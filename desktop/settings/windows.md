@@ -8,7 +8,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Settings**
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
 ## General
@@ -20,13 +20,15 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
 
+- **Use integrated container terminal**. Select to execute commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
+
 - **Expose daemon on tcp://localhost:2375 without TLS**. Check this option to
   enable legacy clients to connect to the Docker daemon. You must use this option
   with caution as exposing the daemon without TLS can result in remote code
   execution attacks.
 
 - **Use the WSL 2 based engine**. WSL 2 provides better performance than the
-  legacy Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
+  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
@@ -39,8 +41,10 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Open Docker Desktop dashboard at startup**. Select to automatically open the
   dashboard when starting Docker Desktop.
 
+- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
+
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/index.md#compose-v2-and-the-new-docker-compose-command).
+  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
 
 ## Resources
 
@@ -117,7 +121,7 @@ File share settings are:
 >   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
 >   (named volume) or [data container](../../storage/volumes.md).
 > * Docker Desktop sets permissions to read/write/execute for users, groups and
->   others [0777 or a+rwx](https://chmodcommand.com/chmod-0777/).
+>   others [0777 or a+rwx](https://chmodcommand.com/chmod-0777/){:target="_blank" rel="noopener" class="_"}.
 >   This is not configurable. See [Permissions errors on data directories for shared volumes](../troubleshoot/topics.md).
 > * Windows presents a case-insensitive view of the filesystem to applications while Linux is case-sensitive.
 >   On Linux, it is possible to create two separate files: `test` and `Test`,
@@ -199,11 +203,19 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-## Experimental features
+## Beta features
 
-{% include experimental.md %}
+{% include beta.md %}
 
-From the **Experimental features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/).
+
+On the **Beta features** tab, you also have the option to allow feature flags, which are product features Docker is currently experimenting with. This is switched on by default.
+
+From the **Beta features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"}.
+
+
+### Enable containerd
+
+Turns on the experimental containerd image store. This brings new features like namespaces and faster container startup performance by lazy-pulling images.
 
 ## Kubernetes
 
@@ -249,4 +261,4 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](../extensions.md).
+For more information about Docker extensions, see [Extensions](../extensions/index.md).

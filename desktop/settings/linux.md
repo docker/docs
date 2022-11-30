@@ -1,14 +1,14 @@
 ---
 description: Docker Desktop settings
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Linux
-title: Change Docker Desktop settings on Linux
+title: Change on Linux
 ---
 
 This page provides information on how to configure and manage your Docker Desktop settings.
 
 To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Settings**
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
 ## General
@@ -19,6 +19,8 @@ On the **General** tab, you can configure when to start Docker and specify other
   Desktop when you log into your machine.
 
 - **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
+
+- **Use integrated container terminal**. Select to execute commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md)
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
@@ -31,8 +33,10 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Open Docker Desktop dashboard at startup**. Select to automatically open the
   dashboard when starting Docker Desktop.
 
+- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
+
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/index.md#compose-v2-and-the-new-docker-compose-command).
+  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
 
 ## Resources
 
@@ -126,11 +130,17 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-## Experimental Features
+## Beta Features
 
-{% include experimental.md %}
+{% include beta.md %}
 
-From the **Experimental features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/).
+From the **Beta features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"}.
+
+On the **Beta features** tab, you also have the option to allow feature flags, which are product features Docker is currently experimenting with. This is switched on by default.
+
+### Enable containerd
+
+Turns on the experimental containerd image store. This brings new features like namespaces and faster container startup performance by lazy-pulling images.
 
 ## Kubernetes
 
@@ -172,4 +182,4 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](../extensions.md).
+For more information about Docker extensions, see [Extensions](../extensions/index.md).

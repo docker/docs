@@ -60,45 +60,7 @@ stateless fashion.
 
 ### Understand build context
 
-When you issue a `docker build` command, the current working directory is called
-the _build context_. By default, the Dockerfile is assumed to be located here,
-but you can specify a different location with the file flag (`-f`). Regardless
-of where the `Dockerfile` actually lives, all recursive contents of files and
-directories in the current directory are sent to the Docker daemon as the build
-context.
-
-> Build context example
->
-> Create a directory for the build context and `cd` into it. Write "hello" into
-> a text file named `hello` and create a Dockerfile that runs `cat` on it. Build
-> the image from within the build context (`.`):
->
-> ```console
-> $ mkdir myproject && cd myproject
-> $ echo "hello" > hello
-> $ echo -e "FROM busybox\nCOPY /hello /\nRUN cat /hello" > Dockerfile
-> $ docker build -t helloapp:v1 .
-> ```
->
-> Move `Dockerfile` and `hello` into separate directories and build a second
-> version of the image (without relying on cache from the last build). Use `-f`
-> to point to the Dockerfile and specify the directory of the build context:
->
-> ```console
-> $ mkdir -p dockerfiles context
-> $ mv Dockerfile dockerfiles && mv hello context
-> $ docker build --no-cache -t helloapp:v2 -f dockerfiles/Dockerfile context
-> ```
-
-Inadvertently including files that are not necessary for building an image
-results in a larger build context and larger image size. This can increase the
-time to build the image, time to pull and push it, and the container runtime
-size. To see how big your build context is, look for a message like this when
-building your `Dockerfile`:
-
-```none
-Sending build context to Docker daemon  187.8MB
-```
+See [Build context](../../build/building/context.md) page for more information.
 
 ### Pipe Dockerfile through `stdin`
 
@@ -252,9 +214,9 @@ similar to `.gitignore` files. For information on creating one, see the
 
 ### Use multi-stage builds
 
-[Multi-stage builds](multistage-build.md) allow you to drastically reduce the
-size of your final image, without struggling to reduce the number of intermediate
-layers and files.
+[Multi-stage builds](../../build/building/multi-stage.md) allow you to
+drastically reduce the size of your final image, without struggling to reduce
+the number of intermediate layers and files.
 
 Because an image is built during the final stage of the build process, you can
 minimize image layers by [leveraging build cache](#leverage-build-cache).
@@ -334,10 +296,10 @@ were added to reduce this limitation:
 - Only the instructions `RUN`, `COPY`, `ADD` create layers. Other instructions
   create temporary intermediate images, and do not increase the size of the build.
 
-- Where possible, use [multi-stage builds](multistage-build.md), and only copy
-  the artifacts you need into the final image. This allows you to include tools
-  and debug information in your intermediate build stages without increasing the
-  size of the final image.
+- Where possible, use [multi-stage builds](../../build/building/multi-stage.md),
+  and only copy the artifacts you need into the final image. This allows you to
+  include tools and debug information in your intermediate build stages without
+  increasing the size of the final image.
 
 ### Sort multi-line arguments
 
@@ -924,8 +886,8 @@ These Official Images have exemplary `Dockerfile`s:
 ## Additional resources:
 
 * [Dockerfile Reference](../../engine/reference/builder.md)
-* [More about Base Images](baseimages.md)
 * [More about Automated Builds](../../docker-hub/builds/index.md)
 * [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
+* [More about Base Images](../../build/building/base-images.md)
 

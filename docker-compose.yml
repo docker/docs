@@ -11,6 +11,7 @@ services:
       args:
         - JEKYLL_ENV
         - DOCS_URL
+        - DOCS_ENFORCE_GIT_LOG_HISTORY
       context: .
     image: docs/docstage
     ports:

@@ -40,7 +40,7 @@ describe('Array', function() {
 Let’s build our Docker image and confirm everything is running properly. Run the following command to build and run your Docker image in a container.
 
 ```console
-$ docker-compose -f docker-compose.dev.yml up --build
+$ docker compose -f docker-compose.dev.yml up --build
 ```
 
 Now let’s test our application by POSTing a JSON payload and then make an HTTP GET request to make sure our JSON was saved correctly.
@@ -86,7 +86,7 @@ Okay, now that we know our application is running properly, let’s try and run 
 Below is the Docker command to start the container and run tests:
 
 ```console
-$ docker-compose -f docker-compose.dev.yml run notes npm run test
+$ docker compose -f docker-compose.dev.yml run notes npm run test
 Creating node-docker_notes_run ... 
 
 > node-docker@1.0.0 test /code
@@ -291,4 +291,4 @@ In the next module, we’ll take a look at how to set up a CI/CD pipeline using 
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

@@ -1162,7 +1162,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
   - New Kubernetes menu item allowing to switch Kubernetes context & connect to clusters other than the local one.
 
 * Bug fixes and minor changes
-  - AUFS storage driver is deprecated in Docker Desktop and AUFS support will be removed in the next major release. You can continue with AUFS in Docker Desktop 18.06.x, but you will need to reset disk image (in Settings > Reset menu) before updating to the next major update. You can check documentation to [save images](/engine/reference/commandline/save/#examples) and [backup volumes](../../storage/volumes.md#backup-restore-or-migrate-data-volumes)
+  - AUFS storage driver is deprecated in Docker Desktop and AUFS support will be removed in the next major release. You can continue with AUFS in Docker Desktop 18.06.x, but you will need to reset disk image (in Settings > Reset menu) before updating to the next major update. You can check documentation to [save images](/engine/reference/commandline/save/#examples) and [back up volumes](../../storage/volumes.md#back-up-restore-or-migrate-data-volumes)
   - Fix startup issue with AUFS
   - Fix status bug which could prevent the kubernetes cluster from starting.
   - Fix bug which would cause VM logs to be written to RAM rather than disk in some cases, and the VM to hang.

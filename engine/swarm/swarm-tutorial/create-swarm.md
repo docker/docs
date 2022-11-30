@@ -10,25 +10,13 @@ to create a swarm. Make sure the Docker Engine daemon is started on the host
 machines.
 
 1.  Open a terminal and ssh into the machine where you want to run your manager
-    node. This tutorial uses a machine named `manager1`. If you use Docker Machine,
-    you can connect to it via SSH using the following command:
-
-    ```console
-    $ docker-machine ssh manager1
-    ```
+    node. This tutorial uses a machine named `manager1`. 
 
 2.  Run the following command to create a new swarm:
 
     ```console
     $ docker swarm init --advertise-addr <MANAGER-IP>
     ```
-
-    > **Note**: If you are using Docker Desktop for Mac or Docker Desktop for Windows to test
-    > single-node swarm, simply run `docker swarm init` with no arguments. There is no
-    > need to specify `--advertise-addr` in this case. To learn more, see the topic
-    > on how to
-    > [Use Docker Desktop for Mac or Docker Desktop for Windows](index.md#use-docker-desktop-for-mac-or-docker-desktop-for-windows)
-    > with Swarm.
 
     In the tutorial, the following command creates a swarm on the `manager1`
     machine:

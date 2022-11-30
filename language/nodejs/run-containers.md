@@ -26,7 +26,7 @@ $ docker run node-docker
 
 When you run this command, you’ll notice that you were not returned to the command prompt. This is because our application is a REST server and will run in a loop waiting for incoming requests without returning control back to the OS until we stop the container.
 
-Let’s open a new terminal then make a GET request to the server using the curl command.
+Let’s open a new terminal then make a POST request to the server using the curl command.
 
 ```console
 $ curl --request POST \
@@ -87,7 +87,7 @@ $ curl --request POST \
 
 ## List containers
 
-Since we ran our container in the background, how do we know if our container is running or what other containers are running on our machine? Well, we can run the `docker ps` command. Just like on Linux, to see a list of processes on your machine we would run the ps command. In the same spirit, we can run the `docker ps` command which will show us a list of containers running on our machine.
+Since we ran our container in the background, how do we know if our container is running or what other containers are running on our machine? Well, to see a list of containers running on our machine, run `docker ps`. This is similar to how the ps command is used to see a list of processes on a Linux machine.
 
 ```console
 $ docker ps
@@ -197,4 +197,4 @@ In this module, we took a look at running containers, publishing ports, and runn
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

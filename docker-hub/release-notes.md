@@ -11,11 +11,59 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+## 2022-09-26
+
+### New 
+
+- The new [autobuild feature](../docker-hub/builds/index.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
+
+## 2022-09-21
+
+### Bug fixes and enhancements
+
+- In Docker Hub, you can now download a [registry.json](../docker-hub/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
+
+## 2022-09-19
+
+### Bug fixes and enhancements
+
+- You can now [export a CSV file of members](../docker-hub/members.md/#export-members) from organizations that you own.
+
+## 2022-07-22
+
+### Bug fixes and enhancements
+
+- You can now invite members to your organization with a CSV file containing their email addresses. The CSV file can either be a file you create for this specific purpose or one that’s extracted from another in-house system.
+
+## 2022-07-19
+
+### Bug fixes and enhancements
+
+- SCIM is now available for organizations with a Docker Business subscription using an Azure AD identity provider.
+
+## 2022-06-23
+
+### New
+
+- With [SCIM](scim.md), you can manage users within your Okta identity provider (IdP). In addition, you can enable SCIM on organizations that are part of the Docker Business subscription.
+
+## 2022-05-24
+
+### New
+
+- [Registry Access Management](registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
+
+## 2022-05-03
+
+### New
+
+- Organization owners can [invite new members](members.md#invite-members) to an organization via Docker ID or email address.
+
 ## 2021-11-15
 
 ### New
 
-You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/upgrade.md).
+- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/upgrade.md).
 
 ## 2021-08-31
 
@@ -71,15 +119,15 @@ Docker introduces the Advanced Image Management dashboard that enables you to vi
 
 ### New feature
 
-Docker introduces Audit log, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
+Docker introduces Audit logs, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
 
-For more information about this feature and for instructions on how to use it, see [Audit log](audit-log.md).
+For more information about this feature and for instructions on how to use it, see [Audit logs](audit-log.md).
 
 ## 2020-11-10
 
 ### New feature
 
-The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos.md#viewing-repository-tags).
+The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos/access/index.md#viewing-repository-tags).
 
 # 2020-10-07
 
@@ -99,7 +147,7 @@ Docker introduces Hub Vulnerability Scanning which enables you to automatically 
 
 ### Enhancements
 
-* The [repositories page](repos.md) and all
+* The [repositories page](repos/index.md) and all
 related settings and tabs have been updated and moved from `cloud.docker.com`
 to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker.com/repositories](https://hub.docker.com/repositories).
 

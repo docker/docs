@@ -1,20 +1,24 @@
 ---
-title: Set up a minimal frontend extension 
+title: Set up a minimal frontend extension
 description: Minimal frontend extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:
-- /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
+  - /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
 ---
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a minimal frontend extension based on plain HTML.
 
->Note
+> Note
 >
->Before you start, make sure you have installed the latest version of [Docker Desktop](../../../release-notes.md).
+> Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
+> Note
+>
+> If you want to start a codebase for your new extension, our [Quickstart guide](../../quickstart.md) and `docker extension init <my-extension>` will provide a better base for your extension, more up-to-date and related to your install of Docker Desktop.
 
 ## Extension folder structure
 
-In the `minimal-frontend` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples), you can find a ready-to-go example that represents a UI Extension built on HTML. We will go through this code example in this tutorial.
+In the `minimal-frontend` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}, you can find a ready-to-go example that represents a UI Extension built on HTML. We will go through this code example in this tutorial.
 
 Although you can start from an empty directory, it is highly recommended that you start from the template below and change it accordingly to suit your needs.
 
@@ -30,7 +34,7 @@ Although you can start from an empty directory, it is highly recommended that yo
 2. A file that provides information about the extension such as the name, description, and version.
 3. The source folder that contains all your HTML, CSS and JS files. There can also be other static assets such as logos and icons. For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 
-If you want to set up user authentication for the extension, see [Authentication](../../dev/oauth2-flow.md).
+If you want to set up user authentication for the extension, see [Authentication](../../guides/oauth2-flow.md).
 
 ## Create a Dockerfile
 
@@ -73,4 +77,5 @@ For more information on the `metadata.json`, see [Metadata](../../extensions/MET
 
 ## What's next?
 
-Learn how to [build and install your extension](../build-install.md).
+- Learn how to [build and install your extension](../build-install.md).
+- Build a more advanced frontend extension by following the [Advanced frontend extension tutorial](./frontend-extension-tutorial.md).

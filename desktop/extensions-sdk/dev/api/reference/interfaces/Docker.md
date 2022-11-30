@@ -6,6 +6,8 @@ skip_read_time: true
 
 # Interface: Docker
 
+**`since`** 0.2.0
+
 ## Properties
 
 ### cli

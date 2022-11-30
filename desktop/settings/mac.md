@@ -1,7 +1,7 @@
 ---
 description: Docker Desktop settings
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Mac
-title: Change Docker Desktop preferences on Mac
+title: Change preferences on Mac
 redirect_from:
 - /docker-for-mac/mutagen-caching/
 - /docker-for-mac/mutagen/
@@ -13,7 +13,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Preferences** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.png){: .inline} and then **Preferences**
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Preferences**
 - Select the **Preferences** icon from the Docker Dashboard.
 
 ## General
@@ -25,8 +25,12 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
 
+- **Use integrated container terminal**. Select to execute commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
+
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is disabled by default.
+
+- **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`. 
 
 - **Use gRPC FUSE for file sharing**. Clear this check box to use the legacy
   osxfs file sharing instead.
@@ -42,8 +46,10 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Open Docker Desktop dashboard at startup**. Select to automatically open the
   dashboard when starting Docker Desktop.
 
+- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
+
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/index.md#compose-v2-and-the-new-docker-compose-command).
+  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
 
 ## Resources
 
@@ -157,13 +163,11 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-## Experimental Features
+## Beta Features
 
-{% include experimental.md %}
+{% include beta.md %}
 
-### Enable the new Apple Virtualization framework
-
-Select **Use the new Virtualization framework** to allow Docker Desktop to use the new `virtualization.framework` instead of the ‘hypervisor.framework’. Ensure to reset your Kubernetes cluster when you enable the new Virtualization framework for the first time.
+On the **Beta features** tab, you also have the option to allow feature flags, which are product features Docker is currently experimenting with. This is switched on by default.
 
 ### Enable VirtioFS
 
@@ -178,6 +182,10 @@ To enable virtioFS:
 2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
 
 3. Click **Apply & Restart**.
+
+### Enable containerd
+
+Turns on the experimental containerd image store. This brings new features like namespaces and faster container startup performance by lazy-pulling images.
 
 ## Kubernetes
 
@@ -219,4 +227,4 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](../extensions.md).
+For more information about Docker extensions, see [Extensions](../extensions/index.md).

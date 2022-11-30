@@ -1,7 +1,7 @@
 ---
-description: Get started onboarding with Docker Business
+description: Docker Business onboarding
 keywords: business, organizations, get started, onboarding
-title: Get started onboarding with Docker Business
+title: Docker Business onboarding
 toc_min: 1
 toc_max: 2
 ---
@@ -36,9 +36,9 @@ On the day that your Docker Business subscription starts, your organization's pr
 
 > **Note**
 >
-> If your organization's primary contact does not receive a welcome email from Docker on the day that your subscription starts:
+> If your organization's primary contact doesn't receive a welcome email from Docker on the day that your subscription starts:
 >   - Check your email spam folder.
->   - Use the steps below to verify that your Docker Business organization does not already exist.
+>   - Use the steps below to verify that your Docker Business organization doesn't already exist.
 >   - Contact your Docker sales representative to verify your primary contact's email address.
 
 After completing the steps from the welcome email, verify that your organization exists and your organization has a Docker Business subscription:
@@ -51,24 +51,25 @@ After completing the steps from the welcome email, verify that your organization
 Now that you have a Docker Business organization, it's time to start adding members. Add members to your organization by using one of the following methods:
 
    * **Single Sign-on**: Automatically provision and add members when they sign in to Docker through your identity provider. For details, see [Configure Single Sign-on](../single-sign-on/index.md){: target="_blank" rel="noopener" class="_"}.
-   * **System for Cross-domain Identity Management**: Automatically provision, add, and de-provision members from your identity provider. For details, see [System for Cross-domain Identity Management](../docker-hub/scim.md/){: target="_blank" rel="noopener" class="_"}.
+   * **System for Cross-domain Identity Management**: Automatically provision, add, and de-provision members from your identity provider. For details, see [System for Cross-domain Identity Management](../docker-hub/scim.md){: target="_blank" rel="noopener" class="_"}.
    * **Invite members**: Invite members using their Docker ID or email address. For details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}.
       > **Note**
       >
       > Before you invite members, you must create at least one team. For details, see [Create a team](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}.
 
 
-## Step 4: Enforce sign in for Docker Desktop
+## Step 4: Enforce sign-in for Docker Desktop
 
 By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. To ensure that a user signs in to a Docker account that is a member of your organization and that the
-organization’s settings apply to the user’s session, you can use a `registry.json` file. For details, see [Configure registry.json to enforce sign in](../docker-hub/configure-sign-in.md){: target="_blank" rel="noopener" class="_"}.
+organization’s settings apply to the user’s session, you can use a `registry.json` file. For details, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md){: target="_blank" rel="noopener" class="_"}.
 
 ## What's next
 
-Get the most out of your Docker Business subscription by leveraging these popular features:
+Create and manage your registries and repositories:
 
-- If you haven't configured [System for Cross-domain Identity Management](../docker-hub/scim.md/) yet, configure it now for centralized account management.
-- Create [repositories](../docker-hub/repos.md) to share container images.
+- If you haven't configured [System for Cross-domain Identity Management](../docker-hub/scim.md) yet, configure it now for centralized account management.
+- Create [repositories](../docker-hub/repos/index.md) to share container images.
+- [Consolidate a repository](../docker-hub/repos/index.md/#consolidating-a-repository) from your personal account to your organization.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 - Control which images your members can access with [Image Access Management](../docker-hub/image-access-management.md/).
 - Control which registries your members can access with [Registry Access Management](../docker-hub/registry-access-management.md/).

@@ -4,52 +4,53 @@ keywords: get started, setup, orientation, quickstart, intro, concepts, containe
 description: Making changes to our example learning application
 ---
 
-
-As a small feature request, we've been asked by the product team to
-change the "empty text" when we don't have any todo list items. They
-would like to change it to the following:
-
-> You have no todo items yet! Add one above!
-
-Pretty simple, right? Let's make the change.
+In [part 2](./02_our_app.md), you containerized a todo application. In this part, you will update the application and container image. You will also learn how to stop and remove a container.
 
 ## Update the source code
+
+In the steps below, you will change the "empty text" when you don't have any todo list items to "You have no todo items yet! Add one above!"
+
 
 1. In the `src/static/js/app.js` file, update line 56 to use the new empty text.
 
     ```diff
+    ...
     -                <p className="text-center">No items yet! Add one above!</p>
     +                <p className="text-center">You have no todo items yet! Add one above!</p>
+    ...
     ```
 
-2. Let's build our updated version of the image, using the same command we used before.
+2. Build your updated version of the image, using the same `docker build` command you used in [part 2](./02_our_app.md/#build-the-apps-container-image){:target="_blank" rel="noopener" class="_"}.
 
     ```console
     $ docker build -t getting-started .
     ```
 
-3. Let's start a new container using the updated code.
+3. Start a new container using the updated code.
 
     ```console
     $ docker run -dp 3000:3000 getting-started
     ```
 
-**Uh oh!** You probably saw an error like this (the IDs will be different):
+You probably saw an error like this (the IDs will be different):
 
 ```console
 docker: Error response from daemon: driver failed programming external connectivity on endpoint laughing_burnell 
 (bb242b2ca4d67eba76e79474fb36bb5125708ebdabd7f45c8eaf16caaabde9dd): Bind for 0.0.0.0:3000 failed: port is already allocated.
 ```
 
-So, what happened? We aren't able to start the new container because our old container is still
-running. It is because the container is using the host's port 3000 and
-only one process on the machine (containers included) can listen to a specific port. To fix this, 
-we need to remove the old container.
+The error occurred because you aren't able to start the new container while your old container is still running. The reason is that the old container is already using the host's port 3000 and only one process on the machine (containers included) can listen to a specific port. To fix this, you need to remove the old container.
 
-## Replace the old container
+## Remove the old container
 
-To remove a container, it first needs to be stopped. Once it has stopped, it can be removed. We have two
-ways that we can remove the old container. Feel free to choose the path that you're most comfortable with.
+To remove a container, you first need to stop it. Once it has stopped, you can remove it. You can remove the old container using the CLI or Docker Desktop's graphical interface. Choose the option that you're most comfortable with.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#cli">CLI</a></li>
+  <li><a data-toggle="tab" data-target="#gui">Docker Desktop</a></li>
+</ul>
+<div class="tab-content">
+<div id="cli" class="tab-pane fade in active" markdown="1">
 
 ### Remove a container using the CLI
 
@@ -59,10 +60,9 @@ ways that we can remove the old container. Feel free to choose the path that you
     $ docker ps
     ```
 
-2. Use the `docker stop` command to stop the container.
+2. Use the `docker stop` command to stop the container. Replace &lt;the-container-id&gt; with the ID from `docker ps`.
 
     ```console
-    # Swap out <the-container-id> with the ID from docker ps
     $ docker stop <the-container-id>
     ```
 
@@ -74,44 +74,44 @@ ways that we can remove the old container. Feel free to choose the path that you
 
 >**Note**
 >
->You can stop and remove a container in a single command by adding the "force" flag
->to the `docker rm` command. For example: `docker rm -f <the-container-id>`
->
+>You can stop and remove a container in a single command by adding the `force` flag to the `docker rm` command. For example: `docker rm -f <the-container-id>`
 
-### Remove a container using the Docker Dashboard
+<hr>
+</div>
+<div id="gui" class="tab-pane fade" markdown="1">
 
-If you open the Docker dashboard, you can remove a container with two clicks! It's certainly
-much easier than having to look up the container ID and remove it.
+### Remove a container using Docker Desktop
 
-1. With the dashboard opened, hover over the app container and you'll see a collection of action
-    buttons appear on the right.
+1. Open Docker Desktop to the **Containers** view.
+2. Select the trash can icon under the **Actions** column for the old container that you want to delete.
+3. In the confirmation dialog, select **Delete forever**.
 
-2. Click on the trash can icon to delete the container. 
-
-3. Confirm the removal and you're done!
-
-![Docker Dashboard - removing a container](images/dashboard-removing-container.png)
+<hr>
+</div>
+</div>
 
 ### Start the updated app container
 
-1. Now, start your updated app.
+1. Now, start your updated app using the `docker run` command.
 
     ```console
     $ docker run -dp 3000:3000 getting-started
     ```
 
-2. Refresh your browser on [http://localhost:3000](http://localhost:3000) and you should see your updated help text!
+2. Refresh your browser on [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"} and you should see your updated help text.
 
 ![Updated application with updated empty text](images/todo-list-updated-empty-text.png){: style="width:55%" }
 {: .text-center }
 
-## Recap
+## Next steps
 
-While we were able to build an update, there were two things you might have noticed:
+While you were able to build an update, there were two things you might have noticed:
 
-- All of the existing items in our todo list are gone! That's not a very good app! We'll talk about that
+- All of the existing items in your todo list are gone! That's not a very good app! You'll fix that
 shortly.
-- There were _a lot_ of steps involved for such a small change. In an upcoming section, we'll talk about 
-how to see code updates without needing to rebuild and start a new container every time we make a change.
+- There were a lot of steps involved for such a small change. In an upcoming section, you'll learn
+how to see code updates without needing to rebuild and start a new container every time you make a change.
 
-Before talking about persistence, we'll quickly see how to share these images with others.
+Before talking about persistence, you'll see how to share these images with others.
+
+[Share the application](04_sharing_app.md){: .button .primary-btn}

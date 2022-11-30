@@ -1,0 +1,20 @@
+# This catch-all pattern uses raw which means it
+# will match in code, too. Kept for reference.
+#
+# extends: existence
+# message: Use italics sparingly.
+# level: suggestion
+# scope: raw
+# raw:
+#   - '[\*_]'
+#   - '.*?'
+#   - '[\*_]'
+#   - '(?=[$\s])'
+extends: existence
+message: Use italics sparingly.
+level: suggestion
+scope: emphasis
+tokens:
+  - "[^-]+"
+# This is strange, but vale would match front matter section
+# as italics if I just used a .* pattern

@@ -1,8 +1,10 @@
 ---
-title: Distribute your extension
+title: Packaging, distribution, and API dependencies
 description: Docker extension disctribution
 keywords: Docker, extensions, sdk, distribution
 ---
+
+This page contains additional information on how Docker Extensions are packaged and distributed, and specifying API dependencies. 
 
 ## Packaging
 
@@ -45,3 +47,9 @@ Extensions must specify the Extension API version they rely on. Currently there 
 Docker Desktop can use this Extension API version to detect if a newer version of an extension is valid given the user's current version of Docker Desktop. If it is, the user sees a notification to upgrade the corresponding extension.
 
 The API version that the extension relies upon must be specified in the extension image labels. This allows Docker Desktop to inspect newer versions of extension images without downloading the full extension image upfront.
+
+## License on Extensions and the Extension SDK
+
+The [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client) is licensed under the Apache 2.0 License and is free to use.
+
+There is no constraint on how each extension should be licensed, this is up to the extension authors to decide when creating a new extension.

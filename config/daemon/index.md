@@ -40,7 +40,7 @@ the machine reboots.
 The command to start Docker depends on your operating system. Check the correct
 page under [Install Docker](../../engine/install/index.md). To configure Docker
 to start automatically at system boot, see
-[Configure Docker to start on boot](../../engine/install/linux-postinstall.md#configure-docker-to-start-on-boot).
+[Configure Docker to start on boot](../../engine/install/linux-postinstall.md#configure-docker-to-start-on-boot-with-systemd).
 
 ## Start the daemon manually
 
@@ -229,8 +229,8 @@ subsystem used:
 | Linux                               | Use the command `journalctl -xu docker.service` (or read `/var/log/syslog` or `/var/log/messages`, depending on your Linux Distribution) |
 | macOS (`dockerd` logs)              | `~/Library/Containers/com.docker.docker/Data/log/vm/dockerd.log`                                                                         |
 | macOS (`containerd` logs)           | `~/Library/Containers/com.docker.docker/Data/log/vm/containerd.log`                                                                      |
-| Windows (WSL2) (`dockerd` logs)     | `AppData\Roaming\Docker\log\vm\dockerd.log`                                                                                              |
-| Windows (WSL2) (`containerd` logs)  | `AppData\Roaming\Docker\log\vm\containerd.log`                                                                                           |
+| Windows (WSL2) (`dockerd` logs)     | `AppData\Local\Docker\log\vm\dockerd.log`                                                                                              |
+| Windows (WSL2) (`containerd` logs)  | `AppData\Local\Docker\log\vm\containerd.log`                                                                                           |
 | Windows (Windows containers)        | Logs are in the Windows Event Log                                                                                                        |
 
 To view the `dockerd` logs on macOS, open a terminal Window, and use the `tail`

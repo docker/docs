@@ -1,5 +1,5 @@
 ---
-title: Install Docker Engine
+title: Docker Engine installation overview
 description: Lists the installation methods
 keywords: docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge
 redirect_from:
@@ -45,7 +45,7 @@ your preferred operating system below.
 
 ### Desktop
 
-{% assign yes = '![yes](/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
+{% assign yes = '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
 | Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
 |:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|

@@ -6,6 +6,8 @@ skip_read_time: true
 
 # Interface: ExecResult
 
+**`since`** 0.2.0
+
 ## Hierarchy
 
 - [`RawExecResult`](RawExecResult.md)

@@ -47,32 +47,23 @@ So, let's do it!
     ```console
     $ docker run -dp 3000:3000 \
         -w /app -v "$(pwd):/app" \
-        node:12-alpine \
+        node:18-alpine \
         sh -c "yarn install && yarn run dev"
     ```
 
     If you are using Windows, then use the following command in PowerShell.
 
     ```powershell
-    PS> docker run -dp 3000:3000 `
+    $ docker run -dp 3000:3000 `
         -w /app -v "$(pwd):/app" `
-        node:12-alpine `
+        node:18-alpine `
         sh -c "yarn install && yarn run dev"
-    ```
-
-    If you are using an Apple silicon Mac or another ARM64 device, then use the following command.
-
-    ```console
-    $ docker run -dp 3000:3000 \
-        -w /app -v "$(pwd):/app" \
-        node:12-alpine \
-        sh -c "apk add --no-cache python2 g++ make && yarn install && yarn run dev"
     ```
 
     - `-dp 3000:3000` - same as before. Run in detached (background) mode and create a port mapping
     - `-w /app` - sets the "working directory" or the current directory that the command will run from
-    - `-v "$(pwd):/app"` - bind mount the current directory from the host in the container into the `/app` directory
-    - `node:12-alpine` - the image to use. Note that this is the base image for our app from the Dockerfile
+    - `-v "$(pwd):/app"` - bind mount the current directory from the host into the `/app` directory in the container 
+    - `node:18-alpine` - the image to use. Note that this is the base image for our app from the Dockerfile
     - `sh -c "yarn install && yarn run dev"` - the command. We're starting a shell using `sh` (alpine doesn't have `bash`) and
       running `yarn install` to install _all_ dependencies and then running `yarn run dev`. If we look in the `package.json`,
       we'll see that the `dev` script is starting `nodemon`.
@@ -82,7 +73,7 @@ So, let's do it!
     ```console
     $ docker logs -f <container-id>
     nodemon src/index.js
-    [nodemon] 1.19.2
+    [nodemon] 2.0.20
     [nodemon] to restart at any time, enter `rs`
     [nodemon] watching dir(s): *.*
     [nodemon] starting `node src/index.js`
@@ -118,13 +109,13 @@ all of the build tools and environments installed. With a single `docker run` co
 to go. We'll talk about Docker Compose in a future step, as this will help simplify our commands (we're already getting a lot
 of flags).
 
-## Recap
+## Next steps
 
-At this point, we can persist our database and respond rapidly to the needs and demands of our investors and founders. Hooray!
-But, guess what? We received great news!
+At this point, you can persist your database and respond rapidly to the needs and demands of your investors and founders. Hooray!
+But, guess what? You received great news! Your project has been selected for future development!
 
-**Your project has been selected for future development!** 
+In order to prepare for production, you need to migrate your database from working in SQLite to something that can scale a
+little better. For simplicity, you'll keep with a relational database and switch your application to use MySQL. But, how 
+should you run MySQL? How do you allow the containers to talk to each other? You'll learn about that next!
 
-In order to prepare for production, we need to migrate our database from working in SQLite to something that can scale a
-little better. For simplicity, we'll keep with a relational database and switch our application to use MySQL. But, how 
-should we run MySQL? How do we allow the containers to talk to each other? We'll talk about that next!
+[Multi container apps](07_multi_container.md){: .button .primary-btn}

@@ -13,8 +13,11 @@ redirect_from:
 * Some understanding of Go and its toolchain. This is not a tutorial on Go. If
   you are new to the language, the [Go website](https://golang.org/){: target="_blank" rel="noopener" class="_"}
   is a good starting point, so go (pun intended) check it out.
-* Some awareness of basic Docker concepts. If unsure, work through the orientation
-  and setup in Get started [Part 1](../../get-started/index.md).
+* You understand basic [Docker concepts](../../get-started/overview.md).
+* You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
+* You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
+  on your machine.
+
 
 ## Overview
 
@@ -132,8 +135,6 @@ to "dockerizing" it.
 
 ## Create a Dockerfile for the application
 
-{% include guides/create-dockerfile.md %}
-
 Next, we need to add a line in our Dockerfile that tells Docker what base image
 we would like to use for our application.
 
@@ -153,7 +154,7 @@ When we have used that `FROM` command, we told Docker to include in our image al
 
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [creating base images](../../develop/develop-images/baseimages.md) section of the guide.
+> If you want to learn more about creating your own base images, see [creating base images](../../build/building/base-images.md) section of the guide.
 
 To make things easier when running the rest of our commands, let’s create a
 directory _inside_ the image that we are building. This also instructs Docker
@@ -480,7 +481,7 @@ that we have used to deploy our Go application is very barebones and is meant
 for lean deployments of static binaries.
 
 For more information on multi-stage builds, please feel free to check out
-[other parts](../../develop/develop-images/multistage-build.md) of the Docker
+[other parts](../../build/building/multi-stage.md) of the Docker
 documentation. This is, however, not essential for our progress here, so we'll
 leave it at that.
 
@@ -497,6 +498,6 @@ how to:
 ## Feedback
 
 Help us improve this topic by providing your feedback. Let us know what you
-think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"}
-GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"}
+think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"}
+GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"}
 to suggest updates.

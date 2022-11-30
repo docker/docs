@@ -33,7 +33,9 @@ or containers on the same machine. So, how do we allow one container to talk to 
 
 ## Start MySQL
 
-There are two ways to put a container on a network: 1) Assign it at start or 2) connect an existing container.
+There are two ways to put a container on a network:
+1) Assign it at start or
+2) connect an existing container.
 For now, we will create the network first and attach the MySQL container at startup.
 
 1. Create the network.
@@ -51,30 +53,18 @@ For now, we will create the network first and attach the MySQL container at star
         -v todo-mysql-data:/var/lib/mysql \
         -e MYSQL_ROOT_PASSWORD=secret \
         -e MYSQL_DATABASE=todos \
-        mysql:5.7
-    ```
-    
-    If you are using an ARM based chip, e.g. Macbook M1 Chips / Apple Silicon, then use this command.
-    
-    ```console
-    $ docker run -d \
-        --network todo-app --network-alias mysql \
-        --platform "linux/amd64" \
-        -v todo-mysql-data:/var/lib/mysql \
-        -e MYSQL_ROOT_PASSWORD=secret \
-        -e MYSQL_DATABASE=todos \
-        mysql:5.7
+        mysql:8.0
     ```
 
     If you are using Windows then use this command in PowerShell.
 
     ```powershell
-    PS> docker run -d `
+    $ docker run -d `
         --network todo-app --network-alias mysql `
         -v todo-mysql-data:/var/lib/mysql `
         -e MYSQL_ROOT_PASSWORD=secret `
         -e MYSQL_DATABASE=todos `
-        mysql:5.7
+        mysql:8.0
     ```
 
     You'll also see we specified the `--network-alias` flag. We'll come back to that in just a moment.
@@ -143,7 +133,7 @@ which ships with a _lot_ of tools that are useful for troubleshooting or debuggi
     And you'll get an output like this...
 
     ```text
-    ; <<>> DiG 9.14.1 <<>> mysql
+    ; <<>> DiG 9.18.8 <<>> mysql
     ;; global options: +cmd
     ;; Got answer:
     ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 32162
@@ -181,7 +171,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 > **Setting Connection Settings via Env Vars**
 >
 > While using env vars to set connection settings is generally ok for development, it is **HIGHLY DISCOURAGED**
-> when running applications in production. Diogo Monica, the former lead of security at Docker,
+> when running applications in production. Diogo Monica, a former lead of security at Docker,
 > [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/){:target="_blank" rel="noopener" class="_"}
 > explaining why.
 >
@@ -210,29 +200,29 @@ With all of that explained, let's start our dev-ready container!
       -e MYSQL_USER=root \
       -e MYSQL_PASSWORD=secret \
       -e MYSQL_DB=todos \
-      node:12-alpine \
+      node:18-alpine \
       sh -c "yarn install && yarn run dev"
     ```
 
     If you are using Windows then use this command in PowerShell.
 
     ```powershell
-    PS> docker run -dp 3000:3000 `
+    $ docker run -dp 3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `
       -e MYSQL_HOST=mysql `
       -e MYSQL_USER=root `
       -e MYSQL_PASSWORD=secret `
       -e MYSQL_DB=todos `
-      node:12-alpine `
+      node:18-alpine `
       sh -c "yarn install && yarn run dev"
     ```
-3. If we look at the logs for the container (`docker logs <container-id>`), we should see a message indicating it's
+3. If we look at the logs for the container (`docker logs -f <container-id>`), we should see a message indicating it's
    using the mysql database.
 
     ```console
     $ nodemon src/index.js
-    [nodemon] 1.19.2
+    [nodemon] 2.0.20
     [nodemon] to restart at any time, enter `rs`
     [nodemon] watching dir(s): *.*
     [nodemon] starting `node src/index.js`
@@ -268,15 +258,16 @@ no real indication that they are grouped together in a single app. We'll see how
 
 ![Docker Dashboard showing two ungrouped app containers](images/dashboard-multi-container-app.png)
 
-## Recap
+## Next steps
 
-At this point, we have an application that now stores its data in an external database running in a separate
-container. We learned a little bit about container networking and saw how service discovery can be performed
-using DNS.
+At this point, you have an application that now stores its data in an external database running in a separate
+container. You learned a little bit about container networking and service discovery using DNS.
 
 But, there's a good chance you are starting to feel a little overwhelmed with everything you need to do to start up
-this application. We have to create a network, start containers, specify all of the environment variables, expose
+this application. You have to create a network, start containers, specify all of the environment variables, expose
 ports, and more! That's a lot to remember and it's certainly making things harder to pass along to someone else.
 
-In the next section, we'll talk about Docker Compose. With Docker Compose, we can share our application stacks in a
+In the next section, you'll learn about Docker Compose. With Docker Compose, you can share your application stacks in a
 much easier way and let others spin them up with a single (and simple) command!
+
+[Use Docker Compose](08_using_compose.md){: .button  .primary-btn}

@@ -67,7 +67,7 @@ This page contains release notes for older versions of Docker Desktop for Window
   - Kubernetes Support. You can now run a single-node Kubernetes cluster from the "Kubernetes" Pane in Docker for Windows settings and use kubectl commands as well as Docker commands. See [the Kubernetes section](../kubernetes.md)
 
 * Bug fixes and minor changes
-  - AUFS storage driver is deprecated in Docker Desktop and AUFS support will be removed in the next major release. You can continue with AUFS in Docker Desktop 18.06.x, but you will need to reset the disk image (in Settings > Reset menu) before updating to the next major update. You can check documentation to [save images](/engine/reference/commandline/save/#examples) and [backup volumes](../../storage/volumes.md#backup-restore-or-migrate-data-volumes)
+  - AUFS storage driver is deprecated in Docker Desktop and AUFS support will be removed in the next major release. You can continue with AUFS in Docker Desktop 18.06.x, but you will need to reset the disk image (in Settings > Reset menu) before updating to the next major update. You can check documentation to [save images](/engine/reference/commandline/save/#examples) and [backup volumes](../../storage/volumes.md#back-up-restore-or-migrate-data-volumes)
   - Fix bug which would in some cases cause virtual machine logs to be written to RAM rather than disk, and the virtual machine to hang.
   - Fix security issue with named pipe connection to docker service.
   - Fix VPNKit memory leak. Fixes [docker/for-win#2087](https://github.com/docker/for-win/issues/2087), [moby/vpnkit#371](https://github.com/moby/vpnkit/issues/371)

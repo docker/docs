@@ -14,14 +14,18 @@
     color: rgba(13, 86, 125, 0.55);
 }
 
-.break {
-    margin-bottom: 20px!important;
+.release-date {
+  font-size: 12px;
+  color: rgba(13, 86, 125, 0.55);
 }
 
-.ratings-div {
-  color:      #b9c2cc;
-  margin-top: 150px;
-  text-align: center;
+.github-issue {
+  font-size: 110%;
+  margin-right: 5px;
+}
+
+.break {
+    margin-bottom: 20px!important;
 }
 
 /*
@@ -79,7 +83,7 @@ img.inline {
     float: left;
     margin: 5px 8px 0 0;
     & input[type=text] {
-        background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
+        background: rgba(0, 0, 0, 0.17) url("/assets/images/search.png") no-repeat 10px 9px;
         border: 0;
         color: #0C5176;
         border-radius: 0;
@@ -91,7 +95,7 @@ img.inline {
 
 .nav-secondary input[type=search]
 {
-    background: rgba(0, 0, 0, 0.17) url("/images/search.png") no-repeat 10px 9px;
+    background: rgba(0, 0, 0, 0.17) url("/assets/images/search.png") no-repeat 10px 9px;
     border: 0;
     box-shadow: none;
     color: #fff;
@@ -108,14 +112,14 @@ img.inline {
 
 input[type=text] {
     margin: 0;
-    background: rgba(0, 0, 0, 0.17) url(/images/search.png) no-repeat 10px 9px;
+    background: rgba(0, 0, 0, 0.17) url(/assets/images/search.png) no-repeat 10px 9px;
     border: 1px solid transparent;
     box-shadow: none;
     transition: all 0.2s ease;
 }
 
 .nav-secondary .search-form input[type=search]:focus {
-    background: rgba(255, 255, 255, 0.17) url(/images/search.png) no-repeat 10px 9px;
+    background: rgba(255, 255, 255, 0.17) url(/assets/images/search.png) no-repeat 10px 9px;
 }
 
 .search-form input[type=search]::placeholder
@@ -207,8 +211,19 @@ input[type=text] {
     .col-toc,
     .footer,
     .glyphicon-tags,
-    .ratings-div
     {
       display: none !important;
     }
+}
+
+/*
+ * lists **********************************************************************
+ */
+
+ol li ol li {
+  list-style-type: lower-alpha;
+}
+
+ol li ol li ol li {
+  list-style-type: lower-roman;
 }

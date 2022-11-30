@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # This Dockerfile builds the docs for https://docs.docker.com/
-# from the master branch of https://github.com/docker/docker.github.io
+# from the main branch of https://github.com/docker/docs
 
 # Use same ruby version as the one in .ruby-version
 # that is used by Netlify
@@ -11,6 +11,7 @@ ARG BUNDLER_VERSION=2.3.13
 
 ARG JEKYLL_ENV=development
 ARG DOCS_URL=http://localhost:4000
+ARG DOCS_ENFORCE_GIT_LOG_HISTORY=0
 
 # Base stage for building
 FROM ruby:${RUBY_VERSION}-alpine AS base
@@ -24,6 +25,7 @@ ARG BUNDLER_VERSION
 COPY Gemfile* .
 RUN gem uninstall -aIx bundler \
   && gem install bundler -v ${BUNDLER_VERSION} \
+  && bundle config set force_ruby_platform true \
   && bundle install --jobs 4 --retry 3
 
 # Vendor Gemfile for Jekyll
@@ -45,11 +47,18 @@ COPY --from=vendored /out /
 FROM gem AS generate
 ARG JEKYLL_ENV
 ARG DOCS_URL
+ARG DOCS_ENFORCE_GIT_LOG_HISTORY
 ENV TARGET=/out
 RUN --mount=type=bind,target=.,rw \
+    --mount=type=cache,target=/tmp/docker-docs-clone \
     --mount=type=cache,target=/src/.jekyll-cache <<EOT
   set -eu
-  CONFIG_FILES=_config.yml$([ "$JEKYLL_ENV" = "production" ] && echo ",_config_production.yml" || true)
+  CONFIG_FILES="_config.yml"
+  if [ "${JEKYLL_ENV}" = "production" ]; then
+    CONFIG_FILES="${CONFIG_FILES},_config_production.yml"
+  elif [ "${DOCS_URL}" = "https://docs-stage.docker.com" ]; then
+    CONFIG_FILES="${CONFIG_FILES},_config_stage.yml"
+  fi
   set -x
   bundle exec jekyll build --profile -d ${TARGET} --config ${CONFIG_FILES}
 EOT

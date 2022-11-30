@@ -142,3 +142,5 @@ The `host` section defines a few binaries that must be deployed on the host. The
 `binaries` defines a list of binaries to be copied from the extension image to the host.
 
 `path` specifies the binary path in the image filesystem. Docker Desktop is responsible for copying these files in its own location, and the JavaScript API allows invokes these binaries.
+
+Learn how to [invoke host binaries](../guides/invoke-host-binaries.md).

@@ -112,6 +112,19 @@ the directory contents of the image.
 There are [many examples of Compose files on
 GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
 
+## Getting help
+
+Docker Compose is under active development. If you need help, would like to
+contribute, or simply want to talk about the project with like-minded
+individuals, we have a number of open channels for communication.
+
+* To report bugs or file feature requests: use the [issue tracker on Github](https://github.com/docker/compose/issues).
+
+* To talk about the project with people in real time: join the
+  `#docker-compose` channel on the Docker Community Slack.
+
+* To contribute code or documentation changes: submit a [pull request on Github](https://github.com/docker/compose/pulls).
+
 
 ## Compose documentation
 

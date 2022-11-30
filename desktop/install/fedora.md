@@ -1,21 +1,24 @@
 ---
 description: Instructions for installing Docker Desktop on Fedora
 keywords: fedora, rpm, update install, uninstall, upgrade, update, linux, desktop, docker desktop, docker desktop for linux, dd4l
-title: Install Docker Desktop on Fedora
+title: Install on Fedora
 toc_max: 4
 redirect_from:
-- /desktop/linux/install/fedora/
+  - /desktop/linux/install/fedora/
 ---
 
 This page contains information on how to install, launch and upgrade Docker Desktop on a Fedora distribution.
 
+[RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.14.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+
 ## Prerequisites
 
 To install Docker Desktop successfully, you must:
+
 - Meet the [system requirements](linux-install.md#system-requirements).
 - Have a 64-bit version of either Fedora 35 or Fedora 36.
 
-Additionally, for a Gnome Desktop environment you must install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
+Additionally, for a Gnome Desktop environment you must install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/){:target="_blank" rel="noopener" class="_"}.
 
 For non-Gnome Desktop environments, `gnome-terminal` must be installed:
 
@@ -27,9 +30,9 @@ $ sudo dnf install gnome-terminal
 
 To install Docker Desktop on Fedora:
 
-1. Set up [Docker's package repository](../../engine/install/fedora.md#set-up-the-repository). 
+1. Set up [Docker's package repository](../../engine/install/fedora.md#set-up-the-repository).
 
-2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.11.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [RPM package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.14.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with dnf as follows:
 
@@ -47,13 +50,11 @@ The post-install script:
 
 ## Launch Docker Desktop
 
-
 {% include desktop-linux-launch.md %}
-
 
 ## Upgrade Docker Desktop
 
-Once a new version for Docker Desktop is released, the Docker UI shows a notification. 
+Once a new version for Docker Desktop is released, the Docker UI shows a notification.
 You need to first remove the previous version and then download the new package each time you want to upgrade Docker Desktop. Run:
 
 ```console
@@ -61,26 +62,7 @@ $ sudo dnf remove docker-desktop
 $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
 ```
 
-
-## Uninstall Docker Desktop
-
-To remove Docker Desktop for Linux, run:
-
-```console
-$ sudo dnf remove docker-desktop
-```
-
-For a complete cleanup, remove configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purge
-the remaining systemd service files.
-
-```console
-$ rm -r $HOME/.docker/desktop
-$ sudo rm /usr/local/bin/com.docker.cli
-```
-
-Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/config.json`. Additionally, you must delete any edited configuration files manually. 
-
 ## Next steps
 
-- Take a look at the [Get started](../../get-started/index.md) training modules to learn  how to build an image and run it as a containerized application.
+- Take a look at the [Get started](../../get-started/index.md) training modules to learn how to build an image and run it as a containerized application.
 - Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

@@ -8,9 +8,10 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Prerequisites
 
-Work through the orientation and setup in Get started [Part 1](../../get-started/index.md){:target="_blank" rel="noopener" class="_"} to understand Docker concepts. Refer to the following section for Java prerequisites.
-
-{% include guides/enable-buildkit.md %}
+* You understand basic [Docker concepts](../../get-started/overview.md).
+* You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
+* You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
+  on your machine.
 
 ## Overview
 
@@ -72,8 +73,6 @@ Press `CTRL-c` from within the terminal session where the server is running to s
 We will now continue to build and run the application in Docker.
 
 ## Create a Dockerfile for Java
-
-{% include guides/create-dockerfile.md %}
 
 Next, we need to add a line in our Dockerfile that tells Docker what base image
 we would like to use for our application.
@@ -157,8 +156,10 @@ To increase the performance of the build, and as a general best practice, we rec
 target
 ```
 
-This line excludes the `target` directory, which contains output from Maven, from the Docker build context.
-There are many good reasons to carefully structure a `.dockerignore` file, but this one-line file is good enough for now.
+This line excludes the `target` directory, which contains output from Maven,
+from the Docker [build context](../../build/building/context.md). There are many
+good reasons to carefully structure a `.dockerignore` file, but this one-line
+file is good enough for now.
 
 ## Build an image
 
@@ -245,4 +246,4 @@ In this module, we took a look at setting up our example Java application that w
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[Java%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Java%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.

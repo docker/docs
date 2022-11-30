@@ -29,9 +29,7 @@ What you'll see is that the files created in one container aren't available in a
     commands (why we have the `&&`). The first portion picks a single random number and writes
     it to `/data.txt`. The second command is simply watching a file to keep the container running.
 
-2. Validate that we can see the output by `exec`ing into the container. To do so, open the Dashboard and click the first action of the container that is running the `ubuntu` image.
-
-    ![Dashboard open CLI into ubuntu container](images/dashboard-open-cli-ubuntu.png){: style=width:75% }
+2. Validate that you can see the output by accessing the terminal in the container. To do so, go to **Containers** in Docker Desktop, hover over the container running the **ubuntu** image, and select the **Show container actions** menu. From the dropdown menu, select **Open in terminal**.
 
     You will see a terminal that is running a shell in the ubuntu container. Run the following command to see the content of the `/data.txt` file. Close this terminal afterwards again.
 
@@ -156,10 +154,11 @@ need to have root access to access this directory from the host. But, that's whe
 >If you wanted to look at the actual contents of the Mountpoint directory, you would need to first get inside
 >of the VM.
 
-## Recap
+## Next steps
 
-At this point, we have a functioning application that can survive restarts! We can show it off to our investors and
-hope they can catch our vision!
+At this point, you have a functioning application that can survive restarts! You can show it off to your investors and hope they can catch your vision!
 
-However, we saw earlier that rebuilding images for every change takes quite a bit of time. There's got to be a better
-way to make changes, right? With bind mounts (which we hinted at earlier), there is a better way! Let's take a look at that now!
+However, you saw earlier that rebuilding images for every change takes quite a bit of time. There's got to be a better
+way to make changes, right? With bind mounts (which was hinted at earlier), there is a better way!
+
+[Use bind mounts](06_bind_mounts.md){: .button  .primary-btn}

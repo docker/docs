@@ -158,7 +158,7 @@ $ docker container rm devtest
 
 ### Mount into a non-empty directory on the container
 
-If you bind-mount into a non-empty directory on the container, the directory's
+If you bind-mount a directory into a non-empty directory on the container, the directory's
 existing contents are obscured by the bind mount. This can be beneficial,
 such as when you want to test a new version of your application without
 building a new image. However, it can also be surprising and this behavior
@@ -284,7 +284,7 @@ only configurable for bind mounts, and only on Linux host machines. Bind
 propagation is an advanced topic and many users never need to configure it.
 
 Bind propagation refers to whether or not mounts created within a given
-bind-mount or named volume can be propagated to replicas of that mount. Consider
+bind-mount can be propagated to replicas of that mount. Consider
 a mount point `/mnt`, which is also mounted on `/tmp`. The propagation settings
 control whether a mount on `/tmp/a` would also be available on `/mnt/a`. Each
 propagation setting has a recursive counterpoint. In the case of recursion,
@@ -396,7 +396,8 @@ services:
     volumes:
       - type: bind
         source: ./static
-        target: /opt/app/staticvolumes:
+        target: /opt/app/static
+volumes:
   myapp:
 ```
 
