@@ -68,7 +68,6 @@ i.fa.fa-outdent {
     color: $white;
     padding: 16px 15px 0 0;
     font-size: 1.5rem;
-    opacity: 0.5;
 }
 
 /* Inline graphics and icons (like the whale menu icon in d4mac, d4win) */
@@ -85,7 +84,7 @@ img.inline {
     & input[type=text] {
         background: rgba(0, 0, 0, 0.17) url("/assets/images/search.png") no-repeat 10px 9px;
         border: 0;
-        color: #0C5176;
+        color: $light-blue-700;
         border-radius: 0;
         margin: 0;
         transition: all 0.2s ease;
