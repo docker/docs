@@ -37,16 +37,15 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Substantial performance improvements for macOS users with the option of enabling the new VirtioFS file sharing technology. Available for macOS 12.5 and above. 
 - Docker Desktop for Mac no longer needs to install the privileged helper process `com.docker.vmnetd` on install or on the first run. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
 - Added [WebAssembly capabilities](wasm/index.md). Use with the [containerd integration](containerd/index.md).
-- Docker now supports custom names for new dev environments.
 - Improved the descriptions for beta and experimental settings to clearly explain the differences and how people can access them.
 - Available disk space of VM now displays in the footer of Docker Dashboard.
 - A disk space warning now displays in the footer if available space is below 3GB.
-- A dev environment can now be created by cloning a Git repository to a local bind mount.
 - Updated colours and typography to be in line with Docker Design System.
 - Added a **Build** tab inside **Extensions** which contains all the necessary resources to build an extension.
 - Added the ability to share extensions more easily, either with `docker extension share` CLI or with the share button in the extensions **Manage** tab.
 - Extensions in the Marketplace now display the number of installs. You can also sort extensions by the number of installs.
-- Adds button to open DevEnv folder from UI.
+- Dev Environments allow cloning a Git repository to a local bind mount, so you can use any local editor or IDE.
+- More Dev Environments improvements: custom names, better private repo support, improved port handling.
 
 ### Upgrades
 
