@@ -124,7 +124,8 @@ To launch the application, run the command `make run` in your terminal. This ope
 3. Optional: Provide a name for your dev environment.
 4. Choose **Local directory** as the source.
 5. Select **Select** to open the root directory of the code that you would like to work on.
-    A directory from your computer is bind mounted to the container, so any changes you make locally is reflected in the dev environment. You can use an editor or IDE of your choice.
+   
+   A directory from your computer is bind mounted to the container, so any changes you make locally is reflected in the dev environment. You can use an editor or IDE of your choice.
 
 > **Note**
 >
