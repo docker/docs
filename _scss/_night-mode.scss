@@ -98,6 +98,9 @@ a {
         //border-left: 4px solid $dark-blue-800;
         color: $white;
     }
+    div.side-toc-title {
+        color: $dark-grey-700;
+    }
     .navbar-nav > li.active > a {
       border-color: $dark-blue-600;
       border-bottom: 4px solid $white;
