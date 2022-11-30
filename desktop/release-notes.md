@@ -24,17 +24,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
-## 4.15.0
-{% include release-date.html date="2022-12-01" %}
-
-### Bug fixes and enhancements
-
-#### For all platforms
-
-### New
-
-- Added the ability to run Wasm applications and compose Wasm applications with other containerized workloads, such as a database, in a single application stack.  This is an experimental feature.
-
 ## 4.14.1
 {% include release-date.html date="2022-11-17" %}
 
