@@ -1,6 +1,8 @@
 html.night {
     color-scheme: dark;
   
+    $icons: rocket, download-docker, guides, language-guides, whats-new, manuals, reference;
+
     body {
         background-color: $bg-body-night;
         color: $body-text-night;
@@ -13,7 +15,25 @@ html.night {
             .card, .cardlet {
                 color: inherit;
                 background-color: $bg-card-night;
+            &.rocket {
+                background-image: url(/assets/images/rocket-dark.svg)
             }
+            &.download-docker {
+                background-image: url(/assets/images/rocket-dark.svg)
+            }
+            &.guides {
+                background-image: url(/assets/images/rocket-dark.svg)
+            }
+            &.language-guides {
+                background-image: url(/assets/images/language-guides-dark.svg)
+            }
+            &.manuals {
+                background-image: url(/assets/images/rocket-dark.svg)
+            }
+            &.reference {
+                background-image: url(/assets/images/reference-dark.svg)
+            }
+        }
             footer {
                 background-color: $bg-footer-landing-night;
             }
@@ -261,3 +281,5 @@ a {
         color: $white!important;
     }
 }
+
+
