@@ -124,7 +124,7 @@ To launch the application, run the command `make run` in your terminal. This ope
 3. Optional: Provide a name for you dev environment.
 4. Choose **Local directory** as the source.
 5. Select **Select** to open the root of the code that you would like to work on.
-    A bind mount is created to share the directory from your computer to the container. You can use an editor or IDE of your choice.
+    A directory from your computer is bind mounted to the container, so any changes you make locally will be reflected in the Dev Environment. You can use an editor or IDE of your choice.
 
 > **Note**
 >
