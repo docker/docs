@@ -210,11 +210,11 @@ body.landing {
   }
 
   .cardlet {
-    background-color: $white-25;
+    background-color: $grey-100;
     padding: 24px 36px;
 
     .title {
-      font-family: "Open Sans", sans-serif;
+      font-family: "Roboto", sans-serif;
       line-height: 22px;
       font-size: 22px;
     }
@@ -250,8 +250,8 @@ body.landing {
     }
 
     a.btn {
-      background:  #FF3F73;
-      color:       white;
+      background:  $white;
+      color:       $dark-blue-400;
       font-size:   17px;
       margin-top:  20px;
       padding:     15px 30px;
@@ -270,12 +270,12 @@ body.landing {
 
   .tab-section {
     .title {
-      font-family: "Open Sans", sans-serif;
+      font-family: "Roboto", sans-serif;
       font-size: 22px;
     }
 
     ul.nav.nav-tabs li a, h5, h6 {
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Roboto', sans-serif;
       font-size: 18px;
     }
 
@@ -291,7 +291,7 @@ body.landing {
       li.active a {
         background-color: inherit;
         border: none;
-        border-bottom: 5px solid $dark-blue;
+        border-bottom: 5px solid $dark-blue-500;
       }
     }
 

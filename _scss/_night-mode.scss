@@ -1,6 +1,8 @@
 html.night {
     color-scheme: dark;
   
+    $icons: rocket, download-docker, guides, language-guides, whats-new, manuals, reference;
+
     body {
         background-color: $bg-body-night;
         color: $body-text-night;
@@ -13,13 +15,33 @@ html.night {
             .card, .cardlet {
                 color: inherit;
                 background-color: $bg-card-night;
+            &.rocket {
+                background-image: url(/assets/images/rocket-dark.svg)
             }
+            &.download-docker {
+                background-image: url(/assets/images/download-docker-dark.svg)
+            }
+            &.guides {
+                background-image: url(/assets/images/guides-dark.svg)
+            }
+            &.language-guides {
+                background-image: url(/assets/images/language-guides-dark.svg)
+            }
+            &.manuals {
+                background-image: url(/assets/images/manuals-dark.svg)
+            }
+            &.reference {
+                background-image: url(/assets/images/reference-dark.svg)
+            }
+        }
             footer {
                 background-color: $bg-footer-landing-night;
             }
         }
     }
-
+a {
+    color: $dark-blue-600;
+}
     .rating-nero-value,
     .reading-time,
     .release-date {
@@ -31,16 +53,17 @@ html.night {
         color: $white;
     }
     a:not(.btn):not(.button) {
-        color: $primary-links-night;
+        //color: $primary-links-night;
     }
     .header {
         background-color: $bg-header-night;
+        color: $white;
     }
     hr {
         border-top: 1px solid #4f6071;
     }
     .nav-secondary {
-        background-color: $bg-secondary-night;
+        background-color: $bg-header-night;
 
         .search-form input[type=search] {
           background-color: rgba(76, 76, 76, 0.47);
@@ -52,22 +75,35 @@ html.night {
         }
     }
     .breadcrumb {
-        background-color: $bg-sidebar-night-active;
-        border-bottom:    0.1px solid $primary-links;
+        background-color: $dark-grey-100;
+        border-bottom:    0.1px solid $dark-grey-700;
     }
     .sidebar,
     .col-nav {
         background-color: $bg-sidebar-night;
         border: none;
+        color: $dark-grey-700;
+    }
+    .nav-sidebar li a {
+        cursor: pointer;
+        color: $dark-grey-700;
+    }
+    .toc-nav ul li a {
+        color: $dark-grey-700;
     }
     .nav-sidebar ul li a.active,
     .nav-sidebar.nav > li > a:focus,
     .toc-nav li a.active {
-        background:  $bg-sidebar-night-active;
-        border-left: 4px solid $primary-links;
+        background:  $dark-palette-background;
+        //border-left: 4px solid $dark-blue-800;
+        color: $white;
+    }
+    div.side-toc-title {
+        color: $dark-grey-700;
     }
     .navbar-nav > li.active > a {
-      border-color: $primary-links;
+      border-color: $dark-blue-600;
+      border-bottom: 4px solid $white;
     }
     .slider {
         background-color: #344658;
@@ -89,7 +125,7 @@ html.night {
         border: 1px solid $black;
     }
     code {
-        color: #c1f1f0 !important;
+        color: $dark-grey-700  !important;
         background: #0a121b !important;
     }
     .nav-secondary .dropdown-btn {
@@ -134,14 +170,14 @@ html.night {
         background-color: #192837!important;
     }
     a.gs-title {
-        color: #cccccc !important;
+        color: $dark-grey-700 !important;
         text-decoration: none;
     }
     .gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
         color: #a8b0b7!important;
     }
     .gs-webResult.gs-result a.gs-title:link, .gs-webResult.gs-result a.gs-title:link b, .gs-imageResult a.gs-title:link, .gs-imageResult a.gs-title:link b {
-        color: #a9e4ff!important;
+        color: $dark-blue-700!important;
     }
     .component {
         background: $bg-component-night;
@@ -156,18 +192,27 @@ html.night {
         border: 1px solid rgba(0, 0, 0, 0.1);
         text-shadow: 0 1px rgba(0, 0, 0, 0.2);
     }
+    .primary-btn{
+        background: $dark-blue-100;
+    }
     .footer {
         background-color: $bg-footer-night;
         border-top: 1px solid rgb(31, 52, 66);
     }
     .footer_links li a {
-        color: #b2b2b2;
+        color: $white;
     }
     .bottom_footer {
         border-top: 1px solid rgb(78, 93, 106);
     }
     .footer_social_nav ul li a {
         background-color: #2f2f2f;
+    }
+    .footer_sub_nav ul li a {
+        color: $white;
+    }
+    .footer-copyright p {
+        color: $white;
     }
 
     /* syntax highlighting */
@@ -217,10 +262,14 @@ html.night {
     /* tabs */
     .nav-tabs {
         border-bottom: 1px solid #4f6071;
+        color: $dark-grey-700;
+    }
+    .nav-tabs>li>a {
+        color: $dark-grey-700;
     }
     .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
         color: $white;
-        background-color: #4e6071;
+        background-color: $dark-grey-200;
         border: 1px solid transparent;
     }
     .popover {
@@ -235,3 +284,5 @@ html.night {
         color: $white!important;
     }
 }
+
+

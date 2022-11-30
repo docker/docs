@@ -57,10 +57,10 @@ a.button.outline-btn.min-hgt {
 
 .outline-btn {
     background: #fff;
-    border: 1px solid #0087C8;
+    border: 1px solid $light-blue-400;
     margin: 0;
     &:hover {
-      color: #1488C6;
+      color: $light-blue-400;
     }
 }
 

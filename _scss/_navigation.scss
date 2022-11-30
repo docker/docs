@@ -42,7 +42,7 @@
 // Some links don't have 'href' attr, hence no mouse pointer
 .nav-sidebar li a {
     cursor: pointer;
-    color: $light-palette-grey-800;
+    color: $light-grey-800;
 }
 
 .nav-sidebar>li>a {
@@ -53,8 +53,8 @@
 .nav-sidebar>.active>a,
 .nav-sidebar>.active>a:focus,
 .nav-sidebar>.active>a:hover {
-    color: #2089C4;
-    background-color: #428bca;
+    color: $light-blue-600;
+    background-color: $light-blue-500;
 }
 
 .nav-sidebar ul {
@@ -79,7 +79,7 @@
 .nav-sidebar ul li a,
 .nav-sidebar ul li a:focus {
     border-bottom: none;
-    border-left:   1px solid $light-palette-grey-200;
+    // border-left:   1px solid $light-grey-200;
 }
 
 .nav-sidebar .nav > li > a {
@@ -95,9 +95,9 @@
 .nav-sidebar ul li a.active,
 .nav-sidebar.nav > li > a:focus {
     background:  $bg-sidebar-active;
-    border-left: 4px solid $primary-links;
+    border-left: 4px solid $light-blue-500;
     font-weight: 600;
-    color: #2089C4;
+    color: $light-blue-500;
 }
 
 .nav-sidebar ul li ul li a {
@@ -139,34 +139,35 @@
             display: inline-block;
             font-size: 12px;
             padding: 2px 10px 2px 10px;
-            color: #677285;
+            color: $light-grey-500;
         }
         .slider{
-            background-color: #e0e4e7;
-            border: 1px solid #e0e4e7;
+            background-color: $light-grey-200;
+            border: 1px solid $light-grey-200;
         }
         .slider:before{
-            background-color: #677285;
+            background-color: $light-grey-500;
         }
     }
 }
 
 .toc-nav li a.active {
-    border-left: 4px solid #677285;
+    border-left: 4px solid $light-grey-500;
     font-weight: bold;
-    color: #677285;
+    color: $light-grey-500;
 }
 
 .toc-nav i.fa {
     font-size: 14px;
     margin: 0 8px 0 0;
-    color: #677285;
+    color: $light-grey-500;
 }
 
 div.side-toc-title {
     font-size: 12px;
     font-weight: bold;
     margin: 11px 0 10px 13px;
+    color: $light-grey-500;
 }
 
 .edit {
@@ -184,7 +185,7 @@ div.side-toc-title {
     .icon {
         width: 25px;
         float: left;
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 }
 
@@ -215,7 +216,7 @@ div.side-toc-title {
     right: 0;
     bottom: 0;
     background-color: $slider-bg;
-    border: 1px solid #c3e4f7;
+    border: 1px solid $light-blue-200;
 }
 
 .slider:before {
@@ -271,13 +272,13 @@ input:checked+.slider:before {
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.17);
-      border-bottom:    4px solid rgba($white, 0.75);
+      border-bottom:    4px solid $white;
     }
   }
   .navbar-nav > li.active > a {
     cursor:        default;
     border-left:   none;
-    border-bottom: 4px solid rgba($white, 0.5);
+    border-bottom: 4px solid $white;
   }
 }
 
