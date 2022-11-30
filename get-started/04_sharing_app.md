@@ -63,13 +63,7 @@ To run the image on another device with Docker, use the `docker run` command and
 
 You can also pull and run other images from a registry on your device. In the following steps, you will pull and run the [hello-word](https://hub.docker.com/_/hello-world){:target="_blank" rel="noopener" class="_"} image from Docker Hub.
 
-1. In a terminal, log in to Docker Hub using the `docker login` command. Replace `<your-docker-id>` with your Docker ID.
-
-   ```console
-   $ docker login -u <your-docker-id>
-   ```
-
-2. Pull and run the image using the `docker run` command.
+Use the `docker run` command to pull and run the image.
 
    ```console
    $ docker run hello-world
