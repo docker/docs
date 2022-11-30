@@ -51,7 +51,7 @@ To push an image, you first need to create a repository on Docker Hub.
    $ docker push <your-docker-id>/getting-started
    ```
 
-## Run the image on a new instance
+## Pull and run an image
 
 Now that your image has been built and pushed to a registry, any device with Docker can run your image.
 
@@ -61,52 +61,51 @@ To run the image on another device with Docker, use the `docker run` command and
    $ docker run -dp 3000:3000 <your-docker-id>/getting-started
    ```
 
-If you don't have another device to try, you can delete the image from your device, which will allow you to simulate running the image on a new device.
+You can also pull and run other images from a registry on your device. In the following steps, you will pull and run the [hello-word](https://hub.docker.com/_/hello-world){:target="_blank" rel="noopener" class="_"} image from Docker Hub.
 
-To remove the image, you must first stop and remove the container.
-
-1. Get the ID of the container by using the `docker ps` command. Use the `--all` flag to list all running and stopped containers.
+1. In a terminal, log in to Docker Hub using the `docker login` command. Replace `<your-docker-id>` with your Docker ID.
 
    ```console
-   $ docker ps --all
+   $ docker login -u <your-docker-id>
    ```
 
-2. If the container is running, use the `docker stop` command to stop the container. Replace `<the-container-id>` with the ID from `docker ps`.
+2. Pull and run the image using the `docker run` command.
 
    ```console
-   $ docker stop <the-container-id>
+   $ docker run hello-world
    ```
 
-3. Once the container has stopped, you can remove it by using the `docker rm` command. Replace `<the-container-id>` with the ID from `docker ps`.
+You will see output similar to the following, indicating that Docker pulled the image from the registry and ran it on your device.
 
-   ```console
-   $ docker rm <the-container-id>
+   ```plaintext
+   Unable to find image 'hello-world:latest' locally
+   latest: Pulling from library/hello-world
+   2db29710123e: Pull complete
+   Digest: sha256:faa03e786c97f07ef34423fccceeec2398ec8a5759259f94d99078f264e9d7af
+   Status: Downloaded newer image for hello-world:latest
+
+   Hello from Docker!
+   This message shows that your installation appears to be working correctly.
+
+   To generate this message, Docker took the following steps:
+    1. The Docker client contacted the Docker daemon.
+    2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+       (amd64)
+    3. The Docker daemon created a new container from that image which runs the
+       executable that produces the output you are currently reading.
+    4. The Docker daemon streamed that output to the Docker client, which sent it to your terminal.
+
+   To try something more ambitious, you can run an Ubuntu container with:
+    $ docker run -it ubuntu bash
+
+   Share images, automate workflows, and more with a free Docker ID:
+    https://hub.docker.com/
+
+   For more examples and ideas, visit:
+    https://docs.docker.com/get-started/
    ```
 
-4. Now that the container has been removed, you can remove the image. Get the ID of the image by using the `docker image ls` command.
-
-   ```console
-   $ docker image ls
-   ```
-
-5. Remove the image using the `docker image rm` command. Replace `<the-image-id>` with the ID from `docker image ls`.
-
-   ```console
-   $ docker image rm <the-image-id>
-   ```
-
-   Your device no longer has the image. In order to run the image, you can rebuild it, or pull it from Docker Hub.
-
-6. Pull and run the image from Docker Hub using the `docker run` command. Replace `<your-docker-id>` with your Docker ID.
-
-   ```console
-   $ docker run -dp 3000:3000 <your-docker-id>/getting-started
-   ```
-
-   Docker pulls the image from Docker Hub and runs it.
-
-7. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"}.
-   You should see your app.
+Take some time to explore other images on [Docker Hub](https://hub.docker.com/search){:target="_blank" rel="noopener" class="_"}. Docker Hub is the world's largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers. Store and share your personal projects and see what the container community is building.
 
 ## Next steps
 
