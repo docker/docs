@@ -121,7 +121,7 @@ To launch the application, run the command `make run` in your terminal. This ope
 
 1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started**.
-3. Optional: Provide a name for you dev environment.
+3. Optional: Provide a name for your dev environment.
 4. Choose **Local directory** as the source.
 5. Select **Select** to open the root of the code that you would like to work on.
     A directory from your computer is bind mounted to the container, so any changes you make locally will be reflected in the Dev Environment. You can use an editor or IDE of your choice.
