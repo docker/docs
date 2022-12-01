@@ -228,9 +228,9 @@ To read the Docker app log messages, type `docker` in the Console window search 
 You can use the Console Log Query to search logs, filter the results in various
 ways, and create reports.
 
-### View the Docker Daemon logs
+### View the Docker daemon logs
 
-Refer to the [read the logs](../../config/daemon/index.md#read-the-logs) section
+Refer to the [Read the daemon logs](../../config/daemon/logs.md) section
 to learn how to view the Docker Daemon logs.
 
 </div>
@@ -247,9 +247,9 @@ $ journalctl --user --unit=docker-desktop
 You can also find the logs for the internal components included in Docker
 Desktop at `$HOME/.docker/desktop/log/`.
 
-### View the Docker Daemon logs
+### View the Docker daemon logs
 
-Refer to the [read the logs](../../config/daemon/index.md#read-the-logs) section
+Refer to the [Read the daemon logs](../../config/daemon/logs.md) section
 to learn how to view the Docker Daemon logs.
 
 </div>

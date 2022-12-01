@@ -1,6 +1,6 @@
 ---
 description: Using tmpfs mounts
-title: Use tmpfs mounts
+title: tmpfs mounts
 keywords: storage, persistence, data persistence, tmpfs
 redirect_from:
 - /engine/admin/volumes/tmpfs/
