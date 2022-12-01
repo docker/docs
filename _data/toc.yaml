@@ -1385,46 +1385,40 @@ manuals:
       title: Docker SBOM (Experimental)
   - sectiontitle: Logging
     section:
-    - sectiontitle: Container logs
+    - path: /config/containers/logging/
+      title: View container logs
+    - path: /config/containers/logging/configure/
+      title: Configure logging drivers
+    - path: /config/containers/logging/dual-logging/
+      title: Use a remote logging driver
+    - path: /config/containers/logging/plugins/
+      title: Use a logging driver plugin
+    - path: /config/containers/logging/log_tags/
+      title: Customize log driver output
+    - sectiontitle: Logging drivers
       section:
-      - path: /config/containers/logging/
-        title: View container logs
-      - sectiontitle: Manage container logs
-        section:
-        - path: /config/containers/logging/configure/
-          title: Configure logging drivers
-        - path: /config/containers/logging/dual-logging/
-          title: Use a remote logging driver
-        - path: /config/containers/logging/plugins/
-          title: Use a logging driver plugin
-        - path: /config/containers/logging/log_tags/
-          title: Customize log driver output
-        - sectiontitle: Logging drivers
-          section:
-          - path: /config/containers/logging/local/
-            title: Local file logging driver
-          - path: /config/containers/logging/logentries/
-            title: Logentries logging driver
-          - path: /config/containers/logging/json-file/
-            title: JSON File logging driver
-          - path: /config/containers/logging/gelf/
-            title: Graylog Extended Format (GELF) logging driver
-          - path: /config/containers/logging/syslog/
-            title: Syslog logging driver
-          - path: /config/containers/logging/awslogs/
-            title: Amazon CloudWatch logs logging driver
-          - path: /config/containers/logging/etwlogs/
-            title: ETW logging driver
-          - path: /config/containers/logging/fluentd/
-            title: Fluentd logging driver
-          - path: /config/containers/logging/gcplogs/
-            title: Google Cloud logging driver
-          - path: /config/containers/logging/journald/
-            title: Journald logging driver
-          - path: /config/containers/logging/splunk/
-            title: Splunk logging driver
-    - path: /config/daemon/logs/
-      title: Daemon logs
+      - path: /config/containers/logging/local/
+        title: Local file logging driver
+      - path: /config/containers/logging/logentries/
+        title: Logentries logging driver
+      - path: /config/containers/logging/json-file/
+        title: JSON File logging driver
+      - path: /config/containers/logging/gelf/
+        title: Graylog Extended Format (GELF) logging driver
+      - path: /config/containers/logging/syslog/
+        title: Syslog logging driver
+      - path: /config/containers/logging/awslogs/
+        title: Amazon CloudWatch logs logging driver
+      - path: /config/containers/logging/etwlogs/
+        title: ETW logging driver
+      - path: /config/containers/logging/fluentd/
+        title: Fluentd logging driver
+      - path: /config/containers/logging/gcplogs/
+        title: Google Cloud logging driver
+      - path: /config/containers/logging/journald/
+        title: Journald logging driver
+      - path: /config/containers/logging/splunk/
+        title: Splunk logging driver
   - sectiontitle: Security
     section:
       - path: /engine/security/
@@ -1475,6 +1469,8 @@ manuals:
       section:
       - path: /config/daemon/
         title: Configuration overview
+      - path: /config/daemon/logs/
+        title: Daemon logs
       - path: /config/daemon/systemd/
         title: Configure with systemd
       - path: /config/daemon/ipv6/
