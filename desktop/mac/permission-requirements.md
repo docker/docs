@@ -30,7 +30,7 @@ The only time Docker Desktop may start the privileged process is for binding pri
 
 The docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop ensures the `docker` CLI is on the user’s PATH without having to reconfigure shells, log out then log back in for example. As on most systems, `/usr/local/bin` is by default in user's PATH, Docker Desktop creates symlinks for all docker binaries in it.
 
-Installing symlinks in `/usr/local/bin` is a privileged configuration Docker Desktop performed on the first startup. Docker Desktop checks if symlinks exists and takes the following actions: 
+Installing symlinks in `/usr/local/bin` is a privileged configuration Docker Desktop performs on the first startup. Docker Desktop checks if symlinks exists and takes the following actions: 
 - Creates the symlinks without the admin prompt if `/usr/local/bin` is writable by unprivileged users
 - Triggers an admin prompt for the user to authorize the creation of symlinks in `/usr/local/bin`. If user authorizes, symlinks to docker binaries are created in `/usr/local/bin`.
 If the user rejects the prompt, is not willing to run configurations requiring elevated privileges, or does not have admin rights on their machine, Docker Desktop falls back to create the symlinks in `~/.docker/bin` and edits the user's shell profile to ensure this location is in user's PATH. This requires all open shells to be reloaded. 
