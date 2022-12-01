@@ -141,4 +141,4 @@ Docker doesn't automatically mandate that developers re-launch and sign in once 
 
 In Docker Desktop, developers see the relevant settings grayed out and the message **Locked by your administrator**.
 
-![Proxy settings grayed out](/assets/images/grayed-setting.png){:width="750px"}
+![Proxy settings grayed out](/assets/images/grayed-setting.png){:width="350px"}

@@ -76,6 +76,9 @@ blockquote {
         $body-text-color: $white,
         $icon: "\f06a"
       );
+        a {
+          color: $dark-blue-200;
+        }
     }
 
     &.warning {

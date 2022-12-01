@@ -1343,6 +1343,8 @@ manuals:
           section:
             - title: Publish your extension
               path: /desktop/extensions-sdk/extensions/
+            - title: Share your extension
+              path: /desktop/extensions-sdk/extensions/share
             - title: Metadata
               path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels

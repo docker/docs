@@ -130,18 +130,6 @@ Type a JSON configuration file in the box to configure the daemon settings. For 
 
 Click **Apply & Restart** to save your settings and restart Docker Desktop.
 
-## Beta Features
-
-{% include beta.md %}
-
-From the **Beta features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"}.
-
-On the **Beta features** tab, you also have the option to allow feature flags, which are product features Docker is currently experimenting with. This is switched on by default.
-
-### Enable containerd
-
-Turns on the experimental containerd image store. This brings new features like namespaces and faster container startup performance by lazy-pulling images.
-
 ## Kubernetes
 
 Docker Desktop includes a standalone Kubernetes server, so that you can test
@@ -183,3 +171,21 @@ Use the **Extensions** tab to:
 - **Show Docker Extensions system containers**
 
 For more information about Docker extensions, see [Extensions](../extensions/index.md).
+
+## Features in development
+
+On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
+
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"} from the **Features in development** tab.
+
+### Beta features
+
+{% include beta.md %}
+
+#### Enable containerd
+
+Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
+
+### Experimental features
+
+{% include desktop-experimental.md %}
