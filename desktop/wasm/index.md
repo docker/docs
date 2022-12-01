@@ -7,7 +7,7 @@ toc_max: 3
 
 Wasm (short for WebAssembly) is a faster, lighter alternative to the Linux & Windows containers you’re using in Docker today (with [some tradeoffs](https://www.docker.com/blog/docker-wasm-technical-preview/){:target="_blank" rel="noopener" class="_"}). 
 
-This page provides information about the new ability to run Wasm applications alongside your Linux containers in Docker. To learn more about the launch and how the preview works, read [the launch blog post here](https://www.docker.com/blog/docker-wasm-technical-preview/){:target="_blank" rel="noopener" class="_"}.
+This page provides information about the new ability to run Wasm applications alongside your Linux containers in Docker.
 
 > **Beta**
 >
@@ -16,25 +16,12 @@ This page provides information about the new ability to run Wasm applications al
 
 ## Enable the Docker+Wasm integration
 
-The Docker+Wasm integration currently requires a technical preview build of Docker Desktop.
-
->**Warning**
->
-> With the technical preview build of Docker Desktop, things might not work as expected. Be sure to back up your containers and images before proceeding.
-{: .warning}
+To use the Docker+Wasm integration, developers must enable the [Containerd Image Store](../containerd/index.md) feature.
 
 >**Important**
 >
-> The technical preview build enables the [Containerd Image Store](../containerd/index.md) feature. This cannot be disabled. If you’re not currently using the Containerd Image Store, then pre-existing images and containers will be inaccessible.
+> The Docker+Wasm integration requires the [Containerd Image Store](../containerd/index.md) feature. If you’re not currently using the Containerd Image Store, then pre-existing images and containers will be inaccessible.
 {: .important}
-
-Download the technical preview build of Docker Desktop:
-
-- [macOS Apple Silicon](https://www.docker.com/download/wasm-preview/macosxsilicon){: id="dkr_docs_dl_wasm_apple"}
-- [macOS Intel](https://www.docker.com/download/wasm-preview/macintel){: id="dkr_docs_dl_wasm_intel"}
-- [Windows AMD64](https://www.docker.com/download/wasm-preview/windowsamd64){: id="dkr_docs_dl_wasm_windows"}
-- Linux Arm64 ([deb](https://www.docker.com/download/wasm-preview/linuxarm64deb){: id="dkr_docs_dl_wasm_arm64deb"})
-- Linux AMD64 ([deb](https://www.docker.com/download/wasm-preview/linuxamd64deb){: id="dkr_docs_dl_wasm_amd64deb"}, [rpm](https://www.docker.com/download/wasm-preview/linuxamd64rpm){: id="dkr_docs_dl_wasm_amd64rpm"}, [tar](https://www.docker.com/download/wasm-preview/linuxamd64tarball){: id="dkr_docs_dl_wasm_amd64tar"})
 
 ## Usage examples
 
@@ -156,6 +143,9 @@ In the following example, the Wasm application leverages a MariaDB database runn
 
 
 ## Docker+Wasm Release Notes
+
+2022-12-01
+Beta release included in Docker Desktop 4.15
 
 2022-10-24  
 Initial release
