@@ -40,7 +40,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Improved the descriptions for beta and experimental settings to clearly explain the differences and how people can access them.
 - Available disk space of VM now displays in the footer of Docker Dashboard.
 - A disk space warning now displays in the footer if available space is below 3GB.
-- Updated colours and typography to be in line with Docker Design System.
+- Changes to Docker Desktop's interface as we become more ADA accessible and visually unified.
 - Added a **Build** tab inside **Extensions** which contains all the necessary resources to build an extension.
 - Added the ability to share extensions more easily, either with `docker extension share` CLI or with the share button in the extensions **Manage** tab.
 - Extensions in the Marketplace now display the number of installs. You can also sort extensions by the number of installs.
