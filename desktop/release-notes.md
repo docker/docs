@@ -38,7 +38,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Docker Desktop for Mac no longer needs to install the privileged helper process `com.docker.vmnetd` on install or on the first run. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
 - Added [WebAssembly capabilities](wasm/index.md). Use with the [containerd integration](containerd/index.md).
 - Improved the descriptions for beta and experimental settings to clearly explain the differences and how people can access them.
-- Available disk space of VM now displays in the footer of Docker Dashboard.
+- Available disk space of VM now displays in the footer of Docker Dashboard for Mac and Linux.
 - A disk space warning now displays in the footer if available space is below 3GB.
 - Changes to Docker Desktop's interface as we become more ADA accessible and visually unified.
 - Added a **Build** tab inside **Extensions** which contains all the necessary resources to build an extension.
