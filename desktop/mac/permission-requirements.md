@@ -43,7 +43,7 @@ To ensure the docker socket exists after restart, Docker Desktop sets up a `laun
 ### Binding privileged ports
 
 When running a container that requires privileged ports binding, Docker Desktop first attempts to bind it directly as an unprivileged process. In case of failure due to the OS preventing it, Docker Desktop checks if the `com.docker.vmnetd` privileged helper process is running to bind the privileged port through it. If the privileged helper process is not running, Docker Desktop prompts the user for authorization to run it under [launchd](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html).
-This configures the privileged helper to run as in the versions of Docker Desktop prior to v4.15. However, the functionality provided by this privileged helper has been stripped down. It now only supports port binding and caching the Registry Access Management policy.
+This configures the privileged helper to run as in the versions of Docker Desktop prior to 4.15. However, the functionality provided by this privileged helper has been stripped down. It now only supports port binding and caching the Registry Access Management policy.
 If the user declines the launch of the privileged helper process, the privileged port binding cannot be done and the docker CLI returns an error:
 ```console
 $ docker run -p 127.0.0.1:80:80 docker/getting-started
