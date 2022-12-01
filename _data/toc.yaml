@@ -1363,10 +1363,6 @@ manuals:
         title: Overlay networking tutorial
       - path: /network/network-tutorial-macvlan/
         title: Macvlan network tutorial
-    - sectiontitle: Legacy networking content
-      section:
-      - path: /network/links/
-        title: (Legacy) Container links
   - sectiontitle: Working with Docker Engine
     section:
     - path: /config/daemon/start/
