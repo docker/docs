@@ -216,7 +216,7 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 #### Enable containerd
 
-Turns on the experimental containerd image store. This brings new features like namespaces and faster container startup performance by lazy-pulling images.
+Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
 
 ### Experimental features
 
