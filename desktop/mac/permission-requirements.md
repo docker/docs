@@ -22,7 +22,7 @@ Docker Desktop for Mac is run as an unprivileged user. However, certain function
 Versions prior to Docker Desktop v4.15, do require `root` access to be granted on the first run. The first time that Docker Desktop is launched the user receives an admin prompt to grant permissions for a privileged helper service `com.docker.vmnetd` to be installed. For subsequent runs, no `root` privileges are required. This approach allowed, following the principle of least privilege, `root` access to be used only for the operations for which it is absolutely necessary, while still being able to use Docker Desktop as an unprivileged user. 
 All privileged operations are run using the privileged helper process `com.docker.vmnetd`.
 
-For security reasons, starting with +v4.15, Docker Desktop for Mac does not require the user to run a permanent privileged process. Whenever elevated privileges are needed for a configuration,
+For security reasons, starting with the version 4.15, Docker Desktop for Mac does not require the user to run a permanent privileged process. Whenever elevated privileges are needed for a configuration,
 Docker Desktop prompts the user with information on the task it needs to perform. Most configurations are applied once, subsequent runs do not prompt for privileged access anymore.
 The only time Docker Desktop may start the privileged process is for binding privileged ports that are not allowed by default on the host OS.
 
