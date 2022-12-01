@@ -32,9 +32,6 @@ Ensure you have completed the steps described in the Prerequisites section **bef
 1. Follow the usual installation instructions to install Docker Desktop. If you are running a supported system, Docker Desktop prompts you to enable WSL 2 during installation. Read the information displayed on the screen and enable WSL 2 to continue.
 2. Start Docker Desktop from the Windows Start menu.
 3. From the Docker menu, select **Settings** > **General**.
-
-    ![Enable WSL 2](images/wsl2-enable.png){:width="750px"}
-
 4. Select the **Use WSL 2 based engine** check box.
 
     If you have installed Docker Desktop on a system that supports WSL 2, this option will be enabled by default.
