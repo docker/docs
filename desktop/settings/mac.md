@@ -134,8 +134,6 @@ HTTP/HTTPS proxies can be used when:
 - Containers interact with the external network
 - Scanning images
 
-Each use case above is configured slightly differently.
-
 If the host uses a static HTTP/HTTPS proxy configuration, Docker Desktop reads this configuration
 and automatically uses these settings for logging into Docker and for pulling and pushing images.
 
