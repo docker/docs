@@ -187,16 +187,6 @@ fetch-remote:
           - "!docs/README.md" # readme to make things nice in the compose-cli repo, but meaningless here
           - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
 
-  - repo: "https://github.com/docker/buildx"
-    default_branch: "master"
-    ref: "master"
-    paths:
-      - dest: "build/building"
-        src:
-          - "docs/manuals/drivers"
-          - "docs/manuals/cache"
-          - "docs/manuals/exporters"
-
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"
     ref: "main"
