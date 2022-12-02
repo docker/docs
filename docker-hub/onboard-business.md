@@ -78,6 +78,6 @@ Configure security settings and manage your repositories:
    - [Settings Management](../desktop/hardened-desktop/settings-management/index.md), which helps you to confidently manage and control the usage of Docker Desktop within your organization.
    - [Enhanced Container Isolation](../desktop/hardened-desktop/enhanced-container-isolation/index.md), a setting that instantly enhances security by preventing containers from running as root in Docker Desktop’s Linux VM.
    - [Image Access Management](../docker-hub/image-access-management.md/), which gives you control over which images developers can pull from Docker Hub.
-   - [Registry Access Management](../docker-hub/registry-access-management.md/), which allows you to control the registries developers can access.
+   - [Registry Access Management](../docker-hub/registry-access-management.md/), lets you control the registries developers can access.
 
 Your Docker Business subscription provides many more additional features. [Learn more](../subscription/index.md).
