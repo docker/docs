@@ -38,7 +38,7 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 ### Mac with Intel chip
 
-- macOS must be version 10.15 or newer. That is, Catalina, Big Sur, or Monterey. We recommend upgrading to the latest version of macOS.
+- macOS must be version 11 or newer. That is Big Sur (11), Monterey (12), or Ventura (13). We recommend upgrading to the latest version of macOS.
 
   > **Note**
   >
