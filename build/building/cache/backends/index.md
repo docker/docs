@@ -15,7 +15,7 @@ important to keep the runtime of image builds as low as possible.
 >
 > If you use secrets or credentials inside your build process, ensure you
 > manipulate them using the dedicated
-> [`--secret` option](https://docs.docker.com/engine/reference/commandline/buildx_build/#secret).
+> [`--secret` option](../../../../engine/reference/commandline/buildx_build/#secret).
 > Manually managing secrets using `COPY` or `ARG` could result in leaked
 > credentials.
 
@@ -34,21 +34,21 @@ Buildx supports the following cache storage backends:
 - `local`: writes the build cache to a local directory on the filesystem.
 
 - `gha`: uploads the build cache to
-  [GitHub Actions cache](https://docs.github.com/en/rest/actions/cache) (beta).
+  [GitHub Actions cache](https://docs.github.com/en/rest/actions/cache){: target="_blank" rel="noopener" class="_" } (beta).
 
 - `s3`: uploads the build cache to an
-  [AWS S3 bucket](https://aws.amazon.com/s3/) (unreleased).
+  [AWS S3 bucket](https://aws.amazon.com/s3/){: target="_blank" rel="noopener" class="_" } (unreleased).
 
 - `azblob`: uploads the build cache to
-  [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
+  [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/){: target="_blank" rel="noopener" class="_" }
   (unreleased).
 
 ## Command syntax
 
 To use any of the cache backends, you first need to specify it on build with the
-[`--cache-to` option](https://docs.docker.com/engine/reference/commandline/buildx_build/#cache-to)
+[`--cache-to` option](../../../../engine/reference/commandline/buildx_build/#cache-to)
 to export the cache to your storage backend of choice. Then, use the
-[`--cache-from` option](https://docs.docker.com/engine/reference/commandline/buildx_build/#cache-from)
+[`--cache-from` option](../../../../engine/reference/commandline/buildx_build/#cache-from)
 to import the cache from the storage backend into the current build. Unlike the
 local BuildKit cache (which is always enabled), all of the cache storage
 backends must be explicitly exported to, and explicitly imported from. All cache
@@ -74,7 +74,7 @@ $ docker buildx build --push -t <registry>/<image> \
 ## Multiple caches
 
 BuildKit currently only supports
-[a single cache exporter](https://github.com/moby/buildkit/pull/3024). But you
+[a single cache exporter](https://github.com/moby/buildkit/pull/3024){: target="_blank" rel="noopener" class="_" }. But you
 can import from as many remote caches as you like. For example, a common pattern
 is to use the cache of both the current branch and the main branch. The
 following example shows importing cache from multiple locations using the

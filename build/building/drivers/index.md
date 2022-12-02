@@ -2,7 +2,7 @@
 title: "Drivers overview"
 keywords: build, buildx, driver, builder, docker-container, kubernetes, remote
 redirect_from:
-- /build/buildx/drivers/
+  - /build/buildx/drivers/
 ---
 
 Buildx drivers are configurations for how and where the BuildKit backend runs.
@@ -55,15 +55,14 @@ desktop-linux * docker
 ```
 
 This is because the Docker driver builders are automatically pulled from the
-available
-[Docker Contexts](https://docs.docker.com/engine/context/working-with-contexts/).
+available [Docker Contexts](../../../engine/context/working-with-contexts/).
 When you add new contexts using `docker context create`, these will appear in
 your list of buildx builders.
 
 ## Create a new builder
 
 Use the
-[`docker buildx create`](https://docs.docker.com/engine/reference/commandline/buildx_create/)
+[`docker buildx create`](../../../engine/reference/commandline/buildx_create/)
 command to create a builder, and specify the driver using the `--driver` option.
 
 ```console

@@ -5,7 +5,7 @@ keywords: >
 ---
 
 The `oci` exporter outputs the build result into an
-[OCI image layout](https://github.com/opencontainers/image-spec/blob/main/image-layout.md)
+[OCI image layout](https://github.com/opencontainers/image-spec/blob/main/image-layout.md){: target="_blank" rel="noopener" class="_" }
 tarball. The `docker` exporter behaves the same way, except it exports a Docker
 image layout instead.
 
@@ -57,9 +57,9 @@ $ docker buildx build \
 ```
 
 For more information about annotations, see
-[BuildKit documentation](https://github.com/moby/buildkit/blob/master/docs/annotations.md).
+[BuildKit documentation](https://github.com/moby/buildkit/blob/master/docs/annotations.md){: target="_blank" rel="noopener" class="_" }.
 
 ## Further reading
 
 For more information on the `oci` or `docker` exporters, see the
-[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#docker-tarball).
+[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#docker-tarball){: target="_blank" rel="noopener" class="_" }.

@@ -2,7 +2,7 @@
 title: "Kubernetes driver"
 keywords: build, buildx, driver, builder, kubernetes
 redirect_from:
-- /build/buildx/drivers/kubernetes/
+  - /build/buildx/drivers/kubernetes/
 ---
 
 The Buildx Kubernetes driver allows connecting your local development or CI
@@ -11,8 +11,8 @@ varied compute resources.
 
 ## Synopsis
 
-Run the following command to create a new builder, named `kube`, that uses
-the Kubernetes driver:
+Run the following command to create a new builder, named `kube`, that uses the
+Kubernetes driver:
 
 ```console
 $ docker buildx create \
@@ -62,7 +62,7 @@ is configurable using the following driver options:
 
   These options allow requesting and limiting the resources available to each
   BuildKit pod according to the official Kubernetes documentation
-  [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
+  [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/){: target="_blank" rel="noopener" class="_" }.
 
 For example, to create 4 replica BuildKit pods:
 
@@ -96,7 +96,7 @@ replicas. `sticky` (the default) attempts to connect the same build performed
 multiple times to the same node each time, ensuring better use of local cache.
 
 For more information on scalability, see the options for
-[buildx create](https://docs.docker.com/engine/reference/commandline/buildx_create/#driver-opt).
+[buildx create](../../../../engine/reference/commandline/buildx_create/#driver-opt).
 
 ## Node assignment
 
@@ -127,13 +127,13 @@ $ docker buildx create \
 ## Multi-platform builds
 
 The Buildx Kubernetes driver has support for creating
-[multi-platform images](https://docs.docker.com/build/building/multi-platform/),
-either using QEMU or by leveraging the native architecture of nodes.
+[multi-platform images](../multi-platform.md), either using QEMU or by
+leveraging the native architecture of nodes.
 
 ### QEMU
 
 Like the `docker-container` driver, the Kubernetes driver also supports using
-[QEMU](https://www.qemu.org/) (user mode) to build images for non-native
+[QEMU](https://www.qemu.org/) (user mode){: target="_blank" rel="noopener" class="_" } to build images for non-native
 platforms. Include the `--platform` flag and specify which platforms you want to
 output to.
 
@@ -227,7 +227,7 @@ architectures that you want to support.
 
 The Kubernetes driver supports rootless mode. For more information on how
 rootless mode works, and it's requirements, see
-[here](https://github.com/moby/buildkit/blob/master/docs/rootless.md).
+[here](https://github.com/moby/buildkit/blob/master/docs/rootless.md){: target="_blank" rel="noopener" class="_" }.
 
 To turn it on in your cluster, you can use the `rootless=true` driver option:
 
@@ -255,10 +255,10 @@ This guide shows you how to:
 Prerequisites:
 
 - You have an existing Kubernetes cluster. If you don't already have one, you
-  can follow along by installing [minikube](https://minikube.sigs.k8s.io/docs/).
+  can follow along by installing [minikube](https://minikube.sigs.k8s.io/docs/){: target="_blank" rel="noopener" class="_" }.
 - The cluster you want to connect to is accessible via the `kubectl` command,
   with the `KUBECONFIG` environment variable
-  [set appropriately](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable)
+  [set appropriately](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable){: target="_blank" rel="noopener" class="_" }
   if necessary.
 
 1. Create a `buildkit` namespace.
@@ -325,4 +325,4 @@ That's it! You've now built an image from a Kubernetes pod, using Buildx!
 ## Further reading
 
 For more information on the Kubernetes driver, see the
-[buildx reference](https://docs.docker.com/engine/reference/commandline/buildx_create/#driver).
+[buildx reference](../../../../engine/reference/commandline/buildx_create/#driver).

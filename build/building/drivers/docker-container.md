@@ -2,7 +2,7 @@
 title: "Docker container driver"
 keywords: build, buildx, driver, builder, docker-container
 redirect_from:
-- /build/buildx/drivers/docker-container/
+  - /build/buildx/drivers/docker-container/
 ---
 
 The buildx Docker container driver allows creation of a managed and customizable
@@ -13,8 +13,7 @@ Docker driver. For example:
 
 - Specify custom BuildKit versions to use.
 - Build multi-arch images, see [QEMU](#qemu)
-- Advanced options for
-  [cache import and export](../cache/backends/index.md)
+- Advanced options for [cache import and export](../cache/backends/index.md)
 
 ## Synopsis
 
@@ -42,7 +41,7 @@ pass to `--driver-opt`:
 ## Usage
 
 When you run a build, Buildx pulls the specified `image` (by default,
-[`moby/buildkit`](https://hub.docker.com/r/moby/buildkit)). When the container
+[`moby/buildkit`](https://hub.docker.com/r/moby/buildkit)){: target="_blank" rel="noopener" class="_" }. When the container
 has started, Buildx submits the build submitted to the containerized build
 server.
 
@@ -86,7 +85,7 @@ REPOSITORY                       TAG               IMAGE ID       CREATED       
 ## Cache persistence
 
 The `docker-container` driver supports cache persistence, as it stores all of
-the BuildKit state and related cache into a dedicated docker volume.
+the BuildKit state and related cache into a dedicated Docker volume.
 
 To persist the `docker-container` driver's cache, even after recreating the
 driver using `docker buildx rm` and `docker buildx create`, you can destroy the
@@ -101,7 +100,7 @@ $ docker buildx create --name=container --driver=docker-container --use --bootst
 container
 $ docker buildx ls
 NAME/NODE       DRIVER/ENDPOINT              STATUS   BUILDKIT PLATFORMS
-container *     docker-container                               
+container *     docker-container
   container0    desktop-linux                running  v0.10.5  linux/amd64
 $ docker volume ls
 DRIVER    VOLUME NAME
@@ -120,7 +119,7 @@ container
 
 ## QEMU
 
-The `docker-container` driver supports using [QEMU](https://www.qemu.org/) (user
+The `docker-container` driver supports using [QEMU](https://www.qemu.org/){: target="_blank" rel="noopener" class="_" } (user
 mode) to build non-native platforms. Use the `--platform` flag to specify which
 architectures that you want to build for.
 
@@ -143,4 +142,4 @@ $ docker buildx build \
 ## Further reading
 
 For more information on the Docker container driver, see the
-[buildx reference](https://docs.docker.com/engine/reference/commandline/buildx_create/#driver).
+[buildx reference](../../../../engine/reference/commandline/buildx_create/#driver).

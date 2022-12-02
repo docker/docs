@@ -19,8 +19,8 @@ everything that the inline cache can do, and more:
 >
 > This cache storage backend requires using a different driver than the default
 > `docker` driver - see more information on selecting a driver
-> [here](https://docs.docker.com/build/building/drivers/). To create a new
-> driver (which can act as a simple drop-in replacement):
+> [here](../../drivers/index.md). To create a new driver (which can act as a
+> simple drop-in replacement):
 >
 > ```console
 > $ docker buildx create --use --driver=docker-container
@@ -66,8 +66,7 @@ fail, but the build will continue.
 
 ## Further reading
 
-For an introduction to caching see
-[Optimizing builds with cache](https://docs.docker.com/build/building/cache).
+For an introduction to caching see [Optimizing builds with cache](../index.md).
 
 For more information on the `registry` cache backend, see the
-[BuildKit README](https://github.com/moby/buildkit#registry-push-image-and-cache-separately).
+[BuildKit README](https://github.com/moby/buildkit#registry-push-image-and-cache-separately){: target="_blank" rel="noopener" class="_" }.

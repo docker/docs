@@ -5,7 +5,7 @@ keywords: build, buildx, cache, backend, local
 
 The `local` cache store is a simple cache option that stores your cache as files
 in a directory on your filesystem, using an
-[OCI image layout](https://github.com/opencontainers/image-spec/blob/main/image-layout.md)
+[OCI image layout](https://github.com/opencontainers/image-spec/blob/main/image-layout.md){: target="_blank" rel="noopener" class="_" }
 for the underlying directory structure. Local cache is a good choice if you're
 just testing, or if you want the flexibility to self-manage a shared storage
 solution.
@@ -14,8 +14,8 @@ solution.
 >
 > This cache storage backend requires using a different driver than the default
 > `docker` driver - see more information on selecting a driver
-> [here](https://docs.docker.com/build/building/drivers/). To create a new
-> driver (which can act as a simple drop-in replacement):
+> [here](../../drivers/index.md). To create a new driver (which can act as a
+> simple drop-in replacement):
 >
 > ```console
 > $ docker buildx create --use --driver=docker-container
@@ -84,7 +84,7 @@ Like other cache types, local cache gets replaced on export, by replacing the
 contents of the `index.json` file. However, previous caches will still be
 available in the `blobs` directory. These old caches are addressable by digest,
 and kept indefinitely. Therefore, the size of the local cache will continue to
-grow (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896)
+grow (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896){: target="_blank" rel="noopener" class="_" }
 for more information).
 
 When importing cache using `--cache-to`, you can specify the `digest` parameter
@@ -98,8 +98,7 @@ $ docker buildx build --push -t <registry>/<image> \
 
 ## Further reading
 
-For an introduction to caching see
-[Optimizing builds with cache](https://docs.docker.com/build/building/cache).
+For an introduction to caching see [Optimizing builds with cache](../index.md).
 
 For more information on the `local` cache backend, see the
-[BuildKit README](https://github.com/moby/buildkit#local-directory-1).
+[BuildKit README](https://github.com/moby/buildkit#local-directory-1){: target="_blank" rel="noopener" class="_" }.

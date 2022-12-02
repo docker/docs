@@ -58,9 +58,9 @@ $ docker buildx build \
 ```
 
 For more information about annotations, see
-[BuildKit documentation](https://github.com/moby/buildkit/blob/master/docs/annotations.md).
+[BuildKit documentation](https://github.com/moby/buildkit/blob/master/docs/annotations.md){: target="_blank" rel="noopener" class="_" }.
 
 ## Further reading
 
 For more information on the `image` or `registry` exporters, see the
-[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#imageregistry).
+[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#imageregistry){: target="_blank" rel="noopener" class="_" }.

@@ -48,8 +48,7 @@ $ docker buildx build --push -t <registry>/<image> \
 
 ## Further reading
 
-For an introduction to caching see
-[Optimizing builds with cache](https://docs.docker.com/build/building/cache).
+For an introduction to caching see [Optimizing builds with cache](../index.md).
 
 For more information on the `inline` cache backend, see the
-[BuildKit README](https://github.com/moby/buildkit#inline-push-image-and-cache-together).
+[BuildKit README](https://github.com/moby/buildkit#inline-push-image-and-cache-together){: target="_blank" rel="noopener" class="_" }.

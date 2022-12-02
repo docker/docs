@@ -7,7 +7,7 @@ keywords: >
 
 Exporters save your build results to a specified output type. You specify the
 exporter to use with the
-[`--output` CLI option](https://docs.docker.com/engine/reference/commandline/buildx_build/#output).
+[`--output` CLI option](../../../engine/reference/commandline/buildx_build/#output).
 Buildx supports the following exporters:
 
 - `image`: exports the build result to a container image.
@@ -16,10 +16,10 @@ Buildx supports the following exporters:
 - `local`: exports the build root filesystem into a local directory.
 - `tar`: packs the build root filesystem into a local tarball.
 - `oci`: exports the build result to the local filesystem in the
-  [OCI image layout](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-layout.md)
+  [OCI image layout](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-layout.md){: target="_blank" rel="noopener" class="_" }
   format.
 - `docker`: exports the build result to the local filesystem in the
-  [Docker image](https://github.com/docker/docker/blob/v20.10.2/image/spec/v1.2.md)
+  [Docker image](https://github.com/docker/docker/blob/v20.10.2/image/spec/v1.2.md){: target="_blank" rel="noopener" class="_" }
   format.
 - `cacheonly`: doesn't export a build output, but runs the build and creates a
   cache.
@@ -148,8 +148,7 @@ specified location. The `tar` exporter creates a tarball archive file.
 $ docker buildx build --output type=tar,dest=<path/to/output> .
 ```
 
-The `local` exporter is useful in
-[multi-stage builds](https://docs.docker.com/build/building/multi-stage/) since
+The `local` exporter is useful in [multi-stage builds](../multi-stage.md) since
 it allows you to export only a minimal number of build artifacts. For example,
 self-contained binaries.
 
@@ -183,7 +182,7 @@ WARNING: No output specified with docker-container driver.
 ## Multiple exporters
 
 You can only specify a single exporter for any given build (see
-[this pull request](https://github.com/moby/buildkit/pull/2760) for details).
+[this pull request](https://github.com/moby/buildkit/pull/2760) for details){: target="_blank" rel="noopener" class="_" }.
 But you can perform multiple builds one after another to export the same content
 twice. BuildKit caches the build, so unless any of the layers change, all
 successive builds following the first are instant.
@@ -243,9 +242,9 @@ the previous compression algorithm.
 > **Note**
 >
 > The `gzip` and `estargz` compression methods use the
-> [`compress/gzip` package](https://pkg.go.dev/compress/gzip), while `zstd` uses
+> [`compress/gzip` package](https://pkg.go.dev/compress/gzip){: target="_blank" rel="noopener" class="_" }, while `zstd` uses
 > the
-> [`github.com/klauspost/compress/zstd` package](https://github.com/klauspost/compress/tree/master/zstd).
+> [`github.com/klauspost/compress/zstd` package](https://github.com/klauspost/compress/tree/master/zstd){: target="_blank" rel="noopener" class="_" }.
 
 ### OCI media types
 
