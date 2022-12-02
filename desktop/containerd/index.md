@@ -1,27 +1,34 @@
 ---
-title: Containerd Image Store (Beta)
-description: How to activate the containerd integration feature in Docker Desktop
+title: containerd image store (Beta)
+description:
+  How to activate the containerd integration feature in Docker Desktop
 keywords: Docker, containerd, engine, image store, lazy-pull
 toc_max: 3
 ---
 
-This page provides information about the ongoing integration of `containerd` for image and file system management in the Docker Engine.
+This page provides information about the ongoing integration of `containerd` for
+image and file system management in the Docker Engine.
 
 > **Beta**
 >
-> The Containerd Image Store feature is currently in [Beta](../../release-lifecycle.md/#beta). We recommend that you do not use this feature in production environments as this feature may change or be removed from future releases.
+> The containerd image store feature is currently in
+> [Beta](../../release-lifecycle.md/#beta). We recommend that you do not use
+> this feature in production environments as this feature may change or be
+> removed from future releases.
 
+## Enabling the containerd image store feature
 
-## Enabling the Containerd image store feature
+The containerd image store beta feature is off by default.
 
-The Containerd Image Store beta feature is switched off by default.
+To start using the feature:
 
-To enable this feature:
 1. Navigate to **Settings**, or **Preferences** if you’re a Mac user.
 2. Select the **Experimental** features tab.
-3. Next to **Use containerd for pulling and storing images**, select the checkbox.
+3. Next to **Use containerd for pulling and storing images**, select the
+   checkbox.
 
-To disable this feature, clear the **Use containerd for pulling and storing images** checkbox.
+To turn off this feature, clear the **Use containerd for pulling and storing
+images** checkbox.
 
 ![containerd feature](../images/containerd_feature_activation.png){:width="750px"}
 
@@ -128,7 +135,7 @@ fd61d71c75fe: Download complete
 
 ```
 
-Confirm the NGINX container is running:
+Confirm the Nginx container is running:
 
 ```console
 $ docker ps
@@ -136,7 +143,7 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS        
 93b4d60dfd08   nginx     "/docker-entrypoint.…"   3 seconds ago   Up 3 seconds   0.0.0.0:8080->80/tcp   stoic_mccarthy
 ```
 
-You can also check from the browser that NGINX is running:
+You can also check from the browser that Nginx is running:
 
 ![containerd_feature_nginx](../images/containerd_feature_nginx.png){:width="750px"}
 
@@ -178,12 +185,14 @@ FINISHED
  => => unpacking to docker.io/<username>/hello-friends:latest
 
 ```
+
 Run multi-platform image:
 
 ```console
 $ docker run <username>/hello-friends
 
 ```
+
 Push a multi-platform image:
 
 ```console
@@ -207,21 +216,42 @@ View Tags on DockerHub to see multi-platform result:
 
 ### Docker Desktop 4.13.0 release
 
-* Listing images with `docker images` returns the error `content digest not found` on ARM machines after running or pulling an image with the `--platform` parameter.
+- Listing images with `docker images` returns the error
+  `content digest not found` on ARM machines after running or pulling an image
+  with the `--platform` parameter.
 
 ### Docker Desktop 4.12.0 release
 
-* The Containerd Image Store feature requires Buildx version 0.9.0 or newer.
-    + On Docker Desktop for Linux (DD4L), validate if your locally installed version meets this requirement.  
-    >**Note**
+- The containerd image store feature requires Buildx version 0.9.0 or newer.
+
+  - On Docker Desktop for Linux (DD4L), validate if your locally installed
+    version meets this requirement.
+
+    > **Note**
     >
-    > If an older version is installed, the Docker daemon reports the following error **Multiple platforms feature is currently not supported for docker driver. Please switch to a different driver**.  
-    Install a newer version of Buildx following the instructions on [Docker Buildx Manual download](../../build/buildx/install/#manual-download).
-* Containerd Image Store feature and Kubernetes cluster support in Docker Desktop 4.12.0 are incompatible at the moment. Turn off the Containerd Image Store feature if you are using the Kubernetes from Docker Desktop.
-* Local registry mirror configuration isn't implemented yet with the Containerd Image Store. The `registry-mirrors` and `insecure-registries` aren't taken into account by the Docker daemon.
-* The `reference` filter isn't implemented yet and will return the error `invalid filter 'reference'` when listing images.
-* Pulling an image may fail with the error `pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed`, in the situation where the image does not contain a manifest list. To workaround this issue run the `docker login` command and pull the image again.
+    > If you're using an older version, the Docker daemon reports the following
+    > error:
+    > `Multiple platforms feature is currently not supported for docker driver. Please switch to a different driver`.
+    >
+    > Install a newer version of Buildx following the instructions on
+    > [Docker Buildx Manual download](../../build/buildx/install/#manual-download).
+
+- In Docker Desktop 4.12.0, the containerd image store feature is incompatible
+  with the Kubernetes cluster support. Turn off the containerd image store
+  feature if you are using the Kubernetes from Docker Desktop.
+- Local registry mirror configuration isn't implemented yet with the containerd
+  image store. The `registry-mirrors` and `insecure-registries` aren't taken
+  into account by the Docker daemon.
+- The `reference` filter isn't implemented yet and will return the error
+  `invalid filter 'reference'` when listing images.
+- Pulling an image may fail with the error
+  `pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed`,
+  in the situation where the image does not contain a manifest list. To
+  workaround this issue run the `docker login` command and pull the image again.
 
 ## Feedback
 
-Thanks for trying the new features available with `containerd`. Give feedback or report any bugs you may find through the issues tracker on the [feedback form](https://dockr.ly/3PODIhD){: target="_blank" rel="noopener" class="_"}.
+Thanks for trying the new features available with `containerd`. Give feedback or
+report any bugs you may find through the issues tracker on the
+[feedback form](https://dockr.ly/3PODIhD){: target="_blank" rel="noopener"
+class="_"}.
