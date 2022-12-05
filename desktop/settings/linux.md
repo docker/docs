@@ -99,23 +99,15 @@ File share settings are:
 ### Proxies
 
 To configure HTTP proxies, switch on the **Manual proxy configuration** setting.
+This setting is used for logging into Docker, for pulling and pushing images, and for
+container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
+the developer for a username and password. All passwords are stored securely in the OS credential store.
+Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
+URL for your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
+supports TLS 1.3 when communicating with proxies.
 
-Your proxy settings, however, are not propagated into the containers you start.
-If you wish to set the proxy settings for your containers, you need to define
-environment variables for them, just like you would do on Linux, for example:
-
-```console
-$ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
-
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=b7edf988b2b5
-TERM=xterm
-HOME=/root
-HTTP_PROXY=http://proxy.example.com:3128
-```
-
-For more information on configuring the Docker CLI to automatically set proxy variables for both `docker run` and `docker build`
-see [Configure the Docker client](../../network/proxy.md#configure-the-docker-client).
+To prevent developers from accidentally changing the proxy settings, see
+[Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
 
 ### Network
 

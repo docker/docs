@@ -82,17 +82,17 @@ You selected this USER-ID:
 Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
 ...
 pub   rsa3072 2022-03-31 [SC] [expires: 2024-03-30]
-      7865BA9185AFA2C26C5B505669FC4F36530097C2
+      <generated gpg-id public key>
 uid                      Molly <molly@example.com>
 sub   rsa3072 2022-03-31 [E] [expires: 2024-03-30]
 ```
 
-To initialize `pass`, run:
+To initialize `pass`, run the following command using the public key generated from the previous command
 
 ```console
-molly@ubuntu:~$ pass init 7865BA9185AFA2C26C5B505669FC4F36530097C2
+molly@ubuntu:~$ pass init <generated gpg-id public key>
 mkdir: created directory '/home/molly/.password-store/'
-Password store initialized for 7865BA9185AFA2C26C5B505669FC4F36530097C2
+Password store initialized for <generated gpg-id public key>
 ```
 
 Once `pass` is initialized, you can sign in on the Docker Dashboard and pull your private images.
