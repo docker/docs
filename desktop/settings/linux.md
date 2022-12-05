@@ -107,7 +107,7 @@ URL for your HTTP/HTTPS proxies to protect passwords while in transit on the net
 supports TLS 1.3 when communicating with proxies.
 
 To prevent developers from accidentally changing the proxy settings, see
-[settings management](../hardened-desktop/settings-management/#what-features-can-i-configure-with-settings-management).
+[Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
 
 ### Network
 
