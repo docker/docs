@@ -134,18 +134,20 @@ HTTP/HTTPS proxies can be used when:
 - Containers interact with the external network
 - Scanning images
 
-Each use case above is configured slightly differently.
+If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration), Docker Desktop reads
+this configuration
+and automatically uses these settings for logging into Docker, for pulling and pushing images, and for
+container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
+the developer for a username and password. All passwords are stored securely in the OS credential store.
+Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
+URL for your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
+supports TLS 1.3 when communicating with proxies.
 
-If the host uses a static HTTP/HTTPS proxy configuration, Docker Desktop reads this configuration
-and automatically uses these settings for logging into Docker and for pulling and pushing images.
+To set a different proxy for Docker Desktop, enable **Manual proxy configuration** and enter a single
+upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
 
-If the host uses a more sophisticated HTTP/HTTPS configuration, enable **Manual proxy configuration** and enter a single upstream proxy URL
-of the form `http://username:password@proxy:port`.
-
-HTTP/HTTPS traffic from image builds and running containers is forwarded transparently to the same
-upstream proxy used for logging in and image pulls.
-If you want to override this behaviour and use different HTTP/HTTPS proxies for image builds and
-running containers, see [Configure the Docker client](../../network/proxy.md#configure-the-docker-client).
+To prevent developers from accidentally changing the proxy settings, see
+[Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
 
 The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
