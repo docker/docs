@@ -1242,7 +1242,7 @@ manuals:
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
     - path: /desktop/containerd/
-      title: Containerd Image Store (Beta)
+      title: containerd image store (Beta)
     - path: /desktop/wasm/
       title: Wasm (Beta)
     - sectiontitle: FAQs
