@@ -100,7 +100,7 @@ File share settings are:
 
 To configure HTTP proxies, switch on the **Manual proxy configuration** setting.
 This setting is used for logging into Docker, for pulling and pushing images, and for
-container Internet access. If the proxy requires authorization then Docker Desktop will dynamically ask
+container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
 the developer for a username and password. All passwords are stored securely in the OS credential store.
 Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
 URL for your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
