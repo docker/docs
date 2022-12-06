@@ -6,6 +6,33 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 2.14.0
+{% include release-date.html date="2022-12-02" %}
+
+### Updates
+- Dependencies upgrade: bump compose-go to [v1.8.0](https://github.com/compose-spec/compose-go/releases/tag/v1.8.0)
+- Dependencies upgrade: bump Go to 1.19.3
+
+### Bug fixes and enhancements
+- Added `oom_score_adj` field to service definition. Pull Request [compose#10019](https://github.com/docker/compose/issues/10019){:
+  target="_blank" rel="noopener" class="_"}
+- Added mode field for tmpfs mount permissions. Pull Request [compose#10031](https://github.com/docker/compose/issues/10031){:
+  target="_blank" rel="noopener" class="_"}
+- Compose now only stops services started by `up` when interrupted. Fixed [compose#10028](https://github.com/docker/compose/issues/10028){:
+  target="_blank" rel="noopener" class="_"}
+- Compose now loads implicit profiles for targeted services. Fixed [compose#10025](https://github.com/docker/compose/issues/10025){:target="
+  _blank" rel="noopener" class="_"}
+- Compose does not require `service.build.platforms` to be set if `service.platform` is set. Fixed [compose#10017](https://github.com/docker/compose/issues/10017){:
+  target="_blank" rel="noopener" class="_"}
+- Plain output is used during buildx image builds if `--ansi=never` is set. Fixed [compose#10020](https://github.com/docker/compose/issues/10020){:
+  target="_blank" rel="noopener" class="_"}
+- `COMPOSE_IGNORE_ORPHANS` environment variable now behaves more consistently. Fixed [compose#10035](https://github.com/docker/compose/issues/10035){:
+  target="_blank" rel="noopener" class="_"}
+- Compose now uses the correct image name separator in `convert`. Fixed [compose#9904](https://github.com/docker/compose/issues/9904){:target="
+  _blank" rel="noopener" class="_"}
+- Fixed `run` for services using `network_mode: service:NAME`. Fixed [compose#10036](https://github.com/docker/compose/issues/10036){:
+  target="_blank" rel="noopener" class="_"}
+
 ## 2.13.0
 {% include release-date.html date="2022-11-23" %}
 
@@ -24,7 +51,6 @@ redirect_from:
 - Fixed parsing issue when a container number label is not found. Fixed [compose#10004](https://github.com/docker/compose/issues/10004){:target="_blank" rel="noopener" class="_"}
 - Compose now uses the platform value defined by `DOCKER_DEFAULT_PLATFORM` when no `service.platform` defined. Fixed [compose#9889](https://github.com/docker/compose/issues/9889){:target="_blank" rel="noopener" class="_"}
 - Removed usage of the deprecated dependency `gotest.tools` v2. Pull Request [compose#9935](https://github.com/docker/compose/pull/9935){:target="_blank" rel="noopener" class="_"}
-
 - Excluded issues labeled with `kind/feature` from stale bot process. Fixed [compose#9988](https://github.com/docker/compose/pull/9988){:target="_blank" rel="noopener" class="_"}
 
 
