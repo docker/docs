@@ -29,9 +29,11 @@ builders have used the backend to:
 - Store the extension state, like when a button starts a long-running process, so that if you navigate away
   from the extension user interface and come back, the frontend can pick up where it left off.
 
+Learn more about extension backend in the [architecture](../../architecture/index.md#the-backend) section.
+
 ## Add a backend to the extension
 
-If you created your extension using the `docker extension init` command, you already have a backend set up. If it is
+If you created your extension using the `docker extension init` command, you already have a backend setup. If it is
 not the case, then you have to first create a `vm` directory that will contain the code and update the Dockerfile to
 containerize it.
 
@@ -202,12 +204,18 @@ type HTTPMessageBody struct {
 <div class="tab-content">
   <div id="go-dockerfile" class="tab-pane fade in active" markdown="1">
 
-<br/>
+<br/> 
 
-To deploy your Go backend when installing the extension, you need first to configure the `Dockerfile` so that:
+To deploy your Go backend when installing the extension, you need first to configure the `Dockerfile`, so that:
 - it builds the backend application
 - it copies the binary in the extension's container filesystem
 - it starts the binary when the container starts listening on the extension socket
+
+> **Tip**
+> 
+> To ease version management, you can reuse the same image to build the frontend, build the
+backend service, and package the extension.
+{: .tip }
 
 ```dockerfile
 FROM node:17.7-alpine3.14 AS client-builder
@@ -297,7 +305,7 @@ in the `vm` section of the `metadata.json` file.
 }
 ```
 
-For more information on the `vm` section of the `metadata.json`, see [Metadata](../../extensions/METADATA.md).
+For more information on the `vm` section of the `metadata.json`, see [Metadata](../../architecture/metadata.md).
 
 > **Warning**
 >
@@ -417,4 +425,5 @@ call displayed.
 
 ## What's next?
 
-Learn how to [share and publish your extension](../../extensions/index.md).
+- Learn how to [share and publish your extension](../../extensions/index.md).
+- Learn more about extensions [architecture](../../architecture/index.md).

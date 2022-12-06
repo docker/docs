@@ -12,6 +12,8 @@ Host binaries allow exactly this: to invoke from the extension executables (as b
 shipped as part of your extension and deployed to the host. As extensions can run on multiple platforms, this
 means that you need to ship the executables for all the platforms you want to support.
 
+Learn more about extensions [architecture](../architecture/index.md).
+
 > **Note**
 >
 > Only executables shipped as part of the extension can be invoked with the SDK. 

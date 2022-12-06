@@ -15,7 +15,8 @@ Use the resources in this section to create your own Docker Extension.
 
 Extensions are packaged as specially formatted Docker images, which our CLI tool helps to build. At the root of the image filesystem is a `metadata.json` file which describes the content of the extension. It is a fundamental element of a Docker extension.
 
-An extension can contain a UI part and backend parts that run either on the host or in the Desktop virtual machine. For further details, see [Extension metadata](extensions/METADATA.md).
+An extension can contain a UI part and backend parts that run either on the host or in the Desktop virtual machine.
+For further details, see [Extension metadata](architecture/metadata.md).
 
 Extensions are distributed through the Docker Hub.
 Development of extensions can be done locally without the need to push the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTION.md) for further details.

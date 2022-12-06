@@ -8,8 +8,8 @@ This page contains additional information on how to package and distribute Docke
 
 ## Package your extension
 
-Docker Extensions are packaged as Docker images. The entire extension runtime including the UI, backend services (host or VM) and any necessary binary must be included in the extension image.
-Every extension image must contain a metadata.json file at the root of its filesystem that defines the [contents of the extension](METADATA.md).
+Docker Extensions are packaged as Docker images. The entire extension runtime including the UI, backend services (host or VM), and any necessary binary must be included in the extension image.
+Every extension image must contain a metadata.json file at the root of its filesystem that defines the [contents of the extension](../architecture/metadata.md).
 
 The Docker image must have several [image labels](labels.md), providing information about the extension.
 

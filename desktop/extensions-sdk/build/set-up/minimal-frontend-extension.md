@@ -72,9 +72,10 @@ A `metadata.json` file is required at the root of the image filesystem.
 }
 ```
 
-For more information on the `metadata.json`, see [Metadata](../../extensions/METADATA.md).
+For more information on the `metadata.json`, see [Metadata](../../architecture/metadata.md).
 
 ## What's next?
 
 - Learn how to [build and install your extension](../build-install.md).
+- Learn more about extensions [architecture](../../architecture/index.md).
 - Build a more advanced frontend extension by following the [Advanced frontend extension tutorial](./frontend-extension-tutorial.md).

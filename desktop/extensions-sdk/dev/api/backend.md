@@ -4,7 +4,7 @@ description: Docker extension API
 keywords: Docker, extensions, sdk, API
 ---
 
-The `ddClient.extension.vm` object can be used to communicate with the backend defined in the [vm section](../../extensions/METADATA.md#vm-section) of the extension metadata.
+The `ddClient.extension.vm` object can be used to communicate with the backend defined in the [vm section](../../architecture/metadata.md#vm-section) of the extension metadata.
 
 ## get
 
@@ -25,7 +25,7 @@ See [Service API Reference](reference/interfaces/HttpService.md) for other metho
 > The methods below that use `window.ddClient.backend` are deprecated and will be removed in a future version. Use the methods specified above.
 
 The `window.ddClient.backend` object can be used to communicate with the backend
-defined in the [vm section](../../extensions/METADATA.md#vm-section) of the
+defined in the [vm section](../../architecture/metadata.md#vm-section) of the
 extension metadata. The client is already connected to the backend.
 
 Example usages:
@@ -108,7 +108,7 @@ console.log(output);
 
 ## Invoke an extension binary on the host
 
-You can run binaries defined in the [host section](../../extensions/METADATA.md#host-section)
+You can run binaries defined in the [host section](../../architecture/metadata.md#host-section)
 of the extension metadata.
 
 For example, execute the shipped binary `kubectl -h` command in the host:
