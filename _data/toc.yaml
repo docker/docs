@@ -891,7 +891,7 @@ reference:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecResultV0/
         title: ExecResultV0
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/BackendV0/
-        title: BackendV0  
+        title: BackendV0
 - title: Dockerfile reference
   path: /engine/reference/builder/
 - sectiontitle: Compose file reference
@@ -1179,30 +1179,32 @@ manuals:
           title: Quickstart
         - sectiontitle: "Part one: Build"
           section:
-            - sectiontitle: "Step one: Set up..."
+            - sectiontitle: "Step one: Create a new extension"
               section:
-                - title: ...a minimal frontend extension
+                - title: Create a simple extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
-                - title: ... an advanced frontend extension
+                - title: Create a more advanced frontend
                   path: /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
-                - title: ... a minimal backend extension
-                  path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
+                - title: Add a backend to your extension
+                  path: /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/
             - title: "Step two: Build and install"
               path: /desktop/extensions-sdk/build/build-install/
             - title: "Step three: Test and debug"
               path: /desktop/extensions-sdk/build/test-debug/
         - sectiontitle: "Part two: Publish"
           section:
-            - title: Publish your extension
+            - title: Overview
               path: /desktop/extensions-sdk/extensions/
-            - title: Share your extension
-              path: /desktop/extensions-sdk/extensions/share
             - title: Metadata
               path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
-            - title: Packaging, distribution, and API dependencies
+            - title: Package and release your extension
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
+            - title: Generate a share link
+              path: /desktop/extensions-sdk/extensions/share/
+            - title: Publish in the marketplace
+              path: /desktop/extensions-sdk/extensions/publish/
             - title: Build multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
         - sectiontitle: "Design and UI styling"
