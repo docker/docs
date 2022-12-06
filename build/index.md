@@ -144,11 +144,11 @@ advanced scenarios.
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/build/customize/bake/">
+          <a href="/build/bake/">
            <img src="/assets/images/build-bake.svg" alt="Cake silhouette" width="70px" height="70px">
           </a>
         </div>
-        <h2><a href="/build/customize/bake/">Bake</a></h2>
+        <h2><a href="/build/bake/">Bake</a></h2>
         <p>
           Orchestrate your builds with Bake.
         </p>

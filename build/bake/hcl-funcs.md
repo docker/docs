@@ -2,7 +2,7 @@
 title: "User defined HCL functions"
 keywords: build, buildx, bake, buildkit, hcl
 redirect_from:
-- /build/bake/hcl-funcs/
+- /build/customize/bake/hcl-funcs/
 ---
 
 ## Using interpolation to tag an image with the git sha

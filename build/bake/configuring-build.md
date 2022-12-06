@@ -2,7 +2,7 @@
 title: "Configuring builds"
 keywords: build, buildx, bake, buildkit, hcl, json
 redirect_from:
-- /build/bake/configuring-build/
+- /build/customize/bake/configuring-build/
 ---
 
 Bake supports loading build definition from files, but sometimes you need even
@@ -96,7 +96,7 @@ $ docker buildx bake -f docker-bake.hcl -f env.hcl --print app
 ## From command line
 
 You can also override target configurations from the command line with the
-[`--set` flag](../../../engine/reference/commandline/buildx_bake.md#set):
+[`--set` flag](../../engine/reference/commandline/buildx_bake.md#set):
 
 ```hcl
 # docker-bake.hcl

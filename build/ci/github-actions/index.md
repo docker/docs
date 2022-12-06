@@ -26,7 +26,7 @@ The following GitHub Actions are available:
   installs [QEMU](https://github.com/qemu/qemu) static binaries for multi-arch
   builds.
 - [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake){: target="_blank" rel="noopener" class="_" }:
-  enables using high-level builds with [Bake](../../customize/bake/index.md).
+  enables using high-level builds with [Bake](../../bake/index.md).
 
 Using Docker's actions provides an easy-to-use interface, while still allowing
 flexibility for customizing build parameters.

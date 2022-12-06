@@ -2,7 +2,7 @@
 title: High-level builds with Bake
 keywords: build, buildx, bake, buildkit, hcl, json, compose
 redirect_from:
-- /build/bake/
+- /build/customize/bake/
 ---
 
 > This command is experimental.
@@ -21,10 +21,10 @@ The build commands can be combined with general-purpose command runners
 (for example, `make`). However, these tools generally invoke builds in sequence
 and therefore cannot leverage the full potential of BuildKit parallelization,
 or combine BuildKit's output for the user. For this use case, we have added a
-command called [`docker buildx bake`](../../../engine/reference/commandline/buildx_bake.md).
+command called [`docker buildx bake`](../../engine/reference/commandline/buildx_bake.md).
 
 The `bake` command supports building images from HCL, JSON and Compose files.
-This is similar to [`docker compose build`](../../../compose/compose-file/build.md),
+This is similar to [`docker compose build`](../../compose/compose-file/build.md),
 but allowing all the services to be built concurrently as part of a single
 request. If multiple files are specified they are all read and configurations are
 combined.

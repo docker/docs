@@ -2,12 +2,12 @@
 title: "Building from Compose file"
 keywords: build, buildx, bake, buildkit, compose
 redirect_from:
-- /build/bake/compose-file/
+- /build/customize/bake/compose-file/
 ---
 
 ## Specification
 
-Bake uses the [compose-spec](../../../compose/compose-file/index.md) to
+Bake uses the [compose-spec](../../compose/compose-file/index.md) to
 parse a compose file and translate each service to a [target](file-definition.md#target).
 
 ```yaml
@@ -153,7 +153,7 @@ $ docker buildx bake --print
 ## Extension field with `x-bake`
 
 Even if some fields are not (yet) available in the compose specification, you
-can use the [special extension](../../../compose/compose-file/index.md#extension)
+can use the [special extension](../../compose/compose-file/index.md#extension)
 field `x-bake` in your compose file to evaluate extra fields:
 
 ```yaml
