@@ -20,7 +20,7 @@ These guidelines don't replace Docker's terms of service or guarantee approval. 
 
 #### Guidelines:
 
-- Ensure that you’ve ran the [validation checks](../build/build-install.md)
+- Ensure that you’ve ran the [validation checks](validate.md)
 - Review the [design guidelines](../design/design-guidelines.md)
 - Ensure the [UI styling](../design/overview.md) is in line with Docker Desktop guidelines
 - Ensure your extensions support both light and dark mode

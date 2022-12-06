@@ -39,7 +39,7 @@ deployed on the host, through the [Extensions SDK](https://www.npmjs.com/package
 > vanilla Javascript.
 {: .tip }
 
-Learn more about [building a frontend](../build/set-up/frontend-extension-tutorial.md) for your extension.
+Learn more about [building a frontend](../build/frontend-extension-tutorial.md) for your extension.
 
 ## The backend
 
@@ -83,7 +83,7 @@ running Docker Desktop in constrained environments where they can't open ports o
 
 Finally, the backend can be built with any technology, as long as it can run in a container and listen on a socket.
 
-Learn more about [adding a backend](../build/set-up/backend-extension-tutorial.md) to your extension.
+Learn more about [adding a backend](../build/backend-extension-tutorial.md) to your extension.
 
 ## Executables
 
