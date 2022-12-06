@@ -142,7 +142,8 @@ COPY --from=client-builder /ui/build ui
 
 ## Configure the metadata file
 
-A `metadata.json` file is required at the root of your extension directory.
+In order to add a tab in Docker Desktop for your extension, you have to configure it in the `metadata.json`
+file the root of your extension directory.
 
 ```json
 {
@@ -157,9 +158,34 @@ A `metadata.json` file is required at the root of your extension directory.
 }
 ```
 
+The `title` property is the name of the extension that is displayed in the left-menu of the Docker Desktop Dashboard.
+The `root` property is the path to the frontend application in the extension's container filesystem used by the
+system to deploy it on the host.
+The `src` property is the path to the HTML entry point of the frontend application within the `root` folder.
+
+For more information on the `ui` section of hte `metadata.json`, see [Metadata](../../extensions/METADATA.md#ui-section).
+
+## Build the extension and install it
+
+Now that you have configured the extension, you need to build the extension image that Docker Desktop will use to
+install it.
+
+```bash
+docker build --tag= awesome-inc/my-extension:latest .
+```
+
+This built an image tagged `awesome-inc/my-extension:latest`, you can run `docker inspect
+awesome-inc/my-extension:latest` to see more details about it.
+
+Finally, you can install the extension and see it appearing in the Docker Desktop Dashboard.
+
+```bash
+docker extension install awesome-inc/my-extension:latest
+```
+
 ## Use the Extension APIs client
 
-To use the Extension APIs and perform actions with Docker Desktop, the extension must first import the 
+To use the Extension APIs and perform actions with Docker Desktop, the extension must first import the
 `@docker/extension-api-client` library. To install it, run the command below:
 
 ```bash
@@ -174,7 +200,7 @@ import { createDockerDesktopClient } from '@docker/extension-api-client';
 const ddClient = createDockerDesktopClient();
 ```
 
-When using Typescript, you can also install `@docker/extension-api-client-types` as a dev dependency. This will 
+When using Typescript, you can also install `@docker/extension-api-client-types` as a dev dependency. This will
 provide you with type definitions for the extension APIs and auto-completion in your IDE.
 
 ```bash
@@ -183,7 +209,7 @@ npm install @docker/extension-api-client-types --save-dev
 
 ![types auto complete](images/types-autocomplete.png)
 
-For example, you can use the `docker.cli.exec` function to get the list of all the containers via the `docker ps --all` 
+For example, you can use the `docker.cli.exec` function to get the list of all the containers via the `docker ps --all`
 command and display the result in a table.
 
 <ul class="nav nav-tabs">
