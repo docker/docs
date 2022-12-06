@@ -1329,9 +1329,9 @@ manuals:
           section:
             - sectiontitle: "Step one: Create a new extension"
               section:
-                - title: Create an simple extension
+                - title: Create a simple extension
                   path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
-                - title: Invoke Docker commands
+                - title: Create a more advanced frontend
                   path: /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
                 - title: Add a backend to your extension
                   path: /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/

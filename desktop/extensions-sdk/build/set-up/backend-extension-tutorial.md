@@ -21,13 +21,13 @@ why and how to add a backend.
 ## Why add a backend?
 
 Thanks to the Docker Extensions SDK, most of the time you should be able to do what you need from the Docker CLI
-directly from [the frontend](./frontend-extension-tutorial.md).
+directly from [the frontend](./frontend-extension-tutorial.md#use-the-extension-apis-client).
 
 Nonetheless, there are some cases where you might need to add a backend to your extension. So far, extension
 builders have used the backend to:
 - Store data in a local database and serve them back with a REST API.
 - Store the extension state, like when a button starts a long-running process, so that if you navigate away
-  from the extension and come back, the frontend can pick up where it left off.
+  from the extension user interface and come back, the frontend can pick up where it left off.
 
 ## Add a backend to the extension
 
@@ -71,8 +71,9 @@ On this tutorial, the backend service simply exposes one route that returns a JS
 >
 > We recommend that, the frontend and the backend communicate through sockets (and named pipes on Windows) instead of
 > HTTP. On one hand, because it will prevent port collision with any other running application or container running
-> on the host. On the other hand, because some Docker Desktop users might be unable to open ports on their machines.
-> So, when choosing the language and framework for your backend, make sure it supports sockets connection.
+> on the host. On the other hand, because some Docker Desktop users are running in constrained environments where they
+> can't open ports on their machines. So, when choosing the language and framework for your backend, make sure it
+> supports sockets connection.
 {: .important}
 
 <ul class="nav nav-tabs">
