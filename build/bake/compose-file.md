@@ -97,7 +97,7 @@ Unlike the [HCL format](file-definition.md#hcl-definition), there are some
 limitations with the compose format:
 
 * Specifying variables or global scope attributes is not yet supported
-* `inherits` service field is not supported, but you can use [YAML anchors](https://docs.docker.com/compose/compose-file/#fragments){:target="_blank" rel="noopener" class="_"}
+* `inherits` service field is not supported, but you can use [YAML anchors](https://docs.docker.com/compose/compose-file/#fragments){:target="blank" rel="noopener" class=""}
   to reference other services like the example above
 
 ## `.env` file

@@ -136,17 +136,15 @@ $ docker buildx build --push --tag myregistry.com/myimage:latest .
 ## CNI networking
 
 CNI networking for builders can be useful for dealing with network port
-contention during concurrent builds. CNI is
-[not yet](https://github.com/moby/buildkit/issues/28){:target="_blank"
-rel="noopener" class="_"} available in the default BuildKit image. But you can
-create your own image that includes CNI support.
+contention during concurrent builds. CNI is [not yet](https://github.com/moby/buildkit/issues/28){:target="blank" rel="noopener" class=""}
+available in the default BuildKit image. But you can create your own image that
+includes CNI support.
 
 The following Dockerfile example shows a custom BuildKit image with CNI support.
-It uses the
-[CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json){:target="_blank"
-rel="noopener" class="_"} in BuildKit as an example. Feel free to include your
-own CNI configuration.
+It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json){:target="blank" rel="noopener" class=""}
+in BuildKit as an example. Feel free to include your own CNI configuration.
 
+{% raw %}
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -167,6 +165,7 @@ RUN apk add --no-cache iptables
 COPY --from=cni-plugins /opt/cni/bin /opt/cni/bin
 ADD https://raw.githubusercontent.com/moby/buildkit/${BUILDKIT_VERSION}/hack/fixtures/cni.json /etc/buildkit/cni.json
 ```
+{% endraw %}
 
 Now you can build this image, and create a builder instance from it using
 [the `--driver-opt image` option](../../engine/reference/commandline/buildx_create.md#driver-opt):

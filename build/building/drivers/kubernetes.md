@@ -26,7 +26,7 @@ The following table describes the available driver-specific options that you can
 pass to `--driver-opt`:
 
 | Parameter         | Type              | Default                                 | Description                                                                                                                          |
-| ----------------- | ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+|-------------------|-------------------|-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | `image`           | String            |                                         | Sets the image to use for running BuildKit.                                                                                          |
 | `namespace`       | String            | Namespace in current Kubernetes context | Sets the Kubernetes namespace.                                                                                                       |
 | `replicas`        | Integer           | 1                                       | Sets the number of Pod replicas to create. See [scaling BuildKit][1]                                                                 |
@@ -62,7 +62,7 @@ is configurable using the following driver options:
 
   These options allow requesting and limiting the resources available to each
   BuildKit pod according to the official Kubernetes documentation
-  [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/){: target="_blank" rel="noopener" class="_" }.
+  [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/){:target="blank" rel="noopener" class=""}.
 
 For example, to create 4 replica BuildKit pods:
 
@@ -96,7 +96,7 @@ replicas. `sticky` (the default) attempts to connect the same build performed
 multiple times to the same node each time, ensuring better use of local cache.
 
 For more information on scalability, see the options for
-[buildx create](../../../../engine/reference/commandline/buildx_create/#driver-opt).
+[buildx create](../../../engine/reference/commandline/buildx_create.md#driver-opt).
 
 ## Node assignment
 
@@ -133,9 +133,9 @@ leveraging the native architecture of nodes.
 ### QEMU
 
 Like the `docker-container` driver, the Kubernetes driver also supports using
-[QEMU](https://www.qemu.org/) (user mode){: target="_blank" rel="noopener" class="_" } to build images for non-native
-platforms. Include the `--platform` flag and specify which platforms you want to
-output to.
+[QEMU](https://www.qemu.org/){:target="blank" rel="noopener" class=""} (user mode)
+to build images for non-native platforms. Include the `--platform` flag and
+specify which platforms you want to output to.
 
 For example, to build a Linux image for `amd64` and `arm64`:
 
@@ -220,14 +220,14 @@ combined, by specifying those platforms together in your buildx command:
 $ docker buildx build --builder=kube --platform=linux/amd64,linux/arm64 -t <user>/<image> --push .
 ```
 
-You can repeat the `buildx create --append` command for as many different
-architectures that you want to support.
+You can repeat the `buildx create --append` command for as many architectures
+that you want to support.
 
 ## Rootless mode
 
 The Kubernetes driver supports rootless mode. For more information on how
 rootless mode works, and it's requirements, see
-[here](https://github.com/moby/buildkit/blob/master/docs/rootless.md){: target="_blank" rel="noopener" class="_" }.
+[here](https://github.com/moby/buildkit/blob/master/docs/rootless.md){:target="blank" rel="noopener" class=""}.
 
 To turn it on in your cluster, you can use the `rootless=true` driver option:
 
@@ -255,10 +255,10 @@ This guide shows you how to:
 Prerequisites:
 
 - You have an existing Kubernetes cluster. If you don't already have one, you
-  can follow along by installing [minikube](https://minikube.sigs.k8s.io/docs/){: target="_blank" rel="noopener" class="_" }.
+  can follow along by installing [minikube](https://minikube.sigs.k8s.io/docs/){:target="blank" rel="noopener" class=""}.
 - The cluster you want to connect to is accessible via the `kubectl` command,
   with the `KUBECONFIG` environment variable
-  [set appropriately](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable){: target="_blank" rel="noopener" class="_" }
+  [set appropriately](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable){:target="blank" rel="noopener" class=""}
   if necessary.
 
 1. Create a `buildkit` namespace.
@@ -325,4 +325,4 @@ That's it! You've now built an image from a Kubernetes pod, using Buildx!
 ## Further reading
 
 For more information on the Kubernetes driver, see the
-[buildx reference](../../../../engine/reference/commandline/buildx_create/#driver).
+[buildx reference](../../../engine/reference/commandline/buildx_create.md#driver).

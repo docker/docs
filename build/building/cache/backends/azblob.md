@@ -9,7 +9,7 @@ keywords: build, buildx, cache, backend, azblob, azure
 > `moby/buildkit:master` image in your Buildx driver.
 
 The `azblob` cache store uploads your resulting build cache to
-[Azure's blob storage service](https://azure.microsoft.com/en-us/services/storage/blobs/){: target="_blank" rel="noopener" class="_" }.
+[Azure's blob storage service](https://azure.microsoft.com/en-us/services/storage/blobs/){:target="blank" rel="noopener" class=""}.
 
 > **Note**
 >
@@ -34,7 +34,7 @@ The following table describes the available CSV parameters that you can pass to
 `--cache-to` and `--cache-from`.
 
 | Name                | Option                  | Type        | Default | Description                                        |
-| ------------------- | ----------------------- | ----------- | ------- | -------------------------------------------------- |
+|---------------------|-------------------------|-------------|---------|----------------------------------------------------|
 | `name`              | `cache-to`,`cache-from` | String      |         | Required. The name of the cache image.             |
 | `account_url`       | `cache-to`,`cache-from` | String      |         | Base URL of the storage account.                   |
 | `secret_access_key` | `cache-to`,`cache-from` | String      |         | Blob storage account key, see [authentication][1]. |
@@ -47,7 +47,7 @@ The following table describes the available CSV parameters that you can pass to
 
 The `secret_access_key`, if left unspecified, is read from environment variables
 on the BuildKit server following the scheme for the
-[Azure Go SDK](https://docs.microsoft.com/en-us/azure/developer/go/azure-sdk-authentication){: target="_blank" rel="noopener" class="_" }.
+[Azure Go SDK](https://docs.microsoft.com/en-us/azure/developer/go/azure-sdk-authentication){:target="blank" rel="noopener" class=""}.
 The environment variables are read from the server, not the Buildx client.
 
 ## Further reading
@@ -55,4 +55,4 @@ The environment variables are read from the server, not the Buildx client.
 For an introduction to caching see [Optimizing builds with cache](../index.md).
 
 For more information on the `azblob` cache backend, see the
-[BuildKit README](https://github.com/moby/buildkit#azure-blob-storage-cache-experimental){: target="_blank" rel="noopener" class="_" }.
+[BuildKit README](https://github.com/moby/buildkit#azure-blob-storage-cache-experimental){:target="blank" rel="noopener" class=""}.

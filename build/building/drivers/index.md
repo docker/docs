@@ -19,15 +19,15 @@ prioritizes simplicity and ease of use. It has limited support for advanced
 features like caching and output formats, and isn't configurable. Other drivers
 provide more flexibility and are better at handling advanced scenarios.
 
-The following table outlines some of the differences between drivers.
+The following table outlines some differences between drivers.
 
 | Feature                      |  `docker`   | `docker-container` | `kubernetes` |      `remote`      |
-| :--------------------------- | :---------: | :----------------: | :----------: | :----------------: |
-| **Automatically load image** |     ✅      |                    |              |                    |
-| **Cache export**             | Inline only |         ✅         |      ✅      |         ✅         |
-| **Tarball output**           |             |         ✅         |      ✅      |         ✅         |
-| **Multi-arch images**        |             |         ✅         |      ✅      |         ✅         |
-| **BuildKit configuration**   |             |         ✅         |      ✅      | Managed externally |
+|:-----------------------------|:-----------:|:------------------:|:------------:|:------------------:|
+| **Automatically load image** |      ✅      |                    |              |                    |
+| **Cache export**             | Inline only |         ✅          |      ✅       |         ✅          |
+| **Tarball output**           |             |         ✅          |      ✅       |         ✅          |
+| **Multi-arch images**        |             |         ✅          |      ✅       |         ✅          |
+| **BuildKit configuration**   |             |         ✅          |      ✅       | Managed externally |
 
 ## List available builders
 
@@ -55,14 +55,13 @@ desktop-linux * docker
 ```
 
 This is because the Docker driver builders are automatically pulled from the
-available [Docker Contexts](../../../engine/context/working-with-contexts/).
+available [Docker Contexts](../../../engine/context/working-with-contexts.md).
 When you add new contexts using `docker context create`, these will appear in
 your list of buildx builders.
 
 ## Create a new builder
 
-Use the
-[`docker buildx create`](../../../engine/reference/commandline/buildx_create/)
+Use the [`docker buildx create`](../../../engine/reference/commandline/buildx_create.md)
 command to create a builder, and specify the driver using the `--driver` option.
 
 ```console

@@ -199,14 +199,12 @@ layers to a minimum.
 
 #### Use an appropriate base image
 
-Docker provides over 170 pre-built
-[official images](https://hub.docker.com/search?q=&image_filter=official) for
-almost every common development scenario. For example, if you're building a Java
-web server, use a dedicated image such as
-[`openjdk`](https://hub.docker.com/_/openjdk/). Even when there's not an
-official image for what you might want, Docker provides images from
-[verified publishers](https://hub.docker.com/search?q=&image_filter=store) and
-[open source partners](https://hub.docker.com/search?q=&image_filter=open_source)
+Docker provides over 170 pre-built [official images](https://hub.docker.com/search?q=&image_filter=official){:target="blank" rel="noopener" class=""}
+for almost every common development scenario. For example, if you're building a
+Java web server, use a dedicated image such as [`openjdk`](https://hub.docker.com/_/openjdk/){:target="blank" rel="noopener" class=""}.
+Even when there's not an official image for what you might want, Docker provides
+images from [verified publishers](https://hub.docker.com/search?q=&image_filter=store){:target="blank" rel="noopener" class=""}
+and [open source partners](https://hub.docker.com/search?q=&image_filter=open_source){:target="blank" rel="noopener" class=""}
 that can help you on your way. The Docker community often produces third-party
 images to use as well.
 
@@ -275,9 +273,8 @@ RUN echo "the first command" && \
 ```
 
 Another shell feature that allows you to simplify and concatenate commands in a
-neat way are [`heredocs`](https://en.wikipedia.org/wiki/Here_document){:
-target="blank" rel="noopener" class="\_"}. It enables you to create multi-line
-scripts with good readability:
+neat way are [`heredocs`](https://en.wikipedia.org/wiki/Here_document){:target="blank" rel="noopener" class=""}.
+It enables you to create multi-line scripts with good readability:
 
 ```dockerfile
 RUN <<EOF

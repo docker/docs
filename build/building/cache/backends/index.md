@@ -34,13 +34,13 @@ Buildx supports the following cache storage backends:
 - `local`: writes the build cache to a local directory on the filesystem.
 
 - `gha`: uploads the build cache to
-  [GitHub Actions cache](https://docs.github.com/en/rest/actions/cache){: target="_blank" rel="noopener" class="_" } (beta).
+  [GitHub Actions cache](https://docs.github.com/en/rest/actions/cache){:target="blank" rel="noopener" class=""} (beta).
 
 - `s3`: uploads the build cache to an
-  [AWS S3 bucket](https://aws.amazon.com/s3/){: target="_blank" rel="noopener" class="_" } (unreleased).
+  [AWS S3 bucket](https://aws.amazon.com/s3/){:target="blank" rel="noopener" class=""} (unreleased).
 
 - `azblob`: uploads the build cache to
-  [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/){: target="_blank" rel="noopener" class="_" }
+  [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/){:target="blank" rel="noopener" class=""}
   (unreleased).
 
 ## Command syntax
@@ -74,7 +74,7 @@ $ docker buildx build --push -t <registry>/<image> \
 ## Multiple caches
 
 BuildKit currently only supports
-[a single cache exporter](https://github.com/moby/buildkit/pull/3024){: target="_blank" rel="noopener" class="_" }. But you
+[a single cache exporter](https://github.com/moby/buildkit/pull/3024){:target="blank" rel="noopener" class=""}. But you
 can import from as many remote caches as you like. For example, a common pattern
 is to use the cache of both the current branch and the main branch. The
 following example shows importing cache from multiple locations using the
@@ -89,11 +89,11 @@ $ docker buildx build --push -t <registry>/<image> \
 
 ## Configuration options
 
-This section describes some of the configuration options available when
-generating cache exports. The options described here are common for at least two
-or more backend types. Additionally, the different backend types support
-specific parameters as well. See the detailed page about each backend type for
-more information about which configuration parameters apply.
+This section describes some configuration options available when generating
+cache exports. The options described here are common for at least two or more
+backend types. Additionally, the different backend types support specific
+parameters as well. See the detailed page about each backend type for more
+information about which configuration parameters apply.
 
 The common parameters described here are:
 

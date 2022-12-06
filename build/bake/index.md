@@ -7,7 +7,7 @@ redirect_from:
 
 > This command is experimental.
 >
-> The design of bake is in early stages, and we are looking for [feedback from users](https://github.com/docker/buildx/issues){:target="_blank" rel="noopener" class="_"}.
+> The design of bake is in early stages, and we are looking for [feedback from users](https://github.com/docker/buildx/issues){:target="blank" rel="noopener" class=""}.
 {: .experimental }
 
 Buildx also aims to provide support for high-level build concepts that go beyond
@@ -15,7 +15,7 @@ invoking a single build command. We want to support building all the images in
 your application together and let the users define project specific reusable
 build flows that can then be easily invoked by anyone.
 
-[BuildKit](https://github.com/moby/buildkit){:target="_blank" rel="noopener" class="_"}
+[BuildKit](https://github.com/moby/buildkit){:target="blank" rel="noopener" class=""}
 efficiently handles multiple concurrent build requests and de-duplicating work.
 The build commands can be combined with general-purpose command runners
 (for example, `make`). However, these tools generally invoke builds in sequence

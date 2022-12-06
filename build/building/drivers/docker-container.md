@@ -32,7 +32,7 @@ The following table describes the available driver-specific options that you can
 pass to `--driver-opt`:
 
 | Parameter       | Type   | Default          | Description                                                                                |
-| --------------- | ------ | ---------------- | ------------------------------------------------------------------------------------------ |
+|-----------------|--------|------------------|--------------------------------------------------------------------------------------------|
 | `image`         | String |                  | Sets the image to use for running BuildKit.                                                |
 | `network`       | String |                  | Sets the network mode for running the BuildKit container.                                  |
 | `cgroup-parent` | String | `/docker/buildx` | Sets the cgroup parent of the BuildKit container if Docker is using the `cgroupfs` driver. |
@@ -41,9 +41,9 @@ pass to `--driver-opt`:
 ## Usage
 
 When you run a build, Buildx pulls the specified `image` (by default,
-[`moby/buildkit`](https://hub.docker.com/r/moby/buildkit)){: target="_blank" rel="noopener" class="_" }. When the container
-has started, Buildx submits the build submitted to the containerized build
-server.
+[`moby/buildkit`](https://hub.docker.com/r/moby/buildkit)){:target="blank" rel="noopener" class=""}.
+When the container has started, Buildx submits the build submitted to the
+containerized build server.
 
 ```console
 $ docker buildx build -t <image> --builder=container .
@@ -84,8 +84,8 @@ REPOSITORY                       TAG               IMAGE ID       CREATED       
 
 ## Cache persistence
 
-The `docker-container` driver supports cache persistence, as it stores all of
-the BuildKit state and related cache into a dedicated Docker volume.
+The `docker-container` driver supports cache persistence, as it stores all the
+BuildKit state and related cache into a dedicated Docker volume.
 
 To persist the `docker-container` driver's cache, even after recreating the
 driver using `docker buildx rm` and `docker buildx create`, you can destroy the
@@ -119,9 +119,9 @@ container
 
 ## QEMU
 
-The `docker-container` driver supports using [QEMU](https://www.qemu.org/){: target="_blank" rel="noopener" class="_" } (user
-mode) to build non-native platforms. Use the `--platform` flag to specify which
-architectures that you want to build for.
+The `docker-container` driver supports using [QEMU](https://www.qemu.org/){:target="blank" rel="noopener" class=""}
+(user mode) to build non-native platforms. Use the `--platform` flag to specify
+which architectures that you want to build for.
 
 For example, to build a Linux image for `amd64` and `arm64`:
 
@@ -142,4 +142,4 @@ $ docker buildx build \
 ## Further reading
 
 For more information on the Docker container driver, see the
-[buildx reference](../../../../engine/reference/commandline/buildx_create/#driver).
+[buildx reference](../../../engine/reference/commandline/buildx_create.md#driver).

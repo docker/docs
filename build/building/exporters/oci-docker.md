@@ -5,7 +5,7 @@ keywords: >
 ---
 
 The `oci` exporter outputs the build result into an
-[OCI image layout](https://github.com/opencontainers/image-spec/blob/main/image-layout.md){: target="_blank" rel="noopener" class="_" }
+[OCI image layout](https://github.com/opencontainers/image-spec/blob/main/image-layout.md){:target="blank" rel="noopener" class=""}
 tarball. The `docker` exporter behaves the same way, except it exports a Docker
 image layout instead.
 
@@ -28,7 +28,7 @@ $ docker buildx build --output type=docker[,parameters] .
 The following table describes the available parameters:
 
 | Parameter           | Type                                   | Default | Description                                                                                                                           |
-| ------------------- | -------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------|----------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------|
 | `name`              | String                                 |         | Specify image name(s)                                                                                                                 |
 | `dest`              | String                                 |         | Path                                                                                                                                  |
 | `tar`               | `true`,`false`                         | `true`  | Bundle the output into a tarball layout                                                                                               |
@@ -57,9 +57,9 @@ $ docker buildx build \
 ```
 
 For more information about annotations, see
-[BuildKit documentation](https://github.com/moby/buildkit/blob/master/docs/annotations.md){: target="_blank" rel="noopener" class="_" }.
+[BuildKit documentation](https://github.com/moby/buildkit/blob/master/docs/annotations.md){:target="blank" rel="noopener" class=""}.
 
 ## Further reading
 
 For more information on the `oci` or `docker` exporters, see the
-[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#docker-tarball){: target="_blank" rel="noopener" class="_" }.
+[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#docker-tarball){:target="blank" rel="noopener" class=""}.

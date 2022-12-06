@@ -32,4 +32,4 @@ If you need additional configuration and flexibility, consider using the
 ## Further reading
 
 For more information on the Docker driver, see the
-[buildx reference](../../../../engine/reference/commandline/buildx_create/#driver).
+[buildx reference](../../../engine/reference/commandline/buildx_create.md#driver).

@@ -73,7 +73,7 @@ says "Hello World".
 >
 > If you test the example, make sure to copy over the indentation as well! For
 > more information about this sample Flask application, check the
-> [Flask Quickstart](https://flask.palletsprojects.com/en/2.1.x/quickstart/){:target="_blank" rel="noopener" class="_"}
+> [Flask Quickstart](https://flask.palletsprojects.com/en/2.1.x/quickstart/){:target="blank" rel="noopener" class=""}
 > page.
 
 Here's the Dockerfile that will be used to create an image for our application:
@@ -125,7 +125,7 @@ executed on this base image, in this case, an Ubuntu environment. The notation
 `ubuntu:22.04`, follows the `name:tag` standard for naming docker images. When
 you build your image you use this notation to name your images and use it to
 specify any existing Docker image. There are many public images you can
-leverage in your projects. Explore [Docker Hub](https://hub.docker.com/search?image_filter=official&q=&type=image){:target="_blank" rel="noopener" class="_"}
+leverage in your projects. Explore [Docker Hub](https://hub.docker.com/search?image_filter=official&q=&type=image){:target="blank" rel="noopener" class=""}
 to find out.
 
 ```dockerfile
@@ -225,7 +225,7 @@ From your computer, open a browser and navigate to `http://localhost:8000`
 
 > **Note**
 >
-> You can also build and run using [Play with Docker](https://labs.play-with-docker.com){:target="_blank" rel="noopener" class="_"}
+> You can also build and run using [Play with Docker](https://labs.play-with-docker.com){:target="blank" rel="noopener" class=""}
 > that provides you with a temporary Docker instance in the cloud.
 
 ## Other resources
