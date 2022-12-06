@@ -52,6 +52,10 @@ Manifests:
   Platform:  linux/arm64
 ```
 
+> Having trouble pushing the image?
+>
+> Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
+
 > **Note**
 >
 > For more information, see [Multi-platform images](../../../build/building/multi-platform.md) page.
@@ -131,7 +135,7 @@ As a result, when `TARGETARCH` equals:
 - `arm64`, the `kubectl` binary fetched corresponds to the `arm64` architecture, and is copied to `/darwin/kubectl` in the final stage.
 - `amd64`, two `kubectl` binaries are fetched. One for Darwin and another for Windows. They are copied to `/darwin/kubectl` and `/windows/kubectl.exe` respectively, in the final stage.
 
-> Note 
+> Note
 >
 > The binary destination path for darwin is darwin/kubectl in both cases. The only change is the architecture-specific binary that is downloaded.
 
@@ -142,4 +146,3 @@ When the extension is installed, the extension framework copies the binaries fro
 ### Can I develop extensions that run Windows containers?
 
 Although Docker Extensions is supported on Docker Desktop for Windows, Mac, and Linux, the extension framework only supports linux containers. Therefore, you must target `linux` as the OS when you build your extension image.
- 
