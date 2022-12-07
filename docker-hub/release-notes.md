@@ -13,14 +13,14 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ## 2022-12-19
 
-### New 
+### New
 
-- The new [domain audit](../single-sign-on/manage/index.md/#audit-your-domain-for-users) lets you audit your domain for users who are not a member of your organization.
+- The new [domain audit](../docker-hub/domain-audit.md) feature lets you audit your domains for users who aren't a member of your organization.
 
 
 ## 2022-09-26
 
-### New 
+### New
 
 - The new [autobuild feature](../docker-hub/builds/index.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
 

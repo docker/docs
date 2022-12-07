@@ -18,30 +18,6 @@ To add a guest to your organization in Docker Hub if they aren’t verified thro
 2. Select **Add Member**, enter the email address, and select a team from the drop-down list.
 3. Select **Add** to confirm.
 
-## Audit your domain for users
-
-When your organization has configured SSO and registered a domain, you can audit your domain. Auditing your domain will identify uncaptured users that have an email associated with your domain, but they aren't a member of your organization.
-
-Uncaptured users can pose a security threat to your environment since your organization's security settings aren't applied to the user's sessions.
-
-You can add uncaptured users to your organization in order to apply your organization's security settings. Additionally, you can enforce sign-in to ensure that only members of your organization can sign in to Docker Desktop in your environment. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](../../docker-hub/configure-sign-in.md).
-
-To audit your domain:
-
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator of your organization.
-
-2. Select **Organizations*** and then select your organization.
-
-3. Select **Settings** and then select **Security**.
-
-4. In **Domain Audit**, select **Export Users** to export a CSV file containing the following columns:
-  - Name: The name of the user.
-  - Username: The Docker ID of the user.
-  - Email: The email address of the user.
-  - Date Joined: The date the user created their Docker account.
-
-You can invite all the uncaptured users to your organization using the exported CSV file. For more details, see [Invite members via CSV file](../../docker-hub/members.md/#invite-members-via-csv-file).
-
 ## Remove users from the SSO organization
 
 To remove a user from an organization:
