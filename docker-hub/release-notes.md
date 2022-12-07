@@ -11,6 +11,13 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+## 2022-12-19
+
+### New 
+
+- The new [domain audit](../single-sign-on/manage/index.md/#audit-your-domain-for-users) lets you audit your domain for users who are not a member of your organization.
+
+
 ## 2022-09-26
 
 ### New 
