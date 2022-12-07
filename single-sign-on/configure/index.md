@@ -133,7 +133,7 @@ To verify ownership of a domain, add a TXT record to your Domain Name System (DN
 
 ## Test your SSO configuration
 
-After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you sign in to Docker Hub using an incognito browser. Login using your domain email address and IdP password. You will then get redirected to your identity provider’s login page to authenticate.
+After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you sign in to Docker Hub using an incognito browser. Login using your domain email address. You will then get redirected to your identity provider’s login page to authenticate.
 
 1. Authenticate through email instead of using your Docker ID, and test the login process.
 2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.

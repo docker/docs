@@ -16,6 +16,7 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-20.04
+    if: github.repository_owner == 'docker'
     steps:
       -
         name: Prepare
