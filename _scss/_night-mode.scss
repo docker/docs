@@ -64,15 +64,6 @@ a {
     }
     .nav-secondary {
         background-color: $bg-header-night;
-
-        .search-form input[type=search] {
-          background-color: rgba(76, 76, 76, 0.47);
-          color: $white;
-
-          & :focus {
-            background-color: rgba(255, 255, 255, 0.17);
-          }
-        }
     }
     .breadcrumb {
         background-color: $dark-grey-100;
