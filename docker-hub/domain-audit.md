@@ -4,6 +4,11 @@ keywords: domain audit, security
 title: Domain audit
 ---
 
+> **Note**
+>
+> Domain audit is currently in [Early Access](../release-lifecycle.md/#early-access-ea).
+> The feature is enabled for specific user groups as part of an incremental roll-out strategy.
+
 When your organization has configured SSO and you have verified your domains, you can audit your domains. Auditing your domains will identify uncaptured users that have authenticated with an email associated with one of your verified domains.
 
 Uncaptured users can pose a security threat to your environment since your organization's security settings aren't applied to the user's sessions who aren't part of your organization. In addition, you won't have visibility into the activity of uncaptured users.
