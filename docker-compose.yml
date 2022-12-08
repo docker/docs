@@ -14,5 +14,6 @@ services:
         - DOCS_ENFORCE_GIT_LOG_HISTORY
       context: .
     image: docs/docstage
+    pull_policy: never
     ports:
      - "4000:4000"
