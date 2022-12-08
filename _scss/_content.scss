@@ -23,7 +23,7 @@ pre {
     border-radius: 4px;
     display: block;
     padding: 20.5px!important;
-    margin: 0 0 10px;
+    margin: 0;
     font-size: 13px;
     line-height: 1.42857143;
     word-break: normal !important;
@@ -47,13 +47,40 @@ code {
 .highlighter-rouge {
   margin: 15px 0;
   position: relative;
+  border-radius: 4px;
+  border: 1px solid $light-grey-200;
+  .night & {
+    border: 1px solid $dark-grey-400;
+  }
 
-  button.copy {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
+  font-weight: 500;
+
+  header {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 12px;
+    background-color: $grey-100;
+    color: $light-grey-500;
+    .night & {
+      color: $white;
+      background-color: $dark-grey-200;
+    }
+
+    .hl-title {
+      display: flex;
+      align-items: center;
+    }
+
+    .hl-copy {
+      display: flex;
+      border-radius: 4px;
+      gap: 8px;
+      align-items: center;
+      background: none;
+      border: none;
+    }
   }
 }
 

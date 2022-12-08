@@ -50,15 +50,17 @@ So, let's do it!
         node:18-alpine \
         sh -c "yarn install && yarn run dev"
     ```
+    {: title="Bash" }
 
     If you are using Windows, then use the following command in PowerShell.
 
     ```powershell
-    $ docker run -dp 3000:3000 `
+    PS> docker run -dp 3000:3000 `
         -w /app -v "$(pwd):/app" `
         node:18-alpine `
         sh -c "yarn install && yarn run dev"
     ```
+    {: title="PowerShell"}
 
     - `-dp 3000:3000` - same as before. Run in detached (background) mode and create a port mapping
     - `-w /app` - sets the "working directory" or the current directory that the command will run from
