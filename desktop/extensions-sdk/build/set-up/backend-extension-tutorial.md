@@ -210,6 +210,7 @@ To deploy your Go backend when installing the extension, you need first to confi
 - it starts the binary when the container starts listening on the extension socket
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node:17.7-alpine3.14 AS client-builder
 # ... build frontend application
 

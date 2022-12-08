@@ -74,6 +74,7 @@ extension:
   <div id="react-dockerfile" class="tab-pane fade in active" markdown="1">
 
 ```Dockerfile
+# syntax=docker/dockerfile:1
 FROM --platform=$BUILDPLATFORM node:18.9-alpine3.15 AS client-builder
 WORKDIR /ui
 # cache packages in layer
