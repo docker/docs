@@ -41,6 +41,7 @@ $ docker build .
 With the following Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM busybox
 WORKDIR /src
 COPY foo .
@@ -64,6 +65,7 @@ files required by the `COPY` instructions, in this case `foo`.
 In some cases you may want to send the entire context:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM busybox
 WORKDIR /src
 COPY . .

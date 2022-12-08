@@ -22,6 +22,7 @@ Have a look at the following example, which shows a simple Dockerfile for a
 program written in C.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y build-essentials
@@ -86,6 +87,7 @@ Consider the following example. A Dockerfile snippet that runs a JavaScript
 build from the source files in the current directory:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node
 WORKDIR /app
 COPY . .          # Copy over all files in the current directory
@@ -103,6 +105,7 @@ the dependencies. Finally, copy over the project source code, which is subject
 to frequent change.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM node
 WORKDIR /app
 COPY package.json yarn.lock .    # Copy package management files
@@ -225,6 +228,8 @@ illustrates building a simple web server that serves HTML from your `docs`
 directory in Git:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 # stage 1
 FROM alpine as git
 RUN apk add git
