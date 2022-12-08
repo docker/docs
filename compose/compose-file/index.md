@@ -2225,7 +2225,7 @@ volumes:
       name: actual-name-of-volume
 ```
 
-This make it possible to make this lookup name a parameter of a Compose file, so that the model ID for volume is
+This makes it possible to make this lookup name a parameter of a Compose file, so that the model ID for volume is
 hard-coded but the actual volume ID on platform is set at runtime during deployment:
 
 ```yml

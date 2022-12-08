@@ -77,6 +77,7 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
 2. Using a text editor or code editor, add the following contents to the Dockerfile:
 
    ```dockerfile
+   # syntax=docker/dockerfile:1
    FROM node:18-alpine
    WORKDIR /app
    COPY . .
