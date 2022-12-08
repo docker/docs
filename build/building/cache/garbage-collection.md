@@ -3,7 +3,7 @@ title: Garbage collection
 keywords: build, buildx, buildkit, garbage collection, prune
 ---
 
-While [`docker build prune`](../../../engine/reference/commandline/builder_prune.md)
+While [`docker builder prune`](../../../engine/reference/commandline/builder_prune.md)
 or [`docker buildx prune`](../../../engine/reference/commandline/buildx_prune.md)
 commands run at once, garbage collection runs periodically and follows an
 ordered list of prune policies.
