@@ -128,25 +128,25 @@ Open the `petclinic` in your IDE or a text editor and create a new file named `d
 ```yaml
 version: '3.8'
 services:
- petclinic:
-   build:
-     context: .
-     target: development
-   ports:
-     - 8000:8000
-     - 8080:8080
-   environment:
-     - SERVER_PORT=8080
-     - MYSQL_URL=jdbc:mysql://mysqlserver/petclinic
-   volumes:
-     - ./:/app
+  petclinic:
+    build:
+      context: .
+      target: development
+    ports:
+      - "8000:8000"
+      - "8080:8080"
+    environment:
+      - SERVER_PORT=8080
+      - MYSQL_URL=jdbc:mysql://mysqlserver/petclinic
+    volumes:
+      - ./:/app
     depends_on:
       - mysqlserver
 
- mysqlserver:
+  mysqlserver:
     image: mysql:8.0
     ports:
-      - 3306:3306
+      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
@@ -157,8 +157,8 @@ services:
       - mysql_data:/var/lib/mysql
       - mysql_config:/etc/mysql/conf.d
 volumes:
-    mysql_data:
-    mysql_config:
+  mysql_data:
+  mysql_config:
 ```
 
 This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that using a Compose file.
