@@ -152,6 +152,7 @@ You can also check from the browser that Nginx is running:
 Sample Dockerfile:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM alpine
 
 ENTRYPOINT ["echo", "hello friends"]

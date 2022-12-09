@@ -44,6 +44,7 @@ At a minimum, your Dockerfile needs:
 - The `metadata.json` file.
 
 ```Dockerfile
+# syntax=docker/dockerfile:1
 FROM scratch
 
 LABEL org.opencontainers.image.title="MinimalFrontEnd" \

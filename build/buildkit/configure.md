@@ -148,6 +148,8 @@ rel="noopener" class="_"} in BuildKit as an example. Feel free to include your
 own CNI configuration.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ARG BUILDKIT_VERSION=v{{ site.buildkit_version }}
 ARG CNI_VERSION=v1.0.1
 
