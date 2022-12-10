@@ -39,15 +39,15 @@ Assuming your app runs on the default port, start your UI app and then run:
 
 ```console
 $ cd ui
-$ npm start
+$ npm run dev
 ```
 
-This starts a development server that listens on port 3000.
+This starts a development server that listens on port 5173.
 
 You can now tell Docker Desktop to use this as the frontend source. In another terminal run:
 
 ```console
-$ docker extension dev ui-source <name-of-your-extensions> http://localhost:3000
+$ docker extension dev ui-source <name-of-your-extensions> http://localhost:5173
 ```
 
 Close and reopen the Docker Desktop dashboard and go to your extension. All the changes to the frontend code are immediately visible.
