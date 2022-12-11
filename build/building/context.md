@@ -50,7 +50,7 @@ COPY foo .
 And this directory structure:
 
 ```
-.
+/src
 ├── Dockerfile
 ├── bar
 ├── foo
