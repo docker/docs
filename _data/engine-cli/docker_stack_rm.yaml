@@ -2,8 +2,14 @@ command: docker stack rm
 aliases: remove, down
 short: Remove one or more stacks
 long: |-
-  Remove the stack from the swarm. This command has to be run targeting
-  a manager node.
+  Remove the stack from the swarm.
+
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker stack rm [OPTIONS] STACK [STACK...]
 pname: docker stack
 plink: docker_stack.yaml
@@ -11,7 +17,7 @@ options:
 - option: namespace
   value_type: string
   description: Kubernetes namespace to use
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -20,7 +26,7 @@ inherited_options:
 - option: kubeconfig
   value_type: string
   description: Kubernetes config file
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: true
@@ -28,7 +34,7 @@ inherited_options:
 - option: orchestrator
   value_type: string
   description: Orchestrator to use (swarm|kubernetes|all)
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -38,7 +44,7 @@ examples: |-
 
   This will remove the stack with the name `myapp`. Services, networks, and secrets associated with the stack will be removed.
 
-  ```bash
+  ```console
   $ docker stack rm myapp
 
   Removing service myapp_redis
@@ -52,7 +58,7 @@ examples: |-
 
   This will remove all the specified stacks, `myapp` and `vossibility`. Services, networks, and secrets associated with all the specified stacks will be removed.
 
-  ```bash
+  ```console
   $ docker stack rm myapp vossibility
 
   Removing service myapp_redis

@@ -29,7 +29,7 @@ options:
   shorthand: v
   value_type: bool
   default_value: "false"
-  description: Remove the volumes associated with the container
+  description: Remove anonymous volumes associated with the container
   deprecated: false
   experimental: false
   experimentalcli: false

@@ -14,7 +14,7 @@ is not a requirement to deploy a service.
 
 2.  Run the following command:
 
-    ```bash
+    ```console
     $ docker service create --replicas 1 --name helloworld alpine ping docker.com
 
     9uk4639qpg7npwf3fn2aasksr
@@ -28,7 +28,7 @@ is not a requirement to deploy a service.
 
 3.  Run `docker service ls` to see the list of running services:
 
-    ```bash
+    ```console
     $ docker service ls
 
     ID            NAME        SCALE  IMAGE   COMMAND

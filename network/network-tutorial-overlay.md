@@ -2,6 +2,8 @@
 title: Networking with overlay networks
 description: Tutorials for networking with swarm services and standalone containers on multiple Docker daemons
 keywords: networking, bridge, routing, ports, swarm, overlay
+redirect_from:
+- /engine/userguide/networking/get-started-overlay/
 ---
 
 This series of tutorials deals with networking for swarm services.
@@ -28,16 +30,13 @@ host running elsewhere.
 
 - [Communicate between a container and a swarm service](#communicate-between-a-container-and-a-swarm-service)
   sets up communication between a standalone container and a swarm service,
-  using an attachable overlay network. This is supported in Docker 17.06 and
-  higher.
+  using an attachable overlay network.
 
 ## Prerequisites
 
-These requires you to have at least a single-node swarm, which means that
+These require you to have at least a single-node swarm, which means that
 you have started Docker and run `docker swarm init` on the host. You can run
 the examples on a multi-node swarm as well.
-
-The last example requires Docker 17.06 or higher.
 
 ## Use the default overlay network
 
@@ -51,9 +50,8 @@ the point of view of a service.
 ### Prerequisites
 
 This tutorial requires three physical or virtual Docker hosts which can all
-communicate with one another, all running new installations of Docker 17.03 or
-higher. This tutorial assumes that the three hosts are running on the same
-network with no firewall involved.
+communicate with one another. This tutorial assumes that the three hosts are
+running on the same network with no firewall involved.
 
 These hosts will be referred to as `manager`, `worker-1`, and `worker-2`. The
 `manager` host will function as both a manager and a worker, which means it can
@@ -64,7 +62,7 @@ If you don't have three hosts handy, an easy solution is to set up three
 Ubuntu hosts on a cloud provider such as Amazon EC2, all on the same network
 with all communications allowed to all hosts on that network (using a mechanism
 such as EC2 security groups), and then to follow the
-[installation instructions for Docker Engine - Community on Ubuntu](/engine/installation/linux/docker-ce/ubuntu.md).
+[installation instructions for Docker Engine - Community on Ubuntu](../engine/install/ubuntu.md).
 
 ### Walkthrough
 
@@ -76,7 +74,7 @@ and will be connected together using an overlay network called `ingress`.
 1.  On `manager`. initialize the swarm. If the host only has one network
     interface, the `--advertise-addr` flag is optional.
 
-    ```bash
+    ```console
     $ docker swarm init --advertise-addr=<IP-ADDRESS-OF-MANAGER>
     ```
 
@@ -87,7 +85,7 @@ and will be connected together using an overlay network called `ingress`.
 2.  On `worker-1`, join the swarm. If the host only has one network interface,
     the `--advertise-addr` flag is optional.
 
-    ```bash
+    ```console
     $ docker swarm join --token <TOKEN> \
       --advertise-addr <IP-ADDRESS-OF-WORKER-1> \
       <IP-ADDRESS-OF-MANAGER>:2377
@@ -96,7 +94,7 @@ and will be connected together using an overlay network called `ingress`.
 3.  On `worker-2`, join the swarm. If the host only has one network interface,
     the `--advertise-addr` flag is optional.
 
-    ```bash
+    ```console
     $ docker swarm join --token <TOKEN> \
       --advertise-addr <IP-ADDRESS-OF-WORKER-2> \
       <IP-ADDRESS-OF-MANAGER>:2377
@@ -105,7 +103,7 @@ and will be connected together using an overlay network called `ingress`.
 4.  On `manager`, list all the nodes. This command can only be done from a
     manager.
 
-    ```bash
+    ```console
     $ docker node ls
 
     ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
@@ -116,7 +114,7 @@ and will be connected together using an overlay network called `ingress`.
 
     You can also use the `--filter` flag to filter by role:
 
-    ```bash
+    ```console
     $ docker node ls --filter role=manager
 
     ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
@@ -134,7 +132,7 @@ and will be connected together using an overlay network called `ingress`.
     network called `docker_gwbridge`. Only the listing for `manager` is shown
     here:
 
-    ```bash
+    ```console
     $ docker network ls
 
     NETWORK ID          NAME                DRIVER              SCOPE
@@ -157,11 +155,11 @@ connect a service to each of them.
 
 1.  On `manager`, create a new overlay network called `nginx-net`:
 
-    ```bash
+    ```console
     $ docker network create -d overlay nginx-net
     ```
 
-    You don't need to create the overlay network on the other nodes, beacause it
+    You don't need to create the overlay network on the other nodes, because it
     will be automatically created when one of those nodes starts running a
     service task which requires it.
 
@@ -171,7 +169,7 @@ connect a service to each of them.
 
     > **Note**: Services can only be created on a manager.
 
-    ```bash
+    ```console
     $ docker service create \
       --name my-nginx \
       --publish target=80,published=80 \
@@ -206,11 +204,11 @@ connect a service to each of them.
 6.  Create a new network `nginx-net-2`, then update the service to use this
     network instead of `nginx-net`:
 
-    ```bash
+    ```console
     $ docker network create -d overlay nginx-net-2
     ```
 
-    ```bash
+    ```console
     $ docker service update \
       --network-add nginx-net-2 \
       --network-rm nginx-net \
@@ -230,7 +228,7 @@ connect a service to each of them.
     commands. The manager will direct the workers to remove the networks
     automatically.
 
-    ```bash
+    ```console
     $ docker service rm my-nginx
     $ docker network rm nginx-net nginx-net-2
     ```
@@ -245,14 +243,14 @@ This tutorial assumes the swarm is already set up and you are on a manager.
 
 1.  Create the user-defined overlay network.
 
-    ```bash
+    ```console
     $ docker network create -d overlay my-overlay
     ```
 
 2.  Start a service using the overlay network and publishing port 80 to port
     8080 on the Docker host.
 
-    ```bash
+    ```console
     $ docker service create \
       --name my-nginx \
       --network my-overlay \
@@ -266,7 +264,7 @@ This tutorial assumes the swarm is already set up and you are on a manager.
 
 4.  Remove the service and the network.
 
-    ```bash
+    ```console
     $ docker service rm my-nginx
 
     $ docker network rm my-overlay
@@ -288,8 +286,8 @@ overlay network. Steps are:
 ### Prerequisites
 
 For this test, you need two different Docker hosts that can communicate with
-each other. Each host must have Docker 17.06 or higher with the following ports
-open between the two Docker hosts:
+each other. Each host must have the following ports open between the two Docker
+hosts:
 
 - TCP port 2377
 - TCP and UDP port 7946
@@ -313,7 +311,7 @@ example also uses Linux hosts, but the same commands work on Windows.
         hosts in the swarm, for instance, the private IP address on AWS):
 
 
-    ```bash
+    ```console
     $ docker swarm init
     Swarm initialized: current node (vz1mm9am11qcmo979tlrlox42) is now a manager.
 
@@ -326,7 +324,7 @@ example also uses Linux hosts, but the same commands work on Windows.
 
     b.  On `host2`, join the swarm as instructed above:
 
-    ```bash
+    ```console
     $ docker swarm join --token <your_token> <your_ip_address>:2377
     This node joined a swarm as a worker.
     ```
@@ -337,7 +335,7 @@ example also uses Linux hosts, but the same commands work on Windows.
 
 2.  On `host1`, create an attachable overlay network called `test-net`:
 
-    ```bash
+    ```console
     $ docker network create --driver=overlay --attachable test-net
     uqsof8phj3ak0rq9k86zta6ht
     ```
@@ -346,14 +344,14 @@ example also uses Linux hosts, but the same commands work on Windows.
 
 3.  On `host1`, start an interactive (`-it`) container (`alpine1`) that connects to `test-net`:
 
-    ```bash
+    ```console
     $ docker run -it --name alpine1 --network test-net alpine
     / #
     ```
 
 4.  On `host2`, list the available networks -- notice that `test-net` does not yet exist:
 
-    ```bash
+    ```console
     $ docker network ls
     NETWORK ID          NAME                DRIVER              SCOPE
     ec299350b504        bridge              bridge              local
@@ -365,7 +363,7 @@ example also uses Linux hosts, but the same commands work on Windows.
 
 5.  On `host2`, start a detached (`-d`) and interactive (`-it`) container (`alpine2`) that connects to `test-net`:
 
-    ```bash
+    ```console
     $ docker run -dit --name alpine2 --network test-net alpine
     fb635f5ece59563e7b8b99556f816d24e6949a5f6a5b1fbd92ca244db17a4342
     ```
@@ -374,7 +372,7 @@ example also uses Linux hosts, but the same commands work on Windows.
 
 6. On `host2`, verify that `test-net` was created (and has the same NETWORK ID as `test-net` on `host1`):
 
-    ```bash
+    ```console
     $ docker network ls
     NETWORK ID          NAME                DRIVER              SCOPE
     ...
@@ -383,7 +381,7 @@ example also uses Linux hosts, but the same commands work on Windows.
 
 7.  On `host1`, ping `alpine2` within the interactive terminal of `alpine1`:
 
-    ```bash
+    ```console
     / # ping -c 2 alpine2
     PING alpine2 (10.0.0.5): 56 data bytes
     64 bytes from 10.0.0.5: seq=0 ttl=64 time=0.600 ms
@@ -397,7 +395,7 @@ example also uses Linux hosts, but the same commands work on Windows.
     The two containers communicate with the overlay network connecting the two
     hosts. If you run another alpine container on `host2` that is _not detached_,
     you can ping `alpine1` from `host2` (and here we add the
-    [remove option](https://docs.docker.com/engine/reference/run/#clean-up---rm) for automatic container cleanup):
+    [remove option](/engine/reference/run/#clean-up---rm) for automatic container cleanup):
 
     ```sh
     $ docker run -it --rm --name alpine3 --network test-net alpine
@@ -407,7 +405,7 @@ example also uses Linux hosts, but the same commands work on Windows.
 
 8.  On `host1`, close the `alpine1` session (which also stops the container):
 
-    ```bash
+    ```console
     / # exit
     ```
 
@@ -420,7 +418,7 @@ example also uses Linux hosts, but the same commands work on Windows.
 
     a.  On `host2`, stop `alpine2`, check that `test-net` was removed, then remove `alpine2`:
 
-    ```bash
+    ```console
     $ docker container stop alpine2
     $ docker network ls
     $ docker container rm alpine2
@@ -428,18 +426,12 @@ example also uses Linux hosts, but the same commands work on Windows.
 
     a.  On `host1`, remove `alpine1` and `test-net`:
 
-    ```bash
+    ```console
     $ docker container rm alpine1
     $ docker network rm test-net
     ```
 
 ## Communicate between a container and a swarm service
-
-### Prerequisites
-
-You need Docker 17.06 or higher for this example.
-
-### Walkthrough
 
 In this example, you start two different `alpine` containers on the same Docker
 host and do some tests to understand how they communicate with each other. You
@@ -450,7 +442,7 @@ need to have Docker installed and running.
     swarm on this Docker daemon. You may see different networks, but you should
     at least see these (the network IDs will be different):
 
-    ```bash
+    ```console
     $ docker network ls
 
     NETWORK ID          NAME                DRIVER              SCOPE
@@ -473,7 +465,7 @@ need to have Docker installed and running.
     container's ID will be printed. Because you have not specified any
     `--network` flags, the containers connect to the default `bridge` network.
 
-    ```bash
+    ```console
     $ docker run -dit --name alpine1 alpine ash
 
     $ docker run -dit --name alpine2 alpine ash
@@ -481,7 +473,7 @@ need to have Docker installed and running.
 
     Check that both containers are actually started:
 
-    ```bash
+    ```console
     $ docker container ls
 
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
@@ -491,7 +483,7 @@ need to have Docker installed and running.
 
 3.  Inspect the `bridge` network to see what containers are connected to it.
 
-    ```bash
+    ```console
     $ docker network inspect bridge
 
     [
@@ -552,7 +544,7 @@ need to have Docker installed and running.
 4.  The containers are running in the background. Use the `docker attach`
     command to connect to `alpine1`.
 
-    ```bash
+    ```console
     $ docker attach alpine1
 
     / #
@@ -562,7 +554,7 @@ need to have Docker installed and running.
     the container. Use the `ip addr show` command to show the network interfaces
     for `alpine1` as they look from within the container:
 
-    ```bash
+    ```console
     # ip addr show
 
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
@@ -587,7 +579,7 @@ need to have Docker installed and running.
     pinging `google.com`. The `-c 2` flag limits the command two two `ping`
     attempts.
 
-    ```bash
+    ```console
     # ping -c 2 google.com
 
     PING google.com (172.217.3.174): 56 data bytes
@@ -602,7 +594,7 @@ need to have Docker installed and running.
 6.  Now try to ping the second container. First, ping it by its IP address,
     `172.17.0.3`:
 
-    ```bash
+    ```console
     # ping -c 2 172.17.0.3
 
     PING 172.17.0.3 (172.17.0.3): 56 data bytes
@@ -617,7 +609,7 @@ need to have Docker installed and running.
     This succeeds. Next, try pinging the `alpine2` container by container
     name. This will fail.
 
-    ```bash
+    ```console
     # ping -c 2 alpine2
 
     ping: bad address 'alpine2'
@@ -630,14 +622,14 @@ need to have Docker installed and running.
 
 8.  Stop and remove both containers.
 
-    ```bash
+    ```console
     $ docker container stop alpine1 alpine2
     $ docker container rm alpine1 alpine2
     ```
 
 Remember, the default `bridge` network is not recommended for production. To
 learn about user-defined bridge networks, continue to the
-[next tutorial](#use-user-defined-bridge-networks).
+[next tutorial](network-tutorial-standalone.md#use-user-defined-bridge-networks).
 
 ## Other networking tutorials
 

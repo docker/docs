@@ -2,11 +2,8 @@
   name: v19.03
   image: docs/docker.github.io:latest
   current: true
-# When you make a new stable archive version, move the edge one to be second in
-# the list. The image for edge should be the same as latest.
-- archive:
-  name: edge
-  image: docs/docker.github.io:latest
+# When you make a new stable archive version, create a new entry below with the
+# appropriate docker image. The current release should always be latest.
 - archive:
   name: v18.09
   image: docs/docker.github.io:v18.09
@@ -14,14 +11,5 @@
   name: v18.03
   image: docs/docker.github.io:v18.03
 - archive:
-  name: v17.12
-  image: docs/docker.github.io:v17.12
-- archive:
-  name: v17.09
-  image: docs/docker.github.io:v17.09
-- archive:
   name: v17.06
   image: docs/docker.github.io:v17.06
-- archive:
-  name: v17.03
-  image: docs/docker.github.io:v17.03

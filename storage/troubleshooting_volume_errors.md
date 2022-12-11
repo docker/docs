@@ -18,7 +18,7 @@ documentation for `cadvisor` instructs you to run the `cadvisor` container as
 follows:
 
 
-```bash
+```console
 $ sudo docker run \
   --volume=/:/rootfs:ro \
   --volume=/var/run:/var/run:rw \
@@ -53,7 +53,7 @@ If you are unsure which process is causing the path mentioned in the error to
 be busy and preventing it from being removed, you can use the `lsof` command
 to find its process. For instance, for the error above:
 
-```bash
+```console
 $ sudo lsof /var/lib/docker/containers/74bef250361c7817bee19349c93139621b272bc8f654ae112dd4eb9652af9515/shm
 ```
 

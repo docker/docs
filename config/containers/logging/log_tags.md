@@ -11,7 +11,7 @@ The `tag` log option specifies how to format a tag that identifies the
 container's log messages. By default, the system uses the first 12 characters of
 the container ID. To override this behavior, specify a `tag` option:
 
-```bash
+```console
 $ docker run --log-driver=fluentd --log-opt fluentd-address=myhost.local:24224 --log-opt tag="mailer"
 ```
 

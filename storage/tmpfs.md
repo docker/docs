@@ -1,6 +1,6 @@
 ---
 description: Using tmpfs mounts
-title: Use tmpfs mounts
+title: tmpfs mounts
 keywords: storage, persistence, data persistence, tmpfs
 redirect_from:
 - /engine/admin/volumes/tmpfs/
@@ -31,11 +31,8 @@ containers.
 
 ## Choose the --tmpfs or --mount flag
 
-Originally, the `--tmpfs` flag was used for standalone containers and
-the `--mount` flag was used for swarm services. However, starting with Docker
-17.06, you can also use `--mount` with standalone containers. In general,
-`--mount` is more explicit and verbose. The biggest difference is that the
-`--tmpfs` flag does not support any configurable options.
+In general, `--mount` is more explicit and verbose. The biggest difference is
+that the `--tmpfs` flag does not support any configurable options.
 
 - **`--tmpfs`**: Mounts a `tmpfs` mount without allowing you to specify any
   configurable options, and can only be used with standalone containers.
@@ -43,14 +40,14 @@ the `--mount` flag was used for swarm services. However, starting with Docker
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `--tmpfs`:
-  - The `type` of the mount, which can be [`bind`](bind-mounts-md), `volume`, or
+  - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
     [`tmpfs`](tmpfs.md). This topic discusses `tmpfs`, so the type is always
     `tmpfs`.
   - The `destination` takes as its value the path where the `tmpfs` mount
     is mounted in the container. May be specified as `destination`, `dst`,
     or `target`.
-  - The `tmpfs-type` and `tmpfs-mode` options. See
-    [tmpfs options](#tmpfs-options).
+  - The `tmpfs-size` and `tmpfs-mode` options. See
+    [tmpfs options](#specify-tmpfs-options).
 
 The examples below show both the `--mount` and `--tmpfs` syntax where possible,
 and `--mount` is presented first.
@@ -75,7 +72,7 @@ second uses the `--tmpfs` flag.
 <div class="tab-content">
 <div id="mount-run" class="tab-pane fade in active" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name tmptest \
@@ -86,7 +83,7 @@ $ docker run -d \
 </div><!--mount-->
 <div id="tmpfs-run" class="tab-pane fade" markdown="1">
 
-```bash
+```console
 $ docker run -d \
   -it \
   --name tmptest \
@@ -97,21 +94,19 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Verify that the mount is a `tmpfs` mount by running `docker container inspect
-tmptest` and looking for the `Mounts` section:
+Verify that the mount is a `tmpfs` mount by looking in the `Mounts` section of
+the `docker inspect` output:
 
-```json
-"Tmpfs": {
-    "/app": ""
-},
+```console
+$ docker inspect tmptest --format '{{ json .Mounts }}'
+[{"Type":"tmpfs","Source":"","Destination":"/app","Mode":"","RW":true,"Propagation":""}]
 ```
 
-Remove the container:
+Stop and remove the container:
 
-```bash
-$ docker container stop tmptest
-
-$ docker container rm tmptest
+```console
+$ docker stop tmptest
+$ docker rm tmptest
 ```
 
 ### Specify tmpfs options
@@ -128,7 +123,7 @@ as the `--tmpfs` flag does not support them.
 The following example sets the `tmpfs-mode` to `1770`, so that it is not
 world-readable within the container.
 
-```bash
+```console
 docker run -d \
   -it \
   --name tmptest \

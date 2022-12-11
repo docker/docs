@@ -1,6 +1,11 @@
+---
+layout: null
+---
+{%- if jekyll.environment == 'production' -%}
 User-agent: *
 
 # Docker Engine archives
+Disallow: /edge/
 Disallow: /v1.4/
 Disallow: /v1.5/
 Disallow: /v1.6/
@@ -13,24 +18,21 @@ Disallow: /v1.12/
 Disallow: /v1.13/
 Disallow: /v17.03/
 Disallow: /v17.06/
+Disallow: /v17.09/
+Disallow: /v17.12/
 Disallow: /v18.03/
 Disallow: /v18.09/
 
 # Docker Datacenter archives
-Disallow: /datacenter/dtr/2.0
-Disallow: /datacenter/dtr/2.1
-Disallow: /datacenter/dtr/2.2
-Disallow: /datacenter/dtr/2.3
-Disallow: /datacenter/dtr/2.4
-Disallow: /datacenter/dtr/2.5
-Disallow: /datacenter/dtr/2.6
-
-Disallow: /datacenter/ucp/3.1
-Disallow: /datacenter/ucp/3.0
-Disallow: /datacenter/ucp/2.1
-Disallow: /datacenter/ucp/2.0
-Disallow: /datacenter/ucp/1.1
+Disallow: /datacenter/
+Disallow: /ee/
 
 Disallow: /apidocs/v*
 
-Sitemap: https://docs.docker.com/sitemap.xml
+Sitemap: {{ site.docs_url }}/sitemap.xml
+{%- else -%}
+# Disable all indexing on staging websites and Netlify previews to prevent
+# them showing up in search results.
+User-agent: *
+Disallow: /
+{%- endif %}

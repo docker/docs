@@ -1,225 +1,98 @@
 ---
-title: "Get Started, Part 1: Orientation and setup"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers
-description: Get oriented on some basics of Docker before diving into the walkthrough.
+title: "Overview"
+keywords: get started, overview, quickstart, intro, concepts, containers, images
+description: Get an overview of the Get started guide and learn about containers and images.
 redirect_from:
-- /getstarted/
-- /get-started/part1/
-- /engine/getstarted/
-- /learn/
-- /engine/getstarted/step_one/
-- /engine/getstarted/step_two/
-- /engine/getstarted/step_three/
-- /engine/getstarted/step_four/
-- /engine/getstarted/step_five/
-- /engine/getstarted/step_six/
-- /engine/getstarted/last_page/
 - /engine/getstarted-voting-app/
-- /engine/getstarted-voting-app/node-setup/
-- /engine/getstarted-voting-app/create-swarm/
-- /engine/getstarted-voting-app/deploy-app/
-- /engine/getstarted-voting-app/test-drive/
-- /engine/getstarted-voting-app/customize-app/
 - /engine/getstarted-voting-app/cleanup/
-- /engine/userguide/intro/
-- /mac/started/
-- /windows/started/
-- /linux/started/
-- /getting-started/
-- /mac/step_one/
-- /windows/step_one/
-- /linux/step_one/
-- /engine/tutorials/dockerizing/
-- /mac/step_two/
-- /windows/step_two/
-- /linux/step_two/
-- /mac/step_three/
-- /windows/step_three/
-- /linux/step_three/
-- /engine/tutorials/usingdocker/
-- /mac/step_four/
-- /windows/step_four/
-- /linux/step_four/
+- /engine/getstarted-voting-app/create-swarm/
+- /engine/getstarted-voting-app/customize-app/
+- /engine/getstarted-voting-app/deploy-app/
+- /engine/getstarted-voting-app/node-setup/
+- /engine/getstarted-voting-app/test-drive/
+- /engine/getstarted/
+- /engine/getstarted/last_page/
+- /engine/getstarted/step_five/
+- /engine/getstarted/step_four/
+- /engine/getstarted/step_one/
+- /engine/getstarted/step_six/
+- /engine/getstarted/step_three/
+- /engine/getstarted/step_two/
+- /engine/quickstart/
+- /engine/tutorials/
 - /engine/tutorials/dockerimages/
-- /userguide/dockerimages/
-- /engine/userguide/dockerimages/
-- /mac/last_page/
-- /windows/last_page/
-- /linux/last_page/
-- /mac/step_six/
-- /windows/step_six/
-- /linux/step_six/
-- /engine/tutorials/dockerrepos/
-- /userguide/dockerrepos/
+- /engine/tutorials/dockerizing/
+- /engine/tutorials/usingdocker/
 - /engine/userguide/containers/dockerimages/
+- /engine/userguide/dockerimages/
+- /engine/userguide/intro/
+- /get-started/part1/
+- /get-started/part5/
+- /get-started/part6/
+- /getstarted/
+- /getting-started/
+- /learn/
+- /linux/last_page/
+- /linux/started/
+- /linux/step_four/
+- /linux/step_one/
+- /linux/step_six/
+- /linux/step_three/
+- /linux/step_two/
+- /mac/last_page/
+- /mac/started/
+- /mac/step_four/
+- /mac/step_one/
+- /mac/step_six/
+- /mac/step_three/
+- /mac/step_two/
+- /userguide/dockerimages/
+- /userguide/dockerrepos/
+- /windows/last_page/
+- /windows/started/
+- /windows/step_four/
+- /windows/step_one/
+- /windows/step_six/
+- /windows/step_three/
+- /windows/step_two/
 ---
 
-{% include_relative nav.html selected="1" %}
+Welcome! We're excited that you want to learn Docker.
 
-Welcome! We are excited that you want to learn Docker. The _Docker Get Started Tutorial_
-teaches you how to:
+This guide contains step-by-step instructions on how to get started with Docker. Some of the things you'll learn and do in this guide are:
 
-1. Set up your Docker environment (on this page)
-2. [Build an image and run it as one container](part2.md)
-3. [Scale your app to run multiple containers](part3.md)
-4. [Distribute your app across a cluster](part4.md)
-5. [Stack services by adding a backend database](part5.md)
-6. [Deploy your app to production](part6.md)
+- Build and run an image as a container
+- Share images using Docker Hub
+- Deploy Docker applications using multiple containers with a database
+- Run applications using Docker Compose
 
-## Docker concepts
+Before you get to the hands on part of the guide, you should learn about containers and images.
 
-Docker is a platform for developers and sysadmins to **develop, deploy, and run**
-applications with containers. The use of Linux containers to deploy applications
-is called _containerization_. Containers are not new, but their use for easily
-deploying applications is.
+## What is a container?
 
-Containerization is increasingly popular because containers are:
+Simply put, a container is a sandboxed process on your machine that is isolated from all other processes on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504),
+features that have been in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use. To summarize, a container:
 
-- Flexible: Even the most complex applications can be containerized.
-- Lightweight: Containers leverage and share the host kernel.
-- Interchangeable: You can deploy updates and upgrades on-the-fly.
-- Portable: You can build locally, deploy to the cloud, and run anywhere.
-- Scalable: You can increase and automatically distribute container replicas.
-- Stackable: You can stack services vertically and on-the-fly.
+- is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.
+- can be run on local machines, virtual machines or deployed to the cloud.
+- is portable (can be run on any OS).
+- is isolated from other containers and runs its own software, binaries, and configurations.
 
-![Containers are portable](images/laurel-docker-containers.png){:width="100%"}
+## What is a container image?
 
-### Images and containers
+When running a container, it uses an isolated filesystem. This custom filesystem is provided by a container image. Since the image contains the container's filesystem, it must contain everything needed to run an application - all dependencies, configurations, scripts, binaries, etc. The image also contains other configuration for the container, such as environment variables, a default command to run, and other metadata.
 
-A container is launched by running an image. An **image** is an executable
-package that includes everything needed to run an application--the code, a
-runtime, libraries, environment variables, and configuration files.
+You'll dive deeper into images later on in this guide, covering topics such as layering, best practices, and more.
 
-A **container** is a runtime instance of an image--what the image becomes in
-memory when executed (that is, an image with state, or a user process). You can
-see a list of your running containers with the command, `docker ps`, just as you
-would in Linux.
-
-### Containers and virtual machines
-
-A **container** runs _natively_ on Linux and shares the kernel of the host
-machine with other containers. It runs a discrete process, taking no more memory
-than any other executable, making it lightweight.
-
-By contrast, a **virtual machine** (VM) runs a full-blown "guest" operating
-system with _virtual_ access to host resources through a hypervisor. In general,
-VMs provide an environment with more resources than most applications need.
-
-![Container stack example](/images/Container%402x.png){:width="300px"} | ![Virtual machine stack example](/images/VM%402x.png){:width="300px"}
-
-## Prepare your Docker environment
-
-Install a [maintained version](/engine/installation/#updates-and-patches){: target="_blank" class="_"}
-of Docker Community Edition (CE) or Enterprise Edition (EE) on a
-[supported platform](/ee/supported-platforms/){: target="_blank" class="_"}.
-
-> For full Kubernetes Integration
+> **Note**
 >
-> - [Kubernetes on Docker Desktop for Mac](/docker-for-mac/kubernetes/){: target="_blank" class="_"}
-is available in [17.12 Edge (mac45)](/docker-for-mac/edge-release-notes/#docker-community-edition-17120-ce-mac45-2018-01-05){: target="_blank" class="_"} or
-[17.12 Stable (mac46)](/docker-for-mac/release-notes/#docker-community-edition-17120-ce-mac46-2018-01-09){: target="_blank" class="_"} and higher.
-> - [Kubernetes on Docker Desktop for Windows](/docker-for-windows/kubernetes/){: target="_blank" class="_"}
-is available in
-[18.06.0 CE (win70)](/docker-for-windows/release-notes/){: target="_blank" class="_"} and higher as well as edge channels.
+> If you're familiar with `chroot`, think of a container as an extended version of `chroot`. The filesystem is simply coming from the image. But, a container adds additional isolation not available when simply using chroot.
 
-[Install Docker](/engine/installation/index.md){: class="button outline-btn"}
-<div style="clear:left"></div>
+## Next steps
 
-### Test Docker version
+In this section, you learned about containers and images.
 
-1.  Run `docker --version` and ensure that you have a supported version of Docker:
+In the next section, you'll containerize your first application.
 
-    ```shell
-    docker --version
+[Containerize an application](02_our_app.md){: .button  .primary-btn}
 
-    Docker version 17.12.0-ce, build c97c6d6
-    ```
-
-2.  Run `docker info` (or `docker version` without `--`) to view even more details about your Docker installation:
-
-    ```shell
-    docker info
-
-    Containers: 0
-     Running: 0
-     Paused: 0
-     Stopped: 0
-    Images: 0
-    Server Version: 17.12.0-ce
-    Storage Driver: overlay2
-    ...
-    ```
-
-> To avoid permission errors (and the use of `sudo`), add your user to the `docker` group. [Read more](/engine/installation/linux/linux-postinstall/){: target="_blank" class="_"}.
-
-### Test Docker installation
-
-1.  Test that your installation works by running the simple Docker image,
-[hello-world](https://hub.docker.com/_/hello-world/){: target="_blank" class="_"}:
-
-    ```shell
-    docker run hello-world
-
-    Unable to find image 'hello-world:latest' locally
-    latest: Pulling from library/hello-world
-    ca4f61b1923c: Pull complete
-    Digest: sha256:ca0eeb6fb05351dfc8759c20733c91def84cb8007aa89a5bf606bc8b315b9fc7
-    Status: Downloaded newer image for hello-world:latest
-
-    Hello from Docker!
-    This message shows that your installation appears to be working correctly.
-    ...
-    ```
-
-2.  List the `hello-world` image that was downloaded to your machine:
-
-    ```shell
-    docker image ls
-    ```
-
-3.  List the `hello-world` container (spawned by the image) which exits after
-    displaying its message. If it were still running, you would not need the `--all` option:
-
-    ```shell
-    docker container ls --all
-
-    CONTAINER ID     IMAGE           COMMAND      CREATED            STATUS
-    54f4984ed6a8     hello-world     "/hello"     20 seconds ago     Exited (0) 19 seconds ago
-    ```
-
-## Recap and cheat sheet
-
-```shell
-## List Docker CLI commands
-docker
-docker container --help
-
-## Display Docker version and info
-docker --version
-docker version
-docker info
-
-## Execute Docker image
-docker run hello-world
-
-## List Docker images
-docker image ls
-
-## List Docker containers (running, all, all in quiet mode)
-docker container ls
-docker container ls --all
-docker container ls -aq
-```
-
-## Conclusion of part one
-
-Containerization makes [CI/CD](https://www.docker.com/solutions/cicd){: target="_blank" class="_"} seamless. For example:
-
-- applications have no system dependencies
-- updates can be pushed to any part of a distributed application
-- resource density can be optimized.
-
-With Docker, scaling your application is a matter of spinning up new
-executables, not running heavy VM hosts.
-
-[On to Part 2 >>](part2.md){: class="button outline-btn" style="margin-bottom: 30px; margin-right: 100%"}

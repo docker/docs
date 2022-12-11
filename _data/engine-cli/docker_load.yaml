@@ -27,7 +27,7 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
+  ```console
   $ docker image ls
 
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE

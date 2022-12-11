@@ -1,4 +1,6 @@
 command: docker
+short: The base command for the Docker CLI.
+long: The base command for the Docker CLI.
 cname:
 - docker attach
 - docker build
@@ -10,9 +12,7 @@ cname:
 - docker context
 - docker cp
 - docker create
-- docker deploy
 - docker diff
-- docker engine
 - docker events
 - docker exec
 - docker export
@@ -70,9 +70,7 @@ clink:
 - docker_context.yaml
 - docker_cp.yaml
 - docker_create.yaml
-- docker_deploy.yaml
 - docker_diff.yaml
-- docker_engine.yaml
 - docker_events.yaml
 - docker_exec.yaml
 - docker_export.yaml

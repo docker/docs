@@ -1,26 +1,8 @@
 /*
-*
-* Primary navigation - top header **********************************************************
-*
-*/
+ * Primary navigation - top header *********************************************
+ */
 .nav-container {
     height: 55px;
-}
-
-.primary {
-    padding: 5px 0 0 20px;
-}
-
-.nav-primary {
-    background: transparent;
-    max-width: 1024px;
-    margin: 0 auto;
-    a {
-        color: #fff;
-    }
-    li:nth-child(5n) {
-        padding-right: 50px;
-    }
 }
 
 .sidebar-toggle {
@@ -30,73 +12,37 @@
 }
 
 /*
-*
-* user-nav ***********************************************************************
-*
-*/
-
-.user-nav {
-    padding: 20px 0 0;
-    float: right;
-    ul {
-        li {
-            list-style-type: none;
-            display: inline;
-            padding-right: 10px;
-            a {
-                display: inline;
-            }
-        }
-    }
-}
-
-/*
-*
-* Secondary Navigation  **********************************************************
-*
-*/
+ * Secondary Navigation  *******************************************************
+ */
 
 .nav-secondary {
-    background: $bg-secondary;
+    background-color: $bg-secondary;
     box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
-    height: 55px;
-}
-
-
-/*
-*
-* nav-secondary-tabs  ***********************************************************************
-*
-*/
-
-.nav-secondary-tabs {
-    background-color: $bg-secondary-tabs;
-    bottom: 0;
-    height: 55px;
-    position: absolute;
-    width: 100%;
-    &.affix {
-        background: $bg-secondary;
-        box-shadow: 0 1px 13px rgba(0, 0, 0, 0.24);
-        top: 0;
-        position: fixed;
-        z-index: 100;
-    }
-    .search-form {
-        margin: 5px 27px 0 -10px;
-        width: 240px;
-    }
 }
 
 /*
-*
-* NAV SIDEBAR ***********************************************************************
-*
-*/
+ * Breadcrumbs  ****************************************************************
+ */
+.breadcrumb {
+  background-color: $bg-sidebar-active;
+  border-radius: 0;
+  margin-bottom: 0;
+  padding-left:  22px; // left-align with logo
+  border-bottom: 0.1px solid rgba($primary-links, .5);
+
+  a:not([href]) {
+    cursor: default;
+  }
+}
+
+/*
+ * NAV SIDEBAR *****************************************************************
+ */
 
 // Some links don't have 'href' attr, hence no mouse pointer
 .nav-sidebar li a {
     cursor: pointer;
+    color: $light-grey-800;
 }
 
 .nav-sidebar>li>a {
@@ -107,21 +53,22 @@
 .nav-sidebar>.active>a,
 .nav-sidebar>.active>a:focus,
 .nav-sidebar>.active>a:hover {
-    color: #2089C4;
-    background-color: #428bca;
+    color: $light-blue-600;
+    background-color: $light-blue-500;
 }
 
 .nav-sidebar ul {
     list-style: none;
-    padding: 0px;
+    padding: 0;
     text-align: left;
+
     li {
         display: block;
     }
 }
 
 .nav-sidebar .nav ul {
-  padding: 0px 0px 0px 15px;
+  padding: 0 0 0 15px;
 }
 
 .nav-sidebar ul li a:hover {
@@ -130,25 +77,32 @@
 }
 
 .nav-sidebar ul li a,
-.nav-sidebar ul li a:focus,
-.nav-sidebar ul li a:hover {
+.nav-sidebar ul li a:focus {
     border-bottom: none;
-    text-decoration: none;
+    // border-left:   1px solid $light-grey-200;
+}
+
+.nav-sidebar .nav > li > a {
+  padding-left: 22px; // left-padding to align with logo
+  &.active {
+    padding-left: 19px; // compensate for 1px -> 4px border-width
+  }
+  @include before-md-width {
+    padding-right: 32px; // right-align with hamburger menu
+  }
 }
 
 .nav-sidebar ul li a.active,
-.nav-sidebar.nav>li>a:focus {
-    cursor: default;
-    background: #F3F4F4;
-    color: #2089C4;
-    border-left: 4px solid #077CBC;
+.nav-sidebar.nav > li > a:focus {
+    background:  $bg-sidebar-active;
+    border-left: 4px solid $light-blue-500;
     font-weight: 600;
+    color: $light-blue-500;
 }
 
-.nav-sidebar ul li li a {
-    border-left: 1px solid #077CBC;
-    font-size: 12px;
-    margin-left: 15px;
+.nav-sidebar ul li ul li a {
+  font-size:   12px;
+  margin-left:  8px;
 }
 
 .nav-sidebar .caret {
@@ -156,22 +110,16 @@
     margin-top: 10px;
 }
 
-.leftnav {
-    padding: 0 20px 20px 0;
-}
-
 /* pointer for collapsed sidebar list items */
 
 .collapsed
 {
-    cursor:pointer;   
+    cursor:pointer;
 }
 
 /*
-*
-* Table of contents menu  ***********************************************************************
-*
-*/
+ * Table of contents menu  *****************************************************
+ */
 
 .toc-toggle {
     width: 25px;
@@ -190,33 +138,36 @@
         a {
             display: inline-block;
             font-size: 12px;
-            padding: 5px 10px 5px 10px;
-            text-decoration: none;
+            padding: 2px 10px 2px 10px;
+            color: $light-grey-500;
+        }
+        .slider{
+            background-color: $light-grey-200;
+            border: 1px solid $light-grey-200;
+        }
+        .slider:before{
+            background-color: $light-grey-500;
         }
     }
 }
 
 .toc-nav li a.active {
-    color: #2089C4;
-    border-left: 4px solid #2089C4;
+    border-left: 4px solid $light-grey-500;
     font-weight: bold;
+    color: $light-grey-500;
 }
 
 .toc-nav i.fa {
     font-size: 14px;
-    margin: 0px 8px 0 0;
-    color: #4fa1d0;
+    margin: 0 8px 0 0;
+    color: $light-grey-500;
 }
 
-i.fa.fa-question {
-    font-size: 21px;
-    margin: 0 11px 0 0;
-}
-
-div#side-toc-title {
+div.side-toc-title {
     font-size: 12px;
     font-weight: bold;
     margin: 11px 0 10px 13px;
+    color: $light-grey-500;
 }
 
 .edit {
@@ -224,10 +175,8 @@ div#side-toc-title {
 }
 
 /*
-*
-* Toggle Switches **************************************************************
-*
-*/
+ * Toggle Switches *************************************************************
+ */
 
 .toggle-mode {
     float: left;
@@ -236,7 +185,7 @@ div#side-toc-title {
     .icon {
         width: 25px;
         float: left;
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 }
 
@@ -267,8 +216,7 @@ div#side-toc-title {
     right: 0;
     bottom: 0;
     background-color: $slider-bg;
-    border: 1px solid #c3e4f7;
-    // transition: 0.4s;
+    border: 1px solid $light-blue-200;
 }
 
 .slider:before {
@@ -279,11 +227,10 @@ div#side-toc-title {
     width: 15px;
     left: 2px;
     bottom: 1px;
-    // transition: 0.4s;
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px $slider-btn;
 }
 
 input:checked+.slider:before {
@@ -301,87 +248,90 @@ input:checked+.slider:before {
 
 
 /*
-*
-* Tabs ***********************************************************************
-*
-*/
-#tabs {
-    float: left;
+ * Tabs ************************************************************************
+ */
+
+.navbar-nav > li > a {
+  border-left:   4px solid rgba($white, 0.0);
+}
+.navbar-nav > li.active > a {
+  border-left:   4px solid rgba($white, 0.75);
+}
+
+@include md-width {
+  .landing .navbar-nav > li > a {
+    padding-top:    17px;
+    padding-bottom:  9px;
+  }
+  .navbar-nav > li > a {
+    color:          $white;
+    line-height:    25px;
+    padding-top:    14px;
+    padding-bottom: 12px;
+    font-weight:    600;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.17);
+      border-bottom:    4px solid $white;
+    }
+  }
+  .navbar-nav > li.active > a {
+    cursor:        default;
+    border-left:   none;
+    border-bottom: 4px solid $white;
+  }
+}
+
+div.feedback-links {
+  margin: 15px 0 10px 0;
+}
+
+div.metadata-items {
+  margin: 15px 0 10px 0;
+  ul {
+    list-style: none;
     margin: 0;
-    padding-left: 8px; 
-    ul {
-        padding: 0;
-    }
-}
-
-
-
-.tabs {
-
+    padding-left: 20px;
+    line-height: 20px;
     li {
-        float: left;
-        list-style: none;
-        a {
-            color: $white;
-            padding: 17px 19px 14px 15px;
-            float: left;
-            font-weight: 600;
-            &:hover {
-                background: rgba(0, 0, 0, 0.17) !important;
-                border-bottom: 4px solid #fff;
-            }
-        }
+      padding: 2px 8px 2px 0;
+      width: 100%;
+      font-size: 12px;
+      a {
+        padding: 0;
+      }
     }
+  }
 }
 
-.tabs li.active a {
-    background: transparent !important;
-    color: #fff;
-    cursor: default;
-    border-bottom: 4px solid #fff;
-}
-
-/*
-*
-* feedback links ***********************************************************************
-*
-*/
-
-#sidebar-right.affix .feedback-links {
-    margin: 50px 0 10px 0;
-}
-
-/* polldaddy */
-
-#rating_info_8453675 {
-    display: none !important;
-}
-
-.rating-msg {
-    font: inherit !important;
-    color: inherit !important;
+div.keywords-items {
+  padding-left: 20px;
+  font-size: 12px;
+  a {
+    display: inline-block;
+    margin-right: 8px;
+    i.fa {
+      margin: 0;
+    }
+  }
 }
 
 /*
-*
-* Controls ***********************************************************************
-*
-*/
+ * Controls ********************************************************************
+ */
 
 .ctrl-left {
     float: left;
     width: 20px;
-    margin: 3px 0px 0px 0;
+    margin: 3px 0 0 0;
 }
 
 .ctrl-right {
     float: right;
-    padding: 5px 0px;
+    padding: 5px 0;
 }
 
 .ctrl-right .btn-group {
     float: left;
     margin: 2px 0 0;
 }
-
-

@@ -18,9 +18,10 @@ options:
   kubernetes: false
   swarm: false
 examples: |-
-  ```bash
-    $ docker volume rm hello
-    hello
+  ```console
+  $ docker volume rm hello
+
+  hello
   ```
 deprecated: false
 min_api_version: "1.21"

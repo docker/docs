@@ -107,9 +107,9 @@ examples: |-
   $ docker app install myapp.dockerapp --name myinstallation --target-context=mycontext
   $ docker app install myrepo/myapp:mytag --name myinstallation --target-context=mycontext
   $ docker app install bundle.json --name myinstallation --credential-set=mycredentials.yml
-deprecated: false
+deprecated: true
 experimental: false
-experimentalcli: true
+experimentalcli: false
 kubernetes: false
 swarm: false
 

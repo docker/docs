@@ -10,8 +10,8 @@ This page explains how to set up and use a sandbox for experimenting with trust.
 The sandbox allows you to configure and try trust operations locally without
 impacting your production images.
 
-Before working through this sandbox, you should have read through the [trust
-overview](content_trust.md).
+Before working through this sandbox, you should have read through the
+[trust overview](index.md).
 
 ### Prerequisites
 
@@ -21,9 +21,9 @@ have privileges to run docker commands on your local machine or in the VM.
 
 This sandbox requires you to install two Docker tools: Docker Engine >= 1.10.0
 and Docker Compose >= 1.6.0. To install the Docker Engine, choose from the
-[list of supported platforms](../../installation/index.md). To install
+[list of supported platforms](../../install/index.md). To install
 Docker Compose, see the
-[detailed instructions here](/compose/install/).
+[detailed instructions here](../../../compose/install/index.md).
 
 ## What is in the sandbox?
 
@@ -38,7 +38,7 @@ production trust environment, and sets up these additional components.
 | Notary server   | The service that does all the heavy-lifting of managing trust                                                                               |
 
 This means you run your own content trust (Notary) server and registry.
-If you work exclusively with the Docker Hub, you would not need with these components.
+If you work exclusively with the Docker Hub, you would not need these components.
 They are built into the Docker Hub for you. For the sandbox, however, you build
 your own entire, mock production environment.
 
@@ -222,7 +222,7 @@ data. Then, you try and pull it.
 
 3.  List the layers for the `test/trusttest` image you pushed:
 
-    ```bash
+    ```console
     root@65084fc6f047:/# ls -l /var/lib/registry/docker/registry/v2/repositories/test/trusttest/_layers/sha256
     total 12
     drwxr-xr-x 2 root root 4096 Jun 10 17:26 a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
@@ -262,7 +262,7 @@ data. Then, you try and pull it.
     Docker to attempt to download the tampered image from the registry and reject
     it because it is invalid.
 
-8.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
+9.  Pull the image again. This downloads the image from the registry, because we don't have it cached.
 
         / # docker pull sandboxregistry:5000/test/trusttest
         Using default tag: latest

@@ -2,114 +2,129 @@
 description: Engine
 keywords: Engine
 redirect_from:
-- /engine/misc/
-title: About Docker Engine
+  - /edge/
+  - /engine/ce-ee-node-activate/
+  - /engine/misc/
+  - /linux/
+  - /manuals/ # TODO remove this redirect after we've created a landing page for the product manuals section
+title: Docker Engine overview
 ---
 
-**Develop, Ship and Run Any Application, Anywhere**
+Docker Engine is an open source containerization technology for building and
+containerizing your applications. Docker Engine acts as a client-server
+application with:
 
-[**Docker**](https://www.docker.com) is a platform for developers and sysadmins
-to develop, ship, and run applications.  Docker lets you quickly assemble
-applications from components and eliminates the friction that can come when
-shipping code. Docker lets you get your code tested and deployed into production
-as fast as possible.
+- A server with a long-running daemon process
+  [`dockerd`](/engine/reference/commandline/dockerd).
+- APIs which specify interfaces that programs can use to talk to and instruct
+  the Docker daemon.
+- A command line interface (CLI) client
+  [`docker`](/engine/reference/commandline/cli/).
 
-Docker consists of:
+The CLI uses [Docker APIs](api/index.md) to control or interact with the Docker
+daemon through scripting or direct CLI commands. Many other Docker applications
+use the underlying API and CLI. The daemon creates and manage Docker objects,
+such as images, containers, networks, and volumes.
 
-* The Docker Engine - our lightweight and powerful open source containerization
-  technology combined with a work flow for building and containerizing your
-  applications.
-* [Docker Hub](https://hub.docker.com) - our SaaS service for
-  sharing and managing your application stacks.
+For more details, see
+[Docker Architecture](../get-started/overview.md#docker-architecture).
 
-## Why Docker?
-
-*Faster delivery of your applications*
-
-* We want your environment to work better. Docker containers,
-      and the work flow that comes with them, help your developers,
-      sysadmins, QA folks, and release engineers work together to get your code
-      into production and make it useful. We've created a standard
-      container format that lets developers care about their applications
-      inside containers while sysadmins and operators can work on running the
-      container in your deployment. This separation of duties streamlines and
-      simplifies the management and deployment of code.
-* We make it easy to build new containers, enable rapid iteration of
-      your applications, and increase the visibility of changes. This
-      helps everyone in your organization understand how an application works
-      and how it is built.
-* Docker containers are lightweight and fast! Containers have
-      sub-second launch times, reducing the cycle
-      time of development, testing, and deployment.
-
-*Deploy and scale more easily*
-
-* Docker containers run (almost) everywhere. You can deploy
-      containers on desktops, physical servers, virtual machines, into
-      data centers, and up to public and private clouds.
-* Since Docker runs on so many platforms, it's easy to move your
-      applications around. You can easily move an application from a
-      testing environment into the cloud and back whenever you need.
-* Docker's lightweight containers also make scaling up and
-      down fast and easy. You can quickly launch more containers when
-      needed and then shut them down easily when they're no longer needed.
-
-*Get higher density and run more workloads*
-
-* Docker containers don't need a hypervisor, so you can pack more of
-      them onto your hosts. This means you get more value out of every
-      server and can potentially reduce what you spend on equipment and
-      licenses.
-
-*Faster deployment makes for easier management*
-
-* As Docker speeds up your work flow, it gets easier to make lots
-      of small changes instead of huge, big bang updates. Smaller
-      changes mean reduced risk and more uptime.
-
-## About this guide
-
-The [Understanding Docker section](understanding-docker.md) helps you:
-
- - See how Docker works at a high level
- - Understand the architecture of Docker
- - Discover Docker's features;
- - See how Docker compares to virtual machines
- - See some common use cases.
-
-### Installation guides
-
-The [installation section](installation/index.md) shows you how to install Docker
-on a variety of platforms.
-
-
-### Docker user guide
-
-To learn about Docker in more detail and to answer questions about usage and
-implementation, check out the [Docker User Guide](userguide/index.md).
-
-## Release notes
-
-A summary of the changes in each release in the current series can now be found
-on the separate [Release Notes page](/release-notes)
-
-## Feature Deprecation Policy
-
-As changes are made to Docker there may be times when existing features
-need to be removed or replaced with newer features. Before an existing
-feature is removed it is labeled as "deprecated" within the documentation
-and remains in Docker for at least 3 stable releases unless specified
-explicitly otherwise. After that time it may be removed.
-
-Users are expected to take note of the list of deprecated features each
-release and plan their migration away from those features, and (if applicable)
-towards the replacement features as soon as possible.
-
-The complete list of deprecated features can be found on the
-[Deprecated Features page](deprecated.md).
+<div class="component-container">
+  <!--start row-->
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/engine/install/"><img src="/assets/images/download.svg" alt="Arrow pointing downwards" width="70px" height="70px"></a>
+        </div>
+        <h2><a href="/engine/install/">Install Docker Engine</a></h2>
+        <p>Learn how to install the open source Docker Engine for your distribution.</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/storage/"><img src="/assets/images/engine-storage.svg" alt="Data disks" width="70px" height="70px"></a>
+        </div>
+        <h2><a href="/storage/">Storage</a></h2>
+        <p>Use persistent data with Docker containers.</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/network/"><img src="/assets/images/engine-networking.svg" alt="Computers on a local area network" width="70px" height="70px"></a>
+        </div>
+        <h2><a href="/network/">Networking</a></h2>
+        <p>Manage network connections between containers.</p>
+      </div>
+    </div>
+  </div>
+  <!--start row-->
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/config/containers/logging/"><img src="/assets/images/engine-logging.svg" alt="Document with a text outline" width="70px" height="70px"></a>
+        </div>
+        <h2><a href="/config/containers/logging/">Container logs</a></h2>
+        <p>Learn how to view and read container logs.</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/config/pruning/"><img src="/assets/images/engine-pruning.svg" alt="A pair of scissors" width="70px" height="70px"></a>
+        </div>
+        <h2><a href="/config/pruning/">Prune</a></h2>
+        <p>Tidy up unused resources.</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/config/daemon/"><img src="/assets/images/engine-configure-daemon.svg" alt="Settings cogwheel with stars" width="70px" height="70px"></a>
+        </div>
+        <h2><a href="/config/daemon/">Configure the daemon</a></h2>
+        <p>Delve into the configuration options of the Docker daemon.</p>
+      </div>
+    </div>
+  </div>
+  <!--start row-->
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/engine/security/rootless/"><img src="/assets/images/engine-rootless.svg" alt="Checkered shield" width="70px" height="70px"></a>
+        </div>
+        <h2><a href="/engine/security/rootless/">Rootless mode</a></h2>
+        <p>Run Docker without root privileges.</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/engine/deprecated/"><img src="/assets/images/engine-deprecated.svg" alt="Alarm bell with an exclamation mark" width="70px" height="70px"></a>
+        </div>
+        <h2><a href="/engine/deprecated/">Deprecated features</a></h2>
+        <p>Find out what features of Docker Engine you should stop using.</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/engine/release-notes/"><img src="/assets/images/note-add.svg" alt="Document with an overlaying plus sign" width="70px" height="70px"></a>
+        </div>
+        <h2><a href="/engine/release-notes/">Release notes</a></h2>
+        <p>Read the release notes for the latest version.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 ## Licensing
 
-Docker is licensed under the Apache License, Version 2.0. See
-[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
-license text.
+The Docker Engine is licensed under the Apache License, Version 2.0. See
+[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license
+text.
+

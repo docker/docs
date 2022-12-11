@@ -2,7 +2,11 @@
 <html lang="en-US">
   <meta charset="utf-8">
   <title>Redirecting&hellip;</title>
+  {%- if page.redirect.to contains "://" %}
   <link rel="canonical" href="{{ page.redirect.to }}">
+  {%- else %}
+  <link rel="canonical" href="{{ site.docs_url }}{{ page.redirect.to }}">
+  {%- endif %}
   <meta http-equiv="refresh" content="0; url={{ page.redirect.to }}">
   <meta name="robots" content="noindex">
   <h1>Redirecting&hellip;</h1>

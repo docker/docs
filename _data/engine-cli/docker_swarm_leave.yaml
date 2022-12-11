@@ -26,8 +26,9 @@ options:
 examples: |-
   Consider the following swarm, as seen from the manager:
 
-  ```bash
+  ```console
   $ docker node ls
+
   ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
   7ln70fl22uw2dvjn2ft53m3q5    worker2   Ready   Active
   dkp8vy1dq1kxleu9g4u78tlag    worker1   Ready   Active
@@ -36,8 +37,9 @@ examples: |-
 
   To remove `worker2`, issue the following command from `worker2` itself:
 
-  ```bash
+  ```console
   $ docker swarm leave
+
   Node left the default swarm.
   ```
 

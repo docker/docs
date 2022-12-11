@@ -10,7 +10,7 @@ Docker lets you create services, which can start tasks. A service is a
 description of a desired state, and a task does the work. Work is scheduled on
 swarm nodes in this sequence:
 
-1.  Create a service by using `docker service create` or the UCP web UI or CLI.
+1.  Create a service by using `docker service create`.
 2.  The request goes to a Docker manager node.
 3.  The Docker manager node schedules the service to run on particular nodes.
 4.  Each service can start multiple tasks.
@@ -48,12 +48,12 @@ Run `docker service ps <service-name>` to get the state of a task. The
 `CURRENT STATE` field shows the task's state and how long it's been
 there.
 
-```bash
+```console
 $ docker service ps webserver
-ID                  NAME                IMAGE               NODE                DESIRED STATE       CURRENT STATE            ERROR                              PORTS
-owsz0yp6z375        webserver.1         nginx               UbuntuVM            Running             Running 44 seconds ago
-j91iahr8s74p         \_ webserver.1     nginx               UbuntuVM            Shutdown            Failed 50 seconds ago    "No such container: webserver.…"
-7dyaszg13mw2         \_ webserver.1     nginx               UbuntuVM            Shutdown            Failed 5 hours ago       "No such container: webserver.…"
+ID             NAME              IMAGE    NODE        DESIRED STATE  CURRENT STATE            ERROR                              PORTS
+owsz0yp6z375   webserver.1       nginx    UbuntuVM    Running        Running 44 seconds ago
+j91iahr8s74p    \_ webserver.1   nginx    UbuntuVM    Shutdown       Failed 50 seconds ago    "No such container: webserver.…"
+7dyaszg13mw2    \_ webserver.1   nginx    UbuntuVM    Shutdown       Failed 5 hours ago       "No such container: webserver.…"
 ```
 
 ## Where to go next

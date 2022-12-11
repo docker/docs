@@ -3,11 +3,10 @@ datafolder: engine-cli
 datafile: docker_context_inspect
 title: docker context inspect
 ---
-
 <!--
-Sorry, but the contents of this page are automatically generated from
-Docker's source code. If you want to suggest a change to the text that appears
-here, you'll need to find the string by searching this repo:
+This page is automatically generated from Docker's source code. If you want to
+suggest a change to the text that appears here, open a ticket or pull request
+in the source repository on GitHub:
 
 https://github.com/docker/cli
 -->

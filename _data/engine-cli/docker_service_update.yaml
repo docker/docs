@@ -1,15 +1,22 @@
 command: docker service update
 short: Update a service
 long: |-
-  Updates a service as described by the specified parameters. This command has to be run targeting a manager node.
-  The parameters are the same as [`docker service create`](service_create.md). Please look at the description there
-  for further information.
+  Updates a service as described by the specified parameters. The parameters are
+  the same as [`docker service create`](service_create.md). Refer to the description
+  there for further information.
 
   Normally, updating a service will only cause the service's tasks to be replaced with new ones if a change to the
   service requires recreating the tasks for it to take effect. For example, only changing the
   `--update-parallelism` setting will not recreate the tasks, because the individual tasks are not affected by this
   setting. However, the `--force` flag will cause the tasks to be recreated anyway. This can be used to perform a
   rolling restart without any changes to the service parameters.
+
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker service update [OPTIONS] SERVICE
 pname: docker service
 plink: docker_service.yaml
@@ -18,6 +25,24 @@ options:
   value_type: command
   description: Service command args
   deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cap-add
+  value_type: list
+  description: Add Linux capabilities
+  deprecated: false
+  min_api_version: "1.41"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: cap-drop
+  value_type: list
+  description: Drop Linux capabilities
+  deprecated: false
+  min_api_version: "1.41"
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -359,6 +384,16 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: limit-pids
+  value_type: int64
+  default_value: "0"
+  description: Limit maximum number of processes (default 0 = unlimited)
+  deprecated: false
+  min_api_version: "1.41"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: true
 - option: log-driver
   value_type: string
   description: Logging driver for service
@@ -371,6 +406,16 @@ options:
   value_type: list
   description: Logging driver options
   deprecated: false
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: max-concurrent
+  value_type: uint
+  description: |
+    Number of job tasks to run concurrently (default equal to --replicas)
+  deprecated: false
+  min_api_version: "1.41"
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -686,6 +731,25 @@ options:
   experimentalcli: false
   kubernetes: false
   swarm: false
+- option: ulimit-add
+  value_type: ulimit
+  default_value: '[]'
+  description: Add or update a ulimit option
+  deprecated: false
+  min_api_version: "1.41"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
+- option: ulimit-rm
+  value_type: list
+  description: Remove a ulimit option
+  deprecated: false
+  min_api_version: "1.41"
+  experimental: false
+  experimentalcli: false
+  kubernetes: false
+  swarm: false
 - option: update-delay
   value_type: duration
   default_value: 0s
@@ -773,13 +837,13 @@ options:
 examples: |-
   ### Update a service
 
-  ```bash
+  ```console
   $ docker service update --limit-cpu 2 redis
   ```
 
   ### Perform a rolling restart with no parameter changes
 
-  ```bash
+  ```console
   $ docker service update --force --update-parallelism 1 --update-delay 30s redis
   ```
 
@@ -802,25 +866,21 @@ examples: |-
   service name.
 
   - The `--mount-add` flag takes the same parameters as the `--mount` flag on
-    `service create`. Refer to the [volumes and
-    bind mounts](service_create.md#volumes-and-bind-mounts-mount) section in the
-    `service create` reference for details.
+    `service create`. Refer to the [volumes and bind mounts](service_create.md#add-bind-mounts-volumes-or-memory-filesystems)
+    section in the `service create` reference for details.
 
   - The `--mount-rm` flag takes the `target` path of the mount.
 
-  ```bash
+  ```console
   $ docker service create \
       --name=myservice \
-      --mount \
-        type=volume,source=test-data,target=/somewhere \
-      nginx:alpine \
-      myservice
+      --mount type=volume,source=test-data,target=/somewhere \
+      nginx:alpine
 
   myservice
 
   $ docker service update \
-      --mount-add \
-        type=volume,source=other-volume,target=/somewhere-else \
+      --mount-add type=volume,source=other-volume,target=/somewhere-else \
       myservice
 
   myservice
@@ -834,12 +894,12 @@ examples: |-
 
   Use the `--publish-add` or `--publish-rm` flags to add or remove a published
   port for a service. You can use the short or long syntax discussed in the
-  [docker service create](service_create/#publish-service-ports-externally-to-the-swarm)
+  [docker service create](service_create.md#publish-service-ports-externally-to-the-swarm--p---publish)
   reference.
 
   The following example adds a published service port to an existing service.
 
-  ```bash
+  ```console
   $ docker service update \
     --publish-add published=8080,target=80 \
     myservice
@@ -849,12 +909,12 @@ examples: |-
 
   Use the `--network-add` or `--network-rm` flags to add or remove a network for
   a service. You can use the short or long syntax discussed in the
-  [docker service create](service_create/#attach-a-service-to-an-existing-network-network)
+  [docker service create](service_create.md#attach-a-service-to-an-existing-network---network)
   reference.
 
   The following example adds a new alias name to an existing service already connected to network my-network:
 
-  ```bash
+  ```console
   $ docker service update \
     --network-rm my-network \
     --network-add name=my-network,alias=web1 \
@@ -869,7 +929,7 @@ examples: |-
 
   The following example updates the number of replicas for the service from 4 to 5, and then rolls back to the previous configuration.
 
-  ```bash
+  ```console
   $ docker service update --replicas=5 web
 
   web
@@ -880,9 +940,10 @@ examples: |-
   80bvrzp6vxf3  web   replicated  0/5       nginx:alpine
 
   ```
+
   Roll back the `web` service...
 
-  ```bash
+  ```console
   $ docker service update --rollback web
 
   web
@@ -896,7 +957,7 @@ examples: |-
 
   Other options can be combined with `--rollback` as well, for example, `--update-delay 0s` to execute the rollback without a delay between tasks:
 
-  ```bash
+  ```console
   $ docker service update \
     --rollback \
     --update-delay 0s
@@ -933,7 +994,7 @@ examples: |-
 
   The following example adds a secret named `ssh-2` and removes `ssh-1`:
 
-  ```bash
+  ```console
   $ docker service update \
       --secret-add source=ssh-2,target=ssh-2 \
       --secret-rm ssh-1 \
@@ -943,13 +1004,30 @@ examples: |-
   ### Update services using templates
 
   Some flags of `service update` support the use of templating.
-  See [`service create`](./service_create.md#templating) for the reference.
+  See [`service create`](service_create.md#create-services-using-templates) for the reference.
 
 
   ### Specify isolation mode (Windows)
 
   `service update` supports the same `--isolation` flag as `service create`
-  See [`service create`](./service_create.md) for the reference.
+  See [`service create`](service_create.md) for the reference.
+
+  ### Updating Jobs
+
+  When a service is created as a job, by setting its mode to `replicated-job` or
+  to `global-job` when doing `service create`, options for updating it are
+  limited.
+
+  Updating a Job immediately stops any Tasks that are in progress. The operation
+  creates a new set of Tasks for the job and effectively resets its completion
+  status. If any Tasks were running before the update, they are stopped, and new
+  Tasks are created.
+
+  Jobs cannot be rolled out or rolled back. None of the flags for configuring
+  update or rollback settings are valid with job modes.
+
+  To run a job again with the same parameters that it was run previously, it can
+  be force updated with the `--force` flag.
 deprecated: false
 min_api_version: "1.24"
 experimental: false

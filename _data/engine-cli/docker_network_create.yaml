@@ -11,7 +11,7 @@ long: |-
   this bridge network. You cannot remove this default bridge network, but you can
   create new ones using the `network create` command.
 
-  ```bash
+  ```console
   $ docker network create -d bridge my-bridge-network
   ```
 
@@ -41,7 +41,7 @@ long: |-
   Once you have prepared the `overlay` network prerequisites you simply choose a
   Docker host in the cluster and issue the following to create the network:
 
-  ```bash
+  ```console
   $ docker network create -d overlay my-multihost-network
   ```
 
@@ -85,7 +85,7 @@ options:
   swarm: false
 - option: config-from
   value_type: string
-  description: The network from which copying the configuration
+  description: The network from which to copy the configuration
   deprecated: false
   min_api_version: "1.30"
   experimental: false
@@ -218,7 +218,7 @@ examples: |-
   When you start a container, use the `--network` flag to connect it to a network.
   This example adds the `busybox` container to the `mynet` network:
 
-  ```bash
+  ```console
   $ docker run -itd --network=mynet busybox
   ```
 
@@ -242,14 +242,14 @@ examples: |-
   and specify subnetwork values directly using the `--subnet` option. On a
   `bridge` network you can only create a single subnet:
 
-  ```bash
+  ```console
   $ docker network create --driver=bridge --subnet=192.168.0.0/16 br0
   ```
 
   Additionally, you also specify the `--gateway` `--ip-range` and `--aux-address`
   options.
 
-  ```bash
+  ```console
   $ docker network create \
     --driver=bridge \
     --subnet=172.28.0.0/16 \
@@ -264,14 +264,14 @@ examples: |-
   subnet mask to adhere to the current guidance of not having more than 256 IPs in
   a single overlay network. Each of the subnetworks has 126 usable addresses.
 
-  ```bash
+  ```console
   $ docker network create -d overlay \
-    --subnet=192.168.1.0/25 \
-    --subnet=192.170.2.0/25 \
-    --gateway=192.168.1.100 \
-    --gateway=192.170.2.100 \
-    --aux-address="my-router=192.168.1.5" --aux-address="my-switch=192.168.1.6" \
-    --aux-address="my-printer=192.170.1.5" --aux-address="my-nas=192.170.1.6" \
+    --subnet=192.168.10.0/25 \
+    --subnet=192.168.20.0/25 \
+    --gateway=192.168.10.100 \
+    --gateway=192.168.20.100 \
+    --aux-address="my-router=192.168.10.5" --aux-address="my-switch=192.168.10.6" \
+    --aux-address="my-printer=192.168.20.5" --aux-address="my-nas=192.168.20.6" \
     my-multihost-network
   ```
 
@@ -286,11 +286,12 @@ examples: |-
 
   | Option                                           | Equivalent  | Description                                           |
   |--------------------------------------------------|-------------|-------------------------------------------------------|
-  | `com.docker.network.bridge.name`                 | -           | bridge name to be used when creating the Linux bridge |
+  | `com.docker.network.bridge.name`                 | -           | Bridge name to be used when creating the Linux bridge |
   | `com.docker.network.bridge.enable_ip_masquerade` | `--ip-masq` | Enable IP masquerading                                |
   | `com.docker.network.bridge.enable_icc`           | `--icc`     | Enable or Disable Inter Container Connectivity        |
   | `com.docker.network.bridge.host_binding_ipv4`    | `--ip`      | Default IP when binding container ports               |
   | `com.docker.network.driver.mtu`                  | `--mtu`     | Set the containers network MTU                        |
+  | `com.docker.network.container_iface_prefix`      | -           | Set a custom prefix for container interfaces          |
 
   The following arguments can be passed to `docker network create` for any
   network driver, again with their approximate equivalents to `docker daemon`.
@@ -299,14 +300,14 @@ examples: |-
   |--------------|----------------|--------------------------------------------|
   | `--gateway`  | -              | IPv4 or IPv6 Gateway for the master subnet |
   | `--ip-range` | `--fixed-cidr` | Allocate IPs from a range                  |
-  | `--internal` | -              | Restrict external access to the network   |
+  | `--internal` | -              | Restrict external access to the network    |
   | `--ipv6`     | `--ipv6`       | Enable IPv6 networking                     |
   | `--subnet`   | `--bip`        | Subnet for network                         |
 
   For example, let's use `-o` or `--opt` options to specify an IP address binding
   when publishing ports:
 
-  ```bash
+  ```console
   $ docker network create \
       -o "com.docker.network.bridge.host_binding_ipv4"="172.19.0.1" \
       simple-network
@@ -327,7 +328,7 @@ examples: |-
   if no services depend on it. Any option available when creating an overlay network
   is also available when creating the ingress network, besides the `--attachable` option.
 
-  ```bash
+  ```console
   $ docker network create -d overlay \
     --subnet=10.11.0.0/16 \
     --ingress \

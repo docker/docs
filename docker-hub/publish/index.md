@@ -1,63 +1,68 @@
 ---
-description: Docker Hub programs and policies for publishers
-keywords: Docker, docker, store, publishers, publish images
-title: Publisher & Certified Content Overview
+description: Docker Verified Publisher Program
+title: Docker Verified Publisher Program
+redirect_from:
+  - /docker-store/byol/
+  - /docker-store/certify-images/
+  - /docker-store/certify-plugins-logging/
+  - /docker-store/customer_faq/
+  - /docker-store/publisher_faq/
+  - /docker-store/trustchain/
+  - /docker-store/publish/
+  - /docker-hub/publish/publish/
+  - /docker-hub/publish/customer_faq/
+  - /docker-hub/publish/publisher_faq/
+  - /docker-hub/publish/certify-images/
+  - /docker-hub/publish/certify-plugins-logging/
+  - /docker-hub/publish/trustchain/
+  - /docker-hub/publish/byol/
 ---
 
-Independent Software Vendors (ISVs) can utilize Docker Hub to distribute and
-sell their Dockerized content. Publish your software through Docker Hub to
-experience the following benefits:
+The Verified Publisher Program provides several features and benefits to Docker
+Hub publishers. The following perks are granted based on participation tier:
 
-* **Access to Docker’s large and growing customer-base.** Docker has experienced
-  rapid adoption, and is popular in dev-ops environments. Docker users have
-  pulled images over twelve billion times and they are increasingly turning to
-  Docker Hub as the canonical source for high-quality, curated content.
+- Verified publisher badge
+- Insights and analytics
+- Vulnerability scanning
+- Additional Docker Business seats
+- Removal of rate limiting for developers
+- Co-marketing opportunities
 
-* **Customers can try or buy your software**, right from your product listing.
-  Your content is accessible for installation, trial, and purchase from
-  Docker Hub and the Docker CLI.
+## Verified publisher badge
 
-* **Use of Docker licensing support.** Control who has access to your software:
-  a) logged-in users, b) users who have purchased a license, or c) all Docker
-  users. We’ll help you manage and control your distribution.
+The verified publisher badge signals high quality, and trust, to developers.
+Images with this badge are verified as high quality, and the content can be
+trusted.
 
-* **We handle checkout.** You don’t need to set up your own digital
-  e-commerce site when you sell your content through Docker Hub. Choose
-  how much you want to charge for your products and we handle the billing.
+![Docker, Inc. org with a verified publisher badge](./images/verified-publisher-badge.png)
 
-* **Seamless updates and upgrades for your customers.** We tell your customers
-  when your content has upgrades or updates available.
+## Insights and analytics
 
-* **Become Docker Certified.** Publisher container images and plugins that meet
-  the quality, security, and support criteria of the program displays a
-  “Docker Certified” badge within the Docker Hub (which can be used in
-  external marketing).
+The [insights and analytics](/docker-hub/publish/insights-analytics){:
+target="blank" rel="noopener" class=""} service provides usage metrics for how
+the community uses your Docker images, and grants you insight into your user's
+behavior.
 
-## Distribution models
+![The insights and analytics tab on the Docker Hub website](./images/insights-and-analytics-tab.png)
 
-Docker Hub welcomes free and open-source content, as well as software sold
-directly by publishers. We support the following commercial models:
+Select the time span you want to view analytics data, and export the data in
+either a summary or raw format. The summary format shows you image pulls per
+tag, and the raw format lists information about every image pull for the
+selected time span. Data points include tag, type of pull, user geolocation,
+client tool (user agent), and more.
 
-### Licensed content through Docker Hub BYOL program
+## Vulnerability scanning
 
-ISVs can use Docker Hub as an entitlement and distribution platform. Using
-APIs provided by Docker, ISVs can entitle users and distribute their Dockerized
-content to many different audiences:
-* Existing customers that want their licensed software made available as Docker containers.
-* New customers that are only interested in consuming their software as Docker containers.
-* Trial or beta customers, where the ISV can distribute feature or time limited software.
+Automatic vulnerability scanning using Snyk for images published to Docker Hub.
+Scanning images ensures that the published content is secure, and underlines to
+developers that it can be trusted. Scanning can be enabled on a per-repository
+basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
+target="blank" rel="noopener" class=""} for more information about how to use
+it.
 
-Docker provides a fulfillment service so that ISVs can programmatically entitle
-users, by creating subscriptions to their content in Docker Hub. For more
-information, see [Bring Your Own License (BYOL) products on Hub](byol.md).
+## Who's eligible to become a verified publisher?
 
-### Plugins and agents
-
-ISVs have the ability to create and distribute [plugin images](https://hub.docker.com/search?certification_status=certified&q=&type=plugin) for their customers to integrate with the ISV's proprietary hardware or cloud infrastructure and Docker Enterprise deployments.
-
-You can [apply to be a publisher](https://goto.docker.com/2019-Partner-Program-Technology.html) and learn more about our [Technology Partner Program](https://www.docker.com/partners/partner-program#/technology_partner).
-
-## What's next?
-
-* Learn about submitting products and content to Docker Hub, see the [publishers guide](publish.md) and the [publisher FAQs](publisher_faq.md).
-* Learn about using Docker Hub to download content, see the [customer FAQs](customer_faq.md).
+Any independent software vendor who distributes software on Docker Hub can join
+the Verified Publisher Program. Find out more by heading to the
+[Docker Verified Publisher Program](https://www.docker.com/partners/programs){:target="_blank"
+rel="noopener" class="_"} page.

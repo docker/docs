@@ -9,7 +9,7 @@ redirect_from:
 Docker logging plugins allow you to extend and customize Docker's logging
 capabilities beyond those of the [built-in logging drivers](configure.md).
 A logging service provider can
-[implement their own plugins](/engine/extend/plugins_logging.md) and make them
+[implement their own plugins](../../../engine/extend/plugins_logging.md) and make them
 available on Docker Hub, or a private registry. This topic shows
 how a user of that logging service can configure Docker to use the plugin.
 

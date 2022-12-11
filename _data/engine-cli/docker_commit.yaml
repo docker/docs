@@ -62,7 +62,7 @@ options:
 examples: |-
   ### Commit a container
 
-  ```bash
+  ```console
   $ docker ps
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
@@ -81,7 +81,7 @@ examples: |-
 
   ### Commit a container with new configurations
 
-  ```bash
+  ```console
   $ docker ps
 
   CONTAINER ID       IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES
@@ -92,7 +92,7 @@ examples: |-
 
   [HOME=/ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin]
 
-  $ docker commit --change "ENV DEBUG true" c3f279d17e0a  svendowideit/testimage:version3
+  $ docker commit --change "ENV DEBUG=true" c3f279d17e0a  svendowideit/testimage:version3
 
   f5283438590d
 
@@ -103,7 +103,7 @@ examples: |-
 
   ### Commit a container with new `CMD` and `EXPOSE` instructions
 
-  ```bash
+  ```console
   $ docker ps
 
   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS              NAMES

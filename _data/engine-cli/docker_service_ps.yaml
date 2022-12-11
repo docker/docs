@@ -1,8 +1,14 @@
 command: docker service ps
 short: List the tasks of one or more services
 long: |-
-  Lists the tasks that are running as part of the specified services. This command
-  has to be run targeting a manager node.
+  Lists the tasks that are running as part of the specified services.
+
+  > **Note**
+  >
+  > This is a cluster management command, and must be executed on a swarm
+  > manager node. To learn about managers and workers, refer to the
+  > [Swarm mode section](https://docs.docker.com/engine/swarm/) in the
+  > documentation.
 usage: docker service ps [OPTIONS] SERVICE [SERVICE...]
 pname: docker service
 plink: docker_service.yaml
@@ -57,7 +63,7 @@ examples: |-
 
   The following command shows all the tasks that are part of the `redis` service:
 
-  ```bash
+  ```console
   $ docker service ps redis
 
   ID             NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE          ERROR  PORTS
@@ -77,7 +83,7 @@ examples: |-
   example, after updating the service to use the `redis:3.0.6` image, the output
   may look like this:
 
-  ```bash
+  ```console
   $ docker service ps redis
 
   ID            NAME         IMAGE        NODE      DESIRED STATE  CURRENT STATE                   ERROR  PORTS
@@ -102,7 +108,7 @@ examples: |-
   default, but is printed if `--no-trunc` is used. The `--no-trunc` option
   also shows the non-truncated task ID, and error-messages, as can be seen below;
 
-  ```bash
+  ```console
   $ docker service ps --no-trunc redis
 
   ID                          NAME         IMAGE                                                                                NODE      DESIRED STATE  CURRENT STATE            ERROR                                                                                           PORTS
@@ -131,7 +137,7 @@ examples: |-
 
   The `id` filter matches on all or a prefix of a task's ID.
 
-  ```bash
+  ```console
   $ docker service ps -f "id=8" redis
 
   ID             NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE      ERROR  PORTS
@@ -143,8 +149,9 @@ examples: |-
 
   The `name` filter matches on task names.
 
-  ```bash
+  ```console
   $ docker service ps -f "name=redis.1" redis
+
   ID            NAME     IMAGE        NODE      DESIRED STATE  CURRENT STATE      ERROR  PORTS
   qihejybwf1x5  redis.1  redis:3.0.6  manager1  Running        Running 8 seconds
   ```
@@ -154,8 +161,9 @@ examples: |-
 
   The `node` filter matches on a node name or a node ID.
 
-  ```bash
+  ```console
   $ docker service ps -f "node=manager1" redis
+
   ID            NAME      IMAGE        NODE      DESIRED STATE  CURRENT STATE      ERROR  PORTS
   0qihejybwf1x  redis.1   redis:3.0.6  manager1  Running        Running 8 seconds
   1x0v8yomsncd  redis.5   redis:3.0.6  manager1  Running        Running 8 seconds
@@ -174,26 +182,27 @@ examples: |-
 
   Valid placeholders for the Go template are listed below:
 
-  Placeholder     | Description
-  ----------------|------------------------------------------------------------------------------------------
-  `.ID`           | Task ID
-  `.Name`         | Task name
-  `.Image`        | Task image
-  `.Node`         | Node ID
-  `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`)
-  `.CurrentState` | Current state of the task
-  `.Error`        | Error
-  `.Ports`        | Task published ports
+  | Placeholder     | Description                                                      |
+  |-----------------|------------------------------------------------------------------|
+  | `.ID`           | Task ID                                                          |
+  | `.Name`         | Task name                                                        |
+  | `.Image`        | Task image                                                       |
+  | `.Node`         | Node ID                                                          |
+  | `.DesiredState` | Desired state of the task (`running`, `shutdown`, or `accepted`) |
+  | `.CurrentState` | Current state of the task                                        |
+  | `.Error`        | Error                                                            |
+  | `.Ports`        | Task published ports                                             |
 
   When using the `--format` option, the `service ps` command will either
   output the data exactly as the template declares or, when using the
   `table` directive, includes column headers as well.
 
   The following example uses a template without headers and outputs the
-  `Name` and `Image` entries separated by a colon for all tasks:
+  `Name` and `Image` entries separated by a colon (`:`) for all tasks:
 
-  ```bash
+  ```console
   $ docker service ps --format "{{.Name}}: {{.Image}}" top
+
   top.1: busybox
   top.2: busybox
   top.3: busybox

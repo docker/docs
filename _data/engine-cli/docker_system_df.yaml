@@ -28,7 +28,7 @@ options:
 examples: |-
   By default the command will just show a summary of the data used:
 
-  ```bash
+  ```console
   $ docker system df
 
   TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
@@ -39,7 +39,7 @@ examples: |-
 
   A more detailed view can be requested using the `-v, --verbose` flag:
 
-  ```bash
+  ```console
   $ docker system df -v
 
   Images space usage:
@@ -68,8 +68,9 @@ examples: |-
   * `UNIQUE SIZE` is the amount of space that is only used by a given image
   * `SIZE` is the virtual size of the image, it is the sum of `SHARED SIZE` and `UNIQUE SIZE`
 
-  > **Note**: Network information is not shown because it doesn't consume the disk
-  > space.
+  > **Note**
+  >
+  > Network information is not shown because it does not consume disk space.
 deprecated: false
 min_api_version: "1.25"
 experimental: false

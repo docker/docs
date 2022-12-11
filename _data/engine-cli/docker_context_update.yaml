@@ -2,7 +2,7 @@ command: docker context update
 short: Update a context
 long: |-
   Updates an existing `context`.
-  See [context create](context_create.md)
+  See [context create](context_create.md).
 usage: docker context update [OPTIONS] CONTEXT
 pname: docker context
 plink: docker_context.yaml
@@ -11,7 +11,7 @@ options:
   value_type: string
   description: |
     Default orchestrator for stack operations to use with this context (swarm|kubernetes|all)
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
   kubernetes: false
@@ -37,11 +37,20 @@ options:
   value_type: stringToString
   default_value: '[]'
   description: set the kubernetes endpoint
-  deprecated: false
+  deprecated: true
   experimental: false
   experimentalcli: false
-  kubernetes: false
+  kubernetes: true
   swarm: false
+examples: |-
+  ### Update an existing context
+
+  ```console
+  $ docker context update \
+      --description "some description" \
+      --docker "host=tcp://myserver:2376,ca=~/ca-file,cert=~/cert-file,key=~/key-file" \
+      my-context
+  ```
 deprecated: false
 experimental: false
 experimentalcli: false
