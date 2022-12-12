@@ -145,3 +145,9 @@ A registry is a hosted service containing repositories of images that responds t
 ### What is included in my Docker Business or Team plan?
 
 For a list of features available in each tier, see [Docker subscription overview](../subscription/index.md).
+
+### Can I delete or deactivate a Docker account for another user?
+
+Only someone with access to the Docker account can deactivate the account. For more details, see [Deactivating an account](../docker-hub/deactivate-account.md/).
+
+If the user is a member of your organization, you can remove the user from your organization. For more details, see [Remove members](../docker-hub/members.md/#remove-members).
