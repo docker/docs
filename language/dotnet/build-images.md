@@ -27,7 +27,7 @@ For our sample application, let’s create a simple application from a template 
 ```console
 $ mkdir dotnet-docker
 $ cd dotnet-docker
-$ dotnet new webApp -n myWebApp -o src --no-https
+$ dotnet new webapp -n myWebApp -o src --no-https
 ```
 
 Output similar to the following appears.
