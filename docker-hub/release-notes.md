@@ -11,7 +11,7 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
-## 2022-12-19
+## 2022-12-12
 
 ### New
 
