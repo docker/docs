@@ -2,7 +2,7 @@
 title: "Remote driver"
 keywords: build, buildx, driver, builder, remote
 redirect_from:
-- /build/buildx/drivers/remote/
+  - /build/buildx/drivers/remote/
 ---
 
 The Buildx remote driver allows for more complex custom build workloads,
@@ -22,12 +22,12 @@ $ docker buildx create \
 The following table describes the available driver-specific options that you can
 pass to `--driver-opt`:
 
-| Parameter    | Type   | Default            | Description                                                |
-|--------------|--------|--------------------|------------------------------------------------------------|
-| `key`        | String |                    | Sets the TLS client key.                                   |
-| `cert`       | String |                    | Sets the TLS client certificate to present to `buildkitd`. |
-| `cacert`     | String |                    | Sets the TLS certificate authority used for validation.    |
-| `servername` | String | Endpoint hostname. | Sets the TLS server name used in requests.                 |
+| Parameter    | Type   | Default            | Description                                                            |
+| ------------ | ------ | ------------------ | ---------------------------------------------------------------------- |
+| `key`        | String |                    | Sets the TLS client key.                                               |
+| `cert`       | String |                    | Absolute path to the TLS client certificate to present to `buildkitd`. |
+| `cacert`     | String |                    | Absolute path to the TLS certificate authority used for validation.    |
+| `servername` | String | Endpoint hostname. | TLS server name used in requests.                                      |
 
 ## Example: Remote BuildKit over Unix sockets
 
@@ -125,7 +125,7 @@ but this is for illustration purposes.)
     $ docker buildx create \
       --name remote-container \
       --driver remote \
-      --driver-opt cacert=.certs/ca.pem,cert=.certs/client-cert.pem,key=.certs/client-key.pem,servername=... \
+      --driver-opt cacert=${PWD}/.certs/ca.pem,cert=${PWD}/.certs/client-cert.pem,key=${PWD}/.certs/client-key.pem,servername=... \
       tcp://localhost:1234
     ```
 
@@ -163,7 +163,7 @@ copied between them.
    $ docker buildx create \
      --name remote-kubernetes \
      --driver remote \
-     --driver-opt cacert=.certs/ca.pem,cert=.certs/client-cert.pem,key=.certs/client-key.pem \
+     --driver-opt cacert=${PWD}/.certs/ca.pem,cert=${PWD}/.certs/client-cert.pem,key=${PWD}/.certs/client-key.pem \
      tcp://buildkitd.default.svc:1234
    ```
 
