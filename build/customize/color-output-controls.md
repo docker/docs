@@ -12,7 +12,7 @@ to set the colors that you would like to use:
 ![Progress output custom colors](../images/buildkit-progress-colors.png)
 
 Setting `NO_COLOR` to anything will disable any colorized output as recommended
-by [no-color.org](https://no-color.org/){:target="_blank" rel="noopener" class="_"}:
+by [no-color.org](https://no-color.org/){:target="blank" rel="noopener" class=""}:
 
 ![Progress output no color](../images/buildkit-progress-nocolor.png)
 
@@ -21,4 +21,4 @@ by [no-color.org](https://no-color.org/){:target="_blank" rel="noopener" class="
 > Parsing errors will be reported but ignored. This will result in default
 > color values being used where needed.
 
-See also [the list of pre-defined colors](https://github.com/moby/buildkit/blob/master/util/progress/progressui/colors.go){:target="_blank" rel="noopener" class="_"}.
+See also [the list of pre-defined colors](https://github.com/moby/buildkit/blob/master/util/progress/progressui/colors.go){:target="blank" rel="noopener" class=""}.

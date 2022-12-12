@@ -10,10 +10,10 @@ keywords: build, buildx, cache, backend, gha, github, actions
 > unstable and may change in future releases.
 
 The GitHub Actions cache utilizes the
-[GitHub-provided Action's cache](https://github.com/actions/cache){: target="_blank" rel="noopener" class="_" } available
+[GitHub-provided Action's cache](https://github.com/actions/cache){:target="blank" rel="noopener" class=""} available
 from within your CI execution environment. This is the recommended cache to use
 inside your GitHub action pipelines, as long as your use case falls within the
-[size and usage limits set by GitHub](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy){: target="_blank" rel="noopener" class="_" }.
+[size and usage limits set by GitHub](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy){:target="blank" rel="noopener" class=""}.
 
 > **Note**
 >
@@ -38,7 +38,7 @@ The following table describes the available CSV parameters that you can pass to
 `--cache-to` and `--cache-from`.
 
 | Name    | Option                  | Type        | Default                         | Description                                  |
-| ------- | ----------------------- | ----------- | ------------------------------- | -------------------------------------------- |
+|---------|-------------------------|-------------|---------------------------------|----------------------------------------------|
 | `url`   | `cache-to`,`cache-from` | String      | `$ACTIONS_CACHE_URL`            | Cache server URL, see [authentication][1].   |
 | `token` | `cache-to`,`cache-from` | String      | `$ACTIONS_RUNTIME_TOKEN`        | Access token, see [authentication][1].       |
 | `scope` | `cache-to`,`cache-from` | String      | Name of the current Git branch. | Cache scope, see [scope][2]                  |
@@ -54,7 +54,7 @@ If the `url` or `token` parameters are left unspecified, the `gha` cache backend
 will fall back to using environment variables. If you invoke the `docker buildx`
 command manually from an inline step, then the variables must be manually
 exposed (using
-[`crazy-max/ghaction-github-runtime`](https://github.com/crazy-max/ghaction-github-runtime){: target="_blank" rel="noopener" class="_" },
+[`crazy-max/ghaction-github-runtime`](https://github.com/crazy-max/ghaction-github-runtime){:target="blank" rel="noopener" class=""},
 for example).
 
 ## Scope
@@ -78,15 +78,14 @@ $ docker buildx build --push -t <registry>/<image2> \
   --cache-from type=gha,url=...,token=...,scope=$GITHUB_REF_NAME-image2 .
 ```
 
-GitHub's
-[cache access restrictions](https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache){: target="_blank" rel="noopener" class="_" },
+GitHub's [cache access restrictions](https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache){:target="blank" rel="noopener" class=""},
 still apply. Only the cache for the current branch, the base branch and the
 default branch is accessible by a workflow.
 
 ### Using `docker/build-push-action`
 
 When using the
-[`docker/build-push-action`](https://github.com/docker/build-push-action){: target="_blank" rel="noopener" class="_" }, the
+[`docker/build-push-action`](https://github.com/docker/build-push-action){:target="blank" rel="noopener" class=""}, the
 `url` and `token` parameters are automatically populated. No need to manually
 specify them, or include any additional workarounds.
 
@@ -108,7 +107,7 @@ For example:
 For an introduction to caching see [Optimizing builds with cache](../index.md).
 
 For more information on the `gha` cache backend, see the
-[BuildKit README](https://github.com/moby/buildkit#github-actions-cache-experimental){: target="_blank" rel="noopener" class="_" }.
+[BuildKit README](https://github.com/moby/buildkit#github-actions-cache-experimental){:target="blank" rel="noopener" class=""}.
 
 For more information about using GitHub Actions with Docker, see
 [Introduction to GitHub Actions](../../../ci/github-actions/index.md)

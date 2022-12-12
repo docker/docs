@@ -41,7 +41,7 @@ The following table describes the available CSV parameters that you can pass to
 `--cache-to` and `--cache-from`.
 
 | Name                | Option                  | Type                    | Default | Description                                                          |
-| ------------------- | ----------------------- | ----------------------- | ------- | -------------------------------------------------------------------- |
+|---------------------|-------------------------|-------------------------|---------|----------------------------------------------------------------------|
 | `ref`               | `cache-to`,`cache-from` | String                  |         | Full name of the cache image to import.                              |
 | `dest`              | `cache-to`              | String                  |         | Path of the local directory where cache gets exported to.            |
 | `mode`              | `cache-to`              | `min`,`max`             | `min`   | Cache layers to export, see [cache mode][1].                         |
@@ -69,4 +69,4 @@ fail, but the build will continue.
 For an introduction to caching see [Optimizing builds with cache](../index.md).
 
 For more information on the `registry` cache backend, see the
-[BuildKit README](https://github.com/moby/buildkit#registry-push-image-and-cache-separately){: target="_blank" rel="noopener" class="_" }.
+[BuildKit README](https://github.com/moby/buildkit#registry-push-image-and-cache-separately){:target="blank" rel="noopener" class=""}.

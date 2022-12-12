@@ -93,7 +93,7 @@ $ docker buildx bake build
 
 ### Variable
 
-Similar to how Terraform provides a way to [define variables](https://www.terraform.io/docs/configuration/variables.html#declaring-an-input-variable){:target="_blank" rel="noopener" class="_"},
+Similar to how Terraform provides a way to [define variables](https://www.terraform.io/docs/configuration/variables.html#declaring-an-input-variable){:target="blank" rel="noopener" class=""},
 the HCL file format also supports variable block definitions. These can be used
 to define variables with values provided by the current environment, or a
 default value when unset:
@@ -120,8 +120,8 @@ $ TAG=dev docker buildx bake webapp-dev  # will use the TAG environment variable
 
 ### Functions
 
-A [set of generally useful functions](https://github.com/docker/buildx/blob/master/bake/hclparser/stdlib.go){:target="_blank" rel="noopener" class="_"}
-provided by [go-cty](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib){:target="_blank" rel="noopener" class="_"}
+A [set of generally useful functions](https://github.com/docker/buildx/blob/master/bake/hclparser/stdlib.go){:target="blank" rel="noopener" class=""}
+provided by [go-cty](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib){:target="blank" rel="noopener" class=""}
 are available for use in HCL files:
 
 ```hcl
@@ -135,7 +135,7 @@ target "webapp-dev" {
 }
 ```
 
-In addition, [user defined functions](https://github.com/hashicorp/hcl/tree/main/ext/userfunc){:target="_blank" rel="noopener" class="_"}
+In addition, [user defined functions](https://github.com/hashicorp/hcl/tree/main/ext/userfunc){:target="blank" rel="noopener" class=""}
 are also supported:
 
 ```hcl
@@ -359,7 +359,7 @@ $ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
 ```
 
 As you can see the context is fixed to `https://github.com/docker/cli.git` even if
-[no context is actually defined](https://github.com/docker/cli/blob/2776a6d694f988c0c1df61cad4bfac0f54e481c8/docker-bake.hcl#L17-L26){:target="_blank" rel="noopener" class="_"}
+[no context is actually defined](https://github.com/docker/cli/blob/2776a6d694f988c0c1df61cad4bfac0f54e481c8/docker-bake.hcl#L17-L26){:target="blank" rel="noopener" class=""}
 in the definition.
 
 If you want to access the main context for bake command from a bake file
