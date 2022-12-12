@@ -96,7 +96,7 @@ but this is for illustration purposes.)
 
 1.  Generate certificates for BuildKit.
 
-    You can use the [create-certs.sh](https://github.com/moby/buildkit/v0.10.3/master/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""}
+    You can use the [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""}
     script as a starting point. Note that while it's possible to expose BuildKit
     over TCP without using TLS, it's not recommended. Doing so allows arbitrary
     access to BuildKit without credentials.
@@ -152,7 +152,7 @@ copied between them.
    [here](https://github.com/moby/buildkit/tree/master/examples/kubernetes){:target="blank" rel="noopener" class=""}.
 
    Following the guide, create certificates for the BuildKit daemon and client
-   using [create-certs.sh](https://github.com/moby/buildkit/blob/v0.10.3/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""},
+   using [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""},
    and create a deployment of BuildKit pods with a service that connects to
    them.
 
