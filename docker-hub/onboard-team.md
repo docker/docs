@@ -14,7 +14,6 @@ Before you start to on board your organization, ensure that you've completed the
 - You have a Docker Team subscription. [Buy now](https://www.docker.com/pricing/) if you haven't subscribed to Docker Team yet.
 - You are familiar with Docker terminology. If you discover any unfamiliar terms, see the [glossary](/glossary/#docker) or [FAQs](../docker-hub/onboarding-faqs.md).
 
-
 ## Step 1: Identify your Docker users and their Docker accounts
 
 To begin, you should identify which users you will need to add to your Docker Team organization. Identifying your users will help you efficiently allocate your subscription's seats and manage access.
@@ -29,15 +28,17 @@ To begin, you should identify which users you will need to add to your Docker Te
    - To create a new account, instruct your users to go [sign up](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"} using their email address in your organization's domain.
 3. Ask your Docker sales representative to provide a list of Docker accounts that use an email address in your organization's domain.
 
-## Step 2: Add members
+## Step 2: Invite owners
 
-Now that you have a Docker Team organization, it's time to start adding members.
+Now that you have a Docker Business organization, it's time to start adding owners to help you set up and manage your organization. Owners can add or remove members, and configure Single Sign-on as well as other security settings.
 
-Before you add members, you must create at least one team. For details, see [Create a team](../docker-hub/orgs.md/#create-a-team){: target="_blank" rel="noopener" class="_"}.
+To add an owner, invite a user to the **owners** team. For more details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}.
 
-Add members to your organization by inviting them to a team using their Docker ID or email address. For details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}.
+## Step 3: Invite members
 
-## Step 3: Enforce sign-in for Docker Desktop
+Add members to your organization using a CSV file, or by entering their email addresses. For more details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}
+
+## Step 4: Enforce sign-in for Docker Desktop
 
 By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. To ensure that a user signs in to a Docker account that is a member of your organization and that the
 organization’s settings apply to the user’s session, you can use a `registry.json` file. For details, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md){: target="_blank" rel="noopener" class="_"}.
@@ -50,6 +51,6 @@ Create and manage your repositories:
 - [Consolidate a repository](../docker-hub/repos/index.md/#consolidating-a-repository) from your personal account to your organization.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 
-Your Docker Team subscription provides many more [additional features](../subscription/index.md).
+Your Docker Team subscription provides many more additional features. [Learn more](../subscription/index.md).
 
 

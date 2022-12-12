@@ -71,7 +71,6 @@ The example below shows an extension that uses a binary as part of its operation
 In the `Dockerfile`, we download the binary depending on the target architecture:
 
 ```Dockerfile
-
 #syntax=docker/dockerfile:1.3-labs
 
 FROM alpine AS dl

@@ -17,9 +17,11 @@ Docker Linux packages also include Docker Buildx when installed using the
 ## Dockerfile
 
 Here is how to install and use Buildx inside a Dockerfile through the
-[`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin) image:
+[`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin){:target="blank" rel="noopener" class=""}
+image:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM docker
 COPY --from=docker/buildx-bin:latest /buildx /usr/libexec/docker/cli-plugins/docker-buildx
 RUN docker buildx version
@@ -39,7 +41,7 @@ RUN docker buildx version
 > that you follow the [instructions specific for your distribution](#linux-packages).
 {: .important}
 
-You can also download the latest binary from the [releases page on GitHub](https://github.com/docker/buildx/releases/latest){:target="_blank" rel="noopener" class="_"}.
+You can also download the latest binary from the [releases page on GitHub](https://github.com/docker/buildx/releases/latest){:target="blank" rel="noopener" class=""}.
 
 Rename the relevant binary and copy it to the destination matching your OS:
 

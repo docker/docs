@@ -2,7 +2,7 @@
 title: "User defined HCL functions"
 keywords: build, buildx, bake, buildkit, hcl
 redirect_from:
-- /build/bake/hcl-funcs/
+- /build/customize/bake/hcl-funcs/
 ---
 
 ## Using interpolation to tag an image with the git sha
@@ -98,7 +98,7 @@ $ TAG=$(git rev-parse --short HEAD) docker buildx bake --print webapp
 
 ## Using the `add` function
 
-You can use [`go-cty` stdlib functions](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib){:target="_blank" rel="noopener" class="_"}.
+You can use [`go-cty` stdlib functions](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib){:target="blank" rel="noopener" class=""}.
 Here we are using the `add` function.
 
 ```hcl
@@ -144,7 +144,7 @@ $ docker buildx bake --print webapp
 
 ## Defining an `increment` function
 
-It also supports [user defined functions](https://github.com/hashicorp/hcl/tree/main/ext/userfunc){:target="_blank" rel="noopener" class="_"}.
+It also supports [user defined functions](https://github.com/hashicorp/hcl/tree/main/ext/userfunc){:target="blank" rel="noopener" class=""}.
 The following example defines a simple an `increment` function.
 
 ```hcl

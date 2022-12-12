@@ -24,7 +24,7 @@ The following table describes the available parameters that you can pass to
 `--output` for `type=image`:
 
 | Parameter              | Type                                   | Default | Description                                                                                                                                                                                                                         |
-| ---------------------- | -------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------------|----------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `name`                 | String                                 |         | Specify image name(s)                                                                                                                                                                                                               |
 | `push`                 | `true`,`false`                         | `false` | Push after creating the image.                                                                                                                                                                                                      |
 | `push-by-digest`       | `true`,`false`                         | `false` | Push image without name.                                                                                                                                                                                                            |
@@ -58,9 +58,9 @@ $ docker buildx build \
 ```
 
 For more information about annotations, see
-[BuildKit documentation](https://github.com/moby/buildkit/blob/master/docs/annotations.md){: target="_blank" rel="noopener" class="_" }.
+[BuildKit documentation](https://github.com/moby/buildkit/blob/master/docs/annotations.md){:target="blank" rel="noopener" class=""}.
 
 ## Further reading
 
 For more information on the `image` or `registry` exporters, see the
-[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#imageregistry){: target="_blank" rel="noopener" class="_" }.
+[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#imageregistry){:target="blank" rel="noopener" class=""}.

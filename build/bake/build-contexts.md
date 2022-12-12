@@ -2,12 +2,12 @@
 title: "Defining additional build contexts and linking targets"
 keywords: build, buildx, bake, buildkit, hcl
 redirect_from:
-- /build/bake/build-contexts/
+- /build/customize/bake/build-contexts/
 ---
 
 In addition to the main `context` key that defines the build context each target
 can also define additional named contexts with a map defined with key `contexts`.
-These values map to the `--build-context` flag in the [build command](../../../engine/reference/commandline/buildx_build.md#build-context).
+These values map to the `--build-context` flag in the [build command](../../engine/reference/commandline/buildx_build.md#build-context).
 
 Inside the Dockerfile these contexts can be used with the `FROM` instruction or `--from` flag.
 

@@ -25,11 +25,9 @@ Starting with the [18.09 release](../engine/release-notes/18.09.md#18090),
 Engine is shipped with Moby [BuildKit](buildkit/index.md), the new component for
 executing your builds by default.
 
-The new client
-[Docker Buildx](https://github.com/docker/buildx){:target="_blank"
-rel="noopener" class="_"}, is a CLI plugin that extends the docker command with
-the full support of the features provided by [BuildKit](buildkit/index.md)
-builder toolkit.
+The new client [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""},
+is a CLI plugin that extends the docker command with the full support of the
+features provided by [BuildKit](buildkit/index.md) builder toolkit.
 [`docker buildx build` command](../engine/reference/commandline/buildx_build.md)
 provides the same user experience as `docker build` with many new features like
 creating scoped [builder instances](building/drivers/index.md), building against
@@ -144,11 +142,11 @@ advanced scenarios.
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/build/customize/bake/">
+          <a href="/build/bake/">
            <img src="/assets/images/build-bake.svg" alt="Cake silhouette" width="70px" height="70px">
           </a>
         </div>
-        <h2><a href="/build/customize/bake/">Bake</a></h2>
+        <h2><a href="/build/bake/">Bake</a></h2>
         <p>
           Orchestrate your builds with Bake.
         </p>

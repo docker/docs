@@ -63,6 +63,7 @@ In the yaml file, the build context `backend` specifies that that the container 
 The `development` stage of the Dockerfile is defined as follows:
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM golang:1.16-alpine AS build
 WORKDIR /go/src/github.com/org/repo
 COPY . .

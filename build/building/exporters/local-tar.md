@@ -26,10 +26,10 @@ $ docker buildx build --output type=tar[,parameters] .
 The following table describes the available parameters:
 
 | Parameter | Type   | Default | Description           |
-| --------- | ------ | ------- | --------------------- |
+|-----------|--------|---------|-----------------------|
 | `dest`    | String |         | Path to copy files to |
 
 ## Further reading
 
 For more information on the `local` or `tar` exporters, see the
-[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#local-directory){: target="_blank" rel="noopener" class="_" }.
+[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#local-directory){:target="blank" rel="noopener" class=""}.

@@ -36,10 +36,10 @@ image, just like you would for any other containerized application.
 The following links provide instructions for how you can get started using
 Docker for building your applications in CI:
 
-- [GitHub Actions](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action){: target="_blank" rel="noopener" class="_" }
-- [GitLab](https://docs.gitlab.com/runner/executors/docker.html){: target="_blank" rel="noopener" class="_" }
-- [Circle CI](https://circleci.com/docs/using-docker/){: target="_blank" rel="noopener" class="_" }
-- [Render](https://render.com/docs/docker){: target="_blank" rel="noopener" class="_" }
+- [GitHub Actions](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action){:target="blank" rel="noopener" class=""}
+- [GitLab](https://docs.gitlab.com/runner/executors/docker.html){:target="blank" rel="noopener" class=""}
+- [Circle CI](https://circleci.com/docs/using-docker/){:target="blank" rel="noopener" class=""}
+- [Render](https://render.com/docs/docker){:target="blank" rel="noopener" class=""}
 
 ### Docker in Docker
 
@@ -47,7 +47,7 @@ You can also use a Dockerized build environment to build container images using
 Docker. That is, your build environment runs inside a container which itself is
 equipped to run Docker builds. This method is referred to as "Docker in Docker".
 
-Docker provides an official [Docker image](https://hub.docker.com/_/docker){: target="_blank" rel="noopener" class="_" }
+Docker provides an official [Docker image](https://hub.docker.com/_/docker){:target="blank" rel="noopener" class=""}
 that you can use for this purpose.
 
 ## What's next

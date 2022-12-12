@@ -14,19 +14,19 @@ components for building, annotating, and pushing images.
 
 The following GitHub Actions are available:
 
-- [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images){: target="_blank" rel="noopener" class="_" }:
+- [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images){:target="blank" rel="noopener" class=""}:
   build and push Docker images with BuildKit.
-- [Docker Login](https://github.com/marketplace/actions/docker-login){: target="_blank" rel="noopener" class="_" }:
+- [Docker Login](https://github.com/marketplace/actions/docker-login){:target="blank" rel="noopener" class=""}:
   sign in to a Docker registry.
-- [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){: target="_blank" rel="noopener" class="_" }:
+- [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:target="blank" rel="noopener" class=""}:
   initiates a BuildKit builder.
-- [Docker Metadata action](https://github.com/marketplace/actions/docker-metadata-action){: target="_blank" rel="noopener" class="_" }:
+- [Docker Metadata action](https://github.com/marketplace/actions/docker-metadata-action){:target="blank" rel="noopener" class=""}:
   extracts metadata from Git reference and GitHub events.
-- [Docker Setup QEMU](https://github.com/marketplace/actions/docker-setup-qemu){: target="_blank" rel="noopener" class="_" }:
+- [Docker Setup QEMU](https://github.com/marketplace/actions/docker-setup-qemu){:target="blank" rel="noopener" class=""}:
   installs [QEMU](https://github.com/qemu/qemu) static binaries for multi-arch
   builds.
-- [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake){: target="_blank" rel="noopener" class="_" }:
-  enables using high-level builds with [Bake](../../customize/bake/index.md).
+- [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake){:target="blank" rel="noopener" class=""}:
+  enables using high-level builds with [Bake](../../bake/index.md).
 
 Using Docker's actions provides an easy-to-use interface, while still allowing
 flexibility for customizing build parameters.
