@@ -13,7 +13,7 @@ When your organization has configured SSO, and you have verified your domains, y
 
 Uncaptured users can pose a security threat to your environment since your organization's security settings aren't applied to the user's sessions who aren't part of your organization. In addition, you won't have visibility into the activity of uncaptured users.
 
-You can add uncaptured users to your organization in order to gain visibility into their activity and apply your organization's security settings. Additionally, you can enforce sign-in to ensure that only members of your organization can sign in to Docker Desktop in your environment. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md).
+You can add uncaptured users to your organization to gain visibility into their activity and apply your organization's security settings. Additionally, you can enforce sign-in to ensure that only members of your organization can sign in to Docker Desktop in your environment. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md).
 
 ## Audit your domains for uncaptured users
 
