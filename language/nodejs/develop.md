@@ -49,28 +49,18 @@ $ docker run -it --rm -d -v mongodb:/data/db \
 
 Okay, now that we have a running MongoDB, let’s update `server.js` to use MongoDB and not an in-memory data store.
 
-```javascript
-const ronin 		= require( 'ronin-server' )
-const database  = require( 'ronin-database' )
-const mocks 		= require( 'ronin-mocks' )
+```js
+const ronin = require('ronin-server')
+const database = require('ronin-database')
+const mocks = require('ronin-mocks')
 
 async function main() {
-
-    try {
-    await database.connect( process.env.CONNECTIONSTRING )
-    
-    const server = ronin.server({
-            port: process.env.SERVER_PORT
-        })
-
-        server.use( '/', mocks.server( server.Router()) )
-
-    const result = await server.start()
-        console.info( result )
-    
-    } catch( error ) {
-        console.error( error )
-    }
+  await database.connect( process.env.CONNECTIONSTRING ).catch(console.error)
+  const server = ronin.server({ port: process.env.SERVER_PORT })
+  server.use('/', mocks.server(server.Router()))
+  
+  const result = await server.start().catch(console.error)
+  console.info(result)
 }
 
 main()
@@ -170,7 +160,7 @@ Open the `package.json` file and add the following line to the scripts section:
 
 As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s run the following command in a terminal to install nodemon into our project directory.
 
-```json
+```console
 $ npm install nodemon
 ```
 
@@ -215,9 +205,7 @@ Let’s change the source code and then set a breakpoint.
 Add the following code above the existing `server.use()` statement, and save the file. Make sure that the `return` statement is on a line of its own, as shown here, so you can set the breakpoint appropriately.
 
 ```js
- server.use( '/foo', (req, res) => {
-   return res.json({ "foo": "bar" })
- })
+server.use('/foo', (req, res) => res.json({ "foo": "bar" }))
 ```
 
 If you take a look at the terminal where our Compose application is running, you’ll see that nodemon noticed the changes and reloaded our application.
