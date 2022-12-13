@@ -2,7 +2,7 @@
 title: "Remote driver"
 keywords: build, buildx, driver, builder, remote
 redirect_from:
-- /build/buildx/drivers/remote/
+  - /build/buildx/drivers/remote/
 ---
 
 The Buildx remote driver allows for more complex custom build workloads,
@@ -22,12 +22,12 @@ $ docker buildx create \
 The following table describes the available driver-specific options that you can
 pass to `--driver-opt`:
 
-| Parameter    | Type   | Default            | Description                                                |
-|--------------|--------|--------------------|------------------------------------------------------------|
-| `key`        | String |                    | Sets the TLS client key.                                   |
-| `cert`       | String |                    | Sets the TLS client certificate to present to `buildkitd`. |
-| `cacert`     | String |                    | Sets the TLS certificate authority used for validation.    |
-| `servername` | String | Endpoint hostname. | Sets the TLS server name used in requests.                 |
+| Parameter    | Type   | Default            | Description                                                            |
+| ------------ | ------ | ------------------ | ---------------------------------------------------------------------- |
+| `key`        | String |                    | Sets the TLS client key.                                               |
+| `cert`       | String |                    | Absolute path to the TLS client certificate to present to `buildkitd`. |
+| `cacert`     | String |                    | Absolute path to the TLS certificate authority used for validation.    |
+| `servername` | String | Endpoint hostname. | TLS server name used in requests.                                      |
 
 ## Example: Remote BuildKit over Unix sockets
 
@@ -96,7 +96,7 @@ but this is for illustration purposes.)
 
 1.  Generate certificates for BuildKit.
 
-    You can use the [create-certs.sh](https://github.com/moby/buildkit/v0.10.3/master/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""}
+    You can use the [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""}
     script as a starting point. Note that while it's possible to expose BuildKit
     over TCP without using TLS, it's not recommended. Doing so allows arbitrary
     access to BuildKit without credentials.
@@ -111,9 +111,9 @@ but this is for illustration purposes.)
       -v $PWD/.certs:/etc/buildkit/certs \
       moby/buildkit:latest \
       --addr tcp://0.0.0.0:1234 \
-      --tlscacert /etc/buildkit/certs/ca.pem \
-      --tlscert /etc/buildkit/certs/daemon-cert.pem \
-      --tlskey /etc/buildkit/certs/daemon-key.pem
+      --tlscacert /etc/buildkit/certs/daemon/ca.pem \
+      --tlscert /etc/buildkit/certs/daemon/cert.pem \
+      --tlskey /etc/buildkit/certs/daemon/key.pem
     ```
 
     This command starts a BuildKit container and exposes the daemon's port 1234
@@ -125,7 +125,7 @@ but this is for illustration purposes.)
     $ docker buildx create \
       --name remote-container \
       --driver remote \
-      --driver-opt cacert=.certs/ca.pem,cert=.certs/client-cert.pem,key=.certs/client-key.pem,servername=... \
+      --driver-opt cacert=${PWD}/.certs/client/ca.pem,cert=${PWD}/.certs/client/cert.pem,key=${PWD}/.certs/client/key.pem,servername=<TLS_SERVER_NAME> \
       tcp://localhost:1234
     ```
 
@@ -152,7 +152,7 @@ copied between them.
    [here](https://github.com/moby/buildkit/tree/master/examples/kubernetes){:target="blank" rel="noopener" class=""}.
 
    Following the guide, create certificates for the BuildKit daemon and client
-   using [create-certs.sh](https://github.com/moby/buildkit/blob/v0.10.3/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""},
+   using [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""},
    and create a deployment of BuildKit pods with a service that connects to
    them.
 
@@ -163,7 +163,7 @@ copied between them.
    $ docker buildx create \
      --name remote-kubernetes \
      --driver remote \
-     --driver-opt cacert=.certs/ca.pem,cert=.certs/client-cert.pem,key=.certs/client-key.pem \
+     --driver-opt cacert=${PWD}/.certs/client/ca.pem,cert=${PWD}/.certs/client/cert.pem,key=${PWD}/.certs/client/key.pem \
      tcp://buildkitd.default.svc:1234
    ```
 

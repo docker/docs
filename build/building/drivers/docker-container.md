@@ -139,6 +139,44 @@ $ docker buildx build \
 > slower than native builds. Compute-heavy tasks like compilation and
 > compression/decompression will likely take a large performance hit.
 
+## Custom network
+
+You can customize the network that the builder container uses. This is useful
+if you need to use a specific network for your builds.
+
+For example, let's [create a network](../../../engine/reference/commandline/network_create.md)
+named `foonet`:
+
+```console
+$ docker network create foonet
+```
+
+Now create a [`docker-container` builder](../../../engine/reference/commandline/buildx_create.md)
+that will use this network:
+
+```console
+$ docker buildx create --use \
+  --name mybuilder \
+  --driver docker-container \
+  --driver-opt "network=foonet"
+```
+
+Boot and [inspect `mybuilder`](../../../engine/reference/commandline/buildx_inspect.md):
+
+```console
+$ docker buildx inspect --bootstrap
+```
+
+[Inspect the builder container](../../../engine/reference/commandline/inspect.md)
+and see what network is being used:
+
+{% raw %}
+```console
+$ docker inspect buildx_buildkit_mybuilder0 --format={{.NetworkSettings.Networks}}
+map[foonet:0xc00018c0c0]
+```
+{% endraw %}
+
 ## Further reading
 
 For more information on the Docker container driver, see the
