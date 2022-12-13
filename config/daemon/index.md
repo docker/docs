@@ -43,8 +43,9 @@ won't start and prints an error message.
 
 To configure the Docker daemon using a JSON file, create a file at
 `/etc/docker/daemon.json` on Linux systems, or
-`C:\ProgramData\docker\config\daemon.json` on Windows. On macOS go to the whale
-in the taskbar and select **Preferences** > **Daemon** > **Advanced**.
+`C:\ProgramData\docker\config\daemon.json` on Windows. On macOS, go to the Docker
+menu ![whale menu](/assets/images/whale-x.svg){: .inline} in the taskbar and select
+**Preferences** > **Docker Engine**.
 
 Here's what the configuration file looks like:
 
