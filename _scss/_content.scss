@@ -1,11 +1,11 @@
-
-.content, p {
+.content,
+p {
   line-height: 24px;
-  clear:       both;
+  clear: both;
 
   img {
-    display:   block;
-    height:    auto;
+    display: block;
+    height: auto;
     max-width: 100%;
   }
 }
@@ -13,35 +13,36 @@
 /*
  * Code formatting *************************************************************
  */
-pre, code {
-  background-color: $light-page-background!important;
+pre,
+code {
+  background-color: $light-page-background !important;
   color: $light-blue-600 !important;
 }
 
 pre {
-    border: 0;
-    border-radius: 4px;
-    display: block;
-    padding: 20.5px!important;
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.42857143;
-    word-break: normal !important;
-    word-wrap: break-word;
+  border: 0;
+  border-radius: 4px;
+  display: block;
+  padding: 20.5px !important;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.42857143;
+  word-break: normal !important;
+  word-wrap: break-word;
 
-    code {
-        overflow-x: auto;
-        overflow-wrap: normal;
-        white-space: pre;
-    }
+  code {
+    overflow-x: auto;
+    overflow-wrap: normal;
+    white-space: pre;
+  }
 }
 
 code {
-    border-radius: 2px;
-    font-size: 90%;
-    padding: 3px 7px;
-    overflow-x: scroll;
-    white-space: nowrap;
+  border-radius: 2px;
+  font-size: 90%;
+  padding: 3px 7px;
+  overflow-x: scroll;
+  white-space: nowrap;
 }
 
 .highlighter-rouge {
@@ -80,6 +81,23 @@ code {
       align-items: center;
       background: none;
       border: none;
+      .copy-icon {
+        height: 24px;
+        width: 24px;
+        background-color: $light-grey-500;
+        .night & {
+          background-color: $white;
+        }
+        /* set "copy" logo as a mask */
+        -webkit-mask: url("/assets/images/copy-icon.svg") no-repeat center;
+        mask: url("/assets/images/copy-icon.svg") no-repeat center;
+      }
+      &.copied .copy-icon {
+        /* change logo if .copied class on parent */
+        -webkit-mask: url("/assets/images/copy-icon-copied.svg") no-repeat
+          center;
+        mask: url("/assets/images/copy-icon-copied.svg") no-repeat center;
+      }
     }
   }
 }
@@ -89,9 +107,9 @@ code {
  */
 
 .component-container {
-  padding:  0;
-  margin:   0 0 50px;
-  width:    100%;
+  padding: 0;
+  margin: 0 0 50px;
+  width: 100%;
 
   .row {
     display: flex;
@@ -121,31 +139,32 @@ code {
     h2 {
       font-size: 18px;
     }
-    h2, h3, p {
+    h2,
+    h3,
+    p {
       margin: 0;
     }
   }
 }
 
 a.anchorLink {
-    font-size: 0.5em;
-    margin-left: 5px;
-    visibility: hidden;
+  font-size: 0.5em;
+  margin-left: 5px;
+  visibility: hidden;
 }
 
 h1:hover > a.anchorLink,
 h2:hover > a.anchorLink,
-h3:hover > a.anchorLink
-{
-    visibility: visible;
+h3:hover > a.anchorLink {
+  visibility: visible;
 }
 
 a.glossary {
-    color: $body-text;
-    outline: none;
-     &:hover {
-        opacity: 1;
-    }
+  color: $body-text;
+  outline: none;
+  &:hover {
+    opacity: 1;
+  }
 }
 
 a.accept-eula {
