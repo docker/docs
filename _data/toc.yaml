@@ -1710,6 +1710,8 @@ manuals:
 
 - sectiontitle: Docker Hub
   section:
+  - path: /docker-hub/overview/
+    title: Overview
   - path: /docker-hub/
     title: Quickstart
   - path: /docker-id/
