@@ -164,7 +164,7 @@ The `root` property is the path to the frontend application in the extension's c
 system to deploy it on the host.
 The `src` property is the path to the HTML entry point of the frontend application within the `root` folder.
 
-For more information on the `ui` section of hte `metadata.json`, see [Metadata](../../extensions/METADATA.md#ui-section).
+For more information on the `ui` section of hte `metadata.json`, see [Metadata](../../architecture/metadata.md#ui-section).
 
 ## Build the extension and install it
 
@@ -343,6 +343,7 @@ export function App() {
 ## What's next?
 
 - Learn how to [build and install your extension](../build-install.md).
+- Learn more about extensions [architecture](../../architecture/index.md).
 - For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
 - If you want to set up user authentication for the extension, see [Authentication](../../guides/oauth2-flow.md).
 

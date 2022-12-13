@@ -1195,8 +1195,6 @@ manuals:
           section:
             - title: Overview
               path: /desktop/extensions-sdk/extensions/
-            - title: Metadata
-              path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
             - title: Package and release your extension
@@ -1207,6 +1205,12 @@ manuals:
               path: /desktop/extensions-sdk/extensions/publish/
             - title: Build multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
+        - sectiontitle: "Architecture"
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/architecture/
+            - title: Metadata
+              path: /desktop/extensions-sdk/architecture/metadata/
         - sectiontitle: "Design and UI styling"
           section:
              - title: Guidelines
@@ -1221,6 +1225,8 @@ manuals:
           section:
             - title: Invoke host binaries
               path: /desktop/extensions-sdk/guides/invoke-host-binaries/
+            - title: Use the Docker socket from the extension backend
+              path: /desktop/extensions-sdk/guides/use-docker-socket-from-backend/
             - title: Interacting with Kubernetes
               path: /desktop/extensions-sdk/guides/kubernetes/
             - title: Authentication
