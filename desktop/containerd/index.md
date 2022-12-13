@@ -235,7 +235,7 @@ View Tags on DockerHub to see multi-platform result:
     > `Multiple platforms feature is currently not supported for docker driver. Please switch to a different driver`.
     >
     > Install a newer version of Buildx following the instructions on
-    > [Docker Buildx Manual download](../../build/buildx/install/#manual-download).
+    > [how to manually download Buildx](../../build/install-buildx/#download-manually).
 
 - In Docker Desktop 4.12.0, the containerd image store feature is incompatible
   with the Kubernetes cluster support. Turn off the containerd image store

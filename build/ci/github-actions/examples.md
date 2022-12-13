@@ -201,12 +201,12 @@ actions.
 
 > **Note**
 >
-> See [Cache storage backends](../../building/cache/backends/index.md) for more
+> See [Cache storage backends](../../cache/backends/index.md) for more
 > details about cache storage backends.
 
 ### Inline cache
 
-In most cases you want to use the [inline cache exporter](../../building/cache/backends/inline.md).
+In most cases you want to use the [inline cache exporter](../../cache/backends/inline.md).
 However, note that the `inline` cache exporter only supports `min` cache mode.
 To use `max` cache mode, push the image and the cache separately using the
 registry cache exporter with the `cache-to` option, as shown in the [registry cache example](#registry-cache).
@@ -251,7 +251,7 @@ jobs:
 ### Registry cache
 
 You can import/export cache from a cache manifest or (special) image
-configuration on the registry with the [registry cache exporter](../../building/cache/backends/registry.md).
+configuration on the registry with the [registry cache exporter](../../cache/backends/registry.md).
 
 {% raw %}
 ```yaml
@@ -300,7 +300,7 @@ jobs:
 > if you experience any issues.
 {: .warning }
 
-The [GitHub Actions cache exporter](../../building/cache/backends/gha.md)
+The [GitHub Actions cache exporter](../../cache/backends/gha.md)
 backend uses the [GitHub Cache API](https://github.com/tonistiigi/go-actions-cache/blob/master/api.md)
 to fetch and upload cache blobs. That's why you should only use this cache
 backend in a GitHub Action workflow, as the `url` (`$ACTIONS_CACHE_URL`) and
@@ -354,7 +354,7 @@ jobs:
 {: .warning }
 
 You can also leverage [GitHub cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows){:target="blank" rel="noopener" class=""}
-using the [actions/cache](https://github.com/actions/cache) and [local cache exporter](../../building/cache/backends/local.md)
+using the [actions/cache](https://github.com/actions/cache) and [local cache exporter](../../cache/backends/local.md)
 with this action:
 
 {% raw %}

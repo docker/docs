@@ -4,6 +4,8 @@ description: Improve your build speeds by taking advantage of the builtin cache
 keywords: >
   build, buildx, buildkit, dockerfile, image layers, build instructions, build
   context
+redirect_from:
+  - /build/building/cache/
 ---
 
 You will likely find yourself rebuilding the same Docker image over and over
@@ -35,7 +37,7 @@ Each instruction in this Dockerfile translates (roughly) to a layer in your
 final image. You can think of image layers as a stack, with each layer adding
 more content on top of the layers that came before it:
 
-![Image layer diagram showing the above commands chained together one after the other](../../images/cache-stack.svg){:.invertible}
+![Image layer diagram showing the above commands chained together one after the other](../images/cache-stack.svg){:.invertible}
 
 Whenever a layer changes, that layer will need to be re-built. For example,
 suppose you make a change to your program in the `main.c` file. After this
@@ -43,13 +45,13 @@ change, the `COPY` command will have to run again in order for those changes to
 appear in the image. In other words, Docker will invalidate the cache for this
 layer.
 
-![Image layer diagram, but now with the link between COPY and WORKDIR marked as invalid](../../images/cache-stack-invalidate-copy.svg){:.invertible}
+![Image layer diagram, but now with the link between COPY and WORKDIR marked as invalid](../images/cache-stack-invalidate-copy.svg){:.invertible}
 
 If a layer changes, all other layers that come after it are also affected. When
 the layer with the `COPY` command gets invalidated, all layers that follow will
 need to run again, too:
 
-![Image layer diagram, but now with all links after COPY marked as invalid](../../images/cache-stack-invalidate-rest.svg){:.invertible}
+![Image layer diagram, but now with all links after COPY marked as invalid](../images/cache-stack-invalidate-rest.svg){:.invertible}
 
 And that's the Docker build cache in a nutshell. Once a layer changes, then all
 downstream layers need to be rebuilt as well. Even if they wouldn't build
@@ -65,7 +67,7 @@ anything differently, they still need to re-run.
 > the image on the same host one week later will still get you the same packages
 > as before. The only way to force a rebuild is by making sure that a layer
 > before it has changed, or by clearing the build cache using
-> [`docker builder prune`](/engine/reference/commandline/builder_build/).
+> [`docker builder prune`](../../engine/reference/commandline/builder_prune/).
 
 ## How can I use the cache efficiently?
 
@@ -129,7 +131,7 @@ To get started, here are a few tips and tricks:
 
 Be considerate of what files you add to the image.
 
-Running a command like `COPY . /src` will `COPY` your entire [build context](../context.md)
+Running a command like `COPY . /src` will `COPY` your entire [build context](../building/context.md)
 into the image. If you've got logs, package manager artifacts, or even previous
 build results in your current directory, those will also be copied over. This
 could make your image larger than it needs to be, especially as those files are
@@ -151,7 +153,7 @@ COPY . /src
 ```
 
 You can also create a
-[`.dockerignore` file](../../../engine/reference/builder.md#dockerignore-file),
+[`.dockerignore` file](../../engine/reference/builder.md#dockerignore-file),
 and use that to specify which files and directories to exclude from the build
 context.
 

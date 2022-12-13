@@ -2,6 +2,8 @@
 title: "Local and tar exporters"
 keywords: >
   build, buildx, buildkit, exporter, local, tar
+redirect_from:
+  - /build/building/exporters/local-tar/
 ---
 
 The `local` and `tar` exporters output the root filesystem of the build result
