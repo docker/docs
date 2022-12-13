@@ -1,8 +1,4 @@
-{
-    "dockerfile": "Dockerfile.devenv"
-}
-{
-    "**diff --git a/.docker/Dockerfile.devenv b/.docker/Dockerfile.devenv
+diff --git a/.docker/Dockerfile.devenv b/.docker/Dockerfile.devenv
 index d456ab8872c..b95e940802b 100644
 --- a/.docker/Dockerfile.devenv
 +++ b/.docker/Dockerfile.devenv
@@ -17075,5 +17071,4 @@ index 8d100abe19b..2fb5d9ce988 100644
 + description: Docker Dashboard
 + keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, quick start, guide, sign in
 + title: Quick Start Guide and sign in
-+}**":<
-}
++}
