@@ -2,6 +2,8 @@
 title: "OCI and Docker exporters"
 keywords: >
   build, buildx, buildkit, exporter, oci, docker
+redirect_from:
+  - /build/building/exporters/local-tar/
 ---
 
 The `oci` exporter outputs the build result into an

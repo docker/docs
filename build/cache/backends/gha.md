@@ -1,6 +1,8 @@
 ---
 title: "GitHub Actions cache"
 keywords: build, buildx, cache, backend, gha, github, actions
+redirect_from:
+  - /build/building/cache/backends/gha/
 ---
 
 > **Warning**
@@ -110,4 +112,4 @@ For more information on the `gha` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#github-actions-cache-experimental){:target="blank" rel="noopener" class=""}.
 
 For more information about using GitHub Actions with Docker, see
-[Introduction to GitHub Actions](../../../ci/github-actions/index.md)
+[Introduction to GitHub Actions](../../ci/github-actions/index.md)

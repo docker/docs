@@ -116,9 +116,9 @@ default *  docker
 ```
 
 This displays the default builtin driver, that uses the BuildKit server
-components built directly into the docker engine, also known as the [`docker` driver](../building/drivers/docker.md).
+components built directly into the docker engine, also known as the [`docker` driver](../drivers/docker.md).
 
-Create a new builder using the [`docker-container` driver](../building/drivers/docker-container.md)
+Create a new builder using the [`docker-container` driver](../drivers/docker-container.md)
 which gives you access to more complex features like multi-platform builds
 and the more advanced cache exporters, which are currently unsupported in the
 default `docker` driver:

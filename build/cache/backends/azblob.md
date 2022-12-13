@@ -1,6 +1,8 @@
 ---
 title: "Azure Blob Storage cache"
 keywords: build, buildx, cache, backend, azblob, azure
+redirect_from:
+  - /build/building/cache/backends/azblob/
 ---
 
 > **Warning**

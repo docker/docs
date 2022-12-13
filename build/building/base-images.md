@@ -1,4 +1,5 @@
 ---
+title: Create a base image
 description: How to create base images
 keywords: images, base image, examples
 redirect_from:
@@ -6,7 +7,6 @@ redirect_from:
 - /engine/articles/baseimages/
 - /engine/userguide/eng-image/baseimages/
 - /develop/develop-images/baseimages/
-title: Create a base image
 ---
 
 Most Dockerfiles start from a parent image. If you need to completely control

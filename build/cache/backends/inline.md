@@ -1,6 +1,8 @@
 ---
 title: "Inline cache"
 keywords: build, buildx, cache, backend, inline
+redirect_from:
+  - /build/building/cache/backends/inline/
 ---
 
 The `inline` cache storage backend is the simplest way to get an external cache
