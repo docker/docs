@@ -26,7 +26,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 ### New 
 
-* Support for new [driver `remote`](building/drivers/remote.md) that you can use
+* Support for new [driver `remote`](drivers/remote.md) that you can use
   to connect to any already running BuildKit instance {% include github_issue.md repo="docker/buildx" number="1078" %}
   {% include github_issue.md repo="docker/buildx" number="1093" %} {% include github_issue.md repo="docker/buildx" number="1094" %}
   {% include github_issue.md repo="docker/buildx" number="1103" %} {% include github_issue.md repo="docker/buildx" number="1134" %}

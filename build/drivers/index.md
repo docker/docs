@@ -3,6 +3,8 @@ title: "Drivers overview"
 keywords: build, buildx, driver, builder, docker-container, kubernetes, remote
 redirect_from:
   - /build/buildx/drivers/
+  - /build/building/drivers/
+  - /build/buildx/multiple-builders/
 ---
 
 Buildx drivers are configurations for how and where the BuildKit backend runs.
@@ -22,12 +24,12 @@ provide more flexibility and are better at handling advanced scenarios.
 The following table outlines some differences between drivers.
 
 | Feature                      |  `docker`   | `docker-container` | `kubernetes` |      `remote`      |
-|:-----------------------------|:-----------:|:------------------:|:------------:|:------------------:|
-| **Automatically load image** |      ✅      |                    |              |                    |
-| **Cache export**             | Inline only |         ✅          |      ✅       |         ✅          |
-| **Tarball output**           |             |         ✅          |      ✅       |         ✅          |
-| **Multi-arch images**        |             |         ✅          |      ✅       |         ✅          |
-| **BuildKit configuration**   |             |         ✅          |      ✅       | Managed externally |
+| :--------------------------- | :---------: | :----------------: | :----------: | :----------------: |
+| **Automatically load image** |     ✅      |                    |              |                    |
+| **Cache export**             | Inline only |         ✅         |      ✅      |         ✅         |
+| **Tarball output**           |             |         ✅         |      ✅      |         ✅         |
+| **Multi-arch images**        |             |         ✅         |      ✅      |         ✅         |
+| **BuildKit configuration**   |             |         ✅         |      ✅      | Managed externally |
 
 ## List available builders
 
@@ -55,18 +57,36 @@ desktop-linux * docker
 ```
 
 This is because the Docker driver builders are automatically pulled from the
-available [Docker Contexts](../../../engine/context/working-with-contexts.md).
-When you add new contexts using `docker context create`, these will appear in
-your list of buildx builders.
+available [Docker Contexts](../../engine/context/working-with-contexts.md). When
+you add new contexts using `docker context create`, these will appear in your
+list of buildx builders.
+
+The asterisk (`*`) next to the builder name indicates that this is the selected
+builder which gets used by default, unless you specify a builder using the
+`--builder` option.
 
 ## Create a new builder
 
-Use the [`docker buildx create`](../../../engine/reference/commandline/buildx_create.md)
+Use the
+[`docker buildx create`](../../engine/reference/commandline/buildx_create.md)
 command to create a builder, and specify the driver using the `--driver` option.
 
 ```console
 $ docker buildx create --name=<builder-name> --driver=<driver> --driver-opt=<driver-options>
 ```
+
+This creates a new builder instance with a single build node. After creating a
+new builder you can also
+[append new nodes to it](../../engine/reference/commandline/buildx_create/#append).
+
+To use a remote node for your builders, you can set the `DOCKER_HOST`
+environment variable or provide a remote context name when creating the builder.
+
+## Switch between builders
+
+To switch between different builders, use the `docker buildx use <name>`
+command. After running this command, the build commands will automatically use
+this builder.
 
 ## What's next
 

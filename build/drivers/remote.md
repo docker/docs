@@ -3,6 +3,7 @@ title: "Remote driver"
 keywords: build, buildx, driver, builder, remote
 redirect_from:
   - /build/buildx/drivers/remote/
+  - /build/building/drivers/remote/
 ---
 
 The Buildx remote driver allows for more complex custom build workloads,

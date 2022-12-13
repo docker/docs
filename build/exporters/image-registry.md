@@ -2,6 +2,8 @@
 title: "Image and registry exporters"
 keywords: >
   build, buildx, buildkit, exporter, image, registry
+redirect_from:
+  - /build/building/exporters/image-registry/
 ---
 
 The `image` exporter outputs the build result into a container image format. The

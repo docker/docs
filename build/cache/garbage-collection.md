@@ -1,10 +1,12 @@
 ---
 title: Garbage collection
 keywords: build, buildx, buildkit, garbage collection, prune
+redirect_from:
+  - /build/building/cache/garbage-collection/
 ---
 
-While [`docker builder prune`](../../../engine/reference/commandline/builder_prune.md)
-or [`docker buildx prune`](../../../engine/reference/commandline/buildx_prune.md)
+While [`docker builder prune`](../../engine/reference/commandline/builder_prune.md)
+or [`docker buildx prune`](../../engine/reference/commandline/buildx_prune.md)
 commands run at once, garbage collection runs periodically and follows an
 ordered list of prune policies.
 
@@ -19,7 +21,7 @@ Depending on the [driver](../drivers/index.md) used by your builder instance,
 the garbage collection will use a different configuration file.
 
 If you're using the [`docker` driver](../drivers/docker.md), garbage collection
-can be configured in the [Docker Daemon configuration](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
+can be configured in the [Docker Daemon configuration](../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 file:
 
 ```json
@@ -39,7 +41,7 @@ file:
 ```
 
 For other drivers, garbage collection can be configured using the
-[BuildKit configuration](../../buildkit/toml-configuration.md) file:
+[BuildKit configuration](../buildkit/toml-configuration.md) file:
 
 ```toml
 [worker.oci]

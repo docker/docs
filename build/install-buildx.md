@@ -2,19 +2,20 @@
 title: Install Docker Buildx
 description: How to install Docker Buildx
 keywords: build, buildx, buildkit
+redirect_from:
+  - /build/buildx/install/
 ---
 
 ## Docker Desktop
 
-Docker Buildx is included in [Docker Desktop](../../desktop/index.md) for
-Windows, macOS, and Linux.
+Docker Buildx is included by default in Docker Desktop.
 
-## Linux packages
+## Docker Engine via package manager
 
 Docker Linux packages also include Docker Buildx when installed using the
-[DEB or RPM packages](../../engine/install/index.md).
+`.deb` or `.rpm` packages.
 
-## Dockerfile
+## Install using a Dockerfile
 
 Here is how to install and use Buildx inside a Dockerfile through the
 [`docker/buildx-bin`](https://hub.docker.com/r/docker/buildx-bin){:target="blank" rel="noopener" class=""}
@@ -27,21 +28,21 @@ COPY --from=docker/buildx-bin:latest /buildx /usr/libexec/docker/cli-plugins/doc
 RUN docker buildx version
 ```
 
-## Manual download
+## Download manually
 
 > **Important**
 >
-> This section is for unattended installation of the buildx component. These
+> This section is for unattended installation of the Buildx component. These
 > instructions are mostly suitable for testing purposes. We do not recommend
-> installing buildx using manual download in production environments as they
+> installing Buildx using manual download in production environments as they
 > will not be updated automatically with security updates.
 >
 > On Windows, macOS, and Linux workstations we recommend that you install
-> [Docker Desktop](../../desktop/index.md) instead. For Linux servers, we recommend
-> that you follow the [instructions specific for your distribution](#linux-packages).
+> Docker Desktop instead. For Linux servers, we recommend that you follow the
+> instructions specific for your distribution.
 {: .important}
 
-You can also download the latest binary from the [releases page on GitHub](https://github.com/docker/buildx/releases/latest){:target="blank" rel="noopener" class=""}.
+You can also download the latest binary from the [releases page on GitHub](https://github.com/docker/buildx/releases/latest){:target="blank" rel="noopener" class="_"}.
 
 Rename the relevant binary and copy it to the destination matching your OS:
 
@@ -70,11 +71,11 @@ On Windows:
 > $ chmod +x ~/.docker/cli-plugins/docker-buildx
 > ```
 
-## Set buildx as the default builder
+## Set Buildx as the default builder
 
-Running the command [`docker buildx install`](../../engine/reference/commandline/buildx_install.md)
-sets up docker builder command as an alias to `docker buildx`. This results in
-the ability to have [`docker build`](../../engine/reference/commandline/build.md)
-use the current buildx builder.
+Running the command [`docker buildx install`](../engine/reference/commandline/buildx_install.md)
+sets up the `docker build` command as an alias to `docker buildx`. This results in
+the ability to have [`docker build`](../engine/reference/commandline/build.md)
+use the current Buildx builder.
 
-To remove this alias, run [`docker buildx uninstall`](../../engine/reference/commandline/buildx_uninstall.md).
+To remove this alias, run [`docker buildx uninstall`](../engine/reference/commandline/buildx_uninstall.md).

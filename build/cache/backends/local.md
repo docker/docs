@@ -1,6 +1,8 @@
 ---
 title: "Local cache"
 keywords: build, buildx, cache, backend, local
+redirect_from:
+  - /build/building/cache/backends/local/
 ---
 
 The `local` cache store is a simple cache option that stores your cache as files

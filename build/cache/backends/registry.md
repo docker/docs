@@ -1,6 +1,8 @@
 ---
 title: "Registry cache"
 keywords: build, buildx, cache, backend, registry
+redirect_from:
+  - /build/building/cache/backends/registry/
 ---
 
 The `registry` cache storage can be thought of as an extension to the `inline`
