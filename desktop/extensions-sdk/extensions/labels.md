@@ -35,7 +35,9 @@ Here is the list of labels you need to specify when building your extension:
 
 > HTML content styling
 >
-> Docker Desktop will apply CSS styles to the provided HTML content. You can make sure that it renders correctly [within the marketplace](#preview-the-extension-in-the-marketplace). Docker recommends that you follow the [Styling guidelines](../design/overview.md).
+> Docker Desktop will apply CSS styles to the provided HTML content. You can make sure that it renders correctly 
+> [within the marketplace](#preview-the-extension-in-the-marketplace). Docker recommends that you follow the 
+> [Styling guidelines](../design/index.md).
 
 ## Preview the extension in the Marketplace
 
