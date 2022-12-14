@@ -113,14 +113,43 @@ To prevent developers from accidentally changing the proxy settings, see
 
 Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case the choice of subnet clashes with something in your environment, specify a custom subnet using the **Network** setting.
 
-### Docker Engine
+## Docker Engine
 
-The **Docker Engine** tab allows you to configure the Docker daemon to determine how your containers run.
+The **Docker Engine** tab allows you to configure the Docker daemon used to run containers with Docker Desktop.
 
-Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"}.
+You configure the daemon using a JSON configuration file. Here's what the file might look like:
 
-Click **Apply & Restart** to save your settings and restart Docker Desktop.
+```json
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": false,
+  "features": {
+    "buildkit": true
+  }
+}
+```
+
+You can find this file at `$HOME/.docker/daemon.json`. To change the configuration, either
+edit the JSON configuration directly from the dashboard in Docker Desktop, or open and
+edit the file using your favorite text editor.
+
+> **Note**
+>
+> Only the **Docker Desktop** daemon uses the configuration file under `$HOME/.docker`.
+> If you manually install Docker Engine alongside Docker Desktop, the manually
+> installed instance uses a `dameon.json` configuration file in a  different location.
+> Refer to [Configure the daemon](../../config/daemon/index.md) for more information
+> about how to configure the Docker daemon on a manually installed Docker Engine.
+
+To see the full list of possible configuration options, see the 
+[dockerd command reference](/engine/reference/commandline/dockerd/).
+
+Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
 ## Kubernetes
 
