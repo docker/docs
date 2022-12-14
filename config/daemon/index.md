@@ -25,9 +25,16 @@ redirect_from:
 title: Docker daemon configuration overview
 ---
 
-After successfully installing and starting Docker, the `dockerd` daemon runs
-with its default configuration. This page shows how to customize the daemon
-configuration.
+This page shows you how to customize the Docker daemon, `dockerd`.
+
+> **Note**
+>
+> This page is for users who've installed Docker Engine manually. If you're
+> using Docker Desktop, refer to the following pages instead:
+>
+> - [Change preferences on Mac](../../desktop/settings/mac#docker-engine)
+> - [Change preferences on Windows](../../desktop/settings/windows#docker-engine)
+> - [Change preferences on Linux](../../desktop/settings/linux#docker-engine)
 
 ## Configure the Docker daemon
 
@@ -43,9 +50,7 @@ won't start and prints an error message.
 
 To configure the Docker daemon using a JSON file, create a file at
 `/etc/docker/daemon.json` on Linux systems, or
-`C:\ProgramData\docker\config\daemon.json` on Windows. On macOS, go to the Docker
-menu ![whale menu](/assets/images/whale-x.svg){: .inline} in the taskbar and select
-**Preferences** > **Docker Engine**.
+`C:\ProgramData\docker\config\daemon.json` on Windows.
 
 Here's what the configuration file might look like:
 
