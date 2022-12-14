@@ -35,6 +35,14 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: builder
+      value_type: string
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: buildkitd-flags
       value_type: string
       description: Flags for buildkitd daemon
@@ -124,16 +132,6 @@ options:
       default_value: "false"
       description: Set the current builder instance
       details_url: '#use'
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-inherited_options:
-    - option: builder
-      value_type: string
-      description: Override the configured builder instance
       deprecated: false
       hidden: false
       experimental: false

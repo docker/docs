@@ -35,6 +35,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: attest
+      value_type: stringArray
+      default_value: '[]'
+      description: 'Attestation parameters (format: `type=sbom,generator=image`)'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: build-arg
       value_type: stringArray
       default_value: '[]'
@@ -324,6 +334,15 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: provenance
+      value_type: string
+      description: Shortand for `--attest=type=provenance`
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: pull
       value_type: bool
       default_value: "false"
@@ -362,6 +381,15 @@ options:
       description: Remove intermediate containers after a successful build
       deprecated: false
       hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: sbom
+      value_type: string
+      description: Shorthand for `--attest=type=sbom`
+      deprecated: false
+      hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -531,7 +559,8 @@ examples: |-
     # docker buildx build --build-context project=https://github.com/myuser/project.git .
     ```
 
-    ```Dockerfile
+    ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM alpine
     COPY --from=project myfile /
     ```
@@ -544,10 +573,10 @@ examples: |-
     $ docker buildx build --build-context foo=oci-layout:///path/to/local/layout@sha256:abcd12345 .
     ```
 
-    ```Dockerfile
+    ```dockerfile
+    # syntax=docker/dockerfile:1
     FROM alpine
     RUN apk add git
-
     COPY --from=foo myfile /
 
     FROM foo
@@ -573,7 +602,7 @@ examples: |-
     ```
 
     Use an external cache source for a build. Supported types are `registry`,
-    `local` and `gha`.
+    `local`, `gha` and `s3`.
 
     - [`registry` source](https://github.com/moby/buildkit#registry-push-image-and-cache-separately)
       can import cache from a cache manifest or (special) image configuration on the
@@ -583,6 +612,9 @@ examples: |-
     - [`gha` source](https://github.com/moby/buildkit#github-actions-cache-experimental)
       can import cache from a previously exported cache with `--cache-to` in your
       GitHub repository
+    - [`s3` source](https://github.com/moby/buildkit#s3-cache-experimental)
+      can import cache from a previously exported cache with `--cache-to` in your
+      S3 bucket
 
     If no type is specified, `registry` exporter is used with a specified reference.
 
@@ -594,6 +626,7 @@ examples: |-
     $ docker buildx build --cache-from=type=registry,ref=user/app .
     $ docker buildx build --cache-from=type=local,src=path/to/cache .
     $ docker buildx build --cache-from=type=gha .
+    $ docker buildx build --cache-from=type=s3,region=eu-west-1,bucket=mybucket .
     ```
 
     More info about cache exporters and available attributes: https://github.com/moby/buildkit#export-cache
@@ -605,15 +638,17 @@ examples: |-
     ```
 
     Export build cache to an external cache destination. Supported types are
-    `registry`, `local`, `inline` and `gha`.
+    `registry`, `local`, `inline`, `gha` and `s3`.
 
     - [`registry` type](https://github.com/moby/buildkit#registry-push-image-and-cache-separately) exports build cache to a cache manifest in the registry.
-    - [`local` type](https://github.com/moby/buildkit#local-directory-1) type
-      exports cache to a local directory on the client.
+    - [`local` type](https://github.com/moby/buildkit#local-directory-1) exports
+      cache to a local directory on the client.
     - [`inline` type](https://github.com/moby/buildkit#inline-push-image-and-cache-together)
-      type writes the cache metadata into the image configuration.
+      writes the cache metadata into the image configuration.
     - [`gha` type](https://github.com/moby/buildkit#github-actions-cache-experimental)
-      type exports cache through the [Github Actions Cache service API](https://github.com/tonistiigi/go-actions-cache/blob/master/api.md#authentication).
+      exports cache through the [GitHub Actions Cache service API](https://github.com/tonistiigi/go-actions-cache/blob/master/api.md#authentication).
+    - [`s3` type](https://github.com/moby/buildkit#s3-cache-experimental) exports
+      cache to a S3 bucket.
 
     `docker` driver currently only supports exporting inline cache metadata to image
     configuration. Alternatively, `--build-arg BUILDKIT_INLINE_CACHE=1` can be used
@@ -631,6 +666,7 @@ examples: |-
     $ docker buildx build --cache-to=type=registry,ref=user/app .
     $ docker buildx build --cache-to=type=local,dest=path/to/cache .
     $ docker buildx build --cache-to=type=gha .
+    $ docker buildx build --cache-to=type=s3,region=eu-west-1,bucket=mybucket .
     ```
 
     More info about cache exporters and available attributes: https://github.com/moby/buildkit#export-cache
@@ -871,7 +907,7 @@ examples: |-
     - `src`, `source` - Secret filename. `id` used if unset.
 
     ```dockerfile
-    # syntax=docker/dockerfile:1.4
+    # syntax=docker/dockerfile:1
     FROM python:3
     RUN pip install awscli
     RUN --mount=type=secret,id=aws,target=/root/.aws/credentials \
@@ -890,7 +926,7 @@ examples: |-
     - `env` - Secret environment variable. `id` used if unset, otherwise will look for `src`, `source` if `id` unset.
 
     ```dockerfile
-    # syntax=docker/dockerfile:1.4
+    # syntax=docker/dockerfile:1
     FROM node:alpine
     RUN --mount=type=bind,target=. \
       --mount=type=secret,id=SECRET_TOKEN \
@@ -922,7 +958,7 @@ examples: |-
     Example to access Gitlab using an SSH agent socket:
 
     ```dockerfile
-    # syntax=docker/dockerfile:1.4
+    # syntax=docker/dockerfile:1
     FROM alpine
     RUN apk add --no-cache openssh-client
     RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
