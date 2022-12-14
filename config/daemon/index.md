@@ -47,15 +47,20 @@ To configure the Docker daemon using a JSON file, create a file at
 menu ![whale menu](/assets/images/whale-x.svg){: .inline} in the taskbar and select
 **Preferences** > **Docker Engine**.
 
-Here's what the configuration file looks like:
+Here's what the configuration file might look like:
 
 ```json
 {
-  "debug": true,
-  "tls": true,
-  "tlscert": "/var/docker/server.pem",
-  "tlskey": "/var/docker/serverkey.pem",
-  "hosts": ["tcp://192.168.59.3:2376"]
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": false,
+  "features": {
+    "buildkit": true
+  }
 }
 ```
 
