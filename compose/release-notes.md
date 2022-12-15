@@ -6,6 +6,9 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+{%- include compose/compose-v1-eol.md -%}
+
+
 ## 2.14.0
 {% include release-date.html date="2022-12-02" %}
 

@@ -3,6 +3,8 @@ description: Key features and use cases of Docker Compose
 keywords: documentation, docs, docker, compose, orchestration, containers, uses, features
 title: Compose V2 Overview
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 ## Compose V2 and the new `docker compose` command
 

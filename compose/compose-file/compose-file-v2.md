@@ -5,6 +5,8 @@ title: Compose file version 2 reference
 toc_max: 4
 toc_min: 1
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 ## Reference and guidelines
 

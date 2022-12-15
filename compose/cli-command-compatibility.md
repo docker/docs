@@ -3,6 +3,8 @@ description: Compose command compatibility with docker-compose
 keywords: documentation, docs, docker, compose, containers
 title: Compose command compatibility with docker-compose
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 The `compose` command in the Docker CLI supports most of the `docker-compose` commands and flags. It is expected to be a drop-in replacement for `docker-compose`. 
 

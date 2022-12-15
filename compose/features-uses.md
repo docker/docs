@@ -3,6 +3,8 @@ description: Key features and use cases of Docker Compose
 keywords: documentation, docs, docker, compose, orchestration, containers, uses, features
 title: Key features and use cases
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 Using Compose is essentially a three-step process:
 

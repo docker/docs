@@ -3,6 +3,8 @@ description: Declare default environment variables in a file
 keywords: fig, composition, compose, docker, orchestration, environment, env file
 title: Declare default environment variables in file
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 Compose supports declaring environment variables in an environment file.
 

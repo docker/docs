@@ -6,6 +6,8 @@ toc_max: 3
 redirect_from:
 - /compose/compose-desktop/
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 This page contains summary information about the available options for getting Docker Compose.
 

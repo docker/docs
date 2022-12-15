@@ -3,6 +3,8 @@ title: Environment variables precedence
 description: Scenario Overview illustrating how environment variables are resolved in Compose
 keywords: compose, environment, env file
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 This page contains information on how interpolation works when using environment variables in Compose.
 

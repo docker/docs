@@ -3,6 +3,8 @@ description: How Compose sets up networking between containers
 keywords: documentation, docs, docker, compose, orchestration, containers, networking
 title: Networking in Compose
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 > This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/index.md). Networking features are not supported for Compose file version 1 (deprecated).
 

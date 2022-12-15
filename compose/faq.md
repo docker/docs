@@ -3,6 +3,8 @@ description: Docker Compose FAQ
 keywords: documentation, docs,  docker, compose, faq
 title: Frequently asked questions
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 If you don’t see your question here, feel free to drop by
 [#docker-compose](https://dockercommunity.slack.com/archives/C2X82D9PA) on the

@@ -9,6 +9,8 @@ redirect_from:
  - /compose/swarm/
  - /compose/completion/
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a YAML file to configure your application's services.

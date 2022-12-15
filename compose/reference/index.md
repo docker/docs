@@ -5,6 +5,8 @@ redirect_from:
 - /compose/reference/overview/
 title: Overview of docker compose CLI
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 This page provides the usage information for the `docker compose` Command.
 

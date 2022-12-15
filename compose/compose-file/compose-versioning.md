@@ -3,6 +3,8 @@ description: Compose file reference
 keywords: fig, composition, compose, versions, upgrading, docker
 title: Compose file versions and upgrading
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 The Compose file is a [YAML](https://yaml.org) file defining services,
 networks, and volumes for a Docker application.

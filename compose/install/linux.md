@@ -7,6 +7,8 @@ redirect_from:
 - /compose/compose-plugin/
 - /compose/compose-linux/
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 On this page you can find instructions on how to install the Compose plugin on Linux from the command line.
 

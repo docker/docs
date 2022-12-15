@@ -4,6 +4,8 @@ keywords: compose, orchestration, uninstall, uninstallation, docker, documentati
 
 title: Uninstall Docker Compose
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 Uninstalling Docker Compose depends on the method you have used to install Docker Compose. On this page you can find specific instructions to uninstall Docker Compose.
 

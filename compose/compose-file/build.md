@@ -5,6 +5,7 @@ title: Compose file build reference
 toc_max: 4
 toc_min: 2
 ---
+{%- include compose/compose-v1-eol.md -%}
 
 Compose specification is a platform-neutral way to define multi-container applications. A Compose implementation
 focusing on development use-case to run application on local machine will obviously also support (re)building

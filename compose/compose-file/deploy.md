@@ -5,6 +5,8 @@ title: Compose file deploy reference
 toc_max: 4
 toc_min: 2
 ---
+{%- include compose/compose-v1-eol.md -%}
+
 
 Compose specification is a platform-neutral way to define multi-container applications. A Compose implementation supporting
 deployment of application model MAY require some additional metadata as the Compose application model is way too abstract
