@@ -49,9 +49,9 @@ Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: 
        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                 <a href="/docker-hub/"><img src="/assets/images/check.svg" alt="quickstart" width="70" height="70"></a>
+                 <a href="/docker-hub/"><img src="/assets/images/checklist.svg" alt="quickstart" width="70" height="70"></a>
             </div>
-                <h2 id="docker-desktop"><a href="/docker-hub/">Quickstart</a></h2>
+                <h2 id="docker-hub"><a href="/docker-hub/">Quickstart</a></h2>
                 <p>Step-by-step instructions on getting started Docker Hub.</p>
     </div>
     </div>
