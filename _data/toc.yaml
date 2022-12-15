@@ -1645,6 +1645,14 @@ manuals:
           title: Build contexts and linking targets
         - path: /build/bake/compose-file/
           title: Building from Compose file
+    - sectiontitle: Attestations
+      section:
+        - path: /build/attestations/
+          title: Overview
+        - path: /build/attestations/provenance/
+          title: Provenance
+        - path: /build/attestations/sbom/
+          title: SBOM
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
