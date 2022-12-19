@@ -24,7 +24,7 @@ rel="noopener" class="_"}
   rel="noopener" class="_"}
 - Introduced `--timestamp` option on `compose up`. Fixed [compose#5730](https://github.com/docker/compose/issues/5730){:target="_blank"
   rel="noopener" class="_"}
-- Apply uid/gid when creating secret from environment. Pull Request [compose#10084](https://github.com/docker/compose/pull/10084){:target="_blank"
+- Compose now applies uid/gid when creating a secret from the environment. Pull Request [compose#10084](https://github.com/docker/compose/pull/10084){:target="_blank"
   rel="noopener" class="_"}
 - Fixed deadlock when waiting for attached-dependencies. Fixed [compose#10021](https://github.com/docker/compose/pull/10021){:target="_blank"
   rel="noopener" class="_"}
