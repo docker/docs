@@ -30,7 +30,7 @@ rel="noopener" class="_"}
   rel="noopener" class="_"}
 - Fixed race condition when collecting pulled images IDs. Fixed [compose#9897](https://github.com/docker/compose/pull/9897){:target="_blank"
   rel="noopener" class="_"}
-- Compose don't stop `pull` command for images that can be built. Fixed [compose#8724](https://github.com/docker/compose/pull/8724){:target="_blank"
+- Compose desn't stop the `pull` command for images that can be built. Fixed [compose#8724](https://github.com/docker/compose/pull/8724){:target="_blank"
   rel="noopener" class="_"}
 - Fixed corner case when there's no container to attach to. Fixed [compose#8752](https://github.com/docker/compose/pull/8752){:target="_blank"
   rel="noopener" class="_"}
