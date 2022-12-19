@@ -34,7 +34,7 @@ rel="noopener" class="_"}
   rel="noopener" class="_"}
 - Fixed corner case when there's no container to attach to. Fixed [compose#8752](https://github.com/docker/compose/pull/8752){:target="_blank"
   rel="noopener" class="_"}
-- Compose containers startup must run sequentially for engine to assign distinct ports within configured range. Fixed 
+- Compose containers' startup must run sequentially for engine to assign distinct ports within a configured range. Fixed 
 [compose#8530](https://github.com/docker/compose/pull/8530){:target="_blank" rel="noopener" class="_"}
 - Fixed parsing of `repository:tag`. Fixed [compose#9208](https://github.com/docker/compose/pull/9208){:target="_blank"
   rel="noopener" class="_"}
