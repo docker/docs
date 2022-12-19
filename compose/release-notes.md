@@ -16,7 +16,7 @@ redirect_from:
 ### Bug fixes and enhancements
 - Added `--parallel` to limit concurrent engine calls. Pull Request [compose#10030](https://github.com/docker/compose/pull/10030){:
   target="_blank" rel="noopener" class="_"}
-- Distinguish stdout and stderr in `up` logs. Fixed [compose#8098](https://github.com/docker/compose/issues/8098){:target="_blank" 
+- Distinguished stdout and stderr in `up` logs. Fixed [compose#8098](https://github.com/docker/compose/issues/8098){:target="_blank" 
 rel="noopener" class="_"}
 - Aligned `compose ps` output with `docker ps`. Fixed [compose#6867](https://github.com/docker/compose/issues/6867){:target="_blank"
 rel="noopener" class="_"}
