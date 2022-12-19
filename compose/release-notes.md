@@ -6,6 +6,41 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 2.14.1
+{% include release-date.html date="2022-12-15" %}
+
+### Updates
+- Dependencies upgrade: bump Go to 1.19.4
+- Dependencies upgrade: bump containerd to 1.6.12
+
+### Bug fixes and enhancements
+- Added `--parallel` to limit concurrent engine calls. Pull Request [compose#10030](https://github.com/docker/compose/pull/10030){:
+  target="_blank" rel="noopener" class="_"}
+- Distinguish stdout and stderr in `up` logs. Fixed [compose#8098](https://github.com/docker/compose/issues/8098){:target="_blank" 
+rel="noopener" class="_"}
+- Aligned `compose ps` output with `docker ps`. Fixed [compose#6867](https://github.com/docker/compose/issues/6867){:target="_blank"
+rel="noopener" class="_"}
+- Added `--include-deps` to push command. Pull Request [compose#10044](https://github.com/docker/compose/pull/10044){:target="_blank"
+  rel="noopener" class="_"}
+- Introduced `--timestamp` option on `compose up`. Fixed [compose#5730](https://github.com/docker/compose/issues/5730){:target="_blank"
+  rel="noopener" class="_"}
+- Apply uid/gid when creating secret from environment. Pull Request [compose#10084](https://github.com/docker/compose/pull/10084){:target="_blank"
+  rel="noopener" class="_"}
+- Fixed deadlock when waiting for attached-dependencies. Fixed [compose#10021](https://github.com/docker/compose/pull/10021){:target="_blank"
+  rel="noopener" class="_"}
+- Fixed race condition when collecting pulled images IDs. Fixed [compose#9897](https://github.com/docker/compose/pull/9897){:target="_blank"
+  rel="noopener" class="_"}
+- Compose don't stop `pull` command for images that can be built. Fixed [compose#8724](https://github.com/docker/compose/pull/8724){:target="_blank"
+  rel="noopener" class="_"}
+- Fixed corner case when there's no container to attach to. Fixed [compose#8752](https://github.com/docker/compose/pull/8752){:target="_blank"
+  rel="noopener" class="_"}
+- Compose containers startup must run sequentially for engine to assign distinct ports within configured range. Fixed 
+[compose#8530](https://github.com/docker/compose/pull/8530){:target="_blank" rel="noopener" class="_"}
+- Fixed parsing of `repository:tag`. Fixed [compose#9208](https://github.com/docker/compose/pull/9208){:target="_blank"
+  rel="noopener" class="_"}
+- Load project from files when explicitly set by user. Fixed [compose#9554](https://github.com/docker/compose/pull/9554){:target="_blank"
+  rel="noopener" class="_"} 
+
 ## 2.14.0
 {% include release-date.html date="2022-12-02" %}
 
