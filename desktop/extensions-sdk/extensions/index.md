@@ -13,8 +13,8 @@ You have developed your extension and tested it locally. You are now ready to re
 Releasing your extension consists of:
 
 - Provide information about your extension: description, screenshots, etc. so users can decide to install your extension
-- Validate the extension is built in the right format and includes the required information
-- Make the extension image available on [DockerHub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" }:
+- [Validate](./validate.md) the extension is built in the right format and includes the required information
+- Make the extension image available on [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" }:
 
 See [Package and release your extension](DISTRIBUTION.md) for details about the release process.
 

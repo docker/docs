@@ -1,19 +1,12 @@
 ---
-title: "Step three: Test and debug"
-description: Step four in the extension creation process
+title: "Test and debug"
+description: Test and debug your extension.
 keywords: Docker, Extensions, sdk, preview, update, Chrome DevTools
+redirect_from:
+- /desktop/extensions-sdk/build/test-debug/
 ---
 
-Once your extension has been [built and installed](build-install.md), you can preview your extension in Docker Desktop. 
-
-## Preview the extension
-
-To preview the extension in Docker Desktop, close and open Docker Dashboard once the installation is complete.
-
-The left-hand menu displays a new tab with the name of your extension. 
-The example below shows the [`Min FrontEnd Extension`](set-up/minimal-frontend-extension.md). 
-
-![minimal-frontend-extension](images/ui-minimal-extension.png)
+In order to improve the developer experience, Docker Desktop provides a set of tools to help you test and debug your extension.
 
 ### Open Chrome DevTools
 
@@ -66,14 +59,6 @@ If your extension is composed of one or more services running as containers in t
 2. Under the **Extensions** tab, select the **Show Docker Desktop Extensions system containers** option. You can now view your extension containers and their logs.
 
 
-## Update the extension
-
-To update the extension, you must first [rebuild and reinstall](build-install.md) your extension. You can then use the update command.
-
-```console
-$ docker extension update <name-of-your-extensions>
-```
-
 ## Clean up
 
 To remove the extension, run:
@@ -82,9 +67,8 @@ To remove the extension, run:
 $ docker extension rm <name-of-your-extension>
 ```
 
-## What's next?
+## What's next
 
-- Explore our [design principles](../design/design-principles.md).
-- Take a look at our [UI styling guidelines](../design/overview.md).
-- Set up [authentication for your extension](../guides/oauth2-flow.md)
-- Learn how to [publish your extension](../extensions/index.md).
+- Build an [advanced frontend](../build/frontend-extension-tutorial.md) extension.
+- Learn more about extensions [architecture](../architecture/index.md).
+- Learn more about [designing the UI](../design/design-guidelines.md).

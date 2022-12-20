@@ -5,6 +5,7 @@ keywords: Docker, extensions, sdk, build
 redirect_from:
   - /desktop/extensions-sdk/tutorials/minimal-backend-extension/
   - /desktop/extensions-sdk/build/minimal-backend-extension/
+  - /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/
 ---
 
 Your extension can ship a backend part with which the frontend can interact with. This page provides information on
@@ -16,7 +17,7 @@ why and how to add a backend.
 
 > Note
 >
-> If you want to start a codebase for your new extension, our [Quickstart guide](../../quickstart.md) and `docker extension init <my-extension>` provides a better base for your extension as it is more up-to-date and related to your install of Docker Desktop.
+> If you want to start a codebase for your new extension, our [Quickstart guide](../quickstart.md) and `docker extension init <my-extension>` provides a better base for your extension as it is more up-to-date and related to your install of Docker Desktop.
 
 ## Why add a backend?
 
@@ -29,7 +30,7 @@ builders have used the backend to:
 - Store the extension state, like when a button starts a long-running process, so that if you navigate away
   from the extension user interface and come back, the frontend can pick up where it left off.
 
-Learn more about extension backend in the [architecture](../../architecture/index.md#the-backend) section.
+Learn more about extension backend in the [architecture](../architecture/index.md#the-backend) section.
 
 ## Add a backend to the extension
 
@@ -306,7 +307,7 @@ in the `vm` section of the `metadata.json` file.
 }
 ```
 
-For more information on the `vm` section of the `metadata.json`, see [Metadata](../../architecture/metadata.md).
+For more information on the `vm` section of the `metadata.json`, see [Metadata](../architecture/metadata.md).
 
 > **Warning**
 >
@@ -418,7 +419,7 @@ when you need to debug it.
 >
 > You may need to enable the "Show system containers" option in Docker Desktop to see the backend container running
 > under the extension compose project in the containers tab of the dashboard.
-> See [how to show extension containers](../test-debug.md#show-the-extension-containers) for more information.
+> See [how to show extension containers](../dev/test-debug.md#show-the-extension-containers) for more information.
 {: .tip }
 
 Open Docker Desktop Dashboard and click on the containers tab. You should see the response from the backend service
@@ -426,5 +427,5 @@ call displayed.
 
 ## What's next?
 
-- Learn how to [share and publish your extension](../../extensions/index.md).
-- Learn more about extensions [architecture](../../architecture/index.md).
+- Learn how to [share and publish your extension](../extensions/index.md).
+- Learn more about extensions [architecture](../architecture/index.md).
