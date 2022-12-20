@@ -51,7 +51,7 @@ FROM scratch
 LABEL org.opencontainers.image.title="Minimal frontend" \
     org.opencontainers.image.description="A sample extension to show how easy it's to get started with Desktop Extensions." \
     org.opencontainers.image.vendor="Awesome Inc." \
-    com.docker.desktop.extension.api.version="1.0.0-beta.1" \
+    com.docker.desktop.extension.api.version="0.3.0" \
     com.docker.desktop.extension.icon="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
 
 COPY ui ./ui
@@ -85,8 +85,7 @@ install it.
 $ docker build --tag= awesome-inc/my-extension:latest .
 ```
 
-This built an image tagged `awesome-inc/my-extension:latest`, you can run `docker inspect
-awesome-inc/my-extension:latest` to see more details about it.
+This built an image tagged `awesome-inc/my-extension:latest`, you can run `docker inspect awesome-inc/my-extension:latest` to see more details about it.
 
 Finally, you can install the extension and see it appearing in the Docker Desktop Dashboard.
 

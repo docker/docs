@@ -844,7 +844,7 @@ reference:
         path: /docker-hub/api/deprecated/
   - title: Registry API
     path: /registry/spec/api/
-  - sectiontitle: Docker Extension SDK API (Beta)
+  - sectiontitle: Docker Extension SDK API
     section:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
         title: DesktopUI
@@ -1159,7 +1159,7 @@ manuals:
           title: Distribute your dev environment
         - path: /desktop/dev-environments/dev-cli/
           title: Use the docker dev CLI plugin
-    - sectiontitle: Extensions (Beta)
+    - sectiontitle: Extensions
       section:
       - path: /desktop/extensions/
         title: What are Docker Extensions?
@@ -1169,7 +1169,7 @@ manuals:
         title: Manage non-Marketplace extensions
       - path: /desktop/extensions/settings-feedback/
         title: Change Settings and give feedback
-    - sectiontitle: Extensions SDK (Beta)
+    - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
           title: Overview
