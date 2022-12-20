@@ -14,7 +14,7 @@ redirect_from:
 ### Bug fixes and enhancements
 * Compose now uses DOCKER_DEFAULT_PLATFORM to determine the platform when creating a container. Fixed [compose#10041](https://github.com/docker/compose/pull/10041){:
   target="_blank" rel="noopener" class="_"}
-* Compose now detect when dependency failed to start. Fixed [compose#9732](https://github.com/docker/compose/pull/9732){:
+* Compose now detects when dependency failed to start. Fixed [compose#9732](https://github.com/docker/compose/pull/9732){:
   target="_blank" rel="noopener" class="_"}
 * fixed WCOW volume mounts.  Fixed [compose#9577](https://github.com/docker/compose/pull/9577){:target="_blank" rel="noopener" class="_"}
 * List onlyrunning containers when using `--all=false`.  Fixed [compose#10085](https://github.com/docker/compose/pull/10085){:
