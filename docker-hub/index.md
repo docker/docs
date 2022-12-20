@@ -52,7 +52,7 @@ Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: 
                  <a href="/docker-hub/"><img src="/assets/images/checklist.svg" alt="quickstart" width="70" height="70"></a>
             </div>
                 <h2 id="docker-hub"><a href="/docker-hub/">Quickstart</a></h2>
-                <p>Step-by-step instructions on getting started Docker Hub.</p>
+                <p>Step-by-step instructions on getting started on Docker Hub.</p>
     </div>
     </div>
         <!--start row-->
