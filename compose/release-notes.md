@@ -19,7 +19,7 @@ redirect_from:
 * Fixed WCOW volume mounts.  Fixed [compose#9577](https://github.com/docker/compose/pull/9577){:target="_blank" rel="noopener" class="_"}
 * List only running containers when using `--all=false`.  Fixed [compose#10085](https://github.com/docker/compose/pull/10085){:
   target="_blank" rel="noopener" class="_"}
-* Fixed regression running pull `--ignore-pull-failures`.  Fixed [compose#10089](https://github.com/docker/compose/pull/10089){:
+* Fixed a regression when running pull `--ignore-pull-failures`.  Fixed [compose#10089](https://github.com/docker/compose/pull/10089){:
   target="_blank" rel="noopener" class="_"}
 * Fixed CPU quota issue. Fixed [compose#10073](https://github.com/docker/compose/pull/10073){:target="_blank" rel="noopener" class="_"}
 * Fixed race condition on compose logs. Fixed [compose#8880](https://github.com/docker/compose/pull/8880){:target="_blank" rel="noopener" class="_"}
