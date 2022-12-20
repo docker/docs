@@ -6,6 +6,26 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 2.14.2
+{% include release-date.html date="2022-12-20" %}
+### Update
+- Dependencies upgrade: bump containerd to 1.6.14
+
+### Bug fixes and enhancements
+* Compose now uses DOCKER_DEFAULT_PLATFORM to determine the platform when creating a container. Fixed [compose#10041](https://github.com/docker/compose/pull/10041){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now detects when dependency failed to start. Fixed [compose#9732](https://github.com/docker/compose/pull/9732){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed WCOW volume mounts.  Fixed [compose#9577](https://github.com/docker/compose/pull/9577){:target="_blank" rel="noopener" class="_"}
+* List only running containers when using `--all=false`.  Fixed [compose#10085](https://github.com/docker/compose/pull/10085){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed a regression when running pull `--ignore-pull-failures`.  Fixed [compose#10089](https://github.com/docker/compose/pull/10089){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed CPU quota issue. Fixed [compose#10073](https://github.com/docker/compose/pull/10073){:target="_blank" rel="noopener" class="_"}
+* Fixed race condition on compose logs. Fixed [compose#8880](https://github.com/docker/compose/pull/8880){:target="_blank" rel="noopener" class="_"}
+* Updated projectOptions to be public by renaming it to ProjectOptions. Fixed [compose#100102](https://github.com/docker/compose/pull/100102){:
+target="_blank" rel="noopener" class="_"}
+
 ## 2.14.1
 {% include release-date.html date="2022-12-15" %}
 
@@ -30,7 +50,7 @@ rel="noopener" class="_"}
   rel="noopener" class="_"}
 - Fixed race condition when collecting pulled images IDs. Fixed [compose#9897](https://github.com/docker/compose/pull/9897){:target="_blank"
   rel="noopener" class="_"}
-- Compose desn't stop the `pull` command for images that can be built. Fixed [compose#8724](https://github.com/docker/compose/pull/8724){:target="_blank"
+- Compose doesn't stop the `pull` command for images that can be built. Fixed [compose#8724](https://github.com/docker/compose/pull/8724){:target="_blank"
   rel="noopener" class="_"}
 - Fixed corner case when there's no container to attach to. Fixed [compose#8752](https://github.com/docker/compose/pull/8752){:target="_blank"
   rel="noopener" class="_"}
