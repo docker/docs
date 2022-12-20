@@ -12,7 +12,7 @@ redirect_from:
 - Dependencies upgrade: bump containerd to 1.6.14
 
 ### Bug fixes and enhancements
-* Compose use DOCKER_DEFAULT_PLATFORM to determine platform when creating container. Fixed [compose#10041](https://github.com/docker/compose/pull/10041){:
+* Compose now uses DOCKER_DEFAULT_PLATFORM to determine the platform when creating a container. Fixed [compose#10041](https://github.com/docker/compose/pull/10041){:
   target="_blank" rel="noopener" class="_"}
 * Compose now detect when dependency failed to start. Fixed [compose#9732](https://github.com/docker/compose/pull/9732){:
   target="_blank" rel="noopener" class="_"}
