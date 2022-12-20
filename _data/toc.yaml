@@ -1179,18 +1179,12 @@ manuals:
           title: Quickstart
         - sectiontitle: "Part one: Build"
           section:
-            - sectiontitle: "Step one: Create a new extension"
-              section:
-                - title: Create a simple extension
-                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
-                - title: Create a more advanced frontend
-                  path: /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
-                - title: Add a backend to your extension
-                  path: /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/
-            - title: "Step two: Build and install"
-              path: /desktop/extensions-sdk/build/build-install/
-            - title: "Step three: Test and debug"
-              path: /desktop/extensions-sdk/build/test-debug/
+            - title: Create a simple extension
+              path: /desktop/extensions-sdk/build/minimal-frontend-extension/
+            - title: Create a more advanced frontend
+              path: /desktop/extensions-sdk/build/frontend-extension-tutorial/
+            - title: Add a backend to your extension
+              path: /desktop/extensions-sdk/build/backend-extension-tutorial/
         - sectiontitle: "Part two: Publish"
           section:
             - title: Overview
@@ -1233,6 +1227,8 @@ manuals:
               path: /desktop/extensions-sdk/guides/oauth2-flow/
         - sectiontitle: Developer SDK tools
           section:
+            - title: "Test and debug"
+              path: /desktop/extensions-sdk/dev/test-debug/
             - title: CLI reference
               path: /desktop/extensions-sdk/dev/usage/
             - sectiontitle: Extension APIs
@@ -1711,6 +1707,8 @@ manuals:
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
+    title: Overview
+  - path: /docker-hub/quickstart/
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts

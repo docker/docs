@@ -6,6 +6,7 @@ redirect_from:
   - /desktop/extensions-sdk/tutorials/react-extension/
   - /desktop/extensions-sdk/build/set-up/react-extension/
   - /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
+  - /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
 ---
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a simple Docker extension that contains only a UI part.
@@ -17,7 +18,7 @@ To start creating your extension, you first need a directory with files which ra
 ## Extension folder structure
 
 The quickest way to create a new extension is to run `docker extension init my-extension` as in the
-[Quickstart](../../quickstart.md). This will create a new directory `my-extension` that contains a fully functional extension.
+[Quickstart](../quickstart.md). This will create a new directory `my-extension` that contains a fully functional extension.
 
 > **Tip**
 >
@@ -164,7 +165,7 @@ The `root` property is the path to the frontend application in the extension's c
 system to deploy it on the host.
 The `src` property is the path to the HTML entry point of the frontend application within the `root` folder.
 
-For more information on the `ui` section of hte `metadata.json`, see [Metadata](../../architecture/metadata.md#ui-section).
+For more information on the `ui` section of hte `metadata.json`, see [Metadata](../architecture/metadata.md#ui-section).
 
 ## Build the extension and install it
 
@@ -340,10 +341,34 @@ export function App() {
 
 ![Screenshot of the container list.](images/react-extension.png)
 
+## Re-build the extension and update it
+
+Since you have modified the code of the extension, you must build again the extension.
+
+```console
+$ docker build --tag= awesome-inc/my-extension:latest .
+```
+
+Once built, you need to update it.
+
+```console
+$ docker extension update awesome-inc/my-extension:latest
+```
+
+Now you can see the backend service running in the containers tab of the Docker Desktop Dashboard and watch the logs
+when you need to debug it.
+
+> **Tip**
+>
+> You can turn on [hot reloading](../dev/test-debug.md#hot-reloading-whilst-developing-the-ui) to avoid the need to
+> rebuild the extension every time you make a change.
+{: .tip }
+
 ## What's next?
 
-- Learn how to [build and install your extension](../build-install.md).
-- Learn more about extensions [architecture](../../architecture/index.md).
-- For more information and guidelines on building the UI, see the [Design and UI styling section](../../design/design-guidelines.md).
-- If you want to set up user authentication for the extension, see [Authentication](../../guides/oauth2-flow.md).
+- Add a [backend](./backend-extension-tutorial.md) to your extension.
+- Learn how to [test and debug](../dev/test-debug.md) your extension.
+- Learn more about extensions [architecture](../architecture/index.md).
+- For more information and guidelines on building the UI, see the [Design and UI styling section](../design/design-guidelines.md).
+- If you want to set up user authentication for the extension, see [Authentication](../guides/oauth2-flow.md).
 
