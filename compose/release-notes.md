@@ -17,7 +17,7 @@ redirect_from:
 * Compose now detects when dependency failed to start. Fixed [compose#9732](https://github.com/docker/compose/pull/9732){:
   target="_blank" rel="noopener" class="_"}
 * Fixed WCOW volume mounts.  Fixed [compose#9577](https://github.com/docker/compose/pull/9577){:target="_blank" rel="noopener" class="_"}
-* List onlyrunning containers when using `--all=false`.  Fixed [compose#10085](https://github.com/docker/compose/pull/10085){:
+* List only running containers when using `--all=false`.  Fixed [compose#10085](https://github.com/docker/compose/pull/10085){:
   target="_blank" rel="noopener" class="_"}
 * Fixed regression running pull `--ignore-pull-failures`.  Fixed [compose#10089](https://github.com/docker/compose/pull/10089){:
   target="_blank" rel="noopener" class="_"}
