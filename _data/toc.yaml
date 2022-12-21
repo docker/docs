@@ -1231,6 +1231,8 @@ manuals:
               path: /desktop/extensions-sdk/guides/kubernetes/
             - title: Authentication
               path: /desktop/extensions-sdk/guides/oauth2-flow/
+            - title: Security
+              path: /desktop/extensions-sdk/guides/security/
         - sectiontitle: Developer SDK tools
           section:
             - title: CLI reference
