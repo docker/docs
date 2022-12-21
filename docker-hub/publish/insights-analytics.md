@@ -28,6 +28,7 @@ To view data in the chart:
 
 ![Insights and analytics chart visualization](./images/chart.png)
 
+<!-- prettier-ignore -->
 > **Tip**
 >
 > Hovering your cursor over the chart displays a tooltip, showing precise data
@@ -90,30 +91,31 @@ Export data in either raw or summary format. Each format contains different data
 points and with different structure.
 
 The following sections describe the available data points for each format. The
-**Available from** column shows when the field was first added.
+**Date added** column shows when the field was first introduced.
 
 ### Raw data
 
 The raw data format contains the following data points. Each row in the CSV file
 represents an image pull.
 
-| Data point                    | Description                                                                                                  | Available from   |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------ | ---------------- |
-| Action                        | Request type, see [Action classification rules][1]. One of `pull_by_tag`, `pull_by_digest`, `version_check`. | January 1, 2022  |
-| Action day                    | The date part of the timestamp: `YYYY-MM-DD`                                                                 | January 1, 2022  |
-| Country                       | Request origin country.                                                                                      | January 1, 2022  |
-| Digest                        | Image digest.                                                                                                | January 1, 2022  |
-| HTTP method                   | HTTP method used in the request, see [registry API documentation][2] for details.                            | January 1, 2022  |
-| Host                          | The cloud service provider used in an event.                                                                 | January 1, 2022  |
-| Namespace                     | Docker [organization][3] (image namespace).                                                                  | January 1, 2022  |
-| Reference                     | Image digest or tag used in the request.                                                                     | January 1, 2022  |
-| Repository                    | Docker [repository][4] (image name).                                                                         | January 1, 2022  |
-| Tag (included when available) | Tag name that's only available if the request referred to a tag.                                             | January 1, 2022  |
-| Timestamp                     | Date and time of the request: `YYYY-MM-DD 00:00:00`                                                          | January 1, 2022  |
-| Type                          | The industry from which the event originates. One of `business`, `isp`, `hosting`, `education`, `null`       | January 1, 2022  |
-| User agent tool               | The application a user used to pull an image (for example, `docker` or `containerd`).                        | January 1, 2022  |
-| User agent version            | The version of the application used to pull an image.                                                        | January 1, 2022  |
-| Domain                        | Request origin domain, see [Privacy](#privacy).                                                              | October 11, 2022 |
+| Data point                    | Description                                                                                                  | Date added        |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------- |
+| Action                        | Request type, see [Action classification rules][1]. One of `pull_by_tag`, `pull_by_digest`, `version_check`. | January 1, 2022   |
+| Action day                    | The date part of the timestamp: `YYYY-MM-DD`                                                                 | January 1, 2022   |
+| Country                       | Request origin country.                                                                                      | January 1, 2022   |
+| Digest                        | Image digest.                                                                                                | January 1, 2022   |
+| HTTP method                   | HTTP method used in the request, see [registry API documentation][2] for details.                            | January 1, 2022   |
+| Host                          | The cloud service provider used in an event.                                                                 | January 1, 2022   |
+| Namespace                     | Docker [organization][3] (image namespace).                                                                  | January 1, 2022   |
+| Reference                     | Image digest or tag used in the request.                                                                     | January 1, 2022   |
+| Repository                    | Docker [repository][4] (image name).                                                                         | January 1, 2022   |
+| Tag (included when available) | Tag name that's only available if the request referred to a tag.                                             | January 1, 2022   |
+| Timestamp                     | Date and time of the request: `YYYY-MM-DD 00:00:00`                                                          | January 1, 2022   |
+| Type                          | The industry from which the event originates. One of `business`, `isp`, `hosting`, `education`, `null`       | January 1, 2022   |
+| User agent tool               | The application a user used to pull an image (for example, `docker` or `containerd`).                        | January 1, 2022   |
+| User agent version            | The version of the application used to pull an image.                                                        | January 1, 2022   |
+| Domain                        | Request origin domain, see [Privacy](#privacy).                                                              | October 11, 2022  |
+| Owner                         | The name of the organization that owns the repository.                                                       | December 19, 2022 |
 
 [1]: #action-classification-rules
 [2]: /registry/spec/api/
@@ -131,12 +133,13 @@ There are two levels of summary data available:
 The summary data formats contain the following data points for the selected time
 span:
 
-| Data point        | Value   | Description                                             | Available from  |
-| ----------------- | ------- | ------------------------------------------------------- | --------------- |
-| Unique IP address | String  | Number of unique IP addresses, see [Privacy](#privacy). | January 1, 2022 |
-| Pull by tag       | Integer | GET request, by digest or by tag.                       | January 1, 2022 |
-| Pull by digest    | Integer | GET or HEAD request by digest, or HEAD by digest.       | January 1, 2022 |
-| Version check     | Integer | HEAD by tag, not followed by a GET                      | January 1, 2022 |
+| Data point        | Description                                             | Date added        |
+| ----------------- | ------------------------------------------------------- | ----------------- |
+| Unique IP address | Number of unique IP addresses, see [Privacy](#privacy). | January 1, 2022   |
+| Pull by tag       | GET request, by digest or by tag.                       | January 1, 2022   |
+| Pull by digest    | GET or HEAD request by digest, or HEAD by digest.       | January 1, 2022   |
+| Version check     | HEAD by tag, not followed by a GET                      | January 1, 2022   |
+| Owner             | The name of the organization that owns the repository.  | December 19, 2022 |
 
 ### Action classification rules
 
@@ -177,9 +180,8 @@ The insights and analytics service is continuously improved to increase the
 value it brings to publishers. Some changes might include adding new data
 points, or improving existing data to make it more useful.
 
-When there is a change in the dataset provided by the service, such a change
-doesn't get retroactively applied. As new data points get added, they're
-available from the point of introduction and going forward.
+Changes in the dataset, such as added or removed fields, generally only apply
+from the date of when the field was first introduced, and going forward.
 
 Refer to the tables in the [Data points](#data-points) section to see from which
 date a given data point is available.
@@ -189,10 +191,12 @@ date a given data point is available.
 This section contains information about privacy-protecting measures that ensures
 consumers of content on Docker Hub remain completely anonymous.
 
+<!-- prettier-ignore -->
 > **Important**
 >
 > Docker never shares any Personally Identifiable Information (PII) as part of
-> analytics data. {: .important }
+> analytics data.
+{: .important }
 
 The summary dataset includes Unique IP address count. This data point only
 includes the number of distinct unique IP addresses that request an image.
