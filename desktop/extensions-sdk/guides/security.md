@@ -7,10 +7,12 @@ keywords: Docker, extensions, sdk, security
 ## Extension capabilities
 
 Extensions can provide various optional parts: a user interface (in html/javascript), a backend part (running as a container), and executables deployed on the host machine.
+
 Extensions are executed with the same permissions as the Docker Desktop user and extension capabilities include: running any docker commands (including running containers and mounting folders), running extension binaries, and accessing files on your machine.
+
 The Extensions SDK provides a set of JavaScript APIs to invoke commands or execute these binaries from the extension UI code. Extensions can also provide a backend part that will start a long-lived running container in the background.
 
-Learn more at: https://docs.docker.com/desktop/extensions-sdk/architecture/
+Learn more in the [architecture section](https://docs.docker.com/desktop/extensions-sdk/architecture/)
 
 Extensions code is loaded in Docker Desktop UI electron app. The extension UI code is subject to some constraints for security reasons, described in the following paragraphs.
 
