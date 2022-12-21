@@ -136,6 +136,7 @@ testuser:231072:65536
   This means the IP address is not reachable from the host without `nsenter`-ing into the network namespace.
 - Host network (`docker run --net=host`) is also namespaced inside RootlessKit.
 - NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
+- Rootless Docker relies on userns-remap mode so you should also see the [user namespace known limitations](userns-remap.md#user-namespace-known-limitations).
 
 ## Install
 > **Note**

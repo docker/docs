@@ -254,7 +254,7 @@ What this means is that the whole container filesystem will belong to the user s
 The following standard Docker features are incompatible with running a Docker
 daemon with user namespaces enabled:
 
-- sharing PID or NET namespaces with the host (`--pid=host` or `--network=host`).
+- sharing PID, IPC, or NET namespaces with the host (`--pid=host`, `--ipc=host`, or `--network=host`) in any combination.
 - external (volume or storage) drivers which are unaware or incapable of using
   daemon user mappings.
 - Using the `--privileged` mode flag on `docker run` without also specifying
