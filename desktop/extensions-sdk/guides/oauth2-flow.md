@@ -102,14 +102,15 @@ Finally, you can read the access token from the HTTP response and pass it to the
 
 ## Step three: Store the access token
 
-The Docker Extensions SDK does not currently provide a mechanism to safely store secrets.
 
-It is highly recommended that you use an external source of storage to store the access token.
+The Docker Extensions SDK doesn't currently provide a specific mechanism to store secrets.
 
-> Warning
+It's highly recommended that you use an external source of storage to store the access token.
+
+> Note
 >
-> Storing the access token in a client's localStorage is a security risk as that storage is currently shared amongst all extensions.
-{: .warning}
+> The user interface Local Storage is isolated between extensions (an extension can't access another extension's local storage), and each extension's local storage gets deleted when users uninstall an extension.
 
-## What's next 
+## What's next
+
 Learn how to [publish and distribute your extension](../extensions/index.md)
