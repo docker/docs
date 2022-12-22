@@ -60,6 +60,6 @@ To update the billing information for your organization or personal account:
 
     > **Note**
     >
-    > The details displayed in the **Contact Information** section is used to generate your invoice. All billing-related information is sent to the email address listed in this section. Invoices are sent to one email address. Please contact your administrator to create a group within your organization that includes all of the email addresses.
+    > The details displayed in the **Contact Information** section is used to generate your invoice, and is the default information you provided when the subscription was created. All billing-related information is sent to the email address listed on the **Payment Methods** page in the **Contact Information** section. You can send emails to a maximum of two users in your organization. Contact your administrator to create a group within your organization that includes all of the email addresses.
 
 4. Select **Update** to save your changes.
