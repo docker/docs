@@ -34,29 +34,15 @@ the provenance attestation. Supported values are `mode=min`, and `mode=max`
 
 ### Min
 
-In `min` mode, the provenance attestations include the following information:
+In `min` mode, the provenance attestations include a minimal set of information,
+such as:
 
-- `materials`: inputs used to create the build. Includes base image and version
-  of the Dockerfile syntax directive.
-- `invocation.configSource`: The name of the Dockerfile used to build the image.
-- `invocation.parameters.frontend`: the type of BuildKit frontend used:
-  `dockerfile.v0` or `gateway.v0`.
-- `invocation.parameters.args`: input options passed to the BuildKit frontend.
-  This includes, for example, the target stage of a multi-stage build.
-- `invocation.parameters.locals`: directories and files passed to the build
-  (build context).
-- `invocation.platform`: OS and architecture of the build platform used.
-- `metadata.buildStartedOn`: start time of the build.
-- `metadata.buildFinishedOn`: time when the build finished.
-- `metadata.reproducible`: whether the build is reproducible.
-- `metadata.completeness`: completeness for reproducibility.
-- `metadata.vcs`: version control information, repository and revision (if
-  available).
-
-> **Note**
->
-> Completeness isn't fully implemented yet, so the `reproducible` field always
-> resolves to `false`.
+- Build timestamps
+- The frontend used
+- Build materials
+- Source repository and revision
+- Build platform
+- Reproducibility
 
 Values of build arguments, the identities of secrets, and rich layer metadata is
 not included `mode=min`. The `min`-level provenance is safe to use for all
@@ -149,6 +135,8 @@ using build arguments, consider refactoring builds to pass secret values using
 prevent leaking of sensitive information.
 
 ## Example
+
+<!-- TODO: add a link to the definitions page, imported from moby/buildkit -->
 
 The following example shows what a JSON representation of a provenance
 attestation with `mode=max` looks like:
