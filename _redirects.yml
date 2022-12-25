@@ -123,7 +123,7 @@
   - /go/rootless/
 "/storage/storagedriver/select-storage-driver/":
   - /go/storage-driver/
-"/docker-hub/vulnerability-scanning/":
+"/docker-hub/image-analysis/":
   - /go/tip-scanning/
 "/desktop/windows/wsl/":
   # Link used by Docker Desktop to refer users on how to activate WSL 2

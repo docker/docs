@@ -140,7 +140,7 @@ The **Repositories** view now shows which images have gone stale because they ha
 
 ### New feature
 
-Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk. For more information, see [Hub Vulnerability Scanning](vulnerability-scanning.md).
+Docker introduces Hub Vulnerability Scanning which enables you to automatically scan Docker images for vulnerabilities using Snyk.
 
 ## 2020-05-14
 

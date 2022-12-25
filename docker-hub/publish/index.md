@@ -23,7 +23,7 @@ Hub publishers. The following perks are granted based on participation tier:
 
 - Verified publisher badge
 - Insights and analytics
-- Vulnerability scanning
+- Image analysis
 - Additional Docker Business seats
 - Removal of rate limiting for developers
 - Co-marketing opportunities
@@ -51,14 +51,13 @@ tag, and the raw format lists information about every image pull for the
 selected time span. Data points include tag, type of pull, user geolocation,
 client tool (user agent), and more.
 
-## Vulnerability scanning
+## Image analysis
 
-Automatic vulnerability scanning using Snyk for images published to Docker Hub.
-Scanning images ensures that the published content is secure, and underlines to
-developers that it can be trusted. Scanning can be enabled on a per-repository
-basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
-target="blank" rel="noopener" class=""} for more information about how to use
-it.
+Automatic image analysis for images published to Docker Hub. Analyzing images
+ensures that the published content is secure, and underlines to developers that
+it can be trusted. Analysis can be activated on a per-repository basis, refer to
+[Image analysis](../image-analysis.md) for more information about how to
+use it.
 
 ## Who's eligible to become a verified publisher?
 

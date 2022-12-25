@@ -34,8 +34,8 @@ remediate the CVEs discovered.
 For information about the system requirements to run vulnerability scanning, see [Prerequisites](#prerequisites).
 
 This page contains information about the `docker scan` CLI command. For
-information about automatically scanning Docker images through Docker Hub, see
-[Hub Vulnerability Scanning](/docker-hub/vulnerability-scanning/).
+information about automatically analyzing Docker images through Docker Hub, see
+[Image analysis](../../docker-hub/image-analysis.md).
 
 ## Scan images for Log4j 2 CVE
 

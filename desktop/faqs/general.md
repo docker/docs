@@ -53,7 +53,7 @@ This includes:
 - The in-app [Quick Start Guide](../get-started.md#quick-start-guide)
 - Pulling or pushing an image to Docker Hub
 - [Image Access Management](../../docker-hub/image-access-management.md)
-- [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
+- [Image analysis](../../docker-hub/image-analysis.md)
 - Viewing remote images in the Docker Dashboard
 - Settting up [Dev Environments](../dev-environments/index.md)
 - Docker build when using [BuildKit](../../build/buildkit/index.md#getting-started).

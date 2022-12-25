@@ -139,8 +139,8 @@ guides:
     section:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Dockerfile best practices
-  - path: /develop/scan-images/
-    title: Scan images
+  - path: /develop/analyze-images/
+    title: Analyze images
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -1736,8 +1736,8 @@ manuals:
         title: Link to GitHub and BitBucket
   - path: /docker-hub/webhooks/
     title: Webhooks
-  - path: /docker-hub/vulnerability-scanning/
-    title: Vulnerability scanning
+  - path: /docker-hub/image-analysis/
+    title: Image analysis
   - path: /docker-hub/audit-log/
     title: Audit logs
   - sectiontitle: Security and authentication

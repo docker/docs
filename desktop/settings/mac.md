@@ -132,7 +132,7 @@ HTTP/HTTPS proxies can be used when:
 - Pulling or pushing images
 - Fetching artifacts during image builds
 - Containers interact with the external network
-- Scanning images
+- Analyzing images
 
 If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration), Docker Desktop reads
 this configuration
@@ -149,7 +149,7 @@ upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
 To prevent developers from accidentally changing the proxy settings, see
 [Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
 
-The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
+The HTTPS proxy settings used for analyzing images are set using the `HTTPS_PROXY` environment variable.
 
 ### Network
 

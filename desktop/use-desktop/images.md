@@ -93,7 +93,8 @@ The **Images** view also allows you to manage and interact with images in remote
 
 > **Note**
 >
-> If you have a paid Docker subscription and enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results appear on the Remote repositories tab.
+> If you have a paid Docker subscription and enabled [Image analysis](../../docker-hub/image-analysis.md) in Docker Hub, the scan results appear on the **Remote repositories** tab.
+
 The **Pull** option allows you to pull the latest version of the image from Docker Hub. The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
 
 To interact with remote repositories:
@@ -105,5 +106,3 @@ To interact with remote repositories:
 To view a detailed information about the image in Docker Hub, select the image and then select **View in Hub**.
 
 The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
-
-If you have a paid Docker subscription and have enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
