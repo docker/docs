@@ -7,6 +7,7 @@ notoc: true
 notags: true
 skip_read_time: true
 redirect_from:
+- /search/
 - /app-template/working-with-template/
 - /cluster/reference/
 - /docker-for-aws/

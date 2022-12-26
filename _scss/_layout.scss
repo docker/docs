@@ -30,6 +30,7 @@
  * Header **********************************************************************
  */
 
+/* landing page header apparently */
 .header {
     background-color: $bg-header;
     position: relative;
@@ -37,7 +38,11 @@
     transition: all 0.1s ease;
     border: unset;
     border-radius: unset;
-    height: unset;
+}
+
+/* override bootstrap z-index */
+body > header > nav.navbar {
+    z-index: 1 !important;
 }
 
 .columns {

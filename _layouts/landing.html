@@ -3,57 +3,15 @@
 <html lang="en">
 {%- include head.html -%}
 <body id="landing" class="landing">
-  <nav class="navbar header">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-content" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">
-          <img src="/assets/images/docker-docs-logo.svg" alt="Docker Docs" title="Docker Docs" width="160" height="28" />
-        </a>
-      </div>
-      <div class="collapse navbar-collapse" id="header-content">
-        <ul class="nav navbar-nav">
-        {%- for entry in site.data.toc.horizontalnav -%}
-          {%- if entry.hide_home -%}{% continue %}{%- endif -%}
-          <li{% if entry.node == "home" %} class=active{% endif %}><a href="{{ entry.path }}" id="{{ entry.node }}">{{ entry.title }}</a></li>
-        {%- endfor -%} 
-        <li><a href="/contribute/overview/">Contribute</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li>{% include theme-switch.html %}</li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <header class="header">
+    {% include header.html %}
+  </header>
 
   <section class="hero container">
     <div class="row justify-content-center">
       <div class="col-xs-12 text-center">
-        <h2>What can we help you find?</h2>
+        <h1>What can we help you find?</h1>
       </div>
-    </div>
-    <div class="row justify-content-center">
-      <form action="/search/" method="get" class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-        <label class="sr-only" for="st-search-input">Search</label>
-        <input
-          id="st-search-input"
-          class="form-control"
-          name="q"
-          placeholder="Search for guides, terms, commands and more..."
-          type="search"
-          autocomplete="off"
-          spellcheck="false"
-          dir="auto"
-          autofocus
-          data-hj-allow
-        />
-        <div id="autocompleteResults"></div>
-      </form>
     </div>
   </section>
 

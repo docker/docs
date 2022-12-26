@@ -70,9 +70,18 @@
   <script defer src="/assets/js/docs.js"></script>
   <script defer src="/assets/js/copy.js"></script>
   {%- endif -%}
-  {%- if site.local_search -%}
-  <script defer src="/assets/js/search.js"></script>
-  {%- endif -%}
+  <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+  <script defer type="text/javascript">
+  window.addEventListener('DOMContentLoaded', function() {
+    docsearch({
+      appId: "3XRLW0LZH9",
+      apiKey: "2899036ce47dba191b8dc1758e4bc6a4",
+      indexName: "docker",
+      container: "#search-div",
+      debug: false // Set debug to true if you want to inspect the modal
+    });
+  });
+  </script>
   {%- include analytics/feedback.html -%}
 
   {%- comment -%}

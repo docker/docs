@@ -56,7 +56,7 @@
                                 <div class="metadata-items">
                                     <ul>
                                       {%- unless page.skip_read_time == true %}{% assign words = content | number_of_words %}{% if words >= 360 -%}
-                                      <li title="Estimated reading time"><i class="fa fa-clock" aria-hidden="true"></i> {{ words | divided_by:180 }} minute read</span></li>
+                                      <li title="Estimated reading time"><i class="fa fa-clock" aria-hidden="true"></i> {{ words | divided_by:180 }} minute read</li>
                                       {%- endif %}{% endunless -%}
                                       {%- if edit_url != "" -%}
                                       <li><a href="{{ edit_url }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit this page</a></li>
@@ -66,18 +66,6 @@
                                       {%- endif -%}
                                     </ul>
                                 </div>
-                                {%- unless page.notags == true -%}
-                                {%- assign keywords = page.keywords | split:"," -%}
-                                {%- if keywords.size > 0 -%}
-                                <div class="side-toc-title">Tags</div>
-                                <div class="keywords-items">
-                                {%- for keyword in keywords -%}
-                                {%- assign strippedKeyword = keyword | strip -%}
-                                <a href="/search/?q={{ strippedKeyword }}" class="nomunge"><i class="fa fa-tag" aria-hidden="true"></i> {{ strippedKeyword }}</a>
-                                {%- endfor -%}
-                                </div>
-                                {%- endif -%}
-                                {%- endunless %}
                                 <div class="side-toc-title">Contents</div>
                                 {%- include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name -%}
                                 {%- endunless -%}

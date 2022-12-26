@@ -3,7 +3,7 @@ $dark-blue: #002c66;
 body.landing {
   background-color: $bg-body-landing;
 
-  h2, h5, h6 {
+  h1, h2, h5, h6 {
     font-family: $headings-landing;
   }
 
@@ -41,11 +41,6 @@ body.landing {
       color: white;
     }
 
-    .navbar-brand {
-      padding-top: 12px;
-      padding-bottom: 12px;
-    }
-
     .navbar-toggle {
       margin: 15px;
       height: 20px;
@@ -66,34 +61,12 @@ body.landing {
   }
 
   .hero {
-    padding-top: 20px;
+    padding-top: 48px;
 
-    h2 {
+    h1 {
       font-size: 32px;
       line-height: 32px;
-      margin-bottom: 14px;
-    }
-
-    input {
-      font-size: 18px;
-      height: 50px;
-      line-height: 24px;
-      padding: 13px 20px;
-
-      &:focus {
-        box-shadow: none;
-        outline: none;
-      }
-    }
-
-    #autocompleteResults {
-      left: 14px;
-      right: 14px;
-      width: unset;
-
-      @include before-lg-width {
-          padding: 0;
-      }
+      margin: 28px 0;
     }
   }
 
@@ -330,7 +303,7 @@ body.landing {
     }
   }
 
-  footer {
+  footer.footer {
     background-color: $bg-footer-landing;
     margin-top: 130px;
 

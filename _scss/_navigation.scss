@@ -259,10 +259,6 @@ input:checked+.slider:before {
 }
 
 @include md-width {
-  .landing .navbar-nav > li > a {
-    padding-top:    17px;
-    padding-bottom:  9px;
-  }
   .navbar-nav > li > a {
     color:          $white;
     line-height:    25px;

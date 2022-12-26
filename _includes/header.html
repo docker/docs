@@ -7,7 +7,9 @@
         </div>
         <div class="navbar-collapse" aria-expanded="false" style="height: 1px;">
             {% include navigation.html %}
-            {%- include breadcrumbs.html -%}
+            {%- if page.layout != 'landing' -%}
+              {%- include breadcrumbs.html -%}
+            {%- endif -%}
         </div>
     </div>
 </nav>
