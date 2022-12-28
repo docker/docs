@@ -247,7 +247,7 @@ import { createDockerDesktopClient } from "@docker/extension-api-client";
 const ddClient = createDockerDesktopClient();
 
 export function App() {
-  const [containers, setContainers] = React.useState([]);
+  const [containers, setContainers] = React.useState<any[]>([]);
 
   useEffect(() => {
     // List all containers
