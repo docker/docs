@@ -93,7 +93,7 @@ LABEL org.opencontainers.image.title="My extension" \
     org.opencontainers.image.description="Your Desktop Extension Description" \
     org.opencontainers.image.vendor="Awesome Inc." \
     com.docker.desktop.extension.api.version="0.3.0" \
-    com.docker.desktop.extension.icon="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
+    com.docker.desktop.extension.icon="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" \
     com.docker.extension.screenshots="" \
     com.docker.extension.detailed-description="" \
     com.docker.extension.publisher-url="" \
@@ -247,7 +247,7 @@ import { createDockerDesktopClient } from "@docker/extension-api-client";
 const ddClient = createDockerDesktopClient();
 
 export function App() {
-  const [containers, setContainers] = React.useState([]);
+  const [containers, setContainers] = React.useState<any[]>([]);
 
   useEffect(() => {
     // List all containers
