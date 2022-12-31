@@ -36,7 +36,7 @@ When Kubernetes is enabled and running, an additional status bar in the Dashboar
 ## Use the kubectl command
 
 Kubernetes integration provides the Kubernetes CLI command
-at `/usr/local/bin/kubectl` on Mac and at `C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe` on Windows. This location may not be in your shell's `PATH`
+at `/usr/local/bin/kubectl` on Mac and at `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` on Windows. This location may not be in your shell's `PATH`
 variable, so you may need to type the full path of the command or add it to
 the `PATH`.
 
