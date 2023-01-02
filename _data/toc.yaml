@@ -443,6 +443,8 @@ reference:
           title: docker context ls
         - path: /engine/reference/commandline/context_rm/
           title: docker context rm
+        - path: /engine/reference/commandline/context_show/
+          title: docker context show
         - path: /engine/reference/commandline/context_update/
           title: docker context update
         - path: /engine/reference/commandline/context_use/
@@ -641,6 +643,8 @@ reference:
       section:
       - path: /engine/reference/commandline/stack/
         title: docker stack
+      - path: /engine/reference/commandline/stack_config/
+        title: docker stack config
       - path: /engine/reference/commandline/stack_deploy/
         title: docker stack deploy
       - path: /engine/reference/commandline/stack_ls/
@@ -733,6 +737,8 @@ reference:
         title: docker volume prune
       - path: /engine/reference/commandline/volume_rm/
         title: docker volume rm
+      - path: /engine/reference/commandline/volume_update/
+        title: docker volume update
     - path: /engine/reference/commandline/wait/
       title: docker wait
   - title: Docker Compose CLI reference
