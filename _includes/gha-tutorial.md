@@ -20,14 +20,14 @@ Create a GitHub repository and configure the Docker Hub secrets.
 
 2. Open the repository **Settings**, and go to **Secrets** > **Actions**.
 
-3. Create a new secret named `DOCKER_HUB_USERNAME` and your Docker ID as value.
+3. Create a new secret named `DOCKERHUB_USERNAME` and your Docker ID as value.
 
 4. Create a new
    [Personal Access Token (PAT)](/docker-hub/access-tokens/#create-an-access-token)
    for Docker Hub. You can name this token `clockboxci`.
 
 5. Add the PAT as a second secret in your GitHub repository, with the name
-   `DOCKER_HUB_ACCESS_TOKEN`.
+   `DOCKERHUB_TOKEN`.
 
 With your repository created, and secrets configured, you're now ready for
 action!
@@ -85,8 +85,8 @@ jobs:
         name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -97,7 +97,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/clockbox:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
 ```
 {% endraw %}
 
@@ -145,8 +145,8 @@ jobs:
         name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -157,7 +157,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/clockbox:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
 ```
 {% endraw %}
 
