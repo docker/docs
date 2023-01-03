@@ -67,5 +67,5 @@ When building your extension, ensure that first time users of the extension and 
 ## What's next?
 
 - Explore our [design principles](design-principles.md).
-- Take a look at our [UI styling guidelines](overview.md).
+- Take a look at our [UI styling guidelines](index.md).
 - Learn how to [publish your extension](../extensions/index.md).

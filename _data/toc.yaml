@@ -1207,12 +1207,12 @@ manuals:
               path: /desktop/extensions-sdk/architecture/metadata/
         - sectiontitle: "Design and UI styling"
           section:
+             - title: UI styling guidelines
+               path: /desktop/extensions-sdk/design/
              - title: Guidelines
                path: /desktop/extensions-sdk/design/design-guidelines/
              - title: Docker design principles
                path: /desktop/extensions-sdk/design/design-principles/
-             - title: UI styling guidelines
-               path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
         - sectiontitle: "Developer Guides"
@@ -1225,6 +1225,8 @@ manuals:
               path: /desktop/extensions-sdk/guides/kubernetes/
             - title: Authentication
               path: /desktop/extensions-sdk/guides/oauth2-flow/
+            - title: Security
+              path: /desktop/extensions-sdk/guides/security/
         - sectiontitle: Developer SDK tools
           section:
             - title: "Test and debug"

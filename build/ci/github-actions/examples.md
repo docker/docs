@@ -919,10 +919,10 @@ jobs:
           tags: user/app:latest
       -
         name: Update repo description
-        uses: peter-evans/dockerhub-description@v2
+        uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: user/app
 ```
 {% endraw %}

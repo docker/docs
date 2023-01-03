@@ -31,7 +31,7 @@ What you'll see is that the files created in one container aren't available in a
 
 2. Validate that you can see the output by accessing the terminal in the container. To do so, go to **Containers** in Docker Desktop, hover over the container running the **ubuntu** image, and select the **Show container actions** menu. From the dropdown menu, select **Open in terminal**.
 
-    You will see a terminal that is running a shell in the ubuntu container. Run the following command to see the content of the `/data.txt` file. Close this terminal afterwards again.
+    You will see a terminal that is running a shell in the Ubuntu container. Run the following command to see the content of the `/data.txt` file. Close this terminal afterwards again.
 
     ```console
     $ cat /data.txt
@@ -69,11 +69,11 @@ the container back to the host machine. If a directory in the container is mount
 directory are also seen on the host machine. If we mount that same directory across container restarts, we'd see
 the same files.
 
-There are two main types of volumes. We will eventually use both, but we will start with **named volumes**.
+There are two main types of volumes. We will eventually use both, but we will start with volume mounts.
 
 ## Persist the todo data
 
-By default, the todo app stores its data in a [SQLite Database](https://www.sqlite.org/index.html){:target="_blank" rel="noopener" class="_"} at
+By default, the todo app stores its data in a SQLite database at
 `/etc/todos/todo.db` in the container's filesystem. If you're not familiar with SQLite, no worries! It's simply a relational database in 
 which all of the data is stored in a single file. While this isn't the best for large-scale applications,
 it works for small demos. We'll talk about switching this to a different database engine later.
@@ -83,9 +83,9 @@ next container, it should be able to pick up where the last one left off. By cre
 (often called "mounting") it to the directory the data is stored in, we can persist the data. As our container 
 writes to the `todo.db` file, it will be persisted to the host in the volume.
 
-As mentioned, we are going to use a **named volume**. Think of a named volume as simply a bucket of data. 
-Docker maintains the physical location on the disk and you only need to remember the name of the volume. 
-Every time you use the volume, Docker will make sure the correct data is provided.
+As mentioned, we are going to use a volume mount. Think of a volume mount as an opaque bucket of data. 
+Docker fully manages the volume, including where it is stored on disk. You only need to remember the
+name of the volume.
 
 1. Create a volume by using the `docker volume create` command.
 
@@ -95,11 +95,11 @@ Every time you use the volume, Docker will make sure the correct data is provide
 
 2. Stop and remove the todo app container once again in the Dashboard (or with `docker rm -f <id>`), as it is still running without using the persistent volume.
 
-3. Start the todo app container, but add the `-v` flag to specify a volume mount. We will use the named volume and mount
-   it to `/etc/todos`, which will capture all files created at the path.
+3. Start the todo app container, but add the `--mount` option to specify a volume mount. We will give the volume a name, and mount
+   it to `/etc/todos` in the container, which will capture all files created at the path.
 
     ```console
-    $ docker run -dp 3000:3000 -v todo-db:/etc/todos getting-started
+    $ docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
     ```
 
 4. Once the container starts up, open the app and add a few items to your todo list.
@@ -117,17 +117,9 @@ Every time you use the volume, Docker will make sure the correct data is provide
 
 Hooray! You've now learned how to persist data!
 
->**Note**
->
->While named volumes and bind mounts (which we'll talk about in a minute) are the two main types of volumes supported
->by a default Docker engine installation, there are many volume driver plugins available to support NFS, SFTP, NetApp, 
->and more! This will be especially important once you start running containers on multiple hosts in a clustered
->environment with Swarm, Kubernetes, etc.
->
-
 ## Dive into the volume
 
-A lot of people frequently ask "Where is Docker _actually_ storing my data when I use a named volume?" If you want to know, 
+A lot of people frequently ask "Where is Docker storing my data when I use a volume?" If you want to know, 
 you can use the `docker volume inspect` command.
 
 ```console
@@ -148,11 +140,11 @@ $ docker volume inspect todo-db
 The `Mountpoint` is the actual location on the disk where the data is stored. Note that on most machines, you will
 need to have root access to access this directory from the host. But, that's where it is!
 
->**Accessing volume data directly on Docker Desktop**
->
->While running in Docker Desktop, the Docker commands are actually running inside a small VM on your machine.
->If you wanted to look at the actual contents of the Mountpoint directory, you would need to first get inside
->of the VM.
+> **Accessing volume data directly on Docker Desktop**
+> 
+> While running in Docker Desktop, the Docker commands are actually running inside a small VM on your machine.
+> If you wanted to look at the actual contents of the Mount point directory, you would need to look inside of
+> that VM.
 
 ## Next steps
 

@@ -18,7 +18,7 @@ The build process consists of:
 
 > Note
 >
-> Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance){:target="_blank" rel="noopener" class="_"}.
+> Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/index.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance){:target="_blank" rel="noopener" class="_"}.
 
 For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}.
 
