@@ -71,4 +71,6 @@ $ docker extension rm <name-of-your-extension>
 
 - Build an [advanced frontend](../build/frontend-extension-tutorial.md) extension.
 - Learn more about extensions [architecture](../architecture/index.md).
-- Learn more about [designing the UI](../design/design-guidelines.md).
+- Explore our [design principles](../design/design-principles.md).
+- Take a look at our [UI styling guidelines](../design/index.md).
+- Learn how to [publish your extension](../extensions/index.md).
