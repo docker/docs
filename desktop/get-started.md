@@ -33,7 +33,7 @@ redirect_from:
 
    ![Docker Quick Start tutorial](images/docker-tutorial-linux.png)
 
-To run the Quick Start Guide on demand, select ![whale menu](images/whale-x.svg){: .inline} and then choose **Quick Start Guide**.
+To run the Quick Start Guide on demand, select the Docker menu ![whale menu](images/whale-x.svg){: .inline} and then choose **Quick Start Guide**.
 
 For a more detailed guide, see [Get started](../get-started/index.md).
 
@@ -49,17 +49,17 @@ In large enterprises where admin access is restricted, administrators can create
 
 ### Two-factor authentication
 
-Docker Desktop enables you to sign in to Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
+Docker Desktop lets you to sign in to Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
 
-You must enable two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
+You must turn on two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
 
-After two-factor authentication is enabled:
+After two-factor authentication is turned on:
 
 1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**.
 
-2. Enter your Docker ID and password and click **Sign in**.
+2. Enter your Docker ID and password and select **Sign in**.
 
-3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six-digit code from your phone and then click **Verify**.
+3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six-digit code from your phone and then select **Verify**.
 
 ### Credentials management for Linux users
 
@@ -67,10 +67,15 @@ Docker Desktop relies on [`pass`](https://www.passwordstore.org/){: target="_bla
 Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
 Docker Desktop displays a warning if you've not initialized `pass`.
 
-You can intialize pass by using a gpg key. To generate a gpg key, run:
+You can initialize pass by using a gpg key. To generate a gpg key, run:
 
 ``` console
 $ gpg --generate-key
+``` 
+
+Below is an example similar to what you see once you run the above command:
+
+```console
 ...
 GnuPG needs to construct a user ID to identify your key.
 
@@ -87,10 +92,14 @@ uid                      Molly <molly@example.com>
 sub   rsa3072 2022-03-31 [E] [expires: 2024-03-30]
 ```
 
-To initialize `pass`, run the following command using the public key generated from the previous command
+To initialize `pass`, run the following command using the public key generated from the previous command:
 
 ```console
-molly@ubuntu:~$ pass init <generated gpg-id public key>
+$ pass init <generated gpg-id public key>
+``` 
+Below is an example similar to what you see once you run the above command:
+
+```console
 mkdir: created directory '/home/molly/.password-store/'
 Password store initialized for <generated gpg-id public key>
 ```
@@ -107,7 +116,7 @@ Digest: sha256:3c6b73ce467f04d4897d7a7439782721fd28ec9bf62ea2ad9e81a5fb7fb3ff96
 Status: Downloaded newer image for molly/privateimage:latest
 docker.io/molly/privateimage:latest
 ```
-## Where to go next
+## What's next?
 
 - [Explore Docker Desktop](use-desktop/index.md) and its features. 
 - Change your Docker Desktop settings
