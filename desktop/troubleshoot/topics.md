@@ -37,6 +37,22 @@ you might need to enable [file sharing](../settings/linux.md#file-sharing).
 Volume mounting requires shared drives for projects that live outside of the
 `/home/<user>` directory. From **Settings**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
 
+### Docker Desktop fails to start on MacOS or Linux platforms
+
+On MacOS and Linux, Docker Desktop creates unix domain sockets for communication among various docker processes.
+
+Docker fails to start if the absolute path length of any of these sockets exceeds the OS limitation which is 104 characters on MacOS and 108 characters on Linux. These sockets are created under the user's home directory, if the user id length is such that the absolute path of the socket exceeds the OS path length limitation, then Docker Desktop is unable to create the socket and fails to start. The workaround for this is to shorten the user id.
+
+Following are the examples of errors on MacOS which indicate that the startup failure was due to exceeding the above mentioned OS limitation:
+
+```console
+[vpnkit-bridge][F] listen unix <HOME>/Library/Containers/com.docker.docker/Data/http-proxy-control.sock: bind: invalid argument
+```
+
+```console
+[com.docker.backend][E] listen(vsock:4099) failed: listen unix <HOME>/Library/Containers/com.docker.docker/Data/vms/0/00000002.00001003: bind: invalid argument
+```
+
 ## Topics for Mac
 
 ### Incompatible CPU detected

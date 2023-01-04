@@ -902,8 +902,6 @@ reference:
       title: Compose file build
     - path: /compose/compose-file/deploy/
       title: Compose file deploy
-    - path: /compose/faq/
-      title: Frequently asked questions
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
@@ -1703,6 +1701,8 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
+  - path: /compose/faq/
+    title: FAQs
   - path: /compose/release-notes/
     title: Release notes
 

@@ -1,28 +1,55 @@
 ---
 description: Docker Compose FAQ
 keywords: documentation, docs,  docker, compose, faq
-title: Frequently asked questions
+title: FAQs
 ---
 
-If you don’t see your question here, feel free to drop by
-[#docker-compose](https://dockercommunity.slack.com/archives/C2X82D9PA) on the
-[Docker Community Slack](https://dockr.ly/slack).
+## How do I get help?
 
+Docker Compose is under active development. If you need help, would like to
+contribute, or simply want to talk about the project with like-minded
+individuals, we have a number of open channels for communication.
 
-## Can I control service startup order?
+* To report bugs or file feature requests, use the [issue tracker on Github](https://github.com/docker/compose/issues).
 
-Yes - see [Controlling startup order](startup-order.md).
+* To talk about the project with people in real time, join the
+  `#docker-compose` channel on the [Docker Community Slack](https://dockr.ly/slack).
 
+* To contribute code submit a [pull request on Github](https://github.com/docker/compose/pulls).
+
+## Where can I find example Compose files?
+
+There are [many examples of Compose files on GitHub](https://github.com/docker/awesome-compose).
+
+## What's the difference between `up`, `run`, and `start`?
+
+Typically, you want `docker compose up`. Use `up` to start or restart all the
+services defined in a `docker-compose.yml`. In the default "attached"
+mode, you see all the logs from all the containers. In "detached" mode (`-d`),
+Compose exits after starting the containers, but the containers continue to run
+in the background.
+
+The `docker compose run` command is for running "one-off" or "adhoc" tasks. It
+requires the service name you want to run and only starts containers for services
+that the running service depends on. Use `run` to run tests or perform
+an administrative task such as removing or adding data to a data volume
+container. The `run` command acts like `docker run -ti` in that it opens an
+interactive terminal to the container and returns an exit status matching the
+exit status of the process in the container.
+
+The `docker compose start` command is useful only to restart containers
+that were previously created, but were stopped. It never creates new
+containers.
 
 ## Why do my services take 10 seconds to recreate or stop?
 
-Compose stop attempts to stop a container by sending a `SIGTERM`. It then waits
+Compose stops attempts to stop a container by sending a `SIGTERM`. It then waits
 for a [default timeout of 10 seconds](../engine/reference/commandline/compose_stop.md). After the timeout,
-a `SIGKILL` is sent to the container to forcefully kill it.  If you
+a `SIGKILL` is sent to the container to forcefully kill it. If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
 
-There has already been a lot written about this problem of
+There has already been a lot written about the problem of
 [processes handling signals](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
 in containers.
 
@@ -54,32 +81,16 @@ system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
 [tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
 handling `SIGTERM` properly.
 
+## Can I control service startup order?
+
+Yes - see [Controlling startup order](startup-order.md).
+
 ## How do I run multiple copies of a Compose file on the same host?
 
 Compose uses the project name to create unique identifiers for all of a
 project's  containers and other resources. To run multiple copies of a project,
 set a custom project name using the [`-p` command line option](reference/index.md)
 or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
-
-## What's the difference between `up`, `run`, and `start`?
-
-Typically, you want `docker compose up`. Use `up` to start or restart all the
-services defined in a `docker-compose.yml`. In the default "attached"
-mode, you see all the logs from all the containers. In "detached" mode (`-d`),
-Compose exits after starting the containers, but the containers continue to run
-in the background.
-
-The `docker compose run` command is for running "one-off" or "adhoc" tasks. It
-requires the service name you want to run and only starts containers for services
-that the running service depends on. Use `run` to run tests or perform
-an administrative task such as removing or adding data to a data volume
-container. The `run` command acts like `docker run -ti` in that it opens an
-interactive terminal to the container and returns an exit status matching the
-exit status of the process in the container.
-
-The `docker compose start` command is useful only to restart containers
-that were previously created, but were stopped. It never creates new
-containers.
 
 ## Can I use JSON instead of YAML for my Compose file?
 
@@ -94,7 +105,7 @@ $ docker compose -f docker-compose.json up
 ## Should I include my code with `COPY`/`ADD` or a volume?
 
 You can add your code to the image using `COPY` or `ADD` directive in a
-`Dockerfile`.  This is useful if you need to relocate your code along with the
+`Dockerfile`.  This is useful if you need to move your code along with the
 Docker image, for example when you're sending code to another environment
 (production, CI, etc).
 
@@ -106,25 +117,6 @@ There may be cases where you want to use both. You can have the image
 include the code using a `COPY`, and use a `volume` in your Compose file to
 include the code from the host during development. The volume overrides
 the directory contents of the image.
-
-## Where can I find example compose files?
-
-There are [many examples of Compose files on
-GitHub](https://github.com/search?q=in%3Apath+docker-compose.yml+extension%3Ayml&type=Code).
-
-## Getting help
-
-Docker Compose is under active development. If you need help, would like to
-contribute, or simply want to talk about the project with like-minded
-individuals, we have a number of open channels for communication.
-
-* To report bugs or file feature requests: use the [issue tracker on Github](https://github.com/docker/compose/issues).
-
-* To talk about the project with people in real time: join the
-  `#docker-compose` channel on the Docker Community Slack.
-
-* To contribute code or documentation changes: submit a [pull request on Github](https://github.com/docker/compose/pulls).
-
 
 ## Compose documentation
 
