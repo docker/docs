@@ -42,7 +42,7 @@ from the failure of a manager node without downtime.
 * A three-manager swarm tolerates a maximum loss of one manager.
 * A five-manager swarm tolerates a maximum simultaneous loss of two
 manager nodes.
-* An `N` manager cluster tolerates the loss of at most
+* An `N` (`N` is an odd number of manager nodes in the cluster) manager cluster tolerates the loss of at most
 `(N-1)/2` managers.
 * Docker recommends a maximum of seven manager nodes for a swarm.
 
