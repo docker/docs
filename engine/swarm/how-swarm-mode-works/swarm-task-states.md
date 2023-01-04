@@ -32,6 +32,7 @@ Tasks go through the states in the following order:
 | `PENDING`   | Resources for the task were allocated.                                                                      |
 | `ASSIGNED`  | Docker assigned the task to nodes.                                                                          |
 | `ACCEPTED`  | The task was accepted by a worker node. If a worker node rejects the task, the state changes to `REJECTED`. |
+| `READY`     | The worker node is ready to start the task                                                                  |
 | `PREPARING` | Docker is preparing the task.                                                                               |
 | `STARTING`  | Docker is starting the task.                                                                                |
 | `RUNNING`   | The task is executing.                                                                                      |
