@@ -34,6 +34,11 @@ When creating a new repository:
 * The description can be up to 100 characters and used in the search result.
 * You can link a GitHub or Bitbucket account now, or choose to do it later in
   the repository settings.
+* You can set your default visibility to public or private for your account.
+
+  > **Note:**
+  >
+  > For organizations creating a new repository, it's recommended you select **Private**.
 
 ![Setting page for creating a repo](../images/repo-create-details.png)
 
@@ -43,6 +48,10 @@ images to this repository.
 ## Creating a private repository
 
 To create a private repository, navigate to Docker Hub and select **Repositories** and **Private**.
+
+> **Note**
+>
+> To update your public repository to private, navigate to your repository, select **Settings** and **Make private**.
 
 ![Create Private Repo](/docker-hub/images/repo-create-private.png){: style="max-width: 60%"}
 
