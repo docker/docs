@@ -1121,6 +1121,8 @@ manuals:
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
           title: Run Docker Desktop for Windows in a VM or VDI environment
+        - path: /desktop/allow-list/
+          title: Allowlist for Docker Desktop
         - path: /desktop/uninstall/
           title: Uninstall Docker Desktop
     - sectiontitle: Hardened Docker Desktop
