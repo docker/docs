@@ -15,7 +15,6 @@ This page contains the domain URLs that you need to add to the allowlist to ensu
 |https://api.wootric.com| Analytics |
 |https://cdn.wootric.com| Analytics |
 |https://notify.bugsnag.com| Analytics |
-|https://notify.bugsnag.com| Analytics |
 |https://sessions.bugsnag.com| Analytics |
 |https://auth.docker.io| Authentication |
 |https://cdn.auth0.com| Authentication |
