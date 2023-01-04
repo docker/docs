@@ -4,7 +4,7 @@ horizontalnav:
   path: /
   node: home
 - title: Guides
-  path: /get-started/overview/
+  path: /guides/
   node: guides
 - title: Manuals
   path: /desktop/
@@ -23,10 +23,12 @@ horizontalnav:
 home: {}
 
 guides:
-- title: Docker overview
-  path: /get-started/overview/
+- title: Overview
+  path: /guides/
+- title: Introduction to Docker
+  path: /guides/docker-intro/
 - title: Get Docker
-  path: /get-docker/
+  path: /guides/get-docker/
 - sectiontitle: Get started
   section:
     - title: "Part 1: Overview"
@@ -225,7 +227,7 @@ guides:
         title: Swarm administration guide
       - path: /engine/swarm/raft/
         title: Raft consensus in swarm mode
-- path: /get-started/resources/
+- path: /guides/resources/
   title: "Educational resources"
 
 reference:

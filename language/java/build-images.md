@@ -8,7 +8,7 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Prerequisites
 
-* You understand basic [Docker concepts](../../get-started/overview.md).
+* You understand basic [Docker concepts](../../guides/docker-intro.md).
 * You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
 * You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
   on your machine.
@@ -19,7 +19,7 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 
 To complete this tutorial, you need the following:
 
-- Docker running locally. Follow the instructions to [download and install Docker](../../get-docker.md)
+- Docker running locally. Follow the instructions to [download and install Docker](../../guides/get-docker.md)
 - A Git client
 - An IDE or a text editor to edit files. We recommend using [IntelliJ Community Edition](https://www.jetbrains.com/idea/download/){: target="_blank" rel="noopener" class="_"}.
 

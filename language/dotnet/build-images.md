@@ -17,7 +17,7 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 To complete this tutorial, you need the following:
 
 - .NET SDK version 6.0 or later. [Download .NET SDK](https://dotnet.microsoft.com/download){: target="_blank" rel="noopener" class="_"}.
-- Docker running locally. Follow the instructions to [download and install Docker](../../get-docker.md).
+- Docker running locally. Follow the instructions to [download and install Docker](../../guides/get-docker.md).
 - An IDE or a text editor to edit files. We recommend using [Visual Studio Code](https://code.visualstudio.com/){: target="_blank" rel="noopener" class="_"}.
 
 ## Sample application

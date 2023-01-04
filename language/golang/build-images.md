@@ -13,7 +13,7 @@ redirect_from:
 * Some understanding of Go and its toolchain. This is not a tutorial on Go. If
   you are new to the language, the [Go website](https://golang.org/){: target="_blank" rel="noopener" class="_"}
   is a good starting point, so go (pun intended) check it out.
-* You understand basic [Docker concepts](../../get-started/overview.md).
+* You understand basic [Docker concepts](../../guides/docker-intro.md).
 * You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
 * You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
   on your machine.

@@ -12,10 +12,10 @@ don't worry. This guide doesn't require JavaScript experience.
 
 To complete this guide, you'll need the following:
 
-- Docker running locally. Follow the instructions to [download and install Docker](../get-docker.md).
+- Docker running locally. Follow the instructions to [download and install Docker](../guides/get-docker.md).
 - A [Git client](https://git-scm.com/downloads){:target="_blank" rel="noopener" class="_"}.
 - An IDE or a text editor to edit files. Docker recommends using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}.
-- A conceptual understanding of [containers and images](../get-started/overview.md/#docker-objects).
+- A conceptual understanding of [containers and images](../guides/docker-intro.md/#docker-objects).
 
 ## Get the app
 
@@ -34,7 +34,7 @@ Before you can run the application, you need to get the application source code 
 
 ## Build the app's container image
 
-In order to build the [container image](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}, you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that Docker uses to create a container image.
+In order to build the container image, you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that Docker uses to create a container image.
 
 1. In the `app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
 
@@ -112,7 +112,7 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
 
 ## Start an app container
 
-Now that you have an image, you can run the application in a [container](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}. To do so, you will use the `docker run` command.
+Now that you have an image, you can run the application in a container. To do so, you will use the `docker run` command.
 
 1. Start your container using the `docker run` command and specify the name of the image you just created:
 

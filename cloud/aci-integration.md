@@ -377,7 +377,7 @@ The Docker Compose CLI adds support for running and managing containers on Azure
 
 ### Install Prerequisites
 
-- [Docker 19.03 or later](../get-docker.md)
+- [Docker 19.03 or later](../guides/get-docker.md)
 
 ### Install script
 

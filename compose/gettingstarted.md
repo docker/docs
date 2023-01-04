@@ -12,7 +12,7 @@ The concepts demonstrated here should be understandable even if you're not famil
 ## Prerequisites
 
 You need to have Docker Engine and Docker Compose on your machine. You can either:
-- Install [Docker Engine](../get-docker.md) and [Docker Compose](install/index.md) as standalone binaries
+- Install [Docker Engine](../guides/get-docker.md) and [Docker Compose](install/index.md) as standalone binaries
 - Install [Docker Desktop](../desktop/index.md) which includes both Docker Engine and Docker Compose
 
 You don't need to install Python or Redis, as both are provided by Docker images.

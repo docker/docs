@@ -7,7 +7,8 @@ redirect_from:
 - /engine/introduction/understanding-docker/
 - /engine/understanding-docker/
 - /engine/docker-overview/
-title: Docker overview
+- /get-started/overview/
+title: Intrduction to Docker
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
@@ -197,6 +198,6 @@ These namespaces provide a layer of isolation. Each aspect of a container runs
 in a separate namespace and its access is limited to that namespace.
 
 ## Next steps
-- Read about [installing Docker](../get-docker.md).
+- Read about [installing Docker](../guides/get-docker.md).
 - Get hands-on experience with the [Getting started with Docker](index.md)
     tutorial.

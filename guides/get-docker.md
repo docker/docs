@@ -6,6 +6,7 @@ redirect_from:
 - /install/
 - /install/overview/
 - /installation/
+- /get-docker/
 ---
 
 > **Docker Desktop terms**
