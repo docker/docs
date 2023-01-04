@@ -24,7 +24,7 @@ a Linux machine, you will need to [install Docker Compose](../compose/install/in
 After installation, you should be able to run the following and see version information.
 
 ```console
-$ docker compose version
+$ docker-compose version
 ```
 
 ## Create the Compose file
