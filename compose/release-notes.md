@@ -13,19 +13,19 @@ redirect_from:
 - Dependencies upgrade: bump cli-docs-tool to 0.5.1
 
 ### Bug fixes and enhancements
-* Add support of privileged attribute in `service.build` section. Pull Request [compose#10112](https://github.com/docker/compose/pull/10112){:
+* Added support of the `privileged` attribute in the `service.build` section. Pull Request [compose#10112](https://github.com/docker/compose/pull/10112){:
   target="_blank" rel="noopener" class="_"}
-* Introduce --ignore-buildable to ignore buildable images on pull. Fixed [compose#8805](https://github.com/docker/compose/issues/8805){:
+* Introduced `--ignore-buildable` to ignore buildable images on pull. Fixed [compose#8805](https://github.com/docker/compose/issues/8805){:
   target="_blank" rel="noopener" class="_"}
-* Introduce `--no-attach` to ignore some service output. Fixed [compose#8546](https://github.com/docker/compose/issues/8546){:
+* Introduceed `--no-attach` to ignore some service outputs. Fixed [compose#8546](https://github.com/docker/compose/issues/8546){:
   target="_blank" rel="noopener" class="_"}
 * Fixed issue with `logs` when `driver:none` is set. Fixed [compose#9030](https://github.com/docker/compose/issues/9030){:
   target="_blank" rel="noopener" class="_"}
-* Rely on dockerCLI.streams. Pull Request [compose#10082](https://github.com/docker/compose/pull/10082){:
+* Compose now relies on dockerCLI.streams. Pull Request [compose#10082](https://github.com/docker/compose/pull/10082){:
   target="_blank" rel="noopener" class="_"}
 * Fixed issue with service hash that MUST exclude replicas. Fixed [compose#10077](https://github.com/docker/compose/issues/10077){:
   target="_blank" rel="noopener" class="_"}
-* Check service names based on project, not running containers. Fixed [compose#9951](https://github.com/docker/compose/issues/9951){:
+* Compose now checks service names based on project, not running containers. Fixed [compose#9951](https://github.com/docker/compose/issues/9951){:
   target="_blank" rel="noopener" class="_"}
 * Fixed security opts support (seccomp and unconfined). Fixed [compose#9505](https://github.com/docker/compose/issues/9505){:
   target="_blank" rel="noopener" class="_"}
@@ -35,7 +35,7 @@ redirect_from:
   target="_blank" rel="noopener" class="_"}
 * Compose should ignore not only auto-removed containers but also "removal in progress" for orphan containers. Pull Request [compose#10136](https://github.com/docker/compose/pull/10136){:
   target="_blank" rel="noopener" class="_"}
-* Limit build concurrency according to `--parallel`. Fixed [compose#9091](https://github.com/docker/compose/issues/9091){:
+* Compose limits build concurrency according to `--parallel`. Fixed [compose#9091](https://github.com/docker/compose/issues/9091){:
   target="_blank" rel="noopener" class="_"}
 
 ## 2.14.2
