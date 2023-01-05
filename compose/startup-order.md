@@ -14,9 +14,9 @@ A good example of when you might use this is an application which needs to acces
 
 ## Control startup
 
-On startup, Compose Compose does not wait until a container is "ready", only until it's running. This can cause issues if, for example you have a relational database system that needs to start its own services before being able to handle incoming connections. 
+On startup, Compose does not wait until a container is "ready", only until it's running. This can cause issues if, for example you have a relational database system that needs to start its own services before being able to handle incoming connections.
 
-The solution for detecting the ready state of a service is  to use the `condition ` attribute with one of the following options:
+The solution for detecting the ready state of a service is  to use the `condition` attribute with one of the following options:
 
 - `service_started`
 - `service_healthy`. This specifies that a dependency is expected to be “healthy”, which is defined with `healthcheck`, before starting a dependent service.
