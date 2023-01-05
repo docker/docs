@@ -14,24 +14,23 @@ up your application, you can run Compose apps on a Swarm cluster.
 
 ### Modify your Compose file for production
 
-You probably need to make changes to your app configuration to make it ready for
-production. These changes may include:
+You may need to make changes to your app configuration to make it ready for
+production. These changes might include:
 
 - Removing any volume bindings for application code, so that code stays inside
   the container and can't be changed from outside
 - Binding to different ports on the host
 - Setting environment variables differently, such as reducing the verbosity of
   logging, or to specify settings for external services such as an email server
-- Specifying a restart policy like `restart: always` to avoid downtime
+- Specifying a restart policy like [`restart: always`](compose-file/index.md#restart){: target="_blank" rel="noopener" class="_" } to avoid downtime
 - Adding extra services such as a log aggregator
 
 For this reason, consider defining an additional Compose file, say
 `production.yml`, which specifies production-appropriate
-configuration. This configuration file only needs to include the changes you'd
-like to make from the original Compose file. The additional Compose file
-can be applied over the original `docker-compose.yml` to create a new configuration.
+configuration. This configuration file only needs to include the changes you want to make from the original Compose file. The additional Compose file
+is then applied over the original `docker-compose.yml` to create a new configuration.
 
-Once you've got a second configuration file, tell Compose to use it with the
+Once you have a second configuration file, you can use it with the
 `-f` option:
 
 ```console
@@ -52,24 +51,21 @@ $ docker compose build web
 $ docker compose up --no-deps -d web
 ```
 
-This first rebuilds the image for `web` and then stop, destroy, and recreate
-*just* the `web` service. The `--no-deps` flag prevents Compose from also
+This first command rebuilds the image for `web` and then stops, destroys, and recreates
+just the `web` service. The `--no-deps` flag prevents Compose from also
 recreating any services which `web` depends on.
 
 ### Running Compose on a single server
 
 You can use Compose to deploy an app to a remote Docker host by setting the
 `DOCKER_HOST`, `DOCKER_TLS_VERIFY`, and `DOCKER_CERT_PATH` environment variables
-appropriately. See also [Compose CLI environment variables](../compose/reference/envvars.md).
+appropriately. See also [Compose CLI environment variables](reference/envvars.md).
 
 Once you've set up your environment variables, all the normal `docker compose`
 commands work with no further configuration.
 
-## Compose documentation
+## What's new?
 
-- [User guide](index.md)
-- [Installing Compose](install/index.md)
-- [Getting Started](gettingstarted.md)
 - [Command line reference](reference/index.md)
 - [Compose file reference](compose-file/index.md)
 - [Sample apps with Compose](samples-for-compose.md)
