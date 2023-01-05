@@ -179,7 +179,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms
 
-- Docker Desktop now requires an internal ne2rk subnet of size /24. If you were previously using a /28, it is automatically expanded to /24. If you experience ne2rking issues, check to see if you have a clash between the Docker subnet and your infrastructure. Fixes [docker/for-win#13025](https://github.com/docker/for-win/issues/13025).
+- Docker Desktop now requires an internal network subnet of size /24. If you were previously using a /28, it is automatically expanded to /24. If you experience networking issues, check to see if you have a clash between the Docker subnet and your infrastructure. Fixes [docker/for-win#13025](https://github.com/docker/for-win/issues/13025).
 - Fixed an issue that prevents users from creating Dev Environments when the Git URL has upper-case characters.
 - Fix the `vpnkit.exe is not running` error reported in diagnostics.
 - Reverted qemu to 6.2.0 to fix errors like `PR_SET_CHILD_SUBREAPER is unavailable` when running emulated amd64 code.
@@ -188,7 +188,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed issues related to performing actions on selected containers. [Fixes https://github.com/docker/for-win/issues/13005](https://github.com/docker/for-win/issues/13005)
 - Added functionality that allows you to display timestamps for your container or project view.
 - Fixed a possible segfault when interrupting `docker pull` with Control+C.
-- Increased the default DHCP lease time to avoid the VM's ne2rk glitching and dropping connections every 2 hours.
+- Increased the default DHCP lease time to avoid the VM's network glitching and dropping connections every two hours.
 - Removed the infinite spinner on the containers list. [Fixes https://github.com/docker/for-mac/issues/6486](https://github.com/docker/for-mac/issues/6486)
 - Fixed bug which showed incorrect values on used space in **Settings**.
 - Fixed a bug that caused Kubernetes not to start with the containerd integration.
@@ -259,7 +259,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 #### For all platforms
 
 - Fixed a possible segfault when interrupting `docker pull` with `Control+C` or `CMD+C`.
-- Increased the default DHCP lease time to avoid the VM's ne2rk glitching and dropping connections every 2 hours.
+- Increased the default DHCP lease time to avoid the VM's network glitching and dropping connections every two hours.
 - Reverted `Qemu` to `6.2.0` to fix errors like `PR_SET_CHILD_SUBREAPER is unavailable` when running emulated amd64 code.
 
 #### For Mac
@@ -308,7 +308,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- 2 new security features have been introduced for Docker Business users, Settings Management and Enhanced Container Isolation. Read more about Docker Desktop’s new [Hardened Docker Desktop security model](hardened-desktop/index.md).
+- Two new security features have been introduced for Docker Business users, Settings Management and Enhanced Container Isolation. Read more about Docker Desktop’s new [Hardened Docker Desktop security model](hardened-desktop/index.md).
 - Added the new Dev Environments CLI `docker dev`, so you can create, list, and run Dev Envs via command line. Now it's easier to integrate Dev Envs into custom scripts.
 - Docker Desktop can now be installed to any drive and folder using the `--installation-dir`. Partially addresses [docker/roadmap#94](https://github.com/docker/roadmap/issues/94).
 
@@ -407,7 +407,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Added the ability to use containerd for pulling and storing images. This is an experimental feature.
 - Docker Desktop now runs untagged images. Fixes [docker/for-mac#6425](https://github.com/docker/for-mac/issues/6425).
 - Added search capabilities to Docker Extension's Marketplace. Fixes [docker/roadmap#346](https://github.com/docker/roadmap/issues/346).
-- Added the ability to zoom in, out or set Docker Desktop to Actual Size. This is d1 by using keyboard shortcuts ⌘ + / CTRL +, ⌘ - / CTRL -, ⌘ 0 / CTRL 0 on Mac and Windows respectively, or through the View menu on Mac.
+- Added the ability to zoom in, out or set Docker Desktop to Actual Size. This is done by using keyboard shortcuts ⌘ + / CTRL +, ⌘ - / CTRL -, ⌘ 0 / CTRL 0 on Mac and Windows respectively, or through the View menu on Mac.
 - Added compose stop button if any related container is stoppable.
 - Individual compose containers are now deletable from the **Container** view.
 - Removed the workaround for virtiofsd <-> qemu protocol mismatch on Fedora 35, as it is no longer needed. Fedora 35 users should upgrade the qemu package to the most recent version (qemu-6.1.0-15.fc35 as of the time of writing).
@@ -559,7 +559,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### New
 
 - Docker Desktop is now fully supported for Docker Business customers inside VMware ESXi and Azure VMs. For more information, see [Run Docker Desktop inside a VM or VDI environment](../desktop/vm-vdi.md)
-- Added 2 new extensions ([vcluster](https://hub.docker.com/extensions/loftsh/vcluster-dd-extension) and [PGAdmin4](https://hub.docker.com/extensions/mochoa/pgadmin4-docker-extension)) to the Extensions Marketplace.
+- Added two new extensions ([vcluster](https://hub.docker.com/extensions/loftsh/vcluster-dd-extension) and [PGAdmin4](https://hub.docker.com/extensions/mochoa/pgadmin4-docker-extension)) to the Extensions Marketplace.
 - The ability to sort extensions has been added to the Extensions Marketplace.
 - Fixed a bug that caused some users to be asked for feedback too frequently. You'll now only be asked for feedback twice a year.
 - Added custom theme settings for Docker Desktop. This allows you to specify dark or light mode for Docker Desktop independent of your device settings. Fixes [docker/for-win#12747](https://github.com/docker/for-win/issues/12747)
@@ -693,7 +693,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - You can now add environment variables before running an image in Docker Desktop.
 - Added features to make it easier to work with a container's logs, such as regular expression search and the ability to clear container logs while the container is still running.
 - Implemented feedback on the containers table. Added ports and separated container and image names.
-- Added 2 new extensions, Ddosify and Lacework, to the Extensions Marketplace.
+- Added two new extensions, Ddosify and Lacework, to the Extensions Marketplace.
 
 ### Removed
 
@@ -705,7 +705,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - [Docker Compose v2.6.1](https://github.com/docker/compose/releases/tag/v2.6.1)
 - [Kubernetes v1.24.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.24.1)
 - [cri-dockerd to v0.2.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.2.1)
-- [CNI plugins to v1.1.1](https://github.com/containerne2rking/plugins/releases/tag/v1.1.1)
+- [CNI plugins to v1.1.1](https://github.com/containernetworking/plugins/releases/tag/v1.1.1)
 - [containerd to v1.6.6](https://github.com/containerd/containerd/releases/tag/v1.6.6)
 - [runc to v1.1.2](https://github.com/opencontainers/runc/releases/tag/v1.1.2)
 - [Go 1.18.3](https://github.com/golang/go/releases/tag/go1.18.3)
@@ -724,7 +724,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug where a Docker extension fails to load if its backend container(s) are stopped. Fixes [docker/extensions-sdk#16](https://github.com/docker/extensions-sdk/issues/162).
 - Fixed a bug where the image search field is cleared without a reason. Fixes [docker/for-win#12738](https://github.com/docker/for-win/issues/12738).
 - Fixed a bug where the license agreement does not display and silently blocks Docker Desktop startup.
-- Fixed the displayed image and tag for unpublished extensions to actually display the 1s from the installed unpublished extension.
+- Fixed the displayed image and tag for unpublished extensions to actually display the ones from the installed unpublished extension.
 - Fixed the duplicate footer on the Support screen.
 - Dev Environments can be created from a subdirectory in a GitHub repository.
 - Removed the error message if the tips of the day cannot be loaded when using Docker Desktop offline. Fixes [docker/for-mac#6366](https://github.com/docker/for-mac/issues/6366).
@@ -914,7 +914,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Introduced reading system proxy. You no longer need to manually configure proxies unless it differs from your OS level proxy.
 - Fixed a bug that showed Remote Repositories in the Dashboard when running behind a proxy.
-- Fixed vpnkit establishing and blocking the client connection even if the server is g1. See [docker/for-mac#6235](https://github.com/docker/for-mac/issues/6235)
+- Fixed vpnkit establishing and blocking the client connection even if the server is gone. See [docker/for-mac#6235](https://github.com/docker/for-mac/issues/6235)
 - Made improvements on the Volume tab in Docker Desktop:
   - Volume size is displayed.
   - Columns can be resized, hidden and reordered.
@@ -924,12 +924,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Standardised the header title and action in the Dashboard.
 - Added support for downloading Registry Access Management policies through HTTP proxies.
 - Fixed an issue related to empty remote repositories when the machine is in sleep mode for an extended period of time.
-- Fixed a bug where dangling images were not selected in the cleanup process if their name was not marked as "&lt;n1>" but their tag is.
+- Fixed a bug where dangling images were not selected in the cleanup process if their name was not marked as "&lt;none>" but their tag is.
 - Improved the error message when `docker pull` fails because an HTTP proxy is required.
 - Added the ability to clear the search bar easily in Docker Desktop.
 - Renamed the "Containers / Apps" tab to "Containers".
 - Fixed a silent crash in the Docker Desktop installer when `C:\ProgramData\DockerDesktop` is a file or a symlink.
-- Fixed a bug where an image with no namespace, for example `docker pull <private registry>/image`, would be err1ously blocked by Registry Access Management unless access to Docker Hub was enabled in settings.
+- Fixed a bug where an image with no namespace, for example `docker pull <private registry>/image`, would be erroneously blocked by Registry Access Management unless access to Docker Hub was enabled in settings.
 
 #### For Mac
 
@@ -1258,7 +1258,7 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 #### For all platforms
 
-- Docker Desktop displays an error if `registry.json` contains more than 1 organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
+- Docker Desktop displays an error if `registry.json` contains more than one organization in the `allowedOrgs` field. If you are using multiple organizations for different groups of developers, you must provision a separate `registry.json` file for each group.
 - Fixed a regression in Compose that reverted the container name separator from `-` to `_`. Fixes [docker/compose-switch](https://github.com/docker/compose-switch/issues/24).
 
 #### For Mac
@@ -1373,7 +1373,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 #### For Mac
 
-- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [3 optional command line tools](troubleshoot/known-issues.md).
+- Docker Desktop on Apple silicon no longer requires Rosetta 2, with the exception of [three optional command line tools](troubleshoot/known-issues.md).
 
 #### For Windows
 
@@ -1428,7 +1428,7 @@ actual memory usage. See
 
 #### For all platforms
 
-- Improved: Self-diagnose now also checks for overlap between host IPs and `docker ne2rks`.
+- Improved: Self-diagnose now also checks for overlap between host IPs and `docker networks`.
 - Fixed the position of the indicator that displays the availability of an update on the Docker Dashboard.
 
 #### For Mac
@@ -1504,7 +1504,7 @@ actual memory usage. See
 - Fixed filesystem corruption in the WSL 2 Linux VM in self-diagnose. This can be caused by [microsoft/WSL#5895](https://github.com/microsoft/WSL/issues/5895).
 - Fixed `SeSecurityPrivilege` requirement issue. See [docker/for-win#12037](https://github.com/docker/for-win/issues/12037).
 - Fixed CLI context switch sync with UI. See [docker/for-win#11721](https://github.com/docker/for-win/issues/11721).
-- Added the key `vpnKitMaxPortIdleTime` to `settings.json` to allow the idle ne2rk connection timeout to be disabled or extended.
+- Added the key `vpnKitMaxPortIdleTime` to `settings.json` to allow the idle network connection timeout to be disabled or extended.
 - Fixed a crash on exit. See [docker/for-win#12128](https://github.com/docker/for-win/issues/12128).
 - Fixed a bug where the CLI tools would not be available in WSL 2 distros.
 - Fixed switching from Linux to Windows containers that was stuck because access rights on panic.log. See [for-win#11899](https://github.com/docker/for-win/issues/11899).
