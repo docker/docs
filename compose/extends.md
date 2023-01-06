@@ -443,11 +443,6 @@ services:
 ```
 
 
-## Compose documentation
+## Reference information 
 
-- [User guide](index.md)
-- [Installing Compose](install/index.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
+- [`extends`](compose-file/index.md#extends)
