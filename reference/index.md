@@ -5,7 +5,7 @@ notoc: true
 ---
 
 This section includes the reference documentation for the Docker platform's
-various APIs, CLIs, and file formats.
+various APIs, CLIs, drivers and specifications, and file formats.
 
 ## File formats
 
