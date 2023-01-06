@@ -79,6 +79,9 @@ To remove the extension, run:
 ```console
 $ docker extension rm <name-of-your-extension>
 ```
+> {% include extensions-form.md %}
+{: .important}
+
 
 ## What's next
 
