@@ -36,7 +36,7 @@ without having to specify additional command flags.
 Some projects may need distinct Dockerfiles for specific purposes. A common
 convention is to name these `<something>.Dockerfile`. Such Dockerfiles can then
 be used through the `--file` (or `-f` shorthand) option on the `docker build` command.
-Refer to the ["Specify a Dockerfile" section](../../engine/reference/commandline/build.md#specify-a-dockerfile--f)
+Refer to the ["Specify a Dockerfile" section](../../engine/reference/commandline/build.md#file)
 in the `docker build` reference to learn about the `--file` option.
 
 > **Note**
