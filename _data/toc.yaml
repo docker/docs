@@ -1655,6 +1655,8 @@ manuals:
           title: Provenance
         - path: /build/attestations/slsa-definitions/
           title: SLSA definitions
+        - path: /build/attestations/attestation-storage/
+          title: Attestation storage
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/

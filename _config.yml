@@ -212,3 +212,6 @@ fetch-remote:
       - dest: "build/attestations/slsa-definitions.md"
         src:
           - "docs/attestations/slsa-definitions.md"
+      - dest: "build/attestations/attestation-storage.md"
+        src:
+          - "docs/attestations/attestation-storage.md"
