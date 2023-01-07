@@ -16,6 +16,9 @@ details such as:
 Provenance attestations follow the
 [SLSA provenance schema, version 0.2](https://slsa.dev/provenance/v0.2#schema).
 
+For more information about how BuildKit populates these provenance properties, refer to
+[SLSA definitions](slsa-definitions.md).
+
 ## Create provenance attestations
 
 To create a provenance attestation, pass the `--attest type=provenance` option

@@ -143,5 +143,5 @@ To deep-dive into the specifics about how attestations are stored, see
 
 Learn more about the available attestation types and how to use them:
 
-- [Provenance](provenance.md)
+- [Provenance](slsa-provenance.md)
 - [SBOM](sbom.md)

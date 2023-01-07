@@ -1651,8 +1651,10 @@ manuals:
           title: Overview
         - path: /build/attestations/sbom/
           title: SBOM
-        - path: /build/attestations/provenance/
+        - path: /build/attestations/slsa-provenance/
           title: Provenance
+        - path: /build/attestations/slsa-definitions/
+          title: SLSA definitions
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
