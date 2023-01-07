@@ -1649,10 +1649,10 @@ manuals:
       section:
         - path: /build/attestations/
           title: Overview
-        - path: /build/attestations/provenance/
-          title: Provenance
         - path: /build/attestations/sbom/
           title: SBOM
+        - path: /build/attestations/provenance/
+          title: Provenance
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/

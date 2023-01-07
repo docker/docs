@@ -7,12 +7,14 @@ description: >
 ---
 
 Build attestations describe how an image was built, and what it contains. The
-attestations are created at build-time by BuildKit, and attach to the final
-image as metadata.
+attestations are created at build-time by BuildKit, and become attached to the
+final image as metadata.
 
 The purpose of attestations is to make it possible to inspect an image and see
 where it comes from, who created it and how, and what it contains. This enables
-policy engines to evaluate and validate an image.
+you to make informed decisions about how an image impacts the supply chain security
+of your application. It also enables the use of policy engines for validating
+images based on policy rules you've defined.
 
 Two types of build annotations are available:
 
@@ -125,7 +127,8 @@ attestation.
         "relatedSpdxElement": "SPDXRef-1ac501c94e2f9f81",
         "relationshipType": "CONTAINS",
         "spdxElementId": "SPDXRef-980737451f148c56"
-      }
+      },
+      ...
     ],
     "spdxVersion": "SPDX-2.2"
   }

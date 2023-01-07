@@ -26,12 +26,35 @@ target="blank" rel="noopener" }.
 
 ## Create SBOM attestations
 
-To create a provenance attestation, pass the `--attest type=sbmo` option to the
+To create a provenance attestation, pass the `--attest type=sbom` option to the
 `docker buildx build` command:
 
 ```console
 $ docker buildx build --tag <namespace>/<image>:<version> \
     --attest type=sbom --push .
+```
+
+Alternatively, you can use the shorthand `--sbom=true` option instead of `--attest type=sbom`.
+
+## Verify SBOM attestations
+
+Always validate the generated SBOM for your image before you push your image to a registry.
+
+To validate, you can build the image using the `local` exporter.
+Building with the `local` exporter saves the build result to your local filesystem instead of creating an image.
+Attestations are written to a JSON file in the root directory of your export.
+
+```console
+$ docker buildx build \
+  --sbom=true \
+  --output type=local,dest=out .
+```
+
+The SBOM file appears in the root directory of the output, named `sbom.spdx.json`:
+
+```console
+$ ls -1 ./out | grep sbom
+sbom.spdx.json
 ```
 
 ## Arguments
@@ -42,8 +65,8 @@ exist in the build context. This may cause you to overlook vulnerabilities in
 those dependencies, which could impact the security of your final build
 artifacts.
 
-For instance, you might use multi-stage builds, with a `FROM scratch` stanza for
-your final stage to achieve a smaller image size.
+For instance, you might use [multi-stage builds](../building/multi-stage.md),
+with a `FROM scratch` stanza for your final stage to achieve a smaller image size.
 
 ```dockerfile
 FROM alpine AS build
@@ -112,7 +135,40 @@ argument.
 Only stages that are built will be scanned. Stages that aren't dependencies of
 the target stage won't be built, or scanned.
 
-## Example
+The following Dockerfile example uses multi-stage builds to build a static website with
+[Hugo](https://gohugo.io/){: target="blank" rel="noopener" class="_"}.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine as hugo
+ARG BUILDKIT_SBOM_SCAN_STAGE=true
+WORKDIR /src
+COPY <<config.yml ./
+title: My Hugo website
+config.yml
+RUN apk add --upgrade hugo && hugo
+
+FROM scratch
+COPY --from=hugo /src/public /
+```
+
+Setting `ARG BUILDKIT_SBOM_SCAN_STAGE=true` in the `hugo` stage ensures that the final SBOM
+includes the information that Alpine Linux and Hugo were used to create the website.
+
+Building this image with the `local` exporter creates two JSON files:
+
+```console
+$ docker buildx build \ 
+  --sbom=true \
+  --output type=local,dest=out .
+$ ls -1 out | grep sbom
+sbom-hugo.spdx.json
+sbom.spdx.json
+```
+
+## SBOM attestation example
+
+The following JSON example shows what an SBOM attestation might look like.
 
 ```json
 {
@@ -218,15 +274,14 @@ the target stage won't be built, or scanned.
 ## SBOM generator
 
 BuildKit generates the SBOM using a scanner plugin. By default, it uses is the
-[BuildKit Syft scanner](https://github.com/docker/buildkit-syft-scanner){:
-target="blank" rel="noopener" } plugin. This plugin is built on top of
-[Anchore's Syft](https://github.com/anchore/syft){: target="blank"
-rel="noopener" }, an open source tool for generating an SBOM.
+[BuildKit Syft scanner](https://github.com/docker/buildkit-syft-scanner){: target="blank" rel="noopener" }
+plugin. This plugin is built on top of
+[Anchore's Syft](https://github.com/anchore/syft){: target="blank" rel="noopener" },
+an open source tool for generating an SBOM.
 
 You can select a different plugin to use with the `generator` option, specifying
 an image that implements the
-[BuildKit SBOM scanner protocol](https://github.com/moby/buildkit/blob/master/docs/sbom-protocol.md){:
-target="blank" rel="noopener" }.
+[BuildKit SBOM scanner protocol](https://github.com/moby/buildkit/blob/master/docs/sbom-protocol.md){ :target="blank" rel="noopener" }.
 
 ```console
 $ docker buildx build --attest type=sbom,generator=<image> .

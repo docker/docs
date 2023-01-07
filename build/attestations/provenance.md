@@ -26,6 +26,9 @@ $ docker buildx build --tag <namespace>/<image>:<version> \
     --attest type=provenance,mode=[min,max] .
 ```
 
+Alternatively, you can use the shorthand `--provenance` option instead of `--attest type=provenance`.
+Note that the shorthand version doesn't allow you to specify the `mode` configuration parameter.
+
 ## Mode
 
 You can use the `mode` parameter to define the level of detail to be included in
