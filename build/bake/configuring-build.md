@@ -38,6 +38,7 @@ You can use this file directly:
 ```console
 $ docker buildx bake --print app
 ```
+
 ```json
 {
   "group": {
@@ -72,6 +73,7 @@ And invoke bake together with both of the files:
 ```console
 $ docker buildx bake -f docker-bake.hcl -f env.hcl --print app
 ```
+
 ```json
 {
   "group": {
@@ -113,6 +115,7 @@ You can use this file directly:
 ```console
 $ docker buildx bake --print foo bar
 ```
+
 ```json
 {
   "group": {
@@ -159,6 +162,7 @@ target "app" {
 ```console
 $ docker buildx bake --set app.args.mybuildarg=bar --set app.platform=linux/arm64 app --print
 ```
+
 ```json
 {
   "group": {
@@ -247,6 +251,7 @@ target "app" {
 ```console
 $ docker buildx bake -f docker-bake1.hcl -f docker-bake2.hcl --print app
 ```
+
 ```json
 {
   "group": {

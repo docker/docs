@@ -328,6 +328,7 @@ $ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
 #1 2.022  * [new tag]         v20.10.11  -> v20.10.11
 #1 DONE 2.9s
 ```
+
 ```json
 {
   "group": {
@@ -383,6 +384,7 @@ EOT
 ```console
 $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" --print
 ```
+
 ```json
 {
   "target": {
@@ -414,6 +416,7 @@ $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "htt
 #1 0.429 577303add004dd7efeb13434d69ea030d35f7888       refs/heads/remote-test
 #1 CACHED
 ```
+
 ```json
 {
   "target": {
