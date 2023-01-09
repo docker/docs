@@ -5,8 +5,8 @@ redirect_from:
 - /build/customize/bake/configuring-build/
 ---
 
-Bake supports loading build definition from files, but sometimes you need even
-more flexibility to configure this definition.
+Bake supports loading build definitions from files, but sometimes you need even
+more flexibility to configure these definitions.
 
 For this use case, you can define variables inside the bake files that can be
 set by the user with environment variables or by [attribute definitions](#global-scope-attributes)
