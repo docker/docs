@@ -44,7 +44,7 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 
     To check the WSL mode, run:
 
-     ```consolse
+     ```console
      $ wsl.exe -l -v
      ```
 
@@ -62,13 +62,13 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 
 2. When Docker Desktop starts, go to **Settings** > **Resources** > **WSL Integration**.
 
-    The Docker-WSL integration is enabled on your default WSL distribution. To change your default WSL distro, run:
+    The Docker-WSL integration is enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`
+
+    For example, to set Ubuntu as your default WSL distro, run:
     
     ```console
-    $ wsl --set-default <distro name>
+    $ wsl --set-default ubuntu
     ```
-
-    For example, to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`.
 
     Optionally, select any additional distributions you would like to enable the Docker-WSL integration on.
 
