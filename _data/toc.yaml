@@ -902,8 +902,6 @@ reference:
       title: Compose file build
     - path: /compose/compose-file/deploy/
       title: Compose file deploy
-    - path: /compose/faq/
-      title: Frequently asked questions
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
@@ -1645,6 +1643,18 @@ manuals:
           title: Build contexts and linking targets
         - path: /build/bake/compose-file/
           title: Building from Compose file
+    - sectiontitle: Attestations
+      section:
+        - path: /build/attestations/
+          title: Overview
+        - path: /build/attestations/sbom/
+          title: SBOM
+        - path: /build/attestations/slsa-provenance/
+          title: Provenance
+        - path: /build/attestations/slsa-definitions/
+          title: SLSA definitions
+        - path: /build/attestations/attestation-storage/
+          title: Attestation storage
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
@@ -1705,6 +1715,8 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
+  - path: /compose/faq/
+    title: FAQs
   - path: /compose/release-notes/
     title: Release notes
 

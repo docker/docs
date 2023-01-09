@@ -30,6 +30,8 @@ All extensions submitted to the Extension Marketplace are reviewed and approved 
 
 If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/){:target="_blank" rel="noopener" class="_"}. We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
 
+{% include extensions-form.md %}
+
 ## What’s next?
 
 If you want to get up and running quickly with a Docker Extension, see the [Quickstart guide](quickstart.md).
