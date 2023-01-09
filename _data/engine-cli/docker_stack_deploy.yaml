@@ -81,7 +81,7 @@ inherited_options:
   kubernetes: false
   swarm: false
 examples: |-
-  ### Compose file
+  ### <a name="compose-file"></a> Compose file (--compose-file)
 
   The `deploy` command supports compose file version `3.0` and above.
 

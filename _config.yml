@@ -45,7 +45,7 @@ exclude:
 latest_engine_api_version: "1.41"
 docker_ce_version: "20.10"
 compose_v1_version: "1.29.2"
-compose_version: "v2.14.2"
+compose_version: "v2.15.0"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
@@ -171,7 +171,12 @@ fetch-remote:
 
   - repo: "https://github.com/docker/docker"
     default_branch: "master"
-    ref: "20.10"
+    # The default branch has separate files for each API version, so we can
+    # consume the swagger files from that branch (we only publish the ones
+    # that have been released through the stubs in the engine/api/ directory).
+    # Using the default (master) branch allows for API docs changes to be
+    # published without them being cherry-picked into the release branch.
+    ref: "master"
     paths:
       - dest: "engine/api"
         src:

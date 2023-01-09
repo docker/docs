@@ -98,7 +98,7 @@ RUN npm build     # Run build
 ```
 
 This Dockerfile is rather inefficient. Updating any file causes a reinstall of
-all dependencies every time you build the Docker image &emdash; even if the
+all dependencies every time you build the Docker image even if the
 dependencies didn't change since last time!
 
 Instead, the `COPY` command can be split in two. First, copy over the package
