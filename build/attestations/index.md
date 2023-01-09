@@ -6,6 +6,8 @@ description: >
   are and why they exist
 ---
 
+{% include build-feature-state.md buildkit_v=">=0.11" buildx_v=">=0.10" %}
+
 Build attestations describe how an image was built, and what it contains. The
 attestations are created at build-time by BuildKit, and become attached to the
 final image as metadata.

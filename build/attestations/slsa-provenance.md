@@ -4,6 +4,8 @@ keywords: build, attestations, provenance, slsa
 description: Provenance build attestations
 ---
 
+{% include build-feature-state.md buildkit_v=">=0.11" buildx_v=">=0.10" %}
+
 The provenance attestations include facts about the build process, including
 details such as:
 
@@ -29,8 +31,8 @@ $ docker buildx build --tag <namespace>/<image>:<version> \
     --attest type=provenance,mode=[min,max] .
 ```
 
-Alternatively, you can use the shorthand `--provenance` option instead of `--attest type=provenance`.
-Note that the shorthand version doesn't allow you to specify the `mode` configuration parameter.
+Alternatively, you can use the shorthand `--provenance=true` option instead of `--attest type=provenance`.
+To specify the `mode` parameter using the shorthand option, use: `--provenance=mode=max`.
 
 ## Mode
 
