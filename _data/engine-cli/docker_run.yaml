@@ -1152,14 +1152,36 @@ examples: |-
     ### Mount volume (-v, --read-only) {#volume}
 
     ```console
+    docker  run  -v /path/on/host:/path/inside/container -w `pwd` -i -t  ubuntu pwd
+    ```
+
+    This mounts the path `/path/on/host` on the host machine,
+    to `/path/inside/container` inside the container.
+
+    ```console
+    docker  run  -v /a:/b -v /c.txt:/d.txt -w `pwd` -i -t  ubuntu pwd
+    ```
+
+    This mounts directory `/a` on the host to `/b` into the container,
+    and also mounts the file `/c.txt` on the host to `/d.txt` into the container.
+    
+    ```console
     $ docker  run  -v `pwd`:`pwd` -w `pwd` -i -t  ubuntu pwd
     ```
 
-    The `-v` flag mounts the current working directory into the container. The `-w`
-    lets the command being executed inside the current working directory, by
-    changing into the directory to the value returned by `pwd`. So this
+    The `-v` flag in this example mounts the current working directory into the container. 
+    The `-w` sets the command being executed to inside the current working directory, 
+    by changing into the directory to the value returned by `pwd`. So this
     combination executes the command using the container, but inside the
     current working directory.
+
+    ```console
+    $ docker  run  -v `pwd` -w `pwd` -i -t  ubuntu pwd
+    ```
+
+    This is a simplified version of the previous example.
+    When the mount path inside the container and on the host are the same,
+    they can be specified as a single path, without colon separation.
 
     ```console
     $ docker run -v /doesnt/exist:/foo -w /foo -i -t ubuntu bash
