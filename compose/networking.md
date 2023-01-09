@@ -88,7 +88,7 @@ See the [links reference](compose-file/index.md#links) for more information.
 When deploying a Compose application on a Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
 you can make use of the built-in `overlay` driver to enable multi-host communication.
 
-Overlay networks are always created as `attachable`.  You can optionally set the [`attachable`](compose-file/index.md#attachable) property to `false`.
+Overlay networks are always created as `attachable`. You can optionally set the [`attachable`](compose-file/index.md#attachable) property to `false`.
 
 Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
 a Swarm cluster, and the [Getting started with multi-host networking](../network/network-tutorial-overlay.md)
