@@ -40,6 +40,7 @@ services:
 ```console
 $ docker buildx bake --print
 ```
+
 ```json
 {
   "group": {
@@ -124,6 +125,7 @@ TAG=v1.1.0
 ```console
 $ docker buildx bake --print
 ```
+
 ```json
 {
   "group": {
@@ -200,6 +202,7 @@ services:
 ```console
 $ docker buildx bake --print
 ```
+
 ```json
 {
   "group": {

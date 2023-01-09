@@ -131,6 +131,7 @@ For example:
     "line": "my message"
 }
 ```
+
 ```json
 {
     "attrs": {
@@ -161,6 +162,7 @@ object. If it cannot parse the message, it is sent `inline`. For example:
     "line": "my message"
 }
 ```
+
 ```json
 {
     "attrs": {
