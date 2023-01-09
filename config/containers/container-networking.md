@@ -3,10 +3,10 @@ title: Container networking
 description: How networking works from the container's point of view
 keywords: networking, container, standalone
 redirect_from:
-- /engine/userguide/networking/configure-dns/
-- /engine/userguide/networking/default_network/configure-dns/
-- /engine/userguide/networking/default_network/binding/
-- /engine/userguide/networking/default_network/container-communication/
+  - /engine/userguide/networking/configure-dns/
+  - /engine/userguide/networking/default_network/configure-dns/
+  - /engine/userguide/networking/default_network/binding/
+  - /engine/userguide/networking/default_network/container-communication/
 ---
 
 The type of network a container uses, whether it is a [bridge](../../network/bridge.md), an
@@ -27,7 +27,7 @@ rule which maps a container port to a port on the Docker host to the outside wor
 Here are some examples.
 
 | Flag value                      | Description                                                                                                                                     |
-|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-p 8080:80`                    | Map TCP port 80 in the container to port 8080 on the Docker host.                                                                               |
 | `-p 192.168.1.100:8080:80`      | Map TCP port 80 in the container to port 8080 on the Docker host for connections to host IP 192.168.1.100.                                      |
 | `-p 8080:80/udp`                | Map UDP port 80 in the container to port 8080 on the Docker host.                                                                               |
@@ -70,7 +70,7 @@ in the `docker run` reference documentation. You can override these settings on
 a per-container basis.
 
 | Flag           | Description                                                                                                                                                                                                                                                         |
-|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--dns`        | The IP address of a DNS server. To specify multiple DNS servers, use multiple `--dns` flags. If the container cannot reach any of the IP addresses you specify, Google's public DNS server `8.8.8.8` is added, so that your container can resolve internet domains. |
 | `--dns-search` | A DNS search domain to search non-fully-qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                                            |
 | `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                                            |
