@@ -271,7 +271,7 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 Specify a build’s container isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+[Docker Engine docs](../../engine/reference/commandline/run.md#isolation)
 for details.
 
 If unspecified, Compose will use the `isolation` value found in the service's definition
@@ -898,7 +898,7 @@ services:
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+[Docker Engine docs](../../engine/reference/commandline/run.md#isolation)
 for details.
 
 ### labels
