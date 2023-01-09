@@ -8,7 +8,7 @@ Compose supports two methods of sharing common configuration:
 
 1. Extend an entire Compose file by
    [using multiple Compose files](extends.md#multiple-compose-files)
-2. Extend individual services with [the `extends` field](extends.md#extending-services) (for Compose file versions up to 2.1)
+2. Extend individual services with [the `extends` field](extends.md#extending-services)
 
 
 ## Multiple Compose files
