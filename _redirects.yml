@@ -550,3 +550,7 @@
 "https://hub.docker.com/_/zookeeper/":
   - /samples/zookeeper
   - /samples/library/zookeeper
+
+# feedback
+"https://docs.google.com/forms/d/e/1FAIpQLSenjK8KiBiOrwCpq06u_iVEZGv4tfTEpfmY_cQDmsqJrHL9Gw/viewform":
+  - /feedback/extension/
