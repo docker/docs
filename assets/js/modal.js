@@ -8,6 +8,7 @@ var captionText = document.getElementById("img-modal-caption");
 function handleImageClick(event) {
   modal.style.display = "block";
   modalImg.src = event.target.src;
+  modalImg.alt = event.target.alt;
   captionText.innerHTML = event.target.alt;
   window.addEventListener("keydown", handleModalClose)
 }
