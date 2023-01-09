@@ -41,7 +41,7 @@ Volume mounting requires shared drives for projects that live outside of the
 
 On MacOS and Linux, Docker Desktop creates Unix domain sockets used for inter-process communication.
 
-Docker fails to start if the absolute path length of any of these sockets exceeds the OS limitation which is 104 characters on MacOS and 108 characters on Linux. These sockets are created under the user's home directory. If the user ID length is such that the absolute path of the socket exceeds the OS path length limitation, then Docker Desktop is unable to create the socket and fails to start. The workaround for this is to shorten the user ID whic we recommend has a maximum length of 33 characters on MacOS and 55 characters on Linux. No need to specify the minimum length as that is governed by the OS.
+Docker fails to start if the absolute path length of any of these sockets exceeds the OS limitation which is 104 characters on MacOS and 108 characters on Linux. These sockets are created under the user's home directory. If the user ID length is such that the absolute path of the socket exceeds the OS path length limitation, then Docker Desktop is unable to create the socket and fails to start. The workaround for this is to shorten the user ID which we recommend has a maximum length of 33 characters on MacOS and 55 characters on Linux. 
 
 Following are the examples of errors on MacOS which indicate that the startup failure was due to exceeding the above mentioned OS limitation:
 
