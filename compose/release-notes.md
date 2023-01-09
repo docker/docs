@@ -6,6 +6,21 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 2.15.1
+{% include release-date.html date="2023-01-09" %}
+### Update
+- Dependencies upgrade to fix Golan CVE-2022-27664 and CVE-2022-32149
+
+### Bug fixes and enhancements
+* Added support for UTS namespace. Fixed [compose#8408](https://github.com/docker/compose/issues/8408){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed filtering issue when no filter set. Fixed [roadmap#418](https://github.com/docker/roadmap/issues/418){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed concurrent map writes issue during build step. Pull Request [compose#10151](https://github.com/docker/compose/pull/10151){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed issue when stdin is not a terminal. Fixed [compose#9739](https://github.com/docker/compose/issues/9739){:
+  target="_blank" rel="noopener" class="_"}
+
 ## 2.15.0
 {% include release-date.html date="2023-01-05" %}
 ### Update
