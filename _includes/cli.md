@@ -68,11 +68,6 @@ your client and daemon API versions.
 <span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="This command works with the Swarm orchestrator.">Swarm</span> This command works with the Swarm orchestrator.
 
 {% endif %}
-{% if controller_data.kubernetes %}
-
-<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="This command works with the Kubernetes orchestrator.">Kubernetes</span> This command works with the Kubernetes orchestrator.
-
-{% endif %}
 {% endcapture %}{{ command-orchestrator }}
 
 
