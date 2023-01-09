@@ -41,3 +41,6 @@ Docker extensions published in the marketplace will benefit from update notifica
 ### Extension support and user feedback
 
 In addition to provide a description of you extension features, and screenshots, you should also specify additional URLs in [extension labels](labels.md). This will direct users to your website for reporting bugs and feedback, and accessing documentation and support.
+
+{% include extensions-form.md %}
+

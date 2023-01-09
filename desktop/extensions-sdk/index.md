@@ -21,6 +21,9 @@ For further details, see the [architecture page](architecture/index.md).
 Extensions are distributed through the Docker Hub.
 Development of extensions can be done locally without the need to push the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTION.md) for further details.
 
+{% include extensions-form.md %}
+
+
 <div class="component-container">
     <!--start row-->
     <div class="row">
