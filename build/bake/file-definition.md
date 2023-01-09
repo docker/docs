@@ -48,17 +48,17 @@ Complete list of valid target fields available for [HCL](#hcl-definition) and
 
 | Name                | Type   | Description                                                                                                                     |
 |---------------------|--------|---------------------------------------------------------------------------------------------------------------------------------|
-| `inherits`          | List   | [Inherit build options](#merging-and-inheritance) from other targets                                                            |
 | `args`              | Map    | Set build-time variables (same as [`--build-arg` flag](../../engine/reference/commandline/buildx_build.md))                     |
 | `cache-from`        | List   | External cache sources (same as [`--cache-from` flag](../../engine/reference/commandline/buildx_build.md))                      |
 | `cache-to`          | List   | Cache export destinations (same as [`--cache-to` flag](../../engine/reference/commandline/buildx_build.md))                     |
 | `context`           | String | Set of files located in the specified path or URL                                                                               |
 | `contexts`          | Map    | Additional build contexts (same as [`--build-context` flag](../../engine/reference/commandline/buildx_build.md))                |
-| `dockerfile`        | String | Name of the Dockerfile (same as [`--file` flag](../../engine/reference/commandline/buildx_build.md))                            |
 | `dockerfile-inline` | String | Inline Dockerfile content                                                                                                       |
+| `dockerfile`        | String | Name of the Dockerfile (same as [`--file` flag](../../engine/reference/commandline/buildx_build.md))                            |
+| `inherits`          | List   | [Inherit build options](#merging-and-inheritance) from other targets                                                            |
 | `labels`            | Map    | Set metadata for an image (same as [`--label` flag](../../engine/reference/commandline/buildx_build.md))                        |
-| `no-cache`          | Bool   | Do not use cache when building the image (same as [`--no-cache` flag](../../engine/reference/commandline/buildx_build.md))      |
 | `no-cache-filter`   | List   | Do not cache specified stages (same as [`--no-cache-filter` flag](../../engine/reference/commandline/buildx_build.md))          |
+| `no-cache`          | Bool   | Do not use cache when building the image (same as [`--no-cache` flag](../../engine/reference/commandline/buildx_build.md))      |
 | `output`            | List   | Output destination (same as [`--output` flag](../../engine/reference/commandline/buildx_build.md))                              |
 | `platforms`         | List   | Set target platforms for build (same as [`--platform` flag](../../engine/reference/commandline/buildx_build.md))                |
 | `pull`              | Bool   | Always attempt to pull all referenced images (same as [`--pull` flag](../../engine/reference/commandline/buildx_build.md))      |
