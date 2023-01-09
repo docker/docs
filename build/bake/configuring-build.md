@@ -93,6 +93,55 @@ $ docker buildx bake -f docker-bake.hcl -f env.hcl --print app
 }
 ```
 
+You can also refer to attributes defined as part of other targets, to help
+reduce duplication between targets.
+
+```hcl
+# docker-bake.hcl
+target "foo" {
+  dockerfile = "${target.foo.name}.Dockerfile"
+  tags       = [target.foo.name]
+}
+target "bar" {
+  dockerfile = "${target.foo.name}.Dockerfile"
+  tags       = [target.bar.name]
+}
+```
+
+You can use this file directly:
+
+```console
+$ docker buildx bake --print foo bar
+```
+```json
+{
+  "group": {
+    "default": {
+      "targets": [
+        "foo",
+        "bar"
+      ]
+    }
+  },
+  "target": {
+    "foo": {
+      "context": ".",
+      "dockerfile": "foo.Dockerfile",
+      "tags": [
+        "foo"
+      ]
+    },
+    "bar": {
+      "context": ".",
+      "dockerfile": "foo.Dockerfile",
+      "tags": [
+        "bar"
+      ]
+    }
+  }
+}
+```
+
 ## From command line
 
 You can also override target configurations from the command line with the
