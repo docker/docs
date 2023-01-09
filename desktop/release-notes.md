@@ -41,8 +41,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### Upgrades
 
-- [Compose v2.15.0](https://github.com/docker/compose/releases/tag/v2.15.0)
-- [Containeld v1.6.14](https://github.com/containerd/containerd/releases/tag/v1.6.14)
+- [Compose v2.15.1](https://github.com/docker/compose/releases/tag/v2.15.1)
+- [Containerd v1.6.14](https://github.com/containerd/containerd/releases/tag/v1.6.14)
 - [Docker Engine v20.10.22](https://docs.docker.com/engine/release-notes/#201022)
 - [Docker Scan v0.23.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.23.0)
 - [Go 1.19.4](https://github.com/golang/go/releases/tag/go1.19.4)
@@ -60,6 +60,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed the Docker Desktop dashboard trying at startup to get disk usage information and display an error banner before the engine was running.
 - Added an informational banner with instructions to opt-out of experimental feature access next to all experimental features.
 - Support downloading Kubernetes images via an HTTP proxy.
+- Fixed tooltips to not block action buttons. Fixes [docker/for-mac#6516](https://github.com/docker/for-mac/issues/6516).
+- Fixed the blank "An error occurred" container list on the Container Overview screen
 
 #### For Mac
 
