@@ -214,3 +214,9 @@ fetch-remote:
       - dest: "build/buildkit/toml-configuration.md"
         src:
           - "docs/buildkitd.toml.md"
+      - dest: "build/attestations/slsa-definitions.md"
+        src:
+          - "docs/attestations/slsa-definitions.md"
+      - dest: "build/attestations/attestation-storage.md"
+        src:
+          - "docs/attestations/attestation-storage.md"
