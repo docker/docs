@@ -4,46 +4,36 @@ keywords: documentation, docs, docker, compose, GPU access, NVIDIA, samples
 title: Enabling GPU access with Compose
 ---
 
-Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure to install the [prerequisites](../config/containers/resource_constraints.md#gpu) if you have not already done so.
+Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure you install the [prerequisites](../config/containers/resource_constraints.md#gpu){: target="_blank" rel="noopener" class="_" } if you have not already done so.
 
 The examples in the following sections focus specifically on providing service containers access to GPU devices with Docker Compose. 
 You can use either `docker-compose` or `docker compose` commands.  
-See also, [Compose command compatibility with docker-compose](cli-command-compatibility.md).
-
-### Use of service `runtime` property from Compose v2.3 format (legacy)
-
-Docker Compose v1.27.0+ switched to using the Compose Specification schema which is a combination of all properties from 2.x and 3.x versions. This re-enabled the use of service properties as [runtime](/compose-file/compose-file-v2.md#runtime) to provide GPU access to service containers. However, this does not allow to have control over specific properties of the GPU devices.
-
-```yaml
-services:
-  test:
-    image: nvidia/cuda:10.2-base
-    command: nvidia-smi
-    runtime: nvidia
-
-```
+See also, [Compose command compatibility with docker-compose](cli-command-compatibility.md){: target="_blank" rel="noopener" class="_" }.
 
 ### Enabling GPU access to service containers
 
-Docker Compose v1.28.0+ allows to define GPU reservations using the [device](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#devices) structure defined in the Compose Specification. This provides more granular control over a GPU reservation as custom values can be set for the following device properties: 
+GPUs are referenced in a `docker-compose.yml` file using the [device](compose-file/deploy.md#devices){:target="_blank" rel="noopener" class="_"} structure, within your services that need them. 
 
-- [capabilities](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#capabilities){:target="_blank" rel="noopener" class="_"} - value specifies as a list of strings (eg. `capabilities: [gpu]`). You must set this field in the Compose file. Otherwise, it returns an error on service deployment.
-- [count](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#count){:target="_blank" rel="noopener" class="_"} - value specified as an int or the value `all` representing the number of GPU devices that should be reserved ( providing the host holds that number of GPUs).
-- [device_ids](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#device_ids){:target="_blank" rel="noopener" class="_"} - value specified as a list of strings representing GPU device IDs from the host. You can find the device ID in the output of `nvidia-smi` on the host.
-- [driver](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#driver){:target="_blank" rel="noopener" class="_"} - value specified as a string (eg. `driver: 'nvidia'`)
-- [options](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#options){:target="_blank" rel="noopener" class="_"} - key-value pairs representing driver specific options.
+This provides more granular control over a GPU reservation as custom values can be set for the following device properties: 
+
+- `capabilities`. This value specifies as a list of strings (eg. `capabilities: [gpu]`). You must set this field in the Compose file. Otherwise, it returns an error on service deployment.
+- `count`. This value specified as an integer or the value `all` representing the number of GPU devices that should be reserved (providing the host holds that number of GPUs). If no `count` is set, all GPUs available on the host are used by default.
+- `device_ids`. This value specified as a list of strings representing GPU device IDs from the host. You can find the device ID in the output of `nvidia-smi` on the host. If no `device_ids` are set, all GPUs available on the host used by default.
+- `driver`. This value is specified as a string, for example `driver: 'nvidia'`
+- `options`. Key-value pairs representing driver specific options.
 
 
-> **Note**
+> **Important**
 >
 > You must set the `capabilities` field. Otherwise, it returns an error on service deployment.
 >
 > `count` and `device_ids` are mutually exclusive. You must only define one field at a time.
+{: .important}
 
-For more information on these properties, see the `deploy` section in the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/deploy.md#devices){:target="_blank" rel="noopener" class="_"}.
+For more information on these properties, see the `deploy` section in the [Compose Specification](compose-file/deploy.md#devices){:target="_blank" rel="noopener" class="_"}.
 
 
-Example of a Compose file for running a service with access to 1 GPU device:
+#### Example of a Compose file for running a service with access to 1 GPU device:
 
 ```yaml
 services:
@@ -89,34 +79,9 @@ gpu_test_1 exited with code 0
 
 ```
 
-If no `count` or `device_ids` are set, all GPUs available on the host are going to be used by default.
+On machines hosting multiple GPUs, `device_ids` field can be set to target specific GPU devices and `count` can be used to limit the number of GPU devices assigned to a service container. 
 
-```yaml
-services:
-  test:
-    image: tensorflow/tensorflow:latest-gpu
-    command: python -c "import tensorflow as tf;tf.test.gpu_device_name()"
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [gpu]
-```
-
-```console
-$ docker compose up
-Creating network "gpu_default" with the default driver
-Creating gpu_test_1 ... done
-Attaching to gpu_test_1
-test_1  | I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library libcudart.so.10.1
-.....
-test_1  | I tensorflow/core/common_runtime/gpu/gpu_device.cc:1402]
-Created TensorFlow device (/device:GPU:0 with 13970 MB memory) -> physical GPU (device: 0, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5)
-test_1  | /device:GPU:0
-gpu_test_1 exited with code 0
-```
-
-On machines hosting multiple GPUs, `device_ids` field can be set to target specific GPU devices and `count` can be used to limit the number of GPU devices assigned to a service container. If `count` exceeds the number of available GPUs on the host, the deployment will error out.
+You can use `count` or `device_ids` in each of your service definitions. An error is returned if you try to combine both, specify an invalid device ID, or use a value of count that’s higher than the number of GPUs in your system.
 
 ```console
 $ nvidia-smi   
@@ -145,6 +110,8 @@ $ nvidia-smi
 +-------------------------------+----------------------+----------------------+
 ```
 
+### Access specific devices
+
 To enable access only to GPU-0 and GPU-3 devices:
 
 ```yaml
@@ -160,14 +127,4 @@ services:
             device_ids: ['0', '3']
             capabilities: [gpu]
 
-```
-
-```sh
-$ docker compose up
-...
-Created TensorFlow device (/device:GPU:0 with 13970 MB memory -> physical GPU (device: 0, name: Tesla T4, pci bus id: 0000:00:1b.0, compute capability: 7.5)
-...
-Created TensorFlow device (/device:GPU:1 with 13970 MB memory) -> physical GPU (device: 1, name: Tesla T4, pci bus id: 0000:00:1e.0, compute capability: 7.5)
-...
-gpu_test_1 exited with code 0
 ```
