@@ -16,7 +16,7 @@ redirect_from:
 > employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
 
-Docker Desktop is a once-click-install application for your Mac, Linux, or Windows environment
+Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
 that enables you to build and share containerized applications and microservices. 
 
 It provides a straightforward GUI (Graphical User Interface) that lets you manage your containers, applications, and images directly from your machine. Docker Desktop can be used either on it's own or as a complementary tool to the CLI. 
