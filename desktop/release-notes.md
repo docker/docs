@@ -39,12 +39,14 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Extensions are now included in Quick Search
 - Analyzing large images is now up to 4x faster
 - New local images view has moved from experimental to GA
+- Rosetta for Linux as a Beta feature on MacOS 13 for faster emulation of Intel-based images on Apple Silicon
 
 ### Upgrades
 
 - [Compose v2.15.1](https://github.com/docker/compose/releases/tag/v2.15.1)
 - [Containerd v1.6.14](https://github.com/containerd/containerd/releases/tag/v1.6.14)
 - [Docker Engine v20.10.22](https://docs.docker.com/engine/release-notes/#201022)
+- [Buildx v0.10.0](https://github.com/docker/buildx/releases/tag/v0.10.0)
 - [Docker Scan v0.23.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.23.0)
 - [Go 1.19.4](https://github.com/golang/go/releases/tag/go1.19.4)
 
@@ -74,6 +76,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Changed the disk image size in the Settings to use the decimal system (base 10) to coincide with how Finder displays disk capacity.
 - Fixed Docker crash under network load. Fixes [docker/for-mac#6530](https://github.com/docker/for-mac/issues/6530).
 - Fixed an issue causing Docker to prompt the user to install the `/var/run/docker.sock` symlink after every reboot.
+- Ensured the Login Item which installs the `/var/run/docker.sock` symlink is signed.
+- Fixed bug where `$HOME/.docker` was removed on factory reset.
 
 ### For Windows
 
