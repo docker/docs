@@ -38,6 +38,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Quick Search has moved from experimental to GA
 - Extensions are now included in Quick Search
 - Analyzing large images is now up to 4x faster
+- New local images view has moved from experimental to GA
 
 ### Upgrades
 
@@ -53,7 +54,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Fixed `docker build --quiet` not outputting the image identifier with the `containerd` integration.
 - Fixed image inspect not showing image labels with the `containerd` integration.
-- Increased the contrast between running and stopped container icons to make it easier for colourblind people to scan the containers list.
+- Increased the contrast between running and stopped container icons to make it easier for colorblind people to scan the containers list.
 - Fixed a bug where the user is prompted for new HTTP proxy credentials repeatedly until Docker Desktop is restarted.
 - Added a diagnostics command `com.docker.diagnose login` to check HTTP proxy configuration.
 - Fixed actions on compose stack not working properly. Fixes [docker/for-mac#6566](https://github.com/docker/for-mac/issues/6566).
@@ -70,6 +71,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Added back a way to uninstall Docker Desktop from the command line. Fixes [docker/for-mac#6598](https://github.com/docker/for-mac/issues/6598).
 - Fixed hardcoded `/usr/bin/kill`. Fixes [docker/for-mac#6589](https://github.com/docker/for-mac/issues/6589).
 - Fixed truncation (for example with the `truncate` command) of very large files (> 38GB) shared on VirtioFS with an incorrect size.
+- Changed the disk image size in the Settings to use the decimal system (base 10) to coincide with how Finder displays disk capacity.
+- Fixed Docker crash under network load. Fixes [docker/for-mac#6530](https://github.com/docker/for-mac/issues/6530).
+- Fixed an issue causing Docker to prompt the user to install the `/var/run/docker.sock` symlink after every reboot.
 
 ### For Windows
 
