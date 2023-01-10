@@ -5,8 +5,8 @@ redirect_from:
 - /build/customize/bake/configuring-build/
 ---
 
-Bake supports loading build definition from files, but sometimes you need even
-more flexibility to configure this definition.
+Bake supports loading build definitions from files, but sometimes you need even
+more flexibility to configure these definitions.
 
 For this use case, you can define variables inside the bake files that can be
 set by the user with environment variables or by [attribute definitions](#global-scope-attributes)
@@ -38,6 +38,7 @@ You can use this file directly:
 ```console
 $ docker buildx bake --print app
 ```
+
 ```json
 {
   "group": {
@@ -72,6 +73,7 @@ And invoke bake together with both of the files:
 ```console
 $ docker buildx bake -f docker-bake.hcl -f env.hcl --print app
 ```
+
 ```json
 {
   "group": {
@@ -88,6 +90,56 @@ $ docker buildx bake -f docker-bake.hcl -f env.hcl --print app
       "args": {
         "v1": "pre-def-myuser"
       }
+    }
+  }
+}
+```
+
+You can also refer to attributes defined as part of other targets, to help
+reduce duplication between targets.
+
+```hcl
+# docker-bake.hcl
+target "foo" {
+  dockerfile = "${target.foo.name}.Dockerfile"
+  tags       = [target.foo.name]
+}
+target "bar" {
+  dockerfile = "${target.foo.name}.Dockerfile"
+  tags       = [target.bar.name]
+}
+```
+
+You can use this file directly:
+
+```console
+$ docker buildx bake --print foo bar
+```
+
+```json
+{
+  "group": {
+    "default": {
+      "targets": [
+        "foo",
+        "bar"
+      ]
+    }
+  },
+  "target": {
+    "foo": {
+      "context": ".",
+      "dockerfile": "foo.Dockerfile",
+      "tags": [
+        "foo"
+      ]
+    },
+    "bar": {
+      "context": ".",
+      "dockerfile": "foo.Dockerfile",
+      "tags": [
+        "bar"
+      ]
     }
   }
 }
@@ -110,6 +162,7 @@ target "app" {
 ```console
 $ docker buildx bake --set app.args.mybuildarg=bar --set app.platform=linux/arm64 app --print
 ```
+
 ```json
 {
   "group": {
@@ -198,6 +251,7 @@ target "app" {
 ```console
 $ docker buildx bake -f docker-bake1.hcl -f docker-bake2.hcl --print app
 ```
+
 ```json
 {
   "group": {

@@ -13,7 +13,7 @@ It uses tools built into code editors that allows Docker to access code mounted 
 
 You can use Dev Environments through the intuitive GUI in Docker Dashboard or straight from you terminal with the new [`docker dev` CLI plugin](dev-cli.md).
 
-![Dev environment intro](../images/dev-env.PNG){:width="700px"}
+![Dev environments tab in Docker Desktop](../images/dev-env.PNG){:width="700px"}
 
 ## How does it work?
 

@@ -6,6 +6,53 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+## 2.15.1
+{% include release-date.html date="2023-01-09" %}
+### Update
+- Dependencies upgrade to fix Golan CVE-2022-27664 and CVE-2022-32149
+
+### Bug fixes and enhancements
+* Added support for UTS namespace. Fixed [compose#8408](https://github.com/docker/compose/issues/8408){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed filtering issue when no filter set. Fixed [roadmap#418](https://github.com/docker/roadmap/issues/418){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed concurrent map writes issue during build step. Pull Request [compose#10151](https://github.com/docker/compose/pull/10151){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed issue when stdin is not a terminal. Fixed [compose#9739](https://github.com/docker/compose/issues/9739){:
+  target="_blank" rel="noopener" class="_"}
+
+## 2.15.0
+{% include release-date.html date="2023-01-05" %}
+### Update
+- Dependencies upgrade: bump compose-go to v1.8.1
+- Dependencies upgrade: bump cli-docs-tool to 0.5.1
+
+### Bug fixes and enhancements
+* Added support of the `privileged` attribute in the `service.build` section. Pull Request [compose#10112](https://github.com/docker/compose/pull/10112){:
+  target="_blank" rel="noopener" class="_"}
+* Introduced `--ignore-buildable` to ignore buildable images on pull. Fixed [compose#8805](https://github.com/docker/compose/issues/8805){:
+  target="_blank" rel="noopener" class="_"}
+* Introduceed `--no-attach` to ignore some service outputs. Fixed [compose#8546](https://github.com/docker/compose/issues/8546){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed issue with `logs` when `driver:none` is set. Fixed [compose#9030](https://github.com/docker/compose/issues/9030){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now relies on dockerCLI.streams. Pull Request [compose#10082](https://github.com/docker/compose/pull/10082){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed issue with service hash that MUST exclude replicas. Fixed [compose#10077](https://github.com/docker/compose/issues/10077){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now checks service names based on project, not running containers. Fixed [compose#9951](https://github.com/docker/compose/issues/9951){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed security opts support (seccomp and unconfined). Fixed [compose#9505](https://github.com/docker/compose/issues/9505){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed empty file when using compose config in case of smaller source files. Fixed [compose#10121](https://github.com/docker/compose/issues/10121){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed issue with `--pull` not applied on `compose up`. Fixed [compose#10125](https://github.com/docker/compose/issues/10125){:
+  target="_blank" rel="noopener" class="_"}
+* Compose should ignore not only auto-removed containers but also "removal in progress" for orphan containers. Pull Request [compose#10136](https://github.com/docker/compose/pull/10136){:
+  target="_blank" rel="noopener" class="_"}
+* Compose limits build concurrency according to `--parallel`. Fixed [compose#9091](https://github.com/docker/compose/issues/9091){:
+  target="_blank" rel="noopener" class="_"}
+
 ## 2.14.2
 {% include release-date.html date="2022-12-20" %}
 ### Update

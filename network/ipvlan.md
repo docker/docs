@@ -84,7 +84,7 @@ To help understand how this mode interacts with other hosts, the following
 figure shows the same layer 2 segment between two Docker hosts that applies to
 and IPvlan L2 mode.
 
-![Multiple IPvlan Hosts](images/macvlan-bridge-ipvlan-l2.png)
+![Multiple IPvlan hosts](images/macvlan-bridge-ipvlan-l2.png)
 
 The following will create the exact same network as the network `db_net` created
 earlier, with the driver defaults for `--gateway=192.168.1.1` and `-o ipvlan_mode=l2`.
@@ -161,7 +161,7 @@ practice of layered defense in depth architectures. VLANs or the equivocal VNI
 (Virtual Network Identifier) when using the Overlay driver, are the first step
 in isolating tenant traffic.
 
-![Docker VLANs in Depth](images/vlans-deeper-look.png)
+![Docker VLANs in-depth](images/vlans-deeper-look.png)
 
 The Linux sub-interface tagged with a VLAN can either already exist or will be
 created when you call a `docker network create`. `docker network rm` will delete
@@ -293,7 +293,7 @@ upstream network will not know about without route distribution. For those
 curious how IPvlan L3 will fit into container networking, see the following
 examples.
 
-![Docker IPvlan L2 Mode](images/ipvlan-l3.png)
+![Docker IPvlan L2 mode](images/ipvlan-l3.png)
 
 IPvlan L3 mode drops all broadcast and multicast traffic. This reason alone
 makes IPvlan L3 mode a prime candidate for those looking for massive scale and

@@ -118,8 +118,8 @@ Use these links to read about specific commands, or continue to the
 - [`docker secret inspect`](../reference/commandline/secret_inspect.md)
 - [`docker secret ls`](../reference/commandline/secret_ls.md)
 - [`docker secret rm`](../reference/commandline/secret_rm.md)
-- [`--secret`](../reference/commandline/service_create.md#create-a-service-with-secrets) flag for `docker service create`
-- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#add-or-remove-secrets) flags for `docker service update`
+- [`--secret`](../reference/commandline/service_create.md#secret) flag for `docker service create`
+- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#secret-add) flags for `docker service update`
 
 ## Examples
 
