@@ -10,19 +10,6 @@ The examples in the following sections focus specifically on providing service c
 You can use either `docker-compose` or `docker compose` commands.  
 See also, [Compose command compatibility with docker-compose](cli-command-compatibility.md){: target="_blank" rel="noopener" class="_" }.
 
-### Use of service `runtime` property from Compose v2.3 format (legacy)
-
-Docker Compose v1.27.0+ switched to using the Compose Specification schema which is a combination of all properties from 2.x and 3.x versions. This re-enabled the use of service properties as [runtime](/compose-file/compose-file-v2.md#runtime) to provide GPU access to service containers. However, this does not allow to have control over specific properties of the GPU devices.
-
-```yaml
-services:
-  test:
-    image: nvidia/cuda:10.2-base
-    command: nvidia-smi
-    runtime: nvidia
-
-```
-
 ### Enabling GPU access to service containers
 
 GPUs are referenced in a `docker-compose.yml` file using the [device](compose-file/deploy.md#devices){:target="_blank" rel="noopener" class="_"} structure, within your services that need them. 
