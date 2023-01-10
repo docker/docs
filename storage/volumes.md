@@ -91,7 +91,8 @@ If you need to specify volume driver options, you must use `--mount`.
 >         --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
 >         --name myservice \
 >         <IMAGE>
-{: .warning}
+>
+> {: .warning}
 
 The examples below show both the `--mount` and `-v` syntax where possible, and
 `--mount` is presented first.
@@ -519,6 +520,100 @@ $ docker volume create \
 
 The `addr` option is required if you specify a hostname instead of an IP.
 This lets Docker perform the hostname lookup.
+
+### Block storage devices
+
+You can mount a block storage device, such as an external drive or a drive partition, to a container.
+The following example shows how to create and use a file as a block storage device,
+and how to mount the block device as a container volume.
+
+> **Important**
+>
+> The following procedure is only an example.
+> The solution illustrated here isn't recommended as a general practice.
+> Don't attempt this approach unless you're very confident about what you're doing.
+{: .important }
+
+#### How mounting block devices works
+
+Under the hood, the `--mount` flag using the `local` storage driver invokes the
+Linux `mount` syscall and forwards the options you pass to it unaltered.
+Docker doesn't implement any additional functionality on top of the native mount features supported by the Linux kernel.
+
+If you're familiar with the
+[Linux `mount` command](https://man7.org/linux/man-pages/man8/mount.8.html),
+you can think of the `--mount` options as being forwarded to the `mount` command in the following manner:
+
+```console
+$ mount -t <mount.volume-opt.type> <mount.volume-opt.device> <mount.dst> -o <mount.volume-opts.o>
+```
+
+To illustrate this further, consider the following `mount` command example.
+This command mounts the `/dev/loop5` device to the path `/external-drive` on the system. 
+
+```console
+$ mount -t ext4 /dev/loop5 /external-drive
+```
+
+The following `docker run` command achieves a similar result, from the point of view of the container being run.
+Running a container with this `--mount` option sets up the mount in the same way as if you had executed the
+`mount` command from the previous example.
+
+```console
+$ docker run \
+  --mount='type=volume,dst=/external-drive,volume-driver=local,volume-opt=device=/dev/loop5,volume-opt=type=ext4'
+```
+
+You can't execute the `mount` command inside the container directly,
+because the container is unable to access the `/dev/loop5` device.
+That's why we're using the `--mount` option for the `docker run` command instead.
+
+#### Example: Mounting a block device in a container
+
+The following steps create an `ext4` filesystem and mounts it into a container.
+The filesystem support of your system depends on the version of the Linux kernel you are using.
+
+1. Create a file and allocate some space to it:
+
+   ```console
+   $ fallocate -f 1G disk.raw
+   ```
+
+2. Build a filesystem onto the `disk.raw` file:
+
+   ```console
+   $ mkfs.ext4 disk.raw
+   ```
+
+3. Create a loop device:
+
+   ```console
+   $ losetup -f --show disk.raw
+   /dev/loop5
+   ```
+
+   > **Note**
+   >
+   > `losetup` creates an ephemeral loop device that's removed after
+   > system reboot, or manually removed with `losetup -d`.
+
+4. Run a container that mounts the loop device as a volume:
+
+   ```console
+   $ docker run -it --rm \
+     --mount='type=volume,dst=/external-drive,volume-driver=local,volume-opt=device=/dev/loop5,volume-opt=type=ext4' \
+     ubuntu bash
+   ```
+
+   When the container starts, the path `/external-drive` mounts the
+   `disk.raw` file from the host filesystem as a block device.
+
+5. When you're done, and the device is unmounted from the container,
+   detach the loop device to remove the device from the host system:
+
+   ```console
+   $ losetup -d /dev/loop5
+   ```
 
 ## Back up, restore, or migrate data volumes
 
