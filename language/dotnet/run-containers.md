@@ -38,7 +38,7 @@ $ docker run --publish 5000:80 dotnet-docker
 
 Now, let's access `http://localhost:5000` in a browser. You should see a page similar to the following image.
 
-![image of app page](./images/dotnet-app-verify-build.png)
+![Image of app page](./images/dotnet-app-verify-build.png)
 
 Success! We were able to connect to the application running inside of our container on port 80.
 
@@ -57,7 +57,7 @@ Docker started our container in the background and printed the Container ID on t
 
 Again, let’s make sure that our container is running properly. In a web browser, access `http://localhost:5000`. You should see a page similar to the following image.
 
-![image of app page](./images/dotnet-app-verify-build.png)
+![Image of app page](./images/dotnet-app-verify-build.png)
 
 ## List containers
 

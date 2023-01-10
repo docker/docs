@@ -8,7 +8,7 @@ Extensions use image labels to provide additional information like title, descri
 
 These information allow to display an overview of the extension to users so they can choose to install it:
 
-![List preview](images/marketplace-details.png)
+![Extension preview](images/marketplace-details.png)
 
 You can define [Image labels](../../../engine/reference/builder.md#label) in the extension's `Dockerfile`.
 

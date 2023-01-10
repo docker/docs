@@ -93,13 +93,13 @@ To create a repository:
 3. Name it **&lt;your-username&gt;/my-private-repo**.
 4. Set the visibility to **Private**.
 
-    ![Create Repository](images/index-create-repo.png)
+    ![Create a repository](images/index-create-repo.png)
 
 5. Click **Create**.
 
     You've created your first repository. You should see:
 
-    ![Repository Created](images/index-repo-created.png)
+    ![Repository created](images/index-repo-created.png)
 
 ### Step 3: Download and install Docker Desktop
 
@@ -175,7 +175,7 @@ Docker image locally.
 
 5. Your repository in Docker Hub should now display a new `latest` tag under **Tags**:
 
-    ![Tag Created](images/index-tag.png)
+    ![Tag created](images/index-tag.png)
 
 Congratulations! You've successfully:
 

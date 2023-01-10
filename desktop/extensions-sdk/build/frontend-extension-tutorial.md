@@ -209,7 +209,7 @@ provide you with type definitions for the extension APIs and auto-completion in 
 npm install @docker/extension-api-client-types --save-dev
 ```
 
-![types auto complete](images/types-autocomplete.png)
+![Auto completion in an IDE](images/types-autocomplete.png)
 
 For example, you can use the `docker.cli.exec` function to get the list of all the containers via the `docker ps --all`
 command and display the result in a table.
