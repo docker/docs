@@ -52,7 +52,7 @@ entering a text code into your authenticator app. Once you have linked your
 authenticator app, it will give you a six-digit code to enter in text field.
 Click **Next**.
 
-![Enter special code](../images/2fa-enter-code.png)
+![Enter special code view](../images/2fa-enter-code.png)
 
 You have successfully enabled two-factor authentication. The next time you log
 in to your Docker Hub account, you will be asked for a security code.

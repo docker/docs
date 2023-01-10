@@ -11,7 +11,7 @@ When configuring repositories, your private repositories let you keep your conta
 
 You can make an existing repository private by going to its **Settings** tab and select **Make private**.
 
-![Repo make private](../../images/repo-make-private.png){: style="max-width: 60%"}
+![Make a repo private](../../images/repo-make-private.png){: style="max-width: 60%"}
 
 You get one free private repository with your Docker Hub user account (not
 available for organizations you're a member of). If you need more private

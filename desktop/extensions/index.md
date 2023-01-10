@@ -16,7 +16,7 @@ You can seamlessly connect your favorite development tools to your application d
 
 Anyone can use Docker Extensions and there is no limit to the number of extensions you can install. 
 
-![extenstions](../images/extensions-marketplace.PNG){:width="750px"}
+![Extensions Marketplace](../images/extensions-marketplace.PNG){:width="750px"}
 
 ## What extensions are available?
 

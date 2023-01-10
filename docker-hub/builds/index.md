@@ -179,7 +179,7 @@ bar chart of the build queue times and durations. Both views display the
 pending, in progress, successful, and failed builds for any tag of the
 repository.
 
-![Active Builds](images/index-active.png)
+![Active builds](images/index-active.png)
 
 From either location, you can select a build job to view its build report. The
 build report shows information about the build job. This includes the source
@@ -191,7 +191,7 @@ repository and branch (or tag), the build logs, the build duration, creation tim
 > refresh the Builds page. With the in-progress build logs, you can debug your
 > builds before they're finished.
 
-![Build Report](/docker-hub/images/index-report.png)
+![Build report](/docker-hub/images/index-report.png)
 
 ## Cancel or retry a build
 
@@ -200,7 +200,7 @@ report link on the General tab and on the Builds tab. You can also click the
 **Cancel** on the build report page, or from the Timeline tab's logs
 display for the build.
 
-![list of builds showing the cancel icon](images/build-cancelicon.png)
+![List of builds showing the cancel icon](images/build-cancelicon.png)
 
 ## Failing builds
 

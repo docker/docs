@@ -166,7 +166,7 @@ To give a team access to a repository
 4. Choose a permission from the **Permissions** drop-down list and click
    **Add**.
 
-    ![Team Repo Permissions](images/team-repo-permission.png){:width="700px"}
+    ![Team repository permissions view](images/team-repo-permission.png){:width="700px"}
 
 ### View a team's permissions for all repositories
 
