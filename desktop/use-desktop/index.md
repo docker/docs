@@ -42,3 +42,4 @@ To display the Docker menu, right-click on the ![whale menu](../../assets/images
 - **Pause**
 - **Restart**
 - **Quit Docker Desktop**
+

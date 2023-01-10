@@ -52,6 +52,8 @@
                                 {%- assign my_min = page.toc_min | default: site.toc_min | default: 2 -%}
                                 {%- assign my_max = page.toc_max | default: site.toc_max | default: 3 -%}
                                 {%- assign my_name = page.url | default: "unnamed" -%}
+                                <div id="side-toc-title">Contents:</div>
+                                {% include image-modal.html %}
                                 <div class="side-toc-title">Page details</div>
                                 <div class="metadata-items">
                                     <ul>
