@@ -37,7 +37,7 @@ To remove a user from an organization:
 
 When you disable SSO, you can delete the connection to remove the configuration settings and the added domains. Once you delete this connection, it can't be undone. Users must authenticate with their Docker ID and password or create a password reset if they don't have one.
 
-![Delete SSO](/single-sign-on/images/delete-sso.png){:width="500px"}
+![Delete SSO view](/single-sign-on/images/delete-sso.png){:width="500px"}
 
 ## FAQs
 

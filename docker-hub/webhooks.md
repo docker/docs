@@ -8,7 +8,7 @@ You can use webhooks to cause an action in another service in response to a push
 
 Configure webhooks through the "Webhooks" tab on your Docker Hub repository:
 
-![Webhooks Page](images/webhooks-empty.png)
+![Webhooks page](images/webhooks-empty.png)
 
 ### Create Webhooks
 
@@ -16,13 +16,13 @@ To create a webhook, visit the webhooks tab for your repository. Then:
 1. Provide a name for the webhooks
 2. Provide a destination webhook URL. This is where webhook POST requests will be delivered:
 
-![Webhooks Create](images/webhooks-create.png)
+![Create webhooks](images/webhooks-create.png)
 
 ### View Webhook delivery history
 
 You can view Webhook Delivery History by clicking on the submenu of the webhook and then clicking "View History"
 
-![Webhooks View History](images/webhooks-submenu.png)
+![Webhook delivery history](images/webhooks-submenu.png)
 
 You can then view the delivery history, and whether delivering the POST request was successful or failed:
 

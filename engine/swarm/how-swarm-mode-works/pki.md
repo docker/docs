@@ -32,7 +32,7 @@ the lifetime of the node in the current swarm.
 The diagram below illustrates how manager nodes and worker nodes encrypt
 communications using a minimum of TLS 1.2.
 
-![tls diagram](/engine/swarm/images/tls.png)
+![TLS diagram](/engine/swarm/images/tls.png)
 
 The example below shows the information from a certificate from a worker node:
 

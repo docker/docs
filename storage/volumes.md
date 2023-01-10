@@ -29,7 +29,7 @@ container's writable layer, because a volume does not increase the size of the
 containers using it, and the volume's contents exist outside the lifecycle of a
 given container.
 
-![volumes on the Docker host](images/types-of-mounts-volume.png)
+![Volumes on the Docker host](images/types-of-mounts-volume.png)
 
 If your container generates non-persistent state data, consider using a
 [tmpfs mount](tmpfs.md) to avoid storing the data anywhere permanently, and to

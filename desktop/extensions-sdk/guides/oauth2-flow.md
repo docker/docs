@@ -20,7 +20,7 @@ The Authorization Code grant type is used by confidential and public clients to 
 
 After the user returns to the client via the redirect URL, the application gets the authorization code from the URL and uses it to request an access token.
 
-![oauth2-flow](images/oauth2-flow.png){: style=width:80% }
+![Flow for OAuth 2.0](images/oauth2-flow.png){: style=width:80% }
 
 The image above shows that:
 - The Docker Extension asks the user to authorize access to their data.

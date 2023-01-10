@@ -81,7 +81,7 @@ with the appropriate condition on the IAM role statement.
    > this stack requires a capability. This stack creates a role that will grant
    > Atomist read-only access to ECR resources.
    >
-   > ![confirm](./images/ecr/capability.png)
+   > ![Confirm read-only access to ECR resources](./images/ecr/capability.png)
 
    <div style="text-align: center">
      <table>
@@ -185,7 +185,7 @@ with the appropriate condition on the IAM role statement.
    Atomist tests the connection with your ECR registry. A green check mark
    displays beside the integration if a successful connection is made.
 
-   ![integration list showing a successful ECR integration](./images/ecr/connection-successful.png){:
+   ![Integration list showing a successful ECR integration](./images/ecr/connection-successful.png){:
    width="700px"}
 
 </div>

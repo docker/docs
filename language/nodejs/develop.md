@@ -184,7 +184,7 @@ We pass the `--build` flag so Docker compiles our image and then starts it.
 
 If all goes well, you should see something similar:
 
-  ![node-compile](images/node-compile.png){:width="800px"}
+  ![Screenshot of image being compiled](images/node-compile.png){:width="800px"}
 
 Now let’s test our API endpoint. Run the following curl command:
 
@@ -206,7 +206,7 @@ We’ll use the debugger that comes with the Chrome browser. Open Chrome on your
 
 It opens the following screen.
 
-  ![Chrome-inspect](images/chrome-inspect.png){:width="800px"}
+  ![Imaging showing Chrome inspect with DevTools](images/chrome-inspect.png){:width="800px"}
 
 Click the **Open dedicated DevTools for Node** link. This opens the DevTools that are connected to the running Node.js process inside our container.
 
@@ -222,7 +222,7 @@ Add the following code above the existing `server.use()` statement, and save the
 
 If you take a look at the terminal where our Compose application is running, you’ll see that nodemon noticed the changes and reloaded our application.
 
- ![nodemon](images/nodemon.png){:width="800px"}
+ ![Image of terminal noticing change and reloading](images/nodemon.png){:width="800px"}
 
 Navigate back to the Chrome DevTools and set a breakpoint on the line containing the `return res.json({ "foo": "bar" })` statement, and then run the following curl command to trigger the breakpoint.
 

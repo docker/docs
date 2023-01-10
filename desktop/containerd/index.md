@@ -145,7 +145,7 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS        
 
 You can also check from the browser that Nginx is running:
 
-![containerd_feature_nginx](../images/containerd_feature_nginx.png){:width="750px"}
+![Containerd setting in Docker Desktop](../images/containerd_feature_nginx.png){:width="750px"}
 
 ## Building multi-platform images
 

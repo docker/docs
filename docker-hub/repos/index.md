@@ -53,7 +53,7 @@ To create a private repository, navigate to Docker Hub and select **Repositories
 >
 > To update your public repository to private, navigate to your repository, select **Settings** and **Make private**.
 
-![Create Private Repo](/docker-hub/images/repo-create-private.png){: style="max-width: 60%"}
+![Create a private repo](/docker-hub/images/repo-create-private.png){: style="max-width: 60%"}
 
 ## Deleting a repository
 
