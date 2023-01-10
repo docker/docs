@@ -2,7 +2,7 @@
 title: "Bake file definition"
 keywords: build, buildx, bake, buildkit, hcl, json, compose
 redirect_from:
-- /build/customize/bake/file-definition/
+  - /build/customize/bake/file-definition/
 ---
 
 `buildx bake` supports HCL, JSON and Compose file format for defining build
@@ -10,12 +10,12 @@ redirect_from:
 [functions](#functions). It looks for build definition files in the current
 directory in the following order:
 
-* `docker-compose.yml`
-* `docker-compose.yaml`
-* `docker-bake.json`
-* `docker-bake.override.json`
-* `docker-bake.hcl`
-* `docker-bake.override.hcl`
+- `docker-compose.yml`
+- `docker-compose.yaml`
+- `docker-bake.json`
+- `docker-bake.override.json`
+- `docker-bake.hcl`
+- `docker-bake.override.hcl`
 
 ## Specification
 
@@ -24,7 +24,7 @@ project specific reusable build flows.
 
 ### Target
 
-A target reflects a single docker build invocation with the same options that
+A target reflects a single `docker build` invocation with the same options that
 you would specify for `docker build`:
 
 ```hcl
@@ -34,6 +34,7 @@ target "webapp-dev" {
   tags = ["docker.io/username/webapp:latest"]
 }
 ```
+
 ```console
 $ docker buildx bake webapp-dev
 ```
@@ -46,26 +47,27 @@ $ docker buildx bake webapp-dev
 Complete list of valid target fields available for [HCL](#hcl-definition) and
 [JSON](#json-definition) definitions:
 
-| Name                | Type   | Description                                                                                                                     |
-|---------------------|--------|---------------------------------------------------------------------------------------------------------------------------------|
-| `inherits`          | List   | [Inherit build options](#merging-and-inheritance) from other targets                                                            |
-| `args`              | Map    | Set build-time variables (same as [`--build-arg` flag](../../engine/reference/commandline/buildx_build.md))                     |
-| `cache-from`        | List   | External cache sources (same as [`--cache-from` flag](../../engine/reference/commandline/buildx_build.md))                      |
-| `cache-to`          | List   | Cache export destinations (same as [`--cache-to` flag](../../engine/reference/commandline/buildx_build.md))                     |
-| `context`           | String | Set of files located in the specified path or URL                                                                               |
-| `contexts`          | Map    | Additional build contexts (same as [`--build-context` flag](../../engine/reference/commandline/buildx_build.md))                |
-| `dockerfile`        | String | Name of the Dockerfile (same as [`--file` flag](../../engine/reference/commandline/buildx_build.md))                            |
-| `dockerfile-inline` | String | Inline Dockerfile content                                                                                                       |
-| `labels`            | Map    | Set metadata for an image (same as [`--label` flag](../../engine/reference/commandline/buildx_build.md))                        |
-| `no-cache`          | Bool   | Do not use cache when building the image (same as [`--no-cache` flag](../../engine/reference/commandline/buildx_build.md))      |
-| `no-cache-filter`   | List   | Do not cache specified stages (same as [`--no-cache-filter` flag](../../engine/reference/commandline/buildx_build.md))          |
-| `output`            | List   | Output destination (same as [`--output` flag](../../engine/reference/commandline/buildx_build.md))                              |
-| `platforms`         | List   | Set target platforms for build (same as [`--platform` flag](../../engine/reference/commandline/buildx_build.md))                |
-| `pull`              | Bool   | Always attempt to pull all referenced images (same as [`--pull` flag](../../engine/reference/commandline/buildx_build.md))      |
-| `secret`            | List   | Secret to expose to the build (same as [`--secret` flag](../../engine/reference/commandline/buildx_build.md))                   |
-| `ssh`               | List   | SSH agent socket or keys to expose to the build (same as [`--ssh` flag](../../engine/reference/commandline/buildx_build.md))    |
-| `tags`              | List   | Name and optionally a tag in the format `name:tag` (same as [`--tag` flag](../../engine/reference/commandline/buildx_build.md)) |
-| `target`            | String | Set the target build stage to build (same as [`--target` flag](../../engine/reference/commandline/buildx_build.md))             |
+| Name                | Type   | Description                                                                                                                                                                 |
+| ------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `args`              | Map    | Set build-time variables (same as [`--build-arg` flag](../../engine/reference/commandline/buildx_build.md))                                                                 |
+| `attest`            | List   | Define attestations that should be applied to the image, see [SBOM attestations](../attestations/sbom.md) and [Provenance attestations](../attestations/slsa-provenance.md) |
+| `cache-from`        | List   | External cache sources (same as [`--cache-from` flag](../../engine/reference/commandline/buildx_build.md))                                                                  |
+| `cache-to`          | List   | Cache export destinations (same as [`--cache-to` flag](../../engine/reference/commandline/buildx_build.md))                                                                 |
+| `context`           | String | Set of files located in the specified path or URL                                                                                                                           |
+| `contexts`          | Map    | Additional build contexts (same as [`--build-context` flag](../../engine/reference/commandline/buildx_build.md))                                                            |
+| `dockerfile-inline` | String | Inline Dockerfile content                                                                                                                                                   |
+| `dockerfile`        | String | Name of the Dockerfile (same as [`--file` flag](../../engine/reference/commandline/buildx_build.md))                                                                        |
+| `inherits`          | List   | [Inherit build options](#merging-and-inheritance) from other targets                                                                                                        |
+| `labels`            | Map    | Set metadata for an image (same as [`--label` flag](../../engine/reference/commandline/buildx_build.md))                                                                    |
+| `no-cache-filter`   | List   | Do not cache specified stages (same as [`--no-cache-filter` flag](../../engine/reference/commandline/buildx_build.md))                                                      |
+| `no-cache`          | Bool   | Do not use cache when building the image (same as [`--no-cache` flag](../../engine/reference/commandline/buildx_build.md))                                                  |
+| `output`            | List   | Output destination (same as [`--output` flag](../../engine/reference/commandline/buildx_build.md))                                                                          |
+| `platforms`         | List   | Set target platforms for build (same as [`--platform` flag](../../engine/reference/commandline/buildx_build.md))                                                            |
+| `pull`              | Bool   | Always attempt to pull all referenced images (same as [`--pull` flag](../../engine/reference/commandline/buildx_build.md))                                                  |
+| `secret`            | List   | Secret to expose to the build (same as [`--secret` flag](../../engine/reference/commandline/buildx_build.md))                                                               |
+| `ssh`               | List   | SSH agent socket or keys to expose to the build (same as [`--ssh` flag](../../engine/reference/commandline/buildx_build.md))                                                |
+| `tags`              | List   | Name and optionally a tag in the format `name:tag` (same as [`--tag` flag](../../engine/reference/commandline/buildx_build.md))                                             |
+| `target`            | String | Set the target build stage to build (same as [`--target` flag](../../engine/reference/commandline/buildx_build.md))                                                         |
 
 ### Group
 
@@ -87,6 +89,7 @@ target "db" {
   tags = ["docker.io/username/db"]
 }
 ```
+
 ```console
 $ docker buildx bake build
 ```
@@ -109,6 +112,7 @@ target "webapp-dev" {
   tags = ["docker.io/username/webapp:${TAG}"]
 }
 ```
+
 ```console
 $ docker buildx bake webapp-dev          # will use the default value "latest"
 $ TAG=dev docker buildx bake webapp-dev  # will use the TAG environment variable value
@@ -160,9 +164,9 @@ target "webapp-dev" {
 
 ## Built-in variables
 
-* `BAKE_CMD_CONTEXT` can be used to access the main `context` for bake command
+- `BAKE_CMD_CONTEXT` can be used to access the main `context` for bake command
   from a bake file that has been [imported remotely](file-definition.md#remote-definition).
-* `BAKE_LOCAL_PLATFORM` returns the current platform's default platform
+- `BAKE_LOCAL_PLATFORM` returns the current platform's default platform
   specification (e.g. `linux/amd64`).
 
 ## Merging and inheritance
@@ -177,12 +181,14 @@ target "webapp-dev" {
   tags = ["docker.io/username/webapp:latest"]
 }
 ```
+
 ```hcl
 # docker-bake2.hcl
 target "webapp-dev" {
   tags = ["docker.io/username/webapp:dev"]
 }
 ```
+
 ```console
 $ docker buildx bake -f docker-bake.hcl -f docker-bake2.hcl webapp-dev
 ```
@@ -216,6 +222,7 @@ target "default" {
   tags = ["docker.io/username/webapp:latest"]
 }
 ```
+
 ```console
 $ docker buildx bake
 ```
@@ -264,33 +271,21 @@ target "db" {
   },
   "group": {
     "default": {
-      "targets": [
-        "db",
-        "webapp-dev"
-      ]
+      "targets": ["db", "webapp-dev"]
     }
   },
   "target": {
     "webapp-dev": {
       "dockerfile": "Dockerfile.webapp",
-      "tags": [
-        "docker.io/username/webapp:${TAG}"
-      ]
+      "tags": ["docker.io/username/webapp:${TAG}"]
     },
     "webapp-release": {
-      "inherits": [
-        "webapp-dev"
-      ],
-      "platforms": [
-        "linux/amd64",
-        "linux/arm64"
-      ]
+      "inherits": ["webapp-dev"],
+      "platforms": ["linux/amd64", "linux/arm64"]
     },
     "db": {
       "dockerfile": "Dockerfile.db",
-      "tags": [
-        "docker.io/username/db"
-      ]
+      "tags": ["docker.io/username/db"]
     }
   }
 }
@@ -369,6 +364,7 @@ that has been imported remotely, you can use the [`BAKE_CMD_CONTEXT` built-in va
 ```console
 $ cat https://raw.githubusercontent.com/tonistiigi/buildx/remote-test/docker-bake.hcl
 ```
+
 ```hcl
 target "default" {
   context = BAKE_CMD_CONTEXT
@@ -401,6 +397,7 @@ $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" --pr
 $ touch foo bar
 $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test"
 ```
+
 ```text
 ...
  > [4/4] RUN ls -l && stop:
@@ -432,6 +429,7 @@ $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "htt
 ```console
 $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v20.10.11"
 ```
+
 ```text
 ...
  > [4/4] RUN ls -l && stop:
