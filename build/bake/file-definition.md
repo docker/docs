@@ -50,7 +50,7 @@ Complete list of valid target fields available for [HCL](#hcl-definition) and
 | Name                | Type   | Description                                                                                                                                                                 |
 | ------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `args`              | Map    | Set build-time variables (same as [`--build-arg` flag](../../engine/reference/commandline/buildx_build.md))                                                                 |
-| `attest`            | Map    | Define attestations that should be applied to the image, see [SBOM attestations](../attestations/sbom.md) and [Provenance attestations](../attestations/slsa-provenance.md) |
+| `attest`            | List   | Define attestations that should be applied to the image, see [SBOM attestations](../attestations/sbom.md) and [Provenance attestations](../attestations/slsa-provenance.md) |
 | `cache-from`        | List   | External cache sources (same as [`--cache-from` flag](../../engine/reference/commandline/buildx_build.md))                                                                  |
 | `cache-to`          | List   | Cache export destinations (same as [`--cache-to` flag](../../engine/reference/commandline/buildx_build.md))                                                                 |
 | `context`           | String | Set of files located in the specified path or URL                                                                                                                           |
