@@ -74,7 +74,9 @@ $ docker service create --name helloworld alpine:3.6 ping docker.com
 For more details about image tag resolution, see
 [Specify the image version the service should use](#specify-the-image-version-a-service-should-use).
 
-### gMSA for Swarm (Windows Container)
+### gMSA for Swarm
+
+*This example will only work for a windows container* 
 
 Swarm now allows using a Docker Config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they're used on. 
 
