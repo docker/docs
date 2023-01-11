@@ -6,7 +6,7 @@ title: Explore Images
 
 The **Images**  view is a simple interface that lets you manage Docker images without having to use the CLI. By default, it displays a list of all Docker images on your local disk. 
 
-You can also view images in remote repositories, once you have signed in to Docker Hub. This allows you to collaborate with your team and manage your images directly through Docker Desktop.
+You can also view Hub images once you have signed in to Docker Hub. This allows you to collaborate with your team and manage your images directly through Docker Desktop.
 
 The **Images** view allows you to perform core operations such as running an image as a container, pulling the latest version of an image from Docker Hub, pushing the image to Docker Hub, and inspecting images.
 
@@ -16,9 +16,9 @@ The **Images** view displays metadata about the image such as the:
 - Date created
 - Size of the image.
 
-It also displays **In Use** tags next to images used by running and stopped containers.
+It also displays **In Use** tags next to images used by running and stopped containers. You can choose what information you want displayed by selecting the **More options** menu to the right of the search bar, and then use the toggle switches according to your preferences. 
 
-The **Images on disk** status bar displays the number of images and the total disk space used by the images.
+The **Images on disk** status bar displays the number of images and the total disk space used by the images and when this information was last refreshed.
 
 ## Manage your images
 
@@ -26,10 +26,9 @@ Use the **Search** field to search for any specific image.
 
 You can sort images by:
 
-- Name
-- Date created
-- Size
-
+- In use
+- Unused
+- Dangling
 
 ## Run an image as a container
 
@@ -49,7 +48,7 @@ Inspecting an image displays detailed information about the image such as the:
 - Date the image was created
 - Size of the image
 
-To inspect an image, hover over an image, select the **More options** button and then select **Inspect** from the dropdown menu. 
+To inspect an image, hover over an image, select the **More options** button and then select **View details** from the dropdown menu. 
 
 ## Pull the latest image from Docker Hub
 
@@ -93,17 +92,15 @@ The **Images** view also allows you to manage and interact with images in remote
 
 > **Note**
 >
-> If you have a paid Docker subscription and enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results appear on the Remote repositories tab.
+> If you have a paid Docker subscription and enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results appear on the **Hub** tab.
 The **Pull** option allows you to pull the latest version of the image from Docker Hub. The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
 
 To interact with remote repositories:
 
-1. select the **Remote repositories** tab.
+1. Select the **Hub** tab.
 2. Select an organization from the drop-down list. This displays a list of repositories in your organization.
 3. Hover over an image from the list and then select **Pull** to pull the latest image from the remote repository.
 
 To view a detailed information about the image in Docker Hub, select the image and then select **View in Hub**.
 
 The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
-
-If you have a paid Docker subscription and have enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) the Docker Hub page also displays a summary of the vulnerability scan report and provides detailed information about the vulnerabilities identified.
