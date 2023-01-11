@@ -163,7 +163,7 @@ $ docker buildx imagetools inspect <namespace>/<image>:<version> \
 {% endraw %}
 
 You can also construct more complex expressions using the full functionality of
-go templates. For example, for provenance generated with `mode=max`, you can
+Go templates. For example, for provenance generated with `mode=max`, you can
 extract the full source code of the Dockerfile used to build the image:
 
 {% raw %}

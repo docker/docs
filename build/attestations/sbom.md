@@ -189,7 +189,7 @@ $ docker buildx imagetools inspect <namespace>/<image>:<version> \
 {% endraw %}
 
 You can also construct more complex expressions using the full functionality
-of go templates. For example, you can list all the installed packages and their
+of Go templates. For example, you can list all the installed packages and their
 version identifiers:
 
 {% raw %}
