@@ -34,12 +34,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Extensions have moved from Beta to GA
-- Quick Search has moved from experimental to GA
-- Extensions are now included in Quick Search
-- Analyzing large images is now up to 4x faster
-- New local images view has moved from experimental to GA
-- Rosetta for Linux as a Beta feature on MacOS 13 for faster emulation of Intel-based images on Apple Silicon
+- Extensions have moved from Beta to GA.
+- Quick Search has moved from experimental to GA.
+- Extensions are now included in Quick Search.
+- Analyzing large images is now up to 4x faster.
+- New local images view has moved from experimental to GA.
+- New Beta feature for MacOS 13, Rosetta for Linux, has been added for faster emulation of Intel-based images on Apple Silicon.
 
 ### Upgrades
 
@@ -60,11 +60,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug where the user is prompted for new HTTP proxy credentials repeatedly until Docker Desktop is restarted.
 - Added a diagnostics command `com.docker.diagnose login` to check HTTP proxy configuration.
 - Fixed actions on compose stack not working properly. Fixes [docker/for-mac#6566](https://github.com/docker/for-mac/issues/6566).
-- Fixed the Docker Desktop dashboard trying at startup to get disk usage information and display an error banner before the engine was running.
-- Added an informational banner with instructions to opt-out of experimental feature access next to all experimental features.
-- Support downloading Kubernetes images via an HTTP proxy.
+- Fixed the Docker dashboard trying at startup to get disk usage information and display an error banner before the engine was running.
+- Added an informational banner with instructions on how to opt-out of experimental feature access next to all experimental features.
+- Docker Desktop now supports downloading Kubernetes images via an HTTP proxy.
 - Fixed tooltips to not block action buttons. Fixes [docker/for-mac#6516](https://github.com/docker/for-mac/issues/6516).
-- Fixed the blank "An error occurred" container list on the Container Overview screen
+- Fixed the blank "An error occurred" container list on the **Container** view.
 
 #### For Mac
 
@@ -73,7 +73,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Added back a way to uninstall Docker Desktop from the command line. Fixes [docker/for-mac#6598](https://github.com/docker/for-mac/issues/6598).
 - Fixed hardcoded `/usr/bin/kill`. Fixes [docker/for-mac#6589](https://github.com/docker/for-mac/issues/6589).
 - Fixed truncation (for example with the `truncate` command) of very large files (> 38GB) shared on VirtioFS with an incorrect size.
-- Changed the disk image size in the Settings to use the decimal system (base 10) to coincide with how Finder displays disk capacity.
+- Changed the disk image size in **Settings** to use the decimal system (base 10) to coincide with how Finder displays disk capacity.
 - Fixed Docker crash under network load. Fixes [docker/for-mac#6530](https://github.com/docker/for-mac/issues/6530).
 - Fixed an issue causing Docker to prompt the user to install the `/var/run/docker.sock` symlink after every reboot.
 - Ensured the Login Item which installs the `/var/run/docker.sock` symlink is signed.
@@ -82,7 +82,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### For Windows
 
 - Fixed `docker build` hanging while printing "load metadata for". Fixes [docker/for-win#10247](https://github.com/docker/for-win/issues/10247).
-- Fixed typo in diagnose.exe output (https://github.com/docker/for-win/issues/13107).
+- Fixed typo in diagnose.exe output Fixes [docker/for-win#13107](https://github.com/docker/for-win/issues/13107).
 - Added support for running under cgroupv2 on WSL 2. This is activated by adding `kernelCommandLine = systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all` to your `%USERPROFILE%\.wslconfig` file in the `[wsl2]` section.
 
 ## 4.15.0
