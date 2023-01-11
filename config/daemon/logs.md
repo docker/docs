@@ -118,7 +118,6 @@ Look in the Docker logs for a message like the following:
 
 ```none
 ...goroutine stacks written to /var/run/docker/goroutine-stacks-2017-06-02T193336z.log
-...daemon datastructure dump written to /var/run/docker/daemon-data-2017-06-02T193336z.log
 ```
 
 The locations where Docker saves these stack traces and dumps depends on your
