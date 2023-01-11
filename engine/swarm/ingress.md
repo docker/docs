@@ -69,7 +69,7 @@ the node. For externally routable IP addresses, the port is available from
 outside the host. For all other IP addresses the access is only available from
 within the host.
 
-![service ingress image](images/ingress-routing-mesh.png)
+![Service ingress image](images/ingress-routing-mesh.png)
 
 You can publish a port for an existing service using the following command:
 
@@ -198,7 +198,7 @@ You can configure an external load balancer to route requests to a swarm
 service. For example, you could configure [HAProxy](https://www.haproxy.org) to
 balance requests to an nginx service published to port 8080.
 
-![ingress with external load balancer image](images/ingress-lb.png)
+![Ingress with external load balancer image](images/ingress-lb.png)
 
 In this case, port 8080 must be open between the load balancer and the nodes in
 the swarm. The swarm nodes can reside on a private network that is accessible to

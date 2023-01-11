@@ -77,12 +77,12 @@ rel="noopener" class=""}.
    target="blank" rel="noopener" class=""}, where you should see the image in
    the list.
 
-   ![indexed image in the image overview list](./images/images-overview.png){:
+   ![Indexed image in the image overview list](./images/images-overview.png){:
    width="700px"}
 
 6. Select the image name. This gets you to the list of image tags.
 
-   ![list of image tags](./images/tags-list.png){: width="700px"}
+   ![List of image tags](./images/tags-list.png){: width="700px"}
 
    Since this is your first time indexing this image, the list only has one tag
    for now. When you integrate Atomist with your container registry, images and
@@ -90,7 +90,7 @@ rel="noopener" class=""}.
 
 7. Select the tag name. This shows you the insights for this tag.
 
-   ![vulnerability breakdown view](./images/vulnerabilities-overview.png){:
+   ![Vulnerability breakdown view](./images/vulnerabilities-overview.png){:
    width="700px"}
 
    In this view, you can see how many vulnerabilities this image has, their

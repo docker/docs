@@ -41,7 +41,7 @@ By default, all activities that occur at organization and repository levels are 
 
 Click the **All Activities** drop-down list to view activities that are specific to an organization or a repository. After choosing **Organization** or **Repository**, you can further refine the results using the **All Actions** drop-down list. If you select the **Activities** tab from the **Repository** view, you can only filter repository-level activities.
 
-![Refine org activities](images/org-all-actions.png){:width="600px"}
+![Refine organization activities](images/org-all-actions.png){:width="600px"}
 
 
 ## Audit logs event definitions

@@ -50,7 +50,7 @@ To create your access token:
    will be used, or set a purpose for the token. You can view the following access
    permissions from the drop-down:
 
-      ![PAT Menu](images/hub-create-token.png){:width="700px"}
+      ![New access token menu](images/hub-create-token.png){:width="700px"}
 
    The access permissions are scopes that set restrictions in your
    repositories. For example, for Read & Write permissions, an automation
@@ -60,7 +60,7 @@ To create your access token:
 5. Copy the token that appears on the screen and save it. You will not be able
    to retrieve the token once you close this prompt.
 
-      ![Copy Token](images/hub-copy-token.png){:width="700px"}
+      ![Copy access token view](images/hub-copy-token.png){:width="700px"}
 
 ## Use an access token
 
@@ -85,12 +85,12 @@ You can rename, activate, deactivate, or delete a token as needed.
    This page shows an overview of all your tokens. You can also view the number
    of tokens that are activated and deactivated in the toolbar.
 
-   ![Delete or Edit](images/hub-delete-edit-token.png){:width="700px"}
+   ![Delete or edit and access token](images/hub-delete-edit-token.png){:width="700px"}
 
 2. Select a token and click **Delete** or **Edit**, or use the menu on
    the far right of a token row to bring up the edit screen. You can also
    select multiple tokens to delete at once.
 
-      ![Modify Token](images/hub-edit-token.png){:width="700px"}
+      ![Modify an access token](images/hub-edit-token.png){:width="700px"}
 
 3. After modifying the token, click the **Save** button to save your changes.

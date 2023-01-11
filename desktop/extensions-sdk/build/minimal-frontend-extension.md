@@ -100,7 +100,7 @@ To preview the extension in Docker Desktop, close and open Docker Dashboard once
 
 The left-hand menu displays a new tab with the name of your extension.
 
-![minimal-frontend-extension](images/ui-minimal-extension.png)
+![Minimal frontend extension](images/ui-minimal-extension.png)
 
 ## What's next?
 
