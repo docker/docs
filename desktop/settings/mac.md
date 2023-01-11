@@ -11,10 +11,10 @@ redirect_from:
 
 This page provides information on how to configure and manage your Docker Desktop settings.
 
-To navigate to **Preferences** either:
+To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Preferences**
-- Select the **Preferences** icon from the Docker Dashboard.
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
+- Select the **Settings** icon from the Docker Dashboard.
 
 ## General
 

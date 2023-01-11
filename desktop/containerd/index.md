@@ -22,7 +22,7 @@ The containerd image store beta feature is off by default.
 
 To start using the feature:
 
-1. Navigate to **Settings**, or **Preferences** if you’re a Mac user.
+1. Navigate to **Settings**.
 2. Select the **Experimental** features tab.
 3. Next to **Use containerd for pulling and storing images**, select the
    checkbox.

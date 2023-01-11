@@ -10,7 +10,7 @@ title: Settings and feedback
 
 Docker Extensions is switched on by default. To change your settings:
 
-1. Navigate to **Settings**, or **Preferences** if you're a Mac user.
+1. Navigate to **Settings**.
 2. Select the **Extensions** tab.
 3. Next to **Enable Docker Extensions**, select or clear the checkbox to set your desired state.
 4. In the bottom-right corner, select **Apply & Restart**.
@@ -19,7 +19,7 @@ Docker Extensions is switched on by default. To change your settings:
 
 You can install extensions through the Marketplace or through the Extensions SDK tools. You can choose to only allow published extensions. These are extensions that have been reviewed and published in the Extensions Marketplace.
 
-1. Navigate to **Settings**, or **Preferences** if you're a Mac user.
+1. Navigate to **Settings**.
 2. Select the **Extensions** tab.
 3. Next to **Allow only extensions distributed through the Docker Marketplace**, select or clear the checkbox to set your desired state.
 4. In the bottom-right corner, select **Apply & Restart**.
@@ -29,7 +29,7 @@ You can install extensions through the Marketplace or through the Extensions SDK
 By default, containers created by extensions are hidden from the list of containers in Docker Dashboard and the Docker CLI. To make them visible
 update your settings:
 
-1. Navigate to **Settings**, or **Preferences** if you're a Mac user.
+1. Navigate to **Settings**.
 2. Select the **Extensions** tab.
 3. Next to **Show Docker Extensions system containers**, select or clear the checkbox to set your desired state.
 4. In the bottom-right corner, select **Apply & Restart**.

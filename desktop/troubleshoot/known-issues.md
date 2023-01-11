@@ -26,7 +26,7 @@ title: Known issues for Docker Desktop on Mac
   the Activity Monitor, and for some processes to consume a large amount of CPU
   resources. Reboot and restart Docker to resolve these issues.
 
-* Docker does not auto-start on login even when it is enabled in **Preferences**. This is related to a
+* Docker does not auto-start on login even when it is enabled in **Settings**. This is related to a
   set of issues with Docker helper, registration, and versioning.
 
 * Docker Desktop uses the `HyperKit` hypervisor
