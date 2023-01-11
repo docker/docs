@@ -241,6 +241,10 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
 
+#### Use Rosetta for x86/AMD64 emulation on Apple Silicon. 
+
+Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. 
+
 ### Experimental features
 
 {% include desktop-experimental.md %}
