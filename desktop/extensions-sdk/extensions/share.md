@@ -18,8 +18,6 @@ Docker now allows you to share your extensions using a URL.
 
 When people navigate to this URL, it opens Docker Desktop and displays a preview of your extension in the same way as an extension in the Marketplace. From the preview, users can then select **Install**.
 
-![Navigate to extension link](images/open-share.png)
-
 To generate this link you can either:
 
 - Run the following command:
