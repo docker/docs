@@ -24,13 +24,102 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.16.0
+
+{% include release-date.html date="2022-01-12" %}
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### New
+
+- Extensions have moved from Beta to GA.
+- Quick Search has moved from experimental to GA.
+- Extensions are now included in Quick Search.
+- Analyzing large images is now up to 4x faster.
+- New local images view has moved from experimental to GA.
+- New Beta feature for MacOS 13, Rosetta for Linux, has been added for faster emulation of Intel-based images on Apple Silicon.
+
+### Upgrades
+
+- [Compose v2.15.1](https://github.com/docker/compose/releases/tag/v2.15.1)
+- [Containerd v1.6.14](https://github.com/containerd/containerd/releases/tag/v1.6.14)
+- [Docker Engine v20.10.22](https://docs.docker.com/engine/release-notes/#201022)
+- [Buildx v0.10.0](https://github.com/docker/buildx/releases/tag/v0.10.0)
+- [Docker Scan v0.23.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.23.0)
+- [Go 1.19.4](https://github.com/golang/go/releases/tag/go1.19.4)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed `docker build --quiet` not outputting the image identifier with the `containerd` integration.
+- Fixed image inspect not showing image labels with the `containerd` integration.
+- Increased the contrast between running and stopped container icons to make it easier for colorblind people to scan the containers list.
+- Fixed a bug where the user is prompted for new HTTP proxy credentials repeatedly until Docker Desktop is restarted.
+- Added a diagnostics command `com.docker.diagnose login` to check HTTP proxy configuration.
+- Fixed actions on compose stack not working properly. Fixes [docker/for-mac#6566](https://github.com/docker/for-mac/issues/6566).
+- Fixed the Docker dashboard trying at startup to get disk usage information and display an error banner before the engine was running.
+- Added an informational banner with instructions on how to opt-out of experimental feature access next to all experimental features.
+- Docker Desktop now supports downloading Kubernetes images via an HTTP proxy.
+- Fixed tooltips to not block action buttons. Fixes [docker/for-mac#6516](https://github.com/docker/for-mac/issues/6516).
+- Fixed the blank "An error occurred" container list on the **Container** view.
+
+#### For Mac
+
+- Fixed the Docker engine not starting when Enhanced Container Isolation is enabled if the legacy `osxfs` implementation is used for file sharing.
+- Fixed files created on VirtioFS having the executable bit set. Fixes [docker/for-mac#6614](https://github.com/docker/for-win/issues/6614).
+- Added back a way to uninstall Docker Desktop from the command line. Fixes [docker/for-mac#6598](https://github.com/docker/for-mac/issues/6598).
+- Fixed hardcoded `/usr/bin/kill`. Fixes [docker/for-mac#6589](https://github.com/docker/for-mac/issues/6589).
+- Fixed truncation (for example with the `truncate` command) of very large files (> 38GB) shared on VirtioFS with an incorrect size.
+- Changed the disk image size in **Settings** to use the decimal system (base 10) to coincide with how Finder displays disk capacity.
+- Fixed Docker crash under network load. Fixes [docker/for-mac#6530](https://github.com/docker/for-mac/issues/6530).
+- Fixed an issue causing Docker to prompt the user to install the `/var/run/docker.sock` symlink after every reboot.
+- Ensured the Login Item which installs the `/var/run/docker.sock` symlink is signed.
+- Fixed bug where `$HOME/.docker` was removed on factory reset.
+
+### For Windows
+
+- Fixed `docker build` hanging while printing "load metadata for". Fixes [docker/for-win#10247](https://github.com/docker/for-win/issues/10247).
+- Fixed typo in diagnose.exe output Fixes [docker/for-win#13107](https://github.com/docker/for-win/issues/13107).
+- Added support for running under cgroupv2 on WSL 2. This is activated by adding `kernelCommandLine = systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all` to your `%USERPROFILE%\.wslconfig` file in the `[wsl2]` section.
+
 ## 4.15.0
 
 {% include release-date.html date="2022-12-01" %}
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/93002/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/93002/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/93002/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/93002/docker-desktop-4.15.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/93002/docker-desktop-4.15.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/93002/docker-desktop-4.15.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion10" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading10">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion10" href="#collapse10" aria-expanded="true" aria-controls="collapse10">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 04dbd937971f1940e22f1edab9cad90722268b3f98feb77140535e1ac64606a8</li>
+      <li><b>Mac Intel:</b> SHA-256 bee41d646916e579b16b7fae014e2fb5e5e7b5dbaf7c1949821fd311d3ce430b</li>
+      <li><b>Mac Arm:</b> SHA-256 fc8609d57fb8c8264122f581c0f66497e46e171f8027d85d90213527d6226362</li>
+      <li><b>Linux DEB:</b> SHA-256 744266c6adef23e0823facded844f3b879fd0a988f8604f9b620d7585f249cf9</li>
+      <li><b>Linux RPM:</b> SHA-256 84e206c3e4742d37c7ef7d3d7440c5a085e1a4a77da2c628d133324a3f77f891</li>
+      <li><b>Linux Arch:</b> SHA-256 43156553268ccc8cb11eef08ac375c90af60ccdc65ae407bdf100ff2e50c6867</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### New
 
@@ -1012,7 +1101,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Fixed an issue that sometimes caused Docker Desktop to display a blank white screen. Fixes [docker/for-mac#6134](https://github.com/docker/for-mac/issues/6134).
 - Fixed a problem where gettimeofday() performance drops after waking from sleep when using Hyperkit. Fixes [docker/for-mac#3455](https://github.com/docker/for-mac/issues/3455).
-- Fixed an issue that caused Docker Desktop to become unresponsive during startup when osxfs is used for file sharing.
+- Fixed an issue that caused Docker Desktop to become unresponsive during startup when `osxfs` is used for file sharing.
 
 #### For Windows
 
