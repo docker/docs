@@ -4,11 +4,6 @@ keywords: domain audit, security
 title: Domain audit
 ---
 
-> **Note**
->
-> Domain audit is currently in [Early Access](../release-lifecycle.md/#early-access-ea).
-> The feature is enabled for specific user groups as part of an incremental roll-out strategy.
-
 Domain audit identifies uncaptured users. Uncaptured users are Docker users that have authenticated to Docker using an email address associated with one of your verified domains, but they're not a member of your organization in Docker. You can audit domains on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade.md).
 
 Uncaptured users can pose a security threat to your environment because your organization's security settings aren't applied to the user's sessions who aren't part of your organization. In addition, you won't have visibility into the activity of uncaptured users. Add uncaptured users to your organization to gain visibility into their activity and apply your organization's security settings.
@@ -42,4 +37,4 @@ You can invite all the uncaptured users to your organization using the exported 
 
 > **Note**
 >
-> Domain audit may identify accounts of users who are no longer a part of your organization. Only someone with access to the Docker account can deactivate the account or update the associated email address. For more details, see [Deactivating an account](../docker-hub/deactivate-account.md/).
+> Domain audit may identify accounts of users who are no longer a part of your organization. If you don't want add a user to your organization and you don't want the user to appear in future domain audits, the account must be deactivated or the associated email address must be updated. Only someone with access to the Docker account can deactivate the account or update the associated email address. For more details, see [Deactivating an account](../docker-hub/deactivate-account.md/).
