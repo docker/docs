@@ -29,9 +29,9 @@ Docker Desktop will set up Kubernetes for you quickly and easily. Follow the set
 
 ### Mac
 
-1.  After installing Docker Desktop, you should see a Docker icon in your menu bar. Click on it, and navigate to **Preferences** > **Kubernetes**.
+1.  After installing Docker Desktop, you should see a Docker icon in your menu bar. Click on it, and navigate to **Settings** > **Kubernetes**.
 
-2.  Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in the Preferences menu.
+2.  Check the checkbox labeled **Enable Kubernetes**, and click **Apply & Restart**. Docker Desktop will automatically set up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in **Settings**.
 
 3.  In order to confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
 

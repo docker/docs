@@ -22,7 +22,7 @@ Docker Desktop includes a standalone Kubernetes server and client, as well as Do
 
 To enable Kubernetes:
 
-1. From the Docker menu, select **Preferences** (**Settings** on Windows).
+1. From the Docker menu, select **Settings**.
 2. Select **Kubernetes** and click **Enable Kubernetes**.
 
     This starts a Kubernetes single-node cluster when Docker Desktop starts.

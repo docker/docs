@@ -31,7 +31,7 @@ redirect_from:
 
   Once Docker Desktop is installed, the Quick Start Guide launches. It includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 
-   ![Docker Quick Start tutorial](images/docker-tutorial-linux.png)
+   ![Docker Quick Start tutorial](images/docker-tutorial.png)
 
 To run the Quick Start Guide on demand, select the Docker menu ![whale menu](images/whale-x.svg){: .inline} and then choose **Quick Start Guide**.
 
