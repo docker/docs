@@ -76,6 +76,8 @@ For more details about image tag resolution, see
 
 ### gMSA for Swarm
 
+*This example will only work for a windows container* 
+
 Swarm now allows using a Docker Config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they're used on. 
 
 The following example assumes a gMSA and its credential spec (called credspec.json) already exists, and that the nodes being deployed to are correctly configured for the gMSA.
