@@ -38,7 +38,7 @@ Docker Desktop also provides an easy-access tray icon that appears in the taskba
 To display the Docker menu, right-click on the ![whale menu](../../assets/images/whale-x.svg){: .inline} icon. It displays the following options:
 
 - **Dashboard**. This takes you to the Docker Dashboard.
-- **Sign in/Create Dock Id**
+- **Sign in/Create Docker ID**
 - **Settings**
 - **Check for updates**
 - **Troubleshoot** 
