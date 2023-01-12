@@ -3,6 +3,7 @@ description: How to use Docker Compose's extends keyword to share configuration 
 keywords: fig, composition, compose, docker, orchestration, documentation, docs
 title: Share Compose configurations between files and projects
 ---
+{% include compose-eol.md %}
 
 Compose supports two methods of sharing common configuration:
 

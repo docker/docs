@@ -3,6 +3,7 @@ description: Compose CLI environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Compose CLI environment variables
 ---
+{% include compose-eol.md %}
 
 In this section you can find the list of pre-defined environment variables you can use to configure the Docker Compose command-line behavior.  
 **See also** [Declare default environment variables in file](../env-file.md) to check how to declare default environment variables in an environment file named `.env` placed in the project directory.

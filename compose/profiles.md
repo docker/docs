@@ -3,6 +3,7 @@ title: Using profiles with Compose
 desription: Using profiles with Compose
 keywords: cli, compose, profile, profiles reference
 ---
+{% include compose-eol.md %}
 
 Profiles help you adjust the Compose application model for various uses and
 environments by selectively enabling services.

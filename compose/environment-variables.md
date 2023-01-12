@@ -6,6 +6,7 @@ redirect_from:
 - /compose/env/
 - /compose/link-env-deprecated/
 ---
+{% include compose-eol.md %}
 
 There are multiple parts of Compose that deal with environment variables in one
 sense or another. This page should help you find the information you need.

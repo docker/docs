@@ -3,6 +3,7 @@ description: How Compose sets up networking between containers
 keywords: documentation, docs, docker, compose, orchestration, containers, networking
 title: Networking in Compose
 ---
+{% include compose-eol.md %}
 
 By default Compose sets up a single
 [network](../engine/reference/commandline/network_create.md){: target="_blank" rel="noopener" class="_" } for your app. Each

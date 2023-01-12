@@ -3,6 +3,7 @@ description: Docker Compose FAQ
 keywords: documentation, docs,  docker, compose, faq
 title: Frequently asked questions
 ---
+{% include compose-eol.md %}
 
 ## How do I get help?
 

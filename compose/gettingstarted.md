@@ -3,6 +3,7 @@ description: Get started with Docker Compose
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: Try Docker Compose
 ---
+{% include compose-eol.md %}
 
 This tutorial is designed to introduce the key concepts of Docker Compose whilst building a simple Python web application. The application uses the Flask framework and maintains a hit counter in
 Redis. 
