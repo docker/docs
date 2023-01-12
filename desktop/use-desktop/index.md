@@ -18,8 +18,18 @@ The **Volumes** view displays a list of volumes and allows you to easily create 
 
 In addition, the Docker Dashboard allows you to:
 
-- Easily navigate to the **Preferences** (**Settings** in Windows) menu to configure Docker Desktop preferences. Select the **Preferences** or **Settings** icon in the Dashboard header.
+- Easily navigate to the **Settings** menu to configure Docker Desktop preferences. Select the **Settings** icon in the Dashboard header.
 - Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
+
+## Quick search
+
+From the Docker Dashboard you can use Quick Search, which is located in the Dashboard header, to search for:
+
+- Any container or Compose app on your local system. You can see an overview of associated environment variables or perform quick actions, such as start, stop, or delete.
+
+- Public Docker Hub images, local images, and images from remote repositories. Depending on the type of image you select, you can either pull the image by tag, view documentation, go to Docker Hub for more details, or run a new container using the image.
+
+- Extensions. From here, you can learn more about the extension and install it with a single click. Or, if you already have an extension installed, you can open it straight from the search results. 
 
 ## The Docker menu
 
@@ -28,8 +38,8 @@ Docker Desktop also provides an easy-access tray icon that appears in the taskba
 To display the Docker menu, right-click on the ![whale menu](../../assets/images/whale-x.svg){: .inline} icon. It displays the following options:
 
 - **Dashboard**. This takes you to the Docker Dashboard.
-- **Sign in/Create Dock Id**
-- **Settings**. Takes you to the Settings, or Preferences is you use a macOS.
+- **Sign in/Create Docker ID**
+- **Settings**
 - **Check for updates**
 - **Troubleshoot** 
 - **Switch to Windows containers**

@@ -55,7 +55,7 @@ $ docker extension dev reset <name-of-your-extensions>
 
 If your extension is composed of one or more services running as containers in the Docker Desktop VM, you can access them easily from the dashboard in Docker Desktop.
 
-1. In Docker Desktop, navigate to **Settings** or **Preferences** if you’re a Mac user.
+1. In Docker Desktop, navigate to **Settings**.
 2. Under the **Extensions** tab, select the **Show Docker Desktop Extensions system containers** option. You can now view your extension containers and their logs.
 
 
