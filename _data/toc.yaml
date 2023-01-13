@@ -1164,7 +1164,7 @@ manuals:
       - path: /desktop/extensions/
         title: What are Docker Extensions?
       - path: /desktop/extensions/marketplace/
-        title: Manage marketplace Extensions
+        title: Manage marketplace extensions
       - path: /desktop/extensions/non-marketplace/
         title: Manage non-Marketplace extensions
       - path: /desktop/extensions/settings-feedback/
