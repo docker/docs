@@ -1675,6 +1675,8 @@ manuals:
     title: Overview
   - path: /compose/features-uses/
     title: Key features and use cases
+  - path: /compose/compose-v2/
+    title: Evolution of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
@@ -1687,12 +1689,7 @@ manuals:
         title: Uninstall Compose
   - path: /compose/gettingstarted/
     title: Try Docker Compose
-  - sectiontitle: Compose V2
-    section:
-    - path: /compose/compose-v2/
-      title: Overview
-    - path: /compose/cli-command-compatibility/
-      title: Compose v2 compatibility
+
   - sectiontitle: Environment variables
     section:
     - path: /compose/environment-variables/
