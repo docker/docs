@@ -44,7 +44,7 @@ What you'll see is that the files created in one container aren't available in a
     $ docker exec <container-id> cat /data.txt
     ```
 
-    For `bash` in Windows - use `POSIX` way to say - 'this an a absolute path' to a file:
+    For `bash` in Windows 10 Home - use POSIX absolute path to a file - `double slash in first position`:
     ```bash
     $ docker exec <container-id> cat //data.txt
     ```
@@ -105,6 +105,12 @@ name of the volume.
 
     ```console
     $ docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
+    ```
+
+    For `bash` in Windows 10 Home - use absolute path - double slash:
+    
+    ```bash
+    $ docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=//etc/todos getting-started
     ```
 
 4. Once the container starts up, open the app and add a few items to your todo list.
