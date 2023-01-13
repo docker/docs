@@ -80,10 +80,6 @@ POST https://authorization-server.com/token
 >
 > The client's credentials are included in the `POST` query params in this example. OAuth authorization servers may require that the credentials are sent as a HTTP Basic Authentication header or might support different formats. See your OAuth provider docs for details.
 
-#### Token Endpoint Response
-
-Finally, you can read the access token from the HTTP response and pass it to the extension UI by having the browser after OAuth be redirected to the backend service. The backend service, in turn, has to explicitly redirect the browser to `docker-desktop://dashboard/open`.
-
 ## Step three: Store the access token
 
 The Docker Extensions SDK doesn't currently provide a specific mechanism to store secrets.

@@ -40,7 +40,7 @@ Although you can start from an empty directory, it is highly recommended that yo
 
 At a minimum, your Dockerfile needs:
 
-- Labels which provide extra information about the extension.
+- [Labels](../extensions/labels.md) which provide extra information about the extension, icon and screenshots.
 - The source code which in this case is an `index.html` that sits within the `ui` folder.
 - The `metadata.json` file.
 
@@ -51,7 +51,7 @@ FROM scratch
 LABEL org.opencontainers.image.title="Minimal frontend" \
     org.opencontainers.image.description="A sample extension to show how easy it's to get started with Desktop Extensions." \
     org.opencontainers.image.vendor="Awesome Inc." \
-    com.docker.desktop.extension.api.version="0.3.0" \
+    com.docker.desktop.extension.api.version="0.3.3" \
     com.docker.desktop.extension.icon="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
 
 COPY ui ./ui

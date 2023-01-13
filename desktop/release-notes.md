@@ -24,13 +24,54 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
-## 4.16.0
+## 4.16.1
 
-{% include release-date.html date="2023-01-12" %}
+{% include release-date.html date="2023-01-13" %}
 
 > Download Docker Desktop
 >
 > {% include desktop-install.html %}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed `sudo` inside a container failing with a security related error for some images. Fixes [docker/for-mac/6675](https://github.com/docker/for-mac/issues/6675) and [docker/for-win/13161](https://github.com/docker/for-win/issues/13161).
+
+## 4.16.0
+{% include release-date.html date="2023-01-12" %}
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/95345/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95345/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95345/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/95345/docker-desktop-4.16.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/95345/docker-desktop-4.16.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/95345/docker-desktop-4.16.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion11" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading11">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion11" href="#collapse11" aria-expanded="true" aria-controls="collapse11">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 f02fcd23410f9304bde7cd0b415731614adfd2e70bbb09f669a068c88ddd84f2</li>
+      <li><b>Mac Intel:</b> SHA-256 4fa95e90b6c39400943b263ae5aa1bb6db5b26043dd0148c4e37d3033a754d33</li>
+      <li><b>Mac Arm:</b> SHA-256 3101934a3b062b373a22fd994d743fa6a08fa805695839e6b63bc2d28ebcf59a</li>
+      <li><b>Linux DEB:</b> SHA-256 102b79efd90be5ff72fb6ba4bb385621f4e6ab23c19b14d19d525c10f20bdfdd</li>
+      <li><b>Linux RPM:</b> SHA-256 5145cc5073d4a0b998ebd65b96c5a46bd2d99a1572d5be8cff502a77b2c58c01</li>
+      <li><b>Linux Arch:</b> SHA-256 ab4af236b435489d49553b63f25a18c098677dd9abc176531cdcc3d67831461e</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### New
 
@@ -85,8 +126,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed typo in diagnose.exe output Fixes [docker/for-win#13107](https://github.com/docker/for-win/issues/13107).
 - Added support for running under cgroupv2 on WSL 2. This is activated by adding `kernelCommandLine = systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all` to your `%USERPROFILE%\.wslconfig` file in the `[wsl2]` section.
 
-## 4.15.0
+### Known Issues
 
+- Calling `sudo` inside a container fails with a security related error for some images. See [docker/for-mac/6675](https://github.com/docker/for-mac/issues/6675) and [docker/for-win/13161](https://github.com/docker/for-win/issues/13161).
+
+## 4.15.0
 {% include release-date.html date="2022-12-01" %}
 
 > Download Docker Desktop

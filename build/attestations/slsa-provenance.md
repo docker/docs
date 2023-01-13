@@ -142,7 +142,41 @@ using build arguments, consider refactoring builds to pass secret values using
 [build secrets](../../engine/reference/commandline/buildx_build.md#secret), to
 prevent leaking of sensitive information.
 
-## Example
+## Inspecting Provenance
+
+To explore created Provenance exported through the `image` exporter, you can
+use [`imagetools inspect`](../../engine/reference/commandline/buildx_imagetools_inspect.md).
+
+Using the `--format` option, you can specify a template for the output. All
+provenance-related data is available under the `.Provenance` attribute. For
+example, to get the raw contents of the Provenance in the SLSA format:
+
+{% raw %}
+```console
+$ docker buildx imagetools inspect <namespace>/<image>:<version> \
+    --format "{{ json .Provenance.SLSA }}"
+{
+  "buildType": "https://mobyproject.org/buildkit@v1",
+  ...
+}
+```
+{% endraw %}
+
+You can also construct more complex expressions using the full functionality of
+Go templates. For example, for provenance generated with `mode=max`, you can
+extract the full source code of the Dockerfile used to build the image:
+
+{% raw %}
+```console
+$ docker buildx imagetools inspect <namespace>/<image>:<version> \
+    --format '{{ range (index .Provenance.SLSA.metadata "https://mobyproject.org/buildkit@v1#metadata").source.infos }}{{ if eq .filename "Dockerfile" }}{{ .data }}{{ end }}{{ end }}' | base64 -d
+FROM ubuntu:20.04
+RUN apt-get update
+...
+```
+{% endraw %}
+
+## Provenance attestation example
 
 <!-- TODO: add a link to the definitions page, imported from moby/buildkit -->
 

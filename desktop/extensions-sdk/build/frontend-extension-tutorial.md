@@ -92,7 +92,7 @@ FROM alpine
 LABEL org.opencontainers.image.title="My extension" \
     org.opencontainers.image.description="Your Desktop Extension Description" \
     org.opencontainers.image.vendor="Awesome Inc." \
-    com.docker.desktop.extension.api.version="0.3.0" \
+    com.docker.desktop.extension.api.version="0.3.3" \
     com.docker.desktop.extension.icon="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" \
     com.docker.extension.screenshots="" \
     com.docker.extension.detailed-description="" \
@@ -141,6 +141,10 @@ COPY --from=client-builder /ui/build ui
 
   </div>
 </div>
+
+> Note
+>
+> In the example Dockerfile, you can see that the image label `com.docker.desktop.extension.icon` is set to an icon URL. The Extensions Marketplace displays this icon without installing the extension. The Dockerfile also includes `COPY docker.svg .` to copy an icon file inside the image. This second icon file is used to display the extension UI in the Dashboard, once the extension is installed.
 
 ## Configure the metadata file
 
