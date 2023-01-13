@@ -8,7 +8,7 @@ Domain audit identifies uncaptured users. Uncaptured users are Docker users that
 
 Uncaptured users can pose a security threat to your environment because your organization's security settings aren't applied to the user's sessions who aren't part of your organization. In addition, you won't have visibility into the activity of uncaptured users. Add uncaptured users to your organization to gain visibility into their activity and apply your organization's security settings.
 
-To ensure that you identify all uncaptured users in your environment, you can enforce sign-in. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md). If you don't enforce sign-in, the following types of users may access Docker Desktop in your environment and domain audit won't identify them:
+To ensure that only users in organization can access Docker Desktop in your environment, you can enforce sign-in. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md). If you don't enforce sign-in, the following types of users may access Docker Desktop in your environment and domain audit won't identify them:
    * Users that access Docker Desktop without authenticating
    * Users that authenticate using an account that doesn't have an email address associated with one of your verified domains
 
@@ -31,7 +31,6 @@ To audit your domains:
   - Name: The name of the user.
   - Username: The Docker ID of the user.
   - Email: The email address of the user.
-  - Date Joined: The date the user created their Docker account.
 
 You can invite all the uncaptured users to your organization using the exported CSV file. For more details, see [Invite members via CSV file](../docker-hub/members.md/#invite-members-via-csv-file). Optionally, enforce single sign-on or enable SCIM to automatically add users to your organization. For more details, see [Single Sign-on](../single-sign-on/index.md) or [SCIM](../docker-hub/scim.md).
 
