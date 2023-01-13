@@ -6,7 +6,7 @@ toc_min: 1
 toc_max: 2
 ---
 
-Docker Extensions lets you use third-party tools within Docker Desktop to extend its functionality.
+Docker Extensions let you use third-party tools within Docker Desktop to extend its functionality.
 
 You can seamlessly connect your favorite development tools to your application development and deployment workflows. Augment Docker Desktop with debugging, testing, security, and networking functionalities, and build custom add-ons using the Extensions [SDK](../extensions-sdk/index.md).
 
