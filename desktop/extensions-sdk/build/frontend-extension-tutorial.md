@@ -144,7 +144,7 @@ COPY --from=client-builder /ui/build ui
 
 > Note
 >
-> In the example Dockerfile, you can see that the image label `com.docker.desktop.extension.icon` is set to an icon URL. The Extensions Marketplace will display this icon (without installing the extension). The Dockerfile also includes `COPY docker.svg .` to copy an icon file inside the image. This second icon file will be used to display the extension UI in the Dashboard, once the extension is installed.
+> In the example Dockerfile, you can see that the image label `com.docker.desktop.extension.icon` is set to an icon URL. The Extensions Marketplace displays this icon without installing the extension. The Dockerfile also includes `COPY docker.svg .` to copy an icon file inside the image. This second icon file is used to display the extension UI in the Dashboard, once the extension is installed.
 
 ## Configure the metadata file
 
