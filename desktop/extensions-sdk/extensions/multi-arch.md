@@ -93,7 +93,7 @@ FROM alpine
 LABEL org.opencontainers.image.title="example-extension" \
     org.opencontainers.image.description="My Example Extension" \
     org.opencontainers.image.vendor="Docker Inc." \
-    com.docker.desktop.extension.api.version=">= 0.1.0"
+    com.docker.desktop.extension.api.version=">= 0.3.3"
 
 COPY --from=dl /out /
 ```
