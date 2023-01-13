@@ -41,14 +41,34 @@ When prompted you can either:
 
 ## Inspect an image
 
-Inspecting an image displays detailed information about the image such as the:
+To inspect an image, simply click on the image row. Inspecting an image displays detailed information about the image such as the:
 
 - Image history
 - Image ID
 - Date the image was created
 - Size of the image
+- Layers making up the image
+- Base images used
+- Vulnerabilities found
+- Packages inside the image
 
-To inspect an image, hover over an image, select the **More options** button and then select **View details** from the dropdown menu. 
+### Image Hierarchy
+
+The image you inspect may have one or more base images listed in the Image Hierarchy section. This means the author of the image used another image as a starting point when building the image. Often these base images are either operating system images such as Debian, Ubuntu and Alpine, or programming language images such as php, python, and java. A base image may have it's own parent base image so there is a chain of base images represented in the Image Hierarchy, and clicking on each image in the chain lets you see which layers originate from each base image. Clicking the 'ALL' row brings you back to selecting all the layers and base images for the entire image.
+
+One or more of the base images may have updates available, which may include updated security patches that remove vulnerabilities from your image. Any base images with available updates will be noted on the right-hand side "Images" tab.
+
+### Layers
+
+A Docker image consists of layers. The image layers will be listed top to bottom, with the earliest layer at the top and the most recent layer at the bottom. Often, the layers at the top of the list originate from a base image, and the layers towards the bottom will be layers added by the image author, often by adding commands to a Dockerfile. To see which layers originate from a base image, simply select a base image from the Image Hierarchy view and the relevant layers will be highlighted.
+
+Selecting individual or multiple layers will filter the packages and vulnerabilities on the right-hand side to see what has been added by the selected layers.
+
+### Vulnerabilities
+
+Images may be exposed to vulnerabilities and exploits. These are detected and listed on the right-hand side, grouped by package, and sorted in order of severity. Further information can be examined by expanding the sections such as if the vulnerability has an available fix. For even more details, you can click through to the link on dso.docker.com.
+
+If you have any feedback about this feature can you use the "Give Feedback" link inside Docker Desktop to contact the development team, we would love to hear from you!
 
 ## Pull the latest image from Docker Hub
 
