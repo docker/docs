@@ -17,7 +17,7 @@ why and how to add a backend.
 
 > Note
 >
-> Check the [Quickstart guide](../quickstart.md) and `docker extension init <my-extension>` provides a better base for your extension as it's more up-to-date and related to your install of Docker Desktop.
+> Check the [Quickstart guide](../quickstart.md) and `docker extension init <my-extension>`. They provide a better base for your extension as it's more up-to-date and related to your install of Docker Desktop.
 
 ## Why add a backend?
 
