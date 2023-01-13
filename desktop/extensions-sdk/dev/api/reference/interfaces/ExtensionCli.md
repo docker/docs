@@ -6,7 +6,9 @@ skip_read_time: true
 
 # Interface: ExtensionCli
 
-**`since`** 0.2.0
+**`Since`**
+
+0.2.0
 
 ## Properties
 
