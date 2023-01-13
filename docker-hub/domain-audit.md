@@ -5,6 +5,7 @@ title: Domain audit
 ---
 
 > **Note**
+>
 > Domain audit is currently in [Early Access](../release-lifecycle.md/#early-access-ea).
 
 Domain audit identifies uncaptured users. Uncaptured users are Docker users that have authenticated to Docker using an email address associated with one of your verified domains, but they're not a member of your organization in Docker. You can audit domains on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade.md).
