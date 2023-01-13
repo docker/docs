@@ -168,6 +168,42 @@ sbom-hugo.spdx.json
 sbom.spdx.json
 ```
 
+## Inspecting SBOMs
+
+To explore created SBOMs exported through the `image` exporter, you can use
+[`imagetools inspect`](../../engine/reference/commandline/buildx_imagetools_inspect.md).
+
+Using the `--format` option, you can specify a template for the output. All
+SBOM-related data is available under the `.SBOM` attribute. For example, to get
+the raw contents of an SBOM in SPDX format:
+
+{% raw %}
+```console
+$ docker buildx imagetools inspect <namespace>/<image>:<version> \
+    --format "{{ json .SBOM.SPDX }}"
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  ...
+}
+```
+{% endraw %}
+
+You can also construct more complex expressions using the full functionality
+of Go templates. For example, you can list all the installed packages and their
+version identifiers:
+
+{% raw %}
+```console
+$ docker buildx imagetools inspect <namespace>/<image>:<version> \
+    --format "{{ range .SBOM.SPDX.packages }}{{ .name }}@{{ .versionInfo }}{{ println }}{{ end }}"
+adduser@3.118ubuntu2
+apt@2.0.9
+base-files@11ubuntu5.6
+base-passwd@3.5.47
+...
+```
+{% endraw %}
+
 ## SBOM attestation example
 
 The following JSON example shows what an SBOM attestation might look like.
