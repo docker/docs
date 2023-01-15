@@ -1,23 +1,8 @@
-variable "JEKYLL_ENV" {
-  default = "development"
-}
-variable "DOCS_URL" {
-  default = "http://localhost:4000"
-}
 variable "DOCS_SITE_DIR" {
-  default = "_site"
+  default = "public"
 }
 variable "DOCS_ENFORCE_GIT_LOG_HISTORY" {
   default = "0"
-}
-
-target "_common" {
-  args = {
-    JEKYLL_ENV = JEKYLL_ENV
-    DOCS_URL = DOCS_URL
-    DOCS_ENFORCE_GIT_LOG_HISTORY = DOCS_ENFORCE_GIT_LOG_HISTORY
-  }
-  no-cache-filter = ["generate"]
 }
 
 group "default" {
@@ -25,45 +10,8 @@ group "default" {
 }
 
 target "release" {
-  inherits = ["_common"]
   target = "release"
   output = [DOCS_SITE_DIR]
-}
-
-target "vendor" {
-  target = "vendor"
-  output = ["."]
-}
-
-group "validate" {
-  targets = ["htmlproofer", "mdl"]
-}
-
-target "htmlproofer" {
-  inherits = ["_common"]
-  target = "htmlproofer"
-  output = ["type=cacheonly"]
-}
-
-target "htmlproofer-output" {
-  inherits = ["_common"]
-  target = "htmlproofer-output"
-  output = ["./lint"]
-}
-
-target "mdl" {
-  inherits = ["_common"]
-  target = "mdl"
-  output = ["type=cacheonly"]
-}
-
-target "mdl-output" {
-  inherits = ["_common"]
-  target = "mdl-output"
-  output = ["./lint"]
-  args = {
-    MDL_JSON = 1
-  }
 }
 
 #

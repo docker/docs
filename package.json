@@ -1,0 +1,29 @@
+{
+  "name": "docker/docs",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docker/docs.git"
+  },
+  "keywords": [],
+  "author": "dvdksn",
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/docker/docs/issues"
+  },
+  "homepage": "https://docs.docker.com/",
+  "devDependencies": {
+    "@algolia/autocomplete-js": "^1.7.3",
+    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "@tailwindcss/typography": "^0.5.8",
+    "algoliasearch": "^4.14.2",
+    "alpinejs": "^3.10.5",
+    "autoprefixer": "^10.4.13",
+    "markdownlint": "^0.27.0",
+    "postcss": "^8.4.19",
+    "postcss-cli": "^10.0.0",
+    "postcss-import": "^15.0.0",
+    "tailwindcss": "^3.2.4"
+  }
+}

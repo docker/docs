@@ -1,0 +1,6 @@
+<div class="no-prose grid grid-cols-3 xl:grid-cols-2 gap-4 sm:flex sm:flex-col">
+  {{ range .Page.Params.grid }}
+    {{ $opts := dict "title" .title "link" .link "description" .description "icon" .icon }}
+    {{ partial "components/card.html" $opts }}
+  {{ end }}
+</div>

@@ -1,0 +1,43 @@
+<nav class="text-[16px] flex flex-col gap-2 py-2">
+  {{ with (site.GetPage "/guides") }}
+    <a class="p-2 sidebar-hover" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+  {{ end }}
+  <hr />
+  <div class="pt-2 pl-2 text-gray-light-400 dark:text-gray-dark-400">
+    Manuals
+  </div>
+  <div class="flex flex-col">
+    {{ $manuals := (slice "/desktop" "/engine" "/build" "/compose" "/hub") }}
+    {{ range $manuals }}
+      {{ with (site.GetPage .) }}
+        <a class="py-2 pl-5 sidebar-hover" href="{{ .Permalink }}"
+          >{{ .LinkTitle }}</a
+        >
+      {{ end }}
+    {{ end }}
+  </div>
+  <hr />
+  {{ with (site.GetPage "/reference") }}
+    <a class="p-2 sidebar-hover" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+  {{ end }}
+  <hr />
+  {{ with (site.GetPage "/admin") }}
+    <a class="p-2 sidebar-hover" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+  {{ end }}
+  <hr />
+  {{ with (site.GetPage "/samples") }}
+    <a class="p-2 sidebar-hover" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+  {{ end }}
+  <hr />
+  {{ range site.Home.RegularPages }}
+    <a
+      class="p-2 sidebar-hover text-gray-light-600 dark:text-gray-dark-600 text-base
+    {{ if eq $ . }}
+        border-l-4 border-blue-light dark:border-blue-dark sidebar-hover
+        bg-blue-light-200 dark:bg-blue-dark-100 text-black dark:text-white
+      {{ end }}"
+      href="{{ .Permalink }}"
+      >{{ .LinkTitle }}</a
+    >
+  {{ end }}
+</nav>

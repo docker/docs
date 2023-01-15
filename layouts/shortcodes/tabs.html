@@ -1,0 +1,44 @@
+{{ with .Inner }}{{/* don't do anything, just call it */}}{{ end }}
+{{ $default := (index (.Scratch.Get "tabs") 0).name }}
+{{ $group := .Get "group" }}
+
+
+<div
+  x-data="{ selected: '{{ $default | urlize }}' }"
+  {{ with $group }}
+    @tab-select.window="$event.detail.group === '{{ . }}' ? selected =
+    $event.detail.name : null"
+  {{ end }}
+  aria-role="tabpanel"
+>
+  <div aria-role="tablist" class="space-x-2">
+    {{ range (.Scratch.Get "tabs") }}
+      <button
+        class="p-1"
+        :class="selected === '{{ .name | urlize }}' &&
+          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'"
+        {{ if $group }}
+          @click="$dispatch('tab-select', { group: '{{ $group }}', name:
+          '{{ .name | urlize }}'})"
+        {{ else }}
+          @click="selected = '{{ .name | urlize }}'"
+        {{ end }}
+      >
+        {{ .name }}
+      </button>
+    {{ end }}
+  </div>
+  <hr class="mt-0" />
+  <div>
+    {{ range (.Scratch.Get "tabs") }}
+      <div
+        class="prose max-w-none dark:prose-invert"
+        aria-role="tab"
+        :class="selected !== '{{ .name | urlize }}' && 'hidden'"
+      >
+        {{ .content | $.Page.RenderString (dict "display" "block") }}
+      </div>
+    {{ end }}
+  </div>
+  <hr />
+</div>

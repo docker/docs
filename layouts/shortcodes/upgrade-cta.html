@@ -1,0 +1,7 @@
+<div class="m-4 bg-amber-light-200 dark:bg-amber-dark-200" role="alert">
+  <div class="text-lg">{{ .Get "header" }}</div>
+  {{ .Get "body" | .Page.RenderString (dict "display" "block") }}
+  <a role="button" href="{{ .Get "url" }}" target="_blank">
+    {{ .Get "cta" }}
+  </a>
+</div>

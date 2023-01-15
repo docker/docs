@@ -1,0 +1,54 @@
+<div class="flex-grow flex items-center gap-4">
+  <button
+    x-data
+    tabindex="4"
+    @click="() => {
+      $store.showSidebar = ! $store.showSidebar;
+      const sidebar = document.querySelector('#sidebar');
+      if ($store.showSidebar) {
+        sidebar.classList.replace('md:hidden', 'md:block');
+      } else {
+        sidebar.classList.replace('md:block', 'md:hidden');
+      }
+    }"
+    class="btn-icon-round menu-btn material-symbols-rounded px-6 h-full hidden md:block"
+    aria-label="Menu"
+    id="menu-btn"
+  >
+    menu
+  </button>
+  <div>
+    <a href="{{ site.BaseURL }}">
+      <img src="/assets/images/logo-docs-white.svg" />
+    </a>
+  </div>
+</div>
+<div class="w-96">
+  <div id="autocomplete" class="md:hidden"></div>
+</div>
+<div class="flex-grow flex items-center justify-end gap-6">
+  <div class="flex items-center gap-2">
+    <button tabindex="1" class="material-symbols-rounded">brightness_7</button>
+    <label class="inline-flex relative items-center cursor-pointer">
+      <input
+        x-cloak
+        x-data="{ theme: localStorage.getItem('theme-preference') }"
+        x-init="$watch('theme', value => {
+          localStorage.setItem('theme-preference', value);
+          document.firstElementChild.className = value;
+        })"
+        arial-label="Theme toggle"
+        id="theme-toggle"
+        type="checkbox"
+        value=""
+        class="sr-only peer"
+        :checked="theme === 'dark'"
+        @change="theme = (theme === 'dark' ? 'light' : 'dark')"
+      />
+      <div
+        class="w-9 h-5 peer-focus:outline-none rounded-full peer bg-blue-light-400 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-4 after:w-4 after:transition-none peer-checked:dark:border-gray-dark-600 peer-checked:bg-blue-dark-400"
+      ></div>
+    </label>
+    <button tabindex="1" class="material-symbols-rounded">brightness_2</button>
+  </div>
+</div>

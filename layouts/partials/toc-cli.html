@@ -1,0 +1,11 @@
+<div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
+<nav id="TableOfContents">
+  <ul>
+    {{ range (.Scratch.Get "headings") }}
+      {{/* add left padding depending on level (pl-2, pl-3, pl-4) */}}
+      <li{{ with .level }} class="pl-{{ . }}"{{ end }}>
+        <a href="#{{ anchorize .text }}">{{ plainify .text }}</a>
+      </li>
+    {{ end }}
+  </ul>
+</nav>

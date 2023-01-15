@@ -1,0 +1,6 @@
+{{ if ne .Params.notoc true }}
+  <div>
+    <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
+    {{ .TableOfContents }}
+  </div>
+{{ end }}

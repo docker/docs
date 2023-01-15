@@ -1,0 +1,18 @@
+{{ define "left" }}
+  {{ partial "sidebar.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  <article class="mt-16 prose max-w-none dark:prose-invert">
+    {{ with .Params.hero }}
+      <div class="flex mb-16 items-center gap-16 not-prose sm:p-10">
+        <img class="sm:hidden" src="{{ .image }}" />
+        <div class="flex flex-col gap-2">
+          <h1 class="text-4xl">{{ .heading }}</h1>
+          {{ .copy | $.RenderString (dict "display" "block") }}
+        </div>
+      </div>
+    {{ end }}
+    {{ .Content }}
+  </article>
+{{ end }}

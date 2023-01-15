@@ -1,0 +1,15 @@
+{{ define "left" }}
+  {{ partial "sidebar.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ partial "breadcrumbs.html" . }}
+  <article class="prose max-w-none dark:prose-invert">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </article>
+{{ end }}
+
+{{ define "right" }}
+  {{ partial "aside.html" . }}
+{{ end }}

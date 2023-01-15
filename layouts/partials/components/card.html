@@ -1,0 +1,29 @@
+<div class="not-prose">
+  <a class="h-full" href="{{ .link }}">
+    <div
+      class="h-full bg-white flex flex-col gap-2 rounded-sm p-4 border border-gray-light-100 drop-shadow-sm dark:bg-gray-dark-200 dark:border-gray-dark-400"
+    >
+      <div class="flex gap-4 items-center">
+        <span
+          class="material-symbols-rounded text-[32px] text-blue-light-500 dark:text-blue-dark-500"
+          >{{ .icon }}</span
+        >
+        <div>
+          {{ with .overline }}
+            <div
+              class="text-[10px] uppercase text-gray-light-500 dark:text-gray-dark-700"
+            >
+              {{ . }}
+            </div>
+          {{ end }}
+          <div class="text-xl text-gray-light-800 leading-none dark:text-white">
+            {{ .title }}
+          </div>
+        </div>
+      </div>
+      <div class="text-gray-light-500 dark:text-gray-dark-700">
+        {{ .description | markdownify }}
+      </div>
+    </div>
+  </a>
+</div>

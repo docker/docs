@@ -1,0 +1,9 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" }}
+{{ $title := .Get "title" }}
+<img
+  src="{{ $src }}"
+  alt="{{ $alt }}"
+  {{ with $title }}title="{{ . }}"{{ end }}
+  class="inline my-0"
+/>

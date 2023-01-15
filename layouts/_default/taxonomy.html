@@ -1,0 +1,25 @@
+{{ define "left" }}
+  {{ partial "sidebar.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ partial "breadcrumbs.html" . }}
+  <article class="prose max-w-none dark:prose-invert px-5">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+    <hr />
+    <div class="text-2xl my-4">Browse docs by topic:</div>
+    {{ range .Pages }}
+      {{ $title := partial "utils/title.html" . }}
+      {{ $firstLetter := slicestr $title 0 1 | upper }}
+      {{ if not (in ($.Scratch.Get "letters") $firstLetter) }}
+        {{ $.Scratch.Add "letters" $firstLetter }}
+        {{ $.RenderString (printf "## %s" $firstLetter) }}
+      {{ end }}
+      <p><a href="{{ .Permalink }}">{{ $title }}</a>: {{ .Params.lead }}</p>
+    {{ end }}
+  </article>
+{{ end }}
+
+{{ define "right" }}
+{{ end }}

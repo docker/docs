@@ -1,0 +1,65 @@
+<a
+  class="flex items-center gap-3 text-3xl px-4 my-2 border-blue-light dark:border-blue-dark sidebar-hover sidebar-underline"
+  href="{{ .FirstSection.Permalink }}"
+  >{{ .FirstSection.LinkTitle }}</a
+>
+<ul>
+  {{ $ctx := . }}
+  {{ range .FirstSection.Pages }}
+    {{ template "nodeWalk" (dict "item" . "ctx" $ctx) }}
+  {{ end }}
+</ul>
+
+{{ define "nodeWalk" }}
+  {{ $ctx := .ctx }}
+  {{ $isCurrent := eq .ctx.Permalink .item.Permalink }}
+  {{ $isExpanded := or ($isCurrent) (.item.IsAncestor .ctx) }}
+  {{ $title := partial "utils/title.html" .item }}
+  <li
+    {{ with $isExpanded }}
+      data-expanded="true"
+    {{ end }}
+    {{ if $isCurrent }}
+      class="pl-3 -ml-[2px] border-l-4 border-blue-light dark:border-blue-dark
+      sidebar-hover bg-blue-light-200 dark:bg-blue-dark-100"
+    {{ else }}
+      class="pl-3 sidebar-hover"
+    {{ end }}
+  >
+    <span class="flex items-center">
+      {{ if .item.Pages }}
+        <button
+          class="sidebar-expander material-symbols-rounded -my-1 -ml-[3px] md:text-[28px]"
+        >
+          {{- cond $isExpanded "expand_more" "chevron_right" -}}
+        </button>
+      {{ end }}
+      <a
+        {{ if $isCurrent }}
+          class="py-2 max-w-full w-full truncate font-medium"
+          aria-current="page"
+        {{ else }}
+          class="py-2 max-w-full w-full truncate hover:font-medium"
+        {{ end }}
+        href="{{ .item.Permalink }}"
+        title="{{ $title }}"
+        >{{ $title }}</a
+      >
+    </span>
+  </li>
+  {{ with .item.Pages }}
+    <ul
+      {{ if not $isExpanded }}
+        class="hidden ml-5 border-l-2 border-gray-light-300 md:ml-[21px]
+        dark:border-gray-dark-400"
+      {{ else }}
+        class="ml-5 border-l-2 border-gray-light-300 dark:border-gray-dark-400
+        md:ml-[21px]"
+      {{ end }}
+    >
+      {{ range . }}
+        {{ template "nodeWalk" (dict "item" . "ctx" $ctx) }}
+      {{ end }}
+    </ul>
+  {{ end }}
+{{ end }}

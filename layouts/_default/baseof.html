@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {{ partial "head.html" . }}
+  </head>
+  <body
+    class="text-base divide-y divide-divider-light dark:divide-divider-dark flex flex-col h-max bg-background-light dark:bg-background-dark dark:text-white"
+  >
+    <header
+      class="sticky top-0 z-10 h-16 px-4 flex items-center bg-blue-light-500 dark:bg-blue-dark-200 text-white"
+    >
+      {{ partial "header.html" . }}
+    </header>
+    <main class="min-h-screen flex items-stretch">
+      <div
+        id="sidebar"
+        class="flex flex-col items-end p-5 bg-gray-light-100 sticky top-16 h-[calc(100vh-theme(space.16))] overflow-y-auto flex-shrink-0 flex-grow md:fixed md:w-screen md:hidden md:py-2 dark:bg-gray-dark-100"
+      >
+        {{ block "left" . }}
+        {{ end }}
+      </div>
+      <div
+        class="w-[840px] flex flex-col lg:w-full lg:flex-grow px-8 pb-16 sm:px-2 dark:bg-background-dark"
+      >
+        {{ block "main" . }}
+        {{ end }}
+      </div>
+      <div
+        class="sticky w-[300px] top-16 p-5 h-[calc(100vh-theme(space.16))] flex-grow overflow-y-auto lg:hidden dark:bg-background-dark"
+      >
+        {{ block "right" . }}
+        {{ end }}
+      </div>
+    </main>
+    <footer>
+      {{ partial "footer.html" . }}
+    </footer>
+  </body>
+</html>

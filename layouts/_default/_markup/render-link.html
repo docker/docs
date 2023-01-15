@@ -1,0 +1,14 @@
+{{- if (strings.HasPrefix .Destination "http") -}}
+  <a
+    class="link"
+    href="{{ .Destination | safeURL }}"
+    target="_blank"
+    rel="noopener"
+    >{{ .Text | safeHTML }}<span
+      class="ml-1 align-top text-[1em] material-symbols-rounded"
+      >open_in_new</span
+    ></a
+  >
+{{- else -}}
+  <a class="link" href="{{ ref .Page .Destination }}">{{ .Text | safeHTML }}</a>
+{{- end -}}

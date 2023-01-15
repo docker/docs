@@ -1,0 +1,26 @@
+{{ if .File }}
+  <p class="flex items-center gap-2">
+    <span class="material-symbols-rounded">edit</span
+    ><a
+      class="link"
+      href="https://github.com/docker/docs/edit/main/content/{{ .File.Path }}"
+      >{{ T "editPage" }}
+      <span class="align-middle text-base material-symbols-rounded"
+        >open_in_new</span
+      ></a
+    >
+  </p>
+  <p class="flex items-center gap-2">
+    <span class="material-symbols-rounded">done</span
+    ><a
+      class="link"
+      target="_blank"
+      rel="noopener"
+      href="https://github.com/docker/docs/issues/new?body=File: [content/{{ .File.Path }}]({{ .Permalink }})"
+      >{{ T "requestChanges" }}
+      <span class="align-middle text-base material-symbols-rounded"
+        >open_in_new</span
+      ></a
+    >
+  </p>
+{{ end }}

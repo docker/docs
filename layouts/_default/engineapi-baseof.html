@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docker Engine API {{ .File.BaseFileName }} Reference</title>
+    <!-- needed for adaptive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Reference documentation and Swagger (OpenAPI) specification for the {{ .File.BaseFileName }} version of the API served by Docker Engine." />
+    <meta charset="utf-8" />
+    <!-- favicon -->
+    <meta name="msapplication-TileImage" content="/assets/favicons/docs@2x.ico" />
+    <meta property="og:image" content="/assets/favicons/docs@2x.ico" />
+    <link rel="apple-touch-icon" type="image/x-icon" href="/assets/favicons/docs@2x.ico" sizes="129x128" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicons/docs@2x.ico" sizes="129x128" />
+    {{ $scss := resources.Get "scss/api-reference.scss" | resources.ToCSS }}
+    <link rel="stylesheet" type="text/css" href="{{ $scss.Permalink }}" />
+    <!-- make the latest API version the canonical page as that's what we want users to be using mostly -->
+    <link rel="canonical" href="{{ site.BaseURL }}/engine/api/v{{ site.Params.latest_engine_api_version }}/" />
+</head>
+<body>
+<redoc spec-url="/reference/engine/{{ .File.BaseFileName }}.yaml" hide-hostname="true" suppress-warnings="true" lazy-rendering></redoc>
+<script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"> </script>
+</body>
+</html>

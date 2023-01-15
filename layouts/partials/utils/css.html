@@ -1,0 +1,7 @@
+{{ $tw := resources.Get "css/tailwind.css" }}
+{{ $tw = $tw | resources.PostCSS }}
+{{ if or hugo.IsProduction (eq hugo.Environment "staging") }}
+  {{ $tw = $tw | minify | fingerprint | resources.PostProcess }}
+{{ else }}
+  {{ $tw = $tw | resources.ExecuteAsTemplate (printf "tailwind.%v.css" now.UnixMilli) . }}
+{{ end }} <link href="{{ $tw.Permalink }}" rel="stylesheet" />

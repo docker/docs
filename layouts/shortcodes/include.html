@@ -1,0 +1,2 @@
+{{ $fileToInclude := .Get 0 }}
+{{  os.ReadFile (printf "includes/%s" $fileToInclude) | .Page.RenderString }}

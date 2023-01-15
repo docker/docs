@@ -1,0 +1,213 @@
+title: Docker Docs
+baseURL: https://hugodocker.netlify.app/
+refLinksErrorLevel: WARNING
+enableGitInfo: true
+tableOfContents:
+  startLevel: 2
+  endLevel: 4
+
+params:
+  analytics:
+    google: GTM-WL2QLG5
+    onetrust: 8e0ebfd9-035d-4ec2-9b2f-a2de9c09f906
+    hotjar: 3169877
+  versions:
+    latest_engine_api_version: "1.41"
+    docker_ce_version: "20.10"
+    compose_v1_version: "1.29.2"
+    compose_version: "v2.13.0"
+    compose_file_v3: "3.9"
+    compose_file_v2: "2.4"
+    machine_version: "0.16.0"
+    distribution_version: "2.7"
+    compose_switch_version: "1.0.4"
+    buildkit_version: "0.10.5"
+    min_api_threshold: 1.40
+
+markup:
+  goldmark:
+    extensions:
+      typographer: false
+    parser:
+      wrapStandAloneImageWithinParagraph: false
+      attribute:
+        block: true
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+related:
+  includeNewer: true
+  indices:
+    - name: topics
+      weight: 100
+    - name: keywords
+      weight: 40
+  threshold: 80
+  toLower: false
+
+module:
+  imports:
+    - path: github.com/moby/moby
+      mounts:
+        - source: docs/api
+          target: content/reference/engine/prev
+          includeFiles: "v1.*.md"
+        - source: docs/api
+          target: content/reference/engine
+          includeFiles: "version-history.md"
+        - source: docs/api
+          target: static/reference/engine
+          includeFiles: "*.yaml"
+    - path: github.com/moby/buildkit
+      mounts:
+        - source: frontend/dockerfile/docs/reference.md
+          target: content/reference/dockerfile.md
+        - source: docs/buildkitd.toml.md
+          target: content/build/buildkit/toml-configuration.md
+        - source: docs/attestations/slsa-definitions.md
+          target: content/build/attestations/slsa-definitions.md
+        - source: docs/attestations/attestation-storage.md
+          target: content/build/attestations/attestation-storage.md
+    # - path: github.com/docker/cli/docs
+    #   mounts:
+    #     - source: extend
+    #       target: content/engine/extend
+    #     - source: deprecated.md
+    #       target: content/engine/deprecated.md
+    #     - source: reference/run.md
+    #       target: content/engine/run-reference.md
+    #     - source: reference/commandline/cli.md
+    #       target: content/reference/cli/cli.md
+    #     - source: reference/commandline/dockerd.md
+    #       target: content/reference/cli/dockerd.md
+
+
+outputFormats:
+  algolia:
+    baseName: algolia
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
+  redirects:
+    baseName: redirects
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
+
+outputs:
+  home:
+    - html
+    - algolia
+    - redirects
+  term:
+    - html
+    - json
+
+taxonomies:
+  topic: topics
+
+languages:
+  en:
+    languageName: English
+
+menus:
+  footer:
+    - url: https://www.docker.com/products
+      name: Product offerings
+    - url: https://www.docker.com/products/personal
+      name: Docker Personal
+      parent: Product offerings
+    - url: https://www.docker.com/products/pro
+      name: Docker Pro
+      parent: Product offerings
+    - url: https://www.docker.com/products/team
+      name: Docker Team
+      parent: Product offerings
+    - url: https://www.docker.com/products/business
+      name: Docker Business
+      parent: Product offerings
+    - url: https://www.docker.com/pricing/faq
+      name: Pricing FAQs
+      parent: Product offerings
+    - url: https://www.docker.com/partners/programs
+      name: Docker Verified Publisher
+      parent: Product offerings
+    - url: https://www.docker.com/partners
+      name: Partners
+      parent: Product offerings
+
+    - url: https://www.docker.com/
+      name: Features
+    - url: https://www.docker.com/products/docker-desktop
+      name: Docker Desktop
+      parent: Features
+    - url: https://www.docker.com/products/docker-hub
+      name: Docker Hub
+      parent: Features
+    - url: https://www.docker.com/products/secure-software-supply-chain
+      name: Secure Software Supply Chain
+      parent: Features
+    - url: https://www.docker.com/products/container-runtime
+      name: Container Runtime
+      parent: Features
+    - url: https://www.docker.com/products/developer-tools
+      name: Developer Tools
+      parent: Features
+    - url: https://www.docker.com/partners
+      name: Trusted Content
+      parent: Features
+    - url: https://www.docker.com/roadmap
+      name: Docker Product Roadmap
+      parent: Features
+
+    - name: Developers
+    - url: https://www.docker.com/use-cases
+      name: Use cases
+      parent: Developers
+    - url: /get-started/
+      name: Get started
+      parent: Developers
+    - url: https://www.docker.com/blog/
+      name: Block
+      parent: Developers
+    - url: https://www.docker.com/docker-community
+      name: Community
+      parent: Developers
+    - url: https://www.docker.com/open-source
+      name: Open Source
+      parent: Developers
+    - url: https://www.docker.com/community/get-involved/developer-preview
+      name: Preview Program
+      parent: Developers
+
+    - url: https://www.docker.com/company
+      name: About us
+    - url: https://www.docker.com/what-container
+      name: What is a container?
+      parent: About us
+    - url: https://www.docker.com/why-docker
+      name: Why Docker?
+      parent: About us
+    - url: https://www.docker.com/events
+      name: Virtual events
+      parent: About us
+    - url: https://www.docker.com/swag
+      name: Swag store
+      parent: About us
+    - url: https://www.docker.com/company/newsroom
+      name: Newsroom
+      parent: About us
+    - url: https://www.docker.com/careers
+      name: Careers
+      parent: About us
+    - url: https://www.docker.com/company/contact
+      name: Contact us
+      parent: About us
+    - url: https://www.docker.com/customers
+      name: Customers
+      parent: About us
+    - url: https://www.docker.com/newsletter-subscription
+      name: Newsletter
+      parent: About us

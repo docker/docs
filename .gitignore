@@ -10,3 +10,6 @@ CNAME
 _kbase/**
 /vendor
 /lint
+node_modules
+.hugo_build.lock
+resources

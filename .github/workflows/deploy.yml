@@ -21,7 +21,6 @@ jobs:
       -
         name: Prepare
         run: |
-          JEKYLL_ENV=development
           DOCS_AWS_REGION=us-east-1
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             DOCS_URL="https://docs-stage.docker.com"
@@ -32,7 +31,6 @@ jobs:
             DOCS_LAMBDA_FUNCTION_REDIRECTS="DockerDocsRedirectFunction-stage"
             DOCS_SLACK_MSG="Successfully deployed docs-stage from main branch. $DOCS_URL"
           elif [ "${{ github.ref }}" = "refs/heads/published" ]; then
-            JEKYLL_ENV=production
             DOCS_URL="https://docs.docker.com"
             DOCS_AWS_IAM_ROLE="arn:aws:iam::710015040892:role/prod-docs-docs.docker.com-20220818202218674300000001"
             DOCS_S3_BUCKET="prod-docs-docs.docker.com"
@@ -56,7 +54,6 @@ jobs:
             SEND_SLACK_MSG="false"
           fi
           echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-          echo "JEKYLL_ENV=$JEKYLL_ENV" >> $GITHUB_ENV
           echo "DOCS_URL=$DOCS_URL" >> $GITHUB_ENV
           echo "DOCS_AWS_REGION=$DOCS_AWS_REGION" >> $GITHUB_ENV
           echo "DOCS_AWS_IAM_ROLE=$DOCS_AWS_IAM_ROLE" >> $GITHUB_ENV
@@ -93,7 +90,7 @@ jobs:
         name: Upload files to S3 bucket
         if: ${{ env.DOCS_S3_BUCKET != '' }}
         run: |
-          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync --acl public-read _site s3://${{ env.DOCS_S3_BUCKET }}/ --delete
+          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync --acl public-read public s3://${{ env.DOCS_S3_BUCKET }}/ --delete
       -
         name: Update S3 config
         if: ${{ env.DOCS_S3_BUCKET != '' && env.DOCS_S3_CONFIG != '' }}

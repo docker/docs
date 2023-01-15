@@ -1,0 +1,53 @@
+{{ define "left" }}
+  {{ partial "sidebar.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ partial "breadcrumbs.html" . }}
+  <article class="prose max-w-none dark:prose-invert">
+    <h1>{{ .Title }}</h1>
+    <div class="flex">
+      {{ with .NextInSection }}
+        <a
+          class="flex items-center gap-2 py-2 px-4 text-white no-underline rounded-sm bg-blue-light hover:bg-blue-light-400 dark:bg-blue-dark hover:dark:bg-blue-dark-400"
+          href="{{ .Permalink }}"
+          ><span class="material-symbols-rounded">arrow_back</span
+          ><span class="sm:hidden">{{ .LinkTitle }}</span></a
+        >
+      {{ end }}
+      {{ with .PrevInSection }}
+        <a
+          class="ml-auto flex items-center gap-2 py-2 px-4 text-white no-underline rounded-sm bg-blue-light hover:bg-blue-light-400 dark:bg-blue-dark hover:dark:bg-blue-dark-400"
+          href="{{ .Permalink }}"
+          ><span class="sm:hidden">{{ .LinkTitle }}</span
+          ><span class="material-symbols-rounded">arrow_forward</span></a
+        >
+      {{ end }}
+    </div>
+    {{ .Content }}
+    {{ if gt .WordCount 100 }}
+      <div class="flex">
+        {{ with .NextInSection }}
+          <a
+            class="flex items-center gap-2 py-2 px-4 text-white no-underline rounded-sm bg-blue-light hover:bg-blue-light-400 dark:bg-blue-dark hover:dark:bg-blue-dark-400"
+            href="{{ .Permalink }}"
+            ><span class="material-symbols-rounded">arrow_back</span
+            ><span class="sm:hidden">{{ .LinkTitle }}</span></a
+          >
+        {{ end }}
+        {{ with .PrevInSection }}
+          <a
+            class="ml-auto flex items-center gap-2 py-2 px-4 text-white no-underline rounded-sm bg-blue-light hover:bg-blue-light-400 dark:bg-blue-dark hover:dark:bg-blue-dark-400"
+            href="{{ .Permalink }}"
+            ><span class="sm:hidden">{{ .LinkTitle }}</span
+            ><span class="material-symbols-rounded">arrow_forward</span></a
+          >
+        {{ end }}
+      </div>
+    {{ end }}
+  </article>
+{{ end }}
+
+{{ define "right" }}
+  {{ partial "aside.html" . }}
+{{ end }}

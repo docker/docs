@@ -1,0 +1,7 @@
+{{ $description := .Get "description" }}
+{{ $icon := .Get "icon" }}
+{{ $link := .Get "link" }}
+{{ $overline := .Get "overline" }}
+{{ $title := .Get "title" }}
+
+{{ partial "components/card.html" (dict "description" $description "icon" $icon "link" $link "overline" $overline "title" $title) }}

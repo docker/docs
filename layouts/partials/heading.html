@@ -1,0 +1,12 @@
+{{ $id := .id | default (anchorize (plainify .text)) }}
+<a class="relative -top-12" name="{{ $id }}"></a>
+<h{{ .level }}
+  {{ with .class }}
+    class="{{ . }}"
+  {{ end }}
+>
+  <span class="group not-prose">
+    <a class="text-black dark:text-white no-underline group-hover:underline" href="#{{ $id }}">{{ .text }}</a>
+    <span class="invisible align-bottom group-hover:visible material-symbols-rounded">link</span>
+  </span>
+</h{{ .level }}>

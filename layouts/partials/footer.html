@@ -1,0 +1,102 @@
+<div
+  class="flex flex-col overflow-hidden max-w-[1024px] mx-auto p-12 gap-12 text-xs font-normal"
+>
+  <div class="flex flex-wrap justify-between gap-4 sm:flex-col sm:items-center">
+    {{ range site.Menus.footer }}
+      <div class="w-32">
+        <ul class="space-y-2">
+          <li>
+            <b
+              ><a
+                class="hover:underline"
+                href="{{ .URL }}"
+                target="_blank"
+                rel="noopener"
+                >{{ .Name }}</a
+              ></b
+            >
+          </li>
+          {{ range .Children }}
+            <li>
+              <a
+                class="hover:underline"
+                href="{{ .URL }}"
+                target="_blank"
+                rel="noopener"
+                >{{ .Name }}</a
+              >
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </div>
+  <div class="self-end">
+    <nav class="">
+      <ul class="flex gap-4">
+        <li>
+          <a
+            class="hover:underline"
+            href="https://www.docker.com/legal/docker-terms-service"
+            target="_blank"
+            rel="noopener"
+            >Terms of Service</a
+          >
+        </li>
+        <li>
+          <a
+            class="hover:underline"
+            href="https://status.docker.com/"
+            target="_blank"
+            rel="noopener"
+            >Status</a
+          >
+        </li>
+        <li>
+          <a
+            class="hover:underline"
+            href="https://www.docker.com/legal"
+            target="_blank"
+            rel="noopener"
+            >Legal</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="flex justify-between">
+    <div>
+      <p>
+        Copyright &copy; 2013-{{ now.Format "2006" }} Docker Inc. All rights
+        reserved.
+      </p>
+      {{ if hugo.IsProduction }}
+        <button id="ot-sdk-btn" class="ot-sdk-show-settings">
+          Cookie Settings
+        </button>
+      {{ end }}
+    </div>
+    <nav>
+      <ul class="flex gap-4">
+        <li class="hover:underline">
+          <a href="https://twitter.com/docker">Twitter</a>
+        </li>
+        <li class="hover:underline">
+          <a href="https://www.youtube.com/user/dockerrun">Youtube</a>
+        </li>
+        <li class="hover:underline">
+          <a href="https://github.com/docker">GitHub</a>
+        </li>
+        <li class="hover:underline">
+          <a href="https://www.linkedin.com/company/docker">Linkedin</a>
+        </li>
+        <li class="hover:underline">
+          <a href="https://www.facebook.com/docker.run">Facebook</a>
+        </li>
+        <li class="hover:underline">
+          <a href="https://www.reddit.com/r/docker">Reddit</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+github.com/moby/buildkit v0.11.0 h1:GqBC/ETDqwdu61g4tCxX1GFZuGWg/nuqFxamb2or1dw=
+github.com/moby/buildkit v0.11.0/go.mod h1:v43oa6H2Fx/cdzc7j0UlUu8p6188yy1P3vrujAs99uw=
+github.com/moby/moby v20.10.3-0.20230116172024-9052e33a1068+incompatible h1:v86alJH7ISL0XuPTzxS5ymTvmFoz9YpzyTB1E4SUu+w=
+github.com/moby/moby v20.10.3-0.20230116172024-9052e33a1068+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v20.10.22+incompatible h1:KHnFMlxjgGizH7+3fQj8+PjmrwEnilKgahf/TgTQIxI=
+github.com/moby/moby v20.10.22+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v23.0.0-rc.2.0.20230114215821-ebedb1c49603+incompatible h1:xXeQq35bgCiJf67RTyogkRdi7aAZJlFMALoZcXhuv4E=
+github.com/moby/moby v23.0.0-rc.2.0.20230114215821-ebedb1c49603+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=

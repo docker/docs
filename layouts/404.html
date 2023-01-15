@@ -1,0 +1,33 @@
+{{ define "left" }}
+  {{ partial "sidebar.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  <article class="prose max-w-none dark:prose-invert">
+    <p>
+      There might be a mistake in the URL or you might've clicked a link to
+      content that no longer exists. If you think it's the latter, please file
+      an issue in our
+      <a
+        class="link"
+        href="https://github.com/docker/docs/issues/new?title=404+page+not+found%3A+{{ htmlEscape .Permalink }}"
+        >issue tracker on GitHub</a
+      >
+      and let us know what happened. Please also include a link to where the
+      error occurred, if applicable.
+    </p>
+
+    <a
+      class="link"
+      href="https://github.com/docker/docs/issues/new?title=404+page+not+found%3A+{{ htmlEscape .Permalink }}"
+    >
+      ><strong>Click here to create a new ticket</strong></a
+    >
+    <a href="{{ site.BaseURL }}">
+      <figure>
+        <img src="/assets/images/404-docs.png" alt="404 page not found" />
+        <figcaption>Go to the homepage</figcaption>
+      </figure>
+    </a>
+  </article>
+{{ end }}

@@ -1,0 +1,8 @@
+{{- $.Scratch.Add "algolia" slice -}}
+{{- $section := $.Site.GetPage "section" .Section }}
+{{- range .Site.AllPages -}}
+  {{- if or (and (.IsDescendant $section) (and (not .Draft) (not .Params.private))) $section.IsHome -}}
+    {{- $.Scratch.Add "algolia" (dict "objectID" (md5 .Permalink) "description" .Description "keywords" .Keywords "kind" .Kind "lang" .Lang "permalink" .Permalink "summary" .Summary "title" .Title "section" .Section "tags" .Params.Tags)}}
+  {{- end -}}
+{{- end -}}
+{{- $.Scratch.Get "algolia" | jsonify -}}
