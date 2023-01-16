@@ -143,7 +143,7 @@ Start with a **docker-compose.yml**.
 
 ```yaml
 web:
-  image: example/my_web_app:latest
+  image: example/my_web:latest
   depends_on:
     - db
 
