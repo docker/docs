@@ -209,7 +209,7 @@ instead of `dnf -y install`, and point to the new file.
 1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
     ```console
-    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
