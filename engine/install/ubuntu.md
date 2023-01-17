@@ -97,6 +97,7 @@ Docker from the repository.
     ```console
     $ sudo mkdir -p /etc/apt/keyrings
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
     ```
 
 3.  Use the following command to set up the repository:
