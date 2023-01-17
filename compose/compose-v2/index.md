@@ -12,8 +12,8 @@ This page provides information on the history of Compose and explains the key di
 
 The first release of Compose, written in Python, happened at the end of 2014. Between 2014 and 2017, two more versions of Compose were released:
 
-- [Compose 1.6.0 with file format V2](/compose-file/compose-file-v2/)
-- [Compose 1.10.0 with file format V3](compose-file/compose-file-v3/)
+- [Compose 1.6.0 with file format V2](../compose-file/compose-file-v2/)
+- [Compose 1.10.0 with file format V3](../compose-file/compose-file-v3/)
 
 These three early releases are collectively referred to as Compose V1. 
 
