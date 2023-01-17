@@ -5,7 +5,7 @@ long: |-
     Bake is a high-level build command. Each specified target will run in parallel
     as part of the build.
 
-    Read [High-level build options with Bake](/build/bake/)
+    Read [High-level build options with Bake](/build/customize/bake/)
     guide for introduction to writing bake files.
 
     > **Note**
@@ -82,6 +82,15 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: provenance
+      value_type: string
+      description: Shorthand for `--set=*.attest=type=provenance`
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: pull
       value_type: bool
       default_value: "false"
@@ -97,6 +106,15 @@ options:
       value_type: bool
       default_value: "false"
       description: Shorthand for `--set=*.output=type=registry`
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: sbom
+      value_type: string
+      description: Shorthand for `--set=*.attest=type=sbom`
       deprecated: false
       hidden: false
       experimental: false
@@ -166,7 +184,7 @@ examples: |-
     $ docker buildx bake -f docker-bake.dev.hcl db webapp-release
     ```
 
-    See our [file definition](/build/bake/file-definition/)
+    See our [file definition](/build/customize/bake/file-definition/)
     guide for more details.
 
     ### Do not use cache when building the image (--no-cache) {#no-cache}

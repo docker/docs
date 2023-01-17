@@ -122,6 +122,61 @@ $ TAG=dev docker buildx bake webapp-dev  # will use the TAG environment variable
 >
 > See also the [Configuring builds](configuring-build.md) page for advanced usage.
 
+### Null values
+
+Null values for `args` and `labels` are supported, so default sets in your
+Dockerfile will be used:
+
+```hcl
+# docker-bake.hcl
+variable "GO_VERSION" {
+  default = null
+}
+target "default" {
+  args = {
+    GO_VERSION = GO_VERSION
+  }
+}
+```
+
+```dockerfile
+ARG GO_VERSION="1.18"
+FROM golang:${GO_VERSION}
+```
+
+```console
+$ docker buildx bake --print
+```
+
+```json
+{
+  "target": {
+    "default": {
+      "context": ".",
+      "dockerfile": "Dockerfile"
+    }
+  }
+}
+```
+
+```console
+$ GO_VERSION=1.19 docker buildx bake --print
+```
+
+```json
+{
+  "target": {
+    "default": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "args": {
+        "GO_VERSION": "1.19"
+      }
+    }
+  }
+}
+```
+
 ### Functions
 
 A [set of generally useful functions](https://github.com/docker/buildx/blob/master/bake/hclparser/stdlib.go){:target="blank" rel="noopener" class=""}

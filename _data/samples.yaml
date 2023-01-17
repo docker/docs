@@ -313,8 +313,8 @@ samples:
       - javascript
       - nginx
       - postgresql
-  - title: k8s-wordsmith-demo
-    url: https://github.com/dockersamples/k8s-wordsmith-demo
+  - title: wordsmith
+    url: https://github.com/dockersamples/wordsmith
     description: A demo app that runs three containers, including PostgreSQL, Java, and Go.
     dev_env: false
     services:
