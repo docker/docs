@@ -10,12 +10,13 @@ This page provides information on the history of Compose and explains the key di
 
 ## History
 
-The first release of Compose, written in Python, happened at the end of 2014. Between 2014 and 2017, two more versions of Compose were released:
+The first release of Compose, written in Python, happened at the end of 2014. 
+Between 2014 and 2017 two other noticeable versions of Compose, which introduced new file format versions, were released:
 
 - [Compose 1.6.0 with file format V2](../compose-file/compose-file-v2/)
 - [Compose 1.10.0 with file format V3](../compose-file/compose-file-v3/)
 
-These three early releases are collectively referred to as Compose V1. 
+These three key file format versions and releases prior to v1.27.0 are collectively referred to as Compose V1. 
 
 In mid-2020 Compose V2 was released. It merged Compose file format V2 and V3 and was written in Golang. The file format is defined by the [Compose specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"}. Compose V2 is the latest and recommended version of Compose. It provides improved integration with other Docker command-line features, and allows it to run natively on macOS, Windows, and Linux.  
 
