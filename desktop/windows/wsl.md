@@ -72,10 +72,6 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 
     Optionally, select any additional distributions you would like to enable the Docker-WSL integration on.
 
-    > **Note**
-    >
-    > The Docker-WSL integration components running in your distro depend on glibc. This can cause issues when running musl-based distros such as Alpine Linux. Alpine users can use the [alpine-pkg-glibc](https://github.com/sgerrand/alpine-pkg-glibc){:target="_blank" rel="noopener" class="_"} package to deploy glibc alongside musl to run the integration.
-
 3. Select **Apply & Restart**.
 
 > **Note**
