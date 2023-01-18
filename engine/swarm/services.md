@@ -697,6 +697,20 @@ $ docker service create \
   nginx
 ```
 
+The output looks like this, when no node has the label `region` set
+
+```console
+2ma932boan2j5ih3qqrph0glr
+overall progress: 0 out of 5 tasks 
+1/5: no suitable node (3 nodes not available for new tasks; scheduling constrai… 
+2/5: no suitable node (3 nodes not available for new tasks; scheduling constrai… 
+3/5: no suitable node (3 nodes not available for new tasks; scheduling constrai… 
+4/5: no suitable node (3 nodes not available for new tasks; scheduling constrai… 
+5/5: no suitable node (3 nodes not available for new tasks; scheduling constrai… 
+```
+
+For this service to be scheduled, you need to add a [label](manage-nodes.md#add-or-remove-label-metadata) to any node in the swarm cluster using. Hitting `Ctrl+C` places the operation to execute in the background.
+
 You can also use the `constraint` service-level key in a `docker-compose.yml`
 file.
 
