@@ -709,7 +709,7 @@ overall progress: 0 out of 5 tasks
 5/5: no suitable node (3 nodes not available for new tasks; scheduling constrai… 
 ```
 
-For this service to be scheduled, you need to add a [label](manage-nodes.md#add-or-remove-label-metadata) to any node in the swarm cluster using. Hitting `Ctrl+C` places the operation to execute in the background.
+For this service to be scheduled, you need to add a [label](manage-nodes.md#add-or-remove-label-metadata) to any node in the swarm cluster. Hitting `Ctrl+C` places the operation to execute in the background.
 
 You can also use the `constraint` service-level key in a `docker-compose.yml`
 file.
