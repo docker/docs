@@ -6,28 +6,36 @@ skip_read_time: true
 
 # Interface: ExecStreamOptions
 
-**`since`** 0.2.2
+**`Since`**
 
-## Methods
+0.2.2
+
+## Properties
 
 ### onOutput
 
-▸ `Optional` **onOutput**(`data`): `void`
+• `Optional` **onOutput**: (`data`: { `stdout`: `string` ; `stderr?`: `undefined`  } \| { `stdout?`: `undefined` ; `stderr`: `string`  }) => `void`
+
+#### Type declaration
+
+▸ (`data`): `void`
 
 Invoked when receiving output from command execution.
 By default, the output is split into chunks at arbitrary boundaries.
 If you prefer the output to be split into complete lines, set `splitOutputLines`
 to true. The callback is then invoked once for each line.
 
-**`since`** 0.2.0
+**`Since`**
 
-#### Parameters
+0.2.0
+
+##### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `data` | { `stdout`: `string` ; `stderr?`: `undefined`  } \| { `stdout?`: `undefined` ; `stderr`: `string`  } | output content. Can include either stdout string, or stderr string, one at a time. |
 
-#### Returns
+##### Returns
 
 `void`
 
@@ -35,17 +43,21 @@ ___
 
 ### onError
 
-▸ `Optional` **onError**(`error`): `void`
+• `Optional` **onError**: (`error`: `any`) => `void`
+
+#### Type declaration
+
+▸ (`error`): `void`
 
 Invoked to report error if the executed command errors.
 
-#### Parameters
+##### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `error` | `any` | the error happening in the executed command |
 
-#### Returns
+##### Returns
 
 `void`
 
@@ -53,21 +65,25 @@ ___
 
 ### onClose
 
-▸ `Optional` **onClose**(`exitCode`): `void`
+• `Optional` **onClose**: (`exitCode`: `number`) => `void`
+
+#### Type declaration
+
+▸ (`exitCode`): `void`
 
 Invoked when process exits.
 
-#### Parameters
+##### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `exitCode` | `number` | the process exit code |
 
-#### Returns
+##### Returns
 
 `void`
 
-## Properties
+___
 
 ### splitOutputLines
 

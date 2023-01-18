@@ -21,6 +21,8 @@ skip_read_time: true
 - [Dialog](interfaces/Dialog.md)
 - [Docker](interfaces/Docker.md)
 - [DockerCommand](interfaces/DockerCommand.md)
+- [ExecOptions](interfaces/ExecOptions.md)
+- [SpawnOptions](interfaces/SpawnOptions.md)
 - [Exec](interfaces/Exec.md)
 - [ExecProcess](interfaces/ExecProcess.md)
 - [ExecStreamOptions](interfaces/ExecStreamOptions.md)
