@@ -10,7 +10,9 @@ Toasts provide a brief notification to the user.
 They appear temporarily and shouldn't interrupt the user experience.
 They also don't require user input to disappear.
 
-**`since`** 0.2.0
+**`Since`**
+
+0.2.0
 
 ## Methods
 

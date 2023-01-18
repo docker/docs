@@ -20,7 +20,9 @@ const output = await window.ddClient.backend.execInContainer(container, cmd);
 console.log(output);
 ```
 
-**`deprecated`** :warning: It will be removed in a future version.
+**`Deprecated`**
+
+:warning: It will be removed in a future version.
 
 #### Parameters
 
@@ -49,7 +51,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-**`deprecated`** :warning: It will be removed in a future version. Use [HttpService.get](HttpService.md#get) instead.
+**`Deprecated`**
+
+:warning: It will be removed in a future version. Use [get](HttpService.md#get) instead.
 
 #### Parameters
 
@@ -75,7 +79,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-**`deprecated`** :warning: It will be removed in a future version. Use [HttpService.post](HttpService.md#post) instead.
+**`Deprecated`**
+
+:warning: It will be removed in a future version. Use [post](HttpService.md#post) instead.
 
 #### Parameters
 
@@ -102,7 +108,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-**`deprecated`** :warning: It will be removed in a future version. Use [HttpService.put](HttpService.md#put) instead.
+**`Deprecated`**
+
+:warning: It will be removed in a future version. Use [put](HttpService.md#put) instead.
 
 #### Parameters
 
@@ -129,7 +137,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-**`deprecated`** :warning: It will be removed in a future version. Use [HttpService.patch](HttpService.md#patch) instead.
+**`Deprecated`**
+
+:warning: It will be removed in a future version. Use [patch](HttpService.md#patch) instead.
 
 #### Parameters
 
@@ -156,7 +166,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-**`deprecated`** :warning: It will be removed in a future version. Use [HttpService.delete](HttpService.md#delete) instead.
+**`Deprecated`**
+
+:warning: It will be removed in a future version. Use [delete](HttpService.md#delete) instead.
 
 #### Parameters
 
@@ -182,7 +194,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-**`deprecated`** :warning: It will be removed in a future version. Use [HttpService.head](HttpService.md#head) instead.
+**`Deprecated`**
+
+:warning: It will be removed in a future version. Use [head](HttpService.md#head) instead.
 
 #### Parameters
 
@@ -208,7 +222,9 @@ window.ddClient.backend
  .then((value: any) => console.log(value));
 ```
 
-**`deprecated`** :warning: It will be removed in a future version. Use [HttpService.request](HttpService.md#request) instead.
+**`Deprecated`**
+
+:warning: It will be removed in a future version. Use [request](HttpService.md#request) instead.
 
 #### Parameters
 
@@ -239,7 +255,9 @@ const output = await window.ddClient.backend.execInVMExtension(
 console.log(output);
 ```
 
-**`deprecated`** :warning: It will be removed in a future version. Use [ExtensionCli.exec](ExtensionCli.md#exec) instead.
+**`Deprecated`**
+
+:warning: It will be removed in a future version. Use [exec](ExtensionCli.md#exec) instead.
 
 #### Parameters
 
@@ -273,7 +291,9 @@ window.ddClient.spawnInVMExtension(
 );
 ```
 
-**`deprecated`** :warning: It will be removed in a future version. Use {@link ExtensionCli.spawn} instead.
+**`Deprecated`**
+
+:warning: It will be removed in a future version.
 
 #### Parameters
 

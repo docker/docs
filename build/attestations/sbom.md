@@ -204,6 +204,22 @@ base-passwd@3.5.47
 ```
 {% endraw %}
 
+## SBOM generator
+
+BuildKit generates the SBOM using a scanner plugin. By default, it uses is the
+[BuildKit Syft scanner](https://github.com/docker/buildkit-syft-scanner){: target="blank" rel="noopener" }
+plugin. This plugin is built on top of
+[Anchore's Syft](https://github.com/anchore/syft){: target="blank" rel="noopener" },
+an open source tool for generating an SBOM.
+
+You can select a different plugin to use with the `generator` option, specifying
+an image that implements the
+[BuildKit SBOM scanner protocol](https://github.com/moby/buildkit/blob/master/docs/sbom-protocol.md){: target="blank" rel="noopener" }.
+
+```console
+$ docker buildx build --attest type=sbom,generator=<image> .
+```
+
 ## SBOM attestation example
 
 The following JSON example shows what an SBOM attestation might look like.
@@ -307,20 +323,4 @@ The following JSON example shows what an SBOM attestation might look like.
     "spdxVersion": "SPDX-2.2"
   }
 }
-```
-
-## SBOM generator
-
-BuildKit generates the SBOM using a scanner plugin. By default, it uses is the
-[BuildKit Syft scanner](https://github.com/docker/buildkit-syft-scanner){: target="blank" rel="noopener" }
-plugin. This plugin is built on top of
-[Anchore's Syft](https://github.com/anchore/syft){: target="blank" rel="noopener" },
-an open source tool for generating an SBOM.
-
-You can select a different plugin to use with the `generator` option, specifying
-an image that implements the
-[BuildKit SBOM scanner protocol](https://github.com/moby/buildkit/blob/master/docs/sbom-protocol.md){ :target="blank" rel="noopener" }.
-
-```console
-$ docker buildx build --attest type=sbom,generator=<image> .
 ```
