@@ -40,7 +40,7 @@ The `ui` section defines a new tab that's added to the dashboard in Docker Deskt
 }
 ```
 
-`root` specifies the folder where the ui code **is within the extension image filesystem**.
+`root` specifies the folder where the UI code is within the extension image filesystem.
 `src` specifies the entrypoint that should be loaded in the extension tab.
 
 Other UI extension points will be available in the future.

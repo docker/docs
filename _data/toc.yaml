@@ -1164,11 +1164,11 @@ manuals:
       - path: /desktop/extensions/
         title: What are Docker Extensions?
       - path: /desktop/extensions/marketplace/
-        title: Manage marketplace extensions
+        title: Manage Marketplace extensions
       - path: /desktop/extensions/non-marketplace/
         title: Manage non-Marketplace extensions
       - path: /desktop/extensions/settings-feedback/
-        title: Change Settings and give feedback
+        title: Change settings and give feedback
     - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
@@ -1181,7 +1181,7 @@ manuals:
           section:
             - title: Create a simple extension
               path: /desktop/extensions-sdk/build/minimal-frontend-extension/
-            - title: Create a more advanced frontend
+            - title: Create an advanced frontend extension
               path: /desktop/extensions-sdk/build/frontend-extension-tutorial/
             - title: Add a backend to your extension
               path: /desktop/extensions-sdk/build/backend-extension-tutorial/

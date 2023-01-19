@@ -8,12 +8,9 @@ redirect_from:
   - /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/
 ---
 
-Your extension can ship a backend part with which the frontend can interact with. This page provides information on
-why and how to add a backend.
+Your extension can ship a backend part with which the frontend can interact with. This page provides information on why and how to add a backend.
 
-> Note
->
-> Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 > Note
 >
@@ -27,15 +24,13 @@ directly from [the frontend](./frontend-extension-tutorial.md#use-the-extension-
 Nonetheless, there are some cases where you might need to add a backend to your extension. So far, extension
 builders have used the backend to:
 - Store data in a local database and serve them back with a REST API.
-- Store the extension state, like when a button starts a long-running process, so that if you navigate away
-  from the extension user interface and come back, the frontend can pick up where it left off.
+- Store the extension state, for example when a button starts a long-running process, so that if you navigate away from the extension user interface and comes back, the frontend can pick up where it left off.
 
-Learn more about extension backend in the [architecture](../architecture/index.md#the-backend) section.
+For more information about extension backends, see [Architecture](../architecture/index.md#the-backend).
 
 ## Add a backend to the extension
 
-If you created your extension using the `docker extension init` command, you already have a backend setup. If it is
-not the case, then you have to first create a `vm` directory that will contain the code and update the Dockerfile to
+If you created your extension using the `docker extension init` command, you already have a backend setup. Otherwise, you have to first create a `vm` directory that contains the code and updates the Dockerfile to
 containerize it.
 
 Here is the extension folder structure with a backend:
@@ -53,7 +48,7 @@ Here is the extension folder structure with a backend:
 ```
 
 1. Contains everything required to build the backend and copy it in the extension's container filesystem.
-2. The source folder that contains the backend code of the extension
+2. The source folder that contains the backend code of the extension.
 
 Although you can start from an empty directory or from the `vm-ui extension` [sample](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"},
 it is highly recommended that you start from the `docker extension init` command and change it to suit your needs.
@@ -64,7 +59,7 @@ it is highly recommended that you start from the `docker extension init` command
 > your own extension and use any other language like Node.js, Python, Java, .Net, or any other language and framework.
 {: .tip }
 
-On this tutorial, the backend service simply exposes one route that returns a JSON payload that says "Hello".
+In this tutorial, the backend service simply exposes one route that returns a JSON payload that says "Hello".
 
 ```json
 { "Message": "Hello" }
@@ -72,10 +67,10 @@ On this tutorial, the backend service simply exposes one route that returns a JS
 
 > **Important**
 >
-> We recommend that, the frontend and the backend communicate through sockets (and named pipes on Windows) instead of
-> HTTP. On one hand, because it will prevent port collision with any other running application or container running
-> on the host. On the other hand, because some Docker Desktop users are running in constrained environments where they
-> can't open ports on their machines. So, when choosing the language and framework for your backend, make sure it
+> We recommend that, the frontend and the backend communicate through sockets, and named pipes on Windows, instead of
+> HTTP. This prevents port collision with any other running application or container running
+> on the host. Also, some Docker Desktop users are running in constrained environments where they
+> can't open ports on their machines. When choosing the language and framework for your backend, make sure it
 > supports sockets connection.
 {: .important}
 
@@ -149,7 +144,7 @@ type HTTPMessageBody struct {
 > **Important**
 >
 > We don't have a working example for Node yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Node){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample for Node.
+> and let us know if you'd like a sample for Node.
 {: .important }
 
   </div>
@@ -160,7 +155,7 @@ type HTTPMessageBody struct {
 > **Important**
 >
 > We don't have a working example for Python yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Python){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample for Python.
+> and let us know if you'd like a sample for Python.
 {: .important }
 
   </div>
@@ -171,7 +166,7 @@ type HTTPMessageBody struct {
 > **Important**
 >
 > We don't have a working example for Java yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Java){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample for Java.
+> and let us know if you'd like a sample for Java.
 {: .important }
 
   </div>
@@ -182,7 +177,7 @@ type HTTPMessageBody struct {
 > **Important**
 >
 > We don't have a working example for .Net. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=.Net){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample for .Net.
+> and let us know if you'd like a sample for .Net.
 {: .important }
 
   </div>
@@ -251,7 +246,7 @@ CMD /service -socket /run/guest-services/extension-allthethings-extension.sock
 > **Important**
 >
 > We don't have a working Dockerfile for Node yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Node){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a Dockerfile for Node.
+> and let us know if you'd like a Dockerfile for Node.
 {: .important }
 
   </div>
@@ -262,7 +257,7 @@ CMD /service -socket /run/guest-services/extension-allthethings-extension.sock
 > **Important**
 >
 > We don't have a working Dockerfile for Python yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Python){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a Dockerfile for Python.
+> and let us know if you'd like a Dockerfile for Python.
 {: .important }
 
   </div>
@@ -273,7 +268,7 @@ CMD /service -socket /run/guest-services/extension-allthethings-extension.sock
 > **Important**
 >
 > We don't have a working Dockerfile for Java yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Java){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a Dockerfile for Java.
+> and let us know if you'd like a Dockerfile for Java.
 {: .important }
 
   </div>
@@ -284,7 +279,7 @@ CMD /service -socket /run/guest-services/extension-allthethings-extension.sock
 > **Important**
 >
 > We don't have a working Dockerfile for .Net. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=.Net){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a Dockerfile for .Net.
+> and let us know if you'd like a Dockerfile for .Net.
 {: .important }
 
   </div>
@@ -369,7 +364,7 @@ export function App() {
 > **Important**
 >
 > We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample with Vue.
+> and let us know if you'd like a sample with Vue.
 {: .important }
 
   </div>
@@ -380,7 +375,7 @@ export function App() {
 > **Important**
 >
 > We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample with Angular.
+> and let us know if you'd like a sample with Angular.
 {: .important }
 
   </div>
@@ -391,7 +386,7 @@ export function App() {
 > **Important**
 >
 > We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample with Svelte.
+> and let us know if you'd like a sample with Svelte.
 {: .important }
 
   </div>
@@ -399,30 +394,27 @@ export function App() {
 
 ## Re-build the extension and update it
 
-Since you have modified the configuration of the extension and added a stage in the Dockerfile, you must build again
-the extension.
+Since you have modified the configuration of the extension and added a stage in the Dockerfile, you must re-build the extension.
 
 ```bash
 docker build --tag= awesome-inc/my-extension:latest .
 ```
 
-Once built, you need to update it (or install it if you haven't done it yet).
+Once built, you need to update it, or install it if you haven't already done so.
 
 ```bash
 docker extension update awesome-inc/my-extension:latest
 ```
 
-Now you can see the backend service running in the containers tab of the Docker Desktop Dashboard and watch the logs
-when you need to debug it.
+Now you can see the backend service running in the **Containers8* tab of the Docker Dashboard and watch the logs when you need to debug it.
 
 > **Tip**
 >
-> You may need to enable the "Show system containers" option in Docker Desktop to see the backend container running
-> under the extension compose project in the containers tab of the dashboard.
-> See [how to show extension containers](../dev/test-debug.md#show-the-extension-containers) for more information.
+> You may need to enable the **Show system containers** option in **Settings** to see the backend container running.
+> See [Show extension containers](../dev/test-debug.md#show-the-extension-containers) for more information.
 {: .tip }
 
-Open Docker Desktop Dashboard and click on the containers tab. You should see the response from the backend service
+Open Docker Dashboard and select the **Containers** tab. You should see the response from the backend service
 call displayed.
 
 ## What's next?

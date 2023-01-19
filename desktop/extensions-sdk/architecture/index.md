@@ -5,7 +5,7 @@ keywords: Docker, extensions, sdk, metadata
 ---
 
 Extensions are applications that run inside the Docker Desktop. They're packaged as Docker images, distributed
-through Docker Hub, and installed by users either through the Marketplace within Docker Desktop Dashboard or the
+through Docker Hub, and installed by users either through the Marketplace within Docker Dashboard or the
 Docker Extensions CLI.
 
 Extensions can be composed of 3 (optional) components:
@@ -21,7 +21,7 @@ To configure and run those components, Docker Desktop uses a `metadata.json` fil
 
 ## The frontend
 
-The frontend, is basically a web application made from HTML, Javascript, and CSS. It can be built with a simple HTML
+The frontend is basically a web application made from HTML, Javascript, and CSS. It can be built with a simple HTML
 file, some vanilla Javascript or any frontend framework, such as React or Vue.js.
 
 When Docker Desktop installs the extension, it extracts the UI folder from the extension image, as defined by the 
@@ -43,13 +43,13 @@ Learn more about [building a frontend](../build/frontend-extension-tutorial.md) 
 
 ## The backend
 
-Alongside a frontend application, extensions can also contain one or many backend services. In many cases, the Extension does not need a backend, and features can be implemented just by invoking docker commands through the SDK. However, there are some cases when an extension requires a backend
+Alongside a frontend application, extensions can also contain one or many backend services. In most cases, the Extension does not need a backend, and features can be implemented just by invoking docker commands through the SDK. However, there are some cases when an extension requires a backend
 	service, for example:
-- run long-running processes that must outlive the frontend
-- store data in a local database and serve them back with a REST API
-- store the extension state, like when a button starts a long-running process, so that if you navigate away
+- To run long-running processes that must outlive the frontend
+- To store data in a local database and serve them back with a REST API
+- To store the extension state, like when a button starts a long-running process, so that if you navigate away
   from the extension and come back, the frontend can pick up where it left off
-- accessing specific resources in the Docker Desktop VM, for example by mounting folders in the compose
+- To access specific resources in the Docker Desktop VM, for example by mounting folders in the compose
 file
 
 > **Tip**
@@ -71,7 +71,7 @@ Note that, if the Compose file defines many services, the SDK can only contact t
 > **Note**
 >
 > In some cases, it is useful to also interact with the Docker engine from the backend.
-> See [how to use the Docker socket](../guides/use-docker-socket-from-backend.md) from the backend.
+> See [How to use the Docker socket](../guides/use-docker-socket-from-backend.md) from the backend.
 
 To communicate with the backend, the Extension SDK provides [functions](../dev/api/backend.md#get) to make `GET`,
 `POST`, `PUT`, `HEAD`, and `DELETE` requests from the frontend. Under the hood, the communication is done through a socket

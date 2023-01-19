@@ -14,13 +14,13 @@ All extensions submitted to the Extension Marketplace are reviewed and approved 
 
 ### Before you submit
 
-Ensure your extension has followed the guidelines outlined in this section before submitting for your extension for review. Docker highly encourage you to check the guidelines as not doing so may considerably impact the duration of the approval process.
+Ensure your extension has followed the guidelines outlined in this section before submitting for your extension for review. Docker highly encourages you to check the guidelines as not doing so may considerably impact the duration of the approval process.
 
 These guidelines don't replace Docker's terms of service or guarantee approval. As the Extension Marketplace continues adding new features for both Extension users and publishers, expect that you maintain your extension over time to ensure it stays available in the Marketplace.
 
 #### Guidelines:
 
-- Ensure that you’ve ran the [validation checks](validate.md)
+- Ensure that you’ve run the [validation checks](validate.md)
 - Review the [design guidelines](../design/design-guidelines.md)
 - Ensure the [UI styling](../design/index.md) is in line with Docker Desktop guidelines
 - Ensure your extensions support both light and dark mode
