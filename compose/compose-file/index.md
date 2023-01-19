@@ -470,6 +470,7 @@ services:
     image: redis:latest
     configs:
       - my_config
+      - my_other_config
 configs:
   my_config:
     file: ./my_config.txt
