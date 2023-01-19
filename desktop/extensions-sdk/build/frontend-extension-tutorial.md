@@ -1,5 +1,5 @@
 ---
-title: Set up an advanced frontend extension
+title: Create an advanced frontend extension
 description: Advanced frontend extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:
@@ -9,16 +9,14 @@ redirect_from:
   - /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
 ---
 
-To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a simple Docker extension that contains only a UI part.
+To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up an extension with a more advanced frontend.
 
-> Note
->
-> Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+Before you start, make sure you have installed the latest version of [Docker Desktop](../../release-notes.md).
 
 ## Extension folder structure
 
 The quickest way to create a new extension is to run `docker extension init my-extension` as in the
-[Quickstart](../quickstart.md). This will create a new directory `my-extension` that contains a fully functional extension.
+[Quickstart](../quickstart.md). This creates a new directory `my-extension` that contains a fully functional extension.
 
 > **Tip**
 >
@@ -105,6 +103,10 @@ COPY docker.svg .
 COPY --from=client-builder /ui/build ui
 
 ```
+> Note
+>
+> In the example Dockerfile, you can see that the image label `com.docker.desktop.extension.icon` is set to an icon URL. The Extensions Marketplace displays this icon without installing the extension. The Dockerfile also includes `COPY docker.svg .` to copy an icon file inside the image. This second icon file is used to display the extension UI in the Dashboard, once the extension is installed.
+
 
   </div>
   <div id="vue-dockerfile" class="tab-pane fade" markdown="1">
@@ -114,7 +116,7 @@ COPY --from=client-builder /ui/build ui
 > **Important**
 >
 > We don't have a working Dockerfile for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a Dockerfile for Vue.
+> and let us know if you'd like a Dockerfile for Vue.
 {: .important }
 
   </div>
@@ -125,7 +127,7 @@ COPY --from=client-builder /ui/build ui
 > **Important**
 >
 > We don't have a working Dockerfile for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a Dockerfile for Angular.
+> and let us know if you'd like a Dockerfile for Angular.
 {: .important }
 
   </div>
@@ -136,15 +138,13 @@ COPY --from=client-builder /ui/build ui
 > **Important**
 >
 > We don't have a working Dockerfile for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a Dockerfile for Svelte.
+> and let us know if you'd like a Dockerfile for Svelte.
 {: .important }
 
   </div>
 </div>
 
-> Note
->
-> In the example Dockerfile, you can see that the image label `com.docker.desktop.extension.icon` is set to an icon URL. The Extensions Marketplace displays this icon without installing the extension. The Dockerfile also includes `COPY docker.svg .` to copy an icon file inside the image. This second icon file is used to display the extension UI in the Dashboard, once the extension is installed.
+
 
 ## Configure the metadata file
 
@@ -306,6 +306,7 @@ export function App() {
 }
 {% endraw %}
 ```
+![Screenshot of the container list.](images/react-extension.png)
 
   </div>
   <div id="vue-app" class="tab-pane fade" markdown="1">
@@ -315,7 +316,7 @@ export function App() {
 > **Important**
 >
 > We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample with Vue.
+> and let us know if you'd like a sample with Vue.
 {: .important }
   
   </div>
@@ -326,7 +327,7 @@ export function App() {
 > **Important**
 >
 > We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample with Angular.
+> and let us know if you'd like a sample with Angular.
 {: .important }
 
   </div>
@@ -337,13 +338,12 @@ export function App() {
 > **Important**
 >
 > We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample with Svelte.
+> and let us know if you'd like a sample with Svelte.
 {: .important }
 
   </div>
 </div>
 
-![Screenshot of the container list.](images/react-extension.png)
 
 ## Policies enforced for the front-end code
 
