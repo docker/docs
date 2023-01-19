@@ -37,6 +37,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 #### For all platforms
 
 - Fixed image tagging with an existing tag with the containerd integration.
+- Fixed a regression introduced with Docker Desktop 4.16 breaking networking from containers with target platform linux/386 on amd64 systems. Fixes [docker/for-mac/6689](https://github.com/docker/for-mac/issues/6689).
 
 #### For Mac
 
