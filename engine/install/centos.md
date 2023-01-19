@@ -37,7 +37,7 @@ The `overlay2` storage driver is recommended.
 
 ### Uninstall old versions
 
-Older versions of Docker went by the names of `docker` or `docker-engine`.Uninstall any such older versions before attempting to install a new version, along with associated dependencies:
+Older versions of Docker went by the names of `docker` or `docker-engine` Uninstall any such older versions before attempting to install a new version, along with associated dependencies:
 
 ```console
 $ sudo yum remove docker \
