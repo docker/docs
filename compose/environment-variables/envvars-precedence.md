@@ -16,6 +16,49 @@ The order of precedence is as follows:
 3. Passed from/set in `compose.yaml` service's configuration, from the [env_file key](../../compose/compose-file/#env_file).
 4. Passed from/set in Container Image in the [ENV directive](../engine/reference/builder.md#env).
 
+>**Note**
+>
+> When you set the same environment variable in multiple files, there's a precedence rule used by Compose when trying to resolve the value for the variable in question.
+You can find this precedence rule and a table illustrating how interpolation works in the [Environment variables precedence](../compose/envvars-precedence.md) page.
+
+In the example below, we set the same environment variable on an Environment
+file, and the Compose file:
+
+```console
+$ cat ./Docker/api/api.env
+NODE_ENV=test
+
+$ cat docker-compose.yml
+version: '3'
+services:
+  api:
+    image: 'node:6-alpine'
+    env_file:
+     - ./Docker/api/api.env
+    environment:
+     - NODE_ENV=production
+```
+
+When you run the container, the environment variable defined in the Compose
+file takes precedence.
+
+```console
+$ docker compose exec api node
+
+> process.env.NODE_ENV
+'production'
+```
+
+Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is
+no Docker Compose entry for `environment`, `env_file` or `run --env`.
+
+> Specifics for NodeJS containers
+>
+> If you have a `package.json` entry for `script:start` like
+> `NODE_ENV=test node server.js`, then this overrules any setting in your
+> `docker-compose.yml` file.
+
+
 ### Example scenario
 
 The following table uses `TAG`, an environment variable defining the version for an image, as an example.

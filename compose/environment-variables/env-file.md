@@ -6,6 +6,8 @@ redirect_from:
 - /compose/env-file/
 ---
 
+Reuse env files by injecting them in multiple containers; all configurations in one place
+
 Compose supports declaring environment variables in an environment file.
 
 ## Syntax
