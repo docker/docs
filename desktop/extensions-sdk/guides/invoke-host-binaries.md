@@ -4,11 +4,13 @@ description: Add invocations to host binaries from the frontend with the extensi
 keywords: Docker, extensions, sdk, build
 ---
 
-In some cases, your extension needs to invoke some command from the host (the computer of your users). For example, you
+In some cases, your extension needs to invoke some command from the host. For example, you
 might want to invoke the CLI of your cloud provider to create a new resource, or the CLI of a tool your extension
-provides, or even a shell script that you want to run on the host. You could do that executing the CLI from a container with the extension SDK. But this CLI needs to access the host's
-filesystem, which isn't easy nor fast if it runs in a container.
-Host binaries allow exactly this: to invoke from the extension executables (as binaries, shell scripts)
+provides, or even a shell script that you want to run on the host. 
+
+You could do that by executing the CLI from a container with the extension SDK. But this CLI needs to access the host's filesystem, which isn't easy nor fast if it runs in a container.
+
+However host binaries invoke from the extension executables (as binaries, shell scripts)
 shipped as part of your extension and deployed to the host. As extensions can run on multiple platforms, this
 means that you need to ship the executables for all the platforms you want to support.
 
@@ -18,7 +20,7 @@ Learn more about extensions [architecture](../architecture/index.md).
 >
 > Only executables shipped as part of the extension can be invoked with the SDK. 
 
-In this example, this CLI will be a simple `Hello world` script that must be invoked with a parameter and will return a 
+In this example, the CLI is a simple `Hello world` script that must be invoked with a parameter and returns a 
 string.
 
 ## Add the executables to the extension
@@ -97,8 +99,9 @@ export function App() {
 <br/>
 
 > **Important**
+>
 > We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample with Vue.
+> and let us know if you'd like a sample with Vue.
 {: .important }
 
   </div>
@@ -107,8 +110,9 @@ export function App() {
 <br/>
 
 > **Important**
+>
 > We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample with Angular.
+> and let us know if you'd like a sample with Angular.
 {: .important }
 
   </div>
@@ -117,8 +121,9 @@ export function App() {
 <br/>
 
 > **Important**
+>
 > We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte){: target="_blank" rel="noopener" class="_"}
-> and let us know you'd like a sample with Svelte.
+> and let us know if you'd like a sample with Svelte.
 {: .important }
 
   </div>
@@ -126,8 +131,8 @@ export function App() {
 
 ## Configure the metadata file
 
-The host binaries must be specified in the `metadata.json` so that Docker Desktop copies them on the host when installing
-the extension. Once the extension is uninstalled, the binaries that were copied will be removed as well.
+The host binaries must be specified in the `metadata.json` so that Docker Desktop copies them on to the host when installing
+the extension. Once the extension is uninstalled, the binaries that were copied are removed as well.
 
 ```json
 {

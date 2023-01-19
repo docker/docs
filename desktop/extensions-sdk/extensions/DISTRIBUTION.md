@@ -15,7 +15,7 @@ The Docker image must have several [image labels](labels.md), providing informat
 
 > See how to use [extension labels](labels.md) to provide extension overview information.
 
-To Package and release an extension, you must build a Docker image (`docker build`), and push the image to [DockerHub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } (`docker push`) with a specific tag that allows you to manage versions of the extension.
+To package and release an extension, you must build a Docker image (`docker build`), and push the image to [DockerHub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } (`docker push`) with a specific tag that allows you to manage versions of the extension.
 
 ## Release your extension
 
@@ -42,7 +42,7 @@ Users can download and install the newer version of any extension without updati
 
 ## Extension API dependencies
 
-Extensions must specify the Extension API version they rely on. Docker Desktop will check the extension required version, and only propose to install extensions that are compatible with the current Docker Desktop installed. Users might need to update Docker Desktop in order to install the latest extensions available.
+Extensions must specify the Extension API version they rely on. Docker Desktop checks the extension required version, and only propose to install extensions that are compatible with the current Docker Desktop installed. Users might need to update Docker Desktop in order to install the latest extensions available.
 
 Extension image labels must specify the API version that the extension relies upon. This allows Docker Desktop to inspect newer versions of extension images without downloading the full extension image upfront.
 

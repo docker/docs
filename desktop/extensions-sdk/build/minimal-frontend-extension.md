@@ -1,5 +1,5 @@
 ---
-title: Set up a minimal frontend extension
+title: Create a simple extension
 description: Minimal frontend extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:
@@ -9,13 +9,11 @@ redirect_from:
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a minimal frontend extension based on plain HTML.
 
-> Note
->
-> Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+Before you start, make sure you have installed the latest version of [Docker Desktop](../../release-notes.md).
 
 > Note
 >
-> If you want to start a codebase for your new extension, our [Quickstart guide](../quickstart.md) and `docker extension init <my-extension>` will provide a better base for your extension, more up-to-date and related to your install of Docker Desktop.
+> If you want to start a codebase for your new extension, our [Quickstart guide](../quickstart.md) and `docker extension init <my-extension>` provides a better base for your extension.
 
 ## Extension folder structure
 
