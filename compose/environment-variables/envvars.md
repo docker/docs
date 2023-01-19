@@ -2,6 +2,8 @@
 description: Compose CLI environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Compose CLI environment variables
+redirect_from:
+- /compose/reference/envvars/
 ---
 
 In this section you can find the list of pre-defined environment variables you can use to configure the Docker Compose command-line behavior.  
