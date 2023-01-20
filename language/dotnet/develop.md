@@ -451,9 +451,9 @@ Now let’s test our application. Using a web browser, access `http://localhost:
 
 ## Next steps
 
-In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
+In the next module, we’ll take a look at how to write containerized tests in Docker. See:
 
-[Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
+[Run your tests](run-tests.md){: .button .primary-btn}
 
 ## Feedback
 
