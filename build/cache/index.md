@@ -264,7 +264,7 @@ RUN echo "the second command"
 ```
 
 It's possible to run both of these commands inside a single `RUN`, which means
-that they will share the same cache! This can is achievable using the `&&` shell
+that they will share the same cache! This is achievable using the `&&` shell
 operator to run one command after another:
 
 ```dockerfile
