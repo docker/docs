@@ -43,7 +43,7 @@ to support those running modes:
 
 ## The Compose application model
 
-The Compose specification allows one to define a platform-agnostic container based application. Such an application is designed as a set of containers which have to both run together with adequate shared resources and communication channels.
+The Compose specification allows one to define a platform-agnostic container based application. Such an application is designed as a set of containers which have to run together with adequate shared resources and communication channels.
 
 Computing components of an application are defined as [Services](#services-top-level-element). A Service is an abstract concept implemented on platforms by running the same container image (and configuration) one or more times.
 
