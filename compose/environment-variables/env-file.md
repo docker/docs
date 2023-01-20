@@ -6,10 +6,6 @@ redirect_from:
 - /compose/env-file/
 ---
 
-Reuse env files by injecting them in multiple containers; all configurations in one place
-
-Compose supports declaring environment variables in an environment file.
-
 ## Syntax
 The following syntax rules apply to environment files:
 
@@ -56,8 +52,8 @@ For braced expressions, the following formats are supported:
   - `${VAR+replacement}` -> `replacement` if `VAR` is set, otherwise empty
 
 ## Precedence
-Environment variables from an environment file have lower precedence than those passed via the command-line or via the `environment` section in project YAML.
-Refer to [Environment Variables Precedence](./envvars-precedence.md) for details.
+Environment variables from an environment file have lower precedence than those passed via the command-line or via the `environment` section in the `docker-compose.yml` file.
+For more information, see [Environment variables precedence](./envvars-precedence.md).
 
 ## Compose file and CLI variables
 

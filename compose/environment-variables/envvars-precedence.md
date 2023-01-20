@@ -6,9 +6,9 @@ redirect_from:
 - /compose/envvars-precedence/
 ---
 
-This page contains information on how interpolation works when using environment variables in Compose.
+When you set the same environment variable in multiple files, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question.
 
-When you set the same environment variable in multiple files, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question. 
+This page contains information on the level of precedence each method of substituting environmental variables takes.
 
 The order of precedence is as follows:
 1. Passed from the command line [`docker compose run --env <KEY[=[VAL]]>`](../../engine/reference/commandline/compose_run/#options).
