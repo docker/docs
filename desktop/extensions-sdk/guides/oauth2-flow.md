@@ -80,7 +80,7 @@ POST https://authorization-server.com/token
 >
 > The client's credentials are included in the `POST` query params in this example. OAuth authorization servers may require that the credentials are sent as a HTTP Basic Authentication header or might support different formats. See your OAuth provider docs for details.
 
-## Step three: Store the access token
+### Store the access token
 
 The Docker Extensions SDK doesn't currently provide a specific mechanism to store secrets.
 
