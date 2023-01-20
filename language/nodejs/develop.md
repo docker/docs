@@ -140,6 +140,7 @@ services:
    - CONNECTIONSTRING=mongodb://mongo:27017/notes
   volumes:
    - ./:/app
+   - /app/node_modules
   command: npm run debug
 
  mongo:
