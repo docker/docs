@@ -24,13 +24,64 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.16.2
+
+{% include release-date.html date="2023-01-19" %}
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where `docker build` and `docker tag` commands produced an `image already exists` error if the containerd integration feature is enabled.
+- Fixed a regression introduced with Docker Desktop 4.16 breaking networking from containers with target platform linux/386 on amd64 systems. Fixes [docker/for-mac/6689](https://github.com/docker/for-mac/issues/6689).
+
+#### For Mac
+
+- Fixed the capitalization of `Info.plist` which caused `vmnetd` to break on case-sensitive file systems. Fixes [docker/for-mac/6677](https://github.com/docker/for-mac/issues/6677).
+
+#### For Windows
+
+- Fixed a regression introduced with Docker Desktop 4.16 causing it to get stuck in the "starting" phase when in WSL2 mode. Fixes [docker/for-win/13165](https://github.com/docker/for-win/issues/13165)
+
 ## 4.16.1
 
 {% include release-date.html date="2023-01-13" %}
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/95567/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95567/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95567/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion12" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading12">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion12" href="#collapse12" aria-expanded="true" aria-controls="collapse12">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 8260a2fbd3cf7e9050ed7348e5c528314df82f1c460c70919afd0e5f95913f14</li>
+      <li><b>Mac Intel:</b> SHA-256 b6d8720e2ceb64a6102c5efba53e2adf441c60508457aeb8cc1fd7c30cd7b28f</li>
+      <li><b>Mac Arm:</b> SHA-256 327725664ac86d34ee3b311b09eace0075492f7ff3e0e384015171769f75bff4</li>
+      <li><b>Linux DEB:</b> SHA-256 8400f9b1bab837b1d2a12597ec74ece859a5e53f5244cd101c72d3b384ac44b4</li>
+      <li><b>Linux RPM:</b> SHA-256 0d2074f6a6fa66300810168ea5c572f81616753c698bc5246a89ad374beaec22</li>
+      <li><b>Linux Arch:</b> SHA-256 11344e66c76ed6ce66b8b077dd86870fc5d63cdcd96941d664de9b65e2123baf</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### Bug fixes and enhancements
 
