@@ -3,6 +3,8 @@ description: Dev Environments
 keywords: Dev Environments, share, local, Compose
 title: Overview
 ---
+{% include dev-envs-changing.md %}
+
 > **Beta**
 >
 > The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
@@ -20,7 +22,6 @@ You can use Dev Environments through the intuitive GUI in Docker Dashboard or st
 >**Changes to Dev Environments with Docker Desktop 4.13**
 >
 >Docker has simplified how you configure your dev environment project. All you need to get started is a `compose-dev.yaml` file. If you have an existing project with a `.docker/` folder this is automatically migrated the next time you launch.
-{: .important}
 
 Dev Environments is powered by [Docker Compose](/compose/). This allows Dev Environments to take advantage of all the benefits and features of Compose whilst adding an intuitive GUI where you can launch environments with the click of a button.
 
