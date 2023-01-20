@@ -16,9 +16,9 @@ Between 2014 and 2017 two other noticeable versions of Compose, which introduced
 - [Compose 1.6.0 with file format V2](../compose-file/compose-file-v2/)
 - [Compose 1.10.0 with file format V3](../compose-file/compose-file-v3/)
 
-These three key file format versions and releases prior to v1.27.0 are collectively referred to as Compose V1. 
+These three key file format versions and releases prior to v1.29.2 are collectively referred to as Compose V1. 
 
-In mid-2020 Compose V2 was released. It merged Compose file format V2 and V3 and was written in Golang. The file format is defined by the [Compose specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"}. Compose V2 is the latest and recommended version of Compose. It provides improved integration with other Docker command-line features, and allows it to run natively on macOS, Windows, and Linux.  
+In mid-2020 Compose V2 was released. It merged Compose file format V2 and V3 and was written in Go. The file format is defined by the [Compose specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"}. Compose V2 is the latest and recommended version of Compose. It provides improved integration with other Docker command-line features, and simplified installation on macOS, Windows, and Linux.  
 
 It makes a clean distinction between the Compose YAML file model and the `docker-compose`
 implementation. Making this change has enabled a number of enhancements, including
@@ -124,33 +124,38 @@ This option works with the `start`, `stop`, `restart` and `down` commands.
 
 ### Config command
 
-The config command is intended to show the configuration used by Docker Compose to run the actual project.
-As we know, at some parts of the Compose file have a short and a long format. For example, the `ports` entry.
+The config command is intended to show the configuration used by Docker Compose to run the actual project after normalization and templating. The resulting output might contain superficial differences in formattting and style.
+For example, some fields in the Compose Specification support both short and a long format so the output structure might not match the input structure but is guaranteed to be semantically equivalent.
+
+Similarly, comments in the source file are not preserved.
+
 In the example below we can see the config command expanding the `ports` section:
 
 docker-compose.yml:
-```
+```yaml
 services:
   web:
-    image: nginx
+    # default to latest but allow overriding the tag
+    image: nginx:${TAG-latest}
     ports:
       - 80:80
 ```
 With `$ docker compose config` the output turns into:
-```
+```yaml
+name: docs-example
 services:
   web:
-    image: nginx
+    image: nginx:stable-alpine
     networks:
       default: null
     ports:
     - mode: ingress
       target: 80
-      published: 80
+      published: "80"
       protocol: tcp
 networks:
   default:
-    name: workspace_default
+    name: basic_default
 ```
 
 The result above is a full size configuration of what will be used by Docker Compose to run the project.
