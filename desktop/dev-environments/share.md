@@ -3,6 +3,7 @@ description: Dev Environments
 keywords: Dev Environments, share, Docker Desktop
 title: Distribute your dev environment
 ---
+{% include dev-envs-changing.md %}
 
 The `compose-dev.yaml` config file makes distributing your dev environment easy so everyone can access the same code and any dependencies.
 
