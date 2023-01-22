@@ -22,8 +22,12 @@ To get started with Docker Engine on CentOS, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of CentOS 7, CentOS 8 (stream),
-or CentOS 9 (stream). Archived versions aren't supported or tested.
+To install Docker Engine, you need a maintained version of one of the following CentOS versions:
+   - CentOS 7
+   - CentOS 8 (stream)
+   - CentOS 9 (stream)
+
+Archived versions aren't supported or tested.
 
 The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
@@ -33,8 +37,8 @@ The `overlay2` storage driver is recommended.
 
 ### Uninstall old versions
 
-Older versions of Docker were called `docker` or `docker-engine`. If these are
-installed, uninstall them, along with associated dependencies.
+Older versions of Docker went by the names of `docker` or `docker-engine`.
+Uninstall any such older versions before attempting to install a new version, along with associated dependencies:
 
 ```console
 $ sudo yum remove docker \
@@ -49,24 +53,23 @@ $ sudo yum remove docker \
 
 It's OK if `yum` reports that none of these packages are installed.
 
-The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker Engine package is now called `docker-ce`.
+Images, containers, volumes, and networks stored in `/var/lib/docker/` aren’t automatically removed when you uninstall Docker.
 
 ## Installation methods
 
 You can install Docker Engine in different ways, depending on your needs:
 
-- Most users
+- You can
   [set up Docker's repositories](#install-using-the-repository) and install
   from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
 
-- Some users download the RPM package and
+- You can download the RPM package and
   [install it manually](#install-from-a-package) and manage
   upgrades completely manually. This is useful in situations such as installing
   Docker on air-gapped systems with no access to the internet.
 
-- In testing and development environments, some users choose to use automated
+- In testing and development environments, you can use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
 
 ### Install using the repository
@@ -92,8 +95,17 @@ $ sudo yum-config-manager \
 
 #### Install Docker Engine
 
-1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose
-    or go to the next step to install a specific version:
+1. Install Docker Engine, containerd, and Docker Compose:
+
+   <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#tab-latest">Latest</a></li>
+    <li><a data-toggle="tab" data-target="#tab-version">Specific version</a></li>
+   </ul>
+   <div class="tab-content">
+   <br>
+   <div id="tab-latest" class="tab-pane fade in active" markdown="1">
+
+    To install the latest version, run:
 
     ```console
     $ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
@@ -105,11 +117,10 @@ $ sudo yum-config-manager \
     This command installs Docker, but it doesn't start Docker. It also creates a
     `docker` group, however, it doesn't add any users to the group by default.
 
-2.  To install a _specific version_ of Docker Engine, list the available versions
-    in the repo, then select and install:
+   </div>
+   <div id="tab-version" class="tab-pane fade" markdown="1">
 
-    a. List and sort the versions available in your repo. This example sorts
-       results by version number, highest to lowest, and is truncated:
+    To install a specific version, start by listing the available versions in the repository:
 
     ```console
     $ yum list docker-ce --showduplicates | sort -r
@@ -123,10 +134,12 @@ $ sudo yum-config-manager \
     The list returned depends on which repositories are enabled, and is specific
     to your version of CentOS (indicated by the `.el7` suffix in this example).
 
-    b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column)
-       starting at the first colon (`:`), up to the first hyphen, separated by
-       a hyphen (`-`). For example, `docker-ce-18.09.1`.
+    Install a specific version by its fully qualified package name, which is
+    the package name (`docker-ce`) plus the version string (2nd column)
+    starting at the first colon (`:`), up to the first hyphen, separated by
+    a hyphen (`-`). For example, `docker-ce-18.09.1`.
+
+    Replace `<VERSION_STRING>` with the desired version and then run the following command to install:
 
     ```console
     $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
@@ -135,13 +148,17 @@ $ sudo yum-config-manager \
     This command installs Docker, but it doesn't start Docker. It also creates a
     `docker` group, however, it doesn't add any users to the group by default.
 
-3.  Start Docker.
+   </div>
+   <hr>
+   </div>
+
+2. Start Docker.
 
     ```console
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker Engine is installed correctly by running the `hello-world`
+3. Verify that Docker Engine installation is successful by running the `hello-world`
     image.
 
     ```console
@@ -149,12 +166,9 @@ $ sudo yum-config-manager \
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints a message and exits.
+    container runs, it prints a confirmation message and exits.
 
-This installs and runs Docker Engine. Use `sudo` to run Docker
-commands. Continue to [Linux postinstall](linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+You have now successfully installed and started Docker Engine. The docker user group exists but contains no users, which is why you’re required to use sudo to run Docker commands. Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged users to run Docker commands and for other optional configuration steps.
 
 #### Upgrade Docker Engine
 
@@ -163,16 +177,15 @@ choosing the new version you want to install.
 
 ### Install from a package
 
-If you cannot use Docker's repository to install Docker, you can download the
+If you can't use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker Engine.
 
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
+1. Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
     and choose your version of CentOS. Then browse to `x86_64/stable/Packages/`
     and download the `.rpm` file for the Docker version you want to install.
 
-2.  Install Docker Engine, changing the path below to the path where you downloaded
-    the Docker package.
+2. Install Docker Engine, changing the path below to the path where you downloaded the Docker package.
 
     ```console
     $ sudo yum install /path/to/package.rpm
@@ -181,13 +194,13 @@ a new file each time you want to upgrade Docker Engine.
     Docker is installed but not started. The `docker` group is created, but no
     users are added to the group.
 
-3.  Start Docker.
+3. Start Docker.
 
     ```console
     $ sudo systemctl start docker
     ```
 
-4.  Verify that Docker Engine is installed correctly by running the `hello-world`
+4. Verify that Docker Engine installation is successful by running the `hello-world`
     image.
 
     ```console
@@ -195,12 +208,9 @@ a new file each time you want to upgrade Docker Engine.
     ```
 
     This command downloads a test image and runs it in a container. When the
-    container runs, it prints a message and exits.
+    container runs, it prints a confirmation message and exits.
 
-This installs and runs Docker Engine. Use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+You have now successfully installed and started Docker Engine. The docker user group exists but contains no users, which is why you’re required to use sudo to run Docker commands. Continue to [Linux postinstall](linux-postinstall.md) to allow non-privileged users to run Docker commands and for other optional configuration steps.
 
 #### Upgrade Docker Engine
 
@@ -212,13 +222,13 @@ instead of `yum -y install`, and point to the new file.
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
+1. Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
     ```console
     $ sudo yum remove docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras
     ```
 
-2.  Images, containers, volumes, or customized configuration files on your host
+2. Images, containers, volumes, or customized configuration files on your host
     are not automatically removed. To delete all images, containers, and
     volumes:
 
