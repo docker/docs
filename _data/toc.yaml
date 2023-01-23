@@ -1517,10 +1517,10 @@ manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/
-      title: Engine 20.10
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/20.10/
+        title: Engine 20.10
       - path: /engine/release-notes/19.03/
         title: Engine 19.03
       - path: /engine/release-notes/18.09/
