@@ -4,10 +4,10 @@ keywords: Docker, pull requests, download, limit,
 title: Download rate limit
 ---
 
-## What is the download rate limit on Docker Hub
+## What's the download rate limit on Docker Hub
 
 Docker Hub limits the number of Docker image downloads ("pulls")
-based on the account type of the user pulling the image. Pull rates limits are based on individual IP address. For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. For [authenticated](#how-do-i-authenticate-pull-requests) users, it is  200 pulls per 6 hour period. Users with a paid [Docker subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} get up to 5000 pulls per day. If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
+based on the account type of the user pulling the image. Pull rates limits are based on individual IP address. For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. For [authenticated](#how-do-i-authenticate-pull-requests) users, it's  200 pulls per 6 hour period. Users with a paid [Docker subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} get up to 5000 pulls per day. If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
 
 Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs.
 
@@ -29,7 +29,7 @@ manifest URLs (`/v2/*/manifests/*`).
 single manifest request.
 - A pull request for a multi-arch image makes two 
 manifest requests. 
-- `HEAD` requests are not counted. 
+- `HEAD` requests aren't counted. 
 
 
 ## How do I know my pull requests are being limited
@@ -51,7 +51,7 @@ ratelimit-limit
 ratelimit-remaining
 ```
 
-These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD will not, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
+These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD won't, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
 
 To get a token anonymously (if you are pulling anonymously):
 
@@ -84,13 +84,13 @@ This means my limit is 100 pulls per 21600 seconds (6 hours), and I have 76 pull
 
 ### I don't see any RateLimit headers
 
-If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
+This could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization. Pulling that image won’t count toward pull limits if you don’t see these headers. However, users with a paid Docker subscription pulling more than 5000 times daily require a [Service Account](../docker-hub/service-accounts.md) subscription.
 
 ## I'm being limited to a lower rate even though I have a paid Docker subscription
 
 To take advantage of the higher limits included in a paid Docker subscription, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account.
 
-A Pro, Team, or a Business tier does not increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
+A Pro, Team, or a Business tier doesn't increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
 
 ## How do I authenticate pull requests
 
@@ -140,7 +140,7 @@ Docker Hub also has an overall rate limit to protect the application
 and infrastructure. This limit applies to all requests to Hub 
 properties including web pages, APIs, image pulls, etc. The limit is 
 applied per-IP, and while the limit changes over time depending on load
-and other factors, it is in the order of thousands of requests per 
+and other factors, it's in the order of thousands of requests per 
 minute. The overall rate limit applies to all users equally
 regardless of account level.
 
