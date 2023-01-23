@@ -1517,6 +1517,8 @@ manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
+    - path: /engine/release-notes/23.0/
+      title: Engine 23.0
     - sectiontitle: Previous versions
       section:
       - path: /engine/release-notes/20.10/
