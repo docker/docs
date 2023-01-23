@@ -160,6 +160,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Mac
 
+- Minimum OS version to install or update Docker Desktop on macOS is now macOS Big Sur (version 11) or later.
 - Fixed the Docker engine not starting when Enhanced Container Isolation is enabled if the legacy `osxfs` implementation is used for file sharing.
 - Fixed files created on VirtioFS having the executable bit set. Fixes [docker/for-mac#6614](https://github.com/docker/for-mac/issues/6614).
 - Added back a way to uninstall Docker Desktop from the command line. Fixes [docker/for-mac#6598](https://github.com/docker/for-mac/issues/6598).
