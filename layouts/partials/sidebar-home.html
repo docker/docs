@@ -1,0 +1,27 @@
+<nav class="text-[16px] flex flex-col gap-2 py-2">
+  {{ with (site.GetPage "/get-started/overview") }}
+    <a class="p-2 sidebar-hover" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+  {{ end }}
+  <div class="pt-2 pl-2">
+    Manuals
+  </div>
+  <div class="flex flex-col">
+    {{ $manuals := (slice "/desktop" "/engine" "/build" "/compose" "/docker-hub") }}
+    {{ range $manuals }}
+      {{ with (site.GetPage .) }}
+        <a class="py-2 pl-5 sidebar-hover" href="{{ .Permalink }}"
+          >{{ .LinkTitle }}</a
+        >
+      {{ end }}
+    {{ end }}
+  </div>
+  {{ with (site.GetPage "/reference") }}
+    <a class="p-2 sidebar-hover" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+  {{ end }}
+  {{ with (site.GetPage "/samples") }}
+    <a class="p-2 sidebar-hover" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+  {{ end }}
+  {{ with (site.GetPage "/contribute/overview") }}
+    <a class="p-2 sidebar-hover" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+  {{ end }}
+</nav>

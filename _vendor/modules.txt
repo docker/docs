@@ -1,0 +1,5 @@
+# github.com/moby/moby v23.0.0-rc.3+incompatible
+# github.com/moby/buildkit v0.11.2
+# github.com/docker/cli v23.0.0-rc.3+incompatible
+# github.com/docker/compose-cli v1.0.30
+# github.com/distribution/distribution v2.8.1+incompatible

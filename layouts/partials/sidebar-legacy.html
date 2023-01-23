@@ -1,0 +1,61 @@
+{{ $scratch := partialCached "utils/tocparser.html" . . }}
+{{ $ctx := . }}
+
+
+<ul>
+  {{ with (index ($scratch.Get "sections") "1") }}
+    {{ range (index site.Data.toc .) }}
+      {{ template "tocRender" (dict "ctx" $ctx "entry" .) }}
+    {{ end }}
+  {{ end }}
+</ul>
+
+{{ define "tocRender" }}
+  {{ $ctx := .ctx }}
+  {{ if .entry.sectiontitle }}
+    <li
+      x-data="{ expanded: false }"
+      x-init="expanded = !!$el.querySelector('a[aria-current]')"
+      :data-expanded="expanded"
+    >
+      <button
+        @click="expanded = ! expanded"
+        class="sidebar-hover w-full flex items-center justify-between"
+      >
+        <span class="pl-3 py-2 truncate">{{ .entry.sectiontitle }}</span>
+        <span
+          class="material-symbols-rounded -my-1 md:text-[28px]"
+          x-text="expanded ? 'expand_more' : 'chevron_right'"
+        >
+        </span>
+      </button>
+      <ul x-show="expanded" class="ml-3 md:ml-[21px]">
+        {{ range .entry.section }}
+          {{ template "tocRender" (dict "entry" . "ctx" $ctx) }}
+        {{ end }}
+      </ul>
+    </li>
+  {{ else }}
+    {{ $isCurrent := eq (urls.Parse $ctx.Permalink).Path .entry.path }}
+    <li
+      {{ if $isCurrent }}
+        class="pl-3 -ml-[2px] border-l-4 border-blue-light dark:border-blue-dark
+        sidebar-hover bg-blue-light-200 dark:bg-blue-dark-100"
+      {{ else }}
+        class="pl-3 sidebar-hover"
+      {{ end }}
+    >
+      <span class="flex items-center">
+        <a
+          {{ if $isCurrent }}
+            aria-current="page"
+          {{ end }}
+          class="py-2 w-full truncate hover:font-medium"
+          href="{{ .entry.path }}"
+          title="{{ .entry.title }}"
+          >{{ .entry.title }}</a
+        >
+      </span>
+    </li>
+  {{ end }}
+{{ end }}

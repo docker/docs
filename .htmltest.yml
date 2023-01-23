@@ -1,0 +1,16 @@
+DirectoryPath: "public"
+EnforceHTTPS: false
+CheckDoctype: false
+CheckExternal: false
+IgnoreAltMissing: true
+IgnoreAltEmpty: true
+IgnoreEmptyHref: true
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreUrls:
+- "/^/docker-hub/api/latest/.*$/"
+- "/^/engine/api/v.+/#.*$/"
+- "/^/glossary/.*$/"
+IgnoreDirs:
+- "/^engine/api/.*$/"
+- "/^registry/configuration/index.html"
+CacheExpires: "6h"

@@ -1,0 +1,23 @@
+services:
+  server:
+    build:
+      context: .
+      target: build-base
+    volumes:
+      - "${PWD}:/src"
+      - /src/node_modules
+    ports:
+      - "1313:1313"
+    command: hugo server --bind=0.0.0.0
+
+  lint:
+    build:
+      context: .
+      target: lint
+    volumes:
+      - "${PWD}:/workdir"
+
+  test:
+    build:
+      context: .
+      target: test

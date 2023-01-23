@@ -1,28 +1,4 @@
-
-horizontalnav:
-- title: Home
-  path: /
-  node: home
-- title: Guides
-  path: /get-started/overview/
-  node: guides
-- title: Manuals
-  path: /desktop/
-  node: manuals
-- title: Reference
-  path: /reference/
-  node: reference
-- title: Samples
-  path: /samples/
-  node: samples
-- title: Contribute
-  path: /contribute/overview/
-  node: contribute
-  hide_home: true
-
-home: {}
-
-guides:
+Guides:
 - title: Docker overview
   path: /get-started/overview/
 - title: Get Docker
@@ -230,7 +206,7 @@ guides:
 - path: /get-started/resources/
   title: "Educational resources"
 
-reference:
+Reference:
 - path: /reference/
   title: Reference documentation
 - sectiontitle: Command-line reference
@@ -782,14 +758,12 @@ reference:
       title: SDKs
     - path: /engine/api/sdk/examples/
       title: SDK examples
-    - path: /engine/api/latest/
-      title: v{{ site.latest_engine_api_version }} reference (latest)
+    - path: /engine/api/v1.41/
+      title: v1.41 reference (latest)
     - sectiontitle: API reference by version
       section:
       - path: /engine/api/version-history/
         title: Version history overview
-      - path: /engine/api/v1.41/
-        title: v1.41 reference
       - path: /engine/api/v1.40/
         title: v1.40 reference
       - path: /engine/api/v1.39/
@@ -957,7 +931,7 @@ reference:
 
 
 
-samples:
+Samples:
 - path: /samples/
   title: Overview
 - sectiontitle: Databases
@@ -1050,7 +1024,7 @@ samples:
       title: Wireguard
 
 
-manuals:
+Manuals:
 - sectiontitle: Docker Desktop
   section:
     - path: /desktop/
@@ -1931,7 +1905,7 @@ manuals:
   title: Get support
 - path: /release-lifecycle/
   title: Product release lifecycle
-contribute:
+Contribute:
   - path: /contribute/overview/
     title: Contribute to Docker's docs
   - path: /contribute/contribute-guide/

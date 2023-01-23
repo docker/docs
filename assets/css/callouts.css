@@ -1,0 +1,29 @@
+/* callouts = blockquotes with classes
+ *
+ * Note: the left border is set using a custom property
+ * in tailwind.config.js
+ *
+ * */
+
+.prose blockquote {
+  @apply p-4 not-italic font-normal bg-blue-light-100 dark:bg-blue-dark-100;
+  quotes: none;
+  *:first-child {
+    @apply mt-0;
+  }
+  *:last-child {
+    @apply mb-0;
+  }
+
+  &.warning {
+    @apply bg-red-light-100 border-l-red-light dark:bg-red-dark-100 dark:border-l-red-dark;
+  }
+
+  &.important {
+    @apply bg-amber-light-100 border-l-amber-light dark:bg-amber-dark-100 dark:border-l-amber-dark;
+  }
+
+  &.tip {
+    @apply bg-green-light-100 border-l-green-light dark:bg-green-dark-100 dark:border-l-green-dark;
+  }
+}

@@ -1,0 +1,4 @@
+{{ $text := .Get "text" }}
+{{ $type := .Get "type" | default "button" }}
+{{ $url := .Get "url" | default "" }}
+{{ partial "components/button.html" (dict "type" $type "text" $text "url" $url) }}

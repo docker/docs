@@ -1,0 +1,110 @@
+main:
+- name: Guides
+  url: /get-started/overview/
+- name: Manuals
+  url: /desktop/
+- name: Reference
+  url: /reference/
+- name: Samples
+  url: /samples/
+- name: Contribute
+  url: /contribute/overview/
+
+footer:
+  - url: https://www.docker.com/products
+    name: Product offerings
+  - url: https://www.docker.com/products/personal
+    name: Docker Personal
+    parent: Product offerings
+  - url: https://www.docker.com/products/pro
+    name: Docker Pro
+    parent: Product offerings
+  - url: https://www.docker.com/products/team
+    name: Docker Team
+    parent: Product offerings
+  - url: https://www.docker.com/products/business
+    name: Docker Business
+    parent: Product offerings
+  - url: https://www.docker.com/pricing/faq
+    name: Pricing FAQs
+    parent: Product offerings
+  - url: https://www.docker.com/partners/programs
+    name: Docker Verified Publisher
+    parent: Product offerings
+  - url: https://www.docker.com/partners
+    name: Partners
+    parent: Product offerings
+
+  - url: https://www.docker.com/
+    name: Features
+  - url: https://www.docker.com/products/docker-desktop
+    name: Docker Desktop
+    parent: Features
+  - url: https://www.docker.com/products/docker-hub
+    name: Docker Hub
+    parent: Features
+  - url: https://www.docker.com/products/secure-software-supply-chain
+    name: Secure Software Supply Chain
+    parent: Features
+  - url: https://www.docker.com/products/container-runtime
+    name: Container Runtime
+    parent: Features
+  - url: https://www.docker.com/products/developer-tools
+    name: Developer Tools
+    parent: Features
+  - url: https://www.docker.com/partners
+    name: Trusted Content
+    parent: Features
+  - url: https://www.docker.com/roadmap
+    name: Docker Product Roadmap
+    parent: Features
+
+  - name: Developers
+  - url: https://www.docker.com/use-cases
+    name: Use cases
+    parent: Developers
+  - url: /get-started/
+    name: Get started
+    parent: Developers
+  - url: https://www.docker.com/blog/
+    name: Block
+    parent: Developers
+  - url: https://www.docker.com/docker-community
+    name: Community
+    parent: Developers
+  - url: https://www.docker.com/open-source
+    name: Open Source
+    parent: Developers
+  - url: https://www.docker.com/community/get-involved/developer-preview
+    name: Preview Program
+    parent: Developers
+
+  - url: https://www.docker.com/company
+    name: About us
+  - url: https://www.docker.com/what-container
+    name: What is a container?
+    parent: About us
+  - url: https://www.docker.com/why-docker
+    name: Why Docker?
+    parent: About us
+  - url: https://www.docker.com/events
+    name: Virtual events
+    parent: About us
+  - url: https://www.docker.com/swag
+    name: Swag store
+    parent: About us
+  - url: https://www.docker.com/company/newsroom
+    name: Newsroom
+    parent: About us
+  - url: https://www.docker.com/careers
+    name: Careers
+    parent: About us
+  - url: https://www.docker.com/company/contact
+    name: Contact us
+    parent: About us
+  - url: https://www.docker.com/customers
+    name: Customers
+    parent: About us
+  - url: https://www.docker.com/newsletter-subscription
+    name: Newsletter
+    parent: About us

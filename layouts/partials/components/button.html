@@ -1,0 +1,12 @@
+{{ $type := .type }}
+<div class="not-prose">
+{{ if eq $type "link" }}
+<a href="{{ .url }}" class="cursor-pointer py-2 px-4 rounded bg-blue-light-500 dark:bg-blue-dark-400 hover:bg-blue-light-400 dark:hover:bg-blue-dark-500 text-white"
+    >{{ .text }}</a
+  >
+{{ else if (eq $type "button") }}
+  <button class="py-2 px-4 rounded bg-blue-light-500 dark:bg-blue-dark-400 hover:bg-blue-light-400 dark:hover:bg-blue-dark-500 text-white">
+    {{ .text }}
+  </button>
+{{ end }}
+</div>

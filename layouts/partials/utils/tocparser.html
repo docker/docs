@@ -1,0 +1,39 @@
+{{ $ctx := . }}
+{{ $scratch := newScratch }}
+{{ $toc := site.Data.toc }}
+{{ range $root, $section := $toc }}
+  {{ if ne ($scratch.Get "match") true }}
+    {{ $scratch.Set "depth" 1 }}
+    {{ $scratch.SetInMap "sections" "1" $root }}
+    {{ template "tocWalk" (dict "scratch" $scratch "section" $section "ctx" $ctx) }}
+  {{ end }}
+{{ end }}
+
+{{ define "tocWalk" }}
+  {{ $ctx := .ctx }}
+  {{ $scratch := .scratch }}
+  {{ $scratch.Set "depth" (add ($scratch.Get "depth") 1) }}
+  {{ range .section }}
+    {{ if ne ($scratch.Get "match") true }}
+      {{ if .path }}
+        {{ $match := eq (urls.Parse .path).Path (urls.Parse $ctx.Permalink).Path }}
+        {{ if $match }}
+          {{ $scratch.Set "match" true }}
+          {{ $scratch.Set "maxdepth" ($scratch.Get "depth") }}
+        {{ end }}
+      {{ else }}
+        {{ $scratch.SetInMap "sections" (string ($scratch.Get "depth")) .sectiontitle }}
+        {{ template "tocWalk" (dict "scratch" $scratch "section" .section "ctx" $ctx) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $scratch.Set "depth" (sub ($scratch.Get "depth") 1) }}
+{{ end }}
+
+{{ range $depth, $e := ($scratch.Get "sections") }}
+  {{ if ge $depth ($scratch.Get "maxdepth") }}
+    {{ $scratch.DeleteInMap "sections" $depth }}
+  {{ end }}
+{{ end }}
+
+{{ return $scratch }}

@@ -1,12 +1,8 @@
 **/.DS_Store
 **/desktop.ini
-.bundle/**
-.jekyll-cache
-.jekyll-metadata
-_site/**
-.sass-cache/**
 .vscode
-CNAME
-_kbase/**
-/vendor
-/lint
+node_modules
+.hugo_build.lock
+resources
+public
+tmp

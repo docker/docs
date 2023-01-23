@@ -1,0 +1,30 @@
+{{- if (strings.HasPrefix .Destination "http") -}}
+  {{/* external link, add icon */}}
+  <a
+    class="link"
+    href="{{ .Destination | safeURL }}"
+    target="_blank"
+    rel="noopener"
+    >{{ .Text | safeHTML }}<span
+      class="ml-1 align-top text-[1em] material-symbols-rounded"
+      >open_in_new</span
+    ></a
+  >
+{{- else if (strings.HasPrefix .Destination "/") -}}
+  {{/* absolute link, use absURL */}}
+  <a class="link" href="{{ absURL .Destination }}">{{ .Text | safeHTML }}</a>
+{{- else -}}
+  {{/* check if the file links to index.md */}}
+  {{- if (strings.FindRE `([^_]|^)index.md` .Destination 1) -}}
+    <a
+      class="link"
+      href="{{ ref .Page (strings.Replace .Destination "index.md" "_index.md") }}"
+      >{{ .Text | safeHTML }}</a
+    >
+  {{- else -}}
+    {{/* relative link, use ref */}}
+    <a class="link" href="{{ ref .Page .Destination }}"
+      >{{ .Text | safeHTML }}</a
+    >
+  {{- end -}}
+{{- end -}}

@@ -1,0 +1,14 @@
+{{ with .GetTerms "topics" }}
+  <div>
+    <div class="text-lg mb-2">{{ T "topics" }}</div>
+    {{ range . }}
+      <div class="inline-flex items-center px-2">
+        <span
+          class="text-lg text-gray-light dark:text-gray-dark material-symbols-rounded"
+          >tag</span
+        >
+        <a class="hover:underline" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+      </div>
+    {{ end }}
+  </div>
+{{ end }}

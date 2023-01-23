@@ -1,0 +1,20 @@
+{{ $scratch := partialCached "utils/tocparser.html" . . }}
+{{ $ctx := . }}
+
+
+<nav class="p-5 space-x-2 text-sm flex items-center overflow-hidden">
+  <a class="link" href="{{ site.BaseURL }}"
+    ><span class="material-symbols-rounded">home</span></a
+  >
+  {{ with ($scratch.GetSortedMapValues "sections") }}
+    <span>/</span>
+    {{ range $i, $e := . }}
+      {{- if $i -}}
+        <span>/</span>
+      {{- end -}}
+      <span class="whitespace-nowrap">{{ . }}</span>
+    {{- end -}}
+  {{- end -}}
+  <span>/</span>
+  <span class="whitespace-nowrap">{{ partial "utils/title.html" . }}</span>
+</nav>

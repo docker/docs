@@ -1,0 +1,8 @@
+{{ if ne .Params.notoc true }}
+  {{ if gt (len .TableOfContents) 32 }}
+    <div>
+      <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
+      {{ .TableOfContents }}
+    </div>
+  {{ end }}
+{{ end }}

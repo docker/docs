@@ -1,0 +1,8 @@
+{{ $tw := resources.Get "css/tailwind.css" }}
+{{ $tw = $tw | resources.PostCSS }}
+{{ if eq hugo.Environment "development" }}
+  {{ $tw = $tw | resources.ExecuteAsTemplate (printf "tailwind.%v.css" now.UnixMilli) . }}
+{{ else }}
+  {{ $tw = $tw | minify | fingerprint | resources.PostProcess }}
+{{ end }}
+<link href="{{ $tw.Permalink }}" rel="stylesheet" />

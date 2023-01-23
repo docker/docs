@@ -1,0 +1,10 @@
+[build]
+publish = "public"
+
+[context.deploy-preview.environment]
+HUGO_VERSION = "0.110.0"
+HUGO_ENABLEGITINFO = "true"
+
+[context.deploy-preview]
+command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+

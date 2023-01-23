@@ -1,0 +1,29 @@
+## aside/toc strings:
+
+readingTime:
+  other: "{{ . }} minute read"
+editPage:
+  other: Edit this page
+requestChanges:
+  other: Request changes
+tableOfContents:
+  other: Table of contents
+relatedContent:
+  other: Related content
+
+## openapi strings:
+
+apiExampleResponse:
+  other: Example response
+apiExampleResponseCode:
+  other: Example for response code
+apiPropParam:
+  other: Parameter
+apiPropType:
+  other: Type
+apiPropValue:
+  other: Value
+apiPropReq:
+  other: Required
+apiPropDesc:
+  other: Description

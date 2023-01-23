@@ -1,0 +1,16 @@
+<nav id="sectiontree" class="w-[300px] flex flex-col md:text-lg md:w-full">
+  {{ if .IsHome }}
+    {{ partial "sidebar-home.html" . }}
+  {{ else }}
+    <div class="pb-2">
+      <a
+        class="px-2 flex items-center gap-1 sidebar-hover"
+        href="{{ site.Home.Permalink }}"
+      >
+        <span class="text-lg material-symbols-rounded">arrow_back</span>
+        <span>All sections</span></a
+      >
+    </div>
+      {{ partial "sidebar-legacy.html" . }}
+  {{ end }}
+</nav>
