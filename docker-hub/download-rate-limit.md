@@ -4,7 +4,7 @@ keywords: Docker, pull requests, download, limit,
 title: Download rate limit
 ---
 
-## What is the download rate limit on Docker Hub
+## What's the download rate limit on Docker Hub
 
 Docker Hub limits the number of Docker image downloads ("pulls")
 based on the account type of the user pulling the image. Pull rates limits are based on individual IP address. For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. For [authenticated](#how-do-i-authenticate-pull-requests) users, it is  200 pulls per 6 hour period. Users with a paid [Docker subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} get up to 5000 pulls per day. If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
@@ -84,7 +84,7 @@ This means my limit is 100 pulls per 21600 seconds (6 hours), and I have 76 pull
 
 ### I don't see any RateLimit headers
 
-If you do not see these headers, that means pulling that image would not count towards pull limits. This could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization.
+Pulling that image won't count toward pull limits if you don't see these headers. However, paid users pulling more than 5000 times daily require a Service Account subscription.
 
 ## I'm being limited to a lower rate even though I have a paid Docker subscription
 
