@@ -1698,13 +1698,13 @@ manuals:
     - path: /compose/environment-variables/
       title: Overview
     - path: /compose/environment-variables/set-environment-variables/
-      title: Explore ways to use environment variables
+      title: Explore ways to set environment variables
     - path: /compose/environment-variables/envvars-precedence/
       title: Understand environment variables' precedence
     - path: /compose/environment-variables/env-file/
       title: Use an environment file
     - path: /compose/environment-variables/envvars/
-      title: Use Compose CLI environment variables
+      title: Change pre-defined environment variables
   - path: /compose/profiles/
     title: Using service profiles
   - path: /compose/gpu-support/

@@ -1,5 +1,5 @@
 ---
-title: Ways to use environment variables in Compose
+title: Ways to set environment variables in Compose
 description: How to set, use and manage environment variables in Compose
 keywords: compose, orchestration, environment, env file
 redirect_from:
@@ -7,7 +7,7 @@ redirect_from:
 - /compose/link-env-deprecated/
 ---
 
-Environment variables are dealt with by either the Compose file or the CLI, and both have multiple ways you can substitute in your environment variables. This is outlined below. 
+Environment variables are dealt with by either the Compose file or the CLI. Both have multiple ways you can substitute in or set, your environment variables. This is outlined below. 
 
 ## Compose file
 
@@ -15,7 +15,7 @@ Environment variables are dealt with by either the Compose file or the CLI, and 
 
 The `.env` file is useful if you have multiple environment variables you need to store.
 
-Below is an example: 
+Below is a simple example: 
 
 ```console
 $ cat .env
@@ -27,9 +27,9 @@ services:
     image: "webapp:${TAG}"
 ```
 
-When you run `docker compose up`, the `web` service defined above uses the
-image `webapp:v1.5`. You can verify this with the
-[convert command](../engine/reference/commandline/compose_convert.md), which prints your resolved application config to the terminal:
+When you run `docker compose up`, the `web` service defined in the Compose file substitues in the
+image `webapp:v1.5` which was set in the `.env` file. You can verify this with the
+[convert command](../../engine/reference/commandline/compose_convert.md), which prints your resolved application config to the terminal:
 
 ```console
 $ docker compose convert
@@ -39,42 +39,23 @@ services:
     image: 'webapp:v1.5'
 ```
 
-The `.env` file path is as follows:
+The `.env` file is placed at the base of the project directory where you intend to run the `docker compose` command. You can alternatively call upon the file by either using:
+- The [`--file` option in the CLI](/compose/reference.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
+- Setting the [`COMPOSE_FILE` environment variable](envvars.md)
+- Using the [`env_file` attribute in the Compose file](/compose/compose-file.md#env_file)
 
-  - The `.env` file is placed at the base of the project directory.
-  - The project directory can be explicitly defined with the `--file` option or `COMPOSE_FILE`
-  environment variable. Otherwise, it is the current working directory where the `docker compose` command is run.
-  - For versions older than `v1.28`, Compose might have trouble resolving `.env` file with `--file` or `COMPOSE_FILE`. To work around this, use `--project-directory`. This overrides the path for the `.env` file. This inconsistency is addressed in `v1.28` by limiting the file path to the project directory.
+For more information on formatting an environment file, see [Use an environment file](env-file.md).
 
 > **Important**
 >
 >The `.env` file feature only works when you use the `docker compose up` command and does not work with `docker stack deploy`.
 {: .important}
 
-### Substitute from the shell 
-
-It's possible to use environment variables in your shell to populate values
-inside a Compose file. Compose uses the variable values from the shell environment in which `docker compose` is run.
-
-For example, suppose the shell contains `POSTGRES_VERSION=9.3` and you supply the following configuration:
-
-```yaml
-db:
-  image: "postgres:${POSTGRES_VERSION}"
-```
-
-When you run `docker compose up` with this configuration, Compose looks for the `POSTGRES_VERSION` environment variable in the shell and substitutes its value in. For this example, Compose resolves the image to `postgres:9.3` before running the configuration.
-
-If an environment variable is not set, Compose substitutes with an empty string. In the example above, if `POSTGRES_VERSION` is not set, the value for the image option is `postgres:.`
-
-> **Important**
->
-> Values set in the shell environment override those set in the `.env` file. For more information, see [Environment variable precedence](envvars-precedence.md).
 
 ### Use the `environment` attribute
 
 You can set environment variables in a service's containers with the
-[`environment` attribute](compose/compose-file.md#environment). It works in the same way as `docker run -e VARIABLE=VALUE ...`
+[`environment` attribute](compose/compose-file.md#environment) in your Compose file. It works in the same way as `docker run -e VARIABLE=VALUE ...`
 
 ```yaml
 web:
@@ -93,6 +74,8 @@ web:
 
 The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
 
+See [`environment` attribute](/compose/compose-file.md#environment) for more information.
+
 ### Use the `env_file` attribute
 
 You can pass multiple environment variables from an external file through to
@@ -106,15 +89,36 @@ web:
 
 > **Note**
 >
->Wit this option, environment variables declared in the file cannot be referenced in the Compose file or used to configure Compose.
+>With this option, environment variables declared in the file cannot then be referenced again separately in the Compose file or used to configure Compose.
+
+See [`env_file` attribute](/compose/compose-file.md#env_file) for more information.
+
+### Substitute from the shell 
+
+It's possible to use environment variables in your shell to populate values inside a Compose file. Compose uses the variable values from the shell environment in which `docker compose` is run.
+
+For example, suppose the shell contains `POSTGRES_VERSION=9.3` and you supply the following configuration:
+
+```yaml
+db:
+  image: "postgres:${POSTGRES_VERSION}"
+```
+
+When you run `docker compose up` with this configuration, Compose looks for the `POSTGRES_VERSION` environment variable in the shell and substitutes its value in. For this example, Compose resolves the image to `postgres:9.3` before running the configuration.
+
+If an environment variable is not set, Compose substitutes with an empty string. In the example above, if `POSTGRES_VERSION` is not set, the value for the image option is `postgres:.`
+
+> **Important**
+>
+> Values set in the shell environment override those set in the `.env` file, the `environment` attribute, and the `env_file` attribute. For more information, see [Environment variable precedence](envvars-precedence.md).
 
 ## CLI
 
 ### Substitute with `--env-file`
 
-You can set default values for multiple environment variables , in an [environment file](env-file.md) and then pass the file as an argument in the CLI.
+You can set default values for multiple environment variables, in an [environment file](env-file.md) and then pass the file as an argument in the CLI.
 
-The advantage of this method is that you can store the file anywhere and name it appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. This file path is relative to the current working directory where the Docker Compose command is executed.Passing the file path is done using the `--env-file` option:
+The advantage of this method is that you can store the file anywhere and name it appropriately, for example, `.env.ci`, `.env.dev`, `.env.prod`. This file path is relative to the current working directory where the Docker Compose command is executed. Passing the file path is done using the `--env-file` option:
 
 ```console
 $ docker compose --env-file ./config/.env.dev up
@@ -163,7 +167,7 @@ ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 
 > **Important**
 >
-> Values set in the shell environment override those set in the `.env` file. For more information, see [Environment variable precedence](envvars-precedence.md)
+> Values set in the shell environment override those set when using the `--env-file` argument in the CLI. For more information, see [Environment variable precedence](envvars-precedence.md)
 
 ### Set environment variables with 'docker compose run -e'
 
@@ -182,14 +186,3 @@ $ docker compose run -e DEBUG web python console.py
 
 The value of the `DEBUG` variable in the container is taken from the value for
 the same variable in the shell in which Compose is run.
-
-### Use pre-defined environment variables
-
-Several environment variables are available for you to configure the Docker
-Compose command-line behavior. They begin with `COMPOSE_` or `DOCKER_`, and are
-documented in [CLI Environment Variables](reference/envvars.md).
-
-## Reference information
-
-- [`env_file](../compose-file/index.md#env_file)
-- [`environment`](../compose-file/index.md#environment)
