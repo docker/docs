@@ -74,9 +74,9 @@ For more details, see
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/config/pruning/"><img src="/assets/images/engine-pruning.svg" alt="A pair of scissors" width="70px" height="70px"></a>
+          <a href="/config/pruning.md/"><img src="/assets/images/engine-pruning.svg" alt="A pair of scissors" width="70px" height="70px"></a>
         </div>
-        <h2><a href="/config/pruning/">Prune</a></h2>
+        <h2><a href="/config/pruning.md/">Prune</a></h2>
         <p>Tidy up unused resources.</p>
       </div>
     </div>
@@ -95,9 +95,9 @@ For more details, see
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/engine/security/rootless/"><img src="/assets/images/engine-rootless.svg" alt="Checkered shield" width="70px" height="70px"></a>
+          <a href="/engine/security/rootless.md/"><img src="/assets/images/engine-rootless.svg" alt="Checkered shield" width="70px" height="70px"></a>
         </div>
-        <h2><a href="/engine/security/rootless/">Rootless mode</a></h2>
+        <h2><a href="/engine/security/rootless.md/">Rootless mode</a></h2>
         <p>Run Docker without root privileges.</p>
       </div>
     </div>
