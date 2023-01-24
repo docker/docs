@@ -40,7 +40,7 @@ services:
 ```
 
 The `.env` file is placed at the base of the project directory where you intend to run the `docker compose` command. You can alternatively call upon the file by either using:
-- The [`--file` option in the CLI](/compose/reference.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
+- The [`--file` option in the CLI](../reference.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
 - Setting the [`COMPOSE_FILE` environment variable](envvars.md)
 - Using the [`env_file` attribute in the Compose file](../compose-file/index.md#env_file)
 
@@ -55,7 +55,7 @@ For more information on formatting an environment file, see [Use an environment 
 ### Use the `environment` attribute
 
 You can set environment variables in a service's containers with the
-[`environment` attribute](compose/compose-file/index.md#environment) in your Compose file. It works in the same way as `docker run -e VARIABLE=VALUE ...`
+[`environment` attribute](../compose-file/index.md#environment) in your Compose file. It works in the same way as `docker run -e VARIABLE=VALUE ...`
 
 ```yaml
 web:
