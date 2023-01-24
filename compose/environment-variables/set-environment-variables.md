@@ -74,12 +74,12 @@ web:
 
 The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
 
-See [`environment` attribute](/compose/compose-file.md#environment) for more information.
+See [`environment` attribute](../compose-file.md#environment) for more information.
 
 ### Use the `env_file` attribute
 
 You can pass multiple environment variables from an external file through to
-a service's containers with the [`env_file` option](compose/compose-file.md#env_file). This works in the same way as `docker run --env-file=FILE ...`:
+a service's containers with the [`env_file` option](../compose-file.md#env_file). This works in the same way as `docker run --env-file=FILE ...`:
 
 ```yaml
 web:
@@ -91,7 +91,7 @@ web:
 >
 >With this option, environment variables declared in the file cannot then be referenced again separately in the Compose file or used to configure Compose.
 
-See [`env_file` attribute](/compose/compose-file.md#env_file) for more information.
+See [`env_file` attribute](../compose-file.md#env_file) for more information.
 
 ### Substitute from the shell 
 

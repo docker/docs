@@ -10,4 +10,4 @@ This section covers:
 - The various ways you can [set environment variables in Compose](set-environment-variables.md).
 - [How environment variable precedence works](envvars-precedence.md).
 - The correct syntax for an [environment file](env-file.md).
-- Changing pre-defined [environment variables](envvars.mds).
+- Changing pre-defined [environment variables](envvars.md).
