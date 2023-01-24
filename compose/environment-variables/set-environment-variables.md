@@ -40,7 +40,7 @@ services:
 ```
 
 The `.env` file is placed at the base of the project directory where you intend to run the `docker compose` command. You can alternatively call upon the file by either using:
-- The [`--file` option in the CLI](../reference.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
+- The [`--file` option in the CLI](../reference/index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
 - Setting the [`COMPOSE_FILE` environment variable](envvars.md)
 - Using the [`env_file` attribute in the Compose file](../compose-file/index.md#env_file)
 
