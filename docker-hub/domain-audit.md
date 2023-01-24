@@ -8,13 +8,13 @@ title: Domain audit
 >
 > Domain audit is currently in [Early Access](../release-lifecycle.md/#early-access-ea).
 
-Domain audit identifies uncaptured users. Uncaptured users are Docker users that have authenticated to Docker using an email address associated with one of your verified domains, but they're not a member of your organization in Docker. You can audit domains on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade.md).
+Domain audit identifies uncaptured users. Uncaptured users are Docker users who have authenticated to Docker using an email address associated with one of your verified domains, but they're not a member of your organization in Docker. You can audit domains on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade.md).
 
-Uncaptured users who access Docker Desktop in your environment may pose a security threat because your organization's security settings, like Image Access Management and Registry Access Management, aren't applied to a user's session. In addition, you won't have visibility into the activity of uncaptured users. You can add uncaptured users to your organization to gain visibility into their activity and apply your organization's security settings.
+Uncaptured users who access Docker Desktop in your environment may pose a security risk because your organization's security settings, like Image Access Management and Registry Access Management, aren't applied to a user's session. In addition, you won't have visibility into the activity of uncaptured users. You can add uncaptured users to your organization to gain visibility into their activity and apply your organization's security settings.
 
 Domain audit can't identify the following Docker users in your environment:
-   * Users that access Docker Desktop without authenticating
-   * Users that authenticate using an account that doesn't have an email address associated with one of your verified domains
+   * Users who access Docker Desktop without authenticating
+   * Users who authenticate using an account that doesn't have an email address associated with one of your verified domains
 
 Although domain audit can't identify all Docker users in your environment, you can enforce sign-in to prevent unidentifiable users from accessing Docker Desktop in your environment. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md).
 
@@ -27,7 +27,7 @@ Before you audit your domains, the following prerequisites are required:
 
 To audit your domains:
 
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an administrator of your organization.
+1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} as an owner of your organization.
 
 2. Select **Organizations** and then select your organization.
 
