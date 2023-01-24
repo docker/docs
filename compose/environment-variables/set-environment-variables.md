@@ -42,7 +42,7 @@ services:
 The `.env` file is placed at the base of the project directory where you intend to run the `docker compose` command. You can alternatively call upon the file by either using:
 - The [`--file` option in the CLI](/compose/reference.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
 - Setting the [`COMPOSE_FILE` environment variable](envvars.md)
-- Using the [`env_file` attribute in the Compose file](/compose/compose-file.md#env_file)
+- Using the [`env_file` attribute in the Compose file](../compose-file/index.md#env_file)
 
 For more information on formatting an environment file, see [Use an environment file](env-file.md).
 
@@ -55,7 +55,7 @@ For more information on formatting an environment file, see [Use an environment 
 ### Use the `environment` attribute
 
 You can set environment variables in a service's containers with the
-[`environment` attribute](compose/compose-file.md#environment) in your Compose file. It works in the same way as `docker run -e VARIABLE=VALUE ...`
+[`environment` attribute](compose/compose-file/index.md#environment) in your Compose file. It works in the same way as `docker run -e VARIABLE=VALUE ...`
 
 ```yaml
 web:
@@ -74,12 +74,12 @@ web:
 
 The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
 
-See [`environment` attribute](../compose-file.md#environment) for more information.
+See [`environment` attribute](../compose-file/index.md#environment) for more information.
 
 ### Use the `env_file` attribute
 
 You can pass multiple environment variables from an external file through to
-a service's containers with the [`env_file` option](../compose-file.md#env_file). This works in the same way as `docker run --env-file=FILE ...`:
+a service's containers with the [`env_file` option](../compose-file/index.md#env_file). This works in the same way as `docker run --env-file=FILE ...`:
 
 ```yaml
 web:
@@ -91,7 +91,7 @@ web:
 >
 >With this option, environment variables declared in the file cannot then be referenced again separately in the Compose file or used to configure Compose.
 
-See [`env_file` attribute](../compose-file.md#env_file) for more information.
+See [`env_file` attribute](../compose-file/index.md#env_file) for more information.
 
 ### Substitute from the shell 
 
