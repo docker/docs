@@ -1169,6 +1169,8 @@ manuals:
               path: /desktop/extensions-sdk/extensions/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
+            - title: Validate
+              path: /desktop/extensions-sdk/extensions/validate/
             - title: Package and release your extension
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Generate a share link
