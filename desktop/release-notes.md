@@ -66,12 +66,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 > Download Docker Desktop
 >
-> [Windows](https://desktop.docker.com/win/main/amd64/95567/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95567/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95567/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.2-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.2-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.2-x86_64.pkg.tar.zst)
+> [Windows](https://desktop.docker.com/win/main/amd64/95914/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95914/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95914/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.pkg.tar.zst)
 
 <div class="panel-group" id="accordion12" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
