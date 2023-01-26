@@ -41,7 +41,7 @@ services:
 
 The `.env` file is placed at the base of the project directory where you intend to run the `docker compose` command. You can alternatively call upon the file by either using:
 - The [`--file` option in the CLI](../reference/index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
-- Setting the [`COMPOSE_FILE` environment variable](envvars.md)
+- The [`- -env-file` option in the CLI](#substitute-with---env-file)
 - Using the [`env_file` attribute in the Compose file](../compose-file/index.md#env_file)
 
 For more information on formatting an environment file, see [Use an environment file](env-file.md).
@@ -169,7 +169,7 @@ ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 >
 > Values set in the shell environment override those set when using the `--env-file` argument in the CLI. For more information, see [Environment variable precedence](envvars-precedence.md)
 
-### Set environment variables with 'docker compose run -e'
+### Set environment variables with `docker compose run -e`
 
 Similar to `docker run -e`, you can set environment variables in a one-off
 container with `docker compose run -e`:

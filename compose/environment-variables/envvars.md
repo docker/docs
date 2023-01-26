@@ -17,6 +17,7 @@ This page contains information on how you can change the following pre-defined e
 - `DOCKER_CERT_PATH`
 - `DOCKER_HOST`
 - `DOCKER_TLS_VERIFY`
+- `COMPOSE\_PARALLEL\_LIMIT`
 
 ## Methods
 
@@ -114,18 +115,21 @@ When enabled, Compose doesn't try to detect orphaned containers for the project.
     * `false` or `0`, to disable.
 * Defaults to: `0`.
 
+### COMPOSE\_PARRALLEL\_LIMIT
+
+Specifies the maximum level of parallelism for concurrent engine calls.
+
 ## Deprecated in Compose v2
 
 The pre-definded environment variables listed below are deprecated in [V2](../compose-v2/index.md).  
 
-- COMPOSE\_API\_VERSION
+- `COMPOSE\_API\_VERSION`
     By default the API version is negotiated with the server. Use `DOCKER_API_VERSION`.  
     See `DOCKER_API_VERSION` on the [Use the Docker command line](../../../engine/reference/commandline/cli/#environment-variables){:target="_blank" rel="noopener" class="_"} page.
-- COMPOSE\_HTTP\_TIMEOUT
-- COMPOSE\_TLS\_VERSION
-- COMPOSE\_FORCE\_WINDOWS\_HOST
-- COMPOSE\_PARALLEL\_LIMIT
-- COMPOSE\_INTERACTIVE\_NO\_CLI
+- `COMPOSE\_HTTP\_TIMEOUT`
+- `COMPOSE\_TLS\_VERSION`
+- `COMPOSE\_FORCE\_WINDOWS\_HOST`
+- `COMPOSE\_INTERACTIVE\_NO\_CLI`
     V2 now uses the vendored code of [Docker CLI](https://github.com/docker/cli){:target="_blank" rel="noopener" class="_"}.
-- COMPOSE\_DOCKER\_CLI\_BUILDx
+- `COMPOSE\_DOCKER\_CLI\_BUILDx`
     Use `DOCKER_BUILDKIT` to select between BuildKit and the classic builder. If `DOCKER_BUILDKIT=0` then `docker build` uses the classic builder to build images.

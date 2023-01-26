@@ -6,7 +6,7 @@ redirect_from:
 - /compose/envvars-precedence/
 ---
 
-When you set the same environment variable in multiple files, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question.
+When you set the same environment variable in multiple sources, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question.
 
 This page contains information on the level of precedence each method of setting environmental variables takes.
 
