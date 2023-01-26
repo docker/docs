@@ -43,6 +43,7 @@ Python
 QEMU
 RHEL
 Raspbian
+Ryuk
 S3
 SBOMs?
 SLES
@@ -55,6 +56,7 @@ Solr
 SonarQube
 Syft
 TLS
+Testcontainers
 Twilio
 Ubuntu
 WSL
