@@ -57,7 +57,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Windows
 
-
+- Fixed Docker Desktop failing to start the WSL 2 backend when file system compression or encryption is enabled on `%LOCALAPPDATA%`. Fixes [docker/for-win#13184](https://github.com/docker/for-win/issues/13184).
+- Fixed Docker Desktop failing to report a missing or outdated WSL installation when starting. Fixes [docker/for-win#13184](https://github.com/docker/for-win/issues/13184).
 
 ## 4.16.2
 
