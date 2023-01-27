@@ -269,6 +269,33 @@ correctly. Look for the `Mounts` section:
 ],
 ```
 
+Alternatively, if you have [`jq`](https://stedolan.github.io/jq/download/) installed, you can use the following command to display the mount information in a more readable format, and help you find the Mounts block faster (note that the `jq` command is not part of the Docker CLI, it is a separate tool):
+
+```console
+$ docker inspect devtest | jq '.[0].Mounts'
+```
+
+The output should look similar to the following:
+
+```json
+[
+  {
+    "Type": "bind",
+    "Source": "/tmp/source/target",
+    "Destination": "/app",
+    "Mode": "ro",
+    "RW": false,
+    "Propagation": "rprivate"
+  }
+]
+```
+
+If the previous instructions failed to mount the directory, the output of the previous command will be empty:
+
+```json
+[]
+```
+
 Stop the container:
 
 ```console
