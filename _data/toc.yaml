@@ -1805,7 +1805,7 @@ manuals:
   - sectiontitle: Set up your company
     section:
     - path: /docker-hub/creating-companies/
-      title: Manage a company
+      title: Overview
     - path:  /docker-hub/company-owner/
       title: Company owners
     - path:  /docker-hub/domains/

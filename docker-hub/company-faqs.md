@@ -43,7 +43,7 @@ Domain verification, Single Sign-on, and System for Cross-domain Identity Manage
 
 ### What's required to create a company name?
 
-A company name must be unique to that of it's child organization. If a child organization requires the same name as a company, we suggest modifying slightly. For example, **Docker Inc** (parent company), **Docker** (child organization).
+A company name must be unique to that of its child organization. If a child organization requires the same name as a company, we suggest modifying slightly. For example, **Docker Inc** (parent company), **Docker** (child organization).
 
 ### How does a company owner add an organization to the company?
 
@@ -51,7 +51,7 @@ Contact your designated CSM team member or Docker Support with a list of the Doc
 
 ### How does a company owner manage SSO/SCIM settings from my new parent company?
 
-See Manage your [SCIM](../docker-hub/company-scim.md) and [SSO](../docker-hub/creating-companies.md#single-sign-on-connection) settings. 
+See Manage your [SCIM](../docker-hub/company-scim.md) and [SSO](../docker-hub/sso-connection.md) settings.
 
 ### How does a company owner enable group mapping in my IdP?
 

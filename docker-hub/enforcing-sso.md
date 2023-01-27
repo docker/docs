@@ -13,6 +13,6 @@ You must test your SSO connection first if you’d like to enforce SSO log-in. A
 
     > **Note**
     >
-    > When you enforce SSO,  all members of your organization with a matching domain must authenticate through your IdP. 
+    > When you enforce SSO, all members of your organization with a matching domain must authenticate through your IdP. 
 2. Continue with the on-screen instructions and verify that you’ve completed the tasks. 
 3. Select **Turn on enforcement** to complete. 

@@ -1,7 +1,7 @@
 ---
 description: manage companies
 keywords: company, multiple organizations, manage companies
-title: Manage a company
+title: Overview
 ---
 
 > **Note**
@@ -25,7 +25,6 @@ The company owner can:
 - Enforce SSO log-in for all users in the company.
 - Verify a domain separately from the organization namespace.
 - Add and remove up to 10 company owners.
-- Company owners don't occupy a seat.
 
 A company owner role is only available if your organization has a Docker Business subscription. If you don't have a Docker Business subscription, you must first [upgrade your subscription](../subscription/upgrade.md).
 
