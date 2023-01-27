@@ -11,7 +11,7 @@ When you set the same environment variable in multiple sources, there’s a prec
 This page contains information on the level of precedence each method of setting environmental variables takes.
 
 The order of precedence (highest to lowest) is as follows:
-1. Set using [`docker compose run -e` in the CLI](set-environment-variables.md#set-environment-variables-with-docker-compose-run--e)
+1. Set using [`docker compose run -e` in the CLI](set-environment-variables.md#set-environment-variables-with-docker-compose-run---env)
 2. Substituted from your [shell](set-environment-variables.md#substitute-from-the-shell)
 3. Set using the [`environment` attribute in the Compose file](set-environment-variables.md#use-the-environment-attribute)
 4. Use of the [`--env-file` argument](set-environment-variables.md#substitute-with---env-file) in the CLI
