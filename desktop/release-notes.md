@@ -24,77 +24,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
-## 4.16.3
-
-{% include release-date.html date="2023-01-27" %}
-
-> Download Docker Desktop
->
-> <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingOne">
-        <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Windows
-            <i class="fa fa-chevron-down"></i>
-          </a>
-        </h5>
-      </div>
-      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-        <div class="panel-body">
-          <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Download file</a> 
-        <br>
-        <br>
-        <b>Checksum: 99f6600e7a05c7e56490600497b64a5039eb15f3413c1cf7b3a89bdfc4d947b8</b> 
-        </div>
-      </div>
-    </div>
-    </div>
->
-> For the latest release of Docker Desktop for Mac and Linux, see [4.16.2](#4162)
-
-### Bug fixes and enhancements
-
-#### For Windows
-
-- Fixed Docker Desktop failing to start the WSL 2 backend when file system compression or encryption is enabled on `%LOCALAPPDATA%`. Fixes [docker/for-win#13184](https://github.com/docker/for-win/issues/13184).
-- Fixed Docker Desktop failing to report a missing or outdated WSL installation when starting. Fixes [docker/for-win#13184](https://github.com/docker/for-win/issues/13184).
-
 ## 4.16.2
 
 {% include release-date.html date="2023-01-19" %}
 
 > Download Docker Desktop
 >
-> [Windows](https://desktop.docker.com/win/main/amd64/95914/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95914/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95914/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion12" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading12">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion12" href="#collapse12" aria-expanded="true" aria-controls="collapse12">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 20e4ba05b573610506b57a7f216115458019d2c002f18ef6d50a2419b7db545b</li>
-      <li><b>Mac Intel:</b> SHA-256 22eecb8ea07f10892d81cde07d614fb8b342163106133a75c4280a8e28787643</li>
-      <li><b>Mac Arm:</b> SHA-256 838eabe6cc42fe7e4be2cdb4d73924c61fc7982366dac2a9467793845851cb2e</li>
-      <li><b>Linux DEB:</b> SHA-256 fa3023eb16c24dcbdc5f12021340e874d8399863e96c1a58091c9a41fd50fe58</li>
-      <li><b>Linux RPM:</b> SHA-256 7f54f29a971b9ba456e7aef777d747867d7e4eccb7a2b47aa9092c99a990f8d5</li>
-      <li><b>Linux Arch:</b> SHA-256 05e94709974e711bf81aa16845ebba976f8236a371432594c87a68ecf9a21d0f</li>
-      </div>
-    </div>
-  </div>
-</div>
+> {% include desktop-install.html %}
 
 ### Bug fixes and enhancements
 
@@ -120,9 +56,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [Windows](https://desktop.docker.com/win/main/amd64/95567/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95567/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95567/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.1-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.1-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.1-x86_64.pkg.tar.zst)
+> [Debian](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.0-x86_64.pkg.tar.zst)
 
 <div class="panel-group" id="accordion12" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
