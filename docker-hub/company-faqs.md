@@ -4,27 +4,27 @@ keywords: Docker, Docker Hub, SSO FAQs, single sign-on
 title: Frequently asked questions
 ---
 
-### Q: As a Docker Business customer, what steps should I follow to create a company?
+### As a Docker Business customer, what steps should I follow to create a company?
 
 Contact your designated CSM team member or Docker Support.
 
-### Q: Are existing subscriptions affected when a company is created and organizations are added to the company?
+### Are existing subscriptions affected when a company is created and organizations are added to the company?
 
 Subscriptions and related billing details will continue to be managed at the organization level at this time.
 
-### Q: Some of my organizations don’t have a Docker Business subscription. Can I still use a parent company?
+### Some of my organizations don’t have a Docker Business subscription. Can I still use a parent company?
 
 Yes, but only organizations with a Docker Business subscription are placed under a company.
 
-### Q: What happens if one of my organizations downgrades from Docker Business, but I still need access as a company owner?
+### What happens if one of my organizations downgrades from Docker Business, but I still need access as a company owner?
 
 To access and manage child organizations, the organization must have a Docker Business subscription. If the organization isn't a part of this subscription, the owner of the organization must manage the org from the company. 
 
-### Q: Does my organization need to prepare for downtime during the migration process?
+### Does my organization need to prepare for downtime during the migration process?
 
 No, you can continue with business as usual.
 
-### Q: How many company owners can I add?
+### How many company owners can I add?
 
 A maximum of 10 company owners can be added to a single company account.
 
