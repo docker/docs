@@ -5,7 +5,7 @@ long: |-
     Bake is a high-level build command. Each specified target will run in parallel
     as part of the build.
 
-    Read [High-level build options with Bake](/build/customize/bake/)
+    Read [High-level build options with Bake](/build/bake/)
     guide for introduction to writing bake files.
 
     > **Note**
@@ -85,6 +85,7 @@ options:
     - option: provenance
       value_type: string
       description: Shorthand for `--set=*.attest=type=provenance`
+      details_url: '#provenance'
       deprecated: false
       hidden: false
       experimental: false
@@ -115,6 +116,7 @@ options:
     - option: sbom
       value_type: string
       description: Shorthand for `--set=*.attest=type=sbom`
+      details_url: '#sbom'
       deprecated: false
       hidden: false
       experimental: false
@@ -184,7 +186,7 @@ examples: |-
     $ docker buildx bake -f docker-bake.dev.hcl db webapp-release
     ```
 
-    See our [file definition](/build/customize/bake/file-definition/)
+    See our [file definition](/build/bake/file-definition/)
     guide for more details.
 
     ### Do not use cache when building the image (--no-cache) {#no-cache}
@@ -222,9 +224,17 @@ examples: |-
 
     Same as [`build --progress`](buildx_build.md#progress).
 
+    ### Create provenance attestations (--provenance) {#provenance}
+
+    Same as [`build --provenance`](buildx_build.md#provenance).
+
     ### Always attempt to pull a newer version of the image (--pull) {#pull}
 
     Same as `build --pull`.
+
+    ### Create SBOM attestations (--sbom) {#sbom}
+
+    Same as [`build --sbom`](buildx_build.md#sbom).
 
     ### Override target configurations from command line (--set) {#set}
 

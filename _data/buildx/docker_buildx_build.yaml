@@ -39,6 +39,7 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: 'Attestation parameters (format: `type=sbom,generator=image`)'
+      details_url: '#attest'
       deprecated: false
       hidden: false
       experimental: false
@@ -337,6 +338,7 @@ options:
     - option: provenance
       value_type: string
       description: Shortand for `--attest=type=provenance`
+      details_url: '#provenance'
       deprecated: false
       hidden: false
       experimental: false
@@ -388,6 +390,7 @@ options:
     - option: sbom
       value_type: string
       description: Shorthand for `--attest=type=sbom`
+      details_url: '#sbom'
       deprecated: false
       hidden: false
       experimental: false
@@ -494,6 +497,30 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
+    ### Create attestations (--attest) {#attest}
+
+    ```
+    --attest=type=sbom,...
+    --attest=type=provenance,...
+    ```
+
+    Create [image attestations](/build/attestations/).
+    BuildKit currently supports:
+
+    - `sbom` - Software Bill of Materials.
+
+      Use `--attest=type=sbom` to generate an SBOM for an image at build-time.
+      Alternatively, you can use the [`--sbom` shorthand](#sbom).
+
+      For more information, see [here](/build/attestations/sbom/).
+
+    - `provenance` - SLSA Provenance
+
+      Use `--attest=type=provenance` to generate provenance for an image at
+      build-time. Alternatively, you can use the [`--provenance` shorthand](#provenance).
+
+      For more information, see [here](/build/attestations/slsa-provenance/).
+
     ### Allow extra privileged entitlement (--allow) {#allow}
 
     ```
@@ -879,10 +906,20 @@ examples: |-
     > Check also our [Color output controls guide](https://github.com/docker/buildx/blob/master/docs/guides/color-output.md)
     > for modifying the colors that are used to output information to the terminal.
 
+    ### Create provenance attestations (--provenance) {#provenance}
+
+    Shorthand for [`--attest=type=provenance`](#attest). Enables provenance
+    attestations for the build result.
+
     ### Push the build result to a registry (--push) {#push}
 
     Shorthand for [`--output=type=registry`](#registry). Will automatically push the
     build result to registry.
+
+    ### Create SBOM attestations (--sbom) {#sbom}
+
+    Shorthand for [`--attest=type=sbom`](#attest). Enables SBOM attestations for
+    the build result.
 
     ### Secret to expose to the build (--secret) {#secret}
 

@@ -1813,12 +1813,33 @@ manuals:
       title: Business
     - path: /docker-hub/onboarding-faqs/
       title: FAQs
+  - sectiontitle: Set up your company
+    section:
+    - path: /docker-hub/creating-companies/
+      title: Overview
+    - path:  /docker-hub/company-owner/
+      title: Company owners
+    - path:  /docker-hub/domains/
+      title: Domains
+    - path:  /docker-hub/sso-connection/
+      title: SSO connection
+    - path:  /docker-hub/group-mapping/
+      title: Group mapping
+    - path:  /docker-hub/company-scim/
+      title: SCIM
+    - path:  /docker-hub/enforcing-sso/
+      title: Enforce SSO Login
+    - path: /docker-hub/company-faqs/
+      title: FAQs
   - path: /docker-hub/orgs/
-    title: Teams and organizations
+    title: Create your organization
+  - path: /docker-hub/manage-a-team/
+    title: Manage a team
   - path: /docker-hub/members/
     title: Manage members
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign-in
+
   - sectiontitle: Single Sign-on
     section:
       -  path: /single-sign-on/
