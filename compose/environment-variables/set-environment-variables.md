@@ -39,7 +39,7 @@ services:
     image: 'webapp:v1.5'
 ```
 
-The `.env` file is placed at the base of the project directory where you intend to run the `docker compose` command. You can alternatively call upon the file by either using:
+The `.env` file should be placed at the root of the project directory next to your `docker-compose.yml` file. You can use an alternative path with one of the following methods:
 - The [`--file` option in the CLI](../reference/index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
 - The [`- -env-file` option in the CLI](#substitute-with---env-file)
 - Using the [`env_file` attribute in the Compose file](../compose-file/index.md#env_file)
@@ -48,8 +48,9 @@ For more information on formatting an environment file, see [Use an environment 
 
 > **Important**
 >
->The `.env` file feature only works when you use the `docker compose up` command and does not work with `docker stack deploy`.
-{: .important}
+> Substitution from `.env` files is a Docker Compose CLI feature.
+>
+> It is not supported by Swarm when running `docker stack deploy`.
 
 
 ### Use the `environment` attribute
@@ -86,6 +87,8 @@ web:
   env_file:
     - web-variables.env
 ```
+
+If multiple files are specified, they are evaluated in order and can override values set in previous files.
 
 > **Note**
 >
@@ -152,7 +155,7 @@ services:
 Passing the `--env-file` argument overrides the default file path:
 
 ```console
-$ docker compose --env-file ./config/.env.dev config
+$ docker compose --env-file ./config/.env.dev convert
 services:
   web:
     image: 'webapp:v1.6'
@@ -161,7 +164,7 @@ services:
 When an invalid file path is being passed as an `--env-file` argument, Compose returns an error:
 
 ```console
-$ docker compose --env-file ./doesnotexist/.env.dev  config
+$ docker compose --env-file ./doesnotexist/.env.dev  convert
 ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 ```
 
@@ -169,10 +172,10 @@ ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 >
 > Values set in the shell environment override those set when using the `--env-file` argument in the CLI. For more information, see [Environment variable precedence](envvars-precedence.md)
 
-### Set environment variables with `docker compose run -e`
+### Set environment variables with `docker compose run --env`
 
-Similar to `docker run -e`, you can set environment variables in a one-off
-container with `docker compose run -e`:
+Similar to `docker run --env`, you can set environment variables in a one-off
+container with `docker compose run --env` or its short form `docker compose run -e`:
 
 ```console
 $ docker compose run -e DEBUG=1 web python console.py

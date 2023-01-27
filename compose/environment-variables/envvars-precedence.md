@@ -10,7 +10,7 @@ When you set the same environment variable in multiple sources, there’s a prec
 
 This page contains information on the level of precedence each method of setting environmental variables takes.
 
-The order of precedence is as follows:
+The order of precedence (highest to lowest) is as follows:
 1. Set using [`docker compose run -e` in the CLI](set-environment-variables.md#set-environment-variables-with-docker-compose-run--e)
 2. Substituted from your [shell](set-environment-variables.md#substitute-from-the-shell)
 3. Set using the [`environment` attribute in the Compose file](set-environment-variables.md#use-the-environment-attribute)
@@ -47,11 +47,11 @@ $ docker compose exec api node
 'production'
 ```
 
-> Specifics for NodeJS containers
+> Hard coding variables in container scripts
 >
-> If you have a `package.json` entry for `script:start` like
-> `NODE_ENV=test node server.js`, then this overrules any setting in your
-> `docker-compose.yml` file.
+> Executing a command within the container that unconditionally sets a variable value overrules any setting in your `docker-compose.yml` file.
+>
+> For example, in a NodeJS project, if you have a `package.json` entry for `scripts.start`, such as `NODE_ENV=test` `node server.js`, any value set for `NODE_ENV` in your Compose file, is ignored when running `npm run start` within the container.
 
 
 ## Advanced example 
@@ -67,7 +67,7 @@ The columns `Host OS environment` and `.env file` is listed only as an illustrat
 Each row represents a combination of contexts where `TAG` is set, substituted, or both.
 
 
-|  # |  `docker compose run -e`  |  `environment` attribute  |  `env_file` attribute  |  Image `ENV` |  `Host OS` environment  |  `.env` file      | |  Result  |
+|  # |  `docker compose run --env`  |  `environment` attribute  |  `env_file` attribute  |  Image `ENV` |  `Host OS` environment  |  `.env` file      | |  Result  |
 |:--:|:-------------:|:----------------------------------:|:-------------------------------:|:------------:|:-----------------------:|:-----------------:|:---:|:-------------:|
 |  1 |   -           |   -                                |   -                             |   -          |  `TAG=1.4`              |  `TAG=1.3`        || - |
 |  2 |   -           |   -                                |   -                             |`TAG=1.5` |  `TAG=1.4`                  |  `TAG=1.3`        ||**`TAG=1.5`**  |

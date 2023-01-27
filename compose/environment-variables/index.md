@@ -4,7 +4,7 @@ description: Explainer on the ways to set, use and manage environment variables 
 keywords: compose, orchestration, environment, env file
 ---
 
-Environment variables can help you define various configuration values. They also keep your app secure, flexible and organized. 
+Environment variables can help you define various configuration values. They also keep your app flexible and organized. 
 
 This section covers:
 - The various ways you can [set environment variables in Compose](set-environment-variables.md).

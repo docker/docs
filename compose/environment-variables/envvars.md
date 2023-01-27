@@ -1,5 +1,5 @@
 ---
-description: Compose CLI environment variables
+description: Compose pre-defined environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Change pre-defined environment variables
 redirect_from:
@@ -15,11 +15,14 @@ This page contains information on how you can change the following pre-defined e
 - `COMPOSE_PROFILES`
 - `COMPOSE_PROJECT_NAME`
 - `DOCKER_CERT_PATH`
-- `DOCKER_HOST`
-- `DOCKER_TLS_VERIFY`
-- `COMPOSE\_PARALLEL\_LIMIT`
+- `COMPOSE_PARALLEL_LIMIT`
+- `COMPOSE_IGNORE_ORPHANS`
+- `COMPOSE_REMOVE_ORPHANS`
+- `COMPOSE_PATH_SEPARATOR`
 
-## Methods
+Compose also inherits common Docker CLI environment variables, such as `DOCKER_HOST` and `DOCKER_CONTEXT`. See [Docker CLI environment variable reference](/engine/reference/commandline/cli/#environment-variables) for details.
+
+## Methods to override 
 
 You can change the pre-defined environment variables:
 - Within your Compose file using the [`environment` attribute](set-environment-variables.md#use-the-environment-attribute)
@@ -73,22 +76,6 @@ This example enables all services matching both the `frontend` and `debug` profi
 
 See also [Using profiles with Compose](../profiles.md) and the [`--profile` command-line option](../reference/index.md#use---profile-to-specify-one-or-more-active-profiles).
 
-### DOCKER\_HOST
-
-Sets the URL of the Docker daemon. 
-Defaults to `unix:///var/run/docker.sock`(same as with the Docker client).
-
-### DOCKER\_TLS\_VERIFY
-
-See `DOCKER_TLS_VERIFY` on the [Use the Docker command line](../../../engine/reference/commandline/cli/#environment-variables){:target="_blank" rel="noopener" class="_"} page.
-
-### DOCKER\_CERT\_PATH
-
-Configures the path to the `ca.pem`, `cert.pem`, and `key.pem` files used for TLS verification.  
-Defaults to `~/.docker`.
-
-See, `DOCKER_CERT_PATH` on the [Use the Docker command line](../../../engine/reference/commandline/cli/#environment-variables){:target="_blank" rel="noopener" class="_"} page.
-
 ### COMPOSE\_CONVERT\_WINDOWS\_PATHS
 
 When enabled, Compose performs path conversion from Windows-style to Unix-style in volume definitions.
@@ -103,7 +90,7 @@ When enabled, Compose performs path conversion from Windows-style to Unix-style 
 Specifies a different path separator for items listed in `COMPOSE_FILE`.
 
 * Defaults to:
-    * On Mac and Linux to `:`,
+    * On MacOS and Linux to `:`,
     * On Windows to`;`.
 
 ### COMPOSE\_IGNORE\_ORPHANS
@@ -115,7 +102,7 @@ When enabled, Compose doesn't try to detect orphaned containers for the project.
     * `false` or `0`, to disable.
 * Defaults to: `0`.
 
-### COMPOSE\_PARRALLEL\_LIMIT
+### COMPOSE\_PARALLEL\_LIMIT
 
 Specifies the maximum level of parallelism for concurrent engine calls.
 
@@ -123,13 +110,12 @@ Specifies the maximum level of parallelism for concurrent engine calls.
 
 The pre-definded environment variables listed below are deprecated in [V2](../compose-v2/index.md).  
 
-- `COMPOSE\_API\_VERSION`
+- `COMPOSE_API_VERSION`
     By default the API version is negotiated with the server. Use `DOCKER_API_VERSION`.  
-    See `DOCKER_API_VERSION` on the [Use the Docker command line](../../../engine/reference/commandline/cli/#environment-variables){:target="_blank" rel="noopener" class="_"} page.
-- `COMPOSE\_HTTP\_TIMEOUT`
-- `COMPOSE\_TLS\_VERSION`
-- `COMPOSE\_FORCE\_WINDOWS\_HOST`
-- `COMPOSE\_INTERACTIVE\_NO\_CLI`
-    V2 now uses the vendored code of [Docker CLI](https://github.com/docker/cli){:target="_blank" rel="noopener" class="_"}.
-- `COMPOSE\_DOCKER\_CLI\_BUILDx`
-    Use `DOCKER_BUILDKIT` to select between BuildKit and the classic builder. If `DOCKER_BUILDKIT=0` then `docker build` uses the classic builder to build images.
+    See the [Docker CLI environment variable reference](../../../engine/reference/commandline/cli/#environment-variables){:target="_blank" rel="noopener" class="_"} page.
+- `COMPOSE_HTTP_TIMEOUT`
+- `COMPOSE_TLS_VERSION`
+- `COMPOSE_FORCE_WINDOWS_HOST`
+- `COMPOSE_INTERACTIVE_NO_CLI`
+- `COMPOSE_DOCKER_CLI_BUILD`
+    Use `DOCKER_BUILDKIT` to select between BuildKit and the classic builder. If `DOCKER_BUILDKIT=0` then `docker compose build` uses the classic builder to build images.
