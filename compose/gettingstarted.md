@@ -228,7 +228,7 @@ services:
     volumes:
       - .:/code
     environment:
-      FLASK_DEBUG: True
+      FLASK_DEBUG: "true"
   redis:
     image: "redis:alpine"
 ```
