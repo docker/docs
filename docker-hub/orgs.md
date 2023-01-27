@@ -1,7 +1,7 @@
 ---
 description: Docker Hub Teams & Organizations
 keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker Hub, docs, documentation
-title: Teams and Organizations
+title: Create your organization
 redirect_from:
 - /docker-cloud/orgs/
 ---
@@ -113,7 +113,6 @@ configure your organization.
 [Docker subscription (plan)](../subscription/index.md) and your billing history.
 You can also access your invoices from this tab.
 
-
 ## Create a team
 
 A **Team** is a group of Docker users that belong to an organization. An
@@ -184,3 +183,4 @@ and Organizations in Docker Hub.
 - [Create an organization](https://www.youtube-nocookie.com/embed/b0TKcIqa9Po){: target="_blank" rel="noopener" class="_"}
 - [Working with Teams](https://www.youtube-nocookie.com/embed/MROKmtmWCVI){: target="_blank" rel="noopener" class="_"}
 - [Create Teams](https://www.youtube-nocookie.com/embed/78wbbBoasIc){: target="_blank" rel="noopener" class="_"}
+
