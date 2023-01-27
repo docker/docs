@@ -1,6 +1,6 @@
 ---
 title: FAQs and known issues
-description: FAQ for Enhanced Container Isolation 
+description: FAQ for Enhanced Container Isolation
 keywords: enhanced container isolation, security, faq, sysbox, known issues, Docker Desktop
 toc_max: 2
 ---
@@ -88,12 +88,56 @@ See [How does it work](how-eci-works.md#enhanced-container-isolation-vs-rootless
 </div>
 <div id="tab4" class="tab-pane fade" markdown="1">
 
-#### Incompatibility with Windows Subsystem for Linux (WSL)
-Enhanced Container Isolation (ECI) does not currently work when Docker Desktop runs on
-Windows with WSL/WSL2. This is due to some limitations of the WSL/WSL2 Linux
-Kernel. As a result, to use Enhanced Container Isolation on Windows, you must
-configure Docker Desktop to use Hyper-V. This can be enforced using Admin
-Controls. For more information, see [Settings Management](../settings-management/index.md).
+#### Is ECI supported on WSL?
+
+Prior to Docker Desktop 4.20, using Enhanced Container Isolation (ECI) on
+Windows hosts was only supported when Docker Desktop was configured to use
+Hyper-V to create the Docker Desktop Linux VM. ECI was not supported when Docker
+Desktop was configured to use Windows Subsystem for Linux (WSL).
+
+Starting with Docker Desktop 4.20, ECI is supported when Docker Desktop is
+configured to use either Hyper-V or WSL version 2 (aka WSL 2).
+
+>**Note**
+>
+> Docker Desktop requires WSL 2 version 1.1.3.0 or later. To get the current
+> version of WSL on your host, type `wsl --version`. If the command fails or if
+> it returns a version number prior to 1.1.3.0, update WSL to the latest version
+> by typing `wsl --update` in a Windows command or PowerShell terminal.
+
+However, ECI on WSL is not as secure as on Hyper-V because of several reasons:
+
+* While ECI on WSL still hardens containers so that malicious workloads can't
+  easily breach Docker Desktop's Linux VM, ECI on WSL can't prevent Docker
+  Desktop users from breaching the Docker Desktop Linux VM. Such users can
+  trivially access that VM (as root) with the `wsl -d docker-desktop` command,
+  and use that access to modify Docker Engine settings inside the VM. This gives
+  Docker Desktop users control of the Docker Desktop VM and allows them to
+  bypass Docker Desktop admin configs set by admins via the
+  [settings-management](../settings-management/index.md) feature. In contrast,
+  ECI on Hyper-V does not allow Docker Desktop users to breach the Docker
+  Desktop Linux VM.
+
+* With WSL 2, all WSL 2 distros on the same Windows host share the same instance
+  of the Linux kernel, by design. As a result, Docker Desktop can't ensure the
+  integrity of the kernel in the Docker Desktop Linux VM since another WSL 2
+  distro could modify shared kernel settings. In contrast, when using Hyper-V,
+  the Docker Desktop Linux VM has a dedicated kernel that is solely under the
+  control of Docker Desktop.
+
+The table below summarizes this.
+
+| Security Feature                                   | ECI on WSL   | ECI on Hyper-V   | Comment               |
+| -------------------------------------------------- | ------------ | ---------------- | --------------------- |
+| Strongly secure containers                         | Yes          | Yes              | Makes it harder for malicious container workloads to breach the Docker Desktop Linux VM and host. |
+| Docker Desktop Linux VM protected from user access | No           | Yes              | On WSL, users can access Docker Engine directly or bypass Docker Desktop security settings. |
+| Docker Desktop Linux VM has a dedicated kernel     | No           | Yes              | On WSL, Docker Desktop can't guarantee the integrity of kernel level configs. |
+
+In general, using ECI with Hyper-V is more secure than with WSL 2. But WSL 2
+offers advantages for performance and resource utilization on the host machine,
+and it's an excellent way for users to run their favorite Linux distro on
+Windows hosts and access Docker from within (see Docker Desktop's WSL distro
+integration feature, enabled via the Dashboard's **Settings** > **Resources** > **WSL Integration**).
 
 #### Docker build and buildx has some restrictions
 With ECI enabled, Docker build `--network=host` and Docker buildx entitlements
