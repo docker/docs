@@ -3,6 +3,7 @@ description: Set up a dev Environments
 keywords: Dev Environments, share, set up, Compose, Docker Desktop
 title: Set up a dev environment
 ---
+{% include dev-envs-changing.md %}
 
 >**Changes to Dev Environments with Docker Desktop 4.13**
 >
@@ -10,7 +11,7 @@ title: Set up a dev environment
 >
 > If you are using `.docker/docker-compose.yaml`, we move it to `../compose-dev.yaml`.
 >If you are using `.docker/config.json`, we create a `../compose-dev.yaml` file with a single service named "app”. It is configured to use the image or Dockerfile referenced in the JSON as a starting point.
-{: .important}
+
 To set up a dev environment, there are additional configuration steps to tell Docker Desktop how to build, start, and use the right image for your services.
 
 Dev Environments use an `compose-dev.yaml` file located at the root of your project. This file allows you to define the image required for a dedicated service, the ports you'd like to expose, along with additional configuration options.

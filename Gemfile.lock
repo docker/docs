@@ -16,7 +16,7 @@ GEM
     ffi (1.15.5)
     forwardable-extended (2.6.0)
     front_matter_parser (1.0.1)
-    git (1.12.0)
+    git (1.13.0)
       addressable (~> 2.8)
       rchardet (~> 1.8)
     html-proofer (3.19.4)
@@ -88,7 +88,7 @@ GEM
     parallel (1.22.1)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
-    public_suffix (5.0.0)
+    public_suffix (5.0.1)
     racc (1.6.1)
     rainbow (3.1.1)
     rake (13.0.6)
@@ -116,7 +116,7 @@ PLATFORMS
 
 DEPENDENCIES
   front_matter_parser (= 1.0.1)
-  git (= 1.12.0)
+  git (= 1.13.0)
   html-proofer (= 3.19.4)
   jekyll (= 4.2.2)
   jekyll-redirect-from

@@ -264,7 +264,7 @@ $ docker run \
 
 Let's test that the application works and is connecting to the database. Using a web browser, access `http://localhost:5000`. A page similar to the following image appears.
 
-![image of app page](./images/dotnet-verify-db.png)
+![Image of app page](./images/dotnet-verify-db.png)
 
 
 ## Connect Adminer and populate the database
@@ -284,7 +284,7 @@ Using a web browser, access `http://localhost:8080`.
 
 The Adminer login page appears.
 
-![image of app page](./images/dotnet-adminer-login.png)
+![Image of app page](./images/dotnet-adminer-login.png)
 
 
 Specify the following in the login page and then click **Login**:
@@ -296,21 +296,21 @@ Specify the following in the login page and then click **Login**:
 
 The `Schema: public` page appears.
 
-![image of app page](./images/dotnet-adminer-db.png)
+![Image of app page](./images/dotnet-adminer-db.png)
 
 In `Tables and views`, click `Students`. The `Table: Students` page appears.
 
-![image of app page](./images/dotnet-adminer-table.png)
+![Image of app page](./images/dotnet-adminer-table.png)
 
 Click `New item`. The `Insert: Students` page appears.
 
-![image of app page](./images/dotnet-adminer-add.png)
+![Image of app page](./images/dotnet-adminer-add.png)
 
 Specify a `LastName`, `FirstMidName`, and `EnrollmentDate`. Click `Save`.
 
 Verify that the student name appears in the application. Use a web browser to access `http://localhost:5000`.
 
-![image of app page](./images/dotnet-app-verify-db-add.png)
+![Image of app page](./images/dotnet-app-verify-db-add.png)
 
 List and then stop the application, database, and Adminer containers.
 
@@ -451,9 +451,9 @@ Now let’s test our application. Using a web browser, access `http://localhost:
 
 ## Next steps
 
-In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
+In the next module, we’ll take a look at how to write containerized tests in Docker. See:
 
-[Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
+[Run your tests](run-tests.md){: .button .primary-btn}
 
 ## Feedback
 

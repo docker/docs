@@ -88,7 +88,6 @@ examples: |-
     * `.Name`: provides the reference of the image
     * `.Manifest`: provides the manifest or manifest list
     * `.Image`: provides the image config
-    * `.BuildInfo`: provides [build info from image config](https://github.com/moby/buildkit/blob/master/docs/build-repro.md#image-config)
 
     #### `.Name`
 
@@ -138,39 +137,6 @@ examples: |-
       Platform:  linux/riscv64
     ```
 
-    #### `.BuildInfo`
-
-    ```console
-    $ docker buildx imagetools inspect crazymax/buildx:buildinfo --format "{{.BuildInfo}}"
-    Name: docker.io/crazymax/buildx:buildinfo
-    Frontend: dockerfile.v0
-    Attrs:
-      filename:      Dockerfile
-      source:        docker/dockerfile-upstream:master-labs
-      build-arg:bar: foo
-      build-arg:foo: bar
-    Sources:
-      Type: docker-image
-      Ref:  docker.io/docker/buildx-bin:0.6.1@sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0
-      Pin:  sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0
-
-      Type: docker-image
-      Ref:  docker.io/library/alpine:3.13
-      Pin:  sha256:026f721af4cf2843e07bba648e158fb35ecc876d822130633cc49f707f0fc88c
-
-      Type: docker-image
-      Ref:  docker.io/moby/buildkit:v0.9.0
-      Pin:  sha256:8dc668e7f66db1c044aadbed306020743516a94848793e0f81f94a087ee78cab
-
-      Type: docker-image
-      Ref:  docker.io/tonistiigi/xx@sha256:21a61be4744f6531cb5f33b0e6f40ede41fa3a1b8c82d5946178f80cc84bfc04
-      Pin:  sha256:21a61be4744f6531cb5f33b0e6f40ede41fa3a1b8c82d5946178f80cc84bfc04
-
-      Type: http
-      Ref:  https://raw.githubusercontent.com/moby/moby/master/README.md
-      Pin:  sha256:419455202b0ef97e480d7f8199b26a721a417818bc0e2d106975f74323f25e6c
-    ```
-
     #### JSON output
 
     A `json` go template func is also available if you want to render fields as
@@ -182,7 +148,7 @@ examples: |-
     ```json
     {
       "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-      "digest": "sha256:08602e7340970e92bde5e0a2e887c1fde4d9ae753d1e05efb4c8ef3b609f97f1",
+      "digest": "sha256:a9ca35b798e0b198f9be7f3b8b53982e9a6cf96814cb10d78083f40ad8c127f1",
       "size": 949
     }
     ```
@@ -193,23 +159,23 @@ examples: |-
     ```json
     {
       "schemaVersion": 2,
-      "mediaType": "application/vnd.docker.distribution.manifest.list.v2+json",
-      "digest": "sha256:79d97f205e2799d99a3a8ae2a1ef17acb331e11784262c3faada847dc6972c52",
-      "size": 2010,
+      "mediaType": "application/vnd.oci.image.index.v1+json",
+      "digest": "sha256:d895e8fdcf5e2bb39acb5966f97fc4cd87a2d13d27c939c320025eb4aca5440c",
+      "size": 4654,
       "manifests": [
         {
-          "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:bd1e78f06de26610fadf4eb9d04b1a45a545799d6342701726e952cc0c11c912",
-          "size": 1158,
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:ac9dd4fbec9e36b562f910618975a2936533f8e411a3fea2858aacc0ac972e1c",
+          "size": 1054,
           "platform": {
             "architecture": "amd64",
             "os": "linux"
           }
         },
         {
-          "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:d37dcced63ec0965824fca644f0ac9efad8569434ec15b4c83adfcb3dcfc743b",
-          "size": 1158,
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:0f4dc6797db467372cbf52c7236816203654a839f64a6542c9135d1973c9d744",
+          "size": 1054,
           "platform": {
             "architecture": "arm",
             "os": "linux",
@@ -217,260 +183,356 @@ examples: |-
           }
         },
         {
-          "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:ce142eb2255e6af46f2809e159fd03081697c7605a3de03b9cbe9a52ddb244bf",
-          "size": 1158,
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:d62bb533d95afe17c4a9caf1e7c57a3b0a7a67409ccfa7af947aeb0f670ffb87",
+          "size": 1054,
           "platform": {
             "architecture": "arm64",
             "os": "linux"
           }
         },
         {
-          "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:f59bfb5062fff76ce464bfa4e25ebaaaac887d6818238e119d68613c456d360c",
-          "size": 1158,
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:b4944057e0c68203cdcc3dceff3b2df3c7d9e3dd801724fa977b01081da7771e",
+          "size": 1054,
           "platform": {
             "architecture": "s390x",
             "os": "linux"
           }
         },
         {
-          "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:cc96426e0c50a78105d5637d31356db5dd6ec594f21b24276e534a32da09645c",
-          "size": 1159,
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:825702a51eb4234904fc9253d8b0bf0a584787ffd8fc3fd6fa374188233ce399",
+          "size": 1054,
           "platform": {
             "architecture": "ppc64le",
             "os": "linux"
           }
         },
         {
-          "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:39f9c1e2878e6c333acb23187d6b205ce82ed934c60da326cb2c698192631478",
-          "size": 1158,
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:dfb27c6acc9b9f3a7c9d47366d137089565062f43c8063c9f5e408d34c87ee4a",
+          "size": 1054,
           "platform": {
             "architecture": "riscv64",
             "os": "linux"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:f2fe69bccc878e658caf21dfc99eaf726fb20d28f17398c1d66a90e62cc019f9",
+          "size": 1113,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:ac9dd4fbec9e36b562f910618975a2936533f8e411a3fea2858aacc0ac972e1c",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:9e112f8d4e383186f36369fba7b454e246d2e9ca5def797f1b84ede265e9f3ca",
+          "size": 1113,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:0f4dc6797db467372cbf52c7236816203654a839f64a6542c9135d1973c9d744",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:09d593587f8665269ec6753eaed7fbdb09968f71587dd53e06519502cbc16775",
+          "size": 1113,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:d62bb533d95afe17c4a9caf1e7c57a3b0a7a67409ccfa7af947aeb0f670ffb87",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:985a3f4544dfb042db6a8703f5f76438667dd7958aba14cb04bebe3b4cbd9307",
+          "size": 1113,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:b4944057e0c68203cdcc3dceff3b2df3c7d9e3dd801724fa977b01081da7771e",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:cfccb6afeede7dc29bf8abef4815d56f2723fa482ea63c9cd519cd991c379294",
+          "size": 1113,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:825702a51eb4234904fc9253d8b0bf0a584787ffd8fc3fd6fa374188233ce399",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:2e93733432c6a14cb57db33928b3a17d7ca298b3babe24d9f56dca2754dbde3b",
+          "size": 1113,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:dfb27c6acc9b9f3a7c9d47366d137089565062f43c8063c9f5e408d34c87ee4a",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
           }
         }
       ]
     }
     ```
 
+    Following command provides [SLSA](https://github.com/moby/buildkit/blob/master/docs/attestations/slsa-provenance.md) JSON output:
+
     ```console
-    $ docker buildx imagetools inspect crazymax/buildx:buildinfo --format "{{json .BuildInfo}}"
+    $ docker buildx imagetools inspect crazymax/buildkit:attest --format "{{json .Provenance}}"
     ```
     ```json
     {
-      "frontend": "dockerfile.v0",
-      "attrs": {
-        "build-arg:bar": "foo",
-        "build-arg:foo": "bar",
-        "filename": "Dockerfile",
-        "source": "crazymax/dockerfile:buildattrs"
-      },
-      "sources": [
-        {
-          "type": "docker-image",
-          "ref": "docker.io/docker/buildx-bin:0.6.1@sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0",
-          "pin": "sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0"
+      "SLSA": {
+        "builder": {
+          "id": ""
         },
-        {
-          "type": "docker-image",
-          "ref": "docker.io/library/alpine:3.13@sha256:026f721af4cf2843e07bba648e158fb35ecc876d822130633cc49f707f0fc88c",
-          "pin": "sha256:026f721af4cf2843e07bba648e158fb35ecc876d822130633cc49f707f0fc88c"
+        "buildType": "https://mobyproject.org/buildkit@v1",
+        "materials": [
+          {
+            "uri": "pkg:docker/docker/buildkit-syft-scanner@stable-1",
+            "digest": {
+              "sha256": "b45f1d207e16c3a3a5a10b254ad8ad358d01f7ea090d382b95c6b2ee2b3ef765"
+            }
+          },
+          {
+            "uri": "pkg:docker/alpine@latest?platform=linux%2Famd64",
+            "digest": {
+              "sha256": "8914eb54f968791faf6a8638949e480fef81e697984fba772b3976835194c6d4"
+            }
+          }
+        ],
+        "invocation": {
+          "configSource": {},
+          "parameters": {
+            "frontend": "dockerfile.v0",
+            "locals": [
+              {
+                "name": "context"
+              },
+              {
+                "name": "dockerfile"
+              }
+            ]
+          },
+          "environment": {
+            "platform": "linux/amd64"
+          }
         },
-        {
-          "type": "docker-image",
-          "ref": "docker.io/moby/buildkit:v0.9.0@sha256:8dc668e7f66db1c044aadbed306020743516a94848793e0f81f94a087ee78cab",
-          "pin": "sha256:8dc668e7f66db1c044aadbed306020743516a94848793e0f81f94a087ee78cab"
-        },
-        {
-          "type": "docker-image",
-          "ref": "docker.io/tonistiigi/xx@sha256:21a61be4744f6531cb5f33b0e6f40ede41fa3a1b8c82d5946178f80cc84bfc04",
-          "pin": "sha256:21a61be4744f6531cb5f33b0e6f40ede41fa3a1b8c82d5946178f80cc84bfc04"
-        },
-        {
-          "type": "http",
-          "ref": "https://raw.githubusercontent.com/moby/moby/master/README.md",
-          "pin": "sha256:419455202b0ef97e480d7f8199b26a721a417818bc0e2d106975f74323f25e6c"
+        "metadata": {
+          "buildInvocationID": "02tdha2xkbxvin87mz9drhag4",
+          "buildStartedOn": "2022-12-01T11:50:07.264704131Z",
+          "buildFinishedOn": "2022-12-01T11:50:08.243788739Z",
+          "reproducible": false,
+          "completeness": {
+            "parameters": true,
+            "environment": true,
+            "materials": false
+          },
+          "https://mobyproject.org/buildkit@v1#metadata": {}
         }
-      ]
+      }
+    }
+    ```
+
+    Following command provides [SBOM](https://github.com/moby/buildkit/blob/master/docs/attestations/sbom.md) JSON output:
+
+    ```console
+    $ docker buildx imagetools inspect crazymax/buildkit:attest --format "{{json .SBOM}}"
+    ```
+    ```json
+    {
+      "SPDX": {
+        "SPDXID": "SPDXRef-DOCUMENT",
+        "creationInfo": {
+          "created": "2022-12-01T11:46:48.063400162Z",
+          "creators": [
+            "Tool: syft-v0.60.3",
+            "Tool: buildkit-1ace2bb",
+            "Organization: Anchore, Inc"
+          ],
+          "licenseListVersion": "3.18"
+        },
+        "dataLicense": "CC0-1.0",
+        "documentNamespace": "https://anchore.com/syft/dir/run/src/core-0a4ccc6d-1a72-4c3a-a40e-3df1a2ffca94",
+        "files": [...],
+        "spdxVersion": "SPDX-2.2"
+      }
     }
     ```
 
     ```console
-    $ docker buildx imagetools inspect crazymax/buildx:buildinfo --format "{{json .}}"
+    $ docker buildx imagetools inspect crazymax/buildkit:attest --format "{{json .}}"
     ```
     ```json
     {
-      "name": "crazymax/buildx:buildinfo",
+      "name": "crazymax/buildkit:attest",
       "manifest": {
-        "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-        "digest": "sha256:899d2c7acbc124d406820857bb51d9089717bbe4e22b97eb4bc5789e99f09f83",
-        "size": 2628
+        "schemaVersion": 2,
+        "mediaType": "application/vnd.oci.image.index.v1+json",
+        "digest": "sha256:7007b387ccd52bd42a050f2e8020e56e64622c9269bf7bbe257b326fe99daf19",
+        "size": 855,
+        "manifests": [
+          {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:fbd10fe50b4b174bb9ea273e2eb9827fa8bf5c88edd8635a93dc83e0d1aecb55",
+            "size": 673,
+            "platform": {
+              "architecture": "amd64",
+              "os": "linux"
+            }
+          },
+          {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:a9de632c16998489fd63fbca42a03431df00639cfb2ecb8982bf9984b83c5b2b",
+            "size": 839,
+            "annotations": {
+              "vnd.docker.reference.digest": "sha256:fbd10fe50b4b174bb9ea273e2eb9827fa8bf5c88edd8635a93dc83e0d1aecb55",
+              "vnd.docker.reference.type": "attestation-manifest"
+            },
+            "platform": {
+              "architecture": "unknown",
+              "os": "unknown"
+            }
+          }
+        ]
       },
       "image": {
-        "created": "2022-02-24T12:27:43.627154558Z",
+        "created": "2022-12-01T11:46:47.713777178Z",
         "architecture": "amd64",
         "os": "linux",
         "config": {
           "Env": [
-            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-            "DOCKER_TLS_CERTDIR=/certs",
-            "DOCKER_CLI_EXPERIMENTAL=enabled"
-          ],
-          "Entrypoint": [
-            "docker-entrypoint.sh"
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
           ],
           "Cmd": [
-            "sh"
+            "/bin/sh"
           ]
         },
         "rootfs": {
           "type": "layers",
           "diff_ids": [
-            "sha256:7fcb75871b2101082203959c83514ac8a9f4ecfee77a0fe9aa73bbe56afdf1b4",
-            "sha256:d3c0b963ff5684160641f936d6a4aa14efc8ff27b6edac255c07f2d03ff92e82",
-            "sha256:3f8d78f13fa9b1f35d3bc3f1351d03a027c38018c37baca73f93eecdea17f244",
-            "sha256:8e6eb1137b182ae0c3f5d40ca46341fda2eaeeeb5fa516a9a2bf96171238e2e0",
-            "sha256:fde4c869a56b54dd76d7352ddaa813fd96202bda30b9dceb2c2f2ad22fa2e6ce",
-            "sha256:52025823edb284321af7846419899234b3c66219bf06061692b709875ed0760f",
-            "sha256:50adb5982dbf6126c7cf279ac3181d1e39fc9116b610b947a3dadae6f7e7c5bc",
-            "sha256:9801c319e1c66c5d295e78b2d3e80547e73c7e3c63a4b71e97c8ca357224af24",
-            "sha256:dfbfac44d5d228c49b42194c8a2f470abd6916d072f612a6fb14318e94fde8ae",
-            "sha256:3dfb74e19dedf61568b917c19b0fd3ee4580870027ca0b6054baf239855d1322",
-            "sha256:b182e707c23e4f19be73f9022a99d2d1ca7bf1ca8f280d40e4d1c10a6f51550e"
+            "sha256:ded7a220bb058e28ee3254fbba04ca90b679070424424761a53a043b93b612bf",
+            "sha256:d85d09ab4b4e921666ccc2db8532e857bf3476b7588e52c9c17741d7af14204f"
           ]
         },
         "history": [
           {
-            "created": "2021-11-12T17:19:58.698676655Z",
-            "created_by": "/bin/sh -c #(nop) ADD file:5a707b9d6cb5fff532e4c2141bc35707593f21da5528c9e71ae2ddb6ba4a4eb6 in / "
+            "created": "2022-11-22T22:19:28.870801855Z",
+            "created_by": "/bin/sh -c #(nop) ADD file:587cae71969871d3c6456d844a8795df9b64b12c710c275295a1182b46f630e7 in / "
           },
           {
-            "created": "2021-11-12T17:19:58.948920855Z",
+            "created": "2022-11-22T22:19:29.008562326Z",
             "created_by": "/bin/sh -c #(nop)  CMD [\"/bin/sh\"]",
             "empty_layer": true
           },
           {
-            "created": "2022-02-24T12:27:38.285594601Z",
-            "created_by": "RUN /bin/sh -c apk --update --no-cache add     bash     ca-certificates     openssh-client   \u0026\u0026 rm -rf /tmp/* /var/cache/apk/* # buildkit",
+            "created": "2022-12-01T11:46:47.713777178Z",
+            "created_by": "RUN /bin/sh -c apk add curl # buildkit",
             "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:41.061874167Z",
-            "created_by": "COPY /opt/docker/ /usr/local/bin/ # buildkit",
-            "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:41.174098947Z",
-            "created_by": "COPY /usr/bin/buildctl /usr/local/bin/buildctl # buildkit",
-            "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:41.320343683Z",
-            "created_by": "COPY /usr/bin/buildkit* /usr/local/bin/ # buildkit",
-            "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:41.447149933Z",
-            "created_by": "COPY /buildx /usr/libexec/docker/cli-plugins/docker-buildx # buildkit",
-            "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:43.057722191Z",
-            "created_by": "COPY /opt/docker-compose /usr/libexec/docker/cli-plugins/docker-compose # buildkit",
-            "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:43.145224134Z",
-            "created_by": "ADD https://raw.githubusercontent.com/moby/moby/master/README.md / # buildkit",
-            "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:43.422212427Z",
-            "created_by": "ENV DOCKER_TLS_CERTDIR=/certs",
-            "comment": "buildkit.dockerfile.v0",
-            "empty_layer": true
-          },
-          {
-            "created": "2022-02-24T12:27:43.422212427Z",
-            "created_by": "ENV DOCKER_CLI_EXPERIMENTAL=enabled",
-            "comment": "buildkit.dockerfile.v0",
-            "empty_layer": true
-          },
-          {
-            "created": "2022-02-24T12:27:43.422212427Z",
-            "created_by": "RUN /bin/sh -c docker --version   \u0026\u0026 buildkitd --version   \u0026\u0026 buildctl --version   \u0026\u0026 docker buildx version   \u0026\u0026 docker compose version   \u0026\u0026 mkdir /certs /certs/client   \u0026\u0026 chmod 1777 /certs /certs/client # buildkit",
-            "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:43.514320155Z",
-            "created_by": "COPY rootfs/modprobe.sh /usr/local/bin/modprobe # buildkit",
-            "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:43.627154558Z",
-            "created_by": "COPY rootfs/docker-entrypoint.sh /usr/local/bin/ # buildkit",
-            "comment": "buildkit.dockerfile.v0"
-          },
-          {
-            "created": "2022-02-24T12:27:43.627154558Z",
-            "created_by": "ENTRYPOINT [\"docker-entrypoint.sh\"]",
-            "comment": "buildkit.dockerfile.v0",
-            "empty_layer": true
-          },
-          {
-            "created": "2022-02-24T12:27:43.627154558Z",
-            "created_by": "CMD [\"sh\"]",
-            "comment": "buildkit.dockerfile.v0",
-            "empty_layer": true
           }
         ]
       },
-      "buildinfo": {
-        "frontend": "dockerfile.v0",
-        "attrs": {
-          "build-arg:bar": "foo",
-          "build-arg:foo": "bar",
-          "filename": "Dockerfile",
-          "source": "docker/dockerfile-upstream:master-labs"
-        },
-        "sources": [
-          {
-            "type": "docker-image",
-            "ref": "docker.io/docker/buildx-bin:0.6.1@sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0",
-            "pin": "sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0"
+      "Provenance": {
+        "SLSA": {
+          "builder": {
+            "id": ""
           },
-          {
-            "type": "docker-image",
-            "ref": "docker.io/library/alpine:3.13",
-            "pin": "sha256:026f721af4cf2843e07bba648e158fb35ecc876d822130633cc49f707f0fc88c"
+          "buildType": "https://mobyproject.org/buildkit@v1",
+          "materials": [
+            {
+              "uri": "pkg:docker/docker/buildkit-syft-scanner@stable-1",
+              "digest": {
+                "sha256": "b45f1d207e16c3a3a5a10b254ad8ad358d01f7ea090d382b95c6b2ee2b3ef765"
+              }
+            },
+            {
+              "uri": "pkg:docker/alpine@latest?platform=linux%2Famd64",
+              "digest": {
+                "sha256": "8914eb54f968791faf6a8638949e480fef81e697984fba772b3976835194c6d4"
+              }
+            }
+          ],
+          "invocation": {
+            "configSource": {},
+            "parameters": {
+              "frontend": "dockerfile.v0",
+              "locals": [
+                {
+                  "name": "context"
+                },
+                {
+                  "name": "dockerfile"
+                }
+              ]
+            },
+            "environment": {
+              "platform": "linux/amd64"
+            }
           },
-          {
-            "type": "docker-image",
-            "ref": "docker.io/moby/buildkit:v0.9.0",
-            "pin": "sha256:8dc668e7f66db1c044aadbed306020743516a94848793e0f81f94a087ee78cab"
-          },
-          {
-            "type": "docker-image",
-            "ref": "docker.io/tonistiigi/xx@sha256:21a61be4744f6531cb5f33b0e6f40ede41fa3a1b8c82d5946178f80cc84bfc04",
-            "pin": "sha256:21a61be4744f6531cb5f33b0e6f40ede41fa3a1b8c82d5946178f80cc84bfc04"
-          },
-          {
-            "type": "http",
-            "ref": "https://raw.githubusercontent.com/moby/moby/master/README.md",
-            "pin": "sha256:419455202b0ef97e480d7f8199b26a721a417818bc0e2d106975f74323f25e6c"
+          "metadata": {
+            "buildInvocationID": "02tdha2xkbxvin87mz9drhag4",
+            "buildStartedOn": "2022-12-01T11:50:07.264704131Z",
+            "buildFinishedOn": "2022-12-01T11:50:08.243788739Z",
+            "reproducible": false,
+            "completeness": {
+              "parameters": true,
+              "environment": true,
+              "materials": false
+            },
+            "https://mobyproject.org/buildkit@v1#metadata": {}
           }
-        ]
+        }
+      },
+      "SBOM": {
+        "SPDX": {
+          "SPDXID": "SPDXRef-DOCUMENT",
+          "creationInfo": {
+            "created": "2022-12-01T11:46:48.063400162Z",
+            "creators": [
+              "Tool: syft-v0.60.3",
+              "Tool: buildkit-1ace2bb",
+              "Organization: Anchore, Inc"
+            ],
+            "licenseListVersion": "3.18"
+          },
+          "dataLicense": "CC0-1.0",
+          "documentNamespace": "https://anchore.com/syft/dir/run/src/core-0a4ccc6d-1a72-4c3a-a40e-3df1a2ffca94",
+          "files": [...],
+          "spdxVersion": "SPDX-2.2"
+        }
       }
     }
     ```
 
     #### Multi-platform
 
-    Multi-platform images are supported for `.Image` and `.BuildInfo` fields. If
-    you want to pick up a specific platform, you can specify it using the `index`
+    Multi-platform images are supported for `.Image`, `.SLSA` and `.SBOM` fields.
+    If you want to pick up a specific platform, you can specify it using the `index`
     go template function:
 
     ```console
@@ -478,7 +540,7 @@ examples: |-
     ```
     ```json
     {
-      "created": "2022-02-25T17:13:27.89891722Z",
+      "created": "2022-11-30T17:42:26.414957336Z",
       "architecture": "s390x",
       "os": "linux",
       "config": {
@@ -497,8 +559,8 @@ examples: |-
         "diff_ids": [
           "sha256:41048e32d0684349141cf05f629c5fc3c5915d1f3426b66dbb8953a540e01e1e",
           "sha256:2651209b9208fff6c053bc3c17353cb07874e50f1a9bc96d6afd03aef63de76a",
-          "sha256:6741ed7e73039d853fa8902246a4c7e8bf9dd09652fd1b08251bc5f9e8876a7f",
-          "sha256:92ac046adeeb65c86ae3f0b458dee04ad4a462e417661c04d77642c66494f69b"
+          "sha256:88577322e65f094ce8ac27435880f1a8a9baadb569258026bb141770451bafcb",
+          "sha256:de8f9a790e4ed10ff1f1f8ea923c9da4f97246a7e200add2dc6650eba3f10a20"
         ]
       },
       "history": [
@@ -517,23 +579,23 @@ examples: |-
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2022-02-24T00:34:00.924540012Z",
+          "created": "2022-08-25T00:39:25.652811078Z",
           "created_by": "COPY examples/buildctl-daemonless/buildctl-daemonless.sh /usr/bin/ # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2022-02-25T17:13:27.89891722Z",
+          "created": "2022-11-30T17:42:26.414957336Z",
           "created_by": "VOLUME [/var/lib/buildkit]",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
         },
         {
-          "created": "2022-02-25T17:13:27.89891722Z",
+          "created": "2022-11-30T17:42:26.414957336Z",
           "created_by": "COPY / /usr/bin/ # buildkit",
           "comment": "buildkit.dockerfile.v0"
         },
         {
-          "created": "2022-02-25T17:13:27.89891722Z",
+          "created": "2022-11-30T17:42:26.414957336Z",
           "created_by": "ENTRYPOINT [\"buildkitd\"]",
           "comment": "buildkit.dockerfile.v0",
           "empty_layer": true
@@ -557,24 +619,24 @@ examples: |-
       "schemaVersion": 2,
       "config": {
         "mediaType": "application/vnd.docker.container.image.v1+json",
-        "digest": "sha256:7ace7d324e79b360b2db8b820d83081863d96d22e734cdf297a8e7fd83f6ceb3",
-        "size": 2298
+        "digest": "sha256:a98999183d2c7a8845f6d56496e51099ce6e4359ee7255504174b05430c4b78b",
+        "size": 2762
       },
       "layers": [
         {
           "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
-          "digest": "sha256:5843afab387455b37944e709ee8c78d7520df80f8d01cf7f861aae63beeddb6b",
-          "size": 2811478
+          "digest": "sha256:8663204ce13b2961da55026a2034abb9e5afaaccf6a9cfb44ad71406dcd07c7b",
+          "size": 2818370
         },
         {
           "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
-          "digest": "sha256:726d3732a87e1c430d67e8969de6b222a889d45e045ebae1a008a37ba38f3b1f",
-          "size": 1776812
+          "digest": "sha256:f0868a92f8e1e5018ed4e60eb845ed4ff0e2229897f4105e5a4735c1d6fd874f",
+          "size": 1821402
         },
         {
           "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
-          "digest": "sha256:5d7cf9b33148a8f220c84f27dd2cfae46aca019a3ea3fbf7274f6d6dbfae8f3b",
-          "size": 382855
+          "digest": "sha256:d010066dbdfcf7c12fca30cd4b567aa7218eb6762ab53169d043655b7a8d7f2e",
+          "size": 404457
         }
       ]
     }
@@ -590,7 +652,7 @@ examples: |-
       "manifests": [
         {
           "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:667d28c9fb33820ce686887a717a148e89fa77f9097f9352996bbcce99d352b1",
+          "digest": "sha256:f9f41c85124686c2afe330a985066748a91d7a5d505777fe274df804ab5e077e",
           "size": 1158,
           "platform": {
             "architecture": "amd64",
@@ -599,7 +661,7 @@ examples: |-
         },
         {
           "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:71789527b64ab3d7b3de01d364b449cd7f7a3da758218fbf73b9c9aae05a6775",
+          "digest": "sha256:82097c2be19c617aafb3c3e43c88548738d4b2bf3db5c36666283a918b390266",
           "size": 1158,
           "platform": {
             "architecture": "arm",
@@ -609,7 +671,7 @@ examples: |-
         },
         {
           "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:fb64667e1ce6ab0d05478f3a8402af07b27737598dcf9a510fb1d792b13a66be",
+          "digest": "sha256:b6b91e6c823d7220ded7d3b688e571ba800b13d91bbc904c1d8053593e3ee42c",
           "size": 1158,
           "platform": {
             "architecture": "arm64",
@@ -618,7 +680,7 @@ examples: |-
         },
         {
           "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:1c3ddf95a0788e23f72f25800c05abc4458946685e2b66788c3d978cde6da92b",
+          "digest": "sha256:797061bcc16778de048b96f769c018ec24da221088050bbe926ea3b8d51d77e8",
           "size": 1158,
           "platform": {
             "architecture": "s390x",
@@ -627,7 +689,7 @@ examples: |-
         },
         {
           "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:05bcde6d460a284e5bc88026cd070277e8380355de3126cbc8fe8a452708c6b1",
+          "digest": "sha256:b93d3a84d18c4d0b8c279e77343d854d9b5177df7ea55cf468d461aa2523364e",
           "size": 1159,
           "platform": {
             "architecture": "ppc64le",
@@ -636,7 +698,7 @@ examples: |-
         },
         {
           "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-          "digest": "sha256:c04c57765304ab84f4f9807fff3e11605c3a60e16435c734b02c723680f6bd6e",
+          "digest": "sha256:d5c950dd1b270d437c838187112a0cb44c9258248d7a3a8bcb42fae8f717dc01",
           "size": 1158,
           "platform": {
             "architecture": "riscv64",

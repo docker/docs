@@ -6,14 +6,14 @@ title: Share Compose configurations between files and projects
 
 Compose supports two methods of sharing common configuration:
 
-1. Extending an entire Compose file by
+1. Extend an entire Compose file by
    [using multiple Compose files](extends.md#multiple-compose-files)
-2. Extending individual services with [the `extends` field](extends.md#extending-services) (for Compose file versions up to 2.1)
+2. Extend individual services with [the `extends` field](extends.md#extending-services)
 
 
 ## Multiple Compose files
 
-Using multiple Compose files enables you to customize a Compose application
+Using multiple Compose files lets you to customize a Compose application
 for different environments or different workflows.
 
 ### Understanding multiple Compose files
@@ -170,17 +170,6 @@ $ docker compose -f docker-compose.yml -f docker-compose.admin.yml \
 ```
 
 ## Extending services
-
-> **Note**
->
-> The `extends` keyword is supported in earlier Compose file formats up to Compose
-> file version 2.1 (see [extends in v2](compose-file/compose-file-v2.md#extends)), but is
-> not supported in Compose version 3.x. See the [Version 3 summary](compose-file/compose-versioning.md#version-3)
-> of keys added and removed, along with information on [how to upgrade](compose-file/compose-versioning.md#upgrading).
-> See [moby/moby#31101](https://github.com/moby/moby/issues/31101) to follow the
-> discussion thread on the possibility of adding support for `extends` in some form in
-> future versions. The `extends` keyword has been included in docker-compose versions 1.27
-> and higher.
 
 Docker Compose's `extends` keyword enables the sharing of common configurations
 among different files, or even different projects entirely. Extending services
@@ -454,11 +443,6 @@ services:
 ```
 
 
-## Compose documentation
+## Reference information
 
-- [User guide](index.md)
-- [Installing Compose](install/index.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
+[`extends`](compose-file/index.md#extends)

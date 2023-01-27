@@ -6,7 +6,9 @@ skip_read_time: true
 
 # Interface: RequestConfig
 
-**`since`** 0.2.0
+**`Since`**
+
+0.2.0
 
 ## Properties
 

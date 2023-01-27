@@ -1,6 +1,7 @@
 ARM
 AWS
 Amazon
+Anchore
 Apple
 Artifactory
 Azure( Blob Storage)?
@@ -43,7 +44,10 @@ QEMU
 RHEL
 Raspbian
 S3
+SBOMs?
 SLES
+SLSA
+SPDX
 SQLite
 Slack
 Snyk

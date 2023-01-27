@@ -126,7 +126,7 @@ Now that you have an image, you can run the application in a [container](../get-
 2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"}.
    You should see your app.
 
-   ![Empty Todo List](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
+   ![Empty todo list](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
    {: .text-center }
 
 3. Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove items. Your frontend is successfully storing items in the backend.

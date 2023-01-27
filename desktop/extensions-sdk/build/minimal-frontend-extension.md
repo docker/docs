@@ -1,5 +1,5 @@
 ---
-title: Set up a minimal frontend extension
+title: Create a simple extension
 description: Minimal frontend extension tutorial
 keywords: Docker, extensions, sdk, build
 redirect_from:
@@ -9,13 +9,11 @@ redirect_from:
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a minimal frontend extension based on plain HTML.
 
-> Note
->
-> Before you start, make sure you have installed the latest version of [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+Before you start, make sure you have installed the latest version of [Docker Desktop](../../release-notes.md).
 
 > Note
 >
-> If you want to start a codebase for your new extension, our [Quickstart guide](../quickstart.md) and `docker extension init <my-extension>` will provide a better base for your extension, more up-to-date and related to your install of Docker Desktop.
+> If you want to start a codebase for your new extension, our [Quickstart guide](../quickstart.md) and `docker extension init <my-extension>` provides a better base for your extension.
 
 ## Extension folder structure
 
@@ -40,7 +38,7 @@ Although you can start from an empty directory, it is highly recommended that yo
 
 At a minimum, your Dockerfile needs:
 
-- Labels which provide extra information about the extension.
+- [Labels](../extensions/labels.md) which provide extra information about the extension, icon and screenshots.
 - The source code which in this case is an `index.html` that sits within the `ui` folder.
 - The `metadata.json` file.
 
@@ -51,7 +49,7 @@ FROM scratch
 LABEL org.opencontainers.image.title="Minimal frontend" \
     org.opencontainers.image.description="A sample extension to show how easy it's to get started with Desktop Extensions." \
     org.opencontainers.image.vendor="Awesome Inc." \
-    com.docker.desktop.extension.api.version="1.0.0-beta.1" \
+    com.docker.desktop.extension.api.version="0.3.3" \
     com.docker.desktop.extension.icon="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
 
 COPY ui ./ui
@@ -85,8 +83,7 @@ install it.
 $ docker build --tag= awesome-inc/my-extension:latest .
 ```
 
-This built an image tagged `awesome-inc/my-extension:latest`, you can run `docker inspect
-awesome-inc/my-extension:latest` to see more details about it.
+This built an image tagged `awesome-inc/my-extension:latest`, you can run `docker inspect awesome-inc/my-extension:latest` to see more details about it.
 
 Finally, you can install the extension and see it appearing in the Docker Desktop Dashboard.
 
@@ -100,7 +97,7 @@ To preview the extension in Docker Desktop, close and open Docker Dashboard once
 
 The left-hand menu displays a new tab with the name of your extension.
 
-![minimal-frontend-extension](images/ui-minimal-extension.png)
+![Minimal frontend extension](images/ui-minimal-extension.png)
 
 ## What's next?
 

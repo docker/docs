@@ -26,7 +26,9 @@ After an extension is deployed, it is also possible to open Chrome DevTools from
 
 ### Hot reloading whilst developing the UI
 
-During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. To do this, you can configure Docker Desktop to load your UI from a development server, such as the one Create React App starts when invoked with yarn start.
+During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire
+extension. To do this, you can configure Docker Desktop to load your UI from a development server, such as the one
+[Vite](https://vitejs.dev/) starts when invoked with `npm start`.
 
 Assuming your app runs on the default port, start your UI app and then run:
 
@@ -35,12 +37,12 @@ $ cd ui
 $ npm run dev
 ```
 
-This starts a development server that listens on port 5173.
+This starts a development server that listens on port 3000.
 
 You can now tell Docker Desktop to use this as the frontend source. In another terminal run:
 
 ```console
-$ docker extension dev ui-source <name-of-your-extensions> http://localhost:5173
+$ docker extension dev ui-source <name-of-your-extensions> http://localhost:3000
 ```
 
 Close and reopen the Docker Desktop dashboard and go to your extension. All the changes to the frontend code are immediately visible.
@@ -55,7 +57,7 @@ $ docker extension dev reset <name-of-your-extensions>
 
 If your extension is composed of one or more services running as containers in the Docker Desktop VM, you can access them easily from the dashboard in Docker Desktop.
 
-1. In Docker Desktop, navigate to **Settings** or **Preferences** if you’re a Mac user.
+1. In Docker Desktop, navigate to **Settings**.
 2. Under the **Extensions** tab, select the **Show Docker Desktop Extensions system containers** option. You can now view your extension containers and their logs.
 
 

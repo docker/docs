@@ -11,10 +11,10 @@ redirect_from:
 
 This page provides information on how to configure and manage your Docker Desktop settings.
 
-To navigate to **Preferences** either:
+To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Preferences**
-- Select the **Preferences** icon from the Docker Dashboard.
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
+- Select the **Settings** icon from the Docker Dashboard.
 
 ## General
 
@@ -240,6 +240,10 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 #### Enable containerd
 
 Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
+
+#### Use Rosetta for x86/AMD64 emulation on Apple Silicon. 
+
+Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. 
 
 ### Experimental features
 

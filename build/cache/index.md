@@ -98,7 +98,7 @@ RUN npm build     # Run build
 ```
 
 This Dockerfile is rather inefficient. Updating any file causes a reinstall of
-all dependencies every time you build the Docker image &emdash; even if the
+all dependencies every time you build the Docker image even if the
 dependencies didn't change since last time!
 
 Instead, the `COPY` command can be split in two. First, copy over the package
@@ -264,7 +264,7 @@ RUN echo "the second command"
 ```
 
 It's possible to run both of these commands inside a single `RUN`, which means
-that they will share the same cache! This can is achievable using the `&&` shell
+that they will share the same cache! This is achievable using the `&&` shell
 operator to run one command after another:
 
 ```dockerfile

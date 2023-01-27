@@ -125,6 +125,8 @@ guides:
       path: /language/dotnet/run-containers/
     - title: "Develop your app"
       path: /language/dotnet/develop/
+    - title: "Run your tests"
+      path: /language/dotnet/run-tests/
     - title: "Configure CI/CD"
       path: /language/dotnet/configure-ci-cd/
     - title: "Deploy your app"
@@ -844,7 +846,7 @@ reference:
         path: /docker-hub/api/deprecated/
   - title: Registry API
     path: /registry/spec/api/
-  - sectiontitle: Docker Extension SDK API (Beta)
+  - sectiontitle: Docker Extension SDK API
     section:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
         title: DesktopUI
@@ -902,8 +904,6 @@ reference:
       title: Compose file build
     - path: /compose/compose-file/deploy/
       title: Compose file deploy
-    - path: /compose/faq/
-      title: Frequently asked questions
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
@@ -1161,17 +1161,17 @@ manuals:
           title: Distribute your dev environment
         - path: /desktop/dev-environments/dev-cli/
           title: Use the docker dev CLI plugin
-    - sectiontitle: Extensions (Beta)
+    - sectiontitle: Extensions
       section:
       - path: /desktop/extensions/
         title: What are Docker Extensions?
       - path: /desktop/extensions/marketplace/
-        title: Manage marketplace Extensions
+        title: Manage Marketplace extensions
       - path: /desktop/extensions/non-marketplace/
         title: Manage non-Marketplace extensions
       - path: /desktop/extensions/settings-feedback/
-        title: Change Settings and give feedback
-    - sectiontitle: Extensions SDK (Beta)
+        title: Change settings and give feedback
+    - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
           title: Overview
@@ -1183,7 +1183,7 @@ manuals:
           section:
             - title: Create a simple extension
               path: /desktop/extensions-sdk/build/minimal-frontend-extension/
-            - title: Create a more advanced frontend
+            - title: Create an advanced frontend extension
               path: /desktop/extensions-sdk/build/frontend-extension-tutorial/
             - title: Add a backend to your extension
               path: /desktop/extensions-sdk/build/backend-extension-tutorial/
@@ -1645,6 +1645,18 @@ manuals:
           title: Build contexts and linking targets
         - path: /build/bake/compose-file/
           title: Building from Compose file
+    - sectiontitle: Attestations
+      section:
+        - path: /build/attestations/
+          title: Overview
+        - path: /build/attestations/sbom/
+          title: SBOM
+        - path: /build/attestations/slsa-provenance/
+          title: Provenance
+        - path: /build/attestations/slsa-definitions/
+          title: SLSA definitions
+        - path: /build/attestations/attestation-storage/
+          title: Attestation storage
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
@@ -1665,6 +1677,8 @@ manuals:
     title: Overview
   - path: /compose/features-uses/
     title: Key features and use cases
+  - path: /compose/compose-v2/
+    title: Evolution of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
@@ -1677,12 +1691,7 @@ manuals:
         title: Uninstall Compose
   - path: /compose/gettingstarted/
     title: Try Docker Compose
-  - sectiontitle: Compose V2
-    section:
-    - path: /compose/compose-v2/
-      title: Overview
-    - path: /compose/cli-command-compatibility/
-      title: Compose v2 compatibility
+
   - sectiontitle: Environment variables
     section:
     - path: /compose/environment-variables/
@@ -1705,6 +1714,8 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
+  - path: /compose/faq/
+    title: FAQs
   - path: /compose/release-notes/
     title: Release notes
 

@@ -51,6 +51,7 @@ alternatively, in json format:
 ```console
 $ docker buildx bake --print webapp
 ```
+
 ```json
 {
   "group": {
@@ -75,6 +76,7 @@ $ docker buildx bake --print webapp
 ```console
 $ TAG=$(git rev-parse --short HEAD) docker buildx bake --print webapp
 ```
+
 ```json
 {
   "group": {
@@ -121,6 +123,7 @@ target "webapp" {
 ```console
 $ docker buildx bake --print webapp
 ```
+
 ```json
 {
   "group": {
@@ -168,6 +171,7 @@ target "webapp" {
 ```console
 $ docker buildx bake --print webapp
 ```
+
 ```json
 {
   "group": {
@@ -217,6 +221,7 @@ target "webapp" {
 ```console
 $ docker buildx bake --print webapp
 ```
+
 ```json
 {
   "group": {
@@ -262,6 +267,7 @@ target "webapp" {
 ```console
 $ docker buildx bake --print webapp
 ```
+
 ```json
 {
   "group": {
@@ -309,6 +315,7 @@ target "app" {
 ```console
 $ docker buildx bake --print app
 ```
+
 ```json
 {
   "group": {
