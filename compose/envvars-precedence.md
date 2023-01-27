@@ -4,7 +4,7 @@ description: Scenario Overview illustrating how environment variables are resolv
 keywords: compose, environment, env file
 ---
 
-This page contains information on how how interpolation works when using environment variables in Compose.
+This page contains information on how interpolation works when using environment variables in Compose.
 
 When you set the same environment variable in multiple files, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question. 
 
@@ -12,7 +12,7 @@ The order of precedence is as follows:
 1. Passed from the command line [`docker compose run --env <KEY[=[VAL]]>`](../../engine/reference/commandline/compose_run/#options).
 2. Passed from/set in `compose.yaml` service's configuration, from the [environment key](../../compose/compose-file/#environment).
 3. Passed from/set in `compose.yaml` service's configuration, from the [env_file key](../../compose/compose-file/#env_file).
-4. Passed from/set in Container Image in the [ENV directive](../../engine/reference/builder/#env).
+4. Passed from/set in Container Image in the [ENV directive](../engine/reference/builder.md#env).
 
 ### Example scenario
 

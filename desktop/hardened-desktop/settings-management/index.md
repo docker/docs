@@ -9,7 +9,7 @@ title: What is Settings Management?
 
 Settings Management is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization. 
 
-With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Settings Management to enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
+With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Settings Management to enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
 
 It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
 
@@ -29,13 +29,13 @@ Values that are set to `locked: true` within the `admin-settings.json` override 
 
 Using the `admin-settings.json` file, admins can:
 
-- Enable [Enhanced Container Isolation](../enhanced-container-isolation/index.md) (currently incompatible with WSL)
+- Enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md) (currently incompatible with WSL)
 - Configure HTTP proxies
 - Configure network settings
+- Configure Kubernetes settings
 - Enforce the use of WSL2 based engine or Hyper-V
 - Configure Docker Engine
 - Turn off Docker Desktop's ability to checks for updates
-- Turn off Docker Desktop's ability to send usage statistics
 
 For more details on the syntax and options admins can set, see [Configure Settings Management](configure.md).
 
@@ -55,4 +55,4 @@ Docker doesn't automatically mandate that developers re-launch and re-authentica
 
 Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or the `settings.json` file. In addition, if Enhanced Container Isolation is enforced, users can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
 
-![Proxy settings grayed out](/assets/images/grayed-setting.png){:width="750px"}
+![Proxy settings grayed out](/assets/images/grayed-setting.png){:width="350px"}

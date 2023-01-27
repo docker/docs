@@ -1,6 +1,6 @@
 ---
 description: How to uninstall Docker Desktop 
-keywords: windows, install, download, run, docker, local
+keywords: Windows, unintall, Mac, Linux, Docker Desktop
 title: Uninstall Docker Desktop
 ---
 
@@ -39,13 +39,13 @@ To uninstall Docker Desktop from your Mac:
 
 > Uninstall Docker Desktop from the command line
 >
-> To uninstall Docker Desktop from a terminal, run: `<DockerforMacPath>
-> --uninstall`. If your instance is installed in the default location, this
+> To uninstall Docker Desktop from a terminal, run: `<path to Docker app>/Contents/MacOS/uninstall`.
+> If your instance is installed in the default location, this
 > command provides a clean uninstall:
 >
 > ```console
-> $ /Applications/Docker.app/Contents/MacOS/Docker --uninstall
-> Docker is running, exiting...
+> $ /Applications/Docker.app/Contents/MacOS/uninstall
+> Uninstalling Docker Desktop...
 > Docker uninstalled successfully. You can move the Docker application to the trash.
 > ```
 >

@@ -36,7 +36,7 @@ exist, create it.
 - **Linux**: `/etc/docker/daemon.json`
 - **Windows Server**: `C:\ProgramData\docker\config\daemon.json`
 - **Docker Desktop for Mac / Docker Desktop for Windows**: Click the Docker icon in the toolbar,
-  select **Preferences**, then select **Daemon**. Click **Advanced**.
+  select **Settings**, then select **Daemon**. Click **Advanced**.
 
 If the file is currently empty, paste the following:
 
@@ -149,7 +149,7 @@ scrape_configs:
          # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['docker.for.mac.host.internal:9323']
+      - targets: ['host.docker.internal:9323']
 ```
 
 </div><!-- mac -->
@@ -189,7 +189,7 @@ scrape_configs:
          # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['192.168.65.1:9323']
+      - targets: ['host.docker.internal:9323']
 ```
 
 </div><!-- windows -->

@@ -24,7 +24,7 @@
 .dropdown-menu>li>a {
     font-size: 13.5px;
     line-height: 16px;
-    color: #1488c6;
+    color: $light-blue-400;
     padding: 5px 15px;
     display: block;
 }
@@ -38,14 +38,14 @@
   font-family: $buttons;
 }
 .btn-primary {
-  background-color: $marine-50;
+  background-color: $light-blue-500;
   border: 1px solid rgba(0, 0, 0, 0.1);
 
   &:hover {
     opacity: 0.8;
 
     // override default bootstrap behaviour
-    background-color: $marine-50;
+    background-color: $light-blue-500;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
 }
@@ -86,7 +86,7 @@
 .dropdown-menu>li>a:focus,
 .dropdown-menu>li>a:hover {
     color: #ffffff;
-    background-color: #0c5176;
+    background-color: $light-blue-700;
 }
 
 /*
@@ -109,7 +109,7 @@
  * override google results +++++++++++++++++++++++++++++++++++++++++++++++++++++
  */
 .gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
-    color: #27343B!important;
+    color: $light-blue-700!important;
     line-height: 23px!important;
 }
 .gsc-webResult .gsc-result {
@@ -117,15 +117,15 @@
 }
 
 a.gs-title {
-    color: #2089C4!important;
+    color: $light-blue-500!important;
     text-decoration: none;
 }
 
 .gs-webResult.gs-result a.gs-title:visited, .gs-webResult.gs-result a.gs-title:visited b, .gs-imageResult a.gs-title:visited, .gs-imageResult a.gs-title:visited b {
-    color: #F993A6!important;
+    color: $light-red-400!important;
 }
 .gs-webResult div.gs-visibleUrl, .gs-imageResult div.gs-visibleUrl {
-    color: #82949E!important;
+    color: $light-grey-600!important;
 }
 
 .gs-webResult .gs-snippet, .gs-imageResult .gs-snippet, .gs-fileFormatType {
@@ -135,6 +135,13 @@ a.gs-title {
 .gsc-tabHeader.gsc-tabhActive, .gsc-tabsArea {
     border-color: #f7f7f761 !important;
     background: transparent;
+}
+.gsc-tabHeader.gsc-tabActive, .gsc-refinementHeader.gscrefinementActive{
+    color: $dark-grey-700!important;
+}
+
+.gsc-results .gsc-cursor-box .gsc-cursor-page{
+    color: $black!important;
 }
 
 input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {

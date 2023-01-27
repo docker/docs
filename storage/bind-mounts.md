@@ -1,6 +1,6 @@
 ---
 description: Using bind mounts
-title: Use bind mounts
+title: Bind mounts
 keywords: storage, persistence, data persistence, mounts, bind mounts
 redirect_from:
 - /engine/admin/volumes/bind-mounts/
@@ -21,7 +21,7 @@ available. If you are developing new Docker applications, consider using
 [named volumes](volumes.md) instead. You can't use Docker CLI commands to directly
 manage bind mounts.
 
-![bind mounts on the Docker host](images/types-of-mounts-bind.png)
+![Bind mounts on the Docker host](images/types-of-mounts-bind.png)
 
 ## Choose the -v or --mount flag
 
@@ -158,7 +158,7 @@ $ docker container rm devtest
 
 ### Mount into a non-empty directory on the container
 
-If you bind-mount into a non-empty directory on the container, the directory's
+If you bind-mount a directory into a non-empty directory on the container, the directory's
 existing contents are obscured by the bind mount. This can be beneficial,
 such as when you want to test a new version of your application without
 building a new image. However, it can also be surprising and this behavior

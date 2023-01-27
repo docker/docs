@@ -179,13 +179,19 @@ bar chart of the build queue times and durations. Both views display the
 pending, in progress, successful, and failed builds for any tag of the
 repository.
 
-![Active Builds](images/index-active.png)
+![Active builds](images/index-active.png)
 
 From either location, you can select a build job to view its build report. The
 build report shows information about the build job. This includes the source
-repository and branch (or tag), the build logs, the build duration, creation time and location, and the user namespace the build occurred in. You can also refresh the page to see the current progress of your build logs.
+repository and branch (or tag), the build logs, the build duration, creation time and location, and the user namespace the build occurred in.
 
-![Build Report](/docker-hub/images/index-report.png)
+>**Note**
+>
+> You can now view the progress of your builds every 30 seconds when you
+> refresh the Builds page. With the in-progress build logs, you can debug your
+> builds before they're finished.
+
+![Build report](/docker-hub/images/index-report.png)
 
 ## Cancel or retry a build
 
@@ -194,7 +200,9 @@ report link on the General tab and on the Builds tab. You can also click the
 **Cancel** on the build report page, or from the Timeline tab's logs
 display for the build.
 
-![list of builds showing the cancel icon](images/build-cancelicon.png)
+![List of builds showing the cancel icon](images/build-cancelicon.png)
+
+## Failing builds
 
 If a build fails, a **Retry** icon appears next to the build report line on the
 **General** and **Builds** tabs. The **Build report** page and **Timeline logs** also display a **Retry** button.
@@ -206,6 +214,15 @@ If a build fails, a **Retry** icon appears next to the build report line on the
 > If you are viewing the build details for a repository that belongs to an
 > Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
 
+Automated builds have a 4-hour execution time limit. If a build reaches this time limit, it's
+automatically cancelled, and the build logs display the following message:
+
+```text
+2022-11-02T17:42:27Z The build was cancelled or exceeded the maximum execution time.
+```
+
+This log message is the same as when you actively cancel a build. To identify
+whether a build was automatically cancelled, check the build duration.
 
 ## Disable an automated build
 
@@ -311,7 +328,7 @@ sources. For example, you might have
 
 Autobuilds use the BuildKit build system by default. If you want to use the legacy
 Docker build system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"}
-`DOCKER_BUILDKIT=0`. Refer to the [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+`DOCKER_BUILDKIT=0`. Refer to the [BuildKit](../../build/buildkit/index.md)
 page for more information on BuildKit.
 
 ## Build repositories with linked private submodules

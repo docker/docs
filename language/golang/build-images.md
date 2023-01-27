@@ -13,8 +13,11 @@ redirect_from:
 * Some understanding of Go and its toolchain. This is not a tutorial on Go. If
   you are new to the language, the [Go website](https://golang.org/){: target="_blank" rel="noopener" class="_"}
   is a good starting point, so go (pun intended) check it out.
-* Some awareness of basic Docker concepts. If unsure, work through the orientation
-  and setup in Get started [Part 1](../../get-started/index.md).
+* You understand basic [Docker concepts](../../get-started/overview.md).
+* You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
+* You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
+  on your machine.
+
 
 ## Overview
 
@@ -132,8 +135,6 @@ to "dockerizing" it.
 
 ## Create a Dockerfile for the application
 
-{% include guides/create-dockerfile.md %}
-
 Next, we need to add a line in our Dockerfile that tells Docker what base image
 we would like to use for our application.
 
@@ -153,7 +154,7 @@ When we have used that `FROM` command, we told Docker to include in our image al
 
 > **Note**
 >
-> If you want to learn more about creating your own base images, see [creating base images](../../develop/develop-images/baseimages.md) section of the guide.
+> If you want to learn more about creating your own base images, see [creating base images](../../build/building/base-images.md) section of the guide.
 
 To make things easier when running the rest of our commands, let’s create a
 directory _inside_ the image that we are building. This also instructs Docker

@@ -76,6 +76,24 @@ for the current page, we:
                         {%- assign level4_url    = level4.path -%}
                         {%- break -%}
                     {%- endif -%}
+                    {%- for level5 in level4.section -%}
+                        {%- if level5.path == page.url -%}
+                            {%- assign found = "true" -%}
+                            {%- assign section_title = section.title -%}
+                            {%- assign section_url   = section.path -%}
+                            {%- assign level1_title  = level1.sectiontitle -%}
+                            {%- assign level1_url    = level1.section[0].path -%}
+                            {%- assign level2_title  = level2.sectiontitle -%}
+                            {%- assign level2_url    = level2.section[0].path -%}
+                            {%- assign level3_title  = level3.sectiontitle -%}
+                            {%- assign level3_url    = level3.section[0].path -%}
+                            {%- assign level4_title  = level4.title -%}
+                            {%- assign level4_url    = level4.path -%}
+                            {%- assign level5_title  = level5.title -%}
+                            {%- assign level5_url    = level5.path -%}
+                            {%- break -%}
+                        {%- endif -%}
+                    {%- endfor -%}
                 {%- endfor -%}
             {%- endfor -%}
         {%- endfor -%}
@@ -101,6 +119,7 @@ for the current page, we:
             {%- if level2_title -%}<li><a {%- if level2_url %} href="{{ level2_url }}"{%- endif -%}>{{ level2_title }}</a></li>{%- endif -%}
             {%- if level3_title -%}<li><a {%- if level3_url %} href="{{ level3_url }}"{%- endif -%}>{{ level3_title }}</a></li>{%- endif -%}
             {%- if level4_title -%}<li><a {%- if level4_url %} href="{{ level4_url }}"{%- endif -%}>{{ level4_title }}</a></li>{%- endif -%}
+            {%- if level5_title -%}<li><a {%- if level5_url %} href="{{ level5_url }}"{%- endif -%}>{{ level5_title }}</a></li>{%- endif -%}
         </ol>
     </nav>
 </div>

@@ -40,7 +40,7 @@ describe('Array', function() {
 Let’s build our Docker image and confirm everything is running properly. Run the following command to build and run your Docker image in a container.
 
 ```console
-$ docker-compose -f docker-compose.dev.yml up --build
+$ docker compose -f docker-compose.dev.yml up --build
 ```
 
 Now let’s test our application by POSTing a JSON payload and then make an HTTP GET request to make sure our JSON was saved correctly.
@@ -86,7 +86,7 @@ Okay, now that we know our application is running properly, let’s try and run 
 Below is the Docker command to start the container and run tests:
 
 ```console
-$ docker-compose -f docker-compose.dev.yml run notes npm run test
+$ docker compose -f docker-compose.dev.yml run notes npm run test
 Creating node-docker_notes_run ... 
 
 > node-docker@1.0.0 test /code

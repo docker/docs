@@ -4,25 +4,22 @@ keywords: documentation, docs, docker, compose, orchestration, containers, netwo
 title: Networking in Compose
 ---
 
-> This page applies to Compose file formats [version 2](compose-file/compose-file-v2.md) and [higher](compose-file/index.md). Networking features are not supported for Compose file version 1 (deprecated).
-
 By default Compose sets up a single
-[network](../engine/reference/commandline/network_create.md) for your app. Each
-container for a service joins the default network and is both *reachable* by
-other containers on that network, and *discoverable* by them at a hostname
+[network](../engine/reference/commandline/network_create.md){: target="_blank" rel="noopener" class="_" } for your app. Each
+container for a service joins the default network and is both reachable by
+other containers on that network, and discoverable by them at a hostname
 identical to the container name.
 
 > **Note**
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](reference/index.md)
-> or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
+> project name with either the [`--project-name` flag](reference/index.md){: target="_blank" rel="noopener" class="_" }
+> or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name){: target="_blank" rel="noopener" class="_" }.
 
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .
@@ -42,14 +39,6 @@ When you run `docker compose up`, the following happens:
 3.  A container is created using `db`'s configuration. It joins the network
     `myapp_default` under the name `db`.
 
-> **In v2.1+, overlay networks are always `attachable`**
->
-> Starting in Compose file format 2.1, overlay networks are always created as
-> `attachable`, and this is not configurable. This means that standalone
-> containers can connect to overlay networks.
->
-> In Compose file format 3.x, you can optionally set the `attachable` property
-> to `false`.
 
 Each container can now look up the hostname `web` or `db` and
 get back the appropriate container's IP address. For example, `web`'s
@@ -66,18 +55,22 @@ Within the `web` container, your connection string to `db` would look like
 `postgres://db:5432`, and from the host machine, the connection string would
 look like `postgres://{DOCKER_IP}:8001`.
 
-## Update containers
+## Update containers on the network
 
 If you make a configuration change to a service and run `docker compose up` to update it, the old container is removed and the new one joins the network under a different IP address but the same name. Running containers can look up that name and connect to the new address, but the old address stops working.
 
 If any containers have connections open to the old container, they are closed. It is a container's responsibility to detect this condition, look up the name again and reconnect.
 
-## Links
+> **Tip**
+>
+> Reference containers by name, not IP, whenever possible. Otherwise you’ll need to constantly update the IP address you use.
+{: .tip }
 
-Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate - by default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at the hostnames `db` and `database`:
+## Link containers
+
+Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate. By default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at the hostnames `db` and `database`:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
 
   web:
@@ -88,12 +81,14 @@ services:
     image: postgres
 ```
 
-See the [links reference](compose-file/compose-file-v2.md#links) for more information.
+See the [links reference](compose-file/index.md#links) for more information.
 
 ## Multi-host networking
 
 When deploying a Compose application on a Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
 you can make use of the built-in `overlay` driver to enable multi-host communication.
+
+Overlay networks are always created as `attachable`. You can optionally set the [`attachable`](compose-file/index.md#attachable) property to `false`.
 
 Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
 a Swarm cluster, and the [Getting started with multi-host networking](../network/network-tutorial-overlay.md)
@@ -103,13 +98,11 @@ to learn about multi-host overlay networks.
 
 Instead of just using the default app network, you can specify your own networks with the top-level `networks` key. This lets you create more complex topologies and specify [custom network drivers](/engine/extend/plugins_network/) and options. You can also use it to connect services to externally-created networks which aren't managed by Compose.
 
-Each service can specify what networks to connect to with the *service-level* `networks` key, which is a list of names referencing entries under the *top-level* `networks` key.
+Each service can specify what networks to connect to with the service-level `networks` key, which is a list of names referencing entries under the top-level `networks` key.
 
-Here's an example Compose file defining two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common - only `app` can talk to both.
+The following example shows a Compose file which defines two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common. Only `app` can talk to both.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
-
 services:
   proxy:
     build: ./proxy
@@ -137,12 +130,11 @@ networks:
       bar: "2"
 ```
 
-Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/compose-file-v2.md#ipv4_address-ipv6_address) for each attached network.
+Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/index.md#ipv4_address-ipv6_address) for each attached network.
 
-Networks can also be given a [custom name](compose-file/compose-file-v3.md#network-configuration-reference) (since version 3.5):
+Networks can also be given a [custom name](compose-file/index.md#name):
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   # ...
 networks:
@@ -151,17 +143,11 @@ networks:
     driver: custom-driver-1
 ```
 
-For full details of the network configuration options available, see the following references:
-
-- [Top-level `networks` key](compose-file/compose-file-v2.md#network-configuration-reference)
-- [Service-level `networks` key](compose-file/compose-file-v2.md#networks)
-
 ## Configure the default network
 
-Instead of (or as well as) specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under `networks` named `default`:
+Instead of, or as well as, specifying your own networks, you can also change the settings of the app-wide default network by defining an entry under `networks` named `default`:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .
@@ -178,15 +164,21 @@ networks:
 
 ## Use a pre-existing network
 
-If you want your containers to join a pre-existing network, use the [`external` option](compose-file/compose-file-v2.md#network-configuration-reference):
-
+If you want your containers to join a pre-existing network, use the [`external` option](compose-file/index.md#external)
 ```yaml
 services:
   # ...
 networks:
-  default:
+  network1:
     name: my-pre-existing-network
     external: true
 ```
 
-Instead of attempting to create a network called `[projectname]_default`, Compose looks for a network called `my-pre-existing-network` and connect your app's containers to it.
+Instead of attempting to create a network called `[projectname]_default`, Compose looks for a network called `my-pre-existing-network` and connects your app's containers to it.
+
+## Further reference information 
+
+For full details of the network configuration options available, see the following references:
+
+- [Top-level `networks` key](compose-file/index.md#networks-top-level-element)
+- [Service-level `networks` key](compose-file/index.md#networks)

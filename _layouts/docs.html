@@ -3,7 +3,7 @@
 {%- if page.edit_url -%}
     {%- assign edit_url = page.edit_url -%}
 {%- else -%}
-    {% capture edit_url %}{{ site.repo }}/edit/master/{{ page.path }}{% endcapture %}
+    {% capture edit_url %}{{ site.repo }}/edit/main/{{ page.path }}{% endcapture %}
 {%- endif -%}
 {%- if page.issue_url -%}
     {%- assign issue_url = page.issue_url -%}
@@ -28,23 +28,8 @@
                             {%- if page.advisory -%}
                             <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
                             {%- endif -%}
-                            <p>{%- include read_time.html -%}</p>
+                            <p></p>
                             {{ content }}
-                            {%- unless page.notags == true -%}
-                            {%- assign keywords = page.keywords | split:"," -%}
-                            {%- if keywords.size > 0 -%}
-                            <span class="glyphicon glyphicon-tags" style="padding-right: 10px"></span><span style="vertical-align: 2px">
-                                {%- for keyword in keywords -%}
-                                {%- assign strippedKeyword = keyword | strip -%}
-                                <a href="/search/?q={{ strippedKeyword }}">{{ strippedKeyword }}</a>
-                                {%- unless forloop.last %}, {% endunless -%}
-                                {%- endfor -%}
-                            </span>
-                            {%- endif -%}
-                            {%- endunless %}
-                            {%- if site.polldaddy_id and page.noratings != true -%}
-                            <div class="ratings-div"><div id="pd_rating_holder_{{ site.polldaddy_id }}"></div></div>
-                            {%- endif -%}
                         </section>
                     </main>
                     <nav class="col-nav">
@@ -68,17 +53,36 @@
                                 {%- assign my_max = page.toc_max | default: site.toc_max | default: 3 -%}
                                 {%- assign my_name = page.url | default: "unnamed" -%}
                                 <div id="side-toc-title">Contents:</div>
+                                {% include image-modal.html %}
+                                <div class="side-toc-title">Page details</div>
+                                <div class="metadata-items">
+                                    <ul>
+                                      {%- unless page.skip_read_time == true %}{% assign words = content | number_of_words %}{% if words >= 360 -%}
+                                      <li title="Estimated reading time"><i class="fa fa-clock" aria-hidden="true"></i> {{ words | divided_by:180 }} minute read</span></li>
+                                      {%- endif %}{% endunless -%}
+                                      {%- if edit_url != "" -%}
+                                      <li><a href="{{ edit_url }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit this page</a></li>
+                                      {%- endif -%}
+                                      {%- if issue_url != "" -%}
+                                      <li><a href="{{ issue_url }}" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request changes</a></li>
+                                      {%- endif -%}
+                                    </ul>
+                                </div>
+                                {%- unless page.notags == true -%}
+                                {%- assign keywords = page.keywords | split:"," -%}
+                                {%- if keywords.size > 0 -%}
+                                <div class="side-toc-title">Tags</div>
+                                <div class="keywords-items">
+                                {%- for keyword in keywords -%}
+                                {%- assign strippedKeyword = keyword | strip -%}
+                                <a href="/search/?q={{ strippedKeyword }}" class="nomunge"><i class="fa fa-tag" aria-hidden="true"></i> {{ strippedKeyword }}</a>
+                                {%- endfor -%}
+                                </div>
+                                {%- endif -%}
+                                {%- endunless %}
+                                <div class="side-toc-title">Contents</div>
                                 {%- include toc_pure_liquid.html html=content sanitize=true class="inline_toc" id="my_toc" toc_min=my_min toc_max=my_max page_name=my_name -%}
                                 {%- endunless -%}
-                                <div class="feedback-links">
-                                    <ul>
-                                        {%- if edit_url != "" -%}
-                                        <li><a href="{{ edit_url }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit this page</a></li>
-                                        {%- endif -%}
-                                        {%- if issue_url != "" -%}
-                                        <li><a href="{{ issue_url }}" class="nomunge"><i class="fa fa-check" aria-hidden="true"></i> Request changes</a></li>
-                                        {%- endif -%}
-                                    </ul>
                             </div>
                         </div>
                     </div>
@@ -90,6 +94,5 @@
         {% include footer.html %}
     </footer>
     <script>const pageURL = "{{ page.url }}";</script>
-    {%- if jekyll.environment == 'production' -%}{%- include analytics/polldaddy.html -%}{%- endif -%}
 </body>
 </html>

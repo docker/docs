@@ -57,6 +57,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer cli.Close()
 
 	reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
 	if err != nil {
@@ -177,6 +178,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer cli.Close()
 
 	imageName := "bfirsh/reticulate-splines"
 
@@ -261,6 +263,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer cli.Close()
 
 	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
 	if err != nil {
@@ -337,6 +340,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer cli.Close()
 
 	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
 	if err != nil {
@@ -418,6 +422,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer cli.Close()
 
 	options := types.ContainerLogsOptions{ShowStdout: true}
 	// Replace this ID with a container that really exists
@@ -488,6 +493,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer cli.Close()
 
 	images, err := cli.ImageList(ctx, types.ImageListOptions{})
 	if err != nil {
@@ -559,6 +565,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer cli.Close()
 
 	out, err := cli.ImagePull(ctx, "alpine", types.ImagePullOptions{})
 	if err != nil {
@@ -635,6 +642,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer cli.Close()
 
 	authConfig := types.AuthConfig{
 		Username: "username",
@@ -732,6 +740,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer cli.Close()
 
 	createResp, err := cli.ContainerCreate(ctx, &container.Config{
 		Image: "alpine",

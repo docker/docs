@@ -31,21 +31,11 @@ $ docker compose version
 
 1. At the root of the app project, create a file named `docker-compose.yml`.
 
-2. In the compose file, we'll start off by defining the schema version. In most cases, it's best to use
-   the latest supported version. You can look at the [Compose file reference](../compose/compose-file/index.md)
-   for the current schema versions and the compatibility matrix.
+2. In the compose file, we'll start off by defining the list of services (or containers) we want to run as part of our application.
 
-    ```yaml
-    version: "3.7"
-    ```
-
-3. Next, we'll define the list of services (or containers) we want to run as part of our application.
-
-    ```yaml
-    version: "3.7"
-
-    services:
-    ```
+   ```yaml
+   services:
+   ```
 
 And now, we'll start migrating a service at a time into the compose file.
 
@@ -61,102 +51,79 @@ $ docker run -dp 3000:3000 \
   -e MYSQL_USER=root \
   -e MYSQL_PASSWORD=secret \
   -e MYSQL_DB=todos \
-  node:12-alpine \
-  sh -c "yarn install && yarn run dev"
-```
-
-If you are using PowerShell then use this command:
-
-```powershell
-PS> docker run -dp 3000:3000 `
-  -w /app -v "$(pwd):/app" `
-  --network todo-app `
-  -e MYSQL_HOST=mysql `
-  -e MYSQL_USER=root `
-  -e MYSQL_PASSWORD=secret `
-  -e MYSQL_DB=todos `
-  node:12-alpine `
+  node:18-alpine \
   sh -c "yarn install && yarn run dev"
 ```
 
 1. First, let's define the service entry and the image for the container. We can pick any name for the service.
    The name will automatically become a network alias, which will be useful when defining our MySQL service.
 
-    ```yaml
-    version: "3.7"
+   ```yaml
 
-    services:
-      app:
-        image: node:12-alpine
-    ```
+   services:
+     app:
+       image: node:18-alpine
+   ```
 
 2. Typically, you will see the `command` close to the `image` definition, although there is no requirement on ordering.
    So, let's go ahead and move that into our file.
 
-    ```yaml
-    version: "3.7"
-
-    services:
-      app:
-        image: node:12-alpine
-        command: sh -c "yarn install && yarn run dev"
-    ```
+   ```yaml
+   services:
+     app:
+       image: node:18-alpine
+       command: sh -c "yarn install && yarn run dev"
+   ```
 
 
 3. Let's migrate the `-p 3000:3000` part of the command by defining the `ports` for the service. We will use the
    [short syntax](../compose/compose-file/compose-file-v3.md#short-syntax-1) here, but there is also a more verbose
    [long syntax](../compose/compose-file/compose-file-v3.md#long-syntax-1) available as well.
 
-    ```yaml
-    version: "3.7"
-
-    services:
-      app:
-        image: node:12-alpine
-        command: sh -c "yarn install && yarn run dev"
-        ports:
-          - 3000:3000
-    ```
+   ```yaml
+   services:
+     app:
+       image: node:18-alpine
+       command: sh -c "yarn install && yarn run dev"
+       ports:
+         - 3000:3000
+   ```
  
 4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
    the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/compose-file-v3.md#short-syntax-3) and [long](../compose/compose-file/compose-file-v3.md#long-syntax-3) syntax.
 
     One advantage of Docker Compose volume definitions is we can use relative paths from the current directory.
 
-    ```yaml
-    version: "3.7"
-
-    services:
-      app:
-        image: node:12-alpine
-        command: sh -c "yarn install && yarn run dev"
-        ports:
-          - 3000:3000
-        working_dir: /app
-        volumes:
-          - ./:/app
-    ```
+   ```yaml
+   services:
+     app:
+       image: node:18-alpine
+       command: sh -c "yarn install && yarn run dev"
+       ports:
+         - 3000:3000
+       working_dir: /app
+       volumes:
+         - ./:/app
+   ```
 
 5. Finally, we need to migrate the environment variable definitions using the `environment` key.
 
-    ```yaml
-    version: "3.7"
-
-    services:
-      app:
-        image: node:12-alpine
-        command: sh -c "yarn install && yarn run dev"
-        ports:
-          - 3000:3000
-        working_dir: /app
-        volumes:
-          - ./:/app
-        environment:
-          MYSQL_HOST: mysql
-          MYSQL_USER: root
-          MYSQL_PASSWORD: secret
-          MYSQL_DB: todos
-    ```
+   ```yaml
+   services:
+     app:
+       image: node:18-alpine
+       command: sh -c "yarn install && yarn run dev"
+       ports:
+         - 3000:3000
+       working_dir: /app
+       volumes:
+         - ./:/app
+       environment:
+         MYSQL_HOST: mysql
+         MYSQL_USER: root
+         MYSQL_PASSWORD: secret
+         MYSQL_DB: todos
+   ```
 
 ### Define the MySQL service
 
@@ -168,82 +135,65 @@ $ docker run -d \
   -v todo-mysql-data:/var/lib/mysql \
   -e MYSQL_ROOT_PASSWORD=secret \
   -e MYSQL_DATABASE=todos \
-  mysql:5.7
-```
-
-If you are using PowerShell then use this command:
-
-```powershell
-PS> docker run -d `
-  --network todo-app --network-alias mysql `
-  -v todo-mysql-data:/var/lib/mysql `
-  -e MYSQL_ROOT_PASSWORD=secret `
-  -e MYSQL_DATABASE=todos `
-  mysql:5.7
+  mysql:8.0
 ```
 
 1. We will first define the new service and name it `mysql` so it automatically gets the network alias. We'll
    go ahead and specify the image to use as well.
 
-    ```yaml
-    version: "3.7"
+   ```yaml
 
-    services:
-      app:
-        # The app service definition
-      mysql:
-        image: mysql:5.7
-    ```
+   services:
+     app:
+       # The app service definition
+     mysql:
+       image: mysql:8.0
+   ```
 
 2. Next, we'll define the volume mapping. When we ran the container with `docker run`, the named volume was created
    automatically. However, that doesn't happen when running with Compose. We need to define the volume in the top-level
    `volumes:` section and then specify the mountpoint in the service config. By simply providing only the volume name,
    the default options are used. There are [many more options available](../compose/compose-file/compose-file-v3.md#volume-configuration-reference) though.
 
-    ```yaml
-    version: "3.7"
+   ```yaml
+   services:
+     app:
+       # The app service definition
+     mysql:
+       image: mysql:8.0
+       volumes:
+         - todo-mysql-data:/var/lib/mysql
 
-    services:
-      app:
-        # The app service definition
-      mysql:
-        image: mysql:5.7
-        volumes:
-          - todo-mysql-data:/var/lib/mysql
-
-    volumes:
-      todo-mysql-data:
-    ```
+   volumes:
+     todo-mysql-data:
+   ```
 
 3. Finally, we only need to specify the environment variables.
 
-    ```yaml
-    version: "3.7"
+   ```yaml
+   services:
+     app:
+       # The app service definition
+     mysql:
+       image: mysql:8.0
+       volumes:
+         - todo-mysql-data:/var/lib/mysql
+       environment:
+         MYSQL_ROOT_PASSWORD: secret
+         MYSQL_DATABASE: todos
 
-    services:
-      app:
-        # The app service definition
-      mysql:
-        image: mysql:5.7
-        volumes:
-          - todo-mysql-data:/var/lib/mysql
-        environment:
-          MYSQL_ROOT_PASSWORD: secret
-          MYSQL_DATABASE: todos
-
-    volumes:
-      todo-mysql-data:
-    ```
+   volumes:
+     todo-mysql-data:
+   ```
 
 At this point, our complete `docker-compose.yml` should look like this:
 
 
 ```yaml
-version: "3.7"
 
 services:
   app:
-    image: node:12-alpine
+    image: node:18-alpine
     command: sh -c "yarn install && yarn run dev"
     ports:
       - 3000:3000
@@ -257,7 +207,7 @@ services:
       MYSQL_DB: todos
 
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     volumes:
       - todo-mysql-data:/var/lib/mysql
     environment:
@@ -300,7 +250,7 @@ Now that we have our `docker-compose.yml` file, we can start it up!
 
     ```plaintext
     mysql_1  | 2019-10-03T03:07:16.083639Z 0 [Note] mysqld: ready for connections.
-    mysql_1  | Version: '5.7.27'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+    mysql_1  | Version: '8.0.31'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
     app_1    | Connected to mysql db at host mysql
     app_1    | Listening on port 3000
     ```

@@ -792,9 +792,9 @@ services:
 
 Specify placement of constraints and preferences. See the docker service create
 documentation for a full description of the syntax and available types of
-[constraints](../../engine/reference/commandline/service_create.md#specify-service-constraints---constraint),
-[preferences](../../engine/reference/commandline/service_create.md#specify-service-placement-preferences---placement-pref),
-and [specifying the maximum replicas per node](../../engine/reference/commandline/service_create.md#specify-maximum-replicas-per-node---replicas-max-per-node)
+[constraints](../../engine/reference/commandline/service_create.md#constraint),
+[preferences](../../engine/reference/commandline/service_create.md#placement-pref),
+and [specifying the maximum replicas per node](../../engine/reference/commandline/service_create.md#replicas-max-per-node)
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"
@@ -814,7 +814,7 @@ services:
 
 > Added in [version 3.8](compose-versioning.md#version-38) file format.
 
-If the service is `replicated` (which is the default), [limit the number of replicas](../../engine/reference/commandline/service_create.md#specify-maximum-replicas-per-node---replicas-max-per-node)
+If the service is `replicated` (which is the default), [limit the number of replicas](../../engine/reference/commandline/service_create.md#replicas-max-per-node)
 that can run on a node at any time.
 
 When there are more tasks requested than running nodes, an error
@@ -1343,7 +1343,7 @@ services:
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](../../engine/reference/commandline/run.md#specify-isolation-technology-for-container---isolation)
+[Docker Engine docs](../../engine/reference/commandline/run.md#isolation)
 for details.
 
 ### labels
@@ -1397,7 +1397,7 @@ the alias, or the service name if no alias was specified.
 
 Links are not required to enable services to communicate - by default,
 any service can reach any other service at that service’s name. (See also, the
-[Links topic in Networking in Compose](../networking.md#links).)
+[Link containers section in Networking in Compose](../networking.md#link-containers).)
 
 Links also express dependency between services in the same way as
 [depends_on](#depends_on), so they determine the order of service startup.
@@ -1908,7 +1908,7 @@ sysctls:
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to
-[configure namespaced kernel parameters (sysctls) at runtime](../../engine/reference/commandline/run.md#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+[configure namespaced kernel parameters (sysctls) at runtime](../../engine/reference/commandline/run.md#sysctl).
 
 > Note when using docker stack deploy
 >

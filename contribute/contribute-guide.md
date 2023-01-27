@@ -4,7 +4,7 @@ description: Guidelines for contributing to Docker's docs
 keywords: contribute, guide, style guide
 ---
 
-The live docs are published from the `master` branch. Therefore, you must create pull requests against the `master` branch for all content updates. This includes:
+The live docs are published from the `main` branch. Therefore, you must create pull requests against the `main` branch for all content updates. This includes:
 
 - Conceptual and task-based information
 - Restructuring / rewriting
@@ -17,7 +17,7 @@ There are two ways to contribute a pull request to the docs repository:
 
     This opens the GitHub editor, which means you don't need to know a lot about Git, or even about Markdown. When you save, Git prompts you to create a fork if you don't already have one, and to create a branch in your fork and submit the pull request.
 
-2. Fork the [docs GitHub repository]({{ site.repo }}). Suggest changes or add new content on your local branch, and submit a pull request (PR) to the `master` branch.
+2. Fork the [docs GitHub repository]({{ site.repo }}). Suggest changes or add new content on your local branch, and submit a pull request (PR) to the `main` branch.
 
     This is the manual, more advanced version of clicking 'Edit this page' on a published docs page. Initiating a docs changes in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.
 
@@ -44,7 +44,7 @@ Help us review your PRs more quickly by following these guidelines.
 - Don't change whitespace or line wrapping in parts of a file you are not editing for other reasons. Make sure your text editor is not configured to
   automatically reformat the whole file when saving.
 - We highly recommend that you [build](#build-and-preview-the-docs-locally) and [test](#test-the-docs-locally) the docs locally before submitting a PR. 
-- A Netlify test runs for each PR that is against the `master` branch, and deploys the result of your PR to a staging site. The URL will be available at in the **Conversation** tab. Check the staging site to verify how your changes look and fix issues, if necessary.
+- A Netlify test runs for each PR that is against the `main` branch, and deploys the result of your PR to a staging site. The URL will be available at in the **Conversation** tab. Check the staging site to verify how your changes look and fix issues, if necessary.
 
 ### Collaborate on a pull request
 
@@ -56,11 +56,11 @@ given file in the **Files** view.
 
 If a PR consists of multiple small addendum commits on top of a more significant
 one, the commit will usually be "squash-merged", so that only one commit is
-merged into the `master` branch. In some scenarios where a squash and merge isn't appropriate, all commits are kept separate when merging.
+merged into the `main` branch. In some scenarios where a squash and merge isn't appropriate, all commits are kept separate when merging.
 
 ### Per-PR staging on GitHub
 
-A Netlify test runs for each PR created against the `master` branch and deploys the result of your PR to a staging site. When the site builds successfully, you will see a comment in the **Conversation** tab in the PR stating **Deploy Preview for docsdocker ready!**. Click the **Browse the preview** URL and check the staging site to verify how your changes look and fix issues, if necessary. Reviewers also check the staged site before merging the PR to protect the integrity of the docs site.
+A Netlify test runs for each PR created against the `main` branch and deploys the result of your PR to a staging site. When the site builds successfully, you will see a comment in the **Conversation** tab in the PR stating **Deploy Preview for docsdocker ready!**. Click the **Browse the preview** URL and check the staging site to verify how your changes look and fix issues, if necessary. Reviewers also check the staged site before merging the PR to protect the integrity of the docs site.
 
 ## Build and preview the docs locally
 
@@ -103,7 +103,7 @@ local builds, and builds that are deployed to [docs.docker.com](/):
 
 - search auto-completion, and generation of `js/metadata.json`
 - Google Analytics
-- page ratings
+- page feedback
 - `sitemap.xml` generation
 - minification of stylesheets (`css/style.css`)
 - adjusting "edit this page" links for content in other repositories

@@ -24,13 +24,17 @@ kramdown:
   syntax_highlighter: rouge
   toc_levels: 2..3
 
+# https://jekyllrb.com/docs/configuration/liquid/
+liquid:
+  error_mode: strict
+
+# Exclude directories and/or files from the conversion. These exclusions are
+# relative to the site's source directory and cannot be outside the source
+# directory.
 exclude:
+  - _deploy
   - _releaser
-  - _samples
-  - _scripts
-  - datacenter
   - docker-bake.hcl
-  - ee
   - LICENSE
   - Makefile
   - README.md
@@ -41,12 +45,13 @@ exclude:
 latest_engine_api_version: "1.41"
 docker_ce_version: "20.10"
 compose_v1_version: "1.29.2"
-compose_version: "v2.12.0"
+compose_version: "v2.15.1"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
 compose_switch_version: "1.0.4"
+buildkit_version: "0.10.5"
 
 # Options for displaying minimum API version requirements in the reference pages.
 #
@@ -87,13 +92,10 @@ sass:
   sass_dir: _scss
   style: expanded
 
-# Set default options / metadata for some paths.
-#
 # Setting options here prevents having to repeat the same option in front-matter
 # on every page.
+# https://jekyllrb.com/docs/configuration/front-matter-defaults/
 defaults:
-  # Default one for development builds (local and PR previews)
-  # sitemap is disabled here but not for production in _config_production.yml
   - scope:
       path: ""
       type: "pages"
@@ -101,6 +103,28 @@ defaults:
       layout: docs
       toc_min: 2
       toc_max: 4
+
+  # Exclude from sitemap
+  - scope:
+      path: "desktop/enterprise"
+    values:
+      sitemap: false
+  - scope:
+      path: "assets/**"
+    values:
+      sitemap: false
+  - scope:
+      path: "**/nav.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "google*.html"
+    values:
+      sitemap: false
+  - scope:
+      path: "**/*.pdf"
+    values:
+      sitemap: false
 
   # Set the correct edit-URL for some local and remote resources. We usually don't create a direct
   # edit link for these, and instead point to the directory that contains the file.
@@ -121,6 +145,7 @@ defaults:
 
 # Fetch upstream resources (reference documentation) used by _plugins/fetch_remote.rb
 # - repo is the GitHub repository to fetch from
+# - default_branch used to generate edit_url link
 # - ref the Git reference
 # - paths is a list to the resources within the remote repository
 #   - dest is the destination path within the working tree
@@ -146,7 +171,12 @@ fetch-remote:
 
   - repo: "https://github.com/docker/docker"
     default_branch: "master"
-    ref: "20.10"
+    # The default branch has separate files for each API version, so we can
+    # consume the swagger files from that branch (we only publish the ones
+    # that have been released through the stubs in the engine/api/ directory).
+    # Using the default (master) branch allows for API docs changes to be
+    # published without them being cherry-picked into the release branch.
+    ref: "master"
     paths:
       - dest: "engine/api"
         src:
@@ -161,20 +191,6 @@ fetch-remote:
           - "docs/*.md"
           - "!docs/README.md" # readme to make things nice in the compose-cli repo, but meaningless here
           - "!docs/architecture.md" # Compose-CLI architecture, unrelated to cloud integration
-
-  - repo: "https://github.com/docker/buildx"
-    default_branch: "master"
-    ref: "master"
-    paths:
-      - dest: "build/customize/bake"
-        src:
-          - "docs/guides/bake/**"
-      - dest: "build/building/drivers"
-        src:
-          - "docs/guides/drivers/**"
-      - dest: "build/building/cache/backends"
-        src:
-          - "docs/guides/cache/**"
 
   - repo: "https://github.com/distribution/distribution"
     default_branch: "main"
@@ -195,3 +211,12 @@ fetch-remote:
       - dest: "engine/reference/builder.md"
         src:
           - "frontend/dockerfile/docs/reference.md"
+      - dest: "build/buildkit/toml-configuration.md"
+        src:
+          - "docs/buildkitd.toml.md"
+      - dest: "build/attestations/slsa-definitions.md"
+        src:
+          - "docs/attestations/slsa-definitions.md"
+      - dest: "build/attestations/attestation-storage.md"
+        src:
+          - "docs/attestations/attestation-storage.md"

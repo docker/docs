@@ -24,7 +24,7 @@ repositories for your Docker images.
    the
    [Atomist GitHub App](https://github.com/apps/atomist "Atomist GitHub App"){: target="blank" rel="noopener" class=""}.
 
-   ![install the GitHub app](images/gh-install.png){: width="700px" }
+   ![Install the GitHub app view](images/gh-install.png){: width="700px" }
 
 4. Install the app.
 
@@ -39,7 +39,7 @@ repositories for your Docker images.
 5. In the repository selection menu, select what repositories you want Atomist
    to start watching.
 
-   ![activate repositories](images/activate-repos.png){: width="500px" }
+   ![Activate repositories view](images/activate-repos.png){: width="500px" }
 
    If you are just looking to evaluate Atomist, start by selecting a few
    repositories during evaluation. Once you are comfortable using Atomist, you

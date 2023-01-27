@@ -6,91 +6,24 @@ notoc: true
 ---
 
 You can control the order of service startup and shutdown with the
-[depends_on](compose-file/compose-file-v3.md#depends_on) option. Compose always starts and stops
+[depends_on](compose-file/index.md#depends_on) option. Compose always starts and stops
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
-However, for startup Compose does not wait until a container is "ready" (whatever that means
-for your particular application) - only until it's running. There's a good
-reason for this.
+A good example of when you might use this is an application which needs to access a database. If both services are started with `docker compose up`, there is a chance this will fail since the application service might start before the database service and won't find a database able to handle its SQL statements. 
 
-The problem of waiting for a database (for example) to be ready is really just
-a subset of a much larger problem of distributed systems. In production, your
-database could become unavailable or move hosts at any time. Your application
-needs to be resilient to these types of failures.
+## Control startup
 
-To handle this, design your application to attempt to re-establish a connection to
-the database after a failure. If the application retries the connection,
-it can eventually connect to the database.
+On startup, Compose does not wait until a container is "ready", only until it's running. This can cause issues if, for example you have a relational database system that needs to start its own services before being able to handle incoming connections.
 
-The best solution is to perform this check in your application code, both at
-startup and whenever a connection is lost for any reason. However, if you don't
-need this level of resilience, you can work around the problem with a wrapper
-script:
+The solution for detecting the ready state of a service is  to use the `condition` attribute with one of the following options:
 
-- Use a tool such as [wait-for-it](https://github.com/vishnubob/wait-for-it),
-  [dockerize](https://github.com/powerman/dockerize), [Wait4X](https://github.com/atkrad/wait4x), sh-compatible
-  [wait-for](https://github.com/Eficode/wait-for), or [RelayAndContainers](https://github.com/jasonsychau/RelayAndContainers) template. These are small
-  wrapper scripts which you can include in your application's image to
-  poll a given host and port until it's accepting TCP connections.
+- `service_started`
+- `service_healthy`. This specifies that a dependency is expected to be “healthy”, which is defined with `healthcheck`, before starting a dependent service.
+- `service_completed_successfully`. This specifies that a dependency is expected to run to successful completion before starting a dependent service.
 
-  For example, to use `wait-for-it.sh` or `wait-for` to wrap your service's command:
+## Reference information 
 
-  ```yaml
-  version: "2"
-  services:
-    web:
-      build: .
-      ports:
-        - "80:8000"
-      depends_on:
-        - "db"
-      command: ["./wait-for-it.sh", "db:5432", "--", "python", "app.py"]
-    db:
-      image: postgres
-  ```
+- [`depends_on`](compose-file/index.md#depends_on)
+- [`healthcheck`](compose-file/index.md#healthcheck)
 
-  > **Tip**
-  >
-  > There are limitations to this first solution. For example, it doesn't verify
-  > when a specific service is really ready. If you add more arguments to the
-  > command, use the `bash shift` command with a loop, as shown in the next
-  > example.
-
-- Alternatively, write your own wrapper script to perform a more application-specific
-  health check. For example, you might want to wait until Postgres is ready to
-  accept commands:
-
-  ```bash
-  #!/bin/sh
-  # wait-for-postgres.sh
-
-  set -e
-  
-  host="$1"
-  shift
-  
-  until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -U "postgres" -c '\q'; do
-    >&2 echo "Postgres is unavailable - sleeping"
-    sleep 1
-  done
-  
-  >&2 echo "Postgres is up - executing command"
-  exec "$@"
-  ```
-
-  You can use this as a wrapper script as in the previous example, by setting:
-
-  ```yaml
-  command: ["./wait-for-postgres.sh", "db", "python", "app.py"]
-  ```
-
-
-## Compose documentation
-
-- [User guide](index.md)
-- [Installing Compose](install/index.md)
-- [Getting Started](gettingstarted.md)
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)

@@ -29,7 +29,7 @@ guides:
   path: /get-docker/
 - sectiontitle: Get started
   section:
-    - title: "Part 1: Orientation and setup"
+    - title: "Part 1: Overview"
       path: /get-started/
     - title: "Part 2: Containerize an application"
       path: /get-started/02_our_app/
@@ -115,6 +115,22 @@ guides:
       path: /language/golang/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/golang/deploy/
+  - sectiontitle: C# (.NET)
+    section:
+    - title: "Overview"
+      path: /language/dotnet/
+    - title: "Build images"
+      path: /language/dotnet/build-images/
+    - title: "Run containers"
+      path: /language/dotnet/run-containers/
+    - title: "Develop your app"
+      path: /language/dotnet/develop/
+    - title: "Run your tests"
+      path: /language/dotnet/run-tests/
+    - title: "Configure CI/CD"
+      path: /language/dotnet/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/dotnet/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
@@ -125,20 +141,8 @@ guides:
     section:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Dockerfile best practices
-    - path: /develop/develop-images/build_enhancements/
-      title: Build images with BuildKit
-    - path: /develop/develop-images/image_management/
-      title: Manage images
-    - path: /develop/develop-images/baseimages/
-      title: Create your own base image (advanced)
   - path: /develop/scan-images/
     title: Scan images
-- sectiontitle: Set up CI/CD
-  section:
-  - path: /ci-cd/best-practices/
-    title: CI/CD Best practices
-  - path: /ci-cd/github-actions/
-    title: Configure GitHub Actions
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -165,70 +169,6 @@ guides:
       path: /get-started/kube-deploy/
     - title: "Deploy to Swarm"
       path: /get-started/swarm-deploy/
-  - sectiontitle: Configure all objects
-    section:
-    - path: /config/labels-custom-metadata/
-      title: Apply custom metadata to objects
-    - path: /config/pruning/
-      title: Prune unused objects
-    - path: /config/formatting/
-      title: Format command and log output
-  - sectiontitle: Configure the daemon
-    section:
-    - path: /config/daemon/
-      title: Configure and run Docker
-    - path: /config/daemon/systemd/
-      title: Control Docker with systemd
-  - path: /config/daemon/prometheus/
-    title: Collect metrics with Prometheus
-  - sectiontitle: Configure containers
-    section:
-    - path: /config/containers/start-containers-automatically/
-      title: Start containers automatically
-    - path: /config/containers/live-restore/
-      title: Keep containers alive during daemon downtime
-    - path: /config/containers/multi-service_container/
-      title: Run multiple services in a container
-    - path: /config/containers/runmetrics/
-      title: Container runtime metrics
-    - path: /config/containers/resource_constraints/
-      title: Runtime options with Memory, CPUs, and GPUs
-    - sectiontitle: Logging
-      section:
-      - path: /config/containers/logging/
-        title: View a container's logs
-      - path: /config/containers/logging/configure/
-        title: Configure logging drivers
-      - path: /config/containers/logging/dual-logging/
-        title: Use docker logs with a logging driver
-      - path: /config/containers/logging/plugins/
-        title: Use a logging driver plugin
-      - path: /config/containers/logging/log_tags/
-        title: Customize log driver output
-      - sectiontitle: Logging driver details
-        section:
-        - path: /config/containers/logging/local/
-          title: Local file logging driver
-        - path: /config/containers/logging/logentries/
-          title: Logentries logging driver
-        - path: /config/containers/logging/json-file/
-          title: JSON File logging driver
-        - path: /config/containers/logging/gelf/
-          title: Graylog Extended Format (GELF) logging driver
-        - path: /config/containers/logging/syslog/
-          title: Syslog logging driver
-        - path: /config/containers/logging/awslogs/
-          title: Amazon CloudWatch logs logging driver
-        - path: /config/containers/logging/etwlogs/
-          title: ETW logging driver
-        - path: /config/containers/logging/fluentd/
-          title: Fluentd logging driver
-        - path: /config/containers/logging/gcplogs/
-          title: Google Cloud logging driver
-        - path: /config/containers/logging/journald/
-          title: Journald logging driver
-        - path: /config/containers/logging/splunk/
-          title: Splunk logging driver
     - sectiontitle: Scale your app
       section:
       - path: /engine/swarm/
@@ -287,92 +227,6 @@ guides:
         title: Swarm administration guide
       - path: /engine/swarm/raft/
         title: Raft consensus in swarm mode
-    - sectiontitle: Extend Docker
-      section:
-      - path: /engine/extend/
-        title: Managed plugin system
-      - path: /engine/extend/plugins_authorization/
-        title: Access authorization plugin
-      - path: /engine/extend/legacy_plugins/
-        title: Extending Docker with plugins
-      - path: /engine/extend/plugins_network/
-        title: Docker network driver plugins
-      - path: /engine/extend/plugins_volume/
-        title: Volume plugins
-      - title: Plugin configuration
-        path: /engine/extend/config/
-      - path: /engine/extend/plugin_api/
-        title: Plugins
-  - sectiontitle: Configure networking
-    section:
-    - path: /network/
-      title: Networking overview
-    - path: /network/bridge/
-      title: Use bridge networks
-    - path: /network/overlay/
-      title: Use overlay networks
-    - path: /network/host/
-      title: Use host networking
-    - path: /network/ipvlan/
-      title: Use IPvlan networks
-    - path: /network/macvlan/
-      title: Use Macvlan networks
-    - path: /network/none/
-      title: Disable networking for a container
-    - sectiontitle: Networking tutorials
-      section:
-      - path: /network/network-tutorial-standalone/
-        title: Bridge network tutorial
-      - path: /network/network-tutorial-host/
-        title: Host networking tutorial
-      - path: /network/network-tutorial-overlay/
-        title: Overlay networking tutorial
-      - path: /network/network-tutorial-macvlan/
-        title: Macvlan network tutorial
-    - sectiontitle: Configure the daemon and containers
-      section:
-      - path: /config/daemon/ipv6/
-        title: Configure the daemon for IPv6
-      - path: /network/iptables/
-        title: Docker and iptables
-      - path: /config/containers/container-networking/
-        title: Container networking
-      - path: /network/proxy/
-        title: Configure Docker to use a proxy server
-    - sectiontitle: Legacy networking content
-      section:
-      - path: /network/links/
-        title: (Legacy) Container links
-  - sectiontitle: Manage application data
-    section:
-    - path: /storage/
-      title: Storage overview
-    - path: /storage/volumes/
-      title: Volumes
-    - path: /storage/bind-mounts/
-      title: Bind mounts
-    - path: /storage/tmpfs/
-      title: tmpfs mounts
-    - path: /storage/troubleshooting_volume_errors/
-      title: Troubleshoot volume problems
-    - sectiontitle: Store data within containers
-      section:
-      - path: /storage/storagedriver/
-        title: About storage drivers
-      - path: /storage/storagedriver/select-storage-driver/
-        title: Select a storage driver
-      - path: /storage/storagedriver/aufs-driver/
-        title: Use the AUFS storage driver
-      - path: /storage/storagedriver/btrfs-driver/
-        title: Use the Btrfs storage driver
-      - path: /storage/storagedriver/device-mapper-driver/
-        title: Use the Device mapper storage driver
-      - path: /storage/storagedriver/overlayfs-driver/
-        title: Use the OverlayFS storage driver
-      - path: /storage/storagedriver/zfs-driver/
-        title: Use the ZFS storage driver
-      - path: /storage/storagedriver/vfs-driver/
-        title: Use the VFS storage driver
 - path: /get-started/resources/
   title: "Educational resources"
 
@@ -992,7 +846,7 @@ reference:
         path: /docker-hub/api/deprecated/
   - title: Registry API
     path: /registry/spec/api/
-  - sectiontitle: Docker Extension SDK API (Beta)
+  - sectiontitle: Docker Extension SDK API
     section:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
         title: DesktopUI
@@ -1039,7 +893,7 @@ reference:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/ExecResultV0/
         title: ExecResultV0
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/BackendV0/
-        title: BackendV0  
+        title: BackendV0
 - title: Dockerfile reference
   path: /engine/reference/builder/
 - sectiontitle: Compose file reference
@@ -1050,8 +904,6 @@ reference:
       title: Compose file build
     - path: /compose/compose-file/deploy/
       title: Compose file deploy
-    - path: /compose/faq/
-      title: Frequently asked questions
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
@@ -1128,7 +980,7 @@ samples:
       title: .NET
     - path: /samples/angular/
       title: Angular
-    - path: /samples/django-sample/
+    - path: /samples/django/
       title: Django
     - path: /samples/express/
       title: Express
@@ -1140,6 +992,8 @@ samples:
       title: Node.js
     - path: /samples/react/
       title: React
+    - path: /samples/rails/
+      title: Rails
     - path: /samples/spark/
       title: Spark
     - path: /samples/spring/
@@ -1158,6 +1012,8 @@ samples:
       title: PHP
     - path: /samples/python/
       title: Python
+    - path: /samples/ruby/
+      title: Ruby
     - path: /samples/rust/
       title: Rust
     - path: /samples/typescript/
@@ -1172,7 +1028,7 @@ samples:
       title: Portainer
     - path: /samples/prometheus/
       title: Prometheus
-    - path: /samples/wordpress-sample/
+    - path: /samples/wordpress/
       title: WordPress
 - sectiontitle: Other services
   section:
@@ -1209,8 +1065,6 @@ manuals:
          title: Install on Windows
        - path: /desktop/windows/permission-requirements/
          title: Understand permission requirements for Windows
-       - path: /desktop/mac/apple-silicon/
-         title: Install on Apple silicon
        - path: /desktop/install/linux-install/
          title: Install on Linux
        - sectiontitle: Installation per Linux distro
@@ -1267,9 +1121,11 @@ manuals:
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
           title: Run Docker Desktop for Windows in a VM or VDI environment
+        - path: /desktop/allow-list/
+          title: Allowlist for Docker Desktop
         - path: /desktop/uninstall/
           title: Uninstall Docker Desktop
-    - sectiontitle: Hardened Desktop
+    - sectiontitle: Hardened Docker Desktop
       section:
         - path: /desktop/hardened-desktop/
           title: Overview
@@ -1291,76 +1147,92 @@ manuals:
             title: FAQs and known issues
         - path: /desktop/hardened-desktop/registry-access-management/
           title: Registry Access Management
+        - path: /docker-hub/image-access-management/
+          title: Image Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
           title: Overview
         - path: /desktop/dev-environments/create-dev-env/
-          title: Create a simple dev environment
-        - path: /desktop/dev-environments/create-compose-dev-env/
-          title: Create an advanced dev environment
+          title: Launch a dev environment
+        - path: /desktop/dev-environments/set-up/
+          title: Set up a dev environment
         - path: /desktop/dev-environments/share/
           title: Distribute your dev environment
-    - sectiontitle: Extensions (Beta)
+        - path: /desktop/dev-environments/dev-cli/
+          title: Use the docker dev CLI plugin
+    - sectiontitle: Extensions
       section:
       - path: /desktop/extensions/
         title: What are Docker Extensions?
       - path: /desktop/extensions/marketplace/
-        title: Manage marketplace Extensions
+        title: Manage Marketplace extensions
       - path: /desktop/extensions/non-marketplace/
         title: Manage non-Marketplace extensions
       - path: /desktop/extensions/settings-feedback/
-        title: Change Settings and give feedback
-    - sectiontitle: Extensions SDK (Beta)
+        title: Change settings and give feedback
+    - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
           title: Overview
+        - path: /desktop/extensions-sdk/process/
+          title: The build and publish process
         - path: /desktop/extensions-sdk/quickstart/
           title: Quickstart
         - sectiontitle: "Part one: Build"
           section:
-            - sectiontitle: "Step one: Set up..."
-              section:
-                - title: ...a minimal frontend extension
-                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
-                - title: ... a ReactJS-based extension
-                  path: /desktop/extensions-sdk/build/set-up/react-extension/
-                - title: ... a minimal extension invoking Docker commands
-                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
-                - title: ... a minimal backend extension
-                  path: /desktop/extensions-sdk/build/set-up/minimal-backend-extension/
-            - title: "Step two: Build and install"
-              path: /desktop/extensions-sdk/build/build-install/
-            - title: "Step three: Test and debug"
-              path: /desktop/extensions-sdk/build/test-debug/
+            - title: Create a simple extension
+              path: /desktop/extensions-sdk/build/minimal-frontend-extension/
+            - title: Create an advanced frontend extension
+              path: /desktop/extensions-sdk/build/frontend-extension-tutorial/
+            - title: Add a backend to your extension
+              path: /desktop/extensions-sdk/build/backend-extension-tutorial/
         - sectiontitle: "Part two: Publish"
           section:
             - title: Overview
               path: /desktop/extensions-sdk/extensions/
-            - title: Metadata
-              path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
-            - title: Distribution
+            - title: Package and release your extension
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
+            - title: Generate a share link
+              path: /desktop/extensions-sdk/extensions/share/
+            - title: Publish in the marketplace
+              path: /desktop/extensions-sdk/extensions/publish/
             - title: Build multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
+        - sectiontitle: "Architecture"
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/architecture/
+            - title: Metadata
+              path: /desktop/extensions-sdk/architecture/metadata/
         - sectiontitle: "Design and UI styling"
           section:
+             - title: UI styling guidelines
+               path: /desktop/extensions-sdk/design/
              - title: Guidelines
                path: /desktop/extensions-sdk/design/design-guidelines/
              - title: Docker design principles
                path: /desktop/extensions-sdk/design/design-principles/
-             - title: UI styling guidelines
-               path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
+        - sectiontitle: "Developer Guides"
+          section:
+            - title: Invoke host binaries
+              path: /desktop/extensions-sdk/guides/invoke-host-binaries/
+            - title: Use the Docker socket from the extension backend
+              path: /desktop/extensions-sdk/guides/use-docker-socket-from-backend/
+            - title: Interacting with Kubernetes
+              path: /desktop/extensions-sdk/guides/kubernetes/
+            - title: Authentication
+              path: /desktop/extensions-sdk/guides/oauth2-flow/
+            - title: Security
+              path: /desktop/extensions-sdk/guides/security/
         - sectiontitle: Developer SDK tools
           section:
-            - title: Interacting with Kubernetes
-              path: /desktop/extensions-sdk/dev/kubernetes/          
-            - title: Authentication
-              path: /desktop/extensions-sdk/dev/oauth2-flow/
+            - title: "Test and debug"
+              path: /desktop/extensions-sdk/dev/test-debug/
             - title: CLI reference
               path: /desktop/extensions-sdk/dev/usage/
             - sectiontitle: Extension APIs
@@ -1378,7 +1250,9 @@ manuals:
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
     - path: /desktop/containerd/
-      title: Containerd Image Store (Beta)
+      title: containerd image store (Beta)
+    - path: /desktop/wasm/
+      title: Wasm (Beta)
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/
@@ -1415,156 +1289,409 @@ manuals:
   section:
   - path: /engine/
     title: Overview
-  - path: /engine/install/
-    title: Install
-  - sectiontitle: Installation per distro
+  - sectiontitle: Install
     section:
+    - path: /engine/install/
+      title: Overview
     - path: /engine/install/centos/
-      title: Install on CentOS
+      title: CentOS
     - path: /engine/install/debian/
-      title: Install on Debian
+      title: Debian
     - path: /engine/install/fedora/
-      title: Install on Fedora
+      title: Fedora
     - path: /engine/install/rhel/
-      title: Install on RHEL
+      title: RHEL
     - path: /engine/install/sles/
-      title: Install on SLES
+      title: SLES
     - path: /engine/install/ubuntu/
-      title: Install on Ubuntu
+      title: Ubuntu
     - path: /engine/install/binaries/
-      title: Install binaries
-  - path: /engine/install/linux-postinstall/
-    title: Optional post-installation steps
+      title: Binaries
+    - path: /engine/install/linux-postinstall/
+      title: Post-installation steps
+    - path: /engine/install/troubleshoot/
+      title: Troubleshoot installation
+  - sectiontitle: Storage
+    section:
+    - path: /storage/
+      title: Overview
+    - path: /storage/volumes/
+      title: Volumes
+    - path: /storage/bind-mounts/
+      title: Bind mounts
+    - path: /storage/tmpfs/
+      title: tmpfs mounts
+    - path: /storage/troubleshooting_volume_errors/
+      title: Troubleshoot
+    - sectiontitle: Storage drivers
+      section:
+      - path: /storage/storagedriver/
+        title: Overview
+      - path: /storage/storagedriver/select-storage-driver/
+        title: Select a storage driver
+      - path: /storage/storagedriver/aufs-driver/
+        title: Use the AUFS storage driver
+      - path: /storage/storagedriver/btrfs-driver/
+        title: Use the Btrfs storage driver
+      - path: /storage/storagedriver/device-mapper-driver/
+        title: Use the Device mapper storage driver
+      - path: /storage/storagedriver/overlayfs-driver/
+        title: Use the OverlayFS storage driver
+      - path: /storage/storagedriver/zfs-driver/
+        title: Use the ZFS storage driver
+      - path: /storage/storagedriver/vfs-driver/
+        title: Use the VFS storage driver
+  - sectiontitle: Networking
+    section:
+    - path: /network/
+      title: Overview
+    - path: /config/containers/container-networking/
+      title: Container networking
+    - path: /network/proxy/
+      title: Configure Docker to use a proxy server
+    - path: /network/bridge/
+      title: Bridge networks
+    - path: /network/overlay/
+      title: Overlay networks
+    - path: /network/host/
+      title: Host networking
+    - path: /network/ipvlan/
+      title: IPvlan networks
+    - path: /network/macvlan/
+      title: Macvlan networks
+    - path: /network/none/
+      title: Disable networking for a container
+    - sectiontitle: Networking tutorials
+      section:
+      - path: /network/network-tutorial-standalone/
+        title: Bridge network tutorial
+      - path: /network/network-tutorial-host/
+        title: Host networking tutorial
+      - path: /network/network-tutorial-overlay/
+        title: Overlay networking tutorial
+      - path: /network/network-tutorial-macvlan/
+        title: Macvlan network tutorial
+    - sectiontitle: Legacy networking content
+      section:
+      - path: /network/links/
+        title: (Legacy) Container links
+  - sectiontitle: Working with Docker Engine
+    section:
+    - path: /config/daemon/start/
+      title: Start the daemon
+    - path: /config/pruning/
+      title: Prune unused objects
+    - path: /config/formatting/
+      title: Format command and log output
+    - path: /config/containers/start-containers-automatically/
+      title: Start containers automatically
+    - path: /config/labels-custom-metadata/
+      title: Labels
+    - path: /engine/scan/
+      title: Docker Scan
+    - path: /engine/sbom/
+      title: Docker SBOM (Experimental)
+  - sectiontitle: Logging
+    section:
+    - sectiontitle: Container logs
+      section:
+      - path: /config/containers/logging/
+        title: View container logs
+      - sectiontitle: Manage container logs
+        section:
+        - path: /config/containers/logging/configure/
+          title: Configure logging drivers
+        - path: /config/containers/logging/dual-logging/
+          title: Use a remote logging driver
+        - path: /config/containers/logging/plugins/
+          title: Use a logging driver plugin
+        - path: /config/containers/logging/log_tags/
+          title: Customize log driver output
+        - sectiontitle: Logging drivers
+          section:
+          - path: /config/containers/logging/local/
+            title: Local file logging driver
+          - path: /config/containers/logging/logentries/
+            title: Logentries logging driver
+          - path: /config/containers/logging/json-file/
+            title: JSON File logging driver
+          - path: /config/containers/logging/gelf/
+            title: Graylog Extended Format (GELF) logging driver
+          - path: /config/containers/logging/syslog/
+            title: Syslog logging driver
+          - path: /config/containers/logging/awslogs/
+            title: Amazon CloudWatch logs logging driver
+          - path: /config/containers/logging/etwlogs/
+            title: ETW logging driver
+          - path: /config/containers/logging/fluentd/
+            title: Fluentd logging driver
+          - path: /config/containers/logging/gcplogs/
+            title: Google Cloud logging driver
+          - path: /config/containers/logging/journald/
+            title: Journald logging driver
+          - path: /config/containers/logging/splunk/
+            title: Splunk logging driver
+    - path: /config/daemon/logs/
+      title: Daemon logs
+  - sectiontitle: Security
+    section:
+      - path: /engine/security/
+        title: Overview
+      - path: /engine/security/rootless/
+        title: Rootless mode
+      - path: /engine/security/non-events/
+        title: Docker security non-events
+      - path: /engine/security/protect-access/
+        title: Protect the Docker daemon socket
+      - path: /engine/security/certificates/
+        title: Using certificates for repository client verification
+      - sectiontitle: Use trusted images
+        section:
+        - path: /engine/security/trust/
+          title: Overview
+        - path: /engine/security/trust/trust_automation/
+          title: Automation
+        - path: /engine/security/trust/trust_delegation/
+          title: Delegations
+        - path: /engine/security/trust/deploying_notary/
+          title: Deploy Notary
+        - path: /engine/security/trust/trust_key_mng/
+          title: Manage content trust keys
+        - path: /engine/security/trust/trust_sandbox/
+          title: Play in a content trust sandbox
+      - path: /engine/security/antivirus/
+        title: Antivirus software
+      - path: /engine/security/apparmor/
+        title: AppArmor security profiles
+      - path: /engine/security/seccomp/
+        title: Seccomp security profiles
+      - path: /engine/security/userns-remap/
+        title: Isolate containers with a user namespace
+  - sectiontitle: Advanced concepts
+    section:
+    - sectiontitle: Container runtime
+      section:
+      - path: /config/containers/resource_constraints/
+        title: Configure runtime resource constraints
+      - path: /config/containers/runmetrics/
+        title: Collect runtime metrics
+      - path: /config/containers/multi-service_container/
+        title: Run multiple services in a container
+      - path: /config/daemon/prometheus/
+        title: Collect metrics with Prometheus
+    - sectiontitle: Daemon configuration
+      section:
+      - path: /config/daemon/
+        title: Configuration overview
+      - path: /config/daemon/systemd/
+        title: Configure with systemd
+      - path: /config/daemon/ipv6/
+        title: Use IPv6
+      - path: /config/containers/live-restore/
+        title: Keep containers alive during daemon downtime
+      - path: /config/daemon/troubleshoot/
+        title: Troubleshoot
+      - path: /network/iptables/
+        title: Docker and iptables
+      - path: /config/daemon/remote-access/
+        title: Remote access
+      - path: /engine/context/working-with-contexts/
+        title: Contexts
+    - sectiontitle: Engine plugins
+      section:
+      - path: /engine/extend/
+        title: Managed plugin system
+      - path: /engine/extend/plugins_authorization/
+        title: Access authorization plugin
+      - path: /engine/extend/legacy_plugins/
+        title: Extending Docker with plugins
+      - path: /engine/extend/plugins_network/
+        title: Docker network driver plugins
+      - path: /engine/extend/plugins_volume/
+        title: Volume plugins
+      - title: Plugin configuration
+        path: /engine/extend/config/
+      - path: /engine/extend/plugin_api/
+        title: Plugins
   - path: /engine/deprecated/
     title: Deprecated features
-  - path: /engine/context/working-with-contexts/
-    title: Docker Context
-  - path: /engine/scan/
-    title: Docker Scan
-  - path: /engine/sbom/
-    title: Docker SBOM (Experimental)
-  - path: /engine/release-notes/
-    title: Release notes
-  - sectiontitle: Previous versions
+  - sectiontitle: Release notes
     section:
+    - path: /engine/release-notes/
+      title: Engine 20.10
+    - sectiontitle: Previous versions
+      section:
       - path: /engine/release-notes/19.03/
-        title: Engine 19.03 release notes
+        title: Engine 19.03
       - path: /engine/release-notes/18.09/
-        title: Engine 18.09 release notes
+        title: Engine 18.09
       - path: /engine/release-notes/18.06/
-        title: Engine 18.06 release notes
+        title: Engine 18.06
       - path: /engine/release-notes/18.05/
-        title: Engine 18.05 release notes
+        title: Engine 18.05
       - path: /engine/release-notes/18.04/
-        title: Engine 18.04 release notes
+        title: Engine 18.04
       - path: /engine/release-notes/18.03/
-        title: Engine 18.03 release notes
+        title: Engine 18.03
       - path: /engine/release-notes/18.02/
-        title: Engine 18.02 release notes
+        title: Engine 18.02
       - path: /engine/release-notes/18.01/
-        title: Engine 18.01 release notes
+        title: Engine 18.01
       - path: /engine/release-notes/17.12/
-        title: Engine 17.12 release notes
+        title: Engine 17.12
       - path: /engine/release-notes/17.11/
-        title: Engine 17.11 release notes
+        title: Engine 17.11
       - path: /engine/release-notes/17.10/
-        title: Engine 17.10 release notes
+        title: Engine 17.10
       - path: /engine/release-notes/17.09/
-        title: Engine 17.09 release notes
+        title: Engine 17.09
       - path: /engine/release-notes/17.07/
-        title: Engine 17.07 release notes
+        title: Engine 17.07
       - path: /engine/release-notes/17.06/
-        title: Engine 17.06 release notes
+        title: Engine 17.06
       - path: /engine/release-notes/17.05/
-        title: Engine 17.05 release notes
+        title: Engine 17.05
       - path: /engine/release-notes/17.04/
-        title: Engine 17.04 release notes
+        title: Engine 17.04
       - path: /engine/release-notes/17.03/
-        title: Engine 17.03 release notes
+        title: Engine 17.03
       - path: /engine/release-notes/prior-releases/
         title: Engine 1.13 and earlier
 - sectiontitle: Docker Build
   section:
     - path: /build/
       title: Overview
+    - path: /build/install-buildx/
+      title: Install Buildx
     - sectiontitle: Building images
       section:
         - path: /build/building/packaging/
           title: Packaging your software
-        - sectiontitle: Build drivers
-          section:
-            - path: /build/building/drivers/
-              title: Overview
-            - path: /build/building/drivers/docker/
-              title: Docker driver
-            - path: /build/building/drivers/docker-container/
-              title: Docker container driver
-            - path: /build/building/drivers/kubernetes/
-              title: Kubernetes driver
-            - path: /build/building/drivers/remote/
-              title: Remote driver
-        - path: /build/building/cache/
-          title: Optimizing builds with cache
-        - sectiontitle: Cache backends
-          section:
-            - path: /build/building/cache/backends/
-              title: Overview
-            - path: /build/building/cache/backends/inline/
-              title: Inline
-            - path: /build/building/cache/backends/local/
-              title: Local
-            - path: /build/building/cache/backends/registry/
-              title: Registry
-            - path: /build/building/cache/backends/gha/
-              title: GitHub Actions
-            - path: /build/building/cache/backends/azblob/
-              title: Azure Blob Storage
-            - path: /build/building/cache/backends/s3/
-              title: Amazon S3
+        - path: /build/building/context/
+          title: Build context
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
-    - sectiontitle: Customizing builds
+        - path: /build/building/base-images/
+          title: Create your own base image
+    - sectiontitle: Drivers
       section:
-        - sectiontitle: High-level builds with Bake
+        - path: /build/drivers/
+          title: Drivers overview
+        - path: /build/drivers/docker/
+          title: Docker driver
+        - path: /build/drivers/docker-container/
+          title: Docker container driver
+        - path: /build/drivers/kubernetes/
+          title: Kubernetes driver
+        - path: /build/drivers/remote/
+          title: Remote driver
+    - sectiontitle: Cache
+      section:
+        - path: /build/cache/
+          title: Optimizing builds with cache
+        - path: /build/cache/garbage-collection/
+          title: Garbage collection
+        - sectiontitle: Cache backends
           section:
-            - path: /build/customize/bake/
+            - path: /build/cache/backends/
               title: Overview
-            - path: /build/customize/bake/file-definition/
-              title: File definition
-            - path: /build/customize/bake/configuring-build/
-              title: Configuring builds
-            - path: /build/customize/bake/hcl-funcs/
-              title: User defined HCL functions
-            - path: /build/customize/bake/build-contexts/
-              title: Build contexts and linking targets
-            - path: /build/customize/bake/compose-file/
-              title: Building from Compose file
-    - sectiontitle: Buildx
+            - path: /build/cache/backends/inline/
+              title: Inline
+            - path: /build/cache/backends/local/
+              title: Local
+            - path: /build/cache/backends/registry/
+              title: Registry
+            - path: /build/cache/backends/gha/
+              title: GitHub Actions
+            - path: /build/cache/backends/azblob/
+              title: Azure Blob Storage
+            - path: /build/cache/backends/s3/
+              title: Amazon S3
+    - sectiontitle: Exporters
       section:
-        - path: /build/buildx/install/
-          title: Install Buildx
-        - path: /build/buildx/multiple-builders/
-          title: Using multiple builders
+      - path: /build/exporters/
+        title: Overview
+      - path: /build/exporters/image-registry/
+        title: Image and registry exporters
+      - path: /build/exporters/local-tar/
+        title: Local and tar exporters
+      - path: /build/exporters/oci-docker/
+        title: OCI and Docker exporters
+    - sectiontitle: Continuous integration
+      section:
+        - path: /build/ci/
+          title: CI with Docker
+        - sectiontitle: GitHub Actions
+          section:
+          - path: /build/ci/github-actions/
+            title: Introduction
+          - path: /build/ci/github-actions/examples/
+            title: Examples
+          - path: /build/ci/github-actions/configure-builder/
+            title: Configuring your builder
+    - sectiontitle: Bake
+      section:
+        - path: /build/bake/
+          title: Overview
+        - path: /build/bake/file-definition/
+          title: File definition
+        - path: /build/bake/configuring-build/
+          title: Configuring builds
+        - path: /build/bake/hcl-funcs/
+          title: User defined HCL functions
+        - path: /build/bake/build-contexts/
+          title: Build contexts and linking targets
+        - path: /build/bake/compose-file/
+          title: Building from Compose file
+    - sectiontitle: Attestations
+      section:
+        - path: /build/attestations/
+          title: Overview
+        - path: /build/attestations/sbom/
+          title: SBOM
+        - path: /build/attestations/slsa-provenance/
+          title: Provenance
+        - path: /build/attestations/slsa-definitions/
+          title: SLSA definitions
+        - path: /build/attestations/attestation-storage/
+          title: Attestation storage
+    - sectiontitle: BuildKit
+      section:
+        - path: /build/buildkit/
+          title: Overview
+        - path: /build/buildkit/dockerfile-frontend/
+          title: Custom Dockerfile syntax
+        - path: /build/buildkit/configure/
+          title: Configure
+        - path: /build/buildkit/toml-configuration/
+          title: TOML configuration
+        - path: /build/buildkit/color-output-controls/
+          title: Color output controls
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
     title: Overview
+  - path: /compose/features-uses/
+    title: Key features and use cases
+  - path: /compose/compose-v2/
+    title: Evolution of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
-        title: Install overview
+        title: Overview
       - path: /compose/install/linux/
-        title: Install on Linux
+        title: Install the Compose plugin
       - path: /compose/install/other/
-        title: Other install scenarios
+        title: Install the Compose standalone
       - path: /compose/install/uninstall/
-        title: Uninstall Docker Compose
+        title: Uninstall Compose
   - path: /compose/gettingstarted/
-    title: Getting started
+    title: Try Docker Compose
+
   - sectiontitle: Environment variables
     section:
     - path: /compose/environment-variables/
@@ -1587,14 +1714,16 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /compose/cli-command-compatibility/
-    title: Compose v2 compatibility
+  - path: /compose/faq/
+    title: FAQs
   - path: /compose/release-notes/
     title: Release notes
 
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
+    title: Overview
+  - path: /docker-hub/quickstart/
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts
@@ -1655,7 +1784,7 @@ manuals:
       - path: /docker-hub/publish/
         title: Overview
       - path: /docker-hub/publish/insights-analytics/
-        title: Insights & analytics
+        title: Insights and analytics
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
   - path: /docker-hub/release-notes/
@@ -1690,56 +1819,28 @@ manuals:
     title: Manage members
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign-in
-  - sectiontitle: Single-Sign-on
+  - sectiontitle: Single Sign-on
     section:
       -  path: /single-sign-on/
+         title: Overview
+      -  path: /single-sign-on/requirements/
+         title: Requirements
+      -  path: /single-sign-on/configure/
          title: Configure
+      -  path: /single-sign-on/manage/
+         title: Manage
       -  path: /single-sign-on/faqs/
          title: FAQs
   - path: /docker-hub/scim/
-    title: System for Cross-domain Identity Management
+    title: SCIM
+  - path: /docker-hub/domain-audit/
+    title: Domain audit
   - path: /docker-hub/image-access-management/
     title: Image Access Management
 
 
-- sectiontitle: Security
-  section:
-  - path: /security/
-    title: Announcements
-  - sectiontitle: Docker Engine security
-    section:
-      - path: /engine/security/
-        title: Overview
-      - path: /engine/security/non-events/
-        title: Docker security non-events
-      - path: /engine/security/protect-access/
-        title: Protect the Docker daemon socket
-      - path: /engine/security/certificates/
-        title: Using certificates for repository client verification
-      - sectiontitle: Use trusted images
-        section:
-        - path: /engine/security/trust/
-          title: Overview
-        - path: /engine/security/trust/trust_automation/
-          title: Automation
-        - path: /engine/security/trust/trust_delegation/
-          title: Delegations
-        - path: /engine/security/trust/deploying_notary/
-          title: Deploy Notary
-        - path: /engine/security/trust/trust_key_mng/
-          title: Manage content trust keys
-        - path: /engine/security/trust/trust_sandbox/
-          title: Play in a content trust sandbox
-      - path: /engine/security/antivirus/
-        title: Antivirus software
-      - path: /engine/security/apparmor/
-        title: AppArmor security profiles
-      - path: /engine/security/seccomp/
-        title: Seccomp security profiles
-      - path: /engine/security/userns-remap/
-        title: Isolate containers with a user namespace
-      - path: /engine/security/rootless/
-        title: Rootless mode
+- title: Security announcements
+  path: /security/
 
 - sectiontitle: Atomist
   section:
@@ -1802,7 +1903,7 @@ manuals:
 - path: /release-notes/
   title: Release notes
 - path: /support/
-  title: Get Support
+  title: Get support
 - path: /release-lifecycle/
   title: Product release lifecycle
 contribute:
@@ -1824,6 +1925,8 @@ contribute:
       title: Voice and tone
   - path: /contribute/file-conventions/
     title: Source file conventions
+  - path: /contribute/ui/
+    title: UI elements in content
   - sectiontitle: Useful components
     section:
     - path: /contribute/components/accordions/

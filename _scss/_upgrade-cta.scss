@@ -1,13 +1,13 @@
 .docker-upgrade-cta {
-  body.night & {
-    background-color: change-color($orange-10, $alpha: 0.3);
-    border: 1px solid $orange-10;
-    p, .docker-upgrade-cta__heading { color: $white-0; }
+  html.night & {
+    background-color: change-color($light-amber-100, $alpha: 0.3);
+    border: 1px solid $light-amber-100;
+    p, .docker-upgrade-cta__heading { color: $white; }
   }
 
-  body:not(.night) & {
-    background-color: $orange-10;
-    border: 1px solid $orange-20;
+  html:not(.night) & {
+    background-color: $light-amber-100;
+    border: 1px solid $light-amber-200;
     p, .docker-upgrade-cta__heading { color: inherit; }
   }
 

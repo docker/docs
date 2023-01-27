@@ -7,11 +7,15 @@ variable "DOCS_URL" {
 variable "DOCS_SITE_DIR" {
   default = "_site"
 }
+variable "DOCS_ENFORCE_GIT_LOG_HISTORY" {
+  default = "0"
+}
 
 target "_common" {
   args = {
     JEKYLL_ENV = JEKYLL_ENV
     DOCS_URL = DOCS_URL
+    DOCS_ENFORCE_GIT_LOG_HISTORY = DOCS_ENFORCE_GIT_LOG_HISTORY
   }
   no-cache-filter = ["generate"]
 }

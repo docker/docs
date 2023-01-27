@@ -14,9 +14,22 @@ This page details Docker's product release lifecycle and how Docker defines each
 
 | Lifecycle stage  | Customer availability | Support availability | Limitations | Retirement |
 | --- | --- | ---- | ---| ---|
+|[Experimental](#experimental)| Limited availability | Community support |Software may have limitations, bugs and/or stability concerns | Can be discontinued without notice |
 |[Beta](#beta) | All or those involved in a Beta Feedback Program | Community support | Software may have limitations, bugs and/or stability concerns | Can be discontinued without notice |
 | [Early Access (EA)](#early-access-ea) | All or those involved in an Early Access Feedback Program | Full | Software may have limitations, bugs and/or stability concerns.  These limitations will be documented. | Follows [retirement process](#retirement-process) |
 | [General Availability (GA)](#general-availability-ga) | All | Full | Few or no limitations for supported use cases | Follows [retirement process](#retirement-process) |
+
+### Experimental
+
+Experimental offerings are features that Docker is currently experimenting with. Customers who access experimental features have the opportunity to test, validate, and provide feedback on future functionality. This helps us focus our efforts on what provides the most value to our customers.
+
+**Customer availability:** Availability of experimental features is limited. A portion of users may have access to none, one or many experimental features. 
+
+**Support:** Support for Experimental features is best effort via Community support channels and forums.
+
+**Limitations:** Experimental features may have potentially significant limitations such as functional limitations, performance limitations, and API limitations. Features and programmatic interfaces may change at any time without notice.
+
+**Retirement:** During the experimental period, Docker will determine whether to continue an offering through its lifecycle. We reserve the right to change the scope of or discontinue an Experimental product or feature at any point in time without notice, as outlined in our [Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement).
 
 ### Beta
 

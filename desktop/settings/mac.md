@@ -1,7 +1,7 @@
 ---
 description: Docker Desktop settings
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Mac
-title: Change Docker Desktop preferences on Mac
+title: Change preferences on Mac
 redirect_from:
 - /docker-for-mac/mutagen-caching/
 - /docker-for-mac/mutagen/
@@ -11,10 +11,10 @@ redirect_from:
 
 This page provides information on how to configure and manage your Docker Desktop settings.
 
-To navigate to **Preferences** either:
+To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Preferences**
-- Select the **Preferences** icon from the Docker Dashboard.
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
+- Select the **Settings** icon from the Docker Dashboard.
 
 ## General
 
@@ -30,8 +30,9 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is disabled by default.
 
-- **Use gRPC FUSE for file sharing**. Clear this check box to use the legacy
-  osxfs file sharing instead.
+- **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`. 
+
+- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. The **VirtioFS** option is only available for macOS versions 12.5 and above. 
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
@@ -44,8 +45,10 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Open Docker Desktop dashboard at startup**. Select to automatically open the
   dashboard when starting Docker Desktop.
 
+- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
+
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/index.md#compose-v2-and-the-new-docker-compose-command).
+  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
 
 ## Resources
 
@@ -131,18 +134,20 @@ HTTP/HTTPS proxies can be used when:
 - Containers interact with the external network
 - Scanning images
 
-Each use case above is configured slightly differently.
+If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration), Docker Desktop reads
+this configuration
+and automatically uses these settings for logging into Docker, for pulling and pushing images, and for
+container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
+the developer for a username and password. All passwords are stored securely in the OS credential store.
+Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
+URL for your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
+supports TLS 1.3 when communicating with proxies.
 
-If the host uses a static HTTP/HTTPS proxy configuration, Docker Desktop reads this configuration
-and automatically uses these settings for logging into Docker and for pulling and pushing images.
+To set a different proxy for Docker Desktop, enable **Manual proxy configuration** and enter a single
+upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
 
-If the host uses a more sophisticated HTTP/HTTPS configuration, enable **Manual proxy configuration** and enter a single upstream proxy URL
-of the form `http://username:password@proxy:port`.
-
-HTTP/HTTPS traffic from image builds and running containers is forwarded transparently to the same
-upstream proxy used for logging in and image pulls.
-If you want to override this behaviour and use different HTTP/HTTPS proxies for image builds and
-running containers, see [Configure the Docker client](../../network/proxy.md#configure-the-docker-client).
+To prevent developers from accidentally changing the proxy settings, see
+[Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
 
 The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
@@ -152,36 +157,33 @@ You can configure Docker Desktop networking to work on a virtual private network
 
 ## Docker Engine
 
-The **Docker Engine** tab allows you to configure the Docker daemon to determine how your containers run.
+The **Docker Engine** tab allows you to configure the Docker daemon used to run containers with Docker Desktop.
 
-Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"}.
+You configure the daemon using a JSON configuration file. Here's what the file might look like:
 
-Click **Apply & Restart** to save your settings and restart Docker Desktop.
+```json
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": false,
+  "features": {
+    "buildkit": true
+  }
+}
+```
 
-## Beta Features
+You can find this file at `$HOME/.docker/daemon.json`. To change the configuration, either
+edit the JSON configuration directly from the dashboard in Docker Desktop, or open and
+edit the file using your favorite text editor.
 
-{% include beta.md %}
+To see the full list of possible configuration options, see the 
+[dockerd command reference](/engine/reference/commandline/dockerd/).
 
-On the **Beta features** tab, you also have the option to allow version 4.13 feature flags, which are product features Docker is currently experimenting with. This is switched on by default. 
-
-### Enable the new Apple Virtualization framework
-
-Select **Use the new Virtualization framework** to allow Docker Desktop to use the new `virtualization.framework` instead of the ‘hypervisor.framework’. Ensure to reset your Kubernetes cluster when you enable the new Virtualization framework for the first time.
-
-### Enable VirtioFS
-
- Docker Desktop for Mac lets developers use a new experimental file-sharing implementation called [virtiofS](https://virtio-fs.gitlab.io/){: target='_blank' rel='noopener' class='_'}; the current default is gRPC-FUSE. virtiofs has been found to significantly improve file sharing performance on macOS. For more details, see our blog post [Speed boost achievement unlocked on Docker Desktop 4.6 for Mac](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/){:target="_blank" rel="noopener" class="_"}.
-
-To enable virtioFS:
-
-1. Verify that you are on the following macOS version:
-   - macOS 12.2 or later (for Apple Silicon)
-   - macOS 12.3 or later (for Intel)
-
-2. Select **Enable VirtioFS accelerated directory sharing** to enable virtioFS.
-
-3. Click **Apply & Restart**.
+Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
 ## Kubernetes
 
@@ -224,3 +226,25 @@ Use the **Extensions** tab to:
 - **Show Docker Extensions system containers**
 
 For more information about Docker extensions, see [Extensions](../extensions/index.md).
+
+## Features in development
+
+On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
+
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"} from the **Features in development** tab.
+
+### Beta features
+
+{% include beta.md %}
+
+#### Enable containerd
+
+Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
+
+#### Use Rosetta for x86/AMD64 emulation on Apple Silicon. 
+
+Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. 
+
+### Experimental features
+
+{% include desktop-experimental.md %}

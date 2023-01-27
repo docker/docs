@@ -1,47 +1,45 @@
 ---
-title: Publish your extension
+title: Extension release process
 description: General steps in how to publish an extension
 keywords: Docker, Extensions, sdk, publish
 ---
 
-To publish the extension, upload the Docker image to [DockerHub](https://hub.docker.com/).
+This section describes how to make your extension available and more visible, so users can discover it and install it with a single click.
 
-Tag the previous image to prepend the account owner at the beginning of the image name:
+## Release your extension
 
-`docker tag <name-of-your-extension> owner/<name-of-your-extension>`
+You have developed your extension and tested it locally. You are now ready to release the extension and make it available for others to install and use (either internally with your team, or more publicly).
 
-Push the image to Docker Hub:
+Releasing your extension consists of:
 
-`docker push owner/<name-of-your-extension>`
+- Providing information about your extension: description, screenshots, etc. so users can decide to install your extension
+- [Validating](./validate.md) that the extension is built in the right format and includes the required information
+- Making the extension image available on [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" }
 
-> Note
-> 
-> For Docker Extensions images to be listed in Docker Desktop, they must be approved by Docker and the tags must follow semantic versioning, e.g: `0.0.1`.
-> 
-> See [distribution and new releases](DISTRIBUTION.md#distribution-and-new-releases) for more information.
-> 
-> See [semver.org](https://semver.org/) to learn more about semantic versioning.
-> 
+See [Package and release your extension](DISTRIBUTION.md) for more details about the release process.
 
-> Having trouble pushing the image?
-> 
-> Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
-> 
+## Promote your extension
 
-## Publish your extension in the Marketplace
+Once your extension is available on Docker Hub, users who have access to the extension image can install it using the Docker CLI.
 
-Docker Desktop displays published extensions in the Extensions Marketplace.
-If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/). We'll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
+### Use a share extension link
 
-## Clean up
+You can also [generate a share URL](share.md) in order to share your extension within your team, or promote your extension on the internet. The share link allows users to view the extension description and screenshots.
 
-To remove the extension, run:
+### Publish your extension in the Marketplace
 
-`docker extension rm <name-of-your-extension>`
+You can publish your extension in the Extensions Marketplace to make it more discoverable. You must [submit your extension](publish.md) if you want to have it published in the Marketplace.
 
-## What's next
-Find more information about:
-- [The `metadata.json` file](METADATA.md)
-- [Labels in your `Dockerfile`](labels.md)
-- [Distributing your extension](DISTRIBUTION.md)
-- [Building extensions for multiple architectures](multi-arch.md)
+## What happens next
+
+### Extension new releases
+
+Once you have released your extension, you can push a new release just by pushing a new version of the extension image, with an incremented tag (still using semver conventions).
+Docker extensions published in the Marketplace benefit from update notifications to all Desktop users that have installed the extension. For more details, see [new releases and updates](DISTRIBUTION.md#new-releases-and-updates)
+
+### Extension support and user feedback
+
+In addition to providing a description of your extension's features and screenshots, you should also specify additional URLs using [extension labels](labels.md). This direct users to your website for reporting bugs and feedback, and accessing documentation and support.
+
+{% include extensions-form.md %}
+

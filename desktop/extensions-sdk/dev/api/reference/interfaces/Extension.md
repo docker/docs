@@ -6,7 +6,9 @@ skip_read_time: true
 
 # Interface: Extension
 
-**`since`** 0.2.0
+**`Since`**
+
+0.2.0
 
 ## Properties
 
@@ -19,3 +21,13 @@ ___
 ### host
 
 • `Optional` `Readonly` **host**: [`ExtensionHost`](ExtensionHost.md)
+
+___
+
+### image
+
+• `Readonly` **image**: `string`
+
+**`Since`**
+
+0.3.3

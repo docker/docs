@@ -4,7 +4,10 @@ description: Guidelines for using MUI to maximise compatibility with Docker Desk
 keywords: Docker, extensions, mui, theme, theming, material-ui, material
 ---
 
-This article assumes you're following our recommended practice by using our [Material UI theme](https://www.npmjs.com/package/@docker/docker-mui-theme). Following the steps below maximises compatibility with Docker Desktop and minimises the work you need to do as an extension author. They should be considered supplementary to the non-MUI-specific guidelines found in the [UI Styling overview](overview.md).
+This article assumes you're following our recommended practice by using our [Material UI theme](https://www.npmjs.com/package/@docker/docker-mui-theme){:target="_blank" rel="noopener" class="_"}.
+Following the steps below maximises compatibility with Docker Desktop and minimises the work you need to do as an
+extension author. They should be considered supplementary to the non-MUI-specific guidelines found in the
+[UI Styling overview](index.md).
 
 ## Assume the theme can change at any time
 
@@ -35,13 +38,13 @@ Sometimes you’ll need a piece of UI that doesn’t exist in our design system.
 
 If you still decide to build it yourself after contacting us, try and define the new UI in a reuseable fashion. If you define your custom UI in just one place, it’ll make it easier to change in the future if our core theme changes. You could use:
 
--  A new `variant` of an existing component - see [MUI docs](https://mui.com/material-ui/customization/theme-components/#creating-new-component-variants)
+-  A new `variant` of an existing component - see [MUI docs](https://mui.com/material-ui/customization/theme-components/#creating-new-component-variants){:target="_blank" rel="noopener" class="_"}
 -  A MUI mixin (a freeform bundle of reuseable styling rules defined inside a theme)
--  A new [reuseable component](https://mui.com/material-ui/customization/how-to-customize/#2-reusable-component)
+-  A new [reuseable component](https://mui.com/material-ui/customization/how-to-customize/#2-reusable-component){:target="_blank" rel="noopener" class="_"}
 
-Some of the above options require you to extend our MUI theme. See the MUI documentation on [theme composition](https://mui.com/material-ui/customization/theming/#nesting-the-theme).
+Some of the above options require you to extend our MUI theme. See the MUI documentation on [theme composition](https://mui.com/material-ui/customization/theming/#nesting-the-theme){:target="_blank" rel="noopener" class="_"}.
 
 ## What's next?
 
-- Take a look at our [UI styling guide](overview.md).
+- Take a look at our [UI styling guide](index.md).
 - Learn how to [publish your extension](../extensions/index.md).

@@ -1,22 +1,40 @@
 ---
 description: Dev Environments
-keywords: Dev Environments, share, collaborate, local
-title: Create a simple dev environment
+keywords: Dev Environments, share, Docker Desktop, Compose, launch
+title: Launch a dev environment
+redirect_from: 
+- /desktop/dev-environments/create-compose-dev-env/
 ---
+{% include dev-envs-changing.md %}
 
-You can create a dev environment from a:
+You can launch a dev environment from a:
 - Git repository
 - Branch or tag of a Git repository
 - Subfolder of a Git repository
 - Local folder
 
-This did not conflict with any of the local files or local tooling set up on your host. 
+This does not conflict with any of the local files or local tooling set up on your host. 
 
-## Create a dev environment from a Git repository
+>Tip
+>
+>Install the [Dev Environments browser extension](https://github.com/docker/dev-envs-extension){:target="_blank" rel="noopener" class="_"} for [Chrome](https://chrome.google.com/webstore/detail/docker-dev-environments/gnagpachnalcofcblcgdbofnfakdbeka){:target="_blank" rel="noopener" class="_"} or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/docker-dev-environments/){:target="_blank" rel="noopener" class="_"}, to launch a dev environment faster.
+{: .tip }
 
-The simplest way to get started with Dev Environments is to create a new environment by cloning the Git repository of the project you are working on. 
+## Prerequisites
 
-For example, create a new Dev Environment using the simple `single-dev-env` project from the [Docker Samples](https://github.com/dockersamples/single-dev-env){:target="_blank" rel="noopener" class="_"} GitHub repository.
+Dev Environments is available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
+
+- [Docker Desktop](../release-notes.md)
+
+To get started with Dev Environments, you must also install the following tools and extension on your machine:
+
+- [Git](https://git-scm.com){:target="_blank" rel="noopener" class="_"}. Make sure add Git to your PATH if you're a Windows user. 
+- [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}
+- [Visual Studio Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers){:target="_blank" rel="noopener" class="_"}
+
+ After Git is installed, restart Docker Desktop. Select **Quit Docker Desktop**, and then start it again.
+
+## Launch a dev environment from a Git repository
 
 > **Note**
 >
@@ -55,22 +73,23 @@ fi
     </div>
 </div>
 
-To create a dev environment:
+To launch a dev environment:
 
-1. From **Under Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
-2. Select **Get Started** and then copy `https://github.com/dockersamples/single-dev-env.git` and add it to the **Enter the Git Repository** field with **Existing Git repo** as the source.
-3. Select **Continue**.
+1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
+2. Select **Get Started**. 
+3. Optional: Provide a name for you dev environment.
+4. Select **Existing Git repo** as the source and then paste your Git repository link into the field provided.
+5. Choose your IDE. You can choose either:
+    - **Visual Studio Code**. The Git repository is cloned into a Volume and attaches to your containers. This allows you to develop directly inside of them using Visual Studio Code.
+    - **Other**. The Git repository is cloned into your chosen local directory and attaches to your containers as a bind mount. This shares the directory from your computer to the container, and allows you to develop using any local editor or IDE.
+6. Select **Continue**.
 
-    This detects the main language of your repository, clones the Git code inside a volume, determines the best image for your Dev Environment, and opens VS Code inside the Dev Environment container.
-
-4. Hover over the container and select **Open in VS Code** to start working. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
-
-5. To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
+To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
 
-## Create a dev environment from a specific branch or tag
+## Launch from a specific branch or tag
 
-You can create a dev environment from a specific branch (for example, a branch corresponding to a Pull Request) or a tag by adding `@mybranch` or `@tag` as a suffix to your Git URL:
+You can launch a dev environment from a specific branch, for example a branch corresponding to a Pull Request, or a tag by adding `@mybranch` or `@tag` as a suffix to your Git URL:
 
  `https://github.com/dockersamples/single-dev-env@mybranch`
 
@@ -80,30 +99,32 @@ You can create a dev environment from a specific branch (for example, a branch c
 
 Docker then clones the repository with your specified branch or tag.
 
-## Create a dev environment from a subdirectory of a Git repository
+## Launch from a subfolder of a Git repository
 
 >Note
 >
->Currently, Dev Environments is not able to detect the main language of the subdirectory. You need to define your own base image or services in a `compose-dev.yaml`file located in your subdirectory. For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql) or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres). 
+>Currently, Dev Environments is not able to detect the main language of the subdirectory. You need to define your own base image or services in a `compose-dev.yaml`file located in your subdirectory. For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql){:target="_blank" rel="noopener" class="_"} or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres){:target="_blank" rel="noopener" class="_"}. 
 
-1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
-2. Select **Get Started** and then copy your Git subfolder link into the **Enter the Git Repository** field with **Existing Git repo** as the source.
-3. Select **Continue**.
+1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
+2. Select **Get Started**.
+3. Optional: Provide a name for you dev environment.
+4. Select **Existing Git repo** as the source and then paste the link of your Git repo subfolder into the field provided.
+5. Choose your IDE. You can choose either:
+    - **Visual Studio Code**. The Git repository is cloned into a Volume and attaches to your containers. This allows you to develop directly inside of them using Visual Studio Code.
+    - **Other**. The Git repository is cloned into your chosen local directory and attaches to your containers as a bind mount. This shares the directory from your computer to the container, and allows you to develop using any local editor or IDE.
+6. Select **Continue**.
 
-    This clones the Git code inside a volume, determines the best image for your Dev Environment, and opens VS Code inside the Dev Environment container.
+To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
 
-4. Hover over the container and select **Open in VS Code** to start working. You can also open a terminal in VS Code, and use Git to push or pull code to your repository, or switch between branches and work as you would normally.
+## Launch from a local folder
 
-5. To launch the application, run the command `make run` in your terminal. This opens an http server on port 8080. Open [http://localhost:8080](http://localhost:8080) in your browser to see the running application.
-
-## Create a dev environment from a local folder
-
-1. From **Dev Environments** in Docker Dashboard, click **Create**. The **Create a Dev Environment** dialog displays.
-2. Select **Get Started** and then choose **Local Folder** as the source.
-3. Select **Select directory** to open the root of the code that you would like to work on.
-4. Select **Continue**.
-
-    This detects the main language of your local folder, creates a Dev Environment using your local folder, and bind-mounts your local code in the Dev Environment. It then opens VS Code inside the Dev Environment container.
+1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
+2. Select **Get Started**.
+3. Optional: Provide a name for your dev environment.
+4. Choose **Local directory** as the source.
+5. Select **Select** to open the root directory of the code that you would like to work on.
+   
+   A directory from your computer is bind mounted to the container, so any changes you make locally is reflected in the dev environment. You can use an editor or IDE of your choice.
 
 > **Note**
 >
@@ -111,4 +132,6 @@ Docker then clones the repository with your specified branch or tag.
 
 ## What's next?
 
-Learn how to [distribute your dev environment](share.md)
+Learn how to:
+- [Set up a dev environment](set-up.md)
+- [Distribute your dev environment](share.md)

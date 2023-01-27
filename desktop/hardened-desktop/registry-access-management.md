@@ -1,6 +1,6 @@
 ---
 description: Registry Access Management
-keywords: registry, access, managment
+keywords: registry access managment, Hardened Docker Desktop, Docker Desktop, images, Docker Hub
 title: Registry Access Management
 redirect_from: 
 - /docker-hub/registry-access-management/
@@ -17,8 +17,6 @@ Below are some example registries administrators can allow:
  - Amazon ECR
  - GitHub Container Registry
  - Google Container Registry
-
-Administrators can ensure registries are locked in and cannot be edited by developers, if Enhanced Container Isolation is switched on. To learn more, see [Enhanced Container Isolation](enhanced-container-isolation/index.md).
 
 ## Prerequisites 
 
@@ -54,10 +52,12 @@ The new Registry Access Management policy takes effect after the developer succe
 There are certain limitations when using Registry Access Management:
 
 - Windows image pulls, and image builds are not restricted
+-  When RAM is enabled, the registry restrictions are currently applied to the [ADD](/engine/reference/builder/#add) instruction of the Dockerfile when the parameter of the ADD instruction is a URL. A workaround for this is to add the domains of URL parameters to the list of allowed registry addresses under the Registry Access Management settings of your organization.
 - Builds such as `docker buildx` using a Kubernetes driver are not restricted
 - Builds such as `docker buildx` using a custom docker-container driver are not restricted
 - Blocking is DNS-based; you must use a registry's access control mechanisms to distinguish between “push” and “pull”
 - WSL 2 requires at least a 5.4 series Linux kernel (this does not apply to earlier Linux kernel series)
 - Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)
+- Not currently supported on Hyper-V Windows Containers
 
 Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system's `sts` file. Docker Desktop does not support blocking these forms of manipulation.

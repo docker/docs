@@ -1,14 +1,14 @@
 
-@import "color-palette-v2";
+@import "DS-colors";
 
 
 /*
  * global
  */
-$headings:              "Open Sans", sans-serif;
-$headings-landing:      "Open Sans", sans-serif;
-$buttons:               "Open Sans", sans-serif;
-$font:                  "Open Sans", sans-serif;
+$headings:              "Roboto", sans-serif;
+$headings-landing:      "Roboto", sans-serif;
+$buttons:               "Roboto", sans-serif;
+$font:                  "Roboto", sans-serif;
 $body-text-size:        14px;
 $white:                 #fff;
 $black:                 #000;
@@ -17,47 +17,48 @@ $top-navigation-height: 92px; // top navigation height is: nav (55px) + breadcru
 /*
  * standard mode
  */
-$body-text:              $black-0;
-$primary-links:          $blue-70;
+$body-text:             $black;
+$primary-links:         $light-blue-600;
 //
-$bg-body:                $white-0;
-$bg-body-landing:        $white-10;
-$bg-header:              $blue-60;
-$bg-secondary:           $blue-60;
-$bg-sidebar:             $white-10;
-$bg-sidebar-active:      $white-15;
-$bg-footer:              $white-0;
-$bg-footer-landing:      $marine-90;
-$bg-component:           $white-5;
-$bg-card:                $white-0;
+$bg-body:               $white;
+$bg-body-landing:       $light-page-background;
+$bg-header:             $light-blue-500;
+$bg-secondary:          $light-blue-500;
+$bg-sidebar:            $light-page-background;
+$bg-sidebar-active:     $light-page-background;
+$bg-footer:             $white;
+$bg-footer-landing:     $light-grey-500;
+$bg-component:          $light-page-background;
+$bg-card:               $white;
 
 // notes, warnings//
-$note-color:             $blue-80;
-$important-color:        $orange-90;
-$warning-color:          $red-90;
-
-$slider-bg:              $marine-10;
-$slider-btn:             $blue-60;
-$table-head:             $grey-10;
+$note-color:            $light-blue-500;
+$important-color:       $light-amber-500;
+$warning-color:         $light-red-700;
+ 
+$slider-bg:             $light-blue-200;
+$slider-btn:            $light-blue-500;
+$table-head:            $light-grey-200;
 
 /*
  * night mode
  */
-$body-text-night:         hsl(180,   1%,  83%);
-$primary-links-night:     hsl(203,  85%,  79%);
+$body-text-night:        $white;
+$primary-links-night:    $dark-grey-700;
 
-$bg-body-night:           hsl(203,  90%,  10%);
-$bg-body-landing-night:   hsl(203,  90%,  10%);
-$bg-header-night:         hsl(203,  40%,  10%);
-$bg-secondary-night:      hsl(203,  40%,  10%);
-$bg-sidebar-night:        hsl(203,  40%,  10%);
-$bg-sidebar-night-active: hsl(203,  40%,   7%);
-$bg-footer-night:         hsl(203,   0%,   0%);
-$bg-footer-landing-night: hsl(214, 100%,  20%);
+$bg-body-night:          $dark-palette-background;
+$bg-body-landing-night:  $dark-palette-background;
+$bg-header-night:        $dark-blue-200;
+$bg-secondary-night:     $dark-grey-100;
+$bg-sidebar-night:       $dark-grey-100;
+$bg-sidebar-night-active: $dark-grey-100;
+$bg-footer-night:        $dark-grey-100;
+$bg-footer-landing-night: $dark-grey-100;
 
-$bg-component-night:      hsl(203,  44%,  10%);
-$bg-card-night:           #0e161b;
+$bg-component-night:     $dark-grey-200;
+$bg-card-night:          $dark-grey-200;
 
-$active-sidebar-night:    hsl(203,  85%,   79%);
+$active-sidebar-night:   $dark-grey-800;
 
-$bg-search-results-night: hsla(0,    0%,    4%, 0.95);
+$bg-search-results-night: $black;
+

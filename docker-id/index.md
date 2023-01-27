@@ -17,13 +17,13 @@ Your Docker ID becomes your user namespace for hosted Docker services, and becom
 
 2. Enter a username that will become your Docker ID.
 
-    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. Once you create your Docker ID you cannot reuse it in the future if you deactivate this account.
+    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. *Once you create your Docker ID you can't reuse it in the future if you deactivate this account*.
 
 3. Enter a unique, valid email address.
 
-4. Enter a password that is at least 9 characters.
+4. Enter a password that's at least 9 characters.
 
-5. Complete the Captcha verification and then then click **Sign up**.
+5. Complete the Captcha verification and then select **Sign up**.
 
    Docker sends a verification email to the address you provided.
 
@@ -35,9 +35,9 @@ Your Docker ID becomes your user namespace for hosted Docker services, and becom
 
 ## Log in
 
-Once you register and verify your Docker ID email address, you can log in to [Docker Hub](https://hub.docker.com).
+Once you register and verify your Docker ID email address, you can sign in to [Docker Hub](https://hub.docker.com).
 
-You can also log in through the CLI using the `docker login` command. For more information, see [`docker login`](../engine/reference/commandline/login.md).
+You can also sign in through the CLI using the `docker login` command. For more information, see [`docker login`](../engine/reference/commandline/login.md).
 
 > **Warning**
 >

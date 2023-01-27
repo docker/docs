@@ -90,7 +90,7 @@ stored in this container layer, multiple containers can share access to the same
 underlying image and yet have their own data state. The diagram below shows
 multiple containers sharing the same Ubuntu 15.04 image.
 
-![Containers sharing same image](images/sharing-layers.jpg)
+![Containers sharing the same image](images/sharing-layers.jpg)
 
 Docker uses storage drivers to manage the contents of the image layers and the
 writable container layer. Each storage driver handles the implementation
@@ -328,7 +328,7 @@ layers are the same.
     > image for each step for caching purposes, and the `IMAGE` column would show
     > the ID of that image.
     > BuildKit uses its own caching mechanism, and no longer requires intermediate
-    > images for caching. Refer to [build images with BuildKit](../../develop/develop-images/build_enhancements.md)
+    > images for caching. Refer to [BuildKit](../../build/buildkit/index.md)
     > to learn more about other enhancements made in BuildKit.
 
 

@@ -33,7 +33,7 @@ Docker Desktop stores Linux containers and images in a single, large "disk image
 
 #### Where is the disk image file?
 
-To locate the disk image file, select **Preferences** from the Docker Dashboard then **Advanced** from the **Resources** tab.
+To locate the disk image file, select **Settings** from the Docker Dashboard then **Advanced** from the **Resources** tab.
 
 The **Advanced** tab displays the location of the disk image. It also displays the maximum size of the disk image and the actual space the disk image is consuming. Note that other tools might display space usage of the file in terms of the maximum file size, and not the actual file size.
 
@@ -49,7 +49,7 @@ If the disk image file is too big, you can:
 
 To move the disk image file to a different location:
 
-1. Select **Preferences** then  **Advanced** from the **Resources** tab.
+1. Select **Settings** then  **Advanced** from the **Resources** tab.
 
 2. In the **Disk image location** section, click **Browse** and choose a new location for the disk image.
 
@@ -111,7 +111,7 @@ In this example, the actual size of the disk is `2333548` KB, whereas the maximu
 
 To reduce the maximum size of the disk image file:
 
-1. Select **Preferences** then  **Advanced** from the **Resources** tab.
+1. Select **Settings** then  **Advanced** from the **Resources** tab.
 
 2. The **Disk image size** section contains a slider that allows you to change the maximum size of the disk image. Adjust the slider to set a lower limit.
 
@@ -227,7 +227,7 @@ Bash has [built-in support for
 completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1){:target="_blank"
 class="_"} To activate completion for Docker commands, these files need to be
 copied or symlinked to your `bash_completion.d/` directory. For example, if you
-installed bash via [Homebrew](https://brew.sh):
+installed bash via [Homebrew](https://brew.sh){:target="_blank" rel="noopener" class="_"}:
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc

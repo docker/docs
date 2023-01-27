@@ -1,6 +1,6 @@
 ---
 description: Troubleshooting topics
-keywords: linux, mac, windows, troubleshooting, topics
+keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop
 title: Troubleshoot topics
 toc_max: 3
 ---
@@ -37,13 +37,29 @@ you might need to enable [file sharing](../settings/linux.md#file-sharing).
 Volume mounting requires shared drives for projects that live outside of the
 `/home/<user>` directory. From **Settings**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
 
+### Docker Desktop fails to start on MacOS or Linux platforms
+
+On MacOS and Linux, Docker Desktop creates Unix domain sockets used for inter-process communication.
+
+Docker fails to start if the absolute path length of any of these sockets exceeds the OS limitation which is 104 characters on MacOS and 108 characters on Linux. These sockets are created under the user's home directory. If the user ID length is such that the absolute path of the socket exceeds the OS path length limitation, then Docker Desktop is unable to create the socket and fails to start. The workaround for this is to shorten the user ID which we recommend has a maximum length of 33 characters on MacOS and 55 characters on Linux. 
+
+Following are the examples of errors on MacOS which indicate that the startup failure was due to exceeding the above mentioned OS limitation:
+
+```console
+[vpnkit-bridge][F] listen unix <HOME>/Library/Containers/com.docker.docker/Data/http-proxy-control.sock: bind: invalid argument
+```
+
+```console
+[com.docker.backend][E] listen(vsock:4099) failed: listen unix <HOME>/Library/Containers/com.docker.docker/Data/vms/0/00000002.00001003: bind: invalid argument
+```
+
 ## Topics for Mac
 
 ### Incompatible CPU detected
 
 Docker Desktop requires a processor (CPU) that supports virtualization and, more
 specifically, the [Apple Hypervisor
-framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/).
+framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/){:target="_blank" rel="noopener" class="_"}.
 Docker Desktop is only compatible with Mac systems that have a CPU that supports the Hypervisor framework. Most Macs built in 2010 and later support it,as described in the Apple Hypervisor Framework documentation about supported hardware:
 
 *Generally, machines with an Intel VT-x feature set that includes Extended Page
@@ -61,7 +77,7 @@ If your Mac supports the Hypervisor Framework, the command prints
 If not, the command prints `kern.hv_support: 0`.
 
 See also, [Hypervisor Framework
-Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
+Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/){:target="_blank" rel="noopener" class="_"}
 in the Apple documentation, and Docker Desktop [Mac system requirements](../install/mac-install.md#system-requirements).
 
 ## Topics for Windows
@@ -71,7 +87,7 @@ in the Apple documentation, and Docker Desktop [Mac system requirements](../inst
 #### Permissions errors on data directories for shared volumes
 
 When sharing files from Windows, Docker Desktop sets permissions on [shared volumes](../settings/windows.md#file-sharing)
-to a default value of [0777](https://chmodcommand.com/chmod-0777/)
+to a default value of [0777](https://chmodcommand.com/chmod-0777/){:target="_blank" rel="noopener" class="_"}
 (`read`, `write`, `execute` permissions for `user` and for `group`).
 
 The default permissions on shared volumes are not configurable. If you are
@@ -114,7 +130,7 @@ are used, `docker run` fails with syntax errors.
 
 For an example of this issue and the resolution, see this issue on GitHub:
 [Docker RUN fails to execute shell
-script](https://github.com/moby/moby/issues/24388).
+script](https://github.com/moby/moby/issues/24388){:target="_blank" rel="noopener" class="_"}.
 
 #### Path conversion on Windows
 
@@ -232,9 +248,9 @@ Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
 Powershell to be installed and enabled. The Docker Desktop installer enables
 it for you.
 
-Docker Desktop also needs two CPU hardware features to use Hyper-V: Virtualization and Second Level Address Translation (SLAT), which is also called Rapid Virtualization Indexing (RVI). On some systems, Virtualization must be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements) for more details.
+Docker Desktop also needs two CPU hardware features to use Hyper-V: Virtualization and Second Level Address Translation (SLAT), which is also called Rapid Virtualization Indexing (RVI). On some systems, Virtualization must be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements){:target="_blank" rel="noopener" class="_"} for more details.
 
-To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install). A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker Desktop does not work correctly.
+To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install){:target="_blank" rel="noopener" class="_"}. A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker Desktop does not work correctly.
 
 From the start menu, type **Turn Windows features on or off** and press enter.
 In the subsequent screen, verify that Hyper-V is enabled.
@@ -248,7 +264,7 @@ Performance tab on the Task Manager:
 
 If you manually uninstall Hyper-V, WSL 2 or disable virtualization,
 Docker Desktop cannot start. See [Unable to run Docker for Windows on
-Windows 10 Enterprise](https://github.com/docker/for-win/issues/74).
+Windows 10 Enterprise](https://github.com/docker/for-win/issues/74){:target="_blank" rel="noopener" class="_"}.
 
 #### Hypervisor enabled at Windows startup
 
@@ -268,8 +284,8 @@ You can also refer to the [Microsoft TechNet article](https://social.technet.mic
 Docker Desktop is not supported on Windows Server. If you have questions about how to run Windows containers on Windows 10, see
 [Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 
-A full tutorial is available in [docker/labs](https://github.com/docker/labs) on
-[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
+A full tutorial is available in [docker/labs](https://github.com/docker/labs){:target="_blank" rel="noopener" class="_"} on
+[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){:target="_blank" rel="noopener" class="_"}.
 
 You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker Desktop. However, if you install Docker this way, you cannot develop or run Linux containers. If you try to run a Linux container on the native Docker daemon, an error occurs:

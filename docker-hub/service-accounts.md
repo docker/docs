@@ -4,11 +4,11 @@ keywords: Docker, service, accounts, Docker Hub
 title: Service accounts
 ---
 
-A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and do not share Docker IDs with the members in the Team plan. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
+A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and don't share Docker IDs with the members in the organization. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
 
 > **Note**
 >
-> Service accounts included with the Team plan are limited to 5,000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on.
+> All paid Docker subscriptions include up to 5000 pulls per day. If you require a higher number of pulls, you can purchase an Enhanced Service Account add-on.
 
 ## Enhanced Service Account add-on pricing
 
@@ -20,16 +20,16 @@ Refer to the following table for details on the Enhanced Service Account add-on 
 | 2 | 10,000-25,000 | $17,950/yr |
 | 3 | 25,000-50,000 | $32,950/yr |
 | 4 | 50,000-100,000 | $58,950/yr |
-| 5 | 100,000+ | [Contact Sales](https://www.docker.com/pricing/questions){:target="_blank" rel="noopener" class="_"} |
+| 5 | 100,000+ | [Contact Sales](https://www.docker.com/pricing/contact-sales/){:target="_blank" rel="noopener" class="_"} |
 
-<sub>*Once the initial Tier is established, that is the minimum fee for the year.  Annual commitment required.  The service account may exceed Pulls by up to 25% for up to 20 days during the year without incurring additional fees.  Reports on consumption will be provided upon request.  At the end of the initial 1-year term, the appropriate Tier will be established for the following year.<sub>
+<sub>*Once you establish the initial Tier, that's the minimum fee for the year. Annual commitment required. The service account may exceed Pulls by up to 25% for up to 20 days during the year without incurring additional fees. Reports on consumption are available upon request. At the end of the initial 1-year term, the appropriate Tier will be established for the following year.<sub>
 
 ## How a pull is defined
 
 - A pull request is defined as up to two `GET` requests on registry manifest URLs (`/v2/*/manifests/*`).
 - A normal image pull makes a single manifest request.
 - A pull request for a multi-arch image makes two manifest requests.
-- `HEAD` requests are not counted.
+- `HEAD` requests aren't counted.
 - Limits are applied based on the user doing the pull, and not based on the image being pulled or its owner.
 
 ## Creating a new service account
@@ -45,7 +45,7 @@ To create a new service account for your Team account:
 > **Note**
 >
 > If you want a read-only PAT just for your open-source repos, or to access
-official images and other public images, you do not have to grant any access permissions to the new Docker ID.
+official images and other public images, you don't have to grant any access permissions to the new Docker ID.
 
 ## Additional information
 

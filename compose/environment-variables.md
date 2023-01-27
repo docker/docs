@@ -176,6 +176,10 @@ web:
   env_file:
     - web-variables.env
 ```
+> **Note**
+>
+> By using this option, environment variables declared in the file CANNOT be referenced in the Compose file or used to configure Compose.
+
 
 ## Set environment variables with 'docker compose run'
 

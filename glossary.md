@@ -3,7 +3,7 @@ title: "Glossary"
 description: "Glossary of terms used around Docker"
 keywords: "glossary, docker, terms, definitions"
 notoc: true
-noratings: true
+skip_feedback: true
 skip_read_time: true
 redirect_from:
 - /engine/reference/glossary/
@@ -11,7 +11,7 @@ redirect_from:
 ---
 <!--
 To edit/add/remove glossary entries, visit the YAML file at:
-https://github.com/docker/docs/blob/master/_data/glossary.yaml
+https://github.com/docker/docs/blob/main/_data/glossary.yaml
 
 To get a specific entry while writing a page in the docs, enter Liquid text
 like so:

@@ -8,7 +8,27 @@
     "strip": false
   },
   {
+    "prefix": "docker-hub-enterprise/",
+    "strip": false
+  },
+  {
+    "prefix": "docker-trusted-registry/",
+    "strip": false
+  },
+  {
     "prefix": "ee/",
+    "strip": false
+  },
+  {
+    "prefix": "reference/dtr/",
+    "strip": false
+  },
+  {
+    "prefix": "reference/ucp/",
+    "strip": false
+  },
+  {
+    "prefix": "ucp/",
     "strip": false
   },
   {

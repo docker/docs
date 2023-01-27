@@ -1,6 +1,6 @@
 ---
 description: Deploying to Kubernetes on Docker Desktop
-keywords: deploy, kubernetes, kubectl, orchestration
+keywords: deploy, kubernetes, kubectl, orchestration, Docker Desktop
 title: Deploy on Kubernetes
 redirect_from:
 - /docker-for-windows/kubernetes/
@@ -20,7 +20,7 @@ workloads.
 ## Enable Kubernetes
 
 To enable Kubernetes in Docker Desktop:
-1. From the Docker Dashboard, select the **Setting** icon, or **Preferences** icon if you use a macOS.
+1. From the Docker Dashboard, select the **Settings**.
 2. Select **Kubernetes** from the left sidebar. 
 3. Next to **Enable Kubernetes**, select the checkbox.
 4. Select **Apply & Restart** to save the settings and then click **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
@@ -36,7 +36,7 @@ When Kubernetes is enabled and running, an additional status bar in the Dashboar
 ## Use the kubectl command
 
 Kubernetes integration provides the Kubernetes CLI command
-at `/usr/local/bin/kubectl` on Mac and at `C:\>Program Files\Docker\Docker\Resources\bin\kubectl.exe` on Windows. This location may not be in your shell's `PATH`
+at `/usr/local/bin/kubectl` on Mac and at `C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe` on Windows. This location may not be in your shell's `PATH`
 variable, so you may need to type the full path of the command or add it to
 the `PATH`.
 
@@ -74,7 +74,7 @@ For more information about `kubectl`, see the
 ## Disable Kubernetes
 
 To disable Kubernetes in Docker Desktop:
-1. From the Docker Dashboard, select the **Setting** icon, or **Preferences** icon if you use a macOS.
+1. From the Docker Dashboard, select the **Settings** icon.
 2. Select **Kubernetes** from the left sidebar. 
 3. Next to **Enable Kubernetes**, clear the checkbox
 4. Select **Apply & Restart** to save the settings.This stops and removes Kubernetes containers, and also removes the `/usr/local/bin/kubectl` command.

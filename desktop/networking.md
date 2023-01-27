@@ -1,6 +1,6 @@
 ---
 description: Networking on Docker Desktop
-keywords: networking, docker desktop
+keywords: networking, docker desktop, proxy, vpn, Linux, Mac, Windows
 title: Explore networking features
 redirect_from:
 - /desktop/linux/networking/
@@ -82,7 +82,7 @@ services:
 
 ### Changing internal IP addresses
 
-The internal IP addresses used by Docker can be changed from the Settings, if you're a Windows user, or Preferences, if you use Mac or Linux. After changing IPs, it is necessary to reset the Kubernetes cluster and to leave any active Swarm.
+The internal IP addresses used by Docker can be changed from **Settings**. After changing IPs, it is necessary to reset the Kubernetes cluster and to leave any active Swarm.
 
 ### There is no docker0 bridge on the host
 
