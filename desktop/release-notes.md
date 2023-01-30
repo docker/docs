@@ -32,20 +32,20 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 >
 > <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingOne">
+      <div class="panel-heading" role="tab" id="heading14">
         <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse14" aria-expanded="true" aria-controls="collapse14">
             Windows
             <i class="fa fa-chevron-down"></i>
           </a>
         </h5>
       </div>
-      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
         <div class="panel-body">
           <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Download file</a> 
         <br>
         <br>
-        <b>Checksum: </b> 
+        <b>Checksum:</b>5f6db3cf5a2084fc7c584c90792f38a0caac91c4eed4f8653dde7bb8148517f1 
         </div>
       </div>
     </div>
