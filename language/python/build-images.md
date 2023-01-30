@@ -71,7 +71,7 @@ You can `Press CTRL+C to quit`.
 
 Now that our application is running properly, let’s take a look at creating a Dockerfile.
 
-First, create an empty dockerfile (see below) and open it in your favorite IDE.
+First, create an empty Dockerfile (see below) and open it in your favorite IDE.
 
 ```console
 $ cd /path/to/python-docker
