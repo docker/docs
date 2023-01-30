@@ -23,7 +23,7 @@ manage bind mounts.
 
 > Using bind mounts on a Windows host system
 > 
-> Before using bind mounts on a Windows host system through Docker Desktop for Windows, make sure to [<u>enable File Sharing</u>](desktop/windows/#file-sharing). You may also want to take a look at the [<u>Volumes section</u>](desktop/windows/troubleshoot/#volumes) under Logs and troubleshooting to quickly identify other known issues.
+> Before using bind mounts on a Windows host system through Docker Desktop for Windows, make sure to [<u>enable File Sharing</u>](/desktop/settings/windows/#file-sharing). You may also want to take a look at the [<u>Volumes section</u>](/desktop/troubleshoot/topics/#volumes) under Troubleshoot topics to quickly identify other known issues.
 
 ![Bind mounts on the Docker host](images/types-of-mounts-bind.png)
 
