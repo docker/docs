@@ -113,6 +113,7 @@ If an environment variable is not set, Compose substitutes with an empty string.
 > **Important**
 >
 > Values set in the shell environment override those set in the `.env` file, the `environment` attribute, and the `env_file` attribute. For more information, see [Environment variable precedence](envvars-precedence.md).
+
 ## CLI
 
 ### Substitute with `--env-file`
@@ -169,6 +170,7 @@ ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 > **Important**
 >
 > Values set in the shell environment override those set when using the `--env-file` argument in the CLI. For more information, see [Environment variable precedence](envvars-precedence.md)
+
 ### Set environment variables with `docker compose run --env`
 
 Similar to `docker run --env`, you can set environment variables in a one-off
