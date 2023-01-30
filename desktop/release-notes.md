@@ -72,17 +72,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [Debian](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-amd64.deb) |
 > [RPM](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.pkg.tar.zst)
-<div class="panel-group" id="accordion12" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion13" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading12">
+    <div class="panel-heading" role="tab" id="heading13">
       <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion12" href="#collapse12" aria-expanded="true" aria-controls="collapse12">
+        <a role="button" data-toggle="collapse" data-parent="#accordion13" href="#collapse13" aria-expanded="true" aria-controls="collapse13">
           Checksums
           <i class="fa fa-chevron-down"></i>
         </a>
       </h5>
     </div>
-    <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
+    <div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
       <div class="panel-body">
       <li><b>Windows:</b> SHA-256 20e4ba05b573610506b57a7f216115458019d2c002f18ef6d50a2419b7db545b</li>
       <li><b>Mac Intel:</b> SHA-256 22eecb8ea07f10892d81cde07d614fb8b342163106133a75c4280a8e28787643</li>
