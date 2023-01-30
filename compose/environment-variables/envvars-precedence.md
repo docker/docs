@@ -2,59 +2,83 @@
 title: Environment variables precedence
 description: Scenario Overview illustrating how environment variables are resolved in Compose
 keywords: compose, environment, env file
+redirect_from:
+- /compose/envvars-precedence/
 ---
 
-This page contains information on how interpolation works when using environment variables in Compose.
+When you set the same environment variable in multiple sources, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question.
 
-When you set the same environment variable in multiple files, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question. 
+This page contains information on the level of precedence each method of setting environmental variables takes.
 
-The order of precedence is as follows:
-1. Passed from the command line [`docker compose run --env <KEY[=[VAL]]>`](../../engine/reference/commandline/compose_run/#options).
-2. Passed from/set in `compose.yaml` service's configuration, from the [environment key](../../compose/compose-file/#environment).
-3. Passed from/set in `compose.yaml` service's configuration, from the [env_file key](../../compose/compose-file/#env_file).
-4. Passed from/set in Container Image in the [ENV directive](../engine/reference/builder.md#env).
+The order of precedence (highest to lowest) is as follows:
+1. Set using [`docker compose run -e` in the CLI](set-environment-variables.md#set-environment-variables-with-docker-compose-run---env)
+2. Substituted from your [shell](set-environment-variables.md#substitute-from-the-shell)
+3. Set using the [`environment` attribute in the Compose file](set-environment-variables.md#use-the-environment-attribute)
+4. Use of the [`--env-file` argument](set-environment-variables.md#substitute-with---env-file) in the CLI
+5. Use of the [`env_file` attribute](set-environment-variables.md#use-the-env_file-attribute) in the Compose file
+6. Set using an [`.env` file](set-environment-variables.md#substitute-with-an-env-file) placed at base of your project directory
+7. Set in a container image in the [ENV directive](../../engine/reference/builder.md#env).
+   Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is no Docker Compose entry for `environment`, `env_file` or `run --env`.
 
-### Example scenario
+## Simple example
+
+In the example below, we set a different value for the same environment variable in an `.env` file and with the `environment` attribute in the Compose file:
+
+```console
+$ cat ./Docker/api/api.env
+NODE_ENV=test
+
+$ cat docker-compose.yml
+services:
+  api:
+    image: 'node:6-alpine'
+    env_file:
+     - ./Docker/api/api.env
+    environment:
+     - NODE_ENV=production
+```
+
+The environment variable defined with the `environment` attribute takes precedence.
+
+```console
+$ docker compose exec api node
+
+> process.env.NODE_ENV
+'production'
+```
+
+> Hard coding variables in container scripts
+>
+> Executing a command within the container that unconditionally sets a variable value overrules any setting in your `docker-compose.yml` file.
+>
+> For example, in a NodeJS project, if you have a `package.json` entry for `scripts.start`, such as `NODE_ENV=test` `node server.js`, any value set for `NODE_ENV` in your Compose file, is ignored when running `npm run start` within the container.
+
+## Advanced example 
 
 The following table uses `TAG`, an environment variable defining the version for an image, as an example.
 
-#### The columns
+### How the table works
 
-Each column represents a context from where you can set or pass `TAG`, or environment variables in general.
+Each column represents a context from where you can set a value, or substitute in a value for `TAG`.
 
-Table column's description:
-* `run --env` sets the environment variable using the command line instruction `docker compose run -e <KEY[=[VAL]]>`.
-* `compose.yaml`:`environment` key. In `environment` key from the service section in the `compose.yaml` file.
-* `compose.yaml`:`env_file` key. In `env_file` key from the service section in the `compose.yaml` file.
-* Image `ENV` - `ENV` directive in the Dockerfile for the image.
-* `Host OS` environment. The environment where the Docker Engine is running.
-* `.env` file. The `.env` file in the project root.
-* Resolved as. Gives the final result of how `TAG` is resolved for each scenario according to the precedence rule.
+The columns `Host OS environment` and `.env file` is listed only as an illustration lookup. In reality, they don't result in a variable in the container by itself.
 
-#### The rows
-
-Each row represents a combination of contexts where `TAG` is set or passed simultaneously.
+Each row represents a combination of contexts where `TAG` is set, substituted, or both.
 
 
-
-|  # |  `run --env`  |  `compose.yaml`:`environment` key  |  `compose.yaml`:`env_file` key  |  Image `ENV` |  `Host OS` environment  |  `.env` file      |  Resolved as  |
-|:--:|:-------------:|:----------------------------------:|:-------------------------------:|:------------:|:-----------------------:|:-----------------:|:-------------:|
-|  1 |   -           |   -                                |   -                             |   -          |  `TAG=1.4`              |  `TAG=1.3`        |   -           |
-|  2 |   -           |   -                                |   -                             |**`TAG=1.5`** |  `TAG=1.4`              |  `TAG=1.3`        |**`TAG=1.5`**  |
-|  3 |**`TAG`**      |   -                                |   -                             |  `TAG=1.5`   |**`TAG=1.4`**            |  `TAG=1.3`        |**`TAG=1.4`**  |
-|  4 |   -           |   -                                |**`TAG`**                        |  `TAG=1.5`   |   -                     |**`TAG=1.3`**      |**`TAG=1.3`**  |
-|  5 |**`TAG`**      |   -                                |   -                             |  `TAG=1.5`   |   -                     |**`TAG=1.3`**      |**`TAG=1.3`**  |
-|  6 |**`TAG=1.8`**  |   -                                |   -                             |  `TAG=1.5`   |  `TAG=1.4`              |  `TAG=1.3`        |**`TAG=1.8`**  |
-|  7 |   -           |**`TAG`**                           |   -                             |  `TAG=1.5`   |**`TAG=1.4`**            |  `TAG=1.3`        |**`TAG=1.4`**  |
-|  8 |**`TAG`**      |  `TAG=1.7`                         |   -                             |  `TAG=1.5`   |**`TAG=1.4`**            |  `TAG=1.3`        |**`TAG=1.4`**  |
-|  9 |**`TAG=1.8`**  |  `TAG=1.7`                         |   -                             |  `TAG=1.5`   |  `TAG=1.4`              |  `TAG=1.3`        |**`TAG=1.8`**  |
-| 10 |   -           |**`TAG`**                           |   -                             |  `TAG=1.5`   |**`TAG=1.4`**            |  `TAG=1.3`        |**`TAG=1.4`**  |
-| 11 |**`TAG=1.8`**  |   -                                |  `TAG=1.6`                      |  `TAG=1.5`   |  `TAG=1.4`              |  `TAG=1.3`        |**`TAG=1.8`**  |
-| 12 |**`TAG=1.8`**  |  `TAG=1.7`                         |  `TAG=1.6`                      |  `TAG=1.5`   |  `TAG=1.4`              |  `TAG=1.3`        |**`TAG=1.8`**  |
-| 13 |   -           |   -                                |**`TAG=1.6`**                    |  `TAG=1.5`   |  `TAG=1.4`              |   -               |**`TAG=1.6`**  |
-| 14 |   -           |**`TAG=1.7`**                       |   -                             |  `TAG=1.5`   |  `TAG=1.4`              |   -               |**`TAG=1.7`**  |
-
-
-> **Note**
->
-> The columns _`Host OS` environment_ and _`.env` file_ is listed only for lookup. These columns can't result in a variable in the container by itself.
+|  # |  `docker compose run --env`  |  `environment` attribute  |  `env_file` attribute  |  Image `ENV` |  `Host OS` environment  |  `.env` file      | |  Result  |
+|:--:|:-------------:|:----------------------------------:|:-------------------------------:|:------------:|:-----------------------:|:-----------------:|:---:|:-------------:|
+|  1 |   -           |   -                                |   -                             |   -          |  `TAG=1.4`              |  `TAG=1.3`        || - |
+|  2 |   -           |   -                                |   -                             |`TAG=1.5` |  `TAG=1.4`                  |  `TAG=1.3`        ||**`TAG=1.5`**  |
+|  3 |`TAG`          |   -                                |   -                             |  `TAG=1.5`   |`TAG=1.4`                |  `TAG=1.3`        ||**`TAG=1.4`**  |
+|  4 |   -           |   -                                |`TAG`                            |  `TAG=1.5`   |   -                     |`TAG=1.3`          ||**`TAG=1.3`**  |
+|  5 |`TAG`          |   -                                |   -                             |  `TAG=1.5`   |   -                     |`TAG=1.3`          ||**`TAG=1.3`**  |
+|  6 |`TAG=1.8`      |   -                                |   -                             |  `TAG=1.5`   |  `TAG=1.4`              |  `TAG=1.3`        ||**`TAG=1.8`**  |
+|  7 |   -           |`TAG`                               |   -                             |  `TAG=1.5`   |`TAG=1.4`                |  `TAG=1.3`        ||**`TAG=1.4`**  |
+|  8 |`TAG`          |  `TAG=1.7`                         |   -                             |  `TAG=1.5`   |`TAG=1.4`                |  `TAG=1.3`        ||**`TAG=1.4`**  |
+|  9 |`TAG=1.8`      |  `TAG=1.7`                         |   -                             |  `TAG=1.5`   |  `TAG=1.4`              |  `TAG=1.3`        ||**`TAG=1.8`**  |
+| 10 |   -           |`TAG`                               |   -                             |  `TAG=1.5`   |`TAG=1.4`                |  `TAG=1.3`        ||**`TAG=1.4`**  |
+| 11 |`TAG=1.8`      |   -                                |  `TAG=1.6`                      |  `TAG=1.5`   |  `TAG=1.4`              |  `TAG=1.3`        ||**`TAG=1.8`**  |
+| 12 |`TAG=1.8`      |  `TAG=1.7`                         |  `TAG=1.6`                      |  `TAG=1.5`   |  `TAG=1.4`              |  `TAG=1.3`        ||**`TAG=1.8`**  |
+| 13 |   -           |   -                                |`TAG=1.6`                        |  `TAG=1.5`   |  `TAG=1.4`              |   -               ||**`TAG=1.6`**  |
+| 14 |   -           |`TAG=1.7`                           |   -                             |  `TAG=1.5`   |  `TAG=1.4`              |   -               ||**`TAG=1.7`**  |
