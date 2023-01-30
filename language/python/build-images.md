@@ -65,9 +65,18 @@ Switch back to the terminal where our server is running and you should see the f
 127.0.0.1 - - [22/Sep/2020 11:07:41] "GET / HTTP/1.1" 200 -
 ```
 
+You can `Press CTRL+C to quit`.
+
 ## Create a Dockerfile for Python
 
 Now that our application is running properly, let’s take a look at creating a Dockerfile.
+
+First, create an empty dockerfile (see below) and open it in your favorite IDE.
+
+```console
+$ cd /path/to/python-docker
+$ touch Dockerfile
+```
 
 Next, we need to add a line in our Dockerfile that tells Docker what base image
 we would like to use for our application.
