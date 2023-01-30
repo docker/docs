@@ -59,7 +59,7 @@ Valid profiles names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 ## Enable profiles
 
 To enable profiles supply the `--profile` [command-line option](reference/index.md) or
-use the [`COMPOSE_PROFILES` environment variable](reference/envvars.md#compose_profiles):
+use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console
 $ docker compose --profile debug up

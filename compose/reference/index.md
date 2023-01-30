@@ -149,7 +149,7 @@ in addition to the values in the `docker-compose.yml` file.
 
 You can use the `-f` flag to specify a path to a Compose file that is not
 located in the current directory, either from the command line or by setting up
-a [COMPOSE_FILE environment variable](envvars.md#compose_file) in your shell or
+a [COMPOSE_FILE environment variable](../environment-variables/envvars.md#compose_file) in your shell or
 in an environment file.
 
 For an example of using the `-f` option at the command line, suppose you are
@@ -186,7 +186,7 @@ Status: Downloaded newer image for postgres:latest
 
 Each configuration has a project name. If you supply a `-p` flag, you can
 specify a project name. If you don't specify the flag, Compose uses the current
-directory name. See also the [COMPOSE_PROJECT_NAME environment variable](envvars.md#compose_project_name).
+directory name. See also the [COMPOSE_PROJECT_NAME environment variable](../environment-variables/envvars.md#compose_project_name).
 
 ## Use `--profile` to specify one or more active profiles
 
@@ -196,20 +196,20 @@ multiple profiles, e.g. with `docker compose --profile frontend --profile debug 
 the profiles `frontend` and `debug` will be enabled.
 
 See also [_Using profiles with Compose_](../profiles.md) and the
-[`COMPOSE_PROFILES` environment variable](envvars.md#compose_profiles).
+[`COMPOSE_PROFILES` environment variable](../environment-variables/envvars.md#compose_profiles).
 
 ## Set up environment variables
 
-You can set [environment variables](envvars.md) for various
+You can set [environment variables](../environment-variables/envvars.md) for various
 `docker compose` options, including the `-f` and `-p` flags.
 
-For example, the [COMPOSE_FILE environment variable](envvars.md#compose_file)
+For example, the [COMPOSE_FILE environment variable](../environment-variables/envvars.md#compose_file)
 relates to the `-f` flag, and `COMPOSE_PROJECT_NAME`
-[environment variable](envvars.md#compose_project_name) relates to the `-p` flag.
+[environment variable](../environment-variables/envvars.md#compose_project_name) relates to the `-p` flag.
 
-Also, you can set some of these variables in an [environment file](../env-file.md).
+Also, you can set some of these variables in an [environment file](../environment-variables/env-file.md).
 
 ## Where to go next
 
-* [CLI environment variables](envvars.md)
-* [Declare default environment variables in file](../env-file.md)
+* [CLI environment variables](../environment-variables/envvars.md)
+* [Declare default environment variables in file](../environment-variables/env-file.md)

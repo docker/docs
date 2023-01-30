@@ -45,13 +45,14 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
           <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Download file</a> 
         <br>
         <br>
-        <b>Checksum:</b>5f6db3cf5a2084fc7c584c90792f38a0caac91c4eed4f8653dde7bb8148517f1 
+        <b>Checksum:</b> SHA-256 5f6db3cf5a2084fc7c584c90792f38a0caac91c4eed4f8653dde7bb8148517f1 
         </div>
       </div>
     </div>
     </div>
 >
 > For the latest release of Docker Desktop for Mac and Linux, see [4.16.2](#4162)
+
 ### Bug fixes and enhancements
 
 #### For Windows
@@ -65,7 +66,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
 > [Windows](https://desktop.docker.com/win/main/amd64/95914/Docker%20Desktop%20Installer.exe) |
 > [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95914/Docker.dmg) |
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95914/Docker.dmg) |
@@ -693,7 +693,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Compose V2 is now enabled after factory reset.
 - Compose V2 is now enabled by default on new installations of Docker Desktop.
-- Precedence order of environment variables in Compose is more consistent, and clearly [documented](../compose/envvars-precedence.md).
+- Precedence order of environment variables in Compose is more consistent, and clearly [documented](../compose/environment-variables/envvars-precedence.md).
 - Upgraded kernel to 5.10.124.
 - Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
 - Docker Desktop now prevents users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.

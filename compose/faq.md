@@ -90,7 +90,7 @@ Yes, see [Controlling startup order](startup-order.md).
 Compose uses the project name to create unique identifiers for all of a
 project's  containers and other resources. To run multiple copies of a project,
 set a custom project name using the [`-p` command line option](reference/index.md)
-or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
+or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
 ## Can I use JSON instead of YAML for my Compose file?
 
