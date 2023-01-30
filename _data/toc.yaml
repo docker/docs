@@ -339,7 +339,7 @@ reference:
       section:
         - path: /compose/reference/
           title: overview
-        - path: /compose/reference/envvars/
+        - path: /compose/environment-variables/envvars/
           title: environment variables
         - path: /engine/reference/commandline/compose/
           title: docker compose
