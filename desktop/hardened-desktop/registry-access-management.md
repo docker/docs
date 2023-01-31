@@ -12,7 +12,7 @@ redirect_from:
 
 With Registry Access Management, administrators can ensure that their developers using Docker Desktop only access registries that are allowed. This is done through the Registry Access Management dashboard on Docker Hub. 
 
-RAM supports both cloud and on-prem registries. Example registries administrators can allow include: 
+Registry Access Management supports both cloud and on-prem registries. Example registries administrators can allow include: 
  - Docker Hub. This is enabled by default.
  - Amazon ECR
  - GitHub Container Registry
