@@ -2,6 +2,8 @@
 title: Security
 description: Aspects of the security model of extensions
 keywords: Docker, extensions, sdk, security
+redirect_from:
+- /desktop/extensions-sdk/guides/security/
 ---
 
 ## Extension capabilities
