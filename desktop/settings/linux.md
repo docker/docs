@@ -142,7 +142,7 @@ edit the file using your favorite text editor.
 >
 > Only the **Docker Desktop** daemon uses the configuration file under `$HOME/.docker`.
 > If you manually install Docker Engine alongside Docker Desktop, the manually
-> installed instance uses a `dameon.json` configuration file in a  different location.
+> installed instance uses a `daemon.json` configuration file in a  different location.
 > Refer to [Configure the daemon](../../config/daemon/index.md) for more information
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 
