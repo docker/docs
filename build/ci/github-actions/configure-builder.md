@@ -33,7 +33,7 @@ jobs:
           buildkitd-flags: --debug
       -
         name: Build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
 ```
@@ -319,14 +319,14 @@ jobs:
         run: echo ${{ steps.builder2.outputs.name }}
       -
         name: Build against builder1
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           builder: ${{ steps.builder1.outputs.name }}
           context: .
           target: mytarget1
       -
         name: Build against builder2
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           builder: ${{ steps.builder2.outputs.name }}
           context: .
