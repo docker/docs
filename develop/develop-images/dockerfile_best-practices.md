@@ -205,8 +205,8 @@ EOF
 >
 > When building an image using a remote Git repository as build context, Docker
 > performs a `git clone` of the repository on the local machine, and sends
-> those files as build context to the daemon. This feature requires Git to be
-> installed on the host where you run the `docker build` command.
+> those files as build context to the daemon. This feature requires you to
+> install Git on the host where you run the `docker build` command.
 
 ### Exclude with .dockerignore
 
