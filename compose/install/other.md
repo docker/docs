@@ -4,6 +4,7 @@ keywords: compose, orchestration, install, installation, docker, documentation
 toc_max: 3
 title: Install the Compose standalone
 ---
+{% include compose-eol.md %}
 
 On this page you can find instructions on how to install the Compose standalone on Linux or Windows Server, from the command line.
 

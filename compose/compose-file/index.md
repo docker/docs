@@ -8,6 +8,7 @@ title: Compose specification
 toc_max: 4
 toc_min: 1
 ---
+{% include compose-eol.md %}
 
 The Compose file is a [YAML](https://yaml.org){: target="_blank" rel="noopener" class="_"} file defining services,
 networks, and volumes for a Docker application. The latest and recommended

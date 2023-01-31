@@ -3,6 +3,7 @@ title: Overview
 description: Explainer on the ways to set, use and manage environment variables in Compose
 keywords: compose, orchestration, environment, env file
 ---
+{% include compose-eol.md %}
 
 Environment variables can help you define various configuration values. They also keep your app flexible and organized. 
 
