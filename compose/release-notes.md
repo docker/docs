@@ -6,6 +6,8 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+{% include compose-eol.md %}
+
 ## 2.15.1
 {% include release-date.html date="2023-01-09" %}
 ### Update
