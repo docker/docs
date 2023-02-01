@@ -106,7 +106,7 @@ module.exports = {
             },
             "code::after": {
               content: '""'
-            }
+            },
           }
         }
       })

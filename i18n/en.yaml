@@ -1,5 +1,7 @@
-## aside/toc strings:
+## sidebar/aside/toc strings:
 
+sidebarBacklink:
+  other: "Back to home"
 readingTime:
   other: "{{ . }} minute read"
 editPage:
@@ -7,7 +9,7 @@ editPage:
 requestChanges:
   other: Request changes
 tableOfContents:
-  other: Table of contents
+  other: Contents
 relatedContent:
   other: Related content
 

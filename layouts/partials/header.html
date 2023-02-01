@@ -1,5 +1,5 @@
 <div class="max-w-[1440px] mx-auto h-full items-center flex justify-between">
-  <div class="flex items-center gap-4">
+  <div class="flex items-center gap-8 h-full">
     <button
       x-data
       tabindex="4"
@@ -23,9 +23,9 @@
         <img src="{{ site.BaseURL }}/assets/images/docker-docs-logo.svg" />
       </a>
     </div>
+    {{ partial "top-nav.html" . }}
   </div>
   <div class="flex items-center gap-6">
-    {{ partial "top-nav.html" . }}
     <div id="search-container"></div>
     <div class="flex items-center gap-2">
       <button tabindex="1" class="material-symbols-rounded">

@@ -2,7 +2,7 @@
 title: Home
 hero:
   image: /assets/images/laptop.svg
-  heading: Docker onboarding guide
+  heading: Docker documentation
   copy: |
     Want to use Docker but don't know where to start?
     This guide contains step-by-step instructions on how to get started with Docker.
@@ -14,6 +14,10 @@ keywords: Docker, documentation, manual, guide, reference, api, samples
 layout: wide
 notoc: true
 grid:
+  - title: Download and install
+    description: Download and install Docker on your machine in a few, easy steps.
+    icon: downloading
+    link: /get-docker
   - title: "Docker Desktop"
     description: |
       Install on [Mac](./desktop/install/mac-install.md), [Windows](./desktop/install/windows-install.md),
@@ -69,10 +73,6 @@ grid:
       [Docker Extension SDK API](./desktop/extensions-sdk/dev/api/overview.md)
     icon: "description"
     link: "/reference/"
-  - title: Download and install
-    description: Download and install Docker on your machine in a few, easy steps.
-    icon: downloading
-    link: /get-docker
   - title: Get support
     description: Find information on how to get support, and the scope of Docker support.
     icon: contact_support

@@ -9,10 +9,10 @@
   @apply p-4 not-italic font-normal bg-blue-light-100 dark:bg-blue-dark-100;
   quotes: none;
   *:first-child {
-    @apply mt-0;
+    @apply mt-0 before:content-none;
   }
   *:last-child {
-    @apply mb-0;
+    @apply mb-0 after:content-none;
   }
 
   &.warning {

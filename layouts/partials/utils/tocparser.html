@@ -4,7 +4,15 @@
 {{ range $root, $section := $toc }}
   {{ if ne ($scratch.Get "match") true }}
     {{ $scratch.Set "depth" 1 }}
-    {{ $scratch.SetInMap "sections" "1" $root }}
+    {{ $rootSectionLink := "" }}
+    {{ with (index $section 0) }}
+      {{ if .path }}
+        {{ $rootSectionLink = .path }}
+      {{ else }}
+        {{ $rootSectionLink = (index .section 0).path }}
+      {{ end }}
+    {{ end }}
+    {{ $scratch.SetInMap "sections" "1" (dict "title" $root "path" $rootSectionLink) }}
     {{ template "tocWalk" (dict "scratch" $scratch "section" $section "ctx" $ctx) }}
   {{ end }}
 {{ end }}
@@ -20,9 +28,11 @@
         {{ if $match }}
           {{ $scratch.Set "match" true }}
           {{ $scratch.Set "maxdepth" ($scratch.Get "depth") }}
+          {{ $scratch.Set "lastsection" (dict "title" .title "path" .path) }}
         {{ end }}
       {{ else }}
-        {{ $scratch.SetInMap "sections" (string ($scratch.Get "depth")) .sectiontitle }}
+        {{ $sectionLink := (index .section 0).path }}
+        {{ $scratch.SetInMap "sections" (string ($scratch.Get "depth")) (dict "title" .sectiontitle "path" $sectionLink) }}
         {{ template "tocWalk" (dict "scratch" $scratch "section" .section "ctx" $ctx) }}
       {{ end }}
     {{ end }}

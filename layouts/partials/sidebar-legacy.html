@@ -3,7 +3,7 @@
 
 
 <ul>
-  {{ with (index ($scratch.Get "sections") "1") }}
+  {{ with (index (index ($scratch.Get "sections") "1") "title") }}
     {{ range (index site.Data.toc .) }}
       {{ template "tocRender" (dict "ctx" $ctx "entry" .) }}
     {{ end }}

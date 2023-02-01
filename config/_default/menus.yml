@@ -1,14 +1,19 @@
 main:
 - name: Guides
   url: /get-started/overview/
+  weight: 1
 - name: Manuals
   url: /desktop/
+  weight: 2
 - name: Reference
   url: /reference/
+  weight: 3
 - name: Samples
   url: /samples/
+  weight: 4
 - name: Contribute
   url: /contribute/overview/
+  weight: 5
 
 footer:
   - url: https://www.docker.com/products

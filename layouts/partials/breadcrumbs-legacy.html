@@ -2,7 +2,7 @@
 {{ $ctx := . }}
 
 
-<nav class="p-5 space-x-2 text-sm flex items-center overflow-hidden">
+<nav class="py-2 gap-2 flex items-center overflow-hidden">
   <a class="link" href="{{ site.BaseURL }}"
     ><span class="material-symbols-rounded">home</span></a
   >
@@ -12,9 +12,11 @@
       {{- if $i -}}
         <span>/</span>
       {{- end -}}
-      <span class="whitespace-nowrap">{{ . }}</span>
+      <a href="{{ $e.path }}" class="link whitespace-nowrap">{{ $e.title }}</a>
     {{- end -}}
   {{- end -}}
+  {{- with $scratch.Get "lastsection" -}}
   <span>/</span>
-  <span class="whitespace-nowrap">{{ partial "utils/title.html" . }}</span>
+  <a href="{{ .path }}" class="link whitespace-nowrap">{{ .title }}</a>
+  {{- end -}}
 </nav>
