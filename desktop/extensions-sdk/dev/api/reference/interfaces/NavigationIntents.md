@@ -110,6 +110,10 @@ Navigate to the container terminal window in Docker Desktop.
 await ddClient.desktopUI.navigate.viewContainerTerminal(id)
 ```
 
+**`Since`**
+
+0.3.4
+
 #### Parameters
 
 | Name | Type | Description |
