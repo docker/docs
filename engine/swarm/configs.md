@@ -172,7 +172,7 @@ real-world example, continue to
     completion to do this automatically.
 
     ```console
-    $ docker service ps --format "{{.Node}}" redis
+    $ docker service ps --format '{{.Node}}' redis
     
     ip-172-31-46-109
     
