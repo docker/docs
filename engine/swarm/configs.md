@@ -166,11 +166,18 @@ real-world example, continue to
 4.  Get the ID of the `redis` service task container using `docker ps`, so that
     you can use `docker container exec` to connect to the container and read the contents
     of the config data file, which defaults to being readable by all and has the
-    same name as the name of the config. The first command below illustrates
-    how to find the container ID, and the second and third commands use shell
+    same name as the name of the config. The first command retrieves the node ID
+    the container is running on, from the node  `ip-172-31-46-109` run the second command below illustrates
+    how to find the container ID, and the third and fourth commands use shell
     completion to do this automatically.
 
     ```console
+    $ docker service ps --format "{{.Node}}" redis
+    
+    ip-172-31-46-109
+    
+    # from now, the below commands should be executed from node ip-172-31-46-109
+
     $ docker ps --filter name=redis -q
 
     5cb1c2348a59
