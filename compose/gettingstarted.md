@@ -3,11 +3,12 @@ description: Get started with Docker Compose
 keywords: documentation, docs, docker, compose, orchestration, containers
 title: Try Docker Compose
 ---
+{% include compose-eol.md %}
 
 This tutorial is designed to introduce the key concepts of Docker Compose whilst building a simple Python web application. The application uses the Flask framework and maintains a hit counter in
 Redis. 
 
-The concepts demonstrated here should be understandable even if you're not familiar Python. 
+The concepts demonstrated here should be understandable even if you're not familiar with Python. 
 
 ## Prerequisites
 
@@ -228,7 +229,7 @@ services:
     volumes:
       - .:/code
     environment:
-      FLASK_DEBUG: True
+      FLASK_DEBUG: "true"
   redis:
     image: "redis:alpine"
 ```
@@ -236,7 +237,7 @@ services:
 The new `volumes` key mounts the project directory (current directory) on the
 host to `/code` inside the container, allowing you to modify the code on the
 fly, without having to rebuild the image. The `environment` key sets the
-`FLASK_ENV` environment variable, which tells `flask run` to run in development
+`FLASK_DEBUG` environment variable, which tells `flask run` to run in development
 mode and reload the code on change. This mode should only be used in development.
 
 ## Step 6: Re-build and run the app with Compose

@@ -34,12 +34,12 @@ of the convenience script:
 
 > Tip: preview script steps before running
 >
-> You can run the script with the `DRY_RUN=1` option to learn what steps the
+> You can run the script with the `--dry-run` option to learn what steps the
 > script will run when invoked:
 >
 > ```console
 > $ curl -fsSL https://get.docker.com -o get-docker.sh
-> $ DRY_RUN=1 sudo sh ./get-docker.sh
+> $ sudo sh ./get-docker.sh --dry-run
 > ```
 
 This example downloads the script from

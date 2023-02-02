@@ -38,11 +38,11 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 ### Mac with Intel chip
 
-- macOS must be version 10.15 or newer. That is, Catalina, Big Sur, or Monterey. We recommend upgrading to the latest version of macOS.
+- macOS must be version 11 or newer. That is Big Sur (11), Monterey (12), or Ventura (13). We recommend upgrading to the latest version of macOS.
 
   > **Note**
   >
-  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). Docker Desktop currently supports macOS Catalina, macOS Big Sur, and macOS Monterey.
+  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
 
 - At least 4 GB of RAM.
 
@@ -102,11 +102,18 @@ As macOS typically performs security checks the first time an application is use
 The `install` command accepts the following flags:
 - `--accept-license`: accepts the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"} now, rather than requiring it to be accepted when the application is first run
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
-- `--user=<username>`: Runs the privileged helper service once during installation, then disables it at runtime. This removes the need for the user to grant root privileges on first run. For more information, see [Privileged helper permission requirements](../mac/permission-requirements.md#permission-requirements){: target="_blank" rel="noopener" class="_"}. To find the username, enter `ls /Users` in the CLI.
+- `--user=<username>`: Performs the privileged configurations once during installation. This removes the need for the user to grant root privileges on first run. For more information, see [Privileged helper permission requirements](../mac/permission-requirements.md#permission-requirements){: target="_blank" rel="noopener" class="_"}. To find the username, enter `ls /Users` in the CLI.
 - `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](../hardened-desktop/settings-management/index.md).
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example:
     `--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'`
+
+### Runtime permission requirements
+
+For some functions, Docker Desktop may require elevated privileges. The user is informed and prompted for authorization whenever such
+configuration must be performed. [Docker Desktop permission requirements](../mac/permission-requirements.md) provides details on each configuration
+and use case.
+
 
 ## Where to go next
 

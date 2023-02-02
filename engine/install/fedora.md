@@ -20,9 +20,8 @@ To get started with Docker Engine on Fedora, make sure you
 
 To install Docker Engine, you need the 64-bit version of one of these Fedora versions:
 
-- Fedora 34
-- Fedora 35
 - Fedora 36
+- Fedora 37
 
 ### Uninstall old versions
 
@@ -210,7 +209,7 @@ instead of `dnf -y install`, and point to the new file.
 1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
     ```console
-    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host

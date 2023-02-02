@@ -99,48 +99,57 @@ File share settings are:
 ### Proxies
 
 To configure HTTP proxies, switch on the **Manual proxy configuration** setting.
+This setting is used for logging into Docker, for pulling and pushing images, and for
+container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
+the developer for a username and password. All passwords are stored securely in the OS credential store.
+Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
+URL for your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
+supports TLS 1.3 when communicating with proxies.
 
-Your proxy settings, however, are not propagated into the containers you start.
-If you wish to set the proxy settings for your containers, you need to define
-environment variables for them, just like you would do on Linux, for example:
-
-```console
-$ docker run -e HTTP_PROXY=http://proxy.example.com:3128 alpine env
-
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=b7edf988b2b5
-TERM=xterm
-HOME=/root
-HTTP_PROXY=http://proxy.example.com:3128
-```
-
-For more information on configuring the Docker CLI to automatically set proxy variables for both `docker run` and `docker build`
-see [Configure the Docker client](../../network/proxy.md#configure-the-docker-client).
+To prevent developers from accidentally changing the proxy settings, see
+[Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
 
 ### Network
 
 Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case the choice of subnet clashes with something in your environment, specify a custom subnet using the **Network** setting.
 
-### Docker Engine
+## Docker Engine
 
-The **Docker Engine** tab allows you to configure the Docker daemon to determine how your containers run.
+The **Docker Engine** tab allows you to configure the Docker daemon used to run containers with Docker Desktop.
 
-Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"}.
+You configure the daemon using a JSON configuration file. Here's what the file might look like:
 
-Click **Apply & Restart** to save your settings and restart Docker Desktop.
+```json
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": false,
+  "features": {
+    "buildkit": true
+  }
+}
+```
 
-## Beta Features
+You can find this file at `$HOME/.docker/daemon.json`. To change the configuration, either
+edit the JSON configuration directly from the dashboard in Docker Desktop, or open and
+edit the file using your favorite text editor.
 
-{% include beta.md %}
+> **Note**
+>
+> Only the **Docker Desktop** daemon uses the configuration file under `$HOME/.docker`.
+> If you manually install Docker Engine alongside Docker Desktop, the manually
+> installed instance uses a `daemon.json` configuration file in a  different location.
+> Refer to [Configure the daemon](../../config/daemon/index.md) for more information
+> about how to configure the Docker daemon on a manually installed Docker Engine.
 
-From the **Beta features** tab, you can sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"}.
+To see the full list of possible configuration options, see the 
+[dockerd command reference](/engine/reference/commandline/dockerd/).
 
-On the **Beta features** tab, you also have the option to allow feature flags, which are product features Docker is currently experimenting with. This is switched on by default.
-
-### Enable containerd
-
-Turns on the experimental containerd image store. This brings new features like namespaces and faster container startup performance by lazy-pulling images.
+Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
 ## Kubernetes
 
@@ -183,3 +192,21 @@ Use the **Extensions** tab to:
 - **Show Docker Extensions system containers**
 
 For more information about Docker extensions, see [Extensions](../extensions/index.md).
+
+## Features in development
+
+On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
+
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"} from the **Features in development** tab.
+
+### Beta features
+
+{% include beta.md %}
+
+#### Enable containerd
+
+Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
+
+### Experimental features
+
+{% include desktop-experimental.md %}

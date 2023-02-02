@@ -1,6 +1,6 @@
 ---
 description: Understand the process of creating an extension.
-title: The build build and publish process
+title: The build and publish process
 keyword: Docker Extensions, sdk, build, create, publish
 ---
 
@@ -15,34 +15,25 @@ The build process consists of:
 - Creating the Dockerfile to build, publish, and run your extension in Docker Desktop.
 - Configuring the metadata file which is required at the root of the image filesystem.
 - Building and installing the extension.
-- Testing and debugging the extension.
 
-There are also instructions on [how to set authentication](dev/oauth2-flow.md) for your extension.
-
-This build section provides sample folders with ready-to-go examples that walk you through building:
-
-- A frontend extension based on plain HTML
-- A simple Docker extension that contains only a UI part and is based on ReactJS. This is useful if you want to develop an extension which consists exclusively of a visual part with no services running in the VM.
-- An extension that invokes Docker CLI commands
-- A simple backend extension
-
->Note
+> Note
 >
->Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/overview.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance){:target="_blank" rel="noopener" class="_"}.
-
-If your extension requires additional services running in the Docker Desktop VM, see the [VM UI](https://github.com/docker/extensions-sdk/tree/main/samples/vm-service){:target="_blank" rel="noopener" class="_"} example.
+> Whilst you're building your extension, make sure you follow our [design](design/design-guidelines.md) and [UI styling](design/index.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance){:target="_blank" rel="noopener" class="_"}.
 
 For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}.
 
 ### Part two: Publish and distribute your extension
 
-Docker Desktop displays published extensions in the Extensions Marketplace. The Extensions Marketplace is a curated space where developers from all over can discover extensions to improve their developer experience and upload their own extension to share with the world. 
+Docker Desktop displays published extensions in the Extensions Marketplace. The Extensions Marketplace is a curated space where developers can discover extensions to improve their developer experience and upload their own extension to share with the world.
 
-All extensions submitted to the Extension Marketplace are reviewed and approved by our team before listing. This review process ensures a level of trust, security, and quality for developers using Extensions and allows for Extension developers to get feedback on what will improve their Extensions experience.
+All extensions submitted to the Extensions Marketplace are reviewed and approved by our team before listing. This review process ensures a level of trust, security, and quality for developers using extensions and allows for extension developers to recieve feedback and then improve their extension experience.
 
-If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/){:target="_blank" rel="noopener" class="_"}. We’ll review your submission and provide feedback if changes are needed before we can validate and publish it to make it available to all Docker Desktop users.
+If you want your extension to be published in the Marketplace, you can submit your extension [here](https://www.docker.com/products/extensions/submissions/){:target="_blank" rel="noopener" class="_"}. We’ll review your submission and provide feedback if changes are needed before we validate and publish it to make it available to all Docker Desktop users.
+
+{% include extensions-form.md %}
 
 ## What’s next?
+
 If you want to get up and running quickly with a Docker Extension, see the [Quickstart guide](quickstart.md).
 
 Alternatively, get started with Part one: Build for more in-depth information about each step of the extension creation process.

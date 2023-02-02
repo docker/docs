@@ -27,7 +27,7 @@ you can delete the service from the swarm.
     ```console
     $ docker service inspect helloworld
     []
-    Error: no such service: helloworld
+    Status: Error: no such service: helloworld, Code: 1
     ```
 
 4.  Even though the service no longer exists, the task containers take a few

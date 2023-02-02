@@ -113,7 +113,7 @@ $ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
 
-Refer to the [docker build documentation](../../engine/reference/commandline/build.md#set-build-time-variables---build-arg)
+Refer to the [docker build documentation](../../engine/reference/commandline/build.md#build-arg)
 to learn more about Docker build-time variables.
 
 #### Push to multiple repos

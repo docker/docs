@@ -15,6 +15,67 @@ for Docker Engine.
 
 # Version 20.10
 
+## 20.10.23
+{% include release-date.html date="2023-01-19" %}
+
+This release of Docker Engine contains updated versions of Docker Compose,
+Docker Buildx, Containerd, and some minor bug fixes and enhancements.
+
+### Updates
+
+- Update Docker Compose to [v2.15.1](https://github.com/docker/compose/releases/tag/v2.15.1){:target="_blank" rel="noopener"}.
+- Update Docker Buildx to [v0.10.0](https://github.com/docker/buildx/releases/tag/v0.10.0){:target="_blank" rel="noopener"}.
+- Update containerd (`containerd.io` package) to [v1.6.15](https://github.com/containerd/containerd/releases/tag/v1.6.15){:target="_blank" rel="noopener"}.
+- Update the package versioning format for `docker-compose-cli` to allow distro version updates [docker/docker-ce-packaging#822](https://github.com/docker/docker-ce-packaging/pull/822){:target="_blank" rel="noopener"}.
+- Update Go runtime to [1.18.10](https://go.dev/doc/devel/release#go1.18.minor){:target="_blank" rel="noopener"},
+
+### Bug fixes and enhancements
+
+- Fix an issue where `docker build` would fail when using `--add-host=host.docker.internal:host-gateway`
+  with BuildKit enabled [moby/moby#44650](https://github.com/moby/moby/pull/44650){:target="_blank" rel="noopener"}.
+- Revert seccomp: block socket calls to `AF_VSOCK` in default profile [moby/moby#44712](https://github.com/moby/moby/pull/44712){:target="_blank" rel="noopener"}.
+
+  This change, while favorable from a security standpoint, caused a change
+  in behavior for some use-cases. As such, we are reverting it to ensure
+  stability and compatibility for the affected users.
+
+  However, users of `AF_VSOCK` in containers should recognize that this
+  (special) address family is not currently namespaced in any version of
+  the Linux kernel, and may result in unexpected behavior, like containers
+  communicating directly with host hypervisors.
+
+  Future releases, will filter `AF_VSOCK`. Users who need to allow containers
+  to communicate over the unnamespaced `AF_VSOCK` will need to turn off seccomp
+  confinement or set a custom seccomp profile.
+
+## 20.10.22
+{% include release-date.html date="2022-12-16" %}
+
+This release of Docker Engine contains updated versions of Docker Compose,
+Docker Scan, Containerd, and some minor bug fixes and enhancements.
+
+### Updates
+
+- Update Docker Compose to [v2.14.1](https://github.com/docker/compose/releases/tag/v2.14.1){:target="_blank" rel="noopener"}.
+- Update Docker Scan to [v0.23.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.23.0){:target="_blank" rel="noopener"}.
+- Update containerd (`containerd.io` package) to [v1.6.13](https://github.com/containerd/containerd/releases/tag/v1.6.13){:target="_blank" rel="noopener"},
+  to include a fix for [CVE-2022-23471](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23471){:target="_blank" rel="noopener"}.
+- Update Go runtime to [1.18.9](https://go.dev/doc/devel/release#go1.18.minor){:target="_blank" rel="noopener"},
+  to include fixes for
+  [CVE-2022-41716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41716){:target="_blank" rel="noopener"},
+  [CVE-2022-41717](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41717){:target="_blank" rel="noopener"}, and
+  [CVE-2022-41720](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41720){:target="_blank" rel="noopener"}.
+
+### Bug fixes and enhancements
+
+- Improve error message when attempting to pull an unsupported image format or OCI artifact
+  [moby/moby#44413](https://github.com/moby/moby/pull/44413){:target="_blank" rel="noopener"},
+  [moby/moby#44569](https://github.com/moby/moby/pull/44569){:target="_blank" rel="noopener"}. 
+- Fix an issue where the host's ephemeral port-range was ignored when selecting random ports for containers [moby/moby#44476](https://github.com/moby/moby/pull/44476){:target="_blank" rel="noopener"}.
+- Fix `ssh: parse error in message type 27` errors during `docker build` on hosts using OpenSSH 8.9 or above [moby/moby#3862](https://github.com/moby/moby/pull/3862){:target="_blank" rel="noopener"}.
+- seccomp: block socket calls to `AF_VSOCK` in default profile [moby/moby#44564](https://github.com/moby/moby/pull/44564){:target="_blank" rel="noopener"}.
+
+
 ## 20.10.21
 {% include release-date.html date="2022-10-25" %}
 

@@ -6,7 +6,7 @@ keywords: build, buildkit
 
 ## Overview
 
-[BuildKit](https://github.com/moby/buildkit){:target="_blank" rel="noopener" class="_"}
+[BuildKit](https://github.com/moby/buildkit){:target="blank" rel="noopener" class=""}
 is an improved backend to replace the legacy builder. It comes with new and much
 improved functionality for improving your builds' performance and the
 reusability of your Dockerfiles. It also introduces support for handling more
@@ -31,7 +31,7 @@ files to be read or uploaded before the work can begin.
 
 ## LLB
 
-At the core of BuildKit is a [Low-Level Build (LLB)](https://github.com/moby/buildkit#exploring-llb){:target="_blank" rel="noopener" class="_"}
+At the core of BuildKit is a [Low-Level Build (LLB)](https://github.com/moby/buildkit#exploring-llb){:target="blank" rel="noopener" class=""}
 definition format. LLB is an intermediate binary format that allows developers
 to extend BuildKit. LLB defines a content-addressable dependency graph that can
 be used to put together very complex build definitions. It also supports
@@ -47,7 +47,7 @@ graphs and content mounted to specific operations. This makes it much faster,
 more precise, and portable. The build cache can even be exported to a registry,
 where it can be pulled on-demand by subsequent invocations on any host.
 
-LLB can be generated directly using a [golang client package](https://pkg.go.dev/github.com/moby/buildkit/client/llb)
+LLB can be generated directly using a [golang client package](https://pkg.go.dev/github.com/moby/buildkit/client/llb){:target="blank" rel="noopener" class=""}
 that allows defining the relationships between your build operations using Go
 language primitives. This gives you full power to run anything you can imagine,
 but will probably not be how most people will define their builds. Instead,
@@ -100,5 +100,5 @@ And restart the Docker daemon.
 > **Warning**
 >
 > BuildKit only supports building Linux containers. Windows support is tracked
-> in [`moby/buildkit#616`](https://github.com/moby/buildkit/issues/616){:target="_blank" rel="noopener" class="_"}
+> in [`moby/buildkit#616`](https://github.com/moby/buildkit/issues/616){:target="blank" rel="noopener" class=""}
 {: .warning}

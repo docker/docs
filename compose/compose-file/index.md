@@ -8,6 +8,7 @@ title: Compose specification
 toc_max: 4
 toc_min: 1
 ---
+{% include compose-eol.md %}
 
 The Compose file is a [YAML](https://yaml.org){: target="_blank" rel="noopener" class="_"} file defining services,
 networks, and volumes for a Docker application. The latest and recommended
@@ -1756,7 +1757,7 @@ sysctls:
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to [configure namespaced kernel
-parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+parameters (sysctls) at runtime](/engine/reference/commandline/run/#sysctl).
 
 ### tmpfs
 
@@ -2225,7 +2226,7 @@ volumes:
       name: actual-name-of-volume
 ```
 
-This make it possible to make this lookup name a parameter of a Compose file, so that the model ID for volume is
+This makes it possible to make this lookup name a parameter of a Compose file, so that the model ID for volume is
 hard-coded but the actual volume ID on platform is set at runtime during deployment:
 
 ```yml

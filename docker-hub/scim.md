@@ -24,7 +24,7 @@ SSO must be set up and be functional for your organization before you start conf
 
 Before you make SCIM configuration changes in your IdP, navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Organizations** > **Settings** > **Security**. SCIM is locked until you complete the SSO configuration and verify your company domain. Enable SCIM and access your Base URL and API Token. You can also generate a new API token.
 
-![scim-provisioning](images/scim-provisioning.png){:width="700px"}
+![SCIM provisioning view](images/scim-provisioning.png){:width="700px"}
 
 ### Okta
 
@@ -37,16 +37,16 @@ Before you make SCIM configuration changes in your IdP, navigate to [Docker Hub]
     * **Supported Provisioning actions**: select **Push New Users**, **Push Profile Updates**
     * **Authorization/Bearer**: SCIM API Token from Docker Hub
 
-    ![scim-app-provisioning](images/scim-app-provisioning.png){:width="700px"}
+    ![SCIM app provisioning options](images/scim-app-provisioning.png){:width="700px"}
 
 4. Click **Test Connection Configuration** to complete the configuration and **Save**.
 5. Once configured, you must enable synchronization. Navigate to **Provisioning** > **To App** > **Edit**, and enable **Create Users**, **Update User Attributes** and **Deactivates Users**, and **Save**.
 
-    ![provisioning-to-app](images/provisioning-to-app.png){:width="700px"}
+    ![Enable synchronization](images/provisioning-to-app.png){:width="700px"}
 
 6. Remove all fields that aren't supported from your **Docker Hub Attributes Mappings**.
 
-    ![scim-attributes](images/scim-attributes.png){:width="700px"}
+    ![Docker Hub attributes mappings view](images/scim-attributes.png){:width="700px"}
 
 The synchronization of user data is now automated, and the members in your Docker organization will now be automatically provisioned, updated, and de-provisioned based on the access control managed through your identity provider, Okta.
 

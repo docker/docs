@@ -27,7 +27,7 @@ For our sample application, let’s create a simple application from a template 
 ```console
 $ mkdir dotnet-docker
 $ cd dotnet-docker
-$ dotnet new webApp -n myWebApp -o src --no-https
+$ dotnet new webapp -n myWebApp -o src --no-https
 ```
 
 Output similar to the following appears.
@@ -101,7 +101,7 @@ Press Ctrl+C in the terminal window to stop the application.
 
 ## Create a Dockerfile
 
-In the `dotnet-docker\src` directory, create a file named `Dockerfile`.
+In the `dotnet-docker` directory, create a file named `Dockerfile`.
 
 Next, we need to add a line in our Dockerfile that tells Docker what image
 we would like to use to build our application. Open the `Dockerfile` in an IDE or a text editor, and add the following instructions.

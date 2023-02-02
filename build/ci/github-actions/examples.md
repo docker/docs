@@ -9,7 +9,7 @@ Docker GitHub Actions in your CI pipelines.
 
 ## Push to multi-registries
 
-The following workflow will connect you to Docker Hub and [GitHub Container Registry](https://github.com/docker/login-action#github-container-registry){: target="_blank" rel="noopener" class="_" }
+The following workflow will connect you to Docker Hub and [GitHub Container Registry](https://github.com/docker/login-action#github-container-registry){:target="blank" rel="noopener" class=""}
 and push the image to both registries:
 
 {% raw %}
@@ -49,7 +49,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -64,9 +64,9 @@ jobs:
 
 ## Manage tags and labels
 
-If you want an "automatic" tag management and [OCI Image Format Specification](https://github.com/opencontainers/image-spec/blob/master/annotations.md){: target="_blank" rel="noopener" class="_" }
+If you want an "automatic" tag management and [OCI Image Format Specification](https://github.com/opencontainers/image-spec/blob/master/annotations.md){:target="blank" rel="noopener" class=""}
 for labels, you can do it in a dedicated setup step. The following workflow
-will use the [Docker Metadata Action](https://github.com/docker/metadata-action){: target="_blank" rel="noopener" class="_" }
+will use the [Docker Metadata Action](https://github.com/docker/metadata-action){:target="blank" rel="noopener" class=""}
 to handle tags and labels based on GitHub Actions events and Git metadata:
 
 {% raw %}
@@ -133,7 +133,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
@@ -149,9 +149,9 @@ the `platforms` option, as described in the following example.
 
 > **Note**
 >
-> - For a list of available platforms, see the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){: target="_blank" rel="noopener" class="_" }
+> - For a list of available platforms, see the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:target="blank" rel="noopener" class=""}
 >   action.
-> - If you want support for more platforms, you can use QEMU with the [Docker Setup QEMU](https://github.com/docker/setup-qemu-action){: target="_blank" rel="noopener" class="_" }
+> - If you want support for more platforms, you can use QEMU with the [Docker Setup QEMU](https://github.com/docker/setup-qemu-action){:target="blank" rel="noopener" class=""}
 >   action.
 
 {% raw %}
@@ -184,7 +184,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -201,12 +201,12 @@ actions.
 
 > **Note**
 >
-> See [Cache storage backends](../../building/cache/backends/index.md) for more
+> See [Cache storage backends](../../cache/backends/index.md) for more
 > details about cache storage backends.
 
 ### Inline cache
 
-In most cases you want to use the [inline cache exporter](../../building/cache/backends/inline.md).
+In most cases you want to use the [inline cache exporter](../../cache/backends/inline.md).
 However, note that the `inline` cache exporter only supports `min` cache mode.
 To use `max` cache mode, push the image and the cache separately using the
 registry cache exporter with the `cache-to` option, as shown in the [registry cache example](#registry-cache).
@@ -238,7 +238,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
@@ -251,7 +251,7 @@ jobs:
 ### Registry cache
 
 You can import/export cache from a cache manifest or (special) image
-configuration on the registry with the [registry cache exporter](../../building/cache/backends/registry.md).
+configuration on the registry with the [registry cache exporter](../../cache/backends/registry.md).
 
 {% raw %}
 ```yaml
@@ -280,7 +280,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
@@ -296,11 +296,11 @@ jobs:
 
 > **Warning**
 >
-> This cache exporter is experimental. Please provide feedback on [BuildKit repository](https://github.com/moby/buildkit){: target="_blank" rel="noopener" class="_" }
+> This cache exporter is experimental. Please provide feedback on [BuildKit repository](https://github.com/moby/buildkit){:target="blank" rel="noopener" class=""}
 > if you experience any issues.
 {: .warning }
 
-The [GitHub Actions cache exporter](../../building/cache/backends/gha.md)
+The [GitHub Actions cache exporter](../../cache/backends/gha.md)
 backend uses the [GitHub Cache API](https://github.com/tonistiigi/go-actions-cache/blob/master/api.md)
 to fetch and upload cache blobs. That's why you should only use this cache
 backend in a GitHub Action workflow, as the `url` (`$ACTIONS_CACHE_URL`) and
@@ -334,7 +334,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
@@ -348,13 +348,13 @@ jobs:
 
 > **Warning**
 >
-> At the moment, old cache entries aren't deleted, so the cache size [keeps growing](https://github.com/docker/build-push-action/issues/252){:target="_blank" rel="noopener" class="_"}.
-> The following example uses the `Move cache` step as a workaround (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896){:target="_blank" rel="noopener" class="_"}
+> At the moment, old cache entries aren't deleted, so the cache size [keeps growing](https://github.com/docker/build-push-action/issues/252){:target="blank" rel="noopener" class=""}.
+> The following example uses the `Move cache` step as a workaround (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896){:target="blank" rel="noopener" class=""}
 > for more info).
 {: .warning }
 
-You can also leverage [GitHub cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)
-using the [actions/cache](https://github.com/actions/cache) and [local cache exporter](../../building/cache/backends/local.md)
+You can also leverage [GitHub cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows){:target="blank" rel="noopener" class=""}
+using the [actions/cache](https://github.com/actions/cache) and [local cache exporter](../../cache/backends/local.md)
 with this action:
 
 {% raw %}
@@ -392,7 +392,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
@@ -412,7 +412,7 @@ jobs:
 
 ## Secrets
 
-In the following example uses and exposes the [`GITHUB_TOKEN` secret](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret){:target="_blank" rel="noopener" class="_"}
+In the following example uses and exposes the [`GITHUB_TOKEN` secret](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret){:target="blank" rel="noopener" class=""}
 as provided by GitHub in your workflow.
 
 First, create a `Dockerfile` that uses the secret:
@@ -451,7 +451,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
       -
         name: Build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -471,7 +471,7 @@ jobs:
 >   "MY_SECRET=./secret.txt"
 > ```
 
-If you're using [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets){:target="_blank" rel="noopener" class="_"}
+If you're using [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets){:target="blank" rel="noopener" class=""}
 and need to handle multi-line value, you will need to place the key-value pair
 between quotes:
 
@@ -530,7 +530,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
       -
         name: Build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           load: true
@@ -586,7 +586,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and export to Docker
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           load: true
@@ -597,7 +597,7 @@ jobs:
           docker run --rm ${{ env.TEST_TAG }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -615,7 +615,7 @@ jobs:
 
 ## Local registry
 
-For testing purposes you may need to create a [local registry](https://hub.docker.com/_/registry){: target="_blank" rel="noopener" class="_" }
+For testing purposes you may need to create a [local registry](https://hub.docker.com/_/registry){:target="blank" rel="noopener" class=""}
 to push images into:
 
 ```yaml
@@ -648,7 +648,7 @@ jobs:
           driver-opts: network=host
       -
         name: Build and push to local registry
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
@@ -662,10 +662,10 @@ jobs:
 ## Share built image between jobs
 
 As each job is isolated in its own runner, you can't use your built image
-between jobs, except if you're using [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners){: target="_blank" rel="noopener" class="_" }.
-However, you can [pass data between jobs](https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts#passing-data-between-jobs-in-a-workflow){: target="_blank" rel="noopener" class="_" }
-in a workflow using the [actions/upload-artifact](https://github.com/actions/upload-artifact){: target="_blank" rel="noopener" class="_" }
-and [actions/download-artifact](https://github.com/actions/download-artifact){: target="_blank" rel="noopener" class="_" }
+between jobs, except if you're using [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners){:target="blank" rel="noopener" class=""}
+However, you can [pass data between jobs](https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts#passing-data-between-jobs-in-a-workflow){:target="blank" rel="noopener" class=""}
+in a workflow using the [actions/upload-artifact](https://github.com/actions/upload-artifact){:target="blank" rel="noopener" class=""}
+and [actions/download-artifact](https://github.com/actions/download-artifact){:target="blank" rel="noopener" class=""}
 actions:
 
 ```yaml
@@ -688,7 +688,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
       -
         name: Build and export
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           tags: myimage:latest
@@ -759,7 +759,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
       -
         name: Build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           build-contexts: |
@@ -769,7 +769,7 @@ jobs:
 
 ### Use image in subsequent steps
 
-By default, the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){: target="_blank" rel="noopener" class="_" }
+By default, the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:target="blank" rel="noopener" class=""}
 action uses `docker-container` as a build driver, so built Docker images aren't
 loaded automatically.
 
@@ -801,14 +801,14 @@ jobs:
         uses: docker/setup-buildx-action@v2
       -
         name: Build base image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: base
           load: true
           tags: my-base-image:latest
       -
         name: Build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           build-contexts: |
@@ -858,7 +858,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -879,7 +879,7 @@ jobs:
 ## Update Docker Hub repository description
 
 You can update the Docker Hub repository description using a third party action
-called [Docker Hub Description](https://github.com/peter-evans/dockerhub-description){: target="_blank" rel="noopener" class="_" }
+called [Docker Hub Description](https://github.com/peter-evans/dockerhub-description){:target="blank" rel="noopener" class=""}
 with this action:
 
 {% raw %}
@@ -912,17 +912,17 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: user/app:latest
       -
         name: Update repo description
-        uses: peter-evans/dockerhub-description@v2
+        uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: user/app
 ```
 {% endraw %}

@@ -78,8 +78,7 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
 
    ```dockerfile
    # syntax=docker/dockerfile:1
-   FROM node:12-alpine
-   RUN apk add --no-cache python2 g++ make
+   FROM node:18-alpine
    WORKDIR /app
    COPY . .
    RUN yarn install --production
@@ -103,7 +102,7 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
    $ docker build -t getting-started .
    ```
 
-   The `docker build` command uses the Dockerfile to build a new container image. You might have noticed that Docker downloaded a lot of "layers". This is because you instructed the builder that you wanted to start from the `node:12-alpine` image. But, since you didn't have that on your machine, Docker needed to download the image.
+   The `docker build` command uses the Dockerfile to build a new container image. You might have noticed that Docker downloaded a lot of "layers". This is because you instructed the builder that you wanted to start from the `node:18-alpine` image. But, since you didn't have that on your machine, Docker needed to download the image.
 
    After Docker downloaded the image, the instructions from the Dockerfile copied in your application and used `yarn` to install your application's dependencies. The `CMD` directive specifies the default command to run when starting a container from this image.
 
@@ -127,7 +126,7 @@ Now that you have an image, you can run the application in a [container](../get-
 2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"}.
    You should see your app.
 
-   ![Empty Todo List](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
+   ![Empty todo list](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
    {: .text-center }
 
 3. Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove items. Your frontend is successfully storing items in the backend.

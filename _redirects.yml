@@ -92,7 +92,7 @@
   - /go/attack-surface/
 "/build/buildkit/#getting-started":
   - /go/buildkit/
-"/build/buildx/install/":
+"/build/install-buildx/":
   # Instructions on installing Buildx. Redirect used in Docker CLI.
   - /go/buildx/
 "/engine/reference/commandline/compose_build/":
@@ -115,6 +115,8 @@
 "/desktop/use-desktop/pause/":
   - /go/mac-desktop-pause/
   - /go/win-desktop-pause/
+"/desktop/settings/mac/#file-sharing":
+  - /go/mac-file-sharing/
 "/engine/security/rootless/":
   # Instructions on running docker in rootless mode. This redirect is currently
   # used in the installation script at "get.docker.com"
@@ -548,3 +550,7 @@
 "https://hub.docker.com/_/zookeeper/":
   - /samples/zookeeper
   - /samples/library/zookeeper
+
+# feedback
+"https://docs.google.com/forms/d/e/1FAIpQLSenjK8KiBiOrwCpq06u_iVEZGv4tfTEpfmY_cQDmsqJrHL9Gw/viewform":
+  - /feedback/extension/

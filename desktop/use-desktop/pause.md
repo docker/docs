@@ -8,7 +8,7 @@ You can pause your Docker Desktop session when you are not actively using it and
 
 From the Docker menu, select![whale menu](../images/whale-x.svg){: .inline} and then **Pause** to pause Docker Desktop.
 
-Docker Desktop displays the paused status on the Docker menu and on the  **Containers**, **Images**, **Volumes**, and **Dev Environment** screens in Docker Dashboard. You can still access the **Preferences** (or **Settings** if you are a Windows user) and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
+Docker Desktop displays the paused status on the Docker menu and on the  **Containers**, **Images**, **Volumes**, and **Dev Environment** screens in Docker Dashboard. You can still access the **Settings** and the **Troubleshoot** menu from the Dashboard when you've paused Docker Desktop.
 
 Select ![whale menu](../images/whale-x.svg){: .inline} then **Resume** to resume Docker Desktop.
 

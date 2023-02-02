@@ -1,8 +1,10 @@
+ARM
 AWS
 Amazon
+Anchore
 Apple
-Azure( Blob Storage)?
 Artifactory
+Azure( Blob Storage)?
 BusyBox
 CentOS
 Ceph
@@ -22,10 +24,10 @@ Intel
 JFrog
 JetBrains
 Kubernetes
+LTS
 Lightstreamer
 Linux
 Logstash
-LTS
 Mac
 Mail(chimp|gun)
 Microsoft
@@ -39,11 +41,14 @@ Postgres
 PowerShell
 Python
 QEMU
-Raspbian
 RHEL
+Raspbian
 S3
-SQLite
+SBOMs?
 SLES
+SLSA
+SPDX
+SQLite
 Slack
 Snyk
 Solr
@@ -53,6 +58,7 @@ TLS
 Twilio
 Ubuntu
 WSL
+Wasm
 Windows
 XWiki
 Zsh

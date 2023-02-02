@@ -5,13 +5,13 @@ keywords: ci, github actions, gha, buildkit, buildx
 ---
 
 This page contains instructions on configuring your BuildKit instances when
-using our [Setup Buildx Action](https://github.com/docker/setup-buildx-action){: target="_blank" rel="noopener" class="_" }.
+using our [Setup Buildx Action](https://github.com/docker/setup-buildx-action){:target="blank" rel="noopener" class=""}.
 
 ## BuildKit container logs
 
 To display BuildKit container logs when using the `docker-container` driver,
-you must either [enable step debug logging](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging#enabling-step-debug-logging){: target="_blank" rel="noopener" class="_" },
-or set the `--debug` buildkitd flag in the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){: target="_blank" rel="noopener" class="_" } action:
+you must either [enable step debug logging](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging#enabling-step-debug-logging){:target="blank" rel="noopener" class=""},
+or set the `--debug` buildkitd flag in the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:target="blank" rel="noopener" class=""} action:
 
 ```yaml
 name: ci
@@ -33,7 +33,7 @@ jobs:
           buildkitd-flags: --debug
       -
         name: Build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
 ```
@@ -45,7 +45,7 @@ Logs will be available at the end of a job:
 ## Daemon configuration
 
 You can provide a [BuildKit configuration](../../buildkit/toml-configuration.md)
-to your builder if you're using the [`docker-container` driver](../../building/drivers/docker-container.md)
+to your builder if you're using the [`docker-container` driver](../../drivers/docker-container.md)
 (default) with the `config` or `config-inline` inputs:
 
 ### Registry mirror
@@ -133,7 +133,7 @@ fields:
 | `buildkitd-flags` | String | [Flags for buildkitd](../../../engine/reference/commandline/buildx_create.md#buildkitd-flags) daemon                                                                                                                                                                    |
 | `platforms`       | String | Fixed [platforms](../../../engine/reference/commandline/buildx_create.md#platform) for the node. If not empty, values take priority over the detected ones.                                                                                                             |
 
-Here is an example using remote nodes with the [`remote` driver](../../building/drivers/remote.md)
+Here is an example using remote nodes with the [`remote` driver](../../drivers/remote.md)
 and [TLS authentication](#tls-authentication):
 
 {% raw %}
@@ -178,7 +178,7 @@ using SSH or TLS.
 
 ### SSH authentication
 
-To be able to connect to an SSH endpoint using the [`docker-container` driver](../../building/drivers/docker-container.md),
+To be able to connect to an SSH endpoint using the [`docker-container` driver](../../drivers/docker-container.md),
 you have to set up the SSH private key and configuration on the GitHub Runner:
 
 {% raw %}
@@ -209,7 +209,7 @@ jobs:
 
 ### TLS authentication
 
-You can also [set up a remote BuildKit instance](../../building/drivers/remote.md#example-remote-buildkit-in-docker-container)
+You can also [set up a remote BuildKit instance](../../drivers/remote.md#example-remote-buildkit-in-docker-container)
 using the remote driver. To ease the integration in your workflow, you can use
 an environment variables that sets up authentication using the BuildKit client
 certificates for the `tcp://`:
@@ -286,7 +286,7 @@ some packages may be particularly resource-intensive to build and require more
 compute. Or they require a builder equipped with a particular capability or
 hardware.
 
-For more information about remote builder, see [`remote` driver](../../building/drivers/remote.md)
+For more information about remote builder, see [`remote` driver](../../drivers/remote.md)
 and the [append builder nodes example](#append-additional-nodes-to-the-builder).
 
 {% raw %}
@@ -319,14 +319,14 @@ jobs:
         run: echo ${{ steps.builder2.outputs.name }}
       -
         name: Build against builder1
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           builder: ${{ steps.builder1.outputs.name }}
           context: .
           target: mytarget1
       -
         name: Build against builder2
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           builder: ${{ steps.builder2.outputs.name }}
           context: .

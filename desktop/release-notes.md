@@ -24,12 +24,343 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.16.3
+
+{% include release-date.html date="2023-01-30" %}
+
+> Download Docker Desktop
+>
+> <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading14">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse14" aria-expanded="true" aria-controls="collapse14">
+            Windows
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
+        <div class="panel-body">
+          <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Download file</a> 
+        <br>
+        <br>
+        <b>Checksum:</b> SHA-256 5f6db3cf5a2084fc7c584c90792f38a0caac91c4eed4f8653dde7bb8148517f1 
+        </div>
+      </div>
+    </div>
+    </div>
+>
+> For the latest release of Docker Desktop for Mac and Linux, see [4.16.2](#4162)
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Fixed Docker Desktop failing to start the WSL 2 backend when file system compression or encryption is enabled on `%LOCALAPPDATA%`. Fixes [docker/for-win#13184](https://github.com/docker/for-win/issues/13184).
+- Fixed Docker Desktop failing to report a missing or outdated WSL installation when starting. Fixes [docker/for-win#13184](https://github.com/docker/for-win/issues/13184).
+
+## 4.16.2
+
+{% include release-date.html date="2023-01-19" %}
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/95914/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95914/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95914/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.pkg.tar.zst)
+<div class="panel-group" id="accordion13" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading13">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion13" href="#collapse13" aria-expanded="true" aria-controls="collapse13">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 20e4ba05b573610506b57a7f216115458019d2c002f18ef6d50a2419b7db545b</li>
+      <li><b>Mac Intel:</b> SHA-256 22eecb8ea07f10892d81cde07d614fb8b342163106133a75c4280a8e28787643</li>
+      <li><b>Mac Arm:</b> SHA-256 838eabe6cc42fe7e4be2cdb4d73924c61fc7982366dac2a9467793845851cb2e</li>
+      <li><b>Linux DEB:</b> SHA-256 fa3023eb16c24dcbdc5f12021340e874d8399863e96c1a58091c9a41fd50fe58</li>
+      <li><b>Linux RPM:</b> SHA-256 7f54f29a971b9ba456e7aef777d747867d7e4eccb7a2b47aa9092c99a990f8d5</li>
+      <li><b>Linux Arch:</b> SHA-256 05e94709974e711bf81aa16845ebba976f8236a371432594c87a68ecf9a21d0f</li>
+      </div>
+    </div>
+  </div>
+</div>
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue where `docker build` and `docker tag` commands produced an `image already exists` error if the containerd integration feature is enabled.
+- Fixed a regression introduced with Docker Desktop 4.16 breaking networking from containers with target platform linux/386 on amd64 systems. Fixes [docker/for-mac/6689](https://github.com/docker/for-mac/issues/6689).
+
+#### For Mac
+
+- Fixed the capitalization of `Info.plist` which caused `vmnetd` to break on case-sensitive file systems. Fixes [docker/for-mac/6677](https://github.com/docker/for-mac/issues/6677).
+
+#### For Windows
+
+- Fixed a regression introduced with Docker Desktop 4.16 causing it to get stuck in the "starting" phase when in WSL2 mode. Fixes [docker/for-win/13165](https://github.com/docker/for-win/issues/13165)
+
+## 4.16.1
+
+{% include release-date.html date="2023-01-13" %}
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/95567/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95567/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95567/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.1-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion12" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading12">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion12" href="#collapse12" aria-expanded="true" aria-controls="collapse12">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 8260a2fbd3cf7e9050ed7348e5c528314df82f1c460c70919afd0e5f95913f14</li>
+      <li><b>Mac Intel:</b> SHA-256 b6d8720e2ceb64a6102c5efba53e2adf441c60508457aeb8cc1fd7c30cd7b28f</li>
+      <li><b>Mac Arm:</b> SHA-256 327725664ac86d34ee3b311b09eace0075492f7ff3e0e384015171769f75bff4</li>
+      <li><b>Linux DEB:</b> SHA-256 8400f9b1bab837b1d2a12597ec74ece859a5e53f5244cd101c72d3b384ac44b4</li>
+      <li><b>Linux RPM:</b> SHA-256 0d2074f6a6fa66300810168ea5c572f81616753c698bc5246a89ad374beaec22</li>
+      <li><b>Linux Arch:</b> SHA-256 11344e66c76ed6ce66b8b077dd86870fc5d63cdcd96941d664de9b65e2123baf</li>
+      </div>
+    </div>
+  </div>
+</div>
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed `sudo` inside a container failing with a security related error for some images. Fixes [docker/for-mac/6675](https://github.com/docker/for-mac/issues/6675) and [docker/for-win/13161](https://github.com/docker/for-win/issues/13161).
+
+## 4.16.0
+{% include release-date.html date="2023-01-12" %}
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/95345/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95345/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95345/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/95345/docker-desktop-4.16.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/95345/docker-desktop-4.16.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/95345/docker-desktop-4.16.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion11" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading11">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion11" href="#collapse11" aria-expanded="true" aria-controls="collapse11">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 f02fcd23410f9304bde7cd0b415731614adfd2e70bbb09f669a068c88ddd84f2</li>
+      <li><b>Mac Intel:</b> SHA-256 4fa95e90b6c39400943b263ae5aa1bb6db5b26043dd0148c4e37d3033a754d33</li>
+      <li><b>Mac Arm:</b> SHA-256 3101934a3b062b373a22fd994d743fa6a08fa805695839e6b63bc2d28ebcf59a</li>
+      <li><b>Linux DEB:</b> SHA-256 102b79efd90be5ff72fb6ba4bb385621f4e6ab23c19b14d19d525c10f20bdfdd</li>
+      <li><b>Linux RPM:</b> SHA-256 5145cc5073d4a0b998ebd65b96c5a46bd2d99a1572d5be8cff502a77b2c58c01</li>
+      <li><b>Linux Arch:</b> SHA-256 ab4af236b435489d49553b63f25a18c098677dd9abc176531cdcc3d67831461e</li>
+      </div>
+    </div>
+  </div>
+</div>
+
+### New
+
+- Extensions have moved from Beta to GA.
+- Quick Search has moved from experimental to GA.
+- Extensions are now included in Quick Search.
+- Analyzing large images is now up to 4x faster.
+- New local images view has moved from experimental to GA.
+- New Beta feature for MacOS 13, Rosetta for Linux, has been added for faster emulation of Intel-based images on Apple Silicon.
+
+### Upgrades
+
+- [Compose v2.15.1](https://github.com/docker/compose/releases/tag/v2.15.1)
+- [Containerd v1.6.14](https://github.com/containerd/containerd/releases/tag/v1.6.14)
+- [Docker Engine v20.10.22](https://docs.docker.com/engine/release-notes/#201022)
+- [Buildx v0.10.0](https://github.com/docker/buildx/releases/tag/v0.10.0)
+- [Docker Scan v0.23.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.23.0)
+- [Go 1.19.4](https://github.com/golang/go/releases/tag/go1.19.4)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed `docker build --quiet` not outputting the image identifier with the `containerd` integration.
+- Fixed image inspect not showing image labels with the `containerd` integration.
+- Increased the contrast between running and stopped container icons to make it easier for colorblind people to scan the containers list.
+- Fixed a bug where the user is prompted for new HTTP proxy credentials repeatedly until Docker Desktop is restarted.
+- Added a diagnostics command `com.docker.diagnose login` to check HTTP proxy configuration.
+- Fixed actions on compose stack not working properly. Fixes [docker/for-mac#6566](https://github.com/docker/for-mac/issues/6566).
+- Fixed the Docker dashboard trying at startup to get disk usage information and display an error banner before the engine was running.
+- Added an informational banner with instructions on how to opt-out of experimental feature access next to all experimental features.
+- Docker Desktop now supports downloading Kubernetes images via an HTTP proxy.
+- Fixed tooltips to not block action buttons. Fixes [docker/for-mac#6516](https://github.com/docker/for-mac/issues/6516).
+- Fixed the blank "An error occurred" container list on the **Container** view.
+
+#### For Mac
+
+- Minimum OS version to install or update Docker Desktop on macOS is now macOS Big Sur (version 11) or later.
+- Fixed the Docker engine not starting when Enhanced Container Isolation is enabled if the legacy `osxfs` implementation is used for file sharing.
+- Fixed files created on VirtioFS having the executable bit set. Fixes [docker/for-mac#6614](https://github.com/docker/for-mac/issues/6614).
+- Added back a way to uninstall Docker Desktop from the command line. Fixes [docker/for-mac#6598](https://github.com/docker/for-mac/issues/6598).
+- Fixed hardcoded `/usr/bin/kill`. Fixes [docker/for-mac#6589](https://github.com/docker/for-mac/issues/6589).
+- Fixed truncation (for example with the `truncate` command) of very large files (> 38GB) shared on VirtioFS with an incorrect size.
+- Changed the disk image size in **Settings** to use the decimal system (base 10) to coincide with how Finder displays disk capacity.
+- Fixed Docker crash under network load. Fixes [docker/for-mac#6530](https://github.com/docker/for-mac/issues/6530).
+- Fixed an issue causing Docker to prompt the user to install the `/var/run/docker.sock` symlink after every reboot.
+- Ensured the Login Item which installs the `/var/run/docker.sock` symlink is signed.
+- Fixed bug where `$HOME/.docker` was removed on factory reset.
+
+### For Windows
+
+- Fixed `docker build` hanging while printing "load metadata for". Fixes [docker/for-win#10247](https://github.com/docker/for-win/issues/10247).
+- Fixed typo in diagnose.exe output Fixes [docker/for-win#13107](https://github.com/docker/for-win/issues/13107).
+- Added support for running under cgroupv2 on WSL 2. This is activated by adding `kernelCommandLine = systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all` to your `%USERPROFILE%\.wslconfig` file in the `[wsl2]` section.
+
+### Known Issues
+
+- Calling `sudo` inside a container fails with a security related error for some images. See [docker/for-mac/6675](https://github.com/docker/for-mac/issues/6675) and [docker/for-win/13161](https://github.com/docker/for-win/issues/13161).
+
+## 4.15.0
+{% include release-date.html date="2022-12-01" %}
+
+> Download Docker Desktop
+>
+> [Windows](https://desktop.docker.com/win/main/amd64/93002/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/93002/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/93002/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/93002/docker-desktop-4.15.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/93002/docker-desktop-4.15.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/93002/docker-desktop-4.15.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion10" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading10">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion10" href="#collapse10" aria-expanded="true" aria-controls="collapse10">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 04dbd937971f1940e22f1edab9cad90722268b3f98feb77140535e1ac64606a8</li>
+      <li><b>Mac Intel:</b> SHA-256 bee41d646916e579b16b7fae014e2fb5e5e7b5dbaf7c1949821fd311d3ce430b</li>
+      <li><b>Mac Arm:</b> SHA-256 fc8609d57fb8c8264122f581c0f66497e46e171f8027d85d90213527d6226362</li>
+      <li><b>Linux DEB:</b> SHA-256 744266c6adef23e0823facded844f3b879fd0a988f8604f9b620d7585f249cf9</li>
+      <li><b>Linux RPM:</b> SHA-256 84e206c3e4742d37c7ef7d3d7440c5a085e1a4a77da2c628d133324a3f77f891</li>
+      <li><b>Linux Arch:</b> SHA-256 43156553268ccc8cb11eef08ac375c90af60ccdc65ae407bdf100ff2e50c6867</li>
+      </div>
+    </div>
+  </div>
+</div>
+
+### New
+
+- Substantial performance improvements for macOS users with the option of enabling the new VirtioFS file sharing technology. Available for macOS 12.5 and above. 
+- Docker Desktop for Mac no longer needs to install the privileged helper process `com.docker.vmnetd` on install or on the first run. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
+- Added [WebAssembly capabilities](wasm/index.md). Use with the [containerd integration](containerd/index.md).
+- Improved the descriptions for beta and experimental settings to clearly explain the differences and how people can access them.
+- Available disk space of VM now displays in the footer of Docker Dashboard for Mac and Linux.
+- A disk space warning now displays in the footer if available space is below 3GB.
+- Changes to Docker Desktop's interface as we become more ADA accessible and visually unified.
+- Added a **Build** tab inside **Extensions** which contains all the necessary resources to build an extension.
+- Added the ability to share extensions more easily, either with `docker extension share` CLI or with the share button in the extensions **Manage** tab.
+- Extensions in the Marketplace now display the number of installs. You can also sort extensions by the number of installs.
+- Dev Environments allow cloning a Git repository to a local bind mount, so you can use any local editor or IDE.
+- More Dev Environments improvements: custom names, better private repo support, improved port handling.
+
+### Upgrades
+
+- [Compose v2.13.0](https://github.com/docker/compose/releases/tag/v2.13.0)
+- [Containerd v1.6.10](https://github.com/containerd/containerd/releases/tag/v1.6.10)
+- [Docker Hub Tool v0.4.5](https://github.com/docker/hub-tool/releases/tag/v0.4.5)
+- [Docker Scan v0.22.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.22.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Containers are now restored on restart with the containerd integration.
+- Fixed listing multi-platform images with the containerd integration.
+- Better handling of dangling images with the containerd integration.
+- Implement "reference" filter for images with the containerd integration.
+- Added support for selecting upstream HTTP/HTTPS proxies automatically via `proxy.pac` in containers, `docker pull` etc.
+- Fixed regressions when parsing image references on pull. Fixes [docker/for-win#13053](https://github.com/docker/for-win/issues/13053), [docker/for-mac#6560](https://github.com/docker/for-mac/issues/6560), and [docker/for-mac#6540](https://github.com/docker/for-mac/issues/6540).
+
+#### For Mac
+
+- Improved the performance of `docker pull`.
+
+#### For Windows
+
+- Fixed an issue where the system HTTP proxies were not used when Docker starts and the developer logs in.
+- When Docker Desktop is using "system" proxies and if the Windows settings change, Docker Desktop now uses the new Windows settings without a restart.
+
+#### For Linux
+
+- Fixed hot-reload issue on Linux. Fixes [docker/desktop-linux#30](https://github.com/docker/desktop-linux/issues/30).
+- Disabled tray icon animations on Linux which fixes crashes for some users.
+
 ## 4.14.1
 {% include release-date.html date="2022-11-17" %}
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/91661/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/91661/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/91661/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/91661/docker-desktop-4.14.1-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/91661/docker-desktop-4.14.1-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/91661/docker-desktop-4.14.1-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion9" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading9">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion9" href="#collapse9" aria-expanded="true" aria-controls="collapse9">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 1e6d8fadff3393110029eeda2e40344e6a99a90ec69dab0b92327e79afef30c6</li>
+      <li><b>Mac Intel:</b> SHA-256 c70534abce8e288178fdff9fa89d110a93257b008e1e69c69465f6b41d26155f</li>
+      <li><b>Mac Arm:</b> SHA-256 d244fb20ffb94d0ea3837c0b55555f983881405d22fce1e187ced39efbb188a1</li>
+      <li><b>Linux DEB:</b> SHA-256 97698848c1ac1f1b8a6144c497f113cd2ca9e6c3399de7af981d12d1957da1de</li>
+      <li><b>Linux RPM:</b> SHA-256 4393c1ff4da3adac51dbe735d3a498167c59efc9d67d11f3a5c8aac3b629e59c</li>
+      <li><b>Linux Arch:</b> SHA-256 992c0f599234ea88f0af731bff3de3ba35a76366164eae6b755aaf41ef098b24</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### Bug fixes and enhancements
 
@@ -54,17 +385,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/91374/docker-desktop-4.14.0-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/91374/docker-desktop-4.14.0-x86_64.pkg.tar.zst)
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion8" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingSeven">
+    <div class="panel-heading" role="tab" id="heading8">
       <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+        <a role="button" data-toggle="collapse" data-parent="#accordion8" href="#collapse8" aria-expanded="true" aria-controls="collapse8">
           Checksums
           <i class="fa fa-chevron-down"></i>
         </a>
       </h5>
     </div>
-    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+    <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
       <div class="panel-body">
       <li><b>Windows:</b> SHA-256 7e2d34cb7573b81cc067ff9e979e44675d46eb6a26801031c27f83bbf93dfc3b</li>
       <li><b>Mac Intel:</b> SHA-256 f554d67e1189efdc5e85e4c28bc4b82a979914016bfb5cc83cde719d557ce062</li>
@@ -144,17 +475,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/90346/docker-desktop-4.13.1-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/90346/docker-desktop-4.13.1-x86_64.pkg.tar.zst)
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion7" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingSeven">
+    <div class="panel-heading" role="tab" id="heading7">
       <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+        <a role="button" data-toggle="collapse" data-parent="#accordion7" href="#collapse7" aria-expanded="true" aria-controls="collapse7">
           Checksums
           <i class="fa fa-chevron-down"></i>
         </a>
       </h5>
     </div>
-    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+    <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
       <div class="panel-body">
       <li><b>Windows:</b> SHA-256 11bb799f85668f368e3071ac17067ebbe575349d1ccfb7c28a5dc1f872ced54e</li>
       <li><b>Mac Intel:</b> SHA-256 9147ca38d46c59a758ac53560814c91c4deda9b0c4c63adfa3df76f37bacbf00</li>
@@ -200,17 +531,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/89412/docker-desktop-4.13.0-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/89412/docker-desktop-4.13.0-x86_64.pkg.tar.zst)
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion6" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingSeven">
+    <div class="panel-heading" role="tab" id="heading6">
       <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+        <a role="button" data-toggle="collapse" data-parent="#accordion6" href="#collapse6" aria-expanded="true" aria-controls="collapse6">
           Checksums
           <i class="fa fa-chevron-down"></i>
         </a>
       </h5>
     </div>
-    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+    <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
       <div class="panel-body">
       <li><b>Windows:</b> SHA-256 2452d4c9e315d36ad4cade724c962dd18515b8e2f0c2e7f66290648e0319d72b</li>
       <li><b>Mac Intel:</b> SHA-256 5a9e7b810bc9937a0945f9cbbb7ec00c2c5c386b5897c59c1c93187eaf0f2081</li>
@@ -225,7 +556,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Two new security features have been introduced for Docker Business users, Settings Management and Enhanced Container Isolation. Read more about Docker Desktop’s new [Hardened Desktop security model](hardened-desktop/index.md).
+- Two new security features have been introduced for Docker Business users, Settings Management and Enhanced Container Isolation. Read more about Docker Desktop’s new [Hardened Docker Desktop security model](hardened-desktop/index.md).
 - Added the new Dev Environments CLI `docker dev`, so you can create, list, and run Dev Envs via command line. Now it's easier to integrate Dev Envs into custom scripts.
 - Docker Desktop can now be installed to any drive and folder using the `--installation-dir`. Partially addresses [docker/roadmap#94](https://github.com/docker/roadmap/issues/94).
 
@@ -296,17 +627,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/85629/docker-desktop-4.12.0-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/85629/docker-desktop-4.12.0-x86_64.pkg.tar.zst)
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion5" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingSeven">
+    <div class="panel-heading" role="tab" id="heading5">
       <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+        <a role="button" data-toggle="collapse" data-parent="#accordion5" href="#collapse5" aria-expanded="true" aria-controls="collapse5">
           Checksums
           <i class="fa fa-chevron-down"></i>
         </a>
       </h5>
     </div>
-    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+    <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
       <div class="panel-body">
       <li><b>Windows:</b> SHA-256 996a4c5fff5b80b707ecfc0121d7ebe70d96c0bd568f058fd96f32cdec0c10cf</li>
       <li><b>Mac Intel:</b> SHA-256 41085009458ba1741c6a86c414190780ff3b288879aa27821fc4a985d229653c</li>
@@ -362,7 +693,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Compose V2 is now enabled after factory reset.
 - Compose V2 is now enabled by default on new installations of Docker Desktop.
-- Precedence order of environment variables in Compose is more consistent, and clearly [documented](../compose/envvars-precedence.md).
+- Precedence order of environment variables in Compose is more consistent, and clearly [documented](../compose/environment-variables/envvars-precedence.md).
 - Upgraded kernel to 5.10.124.
 - Improved overall performance issues caused by calculating disk size. Related to [docker/for-win#9401](https://github.com/docker/for-win/issues/9401).
 - Docker Desktop now prevents users on ARM macs without Rosetta installed from switching back to Compose V1, which has only intel binaries.
@@ -405,17 +736,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.1-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.1-x86_64.pkg.tar.zst)
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion4" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingSeven">
+    <div class="panel-heading" role="tab" id="heading4">
       <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+        <a role="button" data-toggle="collapse" data-parent="#accordion4" href="#collapse4" aria-expanded="true" aria-controls="collapse4">
           Checksums
           <i class="fa fa-chevron-down"></i>
         </a>
       </h5>
     </div>
-    <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+    <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
       <div class="panel-body">
       <li><b>Windows:</b> SHA-256 8af32948447ddab655455542f6a12c8d752642a2bd451e2a48f76398cfd872b0</li>
       <li><b>Mac Intel:</b> SHA-256 b2f4ad8fea37dfb7d9147f169a9ceab71d7d0d12ff912057c60b58c0e91aed35</li>
@@ -450,17 +781,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.pkg.tar.zst)
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingSeven">
+      <div class="panel-heading" role="tab" id="heading3">
         <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          <a role="button" data-toggle="collapse" data-parent="#accordion3" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
             Checksums
             <i class="fa fa-chevron-down"></i>
           </a>
         </h5>
       </div>
-      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
         <div class="panel-body">
         <li><b>Windows:</b> SHA-256 48ca8cabe67aee94a934b4c0f97a5001e89cb66bbbf824924fbc8bed6a8c90d3</li>
         <li><b>Mac Intel:</b> SHA-256 295694d7c2df05e37ac0d27fe8be5af6295b1edc6fa00a00a47134a14d5d0b34</li>
@@ -537,17 +868,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-x86_64.pkg.tar.zst)
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingSeven">
+      <div class="panel-heading" role="tab" id="heading2">
         <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          <a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
             Checksums
             <i class="fa fa-chevron-down"></i>
           </a>
         </h5>
       </div>
-      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
         <div class="panel-body">
         <li><b>Windows:</b> SHA-256 fe430d19d41cc56fd9a4cd2e22fc0e3522bed910c219208345918c77bbbd2a65</li>
         <li><b>Mac Intel:</b> SHA-256 8be8e5245d6a8dbf7b8cb580fb7d99f04cc143c95323695c0d9be4f85dd60b0e</li>
@@ -582,17 +913,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [RPM](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.pkg.tar.zst)
 
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingSeven">
+      <div class="panel-heading" role="tab" id="heading1">
         <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          <a role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
             Checksums
             <i class="fa fa-chevron-down"></i>
           </a>
         </h5>
       </div>
-      <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
         <div class="panel-body">
         <li><b>Windows:</b> SHA-256 10615f4425e59eef7a22ce79ec13e41057df278547aa81c9fe4d623a848e80d8</li>
         <li><b>Mac Intel:</b> SHA-256 07bfe00296b724e4e772e268217bc8169a8b23ad98e6da419b13ebfe31b54643</li>
@@ -900,8 +1231,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### New
 
 - IT Administrators can now install Docker Desktop remotely using the command line.
-- Add the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../engine/sbom/index.md).
-- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"} for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
+- Add  the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../engine/sbom/index.md).
+- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"}  for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
 
 ### Updates
 
@@ -929,7 +1260,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Fixed an issue that sometimes caused Docker Desktop to display a blank white screen. Fixes [docker/for-mac#6134](https://github.com/docker/for-mac/issues/6134).
 - Fixed a problem where gettimeofday() performance drops after waking from sleep when using Hyperkit. Fixes [docker/for-mac#3455](https://github.com/docker/for-mac/issues/3455).
-- Fixed an issue that caused Docker Desktop to become unresponsive during startup when osxfs is used for file sharing.
+- Fixed an issue that caused Docker Desktop to become unresponsive during startup when `osxfs` is used for file sharing.
 
 #### For Windows
 

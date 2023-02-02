@@ -16,7 +16,7 @@ end
 gem 'rouge', '3.27.0'
 
 gem 'front_matter_parser', '1.0.1'
-gem 'git', '1.12.0'
+gem 'git', '1.13.0'
 gem 'html-proofer', '3.19.4'
 gem 'mdl', '0.11.0'
 gem 'octopress-hooks', '2.6.2'

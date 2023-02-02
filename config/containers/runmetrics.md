@@ -129,7 +129,7 @@ Putting everything together to look at the memory metrics for a Docker
 container, take a look at the following paths:
 - `/sys/fs/cgroup/memory/docker/<longid>/` on cgroup v1, `cgroupfs` driver
 - `/sys/fs/cgroup/memory/system.slice/docker-<longid>.scope/` on cgroup v1, `systemd` driver
-- `/sys/fs/cgroup/docker/<longid/>` on cgroup v2, `cgroupfs` driver
+- `/sys/fs/cgroup/docker/<longid>/` on cgroup v2, `cgroupfs` driver
 - `/sys/fs/cgroup/system.slice/docker-<longid>.scope/` on cgroup v2, `systemd` driver
 
 ### Metrics from cgroups: memory, CPU, block I/O

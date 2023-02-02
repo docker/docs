@@ -8,15 +8,15 @@ redirect_from:
 
 Follow the guide below to build a basic Docker Extension quickly. The Quickstart guide automatically generates boilerplate files for you.
 
-> Note
->
-> NodeJS and Go are only required when you follow the quickstart guide to build an extension. It uses the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
-
 ## Prerequisites
 
 - [Docker Desktop](../release-notes.md)
 - [NodeJS](https://nodejs.org/){:target="_blank" rel="noopener" class="_"}
 - [Go](https://go.dev/dl/){:target="_blank" rel="noopener" class="_"}
+
+> Note
+>
+> NodeJS and Go are only required when you follow the quickstart guide to build an extension. It uses the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
 
 ## Step one: Set up your directory
 
@@ -60,9 +60,13 @@ $ docker extension install <name-of-your-extension>
 
 To preview the extension in Docker Desktop, open Docker Dashboard once the installation is complete.
 
-During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire extension. See [Preview whilst developing the UI](build/test-debug.md#hot-reloading-whilst-developing-the-ui) for more information.
+During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire
+extension. See [Preview whilst developing the UI](dev/test-debug.md#hot-reloading-whilst-developing-the-ui) for more
+information.
 
-You may also want to inspect the containers that belong to the extension. By default, extension containers are hidden from the Docker Dashboard. You can change this in **Settings**, see [how to show extension containers](build/test-debug.md#show-the-extension-containers) for more information.
+You may also want to inspect the containers that belong to the extension. By default, extension containers are
+hidden from the Docker Dashboard. You can change this in **Settings**, see
+[how to show extension containers](dev/test-debug.md#show-the-extension-containers) for more information.
 
 ## Step four: Submit and publish your extension to the Marketplace
 
@@ -75,12 +79,11 @@ To remove the extension, run:
 ```console
 $ docker extension rm <name-of-your-extension>
 ```
+{% include extensions-form.md %}
 
 ## What's next
 
-Learn more about:
-
-- [Building and installing an extension](build/build-install.md)
-- [Testing and debugging](build/test-debug.md)
-- [Setting up authentication](dev/oauth2-flow.md)
-- [Designing the UI](design/design-guidelines.md)
+- Build a more [advanced frontend](build/frontend-extension-tutorial.md) for your extension.
+- Learn how to [test and debug](dev/test-debug.md) your extension.
+- Learn more about extensions [architecture](architecture/index.md).
+- Learn more about [designing the UI](design/design-guidelines.md).

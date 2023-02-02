@@ -95,11 +95,11 @@ You can modify node attributes as follows:
 
 Changing node availability lets you:
 
-* drain a manager node so that only performs swarm management tasks and is
+* drain a manager node so that it only performs swarm management tasks and is
   unavailable for task assignment.
 * drain a node so you can take it down for maintenance.
 * pause a node so it can't receive new tasks.
-* restore unavailable or paused nodes available status.
+* restore unavailable or paused nodes availability status.
 
 For example, to change a manager node to `Drain` availability:
 

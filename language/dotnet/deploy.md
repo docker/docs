@@ -4,7 +4,7 @@ keywords: deploy, ACI, ECS, .net, local, development
 description: Learn how to deploy your application
 ---
 
-{% include_relative nav.html selected="5" %}
+{% include_relative nav.html selected="6" %}
 
 {% include deploy.md %}
 

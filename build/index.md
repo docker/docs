@@ -8,14 +8,12 @@ redirect_from:
   - /develop/develop-images/build_enhancements/
 ---
 
-## Overview
-
 Docker Build is one of Docker Engine's most used features. Whenever you are
 creating an image you are using Docker Build. Build is a key part of your
 software development life cycle allowing you to package and bundle your code and
 ship it anywhere.
 
-Engine uses a client-server architecture and is composed of multiple components
+The Docker Engine uses a client-server architecture and is composed of multiple components
 and tools. The most common method of executing a build is by issuing a
 [`docker build` command](../engine/reference/commandline/build.md). The CLI
 sends the request to Docker Engine which, in turn, executes your build.
@@ -25,22 +23,20 @@ Starting with the [18.09 release](../engine/release-notes/18.09.md#18090),
 Engine is shipped with Moby [BuildKit](buildkit/index.md), the new component for
 executing your builds by default.
 
-The new client
-[Docker Buildx](https://github.com/docker/buildx){:target="_blank"
-rel="noopener" class="_"}, is a CLI plugin that extends the docker command with
-the full support of the features provided by [BuildKit](buildkit/index.md)
-builder toolkit.
+The new client [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""},
+is a CLI plugin that extends the `docker` command with the full support of the
+features provided by [BuildKit](buildkit/index.md) builder toolkit.
 [`docker buildx build` command](../engine/reference/commandline/buildx_build.md)
 provides the same user experience as `docker build` with many new features like
-creating scoped [builder instances](building/drivers/index.md), building against
+creating scoped [builder instances](drivers/index.md), building against
 multiple nodes concurrently, outputs configuration, inline
-[build caching](building/cache/index.md), and specifying target platform. In
-addition, Buildx also supports new features that are not yet available for
+[build caching](cache/index.md), and specifying target platform. In
+addition, Buildx also supports new features that aren't yet available for
 regular `docker build` like building manifest lists, distributed caching, and
 exporting build results to OCI image tarballs.
 
-Docker Build is way more than a simple build command and is not only about
-packaging your code, it's a whole ecosystem of tools and features that support
+Docker Build is more than a simple build command, and it's not only about
+packaging your code. It's a whole ecosystem of tools and features that support
 not only common workflow tasks but also provides support for more complex and
 advanced scenarios.
 
@@ -90,11 +86,11 @@ advanced scenarios.
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/build/building/drivers/">
+          <a href="/build/drivers/">
            <img src="/assets/images/build-drivers.svg" alt="Silhouette of an engineer, with cogwheels in the background" width="70px" height="70px">
           </a>
         </div>
-        <h2><a href="/build/building/drivers/">Build drivers</a></h2>
+        <h2><a href="/build/drivers/">Build drivers</a></h2>
         <p>
           Configure where and how you run your builds.
         </p>
@@ -103,11 +99,11 @@ advanced scenarios.
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/build/building/cache/">
+          <a href="/build/cache/">
            <img src="/assets/images/build-cache.svg" alt="Two arrows rotating in a circle" width="70px" height="70px">
           </a>
         </div>
-        <h2><a href="/build/building/cache/">Build caching</a></h2>
+        <h2><a href="/build/cache/">Build caching</a></h2>
         <p>
           Avoid unnecessary repetitions of costly operations, such as package installs.
         </p>
@@ -131,11 +127,11 @@ advanced scenarios.
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/build/building/exporters/">
+          <a href="/build/exporters/">
            <img src="/assets/images/build-exporters.svg" alt="Arrow coming out of a box" width="70px" height="70px">
           </a>
         </div>
-        <h2><a href="/build/building/exporters/">Exporters</a></h2>
+        <h2><a href="/build/exporters/">Exporters</a></h2>
         <p>
           Export any artifact you like, not just Docker images.
         </p>
@@ -144,11 +140,11 @@ advanced scenarios.
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/build/customize/bake/">
+          <a href="/build/bake/">
            <img src="/assets/images/build-bake.svg" alt="Cake silhouette" width="70px" height="70px">
           </a>
         </div>
-        <h2><a href="/build/customize/bake/">Bake</a></h2>
+        <h2><a href="/build/bake/">Bake</a></h2>
         <p>
           Orchestrate your builds with Bake.
         </p>

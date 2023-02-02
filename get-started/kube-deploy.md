@@ -9,7 +9,7 @@ description: Learn how to describe and deploy a simple application on Kubernetes
 - Download and install Docker Desktop as described in [Get Docker](../get-docker.md).
 - Work through containerizing an application in [Part 2](02_our_app.md).
 - Make sure that Kubernetes is enabled on your Docker Desktop:
-  - **Mac**: Click the Docker icon in your menu bar, navigate to **Preferences** and make sure there's a green light beside 'Kubernetes'.
+  - **Mac**: Click the Docker icon in your menu bar, navigate to **Settings** and make sure there's a green light beside 'Kubernetes'.
   - **Windows**: Click the Docker icon in the system tray and navigate to **Settings** and make sure there's a green light beside 'Kubernetes'.
 
   If Kubernetes isn't running, follow the instructions in [Orchestration](orchestration.md) of this tutorial to finish setting it up.

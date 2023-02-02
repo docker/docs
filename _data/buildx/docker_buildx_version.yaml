@@ -10,12 +10,11 @@ long: |-
 usage: docker buildx version
 pname: docker buildx
 plink: docker_buildx.yaml
-inherited_options:
+options:
     - option: builder
       value_type: string
-      description: Override the configured builder instance
       deprecated: false
-      hidden: false
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false

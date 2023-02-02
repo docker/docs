@@ -32,6 +32,7 @@ Using the `admin-settings.json` file, admins can:
 - Enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md) (currently incompatible with WSL)
 - Configure HTTP proxies
 - Configure network settings
+- Configure Kubernetes settings
 - Enforce the use of WSL2 based engine or Hyper-V
 - Configure Docker Engine
 - Turn off Docker Desktop's ability to checks for updates
@@ -54,4 +55,4 @@ Docker doesn't automatically mandate that developers re-launch and re-authentica
 
 Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or the `settings.json` file. In addition, if Enhanced Container Isolation is enforced, users can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
 
-![Proxy settings grayed out](/assets/images/grayed-setting.png){:width="750px"}
+![Proxy settings grayed out](/assets/images/grayed-setting.png){:width="350px"}

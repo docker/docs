@@ -100,6 +100,7 @@ A Docker image is built  from a Dockerfile. A Dockerfile contains a set of instr
 Building your image is a snapshot of that image, at that moment in time. When you depend on a base image without a tag, you’ll get a different base image every time you rebuild. Also, when you install packages using a package installer, rebuilding can change the image drastically. For example, a Dockerfile containing the following entries can potentially have a different binary with every rebuild.
 
 ```dockerfile
+# syntax=docker/dockerfile:1
 FROM ubuntu:latest
 RUN apt-get -y update && apt-get install -y python
 ```

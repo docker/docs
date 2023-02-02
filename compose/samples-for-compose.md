@@ -3,6 +3,7 @@ description: Summary of samples related to Compose
 keywords: documentation, docs, docker, compose, samples
 title: Sample apps with Compose
 ---
+{% include compose-eol.md %}
 
 The following samples show the various aspects of how to work with Docker
 Compose. As a prerequisite, be sure to [install Docker Compose](install/index.md)
