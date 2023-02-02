@@ -9,7 +9,7 @@ features, improvements, known issues, and bug fixes in each release. You can
 find release notes for each component in the Manuals section. We suggest
 that you regularly visit the release notes to learn about updates.
 
-- [Docker Engine](../engine/release-notes/index.md)
+- [Docker Engine](../engine/release-notes/23.0.md)
 - [Docker Desktop](../desktop/release-notes.md)
 - [Docker Hub](../docker-hub/release-notes.md)
 - [Docker Compose](../compose/release-notes.md)
