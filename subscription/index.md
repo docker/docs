@@ -14,7 +14,7 @@ The following sections provide an overview of each tier. To compare features ava
 
 ## Docker Personal
 
-Docker Personal is the new name for the Docker Free subscription. With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components - including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, Docker Scan, and more.
+Docker Personal is the new name for the Docker Free subscription. With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components - including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
 
 Docker Personal includes unlimited public repositories, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and unlimited collaborators for public repositories at no cost per month.
 

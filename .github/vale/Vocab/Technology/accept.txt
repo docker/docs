@@ -1,4 +1,5 @@
 APIs?
+CVEs?
 DHCP
 DNS
 Ethernet
@@ -11,6 +12,7 @@ IPv[46]
 IPvlan
 MAC
 RPM
+SARIF
 SDKs?
 SSO
 TCP
