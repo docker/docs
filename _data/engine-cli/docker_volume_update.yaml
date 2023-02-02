@@ -1,22 +1,21 @@
-command: docker context rm
-aliases: docker context rm, docker context remove
-short: Remove one or more contexts
-long: Remove one or more contexts
-usage: docker context rm CONTEXT [CONTEXT...]
-pname: docker context
-plink: docker_context.yaml
+command: docker volume update
+short: Update a volume (cluster volumes only)
+long: Update a volume (cluster volumes only)
+usage: docker volume update [OPTIONS] [VOLUME]
+pname: docker volume
+plink: docker_volume.yaml
 options:
-    - option: force
-      shorthand: f
-      value_type: bool
-      default_value: "false"
-      description: Force the removal of a context in use
+    - option: availability
+      value_type: string
+      default_value: active
+      description: Cluster Volume availability (`active`, `pause`, `drain`)
       deprecated: false
       hidden: false
+      min_api_version: "1.42"
       experimental: false
       experimentalcli: false
       kubernetes: false
-      swarm: false
+      swarm: true
 inherited_options:
     - option: help
       value_type: bool
@@ -29,8 +28,9 @@ inherited_options:
       kubernetes: false
       swarm: false
 deprecated: false
+min_api_version: "1.42"
 experimental: false
 experimentalcli: false
 kubernetes: false
-swarm: false
+swarm: true
 

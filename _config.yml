@@ -42,8 +42,8 @@ exclude:
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons.
 # When updating 'latest_engine_api_version', also update 'min_api_threshold' below.
-latest_engine_api_version: "1.41"
-docker_ce_version: "20.10"
+latest_engine_api_version: "1.42"
+docker_ce_version: "23.0.0"
 compose_v1_version: "1.29.2"
 compose_version: "v2.15.1"
 compose_file_v3: "3.9"
@@ -153,7 +153,8 @@ defaults:
 fetch-remote:
   - repo: "https://github.com/docker/cli"
     default_branch: "master"
-    ref: "20.10"
+    # FIXME(thaJeztah): change to 23.0 release branch, once created.
+    ref: "master"
     paths:
       - dest: "engine/extend"
         src:
