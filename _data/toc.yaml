@@ -243,38 +243,6 @@ reference:
       title: Use the Docker command line
     - path: /engine/reference/commandline/docker/
       title: docker (base command)
-    - sectiontitle: docker app
-      section:
-        - path: /engine/reference/commandline/app/
-          title: docker app
-        - path: /engine/reference/commandline/app_bundle/
-          title: docker app bundle
-        - path: /engine/reference/commandline/app_completion/
-          title: docker app completion
-        - path: /engine/reference/commandline/app_init/
-          title: docker app init
-        - path: /engine/reference/commandline/app_inspect/
-          title: docker app inspect
-        - path: /engine/reference/commandline/app_install/
-          title: docker app install
-        - path: /engine/reference/commandline/app_list/
-          title: docker app list
-        - path: /engine/reference/commandline/app_pull/
-          title: docker app pull
-        - path: /engine/reference/commandline/app_push/
-          title: docker app push
-        - path: /engine/reference/commandline/app_render/
-          title: docker app render
-        - path: /engine/reference/commandline/app_status/
-          title: docker app status
-        - path: /engine/reference/commandline/app_uninstall/
-          title: docker app uninstall
-        - path: /engine/reference/commandline/app_upgrade/
-          title: docker app upgrade
-        - path: /engine/reference/commandline/app_validate/
-          title: docker app validate
-        - path: /engine/reference/commandline/app_version/
-          title: docker app version
     - path: /engine/reference/commandline/attach/
       title: docker attach
     - path: /engine/reference/commandline/build/
@@ -475,6 +443,8 @@ reference:
           title: docker context ls
         - path: /engine/reference/commandline/context_rm/
           title: docker context rm
+        - path: /engine/reference/commandline/context_show/
+          title: docker context show
         - path: /engine/reference/commandline/context_update/
           title: docker context update
         - path: /engine/reference/commandline/context_use/
@@ -673,6 +643,8 @@ reference:
       section:
       - path: /engine/reference/commandline/stack/
         title: docker stack
+      - path: /engine/reference/commandline/stack_config/
+        title: docker stack config
       - path: /engine/reference/commandline/stack_deploy/
         title: docker stack deploy
       - path: /engine/reference/commandline/stack_ls/
@@ -765,6 +737,8 @@ reference:
         title: docker volume prune
       - path: /engine/reference/commandline/volume_rm/
         title: docker volume rm
+      - path: /engine/reference/commandline/volume_update/
+        title: docker volume update
     - path: /engine/reference/commandline/wait/
       title: docker wait
   - title: Docker Compose CLI reference
@@ -788,6 +762,8 @@ reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.42/
+        title: v1.42 reference
       - path: /engine/api/v1.41/
         title: v1.41 reference
       - path: /engine/api/v1.40/
@@ -1517,10 +1493,12 @@ manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/
-      title: Engine 20.10
+    - path: /engine/release-notes/23.0/
+      title: Engine 23.0
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/20.10/
+        title: Engine 20.10
       - path: /engine/release-notes/19.03/
         title: Engine 19.03
       - path: /engine/release-notes/18.09/

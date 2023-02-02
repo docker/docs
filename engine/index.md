@@ -113,9 +113,9 @@ For more details, see
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/engine/release-notes/"><img src="/assets/images/note-add.svg" alt="Document with an overlaying plus sign" width="70px" height="70px"></a>
+          <a href="/engine/release-notes/23.0/"><img src="/assets/images/note-add.svg" alt="Document with an overlaying plus sign" width="70px" height="70px"></a>
         </div>
-        <h2><a href="/engine/release-notes/">Release notes</a></h2>
+        <h2><a href="/engine/release-notes/23.0/">Release notes</a></h2>
         <p>Read the release notes for the latest version.</p>
       </div>
     </div>
