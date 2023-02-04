@@ -78,6 +78,9 @@ For now, we will create the network first and attach the MySQL container at star
     ```console
     $ docker exec -it <mysql-container-id> mysql -u root -p
     ```
+    > **Tip**
+    >
+    > If you get an error `ERROR 2002 (HY000): Can't connect to local MySQL server through socket /path/to/socket`, it maybe because docker is trying to connect using the default tcp port. It can be resolved with `docker exec -it <CONTAINER_ID> mysql -h 127.0.0.1 -P 3306 -u root -p` replace `<CONTAINER_ID>` with your container ID. If unsure about the port (3306) and the url (127.0.0.1), you can find it from `docker ps`.
 
     When the password prompt comes up, type in **secret**. In the MySQL shell, list the databases and verify
     you see the `todos` database.
