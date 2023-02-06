@@ -101,7 +101,7 @@ $ sudo yum-config-manager \
     or go to the next step to install a specific version:
 
     ```console
-    $ sudo yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches
@@ -133,7 +133,7 @@ $ sudo yum-config-manager \
        a hyphen (`-`). For example, `docker-ce-20.10.7`.
 
     ```console
-    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
+    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
     ```
 
     This command installs Docker, but it doesn't start Docker. It also creates a
@@ -219,7 +219,7 @@ instead of `yum -y install`, and point to the new file.
 1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
     ```console
-    $ sudo yum remove docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras
+    $ sudo yum remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host
