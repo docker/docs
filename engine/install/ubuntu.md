@@ -123,7 +123,7 @@ Docker from the repository.
    > public key file before updating the package index:
    >
    > ```console
-   > $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
+   > $ sudo chmod -R a+rx /etc/apt/keyrings
    > $ sudo apt-get update
    > ```
 
