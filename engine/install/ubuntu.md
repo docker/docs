@@ -140,7 +140,7 @@ Docker from the repository.
    To install the latest version, run:
 
    ```console
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    </div>
@@ -163,7 +163,7 @@ Docker from the repository.
 
    ```console
    $ VERSION_STRING=5:20.10.13~3-0~ubuntu-jammy
-   $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-compose-plugin
+   $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    </div>
@@ -212,6 +212,7 @@ download a new file each time you want to upgrade Docker Engine.
    - `containerd.io_<version>_<arch>.deb`
    - `docker-ce_<version>_<arch>.deb`
    - `docker-ce-cli_<version>_<arch>.deb`
+   - `docker-buildx-plugin_<version>_<arch>.deb`
    - `docker-compose-plugin_<version>_<arch>.deb`
 
 5. Install the `.deb` packages. Update the paths in the following example to
@@ -221,6 +222,7 @@ download a new file each time you want to upgrade Docker Engine.
    $ sudo dpkg -i ./containerd.io_<version>_<arch>.deb \
      ./docker-ce_<version>_<arch>.deb \
      ./docker-ce-cli_<version>_<arch>.deb \
+     ./docker-buildx-plugin_<version>_<arch>.deb \
      ./docker-compose-plugin_<version>_<arch>.deb
    ```
 
@@ -254,7 +256,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 1.  Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
     ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras
+    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
     ```
 
 2.  Images, containers, volumes, or custom configuration files on your host
