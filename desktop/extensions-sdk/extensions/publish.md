@@ -9,14 +9,28 @@ keywords: Docker, extensions, publish
 Docker Desktop displays published extensions in the Extensions Marketplace on [Docker Desktop](https://open.docker.com/extensions/marketplace){: target="_blank" rel="noopener" class="_"} and [Docker Hub](https://hub.docker.com/search?q=&type=extension){: target="_blank" rel="noopener" class="_"}.
 The Extensions Marketplace is a curated space where developers can discover extensions to improve their developer experience and propose their own extension to be available for all Desktop users.
 
-Whenever you are ready to publish your extension in the Marketplace, you can submit it by creating an issue on the
-extensions submissions [repository](https://github.com/docker/extensions-submissions/issues/new/choose){:target="_blank" rel="noopener" class="_" }.
-From there, you have two publishing options. Publish as either:
-- Self-Published extensions
-- Docker Reviewed extensions
+Whenever you are [ready to publish](./DISTRIBUTION.md) your extension in the Marketplace, you have two publishing options:
 
-As the Extension Marketplace continues adding new features for both Extension users and publishers, we expect that you
-maintain your extension over time to ensure it stays available in the Marketplace.
+<div class="component-container">
+  <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 block">
+      <div class="component">
+        <h2 id="docker-extensions"><a href="https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+">Self-Publish your extension</a></h2>
+      </div>
+    </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 block">
+      <div class="component">
+        <h2 id="docker-extensions"><a href="https://www.docker.com/products/extensions/submissions/">Request Docker to review your extension</a></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+> **Note**
+>
+> As the Extension Marketplace continues adding new features for both Extension users and publishers, we expect that you
+> maintain your extension over time to ensure it stays available in the Marketplace.
 
 ### Before you submit
 
@@ -48,7 +62,7 @@ Depending on which option you select, the publishing process will differ.
 Self-Published extensions are automatically validated. If all the validation checks pass successfully, it is
 published on the Marketplace and accessible to all users within a few hours.
 It is the fastest way to get developers the tools they need and to get feedback from them as you work to
-evolve/polish your extension.
+evolve/polish your extension. You can request a review from the Docker Extensions team at any time.
 
 > **Important**
 >
