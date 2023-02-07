@@ -95,7 +95,7 @@ Docker from the repository.
 2.  Add Docker's official GPG key:
 
     ```console
-    $ sudo mkdir -p /etc/apt/keyrings
+    $ sudo mkdir -m 0755 -p /etc/apt/keyrings
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     ```
 
@@ -232,6 +232,7 @@ download a new file each time you want to upgrade Docker Engine.
    `hello-world` image:
 
    ```console
+   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 
