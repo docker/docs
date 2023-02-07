@@ -8,12 +8,6 @@ redirect_from:
 - /installation/
 ---
 
-> **Docker Desktop terms**
->
-> Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) and in government entities requires a paid
-> subscription.
-
 Docker is an open platform for developing, shipping, and running applications.
 Docker enables you to separate your applications from your infrastructure so you
 can deliver software quickly. With Docker, you can manage your infrastructure in
@@ -56,3 +50,7 @@ section and choose the best installation path for you.
         </div>
     </div>
 </div>
+
+> **Note**
+>
+> If you're looking for information on how to install Docker Engine, see [Docker Engine installation overview](/engine/install/index.md).
