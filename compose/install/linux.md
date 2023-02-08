@@ -1,6 +1,6 @@
 ---
-description: How to install Docker Compose on Linux
-keywords: compose, orchestration, install, installation, docker, documentation
+description: Download and install Docker Compose on Linux with this step-by-step handbook. This plugin can be installed manually or by using a repository.
+keywords: install docker compose linux, docker compose linux, docker compose plugin, docker-compose-plugin, linux install docker compose, install docker-compose linux, linux install docker-compose, linux docker compose, docker compose v2 linux, install docker compose on linux
 toc_max: 3
 title: Install the Compose plugin
 redirect_from:

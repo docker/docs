@@ -1,7 +1,7 @@
 ---
 title: "Overview"
-keywords: get started, overview, quickstart, intro, concepts, containers, images
-description: Get an overview of the Get started guide and learn about containers and images.
+keywords: docker basics, how to start a docker container, container settings, setup docker, how to setup docker, setting up docker, docker container guide, how to get started with docker
+description: Get started with the Docker basics in this comprehensive overview, You'll learn about containers, images, and how to containerize your first application.
 redirect_from:
 - /engine/getstarted-voting-app/
 - /engine/getstarted-voting-app/cleanup/

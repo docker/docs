@@ -1,10 +1,10 @@
 ---
-description: Compose file reference
-keywords: fig, composition, compose, docker
+description: Find the latest recommended version of the Docker Compose file format for defining multi-container applications.
+keywords: docker compose file, docker compose yml, docker compose reference, docker compose cmd, docker compose user, docker compose image, yaml spec, docker compose syntax, yaml specification, docker compose specification
 redirect_from:
 - /compose/yaml/
 - /compose/compose-file/compose-file-v1/
-title: Compose specification
+title: Compose file specification
 toc_max: 4
 toc_min: 1
 ---

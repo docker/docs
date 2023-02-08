@@ -1,6 +1,6 @@
 ---
-description: Docker Desktop WSL 2 backend
-keywords: WSL, WSL 2, Windows Subsystem for Linux, WSL 2 backend Docker, Docker Desktop
+description: Turn on the Docker WSL 2 backend and get to work using best practices, GPU support, and more in this thorough guide. 
+keywords: wsl, wsl2, installing wsl2, wsl installation, docker wsl2, wsl docker, wsl2 tech preview, wsl install docker, install docker wsl, how to install docker in wsl
 redirect_from:
 - /docker-for-windows/wsl/
 - /docker-for-windows/wsl-tech-preview/
