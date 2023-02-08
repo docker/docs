@@ -26,7 +26,8 @@ For further inspiration, see the other examples in the [samples folder](https://
 
 Docker Desktop displays published extensions in the Extensions Marketplace. The Extensions Marketplace is a curated space where developers can discover extensions to improve their developer experience and upload their own extension to share with the world.
 
-If you want your extension to be published in the Marketplace, you can [submit your extension here](https://github.com/docker/extensions-submissions){:target="_blank" rel="noopener" class="_"}.
+If you want your extension to be published in the Marketplace, see our [publish](./extensions/publish.md)
+documentation page.
 
 {% include extensions-form.md %}
 

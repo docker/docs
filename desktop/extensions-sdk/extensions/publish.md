@@ -15,12 +15,28 @@ Whenever you are [ready to publish](./DISTRIBUTION.md) your extension in the Mar
   <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 block">
       <div class="component">
-        <h2 id="docker-extensions"><a href="https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+">Self-Publish your extension</a></h2>
+        <div class="component-icon">
+          <a href="https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+">
+            <img src="/assets/images/self-published-extension.svg" alt="Quickstart" width="70" height="70">
+          </a>
+        </div>
+        <h2 id="docker-extensions">
+          <a href="https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+" target="_blank">
+            Self-Publish your extension
+          </a>
+        </h2>
       </div>
     </div>
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 block">
       <div class="component">
-        <h2 id="docker-extensions"><a href="https://www.docker.com/products/extensions/submissions/">Request Docker to review your extension</a></h2>
+        <div class="component-icon">
+          <a href="https://www.docker.com/products/extensions/submissions/">
+            <img src="/assets/images/docker-reviewed-extension.svg" alt="Quickstart" width="70" height="70">
+          </a>
+        </div>
+        <h2 id="docker-extensions">
+          <a href="https://www.docker.com/products/extensions/submissions/" target="_blank">Request Docker to review your extension</a>
+        </h2>
       </div>
     </div>
   </div>
@@ -91,6 +107,7 @@ The review process also offers some advantages for extension developers of revie
 - You receive weekly reports on your extension's performance
 
 > **Note**
+>
 > If it doesn't meet the approval requirements for a reviewed extension, you can still publish it without a review,
 > and get your extension in the hands of developers. However, you will not benefit from
 > the advantages listed above.
