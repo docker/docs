@@ -21,6 +21,15 @@ To install an extension:
 
 From here, you can select **Open** to access the extension or install additional extensions. The extension also appears in the left-hand menu and in the **Manage** tab.
 
+There are two types of extensions available in the Extensions Marketplace:
+- Docker-Reviewed extensions
+- Self-Published extensions
+
+Docker-Reviewed extensions are manually reviewed by the Docker Extensions team to ensure an elevated level of trust
+and quality. They appear as "Reviewed" in the Marketplace.
+
+Self-Published extensions are autonomously published by extension developers. They appear as "Self-Published" in the Marketplace.
+
 ## Update an extension
 
 You can update any extension outside of Docker Desktop releases. To update an extension to the latest version:
