@@ -1,10 +1,10 @@
 ---
-description: Docker documentation search results
-keywords: Search, Docker, documentation, manual, guide, reference, api
+description: Looking for something specific? Search Docker Documentation for guides, manuals, and more related to your specific topic. 
+keywords: search
 skip_feedback: true
 notoc: true
 notags: true
-title: "Docs search"
+title: "Search"
 skip_read_time: true
 ---
 

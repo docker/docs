@@ -1,6 +1,6 @@
 ---
-description: Home page for Get Docker
-keywords: Docker, download, documentation, manual
+description: Download and install Docker on the platform of your choice, including Mac, Linux, or Windows. 
+keywords: install docker, docker download, download docker, docker installation, how to install docker, get docker, docker locally
 title: Get Docker
 redirect_from:
 - /install/

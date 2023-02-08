@@ -1,7 +1,7 @@
 ---
-description: Introduction and Overview of Compose
-keywords: documentation, docs, docker, compose, orchestration, containers
-title: Overview
+description: Learn how to use Docker Compose to define and run multi-container applications with this detailed introduction to the tool. 
+keywords: docker compose, docker-compose, docker compose command, docker compose files, docker compose documentation, using docker compose, compose container, docker compose service
+title: Docker Compose overview
 redirect_from:
  - /compose/cli-command/
  - /compose/networking/swarm/
