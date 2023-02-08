@@ -25,6 +25,7 @@ Whenever you are [ready to publish](./DISTRIBUTION.md) your extension in the Mar
             Self-Publish your extension
           </a>
         </h2>
+        <p>Extension that are validated through an automated process.</p>
       </div>
     </div>
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 block">
@@ -37,6 +38,7 @@ Whenever you are [ready to publish](./DISTRIBUTION.md) your extension in the Mar
         <h2 id="docker-extensions">
           <a href="https://www.docker.com/products/extensions/submissions/" target="_blank">Request Docker to review your extension</a>
         </h2>
+        <p>Extensions that are manually reviewed by the Docker Extensions team receive tailored and actionable feedback for improvement.</p>
       </div>
     </div>
   </div>
