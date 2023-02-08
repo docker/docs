@@ -1,9 +1,10 @@
 ---
 datafolder: compose-cli
-datafile: docker_compose_convert
-title: docker compose convert
+datafile: docker_compose_config
+title: docker compose config
 redirect_from:
-- /compose/reference/config/
+  - /compose/reference/config/
+  - /engine/reference/commandline/compose_convert/
 ---
 <!--
 Sorry, but the contents of this page are automatically generated from

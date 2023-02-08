@@ -30,7 +30,7 @@ services:
 
 When you run `docker compose up`, the `web` service defined in the Compose file substitues in the
 image `webapp:v1.5` which was set in the `.env` file. You can verify this with the
-[convert command](../../engine/reference/commandline/compose_convert.md), which prints your resolved application config to the terminal:
+[convert command](../../engine/reference/commandline/compose_config.md), which prints your resolved application config to the terminal:
 
 ```console
 $ docker compose convert

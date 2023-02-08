@@ -89,13 +89,22 @@ long: |-
 
     Profiles can also be set by `COMPOSE_PROFILES` environment variable.
 
+    ### Configuring parallelism
+
+    Use `--parallel` to specify the maximum level of parallelism for concurrent engine calls.
+    Calling `docker compose --parallel 1 pull` will pull the pullable images defined in the Compose file
+    one at a time. This can also be used to control build concurrency.
+
+    Parallelism can also be set by the `COMPOSE_PARALLEL_LIMIT` environment variable.
+
     ### Set up environment variables
 
     You can set environment variables for various docker compose options, including the `-f`, `-p` and `--profiles` flags.
 
     Setting the `COMPOSE_FILE` environment variable is equivalent to passing the `-f` flag,
     `COMPOSE_PROJECT_NAME` environment variable does the same as the `-p` flag,
-    and `COMPOSE_PROFILES` environment variable is equivalent to the `--profiles` flag.
+    `COMPOSE_PROFILES` environment variable is equivalent to the `--profiles` flag
+    and `COMPOSE_PARALLEL_LIMIT` does the same as the `--parallel` flag.
 
     If flags are explicitly set on the command line, the associated environment variable is ignored.
 
@@ -106,7 +115,7 @@ pname: docker
 plink: docker.yaml
 cname:
     - docker compose build
-    - docker compose convert
+    - docker compose config
     - docker compose cp
     - docker compose create
     - docker compose down
@@ -132,7 +141,7 @@ cname:
     - docker compose version
 clink:
     - docker_compose_build.yaml
-    - docker_compose_convert.yaml
+    - docker_compose_config.yaml
     - docker_compose_cp.yaml
     - docker_compose_create.yaml
     - docker_compose_down.yaml
@@ -174,6 +183,16 @@ options:
       description: Run compose in backward compatibility mode
       deprecated: false
       hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: dry-run
+      value_type: bool
+      default_value: "false"
+      description: Execute command in dry run mode
+      deprecated: false
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
