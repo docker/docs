@@ -1,7 +1,7 @@
 ---
-description: How to install Docker Desktop on Mac
-keywords: mac, install, download, Docker Desktop, intel, apple silicon,
-title: Install on Mac
+description: Install Docker for Mac to get started. This guide covers system requirements, where to download, and instructions on how to install and update.
+keywords: docker for mac, install docker macos, docker mac, docker mac install, docker install macos, install docker on mac, install docker macbook, docker desktop for mac, how to install docker on mac, setup docker on mac
+title: Install Docker Desktop on Mac
 redirect_from:
 - /desktop/mac/install/
 - /docker-for-mac/install/

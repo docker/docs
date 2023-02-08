@@ -1,7 +1,7 @@
 ---
-description: Using volumes
+description: Learn how to create, manage, and use volumes instead of bind mounts for persisting data generated and used by Docker.
 title: Volumes
-keywords: storage, persistence, data persistence, volumes
+keywords: docker compose volumes, docker volumes, docker compose volume, docker volume mount, docker mount volume, docker volume create, docker volume location
 redirect_from:
   - /userguide/dockervolumes/
   - /engine/tutorials/dockervolumes/

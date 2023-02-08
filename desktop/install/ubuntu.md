@@ -1,7 +1,7 @@
 ---
-description: Instructions for installing Docker Desktop on Ubuntu
-keywords: Ubuntu, install, uninstall, upgrade, update, Linux, desktop, Docker desktop, docker desktop for Linux, DD4L
-title: Install on Ubuntu
+description: Learn how to install, launch and upgrade Docker Desktop on Ubuntu. This quick guide will cover prerequisites, installation methods, and more. 
+keywords: install docker ubuntu, ubuntu install docker, install docker on ubuntu, docker install ubuntu, how to install docker on ubuntu, ubuntu docker install, docker installation on ubuntu, docker ubuntu install, docker installing ubuntu, installing docker on ubuntu, docker desktop for ubuntu
+title: Install Docker Desktop on Ubuntu
 toc_max: 4
 redirect_from:
   - /desktop/linux/install/ubuntu/
