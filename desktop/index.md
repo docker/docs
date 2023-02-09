@@ -10,12 +10,6 @@ redirect_from:
 - /docker-for-windows/opensource/
 ---
 
-> **Docker Desktop terms**
->
-> Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) requires a paid
-> subscription.
-
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
 that enables you to build and share containerized applications and microservices. 
 
