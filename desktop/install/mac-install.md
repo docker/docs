@@ -80,12 +80,9 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
 4. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-    > **Important**
-    >
-    > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
-    {: .important}
+   Note that Docker Desktop will not run if you do not agree with to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
-    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" }. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
+   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" }. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
 
 ### Install from the command line
 
