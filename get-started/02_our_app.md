@@ -78,6 +78,7 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
 
    ```dockerfile
    # syntax=docker/dockerfile:1
+   
    FROM node:18-alpine
    WORKDIR /app
    COPY . .
