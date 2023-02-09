@@ -5,11 +5,8 @@ title: Install Docker Desktop on Linux
 redirect_from:
 - /desktop/linux/install/
 ---
-> **Docker Desktop terms**
->
-> Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) requires a paid
-> subscription.
+
+This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
 
 >Important
 >
@@ -19,8 +16,6 @@ redirect_from:
 >
 >For more information see [What is the difference between Docker Desktop for Linux and Docker Engine](../faqs/linuxfaqs.md#what-is-the-difference-between-docker-desktop-for-linux-and-docker-engine). 
 {: .important} 
-
- This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
 
 ## System requirements
 
@@ -57,9 +52,7 @@ and architectures:
 | [Fedora](fedora.md)     | [{{ yes }}](fedora.md) |
 
 
->  **Note:**
->
-> An experimental package is available for [Arch](archlinux.md)-based distributions. Docker has not tested or verified the installation.
+An experimental package is available for [Arch](archlinux.md)-based distributions. Docker has not tested or verified the installation.
 
 Docker supports Docker Desktop on the current LTS release of the aforementioned distributions and the most recent version. As new versions are made available, Docker stops supporting the oldest version and supports the newest version.
 
@@ -119,9 +112,13 @@ Log out and log back in so that your group membership is re-evaluated.
 
 ## Generic installation steps
 
->Important
+> **Docker Desktop terms**
 >
->Make sure you meet the system requirements outlined earlier and follow the distro-specific prerequisites.
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) requires a paid
+> subscription.
+
+Make sure you meet the system requirements outlined earlier and follow the distro-specific prerequisites.
 {: .important} 
 
 1. Download the correct package for your Linux distribution and install it with the corresponding package manager. 
@@ -138,12 +135,9 @@ Log out and log back in so that your group membership is re-evaluated.
 
 4. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-    > **Important**
-    >
-    > If you do not agree to the terms, the Docker Desktop application will close and  you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
-    {: .important}
+   Note that Docker Desktop will not run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
-    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){:target="_blank" rel="noopener" class="_"}. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}.
+   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){:target="_blank" rel="noopener" class="_"}. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}.
 
 
 ## Where to go next
