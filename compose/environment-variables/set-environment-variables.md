@@ -42,7 +42,7 @@ services:
 
 The `.env` file should be placed at the root of the project directory next to your `docker-compose.yml` file. You can use an alternative path with one of the following methods:
 - The [`--file` option in the CLI](../reference/index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
-- The [`- -env-file` option in the CLI](#substitute-with---env-file)
+- The [`--env-file` option in the CLI](#substitute-with---env-file)
 - Using the [`env_file` attribute in the Compose file](../compose-file/index.md#env_file)
 
 For more information on formatting an environment file, see [Use an environment file](env-file.md).
