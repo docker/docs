@@ -135,7 +135,7 @@ Make sure you meet the system requirements outlined earlier and follow the distr
 
 4. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-   Note that Docker Desktop will not run if you do not agree with to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
+   Note that Docker Desktop will not run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){:target="_blank" rel="noopener" class="_"}. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}.
 
