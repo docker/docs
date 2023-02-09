@@ -16,7 +16,7 @@ To install an extension:
 2. From the Dashboard, select **Add Extensions** in the menu bar.
    The Extensions Marketplace opens on the **Browse** tab.
 3. Browse the available extensions.
-   You can sort the list of extensions by **Recently added** or alphabetically.
+   You can sort the list of extensions by **Recently added**, **Most installed** or alphabetically. Alternatively, use **Filters** to search for extensions by category or whether they have been reviewed or not.
 4. Choose you extension and select **Install**.
 
 From here, you can select **Open** to access the extension or install additional extensions. The extension also appears in the left-hand menu and in the **Manage** tab.
