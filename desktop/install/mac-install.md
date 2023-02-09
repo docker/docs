@@ -12,18 +12,18 @@ redirect_from:
 - /desktop/mac/apple-silicon/
 ---
 
+This page contains information about system requirements, download URLs, and instructions on how to install Docker Desktop for Mac.
+
+[Docker Desktop for Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
+[Docker Desktop for Mac with Apple silicon](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
+
+*For checksums, see [Release notes](../release-notes.md).*
+
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
-
-This page contains information about system requirements, download URLs, and instructions on how to install Docker Desktop for Mac.
-
-[Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64){: .button .primary-btn }
-[Mac with Apple silicon](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64){: .button .primary-btn }
-
-*For checksums, see [Release notes](../release-notes.md).*
 
 ## System requirements
 
