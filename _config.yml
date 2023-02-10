@@ -45,7 +45,7 @@ exclude:
 latest_engine_api_version: "1.42"
 docker_ce_version: "23.0.0"
 compose_v1_version: "1.29.2"
-compose_version: "v2.15.1"
+compose_version: "v2.16.0"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
