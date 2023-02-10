@@ -54,7 +54,7 @@ the service is accessible outside the swarm as well.
 
 Within the `web` container, your connection string to `db` would look like
 `postgres://db:5432`, and from the host machine, the connection string would
-look like `postgres://{DOCKER_IP}:8001`.
+look like `postgres://{DOCKER_IP}:5432`.
 
 ## Update containers on the network
 
