@@ -2,7 +2,7 @@
 description: Docker Documentation is the official Docker library of resources, tutorials, and guides to help you build, share, and run applications.
 keywords: docker documentation, docker docs, docker doc, docker document, docker help, docker manual
 layout: landing
-title: "Docker Documentation: How to Build, Share, and Run"
+title: "How to Build, Share, and Run"
 notoc: true
 notags: true
 skip_read_time: true
