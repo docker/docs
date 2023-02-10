@@ -38,31 +38,44 @@ using System.Net;
 using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Containers;
 using DotNet.Testcontainers.Networks;
+using Xunit;
+using Xunit.Abstractions;
 
 public sealed class UnitTest1 : IAsyncLifetime, IDisposable
 {
     private const ushort HttpPort = 80;
 
-    private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(1));
+    private CancellationTokenSource _cts = new(TimeSpan.FromMinutes(1));
 
-    private readonly IDockerNetwork _network;
+    private IDockerNetwork _network;
 
-    private readonly IDockerContainer _dbContainer;
+    private IDockerContainer _dbContainer;
 
-    private readonly IDockerContainer _appContainer;
+    private IDockerContainer _appContainer;
 
     public UnitTest1()
+    {
+    }
+
+    public async Task InitializeAsync()
     {
         _network = new TestcontainersNetworkBuilder()
             .WithName(Guid.NewGuid().ToString("D"))
             .Build();
+
+        await _network.CreateAsync(_cts.Token)
+            .ConfigureAwait(false);
 
         _dbContainer = new TestcontainersBuilder<TestcontainersContainer>()
             .WithImage("postgres")
             .WithNetwork(_network)
             .WithNetworkAliases("db")
             .WithVolumeMount("postgres-data", "/var/lib/postgresql/data")
+            .WithEnvironment("POSTGRES_PASSWORD", "example")
             .Build();
+
+        await _dbContainer.StartAsync(_cts.Token)
+            .ConfigureAwait(false);
 
         _appContainer = new TestcontainersBuilder<TestcontainersContainer>()
             .WithImage("dotnet-docker")
@@ -70,15 +83,6 @@ public sealed class UnitTest1 : IAsyncLifetime, IDisposable
             .WithPortBinding(HttpPort, true)
             .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(HttpPort))
             .Build();
-    }
-
-    public async Task InitializeAsync()
-    {
-        await _network.CreateAsync(_cts.Token)
-            .ConfigureAwait(false);
-
-        await _dbContainer.StartAsync(_cts.Token)
-            .ConfigureAwait(false);
 
         await _appContainer.StartAsync(_cts.Token)
             .ConfigureAwait(false);
