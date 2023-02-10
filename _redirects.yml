@@ -128,7 +128,6 @@
 "/desktop/windows/wsl/":
   # Link used by Docker Desktop to refer users on how to activate WSL 2
   - /go/wsl2/
-
 # samples
 "https://hub.docker.com/_/adminer/":
   - /samples/adminer
