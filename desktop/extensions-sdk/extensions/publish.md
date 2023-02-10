@@ -11,39 +11,8 @@ The Extensions Marketplace is a curated space where developers can discover exte
 
 Whenever you are [ready to publish](./DISTRIBUTION.md) your extension in the Marketplace, you have two publishing options:
 
-<div class="component-container">
-  <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 block">
-      <div class="component">
-        <div class="component-icon">
-          <a href="https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+">
-            <img src="/assets/images/self-published-extension.svg" alt="Quickstart" width="70" height="70">
-          </a>
-        </div>
-        <h2 id="docker-extensions">
-          <a href="https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+" target="_blank">
-            Self-Publish your extension
-          </a>
-        </h2>
-        <p>Extension that are validated through an automated process.</p>
-      </div>
-    </div>
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 block">
-      <div class="component">
-        <div class="component-icon">
-          <a href="https://www.docker.com/products/extensions/submissions/">
-            <img src="/assets/images/docker-reviewed-extension.svg" alt="Quickstart" width="70" height="70">
-          </a>
-        </div>
-        <h2 id="docker-extensions">
-          <a href="https://www.docker.com/products/extensions/submissions/" target="_blank">Request Docker to review your extension</a>
-        </h2>
-        <p>Extensions that are manually reviewed by the Docker Extensions team receive tailored and actionable feedback for improvement.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
+[Self-Publish your extension](https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+){: target="_blank" rel="noopener" .button .primary-btn }
+[Request Docker to review your extension](https://www.docker.com/products/extensions/submissions/){: target="_blank" rel="noopener" .button .primary-btn }
 
 > **Note**
 >
