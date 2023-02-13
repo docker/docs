@@ -150,7 +150,7 @@ step:
 ```yaml
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
@@ -158,7 +158,7 @@ step:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: ./
