@@ -139,7 +139,7 @@ attestation.
 
 <!-- prettier-ignore -->
 To deep-dive into the specifics about how attestations are stored, see
-[Image Attestation Storage (BuildKit)](https://github.com/moby/buildkit/blob/master/docs/attestation-storage.md){: target="blank" rel="noopener" class="_"}.
+[Image Attestation Storage (BuildKit)](https://docs.docker.com/build/attestations/attestation-storage/){: target="blank" rel="noopener" class="_"}.
 
 ## What's next
 

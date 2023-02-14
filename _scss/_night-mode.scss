@@ -52,6 +52,9 @@ a {
     div#side-toc-title {
         color: $white;
     }
+    .button {
+        color: $white;
+    }
     a:not(.btn):not(.button) {
         //color: $primary-links-night;
     }
