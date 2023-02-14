@@ -110,19 +110,51 @@ To remove an unused or a dangling image:
 
 ## Interact with remote repositories
 
-The **Images** view also allows you to manage and interact with images in remote repositories and lets you switch between organizations. Select an organization from the drop-down to view a list of repositories in your organization.
+The **Images** view also allows you to manage and interact with images in remote repositories.
+By default when you go to **Images** in Docker Desktop, you see a list of images that exist in your local image store.
+Use the **Local** and **Hub** tabs near the top to toggle between viewing images in your local image store,
+and images in remote Docker Hub repositories that you have access to.
 
-> **Note**
->
-> If you have a paid Docker subscription and enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results appear on the **Hub** tab.
-The **Pull** option allows you to pull the latest version of the image from Docker Hub. The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
+You can also [connect JFrog Artifactory registries](#connect-an-artifactory-registry),
+and browse images in JFrog repositories directly in Docker Desktop.
 
-To interact with remote repositories:
+### Hub
 
-1. Select the **Hub** tab.
-2. Select an organization from the drop-down list. This displays a list of repositories in your organization.
-3. Hover over an image from the list and then select **Pull** to pull the latest image from the remote repository.
+Switching to the **Hub** tab prompts you to sign in to your Docker ID, if you're not already signed in.
+When signed in, it shows you a list of images in Docker Hub organizations and repositories that you have access to.
 
-To view a detailed information about the image in Docker Hub, select the image and then select **View in Hub**.
+Select an organization from the drop-down to view a list of repositories in that organization.
 
-The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
+If you have enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results appear next to the image tags.
+
+Hovering over an image tag reveals two options:
+
+- **Pull**: pulls the latest version of the image from Docker Hub.
+- **View in Hub**: opens the Docker Hub page and displays detailed information about the image.
+
+### Artifactory
+
+Integrating Artifactory lets you interact with images in Artifactory, directly in the **Images** view.
+The integration described here connects your local Docker Desktop client with Artifactory,
+similar to running the `docker login` command.
+You can browse, filter, save, and pull images in the Artifactory instance you configure.
+
+You may also want to consider enabling automatic image analysis for your Artifactory repositories.
+Learn more about [Artifactory integration with Docker Scout]().
+
+#### Connect an Artifactory registry
+
+To connect a new Artifactory registry to Docker Desktop:
+
+1. In the **Images** view, select the plus ("+") button in the tab row near the top.
+2. If you aren't already signed in to an Artifactory registry, you're prompted to enter the sign-in details for your Artifactory instance:
+   
+   - **Host**: the base hostname for your Artifactory instance.
+   - **Username**: your Artifactory username.
+   - **Password**: your Artifactory password, or API token.
+
+   This is the same as using the `docker login` command.
+
+3. When signed in, a new **Artifactory** tab appears and opens, listing the most recent images in your Artifactory instance.
+
+By default, the image list sorts images by most recent push, where the newest images appear higher in the list.
