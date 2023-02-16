@@ -20,7 +20,7 @@ To navigate to the company page:
 
 As a company owner, you can configure [Single Sign-on (SSO)](../single-sign-on/configure/index.md) and [System for Cross-domain Identity Management (SCIM)](../docker-hub/scim.md) for all organizations under the company. This is only visible if your organization has a Docker Business subscription. If you want to upgrade your subscription to include the organization under the company, see [upgrade your subscription](../subscription/upgrade.md).
 
-The SSO configuration updates all domain mappings for your organizations to a single domain so you can manage multiple organizations using one domain for your company. Group management is also available if your IdP supports group assignment.
+The SSO configuration updates all domain mappings for your organizations to a single domain so you can manage multiple organizations using one domain for your company. Group mapping is also available if your IdP supports group assignment.
 
 ### Add a company owner
 

@@ -14,11 +14,11 @@ Subscriptions and related billing details will continue to be managed at the org
 
 ### Some of my organizations don’t have a Docker Business subscription. Can I still use a parent company?
 
-Yes, but only organizations with a Docker Business subscription are placed under a company.
+Only organizations with a Docker Business subscription can be placed under a company.
 
 ### What happens if one of my organizations downgrades from Docker Business, but I still need access as a company owner?
 
-To access and manage child organizations, the organization must have a Docker Business subscription. If the organization isn't a part of this subscription, the owner of the organization must manage the org from the company. 
+To access and manage child organizations, the organization must have a Docker Business subscription.
 
 ### Does my organization need to prepare for downtime during the migration process?
 
@@ -30,7 +30,7 @@ A maximum of 10 company owners can be added to a single company account.
 
 ### What permission does the company owner have in the associated/nested organizations?
 
-Company owners can navigate to the **Organization** page, view/edit organization members, change SSO/SCIM settings that may impact all users in each organization under the company. However, a company owner can't change any organization repositories. 
+Company owners can navigate to the **Organization** page, view/edit organization members, change SSO/SCIM settings that may impact all users in each organization under the company.
 
 ### What features are supported at the company level? Will this change over time?
 
