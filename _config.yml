@@ -216,9 +216,9 @@ fetch-remote:
         src:
           - "docs/attestations/attestation-storage.md"
 
-  - repo: "https://github.com/aevesdocker/compose-spec"
+  - repo: "https://github.com/compose-spec/compose-spec"
     default_branch: "master"
-    ref: "spec-split"
+    ref: "master"
     paths:
       - dest: "compose/compose-file/status.md"
         src:
