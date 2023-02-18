@@ -242,6 +242,7 @@ With all of that explained, let's start our dev-ready container!
     And in the mysql shell, run the following:
 
     ```console
+    mysql> use todos;
     mysql> select * from todo_items;
     +--------------------------------------+--------------------+-----------+
     | id                                   | name               | completed |
