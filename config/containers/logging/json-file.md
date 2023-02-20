@@ -27,11 +27,12 @@ only one container.
 ## Usage
 
 To use the `json-file` driver as the default logging driver, set the `log-driver`
-and `log-opts` keys to appropriate values in the `daemon.json` file, which is
-located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\` on Windows Server. If the file does not exist, create it first. For more information about
-configuring Docker using `daemon.json`, see
-[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
+and `log-opts` keys to appropriate values in the `daemon.json` configuration file.
+
+{% include configure-daemon-links.md %}
+
+The following example sets the log driver to `local` and sets the `max-size`
+option.
 
 The following example sets the log driver to `json-file` and sets the `max-size`
 and `max-file` options to enable automatic log-rotation.

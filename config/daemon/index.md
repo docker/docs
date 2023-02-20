@@ -25,16 +25,14 @@ redirect_from:
 title: Docker daemon configuration overview
 ---
 
-This page shows you how to customize the Docker daemon, `dockerd`.
+This page shows you how to customize the Docker daemon, `dockerd`, in a
+standalone Docker Engine installation (without Docker Desktop).
 
-> **Note**
->
-> This page is for users who've installed Docker Engine manually. If you're
-> using Docker Desktop, refer to the following pages instead:
->
-> - [Change preferences on Mac](../../desktop/settings/mac#docker-engine)
-> - [Change preferences on Windows](../../desktop/settings/windows#docker-engine)
-> - [Change preferences on Linux](../../desktop/settings/linux#docker-engine)
+If you're using Docker Desktop, refer to the following pages instead:
+
+- [Change preferences on Mac](../../desktop/settings/mac#docker-engine)
+- [Change preferences on Windows](../../desktop/settings/windows#docker-engine)
+- [Change preferences on Linux](../../desktop/settings/linux#docker-engine)
 
 ## Configure the Docker daemon
 
@@ -48,9 +46,10 @@ You can use both of these options together as long as you don't specify the same
 option both as a flag and in the JSON file. If that happens, the Docker daemon
 won't start and prints an error message.
 
-To configure the Docker daemon using a JSON file, create a file at
-`/etc/docker/daemon.json` on Linux systems, or
-`C:\ProgramData\docker\config\daemon.json` on Windows.
+To configure the Docker daemon using a JSON file, create a file at:
+
+- `/etc/docker/daemon.json` for Docker Engine on Linux
+- `C:\ProgramData\docker\config\daemon.json` for Docker Engine on Windows
 
 Here's what the configuration file might look like:
 
@@ -65,6 +64,10 @@ Here's what the configuration file might look like:
   "experimental": false,
   "features": {
     "buildkit": true
+  },
+  "log-driver": "local",
+  "log-opts": {
+    "max-size": "10m"
   }
 }
 ```

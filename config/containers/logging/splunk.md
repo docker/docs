@@ -18,7 +18,10 @@ per-container basis.
 
 To use the `splunk` driver as the default logging driver, set the keys
 `log-driver` and `log-opts` to appropriate values in the `daemon.json`
-configuration file and restart Docker. For example:
+configuration file.
+
+{% include configure-daemon-links.md %}
+
 
 ```json
 {
@@ -31,10 +34,7 @@ configuration file and restart Docker. For example:
 }
 ```
 
-The daemon.json file is located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
-configuring Docker using `daemon.json`, see
-[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
+Restart Docker for the changes to take effect for newly created containers. Existing containers do not use the new logging configuration.
 
 > **Note**
 >

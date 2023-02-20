@@ -34,11 +34,9 @@ The format is defined in [RFC 5424](https://tools.ietf.org/html/rfc5424) and Doc
 ## Usage
 
 To use the `syslog` driver as the default logging driver, set the `log-driver`
-and `log-opt` keys to appropriate values in the `daemon.json` file, which is
-located in `/etc/docker/` on Linux hosts or
-`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
-configuring Docker using `daemon.json`, see
-[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
+and `log-opt` keys to appropriate values in the `daemon.json` configuration file.
+
+{% include configure-daemon-links.md %}
 
 The following example sets the log driver to `syslog` and sets the
 `syslog-address` option. The `syslog-address` options supports both UDP and TCP;
