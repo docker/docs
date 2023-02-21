@@ -51,7 +51,7 @@ To automatically create a `registry.json` file when installing Docker Desktop, d
 If you're using PowerShell:
 
 ```powershell
-PS> Start-Process '.\Docker Desktop Installer.exe' -Wait install --allowed-org=myorg
+PS> Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myorg'
 ```
 
 If you're using the Windows Command Prompt:
