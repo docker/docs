@@ -2003,7 +2003,7 @@ networks:
 
 ### ipam
 
-`ipam` specifies custom a IPAM configuration. This is an object with several properties, each of which is optional:
+`ipam` specifies a custom IPAM configuration. This is an object with several properties, each of which is optional:
 
 - `driver`: Custom IPAM driver, instead of the default.
 - `config`: A list with zero or more configuration elements, each containing:
