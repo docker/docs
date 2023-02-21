@@ -21,7 +21,7 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 
 To complete this tutorial, you need the following:
 
-- Node.js version 12.18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
+- Node.js version 18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
 - Docker running locally: Follow the instructions to [download and install Docker](../../desktop/index.md).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 
@@ -100,7 +100,7 @@ we would like to use for our application.
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM node:12.18.1
+FROM node:18-alpine
 ```
 
 Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Node.js image that already has all the tools and packages that we need to run a Node.js application. You can think of this in the same way you would think about class inheritance in object oriented programming. For example, if we were able to create Docker images in JavaScript, we might write something like the following.
@@ -109,7 +109,7 @@ Docker images can be inherited from other images. Therefore, instead of creating
 
 This would create a class called `MyImage` that inherited functionality from the base class `NodeBaseImage`.
 
-In the same way, when we use the `FROM` command, we tell Docker to include in our image all the functionality from the `node:12.18.1` image.
+In the same way, when we use the `FROM` command, we tell Docker to include in our image all the functionality from the `node:18-alpine` image.
 
 > **Note**
 >
@@ -149,7 +149,7 @@ Once we have our files inside the image, we can use the `RUN` command to execute
 RUN npm install --production
 ```
 
-At this point, we have an image that is based on node version 12.18.1 and we have installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the COPY command just like we did with our `package.json` files above.
+At this point, we have an image that is based on node version 18 and we have installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the COPY command just like we did with our `package.json` files above.
 
 ```dockerfile
 COPY . .
@@ -166,7 +166,7 @@ Here's the complete Dockerfile.
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM node:12.18.1
+FROM node:18-alpine
 ENV NODE_ENV=production
 
 WORKDIR /app
