@@ -1609,6 +1609,8 @@ manuals:
             title: Introduction
           - path: /build/ci/github-actions/configure-builder/
             title: Configuring your builder
+          - path: /build/ci/github-actions/multi-platform/
+            title: Multi-platform image
           - path: /build/ci/github-actions/cache/
             title: Cache management
           - path: /build/ci/github-actions/examples/
