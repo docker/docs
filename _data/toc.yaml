@@ -887,7 +887,7 @@ reference:
     - sectiontitle: Compose specification
       section:
       - path: /compose/compose-file/
-        title: Compose Specification
+        title: Overview
       - path: /compose/compose-file/status/
         title: Status of the specification
       - path: /compose/compose-file/model/
