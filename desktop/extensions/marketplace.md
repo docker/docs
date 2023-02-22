@@ -22,13 +22,13 @@ To install an extension:
 From here, you can select **Open** to access the extension or install additional extensions. The extension also appears in the left-hand menu and in the **Manage** tab.
 
 There are two types of extensions available in the Extensions Marketplace:
-- Docker-Reviewed extensions
-- Self-Published extensions
+- Docker-reviewed extensions
+- Self-published extensions
 
-Docker-Reviewed extensions are manually reviewed by the Docker Extensions team to ensure an elevated level of trust
-and quality. They appear as "Reviewed" in the Marketplace.
+Docker-reviewed extensions are manually reviewed by the Docker Extensions team to ensure an extra level of trust
+and quality. They appear as **Reviewed** in the Marketplace.
 
-Self-Published extensions are autonomously published by extension developers. They appear as "Self-Published" in the Marketplace.
+Self-published extensions are autonomously published by extension developers. They appear as **Not reviewed** in the Marketplace.
 
 ## Update an extension
 
