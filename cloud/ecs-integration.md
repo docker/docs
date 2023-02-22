@@ -206,7 +206,9 @@ Compose file `logging.driver_opts` elements. See [AWS documentation](https://doc
 
 ## Private Docker images
 
-The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" rel="noopener" class="_"}.
+The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. 
+
+To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" rel="noopener" class="_"}.  If you are using a token, your `auth` string should be `<username>:<token>` as a Base64 encoded string.
 
 For your convenience, the Docker Compose CLI offers the `docker secret` command, so you can manage secrets created on AWS SMS without having to install the AWS CLI.
 

@@ -71,6 +71,8 @@ When logging in from your Docker CLI client (`docker login --username <username>
 omit the password in the login command. Instead, enter your token when asked for
 a password.
 
+If you are using a token to authenticate to AWS ECS, your `auth` string should be `<username:<token>` as a Base64 encoded string.
+
 > **Note**
 >
 > If you have [two-factor authentication (2FA)](2fa/index.md) enabled, you must
