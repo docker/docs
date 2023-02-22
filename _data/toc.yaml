@@ -1607,10 +1607,12 @@ manuals:
           section:
           - path: /build/ci/github-actions/
             title: Introduction
-          - path: /build/ci/github-actions/examples/
-            title: Examples
           - path: /build/ci/github-actions/configure-builder/
             title: Configuring your builder
+          - path: /build/ci/github-actions/cache/
+            title: Cache management
+          - path: /build/ci/github-actions/examples/
+            title: Examples
     - sectiontitle: Bake
       section:
         - path: /build/bake/

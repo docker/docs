@@ -43,5 +43,4 @@ using the official Docker actions, to build and push an image to Docker Hub.
 There are many more things you can do to customize your workflow to better suit
 your needs. To learn more about some of the more advanced use cases, take a look
 at the advanced examples, such as [building multi-platform images](examples.md#multi-platform-images),
-or [using cache storage backends](examples.md#cache) and also how to
-[configure your builder](configure-builder.md).
+or [using cache storage backends](cache.md) and also how to [configure your builder](configure-builder.md).
