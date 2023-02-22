@@ -39,7 +39,7 @@ These guidelines don't replace Docker's terms of service or guarantee approval:
 ### Which publishing option to choose
 
 When submitting an extension to the extensions submissions [repository](https://github.com/docker/extensions-submissions/issues/new/choose){:target="_blank" rel="noopener" class="_" }, you have two publishing options. Publish as either:
-- Self-Published extensions
+- A Self-published extension
 - A Docker-reviewed extension
 
 Depending on which option you select, the publishing process will differ.
