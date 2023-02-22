@@ -87,8 +87,8 @@ Use the links below to easily navigate key sections of the Compose specification
         <div class="component-icon">
           <a href= "/compose/compose-file/volumes/"><img src="/assets/images/engine-storage.svg" alt="Checkered shield" width="70px" height="70px"></a>
         </div>
-        <h2>Explore all volumes attributes for Compose.<a href= "/compose/compose-file/volumes/">Volumes top-level element</a></h2>
-        <p></p>
+        <h2><a href= "/compose/compose-file/volumes/">Volumes top-level element</a></h2>
+        <p>Explore all volumes attributes for Compose.</p>
       </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">

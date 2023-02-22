@@ -222,6 +222,46 @@ fetch-remote:
         src:
           - "docs/attestations/attestation-storage.md"
 
+- repo: "https://github.com/compose-spec/compose-spec"
+    default_branch: "master"
+    ref: "master"
+    paths:
+      - dest: "compose/compose-file/status.md"
+        src:
+          - "Spec/status.md"
+      - dest: "compose/compose-file/model.md"
+        src:
+          - "Spec/model.md"
+      - dest: "compose/compose-file/compose-file.md"
+        src:
+          - "Spec/compose-file.md"
+      - dest: "compose/compose-file/version-and-name.md"
+        src:
+          - "Spec/version-and-name.md"
+      - dest: "compose/compose-file/services.md"
+        src:
+          - "Spec/services.md"
+      - dest: "compose/compose-file/networks.md"
+        src:
+          - "Spec/networks.md"
+      - dest: "compose/compose-file/volumes.md"
+        src:
+          - "Spec/volumes.md"
+      - dest: "compose/compose-file/configs.md"
+        src:
+          - "Spec/configs.md"
+      - dest: "compose/compose-file/secrets.md"
+        src:
+          - "Spec/secrets.md"
+      - dest: "compose/compose-file/fragments.md"
+        src:
+          - "Spec/fragments.md"
+      - dest: "compose/compose-file/extension.md"
+        src:
+          - "Spec/extension.md"
+      - dest: "compose/compose-file/interpolation.md"
+        src:
+          - "Spec/interpolation.md"
 
 
 
