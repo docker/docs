@@ -28,9 +28,8 @@ Before you make SCIM configuration changes in your IdP, navigate to [Docker Hub]
 
 ### Okta
 
-1. In Okta, navigate to **Applications** > **Create App Integration** > **SAML 2.0**, and **Next**.
-2. In the **General** tab, on your new application page, select **Edit App Settings** to enable SCIM provisioning and **Save**.
-3. In the **Provisioning** tab, edit the SCIM Connection and complete the following:
+1. In Okta, navigate to your SAML or SWA Docker app integration and [add SCIM provisioning](https://help.okta.com/oie/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm). 
+2. In the **Provisioning** tab, edit the SCIM Connection and complete the following:
 
     * **SCIM connector base URL**: SCIM Base URL from Docker Hub
     * **Unique identifier field for users**: enter **email**
@@ -39,12 +38,12 @@ Before you make SCIM configuration changes in your IdP, navigate to [Docker Hub]
 
     ![SCIM app provisioning options](images/scim-app-provisioning.png){:width="700px"}
 
-4. Click **Test Connection Configuration** to complete the configuration and **Save**.
-5. Once configured, you must enable synchronization. Navigate to **Provisioning** > **To App** > **Edit**, and enable **Create Users**, **Update User Attributes** and **Deactivates Users**, and **Save**.
+3. Click **Test Connection Configuration** to complete the configuration and **Save**.
+4. Once configured, you must enable synchronization. Navigate to **Provisioning** > **To App** > **Edit**, and enable **Create Users**, **Update User Attributes** and **Deactivates Users**, and **Save**.
 
     ![Enable synchronization](images/provisioning-to-app.png){:width="700px"}
 
-6. Remove all fields that aren't supported from your **Docker Hub Attributes Mappings**.
+5. Remove all fields that aren't supported from your **Docker Hub Attributes Mappings**.
 
     ![Docker Hub attributes mappings view](images/scim-attributes.png){:width="700px"}
 
