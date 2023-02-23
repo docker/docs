@@ -1621,6 +1621,8 @@ manuals:
             title: Cache management
           - path: /build/ci/github-actions/export-docker/
             title: Export to Docker
+          - path: /build/ci/github-actions/test-before-push/
+            title: Test before push
           - path: /build/ci/github-actions/examples/
             title: Examples
     - sectiontitle: Bake
