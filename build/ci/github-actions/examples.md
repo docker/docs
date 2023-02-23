@@ -7,42 +7,6 @@ keywords: ci, github actions, gha, examples
 This page showcases different examples of how you can customize and use the
 Docker GitHub Actions in your CI pipelines.
 
-## Export image to Docker
-
-You may want your build result to be available in the Docker client through
-`docker images` to be able to use it in another step of your workflow:
-
-```yaml
-name: ci
-
-on:
-  push:
-    branches:
-      - "main"
-
-jobs:
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Build
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          load: true
-          tags: myimage:latest
-      -
-        name: Inspect
-        run: |
-          docker image inspect myimage:latest
-```
-
 ## Test your image before pushing it
 
 In some cases, you might want to validate that the image works as expected
