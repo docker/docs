@@ -1,13 +1,7 @@
 ---
-title: Example workflows
-description: Docker GitHub Actions workflow examples.
-keywords: ci, github actions, gha, examples
+title: Update Docker Hub repo description with GitHub Actions
+keywords: ci, github actions, gha, buildkit, buildx, docker hub
 ---
-
-This page showcases different examples of how you can customize and use the
-Docker GitHub Actions in your CI pipelines.
-
-## Update Docker Hub repository description
 
 You can update the Docker Hub repository description using a third party action
 called [Docker Hub Description](https://github.com/peter-evans/dockerhub-description){:target="blank" rel="noopener" class=""}

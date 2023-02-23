@@ -1631,8 +1631,8 @@ manuals:
             title: Named contexts
           - path: /build/ci/github-actions/copy-image-registries/
             title: Copy image between registries
-          - path: /build/ci/github-actions/examples/
-            title: Examples
+          - path: /build/ci/github-actions/update-dockerhub-desc/
+            title: Update Docker Hub repo description
     - sectiontitle: Bake
       section:
         - path: /build/bake/
