@@ -109,7 +109,7 @@ In addition to running the tests on command, we can run them when we build our i
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM node:14.15.4 as base
+FROM node:18-alpine as base
 
 WORKDIR /code
 
@@ -127,7 +127,7 @@ COPY . .
 CMD [ "node", "server.js" ]
 ```
 
-We first add a label `as base` to the `FROM node:14.15.4` statement. This allows us to refer to this build stage in other build stages. Next we add a new build stage labeled test. We will use this stage for running our tests.
+We first add a label `as base` to the `FROM node:18-alpine` statement. This allows us to refer to this build stage in other build stages. Next we add a new build stage labeled test. We will use this stage for running our tests.
 
 Now let’s rebuild our image and run our tests. We will run the same docker build command as above but this time we will add the `--target test` flag so that we specifically run the test build stage.
 
@@ -174,7 +174,7 @@ Update your Dockerfile with the highlighted line below.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM node:14.15.4 as base
+FROM node:18-alpine as base
 
 WORKDIR /code
 
@@ -240,7 +240,7 @@ Now, run the same docker build command from above and observe that the build fai
 ```console
 $ docker build -t node-docker --target test .
 Sending build context to Docker daemon  22.35MB
-Step 1/8 : FROM node:14.15.4 as base
+Step 1/8 : FROM node:18-alpine as base
  ---> 995ff80c793e
 ...
 Step 8/8 : RUN npm run test
