@@ -10,19 +10,6 @@ redirect_from:
 
 On August 31, 2021, we [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for developers and businesses. Docker subscription tiers now include Personal, Pro, Team, and Business.
 
-### Summary of the changes
-
-- We’re introducing a new product subscription, Docker Business, for organizations using Docker at scale for application development and require features like secure software supply chain management, single sign-on (SSO), container registry access controls, and more.
-
-- The [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} includes a change to the terms for **Docker Desktop**.
-    - Docker Desktop **remains free** for small businesses (fewer than 250 employees and less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects.
-    - It requires a paid subscription (**Pro, Team, or Business**), for as little as $5 a month, for commercial use in larger enterprises.
-- The Docker Pro and Docker Team subscriptions now **include commercial use** of Docker Desktop.
-- The existing Docker Free subscription has been renamed **Docker Personal**.
-- **No changes** to Docker Engine or any other upstream **open-source** Docker or Moby project.
-
-To understand how these changes affect you, read the [Docker subscription FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
-
 The following sections provide an overview of each tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
 ## Docker Personal
