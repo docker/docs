@@ -1615,6 +1615,8 @@ manuals:
             title: Secrets
           - path: /build/ci/github-actions/push-multi-registries/
             title: Push to multi-registries
+          - path: /build/ci/github-actions/manage-tags-labels/
+            title: Manage tags and labels
           - path: /build/ci/github-actions/cache/
             title: Cache management
           - path: /build/ci/github-actions/examples/
