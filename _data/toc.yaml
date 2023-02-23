@@ -1607,10 +1607,32 @@ manuals:
           section:
           - path: /build/ci/github-actions/
             title: Introduction
-          - path: /build/ci/github-actions/examples/
-            title: Examples
           - path: /build/ci/github-actions/configure-builder/
             title: Configuring your builder
+          - path: /build/ci/github-actions/multi-platform/
+            title: Multi-platform image
+          - path: /build/ci/github-actions/secrets/
+            title: Secrets
+          - path: /build/ci/github-actions/push-multi-registries/
+            title: Push to multi-registries
+          - path: /build/ci/github-actions/manage-tags-labels/
+            title: Manage tags and labels
+          - path: /build/ci/github-actions/cache/
+            title: Cache management
+          - path: /build/ci/github-actions/export-docker/
+            title: Export to Docker
+          - path: /build/ci/github-actions/test-before-push/
+            title: Test before push
+          - path: /build/ci/github-actions/local-registry/
+            title: Local registry
+          - path: /build/ci/github-actions/share-image-jobs/
+            title: Share built image between jobs
+          - path: /build/ci/github-actions/named-contexts/
+            title: Named contexts
+          - path: /build/ci/github-actions/copy-image-registries/
+            title: Copy image between registries
+          - path: /build/ci/github-actions/update-dockerhub-desc/
+            title: Update Docker Hub repo description
     - sectiontitle: Bake
       section:
         - path: /build/bake/
