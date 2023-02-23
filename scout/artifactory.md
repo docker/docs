@@ -39,8 +39,9 @@ steps:
 3. Upload the analysis result to Docker Scout
 
 The agent records the Software Bill of Material (SBOM) for the image, and the
-SBOMs for all of it's base images. The recorded SBOMs include both OS-level and
-application-level programs or dependencies that the image contains.
+SBOMs for all of its base images. The recorded SBOMs include both Operating
+System (OS)-level and application-level programs or dependencies that the image
+contains.
 
 Additionally, metadata about the image itself is also recorded:
 
@@ -51,9 +52,8 @@ Additionally, metadata about the image itself is also recorded:
 - Target platforms
 - Layer sizes
 
-The agent transacts this data to Docker Scout. The agent never transacts the
-image itself, nor any data inside the image, such as code, binaries, and layer
-blobs.
+The agent sends this data to Docker Scout. The agent never transacts the image
+itself, nor any data inside the image, such as code, binaries, and layer blobs.
 
 The agent doesn't detect and analyze pre-existing images. It only analyzes
 images that appear in the registry while the agent is running.
@@ -64,15 +64,15 @@ This section describes the steps for deploying the Artifactory agent.
 
 ### Prerequisites
 
-Before you deploy the agent, ensure that the prerequisites are met:
+Before you deploy the agent, ensure that you meet the prerequisites:
 
 - The server where you host the agent can access the following resources over
   the network:
   - Your JFrog Artifactory instance
   - `hub.docker.com`, port 443, for authenticating with Docker
   - `api.dso.docker.com`, port 443, for transacting data to Docker Scout
-- The server is not behind a proxy
-- The registries are Docker V2 registries. V1 registries are not supported.
+- The server isn't behind a proxy
+- The registries are Docker V2 registries. V1 registries aren't supported.
 
 The agent supports all versions of JFrog Artifactory and JFrog Container
 Registry.

@@ -24,8 +24,8 @@ or for a specific base image or layer.
 
 ## Image Hierarchy
 
-The image you inspect may have one or more base images listed under **Image
-hierarchy**. This means the author of the image used another image as a starting
+The image you inspect may have one or more base images listed under **Image hierarchy**.
+This means the author of the image used another image as a starting
 point when building the image. Often these base images are either operating
 system images such as Debian, Ubuntu, and Alpine, or programming language images
 such as PHP, Python, and Java.
@@ -69,8 +69,8 @@ image, you can get recommended actions for improving the security of that image.
 To view security recommendations for an image in Docker Desktop:
 
 1. Go to the **Images** view in Docker Desktop.
-1. Select the image tag that you want to view recommendations for.
-1. Near the top, select the **Recommended fixes** dropdown button.
+2. Select the image tag that you want to view recommendations for.
+3. Near the top, select the **Recommended fixes** dropdown button.
 
 The dropdown menu lets you choose whether you want to see recommendations for
 the current image or any base images used to build it:

@@ -7,7 +7,7 @@ title: Advanced image analysis
 > **Note**
 >
 > Docker Scout is an [early access](../release-lifecycle.md#early-access-ea)
-> product, and requires a Pro, Team, or Business subscription.
+> product, and requires a Docker Pro, Team, or Business subscription.
 
 Advanced image analysis is a Docker Scout feature for Docker Hub.
 
@@ -21,8 +21,8 @@ tag page on Docker Hub, as well as in the image details view in Docker Desktop.
 ## Activate Advanced image analysis
 
 Advanced image analysis is an early access feature. It can be activated on a
-per-repository basis for organizations with a Pro, Team, or Business
-subscription.
+per-repository basis for organizations with a
+[Docker Pro, Team, or Business subscription](../subscription/index.md).
 
 > **Note**
 >
@@ -46,8 +46,7 @@ where Advanced image analysis is active:
 
 1. Sign in to your Docker ID, either using the `docker login` command or the
    **Sign in** button in Docker Desktop.
-2. Tag the image that you’d like to analyze. For example, to tag a Redis image,
-   run:
+2. Tag the image to analyze. For example, to tag a Redis image, run:
 
    ```console
    $ docker tag redis <org>/<imagename>:latest

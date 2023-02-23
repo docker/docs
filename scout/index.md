@@ -19,7 +19,7 @@ redirect_from:
 > product, and requires a Pro, Team, or Business subscription.
 
 Docker Scout is a collection of software supply chain features that appear
-throughout Docker user interfaces and the CLI. These features provide detailed
+throughout Docker user interfaces and the command line interface (CLI). These features provide detailed
 insights into the composition and security of container images.
 
 Docker Scout analyzes the image contents and generates a detailed report of
@@ -68,7 +68,7 @@ Scout to enable automatic analysis of images. For more information, see
 
 The `docker scout` CLI plugin provides a terminal interface for Docker Scout.
 
-Using the CLI, you can analyze images and view the analysis report in a text
+Using the CLI, you can analyze images and view the analysis report in text
 format. You can print the results directly to stdout, or export them to a file
 using a structured format, such as Static Analysis Results Interchange Format
 (SARIF). For more information about how to use the `docker scout` CLI, see the
