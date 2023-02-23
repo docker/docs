@@ -1625,6 +1625,8 @@ manuals:
             title: Test before push
           - path: /build/ci/github-actions/local-registry/
             title: Local registry
+          - path: /build/ci/github-actions/share-image-jobs/
+            title: Share built image between jobs
           - path: /build/ci/github-actions/examples/
             title: Examples
     - sectiontitle: Bake
