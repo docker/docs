@@ -1623,6 +1623,8 @@ manuals:
             title: Export to Docker
           - path: /build/ci/github-actions/test-before-push/
             title: Test before push
+          - path: /build/ci/github-actions/local-registry/
+            title: Local registry
           - path: /build/ci/github-actions/examples/
             title: Examples
     - sectiontitle: Bake
