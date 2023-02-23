@@ -1611,6 +1611,8 @@ manuals:
             title: Configuring your builder
           - path: /build/ci/github-actions/multi-platform/
             title: Multi-platform image
+          - path: /build/ci/github-actions/secrets/
+            title: Secrets
           - path: /build/ci/github-actions/cache/
             title: Cache management
           - path: /build/ci/github-actions/examples/
