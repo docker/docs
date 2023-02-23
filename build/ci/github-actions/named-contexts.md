@@ -83,11 +83,14 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+        with:
+          driver: docker
       -
         name: Build base image
         uses: docker/build-push-action@v4
         with:
-          context: base
+          context: ./base
+          file: ./base/Dockerfile
           load: true
           tags: my-base-image:latest
       -
@@ -100,3 +103,64 @@ jobs:
           tags: myimage:latest
 ```
 {% endraw %}
+
+## Using with a container builder
+
+As shown in the previous section we are not using the default
+[`docker-container` driver](../../drivers/docker-container.md) for building with
+named contexts. That's because this driver can't load an image from the Docker
+store as it's isolated. To solve this problem you can use a [local registry](local-registry.md)
+to push your base image in your workflow:
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine
+RUN echo "Hello World"
+```
+
+```yaml
+name: ci
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    services:
+      registry:
+        image: registry:2
+        ports:
+          - 5000:5000
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          # network=host driver-opt needed to push to local registry
+          driver-opts: network=host
+      -
+        name: Build base image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./base
+          file: ./base/Dockerfile
+          tags: localhost:5000/my-base-image:latest
+          push: true
+      -
+        name: Build
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          build-contexts: |
+            alpine=docker-image://localhost:5000/my-base-image:latest
+          tags: myimage:latest
+```
