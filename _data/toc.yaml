@@ -1629,6 +1629,8 @@ manuals:
             title: Share built image between jobs
           - path: /build/ci/github-actions/named-contexts/
             title: Named contexts
+          - path: /build/ci/github-actions/copy-image-registries/
+            title: Copy image between registries
           - path: /build/ci/github-actions/examples/
             title: Examples
     - sectiontitle: Bake
