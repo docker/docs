@@ -4,10 +4,6 @@ keywords: scim, company
 title: SCIM
 ---
 
-> **Note**
->
-> The following features are only available to [Early Access](../release-lifecycle.md/#early-access-ea) participants.
-
 SCIM is a provisioning system that lets you manage users within your identity provider (IdP). You can enable SCIM on organizations that are part of the Docker Business subscription.
 
 ### Enable SCIM

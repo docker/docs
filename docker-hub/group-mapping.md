@@ -4,10 +4,6 @@ keywords: group, comapping
 title: Enable group mapping
 ---
 
-> **Note**
->
-> The following features are only available to [Early Access](../release-lifecycle.md/#early-access-ea) participants.
-
 ## Okta SSO group mapping
 
 Use directory groups to team provisioning from your identity provider, and these updates will sync with your Docker organizations and teams.
