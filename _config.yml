@@ -228,40 +228,40 @@ fetch-remote:
     paths:
       - dest: "compose/compose-file/status.md"
         src:
-          - "Spec/status.md"
+          - "01-status.md"
       - dest: "compose/compose-file/model.md"
         src:
-          - "Spec/model.md"
+          - "02-model.md"
       - dest: "compose/compose-file/compose-file.md"
         src:
-          - "Spec/compose-file.md"
+          - "03-compose-file.md"
       - dest: "compose/compose-file/version-and-name.md"
         src:
-          - "Spec/version-and-name.md"
+          - "04-version-and-name.md"
       - dest: "compose/compose-file/services.md"
         src:
-          - "Spec/services.md"
+          - "05-services.md"
       - dest: "compose/compose-file/networks.md"
         src:
-          - "Spec/networks.md"
+          - "06-networks.md"
       - dest: "compose/compose-file/volumes.md"
         src:
-          - "Spec/volumes.md"
+          - "07-volumes.md"
       - dest: "compose/compose-file/configs.md"
         src:
-          - "Spec/configs.md"
+          - "08-configs.md"
       - dest: "compose/compose-file/secrets.md"
         src:
-          - "Spec/secrets.md"
+          - "09-secrets.md"
       - dest: "compose/compose-file/fragments.md"
         src:
-          - "Spec/fragments.md"
+          - "10-fragments.md"
       - dest: "compose/compose-file/extension.md"
         src:
-          - "Spec/extension.md"
+          - "11-extension.md"
       - dest: "compose/compose-file/interpolation.md"
         src:
-          - "Spec/interpolation.md"
+          - "12-interpolation.md"
 
 
 
