@@ -18,6 +18,21 @@ continuously, meaning you don't need to re-scan the image to see an updated
 vulnerability report. Information about packages and CVEs displays on the image
 tag page on Docker Hub, as well as in the image details view in Docker Desktop.
 
+Advanced image analysis supports the following package ecosystems:
+
+- .NET
+- GitHub packages
+- Go
+- Java
+- JavaScript
+- PHP
+- Python
+- RPM
+- Ruby
+- `alpm` (Arch Linux)
+- `apk` (Alpine Linux)
+- `deb` (Debian Linux and derivatives)
+
 ## Activate Advanced image analysis
 
 Advanced image analysis is an early access feature. It can be activated on a
