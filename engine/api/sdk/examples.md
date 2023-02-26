@@ -331,6 +331,7 @@ import (
 	"fmt"
 
 	"github.com/docker/docker/api/types"
+	containertypes "github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 )
 
@@ -349,7 +350,8 @@ func main() {
 
 	for _, container := range containers {
 		fmt.Print("Stopping container ", container.ID[:10], "... ")
-		if err := cli.ContainerStop(ctx, container.ID, nil); err != nil {
+		noWaitTimeout := 0 // to not wait for the container to exit gracefully
+		if err := cli.ContainerStop(ctx, container.ID, containertypes.StopOptions{Timeout: &noWaitTimeout}); err != nil {
 			panic(err)
 		}
 		fmt.Println("Success")
