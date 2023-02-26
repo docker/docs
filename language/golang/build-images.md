@@ -344,7 +344,7 @@ Your exact output may vary, but you should see `docker-gs-ping` image with the
 
 ## Tag images
 
-An image name is made up of slash-separated name components. Name components may
+An image name is made up of colon-separated name components. Name components may
 contain lowercase letters, digits and separators. A separator is defined as a
 period, one or two underscores, or one or more dashes. A name component may not
 start or end with a separator.
