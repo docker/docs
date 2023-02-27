@@ -557,5 +557,10 @@
 # Docker Scout
 "/scout/":
   - /go/scout/
+  - /go/docker-scout/
 "/scout/artifactory":
   - /go/scout-artifactory/
+
+# Telepresence
+"/develop/remote-development/":
+  - /go/telepresence/
