@@ -31,7 +31,7 @@ From the Docker Dashboard you can use Quick Search, which is located in the Dash
 
 - Extensions. From here, you can learn more about the extension and install it with a single click. Or, if you already have an extension installed, you can open it straight from the search results.
 
-- Any volume. From here you can the associated container. 
+- Any volume. From here you can view the associated container. 
 
 ## The Docker menu
 
