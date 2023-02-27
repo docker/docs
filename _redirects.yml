@@ -557,5 +557,6 @@
 # Docker Scout
 "/scout/":
   - /go/scout/
+  - /go/docker-scout/
 "/scout/artifactory":
   - /go/scout-artifactory/
