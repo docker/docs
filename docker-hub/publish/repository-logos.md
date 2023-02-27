@@ -16,7 +16,7 @@ over the repository can change the repository logo.
 - The supported filetypes for the logo image are JPEG and PNG.
 - The minimum allowed image size in pixels is 120×120.
 - The maximum allowed image size in pixels is 1000×1000.
-- The maximum allowed image file size is 5MB
+- The maximum allowed image file size is 5MB.
 
 ## Set the repository logo
 
