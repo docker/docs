@@ -5,15 +5,21 @@
 
 /build/ @crazy-max @jedevc @dvdksn
 
-/compose/ @usha-mandya @aevesdocker
+/compose/ @aevesdocker
 
 /desktop/ @aevesdocker
 
-/docker-hub/ @jerae-duffin @craig-osterhout
+/desktop/extensions/ @ChrisChinchilla
+
+/desktop/extensions-sdk/ @ChrisChinchilla
+
+/scout/ @ChrisChinchilla
+
+/docker-hub/ @aevesdocker @craig-osterhout
 
 /engine/ @dvdksn
 
-/subscription/ @jerae-duffin
+/subscription/ @aevesdocker
 
 /docker-hub/publish/ @dvdksn
 
@@ -21,4 +27,3 @@
 
 /registry/ @dvdksn
 
-/atomist/ @dvdksn

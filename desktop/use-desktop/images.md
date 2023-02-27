@@ -52,25 +52,8 @@ To inspect an image, simply select the image row. Inspecting an image displays d
 - Vulnerabilities found
 - Packages inside the image
 
-### Image Hierarchy
-
-The image you inspect may have one or more base images listed under **Image hierarchy**. This means the author of the image used another image as a starting point when building the image. Often these base images are either operating system images such as Debian, Ubuntu, and Alpine, or programming language images such as PHP, Python, and Java. 
-
-A base image may have its own parent base image so there is a chain of base images represented in **Image hierarchy**. Selecting each image in the chain lets you see which layers originate from each base image. Selecting the **ALL** row reselects all the layers and base images for the entire image.
-
-One or more of the base images may have updates available, which may include updated security patches that remove vulnerabilities from your image. Any base images with available updates are noted to the right of **Image hierarchy**.
-
-### Layers
-
-A Docker image consists of layers. Image layers are listed from top to bottom, with the earliest layer at the top and the most recent layer at the bottom. Often, the layers at the top of the list originate from a base image, and the layers towards the bottom are layers added by the image author, often by adding commands to a Dockerfile. To see which layers originate from a base image, simply select a base image under **Image hierarchy** and the relevant layers are highlighted.
-
-Selecting individual or multiple layers filters the packages and vulnerabilities on the right-hand side to see what has been added by the selected layers.
-
-### Vulnerabilities
-
-Images may be exposed to vulnerabilities and exploits. These are detected and listed on the right-hand side, grouped by package, and sorted in order of severity. Further information on whether the vulnerability has an available fix, for example, can be examined by expanding the sections. For even more details, you can visit dso.docker.com by selecting the link. 
-
-If you have any feedback about this feature you can use the **Give feedback** link to contact the development team.
+The image view is powered by [Docker Scout](../../scout/index.md).
+For more information about this view, see [Image details view](../../scout/image-details-view.md)
 
 ## Pull the latest image from Docker Hub
 
@@ -110,19 +93,55 @@ To remove an unused or a dangling image:
 
 ## Interact with remote repositories
 
-The **Images** view also allows you to manage and interact with images in remote repositories and lets you switch between organizations. Select an organization from the drop-down to view a list of repositories in your organization.
+The **Images** view also allows you to manage and interact with images in remote repositories.
+By default, when you go to **Images** in Docker Desktop, you see a list of images that exist in your local image store.
+The **Local** and **Hub** tabs near the top toggles between viewing images in your local image store,
+and images in remote Docker Hub repositories that you have access to.
 
-> **Note**
->
-> If you have a paid Docker subscription and enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results appear on the **Hub** tab.
-The **Pull** option allows you to pull the latest version of the image from Docker Hub. The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
+You can also [connect JFrog Artifactory registries](#connect-an-artifactory-registry),
+and browse images in JFrog repositories directly in Docker Desktop.
 
-To interact with remote repositories:
+### Hub
 
-1. Select the **Hub** tab.
-2. Select an organization from the drop-down list. This displays a list of repositories in your organization.
-3. Hover over an image from the list and then select **Pull** to pull the latest image from the remote repository.
+Switching to the **Hub** tab prompts you to sign in to your Docker ID, if you're not already signed in.
+When signed in, it shows you a list of images in Docker Hub organizations and repositories that you have access to.
 
-To view a detailed information about the image in Docker Hub, select the image and then select **View in Hub**.
+Select an organization from the drop-down to view a list of repositories for that organization.
 
-The **View in Hub** option opens the Docker Hub page and displays detailed information about the image, such as the OS architecture, size of the image, the date when the image was pushed, and a list of the image layers.
+If you have enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scanning.md) in Docker Hub, the scan results appear next to the image tags.
+
+Hovering over an image tag reveals two options:
+
+- **Pull**: pulls the latest version of the image from Docker Hub.
+- **View in Hub**: opens the Docker Hub page and displays detailed information about the image.
+
+### Artifactory
+
+The Artifactory integration lets you interact with images in JFrog Artifactory,
+and JFrog container registry, directly in the **Images** view of Docker Desktop.
+The integration described here connects your local Docker Desktop client with Artifactory.
+You can browse, filter, save, and pull images in the Artifactory instance you configure.
+
+You may also want to consider activating automatic image analysis for your Artifactory repositories.
+Learn more about [Artifactory integration with Docker Scout](../../scout/artifactory.md).
+
+#### Connect an Artifactory registry
+
+To connect a new Artifactory registry to Docker Desktop:
+
+1. Sign in to an Artifactory registry using the `docker login` command:
+
+   ```console
+   $ cat ./password.txt | docker login -u <username> --password-stdin <hostname>
+   ```
+
+   - `password.txt`: text file containing your Artifactory password.
+   - `username`: your Artifactory username.
+   - `hostname`: hostname for your Artifactory instance.
+
+2. Open the **Images** view in Docker Desktop.
+3. Select the **Artifactory** tab near the top of the image view to see Artifactory images.
+
+When signed in, a new **Artifactory** tab appears in the **Images** view.
+By default, the image list shows images sorted by push date: the newest images appear higher in the list.
+

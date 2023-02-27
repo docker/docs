@@ -553,3 +553,9 @@
 # feedback
 "https://docs.google.com/forms/d/e/1FAIpQLSenjK8KiBiOrwCpq06u_iVEZGv4tfTEpfmY_cQDmsqJrHL9Gw/viewform":
   - /feedback/extension/
+
+# Docker Scout
+"/scout/":
+  - /go/scout/
+"/scout/artifactory":
+  - /go/scout-artifactory/
