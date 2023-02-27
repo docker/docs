@@ -29,7 +29,9 @@ From the Docker Dashboard you can use Quick Search, which is located in the Dash
 
 - Public Docker Hub images, local images, and images from remote repositories. Depending on the type of image you select, you can either pull the image by tag, view documentation, go to Docker Hub for more details, or run a new container using the image.
 
-- Extensions. From here, you can learn more about the extension and install it with a single click. Or, if you already have an extension installed, you can open it straight from the search results. 
+- Extensions. From here, you can learn more about the extension and install it with a single click. Or, if you already have an extension installed, you can open it straight from the search results.
+
+- Any volume. From here you can view the associated container. 
 
 ## The Docker menu
 

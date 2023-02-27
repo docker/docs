@@ -1,5 +1,5 @@
 ---
-description: Learn how to install, launch and upgrade Docker Desktop on Ubuntu. This quick guide will cover prerequisites, installation methods, and more. 
+description: Learn how to install, launch and upgrade Docker Desktop on Ubuntu. This quick guide will cover prerequisites, installation methods, and more.
 keywords: install docker ubuntu, ubuntu install docker, install docker on ubuntu, docker install ubuntu, how to install docker on ubuntu, ubuntu docker install, docker installation on ubuntu, docker ubuntu install, docker installing ubuntu, installing docker on ubuntu, docker desktop for ubuntu
 title: Install Docker Desktop on Ubuntu
 toc_max: 4
@@ -9,7 +9,7 @@ redirect_from:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution.
 
-[DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.16.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+[DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.17.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
 _For checksums, see [Release notes](../release-notes.md)_
 
@@ -48,7 +48,7 @@ Recommended approach to install Docker Desktop on Ubuntu:
 
 1. Set up [Docker's package repository](../../engine/install/ubuntu.md#set-up-the-repository).
 
-2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.16.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.17.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with apt as follows:
 
