@@ -34,13 +34,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Image analysis results - you can now filter on vulnerability information.
-- Remote registries - you can now view and pull images from Artifactory repositories.
-- Remediation advice - get base image updates, and recommended tags and digests.
-- Docker Desktop now ships with Docker Scout command-line (`docker scout`).
-- Self-published extensions - you can now discover extensions that have been autonomously published in the Extensions Marketplace. For more information, see our documentation on [Managing Marketplace Extensions](https://docs.docker.com/desktop/extensions/marketplace/).
-- Container File Explorer is available as an experimental feature - you now have the ability to debug the filesystem within your containers in the GUI.
-- Global Search now includes Volume results.
+- Docker Desktop now ships with Docker Scout. Pull and view analysis for images from Docker Hub and Artifactory repositories, get base image updates and recommended tags and digests, and filter your images on vulnerability information. To learn more, see [Docker Scout](/scout/index.md).
+- You can now discover extensions that have been autonomously published in the Extensions Marketplace. For more information on self-published extensions, see [Marketplace Extensions](/extensions/marketplace.md).
+- **Container File Explorer** is available as an experimental feature. Debug the filesystem within your containers straight from the GUI.
+- You can now search for volumes in **Global Search**.
 
 ### Upgrades
 
@@ -53,18 +50,18 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 #### For all platforms
 
 - Fixed a bug where diagnostic gathering could hang waiting for a subprocess to exit.
-- Prevented the transparent HTTP proxy from mangling requests too much. Fixes tailscale extension login, see [tailscale/docker-extension#49](https://github.com/tailscale/docker-extension/issues/49).
+- Prevented the transparent HTTP proxy from mangling requests too much. Fixes Tailscale extension login, see [tailscale/docker-extension#49](https://github.com/tailscale/docker-extension/issues/49).
 - Fixed a bug in the transparent TLS proxy where the Server Name Indication field is not set.
 - Added support for subdomain match, CIDR match, `.` and `*.` in HTTP proxy exclude lists.
 - Ensured HTTP proxy settings are respected when uploading diagnostics.
 - Fixed fatal error when fetching credentials from the credential helper.
 - Fixed fatal error related to concurrent logging.
-- Improved the UI for Extensions actions in the Marketplace.
-- Added a new filter in Extensions Marketplace which includes both Categories and Reviewed status.
-- Added a way to report to Docker an extension as malicious.
+- Improved the UI for Extension actions in the Marketplace.
+- Added new filters in the Extensions Marketplace. You can now filter extensions by category and reviewed status.
+- Added a way to report a malicious extension to Docker.
 - Updated Dev Environments to v0.2.2 with initial set up reliability & security fixes.
 - Added a whalecome survey for new users only.
-- Made the troubleshooting page's confirmation dialogs style consistent with other similar dialogs.
+- The confirmation dialogs on the troubleshooting page are now consistent in style with other similar dialogs.
 - Fixed fatal error caused by resetting the Kubernetes cluster before it has started.
 - Implemented `docker import` for the containerd integration.
 - Fixed image tagging with an existing tag with the containerd integration.
@@ -76,31 +73,31 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed download of Registry Access Management policy on systems where the privileged helper tool `com.docker.vmnetd` is not installed.
 - Fixed a bug where `com.docker.vmnetd` could not be installed if `/Library/PrivilegedHelperTools` does not exist.
 - Fixed a bug where the "system" proxy would not handle "autoproxy" / "pac file" configurations.
-- Fixed a bug where vmnetd installation fails reading `Info.Plist` on case-sensitive file systems. Actual filename is `Info.plist`. Fixes [docker/for-mac#6677](https://github.com/docker/for-mac/issues/6677).
+- Fixed a bug where vmnetd installation fails to read `Info.Plist` on case-sensitive file systems. The actual filename is `Info.plist`. Fixes [docker/for-mac#6677](https://github.com/docker/for-mac/issues/6677).
 - Fixed a bug where user is prompted to create the docker socket symlink on every startup. Fixes [docker/for-mac#6634](https://github.com/docker/for-mac/issues/6634).
-- Fixed the start of the application on login not working.
+- Fixed a bug that caused the **Start Docker Desktop when you log in** setting not to work.
 - Fixed UDP connection tracking and `host.docker.internal`. Fixes [docker/for-mac#6699](https://github.com/docker/for-mac/issues/6699).
 - Improved kubectl symlink logic to respect existing binaries in `/usr/local/bin`. Fixes [docker/for-mac#6328](https://github.com/docker/for-mac/issues/6328).
-- Install Rosetta when opting for using it if it's not already installed.
+- Docker Desktop now automatically installs Rosetta when you opt-in to use it but have not already installed it.
 
 ### For Windows
 
-- Added statical linking of WSL integration tools against `musl`, so there is no need to install `alpine-pkg-glibc` in user distros.
+- Added statical linking of WSL integration tools against `musl` so there is no need to install `alpine-pkg-glibc` in user distros.
 - Added support for running under cgroupv2 on WSL 2. This is activated by adding `kernelCommandLine = systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all` to your `%USERPROFILE%\.wslconfig` file in the `[wsl2]` section.
-- Fixed an issue causing DD to get stuck in the "starting" phase when in WSL 2 mode (introduced in 4.16).
+- Fixed an issue that caused Docker Desktop to get stuck in the "starting" phase when in WSL 2 mode (introduced in 4.16).
 - Fixed Docker Desktop failing to start the WSL 2 backend when file system compression or encryption is enabled on `%LOCALAPPDATA%`.
 - Fixed Docker Desktop failing to report a missing or outdated (incapable of running WSL version 2 distros) WSL installation when starting.
 - Fixed a bug where opening in Visual Studio Code fails if the target path has a space.
-- Fixed a bug that causes `~/.docker/context` corruption and the error message "unexpected end of JSON input". Users can also remove `~/.docker/context` to work around this problem.
+- Fixed a bug that causes `~/.docker/context` corruption and the error message "unexpected end of JSON input". You can also remove `~/.docker/context` to work around this problem.
 - Ensured the credential helper used in WSL 2 is properly signed. Related to [docker/for-win#10247](https://github.com/docker/for-win/issues/10247).
-- Fixed an issue causing WSL integration agents to be terminated erroneously. Related to [docker/for-win#13202](https://github.com/docker/for-win/issues/13202).
+- Fixed an issue that caused WSL integration agents to be terminated erroneously. Related to [docker/for-win#13202](https://github.com/docker/for-win/issues/13202).
 - Fixed corrupt contexts on start. Fixes [docker/for-win#13180](https://github.com/docker/for-win/issues/13180) and [docker/for-win#12561](https://github.com/docker/for-win/issues/12561).
 
 ### For Linux
 
 - Added Docker Buildx plugin for Docker Desktop for Linux.
 - Changed compression algorithm to `xz` for RPM and Arch Linux distribution.
-- Fixed leftover files linux packages. Fixes [docker/for-linux#123](https://github.com/docker/desktop-linux/issues/123).
+- Fixed a bug that caused leftover files to be left in the root directory of the Debian package. Fixes [docker/for-linux#123](https://github.com/docker/desktop-linux/issues/123).
 
 ## 4.16.3
 
