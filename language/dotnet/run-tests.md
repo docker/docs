@@ -26,7 +26,7 @@ $ dotnet new xunit -n myWebApp.Tests -o tests
 Next, we'll update the test project and add the Testcontainers for .NET package that allows us to run tests against Docker resources. Switch to the `tests` directory and run the following command:
 
 ```console
-$ dotnet add package Testcontainers
+$ dotnet add package Testcontainers --version 2.3.0
 ```
 
 ## Add a test
