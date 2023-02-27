@@ -34,7 +34,7 @@ We've made it really easy for you to file new issues.
 - Click **Request docs changes** in the right column of every page on
   docs.docker.com and add the details.
 
-![Docs feedback on each page](/opensource/images/docs-site-feedback.png)
+![Docs feedback on each page](/assets/images/docs-site-feedback.png)
 
 ## Contribute to Docker docs
 
