@@ -136,13 +136,11 @@ guides:
   - path: /develop/
     title: Overview
   - path: /develop/dev-best-practices/
-    title: Best practices
-  - sectiontitle: Build images
-    section:
-    - path: /develop/develop-images/dockerfile_best-practices/
-      title: Dockerfile best practices
-  - path: /develop/scan-images/
-    title: Scan images
+    title: Development best practices
+  - path: /develop/develop-images/dockerfile_best-practices/
+    title: Dockerfile best practices
+  - path: /develop/security-best-practices/
+    title: Security best practices
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -605,6 +603,14 @@ reference:
       title: docker run
     - path: /engine/reference/commandline/save/
       title: docker save
+    - sectiontitle: docker scout
+      section:
+      - path: /engine/reference/commandline/scout/
+        title: docker scout
+      - path: /engine/reference/commandline/scout_cves/
+        title: docker scout cves
+      - path: /engine/reference/commandline/scout_version/
+        title: docker scout version
     - path: /engine/reference/commandline/search/
       title: docker search
     - sectiontitle: docker secret
@@ -1796,6 +1802,17 @@ manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
+- sectiontitle: Docker Scout (Early Access)
+  section:
+    - path: /scout/
+      title: Overview
+    - path: /scout/image-details-view/
+      title: Image details view
+    - path: /scout/advanced-image-analysis/
+      title: Advanced image analysis
+    - path: /scout/artifactory/
+      title: Artifactory integration
+
 - sectiontitle: Docker subscription
   section:
   - path: /subscription/
@@ -1865,30 +1882,8 @@ manuals:
   - path: /docker-hub/image-access-management/
     title: Image Access Management
 
-
 - title: Security announcements
   path: /security/
-
-- sectiontitle: Atomist
-  section:
-    - path: /atomist/
-      title: Introduction
-    - path: /atomist/try-atomist/
-      title: Try Atomist
-    - path: /atomist/get-started/
-      title: Get started
-    - sectiontitle: Configure
-      section:
-        - path: /atomist/configure/settings/
-          title: Settings
-        - path: /atomist/configure/advisories/
-          title: Advisories
-    - sectiontitle: Integrate
-      section:
-        - path: /atomist/integrate/github/
-          title: GitHub
-        - path: /atomist/integrate/deploys/
-          title: Track deployments
 
 - sectiontitle: Open-source projects
   section:
