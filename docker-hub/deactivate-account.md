@@ -15,7 +15,7 @@ Before deactivating your Docker Hub account, please complete the following:
 
 2. If you belong to any organizations, remove your account from all of them.
 
-3. If you are the sole owner of any organization, either add someone to the **owners** team and then remove yourself from the organization, or deactivate the organization.
+3. If you are the sole owner of any organization or company, either add someone to the **owners** team and then remove yourself from the organization or company, or deactivate the organization or company.
 
 4. If you have an active subscription, downgrade it to the **Docker Personal** subscription.
 
