@@ -26,7 +26,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ## 4.17.0
 
-{% include release-date.html date="2022-02-27" %}
+{% include release-date.html date="2023-02-27" %}
 
 > Download Docker Desktop
 >
