@@ -4,6 +4,68 @@ keywords: manage, single sign-on, SSO, sign-on
 title: Manage SSO
 ---
 
+# Manage domains
+
+## Delete a domain
+
+
+
+1. In the **Single Sign-On Connection**, select the **Action** icon and **Edit**.
+2. Select **Next** to navigate to the section where the connected domains are listed.
+3. In the **Domain** drop-down, select the **Remove** icon next to the domain that you want to remove.
+4. Select **Next** to confirm or change the connected organization(s).
+5. Select **Next** to confirm or change the default organization and team provisioning selections.
+6. Review the **Connection Summary** and select **Save**.
+
+>**Note**
+    >
+    >If you want to add this domain again, a new TXT record value is assigned. You must complete the verification steps with the new TXT record value.
+
+# Manage organizations
+
+## Connect an organization
+
+You must have a company to connect additional organizations.
+
+1. In the **Single Sign-on Connections** section, select the **Action** icon and **Edit**.
+2. Select **Next** to navigate to the section where connected organizations are listed.
+3. In the **Organizations** drop-down, select the organization to add to the connection.
+
+    ![org-connection](images/org-connection.png){: width="700px" }
+
+4. Select **Next** to confirm or change the default organization and team provisioning.
+5. Review the **Connection Summary** and select **Save**.
+
+    ![review-connection](images/review-connection.png){: width="700px" }
+
+## Remove an organization
+
+1. In the **Single Sign-on Connection** section, select the **Action** icon and **Edit**.
+2. Select **Next** to navigate to the section where connected organizations are listed.
+3. In the **Organizations** drop-down, select **Remove** to remove the connection.
+4. Select **Next** to confirm or change the default organization and team provisioning.
+5. Review the **Connection Summary** and select **Save**.
+
+# Manage SSO connections
+
+## Edit a connection
+
+1. In the **Single Sign-On Connections**, select the **Action** icon.
+2. Select **Edit Connection** to edit you connection.
+3. Continue with the on-screen instructions.
+
+## Delete a connection
+
+1. In the **Single Sign-On Connections**, select the **Action** icon.
+2. Select **Delete** and **Delete Connection**.
+3. Continue with the on-screen instructions.
+
+## Deleting SSO
+
+When you disable SSO, you can delete the connection to remove the configuration settings and the added domains. Once you delete this connection, it can't be undone. Users must authenticate with their Docker ID and password or create a password reset if they don't have one.
+
+# Manage users
+
 ## Manage users when SSO is enabled
 
 You don’t need to add users to your organization in Docker Hub manually. You just need to make sure an account for your users exists in your IdP.
@@ -33,12 +95,17 @@ To remove a user from an organization:
     > in using their email address.
 
 
-## Deleting SSO
 
-When you disable SSO, you can delete the connection to remove the configuration settings and the added domains. Once you delete this connection, it can't be undone. Users must authenticate with their Docker ID and password or create a password reset if they don't have one.
 
-![Delete SSO view](/single-sign-on/images/delete-sso.png){:width="500px"}
 
-## FAQs
 
-To learn more see [FAQs](../faqs.md).
+
+
+
+
+
+
+
+
+
+
