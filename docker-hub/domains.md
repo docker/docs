@@ -4,10 +4,6 @@ keywords: domains, company, multi-orgs
 title: Manage domains
 ---
 
-> **Note**
->
-> The following features are only available to [Early Access](../release-lifecycle.md/#early-access-ea) participants.
-
 ## Add a domain
 
 1. Sign in to [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"}, navigate to the **Organization** page and select your company.

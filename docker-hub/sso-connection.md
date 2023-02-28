@@ -4,10 +4,6 @@ keywords: sso, connection
 title: Single Sign-on connection
 ---
 
-> **Note**
->
-> The following features are only available to [Early Access](../release-lifecycle.md/#early-access-ea) participants.
-
 ## Create a connection
 
 1. Once your domain is verified, continue to **Single Sign-on Connections** and select **Create Connections**, and create a name for the connection. 

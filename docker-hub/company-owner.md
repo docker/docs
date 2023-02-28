@@ -4,11 +4,6 @@ keywords: company, owners
 title: Company owners
 ---
 
-> **Note**
->
-> The following features are only available to [Early Access](../release-lifecycle.md/#early-access-ea) participants.
-
-
 To navigate to the company page:
 
 1. Sign in to [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} to view your company and organizations.
