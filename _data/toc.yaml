@@ -1843,7 +1843,7 @@ manuals:
     - path: /docker-hub/creating-companies/
       title: Overview
     - path:  /docker-hub/company-owner/
-      title: Company owners
+      title: Manage company owners
     - path:  /docker-hub/group-mapping/
       title: Group mapping
     - path:  /docker-hub/company-scim/

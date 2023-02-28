@@ -4,26 +4,27 @@ keywords: company, multiple organizations, manage companies
 title: Overview
 ---
 
-To simplify the management of Docker organizations and settings, Docker has introduced a new view that provides a single point of visibility across multiple organizations called a Company. A company can become a parent to nested child organizations. A company lets Docker Business subscribers manage their organizations and configure settings centrally. With the new company owner role, you can control access to the company and company settings. These settings can affect all the organizations nested under the company. You can assign up to ten unique users to a company owner role without occupying a purchased seat.
+To simplify the management of Docker organizations and settings, Docker has introduced a new view that provides a single point of visibility across multiple organizations called a Company. It's available to Docker Business subscribers. 
 
-Docker will work with your current Docker organization owners to create the company, associate your Docker Business organizations, and identify your company owner(s). Once created, users with a company owner role can navigate to a new page that displays the company name, organizations associated with the company, a list of company owners, and settings that include your Domain verification, Single Sign-on (SSO) connection to your identity provider, System for Cross-domain Identity Management (SCIM) setup.
+The following diagram depicts the set up of a company and how it relates to associated organizations. 
 
+![company-process](images/company-process-diagram.png){: width="700px" }
 
- ![company-process](images/company-process-diagram.png){: width="700px" }
+## Key features
 
-When a company owner makes adjustments to user management settings at the company level, this will affect all organizations associated with the company.
+With a company, company owners can:
 
-The company owner can:
-
-- View all nested organizations.
+- View and manage all nested organizations and configure settings centrally. 
+- Carefully control access to the company and company settings. 
+- Apply changes to settings across all organizations that are nested under the company. 
+- Have up to ten unique users to a company owner role without occupying a purchased seat.
 - Configure SSO and SCIM for all nested organizations, including SCIM Group mapping.
 - Enforce SSO log-in for all users in the company.
 - Verify a domain separately from the organization namespace.
-- Add and remove up to 10 company owners.
-
-A company owner role is only available if your organization has a Docker Business subscription. If you don't have a Docker Business subscription, you must first [upgrade your subscription](../subscription/upgrade.md).
 
 ## Get started
+
+Docker will work with your current Docker organization owners to create the company, associate your organizations, and identify your company owner(s). 
 
 You’ll need to send the following information to your CSM Docker team member to set up your company:
 
@@ -32,11 +33,13 @@ You’ll need to send the following information to your CSM Docker team member t
 - The verified domains you want to move to the company level.
 - Confirm if you want to migrate one of your organization’s SSO and SCIM settings to the company. Migrating SSO settings will also migrate verified domains from the organization to the parent company.
 
-## Company overview and settings
+Once created, users with a company owner role can navigate to the **Overview** page in Docker Hub that displays the company name and organizations associated with the company.
 
-To navigate to the company page:
+![org-page](images/org-page.png){: width="700px" }
 
-1. Sign in to [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} to view your company and organizations.
-2. On the **Organizations** page, select your company to access the **Overview** tab. For example, the company listed below is **dockerinc** and the organization is **docker**.
+## What's next?
 
-    ![org-page](images/org-page.png){: width="700px" }
+- [Configure SSO](../single-sign-on/configure/index.md)
+- [Manage SSO](../single-sign-on/manage/index.md)
+- [Manage company owners](company-owner.md)
+- [Explore FAQs](company-faqs.md)
