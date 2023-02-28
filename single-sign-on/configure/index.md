@@ -16,10 +16,6 @@ To configure SSO, sign in to [Docker Hub](https://hub.docker.com){: target="_bla
 > aren't supported at this time.
 {: .important}
 
-The following video walks you through the process of configuring SSO.
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/QY0j02ggf64" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ### Configuring your IdP
 
 <ul class="nav nav-tabs">
