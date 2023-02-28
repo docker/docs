@@ -10,7 +10,7 @@ redirect_from:
 
 Follow the steps on this page to configure SSO for your organization or company. 
 
-## Step on: Add and verify your domain
+## Step one: Add and verify your domain
 
 1. Sign in to Docker Hub, navigate to the Organization page and select your organization or company.
 2. Select **Settings** and then **Security**. 
@@ -22,7 +22,7 @@ Follow the steps on this page to configure SSO for your organization or company.
 
 4. Once you have waited 72 hours for the TXT Record verification, you can then select **Verify** next to the domain you've added, and follow the instructions. 
 
-![verify-domain](images/verify-domain.png){: width="700px" }
+![verify-domain](../images/verify-domain.png){: width="700px" }
 
 ## Step two: Create an SSO connection
 

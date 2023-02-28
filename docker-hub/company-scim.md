@@ -16,7 +16,7 @@ SCIM is a provisioning system that lets you manage users within your identity pr
 
     > **Note**
     >
-    > Establishing the SSO connection lets you set up SCIM. However, this doesn’t enforce SSO. To continue, see [Enforcing SSO](../docker-hub/enforcing-sso.md).
+    > Establishing the SSO connection lets you set up SCIM. However, this doesn’t enforce SSO. To continue, see Enforcing SSO.
 
 2. Copy the **SCIM Base URL** and **API Token** and paste the values into your IdP.
 

@@ -293,7 +293,7 @@ Yes, the existing user account will join the organization with all assets retain
 
 We only support one email per user on the Docker platform.
 
-###  How can I remove invitees to the org who haven't signed in?
+### How can I remove invitees to the org who haven't signed in?
 
 They can go to the invitee list in the org view and remove them.
 

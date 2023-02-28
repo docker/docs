@@ -30,13 +30,8 @@ You must have a company to connect additional organizations.
 1. In the **Single Sign-on Connections** section, select the **Action** icon and **Edit**.
 2. Select **Next** to navigate to the section where connected organizations are listed.
 3. In the **Organizations** drop-down, select the organization to add to the connection.
-
-    ![org-connection](images/org-connection.png){: width="700px" }
-
 4. Select **Next** to confirm or change the default organization and team provisioning.
 5. Review the **Connection Summary** and select **Save**.
-
-    ![review-connection](images/review-connection.png){: width="700px" }
 
 ## Remove an organization
 
