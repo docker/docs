@@ -21,9 +21,9 @@
 
 /subscription/ @aevesdocker
 
-/docker-hub/publish/ @dvdksn
+/docker-hub/publish/ @ChrisChinchilla
 
-/docker-hub/official_images/ @dvdksn
+/docker-hub/official_images/ @ChrisChinchilla
 
 /registry/ @dvdksn
 
