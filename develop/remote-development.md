@@ -14,7 +14,7 @@ locally is sometimes not feasible:
   that can't be emulated
 - Testing and validating requires large amounts of data or network traffic
 
-Often, this means you'll need to rely on continuous integration pipelines or
+Often, this means you need to rely on continuous integration pipelines or
 staging environments to verify code changes. This introduces a time-consuming
 and cumbersome workflow where you must commit, push, build, test, and deploy
 your code in order to see them running.
@@ -49,8 +49,7 @@ running on developer machines.
 
 ![High-level architecture of Telepresence](./images/telepresence-architecture.png)
 
-You have a few options for how you want the local containers to integrate with
-the cluster:
+You have a few options for how the local containers can integrate with the cluster:
 
 - No intercepts
 
@@ -60,7 +59,7 @@ the cluster:
 
 - Global intercepts
 
-  Next, you can set up global intercepts for a service. This means all traffic
+  You can set up global intercepts for a service. This means all traffic
   for a service will be re-routed from Kubernetes to your local container.
 
 - Personal intercepts
@@ -71,7 +70,7 @@ the cluster:
   routing requests that include a specific HTTP header, to requests targeting a
   specific route of an API.
 
-Telepresence is free and open-source, and you can try it out today by heading to
+Telepresence is free and open-source, and you can try it out by heading to
 the
 [Telepresence quickstart guide](https://www.telepresence.io/docs/latest/quick-start/){: target="_blank" rel="noopener" class="_" }.
 There’s also a
@@ -98,5 +97,5 @@ Docker ID to Ambassador Cloud to sign in and use Telepresence. To get started:
 2. Sign in using your Docker ID.
 3. Authorize the Ambassador Cloud app.
 
-This will take you to a step-by-step guide on setting up Telepresence,
+This takes you to a step-by-step guide on setting up Telepresence,
 connecting to a development cluster, and creating intercepts.
