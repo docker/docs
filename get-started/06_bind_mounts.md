@@ -157,7 +157,7 @@ So, let's do it!
      server. If we look in the `package.json`, we'll see that the `dev` script
      starts `nodemon`.
 
-3. You can watch the logs using `docker logs`. You'll know you're ready to go
+3. You can watch the logs using `docker logs <container-id>`. You'll know you're ready to go
    when you see this:
 
    ```console
