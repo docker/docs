@@ -237,7 +237,7 @@ You can now start your dev-ready container.
     </div>
     </div>
 
-3. If you look at the logs for the container (`docker logs -f <container-id>`), you should see a message similar to the following, which indicates it's
+2. If you look at the logs for the container (`docker logs -f <container-id>`), you should see a message similar to the following, which indicates it's
    using the mysql database.
 
     ```console
@@ -250,9 +250,9 @@ You can now start your dev-ready container.
     Listening on port 3000
     ```
 
-4. Open the app in your browser and add a few items to your todo list.
+3. Open the app in your browser and add a few items to your todo list.
 
-5. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
+4. Connect to the mysql database and prove that the items are being written to the database. Remember, the password
    is `secret`.
 
     ```console
