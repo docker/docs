@@ -141,6 +141,8 @@ guides:
     title: Dockerfile best practices
   - path: /develop/security-best-practices/
     title: Security best practices
+  - path: /develop/remote-development/
+    title: Remote development
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -1561,6 +1563,8 @@ manuals:
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
+        - path: /build/building/opentelemetry/
+          title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
     - sectiontitle: Drivers
