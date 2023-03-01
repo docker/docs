@@ -12,7 +12,7 @@ set `JAEGER_TRACE` environment variable to the collection address using a
 First create a Jaeger container:
 
 ```console
-$ docker run -d --name jaeger -p "6831:6831/udp" -p "16686:16686" jaegertracing/all-in-one
+$ docker run -d --name jaeger -p "6831:6831/udp" -p "16686:16686" --restart unless-stopped jaegertracing/all-in-one
 ```
 
 Then [create a `docker-container` builder](../drivers/docker-container.md)
