@@ -6,7 +6,7 @@ keywords: >
 description: Using bind mounts in our application
 ---
 
-In the previous chapter, we talked about and used a volume mount to persist the
+In [part 5](./05_persisting_data.md), we talked about and used a volume mount to persist the
 data in our database. A volume mount is a great choice when you need somewhere
 persistent to store your application data.
 

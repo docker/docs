@@ -6,7 +6,7 @@ redirect_from:
 description: Containerize and run a simple application to learn Docker
 ---
 
-For the rest of this guide, you will be working with a simple todo
+For the rest of this guide, you'll be working with a simple todo
 list manager that's running in Node.js. If you're not familiar with Node.js,
 don't worry. This guide doesn't require JavaScript experience.
 

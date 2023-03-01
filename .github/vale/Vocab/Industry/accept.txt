@@ -64,3 +64,5 @@ XWiki
 Zsh
 macOS
 minikube
+sandbox
+sandboxed
