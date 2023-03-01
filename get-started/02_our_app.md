@@ -161,7 +161,7 @@ df784548666d        getting-started     "docker-entrypoint.s…"   2 minutes ago
 
 In Docker Desktop, select the **Containers** tab to see a list of your containers.
 
-![Docker Dashboard with tutorial and app containers running](images/dashboard-two-containers.png)
+![Docker Desktop with get-started container running](images/dashboard-two-containers.png)
 
 <hr>
 </div>
