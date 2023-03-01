@@ -1563,6 +1563,8 @@ manuals:
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
+        - path: /build/building/env-vars/
+          title: Environment variables
         - path: /build/building/opentelemetry/
           title: OpenTelemetry support
         - path: /build/building/base-images/
@@ -1681,8 +1683,6 @@ manuals:
           title: Configure
         - path: /build/buildkit/toml-configuration/
           title: TOML configuration
-        - path: /build/buildkit/color-output-controls/
-          title: Color output controls
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
