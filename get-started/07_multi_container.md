@@ -42,12 +42,12 @@ In the following steps, you'll create the network first and then attach the MySQ
 2. Start a MySQL container and attach it to the network. You're also going to define a few environment variables that the
   database will use to initialize the database. To learn more about the MySQL environment variables, see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/)).
 
-   <ul class="nav nav-tabs">
-   <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
-   <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
-   </ul>
-   <div class="tab-content">
-   <div id="mac-linux" class="tab-pane fade in active" markdown="1">
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
+    <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="mac-linux" class="tab-pane fade in active" markdown="1">
 
    ```console
     $ docker run -d \
@@ -58,9 +58,9 @@ In the following steps, you'll create the network first and then attach the MySQ
         mysql:8.0
     ```
 
-   <hr>
-   </div>
-   <div id="windows" class="tab-pane fade" markdown="1">
+    <hr>
+    </div>
+    <div id="windows" class="tab-pane fade" markdown="1">
 
     In Windows, run this command in PowerShell.
 
@@ -73,9 +73,9 @@ In the following steps, you'll create the network first and then attach the MySQ
         mysql:8.0
     ```
 
-   <hr>
-   </div>
-   </div>
+    <hr>
+    </div>
+    </div>
 
     In the command above, you'll see the `--network-alias` flag. In a later section, you'll learn more about this flag.
 
@@ -197,12 +197,12 @@ You can now start your dev-ready container.
 
 1. Specify each of the environment variables above, as well as connect the container to your app network.
 
-   <ul class="nav nav-tabs">
-   <li class="active"><a data-toggle="tab" data-target="#mac-linux2">Mac / Linux</a></li>
-   <li><a data-toggle="tab" data-target="#windows2">Windows</a></li>
-   </ul>
-   <div class="tab-content">
-   <div id="mac-linux2" class="tab-pane fade in active" markdown="1">
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#mac-linux2">Mac / Linux</a></li>
+    <li><a data-toggle="tab" data-target="#windows2">Windows</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="mac-linux2" class="tab-pane fade in active" markdown="1">
 
     ```console
     $ docker run -dp 3000:3000 \
@@ -216,9 +216,9 @@ You can now start your dev-ready container.
       sh -c "yarn install && yarn run dev"
     ```
 
-   <hr>
-   </div>
-   <div id="windows2" class="tab-pane fade" markdown="1">
+    <hr>
+    </div>
+    <div id="windows2" class="tab-pane fade" markdown="1">
 
     In Windows, run this command in PowerShell.
 
@@ -233,9 +233,9 @@ You can now start your dev-ready container.
       node:18-alpine `
       sh -c "yarn install && yarn run dev"
     ```
-   <hr>
-   </div>
-   </div>
+    <hr>
+    </div>
+    </div>
 
 3. If you look at the logs for the container (`docker logs -f <container-id>`), you should see a message similar to the following, which indicates it's
    using the mysql database.
