@@ -1561,6 +1561,8 @@ manuals:
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
+        - path: /build/building/opentelemetry/
+          title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
     - sectiontitle: Drivers
