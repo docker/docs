@@ -6,7 +6,7 @@ keywords: >
 description: Using bind mounts in our application
 ---
 
-In the previous chapter, we talked about and used a volume mount to persist the
+In [part 5](./05_persisting_data.md), we talked about and used a volume mount to persist the
 data in our database. A volume mount is a great choice when you need somewhere
 persistent to store your application data.
 
@@ -157,7 +157,7 @@ So, let's do it!
      server. If we look in the `package.json`, we'll see that the `dev` script
      starts `nodemon`.
 
-3. You can watch the logs using `docker logs`. You'll know you're ready to go
+3. You can watch the logs using `docker logs <container-id>`. You'll know you're ready to go
    when you see this:
 
    ```console

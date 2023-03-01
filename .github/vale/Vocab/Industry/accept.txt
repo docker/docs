@@ -70,3 +70,5 @@ kubefwd
 ktunnel
 macOS
 minikube
+sandbox
+sandboxed
