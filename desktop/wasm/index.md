@@ -47,7 +47,7 @@ $ docker run -dp 8080:8080 \
   michaelirwin244/wasm-example
 ```
 
-After running this command, you should be able to visit http://localhost:8080/ and see the "Hello world" output from this example module.
+After running this command, you can visit [http://localhost:8080/](http://localhost:8080/) to see the "Hello world" output from this example module.
 
 > Got an error message? Head to the [troubleshooting section](#troubleshooting)
 > for help.
