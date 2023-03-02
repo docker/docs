@@ -55,7 +55,7 @@ See your [SCIM](scim.md) and [SSO](../single-sign-on/configure/index.md) setting
 
 ### How does a company owner enable group mapping in my IdP?
 
-See [group mapping](../docker-hub/group-mapping.md) for your IdP.
+See [SCIM](scim.md) for more information.
 
 ### What's the definition of a company vs an organization?
 
