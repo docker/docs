@@ -14,8 +14,6 @@ As a company owner, you can configure [Single Sign-on (SSO)](../single-sign-on/c
 
     ![company-overview](images/company-overview.png){: width="700px" }
 
-    ![add-owner](images/add-owner.png){: width="700px" }
-
 ## Remove a company owner
 
 1. Sign in to [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"}, navigate to the **Organizations** page, and select your company.

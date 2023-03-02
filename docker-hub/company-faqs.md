@@ -32,7 +32,7 @@ A maximum of 10 company owners can be added to a single company account.
 
 Company owners can navigate to the **Organization** page to view all their nested organizations in a single location. They can also view or edit organization members and change SSO and SCIM settings. Changes to company settings impact all users in each organization under the company.
 
-### What features are supported at the company level? Will this change over time?
+### What features are supported at the company level?
 
 Domain verification, Single Sign-on, and System for Cross-domain Identity Management (SCIM) are supported at the company level. The following aren't supported:
 

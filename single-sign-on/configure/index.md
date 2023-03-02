@@ -12,15 +12,15 @@ Follow the steps on this page to configure SSO for your organization or company.
 
 ## Step one: Add and verify your domain
 
-1. Sign in to Docker Hub, navigate to the Organization page and select your organization or company.
-2. Select **Settings** and then **Security**. 
+1. Sign in to Docker Hub, navigate to the **Organization** page and select your organization or company.
+2. Select **Settings**. 
 3. Select **Add Domain** and continue with the on-screen instructions to add the TXT Record Value to your domain name system (DNS).
 
     >**Note**
     >
     > Format your domains without protocol or www information, for example, yourcompany.com. This should include all email domains and subdomains users will use to access Docker. Public domains such as gmail.com, outlook.com, etc aren’t permitted. Also, the email domain should be set as the primary email.
 
-4. Once you have waited 72 hours for the TXT Record verification, you can then select **Verify** next to the domain you've added, and follow the instructions. 
+4. Once you have waited 72 hours for the TXT Record verification, you can then select **Verify** next to the domain you've added, and follow the on-screen instructions. 
 
 ![verify-domain](../images/verify-domain.png){: width="700px" }
 
@@ -37,7 +37,7 @@ Follow the steps on this page to configure SSO for your organization or company.
 {: .important}
 
 
-1. Once your domain is verified, continue to **Single Sign-on Connections** and select **Create Connections**, and create a name for the connection. 
+1. Once your domain is verified, in the **Single Sign-on Connections** table select **Create Connections**, and create a name for the connection. 
 
     > **Note**
     >
@@ -64,7 +64,7 @@ Follow the steps on this page to configure SSO for your organization or company.
 
 7. Review your summary and select **Create Connection**.
 
-**SSO connection is now created**. You can continue to set up SSO Group Mapping and SCIM without enforcing SSO log-in.
+The SSO connection is now created. You can continue to set up SSO Group Mapping and SCIM without enforcing SSO log-in.
 
 ## Step three: Test your SSO configuration
 
@@ -73,27 +73,11 @@ After you’ve completed the SSO configuration process in Docker Hub, you can te
 1. Authenticate through email instead of using your Docker ID, and test the login process.
 2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.
 
-## Step four: Enforce SSO in Docker Hub
-
-Without SSO enforcement, users can continue to sign in using Docker username and password. If users login with your Domain email, they will authenticate through your identity provider instead.
-
-
-You must test your SSO connection first if you’d like to enforce SSO log-in. All users must authenticate with an email address instead of their Docker ID if SSO is enforced.
-
-Before you enforce SSO in Docker Hub, you must complete the following:
-Test SSO by logging in and out successfully, confirm that all members in your org have upgraded to Docker Desktop version 4.4.2, PATs are created for each member, CI/CD passwords are converted to PAT. Also, when using Docker partner products (for example, VS Code), you must use a PAT when you enforce SSO. For your service accounts add your additional domains in **Add Domains** or enable the accounts in your IdP.
-
-Admins can force users to authenticate with Docker Desktop by provisioning a registry.json configuration file. The registry.json file will force users to authenticate as a user that's configured in the allowedOrgs list in the registry.json file. For info on how to configure a registry.json file see [Configure registry.json](../../docker-hub/image-access-management.md#enforce-authentication)
+## Optional step four: Enforce SSO log-in in Docker Hub
 
 1. In the **Single Sign-On Connections** table, select the Action icon and **Enforce Single Sign-on**.
     When SSO is enforced, your users are unable to modify their email address and password, convert a user account to an organization, or set up 2FA through Docker Hub. You must enable 2FA through your IdP.
-
-    > **Note**
-    >
-    > If you want to turn off SSO and revert back to Docker’s built-in
-    > authentication, select **Turn OFF Enforcement**. Your users aren’t
-    > forced to authenticate through your IdP and can sign in to Docker using
-    > their personal credentials.
-
 2. Continue with the on-screen instructions and verify that you’ve completed the tasks. 
 3. Select **Turn on enforcement** to complete. 
+
+To enforce SSO log-in for Docker Desktop, see [Enforce sign-in](../../docker-hub/configure-sign-in.md).

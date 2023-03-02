@@ -4,7 +4,7 @@ keywords: company, multiple organizations, manage companies
 title: Overview
 ---
 
-To simplify the management of Docker organizations and settings, Docker has introduced a new view that provides a single point of visibility across multiple organizations called a Company. It's available to Docker Business subscribers. 
+A company provides a single point of visibility across multiple organizations. Docker introduced this new view to simplify the management of Docker organizations and settings. It's available to Docker Business subscribers. 
 
 The following diagram depicts the set up of a company and how it relates to associated organizations. 
 
@@ -12,15 +12,13 @@ The following diagram depicts the set up of a company and how it relates to asso
 
 ## Key features
 
-With a company, company owners can:
+With a company, administrators can:
 
 - View and manage all nested organizations and configure settings centrally. 
 - Carefully control access to the company and company settings. 
-- Apply changes to settings across all organizations that are nested under the company. 
-- Have up to ten unique users to a company owner role without occupying a purchased seat.
-- Configure SSO and SCIM for all nested organizations, including SCIM Group mapping.
+- Have up to ten unique users assigned the company owner role without occupying a purchased seat.
+- Configure SSO and SCIM for all nested organizations.
 - Enforce SSO log-in for all users in the company.
-- Verify a domain separately from the organization namespace.
 
 ## Get started
 
