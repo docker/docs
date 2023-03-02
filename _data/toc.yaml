@@ -1844,10 +1844,6 @@ manuals:
       title: Overview
     - path:  /docker-hub/company-owner/
       title: Manage company owners
-    - path:  /docker-hub/group-mapping/
-      title: Group mapping
-    - path:  /docker-hub/company-scim/
-      title: SCIM
     - path: /docker-hub/company-faqs/
       title: FAQs
   - path: /docker-hub/orgs/

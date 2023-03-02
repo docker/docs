@@ -4,6 +4,7 @@ keywords: SCIM, SSO
 title: SCIM
 direct_from: 
 - /docker-hub/company-scim/
+- /docker-hub/group-mapping/
 ---
 
 This section is for administrators who want to enable System for Cross-domain Identity Management (SCIM) 2.0 for their business. It is available for Docker Business customers. 
@@ -46,6 +47,13 @@ Follow the instructions provided by your IdP:
 - [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm)
 - [Azure AD](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad#step-2-configure-the-enterprise-application)
 - [OneLogin](https://developers.onelogin.com/scim/create-app)
+
+You also have the option to use group mapping within your IdP. To take advantage of group mapping, follow the instructions provided by your IdP:
+ - - [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-groups.htm)
+- [Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes)
+- [OneLogin](https://developers.onelogin.com/scim/create-app)
+
+Once completed, when your user signs in to Docker through SSO, the user is automatically added to the organizations and teams mapped in the group attributes.
 
 ## Disable SCIM
 

@@ -18,7 +18,7 @@ Yes, but only organizations with a Docker Business subscription can be placed un
 
 ### What happens if one of my organizations downgrades from Docker Business, but I still need access as a company owner?
 
-To access and manage child organizations, the organization must have a Docker Business subscription. 
+To access and manage child organizations, the organization must have a Docker Business subscription. If the organization isn’t included in this subscription, the owner of the organization must manage the organization outside of the company.
 
 ### Does my organization need to prepare for downtime during the migration process?
 
@@ -30,7 +30,7 @@ A maximum of 10 company owners can be added to a single company account.
 
 ### What permission does the company owner have in the associated/nested organizations?
 
-Company owners can navigate to the **Organization** page, view/edit organization members, change SSO/SCIM settings that may impact all users in each organization under the company. 
+Company owners can navigate to the **Organization** page to view all their nested organizations in a single location. They can also view or edit organization members and change SSO and SCIM settings. Changes to company settings impact all users in each organization under the company.
 
 ### What features are supported at the company level? Will this change over time?
 
@@ -59,12 +59,5 @@ See [group mapping](../docker-hub/group-mapping.md) for your IdP.
 
 ### What's the definition of a company vs an organization?
 
-A company is a collection of organizations that's managed together. An organization is a collection of repositories and teams that's managed together. 
+A company is a collection of organizations that are managed together. An organization is a collection of repositories and teams that are managed together. 
 
-### What are the different permissions for an organization owner?
-
-Organization owners can create, view, push, and pull repositories from their organization. As a company owner, you don’t have these privileges.
-
-### If an organization isn't part of a company, would SSO or SCIM settings change?
-
-No, the SSO or SCIM settings won't change for that organization. 

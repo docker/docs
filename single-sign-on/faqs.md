@@ -31,7 +31,7 @@ Docker supports Service Provider Initiated (SP-initiated) SSO flow. This means u
 
 ### Where can I find detailed instructions on how to configure Docker SSO?
 
-You first need to establish an SSO connection with your identity provider, and the company email domain needs to be verified prior to SSO enforcement for your users. For detailed step-by-step instructions on how to configure Docker SSO, see [Single Sign-on](index.md).
+You first need to establish an SSO connection with your identity provider, and the company email domain needs to be verified prior to establishing an SSO connection for your users. For detailed step-by-step instructions on how to configure Docker SSO, see [Single Sign-on](index.md).
 
 ### Does Docker SSO support multi-factor authentication (MFA)?
 
@@ -39,7 +39,7 @@ When an organization uses SSO, MFA is determined on the IdP level, not on the Do
 
 ### Do I need a specific version of Docker Desktop for SSO?
 
-Yes, all users in your organization must upgrade to Docker Desktop version 4.4.2 or later. Users on older versions of Docker Desktop will not be able to sign in after enforcing SSO if the company domain email is used to sign in or as the primary email associated with an existing Docker account Your users with existing accounts can't sign in with their username and password.
+Yes, all users in your organization must upgrade to Docker Desktop version 4.4.2 or later. Users on older versions of Docker Desktop will not be able to sign in after SSO is enforced, if the company domain email is used to sign in or as the primary email associated with an existing Docker account. Your users with existing accounts can't sign in with their username and password.
 
 <hr>
 </div>
@@ -56,10 +56,6 @@ The preferred format is your email address, which should also be your Name ID.
 ### When you enforce SAML SSO, at what stage is the login required for tracking through SAML? At runtime or install time?
 
 At runtime for Docker Desktop if it’s configured to require authentication to the organization.
-
-### How long is the grace-period for using regular user id and password for the Docker Desktop itself regardless of the enforced SSO?
-
-We don't have a date on when the grace-period will end.
 
 ### Do you have any information on how to use the Docker Desktop application in accordance with the SSO users we provide? How can we verify that we're handling the licensing correctly?
 
