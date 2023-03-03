@@ -1879,11 +1879,11 @@ manuals:
   - path: /billing/payment-method/
     title: Add or update a payment method
   - path: /billing/details/
-    title: Update your contact information
+    title: Update the contact information
   - path: /billing/history/
     title: View your billing history
   - path: /billing/cycle/
-    title: Change you billing cycle
+    title: Change your billing cycle
   - path: /billing/faqs/
     title: FAQs
 
