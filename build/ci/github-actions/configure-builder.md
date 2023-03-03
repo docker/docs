@@ -7,6 +7,32 @@ keywords: ci, github actions, gha, buildkit, buildx
 This page contains instructions on configuring your BuildKit instances when
 using our [Setup Buildx Action](https://github.com/docker/setup-buildx-action){:target="blank" rel="noopener" class=""}.
 
+## Version pinning
+
+By default, the action will attempt to use the latest version of [Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""}
+available on the GitHub Runner (the build client) and the latest release of
+[BuildKit](https://github.com/moby/buildkit){:target="blank" rel="noopener" class=""} (the build server).
+
+To pin to a specific version of Buildx, use the `version` input. For example,
+to pin to Buildx v0.10.0:
+
+```yaml
+- name: Set up Docker Buildx
+  uses: docker/setup-buildx-action@v2
+  with:
+    version: v0.10.0
+```
+
+To pin to a specific version of BuildKit, use the `image` option in the
+`driver-opts` input. For example, to pin to BuildKit v0.11.0:
+
+```yaml
+- name: Set up Docker Buildx
+  uses: docker/setup-buildx-action@v2
+  with:
+    driver-opts: image=moby/buildkit:v0.11.0
+```
+
 ## BuildKit container logs
 
 To display BuildKit container logs when using the `docker-container` driver,
@@ -42,7 +68,7 @@ Logs will be available at the end of a job:
 
 ![BuildKit container logs](images/buildkit-container-logs.png)
 
-## Daemon configuration
+## BuildKit Daemon configuration
 
 You can provide a [BuildKit configuration](../../buildkit/toml-configuration.md)
 to your builder if you're using the [`docker-container` driver](../../drivers/docker-container.md)

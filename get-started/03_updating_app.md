@@ -83,7 +83,7 @@ To remove a container, you first need to stop it. Once it has stopped, you can r
 ### Remove a container using Docker Desktop
 
 1. Open Docker Desktop to the **Containers** view.
-2. Select the trash can icon under the **Actions** column for the old container that you want to delete.
+2. Select the trash can icon under the **Actions** column for the old, currently running container that you want to delete.
 3. In the confirmation dialog, select **Delete forever**.
 
 <hr>

@@ -4,7 +4,7 @@ keywords: get started, setup, orientation, quickstart, intro, concepts, containe
 description: Making sure you have more ideas of what you could do next with your application
 ---
 
-Although we're done with our workshop, there's still a LOT more to learn about containers!
+Although we're done with our get started guide, there's still a LOT more to learn about containers!
 We're not going to go deep-dive here, but here are a few other areas to look at next!
 
 ## Container orchestration
@@ -44,9 +44,9 @@ We recommend the video workshop from DockerCon 2022. Watch the video below or us
 
 ## Creating a container from scratch
 
- If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security has a fantastic talk in which she creates a container from scratch in Go. While the talk does not go into networking, using images for the filesystem, and other advanced topics, it gives a deep dive into how things are working.
+If you'd like to see how containers are built from scratch, Liz Rice from Aqua Security has a fantastic talk in which she creates a container from scratch in Go. While the talk does not go into networking, using images for the filesystem, and other advanced topics, it gives a deep dive into how things are working.
 
- <iframe src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/8fi7uSYlOdc" style="max-width: 100%; aspect-ratio: 16 / 9;" width="560" height="auto" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Language-specific guides
 

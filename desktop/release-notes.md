@@ -24,34 +24,107 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.17.0
+
+{% include release-date.html date="2023-02-27" %}
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### New
+
+- Docker Desktop now ships with Docker Scout. Pull and view analysis for images from Docker Hub and Artifactory repositories, get base image updates and recommended tags and digests, and filter your images on vulnerability information. To learn more, see [Docker Scout](../scout/index.md).
+- `docker scan` has been replaced by `docker scout`. See [Docker Scout CLI](../scout/index.md#docker-scout-cli), for more information.
+- You can now discover extensions that have been autonomously published in the Extensions Marketplace. For more information on self-published extensions, see [Marketplace Extensions](/extensions/marketplace.md).
+- **Container File Explorer** is available as an experimental feature. Debug the filesystem within your containers straight from the GUI.
+- You can now search for volumes in **Global Search**.
+
+### Upgrades
+
+- [Containerd v1.6.18](https://github.com/containerd/containerd/releases/tag/v1.6.18), which includes fixes for [CVE-2023-25153](https://github.com/advisories/GHSA-259w-8hf6-59c2) and [CVE-2023-25173](https://github.com/advisories/GHSA-hmfx-3pcx-653p).
+- [Docker Engine v20.10.23](https://docs.docker.com/engine/release-notes/20.10/#201023).
+- [Go 1.19.5](https://github.com/golang/go/releases/tag/go1.19.5)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where diagnostic gathering could hang waiting for a subprocess to exit.
+- Prevented the transparent HTTP proxy from mangling requests too much. Fixes Tailscale extension login, see [tailscale/docker-extension#49](https://github.com/tailscale/docker-extension/issues/49).
+- Fixed a bug in the transparent TLS proxy where the Server Name Indication field is not set.
+- Added support for subdomain match, CIDR match, `.` and `*.` in HTTP proxy exclude lists.
+- Ensured HTTP proxy settings are respected when uploading diagnostics.
+- Fixed fatal error when fetching credentials from the credential helper.
+- Fixed fatal error related to concurrent logging.
+- Improved the UI for Extension actions in the Marketplace.
+- Added new filters in the Extensions Marketplace. You can now filter extensions by category and reviewed status.
+- Added a way to report a malicious extension to Docker.
+- Updated Dev Environments to v0.2.2 with initial set up reliability & security fixes.
+- Added a whalecome survey for new users only.
+- The confirmation dialogs on the troubleshooting page are now consistent in style with other similar dialogs.
+- Fixed fatal error caused by resetting the Kubernetes cluster before it has started.
+- Implemented `docker import` for the containerd integration.
+- Fixed image tagging with an existing tag with the containerd integration.
+- Implemented the dangling filter on images for the containerd integration.
+- Fixed `docker ps` failing with containers whose images are no longer present with the containerd integration.
+
+#### For Mac
+
+- Fixed download of Registry Access Management policy on systems where the privileged helper tool `com.docker.vmnetd` is not installed.
+- Fixed a bug where `com.docker.vmnetd` could not be installed if `/Library/PrivilegedHelperTools` does not exist.
+- Fixed a bug where the "system" proxy would not handle "autoproxy" / "pac file" configurations.
+- Fixed a bug where vmnetd installation fails to read `Info.Plist` on case-sensitive file systems. The actual filename is `Info.plist`. Fixes [docker/for-mac#6677](https://github.com/docker/for-mac/issues/6677).
+- Fixed a bug where user is prompted to create the docker socket symlink on every startup. Fixes [docker/for-mac#6634](https://github.com/docker/for-mac/issues/6634).
+- Fixed a bug that caused the **Start Docker Desktop when you log in** setting not to work.
+- Fixed UDP connection tracking and `host.docker.internal`. Fixes [docker/for-mac#6699](https://github.com/docker/for-mac/issues/6699).
+- Improved kubectl symlink logic to respect existing binaries in `/usr/local/bin`. Fixes [docker/for-mac#6328](https://github.com/docker/for-mac/issues/6328).
+- Docker Desktop now automatically installs Rosetta when you opt-in to use it but have not already installed it.
+
+### For Windows
+
+- Added statical linking of WSL integration tools against `musl` so there is no need to install `alpine-pkg-glibc` in user distros.
+- Added support for running under cgroupv2 on WSL 2. This is activated by adding `kernelCommandLine = systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all` to your `%USERPROFILE%\.wslconfig` file in the `[wsl2]` section.
+- Fixed an issue that caused Docker Desktop to get stuck in the "starting" phase when in WSL 2 mode (introduced in 4.16).
+- Fixed Docker Desktop failing to start the WSL 2 backend when file system compression or encryption is enabled on `%LOCALAPPDATA%`.
+- Fixed Docker Desktop failing to report a missing or outdated (incapable of running WSL version 2 distros) WSL installation when starting.
+- Fixed a bug where opening in Visual Studio Code fails if the target path has a space.
+- Fixed a bug that causes `~/.docker/context` corruption and the error message "unexpected end of JSON input". You can also remove `~/.docker/context` to work around this problem.
+- Ensured the credential helper used in WSL 2 is properly signed. Related to [docker/for-win#10247](https://github.com/docker/for-win/issues/10247).
+- Fixed an issue that caused WSL integration agents to be terminated erroneously. Related to [docker/for-win#13202](https://github.com/docker/for-win/issues/13202).
+- Fixed corrupt contexts on start. Fixes [docker/for-win#13180](https://github.com/docker/for-win/issues/13180) and [docker/for-win#12561](https://github.com/docker/for-win/issues/12561).
+
+### For Linux
+
+- Added Docker Buildx plugin for Docker Desktop for Linux.
+- Changed compression algorithm to `xz` for RPM and Arch Linux distribution.
+- Fixed a bug that caused leftover files to be left in the root directory of the Debian package. Fixes [docker/for-linux#123](https://github.com/docker/desktop-linux/issues/123).
+
 ## 4.16.3
 
 {% include release-date.html date="2023-01-30" %}
 
 > Download Docker Desktop
 >
-> <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading14">
-        <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse14" aria-expanded="true" aria-controls="collapse14">
-            Windows
-            <i class="fa fa-chevron-down"></i>
-          </a>
-        </h5>
-      </div>
-      <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
-        <div class="panel-body">
-          <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Download file</a> 
-        <br>
-        <br>
-        <b>Checksum:</b> SHA-256 5f6db3cf5a2084fc7c584c90792f38a0caac91c4eed4f8653dde7bb8148517f1 
-        </div>
+> [Windows](https://desktop.docker.com/win/main/amd64/96739/Docker%20Desktop%20Installer.exe)
+
+<div class="panel-group" id="accordion10" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading10">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion10" href="#collapse10" aria-expanded="true" aria-controls="collapse10">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 5f6db3cf5a2084fc7c584c90792f38a0caac91c4eed4f8653dde7bb8148517f1</li>
       </div>
     </div>
-    </div>
->
-> For the latest release of Docker Desktop for Mac and Linux, see [4.16.2](#4162)
+  </div>
+</div>
 
 ### Bug fixes and enhancements
 
@@ -72,6 +145,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 > [Debian](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-amd64.deb) |
 > [RPM](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.rpm) |
 > [Arch package](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.pkg.tar.zst)
+
 <div class="panel-group" id="accordion13" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="heading13">
@@ -153,6 +227,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed `sudo` inside a container failing with a security related error for some images. Fixes [docker/for-mac/6675](https://github.com/docker/for-mac/issues/6675) and [docker/for-win/13161](https://github.com/docker/for-win/issues/13161).
 
 ## 4.16.0
+
 {% include release-date.html date="2023-01-12" %}
 
 > Download Docker Desktop
@@ -246,6 +321,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Calling `sudo` inside a container fails with a security related error for some images. See [docker/for-mac/6675](https://github.com/docker/for-mac/issues/6675) and [docker/for-win/13161](https://github.com/docker/for-win/issues/13161).
 
 ## 4.15.0
+
 {% include release-date.html date="2022-12-01" %}
 
 > Download Docker Desktop
@@ -282,7 +358,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- Substantial performance improvements for macOS users with the option of enabling the new VirtioFS file sharing technology. Available for macOS 12.5 and above. 
+- Substantial performance improvements for macOS users with the option of enabling the new VirtioFS file sharing technology. Available for macOS 12.5 and above.
 - Docker Desktop for Mac no longer needs to install the privileged helper process `com.docker.vmnetd` on install or on the first run. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
 - Added [WebAssembly capabilities](wasm/index.md). Use with the [containerd integration](containerd/index.md).
 - Improved the descriptions for beta and experimental settings to clearly explain the differences and how people can access them.
@@ -328,6 +404,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Disabled tray icon animations on Linux which fixes crashes for some users.
 
 ## 4.14.1
+
 {% include release-date.html date="2022-11-17" %}
 
 > Download Docker Desktop
@@ -374,6 +451,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug causing symlinks to not be created for the user if `/usr/local/lib` doesn't already exist. Fixes [docker/for-mac#6569](https://github.com/docker/for-mac/issues/6569)
 
 ## 4.14.0
+
 {% include release-date.html date="2022-11-10" %}
 
 > Download Docker Desktop
@@ -464,6 +542,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - For some users on Mac OS there is a known issue with the installer that prevents the installation of a new helper tool needed for the experimental vulnerability and package discovery feature in Docker Desktop. To fix this, a symlink is needed that can be created with the following command: `sudo ln -s /Applications/Docker.app/Contents/Resources/bin/docker-index /usr/local/bin/docker-index`
 
 ## 4.13.1
+
 {% include release-date.html date="2022-10-31" %}
 
 > Download Docker Desktop
@@ -520,6 +599,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Docker Desktop now functions on machines where PowerShell is disabled.
 
 ## 4.13.0
+
 {% include release-date.html date="2022-10-19" %}
 
 > Download Docker Desktop
@@ -616,6 +696,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug that prevented pushing images from the Dashboard
 
 ## 4.12.0
+
 {% include release-date.html date="2022-09-01" %}
 
 > Download Docker Desktop
@@ -725,7 +806,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug where versions displayed during an update could be incorrect. Fixes [for-win/issues#12822](https://github.com/docker/for-win/issues/12822).
 
 ## 4.11.1
- {% include release-date.html date="2022-08-05" %}
+
+{% include release-date.html date="2022-08-05" %}
 
 > Download Docker Desktop
 >
@@ -770,6 +852,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed `docker login` to private registries from WSL2 distro [docker/for-win#12871](https://github.com/docker/for-win/issues/12871)
 
 ## 4.11.0
+
 {% include release-date.html date="2022-07-28" %}
 
 > Download Docker Desktop
@@ -857,6 +940,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed bug related to setting up file shares with spaces in their path.
 
 ## 4.10.1
+
 {% include release-date.html date="2022-07-05" %}
 
 > Download Docker Desktop
@@ -902,6 +986,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug where the install command failed because paths were not initialized. Fixes [docker/for-mac#6384](https://github.com/docker/for-mac/issues/6384).
 
 ## 4.10.0
+
 {% include release-date.html date="2022-06-30" %}
 
 > Download Docker Desktop
@@ -1001,6 +1086,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Occasionally the Docker engine will restart during a `docker system prune`. This is a [known issue](https://github.com/moby/buildkit/pull/2177) in the version of buildkit used in the current engine and will be fixed in future releases.
 
 ## 4.9.1
+
 {% include release-date.html date="2022-06-16" %}
 
 > Download Docker Desktop
@@ -1019,6 +1105,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed blank dashboard screen. Fixes [docker/for-win#12759](https://github.com/docker/for-win/issues/12759).
 
 ## 4.9.0
+
 {% include release-date.html date="2022-06-02" %}
 
 > Download Docker Desktop
@@ -1075,6 +1162,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Changing ownership rights for files in bind mounts fails. This is due to the way we have implemented file sharing between the host and VM within which the Docker Engine runs. We aim to resolve this issue in the next release.
 
 ## 4.8.2
+
 {% include release-date.html date="2022-05-18" %}
 
 > Download Docker Desktop
@@ -1103,6 +1191,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Changing ownership rights for files in bind mounts fails. This is due to the way we have implemented file sharing between the host and VM within which the Docker Engine runs. We aim to resolve this issue in the next release.
 
 ## 4.8.1
+
 {% include release-date.html date="2022-05-09" %}
 
 > Download Docker Desktop
@@ -1132,6 +1221,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Changing ownership rights for files in bind mounts fails. This is due to the way we have implemented file sharing between the host and VM within which the Docker Engine runs. We aim to resolve this issue in the next release.
 
 ## 4.8.0
+
 {% include release-date.html date="2022-05-06" %}
 
 > Download Docker Desktop
@@ -1200,6 +1290,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Changing ownership rights for files in bind mounts fails. This is due to the way we have implemented file sharing between the host and VM within which the Docker Engine runs. We aim to resolve this issue in the next release.
 
 ## 4.7.1
+
 {% include release-date.html date="2022-04-19" %}
 
 > Download Docker Desktop
@@ -1220,6 +1311,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug that prevented using Windows container mode. Fixes [docker/for-win#12652](https://github.com/docker/for-win/issues/12652).
 
 ## 4.7.0
+
 {% include release-date.html date="2022-04-07" %}
 
 > Download Docker Desktop
@@ -1231,8 +1323,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 ### New
 
 - IT Administrators can now install Docker Desktop remotely using the command line.
-- Add  the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../engine/sbom/index.md).
-- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"}  for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
+- Add the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../engine/sbom/index.md).
+- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"} for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
 
 ### Updates
 
@@ -1268,6 +1360,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug in the WSL 2 integration that caused Docker commands to stop working after restarting Docker Desktop or after switching to Windows containers.
 
 ## 4.6.1
+
 {% include release-date.html date="2022-03-22" %}
 
 > Download Docker Desktop
@@ -1287,6 +1380,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Removed a false positive "vm is not running" error from self-diagnose. Fixes [docker/for-mac#6233](https://github.com/docker/for-mac/issues/6233).
 
 ## 4.6.0
+
 {% include release-date.html date="2022-03-14" %}
 
 > Download Docker Desktop
@@ -1362,6 +1456,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - After enabling VirtioFS, containers with processes running with different Unix user IDs may experience caching issues. For example if a process running as `root` queries a file and another process running as user `nginx` tries to access the same file immediately, the `nginx` process will get a "Permission Denied" error.
 
 ## 4.5.1
+
 {% include release-date.html date="2022-02-15" %}
 
 > Download Docker Desktop
@@ -1379,6 +1474,7 @@ If you are running Docker Desktop on Windows Home, installing 4.5.1 will switch 
 Alternatively, you can edit the Docker Desktop settings file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
 
 ## 4.5.0
+
 {% include release-date.html date="2022-02-10" %}
 
 > Download Docker Desktop
@@ -1431,7 +1527,8 @@ Alternatively, you can edit the Docker Desktop settings file located at `%APPDAT
 Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Desktop to use the Hyper-V backend instead of WSL 2. This means, Windows Home users will not be able to start Docker Desktop as WSL 2 is the only supported backend. To work around this issue, you must uninstall 4.5.0 from your machine and then download and install Docker Desktop 4.5.1 or a higher version. Alternatively, you can edit the Docker Desktop settings.json file located at `%APPDATA%\Docker\settings.json` and manually switch the value of the `wslEngineEnabled` field to `true`.
 
 ## 4.4.4
- {% include release-date.html date="2022-01-24" %}
+
+{% include release-date.html date="2022-01-24" %}
 
 > Download Docker Desktop
 >
@@ -1452,6 +1549,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 - The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
 
 ## 4.4.3
+
 {% include release-date.html date="2022-01-14" %}
 
 > Download Docker Desktop
@@ -1473,6 +1571,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 - The tips of the week show on top of the mandatory login dialog when an organization restriction is enabled via a `registry.json` file.
 
 ## 4.4.2
+
 {% include release-date.html date="22-01-13" %}
 
 > Download Docker Desktop
@@ -1500,7 +1599,6 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 Docker Desktop version 4.3.0 and 4.3.1 has a bug that may log sensitive information (access token or password) on the user's machine during login.
 This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files.
-
 
 ### Bug fixes and enhancements
 

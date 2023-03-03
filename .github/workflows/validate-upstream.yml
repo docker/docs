@@ -16,6 +16,9 @@ on:
       data-files-folder:
         required: false
         type: string
+      data-files-placeholder-folder:
+        required: false
+        type: string
 
 jobs:
   run:
@@ -73,7 +76,41 @@ jobs:
         if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
         with:
           name: ${{ inputs.data-files-id }}
-          path: ./_data/${{ inputs.data-files-folder }}
+          path: /tmp/_data/${{ inputs.data-files-folder }}
+      -
+        # Copy data files from /tmp/_data/${{ inputs.data-files-folder }} to
+        # _data/${{ inputs.data-files-folder }}. If data-files-placeholder-folder
+        # is set, then check if a placeholder file exists for each data file in
+        # that folder. If not, then creates a placeholder file with the same
+        # name as the data file, but with a .md extension.
+        name: Copy data files
+        if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const dataFilesPlaceholderFolder = `${{ inputs.data-files-placeholder-folder }}`;
+            const globber = await glob.create(`/tmp/_data/${{ inputs.data-files-folder }}/*.yaml`);
+            for await (const yamlSrcPath of globber.globGenerator()) {
+              const yamlSrcFilename = path.basename(yamlSrcPath);
+              const yamlDestPath = path.join('_data', `${{ inputs.data-files-folder }}`, yamlSrcFilename);
+              const placeholderPath = path.join(dataFilesPlaceholderFolder, yamlSrcFilename.replace(/^docker_/, '').replace(/\.yaml$/, '.md'));
+              if (dataFilesPlaceholderFolder !== '' && !fs.existsSync(placeholderPath)) {
+                const placeholderContent = `---
+            datafolder: ${{ inputs.data-files-folder }}
+            datafile: ${yamlSrcFilename.replace(/\.[^/.]+$/, '')}
+            title: ${yamlSrcFilename.replace(/\.[^/.]+$/, "").replaceAll('_', ' ')}
+            ---
+            {% include cli.md datafolder=page.datafolder datafile=page.datafile %}`;
+                await core.group(`creating ${placeholderPath}`, async () => {
+                  core.info(placeholderContent);
+                });
+                await fs.writeFileSync(placeholderPath, placeholderContent);
+              }
+              core.info(`${yamlSrcPath} => ${yamlDestPath}`);
+              await fs.copyFileSync(yamlSrcPath, yamlDestPath);
+            }
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2

@@ -9,12 +9,12 @@ application stack. The following question often arises - "Where will MySQL run? 
 container or run it separately?" In general, **each container should do one thing and do it well.** A few
 reasons:
 
-- There's a good chance you'd have to scale APIs and front-ends differently than databases
-- Separate containers let you version and update versions in isolation
+- There's a good chance you'd have to scale APIs and front-ends differently than databases.
+- Separate containers let you version and update versions in isolation.
 - While you may use a container for the database locally, you may want to use a managed service
   for the database in production. You don't want to ship your database engine with your app then.
 - Running multiple processes will require a process manager (the container only starts one process), 
-  which adds complexity to container startup/shutdown
+  which adds complexity to container startup/shutdown.
 
 And there are more reasons. So, we will update our application to work like this:
 
