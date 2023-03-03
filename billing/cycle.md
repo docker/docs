@@ -4,20 +4,26 @@ description: how to change yor billing cycle in Docker Hub
 keywords: billing, cycle, payments, 
 ---
 
-You can pay for your personal account or organization's subscription on a monthly or yearly billing cycle.
+You can pay for a Personal, Pro, or Team subscription on a monthly or yearly billing cycle.
 
-When you change the billing cycle's duration, your subscription is moved to your new billing cycle on your next billing date. To check your billing date, see [FAQs](faqs.md).
+If you currently have a monthly billing cycle, you can choose to switch to an annual billing cycle. 
 
-To change your billing cycle:
+When you change the billing cycle's duration, the subscription moves to the new billing cycle on the next billing date. To check the billing date, see [FAQs](faqs.md).
 
-1. ## Switch from a monthly subscription to an annual subscription
+## Personal account
 
-To upgrade from a monthly subscription to an annual subscription:
+1. Select **Your Account** in the top-right corner of Docker Hub.
+2. From the drop-down menu select **Billing**.
+3. In the bottom-right of the **Plan** tab, select **Switch to annual billing**.
+4. Review the information displayed on the **Change to an Annual subscription** page and select **Accept Terms and Purchase** to confirm.
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account as an organization owner or with your personal account.
-2. Open the drop-down menu next to your username in the top-right corner and select **Billing**.
-3. Select your personal account or organization from the left-hand menu and select the **Payment Methods** tab.
-4. Select **switch to annual billing**
-5. Review the information displayed on the **Change to an Annual subscription** page and select **Accept Terms and Purchase** to confirm.
+## Organization 
 
-You can view the confirmation of the upgrade with an invoice containing details about your new subscription, entitlements, and the total cost on the **Billing** page.
+> **Note**
+>
+> You must be an owner of the organization to make changes to the payment information.
+
+1. In Docker Hub, select **Organizations**.
+2. Select the organization that you want to change the payment method for. 
+3. In the bottom-right of the **Plan** tab, select **Switch to annual billing**. 
+4. Review the information displayed on the **Change to an Annual subscription** page and select **Accept Terms and Purchase** to confirm.
