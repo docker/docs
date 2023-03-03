@@ -1877,7 +1877,7 @@ manuals:
   - path: /billing/
     title: Overview
   - path: /billing/payment-method/
-    title: Change your payment information
+    title: Add or update a payment method
   - path: /billing/details/
     title: Update your contact information
   - path: /billing/history/

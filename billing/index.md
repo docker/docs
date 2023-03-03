@@ -14,7 +14,7 @@ Use the resources in this section to manage your billing and payment settings fo
              <div class="component-icon">
                  <a href="/billing/payment-method/"><img src="/assets/images/payment-info.svg" alt="payment info" width="70" height="70"></a>
              </div>
-                 <h2 id="payment infor"><a href="/billing/payment-method/">Change your payment information</a></h2>
+                 <h2 id="payment infor"><a href="/billing/payment-method/">Add or update a payment method</a></h2>
         </div>
       </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
@@ -22,7 +22,7 @@ Use the resources in this section to manage your billing and payment settings fo
             <div class="component-icon">
                 <a href="/billing/details/"><img src="/assets/images/contact.svg" alt="billing-info" width="70" height="70"></a>
             </div>
-                <h2 id="billing history"><a href="/billing/details/">Update your contact information</a></h2>
+                <h2 id="billing history"><a href="/billing/details/">Update the contact information</a></h2>
             </div>
         </div>
   </div>  
@@ -33,7 +33,7 @@ Use the resources in this section to manage your billing and payment settings fo
              <div class="component-icon">
                  <a href="/billing/history/"><img src="/assets/images/billing-history.svg" alt="Billing history" width="70" height="70"></a>
                  </div>
-                 <h2 id="billing history"><a href="/billing/history/">View your billing history</a></h2>
+                 <h2 id="billing history"><a href="/billing/history/">View billing history</a></h2>
             </div>
         </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
