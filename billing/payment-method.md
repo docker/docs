@@ -22,7 +22,7 @@ You can add a payment method or update your account's existing payment method at
 
 > **Note**
 >
-> You must be an owner of the organization to make changes to the payment information.
+> You must be an organization owner to make changes to the payment information.
 
 1. In Docker Hub, select **Organizations**.
 2. Select the organization that you want to change the payment method for. 

@@ -10,7 +10,7 @@ You can view the billing history and download past invoices for a personal accou
 
 1. Select **Your Account** in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
-3. Select the **Payment Methods** tab and then **Billing history**.
+3. Select the **Payment Methods** tab and then **Billing History**.
     The page displays a list of past invoices. 
 
 From here you can choose to:
@@ -27,7 +27,7 @@ From here you can choose to:
 
 1. In Docker Hub, select **Organizations**.
 2. Select the organization that you want to change the payment method for. 
-3. Select the **Payment Methods** tab and then **Billing history**.
+3. Select the **Payment Methods** tab and then **Billing History**.
     The page displays a list of past invoices. 
 
 From here you can choose to:
