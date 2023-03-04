@@ -198,13 +198,14 @@ footer {
 .footer_social_nav ul li {
     float: left;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer_social_nav ul li:before {
     color: $white;
     position: absolute;
-    top: 10px;
-    left: 10px;
 }
 
 .footer_social_nav ul li+li {
