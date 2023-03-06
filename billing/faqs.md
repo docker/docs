@@ -35,8 +35,8 @@ Once the grace period is over and the invoice is still not paid, the subscriptio
 Docker Hub sends the following billing-related emails:
 
 - Confirmation of a new subscription.
-- Every time an invoice is paid. 
-- If the credit or debit card payment fails. 
-- If the credit or debit card on file is expiring soon or has expired. 
+- Confirmation of paid invoices. 
+- Notifications of credit or debit card payment failures. 
+- Notifications of credit or debit card expiration. 
 - Confirmation of a cancelled subscription 
 - Reminders of subscription renewals for annual subscribers. This is sent 14 days before the renewal date. 

@@ -6,7 +6,7 @@ keywords: billing, cycle, payments,
 
 You can pay for a Pro or Team subscription on a monthly or yearly billing cycle.
 
-If you currently have a monthly billing cycle, you can choose to switch to an annual billing cycle. Note that you are unable to switch from an annual billing cycle to monthly. 
+If you currently have a monthly billing cycle, you can choose to switch to an annual billing cycle. Note that it's not possible to switch from an annual billing cycle to monthly. 
 
 When you change the billing cycle's duration:
 - The subscription moves to the new billing cycle on the next billing date. To check the billing date, see [FAQs](faqs.md#where-can-i-view-my-billing-date).
