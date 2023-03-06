@@ -154,7 +154,7 @@ fetch-remote:
   - repo: "https://github.com/docker/cli"
     default_branch: "master"
     # FIXME(thaJeztah): change to 23.0 release branch, once created.
-    ref: "master"
+    ref: "23.0"
     paths:
       - dest: "engine/extend"
         src:
