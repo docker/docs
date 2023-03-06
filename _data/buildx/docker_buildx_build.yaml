@@ -845,8 +845,13 @@ examples: |-
 
     Set the target platform for the build. All `FROM` commands inside the Dockerfile
     without their own `--platform` flag will pull base images for this platform and
-    this value will also be the platform of the resulting image. The default value
-    will be the current platform of the buildkit daemon.
+    this value will also be the platform of the resulting image.
+
+    The default value is the platform of the BuildKit daemon where the build runs.
+    The value takes the form of `os/arch` or `os/arch/variant`. For example,
+    `linux/amd64` or `linux/arm/v7`. Additionally, the `--platform` flag also supports
+    a special `local` value, which tells BuildKit to use the platform of the BuildKit
+    client that invokes the build.
 
     When using `docker-container` driver with `buildx`, this flag can accept multiple
     values as an input separated by a comma. With multiple values the result will be
