@@ -29,3 +29,14 @@ If your subscription payment fails, there is a grace period of 15 days, includin
 Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt. 
 
 Once the grace period is over and the invoice is still not paid, the subscription is downgraded to a free plan and all paid features are disabled. 
+
+## What billing-related emails will I receive from Docker Hub?
+
+Docker Hub sends the following billing-related emails:
+
+- Confirmation of a new subscription.
+- Confirmation of paid invoices. 
+- Notifications of credit or debit card payment failures. 
+- Notifications of credit or debit card expiration. 
+- Confirmation of a cancelled subscription 
+- Reminders of subscription renewals for annual subscribers. This is sent 14 days before the renewal date. 

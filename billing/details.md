@@ -6,7 +6,7 @@ keywords: payments, billing, subscription, contact
 
 Find information on how to update the contact information for your personal account or for an organization. 
 
-The email address provided is where Docker sends all invoices and other billing-related communication.
+The contact information provided appears on all your billing invoices. The email address provided is where Docker sends all invoices and other billing-related communication. For more information on the billing emails you recieve, see [FAQs](faqs.md#what-billing-related-emails-will-i-receive-from-docker-hub)
 
 ## Personal account
 
