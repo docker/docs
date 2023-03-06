@@ -18,7 +18,7 @@ command. A single Docker Hub repository can hold many Docker images (stored as
 To create a repository, sign into Docker Hub, select **Repositories** then
 **Create Repository**:
 
-![Create repo](../images/repos-create.png)
+![Create repository](../images/repos-create.png)
 
 When creating a new repository:
 
@@ -32,6 +32,7 @@ When creating a new repository:
   > You can't rename a Docker Hub repository once it's created.
 
 * The description can be up to 100 characters and used in the search result.
+* The maximum logo size is 1000x1000.
 * You can link a GitHub or Bitbucket account now, or choose to do it later in
   the repository settings.
 * You can set your default visibility to public or private for your account.
@@ -40,7 +41,7 @@ When creating a new repository:
   >
   > For organizations creating a new repository, it's recommended you select **Private**.
 
-![Setting page for creating a repo](../images/repo-create-details.png)
+![Setting page for creating a repository](../images/repo-create-details.png)
 
 After you select **Create**, you can start using `docker push` to push
 images to this repository.
@@ -53,7 +54,7 @@ To create a private repository, navigate to Docker Hub and select **Repositories
 >
 > To update your public repository to private, navigate to your repository, select **Settings** and **Make private**.
 
-![Create a private repo](/docker-hub/images/repo-create-private.png){: style="max-width: 60%"}
+![Create a private repository](/docker-hub/images/repo-create-private.png){: style="max-width: 60%"}
 
 ## Deleting a repository
 
