@@ -44,15 +44,15 @@ You must make sure you have [configured SSO](../single-sign-on/index.md) before 
 
 Follow the instructions provided by your IdP:
 
-- [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm)
-- [Azure AD](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad#step-2-configure-the-enterprise-application)
-- [OneLogin](https://developers.onelogin.com/scim/create-app)
+- [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm){: target="_blank" rel="noopener" class="_" }
+- [Azure AD](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad#step-2-configure-the-enterprise-application){: target="_blank" rel="noopener" class="_" }
+- [OneLogin](https://developers.onelogin.com/scim/create-app){: target="_blank" rel="noopener" class="_" }
 
 ### Optional step 
 You also have the option to use group mapping within your IdP. To take advantage of group mapping, follow the instructions provided by your IdP:
-- [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-groups.htm)
-- [Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes)
-- [OneLogin](https://developers.onelogin.com/scim/create-app)
+- [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm){: target="_blank" rel="noopener" class="_" }
+- [Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes){: target="_blank" rel="noopener" class="_" }
+- [OneLogin](https://developers.onelogin.com/scim/create-app){: target="_blank" rel="noopener" class="_" }
 
 Once complete, a user who signs in to Docker through SSO is automatically added to the organizations and teams mapped in the IdP.
 
