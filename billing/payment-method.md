@@ -4,9 +4,13 @@ description: Information on how to add or update a payment method in Docker Hub
 keywords: payments, billing, subscription
 ---
 
-Find information on how to add or update edit a payment method for your personal account or for an organization. 
+Find information on how to add or update a payment method for your personal account or for an organization. 
 
 You can add a payment method or update your account's existing payment method at any time.
+
+>**Important**
+>
+> If you want to remove all payment methods, you must first downgrade your subscription to a free plan. See [Downgrade](../subscription/downgrade.md), for more information. 
 
 ## Personal account
 
@@ -16,7 +20,7 @@ You can add a payment method or update your account's existing payment method at
 4. In the **Payment information** section, enter the new payment method. 
     The screen refreshes and displays your new payment information alongside your existing information.
 5. Select **Make Default** to ensure that your new payment method applies to all purchases and subscriptions. 
-6. Optional: Remove your existing payment method by selecting the **X** icon. 
+6. Optional: Remove your existing payment method by selecting the **X** icon.
 
 ## Organization 
 
