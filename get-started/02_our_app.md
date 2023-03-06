@@ -135,9 +135,37 @@ Now that you have an image, you can run the application in a [container](../get-
 
 At this point, you should have a running todo list manager with a few items, all built by you.
 
-If you take a quick look at your Docker Dashboard, you should see at least one container running that is using the `getting-started` image and on port `3000`.
+If you take a quick look at your containers, you should see at least one container running that is using the `getting-started` image and on port `3000`. To see your containers, you can use the CLI or Docker Desktop's graphical interface.
 
-![Docker Dashboard with tutorial and app containers running](images/dashboard-two-containers.png)
+   <ul class="nav nav-tabs">
+     <li class="active"><a data-toggle="tab" data-target="#cli">CLI</a></li>
+     <li><a data-toggle="tab" data-target="#gui">Docker Desktop</a></li>
+   </ul>
+   <div class="tab-content">
+   <div id="cli" class="tab-pane fade in active" markdown="1">
+
+Run the following `docker ps` command in a terminal to list your containers.
+
+```console
+$ docker ps
+```
+Output similar to the following should appear.
+```console
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+df784548666d        getting-started     "docker-entrypoint.s…"   2 minutes ago       Up 2 minutes        0.0.0.0:3000->3000/tcp   priceless_mcclintock
+```
+
+<hr>
+</div>
+<div id="gui" class="tab-pane fade" markdown="1">
+
+In Docker Desktop, select the **Containers** tab to see a list of your containers.
+
+![Docker Desktop with get-started container running](images/dashboard-two-containers.png)
+
+<hr>
+</div>
+</div>
 
 ## Next steps
 

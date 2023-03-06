@@ -1821,19 +1821,6 @@ manuals:
     - path: /scout/artifactory/
       title: Artifactory integration
 
-- sectiontitle: Docker subscription
-  section:
-  - path: /subscription/
-    title: Overview
-  - path: /subscription/upgrade/
-    title: Upgrade
-  - path: /subscription/downgrade/
-    title: Downgrade
-  - path: /subscription/add-seats/
-    title: Add seats
-  - path: /subscription/remove-seats/
-    title: Remove seats
-
 - sectiontitle: Administration
   section:
   - sectiontitle: Onboarding
@@ -1870,7 +1857,6 @@ manuals:
     title: Manage members
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign-in
-
   - sectiontitle: Single Sign-on
     section:
       -  path: /single-sign-on/
@@ -1889,6 +1875,34 @@ manuals:
     title: Domain audit
   - path: /docker-hub/image-access-management/
     title: Image Access Management
+
+- sectiontitle: Billing
+  section:
+  - path: /billing/
+    title: Overview
+  - path: /billing/payment-method/
+    title: Add or update a payment method
+  - path: /billing/details/
+    title: Update the contact information
+  - path: /billing/history/
+    title: View your billing history
+  - path: /billing/cycle/
+    title: Change your billing cycle
+  - path: /billing/faqs/
+    title: FAQs
+
+- sectiontitle: Subscription
+  section:
+  - path: /subscription/
+    title: Overview
+  - path: /subscription/upgrade/
+    title: Upgrade
+  - path: /subscription/downgrade/
+    title: Downgrade
+  - path: /subscription/add-seats/
+    title: Add seats
+  - path: /subscription/remove-seats/
+    title: Remove seats
 
 - title: Security announcements
   path: /security/

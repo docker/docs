@@ -112,7 +112,7 @@ You can now specify any email address to receive billing-related emails for your
 
 To change the email address receiving billing-related emails, log into Docker Hub and navigate to the **Billing** tab of your organization. Select **Payment Methods** > **Contact Information**. Enter the new email address that you'd like to use in the **Email** field. Click **Update** for the changes to take effect.
 
-For details on how to update your billing information, see [Update billing information](../subscription/upgrade.md#update-billing-information).
+For details on how to update your billing information, see [Update billing information](../billing/index.md).
 
 ## 2021-03-22
 
