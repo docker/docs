@@ -11,12 +11,16 @@ title: Advanced image analysis
 
 Advanced image analysis is a Docker Scout feature for Docker Hub.
 
-When you activate Advanced image analysis for a repository, new tags are
-automatically analyzed when you push to that repository. Advanced image analysis
-is more than point-in-time scanning - your analysis gets reevaluated
+When you activate advanced image analysis for a repository, Scout analyzes new tags
+automatically when you push to that repository. Advanced image analysis
+is more than point-in-time scanning, the analysis gets reevaluated
 continuously, meaning you don't need to re-scan the image to see an updated
-vulnerability report. Information about packages and CVEs displays on the image
-tag page on Docker Hub, as well as in the image details view in Docker Desktop.
+vulnerability report. 
+
+The **General** tab of an image page on Docker Hub shows a summary of common vulnerabilities and
+exposures (CVEs) for the image in the **Tags** section. The **Tags** tab shows all analysis results.
+
+The **Images** section of Docker Desktop shows an overview of CVEs for an image and the details view shows all ulnerabilities.
 
 Advanced image analysis supports the following package ecosystems:
 
