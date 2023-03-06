@@ -9,9 +9,9 @@ direct_from:
 
 This section is for administrators who want to enable System for Cross-domain Identity Management (SCIM) 2.0 for their business. It is available for Docker Business customers. 
 
-SCIM provides automated user provisioning and de-provisioning for your Docker organization or company through your identity provider (IdP).  Once you enable SCIM in your IdP, any user assigned to the Docker application in the IdP, is automatically provisioned in Docker Hub and added to the organization or company. 
+SCIM provides automated user provisioning and de-provisioning for your Docker organization or company through your identity provider (IdP).  Once you enable SCIM in Docker Hub and your IdP, any user assigned to the Docker application in the IdP is automatically provisioned in Docker Hub and added to the organization or company. 
 
-Similarly, if a user gets unassigned from the Docker application in the IdP, the user is removed from the organization or company in Docker Hub. SCIM also synchronizes changes made to users’ attributes in the IdP, for instance the user’s first name and last name.
+Similarly, if a user gets unassigned from the Docker application in the IdP, the user is removed from the organization or company in Docker Hub. SCIM also synchronizes changes made to a user's attributes in the IdP, for instance the user’s first name and last name.
 
 The following provisioning features are supported:
  - Creating new users
@@ -48,12 +48,13 @@ Follow the instructions provided by your IdP:
 - [Azure AD](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad#step-2-configure-the-enterprise-application)
 - [OneLogin](https://developers.onelogin.com/scim/create-app)
 
+### Optional step 
 You also have the option to use group mapping within your IdP. To take advantage of group mapping, follow the instructions provided by your IdP:
 - [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-groups.htm)
 - [Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes)
 - [OneLogin](https://developers.onelogin.com/scim/create-app)
 
-Once completed, when a user signs in to Docker through SSO they are automatically added to the organizations and teams mapped in the IdP.
+Once complete, a user who signs in to Docker through SSO is automatically added to the organizations and teams mapped in the IdP.
 
 ## Disable SCIM
 

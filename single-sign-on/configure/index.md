@@ -64,18 +64,18 @@ Follow the steps on this page to configure SSO for your organization or company.
 
 7. Review your summary and select **Create Connection**.
 
-The SSO connection is now created. You can continue to set up SSO Group Mapping and SCIM without enforcing SSO log-in.
+The SSO connection is now created. You can continue to set up [SSO Group Mapping and SCIM](../../docker-hub/scim.md) without enforcing SSO log-in.
 
-## Step three: Test your SSO configuration
+## Optional step three: Test your SSO configuration
 
-After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you sign in to Docker Hub using an incognito browser. Login using your domain email address. You will then get redirected to your identity provider’s login page to authenticate.
+After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you sign in to Docker Hub using an incognito browser. Log in to Docker Hub using your domain email address. You are then redirected to your IdP's login page to authenticate.
 
 1. Authenticate through email instead of using your Docker ID, and test the login process.
 2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.
 
 ## Optional step four: Enforce SSO log-in in Docker Hub
 
-1. In the **Single Sign-On Connections** table, select the Action icon and **Enforce Single Sign-on**.
+1. In the **Single Sign-On Connections** table, select the **Action** icon and then **Enforce Single Sign-on**.
     When SSO is enforced, your users are unable to modify their email address and password, convert a user account to an organization, or set up 2FA through Docker Hub. You must enable 2FA through your IdP.
 2. Continue with the on-screen instructions and verify that you’ve completed the tasks. 
 3. Select **Turn on enforcement** to complete. 

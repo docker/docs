@@ -14,7 +14,7 @@ You can convert an existing user account to an organization. You might want to d
 
 Before you convert a user account to an organization, ensure that you have completed the following steps:
 
-1. The user account that you wish to convert must not be a member of any teams, organizations, or company. You must remove the account from all teams, organizations, or companies.
+1. The user account that you wish to convert must not be a member of a company or any teams or organizations. You must remove the account from all teams, organizations, or the company.
 
     Go to **Organizations**, select an organization from the list, and then click the Leave organization arrow next to your username in the members list.
 
@@ -26,7 +26,7 @@ Before you convert a user account to an organization, ensure that you have compl
 
 ## Convert a Community account into an organization
 
-1. Ensure you have removed your user account from all teams, organizations, or companies and that you have a new Docker ID before you convert an account. See the [Prerequisites](#prerequisites) section for details.
+1. Ensure you have removed your user account from any company or teams or organizations. Also make sure that you have a new Docker ID before you convert an account. See the [Prerequisites](#prerequisites) section for details.
 
 2. Click on your account name in the top navigation, then go to your **Account Settings**.
 
@@ -48,7 +48,7 @@ Before you convert a user account to an organization, ensure that you have compl
 will be migrated to a Team plan and will be charged $35 per month for 5 seats. For more information,
 see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
-1. Ensure you have removed your user account from all teams, organizations, and companies, and that you have a new Docker ID before you convert an account. See the [Prerequisites](#prerequisites) section for details.
+1. Ensure you have removed your user account from any company or teams or organizations. Also make sure that you have a new Docker ID before you convert an account. See the [Prerequisites](#prerequisites) section for details.
 
 2. Click on your account name in the top navigation bar, then go to your **Account Settings**.
 
