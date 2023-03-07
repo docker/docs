@@ -12,8 +12,8 @@ Follow the steps on this page to configure SSO for your organization or company.
 
 ## Step one: Add and verify your domain
 
-1. Sign in to Docker Hub, navigate to the **Organization** page and select your organization or company.
-2. Select **Settings**. 
+1. Sign in to Docker Hub, navigate to the **Organizations** page and select your organization or company.
+2. Select **Settings**. If you are setting up SSO for an organization you then need to select **Security**. 
 3. Select **Add Domain** and continue with the on-screen instructions to add the TXT Record Value to your domain name system (DNS).
 
     >**Note**
@@ -37,7 +37,7 @@ Follow the steps on this page to configure SSO for your organization or company.
 {: .important}
 
 
-1. Once your domain is verified, in the **Single Sign-on Connections** table select **Create Connections**, and create a name for the connection. 
+1. Once your domain is verified, in the **Single Sign-on Connection** table select **Create Connections**, and create a name for the connection. 
 
     > **Note**
     >

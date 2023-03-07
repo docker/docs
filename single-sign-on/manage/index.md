@@ -27,7 +27,7 @@ title: Manage SSO
 
 ### Connect an organization 
 
-1. In the **Single Sign-on Connections** table, select the **Action** icon and then **Edit connection**.
+1. In the **Single Sign-On Connection** table, select the **Action** icon and then **Edit connection**.
 2. Select **Next** to navigate to the section where connected organizations are listed.
 3. In the **Organizations** drop-down, select the organization to add to the connection.
 4. Select **Next** to confirm or change the default organization and team provisioning.
@@ -35,7 +35,7 @@ title: Manage SSO
 
 ### Remove an organization
 
-1. In the **Single Sign-on Connection** table, select the **Action** icon and then **Edit connection**.
+1. In the **Single Sign-On Connection** table, select the **Action** icon and then **Edit connection**.
 2. Select **Next** to navigate to the section where connected organizations are listed.
 3. In the **Organizations** drop-down, select **Remove** to remove the connection.
 4. Select **Next** to confirm or change the default organization and team provisioning.
@@ -51,7 +51,7 @@ title: Manage SSO
 
 ### Delete a connection
 
-1. In the **Single Sign-On Connections** table, select the **Action** icon.
+1. In the **Single Sign-On Connection** table, select the **Action** icon.
 2. Select **Delete** and **Delete connection**.
 3. Continue with the on-screen instructions.
 

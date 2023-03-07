@@ -30,7 +30,7 @@ A maximum of 10 company owners can be added to a single company account.
 
 ### What permission does the company owner have in the associated/nested organizations?
 
-Company owners can navigate to the **Organization** page to view all their nested organizations in a single location. They can also view or edit organization members and change SSO and SCIM settings. Changes to company settings impact all users in each organization under the company.
+Company owners can navigate to the **Organizations** page to view all their nested organizations in a single location. They can also view or edit organization members and change SSO and SCIM settings. Changes to company settings impact all users in each organization under the company.
 
 ### What features are supported at the company level?
 

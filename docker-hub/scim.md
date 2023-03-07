@@ -36,9 +36,10 @@ You must make sure you have [configured SSO](../single-sign-on/index.md) before 
 
 ### Step one: Enable SCIM in Docker Hub
 
-1. In the **Single Sign-On Connections** table, select the **Actions** icon and **Setup SCIM**.
-
-2. Copy the **SCIM Base URL** and **API Token** and paste the values into your IdP.
+1. Sign in to Docker Hub, navigate to the **Organizations** page and select your organization or company.
+2. Select **Settings**. If you are setting up SCIM for an organization you then need to select **Security**. 
+3. n the **Single Sign-On Connection** table, select the **Actions** icon and **Setup SCIM**.
+4. Copy the **SCIM Base URL** and **API Token** and paste the values into your IdP.
 
 ### Step two: Enable SCIM in your IdP
 
@@ -60,5 +61,5 @@ Once complete, a user who signs in to Docker through SSO is automatically added 
 
 If SCIM is disabled, any user provisioned through SCIM will remain in the organization. Future changes for your users will not sync from your IdP. User de-provisioning is only possible when manually removing the user from the organization.
 
-1. In the **Single Sign-On Connections** table, select the **Actions** icon
+1. In the **Single Sign-On Connection** table, select the **Actions** icon
 2. Select **Disable SCIM**.
