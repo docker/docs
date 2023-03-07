@@ -7,7 +7,12 @@ title: Advanced image analysis
 > **Note**
 >
 > Docker Scout is an [early access](../release-lifecycle.md#early-access-ea)
-> product, and requires a Docker Pro, Team, or Business subscription.
+> product, and requires a Docker Pro, Team, or Business subscription..
+>
+> If you're interested in this integration for your organization and want to
+> learn more, get in touch by filling out the contact form on the
+> [Docker Scout product page](https://docker.com/products/docker-scout){:
+> target="\_blank" rel="noopener" }.
 
 Advanced image analysis is a Docker Scout feature for Docker Hub.
 
@@ -94,7 +99,7 @@ To view the vulnerability report on Docker Hub:
    This tab displays a deep-dive view of the image's packages and any known vulnerabilities.
 
    For more information about how to interpret the vulnerability report, see
-   [Image details view](./image-details-view.md)
+   [Image details view](./image-details-view.md).
 
 Expanding any of the packages in the list shows you more information about the
 vulnerabilities that affect a given package. Expanding the vulnerability shows a summary of it's details and
