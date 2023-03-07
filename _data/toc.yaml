@@ -1836,17 +1836,7 @@ manuals:
     - path: /docker-hub/creating-companies/
       title: Overview
     - path:  /docker-hub/company-owner/
-      title: Company owners
-    - path:  /docker-hub/domains/
-      title: Domains
-    - path:  /docker-hub/sso-connection/
-      title: SSO connection
-    - path:  /docker-hub/group-mapping/
-      title: Group mapping
-    - path:  /docker-hub/company-scim/
-      title: SCIM
-    - path:  /docker-hub/enforcing-sso/
-      title: Enforce SSO Login
+      title: Manage company owners
     - path: /docker-hub/company-faqs/
       title: FAQs
   - path: /docker-hub/orgs/
