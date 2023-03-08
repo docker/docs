@@ -17,6 +17,7 @@ the behavior of features related to building:
 | [BUILDX_BUILDER](#buildx_builder)                                 | String            | Specify the builder instance to use.                 |
 | [BUILDX_CONFIG](#buildx_config)                                   | String            | Specify location for configuration, state, and logs. |
 | [BUILDX_EXPERIMENTAL](#buildx_experimental)                       | Boolean           | Turn on experimental features.                       |
+| [BUILDX_GIT_CHECK_DIRTY](#buildx_git_check_dirty)                 | Boolean           | Enable dirty Git checkout detection.                 |
 | [BUILDX_GIT_INFO](#buildx_git_info)                               | Boolean           | Remove Git information in provenance attestations.   |
 | [BUILDX_GIT_LABELS](#buildx_git_labels)                           | String \| Boolean | Add Git provenance labels to images.                 |
 | [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations) | Boolean           | Turn off default provenance attestations.            |
@@ -115,6 +116,19 @@ Usage:
 $ export BUILDX_EXPERIMENTAL=1
 ```
 
+## BUILDX_GIT_CHECK_DIRTY
+
+_Introduced in [Buildx v0.10.4](../release-notes.md#0104)_
+
+When set to true, checks for dirty state in source control information for
+[provenance attestations](../attestations/slsa-provenance.md).
+
+Usage:
+
+```console
+$ export BUILDX_GIT_CHECK_DIRTY=1
+```
+
 ## BUILDX_GIT_INFO
 
 _Introduced in [Buildx v0.10.0](../release-notes.md#0100)_
@@ -159,7 +173,7 @@ If the repository is in a dirty state, the `revision` gets a `-dirty` suffix.
 
 ## BUILDX_NO_DEFAULT_ATTESTATIONS
 
-_Introduced in Buildx v0.10.4_
+_Introduced in [Buildx v0.10.4](../release-notes.md#0104)_
 
 By default, BuildKit v0.11 and later adds
 [provenance attestations](../attestations/slsa-provenance.md) to images you
