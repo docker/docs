@@ -50,6 +50,16 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
   use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
 
+## Installation 
+
+On the **Installation** tab, you can reconfigure your initial installation settings:
+
+- **Choose location for Docker CLI tools**. you can choose either the default location, or manually install under `$HOME/.docker/bin`. For more information, see [TODO]()
+
+- **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks)
+
+- **Enable privileged port mapping (Requires password)**. Starts the privileged ports that are between 1 and 1024. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#binding-privileged-ports)
+
 ## Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies,
