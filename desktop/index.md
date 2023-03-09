@@ -1,6 +1,6 @@
 ---
-description: Docker Desktop overview
-keywords: Docker Desktop, Docker, features, GUI, linux, mac, windows
+description: Explore more of Docker Desktop, what it has to offer, and its key features. Take the next step by downloading or find additional resources.
+keywords: how to use docker desktop, what is docker desktop used for, what does docker desktop do, using docker desktop
 title: Docker Desktop
 redirect_from:
 - /desktop/opensource/
@@ -10,16 +10,12 @@ redirect_from:
 - /docker-for-windows/opensource/
 ---
 
-> **Docker Desktop terms**
->
-> Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) requires a paid
-> subscription.
-
-Docker Desktop is an easy-to-install application for your Mac, Linux, or Windows environment
+Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
 that enables you to build and share containerized applications and microservices. 
 
-It provides a simple interface that enables you to manage your containers, applications, and images directly from your machine without having to use the CLI to perform core actions.
+It provides a straightforward GUI (Graphical User Interface) that lets you manage your containers, applications, and images directly from your machine. Docker Desktop can be used either on it's own or as a complementary tool to the CLI. 
+
+Docker Desktop reduces the time spent on complex setups so you can focus on writing code. It takes care of port mappings, file system concerns, and other default settings, and is regularly updated with bug fixes and security updates.
 
 <style>
 .tab-content > .tab-pane {s
@@ -46,6 +42,7 @@ It provides a simple interface that enables you to manage your containers, appli
 - [Docker Engine](../engine/index.md)
 - Docker CLI client
 - [Docker Buildx](../build/index.md)
+- [Extensions](extensions/index.md)
 - [Docker Compose](../compose/index.md)
 - [Docker Content Trust](../engine/security/trust/index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
@@ -55,7 +52,7 @@ It provides a simple interface that enables you to manage your containers, appli
 <div id="features" class="tab-pane fade" markdown="1">
 
 * Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks.
-* Easy installation and setup of a complete Docker development environment.
+* Quick installation and setup of a complete Docker development environment.
 * Includes the latest version of Kubernetes.
 * On Windows, the ability to toggle between Linux and Windows Server environments to build applications.
 * Fast and reliable performance with native Windows Hyper-V virtualization.

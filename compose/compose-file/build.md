@@ -432,4 +432,4 @@ services:
 ## Implementations
 
 * [docker-compose](../../compose/index.md)
-* [buildx bake](../../build/customize/bake/index.md)
+* [buildx bake](../../build/bake/index.md)

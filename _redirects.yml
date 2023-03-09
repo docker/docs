@@ -92,7 +92,7 @@
   - /go/attack-surface/
 "/build/buildkit/#getting-started":
   - /go/buildkit/
-"/build/buildx/install/":
+"/build/install-buildx/":
   # Instructions on installing Buildx. Redirect used in Docker CLI.
   - /go/buildx/
 "/engine/reference/commandline/compose_build/":
@@ -115,6 +115,8 @@
 "/desktop/use-desktop/pause/":
   - /go/mac-desktop-pause/
   - /go/win-desktop-pause/
+"/desktop/settings/mac/#file-sharing":
+  - /go/mac-file-sharing/
 "/engine/security/rootless/":
   # Instructions on running docker in rootless mode. This redirect is currently
   # used in the installation script at "get.docker.com"
@@ -126,7 +128,6 @@
 "/desktop/windows/wsl/":
   # Link used by Docker Desktop to refer users on how to activate WSL 2
   - /go/wsl2/
-
 # samples
 "https://hub.docker.com/_/adminer/":
   - /samples/adminer
@@ -548,3 +549,18 @@
 "https://hub.docker.com/_/zookeeper/":
   - /samples/zookeeper
   - /samples/library/zookeeper
+
+# feedback
+"https://docs.google.com/forms/d/e/1FAIpQLSenjK8KiBiOrwCpq06u_iVEZGv4tfTEpfmY_cQDmsqJrHL9Gw/viewform":
+  - /feedback/extension/
+
+# Docker Scout
+"/scout/":
+  - /go/scout/
+  - /go/docker-scout/
+"/scout/artifactory":
+  - /go/scout-artifactory/
+
+# Telepresence
+"/develop/remote-development/":
+  - /go/telepresence/

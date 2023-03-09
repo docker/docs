@@ -4,7 +4,10 @@ description: Guidelines for using MUI to maximise compatibility with Docker Desk
 keywords: Docker, extensions, mui, theme, theming, material-ui, material
 ---
 
-This article assumes you're following our recommended practice by using our [Material UI theme](https://www.npmjs.com/package/@docker/docker-mui-theme){:target="_blank" rel="noopener" class="_"}. Following the steps below maximises compatibility with Docker Desktop and minimises the work you need to do as an extension author. They should be considered supplementary to the non-MUI-specific guidelines found in the [UI Styling overview](overview.md).
+This article assumes you're following our recommended practice by using our [Material UI theme](https://www.npmjs.com/package/@docker/docker-mui-theme){:target="_blank" rel="noopener" class="_"}.
+Following the steps below maximises compatibility with Docker Desktop and minimises the work you need to do as an
+extension author. They should be considered supplementary to the non-MUI-specific guidelines found in the
+[UI Styling overview](index.md).
 
 ## Assume the theme can change at any time
 
@@ -43,5 +46,5 @@ Some of the above options require you to extend our MUI theme. See the MUI docum
 
 ## What's next?
 
-- Take a look at our [UI styling guide](overview.md).
+- Take a look at our [UI styling guide](index.md).
 - Learn how to [publish your extension](../extensions/index.md).

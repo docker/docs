@@ -1,8 +1,9 @@
 ---
-description: Get started with Docker Compose
-keywords: documentation, docs, docker, compose, orchestration, containers
+description: Check out this tutorial on how to use Docker Compose from defining application dependencies to experimenting with commands.   
+keywords: docker compose example, docker compose tutorial, how to use docker compose, running docker compose, how to run docker compose, docker compose build image, docker compose command example, run docker compose file, how to create a docker compose file, run a docker compose file
 title: Try Docker Compose
 ---
+{% include compose-eol.md %}
 
 This tutorial is designed to introduce the key concepts of Docker Compose whilst building a simple Python web application. The application uses the Flask framework and maintains a hit counter in
 Redis. 
@@ -228,7 +229,7 @@ services:
     volumes:
       - .:/code
     environment:
-      FLASK_DEBUG: True
+      FLASK_DEBUG: "true"
   redis:
     image: "redis:alpine"
 ```

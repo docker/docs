@@ -42,10 +42,10 @@ exclude:
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons.
 # When updating 'latest_engine_api_version', also update 'min_api_threshold' below.
-latest_engine_api_version: "1.41"
-docker_ce_version: "20.10"
+latest_engine_api_version: "1.42"
+docker_ce_version: "23.0.0"
 compose_v1_version: "1.29.2"
-compose_version: "v2.14.0"
+compose_version: "v2.16.0"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
@@ -153,7 +153,7 @@ defaults:
 fetch-remote:
   - repo: "https://github.com/docker/cli"
     default_branch: "master"
-    ref: "20.10"
+    ref: "23.0"
     paths:
       - dest: "engine/extend"
         src:
@@ -171,7 +171,7 @@ fetch-remote:
 
   - repo: "https://github.com/docker/docker"
     default_branch: "master"
-    ref: "20.10"
+    ref: "23.0"
     paths:
       - dest: "engine/api"
         src:
@@ -209,3 +209,9 @@ fetch-remote:
       - dest: "build/buildkit/toml-configuration.md"
         src:
           - "docs/buildkitd.toml.md"
+      - dest: "build/attestations/slsa-definitions.md"
+        src:
+          - "docs/attestations/slsa-definitions.md"
+      - dest: "build/attestations/attestation-storage.md"
+        src:
+          - "docs/attestations/attestation-storage.md"

@@ -136,18 +136,18 @@ $ docker buildx build --push --tag myregistry.com/myimage:latest .
 ## CNI networking
 
 CNI networking for builders can be useful for dealing with network port
-contention during concurrent builds. CNI is
-[not yet](https://github.com/moby/buildkit/issues/28){:target="_blank"
-rel="noopener" class="_"} available in the default BuildKit image. But you can
-create your own image that includes CNI support.
+contention during concurrent builds. CNI is [not yet](https://github.com/moby/buildkit/issues/28){:target="blank" rel="noopener" class=""}
+available in the default BuildKit image. But you can create your own image that
+includes CNI support.
 
 The following Dockerfile example shows a custom BuildKit image with CNI support.
-It uses the
-[CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json){:target="_blank"
-rel="noopener" class="_"} in BuildKit as an example. Feel free to include your
-own CNI configuration.
+It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json){:target="blank" rel="noopener" class=""}
+in BuildKit as an example. Feel free to include your own CNI configuration.
 
+{% raw %}
 ```dockerfile
+# syntax=docker/dockerfile:1
+
 ARG BUILDKIT_VERSION=v{{ site.buildkit_version }}
 ARG CNI_VERSION=v1.0.1
 
@@ -165,6 +165,7 @@ RUN apk add --no-cache iptables
 COPY --from=cni-plugins /opt/cni/bin /opt/cni/bin
 ADD https://raw.githubusercontent.com/moby/buildkit/${BUILDKIT_VERSION}/hack/fixtures/cni.json /etc/buildkit/cni.json
 ```
+{% endraw %}
 
 Now you can build this image, and create a builder instance from it using
 [the `--driver-opt image` option](../../engine/reference/commandline/buildx_create.md#driver-opt):
@@ -177,3 +178,37 @@ $ docker buildx create --use --bootstrap \
   --driver-opt "image=buildkit-cni:local" \
   --buildkitd-flags "--oci-worker-net=cni"
 ```
+
+## Resource limiting
+
+### Max parallelism
+
+You can limit the parallelism of the BuildKit solver, which is particularly useful
+for low-powered machines, using a [BuildKit configuration](toml-configuration.md)
+while creating a builder with the [`--config` flags](../../engine/reference/commandline/buildx_create.md#config).
+
+```toml
+# /etc/buildkitd.toml
+[worker.oci]
+  max-parallelism = 4
+```
+
+Now you can [create a `docker-container` builder](../drivers/docker-container.md)
+that will use this BuildKit configuration to limit parallelism.
+
+```console
+$ docker buildx create --use \
+  --name mybuilder \
+  --driver docker-container \
+  --config /etc/buildkitd.toml
+```
+
+### TCP connection limit
+
+TCP connections are limited to 4 simultaneous connections per registry for
+pulling and pushing images, plus one additional connection dedicated to metadata
+requests. This connection limit prevents your build from getting stuck while
+pulling images. The dedicated metadata connection helps reduce the overall build
+time.
+
+More information: [moby/buildkit#2259](https://github.com/moby/buildkit/pull/2259){:target="blank" rel="noopener" class=""}

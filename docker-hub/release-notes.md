@@ -11,9 +11,16 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+## 2022-12-12
+
+### New
+
+- The new [domain audit](../docker-hub/domain-audit.md) feature lets you audit your domains for users who aren't a member of your organization.
+
+
 ## 2022-09-26
 
-### New 
+### New
 
 - The new [autobuild feature](../docker-hub/builds/index.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
 
@@ -105,7 +112,7 @@ You can now specify any email address to receive billing-related emails for your
 
 To change the email address receiving billing-related emails, log into Docker Hub and navigate to the **Billing** tab of your organization. Select **Payment Methods** > **Contact Information**. Enter the new email address that you'd like to use in the **Email** field. Click **Update** for the changes to take effect.
 
-For details on how to update your billing information, see [Update billing information](../subscription/upgrade.md#update-billing-information).
+For details on how to update your billing information, see [Update billing information](../billing/index.md).
 
 ## 2021-03-22
 

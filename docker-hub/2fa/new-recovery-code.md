@@ -20,7 +20,7 @@ on your username and select **Account Settings**. Go to **Security** and **Click
 
 Enter your password.
 
-![Enter your password](../images/2fa-pw-new-code.png){:width="250px"}
+![Enter your password view](../images/2fa-pw-new-code.png){:width="250px"}
 
 Your new recovery code will be displayed. Remember to save your recovery code
 and store it somewhere safe.

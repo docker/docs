@@ -71,7 +71,6 @@ The example below shows an extension that uses a binary as part of its operation
 In the `Dockerfile`, we download the binary depending on the target architecture:
 
 ```Dockerfile
-
 #syntax=docker/dockerfile:1.3-labs
 
 FROM alpine AS dl
@@ -94,7 +93,7 @@ FROM alpine
 LABEL org.opencontainers.image.title="example-extension" \
     org.opencontainers.image.description="My Example Extension" \
     org.opencontainers.image.vendor="Docker Inc." \
-    com.docker.desktop.extension.api.version=">= 0.1.0"
+    com.docker.desktop.extension.api.version=">= 0.3.3"
 
 COPY --from=dl /out /
 ```
@@ -141,8 +140,6 @@ As a result, when `TARGETARCH` equals:
 
 When the extension is installed, the extension framework copies the binaries from the extension image at `/darwin/kubectl` for Darwin, or `/windows/kubectl.exe` for Windows, to a specific location in the user’s host filesystem.
 
-## FAQs
+## Can I develop extensions that run Windows containers?
 
-### Can I develop extensions that run Windows containers?
-
-Although Docker Extensions is supported on Docker Desktop for Windows, Mac, and Linux, the extension framework only supports linux containers. Therefore, you must target `linux` as the OS when you build your extension image.
+Although Docker Extensions is supported on Docker Desktop for Windows, Mac, and Linux, the extension framework only supports Linux containers. Therefore, you must target `linux` as the OS when you build your extension image.

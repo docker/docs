@@ -6,7 +6,9 @@ skip_read_time: true
 
 # Interface: ExtensionVM
 
-**`since`** 0.2.0
+**`Since`**
+
+0.2.0
 
 ## Properties
 
@@ -58,11 +60,17 @@ await ddClient.extension.vm.cli.exec("ls", ["-l"], {
          });
 ```
 
-**`param`** Command to execute.
+**`Param`**
 
-**`param`** Arguments of the command to execute.
+Command to execute.
 
-**`param`** The callback function where to listen from the command output data and errors.
+**`Param`**
+
+Arguments of the command to execute.
+
+**`Param`**
+
+The callback function where to listen from the command output data and errors.
 
 ___
 

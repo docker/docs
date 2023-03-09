@@ -167,14 +167,14 @@ nested and snapshotted. The diagram below shows 4 subvolumes. 'Subvolume 2' and
 'Subvolume 3' are nested, whereas 'Subvolume 4' shows its own internal directory
 tree.
 
-![subvolume example](images/btfs_subvolume.jpg)
+![Subvolume example](images/btfs_subvolume.jpg)
 
 Only the base layer of an image is stored as a true subvolume. All the other
 layers are stored as snapshots, which only contain the differences introduced
 in that layer. You can create snapshots of snapshots as shown in the diagram
 below.
 
-![snapshots diagram](images/btfs_snapshots.jpg)
+![Snapshots diagram](images/btfs_snapshots.jpg)
 
 On disk, snapshots look and feel just like subvolumes, but in reality they are
 much smaller and more space-efficient. Copy-on-write is used to maximize storage
@@ -182,7 +182,7 @@ efficiency and minimize layer size, and writes in the container's writable layer
 are managed at the block level. The following image shows a subvolume and its
 snapshot sharing data.
 
-![snapshot and subvolume sharing data](images/btfs_pool.jpg)
+![Snapshot and subvolume sharing data](images/btfs_pool.jpg)
 
 For maximum efficiency, when a container needs more space, it is allocated in
 *chunks* of roughly 1 GB in size.

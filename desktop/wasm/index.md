@@ -47,6 +47,8 @@ $ docker run -dp 8080:8080 \
   michaelirwin244/wasm-example
 ```
 
+After running this command, you can visit [http://localhost:8080/](http://localhost:8080/) to see the "Hello world" output from this example module.
+
 > Got an error message? Head to the [troubleshooting section](#troubleshooting)
 > for help.
 
@@ -151,6 +153,7 @@ running in a container.
    the `ENTRYPOINT`.
 
    ```dockerfile
+   # syntax=docker/dockerfile:1
    FROM scratch
    COPY --from=build /build/hello_world.wasm /hello_world.wasm
    ENTRYPOINT [ "hello_world.wasm" ]

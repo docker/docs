@@ -29,7 +29,7 @@ $ docker compose version
 
 ## Create the Compose file
 
-1. At the root of the app project, create a file named `docker-compose.yml`.
+1. At the root of the `/getting-started/app` folder, create a file named `docker-compose.yml`.
 
 2. In the compose file, we'll start off by defining the list of services (or containers) we want to run as part of our application.
 
@@ -190,7 +190,6 @@ At this point, our complete `docker-compose.yml` should look like this:
 
 
 ```yaml
-
 services:
   app:
     image: node:18-alpine
@@ -278,7 +277,7 @@ Compose and used to group the containers together. By default, the project name 
 
 ![Docker Dashboard with app project](images/dashboard-app-project-collapsed.png)
 
-If you twirl down the app, you will see the two containers we defined in the compose file. The names are also a little
+If you click the disclose arrow next to **app**, you will see the two containers we defined in the compose file. The names are also a little
 more descriptive, as they follow the pattern of `<service-name>-<replica-number>`. So, it's very easy to
 quickly see what container is our app and which container is the mysql database.
 

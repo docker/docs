@@ -5,6 +5,7 @@ title: Launch a dev environment
 redirect_from: 
 - /desktop/dev-environments/create-compose-dev-env/
 ---
+{% include dev-envs-changing.md %}
 
 You can launch a dev environment from a:
 - Git repository
@@ -31,9 +32,7 @@ To get started with Dev Environments, you must also install the following tools 
 - [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}
 - [Visual Studio Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers){:target="_blank" rel="noopener" class="_"}
 
-> **Note**
->
-> After Git is installed, restart Docker Desktop. Select **Quit Docker Desktop**, and then start it again.
+ After Git is installed, restart Docker Desktop. Select **Quit Docker Desktop**, and then start it again.
 
 ## Launch a dev environment from a Git repository
 

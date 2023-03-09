@@ -1,9 +1,7 @@
 ---
-description: Optional post-installation steps for Linux
-keywords: >
-  Docker, Docker documentation, requirements, apt, installation, ubuntu,
-  install, uninstall, upgrade, update
-title: Docker Engine post-installation steps
+description: Find the recommended Docker Engine post-installation steps for Linux users, including how to run Docker as a non-root user and more.   
+keywords: run docker without sudo, docker running as root, docker post install, docker post installation, run docker as non root, docker non root user, how to run docker in linux, how to run docker linux, how to start docker in linux, run docker on linux
+title: Linux post-installation steps for Docker Engine
 redirect_from:
   - /engine/installation/linux/docker-ee/linux-postinstall/
   - /engine/installation/linux/linux-postinstall/

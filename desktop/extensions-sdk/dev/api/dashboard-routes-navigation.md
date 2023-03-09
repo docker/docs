@@ -14,10 +14,10 @@ try {
   await ddClient.desktopUI.navigate.viewContainerLogs(id);
 } catch (e) {
   console.error(e);
-  ddClient.desktopUI.toast.error(`Failed to navigate to logs for container "${id}".`);
+  ddClient.desktopUI.toast.error(
+    `Failed to navigate to logs for container "${id}".`
+  );
 }
-```
-
 ```
 
 #### Parameters

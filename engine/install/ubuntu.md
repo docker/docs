@@ -1,7 +1,6 @@
 ---
-description: Instructions for installing Docker Engine on Ubuntu
-keywords:
-  requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
+description: Jumpstart your client-side server applications with Docker Engine on Ubuntu. This guide details prerequisites and multiple methods to install. 
+keywords: docker install script, ubuntu docker server, ubuntu server docker, install docker engine ubuntu, install docker on ubuntu server, ubuntu 18.04 docker-ce, install docker engine on ubuntu, ubuntu install docker ce, ubuntu install docker engine
 redirect_from:
   - /ee/docker-ee/ubuntu/
   - /engine/installation/linux/docker-ce/ubuntu/
@@ -95,7 +94,7 @@ Docker from the repository.
 2.  Add Docker's official GPG key:
 
     ```console
-    $ sudo mkdir -p /etc/apt/keyrings
+    $ sudo mkdir -m 0755 -p /etc/apt/keyrings
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     ```
 
@@ -140,7 +139,7 @@ Docker from the repository.
    To install the latest version, run:
 
    ```console
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    </div>
@@ -163,7 +162,7 @@ Docker from the repository.
 
    ```console
    $ VERSION_STRING=5:20.10.13~3-0~ubuntu-jammy
-   $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-compose-plugin
+   $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    </div>
@@ -212,6 +211,7 @@ download a new file each time you want to upgrade Docker Engine.
    - `containerd.io_<version>_<arch>.deb`
    - `docker-ce_<version>_<arch>.deb`
    - `docker-ce-cli_<version>_<arch>.deb`
+   - `docker-buildx-plugin_<version>_<arch>.deb`
    - `docker-compose-plugin_<version>_<arch>.deb`
 
 5. Install the `.deb` packages. Update the paths in the following example to
@@ -221,6 +221,7 @@ download a new file each time you want to upgrade Docker Engine.
    $ sudo dpkg -i ./containerd.io_<version>_<arch>.deb \
      ./docker-ce_<version>_<arch>.deb \
      ./docker-ce-cli_<version>_<arch>.deb \
+     ./docker-buildx-plugin_<version>_<arch>.deb \
      ./docker-compose-plugin_<version>_<arch>.deb
    ```
 
@@ -230,6 +231,7 @@ download a new file each time you want to upgrade Docker Engine.
    `hello-world` image:
 
    ```console
+   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 
@@ -254,7 +256,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 1.  Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
     ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
     ```
 
 2.  Images, containers, volumes, or custom configuration files on your host

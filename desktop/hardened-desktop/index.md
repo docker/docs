@@ -19,6 +19,8 @@ Hardened Docker Desktop includes:
 - Registry Access Management, which allows admins to control the registries developers can access.
 - Image Access Management, which gives admins control over which images developers can pull from Docker Hub.
 
+The features of Hardened Docker Desktop operate independently of each other. When used together, these mechanisms defend against attacks at different functional layers of the developer workflow.
+
 Docker plans to continue adding more security enhancements to the Hardened Docker Desktop security model.
 
  <div class="component-container">

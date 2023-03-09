@@ -6,6 +6,174 @@ toc_max: 2
 redirect_from:
   - /release-notes/docker-compose/
 ---
+{% include compose-eol.md %}
+
+## 2.16.0
+{% include release-date.html date="2023-02-08" %}
+### Update
+- Dependencies upgrade: bump docker to v23.0.0
+- Dependencies upgrade: bump docker-cli to v23.0.0
+- Dependencies upgrade: bump buildkit to v0.11.2
+- Dependencies upgrade: bump buildx to v0.10.2
+- Dependencies upgrade: bump containerd to 1.6.16
+- Dependencies upgrade: bump golang to 1.20
+
+### Bug fixes and enhancements
+* Introduced `--remove-orphans` for the `compose create` command. Fixed [compose#9718](https://github.com/docker/compose/issues/9718){:
+  target="_blank" rel="noopener" class="_"}
+* Shortened the TTY output when the terminal is too small. Fixed [compose#9962](https://github.com/docker/compose/issues/9962){:
+  target="_blank" rel="noopener" class="_"}
+* Added `remove-orphans` functionality to run. Fixed [compose#9718](https://github.com/docker/compose/issues/9718#issuecomment-1209448445){:
+  target="_blank" rel="noopener" class="_"}
+* Introduced the experimental `watch` command. Pull Request [compose#10163](https://github.com/docker/compose/pull/10163){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now allows TTY to be allocated with `-t`. Fixed [compose#10161](https://github.com/docker/compose/issues/10161){:
+  target="_blank" rel="noopener" class="_"}
+* Introduced the experimental `dry-run` command. Pull Request [compose#10173](https://github.com/docker/compose/issues/10173){:
+  target="_blank" rel="noopener" class="_"}
+* Updated the documentation to explain ways to configure parallelism. Pull Request [compose#10198](https://github.com/docker/compose/issues/10198){:
+  target="_blank" rel="noopener" class="_"}
+* Aligned the `logs` command with docker CLI by aliasing `-n` for `--tail`. Fixed [compose#10199](https://github.com/docker/compose/issues/10199){:
+  target="_blank" rel="noopener" class="_"}
+* Added support for `docker compose build --push`. Pull Request [compose#10148](https://github.com/docker/compose/issues/10148){:
+  target="_blank" rel="noopener" class="_"}
+* Added `--scale` to the `compose create` command. Fixed [compose#10208](https://github.com/docker/compose/issues/10208){:
+  target="_blank" rel="noopener" class="_"}
+* Renamed `convert` to `config` to align with the Compose V1 UX. Pull Request [compose#10214](https://github.com/docker/compose/issues/10214){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now passes the proxy config as build args. Fixed [compose#8797](https://github.com/docker/compose/issues/8797){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed parsing issue in `compose up` by ignoring containers not created by Compose. Fixed [compose#10162](https://github.com/docker/compose/issues/10162#issuecomment-1384989985){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed the goroutine leak in log formatter initialization. Fixed [compose#10157](https://github.com/docker/compose/issues/10157){:
+    target="_blank" rel="noopener" class="_"}
+* Fixed an issue where compose logs don't exit when all running containers have been stopped. Pull Request [compose#10181](https://github.com/docker/compose/issues/10181){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed the documentation to reflect `docker compose ps` being aligned with `docker ps`. Pull Request [compose#10195](https://github.com/docker/compose/issues/10195){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed an issue where the remote Buildx driver was not found. Fixed [compose#9893](https://github.com/docker/compose/issues/9893){:
+  target="_blank" rel="noopener" class="_"}
+* Improved logging when recreating a service container. Pull request [compose#10236](https://github.com/docker/compose/issues/10236){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed an issue so Compose now only waits for containers concerned by the wait condition. Fixed [compose#10200](https://github.com/docker/compose/issues/10200){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now prevents assignment to entry in nil map. Fixed [compose#10244](https://github.com/docker/compose/issues/10244){:
+  target="_blank" rel="noopener" class="_"}
+* Added a dedicated GitHub Action workflow for Cucumber tests. Pull Request [compose#10165](https://github.com/docker/compose/issues/10165){:
+  target="_blank" rel="noopener" class="_"}
+* Cleaned the TUI lines when switching in compact log mode. Fixed [compose#10201](https://github.com/docker/compose/issues/10201){:
+  target="_blank" rel="noopener" class="_"}
+* Added Tilt watcher to detect code changes in watch mode. Pull Request [compose#10218](https://github.com/docker/compose/issues/10218){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now supports Dry Run mode for `kill` command. Fixed [compose#10210](https://github.com/docker/compose/issues/10210){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now supports Dry Run mode for `pause` command.Fixed [compose#10217](https://github.com/docker/compose/issues/10217){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now supports Dry Run mode for `cp` command.Fixed [compose#10235](https://github.com/docker/compose/issues/10235){:
+  target="_blank" rel="noopener" class="_"}
+
+## 2.15.1
+{% include release-date.html date="2023-01-09" %}
+### Update
+- Dependencies upgrade to fix Golan CVE-2022-27664 and CVE-2022-32149
+
+### Bug fixes and enhancements
+* Added support for UTS namespace. Fixed [compose#8408](https://github.com/docker/compose/issues/8408){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed filtering issue when no filter set. Fixed [roadmap#418](https://github.com/docker/roadmap/issues/418){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed concurrent map writes issue during build step. Pull Request [compose#10151](https://github.com/docker/compose/pull/10151){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed issue when stdin is not a terminal. Fixed [compose#9739](https://github.com/docker/compose/issues/9739){:
+  target="_blank" rel="noopener" class="_"}
+
+## 2.15.0
+{% include release-date.html date="2023-01-05" %}
+### Update
+- Dependencies upgrade: bump compose-go to v1.8.1
+- Dependencies upgrade: bump cli-docs-tool to 0.5.1
+
+### Bug fixes and enhancements
+* Added support of the `privileged` attribute in the `service.build` section. Pull Request [compose#10112](https://github.com/docker/compose/pull/10112){:
+  target="_blank" rel="noopener" class="_"}
+* Introduced `--ignore-buildable` to ignore buildable images on pull. Fixed [compose#8805](https://github.com/docker/compose/issues/8805){:
+  target="_blank" rel="noopener" class="_"}
+* Introduceed `--no-attach` to ignore some service outputs. Fixed [compose#8546](https://github.com/docker/compose/issues/8546){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed issue with `logs` when `driver:none` is set. Fixed [compose#9030](https://github.com/docker/compose/issues/9030){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now relies on dockerCLI.streams. Pull Request [compose#10082](https://github.com/docker/compose/pull/10082){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed issue with service hash that MUST exclude replicas. Fixed [compose#10077](https://github.com/docker/compose/issues/10077){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now checks service names based on project, not running containers. Fixed [compose#9951](https://github.com/docker/compose/issues/9951){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed security opts support (seccomp and unconfined). Fixed [compose#9505](https://github.com/docker/compose/issues/9505){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed empty file when using compose config in case of smaller source files. Fixed [compose#10121](https://github.com/docker/compose/issues/10121){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed issue with `--pull` not applied on `compose up`. Fixed [compose#10125](https://github.com/docker/compose/issues/10125){:
+  target="_blank" rel="noopener" class="_"}
+* Compose should ignore not only auto-removed containers but also "removal in progress" for orphan containers. Pull Request [compose#10136](https://github.com/docker/compose/pull/10136){:
+  target="_blank" rel="noopener" class="_"}
+* Compose limits build concurrency according to `--parallel`. Fixed [compose#9091](https://github.com/docker/compose/issues/9091){:
+  target="_blank" rel="noopener" class="_"}
+
+## 2.14.2
+{% include release-date.html date="2022-12-20" %}
+### Update
+- Dependencies upgrade: bump containerd to 1.6.14
+
+### Bug fixes and enhancements
+* Compose now uses DOCKER_DEFAULT_PLATFORM to determine the platform when creating a container. Fixed [compose#10041](https://github.com/docker/compose/pull/10041){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now detects when dependency failed to start. Fixed [compose#9732](https://github.com/docker/compose/pull/9732){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed WCOW volume mounts.  Fixed [compose#9577](https://github.com/docker/compose/pull/9577){:target="_blank" rel="noopener" class="_"}
+* List only running containers when using `--all=false`.  Fixed [compose#10085](https://github.com/docker/compose/pull/10085){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed a regression when running pull `--ignore-pull-failures`.  Fixed [compose#10089](https://github.com/docker/compose/pull/10089){:
+  target="_blank" rel="noopener" class="_"}
+* Fixed CPU quota issue. Fixed [compose#10073](https://github.com/docker/compose/pull/10073){:target="_blank" rel="noopener" class="_"}
+* Fixed race condition on compose logs. Fixed [compose#8880](https://github.com/docker/compose/pull/8880){:target="_blank" rel="noopener" class="_"}
+* Updated projectOptions to be public by renaming it to ProjectOptions. Fixed [compose#100102](https://github.com/docker/compose/pull/100102){:
+target="_blank" rel="noopener" class="_"}
+
+## 2.14.1
+{% include release-date.html date="2022-12-15" %}
+
+### Updates
+- Dependencies upgrade: bump Go to 1.19.4
+- Dependencies upgrade: bump containerd to 1.6.12
+
+### Bug fixes and enhancements
+- Added `--parallel` to limit concurrent engine calls. Pull Request [compose#10030](https://github.com/docker/compose/pull/10030){:
+  target="_blank" rel="noopener" class="_"}
+- Distinguished stdout and stderr in `up` logs. Fixed [compose#8098](https://github.com/docker/compose/issues/8098){:target="_blank" 
+rel="noopener" class="_"}
+- Aligned `compose ps` output with `docker ps`. Fixed [compose#6867](https://github.com/docker/compose/issues/6867){:target="_blank"
+rel="noopener" class="_"}
+- Added `--include-deps` to push command. Pull Request [compose#10044](https://github.com/docker/compose/pull/10044){:target="_blank"
+  rel="noopener" class="_"}
+- Introduced `--timestamp` option on `compose up`. Fixed [compose#5730](https://github.com/docker/compose/issues/5730){:target="_blank"
+  rel="noopener" class="_"}
+- Compose now applies uid/gid when creating a secret from the environment. Pull Request [compose#10084](https://github.com/docker/compose/pull/10084){:target="_blank"
+  rel="noopener" class="_"}
+- Fixed deadlock when waiting for attached-dependencies. Fixed [compose#10021](https://github.com/docker/compose/pull/10021){:target="_blank"
+  rel="noopener" class="_"}
+- Fixed race condition when collecting pulled images IDs. Fixed [compose#9897](https://github.com/docker/compose/pull/9897){:target="_blank"
+  rel="noopener" class="_"}
+- Compose doesn't stop the `pull` command for images that can be built. Fixed [compose#8724](https://github.com/docker/compose/pull/8724){:target="_blank"
+  rel="noopener" class="_"}
+- Fixed corner case when there's no container to attach to. Fixed [compose#8752](https://github.com/docker/compose/pull/8752){:target="_blank"
+  rel="noopener" class="_"}
+- Compose containers' startup must run sequentially for engine to assign distinct ports within a configured range. Fixed 
+[compose#8530](https://github.com/docker/compose/pull/8530){:target="_blank" rel="noopener" class="_"}
+- Fixed parsing of `repository:tag`. Fixed [compose#9208](https://github.com/docker/compose/pull/9208){:target="_blank"
+  rel="noopener" class="_"}
+- Load project from files when explicitly set by user. Fixed [compose#9554](https://github.com/docker/compose/pull/9554){:target="_blank"
+  rel="noopener" class="_"} 
+
 ## 2.14.0
 {% include release-date.html date="2022-12-02" %}
 

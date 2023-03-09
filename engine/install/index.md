@@ -1,7 +1,7 @@
 ---
-title: Docker Engine installation overview
-description: Lists the installation methods
-keywords: docker, installation, install, Docker Engine, Docker Engine, docker editions, stable, edge
+title: Install Docker Engine 
+description: Choose the best method for you to install Docker Engine. This client-server application is available on Linux, Mac, Windows, and as a static binary.
+keywords: install engine, docker engine install, install docker engine, docker engine installation, engine install, docker ce installation, docker ce install, engine installer, installing docker engine, docker server install
 redirect_from:
 - /cs-engine/
 - /cs-engine/1.12/

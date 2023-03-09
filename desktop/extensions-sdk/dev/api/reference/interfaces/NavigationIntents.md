@@ -6,7 +6,9 @@ skip_read_time: true
 
 # Interface: NavigationIntents
 
-**`since`** 0.2.0
+**`Since`**
+
+0.2.0
 
 ## Container Methods
 
@@ -83,6 +85,34 @@ Navigate to the container inspect window in Docker Desktop.
 ```typescript
 await ddClient.desktopUI.navigate.viewContainerInspect(id)
 ```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `id` | `string` | The full container id, e.g. `46b57e400d801762e9e115734bf902a2450d89669d85881058a46136520aca28`. You can use the `--no-trunc` flag as part of the `docker ps` command to display the full container id. |
+
+#### Returns
+
+`Promise`<`void`\>
+
+A promise that fails if the container doesn't exist.
+
+___
+
+### viewContainerTerminal
+
+▸ **viewContainerTerminal**(`id`): `Promise`<`void`\>
+
+Navigate to the container terminal window in Docker Desktop.
+
+```typescript
+await ddClient.desktopUI.navigate.viewContainerTerminal(id)
+```
+
+**`Since`**
+
+0.3.4
 
 #### Parameters
 
