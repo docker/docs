@@ -43,7 +43,7 @@ SBOMs for all of its base images. The recorded SBOMs include both Operating
 System (OS)-level and application-level programs or dependencies that the image
 contains.
 
-Additionally, the agents sends the following metadata about the image to Docker Scout to 
+Additionally, the agent sends the following metadata about the image to Docker Scout to 
 record:
 
 - The source repository for the image
