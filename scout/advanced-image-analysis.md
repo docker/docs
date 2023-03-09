@@ -103,7 +103,7 @@ To view the vulnerability report on Docker Hub:
 
 Expanding any of the packages in the list shows you more information about the
 vulnerabilities that affect a given package. Expanding the vulnerability shows a summary of it's details and
-clicking on the vulnerability name opens Docker's image vulnerability database, which provides
+selecting the vulnerability name opens Docker's image vulnerability database, which provides
 more information on the vulnerability and what images it affects.
 
 ## Deactivate Advanced image analysis
