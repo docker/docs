@@ -32,7 +32,6 @@ When creating a new repository:
   > You can't rename a Docker Hub repository once it's created.
 
 * The description can be up to 100 characters and used in the search result.
-* The maximum logo size is 1000x1000.
 * You can link a GitHub or Bitbucket account now, or choose to do it later in
   the repository settings.
 * You can set your default visibility to public or private for your account.
@@ -40,6 +39,10 @@ When creating a new repository:
   > **Note:**
   >
   > For organizations creating a new repository, it's recommended you select **Private**.
+
+  > **Note**
+  >
+  > Docker Verified Publisher (DVP) and Docker-Sponsored Open Source (DDOS) organizations can also add a logo to a repository. The maximum size is 1000x1000.
 
 ![Setting page for creating a repository](../images/repo-create-details.png)
 
