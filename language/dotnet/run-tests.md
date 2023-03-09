@@ -23,10 +23,10 @@ $ cd /path/to/dotnet-docker
 $ dotnet new xunit -n myWebApp.Tests -o tests
 ```
 
-Next, we'll update the test project and add the Testcontainers for .NET package that allows us to run tests against Docker resources. Switch to the `tests` directory and run the following command:
+Next, we'll update the test project and add the Testcontainers for .NET package that allows us to run tests against Docker resources (PostgreSQL container). Switch to the `tests` directory and run the following command:
 
 ```console
-$ dotnet add package Testcontainers --version 2.3.0
+$ dotnet add package Testcontainers.PostgreSql --version 3.0.0
 ```
 
 ## Add a test
@@ -34,10 +34,16 @@ $ dotnet add package Testcontainers --version 2.3.0
 Open the test project in your favorite IDE and replace the contents of `UnitTest1` with the following code:
 
 ```c#
+using System;
 using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Containers;
 using DotNet.Testcontainers.Networks;
+using Testcontainers.PostgreSql;
+using Xunit;
 
 public sealed class UnitTest1 : IAsyncLifetime, IDisposable
 {
@@ -45,30 +51,29 @@ public sealed class UnitTest1 : IAsyncLifetime, IDisposable
 
     private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(1));
 
-    private readonly IDockerNetwork _network;
+    private readonly INetwork _network;
 
-    private readonly IDockerContainer _dbContainer;
+    private readonly IContainer _dbContainer;
 
-    private readonly IDockerContainer _appContainer;
+    private readonly IContainer _appContainer;
 
     public UnitTest1()
     {
-        _network = new TestcontainersNetworkBuilder()
-            .WithName(Guid.NewGuid().ToString("D"))
+        _network = new NetworkBuilder()
             .Build();
 
-        _dbContainer = new TestcontainersBuilder<TestcontainersContainer>()
+        _dbContainer = new PostgreSqlBuilder()
             .WithImage("postgres")
             .WithNetwork(_network)
             .WithNetworkAliases("db")
             .WithVolumeMount("postgres-data", "/var/lib/postgresql/data")
             .Build();
 
-        _appContainer = new TestcontainersBuilder<TestcontainersContainer>()
+        _appContainer = new ContainerBuilder()
             .WithImage("dotnet-docker")
             .WithNetwork(_network)
             .WithPortBinding(HttpPort, true)
-            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(HttpPort))
+            .WithWaitStrategy(Wait.ForUnixContainer().UntilHttpRequestIsSucceeded(request => request.ForPath("/")))
             .Build();
     }
 
