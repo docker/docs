@@ -43,9 +43,9 @@ Use the resources in this section to manage your Docker subscription.
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                <a href="/subscription/faqs/"><img src="/assets/images/help.svg" alt="faqs" width="70" height="70"></a>
+                <a href="/subscription/faq/"><img src="/assets/images/help.svg" alt="faqs" width="70" height="70"></a>
             </div>
-                <h2 id="faqs"><a href="/subscription/faqs">Explore common FAQs</a></h2>
+                <h2 id="faqs"><a href="/subscription/faq">Explore common FAQs</a></h2>
             </div>
         </div>
     </div>
