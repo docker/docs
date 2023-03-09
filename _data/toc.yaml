@@ -1895,9 +1895,10 @@ manuals:
     title: Remove seats
   - path: /subscription/downgrade/
     title: Downgrade
-  - path: /subscription/faqs/
+  - path: /subscription/faq/
     title: FAQs
   - path: /subscription/desktop-license/
+    title: Docker Desktop license agreement
 
 - title: Security announcements
   path: /security/
