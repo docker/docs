@@ -40,3 +40,11 @@ Docker Hub sends the following billing-related emails:
 - Notifications of credit or debit card expiration. 
 - Confirmation of a cancelled subscription 
 - Reminders of subscription renewals for annual subscribers. This is sent 14 days before the renewal date. 
+
+### Does Docker offer academic pricing?
+
+Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target="blank" rel="noopener" class=""}.
+
+### Do I need to do anything at the end of my subscription term?
+
+No. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
