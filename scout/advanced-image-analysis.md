@@ -16,7 +16,7 @@ title: Advanced image analysis
 
 Advanced image analysis is a Docker Scout feature for Docker Hub.
 
-When you activate advanced image analysis for a repository, Scout analyzes new tags
+When you activate Advanced image analysis for a repository, Scout analyzes new tags
 automatically when you push to that repository. Advanced image analysis
 is more than point-in-time scanning, the analysis gets reevaluated
 continuously, meaning you don't need to re-scan the image to see an updated
