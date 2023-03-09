@@ -1873,7 +1873,7 @@ manuals:
   - path: /billing/payment-method/
     title: Add or update a payment method
   - path: /billing/details/
-    title: Update the contact information
+    title: Update the billing information
   - path: /billing/history/
     title: View your billing history
   - path: /billing/cycle/
