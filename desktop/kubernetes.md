@@ -20,7 +20,7 @@ workloads.
 ## Enable Kubernetes
 
 To enable Kubernetes in Docker Desktop:
-1. From the Docker Dashboard, select the **Settings**.
+1. From the Docker Dashboard, select **Preferences**.
 2. Select **Kubernetes** from the left sidebar. 
 3. Next to **Enable Kubernetes**, select the checkbox.
 4. Select **Apply & Restart** to save the settings and then click **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
