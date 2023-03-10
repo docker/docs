@@ -8,7 +8,7 @@ This page provides an overview of each tier. To compare features available in ea
 
 ## Docker Personal
 
-Docker Personal is the new name for the Docker Free subscription. With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components - including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
+Docker Personal is the new name for the Docker Free subscription. With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components -including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
 
 Docker Personal includes unlimited public repositories, unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and unlimited collaborators for public repositories at no cost per month.
 
@@ -36,8 +36,16 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 In addition to all the features available in Docker Pro and Docker Team, Docker Business includes [Hardened Docker Desktop](../desktop/hardened-desktop/index.md) enhanced container isolation and settings management, centralized management, [Image Access Management](../docker-hub/image-access-management.md) with the ability to control what registries and content developers can access, ensuring teams are building secure from the start by only pulling trusted base images,[Single Sign-On](../single-sign-on/index.md),[System for Cross-domain Identity Management](../docker-hub/scim.md) and more.
 
-### self-serve
-
-### Sales assisted
-
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+
+### Self-serve
+
+A self-serve Docker Business subscription is where everything is set up by you. You can:
+
+- Manage your own invoices
+- Add or remove seats
+- Update billing and payment information
+
+### Sales-assisted
+
+A sales-assisted Docker Business subscription where everything is set up and managed by a dedicated Docker account manager.

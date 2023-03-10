@@ -20,8 +20,6 @@ Before you downgrade to a free plan, you may need to reduce the number of team m
 >If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription. 
 {: .important}
 
-To downgrade your subscription:
-
 1. Log in to your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
 2. Select your username in the top-right corner and from the dropdown menu select **Billing**.
