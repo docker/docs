@@ -106,7 +106,7 @@ Docker Personal: |
 Docker Pro: |
   Docker Pro is a [Docker subscription](#docker-subscription). Docker Pro enables individual developers to get more control of their development environment and provides an integrated and reliable developer experience. It reduces the amount of time developers spend on mundane and repetitive tasks and empowers developers to spend more time creating value for their customers.
 Docker subscription: |
-  Docker subscription tiers, sometimes referred to as plans, include [Personal](#docker-personal), [Pro](#docker-pro), [Team](#docker-team), and [Business](#docker-business). For more details, see [Docker subscription overview](/subscription/#docker-business).
+  Docker subscription tiers, sometimes referred to as plans, include [Personal](#docker-personal), [Pro](#docker-pro), [Team](#docker-team), and [Business](#docker-business). For more details, see [Docker subscription overview](/subscription/details/).
 Docker Team: |
   Docker Team is a [Docker subscription](#docker-subscription). Docker Team offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
 Docker Trusted Content Program: |
