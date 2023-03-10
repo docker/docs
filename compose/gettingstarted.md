@@ -111,7 +111,7 @@ This tells Docker to:
 
 >Important
 >
->Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and which results in an error when you run the application.
+>Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
 {: .important}
 
 For more information on how to write Dockerfiles, see the
