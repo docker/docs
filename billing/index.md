@@ -22,7 +22,7 @@ Use the resources in this section to manage your billing and payment settings fo
             <div class="component-icon">
                 <a href="/billing/details/"><img src="/assets/images/contact.svg" alt="billing-info" width="70" height="70"></a>
             </div>
-                <h2 id="billing history"><a href="/billing/details/">Update the contact information</a></h2>
+                <h2 id="billing history"><a href="/billing/details/">Update the billing information</a></h2>
             </div>
         </div>
   </div>  
