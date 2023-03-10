@@ -18,10 +18,9 @@ The following provisioning features are supported:
  - Push user profile updates
  - Remove users
  - Deactivate users 
- - Re-activate users. 
+ - Re-activate users
+ - Group mapping
  
-Group management is not supported.
-
 The table below lists the supported attributes. Note that your attribute mappings must match for SSO to prevent duplicating your members.
 
 | Attribute    | Description
