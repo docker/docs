@@ -61,7 +61,7 @@ To uninstall Docker Desktop from your Mac:
 
 <hr>
 </div>
-<div id="tab5" class="tab-pane fade in active" markdown="1">
+<div id="tab5" class="tab-pane fade" markdown="1">
 <br>
 Docker Desktop can be removed from a Linux host using the package manager.
 

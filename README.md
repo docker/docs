@@ -30,11 +30,15 @@ repository.
 
 We've made it really easy for you to file new issues.
 
-- Click **New issue** on the docs repository and fill in the details, or
+- Click **[New issue](https://github.com/docker/docs/issues/new)** on the docs repository and fill in the details, or
 - Click **Request docs changes** in the right column of every page on
-  docs.docker.com and add the details.
+  docs.docker.com and add the details, or
 
-![Docs feedback on each page](/opensource/images/docs-site-feedback.png)
+  ![Request changes link](/assets/images/docs-site-feedback.png)
+
+- Click the **Give feedback** link on the side of every page in the docs.
+
+  ![Docs feedback on each page](/assets/images/feedback-widget.png)
 
 ## Contribute to Docker docs
 
@@ -45,4 +49,4 @@ contribute, see our [Contribute section](https://docs.docker.com/contribute/over
 
 ## Copyright and license
 
-Copyright 2013-2022 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2023 Docker, inc, released under the Apache 2.0 license.

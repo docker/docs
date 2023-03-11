@@ -11,10 +11,10 @@ redirect_from:
 
 This page provides information on how to configure and manage your Docker Desktop settings.
 
-To navigate to **Preferences** either:
+To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Preferences**
-- Select the **Preferences** icon from the Docker Dashboard.
+- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
+- Select the **Settings** icon from the Docker Dashboard.
 
 ## General
 
@@ -157,12 +157,33 @@ You can configure Docker Desktop networking to work on a virtual private network
 
 ## Docker Engine
 
-The **Docker Engine** tab allows you to configure the Docker daemon to determine how your containers run.
+The **Docker Engine** tab allows you to configure the Docker daemon used to run containers with Docker Desktop.
 
-Type a JSON configuration file in the box to configure the daemon settings. For a full list of options, see the Docker Engine
-[dockerd commandline reference](/engine/reference/commandline/dockerd/){:target="_blank" rel="noopener" class="_"}.
+You configure the daemon using a JSON configuration file. Here's what the file might look like:
 
-Click **Apply & Restart** to save your settings and restart Docker Desktop.
+```json
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": false,
+  "features": {
+    "buildkit": true
+  }
+}
+```
+
+You can find this file at `$HOME/.docker/daemon.json`. To change the configuration, either
+edit the JSON configuration directly from the dashboard in Docker Desktop, or open and
+edit the file using your favorite text editor.
+
+To see the full list of possible configuration options, see the 
+[dockerd command reference](/engine/reference/commandline/dockerd/).
+
+Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
 ## Kubernetes
 
@@ -219,6 +240,10 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 #### Enable containerd
 
 Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
+
+#### Use Rosetta for x86/AMD64 emulation on Apple Silicon. 
+
+Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. 
 
 ### Experimental features
 

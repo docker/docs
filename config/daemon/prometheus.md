@@ -36,7 +36,7 @@ exist, create it.
 - **Linux**: `/etc/docker/daemon.json`
 - **Windows Server**: `C:\ProgramData\docker\config\daemon.json`
 - **Docker Desktop for Mac / Docker Desktop for Windows**: Click the Docker icon in the toolbar,
-  select **Preferences**, then select **Daemon**. Click **Advanced**.
+  select **Settings**, then select **Daemon**. Click **Advanced**.
 
 If the file is currently empty, paste the following:
 

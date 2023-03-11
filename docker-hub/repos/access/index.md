@@ -27,7 +27,7 @@ see the [organizations documentation](../../../docker-hub/orgs.md#create-an-orga
 Docker Hub's individual repositories view shows you the available tags and the
 size of the associated image. Go to the **Repositories** view and select repository to see its tags. To view individual tags, select the **Tags** tab.
 
-![View Repo Tags](../../images/repo-overview.png)
+![View repo tags](../../images/repo-overview.png)
 
 Image sizes are the cumulative space taken up by the image and all its parent
 images. This is also the disk space used by the contents of the `.tar` file
@@ -48,7 +48,7 @@ To delete a tag, select the corresponding checkbox and select **Delete** from th
 
 You can select a tag's digest to view more details.
 
-![View Tag](../../images/repo-image-layers.png)
+![View tag](../../images/repo-image-layers.png)
 
 ## Searching for repositories
 

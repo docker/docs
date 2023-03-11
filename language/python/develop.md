@@ -228,7 +228,7 @@ If you have any containers running from the previous sections, [stop](./run-cont
 Now, to start our application and to confirm that it is running properly, run the following command:
 
 ```console
-$ docker-compose -f docker-compose.dev.yml up --build
+$ docker compose -f docker-compose.dev.yml up --build
 ```
 
 We pass the `--build` flag so Docker will compile our image and then start the containers.

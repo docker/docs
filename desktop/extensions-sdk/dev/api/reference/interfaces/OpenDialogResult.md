@@ -6,7 +6,9 @@ skip_read_time: true
 
 # Interface: OpenDialogResult
 
-**`since`** 0.2.3
+**`Since`**
+
+0.2.3
 
 ## Properties
 

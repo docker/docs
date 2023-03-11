@@ -12,11 +12,13 @@ redirect_from:
 
 With Registry Access Management, administrators can ensure that their developers using Docker Desktop only access registries that are allowed. This is done through the Registry Access Management dashboard on Docker Hub. 
 
-Below are some example registries administrators can allow: 
+Registry Access Management supports both cloud and on-prem registries. Example registries administrators can allow include: 
  - Docker Hub. This is enabled by default.
  - Amazon ECR
  - GitHub Container Registry
  - Google Container Registry
+ - Nexus
+ - Artifactory
 
 ## Prerequisites 
 
@@ -52,6 +54,7 @@ The new Registry Access Management policy takes effect after the developer succe
 There are certain limitations when using Registry Access Management:
 
 - Windows image pulls, and image builds are not restricted
+-  When RAM is enabled, the registry restrictions are currently applied to the [ADD](/engine/reference/builder/#add) instruction of the Dockerfile when the parameter of the ADD instruction is a URL. A workaround for this is to add the domains of URL parameters to the list of allowed registry addresses under the Registry Access Management settings of your organization.
 - Builds such as `docker buildx` using a Kubernetes driver are not restricted
 - Builds such as `docker buildx` using a custom docker-container driver are not restricted
 - Blocking is DNS-based; you must use a registry's access control mechanisms to distinguish between “push” and “pull”

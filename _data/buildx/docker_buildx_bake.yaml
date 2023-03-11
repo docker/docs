@@ -82,6 +82,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: provenance
+      value_type: string
+      description: Shorthand for `--set=*.attest=type=provenance`
+      details_url: '#provenance'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: pull
       value_type: bool
       default_value: "false"
@@ -97,6 +107,16 @@ options:
       value_type: bool
       default_value: "false"
       description: Shorthand for `--set=*.output=type=registry`
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: sbom
+      value_type: string
+      description: Shorthand for `--set=*.attest=type=sbom`
+      details_url: '#sbom'
       deprecated: false
       hidden: false
       experimental: false
@@ -204,9 +224,17 @@ examples: |-
 
     Same as [`build --progress`](buildx_build.md#progress).
 
+    ### Create provenance attestations (--provenance) {#provenance}
+
+    Same as [`build --provenance`](buildx_build.md#provenance).
+
     ### Always attempt to pull a newer version of the image (--pull) {#pull}
 
     Same as `build --pull`.
+
+    ### Create SBOM attestations (--sbom) {#sbom}
+
+    Same as [`build --sbom`](buildx_build.md#sbom).
 
     ### Override target configurations from command line (--set) {#set}
 

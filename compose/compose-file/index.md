@@ -1,13 +1,14 @@
 ---
-description: Compose file reference
-keywords: fig, composition, compose, docker
+description: Find the latest recommended version of the Docker Compose file format for defining multi-container applications.
+keywords: docker compose file, docker compose yml, docker compose reference, docker compose cmd, docker compose user, docker compose image, yaml spec, docker compose syntax, yaml specification, docker compose specification
 redirect_from:
 - /compose/yaml/
 - /compose/compose-file/compose-file-v1/
-title: Compose specification
+title: Compose file specification
 toc_max: 4
 toc_min: 1
 ---
+{% include compose-eol.md %}
 
 The Compose file is a [YAML](https://yaml.org){: target="_blank" rel="noopener" class="_"} file defining services,
 networks, and volumes for a Docker application. The latest and recommended
@@ -1756,7 +1757,7 @@ sysctls:
 You can only use sysctls that are namespaced in the kernel. Docker does not
 support changing sysctls inside a container that also modify the host system.
 For an overview of supported sysctls, refer to [configure namespaced kernel
-parameters (sysctls) at runtime](/engine/reference/commandline/run/#configure-namespaced-kernel-parameters-sysctls-at-runtime).
+parameters (sysctls) at runtime](/engine/reference/commandline/run/#sysctl).
 
 ### tmpfs
 
@@ -2002,7 +2003,7 @@ networks:
 
 ### ipam
 
-`ipam` specifies custom a IPAM configuration. This is an object with several properties, each of which is optional:
+`ipam` specifies a custom IPAM configuration. This is an object with several properties, each of which is optional:
 
 - `driver`: Custom IPAM driver, instead of the default.
 - `config`: A list with zero or more configuration elements, each containing:

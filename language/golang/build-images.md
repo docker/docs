@@ -314,8 +314,6 @@ $ docker build --tag docker-gs-ping .
  => => exporting layers                                                                   0.0s
  => => writing image sha256:336a3f164d0f079f2e42cd1d38f24ab9110d47d481f1db7f2a0b0d2859ec  0.0s
  => => naming to docker.io/library/docker-gs-ping                                         0.0s
-
-Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
 ```
 
 Your exact output will vary, but provided there aren't any errors, you should

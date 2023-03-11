@@ -27,7 +27,7 @@ For our sample application, let’s create a simple application from a template 
 ```console
 $ mkdir dotnet-docker
 $ cd dotnet-docker
-$ dotnet new webApp -n myWebApp -o src --no-https
+$ dotnet new webapp -n myWebApp -o src --no-https
 ```
 
 Output similar to the following appears.
@@ -155,7 +155,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 as runtime
 Next, specify the working directory for this stage.
 
 ```dockerfile
-WORKDIR /app
+WORKDIR /publish
 ```
 
 Next, copy the /publish directory from the build-env stage into the runtime image.

@@ -3,6 +3,7 @@ description: Key features and use cases of Docker Compose
 keywords: documentation, docs, docker, compose, orchestration, containers, uses, features
 title: Key features and use cases
 ---
+{% include compose-eol.md %}
 
 Using Compose is essentially a three-step process:
 
@@ -12,7 +13,7 @@ anywhere.
 2. Define the services that make up your app in `docker-compose.yml`
 so they can be run together in an isolated environment.
 
-3. Run `docker compose up` and the [Docker compose command](compose-v2/index.md#compose-v2-and-the-new-docker-compose-command) starts and runs your entire app. You can alternatively run `docker-compose up` using Compose standalone(`docker-compose` binary).
+3. Run `docker compose up` and the Docker compose command starts and runs your entire app. You can alternatively run `docker-compose up` using Compose standalone(`docker-compose` binary).
 
 A `docker-compose.yml` looks like this:
 
@@ -52,7 +53,7 @@ Compose uses a project name to isolate environments from each other. You can mak
 The default project name is the basename of the project directory. You can set
 a custom project name by using the
 [`-p` command line option](reference/index.md) or the
-[`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
+[`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
 The default project directory is the base directory of the Compose file. A custom value
 for it can be defined with the `--project-directory` command line option.
@@ -66,7 +67,7 @@ the old container to the new container. This process ensures that any data
 you've created in volumes isn't lost.
 
 If you use `docker compose` on a Windows machine, see
-[Environment variables](reference/envvars.md) and adjust the necessary environment
+[Environment variables](environment-variables/envvars.md) and adjust the necessary environment
 variables for your specific needs.
 
 

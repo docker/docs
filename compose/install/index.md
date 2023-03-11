@@ -1,11 +1,12 @@
 ---
-description: How to install Docker Compose
-keywords: compose, orchestration, install, installation, docker, documentation
+description: Learn how to install Docker Compose. Compose is available natively on Docker Desktop, as a Docker Engine plugin, and as a standalone tool. 
+keywords: install docker compose, docker compose install, install docker compose ubuntu, installing docker compose, docker compose download, docker compose not found, docker compose windows, how to install docker compose
 title: Overview
 toc_max: 3
 redirect_from:
 - /compose/compose-desktop/
 ---
+{% include compose-eol.md %}
 
 This page contains summary information about the available options for getting Docker Compose.
 

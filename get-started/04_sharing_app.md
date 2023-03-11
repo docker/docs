@@ -3,11 +3,11 @@ title: "Share the application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop, docker hub, sharing 
 redirect_from:
 - /get-started/part3/
-description: Sharing our image we built for our example application so we can run it else where and other developers can use it
+description: Sharing your image you built for your example application so you can run it else where and other developers can use it
 ---
 
-Now that we've built an image, let's share it! To share Docker images, you have to use a Docker
-registry. The default registry is Docker Hub and is where all of the images we've used have come from.
+Now that you've built an image, you can share it. To share Docker images, you have to use a Docker
+registry. The default registry is Docker Hub and is where all of the images you've used have come from.
 
 > **Docker ID**
 >
@@ -15,11 +15,11 @@ registry. The default registry is Docker Hub and is where all of the images we'v
 
 ## Create a repo
 
-To push an image, we first need to create a repository on Docker Hub.
+To push an image, you first need to create a repository on Docker Hub.
 
 1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} or Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
 
-2. Click the **Create Repository** button.
+2. Select the **Create Repository** button.
 
 3. For the repo name, use `getting-started`. Make sure the Visibility is `Public`.
 
@@ -27,9 +27,9 @@ To push an image, we first need to create a repository on Docker Hub.
     >
     > Did you know that Docker offers private repositories which allows you to restrict content to specific users or teams? Check out the details on the [Docker pricing](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} page.
 
-4. Click the **Create** button!
+4. Select the **Create** button.
 
-If you look at the image below an example **Docker command** can be seen. This command will push to this repo.
+If you look at the image below an example Docker command can be seen. This command will push to this repo.
 
 ![Docker command with push example](images/push-command.png){: style=width:75% }
 {: .text-center }
@@ -48,7 +48,7 @@ If you look at the image below an example **Docker command** can be seen. This c
     Why did it fail? The push command was looking for an image named docker/getting-started, but
     didn't find one. If you run `docker image ls`, you won't see one either.
 
-    To fix this, we need to "tag" our existing image we've built to give it another name.
+    To fix this, you need to "tag" your existing image you've built to give it another name.
 
 2. Login to the Docker Hub using the command `docker login -u YOUR-USER-NAME`.
 
@@ -58,10 +58,11 @@ If you look at the image below an example **Docker command** can be seen. This c
     ```console
     $ docker tag getting-started YOUR-USER-NAME/getting-started
     ```
-    Learn more about [docker tag](../engine/reference/commandline/tag.md).
+
+    To learn more about the `docker tag` command, see [docker tag](../engine/reference/commandline/tag.md).
 
 4. Now try your push command again. If you're copying the value from Docker Hub, you can drop the 
-   `tagname` portion, as we didn't add a tag to the image name. If you don't specify a tag, Docker
+   `tagname` portion, as you didn't add a tag to the image name. If you don't specify a tag, Docker
    will use a tag called `latest`.
 
     ```console
@@ -70,16 +71,28 @@ If you look at the image below an example **Docker command** can be seen. This c
 
 ## Run the image on a new instance
 
-Now that our image has been built and pushed into a registry, let's try running our app on a brand
-new instance that has never seen this container image! To do this, we will use Play with Docker.
+Now that your image has been built and pushed into a registry, try running your app on a brand
+new instance that has never seen this container image. To do this, you will use Play with Docker.
+
+> **Note**
+>
+> Play with Docker uses the amd64 platform. If you are using an ARM based Mac with Apple Silicon, you will need to rebuild the image to be compatible with Play with Docker and push the new image to your repository.
+>
+> To build an image for the amd64 platform, use the `--platform` flag.
+> ```console
+> $ docker build --platform linux/amd64 -t YOUR-USER-NAME/getting-started .
+> ```
+>
+> Docker buildx also supports building multi-platform images. To learn more, see [Mult-platform images](../build/building/multi-platform.md).
+
 
 1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
 
-2. Click **Login** and then select **docker** from the drop-down list.
+2. Select **Login** and then select **docker** from the drop-down list.
 
 3. Connect with your Docker Hub account.
 
-4. Once you're logged in, click on the **ADD NEW INSTANCE** option on the left side bar. If you don't see it, make your browser a little wider. After a few seconds, a terminal window opens in your browser.
+4. Once you're logged in, select the **ADD NEW INSTANCE** option on the left side bar. If you don't see it, make your browser a little wider. After a few seconds, a terminal window opens in your browser.
 
     ![Play with Docker add new instance](images/pwd-add-new-instance.png){: style=width:75% }
 
@@ -89,10 +102,10 @@ new instance that has never seen this container image! To do this, we will use P
     $ docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
     ```
 
-    You should see the image get pulled down and eventually start up!
+    You should see the image get pulled down and eventually start up.
 
-6. Click on the 3000 badge when it comes up and you should see the app with your modifications! Hooray!
-    If the 3000 badge doesn't show up, you can click on the "Open Port" button and type in 3000.
+6. Select on the 3000 badge when it comes up and you should see the app with your modifications.
+    If the 3000 badge doesn't show up, you can select on the **Open Port** button and type in 3000.
 
 
 ## Next steps
@@ -104,6 +117,6 @@ can use the latest version of the image.
 
 Now you can circle back around to what you noticed at the end of the last
 section. As a reminder, you noticed that when you restarted the app, you lost all of your todo list items.
-That's obviously not a great user experience, so next you'll learn how you can persist the data across restarts!
+That's obviously not a great user experience, so next you'll learn how you can persist the data across restarts.
 
 [Persist the DB](05_persisting_data.md){: .button  .primary-btn}

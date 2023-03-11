@@ -1,5 +1,5 @@
 Your configuration options can contain environment variables. Compose uses the
-variable values from the shell environment in which `docker-compose` is run. For
+variable values from the shell environment in which `docker compose` is run. For
 example, suppose the shell contains `POSTGRES_VERSION=9.3` and you supply this
 configuration:
 
@@ -8,7 +8,7 @@ db:
   image: "postgres:${POSTGRES_VERSION}"
 ```
 
-When you run `docker-compose up` with this configuration, Compose looks for the
+When you run `docker compose up` with this configuration, Compose looks for the
 `POSTGRES_VERSION` environment variable in the shell and substitutes its value
 in. For this example, Compose resolves the `image` to `postgres:9.3` before
 running the configuration.
@@ -24,7 +24,7 @@ Values set in the shell environment override those set in the `.env` file.
 
 > Note when using docker stack deploy
 >
-> The `.env file` feature only works when you use the `docker-compose up` command
+> The `.env file` feature only works when you use the `docker compose up` command
 > and does not work with `docker stack deploy`.
 {: .important }
 

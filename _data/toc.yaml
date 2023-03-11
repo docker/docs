@@ -125,6 +125,8 @@ guides:
       path: /language/dotnet/run-containers/
     - title: "Develop your app"
       path: /language/dotnet/develop/
+    - title: "Run your tests"
+      path: /language/dotnet/run-tests/
     - title: "Configure CI/CD"
       path: /language/dotnet/configure-ci-cd/
     - title: "Deploy your app"
@@ -134,13 +136,13 @@ guides:
   - path: /develop/
     title: Overview
   - path: /develop/dev-best-practices/
-    title: Best practices
-  - sectiontitle: Build images
-    section:
-    - path: /develop/develop-images/dockerfile_best-practices/
-      title: Dockerfile best practices
-  - path: /develop/scan-images/
-    title: Scan images
+    title: Development best practices
+  - path: /develop/develop-images/dockerfile_best-practices/
+    title: Dockerfile best practices
+  - path: /develop/security-best-practices/
+    title: Security best practices
+  - path: /develop/remote-development/
+    title: Remote development
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -241,38 +243,6 @@ reference:
       title: Use the Docker command line
     - path: /engine/reference/commandline/docker/
       title: docker (base command)
-    - sectiontitle: docker app
-      section:
-        - path: /engine/reference/commandline/app/
-          title: docker app
-        - path: /engine/reference/commandline/app_bundle/
-          title: docker app bundle
-        - path: /engine/reference/commandline/app_completion/
-          title: docker app completion
-        - path: /engine/reference/commandline/app_init/
-          title: docker app init
-        - path: /engine/reference/commandline/app_inspect/
-          title: docker app inspect
-        - path: /engine/reference/commandline/app_install/
-          title: docker app install
-        - path: /engine/reference/commandline/app_list/
-          title: docker app list
-        - path: /engine/reference/commandline/app_pull/
-          title: docker app pull
-        - path: /engine/reference/commandline/app_push/
-          title: docker app push
-        - path: /engine/reference/commandline/app_render/
-          title: docker app render
-        - path: /engine/reference/commandline/app_status/
-          title: docker app status
-        - path: /engine/reference/commandline/app_uninstall/
-          title: docker app uninstall
-        - path: /engine/reference/commandline/app_upgrade/
-          title: docker app upgrade
-        - path: /engine/reference/commandline/app_validate/
-          title: docker app validate
-        - path: /engine/reference/commandline/app_version/
-          title: docker app version
     - path: /engine/reference/commandline/attach/
       title: docker attach
     - path: /engine/reference/commandline/build/
@@ -337,12 +307,14 @@ reference:
       section:
         - path: /compose/reference/
           title: overview
-        - path: /compose/reference/envvars/
+        - path: /compose/environment-variables/envvars/
           title: environment variables
         - path: /engine/reference/commandline/compose/
           title: docker compose
         - path: /engine/reference/commandline/compose_build/
           title: docker compose build
+        - path: /engine/reference/commandline/compose_config/
+          title: docker compose config
         - path: /engine/reference/commandline/compose_convert/
           title: docker compose convert
         - path: /engine/reference/commandline/compose_cp/
@@ -473,6 +445,8 @@ reference:
           title: docker context ls
         - path: /engine/reference/commandline/context_rm/
           title: docker context rm
+        - path: /engine/reference/commandline/context_show/
+          title: docker context show
         - path: /engine/reference/commandline/context_update/
           title: docker context update
         - path: /engine/reference/commandline/context_use/
@@ -631,6 +605,14 @@ reference:
       title: docker run
     - path: /engine/reference/commandline/save/
       title: docker save
+    - sectiontitle: docker scout
+      section:
+      - path: /engine/reference/commandline/scout/
+        title: docker scout
+      - path: /engine/reference/commandline/scout_cves/
+        title: docker scout cves
+      - path: /engine/reference/commandline/scout_version/
+        title: docker scout version
     - path: /engine/reference/commandline/search/
       title: docker search
     - sectiontitle: docker secret
@@ -671,6 +653,8 @@ reference:
       section:
       - path: /engine/reference/commandline/stack/
         title: docker stack
+      - path: /engine/reference/commandline/stack_config/
+        title: docker stack config
       - path: /engine/reference/commandline/stack_deploy/
         title: docker stack deploy
       - path: /engine/reference/commandline/stack_ls/
@@ -763,6 +747,8 @@ reference:
         title: docker volume prune
       - path: /engine/reference/commandline/volume_rm/
         title: docker volume rm
+      - path: /engine/reference/commandline/volume_update/
+        title: docker volume update
     - path: /engine/reference/commandline/wait/
       title: docker wait
   - title: Docker Compose CLI reference
@@ -786,6 +772,8 @@ reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.42/
+        title: v1.42 reference
       - path: /engine/api/v1.41/
         title: v1.41 reference
       - path: /engine/api/v1.40/
@@ -844,7 +832,7 @@ reference:
         path: /docker-hub/api/deprecated/
   - title: Registry API
     path: /registry/spec/api/
-  - sectiontitle: Docker Extension SDK API (Beta)
+  - sectiontitle: Docker Extension SDK API
     section:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
         title: DesktopUI
@@ -902,8 +890,6 @@ reference:
       title: Compose file build
     - path: /compose/compose-file/deploy/
       title: Compose file deploy
-    - path: /compose/faq/
-      title: Frequently asked questions
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
@@ -1121,6 +1107,8 @@ manuals:
           title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
           title: Run Docker Desktop for Windows in a VM or VDI environment
+        - path: /desktop/allow-list/
+          title: Allowlist for Docker Desktop
         - path: /desktop/uninstall/
           title: Uninstall Docker Desktop
     - sectiontitle: Hardened Docker Desktop
@@ -1159,17 +1147,17 @@ manuals:
           title: Distribute your dev environment
         - path: /desktop/dev-environments/dev-cli/
           title: Use the docker dev CLI plugin
-    - sectiontitle: Extensions (Beta)
+    - sectiontitle: Extensions
       section:
       - path: /desktop/extensions/
         title: What are Docker Extensions?
       - path: /desktop/extensions/marketplace/
-        title: Manage marketplace Extensions
+        title: Manage Marketplace extensions
       - path: /desktop/extensions/non-marketplace/
         title: Manage non-Marketplace extensions
       - path: /desktop/extensions/settings-feedback/
-        title: Change Settings and give feedback
-    - sectiontitle: Extensions SDK (Beta)
+        title: Change settings and give feedback
+    - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
           title: Overview
@@ -1179,26 +1167,20 @@ manuals:
           title: Quickstart
         - sectiontitle: "Part one: Build"
           section:
-            - sectiontitle: "Step one: Create a new extension"
-              section:
-                - title: Create a simple extension
-                  path: /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
-                - title: Create a more advanced frontend
-                  path: /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
-                - title: Add a backend to your extension
-                  path: /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/
-            - title: "Step two: Build and install"
-              path: /desktop/extensions-sdk/build/build-install/
-            - title: "Step three: Test and debug"
-              path: /desktop/extensions-sdk/build/test-debug/
+            - title: Create a simple extension
+              path: /desktop/extensions-sdk/build/minimal-frontend-extension/
+            - title: Create an advanced frontend extension
+              path: /desktop/extensions-sdk/build/frontend-extension-tutorial/
+            - title: Add a backend to your extension
+              path: /desktop/extensions-sdk/build/backend-extension-tutorial/
         - sectiontitle: "Part two: Publish"
           section:
             - title: Overview
               path: /desktop/extensions-sdk/extensions/
-            - title: Metadata
-              path: /desktop/extensions-sdk/extensions/METADATA/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
+            - title: Validate
+              path: /desktop/extensions-sdk/extensions/validate/
             - title: Package and release your extension
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Generate a share link
@@ -1207,26 +1189,38 @@ manuals:
               path: /desktop/extensions-sdk/extensions/publish/
             - title: Build multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
+        - sectiontitle: "Architecture"
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/architecture/
+            - title: Metadata
+              path: /desktop/extensions-sdk/architecture/metadata/
+            - title: Security
+              path: /desktop/extensions-sdk/architecture/security/
         - sectiontitle: "Design and UI styling"
           section:
+             - title: UI styling guidelines
+               path: /desktop/extensions-sdk/design/
              - title: Guidelines
                path: /desktop/extensions-sdk/design/design-guidelines/
              - title: Docker design principles
                path: /desktop/extensions-sdk/design/design-principles/
-             - title: UI styling guidelines
-               path: /desktop/extensions-sdk/design/overview/
              - title: MUI best practices
                path: /desktop/extensions-sdk/design/mui-best-practices/
         - sectiontitle: "Developer Guides"
           section:
             - title: Invoke host binaries
               path: /desktop/extensions-sdk/guides/invoke-host-binaries/
+            - title: Use the Docker socket from the extension backend
+              path: /desktop/extensions-sdk/guides/use-docker-socket-from-backend/
             - title: Interacting with Kubernetes
               path: /desktop/extensions-sdk/guides/kubernetes/
             - title: Authentication
               path: /desktop/extensions-sdk/guides/oauth2-flow/
         - sectiontitle: Developer SDK tools
           section:
+            - title: "Test and debug"
+              path: /desktop/extensions-sdk/dev/test-debug/
             - title: CLI reference
               path: /desktop/extensions-sdk/dev/usage/
             - sectiontitle: Extension APIs
@@ -1511,10 +1505,12 @@ manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/
-      title: Engine 20.10
+    - path: /engine/release-notes/23.0/
+      title: Engine 23.0
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/20.10/
+        title: Engine 20.10
       - path: /engine/release-notes/19.03/
         title: Engine 19.03
       - path: /engine/release-notes/18.09/
@@ -1555,80 +1551,128 @@ manuals:
   section:
     - path: /build/
       title: Overview
+    - path: /build/install-buildx/
+      title: Install Buildx
     - sectiontitle: Building images
       section:
         - path: /build/building/packaging/
           title: Packaging your software
         - path: /build/building/context/
           title: Build context
-        - sectiontitle: Build drivers
-          section:
-            - path: /build/building/drivers/
-              title: Overview
-            - path: /build/building/drivers/docker/
-              title: Docker driver
-            - path: /build/building/drivers/docker-container/
-              title: Docker container driver
-            - path: /build/building/drivers/kubernetes/
-              title: Kubernetes driver
-            - path: /build/building/drivers/remote/
-              title: Remote driver
-        - sectiontitle: Cache
-          section:
-            - path: /build/building/cache/
-              title: Optimizing builds with cache
-            - path: /build/building/cache/garbage-collection/
-              title: Garbage collection
-            - sectiontitle: Cache backends
-              section:
-                - path: /build/building/cache/backends/
-                  title: Overview
-                - path: /build/building/cache/backends/inline/
-                  title: Inline
-                - path: /build/building/cache/backends/local/
-                  title: Local
-                - path: /build/building/cache/backends/registry/
-                  title: Registry
-                - path: /build/building/cache/backends/gha/
-                  title: GitHub Actions
-                - path: /build/building/cache/backends/azblob/
-                  title: Azure Blob Storage
-                - path: /build/building/cache/backends/s3/
-                  title: Amazon S3
-        - sectiontitle: Exporters
-          section:
-          - path: /build/building/exporters/
-            title: Overview
-          - path: /build/building/exporters/image-registry/
-            title: Image and registry exporters
-          - path: /build/building/exporters/local-tar/
-            title: Local and tar exporters
-          - path: /build/building/exporters/oci-docker/
-            title: OCI and Docker exporters
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
+        - path: /build/building/env-vars/
+          title: Environment variables
+        - path: /build/building/opentelemetry/
+          title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
-    - sectiontitle: Customizing builds
+    - sectiontitle: Drivers
       section:
-        - sectiontitle: High-level builds with Bake
+        - path: /build/drivers/
+          title: Drivers overview
+        - path: /build/drivers/docker/
+          title: Docker driver
+        - path: /build/drivers/docker-container/
+          title: Docker container driver
+        - path: /build/drivers/kubernetes/
+          title: Kubernetes driver
+        - path: /build/drivers/remote/
+          title: Remote driver
+    - sectiontitle: Cache
+      section:
+        - path: /build/cache/
+          title: Optimizing builds with cache
+        - path: /build/cache/garbage-collection/
+          title: Garbage collection
+        - sectiontitle: Cache backends
           section:
-            - path: /build/customize/bake/
+            - path: /build/cache/backends/
               title: Overview
-            - path: /build/customize/bake/file-definition/
-              title: File definition
-            - path: /build/customize/bake/configuring-build/
-              title: Configuring builds
-            - path: /build/customize/bake/hcl-funcs/
-              title: User defined HCL functions
-            - path: /build/customize/bake/build-contexts/
-              title: Build contexts and linking targets
-            - path: /build/customize/bake/compose-file/
-              title: Building from Compose file
-        - path: /build/customize/color-output-controls/
-          title: Color output controls
+            - path: /build/cache/backends/inline/
+              title: Inline
+            - path: /build/cache/backends/local/
+              title: Local
+            - path: /build/cache/backends/registry/
+              title: Registry
+            - path: /build/cache/backends/gha/
+              title: GitHub Actions
+            - path: /build/cache/backends/azblob/
+              title: Azure Blob Storage
+            - path: /build/cache/backends/s3/
+              title: Amazon S3
+    - sectiontitle: Exporters
+      section:
+      - path: /build/exporters/
+        title: Overview
+      - path: /build/exporters/image-registry/
+        title: Image and registry exporters
+      - path: /build/exporters/local-tar/
+        title: Local and tar exporters
+      - path: /build/exporters/oci-docker/
+        title: OCI and Docker exporters
+    - sectiontitle: Continuous integration
+      section:
+        - path: /build/ci/
+          title: CI with Docker
+        - sectiontitle: GitHub Actions
+          section:
+          - path: /build/ci/github-actions/
+            title: Introduction
+          - path: /build/ci/github-actions/configure-builder/
+            title: Configuring your builder
+          - path: /build/ci/github-actions/multi-platform/
+            title: Multi-platform image
+          - path: /build/ci/github-actions/secrets/
+            title: Secrets
+          - path: /build/ci/github-actions/push-multi-registries/
+            title: Push to multi-registries
+          - path: /build/ci/github-actions/manage-tags-labels/
+            title: Manage tags and labels
+          - path: /build/ci/github-actions/cache/
+            title: Cache management
+          - path: /build/ci/github-actions/export-docker/
+            title: Export to Docker
+          - path: /build/ci/github-actions/test-before-push/
+            title: Test before push
+          - path: /build/ci/github-actions/local-registry/
+            title: Local registry
+          - path: /build/ci/github-actions/share-image-jobs/
+            title: Share built image between jobs
+          - path: /build/ci/github-actions/named-contexts/
+            title: Named contexts
+          - path: /build/ci/github-actions/copy-image-registries/
+            title: Copy image between registries
+          - path: /build/ci/github-actions/update-dockerhub-desc/
+            title: Update Docker Hub repo description
+    - sectiontitle: Bake
+      section:
+        - path: /build/bake/
+          title: Overview
+        - path: /build/bake/file-definition/
+          title: File definition
+        - path: /build/bake/configuring-build/
+          title: Configuring builds
+        - path: /build/bake/hcl-funcs/
+          title: User defined HCL functions
+        - path: /build/bake/build-contexts/
+          title: Build contexts and linking targets
+        - path: /build/bake/compose-file/
+          title: Building from Compose file
+    - sectiontitle: Attestations
+      section:
+        - path: /build/attestations/
+          title: Overview
+        - path: /build/attestations/sbom/
+          title: SBOM
+        - path: /build/attestations/slsa-provenance/
+          title: Provenance
+        - path: /build/attestations/slsa-definitions/
+          title: SLSA definitions
+        - path: /build/attestations/attestation-storage/
+          title: Attestation storage
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
@@ -1639,24 +1683,6 @@ manuals:
           title: Configure
         - path: /build/buildkit/toml-configuration/
           title: TOML configuration
-    - sectiontitle: Buildx
-      section:
-        - path: /build/buildx/install/
-          title: Install Buildx
-        - path: /build/buildx/multiple-builders/
-          title: Using multiple builders
-    - sectiontitle: Continuous integration
-      section:
-        - path: /build/ci/
-          title: CI with Docker
-        - sectiontitle: GitHub Actions
-          section:
-          - path: /build/ci/github-actions/
-            title: Introduction
-          - path: /build/ci/github-actions/examples/
-            title: Examples
-          - path: /build/ci/github-actions/configure-builder/
-            title: Configuring your builder
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
@@ -1665,6 +1691,8 @@ manuals:
     title: Overview
   - path: /compose/features-uses/
     title: Key features and use cases
+  - path: /compose/compose-v2/
+    title: Evolution of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
@@ -1677,20 +1705,19 @@ manuals:
         title: Uninstall Compose
   - path: /compose/gettingstarted/
     title: Try Docker Compose
-  - sectiontitle: Compose V2
-    section:
-    - path: /compose/compose-v2/
-      title: Overview
-    - path: /compose/cli-command-compatibility/
-      title: Compose v2 compatibility
+
   - sectiontitle: Environment variables
     section:
     - path: /compose/environment-variables/
       title: Overview
-    - path: /compose/envvars-precedence/
-      title: Environment variables' precedence
-  - path: /compose/env-file/
-    title: Environment file
+    - path: /compose/environment-variables/set-environment-variables/
+      title: Explore ways to set environment variables
+    - path: /compose/environment-variables/envvars-precedence/
+      title: Understand environment variables' precedence
+    - path: /compose/environment-variables/env-file/
+      title: Use an environment file
+    - path: /compose/environment-variables/envvars/
+      title: Change pre-defined environment variables
   - path: /compose/profiles/
     title: Using service profiles
   - path: /compose/gpu-support/
@@ -1705,12 +1732,16 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
+  - path: /compose/faq/
+    title: FAQs
   - path: /compose/release-notes/
     title: Release notes
 
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
+    title: Overview
+  - path: /docker-hub/quickstart/
     title: Quickstart
   - path: /docker-id/
     title: Docker ID accounts
@@ -1774,21 +1805,21 @@ manuals:
         title: Insights and analytics
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
+  - path: /docker-hub/oci-artifacts/
+    title: OCI artifacts
   - path: /docker-hub/release-notes/
     title: Release notes
 
-- sectiontitle: Docker subscription
+- sectiontitle: Docker Scout (Early Access)
   section:
-  - path: /subscription/
-    title: Overview
-  - path: /subscription/upgrade/
-    title: Upgrade
-  - path: /subscription/downgrade/
-    title: Downgrade
-  - path: /subscription/add-seats/
-    title: Add seats
-  - path: /subscription/remove-seats/
-    title: Remove seats
+    - path: /scout/
+      title: Overview
+    - path: /scout/image-details-view/
+      title: Image details view
+    - path: /scout/advanced-image-analysis/
+      title: Advanced image analysis
+    - path: /scout/artifactory/
+      title: Artifactory integration
 
 - sectiontitle: Administration
   section:
@@ -1800,8 +1831,18 @@ manuals:
       title: Business
     - path: /docker-hub/onboarding-faqs/
       title: FAQs
+  - sectiontitle: Set up your company
+    section:
+    - path: /docker-hub/creating-companies/
+      title: Overview
+    - path:  /docker-hub/company-owner/
+      title: Manage company owners
+    - path: /docker-hub/company-faqs/
+      title: FAQs
   - path: /docker-hub/orgs/
-    title: Teams and organizations
+    title: Create your organization
+  - path: /docker-hub/manage-a-team/
+    title: Manage a team
   - path: /docker-hub/members/
     title: Manage members
   - path: /docker-hub/configure-sign-in/
@@ -1820,33 +1861,41 @@ manuals:
          title: FAQs
   - path: /docker-hub/scim/
     title: SCIM
+  - path: /docker-hub/domain-audit/
+    title: Domain audit
   - path: /docker-hub/image-access-management/
     title: Image Access Management
 
+- sectiontitle: Billing
+  section:
+  - path: /billing/
+    title: Overview
+  - path: /billing/payment-method/
+    title: Add or update a payment method
+  - path: /billing/details/
+    title: Update the billing information
+  - path: /billing/history/
+    title: View your billing history
+  - path: /billing/cycle/
+    title: Change your billing cycle
+  - path: /billing/faqs/
+    title: FAQs
+
+- sectiontitle: Subscription
+  section:
+  - path: /subscription/
+    title: Overview
+  - path: /subscription/upgrade/
+    title: Upgrade
+  - path: /subscription/downgrade/
+    title: Downgrade
+  - path: /subscription/add-seats/
+    title: Add seats
+  - path: /subscription/remove-seats/
+    title: Remove seats
 
 - title: Security announcements
   path: /security/
-
-- sectiontitle: Atomist
-  section:
-    - path: /atomist/
-      title: Introduction
-    - path: /atomist/try-atomist/
-      title: Try Atomist
-    - path: /atomist/get-started/
-      title: Get started
-    - sectiontitle: Configure
-      section:
-        - path: /atomist/configure/settings/
-          title: Settings
-        - path: /atomist/configure/advisories/
-          title: Advisories
-    - sectiontitle: Integrate
-      section:
-        - path: /atomist/integrate/github/
-          title: GitHub
-        - path: /atomist/integrate/deploys/
-          title: Track deployments
 
 - sectiontitle: Open-source projects
   section:

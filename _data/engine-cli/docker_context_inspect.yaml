@@ -5,53 +5,58 @@ usage: docker context inspect [OPTIONS] [CONTEXT] [CONTEXT...]
 pname: docker context
 plink: docker_context.yaml
 options:
-- option: format
-  shorthand: f
-  value_type: string
-  description: Format the output using the given Go template
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
+    - option: format
+      shorthand: f
+      value_type: string
+      description: |-
+        Format output using a custom template:
+        'json':             Print in JSON format
+        'TEMPLATE':         Print output using the given Go template.
+        Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: help
+      value_type: bool
+      default_value: "false"
+      description: Print usage
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
-  ### Inspect a context by name
+    ### Inspect a context by name
 
-  ```console
-  $ docker context inspect "local+aks"
+    ```console
+    $ docker context inspect "local+aks"
 
-  [
-    {
-      "Name": "local+aks",
-      "Metadata": {
-        "Description": "Local Docker Engine + Azure AKS endpoint",
-        "StackOrchestrator": "kubernetes"
-      },
-      "Endpoints": {
-        "docker": {
-          "Host": "npipe:////./pipe/docker_engine",
-          "SkipTLSVerify": false
+    [
+      {
+        "Name": "local+aks",
+        "Metadata": {
+          "Description": "Local Docker Engine",
+          "StackOrchestrator": "swarm"
         },
-        "kubernetes": {
-          "Host": "https://simon-aks-***.hcp.uksouth.azmk8s.io:443",
-          "SkipTLSVerify": false,
-          "DefaultNamespace": "default"
+        "Endpoints": {
+          "docker": {
+            "Host": "npipe:////./pipe/docker_engine",
+            "SkipTLSVerify": false
+          }
+        },
+        "TLSMaterial": {},
+        "Storage": {
+          "MetadataPath": "C:\\Users\\simon\\.docker\\contexts\\meta\\cb6d08c0a1bfa5fe6f012e61a442788c00bed93f509141daff05f620fc54ddee",
+          "TLSPath": "C:\\Users\\simon\\.docker\\contexts\\tls\\cb6d08c0a1bfa5fe6f012e61a442788c00bed93f509141daff05f620fc54ddee"
         }
-      },
-      "TLSMaterial": {
-        "kubernetes": [
-          "ca.pem",
-          "cert.pem",
-          "key.pem"
-        ]
-      },
-      "Storage": {
-        "MetadataPath": "C:\\Users\\simon\\.docker\\contexts\\meta\\cb6d08c0a1bfa5fe6f012e61a442788c00bed93f509141daff05f620fc54ddee",
-        "TLSPath": "C:\\Users\\simon\\.docker\\contexts\\tls\\cb6d08c0a1bfa5fe6f012e61a442788c00bed93f509141daff05f620fc54ddee"
       }
-    }
-  ]
-  ```
+    ]
+    ```
 deprecated: false
 experimental: false
 experimentalcli: false
