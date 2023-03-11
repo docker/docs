@@ -194,7 +194,7 @@ COPY go.mod go.sum ./
 > **Notice**
 >
 > Please take some time to familiarise yourself with the trailing slash treatment
-> by the `COPY` command: [Dockerfile reference](../../engine/reference/builder/#copy)
+> by the `COPY` command: [Dockerfile reference](../../engine/reference/builder.md/#copy)
 > as it might otherwise trick you up in more ways than you can imagine.
 
 Now that we have the module files inside the Docker image that we are building,
