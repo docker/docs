@@ -72,7 +72,7 @@ func main() {
 		return c.HTML(http.StatusOK, "Hello, Docker! <3")
 	})
 
-	e.GET("/ping", func(c echo.Context) error {
+	e.GET("/health", func(c echo.Context) error {
 		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
 	})
 
@@ -112,7 +112,7 @@ the banner, as illustrated in the next figure.
    ____    __
   / __/___/ /  ___
  / _// __/ _ \/ _ \
-/___/\__/_//_/\___/ v4.2.2
+/___/\__/_//_/\___/ v4.10.2
 High performance, minimalist Go web framework
 https://echo.labstack.com
 ____________________________________O/_______
@@ -145,7 +145,7 @@ We then tell Docker what *base image* we would like to use for our application:
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM golang:1.19-alpine
+FROM golang:1.19
 ```
 
 Docker images can be inherited from other images. Therefore, instead of creating
@@ -182,12 +182,20 @@ parameter tells Docker what files you want to copy into the image. The last
 parameter tells Docker where you want that file to be copied to. 
 
 We’ll copy the `go.mod` and `go.sum` file into our project directory `/app` which,
-owing to our use of `WORKDIR`, is the current directory (`.`) inside the image.
+owing to our use of `WORKDIR`, is the current directory (`./`) inside the image.
+Unlike some modern shells that appear to be indifferent to the use of trailing slash (`/`),
+and can figure out what the user meant (most of the time), Docker's `COPY` command 
+is quite sensitive in its interpretation of the trailing slash.
 
 ```dockerfile
-COPY go.mod ./
-COPY go.sum ./
+COPY go.mod go.sum ./
 ```
+
+> **Notice**
+>
+> Please take some time to familiarise yourself with the trailing slash treatment
+> by the `COPY` command: [Dockerfile reference](../../engine/reference/builder/#copy)
+> as it might otherwise trick you up in more ways than you can imagine.
 
 Now that we have the module files inside the Docker image that we are building,
 we can use the `RUN` command to execute the command `go mod download` there as
@@ -217,7 +225,7 @@ Now, we would like to compile our application. To that end, we use the familiar
 `RUN` command:
 
 ```dockerfile
-RUN go build -o /docker-gs-ping
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
 ```
 
 This should be familiar. The result of that command will be a static application
@@ -241,23 +249,30 @@ Here's the complete `Dockerfile`:
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM golang:1.19-alpine
+FROM golang:1.19
 
+# Set destination for COPY
 WORKDIR /app
 
-COPY go.mod .
-COPY go.sum .
+# Download Go modules
+COPY go.mod go.sum ./
 RUN go mod download
 
+# Copy the source code. Note the slash at the end, as explained in
+# https://docs.docker.com/engine/reference/builder/#copy
 COPY *.go ./
 
-RUN go build -o /docker-gs-ping
+# Build
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
 
+# Optional:
 # To bind to a TCP port, runtime parameters must be supplied to the docker command.
-# But we can (optionally) document in the Dockerfile what ports
-# the application is going to listen on.
+# But we can document in the Dockerfile what ports
+# the application is going to listen on by default.
+# https://docs.docker.com/engine/reference/builder/#expose
 EXPOSE 8080
 
+# Run
 CMD [ "/docker-gs-ping" ]
 ```
 
@@ -273,8 +288,7 @@ make sure that the comments follow *after* any directives that you may have used
 # syntax=docker/dockerfile:1
 # A sample microservice in Go packaged into a container image.
 
-# Alpine is chosen for its smaller footprint compared to Ubuntu
-FROM golang:1.19-alpine
+FROM golang:1.19
 
 # ...
 ```
@@ -300,29 +314,28 @@ The build process will print some diagnostic messages as it goes through the bui
 The following is just an example of what these messages may look like.
 
 ```console
-[+] Building 17.1s (16/16) FINISHED
- => [internal] load build definition from Dockerfile                                                                                       1.6s
- => => transferring dockerfile: 32B                                                                                                        0.0s
- => [internal] load .dockerignore                                                                                                          2.1s
- => => transferring context: 2B                                                                                                            0.0s
- => resolve image config for docker.io/docker/dockerfile:1                                                                                 1.4s
- => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:39b85bbfa7536a5feceb7372a0817649ecb2724562a38360f4d6a7782a409b14            0.0s
- => [internal] load .dockerignore                                                                                                          0.0s
+[+] Building 2.2s (15/15) FINISHED
  => [internal] load build definition from Dockerfile                                                                                       0.0s
- => [internal] load metadata for docker.io/library/golang:1.19-alpine                                                                      1.3s
- => [1/7] FROM docker.io/library/golang:1.19-alpine@sha256:ee42797ebf3cfbd7887c9c582dc6f75850d3a631ed85125356842483c2631e64                0.0s
- => [internal] load build context                                                                                                          0.4s
- => => transferring context: 850B                                                                                                          0.0s
- => CACHED [2/7] WORKDIR /app                                                                                                              0.0s
- => CACHED [3/7] COPY go.mod .                                                                                                             0.0s
- => CACHED [4/7] COPY go.sum .                                                                                                             0.0s
- => CACHED [5/7] RUN go mod download                                                                                                       0.0s
- => [6/7] COPY *.go ./                                                                                                                     0.8s
- => [7/7] RUN go build -o /docker-gs-ping                                                                                                  6.6s
- => exporting to image                                                                                                                     2.3s
- => => exporting layers                                                                                                                    1.8s
- => => writing image sha256:7f153fbcc0a826faf08ccde29f28c844c6cce97f5ca5430c91d8a5164efce5c0                                               0.1s
- => => naming to docker.io/library/docker-gs-ping
+ => => transferring dockerfile: 701B                                                                                                       0.0s
+ => [internal] load .dockerignore                                                                                                          0.0s
+ => => transferring context: 2B                                                                                                            0.0s
+ => resolve image config for docker.io/docker/dockerfile:1                                                                                 1.1s
+ => CACHED docker-image://docker.io/docker/dockerfile:1@sha256:39b85bbfa7536a5feceb7372a0817649ecb2724562a38360f4d6a7782a409b14            0.0s
+ => [internal] load build definition from Dockerfile                                                                                       0.0s
+ => [internal] load .dockerignore                                                                                                          0.0s
+ => [internal] load metadata for docker.io/library/golang:1.19                                                                             0.7s
+ => [1/6] FROM docker.io/library/golang:1.19@sha256:5d947843dde82ba1df5ac1b2ebb70b203d106f0423bf5183df3dc96f6bc5a705                       0.0s
+ => [internal] load build context                                                                                                          0.0s
+ => => transferring context: 6.08kB                                                                                                        0.0s
+ => CACHED [2/6] WORKDIR /app                                                                                                              0.0s
+ => CACHED [3/6] COPY go.mod go.sum ./                                                                                                     0.0s
+ => CACHED [4/6] RUN go mod download                                                                                                       0.0s
+ => CACHED [5/6] COPY *.go ./                                                                                                              0.0s
+ => CACHED [6/6] RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping                                                                  0.0s
+ => exporting to image                                                                                                                     0.0s
+ => => exporting layers                                                                                                                    0.0s
+ => => writing image sha256:ede8ff889a0d9bc33f7a8da0673763c887a258eb53837dd52445cdca7b7df7e3                                               0.0s
+ => => naming to docker.io/library/docker-gs-ping                                                                                          0.0s
 ```
 
 Your exact output will vary, but provided there aren't any errors, you should
@@ -342,7 +355,7 @@ To list images, run the `docker image ls`command (or the `docker images` shortha
 $ docker image ls
 
 REPOSITORY                       TAG       IMAGE ID       CREATED         SIZE
-docker-gs-ping                   latest    7f153fbcc0a8   2 minutes ago   449MB
+docker-gs-ping                   latest    7f153fbcc0a8   2 minutes ago   1.11GB
 ...
 ```
 
@@ -383,8 +396,8 @@ images:
 $ docker image ls
 
 REPOSITORY                       TAG       IMAGE ID       CREATED         SIZE
-docker-gs-ping                   latest    7f153fbcc0a8   6 minutes ago   449MB
-docker-gs-ping                   v1.0      7f153fbcc0a8   6 minutes ago   449MB
+docker-gs-ping                   latest    7f153fbcc0a8   6 minutes ago   1.11GB
+docker-gs-ping                   v1.0      7f153fbcc0a8   6 minutes ago   1.11GB
 ...
 ```
 
@@ -414,7 +427,7 @@ You will see that the tag `v1.0` is no longer in the list of images kept by your
 
 ```
 REPOSITORY                       TAG       IMAGE ID       CREATED         SIZE
-docker-gs-ping                   latest    7f153fbcc0a8   7 minutes ago   449MB
+docker-gs-ping                   latest    7f153fbcc0a8   7 minutes ago   1.11GB
 ...
 ```
 
@@ -423,8 +436,8 @@ tag available on our machine, so the image is there.
 
 ## Multi-stage builds
 
-You may have noticed that our `docker-gs-ping` image stands at several hundred megabytes, 
-which is a lot for a tiny compiled Go application. You may also be wondering what happened
+You may have noticed that our `docker-gs-ping` image weighs in at over a gigabyte (!!!), 
+which is *a lot* for a tiny compiled Go application. You may also be wondering what happened
 to the full suite of Go tools, including the compiler, after we had built our image.
 
 The answer is that the full toolchain is still there, in the container image. 
@@ -451,27 +464,33 @@ content:
 ## Build the application from source
 ##
 
-FROM golang:1.19-buster AS build
+FROM golang:1.19 AS build-stage
 
 WORKDIR /app
 
-COPY go.mod .
-COPY go.sum .
+COPY go.mod go.sum ./
 RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /docker-gs-ping
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+
+##
+## Run the tests in the container
+##
+
+FROM build-stage AS run-test-stage
+RUN go test -v ./...
 
 ##
 ## Deploy the application binary into a lean image
 ##
 
-FROM gcr.io/distroless/base-debian10
+FROM gcr.io/distroless/base-debian11 AS build-release-stage
 
 WORKDIR /
 
-COPY --from=build /docker-gs-ping /docker-gs-ping
+COPY --from=build-stage /docker-gs-ping /docker-gs-ping
 
 EXPOSE 8080
 
@@ -490,12 +509,12 @@ $ docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
 ```
 
 Comparing the sizes of `docker-gs-ping:multistage` and `docker-gs-ping:latest`
-we see an order-of-magnitude difference! (`docker image ls`)
+we see a *few orders-of-magnitude* difference! (`docker image ls`)
 
 ```
 REPOSITORY       TAG          IMAGE ID       CREATED              SIZE
-docker-gs-ping   multistage   e3fdde09f172   About a minute ago   27.1MB
-docker-gs-ping   latest       336a3f164d0f   About an hour ago    540MB
+docker-gs-ping   multistage   e3fdde09f172   About a minute ago   28.1MB
+docker-gs-ping   latest       336a3f164d0f   About an hour ago    1.11GB
 ```
 
 This is so because the ["distroless"](https://github.com/GoogleContainerTools/distroless){:target="_blank" rel="noopener" class="_"} 
