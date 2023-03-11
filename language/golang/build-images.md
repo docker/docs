@@ -444,7 +444,7 @@ The answer is that the full toolchain is still there, in the container image.
 Not only this is inconvenient because of the large file size, but it may also
 present a security risk when the container is deployed.
 
-These two issues can be solved by using [multi-stage builds](../../build/building/multi-stage/).
+These two issues can be solved by using [multi-stage builds](../../build/building/multi-stage.md).
 
 In a nutshell, a multi-stage build can carry over the artifacts from one build stage into another,
 and every build stage can be instantiated from a different base image.
