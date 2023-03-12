@@ -101,9 +101,9 @@ $ docker run -dp 3000:3000 \
        command: sh -c "yarn install && yarn run dev"
        ports:
          - 3000:3000
-       working_dir: /app
+       working_dir: /src/app
        volumes:
-         - ./:/app
+         - ./:/src
    ```
 
 5. Finally, we need to migrate the environment variable definitions using the `environment` key.
@@ -115,9 +115,9 @@ $ docker run -dp 3000:3000 \
        command: sh -c "yarn install && yarn run dev"
        ports:
          - 3000:3000
-       working_dir: /app
+       working_dir: /src/app
        volumes:
-         - ./:/app
+         - ./:/src
        environment:
          MYSQL_HOST: mysql
          MYSQL_USER: root
