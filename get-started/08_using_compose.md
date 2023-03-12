@@ -196,9 +196,9 @@ services:
     command: sh -c "yarn install && yarn run dev"
     ports:
       - 3000:3000
-    working_dir: /app
+    working_dir: /src/app
     volumes:
-      - ./:/app
+      - ./:/src
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
