@@ -100,6 +100,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Changed compression algorithm to `xz` for RPM and Arch Linux distribution.
 - Fixed a bug that caused leftover files to be left in the root directory of the Debian package. Fixes [docker/for-linux#123](https://github.com/docker/desktop-linux/issues/123).
 
+### Security
+
+#### For all platforms
+
+- Fixed [CVE-2023-0628](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0628){: target="_blank" rel="noopener" class="_"}, which allows an attacker to execute an arbitrary command inside a Dev Environments container during initialization by tricking a user to open a crafted malicious `docker-desktop://` URL.
+- Fixed [CVE-2023-0629](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0629){: target="_blank" rel="noopener" class="_"}, which allows an unprivileged user to bypass Enhanced Container Isolation (ECI) restrictions by setting the Docker host to `docker.raw.sock`, or `npipe:////.pipe/docker_engine_linux` on Windows, via the `-H` (`--host`) CLI flag or the `DOCKER_HOST` environment variable and launch containers without the additional hardening features provided by ECI. This does not affect already running containers, nor containers launched through the usual approach (without Docker's raw socket).
+
 ## 4.16.3
 
 {% include release-date.html date="2023-01-30" %}
