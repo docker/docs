@@ -8,7 +8,7 @@ redirect_from:
 
 You can remove seats from your Team or Business subscription at anytime. 
 
-If you remove seats in the middle of the billing cycle, changes are applied immediately and are reflected in the next billing cycle.
+If you remove seats in the middle of the billing cycle, changes are applied immediately and are reflected in the next billing cycle. Any unused portion of the subscription for removed seats isn't refundable or creditable.
 
 For example, if you receive your billing on the 8th of every month for 10 seats and you want to remove 2 seats on the 15th of the month, the 2 seats are removed immediately. Your payment for 8 seats begins the next month. If you are on the annual subscription, the 2 seats are removed immediately, and your payment for the 8 seats begins next year.
 

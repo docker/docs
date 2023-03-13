@@ -7,11 +7,11 @@ redirect_from:
 - /docker-hub/billing/downgrade/
 ---
 
-You can downgrade your Docker subscription at anytime before the renewal date. The unused portion of the subscription isn't refundable.
+You can downgrade your Docker subscription at anytime before the renewal date. The unused portion of the subscription isn't refundable or creditable.
 
 When you downgrade your subscription, changes are applied immediately and you no longer have access to prior services.
 
-Before you downgrade to a free plan, you may need to reduce the number of team members and convert any private repositories to public repositories. For information, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+Before you downgrade to a free subscription, you may need to reduce the number of team members and convert any private repositories to public repositories or delete them. For information, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
 ## Downgrade your Docker subscription
 

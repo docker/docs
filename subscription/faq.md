@@ -16,6 +16,12 @@ All Docker Pro, Team, and Business subscribers receive email support for their s
 
 Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target="blank" rel="noopener" class=""}.
 
+### What ways can I contribute to Docker content?
+
+Docker offers two programs:
+- [Docker-Sponsored Open Source Program (DSOS)](https://www.docker.com/community/open-source/application/)
+- [Docker Verified Publisher (DVP)](../docker-hub/publish/index.md)
+
 ### Do I need to do anything at the end of my subscription term?
 
 No. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
