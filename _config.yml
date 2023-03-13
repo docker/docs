@@ -262,7 +262,3 @@ fetch-remote:
       - dest: "compose/compose-file/interpolation.md"
         src:
           - "12-interpolation.md"
-
-
-
-
