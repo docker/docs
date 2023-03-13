@@ -11,9 +11,9 @@ When you upgrade to a paid subscription, you immediately have access to all the 
 
 ## Upgrade your subscription 
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+1. Log in to your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
-2. Optional step: If you are upgrading from a free user account to a Team or Business subscription and want to keep your account name, [convert your user account into an organization](../docker-hub/convert-account.md).
+2. Optional: If you are upgrading from a free user account to a Team or Business subscription and want to keep your account name, [convert your user account into an organization](../docker-hub/convert-account.md).
 
 3. From the **Billing** section, select the **Plan** tab.
 
@@ -22,8 +22,8 @@ When you upgrade to a paid subscription, you immediately have access to all the 
     >**Note**
     >
     > If you are changing from:
-    >- An annual Team subscription to an annual Business subscription, the start >date and end date of your subscription remains unchanged. Any unused >subscription is prorated and applied as credit towards the new annual >period of the Business subscription.
-    >- A monthly Team subscription to an annual Business subscription, the start >date is reset. Any unused subscription is prorated and applied as credit >towards the new annual period of the Business subscription.
+    >- An annual Team subscription to an annual Business subscription, the start date and end date of your subscription remains unchanged. Any unused subscription is prorated and applied as credit towards the new annual period of the Business subscription.
+    >- A monthly Team subscription to an annual Business subscription, the start date is reset. Any unused subscription is prorated and applied as credit towards the new annual period of the Business subscription.
 
 5. Follow the on-screen instructions.
  

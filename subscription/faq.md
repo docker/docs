@@ -1,7 +1,7 @@
 ---
-description: Subscription & Billing FAQs
-keywords: Docker, Docker Hub, billing FAQs, pull rate limiting FAQs, subscription, platform
-title: Subscription & Billing FAQs
+description: Subscription FAQs
+keywords: Docker, Docker Hub, subscription FAQs, subscription, platform
+title: Subscription FAQs
 ---
 
 ### I want to buy a large number of Docker Business subscription seats. How do I do this? Can I get a discount?
