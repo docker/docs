@@ -67,7 +67,7 @@ jobs:
           yq _config.yml
           # cleanup js-yaml module and data files
           rm -rf ./node_modules
-          if [ -n "./_data/${{ inputs.data-files-folder }}" ]; then
+          if [[ -n "${{ inputs.data-files-folder }}" ]] && [[ -d "./_data/${{ inputs.data-files-folder }}" ]]; then
             rm -rf ./_data/${{ inputs.data-files-folder }}/*
           fi
       -
