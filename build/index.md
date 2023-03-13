@@ -23,7 +23,7 @@ Starting with the [18.09 release](../engine/release-notes/18.09.md#18090),
 Engine is shipped with Moby [BuildKit](buildkit/index.md), the new component for
 executing your builds by default.
 
-The new client [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""},
+The new client [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""}
 is a CLI plugin that extends the `docker` command with the full support of the
 features provided by [BuildKit](buildkit/index.md) builder toolkit.
 [`docker buildx build` command](../engine/reference/commandline/buildx_build.md)
