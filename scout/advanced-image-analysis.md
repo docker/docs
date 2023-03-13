@@ -7,7 +7,7 @@ title: Advanced image analysis
 > **Note**
 >
 > Docker Scout is an [early access](../release-lifecycle.md#early-access-ea)
-> product, and requires a Docker Pro, Team, or Business subscription..
+> product, and requires a Docker Pro, Team, or Business subscription.
 >
 > If you're interested in this integration for your organization and want to
 > learn more, get in touch by filling out the contact form on the
