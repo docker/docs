@@ -107,7 +107,7 @@ With the `requirements.txt` file inside the image, you can use the `RUN` command
 RUN pip3 install -r requirements.txt
 ```
 
-At this point, you an image based on Python version 3.8 and have installed the dependencies. The next step is to add the source code into the image. Use the `COPY` command as with the `requirements.txt` file. This `COPY` command takes all the files located in the current directory and copies them into the image.
+At this point, you have an image based on Python version 3.8 and have installed the dependencies. The next step is to add the source code into the image. Use the `COPY` command as with the `requirements.txt` file. This `COPY` command takes all the files located in the current directory and copies them into the image.
 
 ```dockerfile
 COPY . .
