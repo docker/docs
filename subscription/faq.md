@@ -6,7 +6,7 @@ title: Subscription FAQs
 
 ### I want to buy a large number of Docker Business subscription seats. How do I do this? Can I get a discount?
 
-Docker offers volume pricing for Docker Business subscriptions starting at 100 seats. Contact the [Docker Sales Team](https://goto.docker.com/pricing-question.html){:target="blank" rel="noopener" class=""} for more information.
+Docker offers volume pricing for Docker Business subscriptions starting at 25 seats. Contact the [Docker Sales Team](https://www.docker.com/pricing/contact-sales/){:target="blank" rel="noopener" class=""} for more information.
 
 ### How do I access support? What level of support do I get for my subscription?
 

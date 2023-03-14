@@ -1,5 +1,5 @@
 ---
-title: Understand Docker subscriptions and features
+title: Docker subscriptions and features
 description: Understand 
 keywords: subscription, personal, pro, team, business, features
 ---

@@ -1886,7 +1886,7 @@ manuals:
   - path: /subscription/
     title: Overview
   - path: /subscription/details/
-    title: Understand Docker subscriptions and features
+    title: Docker subscriptions and features
   - path: /subscription/upgrade/
     title: Upgrade
   - path: /subscription/add-seats/
