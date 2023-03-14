@@ -1885,14 +1885,20 @@ manuals:
   section:
   - path: /subscription/
     title: Overview
+  - path: /subscription/details/
+    title: Docker subscriptions and features
   - path: /subscription/upgrade/
     title: Upgrade
-  - path: /subscription/downgrade/
-    title: Downgrade
   - path: /subscription/add-seats/
     title: Add seats
   - path: /subscription/remove-seats/
     title: Remove seats
+  - path: /subscription/downgrade/
+    title: Downgrade
+  - path: /subscription/faq/
+    title: FAQs
+  - path: /subscription/desktop-license/
+    title: Docker Desktop license agreement
 
 - title: Security announcements
   path: /security/

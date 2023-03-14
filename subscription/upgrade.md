@@ -7,29 +7,23 @@ redirect_from:
 - /docker-hub/billing/upgrade/
 ---
 
-This page contains information on how to purchase a Docker paid subscription. It also contains information on how to upgrade your existing subscription and update your billing information.
+When you upgrade to a paid subscription, you immediately have access to all the features and entitlements available in your new chosen subscription. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
 
-You can upgrade from Docker Personal to a Pro, Team, or a Business subscription from a Personal subscription. When you upgrade to a paid subscription, you can immediately use all the features and entitlements offered in your new subscription. For detailed information on features available in each subscription, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+## Upgrade your subscription 
 
-## Upgrade to a Pro, Team, or Business subscription
+1. Log in to your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
-The following section contains information on how to purchase a Docker  subscription for new customers. To upgrade from a Personal subscription to a Team or Business subscription, you must first convert your personal namespace to an organization namespace. To learn more, see [convert an account into an organization](../docker-hub/convert-account.md).
+2. Optional: If you are upgrading from a free user account to a Team or Business subscription and want to keep your account name, [convert your user account into an organization](../docker-hub/convert-account.md).
 
-To purchase a Pro, Team, or Business subscription:
+3. From the **Billing** section, select the **Plan** tab.
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+4. Select **Change plan** and then choose the plan you'd like to upgrade to. 
 
-2. To upgrade your Personal subscription, click **Upgrade**. To upgrade your Pro or Team subscription, open the drop-down menu next to your username in the top-right corner and select **Billing**. On the **Billing Details** page, click **Change plan** to navigate to the pricing page.
-
-   > **Note**
-   >
-   > If you haven't created an organization for a Team or Business subscription, select **Create Organization** from the drop-down menu and select your plan. If you already have a subscription, you can also add another organization. Select **Buy Now** and continue with the on-screen instructions. The Team subscription is now a 100 seat limit. For more seats, you can upgrade to a Business subscription.
-
-3. On the **Organization Size** page, select your annual or monthly subscription and update the number of users for your organization. If you are upgrading to a Business subscription, you must choose an annual subscription.
-
-
-    > **Note**
+    >**Note**
     >
-    > To upgrade to a Business subscription via purchase orders you must have at least 25 seats. To create a purchase order,  specify the number of users and then select the **Contact Sales form**. Then, continue the on-screen instructions for the billing details and select **Purchase**.
+    > If you are changing from:
+    >- An annual Team subscription to an annual Business subscription, the start date and end date of your subscription remains unchanged. Any unused subscription is prorated and applied as credit towards the new annual period of the Business subscription.
+    >- A monthly Team subscription to an annual Business subscription, the start date is reset. Any unused subscription is prorated and applied as credit towards the new annual period of the Business subscription.
 
-4. Select **Continue to Payment** and update the fields to complete your purchase.
+5. Follow the on-screen instructions.
+ 
