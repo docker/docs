@@ -1836,14 +1836,12 @@ manuals:
       title: FAQs
   - path: /docker-hub/orgs/
     title: Create your organization
+  - path: /docker-hub/convert-account/
+    title: Convert an account into an organization
   - path: /docker-hub/manage-a-team/
     title: Manage a team
   - path: /docker-hub/members/
     title: Manage members
-  - path: /docker-hub/convert-account/
-    title: Convert an account into an organization
-  - path: /docker-hub/deactivate-account/
-    title: Deactivate an account or organization
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign-in
   - sectiontitle: Single Sign-on
@@ -1864,6 +1862,8 @@ manuals:
     title: Domain audit
   - path: /docker-hub/image-access-management/
     title: Image Access Management
+  - path: /docker-hub/deactivate-account/
+    title: Deactivate an account or organization
 
 - sectiontitle: Billing
   section:
