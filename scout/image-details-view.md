@@ -8,11 +8,16 @@ description: >
 > **Note**
 >
 > Docker Scout is an [early access](../release-lifecycle.md#early-access-ea)
-> product, and requires a Pro, Team, or Business subscription.
+> product, and requires a Docker Pro, Team, or Business subscription.
+>
+> If you're interested in Docker Scout for your organization and want to
+> learn more, get in touch by filling out the contact form on the
+> [Docker Scout product page](https://docker.com/products/docker-scout){:
+> target="\_blank" rel="noopener" }.
 
 The image details view shows a breakdown of the Docker Scout analysis. You can
-access the image view both from within Docker Desktop, and from the image tag
-page on Docker Hub. This view provides a breakdown of the image hierarchy (base
+access the image view from within Docker Desktop and from the image tag
+page on Docker Hub. The view provides a breakdown of the image hierarchy (base
 images), image layers, packages, and vulnerabilities.
 
 The image view lets you inspect the composition of an image from different
@@ -22,16 +27,15 @@ or for a specific base image or layer.
 
 ![The image details view in Docker Desktop](./images/dd-image-view.png){:width="700px"}
 
-## Image Hierarchy
+## Image hierarchy
 
-The image you inspect may have one or more base images listed under **Image hierarchy**.
-This means the author of the image used another image as a starting
-point when building the image. Often these base images are either operating
+The image you inspect may have one or more base images represented under **Image hierarchy**.
+This means the author of the image used other images as starting
+points when building the image. Often these base images are either operating
 system images such as Debian, Ubuntu, and Alpine, or programming language images
 such as PHP, Python, and Java.
 
-A base image may have its own parent base image so there is a chain of base
-images represented in **Image hierarchy**. Selecting each image in the chain
+Selecting each image in the chain
 lets you see which layers originate from each base image. Selecting the **ALL**
 row reselects all the layers and base images for the entire image.
 
@@ -44,22 +48,20 @@ images with available updates are noted to the right of **Image hierarchy**.
 A Docker image consists of layers. Image layers are listed from top to bottom,
 with the earliest layer at the top and the most recent layer at the bottom.
 Often, the layers at the top of the list originate from a base image, and the
-layers towards the bottom are layers added by the image author, often by adding
-commands to a Dockerfile. To see which layers originate from a base image,
-simply select a base image under **Image hierarchy** and the relevant layers are
-highlighted.
+layers towards the bottom added by the image author, often using
+commands in a Dockerfile. Selecting a base image under **Image hierarchy** 
+highlights with layers originate from a base image.
 
 Selecting individual or multiple layers filters the packages and vulnerabilities
-on the right-hand side to see what has been added by the selected layers.
+on the right-hand side to show what the selected layers added.
 
 ## Vulnerabilities
 
-Images may be exposed to vulnerabilities and exploits. These are detected and
-listed on the right-hand side, grouped by package, and sorted in order of
-severity. Further information on whether the vulnerability has an available fix,
-for example, can be examined by expanding the sections.
+The **Vulnerabilities** tab displays a list of vulnerabilities and exploits detected in the image. The list is grouped by package, and sorted in order of severity.
 
-## Remediation
+You can find further information on the vulnerability or exploit, including if a fix is available, by expanding the list item.
+
+## Remediation recommendations
 
 In Docker Hub and Docker Desktop 4.17 and later versions, when inspecting an
 image, you can get recommended actions for improving the security of that image.
@@ -80,8 +82,8 @@ the current image or any base images used to build it:
 - [**Recommendations for base image**](#recommendations-for-base-image) provides
   recommendations for base images used to build the image.
 
-  If the image you're viewing has no associated base images, only the option to
-  view recommendations for the current image displays here.
+If the image you're viewing has no associated base images, the dropdown only 
+shows the option to view recommendations for the current image.
 
 ### Recommendations in Docker Hub
 
@@ -104,12 +106,12 @@ To view security recommendations for an image in Docker Hub:
 >
 > This recommendation is only available in Docker Desktop.
 
-Recommendations for the current image helps you determine whether the image
-version that you're using is out of date. If tag you're using is referencing an
-old digest, you'll receive a recommendation to update your tag by pulling the
-latest version of the tag.
+The recommendations for the current image view helps you determine whether the image
+version that you're using is out of date. If the tag you're using is referencing an
+old digest, the view shows a recommendation to update the tag by pulling the
+latest version.
 
-Select the **Pull new image** button to get the updated version. Select the
+Select the **Pull new image** button to get the updated version. Check the
 checkbox to remove the old version after pulling the latest.
 
 ### Recommendations for base image
@@ -117,16 +119,16 @@ checkbox to remove the old version after pulling the latest.
 The base image recommendations view contains two tabs for toggling between
 different types of recommendations:
 
-- Refresh base image
-- Change base image
+- **Refresh base image**
+- **Change base image**
 
 These base image recommendations are only actionable if you're the author of the
-image you're inspecting. That's because changing the base image for an image
+image you're inspecting. This is because changing the base image for an image
 requires you to update the Dockerfile and re-build the image.
 
 #### Refresh base image
 
-This tab shows you if you if the selected base image tag is the latest available
+This tab shows if the selected base image tag is the latest available
 version, or if it's outdated.
 
 If the base image tag used to build the current image isn't the latest, then the
@@ -138,23 +140,22 @@ includes:
 - The age of the latest available version
 - The number of CVEs affecting each version
 
-At the bottom of the window, you also receive command snippets that you can run
-to re-build the image using the latest version.
+At the bottom of the window, you also receive command snippets that you can 
+run to re-build the image using the latest version.
 
 #### Change base image
 
-This tab can present you with different alternative tags that you can use, and
-outlines the benefits and disadvantages of each tag version. Select base image
-tag, and receive recommended options for that tag.
+This tab shows different alternative tags that you can use, and
+outlines the benefits and disadvantages of each tag version. Selecting the base image shows recommended options for that tag.
 
 For example, if the image you're inspecting is using an old version of `debian`
-as a base image, you can get recommendations for newer and more secure versions
+as a base image, it shows recommendations for newer and more secure versions
 of `debian` to use. By providing more than one alternative to choose from, you
 can see for yourself how the options compare with each other, and decide which
 one to use.
 
 ![Base image recommendations](./images/change-base-image.png){:width="700px"}
 
-Select a tag recommendation to receive further details of the recommendation.
-You'll see the benefits and potential disadvantages of this tag, why it's a
+Select a tag recommendation to see further details of the recommendation.
+It shows the benefits and potential disadvantages of the tag, why it's a
 recommended, and how to update your Dockerfile to use this version.

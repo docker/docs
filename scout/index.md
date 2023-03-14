@@ -16,13 +16,18 @@ redirect_from:
 > **Note**
 >
 > Docker Scout is an [early access](../release-lifecycle.md#early-access-ea)
-> product, and requires a Pro, Team, or Business subscription.
+> product, and requires a Docker Pro, Team, or Business subscription.
+>
+> If you're interested in Docker Scout for your organization and want to
+> learn more, get in touch by filling out the contact form on the
+> [Docker Scout product page](https://docker.com/products/docker-scout){:
+> target="\_blank" rel="noopener" }.
 
 Docker Scout is a collection of software supply chain features that appear
 throughout Docker user interfaces and the command line interface (CLI). These features provide detailed
 insights into the composition and security of container images.
 
-Docker Scout analyzes the image contents and generates a detailed report of
+Docker Scout analyzes image contents and generates a detailed report of
 packages and vulnerabilities that it detects. Docker Scout can also help provide
 you with suggestions for how you can remediate issues discovered by the image
 analysis.
@@ -40,10 +45,10 @@ images, packages, and CVEs.
 
 ## Get started with Docker Scout
 
-To start using Docker Scout, enable any of the following features:
+To start using Docker Scout, turn on any of the following features:
 
-- Advanced image analysis in Docker Hub
-- Artifactory integration
+- [Advanced image analysis in Docker Hub](./advanced-image-analysis.md)
+- [Artifactory integration](./artifactory.md)
 
 Enabling either feature requires a paid Docker subscription. Once enabled,
 Docker Scout is activated for your organization automatically.
