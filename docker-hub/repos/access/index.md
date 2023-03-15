@@ -8,10 +8,11 @@ Within your repository, you can give others access to push and pull to your repo
 
 ## Collaborators and their role
 
-A collaborator is someone you want to give access to a private repository. Once
-designated, they can `push` and `pull` to your repositories. They're not
-allowed to perform any administrative tasks such as deleting the repository or
-changing its status from private to public.
+A collaborator is someone you want to give access to a private repository. Once designated, they can `push` and `pull` to your repositories. They're not
+allowed to perform any administrative tasks such as deleting the repository or changing its status from private to public.
+
+You can choose collaborators and manage their access to a private
+repository from that repository's **Settings** page.
 
 > **Note**
 >
@@ -21,12 +22,6 @@ changing its status from private to public.
 You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
 see the [organizations documentation](../../../docker-hub/orgs.md#create-an-organization).
-
-You can choose collaborators and manage their access to a private
-repository from that repository's **Settings** page. You can also toggle the
-repository's status between public and private, if you have an available
-repository slot open. Otherwise, you can upgrade your
-[Docker Hub](https://hub.docker.com/account/billing-plans/){: target="_blank" rel="noopener" class="_"} subscription.
 
 ### Permissions reference
 
@@ -43,7 +38,6 @@ you automatically have Read-only permissions:
 > A user who hasn't verified their email address only has
 > `Read-only` access to the repository, regardless of the rights their team
 > membership has given them.
-
 
 ## Viewing repository tags
 
@@ -65,8 +59,6 @@ images. This is also the disk space used by the contents of the `.tar` file
 created when you `docker save` an image. 
 
 An image is stale if there has been no push or pull activity for more than one month. A multi-architecture image is stale if all single-architecture images part of its manifest are stale.
-
-![View tag](../../images/repo-image-layers.png)
 
 ## Search for repositories
 
