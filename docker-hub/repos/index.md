@@ -6,71 +6,6 @@ redirect_from:
 - /engine/tutorials/dockerrepos/
 ---
 
-Docker Hub repositories allow you share container images with your team,
-customers, or the Docker community at large.
-
-Docker images are pushed to Docker Hub through the [`docker push`](/engine/reference/commandline/push/)
-command. A single Docker Hub repository can hold many Docker images (stored as
-**tags**).
-
-## Creating a repository
-
-To create a repository, sign into Docker Hub, select **Repositories** then
-**Create Repository**:
-
-![Create repository](../images/repos-create.png)
-
-When creating a new repository:
-
-* You can choose to put it in your Docker ID namespace, or in any
-  [organization](../../docker-hub/orgs.md) where you are an [owner](../../docker-hub/orgs.md#the-owners-team).
-* The repository name needs to be unique in that namespace, can be two
-  to 255 characters, and can only contain lowercase letters, numbers, hyphens (`-`), and underscores (`_`).
-
-  > **Note:**
-  >
-  > You can't rename a Docker Hub repository once it's created.
-
-* The description can be up to 100 characters and used in the search result.
-* You can link a GitHub or Bitbucket account now, or choose to do it later in
-  the repository settings.
-* You can set your default visibility to public or private for your account.
-
-  > **Note:**
-  >
-  > For organizations creating a new repository, it's recommended you select **Private**.
-
-  > **Note**
-  >
-  > Docker Verified Publisher (DVP) and Docker-Sponsored Open Source (DDOS) organizations can also add a logo to a repository. The maximum size is 1000x1000.
-
-![Setting page for creating a repository](../images/repo-create-details.png)
-
-After you select **Create**, you can start using `docker push` to push
-images to this repository.
-
-## Creating a private repository
-
-To create a private repository, navigate to Docker Hub and select **Repositories** and **Private**.
-
-> **Note**
->
-> To update your public repository to private, navigate to your repository, select **Settings** and **Make private**.
-
-![Create a private repository](/docker-hub/images/repo-create-private.png){: style="max-width: 60%"}
-
-## Deleting a repository
-
-1. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Repositories**.
-
-2. Select a repository from the list, select **Settings**, and then Delete Repository.
-
-    > **Note:**
-    >
-    > Deleting a repository deletes all the images it contains and its build settings. This action can't be undone.
-
-3. Enter the name of the repository to confirm the deletion and select **Delete**.
-
 ## Consolidating a repository
 
 ### Personal to personal
@@ -100,28 +35,20 @@ To avoid losing your private images, you can pull your private images from your 
 
 The private images that existed in the initial namespace are now available for your organization.
 
-## Pushing a Docker container image to Docker Hub
+## Change a repository from public to private
 
-To push an image to Docker Hub, you must first name your local image using your
-Docker Hub username and the repository name that you created through Docker Hub
-on the web.
+> **Note**
+>
+> To update your public repository to private, navigate to your repository, select **Settings** and **Make private**.
 
-You can add multiple images to a repository by adding a specific `:<tag>` to
-them (for example `docs/base:testing`). If it's not specified, the tag defaults
-to `latest`.
+## Deleting a repository
 
-Name your local images using one of these methods:
+1. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Repositories**.
 
-* When you build them, using `docker build -t <hub-user>/<repo-name>[:<tag>]`
-* By re-tagging an existing local image `docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]`
-* By using `docker commit <existing-container> <hub-user>/<repo-name>[:<tag>]`
-  to commit changes
+2. Select a repository from the list, select **Settings**, and then Delete Repository.
 
-Now you can push this repository to the registry designated by its name or tag.
+    > **Note:**
+    >
+    > Deleting a repository deletes all the images it contains and its build settings. This action can't be undone.
 
-```console
-$ docker push <hub-user>/<repo-name>:<tag>
-```
-
-The image is then uploaded and available for use by your teammates and/or
-the community.
+3. Enter the name of the repository to confirm the deletion and select **Delete**.

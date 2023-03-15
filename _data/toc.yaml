@@ -1747,12 +1747,14 @@ manuals:
     title: Docker ID accounts
   - sectiontitle: Repositories
     section:
-      - path: /docker-hub/repos/
-        title: Manage
+      - path: /docker-hub/repos/create/
+        title: Create
       - path: /docker-hub/repos/access/
         title: Access
       - path: /docker-hub/repos/configure/
         title: Configure
+      - path: /docker-hub/repos/
+        title: Manage
   - path: /docker-hub/service-accounts/
     title: Service accounts
   - path: /docker-hub/official_images/
