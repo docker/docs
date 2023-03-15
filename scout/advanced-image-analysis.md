@@ -8,15 +8,24 @@ title: Advanced image analysis
 >
 > Docker Scout is an [early access](../release-lifecycle.md#early-access-ea)
 > product, and requires a Docker Pro, Team, or Business subscription.
+>
+> If you're interested in Docker Scout for your organization and want to
+> learn more, get in touch by filling out the contact form on the
+> [Docker Scout product page](https://docker.com/products/docker-scout){:
+> target="\_blank" rel="noopener" }.
 
 Advanced image analysis is a Docker Scout feature for Docker Hub.
 
-When you activate Advanced image analysis for a repository, new tags are
-automatically analyzed when you push to that repository. Advanced image analysis
-is more than point-in-time scanning - your analysis gets reevaluated
+When you activate Advanced image analysis for a repository, Scout analyzes new tags
+automatically when you push to that repository. Advanced image analysis
+is more than point-in-time scanning, the analysis gets reevaluated
 continuously, meaning you don't need to re-scan the image to see an updated
-vulnerability report. Information about packages and CVEs displays on the image
-tag page on Docker Hub, as well as in the image details view in Docker Desktop.
+vulnerability report. 
+
+The **General** tab of an image page on Docker Hub shows a summary of common vulnerabilities and
+exposures (CVEs) for the image in the **Tags** section. The **Tags** tab shows all analysis results.
+
+The **Images** section of Docker Desktop shows an overview of CVEs for an image and the details view shows all vulnerabilities.
 
 Advanced image analysis supports the following package ecosystems:
 
@@ -35,7 +44,7 @@ Advanced image analysis supports the following package ecosystems:
 
 ## Activate Advanced image analysis
 
-Advanced image analysis is an early access feature. It can be activated on a
+Advanced image analysis is an early access feature and activated on a
 per-repository basis for organizations with a
 [Docker Pro, Team, or Business subscription](../subscription/index.md).
 
@@ -56,10 +65,10 @@ To activate Advanced image analysis:
 
 ## Analyze an image
 
-To trigger Advanced image analysis, push the image to a Docker Hub repository
-where Advanced image analysis is active:
+To trigger Advanced image analysis, push an image to a Docker Hub repository
+with Advanced image analysis active:
 
-1. Sign in to your Docker ID, either using the `docker login` command or the
+1. Sign in with your Docker ID, either using the `docker login` command or the
    **Sign in** button in Docker Desktop.
 2. Tag the image to analyze. For example, to tag a Redis image, run:
 
@@ -77,28 +86,25 @@ where Advanced image analysis is active:
 
 To view the vulnerability report on Docker Hub:
 
-1. Go to Docker Hub and open the repository page. A vulnerability summary is
-   available in the **Tags** section of the page.
+1. Go to Docker Hub and open the repository page. The **Tags** section
+   displays a vulnerability summary.
 
-   It may take a few minutes for the vulnerability report to appear in your
-   repository. If your vulnerability summary doesn't display yet, wait a moment
+   It may take a few minutes for the vulnerability report to appear. If your vulnerability summary doesn't display, wait a moment
    and then refresh the page.
 
 2. Click on the tag in the table. This opens the details page for the tag.
 
 3. Select the **Vulnerabilities** tab on the right side of the page.
 
-   This tab displays a deep-dive view of your vulnerability exposure. If your
-   image contains packages known to be affected by vulnerabilities, those
-   packages show up here.
+   This tab displays a deep-dive view of the image's packages and any known vulnerabilities.
 
    For more information about how to interpret the vulnerability report, see
-   [Image details view](./image-details-view.md)
+   [Image details view](./image-details-view.md).
 
 Expanding any of the packages in the list shows you more information about the
-vulnerabilities that affect a given package. Clicking on the hyperlink of a
-vulnerability opens it in Docker's image vulnerability database, which provides
-even more information on the vulnerability and what images it affects.
+vulnerabilities that affect a given package. Expanding the vulnerability shows a summary of it's details and
+selecting the vulnerability name opens Docker's image vulnerability database, which provides
+more information on the vulnerability and what images it affects.
 
 ## Deactivate Advanced image analysis
 
@@ -113,11 +119,10 @@ To deactivate Advanced image analysis:
 2. Select **Repositories** from the main menu and select a repository from the
    list.
 3. Go to the **Settings** tab.
-4. Under **Image insight settings**, and select one of the following options:
+4. Under **Image insight settings**, select one of the following options:
 
-   - **None** if you want to completely turn off vulnerability detection
-   - **Hub vulnerability scanning** if you want to use the basic scanning
-     feature.
+   - **Basic Hub vulnerability scanning** to use the basic scanning feature.
+   - **None** to turn off vulnerability detection.
 
 5. Select **Save**.
 

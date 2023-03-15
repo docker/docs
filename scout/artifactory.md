@@ -38,12 +38,13 @@ steps:
 2. Analyze the image
 3. Upload the analysis result to Docker Scout
 
-The agent records the Software Bill of Material (SBOM) for the image, and the
+The agent records the Software Bill of Materials (SBOM) for the image, and the
 SBOMs for all of its base images. The recorded SBOMs include both Operating
 System (OS)-level and application-level programs or dependencies that the image
 contains.
 
-Additionally, metadata about the image itself is also recorded:
+Additionally, the agent sends the following metadata about the image to Docker Scout to 
+record:
 
 - The source repository for the image
 - Build instructions
@@ -52,7 +53,7 @@ Additionally, metadata about the image itself is also recorded:
 - Target platforms
 - Layer sizes
 
-The agent sends this data to Docker Scout. The agent never transacts the image
+The agent never transacts the image
 itself, nor any data inside the image, such as code, binaries, and layer blobs.
 
 The agent doesn't detect and analyze pre-existing images. It only analyzes
@@ -135,7 +136,7 @@ to run the agent. For example, `/var/opt/artifactory-agent/config.json`.
 
 The following example shows how to run the Docker Scout Artifactory agent using
 `docker run`. This command creates a bind mount for the directory containing the
-JSON configuration file created earlier to `/opt/artifactory-agent/data` inside
+JSON configuration file created earlier at `/opt/artifactory-agent/data` inside
 the container. Make sure the mount path you use is the directory containing the
 `config.json` file.
 
