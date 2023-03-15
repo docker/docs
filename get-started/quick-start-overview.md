@@ -14,7 +14,7 @@ Use the resources in this section to learn Docker concepts by using Docker Deskt
              <div class="component-icon">
                  <a href="/get-started/what-is-a-container/"><img src="/assets/images/help.svg" alt="what is a container" width="70" height="70"></a>
              </div>
-                 <h2 id="what-is-a-container"><a href="/get-started/what is a container/">What is a container?</a></h2>
+                 <h2 id="what-is-a-container"><a href="/get-started/what-is-a-container/">What is a container?</a></h2>
         </div>
       </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
