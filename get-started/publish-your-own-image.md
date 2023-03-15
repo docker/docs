@@ -32,8 +32,9 @@ $ docker tag docker/welcome-to-docker YOUR-USERNAME/welcome-to-docker
 
 In Docker Desktop, go to the **Images** tab and find your image. In the **Actions** column, select the **More image actions** icon and then select **Push to Hub**. Your image will upload to Docker Hub and be publicly available for anyone to use.
 
+![Push image to Docker Hub](images/getting-started-push.gif)
+
 ## Step 5: Verify the image is on Docker Hub
 
-THat's it! Your image is now being shared on Docker Hub. In browser, go to [Docker Hub](https://hub.docker.com) and verify that you see the `welcome-to-docker` repository.
+That's it! Your image is now being shared on Docker Hub. In browser, go to [Docker Hub](https://hub.docker.com) and verify that you see the `welcome-to-docker` repository.
 
-![Signing in to Docker](images/getting-started-push.gif)
