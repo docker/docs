@@ -24,13 +24,15 @@ Before you downgrade to a free subscription, you may need to reduce the number o
 
 2. Select your username in the top-right corner and from the dropdown menu select **Billing**.
 
-3. On the **Plan** tab, select **Change plan**.
+3. Choose either your personal account or an organization to downgrade. 
 
-4. On the **Change Plan** page, select the plan you'd like to downgrade to. 
+4. On the **Plan** tab, select **Change plan**.
 
-5. Review the downgrade warning and select **Continue**.
+5. On the **Change Plan** page, select the plan you'd like to downgrade to. 
 
-6. Optional: Select a reason for your downgrade from the list and select **Send**.
+6. Review the downgrade warning and select **Continue**.
+
+7. Optional: Select a reason for your downgrade from the list and select **Send**.
     The **Billing** page displays a confirmation of the downgrade with details on when the downgrade changes take effect.
 
 If you want to cancel the downgrade, select **Cancel the downgrade** on the **Plan** tab.
