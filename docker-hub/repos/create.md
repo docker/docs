@@ -2,6 +2,8 @@
 description: Creating repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, manage, repos
 title: Create repositories
+redirect_from:
+- /docker-hub/repos/configure/
 ---
 
 Docker Hub repositories let you share container images with your team,

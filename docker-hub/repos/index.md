@@ -13,6 +13,10 @@ redirect_from:
 3. Select **Make private**.
 4. Enter the name of your repository to confirm. 
 
+You get one free private repository with your Docker Hub user account (not
+available for organizations you're a member of). If you need more private
+repositories for your user account, upgrade your Docker Hub subscription from your [Billing Information](https://hub.docker.com/billing/plan){: target="_blank" rel="noopener" class="_"} page.
+
 ## Move images between repositories
 
 ### Personal to personal

@@ -22,6 +22,29 @@ You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
 see the [organizations documentation](../../../docker-hub/orgs.md#create-an-organization).
 
+You can choose collaborators and manage their access to a private
+repository from that repository's **Settings** page. You can also toggle the
+repository's status between public and private, if you have an available
+repository slot open. Otherwise, you can upgrade your
+[Docker Hub](https://hub.docker.com/account/billing-plans/){: target="_blank" rel="noopener" class="_"} subscription.
+
+### Permissions reference
+
+Permissions are cumulative. For example, if you have Read & Write permissions,
+you automatically have Read-only permissions:
+
+- `Read-only` access lets users view, search, and pull a private repository in the same way as they can a public repository.
+- `Read & Write` access lets users pull, push, and view a repository. In addition, it lets users view, cancel, retry or trigger builds
+- `Admin` access lets users pull, push, view, edit, and delete a
+  repository. You can also edit build settings, and update the repositories description, collaborators rights, public/private visibility, and delete.
+
+> **Note**
+>
+> A user who hasn't verified their email address only has
+> `Read-only` access to the repository, regardless of the rights their team
+> membership has given them.
+
+
 ## Viewing repository tags
 
 You can view the available tags and the size of the associated image. Go to the **Repositories** view and select a repository to see its tags. To view individual tags, select the **Tags** tab.
