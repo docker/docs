@@ -1803,8 +1803,6 @@ manuals:
         title: Overview
       - path: /docker-hub/publish/insights-analytics/
         title: Insights and analytics
-      - path: /docker-hub/publish/publisher-center-migration/
-        title: Migrate content from the Publisher Center
   - path: /docker-hub/oci-artifacts/
     title: OCI artifacts
   - path: /docker-hub/release-notes/
