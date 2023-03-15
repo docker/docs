@@ -259,24 +259,6 @@ $ docker buildx build \
   --output type=image,name=<registry>/<image>,push=true,oci-mediatypes=true .
 ```
 
-### Build info
-
-Exporters that output container images, allow embedding information about the
-build, including information on the original build request and sources used
-during the build. This is supported by the `image`, `registry`, `oci` and
-`docker` exporters.
-
-This build info is attached to the image configuration:
-
-```json
-{
-  "moby.buildkit.buildinfo.v0": "<base64>"
-}
-```
-
-By default, build dependencies are attached to the image configuration. You can
-turn off this behavior by setting `buildinfo=false`.
-
 ## What's next
 
 Read about each of the exporters to learn about how they work and how to use

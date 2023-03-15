@@ -38,14 +38,11 @@ The following table describes the available parameters:
 | `compression-level` | `0..22`                                |         | Compression level, see [compression][1]                                                                                               |
 | `force-compression` | `true`,`false`                         | `false` | Forcefully apply compression, see [compression][1]                                                                                    |
 | `oci-mediatypes`    | `true`,`false`                         |         | Use OCI media types in exporter manifests. Defaults to `true` for `type=oci`, and `false` for `type=docker`. See [OCI Media types][2] |
-| `buildinfo`         | `true`,`false`                         | `true`  | Attach inline [build info][3]                                                                                                         |
-| `buildinfo-attrs`   | `true`,`false`                         | `false` | Attach inline [build info attributes][3]                                                                                              |
-| `annotation.<key>`  | String                                 |         | Attach an annotation with the respective `key` and `value` to the built image,see [annotations][4]                                    |
+| `annotation.<key>`  | String                                 |         | Attach an annotation with the respective `key` and `value` to the built image,see [annotations][3]                                    |
 
 [1]: index.md#compression
 [2]: index.md#oci-media-types
-[3]: index.md#build-info
-[4]: #annotations
+[3]: #annotations
 
 ## Annotations
 
