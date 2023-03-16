@@ -24,7 +24,7 @@ When creating a new repository:
   [organization](../../docker-hub/orgs.md) where you are an [owner](../../docker-hub/orgs.md#the-owners-team).
 - The repository name needs to:
     - Be unique 
-    - Have between 2 and 255 characters,
+    - Have between 2 and 255 characters
     - Only contain lowercase letters, numbers, hyphens (`-`), and underscores (`_`)
 
   > **Note**
@@ -37,7 +37,7 @@ When creating a new repository:
   the repository settings.
 - You can set the repository's default visibility to public or private.
 
-  > **Note:**
+  > **Note**
   >
   > For organizations creating a new repository, it's recommended you select **Private**.
 

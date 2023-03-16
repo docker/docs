@@ -39,7 +39,7 @@ you automatically have Read-only permissions:
 > `Read-only` access to the repository, regardless of the rights their team
 > membership has given them.
 
-## Viewing repository tags
+## View repository tags
 
 You can view the available tags and the size of the associated image. Go to the **Repositories** view and select a repository to see its tags. To view individual tags, select the **Tags** tab.
 
