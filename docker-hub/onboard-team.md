@@ -49,7 +49,7 @@ organization’s settings apply to the user’s session, you can use a `registry
 Create and manage your repositories:
 
 - Create [repositories](../docker-hub/repos/index.md) to share container images.
-- [Consolidate a repository](../docker-hub/repos/index.md/#consolidating-a-repository) from your personal account to your organization.
+- [Consolidate a repository](../docker-hub/repos/index.md/#move-images-between-repositories) from your personal account to your organization.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 
 Your Docker Team subscription provides many more additional features. [Learn more](../subscription/index.md).
