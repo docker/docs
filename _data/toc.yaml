@@ -1859,6 +1859,8 @@ manuals:
          title: FAQs
   - path: /docker-hub/scim/
     title: SCIM
+  - path: /docker-hub/group-mapping/
+    title: Group mapping
   - path: /docker-hub/domain-audit/
     title: Domain audit
   - path: /docker-hub/image-access-management/
