@@ -13,6 +13,7 @@ Once you enable group mappings in your connection, users assigned to that group 
 >**Tip**
 >
 >Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, a group is created if it doesn’t already exist.
+{: .tip}
 
 To take advantage of group mapping, make sure you have [enabled SCIM](scim.md) and then follow the instructions provided by your IdP:
 
