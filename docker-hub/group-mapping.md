@@ -14,10 +14,9 @@ Once you enable group mappings in your connection, users assigned to that group 
 >
 >Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, a group is created if it doesn’t already exist.
 
+To take advantage of group mapping, make sure you have [enabled SCIM](scim.md) and then follow the instructions provided by your IdP:
 
-To take advantage of group mapping, follow the instructions provided by your IdP:
-
-- [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm){: target="_blank" rel="noopener" class="_" }
+- [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm){: target="_blank" rel="noopener" class="_" }
 - [Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes){: target="_blank" rel="noopener" class="_" }
 - [OneLogin](https://developers.onelogin.com/scim/create-app){: target="_blank" rel="noopener" class="_" }
 
