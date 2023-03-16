@@ -44,15 +44,15 @@ RUN npm install \
     && npm run build \
     && rm -fr node_modules
 
-# Specify that the application in the container will listen on port 3000
-EXPOSE 3000
+# Specify that the application in the container will listen on port 80
+EXPOSE 80
 
 # Start the app using serve command
 CMD [ "serve", "-s", "build" ]
 ```
 
 ## Step 3: Build your first image
-An Image is like a static version of a container. You always need an image to run a container. Once you have a Dockerfile in your repository, run the following `docker build` command in the project folder to create an image.
+An image is like a static version of a container. You always need an image to run a container. Once you have a Dockerfile in your repository, run the following `docker build` command in the project folder to create an image.
 
 ```console
 $ docker build -t welcome-to-docker .
@@ -69,7 +69,7 @@ $ docker build -t welcome-to-docker .
 Now that you have your image, use the following `docker run` command to see your container in action.
 
 ```console
-$ docker run -p 8089:3000 welcome-to-docker
+$ docker run -p 8089:80 welcome-to-docker
 ```
 
 > **Breaking down the `docker run` command**
@@ -80,7 +80,7 @@ $ docker run -p 8089:3000 welcome-to-docker
 
 ## Step 5: Monitor your container
 
-You can use Docker Desktop to monitor your running containers. Go to the **Containers** tab to view the container you just ran.
+You can use Docker Desktop to monitor your running containers. Go to the **Containers** tab to view the container you just ran. Select the container name to view the logs, stats, and more.
 
 ![Viewing the Containers tab in Docker Desktop](images/getting-started-monitor.gif){:width="500px"}
 

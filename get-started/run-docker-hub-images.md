@@ -8,13 +8,13 @@ You can share and store images in Docker Hub ([http://hub.docker.com](http://hub
 
 ## Step 1: Search for the image
 
-You can search for Docker Hub images on Docker Desktop. Use the search bar, or use the shortcut ⌘K on Mac or Ctrl + K on Windows. In the search, specify `welcome-to-docker` to find the welcome image you'll use in this guide.
+You can search for Docker Hub images on Docker Desktop. Use the search bar, or use the shortcut ⌘K on Mac or Ctrl + K on Windows. In the search, specify `welcome-to-docker` to find the `docker/welcome-to-docker` image you'll use in this guide.
 
 ![Search Docker Desktop for the welcome-to-docker image](images/getting-started-search.png){:width="500px"}
 
 ## Step 2: Run the image
 
-To run the `welcom=to-docker` image, select **Run** and then specify the port number `8090` in **Optional settings**.
+To run the `docker/welcome-to-docker` image, select **Run**. When the **Optional settings** appear, specify the **Host port** number `8090` and then click **Run**.
 
 ![Running the image in Docker Desktop](images/getting-started-run.gif){:width="500px"}
 

@@ -23,7 +23,7 @@ $ docker run -p 8088:80 --name welcome-to-docker docker/welcome-to-docker
 
 ## Step 1: View containers on Docker Desktop
 
-You just ran your first container! Open Docker Desktop to take a look. This container runs a simple web server that displays HTML text. When working with Docker, each of part of your app runs in a different container. For example, a different container for the frontend, backend, and database.
+You just ran a container! Open Docker Desktop to take a look. This container runs a simple web server that displays HTML text. When working with Docker, each of part of your app runs in a different container. For example, a different container for the frontend, backend, and database.
 
 ![Docker Desktop with get-started container running](images/getting-started-container.png){:width="500px"}
 
@@ -39,9 +39,11 @@ A container is an isolated environment for your code. This means that a containe
 
 ![Viewing container details in Docker Desktop](images/getting-started-explore-container.gif){:width="500px"}
 
-## Step 4: stop your container
+## Step 4: Stop your container
 
-The `welcome-to-docker` container will continue to run until you stop it. You can use Docker Desktop to quickly stop the container. Go to the **Containers** tab in Docker Desktop and select the **Stop** icon in the **Actions** column of your container.
+The `welcome-to-docker` container will continue to run until you stop it. You can use Docker Desktop to stop the container. Go to the **Containers** tab in Docker Desktop and select the **Stop** icon in the **Actions** column of your container.
+
+![Stopping a container in Docker Desktop](images/getting-started-stop.png)
 
 ## What's next
 
