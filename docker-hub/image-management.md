@@ -4,7 +4,7 @@ keywords: dashboard, images, image management, inactive
 title: Advanced Image Management dashboard
 ---
 
-{% include upgrade-cta.html s%}
+{% include upgrade-cta.html %}
 
 Advanced Image Management allows you to manage Docker images across all repositories and streamline storage in Docker Hub.
 
