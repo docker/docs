@@ -57,9 +57,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Windows
 
-- Allowed Windows containers to work when BitLocker is enabled on C:
+- Docker Desktop now allows Windows containers to work when BitLocker is enabled on C:
 - Fixed a bug where `docker buildx` container builders would lose access to the network after 24hrs.
 - Fixed a bug where Registry Access Management policy updates were not downloaded.
+- Improved debug information to better characterise failures under WSL 2.
 
 ## 4.17.0
 
