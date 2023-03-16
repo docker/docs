@@ -24,12 +24,11 @@ With a company, administrators can:
 
 Docker will work with your current Docker organization owners to create the company, associate your organizations, and identify your company owner(s). 
 
-You’ll need to send the following information to your CSM Docker team member to set up your company:
+You’ll need to submit a [support ticket](https://hub.docker.com/support/contact/) with the following information:
 
-- The name of your company. For example, Docker uses the company name **dockerinc**.
-- The organizations that you want to associate with the new company.
-- The verified domains you want to move to the company level.
-- Confirm if you want to migrate one of your organization’s SSO and SCIM settings to the company. Migrating SSO settings will also migrate verified domains from the organization to the parent company.
+- The name of your company. This cannot be the same as any of the associated organizations. 
+- The organization(s) that you want to associate with the new company.
+- The Docker ID of the person that will be the company owner.
 
 Once created, users with a company owner role can navigate to the **Overview** page in Docker Hub that displays the company name and organizations associated with the company.
 

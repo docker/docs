@@ -16,6 +16,7 @@ redirect_from:
   - /docker-hub/publish/certify-plugins-logging/
   - /docker-hub/publish/trustchain/
   - /docker-hub/publish/byol/
+  - /docker-hub/publish/publisher-center-migration/ 
 ---
 
 The Verified Publisher Program provides several features and benefits to Docker
