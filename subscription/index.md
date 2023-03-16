@@ -5,7 +5,6 @@ title: Docker subscription overview
 redirect_from:
 - /docker-hub/billing/
 - /docker-hub/billing/faq/
-- /subscription/faq/
 ---
 
 Use the resources in this section to manage your Docker subscription.
