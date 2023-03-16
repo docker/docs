@@ -105,7 +105,7 @@ configure your organization.
 - **Settings**: Displays information about your
   organization, and allows you to view and change your repository privacy
   settings, configure org permissions such as
-  [Image Access Management](image-access-management.md), configure notification settings, and [deactivate](deactivate-account.md#deactivating-an-organization) your
+  [Image Access Management](image-access-management.md), configure notification settings, and [deactivate](deactivate-account.md#deactivate-an-organization) your
   organization. You can also update your organization name and company name that appear on your organization landing page.
 
 

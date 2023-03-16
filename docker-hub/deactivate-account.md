@@ -20,11 +20,11 @@ Before deactivating your Docker Hub account, ensure that you meet the following 
 - You must not be a member of a company or any teams or organizations. You must remove the account from all teams, organizations, or the company.
 
     To do this:
-    1.  Navigate to **Organizations** and then select the organization(s) you need to leave.
+    1. Navigate to **Organizations** and then select the organization(s) you need to leave.
     2. Find your username in the **Members** tab.
     3. Select the **More options** menu and then select **Leave organization**.
 
-- If you are the sole owner of an organization,  either add someone to [the **owners** team](manage-a-team.md#the-owners-team) and then remove yourself from the organization, or deactivate the organization. Similarly, if you are the sole owner of a company, either add someone else as a company owner and then remove yourself, or deactivate the company.
+- If you are the sole owner of an organization, either add someone to [the **owners** team](manage-a-team.md#the-owners-team) and then remove yourself from the organization, or deactivate the organization. Similarly, if you are the sole owner of a company, either add someone else as a company owner and then remove yourself, or deactivate the company.
 
 - If you have an active subscription, [downgrade it to a Docker Personal subscription](../subscription/downgrade.md).
 
@@ -43,7 +43,7 @@ Once you have completed all the steps above, you can deactivate your account.
 {: .warning }
 
 
-## Deactivating an organization
+## Deactivate an organization
 
 Before deactivating an organization, please complete the following:
 
@@ -62,7 +62,7 @@ Once you have completed all the steps above, you can deactivate your organizatio
 
 1. On Docker Hub, select **Organizations**.
 2. Choose the organization you want to deactivate. 
-3. In**Settings**, select the **Deactivate Org** tab and then **Deactivate organization**.
+3. In **Settings**, select the **Deactivate Org** tab and then **Deactivate organization**.
 
-> This cannot be undone! Be sure you've gathered all the data you need from your organization before deactivating it.
+> This cannot be undone. Be sure you've gathered all the data you need from your organization before deactivating it.
 {: .warning }

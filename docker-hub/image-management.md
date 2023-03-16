@@ -13,7 +13,7 @@ It provides:
 - Allows you to view, sort, and filter images by tags, activity status, and date
 - Contains options to clean up your workspace by deleting images that are no longer required
 
-## Access the Advanced Image Management dashboard:
+## Access the Advanced Image Management dashboard
 
 1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. Select **Repositories**.

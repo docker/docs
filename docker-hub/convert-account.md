@@ -22,7 +22,7 @@ Before you convert a user account to an organization, ensure that you meet the f
 - The user account that you wish to convert must not be a member of a company or any teams or organizations. You must remove the account from all teams, organizations, or the company.
 
     To do this:
-    1.  Navigate to **Organizations** and then select the organization(s) you need to leave.
+    1. Navigate to **Organizations** and then select the organization(s) you need to leave.
     2. Find your username in the **Members** tab.
     3. Select the **More options** menu and then select **Leave organization**.
 
@@ -44,4 +44,4 @@ Before you convert a user account to an organization, ensure that you meet the f
 
 5. Enter a **Docker ID** to set an organization owner. This is the user account that will manage the organization, and the only way to access the organization settings after conversion. You cannot use the same Docker ID as the account you are trying to convert.
 
-6. Select **Convert and Purchase** to confirm. The new owner receives a notification email. Use that owner account to log into your new organization.
+6. Select **Convert and Purchase** to confirm. The new owner receives a notification email. Use that owner account to log in to your new organization.
