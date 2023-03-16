@@ -115,17 +115,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 >
 > [Windows](https://desktop.docker.com/win/main/amd64/96739/Docker%20Desktop%20Installer.exe)
 
-<div class="panel-group" id="accordion10" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion14" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading10">
+    <div class="panel-heading" role="tab" id="heading14">
       <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion10" href="#collapse10" aria-expanded="true" aria-controls="collapse10">
+        <a role="button" data-toggle="collapse" data-parent="#accordion14" href="#collapse14" aria-expanded="true" aria-controls="collapse14">
           Checksums
           <i class="fa fa-chevron-down"></i>
         </a>
       </h5>
     </div>
-    <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+    <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
       <div class="panel-body">
       <li><b>Windows:</b> SHA-256 5f6db3cf5a2084fc7c584c90792f38a0caac91c4eed4f8653dde7bb8148517f1</li>
       </div>
