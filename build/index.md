@@ -99,34 +99,6 @@ advanced scenarios.
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/build/cache/">
-           <img src="/assets/images/build-cache.svg" alt="Two arrows rotating in a circle" width="70px" height="70px">
-          </a>
-        </div>
-        <h2><a href="/build/cache/">Build caching</a></h2>
-        <p>
-          Avoid unnecessary repetitions of costly operations, such as package installs.
-        </p>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-      <div class="component">
-        <div class="component-icon">
-          <a href="/build/ci/">
-           <img src="/assets/images/build-ci.svg" alt="Infinity loop" width="70px" height="70px">
-          </a>
-        </div>
-        <h2><a href="/build/ci/">Continuous integration</a></h2>
-        <p>
-          Learn how to use Docker in your continuous integration pipelines.
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-      <div class="component">
-        <div class="component-icon">
           <a href="/build/exporters/">
            <img src="/assets/images/build-exporters.svg" alt="Arrow coming out of a box" width="70px" height="70px">
           </a>
@@ -140,6 +112,21 @@ advanced scenarios.
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
+          <a href="/build/cache/">
+           <img src="/assets/images/build-cache.svg" alt="Two arrows rotating in a circle" width="70px" height="70px">
+          </a>
+        </div>
+        <h2><a href="/build/cache/">Build caching</a></h2>
+        <p>
+          Avoid unnecessary repetitions of costly operations, such as package installs.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
           <a href="/build/bake/">
            <img src="/assets/images/build-bake.svg" alt="Cake silhouette" width="70px" height="70px">
           </a>
@@ -147,6 +134,19 @@ advanced scenarios.
         <h2><a href="/build/bake/">Bake</a></h2>
         <p>
           Orchestrate your builds with Bake.
+        </p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+      <div class="component">
+        <div class="component-icon">
+          <a href="/build/ci/">
+           <img src="/assets/images/build-ci.svg" alt="Infinity loop" width="70px" height="70px">
+          </a>
+        </div>
+        <h2><a href="/build/ci/">Continuous integration</a></h2>
+        <p>
+          Learn how to use Docker in your continuous integration pipelines.
         </p>
       </div>
     </div>
