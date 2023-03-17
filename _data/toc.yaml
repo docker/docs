@@ -1685,12 +1685,14 @@ manuals:
           title: SLSA definitions
         - path: /build/attestations/attestation-storage/
           title: Attestation storage
+    - sectiontitle: Dockerfile
+      section:
+        - path: /build/dockerfile/frontend/
+          title: Custom Dockerfile syntax
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
           title: Overview
-        - path: /build/buildkit/dockerfile-frontend/
-          title: Custom Dockerfile syntax
         - path: /build/buildkit/configure/
           title: Configure
         - path: /build/buildkit/toml-configuration/
