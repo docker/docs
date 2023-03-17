@@ -1689,6 +1689,8 @@ manuals:
       section:
         - path: /build/dockerfile/frontend/
           title: Custom Dockerfile syntax
+        - path: /build/dockerfile/release-notes/
+          title: Release notes
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
