@@ -14,7 +14,7 @@ You can search for Docker Hub images on Docker Desktop. Use the search bar, or u
 
 ## Step 2: Run the image
 
-To run the `docker/welcome-to-docker` image, select **Run**. When the **Optional settings** appear, specify the **Host port** number `8090` and then click **Run**.
+To run the `docker/welcome-to-docker` image, select **Run**. When the **Optional settings** appear, specify the **Host port** number `8090` and then select **Run**.
 
 ![Running the image in Docker Desktop](images/getting-started-run.gif){:width="500px"}
 
@@ -32,4 +32,16 @@ That's it! The container is ready to use. Go to the **Containers** tab in Docker
 
 In this guide, your ran someone else's image from Docker Hub. Next, you'll learn how you can publish your own image to Docker Hub.
 
-[Publish you own image](publish-your-own-image.md){: .button .primary-btn}
+<div class="component-container">
+    <!--start row-->
+    <div class="row">
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <a href="/get-started/publish-your-own-image/"><img src="/assets/images/build-exporters.svg" alt="publish your own image" width="70" height="70"></a>
+            </div>
+                <h3 id="publish-your-own-image"><a href="/get-started/publish-your-own-image/">Publish your own image</a></h3>
+            </div>
+        </div>
+    </div>
+</div>

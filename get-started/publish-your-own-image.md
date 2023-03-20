@@ -8,11 +8,11 @@ In this guide, you'll learn how you can share your packaged application in an im
 
 ## Step 1: Get an image
 
-Before you publish your image, you'll need an image to publish. For this guide, you'll use the `welcome-to-docker` image. To get the image, run the following `docker pull` command in a terminal to pull the image from Docker Hub.
+Before you publish your image, you'll need an image to publish. For this guide, you'll use the `welcome-to-docker` image.
 
-```console
-$ docker pull docker/welcome-to-docker
-```
+To get the image, use Docker Desktop to search for the `welcome-to-docker` image, and then select **Pull**
+
+![Pulling the welcome-to-docker image](images/getting-started-pull.gif){:width="500px"}
 
 ## Step 2: Sign in to Docker
 

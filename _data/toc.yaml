@@ -56,9 +56,9 @@ guides:
   - path: /get-started/what-is-a-container/
     title: What is a container?
   - path: /get-started/run-your-own-container/
-    title: Run your own container
+    title: Create and run your own container
   - path: /get-started/run-docker-hub-images/
-    title: Run Docker Hub images
+    title: Run an existing Docker Hub image
   - path: /get-started/publish-your-own-image/
     title: Publish your own image
 - sectiontitle: Language-specific guides

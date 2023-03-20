@@ -1,5 +1,5 @@
 ---
-title: Run your own container
+title: Create and run your own container
 keywords: get started, quick start, intro, concepts
 description: Learn how to run a container from scratch
 ---
@@ -8,20 +8,39 @@ In this guide you'll learn the basic steps to run a container from scratch. For 
 
 ## Step 1: Get the sample application
 
-If you have git, use the following command in a terminal to clone the sample application repository.
+If you have git, you can clone the repository for the sample application. Otherwise, you can download the sample application. Choose one of the following options.
+
+   <ul class="nav nav-tabs">
+     <li class="active"><a data-toggle="tab" data-target="#git">Clone with git</a></li>
+     <li><a data-toggle="tab" data-target="#download">Download</a></li>
+   </ul>
+  <div class="tab-content">
+  <div id="git" class="tab-pane fade in active" markdown="1">
+
+Use the following command in a terminal to clone the sample application repository.
 
 ```console
 $ git clone https://github.com/docker/welcome-to-docker
 ```
 
-If you don't have git, [download the source](https://github.com/docker/
+   <hr>
+  </div>
+  <div id="download" class="tab-pane fade" markdown="1">
+
+   If you don't have git, [download the source](https://github.com/docker/
 welcome-to-docker/archive/refs/heads/main.zip) and extract it.
+
+   <hr>
+  </div>
+  </div>
 
 ## Step 2: Create a Dockerfile in your project folder
 
-To run your code in a container, the most fundamental thing you need is a Dockerfile. A Dockerfile describes what goes into a container. To add a Dockerfile, create a text file called `Dockerfile` with no file extension in the root directory of your project and add the following contents.
+To run your code in a container, the most fundamental thing you need is a Dockerfile. A Dockerfile describes what goes into a container. To add a Dockerfile, create a text file called `Dockerfile` with no file extension in the root directory of your project. Open the Dockerfile in your favorite IDE add the following contents.
 
-```Dockerfile
+```dockerfile
+# syntax=docker/dockerfile:1
+
 # Start your image with a node base image
 FROM node:18-alpine
 
@@ -44,39 +63,28 @@ RUN npm install \
     && npm run build \
     && rm -fr node_modules
 
-# Specify that the application in the container will listen on port 80
-EXPOSE 80
+# Specify that the application in the container will listen on port 3000
+EXPOSE 3000
 
 # Start the app using serve command
 CMD [ "serve", "-s", "build" ]
 ```
 
 ## Step 3: Build your first image
+
 An image is like a static version of a container. You always need an image to run a container. Once you have a Dockerfile in your repository, run the following `docker build` command in the project folder to create an image.
 
 ```console
 $ docker build -t welcome-to-docker .
 ```
 
-> **Breaking down the `docker build` command**
->
-> Here are what the different parts of the `docker build` command do:
-> - `docker build`: This command builds the image. It needs one argument, the source folder for the Dockerfile that needs to be built. In this case, it’s the Dockerfile in the current folder, `.`.
-> - `-t welcome-to-docker`: The `-t` flag tags the image with a unique name. In this case, `welcome-to-docker`.
+After your image is built, you can view your image in the **Images** tab in Docker Desktop.
 
 ## Step 4: Run your container
 
-Now that you have your image, use the following `docker run` command to see your container in action.
+To run your image as a container, go to the **Images** tab, and then select **Run** in the **Actions** column of your image. When the **Optional settings** appear, specify the **Host port** number `8089` and then select **Run**.
 
-```console
-$ docker run -p 8089:80 welcome-to-docker
-```
-
-> **Breaking down the `docker run` command**
->
-> Here are what the different parts of the `docker run` command do:
-> - `docker run`: This is used to run containers. It needs at least one argument, and that argument is the image you want to run. In this case, it's `welcome-to-docker`.
-> - `-p 8089:80`: This lets Docker know that port 80 in the container needs to be accessible from port 8089 on your local host.
+![Running an image in Docker Desktop](images/getting-started-run-image.gif){:width="500px"}
 
 ## Step 5: Monitor your container
 
@@ -88,15 +96,34 @@ You can use Docker Desktop to monitor your running containers. Go to the **Conta
 
 In this guide, you built your own image. When running containers on Docker Desktop, you don’t need to build your own image from scratch. You can also run images created by others on Docker Hub.
 
-> **Note**
->
-> If you want to learn more about creating images for applications in other languages, check out the following language-specific guides:
-> - [Node.js](../language/nodejs/index.md)
-> - [Python](../language/python/index.md)
-> - [Go](../language/golang/index.md)
-> - [Java](../language/java/index.md)
-> - [C# (.NET)](../language/dotnet/index.md)
+<div class="component-container">
+    <!--start row-->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+             <div class="component-icon">
+                 <a href="/get-started/run-docker-hub-images/"><img src="/assets/images/build-multi-platform.svg" alt="run docker hub images" width="70" height="70"></a>
+             </div>
+                 <h3 id="run-docker-hub-images"><a href="/get-started/run-docker-hub-images">Run an existing Docker Hub image</a></h3>
+        </div>
+      </div>
+    </div>
+</div>
 
 
-[Run Docker Hub images](run-docker-hub-images.md){: .button .primary-btn}
+## Dive deeper
 
+### Language-specific guides
+
+If you want to learn more about creating images for applications in other languages, check out the following language-specific guides:
+ - [Node.js](../language/nodejs/index.md)
+ - [Python](../language/python/index.md)
+ - [Go](../language/golang/index.md)
+ - [Java](../language/java/index.md)
+ - [C# (.NET)](../language/dotnet/index.md)
+
+### Breaking down the `docker build` command
+
+When you built the image, you used the `docker build` command. Here are what the different parts of the `docker build` command do:
+ - `docker build`: This command builds the image. It needs one argument, the source folder for the Dockerfile that needs to be built. In this case, it’s the Dockerfile in the current folder, `.`.
+ - `-t welcome-to-docker`: The `-t` flag tags the image with a unique name. In this case, `welcome-to-docker`.
