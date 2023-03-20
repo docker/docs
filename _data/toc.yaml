@@ -1759,6 +1759,8 @@ manuals:
     title: Docker Official images
   - sectiontitle: Automated builds
     section:
+      - path: /docker-hub/how-builds-work/
+        title: How automated builds work
       - path: /docker-hub/builds/
         title: Set up automated builds
       - path: /docker-hub/builds/automated-testing/

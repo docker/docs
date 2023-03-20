@@ -64,6 +64,11 @@ to further customize your test behavior.
 > **Note**: If you enable Automated builds, they also run any tests defined
 in the `test.yml` files.
 
+> **Note**
+>
+> While the Autotest feature builds an image for testing purposes, it
+> doesn't push the resulting image to Docker Hub.
+
 ## Enable automated tests on a repository
 
 To enable testing on a source code repository, you must first create an
