@@ -24,13 +24,79 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.17.1
+
+{% include release-date.html date="2023-03-20" %}
+
+> Download Docker Desktop
+>
+> <div class="panel-group" id="accordion16" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading16">
+        <h5 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse16" aria-expanded="true" aria-controls="collapse16">
+            Windows
+            <i class="fa fa-chevron-down"></i>
+          </a>
+        </h5>
+      </div>
+      <div id="collapse16" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading16">
+        <div class="panel-body">
+          <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Download file</a> 
+        <br>
+        <br>
+        <b>Checksum:</b> e66a76f8f71f7e5e4488163d7da686d1fc669c5cbb47fec15085623c4deaf16a
+        </div>
+      </div>
+    </div>
+    </div>
+>
+> For the latest release of Docker Desktop for Mac and Linux, see [4.17.0](#4170)
+ 
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Docker Desktop now allows Windows containers to work when BitLocker is enabled on C:
+- Fixed a bug where `docker buildx` container builders would lose access to the network after 24hrs.
+- Fixed a bug where Registry Access Management policy updates were not downloaded.
+- Improved debug information to better characterise failures under WSL 2.
+
 ## 4.17.0
 
 {% include release-date.html date="2023-02-27" %}
 
 > Download Docker Desktop
 >
-> {% include desktop-install.html %}
+> [Windows](https://desktop.docker.com/win/main/amd64/99724/Docker%20Desktop%20Installer.exe) |
+> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/99724/Docker.dmg) |
+> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/99724/Docker.dmg) |
+> [Debian](https://desktop.docker.com/linux/main/amd64/99724/docker-desktop-4.17.0-amd64.deb) |
+> [RPM](https://desktop.docker.com/linux/main/amd64/99724/docker-desktop-4.17.0-x86_64.rpm) |
+> [Arch package](https://desktop.docker.com/linux/main/amd64/99724/docker-desktop-4.17.0-x86_64.pkg.tar.zst)
+
+<div class="panel-group" id="accordion15" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading15">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion15" href="#collapse15" aria-expanded="true" aria-controls="collapse15">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 69ea659b0ca0e160a1de9bd63dc5697f5eb89fff1d33484fb8ef9793e43d0d45</li>
+      <li><b>Mac Intel:</b> SHA-256 eb0531122a62859ce7b029e943fdad365603a916e6c15c107514c1e4a818d7ef</li>
+      <li><b>Mac Arm:</b> SHA-256 5e01465d93dfe18d7678a96705e7c26bb654b6766f06373b5cffbf77c641bccc</li>
+      <li><b>Linux DEB:</b> SHA-256 6828d35ae02763255790de6690909935a1f7c951373179ac0efd6c6b578b5219</li>
+      <li><b>Linux RPM:</b> SHA-256 7973c5bf41bdc78ca39ba64f93c6e4a33263d8dbfc604651bf1562bfeeea26f7</li>
+      <li><b>Linux Arch:</b> SHA-256 c783ce942c84f899d1f576d01d34fd4de3cefa0a1d577eda2bc5c4ceaec6cfdb</li>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### New
 
@@ -115,17 +181,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 >
 > [Windows](https://desktop.docker.com/win/main/amd64/96739/Docker%20Desktop%20Installer.exe)
 
-<div class="panel-group" id="accordion10" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion14" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading10">
+    <div class="panel-heading" role="tab" id="heading14">
       <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion10" href="#collapse10" aria-expanded="true" aria-controls="collapse10">
+        <a role="button" data-toggle="collapse" data-parent="#accordion14" href="#collapse14" aria-expanded="true" aria-controls="collapse14">
           Checksums
           <i class="fa fa-chevron-down"></i>
         </a>
       </h5>
     </div>
-    <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
+    <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
       <div class="panel-body">
       <li><b>Windows:</b> SHA-256 5f6db3cf5a2084fc7c584c90792f38a0caac91c4eed4f8653dde7bb8148517f1</li>
       </div>
