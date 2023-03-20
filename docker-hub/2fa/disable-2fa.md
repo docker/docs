@@ -5,6 +5,7 @@ title: Disable two-factor authentication on Docker Hub
 ---
 
 > **Warning**
+>
 > Disabling two-factor authentication results in decreased security for your
 > Docker Hub account.
 {: .warning }

@@ -5,7 +5,7 @@ keywords: docker hub, hub, security, PAT, personal access token
 ---
 
 If you are using the [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"}
-tool (currently experimental) to access Hub images from the Docker CLI., you can create personal access tokens (PAT) as alternatives to your password.
+tool (currently experimental) to access Hub images from the Docker CLI, you can create personal access tokens (PAT) as alternatives to your password.
 
 Compared to passwords, personal access tokens provide the following advantages:
 
@@ -18,7 +18,7 @@ any time.
    >
    > If you have [two-factor authentication (2FA)](2fa/index.md) enabled on
    > your account, you must create at least one personal access token. Otherwise,
-   > you will be unable to log in to your account from the Docker CLI.
+   > you won't be unable to sign in to your account from the Docker CLI.
 
 ## Create an access token
 
@@ -29,12 +29,11 @@ any time.
 
 1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 
-2. Select your username in the top right corner and from the dropdwon menu select **[Account Settings](https://hub.docker.com/settings/general)**.
+2. Select your username in the top right corner and from the dropdown menu select **Account Settings)**.
 
-3. Select the **[Security](https://hub.docker.com/settings/security)** tab and then **New Access Token**.
+3. Select the **Security** tab and then **New Access Token**.
 
-4. Add a description for your token. Use something that indicates where the token 
-   will be used, or set a purpose for the token.
+4. Add a description for your token. Use something that indicates where the use case or purpose of the token.
    
 5. Set the access permissions. 
    The access permissions are scopes that set restrictions in your
@@ -42,7 +41,7 @@ any time.
    pipeline can build an image and then push it to a repository. However, it
    can not delete the repository.
 
-6. Select **Generate** and then copy the token that appears on the screen and save it. You will not be able
+6. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able
    to retrieve the token once you close this prompt.
 
 ## Use an access token
@@ -64,12 +63,12 @@ a password.
 
 You can rename, activate, deactivate, or delete a token as needed.
 
-1. Access your tokens under **[Account Settings > Security](https://hub.docker.com/settings/security){: target="_blank" rel="noopener" class="_"}**.
+1. Access your tokens under **Account Settings > Security**.
+   
    This page shows an overview of all your tokens. You can also view the number
    of tokens that are activated and deactivated in the toolbar.
 
-2. Choose a token and then select **Delete** or **Edit**, or use the menu on
-   the far right of a token row to bring up the edit screen. You can also
-   select multiple tokens to delete at once.
+2. Choose a token and then select **Delete** or **Edit**, or use the menu on the far right of a token row to bring up the edit screen. 
+   You can also select multiple tokens to delete at once.
 
 3. After modifying the token, select **Save**.
