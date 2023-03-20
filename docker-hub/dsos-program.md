@@ -1,6 +1,7 @@
 ---
 description: Docker-Sponsored Open Source Program
 title: Docker-Sponsored Open Source Program
+keywords: docker hub, hub, insights, analytics, open source, Docker sponsored, program
 ---
 
 The Docker-Sponsored Open Source Program provides several features and benefits to non-commercial open source developers.
