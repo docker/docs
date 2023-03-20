@@ -1776,7 +1776,7 @@ manuals:
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
-        title: Manage access tokens
+        title: Create and manage access tokens
       - sectiontitle: Two-factor authentication
         section:
           - path: /docker-hub/2fa/
