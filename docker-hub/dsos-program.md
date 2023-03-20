@@ -5,22 +5,20 @@ title: Docker-Sponsored Open Source Program
 
 The Docker-Sponsored Open Source Program provides several features and benefits to non-commercial open source developers.
 
-The following perks are granted based on verified eligibility:
-
+The program grants the following perks to eligible projects:
 
 - Verified Docker-Sponsored Open Source badge
 - Insights and analytics
 - Vulnerability scanning
-- Additional Docker Business seats
 - Removal of rate limiting for developers
 - Improved discoverability on Docker Hub
 
+These benefits are valid for one year and can be renewed if your project still meets the program requirements. Program members, and all users pulling public images from your project namespace get access to unlimited pulls and unlimited egress.
 
 ## Verified Docker-Sponsored Open Source badge
 
 The verified Docker-Sponsored Open Source badge signals high quality, and trust, to developers.
-Images with this badge are verified as high quality, and the content can be
-trusted as active open source projects.
+Docker verifies images with this badge as high quality, and that developers can trust the content as and active open source project.
 
 ![Fluent org with a Docker-Sponsored Open Source badge](images/sponsored-badge.png)
 
@@ -43,7 +41,15 @@ client tool (user agent), and more.
 
 Automatic vulnerability scanning using [Docker Scout](/scout/) for images published to Docker Hub.
 Scanning images ensures that the published content is secure, and underlines to
-developers that it can be trusted. Scanning can be enabled on a per-repository
+developers that they can trust it. You can enable scanning on a per-repository
 basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
 target="blank" rel="noopener" class=""} for more information about how to use
 it.
+
+## Who's eligible for the Docker-Sponsored Open Source program?
+
+To qualify for the program, your project namespace must be shared in public repositories, meet [the Open Source Initiative definition](https://opensource.org/docs/osd), and be in active development with no pathway to commercialization.
+
+Find out more by heading to the
+[Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/#){:target="_blank"
+rel="noopener" class="_"} application page.
