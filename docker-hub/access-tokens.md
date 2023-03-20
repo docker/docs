@@ -24,16 +24,16 @@ any time.
 
 > **Important**
 >
-> Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager, for example.
+> Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager for example.
 {: .important}
 
 1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 
-2. Select your username in the top right corner and from the dropdown menu select **Account Settings)**.
+2. Select your username in the top-right corner and from the dropdown menu select **Account Settings**.
 
 3. Select the **Security** tab and then **New Access Token**.
 
-4. Add a description for your token. Use something that indicates where the use case or purpose of the token.
+4. Add a description for your token. Use something that indicates the use case or purpose of the token.
    
 5. Set the access permissions. 
    The access permissions are scopes that set restrictions in your
