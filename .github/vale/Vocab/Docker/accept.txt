@@ -24,3 +24,5 @@ Swarm Mode
 [Mm]oby
 dockerd
 dockerignore
+Docker Hub Vulnerability Scanning
+Basic vulnerability scanning
