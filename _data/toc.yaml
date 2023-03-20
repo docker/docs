@@ -1803,6 +1803,9 @@ manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
+  - path: /docker-hub/dsos-program/
+    title: Docker-Sponsored Open Source Program
+
 - sectiontitle: Docker Scout (Early Access)
   section:
     - path: /scout/
