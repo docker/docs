@@ -6,9 +6,9 @@ title: Group Mapping
 
 With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams. 
 
-To correctly assign your users to Docker teams, you must create groups in your IDP following the naming pattern `organization:name`. For example, if you want to manage provisioning for the team "developers” in Docker, and your organization name is “moby,” you must create a group in your IDP with the name “moby:developers”. 
+To correctly assign your users to Docker teams, you must create groups in your IDP following the naming pattern `organization:team`. For example, if you want to manage provisioning for the team "developers” in Docker, and your organization name is “moby,” you must create a group in your IdP with the name “moby:developers”. 
 
-Once you enable group mappings in your connection, users assigned to that group in your IDP will automatically be added to the team “developers” in Docker.
+Once you enable group mappings in your connection, users assigned to that group in your IdP will automatically be added to the team “developers” in Docker.
 
 >**Tip**
 >
