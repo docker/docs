@@ -1581,6 +1581,16 @@ manuals:
           title: Kubernetes driver
         - path: /build/drivers/remote/
           title: Remote driver
+    - sectiontitle: Exporters
+      section:
+        - path: /build/exporters/
+          title: Overview
+        - path: /build/exporters/image-registry/
+          title: Image and registry exporters
+        - path: /build/exporters/local-tar/
+          title: Local and tar exporters
+        - path: /build/exporters/oci-docker/
+          title: OCI and Docker exporters
     - sectiontitle: Cache
       section:
         - path: /build/cache/
@@ -1603,50 +1613,6 @@ manuals:
               title: Azure Blob Storage
             - path: /build/cache/backends/s3/
               title: Amazon S3
-    - sectiontitle: Exporters
-      section:
-      - path: /build/exporters/
-        title: Overview
-      - path: /build/exporters/image-registry/
-        title: Image and registry exporters
-      - path: /build/exporters/local-tar/
-        title: Local and tar exporters
-      - path: /build/exporters/oci-docker/
-        title: OCI and Docker exporters
-    - sectiontitle: Continuous integration
-      section:
-        - path: /build/ci/
-          title: CI with Docker
-        - sectiontitle: GitHub Actions
-          section:
-          - path: /build/ci/github-actions/
-            title: Introduction
-          - path: /build/ci/github-actions/configure-builder/
-            title: Configuring your builder
-          - path: /build/ci/github-actions/multi-platform/
-            title: Multi-platform image
-          - path: /build/ci/github-actions/secrets/
-            title: Secrets
-          - path: /build/ci/github-actions/push-multi-registries/
-            title: Push to multi-registries
-          - path: /build/ci/github-actions/manage-tags-labels/
-            title: Manage tags and labels
-          - path: /build/ci/github-actions/cache/
-            title: Cache management
-          - path: /build/ci/github-actions/export-docker/
-            title: Export to Docker
-          - path: /build/ci/github-actions/test-before-push/
-            title: Test before push
-          - path: /build/ci/github-actions/local-registry/
-            title: Local registry
-          - path: /build/ci/github-actions/share-image-jobs/
-            title: Share built image between jobs
-          - path: /build/ci/github-actions/named-contexts/
-            title: Named contexts
-          - path: /build/ci/github-actions/copy-image-registries/
-            title: Copy image between registries
-          - path: /build/ci/github-actions/update-dockerhub-desc/
-            title: Update Docker Hub repo description
     - sectiontitle: Bake
       section:
         - path: /build/bake/
@@ -1683,6 +1649,40 @@ manuals:
           title: Configure
         - path: /build/buildkit/toml-configuration/
           title: TOML configuration
+    - sectiontitle: Continuous integration
+      section:
+        - path: /build/ci/
+          title: CI with Docker
+        - sectiontitle: GitHub Actions
+          section:
+          - path: /build/ci/github-actions/
+            title: Introduction
+          - path: /build/ci/github-actions/configure-builder/
+            title: Configuring your builder
+          - path: /build/ci/github-actions/multi-platform/
+            title: Multi-platform image
+          - path: /build/ci/github-actions/secrets/
+            title: Secrets
+          - path: /build/ci/github-actions/push-multi-registries/
+            title: Push to multi-registries
+          - path: /build/ci/github-actions/manage-tags-labels/
+            title: Manage tags and labels
+          - path: /build/ci/github-actions/cache/
+            title: Cache management
+          - path: /build/ci/github-actions/export-docker/
+            title: Export to Docker
+          - path: /build/ci/github-actions/test-before-push/
+            title: Test before push
+          - path: /build/ci/github-actions/local-registry/
+            title: Local registry
+          - path: /build/ci/github-actions/share-image-jobs/
+            title: Share built image between jobs
+          - path: /build/ci/github-actions/named-contexts/
+            title: Named contexts
+          - path: /build/ci/github-actions/copy-image-registries/
+            title: Copy image between registries
+          - path: /build/ci/github-actions/update-dockerhub-desc/
+            title: Update Docker Hub repo description
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
@@ -1747,12 +1747,12 @@ manuals:
     title: Docker ID accounts
   - sectiontitle: Repositories
     section:
-      - path: /docker-hub/repos/
-        title: Manage
+      - path: /docker-hub/repos/create/
+        title: Create
       - path: /docker-hub/repos/access/
         title: Access
-      - path: /docker-hub/repos/configure/
-        title: Configure
+      - path: /docker-hub/repos/
+        title: Manage
   - path: /docker-hub/service-accounts/
     title: Service accounts
   - path: /docker-hub/official_images/
@@ -1789,14 +1789,9 @@ manuals:
             title: Generate a new recovery code
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
-  - sectiontitle: Administration
-    section:
-     - path: /docker-hub/image-management/
-       title: Advanced Image Management dashboard
-     - path: /docker-hub/convert-account/
-       title: Convert an account into an organization
-     - path: /docker-hub/deactivate-account/
-       title: Deactivate an account or an organization
+  - path: /docker-hub/image-management/
+    title: Advanced Image Management
+
   - sectiontitle: Docker Verified Publisher
     section:
       - path: /docker-hub/publish/
@@ -1839,6 +1834,8 @@ manuals:
       title: FAQs
   - path: /docker-hub/orgs/
     title: Create your organization
+  - path: /docker-hub/convert-account/
+    title: Convert an account into an organization
   - path: /docker-hub/manage-a-team/
     title: Manage a team
   - path: /docker-hub/members/
@@ -1863,6 +1860,8 @@ manuals:
     title: Domain audit
   - path: /docker-hub/image-access-management/
     title: Image Access Management
+  - path: /docker-hub/deactivate-account/
+    title: Deactivate an account or organization
 
 - sectiontitle: Billing
   section:

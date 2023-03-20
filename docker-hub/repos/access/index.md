@@ -4,14 +4,15 @@ keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker
 title: Access repositories
 ---
 
- Within your repository, you can give others access to push and pull to your repository, and you can assign permissions. You can also view your repository tags and the associated images.
+Within your repository, you can give others access to push and pull to your repository, and you can assign permissions. You can also view your repository tags and the associated images.
 
 ## Collaborators and their role
 
-A collaborator is someone you want to give access to a private repository. Once
-designated, they can `push` and `pull` to your repositories. They're not
-allowed to perform any administrative tasks such as deleting the repository or
-changing its status from private to public.
+A collaborator is someone you want to give access to a private repository. Once designated, they can `push` and `pull` to your repositories. They're not
+allowed to perform any administrative tasks such as deleting the repository or changing its status from private to public.
+
+You can choose collaborators and manage their access to a private
+repository from that repository's **Settings** page.
 
 > **Note**
 >
@@ -22,22 +23,27 @@ You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
 see the [organizations documentation](../../../docker-hub/orgs.md#create-an-organization).
 
-## Viewing repository tags
+### Permissions reference
 
-Docker Hub's individual repositories view shows you the available tags and the
-size of the associated image. Go to the **Repositories** view and select repository to see its tags. To view individual tags, select the **Tags** tab.
+Permissions are cumulative. For example, if you have Read & Write permissions,
+you automatically have Read-only permissions:
+
+- `Read-only` access lets users view, search, and pull a private repository in the same way as they can a public repository.
+- `Read & Write` access lets users pull, push, and view a repository. In addition, it lets users view, cancel, retry or trigger builds
+- `Admin` access lets users pull, push, view, edit, and delete a
+  repository. You can also edit build settings, and update the repositories description, collaborators rights, public/private visibility, and delete.
+
+> **Note**
+>
+> A user who hasn't verified their email address only has
+> `Read-only` access to the repository, regardless of the rights their team
+> membership has given them.
+
+## View repository tags
+
+You can view the available tags and the size of the associated image. Go to the **Repositories** view and select a repository to see its tags. To view individual tags, select the **Tags** tab.
 
 ![View repo tags](../../images/repo-overview.png)
-
-Image sizes are the cumulative space taken up by the image and all its parent
-images. This is also the disk space used by the contents of the `.tar` file
-created when you `docker save` an image. An image is stale if there has been no push/pull activity for more than one month. For example:
-
-* It hasn't been pulled for more than one month
-* And it hasn't been pushed for more than one month
-
-A multi-architecture image is stale if all single-architecture images
-part of its manifest are stale.
 
 To delete a tag, select the corresponding checkbox and select **Delete** from the **Action** drop-down list.
 
@@ -48,13 +54,16 @@ To delete a tag, select the corresponding checkbox and select **Delete** from th
 
 You can select a tag's digest to view more details.
 
-![View tag](../../images/repo-image-layers.png)
+Image sizes are the cumulative space taken up by the image and all its parent
+images. This is also the disk space used by the contents of the `.tar` file
+created when you `docker save` an image. 
 
-## Searching for repositories
+An image is stale if there has been no push or pull activity for more than one month. A multi-architecture image is stale if all single-architecture images part of its manifest are stale.
+
+## Search for repositories
 
 You can search the [Docker Hub](https://hub.docker.com) registry through its
-search interface or by using the command line interface. Searching can find
-images by image name, username, or description:
+search interface or by using the command line interface. You can search by image name, username, or description:
 
 ```console
 $ docker search centos
@@ -66,7 +75,8 @@ tutum/centos                         Centos image with SSH access. For the root.
 ...
 ```
 
-There you can see two example results: `centos` and `ansible/centos7-ansible`.
+In the example above, you can see two example results, `centos` and `ansible/centos7-ansible`.
+
 The second result shows that it comes from the public repository of a user,
 named `ansible/`, while the first result, `centos`, doesn't explicitly list a
 repository which means that it comes from the top-level namespace for
@@ -89,6 +99,6 @@ Status: Downloaded newer image for centos:latest
 
 You now have an image from which you can run containers.
 
-## Starring repositories
+## Star repositories
 
-Your can star your repositories. Stars are a way to show that you like a repository. They're also an easy way of bookmarking your favorites.
+Stars are a way to show that you like a repository. They're also an easy way of bookmarking your favorites.
