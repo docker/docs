@@ -25,17 +25,13 @@ Authenticator with a registered YubiKey.
 1. Sign to your Docker Hub account. 
 2. Select your username and then from the dropdown menu, select **Account Settings**. 
 3. Select the **Security** tab and then select **Enable Two-Factor Authentication**.
-    
-    The next page will remind you to download an authenticator app
+    The next page reminds you to download an authenticator app
 4. Select **Set up using an app**. 
-    
     Your unique recovery code is sent to you.
 5. Save your recovery code and store it somewhere safe.
-    
     Your recovery code can be used to recover your account in the event you lose access to your authenticator app.
 
 6. Select **Next** and then open your authenticator app. 
-    
     You can choose between scanning the QR code or entering a text code into your authenticator app. 
 7. Once you have linked your authenticator app, enter the six-digit code to in text field and then select **Next**.
 

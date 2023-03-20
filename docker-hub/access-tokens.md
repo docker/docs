@@ -18,7 +18,7 @@ any time.
    >
    > If you have [two-factor authentication (2FA)](2fa/index.md) enabled on
    > your account, you must create at least one personal access token. Otherwise,
-   > you won't be unable to sign in to your account from the Docker CLI.
+   > you won't be able to sign in to your account from the Docker CLI.
 
 ## Create an access token
 
@@ -64,7 +64,6 @@ a password.
 You can rename, activate, deactivate, or delete a token as needed.
 
 1. Access your tokens under **Account Settings > Security**.
-   
    This page shows an overview of all your tokens. You can also view the number
    of tokens that are activated and deactivated in the toolbar.
 
