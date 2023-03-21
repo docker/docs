@@ -22,7 +22,7 @@ Use the resources in this section to learn Docker concepts by using Docker Deskt
             <div class="component-icon">
                 <a href="/get-started/run-your-own-container/"><img src="/assets/images/build-frontends.svg" alt="run your own container" width="70" height="70"></a>
             </div>
-                <h2 id="run-your-own-container"><a href="/get-started/run-your-own-container">Create and run your own container</a></h2>
+                <h2 id="run-your-own-container"><a href="/get-started/run-your-own-container">Run your own container</a></h2>
             </div>
         </div>
   </div>  
@@ -33,13 +33,13 @@ Use the resources in this section to learn Docker concepts by using Docker Deskt
              <div class="component-icon">
                  <a href="/get-started/run-docker-hub-images/"><img src="/assets/images/build-multi-platform.svg" alt="run docker hub images" width="70" height="70"></a>
                  </div>
-                 <h2 id="run-docker-hub-images"><a href="/get-started/run-docker-hub-images">Run an existing Docker Hub image</a></h2>
+                 <h2 id="run-docker-hub-images"><a href="/get-started/run-docker-hub-images">Run Docker Hub images</a></h2>
             </div>
         </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                <a href="/get-started/publish-your-own-image/"><img src="/assets/images/build-exporters.svg" alt="publish your own image" width="70" height="70"></a>
+                <a href="/get-started/publish-your-own-image/"><img src="/assets/images/arrow-up.svg" alt="publish your own image" width="70" height="70"></a>
             </div>
                 <h2 id="publish-your-own-image"><a href="/get-started/publish-your-own-image/">Publish your own image</a></h2>
             </div>

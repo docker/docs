@@ -10,7 +10,7 @@ In this guide, you'll learn how you can share your packaged application in an im
 
 Before you publish your image, you'll need an image to publish. For this guide, you'll use the `welcome-to-docker` image.
 
-To get the image, use Docker Desktop to search for the `welcome-to-docker` image, and then select **Pull**
+To get the image, use Docker Desktop to search for the `welcome-to-docker` image, and then select **Pull**.
 
 ![Pulling the welcome-to-docker image](images/getting-started-pull.gif){:width="500px"}
 
@@ -30,11 +30,20 @@ $ docker tag docker/welcome-to-docker YOUR-USERNAME/welcome-to-docker
 
 ## Step 4: Push your image to Docker Hub
 
-In Docker Desktop, go to the **Images** tab and find your image. In the **Actions** column, select the **More image actions** icon and then select **Push to Hub**. Your image will upload to Docker Hub and be publicly available for anyone to use.
+In Docker Desktop, go to the **Images** tab and find your image. In the **Actions** column, select the **Show image actions** icon and then select **Push to Hub**. Your image will upload to Docker Hub and be publicly available for anyone to use.
 
 ![Push image to Docker Hub](images/getting-started-push.gif)
 
 ## Step 5: Verify the image is on Docker Hub
 
-That's it! Your image is now being shared on Docker Hub. In browser, go to [Docker Hub](https://hub.docker.com) and verify that you see the `welcome-to-docker` repository.
+That's it! Docker Hub is now sharing your image. In browser, go to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} and verify that you see the `welcome-to-docker` repository.
 
+## What's next
+
+Learn more about creating images for applications in other languages from the following language-specific guides:
+
+ - [Node.js](../language/nodejs/index.md)
+ - [Python](../language/python/index.md)
+ - [Go](../language/golang/index.md)
+ - [Java](../language/java/index.md)
+ - [C# (.NET)](../language/dotnet/index.md)

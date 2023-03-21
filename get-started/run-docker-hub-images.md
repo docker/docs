@@ -4,7 +4,7 @@ keywords: get started, quick start, intro, concepts
 description: Learn how to run Docker Hub images
 ---
 
-You can share and store images in Docker Hub ([http://hub.docker.com](http://hub.docker.com)). Docker hub has over 100,000 images created by developers that you can run locally. You can search for Docker Hub images and run them directly from Docker Desktop.
+You can share and store images in Docker Hub ([http://hub.docker.com](http://hub.docker.com){:target="_blank" rel="noopener" class="_"}). Docker hub has over 100,000 images created by developers that you can run locally. You can search for Docker Hub images and run them directly from Docker Desktop.
 
 ## Step 1: Search for the image
 
@@ -20,7 +20,7 @@ To run the `docker/welcome-to-docker` image, select **Run**. When the **Optional
 
 > **Note**
 >
-> Many images hosted on Docker Hub have a description that highlights what settings must be set in order to run them. You can read the description for the image on Docker Hub by selecting **View on Hub** or by searching for the image directly on [https://hub.docker.com](https://hub.docker.com).
+> Many images hosted on Docker Hub have a description that highlights what settings must be set in order to run them. You can read the description for the image on Docker Hub by selecting **View on Hub** or by searching for the image directly on [https://hub.docker.com](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
 
 ## Step 3: Explore the container
 
@@ -38,7 +38,7 @@ In this guide, your ran someone else's image from Docker Hub. Next, you'll learn
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                <a href="/get-started/publish-your-own-image/"><img src="/assets/images/build-exporters.svg" alt="publish your own image" width="70" height="70"></a>
+                <a href="/get-started/publish-your-own-image/"><img src="/assets/images/arrow-up.svg" alt="publish your own image" width="70" height="70"></a>
             </div>
                 <h3 id="publish-your-own-image"><a href="/get-started/publish-your-own-image/">Publish your own image</a></h3>
             </div>

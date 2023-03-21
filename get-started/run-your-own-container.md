@@ -1,5 +1,5 @@
 ---
-title: Create and run your own container
+title: Run your own container
 keywords: get started, quick start, intro, concepts
 description: Learn how to run a container from scratch
 ---
@@ -17,6 +17,8 @@ If you have git, you can clone the repository for the sample application. Otherw
   <div class="tab-content">
   <div id="git" class="tab-pane fade in active" markdown="1">
 
+### Clone with git
+
 Use the following command in a terminal to clone the sample application repository.
 
 ```console
@@ -27,8 +29,12 @@ $ git clone https://github.com/docker/welcome-to-docker
   </div>
   <div id="download" class="tab-pane fade" markdown="1">
 
-   If you don't have git, [download the source](https://github.com/docker/
-welcome-to-docker/archive/refs/heads/main.zip) and extract it.
+### Download
+
+If you don't have git, download the source and extract it.
+
+[Download the source](https://github.com/docker/
+welcome-to-docker/archive/refs/heads/main.zip){: .button .primary-btn}
 
    <hr>
   </div>
@@ -36,7 +42,52 @@ welcome-to-docker/archive/refs/heads/main.zip) and extract it.
 
 ## Step 2: Create a Dockerfile in your project folder
 
-To run your code in a container, the most fundamental thing you need is a Dockerfile. A Dockerfile describes what goes into a container. To add a Dockerfile, create a text file called `Dockerfile` with no file extension in the root directory of your project. Open the Dockerfile in your favorite IDE add the following contents.
+To run your code in a container, the most fundamental thing you need is a Dockerfile. A Dockerfile describes what goes into a container. To add a Dockerfile, create a text file called `Dockerfile` with no file extension in the root directory of your project. You can use the following commands to create a Dockerfile.
+
+   <ul class="nav nav-tabs">
+     <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
+     <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
+   </ul>
+   <div class="tab-content">
+   <div id="mac-linux" class="tab-pane fade in active" markdown="1">
+
+  ### Mac / Linux
+
+   In the terminal, run the following commands listed below.
+
+   Change directory to the `welcome-to-docker` directory. Replace `/path/to/welcome-to-docker` with the path to your `welcome-to-docker` directory.
+   ```console
+   $ cd /path/to/welcome-to-docker
+   ```
+   Create an empty file named `Dockerfile`.
+   ```console
+   $ touch Dockerfile
+   ```
+
+   <hr>
+   </div>
+   <div id="windows" class="tab-pane fade" markdown="1">
+
+  ### Windows
+
+   In the Windows Command Prompt, run the following commands listed below.
+
+   Change directory to the `welcome-to-docker` directory. Replace `\path\to\welcome-to-docker` with the path to your `welcome-to-docker` directory.
+   ```console
+   $ cd \path\to\welcome-to-docker
+   ```
+   Create an empty file named `Dockerfile`.
+   ```console
+   $ type nul > Dockerfile
+   ```
+
+   <hr>
+   </div>
+   </div>
+
+## Step 3: Add instructions to your Dockerfile
+
+Using a text editor or code editor, add the following contents to the Dockerfile:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -78,7 +129,7 @@ An image is like a static version of a container. You always need an image to ru
 $ docker build -t welcome-to-docker .
 ```
 
-After your image is built, you can view your image in the **Images** tab in Docker Desktop.
+Building the image will take some time. After your image is built, you can view your image in the **Images** tab in Docker Desktop.
 
 ## Step 4: Run your container
 
@@ -86,11 +137,9 @@ To run your image as a container, go to the **Images** tab, and then select **Ru
 
 ![Running an image in Docker Desktop](images/getting-started-run-image.gif){:width="500px"}
 
-## Step 5: Monitor your container
+## Step 5: Verify that your container is running
 
-You can use Docker Desktop to monitor your running containers. Go to the **Containers** tab to view the container you just ran. Select the container name to view the logs, stats, and more.
-
-![Viewing the Containers tab in Docker Desktop](images/getting-started-monitor.gif){:width="500px"}
+You can use Docker Desktop to view and access running containers. Go to the **Containers** tab to view your container and select the link in the **Port(s)** column or go to [http://localhost:8089](http://localhost:8089){:target="_blank" rel="noopener" class="_"} to verify that the application is running.
 
 ## What's next
 
@@ -104,7 +153,7 @@ In this guide, you built your own image. When running containers on Docker Deskt
              <div class="component-icon">
                  <a href="/get-started/run-docker-hub-images/"><img src="/assets/images/build-multi-platform.svg" alt="run docker hub images" width="70" height="70"></a>
              </div>
-                 <h3 id="run-docker-hub-images"><a href="/get-started/run-docker-hub-images">Run an existing Docker Hub image</a></h3>
+                 <h3 id="run-docker-hub-images"><a href="/get-started/run-docker-hub-images">Run Docker Hub images</a></h3>
         </div>
       </div>
     </div>
