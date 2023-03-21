@@ -30,10 +30,10 @@ services:
 
 When you run `docker compose up`, the `web` service defined in the Compose file substitues in the
 image `webapp:v1.5` which was set in the `.env` file. You can verify this with the
-[convert command](../../engine/reference/commandline/compose_config.md), which prints your resolved application config to the terminal:
+[config command](../../engine/reference/commandline/compose_config.md), which prints your resolved application config to the terminal:
 
 ```console
-$ docker compose convert
+$ docker compose config
 
 services:
   web:
@@ -146,7 +146,7 @@ services:
 If the `--env-file` is not used in the command line, the `.env` file is loaded by default:
 
 ```console
-$ docker compose convert
+$ docker compose config
 services:
   web:
     image: 'webapp:v1.5'
@@ -155,7 +155,7 @@ services:
 Passing the `--env-file` argument overrides the default file path:
 
 ```console
-$ docker compose --env-file ./config/.env.dev convert
+$ docker compose --env-file ./config/.env.dev config
 services:
   web:
     image: 'webapp:v1.6'
@@ -164,7 +164,7 @@ services:
 When an invalid file path is being passed as an `--env-file` argument, Compose returns an error:
 
 ```console
-$ docker compose --env-file ./doesnotexist/.env.dev  convert
+$ docker compose --env-file ./doesnotexist/.env.dev  config
 ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 ```
 
