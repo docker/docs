@@ -92,7 +92,7 @@ local-remote development environment easy and seamless. You can now connect your
 Docker ID to Ambassador Cloud to sign in and use Telepresence. To get started:
 
 1. Go to the
-   [Docker × Ambassador](https://app.getambassador.io/auth/realms/production/protocol/openid-connect/auth?client[…]ker-docs&utm_medium=dockerwebsite&utm_campaign=Docker%26TP)
+   [Docker × Ambassador](https://app.getambassador.io/auth/realms/production/protocol/openid-connect/auth?client_id=docker-docs&response_type=code&redirect_uri=https%3A%2F%2Fapp.getambassador.io&utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker%26TP)
    page.
 2. Sign in using your Docker ID.
 3. Authorize the Ambassador Cloud app.
