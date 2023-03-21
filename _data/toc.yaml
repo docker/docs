@@ -1798,6 +1798,8 @@ manuals:
         title: Overview
       - path: /docker-hub/publish/insights-analytics/
         title: Insights and analytics
+  - path: /docker-hub/dsos-program/
+    title: Docker-Sponsored Open Source Program
   - path: /docker-hub/oci-artifacts/
     title: OCI artifacts
   - path: /docker-hub/release-notes/
