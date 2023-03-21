@@ -4,55 +4,6 @@ keywords: get started, setup, orientation, quickstart, intro, concepts, containe
 description: Tips for building the images for our application
 ---
 
-## Security scanning
-
-When you have built an image, it is a good practice to scan it for security vulnerabilities using the `docker scan` command.
-Docker has partnered with [Snyk](https://snyk.io){:target="_blank" rel="noopener" class="_"} to provide the vulnerability scanning service.
-
-> **Note**
-> 
-> You must be logged in to Docker Hub to scan your images. Run the command `docker scan --login`, and then scan your images using
-> `docker scan <image-name>`.
-
-For example, to scan the `getting-started` image you created earlier in the tutorial, you can just type
-
-```console
-$ docker scan getting-started
-```
-
-The scan uses a constantly updated database of vulnerabilities, so the output you see will vary as new
-vulnerabilities are discovered, but it might look something like this:
-
-```plaintext
-✗ Low severity vulnerability found in freetype/freetype
-  Description: CVE-2020-15999
-  Info: https://snyk.io/vuln/SNYK-ALPINE310-FREETYPE-1019641
-  Introduced through: freetype/freetype@2.10.0-r0, gd/libgd@2.2.5-r2
-  From: freetype/freetype@2.10.0-r0
-  From: gd/libgd@2.2.5-r2 > freetype/freetype@2.10.0-r0
-  Fixed in: 2.10.0-r1
-
-✗ Medium severity vulnerability found in libxml2/libxml2
-  Description: Out-of-bounds Read
-  Info: https://snyk.io/vuln/SNYK-ALPINE310-LIBXML2-674791
-  Introduced through: libxml2/libxml2@2.9.9-r3, libxslt/libxslt@1.1.33-r3, nginx-module-xslt/nginx-module-xslt@1.17.9-r1
-  From: libxml2/libxml2@2.9.9-r3
-  From: libxslt/libxslt@1.1.33-r3 > libxml2/libxml2@2.9.9-r3
-  From: nginx-module-xslt/nginx-module-xslt@1.17.9-r1 > libxml2/libxml2@2.9.9-r3
-  Fixed in: 2.9.9-r4
-```
-
-The output lists the type of vulnerability, a URL to learn more, and importantly which version of the relevant library
-fixes the vulnerability.
-
-There are several other options, which you can read about in the [docker scan documentation](../engine/scan/index.md).
-
-As well as scanning your newly built image on the command line, you can also [configure Docker Hub](../docker-hub/vulnerability-scanning.md)
-to scan all newly pushed images automatically, and you can then see the results in both Docker Hub and Docker Desktop.
-
-![Hub vulnerability scanning](images/hvs.png){: style=width:75% }
-{: .text-center }
-
 ## Image layering
 
 Did you know that you can look at what makes up an image? Using the `docker image history`

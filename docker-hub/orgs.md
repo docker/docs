@@ -105,7 +105,7 @@ configure your organization.
 - **Settings**: Displays information about your
   organization, and allows you to view and change your repository privacy
   settings, configure org permissions such as
-  [Image Access Management](image-access-management.md), configure notification settings, and [deactivate](deactivate-account.md#deactivating-an-organization) your
+  [Image Access Management](image-access-management.md), configure notification settings, and [deactivate](deactivate-account.md#deactivate-an-organization) your
   organization. You can also update your organization name and company name that appear on your organization landing page.
 
 
@@ -139,7 +139,7 @@ process. The owners team has full access to all repositories in the organization
 An organization owner is an administrator who is responsible to manage
 repositories and add team members to the organization. They have full access to
 private repositories, all teams, billing information, and org settings. An org
-owner can also specify [permissions](../docker-hub/repos/configure/index.md#permissions-reference) for each team in
+owner can also specify [permissions](../docker-hub/repos/access/index.md#permissions-reference) for each team in
 the organization. Only an org owner can enable [SSO](../single-sign-on/index.md)
 for
 the organization. When SSO is enabled for your organization, the org owner can

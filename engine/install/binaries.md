@@ -149,7 +149,7 @@ instructions for enabling and configuring AppArmor or SELinux.
 The binaries for Mac also do not contain:
 
 - A runtime environment. You must set up a functional engine either in a Virtual Machine, or on a remote Linux machine.
-- Docker components such as `buildx`, `docker scan`, and `docker compose`.
+- Docker components such as `buildx` and `docker compose`.
 
 To install client binaries, perform the following steps:
 
@@ -201,10 +201,10 @@ To install client binaries, perform the following steps:
 > **Note**
 >
 > The following section describes how to install the Docker daemon on Windows
-> Server which allows you to run Windows containers only. The binaries for
-> Windows do not contain Docker components such as `buildx`, `docker scan`, and
-> `docker compose`. If you are running Windows 10 or 11, we recommend that you
-> install [Docker Desktop](../../desktop/index.md) instead.
+> Server which allows you to run Windows containers only. When you install the
+> Docker daemon on Windows Server, the daemon doesn't contain Docker components
+> such as `buildx` and `compose`. If you are running Windows 10 or 11,
+> we recommend that you install [Docker Desktop](../../desktop/index.md) instead.
 
 Binary packages on Windows include both `dockerd.exe` and `docker.exe`. On Windows,
 these binaries only provide the ability to run native Windows containers (not

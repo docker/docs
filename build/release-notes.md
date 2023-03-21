@@ -8,6 +8,32 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""}.
 
+## 0.10.4
+
+{% include release-date.html date="2023-03-06" %}
+
+{% include buildx-v0.10-disclaimer.md %}
+
+### Bug fixes and enhancements
+
+* Add `BUILDX_NO_DEFAULT_ATTESTATIONS` as alternative to `--provenance false`. {% include github_issue.md repo="docker/buildx" number="1645" %}
+* Disable dirty Git checkout detection by default for performance. Can be enabled with `BUILDX_GIT_CHECK_DIRTY` opt-in. {% include github_issue.md repo="docker/buildx" number="1650" %}
+* Strip credentials from VCS hint URL before sending to BuildKit. {% include github_issue.md repo="docker/buildx" number="1664" %}
+
+## 0.10.3
+
+{% include release-date.html date="2023-02-16" %}
+
+{% include buildx-v0.10-disclaimer.md %}
+
+### Bug fixes and enhancements
+
+* Fix reachable commit and warnings on collecting Git provenance info. {% include github_issue.md repo="docker/buildx" number="1592" %} {% include github_issue.md repo="docker/buildx" number="1634" %}
+* Fix a regression where docker context was not being validated. {% include github_issue.md repo="docker/buildx" number="1596" %}
+* Fix function resolution with JSON bake definition. {% include github_issue.md repo="docker/buildx" number="1605" %}
+* Fix case where original HCL bake diagnostic is discarded. {% include github_issue.md repo="docker/buildx" number="1607" %}
+* Fix labels not correctly set with bake and compose file. {% include github_issue.md repo="docker/buildx" number="1631" %}
+
 ## 0.10.2
 
 {% include release-date.html date="2023-01-30" %}

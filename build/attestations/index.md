@@ -49,6 +49,15 @@ You can opt in to add either the SBOM or provenance attestation type, or both.
 $ docker buildx build --sbom=true --provenance=true .
 ```
 
+> **Note**
+>
+> Provenance attestations are enabled by default, with the `mode=min` option.
+> You can disable provenance attestations using the `--provenance=false` flag,
+> or by setting the [`BUILDX_NO_DEFAULT_ATTESTATIONS`](../building/env-vars.md#buildx_no_default_attestations) environment variable.
+>
+> Using the `--provenance=true` flag attaches provenance attestations with `mode=max`
+> by default. See [Provenance attestation](./slsa-provenance.md) for more details.
+
 BuildKit generates the attestations when building the image. The attestation
 records are wrapped in the in-toto JSON format and attached it to the image
 index in a manifest for the final image.
@@ -58,7 +67,7 @@ index in a manifest for the final image.
 <!-- prettier-ignore -->
 BuildKit produces attestations in the
 [in-toto format](https://github.com/in-toto/attestation){: target="blank" rel="noopener" class="\_" },
-as defined by the 
+as defined by the
 [in-toto framework](https://in-toto.io/){: target="blank" rel="noopener" class="\_" },
 a standard supported by the Linux Foundation.
 

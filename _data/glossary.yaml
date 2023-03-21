@@ -66,7 +66,7 @@ Docker: |
   - The Docker project as a whole, which is a platform for developers and sysadmins to develop, ship, and run applications
   - The docker daemon process running on the host which manages images and containers (also called Docker Engine)
 Docker Business: |
-  Docker Buisness is a [Docker subscription](#docker-subscription). Docker Business offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and accelerate their secure software supply chain initiatives.
+  Docker Buisness is a Docker subscription. Docker Business offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and accelerate their secure software supply chain initiatives.
 Docker Desktop: |
   Docker Desktop is an easy-to-install, lightweight
   Docker development environment. Docker Desktop is available for [Mac](#docker-desktop-for-mac), [Windows](#docker-desktop-for-windows), and [Linux](#docker-desktop-for-linux), providing developers a consistent experience across platforms. Docker Desktop includes Docker Engine, Docker CLI client, Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper.
@@ -106,7 +106,7 @@ Docker Personal: |
 Docker Pro: |
   Docker Pro is a [Docker subscription](#docker-subscription). Docker Pro enables individual developers to get more control of their development environment and provides an integrated and reliable developer experience. It reduces the amount of time developers spend on mundane and repetitive tasks and empowers developers to spend more time creating value for their customers.
 Docker subscription: |
-  Docker subscription tiers, sometimes referred to as plans, include [Personal](#docker-personal), [Pro](#docker-pro), [Team](#docker-team), and [Business](#docker-business). For more details, see [Docker subscription overview](/subscription/#docker-business).
+  Docker subscription tiers, sometimes referred to as plans, include [Personal](#docker-personal), [Pro](#docker-pro), [Team](#docker-team), and [Business](#docker-business). For more details, see [Docker subscription overview](/subscription/details/).
 Docker Team: |
   Docker Team is a [Docker subscription](#docker-subscription). Docker Team offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
 Docker Trusted Content Program: |

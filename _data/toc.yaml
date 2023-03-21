@@ -136,13 +136,13 @@ guides:
   - path: /develop/
     title: Overview
   - path: /develop/dev-best-practices/
-    title: Best practices
-  - sectiontitle: Build images
-    section:
-    - path: /develop/develop-images/dockerfile_best-practices/
-      title: Dockerfile best practices
-  - path: /develop/scan-images/
-    title: Scan images
+    title: Development best practices
+  - path: /develop/develop-images/dockerfile_best-practices/
+    title: Dockerfile best practices
+  - path: /develop/security-best-practices/
+    title: Security best practices
+  - path: /develop/remote-development/
+    title: Remote development
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -605,6 +605,14 @@ reference:
       title: docker run
     - path: /engine/reference/commandline/save/
       title: docker save
+    - sectiontitle: docker scout
+      section:
+      - path: /engine/reference/commandline/scout/
+        title: docker scout
+      - path: /engine/reference/commandline/scout_cves/
+        title: docker scout cves
+      - path: /engine/reference/commandline/scout_version/
+        title: docker scout version
     - path: /engine/reference/commandline/search/
       title: docker search
     - sectiontitle: docker secret
@@ -1197,6 +1205,8 @@ manuals:
               path: /desktop/extensions-sdk/extensions/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
+            - title: Validate
+              path: /desktop/extensions-sdk/extensions/validate/
             - title: Package and release your extension
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Generate a share link
@@ -1579,6 +1589,10 @@ manuals:
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
+        - path: /build/building/env-vars/
+          title: Environment variables
+        - path: /build/building/opentelemetry/
+          title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
     - sectiontitle: Drivers
@@ -1593,6 +1607,16 @@ manuals:
           title: Kubernetes driver
         - path: /build/drivers/remote/
           title: Remote driver
+    - sectiontitle: Exporters
+      section:
+        - path: /build/exporters/
+          title: Overview
+        - path: /build/exporters/image-registry/
+          title: Image and registry exporters
+        - path: /build/exporters/local-tar/
+          title: Local and tar exporters
+        - path: /build/exporters/oci-docker/
+          title: OCI and Docker exporters
     - sectiontitle: Cache
       section:
         - path: /build/cache/
@@ -1615,28 +1639,6 @@ manuals:
               title: Azure Blob Storage
             - path: /build/cache/backends/s3/
               title: Amazon S3
-    - sectiontitle: Exporters
-      section:
-      - path: /build/exporters/
-        title: Overview
-      - path: /build/exporters/image-registry/
-        title: Image and registry exporters
-      - path: /build/exporters/local-tar/
-        title: Local and tar exporters
-      - path: /build/exporters/oci-docker/
-        title: OCI and Docker exporters
-    - sectiontitle: Continuous integration
-      section:
-        - path: /build/ci/
-          title: CI with Docker
-        - sectiontitle: GitHub Actions
-          section:
-          - path: /build/ci/github-actions/
-            title: Introduction
-          - path: /build/ci/github-actions/examples/
-            title: Examples
-          - path: /build/ci/github-actions/configure-builder/
-            title: Configuring your builder
     - sectiontitle: Bake
       section:
         - path: /build/bake/
@@ -1673,8 +1675,40 @@ manuals:
           title: Configure
         - path: /build/buildkit/toml-configuration/
           title: TOML configuration
-        - path: /build/buildkit/color-output-controls/
-          title: Color output controls
+    - sectiontitle: Continuous integration
+      section:
+        - path: /build/ci/
+          title: CI with Docker
+        - sectiontitle: GitHub Actions
+          section:
+          - path: /build/ci/github-actions/
+            title: Introduction
+          - path: /build/ci/github-actions/configure-builder/
+            title: Configuring your builder
+          - path: /build/ci/github-actions/multi-platform/
+            title: Multi-platform image
+          - path: /build/ci/github-actions/secrets/
+            title: Secrets
+          - path: /build/ci/github-actions/push-multi-registries/
+            title: Push to multi-registries
+          - path: /build/ci/github-actions/manage-tags-labels/
+            title: Manage tags and labels
+          - path: /build/ci/github-actions/cache/
+            title: Cache management
+          - path: /build/ci/github-actions/export-docker/
+            title: Export to Docker
+          - path: /build/ci/github-actions/test-before-push/
+            title: Test before push
+          - path: /build/ci/github-actions/local-registry/
+            title: Local registry
+          - path: /build/ci/github-actions/share-image-jobs/
+            title: Share built image between jobs
+          - path: /build/ci/github-actions/named-contexts/
+            title: Named contexts
+          - path: /build/ci/github-actions/copy-image-registries/
+            title: Copy image between registries
+          - path: /build/ci/github-actions/update-dockerhub-desc/
+            title: Update Docker Hub repo description
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
@@ -1739,12 +1773,12 @@ manuals:
     title: Docker ID accounts
   - sectiontitle: Repositories
     section:
-      - path: /docker-hub/repos/
-        title: Manage
+      - path: /docker-hub/repos/create/
+        title: Create
       - path: /docker-hub/repos/access/
         title: Access
-      - path: /docker-hub/repos/configure/
-        title: Configure
+      - path: /docker-hub/repos/
+        title: Manage
   - path: /docker-hub/service-accounts/
     title: Service accounts
   - path: /docker-hub/official_images/
@@ -1768,7 +1802,7 @@ manuals:
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
-        title: Manage access tokens
+        title: Create and manage access tokens
       - sectiontitle: Two-factor authentication
         section:
           - path: /docker-hub/2fa/
@@ -1781,37 +1815,32 @@ manuals:
             title: Generate a new recovery code
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
-  - sectiontitle: Administration
-    section:
-     - path: /docker-hub/image-management/
-       title: Advanced Image Management dashboard
-     - path: /docker-hub/convert-account/
-       title: Convert an account into an organization
-     - path: /docker-hub/deactivate-account/
-       title: Deactivate an account or an organization
+  - path: /docker-hub/image-management/
+    title: Advanced Image Management
+
   - sectiontitle: Docker Verified Publisher
     section:
       - path: /docker-hub/publish/
         title: Overview
       - path: /docker-hub/publish/insights-analytics/
         title: Insights and analytics
-      - path: /docker-hub/publish/publisher-center-migration/
-        title: Migrate content from the Publisher Center
+  - path: /docker-hub/dsos-program/
+    title: Docker-Sponsored Open Source Program
+  - path: /docker-hub/oci-artifacts/
+    title: OCI artifacts
   - path: /docker-hub/release-notes/
     title: Release notes
 
-- sectiontitle: Docker subscription
+- sectiontitle: Docker Scout (Early Access)
   section:
-  - path: /subscription/
-    title: Overview
-  - path: /subscription/upgrade/
-    title: Upgrade
-  - path: /subscription/downgrade/
-    title: Downgrade
-  - path: /subscription/add-seats/
-    title: Add seats
-  - path: /subscription/remove-seats/
-    title: Remove seats
+    - path: /scout/
+      title: Overview
+    - path: /scout/image-details-view/
+      title: Image details view
+    - path: /scout/advanced-image-analysis/
+      title: Advanced image analysis
+    - path: /scout/artifactory/
+      title: Artifactory integration
 
 - sectiontitle: Administration
   section:
@@ -1828,28 +1857,19 @@ manuals:
     - path: /docker-hub/creating-companies/
       title: Overview
     - path:  /docker-hub/company-owner/
-      title: Company owners
-    - path:  /docker-hub/domains/
-      title: Domains
-    - path:  /docker-hub/sso-connection/
-      title: SSO connection
-    - path:  /docker-hub/group-mapping/
-      title: Group mapping
-    - path:  /docker-hub/company-scim/
-      title: SCIM
-    - path:  /docker-hub/enforcing-sso/
-      title: Enforce SSO Login
+      title: Manage company owners
     - path: /docker-hub/company-faqs/
       title: FAQs
   - path: /docker-hub/orgs/
     title: Create your organization
+  - path: /docker-hub/convert-account/
+    title: Convert an account into an organization
   - path: /docker-hub/manage-a-team/
     title: Manage a team
   - path: /docker-hub/members/
     title: Manage members
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign-in
-
   - sectiontitle: Single Sign-on
     section:
       -  path: /single-sign-on/
@@ -1864,35 +1884,51 @@ manuals:
          title: FAQs
   - path: /docker-hub/scim/
     title: SCIM
+  - path: /docker-hub/group-mapping/
+    title: Group mapping
   - path: /docker-hub/domain-audit/
     title: Domain audit
   - path: /docker-hub/image-access-management/
     title: Image Access Management
+  - path: /docker-hub/deactivate-account/
+    title: Deactivate an account or organization
 
+- sectiontitle: Billing
+  section:
+  - path: /billing/
+    title: Overview
+  - path: /billing/payment-method/
+    title: Add or update a payment method
+  - path: /billing/details/
+    title: Update the billing information
+  - path: /billing/history/
+    title: View your billing history
+  - path: /billing/cycle/
+    title: Change your billing cycle
+  - path: /billing/faqs/
+    title: FAQs
+
+- sectiontitle: Subscription
+  section:
+  - path: /subscription/
+    title: Overview
+  - path: /subscription/details/
+    title: Docker subscriptions and features
+  - path: /subscription/upgrade/
+    title: Upgrade
+  - path: /subscription/add-seats/
+    title: Add seats
+  - path: /subscription/remove-seats/
+    title: Remove seats
+  - path: /subscription/downgrade/
+    title: Downgrade
+  - path: /subscription/faq/
+    title: FAQs
+  - path: /subscription/desktop-license/
+    title: Docker Desktop license agreement
 
 - title: Security announcements
   path: /security/
-
-- sectiontitle: Atomist
-  section:
-    - path: /atomist/
-      title: Introduction
-    - path: /atomist/try-atomist/
-      title: Try Atomist
-    - path: /atomist/get-started/
-      title: Get started
-    - sectiontitle: Configure
-      section:
-        - path: /atomist/configure/settings/
-          title: Settings
-        - path: /atomist/configure/advisories/
-          title: Advisories
-    - sectiontitle: Integrate
-      section:
-        - path: /atomist/integrate/github/
-          title: GitHub
-        - path: /atomist/integrate/deploys/
-          title: Track deployments
 
 - sectiontitle: Open-source projects
   section:

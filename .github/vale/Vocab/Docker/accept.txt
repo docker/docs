@@ -1,4 +1,5 @@
 (Certified|Verified) Publisher( Program)?
+Docker-Sponsored Open Source
 Autotest
 BuildKit
 Docker

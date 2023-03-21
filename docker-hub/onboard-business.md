@@ -57,12 +57,13 @@ organization’s settings apply to the user’s session, you can use a `registry
 Configure security settings and manage your repositories:
 
 - Create [repositories](../docker-hub/repos/index.md) to share container images.
-- [Consolidate a repository](../docker-hub/repos/index.md/#consolidating-a-repository) from your personal account to your organization.
+- [Move images](../docker-hub/repos/index.md/#move-images-between-repositories) from your personal account to your organization.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 - Configure [Hardened Docker Desktop](../desktop/hardened-desktop/index.md) to improve your organization’s security posture for containerized development. Hardened Docker Desktop includes:
    - [Settings Management](../desktop/hardened-desktop/settings-management/index.md), which helps you to confidently manage and control the usage of Docker Desktop within your organization.
    - [Enhanced Container Isolation](../desktop/hardened-desktop/enhanced-container-isolation/index.md), a setting that instantly enhances security by preventing containers from running as root in Docker Desktop’s Linux VM.
    - [Image Access Management](../docker-hub/image-access-management.md/), lets you control which images developers can pull from Docker Hub.
    - [Registry Access Management](../docker-hub/registry-access-management.md/), lets you control the registries developers can access.
+- [Audit your domains](../docker-hub/domain-audit.md) to identify Docker users who have authenticated to Docker using an email address associated with one of your verified domains, but they’re not a member of your organization in Docker.
 
 Your Docker Business subscription provides many more additional features. [Learn more](../subscription/index.md).

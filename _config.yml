@@ -153,8 +153,7 @@ defaults:
 fetch-remote:
   - repo: "https://github.com/docker/cli"
     default_branch: "master"
-    # FIXME(thaJeztah): change to 23.0 release branch, once created.
-    ref: "master"
+    ref: "23.0"
     paths:
       - dest: "engine/extend"
         src:
@@ -172,12 +171,7 @@ fetch-remote:
 
   - repo: "https://github.com/docker/docker"
     default_branch: "master"
-    # The default branch has separate files for each API version, so we can
-    # consume the swagger files from that branch (we only publish the ones
-    # that have been released through the stubs in the engine/api/ directory).
-    # Using the default (master) branch allows for API docs changes to be
-    # published without them being cherry-picked into the release branch.
-    ref: "master"
+    ref: "23.0"
     paths:
       - dest: "engine/api"
         src:
