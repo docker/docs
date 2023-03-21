@@ -51,7 +51,7 @@ guides:
       path: /get-started/11_what_next/
 - sectiontitle: Docker Desktop hands-on guides
   section:
-  - path: /get-started/quick-start-overview/
+  - path: /get-started/hands-on-overview/
     title: Overview
   - path: /get-started/what-is-a-container/
     title: What is a container?

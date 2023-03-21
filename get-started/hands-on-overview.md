@@ -1,7 +1,7 @@
 ---
-title: Docker Desktop quick start overview
+title: Docker Desktop hands-on guides
 keywords: get started, setup, orientation, quickstart, intro, concepts
-description: Overview of Docker Desktop quick start guides
+description: Overview of Docker Desktop hands-on guides
 ---
 
 Use the resources in this section to learn Docker concepts by using Docker Desktop.
