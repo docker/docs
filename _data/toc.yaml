@@ -1776,7 +1776,7 @@ manuals:
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
-        title: Manage access tokens
+        title: Create and manage access tokens
       - sectiontitle: Two-factor authentication
         section:
           - path: /docker-hub/2fa/
@@ -1798,6 +1798,8 @@ manuals:
         title: Overview
       - path: /docker-hub/publish/insights-analytics/
         title: Insights and analytics
+  - path: /docker-hub/dsos-program/
+    title: Docker-Sponsored Open Source Program
   - path: /docker-hub/oci-artifacts/
     title: OCI artifacts
   - path: /docker-hub/release-notes/
