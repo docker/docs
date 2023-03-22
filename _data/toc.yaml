@@ -1763,7 +1763,7 @@ manuals:
         title: How automated builds work
       - path: /docker-hub/builds/
         title: Set up automated builds
-      - path: /docker-hub/manage-builds/
+      - path: /docker-hub/builds/manage-builds/
         title: Manage your builds
       - path: /docker-hub/builds/troubleshoot/
         title: Troubleshoot your builds

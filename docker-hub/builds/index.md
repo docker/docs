@@ -18,7 +18,7 @@ title: Set up Automated Builds
 This page contains information on:
 - [Configuring automated builds](#configure-automated-build-settings)
 - [Advanced automated build options](#advanced-automated-build-options)
-- [Autobuild for teams](#autobuild-for-teams)
+- [Automated builds for teams](#autobuild-for-teams)
 
 ## Configure automated builds
 
