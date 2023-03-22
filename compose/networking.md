@@ -181,5 +181,5 @@ Instead of attempting to create a network called `[projectname]_default`, Compos
 
 For full details of the network configuration options available, see the following references:
 
-- [Top-level `networks` key](compose-file/06-networks)
+- [Top-level `networks` key](compose-file/06-networks.md)
 - [Service-level `networks` key](compose-file/05-services.md#networks)

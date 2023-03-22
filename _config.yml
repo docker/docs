@@ -220,39 +220,39 @@ fetch-remote:
     default_branch: "master"
     ref: "master"
     paths:
-      - dest: "compose/compose-file/status.md"
+      - dest: "compose/compose-file/01-status.md"
         src:
           - "01-status.md"
-      - dest: "compose/compose-file/model.md"
+      - dest: "compose/compose-file/02-model.md"
         src:
           - "02-model.md"
-      - dest: "compose/compose-file/compose-file.md"
+      - dest: "compose/compose-file/03-compose-file.md"
         src:
           - "03-compose-file.md"
-      - dest: "compose/compose-file/version-and-name.md"
+      - dest: "compose/compose-file/04-version-and-name.md"
         src:
           - "04-version-and-name.md"
-      - dest: "compose/compose-file/services.md"
+      - dest: "compose/compose-file/05-services.md"
         src:
           - "05-services.md"
-      - dest: "compose/compose-file/networks.md"
+      - dest: "compose/compose-file/06-networks.md"
         src:
           - "06-networks.md"
-      - dest: "compose/compose-file/volumes.md"
+      - dest: "compose/compose-file/07-volumes.md"
         src:
           - "07-volumes.md"
-      - dest: "compose/compose-file/configs.md"
+      - dest: "compose/compose-file/08-configs.md"
         src:
           - "08-configs.md"
-      - dest: "compose/compose-file/secrets.md"
+      - dest: "compose/compose-file/09-secrets.md"
         src:
           - "09-secrets.md"
-      - dest: "compose/compose-file/fragments.md"
+      - dest: "compose/compose-file/10-fragments.md"
         src:
           - "10-fragments.md"
-      - dest: "compose/compose-file/extension.md"
+      - dest: "compose/compose-file/11-extension.md"
         src:
           - "11-extension.md"
-      - dest: "compose/compose-file/interpolation.md"
+      - dest: "compose/compose-file/12-interpolation.md"
         src:
           - "12-interpolation.md"
