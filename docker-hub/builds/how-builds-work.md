@@ -12,11 +12,13 @@ title: How automated builds work
 Docker Hub can automatically build images from source code in an external
 repository and automatically push the built image to your Docker repositories.
 
+![An automated build dashboard](images/index-dashboard.png)
+
 When you set up automated builds, also called autobuilds, you create a list of
 branches and tags that you want to build into Docker images. When you push code
-to a source code branch, for example in GitHub, for one of those listed image
+to a source-code branch, for example in GitHub, for one of those listed image
 tags, the push uses a webhook to trigger a new build, which produces a Docker
-image. The built image is then pushed to the Docker Hub registry.
+image. The built image is then pushed to Docker Hub.
 
 > **Note**
 >
@@ -37,4 +39,3 @@ The maximum number of pending builds in the queue is 30 and Docker Hub discards 
 requests. The number of concurrent builds for Pro is 5 and
 for Team and Business is 15.
 
-![An automated build dashboard](images/index-dashboard.png)
