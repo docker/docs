@@ -45,13 +45,13 @@ then Compose starts containers named `myapp-db-1` and `myapp-web-1` respectively
 
 Compose can set the project name in different ways. The level of precedence (from highest to lowest) for each method is as follows:
 
-- The `-p` command line flag 
-- `COMPOSE_PROJECT_NAME`
-- The top level `name:` variable from the config file (or the last `name:` from
+1. The `-p` command line flag 
+2. `COMPOSE_PROJECT_NAME`
+3. The top level `name:` variable from the config file (or the last `name:` from
   a series of config files specified using `-f`)
-- The `basename` of the project directory containing the config file (or
+4. The `basename` of the project directory containing the config file (or
   containing the first config file specified using `-f`)
-- The `basename` of the current directory if no config file is specified
+5. The `basename` of the current directory if no config file is specified
 
 Project names must contain only lowercase letters, decimal digits, dashes, and
 underscores, and must begin with a lowercase letter or decimal digit. If the

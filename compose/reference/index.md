@@ -187,13 +187,13 @@ Status: Downloaded newer image for postgres:latest
 
 Each configuration has a project name which Compose can set in different ways. The level of precedence (from highest to lowest) for each method is as follows: 
 
-- The `-p` command line flag 
-- The [COMPOSE_PROJECT_NAME environment variable][]
-- The top level `name:` variable from the config file (or the last `name:` from
+1. The `-p` command line flag 
+2. The [COMPOSE_PROJECT_NAME environment variable][]
+3. The top level `name:` variable from the config file (or the last `name:` from
   a series of config files specified using `-f`)
-- The `basename` of the project directory containing the config file (or
+4. The `basename` of the project directory containing the config file (or
   containing the first config file specified using `-f`)
-- The `basename` of the current directory if no config file is specified
+5. The `basename` of the current directory if no config file is specified
 
 [COMPOSE_PROJECT_NAME environment variable]: ../environment-variables/envvars.md#compose_project_name
 
