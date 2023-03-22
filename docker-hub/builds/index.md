@@ -11,8 +11,8 @@ title: Set up Automated Builds
 ---
 
 {% include upgrade-cta.html
-  header-text="This feature requires a Docker subscription"
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
+  header-text='This feature requires a Docker subscription'
+  target-url='https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds'
 %}
 
 This page contains information on:

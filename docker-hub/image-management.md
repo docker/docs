@@ -5,8 +5,8 @@ title: Advanced Image Management dashboard
 ---
 
 {% include upgrade-cta.html
-   header-text="This feature requires a Docker subscription"
-   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds
+   header-text='This feature requires a Docker subscription'
+   target-url='https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds'
  %}
 
 Advanced Image Management allows you to manage Docker images across all repositories and streamline storage in Docker Hub.

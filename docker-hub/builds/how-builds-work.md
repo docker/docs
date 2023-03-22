@@ -23,7 +23,7 @@ image. The built image is then pushed to Docker Hub.
 > **Note**
 >
 > You can still use `docker push` to push pre-built images to
-repositories with Automated Builds configured.
+repositories with Automated builds configured.
 
 If you have automated tests configured, these run after building but before
 pushing to the registry. You can use these tests to create a continuous
