@@ -884,34 +884,8 @@ reference:
   path: /engine/reference/builder/
 - sectiontitle: Compose file reference
   section:
-    - sectiontitle: Compose specification
-      section:
-      - path: /compose/compose-file/
-        title: Overview
-      - path: /compose/compose-file/01-status/
-        title: Status of the specification
-      - path: /compose/compose-file/02-model/
-        title: Compose application model
-      - path: /compose/compose-file/03-compose-file/
-        title: The Compose file
-      - path: /compose/compose-file/build/04-version-and-name/
-        title: Version and name top-level element
-      - path: /compose/compose-file/05-services/
-        title: Services top-level element
-      - path: /compose/compose-file/06-networks/
-        title: Network top-level element
-      - path: /compose/compose-file/07-volumes/
-        title: Volumes top-level element
-      - path: /compose/compose-file/08-configs/
-        title: Configs top-level element
-      - path: /compose/compose-file/09-secrets/
-        title: Secrets top-level element
-      - path: /compose/compose-file/10-fragments/
-        title: Fragments
-      - path: /compose/compose-file/11-extensions/
-        title: Extensions
-      - path: /compose/compose-file/12-interpolation/
-        title: Interpolation
+    - path: /compose/compose-file/
+      title: Compose Specification
     - path: /compose/compose-file/build/
       title: Compose file build
     - path: /compose/compose-file/deploy/
