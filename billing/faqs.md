@@ -48,3 +48,15 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target=
 ### Do I need to do anything at the end of my subscription term?
 
 No. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
+
+### How do I redeem a coupon?
+
+You can redeem a coupon for any paid Docker subscription. 
+
+A coupon can be used when you:
+- Sign up to a new paid subscription from a free subscription
+- Upgrade an existing paid subscription 
+
+You are asked to enter your coupon code when you confirm or enter your payment method. 
+
+If you use a coupon to pay for a subscription, when the coupon expires, your payment method is charged the full cost of your subscription. If you do not have a saved payment method, your account is downgraded to a free subscription. 
