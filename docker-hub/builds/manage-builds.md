@@ -4,6 +4,16 @@ description: How to manage autobuilds in Docker Hub
 keywords: autobuilds, automated, docker hub, registry
 ---
 
+
+## Cancel or retry a build
+
+While a build is in queue or running, a **Cancel** icon appears next to its build
+report link on the General tab and on the Builds tab. You can also click the
+**Cancel** on the build report page, or from the Timeline tab's logs
+display for the build.
+
+![List of builds showing the cancel icon](images/build-cancelicon.png)
+
 ## Check your active builds
 
 A summary of a repository's builds appears both on the repository **General**

@@ -1759,13 +1759,13 @@ manuals:
     title: Docker Official images
   - sectiontitle: Automated builds
     section:
-      - path: /docker-hub/how-builds-work/
+      - path: /docker-hub/builds/how-builds-work/
         title: How automated builds work
       - path: /docker-hub/builds/
         title: Set up automated builds
       - path: /docker-hub/manage-builds/
         title: Manage your builds
-      - path: /docker-hub/troubleshoot/
+      - path: /docker-hub/builds/troubleshoot/
         title: Troubleshoot your builds
       - path: /docker-hub/builds/automated-testing/
         title: Testing in automated builds
