@@ -7,7 +7,7 @@ notoc: true
 {% include compose-eol.md %}
 
 You can control the order of service startup and shutdown with the
-[depends_on](compose-file/index.md#depends_on) option. Compose always starts and stops
+[depends_on](compose-file/05-services.md#depends_on) option. Compose always starts and stops
 containers in dependency order, where dependencies are determined by
 `depends_on`, `links`, `volumes_from`, and `network_mode: "service:..."`.
 
@@ -25,6 +25,6 @@ The solution for detecting the ready state of a service is  to use the `conditio
 
 ## Reference information 
 
-- [`depends_on`](compose-file/index.md#depends_on)
-- [`healthcheck`](compose-file/index.md#healthcheck)
+- [`depends_on`](compose-file/05-services.md#depends_on)
+- [`healthcheck`](compose-file/05-services.md#depends_on)
 

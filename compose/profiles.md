@@ -18,7 +18,7 @@ development tasks.
 ## Assigning profiles to services
 
 Services are associated with profiles through the
-[`profiles` attribute](compose-file/index.md#profiles) which takes an
+[`profiles` attribute](compose-file/05-services.md#profiles) which takes an
 array of profile names:
 
 ```yaml
@@ -183,4 +183,4 @@ $ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 
 ## Reference information
 
-[`profiles`](compose-file/index.md#profiles)
+[`profiles`](compose-file/05-services.md#profiles)
