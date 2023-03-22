@@ -185,8 +185,7 @@ Status: Downloaded newer image for postgres:latest
 
 ## Use `-p` to specify a project name
 
-Each configuration has a project name. Compose sets the project name using the
-following mechanisms, in order of precedence:
+Each configuration has a project name which Compose can set in different ways. The level of precedence (from highest to lowest) for each method is as follows: 
 
 - The `-p` command line flag 
 - The [COMPOSE_PROJECT_NAME environment variable][]

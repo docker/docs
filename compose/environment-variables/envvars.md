@@ -43,8 +43,7 @@ the container's name on startup.
 For example, if your project name is `myapp` and it includes two services `db` and `web`, 
 then Compose starts containers named `myapp-db-1` and `myapp-web-1` respectively.
 
-Compose sets the project name using the following mechanisms, in order of
-precedence:
+Compose can set the project name in different ways. The level of precedence (from highest to lowest) for each method is as follows:
 
 - The `-p` command line flag 
 - `COMPOSE_PROJECT_NAME`
