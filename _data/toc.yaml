@@ -894,7 +894,7 @@ reference:
         title: Compose application model
       - path: /compose/compose-file/03-compose-file/
         title: The Compose file
-      - path: /compose/compose-file/build/04-version-and-name/
+      - path: /compose/compose-file/04-version-and-name/
         title: Version and name top-level element
       - path: /compose/compose-file/05-services/
         title: Services top-level element
@@ -908,7 +908,7 @@ reference:
         title: Secrets top-level element
       - path: /compose/compose-file/10-fragments/
         title: Fragments
-      - path: /compose/compose-file/11-extensions/
+      - path: /compose/compose-file/11-extension/
         title: Extensions
       - path: /compose/compose-file/12-interpolation/
         title: Interpolation
