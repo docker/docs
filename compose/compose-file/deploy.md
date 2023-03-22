@@ -155,7 +155,7 @@ services:
 
 `memory` configures a limit or reservation on the amount of memory a container
 can allocate, set as a string expressing a
-[byte value](index.md#specifying-byte-values).
+[byte value](11-extension.md#specifying-byte-values).
 
 #### pids
 
@@ -249,11 +249,11 @@ deploy:
 `restart_policy` configures if and how to restart containers when they exit. If `restart_policy` is not set, Compose implementations MUST consider `restart` field set by service configuration.
 
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
-- `delay`: How long to wait between restart attempts, specified as a [duration](index.md#specifying-durations) (default: 0).
+- `delay`: How long to wait between restart attempts, specified as a [duration](11-extension.md#specifying-durations) (default: 0).
 - `max_attempts`: How many times to attempt to restart a container before giving up (default: never give up). If the restart does not
   succeed within the configured `window`, this attempt doesn't count toward the configured `max_attempts` value.
   For example, if `max_attempts` is set to '2', and the restart fails on the first attempt, more than two restarts MUST be attempted.
-- `window`: How long to wait before deciding if a restart has succeeded, specified as a [duration](index.md#specifying-durations) (default:
+- `window`: How long to wait before deciding if a restart has succeeded, specified as a [duration](11-extension.md#specifying-durations) (default:
   decide immediately).
 
 ```yml
