@@ -140,9 +140,9 @@ the **Linked Accounts** section.
 
 4. Go to your Bitbucket account and navigate to **Bitbucket settings**.
 
-6. On the page that appears, select **OAuth**.
+5. On the page that appears, select **OAuth**.
 
-7. Select **Revoke** next to the Docker Hub line.
+6. Select **Revoke** next to the Docker Hub line.
 
 > **Note**
 >
