@@ -4,6 +4,11 @@ description: How to troubleshoot automated builds
 keywords: docker hub, troubleshoot, automated builds, autobuilds
 ---
 
+> **Note**
+>
+> Automated builds requires a
+> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
+
 ## Failing builds
 
 If a build fails, a **Retry** icon appears next to the build report line on the
@@ -14,7 +19,7 @@ If a build fails, a **Retry** icon appears next to the build report line on the
 > **Note**
 >
 > If you are viewing the build details for a repository that belongs to an
-> Organization, the Cancel and Retry buttons only appear if you have `Read & Write` access to the repository.
+> organization, the **Cancel** and **Retry** buttons only appear if you have `Read & Write` access to the repository.
 
 Automated builds have a 4-hour execution time limit. If a build reaches this time limit, it's
 automatically cancelled, and the build logs display the following message:
@@ -30,10 +35,10 @@ whether a build was automatically cancelled, check the build duration.
 ## Build repositories with linked private submodules
 
 Docker Hub sets up a deploy key in your source code repository that allows it
-to clone the repository and build it; however this key only works for a single,
+to clone the repository and build it. This key only works for a single,
 specific code repository. If your source code repository uses private Git
-submodules (or requires that you clone other private repositories to build),
-Docker Hub cannot access these additional repos, your build cannot complete,
+submodules, or requires that you clone other private repositories to build,
+Docker Hub cannot access these additional repositories, your build cannot complete,
 and an error is logged in your build timeline.
 
 To work around this, you can set up your automated build using the `SSH_PRIVATE`
@@ -42,7 +47,7 @@ system access to the repositories.
 
 > **Note**
 >
-> If you are using autobuild for teams, use [the process below](index.md#service-users-for-team-autobuilds)
+> If you are using autobuild for teams, use [the process below](#service-users-for-team-autobuilds)
 > instead, and configure a service user for your source code provider. You can
 > also do this for an individual account to limit Docker Hub's access to your
 > source repositories.
@@ -53,10 +58,10 @@ system access to the repositories.
 
 2. Copy the private half of the keypair to your clipboard.
 3. In Docker Hub, navigate to the build page for the repository that has linked private submodules. (If necessary, follow the steps [here](index.md#configure-automated-build-settings) to configure the automated build.)
-4. At the bottom of the screen, click the plus sign ( **+** ) next to **Build Environment variables**.
+4. At the bottom of the screen, select the **plus** icon next to **Build Environment variables**.
 5. Enter `SSH_PRIVATE` as the name for the new environment variable.
 6. Paste the private half of the keypair into the **Value** field.
-7. Click **Save**, or **Save and Build** to validate that the build now completes.
+7. Select **Save**, or **Save and Build** to validate that the build now completes.
 
 > **Note**
 >

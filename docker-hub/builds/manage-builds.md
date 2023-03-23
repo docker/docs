@@ -3,6 +3,10 @@ title: Manage autobuilds
 description: How to manage autobuilds in Docker Hub
 keywords: autobuilds, automated, docker hub, registry
 ---
+> **Note**
+>
+> Automated builds requires a
+> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
 
 ## Cancel or retry a build
 

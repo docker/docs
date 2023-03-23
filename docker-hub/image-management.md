@@ -4,10 +4,10 @@ keywords: dashboard, images, image management, inactive
 title: Advanced Image Management dashboard
 ---
 
-{% include upgrade-cta.html
-   header-text='This feature requires a Docker subscription'
-   target-url='https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds'
- %}
+> **Note**
+>
+> Image management requires a
+> [Docker Pro, Team, or Business subscription](../subscription/index.md).
 
 Advanced Image Management allows you to manage Docker images across all repositories and streamline storage in Docker Hub.
 

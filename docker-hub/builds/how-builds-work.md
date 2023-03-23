@@ -4,10 +4,10 @@ keywords: docker hub, automated builds
 title: How automated builds work
 ---
 
-{% include upgrade-cta.html
-  header-text="This feature requires a Docker subscription"
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
-%}
+> **Note**
+>
+> Automated builds requires a
+> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
 
 Docker Hub can automatically build images from source code in an external
 repository and automatically push the built image to your Docker repositories.
