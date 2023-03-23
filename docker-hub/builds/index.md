@@ -16,7 +16,7 @@ title: Set up Automated Builds
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
 
 This page contains information on:
-- [Configuring automated builds](#configure-automated-build-settings)
+- [Configuring automated builds](#configure-automated-builds)
 - [Advanced automated build options](#advanced-automated-build-options)
 - [Automated builds for teams](#autobuild-for-teams)
 
@@ -290,7 +290,7 @@ variable to automated builds associated with the account. For more information, 
     >
     > You may need to log out of your individual account on the source code provider to create the link to the service account.
 
-6. Optional: Use the SSH keys you generated to set up any builds with private submodules, using the service account and [the instructions above](index.md#build-repositories-with-linked-private-submodules).
+6. Optional: Use the SSH keys you generated to set up any builds with private submodules, using the service account and [the instructions above](troubleshoot.md#build-repositories-with-linked-private-submodules).
 
 ## What's Next?
 
