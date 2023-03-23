@@ -6,7 +6,7 @@ title: Audit logs
 
 > **Note**
 >
-> Audit logs requires a [Docker Team, or Business subscription](../../subscription/index.md).
+> Audit logs requires a [Docker Team, or Business subscription](../subscription/index.md).
 
 Audit logs display a chronological list of activities that occur at organization and repository levels. It provides a report to owners of Docker Team on all their team member activities. 
 
