@@ -105,7 +105,7 @@ Docker repository, regardless of the Autotest settings.
 
     > **Important**
     >
-    >For security purposes, autotest on external pull requests_is
+    >For security purposes, autotest on external pull requests is
     limited on public repositories. Private images are not pulled and
     environment variables defined in Docker Hub are not
     available. Automated builds continue to work as usual.

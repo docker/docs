@@ -47,7 +47,7 @@ system access to the repositories.
 
 > **Note**
 >
-> If you are using autobuild for teams, use [the process below](#service-users-for-team-autobuilds)
+> If you are using autobuild for teams, use the process below
 > instead, and configure a service user for your source code provider. You can
 > also do this for an individual account to limit Docker Hub's access to your
 > source repositories.

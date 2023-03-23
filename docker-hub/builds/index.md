@@ -120,7 +120,7 @@ For each source:
 >
 > When Docker Hub pulls a branch from a source code repository, it performs a
 > shallow clone - only the tip of the specified branch. Refer to
-> [Advanced options for Autobuild and Autotest](advanced.md#source-repository--branch-clones)
+> [Advanced options for Autobuild and Autotest](advanced.md#source-repository-or-branch-clones)
 > for more information.
 
 ### Environment variables for builds
