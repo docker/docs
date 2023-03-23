@@ -32,7 +32,7 @@ remote resources helps simplify and speed up the inner loop. There are several
 tools available, commercial and open-source, that you can use to enable a hybrid
 local-and-remote development environment. For example:
 
-- [Telepresence](https://www.cncf.io/projects/telepresence/){: target="_blank" rel="noopener" class="_" }
+- [Telepresence](https://app.getambassador.io/auth/realms/production/protocol/openid-connect/auth?client_id=docker-docs&response_type=code&redirect_uri=https%3A%2F%2Fapp.getambassador.io&utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker%26TP){: target="_blank" rel="noopener" class="_" }
 - [CodeZero](https://www.codezero.io/){: target="_blank" rel="noopener" class="_" }
 - [Gefyra](https://gefyra.dev/){: target="_blank" rel="noopener" class="_" }
 - [kubefwd](https://kubefwd.com/){: target="_blank" rel="noopener" class="_" }
