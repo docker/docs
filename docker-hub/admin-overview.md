@@ -42,7 +42,7 @@ Sign in to Docker Hub to change account settings and carry out administrative or
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                 <a href="/docker-hub/configure-sign-in/"><img src="/assets/images/help.svg" alt="sign-in" width="70" height="70"></a>
+                 <a href="/docker-hub/configure-sign-in/"><img src="/assets/images/sign-on.svg" alt="sign-in" width="70" height="70"></a>
             </div>
                 <h2 id="sign-in"><a href="/docker-hub/configure-sign-in/">Enforce sign in</a></h2>
                 <p>Configure sign in for members of your teams and organizations.</p>
@@ -51,7 +51,7 @@ Sign in to Docker Hub to change account settings and carry out administrative or
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
           <div class="component-icon">
-                 <a href="/single-sign-on/"><img src="/assets/images/all-inbox.svg" alt="SSO" width="70" height="70"></a>
+                 <a href="/single-sign-on/"><img src="/assets/images/sso.svg" alt="SSO" width="70" height="70"></a>
           </div>
                 <h2 id="SSO"><a href="/single-sign-on/">Enable Single Sign-On</a></h2>
                 <p>Understand and use Single Sign-On.</p>
