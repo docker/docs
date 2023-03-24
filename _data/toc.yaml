@@ -1846,6 +1846,8 @@ manuals:
   section:
   - sectiontitle: Onboarding
     section:
+    - path: /docker-hub/admin-overview/
+      title: Overview
     - path: /docker-hub/onboard-team/
       title: Team
     - path: /docker-hub/onboard-business/
