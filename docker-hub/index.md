@@ -99,7 +99,7 @@ GitHub and Bitbucket and push them to Docker Hub.
            <img src="/assets/images/build-configure-buildkit.svg" alt="secure" width="70px" height="70px">
           </a>
             </div>
-                <h2 id="docker-hub"><a href="/docker-hub/builds/">Use Automated buildsanage access tokens</a></h2>
+                <h2 id="docker-hub"><a href="/docker-hub/builds/">Use Automated builds</a></h2>
                 <p>Create and manage automated builds and autotesting.</p>
         </div>
      </div>

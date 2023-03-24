@@ -4,7 +4,7 @@ description: landing page for administration topic
 keywords: administration, docker hub, admin
 ---
 
-Sign in to Docker Hub to change account settings and carry out administrative or security related tasks. 
+Sign in to Docker Hub to change account settings and carry out administrative or security-related tasks. 
 
 <div class="component-container">
     <!--start row-->
