@@ -214,7 +214,7 @@ an open source tool for generating an SBOM.
 
 You can select a different plugin to use with the `generator` option, specifying
 an image that implements the
-[BuildKit SBOM scanner protocol](https://github.com/moby/buildkit/blob/master/docs/sbom-protocol.md){: target="blank" rel="noopener" }.
+[BuildKit SBOM scanner protocol](https://github.com/moby/buildkit/blob/master/docs/attestations/sbom-protocol.md){: target="blank" rel="noopener" }.
 
 ```console
 $ docker buildx build --attest type=sbom,generator=<image> .
