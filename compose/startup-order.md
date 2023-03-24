@@ -26,5 +26,5 @@ The solution for detecting the ready state of a service is  to use the `conditio
 ## Reference information 
 
 - [`depends_on`](compose-file/05-services.md#depends_on)
-- [`healthcheck`](compose-file/05-services.md#depends_on)
+- [`healthcheck`](compose-file/05-services.md#healthcheck)
 
