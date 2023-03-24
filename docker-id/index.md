@@ -33,7 +33,7 @@ Your Docker ID becomes your username for hosted Docker services, and [Docker for
 >
 > You have limited actions available until you verify your email address.
 
-## Log in
+## Sign in
 
 Once you register and verify your Docker ID email address, you can sign in to [Docker Hub](https://hub.docker.com).
 
