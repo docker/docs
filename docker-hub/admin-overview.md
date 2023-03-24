@@ -4,7 +4,7 @@ description: landing page for administration topic
 keywords: administration, docker hub, admin
 ---
 
-
+Sign in to Docker Hub to change account settings and carry out administrative or security related tasks. 
 
 <div class="component-container">
     <!--start row-->
@@ -12,7 +12,7 @@ keywords: administration, docker hub, admin
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
              <div class="component-icon">
-                 <a href="/docker-hub/orgs/"><<img src="/assets/images/download.svg" alt="Set-up-an-org" width="70" height="70"></a>
+                 <a href="/docker-hub/orgs/"><img src="/assets/images/contact.svg" alt="Set-up-an-org" width="70" height="70"></a>
                  </div>
                  <h2 id="set-up-an-org">Set up an organization</h2>
                 <p> <a href="/docker-hub/orgs/">Explore and set up an organization in Docker Hub</a></p>
@@ -21,7 +21,7 @@ keywords: administration, docker hub, admin
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                 <a href="/docker-hub/orgs/"><img src="/assets/images/explore.svg" alt="Docker Desktop" width="70" height="70"></a>
+                 <a href="/docker-hub/orgs/"><img src="/assets/images/explore.svg" alt="onboard" width="70" height="70"></a>
             </div>
                 <h2 id="onboard-users">Onboard users to your teams and organizations</h2>
                 <p>Learn how to onboard with <a href="/docker-hub/onboard-team/">Docker Team</a> or <a href="/docker-hub/onboard-business/">Docker Business</a> subscription.</p>
@@ -30,7 +30,7 @@ keywords: administration, docker hub, admin
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                <a href="/desktop/hardened-desktop/"><img src="/assets/images/note-add.svg" alt="Release notes" width="70" height="70"></a>
+                <a href="/desktop/hardened-desktop/"><img src="/assets/images/lock.svg" alt="Release notes" width="70" height="70"></a>
             </div>
                 <h2 id="hardened-desktop"><a href="/desktop/hardened-desktop/">Use Hardened Docker Desktop</a></h2>
                 <p>Explore the security model for Docker Desktop.</p>
@@ -60,7 +60,7 @@ keywords: administration, docker hub, admin
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                <a href="/docker-hub/2fa/"><img src="/assets/images/sms.svg" alt="2fa" width="70" height="70"></a>
+                <a href="/docker-hub/2fa/"><img src="/assets/images/secure.svg" alt="2fa" width="70" height="70"></a>
             </div>
                 <h2 id="2fa"><a href="/docker-hub/2fa/">Set up two-factor authentication</a></h2>
                 <p>Add an extra layer of authentication to your Docker account.</p>

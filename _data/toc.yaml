@@ -1797,8 +1797,6 @@ manuals:
     title: Webhooks
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
-  - path: /docker-hub/audit-log/
-    title: Audit logs
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - path: /docker-hub/image-management/
@@ -1828,7 +1826,7 @@ manuals:
     - path: /scout/artifactory/
       title: Artifactory integration
 
-- sectiontitle: Administration
+- sectiontitle: Administration and security
   section:
   - path: /docker-hub/admin-overview/
     title: Overview
@@ -1888,6 +1886,8 @@ manuals:
             title: Generate a new recovery code
   - path: /docker-hub/group-mapping/
     title: Group mapping
+  - path: /docker-hub/audit-log/
+    title: Audit logs
   - path: /docker-hub/domain-audit/
     title: Domain audit
   - path: /docker-hub/image-access-management/

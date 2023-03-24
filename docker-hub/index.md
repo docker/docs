@@ -95,12 +95,12 @@ GitHub and Bitbucket and push them to Docker Hub.
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-          <a href="/docker-hub/access-tokens">
-           <img src="/assets/images/secure.svg" alt="secure" width="70px" height="70px">
+          <a href="/docker-hub/builds/">
+           <img src="/assets/images/build-configure-buildkit.svg" alt="secure" width="70px" height="70px">
           </a>
             </div>
-                <h2 id="docker-hub"><a href="/docker-hub/access-tokens">Manage access tokens</a></h2>
-                <p>Create personal access tokens as an alternative to your password.</p>
+                <h2 id="docker-hub"><a href="/docker-hub/builds/">Use Automated buildsanage access tokens</a></h2>
+                <p>Create and manage automated builds and autotesting.</p>
         </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
