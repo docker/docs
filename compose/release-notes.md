@@ -8,6 +8,74 @@ redirect_from:
 ---
 {% include compose-eol.md %}
 
+## 2.17.0
+{% include release-date.html date="2023-03-23" %}
+### Update
+- Dependencies upgrade: bump buildkit to v0.11.4
+- Dependencies upgrade: bump buildx to v0.10.4
+- Dependencies upgrade: bump containerd to 1.6.18
+- Dependencies upgrade: bump compose-go to v1.13.0
+
+### Bug fixes and enhancements
+* Introduce `--wait-timeout` on `up` command. Fixed [compose#10269](https://github.com/docker/compose/issues/10269){:
+  target="_blank" rel="noopener" class="_"}
+* Make `compose service --hash` output sort by service name. Pull Request [compose#10278](https://github.com/docker/compose/pull/10278){:
+  target="_blank" rel="noopener" class="_"}
+* Render a compact TUI progress to monitor layers download. Pull Request [compose#10281](https://github.com/docker/compose/pull/10281){:
+  target="_blank" rel="noopener" class="_"}
+* Introduce `restart` for `depends_on`. Fixed [compose#10284](https://github.com/docker/compose/issues/10284){:
+  target="_blank" rel="noopener" class="_"}
+* Add support of `NO_COLOR` env var. Fixed [compose#10340](https://github.com/docker/compose/issues/10340){:
+  target="_blank" rel="noopener" class="_"}
+* Progress writer uses `dockercli.Err` stream. Fixed [compose#10366](https://github.com/docker/compose/issues/10366){:
+  target="_blank" rel="noopener" class="_"}
+* Introduce `dockerfile_inline`. Fixed [compose#8077](https://github.com/docker/compose/issues/8077){:
+  target="_blank" rel="noopener" class="_"}
+* Add support for `additional_contexts` in `build` service configuration. Fixed [compose#9461](https://github.com/docker/compose/issues/9461){:
+  target="_blank" rel="noopener" class="_"} [compose#9961](https://github.com/docker/compose/issues/9961){:
+  target="_blank" rel="noopener" class="_"}
+* Add file delete/rename handling in `watch` mode. Pull Request [compose#10386](https://github.com/docker/compose/pull/10386){:
+  target="_blank" rel="noopener" class="_"}
+* Introduce `ignore` attribute in `watch` mode. Pull Request [compose#10385](https://github.com/docker/compose/pull/10385){:
+  target="_blank" rel="noopener" class="_"}
+* Use progress writer to show copies status. Pull Request [compose#10387](https://github.com/docker/compose/pull/10387){:
+  target="_blank" rel="noopener" class="_"}
+* Update reference documentation of `-p`/`--project-name` flag. Fixed [docs#16915](https://github.com/docker/docs/pull/16915){:
+  target="_blank" rel="noopener" class="_"}, [compose-spec#311](https://github.com/compose-spec/compose-spec/issues/311){:
+  target="_blank" rel="noopener" class="_"}
+* Introduce `replace` label to track relationship between old and new containers of a service. Fixed [compose#9600](https://github.com/docker/compose/issues/9600){:
+  target="_blank" rel="noopener" class="_"}
+* Restart dependent services after a service has been restarted. Fixed [compose#10263](https://github.com/docker/compose/issues/10263){:
+  target="_blank" rel="noopener" class="_"}
+* Ignore services without a build section in `watch` mode. Fixed [compose#10270](https://github.com/docker/compose/issues/10270){:
+  target="_blank" rel="noopener" class="_"}
+* Apply config options for pseudo-subcommands. Fixed [compose#10286](https://github.com/docker/compose/issues/10286){:
+  target="_blank" rel="noopener" class="_"}
+* Manage only containers with config_hash labels (i.e, created by compose). Fixed [compose#10317](https://github.com/docker/compose/issues/10317){:
+  target="_blank" rel="noopener" class="_"}
+* Trigger an error if project name is empty after normalization. Fixed [compose#10313](https://github.com/docker/compose/issues/10313){:
+  target="_blank" rel="noopener" class="_"}
+* Restart only needed services by checking `depends_on` relations. Fixed [compose#10337](https://github.com/docker/compose/issues/10337){:
+  target="_blank" rel="noopener" class="_"}
+* Fix display issue on small terminal. Fixed [compose#10322](https://github.com/docker/compose/issues/10322){:
+  target="_blank" rel="noopener" class="_"}
+* Fix issue building the built images IDs collection. Pull Request [compose#10372](https://github.com/docker/compose/issues/10372){:
+  target="_blank" rel="noopener" class="_"}
+* Use configured name separator to define oneoff container name. Fixed [compose#10354](https://github.com/docker/compose/issues/10354){:
+  target="_blank" rel="noopener" class="_"}
+* Fix concurrent map read/write issue when recreating containers. Fixed [compose#10319](https://github.com/docker/compose/issues/10319){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now supports Dry Run mode for `stop` and `rm` commands. Pull Request [compose#10257](https://github.com/docker/compose/issues/10257){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now supports Dry Run mode for `pull` command. Pull Request [compose#10341](https://github.com/docker/compose/issues/10341){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now supports Dry Run mode for `push` command. Pull Request [compose#10355](https://github.com/docker/compose/issues/10355){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now supports Dry Run mode for `exec` command. Pull Request [compose#10252](https://github.com/docker/compose/issues/10252){:
+  target="_blank" rel="noopener" class="_"}
+* Compose now supports Dry Run mode for `restart` command. Pull Request [compose#10339](https://github.com/docker/compose/issues/10339){:
+  target="_blank" rel="noopener" class="_"}
+
 ## 2.16.0
 {% include release-date.html date="2023-02-08" %}
 ### Update
