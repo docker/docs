@@ -8,7 +8,7 @@ Docker Hub is a service provided by Docker for finding and sharing container ima
 
 It's the world’s largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers.
 
-Docker Hub is also where you can go to change account settings and carry out administrative tasks.
+Docker Hub is also where you can go to change your Docker account settings and carry out administrative tasks.
 
 <style>
 .tab-content > .tab-pane {s
@@ -27,7 +27,7 @@ Docker Hub is also where you can go to change account settings and carry out adm
 </style>
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#includes">What key features are included in Docker Hub?</a></li>
-<li><a data-toggle="tab" data-target="#features">What administrative tasks can I do in Docker Hub?</a></li>
+<li><a data-toggle="tab" data-target="#features">What administrative tasks can I perform in Docker Hub?</a></li>
 </ul>
 <div class="tab-content">
 <div id="includes" class="tab-pane fade in active" markdown="1">

@@ -1799,20 +1799,6 @@ manuals:
     title: Vulnerability scanning
   - path: /docker-hub/audit-log/
     title: Audit logs
-  - sectiontitle: Security and authentication
-    section:
-      - path: /docker-hub/access-tokens/
-        title: Create and manage access tokens
-      - sectiontitle: Two-factor authentication
-        section:
-          - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
-          - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
-          - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - path: /docker-hub/image-management/
@@ -1844,10 +1830,10 @@ manuals:
 
 - sectiontitle: Administration
   section:
+  - path: /docker-hub/admin-overview/
+    title: Overview
   - sectiontitle: Onboarding
     section:
-    - path: /docker-hub/admin-overview/
-      title: Overview
     - path: /docker-hub/onboard-team/
       title: Team
     - path: /docker-hub/onboard-business/
@@ -1886,6 +1872,20 @@ manuals:
          title: FAQs
   - path: /docker-hub/scim/
     title: SCIM
+  - sectiontitle: Security and authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Create and manage access tokens
+      - sectiontitle: Two-factor authentication
+        section:
+          - path: /docker-hub/2fa/
+            title: Enable two-factor authentication
+          - path: /docker-hub/2fa/disable-2fa/
+            title: Disable two-factor authentication
+          - path: /docker-hub/2fa/recover-hub-account/
+            title: Recover your Docker Hub account
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
   - path: /docker-hub/group-mapping/
     title: Group mapping
   - path: /docker-hub/domain-audit/
