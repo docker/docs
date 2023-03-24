@@ -10,7 +10,7 @@ Continue with the following steps to view and explore an actual container in Doc
 
 ## Step 1: Set up the guide
 
-The first thing you need is a running container. For this guide, you will use a premade container. To get started, start Docker Desktop and then run the following command in your local terminal:
+The first thing you need is a running container. For this guide, use the premade `welcome-to-docker` container. To get started, start Docker Desktop and then run the following command in your local terminal:
 
 ```console
 $ docker run -p 8088:80 -d --name welcome-to-docker docker/welcome-to-docker
@@ -36,27 +36,15 @@ Docker Desktop allows you to easily view and interact with different aspects of 
 
 ## Step 5: Stop your container
 
-The `welcome-to-docker` container will continue to run until you stop it. To stop the container in Docker Desktop, go to the **Containers** tab and select the **Stop** icon in the **Actions** column of your container.
+The `welcome-to-docker` container continues to run until you stop it. To stop the container in Docker Desktop, go to the **Containers** tab and select the **Stop** icon in the **Actions** column of your container.
 
 ![Stopping a container in Docker Desktop](images/getting-started-stop.png){:width="500px"}
 
 ## What's next
 
-In this guide, you explored what a container is. Next, you'll learn what you need to create and run your own container.
+In this guide, you explored what a container is. Continue to the next guide to learn what you need to create and run your own container.
 
-<div class="component-container">
-    <!--start row-->
-    <div class="row">
-     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-        <div class="component">
-            <div class="component-icon">
-                <a href="/get-started/run-your-own-container/"><img src="/assets/images/build-frontends.svg" alt="run your own container" width="70" height="70"></a>
-            </div>
-                <h3 id="run-your-own-container"><a href="/get-started/run-your-own-container">Run your own container</a></h3>
-            </div>
-        </div>
-  </div>
-</div>
+[Run your own container](./run-your-own-container.md){: .button .primary-btn}
 
 ## Dive deeper
 
@@ -67,6 +55,6 @@ When setting up the container, you used the `docker run` command. Here are what 
  - `docker run`: This is used to run containers. It needs at least one argument, and that argument is the image you want to run. In this case, it's `docker/welcome-to-docker`.
  - `-p 8088:80`: This lets Docker know that port 80 in the container needs to be accessible from port 8088 on your local host.
  - `-d`: This runs the container detached or in the background.
- - `—-name welcome-to-docker`: This sets the name for your container. If you don’t do so, Docker will select a random name for you.
+ - `—-name welcome-to-docker`: This sets the name for your container. If you don’t do so, Docker selects a random name for you.
 
 Continue following [What's next](#whats-next) to learn how to intuitively run an image using the Docker Desktop GUI.

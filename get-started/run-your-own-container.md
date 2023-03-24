@@ -4,7 +4,7 @@ keywords: get started, quick start, intro, concepts
 description: Learn how to run a container from scratch
 ---
 
-In this guide you'll learn the basic steps to run a container from scratch. For this guide, you'll use a sample Node.js application, but it's not necessary to know Node.js.
+Follow this guide to learn the basic steps of running a container from scratch. This guide uses a sample Node.js application, but it's not necessary to know Node.js.
 
 ## Step 1: Get the sample application
 
@@ -114,7 +114,7 @@ RUN npm install \
     && npm run build \
     && rm -fr node_modules
 
-# Specify that the application in the container will listen on port 3000
+# Specify that the application in the container listens on port 3000
 EXPOSE 3000
 
 # Start the app using serve command
@@ -129,7 +129,7 @@ An image is like a static version of a container. You always need an image to ru
 $ docker build -t welcome-to-docker .
 ```
 
-Building the image will take some time. After your image is built, you can view your image in the **Images** tab in Docker Desktop.
+Building the image may take some time. After your image is built, you can view your image in the **Images** tab in Docker Desktop.
 
 ## Step 4: Run your container
 
@@ -145,20 +145,7 @@ You can use Docker Desktop to view and access running containers. Go to the **Co
 
 In this guide, you built your own image. When running containers on Docker Desktop, you don’t need to build your own image from scratch. You can also run images created by others on Docker Hub.
 
-<div class="component-container">
-    <!--start row-->
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-        <div class="component">
-             <div class="component-icon">
-                 <a href="/get-started/run-docker-hub-images/"><img src="/assets/images/build-multi-platform.svg" alt="run docker hub images" width="70" height="70"></a>
-             </div>
-                 <h3 id="run-docker-hub-images"><a href="/get-started/run-docker-hub-images">Run Docker Hub images</a></h3>
-        </div>
-      </div>
-    </div>
-</div>
-
+[Run Docker Hub images](./run-docker-hub-images.md){: .button .primary-btn}
 
 ## Dive deeper
 

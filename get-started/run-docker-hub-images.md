@@ -8,7 +8,7 @@ You can share and store images in Docker Hub ([http://hub.docker.com](http://hub
 
 ## Step 1: Search for the image
 
-You can search for Docker Hub images on Docker Desktop. Use the search bar, or use the shortcut ⌘K on Mac or Ctrl + K on Windows. In the search, specify `welcome-to-docker` to find the `docker/welcome-to-docker` image you'll use in this guide.
+You can search for Docker Hub images on Docker Desktop. Use the search bar, or use the shortcut ⌘K on Mac or Ctrl + K on Windows. In the search bar, specify `welcome-to-docker` to find the `docker/welcome-to-docker` image used in this guide.
 
 ![Search Docker Desktop for the welcome-to-docker image](images/getting-started-search.png){:width="500px"}
 
@@ -30,18 +30,6 @@ That's it! The container is ready to use. Go to the **Containers** tab in Docker
 
 ## What's next
 
-In this guide, your ran someone else's image from Docker Hub. Next, you'll learn how you can publish your own image to Docker Hub.
+In this guide, you ran someone else's image from Docker Hub. Continue to the next guide to learn how you can publish your own image to Docker Hub.
 
-<div class="component-container">
-    <!--start row-->
-    <div class="row">
-     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-        <div class="component">
-            <div class="component-icon">
-                <a href="/get-started/publish-your-own-image/"><img src="/assets/images/arrow-up.svg" alt="publish your own image" width="70" height="70"></a>
-            </div>
-                <h3 id="publish-your-own-image"><a href="/get-started/publish-your-own-image/">Publish your own image</a></h3>
-            </div>
-        </div>
-    </div>
-</div>
+[Publish your own image](./publish-your-own-image.md){: .button .primary-btn}
