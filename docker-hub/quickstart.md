@@ -76,11 +76,11 @@ redirect_from:
 - /apidocs/overview/
 ---
 
-The following section contains step-by-step instructions on how to easily get started with Docker Hub.
+The following section contains step-by-step instructions on how to get started with Docker Hub.
 
 ### Step 1: Sign up for a Docker account
 
-Let's start by creating a [Docker ID](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"}.
+Start by creating a [Docker ID](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"}.
 
 A Docker ID grants you access to Docker Hub repositories and allows you to explore images that are available from the community and verified publishers. You'll also need a Docker ID to share images on Docker Hub.
 
@@ -89,29 +89,24 @@ A Docker ID grants you access to Docker Hub repositories and allows you to explo
 To create a repository:
 
 1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
-2. Click **Create a Repository** on the Docker Hub welcome page.
+2. Select **Create a Repository** on the Docker Hub welcome page.
 3. Name it **&lt;your-username&gt;/my-private-repo**.
 4. Set the visibility to **Private**.
+5. Select **Create**.
 
-    ![Create a repository](images/index-create-repo.png)
-
-5. Click **Create**.
-
-    You've created your first repository. You should see:
-
-    ![Repository created](images/index-repo-created.png)
+    You've created your first repository. 
 
 ### Step 3: Download and install Docker Desktop
 
-You'll need to download Docker Desktop to build, push, and pull container images.
+You need to download Docker Desktop to build, push, and pull container images.
 
 1. Download and install [Docker Desktop](../desktop/index.md).
 
-2. Sign in to the Docker Desktop application using the Docker ID you've just created.
+2. Sign in to Docker Desktop using the Docker ID you created in step one.
 
 ### Step 4: Pull and run a container image from Docker Hub
 
-1. Run `docker pull hello-world` to pull the image from Docker Hub. You should see output similar to:
+1. In your terminal, run `docker pull hello-world` to pull the image from Docker Hub. You should see output similar to:
 
    ```console
    $ docker pull hello-world
@@ -177,7 +172,7 @@ Docker image locally.
 
     ![Tag created](images/index-tag.png)
 
-Congratulations! You've successfully:
+You've successfully:
 
 - Signed up for a Docker account
 - Created your first repository
