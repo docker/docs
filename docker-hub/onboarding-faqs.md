@@ -39,14 +39,14 @@ The organization name, sometimes referred to as the organization namespace or th
 
 ### What’s a team?
 
-A **Team** is a group of Docker users that belong to an organization. An organization can have multiple teams. When you first create an organization, you’ll see that you have a team, the owners team, with a single member. An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. [Learn more](orgs.md#create-a-team).
+A **Team** is a group of Docker users that belong to an organization. An organization can have multiple teams. When you first create an organization, you’ll see that you have a team, the owners team, with a single member. An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. [Learn more](manage-a-team.md).
 
 ### Who is an organization owner?
 
 An organization owner is an administrator who is responsible to manage
 repositories and add team members to the organization. They have full access to
 private repositories, all teams, billing information, and organization settings.
-An organization owner can also specify [permissions](orgs.md#configure-repository-permissions) for each team in the
+An organization owner can also specify [permissions](manage-a-team.md#configure-repository-permissions) for each team in the
 organization. Only an organization owner can enable SSO for the organization.
 When SSO is enabled for your organization, the organization owner can also
 manage users.
