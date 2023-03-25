@@ -62,6 +62,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug where Registry Access Management policy updates were not downloaded.
 - Improved debug information to better characterise failures under WSL 2.
 
+### Known Issues
+
+- Running containers with `--gpus` on Windows with the WSL 2 backend does not work. This will be fixed in future releases. See [docker/for-win/13324](https://github.com/docker/for-win/issues/13324).
+
 ## 4.17.0
 
 {% include release-date.html date="2023-02-27" %}
