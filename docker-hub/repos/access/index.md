@@ -33,6 +33,20 @@ you automatically have Read-only permissions:
 - `Admin` access lets users pull, push, view, edit, and delete a
   repository. You can also edit build settings, and update the repositories description, collaborators rights, public/private visibility, and delete.
 
+| Action | Read-only | Read & Write | Admin |
+|:------------------:|:---------:|:------------:|:-----:|
+| Pull a Repository | ✅ | ✅ | ✅ |
+| View a Repository | ✅ | ✅ | ✅ |
+| Push a Repository | ❌ | ✅ | ✅ |
+| Edit a Repository | ❌ | ❌ | ✅ |
+| Delete a Repository | ❌ | ❌ | ✅ |
+| Update a Repository Description | ❌ | ❌ | ✅ |
+| View Builds | ✅ | ✅ | ✅ |
+| Cancel Builds | ❌ | ✅ | ✅ |
+| Retry Builds | ❌ | ✅ | ✅ |
+| Trigger Builds | ❌ | ✅ | ✅ |
+| Edit Build Settings | ❌ | ❌ | ✅ |
+
 > **Note**
 >
 > A user who hasn't verified their email address only has
