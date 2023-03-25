@@ -1797,22 +1797,6 @@ manuals:
     title: Webhooks
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
-  - path: /docker-hub/audit-log/
-    title: Audit logs
-  - sectiontitle: Security and authentication
-    section:
-      - path: /docker-hub/access-tokens/
-        title: Create and manage access tokens
-      - sectiontitle: Two-factor authentication
-        section:
-          - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
-          - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
-          - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - path: /docker-hub/image-management/
@@ -1842,8 +1826,10 @@ manuals:
     - path: /scout/artifactory/
       title: Artifactory integration
 
-- sectiontitle: Administration
+- sectiontitle: Administration and security
   section:
+  - path: /docker-hub/admin-overview/
+    title: Overview
   - sectiontitle: Onboarding
     section:
     - path: /docker-hub/onboard-team/
@@ -1884,8 +1870,24 @@ manuals:
          title: FAQs
   - path: /docker-hub/scim/
     title: SCIM
+  - sectiontitle: Security and authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Create and manage access tokens
+      - sectiontitle: Two-factor authentication
+        section:
+          - path: /docker-hub/2fa/
+            title: Enable two-factor authentication
+          - path: /docker-hub/2fa/disable-2fa/
+            title: Disable two-factor authentication
+          - path: /docker-hub/2fa/recover-hub-account/
+            title: Recover your Docker Hub account
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
   - path: /docker-hub/group-mapping/
     title: Group mapping
+  - path: /docker-hub/audit-log/
+    title: Audit logs
   - path: /docker-hub/domain-audit/
     title: Domain audit
   - path: /docker-hub/image-access-management/
