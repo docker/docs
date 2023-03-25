@@ -22,7 +22,7 @@ Use the following steps to invite members to your organization via Docker ID or 
 5. Select a team from the drop-down list to add all invited users to that team.
   > **Note**
   >
-  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](../docker-hub/orgs.md/#create-a-team).
+  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](manage-a-team.md).
 6. Select **Invite** to confirm.
    > **Note**
    >
@@ -39,7 +39,7 @@ To invite multiple members to your organization via a CSV file containing email 
 4. Select a team from the drop-down list to add all invited users to that team.
   > **Note**
   >
-  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](../docker-hub/orgs.md/#create-a-team).
+  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](manage-a-team.md).
 5. Select **Download the template CSV file** to optionally download an example CSV file. The following is an example of the contents of a valid CSV file.
     ```
     email
