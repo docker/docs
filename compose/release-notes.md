@@ -8,6 +8,21 @@ redirect_from:
 ---
 {% include compose-eol.md %}
 
+## 2.17.1
+{% include release-date.html date="2023-03-24" %}
+### Update
+- Dependencies upgrade: bump buildkit to v0.11.5
+- Dependencies upgrade: bump compose-go to v1.13.1
+- Dependencies upgrade: bump golang to 1.20.2
+
+### Bug fixes and enhancements
+- Fixed panic on `alpha watch` command. Pull Request [compose#10393](https://github.com/docker/compose/pull/10393){:
+  target="_blank" rel="noopener" class="_"}
+- Prevented conflicts for services named `extensions`. Fixed [compose-go#247](https://github.com/compose-spec/compose-go/issues/247){:
+  target="_blank" rel="noopener" class="_"}
+- Compose now validates project names more consistently. Fixed [compose-go#363](https://github.com/compose-spec/compose-go/issues/363){:
+  target="_blank" rel="noopener" class="_"}
+
 ## 2.17.0
 {% include release-date.html date="2023-03-23" %}
 ### Update
