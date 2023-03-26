@@ -45,7 +45,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
           <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Download file</a> 
         <br>
         <br>
-        <b>Checksum:</b> e66a76f8f71f7e5e4488163d7da686d1fc669c5cbb47fec15085623c4deaf16a
+        <b>Checksum:</b> 2ea284648a5f708428f3a06bb8e1eb68cbeba6689b53c53d7ca24043a8f34800
         </div>
       </div>
     </div>
