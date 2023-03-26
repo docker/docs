@@ -472,7 +472,7 @@ requirements:
 
    - [Download for Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64)
    - [Download for Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64)
-   - [Download for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe)
+   - [Download for Windows](https://desktop.docker.com/win/main/amd64/96739/Docker%20Desktop%20Installer.exe)
 
 2. Sign into [Docker Hub](https://hub.docker.com){: target="_blank"
    rel="noopener" class="_"}.

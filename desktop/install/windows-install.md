@@ -17,7 +17,7 @@ redirect_from:
 
 Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
 
-[Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
+[Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/96739/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
 
 _For checksums, see [Release notes](../release-notes.md)_
 

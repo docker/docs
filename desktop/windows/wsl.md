@@ -23,7 +23,7 @@ Before you turn on the Docker Desktop WSL 2, ensure you have:
 
 ## Turn on Docker Desktop WSL 2
 
-1. Download [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
+1. Download [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/96739/Docker%20Desktop%20Installer.exe).
 2. Follow the usual installation instructions to install Docker Desktop. If you are running a supported system, Docker Desktop prompts you to enable WSL 2 during installation. Read the information displayed on the screen and enable WSL 2 to continue.
 3. Start Docker Desktop from the Windows Start menu.
 4. From the Docker menu, select **Settings** and then **General**.
