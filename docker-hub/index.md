@@ -4,16 +4,35 @@ keywords: Docker, docker, docker hub, hub, overview
 title: Overview
 ---
 
-[Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} is a service provided by Docker for
-finding and sharing container images with your team. It's the world’s largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers.
+Docker Hub is a service provided by Docker for finding and sharing container images.
 
-Users get access to free public repositories for storing and sharing images or can choose a [subscription plan](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} for private repositories.
+It's the world’s largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers.
 
-Docker Hub provides the following major features:
+Docker Hub is also where you can go to [change your Docker account settings and carry out administrative tasks](admin-overview.md).
+
+<style>
+.tab-content > .tab-pane {s
+  background-color: #fafafb;
+  border: 1px solid #ddd;
+  border-top: 0;
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 10px;
+}
+.night .tab-content > .tab-pane {
+  background-color: #0e1c25;
+  border: 1px solid #4f6071;
+}
+</style>
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#includes">What key features are included in Docker Hub?</a></li>
+<li><a data-toggle="tab" data-target="#features">What administrative tasks can I perform in Docker Hub?</a></li>
+</ul>
+<div class="tab-content">
+<div id="includes" class="tab-pane fade in active" markdown="1">
 
 * [Repositories](../docker-hub/repos/index.md): Push and pull container images.
-* [Teams & Organizations](orgs.md): Manage access to private
-repositories of container images.
 * [Docker Official Images](official_images.md): Pull and use high-quality
 container images provided by Docker.
 * [Docker Verified Publisher Images](publish/index.md): Pull and use high-
@@ -24,8 +43,22 @@ quality container images from non-commercial open source projects.
 GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
+*[Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
 
-Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
+</div>
+<div id="features" class="tab-pane fade" markdown="1">
+
+* [Create and manage teams & organizations](orgs.md)
+* [Create a company](creating-companies.md)
+* [Enforce sign in](configure-sign-in.md)
+* Set up [SSO](../single-sign-on/index.md) and [SCIM](scim.md)
+* Use [Group mapping](group-mapping.md)
+* [Carry out domain audits](domain-audit.md)
+* [Use Image Access Management](image-access-management.md) to control developers' access to certain types of images
+* [Enable Registry Access Management](../desktop/hardened-desktop/registry-access-management.md)
+
+</div>
+</div>
 
 <div class="component-container">
     <!--start row-->
@@ -35,7 +68,7 @@ Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: 
              <div class="component-icon">
                  <a href="/docker-id/"><img src="/assets/images/laptop.svg" alt="Docker ID" width="70" height="70"></a>
              </div>
-                 <h2 id="docker-id"><a href="/docker-id/">Create a Docker ID </a></h2>
+                 <h2 id="docker-id"><a href="/docker-id/">Create an account</a></h2>
                 <p>Sign up and create a new Docker ID</p>
         </div>
       </div>
@@ -62,12 +95,12 @@ Docker provides a [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: 
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-          <a href="/docker-hub/access-tokens">
-           <img src="/assets/images/secure.svg" alt="secure" width="70px" height="70px">
+          <a href="/docker-hub/builds/">
+           <img src="/assets/images/build-configure-buildkit.svg" alt="secure" width="70px" height="70px">
           </a>
             </div>
-                <h2 id="docker-hub"><a href="/docker-hub/access-tokens">Manage access tokens</a></h2>
-                <p>Create personal access tokens as an alternative to your password.</p>
+                <h2 id="docker-hub"><a href="/docker-hub/builds/">Use Automated builds</a></h2>
+                <p>Create and manage automated builds and autotesting.</p>
         </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
