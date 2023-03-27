@@ -58,9 +58,9 @@ On the **Advanced** tab, you can reconfigure your initial installation settings:
   - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin`
   - **User**: Docker CLI tools are installed in the user directory under `$HOME/.docker/bin`. You must then add `$HOME/.docker/bin` to your PATH. To add `$HOME/.docker/bin` to your path, run:
 
-  ```console
-    $ export PATH=$PATH:~/.docker/bin
-  ```
+   ```console
+   $ export PATH=$PATH:~/.docker/bin
+   ```
 
 - **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks)
 
