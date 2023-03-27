@@ -14,7 +14,7 @@ It also provides clarity on running containers as `root` as opposed to having `r
 ## Permission requirements
 
 Docker Desktop for Mac is run as an unprivileged user. However, certain functionalities may be required for Docker Desktop to perform a limited set of privileged configurations such as:
- - [Installing symlinks](#installing-symlinks) in `/usr/local/bin`. This ensures the `docker` CLI is on the user’s PATH without having to reconfigure shells, log out then log back in, for example.
+ - [Installing symlinks](#installing-symlinks) in either `/usr/local/bin` or `$HOME/.docker/bin`. 
  - [Binding privileged ports](#binding-privileged-ports) that are less than 1024. The so-called "privileged ports" have not generally been used as a security boundary, however OSes still prevent unprivileged processes from binding them which breaks commands like `docker run -p 127.0.0.1:80:80 docker/getting-started`.
  - [Ensuring `localhost` and `kubernetes.docker.internal` are defined](#ensuring-localhost-and-kubernetesdockerinternal-are-defined) in `/etc/hosts`. Some old macOS installs did not have `localhost` in `/etc/hosts`, which caused Docker to fail. Defining the DNS name `kubernetes.docker.internal` allows us to share Kubernetes contexts with containers.
  - Securely caching the Registry Access Management policy which is read-only for the developer.
@@ -25,14 +25,20 @@ All privileged operations are run using the privileged helper process `com.docke
 For security reasons, version 4.15 of Docker Desktop for Mac doesn't require the user to run a permanent privileged process. Whenever elevated privileges are needed for a configuration, Docker Desktop prompts the user with information on the task it needs to perform. Most configurations are applied once, subsequent runs don't prompt for privileged access anymore.
 The only time Docker Desktop may start the privileged process is for binding privileged ports that are not allowed by default on the host OS.
 
+From version 4.18 and above of Docker Desktop, privileged access for certain functionalities is granted during installation. The first time Docker Desktop for Mac is launched, the user is presented with an installation window to either use the recommended settings, or configure:
+- The location of the Docker CLI tools either in the system or user directory
+- The default Docker socket
+- Privileged port mapping. 
+
+The user is then asked for their password to confirm. 
+
 ### Installing symlinks
 
-The docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop ensures the `docker` CLI is on the user’s PATH without having to reconfigure shells, log out then log back in for example. As on most systems `/usr/local/bin` is in the user's PATH by default, and so Docker Desktop creates symlinks for all docker binaries in it.
+The docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop ensures the docker CLI is on the user’s PATH without having to reconfigure shells, log out then log back in for example As on most systems `/usr/local/bin` is in the user's PATH by default, and so Docker Desktop creates symlinks for all docker binaries in it.
 
-Installing symlinks in `/usr/local/bin` is a privileged configuration Docker Desktop performs on the first startup. Docker Desktop checks if symlinks exists and takes the following actions: 
+For versions below 4.18, installing symlinks in `/usr/local/bin` is a privileged configuration Docker Desktop performs on the first startup. Docker Desktop checks if symlinks exists and takes the following actions: 
 - Creates the symlinks without the admin prompt if `/usr/local/bin` is writable by unprivileged users.
-- Triggers an admin prompt for the user to authorize the creation of symlinks in `/usr/local/bin`. If the user authorizes this, symlinks to docker binaries are created in `/usr/local/bin`.
-If the user rejects the prompt, is not willing to run configurations requiring elevated privileges, or does not have admin rights on their machine, Docker Desktop creates the symlinks in `~/.docker/bin` and edits the user's shell profile to ensure this location is in the user's PATH. This requires all open shells to be reloaded. 
+- Triggers an admin prompt for the user to authorize the creation of symlinks in `/usr/local/bin`. If the user authorizes this, symlinks to docker binaries are created in `/usr/local/bin`. If the user rejects the prompt, is not willing to run configurations requiring elevated privileges, or does not have admin rights on their machine, Docker Desktop creates the symlinks in `~/.docker/bin` and edits the user's shell profile to ensure this location is in the user's PATH. This requires all open shells to be reloaded. 
 The rejection is recorded for future runs to avoid prompting the user again.
 For any failure to ensure binaries are on the user's PATH, the user may need to manually add to their PATH the `/Applications/Docker.app/Contents/Resources/bin` or use the full path to docker binaries.
 
@@ -43,7 +49,7 @@ To ensure the docker socket exists after restart, Docker Desktop sets up a `laun
 
 When running a container that requires binding privileged ports, Docker Desktop first attempts to bind it directly as an unprivileged process. If the OS prevents this and it fails, Docker Desktop checks if the `com.docker.vmnetd` privileged helper process is running to bind the privileged port through it. 
 
-If the privileged helper process is not running, Docker Desktop prompts the user for authorization to run it under [launchd](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html).
+For versions below 4.18, if the privileged helper process is not running, Docker Desktop prompts the user for authorization to run it under [launchd](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html).
 This configures the privileged helper to run as in the versions of Docker Desktop prior to 4.15. However, the functionality provided by this privileged helper now only supports port binding and caching the Registry Access Management policy.
 If the user declines the launch of the privileged helper process, binding the privileged port cannot be done and the docker CLI returns an error:
 ```console

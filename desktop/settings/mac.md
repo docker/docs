@@ -50,11 +50,13 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
   use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
 
-## Installation 
+## Advanced
 
-On the **Installation** tab, you can reconfigure your initial installation settings:
+On the **Advanced** tab, you can reconfigure your initial installation settings:
 
-- **Choose location for Docker CLI tools**. you can choose either the default location, or manually install under `$HOME/.docker/bin`. For more information, see [TODO]()
+- **Choose how to configure the intallation of Docker's CLI tools**. 
+  - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin `
+  - **User**: Docker CLI tools are installed in the user directory under `$HOME/.docker/bin`. You must then add `$HOME/.docker/bin` to your PATH.
 
 - **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks)
 
