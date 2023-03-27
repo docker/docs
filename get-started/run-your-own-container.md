@@ -51,35 +51,36 @@ To run your code in a container, the most fundamental thing you need is a Docker
    <div class="tab-content">
    <div id="mac-linux" class="tab-pane fade in active" markdown="1">
 
-  ### Mac / Linux
+### Mac / Linux
 
-   In the terminal, run the following commands listed below.
+In the terminal, run the following commands listed below.
 
-   Change directory to the `welcome-to-docker` directory. Replace `/path/to/welcome-to-docker` with the path to your `welcome-to-docker` directory.
-   ```console
-   $ cd /path/to/welcome-to-docker
-   ```
-   Create an empty file named `Dockerfile`.
-   ```console
-   $ touch Dockerfile
-   ```
+Change directory to the `welcome-to-docker` directory. Replace `/path/to/welcome-to-docker` with the path to your `welcome-to-docker` directory.
+```console
+$ cd /path/to/welcome-to-docker
+```
+Create an empty file named `Dockerfile`.
+```console
+$ touch Dockerfile
+```
 
    <hr>
    </div>
    <div id="windows" class="tab-pane fade" markdown="1">
 
-  ### Windows
+### Windows
 
-   In the Windows Command Prompt, run the following commands listed below.
+In the Windows Command Prompt, run the following commands listed below.
 
-   Change directory to the `welcome-to-docker` directory. Replace `\path\to\welcome-to-docker` with the path to your `welcome-to-docker` directory.
-   ```console
-   $ cd \path\to\welcome-to-docker
-   ```
-   Create an empty file named `Dockerfile`.
-   ```console
-   $ type nul > Dockerfile
-   ```
+Change directory to the `welcome-to-docker` directory. Replace `\path\to\welcome-to-docker` with the path to your `welcome-to-docker` directory.
+
+```console
+$ cd \path\to\welcome-to-docker
+```
+Create an empty file named `Dockerfile`.
+```console
+$ type nul > Dockerfile
+```
 
    <hr>
    </div>
