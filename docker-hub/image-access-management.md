@@ -25,14 +25,14 @@ For example, a developer, who is part of an organization, building a new contain
 
     > **Note**
     >
-    > Image Access Management is turned off default. However, members of the `owners` team in your organization have access to all images regardless of the settings.
+    > Image Access Management is turned off by default. However, members of the `owners` team in your organization have access to all images regardless of the settings.
 
 5. Select the category restrictions for your images by selecting **Allowed**.
-     Once the restrictions are applied, your members can view the Org permissions page in a read-only format.
-6. Optional: To ensure that each org member uses images in a safe and secure environment, [enfore sign-in](../docker-hub/configure-sign-in.md).
+     Once the restrictions are applied, your members can view the organization permissions page in a read-only format.
+6. Optional: To ensure that each organization member uses images in a safe and secure environment, [enfore sign-in](../docker-hub/configure-sign-in.md).
 
 ## Verify the restrictions
 
-   To confirm that the restrictions are successful, have each organization member pull an image onto their local computer after signing in to Docker Desktop. If they're don't sign in, an error message is sent.
+   To confirm that the restrictions are successful, have each organization member pull an image onto their local computer after signing in to Docker Desktop. If they don't sign in, they receive an error message.
 
    For example, if you enable Image Access Management, your members can only pull an Organization Image, Docker Official Image, or Verified Publisher Image onto their local machine. If you disable the restrictions, your members can pull any image, including community images.
