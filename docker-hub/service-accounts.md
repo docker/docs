@@ -3,6 +3,10 @@ description: Docker Service accounts
 keywords: Docker, service, accounts, Docker Hub
 title: Service accounts
 ---
+> **Note**
+>
+> Service accounts requires a
+> [Docker Team, or Business subscription](../subscription/index.md).
 
 A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and don't share Docker IDs with the members in the organization. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
 

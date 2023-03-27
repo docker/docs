@@ -49,6 +49,18 @@ guides:
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
+- sectiontitle: Docker Desktop hands-on guides
+  section:
+  - path: /get-started/hands-on-overview/
+    title: Overview
+  - path: /get-started/what-is-a-container/
+    title: What is a container?
+  - path: /get-started/run-your-own-container/
+    title: Run your own container
+  - path: /get-started/run-docker-hub-images/
+    title: Run Docker Hub images
+  - path: /get-started/publish-your-own-image/
+    title: Publish your own image
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -1767,10 +1779,10 @@ manuals:
   section:
   - path: /docker-hub/
     title: Overview
+  - path: /docker-id/
+    title: Create an account
   - path: /docker-hub/quickstart/
     title: Quickstart
-  - path: /docker-id/
-    title: Docker ID accounts
   - sectiontitle: Repositories
     section:
       - path: /docker-hub/repos/create/
