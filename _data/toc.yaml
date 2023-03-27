@@ -1779,10 +1779,10 @@ manuals:
   section:
   - path: /docker-hub/
     title: Overview
+  - path: /docker-id/
+    title: Create an account
   - path: /docker-hub/quickstart/
     title: Quickstart
-  - path: /docker-id/
-    title: Docker ID accounts
   - sectiontitle: Repositories
     section:
       - path: /docker-hub/repos/create/
