@@ -54,13 +54,16 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 On the **Advanced** tab, you can reconfigure your initial installation settings:
 
-- **Choose how to configure the intallation of Docker's CLI tools**. 
+- **Choose how to configure the installation of Docker's CLI tools**. 
   - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin `
   - **User**: Docker CLI tools are installed in the user directory under `$HOME/.docker/bin`. You must then add `$HOME/.docker/bin` to your PATH.
 
 - **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks)
 
 - **Enable privileged port mapping (Requires password)**. Starts the privileged ports that are between 1 and 1024. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#binding-privileged-ports)
+
+For more information on each configuration
+and use case, see [Permission requirements](../mac/permission-requirements.md).
 
 ## Resources
 
