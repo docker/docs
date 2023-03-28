@@ -15,7 +15,6 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- As a Docker Business customer, you can now manage multiple organizations under a new [company layer](creating-companies.md). 
 - [Group Mapping](group-mapping.md) for SSO and SCIM provisioning.
 
 ## 2022-12-12
