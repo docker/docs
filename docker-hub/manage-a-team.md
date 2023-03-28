@@ -65,7 +65,7 @@ To give a team access to a repository
   repository. You can also edit build settings, and update the repositories description, collaborators rights, public/private visibility, and delete.
 
 Permissions are cumulative. For example, if you have "Read & Write" permissions,
-you automatically have "Read-only"s permissions:
+you automatically have "Read-only" permissions:
 
 | Action | Read-only | Read & Write | Admin |
 |:------------------:|:---------:|:------------:|:-----:|
