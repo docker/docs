@@ -1863,7 +1863,7 @@ manuals:
   - path: /docker-hub/convert-account/
     title: Convert an account into an organization
   - path: /docker-hub/manage-a-team/
-    title: Manage a team
+    title: Create and manage a team
   - path: /docker-hub/members/
     title: Manage members
   - path: /docker-hub/configure-sign-in/
