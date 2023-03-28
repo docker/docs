@@ -85,8 +85,8 @@ Your Mac must meet the following requirements to install Docker Desktop successf
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" }. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
 5. From the installation window, select either: 
    - **Use recommended settings (Requires password)**. This let's Docker Desktop automatically set the necessary configuration settings. 
-   - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](../settings/mac.md#advanced), for more information.
-6. Select **Finish**. If you have applied any of the above configurations in step 5, you are asked to enter your password to confirm. 
+   - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](../settings/mac.md#advanced), for more information and how to set the location of the Docker CLI tools.
+6. Select **Finish**. If you have applied any of the above configurations that require a password in step 5, you are asked to enter your password to confirm. 
 
 ### Install from the command line
 
