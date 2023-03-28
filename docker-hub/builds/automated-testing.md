@@ -9,7 +9,7 @@ title: Automated repository tests
 
 > **Note**
 >
-> Automated builds requires a
+> Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
 
 Docker Hub can automatically test changes to your source code repositories
@@ -58,10 +58,11 @@ You can also use [custom build hooks](advanced.md#override-build-test-or-push-co
 to further customize your test behavior.
 
 > **Note**
+>
 > If you enable Automated builds, they also run any tests defined
 in the `test.yml` files.
 
-## Enable automated tests on a repository
+## Enable Automated tests on a repository
 
 To enable testing on a source code repository, you must first create an
 associated build-repository in Docker Hub.  Your `Autotest` settings are

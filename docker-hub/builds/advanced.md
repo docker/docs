@@ -8,7 +8,7 @@ redirect_from:
 
 > **Note**
 >
-> Automated builds requires a
+> Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
 
 The following options allow you to customize your automated build and automated
@@ -57,7 +57,7 @@ to perform actions in between these commands.
 
 > **Important**
 >
->Use these hooks with caution.The contents of these hook files replace the
+>Use these hooks with caution. The contents of these hook files replace the
 basic `docker` commands, so you must include a similar build, test or push
 command in the hook or your automated process does not complete.
 {: .important}
@@ -93,8 +93,8 @@ The following hooks are available:
 * `hooks/post_build`
 * `hooks/pre_test`
 * `hooks/post_test`
-* `hooks/pre_push` (only used when executing a build rule or [automated build](index.md) )
-* `hooks/post_push` (only used when executing a build rule or [automated build](index.md) )
+* `hooks/pre_push` (only used when executing a build rule or [Automated build](index.md) )
+* `hooks/post_push` (only used when executing a build rule or [Automated build](index.md) )
 
 ### Build hook examples
 
@@ -113,9 +113,11 @@ the image being built.
 $ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 ```
 
-> **Caution**: A `hooks/build` file overrides the basic [docker build](../../engine/reference/commandline/build.md) command
-used by the builder, so you must include a similar build command in the hook or
+> **Important**
+>
+> A `hooks/build` file overrides the basic [docker build](../../engine/reference/commandline/build.md) command used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
+{: .important}
 
 Refer to the [docker build documentation](../../engine/reference/commandline/build.md#build-arg)
 to learn more about Docker build-time variables.

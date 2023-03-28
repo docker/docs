@@ -1,7 +1,7 @@
 ---
 description: Link to GitHub and BitBucket
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, trusted, builds, trusted builds, automated builds, GitHub
-title: Configure automated builds from GitHub and BitBucket
+title: Configure Automated builds from GitHub and BitBucket
 redirect_from:
 - /docker-hub/github/
 - /docker-hub/bitbucket/
@@ -10,7 +10,7 @@ redirect_from:
 
 > **Note**
 >
-> Automated builds requires a
+> Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
 
 To automate building and testing of your images, you link to your hosted source
@@ -28,7 +28,7 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
 3. Select **Link provider** for the source provider you want to link.
 
-    If you want to unlink your current GitHub account and relink to a new GitHub account, make sure to completely logout of [GitHub] (https://github.com/){: target="_blank" rel="noopener"
+    If you want to unlink your current GitHub account and relink to a new GitHub account, make sure to completely logout of [GitHub](https://github.com/){: target="_blank" rel="noopener"
     class="_"} before linking via Docker Hub.
 
 
@@ -36,14 +36,16 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
     ![Granting access to GitHub account](images/authorize-builder.png){:width="750px"}
 
-    >**Note**: If you are the owner of any GitHub organizations, you might see
+    >**Note**
+    >
+    > If you are the owner of any GitHub organizations, you might see
     options to grant Docker Hub access to them from this screen. You can also
     individually edit an organization's third-party access settings to grant or
     revoke Docker Hub's access. See
     [Grant access to a GitHub organization](link-source.md#grant-access-to-a-github-organization)
     to learn more.
 
-5. Click **Authorize docker** to save the link.
+5. Select **Authorize docker** to save the link.
 
 ### Grant access to a GitHub organization
 
@@ -88,7 +90,7 @@ To revoke Docker Hub's access to an organization's GitHub repositories:
 
 4. Click the pencil icon next to Docker Hub Builder.
 
-5. On the next page, click **Deny access**.
+5. On the next page, select **Deny access**.
 
 ### Unlink a GitHub user account
 

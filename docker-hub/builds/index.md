@@ -1,5 +1,5 @@
 ---
-description: Set up automated builds
+description: Set up Automated builds
 keywords: automated, build, images, Docker Hub
 redirect_from:
 - /docker-hub/builds/automated-build/
@@ -12,15 +12,15 @@ title: Set up Automated Builds
 
 > **Note**
 >
-> Automated builds requires a
+> Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
 
 This page contains information on:
-- [Configuring automated builds](#configure-automated-builds)
-- [Advanced automated build options](#advanced-automated-build-options)
+- [Configuring Automated builds](#configure-automated-builds)
+- [Advanced Automated build options](#advanced-automated-build-options)
 - [Automated builds for teams](#autobuild-for-teams)
 
-## Configure automated builds
+## Configure Automated builds
 
 You can configure repositories in Docker Hub so that they automatically
 build an image each time you push new code to your source provider. If you have
@@ -86,7 +86,7 @@ when the tests succeed.
 
 ### Set up build rules
 
-By default when you set up automated builds, a basic build rule is created for you.
+By default when you set up Automated builds, a basic build rule is created for you.
 This default rule watches for changes to the `master` or `main` branch in your source code
 repository, and builds the `master` or `main` branch into a Docker image tagged with
 `latest`.
@@ -100,7 +100,7 @@ For each source:
 
 * Enter the name of the **Source** branch or tag you want to build.
 
-  The first time you configure automated builds, a default build rule is set up
+  The first time you configure Automated builds, a default build rule is set up
   for you. This default set builds from the `Branch` in your source code called
   `master`, and creates a Docker image tagged with `latest`.
 
@@ -206,7 +206,7 @@ context. If the Dockerfile is at the root of the build context path, leave the
 Dockerfile path set to `/`. If the build context field is blank, set the path
 to the Dockerfile from the root of the source repository.
 
-### Regexes and automated builds
+### Regexes and Automated builds
 
 You can specify a regular expression (regex) so that only matching branches or
 tags are built. You can also use the results of the regex to create the Docker
@@ -254,9 +254,9 @@ including any testing settings.
 
 > **Note**
 >
-> Only members of the `Owners` team can set up automated builds for teams.
+> Only members of the `Owners` team can set up Automated builds for teams.
 
-When you set up automated builds for teams, you grant Docker Hub access to
+When you set up Automated builds for teams, you grant Docker Hub access to
 your source code repositories using OAuth tied to a specific user account. This
 means that Docker Hub has access to everything that the linked source provider
 account can access.

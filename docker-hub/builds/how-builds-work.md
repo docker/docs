@@ -1,12 +1,12 @@
 ---
 description: how automated builds work
 keywords: docker hub, automated builds
-title: How automated builds work
+title: How Automated builds work
 ---
 
 > **Note**
 >
-> Automated builds requires a
+> Automated builds require a
 > [Docker Pro, Team, or Business subscription](../../subscription/index.md).
 
 Docker Hub can automatically build images from source code in an external
@@ -14,7 +14,7 @@ repository and automatically push the built image to your Docker repositories.
 
 ![An automated build dashboard](images/index-dashboard.png){:width="750px"}
 
-When you set up automated builds, also called autobuilds, you create a list of
+When you set up Automated builds, also called autobuilds, you create a list of
 branches and tags that you want to build into Docker images. When you push code
 to a source-code branch, for example in GitHub, for one of those listed image
 tags, the push uses a webhook to trigger a new build, which produces a Docker
