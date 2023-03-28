@@ -15,7 +15,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- As a Docker Business customer, you can now manage multiple organizations under a new layer called [a Company](creating-companies.md). 
+- As a Docker Business customer, you can now manage multiple organizations under a new [company layer](creating-companies.md). 
 
 ## 2022-12-12
 
