@@ -28,7 +28,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- The new [autobuild feature](../docker-hub/builds/index.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
+- The new [autobuild feature](../docker-hub/builds/manage-builds.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
 
 ## 2022-09-21
 
