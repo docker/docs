@@ -11,6 +11,12 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+## 2023-03-07
+
+### New
+
+-  You can now automatically sync user updates with your Docker organizations and teams with [Group Mapping](group-mapping.md) for SSO and SCIM provisioning.
+
 ## 2022-12-12
 
 ### New
