@@ -1797,12 +1797,18 @@ manuals:
     title: Docker Official images
   - sectiontitle: Automated builds
     section:
+      - path: /docker-hub/builds/how-builds-work/
+        title: How Automated builds work
       - path: /docker-hub/builds/
-        title: Set up automated builds
+        title: Set up Automated builds
+      - path: /docker-hub/builds/manage-builds/
+        title: Manage your builds
+      - path: /docker-hub/builds/troubleshoot/
+        title: Troubleshoot your builds
       - path: /docker-hub/builds/automated-testing/
-        title: Testing in automated builds
+        title: Testing in Automated builds
       - path: /docker-hub/builds/advanced/
-        title: Advanced automated builds
+        title: Advanced options for builds
       - path: /docker-hub/builds/link-source/
         title: Link to GitHub and BitBucket
   - path: /docker-hub/webhooks/
@@ -1863,7 +1869,7 @@ manuals:
   - path: /docker-hub/convert-account/
     title: Convert an account into an organization
   - path: /docker-hub/manage-a-team/
-    title: Manage a team
+    title: Create and manage a team
   - path: /docker-hub/members/
     title: Manage members
   - path: /docker-hub/configure-sign-in/

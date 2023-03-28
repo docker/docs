@@ -41,9 +41,9 @@ Refer to the following table for details on the Enhanced Service Account add-on 
 To create a new service account for your Team account:
 
 1. Create a new Docker ID.
-2. Create a [team](orgs.md#create-a-team) in your organization and grant it read-only access to your private repositories.
+2. Create a [team](manage-a-team.md) in your organization and grant it read-only access to your private repositories.
 3. Add the new Docker ID to your [organization](orgs.md).
-4. Add the new Docker ID  to the [team](orgs.md#create-a-team) you created earlier.
+4. Add the new Docker ID  to the [team](manage-a-team.md) you created earlier.
 5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
 
 > **Note**

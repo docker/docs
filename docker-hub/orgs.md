@@ -6,21 +6,17 @@ redirect_from:
 - /docker-cloud/orgs/
 ---
 
-Docker Hub organizations let you create teams so you can give your team access
-to shared image repositories.
-
-An **Organization** is a collection of teams and repositories
-that can be managed together. A **Team** is a group of Docker members that belong to an organization. 
+An organization in Docker Hub is a collection of teams and repositories
+that can be managed together. A team is a group of Docker members that belong to an organization. 
 An organization can have multiple teams. 
 
 Docker users become members of an organization
 when they are assigned to at least one team in the organization. When you first
-create an organization, you’ll see that you have a team, the **owners** (Admins)
-team, with a single member. An organization owner is someone that is part of the
+create an organization, you have one team, the "owners" team, that has a single member. An organization owner is someone that is part of the
 owners team. They can create new teams and add
 members to an existing team using their Docker ID or email address and by
-selecting a team the user should be part of. An org owner can also add
-additional org owners to help them manage users, teams, and repositories in the
+selecting a team the user should be part of. An organization owner can also add
+additional owners to help them manage users, teams, and repositories in the
 organization.
 
 ## Create an organization
@@ -36,12 +32,12 @@ To create an organization:
 
 1. Sign into [Docker Hub](https://hub.docker.com/){: target="_blank"
 rel="noopener" class="_"} using your [Docker ID](../docker-id/index.md) or your email address.
-2. Select **Organizations**. Click **Create Organization** to create a new organization.
+2. Select **Organizations** and then **Create Organization** to create a new organization.
 3. Choose a plan for your organization. See [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener"
 class="_" id="dkr_docs_subscription_btl"} for details on the features offered
 in the Team and Business plan.
 4. Enter a name for your organization. This is the official, unique name for
-your organization in Docker Hub. Note that it is not possible to change the name
+your organization in Docker Hub. It is not possible to change the name
 of the organization after you've created it.
 
       > **Note**
@@ -51,21 +47,19 @@ of the organization after you've created it.
 5. Enter the name of your company. This is the full name of your company.
 This info is displayed on your organization page, and in the details of any
 public images you publish. You can update the company name anytime by navigating
-to your organization's **Settings** page. Click **Continue to Org size**.
-6. On the Organization Size page, specify the number of users (seats) you'd
-require and click **Continue to payment**.
+to your organization's **Settings** page. 
+6. Select **Continue to Org size** and then specify the number of users (seats) you'd
+require.
+7. Select **Continue to payment** and follow the onscreen instructions. 
 
-You've now created an organization. Select the newly created organization from
-the Organizations page. You'll now see that you have a team, the **owners** team
-with a single member (you).
+You've now created an organization with one team, the owners team, with you as the single member.
 
-### View an organization
+## View an organization
 
 To view an organization:
 
-1. Log into Docker Hub with a user account that is a member of any team in the
-   organization. You must be part of the **owners** team to access the
-   organization's **Settings** page.
+1. Sign in to Docker Hub with a user account that is a member of any team in the
+   organization. 
 
       > **Note**
       >
@@ -77,21 +71,19 @@ To view an organization:
       > conversion or another account that was added as a member. If you 
       > don't see the organization after logging in,
       > then you are neither a member or an owner of it. An organization
-      > administrator will need to add you as a member of the organization.
+      > administrator needs to add you as a member of the organization.
 
-2. Click **Organizations** in the top navigation bar, then choose your
+2. Select **Organizations** in the top navigation bar, then choose your
    organization from the list.
 
-      ![View organization details](images/view-org.png){:width="700px"}
-
-The Organization landing page displays various options that allow you to
+The organization landing page displays various options that allow you to
 configure your organization.
 
 - **Members**: Displays a list of team members. You
   can invite new members using the **Invite members** button. See [Manage members](../docker-hub/members.md) for details.
 
 - **Teams**: Displays a list of existing teams and the number of
-  members in each team. See [Create a team](#create-a-team) for details.
+  members in each team. See [Create a team](manage-a-team.md) for details.
 
 - **Repositories**: Displays a list of repositories associated with the
   organization. See [Repositories](../docker-hub/repos/index.md) for detailed information about
@@ -106,73 +98,12 @@ configure your organization.
   organization, and allows you to view and change your repository privacy
   settings, configure org permissions such as
   [Image Access Management](image-access-management.md), configure notification settings, and [deactivate](deactivate-account.md#deactivate-an-organization) your
-  organization. You can also update your organization name and company name that appear on your organization landing page.
-
+  organization. You can also update your organization name and company name that appear on your organization landing page. You must be part of the owners team to access the
+   organization's **Settings** page.
 
 - **Billing**: Displays information about your existing
 [Docker subscription (plan)](../subscription/index.md) and your billing history.
 You can also access your invoices from this tab.
-
-## Create a team
-
-A **Team** is a group of Docker users that belong to an organization. An
-organization can have multiple teams. When you first create an organization,
-you’ll see that you have a team, the **owners** team, with a single member. An
-organization owner can then create new teams and add members to an existing team
-using their Docker ID or email address and by selecting a team the user should be part of.
-
-The org owner can add additional org owners to the owners team to help them
-manage users, teams, and repositories in the organization. See [Owners
-team](#the-owners-team) for details.
-
-To create a team:
-
-1. Go to **Organizations** in Docker Hub, and select your organization.
-2. Open the **Teams** tab and click **Create Team**.
-3. Fill out your team's information and click **Create**.
-
-### The owners team
-
-The **owners** team is a special team created by default during the org creation
-process. The owners team has full access to all repositories in the organization.
-
-An organization owner is an administrator who is responsible to manage
-repositories and add team members to the organization. They have full access to
-private repositories, all teams, billing information, and org settings. An org
-owner can also specify [permissions](../docker-hub/repos/access/index.md#permissions-reference) for each team in
-the organization. Only an org owner can enable [SSO](../single-sign-on/index.md)
-for
-the organization. When SSO is enabled for your organization, the org owner can
-also manage users. Docker can auto-provision Docker IDs for new end-users or
-users who'd like to have a separate Docker ID for company use through SSO
-enforcement.
-
-The org owner can also add additional org owners to help them manage users, teams, and repositories in the organization.
-
-## Configure repository permissions
-
-Organization owners can configure repository permissions on a per-team basis.
-For example, you can specify that all teams within an organization have Read and
-Write access to repositories A and B, whereas only specific teams have Admin
-access. Note that org owners have full administrative access to all repositories within the organization.
-
-To give a team access to a repository
-
-1. Navigate to **Organizations** in Docker Hub, and select your organization.
-2. Click on the **Teams** tab and select the team that you'd like to configure  repository access to.
-3. Click on the **Permissions** tab and select a repository from the
-   **Repository** drop-down.
-4. Choose a permission from the **Permissions** drop-down list and click
-   **Add**.
-
-    ![Team repository permissions view](images/team-repo-permission.png){:width="700px"}
-
-### View a team's permissions for all repositories
-
-To view a team's permissions across all repositories:
-
-1. Open **Organizations** > **_Your Organization_** > **Teams** > **_Team Name_**.
-2. Click on the **Permissions** tab, where you can view the repositories this team can access.
 
 ## Videos
 

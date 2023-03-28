@@ -11,6 +11,12 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+## 2023-03-07
+
+### New
+
+-  You can now automatically sync user updates with your Docker organizations and teams with [Group Mapping](group-mapping.md) for SSO and SCIM provisioning.
+
 ## 2022-12-12
 
 ### New
@@ -22,7 +28,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- The new [autobuild feature](../docker-hub/builds/index.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
+- The new [autobuild feature](../docker-hub/builds/manage-builds.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
 
 ## 2022-09-21
 

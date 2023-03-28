@@ -175,7 +175,7 @@ Yes. You must verify a domain before using it with an SSO connection.
 
 ### Does Docker SSO support authenticating through the command line?
 
-Yes. When SSO is enabled, you can access the Docker CLI through Personal Access Tokens (PATs).  Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](../docker-hub/access-tokens.md). Before we transition to PATs, CLI users can continue logging in using their personal credentials until early next year to mitigate the risk of interrupting CI/CD pipelines.
+Yes. When SSO is enforced, you can access the Docker CLI through Personal Access Tokens (PATs).  Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](../docker-hub/access-tokens.md).
 
 ### How does SSO affect our automation systems and CI/CD pipelines?
 
