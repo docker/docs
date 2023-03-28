@@ -56,11 +56,11 @@ guides:
   - path: /get-started/what-is-a-container/
     title: What is a container?
   - path: /get-started/run-your-own-container/
-    title: Run your own container
+    title: How do I run a container?
   - path: /get-started/run-docker-hub-images/
     title: Run Docker Hub images
   - path: /get-started/publish-your-own-image/
-    title: Publish your own image
+    title: Publish your images
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
