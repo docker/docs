@@ -17,7 +17,7 @@ team](#the-owners-team) for details.
 ## Create a team
 
 1. Go to **Organizations** in Docker Hub, and select your organization.
-2. Open the **Teams** tab and select **Create Team**.
+2. Select the **Teams** tab and then select **Create Team**.
 3. Fill out your team's information and select **Create**.
 4. [Add members to your team](members.md#add-a-member-to-a-team)
 
