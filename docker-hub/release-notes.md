@@ -11,6 +11,12 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+## 2023-03-07
+
+### New
+
+- As a Docker Business customer, you can now manage multiple organizations under a new layer called [a Company](creating-companies.md). 
+
 ## 2022-12-12
 
 ### New
