@@ -8,6 +8,15 @@ redirect_from:
 ---
 {% include compose-eol.md %}
 
+## 2.17.2
+{% include release-date.html date="2023-03-26" %}
+### Update
+- Dependencies upgrade: bump compose-go to v1.13.2
+
+### Bug fixes and enhancements
+- Fixed invalid project name error for directories with uppercase characters or `.` in the name. Fixed [compose#10405](https://github.com/docker/compose/issues/10405){:
+  target="_blank" rel="noopener" class="_"}
+
 ## 2.17.1
 {% include release-date.html date="2023-03-24" %}
 ### Update
