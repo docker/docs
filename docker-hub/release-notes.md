@@ -15,7 +15,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- [Group Mapping](group-mapping.md) for SSO and SCIM provisioning.
+-  You can now automatically sync user updates with your Docker organizations and teams with [Group Mapping](group-mapping.md) for SSO and SCIM provisioning.
 
 ## 2022-12-12
 
