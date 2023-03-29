@@ -8,7 +8,6 @@ title: Registry overview
 
 {% include registry.md %}
 
-
 <div class="component-container">
     <!--start row-->
     <div class="row">

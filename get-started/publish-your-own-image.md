@@ -1,5 +1,5 @@
 ---
-title: Publish your own image
+title: Publish your images
 keywords: get started, quick start, intro, concepts
 description: Learn how to publish your own images
 ---

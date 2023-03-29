@@ -4,6 +4,11 @@ keywords: company, multiple organizations, manage companies
 title: Overview
 ---
 
+> **Note**
+>
+> The company layer is in [early access](../release-lifecycle.md#early-access-ea)
+> and requires a Docker Team or Business subscription.
+
 A company provides a single point of visibility across multiple organizations. Docker introduced this new view to simplify the management of Docker organizations and settings. It's available to Docker Business subscribers. 
 
 The following diagram depicts the set up of a company and how it relates to associated organizations. 
