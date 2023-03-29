@@ -90,7 +90,7 @@ $ sudo dnf config-manager \
     or go to the next step to install a specific version:
 
     ```console
-    $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     ```
 
     If prompted to accept the GPG key, verify that the fingerprint matches
@@ -123,7 +123,7 @@ $ sudo dnf config-manager \
        `docker-ce-3:18.09.1`.
 
     ```console
-    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-compose-plugin
+    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
     ```
 
     This command installs Docker, but it doesn't start Docker. It also creates a
@@ -209,7 +209,7 @@ instead of `dnf -y install`, and point to the new file.
 1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
     ```console
-    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras
+    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
     ```
 
 2.  Images, containers, volumes, or customized configuration files on your host

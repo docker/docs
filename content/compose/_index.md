@@ -1,8 +1,7 @@
 ---
-description: Introduction and Overview of Compose
-keywords: documentation, docs, docker, compose, orchestration, containers
-title: Overview
-linkTitle: Docker Compose
+description: Learn how to use Docker Compose to define and run multi-container applications with this detailed introduction to the tool. 
+keywords: docker compose, docker-compose, docker compose command, docker compose files, docker compose documentation, using docker compose, compose container, docker compose service
+title: Docker Compose overview
 aliases:
  - /compose/cli-command/
  - /compose/networking/swarm/
@@ -10,7 +9,7 @@ aliases:
  - /compose/swarm/
  - /compose/completion/
 grid:
-  - title: "Install"
+  - title: "Install Compose"
     description: "Follow the instructions on how to install Docker Compose."
     icon: "download"
     link: "/compose/install"
@@ -18,7 +17,7 @@ grid:
     description: "Learn the key concepts of Docker Compose whilst building a simple Python web application."
     icon: "explore"
     link: "/compose/gettingstarted"
-  - title: "Release notes"
+  - title: "View the release notes"
     description: "Find out about the latest enhancements and bug fixes."
     icon: "note_add"
     link: "/compose/release-notes"
@@ -37,6 +36,8 @@ grid:
     icon: "sms"
     link: "/compose/faq"
 ---
+<!-- TODO: Update -->
+{% include compose-eol.md %}
 
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a YAML file to configure your application's services.

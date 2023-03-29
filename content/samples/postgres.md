@@ -1,6 +1,5 @@
 ---
 title: PostgreSQL samples
-layout: samples
 description: Docker samples for PostgreSQL.
 service: postgresql
 aliases:
@@ -8,3 +7,5 @@ aliases:
   - /samples/postgresql_service/
 ---
 
+
+{% include_relative samples-body.md %}

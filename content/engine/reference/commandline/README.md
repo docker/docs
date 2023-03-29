@@ -1,5 +1,4 @@
 # About these files
-layout: cli
 
 The files in this directory are stub files which include the file
 `/_includes/cli.md`, which parses YAML files generated from the

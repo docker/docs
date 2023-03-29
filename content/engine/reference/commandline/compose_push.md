@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: compose-cli
 datafile: docker_compose_push
 title: docker compose push

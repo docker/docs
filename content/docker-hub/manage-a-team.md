@@ -30,7 +30,7 @@ process. The owners team has full access to all repositories in the organization
 An organization owner is an administrator who is responsible to manage
 repositories and add team members to the organization. They have full access to
 private repositories, all teams, billing information, and org settings. An org
-owner can also specify [permissions](../docker-hub/repos/configure/index.md#permissions-reference) for each team in
+owner can also specify [permissions](../docker-hub/repos/access/index.md#permissions-reference) for each team in
 the organization. Only an org owner can enable [SSO](../single-sign-on/index.md)
 for
 the organization. When SSO is enabled for your organization, the org owner can

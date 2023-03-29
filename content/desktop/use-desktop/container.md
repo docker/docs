@@ -28,7 +28,9 @@ Using the integrated terminal is the same as running `docker exec -it <container
 - Persists your session if you navigate to another part of the Docker Dashboard and then return.
 - Supports copy, paste, search, and clearing your session.
 
-To open the integrated terminal, hover over your running container and select the **Show container actions** menu. From the dropdown menu, select **Open in terminal**.
+To open the integrated terminal, either:
+- Hover over your running container and select the **Show container actions** menu. From the dropdown menu, select **Open in terminal**.
+- Select the container and then select the **Terminal** tab.
 
  To use your external terminal, change your settings.
 
@@ -36,7 +38,7 @@ To open the integrated terminal, hover over your running container and select th
 
 You can obtain detailed information about the container when you select a container.
 
-The **container view** displays **Logs**, **Inspect**, and **Stats** tabs and provides quick action buttons to perform various actions.
+The **container view** displays **Logs**, **Inspect**, **Terminal**, and **Stats** tabs and provides quick action buttons to perform various actions.
 
 - Select **Logs** to see logs from the container. You can also:
     - Use `Cmd + f`/`Ctrl + f` to open the search bar and find specific entries. Search matches are highlighted in yellow.

@@ -1,6 +1,5 @@
 ---
 title: .NET samples
-layout: samples
 description: Docker samples for .NET.
 service: .net
 aliases:
@@ -9,3 +8,4 @@ aliases:
   - /samples/aspnet-mssql-compose/
 ---
 
+{% include_relative samples-body.md %}

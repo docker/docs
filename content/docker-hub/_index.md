@@ -2,7 +2,6 @@
 description: Docker Hub overview
 keywords: Docker, docker, docker hub, hub, overview
 title: Overview
-linkTitle: Docker Hub
 grid:
   - title: "Create a Docker ID"
     description:
@@ -45,6 +44,8 @@ repositories of container images.
 container images provided by Docker.
 * [Docker Verified Publisher Images](publish/index.md): Pull and use high-
 quality container images provided by external vendors.
+* [Docker-Sponsored Open Source Images](dsos-program.md): Pull and use high-
+quality container images from non-commercial open source projects.
 * [Builds](builds/index.md): Automatically build container images from
 GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push

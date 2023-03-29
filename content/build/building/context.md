@@ -125,16 +125,16 @@ $ docker build https://github.com/user/myrepo.git#container:docker
 The following table represents all the valid suffixes with their build
 contexts:
 
-| Build Syntax Suffix            | Commit Used           | Build Context Used |
-|--------------------------------|-----------------------|--------------------|
-| `myrepo.git`                   | `refs/heads/master`   | `/`                |
-| `myrepo.git#mytag`             | `refs/tags/mytag`     | `/`                |
-| `myrepo.git#mybranch`          | `refs/heads/mybranch` | `/`                |
-| `myrepo.git#pull/42/head`      | `refs/pull/42/head`   | `/`                |
-| `myrepo.git#:myfolder`         | `refs/heads/master`   | `/myfolder`        |
-| `myrepo.git#master:myfolder`   | `refs/heads/master`   | `/myfolder`        |
-| `myrepo.git#mytag:myfolder`    | `refs/tags/mytag`     | `/myfolder`        |
-| `myrepo.git#mybranch:myfolder` | `refs/heads/mybranch` | `/myfolder`        |
+| Build Syntax Suffix            | Commit Used                   | Build Context Used |
+| ------------------------------ | ----------------------------- | ------------------ |
+| `myrepo.git`                   | `refs/heads/<default branch>` | `/`                |
+| `myrepo.git#mytag`             | `refs/tags/mytag`             | `/`                |
+| `myrepo.git#mybranch`          | `refs/heads/mybranch`         | `/`                |
+| `myrepo.git#pull/42/head`      | `refs/pull/42/head`           | `/`                |
+| `myrepo.git#:myfolder`         | `refs/heads/<default branch>` | `/myfolder`        |
+| `myrepo.git#master:myfolder`   | `refs/heads/master`           | `/myfolder`        |
+| `myrepo.git#mytag:myfolder`    | `refs/tags/mytag`             | `/myfolder`        |
+| `myrepo.git#mybranch:myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
 
 By default `.git` directory is not kept on Git checkouts. You can set the
 [BuildKit built-in arg `BUILDKIT_CONTEXT_KEEP_GIT_DIR=1`](../../engine/reference/builder.md#buildkit-built-in-build-args)

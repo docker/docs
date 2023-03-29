@@ -3,10 +3,10 @@ title: Container networking
 description: How networking works from the container's point of view
 keywords: networking, container, standalone
 aliases:
-- /engine/userguide/networking/configure-dns/
-- /engine/userguide/networking/default_network/configure-dns/
-- /engine/userguide/networking/default_network/binding/
-- /engine/userguide/networking/default_network/container-communication/
+  - /engine/userguide/networking/configure-dns/
+  - /engine/userguide/networking/default_network/configure-dns/
+  - /engine/userguide/networking/default_network/binding/
+  - /engine/userguide/networking/default_network/container-communication/
 ---
 
 A container has no information about what kind of network it's attached to,
@@ -20,7 +20,7 @@ This page describes networking from the point of view of the container.
 ## Published ports
 
 By default, when you create or run a container using `docker create` or `docker run`,
-the container doesn't expose any of it's ports to the outside world.
+the container doesn't expose any of its ports to the outside world.
 To make a port available to services outside of Docker,
 or to Docker containers running on a different network,
 use the `--publish` or `-p` flag.

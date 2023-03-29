@@ -1,7 +1,8 @@
 ---
 title: JavaScript samples
-layout: samples
 description: Docker samples for JavaScript.
 service: javascript
 ---
 
+
+{% include_relative samples-body.md %}

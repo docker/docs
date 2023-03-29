@@ -1,7 +1,7 @@
 ---
-description: How to install Docker Desktop for Windows
-keywords: windows, install, download, run, docker, local, Docker Desktop
-title: Install on Windows
+description: Get started with Docker for Windows. This guide covers system requirements, where to download, and instructions on how to install and update.
+keywords: docker for windows, docker windows, docker desktop for windows, docker on windows, install docker windows, install docker on windows, docker windows 10, docker run on windows, installing docker for windows
+title: Install Docker Desktop on Windows
 aliases:
 - /desktop/windows/install/
 - /docker-ee-for-windows/install/
@@ -15,19 +15,17 @@ aliases:
 - /installation/windows/
 ---
 
+Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
+
+[Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
+
+_For checksums, see [Release notes](../release-notes.md)_
+
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
-
-Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
-
-> Download Docker Desktop for Windows
->
-> [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
-
-_For checksums, see [Release notes](../release-notes.md)_
 
 ## System requirements
 
@@ -97,7 +95,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](..
 Looking for information on using Windows containers?
 
 * [Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers)
-  describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned above.
+  describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned below.
 - [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
   provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
   with Windows containers.
@@ -184,10 +182,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 3. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-   > **Important**
-   >
-   > If you do not agree to the terms, the Docker Desktop application will close and you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
-   {: .important}
+   Note that Docker Desktop will not run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/){:target="_blank" rel="noopener" class="_"}. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="\_blank" rel="noopener" class="*" id="dkr_docs_desktop_install_btl"}.
 

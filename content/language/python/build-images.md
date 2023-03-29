@@ -15,7 +15,7 @@ description: Learn how to build your first Docker image by writing a Dockerfile
 
 ## Overview
 
-Now that we have a good overview of containers and the Docker platform, let’s take a look at building our first image. An image includes everything needed to run an application - the code or binary, runtime, dependencies, and any other file system objects required.
+Now that you have a good overview of containers and the Docker platform, let’s take a look at building your first image. An image includes everything needed to run an application - the code or binary, runtime, dependencies, and any other file system objects required.
 
 To complete this tutorial, you need the following:
 
@@ -25,7 +25,9 @@ To complete this tutorial, you need the following:
 
 ## Sample application
 
-Let’s create a simple Python application using the Flask framework that we’ll use as our example. Create a directory in your local machine named `python-docker` and follow the steps below to create a simple web server.
+The sample application uses the popular [Flask](https://flask.palletsprojects.com/) framework.
+
+Create a directory on your local machine named `python-docker` and follow the steps below to activate a Python virtual environment, install Flask as a dependency, and create a Python code file.
 
 ```console
 $ cd /path/to/python-docker
@@ -36,7 +38,7 @@ $ source .venv/bin/activate
 (.venv) $ touch app.py
 ```
 
-Now, let’s add some code to handle simple web requests. Open this working directory in your favorite IDE and enter the following code into the `app.py` file.
+Add code to handle simple web requests. Open the `python-docker` directory in your favorite IDE and enter the following code into the `app.py` file.
 
 ```python
 from flask import Flask
@@ -49,7 +51,7 @@ def hello_world():
 
 ## Test the application
 
-Let’s start our application and make sure it’s running properly. Open your terminal and navigate to the working directory you created.
+Start the application and make sure it’s running. Open your terminal and navigate to the working directory you created.
 
 ```console
 $ cd /path/to/python-docker
@@ -57,9 +59,9 @@ $ source .venv/bin/activate
 (.venv) $ python3 -m flask run
 ```
 
-To test that the application is working properly, open a new browser and navigate to `http://localhost:5000`.
+To test that the application is working, open a new browser and navigate to `http://localhost:5000`.
 
-Switch back to the terminal where our server is running and you should see the following requests in the server logs. The data and timestamp will be different on your machine.
+Switch back to the terminal where the server is running and you should see the following requests in the server logs. The data and timestamp will be different on your machine.
 
 ```shell
 127.0.0.1 - - [22/Sep/2020 11:07:41] "GET / HTTP/1.1" 200 -
@@ -67,10 +69,9 @@ Switch back to the terminal where our server is running and you should see the f
 
 ## Create a Dockerfile for Python
 
-Now that our application is running properly, let’s take a look at creating a Dockerfile.
+Now that the application is running, you can create a Dockerfile from it.
 
-Next, we need to add a line in our Dockerfile that tells Docker what base image
-we would like to use for our application.
+Inside the `python-docker` directory create a `Dockerfile` and add a line that tells Docker what base image to use for the application.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -78,39 +79,41 @@ we would like to use for our application.
 FROM python:3.8-slim-buster
 ```
 
-Docker images can be inherited from other images. Therefore, instead of creating our own base image, we’ll use the official Python image that already has all the tools and packages that we need to run a Python application.
+Docker images can inherit from other images. Therefore, instead of creating your own base image, you can use the official Python image that has all the tools and packages needed to run a Python application.
 
 > **Note**
 >
 > To learn more about creating your own base images, see [Creating base images](../../build/building/base-images.md).
 
-To make things easier when running the rest of our commands, let’s create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. By doing this, we do not have to type out full file paths but can use relative paths based on the working directory.
+To make things easier when running the remaining commands, create a working directory. This instructs Docker to use this path as the default location for all subsequent commands. This means you can use relative file paths based on the working directory instead of full file paths.
 
 ```dockerfile
 WORKDIR /app
 ```
 
-Usually, the very first thing you do once you’ve downloaded a project written in Python is to install `pip` packages. This ensures that your application has all its dependencies installed.
+Usually, the first thing you do with a project written in Python is to install `pip` packages to ensure the application has all its dependencies installed.
 
-Before we can run `pip3 install`, we need to get our `requirements.txt` file into our image. We’ll use the `COPY` command to do this. The `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where you want that file(s) to be copied to. We’ll copy the `requirements.txt` file into our working directory `/app`.
+Before running `pip3 install`, you need the `requirements.txt` file into the image. Use the `COPY` command to do this.
+
+The `COPY` command takes two parameters. The first parameter tells Docker what file(s) you would like to copy into the image. The second parameter tells Docker where to copy that file(s) to. For this example, copy the `requirements.txt` file into the working directory `/app`.
 
 ```dockerfile
 COPY requirements.txt requirements.txt
 ```
 
-Once we have our `requirements.txt` file inside the image, we can use the `RUN` command to execute the command `pip3 install`. This works exactly the same as if we were running `pip3 install` locally on our machine, but this time the modules are installed into the image.
+With the `requirements.txt` file inside the image, you can use the `RUN` command to run `pip3 install`. This works exactly the same as running `pip3 install` locally on a machine, but this time pip installs the modules into the image.
 
 ```dockerfile
 RUN pip3 install -r requirements.txt
 ```
 
-At this point, we have an image that is based on Python version 3.8 and we have installed our dependencies. The next step is to add our source code into the image. We’ll use the `COPY` command just like we did with our `requirements.txt` file above.
+At this point, you have an image based on Python version 3.8 and have installed the dependencies. The next step is to add the source code into the image. Use the `COPY` command as with the `requirements.txt` file. This `COPY` command takes all the files located in the current directory and copies them into the image.
 
 ```dockerfile
 COPY . .
 ```
 
-This `COPY` command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is executed inside a container. We do this using the `CMD` command. Note that we need to make the application externally visible (i.e. from outside the container) by specifying `--host=0.0.0.0`.
+Now, tell Docker what command to run when the image is executed inside a container using the `CMD` command. Note that you need to make the application externally visible (i.e. from outside the container) by specifying `--host=0.0.0.0`.
 
 ```dockerfile
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
@@ -135,7 +138,7 @@ CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 
 ### Directory structure
 
-Just to recap, we created a directory in our local machine called `python-docker` and created a simple Python application using the Flask framework. We also used the `requirements.txt` file to gather our requirements, and created a Dockerfile containing the commands to build an image. The Python application directory structure would now look like:
+Just to recap, you created a directory on your local machine called `python-docker` and created a simple Python application using the Flask framework. You used the `requirements.txt` file to gather requirements, and created a Dockerfile containing the commands to build an image. The Python application directory structure should now look like the following:
 
 ```shell
 python-docker
@@ -146,11 +149,11 @@ python-docker
 
 ## Build an image
 
-Now that we’ve created our Dockerfile, let’s build our image. To do this, we use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in this context.
+Now that you’ve created the Dockerfile, let’s build the image. To do this, use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a “context”. A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in this context.
 
-The build command optionally takes a `--tag` flag. The tag is used to set the name of the image and an optional tag in the format `name:tag`. We’ll leave off the optional `tag` for now to help simplify things. If you do not pass a tag, Docker uses “latest” as its default tag.
+The build command optionally takes a `--tag` flag. The tag sets the name of the image and an optional tag in the format `name:tag`. Leave off the optional `tag` for now to help simplify things. If you don't pass a tag, Docker uses “latest” as its default tag.
 
-Let’s build our first Docker image.
+Build the Docker image.
 
 ```console
 $ docker build --tag python-docker .
@@ -176,9 +179,9 @@ $ docker build --tag python-docker .
 
 ## View local images
 
-To see a list of images we have on our local machine, we have two options. One is to use the CLI and the other is to use [Docker Desktop](../../desktop/use-desktop/images.md). As we are currently working in the terminal let’s take a look at listing images using the CLI.
+To see a list of images you have on your local machine, you have two options. One is to use the Docker CLI and the other is to use [Docker Desktop](../../desktop/use-desktop/images.md). As you are working in the terminal already, take a look at listing images using the CLI.
 
-To list images, simply run the `docker images` command.
+To list images, run the `docker images` command.
 
 ```console
 $ docker images
@@ -186,23 +189,23 @@ REPOSITORY      TAG               IMAGE ID       CREATED         SIZE
 python-docker   latest            8cae92a8fbd6   3 minutes ago   123MB
 ```
 
-You should see at least one image listed, the image we just built `python-docker:latest`.
+You should see at least one image listed, including the image you just built `python-docker:latest`.
 
 ## Tag images
 
-As mentioned earlier, an image name is made up of slash-separated name components. Name components may contain lowercase letters, digits and separators. A separator is defined as a period, one or two underscores, or one or more dashes. A name component may not start or end with a separator.
+As mentioned earlier, an image name is made up of slash-separated name components. Name components may contain lowercase letters, digits, and separators. A separator can include a period, one or two underscores, or one or more dashes. A name component may not start or end with a separator.
 
-An image is made up of a manifest and a list of layers. Do not worry too much about manifests and layers at this point other than a “tag” points to a combination of these artifacts. You can have multiple tags for an image. Let’s create a second tag for the image we built and take a look at its layers.
+An image is made up of a manifest and a list of layers. Don't worry too much about manifests and layers at this point other than a “tag” points to a combination of these artifacts. You can have multiple tags for an image. Let’s create a second tag for the image you built and take a look at its layers.
 
-To create a new tag for the image we’ve built above, run the following command.
+To create a new tag for the image you built, run the following command.
 
 ```console
 $ docker tag python-docker:latest python-docker:v1.0.0
 ```
 
-The `docker tag` command creates a new tag for an image. It does not create a new image. The tag points to the same image and is just another way to reference the image.
+The `docker tag` command creates a new tag for an image. It doesn't create a new image. The tag points to the same image and is just another way to reference the image.
 
-Now, run the `docker images` command to see a list of our local images.
+Now, run the `docker images` command to see a list of the local images.
 
 ```console
 $ docker images
@@ -212,16 +215,16 @@ python-docker   v1.0.0            8cae92a8fbd6   4 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 ```
 
-You can see that we have two images that start with `python-docker`. We know they are the same image because if you take a look at the `IMAGE ID` column, you can see that the values are the same for the two images.
+You can see that two images start with `python-docker`. You know they're the same image because if you take a look at the `IMAGE ID` column, you can see that the values are the same for the two images.
 
-Let’s remove the tag that we just created. To do this, we’ll use the `rmi` command. The `rmi` command stands for remove image.
+Remove the tag you just created. To do this, use the `rmi` command. The `rmi` command stands for remove image.
 
 ```console
 $ docker rmi python-docker:v1.0.0
 Untagged: python-docker:v1.0.0
 ```
 
-Note that the response from Docker tells us that the image has not been removed but only “untagged”. You can check this by running the `docker images` command.
+Note that the response from Docker tells you that Docker didn't remove the image, but only “untagged” it. You can check this by running the `docker images` command.
 
 ```console
 $ docker images
@@ -230,14 +233,12 @@ python-docker   latest            8cae92a8fbd6   6 minutes ago   123MB
 python          3.8-slim-buster   be5d294735c6   9 days ago      113MB
 ```
 
-Our image that was tagged with `:v1.0.0` has been removed, but we still have the `python-docker:latest` tag available on our machine.
+Docker removed the image tagged with `:v1.0.0`, but the `python-docker:latest` tag is available on your machine.
 
 ## Next steps
 
-In this module, we took a look at setting up our example Python application that we will use for the rest of the tutorial. We also created a Dockerfile that we used to build our Docker image. Then, we took a look at tagging our images and removing images. In the next module we’ll take a look at how to:
+This module looked at setting up an example Python application used for the rest of the tutorial, and created a Dockerfile used to build the Docker image. It also looked at tagging and removing images.
 
-[Run your image as a container](run-containers.md){: .button .primary-btn}
+The next module will take a look at how to:
 
-## Feedback
-
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+- [Run the image as a container](run-containers.md){: .button .primary-btn}

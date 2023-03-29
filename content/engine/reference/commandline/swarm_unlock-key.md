@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: engine-cli
 datafile: docker_swarm_unlock-key
 title: docker swarm unlock-key

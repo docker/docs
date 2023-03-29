@@ -53,7 +53,8 @@ What you'll see is that the files created in one container aren't available in a
     $ docker run -it ubuntu ls /
     ```
 
-    And look! There's no `data.txt` file there! That's because it was written to the scratch space for
+    In this case the command lists the files in the root directory of the container.
+    Look, there's no `data.txt` file there! That's because it was written to the scratch space for
     only the first container.
 
 4. Go ahead and remove the first container using the `docker rm -f <container-id>` command.

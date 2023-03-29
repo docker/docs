@@ -95,6 +95,8 @@ $ docker buildx bake -f docker-bake.hcl -f env.hcl --print app
 }
 ```
 
+## Resource interpolation
+
 You can also refer to attributes defined as part of other targets, to help
 reduce duplication between targets.
 

@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: engine-cli
 datafile: docker_checkpoint_ls
 title: docker checkpoint ls

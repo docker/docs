@@ -1,6 +1,6 @@
 ---
-description: Docker Desktop overview
-keywords: Docker Desktop, Docker, features, GUI, linux, mac, windows
+description: Explore more of Docker Desktop, what it has to offer, and its key features. Take the next step by downloading or find additional resources.
+keywords: how to use docker desktop, what is docker desktop used for, what does docker desktop do, using docker desktop
 title: Docker Desktop
 aliases:
 - /desktop/opensource/
@@ -9,18 +9,18 @@ aliases:
 - /docker-for-windows/dashboard/
 - /docker-for-windows/opensource/
 grid:
-  - title: "Install"
+  - title: "Install Docker Desktop"
     description: |
-      Learn how to install Docker Desktop on
+      Install Docker Desktop on
       [Mac](/desktop/install/mac-install/),
       [Windows](/desktop/install/windows-install/), or
       [Linux](/desktop/install/linux-install/).
     icon: "download"
-  - title: "Explore"
+  - title: "Explore Docker Desktop"
     description: "Navigate Docker Desktop and learn about its key features."
     icon: "explore"
     link: "/desktop/use-desktop"
-  - title: "Release notes"
+  - title: "View the release notes"
     description: "Find out about new features, improvements, and bug fixes."
     icon: "note_add"
     link: "/desktop/release-notes"
@@ -40,12 +40,6 @@ grid:
     link: "/desktop/feedback"
 ---
 
-> **Docker Desktop terms**
->
-> Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) requires a paid
-> subscription.
-
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
 that enables you to build and share containerized applications and microservices. 
 
@@ -53,8 +47,29 @@ It provides a straightforward GUI (Graphical User Interface) that lets you manag
 
 Docker Desktop reduces the time spent on complex setups so you can focus on writing code. It takes care of port mappings, file system concerns, and other default settings, and is regularly updated with bug fixes and security updates.
 
+<style>
+.tab-content > .tab-pane {s
+  background-color: #fafafb;
+  border: 1px solid #ddd;
+  border-top: 0;
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 10px;
+}
+.night .tab-content > .tab-pane {
+  background-color: #0e1c25;
+  border: 1px solid #4f6071;
+}
+</style>
+
 {{< tabs >}}
 {{< tab name="What's included in Docker Desktop?" >}}
+
+<li><a data-toggle="tab" data-target="#features">What are the key features of Docker Desktop?</a></li>
+</ul>
+<div class="tab-content">
+<div id="includes" class="tab-pane fade in active" markdown="1">
 
 - [Docker Engine](../engine/_index.md)
 - Docker CLI client
@@ -68,13 +83,13 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 {{< /tab >}}
 {{< tab name="What are the key features of Docker Desktop?" >}}
 
-- Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks.
-- Quick installation and setup of a complete Docker development environment.
-- Includes the latest version of Kubernetes.
-- On Windows, the ability to toggle between Linux and Windows Server environments to build applications.
-- Fast and reliable performance with native Windows Hyper-V virtualization.
-- Ability to work natively on Linux through WSL 2 on Windows machines.
-- Volume mounting for code and data, including file change notifications and easy access to running containers on the localhost network.
+* Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks.
+* Quick installation and setup of a complete Docker development environment.
+* Includes the latest version of Kubernetes.
+* On Windows, the ability to toggle between Linux and Windows Server environments to build applications.
+* Fast and reliable performance with native Windows Hyper-V virtualization.
+* Ability to work natively on Linux through WSL 2 on Windows machines.
+* Volume mounting for code and data, including file change notifications and easy access to running containers on the localhost network.
 
 {{< /tab >}}
 {{< /tabs >}}
