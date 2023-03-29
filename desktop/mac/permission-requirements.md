@@ -77,7 +77,7 @@ As the `/var/run` is mounted as a tmpfs, its content is deleted on restart, syml
 
 <hr>
 </div>
-<div id="tab5 class="tab-pane fade" markdown="1">
+<div id="tab5" class="tab-pane fade" markdown="1">
 
 For versions prior to 4.18, installing symlinks in `/usr/local/bin` is a privileged configuration Docker Desktop performs on the first startup. Docker Desktop checks if symlinks exists and takes the following actions: 
 - Creates the symlinks without the admin prompt if `/usr/local/bin` is writable by unprivileged users.
