@@ -4,6 +4,7 @@ refLinksErrorLevel: WARNING
 enableGitInfo: true
 dataDir: _data
 disablePathToLower: true
+enableInlineShortcodes: true
 
 markup:
   tableOfContents:

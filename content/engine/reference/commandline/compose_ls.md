@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: compose-cli
 datafile: docker_compose_ls
 title: docker compose ls

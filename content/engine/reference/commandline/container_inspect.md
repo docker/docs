@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: engine-cli
 datafile: docker_container_inspect
 title: docker container inspect

@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: engine-cli
 datafile: docker_node_update
 title: docker node update

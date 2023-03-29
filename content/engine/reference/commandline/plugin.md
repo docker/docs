@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: engine-cli
 datafile: docker_plugin
 title: docker plugin

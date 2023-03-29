@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: compose-cli
 datafile: docker_compose_build
 title: docker compose build

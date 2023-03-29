@@ -24,6 +24,7 @@ To begin, you should identify which users you will need to add to your Docker Bu
    - If your organization uses device management software, like MDM or JAMF, you may use the device management software to help identify Docker users. See your device management software's documentation for details. You can identify Docker users by checking if Docker Desktop is installed at the following location on each user's machine:
       - Mac: `/Applications/Docker.app`
       - Windows: `C:\Program Files\Docker\Docker`
+      - Linux: `/opt/docker-desktop`
    - If your organization doesn't use device management software, you may survey your users.
 2. Instruct all your Docker users in your organization to update their existing Docker account's email address to an address that's in your organization's domain, or to create a new account using an email address in your organization's domain.
    - To update an account's email address, instruct your users to sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, go to [Account Settings](https://hub.docker.com/settings/general){: target="_blank" rel="noopener" class="_"}, and update the email address to their email address in your organization's domain.
@@ -56,12 +57,13 @@ organization’s settings apply to the user’s session, you can use a `registry
 Configure security settings and manage your repositories:
 
 - Create [repositories](../docker-hub/repos/index.md) to share container images.
-- [Consolidate a repository](../docker-hub/repos/index.md/#consolidating-a-repository) from your personal account to your organization.
+- [Move images](../docker-hub/repos/index.md/#move-images-between-repositories) from your personal account to your organization.
 - Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
 - Configure [Hardened Docker Desktop](../desktop/hardened-desktop/index.md) to improve your organization’s security posture for containerized development. Hardened Docker Desktop includes:
    - [Settings Management](../desktop/hardened-desktop/settings-management/index.md), which helps you to confidently manage and control the usage of Docker Desktop within your organization.
    - [Enhanced Container Isolation](../desktop/hardened-desktop/enhanced-container-isolation/index.md), a setting that instantly enhances security by preventing containers from running as root in Docker Desktop’s Linux VM.
    - [Image Access Management](../docker-hub/image-access-management.md/), lets you control which images developers can pull from Docker Hub.
    - [Registry Access Management](../docker-hub/registry-access-management.md/), lets you control the registries developers can access.
+- [Audit your domains](../docker-hub/domain-audit.md) to identify Docker users who have authenticated to Docker using an email address associated with one of your verified domains, but they’re not a member of your organization in Docker.
 
 Your Docker Business subscription provides many more additional features. [Learn more](../subscription/index.md).

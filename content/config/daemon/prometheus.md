@@ -36,18 +36,17 @@ exist, create it.
 - **Linux**: `/etc/docker/daemon.json`
 - **Windows Server**: `C:\ProgramData\docker\config\daemon.json`
 - **Docker Desktop for Mac / Docker Desktop for Windows**: Click the Docker icon in the toolbar,
-  select **Settings**, then select **Daemon**. Click **Advanced**.
+  select **Settings**, then select **Docker Engine**.
 
 If the file is currently empty, paste the following:
 
 ```json
 {
-  "metrics-addr" : "127.0.0.1:9323",
-  "experimental" : true
+  "metrics-addr" : "127.0.0.1:9323"
 }
 ```
 
-If the file is not empty, add those two keys, making sure that the resulting
+If the file is not empty, add the new key, making sure that the resulting
 file is valid JSON. Be careful that every line ends with a comma (`,`) except
 for the last line.
 

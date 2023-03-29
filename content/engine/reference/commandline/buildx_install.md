@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: buildx
 datafile: docker_buildx_install
 title: docker buildx install

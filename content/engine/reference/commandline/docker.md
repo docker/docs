@@ -1,11 +1,10 @@
 ---
-layout: cli
 datafolder: engine-cli
 datafile: docker
 title: docker
 aliases:
-  - /engine/reference/commandline/
   - /edge/engine/reference/commandline/
+  - /engine/reference/commandline/ 
   - /engine/reference/commandline/registry/
   - /engine/reference/commandline/registry_events/
   - /engine/reference/commandline/registry_history/

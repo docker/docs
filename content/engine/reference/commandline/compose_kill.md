@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: compose-cli
 datafile: docker_compose_kill
 title: docker compose kill

@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: buildx
 datafile: docker_buildx_ls
 title: docker buildx ls

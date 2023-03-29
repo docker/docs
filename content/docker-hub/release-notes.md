@@ -110,9 +110,9 @@ The **Billing Details** page now shows any organizations you own, in addition to
 
 You can now specify any email address to receive billing-related emails for your organization. The email address doesn't have to be associated with an organization owner account. You must be an owner of the organization to update any billing details.
 
-To change the email address receiving billing-related emails, log into Docker Hub and navigate to the **Billing** tab of your organization. Select **Payment Methods** > **Contact Information**. Enter the new email address that you'd like to use in the **Email** field. Click **Update** for the changes to take effect.
+To change the email address receiving billing-related emails, log into Docker Hub and navigate to the **Billing** tab of your organization. Select **Payment Methods** > **Billing Information**. Enter the new email address that you'd like to use in the **Email** field. Click **Update** for the changes to take effect.
 
-For details on how to update your billing information, see [Update billing information](../subscription/upgrade.md#update-billing-information).
+For details on how to update your billing information, see [Update billing information](../billing/index.md).
 
 ## 2021-03-22
 
@@ -134,7 +134,7 @@ For more information about this feature and for instructions on how to use it, s
 
 ### New feature
 
-The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos/access/index.md#viewing-repository-tags).
+The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos/access/index.md#view-repository-tags).
 
 # 2020-10-07
 

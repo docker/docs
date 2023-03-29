@@ -91,7 +91,7 @@ $ COMPOSE_PROFILES=frontend,debug docker compose up
 When a service with assigned `profiles` is explicitly targeted on the command
 line its profiles are enabled automatically so you don't need to enable them
 manually. This can be used for one-off services and debugging tools.
-As an example consider the folowing configuration:
+As an example consider the following configuration:
 
 ```yaml
 version: "{{ site.compose_file_v3 }}"

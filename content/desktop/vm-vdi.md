@@ -30,8 +30,6 @@ Nested virtualization of other hypervisors like Hyper-V inside a vSphere VM [is 
 
 For steps on how to expose hardware-assisted virtualization to the guest OS, [see VMware's documentation](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vm_admin.doc/GUID-2A98801C-68E8-47AF-99ED-00C63E4857F6.html){:target="_blank" rel="noopener" class="_"}.
 
-You may also need to [configure some network settings](https://www.vembu.com/blog/nested-hyper-v-vms-on-a-vmware-esxi-server){:target="_blank" rel="noopener" class="_"}.
-
 
 ### Enable nested virtualization on Microsoft Hyper-V
 

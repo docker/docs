@@ -1,7 +1,8 @@
 ---
 title: Traefik samples
-layout: samples
 description: Docker samples for Traefik.
 service: traefik
 ---
 
+
+{% include_relative samples-body.md %}

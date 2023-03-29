@@ -1,7 +1,5 @@
 ---
 title: Samples overview
-linkTitle: Samples
-layout: list # reset to default layout
 description: Learn how to containerize different types of services by walking through Official Docker samples.
 aliases:
 - /en/latest/examples/
@@ -27,3 +25,5 @@ Learn how to containerize different types of services by walking through Officia
 
 ## Other services
 [Cloudflared](../samples/cloudflared.md) \| [Elasticsearch / Logstash / Kibana](../samples/elasticsearch.md) \| [Minecraft](../samples/minecraft.md) \| [NGINX](../samples/nginx.md) \| [Pi-hole](../samples/pi-hole.md) \| [Plex](../samples/plex.md) \| [Traefik](../samples/traefik.md) \| [WireGuard](../samples/wireguard.md)
+
+{% include_relative samples-footer.md %}

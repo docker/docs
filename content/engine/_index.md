@@ -8,9 +8,8 @@ aliases:
   - /linux/
   - /manuals/ # TODO remove this redirect after we've created a landing page for the product manuals section
 title: Docker Engine overview
-linkTitle: Docker Engine
 grid:
-  - title: "Install"
+  - title: "Install Docker Engine"
     description:
       "Learn how to install the open source Docker Engine for your distribution."
     icon: "download"
@@ -39,6 +38,10 @@ grid:
     description: "Run Docker without root privileges."
     icon: "security"
     link: "/security"
+  - title: "Deprecated features"
+    description: "Find out what features of Docker Engine you should stop using."
+    icon: "note_add"
+    link: "/engine/deprecated/"
   - title: "Release notes"
     description: "Read the release notes for the latest version."
     icon: "note_add"

@@ -1,5 +1,4 @@
 ---
-layout: cli
 datafolder: buildx
 datafile: docker_buildx_imagetools_inspect
 title: docker buildx imagetools inspect

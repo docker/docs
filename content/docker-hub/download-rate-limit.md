@@ -49,6 +49,7 @@ Valid manifest API requests to Hub will usually include the following rate limit
 ```
 ratelimit-limit    
 ratelimit-remaining
+docker-ratelimit-source
 ```
 
 These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD won't, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
@@ -76,6 +77,7 @@ Which should return headers including these:
 ```http
 ratelimit-limit: 100;w=21600
 ratelimit-remaining: 76;w=21600
+docker-ratelimit-source: 192.0.2.1
 ```
 
 This means my limit is 100 pulls per 21600 seconds (6 hours), and I have 76 pulls remaining.
@@ -84,7 +86,7 @@ This means my limit is 100 pulls per 21600 seconds (6 hours), and I have 76 pull
 
 ### I don't see any RateLimit headers
 
-This could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization. Pulling that image won’t count toward pull limits if you don’t see these headers. However, users with a paid Docker subscription pulling more than 5000 times daily require a [Service Account](../docker-hub/service-accounts.md) subscription.
+This could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization. It could also mean that the user you are pulling as is part of a paid Docker plan. Pulling that image won’t count toward pull limits if you don’t see these headers. However, users with a paid Docker subscription pulling more than 5000 times daily require a [Service Account](../docker-hub/service-accounts.md) subscription.
 
 ## I'm being limited to a lower rate even though I have a paid Docker subscription
 

@@ -1,6 +1,6 @@
 ---
-description: Docker explained in depth
-keywords: docker, introduction, documentation, about, technology, understanding
+description: Get an in-depth overview of the Docker platform including what it can be used for, the architecture it employs, and its underlying technology. 
+keywords: what is a docker, docker daemon, why use docker, docker architecture, what to use docker for, docker client, what is docker for, why docker, uses for docker, what is docker container used for, what are docker containers used for
 aliases:
 - /introduction/understanding-docker/
 - /engine/userguide/basics/
@@ -8,7 +8,6 @@ aliases:
 - /engine/understanding-docker/
 - /engine/docker-overview/
 title: Docker overview
-linkTitle: Guides
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
@@ -85,7 +84,7 @@ daemon. The Docker client and daemon communicate using a REST API, over UNIX
 sockets or a network interface. Another Docker client is Docker Compose,
 that lets you work with applications consisting of a set of containers.
 
-![Docker Architecture diagram](/engine/images/architecture.svg)
+![Docker Architecture diagram](/assets/images/architecture.svg)
 
 ### The Docker daemon
 

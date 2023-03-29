@@ -1,6 +1,5 @@
 ---
 title: Overview of Docker Build
-linkTitle: Docker Build
 description: Introduction and overview of Docker Build
 keywords: build, buildx, buildkit
 aliases:
@@ -24,29 +23,39 @@ grid:
       architectures."
     icon: "home_storage"
     link: "/build/building/multi-platform/"
-  - title: "Drivers"
+  - title: "Build drivers"
     description: "Configure where and how you run your builds."
     icon: "engineering"
     link: "/build/drivers/"
-  - title: "Caching"
+  - title: "Exporters"
+    description: "Export any artifact you like, not just Docker images."
+    icon: "output"
+    link: "/build/exporters"
+  - title: "Build caching"
     description:
       "Avoid unnecessary repetitions of costly operations, such as package
       installs."
     icon: "cycle"
     link: "/build/cache"
+  - title: "Bake"
+    description: "Orchestrate your builds with Bake."
+    icon: "cake"
+    link: "/build/bake"
   - title: "Continuous integration"
     description:
       "Learn how to use Docker in your continuous integration pipelines."
     icon: "all_inclusive"
     link: "/build/ci"
-  - title: "Exporters"
-    description: "Export any artifact you like, not just Docker images."
-    icon: "output"
-    link: "/build/exporters"
-  - title: "Bake"
-    description: "Orchestrate your builds with Bake."
-    icon: "cake"
-    link: "/build/bake"
+  - title: "Dockerfile frontend"
+    description:
+      "Learn about the Dockerfile frontend for BuildKit."
+    icon: "all_inclusive"
+    link: "/build/buildkit/dockerfile-frontend/"
+  - title: "Configure BuildKit"
+    description:
+      "Take a deep dive into the internals of BuildKit to get the most out of your builds."
+    icon: "all_inclusive"
+    link: "/build/buildkit/configure/"
 ---
 
 Docker Build is one of Docker Engine's most used features. Whenever you are
@@ -64,7 +73,7 @@ Starting with the [18.09 release](../engine/release-notes/18.09.md#18090),
 Engine is shipped with Moby [BuildKit](buildkit/index.md), the new component for
 executing your builds by default.
 
-The new client [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""},
+The new client [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""}
 is a CLI plugin that extends the `docker` command with the full support of the
 features provided by [BuildKit](buildkit/index.md) builder toolkit.
 [`docker buildx build` command](../engine/reference/commandline/buildx_build.md)

@@ -1,7 +1,7 @@
 ---
 title: Express samples
-layout: samples
 description: Docker samples for Express.
 service: express
 ---
 
+{% include_relative samples-body.md %}
