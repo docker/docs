@@ -36,11 +36,13 @@ From version 4.18 and above of Docker Desktop, privileged access for certain fun
 
 The user is then asked for their password to confirm. 
 
+These configuration can be changed at a later time from the **Advanced** page in **Settings**.
+
 <hr>
 </div>
 <div id="tab2" class="tab-pane fade" markdown="1">
 
-For security reasons, version 4.15 to 4.17 of Docker Desktop for Mac doesn't require the user to run a permanent privileged process. Whenever elevated privileges are needed for a configuration, Docker Desktop prompts the user with information on the task it needs to perform. Most configurations are applied once, subsequent runs don't prompt for privileged access anymore.
+Versions 4.15 to 4.17 of Docker Desktop for Mac doesn't require the user to run a permanent privileged process. Whenever elevated privileges are needed for a configuration, Docker Desktop prompts the user with information on the task it needs to perform. Most configurations are applied once, subsequent runs don't prompt for privileged access anymore.
 The only time Docker Desktop may start the privileged process is for binding privileged ports that are not allowed by default on the host OS.
 
 <hr>
@@ -56,28 +58,26 @@ All privileged operations are run using the privileged helper process `com.docke
 
 ### Installing symlinks
 
+The docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop ensures the docker CLI is on the user’s PATH without having to reconfigure shells, log out then log back in for example. As on most systems `/usr/local/bin` is in the user's PATH by default, and so Docker Desktop creates symlinks for all docker binaries in it.
+
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#tab1">Version 4.18 and later</a></li>
-  <li><a data-toggle="tab" data-target="#tab2">Version 4.17 and earlier </a></li>
+  <li class="active"><a data-toggle="tab" data-target="#tab4">Version 4.18 and later</a></li>
+  <li><a data-toggle="tab" data-target="#tab5">Version 4.17 and earlier </a></li>
 </ul>
 <div class="tab-content">
-<div id="tab1" class="tab-pane fade in active" markdown="1">
-
-The docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop ensures the docker CLI is on the user’s PATH without having to reconfigure shells, log out then log back in for example. As on most systems `/usr/local/bin` is in the user's PATH by default, and so Docker Desktop creates symlinks for all docker binaries in it.
+<div id="tab4" class="tab-pane fade in active" markdown="1">
 
 With version 4.18 and later users can choose whether symlinks are installed either in `/usr/local/bin` or `$HOME/.docker/bin` during installation of Docker Desktop.
 
-If `/usr/local/bin` is chosen, Docker Desktop requires authorization to confirm this choice before the symlinks to docker binaries are created in `/usr/local/bin`. If `$HOME/.docker/bin` is chosen, authorization is not required, but the user must [manually add `$HOME/.docker/bin`](../settings/mac.md#advanced)to their PATH. 
+If `/usr/local/bin` is chosen and this location is not writable by unprivileged users, Docker Desktop requires authorization to confirm this choice before the symlinks to docker binaries are created in `/usr/local/bin`. If `$HOME/.docker/bin` is chosen, authorization is not required, but the user must [manually add `$HOME/.docker/bin`](../settings/mac.md#advanced)to their PATH. 
 
-Users are also given the option to enable the installation of the `/var/run/docker.sock` symlink. Creating this symlink ensures various docker clients relying on the default docker socket path to work without additional changes. As the `/var/run` is mounted as a tmpfs, its content is deleted on restart, symlink to docker socket included.
+Users are also given the option to enable the installation of the `/var/run/docker.sock` symlink. Creating this symlink ensures various docker clients relying on the default docker socket path to work without additional changes. 
 
-To ensure the docker socket exists after restart, Docker Desktop sets up a `launchd` startup task that creates the symlink by running `ln -s -f /Users/<user>/.docker/run/docker.sock /var/run/docker.sock`. This ensures the user is not prompted on each startup to create the symlink. If the user does not enable this option at installation, the symlink and the startup task is not created and the user may have to explicitly set the `DOCKER_HOST` to `/Users/<user>/.docker/run/docker.sock` in the clients it is using. The docker CLI relies on the current context to retrieve the socket path, the current context is set to `desktop-linux` on Docker Desktop startup.
+As the `/var/run` is mounted as a tmpfs, its content is deleted on restart, symlink to docker socket included. To ensure the docker socket exists after restart, Docker Desktop sets up a `launchd` startup task that creates the symlink by running `ln -s -f /Users/<user>/.docker/run/docker.sock /var/run/docker.sock`. This ensures the user is not prompted on each startup to create the symlink. If the user does not enable this option at installation, the symlink and the startup task is not created and the user may have to explicitly set the `DOCKER_HOST` to `/Users/<user>/.docker/run/docker.sock` in the clients it is using. The docker CLI relies on the current context to retrieve the socket path, the current context is set to `desktop-linux` on Docker Desktop startup.
 
 <hr>
 </div>
-<div id="tab2" class="tab-pane fade" markdown="1">
-
-The docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop ensures the docker CLI is on the user’s PATH without having to reconfigure shells, log out then log back in for example. As on most systems `/usr/local/bin` is in the user's PATH by default, and so Docker Desktop creates symlinks for all docker binaries in it.
+<div id="tab5 class="tab-pane fade" markdown="1">
 
 For versions prior to 4.18, installing symlinks in `/usr/local/bin` is a privileged configuration Docker Desktop performs on the first startup. Docker Desktop checks if symlinks exists and takes the following actions: 
 - Creates the symlinks without the admin prompt if `/usr/local/bin` is writable by unprivileged users.
@@ -95,16 +95,16 @@ To ensure the docker socket exists after restart, Docker Desktop sets up a `laun
 ### Binding privileged ports
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#tab1">Version 4.18 and later</a></li>
-  <li><a data-toggle="tab" data-target="#tab2">Version 4.17 and earlier </a></li>
+  <li class="active"><a data-toggle="tab" data-target="#tab6">Version 4.18 and later</a></li>
+  <li><a data-toggle="tab" data-target="#tab7">Version 4.17 and earlier </a></li>
 </ul>
 <div class="tab-content">
-<div id="tab1" class="tab-pane fade in active" markdown="1">
+<div id="tab6" class="tab-pane fade in active" markdown="1">
 
-With version 4.18 and later users can choose to enable privileged port mapping during installation. Docker Desktop requires authorization to confirm this choice.
+With version 4.18 and later users can choose to enable privileged port mapping during installation, or from the **Advanced** page in **Settings** post-installation. Docker Desktop requires authorization to confirm this choice.
 <hr>
 </div>
-<div id="tab2" class="tab-pane fade" markdown="1">
+<div id="tab7" class="tab-pane fade" markdown="1">
 
 For versions below 4.18 , if a user runs a container that requires binding privileged ports, Docker Desktop first attempts to bind it directly as an unprivileged process. If the OS prevents this and it fails, Docker Desktop checks if the `com.docker.vmnetd` privileged helper process is running to bind the privileged port through it. 
 
@@ -131,7 +131,24 @@ ERRO[0003] error waiting for container: context canceled
 
 ### Ensuring `localhost` and `kubernetes.docker.internal` are defined
 
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#tab8">Version 4.18 and later</a></li>
+  <li><a data-toggle="tab" data-target="#tab9">Version 4.17 and earlier </a></li>
+</ul>
+<div class="tab-content">
+<div id="tab8" class="tab-pane fade in active" markdown="1">
+
+With version 4.18 it's the user's responsibility to ensure that localhost is resolved to `127.0.0.1` and if Kubernetes is used, that `kubernetes.docker.internal` is resolved to `127.0.0.1`.
+
+<hr>
+</div>
+<div id="tab9" class="tab-pane fade" markdown="1">
+
 On first run, Docker Desktop checks if `localhost` is resolved to `127.0.0.1`. In case the resolution fails, it prompts the user to allow adding the mapping to `/etc/hosts`. Similarly, when the Kubernetes cluster is installed, it checks that `kubernetes.docker.internal` is resolved to `127.0.0.1` and prompts the user to do so. 
+
+<hr>
+</div>
+</div>
 
 ## Installing from the commandline
 
