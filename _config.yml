@@ -260,5 +260,5 @@ fetch-remote:
         src:
           - "build.md"
       - dest: "compose/compose-file/deploy.md"
-          - "deploy.md"
-
+        src:
+         - "deploy.md"
