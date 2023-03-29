@@ -47,7 +47,7 @@ After `docker init` has completed, you must modify the created files and tailor 
 
 ### Example of selecting Other
 
-The following example runs `docker init` and walks through the options after selecting **Other**.
+The following example runs `docker init` and walks through the options after selecting `Other`.
 
 ```console
 $ docker init
@@ -68,7 +68,7 @@ Let's get started!
   Quit
 ```
 
-The following appears after selecting **Other**.
+The following appears after selecting `Other`.
 
 ```console
 CREATED: .dockerignore
@@ -84,7 +84,7 @@ When you're ready, start your application by running: docker compose up --build
 
 ### Example of selecting Go
 
-The following example runs `docker init` and walks through the options after selecting **Go**.
+The following example runs `docker init` and walks through the options after selecting `Go`.
 
 ```console
 $ docker init
@@ -105,28 +105,28 @@ Let's get started!
   Quit
 ```
 
-The following appears after selecting **Go**.
+The following appears after selecting `Go`.
 
 ```console
 ? What application platform does your project use? Go
 ? What version of Go do you want to use? (1.20)
 ```
 
-The following appears after selecting the default **1.20**.
+The following appears after selecting the default `1.20`.
 
 ```console
 ? What version of Go do you want to use? 1.20
 ? What's the relative directory (with a leading .) of your main package? (.)
 ```
 
-The following appears after selecting the default **.**.
+The following appears after selecting the default `.`.
 
 ```console
 ? What's the relative directory (with a leading .) of your main package? .
 ? What port does your server listen on? (3333)
 ```
 
-The following appears after selecting the default **3333**.
+The following appears after selecting the default `3333`.
 
 ```console
 ? What port does your server listen on? 3333
