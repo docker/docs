@@ -1949,7 +1949,7 @@ manuals:
   - sectiontitle: Docker Registry
     section:
     - path: /registry/
-      title: Registry overview
+      title: Overview
     - path: /registry/introduction/
       title: Understand the Registry
     - path: /registry/deploying/
