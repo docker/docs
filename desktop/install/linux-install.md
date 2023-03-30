@@ -17,25 +17,6 @@ This page contains information about general system requirements, supported plat
 >For more information see [What is the difference between Docker Desktop for Linux and Docker Engine](../faqs/linuxfaqs.md#what-is-the-difference-between-docker-desktop-for-linux-and-docker-engine). 
 {: .important} 
 
-## System requirements
-
-To install Docker Desktop successfully, your Linux host must meet the following general requirements:
-
-- 64-bit kernel and CPU support for virtualization.
-- KVM virtualization support. Follow the [KVM virtualization support instructions](#kvm-virtualization-support) to check if the KVM kernel modules are enabled and how to provide access to the kvm device.
-- **QEMU must be version 5.2 or newer**. We recommend upgrading to the latest version.
-- systemd init system.
-- Gnome, KDE, or MATE Desktop environment.
-  - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/){:target="_blank" rel="noopener" class="_"}.
-- At least 4 GB of RAM.
-- Enable configuring ID mapping in user namespaces, see [File sharing](../faqs/linuxfaqs.md#how-do-i-enable-file-sharing).
-
-Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](../faqs/linuxfaqs.md#why-does-docker-desktop-for-linux-run-a-vm).
-
-> **Note:**
->
-> Docker does not provide support for running Docker Desktop in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
-
 ## Supported platforms
 
 Docker provides `.deb` and `.rpm` packages from the following Linux distributions
@@ -56,6 +37,24 @@ An experimental package is available for [Arch](archlinux.md)-based distribution
 
 Docker supports Docker Desktop on the current LTS release of the aforementioned distributions and the most recent version. As new versions are made available, Docker stops supporting the oldest version and supports the newest version.
 
+## System requirements
+
+To install Docker Desktop successfully, your Linux host must meet the following general requirements:
+
+- 64-bit kernel and CPU support for virtualization.
+- KVM virtualization support. Follow the [KVM virtualization support instructions](#kvm-virtualization-support) to check if the KVM kernel modules are enabled and how to provide access to the kvm device.
+- **QEMU must be version 5.2 or newer**. We recommend upgrading to the latest version.
+- systemd init system.
+- Gnome, KDE, or MATE Desktop environment.
+  - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/){:target="_blank" rel="noopener" class="_"}.
+- At least 4 GB of RAM.
+- Enable configuring ID mapping in user namespaces, see [File sharing](../faqs/linuxfaqs.md#how-do-i-enable-file-sharing).
+
+Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](../faqs/linuxfaqs.md#why-does-docker-desktop-for-linux-run-a-vm).
+
+> **Note:**
+>
+> Docker does not provide support for running Docker Desktop in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
 
 ### KVM virtualization support
 
