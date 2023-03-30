@@ -32,4 +32,4 @@ That's it! The container is ready to use. Go to the **Containers** tab in Docker
 
 In this guide, you ran someone else's image from Docker Hub. Continue to the next guide to learn how you can publish your own image to Docker Hub.
 
-[Publish your own image](./publish-your-own-image.md){: .button .primary-btn}
+[Publish your images](./publish-your-own-image.md){: .button .primary-btn}

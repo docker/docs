@@ -56,11 +56,11 @@ guides:
   - path: /get-started/what-is-a-container/
     title: What is a container?
   - path: /get-started/run-your-own-container/
-    title: Run your own container
+    title: How do I run a container?
   - path: /get-started/run-docker-hub-images/
     title: Run Docker Hub images
   - path: /get-started/publish-your-own-image/
-    title: Publish your own image
+    title: Publish your images
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -1791,10 +1791,14 @@ manuals:
         title: Access
       - path: /docker-hub/repos/
         title: Manage
-  - path: /docker-hub/service-accounts/
-    title: Service accounts
   - path: /docker-hub/official_images/
     title: Docker Official images
+  - path: /docker-hub/download-rate-limit/
+    title: Download rate limit
+  - path: /docker-hub/webhooks/
+    title: Webhooks
+  - path: /docker-hub/service-accounts/
+    title: Service accounts
   - sectiontitle: Automated builds
     section:
       - path: /docker-hub/builds/how-builds-work/
@@ -1811,15 +1815,10 @@ manuals:
         title: Advanced options for builds
       - path: /docker-hub/builds/link-source/
         title: Link to GitHub and BitBucket
-  - path: /docker-hub/webhooks/
-    title: Webhooks
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
-  - path: /docker-hub/download-rate-limit/
-    title: Download rate limit
   - path: /docker-hub/image-management/
     title: Advanced Image Management
-
   - sectiontitle: Docker Verified Publisher
     section:
       - path: /docker-hub/publish/
@@ -1888,6 +1887,8 @@ manuals:
          title: FAQs
   - path: /docker-hub/scim/
     title: SCIM
+  - path: /docker-hub/group-mapping/
+    title: Group mapping
   - sectiontitle: Security and authentication
     section:
       - path: /docker-hub/access-tokens/
@@ -1902,8 +1903,6 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
-  - path: /docker-hub/group-mapping/
-    title: Group mapping
   - path: /docker-hub/audit-log/
     title: Audit logs
   - path: /docker-hub/domain-audit/

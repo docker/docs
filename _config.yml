@@ -256,3 +256,9 @@ fetch-remote:
       - dest: "compose/compose-file/12-interpolation.md"
         src:
           - "12-interpolation.md"
+      - dest: "compose/compose-file/build.md"
+        src:
+          - "build.md"
+      - dest: "compose/compose-file/deploy.md"
+        src:
+         - "deploy.md"
