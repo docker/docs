@@ -69,6 +69,16 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Fixes a bug where the VM networking crashes after 24h. [docker/for-linux#131](https://github.com/docker/desktop-linux/issues/131)
 
+### Security
+
+#### Windows
+
+- Fixes security issue in Artifactory Integration where it would fallback to sending registry credentials over plain HTTP if HTTPS check failed. Fixes [docker/for-win#13344](https://github.com/docker/for-win/issues/13344).
+
+#### Mac
+
+- Remove the com.apple.security.cs.allow-dyld-environment-variables and com.apple.security.cs.disable-library-validation entitlements which allow an arbitrary dynamic library to be loaded with Docker Desktop via the DYLD_INSERT_LIBRARIES environment variable.
+
 ## 4.17.1
 
 {% include release-date.html date="2023-03-20" %}
