@@ -45,6 +45,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### Bug fixes and enhancements
 
+#### For all platforms
+
 - [Docker Scout CLI](../scout/index.md#docker-scout-cli) can now compare two images and display packages and vulnerabilities differences. This command is in [Early Access](../release-lifecycle.md) and might change in the future.
 - [Docker Scout CLI](../scout/index.md#docker-scout-cli) now displays base image update and remediation recommendations using `docker scout recommendations`. It also displays a short overview of an image using `docker scout quickview` commands.
 - You can now search for extensions direct from the Marketplace, as well as using **Global Search**.
@@ -71,7 +73,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### Security
 
-#### Windows
+#### For all platforms
 
 - Fixes security issue in Artifactory Integration where it would fallback to sending registry credentials over plain HTTP if HTTPS check failed. Fixes [docker/for-win#13344](https://github.com/docker/for-win/issues/13344).
 
