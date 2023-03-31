@@ -25,7 +25,7 @@ automatically on images in your Artifactory registries.
 You can analyze Artifactory images for vulnerabilities locally using Docker Desktop or the Docker CLI. You first need to authenticate with JFrog Artifactory using the `[Docker login](/engine/reference/commandline/login/)` command. For example:
 
 ```bash
-docker login {REPOSITORY_URL}.jfrog.io
+docker login {URL}
 ```
 
 You can find the credentials for your Artifactory repository by selecting it in the Artifactory UI and then the **Set Me Up** button.
