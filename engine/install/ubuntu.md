@@ -181,6 +181,8 @@ Docker from the repository.
    container runs, it prints a confirmation message and exits.
 
 You have now successfully installed and started Docker Engine. 
+> Receiving errors when trying to run without root?
+>
 > The `docker` user group exists but contains no users, which is why you're required 
 > to use `sudo` to run Docker commands. Continue to [Linux post-install](linux-postinstall.md)
 > to allow non-privileged users to run Docker commands and for other optional configuration steps.
