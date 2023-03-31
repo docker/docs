@@ -28,7 +28,11 @@ You can analyze Artifactory images for vulnerabilities locally using Docker Desk
 docker login {URL}
 ```
 
-You can find the credentials for your Artifactory repository by selecting it in the Artifactory UI and then the **Set Me Up** button.
+> **Tip**
+>
+> For cloud-hosted Artifactory you can find the credentials for your Artifactory repository by
+> selecting it in the Artifactory UI and then the **Set Me Up** button.
+{: .tip }
 
 ## Remote image analysis
 
