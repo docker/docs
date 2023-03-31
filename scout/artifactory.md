@@ -20,19 +20,19 @@ title: Artifactory integration
 Integrating Docker Scout with JFrog Artifactory lets you run image analysis
 automatically on images in your Artifactory registries.
 
-## Local scanning
+## Local image analysis
 
-You can Artifactory images for vulnerabilities locally with Docker Desktop or the Docker CLI. You first need to authenticate with JFrog Artifactory using the `[Docker login](/engine/reference/commandline/login/)` command. For example:
+You can analyze Artifactory images for vulnerabilities locally using Docker Desktop or the Docker CLI. You first need to authenticate with JFrog Artifactory using the `[Docker login](/engine/reference/commandline/login/)` command. For example:
 
 ```bash
 docker login {REPOSITORY_URL}.jfrog.io
 ```
 
-You can find the credentials for your Artifactory repository by selecting it in the Artifactory UI and selecting the **Set Me Up** button.
+You can find the credentials for your Artifactory repository by selecting it in the Artifactory UI and then the **Set Me Up** button.
 
-## Production scanning
+## Remote image analysis
 
-To automatically scan images and containers running in production environments you need to deploy the Docker Scout Artifactory agent. The agent is a
+To automatically analyze images and containers running in remote environments you need to deploy the Docker Scout Artifactory agent. The agent is a
 standalone service that analyzes images and uploads the result to Docker Scout.
 You can view the results using the
 [Docker Scout web UI](https://dso.docker.com/){: target="\_blank" rel="noopener"
