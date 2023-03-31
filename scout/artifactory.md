@@ -32,7 +32,7 @@ You can find the credentials for your Artifactory repository by selecting it in 
 
 ## Remote image analysis
 
-To automatically analyze images and containers running in remote environments you need to deploy the Docker Scout Artifactory agent. The agent is a
+To automatically analyze images running in remote environments you need to deploy the Docker Scout Artifactory agent. The agent is a
 standalone service that analyzes images and uploads the result to Docker Scout.
 You can view the results using the
 [Docker Scout web UI](https://dso.docker.com/){: target="\_blank" rel="noopener"
