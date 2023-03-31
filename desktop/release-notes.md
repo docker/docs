@@ -36,6 +36,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Initial beta release of `docker init` as per [the roadmap](https://github.com/docker/roadmap/issues/453).
 - Added a new **Learning Center** tab to help users get started with Docker.
+- Docker Compose now has an experimental file watch command that will automatically update your running Compose services as you edit and save your code.
 
 ### Upgrades
 
@@ -69,17 +70,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### For Linux
 
-- Fixes a bug where the VM networking crashes after 24h. [docker/for-linux#131](https://github.com/docker/desktop-linux/issues/131)
+- Fixed a bug where the VM networking crashes after 24h. [docker/for-linux#131](https://github.com/docker/desktop-linux/issues/131)
 
 ### Security
 
 #### For all platforms
 
-- Fixes security issue in Artifactory Integration where it would fallback to sending registry credentials over plain HTTP if HTTPS check failed. Fixes [docker/for-win#13344](https://github.com/docker/for-win/issues/13344).
+- Fixed a security issue with the Artifactory Integration where it would fall back to sending registry credentials over plain HTTP if HTTPS check failed. Only users who have `Access experimental features` enabled are affected. Fixes [docker/for-win#13344](https://github.com/docker/for-win/issues/13344).
 
-#### Mac
+#### For Mac
 
-- Remove the com.apple.security.cs.allow-dyld-environment-variables and com.apple.security.cs.disable-library-validation entitlements which allow an arbitrary dynamic library to be loaded with Docker Desktop via the DYLD_INSERT_LIBRARIES environment variable.
+- Removed the `com.apple.security.cs.allow-dyld-environment-variables` and `com.apple.security.cs.disable-library-validation` entitlements which allow an arbitrary dynamic library to be loaded with Docker Desktop via the `DYLD_INSERT_LIBRARIES` environment variable.
 
 ## 4.17.1
 
