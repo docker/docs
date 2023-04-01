@@ -18,8 +18,7 @@ These benefits are valid for one year and can be renewed if your project still m
 
 ## Verified Docker-Sponsored Open Source badge
 
-The verified Docker-Sponsored Open Source badge signals high quality, and trust, to developers.
-Docker verifies images with this badge as high quality, and that developers can trust the content as and active open source project.
+Docker verifies that developers can trust images with this badge as an active open source project.
 
 ![Fluent org with a Docker-Sponsored Open Source badge](images/sponsored-badge.png)
 

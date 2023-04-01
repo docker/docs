@@ -45,7 +45,7 @@ exclude:
 latest_engine_api_version: "1.42"
 docker_ce_version: "23.0.0"
 compose_v1_version: "1.29.2"
-compose_version: "v2.17.0"
+compose_version: "v2.17.2"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
@@ -256,3 +256,9 @@ fetch-remote:
       - dest: "compose/compose-file/12-interpolation.md"
         src:
           - "12-interpolation.md"
+      - dest: "compose/compose-file/build.md"
+        src:
+          - "build.md"
+      - dest: "compose/compose-file/deploy.md"
+        src:
+         - "deploy.md"

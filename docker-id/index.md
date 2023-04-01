@@ -1,27 +1,27 @@
 ---
 description: Sign up for a Docker ID and log in
 keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge base, beta access, email, activation, verification
-title: Docker ID accounts
+title: Create an account
 redirect_from:
 - /docker-cloud/dockerid/
 - /docker-hub/accounts/
 ---
 
-Your free Docker ID grants you access to Docker Hub repositories and some beta programs. All you need is an email address.
+All you need is an email address to create a Docker account. Once you've created your account with a unique Docker ID, you can access Docker Hub repositories and explore images that are available from the community and verified publishers. 
 
-## Register for a Docker ID
+Your Docker ID becomes your username for hosted Docker services, and [Docker forums](https://forums.docker.com/).
 
-Your Docker ID becomes your user namespace for hosted Docker services, and becomes your username on the [Docker forums](https://forums.docker.com/). To create a new Docker ID:
+## Create a Docker ID
 
 1. Go to the [Docker Hub signup page](https://hub.docker.com/signup/).
 
-2. Enter a username that will become your Docker ID.
+2. Enter a username.
 
-    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. *Once you create your Docker ID you can't reuse it in the future if you deactivate this account*.
+    Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. Once you create your Docker ID you can't reuse it in the future if you deactivate this account.
 
 3. Enter a unique, valid email address.
 
-4. Enter a password that's at least 9 characters.
+4. Enter a password that's at least 9 characters long.
 
 5. Complete the Captcha verification and then select **Sign up**.
 
@@ -33,7 +33,7 @@ Your Docker ID becomes your user namespace for hosted Docker services, and becom
 >
 > You have limited actions available until you verify your email address.
 
-## Log in
+## Sign in
 
 Once you register and verify your Docker ID email address, you can sign in to [Docker Hub](https://hub.docker.com).
 
