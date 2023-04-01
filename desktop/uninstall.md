@@ -58,6 +58,9 @@ To uninstall Docker Desktop from your Mac:
 > other Docker related data local to the machine, and removes the files generated
 > by the application. Refer to the [back up and restore data](backup-and-restore.md)
 > section to learn how to preserve important data before uninstalling.
+  
+> **Note**
+> If you inherited your system setup or docker configuration from an Intel machine and are reinstalling on a machine with Apple Silicone, you may still have a daemon file located in `/Library/LaunchDaemons` called `com.docker.socket.plist` even after running a clean installation.  These root permissions will cause issues with a new installation of docker and prevent it from connecting to the daemon.  After uninstall, make sure to check that this has been removed and if not, move to the trash before reinstalling.    
 
 <hr>
 </div>
