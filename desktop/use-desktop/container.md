@@ -50,7 +50,7 @@ The **container view** displays **Logs**, **Inspect**, **Terminal**, **Files**, 
 
 - Select **Inspect** to view low-level information about the container. You can see the local path, version number of the image, SHA-256, port mapping, and other details.
 
-- Select **Files** to explore all the files in your running or stopped containers. You can also:
+- Select **Files** to explore the filesystem of running or stopped containers. You can also:
     - See which files have been recently added, modified, or deleted
     - Edit a file straight from the built-in editor
     - Drag and drop files and folders between the host and the container
