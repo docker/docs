@@ -36,7 +36,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Initial beta release of `docker init` as per [the roadmap](https://github.com/docker/roadmap/issues/453).
 - Added a new **Learning Center** tab to help users get started with Docker.
-- Docker Compose now has an experimental file watch command that will automatically update your running Compose services as you edit and save your code.
+- Added an experimental file-watch command to Docker Compose that automatically updates your running Compose services as you edit and save your code.
 
 ### Upgrades
 
@@ -63,10 +63,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - Fixed a bug where `docker run --gpus=all` hangs. Fixes [docker/for-win#13333](https://github.com/docker/for-win/issues/13333).
 - Fixed a bug where Registry Access Management policy updates were not downloaded.
 - Docker Desktop now allows Windows containers to work when BitLocker is enabled on `C:`.
+- Docker Desktop with the WSL backend no longer requires the `com.docker.service` privileged service to run permanently. For more information see [Permission requirements for Windows](https://docs.docker.com/desktop/windows/permission-requirements/).
 
 ### For Mac
 
 - Fixed a performance issue where attributes stored on the host would not be cached for VirtioFS users.
+- The first time Docker Desktop for Mac is launched, the user is presented with an installation window to confirm or adjust the configuration that requires privileged access. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
+- Added the **Advanced** tab in **Settings**, where users can adjust the settings which require privileged access.
 
 ### For Linux
 
