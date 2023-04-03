@@ -29,11 +29,17 @@ redirect_from:
 
 ## Quick Start Guide
 
-  Once Docker Desktop is installed, the Quick Start Guide launches. It includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+The Quick Start Guide includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
 
-   ![Docker Quick Start tutorial](images/docker-tutorial.png)
+![Docker Quick Start tutorial](images/docker-tutorial.png)
 
-To run the Quick Start Guide on demand, select the Docker menu ![whale menu](images/whale-x.svg){: .inline} and then choose **Quick Start Guide**.
+To run the Quick Start Guide, select the Docker menu ![whale menu](images/whale-x.svg){: .inline} and then choose **Quick Start Guide**.
+
+> **Note**
+>
+> To access the Quick Start Guide, you must turn off **Access experimental features**.
+> Learn how to turn off **Access experimental features** on [Mac](../settings/mac/#experimental-features), [Windows](../settings/windows/#experimental-features), or [Linux](../settings/linux/#experimental-features).
+
 
 For a more detailed guide, see [Get started](../get-started/index.md), or the [Docker Desktop hands-on guides](../get-started/hands-on-overview.md).
 
