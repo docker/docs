@@ -1,0 +1,18 @@
+command: docker scout
+short: Command line tool for Docker Scout
+long: Command line tool for Docker Scout
+usage: docker scout [command]
+pname: docker
+plink: docker.yaml
+cname:
+    - docker scout cves
+    - docker scout version
+clink:
+    - docker_scout_cves.yaml
+    - docker_scout_version.yaml
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

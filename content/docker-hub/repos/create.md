@@ -21,7 +21,7 @@ command.
 When creating a new repository:
 
 - You can choose to locate it under your own user account, or under any
-  [organization](../../docker-hub/orgs.md) where you are an [owner](../../docker-hub/orgs.md#the-owners-team).
+  [organization](../../docker-hub/orgs.md) where you are an [owner](../manage-a-team.md#the-owners-team).
 - The repository name needs to:
     - Be unique 
     - Have between 2 and 255 characters

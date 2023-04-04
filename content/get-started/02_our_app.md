@@ -7,8 +7,8 @@ description: Containerize and run a simple application to learn Docker
 ---
 
 For the rest of this guide, you'll be working with a simple todo
-list manager that's running in Node.js. If you're not familiar with Node.js,
-don't worry. This guide doesn't require JavaScript experience.
+list manager that runs on Node.js. If you're not familiar with Node.js,
+don't worry. This guide doesn't require any prior experience with JavaScript.
 
 To complete this guide, you'll need the following:
 
@@ -34,7 +34,7 @@ Before you can run the application, you need to get the application source code 
 
 ## Build the app's container image
 
-In order to build the [container image](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}, you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that Docker uses to create a container image.
+To build the [container image](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}, you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension that contains a script of instructions. Docker uses this script to build a container image.
 
 1. In the `app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
 
@@ -130,7 +130,7 @@ Now that you have an image, you can run the application in a [container](../get-
    ![Empty todo list](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
    {: .text-center }
 
-3. Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove items. Your frontend is successfully storing items in the backend.
+3. Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove them. Your frontend is successfully storing items in the backend.
 
 
 At this point, you should have a running todo list manager with a few items, all built by you.

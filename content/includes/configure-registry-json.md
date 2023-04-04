@@ -13,7 +13,8 @@ Based on the user's operating system, you must create a `registry.json` file at 
 | Mac      | `/Library/Application Support/com.docker.docker/registry.json` |
 | Linux    | `/usr/share/docker-desktop/registry/registry.json`             |
 
-The `registry.json` file must contain the following contents, where `myorg` is replaced with your organization's name.
+The `registry.json` file must contain the following contents, where `myorg` is replaced with your organization's name. The file contents are case-sensitive and you must use lowercase letters for your organization's name.
+
 
 ```json
 {
@@ -42,12 +43,13 @@ On Windows, you can use the following methods to create a `registry.json` file.
 
 #### Create registry.json when installing Docker Desktop on Windows
 
-To automatically create a `registry.json` file when installing Docker Desktop, download `Docker Desktop Installer.exe` and run one of the following commands from the directory containing `Docker Desktop Installer.exe`. Replace `myorg` with your organization's name.
+To automatically create a `registry.json` file when installing Docker Desktop, download `Docker Desktop Installer.exe` and run one of the following commands from the directory containing `Docker Desktop Installer.exe`. Replace `myorg` with your organization's name and you must use lowercase letters for your organization's name.
+
 
 If you're using PowerShell:
 
 ```powershell
-PS> Start-Process '.\Docker Desktop Installer.exe' -Wait install --allowed-org=myorg
+PS> Start-Process '.\Docker Desktop Installer.exe' -Wait 'install --allowed-org=myorg'
 ```
 
 If you're using the Windows Command Prompt:
@@ -58,7 +60,7 @@ C:\Users\Admin> "Docker Desktop Installer.exe" install --allowed-org=myorg
 
 #### Create registry.json manually on Windows
 
-To manually create a `registry.json` file, run the following PowerShell command as an Admin and replace `myorg` with your organization's name:
+To manually create a `registry.json` file, run the following PowerShell command as an Admin and replace `myorg` with your organization's name. The file contents are case-sensitive and you must use lowercase letters for your organization's name.
 
 ```powershell
 PS>  Set-Content /ProgramData/DockerDesktop/registry.json '{"allowedOrgs":["myorg"]}'
@@ -87,7 +89,8 @@ On Mac, you can use the following methods to create a `registry.json` file.
 
 #### Create registry.json when installing Docker Desktop on Mac
 
-To automatically create a registry.json file when installing Docker Desktop, download `Docker.dmg` and run the following commands in a terminal from the directory containing `Docker.dmg`. Replace `myorg` with your organization's name.
+To automatically create a registry.json file when installing Docker Desktop, download `Docker.dmg` and run the following commands in a terminal from the directory containing `Docker.dmg`. Replace `myorg` with your organization's name and you must use lowercase letters for your organization's name.
+
 
 ```console
 $ sudo hdiutil attach Docker.dmg
@@ -98,7 +101,7 @@ $ sudo hdiutil detach /Volumes/Docker
 #### Create registry.json manually on Mac
 
 To manually create a `registry.json` file, run the following commands in a terminal
-and replace `myorg` with your organization's name.
+and replace `myorg` with your organization's name. The file contents are case-sensitive and you must use lowercase letters for your organization's name.
 
 ```console
 $ sudo mkdir -p "/Library/Application Support/com.docker.docker"
@@ -136,7 +139,8 @@ On Linux, you can use the following methods to create a `registry.json` file.
 #### Create registry.json manually on Linux
 
 To manually create a `registry.json` file, run the following commands in a terminal
-and replace `myorg` with your organization's name.
+and replace `myorg` with your organization's name. The file contents are case-sensitive and you must use lowercase letters for your organization's name.
+
 
 ```console
 $ sudo mkdir -p /usr/share/docker-desktop/registry

@@ -128,9 +128,6 @@
 "/desktop/windows/wsl/":
   # Link used by Docker Desktop to refer users on how to activate WSL 2
   - /go/wsl2/
-"/engine/api/latest/":
-  - /go/engine/api/
-
 # samples
 "https://hub.docker.com/_/adminer/":
   - /samples/adminer
@@ -556,3 +553,14 @@
 # feedback
 "https://docs.google.com/forms/d/e/1FAIpQLSenjK8KiBiOrwCpq06u_iVEZGv4tfTEpfmY_cQDmsqJrHL9Gw/viewform":
   - /feedback/extension/
+
+# Docker Scout
+"/scout/":
+  - /go/scout/
+  - /go/docker-scout/
+"/scout/artifactory":
+  - /go/scout-artifactory/
+
+# Telepresence
+"/develop/remote-development/":
+  - /go/telepresence/

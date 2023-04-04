@@ -89,8 +89,7 @@ Docker from the repository.
     $ sudo apt-get install \
         ca-certificates \
         curl \
-        gnupg \
-        lsb-release
+        gnupg
     ```
 
 2.  Add Docker's official GPG key:
@@ -104,8 +103,9 @@ Docker from the repository.
 
     ```console
     $ echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
+      "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 
 #### Install Docker Engine

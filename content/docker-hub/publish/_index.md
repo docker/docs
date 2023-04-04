@@ -54,7 +54,7 @@ client tool (user agent), and more.
 
 ## Vulnerability scanning
 
-Automatic vulnerability scanning using Snyk for images published to Docker Hub.
+Automatic vulnerability scanning for images published to Docker Hub.
 Scanning images ensures that the published content is secure, and underlines to
 developers that it can be trusted. Scanning can be enabled on a per-repository
 basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:

@@ -183,7 +183,7 @@ attestations.
 Usage:
 
 ```console
-$ export BUILDX_NO_DEFAULT_ATTESTATION=1
+$ export BUILDX_NO_DEFAULT_ATTESTATIONS=1
 ```
 
 ## BUILDX_NO_DEFAULT_LOAD

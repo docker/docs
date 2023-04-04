@@ -135,8 +135,7 @@ Docker provides two modes for delivering messages from the container to the log
 driver:
 
 * (default) direct, blocking delivery from container to driver
-* non-blocking delivery that stores log messages in an intermediate per-container
-  ring buffer for consumption by driver
+* non-blocking delivery that stores log messages in an intermediate per-container buffer for consumption by driver
 
 The `non-blocking` message delivery mode prevents applications from blocking due
 to logging back pressure. Applications are likely to fail in unexpected ways when
@@ -144,15 +143,14 @@ STDERR or STDOUT streams block.
 
 > **Warning**
 >
-> When the buffer is full and a new message is enqueued, the oldest message in
-> memory is dropped.  Dropping messages is often preferred to blocking the
+> When the buffer is full, new messages will not be enqueued.  Dropping messages is often preferred to blocking the
 > log-writing process of an application.
 {: .warning}
 
 The `mode` log option controls whether to use the `blocking` (default) or
 `non-blocking` message delivery.
 
-The `max-buffer-size` log option controls the size of the ring buffer used for
+The `max-buffer-size` log option controls the size of the buffer used for
 intermediate message storage when `mode` is set to `non-blocking`. `max-buffer-size`
 defaults to 1 megabyte.
 

@@ -10,4 +10,5 @@ in the source repository on GitHub:
 
 https://github.com/docker/scout-cli-plugin
 -->
+
 {% include cli.md datafolder=page.datafolder datafile=page.datafile %}

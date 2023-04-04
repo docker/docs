@@ -50,7 +50,7 @@ Create and manage your repositories:
 
 - Create [repositories](../docker-hub/repos/index.md) to share container images.
 - [Consolidate a repository](../docker-hub/repos/index.md/#move-images-between-repositories) from your personal account to your organization.
-- Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
+- Create [teams](manage-a-team.md#create-a-team) and configure [repository permissions](manage-a-team.md#configure-repository-permissions-for-a-team).
 
 Your Docker Team subscription provides many more additional features. [Learn more](../subscription/index.md).
 

@@ -1,6 +1,7 @@
 ARM
 AWS
 Amazon
+Ambassador
 Anchore
 Apple
 Artifactory
@@ -9,6 +10,7 @@ BusyBox
 CentOS
 Ceph
 CloudFront
+CNCF
 Codefresh
 CouchDB
 Couchbase
@@ -17,6 +19,7 @@ Django
 Fargate
 Fedora
 Flink
+Gefyra
 GeoNetwork
 GitHub( Actions)?
 Google
@@ -54,6 +57,7 @@ Snyk
 Solr
 SonarQube
 Syft
+Telepresence
 TLS
 Twilio
 Ubuntu
@@ -62,5 +66,9 @@ Wasm
 Windows
 XWiki
 Zsh
+kubefwd
+ktunnel
 macOS
 minikube
+sandbox
+sandboxed

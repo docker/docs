@@ -6,12 +6,15 @@ title: Download rate limit
 
 ## What's the download rate limit on Docker Hub
 
-Docker Hub limits the number of Docker image downloads ("pulls")
-based on the account type of the user pulling the image. Pull rates limits are based on individual IP address. For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. For [authenticated](#how-do-i-authenticate-pull-requests) users, it's  200 pulls per 6 hour period. Users with a paid [Docker subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} get up to 5000 pulls per day. If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
+Docker Hub limits the number of Docker image downloads, or pulls based on the account type of the user pulling the image. Pull rate limits are based on individual IP address.
 
-Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs.
+For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. 
+For [authenticated](#how-do-i-authenticate-pull-requests) users, it's  200 pulls per 6 hour period. 
+Users with a paid [Docker subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} get up to 5000 pulls per day. 
 
-See [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} and [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} for details.
+If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
+
+Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs. See [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} and [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} for details.
 
 ## Definition of limits
 
@@ -34,17 +37,17 @@ manifest requests.
 
 ## How do I know my pull requests are being limited
 
-When you issue a pull request and you are over the limit for your account type, Docker Hub will return a `429` response code with the following body when the manifest is requested:
+When you issue a pull request and you are over the limit, Docker Hub returns a `429` response code with the following body when the manifest is requested:
 
 ```
 You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
 ```
 
-You will see this error message in the Docker CLI or in the Docker Engine logs.
+This error message appears in the Docker CLI or in the Docker Engine logs.
 
 ## How can I check my current rate
 
-Valid manifest API requests to Hub will usually include the following rate limit headers in the response:
+Valid API requests to Hub usually include the following rate limit headers in the response:
 
 ```
 ratelimit-limit    
@@ -52,15 +55,19 @@ ratelimit-remaining
 docker-ratelimit-source
 ```
 
-These headers will be returned on both GET and HEAD requests. Note that using GET emulates a real pull and will count towards the limit; using HEAD won't, so we will use it in this example. To check your limits, you will need `curl`, `grep`, and `jq` installed.
+These headers are returned on both GET and HEAD requests.
 
-To get a token anonymously (if you are pulling anonymously):
+>**Note**
+>
+>Using GET emulates a real pull and counts towards the limit. Using HEAD won't. To check your limits, you need `curl`, `grep`, and `jq` installed.
+
+To get a token anonymously, if you are pulling anonymously:
 
 ```console
 $ TOKEN=$(curl "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
 ```
 
-To get a token with a user account (if you are authenticating your pulls) - don't forget to insert your username and password in the following command:
+To get a token with a user account, if you are authenticated (insert your username and password in the following command):
 
 ```console
 $ TOKEN=$(curl --user 'username:password' "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull" | jq -r .token)
@@ -72,7 +79,7 @@ Then to get the headers showing your limits, run the following:
 $ curl --head -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest
 ```
 
-Which should return headers including these:
+Which should return the following headers:
 
 ```http
 ratelimit-limit: 100;w=21600
@@ -80,13 +87,11 @@ ratelimit-remaining: 76;w=21600
 docker-ratelimit-source: 192.0.2.1
 ```
 
-This means my limit is 100 pulls per 21600 seconds (6 hours), and I have 76 pulls remaining.
-
-> Remember that these headers are best-effort and there will be small variations.
+In the example above, the pull limit is 100 pulls per 21600 seconds (6 hours), and there are 76 pulls remaining.
 
 ### I don't see any RateLimit headers
 
-This could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization. It could also mean that the user you are pulling as is part of a paid Docker plan. Pulling that image won’t count toward pull limits if you don’t see these headers. However, users with a paid Docker subscription pulling more than 5000 times daily require a [Service Account](../docker-hub/service-accounts.md) subscription.
+If you don't see any RateLimit header, it could be because the image or your IP is unlimited in partnership with a publisher, provider, or an open-source organization. It could also mean that the user you are pulling as is part of a paid Docker plan. Pulling that image won’t count toward pull limits if you don’t see these headers. However, users with a paid Docker subscription pulling more than 5000 times daily require a [Service Account](../docker-hub/service-accounts.md) subscription.
 
 ## I'm being limited to a lower rate even though I have a paid Docker subscription
 
@@ -96,13 +101,13 @@ A Pro, Team, or a Business tier doesn't increase limits on your images for other
 
 ## How do I authenticate pull requests
 
-The following section contains information on how to log into on Docker Hub to authenticate pull requests.
+The following section contains information on how to sign in to Docker Hub to authenticate pull requests.
 
 ### Docker Desktop
 
-If you are using Docker Desktop, you can log into Docker Hub from the Docker Desktop menu.
+If you are using Docker Desktop, you can sign in to Docker Hub from the Docker Desktop menu.
 
-Click **Sign in / Create Docker ID** from the Docker Desktop menu and follow the on-screen instructions to complete the sign-in process.
+Select **Sign in / Create Docker ID** from the Docker Desktop menu and follow the on-screen instructions to complete the sign-in process.
 
 ### Docker Engine
 
@@ -140,13 +145,13 @@ If you are using any third-party platforms, follow your provider’s instruction
 
 Docker Hub also has an overall rate limit to protect the application 
 and infrastructure. This limit applies to all requests to Hub 
-properties including web pages, APIs, image pulls, etc. The limit is 
+properties including web pages, APIs, image pulls. The limit is 
 applied per-IP, and while the limit changes over time depending on load
 and other factors, it's in the order of thousands of requests per 
 minute. The overall rate limit applies to all users equally
 regardless of account level.
 
 You can differentiate between these limits by looking at the error 
-code. The "overall limit" will return a simple `429 Too Many Requests` 
+code. The "overall limit" returns a simple `429 Too Many Requests` 
 response. The pull limit returns a longer error message that
 includes a link to this page.

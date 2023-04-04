@@ -25,6 +25,18 @@ guides:
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
+- sectiontitle: Docker Desktop hands-on guides
+  section:
+  - path: /get-started/hands-on-overview/
+    title: Overview
+  - path: /get-started/what-is-a-container/
+    title: What is a container?
+  - path: /get-started/run-your-own-container/
+    title: How do I run a container?
+  - path: /get-started/run-docker-hub-images/
+    title: Run Docker Hub images
+  - path: /get-started/publish-your-own-image/
+    title: Publish your images
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -860,8 +872,34 @@ reference:
   path: /engine/reference/builder/
 - sectiontitle: Compose file reference
   section:
-    - path: /compose/compose-file/
-      title: Compose Specification
+    - sectiontitle: Compose specification
+      section:
+      - path: /compose/compose-file/
+        title: Overview
+      - path: /compose/compose-file/01-status/
+        title: Status of the specification
+      - path: /compose/compose-file/02-model/
+        title: Compose application model
+      - path: /compose/compose-file/03-compose-file/
+        title: The Compose file
+      - path: /compose/compose-file/04-version-and-name/
+        title: Version and name top-level element
+      - path: /compose/compose-file/05-services/
+        title: Services top-level element
+      - path: /compose/compose-file/06-networks/
+        title: Network top-level element
+      - path: /compose/compose-file/07-volumes/
+        title: Volumes top-level element
+      - path: /compose/compose-file/08-configs/
+        title: Configs top-level element
+      - path: /compose/compose-file/09-secrets/
+        title: Secrets top-level element
+      - path: /compose/compose-file/10-fragments/
+        title: Fragments
+      - path: /compose/compose-file/11-extension/
+        title: Extensions
+      - path: /compose/compose-file/12-interpolation/
+        title: Interpolation
     - path: /compose/compose-file/build/
       title: Compose file build
     - path: /compose/compose-file/deploy/
@@ -1717,10 +1755,10 @@ manuals:
   section:
   - path: /docker-hub/
     title: Overview
+  - path: /docker-id/
+    title: Create an account
   - path: /docker-hub/quickstart/
     title: Quickstart
-  - path: /docker-id/
-    title: Docker ID accounts
   - sectiontitle: Repositories
     section:
       - path: /docker-hub/repos/create/
@@ -1729,45 +1767,34 @@ manuals:
         title: Access
       - path: /docker-hub/repos/
         title: Manage
-  - path: /docker-hub/service-accounts/
-    title: Service accounts
   - path: /docker-hub/official_images/
     title: Docker Official images
-  - sectiontitle: Automated builds
-    section:
-      - path: /docker-hub/builds/
-        title: Set up automated builds
-      - path: /docker-hub/builds/automated-testing/
-        title: Testing in automated builds
-      - path: /docker-hub/builds/advanced/
-        title: Advanced automated builds
-      - path: /docker-hub/builds/link-source/
-        title: Link to GitHub and BitBucket
-  - path: /docker-hub/webhooks/
-    title: Webhooks
-  - path: /docker-hub/vulnerability-scanning/
-    title: Vulnerability scanning
-  - path: /docker-hub/audit-log/
-    title: Audit logs
-  - sectiontitle: Security and authentication
-    section:
-      - path: /docker-hub/access-tokens/
-        title: Create and manage access tokens
-      - sectiontitle: Two-factor authentication
-        section:
-          - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
-          - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
-          - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
+  - path: /docker-hub/webhooks/
+    title: Webhooks
+  - path: /docker-hub/service-accounts/
+    title: Service accounts
+  - sectiontitle: Automated builds
+    section:
+      - path: /docker-hub/builds/how-builds-work/
+        title: How Automated builds work
+      - path: /docker-hub/builds/
+        title: Set up Automated builds
+      - path: /docker-hub/builds/manage-builds/
+        title: Manage your builds
+      - path: /docker-hub/builds/troubleshoot/
+        title: Troubleshoot your builds
+      - path: /docker-hub/builds/automated-testing/
+        title: Testing in Automated builds
+      - path: /docker-hub/builds/advanced/
+        title: Advanced options for builds
+      - path: /docker-hub/builds/link-source/
+        title: Link to GitHub and BitBucket
+  - path: /docker-hub/vulnerability-scanning/
+    title: Vulnerability scanning
   - path: /docker-hub/image-management/
     title: Advanced Image Management
-
   - sectiontitle: Docker Verified Publisher
     section:
       - path: /docker-hub/publish/
@@ -1792,8 +1819,10 @@ manuals:
     - path: /scout/artifactory/
       title: Artifactory integration
 
-- sectiontitle: Administration
+- sectiontitle: Administration and security
   section:
+  - path: /docker-hub/admin-overview/
+    title: Overview
   - sectiontitle: Onboarding
     section:
     - path: /docker-hub/onboard-team/
@@ -1815,7 +1844,7 @@ manuals:
   - path: /docker-hub/convert-account/
     title: Convert an account into an organization
   - path: /docker-hub/manage-a-team/
-    title: Manage a team
+    title: Create and manage a team
   - path: /docker-hub/members/
     title: Manage members
   - path: /docker-hub/configure-sign-in/
@@ -1836,6 +1865,22 @@ manuals:
     title: SCIM
   - path: /docker-hub/group-mapping/
     title: Group mapping
+  - sectiontitle: Security and authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Create and manage access tokens
+      - sectiontitle: Two-factor authentication
+        section:
+          - path: /docker-hub/2fa/
+            title: Enable two-factor authentication
+          - path: /docker-hub/2fa/disable-2fa/
+            title: Disable two-factor authentication
+          - path: /docker-hub/2fa/recover-hub-account/
+            title: Recover your Docker Hub account
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
+  - path: /docker-hub/audit-log/
+    title: Audit logs
   - path: /docker-hub/domain-audit/
     title: Domain audit
   - path: /docker-hub/image-access-management/

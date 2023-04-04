@@ -5,11 +5,22 @@ usage: docker trust signer
 pname: docker trust
 plink: docker_trust.yaml
 cname:
-- docker trust signer add
-- docker trust signer remove
+    - docker trust signer add
+    - docker trust signer remove
 clink:
-- docker_trust_signer_add.yaml
-- docker_trust_signer_remove.yaml
+    - docker_trust_signer_add.yaml
+    - docker_trust_signer_remove.yaml
+inherited_options:
+    - option: help
+      value_type: bool
+      default_value: "false"
+      description: Print usage
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 experimental: false
 experimentalcli: false
