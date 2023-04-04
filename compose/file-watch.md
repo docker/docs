@@ -9,7 +9,11 @@ title: Automatically update services with file watch
 >
 > The Compose file watch feature is currently [Experimental](../release-lifecycle.md).
 
-Use `watch` to automatically update your running Compose services as you edit and save your code. 
+Use `watch` to automatically update your running Compose services as you edit and save your code.
+
+For many projects, this enables a hands-off development workflow once Compose is running: services automatically update themselves as you save your work.
+
+You do not need to enable `watch` for all services in a Compose project. In some instances, only part of the project (e.g. Javascript frontend) might be suitable for automatic updates.
 
 `watch` adheres to the following file path rules:
 
@@ -36,7 +40,7 @@ If `action` is set to `sync`, Compose makes sure any changes made to files on yo
 
 Sync is ideal for frameworks that support "Hot Reload" or equivalent functionality.
 
-More generally, they can be used in place of bind mounts for many development use cases.
+More generally, sync rules can be used in place of bind mounts for many development use cases.
 
 #### Rebuild
 
