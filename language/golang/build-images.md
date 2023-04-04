@@ -241,7 +241,7 @@ image is used to start a container.
 We do this with the `CMD` command:
 
 ```dockerfile
-CMD [ "/docker-gs-ping" ]
+CMD ["/docker-gs-ping"]
 ```
 
 Here's the complete `Dockerfile`:
@@ -273,7 +273,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
 EXPOSE 8080
 
 # Run
-CMD [ "/docker-gs-ping" ]
+CMD ["/docker-gs-ping"]
 ```
 
 The `Dockerfile` may also contain _comments_. They always begin with a `#` symbol,
