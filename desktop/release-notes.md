@@ -43,6 +43,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - [Buildx v0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4)
 - [Compose 2.17.2](https://github.com/docker/compose/releases/tag/v2.17.2)
 - [Containerd v1.6.18](https://github.com/containerd/containerd/releases/tag/v1.6.18), which includes fixes for [CVE-2023-25153](https://github.com/advisories/GHSA-259w-8hf6-59c2) and [CVE-2023-25173](https://github.com/advisories/GHSA-hmfx-3pcx-653p).
+- [Docker Engine v20.10.24](https://docs.docker.com/engine/release-notes/#201024), which contains fixes for [CVE-2023-28841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28841),
+  [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840), and
+  [CVE-2023-28842](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28842).
 
 ### Bug fixes and enhancements
 
@@ -60,7 +63,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### For Windows
 
-- Fixed a bug where `docker run --gpus=all` hangs. Fixes [docker/for-win#13333](https://github.com/docker/for-win/issues/13333).
+- Fixed a bug where `docker run --gpus=all` hangs. Fixes [docker/for-win#13324](https://github.com/docker/for-win/issues/13324).
 - Fixed a bug where Registry Access Management policy updates were not downloaded.
 - Docker Desktop now allows Windows containers to work when BitLocker is enabled on `C:`.
 - Docker Desktop with the WSL backend no longer requires the `com.docker.service` privileged service to run permanently. For more information see [Permission requirements for Windows](https://docs.docker.com/desktop/windows/permission-requirements/).
