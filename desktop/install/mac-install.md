@@ -78,11 +78,15 @@ Your Mac must meet the following requirements to install Docker Desktop successf
 
     {% include desktop-license-update.md %}
 
-4. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
+4. Select **Accept** to continue. 
 
    Note that Docker Desktop will not run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_" }. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_"}.
+5. From the installation window, select either: 
+   - **Use recommended settings (Requires password)**. This let's Docker Desktop automatically set the necessary configuration settings. 
+   - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](../settings/mac.md#advanced), for more information and how to set the location of the Docker CLI tools.
+6. Select **Finish**. If you have applied any of the above configurations that require a password in step 5, you are asked to enter your password to confirm. 
 
 ### Install from the command line
 
@@ -104,13 +108,6 @@ The `install` command accepts the following flags:
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example:
     `--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'`
-
-### Runtime permission requirements
-
-For some functions, Docker Desktop may require elevated privileges. The user is informed and prompted for authorization whenever such
-configuration must be performed. [Docker Desktop permission requirements](../mac/permission-requirements.md) provides details on each configuration
-and use case.
-
 
 ## Where to go next
 
