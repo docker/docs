@@ -38,7 +38,7 @@ To open the integrated terminal, either:
 
 You can obtain detailed information about the container when you select a container.
 
-The **container view** displays **Logs**, **Inspect**, **Terminal**, and **Stats** tabs and provides quick action buttons to perform various actions.
+The **container view** displays **Logs**, **Inspect**, **Terminal**, **Files**, and **Stats** tabs and provides quick action buttons to perform various actions.
 
 - Select **Logs** to see logs from the container. You can also:
     - Use `Cmd + f`/`Ctrl + f` to open the search bar and find specific entries. Search matches are highlighted in yellow.
@@ -49,5 +49,12 @@ The **container view** displays **Logs**, **Inspect**, **Terminal**, and **Stats
     - Select and view external links that may be in your logs. 
 
 - Select **Inspect** to view low-level information about the container. You can see the local path, version number of the image, SHA-256, port mapping, and other details.
+
+- Select **Files** to explore the filesystem of running or stopped containers. You can also:
+    - See which files have been recently added, modified, or deleted
+    - Edit a file straight from the built-in editor
+    - Drag and drop files and folders between the host and the container
+    - Delete unnecessary files when you right-click on a file
+    - Download file and folders from the container straight to the host
 
 - Select **Stats** to view information about the container resource utilization. You can see the amount of CPU, disk I/O, memory, and network I/O used by the container.
