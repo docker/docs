@@ -511,6 +511,8 @@ reference:
       title: docker import
     - path: /engine/reference/commandline/info/
       title: docker info
+    - path: /engine/reference/commandline/init/
+      title: docker init (Beta)
     - path: /engine/reference/commandline/inspect/
       title: docker inspect
     - path: /engine/reference/commandline/kill/
@@ -621,8 +623,14 @@ reference:
       section:
       - path: /engine/reference/commandline/scout/
         title: docker scout
+      - path: /engine/reference/commandline/scout_compare/
+        title: docker scout compare
       - path: /engine/reference/commandline/scout_cves/
         title: docker scout cves
+      - path: /engine/reference/commandline/scout_quickview/
+        title: docker scout quickview
+      - path: /engine/reference/commandline/scout_recommendations/
+        title: docker scout recommendations
       - path: /engine/reference/commandline/scout_version/
         title: docker scout version
     - path: /engine/reference/commandline/search/

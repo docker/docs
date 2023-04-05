@@ -1,0 +1,150 @@
+command: docker init
+short: Creates Docker-related starter files for your project
+long: |-
+  Initialize a project with the files necessary to run the project in a container.
+
+  Docker Desktop 4.18 and later provides the Docker Init plugin with the `docker init` CLI command. Run `docker init` in your project directory to be walked through the creation of the following files with sensible defaults for your project:
+    
+    * .dockerignore
+    * Dockerfile
+    * docker-compose.yaml
+    
+    If any of the files already exist, a prompt appears and provides a warning as well as giving you the option to overwrite all the files.
+    
+    > **Warning**
+    >
+    > You can't recover overwritten files.
+    > To back up an existing file before selecting to overwrite it, rename the file or copy it to another directory.
+    {: .warning}
+  
+  After running `docker init`, you can choose one of the following templates:
+    
+    * Go: Suitable for a Go server application.
+    * Other: General purpose starting point for containerizing your application.
+  
+  After `docker init` has completed, you must modify the created files and tailor them to your project. Visit the following topics to learn more about the files:
+    
+    * [.dockerignore](../../../engine/reference/builder.md#dockerignore-file)
+    * [Dockerfile](../../../engine/reference/builder.md)
+    * [docker-compose.yaml](../../../compose/compose-file/03-compose-file.md)
+
+usage: docker init [OPTIONS]
+pname: docker
+plink: docker.yaml
+options:
+    - option: version
+      value_type: bool
+      default_value: "false"
+      description: Display version of the init plugin
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+examples: |-
+  ### Example of selecting Other
+  
+  The following example runs `docker init` and walks through the options after selecting `Other`.
+  
+  ```console
+  $ docker init
+  
+  Welcome to the Docker Init CLI!
+  
+  This utility will walk you through creating the following files with sensible defaults for your project:
+    - .dockerignore
+    - Dockerfile
+    - docker-compose.yaml
+  
+  Let's get started!
+  
+  ? What application platform does your project use?  [Use arrows to move, type to filter]
+  > Go - suitable for a Go server application
+    Other - general purpose starting point for containerizing your application
+    Don't see something you need? Let us know!
+    Quit
+  ```
+  
+  The following appears after selecting `Other`.
+  
+  ```console
+  CREATED: .dockerignore
+  CREATED: Dockerfile
+  CREATED: docker-compose.yaml
+  
+  ✔ Your Docker files are ready!
+  
+  Take a moment to review them and tailor them to your application.
+  
+  When you're ready, start your application by running: docker compose up --build
+  ```
+  
+  ### Example of selecting Go
+  
+  The following example runs `docker init` and walks through the options after selecting `Go`.
+  
+  ```console
+  $ docker init
+  
+  Welcome to the Docker Init CLI!
+  
+  This utility will walk you through creating the following files with sensible defaults for your project:
+    - .dockerignore
+    - Dockerfile
+    - docker-compose.yaml
+  
+  Let's get started!
+  
+  ? What application platform does your project use?  [Use arrows to move, type to filter]
+  > Go - (detected) suitable for a Go server application
+    Other - general purpose starting point for containerizing your application
+    Don't see something you need? Let us know!
+    Quit
+  ```
+  
+  The following appears after selecting `Go`.
+  
+  ```console
+  ? What application platform does your project use? Go
+  ? What version of Go do you want to use? (1.20)
+  ```
+  
+  The following appears after selecting the default `1.20`.
+  
+  ```console
+  ? What version of Go do you want to use? 1.20
+  ? What's the relative directory (with a leading .) of your main package? (.)
+  ```
+  
+  The following appears after selecting the default `.`.
+  
+  ```console
+  ? What's the relative directory (with a leading .) of your main package? .
+  ? What port does your server listen on? (3333)
+  ```
+  
+  The following appears after selecting the default `3333`.
+  
+  ```console
+  ? What port does your server listen on? 3333
+  
+  CREATED: .dockerignore
+  CREATED: Dockerfile
+  CREATED: docker-compose.yaml
+  
+  ✔ Your Docker files are ready!
+  
+  Take a moment to review them and tailor them to your application.
+  
+  When you're ready, start your application by running: docker compose up --build -d
+  
+  Your application will be available at http://localhost:3333
+  
+  To stop your application, run: docker compose down
+  ```

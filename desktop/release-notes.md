@@ -24,35 +24,100 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.18.0
+
+{% include release-date.html date="2023-04-03" %}
+
+> Download Docker Desktop
+>
+> {% include desktop-install.html %}
+
+### New
+
+- Initial beta release of `docker init` as per [the roadmap](https://github.com/docker/roadmap/issues/453).
+- Added a new **Learning Center** tab to help users get started with Docker.
+- Added an experimental file-watch command to Docker Compose that automatically updates your running Compose services as you edit and save your code.
+
+### Upgrades
+
+- [Buildx v0.10.4](https://github.com/docker/buildx/releases/tag/v0.10.4)
+- [Compose 2.17.2](https://github.com/docker/compose/releases/tag/v2.17.2)
+- [Containerd v1.6.18](https://github.com/containerd/containerd/releases/tag/v1.6.18), which includes fixes for [CVE-2023-25153](https://github.com/advisories/GHSA-259w-8hf6-59c2) and [CVE-2023-25173](https://github.com/advisories/GHSA-hmfx-3pcx-653p).
+- [Docker Engine v20.10.24](https://docs.docker.com/engine/release-notes/20.10/#201024), which contains fixes for [CVE-2023-28841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28841),
+  [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840), and
+  [CVE-2023-28842](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28842).
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- [Docker Scout CLI](../scout/index.md#docker-scout-cli) can now compare two images and display packages and vulnerabilities differences. This command is in [Early Access](../release-lifecycle.md) and might change in the future.
+- [Docker Scout CLI](../scout/index.md#docker-scout-cli) now displays base image update and remediation recommendations using `docker scout recommendations`. It also displays a short overview of an image using `docker scout quickview` commands.
+- You can now search for extensions direct from the Marketplace, as well as using **Global Search**.
+- Fixed a bug where `docker buildx` container builders would lose access to the network after 24hrs.
+- Reduced how often users are prompted for feedback on Docker Desktop.
+- Removed minimum VM swap size.
+- Added support for subdomain match, CIDR match, `.` and `_.` in HTTP proxy exclude lists.
+- Fixed a bug in the transparent TLS proxy when the Server Name Indication field is not set.
+- Fixed a grammatical error in Docker Desktop engine status message.
+
+### For Windows
+
+- Fixed a bug where `docker run --gpus=all` hangs. Fixes [docker/for-win#13324](https://github.com/docker/for-win/issues/13324).
+- Fixed a bug where Registry Access Management policy updates were not downloaded.
+- Docker Desktop now allows Windows containers to work when BitLocker is enabled on `C:`.
+- Docker Desktop with the WSL backend no longer requires the `com.docker.service` privileged service to run permanently. For more information see [Permission requirements for Windows](https://docs.docker.com/desktop/windows/permission-requirements/).
+
+### For Mac
+
+- Fixed a performance issue where attributes stored on the host would not be cached for VirtioFS users.
+- The first time Docker Desktop for Mac is launched, the user is presented with an installation window to confirm or adjust the configuration that requires privileged access. For more information see [Permission requirements for Mac](https://docs.docker.com/desktop/mac/permission-requirements/).
+- Added the **Advanced** tab in **Settings**, where users can adjust the settings which require privileged access.
+
+### For Linux
+
+- Fixed a bug where the VM networking crashes after 24h. [docker/for-linux#131](https://github.com/docker/desktop-linux/issues/131)
+
+### Security
+
+#### For all platforms
+
+- Fixed a security issue with the Artifactory Integration where it would fall back to sending registry credentials over plain HTTP if HTTPS check failed. Only users who have `Access experimental features` enabled are affected. Fixes [docker/for-win#13344](https://github.com/docker/for-win/issues/13344).
+
+#### For Mac
+
+- Removed the `com.apple.security.cs.allow-dyld-environment-variables` and `com.apple.security.cs.disable-library-validation` entitlements which allow an arbitrary dynamic library to be loaded with Docker Desktop via the `DYLD_INSERT_LIBRARIES` environment variable.
+
+### Known Issues
+
+- Uninstalling Docker Desktop on Mac from the **Troubleshoot** page might trigger an unexpected fatal error popup.
+
 ## 4.17.1
 
 {% include release-date.html date="2023-03-20" %}
 
 > Download Docker Desktop
 >
-> <div class="panel-group" id="accordion16" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading16">
-        <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse16" aria-expanded="true" aria-controls="collapse16">
-            Windows
-            <i class="fa fa-chevron-down"></i>
-          </a>
-        </h5>
-      </div>
-      <div id="collapse16" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading16">
-        <div class="panel-body">
-          <a class="btn btn-primary" href="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64" role="button">Download file</a> 
-        <br>
-        <br>
-        <b>Checksum:</b> 2ea284648a5f708428f3a06bb8e1eb68cbeba6689b53c53d7ca24043a8f34800
-        </div>
+> [Windows](https://desktop.docker.com/win/main/amd64/101757/Docker%20Desktop%20Installer.exe)
+
+<div class="panel-group" id="accordion14" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading14">
+      <h5 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion14" href="#collapse14" aria-expanded="true" aria-controls="collapse14">
+          Checksums
+          <i class="fa fa-chevron-down"></i>
+        </a>
+      </h5>
+    </div>
+    <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
+      <div class="panel-body">
+      <li><b>Windows:</b> SHA-256 2ea284648a5f708428f3a06bb8e1eb68cbeba6689b53c53d7ca24043a8f34800</li>
       </div>
     </div>
-    </div>
->
-> For the latest release of Docker Desktop for Mac and Linux, see [4.17.0](#4170)
- 
+  </div>
+</div>
+
 ### Bug fixes and enhancements
 
 #### For Windows
