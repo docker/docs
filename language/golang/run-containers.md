@@ -198,7 +198,7 @@ Now, we can easily identify our container based on the name.
 
 In this module, we learned how to run containers and publish ports. We also learned to manage the lifecycle of containers. We then discussed the importance of naming our containers so that they are more easily identifiable. In the next module, we’ll learn how to run a database in a container and connect it to our application. See:
 
-[How to develop your application](develop.md){: .button .outline-btn}
+[How to develop your application](develop.md){: .button .primary-btn}
 
 ## Feedback
 
