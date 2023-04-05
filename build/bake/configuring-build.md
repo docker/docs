@@ -275,3 +275,204 @@ $ docker buildx bake -f docker-bake1.hcl -f docker-bake2.hcl --print app
   }
 }
 ```
+
+## Matrix builds
+
+Matrix builds allow you to build a target with multiple combinations of
+specified parameters. You can use this to reduce duplication in your bake
+definition.
+
+You can create a matrix for a target by using the `matrix` attribute. The
+`matrix` attribute is a map of parameter names to lists of values. Each
+possible combination of values will be built as a separate target. Each
+generated target **must** have a unique name. These names should be manually
+specified using the `name` attribute.
+
+```hcl
+target "app" {
+  name = "app-${tgt}"
+  matrix = {
+    tgt = ["foo", "bar"]
+  }
+  target = tgt
+}
+```
+
+```console
+$ docker buildx bake --print app
+```
+
+```json
+{
+  "group": {
+    "app": {
+      "targets": [
+        "app-foo",
+        "app-bar"
+      ]
+    },
+    "default": {
+      "targets": [
+        "app"
+      ]
+    }
+  },
+  "target": {
+    "app-bar": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "target": "bar"
+    },
+    "app-foo": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "target": "foo"
+    }
+  }
+}
+```
+
+As you can see, the `app` target is now a group, which contains two targets:
+`app-foo` and `app-bar`, which are built with the `--target` argument set to
+`foo` and `bar` respectively.
+
+You can use the matrix feature to define multiple targets that are similar but
+that need to built with varying parameters. When using multiple matrix keys,
+every possible combination of values will be built.
+
+```hcl
+target "app" {
+  name = "app-${tgt}-${replace(version, ".", "-")}"
+  matrix = {
+    tgt = ["foo", "bar"]
+    version = ["1.0", "2.0"]
+  }
+  target = tgt
+  args = {
+    VERSION = version
+  }
+}
+```
+
+```console
+$ docker buildx bake --print app
+```
+
+```json
+{
+  "group": {
+    "app": {
+      "targets": [
+        "app-foo-1-0",
+        "app-bar-1-0",
+        "app-foo-2-0",
+        "app-bar-2-0"
+      ]
+    },
+    "default": {
+      "targets": [
+        "app"
+      ]
+    }
+  },
+  "target": {
+    "app-bar-1-0": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "args": {
+        "VERSION": "1.0"
+      },
+      "target": "bar"
+    },
+    "app-bar-2-0": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "args": {
+        "VERSION": "2.0"
+      },
+      "target": "bar"
+    },
+    "app-foo-1-0": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "args": {
+        "VERSION": "1.0"
+      },
+      "target": "foo"
+    },
+    "app-foo-2-0": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "args": {
+        "VERSION": "2.0"
+      },
+      "target": "foo"
+    }
+  }
+}
+```
+
+For additional flexibility you can include non-string values in the matrix map,
+for example, you can include map values to create a list of possible options.
+
+```hcl
+target "app" {
+  name = "app-${item.tgt}-${replace(item.version, ".", "-")}"
+  matrix = {
+    item = [
+      {
+        tgt = "foo"
+        version = "1.0"
+      },
+      {
+        tgt = "bar"
+        version = "2.0"
+      }
+    ]
+  }
+  target = item.tgt
+  args = {
+    VERSION = item.version
+  }
+}
+```
+
+```console
+$ docker buildx bake --print app
+```
+
+```json
+{
+  "group": {
+    "app": {
+      "targets": [
+        "app-foo-1-0",
+        "app-bar-2-0"
+      ]
+    },
+    "default": {
+      "targets": [
+        "app"
+      ]
+    }
+  },
+  "target": {
+    "app-bar-2-0": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "args": {
+        "VERSION": "2.0"
+      },
+      "target": "bar"
+    },
+    "app-foo-1-0": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "args": {
+        "VERSION": "1.0"
+      },
+      "target": "foo"
+    }
+  }
+}
+```

@@ -59,6 +59,8 @@ Complete list of valid target fields available for [HCL](#hcl-definition) and
 | `dockerfile`        | String | Name of the Dockerfile (same as [`--file` flag](../../engine/reference/commandline/buildx_build.md))                                                                        |
 | `inherits`          | List   | [Inherit build options](#merging-and-inheritance) from other targets                                                                                                        |
 | `labels`            | Map    | Set metadata for an image (same as [`--label` flag](../../engine/reference/commandline/buildx_build.md))                                                                    |
+| `matrix`            | Map    | Define a set of variables to automatically expand the target into multiple targets (see [Matrix definitions](./configuring-build.md#matrix-builds))                         |
+| `name`              | String | Override a target's name when automatically expanding to multiple targets using a matrix (see [Matrix definitions](./configuring-build.md#matrix-builds))                   |
 | `no-cache-filter`   | List   | Do not cache specified stages (same as [`--no-cache-filter` flag](../../engine/reference/commandline/buildx_build.md))                                                      |
 | `no-cache`          | Bool   | Do not use cache when building the image (same as [`--no-cache` flag](../../engine/reference/commandline/buildx_build.md))                                                  |
 | `output`            | List   | Output destination (same as [`--output` flag](../../engine/reference/commandline/buildx_build.md))                                                                          |
