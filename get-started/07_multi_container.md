@@ -193,7 +193,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 > as the connection password. Docker doesn't do anything to support these env vars. Your app will need to know to look for
 > the variable and get the file contents.
 
-You can now start your dev-ready container. 
+You can now start your dev-ready container.
 
 1. Specify each of the environment variables above, as well as connect the container to your app network. Make sure that you are in the `getting-started/app` directory when you run this command.
 
