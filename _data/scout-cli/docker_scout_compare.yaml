@@ -1,7 +1,7 @@
 command: docker scout compare
 short: '[early preview] Compare two images and display differences'
 long: |-
-    The `docker scout compare` command analyzes two images and display a comparison of both.
+    The `docker scout compare` command analyzes two images and displays a comparison of both.
 
     > This command is in **early preview** and its behaviour might change in the future
 

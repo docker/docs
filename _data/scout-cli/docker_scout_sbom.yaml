@@ -1,7 +1,7 @@
 command: docker scout sbom
 short: Generate or display SBOM of an image
 long: |-
-    The `docker scout sbom` command analyzes a software artifact to generate the corresponding Software Bill Of Materials - SBOM.
+    The `docker scout sbom` command analyzes a software artifact to generate the corresponding Software Bill Of Materials (SBOM).
 
     The SBOM can be used to list all packages, or the ones from a specific type (as dep, maven, etc).
 

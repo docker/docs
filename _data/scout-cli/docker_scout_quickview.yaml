@@ -2,7 +2,7 @@ command: docker scout quickview
 short: Quick overview of an image
 long: |-
     The `docker scout quickview` command displays a quick overview of an image.
-    It displays a summary of the vulnerabilities in the image and the one specifically in the base image.
+    It displays a summary of the vulnerabilities in the image and the vulnerabilities from the base image.
     If available it also displays base image refresh and update recommendations.
 usage: docker scout quickview IMAGE|DIRECTORY|ARCHIVE
 pname: docker scout
