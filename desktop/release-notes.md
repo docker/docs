@@ -88,6 +88,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Removed the `com.apple.security.cs.allow-dyld-environment-variables` and `com.apple.security.cs.disable-library-validation` entitlements which allow an arbitrary dynamic library to be loaded with Docker Desktop via the `DYLD_INSERT_LIBRARIES` environment variable.
 
+### Known Issues
+
+- Uninstalling Docker Desktop on Mac from the **Troubleshoot** page might trigger an unexpected fatal error popup.
+
 ## 4.17.1
 
 {% include release-date.html date="2023-03-20" %}
