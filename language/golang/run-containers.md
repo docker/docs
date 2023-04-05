@@ -28,7 +28,7 @@ $ docker run docker-gs-ping
    ____    __
   / __/___/ /  ___
  / _// __/ _ \/ _ \
-/___/\__/_//_/\___/ v4.2.2
+/___/\__/_//_/\___/ v4.10.2
 High performance, minimalist Go web framework
 https://echo.labstack.com
 ____________________________________O/_______
