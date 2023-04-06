@@ -16,14 +16,13 @@ For many projects, this enables a hands-off development workflow once Compose is
 You do not need to enable `watch` for all services in a Compose project. In some instances, only part of the project (e.g. Javascript frontend) might be suitable for automatic updates.
 
 `watch` adheres to the following file path rules:
-
 * All paths are relative to the build context
 * Directories are watched recursively
 * Glob patterns are not supported
 * Rules from `.dockerignore` apply
   * Use `include` / `exclude` to override
   * Temporary/backup files for common IDEs (Vim, Emacs, JetBrains, & more) are ignored automatically
-* `.git` directories are ignored automatically
+  * `.git` directories are ignored automatically
 
 ## Configuration
 
@@ -69,19 +68,47 @@ For `path: ./app/html` and a change to `./app/html/index.html`:
 * `target: /assets` -> `/assets/index.html`
 
 ## Example
+Watch mode can be used with many different languages and frameworks.
+The specific paths and rules will vary project to project, but the concepts remain the same. 
+
+This minimal example targets a Node.js application with the following structure:
+```text
+myproject/
+├── web/
+│   ├── App.jsx
+│   └── index.js
+├── Dockerfile
+├── compose.yaml
+└── package.json
+```
 
 ```yaml
 services:
-  app:
-    build: ./app
+  web:
+    build: .
+    command: npm start
     x-develop:
       watch:
         - action: sync
-          path: ./app/html
-          target: /app/html
+          path: ./web
+          target: /src/web
         - action: rebuild
-          path: ./app/requirements.txt
+          path: package.json
 ```
+
+In this example, when running `docker compose up --build --wait`, a container for the `web` service is launched using an image built from the `Dockerfile` in the project root.
+The `web` service runs `npm start` for its command, which will launch a development version of the application with Hot Module Reload enabled in the bundler (Webpack, Vite, Turbopack, etc).
+
+After the service is up, running `docker compose alpha watch` will start watch mode.
+Then, whenever a source file in the `web/` directory is changed, Compose will copy the file to the corresponding location under `/src/web` inside the container.
+For example, `./web/App.jsx` would be copied to `/src/web/App.jsx`.
+
+Once copied, the bundler updates the running application without a restart.
+
+Unlike source code files, adding a new dependency can’t be done on-the-fly, so whenever `package.json` is changed, Compose
+will rebuild the image and recreate the `web` service container.
+
+This pattern can be followed for many languages and frameworks, such as Python + Flask: Python source files are synced while `requirements.txt`-type files should trigger a rebuild.
 
 ## Use `watch`
 
