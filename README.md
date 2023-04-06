@@ -49,4 +49,4 @@ contribute, see our [Contribute section](https://docs.docker.com/contribute/over
 
 ## Copyright and license
 
-Copyright 2013-2023 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2023 Docker, inc, released under the <a href="https://github.com/docker/docs/blob/main/LICENSE">Apache 2.0 license</a> .
