@@ -4,11 +4,13 @@ description: Provides usage statistics of your images on Docker Hub.
 keywords: docker hub, hub, insights, analytics, api, verified publisher
 ---
 
-Insights and analytics provides usage analytics for your Docker Verified
-Publisher (DVP) images on Docker Hub. With this tool, you have self-serve access
+Insights and analytics provides usage analytics for Docker Verified
+Publisher (DVP) images on Docker Hub, providing self-serve access
 to metrics as both raw data and summary data for a desired time span. You can
 view number of image pulls by tag or by digest, and get breakdowns by
-geolocation, cloud provider, client, and more. Head to the
+geolocation, cloud provider, client, and more.
+
+Head to the
 [Docker Verified Publisher Program page](https://www.docker.com/partners/programs/){: target="blank" rel="noopener" class="_" }
 to learn more about the benefits of becoming a verified publisher.
 
@@ -42,8 +44,8 @@ This is a convenient way to share statistics with others in your organization.
 
 ![Chart share icon](./images/chart-share-icon.png)
 
-Selecting the icon generates a link that gets copied to your clipboard. The link
-preserves the display selections you made. When someone uses the link, the
+Selecting the icon generates a link that's copied to your clipboard. The link
+preserves the display selections you made. When someone follows the link, the
 **Insights and analytics** page opens and displays the chart with the same
 configuration as you had set up when creating the link.
 
@@ -58,7 +60,7 @@ Sunday) or monthly format. Monthly data is available from the first day of the
 following calendar month. You can import this data into your own systems, or you
 can analyze it manually as a spreadsheet.
 
-### Export data using the website
+### Export data
 
 Export usage data for your organization's images using the Docker Hub website by following these steps:
 
@@ -161,16 +163,16 @@ target="_blank" rel="noopener" class="_"}.
 | Starting event | Reference | Followed by                                                     | Resulting action | Use case(s)                                                                                                    | Notes                                                                                                                                                                                                                                                                                          |
 | :------------- | :-------- | :-------------------------------------------------------------- | :--------------- | :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | HEAD           | tag       | N/A                                                             | Version check    | User already has all layers existing on local machine                                                          | This is similar to the use case of a pull by tag when the user already has all the image layers existing locally, however, it differentiates the user intent and classifies accordingly.                                                                                              |
-| GET            | tag       | N/A                                                             | Pull by tag      | User already has all layers existing on local machine and/or the image is single-architecture                          |
-| GET            | tag       | Get by different digest                                         | Pull by tag      | Image is multi-architecture                                                                                            | Second GET by digest must be different from the first.                                                                                                                                                                                                                                         |
-| HEAD           | tag       | GET by same digest                                              | Pull by tag      | Image is multi-architecture but some or all image layers already exist on the local machine                           | The HEAD by tag sends the most current digest, the following GET must be by that same digest. There may occur an additional GET, if the image is multi-architecture (see the next row in this table). If the user doesn't want the most recent digest, then the user performs HEAD by digest. |
-| HEAD           | tag       | GET by the same digest, then a second GET by a different digest | Pull by tag      | Image is multi-architecture                                                                                            | The HEAD by tag sends the most recent digest, the following GET must be by that same digest. Since the image is multi-architecture, there is a second GET by a different digest. If the user doesn't want the most recent digest, then the user performs HEAD by digest.                      |
-| HEAD           | tag       | GET by same digest, then a second GET by different digest       | Pull by tag      | Image is multi-architecture                                                                                            | The HEAD by tag sends the most current digest, the following GET must be by that same digest. Since the image is multi-architecture, there is a second GET by a different digest. If the user doesn't want the most recent digest, then the user performs HEAD by digest.                     |
-| GET            | digest    | N/A                                                             | Pull by digest   | User already has all layers existing on local machine and/or the image is single-architecture                          |
+| GET            | tag       | N/A                                                             | Pull by tag      | User already has all layers existing on local machine and/or the image is single-arch                          |
+| GET            | tag       | Get by different digest                                         | Pull by tag      | Image is multi-arch                                                                                            | Second GET by digest must be different from the first.                                                                                                                                                                                                                                         |
+| HEAD           | tag       | GET by same digest                                              | Pull by tag      | Image is multi-arch but some or all image layers already exist on the local machine                           | The HEAD by tag sends the most current digest, the following GET must be by that same digest. There may occur an additional GET, if the image is multi-arch (see the next row in this table). If the user doesn't want the most recent digest, then the user performs HEAD by digest. |
+| HEAD           | tag       | GET by the same digest, then a second GET by a different digest | Pull by tag      | Image is multi-arch                                                                                            | The HEAD by tag sends the most recent digest, the following GET must be by that same digest. Since the image is multi-arch, there is a second GET by a different digest. If the user doesn't want the most recent digest, then the user performs HEAD by digest.                      |
+| HEAD           | tag       | GET by same digest, then a second GET by different digest       | Pull by tag      | Image is multi-arch                                                                                            | The HEAD by tag sends the most current digest, the following GET must be by that same digest. Since the image is multi-arch, there is a second GET by a different digest. If the user doesn't want the most recent digest, then the user performs HEAD by digest.                     |
+| GET            | digest    | N/A                                                             | Pull by digest   | User already has all layers existing on local machine and/or the image is single-arch                          |
 | HEAD           | digest    | N/A                                                             | Pull by digest   | User already has all layers existing on their local machine                                                   |
-| GET            | digest    | GET by different digest                                         | Pull by digest   | Image is multi-architecture                                                                                            | The second GET by digest must be different from the first.                                                                                                                                                                                                                                      |
-| HEAD           | digest    | GET by same digest                                              | Pull by digest   | Image is single-architecture and/or image is multi-architecture but some part of the image already exists on the local machine |
-| HEAD           | digest    | GET by same digest, then a second GET by different digest       | Pull by Digest   | Image is multi-architecture                                                                                            |
+| GET            | digest    | GET by different digest                                         | Pull by digest   | Image is multi-arch                                                                                            | The second GET by digest must be different from the first.                                                                                                                                                                                                                                      |
+| HEAD           | digest    | GET by same digest                                              | Pull by digest   | Image is single-arch and/or image is multi-arch but some part of the image already exists on the local machine |
+| HEAD           | digest    | GET by same digest, then a second GET by different digest       | Pull by Digest   | Image is multi-arch                                                                                            |
 
 ## Changes in data over time
 

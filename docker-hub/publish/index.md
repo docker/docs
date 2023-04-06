@@ -55,7 +55,7 @@ selected time span. Data points include tag, type of pull, user geolocation, cli
 ## Vulnerability scanning
 
 [Docker Scout](/scout/){:
-target="blank" rel="noopener" class=""} provides automatic vulnerability scanning for images published to Docker Hub.
+target="blank" rel="noopener" class=""} provides automatic vulnerability scanning for DVP images published to Docker Hub.
 Scanning images ensures that the published content is secure, and proves to
 developers that they can trust the image. You can enable scanning on a per-repository
 basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
