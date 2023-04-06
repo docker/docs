@@ -116,7 +116,7 @@ COPY . .
 Now, tell Docker what command to run when the image is executed inside a container using the `CMD` command. Note that you need to make the application externally visible (i.e. from outside the container) by specifying `--host=0.0.0.0`.
 
 ```dockerfile
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 ```
 
 Here's the complete Dockerfile.
@@ -133,7 +133,7 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 ```
 
 ### Directory structure
@@ -170,7 +170,7 @@ $ docker build --tag python-docker .
  => [3/6] COPY requirements.txt requirements.txt
  => [4/6] RUN pip3 install -r requirements.txt
  => [5/6] COPY . .
- => [6/6] CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0"]
+ => [6/6] CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
  => exporting to image
  => => exporting layers
  => => writing image sha256:8cae92a8fbd6d091ce687b71b31252056944b09760438905b726625831564c4c

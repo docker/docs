@@ -119,12 +119,12 @@ COPY package-lock.json package-lock.json
 FROM base as test
 RUN npm ci
 COPY . .
-CMD [ "npm", "run", "test" ]
+CMD ["npm", "run", "test"]
 
 FROM base as prod
 RUN npm ci --production
 COPY . .
-CMD [ "node", "server.js" ]
+CMD ["node", "server.js"]
 ```
 
 We first add a label `as base` to the `FROM node:18-alpine` statement. This allows us to refer to this build stage in other build stages. Next we add a new build stage labeled test. We will use this stage for running our tests.
@@ -189,7 +189,7 @@ RUN npm run test
 FROM base as prod
 RUN npm ci --production
 COPY . .
-CMD [ "node", "server.js" ]
+CMD ["node", "server.js"]
 ```
 
 Now to run our tests, we just need to run the docker build command as above.
