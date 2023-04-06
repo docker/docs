@@ -53,10 +53,10 @@ The summary format shows image pulls per tag, and the raw format lists informati
 selected time span. Data points include tag, type of pull, user geolocation, client tool (user agent), and more.
 
 ## Vulnerability scanning
-<!-- TODO: Clar -->
+
 [Docker Scout](/scout/){:
 target="blank" rel="noopener" class=""} provides automatic vulnerability scanning for images published to Docker Hub.
-Scanning images ensures that the published content is secure, and preoves to
+Scanning images ensures that the published content is secure, and proves to
 developers that they can trust the image. You can enable scanning on a per-repository
 basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
 target="blank" rel="noopener" class=""} for more information about how to use
