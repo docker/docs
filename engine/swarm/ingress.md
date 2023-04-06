@@ -15,7 +15,11 @@ To use the ingress network in the swarm, you need to have the following
 ports open between the swarm nodes before you enable swarm mode:
 
 * Port `7946` TCP/UDP for container network discovery.
-* Port `4789` UDP for the container ingress network.
+* Port `4789` UDP (configurable) for the container ingress network.
+
+When setting up networking in a Swarm, special care should be taken. Consult
+the [tutorial](swarm-tutorial/index.md#open-protocols-and-ports-between-the-hosts)
+for an overview.
 
 You must also open the published port between the swarm nodes and any external
 resources, such as an external load balancer, that require access to the port.
