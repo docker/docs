@@ -82,7 +82,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms
 
-- Fixed a security issue with the Artifactory Integration where it would fall back to sending registry credentials over plain HTTP if HTTPS check failed. Only users who have `Access experimental features` enabled are affected. Fixes [docker/for-win#13344](https://github.com/docker/for-win/issues/13344).
+- Fixed [CVE-2023-1802](https://www.cve.org/cverecord?id=CVE-2023-1802){: target="_blank" rel="noopener" class="_"} where a security issue with the Artifactory Integration would cause it to fall back to sending registry credentials over plain HTTP if HTTPS check failed. Only users who have `Access experimental features` enabled are affected. Fixes [docker/for-win#13344](https://github.com/docker/for-win/issues/13344).
 
 #### For Mac
 
