@@ -71,12 +71,29 @@ The tutorial uses `manager1` : `192.168.99.100`.
 
 The following ports must be available. On some systems, these ports are open by default.
 
-* **TCP port 2377** for cluster management communications
-* **TCP** and **UDP port 7946** for communication among nodes
-* **UDP port 4789** for overlay network traffic
+* Port `2377` TCP for communication with and between manager nodes
+* Port `7946` TCP/UDP for overlay network node discovery
+* Port `4789` UDP (configurable) for overlay network traffic
 
 If you plan on creating an overlay network with encryption (`--opt encrypted`),
-you also need to ensure **ip protocol 50** (**ESP**) traffic is allowed.
+you also need to ensure **IP protocol 50** (**IPSec ESP**) traffic is allowed.
+
+Port `4789` is the default value for the Swarm data path port, also known as the VXLAN port.
+It is important to prevent any untrusted traffic from reaching this port, as VXLAN does not
+provide authentication. This port should only be opened to a trusted network, and never at a
+perimeter firewall.
+
+If the network which Swarm traffic traverses is not fully trusted, it is strongly suggested that
+encrypted overlay networks be used. If encrypted overlay networks are in exclusive use, some
+additional hardening is suggested:
+
+* [Customize the default ingress network](../networking.md) to use encryption
+* Only accept encrypted packets on the Data Path Port:
+
+```
+# Example iptables rule (order and other tools may require customization)
+iptables -I INPUT -m udp —-dport 4789 -m policy --dir in --pol none -j DROP
+```
 
 ## What's next?
 
