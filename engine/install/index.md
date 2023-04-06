@@ -30,16 +30,16 @@ redirect_from:
 
 > **Docker Desktop for Linux**
 >
-> Docker Desktop helps you build, share, and run containers easily on Mac and
-> Windows as you do on Linux. We are excited to share that Docker Desktop for
+> Docker Desktop helps you build, share, and run containers on Mac and
+> Windows as you do on Linux. Docker Desktop for
 > Linux is now GA. For more information, see
 [Docker Desktop for Linux](../../desktop/install/linux-install.md).
 {: .important}
 
 ## Supported platforms
 
-Docker Engine is available on a variety of [Linux platforms](../../desktop/install/linux-install.md),
-[macOS](../../desktop/install/mac-install.md) and [Windows 10](../../desktop/install/windows-install.md)
+Docker Engine is available on a variety of [Linux distros](../../desktop/install/linux-install.md),
+[macOS](../../desktop/install/mac-install.md), and [Windows 10](../../desktop/install/windows-install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
@@ -55,7 +55,7 @@ your preferred operating system below.
 
 ### Server
 
-Docker provides `.deb` and `.rpm` packages from the following Linux distributions
+Docker provides `.deb` and `.rpm` packages from the following Linux distros
 and architectures:
 
 | Platform                | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)           | s390x                  |
@@ -69,12 +69,12 @@ and architectures:
 | [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
 | [Binaries](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) |                        |
 
-### Other Linux distributions
+### Other Linux distros
 
 > **Note**
 >
-> While the instructions below may work, Docker does not test or verify
-> installation on derivatives.
+> While the instructions below may work, Docker doesn't test or verify
+> installation on distro derivatives.
 
 - Users of Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
   "LMDE" (Debian-based Mint) should follow the installation instructions for
@@ -86,15 +86,15 @@ and architectures:
   substituting the version of their distro for the corresponding Ubuntu release.
   Refer to the documentation of your distro to find which Ubuntu release
   corresponds with your derivative version.
-- Some Linux distributions are providing a package of Docker Engine through their
+- Some Linux distros provide a package of Docker Engine through their
   package repositories. These packages are built and maintained by the Linux
-  distribution's package maintainers and may have differences in configuration
-  or built from modified source code. Docker is not involved in releasing these
-  packages and bugs or issues involving these packages should be reported in
-  your Linux distribution's issue tracker.
+  distro's package maintainers and may have differences in configuration
+  or built from modified source code. Docker isn't involved in releasing these
+  packages and you should report any bugs or issues involving these packages to
+  your Linux distro's issue tracker.
 
 Docker provides [binaries](binaries.md) for manual installation of Docker Engine.
-These binaries are statically linked and can be used on any Linux distribution.
+These binaries are statically linked and you can use them on any Linux distro.
 
 ## Release channels
 

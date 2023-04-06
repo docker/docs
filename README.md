@@ -20,7 +20,7 @@ an existing issue. If possible, we recommend that you suggest a fix to the issue
 by creating a pull request.
 
 You can ask general questions and get community support through the [Docker
-Community Slack](http://dockr.ly/slack). Personalized support is available
+Community Slack](https://dockr.ly/comm-slack). Personalized support is available
 through the Docker Pro, Team, and Business subscriptions. See [Docker
 Pricing](https://www.docker.com/pricing) for details.
 
@@ -49,4 +49,4 @@ contribute, see our [Contribute section](https://docs.docker.com/contribute/over
 
 ## Copyright and license
 
-Copyright 2013-2023 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2023 Docker, inc, released under the <a href="https://github.com/docker/docs/blob/main/LICENSE">Apache 2.0 license</a> .

@@ -43,7 +43,20 @@ the container's name on startup.
 For example, if your project name is `myapp` and it includes two services `db` and `web`, 
 then Compose starts containers named `myapp-db-1` and `myapp-web-1` respectively.
 
-It defaults to the `basename` of the project directory.
+Compose can set the project name in different ways. The level of precedence (from highest to lowest) for each method is as follows:
+
+1. The `-p` command line flag 
+2. `COMPOSE_PROJECT_NAME`
+3. The top level `name:` variable from the config file (or the last `name:` from
+  a series of config files specified using `-f`)
+4. The `basename` of the project directory containing the config file (or
+  containing the first config file specified using `-f`)
+5. The `basename` of the current directory if no config file is specified
+
+Project names must contain only lowercase letters, decimal digits, dashes, and
+underscores, and must begin with a lowercase letter or decimal digit. If the
+`basename` of the project directory or current directory violates this
+constraint, you must use one of the other mechanisms.
 
 See also the [command-line options overview](../reference/index.md#command-options-overview-and-help) and [using `-p` to specify a project name](../reference/index.md#use--p-to-specify-a-project-name).
 

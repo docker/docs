@@ -4,6 +4,11 @@ keywords: company, owners
 title: Manage company owners
 ---
 
+> **Note**
+>
+> The company layer is in [early access](../release-lifecycle.md#early-access-ea)
+> and requires a Docker Team or Business subscription.
+
 As a company owner, you can configure [Single Sign-on (SSO)](../single-sign-on/configure/index.md) and [System for Cross-domain Identity Management (SCIM)](../docker-hub/scim.md) for all organizations under the company. This is only visible if your organization has a Docker Business subscription. If you want to upgrade your subscription to include the organization under the company, see [upgrade your subscription](../subscription/upgrade.md).
 
 ## Add a company owner

@@ -26,4 +26,5 @@ When you upgrade to a paid subscription, you immediately have access to all the 
     >- A monthly Team subscription to an annual Business subscription, the start date is reset. Any unused subscription is prorated and applied as credit towards the new annual period of the Business subscription.
 
 5. Follow the on-screen instructions.
- 
+
+    If you have a [coupon](../billing/faqs.md#how-do-i-redeem-a-coupon) to use, you can enter it during this step. 
