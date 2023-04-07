@@ -186,9 +186,12 @@ $ docker buildx create \
 ```
 
 This creates a Buildx builder named `kube`, containing a single builder node
-`builder-amd64`. Note that the Buildx concept of a node isn't the same as the
-Kubernetes concept of a node. A Buildx node in this case could connect multiple
-Kubernetes nodes of the same architecture together.
+named `builder-amd64`. Assigning a node name using `--node` is optional. Buildx
+generates a random node name if you don't provide one.
+
+Note that the Buildx concept of a node isn't the same as the Kubernetes concept
+of a node. A Buildx node in this case could connect multiple Kubernetes nodes of
+the same architecture together.
 
 With the `kube` builder created, you can now introduce another architecture into
 the mix using `--append`. For example, to add `arm64`:
