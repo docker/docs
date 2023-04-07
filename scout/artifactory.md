@@ -7,15 +7,7 @@ keywords: >
 title: Artifactory integration
 ---
 
-> **Note**
->
-> Docker Scout is an [early access](../release-lifecycle.md#early-access-ea)
-> product.
->
-> If you're interested in this integration for your organization and want to
-> learn more, get in touch by filling out the contact form on the
-> [Docker Scout product page](https://docker.com/products/docker-scout){:
-> target="\_blank" rel="noopener" }.
+{% include scout-early-access.md %}
 
 Integrating Docker Scout with JFrog Artifactory lets you run image analysis
 automatically on images in your Artifactory registries.
