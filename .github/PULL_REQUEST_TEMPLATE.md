@@ -1,4 +1,4 @@
-<!--
+
   Thank you for contributing to Docker documentation!
 
   Here are a few things to keep in mind:
