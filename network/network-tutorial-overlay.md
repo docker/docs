@@ -433,203 +433,76 @@ example also uses Linux hosts, but the same commands work on Windows.
 
 ## Communicate between a container and a swarm service
 
-In this example, you start two different `alpine` containers on the same Docker
-host and do some tests to understand how they communicate with each other. You
-need to have Docker installed and running.
+In order to communicate between a container and a swarm service in Docker, you can use Docker's built-in networking functionality. Docker provides a default overlay network called **ingress** that allows containers to communicate with each other and with swarm services.
 
-1.  Open a terminal window. List current networks before you do anything else.
-    Here's what you should see if you've never added a network or initialized a
-    swarm on this Docker daemon. You may see different networks, but you should
-    at least see these (the network IDs will be different):
+an example of how to create a service in a Docker Swarm and connect to it from a standalone container:
+
+1.  To get started, make sure Docker is installed and running, and then initialize a Docker Swarm by executing the following command on one of your Docker hosts:
 
     ```console
-    $ docker network ls
+    $ docker swarm init
+    Swarm initialized: current node (vz1mm9am11qcmo979tlrlox42) is now a manager.
 
-    NETWORK ID          NAME                DRIVER              SCOPE
-    17e324f45964        bridge              bridge              local
-    6ed54d316334        host                host                local
-    7092879f2cc8        none                null                local
+    To add a worker to this swarm, run the following command:
+
+        docker swarm join --token SWMTKN-1-5g90q48weqrtqryq4kj6ow0e8xm9wmv9o6vgqc5j320ymybd5c-8ex8j0bc40s6hgvy5ui5gl4gy 172.31.47.252:2377
+
+    To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
     ```
 
-    The default `bridge` network is listed, along with `host` and `none`. The
-    latter two are not fully-fledged networks, but are used to start a container
-    connected directly to the Docker daemon host's networking stack, or to start
-    a container with no network devices. **This tutorial will connect two
-    containers to the `bridge` network.**
+    This will create a new Swarm on the Docker host and make it the Swarm manager.
 
-2.  Start two `alpine` containers running `ash`, which is Alpine's default shell
-    rather than `bash`. The `-dit` flags mean to start the container detached
-    (in the background), interactive (with the ability to type into it), and
-    with a TTY (so you can see the input and output). Since you are starting it
-    detached, you won't be connected to the container right away. Instead, the
-    container's ID will be printed. Because you have not specified any
-    `--network` flags, the containers connect to the default `bridge` network.
+2.  To create an overlay network and connect it to a service and standalone container, you can follow these:
 
     ```console
-    $ docker run -dit --name alpine1 alpine ash
-
-    $ docker run -dit --name alpine2 alpine ash
+    $ docker network create --driver overlay --attachable test-net
+    ustipr7451nqb90li3orjmt8n
     ```
 
-    Check that both containers are actually started:
+    The `--attachable` flag is used when creating a Docker overlay network in a Docker Swarm, and it allows other services and containers outside of the Swarm to attach to the network.
+
+    Note that allowing external services or containers to connect to a Swarm network may introduce security risks, so it's important to consider the implications before using the `--attachable` flag.
+
+3.  Run the following command to create a Docker service named **test-service** and connect it to the **test-net** network:
 
     ```console
-    $ docker container ls
-
-    CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-    602dbf1edc81        alpine              "ash"               4 seconds ago       Up 3 seconds                            alpine2
-    da33b7aa74b0        alpine              "ash"               17 seconds ago      Up 16 seconds                           alpine1
+    docker service create --name test-service --network test-net --replicas 3 --publish published=8080,target=80 nginx:latest
     ```
 
-3.  Inspect the `bridge` network to see what containers are connected to it.
+    This command creates a new service called **test-service** with three replicas, running the nginx container image and publishing port 80 in the container to port 8080 on the host. The `--publish` option maps the container's port 80 to the host's port 8080, allowing external access to the service.
+
+4.  Verify that the service is running by running the following command:
 
     ```console
-    $ docker network inspect bridge
-
-    [
-        {
-            "Name": "bridge",
-            "Id": "17e324f459648a9baaea32b248d3884da102dde19396c25b30ec800068ce6b10",
-            "Created": "2017-06-22T20:27:43.826654485Z",
-            "Scope": "local",
-            "Driver": "bridge",
-            "EnableIPv6": false,
-            "IPAM": {
-                "Driver": "default",
-                "Options": null,
-                "Config": [
-                    {
-                        "Subnet": "172.17.0.0/16",
-                        "Gateway": "172.17.0.1"
-                    }
-                ]
-            },
-            "Internal": false,
-            "Attachable": false,
-            "Containers": {
-                "602dbf1edc81813304b6cf0a647e65333dc6fe6ee6ed572dc0f686a3307c6a2c": {
-                    "Name": "alpine2",
-                    "EndpointID": "03b6aafb7ca4d7e531e292901b43719c0e34cc7eef565b38a6bf84acf50f38cd",
-                    "MacAddress": "02:42:ac:11:00:03",
-                    "IPv4Address": "172.17.0.3/16",
-                    "IPv6Address": ""
-                },
-                "da33b7aa74b0bf3bda3ebd502d404320ca112a268aafe05b4851d1e3312ed168": {
-                    "Name": "alpine1",
-                    "EndpointID": "46c044a645d6afc42ddd7857d19e9dcfb89ad790afb5c239a35ac0af5e8a5bc5",
-                    "MacAddress": "02:42:ac:11:00:02",
-                    "IPv4Address": "172.17.0.2/16",
-                    "IPv6Address": ""
-                }
-            },
-            "Options": {
-                "com.docker.network.bridge.default_bridge": "true",
-                "com.docker.network.bridge.enable_icc": "true",
-                "com.docker.network.bridge.enable_ip_masquerade": "true",
-                "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
-                "com.docker.network.bridge.name": "docker0",
-                "com.docker.network.driver.mtu": "1500"
-            },
-            "Labels": {}
-        }
-    ]
+    docker service ls
+    ID             NAME                               MODE         REPLICAS   IMAGE                                      PORTS
+    gr7fw4vvrvtd   test-service                       replicated   3/3        nginx:latest                               *:8080->80/tcp
     ```
 
-    Near the top, information about the `bridge` network is listed, including
-    the IP address of the gateway between the Docker host and the `bridge`
-    network (`172.17.0.1`). Under the `Containers` key, each connected container
-    is listed, along with information about its IP address (`172.17.0.2` for
-    `alpine1` and `172.17.0.3` for `alpine2`).
+    This will show a list of all the services running in the Swarm, including the **test-service** service that you just created.
 
-4.  The containers are running in the background. Use the `docker attach`
-    command to connect to `alpine1`.
+5.  Create a new standalone container and connect it to the same network as the **test-service** service by running the following command:
 
     ```console
-    $ docker attach alpine1
-
-    / #
+    docker run -it --name test-container --network test-net  alpine:latest sh
     ```
 
-    The prompt changes to `#` to indicate that you are the `root` user within
-    the container. Use the `ip addr show` command to show the network interfaces
-    for `alpine1` as they look from within the container:
+    This command creates a new container called **test-service** running the alpine container image and connects it to a previously created overlay network. The `--network` option specifies the name of the network to connect the container to.
+
+    Test the connection between the container and the service by running the following command inside standalone container:
 
     ```console
-    # ip addr show
+    / # ping -c 2 test-service
+    PING test-service (10.0.0.5): 56 data bytes
+    64 bytes from 10.0.0.5: seq=0 ttl=64 time=0.600 ms
+    64 bytes from 10.0.0.5: seq=1 ttl=64 time=0.555 ms
 
-    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
-        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-        inet 127.0.0.1/8 scope host lo
-           valid_lft forever preferred_lft forever
-        inet6 ::1/128 scope host
-           valid_lft forever preferred_lft forever
-    27: eth0@if28: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP
-        link/ether 02:42:ac:11:00:02 brd ff:ff:ff:ff:ff:ff
-        inet 172.17.0.2/16 scope global eth0
-           valid_lft forever preferred_lft forever
-        inet6 fe80::42:acff:fe11:2/64 scope link
-           valid_lft forever preferred_lft forever
-    ```
-
-    The first interface is the loopback device. Ignore it for now. Notice that
-    the second interface has the IP address `172.17.0.2`, which is the same
-    address shown for `alpine1` in the previous step.
-
-5.  From within `alpine1`, make sure you can connect to the internet by
-    pinging `google.com`. The `-c 2` flag limits the command two two `ping`
-    attempts.
-
-    ```console
-    # ping -c 2 google.com
-
-    PING google.com (172.217.3.174): 56 data bytes
-    64 bytes from 172.217.3.174: seq=0 ttl=41 time=9.841 ms
-    64 bytes from 172.217.3.174: seq=1 ttl=41 time=9.897 ms
-
-    --- google.com ping statistics ---
+    --- test-service ping statistics ---
     2 packets transmitted, 2 packets received, 0% packet loss
-    round-trip min/avg/max = 9.841/9.869/9.897 ms
+    round-trip min/avg/max = 0.555/0.577/0.600 ms
     ```
 
-6.  Now try to ping the second container. First, ping it by its IP address,
-    `172.17.0.3`:
-
-    ```console
-    # ping -c 2 172.17.0.3
-
-    PING 172.17.0.3 (172.17.0.3): 56 data bytes
-    64 bytes from 172.17.0.3: seq=0 ttl=64 time=0.086 ms
-    64 bytes from 172.17.0.3: seq=1 ttl=64 time=0.094 ms
-
-    --- 172.17.0.3 ping statistics ---
-    2 packets transmitted, 2 packets received, 0% packet loss
-    round-trip min/avg/max = 0.086/0.090/0.094 ms
-    ```
-
-    This succeeds. Next, try pinging the `alpine2` container by container
-    name. This will fail.
-
-    ```console
-    # ping -c 2 alpine2
-
-    ping: bad address 'alpine2'
-    ```
-
-7.  Detach from `alpine1` without stopping it by using the detach sequence,
-    `CTRL` + `p` `CTRL` + `q` (hold down `CTRL` and type `p` followed by `q`).
-    If you wish, attach to `alpine2` and repeat steps 4, 5, and 6 there,
-    substituting `alpine1` for `alpine2`.
-
-8.  Stop and remove both containers.
-
-    ```console
-    $ docker container stop alpine1 alpine2
-    $ docker container rm alpine1 alpine2
-    ```
-
-Remember, the default `bridge` network is not recommended for production. To
-learn about user-defined bridge networks, continue to the
-[next tutorial](network-tutorial-standalone.md#use-user-defined-bridge-networks).
+You have now created a Docker Swarm service with three replicas and connected a standalone container to the same network as the service, allowing the container to communicate with the service using the service's name as the hostname.
 
 ## Other networking tutorials
 
