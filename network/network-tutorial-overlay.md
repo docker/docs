@@ -466,7 +466,7 @@ an example of how to create a service in a Docker Swarm and connect to it from a
 3.  Run the following command to create a Docker service named **test-service** and connect it to the **test-net** network:
 
     ```console
-    docker service create --name test-service --network test-net --replicas 3 --publish published=8080,target=80 nginx:latest
+    $ docker service create --name test-service --network test-net --replicas 3 --publish published=8080,target=80 nginx:latest
     ```
 
     This command creates a new service called **test-service** with three replicas, running the nginx container image and publishing port 80 in the container to port 8080 on the host. The `--publish` option maps the container's port 80 to the host's port 8080, allowing external access to the service.
@@ -474,7 +474,7 @@ an example of how to create a service in a Docker Swarm and connect to it from a
 4.  Verify that the service is running by running the following command:
 
     ```console
-    docker service ls
+    $ docker service ls
     ID             NAME                               MODE         REPLICAS   IMAGE                                      PORTS
     gr7fw4vvrvtd   test-service                       replicated   3/3        nginx:latest                               *:8080->80/tcp
     ```
@@ -484,7 +484,7 @@ an example of how to create a service in a Docker Swarm and connect to it from a
 5.  Create a new standalone container and connect it to the same network as the **test-service** service by running the following command:
 
     ```console
-    docker run -it --name test-container --network test-net  alpine:latest sh
+    $ docker run -it --name test-container --network test-net  alpine:latest sh
     ```
 
     This command creates a new container called **test-service** running the alpine container image and connects it to a previously created overlay network. The `--network` option specifies the name of the network to connect the container to.
