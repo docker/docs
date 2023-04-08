@@ -15,10 +15,10 @@ changes won't be seen in another container, _even if_ they are using the same im
 
 ### See this in practice
 
-To see this in action, we're going to start two containers and create a file in each.
+To see this in action, we're going to run two containers and create a file in each.
 What you'll see is that the files created in one container aren't available in another.
 
-1. Start an `ubuntu` container that will create a file named `/data.txt` with a random number
+1. Run an `ubuntu` container that will create a file named `/data.txt` with a random number
    between 1 and 10000.
 
     ```console
@@ -46,7 +46,7 @@ What you'll see is that the files created in one container aren't available in a
 
     You should see a random number!
 
-3. Now, let's start another `ubuntu` container (the same image) and we'll see we don't have the same
+3. Now, let's run another `ubuntu` container (the same image) and we'll see we don't have the same
    file.
 
     ```console
@@ -61,13 +61,13 @@ What you'll see is that the files created in one container aren't available in a
 
 ## Container volumes
 
-With the previous experiment, we saw that each container starts from the image definition each time it starts. 
+With the previous experiment, we saw that each container's state begins with the image definition when it is created. 
 While containers can create, update, and delete files, those changes are lost when the container is removed 
 and all changes are isolated to that container. With volumes, we can change all of this.
 
 [Volumes](../storage/volumes.md) provide the ability to connect specific filesystem paths of 
 the container back to the host machine. If a directory in the container is mounted, changes in that
-directory are also seen on the host machine. If we mount that same directory across container restarts, we'd see
+directory are also seen on the host machine. If we mount that same directory across container creations, we'd see
 the same files.
 
 There are two main types of volumes. We will eventually use both, but we will start with volume mounts.
@@ -110,7 +110,7 @@ name of the volume.
 
 5. Stop and remove the container for the todo app. Use the Dashboard or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
 
-6. Start a new container using the same command from above.
+6. Run a new container using the same command from above.
 
 7. Open the app. You should see your items still in your list!
 
