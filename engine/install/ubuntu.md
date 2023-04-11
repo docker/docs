@@ -94,8 +94,9 @@ Docker from the repository.
 2.  Add Docker's official GPG key:
 
     ```console
-    $ sudo mkdir -m 0755 -p /etc/apt/keyrings
+    $ sudo install -m 0755 -d /etc/apt/keyrings
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
     ```
 
 3.  Use the following command to set up the repository:
@@ -114,18 +115,6 @@ Docker from the repository.
    ```console
    $ sudo apt-get update
    ```
-
-   > Receiving a GPG error when running `apt-get update`?
-   >
-   > Your default [umask](https://en.wikipedia.org/wiki/Umask){: target="blank"
-   > rel="noopener" } may be incorrectly configured, preventing detection of the
-   > repository public key file. Try granting read permission for the Docker
-   > public key file before updating the package index:
-   >
-   > ```console
-   > $ sudo chmod -R a+rx /etc/apt/keyrings
-   > $ sudo apt-get update
-   > ```
 
 2. Install Docker Engine, containerd, and Docker Compose.
 
