@@ -1,9 +1,9 @@
 ---
 title: "Containerize an application"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+keywords: dockerfile example, Containerize an application, run docker file, running docker file, how to run dockerfile, example dockerfile, how to create a docker container, create dockerfile, simple dockerfile, creating containers
 redirect_from:
 - /get-started/part2/
-description: Containerize and run a simple application to learn Docker
+description: Follow this step-by-step guide to learn how to create and run a containerized application using Docker
 ---
 
 For the rest of this guide, you'll be working with a simple todo
