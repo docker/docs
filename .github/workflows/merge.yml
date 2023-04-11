@@ -17,5 +17,8 @@ jobs:
         with:
           delete-branch: false
           branch: published
-          commit-message: publish updates from main
-
+          commit-message: &msg publish updates from main
+          labels: area/release
+          title: *msg
+          body: |
+            Automated pull request for publishing docs updates.
