@@ -37,6 +37,7 @@ pass to `--driver-opt`:
 | `limits.memory`   | Memory size       |                                         | Sets the limit memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G`   |
 | `nodeselector`    | CSV string        |                                         | Sets the pod's `nodeSelector` label(s). See [node assignment][2].                                                                    |
 | `tolerations`     | CSV string        |                                         | Configures the pod's taint toleration. See [node assignment][2].                                                                     |
+| `serviceaccount`  | String            |                                         | Sets the pod's `serviceAccountName`.                                                                                                 |
 | `rootless`        | `true`,`false`    | `false`                                 | Run the container as a non-root user. See [rootless mode][3].                                                                        |
 | `loadbalance`     | `sticky`,`random` | `sticky`                                | Load-balancing strategy. If set to `sticky`, the pod is chosen using the hash of the context path.                                   |
 | `qemu.install`    | `true`,`false`    |                                         | Install QEMU emulation for multi platforms support. See [QEMU][4].                                                                   |
