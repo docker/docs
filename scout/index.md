@@ -50,7 +50,7 @@ Docker Scout is activated for your organization automatically.
 Advanced image analysis is a feature in Docker Hub which, when enabled, triggers
 a Docker Scout analysis every time you push an image. The analysis updates
 continuously, meaning that the vulnerability report for an image is always up to
-date as new CVEs are discovered. No need to re-scan an image.
+date as Docker Scout discovers new CVEs. No need to re-scan an image.
 
 For more information, see
 [Advanced image analysis](./advanced-image-analysis.md).
