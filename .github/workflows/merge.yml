@@ -1,0 +1,21 @@
+name: merge
+
+# open or update publishing PR when there is a push to main
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  main-to-published:
+    runs-on: ubuntu-22.04
+    if: github.repository_owner == 'docker'
+    steps:
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          delete-branch: false
+          branch: published
+          commit-message: publish updates from main
+
