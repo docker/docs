@@ -13,4 +13,5 @@ IgnoreURLs:
 IgnoreDirs:
 - "engine/api"
 - "registry/configuration"
+- "compose/compose-file" # temporarily ignore until upstream is fixed
 CacheExpires: "6h"
