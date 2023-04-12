@@ -1,0 +1,16 @@
+DirectoryPath: "_site"
+EnforceHTTPS: false
+CheckDoctype: false
+CheckExternal: false
+IgnoreAltMissing: true
+IgnoreAltEmpty: true
+IgnoreEmptyHref: true
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreURLs:
+- "^/docker-hub/api/latest/.*$"
+- "^/engine/api/v.+/#.*$"
+- "^/glossary/.*$"
+IgnoreDirs:
+- "engine/api"
+- "registry/configuration"
+CacheExpires: "6h"
