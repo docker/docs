@@ -28,9 +28,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-04-03" %}
 
-> Download Docker Desktop
->
-> {% include desktop-install.html %}
+{% include desktop-install.md all=true build_path="/" %}
 
 ### New
 
@@ -96,27 +94,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-03-20" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/101757/Docker%20Desktop%20Installer.exe)
-
-<div class="panel-group" id="accordion14" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading14">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion14" href="#collapse14" aria-expanded="true" aria-controls="collapse14">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 2ea284648a5f708428f3a06bb8e1eb68cbeba6689b53c53d7ca24043a8f34800</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md win=true build_path="/101757/" %}
 
 ### Bug fixes and enhancements
 
@@ -135,37 +113,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-02-27" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/99724/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/99724/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/99724/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/99724/docker-desktop-4.17.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/99724/docker-desktop-4.17.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/99724/docker-desktop-4.17.0-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion15" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading15">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion15" href="#collapse15" aria-expanded="true" aria-controls="collapse15">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse15" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading15">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 69ea659b0ca0e160a1de9bd63dc5697f5eb89fff1d33484fb8ef9793e43d0d45</li>
-      <li><b>Mac Intel:</b> SHA-256 eb0531122a62859ce7b029e943fdad365603a916e6c15c107514c1e4a818d7ef</li>
-      <li><b>Mac Arm:</b> SHA-256 5e01465d93dfe18d7678a96705e7c26bb654b6766f06373b5cffbf77c641bccc</li>
-      <li><b>Linux DEB:</b> SHA-256 6828d35ae02763255790de6690909935a1f7c951373179ac0efd6c6b578b5219</li>
-      <li><b>Linux RPM:</b> SHA-256 7973c5bf41bdc78ca39ba64f93c6e4a33263d8dbfc604651bf1562bfeeea26f7</li>
-      <li><b>Linux Arch:</b> SHA-256 c783ce942c84f899d1f576d01d34fd4de3cefa0a1d577eda2bc5c4ceaec6cfdb</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/99724/" %}
 
 ### New
 
@@ -246,27 +194,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-01-30" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/96739/Docker%20Desktop%20Installer.exe)
-
-<div class="panel-group" id="accordion14" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading14">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion14" href="#collapse14" aria-expanded="true" aria-controls="collapse14">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse14" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading14">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 5f6db3cf5a2084fc7c584c90792f38a0caac91c4eed4f8653dde7bb8148517f1</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md win=true build_path="/96739/" %}
 
 ### Bug fixes and enhancements
 
@@ -279,37 +207,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-01-19" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/95914/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95914/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95914/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/95914/docker-desktop-4.16.2-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion13" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading13">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion13" href="#collapse13" aria-expanded="true" aria-controls="collapse13">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse13" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading13">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 20e4ba05b573610506b57a7f216115458019d2c002f18ef6d50a2419b7db545b</li>
-      <li><b>Mac Intel:</b> SHA-256 22eecb8ea07f10892d81cde07d614fb8b342163106133a75c4280a8e28787643</li>
-      <li><b>Mac Arm:</b> SHA-256 838eabe6cc42fe7e4be2cdb4d73924c61fc7982366dac2a9467793845851cb2e</li>
-      <li><b>Linux DEB:</b> SHA-256 fa3023eb16c24dcbdc5f12021340e874d8399863e96c1a58091c9a41fd50fe58</li>
-      <li><b>Linux RPM:</b> SHA-256 7f54f29a971b9ba456e7aef777d747867d7e4eccb7a2b47aa9092c99a990f8d5</li>
-      <li><b>Linux Arch:</b> SHA-256 05e94709974e711bf81aa16845ebba976f8236a371432594c87a68ecf9a21d0f</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/95914/" %}
 
 ### Bug fixes and enhancements
 
@@ -330,37 +228,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-01-13" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/95567/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95567/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95567/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.1-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.1-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/95567/docker-desktop-4.16.1-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion12" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading12">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion12" href="#collapse12" aria-expanded="true" aria-controls="collapse12">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse12" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading12">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 8260a2fbd3cf7e9050ed7348e5c528314df82f1c460c70919afd0e5f95913f14</li>
-      <li><b>Mac Intel:</b> SHA-256 b6d8720e2ceb64a6102c5efba53e2adf441c60508457aeb8cc1fd7c30cd7b28f</li>
-      <li><b>Mac Arm:</b> SHA-256 327725664ac86d34ee3b311b09eace0075492f7ff3e0e384015171769f75bff4</li>
-      <li><b>Linux DEB:</b> SHA-256 8400f9b1bab837b1d2a12597ec74ece859a5e53f5244cd101c72d3b384ac44b4</li>
-      <li><b>Linux RPM:</b> SHA-256 0d2074f6a6fa66300810168ea5c572f81616753c698bc5246a89ad374beaec22</li>
-      <li><b>Linux Arch:</b> SHA-256 11344e66c76ed6ce66b8b077dd86870fc5d63cdcd96941d664de9b65e2123baf</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/95567/" %}
 
 ### Bug fixes and enhancements
 
@@ -372,37 +240,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-01-12" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/95345/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/95345/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/95345/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/95345/docker-desktop-4.16.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/95345/docker-desktop-4.16.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/95345/docker-desktop-4.16.0-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion11" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading11">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion11" href="#collapse11" aria-expanded="true" aria-controls="collapse11">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse11" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading11">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 f02fcd23410f9304bde7cd0b415731614adfd2e70bbb09f669a068c88ddd84f2</li>
-      <li><b>Mac Intel:</b> SHA-256 4fa95e90b6c39400943b263ae5aa1bb6db5b26043dd0148c4e37d3033a754d33</li>
-      <li><b>Mac Arm:</b> SHA-256 3101934a3b062b373a22fd994d743fa6a08fa805695839e6b63bc2d28ebcf59a</li>
-      <li><b>Linux DEB:</b> SHA-256 102b79efd90be5ff72fb6ba4bb385621f4e6ab23c19b14d19d525c10f20bdfdd</li>
-      <li><b>Linux RPM:</b> SHA-256 5145cc5073d4a0b998ebd65b96c5a46bd2d99a1572d5be8cff502a77b2c58c01</li>
-      <li><b>Linux Arch:</b> SHA-256 ab4af236b435489d49553b63f25a18c098677dd9abc176531cdcc3d67831461e</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/95345/" %}
 
 ### New
 
@@ -466,37 +304,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-12-01" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/93002/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/93002/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/93002/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/93002/docker-desktop-4.15.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/93002/docker-desktop-4.15.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/93002/docker-desktop-4.15.0-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion10" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading10">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion10" href="#collapse10" aria-expanded="true" aria-controls="collapse10">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse10" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading10">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 04dbd937971f1940e22f1edab9cad90722268b3f98feb77140535e1ac64606a8</li>
-      <li><b>Mac Intel:</b> SHA-256 bee41d646916e579b16b7fae014e2fb5e5e7b5dbaf7c1949821fd311d3ce430b</li>
-      <li><b>Mac Arm:</b> SHA-256 fc8609d57fb8c8264122f581c0f66497e46e171f8027d85d90213527d6226362</li>
-      <li><b>Linux DEB:</b> SHA-256 744266c6adef23e0823facded844f3b879fd0a988f8604f9b620d7585f249cf9</li>
-      <li><b>Linux RPM:</b> SHA-256 84e206c3e4742d37c7ef7d3d7440c5a085e1a4a77da2c628d133324a3f77f891</li>
-      <li><b>Linux Arch:</b> SHA-256 43156553268ccc8cb11eef08ac375c90af60ccdc65ae407bdf100ff2e50c6867</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/93002/" %}
 
 ### New
 
@@ -549,37 +357,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-11-17" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/91661/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/91661/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/91661/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/91661/docker-desktop-4.14.1-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/91661/docker-desktop-4.14.1-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/91661/docker-desktop-4.14.1-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion9" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading9">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion9" href="#collapse9" aria-expanded="true" aria-controls="collapse9">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading9">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 1e6d8fadff3393110029eeda2e40344e6a99a90ec69dab0b92327e79afef30c6</li>
-      <li><b>Mac Intel:</b> SHA-256 c70534abce8e288178fdff9fa89d110a93257b008e1e69c69465f6b41d26155f</li>
-      <li><b>Mac Arm:</b> SHA-256 d244fb20ffb94d0ea3837c0b55555f983881405d22fce1e187ced39efbb188a1</li>
-      <li><b>Linux DEB:</b> SHA-256 97698848c1ac1f1b8a6144c497f113cd2ca9e6c3399de7af981d12d1957da1de</li>
-      <li><b>Linux RPM:</b> SHA-256 4393c1ff4da3adac51dbe735d3a498167c59efc9d67d11f3a5c8aac3b629e59c</li>
-      <li><b>Linux Arch:</b> SHA-256 992c0f599234ea88f0af731bff3de3ba35a76366164eae6b755aaf41ef098b24</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/91661/" %}
 
 ### Bug fixes and enhancements
 
@@ -596,37 +374,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-11-10" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/91374/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/91374/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/91374/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/91374/docker-desktop-4.14.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/91374/docker-desktop-4.14.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/91374/docker-desktop-4.14.0-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion8" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading8">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion8" href="#collapse8" aria-expanded="true" aria-controls="collapse8">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading8">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 7e2d34cb7573b81cc067ff9e979e44675d46eb6a26801031c27f83bbf93dfc3b</li>
-      <li><b>Mac Intel:</b> SHA-256 f554d67e1189efdc5e85e4c28bc4b82a979914016bfb5cc83cde719d557ce062</li>
-      <li><b>Mac Arm:</b> SHA-256 38be55c1dc0686e17c761c4953892ff21ffc5cddef19171e428ca2c0224f3b95</li>
-      <li><b>Linux DEB:</b> SHA-256 5b9e701a907a901c77f2093e54a41b5d706e97e39a30416d5c1519a77f024240</li>
-      <li><b>Linux RPM:</b> SHA-256 505f503636acf842cf5228d21d30f95d8e5d0f111feb9a1448f21d80c8169e93</li>
-      <li><b>Linux Arch:</b> SHA-256 8bcf97f361f02e9a7ba3fb2bab4b0905d51d75f7b2ef918c31d946a2a1ab201d</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/91374/" %}
 
 ### New
 
@@ -687,37 +435,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-10-31" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/90346/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/90346/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/90346/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/90346/docker-desktop-4.13.1-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/90346/docker-desktop-4.13.1-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/90346/docker-desktop-4.13.1-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion7" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading7">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion7" href="#collapse7" aria-expanded="true" aria-controls="collapse7">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 11bb799f85668f368e3071ac17067ebbe575349d1ccfb7c28a5dc1f872ced54e</li>
-      <li><b>Mac Intel:</b> SHA-256 9147ca38d46c59a758ac53560814c91c4deda9b0c4c63adfa3df76f37bacbf00</li>
-      <li><b>Mac Arm:</b> SHA-256 21a2bd82ade4b4776d3a4c28524e114733f172e9cd4f1da2193487db217c319f</li>
-      <li><b>Linux DEB:</b> SHA-256 1be90be14b53bc555d3bc16e4b9454d9dff0286b90c4b864cfdbb2e0cdbd2a56</li>
-      <li><b>Linux RPM:</b> SHA-256 49516e246d61d2f8da6753408e3c42c5a71d06de155aaea584135e34dde3af33</li>
-      <li><b>Linux Arch:</b> SHA-256 7fb7ef0fdcb762df2298dcd2578d3c749cccd554e3c652ba7a4648ce815ca140</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/90346/" %}
 
 ### Updates
 
@@ -744,37 +462,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-10-19" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/89412/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/89412/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/89412/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/89412/docker-desktop-4.13.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/89412/docker-desktop-4.13.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/89412/docker-desktop-4.13.0-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion6" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading6">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion6" href="#collapse6" aria-expanded="true" aria-controls="collapse6">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 2452d4c9e315d36ad4cade724c962dd18515b8e2f0c2e7f66290648e0319d72b</li>
-      <li><b>Mac Intel:</b> SHA-256 5a9e7b810bc9937a0945f9cbbb7ec00c2c5c386b5897c59c1c93187eaf0f2081</li>
-      <li><b>Mac Arm:</b> SHA-256 f33037ef7b02946d5714012398848654bd7a759ee729b0346acc46a8e73a76ed</li>
-      <li><b>Linux DEB:</b> SHA-256 aa1d4ee1c2c72bf7be05c88d33d8f1f6344ab4e6d9de52f50367d9e799641102</li>
-      <li><b>Linux RPM:</b> SHA-256 6f70246d11d06f123b8011eeafb7b0a161d60764719b44b817a49dee7da4a06e</li>
-      <li><b>Linux Arch:</b> SHA-256 8aa42c18d643b5dc333cbea096f9585d89b912344a26fc9ea902f30d2c5140d8</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/89412/" %}
 
 ### New
 
@@ -841,37 +529,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-09-01" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/85629/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/85629/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/85629/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/85629/docker-desktop-4.12.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/85629/docker-desktop-4.12.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/85629/docker-desktop-4.12.0-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion5" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading5">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion5" href="#collapse5" aria-expanded="true" aria-controls="collapse5">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 996a4c5fff5b80b707ecfc0121d7ebe70d96c0bd568f058fd96f32cdec0c10cf</li>
-      <li><b>Mac Intel:</b> SHA-256 41085009458ba1741c6a86c414190780ff3b288879aa27821fc4a985d229653c</li>
-      <li><b>Mac Arm:</b> SHA-256 7eb63b4819cd1f87c61d5e8f54613692e07fb203d81bcf8d66f5de55489d3b81</li>
-      <li><b>Linux DEB:</b> SHA-256 4407023db032219d6ac6031f81da6389ab192d3d06084ee6dad1ba4f4c64a4fe</li>
-      <li><b>Linux RPM:</b> SHA-256 05e91f2a9763089acdfe710140893cb096bec955bcd99279bbe3aea035d09bc5</li>
-      <li><b>Linux Arch:</b> SHA-256 7c6b43c8ab140c755e6c8ce4ec494b3f5c4f3b0c1ab3cee8bfd0b6864f795d8a</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/85629/" %}
 
 ### New
 
@@ -951,37 +609,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-08-05" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/84025/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/84025/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/84025/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.1-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.1-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/84025/docker-desktop-4.11.1-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion4" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="heading4">
-      <h5 class="panel-title">
-        <a role="button" data-toggle="collapse" data-parent="#accordion4" href="#collapse4" aria-expanded="true" aria-controls="collapse4">
-          Checksums
-          <i class="fa fa-chevron-down"></i>
-        </a>
-      </h5>
-    </div>
-    <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
-      <div class="panel-body">
-      <li><b>Windows:</b> SHA-256 8af32948447ddab655455542f6a12c8d752642a2bd451e2a48f76398cfd872b0</li>
-      <li><b>Mac Intel:</b> SHA-256 b2f4ad8fea37dfb7d9147f169a9ceab71d7d0d12ff912057c60b58c0e91aed35</li>
-      <li><b>Mac Arm:</b> SHA-256 a7d84117bef83764cb9bf275cd01b8ba0c43f08dbfe4d4a7d4f05549cdd81f54</li>
-      <li><b>Linux DEB:</b> SHA-256 8877443ded0dee19b1bacaa608bd81d4bb216b59ff5fc12c89489e9ac5b00e0f</li>
-      <li><b>Linux RPM:</b> SHA-256 a4a12071cdb4c3a845711eec13b97b838ae088f85f81cb5dd0db51aa6b050ed5</li>
-      <li><b>Linux Arch:</b> SHA-256 66bdf3b4eb3cd29e190cf660ede53d3e854a4ec823c2ea04a4a02a175203f880</li>
-      </div>
-    </div>
-  </div>
-</div>
+{% include desktop-install.md all=true build_path="/84025/" %}
 
 ### Bug fixes and enhancements
 
@@ -997,37 +625,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-07-28" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/83626/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/83626/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/83626/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/83626/docker-desktop-4.11.0-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading3">
-        <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion3" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
-            Checksums
-            <i class="fa fa-chevron-down"></i>
-          </a>
-        </h5>
-      </div>
-      <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
-        <div class="panel-body">
-        <li><b>Windows:</b> SHA-256 48ca8cabe67aee94a934b4c0f97a5001e89cb66bbbf824924fbc8bed6a8c90d3</li>
-        <li><b>Mac Intel:</b> SHA-256 295694d7c2df05e37ac0d27fe8be5af6295b1edc6fa00a00a47134a14d5d0b34</li>
-        <li><b>Mac Arm:</b> SHA-256 9824103e3d5a7d01a4d7d8086210157e1cc02217cb9edd82fe4bf2d16c138c44</li>
-        <li><b>Linux DEB:</b> SHA-256 a0dc8ac97cc21e5a13a9e316cac11d85b7c248fd0c166b22a2ab239d17d43d9f</li>
-        <li><b>Linux RPM:</b> SHA-256 eb077737298827092b283d3c85edacd128ecd993e987aa30d8081e2306401774</li>
-        <li><b>Linux Arch:</b> SHA-256 a85fd5e83d5b613ef43d335c0ab0af4600aeb8a92921b617cb7a555826e361de</li>
-        </div>
-      </div>
-    </div>
-  </div>
+{% include desktop-install.md all=true build_path="/83626/" %}
 
 ### New
 
@@ -1085,37 +683,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-07-05" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/82475/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/82475/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/82475/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/82475/docker-desktop-4.10.1-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading2">
-        <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
-            Checksums
-            <i class="fa fa-chevron-down"></i>
-          </a>
-        </h5>
-      </div>
-      <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
-        <div class="panel-body">
-        <li><b>Windows:</b> SHA-256 fe430d19d41cc56fd9a4cd2e22fc0e3522bed910c219208345918c77bbbd2a65</li>
-        <li><b>Mac Intel:</b> SHA-256 8be8e5245d6a8dbf7b8cb580fb7d99f04cc143c95323695c0d9be4f85dd60b0e</li>
-        <li><b>Mac Arm:</b> SHA-256 b3d4ef222325bde321045f3b8d946c849cd2812e9ad52a801000a95edb8af57b</li>
-        <li><b>Linux DEB:</b> SHA-256 9363bc584478c5c7654004bacb51429c275b58a868ef43c3bc6249d5844ec5be</li>
-        <li><b>Linux RPM:</b> SHA-256 92371d1a1ae4b57921721da95dc0252aefa4c79eb12208760c800ac07c0ae1d2</li>
-        <li><b>Linux Arch:</b> SHA-256 799af244b05e8b08f03b6e0dbbc1dfcc027ff49f15506b3c460e0f9bae06ca5d</li>
-        </div>
-      </div>
-    </div>
-  </div>
+{% include desktop-install.md all=true build_path="/82475/" %}
 
 ### Bug fixes and enhancements
 
@@ -1131,37 +699,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-06-30" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/82025/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/82025/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/82025/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/82025/docker-desktop-4.10.0-x86_64.pkg.tar.zst)
-
-<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="heading1">
-        <h5 class="panel-title">
-          <a role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
-            Checksums
-            <i class="fa fa-chevron-down"></i>
-          </a>
-        </h5>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
-        <div class="panel-body">
-        <li><b>Windows:</b> SHA-256 10615f4425e59eef7a22ce79ec13e41057df278547aa81c9fe4d623a848e80d8</li>
-        <li><b>Mac Intel:</b> SHA-256 07bfe00296b724e4e772e268217bc8169a8b23ad98e6da419b13ebfe31b54643</li>
-        <li><b>Mac Arm:</b> SHA-256 c9d2e72e5438726ab5a94c227d9130a65719f8fd09b877860ca2dcd86cfc188e</li>
-        <li><b>Linux DEB:</b> SHA-256 c5f10b3d902b4ea10c8f75c17ba174e8838fc75889f76bc27abcab6afaf1969c</li>
-        <li><b>Linux RPM:</b> SHA-256 a8ad3f8d4e93dfb6f28559f7dc84b7652e651fd6a49506e18958f1e69b51d9be</li>
-        <li><b>Linux Arch:</b> SHA-256 37131c48df6436c1066c41ec0beda039e726e33bee689f751648c473f4abd96e</li>
-        </div>
-      </div>
-    </div>
-  </div>
+{% include desktop-install.md all=true build_path="/82025/" %}
 
 ### New
 
@@ -1231,14 +769,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-06-16" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/81317/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/81317/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/81317/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/81317/docker-desktop-4.9.1-x86_64.pkg.tar.zst)
+{% include desktop-install.md all=true build_path="/81317/" %}
 
 ### Bug fixes and enhancements
 
@@ -1250,14 +781,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-06-02" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/80466/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/80466/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/80466/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/80466/docker-desktop-4.9.0-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/80466/docker-desktop-4.9.0-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/80466/docker-desktop-4.9.0-x86_64.pkg.tar.zst)
+{% include desktop-install.md all=true build_path="/80466/" %}
 
 ### New
 
@@ -1307,14 +831,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-05-18" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/79419/Docker%20Desktop%20Installer.exe)|
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/79419/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/79419/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/79419/docker-desktop-4.8.2-amd64.deb) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/79419/docker-desktop-4.8.2-x86_64.rpm) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/79419/docker-desktop-4.8.2-x86_64.pkg.tar.zst)
+{% include desktop-install.md all=true build_path="/79419/" %}
 
 ### Updates
 
@@ -1336,14 +853,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-05-09" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/78998/Docker%20Desktop%20Installer.exe)|
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/78998/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/78998/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.1-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.1-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64)
+{% include desktop-install.md all=true build_path="/78998/" %}
 
 ### New
 
@@ -1366,14 +876,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-05-06" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/78933/Docker%20Desktop%20Installer.exe)|
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/78933/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/78933/Docker.dmg) |
-> [Debian](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
-> [RPM](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) |
-> [Arch package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.8.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64)
+{% include desktop-install.md all=true build_path="/78933/" %}
 
 ### New
 
@@ -1435,11 +938,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-04-19" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/77678/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/77678/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/77678/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/77678/" %}
 
 ### Bug fixes and enhancements
 
@@ -1456,11 +955,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-04-07" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/77141/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/77141/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/77141/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/77141/" %}
 
 ### New
 
@@ -1505,11 +1000,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-03-22" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/76265/Docker%20Desktop%20Installer.exe)|
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/76265/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/76265/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/76265/" %}
 
 ### Updates
 
@@ -1525,11 +1016,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-03-14" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/75818/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/75818/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/75818/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/75818/" %}
 
 ### New
 
@@ -1601,9 +1088,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-02-15" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/74721/Docker%20Desktop%20Installer.exe)
+{% include desktop-install.md win=true build_path="/74721/" %}
 
 ### Bug fixes and enhancements
 
@@ -1619,10 +1104,7 @@ Alternatively, you can edit the Docker Desktop settings file located at `%APPDAT
 
 {% include release-date.html date="2022-02-10" %}
 
-> Download Docker Desktop
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/74594/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/74594/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/74594/" %}
 
 ### New
 
@@ -1672,9 +1154,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 {% include release-date.html date="2022-01-24" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/73704/Docker%20Desktop%20Installer.exe)
+{% include desktop-install.md win=true build_path="/73704/" %}
 
 ### Bug fixes and enhancements
 
@@ -1694,9 +1174,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 {% include release-date.html date="2022-01-14" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/73365/Docker%20Desktop%20Installer.exe)
+{% include desktop-install.md win=true build_path="/73365/" %}
 
 ### Bug fixes and enhancements
 
@@ -1716,11 +1194,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 {% include release-date.html date="22-01-13" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/73305/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/73305/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/73305/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/73305/" %}
 
 ### New
 
@@ -1773,13 +1247,9 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 ## 4.3.2
 
-2021-12-21
+{% include release-date.html date="2021-12-21" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/72729/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/72729/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/72729/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/72729/" %}
 
 ### Security
 
@@ -1805,13 +1275,9 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 ## 4.3.1
 
-2021-12-11
+{% include release-date.html date="2021-12-11" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/72247/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/72247/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/72247/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/72247/" %}
 
 ### Upgrades
 
@@ -1831,13 +1297,9 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 ## 4.3.0
 
-2021-12-02
+{% include release-date.html date="2021-12-02" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/71786/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/71786/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/71786/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/71786/" %}
 
 ### Upgrades
 
@@ -1883,13 +1345,9 @@ actual memory usage. See
 
 ## 4.2.0
 
-2021-11-09
+{% include release-date.html date="2021-11-09" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/70708/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/70708/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/70708/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/70708/" %}
 
 ### New
 
@@ -1935,13 +1393,9 @@ actual memory usage. See
 
 ## 4.1.1
 
-2021-10-12
+{% include release-date.html date="2021-10-12" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/69879/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/69879/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/69879/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/69879/" %}
 
 ### Bug fixes and minor changes
 
@@ -1960,13 +1414,9 @@ actual memory usage. See
 
 ## 4.1.0
 
-2021-09-30
+{% include release-date.html date="2021-09-30" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/69386/Docker%20Desktop%20Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/69386/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/69386/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/69386/" %}
 
 ### New
 
@@ -2005,13 +1455,9 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 ## 4.0.1
 
-2021-09-13
+{% include release-date.html date="2021-09-13" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/68347/Docker Desktop Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/68347/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/68347/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/68347/" %}
 
 ### Upgrades
 
@@ -2032,13 +1478,9 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 ## 4.0.0
 
-2021-08-31
+{% include release-date.html date="2021-08-31" %}
 
-> Download Docker Desktop
->
-> [Windows](https://desktop.docker.com/win/main/amd64/67817/Docker Desktop Installer.exe) |
-> [Mac with Intel chip](https://desktop.docker.com/mac/main/amd64/67817/Docker.dmg) |
-> [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64/67817/Docker.dmg)
+{% include desktop-install.md win=true mac=true build_path="/67817/" %}
 
 ### New
 
