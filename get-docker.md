@@ -1,18 +1,12 @@
 ---
-description: Home page for Get Docker
-keywords: Docker, download, documentation, manual
+description: Download and install Docker on the platform of your choice, including Mac, Linux, or Windows. 
+keywords: install docker, docker download, download docker, docker installation, how to install docker, get docker, docker locally
 title: Get Docker
 redirect_from:
 - /install/
 - /install/overview/
 - /installation/
 ---
-
-> **Docker Desktop terms**
->
-> Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) and in government entities requires a paid
-> subscription.
 
 Docker is an open platform for developing, shipping, and running applications.
 Docker enables you to separate your applications from your infrastructure so you
@@ -56,3 +50,7 @@ section and choose the best installation path for you.
         </div>
     </div>
 </div>
+
+> **Note**
+>
+> If you're looking for information on how to install Docker Engine, see [Docker Engine installation overview](/engine/install/index.md).

@@ -4,6 +4,17 @@ long: Delete one or more manifest lists from local storage
 usage: docker manifest rm MANIFEST_LIST [MANIFEST_LIST...]
 pname: docker manifest
 plink: docker_manifest.yaml
+inherited_options:
+    - option: help
+      value_type: bool
+      default_value: "false"
+      description: Print usage
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 experimental: false
 experimentalcli: true

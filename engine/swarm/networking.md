@@ -49,7 +49,7 @@ The following three network concepts are important to swarm services:
   join a swarm. Most users do not need to customize its configuration, but
   Docker allows you to do so.
 
-> **See also** [Networking overview](../../network/index.md) for more details about swarm networking in general.
+> **See also** [Networking overview](../../network/index.md) for more details about Swarm networking in general.
 
 ## Firewall considerations
 
@@ -57,7 +57,11 @@ Docker daemons participating in a swarm need the ability to communicate with
 each other over the following ports:
 
 * Port `7946` TCP/UDP for container network discovery.
-* Port `4789` UDP for the container overlay network.
+* Port `4789` UDP (configurable) for the overlay network (including ingress) data path.
+
+When setting up networking in a Swarm, special care should be taken. Consult
+the [tutorial](swarm-tutorial/index.md#open-protocols-and-ports-between-the-hosts)
+for an overview.
 
 ## Create an overlay network
 

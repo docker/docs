@@ -164,7 +164,7 @@ To view the join command and token for manager nodes, run:
 ```console
 $ docker swarm join-token manager
 
-To add a worker to this swarm, run the following command:
+To add a manager to this swarm, run the following command:
 
     docker swarm join \
     --token SWMTKN-1-59egwe8qangbzbqb3ryawxzk3jn97ifahlsrw01yar60pmkr90-bdjfnkcflhooyafetgjod97sz \

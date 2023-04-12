@@ -5,15 +5,31 @@ usage: docker image inspect [OPTIONS] IMAGE [IMAGE...]
 pname: docker image
 plink: docker_image.yaml
 options:
-- option: format
-  shorthand: f
-  value_type: string
-  description: Format the output using the given Go template
-  deprecated: false
-  experimental: false
-  experimentalcli: false
-  kubernetes: false
-  swarm: false
+    - option: format
+      shorthand: f
+      value_type: string
+      description: |-
+        Format output using a custom template:
+        'json':             Print in JSON format
+        'TEMPLATE':         Print output using the given Go template.
+        Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: help
+      value_type: bool
+      default_value: "false"
+      description: Print usage
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 experimental: false
 experimentalcli: false

@@ -42,10 +42,10 @@ exclude:
 # Component versions -- address like site.docker_ce_version
 # You can't have - characters in these for non-YAML reasons.
 # When updating 'latest_engine_api_version', also update 'min_api_threshold' below.
-latest_engine_api_version: "1.41"
-docker_ce_version: "20.10"
+latest_engine_api_version: "1.42"
+docker_ce_version: "23.0.0"
 compose_v1_version: "1.29.2"
-compose_version: "v2.15.1"
+compose_version: "v2.17.2"
 compose_file_v3: "3.9"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
@@ -153,7 +153,7 @@ defaults:
 fetch-remote:
   - repo: "https://github.com/docker/cli"
     default_branch: "master"
-    ref: "20.10"
+    ref: "23.0"
     paths:
       - dest: "engine/extend"
         src:
@@ -171,12 +171,7 @@ fetch-remote:
 
   - repo: "https://github.com/docker/docker"
     default_branch: "master"
-    # The default branch has separate files for each API version, so we can
-    # consume the swagger files from that branch (we only publish the ones
-    # that have been released through the stubs in the engine/api/ directory).
-    # Using the default (master) branch allows for API docs changes to be
-    # published without them being cherry-picked into the release branch.
-    ref: "master"
+    ref: "23.0"
     paths:
       - dest: "engine/api"
         src:
@@ -220,3 +215,50 @@ fetch-remote:
       - dest: "build/attestations/attestation-storage.md"
         src:
           - "docs/attestations/attestation-storage.md"
+
+  - repo: "https://github.com/compose-spec/compose-spec"
+    default_branch: "master"
+    ref: "master"
+    paths:
+      - dest: "compose/compose-file/01-status.md"
+        src:
+          - "01-status.md"
+      - dest: "compose/compose-file/02-model.md"
+        src:
+          - "02-model.md"
+      - dest: "compose/compose-file/03-compose-file.md"
+        src:
+          - "03-compose-file.md"
+      - dest: "compose/compose-file/04-version-and-name.md"
+        src:
+          - "04-version-and-name.md"
+      - dest: "compose/compose-file/05-services.md"
+        src:
+          - "05-services.md"
+      - dest: "compose/compose-file/06-networks.md"
+        src:
+          - "06-networks.md"
+      - dest: "compose/compose-file/07-volumes.md"
+        src:
+          - "07-volumes.md"
+      - dest: "compose/compose-file/08-configs.md"
+        src:
+          - "08-configs.md"
+      - dest: "compose/compose-file/09-secrets.md"
+        src:
+          - "09-secrets.md"
+      - dest: "compose/compose-file/10-fragments.md"
+        src:
+          - "10-fragments.md"
+      - dest: "compose/compose-file/11-extension.md"
+        src:
+          - "11-extension.md"
+      - dest: "compose/compose-file/12-interpolation.md"
+        src:
+          - "12-interpolation.md"
+      - dest: "compose/compose-file/build.md"
+        src:
+          - "build.md"
+      - dest: "compose/compose-file/deploy.md"
+        src:
+         - "deploy.md"

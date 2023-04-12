@@ -1,36 +1,31 @@
 ---
 description: Docker Hub Webhooks
 keywords: Docker, webhooks, hub, builds
-title: Docker Hub Webhooks
+title: Webhooks
 ---
 
 You can use webhooks to cause an action in another service in response to a push event in the repository. Webhooks are POST requests sent to a URL you define in Docker Hub.
 
-Configure webhooks through the "Webhooks" tab on your Docker Hub repository:
+## Create a webhook
 
-![Webhooks page](images/webhooks-empty.png)
+To create a webhook:
+1. In your chosen respository, select the **Webhooks** tabThen:
+2. Provide a name for the webhook
+3. Provide a destination webhook URL. This is where webhook POST requests are delivered.
+4. Select **Create**. 
 
-### Create Webhooks
+## View webhook delivery history
 
-To create a webhook, visit the webhooks tab for your repository. Then:
-1. Provide a name for the webhooks
-2. Provide a destination webhook URL. This is where webhook POST requests will be delivered:
+To view the history of the webhook:
+1. Hover over your webhook under the **Current Webhooks section**. 
+2. Select the **Menu options** icon.
+3. Select **View History**. 
 
-![Create webhooks](images/webhooks-create.png)
+You can then view the delivery history, and whether delivering the POST request was successful or not:
 
-### View Webhook delivery history
+## Example webhook payload
 
-You can view Webhook Delivery History by clicking on the submenu of the webhook and then clicking "View History"
-
-![Webhook delivery history](images/webhooks-submenu.png)
-
-You can then view the delivery history, and whether delivering the POST request was successful or failed:
-
-![Webhooks History](images/webhooks-history.png)
-
-### Example Webhook payload
-
-Docker Hub Webhook payloads have the following payload JSON format:
+Webhook payloads have the following JSON format:
 
 ```json
 {
@@ -60,23 +55,23 @@ Docker Hub Webhook payloads have the following payload JSON format:
 }
 ```
 
-### Validate a webhook callback
+## Validate a webhook callback
 
-To validate a callback in a webhook chain, you need to
+To validate a callback in a webhook chain, you need to:
 
 1. Retrieve the `callback_url` value in the request's JSON payload.
 2. Send a POST request to this URL containing a valid JSON body.
 
-> **Note**: A chain request is only considered complete once the last
-> callback has been validated.
+> **Note**
+>
+> A chain request is only considered complete once the last callback is validated.
 
-
-#### Callback JSON data
+### Callback JSON data
 
 The following parameters are recognized in callback data:
 
 * `state` (required): Accepted values are `success`, `failure`, and `error`.
-  If the state isn't `success`, the Webhook chain is interrupted.
+  If the state isn't `success`, the webhook chain is interrupted.
 * `description`: A string containing miscellaneous information that is
   available on Docker Hub. Maximum 255 characters.
 * `context`: A string containing the context of the operation. Can be retrieved

@@ -49,6 +49,18 @@ guides:
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
+- sectiontitle: Docker Desktop hands-on guides
+  section:
+  - path: /get-started/hands-on-overview/
+    title: Overview
+  - path: /get-started/what-is-a-container/
+    title: What is a container?
+  - path: /get-started/run-your-own-container/
+    title: How do I run a container?
+  - path: /get-started/run-docker-hub-images/
+    title: Run Docker Hub images
+  - path: /get-started/publish-your-own-image/
+    title: Publish your images
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -136,13 +148,13 @@ guides:
   - path: /develop/
     title: Overview
   - path: /develop/dev-best-practices/
-    title: Best practices
-  - sectiontitle: Build images
-    section:
-    - path: /develop/develop-images/dockerfile_best-practices/
-      title: Dockerfile best practices
-  - path: /develop/scan-images/
-    title: Scan images
+    title: Development best practices
+  - path: /develop/develop-images/dockerfile_best-practices/
+    title: Dockerfile best practices
+  - path: /develop/security-best-practices/
+    title: Security best practices
+  - path: /develop/remote-development/
+    title: Remote development
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
@@ -243,38 +255,6 @@ reference:
       title: Use the Docker command line
     - path: /engine/reference/commandline/docker/
       title: docker (base command)
-    - sectiontitle: docker app
-      section:
-        - path: /engine/reference/commandline/app/
-          title: docker app
-        - path: /engine/reference/commandline/app_bundle/
-          title: docker app bundle
-        - path: /engine/reference/commandline/app_completion/
-          title: docker app completion
-        - path: /engine/reference/commandline/app_init/
-          title: docker app init
-        - path: /engine/reference/commandline/app_inspect/
-          title: docker app inspect
-        - path: /engine/reference/commandline/app_install/
-          title: docker app install
-        - path: /engine/reference/commandline/app_list/
-          title: docker app list
-        - path: /engine/reference/commandline/app_pull/
-          title: docker app pull
-        - path: /engine/reference/commandline/app_push/
-          title: docker app push
-        - path: /engine/reference/commandline/app_render/
-          title: docker app render
-        - path: /engine/reference/commandline/app_status/
-          title: docker app status
-        - path: /engine/reference/commandline/app_uninstall/
-          title: docker app uninstall
-        - path: /engine/reference/commandline/app_upgrade/
-          title: docker app upgrade
-        - path: /engine/reference/commandline/app_validate/
-          title: docker app validate
-        - path: /engine/reference/commandline/app_version/
-          title: docker app version
     - path: /engine/reference/commandline/attach/
       title: docker attach
     - path: /engine/reference/commandline/build/
@@ -339,12 +319,14 @@ reference:
       section:
         - path: /compose/reference/
           title: overview
-        - path: /compose/reference/envvars/
+        - path: /compose/environment-variables/envvars/
           title: environment variables
         - path: /engine/reference/commandline/compose/
           title: docker compose
         - path: /engine/reference/commandline/compose_build/
           title: docker compose build
+        - path: /engine/reference/commandline/compose_config/
+          title: docker compose config
         - path: /engine/reference/commandline/compose_convert/
           title: docker compose convert
         - path: /engine/reference/commandline/compose_cp/
@@ -475,6 +457,8 @@ reference:
           title: docker context ls
         - path: /engine/reference/commandline/context_rm/
           title: docker context rm
+        - path: /engine/reference/commandline/context_show/
+          title: docker context show
         - path: /engine/reference/commandline/context_update/
           title: docker context update
         - path: /engine/reference/commandline/context_use/
@@ -527,6 +511,8 @@ reference:
       title: docker import
     - path: /engine/reference/commandline/info/
       title: docker info
+    - path: /engine/reference/commandline/init/
+      title: docker init (Beta)
     - path: /engine/reference/commandline/inspect/
       title: docker inspect
     - path: /engine/reference/commandline/kill/
@@ -633,6 +619,20 @@ reference:
       title: docker run
     - path: /engine/reference/commandline/save/
       title: docker save
+    - sectiontitle: docker scout (Early Access)
+      section:
+      - path: /engine/reference/commandline/scout/
+        title: docker scout
+      - path: /engine/reference/commandline/scout_compare/
+        title: docker scout compare
+      - path: /engine/reference/commandline/scout_cves/
+        title: docker scout cves
+      - path: /engine/reference/commandline/scout_quickview/
+        title: docker scout quickview
+      - path: /engine/reference/commandline/scout_recommendations/
+        title: docker scout recommendations
+      - path: /engine/reference/commandline/scout_version/
+        title: docker scout version
     - path: /engine/reference/commandline/search/
       title: docker search
     - sectiontitle: docker secret
@@ -673,6 +673,8 @@ reference:
       section:
       - path: /engine/reference/commandline/stack/
         title: docker stack
+      - path: /engine/reference/commandline/stack_config/
+        title: docker stack config
       - path: /engine/reference/commandline/stack_deploy/
         title: docker stack deploy
       - path: /engine/reference/commandline/stack_ls/
@@ -765,6 +767,8 @@ reference:
         title: docker volume prune
       - path: /engine/reference/commandline/volume_rm/
         title: docker volume rm
+      - path: /engine/reference/commandline/volume_update/
+        title: docker volume update
     - path: /engine/reference/commandline/wait/
       title: docker wait
   - title: Docker Compose CLI reference
@@ -788,6 +792,8 @@ reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.42/
+        title: v1.42 reference
       - path: /engine/api/v1.41/
         title: v1.41 reference
       - path: /engine/api/v1.40/
@@ -898,8 +904,34 @@ reference:
   path: /engine/reference/builder/
 - sectiontitle: Compose file reference
   section:
-    - path: /compose/compose-file/
-      title: Compose Specification
+    - sectiontitle: Compose specification
+      section:
+      - path: /compose/compose-file/
+        title: Overview
+      - path: /compose/compose-file/01-status/
+        title: Status of the specification
+      - path: /compose/compose-file/02-model/
+        title: Compose application model
+      - path: /compose/compose-file/03-compose-file/
+        title: The Compose file
+      - path: /compose/compose-file/04-version-and-name/
+        title: Version and name top-level element
+      - path: /compose/compose-file/05-services/
+        title: Services top-level element
+      - path: /compose/compose-file/06-networks/
+        title: Network top-level element
+      - path: /compose/compose-file/07-volumes/
+        title: Volumes top-level element
+      - path: /compose/compose-file/08-configs/
+        title: Configs top-level element
+      - path: /compose/compose-file/09-secrets/
+        title: Secrets top-level element
+      - path: /compose/compose-file/10-fragments/
+        title: Fragments
+      - path: /compose/compose-file/11-extension/
+        title: Extensions
+      - path: /compose/compose-file/12-interpolation/
+        title: Interpolation
     - path: /compose/compose-file/build/
       title: Compose file build
     - path: /compose/compose-file/deploy/
@@ -1193,6 +1225,8 @@ manuals:
               path: /desktop/extensions-sdk/extensions/
             - title: Labels
               path: /desktop/extensions-sdk/extensions/labels/
+            - title: Validate
+              path: /desktop/extensions-sdk/extensions/validate/
             - title: Package and release your extension
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Generate a share link
@@ -1207,6 +1241,8 @@ manuals:
               path: /desktop/extensions-sdk/architecture/
             - title: Metadata
               path: /desktop/extensions-sdk/architecture/metadata/
+            - title: Security
+              path: /desktop/extensions-sdk/architecture/security/
         - sectiontitle: "Design and UI styling"
           section:
              - title: UI styling guidelines
@@ -1227,8 +1263,6 @@ manuals:
               path: /desktop/extensions-sdk/guides/kubernetes/
             - title: Authentication
               path: /desktop/extensions-sdk/guides/oauth2-flow/
-            - title: Security
-              path: /desktop/extensions-sdk/guides/security/
         - sectiontitle: Developer SDK tools
           section:
             - title: "Test and debug"
@@ -1517,10 +1551,12 @@ manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/
-      title: Engine 20.10
+    - path: /engine/release-notes/23.0/
+      title: Engine 23.0
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/20.10/
+        title: Engine 20.10
       - path: /engine/release-notes/19.03/
         title: Engine 19.03
       - path: /engine/release-notes/18.09/
@@ -1573,6 +1609,10 @@ manuals:
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
+        - path: /build/building/env-vars/
+          title: Environment variables
+        - path: /build/building/opentelemetry/
+          title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
     - sectiontitle: Drivers
@@ -1587,6 +1627,16 @@ manuals:
           title: Kubernetes driver
         - path: /build/drivers/remote/
           title: Remote driver
+    - sectiontitle: Exporters
+      section:
+        - path: /build/exporters/
+          title: Overview
+        - path: /build/exporters/image-registry/
+          title: Image and registry exporters
+        - path: /build/exporters/local-tar/
+          title: Local and tar exporters
+        - path: /build/exporters/oci-docker/
+          title: OCI and Docker exporters
     - sectiontitle: Cache
       section:
         - path: /build/cache/
@@ -1609,28 +1659,6 @@ manuals:
               title: Azure Blob Storage
             - path: /build/cache/backends/s3/
               title: Amazon S3
-    - sectiontitle: Exporters
-      section:
-      - path: /build/exporters/
-        title: Overview
-      - path: /build/exporters/image-registry/
-        title: Image and registry exporters
-      - path: /build/exporters/local-tar/
-        title: Local and tar exporters
-      - path: /build/exporters/oci-docker/
-        title: OCI and Docker exporters
-    - sectiontitle: Continuous integration
-      section:
-        - path: /build/ci/
-          title: CI with Docker
-        - sectiontitle: GitHub Actions
-          section:
-          - path: /build/ci/github-actions/
-            title: Introduction
-          - path: /build/ci/github-actions/examples/
-            title: Examples
-          - path: /build/ci/github-actions/configure-builder/
-            title: Configuring your builder
     - sectiontitle: Bake
       section:
         - path: /build/bake/
@@ -1667,8 +1695,40 @@ manuals:
           title: Configure
         - path: /build/buildkit/toml-configuration/
           title: TOML configuration
-        - path: /build/buildkit/color-output-controls/
-          title: Color output controls
+    - sectiontitle: Continuous integration
+      section:
+        - path: /build/ci/
+          title: CI with Docker
+        - sectiontitle: GitHub Actions
+          section:
+          - path: /build/ci/github-actions/
+            title: Introduction
+          - path: /build/ci/github-actions/configure-builder/
+            title: Configuring your builder
+          - path: /build/ci/github-actions/multi-platform/
+            title: Multi-platform image
+          - path: /build/ci/github-actions/secrets/
+            title: Secrets
+          - path: /build/ci/github-actions/push-multi-registries/
+            title: Push to multi-registries
+          - path: /build/ci/github-actions/manage-tags-labels/
+            title: Manage tags and labels
+          - path: /build/ci/github-actions/cache/
+            title: Cache management
+          - path: /build/ci/github-actions/export-docker/
+            title: Export to Docker
+          - path: /build/ci/github-actions/test-before-push/
+            title: Test before push
+          - path: /build/ci/github-actions/local-registry/
+            title: Local registry
+          - path: /build/ci/github-actions/share-image-jobs/
+            title: Share built image between jobs
+          - path: /build/ci/github-actions/named-contexts/
+            title: Named contexts
+          - path: /build/ci/github-actions/copy-image-registries/
+            title: Copy image between registries
+          - path: /build/ci/github-actions/update-dockerhub-desc/
+            title: Update Docker Hub repo description
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
@@ -1696,10 +1756,14 @@ manuals:
     section:
     - path: /compose/environment-variables/
       title: Overview
-    - path: /compose/envvars-precedence/
-      title: Environment variables' precedence
-  - path: /compose/env-file/
-    title: Environment file
+    - path: /compose/environment-variables/set-environment-variables/
+      title: Explore ways to set environment variables
+    - path: /compose/environment-variables/envvars-precedence/
+      title: Understand environment variables' precedence
+    - path: /compose/environment-variables/env-file/
+      title: Use an environment file
+    - path: /compose/environment-variables/envvars/
+      title: Change pre-defined environment variables
   - path: /compose/profiles/
     title: Using service profiles
   - path: /compose/gpu-support/
@@ -1723,62 +1787,46 @@ manuals:
   section:
   - path: /docker-hub/
     title: Overview
+  - path: /docker-id/
+    title: Create an account
   - path: /docker-hub/quickstart/
     title: Quickstart
-  - path: /docker-id/
-    title: Docker ID accounts
   - sectiontitle: Repositories
     section:
-      - path: /docker-hub/repos/
-        title: Manage
+      - path: /docker-hub/repos/create/
+        title: Create
       - path: /docker-hub/repos/access/
         title: Access
-      - path: /docker-hub/repos/configure/
-        title: Configure
-  - path: /docker-hub/service-accounts/
-    title: Service accounts
+      - path: /docker-hub/repos/
+        title: Manage
   - path: /docker-hub/official_images/
     title: Docker Official images
-  - sectiontitle: Automated builds
-    section:
-      - path: /docker-hub/builds/
-        title: Set up automated builds
-      - path: /docker-hub/builds/automated-testing/
-        title: Testing in automated builds
-      - path: /docker-hub/builds/advanced/
-        title: Advanced automated builds
-      - path: /docker-hub/builds/link-source/
-        title: Link to GitHub and BitBucket
-  - path: /docker-hub/webhooks/
-    title: Webhooks
-  - path: /docker-hub/vulnerability-scanning/
-    title: Vulnerability scanning
-  - path: /docker-hub/audit-log/
-    title: Audit logs
-  - sectiontitle: Security and authentication
-    section:
-      - path: /docker-hub/access-tokens/
-        title: Manage access tokens
-      - sectiontitle: Two-factor authentication
-        section:
-          - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
-          - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
-          - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
-  - sectiontitle: Administration
+  - path: /docker-hub/webhooks/
+    title: Webhooks
+  - path: /docker-hub/service-accounts/
+    title: Service accounts
+  - sectiontitle: Automated builds
     section:
-     - path: /docker-hub/image-management/
-       title: Advanced Image Management dashboard
-     - path: /docker-hub/convert-account/
-       title: Convert an account into an organization
-     - path: /docker-hub/deactivate-account/
-       title: Deactivate an account or an organization
+      - path: /docker-hub/builds/how-builds-work/
+        title: How Automated builds work
+      - path: /docker-hub/builds/
+        title: Set up Automated builds
+      - path: /docker-hub/builds/manage-builds/
+        title: Manage your builds
+      - path: /docker-hub/builds/troubleshoot/
+        title: Troubleshoot your builds
+      - path: /docker-hub/builds/automated-testing/
+        title: Testing in Automated builds
+      - path: /docker-hub/builds/advanced/
+        title: Advanced options for builds
+      - path: /docker-hub/builds/link-source/
+        title: Link to GitHub and BitBucket
+  - path: /docker-hub/vulnerability-scanning/
+    title: Vulnerability scanning
+  - path: /docker-hub/image-management/
+    title: Advanced Image Management
   - sectiontitle: Docker Verified Publisher
     section:
       - path: /docker-hub/publish/
@@ -1789,24 +1837,28 @@ manuals:
         title: Repository logos
       - path: /docker-hub/publish/publisher-center-migration/
         title: Migrate content from the Publisher Center
+  - path: /docker-hub/dsos-program/
+    title: Docker-Sponsored Open Source Program
+  - path: /docker-hub/oci-artifacts/
+    title: OCI artifacts
   - path: /docker-hub/release-notes/
     title: Release notes
 
-- sectiontitle: Docker subscription
+- sectiontitle: Docker Scout (Early Access)
   section:
-  - path: /subscription/
-    title: Overview
-  - path: /subscription/upgrade/
-    title: Upgrade
-  - path: /subscription/downgrade/
-    title: Downgrade
-  - path: /subscription/add-seats/
-    title: Add seats
-  - path: /subscription/remove-seats/
-    title: Remove seats
+    - path: /scout/
+      title: Overview
+    - path: /scout/image-details-view/
+      title: Image details view
+    - path: /scout/advanced-image-analysis/
+      title: Advanced image analysis
+    - path: /scout/artifactory/
+      title: Artifactory integration
 
-- sectiontitle: Administration
+- sectiontitle: Administration and security
   section:
+  - path: /docker-hub/admin-overview/
+    title: Overview
   - sectiontitle: Onboarding
     section:
     - path: /docker-hub/onboard-team/
@@ -1815,8 +1867,20 @@ manuals:
       title: Business
     - path: /docker-hub/onboarding-faqs/
       title: FAQs
+  - sectiontitle: Set up your company
+    section:
+    - path: /docker-hub/creating-companies/
+      title: Overview
+    - path:  /docker-hub/company-owner/
+      title: Manage company owners
+    - path: /docker-hub/company-faqs/
+      title: FAQs
   - path: /docker-hub/orgs/
-    title: Teams and organizations
+    title: Create your organization
+  - path: /docker-hub/convert-account/
+    title: Convert an account into an organization
+  - path: /docker-hub/manage-a-team/
+    title: Create and manage a team
   - path: /docker-hub/members/
     title: Manage members
   - path: /docker-hub/configure-sign-in/
@@ -1835,35 +1899,67 @@ manuals:
          title: FAQs
   - path: /docker-hub/scim/
     title: SCIM
+  - path: /docker-hub/group-mapping/
+    title: Group mapping
+  - sectiontitle: Security and authentication
+    section:
+      - path: /docker-hub/access-tokens/
+        title: Create and manage access tokens
+      - sectiontitle: Two-factor authentication
+        section:
+          - path: /docker-hub/2fa/
+            title: Enable two-factor authentication
+          - path: /docker-hub/2fa/disable-2fa/
+            title: Disable two-factor authentication
+          - path: /docker-hub/2fa/recover-hub-account/
+            title: Recover your Docker Hub account
+          - path: /docker-hub/2fa/new-recovery-code/
+            title: Generate a new recovery code
+  - path: /docker-hub/audit-log/
+    title: Audit logs
   - path: /docker-hub/domain-audit/
     title: Domain audit
   - path: /docker-hub/image-access-management/
     title: Image Access Management
+  - path: /docker-hub/deactivate-account/
+    title: Deactivate an account or organization
 
+- sectiontitle: Billing
+  section:
+  - path: /billing/
+    title: Overview
+  - path: /billing/payment-method/
+    title: Add or update a payment method
+  - path: /billing/details/
+    title: Update the billing information
+  - path: /billing/history/
+    title: View your billing history
+  - path: /billing/cycle/
+    title: Change your billing cycle
+  - path: /billing/faqs/
+    title: FAQs
+
+- sectiontitle: Subscription
+  section:
+  - path: /subscription/
+    title: Overview
+  - path: /subscription/details/
+    title: Docker subscriptions and features
+  - path: /subscription/upgrade/
+    title: Upgrade
+  - path: /subscription/add-seats/
+    title: Add seats
+  - path: /subscription/remove-seats/
+    title: Remove seats
+  - path: /subscription/downgrade/
+    title: Downgrade
+  - path: /subscription/faq/
+    title: FAQs
+  - path: /subscription/desktop-license/
+    title: Docker Desktop license agreement
 
 - title: Security announcements
   path: /security/
-
-- sectiontitle: Atomist
-  section:
-    - path: /atomist/
-      title: Introduction
-    - path: /atomist/try-atomist/
-      title: Try Atomist
-    - path: /atomist/get-started/
-      title: Get started
-    - sectiontitle: Configure
-      section:
-        - path: /atomist/configure/settings/
-          title: Settings
-        - path: /atomist/configure/advisories/
-          title: Advisories
-    - sectiontitle: Integrate
-      section:
-        - path: /atomist/integrate/github/
-          title: GitHub
-        - path: /atomist/integrate/deploys/
-          title: Track deployments
 
 - sectiontitle: Open-source projects
   section:

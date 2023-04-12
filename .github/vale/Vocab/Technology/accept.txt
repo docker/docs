@@ -1,4 +1,5 @@
 APIs?
+CVEs?
 DHCP
 DNS
 Ethernet
@@ -13,6 +14,7 @@ JPEG
 MAC
 RPM
 PNG
+SARIF
 SDKs?
 SSO
 TCP

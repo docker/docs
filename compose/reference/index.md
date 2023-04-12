@@ -5,6 +5,7 @@ redirect_from:
 - /compose/reference/overview/
 title: Overview of docker compose CLI
 ---
+{% include compose-eol.md %}
 
 This page provides the usage information for the `docker compose` Command.
 
@@ -149,7 +150,7 @@ in addition to the values in the `docker-compose.yml` file.
 
 You can use the `-f` flag to specify a path to a Compose file that is not
 located in the current directory, either from the command line or by setting up
-a [COMPOSE_FILE environment variable](envvars.md#compose_file) in your shell or
+a [COMPOSE_FILE environment variable](../environment-variables/envvars.md#compose_file) in your shell or
 in an environment file.
 
 For an example of using the `-f` option at the command line, suppose you are
@@ -184,9 +185,22 @@ Status: Downloaded newer image for postgres:latest
 
 ## Use `-p` to specify a project name
 
-Each configuration has a project name. If you supply a `-p` flag, you can
-specify a project name. If you don't specify the flag, Compose uses the current
-directory name. See also the [COMPOSE_PROJECT_NAME environment variable](envvars.md#compose_project_name).
+Each configuration has a project name which Compose can set in different ways. The level of precedence (from highest to lowest) for each method is as follows: 
+
+1. The `-p` command line flag 
+2. The [COMPOSE_PROJECT_NAME environment variable][]
+3. The top level `name:` variable from the config file (or the last `name:` from
+  a series of config files specified using `-f`)
+4. The `basename` of the project directory containing the config file (or
+  containing the first config file specified using `-f`)
+5. The `basename` of the current directory if no config file is specified
+
+[COMPOSE_PROJECT_NAME environment variable]: ../environment-variables/envvars.md#compose_project_name
+
+Project names must contain only lowercase letters, decimal digits, dashes, and
+underscores, and must begin with a lowercase letter or decimal digit. If the
+`basename` of the project directory or current directory violates this
+constraint, you must use one of the other mechanisms.
 
 ## Use `--profile` to specify one or more active profiles
 
@@ -196,20 +210,20 @@ multiple profiles, e.g. with `docker compose --profile frontend --profile debug 
 the profiles `frontend` and `debug` will be enabled.
 
 See also [_Using profiles with Compose_](../profiles.md) and the
-[`COMPOSE_PROFILES` environment variable](envvars.md#compose_profiles).
+[`COMPOSE_PROFILES` environment variable](../environment-variables/envvars.md#compose_profiles).
 
 ## Set up environment variables
 
-You can set [environment variables](envvars.md) for various
+You can set [environment variables](../environment-variables/envvars.md) for various
 `docker compose` options, including the `-f` and `-p` flags.
 
-For example, the [COMPOSE_FILE environment variable](envvars.md#compose_file)
+For example, the [COMPOSE_FILE environment variable](../environment-variables/envvars.md#compose_file)
 relates to the `-f` flag, and `COMPOSE_PROJECT_NAME`
-[environment variable](envvars.md#compose_project_name) relates to the `-p` flag.
+[environment variable](../environment-variables/envvars.md#compose_project_name) relates to the `-p` flag.
 
-Also, you can set some of these variables in an [environment file](../env-file.md).
+Also, you can set some of these variables in an [environment file](../environment-variables/env-file.md).
 
 ## Where to go next
 
-* [CLI environment variables](envvars.md)
-* [Declare default environment variables in file](../env-file.md)
+* [CLI environment variables](../environment-variables/envvars.md)
+* [Declare default environment variables in file](../environment-variables/env-file.md)

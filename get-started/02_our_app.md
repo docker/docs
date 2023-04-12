@@ -1,14 +1,14 @@
 ---
 title: "Containerize an application"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+keywords: dockerfile example, Containerize an application, run docker file, running docker file, how to run dockerfile, example dockerfile, how to create a docker container, create dockerfile, simple dockerfile, creating containers
 redirect_from:
 - /get-started/part2/
-description: Containerize and run a simple application to learn Docker
+description: Follow this step-by-step guide to learn how to create and run a containerized application using Docker
 ---
 
-For the rest of this guide, you will be working with a simple todo
-list manager that's running in Node.js. If you're not familiar with Node.js,
-don't worry. This guide doesn't require JavaScript experience.
+For the rest of this guide, you'll be working with a simple todo
+list manager that runs on Node.js. If you're not familiar with Node.js,
+don't worry. This guide doesn't require any prior experience with JavaScript.
 
 To complete this guide, you'll need the following:
 
@@ -34,7 +34,7 @@ Before you can run the application, you need to get the application source code 
 
 ## Build the app's container image
 
-In order to build the [container image](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}, you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension. A Dockerfile contains a script of instructions that Docker uses to create a container image.
+To build the [container image](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}, you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension that contains a script of instructions. Docker uses this script to build a container image.
 
 1. In the `app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
 
@@ -78,6 +78,7 @@ In order to build the [container image](../get-started/overview.md/#docker-objec
 
    ```dockerfile
    # syntax=docker/dockerfile:1
+   
    FROM node:18-alpine
    WORKDIR /app
    COPY . .
@@ -129,14 +130,42 @@ Now that you have an image, you can run the application in a [container](../get-
    ![Empty todo list](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
    {: .text-center }
 
-3. Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove items. Your frontend is successfully storing items in the backend.
+3. Go ahead and add an item or two and see that it works as you expect. You can mark items as complete and remove them. Your frontend is successfully storing items in the backend.
 
 
 At this point, you should have a running todo list manager with a few items, all built by you.
 
-If you take a quick look at your Docker Dashboard, you should see at least one container running that is using the `getting-started` image and on port `3000`.
+If you take a quick look at your containers, you should see at least one container running that is using the `getting-started` image and on port `3000`. To see your containers, you can use the CLI or Docker Desktop's graphical interface.
 
-![Docker Dashboard with tutorial and app containers running](images/dashboard-two-containers.png)
+   <ul class="nav nav-tabs">
+     <li class="active"><a data-toggle="tab" data-target="#cli">CLI</a></li>
+     <li><a data-toggle="tab" data-target="#gui">Docker Desktop</a></li>
+   </ul>
+   <div class="tab-content">
+   <div id="cli" class="tab-pane fade in active" markdown="1">
+
+Run the following `docker ps` command in a terminal to list your containers.
+
+```console
+$ docker ps
+```
+Output similar to the following should appear.
+```console
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+df784548666d        getting-started     "docker-entrypoint.s…"   2 minutes ago       Up 2 minutes        0.0.0.0:3000->3000/tcp   priceless_mcclintock
+```
+
+<hr>
+</div>
+<div id="gui" class="tab-pane fade" markdown="1">
+
+In Docker Desktop, select the **Containers** tab to see a list of your containers.
+
+![Docker Desktop with get-started container running](images/dashboard-two-containers.png)
+
+<hr>
+</div>
+</div>
 
 ## Next steps
 

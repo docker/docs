@@ -12,18 +12,6 @@ toc_max: 2
 
 We strongly encourage you to update to the latest version of [Apache Commons Text](https://commons.apache.org/proper/commons-text/download_text.cgi){:target="_blank" rel="noopener" class="_"}.
 
-### Scan images using the `docker scan` command
-
-`docker scan` as shipped with latest versions of Docker Desktop detects the Text4Shell CVE-2022-42889 vulnerability.
-
-If an image is vulnerable to CVE-2022-42889, the output of `docker scan` will contain the following text:
-
-```
-  Upgrade org.apache.commons:commons-text@1.9 to org.apache.commons:commons-text@1.10.0 to fix
-  ✗ Arbitrary Code Execution (new) [High Severity][https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-3043138] in org.apache.commons:commons-text@1.9
-    introduced by org.apache.commons:commons-text@1.9
-```
-
 ### Scan images on Docker Hub
 
 Docker Hub security scans triggered **after 1200 UTC 21 October 2021** are now
@@ -95,13 +83,6 @@ target="_blank" rel="noopener" class="_"}, the fix made in version 2.15.0 was
 > [CVE-2021-45105](https://nvd.nist.gov/vuln/detail/CVE-2021-45105){: target="_blank" rel="noopener" class="_"}.
 > For a more complete fix to this vulnerability, we recommended that you update to 2.17.0 where possible.
 {: .important}
-
-### Scan images using the `docker scan` command
-
-The configurations for the `docker scan` command previously shipped in Docker
-Desktop versions 4.3.0 and earlier unfortunately do not detect this
-vulnerability on scans. You must update your Docker Desktop installation to
-4.3.1 or higher to fix this issue. For detailed instructions, see [Scan images for Log4j 2 CVE](../engine/scan/index.md#scan-images-for-log4j-2-cve).
 
 ### Scan images on Docker Hub
 

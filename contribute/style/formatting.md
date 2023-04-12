@@ -25,7 +25,7 @@ Page titles should be action orientated. For example:
 
 ### Best practice:
 
-- Make sure the title of your page and the TOC entry matches
+- Make sure the title of your page and the TOC entry matches.
 - If you want to use a ‘:’ in a page title in the table of contents (_toc.yaml), you must wrap the entire title in “” to avoid breaking the build.
 
 ## Images

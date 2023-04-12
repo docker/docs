@@ -155,7 +155,7 @@ Use the appropriate command below to set the context to `docker-test` using an e
 Windows PowerShell:
 
 ```console
-> $Env:DOCKER_CONTEXT=docker-test
+> $env:DOCKER_CONTEXT='docker-test'
 ```
 
 Linux:

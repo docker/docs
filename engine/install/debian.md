@@ -89,23 +89,24 @@ Docker from the repository.
     $ sudo apt-get install \
         ca-certificates \
         curl \
-        gnupg \
-        lsb-release
+        gnupg
     ```
 
 2.  Add Docker's official GPG key:
 
     ```console
-    $ sudo mkdir -p /etc/apt/keyrings
+    $ sudo install -m 0755 -d /etc/apt/keyrings
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
     ```
 
 3.  Use the following command to set up the repository:
 
     ```console
     $ echo \
-      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
-      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
+      "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 
 #### Install Docker Engine
@@ -118,18 +119,6 @@ Raspbian.
    ```console
    $ sudo apt-get update
    ```
-
-   > Receiving a GPG error when running `apt-get update`?
-   >
-   > Your default [umask](https://en.wikipedia.org/wiki/Umask){: target="blank"
-   > rel="noopener" } may be incorrectly configured, preventing detection of the
-   > repository public key file. Try granting read permission for the Docker
-   > public key file before updating the package index:
-   >
-   > ```console
-   > $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
-   > $ sudo apt-get update
-   > ```
 
 2. Install Docker Engine, containerd, and Docker Compose.
 
@@ -144,7 +133,7 @@ Raspbian.
    To install the latest version, run:
 
    ```console
-    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    </div>
@@ -167,7 +156,7 @@ Raspbian.
 
    ```console
    $ VERSION_STRING=5:18.09.0~3-0~debian-stretch
-   $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-compose-plugin
+   $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
    </div>
@@ -216,6 +205,7 @@ download a new file each time you want to upgrade Docker Engine.
    - `containerd.io_<version>_<arch>.deb`
    - `docker-ce_<version>_<arch>.deb`
    - `docker-ce-cli_<version>_<arch>.deb`
+   - `docker-buildx-plugin_<version>_<arch>.deb`
    - `docker-compose-plugin_<version>_<arch>.deb`
 
 5. Install the `.deb` packages. Update the paths in the following example to
@@ -225,6 +215,7 @@ download a new file each time you want to upgrade Docker Engine.
    $ sudo dpkg -i ./containerd.io_<version>_<arch>.deb \
      ./docker-ce_<version>_<arch>.deb \
      ./docker-ce-cli_<version>_<arch>.deb \
+     ./docker-buildx-plugin_<version>_<arch>.deb \
      ./docker-compose-plugin_<version>_<arch>.deb
    ```
 
@@ -259,7 +250,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
 1.  Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
     ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras
+    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
     ```
 
 2.  Images, containers, volumes, or custom configuration files on your host

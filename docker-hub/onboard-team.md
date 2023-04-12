@@ -11,7 +11,7 @@ The following section contains step-by-step instructions on how to get started o
 ## Prerequisites
 
 Before you start to on board your organization, ensure that you've completed the following:
-- You have a Docker Team subscription. [Buy now](https://www.docker.com/pricing/) if you haven't subscribed to Docker Team yet.
+- You have a Docker Team subscription. You can verify your subscription in Docker Hub's [Billing Details](https://hub.docker.com/billing){: target="_blank" rel="noopener" class="_"}. If you haven't subscribed to Docker Team yet, see [Upgrade your subscription](../subscription/upgrade.md) for details about upgrading.
 - You are familiar with Docker terminology. If you discover any unfamiliar terms, see the [glossary](/glossary/#docker) or [FAQs](../docker-hub/onboarding-faqs.md).
 
 ## Step 1: Identify your Docker users and their Docker accounts
@@ -22,6 +22,7 @@ To begin, you should identify which users you will need to add to your Docker Te
    - If your organization uses device management software, like MDM or JAMF, you may use the device management software to help identify Docker users. See your device management software's documentation for details. You can identify Docker users by checking if Docker Desktop is installed at the following location on each user's machine:
       - Mac: `/Applications/Docker.app`
       - Windows: `C:\Program Files\Docker\Docker`
+      - Linux: `/opt/docker-desktop`
    - If your organization doesn't use device management software, you may survey your users.
 2. Instruct all your Docker users in your organization to update their existing Docker account's email address to an address that's in your organization's domain, or to create a new account using an email address in your organization's domain.
    - To update an account's email address, instruct your users to sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, go to [Account Settings](https://hub.docker.com/settings/general){: target="_blank" rel="noopener" class="_"}, and update the email address to their email address in your organization's domain.
@@ -30,7 +31,7 @@ To begin, you should identify which users you will need to add to your Docker Te
 
 ## Step 2: Invite owners
 
-Now that you have a Docker Business organization, it's time to start adding owners to help you set up and manage your organization. Owners can add or remove members, and configure Single Sign-on as well as other security settings.
+Now that you have a Docker Team organization, it's time to start adding owners to help you set up and manage your organization. Owners can add or remove members, and configure other organization settings.
 
 To add an owner, invite a user to the **owners** team. For more details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}.
 
@@ -48,8 +49,8 @@ organization’s settings apply to the user’s session, you can use a `registry
 Create and manage your repositories:
 
 - Create [repositories](../docker-hub/repos/index.md) to share container images.
-- [Consolidate a repository](../docker-hub/repos/index.md/#consolidating-a-repository) from your personal account to your organization.
-- Create [teams](../docker-hub/orgs.md/#create-a-team) and configure [repository permissions](../docker-hub/orgs.md/#configure-repository-permissions).
+- [Consolidate a repository](../docker-hub/repos/index.md/#move-images-between-repositories) from your personal account to your organization.
+- Create [teams](manage-a-team.md#create-a-team) and configure [repository permissions](manage-a-team.md#configure-repository-permissions-for-a-team).
 
 Your Docker Team subscription provides many more additional features. [Learn more](../subscription/index.md).
 

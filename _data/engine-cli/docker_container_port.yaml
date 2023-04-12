@@ -1,9 +1,21 @@
 command: docker container port
+aliases: docker container port, docker port
 short: List port mappings or a specific mapping for the container
-long: List port mappings or a specific mapping for the container
+long: See [docker port](port.md) for more information.
 usage: docker container port CONTAINER [PRIVATE_PORT[/PROTO]]
 pname: docker container
 plink: docker_container.yaml
+inherited_options:
+    - option: help
+      value_type: bool
+      default_value: "false"
+      description: Print usage
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 experimental: false
 experimentalcli: false

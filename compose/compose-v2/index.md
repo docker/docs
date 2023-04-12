@@ -5,6 +5,7 @@ title: Evolution of Compose
 redirect_from:
  - /compose/cli-command-compatibility/
 ---
+{% include compose-eol.md %}
 
 This page provides information on the history of Compose and explains the key differences between Compose V1 and Compose V2. 
 

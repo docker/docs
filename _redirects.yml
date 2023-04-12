@@ -105,6 +105,8 @@
   - /go/deprecated/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
+"/compose/compose-v2/":
+  - /go/compose-v1-eol/
 "/config/formatting/":
   # Instructions on using Go templates to format CLI output with --format
   - /go/formatting/
@@ -128,7 +130,6 @@
 "/desktop/windows/wsl/":
   # Link used by Docker Desktop to refer users on how to activate WSL 2
   - /go/wsl2/
-
 # samples
 "https://hub.docker.com/_/adminer/":
   - /samples/adminer
@@ -554,3 +555,14 @@
 # feedback
 "https://docs.google.com/forms/d/e/1FAIpQLSenjK8KiBiOrwCpq06u_iVEZGv4tfTEpfmY_cQDmsqJrHL9Gw/viewform":
   - /feedback/extension/
+
+# Docker Scout
+"/scout/":
+  - /go/scout/
+  - /go/docker-scout/
+"/scout/artifactory":
+  - /go/scout-artifactory/
+
+# Telepresence
+"/develop/remote-development/":
+  - /go/telepresence/

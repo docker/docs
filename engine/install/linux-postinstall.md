@@ -1,9 +1,7 @@
 ---
-description: Optional post-installation steps for Linux
-keywords: >
-  Docker, Docker documentation, requirements, apt, installation, ubuntu,
-  install, uninstall, upgrade, update
-title: Docker Engine post-installation steps
+description: Find the recommended Docker Engine post-installation steps for Linux users, including how to run Docker as a non-root user and more.   
+keywords: run docker without sudo, docker running as root, docker post install, docker post installation, run docker as non root, docker non root user, how to run docker in linux, how to run docker linux, how to start docker in linux, run docker on linux
+title: Linux post-installation steps for Docker Engine
 redirect_from:
   - /engine/installation/linux/docker-ee/linux-postinstall/
   - /engine/installation/linux/linux-postinstall/
@@ -129,16 +127,16 @@ To avoid issues with overusing disk for log data, consider one of the following
 options:
 
 - Configure the `json-file` logging driver to turn on
-  [log rotation](../../config/containers/logging/json-file.md)
+  [log rotation](../../config/containers/logging/json-file.md).
 - Use an
   [alternative logging driver](../../config/containers/logging/configure.md#configure-the-default-logging-driver)
   such as the ["local" logging driver](../../config/containers/logging/local.md)
-  that performs log rotation by default
+  that performs log rotation by default.
 - Use a logging driver that sends logs to a remote logging aggregator.
 
 ## Next steps
 
-- Take a look at the [Get started](../../get-started/index.md) training modules
+- Read the [Get started](../../get-started/index.md) training modules
   to learn how to build an image and run it as a containerized application.
 - Review the topics in [Develop with Docker](../../develop/index.md) to learn
   how to build new applications using Docker.
