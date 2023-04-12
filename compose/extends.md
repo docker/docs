@@ -446,4 +446,4 @@ services:
 
 ## Reference information
 
-[`extends`](compose-file/index.md#extends)
+[`extends`](compose-file/05-services.md#extends)

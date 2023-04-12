@@ -54,7 +54,7 @@ options:
       swarm: false
     - option: format
       value_type: string
-      default_value: txt-by-packages
+      default_value: packages
       description: |-
         Output format of the generated vulnerability report:
         - packages: default output, plain text with vulnerabilities grouped by packages
@@ -111,7 +111,7 @@ options:
       value_type: stringSlice
       default_value: '[]'
       description: |
-        Comma separated list of severities (critical, high, medium, low) to filter CVEs by
+        Comma separated list of severities (critical, high, medium, low, unspecified) to filter CVEs by
       deprecated: false
       hidden: false
       experimental: false
@@ -140,7 +140,7 @@ options:
       swarm: false
     - option: platform
       value_type: string
-      description: Platform of image for which to list CVEs for
+      description: Platform of image to analyze
       deprecated: false
       hidden: false
       experimental: false

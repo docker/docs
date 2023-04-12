@@ -29,7 +29,7 @@ You should use the Registry if you want to:
 Users looking for a zero maintenance, ready-to-go solution are encouraged to
 head-over to the [Docker Hub](https://hub.docker.com), which provides a
 free-to-use, hosted Registry, plus additional features (organization accounts,
-automated builds, and more).
+Automated builds, and more).
 
 ## Requirements
 

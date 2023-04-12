@@ -40,6 +40,8 @@ If books are your preferred learning style, check out these written by the [Dock
 * [The Kubernetes Book](https://www.amazon.com/Kubernetes-Book-Nigel-Poulton/dp/1521823634/ref=sr_1_3?ie=UTF8&qid=1509660871&sr=8-3&keywords=nigel+poulton){:target="_blank" rel="noopener" class="_"}, Nigel Poulton, Nov 2018
 * [Docker Deep Dive](https://www.amazon.com/Docker-Deep-Dive-Nigel-Poulton/dp/1521822808/ref=sr_1_1?ie=UTF8&qid=1509660871&sr=8-1&keywords=nigel+poulton){:target="_blank" rel="noopener" class="_"}, Nigel Poulton, March 2018
 * [Portuguese] [Docker para desenvolvedores](https://leanpub.com/dockerparadesenvolvedores){:target="_blank" rel="noopener" class="_"} (2017) by Rafael Gomes
+* [Spanish] [Érase una vez Docker](https://leanpub.com/erase-una-vez-docker){:target="_blank" rel="noopener" class="_"}, Manuel Morejón, March 2023
+* [Spanish] [Érase una vez Kubernetes](https://leanpub.com/erase-una-vez-kubernetes){:target="_blank" rel="noopener" class="_"}, Manuel Morejón, Jan 2022
 
 ## CLI cheat sheet
 

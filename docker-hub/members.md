@@ -22,8 +22,8 @@ Use the following steps to invite members to your organization via Docker ID or 
 5. Select a team from the drop-down list to add all invited users to that team.
   > **Note**
   >
-  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](../docker-hub/orgs.md/#create-a-team).
-6. Click **Invite** to confirm.
+  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](manage-a-team.md).
+6. Select **Invite** to confirm.
    > **Note**
    >
    > You can view the pending invitations in the **Members** tab. The invitees receive an email with a link to the organization in Docker Hub where they can accept or decline the invitation.
@@ -39,7 +39,7 @@ To invite multiple members to your organization via a CSV file containing email 
 4. Select a team from the drop-down list to add all invited users to that team.
   > **Note**
   >
-  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](../docker-hub/orgs.md/#create-a-team).
+  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings. To create a new team, see [Create a team](manage-a-team.md).
 5. Select **Download the template CSV file** to optionally download an example CSV file. The following is an example of the contents of a valid CSV file.
     ```
     email
@@ -63,7 +63,7 @@ To invite multiple members to your organization via a CSV file containing email 
 	  - **Already invited**: The user has already been sent an invite email and another invite email will not be sent.
 	  - **Member**: The user is already a member of your organization and an invite email will not be sent.
 	  - **Duplicate**: The CSV file has multiple occurrences of the same email address. The user will be sent only one invite email.
-9. Click **Send invites**.
+9. Select **Send invites**.
    > **Note**
    >
    > You can view the pending invitations in the **Members** tab. The invitees receive an email with a link to the organization in Docker Hub where they can accept or decline the invitation.
@@ -75,13 +75,13 @@ Organization owners can add a member to one or more teams within an organization
 To add a member to a team:
 
 1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
-2. In the **Members** tab, click the additional options from the table menu and select **Add to team**.
+2. In the **Members** tab, select the additional options from the table menu and select **Add to team**.
 
     > **Note**
     >
-    > You can also navigate to **Organizations** > **Your Organization** > **Teams** > **Your Team Name** and click **Add Member**. Select a member from the drop-down list to add them to the team or search by Docker ID or email.
+    > You can also navigate to **Organizations** > **Your Organization** > **Teams** > **Your Team Name** and select **Add Member**. Select a member from the drop-down list to add them to the team or search by Docker ID or email.
 
-3. Select the team and click **Add**.
+3. Select the team and then select **Add**.
 
     > **Note**
     >
@@ -93,7 +93,7 @@ To resend an invitation if the invite is pending or declined:
 
 1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select your organization.
 2. In the **Members** tab, locate the invitee and select **Resend invitation** from the table menu.
-3. Click **Invite** to confirm.
+3. Select **Invite** to confirm.
 
 ## Remove members
 
@@ -101,20 +101,20 @@ To remove a member from an organization:
 
 1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
 2. In the **Members** tab, select Remove member from the table menu.
-3. When prompted, click **Remove** to confirm.
+3. When prompted, select **Remove** to confirm.
 
 To remove an invitee from an organization:
 
 1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
 2. In the **Members** tab, locate the invitee you would like to remove and select **Remove invitee** from the table menu.
-3. When prompted, click **Remove** to confirm.
+3. When prompted, select **Remove** to confirm.
 
 To remove a member from a specific team:
 
 1. Navigate to **Organizations** in [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}, and select your organization.
-2. Click on the **Teams** tab and select the team from the list.
-3. Click the **X** next to the user’s name to remove them from the team.
-4. When prompted, click **Remove** to confirm.
+2. Select on the **Teams** tab and select the team from the list.
+3. Select the **X** next to the user’s name to remove them from the team.
+4. When prompted, select **Remove** to confirm.
 
 ## Export members
 

@@ -185,9 +185,22 @@ Status: Downloaded newer image for postgres:latest
 
 ## Use `-p` to specify a project name
 
-Each configuration has a project name. If you supply a `-p` flag, you can
-specify a project name. If you don't specify the flag, Compose uses the current
-directory name. See also the [COMPOSE_PROJECT_NAME environment variable](../environment-variables/envvars.md#compose_project_name).
+Each configuration has a project name which Compose can set in different ways. The level of precedence (from highest to lowest) for each method is as follows: 
+
+1. The `-p` command line flag 
+2. The [COMPOSE_PROJECT_NAME environment variable][]
+3. The top level `name:` variable from the config file (or the last `name:` from
+  a series of config files specified using `-f`)
+4. The `basename` of the project directory containing the config file (or
+  containing the first config file specified using `-f`)
+5. The `basename` of the current directory if no config file is specified
+
+[COMPOSE_PROJECT_NAME environment variable]: ../environment-variables/envvars.md#compose_project_name
+
+Project names must contain only lowercase letters, decimal digits, dashes, and
+underscores, and must begin with a lowercase letter or decimal digit. If the
+`basename` of the project directory or current directory violates this
+constraint, you must use one of the other mechanisms.
 
 ## Use `--profile` to specify one or more active profiles
 

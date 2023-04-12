@@ -69,8 +69,11 @@ Here's what the configuration file might look like:
 }
 ```
 
-With this configuration the Docker daemon runs in debug mode, uses TLS, and
-listens for traffic routed to `192.168.59.3` on port `2376`. You can learn what
+In addition to Docker Desktop default values, this configuration enables garbage
+collection at a 20GB threshold, and enables buildkit.
+
+Using this configuration file, run the Docker daemon in debug mode, using TLS, and
+listen for traffic routed to `192.168.59.3` on port `2376`. You can learn what
 configuration options are available in the
 [dockerd reference docs](../../engine/reference/commandline/dockerd.md#daemon-configuration-file)
 

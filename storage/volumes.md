@@ -245,7 +245,7 @@ volumes:
 ```
 
 For more information about using volumes with Compose, refer to the
-[Volumes](../compose/compose-file/index.md#volumes)
+[Volumes](../compose/compose-file/07-volumes.md)
 section in the Compose specification.
 
 ### Start a service with volumes

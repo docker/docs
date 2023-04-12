@@ -195,7 +195,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 
 You can now start your dev-ready container.
 
-1. Specify each of the environment variables above, as well as connect the container to your app network.
+1. Specify each of the environment variables above, as well as connect the container to your app network. Make sure that you are in the `getting-started/app` directory when you run this command.
 
     <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" data-target="#mac-linux2">Mac / Linux</a></li>

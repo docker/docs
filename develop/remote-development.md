@@ -32,7 +32,7 @@ remote resources helps simplify and speed up the inner loop. There are several
 tools available, commercial and open-source, that you can use to enable a hybrid
 local-and-remote development environment. For example:
 
-- [Telepresence](https://www.cncf.io/projects/telepresence/){: target="_blank" rel="noopener" class="_" }
+- [Telepresence](https://app.getambassador.io/auth/realms/production/protocol/openid-connect/auth?client_id=docker-docs&response_type=code&redirect_uri=https%3A%2F%2Fapp.getambassador.io&utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker%26TP){: target="_blank" rel="noopener" class="_" }
 - [CodeZero](https://www.codezero.io/){: target="_blank" rel="noopener" class="_" }
 - [Gefyra](https://gefyra.dev/){: target="_blank" rel="noopener" class="_" }
 - [kubefwd](https://kubefwd.com/){: target="_blank" rel="noopener" class="_" }
@@ -72,9 +72,9 @@ You have a few options for how the local containers can integrate with the clust
 
 Telepresence is free and open-source, and you can try it out by heading to
 the
-[Telepresence quickstart guide](https://www.telepresence.io/docs/latest/quick-start/){: target="_blank" rel="noopener" class="_" }.
+[Telepresence quickstart guide](https://www.telepresence.io/docs/latest/quick-start/?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" }.
 There’s also a
-[Telepresence extension for Docker Desktop](https://www.getambassador.io/docs/telepresence/latest/extension/intro){: target="_blank" rel="noopener" class="_" },
+[Telepresence extension for Docker Desktop](https://www.getambassador.io/docs/telepresence/latest/extension/intro?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" },
 which helps you manage intercepts for your containers.
 
 ### Docker × Ambassador
@@ -92,7 +92,7 @@ local-remote development environment easy and seamless. You can now connect your
 Docker ID to Ambassador Cloud to sign in and use Telepresence. To get started:
 
 1. Go to the
-   [Docker × Ambassador](https://app.getambassador.io/auth/realms/production/protocol/openid-connect/auth?client_id=docker-docs&response_type=code&redirect_uri=https://app.getambassador.io)
+   [Docker × Ambassador](https://app.getambassador.io/auth/realms/production/protocol/openid-connect/auth?client_id=docker-docs&response_type=code&redirect_uri=https%3A%2F%2Fapp.getambassador.io&utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker%26TP)
    page.
 2. Sign in using your Docker ID.
 3. Authorize the Ambassador Cloud app.
