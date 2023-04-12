@@ -63,3 +63,5 @@ exceptions:
   - XSS
   - YAML
   - ZIP
+  - SBOM
+  - CVE
