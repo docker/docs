@@ -33,8 +33,7 @@ $ git clone https://github.com/docker/welcome-to-docker
 
 If you don't have git, download the source and extract it.
 
-[Download the source](https://github.com/docker/
-welcome-to-docker/archive/refs/heads/main.zip){: .button .primary-btn}
+[Download the source](https://github.com/docker/welcome-to-docker/archive/refs/heads/main.zip){: .button .primary-btn}
 
    <hr>
   </div>
