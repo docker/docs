@@ -44,4 +44,4 @@ The aim of this guide is to provide enough examples and instructions for you to 
 
 Let's get started!
 
-[Build your Go image](build-images.md){: .button .outline-btn}
+[Build your Go image](build-images.md){: .button .primary-btn}
