@@ -1861,8 +1861,6 @@ manuals:
       title: Team
     - path: /docker-hub/onboard-business/
       title: Business
-    - path: /docker-hub/onboarding-faqs/
-      title: FAQs
   - sectiontitle: Set up your company
     section:
     - path: /docker-hub/creating-companies/
@@ -1919,6 +1917,8 @@ manuals:
     title: Image Access Management
   - path: /docker-hub/deactivate-account/
     title: Deactivate an account or organization
+  - path: /docker-hub/onboarding-faqs/
+    title: FAQs
 
 - sectiontitle: Billing
   section:
