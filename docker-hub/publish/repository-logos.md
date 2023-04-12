@@ -26,7 +26,7 @@ over the repository can change the repository logo.
    (![Camera icon](./images/upload_logo_sm.png){: .inline height="22px" })
    overlaying the current repository logo.
 4. In the dialog that opens, select the PNG image that you want to upload to
-    †erset it as the logo for the repository.
+   set it as the logo for the repository.
 
 ## Remove the logo
 
