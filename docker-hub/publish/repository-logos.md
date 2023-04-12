@@ -34,4 +34,4 @@ Remove a logo using the clear button (![Clear button](../images/clear_logo_sm.pn
 
 Removing the logo makes the repository fallback to using the organization logo, if set, and the default logo if not.
 
-(![Camera icon](./images/default_logo_sm.png){: .inline height="22px" })
+![Default logo which is a 3D grey cube](./images/default_logo_sm.png){: .inline height="22px" }
