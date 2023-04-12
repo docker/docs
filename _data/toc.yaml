@@ -1850,6 +1850,8 @@ manuals:
       title: Advanced image analysis
     - path: /scout/artifactory/
       title: Artifactory integration
+    - path: /scout/vulnerability-database/
+      title: Vulnerability database
 
 - sectiontitle: Administration and security
   section:
