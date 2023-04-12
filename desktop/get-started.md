@@ -87,7 +87,7 @@ sub   rsa3072 2022-03-31 [E] [expires: 2024-03-30]
 To initialize `pass`, run the following command using the public key generated from the previous command:
 
 ```console
-$ pass init <generated gpg-id public key>
+$ pass init generated gpg-id public key
 ``` 
 Below is an example similar to what you see once you run the above command:
 
