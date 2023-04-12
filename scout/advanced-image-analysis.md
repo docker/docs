@@ -127,9 +127,18 @@ rel="noopener" class="_"} GitHub repository.
 
 ## Advanced image analysis sources
 
-Docker Scout's long-term vision is to provide features to help you maintain a secure software supply chain.
-However, there are other tools and products that promise to do the same, all of which might show different results to Docker Scout.
+Docker Scout's long-term vision is to provide features to help you maintain a
+secure software supply chain. However, there are other tools and products that
+promise to do the same, all of which might show different results to Docker
+Scout.
 
-Docker Scout ingests its vulnerability regularly data from multiple sources and correlates that data to provide actionable insights to you.
-It does this by making a full inventory of a container image and storing that inventory in a software bill of materials (SBOM).
-The SBOM summarizes the contents of the image and how the contents got there meaning that when there is information about a new vulnerability, Docker Scout correlates it with the SBOM. If Docker Scout finds a match for a vulnerability, it can identify the artefact that's now vulnerable, why, and where it's in use.
+Docker Scout ingests its vulnerability regularly data from multiple sources
+including high-profile package repositories and security trackers. 
+
+Scout correlates this data by making a full inventory of a container image and
+storing that inventory in a software bill of materials (SBOM).
+
+The SBOM summarizes the contents of the image and how the contents got there
+meaning that when there is information about a new vulnerability, Docker Scout
+correlates it with the SBOM. If Docker Scout finds a match for a vulnerability,
+it can identify the artefact that's now vulnerable, why, and where it's in use.

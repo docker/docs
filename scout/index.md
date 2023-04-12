@@ -42,15 +42,14 @@ To start using Docker Scout, turn on any of the following features:
 - [Advanced image analysis in Docker Hub](./advanced-image-analysis.md)
 - [Artifactory integration](./artifactory.md)
 
-Enabling either feature requires a paid Docker subscription. Once enabled,
-Docker Scout is activated for your organization automatically.
+Enabling either feature requires a paid Docker subscription, which enables Docker Scout for your organization.
 
 ### Advanced image analysis
 
 Advanced image analysis is a feature in Docker Hub which, when enabled, triggers
 a Docker Scout analysis every time you push an image. The analysis updates
 continuously, meaning that the vulnerability report for an image is always up to
-date as Docker Scout discovers new CVEs. No need to re-scan an image.
+date as Docker Scout discovers new vulnerabilities. No need to re-scan an image.
 
 For more information, see
 [Advanced image analysis](./advanced-image-analysis.md).
