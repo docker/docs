@@ -522,7 +522,7 @@ In this module, we met our example application and built and container image for
 
 In the next module, we’ll take a look at how to:
 
-[Run your image as a container](run-containers.md){: .button .outline-btn}
+[Run your image as a container](run-containers.md){: .button .primary-btn}
 
 ## Feedback
 

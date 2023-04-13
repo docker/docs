@@ -17,6 +17,7 @@ Additionally, with WSL 2, the time required to start a Docker daemon after a col
 
 Before you turn on the Docker Desktop WSL 2, ensure you have:
 
+- WSL version 1.1.3.0 or above.
 - Windows 10, version 1903 or higher, or Windows 11.
 - Enabled WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}.
 - Downloaded and installed the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){:target="_blank" rel="noopener" class="_"}.

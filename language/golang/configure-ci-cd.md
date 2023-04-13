@@ -20,7 +20,7 @@ You can also consider deploying your application to a public Cloud provider, suc
 
 In the next module, we’ll look into some options for doing so:
 
-[Deploy your app](deploy.md){: .button .outline-btn}
+[Deploy your app](deploy.md){: .button .primary-btn}
 
 ## Feedback
 
