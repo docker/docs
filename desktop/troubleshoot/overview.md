@@ -260,4 +260,47 @@ to learn how to view the Docker Daemon logs.
 
 
 
+System.Threading.Tasks.TaskCanceledException:
+Cancellation token triggered before we finished reading from the stream.
+   v HttpOverStream.ByLineReader.<ReadLineAsync>d__0.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v HttpOverStream.Client.DialMessageHandler.<SendAsync>d__9.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Docker.Core.IPC.Client.<SendAsync>d__5.MoveNext() v C:\workspaces\PR-21076\src\github.com\docker\pinata\win\src\Docker.Core\IPC\Client.cs:řádek 40
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v System.Net.Http.HttpClient.<FinishSendAsyncBuffered>d__58.MoveNext()
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Docker.Core.BackendAPI.ServiceAPIClient.<DestroyHyperVVMAsync>d__14.MoveNext() v C:\workspaces\PR-21076\src\github.com\docker\pinata\win\src\Docker.Core\BackendAPI\ServiceAPIClient.cs:řádek 128
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Docker.Engines.LinuxHyperVEngine.<DoDestroyAsync>d__20.MoveNext() v C:\workspaces\PR-21076\src\github.com\docker\pinata\win\src\Docker.Engines\LinuxHyperVEngine.cs:řádek 151
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Docker.ApiServices.StateMachines.DestroyTransition.<DoRunAsync>d__7.MoveNext() v C:\workspaces\PR-21076\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\DestroyTransition.cs:řádek 39
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Docker.ApiServices.StateMachines.EngineStateMachine.<DestroyAsync>d__17.MoveNext() v C:\workspaces\PR-21076\src\github.com\docker\pinata\win\src\Docker.ApiServices\StateMachines\EngineStateMachine.cs:řádek 93
+--- Konec trasování zásobníku z předchozího místa, ze kterého byla vyvolána výjimka ---
+   v System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   v System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   v System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   v Docker.Engines.Engines.<ResetToDefaultAsync>d__25.MoveNext() v C:\workspaces\PR-21076\src\github.com\docker\pinata\win\src\Docker.Engines\Engines.cs:řádek 180
 
