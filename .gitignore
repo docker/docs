@@ -10,3 +10,4 @@ CNAME
 _kbase/**
 /vendor
 /lint
+tmp/.htmltest/**

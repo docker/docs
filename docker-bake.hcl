@@ -36,18 +36,18 @@ target "vendor" {
 }
 
 group "validate" {
-  targets = ["htmlproofer", "mdl"]
+  targets = ["htmltest", "mdl"]
 }
 
-target "htmlproofer" {
+target "htmltest" {
   inherits = ["_common"]
-  target = "htmlproofer"
+  target = "htmltest"
   output = ["type=cacheonly"]
 }
 
-target "htmlproofer-output" {
+target "htmltest-output" {
   inherits = ["_common"]
-  target = "htmlproofer-output"
+  target = "htmltest-output"
   output = ["./lint"]
 }
 
