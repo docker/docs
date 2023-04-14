@@ -34,10 +34,10 @@ redirect_from:
 
 ## 2.17.0
 {% include release-date.html date="2023-03-23" %}
-### Upgrade Notes
-- Project name validation is more strictly enforced. Project names can only include letters, numbers, `_`, `-` and must be lowercase and start with a letter or number
-- Boolean fields in YAML must be either `true` or `false`. Deprecated YAML 1.1 values such as "on" or "no" are not supported
-- Duplicate YAML merge keys (`<<`) are rejected
+### Upgrade notes
+- Project name validation is more strictly enforced. Project names can only include letters, numbers, `_`, `-` and must be lowercase and start with a letter or number.
+- Boolean fields in YAML must be either `true` or `false`. Deprecated YAML 1.1 values such as "on" or "no" are not supported.
+- Duplicate YAML merge keys (`<<`) are rejected.
 
 ### Update
 - Dependencies upgrade: bump buildkit to v0.11.4
