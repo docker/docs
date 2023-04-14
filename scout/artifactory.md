@@ -162,11 +162,11 @@ $ docker run \
 
 #### Analyzing pre-existing data
 
-By default the agent will detect and analyze images as they're created and
-updated. If you would like to use the agent to analyze pre-existing images, you
-can use backfill mode. Use the `--backfill-from=TIME` command line argument,
+By default the agent detects and analyzes images as they're created and
+updated. If you want to use the agent to analyze pre-existing images, you
+can use backfill mode. Use the `--backfill-from=TIME` command line option,
 where `TIME` is an ISO 8601 formatted time, to run the agent in backfill mode.
-If this argument is given, the agent analyzes all images pushed between that
+If you use this option, the agent analyzes all images pushed between that
 time and the current time when the agent starts, then exits.
 
 For example:
@@ -178,8 +178,8 @@ $ docker run \
 ```
 
 When running a backfill multiple times, the agent won't analyze images that
-were already analyzed. To force re-analysis, provide the `--force` command
-line argument.
+it's already analyzed. To force re-analysis, provide the `--force` command
+line flag.
 
 ### View analysis results
 
