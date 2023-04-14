@@ -4,6 +4,14 @@ title: Docker-Sponsored Open Source Program
 keywords: docker hub, hub, insights, analytics, open source, Docker sponsored, program
 ---
 
+[Docker Sponsored Open Source images](https://hub.docker.com/search?q=&image_filter=open_source){:target="_blank" rel="noopener" class="_"} are published and maintained by open-source projects sponsored by Docker through the program.
+
+Images part of this program have a special badge on Docker Hub making it easier for you to identify projects that Docker has verified as active open source projects.
+
+![Docker-Sponsored Open Source badge](images/sponsored-badge-iso.png)
+
+## For content publishers
+
 The Docker-Sponsored Open Source Program provides several features and benefits to non-commercial open source developers.
 
 The program grants the following perks to eligible projects:
@@ -14,15 +22,15 @@ The program grants the following perks to eligible projects:
 - Removal of rate limiting for developers
 - Improved discoverability on Docker Hub
 
-These benefits are valid for one year and can be renewed if your project still meets the program requirements. Program members, and all users pulling public images from your project namespace get access to unlimited pulls and unlimited egress.
+These benefits are valid for one year and you can renew if your project still meets the program requirements. Program members, and all users pulling public images from your project namespace get access to unlimited pulls and unlimited egress.
 
-## Verified Docker-Sponsored Open Source badge
+### Verified Docker-Sponsored Open Source badge
 
 Docker verifies that developers can trust images with this badge as an active open source project.
 
 ![Fluent org with a Docker-Sponsored Open Source badge](images/sponsored-badge.png)
 
-## Insights and analytics
+### Insights and analytics
 
 The [insights and analytics](/docker-hub/publish/insights-analytics){:
 target="blank" rel="noopener" class=""} service provides usage metrics for how
@@ -37,7 +45,7 @@ tag, and the raw format lists information about every image pull for the
 selected time span. Data points include tag, type of pull, user geolocation,
 client tool (user agent), and more.
 
-## Vulnerability scanning
+### Vulnerability scanning
 
 Automatic vulnerability scanning using [Docker Scout](/scout/) for images published to Docker Hub.
 Scanning images ensures that the published content is secure, and underlines to
@@ -48,7 +56,7 @@ it.
 
 ## Who's eligible for the Docker-Sponsored Open Source program?
 
-To qualify for the program, your project namespace must be shared in public repositories, meet [the Open Source Initiative definition](https://opensource.org/docs/osd), and be in active development with no pathway to commercialization.
+To qualify for the program, your must share your project namespace in public repositories, meet [the Open Source Initiative definition](https://opensource.org/docs/osd), and be in active development with no pathway to commercialization.
 
 Find out more by heading to the
 [Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/#){:target="_blank"

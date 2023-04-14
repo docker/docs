@@ -7,16 +7,16 @@ redirect_from:
 ---
 
 The [Docker Official Images](https://hub.docker.com/search?q=&type=image&image_filter=official){:target="_blank" rel="noopener" class="_"} are a
-curated set of Docker repositories hosted on Docker Hub. They are
+curated set of Docker repositories hosted on Docker Hub. They're
 designed to:
 
 * Provide essential base OS repositories (for example,
-  [ubuntu](https://hub.docker.com/_/ubuntu/){:target="_blank" rel="noopener" class="_"},
-  [centos](https://hub.docker.com/_/centos/){:target="_blank" rel="noopener" class="_"}) that serve as the
+  [Ubuntu](https://hub.docker.com/_/ubuntu/){:target="_blank" rel="noopener" class="_"},
+  [CentOS](https://hub.docker.com/_/centos/){:target="_blank" rel="noopener" class="_"}) that serve as the
   starting point for the majority of users.
 
 * Provide drop-in solutions for popular programming language runtimes, data
-  stores, and other services, similar to what a Platform as a Service (PAAS)
+  stores, and other services. Similar to what a Platform as a Service (PaaS)
   would offer.
 
 * Exemplify [`Dockerfile` best practices](/engine/userguide/eng-image/dockerfile_best-practices/)
@@ -27,13 +27,13 @@ designed to:
   particularly important as Docker Official Images are some of the most
   popular on Docker Hub.
 
-Docker, Inc. sponsors a dedicated team that is responsible for reviewing and
+Docker, Inc. sponsors a dedicated team that's responsible for reviewing and
 publishing all content in the Docker Official Images. This team works in
 collaboration with upstream software maintainers, security experts, and the
 broader Docker community.
 
-While it is preferable to have upstream software authors maintaining their
-corresponding Docker Official Images, this is not a strict requirement. Creating
+While it's preferable to have upstream software authors maintaining their
+Docker Official Images, this isn't a strict requirement. Creating
 and maintaining images for Docker Official Images is a collaborative process. It takes
 place openly on GitHub where participation is encouraged. Anyone can provide
 feedback, contribute code, suggest process changes, or even propose a new

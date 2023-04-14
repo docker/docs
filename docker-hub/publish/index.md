@@ -19,8 +19,16 @@ redirect_from:
   - /docker-hub/publish/publisher-center-migration/
 ---
 
+[The Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store){:target="_blank" rel="noopener" class="_"} provides high-quality images from commercial publishers verified by Docker.
+
+Images part of this program have a special badge on Docker Hub making it easier for you to identify projects that Docker has verified as high-quality commercial publishers.
+
+![Docker-Sponsored Open Source badge](./images/verified-publisher-badge-iso.png)
+
+## For content publishers
+
 The Verified Publisher Program provides several features and benefits to Docker
-Hub publishers. The following perks are granted based on participation tier:
+Hub publishers. The program grants the following perks based on participation tier:
 
 - Verified publisher badge
 - Insights and analytics
