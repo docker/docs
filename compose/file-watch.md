@@ -48,7 +48,7 @@ Most importantly, watch mode allows for greater granularity than is practical wi
 
 For example, in a JavaScript project, ignoring the `node_modules/` directory has a couple benefits:
 * **Performance**: file trees with many small files can cause high I/O load in some configurations
-* **Multi-platform**: compiled artifacts cannot be shared if the host OS (e.g. Windows, macOS) or architecture (e.g. arm64) is different than the container
+* Multi-platform: compiled artifacts cannot be shared if the host OS (e.g. Windows, macOS) or architecture (e.g. arm64) is different than the container
 
 For example, in a Node.js project, it's not recommended to sync the `node_modules/` directory. Even though JavaScript is interpreted, npm packages can contain native code that is not portable across platforms.
 
@@ -108,16 +108,16 @@ services:
 ```
 
 In this example, when running `docker compose up --build --wait`, a container for the `web` service is launched using an image built from the `Dockerfile` in the project root.
-The `web` service runs `npm start` for its command, which will launch a development version of the application with Hot Module Reload enabled in the bundler (Webpack, Vite, Turbopack, etc).
+The `web` service runs `npm start` for its command, which then launches a development version of the application with Hot Module Reload enabled in the bundler (Webpack, Vite, Turbopack, etc).
 
-After the service is up, running `docker compose alpha watch` will start watch mode.
-Then, whenever a source file in the `web/` directory is changed, Compose will sync the file to the corresponding location under `/src/web` inside the container.
-For example, `./web/App.jsx` would be copied to `/src/web/App.jsx`.
+After the service is up, running `docker compose alpha watch` starts watch mode.
+Then, whenever a source file in the `web/` directory is changed, Compose syncs the file to the corresponding location under `/src/web` inside the container.
+For example, `./web/App.jsx` is copied to `/src/web/App.jsx`.
 
 Once copied, the bundler updates the running application without a restart.
 
 Unlike source code files, adding a new dependency can’t be done on-the-fly, so whenever `package.json` is changed, Compose
-will rebuild the image and recreate the `web` service container.
+rebuilds the image and recreates the `web` service container.
 
 This pattern can be followed for many languages and frameworks, such as Python with Flask: Python source files can be synced while a change to `requirements.txt` should trigger a rebuild.
 
