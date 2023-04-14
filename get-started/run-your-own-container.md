@@ -121,7 +121,7 @@ EXPOSE 3000
 CMD [ "serve", "-s", "build" ]
 ```
 
-## Step 3: Build your first image
+## Step 4: Build your first image
 
 An image is like a static version of a container. You always need an image to run a container. Once you have a Dockerfile in your repository, run the following `docker build` command in the project folder to create an image.
 
@@ -131,13 +131,13 @@ $ docker build -t welcome-to-docker .
 
 Building the image may take some time. After your image is built, you can view your image in the **Images** tab in Docker Desktop.
 
-## Step 4: Run your container
+## Step 5: Run your container
 
 To run your image as a container, go to the **Images** tab, and then select **Run** in the **Actions** column of your image. When the **Optional settings** appear, specify the **Host port** number `8089` and then select **Run**.
 
 ![Running an image in Docker Desktop](images/getting-started-run-image.gif){:width="500px"}
 
-## Step 5: Verify that your container is running
+## Step 6: Verify that your container is running
 
 You can use Docker Desktop to view and access running containers. Go to the **Containers** tab to view your container and select the link in the **Port(s)** column or go to [http://localhost:8089](http://localhost:8089){:target="_blank" rel="noopener" class="_"} to verify that the application is running.
 

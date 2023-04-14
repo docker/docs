@@ -153,11 +153,11 @@ advanced scenarios.
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/build/buildkit/dockerfile-frontend/">
+          <a href="/build/dockerfile/frontend/">
            <img src="/assets/images/build-frontends.svg" alt="Pen writing on a document" width="70px" height="70px">
           </a>
         </div>
-        <h2><a href="/build/buildkit/dockerfile-frontend/">Dockerfile frontend</a></h2>
+        <h2><a href="/build/dockerfile/frontend/">Dockerfile frontend</a></h2>
         <p>
           Learn about the Dockerfile frontend for BuildKit.
         </p>
