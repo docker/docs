@@ -59,8 +59,6 @@ Your Mac must meet the following requirements to install Docker Desktop successf
   $ softwareupdate --install-rosetta
   ```
 
- For more information, see [Docker Desktop for Apple silicon](../install/mac-install.md).
-
 </div>
 </div>
 
