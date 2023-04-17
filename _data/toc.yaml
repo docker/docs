@@ -1893,8 +1893,8 @@ manuals:
          title: Configure
       -  path: /single-sign-on/manage/
          title: Manage
-      - path: /docker-hub/configure-sign-in/
-          title: Enforce sign-in for Desktop
+      -  path: /docker-hub/configure-sign-in/
+         title: Enforce sign-in for Desktop
       -  path: /single-sign-on/faqs/
          title: FAQs
   - path: /docker-hub/scim/
