@@ -32,9 +32,7 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
     a) If the IdP provided group mappings for the user, the user gets added to the organizations and teams indicated by the group mappings.
     
-    b) If the IdP didn't provide group mappings, it checks if the user is already a member of the organization, or if the SSO connection is for multiple organizations (only at company level) if the user is a member of any of those organizations.
-        
-        i) If the user is not a member, it adds the user to the default team and organization configured in the SSO connection.
+    b) If the IdP didn't provide group mappings, it checks if the user is already a member of the organization, or if the SSO connection is for multiple organizations (only at company level) and if the user is a member of any of those organizations. If the user is not a member, it adds the user to the default team and organization configured in the SSO connection.
 
 ![JIT provisioning](images/jit.PNG)
 
@@ -51,3 +49,4 @@ Once complete, a user who signs in to Docker through SSO is automatically added 
 >**Tip**
 >
 > [Enable SCIM](scim.md) to take advantage of automatic user provisioning and de-provisioning. If you don't enable SCIM users are only automatically provisioned. You have to de-provision them manually. 
+{: .tip}
