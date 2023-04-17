@@ -26,7 +26,7 @@ These benefits are valid for one year and you can renew if your project still me
 
 ### Verified Docker-Sponsored Open Source badge
 
-Docker verifies that developers can trust images with this badge as an active open source project.
+Docker verifies that developers can trust images with this badge on Docker Hub as an active open source project.
 
 ![Fluent org with a Docker-Sponsored Open Source badge](images/sponsored-badge.png)
 
@@ -47,9 +47,13 @@ client tool (user agent), and more.
 
 ### Vulnerability scanning
 
-Automatic vulnerability scanning using [Docker Scout](/scout/) for images published to Docker Hub.
-Scanning images ensures that the published content is secure, and underlines to
-developers that they can trust it. You can enable scanning on a per-repository
+[Docker Scout](/scout/){:
+target="blank" rel="noopener" class=""} provides automatic vulnerability scanning 
+for DVP images published to Docker Hub.
+Scanning images ensures that the published content is secure, and proves to
+developers that they can trust the image.
+
+You can enable scanning on a per-repository
 basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
 target="blank" rel="noopener" class=""} for more information about how to use
 it.

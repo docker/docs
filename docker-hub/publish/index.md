@@ -37,11 +37,10 @@ Hub publishers. The program grants the following perks based on participation ti
 - Removal of rate limiting for developers
 - Co-marketing opportunities
 
-## Verified publisher badge
+### Verified publisher badge
 
-The verified publisher badge signals high quality, and trust, to developers.
-Images with this badge are verified as high quality, and the content can be
-trusted.
+Images part of this program have a badge on Docker Hub making it easier for developers
+to identify projects that Docker has verified as high quality publishers and with content they can trust.
 
 ![Docker, Inc. org with a verified publisher badge](./images/verified-publisher-badge.png)
 
@@ -60,11 +59,15 @@ tag, and the raw format lists information about every image pull for the
 selected time span. Data points include tag, type of pull, user geolocation,
 client tool (user agent), and more.
 
-## Vulnerability scanning
+### Vulnerability scanning
 
-Automatic vulnerability scanning for images published to Docker Hub.
-Scanning images ensures that the published content is secure, and underlines to
-developers that it can be trusted. Scanning can be enabled on a per-repository
+[Docker Scout](/scout/){:
+target="blank" rel="noopener" class=""} provides automatic vulnerability scanning 
+for DVP images published to Docker Hub.
+Scanning images ensures that the published content is secure, and proves to
+developers that they can trust the image.
+
+You can enable scanning on a per-repository
 basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
 target="blank" rel="noopener" class=""} for more information about how to use
 it.
