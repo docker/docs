@@ -1885,8 +1885,6 @@ manuals:
     title: Create and manage a team
   - path: /docker-hub/members/
     title: Manage members
-  - path: /docker-hub/configure-sign-in/
-    title: Enforce sign-in
   - sectiontitle: Single Sign-on
     section:
       -  path: /single-sign-on/
@@ -1917,6 +1915,8 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
+  - path: /docker-hub/configure-sign-in/
+    title: Enforce sign-in for Desktop
   - path: /docker-hub/audit-log/
     title: Audit logs
   - path: /docker-hub/domain-audit/
