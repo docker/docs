@@ -1776,6 +1776,8 @@ manuals:
     title: Extend services in Compose
   - path: /compose/networking/
     title: Networking in Compose
+  - path: /compose/file-watch/
+    title: Automatically update services with file watch (Experimental)
   - path: /compose/production/
     title: Using Compose in production
   - path: /compose/startup-order/
