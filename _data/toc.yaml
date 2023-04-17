@@ -932,6 +932,8 @@ reference:
         title: Extensions
       - path: /compose/compose-file/12-interpolation/
         title: Interpolation
+      - path: /compose/compose-file/13-merge/
+        title: Merge
     - path: /compose/compose-file/build/
       title: Compose file build
     - path: /compose/compose-file/deploy/
