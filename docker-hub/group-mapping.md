@@ -17,7 +17,7 @@ Once you enable group mappings in your connection, users assigned to that group 
 
 ## How group mapping works
 
-IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. These attributes are used by Just-In-Time (JIT) Provisioning to create or update their user’s Docker profile and their associations with organizations and teams on Docker Hub.
+IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. These attributes are used by Just-In-Time (JIT) Provisioning to create or update the user’s Docker profile and their associations with organizations and teams on Docker Hub.
 
 Docker uses the email address of the user to identify them on the platform. Every Docker account must have a unique email address at all times.
 
@@ -25,7 +25,7 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
 1. Checks if there's an existing Docker account with the email address of the user that just authenticated.
     
-    a) If no account is found with the same email address, it creates a new Docker account using basic user attributes (email, name and surname). The JIT provisioner generates a new username for this new account by using the email, name, and random numbers to make sure that all account usernames are unique in the platform.
+    a) If no account is found with the same email address, it creates a new Docker account using basic user attributes (email, name, and surname). The JIT provisioner generates a new username for this new account by using the email, name, and random numbers to make sure that all account usernames are unique in the platform.
     
     b) If an account exists for this email address, it uses this account and updates the full name of the user’s profile if needed.
 2. Checks if the IdP shared group mappings while authenticating the user.

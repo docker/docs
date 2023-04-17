@@ -49,7 +49,9 @@ Follow the steps on this page to configure SSO for your organization or company.
    - SAML: **Entity ID**, **ACS URL**
    - Azure AD (OIDC): **Redirect URL**
 
-   ![SAML](../../docker-hub/images/saml-create-connection.png){: width="700px" } ![Azure AD](../../docker-hub/images/azure-create-connection.png){: width="700px" }
+   ![SAML](../../docker-hub/images/saml-create-connection.png){: width="500px" }
+   
+   ![Azure AD](../../docker-hub/images/azure-create-connection.png){: width="500px" }
 
 4. From your IdP, copy and paste the following values into the Docker **Settings** fields:
 
@@ -75,18 +77,16 @@ After you’ve completed the SSO configuration process in Docker Hub, you can te
 1. Authenticate through email instead of using your Docker ID, and test the login process.
 2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.
 
-## Optional step four: Enforce SSO in Docker Hub
+## Optional step four: Enforce SSO 
 
 1. In the **Single Sign-On Connections** table, select the **Action** icon and then **Enforce Single Sign-on**.
     When SSO is enforced, your users are unable to modify their email address and password, convert a user account to an organization, or set up 2FA through Docker Hub. You must enable 2FA through your IdP.
 2. Continue with the on-screen instructions and verify that you’ve completed the tasks. 
 3. Select **Turn on enforcement** to complete. 
 
-Your users must now sign in to Docker Hub with SSO. 
-
-To enforce SSO for Docker Desktop, see [Enforce sign-in](../../docker-hub/configure-sign-in.md).
+Your users must now sign in to Docker with SSO. 
 
 >**Important**
 >
->If SSO is not enforced, users can choose to sign in with either their Docker ID or SSO.
+>If SSO isn't enforced, users can choose to sign in with either their Docker ID or SSO.
 {: .important}

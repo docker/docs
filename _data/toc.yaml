@@ -1893,8 +1893,6 @@ manuals:
          title: Configure
       -  path: /single-sign-on/manage/
          title: Manage
-      -  path: /docker-hub/configure-sign-in/
-         title: Enforce sign-in for Desktop
       -  path: /single-sign-on/faqs/
          title: FAQs
   - path: /docker-hub/scim/
@@ -1915,6 +1913,8 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
+  - path: /docker-hub/configure-sign-in/
+    title: Enforce sign-in for Desktop
   - path: /docker-hub/audit-log/
     title: Audit logs
   - path: /docker-hub/domain-audit/
