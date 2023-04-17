@@ -49,6 +49,9 @@ Follow the steps on this page to configure SSO for your organization or company.
    - SAML: **Entity ID**, **ACS URL**
    - Azure AD (OIDC): **Redirect URL**
 
+   ![SAML](../../docker-hub/images/saml-create-connection.png) 
+   ![Azure AD](../../docker-hub/images/azure-create-connection.png)
+
 4. From your IdP, copy and paste the following values into the Docker **Settings** fields:
 
     - SAML: **SAML Sign-on URL**, **x509 Certificate**
