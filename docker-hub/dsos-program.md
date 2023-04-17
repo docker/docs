@@ -26,7 +26,7 @@ These benefits are valid for one year and you can renew if your project still me
 
 ### Verified Docker-Sponsored Open Source badge
 
-Docker verifies that developers can trust images with this badge as an active open source project.
+Docker verifies that developers can trust images with this badge on Docker Hub as an active open source project.
 
 ![Fluent org with a Docker-Sponsored Open Source badge](images/sponsored-badge.png)
 
