@@ -20,7 +20,7 @@ redirect_from:
 ---
 
 The Verified Publisher Program provides several features and benefits to Docker
-Hub publishers. The following perks are granted based on participation tier:
+Hub publishers. The program grants the following perks based on participation tier:
 
 - Verified publisher badge
 - Insights and analytics
@@ -32,8 +32,8 @@ Hub publishers. The following perks are granted based on participation tier:
 ## Verified publisher badge
 
 The verified publisher badge signals high quality, and trust, to developers.
-Images with this badge are verified as high quality, and the content can be
-trusted.
+
+Images from publishers with this badge are verified as high quality, and that users can trust the content.
 
 ![Docker, Inc. org with a verified publisher badge](./images/verified-publisher-badge.png)
 
@@ -46,17 +46,18 @@ behavior.
 
 ![The insights and analytics tab on the Docker Hub website](./images/insights-and-analytics-tab.png)
 
-Select the time span you want to view analytics data, and export the data in
-either a summary or raw format. The summary format shows you image pulls per
-tag, and the raw format lists information about every image pull for the
-selected time span. Data points include tag, type of pull, user geolocation,
-client tool (user agent), and more.
+You can use the view to select the time span you want to view analytics data and export the data in
+either a summary or raw format.
+
+The summary format shows image pulls per tag, and the raw format lists information about every image pull for the
+selected time span. Data points include tag, type of pull, user geolocation, client tool (user agent), and more.
 
 ## Vulnerability scanning
 
-Automatic vulnerability scanning for images published to Docker Hub.
-Scanning images ensures that the published content is secure, and underlines to
-developers that it can be trusted. Scanning can be enabled on a per-repository
+[Docker Scout](/scout/){:
+target="blank" rel="noopener" class=""} provides automatic vulnerability scanning for DVP images published to Docker Hub.
+Scanning images ensures that the published content is secure, and proves to
+developers that they can trust the image. You can enable scanning on a per-repository
 basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
 target="blank" rel="noopener" class=""} for more information about how to use
 it.
