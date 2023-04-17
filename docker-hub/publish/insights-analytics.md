@@ -4,29 +4,29 @@ description: Provides usage statistics of your images on Docker Hub.
 keywords: docker hub, hub, insights, analytics, api, verified publisher
 ---
 
-Insights and analytics provides usage analytics for your Docker Verified
-Publisher (DVP) images on Docker Hub. With this tool, you have self-serve access
+Insights and analytics provides usage analytics for Docker Verified
+Publisher (DVP) images on Docker Hub, providing self-serve access
 to metrics as both raw data and summary data for a desired time span. You can
 view number of image pulls by tag or by digest, and get breakdowns by
-geolocation, cloud provider, client, and more. Head to the
+geolocation, cloud provider, client, and more.
+
+Head to the
 [Docker Verified Publisher Program page](https://www.docker.com/partners/programs/){: target="blank" rel="noopener" class="_" }
 to learn more about the benefits of becoming a verified publisher.
 
 ## View the analytics data
 
-Analytics data for your repositories is available on the **Insights and
+You can find analytics data for your repositories on the **Insights and
 analytics** dashboard at the following URL:
 `https://hub.docker.com/orgs/{namespace}/insights`. The dashboard contains a
-chart visualization of the usage data, as well as a table where you can download
+visualization of the usage data and a table where you can download
 the data as CSV files.
 
 To view data in the chart:
 
 - Select the data granularity: weekly or monthly
 - Select the time interval: 3, 6, or 12 months
-- Select one or more repositories in the list.
-
-  You can filter the list by repository name.
+- Select one or more repositories in the list
 
 ![Insights and analytics chart visualization](./images/chart.png)
 
@@ -37,18 +37,17 @@ To view data in the chart:
 > for points in time.
 {: .tip }
 
-### Share
+### Share analytics data
 
-You can share the visualization chart with others using the share icon located
-just above the chart:
+You can share the visualization with others using the share icon above the chart.
+This is a convenient way to share statistics with others in your organization.
 
 ![Chart share icon](./images/chart-share-icon.png)
 
-Selecting the icon generates a link that gets copied to your clipboard. The link
-preserves the display selections you've made. When someone uses the link, the
+Selecting the icon generates a link that's copied to your clipboard. The link
+preserves the display selections you made. When someone follows the link, the
 **Insights and analytics** page opens and displays the chart with the same
-configuration as you had set up when creating the link. This is a convenient way
-to quickly share statistics with others in your organization.
+configuration as you had set up when creating the link.
 
 ## Exporting analytics data
 
@@ -61,10 +60,9 @@ Sunday) or monthly format. Monthly data is available from the first day of the
 following calendar month. You can import this data into your own systems, or you
 can analyze it manually as a spreadsheet.
 
-### Export data using the website
+### Export data
 
-Here's how to export usage data for your organization's images using the Docker
-Hub website.
+Export usage data for your organization's images using the Docker Hub website by following these steps:
 
 1.  Sign in to [Docker Hub](https://hub.docker.com/){: target="_blank"
     rel="noopener" class="_"} and select **Organizations**.
@@ -103,7 +101,7 @@ represents an image pull.
 | Data point                    | Description                                                                                                  | Date added        |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------- |
 | Action                        | Request type, see [Action classification rules][1]. One of `pull_by_tag`, `pull_by_digest`, `version_check`. | January 1, 2022   |
-| Action day                    | The date part of the timestamp: `YYYY-MM-DD`                                                                 | January 1, 2022   |
+| Action day                    | The date part of the timestamp: `YYYY-MM-DD`.                                                                 | January 1, 2022   |
 | Country                       | Request origin country.                                                                                      | January 1, 2022   |
 | Digest                        | Image digest.                                                                                                | January 1, 2022   |
 | HTTP method                   | HTTP method used in the request, see [registry API documentation][2] for details.                            | January 1, 2022   |
@@ -112,8 +110,8 @@ represents an image pull.
 | Reference                     | Image digest or tag used in the request.                                                                     | January 1, 2022   |
 | Repository                    | Docker [repository][4] (image name).                                                                         | January 1, 2022   |
 | Tag (included when available) | Tag name that's only available if the request referred to a tag.                                             | January 1, 2022   |
-| Timestamp                     | Date and time of the request: `YYYY-MM-DD 00:00:00`                                                          | January 1, 2022   |
-| Type                          | The industry from which the event originates. One of `business`, `isp`, `hosting`, `education`, `null`       | January 1, 2022   |
+| Timestamp                     | Date and time of the request: `YYYY-MM-DD 00:00:00`.                                                          | January 1, 2022   |
+| Type                          | The industry from which the event originates. One of `business`, `isp`, `hosting`, `education`, `null`.       | January 1, 2022   |
 | User agent tool               | The application a user used to pull an image (for example, `docker` or `containerd`).                        | January 1, 2022   |
 | User agent version            | The version of the application used to pull an image.                                                        | January 1, 2022   |
 | Domain                        | Request origin domain, see [Privacy](#privacy).                                                              | October 11, 2022  |
@@ -164,16 +162,16 @@ target="_blank" rel="noopener" class="_"}.
 
 | Starting event | Reference | Followed by                                                     | Resulting action | Use case(s)                                                                                                    | Notes                                                                                                                                                                                                                                                                                          |
 | :------------- | :-------- | :-------------------------------------------------------------- | :--------------- | :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| HEAD           | tag       | N/A                                                             | Version check    | User already has all layers existing on local machine                                                          | This is similar to the use case of a pull by tag when the user already has all the image layers existing locally, however, we are able to differentiate the user intent and classify accordingly.                                                                                              |
+| HEAD           | tag       | N/A                                                             | Version check    | User already has all layers existing on local machine                                                          | This is similar to the use case of a pull by tag when the user already has all the image layers existing locally, however, it differentiates the user intent and classifies accordingly.                                                                                              |
 | GET            | tag       | N/A                                                             | Pull by tag      | User already has all layers existing on local machine and/or the image is single-arch                          |
-| GET            | tag       | Get by different digest                                         | Pull by tag      | Image is multi-arch                                                                                            | Second GET by digests must be different from the first                                                                                                                                                                                                                                         |
-| HEAD           | tag       | GET by same digest                                              | Pull by tag      | Image is multi-arch but some or all image layers already exist on the local machine.                           | The HEAD by tag will send the most current digest, the following GET must be by that same digest. There may occur an additional GET, if the image is multi-arch (see the next row in this table). If the user doesn't want the most recent digest, then the user would perform HEAD by digest. |
-| HEAD           | tag       | GET by the same digest, then a second GET by a different digest | Pull by tag      | Image is multi-arch                                                                                            | The HEAD by tag will send the most recent digest, the following GET must be by that same digest. Since the image is multi-arch, there is a second GET by a different digest. If the user doesn't want the most recent digest, then the user would perform HEAD by digest.                      |
-| HEAD           | tag       | GET by same digest, then a second GET by different digest       | Pull by tag      | Image is multi-arch                                                                                            | The HEAD by tag will send the most current digest, the following GET must be by that same digest. Since the image is multi-arch, there is a second GET by a different digest. If the user doesn't want the most recent digest, then the user would perform HEAD by digest.                     |
+| GET            | tag       | Get by different digest                                         | Pull by tag      | Image is multi-arch                                                                                            | Second GET by digest must be different from the first.                                                                                                                                                                                                                                         |
+| HEAD           | tag       | GET by same digest                                              | Pull by tag      | Image is multi-arch but some or all image layers already exist on the local machine                           | The HEAD by tag sends the most current digest, the following GET must be by that same digest. There may occur an additional GET, if the image is multi-arch (see the next row in this table). If the user doesn't want the most recent digest, then the user performs HEAD by digest. |
+| HEAD           | tag       | GET by the same digest, then a second GET by a different digest | Pull by tag      | Image is multi-arch                                                                                            | The HEAD by tag sends the most recent digest, the following GET must be by that same digest. Since the image is multi-arch, there is a second GET by a different digest. If the user doesn't want the most recent digest, then the user performs HEAD by digest.                      |
+| HEAD           | tag       | GET by same digest, then a second GET by different digest       | Pull by tag      | Image is multi-arch                                                                                            | The HEAD by tag sends the most current digest, the following GET must be by that same digest. Since the image is multi-arch, there is a second GET by a different digest. If the user doesn't want the most recent digest, then the user performs HEAD by digest.                     |
 | GET            | digest    | N/A                                                             | Pull by digest   | User already has all layers existing on local machine and/or the image is single-arch                          |
-| HEAD           | digest    | N/A                                                             | Pull by digest   | User already has all layers existing on their local machine.                                                   |
-| GET            | digest    | GET by different digest                                         | Pull by digest   | Image is multi-arch                                                                                            | The second GET by digest must be different from the first                                                                                                                                                                                                                                      |
-| HEAD           | digest    | GET by same digest                                              | Pull by digest   | Image is single arch and/or image is multi-arch but some part of the image already exists on the local machine |
+| HEAD           | digest    | N/A                                                             | Pull by digest   | User already has all layers existing on their local machine                                                   |
+| GET            | digest    | GET by different digest                                         | Pull by digest   | Image is multi-arch                                                                                            | The second GET by digest must be different from the first.                                                                                                                                                                                                                                      |
+| HEAD           | digest    | GET by same digest                                              | Pull by digest   | Image is single-arch and/or image is multi-arch but some part of the image already exists on the local machine |
 | HEAD           | digest    | GET by same digest, then a second GET by different digest       | Pull by Digest   | Image is multi-arch                                                                                            |
 
 ## Changes in data over time
@@ -200,11 +198,11 @@ consumers of content on Docker Hub remain completely anonymous.
 > analytics data.
 {: .important }
 
-The summary dataset includes Unique IP address count. This data point only
+The summary dataset includes unique IP address count. This data point only
 includes the number of distinct unique IP addresses that request an image.
 Individual IP addresses are never shared.
 
-The raw dataset includes user IP domains as a data point. That's the domain name
+The raw dataset includes user IP domains as a data point. This is the domain name
 associated with the IP address used to pull an image. If the IP type is
 `business`, the domain represents the company or organization associated with
 that IP address (for example, `docker.com`). For any other IP type that's not
