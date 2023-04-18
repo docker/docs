@@ -157,10 +157,7 @@ $ sudo yum-config-manager \
 
 This installs and runs Docker Engine. 
 
-> Receiving errors when trying to run without root?
-> 
-> Continue to [Linux post-install](linux-postinstall.md) to allow non-privileged users to run Docker commands 
-> and for other optional configuration steps.
+{% include root-errors.md %}
 
 #### Upgrade Docker Engine
 

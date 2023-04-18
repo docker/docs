@@ -170,11 +170,7 @@ $ sudo yum-config-manager \
 
 You have now successfully installed and started Docker Engine. 
 
-> Receiving errors when trying to run without root?
->
-> The `docker` user group exists but contains no users, which is why you’re required 
-> to use `sudo` to run Docker commands. Continue to [Linux postinstall](linux-postinstall.md) 
-> to allow non-privileged users to run Docker commands and for other optional configuration steps.
+{% include root-errors.md %}
 
 #### Upgrade Docker Engine
 
