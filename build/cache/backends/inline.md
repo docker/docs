@@ -18,7 +18,7 @@ want to consider the [registry](./registry.md) cache.
 ```console
 $ docker buildx build --push -t <registry>/<image> \
   --cache-to type=inline \
-  --cache-from type=registry,ref=<registry>/image .
+  --cache-from type=registry,ref=<registry>/<image> .
 ```
 
 No additional parameters are supported for the `inline` cache.
