@@ -2,6 +2,7 @@
 datafolder: engine-cli
 datafile: docker_run
 title: docker run
+description: Learn all there is to know about the docker run command and how to use it in the Docker CLI.
 redirect_from:
   - /reference/run/
   - /edge/engine/reference/commandline/run/
