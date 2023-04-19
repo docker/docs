@@ -7,7 +7,7 @@ title: Overview
 > **Note**
 >
 > The company layer is in [early access](../release-lifecycle.md#early-access-ea)
-> and requires a Docker Team or Business subscription.
+> and requires a Docker Business subscription.
 
 A company provides a single point of visibility across multiple organizations. Docker introduced this new view to simplify the management of Docker organizations and settings. It's available to Docker Business subscribers. 
 

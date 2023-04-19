@@ -19,7 +19,7 @@ Between 2014 and 2017 two other noticeable versions of Compose, which introduced
 
 These three key file format versions and releases prior to v1.29.2 are collectively referred to as Compose V1. 
 
-In mid-2020 Compose V2 was released. It merged Compose file format V2 and V3 and was written in Go. The file format is defined by the [Compose specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"}. Compose V2 is the latest and recommended version of Compose. It provides improved integration with other Docker command-line features, and simplified installation on macOS, Windows, and Linux.  
+In mid-2020 Compose V2 was released. It merged Compose file format V2 and V3 and was written in Go. The file format is defined by the [Compose specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"}. Compose V2 is the latest and recommended version of Compose and is compatible with Docker Engine version 19.03.0 and later. It provides improved integration with other Docker command-line features, and simplified installation on macOS, Windows, and Linux.  
 
 It makes a clean distinction between the Compose YAML file model and the `docker-compose`
 implementation. Making this change has enabled a number of enhancements, including

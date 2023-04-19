@@ -19,7 +19,7 @@ It also introduces support for handling more complex scenarios:
   [build context](../building/context.md) between builds
 - Detect and skip transferring unused files in your
   [build context](../building/context.md)
-- Use [Dockerfile frontend](dockerfile-frontend.md) implementations with many
+- Use [Dockerfile frontend](../dockerfile/frontend.md) implementations with many
   new features
 - Avoid side effects with rest of the API (intermediate images and containers)
 - Prioritize your build cache for automatic pruning
@@ -70,7 +70,7 @@ work for the features used by their definition.
 
 For example, to build a [Dockerfile](../../engine/reference/builder.md) with
 BuildKit, you would
-[use an external Dockerfile frontend](dockerfile-frontend.md).
+[use an external Dockerfile frontend](../dockerfile/frontend.md).
 
 ## Getting started
 

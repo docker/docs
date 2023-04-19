@@ -53,11 +53,11 @@ behavior.
 
 ![The insights and analytics tab on the Docker Hub website](./images/insights-and-analytics-tab.png)
 
-Select the time span you want to view analytics data, and export the data in
-either a summary or raw format. The summary format shows you image pulls per
-tag, and the raw format lists information about every image pull for the
-selected time span. Data points include tag, type of pull, user geolocation,
-client tool (user agent), and more.
+You can use the view to select the time span you want to view analytics data and export the data in
+either a summary or raw format.
+
+The summary format shows image pulls per tag, and the raw format lists information about every image pull for the
+selected time span. Data points include tag, type of pull, user geolocation, client tool (user agent), and more.
 
 ### Vulnerability scanning
 

@@ -1,0 +1,17 @@
+DirectoryPath: "_site"
+EnforceHTTPS: false
+CheckDoctype: false
+CheckExternal: false
+IgnoreAltMissing: true
+IgnoreAltEmpty: true
+IgnoreEmptyHref: true
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreURLs:
+- "^/docker-hub/api/latest/.*$"
+- "^/engine/api/v.+/#.*$"
+- "^/glossary/.*$"
+IgnoreDirs:
+- "engine/api"
+- "registry/configuration"
+- "compose/compose-file" # temporarily ignore until upstream is fixed
+CacheExpires: "6h"

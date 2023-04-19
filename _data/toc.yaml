@@ -932,6 +932,8 @@ reference:
         title: Extensions
       - path: /compose/compose-file/12-interpolation/
         title: Interpolation
+      - path: /compose/compose-file/13-merge/
+        title: Merge
     - path: /compose/compose-file/build/
       title: Compose file build
     - path: /compose/compose-file/deploy/
@@ -1685,12 +1687,16 @@ manuals:
           title: SLSA definitions
         - path: /build/attestations/attestation-storage/
           title: Attestation storage
+    - sectiontitle: Dockerfile
+      section:
+        - path: /build/dockerfile/frontend/
+          title: Custom Dockerfile syntax
+        - path: /build/dockerfile/release-notes/
+          title: Release notes
     - sectiontitle: BuildKit
       section:
         - path: /build/buildkit/
           title: Overview
-        - path: /build/buildkit/dockerfile-frontend/
-          title: Custom Dockerfile syntax
         - path: /build/buildkit/configure/
           title: Configure
         - path: /build/buildkit/toml-configuration/
@@ -1772,6 +1778,8 @@ manuals:
     title: Extend services in Compose
   - path: /compose/networking/
     title: Networking in Compose
+  - path: /compose/file-watch/
+    title: Automatically update services with file watch (Experimental)
   - path: /compose/production/
     title: Using Compose in production
   - path: /compose/startup-order/
@@ -1861,8 +1869,6 @@ manuals:
       title: Team
     - path: /docker-hub/onboard-business/
       title: Business
-    - path: /docker-hub/onboarding-faqs/
-      title: FAQs
   - sectiontitle: Set up your company
     section:
     - path: /docker-hub/creating-companies/
@@ -1879,8 +1885,6 @@ manuals:
     title: Create and manage a team
   - path: /docker-hub/members/
     title: Manage members
-  - path: /docker-hub/configure-sign-in/
-    title: Enforce sign-in
   - sectiontitle: Single Sign-on
     section:
       -  path: /single-sign-on/
@@ -1911,6 +1915,8 @@ manuals:
             title: Recover your Docker Hub account
           - path: /docker-hub/2fa/new-recovery-code/
             title: Generate a new recovery code
+  - path: /docker-hub/configure-sign-in/
+    title: Enforce sign-in for Desktop
   - path: /docker-hub/audit-log/
     title: Audit logs
   - path: /docker-hub/domain-audit/
@@ -1919,6 +1925,8 @@ manuals:
     title: Image Access Management
   - path: /docker-hub/deactivate-account/
     title: Deactivate an account or organization
+  - path: /docker-hub/onboarding-faqs/
+    title: FAQs
 
 - sectiontitle: Billing
   section:

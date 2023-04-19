@@ -740,7 +740,7 @@ In this module, we set up a containerised development environment with our appli
 
 In the next module, we’ll take a look at one possible approach to running functional tests in Docker. See:
 
-[Run your tests](run-tests.md){: .button .outline-btn}
+[Run your tests](run-tests.md){: .button .primary-btn}
 
 ## Feedback
 

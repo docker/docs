@@ -35,7 +35,7 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - htmlproofer
+          - htmltest
           - mdl
     steps:
       -
@@ -70,7 +70,7 @@ jobs:
 
             // construct annotations by parsing output
             switch ("${{ matrix.target }}") {
-            case "htmlproofer":
+            case "htmltest":
               const re = /^- (.+)\n  \*  (.+) \(line (\d+)\)\n(.+)$/gm;
               while (true) {
                 const result = re.exec(results);
@@ -79,7 +79,7 @@ jobs:
                 }
 
                 core.error(`${result[2]}\n${result[4]}`, {
-                  title: 'Link check failed',
+                  title: 'HTML test failed',
                   // file: result[1],
                   // startLine: result[3],
                 });
