@@ -165,4 +165,4 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 
 ## Feedback
 
-To provide feedbac, create an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"} repository and add the **WSL 2** label.
+To provide feedback, create an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"} repository and add the **WSL 2** label.
