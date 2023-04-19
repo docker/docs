@@ -17,6 +17,7 @@ Additionally, with WSL 2, the time required to start a Docker daemon after a col
 
 Before you turn on the Docker Desktop WSL 2, ensure you have:
 
+- WSL version 1.1.3.0 or above.
 - Windows 10, version 1903 or higher, or Windows 11.
 - Enabled WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}.
 - Downloaded and installed the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){:target="_blank" rel="noopener" class="_"}.
@@ -158,6 +159,10 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 = 2724.379 single-precision GFLOP/s at 20 flops per interaction
 ```
 
+> **Note**
+>
+> GPU support is only available in Docker Desktop for Windows with the WSL2 backend.
+> 
 ## Feedback
 
 Your feedback is very important to us. Let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"} repository and adding the **WSL 2** label.

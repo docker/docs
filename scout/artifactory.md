@@ -160,6 +160,27 @@ $ docker run \
   docker/artifactory-agent:v1
 ```
 
+#### Analyzing pre-existing data
+
+By default the agent detects and analyzes images as they're created and
+updated. If you want to use the agent to analyze pre-existing images, you
+can use backfill mode. Use the `--backfill-from=TIME` command line option,
+where `TIME` is an ISO 8601 formatted time, to run the agent in backfill mode.
+If you use this option, the agent analyzes all images pushed between that
+time and the current time when the agent starts, then exits.
+
+For example:
+
+```console
+$ docker run \
+  --mount type=bind,src=/var/opt/artifactory-agent,target=/opt/artifactory-agent/data \
+  docker/artifactory-agent:v1 --backfill-from=2022-04-10T10:00:00Z
+```
+
+When running a backfill multiple times, the agent won't analyze images that
+it's already analyzed. To force re-analysis, provide the `--force` command
+line flag.
+
 ### View analysis results
 
 You can view the image analysis results in the Docker Scout web UI.

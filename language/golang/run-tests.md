@@ -102,7 +102,7 @@ In this module, we've seen an example of using Docker for isolated functional te
 
 In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
 
-[Configure CI/CD](configure-ci-cd.md){: .button .outline-btn}
+[Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
 
 ## Feedback
 

@@ -2,7 +2,7 @@
 description: Troubleshooting topics
 keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop
 title: Troubleshoot topics
-toc_max: 3
+toc_max: 4
 ---
 
 ## Topics for all platforms
