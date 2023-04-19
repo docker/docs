@@ -9,7 +9,7 @@ title: Overview
 >
 > The Dev Environments feature is currently in [Beta](../../release-lifecycle.md#beta). We recommend that you do not use this in production environments.
 
-Dev Environments lets you create a configurable developer environment with all the code and tools you need to quickly get up and running. 
+Dev Environments let you create a configurable developer environment with all the code and tools you need to quickly get up and running. 
 
 It uses tools built into code editors that allows Docker to access code mounted into a container rather than on your local host. This isolates the tools, files and running services on your machine allowing multiple versions of them to exist side by side.
 
