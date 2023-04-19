@@ -159,6 +159,10 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 = 2724.379 single-precision GFLOP/s at 20 flops per interaction
 ```
 
+> **Note**
+>
+> GPU support is only available in Docker Desktop for Windows with the WSL2 backend.
+> 
 ## Feedback
 
 Your feedback is very important to us. Let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"} repository and adding the **WSL 2** label.
