@@ -191,10 +191,9 @@ a new file each time you want to upgrade Docker Engine.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints a message and exits.
 
-This installs and runs Docker Engine. Use `sudo` to run Docker commands.
-Continue to [Post-installation steps for Linux](linux-postinstall.md) to allow
-non-privileged users to run Docker commands and for other optional configuration
-steps.
+This installs and runs Docker Engine.
+
+{% include root-errors.md %}
 
 #### Upgrade Docker Engine
 
