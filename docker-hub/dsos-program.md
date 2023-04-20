@@ -6,7 +6,7 @@ keywords: docker hub, hub, insights, analytics, open source, Docker sponsored, p
 
 [Docker Sponsored Open Source images](https://hub.docker.com/search?q=&image_filter=open_source){:target="_blank" rel="noopener" class="_"} are published and maintained by open-source projects sponsored by Docker through the program.
 
-Images part of this program have a special badge on Docker Hub making it easier for you to identify projects that Docker has verified as active open source projects.
+Images that are part of this program have a special badge on Docker Hub making it easier for you to identify projects that Docker has verified as active open-source projects.
 
 ![Docker-Sponsored Open Source badge](images/sponsored-badge-iso.png)
 
