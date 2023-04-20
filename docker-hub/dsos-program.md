@@ -60,7 +60,7 @@ it.
 
 ## Who's eligible for the Docker-Sponsored Open Source program?
 
-To qualify for the program, your must share your project namespace in public repositories, meet [the Open Source Initiative definition](https://opensource.org/docs/osd), and be in active development with no pathway to commercialization.
+To qualify for the program, you must share your project namespace in public repositories, meet [the Open Source Initiative definition](https://opensource.org/docs/osd), and be in active development with no pathway to commercialization.
 
 Find out more by heading to the
 [Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/#){:target="_blank"
