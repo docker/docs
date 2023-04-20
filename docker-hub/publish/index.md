@@ -39,7 +39,7 @@ Hub publishers. The program grants the following perks based on participation ti
 
 ### Verified publisher badge
 
-Images part of this program have a badge on Docker Hub making it easier for developers
+Images that are part of this program have a badge on Docker Hub making it easier for developers
 to identify projects that Docker has verified as high quality publishers and with content they can trust.
 
 ![Docker, Inc. org with a verified publisher badge](./images/verified-publisher-badge.png)
