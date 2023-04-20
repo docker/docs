@@ -21,7 +21,7 @@ redirect_from:
 
 [The Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store){:target="_blank" rel="noopener" class="_"} provides high-quality images from commercial publishers verified by Docker.
 
-Images part of this program have a special badge on Docker Hub making it easier for you to identify projects that Docker has verified as high-quality commercial publishers.
+Images that are part of this program have a special badge on Docker Hub making it easier for you to identify projects that Docker has verified as high-quality commercial publishers.
 
 ![Docker-Sponsored Open Source badge](./images/verified-publisher-badge-iso.png)
 
