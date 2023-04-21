@@ -7,7 +7,7 @@ keywords: docker hub, hub, insights, analytics, api, verified publisher
 Insights and analytics provides usage analytics for Docker Verified
 Publisher (DVP) images on Docker Hub, providing self-serve access
 to metrics as both raw data and summary data for a desired time span. You can
-view number of image pulls by tag or by digest, and get breakdowns by
+view the number of image pulls by tag or by digest, and get breakdowns by
 geolocation, cloud provider, client, and more.
 
 Head to the
