@@ -78,7 +78,7 @@ Official Image.
 
 [Docker Scout](/scout/){:
 target="blank" rel="noopener" class=""} provides automatic vulnerability scanning 
-for DVP images published to Docker Hub.
+for DOI images published to Docker Hub.
 Scanning images ensures that the published content is secure, and proves to
 developers that they can trust the image.
 
