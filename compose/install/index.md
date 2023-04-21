@@ -41,5 +41,5 @@ You can [install the Compose standalone](other.md) on Linux or on Windows Server
 
 >Note
 >
->This install scenario is not recommended and only supported for backward compatibility purpose.
+>This install scenario is not recommended and is only supported for backward compatibility purposes.
 {: .important}
