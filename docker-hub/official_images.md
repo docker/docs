@@ -12,7 +12,7 @@ designed to:
 
 - Provide essential base OS repositories (for example,
   [Ubuntu](https://hub.docker.com/_/ubuntu/){:target="_blank" rel="noopener" class="_"},
-  [CentOS](https://hub.docker.com/_/centos/){:target="_blank" rel="noopener" class="_"}) that serve as the
+  [Alpine](https://hub.docker.com/_/alpine/){:target="_blank" rel="noopener" class="_"}) that serve as the
   starting point for the majority of users.
 - Provide drop-in solutions for popular programming language runtimes, data
   stores, and other services.
