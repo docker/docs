@@ -145,3 +145,28 @@ To connect a new Artifactory registry to Docker Desktop:
 When signed in, a new **Artifactory** tab appears in the **Images** view.
 By default, the image list shows images sorted by push date: the newest images appear higher in the list.
 
+### GitLab
+
+The GitLab integration lets you interact with images in the
+and GitLab container registry, directly in the **Images** view of Docker Desktop.
+The integration described here connects your local Docker Desktop client with GitLab.
+You can browse, filter, save, and pull images in the GitLab instance you configure.
+
+#### Connect an Artifactory registry
+
+To connect a new GitLab registry to Docker Desktop:
+
+1. Sign in to an GitLab registry using the `docker login` command:
+
+   ```console
+   $ cat ./password.txt | docker login -u <username> --password-stdin <hostname>
+   ```
+
+   - `password.txt`: text file containing your GitLab password.
+   - `username`: your GitLab username.
+   - `hostname`: hostname for your GitLab instance.
+
+2. Open the **Images** view in Docker Desktop.
+
+By default, the image list shows images sorted by push date: the newest images appear higher in the list.
+
