@@ -7,25 +7,19 @@ redirect_from:
 ---
 
 The [Docker Official Images](https://hub.docker.com/search?q=&type=image&image_filter=official){:target="_blank" rel="noopener" class="_"} are a
-curated set of Docker repositories hosted on Docker Hub. They're
-designed to:
+curated set of Docker repositories hosted on Docker Hub.
 
-- Provide essential base OS repositories (for example,
-  [Ubuntu](https://hub.docker.com/_/ubuntu/){:target="_blank" rel="noopener" class="_"},
-  [Alpine](https://hub.docker.com/_/alpine/){:target="_blank" rel="noopener" class="_"}) that serve as the
-  starting point for the majority of users.
-- Provide drop-in solutions for popular programming language runtimes, data
-  stores, and other services.
-- Exemplify [`Dockerfile` best practices](/engine/userguide/eng-image/dockerfile_best-practices/)
-  and provide clear documentation to serve as a reference for other `Dockerfile`
-  authors.
-- Ensure that security updates are applied in a timely manner. This is
-  particularly important as Docker Official Images are some of the most
-  popular on Docker Hub.
+These images provide essential base repositories that serve as the starting point for the majority of users.
 
-Images part of this program have a special badge on Docker Hub making it easier for you to identify projects that are official Docker images.
+These include operating systems such as [Ubuntu](https://hub.docker.com/_/ubuntu/){:target="_blank" rel="noopener" class="_"} and [Alpine](https://hub.docker.com/_/alpine/){:target="_blank" rel="noopener" class="_"}, programming languages such as [Python](https://hub.docker.com/_/python) and [Node](https://hub.docker.com/_/node), and other essential tools such as [Redis](https://hub.docker.com/_/redis) and [MySQL](https://hub.docker.com/_/mysql).
 
-![Docker official image badge](./images/official-image-badge.png)
+The images are some of the most secure images on Docker Hub. This is particularly important as Docker Official Images are some of the most popular on Docker Hub. Typically Docker Official images have little or no vulnerabilities.
+
+The images exemplify [`Dockerfile` best practices](/engine/userguide/eng-image/dockerfile_best-practices/) and provide clear documentation to serve as a reference for other `Dockerfile` authors.
+
+Images that are part of this program have a special badge on Docker Hub making it easier for you to identify projects that are official Docker images.
+
+![Docker official image badge](./images/official-image-badge-iso.png)
 
 ## When to use Docker Official Images
 
@@ -73,19 +67,6 @@ Official Image.
 > **Note**
 >
 > Docker Official Images are an intellectual property of Docker.
-
-### Vulnerability scanning
-
-[Docker Scout](/scout/){:
-target="blank" rel="noopener" class=""} provides automatic vulnerability scanning 
-for DOI images published to Docker Hub.
-Scanning images ensures that the published content is secure, and proves to
-developers that they can trust the image.
-
-You can enable scanning on a per-repository
-basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
-target="blank" rel="noopener" class=""} for more information about how to use
-it.
 
 ### Creating a Docker Official Image
 

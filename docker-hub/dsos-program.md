@@ -6,7 +6,7 @@ keywords: docker hub, hub, insights, analytics, open source, Docker sponsored, p
 
 [Docker Sponsored Open Source images](https://hub.docker.com/search?q=&image_filter=open_source){:target="_blank" rel="noopener" class="_"} are published and maintained by open-source projects sponsored by Docker through the program.
 
-Images that are part of this program have a special badge on Docker Hub making it easier for you to identify projects that Docker has verified as active open-source projects.
+Images that are part of this program have a special badge on Docker Hub making it easier for you to identify projects that Docker has verified as trusted, secure, and active open-source projects.
 
 ![Docker-Sponsored Open Source badge](images/sponsored-badge-iso.png)
 
@@ -18,11 +18,11 @@ The program grants the following perks to eligible projects:
 
 - Verified Docker-Sponsored Open Source badge
 - Insights and analytics
-- Vulnerability scanning
+- Vulnerability analysis
 - Removal of rate limiting for developers
 - Improved discoverability on Docker Hub
 
-These benefits are valid for one year and you can renew if your project still meets the program requirements. Program members, and all users pulling public images from your project namespace get access to unlimited pulls and unlimited egress.
+These benefits are valid for one year and you can renew annually if your project still meets the program requirements. Program members, and all users pulling public images from your project namespace get access to unlimited pulls and unlimited egress.
 
 ### Verified Docker-Sponsored Open Source badge
 
@@ -37,19 +37,20 @@ target="blank" rel="noopener" class=""} service provides usage metrics for how
 the community uses your Docker images, and grants you insight into your user's
 behavior.
 
+You can
+view number of image pulls by tag or by digest, and get breakdowns by
+geolocation, cloud provider, client, and more.
+
 ![The insights and analytics tab on the Docker Hub website](./publish/images/insights-and-analytics-tab.png)
 
-Select the time span you want to view analytics data, and export the data in
-either a summary or raw format. The summary format shows you image pulls per
-tag, and the raw format lists information about every image pull for the
-selected time span. Data points include tag, type of pull, user geolocation,
-client tool (user agent), and more.
+You can use the view to select the time span you want to view analytics data and export the data in
+either a summary or raw format.
 
-### Vulnerability scanning
+### Vulnerability analysis
 
 [Docker Scout](/scout/){:
-target="blank" rel="noopener" class=""} provides automatic vulnerability scanning 
-for DVP images published to Docker Hub.
+target="blank" rel="noopener" class=""} provides automatic vulnerability analysis 
+for Docker-Sponsored Open Source Program images published to Docker Hub.
 Scanning images ensures that the published content is secure, and proves to
 developers that they can trust the image.
 
@@ -57,6 +58,11 @@ You can enable scanning on a per-repository
 basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
 target="blank" rel="noopener" class=""} for more information about how to use
 it.
+
+> **Note**
+>
+> Content publishers in the Docker-Sponsored Open Source Program receive 3 free
+> Docker Team Seats
 
 ## Who's eligible for the Docker-Sponsored Open Source program?
 

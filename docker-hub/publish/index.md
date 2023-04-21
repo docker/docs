@@ -19,7 +19,9 @@ redirect_from:
   - /docker-hub/publish/publisher-center-migration/
 ---
 
-[The Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store){:target="_blank" rel="noopener" class="_"} provides high-quality images from commercial publishers verified by Docker.
+[The Docker Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store){:target="_blank" rel="noopener" class="_"} provides high-quality images from commercial publishers verified by Docker.
+
+These images help development teams build secure software supply chains, minimizing exposure to malicious content early in the process to save time and money later.
 
 Images that are part of this program have a special badge on Docker Hub making it easier for you to identify projects that Docker has verified as high-quality commercial publishers.
 
@@ -27,12 +29,13 @@ Images that are part of this program have a special badge on Docker Hub making i
 
 ## For content publishers
 
-The Verified Publisher Program provides several features and benefits to Docker
+The Docker Verified Publisher Program provides several features and benefits to Docker
 Hub publishers. The program grants the following perks based on participation tier:
 
 - Verified publisher badge
+- Priority search ranking in Docker Hub
 - Insights and analytics
-- Vulnerability scanning
+- Vulnerability analysis
 - Additional Docker Business seats
 - Removal of rate limiting for developers
 - Co-marketing opportunities
@@ -51,18 +54,19 @@ target="blank" rel="noopener" class=""} service provides usage metrics for how
 the community uses your Docker images, and grants you insight into your user's
 behavior.
 
+You can
+view number of image pulls by tag or by digest, and get breakdowns by
+geolocation, cloud provider, client, and more.
+
 ![The insights and analytics tab on the Docker Hub website](./images/insights-and-analytics-tab.png)
 
 You can use the view to select the time span you want to view analytics data and export the data in
 either a summary or raw format.
 
-The summary format shows image pulls per tag, and the raw format lists information about every image pull for the
-selected time span. Data points include tag, type of pull, user geolocation, client tool (user agent), and more.
-
-### Vulnerability scanning
+### Vulnerability analysis
 
 [Docker Scout](/scout/){:
-target="blank" rel="noopener" class=""} provides automatic vulnerability scanning 
+target="blank" rel="noopener" class=""} provides automatic vulnerability analysis 
 for DVP images published to Docker Hub.
 Scanning images ensures that the published content is secure, and proves to
 developers that they can trust the image.
