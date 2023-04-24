@@ -1,10 +1,11 @@
 ---
-title: Use macvlan networks
+title: macvlan network driver
 description: All about using macvlan to make your containers appear like physical machines on the network
 keywords: network, macvlan, standalone
 redirect_from:
 - /engine/userguide/networking/get-started-macvlan/
 - /config/containers/macvlan/
+- /network/macvlan/
 ---
 
 Some applications, especially legacy applications or applications which monitor
@@ -94,7 +95,7 @@ $ docker network create -d ipvlan \
 
 ## Use IPv6
 
-If you have [configured the Docker daemon to allow IPv6](../config/daemon/ipv6.md),
+If you have [configured the Docker daemon to allow IPv6](../../config/daemon/ipv6.md),
 you can use dual-stack IPv4/IPv6 `macvlan` networks.
 
 ```console
@@ -108,8 +109,8 @@ $ docker network create -d macvlan \
 
 ## Next steps
 
-- Go through the [macvlan networking tutorial](network-tutorial-macvlan.md)
-- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+- Go through the [macvlan networking tutorial](../network-tutorial-macvlan.md)
+- Learn about [networking from the container's point of view](../index.md)
 - Learn about [bridge networks](bridge.md)
 - Learn about [overlay networks](overlay.md)
 - Learn about [host networking](host.md)

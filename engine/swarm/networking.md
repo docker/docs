@@ -231,7 +231,7 @@ endpoint mode with an external load balancer, or use multiple smaller overlay ne
 
 Management and control plane data related to a swarm is always encrypted.
 For more details about the encryption mechanisms, see the
-[Docker swarm mode overlay network security model](../../network/overlay.md).
+[Docker swarm mode overlay network security model](../../network/drivers/overlay.md).
 
 Application data among swarm nodes is not encrypted by default. To encrypt this
 traffic on a given overlay network, use the `--opt encrypted` flag on `docker

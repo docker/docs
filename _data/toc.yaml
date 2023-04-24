@@ -1352,22 +1352,24 @@ manuals:
     section:
     - path: /network/
       title: Overview
-    - path: /config/containers/container-networking/
-      title: Container networking
+    - sectiontitle: Network drivers
+      section:
+      - path: /network/drivers/
+        title: Drivers overview
+      - path: /network/drivers/bridge/
+        title: Bridge
+      - path: /network/drivers/overlay/
+        title: Overlay
+      - path: /network/drivers/host/
+        title: Host
+      - path: /network/drivers/ipvlan/
+        title: IPvlan
+      - path: /network/drivers/macvlan/
+        title: Macvlan
+      - path: /network/drivers/none/
+        title: None
     - path: /network/proxy/
       title: Configure Docker to use a proxy server
-    - path: /network/bridge/
-      title: Bridge networks
-    - path: /network/overlay/
-      title: Overlay networks
-    - path: /network/host/
-      title: Host networking
-    - path: /network/ipvlan/
-      title: IPvlan networks
-    - path: /network/macvlan/
-      title: Macvlan networks
-    - path: /network/none/
-      title: Disable networking for a container
     - sectiontitle: Networking tutorials
       section:
       - path: /network/network-tutorial-standalone/

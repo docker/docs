@@ -17,7 +17,7 @@ with `--link` is sharing environment variables between containers. However,
 you can use other mechanisms such as volumes to share environment variables
 between containers in a more controlled way.
 >
-> See [Differences between user-defined bridges and the default bridge](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
+> See [Differences between user-defined bridges and the default bridge](drivers/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for some alternatives to using `--link`.
 {:.warning}
 
@@ -30,7 +30,7 @@ Docker link feature to allow containers to discover each other and securely
 transfer information about one container to another container. With the
 introduction of the Docker networks feature, you can still create links but they
 behave differently between default `bridge` network and
-[user defined networks](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge).
+[user defined networks](drivers/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge).
 
 This section briefly discusses connecting via a network port and then goes into
 detail on container linking in default `bridge` network.
@@ -124,7 +124,7 @@ $ docker port nostalgic_morse 5000
 
 > **Note**:
 > This section covers the legacy link feature in the default `bridge` network.
-> Refer to [differences between user-defined bridges and the default bridge](bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
+> Refer to [differences between user-defined bridges and the default bridge](drivers/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for more information on links in user-defined networks.
 
 Network port mappings are not the only way Docker containers can connect to one
