@@ -165,8 +165,3 @@ To connect a new GitLab registry to Docker Desktop:
    - `password.txt`: text file containing your GitLab password.
    - `username`: your GitLab username.
    - `hostname`: hostname for your GitLab instance.
-
-2. Open the **Images** view in Docker Desktop.
-
-By default, the image list shows images sorted by push date: the newest images appear higher in the list.
-
