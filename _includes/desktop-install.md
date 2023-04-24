@@ -8,9 +8,9 @@
 > [Mac with Apple chip](https://desktop.docker.com/mac/main/arm64{{ include.build_path }}Docker.dmg) ([checksum](https://desktop.docker.com/mac/main/arm64{{ include.build_path }}checksums.txt){: target="_blank" rel="noopener" class="_"}) {% if include.all or include.linux %} | {% endif %}
 {% endif -%}
 {% if include.all or include.linux -%}
-> [Debian](https://desktop.docker.com/linux/main/amd64{{ include.build_path }}docker-desktop-4.18.0-amd64.deb) - 
-> [RPM](https://desktop.docker.com/linux/main/amd64{{ include.build_path }}docker-desktop-4.18.0-x86_64.rpm) - 
-> [Arch package](https://desktop.docker.com/linux/main/amd64{{ include.build_path }}docker-desktop-4.18.0-x86_64.pkg.tar.zst) ([checksum](https://desktop.docker.com/linux/main/amd64{{ include.build_path }}checksums.txt){: target="_blank" rel="noopener" class="_"}) 
+> [Debian](https://desktop.docker.com/linux/main/amd64{{ include.build_path }}docker-desktop-{{ include.version }}-amd64.deb) - 
+> [RPM](https://desktop.docker.com/linux/main/amd64{{ include.build_path }}docker-desktop-{{ include.version }}-x86_64.rpm) - 
+> [Arch package](https://desktop.docker.com/linux/main/amd64{{ include.build_path }}docker-desktop-{{ include.version }}-x86_64.pkg.tar.zst) ([checksum](https://desktop.docker.com/linux/main/amd64{{ include.build_path }}checksums.txt){: target="_blank" rel="noopener" class="_"}) 
 {% endif -%}
 {% if include.build_path == "/" -%}
 {: .tip}
