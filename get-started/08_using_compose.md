@@ -20,6 +20,8 @@ So, how do we get started?
 If you installed Docker Desktop for Windows, Mac, or Linux you already have Docker Compose!
 Play-with-Docker instances already have Docker Compose installed as well. 
 
+Standalone installations of Docker Engine requires Docker Compose to be installed as a separate package, see [Install the Compose plugin](../compose/install/linux.md).
+
 After installation, you should be able to run the following and see version information.
 
 ```console
@@ -76,8 +78,8 @@ $ docker run -dp 3000:3000 \
 
 
 3. Let's migrate the `-p 3000:3000` part of the command by defining the `ports` for the service. We will use the
-   [short syntax](../compose/compose-file/05-services/#short-syntax-3) here, but there is also a more verbose
-   [long syntax](../compose/compose-file/05-services/#long-syntax-3) available as well.
+   [short syntax](../compose/compose-file/05-services.md#short-syntax-3) here, but there is also a more verbose
+   [long syntax](../compose/compose-file/05-services.md#long-syntax-3) available as well.
 
    ```yaml
    services:
@@ -89,7 +91,7 @@ $ docker run -dp 3000:3000 \
    ```
  
 4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
-   the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/05-services/#short-syntax-5) and [long](../compose/compose-file/05-services/#long-syntax-5) syntax.
+   the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/05-services.md#short-syntax-5) and [long](../compose/compose-file/05-services.md#long-syntax-5) syntax.
 
     One advantage of Docker Compose volume definitions is we can use relative paths from the current directory.
 
@@ -152,7 +154,7 @@ $ docker run -d \
 2. Next, we'll define the volume mapping. When we ran the container with `docker run`, the named volume was created
    automatically. However, that doesn't happen when running with Compose. We need to define the volume in the top-level
    `volumes:` section and then specify the mountpoint in the service config. By simply providing only the volume name,
-   the default options are used. There are [many more options available](../compose/compose-file/07-volumes/) though.
+   the default options are used. There are [many more options available](../compose/compose-file/07-volumes.md) though.
 
    ```yaml
    services:
