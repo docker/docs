@@ -155,6 +155,30 @@ guides:
     title: Security best practices
   - path: /develop/remote-development/
     title: Remote development
+
+- sectiontitle: Build with Docker
+  section:
+  - path: /build/guide/
+    title: Overview
+  - path: /build/guide/intro/
+    title: 1. Introduction
+  - path: /build/guide/layers/
+    title: 2. Layers
+  - path: /build/guide/multi-stage/
+    title: 3. Multi-stage
+  - path: /build/guide/mounts/
+    title: 4. Mounts
+  - path: /build/guide/build-args/
+    title: 5. Build arguments
+  - path: /build/guide/export/
+    title: 6. Export binaries
+  - path: /build/guide/test/
+    title: 7. Test
+  - path: /build/guide/multi-platform/
+    title: 8. Multi-platform
+  - path: /build/guide/next-steps/
+    title: Next steps
+
 - sectiontitle: Deploy your app to the cloud
   section:
   - path: /cloud/aci-integration/
