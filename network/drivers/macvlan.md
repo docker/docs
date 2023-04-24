@@ -1,11 +1,12 @@
 ---
-title: macvlan network driver
-description: All about using macvlan to make your containers appear like physical machines on the network
+title: Macvlan network driver
+description: All about using Macvlan to make your containers appear like physical
+  machines on the network
 keywords: network, macvlan, standalone
 redirect_from:
-- /engine/userguide/networking/get-started-macvlan/
-- /config/containers/macvlan/
-- /network/macvlan/
+  - /engine/userguide/networking/get-started-macvlan/
+  - /config/containers/macvlan/
+  - /network/macvlan/
 ---
 
 Some applications, especially legacy applications or applications which monitor
@@ -14,12 +15,13 @@ this type of situation, you can use the `macvlan` network driver to assign a MAC
 address to each container's virtual network interface, making it appear to be
 a physical network interface directly connected to the physical network. In this
 case, you need to designate a physical interface on your Docker host to use for
-the `macvlan`, as well as the subnet and gateway of the `macvlan`. You can even
-isolate your `macvlan` networks using different physical network interfaces.
+the Macvlan, as well as the subnet and gateway of the network. You can even
+isolate your Macvlan networks using different physical network interfaces.
+
 Keep the following things in mind:
 
-- It is very easy to unintentionally damage your network due to IP address
-  exhaustion or to "VLAN spread", which is a situation in which you have an
+- You may unintentionally damage your network due to IP address
+  exhaustion or to "VLAN spread", a situation that occurs when you have an
   inappropriately large number of unique MAC addresses in your network.
 
 - Your networking equipment needs to be able to handle "promiscuous mode",
@@ -29,12 +31,22 @@ Keep the following things in mind:
   overlay (to communicate across multiple Docker hosts), these solutions may be
   better in the long term.
 
-## Create a macvlan network
+## Options
 
-When you create a `macvlan` network, it can either be in bridge mode or 802.1q
+The following table describes the driver-specific options that you can pass to
+`--option` when creating a network using the `macvlan` driver.
+
+| Option         | Default  | Description                                                                   |
+| -------------- | -------- | ----------------------------------------------------------------------------- |
+| `macvlan_mode` | `bridge` | Sets the Macvlan mode. Can be one of: `bridge`, `vepa`, `passthru`, `private` |
+| `parent`       |          | Specifies the parent interface to use.                                        |
+
+## Create a Macvlan network
+
+When you create a Macvlan network, it can either be in bridge mode or 802.1q
 trunk bridge mode.
 
-- In bridge mode, `macvlan` traffic goes through a physical device on the host.
+- In bridge mode, Macvlan traffic goes through a physical device on the host.
 
 - In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
   which Docker creates on the fly. This allows you to control routing and
@@ -79,7 +91,7 @@ $ docker network create -d macvlan \
     -o parent=eth0.50 macvlan50
 ```
 
-### Use an ipvlan instead of macvlan
+### Use an IPvlan instead of Macvlan
 
 In the above example, you are still using a L3 bridge. You can use `ipvlan`
 instead, and get an L2 bridge. Specify `-o ipvlan_mode=l2`.
@@ -109,9 +121,5 @@ $ docker network create -d macvlan \
 
 ## Next steps
 
-- Go through the [macvlan networking tutorial](../network-tutorial-macvlan.md)
-- Learn about [networking from the container's point of view](../index.md)
-- Learn about [bridge networks](bridge.md)
-- Learn about [overlay networks](overlay.md)
-- Learn about [host networking](host.md)
-- Learn about [Macvlan networks](macvlan.md)
+Learn how to use the Macvlan driver in the
+[Macvlan networking tutorial](../network-tutorial-macvlan.md)
