@@ -16,6 +16,8 @@ To navigate to **Settings** either:
 - Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
+You can also locate the `settings.json` file at `~/Library/Group Containers/group.com.docker/settings.json`.
+
 ## General
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
