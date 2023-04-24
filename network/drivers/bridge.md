@@ -100,6 +100,34 @@ to each other. For a port to be accessible to containers or non-Docker hosts on
 different networks, that port must be _published_ using the `-p` or `--publish`
 flag.
 
+## Options
+
+The following table describes the driver-specific options that you can pass to
+`--option` when creating a custom network using the `bridge` driver.
+
+| Option                                           | Default        | Description                                                 |
+| ------------------------------------------------ | -------------- | ----------------------------------------------------------- |
+| `com.docker.network.bridge.name`                 |                | Bridge name to be used when creating the Linux bridge.      |
+| `com.docker.network.bridge.enable_ip_masquerade` | `true`         | Enable IP masquerading.                                     |
+| `com.docker.network.bridge.enable_icc`           | `true`         | Enable or Disable inter-container connectivity.             |
+| `com.docker.network.bridge.host_binding_ipv4`    |                | Default IP when binding container ports.                    |
+| `com.docker.network.driver.mtu`                  | `0` (no limit) | Set the containers network Maximum Transmission Unit (MTU). |
+| `com.docker.network.container_iface_prefix`      | `eth`          | Set a custom prefix for container interfaces.               |
+
+Some of these options are also available as flags to the `dockerd` CLI, and you
+can use them to configure the default `docker0` bridge when starting the Docker
+daemon. The following tables shows which options have equivalent flags in the
+`dockerd` CLI.
+
+| Option                                           | Flag        |
+| ------------------------------------------------ | ----------- |
+| `com.docker.network.bridge.name`                 | -           |
+| `com.docker.network.bridge.enable_ip_masquerade` | `--ip-masq` |
+| `com.docker.network.bridge.enable_icc`           | `--icc`     |
+| `com.docker.network.bridge.host_binding_ipv4`    | `--ip`      |
+| `com.docker.network.driver.mtu`                  | `--mtu`     |
+| `com.docker.network.container_iface_prefix`      | -           |
+
 ## Manage a user-defined bridge
 
 Use the `docker network create` command to create a user-defined bridge
