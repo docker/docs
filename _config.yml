@@ -53,6 +53,10 @@ distribution_version: "2.7"
 compose_switch_version: "1.0.4"
 buildkit_version: "0.10.5"
 
+# Strings for use in doc examples, e.g. runtime versions.
+example_go_version: "1.20"
+example_golangci_lint_version: "v1.52"
+
 # Options for displaying minimum API version requirements in the reference pages.
 #
 # The reference pages show badges for commands and options (flags) that require
