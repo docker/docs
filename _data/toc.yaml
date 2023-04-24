@@ -908,6 +908,8 @@ reference:
       section:
       - path: /compose/compose-file/
         title: Overview
+      - path: /compose/compose-file/01-status/
+        title: Status of the specification
       - path: /compose/compose-file/02-model/
         title: Compose application model
       - path: /compose/compose-file/03-compose-file/
@@ -932,8 +934,6 @@ reference:
         title: Interpolation
       - path: /compose/compose-file/13-merge/
         title: Merge
-      - path: /compose/compose-file/01-status/
-        title: Status of the specification
     - path: /compose/compose-file/build/
       title: Compose file build
     - path: /compose/compose-file/deploy/
