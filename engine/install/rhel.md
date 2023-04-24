@@ -82,7 +82,7 @@ from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/rhel" %}
+{% assign download-url-base = "https://download.docker.com/linux/centos" %}
 
 Install the `yum-utils` package (which provides the `yum-config-manager`
 utility) and set up the repository.
@@ -90,7 +90,7 @@ utility) and set up the repository.
 ```console
 $ sudo yum install -y yum-utils
 
-$ sudo yum-config-manager \
+$ sudo dnf config-manager \
     --add-repo \
     {{ download-url-base }}/docker-ce.repo
 ```
