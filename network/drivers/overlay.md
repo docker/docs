@@ -1,10 +1,11 @@
 ---
-title: Use overlay networks
+title: Overlay network driver
 description: All about using overlay networks
 keywords: network, overlay, user-defined, swarm, service
 redirect_from:
 - /engine/userguide/networking/overlay-security-model/
 - /config/containers/overlay/
+- /network/overlay/
 ---
 
 The `overlay` network driver creates a distributed network among multiple
@@ -187,7 +188,7 @@ from the swarm.
 4.  Create or re-create the `docker_gwbridge` bridge manually with your custom
     settings, using the `docker network create` command.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](../engine/reference/commandline/network_create.md#bridge-driver-options).
+    options, see [Bridge driver options](../../engine/reference/commandline/network_create.md#bridge-driver-options).
 
     ```console
     $ docker network create \
@@ -286,7 +287,7 @@ For most situations, you should connect to the service name, which is load-balan
 
 ## Next steps
 
-- Go through the [overlay networking tutorial](network-tutorial-overlay.md)
-- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+- Go through the [overlay networking tutorial](../network-tutorial-overlay.md)
+- Learn about [networking from the container's point of view](../index.md)
 - Learn about [standalone bridge networks](bridge.md)
 - Learn about [Macvlan networks](macvlan.md)

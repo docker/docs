@@ -546,7 +546,7 @@ $ docker service update --network-rm my-network my-web
 
 For more information on overlay networking and service discovery, refer to
 [Attach services to an overlay network](networking.md) and
-[Docker swarm mode overlay network security model](../../network/overlay.md).
+[Docker swarm mode overlay network security model](../../network/drivers/overlay.md).
 
 ### Grant a service access to secrets
 

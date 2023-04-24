@@ -1,7 +1,9 @@
 ---
-title: Disable networking for a container
+title: None network driver
 description: How to disable networking by using the none driver
 keywords: network, none, standalone
+redirect_from:
+  - /network/none/
 ---
 
 If you want to completely disable the networking stack on a container, you can
@@ -47,8 +49,8 @@ only the loopback device is created. The following example illustrates this.
 
 ## Next steps
 
--  Go through the [host networking tutorial](network-tutorial-host.md)
-- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+-  Go through the [host networking tutorial](../network-tutorial-host.md)
+- Learn about [networking from the container's point of view](../index.md)
 - Learn about [bridge networks](bridge.md)
 - Learn about [overlay networks](overlay.md)
 - Learn about [Macvlan networks](macvlan.md)

@@ -37,4 +37,3 @@ addresses using the `--ip6` flag.
 ## Next steps
 
 - [Networking overview](../../network/index.md)
-- [Container networking](../containers/container-networking.md)

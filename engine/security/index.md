@@ -281,4 +281,4 @@ pull requests, or comments on the Docker community forums.
 * [Seccomp security profiles for Docker](seccomp.md)
 * [AppArmor security profiles for Docker](apparmor.md)
 * [On the Security of Containers (2014)](https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e)
-* [Docker swarm mode overlay network security model](../../network/overlay.md)
+* [Docker swarm mode overlay network security model](../../network/drivers/overlay.md)

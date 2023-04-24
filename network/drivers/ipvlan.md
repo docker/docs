@@ -1,14 +1,16 @@
 ---
-title: Use IPvlan networks
+title: IPvlan network driver
 description: All about using IPvlan to make your containers appear like physical machines on the network
 keywords: network, ipvlan, l2, l3, standalone
+redirect_from:
+  - /network/ipvlan/
 ---
 
 The IPvlan driver gives users total control over both IPv4 and IPv6 addressing.
 The VLAN driver builds on top of that in giving operators complete control of
 layer 2 VLAN tagging and even IPvlan L3 routing for users interested in underlay
 network integration. For overlay deployments that abstract away physical constraints
-see the [multi-host overlay](network-tutorial-overlay.md) driver.
+see the [multi-host overlay](../network-tutorial-overlay.md) driver.
 
 IPvlan is a new twist on the tried and true network virtualization technique.
 The Linux implementations are extremely lightweight because rather than using
