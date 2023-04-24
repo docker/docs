@@ -3,12 +3,12 @@ title: Bridge network driver
 description: All about using user-defined bridge networks and the default bridge
 keywords: network, bridge, user-defined, standalone
 redirect_from:
-- /engine/userguide/networking/default_network/custom-docker0/
-- /engine/userguide/networking/default_network/dockerlinks/
-- /engine/userguide/networking/default_network/build-bridges/
-- /engine/userguide/networking/work-with-networks/
-- /config/containers/bridges/
-- /network/bridge/
+  - /engine/userguide/networking/default_network/custom-docker0/
+  - /engine/userguide/networking/default_network/dockerlinks/
+  - /engine/userguide/networking/default_network/build-bridges/
+  - /engine/userguide/networking/work-with-networks/
+  - /config/containers/bridges/
+  - /network/bridge/
 ---
 
 In terms of networking, a bridge network is a Link Layer device
@@ -157,9 +157,9 @@ $ docker network connect my-net my-nginx
 
 ## Disconnect a container from a user-defined bridge
 
-To disconnect a running container from a user-defined bridge, use the `docker
-network disconnect` command. The following command disconnects the `my-nginx`
-container from the `my-net` network.
+To disconnect a running container from a user-defined bridge, use the
+`docker network disconnect` command. The following command disconnects
+the `my-nginx` container from the `my-net` network.
 
 ```console
 $ docker network disconnect my-net my-nginx
@@ -182,18 +182,18 @@ By default, traffic from containers connected to the default bridge network is
 two settings. These are not Docker commands and they affect the Docker host's
 kernel.
 
-1.  Configure the Linux kernel to allow IP forwarding.
+1. Configure the Linux kernel to allow IP forwarding.
 
-    ```console
-    $ sysctl net.ipv4.conf.all.forwarding=1
-    ```
+   ```console
+   $ sysctl net.ipv4.conf.all.forwarding=1
+   ```
 
-2.  Change the policy for the `iptables` `FORWARD` policy from `DROP` to
-    `ACCEPT`.
+2. Change the policy for the `iptables` `FORWARD` policy from `DROP` to
+   `ACCEPT`.
 
-    ```console
-    $ sudo iptables -P FORWARD ACCEPT
-    ```
+   ```console
+   $ sudo iptables -P FORWARD ACCEPT
+   ```
 
 These settings do not persist across a reboot, so you may need to add them to a
 start-up script.
