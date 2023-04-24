@@ -27,6 +27,17 @@ setup consisting of container interfaces, attached directly to the Docker host
 interface. This result is easy to access for external facing services as there
 is no need for port mappings in these scenarios.
 
+## Options
+
+The following table describes the driver-specific options that you can pass to
+`--option` when creating a network using the `ipvlan` driver.
+
+| Option        | Default  | Description                                                           |
+| ------------- | -------- | --------------------------------------------------------------------- |
+| `ipvlan_mode` | `l2`     | Sets the IPvlan operating mode. Can be one of: `l2`, `l3`, `l3s`      |
+| `ipvlan_flag` | `bridge` | Sets the IPvlan mode flag. Can be one of: `bridge`, `private`, `vepa` |
+| `parent`      |          | Specifies the parent interface to use.                                |
+
 ## Prerequisites
 
 - The examples on this page are all single host.
