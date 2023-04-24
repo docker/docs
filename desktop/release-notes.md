@@ -28,7 +28,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-04-03" %}
 
-{% include desktop-install.md all=true build_path="/" %}
+{% include desktop-install.md all=true version="4.18.0" build_path="/" %}
 
 ### New
 
@@ -94,7 +94,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-03-20" %}
 
-{% include desktop-install.md win=true build_path="/101757/" %}
+{% include desktop-install.md win=true version="4.17.1" build_path="/101757/" %}
 
 ### Bug fixes and enhancements
 
@@ -113,7 +113,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-02-27" %}
 
-{% include desktop-install.md all=true build_path="/99724/" %}
+{% include desktop-install.md all=true version="4.17.0" build_path="/99724/" %}
 
 ### New
 
@@ -194,7 +194,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-01-30" %}
 
-{% include desktop-install.md win=true build_path="/96739/" %}
+{% include desktop-install.md win=true version="4.16.3" build_path="/96739/" %}
 
 ### Bug fixes and enhancements
 
@@ -207,7 +207,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-01-19" %}
 
-{% include desktop-install.md all=true build_path="/95914/" %}
+{% include desktop-install.md all=true version="4.16.2" build_path="/95914/" %}
 
 ### Bug fixes and enhancements
 
@@ -228,7 +228,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-01-13" %}
 
-{% include desktop-install.md all=true build_path="/95567/" %}
+{% include desktop-install.md all=true version="4.16.1" build_path="/95567/" %}
 
 ### Bug fixes and enhancements
 
@@ -240,7 +240,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2023-01-12" %}
 
-{% include desktop-install.md all=true build_path="/95345/" %}
+{% include desktop-install.md all=true version="4.16.0" build_path="/95345/" %}
 
 ### New
 
@@ -304,7 +304,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-12-01" %}
 
-{% include desktop-install.md all=true build_path="/93002/" %}
+{% include desktop-install.md all=true version="4.15.0" build_path="/93002/" %}
 
 ### New
 
@@ -357,7 +357,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-11-17" %}
 
-{% include desktop-install.md all=true build_path="/91661/" %}
+{% include desktop-install.md all=true version="4.14.1" build_path="/91661/" %}
 
 ### Bug fixes and enhancements
 
@@ -374,7 +374,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-11-10" %}
 
-{% include desktop-install.md all=true build_path="/91374/" %}
+{% include desktop-install.md all=true version="4.14.0" build_path="/91374/" %}
 
 ### New
 
@@ -435,7 +435,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-10-31" %}
 
-{% include desktop-install.md all=true build_path="/90346/" %}
+{% include desktop-install.md all=true version="4.13.1" build_path="/90346/" %}
 
 ### Updates
 
@@ -462,7 +462,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-10-19" %}
 
-{% include desktop-install.md all=true build_path="/89412/" %}
+{% include desktop-install.md all=true version="4.13.0" build_path="/89412/" %}
 
 ### New
 
@@ -529,7 +529,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-09-01" %}
 
-{% include desktop-install.md all=true build_path="/85629/" %}
+{% include desktop-install.md all=true version="4.12.0" build_path="/85629/" %}
 
 ### New
 
@@ -609,7 +609,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-08-05" %}
 
-{% include desktop-install.md all=true build_path="/84025/" %}
+{% include desktop-install.md all=true version="4.11.1" build_path="/84025/" %}
 
 ### Bug fixes and enhancements
 
@@ -625,7 +625,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-07-28" %}
 
-{% include desktop-install.md all=true build_path="/83626/" %}
+{% include desktop-install.md all=true version="4.11.0" build_path="/83626/" %}
 
 ### New
 
@@ -683,7 +683,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-07-05" %}
 
-{% include desktop-install.md all=true build_path="/82475/" %}
+{% include desktop-install.md all=true version="4.10.1" build_path="/82475/" %}
 
 ### Bug fixes and enhancements
 
@@ -699,7 +699,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-06-30" %}
 
-{% include desktop-install.md all=true build_path="/82025/" %}
+{% include desktop-install.md all=true version="4.10.0" build_path="/82025/" %}
 
 ### New
 
@@ -769,7 +769,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-06-16" %}
 
-{% include desktop-install.md all=true build_path="/81317/" %}
+{% include desktop-install.md all=true version="4.9.1" build_path="/81317/" %}
 
 ### Bug fixes and enhancements
 
@@ -781,7 +781,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-06-02" %}
 
-{% include desktop-install.md all=true build_path="/80466/" %}
+{% include desktop-install.md all=true version="4.9.0" build_path="/80466/" %}
 
 ### New
 
@@ -831,7 +831,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-05-18" %}
 
-{% include desktop-install.md all=true build_path="/79419/" %}
+{% include desktop-install.md all=true version="4.8.2" build_path="/79419/" %}
 
 ### Updates
 
@@ -853,7 +853,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-05-09" %}
 
-{% include desktop-install.md all=true build_path="/78998/" %}
+{% include desktop-install.md all=true version="4.8.1" build_path="/78998/" %}
 
 ### New
 
@@ -876,7 +876,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-05-06" %}
 
-{% include desktop-install.md all=true build_path="/78933/" %}
+{% include desktop-install.md all=true version="4.8.0" build_path="/78933/" %}
 
 ### New
 
@@ -938,7 +938,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-04-19" %}
 
-{% include desktop-install.md win=true mac=true build_path="/77678/" %}
+{% include desktop-install.md win=true mac=true version="4.7.1" build_path="/77678/" %}
 
 ### Bug fixes and enhancements
 
@@ -955,7 +955,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-04-07" %}
 
-{% include desktop-install.md win=true mac=true build_path="/77141/" %}
+{% include desktop-install.md win=true mac=true version="4.7.0" build_path="/77141/" %}
 
 ### New
 
@@ -1000,7 +1000,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-03-22" %}
 
-{% include desktop-install.md win=true mac=true build_path="/76265/" %}
+{% include desktop-install.md win=true mac=true version="4.6.1" build_path="/76265/" %}
 
 ### Updates
 
@@ -1016,7 +1016,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-03-14" %}
 
-{% include desktop-install.md win=true mac=true build_path="/75818/" %}
+{% include desktop-install.md win=true mac=true version="4.6.0" build_path="/75818/" %}
 
 ### New
 
@@ -1088,7 +1088,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include release-date.html date="2022-02-15" %}
 
-{% include desktop-install.md win=true build_path="/74721/" %}
+{% include desktop-install.md win=true version="4.5.1" build_path="/74721/" %}
 
 ### Bug fixes and enhancements
 
@@ -1104,7 +1104,7 @@ Alternatively, you can edit the Docker Desktop settings file located at `%APPDAT
 
 {% include release-date.html date="2022-02-10" %}
 
-{% include desktop-install.md win=true mac=true build_path="/74594/" %}
+{% include desktop-install.md win=true mac=true version="4.5.0" build_path="/74594/" %}
 
 ### New
 
@@ -1154,7 +1154,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 {% include release-date.html date="2022-01-24" %}
 
-{% include desktop-install.md win=true build_path="/73704/" %}
+{% include desktop-install.md win=true version="4.4.4" build_path="/73704/" %}
 
 ### Bug fixes and enhancements
 
@@ -1174,7 +1174,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 {% include release-date.html date="2022-01-14" %}
 
-{% include desktop-install.md win=true build_path="/73365/" %}
+{% include desktop-install.md win=true version="4.4.3" build_path="/73365/" %}
 
 ### Bug fixes and enhancements
 
@@ -1194,7 +1194,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 {% include release-date.html date="22-01-13" %}
 
-{% include desktop-install.md win=true mac=true build_path="/73305/" %}
+{% include desktop-install.md win=true mac=true version="4.4.2" build_path="/73305/" %}
 
 ### New
 
@@ -1249,7 +1249,7 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 {% include release-date.html date="2021-12-21" %}
 
-{% include desktop-install.md win=true mac=true build_path="/72729/" %}
+{% include desktop-install.md win=true mac=true version="4.3.2" build_path="/72729/" %}
 
 ### Security
 
@@ -1277,7 +1277,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 {% include release-date.html date="2021-12-11" %}
 
-{% include desktop-install.md win=true mac=true build_path="/72247/" %}
+{% include desktop-install.md win=true mac=true version="4.3.1" build_path="/72247/" %}
 
 ### Upgrades
 
@@ -1299,7 +1299,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: ta
 
 {% include release-date.html date="2021-12-02" %}
 
-{% include desktop-install.md win=true mac=true build_path="/71786/" %}
+{% include desktop-install.md win=true mac=true version="4.3.0" build_path="/71786/" %}
 
 ### Upgrades
 
@@ -1347,7 +1347,7 @@ actual memory usage. See
 
 {% include release-date.html date="2021-11-09" %}
 
-{% include desktop-install.md win=true mac=true build_path="/70708/" %}
+{% include desktop-install.md win=true mac=true version="4.2.0" build_path="/70708/" %}
 
 ### New
 
@@ -1395,7 +1395,7 @@ actual memory usage. See
 
 {% include release-date.html date="2021-10-12" %}
 
-{% include desktop-install.md win=true mac=true build_path="/69879/" %}
+{% include desktop-install.md win=true mac=true version="4.1.1" build_path="/69879/" %}
 
 ### Bug fixes and minor changes
 
@@ -1416,7 +1416,7 @@ actual memory usage. See
 
 {% include release-date.html date="2021-09-30" %}
 
-{% include desktop-install.md win=true mac=true build_path="/69386/" %}
+{% include desktop-install.md win=true mac=true version="4.1.0" build_path="/69386/" %}
 
 ### New
 
@@ -1457,7 +1457,7 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 {% include release-date.html date="2021-09-13" %}
 
-{% include desktop-install.md win=true mac=true build_path="/68347/" %}
+{% include desktop-install.md win=true mac=true version="4.0.1" build_path="/68347/" %}
 
 ### Upgrades
 
@@ -1480,7 +1480,7 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 {% include release-date.html date="2021-08-31" %}
 
-{% include desktop-install.md win=true mac=true build_path="/67817/" %}
+{% include desktop-install.md win=true mac=true version="4.0.0" build_path="/67817/" %}
 
 ### New
 
