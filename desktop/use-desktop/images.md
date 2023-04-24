@@ -152,7 +152,7 @@ and GitLab container registry, directly in the **Images** view of Docker Desktop
 The integration described here connects your local Docker Desktop client with GitLab.
 You can browse, filter, save, and pull images in the GitLab instance you configure.
 
-#### Connect an Artifactory registry
+#### Connect a GitLab container registry
 
 To connect a new GitLab registry to Docker Desktop:
 
