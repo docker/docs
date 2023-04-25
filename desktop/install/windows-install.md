@@ -161,6 +161,10 @@ The `install` command accepts the following flags:
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example:
     `--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'`
+- `--proxy-http-mode=<mode>`: HTTP Proxy mode, `system` (default) or `manual`.
+- `--override-proxy-http=<URL>`: URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`.
+- `--override-proxy-https=<URL>`: URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`.
+- `--override-proxy-exclude=<hosts/domains>`: Bypass proxy settings for these hosts & domains, a comma-separated list.
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 
