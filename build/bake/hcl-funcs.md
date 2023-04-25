@@ -7,7 +7,7 @@ redirect_from:
 
 ## Using interpolation to tag an image with the git sha
 
-As shown in the [File definition](file-definition.md#variable) page, `bake`
+As shown in the [Bake file reference](reference.md#variable) page, `bake`
 supports variable blocks which are assigned to matching environment variables
 or default values:
 
