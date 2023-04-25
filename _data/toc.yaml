@@ -1112,7 +1112,7 @@ manuals:
             - path: /desktop/install/archlinux/
               title: Install on Arch
     - path: /desktop/get-started/
-      title: Quick Start Guide and sign in
+      title: Learning Center and sign in
     - sectiontitle: Explore Docker Desktop
       section:
         - path: /desktop/use-desktop/
