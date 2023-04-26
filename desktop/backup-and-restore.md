@@ -38,7 +38,7 @@ and [install a different version](release-notes.md) or reset Docker Desktop to f
 
 ## Restore your data
 
-1. Use [`docker pull`](../engine/reference/commandline/load.md) to restore images
+1. Use [`docker pull`](../engine/reference/commandline/pull.md) to restore images
    you pushed to Docker Hub.
 
    If you backed up your images to a local tar file, use [`docker image load -i images.tar`](../engine/reference/commandline/load.md)
