@@ -46,6 +46,21 @@ Here are some examples:
 | `-p 8080:80/udp`                | Map UDP port 80 in the container to port `8080` on the Docker host.                                                                                   |
 | `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port 80 in the container to TCP port `8080` on the Docker host, and map UDP port `80` in the container to UDP port `8080` on the Docker host. |
 
+> **Important**
+>
+> Publishing container ports is insecure by default. Meaning, when you publish
+> a container's ports it becomes available not only to the Docker host, but to
+> the outside world as well.
+>
+> To publish a container's port and only expose it to the Docker host, include
+> the localhost IP address in the port mapping command. On most systems, that
+> IP is `127.0.0.1`.
+>
+> ```console
+> $ docker run -p 127.0.0.1:8080:80 nginx
+> ```
+{: .important }
+
 ## IP address and hostname
 
 By default, the container gets an IP address for every Docker network it attaches to.
