@@ -56,7 +56,6 @@ TODO: Work in progress
 #### For all platforms
 
 - Improved `docker scout compare` command to compare two images, now also aliased under `docker scout diff`.
-- Added in-app walkthroughs to Learning Center.
 - Added more details to dashboard errors when a `docker-compose` action fails ([docker/for-win#13378](https://github.com/docker/for-win/issues/13378)).
 - Added support for setting HTTP proxy configuration during installation. This can be done via the `--proxy-http-mode`, `--overrider-proxy-http`, `--override-proxy-https` and `--override-proxy-exclude` installer flags in the case of installation from the CLI on [Mac](/install/mac-install.md#install-from-the-command-line) and [Windows](/install/windows-install.md#install-from-the-command-line), or alternatively by setting the values in the `install-settings.json` file.
 - Docker Desktop now stops overriding .docker/config.json `credsStore` keys on application start. Note that if you use a custom credential helper then the CLI `docker login` and `docker logout` does not affect whether the UI is signed in to Docker or not. In general, it is better to sign into Docker via the UI since the UI supports multi-factor authentication.
@@ -68,8 +67,8 @@ TODO: Work in progress
 
 #### For Windows
 
-- Reverted to fully patching etc/hosts on windows (includes `host.docker.internal` and `gateway.docker.internal` again). For WSL, this behavior is controlled a new setting in the **General** tab. 
-  Fixes [docker/for-win#13388](https://github.com/docker/for-win/issues/13388) and [docker/for-win#13398](https://github.com/docker/for-win/issues/13398).
+- Reverted to fully patching etc/hosts on windows (includes `host.docker.internal` and `gateway.docker.internal` again). For WSL, this behavior is controlled a new setting in the **General** tab.
+- Fixes [docker/for-win#13388](https://github.com/docker/for-win/issues/13388) and [docker/for-win#13398](https://github.com/docker/for-win/issues/13398).
 - Fixed a spurious `courgette.log` file appearing on the Desktop when updating Docker Desktop. Fixes [docker/for-win#12468](https://github.com/docker/for-win/issues/12468).
 - Fixed the "zoom in" shortcut (ctrl+=). Fixes [docker/for-win#13392](https://github.com/docker/for-win/issues/13392).
 - Fixed a bug where the tray menu would not correctly update after second container type switch. Fixes [docker/for-win#13379](https://github.com/docker/for-win/issues/13379).
