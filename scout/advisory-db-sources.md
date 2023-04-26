@@ -70,9 +70,9 @@ Artifactory](https://docs.docker.com/scout/artifactory/).
 
 Many other tools use fuzzy [Common Product Enumeration
 (CPE)](https://en.wikipedia.org/wiki/Common_Platform_Enumeration) matching with
-wild cards to attempt to match potential vulnerabilities in packages and
-operating systems. This can return a lot of false positives which you need to
-triage.
+wild cards to known vulnerabilities with the versions of software packages they affect.
+This can return a lot of false positives which you need to triage.
+
 
 The typical structure of a CPE match looks like this:
 
