@@ -24,7 +24,7 @@ long: |-
     * Node: Suitable for a Node server application.
     * Other: General purpose starting point for containerizing your application.
   
-  After `docker init` has completed, you must modify the created files and tailor them to your project. Visit the following topics to learn more about the files:
+  After `docker init` has completed, you may need to modify the created files and tailor them to your project. Visit the following topics to learn more about the files:
     
     * [.dockerignore](../../../engine/reference/builder.md#dockerignore-file)
     * [Dockerfile](../../../engine/reference/builder.md)
