@@ -46,7 +46,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### Upgrades
 
-- [Docker Engine v23.0.3](https://docs.docker.com/engine/release-notes/23.0/#2303)
+- [Docker Engine v23.0.5](https://docs.docker.com/engine/release-notes/23.0/#2305)
 - [Compose 2.17.3](https://github.com/docker/compose/releases/tag/v2.17.3)
 - [Containerd v1.6.20](https://github.com/containerd/containerd/releases/tag/v1.6.20)
 - [Kubernetes v1.26.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.3)
