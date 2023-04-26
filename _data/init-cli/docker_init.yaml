@@ -129,6 +129,8 @@ examples: |-
   ? What application platform does your project use? Node
   ? What version of Node do you want to use? 18
   ? Which package manager do you want to use? yarn
+  ? Do you want to run "yarn run build" before starting your server? Yes
+  ? What directory is your build output to? (comma-separate if multiple) output
   ? What command do you want to use to start the app? node index.js
   ? What port does your server listen on? 8000
 
