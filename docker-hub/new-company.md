@@ -11,20 +11,21 @@ To create a new company:
 1. In Docker Hub, navigate to an organization you want to place under a company. The organization must have a Business subscription.
 2. Select **Settings**.
 3. Near the bottom of the **General** tab, select **Create a company**.
-4. Enter a unique name for your company. 
-5. Review the company migration detials and then select **Create company**.
+4. Enter a unique name for your company.
+5. Review the company migration details and then select **Create company**.
 
 ## Add organizations to a company
 
 >**Important**
 >
-> You must be a company owner to add an organization to a company. 
+> You must be a company owner to add an organization to a company.
 {: .important}
 
-There is no limit to the number of organizations you can have under a company layer. All organizations must have Business subscription. 
+There is no limit to the number of organizations you can have under a company layer. All organizations must have Business subscription.
 
 1. In Docker Hub, select **Organisations**.
-2. Select your company. 
+2. Select your company.
 3. From the company page, select **Add organization**.
-4. Choose the organization you want to add from the dropdown menu. 
-5. Select **Add organization** to confirm. 
+4. Choose the organization you want to add from the dropdown menu.
+5. Select **Add organization** to confirm.
+

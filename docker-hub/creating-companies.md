@@ -2,7 +2,6 @@
 description: manage companies
 keywords: company, multiple organizations, manage companies
 title: Overview
-slug: Test
 ---
 
 A company provides a single point of visibility across multiple organizations. Docker introduced this new view to simplify the management of Docker organizations and settings. It's available to Docker Business subscribers. 
@@ -53,3 +52,4 @@ With a company, administrators can:
      </div>
     </div>
 </div>
+
