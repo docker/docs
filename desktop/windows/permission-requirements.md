@@ -35,7 +35,7 @@ The service performs the following functionalities:
 
 The service start mode depends on which container engine is selected, and, for WSL, on whether it is needed to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file. This is controlled by a setting under `Use the WSL 2 based engine` in the settings page. When this is set, WSL engine behaves the same as Hyper-V. So:
 - With Windows containers, or Hyper-v Linux containers, the service is started when the system boots and runs all the time, even when Docker Desktop isn't running. This is required for the user to be able to launch Docker Desktop without admin privileges. 
-- With WSL2-without-hosts Linux containers, the service isn't necessary and therefore doesn't run automatically when the system boots. If the user switches to Windows containers or Hyper-v Linux containers, or simply activate the hosts file maintenance, a UAC prompt is displayed which asks the user to accept the privileged operation to start the service. If accepted, the service is started and set to start automatically upon the next Windows boot.
+- With WSL2 Linux containers, the service isn't necessary and therefore doesn't run automatically when the system boots. When the user switches to Windows containers or Hyper-v Linux containers, or chooses to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file, a UAC prompt is displayed which asks the user to accept the privileged operation to start the service. If accepted, the service is started and set to start automatically upon the next Windows boot.
 
 ## Containers running as root within the Linux VM
 
