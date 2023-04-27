@@ -34,11 +34,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Docker Engine and CLI updated to [Moby 23.0](https://github.com/moby/moby/releases/tag/v23.0.0).
 - The `docker scan` command has been removed, please use `docker scout cves`.
-- Learning Center now supports in-product walkthroughs.
-- Docker init (Beta) adds support for Node.js and Python.
+- The **Learning Center** now supports in-product walkthroughs.
+- Docker init (Beta) now supports Node.js and Python.
 - Faster networking between VM and host on macOS.
 - You can now inspect and analyze remote images from Docker Desktop without pulling them.
-- Usability and performance improvements to the Artifactory images view.
+- Usability and performance improvements to the **Artifactory images** view.
 
 ### Removed
 
