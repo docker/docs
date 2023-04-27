@@ -148,8 +148,8 @@ Docker Desktop will continue to provide this alias by default for the foreseeabl
 The easiest and recommended way to upgrade to Compose V2, is to make sure you have the latest version of [Docker Desktop](../desktop/release-notes.md). Docker Desktop includes Compose V2 along with Docker Engine and Docker CLI which are Compose prerequisites.
 
 If you already have Docker Engine and Docker CLI installed, you can install the Compose plugin from the command line, by either:
-- [Using Docker's repository](linux.md#install-using-the-repository)
-- [Downloading and installing manually](linux.md#install-the-plugin-manually)
+- [Using Docker's repository](install/linux.md#install-using-the-repository)
+- [Downloading and installing manually](install/linux.md#install-the-plugin-manually)
 >This is only available on Linux
 {: .important}
 
