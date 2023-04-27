@@ -401,7 +401,7 @@ services:
         min: 1
         max: 10 #required
         cpu: 75
-        # mem: - mutualy exlusive with cpu
+        # memory: - mutualy exlusive with cpu
 ```
 
 ## IAM roles
