@@ -145,14 +145,11 @@ Docker Desktop will continue to provide this alias by default for the foreseeabl
 
 ## How do I upgrade?
 
-The easiest and recommended way to upgrade to Compose V2, is to make sure you have the latest version of [Docker Desktop](../desktop/release-notes.md). Docker Desktop includes Docker Compose along with Docker Engine and Docker CLI which are Compose prerequisites.
+The easiest and recommended way to upgrade to Compose V2, is to make sure you have the latest version of [Docker Desktop](../desktop/release-notes.md). Docker Desktop includes Compose V2 along with Docker Engine and Docker CLI which are Compose prerequisites.
 
 If you already have Docker Engine and Docker CLI installed, you can install the Compose plugin from the command line, by either:
 - [Using Docker's repository](linux.md#install-using-the-repository)
 - [Downloading and installing manually](linux.md#install-the-plugin-manually)
-
->Note
->
 >This is only available on Linux
 {: .important}
 
@@ -180,8 +177,8 @@ Maintaining backwards compatibility with v1 is *********typically********* achie
 
 Yes. You can still download and install Compose V1 packages, but you won't get support from Docker if anything breaks. 
 
->**Important**
+>**Warning**
 >
 > The final Compose v1 release (v1.29.2) was May 10, 2021. These packages haven't received any security updates since then. Use at your own risk. 
-{: .important}
+{: .warning}
 
