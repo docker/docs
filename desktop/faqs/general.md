@@ -50,12 +50,12 @@ cannot access features that require an active internet
 connection. Additionally, any functionality that requires you to sign won't work while using Docker Desktop offline or in air-gapped environments.
 This includes:
 
-- The in-app [Quick Start Guide](../get-started.md#quick-start-guide)
+- The resources in the [Learning Center](../get-started.md#learning-center)
 - Pulling or pushing an image to Docker Hub
 - [Image Access Management](../../docker-hub/image-access-management.md)
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
 - Viewing remote images in the Docker Dashboard
-- Settting up [Dev Environments](../dev-environments/index.md)
+- Setting up [Dev Environments](../dev-environments/index.md)
 - Docker build when using [BuildKit](../../build/buildkit/index.md#getting-started).
   You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
 - Deploying an app to the cloud through Compose

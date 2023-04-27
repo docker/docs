@@ -157,10 +157,14 @@ The `install` command accepts the following flags:
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
 - `--backend=<backend name>`: selects the default backend to use for Docker Desktop, `hyper-v`, `windows` or `wsl-2` (default)
 - `--installation-dir=<path>`: changes the default installation location (`C:\Program Files\Docker\Docker`)
-- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](../hardened-desktop/settings-management/index.md).
+- `--admin-settings`: automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](../hardened-desktop/settings-management/index.md).
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example:
     `--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'`
+- `--proxy-http-mode=<mode>`: sets the HTTP Proxy mode, `system` (default) or `manual`.
+- `--override-proxy-http=<URL>`: sets the URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`.
+- `--override-proxy-https=<URL>`: sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`.
+- `--override-proxy-exclude=<hosts/domains>`: bypasses proxy settings for these hosts and domains, a comma-separated list.
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 
