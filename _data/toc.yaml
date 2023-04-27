@@ -1779,6 +1779,8 @@ manuals:
         title: Install the Compose standalone
       - path: /compose/install/uninstall/
         title: Uninstall Compose
+  - path: /compose/upgrade/
+    title: Upgrade Compose
   - path: /compose/gettingstarted/
     title: Try Docker Compose
 
