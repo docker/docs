@@ -82,17 +82,52 @@ $ iptables -I DOCKER-USER -i src_if -o dst_if -j ACCEPT
 
 ## Prevent Docker from manipulating iptables
 
-It is possible to set the `iptables` key to `false` in the Docker engine's configuration file at `/etc/docker/daemon.json`, but this option is not appropriate for most users.  It is not possible to completely prevent Docker from creating `iptables` rules, and creating them after-the-fact is extremely involved and beyond the scope of these instructions. Setting `iptables` to `false` will more than likely break container networking for the Docker engine.
+It is possible to set the `iptables` key to `false` in the Docker engine's configuration file at `/etc/docker/daemon.json`, but this option is not appropriate for most users. It is not possible to completely prevent Docker from creating `iptables` rules, and creating them after-the-fact is extremely involved and beyond the scope of these instructions. Setting `iptables` to `false` will more than likely break container networking for the Docker engine.
 
 For system integrators who wish to build the Docker runtime into other applications, explore the [`moby` project](https://mobyproject.org/).
 
 ## Setting the default bind address for containers
 
-By default, the Docker daemon will expose ports on the `0.0.0.0` address, i.e.
-any address on the host. If you want to change that behavior to only
-expose ports on an internal IP address, you can use the `--ip` option to
-specify a different IP address. However, setting `--ip` only changes the
-_default_, it does not _restrict_ services to that IP.
+The Docker daemon binds exposed container ports to the `0.0.0.0` address.
+When you publish a container's ports as follows:
+
+```console
+docker run -p 8080:80 nginx
+```
+
+On most systems, this exposes port 8080 to all network interfaces on the host,
+potentially making them available to the outside world.
+
+You can change the default binding address for exposed container ports so that
+they're only accessible to the Docker host by default. To do that, you can
+configure the daemon to use the loopback address (`127.0.0.1`) instead. You
+have two options for how to do this:
+
+- Set the `--ip` flag on the `dockerd` CLI when you run the daemon
+
+  ```console
+  $ dockerd --ip 127.0.0.1
+  ```
+
+- Configure the `"ip"` key in the `daemon.json` configuration file before startup
+
+  ```json
+  {
+    "ip": "127.0.0.1"
+  }
+  ```
+
+This changes the default binding port for all bridge networks to use the
+`127.0.0.1` address when you expose container ports.
+
+You can also configure this setting individually for each bridge network, using
+the `com.docker.network.bridge.host_binding_ipv4`
+[driver option](./drivers/bridge.md#options) for the bridge driver.
+
+```console
+$ docker network create mybridge \
+  -o "com.docker.network.bridge.host_binding_ipv4=127.0.0.1"
+```
 
 ## Integration with Firewalld
 
