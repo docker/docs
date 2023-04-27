@@ -16,7 +16,40 @@ image and file system management in the Docker Engine.
 > this feature in production environments as this feature may change or be
 > removed from future releases.
 
+## What is the containerd image store?
+
+containerd is a container runtime that manages the container lifecycle, and
+provides image and filesystem management. It's a low-level building block,
+designed to be integrated into other systems, such as Docker and Kubernetes.
+
+Docker Engine already uses containerd for container lifecycle management, which
+includes creating, starting, and stopping containers. This page describes the
+next step of containerd integration for Docker Engine: the image store.
+
+The image store is the component responsible for pushing, pulling, and storing
+images. Integrating the containerd image store enables many new features in the
+Docker Engine, including:
+
+- containerd snapshotters, such as [stargz][1] for lazy-pulling images on startup,
+  or [nydus][2] and [dragonfly][3] for peer-to-peer image distribution.
+- Natively store and build multi-platform images, and other OCI content types
+  that may emerge in the future.
+- Ability to run Wasm containers
+
+[1]: https://github.com/containerd/stargz-snapshotter
+[2]: https://github.com/containerd/nydus-snapshotter
+[3]: https://github.com/dragonflyoss/image-service
+
+The image store integration is still at an early stage, so not all features are
+yet supported.
+
 ## Enabling the containerd image store feature
+
+> **Note**
+>
+> After switching to the containerd image store, images and containers from the
+> default image store won't be visible. All of those containers and images
+> still exist. To see them again, turn off the containerd image store feature.
 
 The containerd image store beta feature is off by default.
 
@@ -32,186 +65,89 @@ images** checkbox.
 
 ![containerd feature](../images/containerd_feature_activation.png){:width="750px"}
 
-## Simple usage examples
-
-### Show server and storage driver version
-
-```console
-$ docker info
-Client:
- Context:    default
- Debug Mode: false
- Plugins:
-  buildx: Docker Buildx (Docker Inc., v0.9.1)
-  compose: Docker Compose (Docker Inc., v2.10.2)
-  extension: Manages Docker extensions (Docker Inc., v0.2.9)
-  sbom: View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc., 0.6.0)
-  scan: Docker Scan (Docker Inc., v0.19.0)
-
-Server:
- Containers: 0
-  Running: 0
-  Paused: 0
-  Stopped: 0
- Images: 0
- Server Version: 22.06.0-beta.0-372-gd3bb8227ce.m
- Storage Driver: stargz
-  driver-type: io.containerd.snapshotter.v1
- Logging Driver: json-file
- Cgroup Driver: cgroupfs
- Cgroup Version: 2
- Plugins:
-  Volume: local
-  Network: bridge host ipvlan macvlan null overlay
-  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
- Swarm: inactive
- Runtimes: runc io.containerd.runc.v2
- Default Runtime: runc
- Init Binary: docker-init
- containerd version: 9cd3357b7fd7218e4aec3eae239db1f68a5a6ec6
- runc version: v1.1.4-0-g5fd4c4d
- init version: de40ad0
- Security Options:
-  seccomp
-   Profile: builtin
-  cgroupns
- Kernel Version: 5.10.124-linuxkit
- Operating System: Docker Desktop
- OSType: linux
- Architecture: aarch64
- CPUs: 5
- Total Memory: 7.653GiB
- Name: docker-desktop
- ID: f4d28427-96df-404c-b47b-647fe5138e2a
- Docker Root Dir: /var/lib/docker
- Debug Mode: false
- HTTP Proxy: http.docker.internal:3128
- HTTPS Proxy: http.docker.internal:3128
- No Proxy: hubproxy.docker.internal
- Registry: https://index.docker.io/v1/
- Labels:
- Experimental: false
- Insecure Registries:
-  hubproxy.docker.internal:5000
-  127.0.0.0/8
- Live Restore Enabled: false
-
-```
-
-### Run a simple container
-
-```console
-$ docker run --rm hello-world
-Unable to find image 'hello-world:latest' locally
-7d246653d051: Download complete
-432f982638b3: Download complete
-46331d942d63: Download complete
-7050e35b49f5: Downloading [>                                                  ]       0B/3.208kB
-
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
-...
-
-```
-
-## Run the container
-
-Run the container specifying port settings:
-
-```console
-$ docker run -p 8080:80 -d nginx
-
-Unable to find image 'nginx:latest' locally
-b95a99feebf7: Download complete
-91d5b6827ff7: Download complete
-fc5ec3f147e4: Download complete
-5b1423465504: Download complete
-1cdde8b981f2: Download complete
-6c0b05f215c0: Download complete
-004f1937a10a: Download complete
-fd61d71c75fe: Download complete
-717bf61a04cf: Download complete
-8b6a7e0df8edbe91dfa77716a5e84ca28348f44f545a0d34c70a8987c56e63e0
-
-```
-
-Confirm the Nginx container is running:
-
-```console
-$ docker ps
-CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                  NAMES
-93b4d60dfd08   nginx     "/docker-entrypoint.…"   3 seconds ago   Up 3 seconds   0.0.0.0:8080->80/tcp   stoic_mccarthy
-```
-
-You can also check from the browser that Nginx is running:
-
-![Containerd setting in Docker Desktop](../images/containerd_feature_nginx.png){:width="750px"}
-
 ## Building multi-platform images
 
-Sample Dockerfile:
-
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM alpine
-
-ENTRYPOINT ["echo", "hello friends"]
-```
-
-Build a multi-platform image:
+The term multi-platform image refers to a bundle of images that can run on different architectures.
+Out of the box, the default builder for Docker Desktop doesn't support building multi-platform images.
 
 ```console
-$ docker buildx build --platform linux/amd64,linux/arm64 -t <username>/hello-friends .
-[+] Building 0.7s (7/7)
-FINISHED
-
- => [internal] load .dockerignore                                                                                                                           0.0s
- => => transferring context: 2B                                                                                                                             0.0s
- => [internal] load build definition from Dockerfile                                                                                                        0.0s
- => => transferring dockerfile: 88B                                                                                                                         0.0s
- => [linux/arm64 internal] load metadata for docker.io/library/alpine:latest                                                                                0.6s
- => [linux/amd64 internal] load metadata for docker.io/library/alpine:latest                                                                                0.6s
- => [linux/amd64 1/1] FROM docker.io/library/alpine@sha256:bc41182d7ef5ffc53a40b044e725193bc10142a1243f395ee852a8d9730fc2ad                                 0.0s
- => => resolve docker.io/library/alpine@sha256:bc41182d7ef5ffc53a40b044e725193bc10142a1243f395ee852a8d9730fc2ad                                             0.0s
- => CACHED [linux/arm64 1/1] FROM docker.io/library/alpine@sha256:bc41182d7ef5ffc53a40b044e725193bc10142a1243f395ee852a8d9730fc2ad                          0.0s
- => => resolve docker.io/library/alpine@sha256:bc41182d7ef5ffc53a40b044e725193bc10142a1243f395ee852a8d9730fc2ad                                             0.0s
- => exporting to image                                                                                                                                      0.0s
- => => exporting layers                                                                                                                                     0.0s
- => => exporting manifest sha256:71bf02afcd7a791c268aa935027f1dc05238f5b5017d755d0fd6d9c71c1b79b9                                                           0.0s
- => => exporting config sha256:f1edbf6b99d22831f9312ab2b8b7642a904c614000bb8369ed673848f4f03578                                                             0.0s
- => => exporting manifest sha256:e41da7320a956163128d77ad69c8109af4799b41bd2e8e660bc6f01136b67f45                                                           0.0s
- => => exporting config sha256:4a5580ab8335432cf6cea7ff695f177d120fa2c9aa4002525025888e3cae16ee                                                             0.0s
- => => exporting manifest list sha256:339d089b539c950268de1edeef9652584e16efa51ea2c84ee586d3143b97234d                                                      0.0s
- => => naming to docker.io/<username>/hello-friends:latest                                                                                              0.0s
- => => unpacking to docker.io/<username>/hello-friends:latest
-
+$ docker buildx ls | grep "DRIVER\|*"
+NAME/NODE       DRIVER/ENDPOINT             STATUS  BUILDKIT PLATFORMS
+default *       docker
+$ docker buildx build --platform=linux/amd64,linux/arm64 .
+[+] Building 0.0s (0/0)
+ERROR: multiple platforms feature is currently not supported for docker driver. Please switch to a different driver (eg. "docker buildx create --use")
 ```
 
-Run multi-platform image:
+Normally, building multi-platform images requires you to create a new builder,
+using a driver that supports multi-platform builds.
+But even then, you can't load the multi-platform images to your local image store.
 
 ```console
-$ docker run <username>/hello-friends
-
+$ docker buildx create --bootstrap
+[+] Building 2.4s (1/1) FINISHED
+ => [internal] booting buildkit
+ => => pulling image moby/buildkit:buildx-stable-1
+ => => creating container buildx_buildkit_objective_blackburn0
+objective_blackburn
+$ docker buildx build --quiet \
+  --platform=linux/amd64,linux/arm64 \
+  --builder=objective_blackburn \
+  --load .
+ERROR: docker exporter does not currently support exporting manifest lists
 ```
 
-Push a multi-platform image:
+Enabling the containerd image store lets you build, and load, multi-platform images
+to your local image store, all while using the default builder.
+
+{% raw %}
 
 ```console
-$ docker push <username>/hello-friends
+$ docker info --format="{{ .Driver }}"
+stargz
+$ docker buildx build \   
+  --platform=linux/arm64,linux/amd64 \
+  --tag=user/containerd-multiplatform .
+[+] Building 6.2s (11/11) FINISHED                                                                                                                                                                       
+ ...
+ => [internal] load build definition from Dockerfile                            0.0s
+ => => transferring dockerfile: 115B                                            0.0s
+ => [linux/arm64 internal] load metadata for docker.io/library/alpine:latest    2.0s
+ => [linux/amd64 internal] load metadata for docker.io/library/alpine:latest    2.1s
+ => [linux/amd64 1/1] FROM docker.io/library/alpine@sha256:124c7d2707904e...    0.0s
+ => => resolve docker.io/library/alpine@sha256:124c7d2707904eea7431fffe91...    0.0s
+ => [linux/arm64 1/1] FROM docker.io/library/alpine@sha256:124c7d2707904e...    0.0s
+ => => resolve docker.io/library/alpine@sha256:124c7d2707904eea7431fffe91...    0.0s
+ => exporting to image                                                          0.0s
+ => => exporting layers                                                         0.0s
+ ...
+ => => naming to docker.io/user/containerd-multiplatform:latest                 0.0s
+ => => unpacking to docker.io/user/containerd-multiplatform:latest              0.0s
+$ docker images
+REPOSITORY                        TAG       IMAGE ID       CREATED          SIZE
+user/containerd-multiplatform     latest    7401bb14c229   14 seconds ago   3.38MB
+user/containerd-multiplatform     latest    7401bb14c229   14 seconds ago   3.26MB
+```
+
+{% endraw %}
+
+You can push the multi-platform image to Docker Hub.
+
+```console
+$ docker push user/containerd-multiplatform
 Using default tag: latest
-f1edbf6b99d2: Pushed
-213ec9aee27d: Pushed
-71bf02afcd7a: Pushed
-e41da7320a95: Pushed
-339d089b539c: Pushed
-4a5580ab8335: Pushed
-9b18e9b68314: Pushed
-
+699c4e744ab4: Pushed 
+878d877e4f70: Pushed 
+f56be85fc22e: Pushed 
+a579f49700dc: Pushed 
+c41833b44d91: Pushed 
+ee79e74f9211: Pushed 
+d28bdb47b683: Pushed
 ```
 
-View Tags on DockerHub to see multi-platform result:
+Inspecting the tag on Docker Hub shows that the image is available for multiple platforms.
 
-![containerd_feature_tags](../images/containerd_feature_tags.png){:width="750px"}
+![Multiplatform image tag on Docker Hub](../images/containerd_multiplatform.png){:width="750px"}
 
 ## Known issues
 
