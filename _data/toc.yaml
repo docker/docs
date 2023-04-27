@@ -1882,6 +1882,8 @@ manuals:
       title: Advanced image analysis
     - path: /scout/artifactory/
       title: Artifactory integration
+    - path: /scout/advisory-db-sources/
+      title: Advisory Database
 
 - sectiontitle: Administration and security
   section:
