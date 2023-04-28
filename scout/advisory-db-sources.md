@@ -46,6 +46,21 @@ trackers, such as:
 - [Ubuntu CVE Tracker](https://people.canonical.com/~ubuntu-security/cve/)
 - [Wolfi Security Feed](https://packages.wolfi.dev/os/security.json)
 
+And the following package ecosystems:
+
+- .NET
+- GitHub packages
+- Go
+- Java
+- JavaScript
+- PHP
+- Python
+- RPM
+- Ruby
+- `alpm` (Arch Linux)
+- `apk` (Alpine Linux)
+- `deb` (Debian Linux and derivatives)
+
 Docker Scout correlates this data by making a full inventory of a container
 image and storing that inventory in a [software bill of materials
 (SBOM)](https://ntia.gov/sites/default/files/publications/sbom_at_a_glance_apr2021_0.pdf).
@@ -72,7 +87,6 @@ Many other tools use fuzzy [Common Product Enumeration
 (CPE)](https://en.wikipedia.org/wiki/Common_Platform_Enumeration) matching with
 wild cards to known vulnerabilities with the versions of software packages they affect.
 This can return a lot of false positives which you need to triage.
-
 
 The typical structure of a CPE match looks like this:
 
