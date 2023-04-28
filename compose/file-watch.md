@@ -103,6 +103,8 @@ services:
         - action: sync
           path: ./web
           target: /src/web
+          ignore:
+            - node_modules/
         - action: rebuild
           path: package.json
 ```
