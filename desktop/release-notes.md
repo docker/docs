@@ -72,8 +72,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Windows
 
-- Reverted to fully patching etc/hosts on windows (includes `host.docker.internal` and `gateway.docker.internal` again). For WSL, this behavior is controlled a new setting in the **General** tab.
-- Fixes [docker/for-win#13388](https://github.com/docker/for-win/issues/13388) and [docker/for-win#13398](https://github.com/docker/for-win/issues/13398).
+- Reverted to fully patching etc/hosts on Windows (includes `host.docker.internal` and `gateway.docker.internal` again). For WSL, this behavior is controlled by a new setting in the **General** tab. Fixes [docker/for-win#13388](https://github.com/docker/for-win/issues/13388) and [docker/for-win#13398](https://github.com/docker/for-win/issues/13398).
 - Fixed a spurious `courgette.log` file appearing on the Desktop when updating Docker Desktop. Fixes [docker/for-win#12468](https://github.com/docker/for-win/issues/12468).
 - Fixed the "zoom in" shortcut (ctrl+=). Fixes [docker/for-win#13392](https://github.com/docker/for-win/issues/13392).
 - Fixed a bug where the tray menu would not correctly update after second container type switch. Fixes [docker/for-win#13379](https://github.com/docker/for-win/issues/13379).
@@ -82,7 +81,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Increased the performance of VM networking when using Virtualization framework on macOS Ventura and above.
 - Fixed a bug where an error window is displayed on uninstall.
-- Fixed a bug where the setting `deprecatedCgroupv1` was ignored.
+- Fixed a bug where the setting `deprecatedCgroupv1` was ignored. Fixes [docker/for-mac#6801](https://github.com/docker/for-mac/issues/6801).
 - Fixed cases where `docker pull` would return `EOF`.
 
 #### For Linux
