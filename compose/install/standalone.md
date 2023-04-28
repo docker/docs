@@ -1,12 +1,14 @@
 ---
+title: Install Compose standalone
 description: How to install Docker Compose - Other Scenarios
 keywords: compose, orchestration, install, installation, docker, documentation
 toc_max: 3
-title: Install the Compose standalone
+redirect_from:
+  - /compose/install/other
 ---
 {% include compose-eol.md %}
 
-On this page you can find instructions on how to install the Compose standalone on Linux or Windows Server, from the command line.
+On this page you can find instructions on how to install Compose standalone on Linux or Windows Server, from the command line.
 
 ### On Linux
 > **Compose standalone**
@@ -36,7 +38,7 @@ Follow these instructions if you are running the Docker daemon and client direct
 on Microsoft Windows Server and want to install Docker Compose.
 
 1.  Run PowerShell as an administrator.
-When asked if you want to allow this app to make changes to your device, click **Yes** in order to proceed with the installation.
+    When asked if you want to allow this app to make changes to your device, click **Yes** in order to proceed with the installation.
 
 2.  GitHub now requires TLS1.2. In PowerShell, run the following:
 
@@ -46,7 +48,7 @@ When asked if you want to allow this app to make changes to your device, click *
 3. Run the following command to download the latest release of Compose ({{site.compose_version}}):
 
     ```powershell
-     Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-Windows-x86_64.exe" -Destination $Env:ProgramFiles\Docker\docker-compose.exe
+     Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{site.compose_version}}/docker-compose-windows-x86_64.exe" -Destination $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
     > **Note**
@@ -61,6 +63,6 @@ When asked if you want to allow this app to make changes to your device, click *
 4.  Test the installation.
 
     ```console
-    $ docker compose version
+    $ docker-compose.exe version
     Docker Compose version {{site.compose_version}}
     ```
