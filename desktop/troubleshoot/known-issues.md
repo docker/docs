@@ -76,7 +76,6 @@ title: Known issues for Docker Desktop on Mac
 <br>
 - Some command line tools do not work when Rosetta 2 is not installed.
   - The old version 1.x of `docker-compose`. We recommend that you use Compose V2 instead. Either type `docker compose` or enable the **Use Docker Compose V2** option in the [General preferences tab](../settings/mac.md#general).
-  - The `docker scan` command and the underlying `snyk` binary.
   - The `docker-credential-ecr-login` credential helper.
 - Some images do not support the ARM64 architecture. You can add `--platform linux/amd64` to run (or build) an Intel image using emulation.
 
