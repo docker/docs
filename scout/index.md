@@ -11,6 +11,7 @@ redirect_from:
   - /atomist/configure/advisories/
   - /atomist/integrate/github/
   - /atomist/integrate/deploys/
+  - /engine/scan/
 ---
 
 {% include scout-early-access.md %}
