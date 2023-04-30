@@ -159,6 +159,15 @@ Version 4.8.2
     - Avoid awkward doubling of vowels. For example ‘semi-independence*’,* or ‘re-elect’.
     - Prevent misreading of certain words. For example ‘Re-collect’ means to collect again; without a hyphen the word recollect has a different meaning.
 
+### Exclamation marks
+
+Avoid the use of exclamation marks.
+
 ### Parentheses
 
-Don't use parentheses in technical documentation. They can reduce the readability of a sentence.  
+Don't use parentheses in technical documentation. They can reduce the readability of a sentence. 
+
+## Third party documentation
+
+If you are documenting a task that requires the use of a third-party product, link out to the third-party's documentation. Do not copy the content because it might violate copyright. It can also result in an unnecessary maintenance burden of having to keep the docs up-to-date when the third-party changes or updates their product. It is best practice to link to the single source of truth. 
+

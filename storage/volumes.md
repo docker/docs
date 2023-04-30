@@ -25,7 +25,7 @@ Docker. Volumes have several advantages over bind mounts:
   Mac and Windows hosts.
 
 In addition, volumes are often a better choice than persisting data in a
-container's writable layer, because a volume does not increase the size of the
+container's writable layer, because a volume doesn't increase the size of the
 containers using it, and the volume's contents exist outside the lifecycle of a
 given container.
 
@@ -36,7 +36,7 @@ If your container generates non-persistent state data, consider using a
 increase the container's performance by avoiding writing into the container's
 writable layer.
 
-Volumes use `rprivate` bind propagation, and bind propagation is not
+Volumes use `rprivate` bind propagation, and bind propagation isn't
 configurable for volumes.
 
 ## Choose the -v or --mount flag
@@ -49,7 +49,7 @@ If you need to specify volume driver options, you must use `--mount`.
 
 - **`-v` or `--volume`**: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
-  is not immediately obvious.
+  isn't immediately obvious.
 
   - In the case of named volumes, the first field is the name of the volume, and is
     unique on a given host machine. For anonymous volumes, the first field is
@@ -61,19 +61,19 @@ If you need to specify volume driver options, you must use `--mount`.
 
 - **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
-  than `-v` or `--volume`, but the order of the keys is not significant, and
+  than `-v` or `--volume`, but the order of the keys isn't significant, and
   the value of the flag is easier to understand.
   - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
     [`tmpfs`](tmpfs.md). This topic discusses volumes, so the type is always
     `volume`.
   - The `source` of the mount. For named volumes, this is the name of the volume.
-    For anonymous volumes, this field is omitted. May be specified as `source`
+    For anonymous volumes, this field is omitted. Can be specified as `source`
     or `src`.
   - The `destination` takes as its value the path where the file or directory
-    is mounted in the container. May be specified as `destination`, `dst`,
+    is mounted in the container. Can be specified as `destination`, `dst`,
     or `target`.
   - The `readonly` option, if present, causes the bind mount to be [mounted into
-    the container as read-only](#use-a-read-only-volume). May be specified as `readonly` or `ro`.
+    the container as read-only](#use-a-read-only-volume). Can be specified as `readonly` or `ro`.
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 
@@ -94,15 +94,15 @@ If you need to specify volume driver options, you must use `--mount`.
 >
 > {: .warning}
 
-The examples below show both the `--mount` and `-v` syntax where possible, and
-`--mount` is presented first.
+The examples below show both the `--mount` and `-v` syntax where possible, with
+`--mount` first.
 
 ### Differences between `-v` and `--mount` behavior
 
 As opposed to bind mounts, all options for volumes are available for both
 `--mount` and `-v` flags.
 
-When using volumes with services, only `--mount` is supported.
+Volumes used with services, only support `--mount`.
 
 ## Create and manage volumes
 
@@ -182,7 +182,7 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Use `docker inspect devtest` to verify that the volume was created and mounted
+Use `docker inspect devtest` to verify that Docker created the volume and it mounted
 correctly. Look for the `Mounts` section:
 
 ```json
@@ -216,7 +216,7 @@ $ docker volume rm myvol2
 
 ## Use a volume with Docker Compose
 
-Here's an example of a single Docker Compose service with a volume:
+The example below shows a single Docker Compose service with a volume:
 
 ```yaml
 services:
@@ -228,7 +228,7 @@ volumes:
   myapp:
 ```
 
-Running `docker compose up` for the first time creates a volume. The same volume is reused when you subsequently run the command.
+Running `docker compose up` for the first time creates a volume. Docker reuses the same volume when you run the command subsequently.
 
 You can create a volume directly outside of Compose using `docker volume create` and
 then reference it inside `docker-compose.yml` as follows:
@@ -293,11 +293,11 @@ flag.
 
 If you start a container which creates a new volume, and the container
 has files or directories in the directory to be mounted such as `/app/`,
-the directory's contents are copied into the volume. The container then
+Docker copies the directory's contents into the volume. The container then
 mounts and uses the volume, and other containers which use the volume also
 have access to the pre-populated content.
 
-To illustrate this, the following example starts an `nginx` container and
+To show this, the following example starts an `nginx` container and
 populates the new volume `nginx-vol` with the contents of the container's
 `/usr/share/nginx/html` directory. This is where Nginx stores its default HTML
 content.
@@ -350,7 +350,7 @@ the container only needs read access to the data. Multiple
 containers can mount the same volume. You can simultaneously mount a
 single volume as `read-write` for some containers and as `read-only` for others.
 
-The following example modifies the one above but mounts the directory as a read-only
+The following example changes the one above. It mounts the directory as a read-only
 volume, by adding `ro` to the (empty by default) list of options, after the
 mount point within the container. Where multiple options are present, you can separate
 them using commas.
@@ -384,7 +384,7 @@ $ docker run -d \
 </div><!--volume-->
 </div><!--tab-content-->
 
-Use `docker inspect nginxtest` to verify that the read-only mount was created
+Use `docker inspect nginxtest` to verify that Docker created the read-only mount
 correctly. Look for the `Mounts` section:
 
 ```json
@@ -427,7 +427,7 @@ supports writing files to an external storage system like NFS or Amazon S3.
 
 Volume drivers allow you to abstract the underlying storage system from the
 application logic. For example, if your services use a volume with an NFS
-driver, you can update the services to use a different driver, as an example to
+driver, you can update the services to use a different driver. For example, to
 store data in the cloud, without changing the application logic.
 
 ## Use a volume driver
@@ -453,7 +453,7 @@ $ docker plugin install --grant-all-permissions vieux/sshfs
 
 This example specifies an SSH password, but if the two hosts have shared keys
 configured, you can exclude the password. Each volume driver may have zero or more
-configurable options, each of which is specified using an `-o` flag.
+configurable options, you specify each of them using an `-o` flag.
 
 ```console
 $ docker volume create --driver vieux/sshfs \
@@ -531,7 +531,7 @@ and how to mount the block device as a container volume.
 >
 > The following procedure is only an example.
 > The solution illustrated here isn't recommended as a general practice.
-> Don't attempt this approach unless you're very confident about what you're doing.
+> Don't attempt this approach unless you're confident about what you're doing.
 {: .important }
 
 #### How mounting block devices works
@@ -542,13 +542,13 @@ Docker doesn't implement any additional functionality on top of the native mount
 
 If you're familiar with the
 [Linux `mount` command](https://man7.org/linux/man-pages/man8/mount.8.html),
-you can think of the `--mount` options as being forwarded to the `mount` command in the following manner:
+you can think of the `--mount` options as forwarded to the `mount` command in the following manner:
 
 ```console
 $ mount -t <mount.volume-opt.type> <mount.volume-opt.device> <mount.dst> -o <mount.volume-opts.o>
 ```
 
-To illustrate this further, consider the following `mount` command example.
+To explain this further, consider the following `mount` command example.
 This command mounts the `/dev/loop5` device to the path `/external-drive` on the system. 
 
 ```console
@@ -564,9 +564,9 @@ $ docker run \
   --mount='type=volume,dst=/external-drive,volume-driver=local,volume-opt=device=/dev/loop5,volume-opt=type=ext4'
 ```
 
-You can't execute the `mount` command inside the container directly,
+You can't run the `mount` command inside the container directly,
 because the container is unable to access the `/dev/loop5` device.
-That's why we're using the `--mount` option for the `docker run` command instead.
+That's why the `docker run` command uses the `--mount` option.
 
 #### Example: Mounting a block device in a container
 

@@ -11,17 +11,10 @@ redirect_from:
   - /atomist/configure/advisories/
   - /atomist/integrate/github/
   - /atomist/integrate/deploys/
+  - /engine/scan/
 ---
 
-> **Note**
->
-> Docker Scout is an [early access](../release-lifecycle.md#early-access-ea)
-> product, and requires a Docker Pro, Team, or Business subscription.
->
-> If you're interested in Docker Scout for your organization and want to
-> learn more, get in touch by filling out the contact form on the
-> [Docker Scout product page](https://docker.com/products/docker-scout){:
-> target="\_blank" rel="noopener" }.
+{% include scout-early-access.md %}
 
 Docker Scout is a collection of software supply chain features that appear
 throughout Docker user interfaces and the command line interface (CLI). These features provide detailed
@@ -66,7 +59,7 @@ For more information, see
 ### Artifactory integration
 
 Users of JFrog Artifactory, or JFrog Container Registry, can integrate Docker
-Scout to enable automatic analysis of images. For more information, see
+Scout to enable automatic analysis of images locally and remotely. For more information, see
 [Artifactory integration](./artifactory.md).
 
 ## Docker Scout CLI

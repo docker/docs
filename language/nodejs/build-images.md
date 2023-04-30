@@ -158,7 +158,7 @@ COPY . .
 The COPY command takes all the files located in the current directory and copies them into the image. Now, all we have to do is to tell Docker what command we want to run when our image is run inside of a container. We do this with the `CMD` command.
 
 ```dockerfile
-CMD [ "node", "server.js" ]
+CMD ["node", "server.js"]
 ```
 
 Here's the complete Dockerfile.
@@ -177,7 +177,7 @@ RUN npm install --production
 
 COPY . .
 
-CMD [ "node", "server.js" ]
+CMD ["node", "server.js"]
 ```
 
 ## Create a .dockerignore file

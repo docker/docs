@@ -33,7 +33,7 @@
     {%- if site.onetrust_id != '' -%}{%- include analytics/onetrust.html ONETRUST_ID=site.onetrust_id -%}{%- endif -%}
     {%- if site.google_analytics != '' -%}{%- include analytics/google_analytics.html GOOGLE_ID=site.google_analytics -%}{%- endif -%}
   {%- endif -%}
-  <title>{{ page.title | default: page_title }} </title>
+  <title>{{ page.title | default: page_title }} | Docker Documentation</title>
   <meta name="description" content="{{ page.description | default: page_description | escape}}" />
   <meta name="keywords" content="{{ page.keywords | default: 'docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization' }}">
   <link rel="canonical" href="{{ site.docs_url }}{{ page.url }}" />

@@ -20,7 +20,7 @@ To install the Compose plugin on Linux, you can either:
 > These instructions assume you already have Docker Engine and Docker CLI installed and now want to install the Compose plugin.  
 For Compose standalone, see [Install Compose Standalone](other.md).
 
-### Install using the repository
+## Install using the repository
 
 1. Set up the repository. Find distro-specific instructions in:
 
@@ -55,7 +55,7 @@ For Compose standalone, see [Install Compose Standalone](other.md).
 
 Where `vN.N.N` is placeholder text standing in for the latest version.
 
-#### Update Compose
+### Update Compose
 
 To update the Compose plugin, run the following commands:
 
@@ -72,7 +72,7 @@ To update the Compose plugin, run the following commands:
     $ sudo yum install docker-compose-plugin
     ```
 
-### Install the plugin manually
+## Install the plugin manually
 
 > **Note**
 >

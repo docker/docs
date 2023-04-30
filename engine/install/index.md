@@ -30,16 +30,16 @@ redirect_from:
 
 > **Docker Desktop for Linux**
 >
-> Docker Desktop helps you build, share, and run containers easily on Mac and
-> Windows as you do on Linux. We are excited to share that Docker Desktop for
+> Docker Desktop helps you build, share, and run containers on Mac and
+> Windows as you do on Linux. Docker Desktop for
 > Linux is now GA. For more information, see
 [Docker Desktop for Linux](../../desktop/install/linux-install.md).
 {: .important}
 
 ## Supported platforms
 
-Docker Engine is available on a variety of [Linux platforms](../../desktop/install/linux-install.md),
-[macOS](../../desktop/install/mac-install.md) and [Windows 10](../../desktop/install/windows-install.md)
+Docker Engine is available on a variety of [Linux distros](../../desktop/install/linux-install.md),
+[macOS](../../desktop/install/mac-install.md), and [Windows 10](../../desktop/install/windows-install.md)
 through Docker Desktop, and as a [static binary installation](binaries.md). Find
 your preferred operating system below.
 
@@ -55,7 +55,7 @@ your preferred operating system below.
 
 ### Server
 
-Docker provides `.deb` and `.rpm` packages from the following Linux distributions
+Docker provides `.deb` and `.rpm` packages from the following Linux distros
 and architectures:
 
 | Platform                | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)           | s390x                  |
@@ -69,12 +69,12 @@ and architectures:
 | [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
 | [Binaries](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) |                        |
 
-### Other Linux distributions
+### Other Linux distros
 
 > **Note**
 >
-> While the instructions below may work, Docker does not test or verify
-> installation on derivatives.
+> While the instructions below may work, Docker doesn't test or verify
+> installation on distro derivatives.
 
 - Users of Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
   "LMDE" (Debian-based Mint) should follow the installation instructions for
@@ -86,83 +86,54 @@ and architectures:
   substituting the version of their distro for the corresponding Ubuntu release.
   Refer to the documentation of your distro to find which Ubuntu release
   corresponds with your derivative version.
-- Some Linux distributions are providing a package of Docker Engine through their
+- Some Linux distros provide a package of Docker Engine through their
   package repositories. These packages are built and maintained by the Linux
-  distribution's package maintainers and may have differences in configuration
-  or built from modified source code. Docker is not involved in releasing these
-  packages and bugs or issues involving these packages should be reported in
-  your Linux distribution's issue tracker.
+  distro's package maintainers and may have differences in configuration
+  or built from modified source code. Docker isn't involved in releasing these
+  packages and you should report any bugs or issues involving these packages to
+  your Linux distro's issue tracker.
 
 Docker provides [binaries](binaries.md) for manual installation of Docker Engine.
-These binaries are statically linked and can be used on any Linux distribution.
+These binaries are statically linked and you can use them on any Linux distro.
 
 ## Release channels
 
 Docker Engine has two types of update channels, **stable** and **test**:
 
-* The **Stable** channel gives you latest releases for general availability.
-* The **Test** channel gives pre-releases that are ready for testing before
-  general availability (GA).
+* The **Stable** channel gives you the latest versions released for general availability.
+* The **Test** channel gives you pre-release versions that are ready for testing before
+  general availability.
 
-### Stable
-
-Year-month releases are made from a release branch diverged from the master
-branch. The branch is created with format `<year>.<month>`, for example
-`20.10`. The year-month name indicates the earliest possible calendar
-month to expect the release to be generally available. All further patch
-releases are performed from that branch. For example, once `v20.10.0` is
-released, all subsequent patch releases are built from the `20.10` branch.
-
-### Test
-
-In preparation for a new year-month release, a branch is created from
-the master branch with format `YY.mm` when the milestones desired by
-Docker for the release have achieved feature-complete. Pre-releases
-such as betas and release candidates are conducted from their respective release
-branches. Patch releases and the corresponding pre-releases are performed
-from within the corresponding release branch.
+Use the test channel with caution. Pre-release versions include experimental and
+early-access features that are subject to breaking changes.
 
 ## Support
 
-Docker Engine releases of a year-month branch are supported with patches as
-needed for one month after the next year-month general availability release.
+Docker Engine is an open source project, supported by the Moby project maintainers
+and community members. Docker doesn't provide support for Docker Engine.
+Docker provides support for Docker products, including Docker Desktop, which uses
+Docker Engine as one of its components.
 
-This means bug reports and backports to release branches are assessed
-until the end-of-life date.
-
-After the year-month branch has reached end-of-life, the branch may be
-deleted from the repository.
-
-### Backporting
-
-Backports to the Docker products are prioritized by the Docker company. A
-Docker employee or repository maintainer will endeavour to ensure sensible
-bugfixes make it into _active_ releases.
-
-If there are important fixes that ought to be considered for backport to
-active release branches, be sure to highlight this in the PR description
-or by adding a comment to the PR.
+For information about the open source project, refer to the
+[Moby project website](https://mobyproject.org/){:target="_blank" rel="noopener"}.
 
 ### Upgrade path
 
-Patch releases are always backward compatible with its year-month version.
+Patch releases are always backward compatible with its major and minor version.
 
 ### Licensing
 
-Docker is licensed under the Apache License, Version 2.0. See
+Docker Engine is licensed under the Apache License, Version 2.0. See
 [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
 license text.
 
 ## Reporting security issues
 
-The Docker maintainers take security seriously. If you discover a security
-issue, please bring it to their attention right away!
+If you discover a security issue, we request that you bring it to our attention immediately.
 
-Please DO NOT file a public issue; instead send your report privately
-to security@docker.com.
+DO NOT file a public issue. Instead, submit your report privately to security@docker.com.
 
-Security reports are greatly appreciated, and Docker will publicly thank you
-for it.
+Security reports are greatly appreciated, and Docker will publicly thank you for it.
 
 ## Get started
 

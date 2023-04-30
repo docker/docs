@@ -1,0 +1,133 @@
+command: docker scout recommendations
+short: Display available base image updates and remediation recommendations
+long: |-
+    The `docker scout recommendations` command display recommendations for base images updates.
+    It analyzes the image and display recommendations to refresh or update the base image.
+    For each recommendation it shows a list of benefits like less vulnerabilities, smaller image, etc.
+
+    The following artifact types are supported:
+
+    - Images
+    - OCI layout directories
+    - Tarball archives, as created by `docker save`
+
+    The tool analyzes the provided software artifact, and generates base image updates and remediation recommendations.
+
+    By default, the tool expects an image reference, such as:
+
+    - `redis`
+    - `curlimages/curl:7.87.0`
+    - `mcr.microsoft.com/dotnet/runtime:7.0`
+
+    If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` flag.
+usage: docker scout recommendations IMAGE|DIRECTORY|ARCHIVE
+pname: docker scout
+plink: docker_scout.yaml
+options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-refresh
+      value_type: bool
+      default_value: "false"
+      description: Only display base image refresh recommendations
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-update
+      value_type: bool
+      default_value: "false"
+      description: Only display base image update recommendations
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: output
+      shorthand: o
+      value_type: string
+      description: Write the report to a file.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: string
+      description: Platform of image to analyze
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ref
+      value_type: string
+      description: |-
+        Reference to use if the provided tarball contains multiple references.
+        Can only be used with --type archive.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: tag
+      value_type: string
+      description: Specify tag
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: type
+      value_type: string
+      default_value: image
+      description: |-
+        Type of the image to analyze. Can be one of:
+        - image
+        - oci-dir
+        - archive (docker save tarball)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### Display base image update recommendations
+
+    ```console
+    $ docker scout recommendations golang:1.19.4
+    ```
+
+    ### Display base image refresh only recommendations
+
+    ```console
+    $ docker scout recommendations --only-refresh golang:1.19.4
+    ```
+
+    ### Display base image update only recommendations
+
+    ```console
+    $ docker scout recommendations --only-update golang:1.19.4
+    ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

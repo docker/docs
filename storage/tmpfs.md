@@ -28,6 +28,7 @@ persist in either the host or the container writable layer.
 * Unlike volumes and bind mounts, you can't share `tmpfs` mounts between
 containers.
 * This functionality is only available if you're running Docker on Linux.
+* Setting permissions on tmpfs may cause them to [reset after container restart](https://github.com/docker/for-linux/issues/138). In some cases [setting the uid/gid](https://github.com/docker/compose/issues/3425#issuecomment-423091370) can serve as a workaround.
 
 ## Choose the --tmpfs or --mount flag
 

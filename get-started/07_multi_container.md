@@ -40,7 +40,7 @@ In the following steps, you'll create the network first and then attach the MySQ
    ```
 
 2. Start a MySQL container and attach it to the network. You're also going to define a few environment variables that the
-  database will use to initialize the database. To learn more about the MySQL environment variables, see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/)).
+  database will use to initialize the database. To learn more about the MySQL environment variables, see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/).
 
     <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
@@ -195,7 +195,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 
 You can now start your dev-ready container.
 
-1. Specify each of the environment variables above, as well as connect the container to your app network.
+1. Specify each of the environment variables above, as well as connect the container to your app network. Make sure that you are in the `getting-started/app` directory when you run this command.
 
     <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" data-target="#mac-linux2">Mac / Linux</a></li>

@@ -98,8 +98,8 @@ CMD flask run --host 0.0.0.0 --port 8000
 The first line to add to a Dockerfile is a [`# syntax` parser directive](../../engine/reference/builder.md#syntax).
 While optional, this directive instructs the Docker builder what syntax to use
 when parsing the Dockerfile, and allows older Docker versions with [BuildKit enabled](../buildkit/index.md#getting-started)
-to use a specific [Dockerfile frontend](../buildkit/dockerfile-frontend.md)
-before starting the build. [Parser directives](../../engine/reference/builder.md/#parser-directives)
+to use a specific [Dockerfile frontend](../dockerfile/frontend.md) before
+starting the build. [Parser directives](../../engine/reference/builder.md/#parser-directives)
 must appear before any other comment, whitespace, or Dockerfile instruction in
 your Dockerfile, and should be the first line in Dockerfiles.
 

@@ -61,6 +61,13 @@ When you disable SSO, you can delete the connection to remove the configuration 
 
 ## Manage users
 
+>**Important**
+>
+> SSO has Just-In-Time (JIT) Provisioning enabled by default, but this can be changed on a per-app basis. To prevent auto-provisioning users, you can create a security group in your IdP and configure the SSO app to authenticate and authorize only those users that are in the security group. Follow the instructions provided by your IdP:
+> - [Okta](https://help.okta.com/en-us/Content/Topics/Security/policies/configure-app-signon-policies.htm)
+> - [AzureAD](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
+{: .important}
+
 ### Add guest users when SSO is enabled
 
 To add a guest to your organization in Docker Hub if they aren’t verified through your IdP:

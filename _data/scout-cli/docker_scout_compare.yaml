@@ -1,0 +1,212 @@
+command: docker scout compare
+short: '[early preview] Compare two images and display differences'
+long: |-
+    The `docker scout compare` command analyzes two images and displays a comparison of both.
+
+    > This command is in **early preview** and its behaviour might change in the future
+
+    The main usage is to compare two versions of the same image.
+    For instance when a new image is built and compared to the version running in production.
+
+    The following artifact types are supported:
+
+    - Images
+    - OCI layout directories
+    - Tarball archives, as created by `docker save`
+
+    The tool analyzes the provided software artifact, and generates a vulnerability report.
+
+    By default, the tool expects an image reference, such as:
+
+    - `redis`
+    - `curlimages/curl:7.87.0`
+    - `mcr.microsoft.com/dotnet/runtime:7.0`
+
+    If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` or `--to-type` flag.
+usage: docker scout compare --to IMAGE|DIRECTORY|ARCHIVE IMAGE|DIRECTORY|ARCHIVE
+pname: docker scout
+plink: docker_scout.yaml
+options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: format
+      value_type: string
+      default_value: text
+      description: |-
+        Output format of the generated vulnerability report:
+        - text: default output, plain text with or without colors depending on the terminal
+        - markdown: Markdown output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ignore-base
+      value_type: bool
+      default_value: "false"
+      description: Filter out CVEs introduced from base image
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-fixed
+      value_type: bool
+      default_value: "false"
+      description: Filter to fixable CVEs
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-package-type
+      value_type: stringSlice
+      default_value: '[]'
+      description: |
+        Comma separated list of package types (like apk, deb, rpm, npm, pypi, golang, etc)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-severity
+      value_type: stringSlice
+      default_value: '[]'
+      description: |
+        Comma separated list of severities (critical, high, medium, low, unspecified) to filter CVEs by
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-unfixed
+      value_type: bool
+      default_value: "false"
+      description: Filter to unfixed CVEs
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: output
+      shorthand: o
+      value_type: string
+      description: Write the report to a file.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: string
+      description: Platform of image to analyze
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ref
+      value_type: string
+      description: |-
+        Reference to use if the provided tarball contains multiple references.
+        Can only be used with --type archive.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: to
+      value_type: string
+      description: image, directory or archive to compare to
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: to-ref
+      value_type: string
+      description: |-
+        Reference to use if the provided tarball contains multiple references.
+        Can only be used with --type archive.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: to-type
+      value_type: string
+      default_value: image
+      description: |-
+        Type of the image to analyze. Can be one of:
+        - image
+        - oci-dir
+        - archive (docker save tarball)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: type
+      value_type: string
+      default_value: image
+      description: |-
+        Type of the image to analyze. Can be one of:
+        - image
+        - oci-dir
+        - archive (docker save tarball)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### Compare an image to the latest tag
+
+    ```console
+    $ docker scout compare --to namespace/repo:latest namespace/repo:v1.2.3-pre
+    ```
+
+    ### Ignore base images
+
+    ```console
+    $ docker scout compare --ignore-base --to namespace/repo:latest namespace/repo:v1.2.3-pre
+    ```
+
+    ### Generate a markdown output
+
+    ```console
+    $ docker scout compare --format markdown --to namespace/repo:latest namespace/repo:v1.2.3-pre
+    ```
+
+    ### Only compare maven packages and only display critical vulnerabilities for maven packages
+
+    ```console
+    $ docker scout compare --only-package-type maven --only-severity critical --to namespace/repo:latest namespace/repo:v1.2.3-pre
+    ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

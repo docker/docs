@@ -95,8 +95,9 @@ Docker from the repository.
 2.  Add Docker's official GPG key:
 
     ```console
-    $ sudo mkdir -m 0755 -p /etc/apt/keyrings
+    $ sudo install -m 0755 -d /etc/apt/keyrings
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
     ```
 
 3.  Use the following command to set up the repository:
@@ -118,18 +119,6 @@ Raspbian.
    ```console
    $ sudo apt-get update
    ```
-
-   > Receiving a GPG error when running `apt-get update`?
-   >
-   > Your default [umask](https://en.wikipedia.org/wiki/Umask){: target="blank"
-   > rel="noopener" } may be incorrectly configured, preventing detection of the
-   > repository public key file. Try granting read permission for the Docker
-   > public key file before updating the package index:
-   >
-   > ```console
-   > $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
-   > $ sudo apt-get update
-   > ```
 
 2. Install Docker Engine, containerd, and Docker Compose.
 
@@ -184,11 +173,9 @@ Raspbian.
    This command downloads a test image and runs it in a container. When the
    container runs, it prints a confirmation message and exits.
 
-You have now successfully installed and started Docker Engine. The `docker` user
-group exists but contains no users, which is why you're required to use `sudo`
-to run Docker commands. Continue to [Linux post-install](linux-postinstall.md)
-to allow non-privileged users to run Docker commands and for other optional
-configuration steps.
+You have now successfully installed and started Docker Engine. 
+
+{% include root-errors.md %}
 
 #### Upgrade Docker Engine
 

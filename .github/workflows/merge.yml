@@ -1,0 +1,31 @@
+name: merge
+
+# open or update publishing PR when there is a push to main
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  main-to-published:
+    runs-on: ubuntu-22.04
+    if: github.repository_owner == 'docker'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: published
+      - name: Reset published branch
+        run: |
+          git fetch origin main:main
+          git reset --hard main
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@5b4a9f6a9e2af26e5f02351490b90d01eb8ec1e5
+        with:
+          delete-branch: false
+          branch: published-update
+          commit-message: publish updates from main
+          labels: area/release
+          title: publish updates from main
+          body: |
+            Automated pull request for publishing docs updates.

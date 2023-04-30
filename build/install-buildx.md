@@ -6,6 +6,10 @@ redirect_from:
   - /build/buildx/install/
 ---
 
+This page describes how to install Buildx, the CLI plugin for managing Docker builds.
+
+Buildx requires Docker Engine version 19.03 or later.
+
 ## Docker Desktop
 
 Docker Buildx is included by default in Docker Desktop.

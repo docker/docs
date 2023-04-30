@@ -5,10 +5,16 @@ usage: docker scout [command]
 pname: docker
 plink: docker.yaml
 cname:
+    - docker scout compare
     - docker scout cves
+    - docker scout quickview
+    - docker scout recommendations
     - docker scout version
 clink:
+    - docker_scout_compare.yaml
     - docker_scout_cves.yaml
+    - docker_scout_quickview.yaml
+    - docker_scout_recommendations.yaml
     - docker_scout_version.yaml
 deprecated: false
 experimental: false

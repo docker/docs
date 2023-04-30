@@ -32,7 +32,7 @@ We've made it really easy for you to file new issues.
 
 - Click **[New issue](https://github.com/docker/docs/issues/new)** on the docs repository and fill in the details, or
 - Click **Request docs changes** in the right column of every page on
-  docs.docker.com and add the details, or
+  [docs.docker.com](https://docs.docker.com/) and add the details, or
 
   ![Request changes link](/assets/images/docs-site-feedback.png)
 
@@ -49,4 +49,4 @@ contribute, see our [Contribute section](https://docs.docker.com/contribute/over
 
 ## Copyright and license
 
-Copyright 2013-2023 Docker, inc, released under the Apache 2.0 license.
+Copyright 2013-2023 Docker, inc, released under the <a href="https://github.com/docker/docs/blob/main/LICENSE">Apache 2.0 license</a> .

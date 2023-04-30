@@ -1,6 +1,6 @@
 ---
 title: Dockerfile reference
-description: "Dockerfiles use a simple DSL which allows you to automate the steps you would normally manually take to create an image."
+description: Find all the available commands you can use in a Dockerfile and learn how to use them, including COPY, ARG, ENTRYPOINT, and more.  
 keywords: dockerfile, docker file, docker copy, dockerfile exec, docker entrypoint, dockerfile entrypoint, dockerfile arg, docker args, entrypoint, shell dockerfile
 toc_max: 3
 redirect_from:

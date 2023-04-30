@@ -1,0 +1,135 @@
+command: docker scout sbom
+short: Generate or display SBOM of an image
+long: |-
+    The `docker scout sbom` command analyzes a software artifact to generate the corresponding Software Bill Of Materials (SBOM).
+
+    The SBOM can be used to list all packages, or the ones from a specific type (as dep, maven, etc).
+
+    The following artifact types are supported:
+
+    - Images
+    - OCI layout directories
+    - Tarball archives, as created by `docker save`
+
+    The tool analyzes the provided software artifact, and generates a vulnerability report.
+
+    By default, the tool expects an image reference, such as:
+
+    - `redis`
+    - `curlimages/curl:7.87.0`
+    - `mcr.microsoft.com/dotnet/runtime:7.0`
+
+    If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` flag.
+usage: docker scout sbom IMAGE|DIRECTORY|ARCHIVE
+pname: docker scout
+plink: docker_scout.yaml
+options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: format
+      value_type: string
+      default_value: json
+      description: |-
+        Output format:
+        - list: list of packages of the image
+        - json: json representation of the SBOM
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-package-type
+      value_type: stringSlice
+      default_value: '[]'
+      description: |-
+        Comma separated list of package types (like apk, deb, rpm, npm, pypi, golang, etc)
+        Can only be used with --format list
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: output
+      shorthand: o
+      value_type: string
+      description: Write the report to a file.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: string
+      description: Platform of image to analyze
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: ref
+      value_type: string
+      description: |-
+        Reference to use if the provided tarball contains multiple references.
+        Can only be used with --type archive.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: type
+      value_type: string
+      default_value: image
+      description: |-
+        Type of the image to analyze. Can be one of:
+        - image
+        - oci-dir
+        - archive (docker save tarball)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ### Display the list of packages
+
+    ```console
+    $ docker scout sbom alpine
+    ```
+
+    ### Only display packages of a specific type
+
+    ```console
+     $ docker scout sbom --only-package-type apk alpine
+    ```
+
+    ### Display the full SBOM as json
+
+    ```console
+    $ docker scout sbom --format json alpine
+    ```
+
+    ### Write SBOM to a file
+
+    ```console
+    $ docker scout sbom --format json --output alpine.sbom alpine
+    ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+
