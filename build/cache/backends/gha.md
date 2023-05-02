@@ -39,12 +39,13 @@ $ docker buildx build --push -t <registry>/<image> \
 The following table describes the available CSV parameters that you can pass to
 `--cache-to` and `--cache-from`.
 
-| Name    | Option                  | Type        | Default                         | Description                                  |
-|---------|-------------------------|-------------|---------------------------------|----------------------------------------------|
-| `url`   | `cache-to`,`cache-from` | String      | `$ACTIONS_CACHE_URL`            | Cache server URL, see [authentication][1].   |
-| `token` | `cache-to`,`cache-from` | String      | `$ACTIONS_RUNTIME_TOKEN`        | Access token, see [authentication][1].       |
-| `scope` | `cache-to`,`cache-from` | String      | Name of the current Git branch. | Cache scope, see [scope][2]                  |
-| `mode`  | `cache-to`              | `min`,`max` | `min`                           | Cache layers to export, see [cache mode][3]. |
+| Name           | Option                  | Type        | Default                         | Description                                   |
+| -------------- | ----------------------- | ----------- | ------------------------------- | --------------------------------------------- |
+| `url`          | `cache-to`,`cache-from` | String      | `$ACTIONS_CACHE_URL`            | Cache server URL, see [authentication][1].    |
+| `token`        | `cache-to`,`cache-from` | String      | `$ACTIONS_RUNTIME_TOKEN`        | Access token, see [authentication][1].        |
+| `scope`        | `cache-to`,`cache-from` | String      | Name of the current Git branch. | Cache scope, see [scope][2]                   |
+| `mode`         | `cache-to`              | `min`,`max` | `min`                           | Cache layers to export, see [cache mode][3].  |
+| `ignore-error` | `cache-to`              | Boolean     | `false`                         | Ignore errors caused by failed cache exports. |
 
 [1]: #authentication
 [2]: #scope
