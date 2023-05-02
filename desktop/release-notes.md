@@ -79,7 +79,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Mac
 
-- Increased the performance of VM networking when using Virtualization framework on macOS Ventura and above.
+- Increased the performance of VM networking when using the Virtualization framework on macOS Ventura and above. Docker Desktop for Mac now uses gVisor instead of VPNKit. To continue using VPNKit, add `"networkType":"vpnkit"` to your `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
 - Fixed a bug where an error window is displayed on uninstall.
 - Fixed a bug where the setting `deprecatedCgroupv1` was ignored. Fixes [docker/for-mac#6801](https://github.com/docker/for-mac/issues/6801).
 - Fixed cases where `docker pull` would return `EOF`.
