@@ -80,6 +80,12 @@ See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/){:target="_blank" rel="noopener" class="_"}
 in the Apple documentation, and Docker Desktop [Mac system requirements](../install/mac-install.md#system-requirements).
 
+### VPNKit keeps breaking
+
+In Docker Desktop version 4.19, gVisor replaced VPNKit to enhance the performance of VM networking when using the Virtualization framework on macOS Ventura and above. 
+
+To continue using VPNKit, add `"networkType":"vpnkit"` to your `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
+
 ## Topics for Windows
 
 ### Volumes
