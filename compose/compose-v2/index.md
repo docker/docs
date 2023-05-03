@@ -76,29 +76,9 @@ Compose V2.
 This section documents commands and flags that are different in Compose V2
 compared to Compose V1.
 
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#tab1">Not yet implemented</a></li>
-  <li><a data-toggle="tab" data-target="#tab2">Not to be implemented</a></li>
-  <li><a data-toggle="tab" data-target="#tab3">New</a></li>
-</ul>
-
-<div class="tab-content">
-
-<div id="tab1" class="tab-pane fade in active" markdown="1">
-
-The following commands have not been implemented yet, and may be implemented at
-a later time. File an issue in
-[Compose](https://github.com/docker/compose/issues){:target="_blank" rel="noopener" class="_"}
-GitHub repository if these commands are a higher priority for your use cases.
-
 `compose build --memory`: BuildKit does not yet support this option. The flag
 is supported, but is hidden to avoid breaking existing Compose usage. It does
 not have any effect.
-<hr>
-
-</div>
-
-<div id="tab2" class="tab-pane fade" markdown="1">
 
 There are no plans to support the commands and flags in the list below. Some of
 these are already deprecated in Compose V1, some are not relevant to Compose
@@ -115,13 +95,10 @@ Compose V2 uses `-` as word separator in container names while V1 used `_`.
 Providing `--compatibility` flag to V2 will make it use `_` as in V1. Make sure
 to stick to one of them, otherwise Compose will not be able to recognize the
 container as an instance of the service.
-<hr>
 
-</div>
+#### New commands and flags in Compose V2
 
-<div id="tab3" class="tab-pane fade" markdown="1">
-
-#### Copy
+##### Copy
 
 The `cp` command copies files or folders between service containers and the
 local filesystem. This command is bidirectional, it can copy from or to the
@@ -139,7 +116,7 @@ Copy a file from local filesystem to service container:
 $ docker compose cp ~/local/path/to/source/file my-service:~/path/to/copied/file
 ```
 
-#### List
+##### List
 
 The `ls` command lists Compose projects. With no flags, it lists only running
 projects. `--all` and `--filter` can be provided to further customize projects
@@ -151,7 +128,7 @@ $ docker compose ls --all --format json
 [{"Name":"dockergithubio","Status":"exited(1)","ConfigFiles":"/path/to/docs/docker-compose.yml"}]
 ```
 
-#### Specify project with `--project-name`
+##### Specify project with `--project-name`
 
 With Compose V1, compose commands had to run either from the project directory
 or by specifying `--file` or `--project-directory` command line flags. With
