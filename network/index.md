@@ -84,18 +84,17 @@ you can use the `--alias` flag to specify an additional network alias for the co
 
 ## DNS services
 
-By default, containers inherit the DNS settings of the host, as defined in the `/etc/resolv.conf` configuration file.
+By default, containers inherit the DNS settings of the host,
+as defined in the `/etc/resolv.conf` configuration file.
 Containers that attach to the default `bridge` network receive a copy of this file.
 Containers that attach to a
 [custom network](network-tutorial-standalone.md#use-user-defined-bridge-networks)
 use Docker's embedded DNS server.
 The embedded DNS server forwards external DNS lookups to the DNS servers configured on the host.
 
-Custom hosts, defined in `/etc/hosts` on the host machine, aren't inherited by containers.
-To pass additional hosts into container, refer to
-[add entries to container hosts file](../engine/reference/commandline/run.md#add-host)
-in the `docker run` reference documentation.
-You can override these settings on a per-container basis.
+You can configure DNS resolution on a per-container basis, using flags for the
+`docker run` command when you start the container. The following table
+describes the available `docker run` flags related to DNS configuration.
 
 | Flag           | Description                                                                                                                                                                                                                                                         |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -103,6 +102,30 @@ You can override these settings on a per-container basis.
 | `--dns-search` | A DNS search domain to search non-fully-qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                                            |
 | `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                                            |
 | `--hostname`   | The hostname a container uses for itself. Defaults to the container's ID if not specified.                                                                                                                                                                          |
+
+### Name resolution with multiple nameservers
+
+When you specify multiple DNS servers using `--dns` flags, name resolution may
+work in a surprising or unexpected way. DNS lookup behavior depends on a number
+of different factors:
+
+- Whether the container OS runs on [musl or glibc](https://wiki.musl-libc.org/functional-differences-from-glibc.html#Name_Resolver/DNS){: target="blank" rel="noopener" }
+- Whether the Docker daemon binary was [statically or dynamically linked](https://pkg.go.dev/net#hdr-Name_Resolution){: target="blank" rel="noopener" }
+- If dynamically linked, which version of glibc that's used
+- Whether or not [nsswitch.conf is present](https://tldp.org/LDP/nag2/x-087-2-resolv.library.html#X-087-2-RESOLV.NSSWITCH-CONF){: target="blank" rel="noopener" }
+
+You may find that name resolution works as follows:
+
+1. The container emits requests to **all** nameservers that you specify.
+2. The container uses the first response returned by any of the nameservers.
+   Even if the first response is `NXDOMAIN`, or similar.
+
+### Custom hosts
+
+Custom hosts, defined in `/etc/hosts` on the host machine, aren't inherited by containers.
+To pass additional hosts into container, refer to
+[add entries to container hosts file](../engine/reference/commandline/run.md#add-host)
+in the `docker run` reference documentation.
 
 ## Proxy server
 
