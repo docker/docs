@@ -15,8 +15,8 @@ toc_max: 4
 ---
 
 To get started with Docker Engine on RHEL, make sure you
-[meet the prerequisites](#prerequisites), then
-[install Docker](#installation-methods).
+[meet the prerequisites](#prerequisites), and then follow the
+[installation steps](#installation-methods).
 
 ## Prerequisites
 
