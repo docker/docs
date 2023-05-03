@@ -23,8 +23,10 @@ To get started with Docker Engine on Debian, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
+- Debian Bookworm 12 (testing)
 - Debian Bullseye 11 (stable)
 - Debian Buster 10 (oldstable)
+- Raspbian Bookworm 12 (testing)
 - Raspbian Bullseye 11 (stable)
 - Raspbian Buster 10 (oldstable)
 
@@ -146,16 +148,15 @@ Raspbian.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:18.09.1~3-0~debian-stretch
-   5:18.09.0~3-0~debian-stretch
-   18.06.1~ce~3-0~debian
-   18.06.0~ce~3-0~debian
+   5:23.0.5-1~debian.11~bullseye
+   5:23.0.4-1~debian.11~bullseye
+   <...>
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:18.09.0~3-0~debian-stretch
+   $ VERSION_STRING=5:23.0.5-1~debian.11~bullseye
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 

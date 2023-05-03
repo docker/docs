@@ -27,6 +27,7 @@ To get started with Docker Engine on Ubuntu, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Ubuntu Lunar 23.04
 - Ubuntu Kinetic 22.10
 - Ubuntu Jammy 22.04 (LTS)
 - Ubuntu Focal 20.04 (LTS)
@@ -142,16 +143,15 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:20.10.16~3-0~ubuntu-jammy
-   5:20.10.15~3-0~ubuntu-jammy
-   5:20.10.14~3-0~ubuntu-jammy
-   5:20.10.13~3-0~ubuntu-jammy
+   5:23.0.5-1~ubuntu.22.04~jammy
+   5:23.0.4-1~ubuntu.22.04~jammy
+   <...>
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:20.10.13~3-0~ubuntu-jammy
+   $ VERSION_STRING=5:23.0.5-1~ubuntu.22.04~jammy
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
