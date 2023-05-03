@@ -40,7 +40,7 @@ the drivers they're using.
 $ docker buildx ls
 NAME/NODE       DRIVER/ENDPOINT      STATUS   BUILDKIT PLATFORMS
 default         docker
-  default       default              running  20.10.17 linux/amd64, linux/386
+  default       default              running  23.0.5   linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
 ```
 
 Depending on your setup, you may find multiple builders in your list that use
@@ -51,9 +51,9 @@ output from `docker buildx ls`:
 ```console
 NAME/NODE       DRIVER/ENDPOINT STATUS  BUILDKIT PLATFORMS
 default         docker
-  default       default         running 20.10.17 linux/amd64, linux/386
+  default       default         running 23.0.5   linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/386
 desktop-linux * docker
-  desktop-linux desktop-linux   running 20.10.17 linux/amd64, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/arm/v7, linux/arm/v6
+  desktop-linux desktop-linux   running 23.0.5   linux/arm64, linux/amd64, linux/amd64/v2, linux/riscv64, linux/ppc64le, linux/s390x, linux/mips64le, linux/mips64
 ```
 
 This is because the Docker driver builders are automatically pulled from the

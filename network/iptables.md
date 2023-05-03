@@ -96,7 +96,10 @@ _default_, it does not _restrict_ services to that IP.
 
 ## Integration with Firewalld
 
-If you are running Docker version 20.10.0 or higher with [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”} on your system with `--iptables` enabled, Docker automatically creates a `firewalld` zone called `docker` and inserts all the network interfaces it creates (for example, `docker0`) into the `docker` zone to allow seamless networking.
+If you are running Docker with [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”}
+on your system with `--iptables` enabled, Docker automatically creates a `firewalld`
+zone called `docker` and inserts all the network interfaces it creates (for example,
+`docker0`) into the `docker` zone to allow seamless networking.
 
 Consider running the following `firewalld` command to remove the docker interface from the zone.
 
