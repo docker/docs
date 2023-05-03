@@ -371,11 +371,11 @@ services:
 You can also build bake files directly from a remote Git repository or HTTPS URL:
 
 ```console
-$ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
-#1 [internal] load git source https://github.com/docker/cli.git#v20.10.11
-#1 0.745 e8f1871b077b64bcb4a13334b7146492773769f7       refs/tags/v20.10.11
+$ docker buildx bake "https://github.com/docker/cli.git#v23.0.5" --progress=plain --print
+#1 [internal] load git source https://github.com/docker/cli.git#v23.0.5
+#1 0.549 428c3537ffd042ccc879c37d73769a518d304869	refs/tags/v23.0.5
 #1 2.022 From https://github.com/docker/cli
-#1 2.022  * [new tag]         v20.10.11  -> v20.10.11
+#1 2.022  * [new tag]         v23.0.5  -> v23.0.5
 #1 DONE 2.9s
 ```
 
@@ -390,11 +390,14 @@ $ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
   },
   "target": {
     "binary": {
-      "context": "https://github.com/docker/cli.git#v20.10.11",
+      "context": "https://github.com/docker/cli.git#v23.0.5",
       "dockerfile": "Dockerfile",
       "args": {
         "BASE_VARIANT": "alpine",
+        "BUILDKIT_CONTEXT_KEEP_GIT_DIR": "1",
         "GO_STRIP": "",
+        "GO_VERSION": "1.19.8",
+        "PACKAGER_NAME": "",
         "VERSION": ""
       },
       "target": "binary",
@@ -463,7 +466,7 @@ $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test"
 ```
 
 ```console
-$ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v20.10.11" --print
+$ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v23.0.5" --print
 #1 [internal] load git source https://github.com/tonistiigi/buildx.git#remote-test
 #1 0.429 577303add004dd7efeb13434d69ea030d35f7888       refs/heads/remote-test
 #1 CACHED
@@ -473,7 +476,7 @@ $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "htt
 {
   "target": {
     "default": {
-      "context": "https://github.com/docker/cli.git#v20.10.11",
+      "context": "https://github.com/docker/cli.git#v23.0.5",
       "dockerfile": "Dockerfile",
       "dockerfile-inline": "FROM alpine\nWORKDIR /src\nCOPY . .\nRUN ls -l \u0026\u0026 stop\n"
     }
@@ -482,7 +485,7 @@ $ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "htt
 ```
 
 ```console
-$ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v20.10.11"
+$ docker buildx bake "https://github.com/tonistiigi/buildx.git#remote-test" "https://github.com/docker/cli.git#v23.0.5"
 ```
 
 ```text
