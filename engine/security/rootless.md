@@ -11,9 +11,6 @@ the container runtime.
 Rootless mode does not require root privileges even during the installation of
 the Docker daemon, as long as the [prerequisites](#prerequisites) are met.
 
-Rootless mode was introduced in Docker Engine v19.03 as an experimental feature.
-Rootless mode graduated from experimental in Docker Engine v20.10.
-
 ## How it works
 
 Rootless mode executes the Docker daemon and containers inside a user namespace.
@@ -306,7 +303,7 @@ To run Rootless Docker inside "rootful" Docker, use the `docker:<version>-dind-r
 image instead of `docker:<version>-dind`.
 
 ```console
-$ docker run -d --name dind-rootless --privileged docker:20.10-dind-rootless
+$ docker run -d --name dind-rootless --privileged docker:23.0-dind-rootless
 ```
 
 The `docker:<version>-dind-rootless` image runs as a non-root user (UID 1000).

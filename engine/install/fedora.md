@@ -22,6 +22,7 @@ To install Docker Engine, you need the 64-bit version of one of these Fedora ver
 
 - Fedora 36
 - Fedora 37
+- Fedora 38
 
 ### Uninstall old versions
 
@@ -108,19 +109,17 @@ $ sudo dnf config-manager \
     ```console
     $ dnf list docker-ce  --showduplicates | sort -r
 
-    docker-ce.x86_64  3:18.09.1-3.fc28                 docker-ce-stable
-    docker-ce.x86_64  3:18.09.0-3.fc28                 docker-ce-stable
-    docker-ce.x86_64  18.06.1.ce-3.fc28                docker-ce-stable
-    docker-ce.x86_64  18.06.0.ce-3.fc28                docker-ce-stable
+    docker-ce.x86_64    3:23.0.5-1.fc37    docker-ce-stable
+    docker-ce.x86_64    3:23.0.4-1.fc37    docker-ce-stable
+    <...>
     ```
 
     The list returned depends on which repositories are enabled, and is specific
-    to your version of Fedora (indicated by the `.fc28` suffix in this example).
+    to your version of Fedora (indicated by the `.fc37` suffix in this example).
 
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column) up to
-       the first hyphen, separated by a hyphen (`-`), for example,
-       `docker-ce-3:18.09.1`.
+       the package name (`docker-ce`) plus the version string (2nd column),
+       separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5-1.fc37`.
 
     ```console
     $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
