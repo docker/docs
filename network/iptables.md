@@ -19,19 +19,41 @@ describes how to achieve that, and what caveats you need to be aware of.
 
 Docker installs two custom iptables chains named `DOCKER-USER` and `DOCKER`,
 and it ensures that incoming packets are always checked by these two chains
-first.
+first. These chains are part of the `FORWARD` chain.
 
 All of Docker's `iptables` rules are added to the `DOCKER` chain. Do not
 manipulate this chain manually. If you need to add rules which load before
 Docker's rules, add them to the `DOCKER-USER` chain. These rules are applied
 before any rules Docker creates automatically.
 
-Rules added to the `FORWARD` chain -- either manually, or by another
-iptables-based firewall -- are evaluated _after_ these chains. This means that
-if you expose a port through Docker, this port gets exposed no matter what
-rules your firewall has configured. If you want those rules to apply even
-when a port gets exposed through Docker, you _must_ add these rules to the
-`DOCKER-USER` chain.
+Other rules added to the `FORWARD` chain, either manually, or by another
+iptables-based firewall, are evaluated after the `DOCKER-USER` and `DOCKER` chains.
+This means that if you expose a port through Docker,
+this port gets exposed no matter what rules your firewall has configured.
+If you want rules to apply even when a port gets exposed through Docker,
+you must add these rules to the `DOCKER-USER` chain.
+
+### Match the original IP and ports for requests
+
+When packets arrive to the `DOCKER-USER` chain, they have already passed through
+a Destination Network Address Translation (DNAT) filter. That means that the
+`iptables` flags you use can only match internal IP addresses and ports of
+containers.
+
+If you want to match traffic based on the original IP and port in the network
+request, you must use the
+[`conntrack` iptables extension](https://ipset.netfilter.org/iptables-extensions.man.html#lbAO).
+For example:
+
+```console
+$ sudo iptables -I DOCKER-USER -p tcp -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+$ sudo iptables -I DOCKER-USER -p tcp -m conntrack -ctorigsrc 1.2.3.4 --ctorigdstport 80 -j ACCEPT
+```
+
+> **Important**
+>
+> Using the `conntrack` extension may result in degraded performance.
+{: .important }
 
 ### Restrict connections to the Docker host
 
