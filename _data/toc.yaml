@@ -1621,8 +1621,8 @@ manuals:
   section:
     - path: /build/
       title: Overview
-    - path: /build/install-buildx/
-      title: Install Buildx
+    - path: /build/architecture/
+      title: Architecture
     - sectiontitle: Building images
       section:
         - path: /build/building/packaging/

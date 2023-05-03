@@ -40,8 +40,7 @@ Buildx comes pre-bundled with Docker Desktop, and you can invoke this build
 client using the `docker buildx` command. No need for any additional setup. If
 you installed Docker Engine manually, you may need to install the Buildx plugin
 separately. See
-[Install Docker Buildx](https://docs.docker.com/build/buildx/install/) for
-instructions.
+[Install Docker Engine](../../engine/install/index.md) for instructions.
 
 Verify that the Buildx client is installed on your system, and that you’re able
 to run it:
