@@ -61,8 +61,6 @@ $ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/15.
 $ sudo zypper addrepo $opensuse_repo
 ```
 
-The `overlay2` storage driver is recommended.
-
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are

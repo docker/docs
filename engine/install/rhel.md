@@ -35,8 +35,6 @@ RHEL versions:
 - RHEL 8 on s390x (IBM Z)
 - RHEL 9 on s390x (IBM Z)
 
-The `overlay2` storage driver is recommended.
-
 ### Uninstall old versions
 
 Older versions of Docker were called `docker` or `docker-engine`. If these are
