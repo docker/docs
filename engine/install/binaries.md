@@ -137,6 +137,10 @@ instructions for enabling and configuring AppArmor or SELinux.
     This command downloads a test image and runs it in a container. When the
     container runs, it prints a message and exits.
 
+You have now successfully installed and started Docker Engine.
+
+{% include root-errors.md %}
+
 ## Install client binaries on macOS
 
 > **Note**

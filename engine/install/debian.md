@@ -174,7 +174,7 @@ Raspbian.
    This command downloads a test image and runs it in a container. When the
    container runs, it prints a confirmation message and exits.
 
-You have now successfully installed and started Docker Engine. 
+You have now successfully installed and started Docker Engine.
 
 {% include root-errors.md %}
 
@@ -231,11 +231,9 @@ download a new file each time you want to upgrade Docker Engine.
    This command downloads a test image and runs it in a container. When the
    container runs, it prints a confirmation message and exits.
 
-You have now successfully installed and started Docker Engine. The `docker` user
-group exists but contains no users, which is why you're required to use `sudo`
-to run Docker commands. Continue to [Linux post-install](linux-postinstall.md)
-to allow non-privileged users to run Docker commands and for other optional
-configuration steps.
+You have now successfully installed and started Docker Engine.
+
+{% include root-errors.md %}
 
 #### Upgrade Docker Engine
 
