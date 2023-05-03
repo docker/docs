@@ -1913,8 +1913,6 @@ manuals:
     section:
       -  path: /single-sign-on/
          title: Overview
-      -  path: /single-sign-on/requirements/
-         title: Requirements
       -  path: /single-sign-on/configure/
          title: Configure
       -  path: /single-sign-on/manage/

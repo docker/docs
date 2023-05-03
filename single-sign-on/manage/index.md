@@ -84,3 +84,7 @@ To remove a user from an organization:
 2. From the **Members** tab, select the **x** next to a member’s name to remove them from all the teams in the organization.
 3. Select **Remove** to confirm. The member receives an email notification confirming the removal.
 
+## What's next?
+
+- [Set up SCIM](../../docker-hub/scim.md)
+- [Enable Group mapping](../../docker-hub/group-mapping.md)
