@@ -12,7 +12,7 @@ On this page you can find instructions on how to install the Compose standalone 
 > **Compose standalone**
 >
 > Note that Compose standalone uses the `-compose` syntax instead of the current standard syntax `compose`.  
->For example type `docker-compose up` when using Compose standalone, instead of `docker compose up`.
+> For example, type `docker-compose up` when using Compose standalone, instead of `docker compose up`.
 
 1. To download and install Compose standalone, run:
   ```console
