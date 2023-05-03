@@ -92,7 +92,7 @@
   - /go/attack-surface/
 "/build/buildkit/#getting-started":
   - /go/buildkit/
-"/build/install-buildx/":
+"/build/architecture/#install-buildx":
   # Instructions on installing Buildx. Redirect used in Docker CLI.
   - /go/buildx/
 "/engine/reference/commandline/compose_build/":

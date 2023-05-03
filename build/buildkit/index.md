@@ -91,7 +91,7 @@ $ DOCKER_BUILDKIT=1 docker build .
 
 > **Note**
 >
-> [Buildx](../install-buildx.md) always uses BuildKit.
+> [Buildx](../architecture.md#buildx) always uses BuildKit.
 
 To use Docker BuildKit by default, edit the Docker daemon configuration in
 `/etc/docker/daemon.json` as follows, and restart the daemon.
