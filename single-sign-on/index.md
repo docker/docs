@@ -24,8 +24,16 @@ When you enable SSO for your organization or company, a first-time user can sign
 
 Administrators can then choose to enforce SSO login and effortlessly manage SSO connections for their individual organization or company. 
 
+## Prerequisites
+
+* You must first notify your company about the new SSO login procedures.
+* Verify that your org members have Docker Desktop version 4.4.2, or later, installed on their machines.
+* If your organization uses the Docker Hub CLI, new org members must [create a Personal Access Token (PAT)](../docker-hub/access-tokens.md) to sign in to the CLI.There is a grace period for existing users, which will expire in the near future. Before the grace period ends, your users can sign in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
+In addition, you should add all email addresses to your IdP.
+* Confirm that all CI/CD pipelines have replaced their passwords with PATs.
+* For your service accounts, add your additional domains or enable it in your IdP.
+
 ## What's next?
 
-- Check [the prerequisites](requirements/index.md)
-- Explore [the FAQs](faqs.md)
 - Start [configuring SSO](configure/index.md) for your organization or company
+- Explore [the FAQs](faqs.md)

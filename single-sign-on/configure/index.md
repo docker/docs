@@ -68,14 +68,21 @@ Follow the steps on this page to configure SSO for your organization or company.
 
 7. Review your summary and select **Create Connection**.
 
-The SSO connection is now created. You can continue to set up [SSO Group Mapping and SCIM](../../docker-hub/scim.md) without enforcing SSO log-in.
-
-## Optional step three: Test your SSO configuration
+## Step three: Test your SSO configuration
 
 After you’ve completed the SSO configuration process in Docker Hub, you can test the configuration when you sign in to Docker Hub using an incognito browser. Sign in to Docker Hub using your domain email address. You are then redirected to your IdP's login page to authenticate.
 
 1. Authenticate through email instead of using your Docker ID, and test the login process.
 2. To authenticate through CLI, your users must have a PAT before you enforce SSO for CLI users.
+
+>**Important**
+>
+> SSO has Just-In-Time (JIT) Provisioning enabled by default, but this can be changed on a per-app basis. To prevent auto-provisioning users, you can create a security group in your IdP and configure the SSO app to authenticate and authorize only those users that are in the security group. Follow the instructions provided by your IdP:
+> - [Okta](https://help.okta.com/en-us/Content/Topics/Security/policies/configure-app-signon-policies.htm)
+> - [AzureAD](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
+{: .important}
+
+The SSO connection is now created. You can continue to set up [SCIM](../../docker-hub/scim.md) without enforcing SSO log-in.
 
 ## Optional step four: Enforce SSO 
 
@@ -90,3 +97,9 @@ Your users must now sign in to Docker with SSO.
 >
 >If SSO isn't enforced, users can choose to sign in with either their Docker ID or SSO.
 {: .important}
+
+## What's next?
+
+- [Manage you SSO connections](../manage/index.md)
+- [Set up SCIM](../../docker-hub/scim.md)
+- [Enable Group mapping](../../docker-hub/group-mapping.md)
