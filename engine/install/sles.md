@@ -34,8 +34,11 @@ To get started with Docker Engine on SLES, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of SLES 15-SP3 or SLES 15-SP4 on s390x (IBM Z).
-Archived versions aren't supported or tested.
+To install Docker Engine, you need a maintained version of one of the following
+SLES versions:
+
+- SLES 15-SP3 on s390x (IBM Z)
+- SLES 15-SP4 on s390x (IBM Z)
 
 The [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.3&arch=s390x)
 repositories must be enabled.
@@ -117,61 +120,61 @@ $ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
 
 #### Install Docker Engine
 
-1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose
-    or go to the next step to install a specific version:
+1. Install the _latest version_ of Docker Engine, containerd, and Docker Compose
+   or go to the next step to install a specific version:
 
-    ```console
-    $ sudo zypper install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    ```
+   ```console
+   $ sudo zypper install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   ```
 
-    If prompted to accept the GPG key, verify that the fingerprint matches
-    `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
+   If prompted to accept the GPG key, verify that the fingerprint matches
+   `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
 
-    This command installs Docker, but it doesn't start Docker. It also creates a
-    `docker` group, however, it doesn't add any users to the group by default.
+   This command installs Docker, but it doesn't start Docker. It also creates a
+   `docker` group, however, it doesn't add any users to the group by default.
 
-2.  To install a _specific version_ of Docker Engine, list the available versions
-    in the repo, then select and install:
+2. To install a _specific version_ of Docker Engine, list the available versions
+   in the repo, then select and install:
 
-    a. List and sort the versions available in your repo. This example sorts
-       results by version number, highest to lowest, and is truncated:
+   a. List and sort the versions available in your repo. This example sorts
+      results by version number, highest to lowest, and is truncated:
 
-    ```console
-    $ sudo zypper search -s --match-exact docker-ce | sort -r
-    
-      v  | docker-ce | package | 3:23.0.5-3 | s390x | Docker CE Stable - s390x
-      v  | docker-ce | package | 3:23.0.4-3 | s390x | Docker CE Stable - s390x
-    ```
+   ```console
+   $ sudo zypper search -s --match-exact docker-ce | sort -r
+ 
+     v  | docker-ce | package | 3:23.0.5-3 | s390x | Docker CE Stable - s390x
+     v  | docker-ce | package | 3:23.0.4-3 | s390x | Docker CE Stable - s390x
+   ```
 
-    The list returned depends on which repositories are enabled, and is specific
-    to your version of SLES.
+   The list returned depends on which repositories are enabled, and is specific
+   to your version of SLES.
 
-    b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (fourth column),
-       separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5`.
+   b. Install a specific version by its fully qualified package name, which is
+      the package name (`docker-ce`) plus the version string (fourth column),
+      separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5`.
 
-    ```console
-    $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
-    ```
+   ```console
+   $ sudo zypper install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
+   ```
 
-    This command installs Docker, but it doesn't start Docker. It also creates a
-    `docker` group, however, it doesn't add any users to the group by default.
+   This command installs Docker, but it doesn't start Docker. It also creates a
+   `docker` group, however, it doesn't add any users to the group by default.
 
-3.  Start Docker.
+3. Start Docker.
 
-    ```console
-    $ sudo systemctl start docker
-    ```
+   ```console
+   $ sudo systemctl start docker
+   ```
 
-4.  Verify that Docker Engine is installed correctly by running the `hello-world`
-    image.
+4. Verify that Docker Engine is installed correctly by running the `hello-world`
+   image.
 
-    ```console
-    $ sudo docker run hello-world
-    ```
+   ```console
+   $ sudo docker run hello-world
+   ```
 
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints a message and exits.
+   This command downloads a test image and runs it in a container. When the
+   container runs, it prints a message and exits.
 
 You have now successfully installed and started Docker Engine.
 
@@ -188,35 +191,35 @@ If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker Engine.
 
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
-    and choose your version of SLES. Then browse to `15/s390x/stable/Packages/`
-    and download the `.rpm` file for the Docker version you want to install.
+1. Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
+   and choose your version of SLES. Then browse to `15/s390x/stable/Packages/`
+   and download the `.rpm` file for the Docker version you want to install.
 
-2.  Install Docker Engine, changing the path below to the path where you downloaded
-    the Docker package.
+2. Install Docker Engine, changing the path below to the path where you downloaded
+   the Docker package.
 
-    ```console
-    $ sudo zypper install /path/to/package.rpm
-    ```
+   ```console
+   $ sudo zypper install /path/to/package.rpm
+   ```
 
-    Docker is installed but not started. The `docker` group is created, but no
-    users are added to the group.
+   Docker is installed but not started. The `docker` group is created, but no
+   users are added to the group.
 
-3.  Start Docker.
+3. Start Docker.
 
-    ```console
-    $ sudo systemctl start docker
-    ```
+   ```console
+   $ sudo systemctl start docker
+   ```
 
-4.  Verify that Docker Engine is installed correctly by running the `hello-world`
-    image.
+4. Verify that Docker Engine is installed correctly by running the `hello-world`
+   image.
 
-    ```console
-    $ sudo docker run hello-world
-    ```
+   ```console
+   $ sudo docker run hello-world
+   ```
 
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints a message and exits.
+   This command downloads a test image and runs it in a container. When the
+   container runs, it prints a message and exits.
 
 You have now successfully installed and started Docker Engine.
 
@@ -232,20 +235,20 @@ instead of `zypper -y install`, and point to the new file.
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
+1. Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
-    ```console
-    $ sudo zypper remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
-    ```
+   ```console
+   $ sudo zypper remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+   ```
 
-2.  Images, containers, volumes, or customized configuration files on your host
-    are not automatically removed. To delete all images, containers, and
-    volumes:
+2. Images, containers, volumes, or customized configuration files on your host
+   are not automatically removed. To delete all images, containers, and
+   volumes:
 
-    ```console
-    $ sudo rm -rf /var/lib/docker
-    $ sudo rm -rf /var/lib/containerd
-    ```
+   ```console
+   $ sudo rm -rf /var/lib/docker
+   $ sudo rm -rf /var/lib/containerd
+   ```
 
 You must delete any edited configuration files manually.
 

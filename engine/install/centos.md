@@ -22,12 +22,12 @@ To get started with Docker Engine on CentOS, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need a maintained version of one of the following CentOS versions:
-   - CentOS 7
-   - CentOS 8 (stream)
-   - CentOS 9 (stream)
+To install Docker Engine, you need a maintained version of one of the following
+CentOS versions:
 
-Archived versions aren't supported or tested.
+- CentOS 7
+- CentOS 8 (stream)
+- CentOS 9 (stream)
 
 The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
@@ -102,46 +102,46 @@ $ sudo yum-config-manager --add-repo {{ download-url-base }}/docker-ce.repo
    <br>
    <div id="tab-latest" class="tab-pane fade in active" markdown="1">
 
-    To install the latest version, run:
+   To install the latest version, run:
 
-    ```console
-    $ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    ```
+   ```console
+   $ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   ```
 
-    If prompted to accept the GPG key, verify that the fingerprint matches
-    `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
+   If prompted to accept the GPG key, verify that the fingerprint matches
+   `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
 
-    This command installs Docker, but it doesn't start Docker. It also creates a
-    `docker` group, however, it doesn't add any users to the group by default.
+   This command installs Docker, but it doesn't start Docker. It also creates a
+   `docker` group, however, it doesn't add any users to the group by default.
 
    </div>
    <div id="tab-version" class="tab-pane fade" markdown="1">
 
-    To install a specific version, start by listing the available versions in the repository:
+   To install a specific version, start by listing the available versions in the repository:
 
-    ```console
-    $ yum list docker-ce --showduplicates | sort -r
+   ```console
+   $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.x86_64    3:23.0.5-1.el8    docker-ce-stable
-    docker-ce.x86_64    3:23.0.4-1.el8    docker-ce-stable
-    <...>
-    ```
+   docker-ce.x86_64    3:23.0.5-1.el8    docker-ce-stable
+   docker-ce.x86_64    3:23.0.4-1.el8    docker-ce-stable
+   <...>
+   ```
 
-    The list returned depends on which repositories are enabled, and is specific
-    to your version of CentOS (indicated by the `.el8` suffix in this example).
+   The list returned depends on which repositories are enabled, and is specific
+   to your version of CentOS (indicated by the `.el8` suffix in this example).
 
-    Install a specific version by its fully qualified package name, which is
-    the package name (`docker-ce`) plus the version string (2nd column),
-    separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5-1.el8`.
+   Install a specific version by its fully qualified package name, which is
+   the package name (`docker-ce`) plus the version string (2nd column),
+   separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5-1.el8`.
 
-    Replace `<VERSION_STRING>` with the desired version and then run the following command to install:
+   Replace `<VERSION_STRING>` with the desired version and then run the following command to install:
 
-    ```console
-    $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
-    ```
+   ```console
+   $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
+   ```
 
-    This command installs Docker, but it doesn't start Docker. It also creates a
-    `docker` group, however, it doesn't add any users to the group by default.
+   This command installs Docker, but it doesn't start Docker. It also creates a
+   `docker` group, however, it doesn't add any users to the group by default.
 
    </div>
    <hr>
@@ -149,19 +149,19 @@ $ sudo yum-config-manager --add-repo {{ download-url-base }}/docker-ce.repo
 
 2. Start Docker.
 
-    ```console
-    $ sudo systemctl start docker
-    ```
+   ```console
+   $ sudo systemctl start docker
+   ```
 
 3. Verify that Docker Engine installation is successful by running the `hello-world`
-    image.
+   image.
 
-    ```console
-    $ sudo docker run hello-world
-    ```
+   ```console
+   $ sudo docker run hello-world
+   ```
 
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints a confirmation message and exits.
+   This command downloads a test image and runs it in a container. When the
+   container runs, it prints a confirmation message and exits.
 
 You have now successfully installed and started Docker Engine.
 
@@ -179,33 +179,33 @@ If you can't use Docker's repository to install Docker, you can download the
 a new file each time you want to upgrade Docker Engine.
 
 1. Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
-    and choose your version of CentOS. Then browse to `x86_64/stable/Packages/`
-    and download the `.rpm` file for the Docker version you want to install.
+   and choose your version of CentOS. Then browse to `x86_64/stable/Packages/`
+   and download the `.rpm` file for the Docker version you want to install.
 
 2. Install Docker Engine, changing the path below to the path where you downloaded the Docker package.
 
-    ```console
-    $ sudo yum install /path/to/package.rpm
-    ```
+   ```console
+   $ sudo yum install /path/to/package.rpm
+   ```
 
-    Docker is installed but not started. The `docker` group is created, but no
-    users are added to the group.
+   Docker is installed but not started. The `docker` group is created, but no
+   users are added to the group.
 
 3. Start Docker.
 
-    ```console
-    $ sudo systemctl start docker
-    ```
+   ```console
+   $ sudo systemctl start docker
+   ```
 
 4. Verify that Docker Engine installation is successful by running the `hello-world`
-    image.
+   image.
 
-    ```console
-    $ sudo docker run hello-world
-    ```
+   ```console
+   $ sudo docker run hello-world
+   ```
 
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints a confirmation message and exits.
+   This command downloads a test image and runs it in a container. When the
+   container runs, it prints a confirmation message and exits.
 
 You have now successfully installed and started Docker Engine.
 
@@ -223,18 +223,18 @@ instead of `yum -y install`, and point to the new file.
 
 1. Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
-    ```console
-    $ sudo yum remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
-    ```
+   ```console
+   $ sudo yum remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+   ```
 
 2. Images, containers, volumes, or customized configuration files on your host
-    are not automatically removed. To delete all images, containers, and
-    volumes:
+   are not automatically removed. To delete all images, containers, and
+   volumes:
 
-    ```console
-    $ sudo rm -rf /var/lib/docker
-    $ sudo rm -rf /var/lib/containerd
-    ```
+   ```console
+   $ sudo rm -rf /var/lib/docker
+   $ sudo rm -rf /var/lib/containerd
+   ```
 
 You must delete any edited configuration files manually.
 

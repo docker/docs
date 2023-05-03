@@ -18,7 +18,8 @@ To get started with Docker Engine on Fedora, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need the 64-bit version of one of these Fedora versions:
+To install Docker Engine, you need a maintained version of one of the following
+Fedora versions:
 
 - Fedora 36
 - Fedora 37
@@ -84,62 +85,62 @@ $ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
 
 #### Install Docker Engine
 
-1.  Install the _latest version_ of Docker Engine, containerd, and Docker Compose
-    or go to the next step to install a specific version:
+1. Install the _latest version_ of Docker Engine, containerd, and Docker Compose
+   or go to the next step to install a specific version:
 
-    ```console
-    $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    ```
+   ```console
+   $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   ```
 
-    If prompted to accept the GPG key, verify that the fingerprint matches
-    `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
+   If prompted to accept the GPG key, verify that the fingerprint matches
+   `060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35`, and if so, accept it.
 
-    This command installs Docker, but it doesn't start Docker. It also creates a
-    `docker` group, however, it doesn't add any users to the group by default.
+   This command installs Docker, but it doesn't start Docker. It also creates a
+   `docker` group, however, it doesn't add any users to the group by default.
 
-2.  To install a _specific version_ of Docker Engine, list the available versions
-    in the repo, then select and install:
+2. To install a _specific version_ of Docker Engine, list the available versions
+   in the repo, then select and install:
 
-    a. List and sort the versions available in your repo. This example sorts
-       results by version number, highest to lowest, and is truncated:
+   a. List and sort the versions available in your repo. This example sorts
+      results by version number, highest to lowest, and is truncated:
 
-    ```console
-    $ dnf list docker-ce  --showduplicates | sort -r
+   ```console
+   $ dnf list docker-ce  --showduplicates | sort -r
 
-    docker-ce.x86_64    3:23.0.5-1.fc37    docker-ce-stable
-    docker-ce.x86_64    3:23.0.4-1.fc37    docker-ce-stable
-    <...>
-    ```
+   docker-ce.x86_64    3:23.0.5-1.fc37    docker-ce-stable
+   docker-ce.x86_64    3:23.0.4-1.fc37    docker-ce-stable
+   <...>
+   ```
 
-    The list returned depends on which repositories are enabled, and is specific
-    to your version of Fedora (indicated by the `.fc37` suffix in this example).
+   The list returned depends on which repositories are enabled, and is specific
+   to your version of Fedora (indicated by the `.fc37` suffix in this example).
 
-    b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column),
-       separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5-1.fc37`.
+   b. Install a specific version by its fully qualified package name, which is
+      the package name (`docker-ce`) plus the version string (2nd column),
+      separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5-1.fc37`.
 
-    ```console
-    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
-    ```
+   ```console
+   $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
+   ```
 
-    This command installs Docker, but it doesn't start Docker. It also creates a
-    `docker` group, however, it doesn't add any users to the group by default.
+   This command installs Docker, but it doesn't start Docker. It also creates a
+   `docker` group, however, it doesn't add any users to the group by default.
 
-3.  Start Docker.
+3. Start Docker.
 
-    ```console
-    $ sudo systemctl start docker
-    ```
+   ```console
+   $ sudo systemctl start docker
+   ```
 
-4.  Verify that Docker Engine is installed correctly by running the `hello-world`
-    image.
+4. Verify that Docker Engine is installed correctly by running the `hello-world`
+   image.
 
-    ```console
-    $ sudo docker run hello-world
-    ```
+   ```console
+   $ sudo docker run hello-world
+   ```
 
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints a message and exits.
+   This command downloads a test image and runs it in a container. When the
+   container runs, it prints a message and exits.
 
 You have now successfully installed and started Docker Engine.
 
@@ -156,35 +157,35 @@ If you cannot use Docker's repository to install Docker, you can download the
 `.rpm` file for your release and install it manually. You need to download
 a new file each time you want to upgrade Docker Engine.
 
-1.  Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
-    and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
-    and download the `.rpm` file for the Docker version you want to install.
+1. Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
+   and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
+   and download the `.rpm` file for the Docker version you want to install.
 
-2.  Install Docker Engine, changing the path below to the path where you downloaded
-    the Docker package.
+2. Install Docker Engine, changing the path below to the path where you downloaded
+   the Docker package.
 
-    ```console
-    $ sudo dnf -y install /path/to/package.rpm
-    ```
+   ```console
+   $ sudo dnf -y install /path/to/package.rpm
+   ```
 
-    Docker is installed but not started. The `docker` group is created, but no
-    users are added to the group.
+   Docker is installed but not started. The `docker` group is created, but no
+   users are added to the group.
 
-3.  Start Docker.
+3. Start Docker.
 
-    ```console
-    $ sudo systemctl start docker
-    ```
+   ```console
+   $ sudo systemctl start docker
+   ```
 
-4.  Verify that Docker Engine is installed correctly by running the `hello-world`
-    image.
+4. Verify that Docker Engine is installed correctly by running the `hello-world`
+   image.
 
-    ```console
-    $ sudo docker run hello-world
-    ```
+   ```console
+   $ sudo docker run hello-world
+   ```
 
-    This command downloads a test image and runs it in a container. When the
-    container runs, it prints a message and exits.
+   This command downloads a test image and runs it in a container. When the
+   container runs, it prints a message and exits.
 
 You have now successfully installed and started Docker Engine.
 
@@ -200,20 +201,20 @@ instead of `dnf -y install`, and point to the new file.
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
+1. Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
 
-    ```console
-    $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
-    ```
+   ```console
+   $ sudo dnf remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+   ```
 
-2.  Images, containers, volumes, or customized configuration files on your host
-    are not automatically removed. To delete all images, containers, and
-    volumes:
+2. Images, containers, volumes, or customized configuration files on your host
+   are not automatically removed. To delete all images, containers, and
+   volumes:
 
-    ```console
-    $ sudo rm -rf /var/lib/docker
-    $ sudo rm -rf /var/lib/containerd
-    ```
+   ```console
+   $ sudo rm -rf /var/lib/docker
+   $ sudo rm -rf /var/lib/containerd
+   ```
 
 You must delete any edited configuration files manually.
 
