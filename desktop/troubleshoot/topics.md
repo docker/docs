@@ -228,7 +228,7 @@ when using `~` because the POSIX layer translates it to a DOS path. `MSYS_NO_PAT
 
 ### Virtualization
 
-Your machine must have the following features for Docker Desktop to function correctly.
+Your machine must have the following features for Docker Desktop to function correctly:
 
 #### WSL 2 and Windows Home
 
@@ -261,16 +261,17 @@ To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.mi
 From the start menu, type **Turn Windows features on or off** and press enter.
 In the subsequent screen, verify that Hyper-V is enabled.
 
-#### Virtualization must be enabled
+#### Nested virtualization must be enabled
 
-In addition to [Hyper-V](#hyper-v) or [WSL 2](../windows/wsl.md), virtualization must be enabled. Check the
+In addition to [Hyper-V](#hyper-v) or [WSL 2](../windows/wsl.md), nested virtualization must be enabled. Check the
 Performance tab on the Task Manager:
 
 ![Task Manager](../images/virtualization-enabled.png){:width="700px"}
 
 If you manually uninstall Hyper-V, WSL 2 or disable virtualization,
-Docker Desktop cannot start. See [Unable to run Docker for Windows on
-Windows 10 Enterprise](https://github.com/docker/for-win/issues/74){:target="_blank" rel="noopener" class="_"}.
+Docker Desktop cannot start. 
+
+To enable nested virtualisation, see [Run Docker Desktop for Windows in a VM or VDI environment](../vm-vdi.md#enable-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
 
 #### Hypervisor enabled at Windows startup
 
