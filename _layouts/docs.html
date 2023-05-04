@@ -22,14 +22,13 @@
                 <div class="col-body">
                     <main class="col-content content">
                         <section class="section">
-                            <div class="content-title">
-                              {%- if page.title -%}
-                              <h1>{{ page.title }}</h1>
-                              {%- endif -%}
-                              {%- if site.hotjar_id and site.hotjar_id != '' and page.skip_feedback != true -%}
-                                <button id="hotjar-feedback">Give feedback</button>
-                              {%- endif -%}
-                            </div>
+                            {%- if page.title -%}
+                            <h1>{{ page.title }}</h1>
+                            {%- endif -%}
+                            {%- if page.advisory -%}
+                            <blockquote>{{ site.data.advisories.texts[page.advisory] | markdownify }}</blockquote>
+                            {%- endif -%}
+                            <p></p>
                             {{ content }}
                         </section>
                     </main>
