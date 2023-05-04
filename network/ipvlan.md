@@ -348,10 +348,10 @@ $ docker network create -d ipvlan \
 $ docker run --net=ipnet210 --ip=192.168.214.10 -itd alpine /bin/sh
 $ docker run --net=ipnet210 --ip=10.1.214.10 -itd alpine /bin/sh
 
-# Test L3 connectivity from 10.1.214.0/24 to 192.168.212.0/24
+# Test L3 connectivity from 10.1.214.0/24 to 192.168.214.0/24
 $ docker run --net=ipnet210 --ip=192.168.214.9 -it --rm alpine ping -c 2 10.1.214.10
 
-# Test L3 connectivity from 192.168.212.0/24 to 10.1.214.0/24
+# Test L3 connectivity from 192.168.214.0/24 to 10.1.214.0/24
 $ docker run --net=ipnet210 --ip=10.1.214.9 -it --rm alpine ping -c 2 192.168.214.10
 
 ```
