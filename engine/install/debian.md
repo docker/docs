@@ -17,6 +17,14 @@ To get started with Docker Engine on Debian, make sure you
 
 ## Prerequisites
 
+> **Note**
+>
+> If you use ufw to manage firewall settings, note that when you expose
+> container ports using Docker, those ports bypass any firewall rules that
+> you configure with ufw. See
+> [Docker and ufw](../../network/packet-filtering-firewalls.md#docker-and-ufw)
+> for details.
+
 ### OS requirements
 
 To install Docker Engine, you need the 64-bit version of one of these Debian

@@ -8,20 +8,18 @@ Docker's networking subsystem is pluggable, using drivers. Several drivers
 exist by default, and provide core networking functionality:
 
 - `bridge`: The default network driver. If you don't specify a driver, this is
-  the type of network you are creating. **Bridge networks are usually used when
-  your applications run in standalone containers that need to communicate.** See
-  [bridge networks](bridge.md).
+  the type of network you are creating. Bridge networks are commonly used when
+  your application runs in a container that needs to communicate with other
+  containers on the same host. See [bridge networks](bridge.md).
 
 - `host`: For standalone containers, remove network isolation between the
   container and the Docker host, and use the host's networking directly. See
   [use the host network](host.md).
 
 - `overlay`: Overlay networks connect multiple Docker daemons together and
-  enable swarm services to communicate with each other. You can also use overlay
-  networks to facilitate communication between a swarm service and a standalone
-  container, or between two standalone containers on different Docker daemons.
-  This strategy removes the need to do OS-level routing between these
-  containers. See [overlay networks](overlay.md).
+  enable Swarm services and containers to communicate across nodes. This
+  strategy removes the need to do OS-level routing.
+  See [overlay networks](overlay.md).
 
 - `ipvlan`: IPvlan networks give users total control over both IPv4 and IPv6
   addressing. The VLAN driver builds on top of that in giving operators complete
@@ -36,27 +34,32 @@ exist by default, and provide core networking functionality:
   through the Docker host's network stack. See
   [Macvlan networks](macvlan.md).
 
-- `none`: For this container, disable all networking. Usually used in
-  conjunction with a custom network driver. `none` is not available for swarm
-  services. See
-  [disable container networking](none.md).
+- `none`: For this container, disable all networking. `none` is not available
+  for Swarm services. See [disable container networking](none.md).
 
 - [Network plugins](/engine/extend/plugins_services/): You can install and use
   third-party network plugins with Docker.
 
 ### Network driver summary
 
-- **User-defined bridge networks** are best when you need multiple containers to
-  communicate on the same Docker host.
-- **Host networks** are best when the network stack should not be isolated from
-  the Docker host, but you want other aspects of the container to be isolated.
-- **Overlay networks** are best when you need containers running on different
-  Docker hosts to communicate, or when multiple applications work together using
-  swarm services.
-- **Macvlan networks** are best when you are migrating from a VM setup or
-  need your containers to look like physical hosts on your network, each with a
-  unique MAC address.
-- **Third-party network plugins** allow you to integrate Docker with specialized
+- The default bridge network is commonly used for running containers that don't
+  require custom networking configurations, such as container-to-container
+  connectivity.
+- User-defined bridge networks enable on the same Docker host to communicate
+  with each other. A user-defined network typically defines an isolated network
+  for multiple containers belonging to a common project or component.
+- Host network shares the host's network with the container. When you use this
+  driver, the container's network isn't isolated from the host.
+- Overlay networks are best when you need containers running on different
+  Docker hosts to communicate, or when multiple applications work together
+  using Swarm services.
+- Macvlan networks are best when you are migrating from a VM setup or need your
+  containers to look like physical hosts on your network, each with a unique
+  MAC address.
+- IPvlan is similar to Macvlan, but doesn't assign unique MAC addresses to
+  containers. Consider using IPvlan when there's a restriction on the number of
+  MAC addresses that can be assigned to a network interface or port.
+- Third-party network plugins allow you to integrate Docker with specialized
   network stacks.
 
 ## Networking tutorials
