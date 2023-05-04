@@ -63,8 +63,9 @@ $ sudo zypper addrepo $opensuse_repo
 
 ### Uninstall old versions
 
-Older versions of Docker were called `docker` or `docker-engine`. If these are
-installed, uninstall them, along with associated dependencies.
+Older versions of Docker went by the names of `docker` or `docker-engine`.
+Uninstall any such older versions before attempting to install a new version,
+along with associated dependencies.
 
 ```console
 $ sudo zypper remove docker \
@@ -78,33 +79,33 @@ $ sudo zypper remove docker \
                   runc
 ```
 
-It's OK if `zypper` reports that none of these packages are installed.
+`zypper` might report that you have none of these packages installed.
 
-The contents of `/var/lib/docker/`, including images, containers, volumes, and
-networks, are preserved. The Docker Engine package is now called `docker-ce`.
+Images, containers, volumes, and networks stored in `/var/lib/docker/` aren't
+automatically removed when you uninstall Docker.
 
 ## Installation methods
 
 You can install Docker Engine in different ways, depending on your needs:
 
-- Most users
+- You can
   [set up Docker's repositories](#install-using-the-repository) and install
   from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
 
-- Some users download the RPM package and
+- You can download the RPM package and
   [install it manually](#install-from-a-package) and manage
   upgrades completely manually. This is useful in situations such as installing
   Docker on air-gapped systems with no access to the internet.
 
-- In testing and development environments, some users choose to use automated
+- In testing and development environments, you can use automated
   [convenience scripts](#install-using-the-convenience-script) to install Docker.
 
-### Install using the repository
+### Install using the rpm repository {#install-using-the-repository}
 
-Before you install Docker Engine for the first time on a new host machine, you need
-to set up the Docker repository. Afterward, you can install and update Docker
-from the repository.
+Before you install Docker Engine for the first time on a new host machine, you
+need to set up the Docker repository. Afterward, you can install and update
+Docker from the repository.
 
 #### Set up the repository
 
@@ -164,15 +165,15 @@ $ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
    $ sudo systemctl start docker
    ```
 
-4. Verify that Docker Engine is installed correctly by running the `hello-world`
-   image.
+4. Verify that the Docker Engine installation is successful by running the
+   `hello-world` image.
 
    ```console
    $ sudo docker run hello-world
    ```
 
    This command downloads a test image and runs it in a container. When the
-   container runs, it prints a message and exits.
+   container runs, it prints a confirmation message and exits.
 
 You have now successfully installed and started Docker Engine.
 
@@ -185,12 +186,12 @@ choosing the new version you want to install.
 
 ### Install from a package
 
-If you cannot use Docker's repository to install Docker, you can download the
-`.rpm` file for your release and install it manually. You need to download
-a new file each time you want to upgrade Docker Engine.
+If you can't use Docker's `rpm` repository to install Docker Engine, you can
+download the `.rpm` file for your release and install it manually. You need to
+download a new file each time you want to upgrade Docker Engine.
 
 1. Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
-   and choose your version of SLES. Then browse to `15/s390x/stable/Packages/`
+   and choose your version of SLES. Then browse to `s390x/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
 2. Install Docker Engine, changing the path below to the path where you downloaded
@@ -209,15 +210,15 @@ a new file each time you want to upgrade Docker Engine.
    $ sudo systemctl start docker
    ```
 
-4. Verify that Docker Engine is installed correctly by running the `hello-world`
-   image.
+4. Verify that the Docker Engine installation is successful by running the
+   `hello-world` image.
 
    ```console
    $ sudo docker run hello-world
    ```
 
    This command downloads a test image and runs it in a container. When the
-   container runs, it prints a message and exits.
+   container runs, it prints a confirmation message and exits.
 
 You have now successfully installed and started Docker Engine.
 
@@ -225,30 +226,29 @@ You have now successfully installed and started Docker Engine.
 
 #### Upgrade Docker Engine
 
-To upgrade Docker Engine, download the newer package file and repeat the
+To upgrade Docker Engine, download the newer package files and repeat the
 [installation procedure](#install-from-a-package), using `zypper -y upgrade`
-instead of `zypper -y install`, and point to the new file.
+instead of `zypper -y install`, and point to the new files.
 
 {% include install-script.md %}
 
 ## Uninstall Docker Engine
 
-1. Uninstall the Docker Engine, CLI, Containerd, and Docker Compose packages:
+1. Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
    ```console
    $ sudo zypper remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
    ```
 
-2. Images, containers, volumes, or customized configuration files on your host
-   are not automatically removed. To delete all images, containers, and
-   volumes:
+2. Images, containers, volumes, or custom configuration files on your host
+   aren't automatically removed. To delete all images, containers, and volumes:
 
    ```console
    $ sudo rm -rf /var/lib/docker
    $ sudo rm -rf /var/lib/containerd
    ```
 
-You must delete any edited configuration files manually.
+You have to delete any edited configuration files manually.
 
 ## Next steps
 
