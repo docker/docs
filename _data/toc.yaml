@@ -1260,7 +1260,7 @@ manuals:
   section:
     - path: /desktop/extensions/
       title: What are Docker Extensions?
-    - sectiontile: Extensions on Docker Desktop
+    - sectiontitle: Extensions on Docker Desktop
       section:
         - path: /desktop/extensions/marketplace/
           title: Manage Marketplace extensions
