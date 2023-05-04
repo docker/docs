@@ -77,7 +77,9 @@ After you’ve completed the SSO configuration process in Docker Hub, you can te
 
 >**Important**
 >
-> SSO has Just-In-Time (JIT) Provisioning enabled by default, but this can be changed on a per-app basis. To prevent auto-provisioning users, you can create a security group in your IdP and configure the SSO app to authenticate and authorize only those users that are in the security group. Follow the instructions provided by your IdP:
+> SSO has Just-In-Time (JIT) Provisioning enabled by default. This means your users are auto-provisioned into a team called 'Company' within your organization on Docker Hub. 
+>
+>You can change this on a per-app basis. To prevent auto-provisioning users, you can create a security group in your IdP and configure the SSO app to authenticate and authorize only those users that are in the security group. Follow the instructions provided by your IdP:
 > - [Okta](https://help.okta.com/en-us/Content/Topics/Security/policies/configure-app-signon-policies.htm)
 > - [AzureAD](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
 {: .important}
