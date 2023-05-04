@@ -119,8 +119,8 @@ $ sudo yum-config-manager \
     ```console
     $ yum list docker-ce --showduplicates | sort -r
 
-    docker-ce.s390x                3:20.10.8-3.el8                 docker-ce-stable
-    docker-ce.s390x                3:20.10.7-3.el8                 docker-ce-stable
+    docker-ce.s390x    3:23.0.5-1.el8    docker-ce-stable
+    docker-ce.s390x    3:23.0.4-1.el8    docker-ce-stable
     <...>
     ```
 
@@ -128,9 +128,8 @@ $ sudo yum-config-manager \
     to your version of RHEL (indicated by the `.el8` suffix in this example).
 
     b. Install a specific version by its fully qualified package name, which is
-       the package name (`docker-ce`) plus the version string (2nd column)
-       starting at the first colon (`:`), up to the first hyphen, separated by
-       a hyphen (`-`). For example, `docker-ce-20.10.7`.
+       the package name (`docker-ce`) plus the version string (2nd column),
+       separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5-1.el8`.
 
     ```console
     $ sudo yum install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin

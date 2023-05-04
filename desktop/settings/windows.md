@@ -32,6 +32,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Use the WSL 2 based engine**. WSL 2 provides better performance than the
   Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
 
+- **Add `*.docker.internal` to the host's `/etc/hosts` file. (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
+
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
   troubleshoot the application. Clear the check box to opt out. Docker may

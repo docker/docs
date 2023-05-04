@@ -112,7 +112,7 @@ to list the existing builders:
 $ docker buildx ls
 NAME/NODE  DRIVER/ENDPOINT  STATUS   BUILDKIT PLATFORMS
 default *  docker
-  default  default          running  20.10.17 linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
+  default  default          running  23.0.5   linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
 ```
 
 This displays the default builtin driver, that uses the BuildKit server
@@ -163,7 +163,7 @@ NAME/NODE     DRIVER/ENDPOINT              STATUS   BUILDKIT PLATFORMS
 mybuilder     docker-container
   mybuilder0  unix:///var/run/docker.sock  running  v0.10.4  linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/mips64le, linux/mips64, linux/arm/v7, linux/arm/v6
 default *     docker
-  default     default                      running  20.10.17 linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
+  default     default                      running  23.0.5   linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
 ```
 
 ## Example

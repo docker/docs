@@ -1,7 +1,7 @@
 ---
 description: Docker Dashboard
-keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, quick start, guide, sign in
-title: Quick Start Guide and sign in
+keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, learning center, guide, sign in
+title: Learning Center and sign in
 redirect_from:
 - /desktop/linux/
 - /desktop/linux/index/
@@ -27,25 +27,21 @@ redirect_from:
 - /winkit/getting-started/
 ---
 
-## Quick Start Guide
+## Learning Center
 
-The Quick Start Guide includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+The Learning Center helps you get started with quick in-app walkthroughs and other resources for learning about Docker.
 
-![Docker Quick Start tutorial](images/docker-tutorial.png)
+To access the Learning Center, select the **Learning Center** tab in Docker
+Desktop.
 
-To run the Quick Start Guide, select the Docker menu ![whale menu](images/whale-x.svg){: .inline} and then choose **Quick Start Guide**.
+![Learning Center](images/learning-center.png)
 
-> **Note**
->
-> To access the Quick Start Guide, you must turn off **Access experimental features**.
-> Learn how to turn off **Access experimental features** on [Mac](../settings/mac/#experimental-features), [Windows](../settings/windows/#experimental-features), or [Linux](../settings/linux/#experimental-features).
-
-
-For a more detailed guide, see [Get started](../get-started/index.md), or the [Docker Desktop hands-on guides](../get-started/hands-on-overview.md).
+For a more detailed guide about getting started, see
+[Get started](../get-started/index.md).
 
 ## Sign in to Docker Desktop
 
-We recommend that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard.
+Docker recommends that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard.
 
 Once logged in, you can access your Docker Hub repositories directly from Docker Desktop.
 
@@ -65,7 +61,7 @@ You can initialize pass by using a gpg key. To generate a gpg key, run:
 $ gpg --generate-key
 ``` 
 
-Below is an example similar to what you see once you run the above command:
+The following is an example similar to what you see once you run the previous command:
 
 ```console
 ...
@@ -89,15 +85,15 @@ To initialize `pass`, run the following command using the public key generated f
 ```console
 $ pass init <generated gpg-id public key>
 ``` 
-Below is an example similar to what you see once you run the above command:
+The following is an example similar to what you see once you run the previous command:
 
 ```console
 mkdir: created directory '/home/molly/.password-store/'
 Password store initialized for <generated gpg-id public key>
 ```
 
-Once `pass` is initialized, you can sign in on the Docker Dashboard and pull your private images.
-When credentials are used by the Docker CLI or Docker Desktop, a user prompt may pop up for the password you set during the gpg key generation.
+Once you initialize `pass`, you can sign in on the Docker Dashboard and pull your private images.
+When Docker CLI or Docker Desktop use credentials, a user prompt may pop up for the password you set during the gpg key generation.
 
 ```console
 $ docker pull molly/privateimage

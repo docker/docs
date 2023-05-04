@@ -22,9 +22,9 @@ The privileged helper `com.docker.service` is a Windows service which runs in th
 
 The service performs the following functionalities:
 - Ensuring that `kubernetes.docker.internal` is defined in the Win32 hosts file. Defining the DNS name `kubernetes.docker.internal` allows Docker to share Kubernetes contexts with containers.
+- Ensuring that `host.docker.internal` and `gateway.docker.internal` are defined in the Win32 hosts file. They point to the host local IP address and allow an application to resolve the host IP using the same name from either the host itself or a container.
 - Securely caching the Registry Access Management policy which is read-only for the developer.
 - Creating the Hyper-V VM `"DockerDesktopVM"` and managing its lifecycle - starting, stopping and destroying it. The VM name is hard coded in the service code so the service cannot be used for creating or manipulating any other VMs.
-- Getting the VHDX disk size.
 - Moving the VHDX file or folder.
 - Starting and stopping the Windows Docker engine and querying whether it is running.
 - Deleting all Windows containers data files.
@@ -33,9 +33,9 @@ The service performs the following functionalities:
 - Checking if required Windows features are both installed and enabled.
 - Conducting healthchecks and retrieving the version of the service itself.
 
-The service start mode depends on which container engine is selected:
-- With Windows containers, or Hyper-v Linux containers the service is started when the system boots and runs all the time, even when Docker Desktop isn't running. This is required for the user to be able to launch Docker Desktop without admin privileges. If the user switches to WSL2 Linux containers, the service is stopped and doesn't start automatically upon next Windows boot.
-- With WSL2 Linux containers, the service isn't necessary and therefore doesn't run automatically when the system boots. If the user switches to Windows containers or Hyper-v Linux containers, a UAC prompt is displayed which asks the user to accept the privileged operation to start the service. If accepted, the service is started and set to start automatically upon the next Windows boot.
+The service start mode depends on which container engine is selected, and, for WSL, on whether it is needed to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file. This is controlled by a setting under `Use the WSL 2 based engine` in the settings page. When this is set, WSL engine behaves the same as Hyper-V. So:
+- With Windows containers, or Hyper-v Linux containers, the service is started when the system boots and runs all the time, even when Docker Desktop isn't running. This is required for the user to be able to launch Docker Desktop without admin privileges. 
+- With WSL2 Linux containers, the service isn't necessary and therefore doesn't run automatically when the system boots. When the user switches to Windows containers or Hyper-v Linux containers, or chooses to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file, a UAC prompt is displayed which asks the user to accept the privileged operation to start the service. If accepted, the service is started and set to start automatically upon the next Windows boot.
 
 ## Containers running as root within the Linux VM
 

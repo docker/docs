@@ -6,7 +6,7 @@ title: Create and manage a team
 
 A team is a group of Docker users that belong to an organization. An
 organization can have multiple teams. When you first create an organization,
-you’ll see that you have a team, the owners team, with a single member. An
+you’ll see that you have a team (called 'Company') and the owners team, with a single member. An
 organization owner can then create new teams and add members to an existing team
 using their Docker ID or email address and by selecting a team the user should be part of.
 
