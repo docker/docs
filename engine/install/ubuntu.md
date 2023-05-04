@@ -156,7 +156,7 @@ Docker from the repository.
    </div>
 
 3. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image:
+   `hello-world` image.
 
    ```console
    $ sudo docker run hello-world
@@ -171,9 +171,8 @@ You have now successfully installed and started Docker Engine.
 
 #### Upgrade Docker Engine
 
-To upgrade Docker Engine, follow the
-[installation instructions](#install-docker-engine), choosing the new version
-you want to install.
+To upgrade Docker Engine, follow the [installation instructions](#install-using-the-repository),
+choosing the new version you want to install.
 
 ### Install from a package
 
@@ -181,8 +180,7 @@ If you can't use Docker's `apt` repository to install Docker Engine, you can
 download the `deb` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
-1. Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){:
-   target="_blank" rel="noopener" class="_" }.
+1. Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" }.
 
 2. Select your Ubuntu version in the list.
 
@@ -212,7 +210,7 @@ download a new file each time you want to upgrade Docker Engine.
    The Docker daemon starts automatically.
 
 6. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image:
+   `hello-world` image.
 
    ```console
    $ sudo service docker start
