@@ -4,6 +4,7 @@ description: How to migrate from Compose V1 to V2
 keywords: compose, upgrade, migration, v1, v2
 redirect_from:
   - /compose/compose-v2/
+  - /compose/cli-command-compatibility/
 ---
 
 {% include compose-eol.md %}
