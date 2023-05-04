@@ -79,10 +79,7 @@ your DNF repositories) and set up the repository.
 
 ```console
 $ sudo dnf -y install dnf-plugins-core
-
-$ sudo dnf config-manager \
-    --add-repo \
-    {{ download-url-base }}/docker-ce.repo
+$ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
 ```
 
 #### Install Docker Engine

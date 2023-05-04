@@ -89,10 +89,7 @@ utility) and set up the repository.
 
 ```console
 $ sudo yum install -y yum-utils
-
-$ sudo yum-config-manager \
-    --add-repo \
-    {{ download-url-base }}/docker-ce.repo
+$ sudo yum-config-manager --add-repo {{ download-url-base }}/docker-ce.repo
 ```
 
 #### Install Docker Engine

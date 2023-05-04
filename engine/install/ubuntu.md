@@ -85,11 +85,7 @@ Docker from the repository.
 
     ```console
     $ sudo apt-get update
-
-    $ sudo apt-get install \
-        ca-certificates \
-        curl \
-        gnupg
+    $ sudo apt-get install ca-certificates curl gnupg
     ```
 
 2.  Add Docker's official GPG key:
