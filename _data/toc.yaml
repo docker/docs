@@ -1262,12 +1262,12 @@ manuals:
       title: What are Docker Extensions?
     - sectiontile: Extensions on Docker Desktop
       section:
-      - path: /desktop/extensions/marketplace/
-        title: Manage Marketplace extensions
-      - path: /desktop/extensions/non-marketplace/
-        title: Manage non-Marketplace extensions
-      - path: /desktop/extensions/settings-feedback/
-        title: Change settings and give feedback
+        - path: /desktop/extensions/marketplace/
+          title: Manage Marketplace extensions
+        - path: /desktop/extensions/non-marketplace/
+          title: Manage non-Marketplace extensions
+        - path: /desktop/extensions/settings-feedback/
+          title: Change settings and give feedback
     - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
