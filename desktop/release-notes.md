@@ -48,12 +48,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 - [Docker Engine v23.0.5](https://docs.docker.com/engine/release-notes/23.0/#2305)
 - [Compose 2.17.3](https://github.com/docker/compose/releases/tag/v2.17.3)
 - [Containerd v1.6.20](https://github.com/containerd/containerd/releases/tag/v1.6.20)
-- [Kubernetes v1.26.3](https://github.com/kubernetes/kubernetes/releases/tag/v1.26.3)
+- [Kubernetes v1.25.9](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.9)
 - [runc v1.1.5](https://github.com/opencontainers/runc/releases/tag/v1.1.5)
-- [criTools v1.26.1](https://github.com/kubernetes-sigs/cri-tools/releases/tag/v1.26.1)
-- [cri-dockerd v0.3.1](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.1)
-- [coredns v1.9.3](https://github.com/coredns/coredns/releases/tag/v1.9.3)
-- [cni v1.2.0](https://github.com/containernetworking/plugins/releases/tag/v1.2.0)
 - [Go v1.20.3](https://github.com/golang/go/releases/tag/go1.20.3)
 
 ### Bug fixes and enhancements
