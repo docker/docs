@@ -2,6 +2,8 @@
 title: Docker Build architecture
 description: Learn about Docker Build and its components.
 keywords: build, buildkit, buildx, architecture
+redirect_from:
+  - /build/install-buildx/
 ---
 
 Docker Build implements a client-server architecture, where:
