@@ -173,7 +173,7 @@ $ docker run -it --rm -v $HOME:/mnt alpine
 > container control of Docker Engine, thus breaking container
 > isolation. Containers that rely on this will not work with Enhanced Container
 > Isolation enabled. Instead, use Docker-in-Docker (i.e., run the Docker Engine
-> fully inside a Docker Container).  Enhanced Container Isolation is capable of
+> fully inside a Docker Container). Enhanced Container Isolation is capable of
 > running Docker-in-Docker securely, without giving the outer container root
 > privileges in the Docker Desktop Linux VM.
 

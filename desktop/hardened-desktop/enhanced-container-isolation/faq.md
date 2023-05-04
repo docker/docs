@@ -18,9 +18,10 @@ No, you can continue to use Docker as usual. Enhanced Container Isolation will b
 
 #### Do all container workloads work well with Enhanced Container Isolation?
 
-Most container workloads do, a few do not (yet). For the few workloads that
-don't yet work with Enhanced Container Isolation, Docker will continue to improve the feature to reduce
-this to a minimum.
+The great majority of container workloads run fine with ECI, but a few do not
+(yet). For the few workloads that don't yet work with Enhanced Container
+Isolation, Docker will continue to improve the feature to reduce this to a
+minimum.
 
 #### Can I run privileged containers with Enhanced Container Isolation?
 
@@ -28,12 +29,13 @@ Yes, you can use the `--privileged` flag in containers but unlike privileged
 containers without Enhanced Container Isolation, the container can only use it's elevated privileges to
 access resources assigned to the container. It can't access global kernel
 resources in the Docker Desktop Linux VM. This allows you to run privileged
-containers securely. For more information, see [Key features and benefits](features-benefits.md#privileged-containers-are-also-secured).
+containers securely (including Docker-in-Docker). For more information, see [Key features and benefits](features-benefits.md#privileged-containers-are-also-secured).
 
 #### Will all privileged container workloads run with Enhanced Container Isolation?
 
-No. Privileged container workloads, or non-namespaced workloads, that wish to access global kernel resources inside the Docker Desktop Linux VM won't
-work. For example, you can't use a privileged container to load a kernel module.
+No. Privileged container workloads that wish to access global kernel resources
+inside the Docker Desktop Linux VM won't work. For example, you can't use a
+privileged container to load a kernel module.
 
 #### Why not just restrict usage of the `--privileged` flag?
 
@@ -60,13 +62,14 @@ Containers, and Dev Environments.
 
 #### Does Enhanced Container Isolation affect performance of containers?
 
-Enhanced Container Isolation has very little impact on the performance of containers. The exception is
-for containers that perform lots of `mount` and `umount` system calls, as these
-are trapped and vetted by the Sysbox container runtime.
+Enhanced Container Isolation has very little impact on the performance of
+containers. The exception is for containers that perform lots of `mount` and
+`umount` system calls, as these are trapped and vetted by the Sysbox container
+runtime to ensure they are not being used to breach the container's filesystem.
 
 #### With Enhanced Container Isolation, can the user still override the `--runtime` flag from the CLI ?
 
-No. With Enhanced Container Isolation enabled, Sysbox is locked as the default (and only) runtime for
+No. With Enhanced Container Isolation enabled, Sysbox is set as the default (and only) runtime for
 containers deployed by Docker Desktop users. If a user attempts to override the
 runtime (e.g., `docker run --runtime=runc`), this request is ignored and the
 container is created through the Sysbox runtime.
@@ -88,15 +91,15 @@ See [How does it work](how-eci-works.md#enhanced-container-isolation-vs-rootless
 </div>
 <div id="tab4" class="tab-pane fade" markdown="1">
 
-#### Is ECI supported on WSL?
+#### WSL Compatibility
 
-Prior to Docker Desktop 4.20, using Enhanced Container Isolation (ECI) on
+Prior to Docker Desktop 4.20, Enhanced Container Isolation (ECI) on
 Windows hosts was only supported when Docker Desktop was configured to use
 Hyper-V to create the Docker Desktop Linux VM. ECI was not supported when Docker
-Desktop was configured to use Windows Subsystem for Linux (WSL).
+Desktop was configured to use Windows Subsystem for Linux (aka WSL).
 
 Starting with Docker Desktop 4.20, ECI is supported when Docker Desktop is
-configured to use either Hyper-V or WSL version 2 (aka WSL 2).
+configured to use either Hyper-V or WSL version 2.
 
 >**Note**
 >
@@ -105,7 +108,7 @@ configured to use either Hyper-V or WSL version 2 (aka WSL 2).
 > it returns a version number prior to 1.1.3.0, update WSL to the latest version
 > by typing `wsl --update` in a Windows command or PowerShell terminal.
 
-However, ECI on WSL is not as secure as on Hyper-V because of several reasons:
+Note however that ECI on WSL is not as secure as on Hyper-V because:
 
 * While ECI on WSL still hardens containers so that malicious workloads can't
   easily breach Docker Desktop's Linux VM, ECI on WSL can't prevent Docker
@@ -113,17 +116,17 @@ However, ECI on WSL is not as secure as on Hyper-V because of several reasons:
   trivially access that VM (as root) with the `wsl -d docker-desktop` command,
   and use that access to modify Docker Engine settings inside the VM. This gives
   Docker Desktop users control of the Docker Desktop VM and allows them to
-  bypass Docker Desktop admin configs set by admins via the
+  bypass Docker Desktop configs set by admins via the
   [settings-management](../settings-management/index.md) feature. In contrast,
   ECI on Hyper-V does not allow Docker Desktop users to breach the Docker
   Desktop Linux VM.
 
 * With WSL 2, all WSL 2 distros on the same Windows host share the same instance
-  of the Linux kernel, by design. As a result, Docker Desktop can't ensure the
-  integrity of the kernel in the Docker Desktop Linux VM since another WSL 2
-  distro could modify shared kernel settings. In contrast, when using Hyper-V,
-  the Docker Desktop Linux VM has a dedicated kernel that is solely under the
-  control of Docker Desktop.
+  of the Linux kernel, by Microsoft's design. As a result, Docker Desktop can't
+  ensure the integrity of the kernel in the Docker Desktop Linux VM since
+  another WSL 2 distro could modify shared kernel settings. In contrast, when
+  using Hyper-V, the Docker Desktop Linux VM has a dedicated kernel that is
+  solely under the control of Docker Desktop.
 
 The table below summarizes this.
 
