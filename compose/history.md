@@ -4,7 +4,6 @@ description: History of Compose V1 and Compose YAML schema versioning
 keywords: compose, compose yaml, swarm, migration, compatibility
 redirect_from:
  - /compose/cli-command-compatibility/
- - /compose/compose-v2/
 ---
 {% include compose-eol.md %}
 

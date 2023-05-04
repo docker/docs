@@ -12,7 +12,7 @@ title: Compose file versions and upgrading
 >The latest and recommended version of Compose is the [Compose Specification](index.md). 
 >Make sure you switch to [Compose V2](/compose/compose-file/) with the `docker compose` CLI plugin or by activating the **Use Docker Compose V2** setting in Docker Desktop.
 >
-> For more information, see the [Evolution of Compose](/compose/compose-v2/). 
+> For more information, see the [History of Compose](/compose/history/). 
 {: .warning}
 
 The Compose file is a [YAML](https://yaml.org) file defining services,
@@ -548,5 +548,3 @@ It's more complicated if you're using particular configuration features:
         volumes:
           data:
             external: true
-
-

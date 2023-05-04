@@ -125,9 +125,10 @@ Yes. You can still download and install Compose V1 packages, but you won't get s
 > The final Compose v1 release (v1.29.2) was May 10, 2021. These packages haven't received any security updates since then. Use at your own risk. 
 {: .warning}
 
+### Additional Resources
 - [docker-compose V1 on PyPI](https://pypi.org/project/docker-compose/1.29.2/){:
   target="_blank" rel="noopener" class="_"}
-- [V1] [docker/compose V1 on Docker Hub](https://hub.docker.com/r/docker/compose){:
+- [docker/compose V1 on Docker Hub](https://hub.docker.com/r/docker/compose){:
   target="_blank" rel="noopener" class="_"}
 - [docker-compose V1 source on GitHub](https://github.com/docker/compose/releases/tag/1.29.2){:
   target="_blank" rel="noopener" class="_"}

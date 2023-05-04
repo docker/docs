@@ -1779,7 +1779,7 @@ manuals:
         title: Install Compose standalone
       - path: /compose/install/uninstall/
         title: Uninstall Compose
-  - path: /compose/upgrade/
+  - path: /compose/migrate/
     title: Migrate to Compose V2
   - path: /compose/gettingstarted/
     title: Try Docker Compose
