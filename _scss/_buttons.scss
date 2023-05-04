@@ -69,24 +69,3 @@ a.button.outline-btn.min-hgt {
 .outline-btn:hover {
     opacity: 0.8;
 }
-
-// Hotjar feedback button
-#hotjar-feedback {
-  align-self: center;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: $light-blue-500;
-  font-weight: bold;
-  background: none;
-  padding: 8px 16px;
-  border: 2px solid $light-blue-500;
-  border-radius: 2px;
-  .night & {
-    color: $white;
-    border: 2px solid $dark-blue-500;
-  }
-  &:hover {
-    opacity: 0.7;
-  }
-}
