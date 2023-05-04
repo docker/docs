@@ -1149,40 +1149,6 @@ manuals:
           title: Explore Volumes
         - path: /desktop/use-desktop/pause/
           title: Pause Docker Desktop
-    - sectiontitle: Change settings
-      section:
-        - path: /desktop/settings/mac/
-          title: On Mac
-        - path: /desktop/settings/windows/
-          title: On Windows
-        - path: /desktop/settings/linux/
-          title: On Linux
-    - sectiontitle: Troubleshoot and diagnose
-      section:
-        - path: /desktop/troubleshoot/overview/
-          title: Overview
-        - path: /desktop/troubleshoot/topics/
-          title: Troubleshoot topics
-        - path: /desktop/troubleshoot/workarounds/
-          title: Workarounds for common problems
-        - path: /desktop/troubleshoot/known-issues/
-          title: Known issues for Mac
-    - sectiontitle: Additional resources
-      section:
-        - path: /desktop/kubernetes/
-          title: Deploy on Kubernetes
-        - path: /desktop/backup-and-restore/
-          title: Back up and restore data
-        - path: /desktop/networking/
-          title: Explore networking features
-        - path: /desktop/windows/wsl/
-          title: Docker Desktop WSL 2 backend on Windows
-        - path: /desktop/vm-vdi/
-          title: Run Docker Desktop for Windows in a VM or VDI environment
-        - path: /desktop/allow-list/
-          title: Allowlist for Docker Desktop
-        - path: /desktop/uninstall/
-          title: Uninstall Docker Desktop
     - sectiontitle: Hardened Docker Desktop
       section:
         - path: /desktop/hardened-desktop/
@@ -1219,16 +1185,89 @@ manuals:
           title: Distribute your dev environment
         - path: /desktop/dev-environments/dev-cli/
           title: Use the docker dev CLI plugin
-    - sectiontitle: Extensions
+    - path: /desktop/containerd/
+      title: containerd image store (Beta)
+    - path: /desktop/wasm/
+      title: Wasm (Beta)
+    - sectiontitle: Additional resources
       section:
-      - path: /desktop/extensions/
-        title: What are Docker Extensions?
-      - path: /desktop/extensions/marketplace/
-        title: Manage Marketplace extensions
-      - path: /desktop/extensions/non-marketplace/
-        title: Manage non-Marketplace extensions
-      - path: /desktop/extensions/settings-feedback/
-        title: Change settings and give feedback
+        - path: /desktop/kubernetes/
+          title: Deploy on Kubernetes
+        - path: /desktop/backup-and-restore/
+          title: Back up and restore data
+        - path: /desktop/networking/
+          title: Explore networking features
+        - path: /desktop/windows/wsl/
+          title: Docker Desktop WSL 2 backend on Windows
+        - path: /desktop/vm-vdi/
+          title: Run Docker Desktop for Windows in a VM or VDI environment
+        - path: /desktop/allow-list/
+          title: Allowlist for Docker Desktop
+    - sectiontitle: Change settings
+      section:
+        - path: /desktop/settings/mac/
+          title: On Mac
+        - path: /desktop/settings/windows/
+          title: On Windows
+        - path: /desktop/settings/linux/
+          title: On Linux
+    - sectiontitle: Troubleshoot and diagnose
+      section:
+        - path: /desktop/troubleshoot/overview/
+          title: Overview
+        - path: /desktop/troubleshoot/topics/
+          title: Troubleshoot topics
+        - path: /desktop/troubleshoot/workarounds/
+          title: Workarounds for common problems
+        - path: /desktop/troubleshoot/known-issues/
+          title: Known issues for Mac
+    - sectiontitle: FAQs
+      section:
+      - path: /desktop/faqs/general/
+        title: General FAQs
+      - path: /desktop/faqs/macfaqs/
+        title: Mac FAQs
+      - path: /desktop/faqs/windowsfaqs/
+        title: Windows FAQs
+      - path: /desktop/faqs/linuxfaqs/
+        title: Linux FAQs
+    - path: /desktop/uninstall/
+      title: Uninstall Docker Desktop
+    - path: /desktop/feedback/
+      title: Give feedback
+    - path: /desktop/release-notes/
+      title: Release notes
+    - sectiontitle: Previous versions
+      section:
+      - path: /desktop/previous-versions/3.x-windows/
+        title: Desktop for Windows 3.x
+      - path: /desktop/previous-versions/3.x-mac/
+        title: Desktop for Mac 3.x
+      - path: /desktop/previous-versions/2.x-windows/
+        title: Desktop for Windows 2.x
+      - path: /desktop/previous-versions/2.x-mac/
+        title: Desktop for Mac 2.x
+      - path: /desktop/previous-versions/edge-releases-windows/
+        title: Windows edge releases
+      - path: /desktop/previous-versions/edge-releases-mac/
+        title: Mac edge releases
+      - path: /desktop/previous-versions/archive-windows/
+        title: Older versions for Windows
+      - path: /desktop/previous-versions/archive-mac/
+        title: Older versions for Mac
+
+- sectiontitle: Docker Extensions
+  section:
+    - path: /desktop/extensions/
+      title: What are Docker Extensions?
+    - sectiontitle: Extensions on Docker Desktop
+      section:
+        - path: /desktop/extensions/marketplace/
+          title: Manage Marketplace extensions
+        - path: /desktop/extensions/non-marketplace/
+          title: Manage non-Marketplace extensions
+        - path: /desktop/extensions/settings-feedback/
+          title: Change settings and give feedback
     - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
@@ -1309,42 +1348,6 @@ manuals:
                   path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
-    - path: /desktop/containerd/
-      title: containerd image store (Beta)
-    - path: /desktop/wasm/
-      title: Wasm (Beta)
-    - sectiontitle: FAQs
-      section:
-      - path: /desktop/faqs/general/
-        title: General FAQs
-      - path: /desktop/faqs/macfaqs/
-        title: Mac FAQs
-      - path: /desktop/faqs/windowsfaqs/
-        title: Windows FAQs
-      - path: /desktop/faqs/linuxfaqs/
-        title: Linux FAQs
-    - path: /desktop/feedback/
-      title: Give feedback
-    - path: /desktop/release-notes/
-      title: Release notes
-    - sectiontitle: Previous versions
-      section:
-      - path: /desktop/previous-versions/3.x-windows/
-        title: Desktop for Windows 3.x
-      - path: /desktop/previous-versions/3.x-mac/
-        title: Desktop for Mac 3.x
-      - path: /desktop/previous-versions/2.x-windows/
-        title: Desktop for Windows 2.x
-      - path: /desktop/previous-versions/2.x-mac/
-        title: Desktop for Mac 2.x
-      - path: /desktop/previous-versions/edge-releases-windows/
-        title: Windows edge releases
-      - path: /desktop/previous-versions/edge-releases-mac/
-        title: Mac edge releases
-      - path: /desktop/previous-versions/archive-windows/
-        title: Older versions for Windows
-      - path: /desktop/previous-versions/archive-mac/
-        title: Older versions for Mac
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
