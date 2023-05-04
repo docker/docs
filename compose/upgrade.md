@@ -11,7 +11,7 @@ redirect_from:
 ## What are the functional differences between Compose V1 and Compose V2?
 
 Compose V2 introduces a new internal architecture integrated with the rest of the Docker platform.
-It offers an improved CLI experience, improved build performance with BuildKit, and continued new feature development.
+It offers an improved CLI experience, improved build performance with BuildKit, and continued new-feature development.
 
 For most projects, switching to Compose V2 requires no changes to the Compose YAML or your development workflow.
 
@@ -75,7 +75,7 @@ Ask yourself...
 Run `docker compose config` on the project to preview the configuration after Compose V2 has performed interpolation to
 verify that values appear as expected.
 
-Maintaining backwards compatibility with Compose V1 is **typically** achievable by ensuring that literal values (no
+Maintaining backwards compatibility with Compose V1 is typically achievable by ensuring that literal values (no
 interpolation) are single-quoted and values that should have interpolation applied are double-quoted.
 
 ## What does this mean for my projects that use Compose V1?
