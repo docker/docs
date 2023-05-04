@@ -86,8 +86,17 @@ $ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
 
 #### Install Docker Engine
 
-1. Install the _latest version_ of Docker Engine, containerd, and Docker Compose
-   or go to the next step to install a specific version:
+1. Install Docker Engine, containerd, and Docker Compose:
+
+   <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#tab-latest">Latest</a></li>
+    <li><a data-toggle="tab" data-target="#tab-version">Specific version</a></li>
+   </ul>
+   <div class="tab-content">
+   <br>
+   <div id="tab-latest" class="tab-pane fade in active" markdown="1">
+
+   To install the latest version, run:
 
    ```console
    $ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -99,11 +108,11 @@ $ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
 
-2. To install a _specific version_ of Docker Engine, list the available versions
-   in the repo, then select and install:
+   </div>
+   <div id="tab-version" class="tab-pane fade" markdown="1">
 
-   a. List and sort the versions available in your repo. This example sorts
-      results by version number, highest to lowest, and is truncated:
+   To install a specific version, start by listing the available versions in
+   the repository:
 
    ```console
    $ dnf list docker-ce --showduplicates | sort -r
@@ -116,9 +125,12 @@ $ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
    The list returned depends on which repositories are enabled, and is specific
    to your version of Fedora (indicated by the `.fc37` suffix in this example).
 
-   b. Install a specific version by its fully qualified package name, which is
-      the package name (`docker-ce`) plus the version string (2nd column),
-      separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5-1.fc37`.
+   Install a specific version by its fully qualified package name, which is
+   the package name (`docker-ce`) plus the version string (2nd column),
+   separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5-1.fc37`.
+
+   Replace `<VERSION_STRING>` with the desired version and then run the following
+   command to install:
 
    ```console
    $ sudo dnf -y install docker-ce-<VERSION_STRING> docker-ce-cli-<VERSION_STRING> containerd.io docker-buildx-plugin docker-compose-plugin
@@ -127,13 +139,17 @@ $ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
 
-3. Start Docker.
+   </div>
+   <hr>
+   </div>
+
+2. Start Docker.
 
    ```console
    $ sudo systemctl start docker
    ```
 
-4. Verify that the Docker Engine installation is successful by running the
+3. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
 
    ```console
