@@ -1769,7 +1769,7 @@ manuals:
   - path: /compose/features-uses/
     title: Key features and use cases
   - path: /compose/history/
-    title: Evolution of Compose
+    title: History of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
