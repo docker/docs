@@ -91,7 +91,7 @@ See [How does it work](how-eci-works.md#enhanced-container-isolation-vs-rootless
 </div>
 <div id="tab4" class="tab-pane fade" markdown="1">
 
-#### WSL Compatibility
+#### ECI support for WSL
 
 Prior to Docker Desktop 4.20, Enhanced Container Isolation (ECI) on
 Windows hosts was only supported when Docker Desktop was configured to use
