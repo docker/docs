@@ -1,7 +1,9 @@
 ---
-title: Docker and iptables
-description: The basics of how Docker works with iptables
-keywords: network, iptables
+title: Packet filtering and firewalls
+description: How Docker works with packet filtering, iptables, and firewalls
+keywords: network, iptables, firewall
+redirect_from:
+  - /network/iptables/
 ---
 
 On Linux, Docker manipulates `iptables` rules to provide network isolation.
@@ -28,9 +30,9 @@ before any rules Docker creates automatically.
 
 Other rules added to the `FORWARD` chain, either manually, or by another
 iptables-based firewall, are evaluated after the `DOCKER-USER` and `DOCKER` chains.
-This means that if you expose a port through Docker,
-this port gets exposed no matter what rules your firewall has configured.
-If you want rules to apply even when a port gets exposed through Docker,
+This means that if you publish a port through Docker,
+this port gets published no matter what rules your firewall has configured.
+If you want rules to apply even when a port gets published through Docker,
 you must add these rules to the `DOCKER-USER` chain.
 
 ### Match the original IP and ports for requests
@@ -47,7 +49,7 @@ For example:
 
 ```console
 $ sudo iptables -I DOCKER-USER -p tcp -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-$ sudo iptables -I DOCKER-USER -p tcp -m conntrack -ctorigsrc 1.2.3.4 --ctorigdstport 80 -j ACCEPT
+$ sudo iptables -I DOCKER-USER -p tcp -m conntrack --ctorigsrc 1.2.3.4 --ctorigdstport 80 -j ACCEPT
 ```
 
 > **Important**
@@ -110,17 +112,18 @@ For system integrators who wish to build the Docker runtime into other applicati
 
 ## Setting the default bind address for containers
 
-The Docker daemon binds exposed container ports to the `0.0.0.0` address.
-When you publish a container's ports as follows:
+By default, the Docker daemon binds published container ports to the `0.0.0.0`
+address. When you publish a container's ports as follows:
 
 ```console
 docker run -p 8080:80 nginx
 ```
 
-On most systems, this exposes port 8080 to all network interfaces on the host,
-potentially making them available to the outside world.
+This publishes port 8080 to all network interfaces on the host, potentially
+making them available to the outside world. Unless you've disabled IPv6 at the
+kernel level, the port gets published on both IPv4 and IPv6.
 
-You can change the default binding address for exposed container ports so that
+You can change the default binding address for published container ports so that
 they're only accessible to the Docker host by default. To do that, you can
 configure the daemon to use the loopback address (`127.0.0.1`) instead. You
 have two options for how to do this:
@@ -139,12 +142,12 @@ have two options for how to do this:
   }
   ```
 
-This changes the default binding port for all bridge networks to use the
-`127.0.0.1` address when you expose container ports.
+This changes the default binding port to `127.0.0.1` for published container
+ports on the default bridge network.
 
-You can also configure this setting individually for each bridge network, using
+To configure this setting for user-defined bridge networks, use
 the `com.docker.network.bridge.host_binding_ipv4`
-[driver option](./drivers/bridge.md#options) for the bridge driver.
+[driver option](./drivers/bridge.md#options) when you create the network.
 
 ```console
 $ docker network create mybridge \
@@ -167,3 +170,16 @@ $ firewall-cmd --reload
 ```
 
 Restarting `dockerd` daemon inserts the interface into the `docker` zone.
+
+## Docker and ufw
+
+Uncomplicated Firewall (ufw) is a frontend that ships with Debian and Ubuntu,
+and it lets you manage firewall rules. Docker and ufw use iptables in ways
+that make them incompatible with each other.
+
+When you publish a container's ports using Docker, traffic to and from that
+container gets diverted before it goes through the ufw firewall settings.
+Docker routes container traffic in the `nat` table, which means that packets
+are diverted before it reaches the `filter` table that ufw uses. Packets are
+routed before the firewall rules can be applied, effectively ignoring your
+firewall configuration.

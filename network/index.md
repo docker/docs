@@ -26,7 +26,7 @@ This page describes networking from the point of view of the container.
 This page describes the concepts around container networking.
 This page doesn't describe OS-specific details about how Docker networks work.
 For information about how Docker manipulates `iptables` rules on Linux,
-see [Docker and iptables](iptables.md).
+see [Packet filtering and firewalls](packet-filtering-firewalls.md).
 
 ## Published ports
 
@@ -35,7 +35,7 @@ the container doesn't expose any of its ports to the outside world.
 To make a port available to services outside of Docker,
 or to Docker containers running on a different network,
 use the `--publish` or `-p` flag.
-This creates a firewall rule in the container,
+This creates a firewall rule in the host,
 mapping a container port to a port on the Docker host to the outside world.
 Here are some examples:
 
@@ -53,8 +53,7 @@ Here are some examples:
 > the outside world as well.
 >
 > To publish a container's port and only expose it to the Docker host, include
-> the localhost IP address in the port mapping command. On most systems, that
-> IP is `127.0.0.1`.
+> the localhost IP address (`127.0.0.1`) in the port mapping command.
 >
 > ```console
 > $ docker run -p 127.0.0.1:8080:80 nginx
@@ -64,8 +63,8 @@ Here are some examples:
 ## IP address and hostname
 
 By default, the container gets an IP address for every Docker network it attaches to.
-A container receives an IP address out of the IP pool of the network it attaches to.
-The Docker daemon effectively acts as a DHCP server for each container.
+A container receives an IP address out of the IP subnet of the network.
+The Docker daemon performs dynamic subnetting and IP address allocation for containers.
 Each network also has a default subnet mask and gateway.
 
 When a container starts, it can only attach to a single network, using the `--network` flag.
@@ -110,11 +109,12 @@ work in a surprising or unexpected way. DNS lookup behavior depends on a number
 of different factors:
 
 - Whether the container OS runs on [musl or glibc](https://wiki.musl-libc.org/functional-differences-from-glibc.html#Name_Resolver/DNS){: target="blank" rel="noopener" }
-- Whether the Docker daemon binary was [statically or dynamically linked](https://pkg.go.dev/net#hdr-Name_Resolution){: target="blank" rel="noopener" }
+- Whether the Docker daemon binary is [statically or dynamically linked](https://pkg.go.dev/net#hdr-Name_Resolution){: target="blank" rel="noopener" }
 - If dynamically linked, which version of glibc that's used
 - Whether or not [nsswitch.conf is present](https://tldp.org/LDP/nag2/x-087-2-resolv.library.html#X-087-2-RESOLV.NSSWITCH-CONF){: target="blank" rel="noopener" }
 
-You may find that name resolution works as follows:
+Under most circumstances, name resolution with multiple nameservers should work
+as follows:
 
 1. The container emits requests to **all** nameservers that you specify.
 2. The container uses the first response returned by any of the nameservers.
