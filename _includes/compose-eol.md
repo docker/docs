@@ -4,4 +4,4 @@
 >
 > Compose V2 is included with all currently supported versions of Docker Desktop.
 > For more information, see [Migrate to Compose V2](/compose/migrate).
-> {: .important}
+{: .important}
