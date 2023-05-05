@@ -85,11 +85,7 @@ Docker from the repository.
 
     ```console
     $ sudo apt-get update
-
-    $ sudo apt-get install \
-        ca-certificates \
-        curl \
-        gnupg
+    $ sudo apt-get install ca-certificates curl gnupg
     ```
 
 2.  Add Docker's official GPG key:
@@ -160,7 +156,7 @@ Docker from the repository.
    </div>
 
 3. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image:
+   `hello-world` image.
 
    ```console
    $ sudo docker run hello-world
@@ -171,17 +167,12 @@ Docker from the repository.
 
 You have now successfully installed and started Docker Engine.
 
-> Receiving errors when trying to run without root?
->
-> The `docker` user group exists but contains no users, which is why you're required 
-> to use `sudo` to run Docker commands. Continue to [Linux post-install](linux-postinstall.md)
-> to allow non-privileged users to run Docker commands and for other optional configuration steps.
+{% include root-errors.md %}
 
 #### Upgrade Docker Engine
 
-To upgrade Docker Engine, follow the
-[installation instructions](#install-docker-engine), choosing the new version
-you want to install.
+To upgrade Docker Engine, follow the [installation instructions](#install-using-the-repository),
+choosing the new version you want to install.
 
 ### Install from a package
 
@@ -189,8 +180,7 @@ If you can't use Docker's `apt` repository to install Docker Engine, you can
 download the `deb` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
-1. Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){:
-   target="_blank" rel="noopener" class="_" }.
+1. Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" }.
 
 2. Select your Ubuntu version in the list.
 
@@ -220,7 +210,7 @@ download a new file each time you want to upgrade Docker Engine.
    The Docker daemon starts automatically.
 
 6. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image:
+   `hello-world` image.
 
    ```console
    $ sudo service docker start
@@ -230,11 +220,9 @@ download a new file each time you want to upgrade Docker Engine.
    This command downloads a test image and runs it in a container. When the
    container runs, it prints a confirmation message and exits.
 
-You have now successfully installed and started Docker Engine. The `docker` user
-group exists but contains no users, which is why you're required to use `sudo`
-to run Docker commands. Read [Linux post-install](linux-postinstall.md)
-to allow non-privileged users to run Docker commands and for other optional
-configuration steps.
+You have now successfully installed and started Docker Engine.
+
+{% include root-errors.md %}
 
 #### Upgrade Docker Engine
 
@@ -245,19 +233,19 @@ To upgrade Docker Engine, download the newer package files and repeat the
 
 ## Uninstall Docker Engine
 
-1.  Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
+1. Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
-    ```console
-    $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
-    ```
+   ```console
+   $ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+   ```
 
-2.  Images, containers, volumes, or custom configuration files on your host
-    aren't automatically removed. To delete all images, containers, and volumes:
+2. Images, containers, volumes, or custom configuration files on your host
+   aren't automatically removed. To delete all images, containers, and volumes:
 
-    ```console
-    $ sudo rm -rf /var/lib/docker
-    $ sudo rm -rf /var/lib/containerd
-    ```
+   ```console
+   $ sudo rm -rf /var/lib/docker
+   $ sudo rm -rf /var/lib/containerd
+   ```
 
 You have to delete any edited configuration files manually.
 
