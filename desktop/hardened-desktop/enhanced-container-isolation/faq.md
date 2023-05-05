@@ -122,11 +122,11 @@ Note however that ECI on WSL is not as secure as on Hyper-V because:
   Desktop Linux VM.
 
 * With WSL 2, all WSL 2 distros on the same Windows host share the same instance
-  of the Linux kernel, by Microsoft's design. As a result, Docker Desktop can't
-  ensure the integrity of the kernel in the Docker Desktop Linux VM since
-  another WSL 2 distro could modify shared kernel settings. In contrast, when
-  using Hyper-V, the Docker Desktop Linux VM has a dedicated kernel that is
-  solely under the control of Docker Desktop.
+  of the Linux kernel. As a result, Docker Desktop can't ensure the integrity of
+  the kernel in the Docker Desktop Linux VM since another WSL 2 distro could
+  modify shared kernel settings. In contrast, when using Hyper-V, the Docker
+  Desktop Linux VM has a dedicated kernel that is solely under the control of
+  Docker Desktop.
 
 The table below summarizes this.
 
