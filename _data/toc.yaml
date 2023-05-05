@@ -1790,7 +1790,7 @@ manuals:
     - path: /compose/environment-variables/set-environment-variables/
       title: Explore ways to set environment variables
     - path: /compose/environment-variables/envvars-precedence/
-      title: Understand environment variables' precedence
+      title: Understand environment variables precedence
     - path: /compose/environment-variables/env-file/
       title: Use an environment file
     - path: /compose/environment-variables/envvars/
