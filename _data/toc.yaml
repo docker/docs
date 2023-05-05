@@ -179,90 +179,30 @@ guides:
   - path: /build/guide/next-steps/
     title: Next steps
 
-- sectiontitle: Deploy your app to the cloud
+- sectiontitle: Deployment and orchestration
   section:
-  - path: /cloud/aci-integration/
-    title: Docker and ACI
-  - path: /cloud/aci-container-features/
-    title: ACI container features
-  - path: /cloud/aci-compose-features/
-    title: ACI Compose features
-  - path: /cloud/ecs-integration/
-    title: Docker and ECS
-  - path: /cloud/ecs-architecture/
-    title: Docker ECS integration architecture
-  - path: /cloud/ecs-compose-features/
-    title: ECS Compose features
-  - path: /cloud/ecs-compose-examples/
-    title: ECS Compose examples
-- sectiontitle: Run your app in production
-  section:
-  - sectiontitle: Orchestration
+  - title: "Overview"
+    path: /get-started/orchestration/
+  - title: "Deploy to Kubernetes"
+    path: /get-started/kube-deploy/
+  - title: "Deploy to Swarm"
+    path: /get-started/swarm-deploy/
+  - sectiontitle: Cloud integrations
     section:
-    - title: "Overview"
-      path: /get-started/orchestration/
-    - title: "Deploy to Kubernetes"
-      path: /get-started/kube-deploy/
-    - title: "Deploy to Swarm"
-      path: /get-started/swarm-deploy/
-    - sectiontitle: Scale your app
-      section:
-      - path: /engine/swarm/
-        title: Swarm mode overview
-      - path: /engine/swarm/key-concepts/
-        title: Swarm mode key concepts
-      - sectiontitle: Get started with swarm mode
-        section:
-        - path: /engine/swarm/swarm-tutorial/
-          title: Swarm mode tutorial overview
-        - path: /engine/swarm/swarm-tutorial/create-swarm/
-          title: Create a swarm
-        - path: /engine/swarm/swarm-tutorial/add-nodes/
-          title: Add nodes to the swarm
-        - path: /engine/swarm/swarm-tutorial/deploy-service/
-          title: Deploy a service
-        - path: /engine/swarm/swarm-tutorial/inspect-service/
-          title: Inspect the service
-        - path: /engine/swarm/swarm-tutorial/scale-service/
-          title: Scale the service
-        - path: /engine/swarm/swarm-tutorial/delete-service/
-          title: Delete the service
-        - path: /engine/swarm/swarm-tutorial/rolling-update/
-          title: Apply rolling updates
-        - path: /engine/swarm/swarm-tutorial/drain-node/
-          title: Drain a node
-        - path: /engine/swarm/ingress/
-          title: Use swarm mode routing mesh
-      - sectiontitle: How swarm mode works
-        section:
-        - path: /engine/swarm/how-swarm-mode-works/nodes/
-          title: How nodes work
-        - path: /engine/swarm/how-swarm-mode-works/services/
-          title: How services work
-        - path: /engine/swarm/how-swarm-mode-works/pki/
-          title: Manage swarm security with PKI
-        - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
-          title: Swarm task states
-      - path: /engine/swarm/swarm-mode/
-        title: Run Docker in swarm mode
-      - path: /engine/swarm/join-nodes/
-        title: Join nodes to a swarm
-      - path: /engine/swarm/manage-nodes/
-        title: Manage nodes in a swarm
-      - path: /engine/swarm/services/
-        title: Deploy services to a swarm
-      - path: /engine/swarm/configs/
-        title: Store service configuration data
-      - path: /engine/swarm/secrets/
-        title: Manage sensitive data with Docker secrets
-      - path: /engine/swarm/swarm_manager_locking/
-        title: Lock your swarm
-      - path: /engine/swarm/networking/
-        title: Manage swarm service networks
-      - path: /engine/swarm/admin_guide/
-        title: Swarm administration guide
-      - path: /engine/swarm/raft/
-        title: Raft consensus in swarm mode
+    - path: /cloud/aci-integration/
+      title: Docker and ACI
+    - path: /cloud/aci-container-features/
+      title: ACI container features
+    - path: /cloud/aci-compose-features/
+      title: ACI Compose features
+    - path: /cloud/ecs-integration/
+      title: Docker and ECS
+    - path: /cloud/ecs-architecture/
+      title: Docker ECS integration architecture
+    - path: /cloud/ecs-compose-features/
+      title: ECS Compose features
+    - path: /cloud/ecs-compose-examples/
+      title: ECS Compose examples
 - path: /get-started/resources/
   title: "Educational resources"
 
@@ -1528,6 +1468,64 @@ manuals:
         title: Seccomp security profiles
       - path: /engine/security/userns-remap/
         title: Isolate containers with a user namespace
+  - sectiontitle: Swarm mode
+    section:
+    - path: /engine/swarm/
+      title: Swarm mode overview
+    - path: /engine/swarm/key-concepts/
+      title: Swarm mode key concepts
+    - sectiontitle: Get started with swarm mode
+      section:
+      - path: /engine/swarm/swarm-tutorial/
+        title: Swarm mode tutorial overview
+      - path: /engine/swarm/swarm-tutorial/create-swarm/
+        title: Create a swarm
+      - path: /engine/swarm/swarm-tutorial/add-nodes/
+        title: Add nodes to the swarm
+      - path: /engine/swarm/swarm-tutorial/deploy-service/
+        title: Deploy a service
+      - path: /engine/swarm/swarm-tutorial/inspect-service/
+        title: Inspect the service
+      - path: /engine/swarm/swarm-tutorial/scale-service/
+        title: Scale the service
+      - path: /engine/swarm/swarm-tutorial/delete-service/
+        title: Delete the service
+      - path: /engine/swarm/swarm-tutorial/rolling-update/
+        title: Apply rolling updates
+      - path: /engine/swarm/swarm-tutorial/drain-node/
+        title: Drain a node
+      - path: /engine/swarm/ingress/
+        title: Use swarm mode routing mesh
+    - sectiontitle: How swarm mode works
+      section:
+      - path: /engine/swarm/how-swarm-mode-works/nodes/
+        title: How nodes work
+      - path: /engine/swarm/how-swarm-mode-works/services/
+        title: How services work
+      - path: /engine/swarm/how-swarm-mode-works/pki/
+        title: Manage swarm security with PKI
+      - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
+        title: Swarm task states
+    - path: /engine/swarm/swarm-mode/
+      title: Run Docker in swarm mode
+    - path: /engine/swarm/join-nodes/
+      title: Join nodes to a swarm
+    - path: /engine/swarm/manage-nodes/
+      title: Manage nodes in a swarm
+    - path: /engine/swarm/services/
+      title: Deploy services to a swarm
+    - path: /engine/swarm/configs/
+      title: Store service configuration data
+    - path: /engine/swarm/secrets/
+      title: Manage sensitive data with Docker secrets
+    - path: /engine/swarm/swarm_manager_locking/
+      title: Lock your swarm
+    - path: /engine/swarm/networking/
+      title: Manage swarm service networks
+    - path: /engine/swarm/admin_guide/
+      title: Swarm administration guide
+    - path: /engine/swarm/raft/
+      title: Raft consensus in swarm mode
   - sectiontitle: Advanced concepts
     section:
     - sectiontitle: Container runtime
