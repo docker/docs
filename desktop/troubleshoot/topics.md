@@ -261,9 +261,9 @@ To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.mi
 From the start menu, type **Turn Windows features on or off** and press enter.
 In the subsequent screen, verify that Hyper-V is enabled.
 
-#### Nested virtualization must be enabled
+#### Virtualization must be enabled
 
-In addition to [Hyper-V](#hyper-v) or [WSL 2](../windows/wsl.md), nested virtualization must be enabled. Check the
+In addition to [Hyper-V](#hyper-v) or [WSL 2](../windows/wsl.md), virtualization must be enabled. Check the
 Performance tab on the Task Manager:
 
 ![Task Manager](../images/virtualization-enabled.png){:width="700px"}
@@ -285,6 +285,17 @@ Virtual Box) and video game installers disable hypervisor on boot. To reenable i
 3. Restart Windows.
 
 You can also refer to the [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt){:target="_blank" rel="noopener" class="_"} on Code flow guard (CFG) settings.
+
+#### Enable nested virtualization
+
+If you are using Hyper-V and you get the following error message:
+
+```console
+The Virtual Machine Management Service failed to start the virtual machine 'DockerDesktopVM' because one of the Hyper-V components is not running
+```
+
+Try [enabling nested virtualization](../vm-vdi.md#enable-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
+
 
 ### Windows containers and Windows Server
 
