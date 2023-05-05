@@ -288,7 +288,7 @@ You can also refer to the [Microsoft TechNet article](https://social.technet.mic
 
 #### Enable nested virtualization
 
-If you are using Hyper-V and you get the following error message:
+If you are using Hyper-V and you get the following error message when running Docker Desktop in a VDI environment:
 
 ```console
 The Virtual Machine Management Service failed to start the virtual machine 'DockerDesktopVM' because one of the Hyper-V components is not running
