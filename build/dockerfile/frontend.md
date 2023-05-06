@@ -1,6 +1,8 @@
 ---
 title: Custom Dockerfile syntax
 keywords: build, buildkit, dockerfile, frontend
+redirect_from:
+  - /build/buildkit/dockerfile-frontend/
 ---
 
 ## Dockerfile frontend

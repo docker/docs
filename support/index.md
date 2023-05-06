@@ -18,10 +18,10 @@ Find information on how to get support, and the scope of Docker support.
 
 If you have a paid Docker subscription, raise a ticket through [Docker support](https://hub.docker.com/support/contact/){:target="_blank" rel="noopener" class="_"}.
 
-All Docker users can seek support through the following resources, where we or the community respond on a best effort basis.
+All Docker users can seek support through the following resources, where Docker or the community respond on a best effort basis.
    - [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win){:target="_blank" rel="noopener" class="_"} 
    - [Docker Desktop for Mac GitHub repo](https://github.com/docker/for-mac){:target="_blank" rel="noopener" class="_"}
-   - [Docker Desktop for Linux GitHub repo](https://github.com/docker/for-linux){:target="_blank" rel="noopener" class="_"}
+   - [Docker Desktop for Linux GitHub repo](https://github.com/docker/desktop-linux){:target="_blank" rel="noopener" class="_"}
    - [Docker Community Forums](https://forums.docker.com/){:target="_blank" rel="noopener" class="_"}
    - [Docker Community Slack](https://dockercommunity.slack.com/){:target="_blank" rel="noopener" class="_"}
 
@@ -73,9 +73,9 @@ Docker excludes support for the following types of issues:
 
 ## What Docker Desktop versions are supported?
 
-For Docker Business customers, we offer support for versions up to six months older than the latest version, although any fixes will be on the latest version.
+For Docker Business customers, Docker offers support for versions up to six months older than the latest version, although any fixes will be on the latest version.
 
-For Pro and Team customers, we only offer support for the latest version of Docker Desktop. If you are running an older version, you may be asked to update before we investigate your support request.
+For Pro and Team customers, Docker only offers support for the latest version of Docker Desktop. If you are running an older version, Docker may ask you to update before investigating your support request.
 
 ## How many machines can I get support for Docker Desktop on?
 

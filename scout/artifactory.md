@@ -12,13 +12,29 @@ title: Artifactory integration
 Integrating Docker Scout with JFrog Artifactory lets you run image analysis
 automatically on images in your Artifactory registries.
 
-This integration is made possible by a monitoring agent. The agent is a
+## Local image analysis
+
+You can analyze Artifactory images for vulnerabilities locally using Docker Desktop or the Docker CLI. You first need to authenticate with JFrog Artifactory using the `[Docker login](/engine/reference/commandline/login/)` command. For example:
+
+```bash
+docker login {URL}
+```
+
+> **Tip**
+>
+> For cloud-hosted Artifactory you can find the credentials for your Artifactory repository by
+> selecting it in the Artifactory UI and then the **Set Me Up** button.
+{: .tip }
+
+## Remote image analysis
+
+To automatically analyze images running in remote environments you need to deploy the Docker Scout Artifactory agent. The agent is a
 standalone service that analyzes images and uploads the result to Docker Scout.
 You can view the results using the
 [Docker Scout web UI](https://dso.docker.com/){: target="\_blank" rel="noopener"
 }.
 
-## How it works
+### How the agent works
 
 The Docker Scout Artifactory agent is available as an
 [image on Docker Hub](https://hub.docker.com/r/docker/artifactory-agent){:
@@ -35,10 +51,9 @@ SBOMs for all of its base images. The recorded SBOMs include both Operating
 System (OS)-level and application-level programs or dependencies that the image
 contains.
 
-Additionally, the agent sends the following metadata about the image to Docker Scout to 
-record:
+Additionally, the agent sends the following metadata about the image to Docker Scout:
 
-- The source repository for the image
+- The source repository URL and commit SHA for the image
 - Build instructions
 - Build date
 - Tags and digest
@@ -51,11 +66,11 @@ itself, nor any data inside the image, such as code, binaries, and layer blobs.
 The agent doesn't detect and analyze pre-existing images. It only analyzes
 images that appear in the registry while the agent is running.
 
-## Deploy the agent
+### Deploy the agent
 
 This section describes the steps for deploying the Artifactory agent.
 
-### Prerequisites
+#### Prerequisites
 
 Before you deploy the agent, ensure that you meet the prerequisites:
 
@@ -70,7 +85,7 @@ Before you deploy the agent, ensure that you meet the prerequisites:
 The agent supports all versions of JFrog Artifactory and JFrog Container
 Registry.
 
-### Create the configuration file
+#### Create the configuration file
 
 You configure the agent using a JSON file. The agent expects the configuration
 file to be in `/opt/artifactory-agent/data/config.json` on startup.
@@ -124,7 +139,7 @@ The following snippet shows a sample configuration:
 Create a configuration file and save it somewhere on the server where you plan
 to run the agent. For example, `/var/opt/artifactory-agent/config.json`.
 
-### Run the agent
+#### Run the agent
 
 The following example shows how to run the Docker Scout Artifactory agent using
 `docker run`. This command creates a bind mount for the directory containing the
@@ -145,7 +160,28 @@ $ docker run \
   docker/artifactory-agent:v1
 ```
 
-## View analysis results
+#### Analyzing pre-existing data
+
+By default the agent detects and analyzes images as they're created and
+updated. If you want to use the agent to analyze pre-existing images, you
+can use backfill mode. Use the `--backfill-from=TIME` command line option,
+where `TIME` is an ISO 8601 formatted time, to run the agent in backfill mode.
+If you use this option, the agent analyzes all images pushed between that
+time and the current time when the agent starts, then exits.
+
+For example:
+
+```console
+$ docker run \
+  --mount type=bind,src=/var/opt/artifactory-agent,target=/opt/artifactory-agent/data \
+  docker/artifactory-agent:v1 --backfill-from=2022-04-10T10:00:00Z
+```
+
+When running a backfill multiple times, the agent won't analyze images that
+it's already analyzed. To force re-analysis, provide the `--force` command
+line flag.
+
+### View analysis results
 
 You can view the image analysis results in the Docker Scout web UI.
 

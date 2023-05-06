@@ -33,94 +33,15 @@ $ git clone https://github.com/docker/welcome-to-docker
 
 If you don't have git, download the source and extract it.
 
-[Download the source](https://github.com/docker/
-welcome-to-docker/archive/refs/heads/main.zip){: .button .primary-btn}
+[Download the source](https://github.com/docker/welcome-to-docker/archive/refs/heads/main.zip){: .button .primary-btn}
 
    <hr>
   </div>
   </div>
 
-## Step 2: Create a Dockerfile in your project folder
+## Step 2: Explore the Dockerfile
 
-To run your code in a container, the most fundamental thing you need is a Dockerfile. A Dockerfile describes what goes into a container. To add a Dockerfile, create a text file called `Dockerfile` with no file extension in the root directory of your project. You can use the following commands to create a Dockerfile.
-
-   <ul class="nav nav-tabs">
-     <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
-     <li><a data-toggle="tab" data-target="#windows">Windows</a></li>
-   </ul>
-   <div class="tab-content">
-   <div id="mac-linux" class="tab-pane fade in active" markdown="1">
-
-### Mac / Linux
-
-In the terminal, run the following commands listed below.
-
-Change directory to the `welcome-to-docker` directory. Replace `/path/to/welcome-to-docker` with the path to your `welcome-to-docker` directory.
-```console
-$ cd /path/to/welcome-to-docker
-```
-Create an empty file named `Dockerfile`.
-```console
-$ touch Dockerfile
-```
-
-   <hr>
-   </div>
-   <div id="windows" class="tab-pane fade" markdown="1">
-
-### Windows
-
-In the Windows Command Prompt, run the following commands listed below.
-
-Change directory to the `welcome-to-docker` directory. Replace `\path\to\welcome-to-docker` with the path to your `welcome-to-docker` directory.
-
-```console
-$ cd \path\to\welcome-to-docker
-```
-Create an empty file named `Dockerfile`.
-```console
-$ type nul > Dockerfile
-```
-
-   <hr>
-   </div>
-   </div>
-
-## Step 3: Add instructions to your Dockerfile
-
-Using a text editor or code editor, add the following contents to the Dockerfile:
-
-```dockerfile
-# syntax=docker/dockerfile:1
-
-# Start your image with a node base image
-FROM node:18-alpine
-
-# Create an application directory
-RUN mkdir -p /app
-
-# Set the /app directory as the working directory for any command that follows
-WORKDIR /app
-
-# Copy the local app package and package-lock.json file to the container
-COPY package*.json ./
-
-# Copy local directories to the working directory of our docker image (/app)
-COPY ./src ./src
-COPY ./public ./public
-
-# Install node packages, install serve, build the app, and remove dependencies at the end
-RUN npm install \
-    && npm install -g serve \
-    && npm run build \
-    && rm -fr node_modules
-
-# Specify that the application in the container listens on port 3000
-EXPOSE 3000
-
-# Start the app using serve command
-CMD [ "serve", "-s", "build" ]
-```
+To run your code in a container, the most fundamental thing you need is a Dockerfile. A Dockerfile describes what goes into a container. Open the sample application in your IDE and then open the `Dockerfile` to explore its contents. Note that this project already has a Dockerfile, but for your own projects you need to create a Dockerfile. A Dockerfile is simply a text file named `Dockerfile` with no file extension.
 
 ## Step 3: Build your first image
 

@@ -61,6 +61,15 @@ When you disable SSO, you can delete the connection to remove the configuration 
 
 ## Manage users
 
+>**Important**
+>
+> SSO has Just-In-Time (JIT) Provisioning enabled by default. This means your users are auto-provisioned into a team called 'Company' within your organization on Docker Hub. 
+>
+>You can change this on a per-app basis. To prevent auto-provisioning users, you can create a security group in your IdP and configure the SSO app to authenticate and authorize only those users that are in the security group. Follow the instructions provided by your IdP:
+> - [Okta](https://help.okta.com/en-us/Content/Topics/Security/policies/configure-app-signon-policies.htm)
+> - [AzureAD](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
+{: .important}
+
 ### Add guest users when SSO is enabled
 
 To add a guest to your organization in Docker Hub if they aren’t verified through your IdP:
@@ -77,3 +86,7 @@ To remove a user from an organization:
 2. From the **Members** tab, select the **x** next to a member’s name to remove them from all the teams in the organization.
 3. Select **Remove** to confirm. The member receives an email notification confirming the removal.
 
+## What's next?
+
+- [Set up SCIM](../../docker-hub/scim.md)
+- [Enable Group mapping](../../docker-hub/group-mapping.md)

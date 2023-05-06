@@ -46,8 +46,7 @@ To display the Docker menu, right-click on the ![whale menu](../../assets/images
 - **Troubleshoot**
 - **Switch to Windows containers**
 - **About Docker Desktop**. Contains information on the versions you are running, and links to the Subscription Service Agreement for example.
-- **Documentation**
-- **Quick Start Guide**. Launches the Quick Start Guide.
+- **Learning Center**
 - **Docker Hub**
 - **Extensions**
 - **Kubernetes**

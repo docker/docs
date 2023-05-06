@@ -13,8 +13,8 @@ toc_max: 4
 ---
 
 To get started with Docker Engine on Debian, make sure you
-[meet the prerequisites](#prerequisites), then
-[install Docker](#installation-methods).
+[meet the prerequisites](#prerequisites), and then follow the
+[installation steps](#installation-methods).
 
 ## Prerequisites
 
@@ -23,29 +23,32 @@ To get started with Docker Engine on Debian, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Debian or
 Raspbian versions:
 
+- Debian Bookworm 12 (testing)
 - Debian Bullseye 11 (stable)
 - Debian Buster 10 (oldstable)
+- Raspbian Bookworm 12 (testing)
 - Raspbian Bullseye 11 (stable)
 - Raspbian Buster 10 (oldstable)
 
-Docker Engine is compatible with `x86_64` (or `amd64`), `armhf`, and `arm64`
+Docker Engine is compatible with x86_64 (or amd64), armhf, and arm64
 architectures.
 
 ### Uninstall old versions
 
 Older versions of Docker went by the names of `docker`, `docker.io`, or
-`docker-engine`. Uninstall any such older versions before attempting to install
+`docker-engine`, you might also have installations of `containerd` or `runc`.
+Uninstall any such older versions before attempting to install
 a new version:
 
 ```console
 $ sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
-It's OK if `apt-get` reports that none of these packages are installed.
+`apt-get` might report that you have none of these packages installed.
 
 Images, containers, volumes, and networks stored in `/var/lib/docker/` aren't
 automatically removed when you uninstall Docker. If you want to start with a
-clean installation, and prefer to clean up any existing data, refer to the
+clean installation, and prefer to clean up any existing data, read the
 [uninstall Docker Engine](#uninstall-docker-engine) section.
 
 ## Installation methods
@@ -56,16 +59,16 @@ You can install Docker Engine in different ways, depending on your needs:
   [Docker Desktop for Linux](../../desktop/install/linux-install.md). This is
   the easiest and quickest way to get started.
 
-- You can also set up and install Docker Engine from
+- Set up and install Docker Engine from
   [Docker's `apt` repository](#install-using-the-repository).
 
 - [Install it manually](#install-from-a-package) and manage upgrades manually.
 
-- Using a [convenience scripts](#install-using-the-convenience-script). Only
+- Use a [convenience scripts](#install-using-the-convenience-script). Only
   recommended for testing and development environments. This is the only
   approach available for Raspbian.
 
-### Install using the repository
+### Install using the apt repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
 need to set up the Docker repository. Afterward, you can install and update
@@ -85,18 +88,15 @@ Docker from the repository.
 
     ```console
     $ sudo apt-get update
-
-    $ sudo apt-get install \
-        ca-certificates \
-        curl \
-        gnupg
+    $ sudo apt-get install ca-certificates curl gnupg
     ```
 
 2.  Add Docker's official GPG key:
 
     ```console
-    $ sudo mkdir -m 0755 -p /etc/apt/keyrings
+    $ sudo install -m 0755 -d /etc/apt/keyrings
     $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
     ```
 
 3.  Use the following command to set up the repository:
@@ -119,18 +119,6 @@ Raspbian.
    $ sudo apt-get update
    ```
 
-   > Receiving a GPG error when running `apt-get update`?
-   >
-   > Your default [umask](https://en.wikipedia.org/wiki/Umask){: target="blank"
-   > rel="noopener" } may be incorrectly configured, preventing detection of the
-   > repository public key file. Try granting read permission for the Docker
-   > public key file before updating the package index:
-   >
-   > ```console
-   > $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
-   > $ sudo apt-get update
-   > ```
-
 2. Install Docker Engine, containerd, and Docker Compose.
 
    <ul class="nav nav-tabs">
@@ -150,23 +138,22 @@ Raspbian.
    </div>
    <div id="tab-version" class="tab-pane fade" markdown="1">
 
-   To install a specific version of Docker Engine, start by list the available
+   To install a specific version of Docker Engine, start by listing the available
    versions in the repository:
 
    ```console
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:18.09.1~3-0~debian-stretch
-   5:18.09.0~3-0~debian-stretch
-   18.06.1~ce~3-0~debian
-   18.06.0~ce~3-0~debian
+   5:23.0.5-1~debian.11~bullseye
+   5:23.0.4-1~debian.11~bullseye
+   <...>
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:18.09.0~3-0~debian-stretch
+   $ VERSION_STRING=5:23.0.5-1~debian.11~bullseye
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
@@ -184,11 +171,9 @@ Raspbian.
    This command downloads a test image and runs it in a container. When the
    container runs, it prints a confirmation message and exits.
 
-You have now successfully installed and started Docker Engine. The `docker` user
-group exists but contains no users, which is why you're required to use `sudo`
-to run Docker commands. Continue to [Linux post-install](linux-postinstall.md)
-to allow non-privileged users to run Docker commands and for other optional
-configuration steps.
+You have now successfully installed and started Docker Engine.
+
+{% include root-errors.md %}
 
 #### Upgrade Docker Engine
 
@@ -243,16 +228,14 @@ download a new file each time you want to upgrade Docker Engine.
    This command downloads a test image and runs it in a container. When the
    container runs, it prints a confirmation message and exits.
 
-You have now successfully installed and started Docker Engine. The `docker` user
-group exists but contains no users, which is why you're required to use `sudo`
-to run Docker commands. Continue to [Linux post-install](linux-postinstall.md)
-to allow non-privileged users to run Docker commands and for other optional
-configuration steps.
+You have now successfully installed and started Docker Engine.
+
+{% include root-errors.md %}
 
 #### Upgrade Docker Engine
 
-To upgrade Docker Engine, download the newer package file and repeat the
-[installation procedure](#install-from-a-package), pointing to the new file.
+To upgrade Docker Engine, download the newer package files and repeat the
+[installation procedure](#install-from-a-package), pointing to the new files.
 
 {% include install-script.md %}
 
@@ -272,7 +255,7 @@ To upgrade Docker Engine, download the newer package file and repeat the
     $ sudo rm -rf /var/lib/containerd
     ```
 
-You must delete any edited configuration files manually.
+You have to delete any edited configuration files manually.
 
 ## Next steps
 

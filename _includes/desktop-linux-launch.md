@@ -27,17 +27,17 @@ of these binaries by running the following commands:
 
 ```console
 $ docker compose version
-Docker Compose version v2.5.0
+Docker Compose version v2.17.3
 
 $ docker --version
-Docker version 20.10.14, build a224086349
+Docker version 23.0.5, build bc4487a
 
 $ docker version
 Client: Docker Engine - Community
-Cloud integration: 1.0.24
-Version:           20.10.14
-API version:       1.41
-...
+ Cloud integration: v1.0.31
+ Version:           23.0.5
+ API version:       1.42
+<...>
 ```
 
 To enable Docker Desktop to start on login, from the Docker menu, select

@@ -11,6 +11,7 @@ redirect_from:
   - /atomist/configure/advisories/
   - /atomist/integrate/github/
   - /atomist/integrate/deploys/
+  - /engine/scan/
 ---
 
 {% include scout-early-access.md %}
@@ -58,7 +59,7 @@ For more information, see
 ### Artifactory integration
 
 Users of JFrog Artifactory, or JFrog Container Registry, can integrate Docker
-Scout to enable automatic analysis of images. For more information, see
+Scout to enable automatic analysis of images locally and remotely. For more information, see
 [Artifactory integration](./artifactory.md).
 
 ## Docker Scout CLI

@@ -4,6 +4,17 @@ keywords: fig, composition, compose, versions, upgrading, docker
 title: Compose file versions and upgrading
 ---
 
+>**Warning**
+>
+>This page contains information on the legacy versions of Compose, also collectively referred to as Compose V1.
+>From the end of June 2023 Compose V1 won’t be supported anymore.
+>
+>The latest and recommended version of Compose is the [Compose Specification](index.md). 
+>Make sure you switch to [Compose V2](/compose/compose-file/) with the `docker compose` CLI plugin or by activating the **Use Docker Compose V2** setting in Docker Desktop.
+>
+> For more information, see the [Evolution of Compose](/compose/compose-v2/). 
+{: .warning}
+
 The Compose file is a [YAML](https://yaml.org) file defining services,
 networks, and volumes for a Docker application.
 
@@ -11,7 +22,6 @@ The Compose file formats are now described in these references, specific to each
 
 | **Reference file**                                    | **What changed in this version** |
 |:------------------------------------------------------|:---------------------------------|
-| [Compose Specification](index.md) (most current, and recommended) | [Versioning](compose-versioning.md#versioning)  |
 | [Version 3](compose-file-v3.md)                       | [Version 3 updates](#version-3)  |
 | [Version 2](compose-file-v2.md)                       | [Version 2 updates](#version-2)  |
 | Version 1 (Deprecated)                                | [Version 1 updates](#version-1-deprecated)  |
@@ -20,8 +30,6 @@ The topics below explain the differences among the versions, Docker Engine
 compatibility, and [how to upgrade](#upgrading).
 
 ## Compatibility matrix
-
-There are several versions of the Compose file format – 1, 2, 2.x, and 3.x
 
 {% include content/compose-matrix.md %}
 
@@ -79,36 +87,7 @@ Several things differ depending on which version you use:
 
 These differences are explained below.
 
-### Version 1 (Deprecated)
 
-Compose files that do not declare a version are considered "version 1". In those
-files, all the [services](compose-file-v3.md#service-configuration-reference) are
-declared at the root of the document.
-
-Version 1 is supported by **Compose up to 1.6.x**. It will be deprecated in a
-future Compose release.
-
-Version 1 files cannot declare named
-[volumes](compose-file-v3.md#volume-configuration-reference), [networks](compose-file-v3.md#network-configuration-reference) or
-[build arguments](compose-file-v3.md#args).
-
-Compose does not take advantage of [networking](../networking.md) when you
-use version 1: every container is placed on the default `bridge` network and is
-reachable from every other container at its IP address. You need to use
-`links` to enable discovery between containers.
-
-Example:
-
-    web:
-      build: .
-      ports:
-       - "8000:5000"
-      volumes:
-       - .:/code
-      links:
-       - redis
-    redis:
-      image: redis
 
 ### Version 2
 
@@ -394,6 +373,38 @@ Introduces the following additional parameters:
    configurations. This option is only supported when deploying swarm services
    using `docker stack deploy`.
 
+### Version 1 (Deprecated)
+
+Compose versions below 1.6.x are 
+
+Compose files that do not declare a version are considered "version 1".  In those
+files, all the [services](compose-file-v3.md#service-configuration-reference) are
+declared at the root of the document.
+
+Version 1 is supported by Compose up to 1.6.x** and has been deprecated.
+
+Version 1 files cannot declare named
+[volumes](compose-file-v3.md#volume-configuration-reference), [networks](compose-file-v3.md#network-configuration-reference) or
+[build arguments](compose-file-v3.md#args).
+
+Compose does not take advantage of [networking](../networking.md) when you
+use version 1: every container is placed on the default `bridge` network and is
+reachable from every other container at its IP address. You need to use
+`links` to enable discovery between containers.
+
+Example:
+
+    web:
+      build: .
+      ports:
+       - "8000:5000"
+      volumes:
+       - .:/code
+      links:
+       - redis
+    redis:
+      image: redis
+
 ## Upgrading
 
 ### Version 2.x to 3.x
@@ -432,6 +443,28 @@ Compose files. (For more information, see [Extending services](../extends.md#ext
 -   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
 -   `link_local_ips` in `networks`: This option has not been introduced in
     `version: "3.x"` Compose files.
+
+#### Compatibility mode
+
+`docker-compose` 1.20.0 introduces a new `--compatibility` flag designed to
+help developers transition to version 3 more easily. When enabled,
+`docker-compose` reads the `deploy` section of each service's definition and
+attempts to translate it into the equivalent version 2 parameter. Currently,
+the following deploy keys are translated:
+
+- [resources](compose-file-v3.md#resources) limits and memory reservations
+- [replicas](compose-file-v3.md#replicas)
+- [restart_policy](compose-file-v3.md#restart_policy) `condition` and `max_attempts`
+
+All other keys are ignored and produce a warning if present. You can review
+the configuration that will be used to deploy by using the `--compatibility`
+flag with the `config` command.
+
+> Do not use this in production
+>
+> We recommend against using `--compatibility` mode in production. The
+> resulting configuration is only an approximate using non-Swarm mode
+> properties, it may produce unexpected results.
 
 ### Version 1 to 2.x
 
@@ -516,29 +549,4 @@ It's more complicated if you're using particular configuration features:
           data:
             external: true
 
-## Compatibility mode
 
-`docker-compose` 1.20.0 introduces a new `--compatibility` flag designed to
-help developers transition to version 3 more easily. When enabled,
-`docker-compose` reads the `deploy` section of each service's definition and
-attempts to translate it into the equivalent version 2 parameter. Currently,
-the following deploy keys are translated:
-
-- [resources](compose-file-v3.md#resources) limits and memory reservations
-- [replicas](compose-file-v3.md#replicas)
-- [restart_policy](compose-file-v3.md#restart_policy) `condition` and `max_attempts`
-
-All other keys are ignored and produce a warning if present. You can review
-the configuration that will be used to deploy by using the `--compatibility`
-flag with the `config` command.
-
-> Do not use this in production!
->
-> We recommend against using `--compatibility` mode in production. Because the
-> resulting configuration is only an approximate using non-Swarm mode
-> properties, it may produce unexpected results.
-
-## Compose file format references
-- [Compose Specification](index.md)
-- [Compose file version 3](compose-file-v3.md)
-- [Compose file version 2](compose-file-v2.md)

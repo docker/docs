@@ -2,7 +2,7 @@
 description: Troubleshooting topics
 keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop
 title: Troubleshoot topics
-toc_max: 3
+toc_max: 4
 ---
 
 ## Topics for all platforms
@@ -79,6 +79,12 @@ If not, the command prints `kern.hv_support: 0`.
 See also, [Hypervisor Framework
 Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/){:target="_blank" rel="noopener" class="_"}
 in the Apple documentation, and Docker Desktop [Mac system requirements](../install/mac-install.md#system-requirements).
+
+### VPNKit keeps breaking
+
+In Docker Desktop version 4.19, gVisor replaced VPNKit to enhance the performance of VM networking when using the Virtualization framework on macOS Ventura and above. 
+
+To continue using VPNKit, add `"networkType":"vpnkit"` to your `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
 
 ## Topics for Windows
 
@@ -222,7 +228,7 @@ when using `~` because the POSIX layer translates it to a DOS path. `MSYS_NO_PAT
 
 ### Virtualization
 
-Your machine must have the following features for Docker Desktop to function correctly.
+Your machine must have the following features for Docker Desktop to function correctly:
 
 #### WSL 2 and Windows Home
 
@@ -263,8 +269,9 @@ Performance tab on the Task Manager:
 ![Task Manager](../images/virtualization-enabled.png){:width="700px"}
 
 If you manually uninstall Hyper-V, WSL 2 or disable virtualization,
-Docker Desktop cannot start. See [Unable to run Docker for Windows on
-Windows 10 Enterprise](https://github.com/docker/for-win/issues/74){:target="_blank" rel="noopener" class="_"}.
+Docker Desktop cannot start. 
+
+To enable nested virtualisation, see [Run Docker Desktop for Windows in a VM or VDI environment](../vm-vdi.md#enable-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
 
 #### Hypervisor enabled at Windows startup
 
@@ -278,6 +285,17 @@ Virtual Box) and video game installers disable hypervisor on boot. To reenable i
 3. Restart Windows.
 
 You can also refer to the [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt){:target="_blank" rel="noopener" class="_"} on Code flow guard (CFG) settings.
+
+#### Enable nested virtualization
+
+If you are using Hyper-V and you get the following error message when running Docker Desktop in a VDI environment:
+
+```console
+The Virtual Machine Management Service failed to start the virtual machine 'DockerDesktopVM' because one of the Hyper-V components is not running
+```
+
+Try [enabling nested virtualization](../vm-vdi.md#enable-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
+
 
 ### Windows containers and Windows Server
 

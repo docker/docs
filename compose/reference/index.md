@@ -28,63 +28,49 @@ You can also see this information by running `docker compose --help` from the
 command line.
 
 ```none
+Usage:  docker compose [OPTIONS] COMMAND
+
 Define and run multi-container applications with Docker.
 
-Usage:
-  docker compose [-f <arg>...] [--profile <name>...] [options] [COMMAND] [ARGS...]
-  docker compose -h|--help
-
 Options:
-  -f, --file FILE             Specify an alternate compose file
-                              (default: docker-compose.yml)
-  -p, --project-name NAME     Specify an alternate project name
-                              (default: directory name)
-  --profile NAME              Specify a profile to enable
-  --verbose                   Show more output
-  --log-level LEVEL           DEPRECATED and not working from 2.0 - Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-  --no-ansi                   Do not print ANSI control characters
-  -v, --version               Print version and exit
-  -H, --host HOST             Daemon socket to connect to
-
-  --tls                       Use TLS; implied by --tlsverify
-  --tlscacert CA_PATH         Trust certs signed only by this CA
-  --tlscert CLIENT_CERT_PATH  Path to TLS certificate file
-  --tlskey TLS_KEY_PATH       Path to TLS key file
-  --tlsverify                 Use TLS and verify the remote
-  --skip-hostname-check       Don't check the daemon's hostname against the
-                              name specified in the client certificate
-  --project-directory PATH    Specify an alternate working directory
-                              (default: the path of the Compose file)
-  --compatibility             If set, Compose will attempt to convert deploy
-                              keys in v3 files to their non-Swarm equivalent
+      --ansi string                Control when to print ANSI control characters ("never"|"always"|"auto") (default "auto")
+      --compatibility              Run compose in backward compatibility mode
+      --env-file stringArray       Specify an alternate environment file.
+  -f, --file stringArray           Compose configuration files
+      --parallel int               Control max parallelism, -1 for unlimited (default -1)
+      --profile stringArray        Specify a profile to enable
+      --project-directory string   Specify an alternate working directory
+                                   (default: the path of the, first specified, Compose file)
+  -p, --project-name string        Project name
 
 Commands:
-  build              Build or rebuild services
-  bundle             Generate a Docker bundle from the Compose file
-  config             Validate and view the Compose file
-  create             Create services
-  down               Stop and remove containers, networks, images, and volumes
-  events             Receive real time events from containers
-  exec               Execute a command in a running container
-  help               Get help on a command
-  images             List images
-  kill               Kill containers
-  logs               View output from containers
-  pause              Pause services
-  port               Print the public port for a port binding
-  ps                 List containers
-  pull               Pull service images
-  push               Push service images
-  restart            Restart services
-  rm                 Remove stopped containers
-  run                Run a one-off command
-  scale              Set number of containers for a service
-  start              Start services
-  stop               Stop services
-  top                Display the running processes
-  unpause            Unpause services
-  up                 Create and start containers
-  version            Show the Docker Compose version information
+  build       Build or rebuild services
+  config      Parse, resolve and render compose file in canonical format
+  cp          Copy files/folders between a service container and the local filesystem
+  create      Creates containers for a service.
+  down        Stop and remove containers, networks
+  events      Receive real time events from containers.
+  exec        Execute a command in a running container.
+  images      List images used by the created containers
+  kill        Force stop service containers.
+  logs        View output from containers
+  ls          List running compose projects
+  pause       Pause services
+  port        Print the public port for a port binding.
+  ps          List containers
+  pull        Pull service images
+  push        Push service images
+  restart     Restart service containers
+  rm          Removes stopped service containers
+  run         Run a one-off command on a service.
+  start       Start services
+  stop        Stop services
+  top         Display the running processes
+  unpause     Unpause services
+  up          Create and start containers
+  version     Show the Docker Compose version information
+
+Run 'docker compose COMMAND --help' for more information on a command.
 ```
 
 You can use Docker Compose binary, `docker compose [-f <arg>...] [options]

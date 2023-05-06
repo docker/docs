@@ -34,6 +34,11 @@ redirect_from:
 
 ## 2.17.0
 {% include release-date.html date="2023-03-23" %}
+### Upgrade notes
+- Project name validation is more strictly enforced. Project names can only include letters, numbers, `_`, `-` and must be lowercase and start with a letter or number.
+- Boolean fields in YAML must be either `true` or `false`. Deprecated YAML 1.1 values such as "on" or "no" are not supported.
+- Duplicate YAML merge keys (`<<`) are rejected.
+
 ### Update
 - Dependencies upgrade: bump buildkit to v0.11.4
 - Dependencies upgrade: bump buildx to v0.10.4
@@ -52,8 +57,6 @@ redirect_from:
 * Added support of `NO_COLOR` env var. Fixed [compose#10340](https://github.com/docker/compose/issues/10340){:
   target="_blank" rel="noopener" class="_"}
 * Progress writer now uses `dockercli.Err` stream. Fixed [compose#10366](https://github.com/docker/compose/issues/10366){:
-  target="_blank" rel="noopener" class="_"}
-* Introduced `dockerfile_inline`. Fixed [compose#8077](https://github.com/docker/compose/issues/8077){:
   target="_blank" rel="noopener" class="_"}
 * Added support for `additional_contexts` in the `build` service configuration. Fixed [compose#9461](https://github.com/docker/compose/issues/9461){:
   target="_blank" rel="noopener" class="_"} [compose#9961](https://github.com/docker/compose/issues/9961){:
