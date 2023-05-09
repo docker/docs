@@ -4,10 +4,6 @@ keywords: Docker, Docker Hub, SSO FAQs, single sign-on
 title: Frequently asked questions
 ---
 
-### As a Docker Business customer, what steps should I follow to create a company?
-
-Contact your designated CSM team member or Docker Support.
-
 ### Are existing subscriptions affected when a company is created and organizations are added to the company?
 
 Subscriptions and related billing details continue to be managed at the organization level at this time.
