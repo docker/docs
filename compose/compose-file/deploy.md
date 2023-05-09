@@ -8,4 +8,4 @@ fetch_remote:
 
 >**Note**
 >
->Build is an OPTIONAL part of the Compose specification.
+>Deploy is an OPTIONAL part of the Compose specification.
