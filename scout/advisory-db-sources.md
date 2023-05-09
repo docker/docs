@@ -1,6 +1,6 @@
 ---
 description: More details on the Docker Scout Advisory Database and CVE-to-package matching service.
-keywords: scanning, vulnerabilities, Hub, supply chain, security
+keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security
 title: Advisory Database sources and matching service
 ---
 
@@ -61,7 +61,7 @@ images that Docker Scout can then match to CVEs. Find more details on how this
 works in the [Advanced image analysis
 document](http://./advanced-image-analysis.md).
 
-Docker Scout is ideal for scanning images in Docker Desktop and Docker Hub, but
+Docker Scout is ideal for analyzing images in Docker Desktop and Docker Hub, but
 the flexibility of the approach also means it can integrate with other image
 sources, for example, [JFrog
 Artifactory](https://docs.docker.com/scout/artifactory/).
@@ -72,7 +72,6 @@ Many other tools use fuzzy [Common Product Enumeration
 (CPE)](https://en.wikipedia.org/wiki/Common_Platform_Enumeration) matching with
 wild cards to known vulnerabilities with the versions of software packages they affect.
 This can return a lot of false positives which you need to triage.
-
 
 The typical structure of a CPE match looks like this:
 
@@ -103,3 +102,20 @@ system versions to make more precise matches.
 
 In summary, Docker Scout’s technique improves matching accuracy and reduces the
 number of results that turn out to be false-positives.
+
+## Package ecosystems supported by the Docker Scout Advisory Database
+
+By sourcing vulnerability data from the providers above, Docker Scout is able to support analyzing the following package ecosystems:
+
+- .NET
+- GitHub packages
+- Go
+- Java
+- JavaScript
+- PHP
+- Python
+- RPM
+- Ruby
+- `alpm` (Arch Linux)
+- `apk` (Alpine Linux)
+- `deb` (Debian Linux and derivatives)
