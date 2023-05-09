@@ -1898,6 +1898,8 @@ manuals:
     section:
     - path: /docker-hub/creating-companies/
       title: Overview
+    - path: /docker-hub/new-company/
+      title: Create a company
     - path:  /docker-hub/company-owner/
       title: Manage company owners
     - path: /docker-hub/company-faqs/
