@@ -220,12 +220,12 @@ The default mask length can be configured and is the same for all networks. It i
 
 ##### Overlay network size limitations
 
-Docker recommends creating overlay networks with `/24` blocks. The `/24` overlay network blocks, which limits the network to 256 IP addresses. 
+Docker recommends creating overlay networks with `/24` blocks. The `/24` overlay network blocks limit the network to 256 IP addresses. 
 
 This recommendation addresses [limitations with swarm mode](https://github.com/moby/moby/issues/30820). 
 If you need more than 256 IP addresses, do not increase the IP block size. You can either use `dnsrr` 
 endpoint mode with an external load balancer, or use multiple smaller overlay networks. See 
-[Configure service discovery](#configure-service-discovery) or more information about different endpoint modes.
+[Configure service discovery](#configure-service-discovery) for more information about different endpoint modes.
 
 #### Configure encryption of application data
 

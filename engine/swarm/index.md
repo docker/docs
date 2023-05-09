@@ -91,7 +91,7 @@ services. The swarm manager automatically assigns addresses to the containers
 on the overlay network when it initializes or updates the application.
 
 * **Service discovery:** Swarm manager nodes assign each service in the swarm a
-unique DNS name and load balances running containers. You can query every
+unique DNS name and load balance running containers. You can query every
 container running in the swarm through a DNS server embedded in the swarm.
 
 * **Load balancing:** You can expose the ports for services to an

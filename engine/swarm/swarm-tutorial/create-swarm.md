@@ -73,7 +73,7 @@ machines.
     The `*` next to the node ID indicates that you're currently connected on
     this node.
 
-    Docker Engine swarm mode automatically names the node for the machine host
+    Docker Engine swarm mode automatically names the node with the machine host
     name. The tutorial covers other columns in later steps.
 
 ## What's next?
