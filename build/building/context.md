@@ -97,26 +97,32 @@ The `URL` parameter can refer to three kinds of resources:
 ### Git repositories
 
 When the `URL` parameter points to the location of a Git repository, the
-repository acts as the build context. The builder recursively pulls the
-repository and its submodules. A shallow clone is performed and therefore pulls
-down just the latest commits, not the entire history. A repository is first
-pulled into a temporary directory on your host. After that succeeds, the
-directory is sent to the daemon as the context. Local copy gives you the ability
-to access private repositories using local user credentials, VPN's, and so forth.
+repository acts as the build context.
 
-> **Note**
->
-> If the `URL` parameter contains a fragment the system will recursively clone
-> the repository and its submodules using a `git clone --recursive` command.
+The builder performs a shallow clone of the repository, downloading only
+the HEAD commit, not the entire history.
 
-Git URLs accept a context configuration parameter in the form of a URL fragment,
-separated by a colon (`:`). The first part represents the reference that Git
-will check out, and can be either a branch, a tag, or a remote reference. The
-second part represents a subdirectory inside the repository that will be used
-as a build context.
+The builder recursively clones the repository and any submodules it contains.
 
-For example, run this command to use a directory called `docker` in the branch
-`container`:
+```console
+$ docker build https://github.com/user/myrepo.git
+```
+
+By default, the builder clones the latest commit on the default branch of the
+repository that you specify.
+
+#### URL fragments
+
+You can append URL fragments to the Git repository address to make the builder
+clone a specific branch, tag, and subdirectory of a repository.
+
+The format of the URL fragment is `#ref:dir`, where:
+
+- `ref` is the name of the branch, tag, or remote reference
+- `dir` is a subdirectory inside the repository
+
+For example, the following command uses the `container` branch,
+and the `docker` subdirectory in that branch, as the build context:
 
 ```console
 $ docker build https://github.com/user/myrepo.git#container:docker
@@ -136,10 +142,12 @@ contexts:
 | `myrepo.git#mytag:myfolder`    | `refs/tags/mytag`             | `/myfolder`        |
 | `myrepo.git#mybranch:myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
 
-By default `.git` directory is not kept on Git checkouts. You can set the
-[BuildKit built-in arg `BUILDKIT_CONTEXT_KEEP_GIT_DIR=1`](../../engine/reference/builder.md#buildkit-built-in-build-args)
-to keep it. It can be useful to keep it around if you want to retrieve Git
-information during your build:
+#### Keep `.git` directory
+
+By default, BuildKit doesn't keep the `.git` directory when using Git contexts.
+You can configure BuildKit to keep the directory by setting the
+[`BUILDKIT_CONTEXT_KEEP_GIT_DIR` build argument](../../engine/reference/builder.md#buildkit-built-in-build-args).
+This can be useful to if you want to retrieve Git information during your build:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -150,8 +158,40 @@ RUN --mount=target=. \
 ```
 
 ```console
-$ docker build --build-arg BUILDKIT_CONTEXT_KEEP_GIT_DIR=1 https://github.com/user/myrepo.git#main
+$ docker build \
+  --build-arg BUILDKIT_CONTEXT_KEEP_GIT_DIR=1
+  https://github.com/user/myrepo.git#main
 ```
+
+#### Private repositories
+
+When you specify a Git context that's also a private repository, the builder
+needs you to provide the necessary authentication credentials. You can use
+either SSH or token-based authentication.
+
+Buildx automatically detects and uses SSH credentials if the Git context you
+specify is an SSH or Git address. By default, this uses `$SSH_AUTH_SOCK`.
+You can configure the SSH credentials to use with the
+[`--ssh` flag](../../engine/reference/commandline/buildx_build.md#ssh).
+
+```console
+$ docker buildx build --ssh default git@github.com:user/private.git
+```
+
+If you want to use token-based authentication instead, you can pass the token
+using the
+[`--secret` flag](../../engine/reference/commandline/buildx_build.md#secret).
+
+```console
+$ GIT_AUTH_TOKEN=<token> docker buildx build \
+  --secret id=GIT_AUTH_TOKEN \
+  https://github.com/user/private.git
+```
+
+> **Note**
+>
+> Don't use `--build-arg` for secrets, except for
+> [HTTP proxies](../../network/proxy.md#set-proxy-using-the-cli)
 
 ### Tarball contexts
 
