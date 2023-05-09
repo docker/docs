@@ -19,21 +19,6 @@ exposures (CVEs) for the image in the **Tags** section. The **Tags** tab shows a
 
 The **Images** section of Docker Desktop shows an overview of CVEs for an image and the details view shows all vulnerabilities.
 
-Advanced image analysis supports the following package ecosystems:
-
-- .NET
-- GitHub packages
-- Go
-- Java
-- JavaScript
-- PHP
-- Python
-- RPM
-- Ruby
-- `alpm` (Arch Linux)
-- `apk` (Alpine Linux)
-- `deb` (Debian Linux and derivatives)
-
 ## Activate Advanced image analysis
 
 Advanced image analysis is an early access feature and activated on a

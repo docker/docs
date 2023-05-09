@@ -8,7 +8,7 @@ When the Docker Engine runs in swarm mode, manager nodes implement the
 [Raft Consensus Algorithm](http://thesecretlivesofdata.com/raft/) to manage the global cluster state.
 
 The reason why *Docker swarm mode* is using a consensus algorithm is to make sure that
-all the manager nodes that are in charge of managing and scheduling tasks in the cluster,
+all the manager nodes that are in charge of managing and scheduling tasks in the cluster
 are storing the same consistent state.
 
 Having the same consistent state across the cluster means that in case of a failure,
