@@ -111,9 +111,9 @@ When you run `docker compose up` with this configuration, Compose looks for the 
 
 If an environment variable is not set, Compose substitutes with an empty string. In the example above, if `POSTGRES_VERSION` is not set, the value for the image option is `postgres:`.
 
-> **Important**
+> **Note**
 >
-> `postgres:` is **not** valid image reference. Docker expects either a reference without a tag like `postgres` which defaults to latest or with a tag `postgres:15`.
+> `postgres:` is not a valid image reference. Docker expects either a reference without a tag, like `postgres` which defaults to the latest image, or with a tag such as `postgres:15`.
 
 > **Important**
 >
