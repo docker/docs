@@ -39,7 +39,7 @@ the community uses Docker images, granting insight into user behavior.
 The usage metrics show the number of image pulls by tag or by digest, and breakdowns by
 geolocation, cloud provider, client, and more.
 
-![The insights and analytics tab on the Docker Hub website](./images/insights-and-analytics-tab.png)
+![The insights and analytics tab on the Docker Hub website](./publish/images/insights-and-analytics-tab.png)
 
 You can use the view to select the time span you want to view analytics data and export the data in
 either a summary or raw format.
