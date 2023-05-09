@@ -36,11 +36,12 @@ The following table describes the available CSV parameters that you can pass to
 `--cache-to` and `--cache-from`.
 
 | Name                | Option                  | Type        | Default | Description                                        |
-|---------------------|-------------------------|-------------|---------|----------------------------------------------------|
+| ------------------- | ----------------------- | ----------- | ------- | -------------------------------------------------- |
 | `name`              | `cache-to`,`cache-from` | String      |         | Required. The name of the cache image.             |
 | `account_url`       | `cache-to`,`cache-from` | String      |         | Base URL of the storage account.                   |
 | `secret_access_key` | `cache-to`,`cache-from` | String      |         | Blob storage account key, see [authentication][1]. |
 | `mode`              | `cache-to`              | `min`,`max` | `min`   | Cache layers to export, see [cache mode][2].       |
+| `ignore-error`      | `cache-to`              | Boolean     | `false` | Ignore errors caused by failed cache exports.      |
 
 [1]: #authentication
 [2]: index.md#cache-mode
