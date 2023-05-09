@@ -4,6 +4,7 @@ keywords: format, formatting, output, templates, log
 title: Format command and log output
 redirect_from:
 - /engine/admin/formatting/
+- /config/formatting/
 ---
 
 Docker uses [Go templates](https://golang.org/pkg/text/template/) which you can

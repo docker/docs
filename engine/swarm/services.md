@@ -1036,5 +1036,5 @@ $ docker inspect --format="{{.Config.Hostname}}" hosttempl.1.wo41w8hg8qanxwjwsg4
 ## Learn More
 
 * [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](../reference/commandline/docker.md)
+* [Docker Engine command line reference](../reference/commandline/index.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)

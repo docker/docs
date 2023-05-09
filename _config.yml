@@ -155,9 +155,9 @@ defaults:
 #   - dest is the destination path within the working tree
 #   - src is a list of glob source paths within the remote repository
 fetch-remote:
-  - repo: "https://github.com/docker/cli"
+  - repo: "https://github.com/dvdksn/cli"
     default_branch: "master"
-    ref: "23.0"
+    ref: "docs/refactor-base-cmd"
     paths:
       - dest: "engine/extend"
         src:
@@ -170,8 +170,10 @@ fetch-remote:
           - "docs/reference/run.md"
       - dest: "engine/reference/commandline"
         src:
-          - "docs/reference/commandline/cli.md"
           - "docs/reference/commandline/dockerd.md"
+      - dest: "engine/reference/commandline/index.md"
+        src:
+          - "docs/reference/commandline/docker.md"
 
   - repo: "https://github.com/docker/docker"
     default_branch: "master"

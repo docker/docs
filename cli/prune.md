@@ -4,6 +4,7 @@ keywords: pruning, prune, images, volumes, containers, networks, disk, administr
 title: Prune unused Docker objects
 redirect_from:
 - /engine/admin/pruning/
+- /config/pruning/
 ---
 
 Docker takes a conservative approach to cleaning up unused objects (often

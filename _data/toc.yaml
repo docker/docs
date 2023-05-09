@@ -215,10 +215,8 @@ reference:
     section:
     - path: /engine/reference/run/
       title: Docker run reference
-    - path: /engine/reference/commandline/cli/
-      title: Use the Docker command line
-    - path: /engine/reference/commandline/docker/
-      title: docker (base command)
+    - path: /engine/reference/commandline/
+      title: docker
     - path: /engine/reference/commandline/attach/
       title: docker attach
     - path: /engine/reference/commandline/build/
@@ -1382,10 +1380,6 @@ manuals:
     section:
     - path: /config/daemon/start/
       title: Start the daemon
-    - path: /config/pruning/
-      title: Prune unused objects
-    - path: /config/formatting/
-      title: Format command and log output
     - path: /config/containers/start-containers-automatically/
       title: Start containers automatically
     - path: /config/labels-custom-metadata/
@@ -1554,8 +1548,6 @@ manuals:
         title: Docker and iptables
       - path: /config/daemon/remote-access/
         title: Remote access
-      - path: /engine/context/working-with-contexts/
-        title: Contexts
     - sectiontitle: Engine plugins
       section:
       - path: /engine/extend/
@@ -1618,6 +1610,36 @@ manuals:
         title: Engine 17.03
       - path: /engine/release-notes/prior-releases/
         title: Engine 1.13 and earlier
+
+- sectiontitle: Docker CLI
+  section:
+  - path: /cli/
+    title: Overview
+  - sectiontitle: Using the CLI
+    section:
+    - path: /cli/flags/
+      title: Flags
+    - path: /cli/mapping/
+      title: Port and volume mapping
+    - path: /cli/prune/
+      title: Prune
+    - path: /cli/format/
+      title: Format
+    - path: /cli/context/
+      title: Context
+    - path: /cli/io/
+      title: I/O streams
+  - sectiontitle: Configuration
+    section:
+    - path: /cli/config-file/
+      title: Configuration file
+    - path: /cli/env-vars/
+      title: Environment variables
+  - path: /cli/doc-conventions/
+    title: Documentation conventions
+  - path: /cli/lifecycle/
+    title: Release lifecycle
+
 - sectiontitle: Docker Build
   section:
     - path: /build/

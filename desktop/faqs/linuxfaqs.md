@@ -44,7 +44,7 @@ $ sudo systemctl disable docker docker.socket containerd
 
 The Docker CLI can be used to interact with multiple Docker Engines. For example,
 you can use the same Docker CLI to control a local Docker Engine and to control
-a remote Docker Engine instance running in the cloud. [Docker Contexts](../../engine/context/working-with-contexts.md)
+a remote Docker Engine instance running in the cloud. [Contexts](../../cli/context.md)
 allow you to switch between Docker Engines instances.
 
 When installing Docker Desktop, a dedicated "desktop-linux" context is created to
@@ -82,7 +82,7 @@ desktop-linux
 Current context is now "desktop-linux"
 ```
 
-Refer to the [Docker Context documentation](../../engine/context/working-with-contexts.md) for more details.
+Refer to the [Context documentation](../../cli/context.md) for more details.
 
 ## Why does Docker Desktop for Linux run a VM?
 

@@ -18,8 +18,17 @@ The easiest way to deploy Notary Server is by using Docker Compose. To follow th
   For more detailed documentation about how to deploy Notary Server, see the [instructions to run a Notary service](https://github.com/theupdateframework/notary/blob/master/docs/running_a_service.md){:target="_blank" rel="noopener" class="_"} as well as [the Notary repository](https://github.com/theupdateframework/notary){:target="_blank" rel="noopener" class="_"} for more information.
 3. Make sure that your Docker or Notary client trusts Notary Server's certificate before you try to interact with the Notary server.
 
-See the instructions for [Docker](../../reference/commandline/cli.md#notary) or
+See the instructions for [Docker](#notary-with-docker) or
 for [Notary](https://github.com/docker/notary#using-notary) depending on which one you are using.
+
+## Notary with Docker
+
+If using your own notary server and a self-signed certificate or an internal
+Certificate Authority, you need to place the certificate at
+`tls/<registry_url>/ca.crt` in your Docker config directory.
+
+Alternatively you can trust the certificate globally by adding it to your system's
+list of root Certificate Authorities.
 
 ## If you want to use Notary in production
 

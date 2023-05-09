@@ -425,4 +425,4 @@ $ docker swarm join \
 * [Swarm administration guide](admin_guide.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
 * [Networking overview](../../network/index.md)
-* [Docker CLI reference](../reference/commandline/docker.md)
+* [Docker CLI reference](../reference/commandline/index.md)

@@ -239,5 +239,5 @@ $ docker node rm node-2
 ## Learn more
 
 * [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](../reference/commandline/docker.md)
+* [Docker Engine command line reference](../reference/commandline/index.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)

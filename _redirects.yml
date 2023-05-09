@@ -103,11 +103,11 @@
   - /go/daemon-access/
 "/engine/deprecated/#deprecated-engine-features-1":
   - /go/deprecated/
-"/engine/reference/commandline/cli/#experimental-features":
+"/cli/lifecycle/#experimental-features":
   - /go/experimental/
 "/compose/compose-v2/":
   - /go/compose-v1-eol/
-"/config/formatting/":
+"/cli/format/":
   # Instructions on using Go templates to format CLI output with --format
   - /go/formatting/
 "/?utm_source=docker&utm_medium=inproductad&utm_campaign=20-11nurturecli_docs":

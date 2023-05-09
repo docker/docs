@@ -15,11 +15,11 @@ containerizing your applications. Docker Engine acts as a client-server
 application with:
 
 - A server with a long-running daemon process
-  [`dockerd`](/engine/reference/commandline/dockerd).
+  [`dockerd`](./reference/commandline/dockerd.md).
 - APIs which specify interfaces that programs can use to talk to and instruct
   the Docker daemon.
 - A command line interface (CLI) client
-  [`docker`](/engine/reference/commandline/cli/).
+  [`docker`](./reference/commandline/index.md).
 
 The CLI uses [Docker APIs](api/index.md) to control or interact with the Docker
 daemon through scripting or direct CLI commands. Many other Docker applications
@@ -74,24 +74,12 @@ For more details, see
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
-          <a href="/config/pruning/"><img src="/assets/images/engine-pruning.svg" alt="A pair of scissors" width="70px" height="70px"></a>
-        </div>
-        <h2><a href="/config/pruning/">Prune</a></h2>
-        <p>Tidy up unused resources.</p>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-      <div class="component">
-        <div class="component-icon">
           <a href="/config/daemon/"><img src="/assets/images/engine-configure-daemon.svg" alt="Settings cogwheel with stars" width="70px" height="70px"></a>
         </div>
         <h2><a href="/config/daemon/">Configure the daemon</a></h2>
         <p>Delve into the configuration options of the Docker daemon.</p>
       </div>
     </div>
-  </div>
-  <!--start row-->
-  <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">
@@ -101,6 +89,9 @@ For more details, see
         <p>Run Docker without root privileges.</p>
       </div>
     </div>
+  </div>
+  <!--start row-->
+  <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
       <div class="component">
         <div class="component-icon">

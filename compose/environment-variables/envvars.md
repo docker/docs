@@ -21,7 +21,7 @@ This page contains information on how you can change the following pre-defined e
 - `COMPOSE_REMOVE_ORPHANS`
 - `COMPOSE_PATH_SEPARATOR`
 
-Compose also inherits common Docker CLI environment variables, such as `DOCKER_HOST` and `DOCKER_CONTEXT`. See [Docker CLI environment variable reference](/engine/reference/commandline/cli/#environment-variables) for details.
+Compose also inherits common Docker CLI environment variables, such as `DOCKER_HOST` and `DOCKER_CONTEXT`. See [Docker CLI environment variable reference](../../cli/env-vars.md) for details.
 
 ## Methods to override 
 
@@ -126,7 +126,7 @@ The pre-definded environment variables listed below are deprecated in [V2](../co
 
 - `COMPOSE_API_VERSION`
     By default the API version is negotiated with the server. Use `DOCKER_API_VERSION`.  
-    See the [Docker CLI environment variable reference](../../../engine/reference/commandline/cli/#environment-variables){:target="_blank" rel="noopener" class="_"} page.
+    See the [Docker CLI environment variable reference](../../cli/env-vars.md) page.
 - `COMPOSE_HTTP_TIMEOUT`
 - `COMPOSE_TLS_VERSION`
 - `COMPOSE_FORCE_WINDOWS_HOST`

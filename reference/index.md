@@ -62,9 +62,9 @@ various APIs, CLIs, drivers and specifications, and file formats.
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                 <a href="/engine/reference/commandline/cli/"><img src="/assets/images/terminal.svg" alt="Docker CLI" width="70" height="70"></a>
+                 <a href="/engine/reference/commandline/"><img src="/assets/images/terminal.svg" alt="Docker CLI" width="70" height="70"></a>
             </div>
-                <h2 id="docker-for-linux"><a href="/engine/reference/commandline/cli/">Docker CLI</a></h2>
+                <h2 id="docker-for-linux"><a href="/engine/reference/commandline/">Docker CLI</a></h2>
                 <p>The main CLI for Docker, includes all <code>docker</code> commands.</p>
         </div>
      </div>

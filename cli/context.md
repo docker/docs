@@ -2,8 +2,9 @@
 title: Docker Context
 description: Learn about Docker Context
 keywords: engine, context, cli, kubernetes
+redirect_from:
+  - /engine/context/working-with-contexts/
 ---
-
 
 ## Introduction
 
@@ -12,8 +13,6 @@ This guide shows how _contexts_ make it easy for a **single Docker CLI** to mana
 A single Docker CLI can have multiple contexts. Each context contains all of the endpoint and security information required to manage a different cluster or node. The `docker context` command makes it easy to configure these contexts and switch between them.
 
 As an example, a single Docker client on your company laptop might be configured with two contexts; **dev-k8s** and **prod-swarm**. **dev-k8s** contains the endpoint data and security credentials to configure and manage a Kubernetes cluster in a development environment. **prod-swarm** contains everything required to manage a Swarm cluster in a production environment. Once these contexts are configured, you can use the top-level `docker context use <context-name>` to easily switch between them.
-
-For information on using Docker Context to deploy your apps to the cloud, see [Deploying Docker containers on Azure](../../cloud/aci-integration.md) and [Deploying Docker containers on ECS](../../cloud/ecs-integration.md).
 
 ## Prerequisites
 

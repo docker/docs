@@ -57,7 +57,7 @@ desktop-linux * docker
 ```
 
 This is because the Docker driver builders are automatically pulled from the
-available [Docker Contexts](../../engine/context/working-with-contexts.md). When
+available [Docker Contexts](../../cli/context.md). When
 you add new contexts using `docker context create`, these will appear in your
 list of buildx builders.
 
