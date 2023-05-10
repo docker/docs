@@ -502,7 +502,7 @@ x-aws-cloudformation:
               StatusCode: 'HTTP_301'
         Protocol: HTTP
         Port: 80
-    WebappTCP443Listener:
+    WebTCP443Listener:
       Properties:
         Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
