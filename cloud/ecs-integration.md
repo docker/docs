@@ -485,10 +485,24 @@ services:
     image: acme/webapp
     ports:
       - "80:80"
+      - "443:443"
 
 x-aws-cloudformation:
   Resources:
-    WebappTCP80Listener:
+    WebTCP80Listener:
+      Properties:
+        DefaultActions:
+          - Type: redirect
+            RedirectConfig:
+              Host: '#{host}'
+              Path: '/#{path}'
+              Port: '443'
+              Protocol: 'HTTPS'
+              Query: '#{query}'
+              StatusCode: 'HTTP_301'
+        Protocol: HTTP
+        Port: 80
+    WebappTCP443Listener:
       Properties:
         Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
