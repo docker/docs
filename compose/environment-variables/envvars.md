@@ -120,9 +120,10 @@ When enabled, Compose doesn't try to detect orphaned containers for the project.
 
 Specifies the maximum level of parallelism for concurrent engine calls.
 
-## Deprecated in Compose v2
+## Unsupported in Compose V2
 
-The pre-definded environment variables listed below are deprecated in [V2](../compose-v2/index.md).  
+The environment variables listed below have no effect in Compose V2.
+For more information, see [Migrate to Compose V2](../migrate.md).
 
 - `COMPOSE_API_VERSION`
     By default the API version is negotiated with the server. Use `DOCKER_API_VERSION`.  
