@@ -14,8 +14,8 @@ if you have not already done so.
 The samples should help you to:
 
 - define services based on Docker images using
-  [Compose files](compose-file/index.md) `docker-compose.yml` and
-  `docker-stack.yml` files
+  [Compose files](compose-file/index.md): `docker-compose.yml` and
+  `docker-stack.yml`
 - understand the relationship between `docker-compose.yml` and
   [Dockerfiles](/engine/reference/builder/)
 - learn how to make calls to your application services from Compose files
@@ -24,16 +24,19 @@ The samples should help you to:
 ## Samples tailored to demo Compose
 
 These samples focus specifically on Docker Compose:
-https://github.com/docker/awesome-compose/tree/master/elasticsearch-logstash-kibana/logstash
 
-- [Quickstart: Compose and Django](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/django/README.md) - Shows how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
+- [Quickstart: Compose and ELK](https://github.com/docker/awesome-compose/tree/master/elasticsearch-logstash-kibana/logstash/README.md) - Shows
+  how to use Docker Compose to set up and run ELK - Elasticsearch-Logstash-Kibana.
 
-- [Quickstart: Compose and Rails](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/README.md) - Shows how to use
-Docker Compose to set up and run a Rails/PostgreSQL app.
+- [Quickstart: Compose and Django](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/django/README.md) - Shows
+  how to use Docker Compose to set up and run a simple Django/PostgreSQL app.
 
-- [Quickstart: Compose and WordPress](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/wordpress/README.md) - Shows how to
-use Docker Compose to set up and run WordPress in an isolated environment
-with Docker containers.
+- [Quickstart: Compose and Rails](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/README.md) - Shows
+  how to use Docker Compose to set up and run a Rails/PostgreSQL app.
+
+- [Quickstart: Compose and WordPress](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/wordpress/README.md) - Shows
+  how to use Docker Compose to set up and run WordPress in an isolated
+  environment with Docker containers.
 
 ## Awesome Compose samples
 
