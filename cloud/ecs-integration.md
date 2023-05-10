@@ -489,7 +489,7 @@ services:
 
 x-aws-cloudformation:
   Resources:
-    WebTCP80Listener:
+    WebappTCP80Listener:
       Properties:
         DefaultActions:
           - Type: redirect
@@ -502,7 +502,7 @@ x-aws-cloudformation:
               StatusCode: 'HTTP_301'
         Protocol: HTTP
         Port: 80
-    WebTCP443Listener:
+    WebappTCP443Listener:
       Properties:
         Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
