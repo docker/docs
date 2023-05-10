@@ -15,7 +15,7 @@ A good example of when you might use this is an application which needs to acces
 
 ## Control startup
 
-On startup, Compose does not wait until a container is "ready", only until it's running. This can cause issues if, for example you have a relational database system that needs to start its own services before being able to handle incoming connections.
+On startup, Compose does not wait until a container is "ready", only until it's running. This can cause issues if, for example, you have a relational database system that needs to start its own services before being able to handle incoming connections.
 
 The solution for detecting the ready state of a service is  to use the `condition` attribute with one of the following options:
 
