@@ -48,7 +48,7 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
 
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
+  use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
 
 ## Resources
 

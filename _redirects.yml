@@ -105,7 +105,7 @@
   - /go/deprecated/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
-"/compose/compose-v2/":
+"/compose/migrate/":
   - /go/compose-v1-eol/
 "/config/formatting/":
   # Instructions on using Go templates to format CLI output with --format

@@ -1766,18 +1766,20 @@ manuals:
     title: Overview
   - path: /compose/features-uses/
     title: Key features and use cases
-  - path: /compose/compose-v2/
-    title: Evolution of Compose
+  - path: /compose/history/
+    title: History of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
         title: Overview
       - path: /compose/install/linux/
-        title: Install the Compose plugin
-      - path: /compose/install/other/
-        title: Install the Compose standalone
+        title: Install Compose plugin
+      - path: /compose/install/standalone/
+        title: Install Compose standalone
       - path: /compose/install/uninstall/
         title: Uninstall Compose
+  - path: /compose/migrate/
+    title: Migrate to Compose V2
   - path: /compose/gettingstarted/
     title: Try Docker Compose
 
