@@ -8,7 +8,7 @@ redirect_from:
 ---
 {% include compose-eol.md %}
 
-Environment variables are dealt with by either the Compose file or the CLI. Both have multiple ways you can substitute in or set, your environment variables. This is outlined below. 
+Environment variables are dealt with by either the Compose file or the CLI. Both have multiple ways you can substitute in or set your environment variables. This is outlined below. 
 
 ## Compose file
 
@@ -28,7 +28,7 @@ services:
     image: "webapp:${TAG}"
 ```
 
-When you run `docker compose up`, the `web` service defined in the Compose file substitues in the
+When you run `docker compose up`, the `web` service defined in the Compose file substitutes in the
 image `webapp:v1.5` which was set in the `.env` file. You can verify this with the
 [config command](../../engine/reference/commandline/compose_config.md), which prints your resolved application config to the terminal:
 
