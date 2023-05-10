@@ -118,7 +118,7 @@ The SSO implementation is already "just in time". Admins don't have to create us
 
 ### Will there be IdP initiated logins? Does Docker plan to support SSO logins outside of Hub and Desktop?
 
-We currently do have any plans to enable IdP initiated logins.
+We currently do not have any plans to enable IdP initiated logins.
 
 ### Build agents - For customers using SSO, do they need to create a bot account to fill a seat within the dockerorg?
 
