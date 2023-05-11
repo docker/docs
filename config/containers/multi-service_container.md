@@ -107,10 +107,14 @@ Use a process manager like `supervisord`. This is a moderately heavy-weight
 approach that requires you to package `supervisord` and its configuration in
 your image (or base your image on one that includes `supervisord`), along with
 the different applications it manages. Then you start `supervisord`, which
-manages your processes for you. Here is an example Dockerfile using this
-approach, that assumes the pre-written `supervisord.conf`, `my_first_process`,
-and `my_second_process` files all exist in the same directory as your
-Dockerfile.
+manages your processes for you.
+
+The following Dockerfile example shows this approach. The example assumes that
+these files exist at the root of the build context:
+
+- `supervisord.conf`
+- `my_first_process`
+- `my_second_process`
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -121,4 +125,19 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY my_first_process my_first_process
 COPY my_second_process my_second_process
 CMD ["/usr/bin/supervisord"]
+```
+
+If you want to make sure both processes output their `stdout` and `stderr` to
+the container logs, you can add the following to the `supervisord.conf` file:
+
+```ini
+[supervisord]
+nodaemon=true
+logfile=/dev/null
+logfile_maxbytes=0
+
+[program:app]
+stdout_logfile=/dev/fd/1
+stdout_logfile_maxbytes=0
+redirect_stderr=true
 ```
