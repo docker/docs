@@ -485,7 +485,6 @@ services:
     image: acme/webapp
     ports:
       - "80:80"
-      - "443:443"
 
 x-aws-cloudformation:
   Resources:
@@ -517,6 +516,16 @@ x-aws-cloudformation:
         LoadBalancerArn:
           Ref: LoadBalancer
       Type: AWS::ElasticLoadBalancingV2::Listener
+    Default443Ingress:
+      Properties:
+        CidrIp: 0.0.0.0/0
+        Description: web:443/tcp on default network
+        FromPort: 443
+        GroupId:
+          Ref: DefaultNetwork
+        IpProtocol: TCP
+        ToPort: 443
+      Type: AWS::EC2::SecurityGroupIngress
 ```
 
 ## Using existing AWS network resources
