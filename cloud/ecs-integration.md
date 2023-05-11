@@ -485,6 +485,7 @@ services:
     image: acme/webapp
     ports:
       - "80:80"
+      - "443:443"
 
 x-aws-cloudformation:
   Resources:
