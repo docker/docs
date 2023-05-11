@@ -485,7 +485,6 @@ services:
     image: acme/webapp
     ports:
       - "80:80"
-      - "443:443"
 
 x-aws-cloudformation:
   Resources:
@@ -506,8 +505,17 @@ x-aws-cloudformation:
       Properties:
         Certificates:
           - CertificateArn: "arn:aws:acm:certificate/123abc"
+        DefaultActions:
+          - Type: forward
+            ForwardConfig:
+              TargetGroups:
+                - TargetGroupArn:
+                    Ref: WebappTCP80TargetGroup
         Protocol: HTTPS
         Port: 443
+        LoadBalancerArn:
+          Ref: LoadBalancer
+      Type: AWS::ElasticLoadBalancingV2::Listener
 ```
 
 ## Using existing AWS network resources
