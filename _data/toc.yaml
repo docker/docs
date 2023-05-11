@@ -1625,6 +1625,8 @@ manuals:
       title: Prune
     - path: /cli/format/
       title: Format
+    - path: /cli/filter/
+      title: Filter
     - path: /cli/context/
       title: Context
     - path: /cli/io/
