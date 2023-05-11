@@ -101,7 +101,7 @@ fixes in [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="
   support in BuildKit v0.11.0+. {% include github_issue.md repo="docker/buildx" number="1482" %}
 * Buildx now remembers the last activity for a builder for better organization
   of builder instances. {% include github_issue.md repo="docker/buildx" number="1439" %}
-* Bake definition now supports [null values](bake/file-definition.md#null-values)
+* Bake definition now supports null values for [variables](bake/reference.md#variable) and [labels](bake/reference.md#targetlabels)
   for build arguments and labels to use the defaults set in the Dockerfile {% include github_issue.md repo="docker/buildx" number="1449" %}
 * The [`buildx imagetools inspect` command](../engine/reference/commandline/buildx_imagetools_inspect.md)
   now supports showing SBOM and Provenance data {% include github_issue.md repo="docker/buildx" number="1444" %}

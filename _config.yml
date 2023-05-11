@@ -269,3 +269,11 @@ fetch-remote:
       - dest: "compose/compose-file/deploy.md"
         src:
          - "deploy.md"
+
+  - repo: "https://github.com/docker/buildx"
+    default_branch: "master"
+    ref: "v0.10"
+    paths:
+      - dest: "build/bake/reference.md"
+        src:
+          - "docs/bake-reference.md"
