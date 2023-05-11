@@ -1688,8 +1688,8 @@ manuals:
       section:
         - path: /build/bake/
           title: Overview
-        - path: /build/bake/file-definition/
-          title: File definition
+        - path: /build/bake/reference/
+          title: Bake file reference
         - path: /build/bake/configuring-build/
           title: Configuring builds
         - path: /build/bake/hcl-funcs/
@@ -1698,6 +1698,8 @@ manuals:
           title: Build contexts and linking targets
         - path: /build/bake/compose-file/
           title: Building from Compose file
+        - path: /build/bake/remote-definition/
+          title: Remote Bake file definition
     - sectiontitle: Attestations
       section:
         - path: /build/attestations/

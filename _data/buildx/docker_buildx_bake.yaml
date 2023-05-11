@@ -186,8 +186,8 @@ examples: |-
     $ docker buildx bake -f docker-bake.dev.hcl db webapp-release
     ```
 
-    See our [file definition](/build/bake/file-definition/)
-    guide for more details.
+    See the [Bake file reference](/build/bake/reference/)
+    for more details.
 
     ### Do not use cache when building the image (--no-cache) {#no-cache}
 
