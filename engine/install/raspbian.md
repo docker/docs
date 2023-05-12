@@ -1,17 +1,14 @@
 ---
-description: Instructions for installing Docker Engine on Debian
+description: Instructions for installing Docker Engine on Raspbian
 keywords:
-  requirements, apt, installation, debian, install, uninstall, upgrade, update
+  requirements, apt, installation, raspbian, install, uninstall, upgrade, update
 redirect_from:
-  - /engine/installation/debian/
-  - /engine/installation/linux/debian/
-  - /engine/installation/linux/docker-ce/debian/
-  - /install/linux/docker-ce/debian/
-title: Install Docker Engine on Debian
+  - /engine/installation/linux/raspbian/
+title: Install Docker Engine on Raspbian
 toc_max: 4
 ---
 
-To get started with Docker Engine on Debian, make sure you
+To get started with Docker Engine on Raspbian, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
 [installation steps](#installation-methods).
 
@@ -19,15 +16,14 @@ To get started with Docker Engine on Debian, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need the 64-bit version of one of these Debian
+To install Docker Engine, you need the 64-bit version of one of these Raspbian
 versions:
 
-- Debian Bookworm 12 (testing)
-- Debian Bullseye 11 (stable)
-- Debian Buster 10 (oldstable)
+- Raspbian Bookworm 12 (testing)
+- Raspbian Bullseye 11 (stable)
+- Raspbian Buster 10 (oldstable)
 
-Docker Engine for Debian is compatible with x86_64 (or amd64), armhf, and arm64
-architectures.
+Docker Engine for Raspbian is compatible with the armhf architecture.
 
 ### Uninstall old versions
 
@@ -71,7 +67,7 @@ Docker from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/debian" %}
+{% assign download-url-base = "https://download.docker.com/linux/raspbian" %}
 
 1.  Update the `apt` package index and install packages to allow `apt` to use a
     repository over HTTPS:
@@ -132,15 +128,15 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:23.0.5-1~debian.11~bullseye
-   5:23.0.4-1~debian.11~bullseye
+   5:23.0.5-1~raspbian.11~bullseye
+   5:23.0.4-1~raspbian.11~bullseye
    <...>
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:23.0.5-1~debian.11~bullseye
+   $ VERSION_STRING=5:23.0.5-1~raspbian.11~bullseye
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
@@ -177,7 +173,7 @@ download a new file each time you want to upgrade Docker Engine.
 1. Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){:
    target="_blank" rel="noopener" class="_" }.
 
-2. Select your Debian version in the list.
+2. Select your Raspbian version in the list.
 
 3. Go to `pool/stable/` and select the applicable architecture (`amd64`,
    `armhf`, `arm64`, or `s390x`).
