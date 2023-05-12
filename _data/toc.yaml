@@ -1308,6 +1308,8 @@ manuals:
       title: SLES
     - path: /engine/install/ubuntu/
       title: Ubuntu
+    - path: /engine/install/raspbian/
+      title: Raspbian
     - path: /engine/install/binaries/
       title: Binaries
     - path: /engine/install/linux-postinstall/
