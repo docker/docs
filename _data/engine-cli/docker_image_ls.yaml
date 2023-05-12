@@ -1,7 +1,7 @@
 command: docker image ls
 aliases: docker image ls, docker image list, docker images
 short: List images
-long: See [docker images](images.md) for more information.
+long: This command is an alias for 'docker images'. See [docker images](images.md) for more information.
 usage: docker image ls [OPTIONS] [REPOSITORY[:TAG]]
 pname: docker image
 plink: docker_image.yaml

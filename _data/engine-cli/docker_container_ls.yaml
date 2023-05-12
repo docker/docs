@@ -1,7 +1,7 @@
 command: docker container ls
 aliases: docker container ls, docker container list, docker container ps, docker ps
 short: List containers
-long: See [docker ps](ps.md) for more information.
+long: This command is an alias for 'docker ps'. See [docker ps](ps.md) for more information.
 usage: docker container ls [OPTIONS]
 pname: docker container
 plink: docker_container.yaml
