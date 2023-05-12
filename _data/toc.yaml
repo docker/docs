@@ -1368,6 +1368,8 @@ manuals:
         title: None
     - path: /network/proxy/
       title: Configure Docker to use a proxy server
+    - path: /config/daemon/ipv6/
+      title: Use IPv6
     - sectiontitle: Networking tutorials
       section:
       - path: /network/network-tutorial-standalone/
@@ -1550,8 +1552,6 @@ manuals:
         title: Configuration overview
       - path: /config/daemon/systemd/
         title: Configure with systemd
-      - path: /config/daemon/ipv6/
-        title: Use IPv6
       - path: /config/containers/live-restore/
         title: Keep containers alive during daemon downtime
       - path: /config/daemon/troubleshoot/
