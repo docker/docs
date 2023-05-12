@@ -120,6 +120,23 @@ as follows:
 2. The container uses the first response returned by any of the nameservers.
    Even if the first response is `NXDOMAIN`, or similar.
 
+### IPv6 name resolution
+
+The embedded DNS server handles both IPv4 and IPv6 name resolution. However,
+there is a caveat in name resolution for IPv6.
+
+Any IPv6 addresses specified in the `/etc/resolv.conf` file on the host system
+get copied over to the `/etc/resolv.conf` file in containers that you run.
+
+For containers running on musl libc (Alpine Linux), hostname resolution might
+sporadically fail if the external IPv6 DNS server wins the race condition
+against the embedded DNS server.
+
+It's rare that the external DNS server is faster than the embedded one. But
+things like garbage collection, or large numbers of concurrent DNS requests,
+can result in a roundtrip to the external server be faster than the local
+resolution, on some occasions.
+
 ### Custom hosts
 
 Custom hosts, defined in `/etc/hosts` on the host machine, aren't inherited by containers.
