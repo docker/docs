@@ -78,9 +78,20 @@ web:
     - DEBUG
 ```
 
-The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
+The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run. 
+Note that in this case no warning will be issued if the `DEBUG` variable in the shell environment is not set. 
 
-See [`environment` attribute](../compose-file/05-services.md#environment) for more information.
+You can also explicitly assign a variable using a Bash-like syntax `${DEBUG}`:
+
+```yaml
+web:
+  environment:
+    - DEBUG=${DEBUG}
+```
+
+The result is similar to the one above but Compose will give you a warning if the `DEBUG` variable is not set in the shell environment.
+
+See [`environment` attribute](../compose-file/05-services.md#environment) and [variable interpolation](../compose-file/12-interpolation/) for more information.
 
 ### Use the `env_file` attribute
 
