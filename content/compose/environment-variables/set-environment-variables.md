@@ -91,7 +91,7 @@ web:
 
 The result is similar to the one above but Compose will give you a warning if the `DEBUG` variable is not set in the shell environment.
 
-See [`environment` attribute](../compose-file/05-services.md#environment) and [variable interpolation](../compose-file/12-interpolation/) for more information.
+See [`environment` attribute](../compose-file/05-services.md#environment) and [variable interpolation](../compose-file/12-interpolation.md) for more information.
 
 ### Use the `env_file` attribute
 
