@@ -6,7 +6,7 @@ redirect_from:
   - /desktop/linux/install/archlinux/
 ---
 
-This topic discusses installation of Docker Desktop from an [Arch package](https://desktop-stage.docker.com/linux/main/amd64/docker-desktop-4.19.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
+This topic discusses installation of Docker Desktop from an [Arch package](https://desktop-stage.docker.com/linux/main/amd64/docker-desktop-4.19.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64) that Docker provides in addition to the supported platforms. Docker hasn't tested or verified the installation.
 
 [Arch package (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.19.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
 
@@ -16,7 +16,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 To install Docker Desktop successfully, you must meet the [system requirements](linux-install.md#system-requirements).
 
-Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be installed:
+Additionally, for non-Gnome Desktop environments, you need to install `gnome-terminal` :
 
 ```console
 $ sudo pacman -S gnome-terminal
@@ -24,14 +24,16 @@ $ sudo pacman -S gnome-terminal
 
 ## Install Docker Desktop
 
-1. Install client binaries. Docker does not have an Arch package repository. Binaries not included in the package must be installed manually before installing Docker Desktop.
+> **Note**
+>
+> [A community-maintained Arch package exists](https://archlinux.org/packages/community/x86_64/docker/), but it contains more than just the Docker client binary and also bundles other binaries. The recommended installation steps are the following.
 
-2. [Install Docker client binary on Linux](../../engine/install/binaries.md#install-daemon-and-client-binaries-on-linux). On Arch-based distributions, users must install the Docker client binary.
+1. [Install Docker client binary on Linux](../../engine/install/binaries.md#install-daemon-and-client-binaries-on-linux). On Arch-based distributions, users must install the Docker client binary.
    Static binaries for the Docker client are available for Linux (as `docker`).
 
-3. Download the Arch package from the [release](../release-notes.md) page.
+2. Download the Arch package from the [release](../release-notes.md) page.
 
-4. Install the package:
+3. Install the package:
 
 ```console
 $ sudo pacman -U ./docker-desktop-<version>-<arch>.pkg.tar.zst
