@@ -10,6 +10,11 @@ redirect_from:
 
 Environment variables are dealt with by either the Compose file or the CLI. Both have multiple ways you can substitute in or set your environment variables. This is outlined below. 
 
+>**Tip**
+>
+> Don't use environment variables to pass sensitive information, such as passwords, in to your containers. Use [secrets](../use-secrets.md) instead.
+{: .tip}
+
 ## Compose file
 
 ### Substitute with an `.env` file
