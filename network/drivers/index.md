@@ -42,12 +42,12 @@ exist by default, and provide core networking functionality:
 
 ### Network driver summary
 
-- The default bridge network is commonly used for running containers that don't
-  require custom networking configurations, such as container-to-container
-  connectivity.
-- User-defined bridge networks enable on the same Docker host to communicate
-  with each other. A user-defined network typically defines an isolated network
-  for multiple containers belonging to a common project or component.
+- The default bridge network is good for running containers that don't require
+  special networking capabilities.
+- User-defined bridge networks enable containers on the same Docker host to
+  communicate with each other. A user-defined network typically defines an
+  isolated network for multiple containers belonging to a common project or
+  component.
 - Host network shares the host's network with the container. When you use this
   driver, the container's network isn't isolated from the host.
 - Overlay networks are best when you need containers running on different
