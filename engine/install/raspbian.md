@@ -16,7 +16,7 @@ To get started with Docker Engine on Raspbian, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need the 64-bit version of one of these Raspbian
+To install Docker Engine, you need the 64-bit version or 32-bit version of one of these Raspbian
 versions:
 
 - Raspbian Bookworm 12 (testing)
@@ -24,6 +24,8 @@ versions:
 - Raspbian Buster 10 (oldstable)
 
 Docker Engine for Raspbian is compatible with the armhf architecture.
+
+For the 64-bit version of Raspbian follow the instructions for [Debian](debian.md).
 
 ### Uninstall old versions
 
