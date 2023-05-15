@@ -19,11 +19,10 @@ To get started with Docker Engine on Debian, make sure you
 
 > **Note**
 >
-> If you use ufw to manage firewall settings, note that when you expose
-> container ports using Docker, those ports bypass any firewall rules that
-> you configure with ufw. See
-> [Docker and ufw](../../network/packet-filtering-firewalls.md#docker-and-ufw)
-> for details.
+> If you use ufw to manage firewall settings, it's important to be aware that
+> when you expose container ports using Docker, these ports bypass any
+> firewall rules set up with ufw. For more information, refer to
+> [Docker and ufw](../../network/packet-filtering-firewalls.md#docker-and-ufw).
 
 ### OS requirements
 

@@ -1353,7 +1353,7 @@ manuals:
     - sectiontitle: Network drivers
       section:
       - path: /network/drivers/
-        title: Drivers overview
+        title: Overview
       - path: /network/drivers/bridge/
         title: Bridge
       - path: /network/drivers/overlay/
@@ -1365,7 +1365,7 @@ manuals:
       - path: /network/drivers/macvlan/
         title: Macvlan
       - path: /network/drivers/none/
-        title: None
+        title: None (no networking)
     - path: /network/proxy/
       title: Configure Docker to use a proxy server
     - path: /config/daemon/ipv6/

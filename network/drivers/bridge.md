@@ -128,8 +128,8 @@ daemon. The following tables shows which options have equivalent flags in the
 | `com.docker.network.driver.mtu`                  | `--mtu`     |
 | `com.docker.network.container_iface_prefix`      | -           |
 
-The Docker daemon supports a `--bridge` flag, which you can use to define a
-custom network bridge. You use this option if you want to run multiple daemon
+The Docker daemon supports a `--bridge` flag, which you can use to define
+your own `docker0` bridge. Use this option if you want to run multiple daemon
 instances on the same host. For details, see
 [Run multiple daemons](../../engine/reference/commandline/dockerd.md#run-multiple-daemons).
 

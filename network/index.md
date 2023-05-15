@@ -23,7 +23,7 @@ a gateway, a routing table, DNS services, and other networking details.
 That is, unless the container uses the `none` network driver.
 This page describes networking from the point of view of the container.
 
-This page describes the concepts around container networking.
+This page also describes the concepts around container networking.
 This page doesn't describe OS-specific details about how Docker networks work.
 For information about how Docker manipulates `iptables` rules on Linux,
 see [Packet filtering and firewalls](packet-filtering-firewalls.md).
@@ -116,7 +116,7 @@ of different factors:
 Under most circumstances, name resolution with multiple nameservers should work
 as follows:
 
-1. The container emits requests to **all** nameservers that you specify.
+1. The container emits requests to all nameservers that you specify.
 2. The container uses the first response returned by any of the nameservers.
    Even if the first response is `NXDOMAIN`, or similar.
 
