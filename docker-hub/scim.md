@@ -36,7 +36,7 @@ You must make sure you have [configured SSO](../single-sign-on/index.md) before 
 
 1. Sign in to Docker Hub, navigate to the **Organizations** page and select your organization or company.
 2. Select **Settings**. If you are setting up SCIM for an organization you then need to select **Security**. 
-3. n the **Single Sign-On Connection** table, select the **Actions** icon and **Setup SCIM**.
+3. In the **Single Sign-On Connection** table, select the **Actions** icon and **Setup SCIM**.
 4. Copy the **SCIM Base URL** and **API Token** and paste the values into your IdP.
 
 ### Step two: Enable SCIM in your IdP
