@@ -4,7 +4,7 @@ keywords: Docker, pull requests, download, limit,
 title: Download rate limit
 ---
 
-## What's the download rate limit on Docker Hub
+## What's the download rate limit on Docker Hub?
 
 Docker Hub limits the number of Docker image downloads, or pulls based on the account type of the user pulling the image. Pull rate limits are based on individual IP address.
 
@@ -35,7 +35,7 @@ manifest requests.
 - `HEAD` requests aren't counted. 
 
 
-## How do I know my pull requests are being limited
+## How do I know my pull requests are being limited?
 
 When you issue a pull request and you are over the limit, Docker Hub returns a `429` response code with the following body when the manifest is requested:
 
@@ -45,7 +45,7 @@ You have reached your pull rate limit. You may increase the limit by authenticat
 
 This error message appears in the Docker CLI or in the Docker Engine logs.
 
-## How can I check my current rate
+## How can I check my current rate?
 
 Valid API requests to Hub usually include the following rate limit headers in the response:
 
@@ -99,7 +99,7 @@ To take advantage of the higher limits included in a paid Docker subscription, y
 
 A Pro, Team, or a Business tier doesn't increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
 
-## How do I authenticate pull requests
+## How do I authenticate pull requests?
 
 The following section contains information on how to sign in to Docker Hub to authenticate pull requests.
 
