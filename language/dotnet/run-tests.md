@@ -66,7 +66,7 @@ public sealed class UnitTest1 : IAsyncLifetime, IDisposable
             .WithImage("postgres")
             .WithNetwork(_network)
             .WithNetworkAliases("db")
-            .WithVolumeMount("postgres-data", "/var/lib/postgresql/data")
+            .WithVolumeMount("postgres-data", "/path/for/test/db")
             .Build();
 
         _appContainer = new ContainerBuilder()
