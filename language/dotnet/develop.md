@@ -350,6 +350,7 @@ services:
    ports:
      - 8080:8080
  app:
+   image: dotnet-docker
    build:
      context: .
    ports:
@@ -429,6 +430,7 @@ services:
    ports:
      - 8080:8080
  app:
+   image: dotnet-docker
    build:
      context: .
    ports:
