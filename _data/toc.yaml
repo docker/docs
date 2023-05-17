@@ -1811,6 +1811,8 @@ manuals:
     title: Automatically update services with file watch (Experimental)
   - path: /compose/production/
     title: Using Compose in production
+  - path: /compose/use-secrets/
+    title: Using secrets in Compose
   - path: /compose/startup-order/
     title: Control startup order
   - path: /compose/samples-for-compose/
