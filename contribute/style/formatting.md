@@ -156,3 +156,13 @@ Note that in many cases, an unordered list is sufficient to describe a list of i
 - To keep tables accessible and scannable, tables should not have any empty cells. If there is no otherwise meaningful value for a cell, consider entering N/A for ‘not applicable’ or None.
 
 For information on how to add tables to your content, see [Useful component and formatting examples](../components/tables.md).
+
+## Referring to file types
+
+When you're discussing a file type, use the formal name of the type. Do not use the filename extension to refer generically to the file type.
+
+    | Correct | Incorrect |
+    | --- | --- |
+    | a PNG file | a .png file |
+    | a Bash file | an .sh file |
+
