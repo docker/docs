@@ -7,7 +7,7 @@ long: |-
     
     * .dockerignore
     * Dockerfile
-    * docker-compose.yaml
+    * compose.yaml
     
     If any of the files already exist, a prompt appears and provides a warning as well as giving you the option to overwrite all the files.
     
@@ -20,13 +20,15 @@ long: |-
   After running `docker init`, you can choose one of the following templates:
     
     * Go: Suitable for a Go server application.
+    * Python: Suitable for a Python server application.
+    * Node: Suitable for a Node server application.
     * Other: General purpose starting point for containerizing your application.
   
-  After `docker init` has completed, you must modify the created files and tailor them to your project. Visit the following topics to learn more about the files:
+  After `docker init` has completed, you may need to modify the created files and tailor them to your project. Visit the following topics to learn more about the files:
     
     * [.dockerignore](../../../engine/reference/builder.md#dockerignore-file)
     * [Dockerfile](../../../engine/reference/builder.md)
-    * [docker-compose.yaml](../../../compose/compose-file/03-compose-file.md)
+    * [compose.yaml](../../../compose/compose-file/03-compose-file.md)
 
 usage: docker init [OPTIONS]
 pname: docker
@@ -48,9 +50,9 @@ experimentalcli: false
 kubernetes: false
 swarm: false
 examples: |-
-  ### Example of selecting Other
+  ### Example of running `docker init`
   
-  The following example runs `docker init` and walks through the options after selecting `Other`.
+  The following example shows the initial menu after running `docker init`. See the additional examples to view the options for each language or framework.
   
   ```console
   $ docker init
@@ -60,23 +62,101 @@ examples: |-
   This utility will walk you through creating the following files with sensible defaults for your project:
     - .dockerignore
     - Dockerfile
-    - docker-compose.yaml
+    - compose.yaml
   
   Let's get started!
   
   ? What application platform does your project use?  [Use arrows to move, type to filter]
-  > Go - suitable for a Go server application
+  > Go - (detected) suitable for a Go server application
+    Python - suitable for a Python server application
+    Node - suitable for a Node server application
     Other - general purpose starting point for containerizing your application
     Don't see something you need? Let us know!
     Quit
   ```
+
+  ### Example of selecting Go
   
-  The following appears after selecting `Other`.
+  The following example shows the prompts that appear after selecting `Go` and example input.
   
   ```console
+  ? What application platform does your project use? Go
+  ? What version of Go do you want to use? 1.20
+  ? What's the relative directory (with a leading .) of your main package? .
+  ? What port does your server listen on? 3333
+
   CREATED: .dockerignore
   CREATED: Dockerfile
-  CREATED: docker-compose.yaml
+  CREATED: compose.yaml
+  
+  ✔ Your Docker files are ready!
+  
+  Take a moment to review them and tailor them to your application.
+  
+  When you're ready, start your application by running: docker compose up --build
+  
+  Your application will be available at http://localhost:3333
+  ```
+  
+  ### Example of selecting Python
+
+  The following example shows the prompts that appear after selecting `Python` and example input.
+  
+  ```console
+  ? What application platform does your project use? Python
+  ? What version of Python do you want to use? 3.8
+  ? What port do you want your app to listen on? 8000
+  ? What is the command to run your app (e.g., gunicorn 'myapp.example:app' --bind=0.0.0.0:8000)? python ./app.py
+  
+  CREATED: .dockerignore
+  CREATED: Dockerfile
+  CREATED: compose.yaml
+  
+  ✔ Your Docker files are ready!
+  
+  Take a moment to review them and tailor them to your application.
+  
+  When you're ready, start your application by running: docker compose up --build
+  
+  Your application will be available at http://localhost:8000
+  ```
+  
+  ### Example of selecting Node
+  
+  The following example shows the prompts that appear after selecting `Node` and example input.
+  
+  ```console
+  ? What application platform does your project use? Node
+  ? What version of Node do you want to use? 18
+  ? Which package manager do you want to use? yarn
+  ? Do you want to run "yarn run build" before starting your server? Yes
+  ? What directory is your build output to? (comma-separate if multiple) output
+  ? What command do you want to use to start the app? node index.js
+  ? What port does your server listen on? 8000
+
+  CREATED: .dockerignore
+  CREATED: Dockerfile
+  CREATED: compose.yaml
+  
+  ✔ Your Docker files are ready!
+  
+  Take a moment to review them and tailor them to your application.
+  
+  When you're ready, start your application by running: docker compose up --build
+
+  Your application will be available at http://localhost:8000
+  ```
+  
+  ### Example of selecting Other
+  
+  The following example shows the output after selecting `Other`.
+  
+  ```console
+  ? What application platform does your project use? Other
+  
+  CREATED: .dockerignore
+  CREATED: Dockerfile
+  CREATED: compose.yaml
   
   ✔ Your Docker files are ready!
   
@@ -84,67 +164,4 @@ examples: |-
   
   When you're ready, start your application by running: docker compose up --build
   ```
-  
-  ### Example of selecting Go
-  
-  The following example runs `docker init` and walks through the options after selecting `Go`.
-  
-  ```console
-  $ docker init
-  
-  Welcome to the Docker Init CLI!
-  
-  This utility will walk you through creating the following files with sensible defaults for your project:
-    - .dockerignore
-    - Dockerfile
-    - docker-compose.yaml
-  
-  Let's get started!
-  
-  ? What application platform does your project use?  [Use arrows to move, type to filter]
-  > Go - (detected) suitable for a Go server application
-    Other - general purpose starting point for containerizing your application
-    Don't see something you need? Let us know!
-    Quit
-  ```
-  
-  The following appears after selecting `Go`.
-  
-  ```console
-  ? What application platform does your project use? Go
-  ? What version of Go do you want to use? (1.20)
-  ```
-  
-  The following appears after selecting the default `1.20`.
-  
-  ```console
-  ? What version of Go do you want to use? 1.20
-  ? What's the relative directory (with a leading .) of your main package? (.)
-  ```
-  
-  The following appears after selecting the default `.`.
-  
-  ```console
-  ? What's the relative directory (with a leading .) of your main package? .
-  ? What port does your server listen on? (3333)
-  ```
-  
-  The following appears after selecting the default `3333`.
-  
-  ```console
-  ? What port does your server listen on? 3333
-  
-  CREATED: .dockerignore
-  CREATED: Dockerfile
-  CREATED: docker-compose.yaml
-  
-  ✔ Your Docker files are ready!
-  
-  Take a moment to review them and tailor them to your application.
-  
-  When you're ready, start your application by running: docker compose up --build -d
-  
-  Your application will be available at http://localhost:3333
-  
-  To stop your application, run: docker compose down
-  ```
+

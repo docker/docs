@@ -88,13 +88,13 @@ The format of the command is:
 $ docker swarm init --default-addr-pool <IP range in CIDR> [--default-addr-pool <IP range in CIDR> --default-addr-pool-mask-length <CIDR value>]
 ```
 
-To create a default IP address pool with a /16 (class B) for the 10.20.0.0 network looks like this:
+The command to create a default IP address pool with a /16 (class B) for the 10.20.0.0 network looks like this:
 
 ```console
 $ docker swarm init --default-addr-pool 10.20.0.0/16
 ```
 
-To create a default IP address pool with a `/16` (class B) for the `10.20.0.0` and `10.30.0.0` networks, and to 
+The command to create a default IP address pool with a `/16` (class B) for the `10.20.0.0` and `10.30.0.0` networks, and to 
 create a subnet mask of `/26` for each network looks like this:
 
 ```console

@@ -9,8 +9,7 @@ toc_min: 1
 
 ## Reference and guidelines
 
-These topics describe version 3 of the Compose file format. This is the newest
-version.
+These topics describe version 3 of the Compose file format.
 
 ## Compose and Docker compatibility matrix
 

@@ -190,11 +190,24 @@ $(document).ready(function () {
     });
 });
 
+
+// Store the original modal body content in a variable
+var originalModalBody = $('#accept-eula .modal-body').html();
+
 function initAcceptEULAModal() {
     $("main").on("click", "a.accept-eula", function (e) {
         e.preventDefault();
-        _("#accept-eula .btn-primary").href = e.target.href;
-        $('#accept-eula').modal('show')
+        // Check for undefined. Occurs when loaded via proxy.
+        if (e.target.href && e.target.href !== 'undefined') {
+            $("#accept-eula .btn-primary").attr('href', e.target.href);
+            $('#accept-eula .modal-body').html(originalModalBody);
+            $("#accept-eula .btn-primary").show();
+        } else {
+            var errorMessage = 'Unable to process the download link. If you are using a proxy, like a translation service, try accessing the the page without using the proxy.';
+            $('#accept-eula .modal-body').html('<div class="alert alert-danger">' + errorMessage + '</div>');
+            $("#accept-eula .btn-primary").hide();
+        }
+        $('#accept-eula').modal('show');
     });
 }
 

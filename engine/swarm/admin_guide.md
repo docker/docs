@@ -185,7 +185,7 @@ manager:
 
 - Restart the daemon and see if the manager comes back as reachable.
 - Reboot the machine.
-- If neither restarting or rebooting work, you should add another manager node or promote a worker to be a manager node. You also need to cleanly remove the failed node entry from the manager set with `docker node demote <NODE>` and `docker node rm <id-node>`.
+- If neither restarting nor rebooting works, you should add another manager node or promote a worker to be a manager node. You also need to cleanly remove the failed node entry from the manager set with `docker node demote <NODE>` and `docker node rm <id-node>`.
 
 Alternatively you can also get an overview of the swarm health from a manager
 node with `docker node ls`:
@@ -207,8 +207,8 @@ You should never restart a manager node by copying the `raft` directory from ano
 
 To cleanly re-join a manager node to a cluster:
 
-1. To demote the node to a worker, run `docker node demote <NODE>`.
-2. To remove the node from the swarm, run `docker node rm <NODE>`.
+1. Demote the node to a worker using `docker node demote <NODE>`.
+2. Remove the node from the swarm using `docker node rm <NODE>`.
 3. Re-join the node to the swarm with a fresh state using `docker swarm join`.
 
 For more information on joining a manager node to a swarm, refer to
@@ -318,7 +318,7 @@ restore the data to a new swarm.
 
 ### Recover from losing the quorum
 
-Swarm is resilient to failures and the swarm can recover from any number
+Swarm is resilient to failures and can recover from any number
 of temporary node failures (machine reboots or crash with restart) or other
 transient errors. However, a swarm cannot automatically recover if it loses a
 quorum. Tasks on existing worker nodes continue to run, but administrative

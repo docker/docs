@@ -1,5 +1,6 @@
 ---
 description: Configure registry.json to enforce users to sign into Docker Desktop
+toc_max: 2
 keywords: authentication, registry.json, configure,
 title: Configure registry.json to enforce sign-in
 ---
@@ -20,6 +21,10 @@ Deploying a `registry.json` file and forcing users to authenticate is not requir
 - Blocks users from accessing Docker Desktop until they are added to a specific organization.
 
 {% include configure-registry-json.md %}
+
+## Deploy registry.json to multiple devices
+
+The previous instructions explain how to create and deploy a registry.json file to a single device. To automatically deploy the registry.json to multiple devices, you must use a third-party solution, such as a mobile device management solution. You can use the previous instructions along with your third-party solution to remotely deploy the registry.json file, or remotely install Docker Desktop with the registry.json file. For more details, see the documentation of your third-party solution.
 
 ## Verify the changes
 

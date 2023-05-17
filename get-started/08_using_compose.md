@@ -17,9 +17,10 @@ So, how do we get started?
 
 ## Install Docker Compose
 
-If you installed Docker Desktop/Toolbox for either Windows or Mac, you already have Docker Compose!
-Play-with-Docker instances already have Docker Compose installed as well. If you are on
-a Linux machine, you will need to [install Docker Compose](../compose/install/index.md).
+If you installed Docker Desktop for Windows, Mac, or Linux you already have Docker Compose!
+Play-with-Docker instances already have Docker Compose installed as well. 
+
+Standalone installations of Docker Engine requires Docker Compose to be installed as a separate package, see [Install the Compose plugin](../compose/install/linux.md).
 
 After installation, you should be able to run the following and see version information.
 
@@ -77,8 +78,8 @@ $ docker run -dp 3000:3000 \
 
 
 3. Let's migrate the `-p 3000:3000` part of the command by defining the `ports` for the service. We will use the
-   [short syntax](../compose/compose-file/compose-file-v3.md#short-syntax-1) here, but there is also a more verbose
-   [long syntax](../compose/compose-file/compose-file-v3.md#long-syntax-1) available as well.
+   [short syntax](../compose/compose-file/05-services.md#short-syntax-3) here, but there is also a more verbose
+   [long syntax](../compose/compose-file/05-services.md#long-syntax-3) available as well.
 
    ```yaml
    services:
@@ -90,7 +91,7 @@ $ docker run -dp 3000:3000 \
    ```
  
 4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
-   the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/compose-file-v3.md#short-syntax-3) and [long](../compose/compose-file/compose-file-v3.md#long-syntax-3) syntax.
+   the `working_dir` and `volumes` definitions. Volumes also has a [short](../compose/compose-file/05-services.md#short-syntax-5) and [long](../compose/compose-file/05-services.md#long-syntax-5) syntax.
 
     One advantage of Docker Compose volume definitions is we can use relative paths from the current directory.
 
@@ -153,7 +154,7 @@ $ docker run -d \
 2. Next, we'll define the volume mapping. When we ran the container with `docker run`, the named volume was created
    automatically. However, that doesn't happen when running with Compose. We need to define the volume in the top-level
    `volumes:` section and then specify the mountpoint in the service config. By simply providing only the volume name,
-   the default options are used. There are [many more options available](../compose/compose-file/compose-file-v3.md#volume-configuration-reference) though.
+   the default options are used. There are [many more options available](../compose/compose-file/07-volumes.md) though.
 
    ```yaml
    services:
@@ -257,15 +258,6 @@ Now that we have our `docker-compose.yml` file, we can start it up!
     The service name is displayed at the beginning of the line (often colored) to help distinguish messages. If you want to
     view the logs for a specific service, you can add the service name to the end of the logs command (for example,
     `docker compose logs -f app`).
-
-    > **Tip: Waiting for the DB before starting the app**
-    >
-    > When the app is starting up, it actually sits and waits for MySQL to be up
-    > and ready before trying to connect to it. Docker doesn't have any built-in
-    > support to wait for another container to be fully up, running, and ready
-    > before starting another container. For Node-based projects, you can use
-    > the [wait-port](https://github.com/dwmkerr/wait-port){:target="_blank" rel="noopener" class="_"}
-    > dependency. Similar projects exist for other languages/frameworks.
 
 4. At this point, you should be able to open your app and see it running. And hey! We're down to a single command!
 

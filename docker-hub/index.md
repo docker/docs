@@ -35,15 +35,16 @@ Docker Hub is also where you can go to [change your Docker account settings and 
 * [Repositories](../docker-hub/repos/index.md): Push and pull container images.
 * [Docker Official Images](official_images.md): Pull and use high-quality
 container images provided by Docker.
-* [Docker Verified Publisher Images](publish/index.md): Pull and use high-
-quality container images provided by external vendors.
-* [Docker-Sponsored Open Source Images](dsos-program.md): Pull and use high-
-quality container images from non-commercial open source projects.
+* [Docker Verified Publisher Images](publish/index.md): Pull and use high-quality
+container images provided by external vendors.
+* [Docker-Sponsored Open Source Images](dsos-program.md): Pull and use high-quality
+container images from non-commercial open source projects.
 * [Builds](builds/index.md): Automatically build container images from
 GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
-*[Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub. Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
+* [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub.
+  * Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
 
 </div>
 <div id="features" class="tab-pane fade" markdown="1">

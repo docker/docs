@@ -14,7 +14,7 @@ Compose supports two methods of sharing common configuration:
 
 ## Multiple Compose files
 
-Using multiple Compose files lets you to customize a Compose application
+Using multiple Compose files lets you customize a Compose application
 for different environments or different workflows.
 
 ### Understanding multiple Compose files
@@ -136,7 +136,7 @@ production.
 
 #### Administrative tasks
 
-Another common use case is running when necessary or administrative tasks against one
+Another common use case is running one off or administrative tasks against one
 or more services in a Compose app. This example demonstrates running a
 database backup.
 

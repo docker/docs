@@ -40,7 +40,7 @@ In the following steps, you'll create the network first and then attach the MySQ
    ```
 
 2. Start a MySQL container and attach it to the network. You're also going to define a few environment variables that the
-  database will use to initialize the database. To learn more about the MySQL environment variables, see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/)).
+  database will use to initialize the database. To learn more about the MySQL environment variables, see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/).
 
     <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>

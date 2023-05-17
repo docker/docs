@@ -8,7 +8,7 @@ redirect_from:
 ## Specification
 
 Bake uses the [compose-spec](../../compose/compose-file/index.md) to
-parse a compose file and translate each service to a [target](file-definition.md#target).
+parse a compose file and translate each service to a [target](reference.md#target).
 
 ```yaml
 # docker-compose.yml
@@ -94,8 +94,7 @@ $ docker buildx bake --print
 }
 ```
 
-Unlike the [HCL format](file-definition.md#hcl-definition), there are some
-limitations with the compose format:
+The compose format has some limitations compared to the HCL format:
 
 * Specifying variables or global scope attributes is not yet supported
 * `inherits` service field is not supported, but you can use [YAML anchors](../../compose/compose-file/10-fragments.md){:target="blank" rel="noopener" class=""}

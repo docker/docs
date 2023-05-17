@@ -47,27 +47,27 @@ your preferred operating system below.
 
 {% assign yes = '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
-| Platform                                                          | x86_64 / amd64                                   | arm64 (Apple Silicon)                            |
-|:------------------------------------------------------------------|:------------------------------------------------:|:------------------------------------------------:|
-| [Docker Desktop for Linux](../../desktop/install/linux-install.md)        | [{{ yes }}](../../desktop/install/linux-install.md)      |                                                  |
-| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md)    | [{{ yes }}](../../desktop/install/mac-install.md)        | [{{ yes }}](../../desktop/install/mac-install.md)        |
-| [Docker Desktop for Windows](../../desktop/install/windows-install.md)    | [{{ yes }}](../../desktop/install/windows-install.md)    |                                                  |
+| Platform                                                               |                    x86_64 / amd64                     |               arm64 (Apple Silicon)               |
+| :--------------------------------------------------------------------- | :---------------------------------------------------: | :-----------------------------------------------: |
+| [Docker Desktop for Linux](../../desktop/install/linux-install.md)     |  [{{ yes }}](../../desktop/install/linux-install.md)  |                                                   |
+| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md) |   [{{ yes }}](../../desktop/install/mac-install.md)   | [{{ yes }}](../../desktop/install/mac-install.md) |
+| [Docker Desktop for Windows](../../desktop/install/windows-install.md) | [{{ yes }}](../../desktop/install/windows-install.md) |                                                   |
 
 ### Server
 
 Docker provides `.deb` and `.rpm` packages from the following Linux distros
 and architectures:
 
-| Platform                | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)           | s390x                  |
-|:------------------------|:-----------------------|:-----------------------|:-----------------------|:-----------------------|
-| [CentOS](centos.md)     | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                        |                        |
-| [Debian](debian.md)     | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) |                        |
-| [Fedora](fedora.md)     | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                        |                        |
-| [Raspbian](debian.md)   |                        |                        | [{{ yes }}](debian.md) |                        |
-| [RHEL](rhel.md)         |                        |                        |                        | [{{ yes }}](rhel.md)   |
-| [SLES](sles.md)         |                        |                        |                        | [{{ yes }}](sles.md)   |
-| [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
-| [Binaries](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) |                        |
+| Platform                | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)             | s390x                  |
+| :---------------------- | :--------------------- | :--------------------- | :----------------------- | :--------------------- |
+| [CentOS](centos.md)     | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                          |                        |
+| [Debian](debian.md)     | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   |                        |
+| [Fedora](fedora.md)     | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                          |                        |
+| [Raspbian](debian.md)   |                        |                        | [{{ yes }}](raspbian.md) |                        |
+| [RHEL](rhel.md)         |                        |                        |                          | [{{ yes }}](rhel.md)   |
+| [SLES](sles.md)         |                        |                        |                          | [{{ yes }}](sles.md)   |
+| [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) |
+| [Binaries](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md)   |                        |
 
 ### Other Linux distros
 
@@ -100,69 +100,40 @@ These binaries are statically linked and you can use them on any Linux distro.
 
 Docker Engine has two types of update channels, **stable** and **test**:
 
-* The **Stable** channel gives you latest releases for general availability.
-* The **Test** channel gives pre-releases that are ready for testing before
-  general availability (GA).
+* The **Stable** channel gives you the latest versions released for general availability.
+* The **Test** channel gives you pre-release versions that are ready for testing before
+  general availability.
 
-### Stable
-
-Year-month releases are made from a release branch diverged from the master
-branch. The branch is created with format `<year>.<month>`, for example
-`20.10`. The year-month name indicates the earliest possible calendar
-month to expect the release to be generally available. All further patch
-releases are performed from that branch. For example, once `v20.10.0` is
-released, all subsequent patch releases are built from the `20.10` branch.
-
-### Test
-
-In preparation for a new year-month release, a branch is created from
-the master branch with format `YY.mm` when the milestones desired by
-Docker for the release have achieved feature-complete. Pre-releases
-such as betas and release candidates are conducted from their respective release
-branches. Patch releases and the corresponding pre-releases are performed
-from within the corresponding release branch.
+Use the test channel with caution. Pre-release versions include experimental and
+early-access features that are subject to breaking changes.
 
 ## Support
 
-Docker Engine releases of a year-month branch are supported with patches as
-needed for one month after the next year-month general availability release.
+Docker Engine is an open source project, supported by the Moby project maintainers
+and community members. Docker doesn't provide support for Docker Engine.
+Docker provides support for Docker products, including Docker Desktop, which uses
+Docker Engine as one of its components.
 
-This means bug reports and backports to release branches are assessed
-until the end-of-life date.
-
-After the year-month branch has reached end-of-life, the branch may be
-deleted from the repository.
-
-### Backporting
-
-Backports to the Docker products are prioritized by the Docker company. A
-Docker employee or repository maintainer will endeavour to ensure sensible
-bugfixes make it into _active_ releases.
-
-If there are important fixes that ought to be considered for backport to
-active release branches, be sure to highlight this in the PR description
-or by adding a comment to the PR.
+For information about the open source project, refer to the
+[Moby project website](https://mobyproject.org/){:target="_blank" rel="noopener"}.
 
 ### Upgrade path
 
-Patch releases are always backward compatible with its year-month version.
+Patch releases are always backward compatible with its major and minor version.
 
 ### Licensing
 
-Docker is licensed under the Apache License, Version 2.0. See
+Docker Engine is licensed under the Apache License, Version 2.0. See
 [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
 license text.
 
 ## Reporting security issues
 
-The Docker maintainers take security seriously. If you discover a security
-issue, please bring it to their attention right away!
+If you discover a security issue, we request that you bring it to our attention immediately.
 
-Please DO NOT file a public issue; instead send your report privately
-to security@docker.com.
+DO NOT file a public issue. Instead, submit your report privately to security@docker.com.
 
-Security reports are greatly appreciated, and Docker will publicly thank you
-for it.
+Security reports are greatly appreciated, and Docker will publicly thank you for it.
 
 ## Get started
 

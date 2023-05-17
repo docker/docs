@@ -8,6 +8,37 @@ redirect_from:
 ---
 {% include compose-eol.md %}
 
+## 2.18.0
+{% include release-date.html date="2023-05-16" %}
+
+For more information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/tag/v2.18.0).
+
+### Bug fixes and enhancements
+- Added dry run support using `--dry-run`
+- Added the first (alpha) implementation of the `viz` sub-command
+- Introduced `--no-path-resolution` to skip relative path to be resolved
+- Introduced `COMPOSE_ANSI` to define the `--ansi` default value
+- Introduced `COMPOSE_STATUS_STDOUT` to get status messages sent to stdout
+- Fixed the BuildKit progressui integration
+- Fixed a bug to stop blocking the events loop collecting logs
+- Restored support for `--memory`
+- Fixed a bug which meant containers didn't stop after termination
+- Compose now lets users declare the build secret target
+- Fixed a bug which caused a container to be recreated when the config has not changed
+- Fixed a race condition when `--parallel` is used with a large number of dependent services
+- Compose now checks the local image matches the required platform
+- Fixed local image removal when `compose down` is ran with `--project-name`
+- Compose now detects the active endpoint trying to remove the network and skips with a warning
+- Removed unnecessary [] output
+- Compose detects that a Windows terminal is not a `console.File` to avoid a panic
+- `--parallel` now has precedence over `COMPOSE_PARALLEL_LIMIT`
+- Compose now reports that the external network is not found when Swarm is disabled
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.13.5
+- Dependencies upgrade: bump buildkit to v0.11.6
+- Dependencies upgrade: bump docker to v23.0.5
+
 ## 2.17.2
 {% include release-date.html date="2023-03-26" %}
 ### Update
@@ -34,6 +65,11 @@ redirect_from:
 
 ## 2.17.0
 {% include release-date.html date="2023-03-23" %}
+### Upgrade notes
+- Project name validation is more strictly enforced. Project names can only include letters, numbers, `_`, `-` and must be lowercase and start with a letter or number.
+- Boolean fields in YAML must be either `true` or `false`. Deprecated YAML 1.1 values such as "on" or "no" are not supported.
+- Duplicate YAML merge keys (`<<`) are rejected.
+
 ### Update
 - Dependencies upgrade: bump buildkit to v0.11.4
 - Dependencies upgrade: bump buildx to v0.10.4
@@ -52,8 +88,6 @@ redirect_from:
 * Added support of `NO_COLOR` env var. Fixed [compose#10340](https://github.com/docker/compose/issues/10340){:
   target="_blank" rel="noopener" class="_"}
 * Progress writer now uses `dockercli.Err` stream. Fixed [compose#10366](https://github.com/docker/compose/issues/10366){:
-  target="_blank" rel="noopener" class="_"}
-* Introduced `dockerfile_inline`. Fixed [compose#8077](https://github.com/docker/compose/issues/8077){:
   target="_blank" rel="noopener" class="_"}
 * Added support for `additional_contexts` in the `build` service configuration. Fixed [compose#9461](https://github.com/docker/compose/issues/9461){:
   target="_blank" rel="noopener" class="_"} [compose#9961](https://github.com/docker/compose/issues/9961){:

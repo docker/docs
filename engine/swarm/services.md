@@ -45,7 +45,7 @@ a3iixnklxuem        quizzical_lamarr    replicated          1/1                 
 
 Created services do not always run right away. A service can be in a pending
 state if its image is unavailable, if no node meets the requirements you
-configure for the service, or other reasons. See
+configure for the service, or for other reasons. See
 [Pending services](how-swarm-mode-works/services.md#pending-services) for more
 information.
 
@@ -125,7 +125,7 @@ nodes are able to log into the registry and pull the image.
 
  Credential spec files are applied at runtime, eliminating the need for host-based credential spec files or registry entries - no gMSA credentials are written to disk on worker nodes. You can make credential specs available to Docker Engine running swarm kit worker nodes before a container starts. When deploying a service using a gMSA-based config, the credential spec is passed directly to the runtime of containers in that service.
 
- The `--credential-spec` must be one of the following formats:
+ The `--credential-spec` must be in one of the following formats:
 
  - `file://<filename>`: The referenced file must be present in the `CredentialSpecs` subdirectory in the docker data directory, which defaults to `C:\ProgramData\Docker\` on Windows. For example, specifying `file://spec.json` loads `C:\ProgramData\Docker\CredentialSpecs\spec.json`.
 - `registry://<value-name>`: The credential spec is read from the Windows registry on the daemon’s host. 
@@ -804,7 +804,7 @@ that the scheduler updates simultaneously.
 
 When an update to an individual task returns a state of `RUNNING`, the scheduler
 continues the update by continuing to another task until all tasks are updated.
-If, at any time during an update a task returns `FAILED`, the scheduler pauses
+If at any time during an update a task returns `FAILED`, the scheduler pauses
 the update. You can control the behavior using the `--update-failure-action`
 flag for `docker service create` or `docker service update`.
 
@@ -830,7 +830,7 @@ after 10% of the tasks being updated fail, the update is paused.
 An individual task update is considered to have failed if the task doesn't
 start up, or if it stops running within the monitoring period specified with
 the `--update-monitor` flag. The default value for `--update-monitor` is 30
-seconds, which means that a task failing in the first 30 seconds after its
+seconds, which means that a task failing in the first 30 seconds after it's
 started counts towards the service update failure threshold, and a failure
 after that is not counted.
 
@@ -843,7 +843,7 @@ to the configuration that was in place before the most recent
 `docker service update` command.
 
 Other options can be combined with `--rollback`; for example,
-`--update-delay 0s` to execute the rollback without a delay between tasks:
+`--update-delay 0s`, to execute the rollback without a delay between tasks:
 
 ```console
 $ docker service update \
@@ -893,8 +893,8 @@ $ docker service create --name=my_redis \
 ### Give a service access to volumes or bind mounts
 
 For best performance and portability, you should avoid writing important data
-directly into a container's writable layer, instead using data volumes or bind
-mounts. This principle also applies to services.
+directly into a container's writable layer. You should instead use data volumes
+or bind mounts. This principle also applies to services.
 
 You can create two types of mounts for services in a swarm, `volume` mounts or
 `bind` mounts. Regardless of which type of mount you use, configure it using the
@@ -920,7 +920,7 @@ $ docker service create \
   <IMAGE>
 ```
 
-If a volume with the same `<VOLUME-NAME>` does not exist when a task is
+If a volume with the name `<VOLUME-NAME>` doesn't exist when a task is
 scheduled to a particular host, then one is created. The default volume
 driver is `local`.  To use a different volume driver with this create-on-demand
 pattern, specify the driver and its options with the `--mount` flag:

@@ -10,7 +10,7 @@ access to the encrypted Raft logs. One of the reasons this feature was introduce
 was in support of the [Docker secrets](secrets.md) feature.
 
 When Docker restarts, both the TLS key used to encrypt communication among swarm
-nodes, and the key used to encrypt and decrypt Raft logs on disk, are loaded
+nodes and the key used to encrypt and decrypt Raft logs on disk are loaded
 into each manager node's memory. Docker has the ability to protect the mutual TLS
 encryption key and the key used to encrypt and decrypt Raft logs at rest, by
 allowing you to take ownership of these keys and to require manual unlocking of

@@ -926,10 +926,8 @@ use it, then remove the old secret.
     ```
 
 
-7.  If you want to try the running all of these examples again or just want to
-    clean up after running through them, use these commands to remove the
-    WordPress service, the MySQL container, the `mydata` and `wpdata` volumes,
-    and the Docker secrets.
+7.  Run the following commands to remove the WordPress service, the MySQL container,
+    the `mydata` and `wpdata` volumes, and the Docker secrets:
 
     ```console
     $ docker service rm wordpress mysql
@@ -1021,7 +1019,7 @@ content from the file specified in the compose file.
 The db service uses both secrets, and the wordpress is using one.
 
 When you deploy, Docker mounts a file under `/run/secrets/<secret_name>` in the
-services. These files are never persisted in disk, but are managed in memory.
+services. These files are never persisted on disk, but are managed in memory.
 
 Each service uses environment variables to specify where the service should look
 for that secret data.

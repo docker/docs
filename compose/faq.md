@@ -39,7 +39,7 @@ interactive terminal to the container and returns an exit status matching the
 exit status of the process in the container.
 
 The `docker compose start` command is useful only to restart containers
-that were previously created, but were stopped. It never creates new
+that were previously created but were stopped. It never creates new
 containers.
 
 ## Why do my services take 10 seconds to recreate or stop?

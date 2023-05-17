@@ -131,9 +131,9 @@ that affect images that you build or use.
   [advanced image analysis](../scout/advanced-image-analysis.md) feature, which extends
   the "core" vulnerability scanning solution with enhanced capabilities and more
   detailed and actionable insights.
-- For the CLI, there's a `docker scout` plugin which replaces the now-deprecated
-  `docker scan` command. This CLI plugin lets you explore vulnerabilities for an
-  image, directly in comfort of your terminal.
+- For the CLI, there's the
+  [`docker scout` CLI plugin](../engine/reference/commandline/scout.md)
+  which lets you explore vulnerabilities for images using the terminal.
 - Docker Desktop sports a detailed image view for images in your local image
   store, that visualizes all of the known vulnerabilities affecting an image.
 

@@ -14,9 +14,11 @@ exceptions:
   - CPU
   - CSS
   - CSV
+  - CVE
   - DEBUG
   - DOM
   - DPI
+  - ELK
   - FAQ
   - GCC
   - GDB
@@ -45,6 +47,7 @@ exceptions:
   - RAM
   - REPL
   - RSA
+  - SBOM
   - SCM
   - SCSS
   - SDK
@@ -63,5 +66,3 @@ exceptions:
   - XSS
   - YAML
   - ZIP
-  - SBOM
-  - CVE

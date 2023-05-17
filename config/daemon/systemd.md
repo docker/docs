@@ -1,6 +1,6 @@
 ---
 description: Controlling and configuring Docker using systemd
-keywords: docker, daemon, systemd, configuration
+keywords: dockerd, daemon, systemd, configuration, proxy, networking
 redirect_from:
   - /articles/host_integration/
   - /articles/systemd/
@@ -25,17 +25,34 @@ Docker with systemd. For this, install the two unit files (`service` and
 [the github repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
 to `/etc/systemd/system`.
 
-## HTTP/HTTPS proxy
+### Configure the Docker daemon to use a proxy server {#httphttps-proxy}
 
-The Docker daemon uses the `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`
-environmental variables in its start-up environment to configure HTTP or HTTPS
-proxy behavior. You can't configure these environment variables using the
-`daemon.json` file.
+The Docker daemon uses the following environment variables in
+its start-up environment to configure HTTP or HTTPS proxy behavior:
 
-This example overrides the default `docker.service` file.
+- `HTTP_PROXY`
+- `http_proxy`
+- `HTTPS_PROXY`
+- `https_proxy`
+- `NO_PROXY`
+- `no_proxy`
+
+In Docker Engine version 23.0 and later versions, you may also configure proxy
+behavior for the daemon in the [`daemon.json` file](./index.md#configure-the-docker-daemon):
+
+```json
+{
+  "http-proxy": "http://proxy.example.com:3128",
+  "https-proxy": "https://proxy.example.com:3129",
+  "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
+}
+```
+
+These configurations override the default `docker.service` systemd file.
 
 If you are behind an HTTP or HTTPS proxy server, for example in corporate
-settings, you need to add this configuration in the Docker systemd service file.
+settings, the daemon proxy configurations must be specified in the systemd
+service file, not in the `daemon.json` file or using environment variables.
 
 > **Note for rootless mode**
 >
@@ -65,7 +82,7 @@ settings, you need to add this configuration in the Docker systemd service file.
 
    ```systemd
    [Service]
-   Environment="HTTP_PROXY=http://proxy.example.com:80"
+   Environment="HTTP_PROXY=http://proxy.example.com:3128"
    ```
 
    If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
@@ -73,7 +90,7 @@ settings, you need to add this configuration in the Docker systemd service file.
 
    ```systemd
    [Service]
-   Environment="HTTPS_PROXY=https://proxy.example.com:443"
+   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
    ```
 
    Multiple environment variables can be set; to set both a non-HTTPS and a
@@ -81,8 +98,8 @@ settings, you need to add this configuration in the Docker systemd service file.
 
    ```systemd
    [Service]
-   Environment="HTTP_PROXY=http://proxy.example.com:80"
-   Environment="HTTPS_PROXY=https://proxy.example.com:443"
+   Environment="HTTP_PROXY=http://proxy.example.com:3128"
+   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
    ```
 
    > **Note**
@@ -92,7 +109,7 @@ settings, you need to add this configuration in the Docker systemd service file.
    >
    > ```
    > [Service]
-   > Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:8080/"
+   > Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:3128/"
    > ```
 
 3. If you have internal Docker registries that you need to contact without
@@ -117,8 +134,8 @@ settings, you need to add this configuration in the Docker systemd service file.
 
    ```systemd
    [Service]
-   Environment="HTTP_PROXY=http://proxy.example.com:80"
-   Environment="HTTPS_PROXY=https://proxy.example.com:443"
+   Environment="HTTP_PROXY=http://proxy.example.com:3128"
+   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
    ```
 
@@ -135,7 +152,7 @@ settings, you need to add this configuration in the Docker systemd service file.
    ```console
    $ sudo systemctl show --property=Environment docker
 
-   Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.example.com:443 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
+   Environment=HTTP_PROXY=http://proxy.example.com:3128 HTTPS_PROXY=https://proxy.example.com:3129 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
    ```
 
 </div>
@@ -152,7 +169,7 @@ settings, you need to add this configuration in the Docker systemd service file.
 
    ```systemd
    [Service]
-   Environment="HTTP_PROXY=http://proxy.example.com:80"
+   Environment="HTTP_PROXY=http://proxy.example.com:3128"
    ```
 
    If you are behind an HTTPS proxy server, set the `HTTPS_PROXY` environment
@@ -160,7 +177,7 @@ settings, you need to add this configuration in the Docker systemd service file.
 
    ```systemd
    [Service]
-   Environment="HTTPS_PROXY=https://proxy.example.com:443"
+   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
    ```
 
    Multiple environment variables can be set; to set both a non-HTTPS and a
@@ -168,8 +185,8 @@ settings, you need to add this configuration in the Docker systemd service file.
 
    ```systemd
    [Service]
-   Environment="HTTP_PROXY=http://proxy.example.com:80"
-   Environment="HTTPS_PROXY=https://proxy.example.com:443"
+   Environment="HTTP_PROXY=http://proxy.example.com:3128"
+   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
    ```
 
    > **Note**
@@ -179,7 +196,7 @@ settings, you need to add this configuration in the Docker systemd service file.
    >
    > ```
    > [Service]
-   > Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:8080/"
+   > Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:3128/"
    > ```
 
 3. If you have internal Docker registries that you need to contact without
@@ -204,8 +221,8 @@ settings, you need to add this configuration in the Docker systemd service file.
 
    ```systemd
    [Service]
-   Environment="HTTP_PROXY=http://proxy.example.com:80"
-   Environment="HTTPS_PROXY=https://proxy.example.com:443"
+   Environment="HTTP_PROXY=http://proxy.example.com:3128"
+   Environment="HTTPS_PROXY=https://proxy.example.com:3129"
    Environment="NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp"
    ```
 
@@ -222,7 +239,7 @@ settings, you need to add this configuration in the Docker systemd service file.
    ```console
    $ systemctl --user show --property=Environment docker
 
-   Environment=HTTP_PROXY=http://proxy.example.com:80 HTTPS_PROXY=https://proxy.example.com:443 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
+   Environment=HTTP_PROXY=http://proxy.example.com:3128 HTTPS_PROXY=https://proxy.example.com:3129 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
    ```
 
 </div>

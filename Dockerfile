@@ -63,28 +63,27 @@ RUN --mount=type=bind,target=.,rw \
   bundle exec jekyll build --profile -d ${TARGET} --config ${CONFIG_FILES}
 EOT
 
-# htmlproofer checks for broken links
-FROM gem AS htmlproofer-base
-RUN --mount=type=bind,from=generate,source=/out,target=_site <<EOF
-  htmlproofer ./_site \
-    --disable-external \
-    --internal-domains="docs.docker.com,docs-stage.docker.com,localhost:4000" \
-    --file-ignore="/^./_site/engine/api/.*$/,./_site/registry/configuration/index.html" \
-    --url-ignore="/^/docker-hub/api/latest/.*$/,/^/engine/api/v.+/#.*$/,/^/glossary/.*$/" > /results 2>&1
-  rc=$?
-  if [[ $rc -eq 0 ]]; then
-    echo -n > /results
-  fi
+# htmltest checks for broken links
+FROM wjdp/htmltest:v0.17.0 as htmltest-base
+RUN --mount=type=bind,from=generate,source=/out,target=_site \
+    --mount=type=bind,source=.htmltest.yml,target=.htmltest.yml \
+    <<EOF
+    htmltest > /results 2>&1
+    rc=$?
+    if [[ $rc -eq 0 ]]; then
+      echo -n > /results
+    fi
 EOF
 
-FROM htmlproofer-base as htmlproofer
+FROM base as htmltest
+COPY --from=htmltest-base /results /results
 RUN <<EOF
   cat /results
   [ ! -s /results ] || exit 1
 EOF
 
-FROM scratch as htmlproofer-output
-COPY --from=htmlproofer-base /results /results
+FROM scratch as htmltest-output
+COPY --from=htmltest-base /results /results
 
 # mdl is a lint tool for markdown files
 FROM gem AS mdl-base
