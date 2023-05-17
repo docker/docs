@@ -283,6 +283,7 @@ Prerequisites:
      --bootstrap \
      --name=kube \
      --driver=kubernetes \
+     --driver-opt=namespace=buildkit
    ```
 
 3. List available Buildx builders using `docker buildx ls`
