@@ -22,15 +22,15 @@ An initialism is a type of acronym that comprises a group of initial letters use
 - Don't use apostrophes for plural acronyms. ✅URLs ❌URL’S
 - Avoid using an acronym for the first time in a title or heading. If the first use of the acronym is in a title or heading, introduce the acronym (in parentheses, following the spelled-out term) in the first body text that follows.
 
-## Bolds and italics
+## Bold and italics
 
-Unless you're referring to Ul text or user-defined text, you should not add emphasis to text. Clear, front-loaded wording makes the subject of a sentence clear.
+Unless you're referring to UI text or user-defined text, you should not add emphasis to text. Clear, front-loaded wording makes the subject of a sentence clear.
 
 ### Best practice:
 
 - Don't use bold to refer to a feature name.
 - Use italics sparingly, as this type of formatting can be difficult to read in digital experiences.
-Notable exceptions are titles of articles, blog posts, or specifcation documents.
+Notable exceptions are titles of articles, blog posts, or specification documents.
 
 ## Capitalization
 
@@ -137,7 +137,9 @@ When you work with numbers in content, the best practices include:
 
 When writing version numbers for release notes, follow the example below:
 
-Version 4.8.2
+- version 4.8.2
+- v1.0
+- Docker Hub API v2
 
 ## Punctuation
 
