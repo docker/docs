@@ -1846,6 +1846,8 @@ manuals:
         title: Overview
       - path: /docker-hub/publish/insights-analytics/
         title: Insights and analytics
+      - path: /docker-hub/publish/repository-logos/
+        title: Repository logos        
   - path: /docker-hub/dsos-program/
     title: Docker-Sponsored Open Source Program
   - path: /docker-hub/download-rate-limit/
