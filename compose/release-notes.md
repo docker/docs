@@ -11,7 +11,7 @@ redirect_from:
 ## 2.18.0
 {% include release-date.html date="2023-05-16" %}
 
-For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/tag/v2.18.0)
+For more information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/tag/v2.18.0).
 
 ### Bug fixes and enhancements
 - Added dry run support using `--dry-run`
