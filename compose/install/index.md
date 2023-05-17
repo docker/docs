@@ -6,6 +6,7 @@ toc_max: 3
 redirect_from:
 - /compose/compose-desktop/
 - /compose/install/other/
+- /compose/install/compose-desktop/
 ---
 {% include compose-eol.md %}
 
