@@ -8,6 +8,38 @@ redirect_from:
 ---
 {% include compose-eol.md %}
 
+## 2.18.0
+{% include release-date.html date="2023-05-16" %}
+
+### Bug fixes and enhancements
+- Added dry run support using `--dry-run`
+- Added the first (alpha) implementation of viz subcommand
+- Introduced `--no-path-resolution` to skip relative path to be resolved
+- Introduced `COMPOSE_ANSI` to define `--ansi` default value
+- Introduced `COMPOSE_STATUS_STDOUT` to get status messages sent to stdout
+- fix: buildkit progressui integration
+- fix: Don't block events loop collecting logs
+- fix: restore support for `--memory`
+- fix: stop containers after termination
+- fix: let user declare build secret target
+- fix: container being recreated while config has not changed
+- fix: race condition when `--parallel` is used with a large number of dependent services
+- fix: check local image matches the required platform
+- fix: local image removal when compose down is ran with `--project-name`
+- fix: detect active endpoint trying to remove network and skip with a warning
+- fix: remove unnecessary [] output
+- fix: detect Windows terminal is not a `console.File` to avoid a panic
+- fix: `--parallel` has precedence over `COMPOSE_PARALLEL_LIMIT`
+- fix: report external network not found when swarm is disabled
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.13.5
+- Dependencies upgrade: bump buildkit to v0.11.6
+- Dependencies upgrade: bump docker to v23.0.5
+
+For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/tag/v2.18.0)
+
+
 ## 2.17.2
 {% include release-date.html date="2023-03-26" %}
 ### Update
