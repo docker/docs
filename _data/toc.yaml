@@ -1811,6 +1811,8 @@ manuals:
     title: Automatically update services with file watch (Experimental)
   - path: /compose/production/
     title: Using Compose in production
+  - path: /compose/use-secrets/
+    title: Using secrets in Compose
   - path: /compose/startup-order/
     title: Control startup order
   - path: /compose/samples-for-compose/
@@ -1844,6 +1846,8 @@ manuals:
         title: Overview
       - path: /docker-hub/publish/insights-analytics/
         title: Insights and analytics
+      - path: /docker-hub/publish/repository-logos/
+        title: Repository logos        
   - path: /docker-hub/dsos-program/
     title: Docker-Sponsored Open Source Program
   - path: /docker-hub/download-rate-limit/
