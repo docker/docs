@@ -80,7 +80,7 @@ _In Docker Desktop 4.1 and lower._
 What might be easy for you might not be easy for others. Try eliminating this word from the sentence because usually the same meaning can be conveyed without it.
 
 #### e.g.
-Don't use. Instead, use phrases like for example or such as.
+Don't use. Instead, use phrases like `for example` or `such as`.
 
 #### enable
 
@@ -108,7 +108,7 @@ _In Docker Desktop 4.1 and higher…_ or _In Docker Desktop 4.1 and above…_
 
 #### please
 
-Don't use please in the normal course of explaining how to use a product, even if you're explaining a difficult task. Also don't use the phrase please note.
+Don't use `please` in the normal course of explaining how to use a product, even if you're explaining a difficult task. Also don't use the phrase `please note`.
 
 #### register
 Use `register` instead of sign up when talking about creating an account.
@@ -142,7 +142,7 @@ _Turn on the dark mode toggle._
 Use `upgrade` for when describing a higher subscription tier
 
 #### vs.
-Don't use vs. as an abbreviation for versus; instead, use the unabbreviated versus.
+Don't use `vs.` as an abbreviation for versus; instead, use the unabbreviated `versus`.
 
 
 #### we
@@ -155,8 +155,7 @@ _Use widgets when you have work you want to organize._
 
 Instead of:
 
-_We created a feature for you to add widgets.
-One exception: You can use we recommend instead of it is recommended or Docker recommends._
+_We created a feature for you to add widgets._
 
 #### wish
 

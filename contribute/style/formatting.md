@@ -159,7 +159,7 @@ For information on how to add tables to your content, see [Useful component and 
 
 ## Referring to file types
 
-When you're discussing a file type, use the formal name of the type. (The file type name is often in all caps because many file type names are acronyms or initialisms.) Do not use the filename extension to refer generically to the file type.
+When you're discussing a file type, use the formal name of the type. Do not use the filename extension to refer generically to the file type.
 
     | Correct | Incorrect |
     | --- | --- |

@@ -11,8 +11,12 @@ swap:
   (?:sign on|log on|log in): sign in
   above: previous
   adaptor: adapter
+  account name: username
   administrate: administer
+  admin: administrator
   afterwards: afterward
+  allow: let
+  allows: lets
   alphabetic: alphabetical
   alphanumerical: alphanumeric
   anti-aliasing: antialiasing
@@ -37,6 +41,8 @@ swap:
   mutices: mutexes
   paas: PaaS
   pb: PB
+  repo: repository
   scroll: navigate
   sign up: register
   tb: TB
+  wish: want
