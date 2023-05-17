@@ -81,6 +81,21 @@ services:
     environment:
       - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
  ```
+ 
+ To avoid hardcoding SSH_AUTH_SOCK, e.g. when working in a team with diverging host setups, you can take advantage of the host environment variable instead:
+ 
+ ```yaml
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - type: bind
+        # Adding a fallback value of /dev/null will prevent hard failing the bind volume mount on hosts without a configured SSH agent
+        source: ${SSH_AUTH_SOCK:-/dev/null}
+        target: ${SSH_AUTH_SOCK:-/dev/null}
+    environment:
+      - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
+ ```
 
 ## Known limitations for all platforms
 
