@@ -84,7 +84,7 @@ Steps:
 4. Push the chart to a Docker Hub repository.
 
    ```console
-   $ helm push demo-0.1.0.tgz oci://registry-1.docker.io/docker
+   $ helm push demo-0.1.0.tgz oci://registry-1.docker.io/hubuser
    ```
 
    This uploads the Helm chart tarball to a `demo` repository in the `docker`
