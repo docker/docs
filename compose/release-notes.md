@@ -8,6 +8,12 @@ redirect_from:
 ---
 {% include compose-eol.md %}
 
+## 2.18.1
+{% include release-date.html date="2023-05-17" %}
+
+### Bug fixes and enhancements
+- Fixed "Image not found" errors when building images
+
 ## 2.18.0
 {% include release-date.html date="2023-05-16" %}
 
