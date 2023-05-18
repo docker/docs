@@ -436,7 +436,12 @@ connected to both networks.
     address. This capability is called **automatic service discovery**. Let's
     connect to `alpine1` and test this out. `alpine1` should be able to resolve
     `alpine2` and `alpine4` (and `alpine1`, itself) to IP addresses.
-
+    
+    > **Note**
+    > 
+    > Only valid for custom container names, the default generated container names cannot be resolved
+    
+    
     ```console
     $ docker container attach alpine1
 
