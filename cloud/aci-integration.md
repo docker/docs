@@ -8,6 +8,8 @@ toc_min: 1
 toc_max: 2
 ---
 
+{% include aci-eos-eol.md %}
+
 ## Overview
 
 The Docker Azure Integration enables developers to use native Docker commands to run applications in Azure Container Instances (ACI) when building cloud-native applications. The new experience provides a tight integration between Docker Desktop and Microsoft Azure allowing developers to quickly run applications using the Docker CLI or VS Code extension, to switch seamlessly from local development to cloud deployment.

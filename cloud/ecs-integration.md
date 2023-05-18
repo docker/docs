@@ -8,6 +8,8 @@ toc_min: 1
 toc_max: 2
 ---
 
+{% include aci-eos-eol.md %}
+
 ## Overview
 
 The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon Elastic Container Service (ECS) when building cloud-native applications.
