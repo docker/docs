@@ -15,11 +15,11 @@
 
 /scout/ @ChrisChinchilla
 
-/docker-hub/ @aevesdocker @craig-osterhout
+/docker-hub/ @aevesdocker @craig-osterhout @stephaurelio
 
 /engine/ @dvdksn
 
-/subscription/ @aevesdocker
+/subscription/ @aevesdocker @stephaurelio
 
 /docker-hub/publish/ @ChrisChinchilla
 
