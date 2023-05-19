@@ -6,13 +6,13 @@ toc_min: 1
 toc_max: 2
 ---
 
-The following section contains step-by-step instructions on how to get started onboarding your organization after you obtain a Docker Team subscription.
+The following section contains step-by-step instructions on how to get started onboarding your organization after you have an organization with a Docker Team subscription.
 
 ## Prerequisites
 
-Before you start to on board your organization, ensure that you've completed the following:
-- You have a Docker Team subscription. You can verify your subscription in Docker Hub's [Billing Details](https://hub.docker.com/billing){: target="_blank" rel="noopener" class="_"}. If you haven't subscribed to Docker Team yet, see [Upgrade your subscription](../subscription/upgrade.md) for details about upgrading.
-- You are familiar with Docker terminology. If you discover any unfamiliar terms, see the [glossary](/glossary/#docker) or [FAQs](../docker-hub/onboarding-faqs.md).
+Before you start to on board your organization, ensure that you:
+- [Create an organization](../docker-hub/orgs.md#create-an-organization) with a Docker Team subscription.
+- Familiarize yourself with Docker concepts and terminology in the [glossary](../glossary.md) and [FAQs](../docker-hub/onboarding-faqs.md).
 
 ## Step 1: Identify your Docker users and their Docker accounts
 
