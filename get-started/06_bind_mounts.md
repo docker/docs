@@ -51,7 +51,7 @@ command prompt (`cmd`).
    bind mount.
 
    ```console
-   $ docker run -it --mount type=bind,src="$(pwd)",target=/src ubuntu bash
+   $ docker run -it --mount "type=bind,src=$pwd,target=/src" ubuntu bash
    ```
 
    The `--mount` option tells Docker to create a bind mount, where `src` is the
