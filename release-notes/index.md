@@ -23,9 +23,9 @@ that you regularly visit the release notes to learn about updates.
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                 <a href="/engine/release-notes/23.0/"><img src="/assets/images/engine-configure-daemon.svg" alt="engine release notes" width="70" height="70"></a>
+                 <a href="/engine/release-notes/24.0/"><img src="/assets/images/engine-configure-daemon.svg" alt="engine release notes" width="70" height="70"></a>
             </div>
-                <h2 id="engine release notes"><a href="/engine/release-notes/23.0/">Docker Engine</a></h2>
+                <h2 id="engine release notes"><a href="/engine/release-notes/24.0/">Docker Engine</a></h2>
          </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">

@@ -32,6 +32,18 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: annotation
+      value_type: map
+      default_value: map[]
+      description: |
+        Add an annotation to the container (passed through to the OCI runtime)
+      deprecated: false
+      hidden: false
+      min_api_version: "1.43"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: attach
       shorthand: a
       value_type: list

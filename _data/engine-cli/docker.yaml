@@ -163,7 +163,7 @@ options:
     - option: host
       shorthand: H
       value_type: list
-      description: Daemon socket(s) to connect to
+      description: Daemon socket to connect to
       deprecated: false
       hidden: false
       experimental: false
