@@ -10,7 +10,7 @@ The following section contains step-by-step instructions on how to get started o
 
 ## Prerequisites
 
-Before you start to on board your organization, ensure that you've completed the following:
+Before you start to on board your organization, ensure that you:
 - [Create an organization](../docker-hub/orgs.md#create-an-organization) with a Docker Business subscription.
 - Familiarize yourself with Docker concepts and terminology in the [glossary](../glossary.md) and [FAQs](../docker-hub/onboarding-faqs.md).
 
