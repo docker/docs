@@ -117,8 +117,8 @@ $ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
    ```console
    $ dnf list docker-ce --showduplicates | sort -r
 
-   docker-ce.x86_64    3:23.0.5-1.fc37    docker-ce-stable
-   docker-ce.x86_64    3:23.0.4-1.fc37    docker-ce-stable
+   docker-ce.x86_64    3:24.0.0-1.fc37    docker-ce-stable
+   docker-ce.x86_64    3:23.0.6-1.fc37    docker-ce-stable
    <...>
    ```
 
@@ -127,7 +127,7 @@ $ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
 
    Install a specific version by its fully qualified package name, which is
    the package name (`docker-ce`) plus the version string (2nd column),
-   separated by a hyphen (`-`). For example, `docker-ce-3:23.0.5-1.fc37`.
+   separated by a hyphen (`-`). For example, `docker-ce-3:24.0.0-1.fc37`.
 
    Replace `<VERSION_STRING>` with the desired version and then run the following
    command to install:

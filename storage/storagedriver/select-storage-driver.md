@@ -1,7 +1,7 @@
 ---
 title: Docker storage drivers
 description: Learn how to select the proper storage driver for your container.
-keywords: container, storage, driver, aufs, btrfs, devicemapper, zfs, overlay, overlay2
+keywords: container, storage, driver, btrfs, devicemapper, zfs, overlay, overlay2
 redirect_from:
 - /engine/userguide/storagedriver/
 - /engine/userguide/storagedriver/selectadriver/
@@ -27,9 +27,7 @@ The Docker Engine provides the following storage drivers on Linux:
 | `fuse-overlayfs`   | `fuse-overlayfs`is preferred only for running Rootless Docker on a host that does not provide support for rootless `overlay2`. On Ubuntu and Debian 10, the `fuse-overlayfs` driver does not need to be used, and `overlay2` works even in rootless mode. Refer to the [rootless mode documentation](../../engine/security/rootless.md) for details.                                                            |
 | `btrfs` and `zfs`  | The `btrfs` and `zfs` storage drivers allow for advanced options, such as creating "snapshots", but require more maintenance and setup. Each of these relies on the backing filesystem being configured correctly.                                                                                                                                                                                              |
 | `vfs`              | The `vfs` storage driver is intended for testing purposes, and for situations where no copy-on-write filesystem can be used. Performance of this storage driver is poor, and is not generally recommended for production use.                                                                                                                                                                                   |
-| `aufs`             | The `aufs` storage driver Was the preferred storage driver for Docker 18.06 and older, when running on Ubuntu 14.04 on kernel 3.13 which had no support for `overlay2`. However, current versions of Ubuntu and Debian now have support for `overlay2`, which is now the recommended driver.                                                                                                                    |
 | `devicemapper`     | The `devicemapper` storage driver requires `direct-lvm` for production environments, because `loopback-lvm`, while zero-configuration, has very poor performance. `devicemapper` was the recommended storage driver for CentOS and RHEL, as their kernel version did not support `overlay2`. However, current versions of CentOS and RHEL now have support for `overlay2`, which is now the recommended driver. |
-| `overlay`          | The legacy `overlay` driver was used for kernels that did not support the "multiple-lowerdir" feature required for `overlay2` All currently supported Linux distributions now provide support for this, and it is therefore deprecated.                                                                                                                                                                         |
 
 The Docker Engine has a prioritized list of which storage driver to use if no
 storage driver is explicitly configured, assuming that the storage driver meets
@@ -62,24 +60,17 @@ packages to be installed, while `btrfs` is only supported if your system uses
 `btrfs` as storage.  In general, the following configurations work on recent
 versions of the Linux distribution:
 
-| Linux distribution  | Recommended storage drivers   | Alternative drivers                                |
-|:--------------------|:------------------------------|:---------------------------------------------------|
-| Ubuntu              | `overlay2`                    | `overlay`¹, `devicemapper`², `aufs`³, `zfs`, `vfs` |
-| Debian              | `overlay2`                    | `overlay`¹, `devicemapper`², `aufs`³, `vfs`        |
-| CentOS              | `overlay2`                    | `overlay`¹, `devicemapper`², `zfs`, `vfs`          |
-| Fedora              | `overlay2`                    | `overlay`¹, `devicemapper`², `zfs`, `vfs`          |
-| SLES 15             | `overlay2`                    | `overlay`¹, `devicemapper`², `vfs`                 |
-| RHEL                | `overlay2`                    | `overlay`¹, `devicemapper`², `vfs`                 |
+| Linux distribution | Recommended storage drivers | Alternative drivers           |
+|:-------------------|:----------------------------|:------------------------------|
+| Ubuntu             | `overlay2`                  | `devicemapper`¹, `zfs`, `vfs` |
+| Debian             | `overlay2`                  | `devicemapper`¹, `vfs`        |
+| CentOS             | `overlay2`                  | `devicemapper`¹, `zfs`, `vfs` |
+| Fedora             | `overlay2`                  | `devicemapper`¹, `zfs`, `vfs` |
+| SLES 15            | `overlay2`                  | `devicemapper`¹, `vfs`        |
+| RHEL               | `overlay2`                  | `devicemapper`¹, `vfs`        |
 
-¹) The `overlay` storage driver is deprecated, and will be removed in a future
-release. It is recommended that users of the `overlay` storage driver migrate to `overlay2`.
-
-²) The `devicemapper` storage driver is deprecated, and will be removed in a future
+¹) The `devicemapper` storage driver is deprecated, and will be removed in a future
 release. It is recommended that users of the `devicemapper` storage driver migrate
-to `overlay2`.
-
-³) The `aufs` storage driver is deprecated, and will be removed in a future
-release. It is recommended that users of the `aufs` storage driver migrate
 to `overlay2`.
 
 When in doubt, the best all-around configuration is to use a modern Linux
@@ -112,15 +103,14 @@ With regard to Docker, the backing filesystem is the filesystem where
 `/var/lib/docker/` is located. Some storage drivers only work with specific
 backing filesystems.
 
-| Storage driver        | Supported backing filesystems  |
-|:----------------------|:------------------------------|
-| `overlay2`, `overlay` | `xfs` with ftype=1, `ext4`    |
-| `fuse-overlayfs`      | any filesystem                |
-| `aufs`                | `xfs`, `ext4`                 |
-| `devicemapper`        | `direct-lvm`                  |
-| `btrfs`               | `btrfs`                       |
-| `zfs`                 | `zfs`                         |
-| `vfs`                 | any filesystem                 |
+| Storage driver   | Supported backing filesystems |
+|:-----------------|:------------------------------|
+| `overlay2`       | `xfs` with ftype=1, `ext4`    |
+| `fuse-overlayfs` | any filesystem                |
+| `devicemapper`   | `direct-lvm`                  |
+| `btrfs`          | `btrfs`                       |
+| `zfs`            | `zfs`                         |
+| `vfs`            | any filesystem                |
 
 ## Other considerations
 
@@ -130,14 +120,11 @@ Among other things, each storage driver has its own performance characteristics
 that make it more or less suitable for different workloads. Consider the
 following generalizations:
 
-- `overlay2`, `aufs`, and `overlay` all operate at the file level rather than
+- `overlay2` operates at the file level rather than
   the block level. This uses memory more efficiently, but the container's
   writable layer may grow quite large in write-heavy workloads.
 - Block-level storage drivers such as `devicemapper`, `btrfs`, and `zfs` perform
   better for write-heavy workloads (though not as well as Docker volumes).
-- For lots of small writes or containers with many layers or deep filesystems,
-  `overlay` may perform better than `overlay2`, but consumes more inodes, which
-  can lead to inode exhaustion.
 - `btrfs` and `zfs` require a lot of memory.
 - `zfs` is a good choice for high-density workloads such as PaaS.
 
@@ -162,8 +149,8 @@ specific shared storage system.
 
 For some users, stability is more important than performance. Though Docker
 considers all of the storage drivers mentioned here to be stable, some are newer
-and are still under active development. In general, `overlay2`, `aufs`, and
-`devicemapper` are the choices with the highest stability.
+and are still under active development. In general, `overlay2` provides the
+highest stability.
 
 ### Test with your own workloads
 
@@ -206,8 +193,7 @@ to physical or logical disks on the Docker host.
 ## Related information
 
 * [About images, containers, and storage drivers](index.md)
-* [`aufs` storage driver in practice](aufs-driver.md)
 * [`devicemapper` storage driver in practice](device-mapper-driver.md)
-* [`overlay` and `overlay2` storage drivers in practice](overlayfs-driver.md)
+* [`overlay2` storage driver in practice](overlayfs-driver.md)
 * [`btrfs` storage driver in practice](btrfs-driver.md)
 * [`zfs` storage driver in practice](zfs-driver.md)

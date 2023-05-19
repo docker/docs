@@ -50,8 +50,16 @@ command prompt (`cmd`).
 2. Run the following command to start `bash` in an `ubuntu` container with a
    bind mount.
 
+   If you are using an Mac or Linux device, then use the following command.
+
    ```console
    $ docker run -it --mount type=bind,src="$(pwd)",target=/src ubuntu bash
+   ```
+
+   If you are using Windows, then use the following command in PowerShell.
+
+   ```powershell
+   $ docker run -it --mount "type=bind,src=$pwd,target=/src" ubuntu bash
    ```
 
    The `--mount` option tells Docker to create a bind mount, where `src` is the
@@ -138,7 +146,7 @@ So, let's do it!
 
    ```powershell
    $ docker run -dp 3000:3000 `
-       -w /app --mount type=bind,src="$(pwd)",target=/app `
+       -w /app --mount "type=bind,src=$pwd,target=/app" `
        node:18-alpine `
        sh -c "yarn install && yarn run dev"
    ```

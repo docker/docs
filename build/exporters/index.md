@@ -21,7 +21,7 @@ Buildx supports the following exporters:
   [OCI image layout](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-layout.md){:target="blank" rel="noopener" class="_"}
   format.
 - `docker`: exports the build result to the local filesystem in the
-  [Docker Image Specification v1.2.0](https://github.com/moby/moby/blob/v23.0.5/image/spec/v1.2.md){:target="blank" rel="noopener" class="_"}
+  [Docker Image Specification v1.2.0](https://github.com/moby/moby/blob/v24.0.0/image/spec/v1.2.md){:target="blank" rel="noopener" class="_"}
   format.
 - `cacheonly`: doesn't export a build output, but runs the build and creates a
   cache.
