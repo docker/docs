@@ -1,6 +1,6 @@
 ---
 description: Learn the technologies that support storage drivers.
-keywords: container, storage, driver, AUFS, btrfs, devicemapper, overlayfs, vfs, zfs
+keywords: container, storage, driver, btrfs, devicemapper, overlayfs, vfs, zfs
 title: About storage drivers
 redirect_from:
 - /en/latest/terms/layer/
@@ -386,8 +386,8 @@ layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
 copy-on-write operation. The specifics steps involved depend on the specific
-storage driver. For the `overlay2`, `overlay`, and `aufs` drivers, the 
-copy-on-write operation follows this rough sequence:
+storage driver. For the `overlay2` driver, the  copy-on-write operation follows
+this rough sequence:
 
 *  Search through the image layers for the file to update. The process starts
    at the newest layer and works down to the base layer one layer at a time.

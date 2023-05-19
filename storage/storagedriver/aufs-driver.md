@@ -2,9 +2,19 @@
 description: Learn how to optimize your use of AUFS driver.
 keywords: 'container, storage, driver, AUFS '
 title: Use the AUFS storage driver
+sitemap: false
 redirect_from:
 - /engine/userguide/storagedriver/aufs-driver/
 ---
+
+
+> **Deprecated**
+>
+> The AuFS storage driver has been deprecated, and is removed in Docker Engine
+> v24.0. If you are using AufS, you must migrate to a supported storage driver
+> before upgrading to Docker Engine v24.0. Read the [Docker storage drivers](select-storage-driver.md)
+> page for supported storage drivers.
+{:.warning}
 
 AUFS is a *union filesystem*. The `aufs` storage driver was previously the default
 storage driver used for managing images and layers on Docker for Ubuntu, and for
@@ -12,12 +22,6 @@ Debian versions prior to Stretch. If your Linux kernel is version 4.0 or higher,
 and you use Docker Engine - Community, consider using the newer
 [overlay2](overlayfs-driver.md){: target="_blank" rel="noopener" class="_" }, which has
 potential performance advantages over the `aufs` storage driver.
-
-> **Note**
->
-> AUFS is not supported on some distributions and Docker editions. See
-> [Prerequisites](#prerequisites) for more information about supported
-> platforms.
 
 ## Prerequisites
 
