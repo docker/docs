@@ -42,9 +42,11 @@ behavior for the daemon in the [`daemon.json` file](./index.md#configure-the-doc
 
 ```json
 {
-  "http-proxy": "http://proxy.example.com:3128",
-  "https-proxy": "https://proxy.example.com:3129",
-  "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
+  "proxies": {
+    "http-proxy": "http://proxy.example.com:3128",
+    "https-proxy": "https://proxy.example.com:3129",
+    "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
+  }
 }
 ```
 
