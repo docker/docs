@@ -1334,8 +1334,6 @@ manuals:
         title: Overview
       - path: /storage/storagedriver/select-storage-driver/
         title: Select a storage driver
-      - path: /storage/storagedriver/aufs-driver/
-        title: Use the AUFS storage driver
       - path: /storage/storagedriver/btrfs-driver/
         title: Use the Btrfs storage driver
       - path: /storage/storagedriver/device-mapper-driver/
@@ -1346,6 +1344,8 @@ manuals:
         title: Use the ZFS storage driver
       - path: /storage/storagedriver/vfs-driver/
         title: Use the VFS storage driver
+      - path: /storage/storagedriver/aufs-driver/
+        title: Use the AUFS storage driver (deprecated)
   - sectiontitle: Networking
     section:
     - path: /network/
