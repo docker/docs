@@ -104,6 +104,15 @@ Docker from the repository.
       "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
       sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
+    
+    > **Note**
+    > In case your Linux distro is based on Ubuntu (e.g Linux Min 21.1), use `"$UBUNTU_CODENAME"` instead of `$VERSION_CODENAME"`:
+    > ```console
+    > $ echo \
+    >   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
+    >   "$(. /etc/os-release && echo "$UBUNTU_CODENAME")" stable" | \
+    >   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    > ```
 
 #### Install Docker Engine
 
