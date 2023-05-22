@@ -104,6 +104,11 @@ Docker from the repository.
       "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
       sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
+    
+    > **Note**
+    >
+    > If you use an Ubuntu derivative distro, such as Linux Mint,
+    > you may need to use `UBUNTU_CODENAME` instead of `VERSION_CODENAME`.
 
 #### Install Docker Engine
 
