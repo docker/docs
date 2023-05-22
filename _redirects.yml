@@ -105,6 +105,8 @@
   - /go/deprecated/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
+"/cloud/ecs-integration/":
+  - /go/compose-ecs-eol/
 "/compose/migrate/":
   - /go/compose-v1-eol/
 "/config/formatting/":
