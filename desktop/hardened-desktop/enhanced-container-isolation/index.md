@@ -77,9 +77,15 @@ See [ECI Support for WSL](faq.md#eci-support-for-wsl) for further info as well a
 To enable Enhanced Container Isolation as a developer:
 1. Ensure your organization has a Docker Business subscription.
 2. Log in to your organization in Docker Desktop. This will ensure the ECI feature is available to you in Docker Desktop's Settings menu.
-3. Navigate to **Settings** > **General** in Docker Desktop.
-4. Next to **Use Enhanced Container Isolation**, select the checkbox.
-5. Select **Apply and restart** to save your settings.
+3. Stop and remove all existing containers.
+4. Navigate to **Settings** > **General** in Docker Desktop.
+5. Next to **Use Enhanced Container Isolation**, select the checkbox.
+6. Select **Apply and restart** to save your settings.
+
+>**Important**
+>
+>Enhanced Container Isolation does not protect containers created prior to enabling ECI. For more information on known limitations and workarounds, see [FAQs and known issues](faq.md).
+{: .important}
 
 #### As an admin
 
