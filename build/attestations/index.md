@@ -59,7 +59,7 @@ $ docker buildx build --sbom=true --provenance=true .
 > by default. See [Provenance attestation](./slsa-provenance.md) for more details.
 
 BuildKit generates the attestations when building the image. The attestation
-records are wrapped in the in-toto JSON format and attached it to the image
+records are wrapped in the in-toto JSON format and attached to the image
 index in a manifest for the final image.
 
 ## Storage
