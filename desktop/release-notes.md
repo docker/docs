@@ -24,11 +24,56 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.20.0
+
+{% include release-date.html date="2023-05-25" %}
+
+{% include desktop-install.md all=true version="4.20.0" build_path="/" %}
+
+### New
+
+- [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) find the most recently built image if none has been provided as an argument.
+
+### Upgrades
+
+- [Buildx v0.10.5](https://github.com/docker/buildx/releases/tag/v0.10.5)
+- [Compose v2.18.1](https://github.com/docker/compose/releases/tag/v2.18.1)
+- [Docker Engine v23.0.5](https://docs.docker.com/engine/release-notes/23.0/#2305)
+- [Containerd v1.6.21](https://github.com/containerd/containerd/releases/tag/v1.6.21)
+- [runc v1.1.7](https://github.com/opencontainers/runc/releases/tag/v1.1.5)
+- [runc v1.1.6](https://github.com/opencontainers/runc/releases/tag/v1.1.6)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Added a warning about the [retirement of Docker Compose ECS/ACS integrations in November 2023](https://docs.docker.com/go/compose-ecs-eol/). Can be suppressed with `COMPOSE_CLOUD_EOL_SILENT=1`.
+- [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) find the most recently built image if none has been provided as an argument.
+- Improved [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) `compare` command.
+- Fix HTTP proxy bug where an HTTP 1.0 client could receive an HTTP 1.1 response.
+- Enabled Docker Desktop's Enhanced Container Isolation (ECI) feature on WSL-2 (Docker Business only).
+- Fixed a bug on the containers list table where hiding columns would not be persisted for a fresh installation of Docker Desktop
+
+#### For Mac
+
+- Reclaim disk space more quickly when files are deleted in containers. Related to [docker/for-mac#371](https://github.com/docker/for-mac/issues/371).
+- Fixed a bug that prevented containers accessing 169.254.0.0/16 IPs. Fixes [docker/for-mac#6825](https://github.com/docker/for-mac/issues/6825).
+- Fixed a bug in `com.docker.diagnose check` where it would complain about a missing vpnkit even when vpnkit is not expected to be running. Related to [docker/for-mac#6825](https://github.com/docker/for-mac/issues/6825).
+
+#### For Windows
+
+- Fixed moving WSL Data on a different disk. Fixes [docker/for-win#13269](https://github.com/docker/for-win/issues/13269).
+- Fixed a bug where Docker Desktop was not stopping its WSL distros (docker-desktop and docker-desktop-data) when it was shutdown, consuming host memory unnecessarily.
+
+#### For Linux
+
+- Fixed an issue with Docker Compose V1/V2 compatibility setting.
+
 ## 4.19.0
 
 {% include release-date.html date="2023-04-27" %}
 
-{% include desktop-install.md all=true version="4.19.0" build_path="/" %}
+{% include desktop-install.md all=true version="4.19.0" build_path="/106363/" %}
 
 ### New
 
@@ -88,7 +133,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms
 
-- Fixed a security issue allowing users to bypass Image Access Management (IAM) restrictions configured by their organisation by avoiding `registry.json` enforced login via deleting the `credsStore` key from their Docker CLI configuration file. Only affects Docker Business customers. 
+- Fixed a security issue allowing users to bypass Image Access Management (IAM) restrictions configured by their organisation by avoiding `registry.json` enforced login via deleting the `credsStore` key from their Docker CLI configuration file. Only affects Docker Business customers.
 - Fixed [CVE-2023-24532](https://github.com/advisories/GHSA-x2w5-7wp4-5qff).
 - Fixed [CVE-2023-25809](https://github.com/advisories/GHSA-m8cg-xc2p-r3fc).
 - Fixed [CVE-2023-27561](https://github.com/advisories/GHSA-vpvm-3wq2-2wvm).
