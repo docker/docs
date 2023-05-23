@@ -12,7 +12,7 @@ fixes in [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="
 
 {% include release-date.html date="2023-03-06" %}
 
-{% include buildx-v0.10-disclaimer.md %}
+{% include 0.10-disclaimer.md %}
 
 ### Bug fixes and enhancements
 
