@@ -1,0 +1,44 @@
+command: docker scout push
+short: Push an image or image index to Docker Scout (experimental)
+long: |
+    The docker scout push command allows to push an image or image index to Docker Scout.
+usage: docker scout push IMAGE
+pname: docker scout
+plink: docker_scout.yaml
+options:
+    - option: namespace
+      value_type: string
+      description: Docker Hub namespace to push to
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: sbom
+      value_type: bool
+      default_value: "false"
+      description: Create and upload SBOMs
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

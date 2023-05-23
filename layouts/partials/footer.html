@@ -1,0 +1,126 @@
+<div
+  class="flex flex-col overflow-hidden max-w-[1024px] mx-auto p-12 gap-12"
+>
+  <div class="flex flex-wrap justify-between gap-4 sm:flex-col sm:items-center">
+    {{ range site.Menus.footer }}
+      <div class="w-32 sm:my-4 sm:text-center">
+        <ul class="space-y-2">
+          <li>
+            <b
+              ><a
+                class="hover:underline"
+                href="{{ .URL }}"
+                target="_blank"
+                rel="noopener"
+                >{{ .Name }}</a
+              ></b
+            >
+          </li>
+          {{ range .Children }}
+            <li>
+              <a
+                class="hover:underline"
+                href="{{ .URL }}"
+                target="_blank"
+                rel="noopener"
+                >{{ .Name }}</a
+              >
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </div>
+  <div class="self-end sm:self-center">
+    <nav>
+      <ul class="flex gap-4 sm:flex-col items-center">
+        <li>
+          <a
+            class="hover:underline"
+            href="https://www.docker.com/legal/docker-terms-service"
+            target="_blank"
+            rel="noopener"
+            >Terms of Service</a
+          >
+        </li>
+        <li>
+          <a
+            class="hover:underline"
+            href="https://status.docker.com/"
+            target="_blank"
+            rel="noopener"
+            >Status</a
+          >
+        </li>
+        <li>
+          <a
+            class="hover:underline"
+            href="https://www.docker.com/legal"
+            target="_blank"
+            rel="noopener"
+            >Legal</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="flex justify-between sm:flex-col sm:gap-4 sm:items-center">
+    <div>
+      <p>
+        Copyright &copy; 2013-{{ now.Format "2006" }} Docker Inc. All rights
+        reserved.
+      </p>
+      {{ with site.Params.analytics.onetrust }}
+        <button id="ot-sdk-btn" class="ot-sdk-show-settings">
+          Cookie Settings
+        </button>
+      {{ end }}
+    </div>
+    <nav>
+      <ul class="flex gap-4 sm:flex-col">
+        <li class="hover:underline">
+          <a href="https://twitter.com/docker" target="_blank" rel="noopener"
+            >Twitter</a
+          >
+        </li>
+        <li class="hover:underline">
+          <a
+            href="https://www.youtube.com/user/dockerrun"
+            target="_blank"
+            rel="noopener"
+            >Youtube</a
+          >
+        </li>
+        <li class="hover:underline">
+          <a href="https://github.com/docker" target="_blank" rel="noopener"
+            >GitHub</a
+          >
+        </li>
+        <li class="hover:underline">
+          <a
+            href="https://www.linkedin.com/company/docker"
+            target="_blank"
+            rel="noopener"
+            >Linkedin</a
+          >
+        </li>
+        <li class="hover:underline">
+          <a
+            href="https://www.facebook.com/docker.run"
+            target="_blank"
+            rel="noopener"
+            >Facebook</a
+          >
+        </li>
+        <li class="hover:underline">
+          <a
+            href="https://www.reddit.com/r/docker"
+            target="_blank"
+            rel="noopener"
+            >Reddit</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

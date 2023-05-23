@@ -1,4 +1,4 @@
-DirectoryPath: "_site"
+DirectoryPath: "public"
 EnforceHTTPS: false
 CheckDoctype: false
 CheckExternal: false
