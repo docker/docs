@@ -116,7 +116,7 @@ counter whenever you visit it.
 5.  Create a file called `docker-compose.yml` and paste this in:
 
     ```none
-        services:
+      services:
       web:
         image: 127.0.0.1:5000/stackdemo
         build: .
