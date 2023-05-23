@@ -967,7 +967,6 @@ the information from a Docker-managed secret instead of being passed directly.
 ## Use Secrets in Compose
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 
 services:
    db:
