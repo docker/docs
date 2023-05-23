@@ -58,8 +58,7 @@ it can identify the artifact that’s now vulnerable, why, and where it’s in u
 When a customer enrolls with Docker Scout, the organization receives their own
 instance of the database. This database tracks timestamped metadata about your
 images that Docker Scout can then match to CVEs. Find more details on how this
-works in the [Advanced image analysis
-document](http://./advanced-image-analysis.md).
+works in the [Advanced image analysis document](./advanced-image-analysis.md).
 
 Docker Scout is ideal for analyzing images in Docker Desktop and Docker Hub, but
 the flexibility of the approach also means it can integrate with other image
