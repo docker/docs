@@ -22,7 +22,6 @@ Services are associated with profiles through the
 array of profile names:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: frontend
@@ -94,7 +93,6 @@ manually. This can be used for one-off services and debugging tools.
 As an example consider the following configuration:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   backend:
     image: backend
@@ -128,7 +126,6 @@ This means that any other services the targeted service `depends_on` should eith
 - Always be enabled, by omitting `profiles` or having a matching profile enabled explicitly
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: web

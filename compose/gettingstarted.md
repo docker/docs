@@ -125,7 +125,6 @@ Create a file called `docker-compose.yml` in your project directory and paste
 the following:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .
@@ -220,7 +219,6 @@ Edit `docker-compose.yml` in your project directory to add a
 [bind mount](../storage/bind-mounts.md) for the `web` service:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .
