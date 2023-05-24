@@ -89,7 +89,7 @@ To remove an unused or a dangling image:
 2. Use the **Unused** or **Dangling** check boxes to select the type of images you would like to remove.
 
     The **Clean up** images status bar displays the total space you can reclaim by removing the selected images.
-3.. Select **Remove** to confirm.
+3. Select **Remove** to confirm.
 
 ## Interact with remote repositories
 
