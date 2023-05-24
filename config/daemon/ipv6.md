@@ -28,7 +28,7 @@ either IPv4 or IPv6 (or both) with any container, service, or network.
 2.  Reload the Docker configuration file.
 
     ```console
-    $ systemctl reload docker
+    $ systemctl restart docker
     ```
 
 You can now create networks with the `--ipv6` flag and assign containers IPv6
