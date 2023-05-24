@@ -32,7 +32,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ### New
 
-- [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) find the most recently built image if none has been provided as an argument.
+- [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) now finds the most recently built image if it is not provided as an argument.
+- Improved the [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) `compare` command.
 
 ### Upgrades
 
@@ -48,26 +49,24 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 #### For all platforms
 
 - Added a warning about the [retirement of Docker Compose ECS/ACS integrations in November 2023](https://docs.docker.com/go/compose-ecs-eol/). Can be suppressed with `COMPOSE_CLOUD_EOL_SILENT=1`.
-- [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) find the most recently built image if none has been provided as an argument.
-- Improved [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) `compare` command.
-- Fix HTTP proxy bug where an HTTP 1.0 client could receive an HTTP 1.1 response.
-- Enabled Docker Desktop's Enhanced Container Isolation (ECI) feature on WSL-2 (Docker Business only).
-- Fixed a bug on the containers list table where hiding columns would not be persisted for a fresh installation of Docker Desktop
+- Fixed an HTTP proxy bug where an HTTP 1.0 client could receive an HTTP 1.1 response.
+- Enabled Docker Desktop's Enhanced Container Isolation (ECI) feature on WSL-2. This is available with a Docker Business subscription.
+- Fixed a bug on the **Containers** table where previously hidden columns were displayed again after a fresh installation of Docker Desktop.
 
 #### For Mac
 
-- Reclaim disk space more quickly when files are deleted in containers. Related to [docker/for-mac#371](https://github.com/docker/for-mac/issues/371).
+- You can now reclaim disk space more quickly when files are deleted in containers. Related to [docker/for-mac#371](https://github.com/docker/for-mac/issues/371).
 - Fixed a bug that prevented containers accessing 169.254.0.0/16 IPs. Fixes [docker/for-mac#6825](https://github.com/docker/for-mac/issues/6825).
 - Fixed a bug in `com.docker.diagnose check` where it would complain about a missing vpnkit even when vpnkit is not expected to be running. Related to [docker/for-mac#6825](https://github.com/docker/for-mac/issues/6825).
 
 #### For Windows
 
 - Fixed moving WSL Data on a different disk. Fixes [docker/for-win#13269](https://github.com/docker/for-win/issues/13269).
-- Fixed a bug where Docker Desktop was not stopping its WSL distros (docker-desktop and docker-desktop-data) when it was shutdown, consuming host memory unnecessarily.
+- Fixed a bug that meant WSL data could not be moved to a different disk. Fixes [docker/for-win#13269](https://github.com/docker/for-win/issues/13269).
 
 #### For Linux
 
-- Fixed an issue with Docker Compose V1/V2 compatibility setting.
+- Fixed an issue with the Docker Compose V1/V2 compatibility setting.
 
 ## 4.19.0
 
