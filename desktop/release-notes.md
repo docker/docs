@@ -30,24 +30,20 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 {% include desktop-install.md all=true version="4.20.0" build_path="/" %}
 
-### New
-
-- [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) now finds the most recently built image if it is not provided as an argument.
-- Improved the [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) `compare` command.
-
 ### Upgrades
 
 - [Buildx v0.10.5](https://github.com/docker/buildx/releases/tag/v0.10.5)
 - [Compose v2.18.1](https://github.com/docker/compose/releases/tag/v2.18.1)
-- [Docker Engine v23.0.5](https://docs.docker.com/engine/release-notes/23.0/#2305)
+- [Docker Engine v24.0.1](https://docs.docker.com/engine/release-notes/24.0/#2401)
 - [Containerd v1.6.21](https://github.com/containerd/containerd/releases/tag/v1.6.21)
 - [runc v1.1.7](https://github.com/opencontainers/runc/releases/tag/v1.1.5)
-- [runc v1.1.6](https://github.com/opencontainers/runc/releases/tag/v1.1.6)
 
 ### Bug fixes and enhancements
 
 #### For all platforms
 
+- [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) now finds the most recently built image if it is not provided as an argument.
+- Improved the [Docker Scout CLI](https://docs.docker.com/scout/#docker-scout-cli) `compare` command.
 - Added a warning about the [retirement of Docker Compose ECS/ACS integrations in November 2023](https://docs.docker.com/go/compose-ecs-eol/). Can be suppressed with `COMPOSE_CLOUD_EOL_SILENT=1`.
 - Fixed an HTTP proxy bug where an HTTP 1.0 client could receive an HTTP 1.1 response.
 - Enabled Docker Desktop's Enhanced Container Isolation (ECI) feature on WSL-2. This is available with a Docker Business subscription.
