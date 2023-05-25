@@ -7,4 +7,5 @@ fetch_remote:
   line_end: -1
 redirect_from:
   - /build/bake/file-definition/
+  - /build/customize/bake/file-definition/
 ---
