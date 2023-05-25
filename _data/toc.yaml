@@ -1891,6 +1891,8 @@ manuals:
       title: Image details view
     - path: /scout/advanced-image-analysis/
       title: Advanced image analysis
+    - path: /scout/web-app/
+      title: Web App
     - path: /scout/artifactory/
       title: Artifactory integration
     - path: /scout/advisory-db-sources/
