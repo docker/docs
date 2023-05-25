@@ -271,6 +271,12 @@ If you configure Docker for IPv6 support (see [Use IPv6](#use-ipv6)), the
 default bridge network is also configured for IPv6 automatically. Unlike
 user-defined bridges, you can't selectively disable IPv6 on the default bridge.
 
+## Connection limit for bridge networks
+
+Due to limitations set by the Linux kernel, bridge networks become unstable and
+inter-container communications may break when 1000 containers or more connect
+to a single bridge network.
+
 ## Next steps
 
 - Go through the [standalone networking tutorial](../network-tutorial-standalone.md)
