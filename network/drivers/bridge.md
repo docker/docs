@@ -208,29 +208,6 @@ addresses.
 When you create your network, you can specify the `--ipv6` flag to enable
 IPv6. You can't selectively disable IPv6 support on the default `bridge` network.
 
-## Enable forwarding from Docker containers to the outside world
-
-By default, traffic from containers connected to the default bridge network is
-**not** forwarded to the outside world. To enable forwarding, you need to change
-two settings. These are not Docker commands and they affect the Docker host's
-kernel.
-
-1. Configure the Linux kernel to allow IP forwarding.
-
-   ```console
-   $ sysctl net.ipv4.conf.all.forwarding=1
-   ```
-
-2. Change the policy for the `iptables` `FORWARD` policy from `DROP` to
-   `ACCEPT`.
-
-   ```console
-   $ sudo iptables -P FORWARD ACCEPT
-   ```
-
-These settings do not persist across a reboot, so you may need to add them to a
-start-up script.
-
 ## Use the default bridge network
 
 The default `bridge` network is considered a legacy detail of Docker and is not
