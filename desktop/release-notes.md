@@ -26,7 +26,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 ## 4.20.0
 
-{% include release-date.html date="2023-05-25" %}
+{% include release-date.html date="2023-05-30" %}
 
 {% include desktop-install.md all=true version="4.20.0" build_path="/" %}
 
@@ -34,7 +34,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - [Buildx v0.10.5](https://github.com/docker/buildx/releases/tag/v0.10.5)
 - [Compose v2.18.1](https://github.com/docker/compose/releases/tag/v2.18.1)
-- [Docker Engine v24.0.1](https://docs.docker.com/engine/release-notes/24.0/#2401)
+- [Docker Engine v24.0.2](https://docs.docker.com/engine/release-notes/24.0/#2402)
 - [Containerd v1.6.21](https://github.com/containerd/containerd/releases/tag/v1.6.21)
 - [runc v1.1.7](https://github.com/opencontainers/runc/releases/tag/v1.1.5)
 
