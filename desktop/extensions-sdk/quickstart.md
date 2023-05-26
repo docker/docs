@@ -43,7 +43,7 @@ To build the extension, run:
 $ docker build -t <name-of-your-extension> .
 ```
 
-`docker build` builds the extension and generates an image named after the chosen hub repository. For instance, if you typed `john/my-extension` as the answer to the following question:
+`docker build` builds the extension and generates an image named the same as the chosen hub repository. For example, if you typed `john/my-extension` as the answer to the following question:
 
 ```console
 ? Hub repository (eg. namespace/repository on hub): john/my-extension`
