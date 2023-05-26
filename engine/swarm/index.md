@@ -45,6 +45,8 @@ redirect_from:
 - /swarm/swarm_at_scale/troubleshoot/
 ---
 
+{% include swarm-mode.md %}
+
 To use Docker in swarm mode, install Docker. See
 [installation instructions](../../get-docker.md) for all operating systems and platforms.
 

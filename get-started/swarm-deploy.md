@@ -6,6 +6,8 @@ redirect_from:
 - /get-started/part4/
 ---
 
+{% include swarm-mode.md %}
+
 ## Prerequisites
 
 - Download and install Docker Desktop as described in [Get Docker](../get-docker.md).
