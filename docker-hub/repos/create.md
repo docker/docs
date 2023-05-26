@@ -40,7 +40,7 @@ When creating a new repository:
     <div class="collapse block" id="collapseSample1">
       <p>A good image description is essential to help potential users understand why and how to use the image. The bellow covers the best practices to follow when adding a description to your image.</p>
       <h3>Describe the image</h3>
-      <p>Include a description of what the image is, the features it offers, and why people might want to use it in their project or image.</p>
+      <p>Include a description of what the image is, the features it offers, and why people might want or need to use it in their project or image.</p>
       <p>Optional information to include are examples of usage, history, the team behind the project, etc.</p>
       <h3>How to start and use the image</h3>
       <p>Provide instructions for a minimal “getting started” example with running a container using the image. Also provide a minimal example of how to use the image in a Dockerfile.</p>
