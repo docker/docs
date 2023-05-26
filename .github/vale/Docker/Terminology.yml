@@ -1,0 +1,10 @@
+extends: substitution
+message: "Consider using '%s' instead of '%s'"
+link: https://docs.docker.com/contribute/style/recommended-words/
+level: suggestion
+action:
+  name: replace
+swap:
+  Hub: Docker Hub
+  hub: Docker Hub
+  Docker hub: Docker Hub
