@@ -32,35 +32,6 @@ When creating a new repository:
   > You can't rename a Docker Hub repository once it's created.
 
 - The description can be up to 100 characters. It is used in the search results.
-
-  <div class="panel panel-default">
-    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
-    Description best practices
-    <i class="chevron fa fa-fw"></i></div>
-    <div class="collapse block" id="collapseSample1">
-      <p>A good image description is essential to help potential users understand why and how to use the image. The below covers the best practices to follow when adding a description to your image.</p>
-      <h3>Describe the image</h3>
-      <p>Include a description of what the image is, the features it offers, and why people might want or need to use it in their project or image.</p>
-      <p>Optional information to include are examples of usage, history, the team behind the project, etc.</p>
-      <h3>How to start and use the image</h3>
-      <p>Provide instructions for a minimal “getting started” example with running a container using the image. Also provide a minimal example of how to use the image in a Dockerfile.</p>
-      <p>Optional information to include, if relevant, is:</p>
-      <ul>
-      <li>Exposing ports</li>
-      <li>Default environment variables</li>
-      <li>Non-root user</li>
-      <li>Running in debug mode</li>
-      </ul>
-      <h3>Image tags and variants</h3>
-      <p>List the key image variants and the tags for using them along with what that variant offers and why someone might want to use that variant.</p>
-      <h3>Where to find more information</h3>
-      <p>Add links here for docs and support sites, communities, or mailing lists where users can find more and ask questions.</p>
-      <h3>Who the image is maintained by</h3>
-      <p>Who is the image maintained by and how can someone contact them with concerns.</p>
-      <h3>License</h3>
-      <p>What is the license for the image and where can people find more details if needed.</p>
-    </div>
-
 - If you are a Docker Verified Publisher (DVP) or Docker-Sponsored Open Source (DSOS) organization, you can also add a logo to a repository. The maximum size is 1000x1000.
 - You can link a GitHub or Bitbucket account now, or choose to do it later in
   the repository settings.
@@ -69,6 +40,39 @@ When creating a new repository:
   > **Note**
   >
   > For organizations creating a new repository, it's recommended you select **Private**.
+
+### Add a repository overview
+
+Once you have created a repository, add an overview to the **Repository overview** field. This describes what your image does and how to use it.
+
+<div class="panel panel-default">
+  <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
+  Repository overview best practices
+  <i class="chevron fa fa-fw"></i></div>
+  <div class="collapse block" id="collapseSample1">
+    <p>A good image description is essential to help potential users understand why and how to use the image. The bellow covers the best practices to follow when adding a description to your image.</p>
+    <h3>Describe the image</h3>
+    <p>Include a description of what the image is, the features it offers, and why people might want or need to use it in their project or image.</p>
+    <p>Optional information to include are examples of usage, history, the team behind the project, etc.</p>
+    <h3>How to start and use the image</h3>
+    <p>Provide instructions for a minimal “getting started” example with running a container using the image. Also provide a minimal example of how to use the image in a Dockerfile.</p>
+    <p>Optional information to include, if relevant, is:</p>
+    <ul>
+    <li>Exposing ports</li>
+    <li>Default environment variables</li>
+    <li>Non-root user</li>
+    <li>Running in debug mode</li>
+    </ul>
+    <h3>Image tags and variants</h3>
+    <p>List the key image variants and the tags for using them along with what that variant offers and why someone might want to use that variant.</p>
+    <h3>Where to find more information</h3>
+    <p>Add links here for docs and support sites, communities, or mailing lists were users can find more and ask questions.</p>
+    <h3>Who maintains the image</h3>
+    <p>Who is the image maintained by and how can someone contact them with concerns.</p>
+    <h3>License</h3>
+    <p>What is the license for the image and where can people find more details if needed.</p>
+  </div>
+</div>
 
 ## Push a Docker container image to Docker Hub
 
