@@ -71,6 +71,16 @@ your client and daemon API versions.
 {% endcapture %}{{ command-orchestrator }}
 
 
+{% if controller_data.aliases %}
+{% assign aliases = controller_data.aliases | split: ', ' %}
+### Aliases
+
+The following commands are equivalent and redirect here:
+{% for alias in aliases %}
+{%- assign fname = alias | remove_first: "docker " | replace: " ", "_" -%}
+- [{{ alias }}](/engine/reference/commandline/{{ fname }}/)
+{% endfor -%}
+{% endif %}
 {% if controller_data.usage %}
 
 ## Usage
