@@ -1,6 +1,6 @@
 extends: substitution
 message: "Consider using '%s' instead of '%s'"
-link: https://docs.docker.com/contribute/style/recommended-words/
+link: https://docs.docker.com/contribute/style/terminology/
 level: suggestion
 action:
   name: replace
