@@ -6,17 +6,21 @@ redirect_from:
   - /desktop/extensions-sdk/dev/overview/
 ---
 
-Use the resources in this section to create your own Docker Extension.
+The resources in this section help you create your own Docker Extension.
 
-Extensions are packaged as specially formatted Docker images, which our CLI tool helps to build. At the root of the image filesystem is a `metadata.json` file which describes the content of the extension. It is a fundamental element of a Docker extension.
+The Docker CLI tool provides a set of commands to help you build and publish your extension, packaged as a 
+specially formatted Docker image.
+
+At the root of the image filesystem is a `metadata.json` file which describes the content of the extension. 
+It's a fundamental element of a Docker extension.
 
 An extension can contain a UI part and backend parts that run either on the host or in the Desktop virtual machine.
 For further information, see [Architecture](architecture/index.md).
 
-Extensions are distributed through Docker Hub. However, development of extensions can be done locally without the need to push the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTION.md) for further details.
+You distribute extensions through Docker Hub. However, you can develop them locally without the need to push 
+the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTION.md) for further details.
 
 {% include extensions-form.md %}
-
 
 <div class="component-container">
     <!--start row-->
