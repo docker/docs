@@ -50,7 +50,7 @@ Once you have created a repository, add an overview to the **Repository overview
   Repository overview best practices
   <i class="chevron fa fa-fw"></i></div>
   <div class="collapse block" id="collapseSample1">
-    <p>A good image description is essential to help potential users understand why and how to use the image. The bellow covers the best practices to follow when adding a description to your image.</p>
+    <p>A good image description is essential to help potential users understand why and how to use the image. The below covers the best practices to follow when adding a description to your image.</p>
     <h3>Describe the image</h3>
     <p>Include a description of what the image is, the features it offers, and why people might want or need to use it in their project or image.</p>
     <p>Optional information to include are examples of usage, history, the team behind the project, etc.</p>
