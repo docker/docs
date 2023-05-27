@@ -66,7 +66,7 @@ Once you have created a repository, add an overview to the **Repository overview
     <h3>Image tags and variants</h3>
     <p>List the key image variants and the tags for using them along with what that variant offers and why someone might want to use that variant.</p>
     <h3>Where to find more information</h3>
-    <p>Add links here for docs and support sites, communities, or mailing lists were users can find more and ask questions.</p>
+    <p>Add links here for docs and support sites, communities, or mailing lists where users can find more and ask questions.</p>
     <h3>Who maintains the image</h3>
     <p>Who is the image maintained by and how can someone contact them with concerns.</p>
     <h3>License</h3>
