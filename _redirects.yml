@@ -3,6 +3,10 @@
 # used by _plugins/pageless_redirects.rb
 #
 
+# Metadata index
+"/assets/js/metadata.json":
+  - /go/index.json
+
 "/desktop/":
   - /docker-for-mac/docker-toolbox/
   - /docker-for-windows/docker-toolbox/
