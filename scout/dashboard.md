@@ -29,6 +29,13 @@ Each entry in the list shows the following details:
 - The most recent version of the image and the vulnerabilities for that version. Clicking the link for the base image opens [the image layer view](#image-layer-view).
 - The operating system and architecture of the image.
 - The base image and version used by the repository and the vulnerabilities for that version. Clicking the link for the base image opens [the image layer view](#image-layer-view).
+
+  > **Note**
+  >
+  > Docker Scout detects the base image of an image by matching layer content hashes.
+  > However, it's possible for multiple images and tags to be associated with these layers. In these cases, Docker Scout's
+  > base image detection might not be precise and potentially return a different tag to the one used in the Dockerfile.
+
 - The recommended fixes, which can include options such as changing tags or rebuilding an image.
 - The predicted improvement to the vulnerabilities if you apply the recommended fixes.
 - An action button to show implementable recommended fixes.
