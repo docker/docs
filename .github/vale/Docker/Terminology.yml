@@ -5,6 +5,5 @@ level: suggestion
 action:
   name: replace
 swap:
-  Hub: Docker Hub
-  hub: Docker Hub
-  Docker hub: Docker Hub
+  '[Hh]ub': Docker Hub
+  'Docker hub': Docker Hub
