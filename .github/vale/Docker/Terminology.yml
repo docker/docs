@@ -7,3 +7,7 @@ action:
 swap:
   '[Hh]ub': Docker Hub
   'Docker hub': Docker Hub
+  '[Ss]cout': Docker Scout
+  'Docker scout': Docker Scout
+  scan: analyse
+  Scan: Analyse
