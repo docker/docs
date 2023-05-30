@@ -1,9 +1,9 @@
 command: docker scout compare
-short: '[early preview] Compare two images and display differences'
+short: '[experimental] Compare two images and display differences'
 long: |-
     The `docker scout compare` command analyzes two images and displays a comparison of both.
 
-    > This command is in **early preview** and its behaviour might change in the future
+    > This command is **experimental** and its behaviour might change in the future
 
     The main usage is to compare two versions of the same image.
     For instance when a new image is built and compared to the version running in production.

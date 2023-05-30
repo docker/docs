@@ -2,18 +2,18 @@
 description: Settings Management for desktop
 keywords: Settings Management, rootless, docker desktop, hardened desktop
 title: What is Settings Management?
---- 
+---
 >**Note**
 >
->Settings Management is available to Docker Business customers only. 
+>Settings Management is available to Docker Business customers only.
 
-Settings Management is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization. 
+Settings Management is a feature that helps admins to control certain Docker Desktop settings on client machines within their organization.
 
 With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Settings Management to enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
 
 It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
 
-### Who is it for? 
+### Who is it for?
 
 - For Organizations who wish to configure Docker Desktop to be within their organization's centralized control.
 - For Organizations who want to create a standardized Docker Desktop environment at scale.
@@ -21,7 +21,7 @@ It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
 
 ### How does it work?
 
-Administrators can configure several Docker Desktop settings using an `admin-settings.json` file. This file is located on the Docker Desktop host and can only be accessed by users with root or admin privileges. 
+Administrators can configure several Docker Desktop settings using an `admin-settings.json` file. This file is located on the Docker Desktop host and can only be accessed by users with root or admin privileges.
 
 Values that are set to `locked: true` within the `admin-settings.json` override any previous values set by users and ensure that these cannot be modified. For more information, see [Configure Settings Management](../settings-management/configure.md#step-two-configure-the-settings-you-want-to-lock-in).
 
@@ -29,7 +29,7 @@ Values that are set to `locked: true` within the `admin-settings.json` override 
 
 Using the `admin-settings.json` file, admins can:
 
-- Enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md) (currently incompatible with WSL)
+- Enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md)
 - Configure HTTP proxies
 - Configure network settings
 - Configure Kubernetes settings
@@ -49,7 +49,7 @@ Once this is done, Docker Desktop users receive the changed settings when they e
 - Quit, re-launch, and sign in to Docker Desktop
 - Launch and sign in to Docker Desktop for the first time
 
-Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers' workflow. 
+Docker doesn't automatically mandate that developers re-launch and re-authenticate once a change has been made, so as not to disrupt your developers' workflow.
 
 ### What do users see when the settings are enforced?
 

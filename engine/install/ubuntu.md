@@ -38,13 +38,29 @@ s390x architectures.
 
 ### Uninstall old versions
 
-Older versions of Docker went by the names of `docker`, `docker.io`, or
-`docker-engine`, you might also have installations of `containerd` or `runc`.
-Uninstall any such older versions before attempting to install
-a new version:
+Before you can install Docker Engine, you must first make sure that any
+conflicting packages are uninstalled.
+
+Distro maintainers provide an unofficial distributions of Docker packages in
+APT. You must uninstall these packages before you can install the official
+version of Docker Engine.
+
+The unofficial packages to uninstall are:
+
+- `docker.io`
+- `docker-compose`
+- `docker-doc`
+- `podman-docker`
+
+Moreover, Docker Engine depends on `containerd` and `runc`. Docker Engine
+bundles these dependencies as one bundle: `containerd.io`. If you have
+installed the `containerd` or `runc` previously, uninstall them to avoid
+conflicts with the versions bundled with Docker Engine.
+
+Run the following command to uninstall all conflicting packages:
 
 ```console
-$ sudo apt-get remove docker docker-engine docker.io containerd runc
+$ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
 
 `apt-get` might report that you have none of these packages installed.

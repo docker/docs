@@ -24,7 +24,7 @@ Docker Hub has more than 8.3 million repositories. Some of these images are
 [Official Images](../docker-hub/official_images.md), which are published by
 Docker as a curated set of Docker open source and drop-in solution repositories.
 Docker also offers images that are published by
-[Verified Publishers](../docker-hub/publish/index.md). These high-quality images
+[Verified Publishers](../docker-hub/dvp-program.md). These high-quality images
 are published and maintained by the organizations partnering with Docker, with
 Docker verifying the authenticity of the content in their repositories. When you
 pick your base image, look out for the **Official Image** and **Verified Publisher**

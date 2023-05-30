@@ -1842,16 +1842,12 @@ manuals:
         title: Manage
   - path: /docker-hub/official_images/
     title: Docker Official images
-  - sectiontitle: Docker Verified Publisher
-    section:
-      - path: /docker-hub/publish/
-        title: Overview
-      - path: /docker-hub/publish/insights-analytics/
-        title: Insights and analytics
-      - path: /docker-hub/publish/repository-logos/
-        title: Repository logos        
+  - path: /docker-hub/dvp-program/
+    title: Docker Verified Publisher Program
   - path: /docker-hub/dsos-program/
     title: Docker-Sponsored Open Source Program
+  - path: /docker-hub/insights-analytics/
+    title: Insights and analytics
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - path: /docker-hub/webhooks/
@@ -1891,6 +1887,8 @@ manuals:
       title: Image details view
     - path: /scout/advanced-image-analysis/
       title: Advanced image analysis
+    - path: /scout/web-app/
+      title: Web App
     - path: /scout/artifactory/
       title: Artifactory integration
     - path: /scout/advisory-db-sources/
