@@ -50,7 +50,7 @@ command prompt (`cmd`).
 2. Run the following command to start `bash` in an `ubuntu` container with a
    bind mount.
 
-   If you are using an Mac or Linux device, then use the following command.
+   If you are using a Mac or Linux device, then use the following command.
 
    ```console
    $ docker run -it --mount type=bind,src="$(pwd)",target=/src ubuntu bash
