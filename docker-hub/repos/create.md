@@ -2,6 +2,7 @@
 description: Creating repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, manage, repos
 title: Create repositories
+toc_max: 3
 redirect_from:
 - /docker-hub/repos/configure/
 ---
@@ -51,10 +52,10 @@ Once you have created a repository, add an overview to the **Repository overview
   <i class="chevron fa fa-fw"></i></div>
   <div class="collapse block" id="collapseSample1">
     <p>A good image description is essential to help potential users understand why and how to use the image. The bellow covers the best practices to follow when adding a description to your image.</p>
-    <h3>Describe the image</h3>
+    <h4>Describe the image</h4>
     <p>Include a description of what the image is, the features it offers, and why people might want or need to use it in their project or image.</p>
     <p>Optional information to include are examples of usage, history, the team behind the project, etc.</p>
-    <h3>How to start and use the image</h3>
+    <h4>How to start and use the image</h4>
     <p>Provide instructions for a minimal “getting started” example with running a container using the image. Also provide a minimal example of how to use the image in a Dockerfile.</p>
     <p>Optional information to include, if relevant, is:</p>
     <ul>
@@ -63,13 +64,13 @@ Once you have created a repository, add an overview to the **Repository overview
     <li>Non-root user</li>
     <li>Running in debug mode</li>
     </ul>
-    <h3>Image tags and variants</h3>
+    <h4>Image tags and variants</h4>
     <p>List the key image variants and the tags for using them along with what that variant offers and why someone might want to use that variant.</p>
-    <h3>Where to find more information</h3>
+    <h4>Where to find more information</h4>
     <p>Add links here for docs and support sites, communities, or mailing lists were users can find more and ask questions.</p>
-    <h3>Who maintains the image</h3>
+    <h4>Who maintains the image</h4>
     <p>Who is the image maintained by and how can someone contact them with concerns.</p>
-    <h3>License</h3>
+    <h4>License</h4>
     <p>What is the license for the image and where can people find more details if needed.</p>
   </div>
 </div>
