@@ -1,8 +1,7 @@
 ---
 title: Image details view
-keywords: scout, supply chain, vulnerabilities, packages, cves, image, tag
-description: >
-  Docker Scout helps you understand your images and their dependencies
+keywords: scout, supply chain, vulnerabilities, packages, cves, image, tag, scan, analysis, analyze
+description: The Docker Scout image detail view analyzes images to show their heirachy, layers, packages, and vulnerabilities
 ---
 
 {% include scout-early-access.md %}
