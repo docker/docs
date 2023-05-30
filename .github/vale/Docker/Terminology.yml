@@ -9,5 +9,5 @@ swap:
   'Docker hub': Docker Hub
   '[Ss]cout': Docker Scout
   'Docker scout': Docker Scout
-  scan: analyse
-  Scan: Analyse
+  scan: analyze
+  Scan: Analyze
