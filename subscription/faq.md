@@ -19,8 +19,8 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target=
 ### What ways can I contribute to Docker content?
 
 Docker offers two programs:
-- [Docker-Sponsored Open Source Program (DSOS)](https://www.docker.com/community/open-source/application/)
-- [Docker Verified Publisher (DVP)](../docker-hub/publish/index.md)
+- [Docker-Sponsored Open Source Program (DSOS)](../docker-hub/dsos-program.md)
+- [Docker Verified Publisher (DVP)](../docker-hub/dvp-program.md)
 
 ### Do I need to do anything at the end of my subscription term?
 

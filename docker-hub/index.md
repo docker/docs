@@ -35,7 +35,7 @@ Docker Hub is also where you can go to [change your Docker account settings and 
 * [Repositories](../docker-hub/repos/index.md): Push and pull container images.
 * [Docker Official Images](official_images.md): Pull and use high-quality
 container images provided by Docker.
-* [Docker Verified Publisher Images](publish/index.md): Pull and use high-quality
+* [Docker Verified Publisher Images](dvp-program.md): Pull and use high-quality
 container images provided by external vendors.
 * [Docker-Sponsored Open Source Images](dsos-program.md): Pull and use high-quality
 container images from non-commercial open source projects.

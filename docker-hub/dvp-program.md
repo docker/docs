@@ -17,6 +17,8 @@ redirect_from:
   - /docker-hub/publish/trustchain/
   - /docker-hub/publish/byol/
   - /docker-hub/publish/publisher-center-migration/
+  - /docker-hub/publish/
+  - /docker-hub/publish/repository-logos/
 ---
 
 [The Docker Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store){:target="_blank" rel="noopener" class="_"} provides high-quality images from commercial publishers verified by Docker.
@@ -32,6 +34,7 @@ Images that are part of this program have a special badge on Docker Hub making i
 The Docker Verified Publisher Program (DVP) provides several features and benefits to Docker
 Hub publishers. The program grants the following perks based on participation tier:
 
+- Repository logo
 - Verified publisher badge
 - Priority search ranking in Docker Hub
 - Insights and analytics
@@ -39,6 +42,39 @@ Hub publishers. The program grants the following perks based on participation ti
 - Additional Docker Business seats
 - Removal of rate limiting for developers
 - Co-marketing opportunities
+
+### Repository logo
+
+DVP organizations can upload custom images for individual repositories on Docker Hub.
+This lets you override the default organization-level logo on a per-repository basis.
+
+Only a user with administrative access (owner or team member with administrator permission)
+over the repository can change the repository logo.
+
+#### Image requirements
+
+- The supported filetypes for the logo image are JPEG and PNG.
+- The minimum allowed image size in pixels is 120×120.
+- The maximum allowed image size in pixels is 1000×1000.
+- The maximum allowed image file size is 5MB.
+
+#### Set the repository logo
+
+1. Sign in to Docker Hub.
+2. Go to the page of the repository that you want to change the logo for.
+3. Select the upload logo button, represented by a camera icon
+   (![Camera icon](./images/upload_logo_sm.png){: .inline height="22px" })
+   overlaying the current repository logo.
+4. In the dialog that opens, select the PNG image that you want to upload to
+   set it as the logo for the repository.
+
+#### Remove the logo
+
+Remove a logo using the clear button (![Clear button](images/clear_logo_sm.png){: .inline width="20px" }).
+
+Removing the logo makes the repository fallback to using the organization logo, if set, and the default logo if not.
+
+![Default logo which is a 3D grey cube](images/default_logo_sm.png){: width="50px" }
 
 ### Verified publisher badge
 
@@ -64,7 +100,7 @@ either a summary or raw format.
 ### Vulnerability analysis
 
 [Docker Scout](/scout/){:
-target="blank" rel="noopener" class=""} provides automatic vulnerability analysis 
+target="blank" rel="noopener" class=""} provides automatic vulnerability analysis
 for DVP images published to Docker Hub.
 Scanning images ensures that the published content is secure, and proves to
 developers that they can trust the image.
