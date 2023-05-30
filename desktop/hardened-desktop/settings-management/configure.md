@@ -2,11 +2,11 @@
 description: settings management for desktop
 keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management
---- 
+---
 
 >**Note**
 >
->Settings Management is available to Docker Business customers only. 
+>Settings Management is available to Docker Business customers only.
 
 This page contains information for admins on how to configure Settings Management to specify and lock configuration parameters to create a standardized Docker Desktop environment across the organization.
 
@@ -19,7 +19,7 @@ Settings Management is designed specifically for organizations who don’t give 
 
 ### Step one: Create the `admin-settings.json` file and save it in the correct location
 
-You can either use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually. 
+You can either use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
 
 To set it up manually:
 1. Create a new, empty JSON file and name it `admin-settings`.
@@ -64,7 +64,8 @@ The following `admin-settings.json` code and table provides an example of the re
     "mode": "system",
     "http": "",
     "https": "",
-    "exclude": []
+    "exclude": [],
+    "windowsDockerdPort": 65000
   },
   "enhancedContainerIsolation": {
     "locked": true,
@@ -107,14 +108,15 @@ The following `admin-settings.json` code and table provides an example of the re
 }
 ```
 
-| Parameter                        |   | Description                      |  
+| Parameter                        |   | Description                      |
 | :------------------------------- |---| :------------------------------- |
 | `configurationFileVersion`        |   |Specifies the version of the configuration file format.    |
-| `exposeDockerAPIOnTCP2375` | <span class="badge badge-info">Windows only</span>| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.| 
+| `exposeDockerAPIOnTCP2375` | <span class="badge badge-info">Windows only</span>| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
 | `proxy` |   |If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores and values set for `http`, `https` and `exclude`. Change `mode` to `manual` to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property, for example `"https": "http://myotherproxy.com:4321"`. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy. |
-| `enhancedContainerIsolation`  |  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md). Note: Enhanced Container Isolation is currently [incompatible with WSL](../enhanced-container-isolation/faq.md#incompatibility-with-windows-subsystem-for-linux-wsl). | 
+&nbsp; &nbsp; &nbsp; &nbsp;`windowsDockerdPort`  | <span class="badge badge-info">Windows only</span> | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greather than 0, use that exact value for the port. The default value is -1 which disables the option. Note: This is available for Windows containers only. |
+| `enhancedContainerIsolation`  |  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md).| 
 | `linuxVM` |   |Parameters and settings related to Linux VM options - grouped together here for convenience. |
-| &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  | <span class="badge badge-info">Windows only</span> | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag. It is also incompatible with Enhanced Container Isolation. See [Known issues](../enhanced-container-isolation/faq.md) for more information.| 
+| &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  | <span class="badge badge-info">Windows only</span> | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag.
 | &nbsp;&nbsp; &nbsp; &nbsp;`dockerDaemonOptions`|  |If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/engine/reference/commandline/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |
 | &nbsp;&nbsp; &nbsp; &nbsp;`vpnkitCIDR` |  |Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`  |
 |`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the UI and when you run `docker ps`.  `imagesRepository` allows you to specify which repository Docker Desktop pulls the Kubernetes images from. For example, `"imagesRepository": "registry-1.docker.io/docker"`.  |
@@ -136,7 +138,7 @@ For settings to take effect:
   >Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
   {: .important}
 
-Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers' workflow. 
+Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers' workflow.
 
 
 In Docker Desktop, developers see the relevant settings grayed out and the message **Locked by your administrator**.
