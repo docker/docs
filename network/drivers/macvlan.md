@@ -4,8 +4,8 @@ description: All about using Macvlan to make your containers appear like physica
   machines on the network
 keywords: network, macvlan, standalone
 redirect_from:
-  - /engine/userguide/networking/get-started-macvlan/
   - /config/containers/macvlan/
+  - /engine/userguide/networking/get-started-macvlan/
   - /network/macvlan/
 ---
 
