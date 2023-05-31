@@ -10,7 +10,7 @@ If you want to completely disable the networking stack on a container, you can
 use the `--network none` flag when starting the container. Within the container,
 only the loopback device is created.
 
-The following example runs shows the output of `ip link show` in an `alpine`
+The following example shows the output of `ip link show` in an `alpine`
 container using the `none` network driver.
 
 ```console

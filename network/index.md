@@ -21,9 +21,9 @@ or whether their peers are also Docker workloads or not.
 A container only sees a network interface with an IP address,
 a gateway, a routing table, DNS services, and other networking details.
 That is, unless the container uses the `none` network driver.
-This page describes networking from the point of view of the container.
 
-This page also describes the concepts around container networking.
+This page describes networking from the point of view of the container,
+and the concepts around container networking.
 This page doesn't describe OS-specific details about how Docker networks work.
 For information about how Docker manipulates `iptables` rules on Linux,
 see [Packet filtering and firewalls](packet-filtering-firewalls.md).
@@ -32,9 +32,8 @@ see [Packet filtering and firewalls](packet-filtering-firewalls.md).
 
 By default, when you create or run a container using `docker create` or `docker run`,
 the container doesn't expose any of its ports to the outside world.
-To make a port available to services outside of Docker,
-or to Docker containers running on a different network,
-use the `--publish` or `-p` flag.
+Use the `--publish` or `-p` flag to make a port available to services
+outside of Docker.
 This creates a firewall rule in the host,
 mapping a container port to a port on the Docker host to the outside world.
 Here are some examples:
@@ -60,6 +59,11 @@ Here are some examples:
 > ```
 {: .important }
 
+If you want to make a container accessible to other containers,
+it isn't necessary to publish the container's ports.
+Inter-container communication is enabled by connecting the containers to the
+same network, usually a [bridge network](./drivers/bridge.md).
+
 ## IP address and hostname
 
 By default, the container gets an IP address for every Docker network it attaches to.
@@ -67,14 +71,14 @@ A container receives an IP address out of the IP subnet of the network.
 The Docker daemon performs dynamic subnetting and IP address allocation for containers.
 Each network also has a default subnet mask and gateway.
 
+When you connect an existing container to a different network using `docker network connect`,
+you can use the `--ip` or `--ip6` flags on that command
+to specify the container's IP address on the additional network.
+
 When a container starts, it can only attach to a single network, using the `--network` flag.
 You can connect a running container to multiple networks using the `docker network connect` command.
 When you start a container using the `--network` flag,
 you can specify the IP address for the container on that network using the `--ip` or `--ip6` flags.
-
-When you connect an existing container to a different network using `docker network connect`,
-you can use the `--ip` or `--ip6` flags on that command
-to specify the container's IP address on the additional network.
 
 In the same way, a container's hostname defaults to be the container's ID in Docker.
 You can override the hostname using `--hostname`.
@@ -92,8 +96,9 @@ use Docker's embedded DNS server.
 The embedded DNS server forwards external DNS lookups to the DNS servers configured on the host.
 
 You can configure DNS resolution on a per-container basis, using flags for the
-`docker run` command when you start the container. The following table
-describes the available `docker run` flags related to DNS configuration.
+`docker run` or `docker create` command used to start the container.
+The following table describes the available `docker run` flags related to DNS
+configuration.
 
 | Flag           | Description                                                                                                                                                                                                                                                         |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -102,39 +107,20 @@ describes the available `docker run` flags related to DNS configuration.
 | `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                                            |
 | `--hostname`   | The hostname a container uses for itself. Defaults to the container's ID if not specified.                                                                                                                                                                          |
 
-### Name resolution with multiple nameservers
+### Nameservers with IPv6 addresses
 
-When you specify multiple DNS servers using `--dns` flags, name resolution may
-work in a surprising or unexpected way. DNS lookup behavior depends on a number
-of different factors:
+If the `/etc/resolv.conf` file on the host system contains one or more
+nameserver entries with an IPv6 address, those nameserver entries get copied
+over to `/etc/resolv.conf` in containers that you run.
 
-- Whether the container OS runs on [musl or glibc](https://wiki.musl-libc.org/functional-differences-from-glibc.html#Name_Resolver/DNS){: target="blank" rel="noopener" }
-- Whether the Docker daemon binary is [statically or dynamically linked](https://pkg.go.dev/net#hdr-Name_Resolution){: target="blank" rel="noopener" }
-- If dynamically linked, which version of glibc that's used
-- Whether or not [nsswitch.conf is present](https://tldp.org/LDP/nag2/x-087-2-resolv.library.html#X-087-2-RESOLV.NSSWITCH-CONF){: target="blank" rel="noopener" }
-
-Under most circumstances, name resolution with multiple nameservers should work
-as follows:
-
-1. The container emits requests to all nameservers that you specify.
-2. The container uses the first response returned by any of the nameservers.
-   Even if the first response is `NXDOMAIN`, or similar.
-
-### IPv6 name resolution
-
-The embedded DNS server handles both IPv4 and IPv6 name resolution. However,
-there is a caveat in name resolution for IPv6.
-
-Any IPv6 addresses specified in the `/etc/resolv.conf` file on the host system
-get copied over to the `/etc/resolv.conf` file in containers that you run.
-
-For containers running on musl libc (Alpine Linux), hostname resolution might
+For containers using musl libc (in other words, Alpine Linux), this results in
+a race condition for hostname lookup. As a result, hostname resolution might
 sporadically fail if the external IPv6 DNS server wins the race condition
 against the embedded DNS server.
 
 It's rare that the external DNS server is faster than the embedded one. But
 things like garbage collection, or large numbers of concurrent DNS requests,
-can result in a roundtrip to the external server be faster than the local
+can result in a roundtrip to the external server being faster than local
 resolution, on some occasions.
 
 ### Custom hosts
