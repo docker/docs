@@ -19,6 +19,8 @@ there, to avoid this extra internet traffic.
 > **Note**
 >
 > Docker Official Images are an intellectual property of Docker.
+>
+> Mirrors of Docker Hub are subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}.
 
 ### Alternatives
 
@@ -30,12 +32,20 @@ relying entirely on your local registry is the simplest scenario.
 
 ### Gotcha
 
-It's currently not possible to mirror another private registry. Only the central
-Hub can be mirrored.
+It's currently not possible to mirror another private registry.
+Only the central Hub can be mirrored.
 
-> **Note**
->
-> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}.
+The URL of a pull-through registry mirror must be the root of a domain.
+No path components other than an optional trailing slash (`/`) are allowed.
+The following table shows examples of allowed and disallowed mirror URLs.
+
+| URL                                    | Allowed |
+| -------------------------------------- | ------- |
+| `https://mirror.company.example`       | Yes     |
+| `https://mirror.company.example/`      | Yes     |
+| `https://mirror.company.example/foo`   | No      |
+| `https://mirror.company.example#bar`   | No      |
+| `https://mirror.company.example?baz=1` | No      |
 
 ### Solution
 
@@ -112,9 +122,13 @@ and add the `registry-mirrors` key and value, to make the change persistent.
 
 ```json
 {
-  "registry-mirrors": ["https://<my-docker-mirror-host>"]
+  "registry-mirrors": ["https://mirror.company.example"]
 }
 ```
+
+> **Note**
+>
+> The mirror URL must be the root of the domain.
 
 Save the file and reload Docker for the change to take effect.
 
