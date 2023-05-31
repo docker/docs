@@ -54,9 +54,9 @@ Your Windows machine must meet the following requirements to successfully instal
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
 - Optional: Download and install a [Linux distribution, such as the Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}. 
-    >Note
-    >
-    >Docker Desktop and the Docker CLI work fine if you choose not to install a Linux distribution. However, for the best developer experience, we recommend installing at least one additional distribution and enabling [Docker support](../windows/wsl.md#enabling-docker-support-in-wsl-2-distros).
+  > Note
+  >
+  > Docker Desktop and the Docker CLI work fine if you choose not to install a Linux distribution. However, for the best developer experience, we recommend installing at least one additional distribution and enabling [Docker support](../windows/wsl.md#enabling-docker-support-in-wsl-2-distros).
 
 </div>
 <div id="win-hyper-v" class="tab-pane fade" markdown="1">
