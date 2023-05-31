@@ -25,7 +25,7 @@ The **Images** tab shows a list of images in an organization. You can search for
 
 Each entry in the list shows the following details:
 
-- The repository name for the image. Clicking the link for the repository opens the list of tags for the repository.
+- The repository name for the image. Clicking the link for the repository opens [the list of tags for the repository](#repository-tag-list).
 - The most recent version of the image and the vulnerabilities for that version. Clicking the link for the base image opens [the image layer view](#image-layer-view).
 - The operating system and architecture of the image.
 - The base image and version used by the repository and the vulnerabilities for that version. Clicking the link for the base image opens [the image layer view](#image-layer-view).
@@ -47,6 +47,21 @@ Each entry in the list shows the following details:
 - The last push for the tag version.
 - The base image and version used by the repository and the vulnerabilities for
   that version.
+- The size of the tag image.
+
+#### Comparing two tag images
+
+You can compare two tag images by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
+
+<!-- TODO: Screenshot -->
+
+The top section of the comparison view shows an overview of the two selected tag images with the same information as the repository tag list view.
+
+The rest of the view shows the following:
+
+- Select the **Packages** tab to see packages added, removed, or updated in each image. Each entry in the table shows the differences between the versions and vulnerabilities in each image. Select the disclosure triangle next to a package to see more detail on the vulnerabilities.
+- Select the **Vulnerabilities** tab to see changes to the vulnerabilities present in each image.
+- Select the **Environment variables** tab to see changes to the environment variables present in each image.
 
 ### Image layer view
 
