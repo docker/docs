@@ -53,7 +53,10 @@ Your Windows machine must meet the following requirements to successfully instal
     BIOS settings. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
-- Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
+- Optional: Download and install a [Linux distribution, such as the Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}. 
+    >Note
+    >
+    >Docker Desktop does not require any particular Linux distros to be installed. The docker CLI and UI all work fine from Windows without any additional Linux distros. However for the best developer experience, we recommend installing at least one additional distro and enabling [Docker support](../windows/wsl.md#enabling-docker-support-in-wsl-2-distros)
 
 </div>
 <div id="win-hyper-v" class="tab-pane fade" markdown="1">
