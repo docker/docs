@@ -42,11 +42,11 @@ assign an IPv6 subnet to the default bridge network:
 }
 ```
 
-After saving the configuration file, reload the Docker daemon for your
+After saving the configuration file, restart the Docker daemon for your
 changes to take effect:
 
 ```console
-$ systemctl reload docker
+$ systemctl restart docker
 ```
 
 You can now create networks with the `--ipv6` flag and assign containers IPv6
