@@ -1516,6 +1516,8 @@ manuals:
       title: Manage nodes in a swarm
     - path: /engine/swarm/services/
       title: Deploy services to a swarm
+    - path: /engine/swarm/stack-deploy/
+      title: Deploy a stack to a swarm
     - path: /engine/swarm/configs/
       title: Store service configuration data
     - path: /engine/swarm/secrets/
