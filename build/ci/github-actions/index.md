@@ -5,6 +5,7 @@ description: >
 keywords: ci, github actions, gha,  build, introduction, tutorial
 redirect_from:
   - /ci-cd/github-actions/
+  - /build/ci/github-actions/examples/
 ---
 
 GitHub Actions is a popular CI/CD platform for automating your build, test, and
