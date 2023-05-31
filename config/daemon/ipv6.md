@@ -25,22 +25,14 @@ To enable IPv6, you must edit the Docker daemon configuration file located at
   "experimental": true,
   "ipv6": true,
   "ip6tables": true,
+  "fixed-cidr-v6": "2001:db8:1::/64",
   ...
 }
 ```
 
-You can optionally also configure the `fixed-cidr-v6` key, if you want to
-assign an IPv6 subnet to the default bridge network:
-
-```diff
-{
-  "experimental": true,
-  "ipv6": true,
-  "ip6tables": true,
-+ "fixed-cidr-v6": "2001:db8:1::/64",
-  ...
-}
-```
+This configuration makes IPv6 networking function as you would expect it to.
+The `ipv6` and `fixed-cidr-v6` parameters are optional.
+They assign an IPv6 subnet to the default bridge network.
 
 After saving the configuration file, restart the Docker daemon for your
 changes to take effect:
@@ -49,8 +41,8 @@ changes to take effect:
 $ systemctl restart docker
 ```
 
-You can now create networks with the `--ipv6` flag and assign containers IPv6
-addresses using the `--ip6` flag.
+Upon restart, the daemon assigns IPv6 addresses to containers connected to the
+default bridge network, and to user-defined networks configured with an IPv6 subnet.
 
 ## Dynamic IPv6 subnet allocation
 
@@ -79,10 +71,10 @@ The default address pool configuration is:
     { "base": "172.17.0.0/16", "size": 16 },
     { "base": "172.18.0.0/16", "size": 16 },
     { "base": "172.19.0.0/16", "size": 16 },
-    { "base": "172.20.0.0/16", "size": 16 },
+    { "base": "172.20.0.0/14", "size": 16 },
     { "base": "172.24.0.0/14", "size": 16 },
     { "base": "172.28.0.0/14", "size": 16 },
-    { "base": "172.28.0.0/16", "size": 20 }
+    { "base": "192.168.0.0/16", "size": 20 }
   ]
 }
 ```
@@ -99,7 +91,7 @@ an IPv6 supernet, with a prefix length of 64 and a size of 80.
     { "base": "172.20.0.0/16", "size": 16 },
     { "base": "172.24.0.0/14", "size": 16 },
     { "base": "172.28.0.0/14", "size": 16 },
-    { "base": "172.28.0.0/16", "size": 20 },
+    { "base": "192.168.0.0/16", "size": 20 },
     { "base": "2001:db8::/64", "size": 80 }
   ]
 }

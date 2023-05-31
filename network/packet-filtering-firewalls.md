@@ -125,25 +125,24 @@ kernel level, the port gets published on both IPv4 and IPv6.
 
 You can change the default binding address for published container ports so that
 they're only accessible to the Docker host by default. To do that, you can
-configure the daemon to use the loopback address (`127.0.0.1`) instead. You
-have two options for how to do this:
+configure the daemon to use the loopback address (`127.0.0.1`) instead.
+To do so, configure the `"ip"` key in the `daemon.json` configuration file:
 
-- Set the `--ip` flag on the `dockerd` CLI when you run the daemon
+```json
+{
+  "ip": "127.0.0.1"
+}
+```
 
-  ```console
-  $ dockerd --ip 127.0.0.1
-  ```
-
-- Configure the `"ip"` key in the `daemon.json` configuration file before startup
-
-  ```json
-  {
-    "ip": "127.0.0.1"
-  }
-  ```
-
-This changes the default binding port to `127.0.0.1` for published container
+This changes the default binding address to `127.0.0.1` for published container
 ports on the default bridge network.
+Restart the daemon for this change to take effect.
+Alternatively, you can use the `dockerd --ip` flag when starting the daemon.
+
+> **Note**
+>
+> Changing the default bind address doesn't have any effect on Swarm services.
+> Swarm services are always exposed on the `0.0.0.0` network interface.
 
 To configure this setting for user-defined bridge networks, use
 the `com.docker.network.bridge.host_binding_ipv4`
@@ -173,13 +172,14 @@ Restarting `dockerd` daemon inserts the interface into the `docker` zone.
 
 ## Docker and ufw
 
-Uncomplicated Firewall (ufw) is a frontend that ships with Debian and Ubuntu,
+[Uncomplicated Firewall](https://launchpad.net/ufw){: target="_blank" rel="noopener"}
+(ufw) is a frontend that ships with Debian and Ubuntu,
 and it lets you manage firewall rules. Docker and ufw use iptables in ways
 that make them incompatible with each other.
 
 When you publish a container's ports using Docker, traffic to and from that
 container gets diverted before it goes through the ufw firewall settings.
 Docker routes container traffic in the `nat` table, which means that packets
-are diverted before it reaches the `filter` table that ufw uses. Packets are
-routed before the firewall rules can be applied, effectively ignoring your
-firewall configuration.
+are diverted before it reaches the `INPUT` and `OUTPUT` chains that ufw uses.
+Packets are routed before the firewall rules can be applied,
+effectively ignoring your firewall configuration.

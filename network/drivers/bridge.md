@@ -107,7 +107,7 @@ The following table describes the driver-specific options that you can pass to
 
 | Option                                           | Default        | Description                                                 |
 | ------------------------------------------------ | -------------- | ----------------------------------------------------------- |
-| `com.docker.network.bridge.name`                 |                | Bridge name to be used when creating the Linux bridge.      |
+| `com.docker.network.bridge.name`                 |                | Interface name to use when creating the Linux bridge.       |
 | `com.docker.network.bridge.enable_ip_masquerade` | `true`         | Enable IP masquerading.                                     |
 | `com.docker.network.bridge.enable_icc`           | `true`         | Enable or Disable inter-container connectivity.             |
 | `com.docker.network.bridge.host_binding_ipv4`    |                | Default IP when binding container ports.                    |
@@ -252,7 +252,10 @@ user-defined bridges, you can't selectively disable IPv6 on the default bridge.
 
 Due to limitations set by the Linux kernel, bridge networks become unstable and
 inter-container communications may break when 1000 containers or more connect
-to a single bridge network.
+to a single network.
+
+For more information about this limitation, see
+[moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718){: target="_blank" rel="noopener"}.
 
 ## Next steps
 

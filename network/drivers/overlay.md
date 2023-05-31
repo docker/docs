@@ -285,6 +285,15 @@ routing on the individual Docker daemon hosts.
 
 For most situations, you should connect to the service name, which is load-balanced and handled by all containers ("tasks") backing the service. To get a list of all tasks backing the service, do a DNS lookup for `tasks.<service-name>.`
 
+## Connection limit for overlay networks
+
+Due to limitations set by the Linux kernel, overlay networks become unstable and
+inter-container communications may break when 1000 containers are co-located on
+the same host.
+
+For more information about this limitation, see
+[moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718){: target="_blank" rel="noopener"}.
+
 ## Next steps
 
 - Go through the [overlay networking tutorial](../network-tutorial-overlay.md)
