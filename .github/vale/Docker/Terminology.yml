@@ -5,9 +5,7 @@ level: suggestion
 action:
   name: replace
 swap:
-  '[Hh]ub': Docker Hub
-  'Docker hub': Docker Hub
-  '[Ss]cout': Docker Scout
-  'Docker scout': Docker Scout
+  '(?<!Docker )[Hh]ub': Docker Hub
+  '(?<!Docker )[Ss]cout': Docker Scout
   scan: analyze
   Scan: Analyze
