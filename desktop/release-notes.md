@@ -57,8 +57,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For Windows
 
-- Fixed moving WSL Data on a different disk. Fixes [docker/for-win#13269](https://github.com/docker/for-win/issues/13269).
 - Fixed a bug that meant WSL data could not be moved to a different disk. Fixes [docker/for-win#13269](https://github.com/docker/for-win/issues/13269).
+- Fixed a bug where Docker Desktop was not stopping its WSL distros (docker-desktop and docker-desktop-data) when it was shutdown, consuming host memory unnecessarily.
 
 #### For Linux
 
