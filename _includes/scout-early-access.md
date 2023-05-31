@@ -1,7 +1,7 @@
 > **Early Access**
 >
 > Docker Scout is an [early access](/release-lifecycle/#early-access-ea)
-> product, and requires a Docker Pro, Team, or Business subscription.
+> product. 
 >
 > If you're interested in Docker Scout for your organization and want to
 > learn more, get in touch by filling out the contact form on the
