@@ -81,9 +81,10 @@ Your Windows machine must meet the following requirements to successfully instal
 </div>
 </div>
 
-> **Note**
+> **Important**
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
+{: .important}
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
