@@ -1,14 +1,14 @@
 ---
-description: The Docker Scout Web App helps review and share the analysis of images.
+description: The Docker Scout Dashboard helps review and share the analysis of images.
 keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security, report, reports, web app
-title: Web App
+title: Dashboard
 redirect_from:
   - /scout/reports/
 ---
 
 {% include scout-early-access.md %}
 
-The Docker Scout Web App helps you share the analysis of images in an organization with your team. Developers can now see an overview of their security status across all their images from both Docker Hub and Artifactory, and get remediation advice at their fingertips. It helps team members in roles such as security, compliance, and operations to know what vulnerabilities and issues they need to focus on.
+The Docker Scout Dashboard helps you share the analysis of images in an organization with your team. Developers can now see an overview of their security status across all their images from both Docker Hub and Artifactory, and get remediation advice at their fingertips. It helps team members in roles such as security, compliance, and operations to know what vulnerabilities and issues they need to focus on.
 
 ## Overview
 
