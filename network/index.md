@@ -3,14 +3,14 @@ title: Networking overview
 description: How networking works from the container's point of view
 keywords: networking, container, standalone
 redirect_from:
-  - /engine/userguide/networking/configure-dns/
-  - /engine/userguide/networking/default_network/configure-dns/
-  - /engine/userguide/networking/default_network/binding/
-  - /engine/userguide/networking/default_network/container-communication/
-  - /engine/userguide/networking/
-  - /engine/userguide/networking/dockernetworks/
   - /articles/networking/
   - /config/containers/container-networking/
+  - /engine/userguide/networking/
+  - /engine/userguide/networking/configure-dns/
+  - /engine/userguide/networking/default_network/binding/
+  - /engine/userguide/networking/default_network/configure-dns/
+  - /engine/userguide/networking/default_network/container-communication/
+  - /engine/userguide/networking/dockernetworks/
 ---
 
 Container networking refers to the ability for containers to connect to and

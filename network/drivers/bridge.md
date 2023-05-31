@@ -3,11 +3,11 @@ title: Bridge network driver
 description: All about using user-defined bridge networks and the default bridge
 keywords: network, bridge, user-defined, standalone
 redirect_from:
+  - /config/containers/bridges/
+  - /engine/userguide/networking/default_network/build-bridges/
   - /engine/userguide/networking/default_network/custom-docker0/
   - /engine/userguide/networking/default_network/dockerlinks/
-  - /engine/userguide/networking/default_network/build-bridges/
   - /engine/userguide/networking/work-with-networks/
-  - /config/containers/bridges/
   - /network/bridge/
 ---
 
