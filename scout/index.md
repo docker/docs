@@ -32,7 +32,7 @@ You can view and interact with Docker Scout from your terminal through the
 `docker scout`
 [plugin for Docker CLI](../engine/reference/commandline/scout_cves.md).
 
-There's also a [Web App](https://scout.docker.com){: target="\_blank"
+There's also a [Dashboard](https://scout.docker.com){: target="\_blank"
 rel="noopener" } that you can use to explore additional information about
 images, packages, and CVEs.
 
