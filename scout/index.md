@@ -43,9 +43,6 @@ To start using Docker Scout, turn on any of the following features:
 - [Advanced image analysis in Docker Hub](./advanced-image-analysis.md)
 - [Artifactory integration](./artifactory.md)
 
-Enabling either feature requires a paid Docker subscription. Once enabled,
-Docker Scout is activated for your organization automatically.
-
 ### Advanced image analysis
 
 Advanced image analysis is a feature in Docker Hub which, when enabled, triggers
