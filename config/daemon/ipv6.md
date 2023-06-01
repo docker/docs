@@ -46,22 +46,18 @@ default bridge network, and to user-defined networks configured with an IPv6 sub
 
 ## Dynamic IPv6 subnet allocation
 
-If you want dynamic IPv6 subnet allocation, you must explicitly configure the
-`default-address-pools` parameter to include:
+If you don't explicitly configure subnets for user-defined networks,
+using `docker network create --subnet=<your-subnet>`,
+those networks use the default address pools of the daemon as a fallback.
+The default address pools are all IPv4 pools.
+This also applies to networks created from a Docker Compose file,
+with `enable_ipv6` set to `true`.
 
-- The default address pool values
-- One or more custom IPv6 supernets
+To enable dynamic subnet allocation for user-defined IPv6 networks,
+you must manually configure address pools of the daemon to include:
 
-> **Note**
->
-> Be aware that the following known limitations exist:
->
-> - Supernets can't have a size larger than 80. This is due to an integer
->   overflow in the Docker daemon. See
->   [moby/moby#42801](https://github.com/moby/moby/issues/42801)
-> - The difference between the supernet length and the pool size can't be
->   larger than 24. Otherwise, the daemon consumes all available memory. See
->   [moby/moby#40275](https://github.com/moby/moby/issues/40275)
+- The default IPv4 address pools
+- One or more IPv6 pools of your own
 
 The default address pool configuration is:
 
@@ -80,7 +76,21 @@ The default address pool configuration is:
 ```
 
 The following example shows a valid configuration with the default values and
-an IPv6 supernet, with a prefix length of 64 and a size of 80.
+an IPv6 pool. The IPv6 pool in the example provides up to 256 IPv6 subnets of
+size `/112`, from an IPv6 pool of prefix length `/104`. Each `/112`-sized
+subnet supports 65 536 IPv6 addresses.
+
+> **Note**
+>
+> Be aware that the following known limitations exist for IPv6 pools:
+>
+> - The `base` value for IPv6 needs a minimum prefix length of `/64`.
+>   This is due to an integer overflow in the Docker daemon.
+>   See [moby/moby#42801](https://github.com/moby/moby/issues/42801).
+> - The difference between the pool length and the pool size can't be larger
+>   than 24. Defining an excessive number of subnets causes the daemon to
+>   consume all available memory.
+>   See [moby/moby#40275](https://github.com/moby/moby/issues/40275).
 
 ```json
 {
@@ -92,11 +102,21 @@ an IPv6 supernet, with a prefix length of 64 and a size of 80.
     { "base": "172.24.0.0/14", "size": 16 },
     { "base": "172.28.0.0/14", "size": 16 },
     { "base": "192.168.0.0/16", "size": 20 },
-    { "base": "2001:db8::/64", "size": 80 }
+    { "base": "2001:db8::/104", "size": 112 }
   ]
 }
 ```
 
+> **Note**
+>
+> The address `2001:db8` in this example is
+> [reserved for use in documentation][wikipedia-ipv6-reserved].
+> Replace it with a valid IPv6 network.
+> The default IPv4 pools are from the private address range,
+> the IPv6 equivalent would be [ULA networks][wikipedia-ipv6-ula].
+
+[wikipedia-ipv6-reserved]: https://en.wikipedia.org/wiki/Reserved_IP_addresses#IPv6
+[wikipedia-ipv6-ula]: https://en.wikipedia.org/wiki/Unique_local_address
 
 ## Next steps
 
