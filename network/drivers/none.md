@@ -1,12 +1,12 @@
 ---
 title: None network driver
-description: How to disable networking by using the none driver
+description: How to isolate the networking stack of a container using the none driver
 keywords: network, none, standalone
 redirect_from:
   - /network/none/
 ---
 
-If you want to completely disable the networking stack on a container, you can
+If you want to completely isolate the networking stack of a container, you can
 use the `--network none` flag when starting the container. Within the container,
 only the loopback device is created.
 
