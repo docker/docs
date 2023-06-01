@@ -22,7 +22,7 @@ configured to use either Hyper-V or WSL version 2.
 > it returns a version number prior to 1.1.3.0, update WSL to the latest version
 > by typing `wsl --update` in a Windows command or PowerShell terminal.
 
-Note however that ECI on WSL is not as secure as on Hyper-V because:
+Note,however, that ECI on WSL is not as secure as on Hyper-V because:
 
 * While ECI on WSL still hardens containers so that malicious workloads can't
   easily breach Docker Desktop's Linux VM, ECI on WSL can't prevent Docker
