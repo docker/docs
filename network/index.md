@@ -51,12 +51,20 @@ Here are some examples:
 > a container's ports it becomes available not only to the Docker host, but to
 > the outside world as well.
 >
-> To publish a container's port and only expose it to the Docker host, include
-> the localhost IP address (`127.0.0.1`) in the port mapping command.
+> If you include the localhost IP address (`127.0.0.1`) with the publish flag,
+> only the Docker host can the published container port.
 >
 > ```console
 > $ docker run -p 127.0.0.1:8080:80 nginx
 > ```
+>
+> > **Warning**
+> >
+> > Hosts within the same L2 segment (for example, hosts connected to the same
+> > network switch) can reach ports published to localhost.
+> > For more information, see
+> > [moby/moby#45610](https://github.com/moby/moby/issues/45610)
+> {: .warning }
 {: .important }
 
 If you want to make a container accessible to other containers,
