@@ -8,6 +8,8 @@ redirect_from:
 ---
 {% include compose-eol.md %}
 
+For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/tag/v2.18.0).
+
 ## 2.18.1
 {% include release-date.html date="2023-05-17" %}
 
@@ -17,7 +19,10 @@ redirect_from:
 ## 2.18.0
 {% include release-date.html date="2023-05-16" %}
 
-For more information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/tag/v2.18.0).
+### Update
+- Dependencies upgrade: bump compose-go to v1.13.5
+- Dependencies upgrade: bump buildkit to v0.11.6
+- Dependencies upgrade: bump docker to v23.0.5
 
 ### Bug fixes and enhancements
 - Added dry run support using `--dry-run`
@@ -40,13 +45,9 @@ For more information, see the [release notes in the Compose repo](https://github
 - `--parallel` now has precedence over `COMPOSE_PARALLEL_LIMIT`
 - Compose now reports that the external network is not found when Swarm is disabled
 
-### Update
-- Dependencies upgrade: bump compose-go to v1.13.5
-- Dependencies upgrade: bump buildkit to v0.11.6
-- Dependencies upgrade: bump docker to v23.0.5
-
 ## 2.17.2
 {% include release-date.html date="2023-03-26" %}
+
 ### Update
 - Dependencies upgrade: bump compose-go to v1.13.2
 
