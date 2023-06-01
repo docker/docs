@@ -56,8 +56,8 @@ and it's an excellent way for users to run their favorite Linux distro on
 Windows hosts and access Docker from within (see Docker Desktop's WSL distro
 integration feature, enabled via the Dashboard's **Settings** > **Resources** > **WSL Integration**).
 
-### Docker build and buildx has some restrictions
-With ECI enabled, Docker build `--network=host` and Docker buildx entitlements
+### Docker Build and Buildx have some restrictions
+With ECI enabled, Docker build `--network=host` and Docker Buildx entitlements
 (`network.host`, `security.insecure`) are not allowed. Builds that require
 these won't work properly.
 
