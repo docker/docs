@@ -68,7 +68,7 @@ For Windows hosts, ECI works with both the Docker Desktop Hyper-V and WSL 2 back
 - Docker Desktop 4.19 or prior: ECI only works with Hyper-V.
 - Docker Desktop 4.20 or later: ECI Works with both Hyper-V and WSL 2 (with WSL version 1.1.3.0 and above).
 
-See [ECI Support for WSL](faq.md#eci-support-for-wsl) for further info as well as security caveats when using Enhanced Container Isolation on WSL 2.
+See [ECI Support for WSL](limitations.md#eci-support-for-wsl) for further info as well as security caveats when using Enhanced Container Isolation on WSL 2.
 
 ### How do I enable Enhanced Container Isolation?
 

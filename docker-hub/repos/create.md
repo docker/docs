@@ -2,6 +2,7 @@
 description: Creating repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, manage, repos
 title: Create repositories
+toc_max: 3
 redirect_from:
 - /docker-hub/repos/configure/
 ---
@@ -40,6 +41,38 @@ When creating a new repository:
   > **Note**
   >
   > For organizations creating a new repository, it's recommended you select **Private**.
+
+### Add a repository overview
+
+Once you have created a repository, add an overview to the **Repository overview** field. This describes what your image does and how to use it.
+
+<div class="panel panel-default">
+  <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
+  Repository overview best practices
+  <i class="chevron fa fa-fw"></i></div>
+  <div class="collapse block" id="collapseSample1">
+    <p>A good image description is essential to help potential users understand why and how to use the image. The below covers the best practices to follow when adding a description to your image.</p>
+    <h4>Describe the image</h4>
+    <p>Include a description of what the image is, the features it offers, and why people might want or need to use it in their project or image.</p>
+    <p>Optional information to include are examples of usage, history, the team behind the project, etc.</p>
+    <h4>How to start and use the image</h4>
+    <p>Provide instructions for a minimal “getting started” example with running a container using the image. Also provide a minimal example of how to use the image in a Dockerfile.</p>
+    <p>Optional information to include, if relevant, is:</p>
+    <ul>
+    <li>Exposing ports</li>
+    <li>Default environment variables</li>
+    <li>Non-root user</li>
+    <li>Running in debug mode</li>
+    </ul>
+    <h4>Image tags and variants</h4>
+    <p>List the key image variants and the tags for using them along with what that variant offers and why someone might want to use that variant.</p>
+    <h4>Where to find more information</h4>
+    <p>Add links here for docs and support sites, communities, or mailing lists where users can find more and ask questions.</p>
+    <p>Who is the image maintained by and how can someone contact them with concerns.</p>
+    <h4>License</h4>
+    <p>What is the license for the image and where can people find more details if needed.</p>
+  </div>
+</div>
 
 ## Push a Docker container image to Docker Hub
 
