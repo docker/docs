@@ -10,7 +10,7 @@ title: Artifactory integration
 {% include scout-early-access.md %}
 
 Integrating Docker Scout with JFrog Artifactory lets you run image analysis
-automatically on images in your Artifactory registries.
+automatically on images in Artifactory registries.
 
 ## Local image analysis
 
