@@ -1,5 +1,5 @@
 ---
-description: Image analysis with Docker Scout
+description: Advanced image analysis is a Docker Scout feature for Docker Hub
 keywords: scanning, vulnerabilities, Hub, supply chain, security
 title: Advanced image analysis
 ---
