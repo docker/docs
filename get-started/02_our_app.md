@@ -14,6 +14,9 @@ To complete this guide, you'll need the following:
 
 - Docker running locally. Follow the instructions to [download and install Docker](../get-docker.md).
 - A [Git client](https://git-scm.com/downloads){:target="_blank" rel="noopener" class="_"}.
+  > **Note**
+  >
+  > If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
 - An IDE or a text editor to edit files. Docker recommends using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}.
 - A conceptual understanding of [containers and images](../get-started/overview.md/#docker-objects).
 
