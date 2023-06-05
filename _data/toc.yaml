@@ -1346,6 +1346,8 @@ manuals:
         title: Use the VFS storage driver
       - path: /storage/storagedriver/aufs-driver/
         title: Use the AUFS storage driver (deprecated)
+      - path: /storage/containerd/
+        title: containerd snapshotters
   - sectiontitle: Networking
     section:
     - path: /network/
