@@ -78,7 +78,8 @@ as a standalone binary.
 To install the plugin, run the following command:
 
 ```bash
-curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s --
+$ curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
+$ sh install-scout.sh
 ```
 
 Always examine scripts downloaded from the internet before running them locally. Before installing, make yourself familiar with potential risks and limitations of the convenience script:
