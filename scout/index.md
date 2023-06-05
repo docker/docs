@@ -86,7 +86,7 @@ Always examine scripts downloaded from the internet before running them locally.
 
 > **Tip**
 >
-> If you want to install the plugin manually, you can find full instructions in the plugin's repository.
+> If you want to install the plugin manually, you can find full instructions in the [plugin's repository](https://github.com/docker/scout-cli).
 {: .tip }
 
 The plugin is also available as [a container image](https://hub.docker.com/r/docker/scout-cli) and as [a GitHub action](https://github.com/docker/scout-action)
