@@ -49,6 +49,10 @@ Authenticated users get a higher pull rate limit compared to anonymous users. Fo
 
 In large enterprises where admin access is restricted, administrators can [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md). Enforcing developers to authenticate through Docker Desktop also allows administrators to improve their organization’s security posture for containerized development by taking advantage of [Hardened Desktop](hardened-desktop/index.md).
 
+> **Note**
+>
+> Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity. 
+
 ### Credentials management for Linux users
 
 Docker Desktop relies on [`pass`](https://www.passwordstore.org/){: target="_blank" rel="noopener" class="_"} to store credentials in gpg2-encrypted files.
