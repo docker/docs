@@ -29,7 +29,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 ## System requirements
 
-Your Windows machine must meet the following requirements to successfully install Docker Desktop.
+You must meet the following requirements to successfully install Docker Desktop on Windows:
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#win-wsl2">WSL 2 backend</a></li>
@@ -40,6 +40,7 @@ Your Windows machine must meet the following requirements to successfully instal
 
 ### WSL 2 backend
 
+- WSL version 1.1.3.0 or above.
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit: Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
 - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
