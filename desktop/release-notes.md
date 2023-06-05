@@ -24,11 +24,28 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.20.1
+
+{% include release-date.html date="2023-06-05" %}
+
+{% include desktop-install.md all=true version="4.20.1" build_path="/" %}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- containerd image store: Fixed a bug that caused `docker load` to fail when loading an image that contains attestations.
+- containerd image store: Fixed the default image exporter during build.
+
+#### For Windows
+
+- Fixed a bug that made it difficult to parse the WSL version on the host in non-western locales. Fixes [docker/for-win#13518](https://github.com/docker/for-win/issues/13518) and [docker/for-win#13524](https://github.com/docker/for-win/issues/13524).
+
 ## 4.20.0
 
 {% include release-date.html date="2023-05-30" %}
 
-{% include desktop-install.md all=true version="4.20.0" build_path="/" %}
+{% include desktop-install.md all=true version="4.20.0" build_path="/109717/" %}
 
 ### Upgrades
 
