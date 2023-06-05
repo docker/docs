@@ -6,7 +6,7 @@ title: Explore Volumes
 
 The **Volumes** view in Docker Dashboard enables you to easily create and delete volumes and see which ones are being used. You can also see which container is using a specific volume and explore the files and folders in your volumes.
 
-For more information about volumes, see [Use volumes](../../storage/volumes.md)
+For more information about volumes, see [Use volumes](../../storage/volumes.md). For examples of how to use volumes in the GUI, see [Persiting the DB](../../get-started/05_persisting_data.md) and [Use bind mounts](../../get-started/06_bind_mounts.md).
 
 By default, the **Volumes** view displays a list of all the volumes. Volumes that are currently used by a container display the **In Use** badge.
 

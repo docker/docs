@@ -32,8 +32,8 @@ What you'll see is that the files created in one container aren't available in a
 2. Validate that you can see the output by accessing the terminal in the container. To do so, you can use the CLI or Docker Desktop's graphical interface.
 
    <ul class="nav nav-tabs">
-     <li class="active"><a data-toggle="tab" data-target="#cli">CLI</a></li>
-     <li><a data-toggle="tab" data-target="#gui">Docker Desktop</a></li>
+     <li class="active"><a data-toggle="tab" data-group="cli" data-target="#cli">CLI</a></li>
+     <li><a data-toggle="tab" data-target="#gui" data-group="gui">Docker Desktop</a></li>
    </ul>
    <div class="tab-content">
    <div id="cli" class="tab-pane fade in active" markdown="1">
@@ -103,33 +103,76 @@ As mentioned, you're going to use a volume mount. Think of a volume mount as an 
 Docker fully manages the volume, including the storage location on disk. You only need to remember the
 name of the volume.
 
+### Create a volume and start the container
+
+You can create the volume and start the container using the CLI or Docker Desktop's graphical interface.
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#cli2" data-group="cli">CLI</a></li>
+  <li><a data-toggle="tab" data-target="#gui2" data-group="gui">Docker Desktop</a></li>
+</ul>
+<div class="tab-content">
+  <div id="cli2" class="tab-pane fade in active" markdown="1">
+
 1. Create a volume by using the `docker volume create` command.
 
-    ```console
-    $ docker volume create todo-db
-    ```
+   ```console
+   $ docker volume create todo-db
+   ```
 
-2. Stop and remove the todo app container once again in the Dashboard (or with `docker rm -f <id>`), as it is still running without using the persistent volume.
+2. Stop and remove the todo app container once again with `docker rm -f <id>`, as it is still running without using the persistent volume.
 
 3. Start the todo app container, but add the `--mount` option to specify a volume mount. Give the volume a name, and mount
-   it to `/etc/todos` in the container, which captures all files created at the path.
+   it to `/etc/todos` in the container, which captures all files created at the path. In your Mac or Linux terminal, or in Windows Command Prompt or PowerShell, run the following command:
 
     ```console
     $ docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
     ```
 
-4. Once the container starts up, open the app and add a few items to your todo list.
+<hr>
+</div>
+<div id="gui2" class="tab-pane fade" markdown="1">
+
+1. Create a volume.
+   1. Select **Volumes** in Docker Desktop.
+   2. In **Volumes**, select **Create**.
+   3. Specify `todo-db` as the volume name, and then select **Create**.
+
+2. Stop and remove the app container.
+   1. Select **Containers** in Docker Desktop.
+   2. Select **Delete** in the **Actions** column for the container.
+
+3. Start the todo app container with the volume mounted.
+   1. Select the search box at the top of Docker Desktop.
+   2. In the search window, select the **Images** tab.
+   3. In the search box, specify the container name, `getting-started`.
+     > **Tip**
+     >
+     >  Use the search filter to filter images and only show **Local images**.
+   4. Select your image and then select **Run**.
+   5. Select **Optional settings**.
+   6. In **Host path**, specify the name of the volume, `todo-db`.
+   7. In **Container path**, specify `/etc/todos`.
+   8. Select **Run**.
+
+<hr>
+</div>
+</div>
+
+### Verify that the data persists
+
+1. Once the container starts up, open the app and add a few items to your todo list.
 
     ![Items added to todo list](images/items-added.png){: style="width: 55%; " }
     {: .text-center }
 
-5. Stop and remove the container for the todo app. Use the Dashboard or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
+2. Stop and remove the container for the todo app. Use Docker Desktop or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
 
-6. Start a new container using the same command from above.
+3. Start a new container using the same steps from above.
 
-7. Open the app. You should see your items still in your list.
+4. Open the app. You should see your items still in your list.
 
-8. Go ahead and remove the container when you're done checking out your list.
+5. Go ahead and remove the container when you're done checking out your list.
 
 You've now learned how to persist data.
 
