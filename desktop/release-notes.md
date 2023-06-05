@@ -34,12 +34,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 #### For all platforms
 
-- Fix `docker load` of an image that contains attestations with the containerd integration.
-- Fix the default image exporter during build with the containerd integration.
+- containerd image store: Fixed a bug that caused `docker load` to fail when loading an image that contains attestations.
+- containerd image store: Fixed the default image exporter during build.
 
 #### For Windows
 
-- Fixed a bug when parsing the WSL version on the host in non-western locales. Fixes [docker/for-win#13518](https://github.com/docker/for-win/issues/13518) and [docker/for-win#13524](https://github.com/docker/for-win/issues/13524).
+- Fixed a bug that made it difficult to parse the WSL version on the host in non-western locales. Fixes [docker/for-win#13518](https://github.com/docker/for-win/issues/13518) and [docker/for-win#13524](https://github.com/docker/for-win/issues/13524).
 
 ## 4.20.0
 
