@@ -51,7 +51,7 @@ In large enterprises where admin access is restricted, administrators can [Confi
 
 > **Note**
 >
-> Docker Desktop automatically signs you out after 90 days, or 30 days of inactivity. 
+> Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity. 
 
 ### Credentials management for Linux users
 
