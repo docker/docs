@@ -22,7 +22,7 @@ host running elsewhere.
   running on the same Docker host. This is recommended for standalone containers
   running in production.
 
-Although [overlay networks](overlay.md) are generally used for swarm services,
+Although [overlay networks](drivers/overlay.md) are generally used for swarm services,
 you can also use an overlay network for standalone containers. That's covered as
 part of the [tutorial on using overlay networks](network-tutorial-overlay.md#use-an-overlay-network-for-standalone-containers).
 

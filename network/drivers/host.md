@@ -1,7 +1,9 @@
 ---
-title: Use host networking
+title: Host network driver
 description: All about exposing containers on the Docker host's network
 keywords: network, host, standalone
+redirect_from:
+  - /network/host/
 ---
 
 If you use the `host` network mode for a container, that container's network
@@ -39,8 +41,8 @@ given swarm node.
 
 ## Next steps
 
-- Go through the [host networking tutorial](network-tutorial-host.md)
-- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+- Go through the [host networking tutorial](../network-tutorial-host.md)
+- Learn about [networking from the container's point of view](../index.md)
 - Learn about [bridge networks](bridge.md)
 - Learn about [overlay networks](overlay.md)
 - Learn about [Macvlan networks](macvlan.md)

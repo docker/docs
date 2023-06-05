@@ -1346,26 +1346,34 @@ manuals:
         title: Use the VFS storage driver
       - path: /storage/storagedriver/aufs-driver/
         title: Use the AUFS storage driver (deprecated)
+      - path: /storage/containerd/
+        title: containerd snapshotters
   - sectiontitle: Networking
     section:
     - path: /network/
       title: Overview
-    - path: /config/containers/container-networking/
-      title: Container networking
+    - sectiontitle: Network drivers
+      section:
+      - path: /network/drivers/
+        title: Overview
+      - path: /network/drivers/bridge/
+        title: Bridge
+      - path: /network/drivers/overlay/
+        title: Overlay
+      - path: /network/drivers/host/
+        title: Host
+      - path: /network/drivers/ipvlan/
+        title: IPvlan
+      - path: /network/drivers/macvlan/
+        title: Macvlan
+      - path: /network/drivers/none/
+        title: None (no networking)
     - path: /network/proxy/
       title: Configure Docker to use a proxy server
-    - path: /network/bridge/
-      title: Bridge networks
-    - path: /network/overlay/
-      title: Overlay networks
-    - path: /network/host/
-      title: Host networking
-    - path: /network/ipvlan/
-      title: IPvlan networks
-    - path: /network/macvlan/
-      title: Macvlan networks
-    - path: /network/none/
-      title: Disable networking for a container
+    - path: /network/packet-filtering-firewalls/
+      title: Packet filtering and firewalls
+    - path: /config/daemon/ipv6/
+      title: Use IPv6
     - sectiontitle: Networking tutorials
       section:
       - path: /network/network-tutorial-standalone/
@@ -1548,14 +1556,10 @@ manuals:
         title: Configuration overview
       - path: /config/daemon/systemd/
         title: Configure with systemd
-      - path: /config/daemon/ipv6/
-        title: Use IPv6
       - path: /config/containers/live-restore/
         title: Keep containers alive during daemon downtime
       - path: /config/daemon/troubleshoot/
         title: Troubleshoot
-      - path: /network/iptables/
-        title: Docker and iptables
       - path: /config/daemon/remote-access/
         title: Remote access
       - path: /engine/context/working-with-contexts/
