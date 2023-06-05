@@ -1,14 +1,16 @@
 ---
-title: Use IPvlan networks
+title: IPvlan network driver
 description: All about using IPvlan to make your containers appear like physical machines on the network
 keywords: network, ipvlan, l2, l3, standalone
+redirect_from:
+  - /network/ipvlan/
 ---
 
 The IPvlan driver gives users total control over both IPv4 and IPv6 addressing.
 The VLAN driver builds on top of that in giving operators complete control of
 layer 2 VLAN tagging and even IPvlan L3 routing for users interested in underlay
 network integration. For overlay deployments that abstract away physical constraints
-see the [multi-host overlay](network-tutorial-overlay.md) driver.
+see the [multi-host overlay](../network-tutorial-overlay.md) driver.
 
 IPvlan is a new twist on the tried and true network virtualization technique.
 The Linux implementations are extremely lightweight because rather than using
@@ -24,6 +26,17 @@ resides in between the Docker host NIC and container interface leaves a simple
 setup consisting of container interfaces, attached directly to the Docker host
 interface. This result is easy to access for external facing services as there
 is no need for port mappings in these scenarios.
+
+## Options
+
+The following table describes the driver-specific options that you can pass to
+`--option` when creating a network using the `ipvlan` driver.
+
+| Option        | Default  | Description                                                           |
+| ------------- | -------- | --------------------------------------------------------------------- |
+| `ipvlan_mode` | `l2`     | Sets the IPvlan operating mode. Can be one of: `l2`, `l3`, `l3s`      |
+| `ipvlan_flag` | `bridge` | Sets the IPvlan mode flag. Can be one of: `bridge`, `private`, `vepa` |
+| `parent`      |          | Specifies the parent interface to use.                                |
 
 ## Prerequisites
 

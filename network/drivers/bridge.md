@@ -1,13 +1,14 @@
 ---
-title: Use bridge networks
+title: Bridge network driver
 description: All about using user-defined bridge networks and the default bridge
 keywords: network, bridge, user-defined, standalone
 redirect_from:
-- /engine/userguide/networking/default_network/custom-docker0/
-- /engine/userguide/networking/default_network/dockerlinks/
-- /engine/userguide/networking/default_network/build-bridges/
-- /engine/userguide/networking/work-with-networks/
-- /config/containers/bridges/
+  - /config/containers/bridges/
+  - /engine/userguide/networking/default_network/build-bridges/
+  - /engine/userguide/networking/default_network/custom-docker0/
+  - /engine/userguide/networking/default_network/dockerlinks/
+  - /engine/userguide/networking/work-with-networks/
+  - /network/bridge/
 ---
 
 In terms of networking, a bridge network is a Link Layer device
@@ -37,7 +38,7 @@ network.**
 - **User-defined bridges provide automatic DNS resolution between containers**.
 
   Containers on the default bridge network can only access each other by IP
-  addresses, unless you use the [`--link` option](links.md), which is
+  addresses, unless you use the [`--link` option](../links.md), which is
   considered legacy. On a user-defined bridge network, containers can resolve
   each other by name or alias.
 
@@ -80,7 +81,7 @@ network.**
 - **Linked containers on the default bridge network share environment variables**.
 
   Originally, the only way to share environment variables between two containers
-  was to link them using the [`--link` flag](links.md). This type of
+  was to link them using the [`--link` flag](../links.md). This type of
   variable sharing is not possible with user-defined networks. However, there
   are superior ways to share environment variables. A few ideas:
 
@@ -91,13 +92,46 @@ network.**
     compose file can define the shared variables.
 
   - You can use swarm services instead of standalone containers, and take
-    advantage of shared [secrets](../engine/swarm/secrets.md) and
-    [configs](../engine/swarm/configs.md).
+    advantage of shared [secrets](../../engine/swarm/secrets.md) and
+    [configs](../../engine/swarm/configs.md).
 
 Containers connected to the same user-defined bridge network effectively expose all ports
 to each other. For a port to be accessible to containers or non-Docker hosts on
 different networks, that port must be _published_ using the `-p` or `--publish`
 flag.
+
+## Options
+
+The following table describes the driver-specific options that you can pass to
+`--option` when creating a custom network using the `bridge` driver.
+
+| Option                                           | Default        | Description                                                 |
+| ------------------------------------------------ | -------------- | ----------------------------------------------------------- |
+| `com.docker.network.bridge.name`                 |                | Interface name to use when creating the Linux bridge.       |
+| `com.docker.network.bridge.enable_ip_masquerade` | `true`         | Enable IP masquerading.                                     |
+| `com.docker.network.bridge.enable_icc`           | `true`         | Enable or Disable inter-container connectivity.             |
+| `com.docker.network.bridge.host_binding_ipv4`    |                | Default IP when binding container ports.                    |
+| `com.docker.network.driver.mtu`                  | `0` (no limit) | Set the containers network Maximum Transmission Unit (MTU). |
+| `com.docker.network.container_iface_prefix`      | `eth`          | Set a custom prefix for container interfaces.               |
+
+Some of these options are also available as flags to the `dockerd` CLI, and you
+can use them to configure the default `docker0` bridge when starting the Docker
+daemon. The following tables shows which options have equivalent flags in the
+`dockerd` CLI.
+
+| Option                                           | Flag        |
+| ------------------------------------------------ | ----------- |
+| `com.docker.network.bridge.name`                 | -           |
+| `com.docker.network.bridge.enable_ip_masquerade` | `--ip-masq` |
+| `com.docker.network.bridge.enable_icc`           | `--icc`     |
+| `com.docker.network.bridge.host_binding_ipv4`    | `--ip`      |
+| `com.docker.network.driver.mtu`                  | `--mtu`     |
+| `com.docker.network.container_iface_prefix`      | -           |
+
+The Docker daemon supports a `--bridge` flag, which you can use to define
+your own `docker0` bridge. Use this option if you want to run multiple daemon
+instances on the same host. For details, see
+[Run multiple daemons](../../engine/reference/commandline/dockerd.md#run-multiple-daemons).
 
 ## Manage a user-defined bridge
 
@@ -110,7 +144,7 @@ $ docker network create my-net
 
 You can specify the subnet, the IP address range, the gateway, and other
 options. See the
-[docker network create](../engine/reference/commandline/network_create.md#specify-advanced-options)
+[docker network create](../../engine/reference/commandline/network_create.md#specify-advanced-options)
 reference or the output of `docker network create --help` for details.
 
 Use the `docker network rm` command to remove a user-defined bridge
@@ -156,9 +190,9 @@ $ docker network connect my-net my-nginx
 
 ## Disconnect a container from a user-defined bridge
 
-To disconnect a running container from a user-defined bridge, use the `docker
-network disconnect` command. The following command disconnects the `my-nginx`
-container from the `my-net` network.
+To disconnect a running container from a user-defined bridge, use the
+`docker network disconnect` command. The following command disconnects
+the `my-nginx` container from the `my-net` network.
 
 ```console
 $ docker network disconnect my-net my-nginx
@@ -167,35 +201,12 @@ $ docker network disconnect my-net my-nginx
 ## Use IPv6
 
 If you need IPv6 support for Docker containers, you need to
-[enable the option](../config/daemon/ipv6.md) on the Docker daemon and reload its
+[enable the option](../../config/daemon/ipv6.md) on the Docker daemon and reload its
 configuration, before creating any IPv6 networks or assigning containers IPv6
 addresses.
 
 When you create your network, you can specify the `--ipv6` flag to enable
 IPv6. You can't selectively disable IPv6 support on the default `bridge` network.
-
-## Enable forwarding from Docker containers to the outside world
-
-By default, traffic from containers connected to the default bridge network is
-**not** forwarded to the outside world. To enable forwarding, you need to change
-two settings. These are not Docker commands and they affect the Docker host's
-kernel.
-
-1.  Configure the Linux kernel to allow IP forwarding.
-
-    ```console
-    $ sysctl net.ipv4.conf.all.forwarding=1
-    ```
-
-2.  Change the policy for the `iptables` `FORWARD` policy from `DROP` to
-    `ACCEPT`.
-
-    ```console
-    $ sudo iptables -P FORWARD ACCEPT
-    ```
-
-These settings do not persist across a reboot, so you may need to add them to a
-start-up script.
 
 ## Use the default bridge network
 
@@ -209,7 +220,7 @@ If you do not specify a network using the `--network` flag, and you do specify a
 network driver, your container is connected to the default `bridge` network by
 default. Containers connected to the default `bridge` network can communicate,
 but only by IP address, unless they are linked using the
-[legacy `--link` flag](links.md).
+[legacy `--link` flag](../links.md).
 
 ### Configure the default bridge network
 
@@ -237,9 +248,18 @@ If you configure Docker for IPv6 support (see [Use IPv6](#use-ipv6)), the
 default bridge network is also configured for IPv6 automatically. Unlike
 user-defined bridges, you can't selectively disable IPv6 on the default bridge.
 
+## Connection limit for bridge networks
+
+Due to limitations set by the Linux kernel, bridge networks become unstable and
+inter-container communications may break when 1000 containers or more connect
+to a single network.
+
+For more information about this limitation, see
+[moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718){: target="_blank" rel="noopener"}.
+
 ## Next steps
 
-- Go through the [standalone networking tutorial](network-tutorial-standalone.md)
-- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+- Go through the [standalone networking tutorial](../network-tutorial-standalone.md)
+- Learn about [networking from the container's point of view](../index.md)
 - Learn about [overlay networks](overlay.md)
 - Learn about [Macvlan networks](macvlan.md)

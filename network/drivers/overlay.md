@@ -1,10 +1,11 @@
 ---
-title: Use overlay networks
+title: Overlay network driver
 description: All about using overlay networks
 keywords: network, overlay, user-defined, swarm, service
 redirect_from:
-- /engine/userguide/networking/overlay-security-model/
-- /config/containers/overlay/
+  - /config/containers/overlay/
+  - /engine/userguide/networking/overlay-security-model/
+  - /network/overlay/
 ---
 
 The `overlay` network driver creates a distributed network among multiple
@@ -187,7 +188,7 @@ from the swarm.
 4.  Create or re-create the `docker_gwbridge` bridge manually with your custom
     settings, using the `docker network create` command.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](../engine/reference/commandline/network_create.md#bridge-driver-options).
+    options, see [Bridge driver options](../../engine/reference/commandline/network_create.md#bridge-driver-options).
 
     ```console
     $ docker network create \
@@ -284,9 +285,18 @@ routing on the individual Docker daemon hosts.
 
 For most situations, you should connect to the service name, which is load-balanced and handled by all containers ("tasks") backing the service. To get a list of all tasks backing the service, do a DNS lookup for `tasks.<service-name>.`
 
+## Connection limit for overlay networks
+
+Due to limitations set by the Linux kernel, overlay networks become unstable and
+inter-container communications may break when 1000 containers are co-located on
+the same host.
+
+For more information about this limitation, see
+[moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718){: target="_blank" rel="noopener"}.
+
 ## Next steps
 
-- Go through the [overlay networking tutorial](network-tutorial-overlay.md)
-- Learn about [networking from the container's point of view](../config/containers/container-networking.md)
+- Go through the [overlay networking tutorial](../network-tutorial-overlay.md)
+- Learn about [networking from the container's point of view](../index.md)
 - Learn about [standalone bridge networks](bridge.md)
 - Learn about [Macvlan networks](macvlan.md)

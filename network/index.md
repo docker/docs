@@ -1,103 +1,144 @@
 ---
 title: Networking overview
-description: Overview of Docker networks and networking concepts
-keywords: networking, bridge, routing, routing mesh, overlay, ports
+description: How networking works from the container's point of view
+keywords: networking, container, standalone
 redirect_from:
-- /engine/userguide/networking/
-- /engine/userguide/networking/dockernetworks/
-- /articles/networking/
+  - /articles/networking/
+  - /config/containers/container-networking/
+  - /engine/userguide/networking/
+  - /engine/userguide/networking/configure-dns/
+  - /engine/userguide/networking/default_network/binding/
+  - /engine/userguide/networking/default_network/configure-dns/
+  - /engine/userguide/networking/default_network/container-communication/
+  - /engine/userguide/networking/dockernetworks/
 ---
 
-One of the reasons Docker containers and services are so powerful is that
-you can connect them together, or connect them to non-Docker workloads. Docker
-containers and services do not even need to be aware that they are deployed on
-Docker, or whether their peers are also Docker workloads or not. Whether your
-Docker hosts run Linux, Windows, or a mix of the two, you can use Docker to
-manage them in a platform-agnostic way.
+Container networking refers to the ability for containers to connect to and
+communicate with each other, or to non-Docker workloads.
 
-This topic defines some basic Docker networking concepts and prepares you to
-design and deploy your applications to take full advantage of these
-capabilities.
+A container has no information about what kind of network it's attached to,
+or whether their peers are also Docker workloads or not.
+A container only sees a network interface with an IP address,
+a gateway, a routing table, DNS services, and other networking details.
+That is, unless the container uses the `none` network driver.
 
-## Scope of this topic
+This page describes networking from the point of view of the container,
+and the concepts around container networking.
+This page doesn't describe OS-specific details about how Docker networks work.
+For information about how Docker manipulates `iptables` rules on Linux,
+see [Packet filtering and firewalls](packet-filtering-firewalls.md).
 
-This topic does **not** go into OS-specific details about how Docker networks
-work, so you will not find information about how Docker manipulates `iptables`
-rules on Linux or how it manipulates routing rules on Windows servers, and you
-will not find detailed information about how Docker forms and encapsulates
-packets or handles encryption. See [Docker and iptables](iptables.md).
+## Published ports
 
-In addition, this topic does not provide any tutorials for how to create,
-manage, and use Docker networks. Each section includes links to relevant
-tutorials and command references.
+By default, when you create or run a container using `docker create` or `docker run`,
+the container doesn't expose any of its ports to the outside world.
+Use the `--publish` or `-p` flag to make a port available to services
+outside of Docker.
+This creates a firewall rule in the host,
+mapping a container port to a port on the Docker host to the outside world.
+Here are some examples:
 
-## Network drivers
+| Flag value                      | Description                                                                                                                                           |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-p 8080:80`                    | Map TCP port 80 in the container to port `8080` on the Docker host.                                                                                   |
+| `-p 192.168.1.100:8080:80`      | Map TCP port 80 in the container to port `8080` on the Docker host for connections to host IP `192.168.1.100`.                                        |
+| `-p 8080:80/udp`                | Map UDP port 80 in the container to port `8080` on the Docker host.                                                                                   |
+| `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port 80 in the container to TCP port `8080` on the Docker host, and map UDP port `80` in the container to UDP port `8080` on the Docker host. |
 
-Docker's networking subsystem is pluggable, using drivers. Several drivers
-exist by default, and provide core networking functionality:
+> **Important**
+>
+> Publishing container ports is insecure by default. Meaning, when you publish
+> a container's ports it becomes available not only to the Docker host, but to
+> the outside world as well.
+>
+> If you include the localhost IP address (`127.0.0.1`) with the publish flag,
+> only the Docker host can the published container port.
+>
+> ```console
+> $ docker run -p 127.0.0.1:8080:80 nginx
+> ```
+>
+> > **Warning**
+> >
+> > Hosts within the same L2 segment (for example, hosts connected to the same
+> > network switch) can reach ports published to localhost.
+> > For more information, see
+> > [moby/moby#45610](https://github.com/moby/moby/issues/45610)
+> {: .warning }
+{: .important }
 
-- `bridge`: The default network driver. If you don't specify a driver, this is
-  the type of network you are creating. **Bridge networks are usually used when
-  your applications run in standalone containers that need to communicate.** See
-  [bridge networks](bridge.md).
+If you want to make a container accessible to other containers,
+it isn't necessary to publish the container's ports.
+Inter-container communication is enabled by connecting the containers to the
+same network, usually a [bridge network](./drivers/bridge.md).
 
-- `host`: For standalone containers, remove network isolation between the
-  container and the Docker host, and use the host's networking directly. See
-  [use the host network](host.md).
+## IP address and hostname
 
-- `overlay`: Overlay networks connect multiple Docker daemons together and
-  enable swarm services to communicate with each other. You can also use overlay
-  networks to facilitate communication between a swarm service and a standalone
-  container, or between two standalone containers on different Docker daemons.
-  This strategy removes the need to do OS-level routing between these
-  containers. See [overlay networks](overlay.md).
+By default, the container gets an IP address for every Docker network it attaches to.
+A container receives an IP address out of the IP subnet of the network.
+The Docker daemon performs dynamic subnetting and IP address allocation for containers.
+Each network also has a default subnet mask and gateway.
 
-- `ipvlan`: IPvlan networks give users total control over both IPv4 and IPv6
-  addressing. The VLAN driver builds on top of that in giving operators complete
-  control of layer 2 VLAN tagging and even IPvlan L3 routing for users
-  interested in underlay network integration. See [IPvlan networks](ipvlan.md).
+When you connect an existing container to a different network using `docker network connect`,
+you can use the `--ip` or `--ip6` flags on that command
+to specify the container's IP address on the additional network.
 
-- `macvlan`: Macvlan networks allow you to assign a MAC address to a container,
-  making it appear as a physical device on your network. The Docker daemon
-  routes traffic to containers by their MAC addresses. Using the `macvlan`
-  driver is sometimes the best choice when dealing with legacy applications that
-  expect to be directly connected to the physical network, rather than routed
-  through the Docker host's network stack. See
-  [Macvlan networks](macvlan.md).
+When a container starts, it can only attach to a single network, using the `--network` flag.
+You can connect a running container to multiple networks using the `docker network connect` command.
+When you start a container using the `--network` flag,
+you can specify the IP address for the container on that network using the `--ip` or `--ip6` flags.
 
-- `none`: For this container, disable all networking. Usually used in
-  conjunction with a custom network driver. `none` is not available for swarm
-  services. See
-  [disable container networking](none.md).
+In the same way, a container's hostname defaults to be the container's ID in Docker.
+You can override the hostname using `--hostname`.
+When connecting to an existing network using `docker network connect`,
+you can use the `--alias` flag to specify an additional network alias for the container on that network.
 
-- [Network plugins](/engine/extend/plugins_services/): You can install and use
-  third-party network plugins with Docker. These plugins are available from
-  [Docker Hub](https://hub.docker.com/search?category=network&q=&type=plugin)
-  or from third-party vendors. See the vendor's documentation for installing and
-  using a given network plugin.
+## DNS services
 
+By default, containers inherit the DNS settings of the host,
+as defined in the `/etc/resolv.conf` configuration file.
+Containers that attach to the default `bridge` network receive a copy of this file.
+Containers that attach to a
+[custom network](network-tutorial-standalone.md#use-user-defined-bridge-networks)
+use Docker's embedded DNS server.
+The embedded DNS server forwards external DNS lookups to the DNS servers configured on the host.
 
-### Network driver summary
+You can configure DNS resolution on a per-container basis, using flags for the
+`docker run` or `docker create` command used to start the container.
+The following table describes the available `docker run` flags related to DNS
+configuration.
 
-- **User-defined bridge networks** are best when you need multiple containers to
-  communicate on the same Docker host.
-- **Host networks** are best when the network stack should not be isolated from
-  the Docker host, but you want other aspects of the container to be isolated.
-- **Overlay networks** are best when you need containers running on different
-  Docker hosts to communicate, or when multiple applications work together using
-  swarm services.
-- **Macvlan networks** are best when you are migrating from a VM setup or
-  need your containers to look like physical hosts on your network, each with a
-  unique MAC address.
-- **Third-party network plugins** allow you to integrate Docker with specialized
-  network stacks.
+| Flag           | Description                                                                                                                                                                                                                                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--dns`        | The IP address of a DNS server. To specify multiple DNS servers, use multiple `--dns` flags. If the container can't reach any of the IP addresses you specify, it uses Google's public DNS server at `8.8.8.8`. This allows containers to resolve internet domains. |
+| `--dns-search` | A DNS search domain to search non-fully-qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                                            |
+| `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                                            |
+| `--hostname`   | The hostname a container uses for itself. Defaults to the container's ID if not specified.                                                                                                                                                                          |
 
-## Networking tutorials
+### Nameservers with IPv6 addresses
 
-Now that you understand the basics about Docker networks, deepen your
-understanding using the following tutorials:
+If the `/etc/resolv.conf` file on the host system contains one or more
+nameserver entries with an IPv6 address, those nameserver entries get copied
+over to `/etc/resolv.conf` in containers that you run.
 
-- [Standalone networking tutorial](network-tutorial-standalone.md)
-- [Host networking tutorial](network-tutorial-host.md)
-- [Overlay networking tutorial](network-tutorial-overlay.md)
-- [Macvlan networking tutorial](network-tutorial-macvlan.md)
+For containers using musl libc (in other words, Alpine Linux), this results in
+a race condition for hostname lookup. As a result, hostname resolution might
+sporadically fail if the external IPv6 DNS server wins the race condition
+against the embedded DNS server.
+
+It's rare that the external DNS server is faster than the embedded one. But
+things like garbage collection, or large numbers of concurrent DNS requests,
+can result in a roundtrip to the external server being faster than local
+resolution, on some occasions.
+
+### Custom hosts
+
+Custom hosts, defined in `/etc/hosts` on the host machine, aren't inherited by containers.
+To pass additional hosts into container, refer to
+[add entries to container hosts file](../engine/reference/commandline/run.md#add-host)
+in the `docker run` reference documentation.
+
+## Proxy server
+
+If your container needs to use a proxy server, see
+[Use a proxy server](proxy.md).
