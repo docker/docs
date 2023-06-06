@@ -68,35 +68,34 @@ Docker Desktop cannot start.
 
 1. Locate the `com.docker.diagnose` tool:
 
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
-<li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
-<li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
-</ul>
-<div class="tab-content">
-<div id="windows1" class="tab-pane fade in active" markdown="1">
+  <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
+  <li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
+  <li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
+  </ul>
+  <div class="tab-content">
+  <div id="windows1" class="tab-pane fade in active" markdown="1">
 
-```console
-$ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
-```
+  ```console
+  $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
+  ```
 
-</div>
-<div id="mac1" class="tab-pane fade" markdown="1">
+  </div>
+  <div id="mac1" class="tab-pane fade" markdown="1">
 
-```console
-$ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
-```
+  ```console
+  $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
+  ```
 
-</div>
-<div id="linux1" class="tab-pane fade" markdown="1">
+  </div>
+  <div id="linux1" class="tab-pane fade" markdown="1">
 
-```console
-$ /opt/docker-desktop/bin/com.docker.diagnose
-```
+ ```console
+  $ /opt/docker-desktop/bin/com.docker.diagnose
+  ```
 
-</div>
-</div>
-
+  </div>
+  </div>
 
 2. Create and upload the diagnostics ID. Run:
 
@@ -140,7 +139,7 @@ $ /opt/docker-desktop/bin/com.docker.diagnose
 
 Docker Desktop contains a self-diagnose tool which can help you identify some common problems. 
 
-1.ocate the `com.docker.diagnose` tool. It is located at:
+1. Locate the `com.docker.diagnose` tool. It is located at:
 
   <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
