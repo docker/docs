@@ -1160,7 +1160,7 @@ manuals:
         - path: /desktop/troubleshoot/workarounds/
           title: Workarounds for common problems
         - path: /desktop/troubleshoot/known-issues/
-          title: Known issues for Mac
+          title: Known issues
     - sectiontitle: FAQs
       section:
       - path: /desktop/faqs/general/

@@ -1,5 +1,5 @@
 ---
-description: Troubleshooting, logs, and known issues
+description: Understand how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
 keywords: Linux, Mac, Windows, troubleshooting, logs, issues, Docker Desktop
 title: Overview
 redirect_from:
