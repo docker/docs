@@ -96,7 +96,6 @@ Docker Desktop cannot start.
 
   </div>
   </div>
-
 2. Create and upload the diagnostics ID. Run:
 
   ```console
@@ -127,7 +126,6 @@ Docker Desktop cannot start.
 
   </div>
   </div>
-
 3. Use your diagnostis ID to get help:
   - If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Select **Submit** to request Docker Desktop support.
   - If you don't have a paid Docker subscription, create an issue on GitHub:
@@ -169,7 +167,6 @@ Docker Desktop contains a self-diagnose tool which can help you identify some co
 
   </div>
   </div>
-
 2. Run the self-diagnose tool:
 
   ```console
