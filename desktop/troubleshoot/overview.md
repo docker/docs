@@ -68,70 +68,70 @@ Docker Desktop cannot start.
 
 1. Locate the `com.docker.diagnose` tool:
 
-  <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
-  <li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
-  <li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
-  </ul>
-  <div class="tab-content">
-  <div id="windows1" class="tab-pane fade in active" markdown="1">
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
+    <li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
+    <li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="windows1" class="tab-pane fade in active" markdown="1">
 
-  ```console
-  $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
-  ```
+    ```console
+    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
+    ```
 
-  </div>
-  <div id="mac1" class="tab-pane fade" markdown="1">
+    </div>
+    <div id="mac1" class="tab-pane fade" markdown="1">
 
-  ```console
-  $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
-  ```
+    ```console
+    $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
+    ```
 
-  </div>
-  <div id="linux1" class="tab-pane fade" markdown="1">
+    </div>
+    <div id="linux1" class="tab-pane fade" markdown="1">
 
- ```console
-  $ /opt/docker-desktop/bin/com.docker.diagnose
-  ```
+    ```console
+    $ /opt/docker-desktop/bin/com.docker.diagnose
+    ```
 
-  </div>
-  </div>
+    </div>
+    </div>
 2. Create and upload the diagnostics ID. Run:
 
-  ```console
-  $ <tool location> gather -upload
-  ```
+    ```console
+    $ <tool location> gather -upload
+    ```
 
-  After the diagnostics have finished, the terminal displays your diagnostics ID. The diagnostics ID is composed of your user ID and a timestamp. Ensure you provide the full diagnostics ID, and not just the user ID.
+    After the diagnostics have finished, the terminal displays your diagnostics ID. The diagnostics ID is composed of your user ID and a timestamp. Ensure you provide the full diagnostics ID, and not just the user ID.
 
-  To view the contents of the diagnostic file, run:
+    To view the contents of the diagnostic file, run:
 
-  <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#mac2">Mac</a></li>
-  <li><a data-toggle="tab" data-target="#linux2">Linux</a></li>
-  </ul>
-  <div class="tab-content">
-  <div id="mac2" class="tab-pane fade in active" markdown="1">
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#mac2">Mac</a></li>
+    <li><a data-toggle="tab" data-target="#linux2">Linux</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="mac2" class="tab-pane fade in active" markdown="1">
 
-  ```console
-  $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
-  ``` 
+    ```console
+    $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
+    ``` 
 
-  </div>
-  <div id="linux2" class="tab-pane fade" markdown="1">
+    </div>
+    <div id="linux2" class="tab-pane fade" markdown="1">
 
-  ```console
-  $ unzip –l /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
-  ``` 
+    ```console
+    $ unzip –l /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
+    ``` 
 
-  </div>
-  </div>
+    </div>
+    </div>
 3. Use your diagnostis ID to get help:
-  - If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Select **Submit** to request Docker Desktop support.
-  - If you don't have a paid Docker subscription, create an issue on GitHub:
-   - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
-   - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
-   - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
+    - If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Select **Submit** to request Docker Desktop support.
+    - If you don't have a paid Docker subscription, create an issue on GitHub:
+        - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
+        - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
+        - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
 
 ### Self-diagnose tool
 
@@ -139,46 +139,46 @@ Docker Desktop contains a self-diagnose tool which can help you identify some co
 
 1. Locate the `com.docker.diagnose` tool. It is located at:
 
-  <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
-  <li><a data-toggle="tab" data-target="#mac3">Mac</a></li>
-  <li><a data-toggle="tab" data-target="#linux3">Linux</a></li>
-  </ul>
-  <div class="tab-content">
-  <div id="windows3" class="tab-pane fade in active" markdown="1">
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
+    <li><a data-toggle="tab" data-target="#mac3">Mac</a></li>
+    <li><a data-toggle="tab" data-target="#linux3">Linux</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="windows3" class="tab-pane fade in active" markdown="1">
 
-  ```console
-  $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
-  ```
+     ```console
+    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
+    ```
 
-  </div>
-  <div id="mac3" class="tab-pane fade" markdown="1">
+    </div>
+    <div id="mac3" class="tab-pane fade" markdown="1">
 
-  ```console
-  $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
-  ```
+    ```console
+    $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
+     ```
 
-  </div>
-  <div id="linux3" class="tab-pane fade" markdown="1">
+    </div>
+    <div id="linux3" class="tab-pane fade" markdown="1">
 
-  ```console
-  $ /opt/docker-desktop/bin/com.docker.diagnose
-  ```
+    ```console
+    $ /opt/docker-desktop/bin/com.docker.diagnose
+    ```
 
-  </div>
-  </div>
+    </div>
+    </div>
 2. Run the self-diagnose tool:
 
-  ```console
-  $ <tool location> check
-  ```
+    ```console
+    $ <tool location> check
+    ```
 
-  The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
+    The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
 
-  You can then create an issue on GitHub:
-   - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
-   - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
-   - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
+    You can then create an issue on GitHub:
+        - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
+        - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
+        - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
 
 ## Check the logs
 
