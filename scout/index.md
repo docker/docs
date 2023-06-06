@@ -68,3 +68,22 @@ format. You can print the results directly to stdout, or export them to a file
 using a structured format, such as Static Analysis Results Interchange Format
 (SARIF). For more information about how to use the `docker scout` CLI, see the
 [reference documentation](../engine/reference/commandline/scout_cves.md).
+
+The plugin is available in Docker Desktop starting with version 4.17 and available
+as a standalone binary.
+
+To install the plugin, run the following command:
+
+```console
+$ curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
+$ sh install-scout.sh
+```
+
+Always examine scripts downloaded from the internet before running them locally. Before installing, make yourself familiar with potential risks and limitations of the convenience script:
+
+> **Tip**
+>
+> If you want to install the plugin manually, you can find full instructions in the [plugin's repository](https://github.com/docker/scout-cli).
+{: .tip }
+
+The plugin is also available as [a container image](https://hub.docker.com/r/docker/scout-cli) and as [a GitHub action](https://github.com/docker/scout-action)
