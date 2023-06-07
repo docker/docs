@@ -45,7 +45,7 @@ And now, we'll start migrating a service at a time into the compose file.
 To remember, this was the command we were using to define our app container.
 
 ```console
-$ docker run -dp 3000:3000 \
+$ docker run -dp 127.0.0.1:3000:3000 \
   -w /app -v "$(pwd):/app" \
   --network todo-app \
   -e MYSQL_HOST=mysql \
@@ -77,7 +77,7 @@ $ docker run -dp 3000:3000 \
    ```
 
 
-3. Let's migrate the `-p 3000:3000` part of the command by defining the `ports` for the service. We will use the
+3. Let's migrate the `-p 127.0.0.1:3000:3000` part of the command by defining the `ports` for the service. We will use the
    [short syntax](../compose/compose-file/05-services.md#short-syntax-3) here, but there is also a more verbose
    [long syntax](../compose/compose-file/05-services.md#long-syntax-3) available as well.
 
@@ -87,7 +87,7 @@ $ docker run -dp 3000:3000 \
        image: node:18-alpine
        command: sh -c "yarn install && yarn run dev"
        ports:
-         - 3000:3000
+         - 127.0.0.1:3000:3000
    ```
  
 4. Next, we'll migrate both the working directory (`-w /app`) and the volume mapping (`-v "$(pwd):/app"`) by using
@@ -101,7 +101,7 @@ $ docker run -dp 3000:3000 \
        image: node:18-alpine
        command: sh -c "yarn install && yarn run dev"
        ports:
-         - 3000:3000
+         - 127.0.0.1:3000:3000
        working_dir: /app
        volumes:
          - ./:/app
@@ -115,7 +115,7 @@ $ docker run -dp 3000:3000 \
        image: node:18-alpine
        command: sh -c "yarn install && yarn run dev"
        ports:
-         - 3000:3000
+         - 127.0.0.1:3000:3000
        working_dir: /app
        volumes:
          - ./:/app
@@ -196,7 +196,7 @@ services:
     image: node:18-alpine
     command: sh -c "yarn install && yarn run dev"
     ports:
-      - 3000:3000
+      - 127.0.0.1:3000:3000
     working_dir: /app
     volumes:
       - ./:/app

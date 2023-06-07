@@ -168,14 +168,14 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
    <div id="mac-linux2" class="tab-pane fade in active" markdown="1">
 
    ```console
-   $ docker run -dp 3000:3000 \
+   $ docker run -dp 127.0.0.1:3000:3000 \
        -w /app --mount type=bind,src="$(pwd)",target=/app \
        node:18-alpine \
        sh -c "yarn install && yarn run dev"
    ```
 
    The following is a breakdown of the command:
-   - `-dp 3000:3000` - same as before. Run in detached (background) mode and
+   - `-dp 127.0.0.1:3000:3000` - same as before. Run in detached (background) mode and
      create a port mapping
    - `-w /app` - sets the "working directory" or the current directory that the
      command will run from
@@ -197,14 +197,14 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
 
    ```powershell
-   $ docker run -dp 3000:3000 `
+   $ docker run -dp 127.0.0.1:3000:3000 `
        -w /app --mount "type=bind,src=$pwd,target=/app" `
        node:18-alpine `
        sh -c "yarn install && yarn run dev"
    ```
 
    The following is a breakdown of the command:
-   - `-dp 3000:3000` - same as before. Run in detached (background) mode and
+   - `-dp 127.0.0.1:3000:3000` - same as before. Run in detached (background) mode and
      create a port mapping
    - `-w /app` - sets the "working directory" or the current directory that the
      command will run from
