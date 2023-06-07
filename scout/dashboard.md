@@ -17,6 +17,19 @@ The Docker Scout Dashboard helps you share the analysis of images in an organiza
 
 The **Overview** tab shows the total number of vulnerabilities across all your Scout-enabled repositories, over time. This calculation takes the most recent image in each repository to avoid including old irrelevant images.
 
+## Repository settings
+
+Enable Docker Scout analysis on repositories in the current organization by selecting your profile
+picture and then the **Repository settings** menu item.
+
+Select the checkboxes for the repositories on which you want to enable Docker Scout analysis and
+select **Enable image analysis**.
+
+When you enable image analysis for a repository, Docker Scout analyzes new tags
+automatically when you push to that repository. Find out more in the [Advanced image analysis](./advanced-image-analysis.md) documentation.
+
+Disable Docker Scout analysis on selected repositories by selecting **Disable image analysis**.
+
 ## Images
 
 ![A screenshot of the Docker Scout images list for an organization](./images/dashboard-images.png)
