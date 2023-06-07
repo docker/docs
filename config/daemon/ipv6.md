@@ -51,7 +51,7 @@ The following steps show you how to create a Docker network that uses IPv6.
      $ docker network create --ipv6 --subnet 2001:0DB8::/112 ip6net
      ```
 
-  -  Using a Docker Compose file:
+   - Using a Docker Compose file:
 
      ```yaml
      networks:
