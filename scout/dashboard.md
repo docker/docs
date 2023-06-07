@@ -41,6 +41,7 @@ The repository tag list shows all tags for a repository. You can search for spec
 
 Each entry in the list shows the following details:
 
+- CHeck
 - The tag version. Clicking the link for version opens [the image layer view](#image-layer-view).
 - The operating system and architecture of the image.
 - The vulnerabilities for the tag version.
@@ -51,17 +52,22 @@ Each entry in the list shows the following details:
 
 #### Comparing two tag images
 
+![Screenshot of selecting two image tags](./images/dashboard-diff-select.png)
+
 You can compare two tag images by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
 
-<!-- TODO: Screenshot -->
+![Screenshot of an overview of differences between two selected images](./images/dashboard-diff-top.png)
 
-The top section of the comparison view shows an overview of the two selected tag images with the same information as the repository tag list view.
+<!-- Reference and target -->
 
-The rest of the view shows the following:
+The top section of the comparison view shows an overview of the two selected image tags.
 
-- Select the **Packages** tab to see packages added, removed, or updated in each image. Each entry in the table shows the differences between the versions and vulnerabilities in each image. Select the disclosure triangle next to a package to see more detail on the vulnerabilities.
+![Screenshot of overview differences between two selected images](./images/dashboard-diff-bottom.png)
+
+The tabs section of the view shows the following:
+
+- Select the **Packages** tab to see packages added, removed, or updated in each image. Each entry in the table shows the differences between the versions and vulnerabilities in each image. Select the disclosure triangle next to a package to see more detail on the vulnerabilities changed.
 - Select the **Vulnerabilities** tab to see changes to the vulnerabilities present in each image.
-- Select the **Environment variables** tab to see changes to the environment variables present in each image.
 
 ### Image layer view
 
