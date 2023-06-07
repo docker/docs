@@ -118,8 +118,7 @@ Docker Desktop cannot start.
     1. Unzip the file. In PowerShell, copy and paste the path to the diagnostics file into the following command and then run it. It should be similar to the following example:
         ```powershell
         $ Expand-Archive -LiteralPath "C:\Users\testUser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602.zip" -DestinationPath "C:\Users\testuser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602"
-        ```
-        
+        ```  
     2. Open the file in your preferred text editor. Run:
         ```powershell
         $ code <path-to-file>
