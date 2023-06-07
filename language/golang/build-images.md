@@ -39,12 +39,12 @@ The application listens on a TCP port defined by the value of environment variab
 
 The application is *stateless*.
 
-The complete source code for the application is on GitHub: [github.com/olliefr/docker-gs-ping](https://github.com/olliefr/docker-gs-ping){: target="_blank" rel="noopener" class="_"}. You are encouraged to fork it and experiment with it as much as you like.
+The complete source code for the application is on GitHub: [github.com/docker/docker-gs-ping](https://github.com/docker/docker-gs-ping){: target="_blank" rel="noopener" class="_"}. You are encouraged to fork it and experiment with it as much as you like.
 
 To continue, we clone the application repository to our local machine:
 
 ```console
-$ git clone https://github.com/olliefr/docker-gs-ping
+$ git clone https://github.com/docker/docker-gs-ping
 ```
 
 The application's `main.go` file is fairly straightforward, if you are familiar with Go:
