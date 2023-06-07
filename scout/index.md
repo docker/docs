@@ -40,6 +40,7 @@ images, packages, and CVEs.
 
 To start using Docker Scout, turn on any of the following features:
 
+- [Enable analysis on repositories in the Docker Scout Dashboard](./dashboard.md#repository-settings)
 - [Advanced image analysis in Docker Hub](./advanced-image-analysis.md)
 - [Artifactory integration](./artifactory.md)
 
