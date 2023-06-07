@@ -1,6 +1,7 @@
 ---
 description: Understand how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
 keywords: Linux, Mac, Windows, troubleshooting, logs, issues, Docker Desktop
+toc_max: 2
 title: Overview
 redirect_from:
 - /desktop/linux/troubleshoot/
@@ -54,8 +55,8 @@ This opens the in-app **Support** page and starts collecting the diagnostics.
     ![Diagnose & Feedback](../images/diagnose-support.png){:width="600px"}
 2. When the diagnostics collection process is complete, select **Upload to get a Diagnostic ID**.
 3. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
-4. Use your diagnostis ID to get help:
-    - If you have a paid Docker subscription: select **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID** field. Then, select **Submit** to request Docker Desktop support.
+4. Use your diagnostics ID to get help:
+    - If you have a paid Docker subscription, select **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID** field. Then, select **Submit** to request Docker Desktop support.
         > **Note**
         >
         > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
@@ -102,32 +103,46 @@ Docker Desktop cannot start.
     $ <tool location> gather -upload
     ```
 
-    After the diagnostics have finished, the terminal displays your diagnostics ID. The diagnostics ID is composed of your user ID and a timestamp. Ensure you provide the full diagnostics ID, and not just the user ID.
+    After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
 
     To view the contents of the diagnostic file, run:
 
     <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" data-target="#mac2">Mac</a></li>
+    <li class="active"><a data-toggle="tab" data-target="#windows2">Windows</a></li>
+    <li><a data-toggle="tab" data-target="#mac2">Mac</a></li>
     <li><a data-toggle="tab" data-target="#linux2">Linux</a></li>
     </ul>
     <div class="tab-content">
-    <div id="mac2" class="tab-pane fade in active" markdown="1">
+    <div id="windows2" class="tab-pane fade in active" markdown="1">
+    <br>
+    1. Unzip the file. In PowerShell, copy and paste the path to the diagnostics file into the following command and then run it. It should be similar to the following example:
+        ```powershell
+        $ Expand-Archive -LiteralPath "C:\Users\testUser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602.zip" -DestinationPath "C:\Users\testuser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602"
+        ```
+        
+    2. Open the file in your preferred text editor. Run:
+        ```powershell
+        $ code <path-to-file>
+        ```
+
+    </div>
+    <div id="mac2" class="tab-pane fade" markdown="1">
 
     ```console
-    $ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
+    $ open /tmp/<your-diagnostics-ID>.zip
     ``` 
 
     </div>
     <div id="linux2" class="tab-pane fade" markdown="1">
 
     ```console
-    $ unzip –l /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
+    $ unzip –l /tmp/<your-diagnostics-ID>.zip
     ``` 
 
     </div>
     </div>
-3. Use your diagnostis ID to get help:
-    - If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Select **Submit** to request Docker Desktop support.
+3. Use your diagnostics ID to get help:
+    - If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Make sure you provide the full diagnostics ID, and not just the user ID. Select **Submit** to request Docker Desktop support.
     - If you don't have a paid Docker subscription, create an issue on GitHub:
         - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
         - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
@@ -185,13 +200,25 @@ Docker Desktop contains a self-diagnose tool which can help you identify some co
 In addition to using the diagnose option to submit logs, you can browse the logs yourself.
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#mac4">Mac</a></li>
+<li class="active"><a data-toggle="tab" data-target="#windows4">Windows</a></li>
+<li><a data-toggle="tab" data-target="#mac4">Mac</a></li>
 <li><a data-toggle="tab" data-target="#linux4">Linux</a></li>
 </ul>
 <div class="tab-content">
-<div id="mac4" class="tab-pane fade in active" markdown="1">
+<div id="windows4" class="tab-pane fade in active" markdown="1">
+<br>
+In PowerShell, run:
 
-### In a terminal
+```powershell
+$ code $Env:LOCALAPPDATA\Docker\log
+```
+
+This opens up all the logs in your preferred text editor for you to explore.
+
+</div>
+<div id="mac4" class="tab-pane fade" markdown="1">
+
+### From terminal
 
 To watch the live flow of Docker Desktop logs in the command line, run the following script from your preferred shell.
 
@@ -206,7 +233,7 @@ Alternatively, to collect the last day of logs (`1d`) in a file, run:
 $ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
 ```
 
-### In the Console app
+### From the Console app
 
 Mac provides a built-in log viewer, named **Console**, which you can use to check
 Docker logs.
@@ -221,16 +248,9 @@ To read the Docker app log messages, type `docker` in the Console window search 
 You can use the Console Log Query to search logs, filter the results in various
 ways, and create reports.
 
-### View the Docker daemon logs
-
-Refer to the [Read the daemon logs](../../config/daemon/logs.md) section
-to learn how to view the Docker Daemon logs.
-
 </div>
 <div id="linux4" class="tab-pane fade" markdown="1">
-
-### In a terminal
-
+<br>
 You can access Docker Desktop logs by running the following command:
 
 ```console
@@ -240,13 +260,13 @@ $ journalctl --user --unit=docker-desktop
 You can also find the logs for the internal components included in Docker
 Desktop at `$HOME/.docker/desktop/log/`.
 
-### View the Docker daemon logs
+</div>
+</div>
+
+## View the Docker daemon logs
 
 Refer to the [Read the daemon logs](../../config/daemon/logs.md) section
 to learn how to view the Docker Daemon logs.
-
-</div>
-</div>
 
 ## Further resources
 
