@@ -9,12 +9,12 @@ title: Known issues
   <li><a data-toggle="tab" data-target="#tab4">For Mac with Apple silicon</a></li>
 </ul>
 <div class="tab-content">
-<div id="tab2" class="tab-pane fade" markdown="1">
+<div id="tab2" class="tab-pane fade  in active" markdown="1">
 <br>
 * IPv6 is not yet supported on Docker Desktop.
 <hr>
 </div> 
-<div id="tab3" class="tab-pane fade in active" markdown="1">
+<div id="tab3" class="tab-pane fade" markdown="1">
 <br>
 * The Mac Activity Monitor reports that Docker is using twice the amount of memory it's actually using. This is due to a bug in MacOS. We have written [a detailed report](https://docs.google.com/document/d/17ZiQC1Tp9iH320K-uqVLyiJmk4DHJ3c4zgQetJiKYQM/edit?usp=sharing){:target="_blank" rel="noopener" class="_"} on this.
 
