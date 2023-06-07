@@ -158,16 +158,16 @@ WARNING! This will remove:
 Are you sure you want to continue? [y/N] y
 ```
 
-To also prune volumes, add the `--volumes` flag:
+To also prune volumes and unused images, add the `--volumes -a` flag:
 
 ```console
-$ docker system prune --volumes
+$ docker system prune --volumes -a
 
 WARNING! This will remove:
         - all stopped containers
         - all networks not used by at least one container
         - all volumes not used by at least one container
-        - all dangling images
+        - all images without at least one container associated to them
         - all build cache
 Are you sure you want to continue? [y/N] y
 ```
