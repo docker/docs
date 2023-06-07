@@ -18,11 +18,10 @@ development tasks.
 ## Assigning profiles to services
 
 Services are associated with profiles through the
-[`profiles` attribute](compose-file/index.md#profiles) which takes an
+[`profiles` attribute](compose-file/05-services.md#profiles) which takes an
 array of profile names:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: frontend
@@ -91,10 +90,9 @@ $ COMPOSE_PROFILES=frontend,debug docker compose up
 When a service with assigned `profiles` is explicitly targeted on the command
 line its profiles are enabled automatically so you don't need to enable them
 manually. This can be used for one-off services and debugging tools.
-As an example consider the folowing configuration:
+As an example consider the following configuration:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   backend:
     image: backend
@@ -128,7 +126,6 @@ This means that any other services the targeted service `depends_on` should eith
 - Always be enabled, by omitting `profiles` or having a matching profile enabled explicitly
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: web
@@ -183,4 +180,4 @@ $ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 
 ## Reference information
 
-[`profiles`](compose-file/index.md#profiles)
+[`profiles`](compose-file/05-services.md#profiles)

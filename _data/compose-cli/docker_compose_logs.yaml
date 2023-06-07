@@ -47,6 +47,7 @@ options:
       kubernetes: false
       swarm: false
     - option: tail
+      shorthand: "n"
       value_type: string
       default_value: all
       description: |
@@ -72,6 +73,17 @@ options:
       value_type: string
       description: |
         Show logs before a timestamp (e.g. 2013-01-02T13:23:37Z) or relative (e.g. 42m for 42 minutes)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: dry-run
+      value_type: bool
+      default_value: "false"
+      description: Execute command in dry run mode
       deprecated: false
       hidden: false
       experimental: false

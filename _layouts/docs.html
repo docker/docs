@@ -8,7 +8,7 @@
 {%- if page.issue_url -%}
     {%- assign issue_url = page.issue_url -%}
 {%- else -%}
-    {% capture issue_url %}{{ site.repo }}/issues/new?body=File: [{{ page.path }}]({{ site.docs_url }}{{ page.url }}){% endcapture %}
+    {% capture issue_url %}{{ site.repo }}/issues/new?template=doc_issue.yml&location={{ site.docs_url }}{{ page.url }}&labels=status%2Ftriage{% endcapture %}
 {%- endif -%} -->
 <html lang="en">
 {%- include head.html -%}

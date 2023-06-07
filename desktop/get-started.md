@@ -1,7 +1,7 @@
 ---
 description: Docker Dashboard
-keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, quick start, guide, sign in
-title: Quick Start Guide and sign in
+keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, learning center, guide, sign in
+title: Learning Center and sign in
 redirect_from:
 - /desktop/linux/
 - /desktop/linux/index/
@@ -27,39 +27,31 @@ redirect_from:
 - /winkit/getting-started/
 ---
 
-## Quick Start Guide
+## Learning Center
 
-  Once Docker Desktop is installed, the Quick Start Guide launches. It includes a simple exercise to build an example Docker image, run it as a container, push and save the image to Docker Hub.
+The Learning Center helps you get started with quick in-app walkthroughs and other resources for learning about Docker.
 
-   ![Docker Quick Start tutorial](images/docker-tutorial.png)
+To access the Learning Center, select the **Learning Center** tab in Docker
+Desktop.
 
-To run the Quick Start Guide on demand, select the Docker menu ![whale menu](images/whale-x.svg){: .inline} and then choose **Quick Start Guide**.
+![Learning Center](images/learning-center.png)
 
-For a more detailed guide, see [Get started](../get-started/index.md).
+For a more detailed guide about getting started, see
+[Get started](../get-started/index.md).
 
 ## Sign in to Docker Desktop
 
-We recommend that you authenticate using the **Sign in/Create ID** option in the top-right corner of Docker Desktop.
+Docker recommends that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard.
 
 Once logged in, you can access your Docker Hub repositories directly from Docker Desktop.
 
 Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
 
-In large enterprises where admin access is restricted, administrators can create a registry.json file and deploy it to the developers’ machines using a device management software as part of the Docker Desktop installation process. Enforcing developers to authenticate through Docker Desktop also allows administrators to set up guardrails using features such as [Image Access Management](../docker-hub/image-access-management.md) which allows team members to only have access to Trusted Content on Docker Hub, and pull only from the specified categories of images. For more information, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md).
+In large enterprises where admin access is restricted, administrators can [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md). Enforcing developers to authenticate through Docker Desktop also allows administrators to improve their organization’s security posture for containerized development by taking advantage of [Hardened Desktop](hardened-desktop/index.md).
 
-### Two-factor authentication
-
-Docker Desktop lets you to sign in to Docker Hub using two-factor authentication. Two-factor authentication provides an extra layer of security when accessing your Docker Hub account.
-
-You must turn on two-factor authentication in Docker Hub before signing into your Docker Hub account through Docker Desktop. For instructions, see [Enable two-factor authentication for Docker Hub](/docker-hub/2fa/).
-
-After two-factor authentication is turned on:
-
-1. Go to the Docker Desktop menu and then select **Sign in / Create Docker ID**.
-
-2. Enter your Docker ID and password and select **Sign in**.
-
-3. After you have successfully signed in, Docker Desktop prompts you to enter the authentication code. Enter the six-digit code from your phone and then select **Verify**.
+> **Note**
+>
+> Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity. 
 
 ### Credentials management for Linux users
 
@@ -73,7 +65,7 @@ You can initialize pass by using a gpg key. To generate a gpg key, run:
 $ gpg --generate-key
 ``` 
 
-Below is an example similar to what you see once you run the above command:
+The following is an example similar to what you see once you run the previous command:
 
 ```console
 ...
@@ -97,15 +89,15 @@ To initialize `pass`, run the following command using the public key generated f
 ```console
 $ pass init <generated gpg-id public key>
 ``` 
-Below is an example similar to what you see once you run the above command:
+The following is an example similar to what you see once you run the previous command:
 
 ```console
 mkdir: created directory '/home/molly/.password-store/'
 Password store initialized for <generated gpg-id public key>
 ```
 
-Once `pass` is initialized, you can sign in on the Docker Dashboard and pull your private images.
-When credentials are used by the Docker CLI or Docker Desktop, a user prompt may pop up for the password you set during the gpg key generation.
+Once you initialize `pass`, you can sign in on the Docker Dashboard and pull your private images.
+When Docker CLI or Docker Desktop use credentials, a user prompt may pop up for the password you set during the gpg key generation.
 
 ```console
 $ docker pull molly/privateimage

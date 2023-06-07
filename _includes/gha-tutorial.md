@@ -18,7 +18,7 @@ Create a GitHub repository and configure the Docker Hub secrets.
    The repository contains a simple Dockerfile, and nothing else. Feel free to
    use another repository containing a working Dockerfile if you prefer.
 
-2. Open the repository **Settings**, and go to **Secrets** > **Actions**.
+2. Open the repository **Settings**, and go to **Secrets and variables** > **Actions**.
 
 3. Create a new secret named `DOCKERHUB_USERNAME` and your Docker ID as value.
 
@@ -165,7 +165,7 @@ jobs:
 
 Save the workflow file and run the job.
 
-1. Select **Start commit** and push the changes to the `main` branch.
+1. Select **Commit changes...** and push the changes to the `main` branch.
 
    After pushing the commit, the workflow starts automatically.
 

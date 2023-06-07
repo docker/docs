@@ -49,7 +49,7 @@ The following three network concepts are important to swarm services:
   join a swarm. Most users do not need to customize its configuration, but
   Docker allows you to do so.
 
-> **See also** [Networking overview](../../network/index.md) for more details about swarm networking in general.
+> **See also** [Networking overview](../../network/index.md) for more details about Swarm networking in general.
 
 ## Firewall considerations
 
@@ -57,7 +57,11 @@ Docker daemons participating in a swarm need the ability to communicate with
 each other over the following ports:
 
 * Port `7946` TCP/UDP for container network discovery.
-* Port `4789` UDP for the container overlay network.
+* Port `4789` UDP (configurable) for the overlay network (including ingress) data path.
+
+When setting up networking in a Swarm, special care should be taken. Consult
+the [tutorial](swarm-tutorial/index.md#open-protocols-and-ports-between-the-hosts)
+for an overview.
 
 ## Create an overlay network
 
@@ -216,18 +220,18 @@ The default mask length can be configured and is the same for all networks. It i
 
 ##### Overlay network size limitations
 
-Docker recommends creating overlay networks with `/24` blocks. The `/24` overlay network blocks, which limits the network to 256 IP addresses. 
+Docker recommends creating overlay networks with `/24` blocks. The `/24` overlay network blocks limit the network to 256 IP addresses. 
 
 This recommendation addresses [limitations with swarm mode](https://github.com/moby/moby/issues/30820). 
 If you need more than 256 IP addresses, do not increase the IP block size. You can either use `dnsrr` 
 endpoint mode with an external load balancer, or use multiple smaller overlay networks. See 
-[Configure service discovery](#configure-service-discovery) or more information about different endpoint modes.
+[Configure service discovery](#configure-service-discovery) for more information about different endpoint modes.
 
 #### Configure encryption of application data
 
 Management and control plane data related to a swarm is always encrypted.
 For more details about the encryption mechanisms, see the
-[Docker swarm mode overlay network security model](../../network/overlay.md).
+[Docker swarm mode overlay network security model](../../network/drivers/overlay.md).
 
 Application data among swarm nodes is not encrypted by default. To encrypt this
 traffic on a given overlay network, use the `--opt encrypted` flag on `docker

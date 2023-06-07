@@ -101,7 +101,7 @@ thousands or even millions of containers.
 ### How do I connect Docker containers?
 
 Currently the recommended way to connect containers is via the Docker network
-feature. You can see details of [how to work with Docker networks](../network/bridge.md).
+feature. You can see details of [how to work with Docker networks](../network/drivers/bridge.md).
 
 ### How do I run more than one process in a Docker container?
 

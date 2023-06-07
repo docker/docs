@@ -1,6 +1,6 @@
 ---
-description: Get started with Docker Compose
-keywords: documentation, docs, docker, compose, orchestration, containers
+description: Check out this tutorial on how to use Docker Compose from defining application dependencies to experimenting with commands.   
+keywords: docker compose example, docker compose tutorial, how to use docker compose, running docker compose, how to run docker compose, docker compose build image, docker compose command example, run docker compose file, how to create a docker compose file, run a docker compose file
 title: Try Docker Compose
 ---
 {% include compose-eol.md %}
@@ -111,7 +111,7 @@ This tells Docker to:
 
 >Important
 >
->Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically and which results in an error when you run the application.
+>Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
 {: .important}
 
 For more information on how to write Dockerfiles, see the
@@ -125,7 +125,6 @@ Create a file called `docker-compose.yml` in your project directory and paste
 the following:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .
@@ -220,7 +219,6 @@ Edit `docker-compose.yml` in your project directory to add a
 [bind mount](../storage/bind-mounts.md) for the `web` service:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     build: .
@@ -268,9 +266,12 @@ If you get runtime errors indicating an application file is not found, a volume
 mount is denied, or a service cannot start, try enabling file or drive sharing.
 Volume mounting requires shared drives for projects that live outside of
 `C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
-Docker Desktop for Windows that uses [Linux containers](../desktop/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
-For more information, see [File sharing](../desktop/settings/mac.md#file-sharing) on Docker
-for Mac, and the general examples on how to
+Docker Desktop for Mac and Docker Desktop for Windows that uses
+[Linux containers](../desktop/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
+For more information, see
+[File sharing on Docker for Mac](../desktop/settings/mac.md#file-sharing),
+[File sharing on Docker for Windows](../desktop/settings/windows.md#file-sharing),
+and the general examples on how to
 > [Manage data in containers](../storage/volumes.md).
 >
 > * If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble

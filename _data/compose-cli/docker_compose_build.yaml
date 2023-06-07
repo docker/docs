@@ -46,11 +46,12 @@ options:
       swarm: false
     - option: memory
       shorthand: m
-      value_type: string
+      value_type: bytes
+      default_value: "0"
       description: |
-        Set memory limit for the build container. Not supported on buildkit yet.
+        Set memory limit for the build container. Not supported by BuildKit.
       deprecated: false
-      hidden: true
+      hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -106,6 +107,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: push
+      value_type: bool
+      default_value: "false"
+      description: Push service images.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: quiet
       shorthand: q
       value_type: bool
@@ -121,6 +132,17 @@ options:
       value_type: string
       description: |
         Set SSH authentications used when building service images. (use 'default' for using your default SSH Agent)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: dry-run
+      value_type: bool
+      default_value: "false"
+      description: Execute command in dry run mode
       deprecated: false
       hidden: false
       experimental: false

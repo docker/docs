@@ -1,53 +1,52 @@
 ---
-description: group mapping
-keywords: group, comapping
-title: Enable group mapping
+description: Group mapping in Docker Hub
+keywords: Group Mapping, SCIM, Docker Hub
+title: Group Mapping
 ---
 
-> **Note**
+With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams. 
+
+To correctly assign your users to Docker teams, you must create groups in your IDP following the naming pattern `organization:team`. For example, if you want to manage provisioning for the team "developers” in Docker, and your organization name is “moby,” you must create a group in your IdP with the name “moby:developers”. 
+
+Once you enable group mappings in your connection, users assigned to that group in your IdP will automatically be added to the team “developers” in Docker.
+
+>**Tip**
 >
-> The following features are only available to [Early Access](../release-lifecycle.md/#early-access-ea) participants.
+>Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, a group is created if it doesn’t already exist.
+{: .tip}
 
-## Okta SSO group mapping
+## How group mapping works
 
-Use directory groups to team provisioning from your identity provider, and these updates will sync with your Docker organizations and teams.
-To correctly assign your users to Docker teams, you must create groups in your IDP following the naming pattern <organization>:<team>. For example, if you want to manage provisioning for the team “developers” in Docker, and your organization name is “moby,” you must create a group in your IDP with the name “moby:developers”. Once you enable group mappings in your connection, users assigned to that group in your IDP will automatically be added to the team “developers” in Docker.
+IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. These attributes are used by Just-In-Time (JIT) Provisioning to create or update the user’s Docker profile and their associations with organizations and teams on Docker Hub.
 
-   > **Note**
-   >
-   > Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, a group is created if it doesn't already exist.
+Docker uses the email address of the user to identify them on the platform. Every Docker account must have a unique email address at all times.
 
-1. In **Okta**, navigate to the directory and select **Group**.
-2. Select **Add Group**, and type the name of your organization and team.
+After every successful SSO sign-in authentication, the JIT provisioner performs the following actions:
 
-    > **Note**
-    >
-    > For example, **auacatenet:platform** (your organization:your team). This connects all of your teams in Docker to your groups in Okta.
+1. Checks if there's an existing Docker account with the email address of the user that just authenticated.
+    
+    a) If no account is found with the same email address, it creates a new Docker account using basic user attributes (email, name, and surname). The JIT provisioner generates a new username for this new account by using the email, name, and random numbers to make sure that all account usernames are unique in the platform.
+    
+    b) If an account exists for this email address, it uses this account and updates the full name of the user’s profile if needed.
+2. Checks if the IdP shared group mappings while authenticating the user.
 
-    ![okta-add-group](images/okta-add-group.png){: width="700px" }
+    a) If the IdP provided group mappings for the user, the user gets added to the organizations and teams indicated by the group mappings.
+    
+    b) If the IdP didn't provide group mappings, it checks if the user is already a member of the organization, or if the SSO connection is for multiple organizations (only at company level) and if the user is a member of any of those organizations. If the user is not a member, it adds the user to the default team and organization configured in the SSO connection.
 
-    ![add-group](images/add-group.png){: width="500px" }
+![JIT provisioning](images/jit.PNG)
 
-3. In your group, select **Assign people** to add your users to the group.
+## Use group mapping
 
-    ![assign-people](images/assign-people.png){: width="700px" }
+To take advantage of group mapping, follow the instructions provided by your IdP:
 
-4. Navigate to **Applications**, configure your application and select **General**.
-5. Select **Next** and update the value for **Group Attribute Statements** (optional) and filter for **Group Attribute Statements**. Note it's recommended to specify a filter, so the groups relevant to your Docker organization and teams are shared with the Docker app.
+- [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm){: target="_blank" rel="noopener" class="_" }
+- [Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes){: target="_blank" rel="noopener" class="_" }
+- [OneLogin](https://developers.onelogin.com/scim/create-app){: target="_blank" rel="noopener" class="_" }
 
-    ![group-attribute-statement](images/group-attribute-statement.png){: width="700px" }
+Once complete, a user who signs in to Docker through SSO is automatically added to the organizations and teams mapped in the IdP.
 
-6. Select **Next** and **Finish** to complete the configuration.
-
-    > **Note**
-    >
-    > Once completed, when your user signs in to Docker through SSO, the user is automatically added to the organizations and teams mapped in the group attributes.
-
-## Azure AD SSO group mapping
-
-1. Navigate to **Enterprise application**, and select your application.
-2. Select **Single-sign on** and **Attributes and Claims**.
-3. Select **Add a group claim** and select groups assigned to the application.
-4. In the **Source attribute**, select **Cloud-only group display name (Preview)** and **Save**. Note, you can filter the groups you want to share with the application as an option.
-
-    ![azure-group](images/azure-group.png){: width="700px" }
+>**Tip**
+>
+> [Enable SCIM](scim.md) to take advantage of automatic user provisioning and de-provisioning. If you don't enable SCIM users are only automatically provisioned. You have to de-provision them manually. 
+{: .tip}

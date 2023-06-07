@@ -6,6 +6,8 @@ redirect_from:
 - /get-started/part4/
 ---
 
+{% include swarm-mode.md %}
+
 ## Prerequisites
 
 - Download and install Docker Desktop as described in [Get Docker](../get-docker.md).
@@ -25,6 +27,8 @@ In order to validate that our containerized application works well on Swarm, we'
 Swarm never creates individual containers like we did in the previous step of this tutorial. Instead, all Swarm workloads are scheduled as _services_, which are scalable groups of containers with added networking features maintained automatically by Swarm. Furthermore, all Swarm objects can and should be described in manifests called _stack files_. These YAML files describe all the components and configurations of your Swarm app, and can be used to easily create and destroy your app in any Swarm environment.
 
 Let's write a simple stack file to run and manage our Todo app, the container `getting-started` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. Place the following in a file called `bb-stack.yaml`:
+
+{% include swarm-compose-compat.md %}
 
 ```yaml
 version: '3.7'

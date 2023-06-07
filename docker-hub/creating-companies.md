@@ -4,44 +4,52 @@ keywords: company, multiple organizations, manage companies
 title: Overview
 ---
 
-> **Note**
->
-> The following features are only available to [Early Access](../release-lifecycle.md/#early-access-ea) participants.
+A company provides a single point of visibility across multiple organizations. Docker introduced this new view to simplify the management of Docker organizations and settings. It's available to Docker Business subscribers. 
 
+The following diagram depicts the set up of a company and how it relates to associated organizations. 
 
-To simplify the management of Docker organizations and settings, Docker has introduced a new view that provides a single point of visibility across multiple organizations called a Company. A company can become a parent to nested child organizations. A company lets Docker Business subscribers manage their organizations and configure settings centrally. With the new company owner role, you can control access to the company and company settings. These settings can affect all the organizations nested under the company. You can assign up to ten unique users to a company owner role without occupying a purchased seat.
+![company-process](images/company-process-diagram.png){: width="700px" }
 
-Docker will work with your current Docker organization owners to create the company, associate your Docker Business organizations, and identify your company owner(s). Once created, users with a company owner role can navigate to a new page that displays the company name, organizations associated with the company, a list of company owners, and settings that include your Domain verification, Single Sign-on (SSO) connection to your identity provider, System for Cross-domain Identity Management (SCIM) setup.
+## Key features
 
+With a company, administrators can:
 
- ![company-process](images/company-process-diagram.png){: width="700px" }
-
-When a company owner makes adjustments to user management settings at the company level, this will affect all organizations associated with the company.
-
-The company owner can:
-
-- View all nested organizations.
-- Configure SSO and SCIM for all nested organizations, including SCIM Group mapping.
+- View and manage all nested organizations and configure settings centrally. 
+- Carefully control access to the company and company settings. 
+- Have up to ten unique users assigned the company owner role without occupying a purchased seat.
+- Configure SSO and SCIM for all nested organizations.
 - Enforce SSO log-in for all users in the company.
-- Verify a domain separately from the organization namespace.
-- Add and remove up to 10 company owners.
 
-A company owner role is only available if your organization has a Docker Business subscription. If you don't have a Docker Business subscription, you must first [upgrade your subscription](../subscription/upgrade.md).
+<div class="component-container">
+<!--start row-->
+    <div class="row">
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                 <a href="/docker-hub/new-company/"><img src="/assets/images/note-add.svg" alt="new company" width="70" height="70"></a>
+            </div>
+                <h2 id="new company"><a href="/docker-hub/new-company/">Create a company</a></h2>
+                <p>Learn how to create a new company layer and add existing organizations.</p>
+        </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+          <div class="component-icon">
+                 <a href="/docker-hub/company-owner/"><img src="/assets/images/sso.svg" alt="Company owner" width="70" height="70"></a>
+          </div>
+                <h2 id="Company owner"><a href="/docker-hub/company-owner/">Manage company owners</a></h2>
+                <p>Find out more about company owners and how to manage them.</p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <a href="/docker-hub/company-faqs/"><img src="/assets/images/help.svg" alt="company faqs" width="70" height="70"></a>
+            </div>
+                <h2 id="company faqs"><a href="/docker-hub/company-faqs/">FAQs</a></h2>
+                <p>Explore common company FAQs.</p>
+        </div>
+     </div>
+    </div>
+</div>
 
-## Get started
-
-You’ll need to send the following information to your CSM Docker team member to set up your company:
-
-- The name of your company. For example, Docker uses the company name **dockerinc**.
-- The organizations that you want to associate with the new company.
-- The verified domains you want to move to the company level.
-- Confirm if you want to migrate one of your organization’s SSO and SCIM settings to the company. Migrating SSO settings will also migrate verified domains from the organization to the parent company.
-
-## Company overview and settings
-
-To navigate to the company page:
-
-1. Sign in to [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} to view your company and organizations.
-2. On the **Organizations** page, select your company to access the **Overview** tab. For example, the company listed below is **dockerinc** and the organization is **docker**.
-
-    ![org-page](images/org-page.png){: width="700px" }

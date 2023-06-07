@@ -21,16 +21,16 @@ There are two ways to contribute a pull request to the docs repository:
 
     This is the manual, more advanced version of clicking 'Edit this page' on a published docs page. Initiating a docs changes in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.
 
-    For a demo of the components, tags, Markdown syntax, styles, etc we use at [https://docs.docker.com/](/), see the Useful components section.
+    For a demo of the components, tags, Markdown syntax, styles, etc. we use at [https://docs.docker.com/](/), see the Useful components section.
 
 ## Important files
 
 Here’s a list of some of the important files:
 
-- `/_data/toc.yaml` defines the left-hand navigation for the docs
-- `/js/docs.js` defines most of the docs-specific JS such as the table of contents (ToC) generation and menu syncing
-- `/css/style.scss` defines the docs-specific style rules
-- `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content
+- `/_data/toc.yaml` defines the left-hand navigation for the docs.
+- `/js/docs.js` defines most of the docs-specific JS such as the table of contents (ToC) generation and menu syncing.
+- `/css/style.scss` defines the docs-specific style rules.
+- `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content.
 
 ### Files not edited here
 
@@ -71,7 +71,7 @@ git clone {{ site.repo }}.git
 cd docs
 ```
 
-Then, build and run the documentation using [Docker Compose](../compose/index.md)
+Then, build and run the documentation using [Docker Compose](../compose/index.md):
 
 ```bash
 docker compose up -d --build

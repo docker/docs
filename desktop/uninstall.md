@@ -34,7 +34,7 @@ To uninstall Docker Desktop from your Windows machine:
 <br>
 To uninstall Docker Desktop from your Mac:
 
-1. From the Docker menu, select **Troubleshoot** and then select **Uninstall**.
+1. From the Docker menu, select the **Troubleshoot** icon in the top-right corner of Docker Dashboard and then select **Uninstall**.
 2. Click **Uninstall** to confirm your selection.
 
 > Uninstall Docker Desktop from the command line
@@ -61,7 +61,7 @@ To uninstall Docker Desktop from your Mac:
 
 <hr>
 </div>
-<div id="tab5" class="tab-pane fade in active" markdown="1">
+<div id="tab5" class="tab-pane fade" markdown="1">
 <br>
 Docker Desktop can be removed from a Linux host using the package manager.
 

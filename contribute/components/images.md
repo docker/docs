@@ -14,7 +14,7 @@ toc_max: 3
 
 - Make the image open in a new tab: [![an image](/assets/images/footer_moby_icon.png)](/assets/images/footer_moby_icon.png){: target="_blank" rel="noopener" class="_"}
 
-- Set the size of an image: ![a pretty wide image](/assets/images/banner_image_24512.png){:width="750px"}
+- Set the width of an image: ![a pretty wide image](/assets/images/banner_image_24512.png){:width="750px"}
 
 - A big wide image: ![a pretty wide image](/assets/images/banner_image_24512.png)
 
@@ -29,7 +29,7 @@ toc_max: 3
 
   [![a small cute image](/assets/images/footer_moby_icon.png)](https://www.docker.com/)
 
-- Set the size of an image: ![a pretty wide image](/assets/images/banner_image_24512.png){:width="750px"}
+- Set the width of an image: ![a pretty wide image](/assets/images/banner_image_24512.png){:width="750px"}
 
 - A big wide image: ![a pretty wide image](/assets/images/banner_image_24512.png)
 

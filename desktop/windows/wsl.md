@@ -1,6 +1,6 @@
 ---
-description: Docker Desktop WSL 2 backend
-keywords: WSL, WSL 2, Windows Subsystem for Linux, WSL 2 backend Docker, Docker Desktop
+description: Turn on the Docker WSL 2 backend and get to work using best practices, GPU support, and more in this thorough guide. 
+keywords: wsl, wsl2, installing wsl2, wsl installation, docker wsl2, wsl docker, wsl2 tech preview, wsl install docker, install docker wsl, how to install docker in wsl
 redirect_from:
 - /docker-for-windows/wsl/
 - /docker-for-windows/wsl-tech-preview/
@@ -17,7 +17,8 @@ Additionally, with WSL 2, the time required to start a Docker daemon after a col
 
 Before you turn on the Docker Desktop WSL 2, ensure you have:
 
-- Windows 10, version 1903 or higher, or Windows 11.
+- WSL version 1.1.3.0 or above.
+- Windows 10, version 21H2 or higher, or Windows 11, version 21H2 or higher. For more information, see [System requirements](https://docs.docker.com/desktop/install/windows-install/#system-requirements).
 - Enabled WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}.
 - Downloaded and installed the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){:target="_blank" rel="noopener" class="_"}.
 
@@ -25,7 +26,7 @@ Before you turn on the Docker Desktop WSL 2, ensure you have:
 
 1. Download [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
 2. Follow the usual installation instructions to install Docker Desktop. If you are running a supported system, Docker Desktop prompts you to enable WSL 2 during installation. Read the information displayed on the screen and enable WSL 2 to continue.
-3. Start Docker Desktop from the Windows Start menu.
+3. Start Docker Desktop from the **Windows Start** menu.
 4. From the Docker menu, select **Settings** and then **General**.
 5. Select the **Use WSL 2 based engine** check box.
 
@@ -115,6 +116,10 @@ The following section describes how to start developing your applications using 
 
 ## GPU support
 
+> **Note**
+>
+> GPU support is only available in Docker Desktop for Windows with the WSL2 backend.
+
 Starting with Docker Desktop 3.1.0, Docker Desktop supports WSL 2 GPU Paravirtualization (GPU-PV) on NVIDIA GPUs. To enable WSL 2 GPU Paravirtualization, you need:
 
 - A machine with an NVIDIA GPU
@@ -160,4 +165,4 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 
 ## Feedback
 
-Your feedback is very important to us. Let us know your feedback by creating an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"} repository and adding the **WSL 2** label.
+To provide feedback, create an issue in the [Docker Desktop for Windows GitHub](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"} repository and add the **WSL 2** label.

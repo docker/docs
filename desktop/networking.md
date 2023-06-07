@@ -31,8 +31,8 @@ When you run a container with the `-p` argument, for example:
 $ docker run -p 80:80 -d nginx
 ```
 
-Docker Desktop makes whatever is running on port 80 in the container (in
-this case, `nginx`) available on port 80 of `localhost`. In this example, the
+Docker Desktop makes whatever is running on port 80 in the container, in
+this case, `nginx`, available on port 80 of `localhost`. In this example, the
 host and container ports are the same. If, for example, you already have something running on port 80 of
 your host machine, you can connect the container to a different port:
 
@@ -58,11 +58,15 @@ Docker Desktop on Mac and Linux allows you to use the host’s SSH agent inside 
 
 1. Bind mount the SSH agent socket by adding the following parameter to your `docker run` command:
 
-    `--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock`
+   ```console
+   $--mount type=bind,src=/run/host-services/ssh-auth.sock,target=/run/host-services/ssh-auth.sock
+   ```
 
 2. Add the `SSH_AUTH_SOCK` environment variable in your container:
 
-    `-e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"`
+    ```console
+    $ -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock"
+    ```
 
 To enable the SSH agent in Docker Compose, add the following flags to your service:
 
@@ -104,7 +108,7 @@ However if you are a Windows user, it works with Windows containers.
 
 ### I want to connect from a container to a service on the host
 
-The host has a changing IP address (or none if you have no network access). We recommend that you connect to the special DNS name
+The host has a changing IP address, or none if you have no network access. We recommend that you connect to the special DNS name
 `host.docker.internal` which resolves to the internal IP address used by the
 host. This is for development purpose and does not work in a production environment outside of Docker Desktop.
 
@@ -129,7 +133,7 @@ If you have installed Python on your machine, use the following instructions as 
 
 #### I want to connect to a container from the host
 
-Port forwarding works for `localhost`; `--publish`, `-p`, or `-P` all work.
+Port forwarding works for `localhost`. `--publish`, `-p`, or `-P` all work.
 Ports exposed from Linux are forwarded to the host.
 
 Our current recommendation is to publish a port, or to connect from another

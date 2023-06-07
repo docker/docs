@@ -8,7 +8,7 @@ title: Enabling GPU access with Compose
 Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure you install the [prerequisites](../config/containers/resource_constraints.md#gpu){: target="_blank" rel="noopener" class="_" } if you have not already done so.
 
 The examples in the following sections focus specifically on providing service containers access to GPU devices with Docker Compose. 
-You can use either `docker-compose` or `docker compose` commands. For more information, see [Evolution of Compose](compose-v2/index.md){: target="_blank" rel="noopener" class="_" }.
+You can use either `docker-compose` or `docker compose` commands. For more information, see [Migrate to Compose V2](migrate.md){: target="_blank" rel="noopener" class="_" }.
 
 ### Enabling GPU access to service containers
 
@@ -17,8 +17,8 @@ GPUs are referenced in a `docker-compose.yml` file using the [device](compose-fi
 This provides more granular control over a GPU reservation as custom values can be set for the following device properties: 
 
 - `capabilities`. This value specifies as a list of strings (eg. `capabilities: [gpu]`). You must set this field in the Compose file. Otherwise, it returns an error on service deployment.
-- `count`. This value specified as an integer or the value `all` representing the number of GPU devices that should be reserved (providing the host holds that number of GPUs). If no `count` is set, all GPUs available on the host are used by default.
-- `device_ids`. This value specified as a list of strings representing GPU device IDs from the host. You can find the device ID in the output of `nvidia-smi` on the host. If no `device_ids` are set, all GPUs available on the host used by default.
+- `count`. This value, specified as an integer or the value `all`, represents the number of GPU devices that should be reserved (providing the host holds that number of GPUs). If `count` is set to `all` or not specified, all GPUs available on the host are used by default.
+- `device_ids`. This value, specified as a list of strings, represents GPU device IDs from the host. You can find the device ID in the output of `nvidia-smi` on the host. If no `device_ids` are set, all GPUs available on the host are used by default.
 - `driver`. This value is specified as a string, for example `driver: 'nvidia'`
 - `options`. Key-value pairs representing driver specific options.
 

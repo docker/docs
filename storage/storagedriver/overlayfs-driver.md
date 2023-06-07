@@ -6,20 +6,8 @@ redirect_from:
 - /engine/userguide/storagedriver/overlayfs-driver/
 ---
 
-OverlayFS is a modern *union filesystem* that is similar to AUFS, but faster
-and with a simpler implementation. Docker provides two storage drivers for
-OverlayFS: the original `overlay`, and the newer and more stable `overlay2`.
-
-This topic refers to the Linux kernel driver as `OverlayFS` and to the Docker
-storage driver as `overlay` or `overlay2`.
-
-> **Note**: If you use OverlayFS, use the `overlay2` driver rather than the
-> `overlay` driver, because it is more efficient in terms of inode utilization.
-> To use the new driver, you need version 4.0 or higher of the Linux kernel,
-> or RHEL or CentOS using version 3.10.0-514 and above.
->
-> For more information about differences between `overlay` vs `overlay2`, check
-> [Docker storage drivers](select-storage-driver.md).
+OverlayFS is a modern *union filesystem*. This topic refers to the Linux kernel
+driver as `OverlayFS` and to the Docker storage driver as `overlay2`.
 
 > **Note**: For `fuse-overlayfs` driver, check [Rootless mode documentation](../../engine/security/rootless.md).
 
@@ -29,20 +17,12 @@ OverlayFS is the recommended storage driver, and supported if you meet the follo
 prerequisites:
 
 - Version 4.0 or higher of the Linux kernel, or RHEL or CentOS using
-  version 3.10.0-514 of the kernel or higher. If you use an older kernel, you need
-  to use the `overlay` driver, which is not recommended.
-- The `overlay` and `overlay2` drivers are supported on `xfs` backing filesystems,
+  version 3.10.0-514 of the kernel or higher.
+- The `overlay2` driver is supported on `xfs` backing filesystems,
   but only with `d_type=true` enabled.
 
     Use `xfs_info` to verify that the `ftype` option is set to `1`. To format an
     `xfs` filesystem correctly, use the flag `-n ftype=1`.
-
-    > **Warning**: Running on XFS without d_type support now causes Docker to
-    > skip the attempt to use the `overlay` or `overlay2` driver. Existing
-    > installs will continue to run, but produce an error. This is to allow
-    > users to migrate their data. In a future version, this will be a fatal
-    > error, which will prevent Docker from starting.
-    {:.warning}
 
 - Changing the storage driver makes existing containers and images inaccessible
   on the local system. Use `docker save` to save any images you have built or
@@ -50,22 +30,13 @@ prerequisites:
   so that you do not need to re-create them later.
 
 
-## Configure Docker with the `overlay` or `overlay2` storage driver
-
-It is highly recommended that you use the `overlay2` driver if possible, rather
-than the `overlay` driver. The `overlay` driver is **not** supported for
-Docker EE.
-
-To configure Docker to use the `overlay` storage driver your Docker host must be
-running version 3.18 of the Linux kernel (preferably newer) with the overlay
-kernel module loaded. For the `overlay2` driver, the version of your kernel must
-be 4.0 or newer.
+## Configure Docker with the `overlay2` storage driver
+<a name="configure-docker-with-the-overlay-or-overlay2-storage-driver"></a>
 
 Before following this procedure, you must first meet all the
 [prerequisites](#prerequisites).
 
-The steps below outline how to configure the `overlay2` storage driver. If you
-need to use the legacy `overlay` driver, specify it instead.
+The steps below outline how to configure the `overlay2` storage driver.
 
 
 1. Stop Docker.
@@ -128,7 +99,7 @@ its compatibility with different backing filesystems.
 ## How the `overlay2` driver works
 
 If you are still using the `overlay` driver rather than `overlay2`, see
-[How the overlay driver works](#how-the-overlay-driver-works) instead.
+[How the overlay driver works](#how-the-overlay2-driver-works) instead.
 
 OverlayFS layers two directories on a single Linux host and presents them as
 a single directory. These directories are called _layers_ and the unification
@@ -229,21 +200,15 @@ workdir=9186877cdf386d0a3b016149cf30c208f326dca307529e646afce5b3f83f5304/work)
 
 The `rw` on the second line shows that the `overlay` mount is read-write.
 
-## How the `overlay` driver works
-
-This content applies to the `overlay` driver only. Docker recommends using the
-`overlay2` driver, which works differently. See
-[How the overlay2 driver works](#how-the-overlay2-driver-works)
-for `overlay2`.
-
-OverlayFS layers two directories on a single Linux host and presents them as
+OverlayFS layers multiple directories on a single Linux host and presents them as
 a single directory. These directories are called _layers_ and the unification
 process is referred to as a _union mount_. OverlayFS refers to the lower directory
-as `lowerdir` and the upper directory a `upperdir`. The unified view is exposed
+as `lowerdirs` and the upper directory a `upperdir`. The unified view is exposed
 through its own directory called `merged`.
 
 The diagram below shows how a Docker image and a Docker container are layered.
 The image layer is the `lowerdir` and the container layer is the `upperdir`.
+If the image has multiple layers, multiple `lowerdir` directories are used.
 The unified view is exposed through a directory called `merged` which is
 effectively the containers mount point. The diagram shows how Docker constructs
 map to OverlayFS constructs.
@@ -254,18 +219,9 @@ Where the image layer and the container layer contain the same files, the
 container layer "wins" and obscures the existence of the same files in the image
 layer.
 
-The `overlay` driver only works with two layers. This means that multi-layered
-images cannot be implemented as multiple OverlayFS layers. Instead, each image
-layer is implemented as its own directory under `/var/lib/docker/overlay`.  Hard
-links are then used as a space-efficient way to reference data shared with lower
-layers. The use of hardlinks causes an excessive use of inodes, which is a known
-limitation of the legacy `overlay` storage driver, and may require additional
-configuration of the backing filesystem. Refer to the [overlayFS and Docker
-performance](#overlayfs-and-docker-performance) for details.
-
-To create a container, the `overlay` driver combines the directory representing
-the image's top layer plus a new directory for the container. The image's top
-layer is the `lowerdir` in the overlay and is read-only. The new directory for
+To create a container, the `overlay2` driver combines the directory representing
+the image's top layer plus a new directory for the container. The image's
+layers are the `lowerdirs` in the overlay and are read-only. The new directory for
 the container is the `upperdir` and is writable.
 
 ### Image and container layers on-disk
@@ -313,13 +269,13 @@ hard links to the data that is shared with lower layers. This allows for
 efficient use of disk space.
 
 ```console
-$ ls -i /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
+$ ls -i /var/lib/docker/overlay2/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
 
-19793696 /var/lib/docker/overlay/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
+19793696 /var/lib/docker/overlay2/38f3ed2eac129654acef11c32670b534670c3a06e483fce313d72e3e0a15baa8/root/bin/ls
 
-$ ls -i /var/lib/docker/overlay/55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358/root/bin/ls
+$ ls -i /var/lib/docker/overlay2/55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358/root/bin/ls
 
-19793696 /var/lib/docker/overlay/55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358/root/bin/ls
+19793696 /var/lib/docker/overlay2/55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358/root/bin/ls
 ```
 
 #### The container layer
@@ -329,7 +285,7 @@ Containers also exist on-disk in the Docker host's filesystem under
 using the `ls -l` command, three directories and one file exist:
 
 ```console
-$ ls -l /var/lib/docker/overlay/<directory-of-running-container>
+$ ls -l /var/lib/docker/overlay2/<directory-of-running-container>
 
 total 16
 -rw-r--r-- 1 root root   64 Jun 20 16:39 lower-id
@@ -342,7 +298,7 @@ The `lower-id` file contains the ID of the top layer of the image the container
 is based on, which is the OverlayFS `lowerdir`.
 
 ```console
-$ cat /var/lib/docker/overlay/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3f27be28b53be6c/lower-id
+$ cat /var/lib/docker/overlay2/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3f27be28b53be6c/lower-id
 
 55f1e14c361b90570df46371b20ce6d480c434981cbda5fd68c6ff61aa0a5358
 ```
@@ -350,27 +306,28 @@ $ cat /var/lib/docker/overlay/ec444863a55a9f1ca2df72223d459c5d940a721b2288ff86a3
 The `upper` directory contains the contents of the container's read-write layer,
 which corresponds to the OverlayFS `upperdir`.
 
-The `merged` directory is the union mount of the `lowerdir` and `upperdir`, which
+The `merged` directory is the union mount of the `lowerdir` and `upperdirs`, which
 comprises the view of the filesystem from within the running container.
 
 The `work` directory is internal to OverlayFS.
 
-To view the mounts which exist when you use the `overlay` storage driver with
+To view the mounts which exist when you use the `overlay2` storage driver with
 Docker, use the `mount` command. The output below is truncated for readability.
 
 ```console
 $ mount | grep overlay
 
-overlay on /var/lib/docker/overlay/ec444863a55a.../merged
-type overlay (rw,relatime,lowerdir=/var/lib/docker/overlay/55f1e14c361b.../root,
-upperdir=/var/lib/docker/overlay/ec444863a55a.../upper,
-workdir=/var/lib/docker/overlay/ec444863a55a.../work)
+overlay on /var/lib/docker/overlay2/l/ec444863a55a.../merged
+type overlay (rw,relatime,lowerdir=/var/lib/docker/overlay2/l/55f1e14c361b.../root,
+upperdir=/var/lib/docker/overlay2/l/ec444863a55a.../upper,
+workdir=/var/lib/docker/overlay2/l/ec444863a55a.../work)
 ```
 
 The `rw` on the second line shows that the `overlay` mount is read-write.
 
 
-## How container reads and writes work with `overlay` or `overlay2`
+## How container reads and writes work with `overlay2`
+<a name="how-container-reads-and-writes-work-with-overlay-or-overlay2"></a>
 
 ### Reading files
 
@@ -398,7 +355,7 @@ Consider some scenarios where files in a container are modified.
 
 - **Writing to a file for the first time**: The first time a container writes
   to an existing file, that file does not exist in the container (`upperdir`).
-  The `overlay`/`overlay2` driver performs a *copy_up* operation to copy the file
+  The  `overlay2` driver performs a *copy_up* operation to copy the file
   from the image (`lowerdir`) to the container (`upperdir`). The container then
   writes the changes to the new copy of the file in the container layer.
 
@@ -412,13 +369,8 @@ Consider some scenarios where files in a container are modified.
     to. Subsequent writes to the same file operate against the copy of the file
     already copied up to the container.
 
-  - OverlayFS only works with two layers. This means that performance should
-    be better than AUFS, which can suffer noticeable latencies when searching
-    for files in images with many layers. This advantage applies to both
-    `overlay` and `overlay2` drivers. `overlayfs2` is slightly
-    less performant than `overlayfs` on initial read, because it must look
-    through more layers, but it caches the results so this is only a small
-    penalty.
+  - OverlayFS works with multiple layers. This means that performance can be
+    impacted when searching for files in images with many layers.
 
 - **Deleting files and directories**:
 
@@ -441,37 +393,23 @@ Consider some scenarios where files in a container are modified.
 
 ## OverlayFS and Docker Performance
 
-Both `overlay2` and `overlay` drivers are more performant than `aufs` and
-`devicemapper`. In certain circumstances, `overlay2` may perform better than
-`btrfs` as well. However, be aware of the following details.
+The `overlay2` driver is more performant than `devicemapper`. In certain circumstances,
+`overlay2` may perform better than `btrfs` as well. However, be aware of the following details.
 
 - **Page Caching**. OverlayFS supports page cache sharing. Multiple containers
   accessing the same file share a single page cache entry for that file. This
-  makes the `overlay` and `overlay2` drivers efficient with memory and a good
+  makes the `overlay2` drivers efficient with memory and a good
   option for high-density use cases such as PaaS.
 
-- **copy_up**. As with AUFS, OverlayFS performs copy-up operations
+- **copy_up**. As with other copy-on-write filesystems, OverlayFS performs copy-up operations
   whenever a container writes to a file for the first time. This can add latency
   into the write operation, especially for large files. However, once the file
   has been copied up, all subsequent writes to that file occur in the upper
   layer, without the need for further copy-up operations.
 
-  The OverlayFS `copy_up` operation is faster than the same operation with AUFS,
-  because AUFS supports more layers than OverlayFS and it is possible to incur
-  far larger latencies if searching through many AUFS layers. `overlay2` supports
-  multiple layers as well, but mitigates any performance hit with caching.
-
-- **Inode limits**. Use of the legacy `overlay` storage driver can cause excessive
-  inode consumption. This is especially true in the presence of a large number
-  of images and containers on the Docker host. The only way to increase the
-  number of inodes available to a filesystem is to reformat it. To avoid running
-  into this issue, it is highly recommended that you use `overlay2` if at all
-  possible.
-
-
 ### Performance best practices
 
-The following generic performance best practices also apply to OverlayFS.
+The following generic performance best practices apply to OverlayFS.
 
 - **Use fast storage**: Solid-state drives (SSDs) provide faster reads and
   writes than spinning disks.

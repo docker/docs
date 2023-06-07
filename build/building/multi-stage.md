@@ -14,26 +14,31 @@ Dockerfiles while keeping them easy to read and maintain.
 >
 > Special thanks to [Alex Ellis](https://twitter.com/alexellisuk){:target="blank" rel="noopener" class=""}
 > for granting permission to use his blog post [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/){:target="blank" rel="noopener" class=""}
-> as the basis of the examples below.
+> as the basis of the examples on this page.
 
 ## Before multi-stage builds
 
-One of the most challenging things about building images is keeping the image
-size down. Each `RUN`, `COPY`, and `ADD` instruction in the Dockerfile adds a layer to the image, and you
-need to remember to clean up any artifacts you don't need before moving on to
-the next layer. To write a really efficient Dockerfile, you have traditionally
-needed to employ shell tricks and other logic to keep the layers as small as
-possible and to ensure that each layer has the artifacts it needs from the
-previous layer and nothing else.
+One problem you may face as you build and publish images, is that the size of
+those images can sometimes grow quite large. Traditionally, before multi-stage
+builds were a thing, keeping the size of images down would require you to
+manually clean up resources from the image, so as to keep it small.
 
-It was actually very common to have one Dockerfile to use for development (which
-contained everything needed to build your application), and a slimmed-down one
-to use for production, which only contained your application and exactly what
-was needed to run it. This has been referred to as the "builder
-pattern". Maintaining two Dockerfiles is not ideal.
+In the past, it was common practice to have one Dockerfile for development,
+and another, slimmed-down one to use for production.
+The development version contained everything needed to build your application.
+The production version only contained your application
+and the dependencies needed to run it.
 
-Here's an example of a `build.Dockerfile` and `Dockerfile` which adhere to the
-builder pattern above:
+To write a truly efficient Dockerfile, you had to come up with shell tricks and
+arcane solutions to keep the layers as small as possible.
+All to ensure that each layer contained only the artifacts it needed,
+and nothing else.
+
+This has been referred to as the _builder pattern_.
+The following examples show two Dockerfiles that adhere to this pattern:
+
+- `build.Dockerfile`, for development builds
+- `Dockerfile`, for slimmed-down production builds
 
 **`build.Dockerfile`**:
 
@@ -46,10 +51,11 @@ RUN go get -d -v golang.org/x/net/html \
   && CGO_ENABLED=0 go build -a -installsuffix cgo -o app .
 ```
 
-Notice that this example also artificially compresses two `RUN` commands together
-using the Bash `&&` operator, to avoid creating an additional layer in the image.
-This is failure-prone and hard to maintain. It's easy to insert another command
-and forget to continue the line using the `\` character, for example.
+Notice how this example artificially compresses two `RUN` commands together
+using the Bash `&&` operator. This is done to avoid creating an additional
+layer in the image. Writing Dockerfiles like this is failure-prone and hard to
+maintain. It's easy to insert another command and forget to continue the line
+using the `\` character, for example.
 
 **`Dockerfile`**:
 
@@ -62,7 +68,11 @@ COPY app ./
 CMD ["./app"]
 ```
 
-**`build.sh`**:
+The following example is a utility script that:
+
+1. Builds the first image.
+2. Creates a container from it to copy the artifact out.
+3. Builds the second image.
 
 ```bash
 #!/bin/sh
@@ -78,12 +88,10 @@ docker build --no-cache -t alexellis2/href-counter:latest .
 rm ./app
 ```
 
-When you run the `build.sh` script, it needs to build the first image, create
-a container from it to copy the artifact out, then build the second
-image. Both images take up room on your system and you still have the `app`
+Both images take up room on your system and you still end up with the `app`
 artifact on your local disk as well.
 
-Multi-stage builds vastly simplify this situation!
+Multi-stage builds simplifies this situation!
 
 ## Use multi-stage builds
 
@@ -91,7 +99,7 @@ With multi-stage builds, you use multiple `FROM` statements in your Dockerfile.
 Each `FROM` instruction can use a different base, and each of them begins a new
 stage of the build. You can selectively copy artifacts from one stage to
 another, leaving behind everything you don't want in the final image. To show
-how this works, let's adapt the `Dockerfile` from the previous section to use
+how this works, you can adapt the `Dockerfile` from the previous section to use
 multi-stage builds.
 
 ```dockerfile
@@ -110,8 +118,9 @@ COPY --from=0 /go/src/github.com/alexellis/href-counter/app ./
 CMD ["./app"]
 ```
 
-You only need the single Dockerfile. You don't need a separate build script,
-either. Just run `docker build`.
+You only need the single Dockerfile.
+No need for a separate build script.
+Just run `docker build`.
 
 ```console
 $ docker build -t alexellis2/href-counter:latest .
@@ -128,7 +137,7 @@ intermediate artifacts are left behind, and not saved in the final image.
 
 ## Name your build stages
 
-By default, the stages are not named, and you refer to them by their integer
+By default, the stages aren't named, and you refer to them by their integer
 number, starting with 0 for the first `FROM` instruction. However, you can
 name your stages, by adding an `AS <NAME>` to the `FROM` instruction. This
 example improves the previous one by naming the stages and using the name in
@@ -162,7 +171,7 @@ the stage named `builder`:
 $ docker build --target builder -t alexellis2/href-counter:latest .
 ```
 
-A few scenarios where this might be very powerful are:
+A few scenarios where this might be useful are:
 
 - Debugging a specific build stage
 - Using a `debug` stage with all debugging symbols or tools enabled, and a
@@ -172,7 +181,7 @@ A few scenarios where this might be very powerful are:
 
 ## Use an external image as a "stage"
 
-When using multi-stage builds, you are not limited to copying from stages you
+When using multi-stage builds, you aren't limited to copying from stages you
 created earlier in your Dockerfile. You can use the `COPY --from` instruction to
 copy from a separate image, either using the local image name, a tag available
 locally or on a Docker registry, or a tag ID. The Docker client pulls the image
@@ -201,10 +210,6 @@ FROM builder AS build2
 COPY source2.cpp source.cpp
 RUN g++ -o /binary source.cpp
 ```
-
-## Version compatibility
-
-Multi-stage build syntax was introduced in Docker Engine 17.05.
 
 ## Differences between legacy builder and BuildKit
 
@@ -279,5 +284,5 @@ Removing intermediate container bbc025b93175
 Successfully built 09fc3770a9c4
 ```
 
-`stage1` gets executed when BuildKit is disabled, even if `stage2` does not
-depend on it.
+The legacy builder processes `stage1`,
+even if `stage2` doesn't depend on it.

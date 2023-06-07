@@ -218,7 +218,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### New
 
-- In partnership with Snyk, Docker Desktop launches [vulnerability scanning](../../engine/scan/index.md) for Docker local images.
+- In partnership with Snyk, Docker Desktop launches vulnerability scanning for Docker local images.
 - Docker ECS plugin has been replaced by [ECS cloud integration](/engine/context/ecs-integration/)
 - Docker UI:
   - The Images view now has search and filter options.

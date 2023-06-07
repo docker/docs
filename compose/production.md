@@ -23,7 +23,7 @@ production. These changes might include:
 - Binding to different ports on the host
 - Setting environment variables differently, such as reducing the verbosity of
   logging, or to specify settings for external services such as an email server
-- Specifying a restart policy like [`restart: always`](compose-file/index.md#restart){: target="_blank" rel="noopener" class="_" } to avoid downtime
+- Specifying a restart policy like [`restart: always`](compose-file/05-services.md#restart){: target="_blank" rel="noopener" class="_" } to avoid downtime
 - Adding extra services such as a log aggregator
 
 For this reason, consider defining an additional Compose file, say

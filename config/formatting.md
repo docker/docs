@@ -84,7 +84,7 @@ $ docker inspect --format "{{lower .Name}}" container
 
 {% raw %}
 ```console
-$ docker inspect --format '{{split .Image ":"}}'
+$ docker inspect --format '{{split .Image ":"}}' container
 ```
 {% endraw %}
 

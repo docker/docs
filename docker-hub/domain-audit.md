@@ -23,7 +23,7 @@ Although domain audit can't identify all Docker users in your environment, you c
 Before you audit your domains, the following prerequisites are required:
    * Your organization must be part of a Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../subscription/upgrade.md).
    * Single sign-on must be configured for your organization. To configure single sign-on, see [Configure Single Sign-on](../single-sign-on/configure/index.md).
-   * You must add and verify your domains. To add and verify a domain, see [Domain control](../single-sign-on/configure/index.md/#domain-control).
+   * You must add and verify your domains. To add and verify a domain, see [Domain control](../single-sign-on/configure/index.md#step-one-add-and-verify-your-domain).
 
 To audit your domains:
 

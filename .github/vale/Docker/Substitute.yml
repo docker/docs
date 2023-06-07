@@ -3,14 +3,20 @@ message: "Consider using '%s' instead of '%s'"
 link: https://docs.docker.com/contribute/style/recommended-words/
 ignorecase: true
 level: suggestion
+action:
+  name: replace
 swap:
   '\b(?:eg|e\.g\.)[\s,]': for example
   '\b(?:ie|i\.e\.)[\s,]': that is
   (?:sign on|log on|log in): sign in
   above: previous
   adaptor: adapter
+  account name: username
   administrate: administer
+  admin: administrator
   afterwards: afterward
+  allow: let
+  allows: lets
   alphabetic: alphabetical
   alphanumerical: alphanumeric
   anti-aliasing: antialiasing
@@ -35,6 +41,8 @@ swap:
   mutices: mutexes
   paas: PaaS
   pb: PB
+  repo: repository
   scroll: navigate
   sign up: register
   tb: TB
+  wish: want

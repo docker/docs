@@ -68,11 +68,6 @@ your client and daemon API versions.
 <span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="This command works with the Swarm orchestrator.">Swarm</span> This command works with the Swarm orchestrator.
 
 {% endif %}
-{% if controller_data.kubernetes %}
-
-<span class="badge badge-info" data-toggle="tooltip" data-placement="right" title="This command works with the Kubernetes orchestrator.">Kubernetes</span> This command works with the Kubernetes orchestrator.
-
-{% endif %}
 {% endcapture %}{{ command-orchestrator }}
 
 
@@ -120,6 +115,7 @@ For example uses of this command, refer to the [examples section](#examples) bel
 </thead>
 <tbody>
 {% for option in alloptions %}
+  {% unless option.hidden %}
   {% capture deprecated-badge %}{% if option.deprecated %}<a href="/engine/deprecated/" target="_blank" rel="noopener" class="_"><span class="badge badge-danger" data-toggle="tooltip" title="Read the deprecation reference (in a new window).">deprecated</span></a>{% endif %}{% endcapture %}
   {% capture experimental-daemon-badge %}{% if option.experimental %}<a href="/engine/reference/commandline/dockerd/#daemon-configuration-file" target="_blank" rel="noopener" class="_"><span class="badge badge-warning" data-toggle="tooltip" title="Read about experimental daemon options (in a new window).">experimental (daemon)</span></a>{% endif %}{% endcapture %}
   {% capture experimental-cli-badge %}{% if option.experimentalcli %}<a href="/engine/reference/commandline/cli/#configuration-files" target="_blank" rel="noopener" class="_"><span class="badge badge-warning"  data-toggle="tooltip" title="Read about experimental CLI options (in a new window).">experimental (CLI)</span></a>{% endif %}{% endcapture %}
@@ -138,13 +134,14 @@ For example uses of this command, refer to the [examples section](#examples) bel
   {% capture option-default %}{% if option.default_value %}{% unless defaults-to-skip contains option.default_value or defaults-to-skip == blank %}`{{ option.default_value }}`{% endunless %}{% endif %}{% endcapture %}
   <tr>
     {% if option.details_url and option.details_url != '' -%}
-    <td markdown="span">[`--{{ option.option }}`]({{ option.details_url }}){% if option.shorthand %} , [`-{{ option.shorthand }}`]({{ option.details_url }}){% endif %}</td>
+    <td markdown="span" nowrap>[`--{{ option.option }}`]({{ option.details_url }}){% if option.shorthand %} , [`-{{ option.shorthand }}`]({{ option.details_url }}){% endif %}</td>
     {%- else -%}
-    <td markdown="span">`--{{ option.option }}`{% if option.shorthand %} , `-{{ option.shorthand }}`{% endif %}</td>
+    <td markdown="span" nowrap>`--{{ option.option }}`{% if option.shorthand %} , `-{{ option.shorthand }}`{% endif %}</td>
     {%- endif %}
     <td markdown="span">{{ option-default }}</td>
-    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip | escape }}</td>
+    <td markdown="span">{% if all-badges != '' %}{{ all-badges | strip }}<br />{% endif %}{{ option.description | strip }}</td>
   </tr>
+  {% endunless %}
 {% endfor %} <!-- end for option -->
 </tbody>
 </table>

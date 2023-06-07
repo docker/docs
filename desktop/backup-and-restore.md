@@ -27,7 +27,7 @@ computer, for example.
 2. Use [`docker push`](../engine/reference/commandline/push.md) to push any
    images you have built locally and want to keep to the [Docker Hub registry](../docker-hub/index.md).
    
-   Make sure to configure the [repository's visibility as "private"](../docker-hub/repos/configure/index.md)
+   Make sure to configure the [repository's visibility as "private"](../docker-hub/repos/index.md)
    for images that should not be publicly accessible. 
 
    Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](../engine/reference/commandline/save.md)
@@ -38,13 +38,13 @@ and [install a different version](release-notes.md) or reset Docker Desktop to f
 
 ## Restore your data
 
-1. Use [`docker pull`](../engine/reference/commandline/load.md) to restore images
+1. Use [`docker pull`](../engine/reference/commandline/pull.md) to restore images
    you pushed to Docker Hub.
 
    If you backed up your images to a local tar file, use [`docker image load -i images.tar`](../engine/reference/commandline/load.md)
    to restore previously saved images.
 
-2. Re-create your containers if needed, using [`docker run`](../engine/reference/commandline/load.md),
+2. Re-create your containers if needed, using [`docker run`](../engine/reference/commandline/run.md),
    or [Docker Compose](../compose/index.md).
 
 Refer to the [backup, restore, or migrate data volumes](../storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section to restore volume data.

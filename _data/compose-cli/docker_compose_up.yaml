@@ -263,6 +263,27 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: wait-timeout
+      value_type: int
+      default_value: "0"
+      description: timeout waiting for application to be running|healthy.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: dry-run
+      value_type: bool
+      default_value: "false"
+      description: Execute command in dry run mode
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 deprecated: false
 experimental: false
 experimentalcli: false
