@@ -205,7 +205,7 @@ You can now start your dev-ready container.
     <div id="mac-linux2" class="tab-pane fade in active" markdown="1">
 
     ```console
-    $ docker run -dp 3000:3000 \
+    $ docker run -dp 127.0.0.1:3000:3000 \
       -w /app -v "$(pwd):/app" \
       --network todo-app \
       -e MYSQL_HOST=mysql \
@@ -223,7 +223,7 @@ You can now start your dev-ready container.
     In Windows, run this command in PowerShell.
 
     ```powershell
-    $ docker run -dp 3000:3000 `
+    $ docker run -dp 127.0.0.1:3000:3000 `
       -w /app -v "$(pwd):/app" `
       --network todo-app `
       -e MYSQL_HOST=mysql `

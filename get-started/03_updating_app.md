@@ -27,14 +27,14 @@ In the steps below, you will change the "empty text" when you don't have any tod
 3. Start a new container using the updated code.
 
     ```console
-    $ docker run -dp 3000:3000 getting-started
+    $ docker run -dp 127.0.0.1:3000:3000 getting-started
     ```
 
 You probably saw an error like this (the IDs will be different):
 
 ```console
 docker: Error response from daemon: driver failed programming external connectivity on endpoint laughing_burnell 
-(bb242b2ca4d67eba76e79474fb36bb5125708ebdabd7f45c8eaf16caaabde9dd): Bind for 0.0.0.0:3000 failed: port is already allocated.
+(bb242b2ca4d67eba76e79474fb36bb5125708ebdabd7f45c8eaf16caaabde9dd): Bind for 127.0.0.1:3000 failed: port is already allocated.
 ```
 
 The error occurred because you aren't able to start the new container while your old container is still running. The reason is that the old container is already using the host's port 3000 and only one process on the machine (containers included) can listen to a specific port. To fix this, you need to remove the old container.
@@ -93,7 +93,7 @@ To remove a container, you first need to stop it. Once it has stopped, you can r
 1. Now, start your updated app using the `docker run` command.
 
     ```console
-    $ docker run -dp 3000:3000 getting-started
+    $ docker run -dp 127.0.0.1:3000:3000 getting-started
     ```
 
 2. Refresh your browser on [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"} and you should see your updated help text.

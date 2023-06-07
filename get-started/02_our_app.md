@@ -121,11 +121,15 @@ Now that you have an image, you can run the application in a [container](../get-
 1. Start your container using the `docker run` command and specify the name of the image you just created:
 
    ```console
-   $ docker run -dp 3000:3000 getting-started
+   $ docker run -dp 127.0.0.1:3000:3000 getting-started
    ```
 
-   You use the `-d` flag to run the new container in "detached" mode (in the background). You also use the `-p` flag to create a mapping between the host's port 3000 to the container's port 3000.
-   Without the port mapping, you wouldn't be able to access the application.
+   The `-d` flag (short for `--detached`) runs the container in the background.
+   The `-p` flag (short for `--publish`) creates a port mapping between the host and the container.
+   The `-p` flag take a string value in the format of `HOST:CONTAINER`,
+   where `HOST` is the address on the host, and `CONTAINER` is the port on the container.
+   The command shown here publishes the container's port 3000 to `127.0.0.1:3000` (`localhost:3000`) on the host.
+   Without the port mapping, you wouldn't be able to access the application from the host.
 
 2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"}.
    You should see your app.
@@ -154,8 +158,8 @@ $ docker ps
 ```
 Output similar to the following should appear.
 ```console
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-df784548666d        getting-started     "docker-entrypoint.s…"   2 minutes ago       Up 2 minutes        0.0.0.0:3000->3000/tcp   priceless_mcclintock
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                      NAMES
+df784548666d        getting-started     "docker-entrypoint.s…"   2 minutes ago       Up 2 minutes        127.0.0.1:3000->3000/tcp   priceless_mcclintock
 ```
 
 <hr>
