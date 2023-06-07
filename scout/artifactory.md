@@ -31,7 +31,7 @@ docker login {URL}
 To automatically analyze images running in remote environments you need to deploy the Docker Scout Artifactory agent. The agent is a
 standalone service that analyzes images and uploads the result to Docker Scout.
 You can view the results using the
-[Docker Scout web UI](https://dso.docker.com/){: target="\_blank" rel="noopener"
+[Docker Scout Dashboard](https://scout.docker.com/){: target="\_blank" rel="noopener"
 }.
 
 ### How the agent works
@@ -183,9 +183,9 @@ line flag.
 
 ### View analysis results
 
-You can view the image analysis results in the Docker Scout web UI.
+You can view the image analysis results in the Docker Scout Dashboard.
 
-1. Go to [Docker Scout web UI](https://dso.docker.com).
+1. Go to [Docker Scout Dashboard](https://scout.docker.com).
 2. Sign in using your Docker ID.
 
    Once signed in, you're taken to the **Images** page. This page displays the
