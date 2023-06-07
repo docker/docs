@@ -22,7 +22,7 @@ The **Overview** tab shows the total number of vulnerabilities across all your S
 Enable Docker Scout analysis on repositories in the current organization by selecting your profile
 picture and then the **Repository settings** menu item.
 
-Select the check boxes for the repositories on which you want to enable Docker Scout analysis and
+Select the checkboxes for the repositories on which you want to enable Docker Scout analysis and
 select **Enable image analysis**.
 
 When you enable image analysis for a repository, Docker Scout analyzes new tags
