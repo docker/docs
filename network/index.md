@@ -52,7 +52,7 @@ Here are some examples:
 > the outside world as well.
 >
 > If you include the localhost IP address (`127.0.0.1`) with the publish flag,
-> only the Docker host can the published container port.
+> only the Docker host can access the published container port.
 >
 > ```console
 > $ docker run -p 127.0.0.1:8080:80 nginx
