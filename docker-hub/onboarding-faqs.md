@@ -1,5 +1,6 @@
 ---
-description: Frequently asked questions
+title: "Frequent asked questions"
+description: Frequently asked administration and security questions
 keywords: onboarding, docker, teams, orgs
 toc_max: 2
 ---
@@ -40,6 +41,10 @@ The organization name, sometimes referred to as the organization namespace or th
 ### What’s a team?
 
 A **Team** is a group of Docker users that belong to an organization. An organization can have multiple teams. When you first create an organization, you’ll see that you have a team, the owners team, with a single member. An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. [Learn more](manage-a-team.md).
+
+### What's a company?
+
+A **Company** is a management layer that centralizes administration of multiple organizations. Administrators can add organizations with a Docker Business subscription to a company and configure settings for all organizations under the company. [Learn more](creating-companies.md).
 
 ### Who is an organization owner?
 
