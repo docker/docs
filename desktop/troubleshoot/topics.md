@@ -1,5 +1,5 @@
 ---
-description: Troubleshooting topics
+description: Explore common troubleshooting topics for Docker Desktop
 keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop
 title: Troubleshoot topics
 toc_max: 4
@@ -313,7 +313,3 @@ C:\Program Files\Docker\docker.exe:
  image operating system "linux" cannot be used on this platform.
  See 'C:\Program Files\Docker\docker.exe run --help'.
 ```
-
-### Networking issues
-
-IPv6 is not (yet) supported on Docker Desktop.

@@ -2333,7 +2333,7 @@ work. Some insider builds may not work.
 **Known issues**
 
 * Only UTF-8 passwords are supported for host filesystem sharing
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/topics.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/known-issues.md).
 
 ### Beta 22 Release (2016-08-11 1.12.0-beta22)
 
@@ -2341,7 +2341,7 @@ Unreleased. See Beta 23 for changes.
 
 **Known issues**
 
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/topics.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/known-issues.md).
 
 ### Beta 21 Release (2016-07-28 1.12.0-beta21)
 
