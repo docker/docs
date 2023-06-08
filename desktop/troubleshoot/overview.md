@@ -1,6 +1,7 @@
 ---
-description: Troubleshooting, logs, and known issues
+description: Understand how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
 keywords: Linux, Mac, Windows, troubleshooting, logs, issues, Docker Desktop
+toc_max: 2
 title: Overview
 redirect_from:
 - /desktop/linux/troubleshoot/
@@ -18,7 +19,7 @@ redirect_from:
   target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
 %}
 
-This page contains information on how to diagnose and troubleshoot Docker Desktop issues and how to check the logs
+This page contains information on how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
 
 ## Troubleshoot menu
 
@@ -29,11 +30,11 @@ To navigate to **Troubleshoot** either:
 
 ![Troubleshoot menu in Docker Desktop](../images/troubleshoot.png){:width="600px"}
 
-The Troubleshoot page contains the following options:
+The **Troubleshoot** page contains the following options:
 
-- **Restart Docker Desktop**. Select to restart Docker Desktop.
+- **Restart Docker Desktop**.
 
-- **Support**. Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose) and [Support](../../support/index.md).
+- **Get support**. Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose) and [Support](../../support/index.md).
 
 - **Reset Kubernetes cluster**. Select to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../settings/linux.md#kubernetes).
 
@@ -43,159 +44,180 @@ reset to factory defaults. Selecting this option results in the loss of existing
 - **Reset to factory defaults**: Choose this option to reset all options on
 Docker Desktop to their initial state, the same as when Docker Desktop was first installed.
 
-If you are a Mac user, you also have the option to **Uninstall** Docker Desktop from your system.
+If you are a Mac or Linux user, you also have the option to **Uninstall** Docker Desktop from your system.
 
 ## Diagnose
 
 ### Diagnose from the app
-
-Make sure you are signed in to Docker Desktop and your [Docker Hub](https://hub.docker.com/){:target="_blank" rel="noopener" class="_"} account.
 
 1. From **Troubleshoot**, select **Get support**. 
 This opens the in-app **Support** page and starts collecting the diagnostics.
     ![Diagnose & Feedback](../images/diagnose-support.png){:width="600px"}
 2. When the diagnostics collection process is complete, select **Upload to get a Diagnostic ID**.
 3. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
-4. If you have a paid Docker subscription, select **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID** field. 
-5. Select **Submit** to request Docker Desktop support.
-   > **Note**
-    >
-    > You must be signed in to Docker Desktop using your Pro, Team, or Business tier credentials to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
-6. If you don't have a paid Docker subscription, select **Upgrade to benefit from Docker Support** to upgrade your existing account.
-    Alternatively, select **Report a Bug** to open a new Docker Desktop issue on GitHub. Complete the information required and ensure you add the diagnostic ID you copied earlier. 
-7. Select **submit new issue** to create a new issue.
+4. Use your diagnostics ID to get help:
+    - If you have a paid Docker subscription, select **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID** field. Then, select **Submit** to request Docker Desktop support.
+        > **Note**
+        >
+        > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
+    - If you don't have a paid Docker subscription, select **Report a Bug** to open a new Docker Desktop issue on GitHub. Complete the information required and ensure you add the diagnostic ID you copied in step three. 
 
 ### Diagnose from the terminal
 
-In some cases, it is useful to run the diagnostics yourself, for instance, if
+In some cases, it's useful to run the diagnostics yourself, for instance, if
 Docker Desktop cannot start.
 
-First, locate the `com.docker.diagnose` tool. It is located at:
+1. Locate the `com.docker.diagnose` tool:
 
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
-<li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
-<li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
-</ul>
-<div class="tab-content">
-<div id="windows1" class="tab-pane fade in active" markdown="1">
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
+    <li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
+    <li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="windows1" class="tab-pane fade in active" markdown="1">
 
-```console
-$ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
-```
+    ```console
+    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
+    ```
 
-</div>
-<div id="mac1" class="tab-pane fade" markdown="1">
+    </div>
+    <div id="mac1" class="tab-pane fade" markdown="1">
 
-```console
-$ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
-```
+    ```console
+    $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
+    ```
 
-</div>
-<div id="linux1" class="tab-pane fade" markdown="1">
+    </div>
+    <div id="linux1" class="tab-pane fade" markdown="1">
 
-```console
-$ /opt/docker-desktop/bin/com.docker.diagnose
-```
+    ```console
+    $ /opt/docker-desktop/bin/com.docker.diagnose
+    ```
 
-</div>
-</div>
+    </div>
+    </div>
+2. Create and upload the diagnostics ID. Run:
 
+    ```console
+    $ <tool location> gather -upload
+    ```
 
-To create and upload diagnostics, run:
+    After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
 
-```console
-$ <tool location> gather -upload
-```
+    To view the contents of the diagnostic file, run:
 
-After the diagnostics have finished, the terminal displays your diagnostics ID. The diagnostics ID is
-composed of your user ID and a timestamp. Ensure you provide the full diagnostics ID, and not just the user ID.
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#windows2">Windows</a></li>
+    <li><a data-toggle="tab" data-target="#mac2">Mac</a></li>
+    <li><a data-toggle="tab" data-target="#linux2">Linux</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="windows2" class="tab-pane fade in active" markdown="1">
+    <br>
+    1. Unzip the file. In PowerShell, copy and paste the path to the diagnostics file into the following command and then run it. It should be similar to the following example:
+        ```powershell
+        $ Expand-Archive -LiteralPath "C:\Users\testUser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602.zip" -DestinationPath "C:\Users\testuser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602"
+        ```  
+    2. Open the file in your preferred text editor. Run:
+        ```powershell
+        $ code <path-to-file>
+        ```
 
-To view the contents of the diagnostic file, run:
+    </div>
+    <div id="mac2" class="tab-pane fade" markdown="1">
 
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#mac2">Mac</a></li>
-<li><a data-toggle="tab" data-target="#linux2">Linux</a></li>
-</ul>
-<div class="tab-content">
-<div id="mac2" class="tab-pane fade in active" markdown="1">
+    ```console
+    $ open /tmp/<your-diagnostics-ID>.zip
+    ``` 
 
-```console
-$ open /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
-``` 
+    </div>
+    <div id="linux2" class="tab-pane fade" markdown="1">
 
-</div>
-<div id="linux2" class="tab-pane fade" markdown="1">
+    ```console
+    $ unzip –l /tmp/<your-diagnostics-ID>.zip
+    ``` 
 
-```console
-$ unzip –l /tmp/BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051.zip
-``` 
-
-</div>
-</div>
-
-If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Select **Submit** to request Docker Desktop support.
+    </div>
+    </div>
+3. Use your diagnostics ID to get help:
+    - If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Make sure you provide the full diagnostics ID, and not just the user ID. Select **Submit** to request Docker Desktop support.
+    - If you don't have a paid Docker subscription, create an issue on GitHub:
+        - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
+        - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
+        - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
 
 ### Self-diagnose tool
 
-Docker Desktop contains a self-diagnose tool which helps you to identify some common problems. 
+Docker Desktop contains a self-diagnose tool which can help you identify some common problems. 
 
-First, locate the `com.docker.diagnose` tool. It is located at:
+1. Locate the `com.docker.diagnose` tool. It is located at:
 
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
-<li><a data-toggle="tab" data-target="#mac3">Mac</a></li>
-<li><a data-toggle="tab" data-target="#linux3">Linux</a></li>
-</ul>
-<div class="tab-content">
-<div id="windows3" class="tab-pane fade in active" markdown="1">
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
+    <li><a data-toggle="tab" data-target="#mac3">Mac</a></li>
+    <li><a data-toggle="tab" data-target="#linux3">Linux</a></li>
+    </ul>
+    <div class="tab-content">
+    <div id="windows3" class="tab-pane fade in active" markdown="1">
 
-```console
-$ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
-```
+     ```console
+    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
+    ```
 
-</div>
-<div id="mac3" class="tab-pane fade" markdown="1">
+    </div>
+    <div id="mac3" class="tab-pane fade" markdown="1">
 
-```console
-$ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
-```
+    ```console
+    $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
+     ```
 
-</div>
-<div id="linux3" class="tab-pane fade" markdown="1">
+    </div>
+    <div id="linux3" class="tab-pane fade" markdown="1">
 
-```console
-$ /opt/docker-desktop/bin/com.docker.diagnose
-```
+    ```console
+    $ /opt/docker-desktop/bin/com.docker.diagnose
+    ```
 
-</div>
-</div>
+    </div>
+    </div>
+2. Run the self-diagnose tool:
 
-To run the self-diagnose tool, run:
+    ```console
+    $ <tool location> check
+    ```
 
-```console
-$ <tool location> check
-```
+    The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
 
-The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
-
-You can then create an issue on GitHub:
-- [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
-- [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
-- [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
+    You can then create an issue on GitHub:
+        - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
+        - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
+        - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
 
 ## Check the logs
 
 In addition to using the diagnose option to submit logs, you can browse the logs yourself.
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#mac4">Mac</a></li>
+<li class="active"><a data-toggle="tab" data-target="#windows4">Windows</a></li>
+<li><a data-toggle="tab" data-target="#mac4">Mac</a></li>
 <li><a data-toggle="tab" data-target="#linux4">Linux</a></li>
 </ul>
 <div class="tab-content">
-<div id="mac4" class="tab-pane fade in active" markdown="1">
+<div id="windows4" class="tab-pane fade in active" markdown="1">
+<br>
+In PowerShell, run:
 
-### In a terminal
+```powershell
+$ code $Env:LOCALAPPDATA\Docker\log
+```
+
+This opens up all the logs in your preferred text editor for you to explore.
+
+</div>
+<div id="mac4" class="tab-pane fade" markdown="1">
+
+### From terminal
 
 To watch the live flow of Docker Desktop logs in the command line, run the following script from your preferred shell.
 
@@ -210,7 +232,7 @@ Alternatively, to collect the last day of logs (`1d`) in a file, run:
 $ /usr/bin/log show --debug --info --style syslog --last 1d --predicate "$pred" >/tmp/logs.txt
 ```
 
-### In the Console app
+### From the Console app
 
 Mac provides a built-in log viewer, named **Console**, which you can use to check
 Docker logs.
@@ -225,16 +247,9 @@ To read the Docker app log messages, type `docker` in the Console window search 
 You can use the Console Log Query to search logs, filter the results in various
 ways, and create reports.
 
-### View the Docker daemon logs
-
-Refer to the [Read the daemon logs](../../config/daemon/logs.md) section
-to learn how to view the Docker Daemon logs.
-
 </div>
 <div id="linux4" class="tab-pane fade" markdown="1">
-
-### In a terminal
-
+<br>
 You can access Docker Desktop logs by running the following command:
 
 ```console
@@ -244,20 +259,16 @@ $ journalctl --user --unit=docker-desktop
 You can also find the logs for the internal components included in Docker
 Desktop at `$HOME/.docker/desktop/log/`.
 
-### View the Docker daemon logs
+</div>
+</div>
+
+## View the Docker daemon logs
 
 Refer to the [Read the daemon logs](../../config/daemon/logs.md) section
 to learn how to view the Docker Daemon logs.
 
-</div>
-</div>
+## Further resources
 
-## What's next?
-
-- View [Troubleshoot topics](topics.md).
+- View specific [troubleshoot topics](topics.md).
 - Implement [workarounds for common problems](workarounds.md)
-- If you're a Mac user, see [Known issues for Mac](known-issues.md)
-
-
-
-
+- View information on [known issues](known-issues.md)
