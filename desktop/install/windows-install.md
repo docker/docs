@@ -164,9 +164,10 @@ The `install` command accepts the following flags:
 - `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. Uses a comma-separated list.
-- `--hyper-v-default-data-root=<path>`: Specifies the default location for the Hyper-V VM disk 
-- `--windows-containers-default-data-root=<path>`: Specifies the default location for the Windows containers
-- `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk
+- `--hyper-v-default-data-root=<path>`: Specifies the default location for the Hyper-V VM disk. 
+- `--windows-containers-default-data-root=<path>`: Specifies the default location for the Windows containers.
+- `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk.
+- `--always-run-service`: Lets users switch to Windows containers without needing admin rights. 
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 
