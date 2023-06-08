@@ -1,5 +1,5 @@
 ---
-description: Cchange your Docker Desktop settings on Linux
+description: Change your Docker Desktop settings on Linux
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Linux
 title: Change on Linux
 ---

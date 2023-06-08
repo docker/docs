@@ -1,5 +1,5 @@
 ---
-description: Find the best way to provide feedback that's right for you
+description: Find a way to provide feedback that's right for you
 keywords: Feedback, Docker Desktop, Linux, Mac, Windows, Dev Environments, Extensions, Community forum, bugs, problems, issues
 title: Give feedback
 ---
