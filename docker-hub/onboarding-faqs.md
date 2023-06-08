@@ -1,5 +1,5 @@
 ---
-title: "Frequent asked questions"
+title: "Frequently asked questions"
 description: Frequently asked administration and security questions
 keywords: onboarding, docker, teams, orgs
 toc_max: 2
