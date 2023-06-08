@@ -1,5 +1,5 @@
 ---
-description: Release notes for Docker Desktop for Mac, Linux, Windows
+description: Release notes for Docker Desktop for Mac, Linux, and Windows
 keywords: Docker desktop, release notes, linux, mac, windows
 title: Docker Desktop release notes
 toc_max: 2

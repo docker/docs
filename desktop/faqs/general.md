@@ -1,5 +1,5 @@
 ---
-description: General Frequently asked questions
+description: Common frequently asked questions for all platforms
 keywords: desktop, mac, windows, faqs
 redirect_from:
 - /mackit/faqs/

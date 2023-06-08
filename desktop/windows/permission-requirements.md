@@ -1,5 +1,5 @@
 ---
-description: Permission requirements for Docker Desktop for Windows
+description: Understand permission requirements for Docker Desktop for Windows
 keywords: Docker Desktop, Windows, security, install
 title: Understand permission requirements for Windows
 redirect_from:

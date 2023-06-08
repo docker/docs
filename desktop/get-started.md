@@ -1,5 +1,5 @@
 ---
-description: Docker Dashboard
+description: Explore the learning center and understand the benefits of signing in to Docker Desktop
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, learning center, guide, sign in
 title: Learning Center and sign in
 redirect_from:
