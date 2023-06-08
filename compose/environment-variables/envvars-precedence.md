@@ -1,6 +1,6 @@
 ---
 title: Environment variables precedence
-description: Scenario Overview illustrating how environment variables are resolved in Compose
+description: Scenario overview illustrating how environment variables are resolved in Compose
 keywords: compose, environment, env file
 redirect_from:
 - /compose/envvars-precedence/

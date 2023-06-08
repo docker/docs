@@ -1,5 +1,5 @@
 ---
-title: Using secrets in Compose
+title: How to use secrets in Docker Compose
 description: How to use secrets in Compose and their benefits
 keywords: secrets, compose, security, environment variables
 ---

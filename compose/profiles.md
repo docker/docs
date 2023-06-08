@@ -1,6 +1,6 @@
 ---
 title: Using profiles with Compose
-desription: Using profiles with Compose
+desription: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
 ---
 {% include compose-eol.md %}
