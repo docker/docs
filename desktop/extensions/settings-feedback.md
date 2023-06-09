@@ -6,7 +6,7 @@ title: Settings and feedback
 
 ## Settings
 
-### Turn on or turn off extensions available in the Marketplace
+### Turn on or turn off extensions
 
 Docker Extensions is switched on by default. To change your settings:
 
@@ -14,6 +14,13 @@ Docker Extensions is switched on by default. To change your settings:
 2. Select the **Extensions** tab.
 3. Next to **Enable Docker Extensions**, select or clear the checkbox to set your desired state.
 4. In the bottom-right corner, select **Apply & Restart**.
+
+>**Note**
+>
+> If you are an [organization owner](../../docker-hub/manage-a-team.md#the-owners-team), you can turn off extensions for your users. Navigate to the `settings.json` file, and set `"extensionsEnabled"` to `false`. 
+> The `settings.json` file is located at:
+>   - `~/Library/Group Containers/group.com.docker/settings.json` on Mac
+>   - `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json` on Windows
 
 ### Turn on or turn off extensions not available in the Marketplace
 
