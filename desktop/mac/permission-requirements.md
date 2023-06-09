@@ -1,5 +1,5 @@
 ---
-description: Permission requirements for Docker Desktop for Mac
+description: Understand permission requirements for Docker Desktop for Mac and the differences between versions
 keywords: Docker Desktop, mac, security, install, permissions
 title: Understand permission requirements for Mac
 redirect_from:

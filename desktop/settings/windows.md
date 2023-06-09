@@ -1,5 +1,5 @@
 ---
-description: Docker Desktop settings
+description: Change your Docker Desktop settings on Windows
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Windows
 title: Change Docker Desktop settings on Windows
 ---

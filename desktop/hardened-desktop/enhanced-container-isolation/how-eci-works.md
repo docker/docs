@@ -1,5 +1,5 @@
 ---
-description: Instructions on how to set up enhanced container isolation
+description: How Enhanced Container Isolation works
 title: How does it work?
 keywords: set up, enhanced container isolation, rootless, security
 ---

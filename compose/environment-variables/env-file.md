@@ -1,5 +1,5 @@
 ---
-description: Declare default environment variables in a file
+description: Understand the accepted syntax for declaring environment variables.
 keywords: fig, composition, compose, docker, orchestration, environment, env file
 title: Use an environment file
 redirect_from:
@@ -34,7 +34,7 @@ The following syntax rules apply to environment files:
   - `VAR='some\tvalue'` -> `some\tvalue`
   - `VAR=some\tvalue` -> `some\tvalue`
 
-### Parameter Expansion
+### Parameter expansion
 Compose supports parameter expansion in environment files.
 Parameter expansion is applied for unquoted and double-quoted values.
 Both braced (`${VAR}`) and unbraced (`$VAR`) expressions are supported.

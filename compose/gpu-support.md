@@ -1,5 +1,5 @@
 ---
-description: GPU support in Compose
+description: Understand GPU support in Docker Compose
 keywords: documentation, docs, docker, compose, GPU access, NVIDIA, samples
 title: Enabling GPU access with Compose
 ---

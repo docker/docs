@@ -1,5 +1,5 @@
 ---
-description: Networking on Docker Desktop
+description: Understand how networking works on Docker Desktop and see the known limitations
 keywords: networking, docker desktop, proxy, vpn, Linux, Mac, Windows
 title: Explore networking features
 redirect_from:

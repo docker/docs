@@ -1,5 +1,5 @@
 ---
-description: Docker Dashboard
+description: Understand what you can do with the Containers view on Docker Dashboard
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual
 title: Explore Containers
 ---

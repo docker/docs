@@ -1,5 +1,5 @@
 ---
-description: Docker Desktop settings
+description: Change your Docker Desktop settings on Mac
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Mac
 title: Change preferences on Mac
 redirect_from:
