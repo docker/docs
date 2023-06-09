@@ -1,0 +1,84 @@
+---
+description: Turn on the Docker WSL 2 backend and get to work using best practices, GPU support, and more in this thorough guide. 
+keywords: wsl, wsl2, installing wsl2, wsl installation, docker wsl2, wsl docker, wsl2 tech preview, wsl install docker, install docker wsl, how to install docker in wsl
+redirect_from:
+- /docker-for-windows/wsl/
+- /docker-for-windows/wsl-tech-preview/
+- /desktop/windows/wsl/
+title: Docker Desktop WSL 2 backend on Windows
+---
+
+Windows Subsystem for Linux (WSL) 2 is a full Linux kernel built by Microsoft, which allows Linux distributions to run without managing virtual machines. With Docker Desktop running on WSL 2, users can leverage Linux workspaces and avoid maintaining both Linux and Windows build scripts. In addition, WSL 2 provides improvements to file system sharing and boot time.
+
+Docker Desktop uses the dynamic memory allocation feature in WSL 2 to improve the resource consumption. This means, Docker Desktop only uses the required amount of CPU and memory resources it needs, while enabling CPU and memory-intensive tasks such as building a container, to run much faster.
+
+Additionally, with WSL 2, the time required to start a Docker daemon after a cold start is significantly faster. It takes less than 10 seconds to start the Docker daemon compared to almost a minute in the previous version of Docker Desktop.
+
+## Prerequisites
+
+Before you turn on the Docker Desktop WSL 2, ensure you have:
+
+- WSL version 1.1.3.0 or above.
+- Windows 10, version 21H2 or higher, or Windows 11, version 21H2 or higher. For more information, see [System requirements](https://docs.docker.com/desktop/install/windows-install/#system-requirements).
+- Enabled WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}.
+- Downloaded and installed the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){:target="_blank" rel="noopener" class="_"}.
+
+## Turn on Docker Desktop WSL 2
+
+1. Download [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
+2. Follow the usual installation instructions to install Docker Desktop. If you are running a supported system, Docker Desktop prompts you to enable WSL 2 during installation. Read the information displayed on the screen and enable WSL 2 to continue.
+3. Start Docker Desktop from the **Windows Start** menu.
+4. From the Docker menu, select **Settings** and then **General**.
+5. Select the **Use WSL 2 based engine** check box.
+
+    If you have installed Docker Desktop on a system that supports WSL 2, this option is enabled by default.
+6. Select **Apply & Restart**.
+
+Now `docker` commands work from Windows using the new WSL 2 engine.
+
+## Enabling Docker support in WSL 2 distros
+
+WSL 2 adds support for "Linux distros" to Windows, where each distro behaves like a VM except they all run on top of a single shared Linux kernel.
+
+Docker Desktop does not require any particular Linux distros to be installed. The `docker` CLI and UI all work fine from Windows without any additional Linux distros. However for the best developer experience, we recommend installing at least one additional distro and enabling Docker support by:
+
+1. Ensure the distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.
+
+    To check the WSL mode, run:
+
+     ```console
+     $ wsl.exe -l -v
+     ```
+
+    To upgrade your existing Linux distro to v2, run:
+
+    ```console
+    $ wsl.exe --set-version (distro name) 2
+    ```
+
+    To set v2 as the default version for future installations, run:
+
+    ```console
+    $ wsl.exe --set-default-version 2
+    ```
+
+2. When Docker Desktop starts, go to **Settings** > **Resources** > **WSL Integration**.
+
+    The Docker-WSL integration is enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`
+
+    For example, to set Ubuntu as your default WSL distro, run:
+    
+    ```console
+    $ wsl --set-default ubuntu
+    ```
+
+    Optionally, select any additional distributions you would like to enable the Docker-WSL integration on.
+
+3. Select **Apply & Restart**.
+
+> **Note**
+>
+> Docker Desktop installs two special-purpose internal Linux distros `docker-desktop` and `docker-desktop-data`. The first (`docker-desktop`) is used to run the Docker engine (`dockerd`) while the second (`docker-desktop-data`) stores containers and images. Neither can be used for general development.
+
+
+
