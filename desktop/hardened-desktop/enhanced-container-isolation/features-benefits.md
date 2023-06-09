@@ -1,5 +1,5 @@
 ---
-description: Instructions on how to set up enhanced container isolation
+description: The benefits of enhanced container isolation
 title: Key features and benefits
 keywords: set up, enhanced container isolation, rootless, security, features, Docker Desktop
 ---

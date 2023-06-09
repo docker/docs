@@ -1,7 +1,6 @@
 ---
 description: How to uninstall Docker Compose
 keywords: compose, orchestration, uninstall, uninstallation, docker, documentation
-
 title: Uninstall Docker Compose
 ---
 

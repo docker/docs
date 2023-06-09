@@ -1,5 +1,5 @@
 ---
-title: Using secrets in Compose
+title: How to use secrets in Docker Compose
 description: How to use secrets in Compose and their benefits
 keywords: secrets, compose, security, environment variables
 ---
@@ -7,8 +7,6 @@ keywords: secrets, compose, security, environment variables
 A secret is any piece of data, such as a password, certificate, or API key, that shouldn’t be transmitted over a network or stored unencrypted in a Dockerfile or in your application’s source code.
 
 Docker Compose provides a way for you to use secrets without having to use environment variables to store information. If you’re injecting passwords and API keys as environment variables, you risk unintentional information exposure. Environment variables are often available to all processes, and it can be difficult to track access. They can also be printed in logs when debugging errors without your knowledge. Using secrets mitigates these risks.
-
-Secrets are also useful for locally replicating a remote development setup with Kubernetes. Using secrets makes your application scalable.
 
 ## Use secrets
 

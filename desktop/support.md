@@ -1,5 +1,5 @@
 ---
-description: Docker Desktop support
+description: See what support is available for Docker Desktop
 keywords: Support, Docker Desktop, Linux, Mac, Windows
 title: Get support
 ---
