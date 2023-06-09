@@ -1,5 +1,5 @@
 ---
-description: Settings Management for desktop
+description: Understand how Settings Management works, who it is for, and what the benefits are
 keywords: Settings Management, rootless, docker desktop, hardened desktop
 title: What is Settings Management?
 ---

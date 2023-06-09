@@ -1,5 +1,5 @@
 ---
-description: Docker Compose FAQ
+description: Frequently asked questions for Docker Compose
 keywords: documentation, docs,  docker, compose, faq
 title: Frequently asked questions
 ---

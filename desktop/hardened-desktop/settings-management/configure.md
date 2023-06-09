@@ -1,5 +1,5 @@
 ---
-description: settings management for desktop
+description: How to configure Settings Management for Docker Desktop
 keywords: admin, controls, rootless, enhanced container isolation
 title: Configure Settings Management
 ---

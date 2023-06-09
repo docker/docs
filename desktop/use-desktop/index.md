@@ -1,5 +1,5 @@
 ---
-description: Docker Dashboard
+description: Understand what you can do with Docker Dashboard
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, whale menu
 title: Overview
 redirect_from:
