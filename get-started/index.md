@@ -92,7 +92,7 @@ You'll dive deeper into images later on in this guide, covering topics such as l
 
 In this section, you learned about containers and images.
 
-In the next section, you'll containerize your first application.
+In the next section, you will containerize your first application.
 
 [Containerize an application](02_our_app.md){: .button  .primary-btn}
 
