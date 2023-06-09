@@ -6,7 +6,7 @@ redirect_from:
 description: Follow this step-by-step guide to learn how to create and run a containerized application using Docker
 ---
 
-For the rest of this guide, you'll be working with a simple todo
+For the rest of this guide, you'll be working with a simple to-do
 list manager that runs on Node.js. If you're not familiar with Node.js,
 don't worry. This guide doesn't require any prior experience with JavaScript.
 
