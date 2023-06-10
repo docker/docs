@@ -4,11 +4,11 @@ keywords: get started, setup, orientation, quickstart, intro, concepts, containe
 description: Making changes to our example learning application
 ---
 
-In [part 2](./02_our_app.md), you containerized a todo application. In this part, you will update the application and container image. You will also learn how to stop and remove a container.
+In [part 2](./02_our_app.md), you containerized a to-do application. In this part, you will update the application and container image. You will also learn how to stop and remove a container.
 
 ## Update the source code
 
-In the steps below, you will change the "empty text" when you don't have any todo list items to "You have no todo items yet! Add one above!"
+In the steps below, you will change the "empty text" when you don't have any to-do list items to "You have no to-do items yet! Add one above!"
 
 
 1. In the `src/static/js/app.js` file, update line 56 to use the new empty text.
