@@ -1,5 +1,5 @@
 ---
-description: Docker Desktop settings
+description: Change your Docker Desktop settings on Linux
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Linux
 title: Change on Linux
 ---
@@ -36,7 +36,7 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
 
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
+  use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
 
 ## Resources
 
@@ -142,7 +142,7 @@ edit the file using your favorite text editor.
 >
 > Only the **Docker Desktop** daemon uses the configuration file under `$HOME/.docker`.
 > If you manually install Docker Engine alongside Docker Desktop, the manually
-> installed instance uses a `dameon.json` configuration file in a  different location.
+> installed instance uses a `daemon.json` configuration file in a  different location.
 > Refer to [Configure the daemon](../../config/daemon/index.md) for more information
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 

@@ -1,12 +1,13 @@
 ---
-description: How to install Docker Compose on Linux
-keywords: compose, orchestration, install, installation, docker, documentation
+description: Download and install Docker Compose on Linux with this step-by-step handbook. This plugin can be installed manually or by using a repository.
+keywords: install docker compose linux, docker compose linux, docker compose plugin, docker-compose-plugin, linux install docker compose, install docker-compose linux, linux install docker-compose, linux docker compose, docker compose v2 linux, install docker compose on linux
 toc_max: 3
 title: Install the Compose plugin
 redirect_from:
 - /compose/compose-plugin/
 - /compose/compose-linux/
 ---
+{% include compose-eol.md %}
 
 On this page you can find instructions on how to install the Compose plugin on Linux from the command line.
 
@@ -17,9 +18,9 @@ To install the Compose plugin on Linux, you can either:
 > **Note**
 >
 > These instructions assume you already have Docker Engine and Docker CLI installed and now want to install the Compose plugin.  
-For Compose standalone, see [Install Compose Standalone](other.md).
+For Compose standalone, see [Install Compose Standalone](standalone.md).
 
-### Install using the repository
+## Install using the repository
 
 1. Set up the repository. Find distro-specific instructions in:
 
@@ -54,7 +55,7 @@ For Compose standalone, see [Install Compose Standalone](other.md).
 
 Where `vN.N.N` is placeholder text standing in for the latest version.
 
-#### Update Compose
+### Update Compose
 
 To update the Compose plugin, run the following commands:
 
@@ -71,7 +72,7 @@ To update the Compose plugin, run the following commands:
     $ sudo yum install docker-compose-plugin
     ```
 
-### Install the plugin manually
+## Install the plugin manually
 
 > **Note**
 >

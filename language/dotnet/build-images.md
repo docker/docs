@@ -155,7 +155,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 as runtime
 Next, specify the working directory for this stage.
 
 ```dockerfile
-WORKDIR /app
+WORKDIR /publish
 ```
 
 Next, copy the /publish directory from the build-env stage into the runtime image.

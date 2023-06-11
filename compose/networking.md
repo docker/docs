@@ -1,8 +1,9 @@
 ---
-description: How Compose sets up networking between containers
+description: How Docker Compose sets up networking between containers
 keywords: documentation, docs, docker, compose, orchestration, containers, networking
 title: Networking in Compose
 ---
+{% include compose-eol.md %}
 
 By default Compose sets up a single
 [network](../engine/reference/commandline/network_create.md){: target="_blank" rel="noopener" class="_" } for your app. Each
@@ -15,7 +16,7 @@ identical to the container name.
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
 > project name with either the [`--project-name` flag](reference/index.md){: target="_blank" rel="noopener" class="_" }
-> or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name){: target="_blank" rel="noopener" class="_" }.
+> or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name){: target="_blank" rel="noopener" class="_" }.
 
 For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
 
@@ -53,7 +54,7 @@ the service is accessible outside the swarm as well.
 
 Within the `web` container, your connection string to `db` would look like
 `postgres://db:5432`, and from the host machine, the connection string would
-look like `postgres://{DOCKER_IP}:8001`.
+look like `postgres://{DOCKER_IP}:8001` for example `postgres://localhost:8001` if your container is running locally.
 
 ## Update containers on the network
 
@@ -81,14 +82,14 @@ services:
     image: postgres
 ```
 
-See the [links reference](compose-file/index.md#links) for more information.
+See the [links reference](compose-file/05-services.md#links) for more information.
 
 ## Multi-host networking
 
 When deploying a Compose application on a Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
 you can make use of the built-in `overlay` driver to enable multi-host communication.
 
-Overlay networks are always created as `attachable`. You can optionally set the [`attachable`](compose-file/index.md#attachable) property to `false`.
+Overlay networks are always created as `attachable`. You can optionally set the [`attachable`](compose-file/06-networks.md#attachable) property to `false`.
 
 Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
 a Swarm cluster, and the [Getting started with multi-host networking](../network/network-tutorial-overlay.md)
@@ -130,9 +131,9 @@ networks:
       bar: "2"
 ```
 
-Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/index.md#ipv4_address-ipv6_address) for each attached network.
+Networks can be configured with static IP addresses by setting the [ipv4_address and/or ipv6_address](compose-file/05-services.md#ipv4_address-ipv6_address) for each attached network.
 
-Networks can also be given a [custom name](compose-file/index.md#name):
+Networks can also be given a [custom name](compose-file/06-networks.md#name):
 
 ```yaml
 services:
@@ -164,7 +165,7 @@ networks:
 
 ## Use a pre-existing network
 
-If you want your containers to join a pre-existing network, use the [`external` option](compose-file/index.md#external)
+If you want your containers to join a pre-existing network, use the [`external` option](compose-file/06-networks.md#external)
 ```yaml
 services:
   # ...
@@ -180,5 +181,5 @@ Instead of attempting to create a network called `[projectname]_default`, Compos
 
 For full details of the network configuration options available, see the following references:
 
-- [Top-level `networks` key](compose-file/index.md#networks-top-level-element)
-- [Service-level `networks` key](compose-file/index.md#networks)
+- [Top-level `networks` key](compose-file/06-networks.md)
+- [Service-level `networks` key](compose-file/05-services.md#networks)

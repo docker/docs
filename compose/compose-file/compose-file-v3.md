@@ -1,15 +1,15 @@
 ---
-description: Compose file reference
-keywords: fig, composition, compose version 3, docker
+description: Find a quick reference for Docker Compose version 3, including Docker Engine compatibility, memory limitations, and more. 
+keywords: docker compose ports, docker compose version 3, docker-compose memory limit version 3, docker compose 3 memory limit
 title: Compose file version 3 reference
 toc_max: 4
 toc_min: 1
 ---
+{% include compose-eol.md %}
 
 ## Reference and guidelines
 
-These topics describe version 3 of the Compose file format. This is the newest
-version.
+These topics describe version 3 of the Compose file format.
 
 ## Compose and Docker compatibility matrix
 

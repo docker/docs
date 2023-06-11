@@ -22,13 +22,13 @@ define its optimal state (number of replicas, network and storage resources
 available to it, ports the service exposes to the outside world, and more).
 Docker works to maintain that desired state. For instance, if a worker node
 becomes unavailable, Docker schedules that node's tasks on other nodes. A _task_
-is a running container which is part of a swarm service and managed by a swarm
-manager, as opposed to a standalone container.
+is a running container which is part of a swarm service and is managed by a
+swarm manager, as opposed to a standalone container.
 
 One of the key advantages of swarm services over standalone containers is that
 you can modify a service's configuration, including the networks and volumes it
 is connected to, without the need to manually restart the service. Docker will
-update the configuration, stop the service tasks with the out of date
+update the configuration, stop the service tasks with out of date
 configuration, and create new ones matching the desired configuration.
 
 When Docker is running in swarm mode, you can still run standalone containers
@@ -41,7 +41,7 @@ workers, or both.
 In the same way that you can use [Docker Compose](../../compose/index.md) to define and run
 containers, you can define and run [Swarm service](services.md) stacks.
 
-Keep reading for details about concepts relating to Docker swarm services,
+Keep reading for details about concepts related to Docker swarm services,
 including nodes, services, tasks, and load balancing.
 
 ## Nodes

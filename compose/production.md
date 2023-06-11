@@ -3,6 +3,7 @@ description: Guide to using Docker Compose in production
 keywords: compose, orchestration, containers, production
 title: Use Compose in production
 ---
+{% include compose-eol.md %}
 
 When you define your app with Compose in development, you can use this
 definition to run your application in different environments such as CI,
@@ -22,7 +23,7 @@ production. These changes might include:
 - Binding to different ports on the host
 - Setting environment variables differently, such as reducing the verbosity of
   logging, or to specify settings for external services such as an email server
-- Specifying a restart policy like [`restart: always`](compose-file/index.md#restart){: target="_blank" rel="noopener" class="_" } to avoid downtime
+- Specifying a restart policy like [`restart: always`](compose-file/05-services.md#restart){: target="_blank" rel="noopener" class="_" } to avoid downtime
 - Adding extra services such as a log aggregator
 
 For this reason, consider defining an additional Compose file, say
@@ -59,7 +60,7 @@ recreating any services which `web` depends on.
 
 You can use Compose to deploy an app to a remote Docker host by setting the
 `DOCKER_HOST`, `DOCKER_TLS_VERIFY`, and `DOCKER_CERT_PATH` environment variables
-appropriately. See also [Compose CLI environment variables](reference/envvars.md).
+appropriately. See also [Compose CLI environment variables](environment-variables/envvars.md).
 
 Once you've set up your environment variables, all the normal `docker compose`
 commands work with no further configuration.

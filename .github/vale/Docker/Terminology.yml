@@ -1,0 +1,11 @@
+extends: substitution
+message: "Consider using '%s' instead of '%s'"
+link: https://docs.docker.com/contribute/style/terminology/
+level: suggestion
+action:
+  name: replace
+swap:
+  '(?<!Docker )[Hh]ub': Docker Hub
+  '(?<!Docker )[Ss]cout': Docker Scout
+  scan: analyze
+  Scan: Analyze

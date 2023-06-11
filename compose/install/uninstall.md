@@ -1,7 +1,6 @@
 ---
 description: How to uninstall Docker Compose
 keywords: compose, orchestration, uninstall, uninstallation, docker, documentation
-
 title: Uninstall Docker Compose
 ---
 
@@ -10,7 +9,7 @@ Uninstalling Docker Compose depends on the method you have used to install Docke
 
 ### Uninstalling Docker Desktop
 
-If you want to uninstall Compose and you have installed Docker Desktop, see, [Uninstall Docker Desktop](../../desktop/uninstall.md) follow the corresponding link bellow to get instructions on how to remove Docker Desktop.
+If you want to uninstall Compose and you have installed Docker Desktop, see [Uninstall Docker Desktop](../../desktop/uninstall.md).
 
 > **Note**
 >

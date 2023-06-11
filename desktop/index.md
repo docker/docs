@@ -1,6 +1,6 @@
 ---
-description: Docker Desktop overview
-keywords: Docker Desktop, Docker, features, GUI, linux, mac, windows
+description: Explore more of Docker Desktop, what it has to offer, and its key features. Take the next step by downloading or find additional resources.
+keywords: how to use docker desktop, what is docker desktop used for, what does docker desktop do, using docker desktop
 title: Docker Desktop
 redirect_from:
 - /desktop/opensource/
@@ -9,12 +9,6 @@ redirect_from:
 - /docker-for-windows/dashboard/
 - /docker-for-windows/opensource/
 ---
-
-> **Docker Desktop terms**
->
-> Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) requires a paid
-> subscription.
 
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
 that enables you to build and share containerized applications and microservices. 

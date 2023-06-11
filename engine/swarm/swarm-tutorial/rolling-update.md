@@ -40,7 +40,7 @@ Redis 3.0.7 container image using rolling updates.
 
     By default, when an update to an individual task returns a state of
     `RUNNING`, the scheduler schedules another task to update until all tasks
-    are updated. If, at any time during an update a task returns `FAILED`, the
+    are updated. If at any time during an update a task returns `FAILED`, the
     scheduler pauses the update. You can control the behavior using the
     `--update-failure-action` flag for `docker service create` or
     `docker service update`.

@@ -1,5 +1,5 @@
 ---
-description: Pause Docker Dashboard
+description: understand what pausing Docker Dashboard means
 keywords: Docker Dashboard, manage, containers, gui, dashboard, pause, user manual
 title: Pause Docker Desktop
 ---

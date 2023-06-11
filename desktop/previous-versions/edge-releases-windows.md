@@ -210,7 +210,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### New
 
-- In partnership with Snyk, Docker Desktop launches [vulnerability scanning](../../engine/scan/index.md) for Docker local images.
+- In partnership with Snyk, Docker Desktop launches vulnerability scanning for Docker local images.
 - Docker ECS plugin has been replaced by [ECS cloud integration](/engine/context/ecs-integration/)
 - Docker UI:
   - The Images view now has search and filter options.
@@ -2333,7 +2333,7 @@ work. Some insider builds may not work.
 **Known issues**
 
 * Only UTF-8 passwords are supported for host filesystem sharing
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/topics.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/known-issues.md).
 
 ### Beta 22 Release (2016-08-11 1.12.0-beta22)
 
@@ -2341,7 +2341,7 @@ Unreleased. See Beta 23 for changes.
 
 **Known issues**
 
-* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/topics.md#networking-issues).
+* Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc` as documented in [Troubleshooting](../troubleshoot/known-issues.md).
 
 ### Beta 21 Release (2016-07-28 1.12.0-beta21)
 

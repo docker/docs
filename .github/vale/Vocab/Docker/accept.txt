@@ -1,4 +1,5 @@
 (Certified|Verified) Publisher( Program)?
+Docker-Sponsored Open Source
 Autotest
 BuildKit
 Docker
@@ -24,3 +25,6 @@ Swarm Mode
 [Mm]oby
 dockerd
 dockerignore
+Docker Hub Vulnerability Scanning
+Docker Vulnerability Scanning
+Basic vulnerability scanning

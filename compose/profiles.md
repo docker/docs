@@ -1,8 +1,9 @@
 ---
 title: Using profiles with Compose
-desription: Using profiles with Compose
+desription: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
 ---
+{% include compose-eol.md %}
 
 Profiles help you adjust the Compose application model for various uses and
 environments by selectively enabling services.
@@ -17,11 +18,10 @@ development tasks.
 ## Assigning profiles to services
 
 Services are associated with profiles through the
-[`profiles` attribute](compose-file/index.md#profiles) which takes an
+[`profiles` attribute](compose-file/05-services.md#profiles) which takes an
 array of profile names:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   frontend:
     image: frontend
@@ -59,7 +59,7 @@ Valid profiles names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 ## Enable profiles
 
 To enable profiles supply the `--profile` [command-line option](reference/index.md) or
-use the [`COMPOSE_PROFILES` environment variable](reference/envvars.md#compose_profiles):
+use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console
 $ docker compose --profile debug up
@@ -90,10 +90,9 @@ $ COMPOSE_PROFILES=frontend,debug docker compose up
 When a service with assigned `profiles` is explicitly targeted on the command
 line its profiles are enabled automatically so you don't need to enable them
 manually. This can be used for one-off services and debugging tools.
-As an example consider the folowing configuration:
+As an example consider the following configuration:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   backend:
     image: backend
@@ -127,7 +126,6 @@ This means that any other services the targeted service `depends_on` should eith
 - Always be enabled, by omitting `profiles` or having a matching profile enabled explicitly
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
 services:
   web:
     image: web
@@ -182,4 +180,4 @@ $ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 
 ## Reference information
 
-[`profiles`](compose-file/index.md#profiles)
+[`profiles`](compose-file/05-services.md#profiles)

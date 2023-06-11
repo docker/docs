@@ -13,12 +13,10 @@ In the steps below, you will change the "empty text" when you don't have any tod
 
 1. In the `src/static/js/app.js` file, update line 56 to use the new empty text.
 
-    ```diff
-    ...
-    -                <p className="text-center">No items yet! Add one above!</p>
-    +                <p className="text-center">You have no todo items yet! Add one above!</p>
-    ...
-    ```
+   ```diff
+   - <p className="text-center">No items yet! Add one above!</p>
+   + <p className="text-center">You have no todo items yet! Add one above!</p>
+   ```
 
 2. Build your updated version of the image, using the same `docker build` command you used in [part 2](./02_our_app.md/#build-the-apps-container-image){:target="_blank" rel="noopener" class="_"}.
 
@@ -83,7 +81,7 @@ To remove a container, you first need to stop it. Once it has stopped, you can r
 ### Remove a container using Docker Desktop
 
 1. Open Docker Desktop to the **Containers** view.
-2. Select the trash can icon under the **Actions** column for the old container that you want to delete.
+2. Select the trash can icon under the **Actions** column for the old, currently running container that you want to delete.
 3. In the confirmation dialog, select **Delete forever**.
 
 <hr>

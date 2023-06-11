@@ -3,6 +3,7 @@ description: How to use Docker Compose's extends keyword to share configuration 
 keywords: fig, composition, compose, docker, orchestration, documentation, docs
 title: Share Compose configurations between files and projects
 ---
+{% include compose-eol.md %}
 
 Compose supports two methods of sharing common configuration:
 
@@ -13,7 +14,7 @@ Compose supports two methods of sharing common configuration:
 
 ## Multiple Compose files
 
-Using multiple Compose files lets you to customize a Compose application
+Using multiple Compose files lets you customize a Compose application
 for different environments or different workflows.
 
 ### Understanding multiple Compose files
@@ -61,17 +62,18 @@ services.
 **docker-compose.yml**
 
 ```yaml
-web:
-  image: example/my_web_app:latest
-  depends_on:
-    - db
-    - cache
+services:
+  web:
+    image: example/my_web_app:latest
+    depends_on:
+      - db
+      - cache
 
-db:
-  image: postgres:latest
+  db:
+    image: postgres:latest
 
-cache:
-  image: redis:latest
+  cache:
+    image: redis:latest
 ```
 
 In this example the development configuration exposes some ports to the
@@ -80,23 +82,24 @@ host, mounts our code as a volume, and builds the web image.
 **docker-compose.override.yml**
 
 ```yaml
-web:
-  build: .
-  volumes:
-    - '.:/code'
-  ports:
-    - 8883:80
-  environment:
-    DEBUG: 'true'
+services:
+  web:
+    build: .
+    volumes:
+      - '.:/code'
+    ports:
+      - 8883:80
+    environment:
+      DEBUG: 'true'
 
-db:
-  command: '-d'
-  ports:
-    - 5432:5432
+  db:
+    command: '-d'
+    ports:
+     - 5432:5432
 
-cache:
-  ports:
-    - 6379:6379
+  cache:
+    ports:
+      - 6379:6379
 ```
 
 When you run `docker compose up` it reads the overrides automatically.
@@ -108,15 +111,16 @@ repo or managed by a different team).
 **docker-compose.prod.yml**
 
 ```yaml
-web:
-  ports:
-    - 80:80
-  environment:
-    PRODUCTION: 'true'
+services:
+  web:
+    ports:
+      - 80:80
+    environment:
+      PRODUCTION: 'true'
 
-cache:
-  environment:
-    TTL: '500'
+  cache:
+    environment:
+      TTL: '500'
 ```
 
 To deploy with this production Compose file you can run
@@ -135,29 +139,31 @@ production.
 
 #### Administrative tasks
 
-Another common use case is running when necessary or administrative tasks against one
+Another common use case is running one off or administrative tasks against one
 or more services in a Compose app. This example demonstrates running a
 database backup.
 
 Start with a **docker-compose.yml**.
 
 ```yaml
-web:
-  image: example/my_web_app:latest
-  depends_on:
-    - db
+services:
+  web:
+    image: example/my_web_app:latest
+    depends_on:
+       db
 
-db:
-  image: postgres:latest
+  db:
+    image: postgres:latest
 ```
 
 In a **docker-compose.admin.yml** add a new service to run the database
 export or backup.
 
 ```yaml
-    dbadmin:
-      build: database_admin/
-      depends_on:
+services:
+  dbadmin:
+     build: database_admin/
+     depends_on:
         - db
 ```
 
@@ -442,7 +448,6 @@ services:
       - ./local:/baz
 ```
 
-
 ## Reference information
 
-[`extends`](compose-file/index.md#extends)
+[`extends`](compose-file/05-services.md#extends)

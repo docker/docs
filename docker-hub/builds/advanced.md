@@ -6,11 +6,10 @@ redirect_from:
 - /docker-cloud/builds/advanced/
 ---
 
-{% include upgrade-cta.html
-  body="The Automated Builds feature is available for Docker Pro, Team, and Business users. Upgrade now to automatically build and push your images. If you are using automated builds for an open-source project, you can join our [Open Source Community](https://www.docker.com/community/open-source/application){: target='_blank' rel='noopener' class='_'} program to learn how Docker can support your project on Docker Hub."
-  header-text="This feature requires a Docker subscription"
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_auto_builds"
-%}
+> **Note**
+>
+> Automated builds require a
+> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
 
 The following options allow you to customize your automated build and automated
 test processes.
@@ -21,8 +20,10 @@ Several utility environment variables are set by the build process, and are
 available during automated builds, automated tests, and while executing
 hooks.
 
-> **Note**: These environment variables are only available to the build and test
-processes and do not affect your service's run environment.
+> **Note**
+>
+> These environment variables are only available to the build and test
+processes and don't affect your service's run environment.
 
 * `SOURCE_BRANCH`: the name of the branch or the tag that is currently being tested.
 * `SOURCE_COMMIT`: the SHA1 hash of the commit being tested.
@@ -51,12 +52,15 @@ services:
 Docker Hub allows you to override and customize the `build`, `test` and `push`
 commands during automated build and test processes using hooks. For example, you
 might use a build hook to set build arguments used only during the build
-process. (You can also set up [custom build phase hooks](#custom-build-phase-hooks)
-to perform actions in between these commands.)
+process. You can also set up [custom build phase hooks](#custom-build-phase-hooks)
+to perform actions in between these commands.
 
-**Use these hooks with caution.** The contents of these hook files replace the
+> **Important**
+>
+>Use these hooks with caution. The contents of these hook files replace the
 basic `docker` commands, so you must include a similar build, test or push
 command in the hook or your automated process does not complete.
+{: .important}
 
 To override these phases, create a folder called `hooks` in your source code
 repository at the same directory level as your Dockerfile. Create a file called
@@ -64,7 +68,7 @@ repository at the same directory level as your Dockerfile. Create a file called
 builder process can execute, such as `docker` and `bash` commands (prefixed
 appropriately with `#!/bin/bash`).
 
-These hooks will be running on an instance of [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/){:target="_blank" rel="noopener" class="_"},
+These hooks run on an instance of [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/){:target="_blank" rel="noopener" class="_"},
 a distro based on Red Hat Enterprise Linux (RHEL), which includes interpreters
 such as Perl or Python, and utilities such as `git` or `curl`. Refer to the
 [Amazon Linux 2 documentation](https://aws.amazon.com/amazon-linux-2/faqs/){:target="_blank" rel="noopener" class="_"}
@@ -89,15 +93,15 @@ The following hooks are available:
 * `hooks/post_build`
 * `hooks/pre_test`
 * `hooks/post_test`
-* `hooks/pre_push` (only used when executing a build rule or [automated build](index.md) )
-* `hooks/post_push` (only used when executing a build rule or [automated build](index.md) )
+* `hooks/pre_push` (only used when executing a build rule or [Automated build](index.md) )
+* `hooks/post_push` (only used when executing a build rule or [Automated build](index.md) )
 
 ### Build hook examples
 
 #### Override the "build" phase to set variables
 
 Docker Hub allows you to define build environment variables either in the hook
-files, or from the automated build interface (which you can then reference in hooks).
+files, or from the automated build interface, which you can then reference in hooks.
 
 In the following example, we define a build hook that uses `docker build` arguments
 to set the variable `CUSTOM` based on the value of variable we defined using the
@@ -109,9 +113,11 @@ the image being built.
 $ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 ```
 
-> **Caution**: A `hooks/build` file overrides the basic [docker build](../../engine/reference/commandline/build.md) command
-used by the builder, so you must include a similar build command in the hook or
+> **Important**
+>
+> A `hooks/build` file overrides the basic [docker build](../../engine/reference/commandline/build.md) command used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
+{: .important}
 
 Refer to the [docker build documentation](../../engine/reference/commandline/build.md#build-arg)
 to learn more about Docker build-time variables.
@@ -128,15 +134,15 @@ $ docker tag $IMAGE_NAME $DOCKER_REPO:$SOURCE_COMMIT
 $ docker push $DOCKER_REPO:$SOURCE_COMMIT
 ```
 
-## Source Repository / Branch Clones
+## Source repository or branch clones
 
 When Docker Hub pulls a branch from a source code repository, it performs
-a shallow clone (only the tip of the specified branch).  This has the advantage
+a shallow clone, it clones only the tip of the specified branch.  This has the advantage
 of minimizing the amount of data transfer necessary from the repository and
 speeding up the build because it pulls only the minimal code necessary.
 
-Because of this, if you need to perform a custom action that relies on a different
-branch (such as a `post_push` hook), you can't checkout that branch, unless
+As a result, if you need to perform a custom action that relies on a different
+branch, such as a `post_push` hook, you can't checkout that branch unless
 you do one of the following:
 
 * You can get a shallow checkout of the target branch by doing the following:

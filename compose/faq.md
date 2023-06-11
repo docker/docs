@@ -1,8 +1,9 @@
 ---
-description: Docker Compose FAQ
+description: Frequently asked questions for Docker Compose
 keywords: documentation, docs,  docker, compose, faq
 title: Frequently asked questions
 ---
+{% include compose-eol.md %}
 
 ## How do I get help?
 
@@ -38,7 +39,7 @@ interactive terminal to the container and returns an exit status matching the
 exit status of the process in the container.
 
 The `docker compose start` command is useful only to restart containers
-that were previously created, but were stopped. It never creates new
+that were previously created but were stopped. It never creates new
 containers.
 
 ## Why do my services take 10 seconds to recreate or stop?
@@ -90,7 +91,7 @@ Yes, see [Controlling startup order](startup-order.md).
 Compose uses the project name to create unique identifiers for all of a
 project's  containers and other resources. To run multiple copies of a project,
 set a custom project name using the [`-p` command line option](reference/index.md)
-or the [`COMPOSE_PROJECT_NAME` environment variable](reference/envvars.md#compose_project_name).
+or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
 ## Can I use JSON instead of YAML for my Compose file?
 

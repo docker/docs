@@ -34,7 +34,7 @@ and also allows better code reuse, different target groups and extended features
 
 ## Next steps
 
-* [File definition](file-definition.md)
+* [Bake file reference](reference.md)
 * [Configuring builds](configuring-build.md)
 * [User defined HCL functions](hcl-funcs.md)
 * [Defining additional build contexts and linking targets](build-contexts.md)

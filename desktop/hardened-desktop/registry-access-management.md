@@ -1,5 +1,5 @@
 ---
-description: Registry Access Management
+description: What Registry Access Management is and how to use it
 keywords: registry access managment, Hardened Docker Desktop, Docker Desktop, images, Docker Hub
 title: Registry Access Management
 redirect_from: 
@@ -12,11 +12,13 @@ redirect_from:
 
 With Registry Access Management, administrators can ensure that their developers using Docker Desktop only access registries that are allowed. This is done through the Registry Access Management dashboard on Docker Hub. 
 
-Below are some example registries administrators can allow: 
+Registry Access Management supports both cloud and on-prem registries. Example registries administrators can allow include: 
  - Docker Hub. This is enabled by default.
  - Amazon ECR
  - GitHub Container Registry
  - Google Container Registry
+ - Nexus
+ - Artifactory
 
 ## Prerequisites 
 

@@ -39,6 +39,7 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: 'Attestation parameters (format: `type=sbom,generator=image`)'
+      details_url: '#attest'
       deprecated: false
       hidden: false
       experimental: false
@@ -337,6 +338,7 @@ options:
     - option: provenance
       value_type: string
       description: Shortand for `--attest=type=provenance`
+      details_url: '#provenance'
       deprecated: false
       hidden: false
       experimental: false
@@ -388,6 +390,7 @@ options:
     - option: sbom
       value_type: string
       description: Shorthand for `--attest=type=sbom`
+      details_url: '#sbom'
       deprecated: false
       hidden: false
       experimental: false
@@ -494,6 +497,33 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
+    ### Create attestations (--attest) {#attest}
+
+    ```
+    --attest=type=sbom,...
+    --attest=type=provenance,...
+    ```
+
+    Create [image attestations](/build/attestations/).
+    BuildKit currently supports:
+
+    - `sbom` - Software Bill of Materials.
+
+      Use `--attest=type=sbom` to generate an SBOM for an image at build-time.
+      Alternatively, you can use the [`--sbom` shorthand](#sbom).
+
+      For more information, see [here](/build/attestations/sbom/).
+
+    - `provenance` - SLSA Provenance
+
+      Use `--attest=type=provenance` to generate provenance for an image at
+      build-time. Alternatively, you can use the [`--provenance` shorthand](#provenance).
+
+      By default, a minimal provenance attestation will be created for the build
+      result, which will only be attached for images pushed to registries.
+
+      For more information, see [here](/build/attestations/slsa-provenance/).
+
     ### Allow extra privileged entitlement (--allow) {#allow}
 
     ```
@@ -815,8 +845,13 @@ examples: |-
 
     Set the target platform for the build. All `FROM` commands inside the Dockerfile
     without their own `--platform` flag will pull base images for this platform and
-    this value will also be the platform of the resulting image. The default value
-    will be the current platform of the buildkit daemon.
+    this value will also be the platform of the resulting image.
+
+    The default value is the platform of the BuildKit daemon where the build runs.
+    The value takes the form of `os/arch` or `os/arch/variant`. For example,
+    `linux/amd64` or `linux/arm/v7`. Additionally, the `--platform` flag also supports
+    a special `local` value, which tells BuildKit to use the platform of the BuildKit
+    client that invokes the build.
 
     When using `docker-container` driver with `buildx`, this flag can accept multiple
     values as an input separated by a comma. With multiple values the result will be
@@ -879,10 +914,40 @@ examples: |-
     > Check also our [Color output controls guide](https://github.com/docker/buildx/blob/master/docs/guides/color-output.md)
     > for modifying the colors that are used to output information to the terminal.
 
+    ### Create provenance attestations (--provenance) {#provenance}
+
+    Shorthand for [`--attest=type=provenance`](#attest), used to configure
+    provenance attestations for the build result. For example,
+    `--provenance=mode=max` can be used as an abbreviation for
+    `--attest=type=provenance,mode=max`.
+
+    Additionally, `--provenance` can be used with boolean values to broadly enable
+    or disable provenance attestations. For example, `--provenance=false` can be
+    used to disable all provenance attestations, while `--provenance=true` can be
+    used to enable all provenance attestations.
+
+    By default, a minimal provenance attestation will be created for the build
+    result, which will only be attached for images pushed to registries.
+
+    For more information, see [here](/build/attestations/slsa-provenance/).
+
     ### Push the build result to a registry (--push) {#push}
 
     Shorthand for [`--output=type=registry`](#registry). Will automatically push the
     build result to registry.
+
+    ### Create SBOM attestations (--sbom) {#sbom}
+
+    Shorthand for [`--attest=type=sbom`](#attest), used to configure SBOM
+    attestations for the build result. For example,
+    `--sbom=generator=<user>/<generator-image>` can be used as an abbreviation for
+    `--attest=type=sbom,generator=<user>/<generator-image>`.
+
+    Additionally, `--sbom` can be used with boolean values to broadly enable or
+    disable SBOM attestations. For example, `--sbom=false` can be used to disable
+    all SBOM attestations.
+
+    For more information, see [here](/build/attestations/sbom/).
 
     ### Secret to expose to the build (--secret) {#secret}
 

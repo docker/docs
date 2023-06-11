@@ -1,5 +1,5 @@
 ---
-description: Docker Desktop settings
+description: Change your Docker Desktop settings on Mac
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Mac
 title: Change preferences on Mac
 redirect_from:
@@ -15,6 +15,8 @@ To navigate to **Settings** either:
 
 - Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
+
+You can also locate the `settings.json` file at `~/Library/Group Containers/group.com.docker/settings.json`.
 
 ## General
 
@@ -48,7 +50,28 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
 
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Docker Compose V2](../../compose/compose-v2/index.md).
+  use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
+
+## Advanced
+
+On the **Advanced** tab, you can reconfigure your initial installation settings:
+
+- **Choose how to configure the installation of Docker's CLI tools**. 
+  - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin`
+  - **User**: Docker CLI tools are installed in the user directory under `$HOME/.docker/bin`. You must then add `$HOME/.docker/bin` to your PATH. To add `$HOME/.docker/bin` to your path:
+      1. Open your shell configuration file. This is `~/.bashrc` if you're using a bash shell, or `~/.zshrc` if you're using a zsh shell. 
+      2. Run the following command:
+            ```console
+            $ export PATH=$PATH:~/.docker/bin
+            ```
+     3. Save and the close the file. Restart your shell to apply the changes to the PATH variable. 
+
+- **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks).
+
+- **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#binding-privileged-ports).
+
+For more information on each configuration
+and use case, see [Permission requirements](../mac/permission-requirements.md).
 
 ## Resources
 

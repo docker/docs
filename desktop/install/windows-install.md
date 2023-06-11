@@ -1,7 +1,7 @@
 ---
-description: How to install Docker Desktop for Windows
-keywords: windows, install, download, run, docker, local, Docker Desktop
-title: Install on Windows
+description: Get started with Docker for Windows. This guide covers system requirements, where to download, and instructions on how to install and update.
+keywords: docker for windows, docker windows, docker desktop for windows, docker on windows, install docker windows, install docker on windows, docker windows 10, docker run on windows, installing docker for windows
+title: Install Docker Desktop on Windows
 redirect_from:
 - /desktop/windows/install/
 - /docker-ee-for-windows/install/
@@ -15,23 +15,21 @@ redirect_from:
 - /installation/windows/
 ---
 
+Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
+
+[Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
+
+_For checksums, see [Release notes](../release-notes.md)_
+
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
 
-Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
-
-> Download Docker Desktop for Windows
->
-> [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
-
-_For checksums, see [Release notes](../release-notes.md)_
-
 ## System requirements
 
-Your Windows machine must meet the following requirements to successfully install Docker Desktop.
+You must meet the following requirements to successfully install Docker Desktop on Windows:
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#win-wsl2">WSL 2 backend</a></li>
@@ -42,8 +40,9 @@ Your Windows machine must meet the following requirements to successfully instal
 
 ### WSL 2 backend
 
+- WSL version 1.1.3.0 or above.
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
-- Windows 10 64-bit: Home or Pro 21H1 (build 19043) or higher, or Enterprise or Education 20H2 (build 19042) or higher.
+- Windows 10 64-bit: Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
 - Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
 - The following hardware prerequisites are required to successfully run
@@ -63,7 +62,7 @@ Your Windows machine must meet the following requirements to successfully instal
 ### Hyper-V backend and Windows containers
 
 - Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
-- Windows 10 64-bit: Pro 21H1 (build 19043) or higher, or Enterprise or Education 20H2 (build 19042) or higher.
+- Windows 10 64-bit: Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
 
   For Windows 10 and Windows 11 Home, see the system requirements in the [WSL 2 backend](#wsl-2-backend){: data-toggle="tab" data-target="#win-wsl2" } tab.
 
@@ -82,7 +81,7 @@ Your Windows machine must meet the following requirements to successfully instal
 
 > **Note**
 >
-> Docker only supports Docker Desktop on Windows for those versions of Windows 10 that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
+> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet){:target="_blank" rel="noopener" class="_"}.
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
@@ -97,7 +96,7 @@ For more information, see [Running Docker Desktop in a VM or VDI environment](..
 Looking for information on using Windows containers?
 
 * [Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers)
-  describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned above.
+  describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned below.
 - [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
   provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
   with Windows containers.
@@ -159,10 +158,14 @@ The `install` command accepts the following flags:
 - `--allowed-org=<org name>`: requires the user to sign in and be part of the specified Docker Hub organization when running the application
 - `--backend=<backend name>`: selects the default backend to use for Docker Desktop, `hyper-v`, `windows` or `wsl-2` (default)
 - `--installation-dir=<path>`: changes the default installation location (`C:\Program Files\Docker\Docker`)
-- `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](../hardened-desktop/settings-management/index.md).
+- `--admin-settings`: automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](../hardened-desktop/settings-management/index.md).
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example:
     `--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'`
+- `--proxy-http-mode=<mode>`: sets the HTTP Proxy mode, `system` (default) or `manual`.
+- `--override-proxy-http=<URL>`: sets the URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`.
+- `--override-proxy-https=<URL>`: sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`.
+- `--override-proxy-exclude=<hosts/domains>`: bypasses proxy settings for these hosts and domains, a comma-separated list.
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 
@@ -184,10 +187,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 3. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-   > **Important**
-   >
-   > If you do not agree to the terms, the Docker Desktop application will close and you can no longer run Docker Desktop on your machine. You can choose to accept the terms at a later date by opening Docker Desktop.
-   {: .important}
+   Note that Docker Desktop will not run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/){:target="_blank" rel="noopener" class="_"}. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="\_blank" rel="noopener" class="*" id="dkr_docs_desktop_install_btl"}.
 
