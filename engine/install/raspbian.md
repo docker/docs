@@ -92,7 +92,7 @@ Docker from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/raspbian" %}
+{% assign download-url-base = "https://download.docker.com/linux/debian" %}
 
 1.  Update the `apt` package index and install packages to allow `apt` to use a
     repository over HTTPS:
