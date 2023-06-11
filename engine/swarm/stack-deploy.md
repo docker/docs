@@ -145,7 +145,7 @@ counter whenever you visit it.
     single node. You can safely ignore this.
 
     ```none
-    $ docker-compose up -d
+    $ docker compose up -d
 
     WARNING: The Docker Engine you're using is running in swarm mode.
 
@@ -164,7 +164,7 @@ counter whenever you visit it.
 2.  Check that the app is running with `docker-compose ps`:
 
     ```console
-    $ docker-compose ps
+    $ docker compose ps
 
           Name                     Command               State           Ports
     -----------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ counter whenever you visit it.
 3.  Bring the app down:
 
     ```console
-    $ docker-compose down --volumes
+    $ docker compose down --volumes
 
     Stopping stackdemo_web_1 ... done
     Stopping stackdemo_redis_1 ... done
