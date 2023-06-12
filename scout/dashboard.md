@@ -25,8 +25,8 @@ The **Images** tab shows a list of images in an organization. You can search for
 
 Each entry in the list shows the following details:
 
-- The repository name for the image. Clicking the link for the repository opens [the list of tags for the repository](#repository-tag-list).
-- The most recent version of the image and the vulnerabilities for that version. Clicking the link for the base image opens [the image layer view](#image-layer-view).
+- The repository name for the image. Selecting the link for the repository opens [the list of tags for the repository](#repository-tag-list).
+- The most recent tag of the image and the vulnerabilities for that version. Selecting the link for the base image opens [the image layer view](#image-layer-view).
 - The operating system and architecture of the image.
 - The base image and version used by the repository and the vulnerabilities for that version. Clicking the link for the base image opens [the image layer view](#image-layer-view).
 - The recommended fixes, which can include options such as changing tags or rebuilding an image.
@@ -41,7 +41,13 @@ The repository tag list shows all tags for a repository. You can search for spec
 
 Each entry in the list shows the following details:
 
-- CHeck
+- A checkbox to mark the tag for comparison to one other.
+
+  > **Tip**
+  >
+  > Compare two tag images by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
+  {: .tip }
+
 - The tag version. Clicking the link for version opens [the image layer view](#image-layer-view).
 - The operating system and architecture of the image.
 - The vulnerabilities for the tag version.
@@ -52,13 +58,7 @@ Each entry in the list shows the following details:
 
 #### Comparing two tag images
 
-![Screenshot of selecting two image tags](./images/dashboard-diff-select.png)
-
-You can compare two tag images by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
-
 ![Screenshot of an overview of differences between two selected images](./images/dashboard-diff-top.png)
-
-<!-- Reference and target -->
 
 The top section of the comparison view shows an overview of the two selected image tags.
 
