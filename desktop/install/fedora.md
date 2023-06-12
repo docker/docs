@@ -46,7 +46,8 @@ The post-install script:
 
 - Sets the capability on the Docker Desktop binary to map privileged ports and set resource limits.
 - Adds a DNS name for Kubernetes to `/etc/hosts`.
-- Creates a link from `/usr/bin/docker` to `/usr/local/bin/com.docker.cli`.
+- Creates a symlink from `/usr/local/bin/com.docker.cli` to `/usr/bin/docker`.
+  This is because in step one, the classic Docker CLI is installed in to `/usr/bin/docker`. Docker Desktop requires this package to be installed as it does not ship the classic Docker CLI itself. The Docker Desktop installer then installs a new Docker CLI binary that includes cloud-integration capabilities, and is essentially a wrapper for the Compose CLI, in `/usr/local/bin/com.docker.cli` and creates a symlink to the classic Docker CLI `usr/bin/docker`.
 
 ## Launch Docker Desktop
 
