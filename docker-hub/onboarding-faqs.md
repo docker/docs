@@ -1,5 +1,6 @@
 ---
-description: Frequently asked questions
+title: "Frequently asked questions"
+description: Frequently asked administration and security questions
 keywords: onboarding, docker, teams, orgs
 toc_max: 2
 ---
@@ -27,7 +28,7 @@ member. An organization owner is someone that is part of the owners team. They
 can create new teams and add members to an existing team using their Docker ID
 or email address and by selecting a team the user should be part of. An
 organization owner can also add additional organization owners to help them
-manage users, teams, and repositories in the organization. [Learn more](orgs.md).
+manage users, teams, and repositories in the organization. See [Create your organization](orgs.md).
 
 ### How many organizations can I create?
 
@@ -39,7 +40,11 @@ The organization name, sometimes referred to as the organization namespace or th
 
 ### What’s a team?
 
-A **Team** is a group of Docker users that belong to an organization. An organization can have multiple teams. When you first create an organization, you’ll see that you have a team, the owners team, with a single member. An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. [Learn more](manage-a-team.md).
+A **Team** is a group of Docker users that belong to an organization. An organization can have multiple teams. When you first create an organization, you’ll see that you have a team, the owners team, with a single member. An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. See [Create and manage a team](manage-a-team.md).
+
+### What's a company?
+
+A **Company** is a management layer that centralizes administration of multiple organizations. Administrators can add organizations with a Docker Business subscription to a company and configure settings for all organizations under the company. See [Set up your company](creating-companies.md).
 
 ### Who is an organization owner?
 
@@ -62,7 +67,7 @@ An existing owner can add additional team members as organization owners. All
 they need to do is select the organization from the
 [Organizations](https://hub.docker.com/orgs){: target="_blank" rel="noopener"
 class="_"} page in Docker Hub, add the Docker ID/Email of the user, and then
-select the **Owners** team from the drop-down menu. [Learn more](manage-a-team.md#the-owners-team).
+select the **Owners** team from the drop-down menu. See [The owners team](manage-a-team.md#the-owners-team).
 
 ### Do users first need to authenticate with Docker before an owner can add them to an organization?
 
@@ -127,7 +132,7 @@ Yes. You can configure repository access on a per-team basis. For example, you
 can specify that all teams within an organization have **Read and Write** access
 to repositories A and B, whereas only specific teams have **Admin** access. Org
 owners have full administrative access to all repositories within the
-organization. [Learn more](manage-a-team.md#configure-repository-permissions-for-a-team).
+organization. See [Configure repository permissions for a team](manage-a-team.md#configure-repository-permissions-for-a-team).
 
 ### Can I configure multiple SSO identity providers (IdPs) to authenticate users to a single org?
 
