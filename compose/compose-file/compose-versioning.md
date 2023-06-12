@@ -61,13 +61,6 @@ There are three legacy versions of the Compose file format:
 
 The latest and recommended version of the Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). This format merges the 2.x and 3.x versions and is implemented by **Compose 1.27.0+**.
 
-> ### v2 and v3 Declaration
->
-> **Note**: When specifying the Compose file version to use, make sure to
-> specify both the _major_ and _minor_ numbers. If no minor version is given,
-> `0` is used by default and not the latest minor version.
-
-
 The [Compatibility Matrix](#compatibility-matrix) shows Compose file versions mapped to Docker Engine releases.
 
 To move your project to a later version, see the [Upgrading](#upgrading)
@@ -109,7 +102,7 @@ discoverable at a hostname that's the same as the service name. This means
 
 > **Note**
 >
-> When specifying the Compose file version to use, make sure to
+> With Compose version 2, when specifying the Compose file version to use, make sure to
 > specify both the _major_ and _minor_ numbers. If no minor version is given,
 > `0` is used by default and not the latest minor version. As a result, features added in later versions will not be supported. For example:
 >
@@ -263,20 +256,8 @@ the [upgrading](#upgrading) guide for how to migrate away from these.
 
 - Added: [deploy](compose-file-v3.md#deploy)
 
-> **Note**: When specifying the Compose file version to use, make sure to
-> specify both the _major_ and _minor_ numbers. If no minor version is given,
-> `0` is used by default and not the latest minor version. As a result, features added in
-> later versions will not be supported. For example:
->
-> ```yaml
-> version: "3"
-> ```
-> 
-> is equivalent to:
-> 
-> ```yaml
-> version: "3.0"
-> ```
+If only the major version is given (`version: '3'`),
+the latest minor version is used by default.
 
 ### Version 3.1
 
