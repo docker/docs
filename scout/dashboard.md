@@ -54,7 +54,7 @@ Each entry in the list shows the following details:
 - The last push for the tag version.
 - The base image and version used by the repository and the vulnerabilities for
   that version.
-- The size of the tag image.
+- The size of the image tag.
 
 #### Comparing two tag images
 
