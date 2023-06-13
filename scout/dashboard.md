@@ -65,7 +65,7 @@ Each entry in the list shows the following details:
 
   > **Tip**
   >
-  > Compare two tag images by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
+  > Compare two image tags by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
   {: .tip }
 
 - The tag version. Clicking the link for version opens [the image layer view](#image-layer-view).
@@ -74,7 +74,7 @@ Each entry in the list shows the following details:
 - The last push for the tag version.
 - The base image and version used by the repository and the vulnerabilities for
   that version.
-- The size of the tag image.
+- The size of the image tag.
 
 #### Comparing two tag images
 
@@ -86,7 +86,7 @@ The top section of the comparison view shows an overview of the two selected ima
 
 The tabs section of the view shows the following:
 
-- Select the **Packages** tab to see packages added, removed, or updated in each image. Each entry in the table shows the differences between the versions and vulnerabilities in each image. Select the disclosure triangle next to a package to see more detail on the vulnerabilities changed.
+- Select the **Packages** tab to see packages added, removed, or changed in each image. Each entry in the table shows the differences between the versions and vulnerabilities in each image. Select the disclosure triangle next to a package to see more detail on the vulnerabilities changed.
 - Select the **Vulnerabilities** tab to see changes to the vulnerabilities present in each image.
 
 ### Image layer view
