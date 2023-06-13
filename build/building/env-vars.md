@@ -9,19 +9,20 @@ redirect_from:
 You can set the following environment variables to enable, disable, or change
 the behavior of features related to building:
 
-| Variable                                                          | Type              | Description                                          |
-| ----------------------------------------------------------------- | ----------------- | ---------------------------------------------------- |
-| [BUILDKIT_COLORS](#buildkit_colors)                               | String            | Configure text color for the terminal output.        |
-| [BUILDKIT_HOST](#buildkit_host)                                   | String            | Specify host to use for remote builders.             |
-| [BUILDKIT_PROGRESS](#buildkit_progress)                           | String            | Configure type of progress output.                   |
-| [BUILDX_BUILDER](#buildx_builder)                                 | String            | Specify the builder instance to use.                 |
-| [BUILDX_CONFIG](#buildx_config)                                   | String            | Specify location for configuration, state, and logs. |
-| [BUILDX_EXPERIMENTAL](#buildx_experimental)                       | Boolean           | Turn on experimental features.                       |
-| [BUILDX_GIT_CHECK_DIRTY](#buildx_git_check_dirty)                 | Boolean           | Enable dirty Git checkout detection.                 |
-| [BUILDX_GIT_INFO](#buildx_git_info)                               | Boolean           | Remove Git information in provenance attestations.   |
-| [BUILDX_GIT_LABELS](#buildx_git_labels)                           | String \| Boolean | Add Git provenance labels to images.                 |
-| [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations) | Boolean           | Turn off default provenance attestations.            |
-| [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                 | Boolean           | Turn off loading images to image store by default.   |
+| Variable                                                                    | Type              | Description                                          |
+| --------------------------------------------------------------------------- | ----------------- | ---------------------------------------------------- |
+| [BUILDKIT_COLORS](#buildkit_colors)                                         | String            | Configure text color for the terminal output.        |
+| [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.             |
+| [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                   |
+| [BUILDKIT_EXPERIMENTAL_SOURCE_POLICY](#buildkit_experimental_source_policy) | String            | Specify a BuildKit source policy file.               |
+| [BUILDX_BUILDER](#buildx_builder)                                           | String            | Specify the builder instance to use.                 |
+| [BUILDX_CONFIG](#buildx_config)                                             | String            | Specify location for configuration, state, and logs. |
+| [BUILDX_EXPERIMENTAL](#buildx_experimental)                                 | Boolean           | Turn on experimental features.                       |
+| [BUILDX_GIT_CHECK_DIRTY](#buildx_git_check_dirty)                           | Boolean           | Enable dirty Git checkout detection.                 |
+| [BUILDX_GIT_INFO](#buildx_git_info)                                         | Boolean           | Remove Git information in provenance attestations.   |
+| [BUILDX_GIT_LABELS](#buildx_git_labels)                                     | String \| Boolean | Add Git provenance labels to images.                 |
+| [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations)           | Boolean           | Turn off default provenance attestations.            |
+| [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                           | Boolean           | Turn off loading images to image store by default.   |
 
 See also
 [BuildKit built-in build args](../../engine/reference/builder.md#buildkit-built-in-build-args).
@@ -77,6 +78,16 @@ Usage:
 
 ```console
 $ export BUILDKIT_PROGRESS=plain
+```
+
+## BUILDKIT_EXPERIMENTAL_SOURCE_POLICY
+
+Lets you specify a
+[BuildKit source policy](https://github.com/moby/buildkit/blob/master/docs/build-repro.md#reproducing-the-pinned-dependencies)
+file for creating reproducible builds with pinned dependencies.
+
+```console
+$ export BUILDKIT_EXPERIMENTAL_SOURCE_POLICY=./policy.json
 ```
 
 ## BUILDX_BUILDER
