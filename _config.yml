@@ -272,7 +272,7 @@ fetch-remote:
 
   - repo: "https://github.com/docker/buildx"
     default_branch: "master"
-    ref: "v0.10"
+    ref: "v0.11"
     paths:
       - dest: "build/bake/reference.md"
         src:
