@@ -18,6 +18,10 @@ or for a specific base image or layer.
 
 ![The image details view in Docker Desktop](./images/dd-image-view.png){:width="700px"}
 
+Docker Desktop first analyzes images locally, where it generates a software bill of materials (SBOM).
+Docker Desktop, Docker Hub, and the Docker Scout Dashboard and CLI all use the [package URL (PURL) links](https://github.com/package-url/purl-spec){: target="_blank" rel="noopener" }
+in this SBOM to query for matching Common Vulnerabilities and Exposures (CVEs) in [Docker Scout's advisory database](./advisory-db-sources.md).
+
 ## Image hierarchy
 
 The image you inspect may have one or more base images represented under **Image hierarchy**.
