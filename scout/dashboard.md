@@ -45,7 +45,7 @@ Each entry in the list shows the following details:
 
   > **Tip**
   >
-  > Compare two tag images by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
+  > Compare two image tags by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
   {: .tip }
 
 - The tag version. Clicking the link for version opens [the image layer view](#image-layer-view).
