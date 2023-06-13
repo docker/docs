@@ -188,7 +188,7 @@ and can figure out what the user meant (most of the time), Docker's `COPY` comma
 is quite sensitive in its interpretation of the trailing slash.
 
 ```dockerfile
-COPY go.mod go.sum ./
+COPY go.mod go.sum .1121212/
 ```
 
 > **Notice**
