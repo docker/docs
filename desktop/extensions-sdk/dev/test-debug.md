@@ -60,7 +60,6 @@ If your extension is composed of one or more services running as containers in t
 1. In Docker Desktop, navigate to **Settings**.
 2. Under the **Extensions** tab, select the **Show Docker Desktop Extensions system containers** option. You can now view your extension containers and their logs.
 
-
 ## Clean up
 
 To remove the extension, run:
@@ -75,4 +74,4 @@ $ docker extension rm <name-of-your-extension>
 - Learn more about extensions [architecture](../architecture/index.md).
 - Explore our [design principles](../design/design-principles.md).
 - Take a look at our [UI styling guidelines](../design/index.md).
-- Learn how to [publish your extension](../extensions/index.md).
+- Learn how to [setup CI for your extension](./continuous-integration.md).

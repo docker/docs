@@ -1272,6 +1272,8 @@ manuals:
           section:
             - title: "Test and debug"
               path: /desktop/extensions-sdk/dev/test-debug/
+            - title: "Continuous integration"
+              path: /desktop/extensions-sdk/dev/continuous-integration/
             - title: CLI reference
               path: /desktop/extensions-sdk/dev/usage/
             - sectiontitle: Extension APIs
