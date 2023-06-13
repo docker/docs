@@ -6,10 +6,10 @@ keywords: wsl, wsl 2, gpu support, develop, docker desktop, windows
 
 ## Develop with Docker and WSL 2
 
-The following section describes how to start developing your applications using Docker and WSL 2. We recommend that you have your code in your default Linux distribution for the best development experience using Docker and WSL 2. After you have enabled WSL 2 on Docker Desktop, you can start working with your code inside the Linux distro and ideally with your IDE still in Windows. This workflow is straightforward if you are using [VSCode](https://code.visualstudio.com/download){:target="_blank" rel="noopener" class="_"}.
+The following section describes how to start developing your applications using Docker and WSL 2. We recommend that you have your code in your default Linux distribution for the best development experience using Docker and WSL 2. After you have turned on the WSL 2 feature on Docker Desktop, you can start working with your code inside the Linux distro and ideally with your IDE still in Windows. This workflow is straightforward if you are using [VSCode](https://code.visualstudio.com/download){:target="_blank" rel="noopener" class="_"}.
 
-1. Open VS Code and install the [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl){:target="_blank" rel="noopener" class="_"} extension. This extension allows you to work with a remote server in the Linux distro and your IDE client still on Windows.
-2. Now, you can start working in VS Code remotely. To do this, open your terminal and type:
+1. Open VS Code and install the [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl){:target="_blank" rel="noopener" class="_"} extension. This extension lets you to work with a remote server in the Linux distro and your IDE client still on Windows.
+2. Start working in VS Code remotely. To do this, open your terminal and type:
 
     ```console
     $ wsl
@@ -19,7 +19,7 @@ The following section describes how to start developing your applications using 
     $ code .
     ```
 
-    This opens a new VS Code connected remotely to your default Linux distro which you can check in the bottom corner of the screen.
+    This opens a new VS Code window connected remotely to your default Linux distro which you can check in the bottom corner of the screen.
 
     Alternatively, you can type the name of your default Linux distro in your Start menu, open it, and then run `code` .
 3. When you are in VS Code, you can use the terminal in VS Code to pull your code and start working natively from your Windows machine.
@@ -30,13 +30,13 @@ The following section describes how to start developing your applications using 
 >
 > GPU support is only available in Docker Desktop for Windows with the WSL2 backend.
 
-Starting with Docker Desktop 3.1.0, Docker Desktop supports WSL 2 GPU Paravirtualization (GPU-PV) on NVIDIA GPUs. To enable WSL 2 GPU Paravirtualization, you need:
+With Docker Desktop version 3.1.0 and later,  WSL 2 GPU Paravirtualization (GPU-PV) on NVIDIA GPUs is supported. To enable WSL 2 GPU Paravirtualization, you need:
 
 - A machine with an NVIDIA GPU
 - The latest Windows Insider version from the Dev Preview ring
 - [Beta drivers](https://developer.nvidia.com/cuda/wsl){:target="_blank" rel="noopener" class="_"} from NVIDIA supporting WSL 2 GPU Paravirtualization
 - Update WSL 2 Linux kernel to the latest version using `wsl --update` from an elevated command prompt
-- Make sure the WSL 2 backend is enabled in Docker Desktop
+- Make sure the WSL 2 backend is turned on in Docker Desktop
 
 To validate that everything works as expected, run the following command to run a short benchmark on your GPU:
 

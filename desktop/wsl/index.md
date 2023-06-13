@@ -8,30 +8,34 @@ redirect_from:
 title: Docker Desktop WSL 2 backend on Windows
 ---
 
-Windows Subsystem for Linux (WSL) 2 is a full Linux kernel built by Microsoft, which allows Linux distributions to run without managing virtual machines. With Docker Desktop running on WSL 2, users can leverage Linux workspaces and avoid maintaining both Linux and Windows build scripts. In addition, WSL 2 provides improvements to file system sharing and boot time.
+Windows Subsystem for Linux (WSL) 2 is a full Linux kernel built by Microsoft, which lets Linux distributions run without managing virtual machines. With Docker Desktop running on WSL 2, users can leverage Linux workspaces and avoid maintaining both Linux and Windows build scripts. In addition, WSL 2 provides improvements to file system sharing and boot time.
 
-Docker Desktop uses the dynamic memory allocation feature in WSL 2 to improve the resource consumption. This means, Docker Desktop only uses the required amount of CPU and memory resources it needs, while enabling CPU and memory-intensive tasks such as building a container, to run much faster.
+Docker Desktop uses the dynamic memory allocation feature in WSL 2 to improve the resource consumption. This means Docker Desktop only uses the required amount of CPU and memory resources it needs, while allowing CPU and memory-intensive tasks such as building a container, to run much faster.
 
-Additionally, with WSL 2, the time required to start a Docker daemon after a cold start is significantly faster. It takes less than 10 seconds to start the Docker daemon compared to almost a minute in the previous version of Docker Desktop.
+Additionally, with WSL 2, the time required to start a Docker daemon after a cold start is significantly faster. 
 
 ## Prerequisites
 
-Before you turn on the Docker Desktop WSL 2, ensure you have:
+Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 
-- WSL version 1.1.3.0 or above.
-- Windows 10, version 21H2 or higher, or Windows 11, version 21H2 or higher. For more information, see [System requirements](https://docs.docker.com/desktop/install/windows-install/#system-requirements).
-- Enabled WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}.
-- Downloaded and installed the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){:target="_blank" rel="noopener" class="_"}.
+- WSL version 1.1.3.0 or later.
+- Windows 10, version 21H2 orlater, or Windows 11, version 21H2 or later. For more information, see [System requirements](https://docs.docker.com/desktop/install/windows-install/#system-requirements).
+- Installed the WSL 2 feature on Windows. For detailed instructions, refer to the [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}.
 
 ## Turn on Docker Desktop WSL 2
 
-1. Download [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
-2. Follow the usual installation instructions to install Docker Desktop. If you are running a supported system, Docker Desktop prompts you to enable WSL 2 during installation. Read the information displayed on the screen and enable WSL 2 to continue.
-3. Start Docker Desktop from the **Windows Start** menu.
-4. From the Docker menu, select **Settings** and then **General**.
-5. Select the **Use WSL 2 based engine** check box.
+> **Important**
+>
+> To avoid any potential conflicts with using WSL 2 on Docker Desktop, you must uninstall any previous versions of Docker Engine and CLI installed directly through Linux distributions before installing Docker Desktop.
+{: .important}
 
-    If you have installed Docker Desktop on a system that supports WSL 2, this option is enabled by default.
+1. Download and install the latest version of [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
+2. Follow the usual installation instructions to install Docker Desktop. Depending on which version of Windows you are using, Docker Desktop may prompt you to turn on WSL 2 during installation. Read the information displayed on the screen and turn on the WSL 2 feature to continue.
+3. Start Docker Desktop from the **Windows Start** menu.
+4. Navigate to **Settings**.
+5. From the **General** tab, select **Use WSL 2 based engine**..
+
+    If you have installed Docker Desktop on a system that supports WSL 2, this option is turned on by default.
 6. Select **Apply & Restart**.
 
 Now `docker` commands work from Windows using the new WSL 2 engine.
@@ -64,15 +68,10 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 
 2. When Docker Desktop starts, go to **Settings** > **Resources** > **WSL Integration**.
 
-    The Docker-WSL integration is enabled on your default WSL distribution. To change your default WSL distro, run `wsl --set-default <distro name>`
-
-    For example, to set Ubuntu as your default WSL distro, run:
-    
-    ```console
-    $ wsl --set-default ubuntu
+    The Docker-WSL integration is enabled on the default WSL distribution, which is [Ubuntu](https://learn.microsoft.com/en-us/windows/wsl/install). To change your default WSL distro, run:
+     ```console
+    $ wsl --set-default <distro name>
     ```
-
-    Optionally, select any additional distributions you would like to enable the Docker-WSL integration on.
 
 3. Select **Apply & Restart**.
 
@@ -80,5 +79,8 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
 >
 > Docker Desktop installs two special-purpose internal Linux distros `docker-desktop` and `docker-desktop-data`. The first (`docker-desktop`) is used to run the Docker engine (`dockerd`) while the second (`docker-desktop-data`) stores containers and images. Neither can be used for general development.
 
+## Additional resources
 
-
+- [Explore best practices](best-practices.md)
+- [View known issues and workarounds](Known-issues-workarounds.md)
+- [Understand how to develop with Docker and WSL 2 and GPU support for WSL](use-wsl.md)
