@@ -21,7 +21,7 @@ works.
 ## Docker Scout’s Advisory Database sources
 
 Docker Scout creates and maintains its vulnerability database by ingesting and
-collating vulnerability data from multiple sources on an hourly basis. These
+collating vulnerability data from multiple sources continuously. These
 sources include many recognizable package repositories and trusted security
 trackers, such as:
 
