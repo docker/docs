@@ -1900,6 +1900,64 @@ manuals:
     - path: /scout/advisory-db-sources/
       title: Advisory Database
 
+- sectiontitle: Docker Admin (Early Access)
+  section:
+  - path: /admin/
+    title: Overview
+  - sectiontitle: Company administration
+    section:
+    - path: /admin/company/
+      title: Overview
+    - path: /admin/company/organizations/
+      title: Manage organizations
+    - path: /admin/company/users/
+      title: Manage users
+    - path: /admin/company/owners/
+      title: Manage company owners
+    - sectiontitle: Settings
+      section:
+      - path: /admin/company/settings/sso/
+        title: Single sign-on overview
+      - path: /admin/company/settings/sso-configuration/
+        title: Configure single sign-on
+      - path: /admin/company/settings/sso-management/
+        title: Manage single sign-on
+      - path: /admin/company/settings/scim/
+        title: SCIM
+      - path: /admin/company/settings/group-mapping/
+        title: Group mapping
+      - path: /admin/company/settings/sso-faq/
+        title: Single sign-on FAQs
+  - sectiontitle: Organization administration
+    section:
+    - path: /admin/organization/
+      title: Overview
+    - path: /admin/organization/members/
+      title: Manage members
+    - path: /admin/organization/activity-logs/
+      title: Activity logs
+    - path: /admin/organization/image-access/
+      title: Image Access Management
+    - path: /admin/organization/registry-access/
+      title: Registry Access Management
+    - path: /admin/organization/general-settings/
+      title: General settings
+    - sectiontitle: Security settings
+      section:
+      - path: /admin/organization/security-settings/sso/
+        title: Single sign-on overview
+      - path: /admin/organization/security-settings/sso-configuration/
+        title: Configure single sign-on
+      - path: /admin/organization/security-settings/sso-management/
+        title: Manage single sign-on
+      - path: /admin/organization/security-settings/scim/
+        title: SCIM
+      - path: /admin/organization/security-settings/group-mapping/
+        title: Group mapping
+      - path: /admin/organization/security-settings/sso-faq/
+        title: Single sign-on FAQs
+
+
 - sectiontitle: Administration and security
   section:
   - path: /docker-hub/admin-overview/
