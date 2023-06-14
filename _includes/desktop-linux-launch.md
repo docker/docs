@@ -19,8 +19,8 @@ context to the previous one.
 The Docker Desktop installer updates Docker Compose and the Docker CLI binaries
 on the host. It installs Docker Compose V2 and gives users the choice to
 link it as docker-compose from the Settings panel. Docker Desktop installs
-the new Docker CLI binary that includes cloud-integration capabilities in `/usr/local/bin`
-and creates a symlink to the classic Docker CLI at `/usr/local/bin/com.docker.cli`.
+the new Docker CLI binary that includes cloud-integration capabilities in `/usr/local/bin/com.docker.cli`
+and creates a symlink to the classic Docker CLI at `/usr/local/bin`.
 
 After you’ve successfully installed Docker Desktop, you can check the versions
 of these binaries by running the following commands:
