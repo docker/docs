@@ -83,7 +83,7 @@ new instance that has never seen this container image. To do this, you will use 
 > $ docker build --platform linux/amd64 -t YOUR-USER-NAME/getting-started .
 > ```
 >
-> Docker buildx also supports building multi-platform images. To learn more, see [Mult-platform images](../build/building/multi-platform.md).
+> Docker buildx also supports building multi-platform images. To learn more, see [Multi-platform images](../build/building/multi-platform.md).
 
 
 1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
