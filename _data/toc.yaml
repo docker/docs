@@ -1137,8 +1137,6 @@ manuals:
           title: Use WSL
         - path: /desktop/wsl/best-practices/
           title: Best practices
-        - path: /desktop/wsl/known-issues-workarounds/
-          title: Known issues and workarounds
     - sectiontitle: Additional resources
       section:
         - path: /desktop/kubernetes/
