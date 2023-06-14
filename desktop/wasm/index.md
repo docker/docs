@@ -22,16 +22,26 @@ alongside your Linux containers in Docker.
 
 ## Turn on the Docker+Wasm integration
 
-To use the Docker+Wasm integration, developers must turn on the
-[containerd image store](../containerd/index.md) feature.
+The Docker+Wasm integration requires the
+[containerd image store](../containerd/index.md) feature. If you’re not
+already using the containerd image store, then pre-existing images and
+containers will be inaccessible.
 
-> **Important**
->
-> The Docker+Wasm integration requires the
-> [containerd image store](../containerd/index.md) feature. If you’re not
-> already using the containerd image store, then pre-existing images and
-> containers will be inaccessible.
-{: .important}
+1. Open the Docker Desktop **Settings**.
+2. Go to the **Features in development** tab.
+3. Check the following checkboxes:
+   - **Use containerd for storing and pulling images**
+   - **Enable Wasm**
+4. Select **Apply & restart** to save the settings.
+5. In the confirmation dialog, select **Install** to install the Wasm runtimes.
+
+Docker Desktop downloads and installs the following runtimes that you can use
+to run Wasm workloads:
+
+- `io.containerd.slight.v1`
+- `io.containerd.spin.v1`
+- `io.containerd.wasmedge.v1`
+- `io.containerd.wasmtime.v1`
 
 ## Usage examples
 
