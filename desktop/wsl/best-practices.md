@@ -7,9 +7,10 @@ keywords: wsl, docker desktop, best practices
 - Always use the latest version of WSL. At a minimum you must use WSL version 1.1.3.0., otherwise Docker Desktop may not work as expected. Older versions of WSL can cause:
     - Docker Desktop to hang periodically or when upgrading
     - Deployment via SSCM to fail 
-    - The `vmmem.exe ` to consume all memory 
+    - The `vmmem.exe` to consume all memory 
     - Network filter policies to be applied globally, not to specific objects
     - GPU failures with containers
+
 - To get the best out of the file system performance when bind-mounting files, it's recommended that you store source code and other data that is bind-mounted into Linux containers. For instance, use `docker run -v <host-path>:<container-path>` in the Linux file system, rather than the Windows file system. You can also refer to the [recommendation](https://learn.microsoft.com/en-us/windows/wsl/compare-versions) from Microsoft.
     - Linux containers only receive file change events, “inotify events”, if the original files are stored in the Linux filesystem. For example, some web development workflows rely on inotify events for automatic reloading when files have changed.
     - Performance is much higher when files are bind-mounted from the Linux filesystem, rather than remoted from the Windows host. Therefore avoid `docker run -v /mnt/c/users:/users,` where `/mnt/c` is mounted from Windows.
