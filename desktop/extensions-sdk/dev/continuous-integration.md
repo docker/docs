@@ -6,9 +6,8 @@ keywords: Docker, Extensions, sdk, CI, test, regression
 
 In order to help validating your extension and ensure it's functional, the Extension SDK provides tools to help you setup continuous integration for your extension.
 
-> The github action and the extension-test-helper library are both [experimental](https://docs.docker.com/release-lifecycle/#experimental).
+> The [Docker Desktop Action](https://github.com/docker/desktop-action) and the [extension-test-helper library](https://www.npmjs.com/package/@docker/extension-test-helper) are both [experimental](https://docs.docker.com/release-lifecycle/#experimental).
 {: .important }
-
 
 ## Setup CI environment with Github action
 
