@@ -1,6 +1,6 @@
 ---
-title: Docker+Wasm (Beta)
-description: How to use the Wasm integration in Docker Desktop
+title: Wasm workloads (Beta)
+description: How to run Wasm workloads with Docker Desktop
 keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
 ---
@@ -15,17 +15,15 @@ alongside your Linux containers in Docker.
 
 > **Beta**
 >
-> The Docker+Wasm feature is currently in
-> [Beta](../../release-lifecycle.md/#beta). We recommend that you do not use
-> this feature in production environments as this feature may change or be
-> removed from future releases.
+> The Wasm feature is currently in [Beta](../../release-lifecycle.md/#beta).
+> We recommend that you do not use this feature in production environments as
+> this feature may change or be removed from future releases.
 
-## Turn on the Docker+Wasm integration
+## Enable Wasm workloads
 
-The Docker+Wasm integration requires the
-[containerd image store](../containerd/index.md) feature. If you’re not
-already using the containerd image store, then pre-existing images and
-containers will be inaccessible.
+Wasm workloads require the [containerd image store](../containerd/index.md)
+feature to be enabled. If you’re not already using the containerd image store,
+then pre-existing images and containers will be inaccessible.
 
 1. Open the Docker Desktop **Settings**.
 2. Go to the **Features in development** tab.
@@ -203,7 +201,7 @@ in Docker Desktop settings and try again.
 ### Failed to start shim: failed to resolve runtime path
 
 If you use an older version of Docker Desktop that doesn't support running Wasm
-containers, you will see an error message similar to the following:
+workloads, you will see an error message similar to the following:
 
 ```
 docker: Error response from daemon: failed to start shim: failed to resolve runtime path: runtime "io.containerd.wasmedge.v1" binary not installed "containerd-shim-wasmedge-v1": file does not exist: unknown.
@@ -223,7 +221,7 @@ Update your Docker Desktop to the latest version and try again.
 
 ## Feedback
 
-Thanks for trying the new Docker+Wasm integration. Give feedback or report any
+Thanks for trying out Wasm workloads with Docker. Give feedback or report any
 bugs you may find through the issues tracker on the
 [public roadmap item](https://github.com/docker/roadmap/issues/426){:
 target="_blank" rel="noopener" class="_"}.

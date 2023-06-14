@@ -1144,7 +1144,7 @@ manuals:
     - path: /desktop/containerd/
       title: containerd image store (Beta)
     - path: /desktop/wasm/
-      title: Wasm (Beta)
+      title: Wasm workloads (Beta)
     - sectiontitle: WSL
       section:
         - path: /desktop/wsl/
