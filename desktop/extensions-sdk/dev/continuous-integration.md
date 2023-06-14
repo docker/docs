@@ -1,10 +1,10 @@
 ---
-title: "Continuous Integration"
+title: "Continuous Integration (CI)"
 description: Automatically test and validate your extension.
 keywords: Docker, Extensions, sdk, CI, test, regression
 ---
 
-In order to help validating your extension and ensure it's functional, the Extension SDK provides a set of tools to help you set continuous integration for your extension.
+In order to help validating your extension and ensure it's functional, the Extension SDK provides tools to help you setup continuous integration for your extension.
 
 > The github action and the extension-test-helper library are both [experimental](https://docs.docker.com/release-lifecycle/#experimental).
 {: .important }
@@ -13,7 +13,7 @@ In order to help validating your extension and ensure it's functional, the Exten
 ## Setup CI environment with Github action
 
 You need Docker Desktop to be able to install and validate your extension.
-You can start Docker Desktop in Github Actions using the [Docker Desktop Action](https://github.com/docker/desktop-action), with the following step:
+You can start Docker Desktop in Github Actions using the [Docker Desktop Action](https://github.com/docker/desktop-action), by adding the following to a workflow file:
 
 ```yaml
 steps:
@@ -21,14 +21,14 @@ steps:
     uses: docker/desktop-action/start@v0.1.0
 ```
 
-> This action supports only Github Action macOS runners at the moment ; you need to specify `runs-on: macOS-latest` for your end to end tests.
+> This action supports only Github Action macOS runners at the moment. You need to specify `runs-on: macOS-latest` for your end to end tests.
 {: .important }
 
-Once the step has executed, the next steps can use Docker Desktop and the Docker CLI to install an test the extension
+Once the step has executed, the next steps can use Docker Desktop and the Docker CLI to install and test the extension.
 
-## Validating your extension with puppeteer
+## Validating your extension with Puppeteer
 
-Once Docker Desktop is started in the CI, you can build, install and validate your extension with jest and puppeteer.
+Once Docker Desktop is started in the CI, you can build, install, and validate your extension with jest and Puppeteer.
 
 First, build and install your extension from your test:
 
