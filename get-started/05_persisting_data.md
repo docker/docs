@@ -126,7 +126,7 @@ You can create the volume and start the container using the CLI or Docker Deskto
    it to `/etc/todos` in the container, which captures all files created at the path. In your Mac or Linux terminal, or in Windows Command Prompt or PowerShell, run the following command:
 
     ```console
-    $ docker run -dp 3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
+    $ docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
     ```
 
 <hr>
