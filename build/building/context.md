@@ -9,25 +9,43 @@ The [`docker build`](../../engine/reference/commandline/build.md) or
 commands build Docker images from a [Dockerfile](../../engine/reference/builder.md)
 and a "context".
 
-A build's context is the set of files located at the `PATH` or `URL` specified
-as the positional argument to the build command:
+The build context is the argument that you pass to the build command:
 
 ```console
 $ docker build [OPTIONS] PATH | URL | -
                          ^^^^^^^^^^^^^^
 ```
 
-The build process can refer to any of the files in the context. For example,
-your build can use a [`COPY` instruction](../../engine/reference/builder.md#copy)
-to reference a file in the context or a [`RUN --mount=type=bind` instruction](../../engine/reference/builder.md#run---mounttypebind)
-for better performance with [BuildKit](../buildkit/index.md). The build context
-is processed recursively. So, a `PATH` includes any subdirectories and the
-`URL` includes the repository and its submodules.
+## What is a build context?
 
-## `PATH` context
+You can pass any of the following inputs as the context for a build:
 
-This example shows a build command that uses the current directory (`.`) as a
-build context:
+- The relative or absolute path to a local directory
+- The address of a remote Git repository, tarball, or plain-text file
+- A piped plain-text file or a tarball using standard input
+
+### Filesystem contexts
+
+When your build context is a local directory, a remote Git repository, or a tar file,
+then that becomes the set of files that the builder can access during the build.
+Build instructions can refer to any of the files and directories in the context.
+For example, when you use a [`COPY` instruction](../../engine/reference/builder.md#copy),
+the builder copies the file or directory from the build context, into the build container.
+A filesystem build context is processed recursively:
+
+- When you specify a local directory or a tarball, all subdirectories are included
+- When you specify a remote Git repository, the repository and all submodules are included
+
+### Text file contexts
+
+When your build context is a plain-text file, the builder interprets the file
+as a Dockerfile. With this approach, the builder doesn't receive a filesystem context.
+For more information about building with a text file context, see [Text files](#text-files).
+
+## Local directories and tarballs
+
+The following example shows a build command that uses the current directory
+(`.`) as a build context:
 
 ```console
 $ docker build .
@@ -38,38 +56,34 @@ $ docker build .
 ...
 ```
 
-With the following Dockerfile:
+This makes files and directories in the current working directory available
+to the builder. The builder loads the files that it needs from the build context,
+when it needs them.
 
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM busybox
-WORKDIR /src
-COPY foo .
-```
-
-And this directory structure:
+For example, given the following directory structure:
 
 ```
 .
+├── index.ts
+├── src/
 ├── Dockerfile
-├── bar
-├── foo
-└── node_modules
+├── package.json
+└── package-lock.json
 ```
 
-The legacy builder sends the entire directory to the daemon, including `bar`
-and `node_modules` directories, even though the `Dockerfile` does not use
-them. When using [BuildKit](../buildkit/index.md), the client only sends the
-files required by the `COPY` instructions, in this case `foo`.
-
-In some cases you may want to send the entire context:
+Dockerfile instructions can reference and include these files in the build
+if you pass the directory as a context.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM busybox
+FROM node:latest
 WORKDIR /src
-COPY . .
+COPY package.json package-lock.json .
+RUN npm ci
+COPY index.ts src .
 ```
+
+### `.dockerignore`
 
 You can use a [`.dockerignore`](../../engine/reference/builder.md#dockerignore-file)
 file to exclude some files or directories from being sent:
@@ -80,24 +94,38 @@ node_modules
 bar
 ```
 
-> **Warning**
->
-> Avoid using your root directory, `/`, as the `PATH` for your build context,
-> as it causes the build to transfer the entire contents of your hard drive to
-> the daemon.
-{:.warning}
+A `.dockerignore` file located at the root of build context is automatically
+detected and used.
 
-## `URL` context
+If you use multiple Dockerfiles, you can use different ignore-files for each
+Dockerfile. You do so using a special naming convention for the ignore-files.
+Place your ignore-file in the same directory as the Dockerfile, and prefix the
+ignore-file with the name of the Dockerfile.
 
-The `URL` parameter can refer to three kinds of resources:
-* [Git repositories](#git-repositories)
-* Pre-packaged [tarball contexts](#tarball-contexts)
-* Plain [text files](#text-files)
+For example:
 
-### Git repositories
+```console
+.
+├── index.ts
+├── src/
+├── docker
+│   ├── build.Dockerfile
+│   ├── build.Dockerfile.dockerignore
+│   ├── lint.Dockerfile
+│   ├── lint.Dockerfile.dockerignore
+│   ├── test.Dockerfile
+│   └── test.Dockerfile.dockerignore
+├── package.json
+└── package-lock.json
+```
 
-When the `URL` parameter points to the location of a Git repository, the
-repository acts as the build context.
+A Dockerfile-specific ignore-file takes precedence over the `.dockerignore`
+file at the root of the build context if both exist.
+
+## Git repositories
+
+When you pass a URL pointing to the location of a Git repository as an argument
+to `docker build`, the builder uses the repository as the build context.
 
 The builder performs a shallow clone of the repository, downloading only
 the HEAD commit, not the entire history.
@@ -111,7 +139,7 @@ $ docker build https://github.com/user/myrepo.git
 By default, the builder clones the latest commit on the default branch of the
 repository that you specify.
 
-#### URL fragments
+### URL fragments
 
 You can append URL fragments to the Git repository address to make the builder
 clone a specific branch, tag, and subdirectory of a repository.
@@ -142,7 +170,7 @@ contexts:
 | `myrepo.git#mytag:myfolder`    | `refs/tags/mytag`             | `/myfolder`        |
 | `myrepo.git#mybranch:myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
 
-#### Keep `.git` directory
+### Keep `.git` directory
 
 By default, BuildKit doesn't keep the `.git` directory when using Git contexts.
 You can configure BuildKit to keep the directory by setting the
@@ -163,7 +191,7 @@ $ docker build \
   https://github.com/user/myrepo.git#main
 ```
 
-#### Private repositories
+### Private repositories
 
 When you specify a Git context that's also a private repository, the builder
 needs you to provide the necessary authentication credentials. You can use
@@ -193,9 +221,9 @@ $ GIT_AUTH_TOKEN=<token> docker buildx build \
 > Don't use `--build-arg` for secrets, except for
 > [HTTP proxies](../../network/proxy.md#set-proxy-using-the-cli)
 
-### Tarball contexts
+### Remote tarballs
 
-If you pass a `URL` to a remote tarball, the `URL` itself is sent to the daemon:
+If you pass the URL to a remote tarball, then the URL itself is sent to the builder.
 
 ```console
 $ docker build http://server/context.tar.gz
@@ -210,39 +238,132 @@ $ docker build http://server/context.tar.gz
 The download operation will be performed on the host the daemon is running on,
 which is not necessarily the same host from which the build command is being
 issued. The daemon will fetch `context.tar.gz` and use it as the build context.
-Tarball contexts must be tar archives conforming to the standard `tar` UNIX
+Tarball contexts must be tar archives conforming to the standard `tar` Unix
 format and can be compressed with any one of the `xz`, `bzip2`, `gzip` or
 `identity` (no compression) formats.
 
+## Pipes
+
+When you pass a single dash `-` as the argument to the build command, you can
+pipe a plain-text file or a tarball as the context:
+
+```console
+$ docker build - PIPE
+```
+
+For example:
+
+```console
+$ docker build - < Dockerfile
+$ docker build - < archive.tar
+$ docker build - <<EOF
+FROM node:alpine
+COPY . .
+RUN npm ci
+EOF
+```
+
+### Tarballs
+
+When you pipe a tarball to the build command, the build uses the contents of
+the tarball as a filesystem context.
+
+For example, given the following project directory:
+
+```
+.
+├── Dockerfile
+├── Makefile
+├── README.md
+├── main.c
+├── scripts
+├── src
+└── test.Dockerfile
+```
+
+You can create a tarball of the directory and pipe it to the build for use as
+a context:
+
+```console
+$ tar czf foo.tar.gz *
+$ docker build - < foo.tar.gz
+```
+
+The build resolves the Dockerfile from the tarball context. You can use the
+`--file` flag to specify the name and location of the Dockerfile relative to
+the root of the tarball. The following command builds using `test.Dockerfile`
+in the tarball:
+
+```console
+$ docker build --file test.Dockerfile - < foo.tar.gz
+```
+
 ### Text files
 
-Instead of specifying a context, you can pass a single `Dockerfile` in the
-`URL` or pipe the file in via `STDIN`. To pipe a `Dockerfile` from `STDIN`:
+When you use a text file as the build context, the builder interprets the file
+as a Dockerfile. Using a text file as context means that the build has no
+filesystem context. This can be useful when your build doesn't require any
+local files. This means there's no filesystem context when building.
+
+You can pass the text file using a standard input stream, or by pointing at the
+URL of a remote text file.
 
 ```console
 $ docker build - < Dockerfile
 ```
 
-With Powershell on Windows, you can run:
+With PowerShell on Windows, you can run:
 
 ```powershell
 Get-Content Dockerfile | docker build -
 ```
 
-If you use `STDIN` or specify a `URL` pointing to a plain text file, the system
-places the contents into a file called `Dockerfile`, and any `-f`, `--file`
-option is ignored. In this scenario, there is no context.
+To use a remote text file, pass the URL of the text file as the argument to the
+build command:
+
+```console
+$ docker build https://raw.githubusercontent.com/dvdksn/clockbox/main/Dockerfile
+```
+
+Again, this means that the build has no filesystem context,
+so Dockerfile commands such as `COPY` can't refer to local files:
+
+```console
+$ ls
+main.c
+$ docker build -<<< $'FROM scratch\nCOPY main.c .'
+[+] Building 0.0s (4/4) FINISHED
+ => [internal] load build definition from Dockerfile       0.0s
+ => => transferring dockerfile: 64B                        0.0s
+ => [internal] load .dockerignore                          0.0s
+ => => transferring context: 2B                            0.0s
+ => [internal] load build context                          0.0s
+ => => transferring context: 2B                            0.0s
+ => ERROR [1/1] COPY main.c .                              0.0s
+------
+ > [1/1] COPY main.c .:
+------
+Dockerfile:2
+--------------------
+   1 |     FROM scratch
+   2 | >>> COPY main.c .
+   3 |
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref 7ab2bb61-0c28-432e-abf5-a4c3440bc6b6::4lgfpdf54n5uqxnv9v6ymg7ih: "/main.c": not found
+```
+
+#### Build using heredocs
 
 The following example builds an image using a `Dockerfile` that is passed
-through stdin. No files are sent as build context to the daemon.
+through standard input using
+[shell heredocs](https://en.wikipedia.org/wiki/Here_document){: target="_blank" rel="noopener"}:
 
 ```bash
-docker build -t myimage:latest -<<EOF
+docker build -t myimage:latest - <<EOF
 FROM busybox
 RUN echo "hello world"
 EOF
 ```
 
-Omitting the build context can be useful in situations where your `Dockerfile`
-does not require files to be copied into the image, and improves the build-speed,
-as no files are sent to the daemon.
+This approach is useful when you want to quickly run a build command with a
+Dockerfile that's short and concise.
