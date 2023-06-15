@@ -10,7 +10,7 @@ redirect_from:
 >
 >Registry Access Management is available to Docker Business customers only. 
 
-With Registry Access Management, administrators can ensure that their developers using Docker Desktop only access registries that are allowed. This is done through the Registry Access Management dashboard on Docker Hub. 
+With Registry Access Management (RAM), administrators can ensure that their developers using Docker Desktop only access registries that are allowed. This is done through the Registry Access Management dashboard on Docker Hub. 
 
 Registry Access Management supports both cloud and on-prem registries. Example registries administrators can allow include: 
  - Docker Hub. This is enabled by default.
@@ -45,7 +45,7 @@ To configure Registry Access Management permissions:
 
 > **Tip**
 >
-> Since RAM sets policies about where content can be fetched from, the [ADD](/engine/reference/builder/#add) instruction of the Dockerfile, when the parameter of the ADD instruction is a URL, is also subject to registry restrictions. It is recommended that you add the domains of URL parameters to the list of allowed registry addresses under the Registry Access Management settings of your organization.
+> Since RAM sets policies about where content can be fetched from, the [ADD](/engine/reference/builder/#add) instruction of the Dockerfile, when the parameter of the ADD instruction is a URL, is also subject to registry restrictions. It's recommended that you add the domains of URL parameters to the list of allowed registry addresses under the Registry Access Management settings of your organization.
 {: .tip}
 
 ## Verify the restrictions
