@@ -35,7 +35,7 @@ To invite multiple members to your organization via a CSV file containing email 
 3. Select **Members**.
 4. Select **Invite Member**.
 5. Select **CSV Upload**.
-6.Select a team or type to create a new team. Docker will invite all users to that team.
+6. Select a team or type to create a new team. Docker will invite all users to that team.
 7. Select **Download the template CSV file** to optionally download an example CSV file. The following is an example of the contents of a valid CSV file.
     ```
     email
@@ -45,28 +45,28 @@ To invite multiple members to your organization via a CSV file containing email 
   CSV file requirements:
    -  The file must contain a header row with at least one heading named `email`. Additional columns are allowed and are ignored in the import.
    -  The file must contain a maximum of 1000 email addresses (rows). To invite more than 1000 users, create multiple CSV files and perform all steps in this task for each file.
-6. Create a new CSV file or export a CSV file from another application.
+8. Create a new CSV file or export a CSV file from another application.
   - To export a CSV file from another application, see the application’s documentation.
   - To create a new CSV file, open a new file in a text editor, type `email` on the first line, type the user email addresses one per line on the following lines, and then save the file with a .csv extension.
-7. Select **Browse files** and then select your CSV file, or drag and drop the CSV file into the **Select a CSV file to upload** box. You can only select one CSV file at a time.
+9. Select **Browse files** and then select your CSV file, or drag and drop the CSV file into the **Select a CSV file to upload** box. You can only select one CSV file at a time.
   > **Note**
   >
   > If the amount of email addresses in your CSV file exceeds the number of available seats in your organization, you can't continue to invite members. To invite members, you can buy more seats, or remove some email addresses from the CSV file and re-select the new file. To buy more seats, see [Add seats to your subscription](../../subscription/add-seats.md) or [Contact sales](https://www.docker.com/pricing/contact-sales/).
-8. After the CSV file has been uploaded, select **Review**.
+10. After the CSV file has been uploaded, select **Review**.
   Valid email addresses and any email addresses that have issues appear.
   Email addresses may have the following issues:
 	  - **Invalid email**: The email address is not a valid address. The email address will be ignored if you send invites. You can correct the email address in the CSV file and re-import the file.
 	  - **Already invited**: The user has already been sent an invite email and another invite email will not be sent.
 	  - **Member**: The user is already a member of your organization and an invite email will not be sent.
 	  - **Duplicate**: The CSV file has multiple occurrences of the same email address. The user will be sent only one invite email.
-9. Select **Send invites**.
+11. Select **Send invites**.
    > **Note**
    >
    > You can view the pending invitations in the **Members** page. The invitees receive an email with a link to the organization in Docker Hub where they can accept or decline the invitation.
 
 ## Add a member to a team
 
-Use Docker Hub to add a member to a team. For more details, see [Add a member to a team](../../docker-hub/members/#add-a-member-to-a-team).
+Use Docker Hub to add a member to a team. For more details, see [Add a member to a team](../../docker-hub/members.md#add-a-member-to-a-team).
 
 ## Resend invitations
 

@@ -38,4 +38,4 @@ In addition, you should add all email addresses to your IdP.
 ## What's next?
 
 - Start [configuring SSO](sso-configuration.md) for your organization
-- Explore [the FAQs](sso-faqs.md)
+- Explore [the FAQs](sso-faq.md)

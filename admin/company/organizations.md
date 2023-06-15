@@ -9,13 +9,13 @@ title: Manage organizations
 
 1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. In the left navigation, select your company in the drop-down menu.
-2. Under **Organizations**, select **Overview**.
+3. Under **Organizations**, select **Overview**.
 
 ## Add seats to an organization
 
 1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. In the left navigation, select your company in the drop-down menu.
-2. Under **Organizations**, select **Overview**.
+3. Under **Organizations**, select **Overview**.
 4. Select the action icon in the organization's card, and then select **Get more seats**.
 
 ## Manage an organization
