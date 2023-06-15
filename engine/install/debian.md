@@ -41,9 +41,9 @@ architectures.
 Before you can install Docker Engine, you must first make sure that any
 conflicting packages are uninstalled.
 
-Distro maintainers provide an unofficial distributions of Docker packages in
-APT. You must uninstall these packages before you can install the official
-version of Docker Engine.
+Distro maintainers provide an unofficial distribution of Docker packages in
+their repositories. You must uninstall these packages before you can install the 
+official version of Docker Engine.
 
 The unofficial packages to uninstall are:
 
