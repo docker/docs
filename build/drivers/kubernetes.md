@@ -37,6 +37,7 @@ pass to `--driver-opt`:
 | `limits.memory`   | Memory size       |                                         | Sets the limit memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G`   |
 | `nodeselector`    | CSV string        |                                         | Sets the pod's `nodeSelector` label(s). See [node assignment][2].                                                                    |
 | `tolerations`     | CSV string        |                                         | Configures the pod's taint toleration. See [node assignment][2].                                                                     |
+| `serviceaccount`  | String            |                                         | Sets the pod's `serviceAccountName`.                                                                                                 |
 | `rootless`        | `true`,`false`    | `false`                                 | Run the container as a non-root user. See [rootless mode][3].                                                                        |
 | `loadbalance`     | `sticky`,`random` | `sticky`                                | Load-balancing strategy. If set to `sticky`, the pod is chosen using the hash of the context path.                                   |
 | `qemu.install`    | `true`,`false`    |                                         | Install QEMU emulation for multi platforms support. See [QEMU][4].                                                                   |
@@ -186,9 +187,12 @@ $ docker buildx create \
 ```
 
 This creates a Buildx builder named `kube`, containing a single builder node
-`builder-amd64`. Note that the Buildx concept of a node isn't the same as the
-Kubernetes concept of a node. A Buildx node in this case could connect multiple
-Kubernetes nodes of the same architecture together.
+named `builder-amd64`. Assigning a node name using `--node` is optional. Buildx
+generates a random node name if you don't provide one.
+
+Note that the Buildx concept of a node isn't the same as the Kubernetes concept
+of a node. A Buildx node in this case could connect multiple Kubernetes nodes of
+the same architecture together.
 
 With the `kube` builder created, you can now introduce another architecture into
 the mix using `--append`. For example, to add `arm64`:

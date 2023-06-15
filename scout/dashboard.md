@@ -38,8 +38,8 @@ The **Images** tab shows a list of images in an organization. You can search for
 
 Each entry in the list shows the following details:
 
-- The repository name for the image. Clicking the link for the repository opens the list of tags for the repository.
-- The most recent version of the image and the vulnerabilities for that version. Clicking the link for the base image opens [the image layer view](#image-layer-view).
+- The repository name for the image. Selecting the link for the repository opens [the list of tags for the repository](#repository-tag-list).
+- The most recent tag of the image and the vulnerabilities for that version. Selecting the link for the base image opens [the image layer view](#image-layer-view).
 - The operating system and architecture of the image.
 - The base image and version used by the repository and the vulnerabilities for that version. Clicking the link for the base image opens [the image layer view](#image-layer-view).
 
@@ -61,12 +61,33 @@ The repository tag list shows all tags for a repository. You can search for spec
 
 Each entry in the list shows the following details:
 
+- A checkbox to mark the tag for comparison to one other.
+
+  > **Tip**
+  >
+  > Compare two image tags by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
+  {: .tip }
+
 - The tag version. Clicking the link for version opens [the image layer view](#image-layer-view).
 - The operating system and architecture of the image.
 - The vulnerabilities for the tag version.
 - The last push for the tag version.
 - The base image and version used by the repository and the vulnerabilities for
   that version.
+- The size of the image tag.
+
+#### Comparing two tag images
+
+![Screenshot of an overview of differences between two selected images](./images/dashboard-diff-top.png)
+
+The top section of the comparison view shows an overview of the two selected image tags.
+
+![Screenshot of overview differences between two selected images](./images/dashboard-diff-bottom.png)
+
+The tabs section of the view shows the following:
+
+- Select the **Packages** tab to see packages added, removed, or changed in each image. Each entry in the table shows the differences between the versions and vulnerabilities in each image. Select the disclosure triangle next to a package to see more detail on the vulnerabilities changed.
+- Select the **Vulnerabilities** tab to see changes to the vulnerabilities present in each image.
 
 ### Image layer view
 

@@ -83,7 +83,7 @@ new instance that has never seen this container image. To do this, you will use 
 > $ docker build --platform linux/amd64 -t YOUR-USER-NAME/getting-started .
 > ```
 >
-> Docker buildx also supports building multi-platform images. To learn more, see [Mult-platform images](../build/building/multi-platform.md).
+> Docker buildx also supports building multi-platform images. To learn more, see [Multi-platform images](../build/building/multi-platform.md).
 
 
 1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
@@ -99,10 +99,24 @@ new instance that has never seen this container image. To do this, you will use 
 5. In the terminal, start your freshly pushed app.
 
     ```console
-    $ docker run -dp 3000:3000 YOUR-USER-NAME/getting-started
+    $ docker run -dp 0.0.0.0:3000:3000 YOUR-USER-NAME/getting-started
     ```
 
     You should see the image get pulled down and eventually start up.
+
+    > **Tip**
+    >
+    > You may have noticed that this command binds the port mapping to a
+    > different IP address. Previous `docker run` commands published ports to
+    > `127.0.0.1:3000` on the host. This time, you're using `0.0.0.0`.
+    >
+    > Binding to `127.0.0.1` only exposes a container's ports to the loopback
+    > interface. Binding to `0.0.0.0`, however, exposes the container's port
+    > on all interfaces of the host, making it available to the outside world.
+    >
+    > For more information about how port mapping works, see
+    > [Networking](../network/index.md#published-ports).
+    {: .tip }
 
 6. Select on the 3000 badge when it comes up and you should see the app with your modifications.
     If the 3000 badge doesn't show up, you can select on the **Open Port** button and type in 3000.
