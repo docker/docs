@@ -1,53 +1,61 @@
 ---
 description: Registry Access Management
-keywords: registry, access, managment
+keywords: registry, access, management
 title: Registry Access Management
 ---
 
 {% include admin-early-access.md %}
 
-Registry Access Management (RAM) is a feature available to organizations with a Docker Business subscription. When RAM is enabled, organization owners can ensure that their developers using Docker Desktop can only access registries that have been allow-listed via the Registry Access Management dashboard on Docker Hub to reflect support for other registries: AWS ECR, GitHub Container Registry, Google Container Registry, Quay, a local private registry, and others.
+> **Note**
+>
+> Registry Access Management is available to Docker Business customers only.
 
-For example, you can use RAM if you manage engineering teams that use Docker Desktop for local development and want to ensure that the images they are pulling are licensed and reputable before using them.
+With Registry Access Management (RAM), administrators can ensure that their developers using Docker Desktop only access registries that are allowed.
 
-## Requirements:
+Registry Access Management supports both cloud and on-prem registries. Example registries administrators can allow include:
+ - Docker Hub. This is enabled by default.
+ - Amazon ECR
+ - GitHub Container Registry
+ - Google Container Registry
+ - Nexus
+ - Artifactory
 
-Your Docker users must use Docker Desktop v4.8 or a later.
+## Prerequisites
+
+You need to [configure a registry.json to enforce sign-in](../../docker-hub/configure-sign-in.md). For Registry Access Management to take effect, Docker Desktop users must authenticate to your organization. 
 
 ## Configure Registry Access Management permissions
 
-To configure Registry Access Management permissions, perform the following steps:
+To configure Registry Access Management permissions:
 
 1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. In the left navigation, select your organization in the drop-down menu.
 3. Select **Registry Access**.
-4. Enable Registry Access Management to set the permissions for your registry.
+4. Toggle on Registry Access Management to set the permissions for your registry.
 
    > **Note**
    >
    > When enabled, the Docker Hub registry is set by default, however you can also restrict this registry for your developers.
 
-5. Select **Add** and enter your registry details in the applicable fields, and select **Create** to add the registry to your list.
+5. To add registries to your list, select **Add** and enter your registry details in the applicable fields, then select **Create**.
 6. Verify that the registry appears in your list and select **Save & Apply**. 
 
    > **Note**
    >
-   > Once you add a registry, it can take up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop. Also, there is no limit on the number of registries you can add. See the [Caveats](#caveats) section to learn more about limitations when using this feature.
+   > Once you add a registry, it takes up to 24 hours for the changes to be enforced on your developers’ machines. If you want to apply the changes sooner, you must force a Docker logout on your developers’ machine and have the developers re-authenticate for Docker Desktop.
 
-## Enforce authentication
-
-To ensure that each organization member uses Registry Access Management on their local machine, you can perform the following steps to enforce sign-in under your organization. To do this:
-
-1. Install the latest version of Docker Desktop on your member's machine.
-2. Create a `registry.json` file by following the instructions for [Configure registry.json](../../docker-hub/configure-sign-in.md).
+> **Tip**
+>
+> Since RAM sets policies about where content can be fetched from, the [ADD](/engine/reference/builder/#add) instruction of the Dockerfile, when the parameter of the ADD instruction is a URL, is also subject to registry restrictions. It's recommended that you add the domains of URL parameters to the list of allowed registry addresses under the Registry Access Management settings of your organization.
+{: .tip}
 
 ## Verify the restrictions
 
-The new Registry Access Management policy should be in place after the developer successfully authenticates to Docker Desktop using their organization credentials. The developer can attempt to pull an image from a disallowed registry via the Docker CLI. They will then receive an error message that your organization has disallowed this registry.
+The new Registry Access Management policy takes effect after the developer successfully authenticates to Docker Desktop using their organization credentials. If a developer attempts to pull an image from a disallowed registry via the Docker CLI, they receive an error message that the organization has disallowed this registry.
 
-### Caveats
+## Caveats
 
-There are certain limitations when using Registry Access Management; they are as follows:
+There are certain limitations when using Registry Access Management:
 
 - Windows image pulls, and image builds are not restricted
 - Builds such as `docker buildx` using a Kubernetes driver are not restricted
@@ -55,5 +63,6 @@ There are certain limitations when using Registry Access Management; they are as
 - Blocking is DNS-based; you must use a registry's access control mechanisms to distinguish between “push” and “pull”
 - WSL 2 requires at least a 5.4 series Linux kernel (this does not apply to earlier Linux kernel series)
 - Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)
+- Not currently supported on Hyper-V Windows Containers
 
-Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system's `sts` file. Blocking these forms of manipulation is outside the remit of Docker Desktop.
+Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system's `sts` file. Docker Desktop does not support blocking these forms of manipulation.

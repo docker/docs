@@ -1,7 +1,7 @@
 ---
 description: SSO configuration
 keywords: configure, sso, docker admin
-title: Configure SSO
+title: Configure Single Sign-On
 ---
 
 {% include admin-early-access.md %}

@@ -10,3 +10,7 @@ members to an existing team using their Docker ID or email address and by
 selecting a team the user should be part of. An organization owner can also add
 additional owners to help them manage users, teams, and repositories in the
 organization.
+
+The following diagram depicts the setup of an organization and how it relates to teams.
+
+![organization-hierarchy](/admin/images/docker-hierarchy-org.svg){: width="700px" }

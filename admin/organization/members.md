@@ -43,7 +43,7 @@ To invite multiple members to your organization via a CSV file containing email 
     docker.user-1@example.com
     ```
   CSV file requirements:
-   -  The file must contain a header row with at least one heading named `email`. Additional columns are allowed and are ignored in the import.
+   -  The file must contain a header row with at least one heading named `email`. Additional columns are allowed but are ignored in the import.
    -  The file must contain a maximum of 1000 email addresses (rows). To invite more than 1000 users, create multiple CSV files and perform all steps in this task for each file.
 8. Create a new CSV file or export a CSV file from another application.
   - To export a CSV file from another application, see the application’s documentation.

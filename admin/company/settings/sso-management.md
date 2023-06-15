@@ -1,7 +1,7 @@
 ---
 description: Manage SSO
 keywords: manage, single sign-on, SSO, sign-on
-title: Manage SSO
+title: Manage Single Sign-On
 ---
 
 {% include admin-early-access.md %}

@@ -69,7 +69,7 @@ Learn how to administer an organization using Docker Admin in the following sect
                 <img src="/assets/images/sign-on.svg" alt="Security settings" width="70" height="70">
             </div>
                 <h2 id="security-settings">Security settings</h2>
-                <p>Set up <a href="/admin/organization/security-settings/sso/">single sign-on</a> and <a href="/admin/organization/security-settings/scim/">SCIM</a> for your organization.</p>
+                <p>Set up <a href="/admin/organization/security-settings/sso/">Single Sign-On</a> and <a href="/admin/organization/security-settings/scim/">SCIM</a> for your organization.</p>
         </div>
      </div>
     </div>

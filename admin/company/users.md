@@ -44,7 +44,7 @@ To invite multiple members to your organization in your company via a CSV file c
     docker.user-1@example.com
     ```
   CSV file requirements:
-   -  The file must contain a header row with at least one heading named `email`. You can add additional columns and the import will ignore them.
+   -  The file must contain a header row with at least one heading named `email`. You can add additional columns but the import will ignore them.
    -  The file can contain a maximum of 1000 email addresses (rows). To invite more than 1000 users, create multiple CSV files and perform all steps in this task for each file.
 9. Create a new CSV file or export a CSV file from another application.
   - To export a CSV file from another application, see the application’s documentation.
@@ -57,7 +57,7 @@ To invite multiple members to your organization in your company via a CSV file c
   Valid email addresses and any email addresses that have issues appear.
   Email addresses may have the following issues:
 	  - **Invalid email**: The email address isn't a valid address. The email address will be ignored if you send invites. You can correct the email address in the CSV file and re-import the file.
-	  - **Already invited**: Docker has already sent an invite email and Docker won't send another invite email .
+	  - **Already invited**: Docker has already sent an invite email and Docker won't send another invite email.
 	  - **Member**: The user is already a member of your organization and Docker won't send an invite email.
 	  - **Duplicate**: The CSV file has multiple occurrences of the same email address. Docker will send the user only one invite email.
 12. Select **Send invites**.
@@ -88,7 +88,7 @@ To remove a member or invitee from an organization:
 
 ## Export users
 
-Company owners can export a CSV file containing the company's users.
+Company owners can export a CSV file containing all of the company's users.
 The CSV file contains the following fields:
 
  * **Name**: The user's name.

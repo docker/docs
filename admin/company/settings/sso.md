@@ -1,7 +1,7 @@
 ---
 description: Single Sign-on
 keywords: Single Sign-on, SSO, sign-on
-title: Overview
+title: Single Sign-On overview
 ---
 
 {% include admin-early-access.md %}

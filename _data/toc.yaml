@@ -1917,17 +1917,17 @@ manuals:
     - sectiontitle: Settings
       section:
       - path: /admin/company/settings/sso/
-        title: Single sign-on overview
+        title: Single Sign-On overview
       - path: /admin/company/settings/sso-configuration/
-        title: Configure single sign-on
+        title: Configure Single Sign-On
       - path: /admin/company/settings/sso-management/
-        title: Manage single sign-on
+        title: Manage Single Sign-On
       - path: /admin/company/settings/scim/
         title: SCIM
       - path: /admin/company/settings/group-mapping/
         title: Group mapping
       - path: /admin/company/settings/sso-faq/
-        title: Single sign-on FAQs
+        title: Single Sign-On FAQs
   - sectiontitle: Organization administration
     section:
     - path: /admin/organization/
@@ -1945,17 +1945,17 @@ manuals:
     - sectiontitle: Security settings
       section:
       - path: /admin/organization/security-settings/sso/
-        title: Single sign-on overview
+        title: Single Sign-On overview
       - path: /admin/organization/security-settings/sso-configuration/
-        title: Configure single sign-on
+        title: Configure Single Sign-On
       - path: /admin/organization/security-settings/sso-management/
-        title: Manage single sign-on
+        title: Manage Single Sign-On
       - path: /admin/organization/security-settings/scim/
         title: SCIM
       - path: /admin/organization/security-settings/group-mapping/
         title: Group mapping
       - path: /admin/organization/security-settings/sso-faq/
-        title: Single sign-on FAQs
+        title: Single Sign-On FAQs
 
 
 - sectiontitle: Administration and security

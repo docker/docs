@@ -1,9 +1,8 @@
-
 A company provides a single point of visibility across multiple organizations. This view simplifies the management of Docker organizations and settings. It's available to Docker Business subscribers.
 
-The following diagram depicts the set up of a company and how it relates to associated organizations. 
+The following diagram depicts the setup of a company and how it relates to associated organizations.
 
-![company-process](/admin/images/docker-hierarchy.svg){: width="700px" }
+![company-hierarchy](/admin/images/docker-hierarchy-company.svg){: width="700px" }
 
 ## Key features
 
@@ -13,4 +12,4 @@ With a company, administrators can:
 - Carefully control access to the company and company settings.
 - Have up to ten unique users assigned the company owner role without occupying a purchased seat.
 - Configure SSO and SCIM for all nested organizations.
-- Enforce SSO log-in for all users in the company.
+- Enforce SSO for all users in the company.

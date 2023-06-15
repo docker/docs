@@ -8,7 +8,7 @@ title: Overview
 
 {% include admin-company-overview.md %}
 
-To create an organization, see [Create a company](../../docker-hub/new-company.md).
+To create a company, see [Create a company](../../docker-hub/new-company.md).
 
 Learn how to administer a company using Docker Admin in the following sections.
 
@@ -50,7 +50,7 @@ Learn how to administer a company using Docker Admin in the following sections.
             <div class="component-icon">
                  <a href="/admin/company/settings/sso/"><img src="/assets/images/sign-on.svg" alt="Configure company SSO" width="70" height="70"></a>
             </div>
-                <h2 id="company-sso"><a href="/admin/company/settings/sso/">Configure single sign-on</a></h2>
+                <h2 id="company-sso"><a href="/admin/company/settings/sso/">Configure Single Sign-On</a></h2>
                 <p>Discover how to configure SSO for your entire company.</p>
         </div>
      </div>
