@@ -71,7 +71,7 @@ Field | Type | Description
 id | string |ID provides a unique identifier for the event.
 timestamp | Time | Timestamp is the time at which the event occurred.
 action |  string |  Action indicates what action encompasses the provided event.
-target | distribution.Descriptor | Target uniquely describes the target of the event.
+target | [Descriptor](https://godoc.org/github.com/docker/distribution#Descriptor) | Target uniquely describes the target of the event.
 length | int | Length in bytes of content. Same as Size field in Descriptor.
 repository | string | Repository identifies the named repository.
 fromRepository | string |  FromRepository identifies the named repository which a blob was mounted from if appropriate.
