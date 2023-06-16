@@ -5,6 +5,7 @@ description: >
 keywords: ci, github actions, gha,  build, introduction, tutorial
 redirect_from:
   - /ci-cd/github-actions/
+  - /build/ci/github-actions/examples/
 ---
 
 GitHub Actions is a popular CI/CD platform for automating your build, test, and
@@ -30,6 +31,25 @@ The following GitHub Actions are available:
 
 Using Docker's actions provides an easy-to-use interface, while still allowing
 flexibility for customizing build parameters.
+
+## Examples
+
+If you're looking for examples on how to use the Docker GitHub Actions,
+refer to the following sections:
+
+- [Cache management](cache.md)
+- [Configuring your builder](configure-builder.md)
+- [Copy image between registries](copy-image-registries.md)
+- [Export to Docker](export-docker.md)
+- [Local registry](local-registry.md)
+- [Manage tags and labels](manage-tags-labels.md)
+- [Multi-platform image](multi-platform.md)
+- [Named contexts](named-contexts.md)
+- [Push to multiple registries](push-multi-registries.md)
+- [Secrets](secrets.md)
+- [Share built image between jobs](share-image-jobs.md)
+- [Test before push](test-before-push.md)
+- [Update Docker Hub repository description](update-dockerhub-desc.md)
 
 ## Get started with GitHub Actions
 
