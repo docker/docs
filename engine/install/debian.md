@@ -29,9 +29,9 @@ To get started with Docker Engine on Debian, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Debian
 versions:
 
-- Debian Bookworm 12 (testing)
-- Debian Bullseye 11 (stable)
-- Debian Buster 10 (oldstable)
+- Debian Trixie 13 (testing)
+- Debian Bookworm 12 (stable)
+- Debian Bullseye 11 (oldstable)
 
 Docker Engine for Debian is compatible with x86_64 (or amd64), armhf, and arm64
 architectures.
