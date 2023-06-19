@@ -358,7 +358,7 @@ To resolve this, either remove the `--ipv6` flag (to preserve the same behavior
 as in Docker 1.12.3 and earlier), or provide an IPv6 subnet as the value of the
 `--subnet` flag.
 
-The network network creation will instead succeed if you use an external IPAM driver
+The network creation will instead succeed if you use an external IPAM driver
 which supports automatic allocation of IPv6 subnets.
 
 ### Runtime
