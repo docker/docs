@@ -21,7 +21,7 @@ The quickest way to create a new extension is to run `docker extension init my-e
 > **Tip**
 >
 > The `docker extension init` generates a React based extension. But you can still use it as a starting point for
-> your own extension and use any other frontend framework, like Vue, Angular, Svelte, etc. or event stay with
+> your own extension and use any other frontend framework, like Vue, Angular, Svelte, etc. or even stay with
 > vanilla Javascript.
 {: .tip }
 
