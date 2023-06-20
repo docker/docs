@@ -12,6 +12,9 @@ horizontalnav:
 - title: Reference
   path: /reference/
   node: reference
+- title: FAQ
+  path: /faq/
+  node: faq
 - title: Samples
   path: /samples/
   node: samples
@@ -1161,16 +1164,6 @@ manuals:
           title: Workarounds for common problems
         - path: /desktop/troubleshoot/known-issues/
           title: Known issues
-    - sectiontitle: FAQs
-      section:
-      - path: /desktop/faqs/general/
-        title: General FAQs
-      - path: /desktop/faqs/macfaqs/
-        title: Mac FAQs
-      - path: /desktop/faqs/windowsfaqs/
-        title: Windows FAQs
-      - path: /desktop/faqs/linuxfaqs/
-        title: Linux FAQs
     - path: /desktop/uninstall/
       title: Uninstall Docker Desktop
     - path: /desktop/feedback/
@@ -1825,8 +1818,6 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /compose/faq/
-    title: FAQs
   - path: /compose/release-notes/
     title: Release notes
 
@@ -1918,8 +1909,6 @@ manuals:
       title: Create a company
     - path:  /docker-hub/company-owner/
       title: Manage company owners
-    - path: /docker-hub/company-faqs/
-      title: FAQs
   - path: /docker-hub/orgs/
     title: Create your organization
   - path: /docker-hub/convert-account/
@@ -1936,8 +1925,6 @@ manuals:
          title: Configure
       -  path: /single-sign-on/manage/
          title: Manage
-      -  path: /single-sign-on/faqs/
-         title: FAQs
   - path: /docker-hub/scim/
     title: SCIM
   - path: /docker-hub/group-mapping/
@@ -1966,9 +1953,6 @@ manuals:
     title: Image Access Management
   - path: /docker-hub/deactivate-account/
     title: Deactivate an account or organization
-  - path: /docker-hub/onboarding-faqs/
-    title: FAQs
-
 - sectiontitle: Billing
   section:
   - path: /billing/
@@ -1981,8 +1965,7 @@ manuals:
     title: View your billing history
   - path: /billing/cycle/
     title: Change your billing cycle
-  - path: /billing/faqs/
-    title: FAQs
+
 
 - sectiontitle: Subscription
   section:
@@ -1998,8 +1981,6 @@ manuals:
     title: Remove seats
   - path: /subscription/downgrade/
     title: Downgrade
-  - path: /subscription/faq/
-    title: FAQs
   - path: /subscription/desktop-license/
     title: Docker Desktop license agreement
 
@@ -2098,3 +2079,32 @@ contribute:
       title: Videos
   - path: /contribute/checklist/
     title: Writing checklist
+
+faq:
+  - path: /faq/index/
+    title: Overview
+  - path: /billing/faqs/
+    title: Billing
+  - path: /compose/faq/
+    title: Compose
+  - sectiontitle: Desktop
+    section:
+    - path: /desktop/faqs/general/
+      title: General 
+    - path: /desktop/faqs/macfaqs/
+      title: Mac 
+    - path: /desktop/faqs/windowsfaqs/
+      title: Windows 
+    - path: /desktop/faqs/linuxfaqs/
+      title: Linux 
+  - sectiontitle: Docker Hub
+    section:
+    - path: /docker-hub/onboarding-faqs/
+      title: Onboarding
+    - path: /docker-hub/company-faqs/
+      title: Company
+    - path: /single-sign-on/faqs/
+      title: Single Sign-On
+  - path: /subscription/faq/
+    title: Subscription
+    
