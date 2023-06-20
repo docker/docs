@@ -74,7 +74,7 @@ Telepresence is free and open-source, and you can try it out by heading to
 the
 [Telepresence quickstart guide](https://www.telepresence.io/docs/latest/quick-start/?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" }.
 There’s also a
-[Telepresence extension for Docker Desktop](https://www.getambassador.io/docs/telepresence/latest/extension/intro?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" },
+[Telepresence extension for Docker Desktop](https://www.getambassador.io/docs/telepresence/latest/docker/extension?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" },
 which helps you manage intercepts for your containers.
 
 ### Docker × Ambassador
