@@ -186,10 +186,10 @@ This is useful when a corporate proxy that requires authentication is manually c
 
 > **Note**
 >
-> The Network tab is not available in the Windows container mode because
+> The **Network** tab isn't available in the Windows container mode because
 > Windows manages networking.
 
-You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
+{% include desktop-network-setting.md %}
 
 ### WSL Integration
 
