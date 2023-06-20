@@ -8,6 +8,85 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""}.
 
+## 0.11.0
+
+{% include release-date.html date="2023-06-13" %}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.0){:target="blank" rel="noopener"}.
+
+### New
+
+- Bake now supports [matrix builds](../build/bake/reference.md#targetmatrix).
+  The new matrix field on `target` lets you create multiple similar targets to
+  remove duplication in bake files. [docker/buildx#1690](https://github.com/docker/buildx/pull/1690){:target="blank" rel="noopener"}
+- New experimental `--detach` flag for running builds in detached mode.
+  [docker/buildx#1296](https://github.com/docker/buildx/pull/1296){:target="blank" rel="noopener"},
+  [docker/buildx#1620](https://github.com/docker/buildx/pull/1620){:target="blank" rel="noopener"},
+  [docker/buildx#1614](https://github.com/docker/buildx/pull/1614){:target="blank" rel="noopener"},
+  [docker/buildx#1737](https://github.com/docker/buildx/pull/1737){:target="blank" rel="noopener"},
+  [docker/buildx#1755](https://github.com/docker/buildx/pull/1755){:target="blank" rel="noopener"}
+- New experimental [debug monitor mode](https://github.com/docker/buildx/blob/v0.11.0-rc1/docs/guides/debugging.md){:target="blank" rel="noopener"}
+  that lets you start a debug session in your builds.
+  [docker/buildx#1626](https://github.com/docker/buildx/pull/1626){:target="blank" rel="noopener"},
+  [docker/buildx#1640](https://github.com/docker/buildx/pull/1640){:target="blank" rel="noopener"}
+- New [`EXPERIMENTAL_BUILDKIT_SOURCE_POLICY` environment variable](./building/env-vars.md#buildkit_experimental_source_policy)
+  for applying a BuildKit source policy file.
+  [docker/buildx#1628](https://github.com/docker/buildx/pull/1628){:target="blank" rel="noopener"}
+
+### Bug fixes and enhancements
+
+- `--load` now supports loading multi-platform images when the containerd image
+  store is enabled.
+  [docker/buildx#1813](https://github.com/docker/buildx/pull/1813){:target="blank" rel="noopener"}
+- Build progress output now displays the name of the builder being used.
+  [docker/buildx#1177](https://github.com/docker/buildx/pull/1177){:target="blank" rel="noopener"}
+- Bake now supports detecting `compose.{yml,yaml}` files.
+  [docker/buildx#1752](https://github.com/docker/buildx/pull/1752){:target="blank" rel="noopener"}
+- Bake now supports new compose build keys `dockerfile_inline` and `additional_contexts`.
+  [docker/buildx#1784](https://github.com/docker/buildx/pull/1784){:target="blank" rel="noopener"}
+- Bake now supports replace HCL function.
+  [docker/buildx#1720](https://github.com/docker/buildx/pull/1720){:target="blank" rel="noopener"}
+- Bake now allows merging multiple similar attestation parameters into a single
+  parameter to allow overriding with a single global value.
+  [docker/buildx#1699](https://github.com/docker/buildx/pull/1699){:target="blank" rel="noopener"}
+- Initial support for shell completion.
+  [docker/buildx#1727](https://github.com/docker/buildx/pull/1727){:target="blank" rel="noopener"}
+- BuildKit versions now correctly display in `buildx ls` and `buildx inspect`
+  for builders using the `docker` driver.
+  [docker/buildx#1552](https://github.com/docker/buildx/pull/1552){:target="blank" rel="noopener"}
+- Display additional builder node details in buildx inspect view.
+  [docker/buildx#1440](https://github.com/docker/buildx/pull/1440){:target="blank" rel="noopener"},
+  [docker/buildx#1854](https://github.com/docker/buildx/pull/1874){:target="blank" rel="noopener"}
+- Builders using the `remote` driver allow using TLS without proving its own
+  key/cert (if BuildKit remote is configured to support it)
+  [docker/buildx#1693](https://github.com/docker/buildx/pull/1693){:target="blank" rel="noopener"}
+- Builders using the `kubernetes` driver support a new `serviceaccount` option,
+  which sets the `serviceAccountName` of the Kubernetes pod.
+  [docker/buildx#1597](https://github.com/docker/buildx/pull/1597){:target="blank" rel="noopener"}
+- Builders using the `kubernetes` driver support the `proxy-url` option in the
+  kubeconfig file.
+  [docker/buildx#1780](https://github.com/docker/buildx/pull/1780){:target="blank" rel="noopener"}
+- Builders using the `kubernetes` are now automatically assigned a node name if
+  no name is explicitly provided.
+  [docker/buildx#1673](https://github.com/docker/buildx/pull/1673){:target="blank" rel="noopener"}
+- Fix invalid path when writing certificates for `docker-container` driver on Windows.
+  [docker/buildx#1831](https://github.com/docker/buildx/pull/1831){:target="blank" rel="noopener"}
+- Fix bake failure when remote bake file is accessed using SSH.
+  [docker/buildx#1711](https://github.com/docker/buildx/pull/1711){:target="blank" rel="noopener"},
+  [docker/buildx#1734](https://github.com/docker/buildx/pull/1734){:target="blank" rel="noopener"}
+- Fix bake failure when remote bake context is incorrectly resolved.
+  [docker/buildx#1783](https://github.com/docker/buildx/pull/1783){:target="blank" rel="noopener"}
+- Fix path resolution of `BAKE_CMD_CONTEXT` and `cwd://` paths in bake contexts.
+  [docker/buildx#1840](https://github.com/docker/buildx/pull/1840){:target="blank" rel="noopener"}
+- Fix mixed OCI and Docker media types when creating images using
+  `buildx imagetools create`.
+  [docker/buildx#1797](https://github.com/docker/buildx/pull/1797){:target="blank" rel="noopener"}
+- Fix mismatched image id between `--iidfile` and `-q`.
+  [docker/buildx#1844](https://github.com/docker/buildx/pull/1844){:target="blank" rel="noopener"}
+- Fix AWS authentication when mixing static creds and IAM profiles.
+  [docker/buildx#1816](https://github.com/docker/buildx/pull/1816){:target="blank" rel="noopener"}
+
 ## 0.10.4
 
 {% include release-date.html date="2023-03-06" %}
