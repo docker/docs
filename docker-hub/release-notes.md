@@ -13,26 +13,26 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ## 2023-05-09
 
-### New
+### New feature
 
 - Docker Business subscribers can now [create a company](new-company.md) in Docker Hub to manage organizations and settings.
 
 ## 2023-03-07
 
-### New
+### New feature
 
 -  You can now automatically sync user updates with your Docker organizations and teams with [Group Mapping](group-mapping.md) for SSO and SCIM provisioning.
 
 ## 2022-12-12
 
-### New
+### New feature
 
 - The new [domain audit](../docker-hub/domain-audit.md) feature lets you audit your domains for users who aren't a member of your organization.
 
 
 ## 2022-09-26
 
-### New
+### New feature
 
 - The new [autobuild feature](../docker-hub/builds/manage-builds.md#check-your-active-builds) lets you view your in-progress logs every 30 seconds instead of when the build is complete.
 
@@ -62,31 +62,31 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ## 2022-06-23
 
-### New
+### New feature
 
 - With [SCIM](scim.md), you can manage users within your Okta identity provider (IdP). In addition, you can enable SCIM on organizations that are part of the Docker Business subscription.
 
 ## 2022-05-24
 
-### New
+### New feature
 
 - [Registry Access Management](registry-access-management.md) is now available for all Docker Business subscriptions. When enabled, your users can access specific registries in Docker Hub.
 
 ## 2022-05-03
 
-### New
+### New feature
 
 - Organization owners can [invite new members](members.md#invite-members) to an organization via Docker ID or email address.
 
 ## 2021-11-15
 
-### New
+### New feature
 
 - You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/upgrade.md).
 
 ## 2021-08-31
 
-### New
+### New feature
 
 Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses. Docker subscription tiers now include Personal, Pro, Team, and Business.
 
@@ -101,7 +101,7 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 
     To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="*blank" rel="noopener" class="*" id="dkr_docs_relnotes_btl"}. For more information, see [Docker subscription overview](../subscription/index.md).
 
-## 2021-05-05
+## 2021-05-05N
 
 ### Enhancement
 
