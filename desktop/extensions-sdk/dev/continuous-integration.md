@@ -23,13 +23,13 @@ steps:
 > This action supports only Github Action macOS runners at the moment. You need to specify `runs-on: macOS-latest` for your end to end tests.
 {: .important }
 
-Once the step has executed, the next steps can use Docker Desktop and the Docker CLI to install and test the extension.
+Once the step has executed, the next steps use Docker Desktop and the Docker CLI to install and test the extension.
 
 ## Validating your extension with Puppeteer
 
-Once Docker Desktop is started in the CI, you can build, install, and validate your extension with jest and Puppeteer.
+Once Docker Desktop starts in CI, you can build, install, and validate your extension with Jest and Puppeteer.
 
-First, build and install your extension from your test:
+First, build and install the extension from your test:
 
 ```ts
 import { DesktopUI } from "@docker/extension-test-helper";
@@ -50,7 +50,7 @@ beforeAll(async () => {
 });
 ```
 
-Then open the Docker Desktop Dashboard and run some tests in your extension UI:
+Then open the Docker Desktop **Dashboard** and run some tests in your extension UI:
 
 ```ts
 describe("Test my extension", () => {
@@ -65,7 +65,7 @@ describe("Test my extension", () => {
 });
 ```
 
-Finally, shutdown the Docker Dashboard and uninstall your extension:
+Finally, shutdown Docker Dashboard and uninstall your extension:
 
 ```ts
 afterAll(async () => {
