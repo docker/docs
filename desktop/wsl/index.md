@@ -44,7 +44,7 @@ Now `docker` commands work from Windows using the new WSL 2 engine.
 
 WSL 2 adds support for "Linux distros" to Windows, where each distro behaves like a VM except they all run on top of a single shared Linux kernel.
 
-Docker Desktop does not require any particular Linux distros to be installed. The `docker` CLI and UI all work fine from Windows without any additional Linux distros. However for the best developer experience, we recommend installing at least one additional distro and enabling Docker support by:
+Docker Desktop does not require any particular Linux distros to be installed. The `docker` CLI and UI all work fine from Windows without any additional Linux distros. However for the best developer experience, we recommend installing at least one additional distro and enable Docker support:
 
 1. Ensure the distribution runs in WSL 2 mode. WSL can run distributions in both v1 or v2 mode.
 
@@ -54,7 +54,7 @@ Docker Desktop does not require any particular Linux distros to be installed. Th
      $ wsl.exe -l -v
      ```
 
-    To upgrade your existing Linux distro to v2, run:
+    To upgrade the Linux distro to v2, run:
 
     ```console
     $ wsl.exe --set-version (distro name) 2
