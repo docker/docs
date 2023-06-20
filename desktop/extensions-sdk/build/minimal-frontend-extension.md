@@ -103,4 +103,5 @@ The left-hand menu displays a new tab with the name of your extension.
 
 - Build a more [advanced frontend](./frontend-extension-tutorial.md) extension.
 - Learn how to [test and debug](../dev/test-debug.md) your extension.
+- Learn how to [setup CI for your extension](../dev/continuous-integration.md).
 - Learn more about extensions [architecture](../architecture/index.md).
