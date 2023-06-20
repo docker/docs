@@ -176,7 +176,7 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 ### Network
 
-You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
+{% include desktop-network-setting.md %}
 
 ## Docker Engine
 
