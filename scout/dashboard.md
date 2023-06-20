@@ -97,7 +97,7 @@ Each entry in the list shows the following details:
 - The repository name. Selecting the link opens [the list of tags for the repository](#repository-tag-list).
 - The most recent tag of the image and its vulnerabilities. Selecting the link for the tag opens [the Image layer detail view](#image-layer-view) for the repository.
 - The operating system and architecture of the image.
-- The base image tag used by the repository. Selecting the link opens [the image layer detail view](#image-layer-view) for the that version.
+- The base image tag used by the repository. Selecting the link opens [the image layer detail view](#image-layer-view) for that version.
 - The current base image digest for the repository.
 - The date of the last push for the repository.
 
