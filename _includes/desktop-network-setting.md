@@ -1,0 +1,1 @@
+Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case the Docker Desktop's choice of subnet clashes with IPs in your environment, specify a custom subnet using the **Network** setting.

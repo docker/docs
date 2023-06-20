@@ -176,7 +176,7 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 ### Network
 
-Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case the choice of subnet clashes with something in your environment, specify a custom subnet using the **Network** setting.
+{% include desktop-network-setting.md %}
 
 ## Docker Engine
 

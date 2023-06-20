@@ -189,7 +189,7 @@ This is useful when a corporate proxy that requires authentication is manually c
 > The **Network** tab isn't available in the Windows container mode because
 > Windows manages networking.
 
-Docker Desktop uses a private IPv4 network for internal services such as a DNS server and an HTTP proxy. In case the choice of subnet clashes with something in your environment, specify a custom subnet using the **Network** setting.
+{% include desktop-network-setting.md %}
 
 ### WSL Integration
 
