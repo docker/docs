@@ -107,18 +107,40 @@ Click the **View recommended fixes** button to see instructions to apply the rec
 
 ## Packages and dependencies
 
-![A screenshot of the Docker Scout packages and dependencies list](./images/dashboard-pandd.png)
+The **Packages and dependencies** tab shows all **Packages** and **Base images** across images in an organization.
 
-The **Packages and dependencies** tab shows all packages and base images part of your images in an organization. You can sort the list by package name.
+### Packages
 
 Each entry in the list shows the following details:
 
 - The package name.
 - The package type.
-- The license(s) used by the package.
 - The versions of the package used by images in the organization.
-- The package type.
 - The number of images that use the package.
+
+### Base images
+
+Each entry in the list shows the following details:
+
+- The base image name.
+- The versions of the base image used by images in the organization.
+- The number of images that use the base image. Selecting the link opens [the list of images that use the base image view](#images-using-base-image).
+- The number of packages in the base image.
+
+## Images using base image
+
+![A screenshot of the Docker Scout view showing images that use a selected base image](./images/dashboard-images-used-by.png)
+
+The **Images** tab shows all images in an organization that use a specific base image.
+
+Each entry in the list shows the following details:
+
+- The repository name. Selecting the link opens [the list of tags for the repository](#repository-tag-list).
+- The most recent tag of the image and its vulnerabilities. Selecting the link for the tag opens [the Image layer detail view](#image-layer-view) for the repository.
+- The operating system and architecture of the image.
+- The base image tag used by the repository. Selecting the link opens [the image layer detail view](#image-layer-view) for that version.
+- The current base image digest for the repository.
+- The date of the last push for the repository.
 
 ## Vulnerabilities
 
