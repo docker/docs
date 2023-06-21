@@ -439,7 +439,7 @@ connected to both networks.
     
     > **Note**
     > 
-    > Only valid for custom container names, the default generated container names cannot be resolved
+    > Automatic service discovery can only resolve custom container names, not default automatically generated container names,
 
     ```console
     $ docker container attach alpine1
