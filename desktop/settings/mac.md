@@ -93,7 +93,7 @@ You can also move the disk image to a different location. If you attempt to move
 
 >**Tip**
 >
-> If you feel Docker Desktop starting to get slow or you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
+> If you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
 {: .tip} 
 
 ### File sharing
