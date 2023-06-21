@@ -30,7 +30,7 @@ On the **General** tab, you can configure when to start Docker and specify other
   execution attacks.
 
 - **Use the WSL 2 based engine**. WSL 2 provides better performance than the
-  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
+  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../wsl/index.md).
 
 - **Add `*.docker.internal` to the host's `/etc/hosts` file. (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
 
@@ -203,7 +203,7 @@ to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 You can also select any additional distributions you would like to enable the WSL 2 integration on.
 
 For more details on configuring Docker Desktop to use WSL 2, see
-[Docker Desktop WSL 2 backend](../windows/wsl.md).
+[Docker Desktop WSL 2 backend](../wsl/index.md).
 
 ## Docker Engine
 

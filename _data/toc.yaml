@@ -1129,6 +1129,14 @@ manuals:
       title: containerd image store (Beta)
     - path: /desktop/wasm/
       title: Wasm (Beta)
+    - sectiontitle: WSL
+      section:
+        - path: /desktop/wsl/
+          title: Set up WSL 2 on Docker Desktop for Windows
+        - path: /desktop/wsl/use-wsl/
+          title: Use WSL
+        - path: /desktop/wsl/best-practices/
+          title: Best practices
     - sectiontitle: Additional resources
       section:
         - path: /desktop/kubernetes/
@@ -1137,8 +1145,6 @@ manuals:
           title: Back up and restore data
         - path: /desktop/networking/
           title: Explore networking features
-        - path: /desktop/windows/wsl/
-          title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
           title: Run Docker Desktop for Windows in a VM or VDI environment
         - path: /desktop/allow-list/
