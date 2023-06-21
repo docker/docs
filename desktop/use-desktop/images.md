@@ -41,7 +41,7 @@ When prompted you can either:
 
 ## Inspect an image
 
-To inspect an image, simply select the image row. Inspecting an image displays detailed information about the image such as the:
+To inspect an image, select the image row. Inspecting an image displays detailed information about the image such as the:
 
 - Image history
 - Image ID

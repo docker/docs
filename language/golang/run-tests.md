@@ -57,7 +57,7 @@ As you can see, this is a high-level test, unconcerned with the implementation d
 * the test is using [`ory/dockertest`](https://github.com/ory/dockertest) Go module;
 * the test assumes that the Docker engine instance is running on the same machine where the test is being run.
 
-The second test in `main_test.go` has almost identical structure but it tests _another_ business requirement of our application. You are welcome to have a look at all available tests in [`docker-gs-ping/main_test.go`](https://github.com/olliefr/docker-gs-ping/blob/main/main_test.go).
+The second test in `main_test.go` has almost identical structure but it tests _another_ business requirement of our application. You are welcome to have a look at all available tests in [`docker-gs-ping/main_test.go`](https://github.com/docker/docker-gs-ping/blob/main/main_test.go).
 
 ## Run tests locally
 
@@ -71,13 +71,13 @@ $ docker build -t docker-gs-ping:latest .
 
 In the above example we've omitted most of the output, only displaying the first line indicating that the build was successful.
 
-Note, that the image is tagged with `latest` which is the same label we've chosen to use in our `main_test.go` tests. 
+Note, that the image is tagged with `latest` which is the same label we've chosen to use in our `main_test.go` tests.
 
 Now that the Docker image for our application had been built, we can run the tests that depend on it:
 
 ```console
 $ go test ./...
-ok      github.com/olliefr/docker-gs-ping       2.564s
+ok      github.com/docker/docker-gs-ping       2.564s
 ```
 
 That was a bit... underwhelming? Let's ask it to print a bit more detail, just to be sure:
@@ -91,7 +91,7 @@ $ go test -v ./...
     main_test.go:83: container not ready, waiting...
 --- PASS: TestHealthCheck (1.40s)
 PASS
-ok      github.com/olliefr/docker-gs-ping       6.670s
+ok      github.com/docker/docker-gs-ping       6.670s
 ```
 
 So, the tests do, indeed, pass. Note, how retrying using exponential back-off helped avoiding failing tests while the containers are being initialised. What happens in each test is that `ory/dockertest` module connects to the local Docker engine instance and instructs it to spin up a container using the image, identified by the tag `docker-gs-ping:latest`. Starting up a container may take a while, so our tests retry accessing the container until the container is ready to respond to requests.
