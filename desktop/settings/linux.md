@@ -103,6 +103,7 @@ File share settings are:
 >   such as cache directories or databases, the performance will be much
 >   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
 >   (named volume) or [data container](../../storage/volumes.md).
+{: .tip}
 
 ### Proxies
 

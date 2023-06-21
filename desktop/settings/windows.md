@@ -141,6 +141,7 @@ File share settings are:
 >   open `Test` will fail with the error "No such file or directory". Similarly,
 >   once a file called `test` is created, attempts to create a second file called
 >   `Test` will fail.
+{: .tip}
 
 #### Shared folders on demand
 
