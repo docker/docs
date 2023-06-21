@@ -3,7 +3,7 @@ short: Run a one-off command on a service.
 long: |-
     Runs a one-time command against a service.
 
-    The following command starts the `web` service and runs `bash` as its command:
+    the following command starts the `web` service and runs `bash` as its command:
 
     ```console
     $ docker compose run web bash
@@ -62,6 +62,24 @@ options:
       value_type: bool
       default_value: "false"
       description: Build image before starting container.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cap-add
+      value_type: list
+      description: Add Linux capabilities
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: cap-drop
+      value_type: list
+      description: Drop Linux capabilities
       deprecated: false
       hidden: false
       experimental: false
