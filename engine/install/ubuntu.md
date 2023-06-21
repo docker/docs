@@ -1,6 +1,6 @@
 ---
 description: Jumpstart your client-side server applications with Docker Engine on Ubuntu. This guide details prerequisites and multiple methods to install.
-keywords: docker install script, ubuntu docker server, ubuntu server docker, install docker engine ubuntu, install docker on ubuntu server, ubuntu 18.04 docker-ce, install docker engine on ubuntu, ubuntu install docker ce, ubuntu install docker engine
+keywords: docker install script, ubuntu docker server, ubuntu server docker, install docker engine ubuntu, install docker on ubuntu server, ubuntu 22.04 docker-ce, install docker engine on ubuntu, ubuntu install docker ce, ubuntu install docker engine
 redirect_from:
   - /ee/docker-ee/ubuntu/
   - /engine/installation/linux/docker-ce/ubuntu/
@@ -38,7 +38,6 @@ versions:
 - Ubuntu Kinetic 22.10
 - Ubuntu Jammy 22.04 (LTS)
 - Ubuntu Focal 20.04 (LTS)
-- Ubuntu Bionic 18.04 (LTS)
 
 Docker Engine is compatible with x86_64 (or amd64), armhf, arm64, and
 s390x architectures.
