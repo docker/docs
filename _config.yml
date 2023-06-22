@@ -280,3 +280,11 @@ fetch-remote:
       - dest: "build/bake/reference.md"
         src:
           - "docs/bake-reference.md"
+
+  - repo: "https://github.com/docker/scout-cli"
+    default_branch: "main"
+    ref: "main"
+    paths:
+      - dest: "_data/scout-cli"
+        src:
+          - "docs/*.yaml"
