@@ -20,33 +20,33 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump golang to 1.20.5
 
 ### Bug fixes and enhancements
-- Introduced ability to select service to be stopped by `compose down`
-- Added `--progress` as top-level flag to configure progress UI style
-- Introduce `run --cap-add` to run maintenance commands using service image
-- Fixed a bug during detection of swarm mode
-- Fixed a bug when setting project name via COMPOSE_PROJECT_NAME environment variable
-- Adjusted the display of volumes flag in the help of `down` command
-- Fixed a bug in `up` command which should not silently ignore missing `depends_on` services
-- Aligned forward signal to container behaviour with the `docker run` one
-- Compose now detects network name conflict
-- Fixed a typo in warning about existing volume
-- Compose now detects new services started after `compose -p x logs -f` command
-- Fixed a bug when `compose` was used as project name
-- Fixed a bug in `watch` command when a directory does not exist
-- Removed default timeout of 10 seconds when restarting / stopping services
-- Fixed a bug in `watch` which applied "rebuild" strategy by default
-- Fixed a race condition, waiting for containers when one exit
-- Added a warning telling users that uid,gid,mode are not implemented for `build.secrets`
-- Fixed a bug in `watch` which was watching the whole build context instead of only configured paths
-- Compose now sorts containers by creation date to scale down the older ones first
-- Fixed a bug in the doc generation task for Windows environment
-- Updated the docs to reflect dry run mode is feature complete
-- Improved the diagnostic message on network label mismatch
-- Fixed a bug which was rendering `Building` section when no build involved
-- Fixed a bug in code coverage metrics
-- Added OTEL initialization
-- Added GitHub action to trigger Docker Desktop e2e tests with Compose edge version
-- Added more ignore rules to dependabot
+- Introduced the ability to select a single service to be stopped by `compose down`.
+- Added `--progress` as top-level flag to configure progress UI style.
+- Introduced `run --cap-add` to run maintenance commands using service image.
+- Fixed a bug during detection of swarm mode.
+- Fixed a bug when setting the project name via `COMPOSE_PROJECT_NAME` environment variable.
+- Adjusted the display of the volumes flag with the help of `down` command. 
+- Fixed a bug in the `up` command which should not silently ignore missing `depends_on` services.
+- Aligned forward signal to container behaviour with the `docker run` one.
+- Compose now detects network name conflict.
+- Fixed a typo in the warning message about an existing volume.
+- Compose now detects new services started after `compose -p x logs -f` command.
+- Fixed a bug when `compose` was used as project name.
+- Fixed a bug in the `watch` command when a directory does not exist.
+- Removed default timeout of 10 seconds when restarting or stopping services.
+- Fixed a bug in `watch` which applied the "rebuild" strategy by default.
+- Fixed a race condition, waiting for containers when one exit.
+- Added a warning telling users that uid,gid,mode are not implemented for `build.secrets`.
+- Fixed a bug in `watch` which was watching the whole build context instead of only configured paths.
+- Compose now sorts containers by creation date to scale down the older ones first.
+- Fixed a bug in the docs generation task for Windows environments.
+- Updated the docs to reflect Dry Run mode is feature complete.
+- Improved the diagnostic message on network label mismatch.
+- Fixed a bug which was rendering `Building` section when there was no build involved.
+- Fixed a bug in code coverage metrics.
+- Added OTEL initialization.
+- Added a GitHub action to trigger Docker Desktop e2e tests with Compose edge versions.
+- Added more ignore rules to dependabot.
 
 ## 2.18.1
 {% include release-date.html date="2023-05-17" %}
