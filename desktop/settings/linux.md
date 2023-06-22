@@ -1,7 +1,7 @@
 ---
 description: Change your Docker Desktop settings on Linux
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Linux
-title: Change on Linux
+title: Change Docker Desktop settings on Linux
 ---
 
 This page provides information on how to configure and manage your Docker Desktop settings.
@@ -20,7 +20,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
 
-- **Use integrated container terminal**. Select to execute commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md)
+- **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
+If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
@@ -34,6 +35,9 @@ On the **General** tab, you can configure when to start Docker and specify other
   dashboard when starting Docker Desktop.
 
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
+    >**Note**
+    >
+    > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
   use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
@@ -65,6 +69,10 @@ Advanced settings are:
 
 You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it.
 
+>**Tip**
+>
+> If you feel Docker Desktop starting to get slow or you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
+
 ### File sharing
 
 Use File sharing to allow local directories on your machine to be shared with
@@ -95,6 +103,7 @@ File share settings are:
 >   such as cache directories or databases, the performance will be much
 >   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
 >   (named volume) or [data container](../../storage/volumes.md).
+{: .tip}
 
 ### Proxies
 
@@ -203,9 +212,9 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 {% include beta.md %}
 
-#### Enable containerd
+#### Use containerd for pulling and storing images
 
-Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
+Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
 
 ### Experimental features
 
