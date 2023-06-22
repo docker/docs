@@ -235,6 +235,10 @@ To see the full list of possible configuration options, see the
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
+## Builders
+
+{% include desktop-builders-setting.md %}
+
 ## Kubernetes
 
 > **Note**

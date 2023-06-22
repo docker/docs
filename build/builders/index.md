@@ -11,6 +11,13 @@ container image or other artifacts.
 You can create and manage builders, inspect them, and even connect to builders
 running remotely. You interact with builders using the Docker CLI.
 
+> **Builds in Docker Desktop**
+>
+> The [Docker Desktop Builds view](../../desktop/use-desktop/builds.md)
+> is a [Beta](../../release-lifecycle.md#beta) feature that lets you
+> view and manage builders using Docker Desktop.
+{: .experimental }
+
 ## Default builder
 
 Docker Engine automatically creates a builder that becomes the default backend

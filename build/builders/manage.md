@@ -4,7 +4,8 @@ keywords: build, buildx, builders, buildkit, drivers, backend
 description: 
 ---
 
-You can create, inspect, and manage builders using `docker buildx` commands.
+You can create, inspect, and manage builders using `docker buildx` commands,
+or [using Docker Desktop](#manage-builders-with-docker-desktop).
 
 ## Create a new builder
 
@@ -95,3 +96,13 @@ acekq89snc7j6im1rjdizvsg1*                true        8.192kB     37 seconds ago
 Reclaimable:  2.01GB
 Total:        2.01GB
 ```
+
+## Manage builders with Docker Desktop
+
+If you have turned on the
+[Docker Desktop Builds view](../../desktop/use-desktop/builds.md),
+you can inspect builders in Docker Desktop settings. See:
+
+- [Change settings, Windows](../../desktop/settings/windows.md#builders)
+- [Change settings, Mac](../../desktop/settings/mac.md#builders)
+- [Change settings, Linux](../../desktop/settings/linux.md#builders)
