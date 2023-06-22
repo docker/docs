@@ -69,8 +69,8 @@ example_golangci_lint_version: "v1.52"
 # API version if it requires a relatively recent version of the Engine.
 #
 # The "min_api_threshold" option specifies the minimum required API version for
-# which we show a badge (currently: API v1.40, or "Docker 19.03").
-min_api_threshold: 1.40
+# which we show a badge (currently: API v1.41, or "Docker 20.10").
+min_api_threshold: 1.41
 
 # Enable search autocompletion (requires metadata.json to be generated)
 local_search: true
