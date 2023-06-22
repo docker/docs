@@ -569,6 +569,10 @@
 "/develop/remote-development/":
   - /go/telepresence/
 
-# Builders
-"/build/drivers/":
+# Build links
+"/desktop/use-desktop/builds/":
+  - /go/builds/
+"/build/builders/":
   - /go/builders/
+"/build/builders/#selected-builder":
+  - /go/builders/selected/
