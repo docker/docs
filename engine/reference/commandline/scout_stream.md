@@ -1,7 +1,7 @@
 ---
 datafolder: scout-cli
-datafile: docker_scout_cves
-title: docker scout cves
+datafile: docker_scout_stream
+title: docker scout stream
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

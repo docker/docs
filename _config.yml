@@ -51,7 +51,7 @@ compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
 compose_switch_version: "1.0.4"
-buildkit_version: "0.10.5"
+buildkit_version: "0.11.6"
 
 # Strings for use in doc examples, e.g. runtime versions.
 example_go_version: "1.20"
@@ -280,3 +280,11 @@ fetch-remote:
       - dest: "build/bake/reference.md"
         src:
           - "docs/bake-reference.md"
+
+  - repo: "https://github.com/docker/scout-cli"
+    default_branch: "main"
+    ref: "main"
+    paths:
+      - dest: "_data/scout-cli"
+        src:
+          - "docs/*.yaml"
