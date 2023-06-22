@@ -2081,7 +2081,7 @@ contribute:
     title: Writing checklist
 
 faq:
-  - path: /faq/index/
+  - path: /faq/
     title: Overview
   - path: /billing/faqs/
     title: Billing
@@ -2097,14 +2097,30 @@ faq:
       title: Windows 
     - path: /desktop/faqs/linuxfaqs/
       title: Linux 
+    - path: /desktop/faqs/releases/
+      title: Releases
   - sectiontitle: Docker Hub
     section:
-    - path: /docker-hub/onboarding-faqs/
-      title: Onboarding
+    - path: /docker-hub/general-faqs/
+      title: General
+    - path: /docker-hub/organization-faqs/
+      title: Organization
     - path: /docker-hub/company-faqs/
       title: Company
-    - path: /single-sign-on/faqs/
-      title: Single Sign-On
+    - sectiontitle: Single Sign-On
+      section:
+      - path: /single-sign-on/faqs/
+        title: General
+      - path: /single-sign-on/saml-faqs/
+        title: SAML
+      - path: /single-sign-on/idp-faqs/
+        title: Identity providers
+      - path: /single-sign-on/domains-faqs/
+        title: Domains
+      - path: /single-sign-on/enforcement-faqs/
+        title: Enforcement
+      - path: /single-sign-on/users-faqs/
+        title: Manage users
   - path: /subscription/faq/
     title: Subscription
     

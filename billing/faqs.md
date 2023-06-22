@@ -30,7 +30,7 @@ Docker also sends an email notification `Action Required - Credit Card Payment F
 
 Once the grace period is over and the invoice is still not paid, the subscription is downgraded to a free plan and all paid features are disabled. 
 
-## What billing-related emails will I receive from Docker Hub?
+### What billing-related emails will I receive from Docker Hub?
 
 Docker Hub sends the following billing-related emails:
 
