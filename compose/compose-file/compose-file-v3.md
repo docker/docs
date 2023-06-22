@@ -805,7 +805,7 @@ services:
       placement:
         constraints:
           - "node.role==manager"
-          - "engine.labels.operatingsystem==ubuntu 18.04"
+          - "engine.labels.operatingsystem==ubuntu 22.04"
         preferences:
           - spread: node.labels.zone
 ```
@@ -1302,7 +1302,7 @@ a partial image ID.
 image: redis
 ```
 ```yaml
-image: ubuntu:18.04
+image: ubuntu:22.04
 ```
 ```yaml
 image: tutum/influxdb

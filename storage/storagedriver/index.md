@@ -39,7 +39,8 @@ read-only. Consider the following Dockerfile:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM ubuntu:18.04
+
+FROM ubuntu:22.04
 LABEL org.opencontainers.image.authors="org@example.com"
 COPY . /app
 RUN make /app
@@ -48,7 +49,7 @@ CMD python /app/app.py
 ```
 
 This Dockerfile contains four commands. Commands that modify the filesystem create
-a layer. The `FROM` statement starts out by creating a layer from the `ubuntu:18.04`
+a layer. The `FROM` statement starts out by creating a layer from the `ubuntu:22.04`
 image. The `LABEL` command only modifies the image's metadata, and does not produce
 a new layer. The `COPY` command adds some files from your Docker client's current
 directory. The first `RUN` command builds your application using the `make` command,
@@ -157,14 +158,15 @@ usually `/var/lib/docker/` on Linux hosts. You can see these layers being pulled
 in this example:
 
 ```console
-$ docker pull ubuntu:18.04
-18.04: Pulling from library/ubuntu
+$ docker pull ubuntu:22.04
+22.04: Pulling from library/ubuntu
 f476d66f5408: Pull complete
 8882c27f669e: Pull complete
 d9af21273955: Pull complete
 f5029279ec12: Pull complete
-Digest: sha256:ab6cb8de3ad7bb33e2534677f865008535427390b117d7939193f8d1a6613e34
-Status: Downloaded newer image for ubuntu:18.04
+Digest: sha256:6120be6a2b7ce665d0cbddc3ce6eae60fe94637c6a66985312d1f02f63cc0bcd
+Status: Downloaded newer image for ubuntu:22.04
+docker.io/library/ubuntu:22.04
 ```
 
 Each of these layers is stored in its own directory inside the Docker host's
