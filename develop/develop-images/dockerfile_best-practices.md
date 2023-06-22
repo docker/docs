@@ -24,7 +24,8 @@ changes from the previous layer. The following is the contents of an example Doc
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM ubuntu:18.04
+
+FROM ubuntu:22.04
 COPY . /app
 RUN make /app
 CMD python /app/app.py
@@ -32,7 +33,7 @@ CMD python /app/app.py
 
 Each instruction creates one layer:
 
-- `FROM` creates a layer from the `ubuntu:18.04` Docker image.
+- `FROM` creates a layer from the `ubuntu:22.04` Docker image.
 - `COPY` adds files from your Docker client's current directory.
 - `RUN` builds your application with `make`.
 - `CMD` specifies what command to run within the container.
@@ -448,7 +449,8 @@ subsequent `apt-get install` instructions fail. For example, the issue will occu
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM ubuntu:18.04
+
+FROM ubuntu:22.04
 RUN apt-get update
 RUN apt-get install -y curl
 ```
@@ -458,7 +460,8 @@ modify `apt-get install` by adding an extra package as shown in the following Do
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM ubuntu:18.04
+
+FROM ubuntu:22.04
 RUN apt-get update
 RUN apt-get install -y curl nginx
 ```
@@ -890,4 +893,3 @@ These Official Images have exemplary Dockerfiles:
 * [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
 * [More about Base Images](../../build/building/base-images.md)
-
