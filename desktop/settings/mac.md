@@ -1,7 +1,7 @@
 ---
 description: Change your Docker Desktop settings on Mac
 keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Mac
-title: Change preferences on Mac
+title: Change Docker Desktop settings on Mac
 redirect_from:
 - /docker-for-mac/mutagen-caching/
 - /docker-for-mac/mutagen/
@@ -9,7 +9,7 @@ redirect_from:
 - /docker-for-mac/osxfs/
 ---
 
-This page provides information on how to configure and manage your Docker Desktop settings.
+This page provides information on how to configure and manage your Docker Desktop for Mac settings.
 
 To navigate to **Settings** either:
 
@@ -27,18 +27,27 @@ On the **General** tab, you can configure when to start Docker and specify other
 
 - **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
 
-- **Use integrated container terminal**. Select to execute commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
+- **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
+If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
 
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
-  virtual machine. This option is disabled by default.
+  virtual machine. This option is turned off by default.
 
 - **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`. 
+    > **Tip**
+    >
+    > Turn this setting on to make Docker Desktop run faster. 
+    {: .tip}
 
 - **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. The **VirtioFS** option is only available for macOS versions 12.5 and above. 
+    >**Tip**
+    >
+    > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
+    {: .tip}
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
-  troubleshoot the application. Clear the check box to opt out. Docker may
+  troubleshoot the application. Clear the checkbox to opt out. Docker may
   periodically prompt you for more information.
 
 - **Show weekly tips**. Select to display useful advice and suggestions about
@@ -47,31 +56,13 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Open Docker Desktop dashboard at startup**. Select to automatically open the
   dashboard when starting Docker Desktop.
 
-- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
+- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md).
+    >**Note**
+    >
+    > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
   use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
-
-## Advanced
-
-On the **Advanced** tab, you can reconfigure your initial installation settings:
-
-- **Choose how to configure the installation of Docker's CLI tools**. 
-  - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin`
-  - **User**: Docker CLI tools are installed in the user directory under `$HOME/.docker/bin`. You must then add `$HOME/.docker/bin` to your PATH. To add `$HOME/.docker/bin` to your path:
-      1. Open your shell configuration file. This is `~/.bashrc` if you're using a bash shell, or `~/.zshrc` if you're using a zsh shell. 
-      2. Run the following command:
-            ```console
-            $ export PATH=$PATH:~/.docker/bin
-            ```
-     3. Save and the close the file. Restart your shell to apply the changes to the PATH variable. 
-
-- **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks).
-
-- **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#binding-privileged-ports).
-
-For more information on each configuration
-and use case, see [Permission requirements](../mac/permission-requirements.md).
 
 ## Resources
 
@@ -99,6 +90,11 @@ Advanced settings are:
 - **Disk image location**. Specify the location of the Linux volume where containers and images are stored.
 
 You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it.
+
+>**Tip**
+>
+> If you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
+{: .tip} 
 
 ### File sharing
 
@@ -146,6 +142,7 @@ File share settings are:
 >   `Test` will fail.
 >
 > For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](../troubleshoot/topics.md)
+{: .tip}
 
 ### Proxies
 
@@ -260,9 +257,9 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 {% include beta.md %}
 
-#### Enable containerd
+#### Use containerd for pulling and storing images
 
-Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
+Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
 
 #### Use Rosetta for x86/AMD64 emulation on Apple Silicon. 
 
@@ -271,3 +268,24 @@ Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This
 ### Experimental features
 
 {% include desktop-experimental.md %}
+
+## Advanced
+
+On the **Advanced** tab, you can reconfigure your initial installation settings:
+
+- **Choose how to configure the installation of Docker's CLI tools**. 
+  - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin`
+  - **User**: Docker CLI tools are installed in the user directory under `$HOME/.docker/bin`. You must then add `$HOME/.docker/bin` to your PATH. To add `$HOME/.docker/bin` to your path:
+      1. Open your shell configuration file. This is `~/.bashrc` if you're using a bash shell, or `~/.zshrc` if you're using a zsh shell. 
+      2. Run the following command:
+            ```console
+            $ export PATH=$PATH:~/.docker/bin
+            ```
+     3. Save and the close the file. Restart your shell to apply the changes to the PATH variable. 
+
+- **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks).
+
+- **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#binding-privileged-ports).
+
+For more information on each configuration
+and use case, see [Permission requirements](../mac/permission-requirements.md).
