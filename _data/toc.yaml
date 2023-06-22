@@ -1658,6 +1658,12 @@ manuals:
           title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
+    - sectiontitle: Builders
+      section:
+        - path: /build/builders/
+          title: Builders overview
+        - path: /build/builders/manage/
+          title: Manage builders
     - sectiontitle: Drivers
       section:
         - path: /build/drivers/
