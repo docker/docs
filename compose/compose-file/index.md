@@ -17,7 +17,7 @@ Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md)
 target="_blank" rel="noopener" class="_"}. The Compose spec merges the legacy
 2.x and 3.x versions, aggregating properties across these formats and is implemented by **Compose 1.27.0+**.
 
-Use the links below to easily navigate key sections of the Compose specification. 
+Use the links below to navigate key sections of the Compose Specification. 
 
 <div class="component-container">
   <!--start row-->
