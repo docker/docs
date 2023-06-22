@@ -263,6 +263,9 @@ fetch-remote:
       - dest: "compose/compose-file/13-merge.md"
         src:
           - "13-merge.md"
+      - dest: "compose/compose-file/14-include.md"
+        src:
+          - "14-include.md"
       - dest: "compose/compose-file/build.md"
         src:
           - "build.md"
