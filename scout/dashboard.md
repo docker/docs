@@ -157,8 +157,28 @@ Each entry in the list shows the following details:
   > Docker Scout bases the calculation behind this severity level on a variety
   > of sources.
 
-- The vulnerability CVE ID.
+- The severity of the vulnerability.
+- The vulnerability CVE ID. Selecting the link for the CVE ID opens [the vulnerability details page](#vulnerability-details-page).
 - The package name and version affected by this CVE.
 - The Common Vulnerability Scoring System (CVSS) score for the vulnerability. Docker Scout shows the highest CVSS score from multiple sources.
-- The number of images in the organization that use the package affected by this CVE.
+- The number of images in the organization that use the package affected by this CVE. Selecting this link opens the [vulnerability details page](#vulnerability-details-page).
 - If Docker Scout knows of a fix for the vulnerability, and if so, the package version of the fix.
+
+### Vulnerability details page
+
+![Screenshot showing the details of a vulnerability in Docker Scout](./images/dashboard-vulns-details.png)
+
+The vulnerability details page shows detailed information about a particular CVE. The page shows the following information:
+
+- The CVE ID and severity.
+- A description of the vulnerability.
+- The number of packages affected by the vulnerability.
+- The vulnerability publish date.
+
+Following this information is a list of all repositories affected by the vulnerability, searchable by image name. Each entry in the list shows the following details:
+
+- The repository name. Selecting the link for the repository name opens [the repository tag list view](#repository-tag-list).
+- The current tag version of the image. Selecting the link for the tag name opens [the repository tag list layer view](#image-layer-view).
+- The date the image was last pushed.
+- The registry where the image is stored.
+- The affected package name and version in the image.
