@@ -8,14 +8,14 @@ redirect_from:
 ---
 
 {% include scout-early-access.md %}
-
+ 
 The Docker Scout Dashboard helps you share the analysis of images in an organization with your team. Developers can now see an overview of their security status across all their images from both Docker Hub and Artifactory, and get remediation advice at their fingertips. It helps team members in roles such as security, compliance, and operations to know what vulnerabilities and issues they need to focus on.
 
 ## Overview
 
 ![A screenshot of the Docker Scout vulnerabilities overview](./images/dashboard-overview.png)
 
-The **Overview** tab shows the total number of vulnerabilities across all your Scout-enabled repositories, over time. This calculation takes the most recent image in each repository to avoid including old irrelevant images.
+The **Overview** tab shows the total number of vulnerabilities across all your Docker Scout-enabled repositories, over time. This calculation takes the most recent image in each repository to avoid including old irrelevant images.
 
 ## Repository settings
 
@@ -41,6 +41,7 @@ Each entry in the list shows the following details:
 - The repository name for the image. Selecting the link for the repository opens [the list of tags for the repository](#repository-tag-list).
 - The most recent tag of the image and the vulnerabilities for that version. Selecting the link for the base image opens [the image layer view](#image-layer-view).
 - The operating system and architecture of the image.
+- The date of the last push for the image.
 - The base image and version used by the repository and the vulnerabilities for that version. Clicking the link for the base image opens [the image layer view](#image-layer-view).
 
   > **Note**
@@ -58,6 +59,8 @@ Each entry in the list shows the following details:
 ### Repository tag list
 
 The repository tag list shows all tags for a repository. You can search for specific tag versions using the search box.
+
+![Screenshot of tags for a repository](./images/dashboard-repo-tags.png)
 
 Each entry in the list shows the following details:
 
@@ -146,7 +149,7 @@ Each entry in the list shows the following details:
 
 ![Screenshot showing Docker Scout Vulnerabilities list](./images/dashboard-vulns.png)
 
-The **Vulnerabilities** tab shows a list of all vulnerabilities from images in the organization. You can sort the list by severity and search for Common Vulnerabilities and Exposures (CVE) ID using the search box.
+The **Vulnerabilities** tab shows a list of all vulnerabilities from images in the organization. You can sort and filter the list by severity and search for Common Vulnerabilities and Exposures (CVE) ID using the search box.
 
 Each entry in the list shows the following details:
 
