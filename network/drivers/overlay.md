@@ -276,10 +276,10 @@ routing on the individual Docker daemon hosts.
 
 | Flag value                      | Description                                                                                                                                     |
 |---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-p 8080:80`                    | Map TCP port 80 in the container to port 8080 on the overlay network.                                                                               |
-| `-p 8080:80/udp`                | Map UDP port 80 in the container to port 8080 on the overlay network.                                                                               |
-| `-p 8080:80/sctp`               | Map SCTP port 80 in the container to port 8080 on the overlay network.                                                                              |
-| `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port 80 in the container to TCP port 8080 on the overlay network, and map UDP port 80 in the container to UDP port 8080 on the overlay network. |
+| `-p 8080:80`                    | Map TCP port 80 in the container to port `8080` on the overlay network.                                                                               |
+| `-p 8080:80/udp`                | Map UDP port 80 in the container to port `8080` on the overlay network.                                                                               |
+| `-p 8080:80/sctp`               | Map SCTP port 80 in the container to port `8080` on the overlay network.                                                                              |
+| `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port 80 in the container to TCP port `8080` on the overlay network, and map UDP port 80 in the container to UDP port `8080` on the overlay network. |
 
 ### Container discovery
 
