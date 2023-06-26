@@ -24,11 +24,59 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/general.md/#releases)
 
+## 4.21.0
+
+{% include release-date.html date="2023-06-29" %}
+
+{% include desktop-install.md all=true version="4.21.0" build_path="/" %}
+
+### New
+
+- Added support for new Wasm runtimes: slight, spin, and wasmtime.  Users can download Wasm runtimes on demand when the containerd image store is enabled.
+- Add Rust server support to Docker init.
+
+### Upgrades
+- [Buildx v0.11.0](https://github.com/docker/buildx/releases/tag/v0.11.0)
+- [Compose v2.19.0](https://github.com/docker/compose/releases/tag/v2.19.0)
+- [Kubernetes v1.27.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.2)
+- [cri-tools v1.27.0](https://github.com/kubernetes-sigs/cri-tools/releases/tag/v1.27.0)
+- [cri-dockerd v0.3.2](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.2)
+- [coredns v1.10.1](https://github.com/coredns/coredns/releases/tag/v1.10.1)
+- [cni v1.2.0](https://github.com/containernetworking/plugins/releases/tag/v1.2.0)
+- [etcd v3.5.7](https://github.com/etcd-io/etcd/releases/tag/v3.5.7)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Automatically pause Docker when idle and wake it up again on demand.
+- VirtioFS will be enabled by default in new installations of Docker Desktop on macOS 12.5 and higher.
+- Fix docker socket permissions. Fixes [docker/for-win#13447](https://github.com/docker/for-win/issues/13447) and [docker/for-mac#6823](https://github.com/docker/for-mac/issues/6823).
+- Fix Docker Desktop hanging on application quit when paused.
+- Fixed a bug where Logs and Terminal content are constantly covered by a fixed toolbar [docker/for-mac#6814](https://github.com/docker/for-mac/issues/6814).
+- Fixed a bug where input labels overlapped with input values on the container run dialog, affecting all platforms. Fixes [docker/for-win#13304](https://github.com/docker/for-win/issues/13304)
+- Fixed a bug where extension menu wasn't clickable. Fixes [docker/for-mac#6840](https://github.com/docker/for-mac/issues/6840) and [docker/for-mac#6855](https://github.com/docker/for-mac/issues/6855)
+
+#### For Mac
+
+- Added a health check for macOS that will notify users if there has been a change on their system which might cause problems running Docker binaries.
+
+#### For Windows
+
+- Fixed a bug on WSL 2 where if Desktop is paused and then killed and then restarted, the startup will hang unless WSL is shutdown first with `wsl --shutdown`.
+- Fixes WSL engine in cases where wsl.exe is not on the PATH [docker/for-win#13547](https://github.com/docker/for-win/issues/13547).
+- Fixes the WSL engine's ability to detect cases where one of the Docker Desktop distro's drive is missing [docker/for-win#13554](https://github.com/docker/for-win/issues/13554).
+- Slow or unresponsive WSL integration should no longer prevent Docker Desktop from starting. Fixes [docker/for-win#13549](https://github.com/docker/for-win/issues/13549).
+- Added the following installer flags:
+  - `--hyper-v-default-data-root` specifies the default location for Hyper-V VM disk.
+  - `--windows-containers-default-data-root` specifies the default data root for Windows Containers.
+  - `--wsl-default-data-root` specifies the default location for WSL distro disks.
+
 ## 4.20.1
 
 {% include release-date.html date="2023-06-05" %}
 
-{% include desktop-install.md all=true version="4.20.1" build_path="/" %}
+{% include desktop-install.md all=true version="4.20.1" build_path="/110738/" %}
 
 ### Bug fixes and enhancements
 
