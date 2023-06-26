@@ -1558,7 +1558,7 @@ manuals:
     section:
     - sectiontitle: Container runtime
       section:
-      - path: /engine/alternative-runtimes/
+      - path: /engine/alternative-container-runtimes/
         title: Alternative container runtimes
       - path: /config/containers/resource_constraints/
         title: Configure runtime resource constraints
