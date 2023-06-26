@@ -24,6 +24,7 @@ with Docker in general, see [the GitHub Actions documentation](../build/ci/githu
 
 Add the following to a GitHub action YAML file:
 
+{% raw %}
 ```yaml
 name: Docker
 
@@ -38,8 +39,8 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
-  IMAGE_NAME: $\{\{ github.repository \}\}
-  SHA: $\{\{ github.event.pull_request.head.sha || github.event.after \}\}
+  IMAGE_NAME: ${{ github.repository }}
+  SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
 
 jobs:
   build:
@@ -48,6 +49,7 @@ jobs:
       contents: read
       packages: write
 ```
+{% endraw %}
 
 This sets up the workflow to run on pull requests and pushes to the `main`
 branch, and sets up environment variables available to all workflow steps. It
@@ -56,24 +58,25 @@ the permissions available to the job.
 
 Add the following to the YAML file:
 
+{% raw %}
 ```yaml
   steps:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        ref: $\{\{ env.SHA \}\}
+        ref: ${{ env.SHA }}
 
     - name: Setup Docker buildx
       uses: docker/setup-buildx-action@v2.5.0
 
     # Login against a Docker registry except on PR
     # https://github.com/docker/login-action
-    - name: Log into registry $\{\{ env.REGISTRY \}\}
+    - name: Log into registry ${{ env.REGISTRY }}
       uses: docker/login-action@v2.1.0
       with:
-        registry: $\{\{ env.REGISTRY \}\}
-        username: $\{\{ secrets.DOCKER_USER \}\}
-        password: $\{\{ secrets.DOCKER_PAT \}\}
+        registry: ${{ env.REGISTRY }}
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PAT }}
 
     # Extract metadata (tags, labels) for Docker
     # https://github.com/docker/metadata-action
@@ -81,14 +84,15 @@ Add the following to the YAML file:
       id: meta
       uses: docker/metadata-action@v4.4.0
       with:
-        images: $\{\{ env.REGISTRY \}\}/$\{\{ env.IMAGE_NAME \}\}
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         labels: |
-          org.opencontainers.image.revision=$\{\{ env.SHA \}\}
+          org.opencontainers.image.revision=${{ env.SHA }}
         tags: |
           type=edge,branch=$repo.default_branch
-          type=semver,pattern=v\{\{version\}\}
+          type=semver,pattern=v{{version}}
           type=sha,prefix=,suffix=,format=short
 ```
+{% endraw %}
 
 This creates workflow steps to checkout the repository, set up Docker buildx,
 log into the Docker registry, and extract metadata from Git reference and GitHub
@@ -96,6 +100,7 @@ events to use in later steps.
 
 Add the following to the YAML file:
 
+{% raw %}
 ```yaml
 # Build and push Docker image with Buildx (don't push on PR)
 # https://github.com/docker/build-push-action
@@ -105,11 +110,12 @@ Add the following to the YAML file:
   with:
     context: .
     push: true
-    tags: $\{\{ steps.meta.outputs.tags \}\}
-    labels: $\{\{ steps.meta.outputs.labels \}\}
+    tags: ${{ steps.meta.outputs.tags }}
+    labels: ${{ steps.meta.outputs.labels }}
     cache-from: type=gha
     cache-to: type=gha,mode=max
 ```
+{% endraw %}
 
 This uses the extracted metadata from the previous step to build and push the
 Docker image to Docker Hub. GitHub Actions skips this step on pull requests and
@@ -117,19 +123,21 @@ only runs when a pull request is merged.
 
 Add the following to the YAML file:
 
+{% raw %}
 ```yaml
 - name: Docker Scout
   id: docker-scout
-  if: $\{\{ github.event_name == 'pull_request' \}\}
+  if: ${{ github.event_name == 'pull_request' }}
   uses: docker/scout-action@dd36f5b0295baffa006aa6623371f226cc03e506
   with:
     command: compare
-    image: $\{\{ steps.meta.outputs.tags \}\}
-    to: $\{\{ env.REGISTRY \}\}/$\{\{ env.IMAGE_NAME \}\}:edge
+    image: ${{ steps.meta.outputs.tags }}
+    to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:edge
     ignore-unchanged: true
     only-severities: critical,high
-    token: $\{\{ secrets.DOCKER_PAT \}\}
+    token: ${{ secrets.DOCKER_PAT }}
 ```
+{% endraw %}
 
 This final step uses the Docker Scout CLI to run [the `compare` command](../engine/reference/commandline/scout_compare.md), comparing the new
 image to the published one. It only shows critical or high-severity vulnerabilities and 
