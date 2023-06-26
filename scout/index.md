@@ -32,6 +32,8 @@ You can use Docker Scout in Docker Desktop, Docker Hub, the Docker CLI, and in
 the Docker Scout Dashboard. If you host your images in JFrog Artifactory, you
 can also use Docker Scout to analyze your images there.
 
+_The following video shows an end-to-end workflow of using Docker Scout to remediate a reported vulnerability_.
+
 <div style="position: relative; padding-bottom: 64.86486486486486%; height: 0;"><iframe src="https://www.loom.com/embed/e066986569924555a2546139f5f61349?sid=6e29be62-78ba-4aa7-a1f6-15f96c37d916" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 
@@ -104,5 +106,6 @@ Users of JFrog Artifactory, or JFrog Container Registry, can integrate Docker
 Scout to enable automatic analysis of images locally and remotely. For more
 information, see [Artifactory integration](./artifactory.md).
 
+_The following video shows how to enable Docker Scout on your repositories_.
 
 <div style="position: relative; padding-bottom: 64.86486486486486%; height: 0;"><iframe src="https://www.loom.com/embed/a6fb14ede0a94d0d984edf6cf16604e0?sid=ba34f694-32a6-4b74-b3f8-9cc6b80ef66f" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
