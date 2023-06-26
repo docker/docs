@@ -80,7 +80,6 @@ the reason each syscall is blocked rather than white-listed.
 | `mbind`             | Syscall that modifies kernel memory and NUMA settings. Already gated by `CAP_SYS_NICE`.                      |
 | `mount`             | Deny mounting, already gated by `CAP_SYS_ADMIN`.                                                             |
 | `move_pages`        | Syscall that modifies kernel memory and NUMA settings.                                                       |
-| `name_to_handle_at` | Sister syscall to `open_by_handle_at`. Already gated by `CAP_DAC_READ_SEARCH`.                                      |
 | `nfsservctl`        | Deny interaction with the kernel nfs daemon. Obsolete since Linux 3.1.                                       |
 | `open_by_handle_at` | Cause of an old container breakout. Also gated by `CAP_DAC_READ_SEARCH`.                                     |
 | `perf_event_open`   | Tracing/profiling syscall, which could leak a lot of information on the host.                                |
