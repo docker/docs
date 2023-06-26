@@ -21,9 +21,7 @@ software packages. These layers and packages can contain vulnerabilities that
 make your containers and the applications they run vulnerable to attack.
 
 Docker Scout can proactively help you find and fix these vulnerabilities,
-helping you create a more secure software supply chain.
-
-It does this by analyzing your images and creating a full inventory of the
+helping you create a more secure software supply chain. It does this by analyzing your images and creating a full inventory of the
 packages and layers called a [Software bill of materials (SBOM)](https://ntia.gov/sites/default/files/publications/sbom_at_a_glance_apr2021_0.pdf).
 It then correlates this inventory with a continuously updated vulnerability
 database to identify vulnerabilities in your images.
