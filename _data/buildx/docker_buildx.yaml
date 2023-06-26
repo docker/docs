@@ -7,6 +7,7 @@ cname:
     - docker buildx bake
     - docker buildx build
     - docker buildx create
+    - docker buildx debug-shell
     - docker buildx du
     - docker buildx imagetools
     - docker buildx inspect
@@ -20,6 +21,7 @@ clink:
     - docker_buildx_bake.yaml
     - docker_buildx_build.yaml
     - docker_buildx_create.yaml
+    - docker_buildx_debug-shell.yaml
     - docker_buildx_du.yaml
     - docker_buildx_imagetools.yaml
     - docker_buildx_inspect.yaml
