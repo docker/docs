@@ -42,6 +42,8 @@ If you choose the integrated terminal, you can run commands in a running contain
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
   use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
 
+- **Show CLI hints**. CLI hints and tips when running Docker commands in the CLI.
+
 ## Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies,

@@ -53,6 +53,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
   use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
 
+- **Show CLI hints**. CLI hints and tips when running Docker commands in the CLI.
+
 ## Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies,
