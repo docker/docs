@@ -103,7 +103,7 @@ To build the [container image](../get-started/overview.md/#docker-objects){:targ
 
    Build the container image.
    ```console
-   $ docker build -t getting-started .
+   $ docker build . -t getting-started .
    ```
 
    The `docker build` command uses the Dockerfile to build a new container image. You might have noticed that Docker downloaded a lot of "layers". This is because you instructed the builder that you wanted to start from the `node:18-alpine` image. But, since you didn't have that on your machine, Docker needed to download the image.
