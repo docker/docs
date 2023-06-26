@@ -84,7 +84,7 @@ $ sh install-scout.sh
 >
 > Always examine scripts downloaded from the internet before running them locally.
 > Before installing, make yourself familiar with potential risks and limitations
-> of the convenience script
+> of the convenience script.
 
 If you want to install the plugin manually, you can find full instructions in
 the [plugin's repository](https://github.com/docker/scout-cli).
