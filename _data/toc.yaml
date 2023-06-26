@@ -1917,6 +1917,8 @@ manuals:
       title: Artifactory integration
     - path: /scout/advisory-db-sources/
       title: Advisory Database
+    - path: /scout/ci
+      title: Continuous integration
 
 - sectiontitle: Docker Admin (Early Access)
   section:
