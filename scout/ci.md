@@ -60,18 +60,18 @@ Add the following to the YAML file:
 ```yaml
   steps:
     - name: Checkout repository
-    uses: actions/checkout@v3
-    with:
+      uses: actions/checkout@v3
+      with:
         ref: $\{\{ env.SHA \}\}
 
     - name: Setup Docker buildx
-    uses: docker/setup-buildx-action@v2.5.0
+      uses: docker/setup-buildx-action@v2.5.0
 
     # Login against a Docker registry except on PR
     # https://github.com/docker/login-action
     - name: Log into registry $\{\{ env.REGISTRY \}\}
-    uses: docker/login-action@v2.1.0
-    with:
+      uses: docker/login-action@v2.1.0
+      with:
         registry: $\{\{ env.REGISTRY \}\}
         username: $\{\{ secrets.DOCKER_USER \}\}
         password: $\{\{ secrets.DOCKER_PAT \}\}
@@ -79,16 +79,16 @@ Add the following to the YAML file:
     # Extract metadata (tags, labels) for Docker
     # https://github.com/docker/metadata-action
     - name: Extract Docker metadata
-    id: meta
-    uses: docker/metadata-action@v4.4.0
-    with:
+      id: meta
+      uses: docker/metadata-action@v4.4.0
+      with:
         images: $\{\{ env.REGISTRY \}\}/$\{\{ env.IMAGE_NAME \}\}
         labels: |
-        org.opencontainers.image.revision=$\{\{ env.SHA \}\}
+          org.opencontainers.image.revision=$\{\{ env.SHA \}\}
         tags: |
-        type=edge,branch=$repo.default_branch
-        type=semver,pattern=v\{\{version\}\}
-        type=sha,prefix=,suffix=,format=short
+          type=edge,branch=$repo.default_branch
+          type=semver,pattern=v\{\{version\}\}
+          type=sha,prefix=,suffix=,format=short
 ```
 
 This creates workflow steps to checkout the repository, set up Docker buildx,
