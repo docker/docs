@@ -908,6 +908,8 @@ reference:
         title: Merge
       - path: /compose/compose-file/14-include/
         title: Include
+      - path: /compose/compose-file/15-profiles/
+        title: Profiles
     - path: /compose/compose-file/build/
       title: Compose file build
     - path: /compose/compose-file/deploy/
