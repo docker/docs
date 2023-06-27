@@ -2115,7 +2115,7 @@ faq:
         title: SAML
       - path: /single-sign-on/idp-faqs/
         title: Identity providers
-      - path: /single-sign-on/domains-faqs/
+      - path: /single-sign-on/domain-faqs/
         title: Domains
       - path: /single-sign-on/enforcement-faqs/
         title: Enforcement

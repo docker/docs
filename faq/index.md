@@ -1,5 +1,5 @@
 ---
-title: FAQs
+title: Frequently asked questions
 description: Landing page to common FAQ topics
 keywords: faqs, desktop, Hub, Scout, Engine, Build, Extensions
 ---

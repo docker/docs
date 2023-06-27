@@ -1,5 +1,5 @@
 ---
-title: FAQs
+title: Billing FAQs
 description: Common FAQs related to billing
 keywords: billing, renewal, payments
 ---

@@ -1,7 +1,7 @@
 ---
 description: Frequently asked questions
 keywords: desktop, linux, faqs
-title: Frequently asked questions for Linux
+title: FAQs for Linux
 redirect_from:
 - /desktop/linux/space/
 ---

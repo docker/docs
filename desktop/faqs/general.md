@@ -6,7 +6,7 @@ redirect_from:
 - /docker-for-mac/faqs/
 - /docker-for-windows/faqs/
 - /desktop/faqs/
-title: Frequently asked questions
+title: General FAQs for Desktop
 ---
 
 ### What are the system requirements for Docker Desktop?

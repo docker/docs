@@ -1,5 +1,5 @@
 ---
-title: "Frequently asked questions"
+title: General FAQs for Docker Hub
 description: Frequently asked administration and security questions
 keywords: onboarding, docker, teams, orgs
 redirect:

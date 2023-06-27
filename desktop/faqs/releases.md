@@ -1,10 +1,8 @@
 ---
 description: Frequently asked questions for all platforms
 keywords: desktop, mac, windows, faqs
-title: Release FAQs
+title: FAQs on Docker Desktop releases
 ---
-
-## Releases
 
 ### Where can I find the checksums for the download files?
 

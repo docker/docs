@@ -1,7 +1,7 @@
 ---
 description: Company FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
-title: Frequently asked questions
+title: FAQs on organizations
 ---
 
 ### What if the Docker ID I want for my organization or company is taken?
