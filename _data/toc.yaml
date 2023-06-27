@@ -1928,6 +1928,8 @@ manuals:
   section:
     - path: /scout/
       title: Overview
+    - path: /scout/quickstart/
+      title: Quickstart
     - path: /scout/image-details-view/
       title: Image details view
     - path: /scout/advanced-image-analysis/

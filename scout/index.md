@@ -6,7 +6,6 @@ description: >
 redirect_from:
   - /atomist/
   - /atomist/try-atomist/
-  - /atomist/get-started/
   - /atomist/configure/settings/
   - /atomist/configure/advisories/
   - /atomist/integrate/github/
