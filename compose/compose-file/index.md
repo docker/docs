@@ -14,8 +14,8 @@ The Compose file is a [YAML](https://yaml.org){: target="_blank" rel="noopener" 
 networks, and volumes for a Docker application. The latest and recommended
 version of the Compose file format is defined by the [Compose
 Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:
-target="_blank" rel="noopener" class="_"}. The Compose spec merges the legacy
-2.x and 3.x versions, aggregating properties across these formats and is implemented by **Compose 1.27.0+**.
+target="_blank" rel="noopener" class="_"}. The Compose Specification merges the legacy
+2.x and 3.x versions (also known as Compose V1), aggregating properties across these formats and is implemented by **Compose 1.27.0+**.
 
 Use the links below to navigate key sections of the Compose Specification. 
 
