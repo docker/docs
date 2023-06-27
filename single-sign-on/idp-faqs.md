@@ -32,7 +32,7 @@ It's not possible to access Docker Hub when your IdP is down. However, you can a
 
 When you turn off SSO, authentication through your Identity Provider isn't required to access Docker. Users may continue to sign in through Single Sign-On as well as Docker ID and password.
 
-### Q: How do I handle accounts using Docker Hub as a secondary registry? Do I need a bot account?
+### How do I handle accounts using Docker Hub as a secondary registry? Do I need a bot account?
 
 You can add a bot account to your IDP and create an access token for it to replace the other credentials.
 
