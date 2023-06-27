@@ -124,7 +124,7 @@ Now that you have an image, you can run the application in a [container](../get-
    $ docker run -dp 127.0.0.1:3000:3000 getting-started
    ```
 
-   The `-d` flag (short for `--detached`) runs the container in the background.
+   The `-d` flag (short for `--detach`) runs the container in the background.
    The `-p` flag (short for `--publish`) creates a port mapping between the host and the container.
    The `-p` flag take a string value in the format of `HOST:CONTAINER`,
    where `HOST` is the address on the host, and `CONTAINER` is the port on the container.
