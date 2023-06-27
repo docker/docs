@@ -241,6 +241,8 @@ reference:
           title: docker buildx build
         - path: /engine/reference/commandline/buildx_create/
           title: docker buildx create
+        - path: /engine/reference/commandline/buildx_debug-shell/
+          title: docker buildx debug-shell
         - path: /engine/reference/commandline/buildx_du/
           title: docker buildx du
         - path: /engine/reference/commandline/buildx_imagetools/
@@ -1558,6 +1560,8 @@ manuals:
     section:
     - sectiontitle: Container runtime
       section:
+      - path: /engine/alternative-runtimes/
+        title: Alternative container runtimes
       - path: /config/containers/resource_constraints/
         title: Configure runtime resource constraints
       - path: /config/containers/runmetrics/
@@ -1915,6 +1919,8 @@ manuals:
       title: Artifactory integration
     - path: /scout/advisory-db-sources/
       title: Advisory Database
+    - path: /scout/ci
+      title: Continuous integration
 
 - sectiontitle: Docker Admin (Early Access)
   section:
