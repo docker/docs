@@ -16,7 +16,7 @@ Docker Personal includes:
 - Unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md)
 - Unlimited [collaborators](../docker-hub/repos/access/index.md#collaborators-and-their-role) for public repositories at no cost per month.
 
-Additionaly, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours. 
+Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours. 
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
 
