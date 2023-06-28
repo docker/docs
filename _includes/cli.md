@@ -184,11 +184,13 @@ For example uses of this command, refer to the [examples section](#examples) bel
 </thead>
 <tbody>
 {% for command in controller_data.cname %}
+  {% unless command.hidden %}
   {% capture dataFileName %}{{ command | strip | replace: " ", "_" }}{% endcapture %}
   <tr>
     <td markdown="span">[{{ command }}]({{ parentPath }}{{ dataFileName | remove_first: "docker_" }}/)</td>
     <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
   </tr>
+  {% endunless %}
 {% endfor %}
 </tbody>
 </table>
@@ -207,11 +209,13 @@ For example uses of this command, refer to the [examples section](#examples) bel
 </thead>
 <tbody>
 {% for command in site.data[include.datafolder][parentdatafile].cname %}
+  {% unless command.hidden %}
   {% capture dataFileName %}{{ command | strip | replace: " ", "_" }}{% endcapture %}
   <tr>
     <td markdown="span">[{{ command }}]({{ parentPath }}{{ dataFileName | remove_first: "docker_" }}/)</td>
     <td markdown="span">{{ site.data[include.datafolder][dataFileName].short }}</td>
   </tr>
+  {% endunless %}
 {% endfor %}
 </tbody>
 </table>
