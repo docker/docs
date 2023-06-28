@@ -223,10 +223,7 @@ You configure the daemon using a JSON configuration file. Here's what the file m
       "enabled": true
     }
   },
-  "experimental": false,
-  "features": {
-    "buildkit": true
-  }
+  "experimental": false
 }
 ```
 
