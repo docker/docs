@@ -16,62 +16,60 @@ redirect_from:
 
 {% include scout-early-access.md %}
 
-Docker Scout is a collection of software supply chain features that appear
-throughout Docker user interfaces and the command line interface (CLI). These features provide detailed
-insights into the composition and security of container images.
+Container images are often built from layers of other container images and
+software packages. These layers and packages can contain vulnerabilities that
+make your containers and the applications they run vulnerable to attack.
 
-Docker Scout analyzes image contents and generates a detailed report of
-packages and vulnerabilities that it detects. Docker Scout can also help provide
-you with suggestions for how you can remediate issues discovered by the image
-analysis.
+Docker Scout can proactively help you find and fix these vulnerabilities,
+helping you create a more secure software supply chain. It does this by analyzing your images and creating a full inventory of the
+packages and layers called a [Software bill of materials (SBOM)](https://ntia.gov/sites/default/files/publications/sbom_at_a_glance_apr2021_0.pdf).
+It then correlates this inventory with a continuously updated vulnerability
+database to identify vulnerabilities in your images.
 
-The [image details view](./image-details-view.md) in Docker Desktop and the tag
-details pages on Docker Hub are both powered by Docker Scout.
+You can use Docker Scout in Docker Desktop, Docker Hub, the Docker CLI, and in
+the Docker Scout Dashboard. If you host your images in JFrog Artifactory, you
+can also use Docker Scout to analyze your images there.
 
-You can view and interact with Docker Scout from your terminal through the
-`docker scout`
-[plugin for Docker CLI](../engine/reference/commandline/scout_cves.md).
+_The following video shows an end-to-end workflow of using Docker Scout to remediate a reported vulnerability_.
 
-There's also a [Dashboard](https://scout.docker.com){: target="\_blank"
-rel="noopener" } that you can use to explore additional information about
-images, packages, and CVEs.
+<div style="position: relative; padding-bottom: 64.86486486486486%; height: 0;"><iframe src="https://www.loom.com/embed/e066986569924555a2546139f5f61349?sid=6e29be62-78ba-4aa7-a1f6-15f96c37d916" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
-## Get started with Docker Scout
 
-To start using Docker Scout, turn on any of the following features:
+## Docker Desktop
 
-- [Enable analysis on repositories in the Docker Scout Dashboard](./dashboard.md#repository-settings)
-- [Advanced image analysis in Docker Hub](./advanced-image-analysis.md)
-- [Artifactory integration](./artifactory.md)
+Docker Scout analyzes all images stored locally in Docker Desktop, providing you
+with up-to-date vulnerability information as you build your images.
 
-### Advanced image analysis
+For more information, read the [Advanced image analysis guide](./advanced-image-analysis.md).
 
-Advanced image analysis is a feature in Docker Hub which, when enabled, triggers
-a Docker Scout analysis every time you push an image. The analysis updates
-continuously, meaning that the vulnerability report for an image is always up to
-date as Docker Scout becomes aware of new CVEs. No need to re-scan an image.
+## Docker Hub
 
-For more information, see
-[Advanced image analysis](./advanced-image-analysis.md).
+If you enable [Advanced image analysis](./advanced-image-analysis.md) for a
+repository in Docker Hub, Docker Scout analyzes your images every time you push
+them to Docker Hub. Docker Scout shows analysis results on every tag view for
+that repository.
 
-### Artifactory integration
+The analysis updates continuously, meaning that the vulnerability report for an
+image is always up to date as Docker Scout becomes aware of new CVEs. No need to
+re-scan an image.
 
-Users of JFrog Artifactory, or JFrog Container Registry, can integrate Docker
-Scout to enable automatic analysis of images locally and remotely. For more information, see
-[Artifactory integration](./artifactory.md).
+For more information, read the [Advanced image analysis guide](./advanced-image-analysis.md).
 
-## Docker Scout CLI
+## Docker Scout CLI plugin {#docker-scout-cli}
 
-The `docker scout` CLI plugin provides a terminal interface for Docker Scout.
+The `docker scout` CLI plugin provides a terminal interface for using Docker
+Scout with local and remote images.
 
 Using the CLI, you can analyze images and view the analysis report in text
 format. You can print the results directly to stdout, or export them to a file
 using a structured format, such as Static Analysis Results Interchange Format
-(SARIF). For more information about how to use the `docker scout` CLI, see the
+(SARIF).
+
+For more information about how to use the `docker scout` CLI, see the
 [reference documentation](../engine/reference/commandline/scout_cves.md).
 
-The plugin is available in Docker Desktop starting with version 4.17 and available
-as a standalone binary.
+The plugin is available in Docker Desktop starting with version 4.17 and
+available as a standalone binary.
 
 To install the plugin, run the following command:
 
@@ -80,11 +78,32 @@ $ curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh 
 $ sh install-scout.sh
 ```
 
-Always examine scripts downloaded from the internet before running them locally. Before installing, make yourself familiar with potential risks and limitations of the convenience script:
-
-> **Tip**
+> **Note**
 >
-> If you want to install the plugin manually, you can find full instructions in the [plugin's repository](https://github.com/docker/scout-cli).
-{: .tip }
+> Always examine scripts downloaded from the internet before running them locally.
+> Before installing, make yourself familiar with potential risks and limitations
+> of the convenience script.
 
-The plugin is also available as [a container image](https://hub.docker.com/r/docker/scout-cli) and as [a GitHub action](https://github.com/docker/scout-action)
+If you want to install the plugin manually, you can find full instructions in
+the [plugin's repository](https://github.com/docker/scout-cli).
+
+The plugin is also available as [a container image](https://hub.docker.com/r/docker/scout-cli)
+and as [a GitHub action](https://github.com/docker/scout-action).
+
+## Docker Scout Dashboard
+
+The [Docker Scout Dashboard](https://scout.docker.com){: target="\_blank" rel="noopener" }
+helps you share the analysis and security status of images in
+an organization with your team. You can also [use the dashboard to enable analysis of multiple repositories at once](./dashboard.md#repository-settings).
+
+For more information, read the [Docker Scout Dashboard guide](./dashboard.md).
+
+## JFrog Artifactory integration
+
+Users of JFrog Artifactory, or JFrog Container Registry, can integrate Docker
+Scout to enable automatic analysis of images locally and remotely. For more
+information, see [Artifactory integration](./artifactory.md).
+
+_The following video shows how to enable Docker Scout on your repositories_.
+
+<div style="position: relative; padding-bottom: 64.86486486486486%; height: 0;"><iframe src="https://www.loom.com/embed/a6fb14ede0a94d0d984edf6cf16604e0?sid=ba34f694-32a6-4b74-b3f8-9cc6b80ef66f" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
