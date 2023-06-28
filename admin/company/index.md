@@ -21,7 +21,7 @@ Learn how to administer a company using Docker Admin in the following sections.
                  <a href="/admin/company/organizations/"><img src="/assets/images/note-add.svg" alt="Manage organizations" width="70" height="70"></a>
             </div>
                 <h2 id="mangage-orgs"><a href="/admin/company/organizations/">Manage organizations</a></h2>
-                <p>Learn how to manage organizations and seats within your company.</p>
+                <p>Learn how to add and manage organizations as well as seats within your company.</p>
         </div>
      </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
