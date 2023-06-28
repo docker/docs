@@ -269,7 +269,7 @@ Let's test that the application works and is connecting to the database. Using a
 
 ## Connect Adminer and populate the database
 
-You now have an application accessing the database, but the database contains no entries. Let's connect Adminer to manage our database and create a database entry.
+You now have an application accessing the database. Although the application created a database and table, it did not create any entries. Let's connect Adminer to manage our database and create a database entry.
 
 ```console
 $ docker run \
