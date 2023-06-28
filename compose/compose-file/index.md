@@ -9,9 +9,9 @@ toc_max: 4
 toc_min: 1
 ---
 
-Use a [Compose file](03-compose-file.md) to configure your Docker application’s services, networks, volumes, and more.
+The [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) is the latest and recommended version of the Compose file format. It helps you define a [Compose file](03-compose-file.md) which is used to configure your Docker application’s services, networks, volumes, and more.
 
-The [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) is the latest and recommended version of the Compose file format. It merges the legacy 2.x and 3.x versions and is implemented by Docker Compose CLI version 1.27.0.
+Legacy versions 2.x and 3.x of the Compose file format were merged into the Compose Specification. It was first implemented in version 1.27.0 of the Docker Compose CLI.
 
 Use the following links to navigate key sections of the Compose Specification. 
 
