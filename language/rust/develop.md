@@ -9,7 +9,8 @@ description: Learn how to develop your Rust application locally.
 ## Prerequisites
 
 * You have installed the latest version of [Docker Desktop](../../get-docker.md).
-* You have completed the walkthroughs in the Docker Desktop [learning center](../../desktop/get-started.md) to learn about Docker concepts.
+* You have completed the walkthroughs in the Docker Desktop [Learning Center](../../desktop/get-started.md) to learn about Docker concepts.
+* You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview
 
@@ -64,7 +65,7 @@ Type "help" for help.
 postgres=#
 ```
 
-In the previous command, you logged in to the PostgreSQL database by passing the 'psql' command to the `db` container. Press ctrl-d to exit the PostgreSQL interactive terminal.
+In the previous command, you logged in to the PostgreSQL database by passing the `psql` command to the `db` container. Press ctrl-d to exit the PostgreSQL interactive terminal.
 
 
 ## Get and run the sample application
@@ -74,10 +75,10 @@ For the sample application, you'll use a variation of the backend from the react
 1. Clone the sample application repository using the following command.
 
    ```
-   $ git clone https://github.com/docker/docker-rust-postgres.git
+   $ git clone https://github.com/docker/docker-rust-postgres
    ```
 
-2. In the cloned repository's directory, run  `docker init` to create the necessary Docker files. Refer to the following example to answer the prompts from `docker init`.
+2. In the cloned repository's directory, run `docker init` to create the necessary Docker files. Refer to the following example to answer the prompts from `docker init`.
 
    ```console
    $ docker init
@@ -236,7 +237,7 @@ You should receive the following response:
 
 ## Summary
 
-In this section, you took a look at setting up your Compose file to run your Rust application and database with single command.
+In this section, you took a look at setting up your Compose file to run your Rust application and database with a single command.
 
 Related information:
  - [Docker volumes](../../storage/volumes.md)

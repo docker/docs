@@ -9,7 +9,8 @@ description: Learn how to build your first Rust Docker image
 ## Prerequisites
 
 * You have installed the latest version of [Docker Desktop](../../get-docker.md).
-* You have completed the walkthroughs in the Docker Desktop [learning center](../../desktop/get-started.md) to learn about Docker concepts.
+* You have completed the walkthroughs in the Docker Desktop [Learning Center](../../desktop/get-started.md) to learn about Docker concepts.
+* You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview
 
@@ -26,7 +27,7 @@ $ git clone https://github.com/docker/docker-rust-hello
 ```
 
 ## Test the application without Docker (optional)
-You can test the application locally without Docker before you continue with building and running the application with Docker. This section requires you to have Rust 1.70.0 or later installed on your machine. Download and install [Rust](https://www.rust-lang.org/tools/install).
+You can test the application locally without Docker before you continue building and running the application with Docker. This section requires you to have Rust 1.70.0 or later installed on your machine. Download and install [Rust](https://www.rust-lang.org/tools/install).
 
 Open a terminal, change directory to the `docker-rust-hello` directory, and run the following command to run the application:
 
@@ -54,7 +55,7 @@ Hello, Docker!
 
 ## Create a Dockerfile for Rust
 
-Now that you have an application, you can use `docker init` to create a Dockerfile for it. Inside the `docker-rust-app` directory, run the `docker init` command. Refer to the following example to answer the prompts from `docker init`.
+Now that you have an application, you can use `docker init` to create a Dockerfile for it. Inside the `docker-rust-hello` directory, run the `docker init` command. Refer to the following example to answer the prompts from `docker init`.
 
 ```console
 $ docker init
@@ -76,7 +77,7 @@ You should now have the following 3 new files in your `docker-rust-hello`
 directory:
  - Dockerfile
  - .dockerignore
- - compose.yml
+ - compose.yaml
 
 For building an image, only the Dockerfile is necessary. Open the Dockerfile
 in your favorite IDE or text editor and see what it contains. To learn more

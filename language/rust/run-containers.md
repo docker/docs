@@ -29,7 +29,7 @@ After running this command, you’ll notice that you weren't returned to the com
 Open a new terminal then make a request to the server using the `curl` command.
 
 ```console
-$ curl localhost:8000
+$ curl http://localhost:8000
 ```
 
 You should see output like the following.
@@ -80,7 +80,7 @@ Docker started your container in the background and printed the Container ID on 
 Again, make sure that our container is running properly. Run the same curl command from above.
 
 ```console
-$ curl localhost:3001
+$ curl http://localhost:3001
 ```
 
 You should see output like the following.
