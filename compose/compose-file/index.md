@@ -8,16 +8,17 @@ title: Overview
 toc_max: 4
 toc_min: 1
 ---
-{% include compose-eol.md %}
 
-The Compose file is a [YAML](https://yaml.org){: target="_blank" rel="noopener" class="_"} file defining services,
-networks, and volumes for a Docker application. The latest and recommended
-version of the Compose file format is defined by the [Compose
-Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md){:
-target="_blank" rel="noopener" class="_"}. The Compose Specification merges the legacy
-2.x and 3.x versions (also known as Compose V1), aggregating properties across these formats and is implemented by **Compose 1.27.0+**.
+Use a [Compose file](03-compose-file.md) to configure your Docker application’s services, networks, volumes, and more.
 
-Use the links below to navigate key sections of the Compose Specification. 
+The [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) is the latest and recommended version of the Compose file format. It merges the legacy 2.x and 3.x versions and is implemented by Docker Compose CLI version 1.27.0.
+
+Use the following links to navigate key sections of the Compose Specification. 
+
+>**New to Compose?**
+>
+> Find more information about the [key features and use cases of Docker Compose](../features-uses.md) or [try the get started guide](../gettingstarted.md).
+{: .tip}
 
 <div class="component-container">
   <!--start row-->
