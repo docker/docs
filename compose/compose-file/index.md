@@ -8,17 +8,24 @@ title: Overview
 toc_max: 4
 toc_min: 1
 ---
-
-The [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) is the latest and recommended version of the Compose file format. It helps you define a [Compose file](03-compose-file.md) which is used to configure your Docker application’s services, networks, volumes, and more.
-
-Legacy versions 2.x and 3.x of the Compose file format were merged into the Compose Specification. It was first implemented in version 1.27.0 of the Docker Compose CLI.
-
-Use the following links to navigate key sections of the Compose Specification. 
-
 >**New to Compose?**
 >
 > Find more information about the [key features and use cases of Docker Compose](../features-uses.md) or [try the get started guide](../gettingstarted.md).
 {: .tip}
+
+Use the following links to navigate key sections of the Compose Specification. 
+
+The [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) is the latest and recommended version of the Compose file format. It helps you define a [Compose file](03-compose-file.md) which is used to configure your Docker application’s services, networks, volumes, and more.
+
+Legacy versions 2.x and 3.x of the Compose file format were merged into the Compose Specification. It is  implemented in versions 1.27.0 and above (also known as Compose V2) of the Docker Compose CLI.
+
+> **Note**
+>
+> Compose V1 no longer receives updates and will not be available in new releases of Docker Desktop after June 2023.
+>
+> Compose V2 is included with all currently supported versions of Docker Desktop.
+> For more information, see [Migrate to Compose V2](/compose/migrate).
+
 
 <div class="component-container">
   <!--start row-->
