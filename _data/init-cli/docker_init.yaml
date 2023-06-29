@@ -20,8 +20,9 @@ long: |-
   After running `docker init`, you can choose one of the following templates:
     
     * Go: Suitable for a Go server application.
-    * Python: Suitable for a Python server application.
     * Node: Suitable for a Node server application.
+    * Python: Suitable for a Python server application.
+    * Rust: Suitable for a Rust server application.
     * Other: General purpose starting point for containerizing your application.
   
   After `docker init` has completed, you may need to modify the created files and tailor them to your project. Visit the following topics to learn more about the files:
@@ -70,11 +71,12 @@ examples: |-
   > Go - (detected) suitable for a Go server application
     Python - suitable for a Python server application
     Node - suitable for a Node server application
+    Rust - suitable for a Rust server application
     Other - general purpose starting point for containerizing your application
     Don't see something you need? Let us know!
     Quit
   ```
-
+  
   ### Example of selecting Go
   
   The following example shows the prompts that appear after selecting `Go` and example input.
@@ -84,7 +86,7 @@ examples: |-
   ? What version of Go do you want to use? 1.20
   ? What's the relative directory (with a leading .) of your main package? .
   ? What port does your server listen on? 3333
-
+  
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
@@ -98,8 +100,34 @@ examples: |-
   Your application will be available at http://localhost:3333
   ```
   
+  ### Example of selecting Node
+  
+  The following example shows the prompts that appear after selecting `Node` and example input.
+  
+  ```console
+  ? What application platform does your project use? Node
+  ? What version of Node do you want to use? 18
+  ? Which package manager do you want to use? yarn
+  ? Do you want to run "yarn run build" before starting your server? Yes
+  ? What directory is your build output to? (comma-separate if multiple) output
+  ? What command do you want to use to start the app? node index.js
+  ? What port does your server listen on? 8000
+  
+  CREATED: .dockerignore
+  CREATED: Dockerfile
+  CREATED: compose.yaml
+  
+  ✔ Your Docker files are ready!
+  
+  Take a moment to review them and tailor them to your application.
+  
+  When you're ready, start your application by running: docker compose up --build
+  
+  Your application will be available at http://localhost:8000
+  ```
+  
   ### Example of selecting Python
-
+  
   The following example shows the prompts that appear after selecting `Python` and example input.
   
   ```console
@@ -121,19 +149,15 @@ examples: |-
   Your application will be available at http://localhost:8000
   ```
   
-  ### Example of selecting Node
+  ### Example of selecting Rust
   
-  The following example shows the prompts that appear after selecting `Node` and example input.
+  The following example shows the prompts that appear after selecting `Rust` and example input.
   
   ```console
-  ? What application platform does your project use? Node
-  ? What version of Node do you want to use? 18
-  ? Which package manager do you want to use? yarn
-  ? Do you want to run "yarn run build" before starting your server? Yes
-  ? What directory is your build output to? (comma-separate if multiple) output
-  ? What command do you want to use to start the app? node index.js
+  ? What application platform does your project use? Rust
+  ? What version of Rust do you want to use? 1.70.0
   ? What port does your server listen on? 8000
-
+  
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
@@ -143,7 +167,7 @@ examples: |-
   Take a moment to review them and tailor them to your application.
   
   When you're ready, start your application by running: docker compose up --build
-
+  
   Your application will be available at http://localhost:8000
   ```
   
