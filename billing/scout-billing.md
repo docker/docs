@@ -16,8 +16,8 @@ Docker Scout is an image monitoring tool to help you find and fix potential vuln
 4. Next to the plan name, select **Buy now**.
 5. From the **Purchase Scout Team** drop-down menu, select the name of your personal account.
 6. This redirects you to the payment processing page where you can enter your email, card information, and billing address.
-7. Select annual or monthly billing.
-8. Optionally, update the quantity of repositories you want to use with Docker Scout. See [Docker Scout subscriptions](../subscription/scout-details.md) to learn more about the number of repositories available at each tier.
+7. Update the quantity of repositories you want to use with Docker Scout. See [Docker Scout subscriptions](../subscription/scout-details.md) to learn more about the number of repositories available at each tier.
+8. Select annual or monthly billing.
 9. Select **Subscribe**.
 
 Once your purchase is complete, you receive a confirmation email and a copy of your invoice.
@@ -31,8 +31,8 @@ Once your purchase is complete, you receive a confirmation email and a copy of y
 5. Next to the plan name, select **Buy now**.
 6. From the **Purchase Scout Team** drop-down menu, select the name of your organization.
 7. This redirects you to the payment processing page where you can enter your email, card information, and billing address.
-8. Select annual or monthly billing.
-9. Optionally, update the quantity of repositories you want to use with Docker Scout. See [Docker Scout subscriptions](../subscription/scout-details.md) to learn more about the number of repositories available at each tier.
+8. Update the quantity of repositories you want to use with Docker Scout. See [Docker Scout subscriptions](../subscription/scout-details.md) to learn more about the number of repositories available at each tier.
+9. Select annual or monthly billing.
 10. Select **Subscribe**.
 
 Once your purchase is complete, you receive a confirmation email and a copy of your invoice.

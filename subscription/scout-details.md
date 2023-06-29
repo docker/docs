@@ -31,7 +31,7 @@ Docker Scout Team includes:
 - All the features available in Docker Scout Free
 - Remote image analysis for up to 100 repositories
 
-You can buy Docker Scout Team in Docker Hub. See [Docker Scout Billing](../billing/scout-billing.md).
+You can buy Docker Scout Team in Docker Hub. See [Docker Scout billing](../billing/scout-billing.md).
 
 ## Docker Scout Business
 
