@@ -6,7 +6,7 @@ keywords: payments, billing, subscription
 
 {% include scout-early-access.md %}
 
-Docker Scout is an image monitoring tool to help you find and fix potential vulnerabilities in container images. In this section, find information on how to buy Docker Scout Team in Docker Hub for your personal account or for an organization.
+Docker Scout is an image monitoring tool to help you find and fix potential vulnerabilities in container images. Docker Scout is free for up to 3 repositories. You can buy Docker Scout Team to turn on Docker Scout for additional repositories. In this section, learn how to buy Docker Scout Team in Docker Hub for your personal account or for an organization.
 
 ## Personal account
 
