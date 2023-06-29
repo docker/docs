@@ -2099,7 +2099,7 @@ faq:
       title: Linux 
     - path: /desktop/faqs/releases/
       title: Releases
-  - sectiontitle: Docker Hub
+  - sectiontitle: Docker Hub and admin
     section:
     - path: /docker-hub/general-faqs/
       title: General
