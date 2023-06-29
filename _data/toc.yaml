@@ -146,6 +146,20 @@ guides:
       path: /language/dotnet/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/dotnet/deploy/
+  - sectiontitle: Rust
+    section:
+    - title: "Overview"
+      path: /language/rust/
+    - title: "Build images"
+      path: /language/rust/build-images/
+    - title: "Run containers"
+      path: /language/rust/run-containers/
+    - title: "Develop your app"
+      path: /language/rust/develop/
+    - title: "Configure CI/CD"
+      path: /language/rust/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/rust/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
