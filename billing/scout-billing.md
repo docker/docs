@@ -39,6 +39,6 @@ Once your purchase is complete, you receive a confirmation email and a copy of y
 
 ## Manage your subscription
 
-Renewals charge to the original credit card used to buy Docker Scout Team.
-
 To access your subscription details, go to the **Billing** section for your personal account or organization that's subscribed. In the **Docker Scout Team** section, select **Change plan**. Here you can find your renewal date, invoice history, or cancel your plan.
+
+Renewals charge to the original credit card used to buy Docker Scout Team.
