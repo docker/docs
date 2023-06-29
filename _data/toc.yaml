@@ -146,6 +146,20 @@ guides:
       path: /language/dotnet/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/dotnet/deploy/
+  - sectiontitle: Rust
+    section:
+    - title: "Overview"
+      path: /language/rust/
+    - title: "Build images"
+      path: /language/rust/build-images/
+    - title: "Run containers"
+      path: /language/rust/run-containers/
+    - title: "Develop your app"
+      path: /language/rust/develop/
+    - title: "Configure CI/CD"
+      path: /language/rust/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/rust/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
@@ -1106,6 +1120,8 @@ manuals:
           title: Explore Images
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
+        - path: /desktop/use-desktop/builds/
+          title: Explore Builds (Beta)
         - path: /desktop/use-desktop/pause/
           title: Pause Docker Desktop
     - sectiontitle: Hardened Docker Desktop
@@ -1147,7 +1163,7 @@ manuals:
     - path: /desktop/containerd/
       title: containerd image store (Beta)
     - path: /desktop/wasm/
-      title: Wasm (Beta)
+      title: Wasm workloads (Beta)
     - sectiontitle: WSL
       section:
         - path: /desktop/wsl/
@@ -1669,6 +1685,12 @@ manuals:
           title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
+    - sectiontitle: Builders
+      section:
+        - path: /build/builders/
+          title: Builders overview
+        - path: /build/builders/manage/
+          title: Manage builders
     - sectiontitle: Drivers
       section:
         - path: /build/drivers/

@@ -39,7 +39,7 @@ If you choose the integrated terminal, you can run commands in a running contain
     > Turn this setting on to make Docker Desktop run faster. 
     {: .tip}
 
-- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. The **VirtioFS** option is only available for macOS versions 12.5 and above. 
+- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default. 
     >**Tip**
     >
     > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
@@ -63,6 +63,8 @@ If you choose the integrated terminal, you can run commands in a running contain
 
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
   use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
+
+- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respecitively. 
 
 ## Resources
 
@@ -201,6 +203,10 @@ To see the full list of possible configuration options, see the
 [dockerd command reference](/engine/reference/commandline/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
+
+## Builders
+
+{% include desktop-builders-setting.md %}
 
 ## Kubernetes
 
