@@ -24,11 +24,62 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.21.0
+
+{% include release-date.html date="2023-06-29" %}
+
+{% include desktop-install.md all=true version="4.21.0" build_path="/" %}
+
+### New
+
+- Added support for new Wasm runtimes: slight, spin, and wasmtime.  Users can download Wasm runtimes on demand when the containerd image store is enabled.
+- Added Rust server support to Docker init.
+- Beta release of the **Builds** view that lets you inspect builds and manage builders. This can be found in the **Features in Development** tab in **Settings**.
+
+### Upgrades
+- [Buildx v0.11.0](https://github.com/docker/buildx/releases/tag/v0.11.0)
+- [Compose v2.19.0](https://github.com/docker/compose/releases/tag/v2.19.0)
+- [Kubernetes v1.27.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.2)
+- [cri-tools v1.27.0](https://github.com/kubernetes-sigs/cri-tools/releases/tag/v1.27.0)
+- [cri-dockerd v0.3.2](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.2)
+- [coredns v1.10.1](https://github.com/coredns/coredns/releases/tag/v1.10.1)
+- [cni v1.2.0](https://github.com/containernetworking/plugins/releases/tag/v1.2.0)
+- [etcd v3.5.7](https://github.com/etcd-io/etcd/releases/tag/v3.5.7)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker Desktop now automatically pauses the Docker Engine when it is not in use and wakes up again on demand.
+- VirtioFS is now the default file sharing implementation for new installations of Docker Desktop on macOS 12.5 and higher.
+- Improved product usage reporting using OpenTelemetry (experimental).
+- Fixed Docker socket permissions. Fixes [docker/for-win#13447](https://github.com/docker/for-win/issues/13447) and [docker/for-mac#6823](https://github.com/docker/for-mac/issues/6823).
+- Fixed am issue which caused Docker Desktop to hang when quitting the application whilst paused.
+- Fixed a bug which caused the **Logs** and **Terminal** tab content in the **Container** view to be covered by a fixed toolbar [docker/for-mac#6814](https://github.com/docker/for-mac/issues/6814).
+- Fixed a bug which caused input labels to overlap with input values on the container run dialog. Fixes [docker/for-win#13304](https://github.com/docker/for-win/issues/13304).
+- Fixed a bug which meant users couldn't select the Docker Extension menu. Fixes [docker/for-mac#6840](https://github.com/docker/for-mac/issues/6840) and [docker/for-mac#6855](https://github.com/docker/for-mac/issues/6855)
+
+#### For Mac
+
+- Added a health check for macOS that notifies users if there has been a change on their system which might cause problems running Docker binaries.
+
+#### For Windows
+
+- Fixed a bug on WSL 2 where if Desktop is paused, killed, and then restarted, the startup hangs unless WSL is shut down first with `wsl --shutdown`.
+- Fixed the WSL engine in cases where wsl.exe is not on the PATH [docker/for-win#13547](https://github.com/docker/for-win/issues/13547).
+- Fixed the WSL engine's ability to detect cases where one of the Docker Desktop distros' drive is missing [docker/for-win#13554](https://github.com/docker/for-win/issues/13554).
+- A slow or unresponsive WSL integration no longer prevents Docker Desktop from starting. Fixes [docker/for-win#13549](https://github.com/docker/for-win/issues/13549).
+- Fixed a bug that caused Docker Desktop to crash on startup [docker/for-win#6890](https://github.com/docker/for-mac/issues/6890).
+- Added the following installer flags:
+  - `--hyper-v-default-data-root` which specifies the default location for Hyper-V VM disk.
+  - `--windows-containers-default-data-root` which specifies the default data root for Windows Containers.
+  - `--wsl-default-data-root` which specifies the default location for WSL distro disks.
+
 ## 4.20.1
 
 {% include release-date.html date="2023-06-05" %}
 
-{% include desktop-install.md all=true version="4.20.1" build_path="/" %}
+{% include desktop-install.md all=true version="4.20.1" build_path="/110738/" %}
 
 ### Bug fixes and enhancements
 
