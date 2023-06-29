@@ -1,7 +1,7 @@
 ---
 description: Company FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
-title: Frequently asked questions
+title: FAQs on companies
 ---
 
 ### Are existing subscriptions affected when a company is created and organizations are added to the company?

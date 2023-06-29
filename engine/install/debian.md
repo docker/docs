@@ -120,6 +120,16 @@ Docker from the repository.
       sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
 
+    > **Note**
+    >
+    > If you use a derivative distro, such as Kali Linux,
+    > you may need to substitute the part of this command that's expected to
+    > print the version codename:
+    >
+    > ```console
+    > $(. /etc/os-release && echo "$VERSION_CODENAME")
+    > ```
+
 #### Install Docker Engine
 
 1. Update the `apt` package index:
