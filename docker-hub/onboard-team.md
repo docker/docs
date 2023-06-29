@@ -12,7 +12,7 @@ The following section contains step-by-step instructions on how to get started o
 
 Before you start to on board your organization, ensure that you:
 - [Create an organization](../docker-hub/orgs.md#create-an-organization) with a Docker Team subscription.
-- Familiarize yourself with Docker concepts and terminology in the [glossary](../glossary.md) and [FAQs](../docker-hub/onboarding-faqs.md).
+- Familiarize yourself with Docker concepts and terminology in the [glossary](../glossary.md) and [FAQs](../docker-hub/general-faqs.md).
 
 ## Step 1: Identify your Docker users and their Docker accounts
 
