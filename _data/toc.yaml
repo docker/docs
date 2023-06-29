@@ -595,6 +595,14 @@ reference:
         title: docker scout quickview
       - path: /engine/reference/commandline/scout_recommendations/
         title: docker scout recommendations
+      - path: /engine/reference/commandline/scout_repo/
+        title: docker scout repo
+      - path: /engine/reference/commandline/scout_repo_disable/
+        title: docker scout repo disable        
+      - path: /engine/reference/commandline/scout_repo_enable/
+        title: docker scout repo enable
+      - path: /engine/reference/commandline/scout_repo_list/
+        title: docker scout repo list
       - path: /engine/reference/commandline/scout_sbom/
         title: docker scout sbom
       - path: /engine/reference/commandline/scout_stream/
