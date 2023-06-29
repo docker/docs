@@ -34,8 +34,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/ge
 
 - Added support for new Wasm runtimes: slight, spin, and wasmtime.  Users can download Wasm runtimes on demand when the containerd image store is enabled.
 - Added Rust server support to Docker init.
-- New [Builds view](use-desktop/builds.md) that lets you inspect builds and manage builders.
-- New [Builds view](use-desktop/builds.md) (Beta) that lets you inspect builds and manage builders. This can be found in the **Features in Development** tab in Docker Desktop.
+- Beta release of the **Builds** view that lets you inspect builds and manage builders. This can be found in the **Features in Development** tab in **Settings**.
 
 ### Upgrades
 - [Buildx v0.11.0](https://github.com/docker/buildx/releases/tag/v0.11.0)
