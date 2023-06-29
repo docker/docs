@@ -1,6 +1,6 @@
 ---
-title: Docker+Wasm (Beta)
-description: How to use the Wasm integration in Docker Desktop
+title: Wasm workloads (Beta)
+description: How to run Wasm workloads with Docker Desktop
 keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
 ---
@@ -15,23 +15,31 @@ alongside your Linux containers in Docker.
 
 > **Beta**
 >
-> The Docker+Wasm feature is currently in
-> [Beta](../../release-lifecycle.md/#beta). We recommend that you do not use
-> this feature in production environments as this feature may change or be
-> removed from future releases.
+> The Wasm feature is currently in [Beta](../../release-lifecycle.md/#beta).
+> We recommend that you do not use this feature in production environments as
+> this feature may change or be removed from future releases.
 
-## Turn on the Docker+Wasm integration
+## Enable Wasm workloads
 
-To use the Docker+Wasm integration, developers must turn on the
-[containerd image store](../containerd/index.md) feature.
+Wasm workloads require the [containerd image store](../containerd/index.md)
+feature to be enabled. If you’re not already using the containerd image store,
+then pre-existing images and containers will be inaccessible.
 
-> **Important**
->
-> The Docker+Wasm integration requires the
-> [containerd image store](../containerd/index.md) feature. If you’re not
-> already using the containerd image store, then pre-existing images and
-> containers will be inaccessible.
-{: .important}
+1. Open the Docker Desktop **Settings**.
+2. Go to the **Features in development** tab.
+3. Check the following checkboxes:
+   - **Use containerd for storing and pulling images**
+   - **Enable Wasm**
+4. Select **Apply & restart** to save the settings.
+5. In the confirmation dialog, select **Install** to install the Wasm runtimes.
+
+Docker Desktop downloads and installs the following runtimes that you can use
+to run Wasm workloads:
+
+- `io.containerd.slight.v1`
+- `io.containerd.spin.v1`
+- `io.containerd.wasmedge.v1`
+- `io.containerd.wasmtime.v1`
 
 ## Usage examples
 
@@ -40,11 +48,10 @@ To use the Docker+Wasm integration, developers must turn on the
 The following `docker run` command starts a Wasm container on your system:
 
 ```console
-$ docker run -dp 8080:8080 \
-  --name=wasm-example \
+$ docker run \
   --runtime=io.containerd.wasmedge.v1 \
-  --platform=wasi/wasm32 \
-  michaelirwin244/wasm-example
+  --platform=wasi/wasm \
+  secondstate/rust-example-hello
 ```
 
 After running this command, you can visit [http://localhost:8080/](http://localhost:8080/) to see the "Hello world" output from this example module.
@@ -57,7 +64,7 @@ Note the `--runtime` and `--platform` flags used in this command:
 - `--runtime=io.containerd.wasmedge.v1`: informs the Docker engine that you want
   to use the Wasm containerd shim instead of the standard Linux container
   runtime
-- `--platform=wasi/wasm32`: specifies the architecture of the image you want to
+- `--platform=wasi/wasm`: specifies the architecture of the image you want to
   use. By leveraging a Wasm architecture, you don’t need to build separate
   images for the different machine architectures. The Wasm runtime takes care of
   the final step of converting the Wasm binary to machine instructions.
@@ -69,11 +76,9 @@ The same application can be run using the following Docker Compose file:
 ```yaml
 services:
   app:
-    image: michaelirwin244/wasm-example
-    platform: wasi/wasm32
+    image: secondstate/rust-example-hello
+    platform: wasi/wasm
     runtime: io.containerd.wasmedge.v1
-    ports:
-      - 8080:8080
 ```
 
 Start the application using the normal Docker Compose commands:
@@ -126,12 +131,12 @@ running in a container.
    server       latest    2c798ddecfa1   2 minutes ago   3MB
    ```
 
-   Inspecting the image shows the image has a `wasi/wasm32` platform, a
+   Inspecting the image shows the image has a `wasi/wasm` platform, a
    combination of OS and architecture:
 
    ```console
    $ docker image inspect server | grep -A 3 "Architecture"
-           "Architecture": "wasm32",
+           "Architecture": "wasm",
            "Os": "wasi",
            "Size": 3001146,
            "VirtualSize": 3001146,
@@ -156,14 +161,14 @@ running in a container.
    # syntax=docker/dockerfile:1
    FROM scratch
    COPY --from=build /build/hello_world.wasm /hello_world.wasm
-   ENTRYPOINT [ "hello_world.wasm" ]
+   ENTRYPOINT [ "/hello_world.wasm" ]
    ```
 
-3. Build and push the image specifying the `wasi/wasm32` architecture. Buildx
+3. Build and push the image specifying the `wasi/wasm` architecture. Buildx
    makes this easy to do in a single command.
 
    ```console
-   $ docker buildx build --platform wasi/wasm32 -t username/hello-world .
+   $ docker buildx build --platform wasi/wasm -t username/hello-world .
    ...
    => exporting to image                                                                             0.0s
    => => exporting layers                                                                            0.0s
@@ -193,7 +198,7 @@ in Docker Desktop settings and try again.
 ### Failed to start shim: failed to resolve runtime path
 
 If you use an older version of Docker Desktop that doesn't support running Wasm
-containers, you will see an error message similar to the following:
+workloads, you will see an error message similar to the following:
 
 ```
 docker: Error response from daemon: failed to start shim: failed to resolve runtime path: runtime "io.containerd.wasmedge.v1" binary not installed "containerd-shim-wasmedge-v1": file does not exist: unknown.
@@ -213,7 +218,7 @@ Update your Docker Desktop to the latest version and try again.
 
 ## Feedback
 
-Thanks for trying the new Docker+Wasm integration. Give feedback or report any
+Thanks for trying out Wasm workloads with Docker. Give feedback or report any
 bugs you may find through the issues tracker on the
 [public roadmap item](https://github.com/docker/roadmap/issues/426){:
 target="_blank" rel="noopener" class="_"}.
