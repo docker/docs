@@ -391,7 +391,7 @@ There are a few points to note about this command.
   ```
 
 * The total number of stored messages is `0` for now. This is fine, because we had not posted anything to our application yet.
-* We refer to the database container by its hostname, which is `db`. This is what we had the `--name db` for when we started the database container.
+* We refer to the database container by its hostname, which is `db`. This is what we had the `--hostname db` for when we started the database container.
 
 * The actual password does not matter, but it must be set to something to avoid confusing the example application.
 * The container we've just run is named `rest-server`. These names are useful for managing the container lifecycle:
