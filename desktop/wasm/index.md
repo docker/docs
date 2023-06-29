@@ -48,11 +48,10 @@ to run Wasm workloads:
 The following `docker run` command starts a Wasm container on your system:
 
 ```console
-$ docker run -dp 8080:8080 \
-  --name=wasm-example \
+$ docker run \
   --runtime=io.containerd.wasmedge.v1 \
-  --platform=wasi/wasm32 \
-  michaelirwin244/wasm-example
+  --platform=wasi/wasm \
+  secondstate/rust-example-hello
 ```
 
 After running this command, you can visit [http://localhost:8080/](http://localhost:8080/) to see the "Hello world" output from this example module.
@@ -65,7 +64,7 @@ Note the `--runtime` and `--platform` flags used in this command:
 - `--runtime=io.containerd.wasmedge.v1`: informs the Docker engine that you want
   to use the Wasm containerd shim instead of the standard Linux container
   runtime
-- `--platform=wasi/wasm32`: specifies the architecture of the image you want to
+- `--platform=wasi/wasm`: specifies the architecture of the image you want to
   use. By leveraging a Wasm architecture, you don’t need to build separate
   images for the different machine architectures. The Wasm runtime takes care of
   the final step of converting the Wasm binary to machine instructions.
@@ -77,11 +76,9 @@ The same application can be run using the following Docker Compose file:
 ```yaml
 services:
   app:
-    image: michaelirwin244/wasm-example
-    platform: wasi/wasm32
+    image: secondstate/rust-example-hello
+    platform: wasi/wasm
     runtime: io.containerd.wasmedge.v1
-    ports:
-      - 8080:8080
 ```
 
 Start the application using the normal Docker Compose commands:
@@ -134,12 +131,12 @@ running in a container.
    server       latest    2c798ddecfa1   2 minutes ago   3MB
    ```
 
-   Inspecting the image shows the image has a `wasi/wasm32` platform, a
+   Inspecting the image shows the image has a `wasi/wasm` platform, a
    combination of OS and architecture:
 
    ```console
    $ docker image inspect server | grep -A 3 "Architecture"
-           "Architecture": "wasm32",
+           "Architecture": "wasm",
            "Os": "wasi",
            "Size": 3001146,
            "VirtualSize": 3001146,
@@ -164,14 +161,14 @@ running in a container.
    # syntax=docker/dockerfile:1
    FROM scratch
    COPY --from=build /build/hello_world.wasm /hello_world.wasm
-   ENTRYPOINT [ "hello_world.wasm" ]
+   ENTRYPOINT [ "/hello_world.wasm" ]
    ```
 
-3. Build and push the image specifying the `wasi/wasm32` architecture. Buildx
+3. Build and push the image specifying the `wasi/wasm` architecture. Buildx
    makes this easy to do in a single command.
 
    ```console
-   $ docker buildx build --platform wasi/wasm32 -t username/hello-world .
+   $ docker buildx build --platform wasi/wasm -t username/hello-world .
    ...
    => exporting to image                                                                             0.0s
    => => exporting layers                                                                            0.0s
