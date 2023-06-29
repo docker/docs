@@ -30,7 +30,7 @@ On the **General** tab, you can configure when to start Docker and specify other
   execution attacks.
 
 - **Use the WSL 2 based engine**. WSL 2 provides better performance than the
-  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../windows/wsl.md).
+  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../wsl/index.md).
 
 - **Add `*.docker.internal` to the host's `/etc/hosts` file. (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
 
@@ -46,6 +46,9 @@ On the **General** tab, you can configure when to start Docker and specify other
   dashboard when starting Docker Desktop.
 
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
+    >**Note**
+    >
+    > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
 - **Use Docker Compose V2**. Select to enable the `docker-compose` command to
   use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
@@ -62,7 +65,7 @@ containers.
 
 > **Note**
 >
-> The Advanced tab is only available in Hyper-V mode, because Windows manages
+> The **Advanced** tab is only available in Hyper-V mode, because Windows manages
 > the resources in WSL 2 mode and Windows container mode. In WSL 2
 > mode, you can configure limits on the memory, CPU, and swap size allocated
 > to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig){:target="_blank"
@@ -92,7 +95,7 @@ You can also move the disk image to a different location. If you attempt to move
 
 > **Note**
 >
-> The File sharing tab is only available in Hyper-V mode because the files
+> The **File sharing** tab is only available in Hyper-V mode because the files
 > are automatically shared in WSL 2 mode and Windows container mode.
 
 Use File sharing to allow local directories on your machine to be shared with
@@ -138,6 +141,7 @@ File share settings are:
 >   open `Test` will fail with the error "No such file or directory". Similarly,
 >   once a file called `test` is created, attempts to create a second file called
 >   `Test` will fail.
+{: .tip}
 
 #### Shared folders on demand
 
@@ -186,10 +190,10 @@ This is useful when a corporate proxy that requires authentication is manually c
 
 > **Note**
 >
-> The Network tab is not available in the Windows container mode because
+> The **Network** tab isn't available in the Windows container mode because
 > Windows manages networking.
 
-You can configure Docker Desktop networking to work on a virtual private network (VPN). Specify a network address translation (NAT) prefix and subnet mask to enable Internet connectivity.
+{% include desktop-network-setting.md %}
 
 ### WSL Integration
 
@@ -203,7 +207,7 @@ to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 You can also select any additional distributions you would like to enable the WSL 2 integration on.
 
 For more details on configuring Docker Desktop to use WSL 2, see
-[Docker Desktop WSL 2 backend](../windows/wsl.md).
+[Docker Desktop WSL 2 backend](../wsl/index.md).
 
 ## Docker Engine
 
@@ -219,10 +223,7 @@ You configure the daemon using a JSON configuration file. Here's what the file m
       "enabled": true
     }
   },
-  "experimental": false,
-  "features": {
-    "buildkit": true
-  }
+  "experimental": false
 }
 ```
 
@@ -291,9 +292,9 @@ You can also sign up to the [Developer Preview Program](https://www.docker.com/c
 
 {% include beta.md %}
 
-#### Enable containerd
+#### Use containerd for pulling and storing images
 
-Turns on the experimental containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker.
+Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
 
 ### Experimental features
 

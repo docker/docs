@@ -45,13 +45,13 @@ exclude:
 latest_engine_api_version: "1.43"
 docker_ce_version: "24.0.0"
 compose_v1_version: "1.29.2"
-compose_version: "v2.18.1"
-compose_file_v3: "3.9"
+compose_version: "v2.19.0"
+compose_file_v3: "3.8"
 compose_file_v2: "2.4"
 machine_version: "0.16.0"
 distribution_version: "2.7"
 compose_switch_version: "1.0.4"
-buildkit_version: "0.10.5"
+buildkit_version: "0.11.6"
 
 # Strings for use in doc examples, e.g. runtime versions.
 example_go_version: "1.20"
@@ -263,6 +263,12 @@ fetch-remote:
       - dest: "compose/compose-file/13-merge.md"
         src:
           - "13-merge.md"
+      - dest: "compose/compose-file/14-include.md"
+        src:
+          - "14-include.md"
+      - dest: "compose/compose-file/15-profiles.md"
+        src:
+          - "15-profiles.md"
       - dest: "compose/compose-file/build.md"
         src:
           - "build.md"
@@ -277,3 +283,11 @@ fetch-remote:
       - dest: "build/bake/reference.md"
         src:
           - "docs/bake-reference.md"
+
+  - repo: "https://github.com/docker/scout-cli"
+    default_branch: "main"
+    ref: "v0.17.0"
+    paths:
+      - dest: "_data/scout-cli"
+        src:
+          - "docs/*.yaml"

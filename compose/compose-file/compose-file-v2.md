@@ -856,7 +856,7 @@ a partial image ID.
 image: redis
 ```
 ```yaml
-image: ubuntu:18.04
+image: ubuntu:22.04
 ```
 ```yaml
 image: tutum/influxdb

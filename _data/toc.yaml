@@ -244,6 +244,8 @@ reference:
           title: docker buildx build
         - path: /engine/reference/commandline/buildx_create/
           title: docker buildx create
+        - path: /engine/reference/commandline/buildx_debug-shell/
+          title: docker buildx debug-shell
         - path: /engine/reference/commandline/buildx_du/
           title: docker buildx du
         - path: /engine/reference/commandline/buildx_imagetools/
@@ -254,8 +256,6 @@ reference:
           title: docker buildx imagetools inspect
         - path: /engine/reference/commandline/buildx_inspect/
           title: docker buildx inspect
-        - path: /engine/reference/commandline/buildx_install/
-          title: docker buildx install
         - path: /engine/reference/commandline/buildx_ls/
           title: docker buildx ls
         - path: /engine/reference/commandline/buildx_prune/
@@ -264,8 +264,6 @@ reference:
           title: docker buildx rm
         - path: /engine/reference/commandline/buildx_stop/
           title: docker buildx stop
-        - path: /engine/reference/commandline/buildx_uninstall/
-          title: docker buildx uninstall
         - path: /engine/reference/commandline/buildx_use/
           title: docker buildx use
         - path: /engine/reference/commandline/buildx_version/
@@ -594,10 +592,24 @@ reference:
         title: docker scout compare
       - path: /engine/reference/commandline/scout_cves/
         title: docker scout cves
+      - path: /engine/reference/commandline/scout_entitlement/
+        title: docker scout entitlement
       - path: /engine/reference/commandline/scout_quickview/
         title: docker scout quickview
       - path: /engine/reference/commandline/scout_recommendations/
         title: docker scout recommendations
+      - path: /engine/reference/commandline/scout_repo/
+        title: docker scout repo
+      - path: /engine/reference/commandline/scout_repo_disable/
+        title: docker scout repo disable        
+      - path: /engine/reference/commandline/scout_repo_enable/
+        title: docker scout repo enable
+      - path: /engine/reference/commandline/scout_repo_list/
+        title: docker scout repo list
+      - path: /engine/reference/commandline/scout_sbom/
+        title: docker scout sbom
+      - path: /engine/reference/commandline/scout_stream/
+        title: docker scout stream
       - path: /engine/reference/commandline/scout_version/
         title: docker scout version
     - path: /engine/reference/commandline/search/
@@ -901,6 +913,10 @@ reference:
         title: Interpolation
       - path: /compose/compose-file/13-merge/
         title: Merge
+      - path: /compose/compose-file/14-include/
+        title: Include
+      - path: /compose/compose-file/15-profiles/
+        title: Profiles
     - path: /compose/compose-file/build/
       title: Compose file build
     - path: /compose/compose-file/deploy/
@@ -1132,6 +1148,14 @@ manuals:
       title: containerd image store (Beta)
     - path: /desktop/wasm/
       title: Wasm (Beta)
+    - sectiontitle: WSL
+      section:
+        - path: /desktop/wsl/
+          title: Set up WSL 2 on Docker Desktop for Windows
+        - path: /desktop/wsl/use-wsl/
+          title: Use WSL
+        - path: /desktop/wsl/best-practices/
+          title: Best practices
     - sectiontitle: Additional resources
       section:
         - path: /desktop/kubernetes/
@@ -1140,8 +1164,6 @@ manuals:
           title: Back up and restore data
         - path: /desktop/networking/
           title: Explore networking features
-        - path: /desktop/windows/wsl/
-          title: Docker Desktop WSL 2 backend on Windows
         - path: /desktop/vm-vdi/
           title: Run Docker Desktop for Windows in a VM or VDI environment
         - path: /desktop/allow-list/
@@ -1265,6 +1287,8 @@ manuals:
           section:
             - title: "Test and debug"
               path: /desktop/extensions-sdk/dev/test-debug/
+            - title: "Continuous integration"
+              path: /desktop/extensions-sdk/dev/continuous-integration/
             - title: CLI reference
               path: /desktop/extensions-sdk/dev/usage/
             - sectiontitle: Extension APIs
@@ -1535,6 +1559,8 @@ manuals:
     section:
     - sectiontitle: Container runtime
       section:
+      - path: /engine/alternative-runtimes/
+        title: Alternative container runtimes
       - path: /config/containers/resource_constraints/
         title: Configure runtime resource constraints
       - path: /config/containers/runmetrics/
@@ -1890,6 +1916,66 @@ manuals:
       title: Artifactory integration
     - path: /scout/advisory-db-sources/
       title: Advisory Database
+    - path: /scout/ci/
+      title: Continuous integration
+
+- sectiontitle: Docker Admin (Early Access)
+  section:
+  - path: /admin/
+    title: Overview
+  - sectiontitle: Company administration
+    section:
+    - path: /admin/company/
+      title: Overview
+    - path: /admin/company/organizations/
+      title: Manage organizations
+    - path: /admin/company/users/
+      title: Manage users
+    - path: /admin/company/owners/
+      title: Manage company owners
+    - sectiontitle: Settings
+      section:
+      - path: /admin/company/settings/sso/
+        title: Single Sign-On overview
+      - path: /admin/company/settings/sso-configuration/
+        title: Configure Single Sign-On
+      - path: /admin/company/settings/sso-management/
+        title: Manage Single Sign-On
+      - path: /admin/company/settings/scim/
+        title: SCIM
+      - path: /admin/company/settings/group-mapping/
+        title: Group mapping
+      - path: /admin/company/settings/sso-faq/
+        title: Single Sign-On FAQs
+  - sectiontitle: Organization administration
+    section:
+    - path: /admin/organization/
+      title: Overview
+    - path: /admin/organization/members/
+      title: Manage members
+    - path: /admin/organization/activity-logs/
+      title: Activity logs
+    - path: /admin/organization/image-access/
+      title: Image Access Management
+    - path: /admin/organization/registry-access/
+      title: Registry Access Management
+    - path: /admin/organization/general-settings/
+      title: General settings
+    - sectiontitle: Security settings
+      section:
+      - path: /admin/organization/security-settings/sso/
+        title: Single Sign-On overview
+      - path: /admin/organization/security-settings/sso-configuration/
+        title: Configure Single Sign-On
+      - path: /admin/organization/security-settings/sso-management/
+        title: Manage Single Sign-On
+      - path: /admin/organization/security-settings/scim/
+        title: SCIM
+      - path: /admin/organization/security-settings/group-mapping/
+        title: Group mapping
+      - path: /admin/organization/security-settings/sso-faq/
+        title: Single Sign-On FAQs
+
 
 - sectiontitle: Administration and security
   section:

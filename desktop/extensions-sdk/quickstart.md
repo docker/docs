@@ -48,6 +48,7 @@ $ docker build -t <name-of-your-extension> .
 ```console
 ? Hub repository (eg. namespace/repository on hub): john/my-extension`
 ```
+
 The `docker build` generates an image with name `john/my-extension`.
 
 ## Step three: Install and preview the extension
@@ -79,11 +80,13 @@ To remove the extension, run:
 ```console
 $ docker extension rm <name-of-your-extension>
 ```
+
 {% include extensions-form.md %}
 
 ## What's next
 
 - Build a more [advanced frontend](build/frontend-extension-tutorial.md) for your extension.
 - Learn how to [test and debug](dev/test-debug.md) your extension.
+- Learn how to [setup CI for your extension](dev/continuous-integration.md).
 - Learn more about extensions [architecture](architecture/index.md).
 - Learn more about [designing the UI](design/design-guidelines.md).
