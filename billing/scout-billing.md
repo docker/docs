@@ -6,7 +6,7 @@ keywords: payments, billing, subscription
 
 {% include scout-early-access.md %}
 
-Docker Scout allows users to secure their software supply chain and continuously observe and improve their security posture. Docker Scout is free for up to 3 repositories. You can buy Docker Scout Team to turn on Docker Scout for additional repositories. In this section, learn how to buy Docker Scout Team in Docker Hub for your personal account or for an organization.
+Docker Scout lets users secure their software supply chain and continuously observe and improve their security posture. Docker Scout is free for up to 3 repositories. You can buy Docker Scout Team to turn on Docker Scout for additional repositories. In this section, learn how to buy Docker Scout Team in Docker Hub for your personal account or for an organization.
 
 ## Personal account
 
