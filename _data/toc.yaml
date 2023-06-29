@@ -1120,6 +1120,8 @@ manuals:
           title: Explore Images
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
+        - path: /desktop/use-desktop/builds/
+          title: Explore Builds (Beta)
         - path: /desktop/use-desktop/pause/
           title: Pause Docker Desktop
     - sectiontitle: Hardened Docker Desktop
@@ -1683,6 +1685,12 @@ manuals:
           title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
+    - sectiontitle: Builders
+      section:
+        - path: /build/builders/
+          title: Builders overview
+        - path: /build/builders/manage/
+          title: Manage builders
     - sectiontitle: Drivers
       section:
         - path: /build/drivers/
