@@ -7,9 +7,10 @@ toc_max: 3
 We support these broad categories of callouts:
 
 - Notes (no Liquid tag required)
-- Tips, which use the `{: .tip }` tag
+- Tips, which use the `{: .tip}` tag
 - Important, which use the `{: .important}` tag
 - Warning , which use the `{: .warning}` tag
+- Experimental, which use the `{: .experimental}` tag
 
 ## Examples
 
@@ -47,6 +48,11 @@ We support these broad categories of callouts:
 > The Docker Dashboard does not remove volumes when you delete the app stack.
 {: .warning}
 
+> **Beta feature**
+>
+> The Builds view is currently in Beta. This feature may change or be removed from future releases.
+{: .experimental}
+
 ## HTML
 
 ```html
@@ -81,4 +87,9 @@ We support these broad categories of callouts:
 >
 > The Docker Dashboard does _not_ remove volumes when you delete the app stack.
 {: .warning}
+
+> **Beta feature**
+>
+> The Builds view is currently in Beta. This feature may change or be removed from future releases.
+{: .experimental}
 ```
