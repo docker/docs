@@ -26,24 +26,18 @@ $ dotnet new xunit -n myWebApp.Tests -o tests
 Next, we'll update the test project and add the Testcontainers for .NET package that allows us to run tests against Docker resources (PostgreSQL container). Switch to the `tests` directory and run the following command:
 
 ```console
-$ dotnet add package Testcontainers.PostgreSql --version 3.0.0
+$ dotnet add package Testcontainers --version 2.3.0
 ```
 
 ## Add a test
 
-Open the test project in your favorite IDE and replace the contents of `UnitTest1` with the following code:
+Open the test project in your favorite IDE and replace the contents of `UnitTest1.cs` with the following code:
 
 ```c#
-using System;
 using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Containers;
 using DotNet.Testcontainers.Networks;
-using Testcontainers.PostgreSql;
-using Xunit;
 
 public sealed class UnitTest1 : IAsyncLifetime, IDisposable
 {
@@ -51,29 +45,30 @@ public sealed class UnitTest1 : IAsyncLifetime, IDisposable
 
     private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(1));
 
-    private readonly INetwork _network;
+    private readonly IDockerNetwork _network;
 
-    private readonly IContainer _dbContainer;
+    private readonly IDockerContainer _dbContainer;
 
-    private readonly IContainer _appContainer;
+    private readonly IDockerContainer _appContainer;
 
     public UnitTest1()
     {
-        _network = new NetworkBuilder()
+        _network = new TestcontainersNetworkBuilder()
+            .WithName(Guid.NewGuid().ToString("D"))
             .Build();
 
-        _dbContainer = new PostgreSqlBuilder()
+        _dbContainer = new TestcontainersBuilder<TestcontainersContainer>()
             .WithImage("postgres")
             .WithNetwork(_network)
             .WithNetworkAliases("db")
             .WithVolumeMount("postgres-data", "/var/lib/postgresql/data")
             .Build();
 
-        _appContainer = new ContainerBuilder()
+        _appContainer = new TestcontainersBuilder<TestcontainersContainer>()
             .WithImage("dotnet-docker")
             .WithNetwork(_network)
             .WithPortBinding(HttpPort, true)
-            .WithWaitStrategy(Wait.ForUnixContainer().UntilHttpRequestIsSucceeded(request => request.ForPath("/")))
+            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(HttpPort))
             .Build();
     }
 
@@ -118,6 +113,25 @@ public sealed class UnitTest1 : IAsyncLifetime, IDisposable
 ```
 
 The test class picks up the configurations and lessons we learned in the previous steps. It connects our application and database through a custom Docker network and runs an HTTP request against our application. As you can see, running containerized tests allows us to test applications without mocks or complicated environment configurations. The tests run on any Docker-API compatible environments including CI.
+
+## Run the test
+
+Before you run the test, [stop](run-containers.md#stop-start-and-name-containers) any running containers from the previous sections.
+
+To run the test, change directory to the `dotnet-docker` directory and run the following `dotnet test` command:
+
+```console
+$ dotnet test tests
+```
+
+You should see output like the following:
+
+```console
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - myWebApp.Tests.dll (net6.0)
+```
 
 ## Next steps
 
