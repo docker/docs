@@ -16,16 +16,13 @@ Docker Scout Free includes:
 
 - Unlimited local image analysis
 - Up to 3 Docker Scout-enabled repositories
-- Vulnerability analysis
-- Image comparison for vulnerabilities, size, and packages
-- Recommendations for refreshing or updating the base image
 - SDLC integration, including policy evaluation and workload integration
 - On-prem and cloud container registry integrations
 - Security posture reporting
 
 ## Docker Scout Team
 
-Docker Scout Team is available for both personal accounts and organizations. This plan is ideal for development teams developing and maintaining multiple container images. 
+Docker Scout Team is available for both personal accounts and organizations. This plan is ideal for development teams developing and maintaining multiple container images.
 
 Docker Scout Team includes:
 
@@ -40,7 +37,7 @@ Docker Scout Business is ideal for commercial organizations managing multiple te
 
 Docker Scout Business includes:
 
-- All the features available in other Docker Scout plans
+- All the features available in Docker Scout Team
 - Unlimited Docker Scout-enabled repositories
 
-You can [contact sales](https://www.docker.com/products/docker-scout/){: target="_blank" rel="noopener" class="_" id="dkr_docs_scout_subscription_btl"} to buy Docker Scout Business.
+You can [contact sales](https://www.docker.com/products/docker-scout/){: target="_blank" rel="noopener" class="_"} to buy Docker Scout Business.
