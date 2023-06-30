@@ -1,7 +1,7 @@
 ---
 title: Docker Scout billing
 description: Learn how to buy Docker Scout Team in Docker Hub and manage your subscription
-keywords: payments, billing, subscription
+keywords: payments, billing, subscription, scout
 ---
 
 {% include scout-early-access.md %}
@@ -14,13 +14,14 @@ Docker Scout lets users secure their software supply chain and continuously obse
 2. From the drop-down menu select **Billing**.
 3. In the **Plan** section, navigate to the **Docker Scout** plan section. The default plan is **Docker Scout Free**. 
 4. Next to the plan name, select **Buy now**.
-5. From the **Purchase Scout Team** drop-down menu, select the name of your personal account.
-6. This redirects you to the payment processing page where you can enter your email, card information, and billing address.
+5. From the **Purchase Scout Team** drop-down menu, under **Your Account**, select the name of your personal account.
+6. This redirects you to the payment processing page. Enter your email if this field isn't pre-populated. Then, enter your payment information.
 7. Update the quantity of repositories you want to use with Docker Scout. See [Docker Scout subscriptions](../subscription/scout-details.md) to learn more about the number of repositories available for each plan.
 8. Select annual or monthly billing.
 9. Select **Subscribe**.
+10. Subscribing redirects you back to the billing page in Docker Hub, where you can find your active Docker Scout plan.
 
-Once your purchase is complete, you receive a confirmation email and a copy of your invoice.
+Once your purchase is complete, you receive a confirmation email and a copy of your invoice. 
 
 ## Organization
 
@@ -30,10 +31,11 @@ Once your purchase is complete, you receive a confirmation email and a copy of y
 4. In the **Plan** section, navigate to the **Docker Scout** plan section. The default plan is **Docker Scout Free**. 
 5. Next to the plan name, select **Buy now**.
 6. From the **Purchase Scout Team** drop-down menu, select the name of your organization.
-7. This redirects you to the payment processing page where you can enter your email, card information, and billing address.
+7. This redirects you to the payment processing page. Enter your email if this field isn't pre-populated. Then, enter your payment information.
 8. Update the quantity of repositories you want to use with Docker Scout. See [Docker Scout subscriptions](../subscription/scout-details.md) to learn more about the number of repositories available for each plan.
 9. Select annual or monthly billing.
 10. Select **Subscribe**.
+11. Subscribing redirects you back to the billing page in Docker Hub, where you can find your active Docker Scout plan.
 
 Once your purchase is complete, you receive a confirmation email and a copy of your invoice.
 
