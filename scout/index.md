@@ -35,6 +35,8 @@ _The following video shows an end-to-end workflow of using Docker Scout to remed
 <div style="position: relative; padding-bottom: 64.86486486486486%; height: 0;"><iframe src="https://www.loom.com/embed/e066986569924555a2546139f5f61349?sid=6e29be62-78ba-4aa7-a1f6-15f96c37d916" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
 
+{% include scout-plans.md %}
+
 ## Docker Desktop
 
 Docker Scout analyzes all images stored locally in Docker Desktop, providing you
