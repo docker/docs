@@ -11,6 +11,7 @@ We support these broad categories of callouts:
 - Important, which use the `{: .important}` tag
 - Warning , which use the `{: .warning}` tag
 - Experimental, which use the `{: .experimental}` tag
+- Restricted, which use the `{: .restricted}` tag
 
 ## Examples
 
@@ -53,6 +54,12 @@ We support these broad categories of callouts:
 > The Builds view is currently in Beta. This feature may change or be removed from future releases.
 {: .experimental}
 
+> **Restricted**
+>
+> Docker Scout is an [early access](/release-lifecycle/#early-access-ea)
+> product.
+{: .restricted}
+
 ## HTML
 
 ```html
@@ -92,4 +99,10 @@ We support these broad categories of callouts:
 >
 > The Builds view is currently in Beta. This feature may change or be removed from future releases.
 {: .experimental}
+
+> **Restricted**
+>
+> Docker Scout is an [early access](/release-lifecycle/#early-access-ea)
+> product.
+{: .restricted}
 ```

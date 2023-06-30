@@ -54,7 +54,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - VirtioFS is now the default file sharing implementation for new installations of Docker Desktop on macOS 12.5 and higher.
 - Improved product usage reporting using OpenTelemetry (experimental).
 - Fixed Docker socket permissions. Fixes [docker/for-win#13447](https://github.com/docker/for-win/issues/13447) and [docker/for-mac#6823](https://github.com/docker/for-mac/issues/6823).
-- Fixed am issue which caused Docker Desktop to hang when quitting the application whilst paused.
+- Fixed an issue which caused Docker Desktop to hang when quitting the application whilst paused.
 - Fixed a bug which caused the **Logs** and **Terminal** tab content in the **Container** view to be covered by a fixed toolbar [docker/for-mac#6814](https://github.com/docker/for-mac/issues/6814).
 - Fixed a bug which caused input labels to overlap with input values on the container run dialog. Fixes [docker/for-win#13304](https://github.com/docker/for-win/issues/13304).
 - Fixed a bug which meant users couldn't select the Docker Extension menu. Fixes [docker/for-mac#6840](https://github.com/docker/for-mac/issues/6840) and [docker/for-mac#6855](https://github.com/docker/for-mac/issues/6855)
