@@ -2073,6 +2073,8 @@ manuals:
     title: View your billing history
   - path: /billing/cycle/
     title: Change your billing cycle
+  - path: /billing/scout-billing/
+    title: Docker Scout billing
 
 
 - sectiontitle: Subscription
@@ -2091,6 +2093,8 @@ manuals:
     title: Downgrade
   - path: /subscription/desktop-license/
     title: Docker Desktop license agreement
+  - path: /subscription/scout-details/
+    title: Docker Scout subscriptions and features
 
 - title: Security announcements
   path: /security/
