@@ -75,7 +75,7 @@ features that have been in Linux for a long time. Docker has worked to make thes
 
 - Is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.
 - Can be run on local machines, virtual machines or deployed to the cloud.
-- Is portable (can be run on any OS).
+- Is portable (can be transferred between computers of the same architecture and operating system).
 - Is isolated from other containers and runs its own software, binaries, and configurations.
 
 ## What is a container image?
