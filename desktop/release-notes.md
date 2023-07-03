@@ -24,16 +24,20 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
-## 4.21.0
+## 4.21.1
 
-{% include release-date.html date="2023-06-29" %}
+{% include release-date.html date="2023-07-03" %}
 
-{% include desktop-install.md all=true version="4.21.0" build_path="/113844/" %}
+{% include desktop-install.md all=true version="4.21.1" build_path="/" %}
 
 ### Upgrades
 - [Compose v2.19.1](https://github.com/docker/compose/releases/tag/v2.19.1)
 
 ### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed connection leak for Docker contexts using SSH ([docker/for-mac#6834](https://github.com/docker/for-mac/issues/6834) and [docker/for-win#13564](https://github.com/docker/for-win/issues/13564))
 
 #### For Mac
 
