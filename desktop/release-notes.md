@@ -28,7 +28,22 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {% include release-date.html date="2023-06-29" %}
 
-{% include desktop-install.md all=true version="4.21.0" build_path="/" %}
+{% include desktop-install.md all=true version="4.21.0" build_path="/113844/" %}
+
+### Upgrades
+- [Compose v2.19.1](https://github.com/docker/compose/releases/tag/v2.19.1)
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Removed configuration health check for further investigation and addressing specific setups.
+
+## 4.21.0
+
+{% include release-date.html date="2023-06-29" %}
+
+{% include desktop-install.md all=true version="4.21.0" build_path="/113844/" %}
 
 ### New
 
