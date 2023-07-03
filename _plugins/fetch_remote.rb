@@ -43,7 +43,7 @@ module Jekyll
       git.add_remote('origin', repo)
     end
 
-    def self.git_fetch(repo, ref, fetch_depth, dir)
+    def self.git_fetch(repo, ref, dir)
       unless Dir.exist?(dir)
         FetchRemote.git_init(repo, dir)
       end
@@ -57,12 +57,8 @@ module Jekyll
         FetchRemote.git_init(repo, dir)
         git = Git.open(dir)
       end
-      puts "    Fetch repository (depth #{fetch_depth})"
-      if fetch_depth > 0
-        git.fetch('origin', prune: true, depth: fetch_depth)
-      else
-        git.fetch('origin', prune: true)
-      end
+      puts "    Fetch repository"
+      git.fetch('origin', tags: true)
       puts "    Checkout repository"
       git.checkout(ref, force: true)
       return git
@@ -72,13 +68,12 @@ module Jekyll
       beginning_time = Time.now
       puts "Starting plugin fetch_remote.rb..."
 
-      fetch_depth = get_docs_url == "http://localhost:4000" && ENV['DOCS_ENFORCE_GIT_LOG_HISTORY'] == "0" ? 1 : 0
       site.config['fetch-remote'].each do |entry|
         puts "  Repo #{entry['repo']} (#{entry['ref']})"
 
         gituri = Git::URL.parse(entry['repo'])
         clonedir = "#{Dir.tmpdir}/docker-docs-clone#{gituri.path}/#{Digest::SHA256.hexdigest(entry['ref'])}"
-        git = FetchRemote.git_fetch("#{entry['repo']}.git", entry['ref'], fetch_depth, clonedir)
+        git = FetchRemote.git_fetch("#{entry['repo']}.git", entry['ref'], clonedir)
 
         entry['paths'].each do |path|
           if File.extname(path['dest']) != ""
