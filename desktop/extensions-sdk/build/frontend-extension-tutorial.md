@@ -177,7 +177,7 @@ Now that you have configured the extension, you need to build the extension imag
 install it.
 
 ```bash
-docker build --tag= awesome-inc/my-extension:latest .
+docker build --tag=awesome-inc/my-extension:latest .
 ```
 
 This built an image tagged `awesome-inc/my-extension:latest`, you can run `docker inspect
@@ -365,7 +365,7 @@ If your extension uses `localStorage` to store data, other extensions running in
 Since you have modified the code of the extension, you must build again the extension.
 
 ```console
-$ docker build --tag= awesome-inc/my-extension:latest .
+$ docker build --tag=awesome-inc/my-extension:latest .
 ```
 
 Once built, you need to update it.
