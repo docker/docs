@@ -22,7 +22,7 @@ First, set up the rest of the workflow. There's a lot that's not specific to Doc
 Scout but needed to create the images to compare. For more details on those actions and using GitHub Actions 
 with Docker in general, see [the GitHub Actions documentation](../build/ci/github-actions/index.md).
 
-Add the following to a GitHub action YAML file:
+Add the following to a GitHub Actions YAML file:
 
 {% raw %}
 ```yaml
