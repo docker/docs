@@ -576,3 +576,8 @@
   - /go/builders/
 "/build/builders/#selected-builder":
   - /go/builders/selected/
+
+# Fix broken link for windows virtualization error message in Docker Desktop
+# https://docker.slack.com/archives/C04300R4G5U/p1688480066445839
+"/desktop/troubleshoot/topics/#virtualization":
+  - /desktop/windows/troubleshoot/#virtualization
