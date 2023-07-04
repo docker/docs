@@ -105,16 +105,15 @@ Docker from the repository.
 2.  Add Docker's official GPG key:
 
     ```console
-    $ sudo install -m 0755 -d /etc/apt/keyrings
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
+    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg
+    $ sudo chmod a+r /usr/share/keyrings/docker.gpg
     ```
 
 3.  Use the following command to set up the repository:
 
     ```console
     $ echo \
-      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
+      "deb [arch="$(dpkg --print-architecture)" signed-by=/usr/share/keyrings/docker.gpg] {{ download-url-base }} \
       "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
       sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
