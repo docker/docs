@@ -83,7 +83,7 @@ we would like to use for our application.
 FROM eclipse-temurin:17-jdk-jammy
 ```
 
-Docker images can be inherited from other images. For this guide, we use Eclipse Termurin, one of the most popular official images with a build-worthy JDK.
+Docker images can be inherited from other images. For this guide, we use Eclipse Temurin, one of the most popular official images with a build-worthy JDK.
 
 To make things easier when running the rest of our commands, let’s set the image's
 working directory. This instructs Docker to use this path as the default location
@@ -118,7 +118,7 @@ but this time the dependencies will be installed into the image.
 RUN ./mvnw dependency:resolve
 ```
 
-At this point, we have an Eclipse Termurin image that is based on OpenJDK version 17, and we have also installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the `COPY` command just like we did with our `pom.xml` file above.
+At this point, we have an Eclipse Temurin image that is based on OpenJDK version 17, and we have also installed our dependencies. The next thing we need to do is to add our source code into the image. We’ll use the `COPY` command just like we did with our `pom.xml` file above.
 
 ```dockerfile
 COPY src ./src
