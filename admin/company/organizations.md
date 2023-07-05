@@ -23,7 +23,7 @@ When you have a [self-serve](../../subscription/details.md#self-serve) subscript
 
 ## Add organizations to a company
 
-There is no limit to the number of organizations you can have under a company layer. All organizations must have Business subscription.
+There is no limit to the number of organizations you can have under a company layer. All organizations must have a Business subscription.
 
 1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. In the left navigation, select your company in the drop-down menu.
