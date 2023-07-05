@@ -185,7 +185,7 @@ docker-build:
 This sets up the workflow to build Docker images with GitLab's
 "Docker-in-Docker" mode to run Docker inside a container.
 
-It then downloads curl and the Docker CLI and logs into the Gitlab CI registry
+It then downloads curl and the Docker CLI and logs into the GitLab CI registry
 and the Docker registry using environment variables defined in your repository's
 settings.
 
