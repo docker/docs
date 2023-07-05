@@ -182,7 +182,7 @@ docker-build:
     - docker login -u "$DOCKER_HUB_USER" -p "$DOCKER_HUB_PAT"
 ```
 
-This sets up the workflow to build Docker images with GitLabs's
+This sets up the workflow to build Docker images with GitLab's
 "Docker-in-Docker" mode to run Docker inside a container.
 
 It then downloads curl and the Docker CLI and logs into the Gitlab CI registry
