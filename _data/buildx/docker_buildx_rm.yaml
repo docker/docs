@@ -95,6 +95,7 @@ examples: |-
     Keep BuildKit state, so it can be reused by a new builder with the same name.
     Currently, only supported by the [`docker-container` driver](buildx_create.md#driver).
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

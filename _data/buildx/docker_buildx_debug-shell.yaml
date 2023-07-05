@@ -8,11 +8,11 @@ options:
     - option: detach
       value_type: bool
       default_value: "true"
-      description: Detach buildx server (supported only on linux) [experimental]
+      description: Detach buildx server (supported only on linux)
       deprecated: false
       hidden: false
       experimental: false
-      experimentalcli: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: progress
@@ -28,21 +28,21 @@ options:
       swarm: false
     - option: root
       value_type: string
-      description: Specify root directory of server to connect [experimental]
+      description: Specify root directory of server to connect
       deprecated: false
       hidden: false
       experimental: false
-      experimentalcli: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: server-config
       value_type: string
       description: |
-        Specify buildx server config file (used only when launching new server) [experimental]
+        Specify buildx server config file (used only when launching new server)
       deprecated: false
       hidden: false
       experimental: false
-      experimentalcli: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
 inherited_options:
@@ -56,6 +56,7 @@ inherited_options:
       kubernetes: false
       swarm: false
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: true
 kubernetes: false

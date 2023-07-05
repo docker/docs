@@ -164,11 +164,11 @@ options:
     - option: detach
       value_type: bool
       default_value: "false"
-      description: Detach buildx server (supported only on linux) [experimental]
+      description: Detach buildx server (supported only on linux)
       deprecated: false
       hidden: false
       experimental: false
-      experimentalcli: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: file
@@ -203,11 +203,11 @@ options:
       swarm: false
     - option: invoke
       value_type: string
-      description: Invoke a command after the build [experimental]
+      description: Invoke a command after the build
       deprecated: false
       hidden: false
       experimental: false
-      experimentalcli: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: isolation
@@ -325,12 +325,11 @@ options:
       swarm: false
     - option: print
       value_type: string
-      description: |
-        Print result of information request (e.g., outline, targets) [experimental]
+      description: Print result of information request (e.g., outline, targets)
       deprecated: false
       hidden: false
       experimental: false
-      experimentalcli: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: progress
@@ -399,11 +398,11 @@ options:
       swarm: false
     - option: root
       value_type: string
-      description: Specify root directory of server to connect [experimental]
+      description: Specify root directory of server to connect
       deprecated: false
       hidden: false
       experimental: false
-      experimentalcli: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: sbom
@@ -441,11 +440,11 @@ options:
     - option: server-config
       value_type: string
       description: |
-        Specify buildx server config file (used only when launching new server) [experimental]
+        Specify buildx server config file (used only when launching new server)
       deprecated: false
       hidden: false
       experimental: false
-      experimentalcli: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: shm-size
@@ -466,7 +465,7 @@ options:
       deprecated: false
       hidden: true
       experimental: false
-      experimentalcli: false
+      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: ssh
@@ -1079,6 +1078,7 @@ examples: |-
     > for both values. If no `ulimits` are set, they are inherited from
     > the default `ulimits` set on the daemon.
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

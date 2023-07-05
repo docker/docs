@@ -27,6 +27,7 @@ examples: |-
 
     Same as [`buildx --builder`](buildx.md#builder).
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false
