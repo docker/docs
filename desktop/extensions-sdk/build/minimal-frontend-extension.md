@@ -80,7 +80,7 @@ Now that you have configured the extension, you need to build the extension imag
 install it.
 
 ```console
-$ docker build --tag= awesome-inc/my-extension:latest .
+$ docker build --tag=awesome-inc/my-extension:latest .
 ```
 
 This built an image tagged `awesome-inc/my-extension:latest`, you can run `docker inspect awesome-inc/my-extension:latest` to see more details about it.
