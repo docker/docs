@@ -77,7 +77,7 @@ Okay, now that we know our application is running properly, let’s try and run 
 ...
   "scripts": {
     "test": "mocha ./**/*.js",
-    "start": "nodemon --inspect=0.0.0.0:9229 server.js"
+    "start": "nodemon --inspect=0.0.0.0:9229 -L server.js"
   },
 ...
 }
@@ -87,21 +87,42 @@ Below is the Docker command to start the container and run tests:
 
 ```console
 $ docker compose -f docker-compose.dev.yml run notes npm run test
-Creating node-docker_notes_run ... 
+```
 
-> node-docker@1.0.0 test /code
+When you run the tests, you should get an error like the following:
+
+```console
 > mocha ./**/*.js
 
-
-
-  Array
-    #indexOf()
-      ✓ should return -1 when the value is not present
-
-
-  1 passing (11ms)
-
+sh: mocha: not found
 ```
+
+The current Dockefile does not install dev dependencies in the image, so mocha cannot be found. To fix this, you can update the Dockerfile to install the dev dependencies.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM node:18-alpine
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN npm install --include=dev
+
+COPY . .
+
+CMD ["node", "server.js"]
+```
+
+Run the command again, and this time rebuild the image to use the new Dockerfile.
+
+```console
+$ docker compose -f docker-compose.dev.yml run --build notes npm run test
+```
+
+This image with dev dependencies installed is not suitable for a production image. Rather than creating multiple Dockerfiles, we can create a multi-stage Dockerfile to create an image for testing and an image for production.
 
 ### Multi-stage Dockerfile for testing
 
