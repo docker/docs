@@ -12,8 +12,8 @@ Follow the steps on this page to configure SSO for your organization.
 
 1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. In the left navigation, select your organization in the drop-down menu.
-3. Select **Security**.
-4. Select **Add Domain** and continue with the on-screen instructions to add the TXT Record Value to your domain name system (DNS).
+3. Select **Domain management**.
+4. Select **Add a domain** and continue with the on-screen instructions to add the TXT Record Value to your domain name system (DNS).
 
     >**Note**
     >
@@ -33,14 +33,19 @@ Follow the steps on this page to configure SSO for your organization.
 > aren't supported at this time.
 {: .important}
 
-1. Once your domain is verified, in the **Single Sign-on Connection** table select **Create Connections**, and create a name for the connection.
+After your domain is verified, create an SSO connection.
+
+1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+2. In the left navigation, select your organization in the drop-down menu.
+3. Select **SSO & SCIM**.
+4. In the table select **Create Connection**, and create a name for the connection.
 
     > **Note**
     >
     > You have to verify at least one domain before creating the connections.
 
-2. Select an authentication method, **SAML** or **Azure AD (OIDC)**.
-3. Copy the following fields and add them to your IdP:
+5. Select an authentication method, **SAML** or **Azure AD (OIDC)**.
+6. Copy the following fields and add them to your IdP:
 
    - SAML: **Entity ID**, **ACS URL**
    - Azure AD (OIDC): **Redirect URL**
@@ -49,16 +54,16 @@ Follow the steps on this page to configure SSO for your organization.
 
    ![Azure AD](../../../docker-hub/images/azure-create-connection.png){: width="500px" }
 
-4. From your IdP, copy and paste the following values into the Docker **Settings** fields:
+7. From your IdP, copy and paste the following values into the Docker **Settings** fields:
 
     - SAML: **SAML Sign-on URL**, **x509 Certificate**
     - Azure AD (OIDC): **Client ID**, **Client Secret**, **Azure AD Domain**
 
-5. Select the verified domains you want to apply the connection to.
+8. Select the verified domains you want to apply the connection to.
 
-6. To provision your users, select the organization(s) and/or team(s).
+9. To provision your users, select the organization(s) and/or team(s).
 
-7. Review your summary and select **Create Connection**.
+10. Review your summary and select **Create Connection**.
 
 ## Step three: Test your SSO configuration
 
@@ -80,10 +85,13 @@ The SSO connection is now created. You can continue to set up [SCIM](scim.md) wi
 
 ## Optional step four: Enforce SSO
 
-1. In the **Single Sign-On Connections** table, select the **Action** icon and then **Enforce Single Sign-on**.
+1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+2. In the left navigation, select your organization in the drop-down menu.
+3. Select **SSO & SCIM**.
+4. In the table, select the **Action** icon and then **Enforce Single Sign-on**.
     When SSO is enforced, your users are unable to modify their email address and password, convert a user account to an organization, or set up 2FA through Docker Hub. You must enable 2FA through your IdP.
-2. Continue with the on-screen instructions and verify that you’ve completed the tasks.
-3. Select **Turn on enforcement** to complete.
+5. Continue with the on-screen instructions and verify that you’ve completed the tasks.
+6. Select **Turn on enforcement** to complete.
 
 Your users must now sign in to Docker with SSO.
 

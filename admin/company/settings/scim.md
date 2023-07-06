@@ -16,8 +16,8 @@ You must make sure you have [configured SSO](sso.md) before you enable SCIM. Enf
 
 1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. In the left navigation, select your company in the drop-down menu.
-3. Select **Settings**.
-4. In the **Single Sign-On Connection** table, select the **Actions** icon and **Setup SCIM**.
+3. Select **SSO & SCIM**.
+4. In the table, select the **Actions** icon and **Setup SCIM**.
 5. Copy the **SCIM Base URL** and **API Token** and paste the values into your IdP.
 
 ### Step two: Enable SCIM in your IdP
@@ -32,5 +32,8 @@ Follow the instructions provided by your IdP:
 
 If SCIM is disabled, any user provisioned through SCIM will remain in the organization. Future changes for your users will not sync from your IdP. User de-provisioning is only possible when manually removing the user from the organization.
 
-1. In the **Single Sign-On Connection** table, select the **Actions** icon.
-2. Select **Disable SCIM**.
+1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+2. In the left navigation, select your company in the drop-down menu.
+3. Select **SSO & SCIM**.
+4. In the table, select the **Actions** icon.
+5. Select **Disable SCIM**.

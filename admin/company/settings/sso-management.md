@@ -10,12 +10,15 @@ title: Manage Single Sign-On
 
 ### Remove a domain from an SSO connection
 
-1. In the **Single Sign-On Connection** table, select the **Action** icon and then **Edit connection**.
-2. Select **Next** to navigate to the section where the connected domains are listed.
-3. In the **Domain** drop-down, select the **Remove** icon next to the domain that you want to remove.
-4. Select **Next** to confirm or change the connected organization(s).
-5. Select **Next** to confirm or change the default organization and team provisioning selections.
-6. Review the **Connection Summary** and select **Save**.
+1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+2. In the left navigation, select your company in the drop-down menu.
+3. Select **SSO & SCIM**.
+4. In the table, select the **Action** icon and then **Edit connection**.
+5. Select **Next** to navigate to the section where the connected domains are listed.
+6. In the **Domain** drop-down, select the **Remove** icon next to the domain that you want to remove.
+7. Select **Next** to confirm or change the connected organization(s).
+8. Select **Next** to confirm or change the default organization and team provisioning selections.
+9. Review the **Connection Summary** and select **Save**.
 
 > **Note**
 >
@@ -25,33 +28,45 @@ title: Manage Single Sign-On
 
 ### Connect an organization
 
-1. In the **Single Sign-On Connection** table, select the **Action** icon and then **Edit connection**.
-2. Select **Next** to navigate to the section where connected organizations are listed.
-3. In the **Organizations** drop-down, select the organization to add to the connection.
-4. Select **Next** to confirm or change the default organization and team provisioning.
-5. Review the **Connection Summary** and select **Save**.
+1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+2. In the left navigation, select your company in the drop-down menu.
+3. Select **SSO & SCIM**.
+4. In the table, select the **Action** icon and then **Edit connection**.
+5. Select **Next** to navigate to the section where connected organizations are listed.
+6. In the **Organizations** drop-down, select the organization to add to the connection.
+7. Select **Next** to confirm or change the default organization and team provisioning.
+8. Review the **Connection Summary** and select **Save**.
 
 ### Remove an organization
 
-1. In the **Single Sign-On Connection** table, select the **Action** icon and then **Edit connection**.
-2. Select **Next** to navigate to the section where connected organizations are listed.
-3. In the **Organizations** drop-down, select **Remove** to remove the connection.
-4. Select **Next** to confirm or change the default organization and team provisioning.
-5. Review the **Connection Summary** and select **Save**.
+1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+2. In the left navigation, select your company in the drop-down menu.
+3. Select **SSO & SCIM**.
+4. In the table, select the **Action** icon and then **Edit connection**.
+5. Select **Next** to navigate to the section where connected organizations are listed.
+6. In the **Organizations** drop-down, select **Remove** to remove the connection.
+7. Select **Next** to confirm or change the default organization and team provisioning.
+8. Review the **Connection Summary** and select **Save**.
 
 ## Manage SSO connections
 
 ### Edit a connection
 
-1. In the **Single Sign-On Connection** table, select the **Action** icon.
-2. Select **Edit connection** to edit you connection.
-3. Continue with the on-screen instructions.
+1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+2. In the left navigation, select your company in the drop-down menu.
+3. Select **SSO & SCIM**.
+4. In the table, select the **Action** icon.
+5. Select **Edit connection** to edit you connection.
+6. Continue with the on-screen instructions.
 
 ### Delete a connection
 
-1. In the **Single Sign-On Connection** table, select the **Action** icon.
-2. Select **Delete** and **Delete connection**.
-3. Continue with the on-screen instructions.
+1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+2. In the left navigation, select your company in the drop-down menu.
+3. Select **SSO & SCIM**.
+4. In the table, select the **Action** icon.
+5. Select **Delete** and **Delete connection**.
+6. Continue with the on-screen instructions.
 
 ### Deleting SSO
 

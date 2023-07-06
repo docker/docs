@@ -8,7 +8,7 @@ title: Overview
 
 {% include admin-company-overview.md %}
 
-To create a company, see [Create a company](../../docker-hub/new-company.md).
+To create a company, see [Create a company](../organization/general-settings.md#create-a-company).
 
 Learn how to administer a company using Docker Admin in the following sections.
 
@@ -57,10 +57,19 @@ Learn how to administer a company using Docker Admin in the following sections.
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                <a href="/admin/company/settings/scim/"><img src="/assets/images/checklist.svg" alt="company faqs" width="70" height="70"></a>
+                <a href="/admin/company/settings/scim/"><img src="/assets/images/checklist.svg" alt="Configure company SCIM" width="70" height="70"></a>
             </div>
                 <h2 id="company-scim"><a href="/admin/company/settings/scim/">Set up SCIM</a></h2>
                 <p>Set up SCIM to automatically provision and deprovision users in your company.</p>
+        </div>
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
+        <div class="component">
+            <div class="component-icon">
+                <a href="/admin/company/settings/domains/"><img src="/assets/images/engine-rootless.svg" alt="Add and verify your domains" width="70" height="70"></a>
+            </div>
+                <h2 id="domains"><a href="/admin/company/settings/domains/">Domain management</a></h2>
+                <p>Add and verify your domains. </p>
         </div>
      </div>
     </div>

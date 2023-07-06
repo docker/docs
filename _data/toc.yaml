@@ -1955,7 +1955,9 @@ manuals:
       title: Manage users
     - path: /admin/company/owners/
       title: Manage company owners
-    - sectiontitle: Settings
+    - path: /admin/company/settings/domains/
+      title: Domain management
+    - sectiontitle: SSO & SCIM
       section:
       - path: /admin/company/settings/sso/
         title: Single Sign-On overview
@@ -1983,7 +1985,9 @@ manuals:
       title: Registry Access Management
     - path: /admin/organization/general-settings/
       title: General settings
-    - sectiontitle: Security settings
+    - path: /admin/organization/security-settings/domains/
+      title: Domain management
+    - sectiontitle: SSO & SCIM
       section:
       - path: /admin/organization/security-settings/sso/
         title: Single Sign-On overview
