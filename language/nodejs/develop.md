@@ -209,7 +209,9 @@ It opens the following screen.
 
   ![Imaging showing Chrome inspect with DevTools](images/chrome-inspect.png){:width="800px"}
 
-Click the **Open dedicated DevTools for Node** link. This opens the DevTools that are connected to the running Node.js process inside our container.
+Select **Configure**. This opens the **Target discovery settings**. Specify the target `127.0.0.1:9229` if it does not exist and then select **Done**.
+
+Select the **Open dedicated DevTools for Node** link. This opens the DevTools that are connected to the running Node.js process inside our container.
 
 Let’s change the source code and then set a breakpoint.
 
