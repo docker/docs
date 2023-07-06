@@ -21,7 +21,7 @@ To create a new company:
 > You must be a company owner to add an organization to a company.
 {: .important}
 
-There is no limit to the number of organizations you can have under a company layer. All organizations must have Business subscription.
+There is no limit to the number of organizations you can have under a company layer. All organizations must have a Business subscription.
 
 1. In Docker Hub, select **Organizations**.
 2. Select your company.
