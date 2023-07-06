@@ -96,6 +96,7 @@ examples: |-
     $ docker --debug buildx inspect elated_tesla
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

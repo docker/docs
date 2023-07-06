@@ -272,6 +272,7 @@ examples: |-
     * `tags`
     * `target`
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

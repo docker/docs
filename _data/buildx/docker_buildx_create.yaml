@@ -327,6 +327,7 @@ examples: |-
     The `--use` flag automatically switches the current builder to the newly created
     one. Equivalent to running `docker buildx use $(docker buildx create ...)`.
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

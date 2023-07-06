@@ -47,6 +47,7 @@ examples: |-
 
     You can also use the `BUILDX_BUILDER` environment variable.
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

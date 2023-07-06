@@ -125,6 +125,7 @@ examples: |-
     $ docker buildx imagetools create -t tonistiigi/myapp -f image1 -f image2
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false
