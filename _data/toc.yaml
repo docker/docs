@@ -12,6 +12,9 @@ horizontalnav:
 - title: Reference
   path: /reference/
   node: reference
+- title: FAQ
+  path: /faq/
+  node: faq
 - title: Samples
   path: /samples/
   node: samples
@@ -143,6 +146,20 @@ guides:
       path: /language/dotnet/configure-ci-cd/
     - title: "Deploy your app"
       path: /language/dotnet/deploy/
+  - sectiontitle: Rust
+    section:
+    - title: "Overview"
+      path: /language/rust/
+    - title: "Build images"
+      path: /language/rust/build-images/
+    - title: "Run containers"
+      path: /language/rust/run-containers/
+    - title: "Develop your app"
+      path: /language/rust/develop/
+    - title: "Configure CI/CD"
+      path: /language/rust/configure-ci-cd/
+    - title: "Deploy your app"
+      path: /language/rust/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
@@ -241,6 +258,8 @@ reference:
           title: docker buildx build
         - path: /engine/reference/commandline/buildx_create/
           title: docker buildx create
+        - path: /engine/reference/commandline/buildx_debug-shell/
+          title: docker buildx debug-shell
         - path: /engine/reference/commandline/buildx_du/
           title: docker buildx du
         - path: /engine/reference/commandline/buildx_imagetools/
@@ -251,8 +270,6 @@ reference:
           title: docker buildx imagetools inspect
         - path: /engine/reference/commandline/buildx_inspect/
           title: docker buildx inspect
-        - path: /engine/reference/commandline/buildx_install/
-          title: docker buildx install
         - path: /engine/reference/commandline/buildx_ls/
           title: docker buildx ls
         - path: /engine/reference/commandline/buildx_prune/
@@ -261,8 +278,6 @@ reference:
           title: docker buildx rm
         - path: /engine/reference/commandline/buildx_stop/
           title: docker buildx stop
-        - path: /engine/reference/commandline/buildx_uninstall/
-          title: docker buildx uninstall
         - path: /engine/reference/commandline/buildx_use/
           title: docker buildx use
         - path: /engine/reference/commandline/buildx_version/
@@ -597,6 +612,14 @@ reference:
         title: docker scout quickview
       - path: /engine/reference/commandline/scout_recommendations/
         title: docker scout recommendations
+      - path: /engine/reference/commandline/scout_repo/
+        title: docker scout repo
+      - path: /engine/reference/commandline/scout_repo_disable/
+        title: docker scout repo disable        
+      - path: /engine/reference/commandline/scout_repo_enable/
+        title: docker scout repo enable
+      - path: /engine/reference/commandline/scout_repo_list/
+        title: docker scout repo list
       - path: /engine/reference/commandline/scout_sbom/
         title: docker scout sbom
       - path: /engine/reference/commandline/scout_stream/
@@ -906,6 +929,8 @@ reference:
         title: Merge
       - path: /compose/compose-file/14-include/
         title: Include
+      - path: /compose/compose-file/15-profiles/
+        title: Profiles
     - path: /compose/compose-file/build/
       title: Compose file build
     - path: /compose/compose-file/deploy/
@@ -1095,6 +1120,8 @@ manuals:
           title: Explore Images
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
+        - path: /desktop/use-desktop/builds/
+          title: Explore Builds (Beta)
         - path: /desktop/use-desktop/pause/
           title: Pause Docker Desktop
     - sectiontitle: Hardened Docker Desktop
@@ -1136,7 +1163,7 @@ manuals:
     - path: /desktop/containerd/
       title: containerd image store (Beta)
     - path: /desktop/wasm/
-      title: Wasm (Beta)
+      title: Wasm workloads (Beta)
     - sectiontitle: WSL
       section:
         - path: /desktop/wsl/
@@ -1175,16 +1202,6 @@ manuals:
           title: Workarounds for common problems
         - path: /desktop/troubleshoot/known-issues/
           title: Known issues
-    - sectiontitle: FAQs
-      section:
-      - path: /desktop/faqs/general/
-        title: General FAQs
-      - path: /desktop/faqs/macfaqs/
-        title: Mac FAQs
-      - path: /desktop/faqs/windowsfaqs/
-        title: Windows FAQs
-      - path: /desktop/faqs/linuxfaqs/
-        title: Linux FAQs
     - path: /desktop/uninstall/
       title: Uninstall Docker Desktop
     - path: /desktop/feedback/
@@ -1558,6 +1575,8 @@ manuals:
     section:
     - sectiontitle: Container runtime
       section:
+      - path: /engine/alternative-runtimes/
+        title: Alternative container runtimes
       - path: /config/containers/resource_constraints/
         title: Configure runtime resource constraints
       - path: /config/containers/runmetrics/
@@ -1666,6 +1685,12 @@ manuals:
           title: OpenTelemetry support
         - path: /build/building/base-images/
           title: Create your own base image
+    - sectiontitle: Builders
+      section:
+        - path: /build/builders/
+          title: Builders overview
+        - path: /build/builders/manage/
+          title: Manage builders
     - sectiontitle: Drivers
       section:
         - path: /build/drivers/
@@ -1841,8 +1866,6 @@ manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
-  - path: /compose/faq/
-    title: FAQs
   - path: /compose/release-notes/
     title: Release notes
 
@@ -1915,6 +1938,8 @@ manuals:
       title: Artifactory integration
     - path: /scout/advisory-db-sources/
       title: Advisory Database
+    - path: /scout/ci/
+      title: Continuous integration
 
 - sectiontitle: Docker Admin (Early Access)
   section:
@@ -1992,8 +2017,6 @@ manuals:
       title: Create a company
     - path:  /docker-hub/company-owner/
       title: Manage company owners
-    - path: /docker-hub/company-faqs/
-      title: FAQs
   - path: /docker-hub/orgs/
     title: Create your organization
   - path: /docker-hub/convert-account/
@@ -2010,8 +2033,6 @@ manuals:
          title: Configure
       -  path: /single-sign-on/manage/
          title: Manage
-      -  path: /single-sign-on/faqs/
-         title: FAQs
   - path: /docker-hub/scim/
     title: SCIM
   - path: /docker-hub/group-mapping/
@@ -2040,9 +2061,6 @@ manuals:
     title: Image Access Management
   - path: /docker-hub/deactivate-account/
     title: Deactivate an account or organization
-  - path: /docker-hub/onboarding-faqs/
-    title: FAQs
-
 - sectiontitle: Billing
   section:
   - path: /billing/
@@ -2055,8 +2073,9 @@ manuals:
     title: View your billing history
   - path: /billing/cycle/
     title: Change your billing cycle
-  - path: /billing/faqs/
-    title: FAQs
+  - path: /billing/scout-billing/
+    title: Docker Scout billing
+
 
 - sectiontitle: Subscription
   section:
@@ -2072,10 +2091,10 @@ manuals:
     title: Remove seats
   - path: /subscription/downgrade/
     title: Downgrade
-  - path: /subscription/faq/
-    title: FAQs
   - path: /subscription/desktop-license/
     title: Docker Desktop license agreement
+  - path: /subscription/scout-details/
+    title: Docker Scout subscriptions and features
 
 - title: Security announcements
   path: /security/
@@ -2172,3 +2191,48 @@ contribute:
       title: Videos
   - path: /contribute/checklist/
     title: Writing checklist
+
+faq:
+  - path: /faq/
+    title: Overview
+  - path: /billing/faqs/
+    title: Billing
+  - path: /compose/faq/
+    title: Compose
+  - sectiontitle: Desktop
+    section:
+    - path: /desktop/faqs/general/
+      title: General 
+    - path: /desktop/faqs/macfaqs/
+      title: Mac 
+    - path: /desktop/faqs/windowsfaqs/
+      title: Windows 
+    - path: /desktop/faqs/linuxfaqs/
+      title: Linux 
+    - path: /desktop/faqs/releases/
+      title: Releases
+  - sectiontitle: Docker Hub and admin
+    section:
+    - path: /docker-hub/general-faqs/
+      title: General
+    - path: /docker-hub/organization-faqs/
+      title: Organization
+    - path: /docker-hub/company-faqs/
+      title: Company
+    - sectiontitle: Single Sign-On
+      section:
+      - path: /single-sign-on/faqs/
+        title: General
+      - path: /single-sign-on/saml-faqs/
+        title: SAML
+      - path: /single-sign-on/idp-faqs/
+        title: Identity providers
+      - path: /single-sign-on/domain-faqs/
+        title: Domains
+      - path: /single-sign-on/enforcement-faqs/
+        title: Enforcement
+      - path: /single-sign-on/users-faqs/
+        title: Manage users
+  - path: /subscription/faq/
+    title: Subscription
+    

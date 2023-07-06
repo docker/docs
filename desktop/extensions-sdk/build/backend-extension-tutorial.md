@@ -397,7 +397,7 @@ export function App() {
 Since you have modified the configuration of the extension and added a stage in the Dockerfile, you must re-build the extension.
 
 ```bash
-docker build --tag= awesome-inc/my-extension:latest .
+docker build --tag=awesome-inc/my-extension:latest .
 ```
 
 Once built, you need to update it, or install it if you haven't already done so.

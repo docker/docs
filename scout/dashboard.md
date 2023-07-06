@@ -19,8 +19,8 @@ The **Overview** tab shows the total number of vulnerabilities across all your D
 
 ## Repository settings
 
-Enable Docker Scout analysis on repositories in the current organization by selecting your profile
-picture and then the **Repository settings** menu item.
+
+Enable Docker Scout analysis on repositories in the current organization by selecting the settings icon next to your user profile picture and then the **Repository settings** menu item.
 
 Select the checkboxes for the repositories on which you want to enable Docker Scout analysis and
 select **Enable image analysis**.
@@ -31,8 +31,6 @@ automatically when you push to that repository. Find out more in the [Advanced i
 Disable Docker Scout analysis on selected repositories by selecting **Disable image analysis**.
 
 ## Images
-
-![A screenshot of the Docker Scout images list for an organization](./images/dashboard-images.png)
 
 The **Images** tab shows a list of images in an organization. You can search for specific repositories using the search box.
 
@@ -54,13 +52,11 @@ Each entry in the list shows the following details:
 - The predicted improvement to the vulnerabilities if you apply the recommended fixes.
 - An action button to show implementable recommended fixes.
 
-  ![Screenshot of recommended fixes for an image](./images/dashboard-suggested-fix.png)
-
 ### Repository tag list
 
-The repository tag list shows all tags for a repository. You can search for specific tag versions using the search box.
-
 ![Screenshot of tags for a repository](./images/dashboard-repo-tags.png)
+
+The repository tag list shows all tags for a repository. You can search for specific tag versions using the search box.
 
 Each entry in the list shows the following details:
 
@@ -81,11 +77,7 @@ Each entry in the list shows the following details:
 
 #### Comparing two tag images
 
-![Screenshot of an overview of differences between two selected images](./images/dashboard-diff-top.png)
-
 The top section of the comparison view shows an overview of the two selected image tags.
-
-![Screenshot of overview differences between two selected images](./images/dashboard-diff-bottom.png)
 
 The tabs section of the view shows the following:
 
@@ -94,25 +86,21 @@ The tabs section of the view shows the following:
 
 ### Image layer view
 
+![Screenshot showing Docker Scout image hierarchy](./images/dashboard-hierachy.png)
+
 The image layer view shows a breakdown of the Docker Scout analysis, including
 an overview of the digest Secure Hash Algorithms (SHA), version, the image hierarchy (base images), image
 layers, packages, and vulnerabilities.
-
-![Screenshot showing Docker Scout image hierarchy](./images/dashboard-hierachy.png)
 
 > **Note**
 >
 > You can find more details on the elements in the image layer view in [the image details view docs](./image-details-view.md).
 
-Click the **View recommended fixes** button to see instructions to apply the recommended fixes for the image.
+Select the **View recommended fixes** button to see instructions to apply the recommended fixes for the image.
 
-![Screenshot of recommended fixes for an image](./images/dashboard-suggested-fix.png)
+## Packages
 
-## Packages and dependencies
-
-The **Packages and dependencies** tab shows all **Packages** and **Base images** across images in an organization.
-
-### Packages
+The **Packages** tab shows all packages across repositories in an organization.
 
 Each entry in the list shows the following details:
 
@@ -121,7 +109,9 @@ Each entry in the list shows the following details:
 - The versions of the package used by images in the organization.
 - The number of images that use the package.
 
-### Base images
+## Base images
+
+The **Base images** tab shows all base images used by repositories in an organization.
 
 Each entry in the list shows the following details:
 
@@ -130,7 +120,7 @@ Each entry in the list shows the following details:
 - The number of images that use the base image. Selecting the link opens [the list of images that use the base image view](#images-using-base-image).
 - The number of packages in the base image.
 
-## Images using base image
+### Images using base image
 
 ![A screenshot of the Docker Scout view showing images that use a selected base image](./images/dashboard-images-used-by.png)
 
@@ -146,8 +136,6 @@ Each entry in the list shows the following details:
 - The date of the last push for the repository.
 
 ## Vulnerabilities
-
-![Screenshot showing Docker Scout Vulnerabilities list](./images/dashboard-vulns.png)
 
 The **Vulnerabilities** tab shows a list of all vulnerabilities from images in the organization. You can sort and filter the list by severity and search for Common Vulnerabilities and Exposures (CVE) ID using the search box.
 
@@ -168,8 +156,6 @@ Each entry in the list shows the following details:
 - If Docker Scout knows of a fix for the vulnerability, and if so, the package version of the fix.
 
 ### Vulnerability details page
-
-![Screenshot showing the details of a vulnerability in Docker Scout](./images/dashboard-vulns-details.png)
 
 The vulnerability details page shows detailed information about a particular CVE. The page shows the following information:
 

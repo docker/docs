@@ -8,6 +8,24 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""}.
 
+## 0.11.1
+
+{% include release-date.html date="2023-07-05" %}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.1){:target="blank" rel="noopener"}.
+
+### Bug fixes and enhancements
+
+- Fix a regression for bake where services in profiles would not be loaded.
+  [docker/buildx#1903](https://github.com/docker/buildx/pull/1903){:target="blank" rel="noopener"}
+- Fix a regression where `--cgroup-parent` option had no effect during build.
+  [docker/buildx#1913](https://github.com/docker/buildx/pull/1913){:target="blank" rel="noopener"}
+- Fix a regression where valid docker contexts could fail buildx builder name
+  validation. [docker/buildx#1879](https://github.com/docker/buildx/pull/1879){:target="blank" rel="noopener"}
+- Fix a possible panic when terminal is resized during the build.
+  [docker/buildx#1929](https://github.com/docker/buildx/pull/1929){:target="blank" rel="noopener"}
+
 ## 0.11.0
 
 {% include release-date.html date="2023-06-13" %}

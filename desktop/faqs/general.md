@@ -6,7 +6,7 @@ redirect_from:
 - /docker-for-mac/faqs/
 - /docker-for-windows/faqs/
 - /desktop/faqs/
-title: Frequently asked questions
+title: General FAQs for Desktop
 ---
 
 ### What are the system requirements for Docker Desktop?
@@ -25,21 +25,17 @@ By default, Docker Desktop is installed at the following location:
 - On Windows: `C:\Program Files\Docker\Docker`
 - On Linux: `/opt/docker-desktop`
 
-### Where can I find the checksums for the download files?
-
-You can find the checksums on the [release notes](../release-notes.md) page.
-
 ### Do I need to pay to use Docker Desktop?
 
 Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. Otherwise, it requires a paid subscription for professional use. Paid subscriptions are also required for government entities. When downloading and installing Docker Desktop, you are asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
 
 Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn more.
 
-## Do I need to pay to create or share Docker Extensions?
+### Do I need to pay to create or share Docker Extensions?
 
 No, the [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client){:target="_blank" rel="noopener" class="_"} is licensed under the Apache 2.0 License and is free to use. Anyone can create new Docker Extensions and share them without constraints.
 
-## Do I need to use a specific license when I create a Docker Extension?
+### Do I need to use a specific license when I create a Docker Extension?
 
 No, there is no constraint on how each extension should be licensed, this is up to the extension authors to decide when creating a new extension.
 
@@ -129,25 +125,3 @@ After updating the `settings.json` file, close and restart Docker Desktop to app
 ### Can I run Docker Desktop on Virtualized hardware?
 
 No, currently this is unsupported and against terms of use.
-
-## Releases
-
-### How do new users install Docker Desktop?
-
-Each Docker Desktop release is also delivered as a full installer for new users. The same applies if you have skipped a version, although this doesn't normally happen as updates are applied automatically.
-
-### How frequent will new releases be?
-
-New releases are available roughly monthly, unless there are critical fixes that need to be released sooner.
-
-### How do I ensure that all users on my team are using the same version?
-
-Previously you had to manage this yourself. Now, it happens automatically as a side effect of all users being on the latest version.
-
-### My colleague has got a new version but I haven’t got it yet.
-
-Sometimes we may roll out a new version gradually over a few days. Therefore, if you wait, it will turn up soon. Alternatively, you can select **Check for Updates** from the Docker menu to jump the queue and get the latest version immediately.
-
-### Where can I find information about Stable and Edge releases?
-
-Starting with Docker Desktop 3.0.0, Stable and Edge releases are combined into a single, cumulative release stream for all users.

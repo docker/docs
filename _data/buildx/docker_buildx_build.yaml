@@ -161,6 +161,16 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: detach
+      value_type: bool
+      default_value: "false"
+      description: Detach buildx server (supported only on linux) [experimental]
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: file
       shorthand: f
       value_type: string
@@ -337,7 +347,7 @@ options:
       swarm: false
     - option: provenance
       value_type: string
-      description: Shortand for `--attest=type=provenance`
+      description: Shorthand for `--attest=type=provenance`
       details_url: '#provenance'
       deprecated: false
       hidden: false
@@ -387,6 +397,15 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: root
+      value_type: string
+      description: Specify root directory of server to connect [experimental]
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: sbom
       value_type: string
       description: Shorthand for `--attest=type=sbom`
@@ -415,6 +434,16 @@ options:
       description: Security options
       deprecated: false
       hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: server-config
+      value_type: string
+      description: |
+        Specify buildx server config file (used only when launching new server) [experimental]
+      deprecated: false
+      hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false

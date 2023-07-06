@@ -28,6 +28,8 @@ The following GitHub Actions are available:
   builds.
 - [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake){:target="blank" rel="noopener" class=""}:
   enables using high-level builds with [Bake](../../bake/index.md).
+- [Docker Scout](https://github.com/docker/scout-action){:target="blank" rel="noopener" class=""}:
+  analyze Docker images for security vulnerabilities.
 
 Using Docker's actions provides an easy-to-use interface, while still allowing
 flexibility for customizing build parameters.
@@ -50,6 +52,7 @@ refer to the following sections:
 - [Share built image between jobs](share-image-jobs.md)
 - [Test before push](test-before-push.md)
 - [Update Docker Hub repository description](update-dockerhub-desc.md)
+- [Analyzing images with Docker Scout](../../../scout/ci.md)
 
 ## Get started with GitHub Actions
 

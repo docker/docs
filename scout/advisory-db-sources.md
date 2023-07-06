@@ -45,6 +45,7 @@ trackers, such as:
 - [SUSE Security CVRF](http://ftp.suse.com/pub/projects/security/cvrf/)
 - [Ubuntu CVE Tracker](https://people.canonical.com/~ubuntu-security/cve/)
 - [Wolfi Security Feed](https://packages.wolfi.dev/os/security.json)
+- [Chainguard Security Feed](https://packages.cgr.dev/chainguard/security.json)
 
 Docker Scout correlates this data by making a full inventory of a container
 image and storing that inventory in a [software bill of materials

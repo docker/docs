@@ -27,6 +27,7 @@ Page titles should be action orientated. For example:
 
 - Make sure the title of your page and the TOC entry matches.
 - If you want to use a ‘:’ in a page title in the table of contents (_toc.yaml), you must wrap the entire title in “” to avoid breaking the build.
+- If you add a new entry to the TOC file, make sure it ends in a trailing slash (/). If you don't, the page won't show the side navigation.
 
 ## Images
 

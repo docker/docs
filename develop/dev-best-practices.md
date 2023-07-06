@@ -16,9 +16,8 @@ memory when starting containers or services. There are a few rules of thumb to
 keep image size small:
 
 - Start with an appropriate base image. For instance, if you need a JDK,
-  consider basing your image on the official `openjdk` image, rather than
-  starting with a generic `ubuntu` image and installing `openjdk` as part of the
-  Dockerfile.
+  consider basing your image on a Docker Official Image which includes OpenJDK,
+  such as `eclipse-temurin`, rather than building your own image from scratch.
 
 - [Use multistage builds](../build/building/multi-stage.md). For
   instance, you can use the `maven` image to build your Java application, then

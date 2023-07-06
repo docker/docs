@@ -10,6 +10,17 @@ redirect_from:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/tag/v2.18.0).
 
+## 2.19.1
+{% include release-date.html date="2023-06-29" %}
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.15.1
+
+### Bug fixes and enhancements
+- Fixed sporadic "container not connected to network" errors on `compose up`.
+- Fixed "please specify build context" errors on `compose build`.
+- Compose now warns if using a bind mount in a service `watch` configuration.
+
 ## 2.19.0
 {% include release-date.html date="2023-06-21" %}
 

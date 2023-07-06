@@ -48,17 +48,7 @@ A builder may run on the same system as the Buildx client, or it may run
 remotely, on a different system. You can run it as a single node, or as a cluster
 of nodes. Builder nodes may be containers, virtual machines, or physical machines.
 
-How and where you run your builders depends on your use case. Buildx implements
-a concept of [build drivers](./drivers/index.md) to refer to different types of
-builder configurations. Buildx supports the following drivers:
-
-- `docker`: uses the BuildKit library bundled into the Docker daemon.
-- `docker-container`: creates a dedicated BuildKit container using Docker.
-- `kubernetes`: creates BuildKit pods in a Kubernetes cluster.
-- `remote`: connects directly to a manually managed BuildKit daemon.
-
-You can create, append, and connect to builders and nodes using the
-[`docker buildx create` command](../engine/reference/commandline/buildx_create.md).
+For more information, see [Builders](./builders/index.md).
 
 ## BuildKit
 

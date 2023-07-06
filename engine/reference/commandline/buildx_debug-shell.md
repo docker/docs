@@ -1,7 +1,7 @@
 ---
 datafolder: buildx
-datafile: docker_buildx_uninstall
-title: docker buildx uninstall
+datafile: docker_buildx_debug-shell
+title: docker buildx debug-shell
 ---
 <!--
 This page is automatically generated from Docker's source code. If you want to

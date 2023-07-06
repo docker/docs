@@ -33,6 +33,8 @@ From the Docker Dashboard you can use Quick Search, which is located in the Dash
 
 - Any volume. From here you can view the associated container.
 
+- Docs. Find help from Docker's official documentation straight from Docker Desktop. 
+
 ## The Docker menu
 
 Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is referred to as the Docker menu ![whale menu](../../assets/images/whale-x.svg){: .inline}.

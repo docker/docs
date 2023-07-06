@@ -62,10 +62,7 @@ Here's what the configuration file might look like:
       "enabled": true
     }
   },
-  "experimental": false,
-  "features": {
-    "buildkit": true
-  }
+  "experimental": false
 }
 ```
 
