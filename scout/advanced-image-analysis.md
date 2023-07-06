@@ -43,7 +43,7 @@ To activate Advanced image analysis:
 > **Tip**
 >
 > You can enable Advanced image analysis on repositories in bulk from
-> [the Docker Scout Dashboard settings](./dashboard.md#repository-settings).
+> the [Docker Scout Dashboard settings](./dashboard.md#repository-settings).
 {: .tip }
 
 ## Analyze an image
