@@ -19,7 +19,6 @@ The **Overview** tab shows the total number of vulnerabilities across all your D
 
 ## Repository settings
 
-
 Enable Docker Scout analysis on repositories in the current organization by selecting the settings icon next to your user profile picture and then the **Repository settings** menu item.
 
 Select the checkboxes for the repositories on which you want to enable Docker Scout analysis and
