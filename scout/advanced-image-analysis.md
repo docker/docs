@@ -40,6 +40,12 @@ To activate Advanced image analysis:
    by Docker Scout**.
 5. Select **Save**.
 
+> **Tip**
+>
+> You can enable Advanced image analysis on repositories in bulk from
+> the [Docker Scout Dashboard settings](./dashboard.md#repository-settings).
+{: .tip }
+
 ## Analyze an image
 
 To trigger Advanced image analysis, push an image to a Docker Hub repository
