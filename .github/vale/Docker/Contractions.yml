@@ -1,7 +1,7 @@
 extends: substitution
 message: "Consider using '%s' instead of '%s'."
 level: warning
-ignorecase: true
+ignorecase: false
 action:
   name: replace
 swap:
@@ -10,6 +10,7 @@ swap:
   could not: couldn't
   did not: didn't
   do not: don't
+  Do not: Don't
   does not: doesn't
   has not: hasn't
   have not: haven't

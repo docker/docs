@@ -8,7 +8,7 @@ action:
 swap:
   '\b(?:eg|e\.g\.)[\s,]': for example
   '\b(?:ie|i\.e\.)[\s,]': that is
-  (?:sign on|log on|log in): sign in
+  (?:sign on|log on|log in|logon|login): sign in
   above: previous
   adaptor: adapter
   account name: username
@@ -27,6 +27,7 @@ swap:
   assembler: assembly language
   below: following
   check box: checkbox
+  check boxes: checkboxes
   click: select
   deselect: clear
   disable: turn off|toggle off

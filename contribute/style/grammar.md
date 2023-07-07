@@ -17,14 +17,14 @@ An initialism is a type of acronym that comprises a group of initial letters use
 
 - Spell out lesser-known acronyms or initialisms on first use, then follow with the acronym or initialism in parentheses. After this, throughout the rest of your page or document, use the acronym or initialism alone.
 > ‘You can use single sign-on (SSO) to sign in to Notion. You may need to ask your administrator to enable SSO.’
-- Where the acronym or initialism is more commonly used than the full phrase, for example, URL, HTML, you do not need to follow this spell-it-out rule.
+- Where the acronym or initialism is more commonly used than the full phrase, for example, URL, HTML, you don't need to follow this spell-it-out rule.
 - Use all caps for acronyms of file types (a JPEG file).
 - Don't use apostrophes for plural acronyms. ✅URLs ❌URL’S
 - Avoid using an acronym for the first time in a title or heading. If the first use of the acronym is in a title or heading, introduce the acronym (in parentheses, following the spelled-out term) in the first body text that follows.
 
 ## Bold and italics
 
-Unless you're referring to UI text or user-defined text, you should not add emphasis to text. Clear, front-loaded wording makes the subject of a sentence clear.
+Unless you're referring to UI text or user-defined text, you shouldn't add emphasis to text. Clear, front-loaded wording makes the subject of a sentence clear.
 
 ### Best practice:
 
@@ -45,15 +45,15 @@ The following content elements should use sentence case:
 - Column and row headers in tables
 - Links
 - Sentences (of course)
-- Anything in the Ul including navigation labels, buttons, headings
+- Anything in the UI including navigation labels, buttons, headings
 
 ### Best practice
 
 - As a general rule, it's best to avoid the use of ALL CAPITALS in most content types. They are more difficult to scan and take up more space. While all caps can convey emphasis, they can also give the impression of shouting.
 - If a company name is all lowercase or all uppercase letters, follow their style, even at the beginning of sentences: DISH and bluecrux. When in doubt, check the company's website.
-- Use title case for Docker solutions : Docker Extensions, Docker Hub.
+- Use title case for Docker solutions: Docker Extensions, Docker Hub.
 - Capitalize a job title if it immediately precedes a name (Chief Executive Officer Scott Johnston).
-- Do not capitalize a job title that follows a name or is a generic reference (Scott Johnston, chief executive officer of Docker).
+- Don't capitalize a job title that follows a name or is a generic reference (Scott Johnston, chief executive officer of Docker).
 - Capitalize department names when you refer to the name of a department, but use lower case if you are talking about the field of work and not the actual department.
 - When referring to specific user interface text, like a button label or menu item, use the same capitalization that’s displayed in the user interface. 
 
@@ -82,9 +82,7 @@ In all UI content and technical documentation, use decimals instead of fractions
 ### Best practice:
 
 - Always carry decimals to at least the hundredth place (33.76).
-
 - In tables, align decimals on the decimal point.
-
 - Add a zero before the decimal point for decimal fractions less than one (0.5 cm).
 
 ## Lists

@@ -28,6 +28,15 @@ Use code formatting for referring to the commands in text and command usage exam
 
 Use when referring to family of Compose commands as offered from the Docker CLI.
 
+// login, sign in, sign out, logout
+// drop down, drop-down, drop-down menu
+
+// console vs shell
+
+#### K8s
+
+Don't use. Use `Kubernetes` instead.
+
 #### Multi-platform
 
 (broad meaning) Mac vs Linux vs Microsoft but also pair of platform architecture such as in Linux/amd64 and Linux/arm64; (narrow meaning) windows/linux/mac.
