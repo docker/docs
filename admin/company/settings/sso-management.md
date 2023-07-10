@@ -15,7 +15,7 @@ title: Manage Single Sign-On
 3. Select **SSO & SCIM**.
 4. In the table, select the **Action** icon and then **Edit connection**.
 5. Select **Next** to navigate to the section where the connected domains are listed.
-6. In the **Domain** drop-down, select the **Remove** icon next to the domain that you want to remove.
+6. In the **Domain** drop-down, select the **x** icon next to the domain that you want to remove.
 7. Select **Next** to confirm or change the connected organization(s).
 8. Select **Next** to confirm or change the default organization and team provisioning selections.
 9. Review the **Connection Summary** and select **Save**.
@@ -56,7 +56,7 @@ title: Manage Single Sign-On
 2. In the left navigation, select your company in the drop-down menu.
 3. Select **SSO & SCIM**.
 4. In the table, select the **Action** icon.
-5. Select **Edit connection** to edit you connection.
+5. Select **Edit connection** to edit your connection.
 6. Continue with the on-screen instructions.
 
 ### Delete a connection
@@ -65,7 +65,7 @@ title: Manage Single Sign-On
 2. In the left navigation, select your company in the drop-down menu.
 3. Select **SSO & SCIM**.
 4. In the table, select the **Action** icon.
-5. Select **Delete** and **Delete connection**.
+5. Select **Delete connection**.
 6. Continue with the on-screen instructions.
 
 ### Deleting SSO

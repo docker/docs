@@ -92,7 +92,7 @@ The SSO connection is now created. You can continue to set up [SCIM](scim.md) wi
 1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. In the left navigation, select your company in the drop-down menu.
 3. Select **SSO & SCIM**.
-4. In the table, select the **Action** icon and then **Enforce Single Sign-on**.
+4. In the table, select the **Action** icon and then **Enable enforcement**.
     When SSO is enforced, your users are unable to modify their email address and password, convert a user account to an organization, or set up 2FA through Docker Hub. You must enable 2FA through your IdP.
 5. Continue with the on-screen instructions and verify that you’ve completed the tasks.
 6. Select **Turn on enforcement** to complete.
