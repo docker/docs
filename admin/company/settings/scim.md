@@ -17,7 +17,7 @@ You must make sure you have [configured SSO](sso.md) before you enable SCIM. Enf
 1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. In the left navigation, select your company in the drop-down menu.
 3. Select **SSO & SCIM**.
-4. In the table, select the **Actions** icon and **Setup SCIM**.
+4. In the table, select the **Actions** icon and **Enable SCIM**.
 5. Copy the **SCIM Base URL** and **API Token** and paste the values into your IdP.
 
 ### Step two: Enable SCIM in your IdP

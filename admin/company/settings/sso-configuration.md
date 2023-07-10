@@ -54,7 +54,7 @@ After your domain is verified, create an SSO connection.
 
    ![Azure AD](../../../docker-hub/images/azure-create-connection.png){: width="500px" }
 
-7. From your IdP, copy and paste the following values into the Docker **Settings** fields:
+7. From your IdP, copy and paste the following values into the settings in Docker Admin:
 
     - SAML: **SAML Sign-on URL**, **x509 Certificate**
     - Azure AD (OIDC): **Client ID**, **Client Secret**, **Azure AD Domain**
