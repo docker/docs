@@ -25,7 +25,7 @@ The samples should help you to:
 
 These samples focus specifically on Docker Compose:
 
-- [Quickstart: Compose and ELK](https://github.com/docker/awesome-compose/tree/master/elasticsearch-logstash-kibana/logstash/README.md) - Shows
+- [Quickstart: Compose and ELK](https://github.com/docker/awesome-compose/tree/master/elasticsearch-logstash-kibana/README.md) - Shows
   how to use Docker Compose to set up and run ELK - Elasticsearch-Logstash-Kibana.
 
 - [Quickstart: Compose and Django](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/django/README.md) - Shows
