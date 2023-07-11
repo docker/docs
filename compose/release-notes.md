@@ -10,6 +10,27 @@ redirect_from:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/tag/v2.18.0).
 
+## 2.20.0
+{% include release-date.html date="2023-07-11" %}
+
+### Update
+- Dependencies upgrade: bump docker/cli-docs-tools to v0.6.0
+- Dependencies upgrade: bump docker to v24.0.4
+- Dependencies upgrade: bump buildx to v0.11.1
+
+### Bug fixes and enhancements
+* Introduce `wait` command
+* Add support of `--builder` and `BUILDX_BUILDER` to `build` command
+* Support `attach` attribute from the Compose Specification
+* Fixed a DryRun mode issue when initializing CLI client
+* Fixed a bug with random missing network when service has more than one
+* Fixed the Secrets file permission value to comply with spec
+* Fixed an issue about `no-deps` flag not applied 
+* Fixed some source code comments
+* Fixed a bug when `--index` is not set select
+* Fix a process leak in wait e2e test
+* Improve some tests speed
+
 ## 2.19.1
 {% include release-date.html date="2023-06-29" %}
 
