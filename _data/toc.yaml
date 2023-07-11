@@ -1850,6 +1850,16 @@ manuals:
       title: Change pre-defined environment variables
   - path: /compose/profiles/
     title: Using service profiles
+  - sectiontitle: Working with multiple Compose files
+    section:
+    - path: /compose/multiple-compose-files/
+      title: Overview
+    - path: /compose/multiple-compose-files/extends/
+      title: Extend
+    - path: /compose/multiple-compose-files/merge/
+      title: Merge
+    - path: /compose/multiple-compose-files/include/
+      title: Include
   - path: /compose/gpu-support/
     title: GPU support in Compose
   - path: /compose/extends/
