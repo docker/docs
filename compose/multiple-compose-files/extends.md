@@ -16,9 +16,6 @@ Compose supports two methods of sharing common configuration:
 
 ## Multiple Compose files
 
-Using multiple Compose files lets you customize a Compose application
-for different environments or different workflows.
-
 ### Understanding multiple Compose files
 
 By default, Compose reads two files, a `docker-compose.yml` and an optional
