@@ -24,7 +24,7 @@ You must make sure you have [configured SSO](../single-sign-on/index.md) before 
 Follow the instructions provided by your IdP:
 
 - [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm){: target="_blank" rel="noopener" class="_" }
-- [Azure AD](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad#step-2-configure-the-enterprise-application){: target="_blank" rel="noopener" class="_" }
+- [Azure AD](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/user-provisioning){: target="_blank" rel="noopener" class="_" }
 - [OneLogin](https://developers.onelogin.com/scim/create-app){: target="_blank" rel="noopener" class="_" }
 
 ## Disable SCIM
