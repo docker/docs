@@ -5,7 +5,6 @@ title: Change pre-defined environment variables
 redirect_from:
 - /compose/reference/envvars/
 ---
-{% include compose-eol.md %}
 
 Compose already comes with pre-defined environment variables. 
 

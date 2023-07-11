@@ -6,7 +6,6 @@ redirect_from:
 - /compose/env/
 - /compose/link-env-deprecated/
 ---
-{% include compose-eol.md %}
 
 Environment variables are dealt with by either the Compose file or the CLI. Both have multiple ways you can substitute in or set your environment variables. This is outlined below. 
 
