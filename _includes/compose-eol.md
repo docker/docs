@@ -5,5 +5,5 @@
 > Compose V2 is included with all currently supported versions of Docker Desktop. 
 > For more information, see [Migrate to Compose V2](/compose/migrate).
 >
-> All documentation describes Compose V2 functionality. 
+> Docker's documentation refers to and describes Compose V2 functionality. 
 {: .important}
