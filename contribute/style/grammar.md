@@ -65,7 +65,7 @@ Following our conversational approach, it's acceptable to use contractions in al
 
 ### Best practice:
 
-- Stay consistent - don't switch between contractions and their spelled-out equivalents in body copy or Ul text.
+- Stay consistent - don't switch between contractions and their spelled-out equivalents in body copy or UI text.
 - Avoid negative contractions (can't, don't, wouldn't, and shouldn't) whenever possible. Try to rewrite your sentence to align with our helpful approach that puts the focus on solutions, not problems.
 - Never contract a noun with is, does, has, or was as this can make it look like the noun is possessive. Your container is ready. Your container’s ready.
 
@@ -95,7 +95,7 @@ Lists are a great way to break down complex ideas and make them easier to read a
 - Don’t add commas (,) or semicolons (;) to the ends of list items.
 - Some content types may use bulleted lists that contain 10 items, but it's preferable to break longer lists into several lists, each with its own subheading or introduction.
 - Never create a bulleted list with only one bullet, and never use a dash to indicate a bulleted list.
-- If your list items are fragments, capitalize the list items for ease of scanning but do not use terminal punctuation. 
+- If your list items are fragments, capitalize the list items for ease of scanning but don't use terminal punctuation. 
 Example:
     
     I went to the shops to buy:
@@ -105,12 +105,11 @@ Example:
     - Eggs
 - Make sure all your list items are parallel. This means you should structure each list item in the same way. They should all be fragments, or they should all be complete sentences. If you start one list item with a verb, then start every list item with a verb.
 - Every item in your list should start with a capital letter unless they’re parameters or commands.
-- Nested sequential lists are labelled with lowercase letters. For example:
+- Nested sequential lists are labeled with lowercase letters. For example:
     1. Top level
     2. Top level
         1. Child step
         2. Child step
-
 
 ## Numbers
 
@@ -121,7 +120,7 @@ When you work with numbers in content, the best practices include:
 - Recast a sentence, rather than begin it with a number (unless it's a year).
 - When you cite numbers in an example, write them out as they appear in any accompanying screenshots.
 - Write numbers out as they appear on the platform when you cite them in an example.
-- To refer to large numbers in abstract (such as thousands, millions, and billions), use a combination of words and numbers. Do not abbreviate numeric signifiers.
+- To refer to large numbers in abstract (such as thousands, millions, and billions), use a combination of words and numbers. Don't abbreviate numeric signifiers.
 - Avoid using commas in numbers because they can represent decimals in different cultures. For numbers that are five digits or more, use a space to separate.
     
     
@@ -133,7 +132,7 @@ When you work with numbers in content, the best practices include:
 
 ### Versions
 
-When writing version numbers for release notes, follow the example below:
+When writing version numbers for release notes, use the following example:
 
 - version 4.8.2
 - v1.0
@@ -144,7 +143,7 @@ When writing version numbers for release notes, follow the example below:
 ### Colons and semicolons
 
 - Use colons to: introduce a list inline in a sentence; introduce a bulleted or numbered list; and provide an explanation.
-- Do not use semicolons. Use two sentences instead.
+- Don't use semicolons. Use two sentences instead.
 
 ### Commas
 
@@ -165,9 +164,9 @@ Avoid the use of exclamation marks.
 
 ### Parentheses
 
-Don't use parentheses in technical documentation. They can reduce the readability of a sentence. 
+Don't use parentheses in technical documentation. They can reduce the readability of a sentence.
 
 ## Third party documentation
 
-If you are documenting a task that requires the use of a third-party product, link out to the third-party's documentation. Do not copy the content because it might violate copyright. It can also result in an unnecessary maintenance burden of having to keep the docs up-to-date when the third-party changes or updates their product. It is best practice to link to the single source of truth. 
+If you are documenting a task that requires the use of a third-party product, link out to the third-party's documentation. Don't copy the content because it might violate copyright. It can also result in an unnecessary maintenance burden of having to keep the docs up-to-date when the third-party changes or updates their product. It is best practice to link to the single source of truth. 
 

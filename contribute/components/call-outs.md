@@ -9,7 +9,7 @@ We support these broad categories of callouts:
 - Notes (no Liquid tag required)
 - Tips, which use the `{: .tip}` tag
 - Important, which use the `{: .important}` tag
-- Warning , which use the `{: .warning}` tag
+- Warning, which use the `{: .warning}` tag
 - Experimental, which use the `{: .experimental}` tag
 - Restricted, which use the `{: .restricted}` tag
 
@@ -48,6 +48,8 @@ We support these broad categories of callouts:
 >
 > The Docker Dashboard does not remove volumes when you delete the app stack.
 {: .warning}
+
+For both of the following callouts, consult [the Docker release lifecycle](/release-lifecycle) for more information on when to use them.
 
 > **Beta feature**
 >

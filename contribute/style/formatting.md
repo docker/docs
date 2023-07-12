@@ -7,14 +7,14 @@ toc_max: 2
 
 ## Headings and subheadings
 
-Readers pay fractionally more attention to headings, bulleted lists and links, so it's important to ensure the first two to three words in those items "front load" information as much as possible.
+Readers pay fractionally more attention to headings, bulleted lists, and links, so it's important to ensure the first two to three words in those items "front load" information as much as possible.
 
 ### Best practice:
 
 - Headings and subheadings should let the reader know what they will find on the page.
 - They should describe succinctly and accurately what the content is about.
 - Headings should be short (no more than eight words), to the point and written in plain, active language.
-- You should avoid puns, teasers and cultural references.
+- You should avoid puns, teasers, and cultural references.
 - Skip leading articles (a, the, etc.)
 
 ## Page title
@@ -29,7 +29,7 @@ Page titles should be action orientated. For example: - _Enable SCIM_ - _Install
 
 ## Images
 
-Images, including screenshots, can help a reader better understand a concept. However, you should use them sparingly as they tend to go out-of-date quickly.
+Images, including screenshots, can help a reader better understand a concept. However, you should use them sparingly as they tend to go out-of-date.
 
 ### Best practice:
 
@@ -61,7 +61,6 @@ The best links offer readers another way to scan information.
 - Avoid generic calls to action (such as click here, find out more).
 - Don't include any end punctuation when you hyperlink text (for example, periods, question marks, or exclamation points).
 - Don't make link text italics or bold, unless it would be so as normal body copy.
-- Make sure your link opens in a new tab so it doesn't interrupt the user-flow.
 
 For information on how to add links to your content, see [Useful component and formatting examples](../components/links.md).
 
@@ -120,7 +119,7 @@ For information on how to add callouts to your content, see [Useful component an
 When documenting how to navigate through the Docker Desktop or Docker Hub UI:
 
 - Always use location, then action. For example:
-  _From the **Visibility** dropdown list (location), select Public (action)._
+  _From the **Visibility** drop-down list (location), select Public (action)._
 - Be brief and specific. For example:
   Do: _Select **Save**._
   Don't: _Select **Save** for the changes to take effect._

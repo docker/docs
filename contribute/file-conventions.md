@@ -10,12 +10,12 @@ When you create a new .md file for new content, make sure:
 - File names are as short as possible
 - Try to keep the file name to one word or two words
 - Use a dash to separate words. For example:
-        - `add-seats.md`  and `remove-seats.md`.
-        - `multiplatform-images` preferred to `multi-platform-images`.
+  - `add-seats.md`  and `remove-seats.md`.
+  - `multiplatform-images` preferred to `multi-platform-images`.
 
-## Frontmatter
+## Front matter
 
-The front-matter of a given page is in a section at the top of the Markdown
+The front matter of a given page is in a section at the top of the Markdown
 file that starts and ends with three hyphens. It includes YAML content. The
 following keys are supported. The title, description, and keywords are required.
 
@@ -33,7 +33,7 @@ following keys are supported. The title, description, and keywords are required.
 | sitemap        | no       | Exclude the page from indexing by search engines. When set to `false`, the page is excluded from `sitemap.xml`, and a `<meta name="robots" content="noindex"/>` header is added to the page.                  |
 
 Here's an example of a valid (but contrived) page metadata. The order of
-the metadata elements in the front-matter isn't important.
+the metadata elements in the front matter isn't important.
 
 ```liquid
 ---
@@ -57,7 +57,7 @@ toc_max: 4
 
 ## Body
 
-The body of the page (with the exception of keywords) starts after the frontmatter 
+The body of the page (with the exception of keywords) starts after the front matter 
 
 ### Text length
 
