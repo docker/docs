@@ -37,6 +37,7 @@ local-and-remote development environment. For example:
 - [Gefyra](https://gefyra.dev/){: target="_blank" rel="noopener" class="_" }
 - [kubefwd](https://kubefwd.com/){: target="_blank" rel="noopener" class="_" }
 - [ktunnel](https://github.com/omrikiei/ktunnel){: target="_blank" rel="noopener" class="_" }
+- [mirrord](https://mirrord.dev){: target="_blank" rel="noopener" class="_" }
 
 ## Telepresence
 
@@ -99,3 +100,16 @@ Docker ID to Ambassador Cloud to sign in and use Telepresence. To get started:
 
 This takes you to a step-by-step guide on setting up Telepresence,
 connecting to a development cluster, and creating intercepts.
+
+## mirrord
+
+mirrord is an open-source tool that lets developers run local processes in the context of their cloud environment. When mirrord is executed, it injects itself into your local process, and starts a temporary pod in your Kubernetes cluster called the mirrord Agent. It then overrides low level functions in your local process, and relays them to a pod in your Kubernetes cluster through the mirrord Agent. mirrord does this for incoming and outgoing traffic, file access, and environment variables, so your process "thinks" it's running in the pod you selected, even though it's actually running locally.
+
+![High-level architecture of mirrord](https://mirrord.dev/docs/overview/architecture/architecture.svg)
+
+Everything mirrord does can be configured to run either locally or remotely and so suit any type of use case. Incoming traffic supports the following modes:
+- Mirroring: mirrord duplicates incoming traffic to the remote pod and sends a copy to your local process. The request is handled by the remote pod.
+- Stealing: mirrord intercepts the incoming traffic to the remote pod and sends it to your local process. The request is handled by the local process.
+- Stealing with a filter: mirrord only steals incoming traffic that matches a filter you specified, on either an HTTP header or a path. Requests matching the filter are handled by the local process, and all other traffic is handled by the remote pod.  
+
+mirrord comes as either a CLI tool or an IDE extension for either VS Code or IntelliJ IDEs. You can try it out [here](https://mirrord.dev/docs/overview/quick-start/).
