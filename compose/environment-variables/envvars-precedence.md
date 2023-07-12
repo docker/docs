@@ -5,7 +5,6 @@ keywords: compose, environment, env file
 redirect_from:
 - /compose/envvars-precedence/
 ---
-{% include compose-eol.md %}
 
 When you set the same environment variable in multiple sources, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question.
 

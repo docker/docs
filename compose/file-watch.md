@@ -3,7 +3,6 @@ description: Use File watch to automatically update running services as you work
 keywords: compose, file watch, experimental 
 title: Automatically update services with file watch
 ---
-{% include compose-eol.md %}
 
 > **Note**
 >
