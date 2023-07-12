@@ -5,7 +5,6 @@ title: Use an environment file
 redirect_from:
 - /compose/env-file/
 ---
-{% include compose-eol.md %}
 
 ## Syntax
 The following syntax rules apply to environment files:

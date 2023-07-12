@@ -3,7 +3,6 @@ description: Understand GPU support in Docker Compose
 keywords: documentation, docs, docker, compose, GPU access, NVIDIA, samples
 title: Enabling GPU access with Compose
 ---
-{% include compose-eol.md %}
 
 Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure you install the [prerequisites](../config/containers/resource_constraints.md#gpu){: target="_blank" rel="noopener" class="_" } if you have not already done so.
 
