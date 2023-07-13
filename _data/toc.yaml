@@ -1936,12 +1936,12 @@ manuals:
       title: Advanced image analysis
     - path: /scout/dashboard/
       title: Dashboard
+    - path: /scout/ci/
+      title: Continuous integration
     - path: /scout/artifactory/
       title: Artifactory integration
     - path: /scout/advisory-db-sources/
       title: Advisory Database
-    - path: /scout/ci/
-      title: Continuous integration
 
 - sectiontitle: Docker Admin (Early Access)
   section:
