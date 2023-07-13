@@ -113,7 +113,7 @@ work.
    │ ├── Dockerfile
    │ ├── myfile.txt
    │ ├── node_modules/
-   │ ├── pacakge.json
+   │ ├── package.json
    │ ├── spec/
    │ ├── src/
    │ └── yarn.lock

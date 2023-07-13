@@ -2705,7 +2705,7 @@ With the ongoing changes to the networking and execution subsystems of docker te
 - Replace deprecated upgrading reference to docker-latest.tgz, which hasn't been updated since 0.5.3
 * Update Gentoo installation documentation now that we're in the portage tree proper
 * Cleanup and reorganize docs and tooling for contributors and maintainers
-- Minor spelling correction of protocoll -> protocol
+- Minor spelling correction of protocol -> protocol
 
 ### Contrib
 

@@ -135,7 +135,7 @@ Before we can run `npm install`, we need to get our `package.json` and `package-
  COPY ["<src>", "<dest>"]
  ```
 
-You can specify multiple `src` resources seperated by a comma. For example, `COPY ["<src1>", "<src2>",..., "<dest>"]`.
+You can specify multiple `src` resources separated by a comma. For example, `COPY ["<src1>", "<src2>",..., "<dest>"]`.
 We’ll copy the `package.json` and the `package-lock.json` file into our working directory `/app`.
 
 ```dockerfile

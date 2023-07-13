@@ -201,7 +201,7 @@ $ docker run --rm -ti -v /$(pwd):/work alpine
 ```
 
 Portability of the scripts is not affected as Linux treats multiple `/` as a single entry.
-Each occurence of paths on a single line must be neutralized.
+Each occurrence of paths on a single line must be neutralized.
 
 ```console
 $ docker run --rm -ti -v /$(pwd):/work alpine ls /work
@@ -278,7 +278,7 @@ To enable nested virtualisation, see [Run Docker Desktop for Windows in a VM or 
 If you have completed the steps described above and are still experiencing
 Docker Desktop startup issues, this could be because the Hypervisor is installed,
 but not launched during Windows startup. Some tools (such as older versions of 
-Virtual Box) and video game installers disable hypervisor on boot. To reenable it:
+Virtual Box) and video game installers disable hypervisor on boot. To re-enable it:
 
 1. Open an administrative console prompt.
 2. Run `bcdedit /set hypervisorlaunchtype auto`.
