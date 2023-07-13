@@ -1,20 +1,20 @@
 ---
 description: How merging Compose files works
 keywords: compose, docker, merge, compose file
-title: Merge 
+title: Merge Compose files
 ---
 
 Docker Compose lets you merge and override a set of Compose files together to create a composite Compose file.
 
-By default, Compose reads two files, a `docker-compose.yml` and an optional
-`docker-compose.override.yml` file. By convention, the `docker-compose.yml`
-contains your base configuration. The override file, as its name implies, can
+By default, Compose reads two files, a `compose.yml` and an optional
+`compose.override.yml` file. By convention, the `compose.yml`
+contains your base configuration. The override file can
 contain configuration overrides for existing services or entirely new
 services.
 
 If a service is defined in both files, Compose merges the configurations using
-the rules described in
-[Adding and overriding configuration](extends.md#adding-and-overriding-configuration).
+the rules described below and in the 
+[Compose Specification](../compose-file/13-merge.md).
 
 To use multiple override files, or an override file with a different name, you
 can use the `-f` option to specify the list of files. Compose merges files in
@@ -22,20 +22,22 @@ the order they're specified on the command line. See the
 [`docker compose` command reference](reference/index.md) for more information
 about using `-f`.
 
-
-When you use multiple configuration files, you must make sure all paths in the
+> **Important**
+>
+> When you use multiple configuration files, you must make sure all paths in the
 files are relative to the base Compose file (the first Compose file specified
 with `-f`). This is required because override files need not be valid
 Compose files. Override files can contain small fragments of configuration.
 Tracking which fragment of a service is relative to which path is difficult and
 confusing, so to keep paths easier to understand, all paths must be defined
 relative to the base file.
+{: .important}
 
 ## Merging rules
 
 Compose copies configurations from the original service over to the local one.
 If a configuration option is defined in both the original service and the local
-service, the local value *replaces* or *extends* the original value.
+service, the local value replaces or extends the original value.
 
 For single-value options like `image`, `command` or `mem_limit`, the new value
 replaces the old value.
@@ -67,7 +69,7 @@ services:
     command: python otherapp.py
 ```
 
-For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
+For the multi-value options `ports`, `expose`, `external_links`, `dns`,
 `dns_search`, and `tmpfs`, Compose concatenates both sets of values:
 
 original service:
@@ -130,7 +132,7 @@ services:
       - BAZ=local
 ```
 
-result
+result:
 
 ```yaml
 services:
@@ -193,7 +195,7 @@ a few different files:
 Start with a base file that defines the canonical configuration for the
 services.
 
-**docker-compose.yml**
+`compose.yml`
 
 ```yaml
 services:
@@ -213,7 +215,7 @@ services:
 In this example the development configuration exposes some ports to the
 host, mounts our code as a volume, and builds the web image.
 
-**docker-compose.override.yml**
+`compose.override.yml`
 
 ```yaml
 services:
@@ -242,7 +244,7 @@ Now, it would be nice to use this Compose app in a production environment. So,
 create another override file (which might be stored in a different git
 repo or managed by a different team).
 
-**docker-compose.prod.yml**
+`compose.prod.yml`
 
 ```yaml
 services:
@@ -260,21 +262,20 @@ services:
 To deploy with this production Compose file you can run
 
 ```console
-$ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+$ docker compose -f compose.yml -f compose.prod.yml up -d
 ```
 
 This deploys all three services using the configuration in
-`docker-compose.yml` and `docker-compose.prod.yml` (but not the
-dev configuration in `docker-compose.override.yml`).
+`compose.yml` and `compose.prod.yml` but not the
+dev configuration in `compose.override.yml`.
 
-
-See [production](production.md) for more information about Compose in
-production.
+For more information, see [Using Compose in
+production.](../production.md). 
 
 ## Limitations
 
-This approach has been selected by many users for years, but it comes with a specific challenge: Docker Compose supports relative paths for the many resources to be included in the application model: build context for service images, location of file defining environment variables, path to a local directory used in a bind-mounted volume.
-With such a constraint, code organization in a monorepo can become hard as a natural choice would be to have dedicated folders per team or component, but then the compose files relative paths won’t be relevant. 
+Docker Compose supports relative paths for the many resources to be included in the application model: build context for service images, location of file defining environment variables, path to a local directory used in a bind-mounted volume.
+With such a constraint, code organization in a monorepo can become hard as a natural choice would be to have dedicated folders per team or component, but then the Compose files relative paths become irrelevant. 
 
 ## Reference information
 

@@ -4,11 +4,11 @@ keywords: compose, docker, include, compose file
 title: Include
 ---
 
-With Docker Compose version 2.20 and later, you can include a whole Compose file directly in your local Compose file using the [`include` top-level element](../compose-file/14-include.md). This solves the relative path problem that `extends` and merge present. 
+With Docker Compose version 2.20 and later, you can include a whole Compose file directly in your local Compose file using the [`include` top-level element](../compose-file/14-include.md). This solves the relative path problem that `extends` and merging present. 
 
-With `include` support, compose makes it easier to modularize such a complex application into sub-compose files. This allows application configuration to be made simpler and more explicit. This also helps to reflect in the config file organization the engineering team responsible for the code. With each team being able to reflect in configuration the way it depends on other’s work, there’s a natural approach to compose.yaml files organization.
+With `include` support, Compose makes it easier to modularize complex applications into sub-Compose files. This allows application configurations to be made simpler and more explicit. This also helps to reflect in the config file organization the engineering team responsible for the code.
 
-Each path listed in the include section is loaded as an individual Compose application model, with it’s own project directory, in order to resolve relative paths.
+Each path listed in the `include` section is loaded as an individual Compose application model, with it’s own project directory, in order to resolve relative paths.
 
 Once the included Compose application is loaded, all resources definitions are copied into the current Compose application model.
 
