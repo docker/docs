@@ -7,14 +7,14 @@
 {% endif %}
 
 
-Audit logs display a chronological list of activities that occur at organization and repository levels. It provides a report to owners on all their team member activities.
+Audit logs display a chronological list of activities that occur at organization and repository levels. It provides a report to owners on all their member activities.
 
 With audit logs, owners can view and track:
  - What changes were made
  - The date when a change was made
  - Who initiated the change
 
- For example, audit logs display activities such as the date when a repository was created or deleted, the team member who created the repository, the name of the repository, and when there was a change to the privacy settings.
+ For example, audit logs display activities such as the date when a repository was created or deleted, the member who created the repository, the name of the repository, and when there was a change to the privacy settings.
 
 Owners can also see the audit logs for their repository if the repository is part of the organization subscribed to a Docker Business or Team plan.
 
@@ -31,7 +31,7 @@ To view the audit logs:
 
 ## Customize the audit logs
 
-By default, all activities that occur at organization and repository levels are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the audit logs of all the activities that occurred during that period are displayed.
+By default, all activities that occur are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the audit logs of all the activities that occurred during that period are displayed.
 
 > **Note**
 >

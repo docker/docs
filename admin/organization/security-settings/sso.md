@@ -6,4 +6,4 @@ title: Single Sign-On overview
 
 {% include admin-early-access.md %}
 
-{% include admin-sso.md %}
+{% include admin-sso.md product="admin" layer="organization" %}

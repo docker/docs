@@ -20,11 +20,11 @@
 
 ## Invite members
 
-Organization owners can invite new members to an organization via Docker ID, email address, or via a CSV file containing email addresses. If an invitee does not have a Docker account, they must create an account and verify their email address before they can accept the invitation to join the organization. When inviting members, their pending invitation occupies a seat.
+Owners can invite new members to an organization via Docker ID, email address, or via a CSV file containing email addresses. If an invitee does not have a Docker account, they must create an account and verify their email address before they can accept the invitation to join the organization. When inviting members, their pending invitation occupies a seat.
 
 ### Invite members via Docker ID or email address
 
-Use the following steps to invite members to your organization via Docker username or email address. To invite a large amount of members to your organization via CSV file, see the next section.
+Use the following steps to invite members to your organization via Docker ID or email address. To invite a large amount of members to your organization via CSV file, see the next section.
 
 1. Sign in to {{ product_link }}{: target="_blank" rel="noopener" class="_"}.
 2. {{ member_navigation }}
@@ -98,18 +98,21 @@ To remove a member from an organization:
 
 ## Export members
 
-Organization owners can export a CSV file containing the organization's members.
-The CSV file contains the following fields:
+Owners can export a CSV file containing all members.
+The CSV file may contain the following fields:
 
  * **Name**: The user's name.
  * **Username**: The user's Docker ID.
  * **Email**: The user's email address.
  * **Type**: The type of user. For example, **Invitee** for users who have not accepted the organization's invite, or **User** for users who are members of the organization.
- * **Permissions**: The user's organization permissions. For example, **Member** or **Owner**.
+ * **Permission**: The user's organization permissions. For example, **Member** or **Owner**.
  * **Teams**: The teams where the user is a member. A team is not listed for invitees.
  * **Date Joined**: The time and date when the user was invited to the organization.
+ * **Member of Organizations**: All organizations the user is a member of within a company.
+ * **Invited to Organizations**: All organizations the user is an invitee of within a company.
+ * **Account Created**: The time and date when the user account was created.
 
-To export a CSV file of the organization's members:
+To export a CSV file of the members:
 
 1. Sign in to {{ product_link }}{: target="_blank" rel="noopener" class="_"}.
 2. {{ member_navigation }}

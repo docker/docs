@@ -3,7 +3,7 @@
   {% if include.layer == "company" %}
     {% assign sso_config_link = "[configuring SSO](/admin/company/settings/sso-configuration/)" %}
   {% else %}
-    {% assign sso_config_link = "[configuring SSO](/admin/organization/security-settings/sso-configuration.md)" %}
+    {% assign sso_config_link = "[configuring SSO](/admin/organization/security-settings/sso-configuration/)" %}
   {% endif %}
 {% else %}
   {% assign product_name="Docker Hub" %}
