@@ -66,8 +66,7 @@ Docker verifies that developers can trust images with this badge on Docker Hub a
 
 ### Insights and analytics
 
-The [insights and analytics](/docker-hub/publish/insights-analytics){:
-target="blank" rel="noopener" class=""} service provides usage metrics for how
+The [insights and analytics](/docker-hub/publish/insights-analytics) service provides usage metrics for how
 the community uses Docker images, granting insight into user behavior.
 
 The usage metrics show the number of image pulls by tag or by digest, and breakdowns by
@@ -80,15 +79,13 @@ either a summary or raw format.
 
 ### Vulnerability analysis
 
-[Docker Scout](/scout/){:
-target="blank" rel="noopener" class=""} provides automatic vulnerability analysis
+[Docker Scout](/scout/) provides automatic vulnerability analysis
 for DVP images published to Docker Hub.
 Scanning images ensures that the published content is secure, and proves to
 developers that they can trust the image.
 
 Analysis is enabled on a per-repository
-basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
-target="blank" rel="noopener" class=""} for more information about how to use
+basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/) for more information about how to use
 it.
 
 > **Note**
@@ -98,8 +95,7 @@ it.
 
 ### Who's eligible for the Docker-Sponsored Open Source program?
 
-To qualify for the program, a publisher must share the project namespace in public repositories, meet [the Open Source Initiative definition](https://opensource.org/docs/osd), and be in active development with no pathway to commercialization.
+To qualify for the program, a publisher must share the project namespace in public repositories, meet [the Open Source Initiative definition](https://opensource.org/docs/osd){:target="_blank" rel="noopener" class="_"}, and be in active development with no pathway to commercialization.
 
 Find out more by heading to the
-[Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/#){:target="_blank"
-rel="noopener" class="_"} application page.
+[Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/){:target="_blank" rel="noopener" class="_"} application page.
