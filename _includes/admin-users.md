@@ -15,7 +15,7 @@
   {% assign member_navigation="Select **Organizations**, your organization, and then **Members**." %}
   {% assign invite_button = "**Invite members**" %}
   {% assign remove_button = "**Remove member**" %}
-    {% assign export_button = "**Export members**" %}
+  {% assign export_button = "**Export members**" %}
 {% endif %}
 
 ## Invite members
