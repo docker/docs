@@ -7,189 +7,13 @@ redirect:
 ---
 {% include compose-eol.md %}
 
-Compose supports two methods of sharing common configuration:
+Docker Compose's [`extends` attribute](../compose-file/05-services.md#extends) lets you share common configurations
+among different files, or even different projects entirely. 
 
-1. Extend an entire Compose file by
-   [using multiple Compose files](extends.md#multiple-compose-files)
-2. Extend individual services with [the `extends` field](extends.md#extending-services)
-
-
-## Multiple Compose files
-
-### Understanding multiple Compose files
-
-By default, Compose reads two files, a `docker-compose.yml` and an optional
-`docker-compose.override.yml` file. By convention, the `docker-compose.yml`
-contains your base configuration. The override file, as its name implies, can
-contain configuration overrides for existing services or entirely new
-services.
-
-If a service is defined in both files, Compose merges the configurations using
-the rules described in
-[Adding and overriding configuration](extends.md#adding-and-overriding-configuration).
-
-To use multiple override files, or an override file with a different name, you
-can use the `-f` option to specify the list of files. Compose merges files in
-the order they're specified on the command line. See the
-[`docker compose` command reference](reference/index.md) for more information
-about using `-f`.
-
-When you use multiple configuration files, you must make sure all paths in the
-files are relative to the base Compose file (the first Compose file specified
-with `-f`). This is required because override files need not be valid
-Compose files. Override files can contain small fragments of configuration.
-Tracking which fragment of a service is relative to which path is difficult and
-confusing, so to keep paths easier to understand, all paths must be defined
-relative to the base file.
-
-### Example use case
-
-In this section, there are two common use cases for multiple Compose files: changing a
-Compose app for different environments, and running administrative tasks
-against a Compose app.
-
-#### Different environments
-
-A common use case for multiple files is changing a development Compose app
-for a production-like environment (which may be production, staging or CI).
-To support these differences, you can split your Compose configuration into
-a few different files:
-
-Start with a base file that defines the canonical configuration for the
-services.
-
-**docker-compose.yml**
-
-```yaml
-services:
-  web:
-    image: example/my_web_app:latest
-    depends_on:
-      - db
-      - cache
-
-  db:
-    image: postgres:latest
-
-  cache:
-    image: redis:latest
-```
-
-In this example the development configuration exposes some ports to the
-host, mounts our code as a volume, and builds the web image.
-
-**docker-compose.override.yml**
-
-```yaml
-services:
-  web:
-    build: .
-    volumes:
-      - '.:/code'
-    ports:
-      - 8883:80
-    environment:
-      DEBUG: 'true'
-
-  db:
-    command: '-d'
-    ports:
-     - 5432:5432
-
-  cache:
-    ports:
-      - 6379:6379
-```
-
-When you run `docker compose up` it reads the overrides automatically.
-
-Now, it would be nice to use this Compose app in a production environment. So,
-create another override file (which might be stored in a different git
-repo or managed by a different team).
-
-**docker-compose.prod.yml**
-
-```yaml
-services:
-  web:
-    ports:
-      - 80:80
-    environment:
-      PRODUCTION: 'true'
-
-  cache:
-    environment:
-      TTL: '500'
-```
-
-To deploy with this production Compose file you can run
-
-```console
-$ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-```
-
-This deploys all three services using the configuration in
-`docker-compose.yml` and `docker-compose.prod.yml` (but not the
-dev configuration in `docker-compose.override.yml`).
-
-
-See [production](production.md) for more information about Compose in
-production.
-
-#### Administrative tasks
-
-Another common use case is running one off or administrative tasks against one
-or more services in a Compose app. This example demonstrates running a
-database backup.
-
-Start with a **docker-compose.yml**.
-
-```yaml
-services:
-  web:
-    image: example/my_web_app:latest
-    depends_on:
-       db
-
-  db:
-    image: postgres:latest
-```
-
-In a **docker-compose.admin.yml** add a new service to run the database
-export or backup.
-
-```yaml
-services:
-  dbadmin:
-     build: database_admin/
-     depends_on:
-        - db
-```
-
-To start a normal environment run `docker compose up -d`. To run a database
-backup, include the `docker-compose.admin.yml` as well.
-
-```console
-$ docker compose -f docker-compose.yml -f docker-compose.admin.yml \
-  run dbadmin db-backup
-```
-
-## Extending services
-
-Docker Compose's `extends` keyword enables the sharing of common configurations
-among different files, or even different projects entirely. Extending services
+Extending services
 is useful if you have several services that reuse a common set of configuration
 options. Using `extends` you can define a common set of service options in one
-place and refer to it from anywhere.
-
-Keep in mind that `volumes_from` and `depends_on` are never shared between
-services using `extends`. These exceptions exist to avoid implicit
-dependencies; you always define `volumes_from` locally. This ensures
-dependencies between services are clearly visible when reading the current file.
-Defining these locally also ensures that changes to the referenced file don't
-break anything.
-
-### Understand the extends configuration
+place and refer to it from anywhere.  You can refer to another compose file and select a service you want to also use in your own application, with the ability to override some attributes for your own needs.
 
 When defining any service in `docker-compose.yml`, you can declare that you are
 extending another service like this:
@@ -255,7 +79,9 @@ services:
     image: postgres
 ```
 
-### Example use case
+## Further examples
+
+### Example one
 
 Extending an individual service is useful when you have multiple services that
 have a common configuration.  The example below is a Compose app with
@@ -299,154 +125,55 @@ services:
       - queue
 ```
 
-## Adding and overriding configuration
+### Example two
 
-Compose copies configurations from the original service over to the local one.
-If a configuration option is defined in both the original service and the local
-service, the local value *replaces* or *extends* the original value.
+Another common use case is running one off or administrative tasks against one
+or more services in a Compose app. This example demonstrates running a
+database backup.
 
-For single-value options like `image`, `command` or `mem_limit`, the new value
-replaces the old value.
-
-original service:
+Start with a **docker-compose.yml**.
 
 ```yaml
 services:
-  myservice:
-    # ...
-    command: python app.py
+  web:
+    image: example/my_web_app:latest
+    depends_on:
+       db
+
+  db:
+    image: postgres:latest
 ```
 
-local service:
+In a **docker-compose.admin.yml** add a new service to run the database
+export or backup.
 
 ```yaml
 services:
-  myservice:
-    # ...
-    command: python otherapp.py
+  dbadmin:
+     build: database_admin/
+     depends_on:
+        - db
 ```
 
-result:
+To start a normal environment run `docker compose up -d`. To run a database
+backup, include the `docker-compose.admin.yml` as well.
 
-```yaml
-services:
-  myservice:
-    # ...
-    command: python otherapp.py
+```console
+$ docker compose -f docker-compose.yml -f docker-compose.admin.yml \
+  run dbadmin db-backup
 ```
 
-For the **multi-value options** `ports`, `expose`, `external_links`, `dns`,
-`dns_search`, and `tmpfs`, Compose concatenates both sets of values:
+## Exceptions and limitations
 
-original service:
+Keep in mind that `volumes_from` and `depends_on` are never shared between
+services using `extends`. These exceptions exist to avoid implicit
+dependencies; you always define `volumes_from` locally. This ensures
+dependencies between services are clearly visible when reading the current file.
+Defining these locally also ensures that changes to the referenced file don't
+break anything.
 
-```yaml
-services:
-  myservice:
-    # ...
-    expose:
-      - "3000"
-```
-
-local service:
-
-```yaml
-services:
-  myservice:
-    # ...
-    expose:
-      - "4000"
-      - "5000"
-```
-
-result:
-
-```yaml
-services:
-  myservice:
-    # ...
-    expose:
-      - "3000"
-      - "4000"
-      - "5000"
-```
-
-In the case of `environment`, `labels`, `volumes`, and `devices`, Compose
-"merges" entries together with locally-defined values taking precedence. For
-`environment` and `labels`, the environment variable or label name determines
-which value is used:
-
-original service:
-
-```yaml
-services:
-  myservice:
-    # ...
-    environment:
-      - FOO=original
-      - BAR=original
-```
-
-local service:
-
-```yaml
-services:
-  myservice:
-    # ...
-    environment:
-      - BAR=local
-      - BAZ=local
-```
-
-result
-
-```yaml
-services:
-  myservice:
-    # ...
-    environment:
-      - FOO=original
-      - BAR=local
-      - BAZ=local
-```
-
-Entries for `volumes` and `devices` are merged using the mount path in the
-container:
-
-original service:
-
-```yaml
-services:
-  myservice:
-    # ...
-    volumes:
-      - ./original:/foo
-      - ./original:/bar
-```
-
-local service:
-
-```yaml
-services:
-  myservice:
-    # ...
-    volumes:
-      - ./local:/bar
-      - ./local:/baz
-```
-
-result:
-
-```yaml
-services:
-  myservice:
-    # ...
-    volumes:
-      - ./original:/foo
-      - ./local:/bar
-      - ./local:/baz
-```
+That’s a good solution as long as you only need a single service to be shared, and you know about its internal details so you know how to tweak configuration. But this isn’t an acceptable solution when you want to reuse someone else's configuration as a “black box” and don’t know about its own dependencies.
 
 ## Reference information
 
-[`extends`](compose-file/05-services.md#extends)
+- [`extends`](../compose-file/05-services.md#extends)
