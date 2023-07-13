@@ -15,7 +15,7 @@ Organization owners can add a member to one or more teams within an organization
 To add a member to a team:
 
 1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
-2.Select **Organizations**, your organization. and then **Members**.
+2. Select **Organizations**, your organization. and then **Members**.
 3. Select the **Action** icon, and then select **Add to team**.
 
     > **Note**

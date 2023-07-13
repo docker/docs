@@ -4,7 +4,7 @@
     {% assign sso_link = "[configured SSO](/admin/company/settings/sso-configuration/)" %}
     {% assign sso_navigation="Select your company in the left navigation drop-down menu, and then select **SSO & SCIM.**" %}
   {% else %}
-    {% assign ssso_link = "[configured SSO](/admin/organization/security-settings/sso-configuration.md)" %}
+    {% assign sso_link = "[configured SSO](/admin/organization/security-settings/sso-configuration.md)" %}
     {% assign sso_navigation="Select your organization in the left navigation drop-down menu, and then select **SSO & SCIM.**" %}
   {% endif %}
 {% else %}

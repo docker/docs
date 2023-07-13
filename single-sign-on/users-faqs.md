@@ -55,7 +55,7 @@ When SSO is enabled and enforced, your users just have to sign in using the emai
 
 ### Is Docker SSO fully synced with Active Directory (AD)?
 
-Docker doesn’t currently support a full sync with AD. That's, if a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](../docker-hub/members.md#remove-members) from the organization.
+Docker doesn’t currently support a full sync with AD. That's, if a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](/docker-hub/members/#remove-a-member-or-invitee) from the organization.
 
 Additionally, you can use our APIs to complete this process.
 
