@@ -812,7 +812,7 @@ For the full change log or additional information, check the [Compose repository
 - Fixed typo in `--ssh` flag description. Related to [#7025](https://github.com/docker/compose/issues/7025){:target="_blank" rel="noopener" class="_"}.
 - Pinned Kubernetes dependencies to the same version as in buildx.
 - Passed the interactive flag from the Compose CLI to the Docker one to run exec command.
-- Fixed race condition on start-stop end-to-end tests running in parrallel.
+- Fixed race condition on start-stop end-to-end tests running in parallel.
 - Removed code regarding an obsolete warning.
 - Vendor: github.com/containerd/containerd v1.6.2. Includes a fix for CVE-2022-24769 (doesn't affect our codebase).
 
