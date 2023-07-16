@@ -85,10 +85,10 @@ To check if the KVM modules are enabled, run:
 
 ```console
 $ lsmod | grep kvm
-kvm_amd               167936  0
-ccp                   126976  1 kvm_amd
-kvm                  1089536  1 kvm_amd
-irqbypass              16384  1 kvm
+# kvm_amd               167936  0
+# ccp                   126976  1 kvm_amd
+# kvm                  1089536  1 kvm_amd
+# irqbypass              16384  1 kvm
 ```
 
 #### Set up KVM device user permissions
