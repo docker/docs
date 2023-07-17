@@ -140,7 +140,7 @@ $ docker build -t java-docker --target test .
 => => naming to docker.io/library/java-docker
 ```
 
-The build output is truncated for simplicity, but you can see that our tests ran succesfully and passed. Let’s break one of the tests and observe the output when our tests fail.
+The build output is truncated for simplicity, but you can see that our tests ran successfully and passed. Let’s break one of the tests and observe the output when our tests fail.
 
 Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change the assertion 
 
