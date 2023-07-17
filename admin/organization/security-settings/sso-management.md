@@ -6,8 +6,7 @@ title: Manage Single Sign-On for an organization
 
 {% include admin-early-access.md %}
 
-> **Note**
->
-> The following topic pertains to managing SSO for an organization. To manage SSO for an company, see [Manage SSO for a company](/admin/company/settings/sso-management/).
+Follow the steps on this page to manage SSO for an organization. To manage SSO for a company, see [Manage SSO for a company](/admin/company/settings/sso-management/).
+
 
 {% include admin-sso-management.md product="admin" layer="organization"%}
