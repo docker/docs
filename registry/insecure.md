@@ -33,7 +33,7 @@ isolated testing or in a tightly controlled, air-gapped environment.
 
     ```json
     {
-      "insecure-registries" : ["http://myregistrydomain.com:5000"]
+      "insecure-registries" : ["myregistrydomain.com:5000"]
     }
     ```
 
