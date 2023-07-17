@@ -70,12 +70,12 @@ You have a few options for how the local containers can integrate with the clust
   routing requests that include a specific HTTP header, to requests targeting a
   specific route of an API.
 
-Telepresence is free and open-source, and you can try it out by heading to
-the
-[Telepresence quickstart guide](https://www.telepresence.io/docs/latest/quick-start/?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" }.
-There’s also a
-[Telepresence extension for Docker Desktop](https://www.getambassador.io/docs/telepresence/latest/docker/extension?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" },
-which helps you manage intercepts for your containers.
+Telepresence seamlessly integrates with Docker and it's available for you to try today. Check out the following docs to learn more:
+
+- [Telepresence extension for Docker Desktop](https://www.getambassador.io/docs/telepresence/latest/docker/extension?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" }
+- [Telepresence in Docker mode](https://www.getambassador.io/docs/telepresence/latest/docker/cli?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" }
+- [Telepresence for Docker Compose](https://www.getambassador.io/docs/telepresence/latest/docker/compose?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" }
+
 
 ### Docker × Ambassador
 
