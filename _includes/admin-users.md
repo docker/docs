@@ -30,7 +30,7 @@ Use the following steps to invite members to your organization via Docker ID or 
 2. {{ member_navigation }}
 3. Select {{ invite_button }}.
 4. Select **Emails or usernames**.
-5. Follow the on-screen instructions to invite members. Invite a maximum of 1000 members and seperate multiple entries by comma, semicolon, or space.
+5. Follow the on-screen instructions to invite members. Invite a maximum of 1000 members and separate multiple entries by comma, semicolon, or space.
 
   > **Note**
   >
