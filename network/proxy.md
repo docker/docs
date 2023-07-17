@@ -150,7 +150,7 @@ and a no-proxy override for the Docker daemon on address
      "httpProxy": "http://proxy.example.com:3128",
      "httpsProxy": "https://proxy.example.com:3129",
      "noProxy": "*.test.example.com,.example.org,127.0.0.0/8"
-   }
+   },
    "tcp://docker-daemon1.example.com": {
      "noProxy": "*.internal.example.net"
    }
