@@ -23,7 +23,7 @@ Images that are part of this program have a special badge on Docker Hub making i
 
 ## When to use Docker Official Images
 
-If you are new to Docker, it's recommend you use the Docker Official Images in your
+If you are new to Docker, it's recommended you use the Docker Official Images in your
 projects. These images have clear documentation, promote best practices,
 and are designed for the most common use cases. Advanced users can
 review Docker Official Images as part of your `Dockerfile` learning process.
