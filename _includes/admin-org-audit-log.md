@@ -1,3 +1,46 @@
+{% if include.product == "admin" %}
+  {% assign product_link="[Docker Admin](https://admin.docker.com)" %}
+  {% assign audit_navigation="Select your organization in the left navigation drop-down menu, and then select **Activity Logs**." %}
+{% else %}
+  {% assign product_link="[Docker Hub](https://hub.docker.com)" %}
+  {% assign audit_navigation="Select **Organizations**, your organization, and then **Activity**." %}
+{% endif %}
+
+
+Audit logs display a chronological list of activities that occur at organization and repository levels. It provides a report to owners on all their member activities.
+
+With audit logs, owners can view and track:
+ - What changes were made
+ - The date when a change was made
+ - Who initiated the change
+
+ For example, audit logs display activities such as the date when a repository was created or deleted, the member who created the repository, the name of the repository, and when there was a change to the privacy settings.
+
+Owners can also see the audit logs for their repository if the repository is part of the organization subscribed to a Docker Business or Team plan.
+
+## View the audit logs
+
+To view the audit logs:
+
+1. Sign in to {{ product_link }}{: target="_blank" rel="noopener" class="_"}.
+2. {{ audit_navigation }}
+
+> **Note**
+>
+> Docker retains the activity data for a period of three months.
+
+## Customize the audit logs
+
+By default, all activities that occur are displayed on the **Activity** tab. Use the calendar option to select a date range and customize your results. After you have selected a date range, the audit logs of all the activities that occurred during that period are displayed.
+
+> **Note**
+>
+> Activities created by the Docker Support team as part of resolving customer issues appear in the audit logs as **dockersupport**.
+
+Select the **All Activities** drop-down to view activities that are specific to an organization, repository, or billing. In Docker Hub, if you select the **Activities** tab from the **Repository** view, you can only filter repository-level activities.
+
+After choosing **Organization**, **Repository**, or **Billing**, you can further refine the results using the **All Actions** drop-down.
+
 ## Event definitions
 
 Refer to the following section for a list of events and their descriptions:

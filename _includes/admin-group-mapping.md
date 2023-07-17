@@ -1,3 +1,13 @@
+{% if include.product == "admin" %}
+  {% if include.layer == "company" %}
+    {% assign scim_link = "[Enable SCIM](/admin/company/settings/scim/)" %}
+  {% else %}
+    {% assign scim_link = "[Enable SCIM](/admin/organization/security-settings/scim/)" %}
+  {% endif %}
+{% else %}
+  {% assign scim_link = "[Enable SCIM](/docker-hub/scim/)" %}
+{% endif %}
+
 With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams.
 
 To correctly assign your users to Docker teams, you must create groups in your IDP following the naming pattern `organization:team`. For example, if you want to manage provisioning for the team "developers” in Docker, and your organization name is “moby,” you must create a group in your IdP with the name “moby:developers”.
@@ -39,3 +49,8 @@ To take advantage of group mapping, follow the instructions provided by your IdP
 - [OneLogin](https://developers.onelogin.com/scim/create-app){: target="_blank" rel="noopener" class="_" }
 
 Once complete, a user who signs in to Docker through SSO is automatically added to the organizations and teams mapped in the IdP.
+
+>**Tip**
+>
+> {{ scim_link }} to take advantage of automatic user provisioning and de-provisioning. If you don't enable SCIM users are only automatically provisioned. You have to de-provision them manually.
+{: .tip}
