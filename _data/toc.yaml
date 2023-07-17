@@ -1146,7 +1146,7 @@ manuals:
             title: FAQs and known issues
         - path: /desktop/hardened-desktop/registry-access-management/
           title: Registry Access Management
-        - path: /docker-hub/image-access-management/
+        - path: /desktop/hardened-desktop/image-access-management/
           title: Image Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
@@ -1957,7 +1957,9 @@ manuals:
       title: Manage users
     - path: /admin/company/owners/
       title: Manage company owners
-    - sectiontitle: Settings
+    - path: /admin/company/settings/domains/
+      title: Domain management
+    - sectiontitle: SSO & SCIM
       section:
       - path: /admin/company/settings/sso/
         title: Single Sign-On overview
@@ -1969,8 +1971,7 @@ manuals:
         title: SCIM
       - path: /admin/company/settings/group-mapping/
         title: Group mapping
-      - path: /admin/company/settings/sso-faq/
-        title: Single Sign-On FAQs
+
   - sectiontitle: Organization administration
     section:
     - path: /admin/organization/
@@ -1985,7 +1986,9 @@ manuals:
       title: Registry Access Management
     - path: /admin/organization/general-settings/
       title: General settings
-    - sectiontitle: Security settings
+    - path: /admin/organization/security-settings/domains/
+      title: Domain management
+    - sectiontitle: SSO & SCIM
       section:
       - path: /admin/organization/security-settings/sso/
         title: Single Sign-On overview
@@ -1997,9 +2000,6 @@ manuals:
         title: SCIM
       - path: /admin/organization/security-settings/group-mapping/
         title: Group mapping
-      - path: /admin/organization/security-settings/sso-faq/
-        title: Single Sign-On FAQs
-
 
 - sectiontitle: Administration and security
   section:
