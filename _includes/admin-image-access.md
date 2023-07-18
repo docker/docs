@@ -30,7 +30,7 @@ You need to [configure a registry.json to enforce sign-in](/docker-hub/configure
 
     > **Note**
     >
-    > Image Access Management is turned off by default. However, members of the `owners` team in your organization have access to all images regardless of the settings.
+    > Image Access Management is turned off by default. However, owners in your organization have access to all images regardless of the settings.
 
 4. Select the category restrictions for your images by selecting **Allowed**.
      Once the restrictions are applied, your members can view the organization permissions page in a read-only format.

@@ -25,7 +25,7 @@ class="_"} can retrieve the Docker ID for you.
 Docker users become members of an organization when they are assigned to at
 least one team in the organization. When you first create an organization,
 you’ll see that you have a team, the **Owners** (Admins) team, with a single
-member. An organization owner is someone that is part of the owners team. They
+member. An organization owner is someone assigned the owner role. They
 can create new teams and add members to an existing team using their Docker ID
 or email address and by selecting a team the user should be part of. An
 organization owner can also add additional organization owners to help them
@@ -41,7 +41,7 @@ The organization name, sometimes referred to as the organization namespace or th
 
 ### What’s a team?
 
-A **Team** is a group of Docker users that belong to an organization. An organization can have multiple teams. When you first create an organization, you’ll see that you have a team, the owners team, with a single member. An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. See [Create and manage a team](manage-a-team.md).
+A **Team** is a group of Docker users that belong to an organization. An organization can have multiple teams. An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. See [Create and manage a team](manage-a-team.md).
 
 ### What's a company?
 
