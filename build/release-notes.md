@@ -8,6 +8,20 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""}.
 
+## 0.11.2
+
+{% include release-date.html date="2023-07-18" %}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.2){:target="blank" rel="noopener"}.
+
+### Bug fixes and enhancements
+
+- Fix a regression that caused buildx to not read the `KUBECONFIG` path from the instance store.
+  [docker/buildx#1941](https://github.com/docker/buildx/pull/1941){:target="blank" rel="noopener"}
+- Fix a regression with result handle builds showing up in the build history incorrectly.
+  [docker/buildx#1954](https://github.com/docker/buildx/pull/1954){:target="blank" rel="noopener"}
+
 ## 0.11.1
 
 {% include release-date.html date="2023-07-05" %}
