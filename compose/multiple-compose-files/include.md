@@ -28,9 +28,9 @@ services:
       - serviceB #use serviceB directly as if it was declared in this Compose file
 ```
 
-In the example above, `my-compose-include.yaml` manages `serviceB` which details ome replicas, web UI to inspect data, isolated networks, volumes for data persistence, etc. The application relying `serviceB` doesn’t need to know about those infrastructure details, and consumes the compose file as a building block it can rely on. 
+In the example above, `my-compose-include.yaml` manages `serviceB` which details some replicas, web UI to inspect data, isolated networks, volumes for data persistence, etc. The application relying on `serviceB` doesn’t need to know about the infrastructure details, and consumes the Compose file as a building block it can rely on. 
 
-This means the team managing `serviceB` can refactor its own database component to introduce additional services without any dependent teams being impacted. It also means that the dependent teams don't need to include additional flags on each Compose command they run
+This means the team managing `serviceB` can refactor its own database component to introduce additional services without any dependent teams being impacted. It also means that the dependent teams don't need to include additional flags on each Compose command they run.
 
 ## Reference information
 
