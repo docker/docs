@@ -107,7 +107,7 @@ mirrord is an open-source tool that lets developers run local processes in the c
 
 ![High-level architecture of mirrord](https://mirrord.dev/docs/overview/architecture/architecture.svg)
 
-Everything mirrord does can be configured to run either locally or remotely and so suit any type of use case. Incoming traffic supports the following modes:
+You can configure mirrord's different features (e.g. file access, outgoing traffic) to run either locally or remotely and suit any type of use case. Incoming traffic supports the following modes:
 - Mirroring: mirrord duplicates incoming traffic to the remote pod and sends a copy to your local process. The request is handled by the remote pod.
 - Stealing: mirrord intercepts the incoming traffic to the remote pod and sends it to your local process. The request is handled by the local process.
 - Stealing with a filter: mirrord only steals incoming traffic that matches a filter you specified, on either an HTTP header or a path. Requests matching the filter are handled by the local process, and all other traffic is handled by the remote pod.  
