@@ -103,7 +103,7 @@ connecting to a development cluster, and creating intercepts.
 
 ## mirrord
 
-mirrord is an open-source tool that lets developers run local processes in the context of their cloud environment. When mirrord is executed, it injects itself into your local process, and starts a temporary pod in your Kubernetes cluster called the mirrord Agent. It then overrides low level functions in your local process, and relays them to a pod in your Kubernetes cluster through the mirrord Agent. mirrord does this for incoming and outgoing traffic, file access, and environment variables, so your process "thinks" it's running in the pod you selected, even though it's actually running locally.
+mirrord is an open-source tool that lets developers run local processes in the context of their cloud environment. When you use mirrord, it injects itself into your local process, and starts a temporary pod in your Kubernetes cluster called the mirrord Agent. It then overrides low-level functions in your local process, and relays them to a pod in your Kubernetes cluster through the mirrord Agent. mirrord does this for incoming and outgoing traffic, file access, and environment variables. So your process "thinks" it's running in the pod you selected, even though it's actually running locally.
 
 ![High-level architecture of mirrord](https://mirrord.dev/docs/overview/architecture/architecture.svg)
 
