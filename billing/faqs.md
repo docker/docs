@@ -28,7 +28,7 @@ If your subscription payment fails, there is a grace period of 15 days, includin
 
 Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt. 
 
-Once the grace period is over and the invoice is still not paid, the subscription is downgraded to a free plan and all paid features are disabled. 
+Once the grace period is over and the invoice is still not paid, the subscription is downgraded to a free plan and all paid features are disabled.
 
 ### What billing-related emails will I receive from Docker Hub?
 
@@ -59,4 +59,34 @@ A coupon can be used when you:
 
 You are asked to enter your coupon code when you confirm or enter your payment method. 
 
-If you use a coupon to pay for a subscription, when the coupon expires, your payment method is charged the full cost of your subscription. If you do not have a saved payment method, your account is downgraded to a free subscription. 
+If you use a coupon to pay for a subscription, when the coupon expires, your payment method is charged the full cost of your subscription. If you do not have a saved payment method, your account is downgraded to a free subscription.
+
+### How do I include my VAT number on my invoice?
+
+Organization owners can update invoice details to include a VAT number. To update the billing information for your organization:
+
+1. In Docker Hub, select **Organizations**, your organization, and then **Billing**.
+2. Select **Payment Methods**.
+3. In the **Billing Information** section, enter your information in the **VAT/Tax ID** field.
+4. Select **Update**.
+
+To download your updated invoice:
+1. Go to **Billing History**, select the **Actions** icon, and then select **Update invoice**.
+2. Select **Update and download** to download the invoice that includes the VAT number.
+
+### How do I update the email that receives billing invoices?
+
+You can update the billing information for your user account or owners can update this information for organizations.
+
+For user accounts:
+
+1. Select **Your Account** in the top-right corner of Docker Hub.
+2. From the drop-down menu select **Billing**.
+3. Select the **Payment Methods** tab, then update the email field in the **Billing Information** section.
+4. Select **Update**.
+
+For organizations:
+
+1. In Docker Hub, select **Organization**, your organization, and then **Billing**.
+2. Select the **Payment Methods** tab, then update the email field in the **Billing Information** section.
+3. Select **Update**.
