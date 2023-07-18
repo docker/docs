@@ -40,11 +40,11 @@ Docker maintains a [public roadmap](https://github.com/docker/roadmap){:target="
 
 ### Can I pause or delay my Docker Hub subscription?
 
-Subscriptions can't be paused or delayed. If a subscription invoice hasn't been paid on the due date, there's a 15 day grace period.
+You can't pause or delay a subscription. If a subscription invoice hasn't been paid on the due date, there's a 15 day grace period, including the due date.
 
 ### Can I transfer my subscription from one user or organization account to another?
 
-Subscriptions can't be transferred from one user or organization account to another.
+Subscriptions are non-transferable.
 
 ### I have more questions regarding the new pricing, who can I reach out to?
 
