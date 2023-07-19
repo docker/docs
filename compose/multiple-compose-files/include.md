@@ -8,13 +8,13 @@ With Docker Compose version 2.20 and later, you can include a whole Compose file
 
 `include` makes it easier to modularize complex applications into sub-Compose files. This allows application configurations to be made simpler and more explicit. This also helps to reflect in the config file organization the engineering team responsible for the code.
 
-Each path listed in the `include` section loads as an individual Compose application model, with it’s own project directory, in order to resolve relative paths.
+Each path listed in the `include` section loads as an individual Compose application model, with its own project directory, in order to resolve relative paths.
 
-Once the included Compose application loads, all resources definitions are copied into the current Compose application model.
+Once the included Compose application loads, all resources are copied into the current Compose application model.
 
 > **Note**
 >
-> `include` applies recursively so an included Compose file which declares its own `include` section, triggers those other files to be included as well.
+> `include` applies recursively so an included Compose file which declares its own `include` section, results in those other files being included as well.
 
 ## Example
 

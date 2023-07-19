@@ -106,7 +106,7 @@ services:
 ```
 
 In the case of `environment`, `labels`, `volumes`, and `devices`, Compose
-"merges" entries together with locally-defined values taking precedence. For
+"merges" entries together with locally defined values taking precedence. For
 `environment` and `labels`, the environment variable or label name determines
 which value is used:
 
