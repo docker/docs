@@ -89,7 +89,7 @@ You can install Docker Engine in different ways, depending on your needs:
 
 - [Install it manually](#install-from-a-package) and manage upgrades manually.
 
-- Use a [convenience scripts](#install-using-the-convenience-script). Only
+- Use a [convenience script](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
 ### Install using the apt repository {#install-using-the-repository}
