@@ -63,20 +63,19 @@ If you use a coupon to pay for a subscription, when the coupon expires, your pay
 
 ### How do I include my VAT number on my invoice?
 
-Organization owners can update invoice details to include a VAT number. To update the billing information for your organization:
+Update your billing information to include your VAT number:
 
-1. In Docker Hub, select **Organizations**, your organization, and then **Billing**.
-2. Select **Payment Methods**.
-3. In the **Billing Information** section, enter your information in the **VAT/Tax ID** field.
-4. Select **Update**.
+1. Sign in to Docker Hub.
+2. For organizations, select **Organizations**, your organization, and then **Billing**. For user accounts, select **Your Account** in the top-right corner, then **Billing**.
+3. Select **Payment Methods**.
+4. In the **Billing Information** section, enter your information in the **VAT/Tax ID** field.
+5. Select **Update**.
 
 To download your updated invoice:
 1. Go to **Billing History**, select the **Actions** icon, and then select **Update invoice**.
 2. Select **Update and download** to download the invoice that includes the VAT number.
 
 ### How do I update the email that receives billing invoices?
-
-You can update the billing information for your user account or owners can update this information for organizations.
 
 For user accounts:
 
