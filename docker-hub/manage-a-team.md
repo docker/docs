@@ -52,7 +52,7 @@ To give a team access to a repository
 2. Select the **Teams** tab and select the team that you'd like to configure repository access to.
 3. Select the **Permissions** tab and select a repository from the
    **Repository** drop-down.
-4. Choose a permission from the **Permissions** dropdown list and select
+4. Choose a permission from the **Permissions** drop-down list and select
    **Add**.
 
     ![Team Repo Permissions](images/team-repo-permission.png){:width="700px"}

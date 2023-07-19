@@ -22,7 +22,7 @@ Before you downgrade to a free subscription, you may need to reduce the number o
 
 1. Log in to your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
 
-2. Select your username in the top-right corner and from the dropdown menu select **Billing**.
+2. Select your username in the top-right corner and from the drop-down menu select **Billing**.
 
 3. Choose either your personal account or an organization to downgrade. 
 

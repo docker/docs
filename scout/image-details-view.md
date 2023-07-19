@@ -67,9 +67,9 @@ To view security recommendations for an image in Docker Desktop:
 
 1. Go to the **Images** view in Docker Desktop.
 2. Select the image tag that you want to view recommendations for.
-3. Near the top, select the **Recommended fixes** dropdown button.
+3. Near the top, select the **Recommended fixes** drop-down button.
 
-The dropdown menu lets you choose whether you want to see recommendations for
+The drop-down menu lets you choose whether you want to see recommendations for
 the current image or any base images used to build it:
 
 - [**Recommendations for this image**](#recommendations-for-current-image)
@@ -77,7 +77,7 @@ the current image or any base images used to build it:
 - [**Recommendations for base image**](#recommendations-for-base-image) provides
   recommendations for base images used to build the image.
 
-If the image you're viewing has no associated base images, the dropdown only 
+If the image you're viewing has no associated base images, the drop-down menu only 
 shows the option to view recommendations for the current image.
 
 ### Recommendations in Docker Hub

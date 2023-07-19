@@ -58,16 +58,16 @@ your preferred operating system below.
 Docker provides `.deb` and `.rpm` packages from the following Linux distros
 and architectures:
 
-| Platform                | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)             | s390x                  |
-| :---------------------- | :--------------------- | :--------------------- | :----------------------- | :--------------------- |
-| [CentOS](centos.md)     | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                          |                        |
-| [Debian](debian.md)     | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   |                        |
-| [Fedora](fedora.md)     | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                          |                        |
-| [Raspbian](debian.md)   |                        |                        | [{{ yes }}](raspbian.md) |                        |
-| [RHEL](rhel.md)         |                        |                        |                          | [{{ yes }}](rhel.md)   |
-| [SLES](sles.md)         |                        |                        |                          | [{{ yes }}](sles.md)   |
-| [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) |
-| [Binaries](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md)   |                        |
+| Platform                | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)             | ppc64le                | s390x                  |
+| :---------------------- | :--------------------- | :--------------------- | :----------------------- |:-----------------------| :--------------------- |
+| [CentOS](centos.md)     | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                          | [{{ yes }}](centos.md) |                        |
+| [Debian](debian.md)     | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)   | [{{ yes }}](debian.md) |                        |
+| [Fedora](fedora.md)     | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                          | [{{ yes }}](fedora.md) |                        |
+| [Raspbian](raspbian.md) |                        |                        | [{{ yes }}](raspbian.md) |                        |                        |
+| [RHEL](rhel.md)         |                        |                        |                          |                        | [{{ yes }}](rhel.md)   |
+| [SLES](sles.md)         |                        |                        |                          |                        | [{{ yes }}](sles.md)   |
+| [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
+| [Binaries](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md)   |                        |                        |
 
 ### Other Linux distros
 

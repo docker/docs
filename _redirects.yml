@@ -563,6 +563,8 @@
 # feedback
 "https://docs.google.com/forms/d/e/1FAIpQLSenjK8KiBiOrwCpq06u_iVEZGv4tfTEpfmY_cQDmsqJrHL9Gw/viewform":
   - /feedback/extension/
+"https://docs.google.com/forms/u/1/d/e/1FAIpQLScgzKwqQyr7BmnphdrcGTO3wkye_McHJVsWzOIgEESfqmditQ/formResponse":
+  - /feedback/runtime/
 
 # Docker Scout
 "/scout/":

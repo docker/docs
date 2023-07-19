@@ -39,8 +39,8 @@ versions:
 - Ubuntu Jammy 22.04 (LTS)
 - Ubuntu Focal 20.04 (LTS)
 
-Docker Engine is compatible with x86_64 (or amd64), armhf, arm64, and
-s390x architectures.
+Docker Engine for Ubuntu is compatible with x86_64 (or amd64), armhf, arm64,
+s390x, and ppc64le (ppc64el) architectures.
 
 ### Uninstall old versions
 
@@ -89,7 +89,7 @@ You can install Docker Engine in different ways, depending on your needs:
 
 - [Install it manually](#install-from-a-package) and manage upgrades manually.
 
-- Use a [convenience scripts](#install-using-the-convenience-script). Only
+- Use a [convenience script](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
 ### Install using the apt repository {#install-using-the-repository}

@@ -138,7 +138,7 @@ mappings for IDs above 0 in the containers.
 If `/etc/subuid` and `/etc/subgid` are missing, they need to be created.
 Both should contain entries in the form -
 `<username>:<start of id range>:<id range size>`. For example, to allow the current user
-to use IDs from 100000 to 165535:
+to use IDs from 100 000 to 165 535:
 
 ```console
 $ grep "$USER" /etc/subuid >> /dev/null 2&>1 || (echo "$USER:100000:65536" | sudo tee -a /etc/subuid)
