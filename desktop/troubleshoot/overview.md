@@ -100,7 +100,7 @@ Docker Desktop cannot start.
 2. Create and upload the diagnostics ID. Run:
 
     ```console
-    $ <tool location> gather -upload
+    $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
     ```
 
     After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
@@ -184,7 +184,7 @@ Docker Desktop contains a self-diagnose tool which can help you identify some co
 2. Run the self-diagnose tool:
 
     ```console
-    $ <tool location> check
+    $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
     ```
 
     The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
