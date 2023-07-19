@@ -6,14 +6,9 @@ title: Roles and permissions
 
 Member roles let organization and company owners control who in an organization has access to products and features on Docker Hub. This section is for organization or company owners who want to learn about the defined roles and their permission scopes.
 
-## Roles and access
+## Roles
 
 When you invite users to your organization on Docker Hub, you assign a role. A role is a collection of permissions. Roles define access to perform actions like creating repositories, pulling images, publishing extensions, or managing repositories.
-
-> Tip
->
-> You don't need to create teams to assign a role to grant administrative access. You can still use teams to group members in your organization and assign [repository access permissions](/docker-hub/manage-a-team/#permissions-reference). Note that when you create new organizations, the owners team is no longer created automatically and only the owner role will grant a user owner permissions.
-{: .tip }
 
 The following roles are available to assign:
 
@@ -36,13 +31,13 @@ The following lists the content and registry permissions for each role:
 | Observe content engagement as a publisher | ❌ | ❌ | ✅ | ✅ |
 | Create public and private repositories | ❌ | ✅ | ✅ | ✅ |
 | Pull, push, edit, and delete a repository | ❌ | ✅ | ✅ | ✅ |
-| Assign team permissions to repositories | ❌ | ✅ | ✅ | ✅ |
 | Manage tags | ❌ | ✅ | ✅ | ✅ |
 | View repository activity | ❌ | ❌ | ✅ | ✅ |
 | Set up automated builds | ❌ | ✅ | ✅ | ✅ |
 | Edit build settings | ❌ | ✅ | ✅ | ✅ |
 | Set up vulnerability analysis with Docker Scout | ❌ | ✅ | ✅ | ✅ |
 | View teams | ❌ | ✅ | ✅ | ✅ |
+| Assign team permissions to repositories | ❌ | ✅ | ✅ | ✅ |
 | Create teams | ❌ | ❌ | ✅ | ✅ |
 | Manage, including delete, teams | ❌ | ❌ | ✅ | ✅ |
 
@@ -56,11 +51,11 @@ The following lists the organization management permissions for each role:
 | Add organizations to a company | ❌ | ❌ | ✅ | ✅ |
 | Invite members | ❌ | ❌ | ✅ | ✅ |
 | Manage members | ❌ | ❌ | ✅ | ✅ |
-| Manage member permissions | ❌ | ❌ | ✅ | ✅ |
+| Manage member roles and permissions | ❌ | ❌ | ✅ | ✅ |
 | View member activity | ❌ | ❌ | ✅ | ✅ |
 | Export and reporting | ❌ | ❌ | ✅ | ✅ |
-| Image access | ❌ | ❌ | ✅ | ✅ |
-| Registry access | ❌ | ❌ | ✅ | ✅ |
+| Image Access Management | ❌ | ❌ | ✅ | ✅ |
+| Registry Access Management | ❌ | ❌ | ✅ | ✅ |
 | Setup Single Sign-On (SSO) and SCIM | ❌ | ❌ | ✅ * | ✅ |
 | Require Desktop login | ❌ | ❌ | ✅ * | ✅ |
 | Manage billing information (e.g. billing address) | ❌ | ❌ | ✅ | ✅ |
