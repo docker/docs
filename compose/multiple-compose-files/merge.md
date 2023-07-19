@@ -24,7 +24,7 @@ about using `-f`.
 
 > **Important**
 >
-> When you use multiple configuration files, you must make sure all paths in the
+> When you use multiple Compose files, you must make sure all paths in the
 files are relative to the base Compose file (the first Compose file specified
 with `-f`). This is required because override files need not be valid
 Compose files. Override files can contain small fragments of configuration.
@@ -185,8 +185,6 @@ For more merging rules, see [Merge and override](../compose-file/13-merge.md) in
 
 ## Example
 
-#### Different environments
-
 A common use case for multiple files is changing a development Compose app
 for a production-like environment (which may be production, staging or CI).
 To support these differences, you can split your Compose configuration into
@@ -240,9 +238,8 @@ services:
 
 When you run `docker compose up` it reads the overrides automatically.
 
-Now, it would be nice to use this Compose app in a production environment. So,
-create another override file (which might be stored in a different git
-repo or managed by a different team).
+To use this Compose app in a production environment, another override file is created, which might be stored in a different git
+repo or managed by a different team.
 
 `compose.prod.yml`
 
