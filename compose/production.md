@@ -38,8 +38,7 @@ Once you have a second configuration file, you can use it with the
 $ docker compose -f docker-compose.yml -f production.yml up -d
 ```
 
-See [Using multiple compose files](extends.md#different-environments) for a more
-complete example.
+See [Using multiple compose files](multiple-compose-files/index.md) for a more complete example, and other options.
 
 ### Deploying changes
 

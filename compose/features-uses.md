@@ -85,7 +85,7 @@ See [Variable substitution](compose-file/compose-file-v3.md#variable-substitutio
 details.
 
 You can extend a Compose file using the `extends` field or by creating multiple
-Compose files. See [extends](extends.md) for more details.
+Compose files. For more details, see [Working with multiple Compose files](multiple-compose-files/index.md).
 
 ## Common use cases of Docker Compose
 
