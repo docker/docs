@@ -49,7 +49,7 @@ What you'll see is that the files created in one container aren't available in a
    </div>
    <div id="gui" class="tab-pane fade" markdown="1">
 
-    In Docker Desktop, go to **Containers**, hover over the container running the **ubuntu** image, and select the **Show container actions** menu. From the dropdown menu, select **Open in terminal**.
+    In Docker Desktop, go to **Containers**, hover over the container running the **ubuntu** image, and select the **Show container actions** menu. From the drop-down menu, select **Open in terminal**.
 
     You will see a terminal that is running a shell in the Ubuntu container. Run the following command to see the content of the `/data.txt` file. Close this terminal afterwards again.
 

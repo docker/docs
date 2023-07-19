@@ -29,7 +29,7 @@ Using the integrated terminal is the same as running `docker exec -it <container
 - Supports copy, paste, search, and clearing your session.
 
 To open the integrated terminal, either:
-- Hover over your running container and select the **Show container actions** menu. From the dropdown menu, select **Open in terminal**.
+- Hover over your running container and select the **Show container actions** menu. From the drop-down menu, select **Open in terminal**.
 - Select the container and then select the **Terminal** tab.
 
  To use your external terminal, change your settings.
