@@ -44,7 +44,7 @@ when the tests succeed.
    > Note
    > You might need to specify an organization or user from
    > the source code provider. Once you select a user, source code
-   > repositories appear in the **Select repository** dropdown list.
+   > repositories appear in the **Select repository** drop-down list.
 
 5. Optional: Enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
 

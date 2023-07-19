@@ -26,6 +26,6 @@ There is no limit to the number of organizations you can have under a company la
 1. In Docker Hub, select **Organizations**.
 2. Select your company.
 3. From the company page, select **Add organization**.
-4. Choose the organization you want to add from the dropdown menu.
+4. Choose the organization you want to add from the drop-down menu.
 5. Select **Add organization** to confirm.
 

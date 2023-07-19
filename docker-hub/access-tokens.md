@@ -29,7 +29,7 @@ any time.
 
 1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 
-2. Select your username in the top-right corner and from the dropdown menu select **Account Settings**.
+2. Select your username in the top-right corner and from the drop-down menu select **Account Settings**.
 
 3. Select the **Security** tab and then **New Access Token**.
 
