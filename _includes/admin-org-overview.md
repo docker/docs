@@ -3,11 +3,8 @@ that can be managed together. A team is a group of Docker members that belong to
 An organization can have multiple teams.
 
 Docker users become members of an organization
-when they are assigned to at least one team in the organization. When you first
-create an organization, you have one team, the "owners" team, that has a single member. An organization owner is someone that is part of the
-owners team. They can create new teams and add
-members to an existing team using their Docker ID or email address and by
-selecting a team the user should be part of. An organization owner can also add
+when an organization owner assigns them a role, such as member or editor. An organization owner is a user with administrative access to the organization. Owners can invite users, assign them roles, create new teams, and add
+members to an existing team using their Docker ID or email address. An organization owner can also add
 additional owners to help them manage users, teams, and repositories in the
 organization.
 
