@@ -32,8 +32,8 @@ versions:
 - Debian Bookworm 12 (stable)
 - Debian Bullseye 11 (oldstable)
 
-Docker Engine for Debian is compatible with x86_64 (or amd64), armhf, and arm64
-architectures.
+Docker Engine for Debian is compatible with x86_64 (or amd64), armhf, arm64,
+and ppc64le (ppc64el) architectures.
 
 ### Uninstall old versions
 
