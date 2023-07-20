@@ -133,16 +133,16 @@ You can create the volume and start the container using the CLI or Docker Deskto
 </div>
 <div id="gui2" class="tab-pane fade" markdown="1">
 
-1. Create a volume.
+1. To create a volume:
    1. Select **Volumes** in Docker Desktop.
    2. In **Volumes**, select **Create**.
    3. Specify `todo-db` as the volume name, and then select **Create**.
 
-2. Stop and remove the app container.
+2. To stop and remove the app container:
    1. Select **Containers** in Docker Desktop.
    2. Select **Delete** in the **Actions** column for the container.
 
-3. Start the todo app container with the volume mounted.
+3. To start the todo app container with the volume mounted:
    1. Select the search box at the top of Docker Desktop.
    2. In the search window, select the **Images** tab.
    3. In the search box, specify the container name, `getting-started`.
@@ -151,9 +151,10 @@ You can create the volume and start the container using the CLI or Docker Deskto
      >  Use the search filter to filter images and only show **Local images**.
    4. Select your image and then select **Run**.
    5. Select **Optional settings**.
-   6. In **Host path**, specify the name of the volume, `todo-db`.
-   7. In **Container path**, specify `/etc/todos`.
-   8. Select **Run**.
+   6. In **Host port**, specify the port, for example, `3000`.
+   7. In **Host path**, specify the name of the volume, `todo-db`.
+   8. In **Container path**, specify `/etc/todos`.
+   9. Select **Run**.
 
 <hr>
 </div>
