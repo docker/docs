@@ -24,7 +24,7 @@ The following diagram shows how SSO operates and is managed in Docker Hub and Do
 
 Before enabling SSO in Docker, administrators must first configure their IdP to work with Docker. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
 
-After establishing the connection between the IdP server and Docker, administrators sign in to Docker {{ product_name }} and complete the SSO enablement process.
+After establishing the connection between the IdP server and Docker, administrators sign in to {{ product_name }} and complete the SSO enablement process.
 
 When you enable SSO for your company, a first-time user can sign in to Docker Hub using their company's domain email address. They're then added to your company and assigned to the company team in the organization.
 
