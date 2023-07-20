@@ -7,7 +7,7 @@
     {% assign member_navigation="Select your company in the left navigation drop-down menu, and then select **Users**." %}
     {% assign remove_button = "**Remove user**" %}
   {% else %}
-    {% assign member_navigation="Select your organization in the left navigation drop-down menu, and then select *Members**." %}
+    {% assign member_navigation="Select your organization in the left navigation drop-down menu, and then select **Members**." %}
     {% assign remove_button = "**Remove member**" %}
   {% endif %}
 {% else %}
