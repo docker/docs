@@ -10,6 +10,24 @@ redirect_from:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.20.2
+{% include release-date.html date="2023-07-19" %}
+
+### Bug fixes and enhancements
+- Added support for the `depends_on.required` attribute.
+- Fixed an issue where build tries to push unnamed service images.
+- Fixed a bug which meant the target secret path on Windows was not checked.
+- Fixed a bug resolving build context path for services using `extends.file`.
+
+## 2.20.1
+{% include release-date.html date="2023-07-18" %}
+
+### Update
+- Dependencies upgrade: bump golang to 1.20.6
+- Dependencies upgrade: bump buildx to v0.11.2
+- Dependencies upgrade: bump buildkit to v0.12
+- Dependencies upgrade: bump docker-cli to v24.0.5-dev
+
 ## 2.20.0
 {% include release-date.html date="2023-07-11" %}
 
