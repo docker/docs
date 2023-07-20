@@ -51,6 +51,10 @@ _The following video shows how to enable Docker Scout on your repositories_.
 
 ### Docker Desktop
 
+> **Note**
+>
+> There is a 3gb size limit on images analyzed by Docker Scout in Docker Desktop.
+
 Docker Scout analyzes all images stored locally in Docker Desktop, providing you
 with up-to-date vulnerability information as you build your images.
 
