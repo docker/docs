@@ -112,8 +112,8 @@ To update a member role:
 1. Sign in to {{ product_link }}{: target="_blank" rel="noopener" class="_"}.
 2. {{ member_navigation }}
 3. Find the username of the member whose role you want to edit. In the table, select the **Actions** icon.
-3. Select **Edit role**.
-4. {{ update_role }}
+4. Select **Edit role**.
+5. {{ update_role }}
 
 ## Export members
 
