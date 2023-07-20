@@ -166,12 +166,14 @@ Run:
 </div>
 </div>
 
-Use your diagnostics ID to get help:
-    - If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Make sure you provide the full diagnostics ID, and not just the user ID. Select **Submit** to request Docker Desktop support.
-    - If you don't have a paid Docker subscription, create an issue on GitHub:
-        - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
-        - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
-        - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
+#### Use your diagnostics ID to get help
+
+If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Make sure you provide the full diagnostics ID, and not just the user ID. Select **Submit** to request Docker Desktop support.
+    
+If you don't have a paid Docker subscription, create an issue on GitHub:
+ - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
+ - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
+ - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
 
 ### Self-diagnose tool
 
