@@ -20,7 +20,7 @@ isolate your Macvlan networks using different physical network interfaces.
 
 Keep the following things in mind:
 
-- You may unintentionally damage your network due to IP address
+- You may unintentionally degrade your network due to IP address
   exhaustion or to "VLAN spread", a situation that occurs when you have an
   inappropriately large number of unique MAC addresses in your network.
 
