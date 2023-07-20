@@ -36,7 +36,15 @@ Personal subscriptions do not include collaborators for private repositories. If
 
 ### How do I know what new features are in planning for my Docker Pro or Docker Team subscription?
 
-Docker maintains a [public roadmap](https://github.com/docker/roadmap){:target="blank" rel="noopener" class=""} so subscribers can see what new features are in development, as well as request new capabilities. 
+Docker maintains a [public roadmap](https://github.com/docker/roadmap){:target="blank" rel="noopener" class=""} so subscribers can see what new features are in development, as well as request new capabilities.
+
+### Can I pause or delay my Docker Hub subscription?
+
+You can't pause or delay a subscription. If a subscription invoice hasn't been paid on the due date, there's a 15 day grace period, including the due date.
+
+### Can I transfer my subscription from one user or organization account to another?
+
+Subscriptions are non-transferable.
 
 ### I have more questions regarding the new pricing, who can I reach out to?
 
