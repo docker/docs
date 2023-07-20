@@ -6,9 +6,11 @@
   {% if include.layer == "company" %}
     {% assign member_navigation="Select your organization in the left navigation drop-down menu, and then select **Users**." %}
     {% assign remove_button = "**Remove user**" %}
+    {% assign update_role = "Select their organization, select the role you want to assign, and then select **Save**." %}
   {% else %}
     {% assign member_navigation="Select your organization in the left navigation drop-down menu, and then select *Members**." %}
     {% assign remove_button = "**Remove member**" %}
+    {% assign update_role = "Select the role you want to assign, then select **Save**." %}
   {% endif %}
 {% else %}
   {% assign product_link="[Docker Hub](https://hub.docker.com)" %}
@@ -16,6 +18,7 @@
   {% assign invite_button = "**Invite members**" %}
   {% assign remove_button = "**Remove member**" %}
   {% assign export_button = "**Export members**" %}
+  {% assign update_role = "Select the role you want to assign, then select **Save**." %}
 {% endif %}
 
 ## Invite members
@@ -110,7 +113,7 @@ To update a member role:
 2. {{ member_navigation }}
 3. Find the username of the member whose role you want to edit. In the table, select the **Actions** icon.
 3. Select **Edit role**.
-4. Select the role you want to assign, then select **Save**.
+4. {{ update_role }}
 
 ## Export members
 
