@@ -135,7 +135,6 @@ Specifies when to print ANSI control characters.
 
 When enabled, Compose writes its internal status and progress messages to `stdout` instead of `stderr`. 
 The default value is false to clearly separate the output streams between Compose messages and your container's logs.
-and containers output (on `stdout` by default)
 
 * Supported values:
   * `true` or `1`, to enable,
