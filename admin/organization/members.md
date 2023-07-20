@@ -6,7 +6,7 @@ title: Manage members
 
 {% include admin-early-access.md %}
 
-{% include admin-users.md product="admin" layer="company" %}
+{% include admin-users.md product="admin" %}
 
 ## Manage members on a team
 
