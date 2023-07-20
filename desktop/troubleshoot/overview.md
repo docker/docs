@@ -122,46 +122,44 @@ After the diagnostics have finished, the terminal displays your diagnostics ID a
     ```
 
 After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
-
 </div>
 </div>
 
+To view the contents of the diagnostic file, run:
 
-    To view the contents of the diagnostic file, run:
-
-    <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" data-target="#windows2">Windows</a></li>
-    <li><a data-toggle="tab" data-target="#mac2">Mac</a></li>
-    <li><a data-toggle="tab" data-target="#linux2">Linux</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="windows2" class="tab-pane fade in active" markdown="1">
-    <br>
-    1. Unzip the file. In PowerShell, copy and paste the path to the diagnostics file into the following command and then run it. It should be similar to the following example:
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#windows2">Windows</a></li>
+<li><a data-toggle="tab" data-target="#mac2">Mac</a></li>
+<li><a data-toggle="tab" data-target="#linux2">Linux</a></li>
+</ul>
+<div class="tab-content">
+<div id="windows2" class="tab-pane fade in active" markdown="1">
+<br>
+1. Unzip the file. In PowerShell, copy and paste the path to the diagnostics file into the following command and then run it. It should be similar to the following example:
         ```powershell
         $ Expand-Archive -LiteralPath "C:\Users\testUser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602.zip" -DestinationPath "C:\Users\testuser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602"
         ```  
-    2. Open the file in your preferred text editor. Run:
+2. Open the file in your preferred text editor. Run:
         ```powershell
         $ code <path-to-file>
         ```
 
-    </div>
-    <div id="mac2" class="tab-pane fade" markdown="1">
+</div>
+<div id="mac2" class="tab-pane fade" markdown="1">
 
     ```console
     $ open /tmp/<your-diagnostics-ID>.zip
     ``` 
 
-    </div>
-    <div id="linux2" class="tab-pane fade" markdown="1">
+</div>
+<div id="linux2" class="tab-pane fade" markdown="1">
 
     ```console
     $ unzip –l /tmp/<your-diagnostics-ID>.zip
     ``` 
+</div>
+</div>
 
-    </div>
-    </div>
 3. Use your diagnostics ID to get help:
     - If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Make sure you provide the full diagnostics ID, and not just the user ID. Select **Submit** to request Docker Desktop support.
     - If you don't have a paid Docker subscription, create an issue on GitHub:
@@ -222,16 +220,15 @@ Docker Desktop contains a self-diagnose tool which can help you identify some co
     ```console
     $ /opt/docker-desktop/bin/com.docker.diagnose check
     ```
-
 </div>
 </div>
 
-    The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
+The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
 
-    You can then create an issue on GitHub:
-        - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
-        - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
-        - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
+You can then create an issue on GitHub:
+    - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
+    - [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
+    - [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
 
 ## Check the logs
 
