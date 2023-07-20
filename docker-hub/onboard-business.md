@@ -33,7 +33,7 @@ To begin, you should identify which users you will need to add to your Docker Bu
 
 Now that you have a Docker Business organization, it's time to start adding owners to help you set up and manage your organization. Owners can add or remove members, and configure Single Sign-on as well as other security settings.
 
-To add an owner, invite a user to the **owners** team. For more details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}.
+To add an owner, invite a user and assign them the owner role. For more details, see [Invite members](../docker-hub/members.md/#invite-members){: target="_blank" rel="noopener" class="_"}.
 
 ## Step 3: Invite members
 

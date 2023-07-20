@@ -236,7 +236,7 @@ When you create an automated build repository in your own user account, you
 can start, cancel, and retry builds, and edit and delete your own repositories.
 
 These same actions are also available for team repositories from Docker Hub if
-you are a member of an organization's `Owners` team. If you are a member of a
+you are an owner. If you are a member of a
 team with `write` permissions you can start, cancel, and retry builds in your
 team's repositories, but you cannot edit the team repository settings or delete
 the team repositories. If your user account has `read` permission, or if you're
@@ -254,7 +254,7 @@ including any testing settings.
 
 > **Note**
 >
-> Only members of the `Owners` team can set up Automated builds for teams.
+> Only owners can set up Automated builds for teams.
 
 When you set up Automated builds for teams, you grant Docker Hub access to
 your source code repositories using OAuth tied to a specific user account. This
@@ -284,7 +284,7 @@ variable to automated builds associated with the account. For more information, 
 
 4. Add the service user to the "build" team on the source provider.
 
-5. Sign in to Docker Hub as a member of the `Owners` team, switch to the organization, and follow the instructions to [link to source code repository](link-source.md) using the service account.
+5. Sign in to Docker Hub as an owner, switch to the organization, and follow the instructions to [link to source code repository](link-source.md) using the service account.
 
     > **Note**
     >

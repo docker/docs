@@ -26,11 +26,11 @@ Before you convert a user account to an organization, ensure that you meet the f
     2. Find your username in the **Members** tab.
     3. Select the **More options** menu and then select **Leave organization**.
 
-    If the user account is the sole owner of any organization or company, add someone to the "owners" team and then remove yourself from the organization or company.
+    If the user account is the sole owner of any organization or company, assign another user the owner role and then remove yourself from the organization or company.
 
 -  You must have a separate Docker ID ready to assign it as the owner of the organization during conversion.
 
-    If you wish to convert your user account into an organization account and you do not have any other user accounts, you need to create a new user account to assign it as the owner of the new organization. This user account then becomes the first member of the "owners" team and has full administrative access to configure and manage the organization. You can add more users into the "owners" team after the conversion.
+    If you wish to convert your user account into an organization account and you do not have any other user accounts, you need to create a new user account to assign it as the owner of the new organization. With the owner role assigned, this user account has full administrative access to configure and manage the organization. You can assign more users the owner role after the conversion.
 
 ## Convert an account into an organization
 

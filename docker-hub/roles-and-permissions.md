@@ -33,8 +33,8 @@ The following lists the content and registry permissions for each role:
 | Pull, push, edit, and delete a repository | ❌ | ✅ | ✅ | ✅ |
 | Manage tags | ❌ | ✅ | ✅ | ✅ |
 | View repository activity | ❌ | ❌ | ✅ | ✅ |
-| Set up automated builds | ❌ | ✅ | ✅ | ✅ |
-| Edit build settings | ❌ | ✅ | ✅ | ✅ |
+| Set up Automated builds | ❌ | ❌ | ✅ | ✅ |
+| Edit build settings | ❌ | ❌ | ✅ | ✅ |
 | Set up vulnerability analysis with Docker Scout | ❌ | ✅ | ✅ | ✅ |
 | View teams | ❌ | ✅ | ✅ | ✅ |
 | Assign team permissions to repositories | ❌ | ✅ | ✅ | ✅ |

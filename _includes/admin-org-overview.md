@@ -1,6 +1,6 @@
 An organization in Docker is a collection of teams and repositories
 that can be managed together. A team is a group of Docker members that belong to an organization.
-An organization can have multiple teams.
+An organization can have multiple teams. Members don't have to be added to a team to be part of an organization.
 
 Docker users become members of an organization once they're associated with that organization by an organization owner. An organization owner is a user with administrative access to the organization.
 
