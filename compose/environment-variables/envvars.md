@@ -126,14 +126,14 @@ Specifies the maximum level of parallelism for concurrent engine calls.
 Specifies when to print ANSI control characters. 
 
 * Supported values:
-  * `auto`, Compose detect if TTY mode can be use otherwise use plain text mode,
+  * `auto`, Compose detects if TTY mode can be used. Otherwise, use plain text mode.
   * `never`, use plain text mode.
   * `always` or `0`, use TTY mode.
 * Defaults to: `auto`.
 
 ### COMPOSE\_STATUS\_STDOUT
 
-When enabled, Compose will switch the output stream, with status and progress messages, to `stdout` instead of `stderr`.
+When enabled, Compose switches the output stream, with status and progress messages sent to `stdout` instead of `stderr`.
 The default value is false to use Posix `stderr` in order to easily separate Compose output stream 
 and containers output (on `stdout` by default)
 
