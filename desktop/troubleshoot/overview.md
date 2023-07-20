@@ -81,12 +81,28 @@ Docker Desktop cannot start.
     $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
     ```
 
+    2. Create and upload the diagnostics ID. Run:
+
+    ```console
+    $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
+    ```
+
+    After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
+
     </div>
     <div id="mac1" class="tab-pane fade" markdown="1">
 
     ```console
     $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
     ```
+
+    2. Create and upload the diagnostics ID. Run:
+
+    ```console
+    $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather -upload
+    ```
+
+    After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
 
     </div>
     <div id="linux1" class="tab-pane fade" markdown="1">
@@ -95,15 +111,17 @@ Docker Desktop cannot start.
     $ /opt/docker-desktop/bin/com.docker.diagnose
     ```
 
-    </div>
-    </div>
-2. Create and upload the diagnostics ID. Run:
+    2. Create and upload the diagnostics ID. Run:
 
     ```console
-    $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
+    $ /opt/docker-desktop/bin/com.docker.diagnose gather -upload
     ```
 
     After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
+
+    </div>
+    </div>
+
 
     To view the contents of the diagnostic file, run:
 
@@ -165,12 +183,24 @@ Docker Desktop contains a self-diagnose tool which can help you identify some co
     $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
     ```
 
+    2. Run the self-diagnose tool:
+
+    ```console
+    $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
+    ```
+
     </div>
     <div id="mac3" class="tab-pane fade" markdown="1">
 
     ```console
     $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
      ```
+
+    2. Run the self-diagnose tool:
+
+    ```console
+    $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose check
+    ```
 
     </div>
     <div id="linux3" class="tab-pane fade" markdown="1">
@@ -179,13 +209,14 @@ Docker Desktop contains a self-diagnose tool which can help you identify some co
     $ /opt/docker-desktop/bin/com.docker.diagnose
     ```
 
-    </div>
-    </div>
-2. Run the self-diagnose tool:
+    2. Run the self-diagnose tool:
 
     ```console
-    $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
+    $ /opt/docker-desktop/bin/com.docker.diagnose check
     ```
+
+    </div>
+    </div>
 
     The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
 
