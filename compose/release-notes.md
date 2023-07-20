@@ -14,9 +14,10 @@ For more detailed information, see the [release notes in the Compose repo](https
 {% include release-date.html date="2023-07-19" %}
 
 ### Bug fixes and enhancements
-- Add support of `depends_on.required` attribute
-- Fixed an issue about build trying to push unnamed service images
+- Added support for the `depends_on.required` attribute.
+- Fixed an issue where build tries to push unnamed service images.
 - Fixed a bug with target secret path on Windows
+- Fixed a bug resolving build context path for services using `extends.file`
 
 ## 2.20.1
 {% include release-date.html date="2023-07-18" %}
