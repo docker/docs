@@ -125,7 +125,7 @@ After the diagnostics have finished, the terminal displays your diagnostics ID a
 </div>
 </div>
 
-To view the contents of the diagnostic file, run:
+To view the contents of the diagnostic file:
 
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#windows2">Windows</a></li>
@@ -136,16 +136,20 @@ To view the contents of the diagnostic file, run:
 <div id="windows2" class="tab-pane fade in active" markdown="1">
 <br>
 1. Unzip the file. In PowerShell, copy and paste the path to the diagnostics file into the following command and then run it. It should be similar to the following example:
-        ```powershell
-        $ Expand-Archive -LiteralPath "C:\Users\testUser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602.zip" -DestinationPath "C:\Users\testuser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602"
-        ```  
+
+    ```powershell
+    $ Expand-Archive -LiteralPath "C:\Users\testUser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602.zip" -DestinationPath "C:\Users\testuser\AppData\Local\Temp\5DE9978A-3848-429E-8776-950FC869186F\20230607101602"
+     ```  
 2. Open the file in your preferred text editor. Run:
-        ```powershell
-        $ code <path-to-file>
-        ```
+
+    ```powershell
+    $ code <path-to-file>
+    ```
 
 </div>
 <div id="mac2" class="tab-pane fade" markdown="1">
+
+Run:
 
     ```console
     $ open /tmp/<your-diagnostics-ID>.zip
@@ -154,13 +158,15 @@ To view the contents of the diagnostic file, run:
 </div>
 <div id="linux2" class="tab-pane fade" markdown="1">
 
+Run:
+
     ```console
     $ unzip –l /tmp/<your-diagnostics-ID>.zip
     ``` 
 </div>
 </div>
 
-3. Use your diagnostics ID to get help:
+Use your diagnostics ID to get help:
     - If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Make sure you provide the full diagnostics ID, and not just the user ID. Select **Submit** to request Docker Desktop support.
     - If you don't have a paid Docker subscription, create an issue on GitHub:
         - [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
