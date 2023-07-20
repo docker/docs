@@ -67,60 +67,64 @@ This opens the in-app **Support** page and starts collecting the diagnostics.
 In some cases, it's useful to run the diagnostics yourself, for instance, if
 Docker Desktop cannot start.
 
-1. Locate the `com.docker.diagnose` tool:
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
+<li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
+<li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
+</ul>
+<div class="tab-content">
+<div id="windows1" class="tab-pane fade in active" markdown="1">
 
-    <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" data-target="#windows1">Windows</a></li>
-    <li><a data-toggle="tab" data-target="#mac1">Mac</a></li>
-    <li><a data-toggle="tab" data-target="#linux1">Linux</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="windows1" class="tab-pane fade in active" markdown="1">
+1. Locate the `com.docker.diagnose` tool:
 
     ```console
     $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
     ```
 
-    2. Create and upload the diagnostics ID. Run:
+2. Create and upload the diagnostics ID. Run:
 
     ```console
     $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
     ```
 
-    After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
+After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
 
-    </div>
-    <div id="mac1" class="tab-pane fade" markdown="1">
+</div>
+<div id="mac1" class="tab-pane fade" markdown="1">
+
+1. Locate the `com.docker.diagnose` tool:
 
     ```console
     $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
     ```
 
-    2. Create and upload the diagnostics ID. Run:
+2. Create and upload the diagnostics ID. Run:
 
     ```console
     $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose gather -upload
     ```
 
-    After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
+After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
 
-    </div>
-    <div id="linux1" class="tab-pane fade" markdown="1">
+</div>
+<div id="linux1" class="tab-pane fade" markdown="1">
+
+1. Locate the `com.docker.diagnose` tool:
 
     ```console
     $ /opt/docker-desktop/bin/com.docker.diagnose
     ```
 
-    2. Create and upload the diagnostics ID. Run:
+2. Create and upload the diagnostics ID. Run:
 
     ```console
     $ /opt/docker-desktop/bin/com.docker.diagnose gather -upload
     ```
 
-    After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
+After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
 
-    </div>
-    </div>
+</div>
+</div>
 
 
     To view the contents of the diagnostic file, run:
@@ -169,54 +173,58 @@ Docker Desktop cannot start.
 
 Docker Desktop contains a self-diagnose tool which can help you identify some common problems. 
 
-1. Locate the `com.docker.diagnose` tool. It is located at:
-
-    <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
-    <li><a data-toggle="tab" data-target="#mac3">Mac</a></li>
-    <li><a data-toggle="tab" data-target="#linux3">Linux</a></li>
-    </ul>
-    <div class="tab-content">
-    <div id="windows3" class="tab-pane fade in active" markdown="1">
-
+ <ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#windows3">Windows</a></li>
+<li><a data-toggle="tab" data-target="#mac3">Mac</a></li>
+<li><a data-toggle="tab" data-target="#linux3">Linux</a></li>
+</ul>
+<div class="tab-content">
+<div id="windows3" class="tab-pane fade in active" markdown="1">
+     
+1. Locate the `com.docker.diagnose` tool. 
+     
      ```console
     $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
     ```
 
-    2. Run the self-diagnose tool:
+2. Run the self-diagnose tool:
 
     ```console
     $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
     ```
 
-    </div>
-    <div id="mac3" class="tab-pane fade" markdown="1">
+</div>
+<div id="mac3" class="tab-pane fade" markdown="1">
+
+1. Locate the `com.docker.diagnose` tool. 
 
     ```console
     $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose
      ```
 
-    2. Run the self-diagnose tool:
+2. Run the self-diagnose tool:
 
     ```console
     $ /Applications/Docker.app/Contents/MacOS/com.docker.diagnose check
     ```
 
-    </div>
-    <div id="linux3" class="tab-pane fade" markdown="1">
+</div>
+<div id="linux3" class="tab-pane fade" markdown="1">
+
+1. Locate the `com.docker.diagnose` tool. 
 
     ```console
     $ /opt/docker-desktop/bin/com.docker.diagnose
     ```
 
-    2. Run the self-diagnose tool:
+2. Run the self-diagnose tool:
 
     ```console
     $ /opt/docker-desktop/bin/com.docker.diagnose check
     ```
 
-    </div>
-    </div>
+</div>
+</div>
 
     The tool runs a suite of checks and displays **PASS** or **FAIL** next to each check. If there are any failures, it highlights the most relevant at the end of the report.
 
