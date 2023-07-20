@@ -19,6 +19,8 @@ This page contains information on how you can change the following pre-defined e
 - `COMPOSE_IGNORE_ORPHANS`
 - `COMPOSE_REMOVE_ORPHANS`
 - `COMPOSE_PATH_SEPARATOR`
+- `COMPOSE_ANSI`
+- `COMPOSE_STATUS_STDOUT`
 
 Compose also inherits common Docker CLI environment variables, such as `DOCKER_HOST` and `DOCKER_CONTEXT`. See [Docker CLI environment variable reference](/engine/reference/commandline/cli/#environment-variables) for details.
 
@@ -118,6 +120,26 @@ When enabled, Compose doesn't try to detect orphaned containers for the project.
 ### COMPOSE\_PARALLEL\_LIMIT
 
 Specifies the maximum level of parallelism for concurrent engine calls.
+
+### COMPOSE\_ANSI
+
+Specifies when to print ANSI control characters. 
+
+* Supported values:
+  * `auto`, Compose detects if TTY mode can be used. Otherwise, use plain text mode.
+  * `never`, use plain text mode.
+  * `always` or `0`, use TTY mode.
+* Defaults to: `auto`.
+
+### COMPOSE\_STATUS\_STDOUT
+
+When enabled, Compose writes its internal status and progress messages to `stdout` instead of `stderr`. 
+The default value is false to clearly separate the output streams between Compose messages and your container's logs.
+
+* Supported values:
+  * `true` or `1`, to enable,
+  * `false` or `0`, to disable.
+* Defaults to: `0`.
 
 ## Unsupported in Compose V2
 

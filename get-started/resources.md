@@ -60,3 +60,13 @@ A number of Docker Captains have also created video courses on Docker and Kubern
 * [French] [Luc Juggery](https://www.udemy.com/user/lucjuggery/){:target="_blank" rel="noopener" class="_"}: Introduction to Kubernetes, The Docker Platform
 
 \* Many of the courses are fee-based
+
+## Community-translated docs
+
+> **Note**
+>
+> The following section contains a subset of Docker docs that are translated by community
+> members. This is not an officially translated version of Docker docs and it may not be up to date.
+> You must use the community-translated docs at your own discretion.
+
+- [Subset of Docker docs in Japanese](https://docs.docker.jp/index.html){:target="_blank" rel="noopener" class="_"} translated by Docker Captain [Masahito Zembutsu](https://github.com/zembutsu){:target="_blank" rel="noopener" class="_"}.
