@@ -60,17 +60,35 @@ Let’s start our application and make sure it’s running properly. Open your t
 $ node server.js
 ```
 
-To test that the application is working properly, we’ll first POST some JSON to the API and then make a GET request to see that the data has been saved. Open a new terminal and run the following curl commands:
+To test that the application is working properly, make a POST request with some JSON data to the API and then make a GET request to see that the data has been saved.
+
+Open a new terminal and run the following curl command:
 
 ```console
 $ curl --request POST \
   --url http://localhost:8000/test \
   --header 'content-type: application/json' \
   --data '{"msg": "testing" }'
-{"code":"success","payload":[{"msg":"testing","id":"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1","createDate":"2020-08-28T21:53:07.157Z"}]}
+```
 
+If the POST request is successful, then the output should look similar to:
+
+```console
+{"code":"success","payload":[{"msg":"testing","id":"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1",
+"createDate":"2020-08-28T21:53:07.157Z"}]}
+```
+
+Now make a GET request:
+
+```console
 $ curl http://localhost:8000/test
-{"code":"success","meta":{"total":1,"count":1},"payload":[{"msg":"testing","id":"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1","createDate":"2020-08-28T21:53:07.157Z"}]}
+```
+
+And the output should look similar to:
+
+```console
+{"code":"success","meta":{"total":1,"count":1},"payload":[{"msg":"testing","id":"31f23305-f5d0-4b4f-a16f-6f4c8ec93cf1",
+"createDate":"2020-08-28T21:53:07.157Z"}]}
 ```
 
 Switch back to the terminal where our server is running. You should now see the following requests in the server logs.
@@ -202,7 +220,8 @@ Let’s build our first Docker image.
 
 ```console
 $ docker build --tag node-docker .
-
+```
+```console
 [+] Building 93.8s (11/11) FINISHED
  => [internal] load build definition from dockerfile                                          0.1s
  => => transferring dockerfile: 617B                                                          0.0s
@@ -222,6 +241,8 @@ To list images, simply run the `images` command.
 
 ```console
 $ docker images
+```
+```console
 REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
 node-docker         latest              3809733582bc        About a minute ago   945MB
 ```
@@ -246,6 +267,8 @@ Now run the `docker images` command to see a list of our local images.
 
 ```console
 $ docker images
+```
+```console
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        24 minutes ago      945MB
 node-docker         v1.0.0              3809733582bc        24 minutes ago      945MB
@@ -257,6 +280,8 @@ Let’s remove the tag that we just created. To do this, we’ll use the rmi com
 
 ```console
 $ docker rmi node-docker:v1.0.0
+```
+```console
 Untagged: node-docker:v1.0.0
 ```
 
@@ -264,6 +289,8 @@ Notice that the response from Docker tells us that the image has not been remove
 
 ```console
 $ docker images
+```
+```console
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 node-docker         latest              3809733582bc        32 minutes ago      945MB
 ```
