@@ -59,7 +59,7 @@ $ docker extension install <name-of-your-extension>
 ```
 
 To preview the extension in Docker Desktop, once the installation is complete and you should
-see a _Quickstart_ item underneath the _Extensions_ menu. Selecting this item opens the extension's frontend.
+see a **Quickstart** item underneath the **Extensions** menu. Selecting this item opens the extension's frontend.
 
 During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire
 extension. See [Preview whilst developing the UI](dev/test-debug.md#hot-reloading-whilst-developing-the-ui) for more
