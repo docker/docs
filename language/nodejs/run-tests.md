@@ -97,7 +97,7 @@ When you run the tests, you should get an error like the following:
 sh: mocha: not found
 ```
 
-The current Dockefile does not install dev dependencies in the image, so mocha cannot be found. To fix this, you can update the Dockerfile to install the dev dependencies.
+The current Dockerfile does not install dev dependencies in the image, so mocha cannot be found. To fix this, you can update the Dockerfile to install the dev dependencies.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
