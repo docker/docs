@@ -164,3 +164,13 @@ When you're discussing a file type, use the formal name of the type. Don't use t
     | --- | --- |
     | a PNG file | a .png file |
     | a Bash file | an .sh file |
+
+## Referring to units
+
+When you're referring to units of measurement, use the abbreviated form in all caps, with a space between the value and the unit. For example:
+
+    | Correct | Incorrect |
+    | --- | --- |
+    | 10 GB | 10GB |
+    | 10 GB | 10 gb |
+    | 10 GB | 10 gigabytes |
