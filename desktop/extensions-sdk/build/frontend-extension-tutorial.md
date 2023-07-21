@@ -20,13 +20,10 @@ The quickest way to create a new extension is to run `docker extension init my-e
 
 > **Tip**
 >
-> The `docker extension init` generates a React based extension. But you can still use it as a starting point for
-> your own extension and use any other frontend framework, like Vue, Angular, Svelte, etc. or even stay with
+> The `docker extension init` generates a React based extension. But you can use it as a starting point for
+> your own extension and use any other frontend framework, like Vue, Angular, Svelte, etc. or stay with
 > vanilla Javascript.
 {: .tip }
-
-Although you can start from an empty directory or from the `react-extension` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"},
-it's highly recommended that you start from the `docker extension init` command and change it to suit your needs.
 
 ```bash
 .
@@ -45,21 +42,31 @@ it's highly recommended that you start from the `docker extension init` command 
 ```
 
 1. Contains everything required to build the extension and run it in Docker Desktop.
-2. High-level folder containing your front-end app source code.
-3. Assets that aren’t compiled or dynamically generated are stored here. These can be static assets like logos or the robots.txt file.
-4. The src, or source folder contains all the React components, external CSS files, and dynamic assets that are brought into the component files.
-5. The icon that is displayed in the left-menu of the Docker Desktop Dashboard.
+2. High-level folder containing front-end app source code.
+3. Store any assets that aren’t compiled or dynamically generated here. These can be static assets like logos or the `robots.txt` file.
+4. The `src`, or source folder contains all the React components, external CSS files, and dynamic assets that are brought into the component files.
+5. The icon displayed in the left-menu of the Docker Desktop Dashboard.
 6. A file that provides information about the extension such as the name, description, and version.
+
+> **Tip**
+>
+> Although you can start from an empty directory or from the `react-extension` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"},
+> it's recommended that you start from the `docker extension init` command and change it to
+> suit your needs.
 
 ## Adapting the Dockerfile
 
 > **Note**
 >
-> When using the `docker extension init`, it creates a `Dockerfile` that already contains what is needed for a React
-> extension.
+> The `docker extension init` command creates a `Dockerfile` with everything needed for a 
+> React extension.
 
-Once the extension is created, you need to configure the `Dockerfile` to build the extension and configure the labels
-that are used to populate the extension's card in the Marketplace. Here is an example of a `Dockerfile` for a React
+Once you have created the extension, you need to configure the `Dockerfile` to build the 
+extension and configure the labels used to populate the extension's card in the Marketplace. 
+
+![An example of a Marketplace extension card](images/marketplace-card-example.png)
+
+The following is an example of a `Dockerfile` for a React
 extension:
 
 <ul class="nav nav-tabs">
@@ -101,12 +108,13 @@ LABEL org.opencontainers.image.title="My extension" \
 COPY metadata.json .
 COPY docker.svg .
 COPY --from=client-builder /ui/build ui
-
 ```
+
 > Note
 >
-> In the example Dockerfile, you can see that the image label `com.docker.desktop.extension.icon` is set to an icon URL. The Extensions Marketplace displays this icon without installing the extension. The Dockerfile also includes `COPY docker.svg .` to copy an icon file inside the image. This second icon file is used to display the extension UI in the Dashboard, once the extension is installed.
-
+> In the example Dockerfile, the image label `com.docker.desktop.extension.icon` is set to an icon URL. The Extensions Marketplace displays this icon without installing the extension.
+> 
+> The Dockerfile includes the `COPY docker.svg .` command to copy an icon file inside the image. The Dashboard uses this second icon file to display the extension UI in the Dashboard, once the extension is installed.
 
   </div>
   <div id="vue-dockerfile" class="tab-pane fade" markdown="1">
@@ -144,12 +152,10 @@ COPY --from=client-builder /ui/build ui
   </div>
 </div>
 
-
-
 ## Configure the metadata file
 
-In order to add a tab in Docker Desktop for your extension, you have to configure it in the `metadata.json`
-file the root of your extension directory.
+To add a tab in Docker Desktop for an extension, configure it in the `metadata.json`
+file the root of the extension directory.
 
 ```json
 {
@@ -164,26 +170,26 @@ file the root of your extension directory.
 }
 ```
 
-The `title` property is the name of the extension that is displayed in the left-menu of the Docker Desktop Dashboard.
-The `root` property is the path to the frontend application in the extension's container filesystem used by the
+- The `title` property is the name of the extension displayed in the left-menu of the Docker Desktop Dashboard.
+- The `root` property is the path to the frontend application in the extension's container filesystem used by the
 system to deploy it on the host.
-The `src` property is the path to the HTML entry point of the frontend application within the `root` folder.
+- The `src` property is the path to the HTML entry point of the frontend application within the `root` folder.
 
-For more information on the `ui` section of hte `metadata.json`, see [Metadata](../architecture/metadata.md#ui-section).
+For more information on the `ui` section of the `metadata.json` file, see [Metadata](../architecture/metadata.md#ui-section).
 
 ## Build the extension and install it
 
-Now that you have configured the extension, you need to build the extension image that Docker Desktop will use to
+With the extension configured, build the extension image that Docker Desktop will use to
 install it.
 
 ```bash
-docker build --tag=awesome-inc/my-extension:latest .
+docker build --tag= awesome-inc/my-extension:latest .
 ```
 
-This built an image tagged `awesome-inc/my-extension:latest`, you can run `docker inspect
+This built an image tagged `awesome-inc/my-extension:latest`. Run `docker inspect
 awesome-inc/my-extension:latest` to see more details about it.
 
-Finally, you can install the extension and see it appearing in the Docker Desktop Dashboard.
+Finally, install the extension and it appears in the Docker Desktop Dashboard.
 
 ```bash
 docker extension install awesome-inc/my-extension:latest
@@ -191,8 +197,8 @@ docker extension install awesome-inc/my-extension:latest
 
 ## Use the Extension APIs client
 
-To use the Extension APIs and perform actions with Docker Desktop, the extension must first import the
-`@docker/extension-api-client` library. To install it, run the command below:
+To use the Extension APIs and perform actions and commands within Docker Desktop, the extension must first import the
+`@docker/extension-api-client` library. To install it, run the following command:
 
 ```bash
 npm install @docker/extension-api-client
@@ -206,8 +212,8 @@ import { createDockerDesktopClient } from '@docker/extension-api-client';
 const ddClient = createDockerDesktopClient();
 ```
 
-When using Typescript, you can also install `@docker/extension-api-client-types` as a dev dependency. This will
-provide you with type definitions for the extension APIs and auto-completion in your IDE.
+When using Typescript, you can also install `@docker/extension-api-client-types` as a dev dependency. This
+provides type definitions for the extension APIs and auto-completion in an IDE.
 
 ```bash
 npm install @docker/extension-api-client-types --save-dev
@@ -235,7 +241,6 @@ Replace the `ui/src/App.tsx` file with the following code:
 // ui/src/App.tsx
 import React, { useEffect } from 'react';
 import {
-  Paper,
   Stack,
   Table,
   TableBody,
@@ -345,27 +350,31 @@ export function App() {
 </div>
 
 
-## Policies enforced for the front-end code
+## Policies enforced for front-end code
 
-Extension UI code is rendered in a separate electron session and doesn't have a node.js environment initialized, nor direct access to the electron APIs. 
+A separate electron session renders Extension UI code and doesn't have a node.js environment initialized,
+nor direct access to the electron APIs.
 
 This is to limit the possible unexpected side effects to the overall Docker Dashboard.
 
 The extension UI code can't perform privileged tasks, such as making changes to the system, or spawning sub-processes, except by using the SDK APIs provided with the extension framework.
-The Extension UI code can also perform interactions with Docker Desktop, such as navigating to various places in the Dashboard, only through the extension SDK APIs.
+The Extension UI code can perform interactions with Docker Desktop, such as navigating to various places in the Dashboard, but only through the extension SDK APIs.
 
-Extensions UI parts are isolated from each other and extension UI code is running in its own session for each extension. Extensions can't access other extensions’ session data.
+Extensions UI parts are isolated from each other and extension UI code runs in its own session for each extension. Extensions can't access other extensions’ session data.
 
-`localStorage` is one of the mechanisms of a browser’s web storage. It allows users to save data as key-value pairs in the browser for later use. `localStorage` doesn't clear data when the browser (the extension pane) closes. This makes it ideal for persisting data when navigating out of the extension to other parts of Docker Desktop.
+`localStorage` is one of the mechanisms of a browser’s web storage. The browser in this case is the extension pane. 
+`localStorage` lets users save data as key-value pairs in the browser for later use and doesn't clear 
+data when the browser closes. This makes it ideal for persisting data when navigating out of the extension to other 
+parts of Docker Desktop.
 
-If your extension uses `localStorage` to store data, other extensions running in Docker Desktop can't access the local storage of your extension. The extension’s local storage is persisted even after Docker Desktop is stopped or restarted. When an extension is upgraded, its local storage is persisted, whereas when it is uninstalled, its local storage is completely removed.
+If your extension uses `localStorage` to store data, other extensions running in Docker Desktop can't access the local storage of your extension. The extension’s local storage persists even after Docker Desktop stops or restarts. When a user updates an extension, its local storage persists, whereas when a user uninstalls it, its local storage is completely removed.
 
 ## Re-build the extension and update it
 
-Since you have modified the code of the extension, you must build again the extension.
+As you modified the code of the extension, you must rebuild it.
 
 ```console
-$ docker build --tag=awesome-inc/my-extension:latest .
+$ docker build --tag= awesome-inc/my-extension:latest .
 ```
 
 Once built, you need to update it.
@@ -375,7 +384,7 @@ $ docker extension update awesome-inc/my-extension:latest
 ```
 
 Now you can see the backend service running in the containers tab of the Docker Desktop Dashboard and watch the logs
-when you need to debug it.
+when you need to debug the extension.
 
 > **Tip**
 >
@@ -387,8 +396,6 @@ when you need to debug it.
 
 - Add a [backend](./backend-extension-tutorial.md) to your extension.
 - Learn how to [test and debug](../dev/test-debug.md) your extension.
-- Learn how to [setup CI for your extension](../dev/continuous-integration.md).
 - Learn more about extensions [architecture](../architecture/index.md).
 - For more information and guidelines on building the UI, see the [Design and UI styling section](../design/design-guidelines.md).
 - If you want to set up user authentication for the extension, see [Authentication](../guides/oauth2-flow.md).
-
