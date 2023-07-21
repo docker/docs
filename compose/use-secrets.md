@@ -79,7 +79,7 @@ In the advanced example above:
 
 > **Note**
 >
-> The [_FILE](https://hub.docker.com/_/mysql) convention is specific to mysql image.
+> The `_FILE` environment variables demonstrated here are a convention used by some images, including Docker Official Images like [mysql](https://hub.docker.com/_/mysql) and [postgres](https://hub.docker.com/_/postgres).
 
 ## Resources:
 
