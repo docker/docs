@@ -1,10 +1,10 @@
 ---
-description: Use roles in Docker Hub to control who has access to content, registry, and organization management permissions.
-keywords: members, teams, organizations, company, roles
+description: Use roles in your organization to control who has access to content, registry, and organization management permissions.
+keywords: members, teams, organization, company, roles, access
 title: Roles and permissions
 ---
 
-Member roles let organization and company owners control who in an organization has access to products and features on Docker Hub. This section is for organization or company owners who want to learn about the defined roles and their permission scopes.
+Organization and company owners can assign roles to individuals giving them different permissions in the organization. This section is for owners who want to learn about the defined roles and their permission scopes.
 
 ## Roles
 
@@ -19,7 +19,9 @@ The following roles are available to assign:
 
 ## Permissions
 
-The following lists the content and registry permissions for each role:
+The following sections outline the permissions for each role.
+
+### Content and registry permissions
 
 | Permission | Member | Editor | Organization owner | Company owner |
 |:----------------------- |:------ |:-------|:------------------ |:----------- |
@@ -43,7 +45,7 @@ The following lists the content and registry permissions for each role:
 
 Note that editors and owners can give teams repository access permissions. See [Create and manage a team permissions reference](/docker-hub/manage-a-team/#permissions-reference).
 
-The following lists the organization management permissions for each role:
+### Organization management permissions
 
 | Permission | Member | Editor | Organization owner | Company owner |
 |:----------------------- |:------ |:-------|:------------------ |:----------- |
