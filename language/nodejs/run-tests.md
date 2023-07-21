@@ -122,6 +122,18 @@ Run the command again, and this time rebuild the image to use the new Dockerfile
 $ docker compose -f docker-compose.dev.yml run --build notes npm run test
 ```
 
+When you run the tests this time, you should get the following output:
+
+```console
+> mocha ./**/*.js
+
+  Array
+    #indexOf()
+      ✔ should return -1 when the value is not present
+
+  1 passing (6ms)
+```
+
 This image with dev dependencies installed is not suitable for a production image. Rather than creating multiple Dockerfiles, we can create a multi-stage Dockerfile to create an image for testing and an image for production.
 
 ### Multi-stage Dockerfile for testing
