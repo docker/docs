@@ -45,7 +45,7 @@ For more information, see the [formatting](style/formatting.md#links) page, or s
 
 ##### Checked that any redirects you may have added, work
 
-For information on how to add redirects, see [Source file conventions](file-conventions.md#frontmatter).
+For information on how to add redirects, see [Source file conventions](file-conventions.md#front-matter).
 
 ##### Used bold on any UI elements you refer to in your content
 
