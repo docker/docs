@@ -4,7 +4,33 @@ title: Links
 toc_max: 3
 ---
 
-It is best practice if [a link to an internal page opens in the same window](/) and [a link to an external page opens in a new window](https://docker.com/){: target="_blank" rel="noopener" class="_" }
+## Internal links
+
+Internal links should open [in the same window](/)
+
+Use the path to the final permalink for the file, without the `.md` extension and a `/` at the end. For example, [to link to this file](/contribute/components/links), use `[](/contribute/components/links)`.
+
+You can also have [a markdown link to a sub-heading or custom target ID](#external-links)
+
+### HTML
+
+```html
+Internal links should open [in the same window](/)
+
+Use the path to the final permalink for the file, without the `.md` extension and a `/` at the end. For example, [to link to this file](/contribute/components/links), use `[](/contribute/components/links)`.
+
+You can also have [a markdown link to a sub-heading or custom target ID](#external-links)
+```
+
+## External links
+
+External links should open [in a new window](https://docker.com/){: target="_blank" rel="noopener" class="_" }, have a `/` at the end of the URL.
+
+### HTML
+
+```html
+External links should open [in a new window](https://docker.com/){: target="_blank" rel="noopener" class="_" }
+```
 
 ### Links to auto-generated content
 
@@ -27,10 +53,6 @@ An example of a link to an auto-generated reference page that we pull in during 
 ## HTML
 
 ```html
-It is best practice if [a link to an internal page opens in the same window](/) and [a link to an external page opens in a new window](https://docker.com/){: target="_blank" rel="noopener" class="_" }
-
-You can also have [a markdown link to a custom target ID](#formatting-examples)
-
 An example of a link to an auto-generated reference page that we pull in during docs builds:
 [/engine/reference/builder/#env](/engine/reference/builder/#env).
 ```
