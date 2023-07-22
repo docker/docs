@@ -59,40 +59,38 @@ redirect_from:
 
 Welcome! We're excited that you want to learn Docker.
 
-This guide contains step-by-step instructions on how to get started with Docker. Some of the things you'll learn and do in this guide are:
+This guide contains step-by-step instructions on how to get started with Docker. This guide shows you how to:
 
 - Build and run an image as a container.
 - Share images using Docker Hub.
 - Deploy Docker applications using multiple containers with a database.
 - Run applications using Docker Compose.
 
-Before you get to the hands on part of the guide, you should learn about containers and images.
-
 ## What is a container?
 
-Simply put, a container is a sandboxed process on your machine that is isolated from all other processes on the host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504),
-features that have been in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use. To summarize, a container:
+A container is a sandboxed process running on a host machine that is isolated from all other processes running on that host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504),
+features that have been in Linux for a long time. Docker makes these capabilities approachable and easy to use. To summarize, a container:
 
 - Is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.
-- Can be run on local machines, virtual machines or deployed to the cloud.
-- Is portable (can be run on any OS).
-- Is isolated from other containers and runs its own software, binaries, and configurations.
+- Can be run on local machines, virtual machines, or deployed to the cloud.
+- Is portable (and can be run on any OS).
+- Is isolated from other containers and runs its own software, binaries, configurations, etc.
 
 ## What is a container image?
 
-When running a container, it uses an isolated filesystem. This custom filesystem is provided by a container image. Since the image contains the container's filesystem, it must contain everything needed to run an application - all dependencies, configurations, scripts, binaries, etc. The image also contains other configuration for the container, such as environment variables, a default command to run, and other metadata.
+A running container uses an isolated filesystem. This isolated filesystem is provided by a container image, and the container image must contain everything needed to run an application - all dependencies, configurations, scripts, binaries, etc. The image also contains other configurations for the container, such as environment variables, a default command to run, and other metadata.
 
-You'll dive deeper into images later on in this guide, covering topics such as layering, best practices, and more.
+This guide covers topics such as image layers, best practices, and more.
 
 > **Note**
 >
-> If you're familiar with `chroot`, think of a container as an extended version of `chroot`. The filesystem is simply coming from the image. But, a container adds additional isolation not available when simply using chroot.
+> If you're familiar with `chroot`, then think of a container as an extended version of `chroot`. The filesystem comes from the image. However, a container adds additional isolation not available when using chroot.
 
 ## Next steps
 
-In this section, you learned about containers and images.
+In this section, we introduced containers and container images.
 
-In the next section, you'll containerize your first application.
+Next, we containerize a simple application.
 
 [Containerize an application](02_our_app.md){: .button  .primary-btn}
 
