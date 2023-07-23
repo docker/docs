@@ -90,7 +90,7 @@ afterwards.
 > ```
 > 
 > You can substitute the examples with your preferred approach, or the approach
-> that best fits your use-case.
+> that best fits your use case.
 
 
 #### Build an image using a Dockerfile from stdin, without sending build context
@@ -115,15 +115,15 @@ EOF
 ```
 
 Omitting the build context can be useful in situations where your Dockerfile
-doesn't require files to be copied into the image, and improves the build-speed,
+doesn't require files to be copied into the image, and improves the build speed,
 as no files are sent to the daemon.
 
-If you want to improve the build-speed by excluding some files from the build-
+If you want to improve the build speed by excluding some files from the build
 context, refer to [exclude with .dockerignore](#exclude-with-dockerignore).
 
 > **Note**
 >
-> If you attempt build an image using a Dockerfile from stdin, without sending build context, then the build will fail if you use `COPY` or `ADD`.
+> If you attempt to build an image using a Dockerfile from stdin, without sending a build context, then the build will fail if you use `COPY` or `ADD`.
 > The following example illustrates this:
 > 
 > ```bash
@@ -204,9 +204,9 @@ EOF
 
 > **Note**
 >
-> When building an image using a remote Git repository as build context, Docker
+> When building an image using a remote Git repository as the build context, Docker
 > performs a `git clone` of the repository on the local machine, and sends
-> those files as build context to the daemon. This feature requires you to
+> those files as the build context to the daemon. This feature requires you to
 > install Git on the host where you run the `docker build` command.
 
 ### Exclude with .dockerignore
@@ -267,7 +267,7 @@ CMD ["--help"]
 
 Avoid installing extra or unnecessary packages just because they might be nice to have. For example, you don’t need to include a text editor in a database image.
 
-When you avoid installing extra or unnecessary packages, you images will have reduced complexity, reduced dependencies, reduced file sizes, and reduced build times.
+When you avoid installing extra or unnecessary packages, your images will have reduced complexity, reduced dependencies, reduced file sizes, and reduced build times.
 
 ### Decouple applications
 
@@ -295,7 +295,7 @@ In older versions of Docker, it was important that you minimized the number of
 layers in your images to ensure they were performant. The following features
 were added to reduce this limitation:
 
-- Only the instructions `RUN`, `COPY`, `ADD` create layers. Other instructions
+- Only the instructions `RUN`, `COPY`, and `ADD` create layers. Other instructions
   create temporary intermediate images, and don't increase the size of the build.
 
 - Where possible, use [multi-stage builds](../../build/building/multi-stage.md),
@@ -305,8 +305,8 @@ were added to reduce this limitation:
 
 ### Sort multi-line arguments
 
-Whenever possible, ease later changes by sorting multi-line arguments
-alphanumerically. This helps to avoid duplication of packages and make the
+Whenever possible, sort multi-line arguments alphanumerically to make maintenance easier. 
+This helps to avoid duplication of packages and make the
 list much easier to update. This also makes PRs a lot easier to read and
 review. Adding a space before a backslash (`\`) helps as well.
 
@@ -326,7 +326,7 @@ RUN apt-get update && apt-get install -y \
 
 When building an image, Docker steps through the instructions in your
 Dockerfile, executing each in the order specified. As each instruction is
-examined, Docker looks for an existing image in its cache that it can reuse,
+examined, Docker looks for an existing image in its cache,
 rather than creating a new, duplicate image.
 
 If you don't want to use the cache at all, you can use the `--no-cache=true`
@@ -377,7 +377,7 @@ For more information about the `FROM` instruction, see [Dockerfile reference for
 
 You can add labels to your image to help organize images by project, record
 licensing information, to aid in automation, or for other reasons. For each
-label, add a line beginning with `LABEL` and with one or more key-value pairs.
+label, add a line beginning with `LABEL` with one or more key-value pairs.
 The following examples show the different acceptable formats. Explanatory comments are included inline.
 
 Strings with spaces must be quoted or the spaces must be escaped. Inner
@@ -429,7 +429,7 @@ For more information about `RUN`, see [Dockerfile reference for the RUN instruct
 
 #### apt-get
 
-Probably the most common use-case for `RUN` is an application of `apt-get`.
+Probably the most common use case for `RUN` is an application of `apt-get`.
 Because it installs packages, the `RUN apt-get` command has several counter-intuitive behaviors to
 look out for.
 
@@ -445,7 +445,7 @@ RUN apt-get update && apt-get install -y \
 ```
 
 Using `apt-get update` alone in a `RUN` statement causes caching issues and
-subsequent `apt-get install` instructions fail. For example, the issue will occur in the following Dockerfile:
+subsequent `apt-get install` instructions to fail. For example, this issue will occur in the following Dockerfile:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -558,7 +558,7 @@ RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
 
 The `CMD` instruction should be used to run the software contained in your
 image, along with any arguments. `CMD` should almost always be used in the form
-of `CMD ["executable", "param1", "param2"…]`. Thus, if the image is for a
+of `CMD ["executable", "param1", "param2"]`. Thus, if the image is for a
 service, such as Apache and Rails, you would run something like `CMD
 ["apache2","-DFOREGROUND"]`. Indeed, this form of the instruction is recommended
 for any service-based image.
@@ -596,7 +596,7 @@ To make new software easier to run, you can use `ENV` to update the
 example, `ENV PATH=/usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
 just works.
 
-The `ENV` instruction is also useful for providing required environment
+The `ENV` instruction is also useful for providing the required environment
 variables specific to services you wish to containerize, such as Postgres’s
 `PGDATA`.
 
@@ -667,9 +667,9 @@ not immediately obvious. Consequently, the best use for `ADD` is local tar file
 auto-extraction into the image, as in `ADD rootfs.tar.xz /`.
 
 If you have multiple Dockerfile steps that use different files from your
-context, `COPY` them individually, rather than all at once. This ensures that
-each step's build cache is only invalidated, forcing the step to be re-run if
-the specifically required files change.
+context, `COPY` them individually, rather than all at once. If
+a specifically required file changes, then this ensures that
+only that step's build cache is invalidated, forcing only that step to be run again.
 
 For example:
 
@@ -764,9 +764,9 @@ exec "$@"
 ```
 
 
- This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec) so that the final running application becomes the container's PID 1. This allows the application to receive any Unix signals sent to the container. For more information, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).
+This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec) so that the final running application becomes the container's PID 1. This allows the application to receive any Unix signals sent to the container. For more information, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).
 
-In the following example, helper script is copied into the container and run via `ENTRYPOINT` on
+In the following example, a helper script is copied into the container and run via `ENTRYPOINT` on
 container start:
 
 ```dockerfile
