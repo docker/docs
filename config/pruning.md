@@ -154,7 +154,7 @@ WARNING! This will remove:
         - all stopped containers
         - all networks not used by at least one container
         - all dangling images
-        - all build cache
+        - all dangling build cache
 Are you sure you want to continue? [y/N] y
 ```
 
@@ -168,7 +168,7 @@ WARNING! This will remove:
         - all networks not used by at least one container
         - all volumes not used by at least one container
         - all dangling images
-        - all build cache
+        - all dangling build cache
 Are you sure you want to continue? [y/N] y
 ```
 
