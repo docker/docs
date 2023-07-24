@@ -29,5 +29,5 @@
    >
    > When you add the TXT record, ensure that you create the record on the root of the zone. This is typically denoted with the `@` name for the record.
 
-6. Use the TXT Record Value that you copied in the prior step and add this into the corresponding field of the record you create.
+6. Use the **TXT Record Value** that you copied in the prior step and add this into the corresponding field of the record you create.
 7. Once you have waited 72 hours for the TXT record verification, you can then select **Verify** next to the domain you've added, and follow the on-screen instructions.
