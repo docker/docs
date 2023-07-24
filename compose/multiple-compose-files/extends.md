@@ -2,7 +2,7 @@
 description: How to use Docker Compose's extends keyword to share configuration between files and projects
 keywords: fig, composition, compose, docker, orchestration, documentation, docs
 title: Extend your Compose file
-redirect: 
+redirect_from:
  - /compose/extends/
 ---
 

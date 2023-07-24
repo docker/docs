@@ -1862,8 +1862,6 @@ manuals:
       title: Include
   - path: /compose/gpu-support/
     title: GPU support in Compose
-  - path: /compose/extends/
-    title: Extend services in Compose
   - path: /compose/networking/
     title: Networking in Compose
   - path: /compose/file-watch/
