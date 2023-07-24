@@ -138,8 +138,8 @@ We’ve added the MySQL module and updated the code to connect to the database s
 First, let’s add the `mysql-connector-python` module to our application using pip.
 
 ```console
-$ pip3 install mysql-connector-python
-$ pip3 freeze | grep mysql-connector-python >> requirements.txt
+$ python3 -m pip install mysql-connector-python
+$ python3 -m pip freeze | grep mysql-connector-python >> requirements.txt
 ```
 
 Now we can build our image.
