@@ -20,7 +20,7 @@ isolate your Macvlan networks using different physical network interfaces.
 
 Keep the following things in mind:
 
-- You may unintentionally damage your network due to IP address
+- You may unintentionally degrade your network due to IP address
   exhaustion or to "VLAN spread", a situation that occurs when you have an
   inappropriately large number of unique MAC addresses in your network.
 
@@ -43,12 +43,12 @@ The following table describes the driver-specific options that you can pass to
 
 ## Create a Macvlan network
 
-When you create a Macvlan network, it can either be in bridge mode or 802.1q
+When you create a Macvlan network, it can either be in bridge mode or 802.1Q
 trunk bridge mode.
 
 - In bridge mode, Macvlan traffic goes through a physical device on the host.
 
-- In 802.1q trunk bridge mode, traffic goes through an 802.1q sub-interface
+- In 802.1Q trunk bridge mode, traffic goes through an 802.1Q sub-interface
   which Docker creates on the fly. This allows you to control routing and
   filtering at a more granular level.
 
@@ -78,7 +78,7 @@ $ docker network create -d macvlan \
   -o parent=eth0 macnet32
 ```
 
-### 802.1q trunk bridge mode
+### 802.1Q trunk bridge mode
 
 If you specify a `parent` interface name with a dot included, such as `eth0.50`,
 Docker interprets that as a sub-interface of `eth0` and creates the sub-interface

@@ -1,7 +1,7 @@
 ---
 title: Networking using a macvlan network
-description: Tutorials for networking using a macvlan bridge network and 802.1q trunk bridge network
-keywords: networking, macvlan, 802.1q, standalone
+description: Tutorials for networking using a macvlan bridge network and 802.1Q trunk bridge network
+keywords: networking, macvlan, 802.1Q, standalone
 ---
 
 This series of tutorials deals with networking standalone containers which
@@ -13,7 +13,7 @@ to the appropriate container. For other networking topics, see the
 ## Goal
 
 The goal of these tutorials is to set up a bridged `macvlan` network and attach
-a container to it, then set up an 802.1q trunked `macvlan` network and attach a
+a container to it, then set up an 802.1Q trunked `macvlan` network and attach a
 container to it.
 
 ## Prerequisites
@@ -119,9 +119,9 @@ on your network, your container appears to be physically attached to the network
     $ docker network rm my-macvlan-net
     ```
 
-## 802.1q trunked bridge example
+## 802.1Q trunked bridge example
 
-In the 802.1q trunked bridge example, your traffic flows through a sub-interface
+In the 802.1Q trunked bridge example, your traffic flows through a sub-interface
 of `eth0` (called `eth0.10`) and Docker routes traffic to your container using
 its MAC address. To network devices on your network, your container appears to
 be physically attached to the network.
