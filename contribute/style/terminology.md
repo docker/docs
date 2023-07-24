@@ -6,19 +6,19 @@ keywords: terminology, style guide, contribute
 
 #### `compose.yaml`
 
-The current designation for the Compose file, as it is a file, format as code.
+The current designation for the Compose file, as it's a file, format as code.
 
 #### Compose plugin
 
-The compose app as an add-on (for Docker CLI) that can be enabled/disabled.
+The compose plugin as an add-on (for Docker CLI) that can be enabled/disabled.
 
 #### Digest
 
-The long number that’s automatically created every time you push an image. You can pull an image by Digest or by Tag.
+A long string that’s automatically created every time you push an image. You can pull an image by Digest or by Tag.
 
 #### Docker Compose
 
-Use  when we talk about the application, or all the functionality associated with the application.
+Use when we talk about the application, or all the functionality associated with the application.
 
 #### `docker compose`
 
@@ -28,9 +28,13 @@ Use code formatting for referring to the commands in text and command usage exam
 
 Use when referring to family of Compose commands as offered from the Docker CLI.
 
+#### K8s
+
+Don't use. Use `Kubernetes` instead.
+
 #### Multi-platform
 
-(broad meaning) Mac vs Linux vs Microsoft but also pair of platform architecture such as in Linux/amd64 and Linux/arm64; (narrow meaning) windows/linux/mac.
+(broad meaning) Mac vs Linux vs Microsoft but also pair of platform architecture such as in Linux/amd64 and Linux/arm64; (narrow meaning) Windows/Linux/macOS.
 
 #### Multi-architecture / multi-arch
 
@@ -48,7 +52,7 @@ Organization or User name. Every image needs a namespace to live under.
 
 A node is a physical or virtual machine running an instance of the Docker Engine in swarm mode.
 Manager nodes perform swarm management and orchestration duties. By default manager nodes are also worker nodes.
-Worker nodes execute tasks.
+Worker nodes invoke tasks.
 
 #### Registry
 

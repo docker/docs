@@ -8,7 +8,7 @@ toc_max: 3
 
 - A small image: ![a small image](/assets/images/footer_moby_icon.png)
 
-- A small image that is a link. The extra newline here makes it not show inline:
+- A small image that's a link. The extra newline here makes it not show inline:
 
   [![a small image](/assets/images/footer_moby_icon.png)](https://www.docker.com/)
 
@@ -25,7 +25,7 @@ toc_max: 3
 ```html
 - A small image: ![a small cute image](/assets/images/footer_moby_icon.png)
 
-- A small image that is a link. The extra newline here makes it not show inline:
+- A small image that's a link. The extra newline here makes it not show inline:
 
   [![a small cute image](/assets/images/footer_moby_icon.png)](https://www.docker.com/)
 
