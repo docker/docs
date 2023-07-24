@@ -155,12 +155,12 @@ $ docker exec -it cid2 /bin/sh
 $ docker exec -it cid3 /bin/sh
 ```
 
-## IPvlan 802.1q trunk L2 mode example usage
+## IPvlan 802.1Q trunk L2 mode example usage
 
 Architecturally, IPvlan L2 mode trunking is the same as Macvlan with regard to
 gateways and L2 path isolation. There are nuances that can be advantageous for
 CAM table pressure in ToR switches, one MAC per port and MAC exhaustion on a
-host's parent NIC to name a few. The 802.1q trunk scenario looks the same. Both
+host's parent NIC to name a few. The 802.1Q trunk scenario looks the same. Both
 modes adhere to tagging standards and have seamless integration with the physical
 network for underlay integration and hardware vendor plugin integrations.
 
@@ -272,10 +272,10 @@ $ docker run --net=ipvlan114 --ip=192.168.114.11 -it --rm alpine /bin/sh
 
 A key takeaway is, operators have the ability to map their physical network into
 their virtual network for integrating containers into their environment with no
-operational overhauls required. NetOps drops an 802.1q trunk into the
+operational overhauls required. NetOps drops an 802.1Q trunk into the
 Docker host. That virtual link would be the `-o parent=` passed in the network
 creation. For untagged (non-VLAN) links, it is as simple as `-o parent=eth0` or
-for 802.1q trunks with VLAN IDs each network gets mapped to the corresponding
+for 802.1Q trunks with VLAN IDs each network gets mapped to the corresponding
 VLAN/Subnet from the network.
 
 An example being, NetOps provides VLAN ID and the associated subnets for VLANs
@@ -510,7 +510,7 @@ $ docker run --net=ipvlan140 --ip=192.168.140.10 -it --rm alpine /bin/sh
 
 ## Dual stack IPv4 IPv6 IPvlan L3 mode
 
-**Example:** IPvlan L3 Mode Dual Stack IPv4/IPv6, Multi-Subnet w/ 802.1q VLAN Tag:118
+**Example:** IPvlan L3 Mode Dual Stack IPv4/IPv6, Multi-Subnet w/ 802.1Q VLAN Tag:118
 
 As in all of the examples, a tagged VLAN interface does not have to be used. The
 sub-interfaces can be swapped with `eth0`, `eth1`, `bond0` or any other valid
@@ -581,7 +581,7 @@ default dev eth0  metric 1024
 docker: Error response from daemon: Address already in use.
 ```
 
-## Manually create 802.1q links
+## Manually create 802.1Q links
 
 ### VLAN ID 40
 

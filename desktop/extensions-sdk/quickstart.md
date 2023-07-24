@@ -6,7 +6,7 @@ redirect_from:
   - desktop/extensions-sdk/tutorials/initialize/
 ---
 
-Follow the guide below to build a basic Docker Extension quickly. The Quickstart guide automatically generates boilerplate files for you.
+Follow this guide to get started with building a basic Docker Extension. The Quickstart guide automatically generates boilerplate files for you.
 
 ## Prerequisites
 
@@ -23,27 +23,27 @@ Follow the guide below to build a basic Docker Extension quickly. The Quickstart
 To set up your directory, use the `init` subcommand and provide a name for your extension.
 
 ```console
-$ docker extension init my-extension
+$ docker extension init <my-extension>
 ```
 
-You’ll be asked a series of questions about your extension, such as its name, a description, and the name of your Hub repository. This helps the CLI generate a set of boilerplate files for you to get started. The boilerplate files are stored in the directory `my-extension`.
+The command asks a series of questions about your extension, such as its name, a description, and the name of your Hub repository. This helps the CLI generate a set of boilerplate files for you to get started. It stores the boilerplate files in the `my-extension` directory.
 
 The automatically generated extension contains:
 
-- A backend service that listens on a socket. It has one endpoint `/hello` that returns a JSON payload.
-- A React frontend that can call the backend and output the backend’s response.
+- A Go backend service in the `backend` folder that listens on a socket. It has one endpoint `/hello` that returns a JSON payload.
+- A React frontend in the `frontend` folder that can call the backend and output the backend’s response.
 
 For more information and guidelines on building the UI, see the [Design and UI styling section](design/design-guidelines.md).
 
 ## Step two: Build the extension
 
-To build your extension, run:
+To build the extension, move into the newly created directory and run:
 
 ```console
 $ docker build -t <name-of-your-extension> .
 ```
 
-`docker build` builds your extension and also generates an image which is named after your chosen hub repository. For instance, if you typed `john/my-extension` as the answer to the following question:
+`docker build` builds the extension and generates an image named the same as the chosen hub repository. For example, if you typed `john/my-extension` as the answer to the following question:
 
 ```console
 ? Hub repository (eg. namespace/repository on hub): john/my-extension`
@@ -59,7 +59,8 @@ To install the extension in Docker Desktop, run:
 $ docker extension install <name-of-your-extension>
 ```
 
-To preview the extension in Docker Desktop, open Docker Dashboard once the installation is complete.
+To preview the extension in Docker Desktop, once the installation is complete and you should
+see a **Quickstart** item underneath the **Extensions** menu. Selecting this item opens the extension's frontend.
 
 During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire
 extension. See [Preview whilst developing the UI](dev/test-debug.md#hot-reloading-whilst-developing-the-ui) for more

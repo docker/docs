@@ -13,15 +13,15 @@ The live docs are published from the `main` branch. Therefore, you must create p
 
 There are two ways to contribute a pull request to the docs repository:
 
-1. You can click **Edit this page** option  in the right column of every page on [https://docs.docker.com/](/).
+1. You can select the **Edit this page** option in the right column of every page on [https://docs.docker.com/](/).
 
     This opens the GitHub editor, which means you don't need to know a lot about Git, or even about Markdown. When you save, Git prompts you to create a fork if you don't already have one, and to create a branch in your fork and submit the pull request.
 
 2. Fork the [docs GitHub repository]({{ site.repo }}). Suggest changes or add new content on your local branch, and submit a pull request (PR) to the `main` branch.
 
-    This is the manual, more advanced version of clicking 'Edit this page' on a published docs page. Initiating a docs changes in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.
+    This is the manual, more advanced version of selecting 'Edit this page' on a published docs page. Initiating a docs change in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.
 
-    For a demo of the components, tags, Markdown syntax, styles, etc. we use at [https://docs.docker.com/](/), see the Useful components section.
+    For a demo of the components, tags, Markdown syntax, styles, etc. used in [https://docs.docker.com/](/), see the components section.
 
 ## Important files
 
@@ -41,17 +41,17 @@ Some files and directories are maintained in the upstream repositories. You can 
 Help us review your PRs more quickly by following these guidelines.
 
 - Try not to touch a large number of files in a single PR if possible.
-- Don't change whitespace or line wrapping in parts of a file you are not editing for other reasons. Make sure your text editor is not configured to
+- Don't change whitespace or line wrapping in parts of a file you aren't editing for other reasons. Make sure your text editor isn't configured to
   automatically reformat the whole file when saving.
 - We highly recommend that you [build](#build-and-preview-the-docs-locally) and [test](#test-the-docs-locally) the docs locally before submitting a PR. 
-- A Netlify test runs for each PR that is against the `main` branch, and deploys the result of your PR to a staging site. The URL will be available at in the **Conversation** tab. Check the staging site to verify how your changes look and fix issues, if necessary.
+- A Netlify test runs for each PR that is against the `main` branch, and deploys the result of your PR to a staging site. The URL will be available in the **Conversation** tab. Check the staging site to verify how your changes look and fix issues, if necessary.
 
 ### Collaborate on a pull request
 
 Unless the PR author specifically disables it, you can push commits into another
 contributor's PR. You can do it from the command line by adding and fetching
 their remote, checking out their branch, and adding commits to it. Even easier,
-you can add commits from the Github web UI, by clicking the pencil icon for a
+you can add commits from the GitHub web UI, by clicking the pencil icon for a
 given file in the **Files** view.
 
 If a PR consists of multiple small addendum commits on top of a more significant
@@ -131,10 +131,11 @@ your editor to get real-time feedback on your writing.
 To get started, follow the [vale installation instructions](https://vale.sh/docs/vale-cli/installation/)
 for your operating system. To enable the vale integration for your editor, install the relevant plugin:
 
-- [VS Code](https://github.com/errata-ai/vale-vscode)
+- [VS Code](https://github.com/chrischinchilla/vale-vscode)
 - [Neovim](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#vale)
 - [Emacs](https://github.com/tpeacock19/flymake-vale)
 - [Jetbrains](https://vale.sh/docs/integrations/jetbrains/)
+- [Sublime Text](https://github.com/errata-ai/LSP-vale-ls)
 
 The vale rules that implement the Docker style guide are included in the Docker docs repository,
 in the `.github/vale` directory. Vale will automatically apply these rules when invoked in this

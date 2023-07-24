@@ -4,7 +4,7 @@ description: Docker's voice and tone
 keywords: style guide, voice, tone, content standards
 --- 
 
-# Voice
+## Voice
 
 At Docker, we've been the customer. We're developers developing for developers. We speak with experience and knowledge and without arrogance or ego. We want to inform and empower people without being confusing or pushy. 
 
@@ -26,19 +26,19 @@ All of this means that when we write documentation and UI copy:
 3. **We are relaxed.** Our demeanor is casual but not lazy, smart but not arrogant, and focused but not cold. Our voice should be welcoming and warm. 
 4. **We are inclusive.** Developers are developers no matter how much code they've written. Every person is as much a part of our community as the next. We are accepting of all developers from all industries and experience levels. 
 
-# Tone
+## Tone
 
 Docker's tone is usually informal, but we believe it's always more important to be clear over comical. We're relaxed, but we're not inappropriate or unprofessional. 
 
-## Friendly tone
+### Friendly tone
 
-Use a tone that's natural, friendly, and respectful without being overly colloquial or full of jargons. Write to inform and empower developers without being confusing or pushy. It’s OK to use contractions as long as the sentence doesn’t become too slangy or informal.
+Use a tone that's natural, friendly, and respectful without being overly colloquial or full of jargon. Write to inform and empower developers without being confusing or pushy. It’s OK to use contractions as long as the sentence doesn’t become too slangy or informal.
 
-**Avoid overdoing the politeness.** It is good to be friendly and polite, but using ‘please’ in technical documentation or UI copy might be overdoing the politeness.
+**Avoid overdoing politeness.** It is good to be friendly and polite, but using ‘please’ in technical documentation or UI copy might be overdoing the politeness.
 
-## Positive language
+### Positive language
 
-Use a positive language. Instead of highlighting the limitations and what the users cannot do, emphasize on the positive outcomes.
+Use positive language. Instead of highlighting the limitations and what the users cannot do, emphasize the positive outcomes.
 
 For example, **instead of**:
 

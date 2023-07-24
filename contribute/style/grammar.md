@@ -17,14 +17,14 @@ An initialism is a type of acronym that comprises a group of initial letters use
 
 - Spell out lesser-known acronyms or initialisms on first use, then follow with the acronym or initialism in parentheses. After this, throughout the rest of your page or document, use the acronym or initialism alone.
 > ‘You can use single sign-on (SSO) to sign in to Notion. You may need to ask your administrator to enable SSO.’
-- Where the acronym or initialism is more commonly used than the full phrase, for example, URL, HTML, you do not need to follow this spell-it-out rule.
+- Where the acronym or initialism is more commonly used than the full phrase, for example, URL, HTML, you don't need to follow this spell-it-out rule.
 - Use all caps for acronyms of file types (a JPEG file).
 - Don't use apostrophes for plural acronyms. ✅URLs ❌URL’S
 - Avoid using an acronym for the first time in a title or heading. If the first use of the acronym is in a title or heading, introduce the acronym (in parentheses, following the spelled-out term) in the first body text that follows.
 
 ## Bold and italics
 
-Unless you're referring to UI text or user-defined text, you should not add emphasis to text. Clear, front-loaded wording makes the subject of a sentence clear.
+Unless you're referring to UI text or user-defined text, you shouldn't add emphasis to text. Clear, front-loaded wording makes the subject of a sentence clear.
 
 ### Best practice:
 
@@ -45,15 +45,15 @@ The following content elements should use sentence case:
 - Column and row headers in tables
 - Links
 - Sentences (of course)
-- Anything in the Ul including navigation labels, buttons, headings
+- Anything in the UI including navigation labels, buttons, headings
 
 ### Best practice
 
 - As a general rule, it's best to avoid the use of ALL CAPITALS in most content types. They are more difficult to scan and take up more space. While all caps can convey emphasis, they can also give the impression of shouting.
 - If a company name is all lowercase or all uppercase letters, follow their style, even at the beginning of sentences: DISH and bluecrux. When in doubt, check the company's website.
-- Use title case for Docker solutions : Docker Extensions, Docker Hub.
+- Use title case for Docker solutions: Docker Extensions, Docker Hub.
 - Capitalize a job title if it immediately precedes a name (Chief Executive Officer Scott Johnston).
-- Do not capitalize a job title that follows a name or is a generic reference (Scott Johnston, chief executive officer of Docker).
+- Don't capitalize a job title that follows a name or is a generic reference (Scott Johnston, chief executive officer of Docker).
 - Capitalize department names when you refer to the name of a department, but use lower case if you are talking about the field of work and not the actual department.
 - When referring to specific user interface text, like a button label or menu item, use the same capitalization that’s displayed in the user interface. 
 
@@ -65,7 +65,7 @@ Following our conversational approach, it's acceptable to use contractions in al
 
 ### Best practice:
 
-- Stay consistent - don't switch between contractions and their spelled-out equivalents in body copy or Ul text.
+- Stay consistent - don't switch between contractions and their spelled-out equivalents in body copy or UI text.
 - Avoid negative contractions (can't, don't, wouldn't, and shouldn't) whenever possible. Try to rewrite your sentence to align with our helpful approach that puts the focus on solutions, not problems.
 - Never contract a noun with is, does, has, or was as this can make it look like the noun is possessive. Your container is ready. Your container’s ready.
 
@@ -82,9 +82,7 @@ In all UI content and technical documentation, use decimals instead of fractions
 ### Best practice:
 
 - Always carry decimals to at least the hundredth place (33.76).
-
 - In tables, align decimals on the decimal point.
-
 - Add a zero before the decimal point for decimal fractions less than one (0.5 cm).
 
 ## Lists
@@ -97,7 +95,7 @@ Lists are a great way to break down complex ideas and make them easier to read a
 - Don’t add commas (,) or semicolons (;) to the ends of list items.
 - Some content types may use bulleted lists that contain 10 items, but it's preferable to break longer lists into several lists, each with its own subheading or introduction.
 - Never create a bulleted list with only one bullet, and never use a dash to indicate a bulleted list.
-- If your list items are fragments, capitalize the list items for ease of scanning but do not use terminal punctuation. 
+- If your list items are fragments, capitalize the list items for ease of scanning but don't use terminal punctuation. 
 Example:
     
     I went to the shops to buy:
@@ -107,12 +105,11 @@ Example:
     - Eggs
 - Make sure all your list items are parallel. This means you should structure each list item in the same way. They should all be fragments, or they should all be complete sentences. If you start one list item with a verb, then start every list item with a verb.
 - Every item in your list should start with a capital letter unless they’re parameters or commands.
-- Nested sequential lists are labelled with lowercase letters. For example:
+- Nested sequential lists are labeled with lowercase letters. For example:
     1. Top level
     2. Top level
         1. Child step
         2. Child step
-
 
 ## Numbers
 
@@ -123,7 +120,7 @@ When you work with numbers in content, the best practices include:
 - Recast a sentence, rather than begin it with a number (unless it's a year).
 - When you cite numbers in an example, write them out as they appear in any accompanying screenshots.
 - Write numbers out as they appear on the platform when you cite them in an example.
-- To refer to large numbers in abstract (such as thousands, millions, and billions), use a combination of words and numbers. Do not abbreviate numeric signifiers.
+- To refer to large numbers in abstract (such as thousands, millions, and billions), use a combination of words and numbers. Don't abbreviate numeric signifiers.
 - Avoid using commas in numbers because they can represent decimals in different cultures. For numbers that are five digits or more, use a space to separate.
     
     
@@ -135,7 +132,7 @@ When you work with numbers in content, the best practices include:
 
 ### Versions
 
-When writing version numbers for release notes, follow the example below:
+When writing version numbers for release notes, use the following example:
 
 - version 4.8.2
 - v1.0
@@ -146,7 +143,7 @@ When writing version numbers for release notes, follow the example below:
 ### Colons and semicolons
 
 - Use colons to: introduce a list inline in a sentence; introduce a bulleted or numbered list; and provide an explanation.
-- Do not use semicolons. Use two sentences instead.
+- Don't use semicolons. Use two sentences instead.
 
 ### Commas
 
@@ -167,9 +164,9 @@ Avoid the use of exclamation marks.
 
 ### Parentheses
 
-Don't use parentheses in technical documentation. They can reduce the readability of a sentence. 
+Don't use parentheses in technical documentation. They can reduce the readability of a sentence.
 
 ## Third party documentation
 
-If you are documenting a task that requires the use of a third-party product, link out to the third-party's documentation. Do not copy the content because it might violate copyright. It can also result in an unnecessary maintenance burden of having to keep the docs up-to-date when the third-party changes or updates their product. It is best practice to link to the single source of truth. 
+If you are documenting a task that requires the use of a third-party product, link out to the third-party's documentation. Don't copy the content because it might violate copyright. It can also result in an unnecessary maintenance burden of having to keep the docs up-to-date when the third-party changes or updates their product. It is best practice to link to the single source of truth. 
 

@@ -4,7 +4,7 @@ title: Videos
 toc_max: 3
 ---
 
-To embed a YouTube video on a docs page, open the video on YouTube, click
+To embed a YouTube video on a docs page, open the video on YouTube, select
 **Share** > **Embed** and then copy the code displayed.
 
 For example, the video embedded on the Get Started page has the following code:

@@ -27,9 +27,9 @@ Write short, concise sentences. Punchy sentences are faster to read and easier t
 
 ##### Used subheadings and bulleted lists to break up the page
 
-This helps ‘scanners’ find the information they need quickly and easily.
+This helps find the information they need quickly and easily.
 
-For more information, see the [formtatting](style/formatting.md#headings-and-subheadings) page, or see the [components](components/lists.md) for examples.
+For more information, see the [formatting](style/formatting.md#headings-and-subheadings) page, or see the [components](components/lists.md) for examples.
 
 ##### Started the title of your page with a verb
 
@@ -45,7 +45,7 @@ For more information, see the [formatting](style/formatting.md#links) page, or s
 
 ##### Checked that any redirects you may have added, work
 
-For information on how to add redirects, see [Source file conventions](file-conventions.md#frontmatter).
+For information on how to add redirects, see [Source file conventions](file-conventions.md#front-matter).
 
 ##### Used bold on any UI elements you refer to in your content
 
