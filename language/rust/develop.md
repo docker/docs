@@ -177,7 +177,7 @@ For the sample application, you'll use a variation of the backend from the react
    $ docker build -t rust-backend-image .
    ```
 
-5. Run `docker run` to run the image as a container on the same network as the database.
+5. Run `docker run` with the following options to run the image as a container on the same network as the database.
 
    ```console
    $ docker run \
