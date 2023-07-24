@@ -139,7 +139,7 @@ First, let’s add the `mysql-connector-python` module to our application using 
 
 ```console
 $ python3 -m pip install mysql-connector-python
-$ python3 -m pip | grep mysql-connector-python >> requirements.txt
+$ python3 -m pip freeze | grep mysql-connector-python >> requirements.txt
 ```
 
 Now we can build our image.
