@@ -138,8 +138,8 @@ We’ve added the MySQL module and updated the code to connect to the database s
 First, let’s add the `mysql-connector-python` module to our application using pip.
 
 ```console
-$ pip3 install mysql-connector-python
-$ pip3 freeze | grep mysql-connector-python >> requirements.txt
+$ python3 -m pip install mysql-connector-python
+$ python3 -m pip freeze | grep mysql-connector-python >> requirements.txt
 ```
 
 Now we can build our image.
@@ -148,7 +148,7 @@ Now we can build our image.
 $ docker build --tag python-docker-dev .
 ```
 
-If you have any containers running from the previous sections using the name `rest-server` or port 8000, [stop](./run-containers.md/#stop-start-and-name-containers) them now.
+If you have any containers running from the previous sections using the name `rest-server` or port 8000, [stop and remove](./run-containers.md/#stop-start-and-name-containers) them now.
 
 Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.
 
