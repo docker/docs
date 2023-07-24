@@ -33,15 +33,15 @@ badges.
 ![Docker Hub Official and Verified Publisher images](images/hub-official-images.png){:width="700px"}
 
 When building your own image from a Dockerfile, ensure you choose a minimal base
-image that matches your requirements. A smaller base image not just offers
+image that matches your requirements. A smaller base image not only offers
 portability and fast downloads, but also shrinks the size of your image and
 minimizes the number of vulnerabilities introduced through the dependencies.
 
-You should also consider using two types of base images: the first image for
-development and unit testing and the second for testing during the latest
+You should also consider using two types of base image: the first image for
+development and unit testing and the second image for testing during the later
 stages of development and production. In the later stages of development, your
-image may not require some build tools such as compilers, build systems, or
-any debugging tools. A small image with minimal dependencies can considerably
+image may not require build tools such as compilers, build systems, and
+debugging tools. A small image with minimal dependencies can considerably
 lower the attack surface.
 
 ### Use multi-stage builds
@@ -56,11 +56,11 @@ from one stage to another, leaving behind things you don’t need in the final
 image. This can result in a concise final image.
 
 This method of creating a tiny image doesn't only significantly reduce
-complexity, but also the change of implementing vulnerable artifacts in your
+complexity, but also reduces the chance of implementing vulnerable artifacts in your
 image. Therefore, instead of images that are built on images, that again are
 built on other images, multi-stage builds allow you to 'cherry pick' your
 artifacts without inheriting the vulnerabilities from the base images on which
-they rely on.
+they rely.
 
 For detailed information on how to configure multi-stage builds, see
 [multi-stage builds](../build/building/multi-stage.md).
@@ -73,7 +73,7 @@ instructions which allows you to automate the steps you would normally
 libraries and install custom software. These appear as instructions in the
 Dockerfile.
 
-Building your image is a snapshot of that image, at that moment in time. When
+Building your image is a snapshot of that image at that moment. When
 you depend on a base image without a tag, you’ll get a different base image
 every time you rebuild. Also, when you install packages using a package
 installer, rebuilding can change the image drastically. For example, a
@@ -100,7 +100,7 @@ Consider the following best practices when rebuilding an image:
 
 - Each container should have only one responsibility.
 - Containers should be immutable, lightweight, and fast.
-- Don’t store data in your container. Use a shared data store instead.
+- Don’t store data in your containers. Use a shared data store instead.
 - Containers should be easy to destroy and rebuild.
 - Use a small base image (such as Linux Alpine). Smaller images are easier to
   distribute.
@@ -109,7 +109,7 @@ Consider the following best practices when rebuilding an image:
 - Auto-scan your image before deploying to avoid pushing vulnerable containers
   to production.
 - Analyze your images daily both during development and production for
-  vulnerabilities. Based on that, automate the rebuild of images if necessary.
+  vulnerabilities. Based on that, automate the rebuilding of images if necessary.
 
 For detailed best practices and methods for building efficient images, see
 [Dockerfile best practices](develop-images/dockerfile_best-practices.md).
@@ -120,12 +120,12 @@ In addition to following the best practices outlined on this page when
 developing images, it's also important to continuously analyze and evaluate the
 security posture of your images using vulnerability detection tools.
 
-Docker tools come with features helps you stay up to date about vulnerabilities
+Docker tools come with features that help you to stay up to date about vulnerabilities
 that affect images that you build or use.
 
 - Docker Hub supports an automatic
   [vulnerability scanning](../docker-hub/vulnerability-scanning.md) feature,
-  which when enabled, automatically scans images when you push them to a Docker Hub
+  which when enabled automatically scans images when you push them to a Docker Hub
   repository. Requires a [Docker subscription](../subscription/index.md).
 - Docker Hub also supports an early-access
   [advanced image analysis](../scout/advanced-image-analysis.md) feature, which extends
@@ -134,11 +134,11 @@ that affect images that you build or use.
 - For the CLI, there's the
   [`docker scout` CLI plugin](../engine/reference/commandline/scout.md)
   which lets you explore vulnerabilities for images using the terminal.
-- Docker Desktop sports a detailed image view for images in your local image
+- Docker Desktop has a detailed image view for images in your local image
   store, that visualizes all of the known vulnerabilities affecting an image.
 
 All of these security features are powered by the same technology:
-[Docker Scout](../scout/index.md). These features help you achieve a holistic
+[Docker Scout](../scout/index.md). These features help you to achieve a holistic
 view of your supply chain security, and to provide actionable suggestions for
 what you can do to remediate those vulnerabilities.
 
