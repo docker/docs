@@ -148,7 +148,7 @@ Now we can build our image.
 $ docker build --tag python-docker-dev .
 ```
 
-If you have any containers running from the previous sections using the name `rest-server` or port 8000, [stop](./run-containers.md/#stop-start-and-name-containers) them now.
+If you have any containers running from the previous sections using the name `rest-server` or port 8000, [stop and remove](./run-containers.md/#stop-start-and-name-containers) them now.
 
 Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.
 
