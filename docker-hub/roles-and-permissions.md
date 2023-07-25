@@ -49,7 +49,7 @@ For team repository permissions, see [Create and manage a team permissions refer
 
 ### Organization management permissions
 
-The following outlines organization management permissions for member, editor, organization owner, and company roles.
+The following outlines organization management permissions for member, editor, organization owner, and company owner roles.
 
 | Permission | Member | Editor | Organization owner | Company owner |
 |:----------------------- |:------ |:-------|:------------------ |:----------- |
