@@ -21,31 +21,35 @@ Owners can manage roles for members of an organization on [Docker Hub](/docker-h
 
 ## Permissions
 
-The following sections outline the permissions for each role.
+The following sections describe the permissions for each role.
 
 ### Content and registry permissions
 
-| Permission | Member | Editor | Organization owner | Company owner |
-|:----------------------- |:------ |:-------|:------------------ |:----------- |
-| Explore images and extensions | ✅ | ✅ | ✅ | ✅ |
-| Star, favorite, vote, and comment on content | ✅ | ✅ | ✅ | ✅ |
+The following outlines content and registry permissions for member, editor, and organization owner roles. Company owners have the same access as organization owners for all associated organizations. See [Company overview](/admin/company/).
+
+| Permission | Member | Editor | Organization owner |
+|:----------------------- |:------ |:-------|:------------------ |
+| Explore images and extensions | ✅ | ✅ | ✅ |
+| Star, favorite, vote, and comment on content | ✅ | ✅ | ✅ |
 | Pull images | ✅ | ✅ | ✅ | ✅ |
 | Create and publish an extension | ✅ | ✅ | ✅ | ✅ |
-| Become a Verified, Official, or Open Source publisher | ❌ | ❌ | ✅ | ✅ |
-| Observe content engagement as a publisher | ❌ | ❌ | ✅ | ✅ |
-| Create public and private repositories | ❌ | ✅ | ✅ | ✅ |
-| Push, edit, and delete a repository | ❌ | ✅ | ✅ | ✅ |
-| Manage tags | ❌ | ✅ | ✅ | ✅ |
-| View repository activity | ❌ | ❌ | ✅ | ✅ |
-| Set up Automated builds | ❌ | ❌ | ✅ | ❌ |
-| Edit build settings | ❌ | ❌ | ✅ | ✅ |
-| Set up vulnerability analysis with Docker Scout | ❌ | ✅ | ✅ | ✅ |
+| Become a Verified, Official, or Open Source publisher | ❌ | ❌ | ✅ |
+| Observe content engagement as a publisher | ❌ | ❌ | ✅ |
+| Create public and private repositories | ❌ | ✅ | ✅ |
+| Manage, including delete, a repository | ❌ | ✅ | ✅ |
+| Manage tags | ❌ | ✅ | ✅ |
+| View repository activity | ❌ | ❌ | ✅ |
+| Set up Automated builds | ❌ | ❌ | ✅ |
+| Edit build settings | ❌ | ❌ | ✅ |
+| Set up vulnerability analysis with Docker Scout | ❌ | ✅ | ✅ |
 | View teams | ❌ | ✅ | ✅ | ✅ |
-| Assign team permissions to repositories | ❌ | ✅ | ✅ | ✅ |
+| Assign team permissions to repositories | ❌ | ✅ | ✅ |
 
 For team repository permissions, see [Create and manage a team permissions reference](/docker-hub/manage-a-team/#permissions-reference).
 
 ### Organization management permissions
+
+The following outlines organization management permissions for member, editor, organization owner, and company roles.
 
 | Permission | Member | Editor | Organization owner | Company owner |
 |:----------------------- |:------ |:-------|:------------------ |:----------- |
