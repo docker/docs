@@ -24,16 +24,41 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.22.0
+
+{% include release-date.html date="2023-07-27" %}
+
+{% include desktop-install.md all=true version="4.22.0" build_path="/" %}
+
+### Upgrades
+
+- [Buildx v0.11.2](https://github.com/docker/buildx/releases/tag/v0.11.2)
+- [Compose v2.20.0](https://github.com/docker/compose/releases/tag/v2.20.0)
+- [Docker Engine v24.0.5](https://docs.docker.com/engine/release-notes/24.0/#2405)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+- Extended Settings-Management features to allow IT/admins to disable Docker-Desktop "extensions".
+- Fixed a bug where enabling Kubernetes from the UI failed when the system is paused.
+- Fixed a bug where enabling Wasm from the UI failed when the system is paused.
+- Bindmounts are shown in the **Container** view.
+- You can now download Wasm runtimes when the containerd image store is enabled.
+
+#### For Mac
+
+- Fixed a bug that prevented Docker Desktop from starting. [docker/for-mac#6890](https://github.com/docker/for-mac/issues/6890)
+
+#### For Windows
+
+- Fixed a bug where self-diagnose showed a false-positive failure when vpnkit is expected to be not running. Fixes [docker/for-win#13479](https://github.com/docker/for-win/issues/13479).
+- Fixed a bug where an invalid regular expression in the search bar caused an error. Fixes [docker/for-win#13592](https://github.com/docker/for-win/issues/13592).
+
 ## 4.21.1
 
 {% include release-date.html date="2023-07-03" %}
 
-{% include desktop-install.md all=true version="4.21.1" build_path="/" %}
-
-### Upgrades
-- [Compose v2.19.1](https://github.com/docker/compose/releases/tag/v2.19.1)
-
-### Bug fixes and enhancements
+{% include desktop-install.md all=true version="4.21.1" build_path="/114176/" %}
 
 #### For all platforms
 
