@@ -8,7 +8,7 @@ Organization and company owners can assign roles to individuals giving them diff
 
 ## Roles
 
-When you invite users to your organization, you assign a role. A role is a collection of permissions. Roles define access to perform actions like creating repositories, pulling images, publishing extensions, or managing repositories.
+When you invite users to your organization, you assign a role. A role is a collection of permissions. Roles define access to perform actions like creating repositories, pulling images, creating teams, and configuring organization settings.
 
 The following roles are available to assign:
 
@@ -29,28 +29,28 @@ The following sections outline the permissions for each role.
 |:----------------------- |:------ |:-------|:------------------ |:----------- |
 | Explore images and extensions | ✅ | ✅ | ✅ | ✅ |
 | Star, favorite, vote, and comment on content | ✅ | ✅ | ✅ | ✅ |
-| Pull images | ✅ | ✅ | ✅ | ✅ |
+| Pull images | ✅ | ✅ | ✅ | ❌ |
 | Create and publish an extension | ✅ | ✅ | ✅ | ✅ |
 | Become a Verified, Official, or Open Source publisher | ❌ | ❌ | ✅ | ✅ |
 | Observe content engagement as a publisher | ❌ | ❌ | ✅ | ✅ |
 | Create public and private repositories | ❌ | ✅ | ✅ | ✅ |
-| Pull, push, edit, and delete a repository | ❌ | ✅ | ✅ | ✅ |
+| Push, edit, and delete a repository | ❌ | ✅ | ✅ | ❌ |
 | Manage tags | ❌ | ✅ | ✅ | ✅ |
 | View repository activity | ❌ | ❌ | ✅ | ✅ |
-| Set up Automated builds | ❌ | ❌ | ✅ | ✅ |
+| Set up Automated builds | ❌ | ❌ | ✅ | ❌ |
 | Edit build settings | ❌ | ❌ | ✅ | ✅ |
 | Set up vulnerability analysis with Docker Scout | ❌ | ✅ | ✅ | ✅ |
 | View teams | ❌ | ✅ | ✅ | ✅ |
 | Assign team permissions to repositories | ❌ | ✅ | ✅ | ✅ |
-| Create teams | ❌ | ❌ | ✅ | ✅ |
-| Manage, including delete, teams | ❌ | ❌ | ✅ | ✅ |
 
-Note that editors and owners can give teams repository access permissions. See [Create and manage a team permissions reference](/docker-hub/manage-a-team/#permissions-reference).
+For team repository permissions, see [Create and manage a team permissions reference](/docker-hub/manage-a-team/#permissions-reference).
 
 ### Organization management permissions
 
 | Permission | Member | Editor | Organization owner | Company owner |
 |:----------------------- |:------ |:-------|:------------------ |:----------- |
+| Create teams | ❌ | ❌ | ✅ | ✅ |
+| Manage, including delete, teams | ❌ | ❌ | ✅ | ✅ |
 | Configure the organization's settings (including linked services) | ❌ | ❌ | ✅ | ✅ |
 | Add organizations to a company | ❌ | ❌ | ✅ | ✅ |
 | Invite members | ❌ | ❌ | ✅ | ✅ |
