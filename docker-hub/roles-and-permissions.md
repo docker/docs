@@ -31,8 +31,8 @@ The following outlines content and registry permissions for member, editor, and 
 |:----------------------- |:------ |:-------|:------------------ |
 | Explore images and extensions | ✅ | ✅ | ✅ |
 | Star, favorite, vote, and comment on content | ✅ | ✅ | ✅ |
-| Pull images | ✅ | ✅ | ✅ | ✅ |
-| Create and publish an extension | ✅ | ✅ | ✅ | ✅ |
+| Pull images | ✅ | ✅ | ✅ |
+| Create and publish an extension | ✅ | ✅ | ✅ |
 | Become a Verified, Official, or Open Source publisher | ❌ | ❌ | ✅ |
 | Observe content engagement as a publisher | ❌ | ❌ | ✅ |
 | Create public and private repositories | ❌ | ✅ | ✅ |
