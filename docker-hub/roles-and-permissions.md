@@ -29,12 +29,12 @@ The following sections outline the permissions for each role.
 |:----------------------- |:------ |:-------|:------------------ |:----------- |
 | Explore images and extensions | ✅ | ✅ | ✅ | ✅ |
 | Star, favorite, vote, and comment on content | ✅ | ✅ | ✅ | ✅ |
-| Pull images | ✅ | ✅ | ✅ | ❌ |
+| Pull images | ✅ | ✅ | ✅ | ✅ |
 | Create and publish an extension | ✅ | ✅ | ✅ | ✅ |
 | Become a Verified, Official, or Open Source publisher | ❌ | ❌ | ✅ | ✅ |
 | Observe content engagement as a publisher | ❌ | ❌ | ✅ | ✅ |
 | Create public and private repositories | ❌ | ✅ | ✅ | ✅ |
-| Push, edit, and delete a repository | ❌ | ✅ | ✅ | ❌ |
+| Push, edit, and delete a repository | ❌ | ✅ | ✅ | ✅ |
 | Manage tags | ❌ | ✅ | ✅ | ✅ |
 | View repository activity | ❌ | ❌ | ✅ | ✅ |
 | Set up Automated builds | ❌ | ❌ | ✅ | ❌ |
