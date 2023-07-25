@@ -48,7 +48,7 @@ as possible for you to work in this repository. The following sections guide you
                  <a href="/contribute/style/recommended-words/"><img src="/assets/images/checklist.svg" alt="Docker Desktop for Mac" width="45" height="45"></a>
             </div>
                 <h2 id="docker-for-linux"><a href="/contribute/style/recommended-words/">Recommended word list</a></h2>
-                <p>Choose the right words for you content.</p>
+                <p>Choose the right words for your content.</p>
         </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
