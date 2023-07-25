@@ -286,7 +286,7 @@ fetch-remote:
 
   - repo: "https://github.com/docker/scout-cli"
     default_branch: "main"
-    ref: "v0.17.0"
+    ref: "v0.20.0"
     paths:
       - dest: "_data/scout-cli"
         src:
