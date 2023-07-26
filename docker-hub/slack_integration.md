@@ -16,7 +16,7 @@ Before you begin, make sure that you are signed into the Slack team that you wan
 
 1. Log in to the Docker account that owns the builds that you want to receive notifications about.
 
-    > **Note**: If you are setting up notifications for an organization, log in as a member of the organization's `Owners` team, then switch to the organization account to change the settings.
+    > **Note**: If you are setting up notifications for an organization, log in as an organization owner, then switch to the organization account to change the settings.
 
 2. Click **Account Settings** in the left hand navigation, and scroll down to the **Notifications** section.
 

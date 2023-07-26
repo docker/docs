@@ -2035,6 +2035,8 @@ manuals:
     title: Create and manage a team
   - path: /docker-hub/members/
     title: Manage members
+  - path: /docker-hub/roles-and-permissions/
+    title: Roles and permissions
   - sectiontitle: Single Sign-on
     section:
       -  path: /single-sign-on/

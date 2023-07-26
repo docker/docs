@@ -197,8 +197,6 @@ overlay storage driver: |
   OverlayFS is a [filesystem](#filesystem) service for Linux which implements a
   [union mount](https://en.wikipedia.org/wiki/Union_mount) for other file systems.
   It is supported by the Docker daemon as a storage driver.
-owners team: |
-  The owners team is a special team created by default during the organization creation process. The owners team has full access to all repositories in the organization.
 parent image: |
   An image's **parent image** is the image designated in the `FROM` directive
   in the image's Dockerfile. All subsequent commands are based on this parent
