@@ -118,26 +118,6 @@ the Docker host, and then add it to the `zpool` using the `zpool add` command:
 $ sudo zpool add zpool-docker /dev/xvdh
 ```
 
-### Limit a container's writable storage quota
-
-If you want to implement a quota on a per-image/dataset basis, you can set the
-`size` storage option to limit the amount of space a single container can use
-for its writable layer.
-
-Edit `/etc/docker/daemon.json` and add the following:
-
-```json
-{
-  "storage-driver": "zfs",
-  "storage-opts": ["size=256M"]
-}
-```
-
-See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#daemon-storage-driver)
-
-Save and close the file, and restart Docker.
-
 ## How the `zfs` storage driver works
 
 ZFS uses the following objects:
