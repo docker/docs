@@ -25,7 +25,9 @@ The following sections describe the permissions for each role.
 
 ### Content and registry permissions
 
-The following outlines content and registry permissions for member, editor, and organization owner roles. Company owners have the same access as organization owners for all associated organizations. See [Company overview](/admin/company/).
+The following outlines content and registry permissions for member, editor, and organization owner roles. These permissions and roles apply to the entire organization, including all the repositories in the namespace for the organization.
+
+Company owners have the same access as organization owners for all associated organizations. See [Company overview](/admin/company/).
 
 | Permission | Member | Editor | Organization owner |
 |:----------------------- |:------ |:-------|:------------------ |
