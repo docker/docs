@@ -16,7 +16,7 @@ Compose V2, which was first released in 2020, is included with all currently sup
 The easiest and recommended way is to make sure you have the latest version of [Docker Desktop](../desktop/release-notes.md), which bundles the Docker Engine and Docker CLI platform including Compose V2.
 
 With Docker Desktop, Compose V2 is always accessible as `docker compose`.
-Additionally, the **Use Compose V2** option is enabled by default, which provides an alias from `docker-compose`.
+Additionally, the **Use Compose V2** setting is turned on by default, which provides an alias from `docker-compose`.
 
 For manual installs on Linux, you can get Compose V2 by either:
 - [Using Docker's repository](install/linux.md#install-using-the-repository) (recommended)
@@ -123,13 +123,13 @@ target="_blank" rel="noopener" class="_"}.
 Additionally, a new [docker/compose-bin image on Docker Hub](https://hub.docker.com/r/docker/compose-bin){:
 target="_blank" rel="noopener" class="_"} packages the latest version of Compose V2 for use in multi-stage builds.
 
-## Can I still use Compose V1 if I really want to?
+## Can I still use Compose V1 if I want to?
 
 Yes. You can still download and install Compose V1 packages, but you won't get support from Docker if anything breaks.
 
 >**Warning**
 >
-> The final Compose V1 release (v1.29.2) was May 10, 2021. These packages haven't received any security updates since then. Use at your own risk. 
+> The final Compose V1 release, version 1.29.2, was May 10, 2021. These packages haven't received any security updates since then. Use at your own risk. 
 {: .warning}
 
 ## Additional Resources
