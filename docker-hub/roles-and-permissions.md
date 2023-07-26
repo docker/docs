@@ -36,7 +36,7 @@ The following outlines content and registry permissions for member, editor, and 
 | Become a Verified, Official, or Open Source publisher | ❌ | ❌ | ✅ |
 | Observe content engagement as a publisher | ❌ | ❌ | ✅ |
 | Create public and private repositories | ❌ | ✅ | ✅ |
-| Manage, including delete, a repository | ❌ | ✅ | ✅ |
+| Edit and delete repositories | ❌ | ✅ | ✅ |
 | Manage tags | ❌ | ✅ | ✅ |
 | View repository activity | ❌ | ❌ | ✅ |
 | Set up Automated builds | ❌ | ❌ | ✅ |
@@ -45,7 +45,7 @@ The following outlines content and registry permissions for member, editor, and 
 | View teams | ❌ | ✅ | ✅ | ✅ |
 | Assign team permissions to repositories | ❌ | ✅ | ✅ |
 
-For team repository permissions, see [Create and manage a team permissions reference](/docker-hub/manage-a-team/#permissions-reference).
+When you add members to a team, you can manage their repository permissions. For team repository permissions, see [Create and manage a team permissions reference](/docker-hub/manage-a-team/#permissions-reference).
 
 ### Organization management permissions
 
