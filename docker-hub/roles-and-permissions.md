@@ -42,7 +42,7 @@ The following outlines content and registry permissions for member, editor, and 
 | Set up Automated builds | ❌ | ❌ | ✅ |
 | Edit build settings | ❌ | ❌ | ✅ |
 | Set up vulnerability analysis with Docker Scout | ❌ | ✅ | ✅ |
-| View teams | ❌ | ✅ | ✅ | ✅ |
+| View teams | ❌ | ✅ | ✅ |
 | Assign team permissions to repositories | ❌ | ✅ | ✅ |
 
 When you add members to a team, you can manage their repository permissions. For team repository permissions, see [Create and manage a team permissions reference](/docker-hub/manage-a-team/#permissions-reference).
