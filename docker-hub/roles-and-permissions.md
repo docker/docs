@@ -54,7 +54,7 @@ The following outlines organization management permissions for member, editor, o
 | Permission | Member | Editor | Organization owner | Company owner |
 |:----------------------- |:------ |:-------|:------------------ |:----------- |
 | Create teams | ❌ | ❌ | ✅ | ✅ |
-| Manage, including delete, teams | ❌ | ❌ | ✅ | ✅ |
+| Manage teams (including delete) | ❌ | ❌ | ✅ | ✅ |
 | Configure the organization's settings (including linked services) | ❌ | ❌ | ✅ | ✅ |
 | Add organizations to a company | ❌ | ❌ | ✅ | ✅ |
 | Invite members | ❌ | ❌ | ✅ | ✅ |
@@ -64,7 +64,7 @@ The following outlines organization management permissions for member, editor, o
 | Export and reporting | ❌ | ❌ | ✅ | ✅ |
 | Image Access Management | ❌ | ❌ | ✅ | ✅ |
 | Registry Access Management | ❌ | ❌ | ✅ | ✅ |
-| Setup Single Sign-On (SSO) and SCIM | ❌ | ❌ | ✅ * | ✅ |
+| Set up Single Sign-On (SSO) and SCIM | ❌ | ❌ | ✅ * | ✅ |
 | Require Desktop login | ❌ | ❌ | ✅ * | ✅ |
 | Manage billing information (e.g. billing address) | ❌ | ❌ | ✅ | ✅ |
 | Manage payment methods (e.g. credit card or invoice) | ❌ | ❌ | ✅ | ✅ |
