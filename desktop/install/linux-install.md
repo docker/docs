@@ -141,9 +141,10 @@ Make sure you meet the system requirements outlined earlier and follow the distr
 
 ## Where to go next
 
+- [Initialize `pass`](../get-started.md#credentials-management-for-linux-users) to manage credentials and sign in to Docker Desktop.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
-* [Back up and restore data](../backup-and-restore.md) provides instructions
+- [Back up and restore data](../backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.
