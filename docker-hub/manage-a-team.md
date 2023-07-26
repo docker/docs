@@ -5,14 +5,12 @@ title: Create and manage a team
 ---
 
 A team is a group of Docker users that belong to an organization. An
-organization can have multiple teams. When you first create an organization,
-you’ll see that you have a team (called 'Company') and the owners team, with a single member. An
+organization can have multiple teams. An
 organization owner can then create new teams and add members to an existing team
-using their Docker ID or email address and by selecting a team the user should be part of.
+using their Docker ID or email address and by selecting a team the user should be part of. Members aren't required to be part of a team to be associated with an organization.
 
-The org owner can add additional org owners to the owners team to help them
-manage users, teams, and repositories in the organization. See [Owners
-team](#the-owners-team) for details.
+The organization owner can add additional organization owners to help them
+manage users, teams, and repositories in the organization by assigning them the owner role.
 
 ## Create a team
 
@@ -21,10 +19,7 @@ team](#the-owners-team) for details.
 3. Fill out your team's information and select **Create**.
 4. [Add members to your team](members.md#add-a-member-to-a-team)
 
-## The owners team
-
-The owners team is a special team created by default during the org creation
-process. The owners team has full access to all repositories in the organization.
+## Organization owner
 
 An organization owner is an administrator who is responsible to manage
 repositories and add team members to the organization. They have full access to
@@ -56,6 +51,8 @@ To give a team access to a repository
    **Add**.
 
     ![Team Repo Permissions](images/team-repo-permission.png){:width="700px"}
+
+Organization owners can also assign members the editor role to grant partial administrative access. See [Roles and permissions](/docker-hub/roles-and-permissions/) for more about the editor role.
 
 ### Permissions reference
 

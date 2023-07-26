@@ -22,10 +22,7 @@ class="_"} can retrieve the Docker ID for you.
 
 ### What’s an organization?
 
-Docker users become members of an organization when they are assigned to at
-least one team in the organization. When you first create an organization,
-you’ll see that you have a team, the **Owners** (Admins) team, with a single
-member. An organization owner is someone that is part of the owners team. They
+Docker users become members of an organization when they're associated with the organization by an organization owner. An organization owner is someone assigned the owner role. They
 can create new teams and add members to an existing team using their Docker ID
 or email address and by selecting a team the user should be part of. An
 organization owner can also add additional organization owners to help them
@@ -39,9 +36,13 @@ To begin, you should set up your first organization and contact the Customer Suc
 
 The organization name, sometimes referred to as the organization namespace or the org ID, is the unique identifier of a Docker organization. The organization name cannot be the same as an existing Docker ID.
 
+### What are roles?
+
+A role is a collection of permissions granted to members. Roles define access to perform actions in Docker Hub like creating repositories, managing tags, or viewing teams. See [Roles and permissions](roles-and-permissions.md).
+
 ### What’s a team?
 
-A **Team** is a group of Docker users that belong to an organization. An organization can have multiple teams. When you first create an organization, you’ll see that you have a team, the owners team, with a single member. An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. See [Create and manage a team](manage-a-team.md).
+A **Team** is a group of Docker users that belong to an organization. An organization can have multiple teams. An organization owner can then create new teams and add members to an existing team using Docker IDs or email address and by selecting a team the user should be part of. See [Create and manage a team](manage-a-team.md).
 
 ### What's a company?
 

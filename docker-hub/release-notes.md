@@ -11,6 +11,12 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
 
+## 2023-07-26
+
+### New
+
+- Organizations can assign the [editor role](roles-and-permissions.md) to members to grant additional permissions without full administrative access.
+
 ## 2023-05-09
 
 ### New

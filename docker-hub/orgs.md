@@ -56,7 +56,7 @@ you require.
    > Instead, select **Organizations** to verify that the organization has been
    > created.
 
-You've now created an organization with one team, the owners team, with you as the single member.
+You've now created an organization.
 
 ## View an organization
 
@@ -102,7 +102,7 @@ configure your organization.
   organization, and allows you to view and change your repository privacy
   settings, configure org permissions such as
   [Image Access Management](image-access-management.md), configure notification settings, and [deactivate](deactivate-account.md#deactivate-an-organization) your
-  organization. You can also update your organization name and company name that appear on your organization landing page. You must be part of the owners team to access the
+  organization. You can also update your organization name and company name that appear on your organization landing page. You must be an owner to access the
    organization's **Settings** page.
 
 - **Billing**: Displays information about your existing

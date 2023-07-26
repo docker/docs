@@ -786,7 +786,7 @@ paths:
         Updates an organization's settings. Some settings are only used when the
         organization is on a business plan.
 
-        ***Only users in the "owners" group of the organization can use this endpoint.***
+        ***Only users with administrative privileges for the organization (owner role) can modify these settings.***
 
         The following settings are only used on a business plan:
         - `restricted_images`

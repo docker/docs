@@ -6,9 +6,11 @@
   {% if include.layer == "company" %}
     {% assign member_navigation="Select your company in the left navigation drop-down menu, and then select **Users**." %}
     {% assign remove_button = "**Remove user**" %}
+    {% assign update_role = "Select their organization, select the role you want to assign, and then select **Save**." %}
   {% else %}
     {% assign member_navigation="Select your organization in the left navigation drop-down menu, and then select **Members**." %}
     {% assign remove_button = "**Remove member**" %}
+    {% assign update_role = "Select the role you want to assign, then select **Save**." %}
   {% endif %}
 {% else %}
   {% assign product_link="[Docker Hub](https://hub.docker.com)" %}
@@ -16,6 +18,7 @@
   {% assign invite_button = "**Invite members**" %}
   {% assign remove_button = "**Remove member**" %}
   {% assign export_button = "**Export members**" %}
+  {% assign update_role = "Select the role you want to assign, then select **Save**." %}
 {% endif %}
 
 ## Invite members
@@ -34,7 +37,7 @@ Use the following steps to invite members to your organization via Docker ID or 
 
   > **Note**
   >
-  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings.
+  >  When you invite members, you assign them a role. See [Roles and permissions](/docker-hub/roles-and-permissions/) for details about the access permissions for each role.
 
 Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept or decline the invitation.
 
@@ -73,7 +76,7 @@ To invite multiple members to an organization via a CSV file containing email ad
 
   > **Note**
   >
-  >  It is recommended that you invite non-administrative users to a team other than the owners team. Members in the owners team will have full access to your organization’s administrative settings.
+  >  When you invite members, you assign them a role. See [Roles and permissions](/docker-hub/roles-and-permissions/) for details about the access permissions for each role.
 
 
 Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept or decline the invitation.
@@ -95,6 +98,22 @@ To remove a member from an organization:
 2. {{ member_navigation }}
 3. In the table, select the **Action** icon, and then select {{  remove_button  }} or **Remove invitee**.
 4. Follow the on-screen instructions to remove the member or invitee.
+
+## Update a member role
+
+Organization owners can manage [roles](/docker-hub/roles-and-permissions/) within an organization. If an organization is part of a company, the company owner can also manage that organization's roles.
+
+> **Note**
+>
+> If you're the only owner of an organization, you need to assign a new owner before you can edit your role.
+
+To update a member role:
+
+1. Sign in to {{ product_link }}{: target="_blank" rel="noopener" class="_"}.
+2. {{ member_navigation }}
+3. Find the username of the member whose role you want to edit. In the table, select the **Actions** icon.
+4. Select **Edit role**.
+5. {{ update_role }}
 
 ## Export members
 

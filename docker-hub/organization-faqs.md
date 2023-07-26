@@ -18,7 +18,7 @@ An existing owner can add additional team members as organization owners. All
 they need to do is select the organization from the
 [Organizations](https://hub.docker.com/orgs){: target="_blank" rel="noopener"
 class="_"} page in Docker Hub, add the Docker ID/Email of the user, and then
-select the **Owners** team from the drop-down menu. See [The owners team](manage-a-team.md#the-owners-team).
+select the owner role from the drop-down menu. See [Organization owner](manage-a-team.md#organization-owner).
 
 ### Do users first need to authenticate with Docker before an owner can add them to an organization?
 
