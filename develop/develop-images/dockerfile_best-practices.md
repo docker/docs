@@ -237,19 +237,18 @@ A Dockerfile for a Go application could look like:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM golang:1.16-alpine AS build
+FROM golang:{{site.example_go_version}}-alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
 RUN apk add --no-cache git
-RUN go get github.com/golang/dep/cmd/dep
 
-# List project dependencies with Gopkg.toml and Gopkg.lock
+# List project dependencies with go.mod and go.sum
 # These layers are only re-built when Gopkg files are updated
-COPY Gopkg.lock Gopkg.toml /go/src/project/
 WORKDIR /go/src/project/
+COPY go.mod go.sum /go/src/project/
 # Install library dependencies
-RUN dep ensure -vendor-only
+RUN go mod download
 
 # Copy the entire project and build it
 # This layer is rebuilt when a file changes in the project directory
