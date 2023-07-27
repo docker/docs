@@ -1984,6 +1984,8 @@ manuals:
     section:
     - path: /admin/organization/
       title: Overview
+    - path: /admin/organization/onboard/
+      title: Onboard your organization
     - path: /admin/organization/members/
       title: Manage members
     - path: /admin/organization/activity-logs/
@@ -2013,12 +2015,8 @@ manuals:
   section:
   - path: /docker-hub/admin-overview/
     title: Overview
-  - sectiontitle: Onboarding
-    section:
-    - path: /docker-hub/onboard-team/
-      title: Team
-    - path: /docker-hub/onboard-business/
-      title: Business
+  - path: /docker-hub/onboard/
+    title: Onboard your organization
   - sectiontitle: Set up your company
     section:
     - path: /docker-hub/creating-companies/
