@@ -49,6 +49,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
   - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/){:target="_blank" rel="noopener" class="_"}.
 - At least 4 GB of RAM.
 - Enable configuring ID mapping in user namespaces, see [File sharing](../faqs/linuxfaqs.md#how-do-i-enable-file-sharing).
+- Recommended: [Initialize `pass`](../get-started.md#credentials-management-for-linux-users) for credentials management.
 
 Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](../faqs/linuxfaqs.md#why-does-docker-desktop-for-linux-run-a-vm).
 
@@ -145,5 +146,5 @@ Make sure you meet the system requirements outlined earlier and follow the distr
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
-* [Back up and restore data](../backup-and-restore.md) provides instructions
+- [Back up and restore data](../backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.
