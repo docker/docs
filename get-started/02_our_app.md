@@ -34,7 +34,7 @@ Before you can run the application, you need to get the application source code 
 
    ```
    ├── getting-started-app/
-   │ ├── pacakage.json
+   │ ├── package.json
    │ ├── README.md
    │ ├── spec/
    │ ├── src/
