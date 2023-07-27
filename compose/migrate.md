@@ -82,7 +82,7 @@ Environment variable behavior in Compose V1 wasn't formally documented and behav
 For Compose V2, the [Environment variables](/compose/environment-variables/) section covers both [precedence](/compose/environment-variables/envvars-precedence) as well as [`.env` file interpolation](/compose/environment-variables/env-file) and includes many examples covering tricky situations such as escaping nested quotes.
 
 Check if:
-- Your project uses multiple levels of environment variable overrides, for example `.env` file and `--env` CLI flags
+- Your project uses multiple levels of environment variable overrides, for example `.env` file and `--env` CLI flags.
 - Any `.env` file values have escape sequences or nested quotes.
 - Any `.env` file values contain literal `$` signs in them. This is common with PHP projects.
 - Any variable values use advanced expansion syntax, for example `${VAR:?error}`.
@@ -100,7 +100,7 @@ interpolation) are single-quoted and values that should have interpolation appli
 
 For most projects, switching to Compose V2 requires no changes to the Compose YAML or your development workflow.
 
-It's recommend that you adapt to the new preferred way of running Compose V2, which is to use `docker compose` instead of `docker-compose`.
+It's recommended that you adapt to the new preferred way of running Compose V2, which is to use `docker compose` instead of `docker-compose`.
 This provides additional flexibility and removes the requirement for a `docker-compose` compatibility alias. 
 
 However, Docker Desktop continues to support a `docker-compose` alias to redirect commands to `docker compose` for convenience and improved compatibility with third-party tools and scripts.
