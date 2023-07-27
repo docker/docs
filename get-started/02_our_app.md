@@ -30,22 +30,22 @@ Before you can run the application, you need to get the application source code 
    $ git clone https://github.com/docker/getting-started-app.git
    ```
 
-2. View the contents of the cloned repository. You should see the following files and subdirectories.
+2. View the contents of the cloned repository. You should see the following files and sub-directories.
 
    ```
    ├── getting-started-app/
-   │ ├── pacakge.json
+   │ ├── pacakage.json
    │ ├── README.md
    │ ├── spec/
    │ ├── src/
    │ └── yarn.lock
-   ```
+```
 
 ## Build the app's container image
 
 To build the [container image](../get-started/overview.md/#docker-objects){:target="_blank" rel="noopener" class="_"}, you'll need to use a `Dockerfile`. A Dockerfile is simply a text-based file with no file extension that contains a script of instructions. Docker uses this script to build a container image.
 
-1. In the `getting-started-app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands below to create a Dockerfile based on your operating system.
+1. In the `getting-started-app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands to create a Dockerfile based on your operating system.
 
    <ul class="nav nav-tabs">
      <li class="active"><a data-toggle="tab" data-target="#mac-linux">Mac / Linux</a></li>
@@ -56,7 +56,7 @@ To build the [container image](../get-started/overview.md/#docker-objects){:targ
 
     In the terminal, run the following commands listed below.
 
-    Change directory to the `getting-started-app` directory. Replace `/path/to/getting-started-app` with the path to your `getting-started-app` directory.
+    Make sure you're in the `getting-started-app` directory. Replace `/path/to/getting-started-app` with the path to your `getting-started-app` directory.
     ```console
     $ cd /path/to/getting-started-app
     ```
@@ -71,7 +71,7 @@ To build the [container image](../get-started/overview.md/#docker-objects){:targ
 
     In the Windows Command Prompt, run the following commands listed below.
 
-    Change directory to the `getting-started-app` directory. Replace `\path\to\getting-started-app` with the path to your `getting-started-app` directory.
+    Make sure you're in the `getting-started-app` directory. Replace `\path\to\getting-started-app` with the path to your `getting-started-app` directory.
     ```console
     $ cd \path\to\getting-started-app
     ```
@@ -101,7 +101,7 @@ To build the [container image](../get-started/overview.md/#docker-objects){:targ
 
 3. Build the container image using the following commands:
 
-   In the terminal, change directory to the `getting-started-app` directory. Replace `/path/to/getting-started-app` with the path to your `getting-started-app` directory.
+   In the terminal, make sure you're in the `getting-started-app` directory. Replace `/path/to/getting-started-app` with the path to your `getting-started-app` directory.
 
    ```console
    $ cd /path/to/getting-started-app
@@ -132,7 +132,7 @@ Now that you have an image, you can run the application in a [container](../get-
 
    The `-d` flag (short for `--detach`) runs the container in the background.
    The `-p` flag (short for `--publish`) creates a port mapping between the host and the container.
-   The `-p` flag takes a string value in the format of `HOST:CONTAINER`,
+   The `-p` flag take a string value in the format of `HOST:CONTAINER`,
    where `HOST` is the address on the host, and `CONTAINER` is the port on the container.
    The command shown here publishes the container's port 3000 to `127.0.0.1:3000` (`localhost:3000`) on the host.
    Without the port mapping, you wouldn't be able to access the application from the host.
