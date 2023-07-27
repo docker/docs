@@ -36,7 +36,7 @@ Alternatively, you can also export inline cache by setting the build argument
 
 ```console
 $ docker buildx build --push -t <registry>/<image> \
-  --arg BUILDKIT_INLINE_CACHE=1 .
+  --build-arg BUILDKIT_INLINE_CACHE=1 .
 ```
 
 To import the resulting cache on a future build, pass `type=registry` to
