@@ -59,13 +59,13 @@ You can manage your members in your identity provider and automatically provisio
 
 ## Step 5: Enforce sign-in for Docker Desktop
 
-By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. You must enforce sign-in to  ensure that users receive the benefits of your Docker subscription and that security settings are enforced. For details, see [Configure registry.json to enforce sign-in](/docker-hub/configure-sign-in/).
+By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. You must enforce sign-in to ensure that users receive the benefits of your Docker subscription and that security settings are enforced. For details, see [Configure registry.json to enforce sign-in](/docker-hub/configure-sign-in/).
 
 ## What's next
 
 - [Create](/docker-hub/repos/create/) and [manage](/docker-hub/repos/) repositories.
 - Create [teams](/docker-hub/manage-a-team/) for fine-grained repository access.
 - Configure [Hardened Docker Desktop](/desktop/hardened-desktop/) to improve your organization’s security posture for containerized development.
-- {{ audit_link }} to identify Docker users who have authenticated to Docker using an email address associated with one of your verified domains, but they’re not a member of your organization in Docker.
+- {{ audit_link }} to ensure that all Docker users in your domain are part of your organization.
 
 Your Docker subscription provides many more additional features. To learn more, see [Docker subscriptions and features](/subscription/details/).
