@@ -2,7 +2,7 @@
   {% assign sso_link="[Configure SSO](/admin/organization/security-settings/sso/)" %}
   {% assign scim_link="[Configure SCIM](/admin/organization/security-settings/scim/)" %}
   {% assign members_link="[Invite members](/admin/organization/members/)" %}
-  {% assign audit_link="[Audit your domains](/admin/organization/domains/)" %}
+  {% assign audit_link="[Audit your domains](/admin/organization/security-settings/domains/)" %}
 {% else %}
   {% assign sso_link="[Configure SSO](/single-sign-on/)" %}
   {% assign scim_link="[Configure SCIM](/docker-hub/scim/)" %}
@@ -59,7 +59,7 @@ You can manage your members in your identity provider and automatically provisio
 
 ## Step 5: Enforce sign-in for Docker Desktop
 
-By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. You must enforce sign-in to  ensure that users receive the benefits of your Docker subscription and that security settings are enforced. For details, see [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md).
+By default, members of your organization can use Docker Desktop on their machines without signing in to any Docker account. You must enforce sign-in to  ensure that users receive the benefits of your Docker subscription and that security settings are enforced. For details, see [Configure registry.json to enforce sign-in](/docker-hub/configure-sign-in/).
 
 ## What's next
 
