@@ -6,9 +6,8 @@ toc_min: 1
 toc_max: 2
 ---
 
-The Python getting started guide teaches you how to create a containerized Python application using Docker. In this guide, you'll learn how to:
+The Python getting started guide teaches you how to containerize a Python application using Docker. In this guide, you'll learn how to:
 
-* Create a sample Python application
 * Create a new Dockerfile which contains instructions required to build a Python image
 * Build an image and run the newly built image as a container
 * Set up volumes and networking
