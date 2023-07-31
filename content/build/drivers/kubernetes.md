@@ -39,6 +39,8 @@ can pass to `--driver-opt`:
 | `limits.cpu`      | CPU units         |                                         | Sets the limit CPU value specified in units of Kubernetes CPU. For example `requests.cpu=100m` or `requests.cpu=2`                   |
 | `limits.memory`   | Memory size       |                                         | Sets the limit memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G`   |
 | `nodeselector`    | CSV string        |                                         | Sets the pod's `nodeSelector` label(s). See [node assignment][2].                                                                    |
+| `annotation`      | CSV string        |                                         | Sets additional annotations on the deployments and pods.                                                                             |
+| `labels`          | CSV string        |                                         | Sets additional labels on the deployments and pods.                                                                                  |
 | `tolerations`     | CSV string        |                                         | Configures the pod's taint toleration. See [node assignment][2].                                                                     |
 | `serviceaccount`  | String            |                                         | Sets the pod's `serviceAccountName`.                                                                                                 |
 | `rootless`        | `true`,`false`    | `false`                                 | Run the container as a non-root user. See [rootless mode][3].                                                                        |
@@ -107,6 +109,8 @@ For more information on scalability, see the options for
 
 The Kubernetes driver allows you to control the scheduling of BuildKit pods
 using the `nodeSelector` and `tolerations` driver options.
+You can use the `annotations` and `labels` driver options to apply additional
+metadata to the deployments and pods that's hosting your builders.
 
 The value of the `nodeSelector` parameter is a comma-separated string of
 key-value pairs, where the key is the node label and the value is the label
@@ -117,9 +121,9 @@ the same values as the Kubernetes manifest. Each `tolerations` entry specifies
 a taint key and the value, operator, or effect. For example:
 `"tolerations=key=foo,value=bar;key=foo2,operator=exists;key=foo3,effect=NoSchedule"`
 
-Due to quoting rules for shell commands, you must wrap the `nodeselector` and
-`tolerations` parameters in single quotes. You can even wrap all of
-`--driver-opt` in single quotes, for example:
+These options accept CSV-delimited strings as values. Due to quoting rules for
+shell commands, you must wrap the values in single quotes. You can even wrap all
+of `--driver-opt` in single quotes, for example:
 
 ```console
 $ docker buildx create \
