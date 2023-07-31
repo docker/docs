@@ -6,7 +6,7 @@ keywords: build, buildkit, buildx, guide, tutorial, introduction
 
 {% include_relative nav.html selected="1" %}
 
-The starting resources for this guide includes a simple Go project and a
+The starting resources for this guide include a simple Go project and a
 Dockerfile. From this starting point, the guide illustrates various ways that
 you can improve how you build the application with Docker.
 
@@ -95,7 +95,7 @@ Here’s what this Dockerfile does:
 
 6. `RUN go build -o /bin/client ./cmd/client`
 
-   Builds the `client` binary, used to send messages to be translated, into the
+   Builds the `client` binary, which is used to send messages to be translated, into the
    `/bin` directory.
 
 7. `RUN go build -o /bin/server ./cmd/server`
