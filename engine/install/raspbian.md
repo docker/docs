@@ -170,7 +170,7 @@ Docker from the repository.
    <hr>
    </div>
 
-3. Verify that the Docker Engine installation is successful by running the
+2. Verify that the Docker Engine installation is successful by running the
    `hello-world` image:
 
    ```console
