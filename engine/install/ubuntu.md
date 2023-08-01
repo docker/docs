@@ -181,8 +181,12 @@ Docker from the repository.
    </div>
    <hr>
    </div>
+3. Start the Docker Engine
 
-3. Verify that the Docker Engine installation is successful by running the
+   ```console
+   $ sudo service docker start
+   ```
+4. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
 
    ```console
