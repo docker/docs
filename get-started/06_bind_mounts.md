@@ -41,8 +41,8 @@ Before looking at how you can use bind mounts for developing your application,
 you can run a quick experiment to get a practical understanding of how bind mounts
 work.
 
-1. Open a terminal and change directory to the `app`
-   directory of the getting started repository.
+1. Open a terminal and change directory to the `getting-started-app`
+   directory.
 
 2. Run the following command to start `bash` in an `ubuntu` container with a
    bind mount.
@@ -71,7 +71,7 @@ work.
    </div>
 
    The `--mount` option tells Docker to create a bind mount, where `src` is the
-   current working directory on your host machine (`getting-started/app`), and
+   current working directory on your host machine (`getting-started-app`), and
    `target` is where that directory should appear inside the container (`/src`).
 
 3. After running the command, Docker starts an interactive `bash` session in the
@@ -89,7 +89,7 @@ work.
 
    This is the directory that you mounted when starting the container. Listing
    the contents of this directory displays the same files as in the
-   `getting-started/app` directory on your host machine.
+   `getting-started-app` directory on your host machine.
 
    ```console
    root@ac1237fad8db:/# cd src
@@ -105,11 +105,11 @@ work.
    Dockerfile  myfile.txt  node_modules  package.json  spec  src  yarn.lock
    ```
 
-6. Open the `app` directory on the host and observe that the `myfile.txt` file
-   is in the directory.
+6. Open the `getting-started-app` directory on the host and observe that the
+   `myfile.txt` file is in the directory.
 
    ```
-   ├── app/
+   ├── getting-started-app/
    │ ├── Dockerfile
    │ ├── myfile.txt
    │ ├── node_modules/
@@ -158,7 +158,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
 1. Make sure you don't have any `getting-started` containers currently running.
 
-2. Run the following command from the `getting-started/app` directory.
+2. Run the following command from the `getting-started-app` directory.
 
    <ul class="nav nav-tabs">
      <li class="active"><a data-toggle="tab" data-target="#mac-linux2">Mac / Linux</a></li>
@@ -253,7 +253,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
      >  Use the search filter to filter images and only show **Local images**.
    4. Select your image and then select **Run**.
    5. Select **Optional settings**.
-   6. In **Host path**, specify the path to the `app` directory on your host machine.
+   6. In **Host path**, specify the path to the `getting-started-app` directory on your host machine.
    7. In **Container path**, specify `/app`.
    8. Select **Run**.
 
