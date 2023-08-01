@@ -10,10 +10,13 @@ Before you can use IPv6 in Docker containers, you need to
 enable IPv6 support in the Docker daemon. Afterward, you can choose to use
 either IPv4 or IPv6 (or both) with any container or network.
 
+IPv6 is only supported on Docker daemons running on Linux hosts.
+
 > **Note**
 >
-> - IPv6 support is experimental, use it with caution.
-> - IPv6 is only supported on Docker daemons running on Linux hosts.
+> When using IPv6, we recommend that you enable the
+> [experimental](../../release-lifecycle.md#experimental)
+> `ip6tables` parameter in the daemon configuration.
 
 ## Create an IPv6 network
 
@@ -48,7 +51,7 @@ The following steps show you how to create a Docker network that uses IPv6.
      $ docker network create --ipv6 --subnet 2001:0DB8::/112 ip6net
      ```
 
-  -  Using a Docker Compose file:
+   - Using a Docker Compose file:
 
      ```yaml
      networks:
