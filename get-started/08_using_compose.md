@@ -30,7 +30,7 @@ $ docker compose version
 
 ## Create the Compose file
 
-1. At the root of the `/getting-started/app` folder, create a file named `docker-compose.yml`.
+1. At the root of the `/getting-started-app` folder, create a file named `docker-compose.yml`.
 
 2. In the compose file, we'll start off by defining the list of services (or containers) we want to run as part of our application.
 
