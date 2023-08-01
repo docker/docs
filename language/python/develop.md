@@ -65,15 +65,14 @@ postgres=#
 
 In the previous command, you logged in to the PostgreSQL database by passing the `psql` command to the `db` container. Press ctrl-d to exit the PostgreSQL interactive terminal.
 
-
 ## Get and run the sample application
 
-To get an updated sample application that includes logic to connect to the database, you'll need to clone a new repository.
+You'll need to clone a new repository to get a sample application that includes logic to connect to the database.
 
 1. Change to a directory where you want to clone the repository and run the following command.
 
    ```consle
-   $ git clone https://github.com/docker/python-docker-database
+   $ git clone https://github.com/docker/python-docker-dev
    ```
 
 2. In the cloned repository's directory, run `docker init` to create the necessary Docker files. Refer to the following example to answer the prompts from `docker init`.

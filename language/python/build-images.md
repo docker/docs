@@ -32,7 +32,7 @@ $ git clone https://github.com/docker/python-docker
 
 You can test the application locally without Docker before you continue building and running the application with Docker. This section requires you to have Python 3.11 or later installed on your machine. Download and install [Python](https://www.python.org/downloads/){: target="_blank" rel="noopener" class="_"}.
 
-Create an environment, install the dependencies, and start the application to make sure it’s running. Open your terminal and navigate to the working directory you created.
+Open your terminal and navigate to the working directory you created. Create an environment, install the dependencies, and start the application to make sure it’s running.
 
 ```console
 $ cd /path/to/python-docker
