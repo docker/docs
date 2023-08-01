@@ -10,6 +10,30 @@ issues, and bug fixes in [Dockerfile reference](../../engine/reference/builder.m
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.6.0
+
+{% include release-date.html date="2023-06-13" %}
+
+### New
+
+* Add `--start-interval` flag to the
+  [`HEALTHCHECK` instruction](../../engine/reference/builder.md#healthcheck).
+
+The following features have graduated from the labs channel to stable:
+
+* The `ADD` instruction can now [import files directly from Git URLs](../../engine/reference/builder.md#adding-a-git-repository-add-git-ref-dir)
+* The `ADD` instruction now supports [`--checksum` flag](../../engine/reference/builder.md#verifying-a-remote-file-checksum-add---checksumchecksum-http-src-dest)
+  to validate the contents of the remote URL contents
+
+### Bug fixes and enhancements
+
+* Variable substitution now supports additional POSIX compatible variants without `:`.
+  [moby/buildkit#3611](https://github.com/moby/buildkit/pull/3611)
+* Exported Windows images now contain OSVersion and OSFeatures values from base image.
+  [moby/buildkit#3619](https://github.com/moby/buildkit/pull/3619)
+* Changed the permissions for Heredocs to 0644.
+  [moby/buildkit#3992](https://github.com/moby/buildkit/pull/3992)
+
 ## 1.5.2
 
 {% include release-date.html date="2023-02-14" %}
