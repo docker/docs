@@ -10,17 +10,44 @@ The **Containers** view lists all your running containers and applications. You 
 
 Use the **Search** field to search for any specific container.
 
-From the **Containers** view you can perform the following actions on one or more containers at once:
+From the **Containers** view you can perform the following actions:
 - Pause/Resume
-- Stop/Start
+- Stop/Start/Restart
+- View image packages and CVEs
 - Delete
 - Open the application in VS code
 - Open the port exposed by the container in a browser
-- Copy docker run. This allows you to easily share container run details or modify certain parameters
+- Copy docker run. This lets you share container run details or modify certain parameters.
+
+## Resource usage
+
+From the **Containers** view you can monitor your containers' CPU and memory usage over time. This can help you understand if something is wrong with your containers or if you need to allocate additional resources. 
+
+When you [inspect a container](#inspect-a-container), the **Stats** tab displays further information about a container's resource utilization. You can see how much CPU, Memory, Network and Disk space your container is using over time.
+
+## Inspect a container
+
+You can obtain detailed information about the container when you select it.
+
+You can then explore the **Logs**, **Inspect**, **Bind mounts**, **Terminal**, **Files**, and **Stats** tabs. Or you can use the quick action buttons to perform various actions such as pause, resume, start or stop .
+
+### Logs
+
+- Select **Logs** to see logs from the container. You can also:
+    - Use `Cmd + f`/`Ctrl + f` to open the search bar and find specific entries. Search matches are highlighted in yellow.
+    - Press `Enter` or `Shift + Enter` to jump to the next or previous search match respectively. 
+    - Use the **Copy** icon in the top right-hand corner to copy all the logs to your clipboard.
+    - Automatically copy any logs content by highlighting a few lines or a section of the logs.
+    - Use the **Clear terminal** icon in the top right-hand corner to clear the logs terminal. 
+    - Select and view external links that may be in your logs. 
+
+### Inspect
+
+- Select **Inspect** to view low-level information about the container. It displays the local path, version number of the image, SHA-256, port mapping, and other details.
 
 ### Integrated terminal
 
-You also have the option to open an integrated terminal, on a running container, directly within Docker Desktop. This allows you to quickly run commands within your container so you can understand its current state or debug when something goes wrong.
+From the **Terminal** tab, lets you use the integrated terminal, on a running container, directly within Docker Desktop. You are able to quickly run commands within your container so you can understand its current state or debug when something goes wrong.
 
 Using the integrated terminal is the same as running `docker exec -it <container-id> /bin/sh`, or `docker exec -it <container-id> cmd.exe` if you are using Windows containers, in your external terminal. It also:
 
@@ -32,23 +59,9 @@ To open the integrated terminal, either:
 - Hover over your running container and select the **Show container actions** menu. From the drop-down menu, select **Open in terminal**.
 - Select the container and then select the **Terminal** tab.
 
- To use your external terminal, change your settings.
+To use your external terminal, change your settings.
 
-## Inspect a container
-
-You can obtain detailed information about the container when you select a container.
-
-The **container view** displays **Logs**, **Inspect**, **Terminal**, **Files**, and **Stats** tabs and provides quick action buttons to perform various actions.
-
-- Select **Logs** to see logs from the container. You can also:
-    - Use `Cmd + f`/`Ctrl + f` to open the search bar and find specific entries. Search matches are highlighted in yellow.
-    - Press `Enter` or `Shift + Enter` to jump to the next or previous search match respectively. 
-    - Use the **Copy** icon in the top right-hand corner to copy all the logs to your clipboard.
-    - Automatically copy any logs content by highlighting a few lines or a section of the logs.
-    - Use the **Clear terminal** icon in the top right-hand corner to clear the logs terminal. 
-    - Select and view external links that may be in your logs. 
-
-- Select **Inspect** to view low-level information about the container. You can see the local path, version number of the image, SHA-256, port mapping, and other details.
+### Files
 
 - Select **Files** to explore the filesystem of running or stopped containers. You can also:
     - See which files have been recently added, modified, or deleted
@@ -56,5 +69,3 @@ The **container view** displays **Logs**, **Inspect**, **Terminal**, **Files**, 
     - Drag and drop files and folders between the host and the container
     - Delete unnecessary files when you right-click on a file
     - Download file and folders from the container straight to the host
-
-- Select **Stats** to view information about the container resource utilization. You can see the amount of CPU, disk I/O, memory, and network I/O used by the container.
