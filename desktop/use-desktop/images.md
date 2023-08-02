@@ -98,8 +98,8 @@ By default, when you go to **Images** in Docker Desktop, you see a list of image
 The **Local** and **Hub** tabs near the top toggles between viewing images in your local image store,
 and images in remote Docker Hub repositories that you have access to.
 
-You can also [connect JFrog Artifactory registries](#connect-an-artifactory-registry),
-and browse images in JFrog repositories directly in Docker Desktop.
+For more information about supported integrations, see
+[Integrating Docker Scout](../../scout/integrations/index.md).
 
 ### Hub
 

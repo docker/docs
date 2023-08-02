@@ -1952,6 +1952,10 @@ manuals:
       title: Advisory Database
     - path: /scout/data-handling/
       title: Data handling
+    - sectiontitle: Integrations
+      section:
+      - title: Overview
+        path: /scout/integrations/
 
 - sectiontitle: Docker Admin (Early Access)
   section:
