@@ -42,3 +42,14 @@ The following CI integrations are available:
 - [Microsoft Azure DevOps Pipelines](./ci/azure.md)
 - [Circle CI](./ci/circle-ci.md)
 - [Jenkins](./ci/jenkins.md)
+
+### Environment monitoring
+
+Environment monitoring refers to integrating Docker Scout with your deployments.
+This can give you information in realtime about your running container workloads.
+
+Integrating with environments lets you compare production workloads to other
+versions, in your image repositories or in your other environments.
+
+For more information about environmet integrations, see
+[Environments](./environment/index.md).

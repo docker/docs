@@ -1952,6 +1952,10 @@ manuals:
       section:
       - title: Overview
         path: /scout/integrations/
+      - sectiontitle: Environment monitoring
+        section:
+        - title: Overview
+          path: /scout/integrations/environment/
       - sectiontitle: Container registries
         section:
         - title: Artifactory
