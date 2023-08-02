@@ -1944,8 +1944,6 @@ manuals:
       title: Advanced image analysis
     - path: /scout/dashboard/
       title: Dashboard
-    - path: /scout/ci/
-      title: Continuous integration
     - path: /scout/artifactory/
       title: Artifactory integration
     - path: /scout/advisory-db-sources/
@@ -1956,6 +1954,18 @@ manuals:
       section:
       - title: Overview
         path: /scout/integrations/
+      - sectiontitle: Continuous integration
+        section:
+        - title: GitHub Actions
+          path: /scout/integrations/ci/gha/
+        - title: GitLab
+          path: /scout/integrations/ci/gitlab/
+        - title: Microsoft Azure DevOps Pipelines
+          path: /scout/integrations/ci/azure/
+        - title: Circle CI
+          path: /scout/integrations/ci/circle-ci/
+        - title: Jenkins
+          path: /scout/integrations/ci/jenkins/
 
 - sectiontitle: Docker Admin (Early Access)
   section:
