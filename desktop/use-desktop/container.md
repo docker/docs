@@ -23,13 +23,13 @@ From the **Containers** view you can perform the following actions:
 
 From the **Containers** view you can monitor your containers' CPU and memory usage over time. This can help you understand if something is wrong with your containers or if you need to allocate additional resources. 
 
-When you [inspect a container](#inspect-a-container), the **Stats** tab displays further information about a container's resource utilization. You can see how much CPU, Memory, Network and Disk space your container is using over time.
+When you [inspect a container](#inspect-a-container), the **Stats** tab displays further information about a container's resource utilization. You can see how much CPU, memory, network and disk space your container is using over time.
 
 ## Inspect a container
 
 You can obtain detailed information about the container when you select it.
 
-You can then explore the **Logs**, **Inspect**, **Bind mounts**, **Terminal**, **Files**, and **Stats** tabs. Or you can use the quick action buttons to perform various actions such as pause, resume, start or stop .
+From here, you can use the quick action buttons to perform various actions such as pause, resume, start or stop, or explore the **Logs**, **Inspect**, **Bind mounts**, **Terminal**, **Files**, and **Stats** tabs. 
 
 ### Logs
 
