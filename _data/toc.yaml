@@ -1944,8 +1944,6 @@ manuals:
       title: Advanced image analysis
     - path: /scout/dashboard/
       title: Dashboard
-    - path: /scout/artifactory/
-      title: Artifactory integration
     - path: /scout/advisory-db-sources/
       title: Advisory Database
     - path: /scout/data-handling/
@@ -1954,6 +1952,10 @@ manuals:
       section:
       - title: Overview
         path: /scout/integrations/
+      - sectiontitle: Container registries
+        section:
+        - title: Artifactory
+          path: /scout/integrations/registry/artifactory/
       - sectiontitle: Continuous integration
         section:
         - title: GitHub Actions

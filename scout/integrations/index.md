@@ -25,7 +25,7 @@ aren't hosted on Docker Hub.
 
 The following container registry integrations are available:
 
-- [Artifactory](../artifactory.md)
+- [Artifactory](./registry/artifactory.md)
 - Amazon ECR (coming soon)
 
 ### Continuous Integration

@@ -123,7 +123,7 @@ The integration described here connects your local Docker Desktop client with Ar
 You can browse, filter, save, and pull images in the Artifactory instance you configure.
 
 You may also want to consider activating automatic image analysis for your Artifactory repositories.
-Learn more about [Artifactory integration with Docker Scout](../../scout/artifactory.md).
+Learn more about [Artifactory integration with Docker Scout](../../scout/integrations/registry/artifactory.md).
 
 #### Connect an Artifactory registry
 

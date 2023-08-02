@@ -580,7 +580,7 @@
 "/scout/":
   - /go/scout/
   - /go/docker-scout/
-"/scout/artifactory":
+"/scout/integrations/registry/artifactory":
   - /go/scout-artifactory/
 
 # Telepresence
