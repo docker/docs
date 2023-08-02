@@ -1950,6 +1950,8 @@ manuals:
       title: Artifactory integration
     - path: /scout/advisory-db-sources/
       title: Advisory Database
+    - path: /scout/data-handling/
+      title: Data handling
 
 - sectiontitle: Docker Admin (Early Access)
   section:
