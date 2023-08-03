@@ -58,7 +58,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 - Fixed a bug where the self-diagnose tool showed a false-positive failure when vpnkit is expected to be not running. Fixes [docker/for-win#13479](https://github.com/docker/for-win/issues/13479).
 - Fixed a bug where an invalid regular expression in the search bar caused an error. Fixes [docker/for-win#13592](https://github.com/docker/for-win/issues/13592).
-- Resource Saver is available as an experimental feature. It reduces the amount of CPU and memory used by Docker Desktop when not running containers.
+- Resource Saver is available as an experimental feature for Windows Hyper-V. It reduces the amount of CPU and memory used by Docker Desktop when not running containers.
 
 ## 4.21.1
 
