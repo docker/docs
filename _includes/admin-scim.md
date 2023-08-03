@@ -37,6 +37,10 @@ The table below lists the supported attributes. Note that your attribute mapping
 | givenName                            | User’s first name |
 | familyName |User’s surname                                              |
 
+> **Note**
+>
+> Your IdP may use different default attributes. You can remove all non-supported attributes not listed in the previous table. If you're setting up SCIM with Azure, you may notice a default attribute `externalId`. If you don't remove this attribute, ensure that you set the attribute type to `reference` to prevent errors with your SCIM configuration.
+
 ## Set up SCIM
 
 You must make sure you have {{ sso_link }} before you enable SCIM. Enforcing SSO is not required.
