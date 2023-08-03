@@ -43,7 +43,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### Bug fixes and enhancements
 
 #### For all platforms
-- Extended Settings Management features to allow IT/admins to disable Docker Desktop "extensions".
+- [Settings Management](hardened-desktop/settings-management.md) now lets you turn off Docker Extensions for your organisation.
 - Fixed a bug where turning on Kubernetes from the UI failed when the system was paused.
 - Fixed a bug where turning on Wasm from the UI failed when the system was paused.
 - Bind mounts are now shown when you [inspect a container](use-desktop/container.md).
@@ -52,13 +52,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Mac
 
 - Fixed a bug that prevented Docker Desktop from starting. [docker/for-mac#6890](https://github.com/docker/for-mac/issues/6890)
-Resource Saver is available as an experimental feature. It reduces the amount of CPU and memory used by Docker Desktop when not running containers.
+- Resource Saver is available as an experimental feature. It reduces the amount of CPU and memory used by Docker Desktop when not running containers.
 
 #### For Windows
 
 - Fixed a bug where the self-diagnose tool showed a false-positive failure when vpnkit is expected to be not running. Fixes [docker/for-win#13479](https://github.com/docker/for-win/issues/13479).
 - Fixed a bug where an invalid regular expression in the search bar caused an error. Fixes [docker/for-win#13592](https://github.com/docker/for-win/issues/13592).
-Resource Saver is available as an experimental feature. It reduces the amount of CPU and memory used by Docker Desktop when not running containers.
+- Resource Saver is available as an experimental feature. It reduces the amount of CPU and memory used by Docker Desktop when not running containers.
 
 ## 4.21.1
 
