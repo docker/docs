@@ -43,7 +43,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### Bug fixes and enhancements
 
 #### For all platforms
-- [Settings Management](hardened-desktop/settings-management.md) now lets you turn off Docker Extensions for your organisation.
+- [Settings Management](hardened-desktop/settings-management/index.md) now lets you turn off Docker Extensions for your organisation.
 - Fixed a bug where turning on Kubernetes from the UI failed when the system was paused.
 - Fixed a bug where turning on Wasm from the UI failed when the system was paused.
 - Bind mounts are now shown when you [inspect a container](use-desktop/container.md).
