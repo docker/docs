@@ -9,11 +9,11 @@
 
 /desktop/ @aevesdocker
 
-/desktop/extensions/ @ChrisChinchilla
+/desktop/extensions/ @aevesdocker
 
-/desktop/extensions-sdk/ @ChrisChinchilla
+/desktop/extensions-sdk/ @aevesdocker
 
-/scout/ @ChrisChinchilla
+/scout/ @dvdksn
 
 /docker-hub/ @aevesdocker @craig-osterhout @stephaurelio
 
@@ -21,9 +21,9 @@
 
 /subscription/ @aevesdocker @stephaurelio
 
-/docker-hub/publish/ @ChrisChinchilla
+/docker-hub/publish/ @aevesdocker
 
-/docker-hub/official_images/ @ChrisChinchilla
+/docker-hub/official_images/ @aevesdocker
 
 /registry/ @dvdksn
 

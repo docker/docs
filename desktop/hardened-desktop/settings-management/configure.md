@@ -104,6 +104,10 @@ The following `admin-settings.json` code and table provides an example of the re
   "analyticsEnabled": {
     "locked": false,
     "value": true
+  },
+  "extensionsEnabled": {
+    "value": false,
+    "locked": true
   }
 }
 ```
@@ -124,6 +128,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  | Overrides the options in the linux daemon config file. See the [Docker Engine reference](/engine/reference/commandline/dockerd/#daemon-configuration-file).|                                |
 |`disableUpdate`|  |If `value` is set to true, checking for and notifications about Docker Desktop updates is disabled.|
 |`analyticsEnabled`|  |If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |
+|`extensionsEnabled`|  |If `value` is set to false, Docker extensions are disabled. |
 
 ### Step three: Re-launch Docker Desktop
 >**Note**
