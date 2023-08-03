@@ -43,7 +43,7 @@ From here, you can use the quick action buttons to perform various actions such 
 
 ### Inspect
 
-- Select **Inspect** to view low-level information about the container. It displays the local path, version number of the image, SHA-256, port mapping, and other details.
+Select **Inspect** to view low-level information about the container. It displays the local path, version number of the image, SHA-256, port mapping, and other details.
 
 ### Integrated terminal
 
@@ -51,7 +51,7 @@ From the **Terminal** tab, lets you use the integrated terminal, on a running co
 
 Using the integrated terminal is the same as running `docker exec -it <container-id> /bin/sh`, or `docker exec -it <container-id> cmd.exe` if you are using Windows containers, in your external terminal. It also:
 
-- Automatically detects the default user for a running container from the image's Dockerfile. If no use is specified it defaults to `root`.
+- Automatically detects the default user for a running container from the image's Dockerfile. If no user is specified it defaults to `root`.
 - Persists your session if you navigate to another part of the Docker Dashboard and then return.
 - Supports copy, paste, search, and clearing your session.
 
@@ -59,7 +59,7 @@ To open the integrated terminal, either:
 - Hover over your running container and select the **Show container actions** menu. From the drop-down menu, select **Open in terminal**.
 - Select the container and then select the **Terminal** tab.
 
-To use your external terminal, change your settings.
+To use your external terminal, navigate to the **General** tab in **Settings** and select the **System default** option under **Choose your terminal**.
 
 ### Files
 
