@@ -26,7 +26,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.22.0
 
-{% include release-date.html date="2023-07-27" %}
+{% include release-date.html date="2023-08-03" %}
 
 {% include desktop-install.md all=true version="4.22.0" build_path="/" %}
 
@@ -52,13 +52,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Mac
 
 - Fixed a bug that prevented Docker Desktop from starting. [docker/for-mac#6890](https://github.com/docker/for-mac/issues/6890)
-- Resource Saver is available as an experimental feature. It reduces the amount of CPU and memory used by Docker Desktop when not running containers.
+- Resource Saver is now available on Mac. It optimises Docker Desktop's usage of your system resources when no containers are running. To access this feature, make sure you have [turned on access to experimental features](settings/mac.md) in settings.
 
 #### For Windows
 
 - Fixed a bug where the self-diagnose tool showed a false-positive failure when vpnkit is expected to be not running. Fixes [docker/for-win#13479](https://github.com/docker/for-win/issues/13479).
 - Fixed a bug where an invalid regular expression in the search bar caused an error. Fixes [docker/for-win#13592](https://github.com/docker/for-win/issues/13592).
-- Resource Saver is available as an experimental feature for Windows Hyper-V. It reduces the amount of CPU and memory used by Docker Desktop when not running containers.
+- Resource Saver is now available on Windows Hyper-V. It optimises Docker Desktop's usage of your system resources when no containers are running. To access this feature, make sure you have [turned on access to experimental features](settings/windows.md) in settings.
 
 ## 4.21.1
 
