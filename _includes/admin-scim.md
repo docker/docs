@@ -64,3 +64,7 @@ If SCIM is disabled, any user provisioned through SCIM will remain in the organi
 2. {{ sso_navigation }}
 3. In the SSO connections table, select the **Actions** icon.
 4. Select **Disable SCIM**.
+
+## Limitations
+
+Administrators can assign roles to organization members. SCIM doesn't support role management.
