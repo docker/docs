@@ -36,13 +36,21 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - [Compose v2.20.2](https://github.com/docker/compose/releases/tag/v2.20.2)
 - [Docker Engine v24.0.5](https://docs.docker.com/engine/release-notes/24.0/#2405)
 
+> **Note**
+>
+> In this release, the bundled Docker Compose and Buildx binaries show a different version string. This relates to our efforts to test new features without causing backwards compatibility issues.
+>
+> For example, `docker buildx version` outputs `buildx v0.11.2-desktop.1`.
+
 ### New
+
 - [Resource Usage](use-desktop/container.md) has moved from experimental to GA.
 - You can now split large Compose projects into multiple sub-projects with [`include`](../compose/multiple-compose-files/include.md).
 
 ### Bug fixes and enhancements
 
 #### For all platforms
+
 - [Settings Management](hardened-desktop/settings-management/index.md) now lets you turn off Docker Extensions for your organisation.
 - Fixed a bug where turning on Kubernetes from the UI failed when the system was paused.
 - Fixed a bug where turning on Wasm from the UI failed when the system was paused.
@@ -82,11 +90,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### New
 
-- Added support for new Wasm runtimes: slight, spin, and wasmtime.  Users can download Wasm runtimes on demand when the containerd image store is enabled.
+- Added support for new Wasm runtimes: slight, spin, and wasmtime. Users can download Wasm runtimes on demand when the containerd image store is enabled.
 - Added Rust server support to Docker init.
 - Beta release of the [**Builds** view](use-desktop/builds.md) that lets you inspect builds and manage builders. This can be found in the **Features in Development** tab in **Settings**.
 
 ### Upgrades
+
 - [Buildx v0.11.0](https://github.com/docker/buildx/releases/tag/v0.11.0)
 - [Compose v2.19.0](https://github.com/docker/compose/releases/tag/v2.19.0)
 - [Kubernetes v1.27.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.27.2)
