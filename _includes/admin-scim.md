@@ -29,13 +29,16 @@ The following provisioning features are supported:
  - Re-activate users
  - Group mapping
 
-The table below lists the supported attributes. Note that your attribute mappings must match for SSO to prevent duplicating your members.
+The following table lists the supported attributes. Note that your attribute mappings must match for SSO to prevent duplicating your members.
 
 | Attribute    | Description
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
-| username             | Unique identifier of the user (email)                                   |
-| givenName                            | User’s first name |
-| familyName |User’s surname                                              |
+| userName             | User's primary email address. This is used as the unique identifier of the user. |
+| name.givenName | User’s first name |
+| name.familyName | User’s surname |
+| active | Indicates if a user is enabled or disabled. Can be set to false to de-provision the user. |
+
+For additional details about supported attributes and SCIM, see [Docker Hub API SCIM reference](/docker-hub/api/latest/#tag/scim).
 
 ## Set up SCIM
 
