@@ -29,17 +29,16 @@ The following provisioning features are supported:
  - Re-activate users
  - Group mapping
 
-The table below lists the supported attributes. Note that your attribute mappings must match for SSO to prevent duplicating your members.
+The following table lists the supported attributes. Note that your attribute mappings must match for SSO to prevent duplicating your members.
 
 | Attribute    | Description
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
-| username             | Unique identifier of the user (email)                                   |
-| givenName                            | User’s first name |
-| familyName |User’s surname                                              |
+| userName             | User's primary email address. This is used as the unique identifier of the user. |
+| givenName | User’s first name |
+| familyName |User’s surname |
+| active | Indicates if a user is enabled or disabled. Can be set to false to de-provision the user. |
 
-> **Note**
->
-> Your IdP may use different default attributes. You can remove all non-supported attributes not listed in the previous table. If you're setting up SCIM with Azure, you may notice a default attribute `externalId`. If you don't remove this attribute, ensure that you set the attribute type to `reference` to prevent errors with your SCIM configuration.
+For additional details about supported attributes and SCIM, see [Docker Hub API SCIM reference](/docker-hub/api/latest/#tag/scim).
 
 ## Set up SCIM
 
