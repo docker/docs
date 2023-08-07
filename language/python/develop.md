@@ -71,7 +71,7 @@ You'll need to clone a new repository to get a sample application that includes 
 
 1. Change to a directory where you want to clone the repository and run the following command.
 
-   ```consle
+   ```console
    $ git clone https://github.com/docker/python-docker-dev
    ```
 
