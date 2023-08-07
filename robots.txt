@@ -28,6 +28,7 @@ Disallow: /datacenter/
 Disallow: /ee/
 
 Disallow: /apidocs/v*
+Disallow: /build/hydrobuild/
 
 Sitemap: {{ site.docs_url }}/sitemap.xml
 {%- else -%}
