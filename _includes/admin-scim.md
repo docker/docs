@@ -34,8 +34,8 @@ The following table lists the supported attributes. Note that your attribute map
 | Attribute    | Description
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
 | userName             | User's primary email address. This is used as the unique identifier of the user. |
-| givenName | User’s first name |
-| familyName |User’s surname |
+| name.givenName | User’s first name |
+| name.familyName | User’s surname |
 | active | Indicates if a user is enabled or disabled. Can be set to false to de-provision the user. |
 
 For additional details about supported attributes and SCIM, see [Docker Hub API SCIM reference](/docker-hub/api/latest/#tag/scim).
