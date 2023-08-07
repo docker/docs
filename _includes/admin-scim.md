@@ -67,4 +67,4 @@ If SCIM is disabled, any user provisioned through SCIM will remain in the organi
 
 ## Limitations
 
-Administrators can assign roles to organization members. SCIM doesn't support role management.
+Administrators can assign [roles](/docker-hub/roles-and-permissions/) to organization members. However, SCIM doesn't support role management.
