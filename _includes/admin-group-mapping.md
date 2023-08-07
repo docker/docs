@@ -51,6 +51,7 @@ The following lists the supported group mapping attributes:
 | id | Unique ID of the group in UUID format. This attribute is read-only. |
 | displayName | Name of the group following the group mapping format: `organization:team`. |
 | members | A list of users that are members of this group. |
+| members[x].value | Unique ID of the user that is a member of this group. Members are referenced by ID. |
 
 To take advantage of group mapping, follow the instructions provided by your IdP:
 
