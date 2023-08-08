@@ -130,15 +130,15 @@ Docker from the repository.
     > $(. /etc/os-release && echo "$VERSION_CODENAME")
     > ```
 
-#### Install Docker Engine
-
-1. Update the `apt` package index:
+4. Update the `apt` package index:
 
    ```console
    $ sudo apt-get update
    ```
 
-2. Install Docker Engine, containerd, and Docker Compose.
+#### Install Docker Engine
+
+1. Install Docker Engine, containerd, and Docker Compose.
 
    <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" data-target="#tab-latest">Latest</a></li>
@@ -180,7 +180,7 @@ Docker from the repository.
    <hr>
    </div>
 
-3. Verify that the Docker Engine installation is successful by running the
+2. Verify that the Docker Engine installation is successful by running the
    `hello-world` image:
 
    ```console

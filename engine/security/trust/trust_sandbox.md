@@ -115,7 +115,7 @@ the `trustsandbox` container, the Notary server, and the Registry server.
 
 5. Run the containers on your local system.
 
-        $ docker-compose up -d
+        $ docker compose up -d
 
     The first time you run this, the docker-in-docker, Notary server, and registry
     images are downloaded from Docker Hub.
@@ -289,4 +289,4 @@ When you are done, and want to clean up all the services you've started and any
 anonymous volumes that have been created, just run the following command in the
 directory where you've created your Docker Compose file:
 
-        $ docker-compose down -v
+        $ docker compose down -v

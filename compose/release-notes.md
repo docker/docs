@@ -39,7 +39,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 ### Bug fixes and enhancements
 * Introduced the `wait` command.
 * Added support of `--builder` and `BUILDX_BUILDER` to the `build` command.
-* Added support for the `attach` attribute from the Compose Specification.
+* Added support for the `include` and `attach` attributes from the Compose Specification.
 * Fixed a DryRun mode issue when initializing CLI client.
 * Fixed a bug with random missing network when a service has more than one.
 * Fixed the Secrets file permission value to comply with the Compose Specification.

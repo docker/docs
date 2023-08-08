@@ -14,17 +14,17 @@ Sign in to Docker Hub to change account settings and carry out administrative or
              <div class="component-icon">
                  <a href="/docker-hub/orgs/"><img src="/assets/images/contact.svg" alt="Set-up-an-org" width="70" height="70"></a>
                  </div>
-                 <h2 id="set-up-an-org">Set up an organization</h2>
-                <p> <a href="/docker-hub/orgs/">Explore and set up an organization in Docker Hub</a></p>
+                 <h2 id="set-up-an-org"><a href="/docker-hub/orgs/">Create your organization</a></h2>
+                <p>Explore and set up an organization in Docker Hub.</p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
         <div class="component">
             <div class="component-icon">
-                 <a href="/docker-hub/orgs/"><img src="/assets/images/explore.svg" alt="onboard" width="70" height="70"></a>
+                 <a href="/docker-hub/onboard/"><img src="/assets/images/explore.svg" alt="onboard" width="70" height="70"></a>
             </div>
-                <h2 id="onboard-users">Onboard users to your teams and organizations</h2>
-                <p>Learn how to onboard with <a href="/docker-hub/onboard-team/">Docker Team</a> or <a href="/docker-hub/onboard-business/">Docker Business</a> subscription.</p>
+               <h2 id="onboard-users"> <a href="/docker-hub/onboard/">Onboard your organization</a></h2>
+                <p>Learn how to onboard users to your organization.</p>
          </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
@@ -44,8 +44,8 @@ Sign in to Docker Hub to change account settings and carry out administrative or
             <div class="component-icon">
                  <a href="/docker-hub/configure-sign-in/"><img src="/assets/images/sign-on.svg" alt="sign-in" width="70" height="70"></a>
             </div>
-                <h2 id="sign-in"><a href="/docker-hub/configure-sign-in/">Enforce sign in</a></h2>
-                <p>Configure sign in for members of your teams and organizations.</p>
+                <h2 id="sign-in"><a href="/docker-hub/configure-sign-in/">Enforce sign-in</a></h2>
+                <p>Configure sign-in for members of your teams and organizations.</p>
         </div>
      </div>
      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">

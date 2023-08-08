@@ -36,6 +36,7 @@ Using the `admin-settings.json` file, admins can:
 - Enforce the use of WSL2 based engine or Hyper-V
 - Configure Docker Engine
 - Turn off Docker Desktop's ability to checks for updates
+- Turn off Docker Extensions
 
 For more details on the syntax and options admins can set, see [Configure Settings Management](configure.md).
 

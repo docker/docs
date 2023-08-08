@@ -168,7 +168,7 @@ Another really cool feature of using a Compose file is that we have service reso
 Now, to start our application and to confirm that it is running properly.
 
 ```console
-$ docker-compose -f docker-compose.dev.yml up --build
+$ docker compose -f docker-compose.dev.yml up --build
 ```
 
 We pass the `--build` flag so Docker will compile our image and then starts the containers. You should see similar output if it runs successfully:

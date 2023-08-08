@@ -6,7 +6,7 @@ keywords: build, buildkit, buildx, guide, tutorial, layers
 
 {% include_relative nav.html selected="2" %}
 
-The order of Dockerfile instructions matter. A Docker build consists of a series
+The order of Dockerfile instructions matters. A Docker build consists of a series
 of ordered build instructions. Each instruction in a Dockerfile roughly translates
 to an image layer. The following diagram illustrates how a Dockerfile translates
 into a stack of layers in a container image.
@@ -22,20 +22,20 @@ If a layer has changed since the last build, that layer, and all layers that fol
 The Dockerfile from the previous section copies all project files to the
 container (`COPY . .`) and then downloads application dependencies in the
 following step (`RUN go mod download`). If you were to change any of the project
-files, that would invalidate the cache for the `COPY` layer. It also invalidates
+files, then that would invalidate the cache for the `COPY` layer. It also invalidates
 the cache for all of the layers that follow.
 
 ![Layer cache is bust](./images/cache-bust.png){:.invertible}
 
-The current order of the Dockerfile instruction make it so that the builder must
+Because of the current order of the Dockerfile instructions, the builder must
 download the Go modules again, despite none of the packages having changed since
-last time.
+the last time.
 
 ## Update the instruction order
 
 You can avoid this redundancy by reordering the instructions in the Dockerfile.
 Change the order of the instructions so that downloading and installing dependencies
-occurs before you copy the source code over to the container. That way, the
+occur before the source code is copied over to the container. In that way, the
 builder can reuse the "dependencies" layer from the cache, even when you
 make changes to your source code.
 
@@ -58,7 +58,7 @@ For Go to know which dependencies to download, you need to copy the `go.mod` and
   ENTRYPOINT [ "/bin/server" ]
 ```
 
-Now if you edit the application code, building the image won't cause the
+Now if you edit your source code, building the image won't cause the
 builder to download the dependencies each time. The `COPY . .` instruction
 appears after the package management instructions, so the builder can reuse the
 `RUN go mod download` layer.
