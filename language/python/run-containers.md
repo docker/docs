@@ -31,7 +31,7 @@ $ curl localhost:5000
 curl: (7) Failed to connect to localhost port 5000: Connection refused
 ```
 
-As you can see, your `curl` command failed because the connection to your server was refused. This means, you were not able to connect to the localhost on port 5000. This is expected because your container is running in isolation which includes networking. Stop the container and restart with port 5000 published on your local network.
+As you can see, your `curl` command failed because the connection to your server was refused. This means you were not able to connect to localhost on port 5000. This is expected because your container is running in isolation which includes networking. Stop the container and restart with port 5000 published on your local network.
 
 To stop the container, press ctrl-c. This will return you to the terminal prompt.
 
@@ -43,7 +43,7 @@ You did not specify a port when running the flask application in the container a
 $ docker run --publish 8000:5000 python-docker
 ```
 
-Now, rerun the curl command from above. Remember to open a new terminal.
+Now, open a new terminal window and re-run the `curl` command.
 
 ```console
 $ curl localhost:8000

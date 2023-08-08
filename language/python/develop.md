@@ -14,13 +14,13 @@ Work through the steps to build an image and run it as a containerized applicati
 
 In this section, you’ll learn how to use volumes and networking in Docker. You’ll also use Docker to build your images and Docker Compose to make everything a whole lot easier.
 
-First, you’ll take a look at running a database in a container and how you can use volumes and networking to persist your data and allow your application to talk with the database. Then you’ll pull everything together into a Compose file which allows you to set up and run a local development environment with one command.
+First, you’ll take a look at running a database in a container and how you can use volumes and networking to persist your data and let your application to talk with the database. Then you’ll pull everything together into a Compose file which lets you to set up and run a local development environment with one command.
 
 ## Run a database in a container
 
-Instead of downloading PostgreSQL, installing, configuring, and then running the PostgreSQL database as a service, you can use the Docker Official Image for PostgreSQL and run it in a container.
+Instead of downloading PostgreSQL, installing, configuring, and then running the PostgreSQL database on your system directly, you can use the Docker Official Image for PostgreSQL and run it in a container.
 
-Before you run PostgreSQL in a container, create a volume that Docker can manage to store your persistent data and configuration. Use the named volumes feature that Docker provides instead of using bind mounts.
+Before you run PostgreSQL in a container, create a volume that Docker can manage to store your persistent data and configuration.
 
 Run the following command to create your volume.
 
@@ -192,7 +192,7 @@ secrets:
     file: db/password.txt
 ```
 
-Note that the file doesn't specify a network for those 2 services. When you use Compose, it automatically creates a network and connects the services to it. For more information see [Networking in Compose](../../compose/networking.md).
+Note that the file doesn't specify a network for those 2 services. Compose automatically creates a network and connects the services to it. For more information see [Networking in Compose](../../compose/networking.md).
 
 Before you run the application using Compose, notice that this Compose file specifies a `password.txt` file to hold the database's password. You must create this file as it's not included in the source repository.
 
@@ -232,7 +232,7 @@ This is because your database is empty.
 In this section, you took a look at setting up your Compose file to run your Python application and database with a single command.
 
 Related information:
- - [Docker volumes](../../storage/volumes.md)
+ - [Volumes](../../storage/volumes.md)
  - [Compose overview](../../compose/index.md)
 
 ## Next steps

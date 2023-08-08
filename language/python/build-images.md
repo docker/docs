@@ -74,10 +74,10 @@ Let's get started!
 You should now have the following 3 new files in your `python-docker`
 directory:
  - Dockerfile
- - .dockerignore
- - compose.yaml
+ - `.dockerignore`
+ - `compose.yaml`
 
-For building an image, only the Dockerfile is necessary. Open the Dockerfile
+The Dockerfile is used to build the image. Open the Dockerfile
 in your favorite IDE or text editor and see what it contains. To learn more
 about Dockerfiles, see the [Dockerfile reference](../../engine/reference/builder.md).
 
@@ -87,7 +87,7 @@ When you run `docker init`, it also creates a [`.dockerignore`](../../engine/ref
 
 ## Build an image
 
-Now that you’ve created the Dockerfile, you can build the image. To do this, use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a "context". A build’s context is the set of files located in the specified PATH or URL. The Docker build process can access any of the files located in this context.
+Now that you’ve created the Dockerfile, you can build the image. To do this, use the `docker build` command. The `docker build` command builds Docker images from a Dockerfile and a build context. A build context is the set of files that the build has access to.
 
 The build command optionally takes a `--tag` flag. The tag sets the name of the image and an optional tag in the format `name:tag`. Leave off the optional `tag` for now to help simplify things. If you don't pass a tag, Docker uses “latest” as its default tag.
 
@@ -185,9 +185,10 @@ This section showed how you can use `docker init` to create a Dockerfile and .do
 
 Related information:
  - [Dockerfile reference](../../engine/reference/builder.md)
- - [.dockerignore file](../../engine/reference/builder.md#dockerignore-file)
+ - [.dockerignore file reference](../../engine/reference/builder.md#dockerignore-file)
  - [docker init CLI reference](../../engine/reference/commandline/init.md)
  - [docker build CLI reference](../../engine/reference/commandline/build.md)
+ - [Build with Docker guide](../../build/guide/index.md)
 
 ## Next steps
 
