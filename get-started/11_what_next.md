@@ -10,7 +10,7 @@ We're not going to go deep-dive here, but here are a few other areas to look at 
 ## Container orchestration
 
 Running containers in production is tough. You don't want to log into a machine and simply run a
-`docker run` or `docker-compose up`. Why not? Well, what happens if the containers die? How do you
+`docker run` or `docker compose up`. Why not? Well, what happens if the containers die? How do you
 scale across several machines? Container orchestration solves this problem. Tools like Kubernetes,
 Swarm, Nomad, and ECS all help solve this problem, all in slightly different ways.
 

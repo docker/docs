@@ -381,7 +381,7 @@ Another really cool feature of using a Compose file is that we have service reso
 Now, to start our application and to confirm that it is running properly, run the following command:
 
 ```console
-$ docker-compose up --build
+$ docker compose up --build
 ```
 
 We pass the `--build` flag so Docker will compile our image and then start the containers.
@@ -390,19 +390,19 @@ Now let’s test our application. Using a web browser, access `http://localhost:
 
 ## Shutting down
 
-To stop the containers started by Docker Compose, press Ctrl+C in the terminal where we ran `docker-compose up`. To remove those containers after they have been stopped, run `docker-compose down`.
+To stop the containers started by Docker Compose, press Ctrl+C in the terminal where we ran `docker compose up`. To remove those containers after they have been stopped, run `docker compose down`.
 
 ## Detached mode
 
-You can run containers started by the `docker-compose` command in detached mode, just as you would with the docker command, by using the `-d` flag.
+You can run containers started by the `docker compose` command in detached mode, just as you would with the docker command, by using the `-d` flag.
 
 To start the stack, defined by the Compose file in detached mode, run:
 
 ```console
-docker-compose up --build -d
+docker compose up --build -d
 ```
 
-Then, you can use `docker-compose stop` to stop the containers and `docker-compose down` to remove them.
+Then, you can use `docker compose stop` to stop the containers and `docker compose down` to remove them.
 
 ## The `.env` file
 
@@ -444,7 +444,7 @@ volumes:
 Build and run your application to confirm the changes are applied properly.
 
 ```console
-$ docker-compose up --build -d
+$ docker compose up --build -d
 ```
 
 Now let’s test our application. Using a web browser, access `http://localhost:5000` to view the page.

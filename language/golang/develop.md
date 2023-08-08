@@ -588,7 +588,7 @@ The exact value does not really matter for our example, because we run Cockroach
 
 ### Merging Compose files
 
-The file name `docker-compose.yml` is the default file name which `docker-compose` command recognises if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:
+The file name `docker-compose.yml` is the default file name which `docker compose` command recognises if no `-f` flag is provided. This means you can have multiple Docker Compose files if your environment has such requirements. Furthermore, Docker Compose files are... composable (pun intended), so multiple files can be specified on the command line to merge parts of the configuration together. The following list is just a few examples of scenarios where such a feature would be very useful:
 
 * Using a bind mount for the source code for local development but not when running the CI tests;
 * Switching between using a pre-built image for the frontend for some API application vs creating a bind mount for source code;
@@ -611,7 +611,7 @@ Other ways of dealing with undefined or empty values exist, as documented in the
 Before you apply changes made to a Compose configuration file, there is an opportunity to validate the content of the configuration file with the following command:
 
 ```console
-$ docker-compose config
+$ docker compose config
 ```
 
 When this command is run, Docker Compose would read the file `docker-compose.yml`, parse it into a data structure in memory, validate where possible, and print back the _reconstruction_ of that configuration file from its internal representation. If this is not possible due to errors, it would print an error message instead.
@@ -621,14 +621,14 @@ When this command is run, Docker Compose would read the file `docker-compose.yml
 Let’s start our application and confirm that it is running properly.
 
 ```console
-$ docker-compose up --build
+$ docker compose up --build
 ```
 
 We pass the `--build` flag so Docker will compile our image and then starts it.
 
 > **Note**
 >
-> Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on the update to the source code unless the `--build` flag is provided. It is a very common pitfall to edit one's source code, and forget to use the `--build` flag when running `docker-compose up`.
+> Docker Compose is a useful tool, but it has its own quirks. For example, no rebuild is triggered on the update to the source code unless the `--build` flag is provided. It is a very common pitfall to edit one's source code, and forget to use the `--build` flag when running `docker compose up`.
 
 Since our set-up is now run by Docker Compose, it has assigned it a "project name", so we got a new volume for our CockroachDB instance. This means that our application would fail to connect to the database, because the database does not exist in this new volume. The terminal would display an authentication error for the database:
 
@@ -693,23 +693,23 @@ Hello, Docker! (0)
 
 ### Shutting down
 
-To _stop_ the containers started by Docker Compose, press ctrl+c in the terminal where we run `docker-compose up`. To _remove_ those containers after they had been stopped, run `docker-compose down`.
+To _stop_ the containers started by Docker Compose, press ctrl+c in the terminal where we run `docker compose up`. To _remove_ those containers after they had been stopped, run `docker compose down`.
 
 ### Detached mode
 
-You can run containers started by the `docker-compose` command in detached mode, just as you would with the `docker` command, by using the `-d` flag. 
+You can run containers started by the `docker compose` command in detached mode, just as you would with the `docker` command, by using the `-d` flag. 
 
 To start the stack, defined by the Compose file in detached mode, run:
 
 ```console
-$ docker-compose up --build -d
+$ docker compose up --build -d
 ```
 
-Then, you can use `docker-compose stop` to stop the containers and `docker-compose down` to remove them.
+Then, you can use `docker compose stop` to stop the containers and `docker compose down` to remove them.
 
 ## Further exploration
 
-We would suggest running `docker-compose` to see what other commands are available.
+We would suggest running `docker compose` to see what other commands are available.
 
 ## Wrap up
 
