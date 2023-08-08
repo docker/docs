@@ -43,7 +43,7 @@ We support these broad categories of callouts:
 > Removing Volumes
 >
 > By default, named volumes in your compose file are NOT removed when running
-> `docker-compose down`. If you want to remove the volumes, you will need to add
+> `docker compose down`. If you want to remove the volumes, you will need to add
 > the `--volumes` flag.
 >
 > The Docker Dashboard does not remove volumes when you delete the app stack.
@@ -91,7 +91,7 @@ For both of the following callouts, consult [the Docker release lifecycle](/rele
 > Removing Volumes
 >
 > By default, named volumes in your compose file are NOT removed when running
-> `docker-compose down`. If you want to remove the volumes, you will need to add
+> `docker compose down`. If you want to remove the volumes, you will need to add
 > the `--volumes` flag.
 >
 > The Docker Dashboard does _not_ remove volumes when you delete the app stack.

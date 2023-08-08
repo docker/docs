@@ -10,15 +10,6 @@
 
 With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams.
 
-To correctly assign your users to Docker teams, you must create groups in your IDP following the naming pattern `organization:team`. For example, if you want to manage provisioning for the team "developers” in Docker, and your organization name is “moby,” you must create a group in your IdP with the name “moby:developers”.
-
-Once you enable group mappings in your connection, users assigned to that group in your IdP will automatically be added to the team “developers” in Docker.
-
->**Tip**
->
->Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, a group is created if it doesn’t already exist.
-{: .tip}
-
 ## How group mapping works
 
 IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. These attributes are used by Just-In-Time (JIT) Provisioning to create or update the user’s Docker profile and their associations with organizations and teams on Docker Hub.
@@ -41,6 +32,26 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 ![JIT provisioning](/docker-hub/images/jit.PNG)
 
 ## Use group mapping
+
+To correctly assign your users to Docker teams, you must create groups in your IdP following the naming pattern `organization:team`. For example, if you want to manage provisioning for the team "developers", and your organization name is "moby", you must create a group in your IdP with the name `moby:developers`.
+
+Once you enable group mappings in your connection, users assigned to that group in your IdP will automatically be added to the team "developers" in Docker.
+
+You can use this format to add a user to multiple organizations. For example, if you want to add a user to the "backend" team in the "moby" organization as well as the "desktop" team in the "docker" organization, the format would be: `moby:backend` and `docker:desktop`.
+
+>**Tip**
+>
+>Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, a group is created if it doesn’t already exist.
+{: .tip}
+
+The following lists the supported group mapping attributes:
+
+| Attribute | Description |
+|:--------- | :---------- |
+| id | Unique ID of the group in UUID format. This attribute is read-only. |
+| displayName | Name of the group following the group mapping format: `organization:team`. |
+| members | A list of users that are members of this group. |
+| members[x].value | Unique ID of the user that is a member of this group. Members are referenced by ID. |
 
 To take advantage of group mapping, follow the instructions provided by your IdP:
 

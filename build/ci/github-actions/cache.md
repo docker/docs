@@ -151,6 +151,83 @@ jobs:
 ```
 {% endraw %}
 
+### Cache mounts
+
+BuildKit doesn't preserve cache mounts in the GitHub Actions cache by default.
+If you wish to put your cache mounts into GitHub Actions cache and reuse it
+between builds, you can use a workaround provided by two third-party actions:
+
+- `overmindtech/buildkit-cache-dance/extract`
+- `overmindtech/buildkit-cache-dance/inject`
+
+These GitHub Actions creates temporary containers to extract and inject the
+cache mount data with your Docker build steps.
+
+The following example shows how to use this workaround with a Go project.
+
+{% raw %}
+```yaml
+name: ci
+on: push
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: YOUR_IMAGE
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Go Build Cache for Docker
+        uses: actions/cache@v3
+        with:
+          path: go-build-cache
+          key: ${{ runner.os }}-go-build-cache-${{ hashFiles('**/go.sum') }}
+
+      - name: inject go-build-cache into docker
+        uses: overmindtech/buildkit-cache-dance/inject@main
+        with:
+          cache-source: go-build-cache
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          file: build/package/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+
+      - name: extract go-build-cache from docker
+        uses: overmindtech/buildkit-cache-dance/extract@main
+        with:
+          cache-source: go-build-cache
+```
+{% endraw %}
+
+For more information about this workaround, refer to the
+[GitHub repository](https://github.com/overmindtech/buildkit-cache-dance).
+
 ### Local cache
 
 > **Warning**

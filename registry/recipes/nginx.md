@@ -193,7 +193,7 @@ Review the [requirements](index.md#requirements), then follow these steps.
 
 Now, start your stack:
 
-    docker-compose up -d
+    docker compose up -d
 
 Login with a "push" authorized user (using `testuser` and `testpassword`), then
 tag and push your first image:

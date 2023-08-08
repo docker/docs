@@ -122,7 +122,7 @@ COPY --from=generate /out /
 # When the image is run, it starts Nginx and serves the docs at port 4000:
 # > make deploy
 # or
-# > docker-compose up --build
+# > docker compose up --build
 FROM nginx:alpine AS deploy
 COPY --from=release / /usr/share/nginx/html
 COPY _deploy/nginx/default.conf /etc/nginx/conf.d/default.conf
