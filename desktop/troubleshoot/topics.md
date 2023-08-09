@@ -271,7 +271,7 @@ Performance tab on the Task Manager:
 If you manually uninstall Hyper-V, WSL 2 or turn off virtualization,
 Docker Desktop cannot start. 
 
-To turn on nested virtualisation, see [Run Docker Desktop for Windows in a VM or VDI environment](../vm-vdi.md#enable-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
+To turn on nested virtualisation, see [Run Docker Desktop for Windows in a VM or VDI environment](../vm-vdi.md#turn-on-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
 
 #### Hypervisor enabled at Windows startup
 
@@ -294,7 +294,7 @@ If you are using Hyper-V and you get the following error message when running Do
 The Virtual Machine Management Service failed to start the virtual machine 'DockerDesktopVM' because one of the Hyper-V components is not running
 ```
 
-Try [enabling nested virtualization](../vm-vdi.md#enable-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
+Try [enabling nested virtualization](../vm-vdi.md#turn-on-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
 
 
 ### Windows containers and Windows Server

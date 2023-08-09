@@ -192,7 +192,7 @@ containerd image store, an error similar to the following displays:
 docker: Error response from daemon: Unknown runtime specified io.containerd.wasmedge.v1.
 ```
 
-[Turn on the containerd feature](../containerd/index.md#enabling-the-containerd-image-store-feature)
+[Turn on the containerd feature](../containerd/index.md#turn-on-the-containerd-image-store-feature)
 in Docker Desktop settings and try again.
 
 ### Failed to start shim: failed to resolve runtime path
