@@ -1,5 +1,5 @@
 ---
-description: Docker Verified Publisher Program
+description: Learn what the Docker Verified Publisher Program is and how it works
 title: Docker Verified Publisher Program
 redirect_from:
   - /docker-store/byol/
@@ -60,7 +60,7 @@ over the repository can change the repository logo.
 
 #### Set the repository logo
 
-1. Sign in to Docker Hub.
+1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
 2. Go to the page of the repository that you want to change the logo for.
 3. Select the upload logo button, represented by a camera icon
    (![Camera icon](./images/upload_logo_sm.png){: .inline height="22px" })
@@ -70,9 +70,9 @@ over the repository can change the repository logo.
 
 #### Remove the logo
 
-Remove a logo using the clear button (![Clear button](images/clear_logo_sm.png){: .inline width="20px" }).
+Select the **Clear** button (![Clear button](images/clear_logo_sm.png){: .inline width="20px" }) to remove a logo.
 
-Removing the logo makes the repository fallback to using the organization logo, if set, and the default logo if not.
+Removing the logo makes the repository default to using the organization logo, if set, or the following default logo if not.
 
 ![Default logo which is a 3D grey cube](images/default_logo_sm.png){: width="50px" }
 
@@ -93,8 +93,7 @@ geolocation, cloud provider, client, and more.
 
 ![The insights and analytics tab on the Docker Hub website](./images/insights-and-analytics-tab.png)
 
-You can use the view to select the time span you want to view analytics data and export the data in
-either a summary or raw format.
+You can select the time span for which you want to view analytics data. You can also export the data in either a summary or raw format.
 
 ### Vulnerability analysis
 
@@ -103,9 +102,8 @@ for DVP images published to Docker Hub.
 Scanning images ensures that the published content is secure, and proves to
 developers that they can trust the image.
 
-Analysis is enabled on a per-repository
-basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/) for more information about how to use
-it.
+You can enable analysis on a per-repository
+basis. For more about using this feature, see [Basic vulnerability scanning](/docker-hub/vulnerability-scanning/).
 
 ### Who's eligible to become a verified publisher?
 

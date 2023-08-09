@@ -1,5 +1,5 @@
 ---
-description: Access repositories on Docker Hub
+description: Discover how to access repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, collaborators, viewing, searching, starring
 title: Access repositories
 ---
@@ -36,7 +36,7 @@ To delete a tag, select the corresponding checkbox and select **Delete** from th
 > Only a user with administrative access (owner or team member with Admin
 > permission) over the repository can delete tags.
 
-You can select a tag's digest to view more details.
+You can select a tag's digest to access more details.
 
 Image sizes are the cumulative space taken up by the image and all its parent
 images. This is also the disk space used by the contents of the `.tar` file
@@ -59,7 +59,7 @@ tutum/centos                         Centos image with SSH access. For the root.
 ...
 ```
 
-In the example above, you can see two example results, `centos` and `ansible/centos7-ansible`.
+In the previous example, you can see two example results, `centos` and `ansible/centos7-ansible`.
 
 The second result shows that it comes from the public repository of a user,
 named `ansible/`, while the first result, `centos`, doesn't explicitly list a
