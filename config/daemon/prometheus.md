@@ -57,22 +57,11 @@ Docker now exposes Prometheus-compatible metrics on port 9323.
 
 ## Configure and run Prometheus
 
-Prometheus runs as a Docker service on a Docker swarm.
+Prometheus runs as a Docker service on a Swarm.
 
-Copy one of the following configuration files and save it to
-`/tmp/prometheus.yml` (Linux or Mac) or `C:\tmp\prometheus.yml` (Windows). This
-is a stock Prometheus configuration file, except for the addition of the Docker
-job definition at the bottom of the file. Docker Desktop for Mac and Docker Desktop for Windows
-need a slightly different configuration.
-
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#linux-config" data-group="linux">Docker for Linux</a></li>
-<li><a data-toggle="tab" data-target="#mac-config" data-group="mac">Docker Desktop for Mac</a></li>
-<li><a data-toggle="tab" data-target="#win-config" data-group="win">Docker Desktop for Windows</a></li>
-</ul>
-
-<div class="tab-content">
-<div id="linux-config" class="tab-pane fade in active" markdown="1">
+Copy the following configuration file and save it to a location of your choice,
+for example `/tmp/prometheus.yml`. This is a stock Prometheus configuration file,
+except for the addition of the Docker job definition at the bottom of the file.
 
 ```yml
 # my global config
@@ -101,47 +90,7 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['localhost:9090']
-
-  - job_name: 'docker'
-         # metrics_path defaults to '/metrics'
-         # scheme defaults to 'http'.
-
-    static_configs:
-      - targets: ['localhost:9323']
-```
-
-</div><!-- linux -->
-<div id="mac-config" class="tab-pane fade" markdown="1">
-
-```yml
-# my global config
-global:
-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
-
-  # Attach these labels to any time series or alerts when communicating with
-  # external systems (federation, remote storage, Alertmanager).
-  external_labels:
-      monitor: 'codelab-monitor'
-
-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
-rule_files:
-  # - "first.rules"
-  # - "second.rules"
-
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
-scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
-    static_configs:
-      - targets: ['host.docker.internal:9090'] # Only works on Docker Desktop for Mac
+      - targets: ['host.docker.internal:9090']
 
   - job_name: 'docker'
          # metrics_path defaults to '/metrics'
@@ -150,92 +99,27 @@ scrape_configs:
     static_configs:
       - targets: ['host.docker.internal:9323']
 ```
-
-</div><!-- mac -->
-<div id="win-config" class="tab-pane fade" markdown="1">
-
-```yml
-# my global config
-global:
-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
-
-  # Attach these labels to any time series or alerts when communicating with
-  # external systems (federation, remote storage, Alertmanager).
-  external_labels:
-      monitor: 'codelab-monitor'
-
-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
-rule_files:
-  # - "first.rules"
-  # - "second.rules"
-
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
-scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
-    static_configs:
-      - targets: ['host.docker.internal:9090'] # Only works on Docker Desktop for Windows
-
-  - job_name: 'docker'
-         # metrics_path defaults to '/metrics'
-         # scheme defaults to 'http'.
-
-    static_configs:
-      - targets: ['host.docker.internal:9323']
-```
-
-</div><!-- windows -->
-</div><!-- tabs -->
-
 
 Next, start a single-replica Prometheus service using this configuration.
 
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#linux-run" data-group="linux">Docker for Linux</a></li>
-<li><a data-toggle="tab" data-target="#mac-run" data-group="mac">Docker Desktop for Mac</a></li>
-<li><a data-toggle="tab" data-target="#win-run" data-group="win">Docker Desktop for Windows or Windows Server</a></li>
-</ul>
+- If you're using Docker Desktop, run:
 
-<div class="tab-content">
+  ```console
+  $ docker service create --replicas 1 --name my-prometheus \
+      --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
+      --publish published=9090,target=9090,protocol=tcp \
+      prom/prometheus
+  ```
 
-<div id="linux-run" class="tab-pane fade in active" markdown="1">
+- If you're using Docker Engine without Docker Desktop, run:
 
-```console
-$ docker service create --replicas 1 --name my-prometheus \
-    --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
-    --publish published=9090,target=9090,protocol=tcp \
-    prom/prometheus
-```
-
-</div><!-- linux -->
-<div id="mac-run" class="tab-pane fade" markdown="1">
-
-```console
-$ docker service create --replicas 1 --name my-prometheus \
-    --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
-    --publish published=9090,target=9090,protocol=tcp \
-    prom/prometheus
-```
-
-</div><!-- mac -->
-<div id="win-run" class="tab-pane fade" markdown="1">
-
-```powershell
-PS C:\> docker service create --replicas 1 --name my-prometheus
-    --mount type=bind,source=C:/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml
-    --publish published=9090,target=9090,protocol=tcp
-    prom/prometheus
-```
-
-</div><!-- windows -->
-</div><!-- tabs -->
+  ```console
+  $ docker service create --replicas 1 --name my-prometheus \
+      --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
+      --publish published=9090,target=9090,protocol=tcp \
+      --add-host host.docker.internal:host-gateway \
+      prom/prometheus
+  ```
 
 Verify that the Docker target is listed at http://localhost:9090/targets/.
 

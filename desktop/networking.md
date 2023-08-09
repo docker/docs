@@ -108,9 +108,9 @@ However if you are a Windows user, it works with Windows containers.
 
 ### I want to connect from a container to a service on the host
 
-The host has a changing IP address, or none if you have no network access. We recommend that you connect to the special DNS name
-`host.docker.internal` which resolves to the internal IP address used by the
-host. This is for development purpose and does not work in a production environment outside of Docker Desktop.
+The host has a changing IP address, or none if you have no network access.
+We recommend that you connect to the special DNS name `host.docker.internal`,
+which resolves to the internal IP address used by the host.
 
 You can also reach the gateway using `gateway.docker.internal`.
 

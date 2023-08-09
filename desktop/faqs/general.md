@@ -96,7 +96,9 @@ For details, see [Docker Engine API](../../engine/api/index.md).
 
 ### How do I connect from a container to a service on the host?
 
-Mac, Linux, and Windows have a changing IP address (or none if you have no network access). On both Mac and Windows, we recommend that you connect to the special DNS name `host.docker.internal`, which resolves to the internal IP address used by the host. This is for development purposes and does not work in a production environment outside of Docker Desktop.
+The host has a changing IP address, or none if you have no network access.
+We recommend that you connect to the special DNS name `host.docker.internal`,
+which resolves to the internal IP address used by the host.
 
 For more information and examples, see [how to connect from a container to a service on the host](../networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 
