@@ -1,14 +1,15 @@
 ---
-description: Instructions for installing Docker Engine on Raspbian
+description: Instructions for installing Docker Engine on Raspberry Pi OS
 keywords:
-  requirements, apt, installation, raspbian, install, uninstall, upgrade, update
+  requirements, apt, installation, Raspberry Pi OS, install, uninstall, upgrade, update
 redirect_from:
   - /engine/installation/linux/raspbian/
-title: Install Docker Engine on Raspbian
+  - /engine/install/raspbian/
+title: Install Docker Engine on Raspberry Pi OS
 toc_max: 4
 ---
 
-To get started with Docker Engine on Raspbian, make sure you
+To get started with Docker Engine on Raspberry Pi OS, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
 [installation steps](#installation-methods).
 
@@ -23,16 +24,16 @@ To get started with Docker Engine on Raspbian, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need the 64-bit version or 32-bit version of one of these Raspbian
+To install Docker Engine, you need the 64-bit version or 32-bit version of one of these Raspberry Pi OS
 versions:
 
-- Raspbian Bookworm 12 (testing)
-- Raspbian Bullseye 11 (stable)
-- Raspbian Buster 10 (oldstable)
+- Raspberry Pi OS Bookworm 12 (testing)
+- Raspberry Pi OS Bullseye 11 (stable)
+- Raspberry Pi OS Buster 10 (oldstable)
 
-Docker Engine for Raspbian is compatible with the armhf architecture.
+Docker Engine for Raspberry Pi OS is compatible with the armhf architecture.
 
-For the 64-bit version of Raspbian follow the instructions for [Debian](debian.md).
+For the 64-bit version of Raspberry Pi OS follow the instructions for [Debian](debian.md).
 
 ### Uninstall old versions
 
@@ -199,7 +200,7 @@ download a new file each time you want to upgrade Docker Engine.
 1. Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){:
    target="_blank" rel="noopener" class="_" }.
 
-2. Select your Raspbian version in the list.
+2. Select your Raspberry Pi OS version in the list.
 
 3. Go to `pool/stable/` and select the applicable architecture (`amd64`,
    `armhf`, `arm64`, or `s390x`).
