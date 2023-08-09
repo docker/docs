@@ -1,6 +1,6 @@
 ---
 title: Multi-platform images
-description: Different strategies for building multi-platform images
+description: Introduction to multi-platform images and how to build them
 keywords: build, buildx, buildkit, multi-platform images
 redirect_from:
 - /build/buildx/multiplatform-images/
@@ -13,8 +13,8 @@ Docker images can support multiple platforms, which means that a single image
 may contain variants for different architectures, and sometimes for different
 operating systems, such as Windows.
 
-When running an image with multi-platform support, `docker` automatically
-selects the image that matches your OS and architecture.
+When you run an image with multi-platform support, Docker automatically selects
+the image that matches your OS and architecture.
 
 Most of the Docker Official Images on Docker Hub provide a [variety of architectures](https://github.com/docker-library/official-images#architectures-other-than-amd64){:target="blank" rel="noopener" class=""}.
 For example, the `busybox` image supports `amd64`, `arm32v5`, `arm32v6`,
@@ -23,54 +23,60 @@ on an `x86_64` / `amd64` machine, the `amd64` variant is pulled and run.
 
 ## Building multi-platform images
 
-Docker is now making it easier than ever to develop containers on, and for Arm
-servers and devices. Using the standard Docker tooling and processes, you can
-start to build, push, pull, and run images seamlessly on different compute
-architectures. In most cases, you don't have to make any changes to Dockerfiles
-or source code to start building for Arm.
-
-BuildKit with Buildx is designed to work well for building for multiple
-platforms and not only for the architecture and operating system that the user
-invoking the build happens to run.
-
 When you invoke a build, you can set the `--platform` flag to specify the target
-platform for the build output, (for example, `linux/amd64`, `linux/arm64`, or
-`darwin/amd64`).
+platform for the build output. For example, `linux/amd64`, `linux/arm64`, or
+`darwin/amd64`.
 
-When the current builder instance is backed by the `docker-container` driver,
-you can specify multiple platforms together. In this case, it builds a manifest
-list which contains images for all specified architectures. When you use this
-image in [`docker run`](../../engine/reference/commandline/run.md) or
-[`docker service`](../../engine/reference/commandline/service.md), Docker picks
-the correct image based on the node's platform.
+By default, you can only build for a single platform at a time. If you want to
+build for multiple platforms at once, you can:
 
-You can build multi-platform images using three different strategies that are
-supported by Buildx and Dockerfiles:
+- Create a new builder that uses the [`docker-container` driver](../drivers/docker-container.md)
+- Turn on the [containerd snapshotter storage](../../desktop/containerd/index.md)
 
-1. Using the QEMU emulation support in the kernel
-2. Building on multiple native nodes using the same builder instance
-3. Using a stage in Dockerfile to cross-compile to different architectures
+## Strategies
 
-QEMU is the easiest way to get started if your node already supports it (for
-example. if you are using Docker Desktop). It requires no changes to your
-Dockerfile and BuildKit automatically detects the secondary architectures that
-are available. When BuildKit needs to run a binary for a different architecture,
-it automatically loads it through a binary registered in the `binfmt_misc`
-handler.
+You can build multi-platform images using three different strategies,
+depending on your use case:
+
+1. Using the [QEMU emulation](#qemu) support in the kernel
+2. Building on [multiple native nodes](#multiple-native-nodes) using the same
+   builder instance
+3. Using a stage in your Dockerfile to [cross-compile](#cross-compilation) to
+   different architectures
+
+### QEMU
+
+Building multi-platform images under emulation with QEMU is the easiest way to
+get started if your builder already supports it. Docker Desktop supports it out
+of the box. It requires no changes to your Dockerfile, and BuildKit
+automatically detects the secondary architectures that are available. When
+BuildKit needs to run a binary for a different architecture, it automatically
+loads it through a binary registered in the `binfmt_misc` handler.
+
+> **Note**
+>
+> QEMU performs full-system emulation of non-native platforms, which is much
+> slower than native builds. Compute-heavy tasks like compilation and
+> compression or decompression likely results in a large performance hit.
+>
+> Use [cross-compilation](#cross-compilation) instead, if possible.
 
 For QEMU binaries registered with `binfmt_misc` on the host OS to work
-transparently inside containers, they must be statically compiled and registered
-with the `fix_binary` flag. This requires a kernel >= 4.8 and
-binfmt-support >= 2.1.7. You can check for proper registration by checking if
-`F` is among the flags in `/proc/sys/fs/binfmt_misc/qemu-*`. While Docker
-Desktop comes preconfigured with `binfmt_misc` support for additional platforms,
-for other installations it likely needs to be installed using
-[`tonistiigi/binfmt`](https://github.com/tonistiigi/binfmt){:target="blank" rel="noopener" class=""}
-image.
+transparently inside containers, they must be statically compiled and
+registered with the `fix_binary` flag. This requires a kernel version 4.8 or
+later, and `binfmt-support` version 2.1.7 or later.
+
+You can verify your registration by checking if `F` is among the flags in
+`/proc/sys/fs/binfmt_misc/qemu-*`. While Docker Desktop comes preconfigured
+with `binfmt_misc` support for additional platforms, for other installations it
+likely needs to be installed using
+[`tonistiigi/binfmt`](https://github.com/tonistiigi/binfmt) image:
 
 ```console
 $ docker run --privileged --rm tonistiigi/binfmt --install all
 ```
+
+### Multiple native nodes
 
 Using multiple native nodes provide better support for more complicated cases
 that are not handled by QEMU and generally have better performance. You can
@@ -85,13 +91,18 @@ $ docker buildx create --append --name mybuild node-arm64
 $ docker buildx build --platform linux/amd64,linux/arm64 .
 ```
 
-Finally, depending on your project, the language that you use may have good
-support for cross-compilation. In that case, multi-stage builds in Dockerfiles
-can be effectively used to build binaries for the platform specified with
-`--platform` using the native architecture of the build node. A list of build
-arguments like `BUILDPLATFORM` and `TARGETPLATFORM` is available automatically
-inside your Dockerfile and can be leveraged by the processes running as part
-of your build.
+For information on using multiple native nodes in CI, with GitHub Actions,
+refer to
+[Configure your GitHub Actions builder](../ci/github-actions/configure-builder.md#append-additional-nodes-to-the-builder).
+
+### Cross-compilation
+
+Depending on your project, if the programming language you use has good support
+for cross-compilation, multi-stage builds in Dockerfiles can be effectively
+used to build binaries for target platforms using the native architecture of
+the build node. Build arguments such as `BUILDPLATFORM` and `TARGETPLATFORM`
+are automatically available for use in your Dockerfile, and can be leveraged by
+the processes running as part of your build.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -124,34 +135,7 @@ and the more advanced cache exporters, which are currently unsupported in the
 default `docker` driver:
 
 ```console
-$ docker buildx create --name mybuilder --driver docker-container --bootstrap
-mybuilder
-```
-
-Switch to the new builder:
-
-```console
-$ docker buildx use mybuilder
-```
-
-> **Note**
->
-> Alternatively, run `docker buildx create --name mybuilder --driver docker-container --bootstrap --use`
-> to create a new builder and switch to it using a single command.
-
-And inspect it:
-
-```console
-$ docker buildx inspect
-Name:   mybuilder
-Driver: docker-container
-
-Nodes:
-Name:      mybuilder0
-Endpoint:  unix:///var/run/docker.sock
-Status:    running
-Buildkit:  v0.10.4
-Platforms: linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/mips64le, linux/mips64, linux/arm/v7, linux/arm/v6
+$ docker buildx create --name mybuilder --bootstrap --use
 ```
 
 Now listing the existing builders again, we can see our new builder is
@@ -160,10 +144,10 @@ registered:
 ```console
 $ docker buildx ls
 NAME/NODE     DRIVER/ENDPOINT              STATUS   BUILDKIT PLATFORMS
-mybuilder     docker-container
-  mybuilder0  unix:///var/run/docker.sock  running  v0.10.4  linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/mips64le, linux/mips64, linux/arm/v7, linux/arm/v6
-default *     docker
-  default     default                      running  v0.11.6  linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
+mybuilder *   docker-container
+  mybuilder0  unix:///var/run/docker.sock  running  v0.12.1  linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/mips64le, linux/mips64, linux/arm/v7, linux/arm/v6
+default       docker
+  default     default                      running  v{{ site.buildkit_version }}  linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
 ```
 
 ## Example
@@ -272,5 +256,5 @@ Linux architectures such as `arm`, `mips`, `ppc64le`, and even `s390x`.
 
 This does not require any special configuration in the container itself as it
 uses [qemu-static](https://wiki.qemu.org/Main_Page){:target="blank" rel="noopener" class=""}
-from the **Docker for Mac VM**. Because of this, you can run an ARM container,
+from the Docker Desktop VM. Because of this, you can run an ARM container,
 like the `arm32v7` or `ppc64le` variants of the busybox image.
