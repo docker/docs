@@ -12,224 +12,211 @@ Work through the steps to build an image and run it as a containerized applicati
 
 ## Introduction
 
-In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.
+In this section, you’ll learn how to use volumes and networking in Docker. You’ll also use Docker to build your images and Docker Compose to make everything a whole lot easier.
+
+First, you’ll take a look at running a database in a container and how you can use volumes and networking to persist your data and let your application to talk with the database. Then you’ll pull everything together into a Compose file which lets you to set up and run a local development environment with one command.
 
 ## Run a database in a container
 
-First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command.
+Instead of downloading PostgreSQL, installing, configuring, and then running the PostgreSQL database on your system directly, you can use the Docker Official Image for PostgreSQL and run it in a container.
 
-Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, we can use the Docker Official Image for MySQL and run it in a container.
+Before you run PostgreSQL in a container, create a volume that Docker can manage to store your persistent data and configuration.
 
-Before we run MySQL in a container, we'll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about [Using volumes](../../storage/volumes.md) in our documentation.
-
-Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.
+Run the following command to create your volume.
 
 ```console
-$ docker volume create mysql
-$ docker volume create mysql_config
+$ docker volume create db-data
 ```
 
-Now we’ll create a network that our application and database will use to talk to each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
+Now create a network that your application and database will use to talk to each other. The network is called a user-defined bridge network and gives you a nice DNS lookup service which you can use when creating your connection string.
 
 ```console
-$ docker network create mysqlnet
+$ docker network create postgresnet
 ```
 
-Now we can run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it for you locally.
-In the following command, option `-v` is for starting the container with volumes. For more information, see [Docker volumes](../../storage/volumes.md).
+Now you can run PostgreSQL in a container and attach to the volume and network that you created above. Docker pulls the image from Hub and runs it for you locally.
+In the following command, option `--mount` is for starting the container with a volume. For more information, see [Docker volumes](../../storage/volumes.md).
 
 ```console
-$ docker run --rm -d -v mysql:/var/lib/mysql \
-  -v mysql_config:/etc/mysql -p 3306:3306 \
-  --network mysqlnet \
-  --name mysqldb \
-  -e MYSQL_ROOT_PASSWORD=p@ssw0rd1 \
-  mysql
+$ docker run --rm -d --mount \
+  "type=volume,src=db-data,target=/var/lib/postgresql/data" \
+  -p 5432:5432 \
+  --network postgresnet \
+  --name db \
+  -e POSTGRES_PASSWORD=mysecretpassword \
+  -e POSTGRES_DB=example \
+  postgres
 ```
 
-Now, let’s make sure that our MySQL database is running and that we can connect to it. Connect to the running MySQL database inside the container using the following command and enter "p@ssw0rd1" when prompted for the password:
+Now, make sure that your PostgreSQL database is running and that you can connect to it. Connect to the running PostgreSQL database inside the container.
 
 ```console
-$ docker exec -ti mysqldb mysql -u root -p
-Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 8
-Server version: 8.0.33 MySQL Community Server - GPL
-
-Copyright (c) 2000, 2023, Oracle and/or its affiliates.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-mysql>
+$ docker exec -it db psql -U postgres
 ```
 
-### Connect the application to the database
-
-In the above command, we logged in to the MySQL database by passing the ‘mysql’ command to the `mysqldb` container. Press CTRL-D to exit the MySQL interactive terminal.
-
-Next, we'll update the sample application we created in the [Build images](build-images.md#sample-application) module. To see the directory structure of the Python app, see [Python application directory structure](build-images.md#directory-structure).
-
-Okay, now that we have a running MySQL, let’s update the `app.py` to use MySQL as a datastore. Let’s also add some routes to our server. One for fetching records and one for creating our database and table.
-
-```python
-import mysql.connector
-import json
-from flask import Flask
-
-app = Flask(__name__)
-
-@app.route('/')
-def hello_world():
-    return 'Hello, Docker!'
-
-@app.route('/widgets')
-def get_widgets():
-    mydb = mysql.connector.connect(
-        host="mysqldb",
-        user="root",
-        password="p@ssw0rd1",
-        database="inventory"
-    )
-    cursor = mydb.cursor()
-
-
-    cursor.execute("SELECT * FROM widgets")
-
-    row_headers=[x[0] for x in cursor.description] #this will extract row headers
-
-    results = cursor.fetchall()
-    json_data=[]
-    for result in results:
-        json_data.append(dict(zip(row_headers,result)))
-
-    cursor.close()
-
-    return json.dumps(json_data)
-
-@app.route('/initdb')
-def db_init():
-    mydb = mysql.connector.connect(
-        host="mysqldb",
-        user="root",
-        password="p@ssw0rd1"
-    )
-    cursor = mydb.cursor()
-
-    cursor.execute("DROP DATABASE IF EXISTS inventory")
-    cursor.execute("CREATE DATABASE inventory")
-    cursor.execute("USE inventory")
-
-    cursor.execute("DROP TABLE IF EXISTS widgets")
-    cursor.execute("CREATE TABLE widgets (name VARCHAR(255), description VARCHAR(255))")
-    cursor.close()
-
-    return 'init database'
-
-if __name__ == "__main__":
-    app.run(host ='0.0.0.0')
-```
-
-We’ve added the MySQL module and updated the code to connect to the database server, created a database and table. We also created a route to fetch widgets. We now need to rebuild our image so it contains our changes.
-
-First, let’s add the `mysql-connector-python` module to our application using pip.
+You should see output like the following.
 
 ```console
-$ python3 -m pip install mysql-connector-python
-$ python3 -m pip freeze | grep mysql-connector-python >> requirements.txt
+psql (15.3 (Debian 15.3-1.pgdg110+1))
+Type "help" for help.
+
+postgres=#
 ```
 
-Now we can build our image.
+In the previous command, you logged in to the PostgreSQL database by passing the `psql` command to the `db` container. Press ctrl-d to exit the PostgreSQL interactive terminal.
 
-```console
-$ docker build --tag python-docker-dev .
+## Get and run the sample application
+
+You'll need to clone a new repository to get a sample application that includes logic to connect to the database.
+
+1. Change to a directory where you want to clone the repository and run the following command.
+
+   ```console
+   $ git clone https://github.com/docker/python-docker-dev
+   ```
+
+2. In the cloned repository's directory, run `docker init` to create the necessary Docker files. Refer to the following example to answer the prompts from `docker init`.
+
+   ```console
+   $ docker init
+   Welcome to the Docker Init CLI!
+
+   This utility will walk you through creating the following files with sensible defaults for your project:
+     - .dockerignore
+     - Dockerfile
+     - compose.yaml
+
+   Let's get started!
+
+   ? What application platform does your project use? Python
+   ? What version of Python do you want to use? 3.11.4
+   ? What port do you want your app to listen on? 5000
+   ? What is the command to run your app? python3 -m flask run --host=0.0.0.0
 ```
 
-If you have any containers running from the previous sections using the name `rest-server` or port 8000, [stop and remove](./run-containers.md/#stop-start-and-name-containers) them now.
+3. In the cloned repository's directory, run `docker build` to build the image.
+   ```console
+   $ docker build -t python-docker-dev .
+   ```
 
-Now, let’s add the container to the database network and then run our container. This allows us to access the database by its container name.
+4. If you have any containers running from the previous sections using the name `rest-server` or port 8000, [stop and remove](./run-containers.md/#stop-start-and-name-containers) them now.
 
-```console
-$ docker run \
-  --rm -d \
-  --network mysqlnet \
-  --name rest-server \
-  -p 8000:5000 \
-  python-docker-dev
-```
+5. Run `docker run` with the following options to run the image as a container on the same network as the database.
 
-Let’s test that our application is connected to the database and is able to add a note.
+   ```console
+   $ docker run \
+     --rm -d \
+     --network postgresnet \
+     --name rest-server \
+     -p 8000:5000 \
+     -e POSTGRES_PASSWORD=mysecretpassword \
+     python-docker-dev
+   ```
 
-```console
-$ curl http://localhost:8000/initdb
-$ curl http://localhost:8000/widgets
-```
+6. Test that your application is connected to the database and is able to list the widgets.
 
-You should receive the following JSON back from our service.
+   ```console
+   $ curl http://localhost:8000/initdb
+   $ curl http://localhost:8000/widgets
+   ```
 
-```json
-[]
-```
+   You should receive the following JSON back from your service.
+
+   ```json
+   []
+   ```
+   This is because your database is empty.
 
 ## Use Compose to develop locally
 
-In this section, we’ll create a [Compose file](../../compose/index.md) to start our python-docker and the MySQL database using a single command.
+When you run `docker init`, in addition to a `Dockerfile`, it also creates a `compose.yaml` file.
 
-Open the `python-docker` directory in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
+This Compose file is super convenient as you don't have to type all the parameters to pass to the `docker run` command. You can declaratively do that using a Compose file.
+
+In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. `docker init` handled creating most of the instructions, but you'll need to update it for your unique application.
+
+In the `compose.yaml` file, you need to uncomment all of the database instructions. In addition, you need to add the database password as an environment variable to the server service.
+
+The following is the updated `compose.yaml` file.
 
 ```yaml
-version: '3.8'
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker compose reference guide at
+# https://docs.docker.com/compose/compose-file/
 
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
 services:
- web:
-  build:
-   context: .
-  ports:
-  - 8000:5000
-  volumes:
-  - ./:/app
+  server:
+    build:
+      context: .
+    ports:
+      - 5000:5000
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
 
- mysqldb:
-  image: mysql
-  ports:
-  - 3306:3306
-  environment:
-  - MYSQL_ROOT_PASSWORD=p@ssw0rd1
-  volumes:
-  - mysql:/var/lib/mysql
-  - mysql_config:/etc/mysql
-
+# The commented out section below is an example of how to define a PostgreSQL
+# database that your application can use. `depends_on` tells Docker Compose to
+# start the database before your application. The `db-data` volume persists the
+# database data between container restarts. The `db-password` secret is used
+# to set the database password. You must create `db/password.txt` and add
+# a password of your choosing to it before running `docker compose up`.
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres
+    restart: always
+    user: postgres
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=example
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
-  mysql:
-  mysql_config:
+  db-data:
+secrets:
+  db-password:
+    file: db/password.txt
 ```
 
-This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that using a Compose file.
+Note that the file doesn't specify a network for those 2 services. Compose automatically creates a network and connects the services to it. For more information see [Networking in Compose](../../compose/networking.md).
 
-We expose port 8000 so that we can reach the dev web server inside the container. We also map our local source code into the running container to make changes in our text editor and have those changes picked up in the container.
+Before you run the application using Compose, notice that this Compose file specifies a `password.txt` file to hold the database's password. You must create this file as it's not included in the source repository.
 
-Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use “mysqldb” in our connection string. The reason we use “mysqldb” is because that is what we've named our MySQL service as in the Compose file.
+In the cloned repository's directory, create a new directory named `db` and inside that directory create a file named `password.txt` that contains the password for the database. Using your favorite IDE or text editor, add the following contents to the `password.txt` file.
 
-Note that we did not specify a network for those 2 services. When we use Docker Compose it automatically creates a network and connect the services to it. For more information see [Networking in Compose](../../compose/networking.md)
-
-If you have any containers running from the previous sections, [stop](./run-containers.md/#stop-start-and-name-containers) them now.
-
-Now, to start our application and to confirm that it is running properly, run the following command:
-
-```console
-$ docker compose -f docker-compose.dev.yml up --build
+```
+mysecretpassword
 ```
 
-We pass the `--build` flag so Docker will compile our image and then start the containers.
+If you have any other containers running from the previous sections, [stop](./run-containers.md/#stop-start-and-name-containers) them now.
 
-Now let’s test our API endpoint. Open a new terminal then make a GET request to the server using the curl commands:
+Now, run the following `docker compose up` command to start your application.
 
 ```console
-$ curl http://localhost:8000/initdb
-$ curl http://localhost:8000/widgets
+$ docker compose up --build
+```
+
+The command passes the `--build` flag so Docker will compile your image and then start the containers.
+
+Now test your API endpoint. Open a new terminal then make a request to the server using the curl commands:
+
+```console
+$ curl http://localhost:5000/initdb
+$ curl http://localhost:5000/widgets
 ```
 
 You should receive the following response:
@@ -238,16 +225,18 @@ You should receive the following response:
 []
 ```
 
-This is because our database is empty.
+This is because your database is empty.
+
+# Summary
+
+In this section, you took a look at setting up your Compose file to run your Python application and database with a single command.
+
+Related information:
+ - [Volumes](../../storage/volumes.md)
+ - [Compose overview](../../compose/index.md)
 
 ## Next steps
 
-In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container.
-
-In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
+In the next section, you'll take a look at how to set up a CI/CD pipeline using GitHub Actions.
 
 [Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
-
-## Feedback
-
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Python%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
