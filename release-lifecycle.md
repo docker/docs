@@ -16,8 +16,8 @@ This page details Docker's product release lifecycle and how Docker defines each
 | --- | --- | ---- | ---| ---|
 |[Experimental](#experimental)| Limited availability | Community support |Software may have limitations, bugs and/or stability concerns | Can be discontinued without notice |
 |[Beta](#beta) | All or those involved in a Beta Feedback Program | Community support | Software may have limitations, bugs and/or stability concerns | Can be discontinued without notice |
-| [Early Access (EA)](#early-access-ea) | All or those involved in an Early Access Feedback Program | Full | Software may have limitations, bugs and/or stability concerns.  These limitations will be documented. | Follows [retirement process](#retirement-process) |
-| [General Availability (GA)](#general-availability-ga) | All | Full | Few or no limitations for supported use cases | Follows [retirement process](#retirement-process) |
+| [Early Access (EA)](#early-access-ea) | All or those involved in an Early Access Feedback Program | Full | Software may have limitations, bugs and/or stability concerns.  These limitations will be documented. | Follows the [retirement process](#retirement-process) |
+| [General Availability (GA)](#general-availability-ga) | All | Full | Few or no limitations for supported use cases | Follows the [retirement process](#retirement-process) |
 
 ### Experimental
 

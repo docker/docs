@@ -4,9 +4,12 @@ keywords: docker, documentation, about, technology, understanding,  release
 title: Docker release notes
 ---
 
-Find out what's new in Docker. Release notes contain information about new
-features, improvements, known issues, and bug fixes in each release. You can
-find release notes for each component in the Manuals section. We suggest
+Find out what's new in Docker. 
+
+Release notes contain information about new
+features, improvements, known issues, and bug fixes in each release. 
+
+You can find release notes for each component in the Manuals section. We suggest
 that you regularly visit the release notes to learn about updates.
 
 <div class="component-container">
