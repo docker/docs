@@ -1,7 +1,7 @@
 ---
 description: Compose pre-defined environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
-title: Change pre-defined environment variables
+title: Change pre-defined environment variables in Docker Compose
 redirect_from:
 - /compose/reference/envvars/
 ---
@@ -105,7 +105,7 @@ When enabled, Compose performs path conversion from Windows-style to Unix-style 
 Specifies a different path separator for items listed in `COMPOSE_FILE`.
 
 * Defaults to:
-    * On MacOS and Linux to `:`,
+    * On macOS and Linux to `:`,
     * On Windows to`;`.
 
 ### COMPOSE\_IGNORE\_ORPHANS

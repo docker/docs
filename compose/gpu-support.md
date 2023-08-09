@@ -1,17 +1,17 @@
 ---
 description: Understand GPU support in Docker Compose
 keywords: documentation, docs, docker, compose, GPU access, NVIDIA, samples
-title: Enabling GPU access with Compose
+title: Turn on GPU access with Docker Compose
 ---
 
-Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure you install the [prerequisites](../config/containers/resource_constraints.md#gpu){: target="_blank" rel="noopener" class="_" } if you have not already done so.
+Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure you install the [prerequisites](../config/containers/resource_constraints.md#gpu){: target="_blank" rel="noopener" class="_" } if you haven't already done so.
 
 The examples in the following sections focus specifically on providing service containers access to GPU devices with Docker Compose. 
 You can use either `docker-compose` or `docker compose` commands. For more information, see [Migrate to Compose V2](migrate.md){: target="_blank" rel="noopener" class="_" }.
 
-### Enabling GPU access to service containers
+## Enabling GPU access to service containers
 
-GPUs are referenced in a `docker-compose.yml` file using the [device](compose-file/deploy.md#devices){:target="_blank" rel="noopener" class="_"} structure, within your services that need them. 
+GPUs are referenced in a `compose.yml` file using the [device](compose-file/deploy.md#devices){:target="_blank" rel="noopener" class="_"} attribute from the Compose Deploy specification, within your services that need them. 
 
 This provides more granular control over a GPU reservation as custom values can be set for the following device properties: 
 
@@ -29,10 +29,9 @@ This provides more granular control over a GPU reservation as custom values can 
 > `count` and `device_ids` are mutually exclusive. You must only define one field at a time.
 {: .important}
 
-For more information on these properties, see the `deploy` section in the [Compose Specification](compose-file/deploy.md#devices){:target="_blank" rel="noopener" class="_"}.
+For more information on these properties, see the `deploy` section in the [Compose Specification](compose-file/deploy.md#devices).
 
-
-#### Example of a Compose file for running a service with access to 1 GPU device:
+### Example of a Compose file for running a service with access to 1 GPU device:
 
 ```yaml
 services:
@@ -78,7 +77,7 @@ gpu_test_1 exited with code 0
 
 ```
 
-On machines hosting multiple GPUs, `device_ids` field can be set to target specific GPU devices and `count` can be used to limit the number of GPU devices assigned to a service container. 
+On machines hosting multiple GPUs, the `device_ids` field can be set to target specific GPU devices and `count` can be used to limit the number of GPU devices assigned to a service container. 
 
 You can use `count` or `device_ids` in each of your service definitions. An error is returned if you try to combine both, specify an invalid device ID, or use a value of count that’s higher than the number of GPUs in your system.
 
@@ -109,9 +108,9 @@ $ nvidia-smi
 +-------------------------------+----------------------+----------------------+
 ```
 
-### Access specific devices
+## Access specific devices
 
-To enable access only to GPU-0 and GPU-3 devices:
+To allow access only to GPU-0 and GPU-3 devices:
 
 ```yaml
 services:

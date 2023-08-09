@@ -1,7 +1,7 @@
 ---
 description: Understand the accepted syntax for declaring environment variables.
 keywords: fig, composition, compose, docker, orchestration, environment, env file
-title: Use an environment file
+title: Use an environment file in Docker Compose
 redirect_from:
 - /compose/env-file/
 ---
@@ -53,5 +53,5 @@ For braced expressions, the following formats are supported:
 
 ## Precedence
 
-Environment variables from an environment file have lower precedence than those passed via the command-line or via the `environment` attribute in the `docker-compose.yml` file.
+Environment variables from an environment file have lower precedence than those passed via the command-line or via the `environment` attribute in the `compose.yml` file.
 For more information, see [Environment variables precedence](envvars-precedence.md).

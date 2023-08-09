@@ -53,7 +53,7 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
     Docker Compose version vN.N.N
     ```
 
-Where `vN.N.N` is placeholder text standing in for the latest version.
+   Where `vN.N.N` is placeholder text standing in for the latest version.
 
 ### Update Compose
 
