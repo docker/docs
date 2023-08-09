@@ -1,12 +1,12 @@
 ---
-title: Overview
+title: Overview of the Extensions SDK
 description: Overall index for Docker Extensions SDK documentation
 keywords: Docker, Extensions, sdk
 redirect_from:
   - /desktop/extensions-sdk/dev/overview/
 ---
 
-The resources in this section help you create your own Docker Extension.
+The resources in this section help you create your own Docker extension.
 
 The Docker CLI tool provides a set of commands to help you build and publish your extension, packaged as a 
 specially formatted Docker image.

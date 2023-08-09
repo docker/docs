@@ -6,7 +6,7 @@ redirect_from:
   - desktop/extensions-sdk/tutorials/initialize/
 ---
 
-Follow this guide to get started with building a basic Docker Extension. The Quickstart guide automatically generates boilerplate files for you.
+Follow this guide to get started with building a basic Docker extension. The Quickstart guide automatically generates boilerplate files for you.
 
 ## Prerequisites
 
@@ -62,9 +62,10 @@ $ docker extension install <name-of-your-extension>
 To preview the extension in Docker Desktop, once the installation is complete and you should
 see a **Quickstart** item underneath the **Extensions** menu. Selecting this item opens the extension's frontend.
 
-During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire
-extension. See [Preview whilst developing the UI](dev/test-debug.md#hot-reloading-whilst-developing-the-ui) for more
-information.
+> **Tip**
+>
+> During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire
+> extension. See [Preview whilst developing the UI](dev/test-debug.md#hot-reloading-whilst-developing-the-ui) for more information.
 
 You may also want to inspect the containers that belong to the extension. By default, extension containers are
 hidden from the Docker Dashboard. You can change this in **Settings**, see

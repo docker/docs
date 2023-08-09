@@ -21,9 +21,10 @@ The build process consists of:
 - Configuring the metadata file which is required at the root of the image filesystem.
 - Building and installing the extension.
 
-> Note
+> **Tip**
 >
 > Whilst building your extension, make sure you follow the [design](design/design-guidelines.md) and [UI styling](design/index.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance){:target="_blank" rel="noopener" class="_"}.
+{: .tip}
 
 For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}.
 

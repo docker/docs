@@ -32,12 +32,14 @@ Here is the list of labels you need to specify when building your extension:
 > Missing required labels
 >
 > If any of the previous **required** labels are missing in the `Dockerfile`, Docker Desktop considers the extension invalid and doesn't list it in the Marketplace.
+{: .important}
 
 > HTML content styling
 >
 > Docker Desktop applies CSS styles to the provided HTML content. You can make sure that it renders correctly 
 > [within the marketplace](#preview-the-extension-in-the-marketplace). Docker recommends that you follow the 
 > [Styling guidelines](../design/index.md).
+{: .tip}
 
 ## Preview the extension in the Marketplace
 
