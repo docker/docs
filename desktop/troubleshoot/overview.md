@@ -2,7 +2,7 @@
 description: Understand how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
 keywords: Linux, Mac, Windows, troubleshooting, logs, issues, Docker Desktop
 toc_max: 2
-title: Overview
+title: Troubleshoot Docker Desktop
 redirect_from:
 - /desktop/linux/troubleshoot/
 - /desktop/mac/troubleshoot/

@@ -1,7 +1,7 @@
 ---
 description: Understand how networking works on Docker Desktop and see the known limitations
 keywords: networking, docker desktop, proxy, vpn, Linux, Mac, Windows
-title: Explore networking features
+title: Explore networking features on Docker Desktop
 redirect_from:
 - /desktop/linux/networking/
 - /docker-for-mac/networking/
@@ -23,7 +23,7 @@ Docker Desktop networking can work when attached to a VPN. To do this,
 Docker Desktop intercepts traffic from the containers and injects it into
 the host as if it originated from the Docker application.
 
-### Port Mapping
+### Port mapping
 
 When you run a container with the `-p` argument, for example:
 
@@ -43,7 +43,7 @@ $ docker run -p 8000:80 -d nginx
 Now, connections to `localhost:8000` are sent to port 80 in the container. The
 syntax for `-p` is `HOST_PORT:CLIENT_PORT`.
 
-### HTTP/HTTPS Proxy Support
+### HTTP/HTTPS Proxy support
 
 See:
 - [Proxies on Linux](settings/linux.md#proxies)
@@ -91,12 +91,12 @@ The internal IP addresses used by Docker can be changed from **Settings**. After
 ### There is no docker0 bridge on the host
 
 Because of the way networking is implemented in Docker Desktop, you cannot
-see a `docker0` interface on the host.  This interface is actually within the
+see a `docker0` interface on the host. This interface is actually within the
 virtual machine.
 
 ### I cannot ping my containers
 
-Docker Desktop can't route traffic to Linux containers.  However if you're a Windows user, you can
+Docker Desktop can't route traffic to Linux containers. However if you're a Windows user, you can
 ping the Windows containers.
 
 ### Per-container IP addressing is not possible
@@ -136,7 +136,7 @@ If you have installed Python on your machine, use the following instructions as 
 Port forwarding works for `localhost`. `--publish`, `-p`, or `-P` all work.
 Ports exposed from Linux are forwarded to the host.
 
-Our current recommendation is to publish a port, or to connect from another
+We recommend you publish a port, or to connect from another
 container. This is what you need to do even on Linux if the container is on an
 overlay network, not a bridge network, as these are not routed.
 
