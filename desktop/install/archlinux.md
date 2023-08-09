@@ -18,9 +18,9 @@ To install Docker Desktop successfully, you must meet the [system requirements](
 
 Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be installed:
 
-  ```console
-  $ sudo pacman -S gnome-terminal
-  ```
+   ```console
+   $ sudo pacman -S gnome-terminal
+   ```
 
 ## Install Docker Desktop
 
@@ -33,9 +33,9 @@ Additionally, for non-Gnome Desktop environments, `gnome-terminal` must be insta
 
 4. Install the package:
 
-  ```console
-  $ sudo pacman -U ./docker-desktop-<version>-<arch>.pkg.tar.zst
-  ```
+   ```console
+   $ sudo pacman -U ./docker-desktop-<version>-<arch>.pkg.tar.zst
+   ```
 
 ## Launch Docker Desktop
 

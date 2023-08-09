@@ -1,7 +1,7 @@
 ---
 description: Understand what you can do with Docker Dashboard
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, whale menu
-title: Overview
+title: Explore Docker Desktop
 redirect_from:
 - /desktop/dashboard/
 ---
@@ -18,14 +18,14 @@ The **Volumes** view displays a list of volumes and allows you to easily create 
 
 In addition, the Docker Dashboard allows you to:
 
-- Easily navigate to the **Settings** menu to configure Docker Desktop preferences. Select the **Settings** icon in the Dashboard header.
+- Navigate to the **Settings** menu to configure your Docker Desktop settings. Select the **Settings** icon in the Dashboard header.
 - Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
 
 ## Quick search
 
 From the Docker Dashboard you can use Quick Search, which is located in the Dashboard header, to search for:
 
-- Any container or Compose app on your local system. You can see an overview of associated environment variables or perform quick actions, such as start, stop, or delete.
+- Any container or Compose application on your local system. You can see an overview of associated environment variables or perform quick actions, such as start, stop, or delete.
 
 - Public Docker Hub images, local images, and images from remote repositories. Depending on the type of image you select, you can either pull the image by tag, view documentation, go to Docker Hub for more details, or run a new container using the image.
 
@@ -39,17 +39,19 @@ From the Docker Dashboard you can use Quick Search, which is located in the Dash
 
 Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is referred to as the Docker menu ![whale menu](../../assets/images/whale-x.svg){: .inline}.
 
-To display the Docker menu, right-click on the ![whale menu](../../assets/images/whale-x.svg){: .inline} icon. It displays the following options:
+To display the Docker menu, select the ![whale menu](../../assets/images/whale-x.svg){: .inline} icon. It displays the following options:
 
 - **Dashboard**. This takes you to the Docker Dashboard.
 - **Sign in/Create Docker ID**
 - **Settings**
 - **Check for updates**
 - **Troubleshoot**
-- **Switch to Windows containers**
+- **Give feedback**
+- **Switch to Windows containers** (if you're on Windows)
 - **About Docker Desktop**. Contains information on the versions you are running, and links to the Subscription Service Agreement for example.
-- **Learning Center**
+- **Learning center**
 - **Docker Hub**
+- **Documentation**
 - **Extensions**
 - **Kubernetes**
 - **Pause**

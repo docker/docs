@@ -10,7 +10,7 @@ title: What is Enhanced Container Isolation?
 
 Enhanced Container Isolation provides an additional layer of security to prevent malicious workloads running in containers from compromising Docker Desktop or the host.
 
-It uses a variety of advanced techniques to harden container isolation, but without impacting developer productivity. It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
+It uses a variety of advanced techniques to harden container isolation, but without impacting developer productivity. It is available with [Docker Desktop 4.13.0 and later](../../release-notes.md).
 
 These techniques include:
 - Running all containers unprivileged through the Linux user-namespace, even those launched with the `--privileged` flag. This makes it harder for malicious container workloads to escape the container and infect the Docker Desktop VM and host.
@@ -31,7 +31,7 @@ Enhanced Container Isolation ensures stronger container isolation and also locks
 - For organizations and developers that want to prevent container attacks and reduce vulnerabilities in developer environments.
 - For organizations that want to ensure stronger container isolation that is easy and intuitive to implement on developers' machines.
 
-### What happens when Enhanced Container Isolation is enabled?
+### What happens when Enhanced Container Isolation is tuned on?
 
 When Enhanced Container Isolation is turned on, the following features are enabled:
 
@@ -123,15 +123,15 @@ When Enhanced Container Isolation is enabled, users see:
 
 To check, run:
 
-```
-$ docker run --rm alpine cat /proc/self/uid_map
-```
+   ```
+   $ docker run --rm alpine cat /proc/self/uid_map
+   ```
 
 The following output displays:
 
-```
-         0     100000      65536
-```
+   ```
+            0     100000      65536
+   ```
 
 This indicates that the container's root user (0) maps to unprivileged user
 (100000) in the Docker Desktop VM, and that the mapping extends for a range of
@@ -143,9 +143,9 @@ further details, see [How Enhanced Container Isolation works](how-eci-works.md).
 
 In contrast, without ECI the Linux user namespace is not used for containers, the following displays:
 
-```
-         0          0 4294967295
-```
+   ```
+            0          0 4294967295
+   ```
 
 This means that the root user in the container (0) is in fact the root user in the Docker Desktop VM (0) which reduces container isolation.
 
@@ -157,8 +157,8 @@ docker inspect --format={% raw %}'{{.HostConfig.Runtime}}'{% endraw %} my_contai
 
 It outputs:
 
-```
-sysbox-runc
-```
+   ```
+   sysbox-runc
+   ```
 
 Without Enhanced Container Isolation, `docker inspect` outputs `runc`, which is the standard OCI runtime.

@@ -22,9 +22,9 @@ Additionally, for a Gnome Desktop environment you must install AppIndicator and 
 
 For non-Gnome Desktop environments, `gnome-terminal` must be installed:
 
-  ```console
-  $ sudo dnf install gnome-terminal
-  ```
+   ```console
+   $ sudo dnf install gnome-terminal
+   ```
 
 ## Install Docker Desktop
 
@@ -36,9 +36,9 @@ To install Docker Desktop on Fedora:
 
 3. Install the package with dnf as follows:
 
-  ```console
-  $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
-  ```
+   ```console
+   $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
+   ```
 
 There are a few post-install configuration steps done through the post-install script contained in the RPM package.
 
@@ -58,10 +58,10 @@ The post-install script:
 Once a new version for Docker Desktop is released, the Docker UI shows a notification.
 You need to first remove the previous version and then download the new package each time you want to upgrade Docker Desktop. Run:
 
-  ```console
-  $ sudo dnf remove docker-desktop
-  $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
-  ```
+   ```console
+   $ sudo dnf remove docker-desktop
+   $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
+   ```
 
 ## Next steps
 
