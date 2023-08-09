@@ -1,22 +1,22 @@
 ---
 title: "Image-building best practices"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
-description: Tips for building the images for our application
+description: Tips for building images for your application
 ---
 
 ## Image layering
 
-Did you know that you can look at what makes up an image? Using the `docker image history`
-command, you can see the command that was used to create each layer within an image.
+Using the `docker image history` command, you can see the command that was used
+to create each layer within an image.
 
 1. Use the `docker image history` command to see the layers in the `getting-started` image you
-   created earlier in the tutorial.
+   created.
 
     ```console
     $ docker image history getting-started
     ```
 
-    You should get output that looks something like this (dates/IDs may be different).
+    You should get output that looks something like the following.
 
     ```plaintext
     IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
@@ -40,7 +40,7 @@ command, you can see the command that was used to create each layer within an im
     diagnose large images.
 
 2. You'll notice that several of the lines are truncated. If you add the `--no-trunc` flag, you'll get the
-   full output (yes... funny how you use a truncated flag to get untruncated output, huh?)
+   full output.
 
     ```console
     $ docker image history --no-trunc getting-started
@@ -49,11 +49,9 @@ command, you can see the command that was used to create each layer within an im
 ## Layer caching
 
 Now that you've seen the layering in action, there's an important lesson to learn to help decrease build
-times for your container images.
+times for your container images. Once a layer changes, all downstream layers have to be recreated as well.
 
-> Once a layer changes, all downstream layers have to be recreated as well
-
-Let's look at the Dockerfile we were using one more time...
+Look at the following Dockerfile you created for the getting started app.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -64,32 +62,32 @@ RUN yarn install --production
 CMD ["node", "src/index.js"]
 ```
 
-Going back to the image history output, we see that each command in the Dockerfile becomes a new layer in the image.
-You might remember that when we made a change to the image, the yarn dependencies had to be reinstalled. Is there a
-way to fix this? It doesn't make much sense to ship around the same dependencies every time we build, right?
+Going back to the image history output, you see that each command in the Dockerfile becomes a new layer in the image.
+You might remember that when you made a change to the image, the yarn dependencies had to be reinstalled. It doesn't make much sense to ship around the same dependencies every time you build.
 
-To fix this, we need to restructure our Dockerfile to help support the caching of the dependencies. For Node-based
-applications, those dependencies are defined in the `package.json` file. So, what if we copied only that file in first,
-install the dependencies, and _then_ copy in everything else? Then, we only recreate the yarn dependencies if there was
-a change to the `package.json`. Make sense?
+To fix it, you need to restructure your Dockerfile to help support the caching
+of the dependencies. For Node-based applications, those dependencies are defined
+in the `package.json` file. You can copy only that file in first, install the
+dependencies, and then copy in everything else. Then, you only recreate the yarn
+dependencies if there was a change to the `package.json`.
 
 1. Update the Dockerfile to copy in the `package.json` first, install dependencies, and then copy everything else in.
 
-    ```dockerfile
-    # syntax=docker/dockerfile:1
-    FROM node:18-alpine
-    WORKDIR /app
-    COPY package.json yarn.lock ./
-    RUN yarn install --production
-    COPY . .
-    CMD ["node", "src/index.js"]
-    ```
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM node:18-alpine
+   WORKDIR /app
+   COPY package.json yarn.lock ./
+   RUN yarn install --production
+   COPY . .
+   CMD ["node", "src/index.js"]
+   ```
 
 2. Create a file named `.dockerignore` in the same folder as the Dockerfile with the following contents.
 
-    ```ignore
-    node_modules
-    ```
+   ```ignore
+   node_modules
+   ```
 
     `.dockerignore` files are an easy way to selectively copy only image relevant files.
     You can read more about this
@@ -106,7 +104,7 @@ a change to the `package.json`. Make sense?
     $ docker build -t getting-started .
     ```
 
-    You should see output like this...
+    You should see output like the following.
 
     ```plaintext
     [+] Building 16.1s (10/10) FINISHED
@@ -128,9 +126,7 @@ a change to the `package.json`. Make sense?
     => => naming to docker.io/library/getting-started
     ```
 
-    You'll see that all layers were rebuilt. Perfectly fine since we changed the Dockerfile quite a bit.
-
-4. Now, make a change to the `src/static/index.html` file (like change the `<title>` to say "The Awesome Todo App").
+4. Now, make a change to the `src/static/index.html` file. For example, change the `<title>` to "The Awesome Todo App".
 
 5. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
 
@@ -154,22 +150,23 @@ a change to the `package.json`. Make sense?
     => => naming to docker.io/library/getting-started
     ```
 
-    First off, you should notice that the build was MUCH faster! And, you'll see that several steps are using previously cached layers. So, hooray! We're using the build cache. Pushing and pulling this image and updates to it
-    will be much faster as well. Hooray!
+    First off, you should notice that the build was much faster. And, you'll see
+    that several steps are using previously cached layers. Pushing and pulling
+    this image and updates to it will be much faster as well. 
 
 ## Multi-stage builds
 
-While we're not going to dive into it too much in this tutorial, multi-stage builds are an incredibly powerful
+Multi-stage builds are an incredibly powerful
 tool to help use multiple stages to create an image. There are several advantages for them:
 
 - Separate build-time dependencies from runtime dependencies
-- Reduce overall image size by shipping _only_ what your app needs to run
+- Reduce overall image size by shipping only what your app needs to run
 
 ### Maven/Tomcat example
 
-When building Java-based applications, a JDK is needed to compile the source code to Java bytecode. However,
+When building Java-based applications, you need a JDK to compile the source code to Java bytecode. However,
 that JDK isn't needed in production. Also, you might be using tools like Maven or Gradle to help build the app.
-Those also aren't needed in our final image. Multi-stage builds help.
+Those also aren't needed in your final image. Multi-stage builds help.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -182,15 +179,15 @@ FROM tomcat
 COPY --from=build /app/target/file.war /usr/local/tomcat/webapps 
 ```
 
-In this example, we use one stage (called `build`) to perform the actual Java build using Maven. In the second
-stage (starting at `FROM tomcat`), we copy in files from the `build` stage. The final image is only the last stage
-being created (which can be overridden using the `--target` flag).
+In this example, you use one stage (called `build`) to perform the actual Java build using Maven. In the second
+stage (starting at `FROM tomcat`), you copy in files from the `build` stage. The final image is only the last stage
+being created, which can be overridden using the `--target` flag.
 
 ### React example
 
-When building React applications, we need a Node environment to compile the JS code (typically JSX), SASS stylesheets,
-and more into static HTML, JS, and CSS. If we aren't doing server-side rendering, we don't even need a Node environment
-for our production build. Why not ship the static resources in a static nginx container?
+When building React applications, you need a Node environment to compile the JS code (typically JSX), SASS stylesheets,
+and more into static HTML, JS, and CSS. If you aren't doing server-side rendering, you don't even need a Node environment
+for your production build. You can ship the static resources in a static nginx container.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -206,15 +203,20 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 ```
 
-Here, we are using a `node:18` image to perform the build (maximizing layer caching) and then copying the output
-into an nginx container. Cool, huh?
+In the previous Dockerfile example, it uses the `node:18` image to perform the build (maximizing layer caching) and then copyies the output
+into an nginx container.
+
+## Summary
+
+In this section, you learned a few image building best practices, including layer caching and multi-stage builds.
+
+Related information:
+ - [.dockerignore](../engine/reference/builder.md#dockerignore-file)
+ - [Dockerfile reference](../engine/reference/builder.md)
+ - [Build with Docker guide](../build/guide/index.md)
+ - [Dockerfile best practices](../develop/develop-images/dockerfile_best-practices.md)
 
 ## Next steps
-
-By understanding a little bit about the structure of images, you can build images faster and ship fewer changes.
-Scanning images gives you confidence that the containers you are running and distributing are secure.
-Multi-stage builds also help you reduce overall image size and increase final container security by separating
-build-time dependencies from runtime dependencies.
 
 In the next section, you'll learn about additional resources you can use to continue learning about containers.
 
