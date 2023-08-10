@@ -16,7 +16,7 @@ In order to open the Chrome DevTools for your extension when you click on the ex
 $ docker extension dev debug <name-of-your-extensions>
 ```
 
-Each subsequent click on the extension tab will also open Chrome Dev Tools. To stop this behaviour, run:
+Each subsequent click on the extension tab also opens Chrome DevTools. To stop this behaviour, run:
 
 ```console
 $ docker extension dev reset <name-of-your-extensions>
@@ -47,7 +47,7 @@ $ docker extension dev ui-source <name-of-your-extensions> http://localhost:3000
 
 Close and reopen the Docker Desktop dashboard and go to your extension. All the changes to the frontend code are immediately visible.
 
-Once finished, you can reset the extension configuration to the original settings. This will also reset opening Chrome dev tools if you used `docker extension dev debug <name-of-your-extensions>`:
+Once finished, you can reset the extension configuration to the original settings. This will also reset opening Chrome DevTools if you used `docker extension dev debug <name-of-your-extensions>`:
 
 ```console
 $ docker extension dev reset <name-of-your-extensions>

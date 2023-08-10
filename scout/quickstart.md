@@ -166,7 +166,8 @@ base images your images use.
 
 You can see and share the same vulnerability information about an image and
 the other images in your organization in the [Docker Scout Dashboard](./dashboard.md).
-All organization members can see an overview of all their images from Docker Hub and Artifactory,
+
+All organization members can see an overview of all their images from integrated container registries,
 and get remediation advice at their fingertips. This helps team members in
 security, compliance, and operations to know what vulnerabilities and issues to focus on.
 
@@ -213,6 +214,5 @@ different tags of the same image.
 
 - Explore the [Docker Scout Dashboard](/scout/dashboard) to see how you can
   collaborate with your team on vulnerabilities.
-- [Find out how to integrate Docker Scout with your CI/CD pipeline](/scout/ci).
+- [Learn how to integrate Docker Scout with other systems](./integrations/index.md).
 - [Find out where Docker Scout gets its vulnerability data](/scout/advisory-db-sources).
-- [Integrate images from JFrog Artifactory](/scout/artifactory).

@@ -8,10 +8,10 @@ redirect_from:
 - /desktop/extensions-sdk/dev/cli/build-test-install-extension/
 ---
 
-Validate your extension before you share or publish it. Validating the extension ensures:
+Validate your extension before you share or publish it. Validating the extension ensures that the extension:
 
-- That the extension is built with the [image labels](labels.md) it requires to display correctly in the marketplace
-- That the extension installs and runs without problems
+- Is built with the [image labels](labels.md) it requires to display correctly in the marketplace
+- Installs and runs without problems
 
 The Extensions CLI lets you validate your extension before installing and running it locally.
 

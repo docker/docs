@@ -8,10 +8,10 @@ Extensions are applications that run inside the Docker Desktop. They're packaged
 through Docker Hub, and installed by users either through the Marketplace within Docker Dashboard or the
 Docker Extensions CLI.
 
-Extensions can be composed of 3 (optional) components:
-- a frontend (or User Interface): a web application displayed in a tab of the dashboard in Docker Desktop
-- a backend: one or many containerised services running in the Docker Desktop VM
-- executables: shell scripts or binaries that Docker Desktop copies on the host when installing the extension
+Extensions can be composed of three (optional) components:
+- A frontend (or User Interface): A web application displayed in a tab of the dashboard in Docker Desktop
+- A backend: One or many containerised services running in the Docker Desktop VM
+- Executables: Shell scripts or binaries that Docker Desktop copies on the host when installing the extension
 
 ![Overview of the three components of an extension](./images/overview.svg)
 
@@ -62,9 +62,9 @@ Usually, the backend is made of one container that runs within the Docker Deskto
 a Docker Compose project, creates the container from the `image` option of the `vm` section of the `metadata.json`, and
 attaches it to the Compose project. See the [ui metadata section](./metadata.md#vm-section) for more details.
 
-In some cases, a `composefile` can be used instead of an `image`. This is useful when the backend container
+In some cases, a `compose.yml` file can be used instead of an `image`. This is useful when the backend container
 needs more specific options, such as mounting volumes or requesting [capabilities](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)
-that can't be expressed just with a Docker image. The `composefile` can also be used to add multiple containers
+that can't be expressed just with a Docker image. The `compose.yml` file can also be used to add multiple containers
 needed by the extension, like a database or a message broker. 
 Note that, if the Compose file defines many services, the SDK can only contact the first of them.
 

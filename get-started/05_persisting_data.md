@@ -18,6 +18,10 @@ changes won't be seen in another container, even if they're using the same image
 To see this in action, you're going to start two containers and create a file in each.
 What you'll see is that the files created in one container aren't available in another.
 
+> **Note**
+>
+> If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
+
 1. Start an `ubuntu` container that will create a file named `/data.txt` with a random number
    between 1 and 10000.
 
@@ -169,7 +173,7 @@ You can create the volume and start the container using the CLI or Docker Deskto
 
 2. Stop and remove the container for the todo app. Use Docker Desktop or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
 
-3. Start a new container using the same steps from above.
+3. Start a new container using the previous steps.
 
 4. Open the app. You should see your items still in your list.
 
@@ -198,19 +202,19 @@ $ docker volume inspect todo-db
 ```
 
 The `Mountpoint` is the actual location of the data on the disk. Note that on most machines, you will
-need to have root access to access this directory from the host. But, that's where it is.
+need to have root access to access this directory from the host.
 
-> **Accessing volume data directly on Docker Desktop**
-> 
-> While running in Docker Desktop, the Docker commands are actually running inside a small VM on your machine.
-> If you wanted to look at the actual contents of the mount point directory, you would need to look inside of
-> that VM.
+## Summary
+
+In this section, you learned how to persist container data.
+
+Related information:
+
+ - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [Volumes](../storage/volumes.md)
 
 ## Next steps
 
-At this point, you have a functioning application that can survive restarts.
-
-However, you saw earlier that rebuilding images for every change takes quite a bit of time. There's got to be a better
-way to make changes, right? With bind mounts, there is a better way.
+Next, you'll learn how you can develop your app more efficiently using bind mounts.
 
 [Use bind mounts](06_bind_mounts.md){: .button  .primary-btn}

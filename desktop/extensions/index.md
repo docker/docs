@@ -12,7 +12,7 @@ You can seamlessly connect your favorite development tools to your application d
 
 Anyone can use Docker Extensions and there is no limit to the number of extensions you can install.
 
-![Extensions Marketplace](../images/marketplace.png){:width="750px"}
+![Extensions Marketplace](../../assets/images/extensions4.22.png){:width="750px"}
 
 ## What extensions are available?
 
@@ -25,4 +25,4 @@ To find out more about Docker Extensions, we recommend the video walkthrough fro
 
 ## Prerequisites
 
-Docker Extensions are available as part of Docker Desktop 4.8.0 or a later release. [Download and install Docker Desktop 4.8.0 or later](../release-notes.md).
+Docker Extensions are available as part of Docker Desktop 4.8.0 and later releases. [Download and install Docker Desktop 4.8.0 or later](../release-notes.md).

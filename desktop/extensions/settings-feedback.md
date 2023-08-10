@@ -1,7 +1,7 @@
 ---
 description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, feedback
-title: Settings and feedback
+title: Settings and feedback for Docker Extensions
 ---
 
 ## Settings
@@ -21,6 +21,8 @@ Docker Extensions is switched on by default. To change your settings:
 > The `settings.json` file is located at:
 >   - `~/Library/Group Containers/group.com.docker/settings.json` on Mac
 >   - `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json` on Windows
+>
+> This can also be done with [Hardened Docker Desktop](../hardened-desktop/index.md)
 
 ### Turn on or turn off extensions not available in the Marketplace
 

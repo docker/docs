@@ -52,7 +52,7 @@ refer to the following sections:
 - [Share built image between jobs](share-image-jobs.md)
 - [Test before push](test-before-push.md)
 - [Update Docker Hub repository description](update-dockerhub-desc.md)
-- [Analyzing images with Docker Scout](../../../scout/ci.md)
+- [Analyzing images with Docker Scout](../../../scout/integrations/ci/gha.md)
 
 ## Get started with GitHub Actions
 

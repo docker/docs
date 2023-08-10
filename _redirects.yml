@@ -81,12 +81,6 @@
 # provide a short, permanent link to refer to a topic in the documentation.
 # For example, the docker CLI can output https://docs.docker.com/go/some-topic
 # in its help output, which can be redirected to elsewhere in the documentation.
-"/scout/":
-  - /go/scout/
-"/scout/quickstart/":
-  - /go/scout-quickstart/
-"/scout/ci/":
-  - /go/scout-ci/
 "/docker-hub/access-tokens/":
   - /go/access-tokens/
 "/desktop/mac/apple-silicon/":
@@ -580,7 +574,22 @@
 "/scout/":
   - /go/scout/
   - /go/docker-scout/
-"/scout/artifactory":
+"/scout/quickstart/":
+  - /go/scout-quickstart/
+"/scout/ci/":
+  - /go/scout-ci/
+# integrations
+"/scout/integrations/ci/gha/":
+  - "/go/scout-gha/"
+"/scout/integrations/ci/gitlab/":
+  - "/go/scout-gitlab/"
+"/scout/integrations/ci/azure/":
+  - "/go/scout-azure/"
+"/scout/integrations/ci/circle-ci/":
+  - "/go/scout-circle-ci/"
+"/scout/integrations/ci/jenkins/":
+  - "/go/scout-jenkins/"
+"/scout/integrations/registry/artifactory":
   - /go/scout-artifactory/
 
 # Telepresence
