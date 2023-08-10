@@ -1711,8 +1711,9 @@ examples: |-
     `host-gateway`. Docker Desktop automatically resolves this hostname, see
     [Explore networking features](/desktop/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host).
 
-    The following example creates a simple HTTP server that serves a file from the
-    host to a container.
+    The following example shows how the special `host-gateway` value works. The
+    example runs an HTTP server that serves a file from host to container over the
+    `host.docker.internal` hostname, which resolves to the host's internal IP.
 
     ```console
     $ echo "hello from host!" > ./hello
