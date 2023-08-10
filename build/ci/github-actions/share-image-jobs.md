@@ -48,9 +48,6 @@ jobs:
     needs: build
     steps:
       -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
         name: Download artifact
         uses: actions/download-artifact@v3
         with:
