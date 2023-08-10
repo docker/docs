@@ -10,7 +10,7 @@ redirect_from:
 >
 > This page assumes that you already have an Identity Provider (IdP), such as Google, Azure AD or Okta, which handles the authentication process and returns an access token.
 
-Learn how you can let users authenticate from your Docker Extension using OAuth 2.0 via a web browser, and return them back to your Docker Extension.
+Learn how you can let users authenticate from your Docker Extension using OAuth 2.0 via a web browser, and return them back to your Docker extension.
 
 In OAuth 2.0, the term "grant type" refers to the way an application gets an access token. Although OAuth 2.0 defines several grant types, this page only describes how to authorize users from your Docker Extension using the Authorization Code grant type.
 
@@ -24,7 +24,7 @@ After the user returns to the client via the redirect URL, the application gets 
 
 The image above shows that:
 
-- The Docker Extension asks the user to authorize access to their data.
+- The Docker extension asks the user to authorize access to their data.
 - If the user grants access, the Docker Extension then requests an access token from the service provider, passing the access grant from the user and authentication details to identify the client.
 - The service provider then validates these details and returns an access token.
 - The Docker Extension uses the access token to request the user data with the service provider.
@@ -54,8 +54,9 @@ window.ddClient.openExternal("https://authorization-server.com/authorize?
 
 You can get the authorization code from the extension UI by listing `docker-desktop://dashboard/extension-tab?extensionId=awesome/my-extension` as the `redirect_uri` in the OAuth app you're using and concatenating the authorization code as a query parameter. The extension UI code will then be able to read the corresponding code query-param.
 
-> Note
-> using this feature requires the extension SDK 0.3.3 in Docker Desktop. You need to ensure that the required SDK version for your extension set with `com.docker.desktop.extension.api.version` in [image labels](../extensions/labels.md) is higher than 0.3.3.
+> **Important**
+>
+> Using this feature requires the extension SDK 0.3.3 in Docker Desktop. You need to ensure that the required SDK version for your extension set with `com.docker.desktop.extension.api.version` in [image labels](../extensions/labels.md) is higher than 0.3.3.
 {: .important}
 
 #### Authorization

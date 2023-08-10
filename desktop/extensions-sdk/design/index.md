@@ -1,5 +1,5 @@
 ---
-title: UI styling overview
+title: UI styling overview for Docker extensions
 description: Docker extension design
 keywords: Docker, extensions, design
 redirect_from:
@@ -13,7 +13,7 @@ We require extensions to match the wider Docker Desktop UI to a certain degree, 
 
 To get started on your UI, follow the steps below.
 
-## 1. Choose your framework
+## Step one: Choose your framework
 
 ### Recommended: React+MUI, using our theme
 
@@ -28,11 +28,11 @@ Read our [MUI best practices](mui-best-practices.md) guide to learn future-proof
 
 You may prefer to use another framework, perhaps because you or your team are more familiar with it or because you have existing assets you want to reuse. This is possible, but highly discouraged. It means that:
 
-- You'll need to manually replicate the look and feel of Docker Desktop. This will take a lot of effort, and if you don't match our theme closely enough, users will find your extension jarring and we may ask you to make changes during a review process.
+- You'll need to manually replicate the look and feel of Docker Desktop. This takes a lot of effort, and if you don't match our theme closely enough, users will find your extension jarring and we may ask you to make changes during a review process.
 - You'll have a higher maintenance burden. Whenever Docker Desktop's theme changes (which could happen in any release), you'll need to manually change your extension to match it.
 - If your extension is open-source, deliberately avoiding common conventions will make it harder for the community to contribute to it.
 
-## 2. Follow the below recommendations
+## Step two: Follow the below recommendations
 
 ### Follow our MUI best practices (if applicable)
 

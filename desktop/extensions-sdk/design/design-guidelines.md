@@ -1,5 +1,5 @@
 ---
-title: Design guidelines
+title: Design guidelines for Docker extensions
 description: Docker extension design
 keywords: Docker, extensions, design
 ---
@@ -34,7 +34,7 @@ Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-
 
   ![Terminal window used correctly](images/terminal_window_do.png)
 
-## Build Features Natively
+## Build features natively
 
 - In order not to disrupt the flow of users, avoid scenarios where the user has to navigate outside Docker Desktop, to the CLI or a webpage for example, in order to carry out certain functionalities. Instead, build features that are native to Docker Desktop.
 
@@ -42,7 +42,7 @@ Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-
 
   ![Correct way to switch context](images/switch_context_do.png)
 
-## Break Down Complicated User Flows
+## Break down complicated user flows
 
 - If a flow is too complicated or the concept is abstract, break down the flow into multiple steps with one simple call-to-action in each step. This helps when onboarding novice users to your extension
 
@@ -52,7 +52,7 @@ Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-
 
   ![Call to action](images/cta.png)
 
-## Onboarding New Users
+## Onboarding new users
 
 When building your extension, ensure that first time users of the extension and your product can understand its value-add and adopt it easily. Ensure you include contextual help within the extension.
 

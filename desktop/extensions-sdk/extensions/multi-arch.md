@@ -55,10 +55,9 @@ Manifests:
 > Having trouble pushing the image?
 >
 > Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
+{: .tip}
 
-> **Note**
->
-> For more information, see [Multi-platform images](../../../build/building/multi-platform.md) page.
+For more information, see [Multi-platform images](../../../build/building/multi-platform.md) page.
 
 ### Adding multi-arch binaries
 

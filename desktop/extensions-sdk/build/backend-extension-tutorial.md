@@ -410,7 +410,7 @@ Now you can see the backend service running in the **Containers8* tab of the Doc
 
 > **Tip**
 >
-> You may need to enable the **Show system containers** option in **Settings** to see the backend container running.
+> You may need to turn on the **Show system containers** option in **Settings** to see the backend container running.
 > See [Show extension containers](../dev/test-debug.md#show-the-extension-containers) for more information.
 {: .tip }
 

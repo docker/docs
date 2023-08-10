@@ -1,5 +1,5 @@
 ---
-title: Security
+title: Extension security
 description: Aspects of the security model of extensions
 keywords: Docker, extensions, sdk, security
 redirect_from:
@@ -22,4 +22,3 @@ The Extensions SDK provides a set of JavaScript APIs to invoke commands or invok
 > Make sure you trust the publisher or author of the extension when you install it, as the extension has the same access rights as the user running Docker Desktop.
 {: .important}
 
-Learn more in the [architecture section](https://docs.docker.com/desktop/extensions-sdk/architecture/)
