@@ -1341,7 +1341,7 @@ manuals:
       title: SLES
     - path: /engine/install/ubuntu/
       title: Ubuntu
-    - path: /engine/install/raspbian/
+    - path: /engine/install/raspberry-pi-os/
       title: Raspbian
     - path: /engine/install/binaries/
       title: Binaries
