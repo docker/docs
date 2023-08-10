@@ -600,3 +600,5 @@
   - /go/multi-platform/
 "/build/cache/backends/inline/":
   - /go/inline-cache/
+"/build/exporters/oci-docker/":
+  - /go/docker-exporter/
