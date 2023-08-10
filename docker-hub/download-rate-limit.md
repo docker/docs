@@ -1,7 +1,7 @@
 ---
-description: Learn how download rate limits work
-keywords: Docker, pull requests, download, limit,
-title: Download rate limit
+description: Learn how download rate limits for image pulls on Docker Hub work
+keywords: Docker Hub, pulls, download, limit,
+title: Docker Hub rate limit
 ---
 
 ## What's the download rate limit on Docker Hub?
