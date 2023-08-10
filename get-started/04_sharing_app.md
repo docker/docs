@@ -112,7 +112,8 @@ new instance that has never seen this container image. To do this, you will use 
     {: .tip }
 
 6. Select the 3000 badge when it appears.
-    If the 3000 badge doesn't appear, you can select **Open Port** and specify `3000`.
+
+   If the 3000 badge doesn't appear, you can select **Open Port** and specify `3000`.
 
 ## Summary
 
