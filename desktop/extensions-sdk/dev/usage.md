@@ -10,7 +10,7 @@ The Extensions CLI is an extension development tool that is used to manage Docke
 
 - `docker extension enable` turns on Docker extensions.
 - `docker extension dev` commands for extension development.
-- `docker extension disable` turns of Docker extensions.
+- `docker extension disable` turns off Docker extensions.
 - `docker extension init` creates a new Docker extension.
 - `docker extension install ` installs a Docker extension with the specified image.
 - `docker extension ls` list installed Docker extensions.
