@@ -25,10 +25,9 @@ packages and layers called a [Software bill of materials (SBOM)](https://ntia.go
 It then correlates this inventory with a continuously updated vulnerability
 database to identify vulnerabilities in your images.
 
-You can use Docker Scout in [Docker Desktop](#docker-desktop), [Docker Hub](#docker-hub), [continuous integration](./ci.md), the [Docker CLI](#docker-scout-cli),
-and in
-the [Docker Scout Dashboard](./dashboard.md). If you host your images in JFrog Artifactory, you
-can also [use Docker Scout to analyze your images](./artifactory.md) there.
+You can use Docker Scout in [Docker Desktop](#docker-desktop), [Docker Hub](#docker-hub), the [Docker CLI](#docker-scout-cli),
+and in the [Docker Scout Dashboard](./dashboard.md). Docker Scout also supports integrations with third-party systems,
+refer to [Integrating Docker Scout](./integrations/index.md) for more information.
 
 {% include scout-plans.md %}
 
@@ -116,9 +115,3 @@ an organization with your team. You can also use the dashboard settings to enabl
 Docker Scout on multiple images from Docker Hub at once.
 
 For more information, read the [Docker Scout Dashboard guide](./dashboard.md).
-
-### JFrog Artifactory integration
-
-Users of JFrog Artifactory, or JFrog Container Registry, can integrate Docker
-Scout to enable automatic analysis of images locally and remotely. For more
-information, see [Artifactory integration](./artifactory.md).
