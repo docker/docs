@@ -1,7 +1,7 @@
 ---
 description: Learn how to use Docker Compose to define and run multi-container applications with this detailed introduction to the tool. 
 keywords: docker compose, docker-compose, docker compose command, docker compose files, docker compose documentation, using docker compose, compose container, docker compose service
-title: Docker Compose overview
+title: Overview of Docker Compose 
 redirect_from:
  - /compose/cli-command/
  - /compose/networking/swarm/
@@ -16,7 +16,7 @@ With Compose, you use a YAML file to configure your application's services.
 Then, with a single command, you create and start all the services
 from your configuration.
 
-Compose works in all environments: production, staging, development, testing, as
+Compose works in all environments; production, staging, development, testing, as
 well as CI workflows. It also has commands for managing the whole lifecycle of your application:
 
  * Start, stop, and rebuild services
@@ -27,9 +27,9 @@ well as CI workflows. It also has commands for managing the whole lifecycle of y
 The key features of Compose that make it effective are:
 
 * [Have multiple isolated environments on a single host](features-uses.md#have-multiple-isolated-environments-on-a-single-host)
-* [Preserves volume data when containers are created](features-uses.md#preserves-volume-data-when-containers-are-created)
+* [Preserve volume data when containers are created](features-uses.md#preserves-volume-data-when-containers-are-created)
 * [Only recreate containers that have changed](features-uses.md#only-recreate-containers-that-have-changed)
-* [Supports variables and moving a composition between environments](features-uses.md#supports-variables-and-moving-a-composition-between-environments)
+* [Support variables and moving a composition between environments](features-uses.md#supports-variables-and-moving-a-composition-between-environments)
 
 <div class="component-container">
     <!--start row-->

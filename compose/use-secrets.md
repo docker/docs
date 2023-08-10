@@ -10,7 +10,7 @@ Docker Compose provides a way for you to use secrets without having to use envir
 
 ## Use secrets
 
-Getting a secret into a container is a two-step process. First, define the secret using the [top-level secrets attribute in your Compose file](compose-file/09-secrets.md). Next, update your service definitions to reference the secrets they require with the [secrets attribute](compose-file/05-services.md#secrets). Compose grants access to secrets on a per-service basis.
+Getting a secret into a container is a two-step process. First, define the secret using the [top-level secrets element in your Compose file](compose-file/09-secrets.md). Next, update your service definitions to reference the secrets they require with the [secrets attribute](compose-file/05-services.md#secrets). Compose grants access to secrets on a per-service basis.
 
 Unlike the other methods, this permits granular access control within a service container via standard filesystem permissions.
 

@@ -26,7 +26,7 @@ Below is a simple example:
 $ cat .env
 TAG=v1.5
 
-$ cat docker-compose.yml
+$ cat compose.yml
 services:
   web:
     image: "webapp:${TAG}"
@@ -44,7 +44,7 @@ services:
     image: 'webapp:v1.5'
 ```
 
-The `.env` file should be placed at the root of the project directory next to your `docker-compose.yml` file. You can use an alternative path with one of the following methods:
+The `.env` file should be placed at the root of the project directory next to your `compose.yaml` file. You can use an alternative path with one of the following methods:
 - The [`--file` option in the CLI](../reference/index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
 - The [`--env-file` option in the CLI](#substitute-with---env-file)
 - Using the [`env_file` attribute in the Compose file](../compose-file/05-services.md#env_file)
@@ -56,6 +56,7 @@ For more information on formatting an environment file, see [Use an environment 
 > Substitution from `.env` files is a Docker Compose CLI feature.
 >
 > It is not supported by Swarm when running `docker stack deploy`.
+{: .important}
 
 ### Use the `environment` attribute
 
@@ -122,6 +123,7 @@ If an environment variable is not set, Compose substitutes with an empty string.
 > **Important**
 >
 > Values set in the shell environment override those set in the `.env` file, the `environment` attribute, and the `env_file` attribute. For more information, see [Environment variable precedence](envvars-precedence.md).
+{: .important}
 
 ## CLI
 
@@ -135,7 +137,7 @@ The advantage of this method is that you can store the file anywhere and name it
 $ docker compose --env-file ./config/.env.dev up
 ```
 
-In the example below, there are two environment files, `.env` and `.env.dev`. Both have different values set for `TAG`. 
+In the following example, there are two environment files, `.env` and `.env.dev`. Both have different values set for `TAG`. 
 
 ```console
 $ cat .env
@@ -145,7 +147,7 @@ $ cat ./config/.env.dev
 TAG=v1.6
 
 
-$ cat docker-compose.yml
+$ cat compose.yml
 services:
   web:
     image: "webapp:${TAG}"
@@ -179,6 +181,7 @@ ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 > **Important**
 >
 > Values set in the shell environment override those set when using the `--env-file` argument in the CLI. For more information, see [Environment variable precedence](envvars-precedence.md)
+{: .important}
 
 ### Set environment variables with `docker compose run --env`
 

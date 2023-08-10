@@ -12,13 +12,13 @@ if you have not already done so.
 
 The samples should help you to:
 
-- define services based on Docker images using
-  [Compose files](compose-file/index.md): `docker-compose.yml` and
+- Define services based on Docker images using
+  [Compose files](compose-file/index.md): `compose.yml` and
   `docker-stack.yml`
-- understand the relationship between `docker-compose.yml` and
+- Understand the relationship between `compose.yml` and
   [Dockerfiles](/engine/reference/builder/)
-- learn how to make calls to your application services from Compose files
-- learn how to deploy applications and services to a [swarm](../engine/swarm/index.md)
+- Learn how to make calls to your application services from Compose files
+- Learn how to deploy applications and services to a [swarm](../engine/swarm/index.md)
 
 ## Samples tailored to demo Compose
 

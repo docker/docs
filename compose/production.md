@@ -23,19 +23,19 @@ production. These changes might include:
 - Binding to different ports on the host
 - Setting environment variables differently, such as reducing the verbosity of
   logging, or to specify settings for external services such as an email server
-- Specifying a restart policy like [`restart: always`](compose-file/05-services.md#restart){: target="_blank" rel="noopener" class="_" } to avoid downtime
+- Specifying a restart policy like [`restart: always`](compose-file/05-services.md#restart)to avoid downtime
 - Adding extra services such as a log aggregator
 
-For this reason, consider defining an additional Compose file, say
+For this reason, consider defining an additional Compose file, for example
 `production.yml`, which specifies production-appropriate
 configuration. This configuration file only needs to include the changes you want to make from the original Compose file. The additional Compose file
-is then applied over the original `docker-compose.yml` to create a new configuration.
+is then applied over the original `compose.yml` to create a new configuration.
 
 Once you have a second configuration file, you can use it with the
 `-f` option:
 
 ```console
-$ docker compose -f docker-compose.yml -f production.yml up -d
+$ docker compose -f compose.yml -f production.yml up -d
 ```
 
 See [Using multiple compose files](multiple-compose-files/index.md) for a more complete example, and other options.
@@ -63,9 +63,3 @@ appropriately. See also [Compose CLI environment variables](environment-variable
 
 Once you've set up your environment variables, all the normal `docker compose`
 commands work with no further configuration.
-
-## What's new?
-
-- [Command line reference](reference/index.md)
-- [Compose file reference](compose-file/index.md)
-- [Sample apps with Compose](samples-for-compose.md)
