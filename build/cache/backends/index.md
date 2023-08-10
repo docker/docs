@@ -13,6 +13,10 @@ An external cache becomes almost essential in CI/CD build environments. Such
 environments usually have little-to-no persistence between runs, but it's still
 important to keep the runtime of image builds as low as possible.
 
+The default `docker` driver only supports embedded cache, using the `inline`
+cache type. To use external cache, you must select an alternative
+[build driver](../../drivers/index.md).
+
 > **Warning**
 >
 > If you use secrets or credentials inside your build process, ensure you
@@ -53,9 +57,7 @@ to export the cache to your storage backend of choice. Then, use the
 [`--cache-from` option](../../../engine/reference/commandline/buildx_build/#cache-from)
 to import the cache from the storage backend into the current build. Unlike the
 local BuildKit cache (which is always enabled), all of the cache storage
-backends must be explicitly exported to, and explicitly imported from. All cache
-exporters except for the `inline` cache requires that you
-[select an alternative Buildx driver](../../drivers/index.md).
+backends must be explicitly exported to, and explicitly imported from.
 
 Example `buildx` command using the `registry` backend, using import and export
 cache:

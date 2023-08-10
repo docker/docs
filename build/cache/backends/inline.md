@@ -7,11 +7,14 @@ redirect_from:
 
 The `inline` cache storage backend is the simplest way to get an external cache
 and is easy to get started using if you're already building and pushing an
-image. However, it doesn't scale as well to multi-stage builds as well as the
-other drivers do. It also doesn't offer separation between your output artifacts
-and your cache output. This means that if you're using a particularly complex
-build flow, or not exporting your images directly to a registry, then you may
-want to consider the [registry](./registry.md) cache.
+image. Inline cache is the only cache backend supported by the default `docker`
+driver.
+
+The downside of inline cache is that it doesn't scale with multi-stage builds
+as well as the other drivers do. It also doesn't offer separation between your
+output artifacts and your cache output. This means that if you're using a
+particularly complex build flow, or not exporting your images directly to a
+registry, then you may want to consider the [registry](./registry.md) cache.
 
 ## Synopsis
 
