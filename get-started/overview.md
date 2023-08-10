@@ -196,5 +196,6 @@ These namespaces provide a layer of isolation. Each aspect of a container runs
 in a separate namespace and its access is limited to that namespace.
 
 ## Next steps
+
 - [Install Docker](../get-docker.md)
 - [Get started with Docker](index.md)
