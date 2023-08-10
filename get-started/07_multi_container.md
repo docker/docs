@@ -77,7 +77,7 @@ In the following steps, you'll create the network first and then attach the MySQ
     </div>
     </div>
 
-    In the command above, you'll see the `--network-alias` flag. In a later section, you'll learn more about this flag.
+    In the previous command, you can see the `--network-alias` flag. In a later section, you'll learn more about this flag.
 
     > **Tip**
     >
@@ -195,7 +195,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 
 You can now start your dev-ready container.
 
-1. Specify each of the environment variables above, as well as connect the container to your app network. Make sure that you are in the `getting-started-app` directory when you run this command.
+1. Specify each of the previous environment variables, as well as connect the container to your app network. Make sure that you are in the `getting-started-app` directory when you run this command.
 
     <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" data-target="#mac-linux2">Mac / Linux</a></li>
@@ -273,14 +273,20 @@ You can now start your dev-ready container.
 
     Your table will look different because it has your items. But, you should see them stored there.
 
-## Next steps
+## Summary
 
 At this point, you have an application that now stores its data in an external database running in a separate
 container. You learned a little bit about container networking and service discovery using DNS.
 
-But, there's a good chance you are starting to feel a little overwhelmed with everything you need to do to start up
+Related information:
+ - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [Networking overview](../network/index.md)
+
+## Next steps
+
+There's a good chance you are starting to feel a little overwhelmed with everything you need to do to start up
 this application. You have to create a network, start containers, specify all of the environment variables, expose
-ports, and more! That's a lot to remember and it's certainly making things harder to pass along to someone else.
+ports, and more. That's a lot to remember and it's certainly making things harder to pass along to someone else.
 
 In the next section, you'll learn about Docker Compose. With Docker Compose, you can share your application stacks in a
 much easier way and let others spin them up with a single, simple command.

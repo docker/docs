@@ -1,14 +1,14 @@
 ---
 title: "Update the application"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
-description: Making changes to our example learning application
+description: Making changes to your application
 ---
 
-In [part 2](./02_our_app.md), you containerized a todo application. In this part, you will update the application and container image. You will also learn how to stop and remove a container.
+In [part 2](./02_our_app.md), you containerized a todo application. In this part, you'll update the application and image. You'll also learn how to stop and remove a container.
 
 ## Update the source code
 
-In the steps below, you will change the "empty text" when you don't have any todo list items to "You have no todo items yet! Add one above!"
+In the following steps, you'll change the "empty text" when you don't have any todo list items to "You have no todo items yet! Add one above!"
 
 
 1. In the `src/static/js/app.js` file, update line 56 to use the new empty text.
@@ -18,19 +18,19 @@ In the steps below, you will change the "empty text" when you don't have any tod
    + <p className="text-center">You have no todo items yet! Add one above!</p>
    ```
 
-2. Build your updated version of the image, using the same `docker build` command you used in [part 2](./02_our_app.md/#build-the-apps-container-image){:target="_blank" rel="noopener" class="_"}.
+2. Build your updated version of the image, using the `docker build` command.
 
-    ```console
-    $ docker build -t getting-started .
-    ```
+   ```console
+   $ docker build -t getting-started .
+   ```
 
 3. Start a new container using the updated code.
 
-    ```console
-    $ docker run -dp 127.0.0.1:3000:3000 getting-started
-    ```
+   ```console
+   $ docker run -dp 127.0.0.1:3000:3000 getting-started
+   ```
 
-You probably saw an error like this (the IDs will be different):
+You probably saw an error like this:
 
 ```console
 docker: Error response from daemon: driver failed programming external connectivity on endpoint laughing_burnell 
@@ -54,21 +54,21 @@ To remove a container, you first need to stop it. Once it has stopped, you can r
 
 1. Get the ID of the container by using the `docker ps` command.
 
-    ```console
-    $ docker ps
-    ```
+   ```console
+   $ docker ps
+   ```
 
-2. Use the `docker stop` command to stop the container. Replace &lt;the-container-id&gt; with the ID from `docker ps`.
+2. Use the `docker stop` command to stop the container. Replace `<the-container-id>` with the ID from `docker ps`.
 
-    ```console
-    $ docker stop <the-container-id>
-    ```
+   ```console
+   $ docker stop <the-container-id>
+   ```
 
 3. Once the container has stopped, you can remove it by using the `docker rm` command.
 
-    ```console
-    $ docker rm <the-container-id>
-    ```
+   ```console
+   $ docker rm <the-container-id>
+   ```
 
 >**Note**
 >
@@ -81,7 +81,7 @@ To remove a container, you first need to stop it. Once it has stopped, you can r
 ### Remove a container using Docker Desktop
 
 1. Open Docker Desktop to the **Containers** view.
-2. Select the trash can icon under the **Actions** column for the old, currently running container that you want to delete.
+2. Select the trash can icon under the **Actions** column for the container that you want to delete.
 3. In the confirmation dialog, select **Delete forever**.
 
 <hr>
@@ -92,24 +92,21 @@ To remove a container, you first need to stop it. Once it has stopped, you can r
 
 1. Now, start your updated app using the `docker run` command.
 
-    ```console
-    $ docker run -dp 127.0.0.1:3000:3000 getting-started
-    ```
+   ```console
+   $ docker run -dp 127.0.0.1:3000:3000 getting-started
+   ```
 
 2. Refresh your browser on [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"} and you should see your updated help text.
 
-![Updated application with updated empty text](images/todo-list-updated-empty-text.png){: style="width:55%" }
-{: .text-center }
+## Summary
+
+In this section, you learned how to update and rebuild a container, as well as how to stop and remove a container.
+
+Related information:
+ - [docker CLI reference](/engine/reference/commandline/cli/)
 
 ## Next steps
 
-While you were able to build an update, there were two things you might have noticed:
-
-- All of the existing items in your todo list are gone! That's not a very good app! You'll fix that
-shortly.
-- There were a lot of steps involved for such a small change. In an upcoming section, you'll learn
-how to see code updates without needing to rebuild and start a new container every time you make a change.
-
-Before talking about persistence, you'll see how to share these images with others.
+Next, you'll learn how to share images with others.
 
 [Share the application](04_sharing_app.md){: .button .primary-btn}

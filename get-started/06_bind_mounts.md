@@ -41,6 +41,10 @@ Before looking at how you can use bind mounts for developing your application,
 you can run a quick experiment to get a practical understanding of how bind mounts
 work.
 
+> **Note**
+>
+> If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
+
 1. Open a terminal and change directory to the `getting-started-app`
    directory.
 
@@ -309,14 +313,19 @@ Update your app on your host machine and see the changes reflected in the contai
    $ docker build -t getting-started .
    ```
 
-## Next steps
+## Summary
 
 At this point, you can persist your database and see changes in your app as you develop without rebuilding the image.
 
 In addition to volume mounts and bind mounts, Docker also supports other mount
 types and storage drivers for handling more complex and specialized use cases.
-To learn more about the advanced storage concepts, see
-[Manage data in Docker](https://docs.docker.com/storage/).
+
+Related information:
+
+ - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [Manage data in Docker](https://docs.docker.com/storage/)
+
+## Next steps
 
 In order to prepare your app for production, you need to migrate your database
 from working in SQLite to something that can scale a little better. For
@@ -325,3 +334,4 @@ to use MySQL. But, how should you run MySQL? How do you allow the containers to
 talk to each other? You'll learn about that in the next section.
 
 [Multi container apps](07_multi_container.md){: .button .primary-btn}
+

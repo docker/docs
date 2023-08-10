@@ -1,11 +1,12 @@
 ---
-title: "What next"
+title: "What next after getting started"
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Making sure you have more ideas of what you could do next with your application
 ---
 
-Although we're done with our get started guide, there's still a LOT more to learn about containers!
-We're not going to go deep-dive here, but here are a few other areas to look at next!
+Although you're done with the get started guide, there's still a lot more to learn about containers.
+
+Here are a few other areas to look at next.
 
 ## Container orchestration
 
@@ -14,24 +15,21 @@ Running containers in production is tough. You don't want to log into a machine 
 scale across several machines? Container orchestration solves this problem. Tools like Kubernetes,
 Swarm, Nomad, and ECS all help solve this problem, all in slightly different ways.
 
-The general idea is that you have "managers" who receive **expected state**. This state might be
+The general idea is that you have managers who receive the expected state. This state might be
 "I want to run two instances of my web app and expose port 80." The managers then look at all of the
-machines in the cluster and delegate work to "worker" nodes. The managers watch for changes (such as
-a container quitting) and then work to make **actual state** reflect the expected state.
+machines in the cluster and delegate work to worker nodes. The managers watch for changes (such as
+a container quitting) and then work to make the actual state reflect the expected state.
 
 ## Cloud Native Computing Foundation projects
 
 The CNCF is a vendor-neutral home for various open-source projects, including Kubernetes, Prometheus, 
-Envoy, Linkerd, NATS, and more! You can view the [graduated and incubated projects here](https://www.cncf.io/projects/){:target="_blank" rel="noopener" class="_"}
-and the entire [CNCF Landscape here](https://landscape.cncf.io/){:target="_blank" rel="noopener" class="_"}. There are a LOT of projects to help
-solve problems around monitoring, logging, security, image registries, messaging, and more!
-
-So, if you're new to the container landscape and cloud-native application development, welcome! Please
-connect with the community, ask questions, and keep learning! We're excited to have you!
+Envoy, Linkerd, NATS, and more. You can view the [graduated and incubated projects here](https://www.cncf.io/projects/){:target="_blank" rel="noopener" class="_"}
+and the entire [CNCF Landscape here](https://landscape.cncf.io/){:target="_blank" rel="noopener" class="_"}. There are a lot of projects to help
+solve problems around monitoring, logging, security, image registries, messaging, and more.
 
 ## Getting started video workshop
 
-We recommend the video workshop from DockerCon 2022. Watch the video below or use the links to open the video at a particular section.
+Docker recommends watching the video workshop from DockerCon 2022. Watch the entire video or use the following links to open the video at a particular section.
 
 * [Docker overview and installation](https://youtu.be/gAGEar5HQoU)
 * [Pull, run, and explore containers](https://youtu.be/gAGEar5HQoU?t=1400)
@@ -50,5 +48,5 @@ If you'd like to see how containers are built from scratch, Liz Rice from Aqua S
 
 ## Language-specific guides
 
-If you are looking for information on how to containerize an application using your favorite language, see [Language-specific getting started guides](../language/index.md).
+If you are looking for information on how to containerize an application using your favorite language, see the [Language-specific guides](../language/index.md).
 
