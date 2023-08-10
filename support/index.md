@@ -33,7 +33,7 @@ If you have a paid Docker subscription, you can get support for the following ty
       * Installation crashes
       * Failure to launch Docker Desktop on first run
    * Desktop update issues
-   * Sign in issues in both the command line interface and Docker Hub user interface
+   * Sign-in issues in both the command line interface and Docker Hub user interface
    * Push or pull issues, including rate limiting
    * Usage issues
       * Crash closing software
