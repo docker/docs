@@ -178,6 +178,7 @@ In Docker Desktop, select the **Containers** tab to see a list of your container
 In this section, you learned the basics about creating a Dockerfile to build an image. Once you built an image, you started a container and saw the running app.
 
 Related information:
+
  - [Dockerfile reference](../engine/reference/builder.md)
  - [docker CLI reference](/engine/reference/commandline/cli/)
  - [Build with Docker guide](../build/guide/index.md)
