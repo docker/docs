@@ -1,6 +1,8 @@
 ---
 title: Multi-stage builds
-description: Keeping your images small with multi-stage builds
+description: |
+  Learn about multi-stage builds and how you can use
+  them to improve your builds and get smaller images
 keywords: build, best practices
 redirect_from:
 - /engine/userguide/eng-image/multistage-build/
@@ -10,125 +12,46 @@ redirect_from:
 Multi-stage builds are useful to anyone who has struggled to optimize
 Dockerfiles while keeping them easy to read and maintain.
 
-> **Acknowledgment**
->
-> Special thanks to [Alex Ellis](https://twitter.com/alexellisuk){:target="blank" rel="noopener" class=""}
-> for granting permission to use his blog post [Builder pattern vs. Multi-stage builds in Docker](https://blog.alexellis.io/mutli-stage-docker-builds/){:target="blank" rel="noopener" class=""}
-> as the basis of the examples on this page.
-
-## Before multi-stage builds
-
-One problem you may face as you build and publish images, is that the size of
-those images can sometimes grow quite large. Traditionally, before multi-stage
-builds were a thing, keeping the size of images down would require you to
-manually clean up resources from the image, so as to keep it small.
-
-In the past, it was common practice to have one Dockerfile for development,
-and another, slimmed-down one to use for production.
-The development version contained everything needed to build your application.
-The production version only contained your application
-and the dependencies needed to run it.
-
-To write a truly efficient Dockerfile, you had to come up with shell tricks and
-arcane solutions to keep the layers as small as possible.
-All to ensure that each layer contained only the artifacts it needed,
-and nothing else.
-
-This has been referred to as the _builder pattern_.
-The following examples show two Dockerfiles that adhere to this pattern:
-
-- `build.Dockerfile`, for development builds
-- `Dockerfile`, for slimmed-down production builds
-
-**`build.Dockerfile`**:
-
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM golang:1.16
-WORKDIR /go/src/github.com/alexellis/href-counter/
-COPY app.go ./
-RUN go get -d -v golang.org/x/net/html \
-  && CGO_ENABLED=0 go build -a -installsuffix cgo -o app .
-```
-
-Notice how this example artificially compresses two `RUN` commands together
-using the Bash `&&` operator. This is done to avoid creating an additional
-layer in the image. Writing Dockerfiles like this is failure-prone and hard to
-maintain. It's easy to insert another command and forget to continue the line
-using the `\` character, for example.
-
-**`Dockerfile`**:
-
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM alpine:latest  
-RUN apk --no-cache add ca-certificates
-WORKDIR /root/
-COPY app ./
-CMD ["./app"]
-```
-
-The following example is a utility script that:
-
-1. Builds the first image.
-2. Creates a container from it to copy the artifact out.
-3. Builds the second image.
-
-```bash
-#!/bin/sh
-echo Building alexellis2/href-counter:build
-docker build -t alexellis2/href-counter:build . -f build.Dockerfile
-
-docker container create --name extract alexellis2/href-counter:build  
-docker container cp extract:/go/src/github.com/alexellis/href-counter/app ./app  
-docker container rm -f extract
-
-echo Building alexellis2/href-counter:latest
-docker build --no-cache -t alexellis2/href-counter:latest .
-rm ./app
-```
-
-Both images take up room on your system and you still end up with the `app`
-artifact on your local disk as well.
-
-Multi-stage builds simplifies this situation!
-
 ## Use multi-stage builds
 
 With multi-stage builds, you use multiple `FROM` statements in your Dockerfile.
 Each `FROM` instruction can use a different base, and each of them begins a new
 stage of the build. You can selectively copy artifacts from one stage to
-another, leaving behind everything you don't want in the final image. To show
-how this works, you can adapt the `Dockerfile` from the previous section to use
-multi-stage builds.
+another, leaving behind everything you don't want in the final image.
+
+The following Dockerfile has two separate stages: one for building a binary,
+and another where we copy the binary into.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
+FROM golang:1.21
+WORKDIR /src
+COPY <<EOF ./main.go
+package main
 
-FROM golang:1.16
-WORKDIR /go/src/github.com/alexellis/href-counter/
-RUN go get -d -v golang.org/x/net/html  
-COPY app.go ./
-RUN CGO_ENABLED=0 go build -a -installsuffix cgo -o app .
+import "fmt"
 
-FROM alpine:latest  
-RUN apk --no-cache add ca-certificates
-WORKDIR /root/
-COPY --from=0 /go/src/github.com/alexellis/href-counter/app ./
-CMD ["./app"]
+func main() {
+  fmt.Println("hello, world")
+}
+EOF
+RUN go build -o /bin/hello ./main.go
+
+FROM scratch
+COPY --from=0 /bin/hello /bin/hello
+CMD ["/bin/hello"]
 ```
 
-You only need the single Dockerfile.
-No need for a separate build script.
-Just run `docker build`.
+You only need the single Dockerfile. No need for a separate build script. Just
+run `docker build`.
 
 ```console
-$ docker build -t alexellis2/href-counter:latest .
+$ docker build -t hello .
 ```
 
-The end result is the same tiny production image as before, with a
-significant reduction in complexity. You don't need to create any intermediate
-images, and you don't need to extract any artifacts to your local system at all.
+The end result is a tiny production image with nothing but the binary inside.
+None of the build tools required to build the application are included in the
+resulting image.
 
 How does it work? The second `FROM` instruction starts a new build stage with
 the `alpine:latest` image as its base. The `COPY --from=0` line copies just the
@@ -146,18 +69,22 @@ Dockerfile are re-ordered later, the `COPY` doesn't break.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
+FROM golang:1.21 as build
+WORKDIR /src
+COPY <<EOF /src/main.go
+package main
 
-FROM golang:1.16 AS builder
-WORKDIR /go/src/github.com/alexellis/href-counter/
-RUN go get -d -v golang.org/x/net/html  
-COPY app.go ./
-RUN CGO_ENABLED=0 go build -a -installsuffix cgo -o app .
+import "fmt"
 
-FROM alpine:latest  
-RUN apk --no-cache add ca-certificates
-WORKDIR /root/
-COPY --from=builder /go/src/github.com/alexellis/href-counter/app ./
-CMD ["./app"]  
+func main() {
+  fmt.Println("hello, world")
+}
+EOF
+RUN go build -o /bin/hello ./main.go
+
+FROM scratch
+COPY --from=build /bin/hello /bin/hello
+CMD ["/bin/hello"]
 ```
 
 ## Stop at a specific build stage
@@ -168,7 +95,7 @@ following command assumes you are using the previous `Dockerfile` but stops at
 the stage named `builder`:
 
 ```console
-$ docker build --target builder -t alexellis2/href-counter:latest .
+$ docker build --target build -t hello .
 ```
 
 A few scenarios where this might be useful are:
@@ -179,7 +106,7 @@ A few scenarios where this might be useful are:
 - Using a `testing` stage in which your app gets populated with test data, but
   building for production using a different stage which uses real data
 
-## Use an external image as a "stage"
+## Use an external image as a stage
 
 When using multi-stage builds, you aren't limited to copying from stages you
 created earlier in your Dockerfile. You can use the `COPY --from` instruction to
@@ -284,5 +211,4 @@ Removing intermediate container bbc025b93175
 Successfully built 09fc3770a9c4
 ```
 
-The legacy builder processes `stage1`,
-even if `stage2` doesn't depend on it.
+The legacy builder processes `stage1`, even if `stage2` doesn't depend on it.

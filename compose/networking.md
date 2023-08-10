@@ -6,7 +6,7 @@ title: Networking in Compose
 {% include compose-eol.md %}
 
 By default Compose sets up a single
-[network](../engine/reference/commandline/network_create.md){: target="_blank" rel="noopener" class="_" } for your app. Each
+[network](../engine/reference/commandline/network_create.md) for your app. Each
 container for a service joins the default network and is both reachable by
 other containers on that network, and discoverable by them at a hostname
 identical to the container name.
@@ -15,10 +15,10 @@ identical to the container name.
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](reference/index.md){: target="_blank" rel="noopener" class="_" }
-> or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name){: target="_blank" rel="noopener" class="_" }.
+> project name with either the [`--project-name` flag](reference/index.md){
+> or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
-For example, suppose your app is in a directory called `myapp`, and your `docker-compose.yml` looks like this:
+For example, suppose your app is in a directory called `myapp`, and your `compose.yml` looks like this:
 
 ```yaml
 services:
@@ -39,7 +39,6 @@ When you run `docker compose up`, the following happens:
     `myapp_default` under the name `web`.
 3.  A container is created using `db`'s configuration. It joins the network
     `myapp_default` under the name `db`.
-
 
 Each container can now look up the hostname `web` or `db` and
 get back the appropriate container's IP address. For example, `web`'s
@@ -181,5 +180,5 @@ Instead of attempting to create a network called `[projectname]_default`, Compos
 
 For full details of the network configuration options available, see the following references:
 
-- [Top-level `networks` key](compose-file/06-networks.md)
-- [Service-level `networks` key](compose-file/05-services.md#networks)
+- [Top-level `networks` element](compose-file/06-networks.md)
+- [Service-level `networks` attribute](compose-file/05-services.md#networks)

@@ -6,12 +6,12 @@ keywords: cli, compose, profile, profiles reference
 {% include compose-eol.md %}
 
 Profiles help you adjust the Compose application model for various uses and
-environments by selectively enabling services.
+environments by selectively starting services.
 This is achieved by assigning each service to zero or more profiles. If
 unassigned, the service is always started but if assigned, it is only started
 if the profile is activated.
 
-This allows you to define additional services in a single `docker-compose.yml` file
+This allows you to define additional services in a single `compose.yml` file
 that should only be started in specific scenarios, for example for debugging or
 development tasks.
 
@@ -56,9 +56,9 @@ Valid profiles names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 > they are always enabled and automatically started.
 {: .tip}
 
-## Enable profiles
+## Start specific profiles
 
-To enable profiles supply the `--profile` [command-line option](reference/index.md) or
+To start a specific profile supply the `--profile` [command-line option](reference/index.md) or
 use the [`COMPOSE_PROFILES` environment variable](environment-variables/envvars.md#compose_profiles):
 
 ```console
@@ -69,10 +69,10 @@ $ COMPOSE_PROFILES=debug docker compose up
 ```
 
 The above commands would both start your application with the `debug` profile enabled.
-In the example, `docker-compose.yml` file above, this starts the services `backend`,
+In the example, `compose.yml` file above, this starts the services `backend`,
 `db` and `phpmyadmin`.
 
-### Enable multiple profiles
+### Start multiple profiles
 
 Multiple profiles can be specified by passing multiple `--profile` flags or
 a comma-separated list for the `COMPOSE_PROFILES` environment variable:
@@ -85,10 +85,10 @@ $ docker compose --profile frontend --profile debug up
 $ COMPOSE_PROFILES=frontend,debug docker compose up
 ```
 
-## Auto-enabling profiles and dependency resolution
+## Auto-starting profiles and dependency resolution
 
 When a service with assigned `profiles` is explicitly targeted on the command
-line its profiles are enabled automatically so you don't need to enable them
+line its profiles are started automatically so you don't need to start them
 manually. This can be used for one-off services and debugging tools.
 As an example consider the following configuration:
 
@@ -118,12 +118,12 @@ $ docker compose up -d
 $ docker compose run db-migrations
 ```
 
-But keep in mind that `docker compose` only automatically enables the
+But keep in mind that `docker compose` only automatically starts the
 profiles of the services on the command line and not of any dependencies. 
 
 This means that any other services the targeted service `depends_on` should either:
 - Share a common profile 
-- Always be enabled, by omitting `profiles` or having a matching profile enabled explicitly
+- Always be started, by omitting `profiles` or having a matching profile started explicitly
 
 ```yaml
 services:
@@ -159,7 +159,7 @@ $ docker compose up -d mock-backend
 $ docker compose up phpmyadmin
 ```
 
-Although targeting `phpmyadmin` automatically enables the profiles `debug`, it doesn't automatically enable the profiles required by `db` which is `dev`. 
+Although targeting `phpmyadmin` automatically starts the profiles `debug`, it doesn't automatically start the profiles required by `db` which is `dev`. 
 
 To fix this you either have to add the `debug` profile to the `db` service:
 
@@ -169,14 +169,13 @@ db:
   profiles: ["debug", "dev"]
 ```
 
-or enable a profile of `db` explicitly:
+or start a profile of `db` explicitly:
 
 ```console
-# Profiles "debug" is enabled automatically by targeting phpmyadmin
+# Profiles "debug" is started automatically by targeting phpmyadmin
 $ docker compose --profile dev up phpmyadmin
 $ COMPOSE_PROFILES=dev docker compose up phpmyadmin
 ```
-
 
 ## Reference information
 

@@ -120,7 +120,7 @@ and the [Dockerfile reference](/engine/reference/builder/).
 
 ## Step 3: Define services in a Compose file
 
-Create a file called `docker-compose.yml` in your project directory and paste
+Create a file called `compose.yaml` in your project directory and paste
 the following:
 
 ```yaml
@@ -214,7 +214,7 @@ image pulled from the Docker Hub registry.
 
 ## Step 5: Edit the Compose file to add a bind mount
 
-Edit `docker-compose.yml` in your project directory to add a
+Edit the `compose.yaml` file in your project directory to add a
 [bind mount](../storage/bind-mounts.md) for the `web` service:
 
 ```yaml
@@ -269,7 +269,7 @@ Docker Desktop for Mac and Docker Desktop for Windows that uses
 [Linux containers](../desktop/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 For more information, see
 [File sharing on Docker for Mac](../desktop/settings/mac.md#file-sharing),
-[File sharing on Docker for Windows](../desktop/settings/windows.md#file-sharing),
+[File sharing on Docker for Windows](../desktop/settings/windows.md#file-sharing), [File sharing on Docker for Linux](../desktop/settings/linux.md#file-sharing).
 and the general examples on how to
 > [Manage data in containers](../storage/volumes.md).
 >
@@ -281,7 +281,7 @@ need VirtualBox.
 
 ## Step 7: Update the application
 
-Because the application code is now mounted into the container using a volume,
+As the application code is now mounted into the container using a volume,
 you can make changes to its code and see the changes instantly, without having
 to rebuild the image.
 
@@ -344,7 +344,7 @@ $ docker compose down --volumes
 
 ## Where to go next
 
-- Next, try the [Sample apps with Compose](https://github.com/docker/awesome-compose)
+- Try the [Sample apps with Compose](https://github.com/docker/awesome-compose)
 - [Explore the full list of Compose commands](reference/index.md)
-- [Explore the Compose configuration file reference](compose-file/index.md)
+- [Explore the Compose file reference](compose-file/index.md)
 - To learn more about volumes and bind mounts, see [Manage data in Docker](../storage/index.md)

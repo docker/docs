@@ -23,14 +23,15 @@ On this page you can find instructions on how to install Compose standalone on L
 2. Apply executable permissions to the standalone binary in the target path for the installation.
 3. Test and execute compose commands using `docker-compose`.
 
-> **Note**
->
-> If the command `docker-compose` fails after installation, check your path.
-> You can also create a symbolic link to `/usr/bin` or any other directory in your path.
-> For example:
-> ```console
-> $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-> ```
+   > **Tip**
+   >
+   > If the command `docker-compose` fails after installation, check your path.
+   > You can also create a symbolic link to `/usr/bin` or any other directory in your path.
+   > For example:
+   > ```console
+   > $ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+   > ```
+   {: .tip}
 
 ### On Windows Server
 
@@ -38,7 +39,7 @@ Follow these instructions if you are running the Docker daemon and client direct
 on Microsoft Windows Server and want to install Docker Compose.
 
 1.  Run PowerShell as an administrator.
-    When asked if you want to allow this app to make changes to your device, click **Yes** in order to proceed with the installation.
+    When asked if you want to allow this app to make changes to your device, select **Yes** in order to proceed with the installation.
 
 2.  GitHub now requires TLS1.2. In PowerShell, run the following:
 

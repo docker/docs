@@ -1,7 +1,7 @@
 ---
 description: Key features and use cases of Docker Compose
 keywords: documentation, docs, docker, compose, orchestration, containers, uses, features
-title: Key features and use cases
+title: Key features and use cases of Docker Compose
 ---
 
 Using Compose is essentially a three-step process:
@@ -9,12 +9,12 @@ Using Compose is essentially a three-step process:
 1. Define your app's environment with a `Dockerfile` so it can be reproduced
 anywhere.
 
-2. Define the services that make up your app in `docker-compose.yml`
+2. Define the services that make up your app in a `compose.yaml` file
 so they can be run together in an isolated environment.
 
-3. Run `docker compose up` and the Docker compose command starts and runs your entire app. You can alternatively run `docker-compose up` using Compose standalone(`docker-compose` binary).
+3. Run `docker compose up` and the Docker compose command starts and runs your entire app.
 
-A `docker-compose.yml` looks like this:
+A `compose.yaml` looks like this:
 
 ```yaml
 services:
@@ -42,20 +42,19 @@ For more information about the Compose file, see the
 
 Compose uses a project name to isolate environments from each other. You can make use of this project name in several different contexts:
 
-* on a dev host, to create multiple copies of a single environment, such as when you want to run a stable copy for each feature branch of a project
-* on a CI server, to keep builds from interfering with each other, you can set
+* On a dev host, to create multiple copies of a single environment, such as when you want to run a stable copy for each feature branch of a project
+* On a CI server, to keep builds from interfering with each other, you can set
   the project name to a unique build number
-* on a shared host or dev host, to prevent different projects, which may use the
+* On a shared host or dev host, to prevent different projects, which may use the
   same service names, from interfering with each other
 
-The default project name is the basename of the project directory. You can set
+The default project name is the base name of the project directory. You can set
 a custom project name by using the
 [`-p` command line option](reference/index.md) or the
 [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
 The default project directory is the base directory of the Compose file. A custom value
 for it can be defined with the `--project-directory` command line option.
-
 
 ### Preserves volume data when containers are created
 
@@ -67,7 +66,6 @@ you've created in volumes isn't lost.
 If you use `docker compose` on a Windows machine, see
 [Environment variables](environment-variables/envvars.md) and adjust the necessary environment
 variables for your specific needs.
-
 
 ### Only recreate containers that have changed
 
@@ -81,8 +79,6 @@ environment very quickly.
 
 Compose supports variables in the Compose file. You can use these variables
 to customize your composition for different environments, or different users.
-See [Variable substitution](compose-file/compose-file-v3.md#variable-substitution) for more
-details.
 
 You can extend a Compose file using the `extends` field or by creating multiple
 Compose files. For more details, see [Working with multiple Compose files](multiple-compose-files/index.md).
@@ -127,4 +123,4 @@ Compose has traditionally been focused on development and testing workflows,
 but with each release we're making progress on more production-oriented features.
 
 For details on using production-oriented features, see
-[compose in production](production.md) in this documentation.
+[Compose in production](production.md).

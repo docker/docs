@@ -8,12 +8,6 @@ redirect_from:
 
 Find information on how to get support, and the scope of Docker support.
 
-{% include upgrade-cta.html
-  body="Docker offers support for developers subscribed to a Pro, Team, or a Business tier. Upgrade now to benefit from Docker Support."
-  header-text="This feature requires a paid Docker subscription"
-  target-url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
-%}
-
 ## How do I get support?
 
 If you have a paid Docker subscription, raise a ticket through [Docker support](https://hub.docker.com/support/contact/){:target="_blank" rel="noopener" class="_"}.
@@ -39,15 +33,15 @@ If you have a paid Docker subscription, you can get support for the following ty
       * Installation crashes
       * Failure to launch Docker Desktop on first run
    * Desktop update issues
-   * Login issues in both the command line interface and Docker Hub user interface
+   * Sign-in issues in both the command line interface and Docker Hub user interface
    * Push or pull issues, including rate limiting
    * Usage issues
       * Crash closing software
       * Docker Desktop not behaving as expected
 
    For Windows users, you can also request support on:
-   * Enabling virtualization in BIOS
-   * Enabling Windows features
+   * Turning on virtualization in BIOS
+   * Turning on Windows features
    * Running inside [certain VM or VDI environments](../desktop/vm-vdi.md) (Docker Business customers only)
 
 
@@ -57,8 +51,8 @@ Docker excludes support for the following types of issues:
    * Altered or modified Docker software
    * Any version of the Docker software other than the latest version
    * Defects in the Docker software due to hardware malfunction, abuse, or improper use
-   * Docker Support excludes training, customization, and integration
-   * Features labeled as experimental
+   * Docker support excludes training, customization, and integration
+   * Features labeled as experimental or beta
    * Reimbursing and expenses spent for third-party services not provided by Docker
    * Routine product maintenance (data backup, cleaning disk space and configuring log rotation)
    * Running containers of a different architecture using emulation
@@ -80,7 +74,7 @@ For Pro and Team customers, Docker only offers support for the latest version of
 ## How many machines can I get support for Docker Desktop on?
 
 As a Pro user you can get support for Docker Desktop on a single machine.
-As a Team, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
+As a Team user, you can get support for Docker Desktop for the number of machines equal to the number of seats as part of your plan.
 
 ## What OS’s are supported?
 
@@ -101,7 +95,7 @@ For more information, see [Docker Data Processing Agreement](https://www.docker.
 
 ## What can I do before seeking support?
 
-Before seeking support, you can perform basic troubleshooting. See [Diagnose and Troubleshooting](../desktop/troubleshoot/overview.md) for more information.
+Before seeking support, you can perform basic troubleshooting. See [Diagnose and troubleshooting](../desktop/troubleshoot/overview.md) for more information.
 
 You can also see if an answer already exists in the following FAQs:
 - [Docker Business or Team onboarding](../docker-hub/general-faqs.md)
