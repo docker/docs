@@ -124,6 +124,7 @@ create the image and push it to a registry and then the production environment
 can use the latest version of the image.
 
 Related information:
+
  - [docker CLI reference](/engine/reference/commandline/cli/)
  - [Multi-platform images](../build/building/multi-platform.md)
  - [Docker Hub overview](../docker-hub/index.md)
