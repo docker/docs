@@ -42,8 +42,8 @@ Docker supports Docker Desktop on the current LTS release of the aforementioned 
 To install Docker Desktop successfully, your Linux host must meet the following general requirements:
 
 - 64-bit kernel and CPU support for virtualization.
-- KVM virtualization support. Follow the [KVM virtualization support instructions](#kvm-virtualization-support) to check if the KVM kernel modules are enabled and how to provide access to the kvm device.
-- **QEMU must be version 5.2 or newer**. We recommend upgrading to the latest version.
+- KVM virtualization support. Follow the [KVM virtualization support instructions](#kvm-virtualization-support) to check if the KVM kernel modules are enabled and how to provide access to the KVM device.
+- QEMU must be version 5.2 or later. We recommend upgrading to the latest version.
 - systemd init system.
 - Gnome, KDE, or MATE Desktop environment.
   - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/){:target="_blank" rel="noopener" class="_"}.
@@ -53,7 +53,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 
 Docker Desktop for Linux runs a Virtual Machine (VM). For more information on why, see [Why Docker Desktop for Linux runs a VM](../faqs/linuxfaqs.md#why-does-docker-desktop-for-linux-run-a-vm).
 
-> **Note:**
+> **Note**
 >
 > Docker does not provide support for running Docker Desktop in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
 
@@ -107,7 +107,7 @@ Add your user to the kvm group in order to access the kvm device:
 $ sudo usermod -aG kvm $USER
 ```
 
-Log out and log back in so that your group membership is re-evaluated.
+Sign out and sign back in so that your group membership is re-evaluated.
 
 
 ## Generic installation steps
@@ -131,7 +131,7 @@ Make sure you meet the system requirements outlined earlier and follow the distr
 
     ![Docker app in Applications](images/docker-app-in-apps.png)
 
-3. Select **Docker Desktop** to start Docker. <br> The Docker menu (![whale menu](images/whale-x.svg){: .inline}) displays the Docker Subscription Service Agreement window.
+3. Select **Docker Desktop** to start Docker. <br> The Docker menu (![whale menu](images/whale-x.svg){: .inline}) displays the Docker Subscription Service Agreement.
 
 4. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
@@ -142,9 +142,10 @@ Make sure you meet the system requirements outlined earlier and follow the distr
 
 ## Where to go next
 
+- [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
+- [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.
-- [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
 - [Back up and restore data](../backup-and-restore.md) provides instructions
   on backing up and restoring data related to Docker.

@@ -52,12 +52,12 @@ as configured via Docker Desktop's **Settings** > **Resources** > **File Sharing
 
 It protects all containers launched by users via `docker create` and `docker run`. It does not yet protect Docker Desktop Kubernetes pods, ExtensioncContainers, and Dev Environments.
 
-### Does Enhanced Container Isolation protect container launched prior to enabling ECI?
+### Does Enhanced Container Isolation protect containers launched prior to enabling ECI?
 
 No. Containers created prior to switching on ECI are not protected. Therefore, we
 recommend removing all containers prior to switching on ECI. 
 
-### Does Enhanced Container Isolation affect performance of containers?
+### Does Enhanced Container Isolation affect the performance of containers?
 
 Enhanced Container Isolation has very little impact on the performance of
 containers. The exception is for containers that perform lots of `mount` and

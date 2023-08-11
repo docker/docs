@@ -6,7 +6,7 @@ keywords: set up, enhanced container isolation, rootless, security
 
 >**Note**
 >
->Enhance Container Isolation is available to Docker Business customers only.
+> Enhanced Container Isolation is available to Docker Business customers only.
 
 Enhanced Container Isolation hardens container isolation using the [Sysbox
 container runtime](https://github.com/nestybox/sysbox){:target="_blank" rel="noopener" class="_"}. Sysbox is a fork of the

@@ -15,7 +15,7 @@ redirect_from:
 - /installation/windows/
 ---
 
-Welcome to Docker Desktop for Windows. This page contains information about Docker Desktop for Windows system requirements, download URL, instructions to install and update Docker Desktop for Windows.
+This page contains the download URL, information about system requirements, and instructions on how to install Docker Desktop for Windows.
 
 [Docker Desktop for Windows](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe){: .button .primary-btn }
 
@@ -29,8 +29,6 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 ## System requirements
 
-You must meet the following requirements to successfully install Docker Desktop on Windows:
-
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" data-target="#win-wsl2">WSL 2 backend</a></li>
 <li><a data-toggle="tab" data-target="#win-hyper-v">Hyper-V backend and Windows containers</a></li>
@@ -40,21 +38,19 @@ You must meet the following requirements to successfully install Docker Desktop 
 
 ### WSL 2 backend
 
-- WSL version 1.1.3.0 or above.
+- WSL version 1.1.3.0 or later.
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit: Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
-- Enable the WSL 2 feature on Windows. For detailed instructions, refer to the
+- Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10){: target="_blank" rel="noopener" class="_"}.
 - The following hardware prerequisites are required to successfully run
   WSL 2 on Windows 10 or Windows 11:
 
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
   - 4GB system RAM
-  - BIOS-level hardware virtualization support must be enabled in the
+  - BIOS-level hardware virtualization support must be turned on in the
     BIOS settings. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
-
-- Download and install the [Linux kernel update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel){: target="_blank" rel="noopener" class="_"}.
 
 </div>
 <div id="win-hyper-v" class="tab-pane fade" markdown="1">
@@ -66,13 +62,13 @@ You must meet the following requirements to successfully install Docker Desktop 
 
   For Windows 10 and Windows 11 Home, see the system requirements in the [WSL 2 backend](#wsl-2-backend){: data-toggle="tab" data-target="#win-wsl2" } tab.
 
-- Hyper-V and Containers Windows features must be enabled.
+- Hyper-V and Containers Windows features must be turned on.
 - The following hardware prerequisites are required to successfully run Client
   Hyper-V on Windows 10:
 
   - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation){: target="_blank" rel="noopener" class="_"}
   - 4GB system RAM
-  - BIOS-level hardware virtualization support must be enabled in the
+  - BIOS-level hardware virtualization support must be turned on in the
     BIOS settings. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
@@ -106,7 +102,7 @@ Looking for information on using Windows containers?
 > **Note**
 >
 > To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
-> Windows Home or Education editions will only allow you to run Linux containers.
+> Windows Home or Education editions only allow you to run Linux containers.
 
 ## Install Docker Desktop on Windows
 
@@ -114,21 +110,16 @@ Looking for information on using Windows containers?
 
 1. Double-click **Docker Desktop Installer.exe** to run the installer.
 
-   If you haven't already downloaded the installer (`Docker Desktop Installer.exe`), you can get it from
-   [**Docker Hub**](https://hub.docker.com/editions/community/docker-ce-desktop-windows/){:target="_blank" rel="noopener" class="_"}.
-   It typically downloads to your `Downloads` folder, or you can run it from
-   the recent downloads bar at the bottom of your web browser.
-
 2. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
 
    If your system only supports one of the two options, you will not be able to select which backend to use.
 
 3. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
-4. When the installation is successful, click **Close** to complete the installation process.
+4. When the installation is successful, select **Close** to complete the installation process.
 
 5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an **administrator** and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
-   Log out and log back in for the changes to take effect.
+   Sign out and sign back in for the changes to take effect.
 
 ### Install from the command line
 
@@ -183,20 +174,21 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
    ![Search for Docker app](images/docker-app-search.png){:width="300px"}
 
-2. The Docker menu (![whale menu](images/whale-x.svg){: .inline}) displays the Docker Subscription Service Agreement window.
+2. The Docker menu (![whale menu](images/whale-x.svg){: .inline}) displays the Docker Subscription Service Agreement.
 
    {% include desktop-license-update.md %}
 
 3. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
-   Note that Docker Desktop will not run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
+   Note that Docker Desktop won't run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement/){:target="_blank" rel="noopener" class="_"}. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="\_blank" rel="noopener" class="*" id="dkr_docs_desktop_install_btl"}.
 
 
 ## Where to go next
 
-* [Get started with Docker](/get-started/) is a tutorial that teaches you how to deploy a multi-service stack.
+- [Get started with Docker](/get-started/) is a tutorial that teaches you how to deploy a multi-service stack.
+- [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, and
   how to get support.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.

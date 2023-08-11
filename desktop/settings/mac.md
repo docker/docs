@@ -23,7 +23,7 @@ You can also locate the `settings.json` file at `~/Library/Group Containers/grou
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
 - **Start Docker Desktop when you log in**. Select to automatically start Docker
-  Desktop when you log into your machine.
+  Desktop when you sign in to your machine.
 
 - **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
 
@@ -110,9 +110,9 @@ otherwise you may get `Mounts denied` or `cannot start service` errors at runtim
 
 File share settings are:
 
-- **Add a Directory**. Click `+` and navigate to the directory you want to add.
+- **Add a Directory**. Select `+` and navigate to the directory you want to add.
 
-- **Remove a Directory**. Click `-` next to the directory you want to remove
+- **Remove a Directory**. Select `-` next to the directory you want to remove
 
 - **Apply & Restart** makes the directory available to containers using Docker's
   bind mount (`-v`) feature.
@@ -150,7 +150,7 @@ File share settings are:
 
 HTTP/HTTPS proxies can be used when:
 
-- Logging in to Docker
+- Signing in to Docker
 - Pulling or pushing images
 - Fetching artifacts during image builds
 - Containers interact with the external network
@@ -158,14 +158,14 @@ HTTP/HTTPS proxies can be used when:
 
 If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration), Docker Desktop reads
 this configuration
-and automatically uses these settings for logging into Docker, for pulling and pushing images, and for
+and automatically uses these settings for signing in to Docker, for pulling and pushing images, and for
 container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
 the developer for a username and password. All passwords are stored securely in the OS credential store.
 Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
 URL for your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
 supports TLS 1.3 when communicating with proxies.
 
-To set a different proxy for Docker Desktop, enable **Manual proxy configuration** and enter a single
+To set a different proxy for Docker Desktop, turn on **Manual proxy configuration** and enter a single
 upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
 
 To prevent developers from accidentally changing the proxy settings, see
@@ -211,7 +211,7 @@ Select **Apply & Restart** to save your settings and restart Docker Desktop.
 ## Kubernetes
 
 Docker Desktop includes a standalone Kubernetes server, so that you can test
-deploying your Docker workloads on Kubernetes. To enable Kubernetes support and
+deploying your Docker workloads on Kubernetes. To turn on Kubernetes support and
 install a standalone instance of Kubernetes running as a Docker container,
 select **Enable Kubernetes**.
 
@@ -227,7 +227,7 @@ see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" cla
 
 The **Software Updates** tab notifies you of any updates available to Docker Desktop.
 When there's a new update, you can choose to download the update right away, or
-click the **Release Notes** option to learn what's included in the updated version.
+select the **Release Notes** option to learn what's included in the updated version.
 
 Turn off the check for updates by clearing the **Automatically check for updates**
 check box. This disables notifications in the Docker menu and the notification
@@ -236,7 +236,7 @@ the **Check for updates** option in the Docker menu.
 
 To allow Docker Desktop to automatically download new updates in the background,
 select **Always download updates**. This downloads newer versions of Docker Desktop
-when an update becomes available. After downloading the update, click
+when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 

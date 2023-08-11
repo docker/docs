@@ -11,7 +11,7 @@ Settings Management is a feature that helps admins to control certain Docker Des
 
 With a few lines of JSON, admins can configure controls for Docker Desktop settings such as proxies and network settings. For an extra layer of security, admins can also use Settings Management to enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md) which ensures that any configurations set with Settings Management cannot be modified by containers.
 
-It is available with [Docker Desktop 4.13.0 or later](../../release-notes.md).
+It is available with [Docker Desktop 4.13.0 and later](../../release-notes.md).
 
 ### Who is it for?
 
@@ -29,7 +29,7 @@ Values that are set to `locked: true` within the `admin-settings.json` override 
 
 Using the `admin-settings.json` file, admins can:
 
-- Enable and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md)
+- Turn on and lock in [Enhanced Container Isolation](../enhanced-container-isolation/index.md)
 - Configure HTTP proxies
 - Configure network settings
 - Configure Kubernetes settings
