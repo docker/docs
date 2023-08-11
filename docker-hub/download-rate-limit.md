@@ -1,16 +1,18 @@
 ---
-description: Download rate limit
-keywords: Docker, pull requests, download, limit,
-title: Download rate limit
+description: Learn how download rate limits for image pulls on Docker Hub work
+keywords: Docker Hub, pulls, download, limit,
+title: Docker Hub rate limit
 ---
 
 ## What's the download rate limit on Docker Hub?
 
-Docker Hub limits the number of Docker image downloads, or pulls based on the account type of the user pulling the image. Pull rate limits are based on individual IP address.
+Docker Hub limits the number of Docker image downloads, or pulls, based on the account type of the user pulling the image. Pull rate limits are based on individual IP address.
 
-For anonymous users, the rate limit is set to 100 pulls per 6 hours per IP address. 
-For [authenticated](#how-do-i-authenticate-pull-requests) users, it's  200 pulls per 6 hour period. 
-Users with a paid [Docker subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} get up to 5000 pulls per day. 
+| User type | Rate limit |
+| --------- | ---------- |
+| Anonymous users | 100 pulls per 6 hours per IP address |
+| [Authenticated users](#how-do-i-authenticate-pull-requests)| 200 pulls per 6 hour period |
+| Users with a paid [Docker subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} | Up to 5000 pulls per day |
 
 If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
 
@@ -97,7 +99,7 @@ If you don't see any RateLimit header, it could be because the image or your IP 
 
 To take advantage of the higher limits included in a paid Docker subscription, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account.
 
-A Pro, Team, or a Business tier doesn't increase limits on your images for other users. See our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
+A Pro, Team, or a Business tier doesn't increase limits on your images for other users. See Docker's [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
 
 ## How do I authenticate pull requests?
 
@@ -111,23 +113,23 @@ Select **Sign in / Create Docker ID** from the Docker Desktop menu and follow th
 
 ### Docker Engine
 
-If you are using a standalone version of Docker Engine, run the `docker login` command from a terminal to authenticate with Docker Hub. For information on how to use the command, see [docker login](../engine/reference/commandline/login.md).
+If you're using a standalone version of Docker Engine, run the `docker login` command from a terminal to authenticate with Docker Hub. For information on how to use the command, see [docker login](../engine/reference/commandline/login.md).
 
 ### Docker Swarm
 
-If you are running Docker Swarm, you must use the `-- with-registry-auth` flag to authenticate with Docker Hub. For more information, see [docker service create](../engine/reference/commandline/service_create.md/#create-a-service). If you are using a Docker Compose file to deploy an application stack, see [docker stack deploy](../engine/reference/commandline/stack_deploy.md).
+If you're running Docker Swarm, you must use the `-- with-registry-auth` flag to authenticate with Docker Hub. For more information, see [Create a service](../engine/reference/commandline/service_create.md/#create-a-service). If you are using a Docker Compose file to deploy an application stack, see [docker stack deploy](../engine/reference/commandline/stack_deploy.md).
 
 ### GitHub Actions
 
-If you are using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" rel="noopener" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
+If you're using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" rel="noopener" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
 
 ### Kubernetes
 
-If you are running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" rel="noopener" class="_"} for information on authentication.
+If you're running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" rel="noopener" class="_"} for information on authentication.
 
 ### Third-party platforms
 
-If you are using any third-party platforms, follow your provider’s instructions on using registry authentication.
+If you're using any third-party platforms, follow your provider’s instructions on using registry authentication.
 
 - [Artifactory](https://www.jfrog.com/confluence/display/JFROG/Advanced+Settings#AdvancedSettings-RemoteCredentials){: target="_blank" rel="noopener" class="_"}
 - [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/){: target="_blank" rel="noopener" class="_"}
@@ -145,7 +147,7 @@ If you are using any third-party platforms, follow your provider’s instruction
 
 Docker Hub also has an overall rate limit to protect the application 
 and infrastructure. This limit applies to all requests to Hub 
-properties including web pages, APIs, image pulls. The limit is 
+properties including web pages, APIs, and image pulls. The limit is 
 applied per-IP, and while the limit changes over time depending on load
 and other factors, it's in the order of thousands of requests per 
 minute. The overall rate limit applies to all users equally

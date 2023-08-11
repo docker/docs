@@ -1,16 +1,13 @@
 ---
 title: Insights and analytics
-description: Provides usage statistics of your images on Docker Hub.
+description: Discover how to access usage statistics of your images on Docker Hub
 keywords: docker hub, hub, insights, analytics, api, verified publisher
 redirect_from:
   - /docker-hub/publish/insights-analytics/
 ---
 
 Insights and analytics provides usage analytics for Docker Verified
-Publisher (DVP) and Docker-Sponsored Open Source (DSOS) images on Docker Hub, providing self-serve access
-to metrics as both raw data and summary data for a desired time span. You can
-view the number of image pulls by tag or by digest, and get breakdowns by
-geolocation, cloud provider, client, and more.
+Publisher (DVP) and Docker-Sponsored Open Source (DSOS) images on Docker Hub. This includes self-serve access to metrics as both raw data and summary data for a desired time span. You can view the number of image pulls by tag or by digest, and get breakdowns by geolocation, cloud provider, client, and more.
 
 <!-- prettier-ignore -->
 > **Tip**
@@ -45,7 +42,7 @@ To view data in the chart:
 
 ### Share analytics data
 
-You can share the visualization with others using the share icon above the chart.
+You can share the visualization with others using the **Share** icon above the chart.
 This is a convenient way to share statistics with others in your organization.
 
 ![Chart share icon](./images/chart-share-icon.png)
