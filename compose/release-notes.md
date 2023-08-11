@@ -10,6 +10,21 @@ redirect_from:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.20.3
+{% include release-date.html date="2023-07-19" %}
+
+### Update
+- Dependencies upgrade: bump golang to 1.21.0
+- Dependencies upgrade: bump compose-go to v1.18.1
+- Dependencies upgrade: bump buildkit to v0.12.1
+
+### Bug fixes and enhancements
+- Added tar synchronisation in `watch` mode.
+- Added builder's name on the first build line.
+- Improved shell completion for `--project-directory` and `--profile`.
+- Fixed build issue with proxy configuration not passing to legacy builder.
+- Removed unnecessary warning when an option dependency exists successfully.
+
 ## 2.20.2
 {% include release-date.html date="2023-07-19" %}
 
