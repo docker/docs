@@ -1,7 +1,7 @@
 ---
 title: Update the billing information
 description: Learn how to update your billing information in Docker Hub
-keywords: payments, billing, subscription, Docker Hub
+keywords: payments, billing, subscription
 ---
 
 You can update the billing information for your personal account or for an organization. 
