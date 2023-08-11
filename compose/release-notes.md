@@ -21,9 +21,9 @@ For more detailed information, see the [release notes in the Compose repo](https
 ### Bug fixes and enhancements
 - Added tar synchronisation in `watch` mode.
 - Added builder's name on the first build line.
-- Improved shell completion for `--project-directory` and `--profile`
-- Fixed build issue with proxy configuration not pass to legacy builder.
-- Removed unnecessary warning when an option dependency exists successfully
+- Improved shell completion for `--project-directory` and `--profile`.
+- Fixed build issue with proxy configuration not passing to legacy builder.
+- Removed unnecessary warning when an option dependency exists successfully.
 
 ## 2.20.2
 {% include release-date.html date="2023-07-19" %}
