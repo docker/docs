@@ -50,11 +50,11 @@ $ kubectl config get-contexts
 $ kubectl config use-context docker-desktop
 ```
 
->Tip
+> **Tip**
 >
 > Run the `kubectl` command in a CMD or PowerShell terminal, otherwise `kubectl config get-contexts` may return an empty result. 
 >
->If you are using a different terminal and this happens, you can try setting the `kubeconfig` environment variable to the location of the `.kube/config` file. 
+> If you are using a different terminal and this happens, you can try setting the `kubeconfig` environment variable to the location of the `.kube/config` file. 
 {: .tip}
 
 If you installed `kubectl` using Homebrew, or by some other method, and
