@@ -1,6 +1,6 @@
 ---
 title: Billing and payments
-description: Landing page for information on billing and payment processes
+description: Discover information on billing and payment processes for Docker subscriptions.
 keywords: billing, invoice, payment, subscription
 ---
 
