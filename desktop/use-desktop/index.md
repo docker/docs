@@ -16,6 +16,13 @@ The **Images** view displays a list of your Docker images and allows you to run 
 
 The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](volumes.md).
 
+The **Learning center** view helps you get started with quick in-app walkthroughs and other resources for learning about Docker. 
+
+For a more detailed guide about getting started, see
+[Get started](../../get-started/index.md).
+
+The **Builds** view, currently in beta, lets you inspect your build history and manage builders. By default, it displays a list of all your ongoing and completed builds. [Explore builds](builds.md).
+
 In addition, the Docker Dashboard allows you to:
 
 - Navigate to the **Settings** menu to configure your Docker Desktop settings. Select the **Settings** icon in the Dashboard header.
