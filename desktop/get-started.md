@@ -1,7 +1,7 @@
 ---
 description: Explore the Learning center and understand the benefits of signing in to Docker Desktop
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, learning center, guide, sign in
-title: Explore the Learning center and sign in to Docker Desktop
+title: Sign in to Docker Desktop
 redirect_from:
 - /desktop/linux/
 - /desktop/linux/index/
@@ -26,18 +26,6 @@ redirect_from:
 - /winkit/
 - /winkit/getting-started/
 ---
-
-## Learning center
-
-The Learning center helps you get started with quick in-app walkthroughs and other resources for learning about Docker.
-
-To access the Learning center, select the **Learning center** view in Docker
-Desktop.
-
-![Learning Center](images/learning-center.png)
-
-For a more detailed guide about getting started, see
-[Get started](../get-started/index.md).
 
 ## Sign in to Docker Desktop
 
@@ -87,13 +75,13 @@ subrsa3072  2022-03-31 [E] [expires: 2024-03-30]
 To initialize `pass`, run the following command using the public key generated from the previous command:
 
 ```console
-$ pass init <generated gpg-id public key>
+$ pass init <your_generated_gpg-id_public_key>
 ``` 
 The following is an example similar to what you see once you run the previous command:
 
 ```console
 mkdir: created directory '/home/molly/.password-store/'
-Password store initialized for <generated gpg-id public key>
+Password store initialized for <generated_gpg-id_public_key>
 ```
 
 Once you initialize `pass`, you can sign in on the Docker Dashboard and pull your private images.
