@@ -42,6 +42,13 @@ RUN bundle update \
 FROM scratch AS vendor
 COPY --from=vendored /out /
 
+FROM gem AS dev
+ENV JEKYLL_ENV=docker
+
+COPY . .
+# HACK: our local plugins are slow and don't need to run on every change
+RUN rm -rf ./_plugins
+
 # Build the static HTML for the current docs.
 # After building with jekyll, fix up some links
 FROM gem AS generate

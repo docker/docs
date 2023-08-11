@@ -1,0 +1,20 @@
+services:
+  docs:
+    build:
+      context: .
+      target: dev
+    command: ["bundle", "exec", "jekyll", "serve", "-H", "0.0.0.0"]
+    environment:
+      JEKYLL_ENV: docker
+    ports:
+      - 4000:4000
+    x-develop:
+      watch:
+        - action: sync
+          source: .
+          target: /src
+          ignore: ['_plugins/']
+        - action: rebuild
+          source: Gemfile
+        - action: rebuild
+          source: Gemfile.lock
