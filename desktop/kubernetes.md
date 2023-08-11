@@ -1,7 +1,7 @@
 ---
 description: See how you can deploy to Kubernetes on Docker Desktop
 keywords: deploy, kubernetes, kubectl, orchestration, Docker Desktop
-title: Deploy on Kubernetes
+title: Deploy on Kubernetes with Docker Desktop
 redirect_from:
 - /docker-for-windows/kubernetes/
 - /docker-for-mac/kubernetes/
@@ -13,21 +13,21 @@ as well as Docker CLI integration that runs on your machine.
 The Kubernetes server runs locally within your Docker instance, is not configurable, and is a single-node cluster. It runs within a Docker container on your local system, and
 is only for local testing. 
 
-Enabling Kubernetes allows you to deploy
-your workloads in parallel, on Kubernetes, Swarm, and as standalone containers. Enabling or disabling the Kubernetes server does not affect your other
+Turning on Kubernetes allows you to deploy
+your workloads in parallel, on Kubernetes, Swarm, and as standalone containers. Turning on or off the Kubernetes server does not affect your other
 workloads.
 
-## Enable Kubernetes
+## Turn on Kubernetes
 
-To enable Kubernetes in Docker Desktop:
+To turn on Kubernetes in Docker Desktop:
 1. From the Docker Dashboard, select the **Settings**.
 2. Select **Kubernetes** from the left sidebar. 
 3. Next to **Enable Kubernetes**, select the checkbox.
-4. Select **Apply & Restart** to save the settings and then click **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
+4. Select **Apply & Restart** to save the settings and then select **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
 
 By default, Kubernetes containers are hidden from commands like `docker ps`, because managing them manually is not supported. Most users do not need this option. To see these internal containers, select **Show system containers (advanced)**. 
 
-When Kubernetes is enabled and running, an additional status bar in the Dashboard footer and Docker menu displays. 
+When Kubernetes is turned on and running, an additional status bar in the Docker Dashboard footer and Docker menu displays. 
 
 > Note
 >
@@ -50,11 +50,12 @@ $ kubectl config get-contexts
 $ kubectl config use-context docker-desktop
 ```
 
->Note
+> **Tip**
 >
 > Run the `kubectl` command in a CMD or PowerShell terminal, otherwise `kubectl config get-contexts` may return an empty result. 
 >
->If you are using a different terminal and this happens, you can try setting the `kubeconfig` environment variable to the location of the `.kube/config` file. 
+> If you are using a different terminal and this happens, you can try setting the `kubeconfig` environment variable to the location of the `.kube/config` file. 
+{: .tip}
 
 If you installed `kubectl` using Homebrew, or by some other method, and
 experience conflicts, remove `/usr/local/bin/kubectl`.
@@ -71,9 +72,9 @@ docker-desktop       Ready     master    3h        v1.19.7
 For more information about `kubectl`, see the
 [`kubectl` documentation](https://kubernetes.io/docs/reference/kubectl/overview/){:target="_blank" rel="noopener" class="_"}.
 
-## Disable Kubernetes
+## Turn off Kubernetes
 
-To disable Kubernetes in Docker Desktop:
+To turn off Kubernetes in Docker Desktop:
 1. From the Docker Dashboard, select the **Settings** icon.
 2. Select **Kubernetes** from the left sidebar. 
 3. Next to **Enable Kubernetes**, clear the checkbox

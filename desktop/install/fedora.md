@@ -1,7 +1,7 @@
 ---
 description: Instructions for installing Docker Desktop on Fedora
 keywords: fedora, rpm, update install, uninstall, upgrade, update, linux, desktop, docker desktop, docker desktop for linux, dd4l
-title: Install on Fedora
+title: Install Docker Desktop on Fedora
 toc_max: 4
 redirect_from:
   - /desktop/linux/install/fedora/
@@ -36,9 +36,9 @@ To install Docker Desktop on Fedora:
 
 3. Install the package with dnf as follows:
 
-```console
-$ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
-```
+   ```console
+   $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
+   ```
 
 There are a few post-install configuration steps done through the post-install script contained in the RPM package.
 
@@ -66,4 +66,5 @@ $ sudo dnf install ./docker-desktop-<version>-<arch>.rpm
 ## Next steps
 
 - Take a look at the [Get started](../../get-started/index.md) training modules to learn how to build an image and run it as a containerized application.
+- [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - Review the topics in [Develop with Docker](../../develop/index.md) to learn how to build new applications using Docker.

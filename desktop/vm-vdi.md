@@ -6,7 +6,7 @@ redirect_from:
 - /desktop/nested-virtualization/
 ---
 
-In general, Docker recommends running Docker Desktop natively on either Mac, Linux, or Windows. However, Docker Desktop for Windows can run inside a virtual desktop provided the virtual desktop is properly configured. 
+In general, we recommend running Docker Desktop natively on either Mac, Linux, or Windows. However, Docker Desktop for Windows can run inside a virtual desktop provided the virtual desktop is properly configured. 
 
 To run Docker Desktop in a virtual desktop environment, it is essential nested virtualization is enabled on the virtual machine that provides the virtual desktop. This is because, under the hood, Docker Desktop is using a Linux VM in which it runs Docker Engine and the containers.
 
@@ -20,18 +20,18 @@ The support available from Docker extends to installing and running Docker Deskt
 
 For troubleshooting problems and intermittent failures that are outside of Docker's control, you should contact your hypervisor vendor. Each hypervisor vendor offers different levels of support. For example, Microsoft supports running nested Hyper-V both on-prem and on Azure, with some version constraints. This may not be the case for VMWare ESXi.
 
-## Enable nested virtualization
+## Turn on nested virtualization
 
-You must enable nested virtualization before you install Docker Desktop on a virtual machine.
+You must turn on nested virtualization before you install Docker Desktop on a virtual machine.
 
-### Enable nested virtualization on VMware ESXi
+### Turn on nested virtualization on VMware ESXi
 
 Nested virtualization of other hypervisors like Hyper-V inside a vSphere VM [is not a supported scenario](https://kb.vmware.com/s/article/2009916){:target="_blank" rel="noopener" class="_"}. However, running Hyper-V VM in a VMware ESXi VM is technically possible and, depending on the version, ESXi includes hardware-assisted virtualization as a supported feature. For internal testing, we used a VM that had 1 CPU with 4 cores and 12GB of memory.
 
 For steps on how to expose hardware-assisted virtualization to the guest OS, [see VMware's documentation](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vm_admin.doc/GUID-2A98801C-68E8-47AF-99ED-00C63E4857F6.html){:target="_blank" rel="noopener" class="_"}.
 
 
-### Enable nested virtualization on Microsoft Hyper-V
+### Turn on nested virtualization on Microsoft Hyper-V
 
 Nested virtualization is supported by Microsoft for running Hyper-V inside an Azure VM.
 

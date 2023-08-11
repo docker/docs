@@ -30,7 +30,7 @@ or `listen tcp:0.0.0.0:8080: bind: address is already in use` ...
 
 These errors are often caused by some other software on Windows using those
 ports. To discover the identity of this software, either use the `resmon.exe`
-GUI and click "Network" and then "Listening Ports" or in a Powershell use
+GUI and click "Network" and then "Listening Ports" or in a PowerShell use
 `netstat -aon | find /i "listening "` to discover the PID of the process
 currently using the port (the PID is the number in the rightmost column). Decide
 whether to shut the other process down, or to use a different port in your

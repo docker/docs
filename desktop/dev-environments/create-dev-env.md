@@ -10,7 +10,7 @@ redirect_from:
 You can launch a dev environment from a:
 - Git repository
 - Branch or tag of a Git repository
-- Subfolder of a Git repository
+- Sub-folder of a Git repository
 - Local folder
 
 This does not conflict with any of the local files or local tooling set up on your host. 
@@ -22,7 +22,7 @@ This does not conflict with any of the local files or local tooling set up on yo
 
 ## Prerequisites
 
-Dev Environments is available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or higher:
+Dev Environments is available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or later:
 
 - [Docker Desktop](../release-notes.md)
 

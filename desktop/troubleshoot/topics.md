@@ -1,7 +1,7 @@
 ---
 description: Explore common troubleshooting topics for Docker Desktop
 keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop
-title: Troubleshoot topics
+title: Troubleshoot topics for Docker Desktop
 toc_max: 4
 ---
 
@@ -32,7 +32,7 @@ As well as on the registry. For example:
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access to a volume mount is denied, or a service
 cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
-you might need to enable [file sharing](../settings/linux.md#file-sharing).
+you might need to turn on [file sharing](../settings/linux.md#file-sharing).
 
 Volume mounting requires shared drives for projects that live outside of the
 `/home/<user>` directory. From **Settings**, select **Resources** and then **File sharing**. Share the drive that contains the Dockerfile and volume.
@@ -111,7 +111,7 @@ in the FAQs.
 If you are using mounted volumes and get runtime errors indicating an
 application file is not found, access is denied to a volume mount, or a service
 cannot start, such as when using [Docker Compose](../../compose/gettingstarted.md),
-you might need to enable [shared folders](../settings/windows.md#file-sharing).
+you might need to turn on [shared folders](../settings/windows.md#file-sharing).
 
 With the Hyper-V backend, mounting files from Windows requires shared folders for Linux containers. From **Settings**, select **Shared Folders** and share the folder that contains the
 Dockerfile and volume.
@@ -180,7 +180,7 @@ This is because the `\` character has a special meaning in Git Bash. If you are 
 $ docker run --rm -ti -v C:\\Users\\user\\work:/work alpine
 ```
 
-Also, in scripts, the `pwd` command is used to avoid hardcoding file system locations. Its output is a Unix-style path.
+Also, in scripts, the `pwd` command is used to avoid hard-coding file system locations. Its output is a Unix-style path.
 
 ```console
 $ pwd
@@ -251,7 +251,7 @@ On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following fea
 ![Hyper-V on Windows features](../images/hyperv-enabled.png){:width="600px"}
 
 Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
-Powershell to be installed and enabled. The Docker Desktop installer enables
+PowerShell to be installed and enabled. The Docker Desktop installer enables
 it for you.
 
 Docker Desktop also needs two CPU hardware features to use Hyper-V: Virtualization and Second Level Address Translation (SLAT), which is also called Rapid Virtualization Indexing (RVI). On some systems, Virtualization must be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements){:target="_blank" rel="noopener" class="_"} for more details.
@@ -261,24 +261,24 @@ To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.mi
 From the start menu, type **Turn Windows features on or off** and press enter.
 In the subsequent screen, verify that Hyper-V is enabled.
 
-#### Virtualization must be enabled
+#### Virtualization must be turned on
 
-In addition to [Hyper-V](#hyper-v) or [WSL 2](../wsl/index.md), virtualization must be enabled. Check the
+In addition to [Hyper-V](#hyper-v) or [WSL 2](../wsl/index.md), virtualization must be turned on. Check the
 Performance tab on the Task Manager:
 
 ![Task Manager](../images/virtualization-enabled.png){:width="700px"}
 
-If you manually uninstall Hyper-V, WSL 2 or disable virtualization,
+If you manually uninstall Hyper-V, WSL 2 or turn off virtualization,
 Docker Desktop cannot start. 
 
-To enable nested virtualisation, see [Run Docker Desktop for Windows in a VM or VDI environment](../vm-vdi.md#enable-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
+To turn on nested virtualisation, see [Run Docker Desktop for Windows in a VM or VDI environment](../vm-vdi.md#turn-on-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
 
 #### Hypervisor enabled at Windows startup
 
 If you have completed the steps described above and are still experiencing
 Docker Desktop startup issues, this could be because the Hypervisor is installed,
 but not launched during Windows startup. Some tools (such as older versions of 
-Virtual Box) and video game installers disable hypervisor on boot. To re-enable it:
+Virtual Box) and video game installers turn off hypervisor on boot. To turn it back on:
 
 1. Open an administrative console prompt.
 2. Run `bcdedit /set hypervisorlaunchtype auto`.
@@ -286,7 +286,7 @@ Virtual Box) and video game installers disable hypervisor on boot. To re-enable 
 
 You can also refer to the [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt){:target="_blank" rel="noopener" class="_"} on Code flow guard (CFG) settings.
 
-#### Enable nested virtualization
+#### Turn on nested virtualization
 
 If you are using Hyper-V and you get the following error message when running Docker Desktop in a VDI environment:
 
@@ -294,7 +294,7 @@ If you are using Hyper-V and you get the following error message when running Do
 The Virtual Machine Management Service failed to start the virtual machine 'DockerDesktopVM' because one of the Hyper-V components is not running
 ```
 
-Try [enabling nested virtualization](../vm-vdi.md#enable-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
+Try [enabling nested virtualization](../vm-vdi.md#turn-on-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
 
 
 ### Windows containers and Windows Server

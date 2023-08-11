@@ -5,6 +5,13 @@ keywords: Docker, WebAssembly, wasm, containerd, engine
 toc_max: 3
 ---
 
+> **Beta**
+>
+> The Wasm feature is currently in [Beta](../../release-lifecycle.md/#beta).
+> We recommend that you do not use this feature in production environments as
+> this feature may change or be removed from future releases.
+{: .experimental}
+
 Wasm (short for WebAssembly) is a fast, light alternative to the Linux and
 Windows containers you’re using in Docker today (with
 [some tradeoffs](https://www.docker.com/blog/docker-wasm-technical-preview/){:target="_blank"
@@ -13,20 +20,14 @@ rel="noopener" class="_"}).
 This page provides information about the new ability to run Wasm applications
 alongside your Linux containers in Docker.
 
-> **Beta**
->
-> The Wasm feature is currently in [Beta](../../release-lifecycle.md/#beta).
-> We recommend that you do not use this feature in production environments as
-> this feature may change or be removed from future releases.
-
-## Enable Wasm workloads
+## Turn on Wasm workloads
 
 Wasm workloads require the [containerd image store](../containerd/index.md)
-feature to be enabled. If you’re not already using the containerd image store,
+feature to be turned on. If you’re not already using the containerd image store,
 then pre-existing images and containers will be inaccessible.
 
 1. Open the Docker Desktop **Settings**.
-2. Go to the **Features in development** tab.
+2. Go to **Features in development** and then select the **Beta features** tab.
 3. Check the following checkboxes:
    - **Use containerd for storing and pulling images**
    - **Enable Wasm**
@@ -56,15 +57,14 @@ $ docker run \
 
 After running this command, you can visit [http://localhost:8080/](http://localhost:8080/) to see the "Hello world" output from this example module.
 
-> Got an error message? Head to the [troubleshooting section](#troubleshooting)
-> for help.
+If you are receiving an error message, see the [troubleshooting section](#troubleshooting) for help.
 
 Note the `--runtime` and `--platform` flags used in this command:
 
-- `--runtime=io.containerd.wasmedge.v1`: informs the Docker engine that you want
+- `--runtime=io.containerd.wasmedge.v1`: Informs the Docker engine that you want
   to use the Wasm containerd shim instead of the standard Linux container
   runtime
-- `--platform=wasi/wasm`: specifies the architecture of the image you want to
+- `--platform=wasi/wasm`: Specifies the architecture of the image you want to
   use. By leveraging a Wasm architecture, you don’t need to build separate
   images for the different machine architectures. The Wasm runtime takes care of
   the final step of converting the Wasm binary to machine instructions.
@@ -83,9 +83,9 @@ services:
 
 Start the application using the normal Docker Compose commands:
 
-```console
-$ docker compose up
-```
+   ```console
+   $ docker compose up
+   ```
 
 ### Running a multi-service application with Wasm
 
@@ -192,7 +192,7 @@ containerd image store, an error similar to the following displays:
 docker: Error response from daemon: Unknown runtime specified io.containerd.wasmedge.v1.
 ```
 
-[Turn on the containerd feature](../containerd/index.md#enabling-the-containerd-image-store-feature)
+[Turn on the containerd feature](../containerd/index.md#turn-on-the-containerd-image-store-feature)
 in Docker Desktop settings and try again.
 
 ### Failed to start shim: failed to resolve runtime path

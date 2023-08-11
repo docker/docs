@@ -1,7 +1,7 @@
 ---
 description: Explore more of Docker Desktop, what it has to offer, and its key features. Take the next step by downloading or find additional resources.
 keywords: how to use docker desktop, what is docker desktop used for, what does docker desktop do, using docker desktop
-title: Docker Desktop
+title: Overview of Docker Desktop
 redirect_from:
 - /desktop/opensource/
 - /docker-for-mac/dashboard/
@@ -11,9 +11,9 @@ redirect_from:
 ---
 
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
-that enables you to build and share containerized applications and microservices. 
+that lets you build, share, and run containerized applications and microservices. 
 
-It provides a straightforward GUI (Graphical User Interface) that lets you manage your containers, applications, and images directly from your machine. Docker Desktop can be used either on it's own or as a complementary tool to the CLI. 
+It provides a straightforward GUI (Graphical User Interface) that lets you manage your containers, applications, and images directly from your machine. Docker Desktop can be used either on its own or as a complementary tool to the CLI. 
 
 Docker Desktop reduces the time spent on complex setups so you can focus on writing code. It takes care of port mappings, file system concerns, and other default settings, and is regularly updated with bug fixes and security updates.
 
@@ -42,8 +42,9 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 - [Docker Engine](../engine/index.md)
 - Docker CLI client
 - [Docker Buildx](../build/index.md)
-- [Extensions](extensions/index.md)
+- [Docker Extensions](extensions/index.md)
 - [Docker Compose](../compose/index.md)
+- [Docker Scout](../scout/index.md)
 - [Docker Content Trust](../engine/security/trust/index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
 - [Credential Helper](https://github.com/docker/docker-credential-helpers/)
@@ -64,7 +65,7 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 
 Docker Desktop works with your choice of development tools and languages and
 gives you access to a vast library of certified images and templates in
-[Docker Hub](https://hub.docker.com/). This enables development teams to extend
+[Docker Hub](https://hub.docker.com/). This allows development teams to extend
 their environment to rapidly auto-build, continuously integrate, and collaborate
 using a secure repository.
 
@@ -77,7 +78,7 @@ using a secure repository.
                  <img src="/assets/images/download.svg" alt="Download and install" width="70" height="70">
                  </div>
                  <h2 id="docker-for-mac">Install Docker Desktop</h2>
-                <p> <a href="/desktop/install/mac-install/">On Mac </a>, <a href="/desktop/install/windows-install/">Windows</a> or <a href="/desktop/install/linux-install/">Linux</a></p>
+                <p> <a href="/desktop/install/mac-install/">On Mac </a>, <a href="/desktop/install/windows-install/">Windows</a>, or <a href="/desktop/install/linux-install/">Linux</a></p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
@@ -116,7 +117,7 @@ using a secure repository.
                  <a href="/desktop/kubernetes/"><img src="/assets/images/all-inbox.svg" alt="Additional resources" width="70" height="70"></a>
           </div>
                 <h2 id="docker-for-windows/install/"><a href="/desktop/kubernetes/">Find additional resources</a></h2>
-                <p>Find information on networking features, deploying on Kuberntes and more.</p>
+                <p>Find information on networking features, deploying on Kuberntes, and more.</p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">

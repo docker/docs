@@ -4,7 +4,7 @@ title: Key features and benefits
 keywords: set up, enhanced container isolation, rootless, security, features, Docker Desktop
 ---
 
-### Linux User Namespace on all Containers
+### Linux User Namespace on all containers
 
 With Enhanced Container Isolation, all user containers leverage the [Linux user-namespace](https://man7.org/linux/man-pages/man7/user_namespaces.7.html){:target="_blank" rel="noopener" class="_"}
 for extra isolation. This means that the root user in the container maps to an unprivileged
@@ -12,7 +12,7 @@ user in the Docker Desktop Linux VM.
 
 For example:
 
-```
+```console
 $ docker run -it --rm --name=first alpine
 / # cat /proc/self/uid_map
          0     100000      65536
@@ -26,7 +26,7 @@ range of 64K user IDs. The same applies to group IDs.
 Each container gets an exclusive range of mappings, managed by Sysbox. For
 example, if a second container is launched the mapping range is different:
 
-```
+```console
 $ docker run -it --rm --name=second alpine
 / # cat /proc/self/uid_map
          0     165536      65536
@@ -35,7 +35,7 @@ $ docker run -it --rm --name=second alpine
 In contrast, without Enhanced Container Isolation, the container's root user is
 in fact root on the host (aka "true root") and this applies to all containers:
 
-```
+```console
 $ docker run -it --rm alpine
 / # cat /proc/self/uid_map
          0       0     4294967295
@@ -48,7 +48,7 @@ Linux capabilities are constrained to resources within the container only,
 increasing isolation significantly compared to regular containers, both
 container-to-host and cross-container isolation.
 
-### Privileged Containers Are Also Secured
+### Privileged containers are also secured
 
 Privileged containers `docker run --privileged ...` are insecure because they
 give the container full access to the Linux kernel. That is, the container runs

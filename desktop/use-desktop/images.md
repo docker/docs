@@ -1,22 +1,22 @@
 ---
 description: Understand what you can do with the Images view on Docker Dashboard
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual
-title: Explore Images
+title: Explore the Images view in Docker Desktop
 ---
 
-The **Images**  view is a simple interface that lets you manage Docker images without having to use the CLI. By default, it displays a list of all Docker images on your local disk. 
+The **Images** view lets you manage Docker images without having to use the CLI. By default, it displays a list of all Docker images on your local disk. 
 
 You can also view Hub images once you have signed in to Docker Hub. This allows you to collaborate with your team and manage your images directly through Docker Desktop.
 
-The **Images** view allows you to perform core operations such as running an image as a container, pulling the latest version of an image from Docker Hub, pushing the image to Docker Hub, and inspecting images.
+The **Images** view lets you perform core operations such as running an image as a container, pulling the latest version of an image from Docker Hub, pushing the image to Docker Hub, and inspecting images.
 
-The **Images** view displays metadata about the image such as the:
+It also displays metadata about the image such as the:
 - Tag
 - Image ID
 - Date created
 - Size of the image.
 
-It also displays **In Use** tags next to images used by running and stopped containers. You can choose what information you want displayed by selecting the **More options** menu to the right of the search bar, and then use the toggle switches according to your preferences. 
+An **In Use** tag displays next to images used by running and stopped containers. You can choose what information you want displayed by selecting the **More options** menu to the right of the search bar, and then use the toggle switches according to your preferences. 
 
 The **Images on disk** status bar displays the number of images and the total disk space used by the images and when this information was last refreshed.
 
@@ -61,7 +61,7 @@ Select the image from the list, select the **More options** button and select **
 
 > **Note**
 >
-> The repository must exist on Docker Hub in order to pull the latest version of an image. You must be logged in to pull private images.
+> The repository must exist on Docker Hub in order to pull the latest version of an image. You must be signed in to pull private images.
 
 ## Push an image to Docker Hub
 
@@ -103,7 +103,7 @@ For more information about supported integrations, see
 
 ### Hub
 
-Switching to the **Hub** tab prompts you to sign in to your Docker ID, if you're not already signed in.
+Switching to the **Hub** tab prompts you to sign in to your Docke Hub account, if you're not already signed in.
 When signed in, it shows you a list of images in Docker Hub organizations and repositories that you have access to.
 
 Select an organization from the drop-down to view a list of repositories for that organization.
@@ -112,8 +112,8 @@ If you have enabled [Vulnerability Scanning](../../docker-hub/vulnerability-scan
 
 Hovering over an image tag reveals two options:
 
-- **Pull**: pulls the latest version of the image from Docker Hub.
-- **View in Hub**: opens the Docker Hub page and displays detailed information about the image.
+- **Pull**: Pull the latest version of the image from Docker Hub.
+- **View in Hub**: Open the Docker Hub page and display detailed information about the image.
 
 ### Artifactory
 
@@ -135,9 +135,9 @@ To connect a new Artifactory registry to Docker Desktop:
    $ cat ./password.txt | docker login -u <username> --password-stdin <hostname>
    ```
 
-   - `password.txt`: text file containing your Artifactory password.
-   - `username`: your Artifactory username.
-   - `hostname`: hostname for your Artifactory instance.
+   - `password.txt`: Text file containing your Artifactory password.
+   - `username`: Your Artifactory username.
+   - `hostname`: Hostname for your Artifactory instance.
 
 2. Open the **Images** view in Docker Desktop.
 3. Select the **Artifactory** tab near the top of the image view to see Artifactory images.
