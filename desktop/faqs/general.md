@@ -46,7 +46,7 @@ cannot access features that require an active internet
 connection. Additionally, any functionality that requires you to sign won't work while using Docker Desktop offline or in air-gapped environments.
 This includes:
 
-- The resources in the [Learning Center](../get-started.md#learning-center)
+- The resources in the [Learning Center](../use-desktop/index.md)
 - Pulling or pushing an image to Docker Hub
 - [Image Access Management](../../docker-hub/image-access-management.md)
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
