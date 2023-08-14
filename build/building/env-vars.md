@@ -14,7 +14,6 @@ the behavior of features related to building:
 | [BUILDKIT_COLORS](#buildkit_colors)                                         | String            | Configure text color for the terminal output.        |
 | [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.             |
 | [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                   |
-| [BUILDKIT_EXPERIMENTAL_SOURCE_POLICY](#buildkit_experimental_source_policy) | String            | Specify a BuildKit source policy file.               |
 | [BUILDX_BUILDER](#buildx_builder)                                           | String            | Specify the builder instance to use.                 |
 | [BUILDX_CONFIG](#buildx_config)                                             | String            | Specify location for configuration, state, and logs. |
 | [BUILDX_EXPERIMENTAL](#buildx_experimental)                                 | Boolean           | Turn on experimental features.                       |
@@ -23,6 +22,7 @@ the behavior of features related to building:
 | [BUILDX_GIT_LABELS](#buildx_git_labels)                                     | String \| Boolean | Add Git provenance labels to images.                 |
 | [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations)           | Boolean           | Turn off default provenance attestations.            |
 | [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                           | Boolean           | Turn off loading images to image store by default.   |
+| [EXPERIMENTAL_BUILDKIT_SOURCE_POLICY](#experimental_buildkit_source_policy)  | String           | Specify a BuildKit source policy file.               |
 
 See also
 [BuildKit built-in build args](../../engine/reference/builder.md#buildkit-built-in-build-args).
@@ -80,14 +80,47 @@ Usage:
 $ export BUILDKIT_PROGRESS=plain
 ```
 
-## BUILDKIT_EXPERIMENTAL_SOURCE_POLICY
+## EXPERIMENTAL_BUILDKIT_SOURCE_POLICY
 
 Lets you specify a
 [BuildKit source policy](https://github.com/moby/buildkit/blob/master/docs/build-repro.md#reproducing-the-pinned-dependencies)
 file for creating reproducible builds with pinned dependencies.
 
 ```console
-$ export BUILDKIT_EXPERIMENTAL_SOURCE_POLICY=./policy.json
+$ export EXPERIMENTAL_BUILDKIT_SOURCE_POLICY=./policy.json
+```
+
+Example:
+
+```json
+{
+  "rules": [
+    {
+      "action": "CONVERT",
+      "selector": {
+        "identifier": "docker-image://docker.io/library/alpine:latest"
+      },
+      "updates": {
+        "identifier": "docker-image://docker.io/library/alpine:latest@sha256:4edbd2beb5f78b1014028f4fbb99f3237d9561100b6881aabbf5acce2c4f9454"
+      }
+    },
+    {
+      "action": "CONVERT",
+      "selector": {
+        "identifier": "https://raw.githubusercontent.com/moby/buildkit/v0.10.1/README.md"
+      },
+      "updates": {
+        "attrs": {"http.checksum": "sha256:6e4b94fc270e708e1068be28bd3551dc6917a4fc5a61293d51bb36e6b75c4b53"}
+      }
+    },
+    {
+      "action": "DENY",
+      "selector": {
+        "identifier": "docker-image://docker.io/library/golang*"
+      }
+    }
+  ]
+}
 ```
 
 ## BUILDX_BUILDER
