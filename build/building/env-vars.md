@@ -22,7 +22,7 @@ the behavior of features related to building:
 | [BUILDX_GIT_LABELS](#buildx_git_labels)                                     | String \| Boolean | Add Git provenance labels to images.                 |
 | [BUILDX_NO_DEFAULT_ATTESTATIONS](#buildx_no_default_attestations)           | Boolean           | Turn off default provenance attestations.            |
 | [BUILDX_NO_DEFAULT_LOAD](#buildx_no_default_load)                           | Boolean           | Turn off loading images to image store by default.   |
-| [EXPERIMENTAL_BUILDKIT_SOURCE_POLICY](#experimental_builkit_source_policy)  | String            | Specify a BuildKit source policy file.               |
+| [EXPERIMENTAL_BUILDKIT_SOURCE_POLICY](#experimental_buildkit_source_policy)  | String           | Specify a BuildKit source policy file.               |
 
 See also
 [BuildKit built-in build args](../../engine/reference/builder.md#buildkit-built-in-build-args).
