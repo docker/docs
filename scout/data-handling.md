@@ -27,7 +27,7 @@ Docker and OCI image metadata:
 
 Software Bill of Materials (SBOM) metadata:
 
-- Advisory prefix URL (PURL)
+- Package URLs (PURL)
 - Package author and description
 - License IDs
 - Package name and namespace
@@ -44,6 +44,10 @@ about new CVEs (and other risks, such as leaked secrets), it "overlays" this
 information on the SBOM. If there's a match, the results of the match are
 displayed in the user interfaces where Docker Scout data is surfaced, such as
 the Docker Scout Dashboard and in Docker Desktop.
+
+For images analyzed locally on a developer's machine, Docker Scout only
+transmits PURLs and layer digests. This data is not persistently stored on the
+Docker Scout platform; it's only used to run the analysis.
 
 ## Data storage
 

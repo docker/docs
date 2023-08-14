@@ -1,5 +1,5 @@
 ---
-description: Using repositories on Docker Hub
+description: Learn how to use repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, manage, repos
 title: Manage repositories
 redirect_from:

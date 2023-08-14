@@ -1,12 +1,12 @@
 ---
-description: Docker Hub overview
+description: Learn about Docker Hub features and the administrative tasks available in Docker Hub
 keywords: Docker, docker, docker hub, hub, overview
-title: Overview
+title: Overview of Docker Hub
 ---
 
 Docker Hub is a service provided by Docker for finding and sharing container images.
 
-It's the world’s largest repository of container images with an array of content sources including container community developers, open source projects and independent software vendors (ISV) building and distributing their code in containers.
+It's the world’s largest repository of container images with an array of content sources including container community developers, open source projects, and independent software vendors (ISV) building and distributing their code in containers.
 
 Docker Hub is also where you can go to [change your Docker account settings and carry out administrative tasks](admin-overview.md).
 
@@ -49,14 +49,14 @@ GitHub and Bitbucket and push them to Docker Hub.
 </div>
 <div id="features" class="tab-pane fade" markdown="1">
 
-* [Create and manage teams & organizations](orgs.md)
+* [Create and manage teams and organizations](orgs.md)
 * [Create a company](creating-companies.md)
 * [Enforce sign in](configure-sign-in.md)
 * Set up [SSO](../single-sign-on/index.md) and [SCIM](scim.md)
 * Use [Group mapping](group-mapping.md)
 * [Carry out domain audits](domain-audit.md)
 * [Use Image Access Management](image-access-management.md) to control developers' access to certain types of images
-* [Enable Registry Access Management](../desktop/hardened-desktop/registry-access-management.md)
+* [Turn on Registry Access Management](../desktop/hardened-desktop/registry-access-management.md)
 
 </div>
 </div>
@@ -70,7 +70,7 @@ GitHub and Bitbucket and push them to Docker Hub.
                  <a href="/docker-id/"><img src="/assets/images/laptop.svg" alt="Docker ID" width="70" height="70"></a>
              </div>
                  <h2 id="docker-id"><a href="/docker-id/">Create an account</a></h2>
-                <p>Sign up and create a new Docker ID</p>
+                <p>Register and create a new Docker ID</p>
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">

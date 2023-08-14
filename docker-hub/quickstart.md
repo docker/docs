@@ -1,5 +1,5 @@
 ---
-description: Docker Hub Quickstart
+description: Learn how to get started using Docker Hub
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, accounts, organizations, repositories, groups, teams
 title: Docker Hub Quickstart
 redirect_from:
@@ -82,7 +82,7 @@ The following section contains step-by-step instructions on how to get started w
 
 Start by creating a [Docker ID](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"}.
 
-A Docker ID grants you access to Docker Hub repositories and allows you to explore images that are available from the community and verified publishers. You'll also need a Docker ID to share images on Docker Hub.
+A Docker ID grants you access to Docker Hub repositories and lets you explore available images from the community and verified publishers. You also need a Docker ID to share images on Docker Hub.
 
 ### Step 2: Create your first repository
 
