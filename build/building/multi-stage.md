@@ -98,6 +98,14 @@ the stage named `builder`:
 $ docker build --target build -t hello .
 ```
 
+The builder targeted here is actually the first stage build responsible for building the Go application
+
+```dockerfile
+FROM golang:1.21 as build
+WORKDIR /src
+COPY <<EOF /src/main.go
+```
+
 A few scenarios where this might be useful are:
 
 - Debugging a specific build stage
