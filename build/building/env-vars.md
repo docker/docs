@@ -114,10 +114,10 @@ Example:
       }
     },
     {
-        "action": "DENY",
-        "selector": {
-            "identifier": "docker-image://docker.io/library/golang*"
-        }
+      "action": "DENY",
+      "selector": {
+          "identifier": "docker-image://docker.io/library/golang*"
+      }
     }
   ]
 }
