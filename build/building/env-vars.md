@@ -116,7 +116,7 @@ Example:
     {
       "action": "DENY",
       "selector": {
-          "identifier": "docker-image://docker.io/library/golang*"
+        "identifier": "docker-image://docker.io/library/golang*"
       }
     }
   ]
