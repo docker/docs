@@ -92,7 +92,7 @@ CMD ["/bin/hello"]
 When you build your image, you don't necessarily need to build the entire
 Dockerfile including every stage. You can specify a target build stage. The
 following command assumes you are using the previous `Dockerfile` but stops at
-the stage named `builder`:
+the stage named `build`:
 
 ```console
 $ docker build --target build -t hello .
