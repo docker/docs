@@ -27,8 +27,6 @@ see the [organizations documentation](../../../docker-hub/orgs.md#create-an-orga
 
 You can view the available tags and the size of the associated image. Go to the **Repositories** view and select a repository to see its tags. To view individual tags, select the **Tags** tab.
 
-![View repo tags](../../images/repo-overview.png)
-
 To delete a tag, select the corresponding checkbox and select **Delete** from the **Action** drop-down list.
 
 > **Note**
