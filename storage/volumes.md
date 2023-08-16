@@ -576,7 +576,7 @@ The filesystem support of your system depends on the version of the Linux kernel
 1. Create a file and allocate some space to it:
 
    ```console
-   $ fallocate -f 1G disk.raw
+   $ fallocate -l 1G disk.raw
    ```
 
 2. Build a filesystem onto the `disk.raw` file:
