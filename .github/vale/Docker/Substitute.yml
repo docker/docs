@@ -46,7 +46,6 @@ swap:
   repo: repository
   scroll: navigate
   (?:sign on|log on|log in|logon|login): sign in
-  sign up: register
   tb: TB
   vs: versus
   wish: want

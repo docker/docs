@@ -120,7 +120,7 @@ Don't use `please` in the normal course of explaining how to use a product, even
 
 #### register
 
-Use `register` instead of sign up when talking about creating an account.
+Use `sign up` instead of register when talking about creating an account.
 
 #### repo
 
@@ -142,7 +142,7 @@ Use `sign in to` instead of `sign into`.
 
 #### sign up
 
-Use `register` or `create account` instead of `sign up` when talking about creating an account.
+Use `sign up` or `create account` instead of `register` when talking about creating an account.
 
 #### tab versus view
 
