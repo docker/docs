@@ -12,17 +12,6 @@ for the underlying directory structure. Local cache is a good choice if you're
 just testing, or if you want the flexibility to self-manage a shared storage
 solution.
 
-> **Note**
->
-> This cache storage backend requires using a different driver than the default
-> `docker` driver - see more information on selecting a driver
-> [here](../../drivers/index.md). To create a new driver (which can act as a
-> simple drop-in replacement):
->
-> ```console
-> $ docker buildx create --use --driver=docker-container
-> ```
-
 ## Synopsis
 
 ```console
