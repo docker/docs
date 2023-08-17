@@ -315,6 +315,32 @@ Exposes all available GPUs and returns a result akin to the following:
 |  No running processes found                                                 |
 +-----------------------------------------------------------------------------+
 ```
+Use `nvidia-container-cli --load-kmods info` to get device index and GPU UUID(There are 4 GPUs here):
+```bash
+$ sudo nvidia-container-cli --load-kmods info
+NVRM version: 396.26
+CUDA version: 9.2 Device Index: 0
+Device Minor: 2
+Model: Tesla V100-SXM2-16GB
+GPU UUID: GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a
+Bus Location: 00000000:00:1b.0
+Architecture: 7.0 Device Index: 1
+Device Minor: 0
+Model: Tesla V100-SXM2-16GB
+GPU UUID: GPU-716346f4-da29-392a-c4ee-b9840ec2f2e9
+Bus Location: 00000000:00:1c.0
+Architecture: 7.0 Device Index: 2
+Device Minor: 3
+Model: Tesla V100-SXM2-16GB
+GPU UUID: GPU-9676587f-b418-ee6b-15ac-38470e1278fb
+Bus Location: 00000000:00:1d.0
+Architecture: 7.0 Device Index: 3
+Device Minor: 2
+Model: Tesla V100-SXM2-16GB
+GPU UUID: GPU-2370332b-9181-d6f5-1f24-59d66fc7a87e
+Bus Location: 00000000:00:1e.0
+Architecture: 7.0
+```
 
 Use the `device` option to specify GPUs. For example:
 
@@ -322,7 +348,7 @@ Use the `device` option to specify GPUs. For example:
 $ docker run -it --rm --gpus device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a ubuntu nvidia-smi
 ```
 
-Exposes that specific GPU.
+Exposes that specific GPU,use `--gpus device=0` and `--gpus device=GPU-3a23c669-1f69-c64e-cf85-44e9b07e7a2a` have the same effect.
 
 ```console
 $ docker run -it --rm --gpus '"device=0,2"' ubuntu nvidia-smi
