@@ -77,7 +77,7 @@ logs locally:
 
 With the dual logging cache enabled, the `docker logs` command can be used to
 read logs, even if the logging driver does not support reading logs. The following
-examples shows a daemon configuration that uses the `splunk` remote logging driver
+example shows a daemon configuration that uses the `splunk` remote logging driver
 as a default, with dual logging caching enabled:
 
 - Step 1: Configure Docker daemon
