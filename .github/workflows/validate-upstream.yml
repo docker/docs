@@ -19,6 +19,9 @@ on:
       data-files-placeholder-folder:
         required: false
         type: string
+      data-files-placeholder-prefix:
+        required: false
+        type: string
 
 jobs:
   run:
@@ -70,6 +73,18 @@ jobs:
           if [[ -n "${{ inputs.data-files-folder }}" ]] && [[ -d "./_data/${{ inputs.data-files-folder }}" ]]; then
             rm -rf ./_data/${{ inputs.data-files-folder }}/*
           fi
+      -
+        name: Cleanup stub files
+        if: ${{ inputs.data-files-folder != '' && inputs.data-files-placeholder-prefix != '' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const globber = await glob.create(`${{ inputs.data-files-placeholder-folder }}/${{ inputs.data-files-placeholder-prefix }}*`);
+            for await (const placeholderPath of globber.globGenerator()) {
+              core.info(`removing ${placeholderPath}`);
+              await fs.unlinkSync(placeholderPath);
+            }
       -
         name: Download data files
         uses: actions/download-artifact@v3
