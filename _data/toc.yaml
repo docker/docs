@@ -897,7 +897,7 @@ reference:
   path: /engine/reference/builder/
 - sectiontitle: Compose file reference
   section:
-    - sectiontitle: Compose specification
+    - sectiontitle: Compose Specification
       section:
       - path: /compose/compose-file/
         title: Overview
@@ -932,9 +932,9 @@ reference:
       - path: /compose/compose-file/15-profiles/
         title: Profiles
     - path: /compose/compose-file/build/
-      title: Compose file build
+      title: Compose Build Specification
     - path: /compose/compose-file/deploy/
-      title: Compose file deploy
+      title: Compose Deploy Specification
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
