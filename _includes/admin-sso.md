@@ -30,6 +30,27 @@ When you enable SSO for your company, a first-time user can sign in to Docker Hu
 
 Administrators can then choose to enforce SSO login and effortlessly manage SSO connections for their individual company.
 
+### SSO attributes
+
+When a user signs in using SSO, Docker obtains the following attributes from the IdP:
+
+- **Email address** - this is the unique identifier of the user
+- **Full name** - name of the user
+- **Groups (optional)** - list of groups to which the user belongs
+
+If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those listed above. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work.
+
+| SSO attribute | SAML assertion message attributes |
+| ---------------- | ------------------------- |
+| Email address    | `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn"`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"`, `email`                           |
+| Full name        | `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"`, `name`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"`  |
+| Groups (optional) | `"http://schemas.xmlsoap.org/claims/Group"`, `"http://schemas.microsoft.com/ws/2008/06/identity/claims/groups"`, `Groups`, `groups` |
+
+> **Important**
+>
+> If none of the email address attributes listed in the previous table are found, SSO will return an error.
+{: .important}
+
 ## Prerequisites
 
 * You must first notify your company about the new SSO login procedures.
