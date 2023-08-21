@@ -38,7 +38,7 @@ When a user signs in using SSO, Docker obtains the following attributes from the
 - **Full name** - name of the user
 - **Groups (optional)** - list of groups to which the user belongs
 
-If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those listed above. The following examples list the possible attributes that can be present in order for your SSO connection to work.
+If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those listed above. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work.
 
 | SSO attribute | SAML assertion message attributes |
 | ---------------- | ------------------------- |
