@@ -53,9 +53,9 @@ your preferred operating system below.
 
 | Platform                                                               |                    x86_64 / amd64                     |               arm64 (Apple Silicon)               |
 | :--------------------------------------------------------------------- | :---------------------------------------------------: | :-----------------------------------------------: |
-| [Docker Desktop for Linux](../../desktop/install/linux-install.md)     |  [{{% param "yes" %}}](../../desktop/install/linux-install.md)  |                                                   |
-| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md) |   [{{% param "yes" %}}](../../desktop/install/mac-install.md)   | [{{% param "yes" %}}](../../desktop/install/mac-install.md) |
-| [Docker Desktop for Windows](../../desktop/install/windows-install.md) | [{{% param "yes" %}}](../../desktop/install/windows-install.md) |                                                   |
+| [Docker Desktop for Linux](../../desktop/install/linux-install.md)     |  [ ✅  ](../../desktop/install/linux-install.md)  |                                                   |
+| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md) |   [ ✅  ](../../desktop/install/mac-install.md)   | [ ✅  ](../../desktop/install/mac-install.md) |
+| [Docker Desktop for Windows](../../desktop/install/windows-install.md) | [ ✅  ](../../desktop/install/windows-install.md) |                                                   |
 
 ### Server
 
@@ -64,14 +64,14 @@ and architectures:
 
 | Platform                              | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)                    | ppc64le                | s390x                  |
 | :------------------------------------ | :--------------------- | :--------------------- | :------------------------------ | :--------------------- | :--------------------- |
-| [CentOS](centos.md)                   | [{{% param "yes" %}}](centos.md) | [{{% param "yes" %}}](centos.md) |                                 | [{{% param "yes" %}}](centos.md) |                        |
-| [Debian](debian.md)                   | [{{% param "yes" %}}](debian.md) | [{{% param "yes" %}}](debian.md) | [{{% param "yes" %}}](debian.md)          | [{{% param "yes" %}}](debian.md) |                        |
-| [Fedora](fedora.md)                   | [{{% param "yes" %}}](fedora.md) | [{{% param "yes" %}}](fedora.md) |                                 | [{{% param "yes" %}}](fedora.md) |                        |
-| [Raspberry Pi OS](raspberry-pi-os.md) |                        |                        | [{{% param "yes" %}}](raspberry-pi-os.md) |                        |                        |
-| [RHEL](rhel.md)                       |                        |                        |                                 |                        | [{{% param "yes" %}}](rhel.md)   |
-| [SLES](sles.md)                       |                        |                        |                                 |                        | [{{% param "yes" %}}](sles.md)   |
-| [Ubuntu](ubuntu.md)                   | [{{% param "yes" %}}](ubuntu.md) | [{{% param "yes" %}}](ubuntu.md) | [{{% param "yes" %}}](ubuntu.md)          | [{{% param "yes" %}}](ubuntu.md) | [{{% param "yes" %}}](ubuntu.md) |
-| [Binaries](binaries.md)               | [{{% param "yes" %}}](binaries.md) | [{{% param "yes" %}}](binaries.md) | [{{% param "yes" %}}](binaries.md)          |                        |                        |
+| [CentOS](centos.md)                   | [ ✅  ](centos.md) | [ ✅  ](centos.md) |                                 | [ ✅  ](centos.md) |                        |
+| [Debian](debian.md)                   | [ ✅  ](debian.md) | [ ✅  ](debian.md) | [ ✅  ](debian.md)          | [ ✅  ](debian.md) |                        |
+| [Fedora](fedora.md)                   | [ ✅  ](fedora.md) | [ ✅  ](fedora.md) |                                 | [ ✅  ](fedora.md) |                        |
+| [Raspberry Pi OS](raspberry-pi-os.md) |                        |                        | [ ✅  ](raspberry-pi-os.md) |                        |                        |
+| [RHEL](rhel.md)                       |                        |                        |                                 |                        | [ ✅  ](rhel.md)   |
+| [SLES](sles.md)                       |                        |                        |                                 |                        | [ ✅  ](sles.md)   |
+| [Ubuntu](ubuntu.md)                   | [ ✅  ](ubuntu.md) | [ ✅  ](ubuntu.md) | [ ✅  ](ubuntu.md)          | [ ✅  ](ubuntu.md) | [ ✅  ](ubuntu.md) |
+| [Binaries](binaries.md)               | [ ✅  ](binaries.md) | [ ✅  ](binaries.md) | [ ✅  ](binaries.md)          |                        |                        |
 
 ### Other Linux distros
 
