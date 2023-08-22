@@ -4,6 +4,31 @@ description: Overall index for Docker Extensions SDK documentation
 keywords: Docker, Extensions, sdk
 aliases:
 - /desktop/extensions-sdk/dev/overview/
+grid:
+  - title: "The build and publish process"
+    description: Understand the process for building and publishing an extension.
+    icon: "checklist"
+    link: "/desktop/extensions-sdk/process/"
+  - title: "Quickstart guide"
+    description: Follow the quickstart guide to build a basic Docker Extension quickly.
+    icon: "explore"
+    link: "/desktop/extensions-sdk/quickstart/"
+  - title: "View the design guidelines"
+    description: Ensure your extension aligns to Docker's design guidelines and principles.
+    icon: "design_services"
+    link: "/desktop/extensions-sdk/design/design-guidelines/"
+  - title: "Publish your extension"
+    description: Understand how to publish your extension to the Marketplace.
+    icon: "publish"
+    link: "/desktop/extensions-sdk/extensions/"
+  - title: "Interacting with Kubernetes"
+    description: Find information on how to interact indirectly with a Kubernetes cluster from your Docker Extension.
+    icon: "multiple_stop"
+    link: "/desktop/extensions-sdk/dev/kubernetes/"
+  - title: "Multi-arch extensions"
+    description: Build your extension for multiple architectures.
+    icon: "content_copy"
+    link: "/desktop/extensions-sdk/extensions/multi-arch/"
 ---
 
 The resources in this section help you create your own Docker extension.
@@ -22,65 +47,4 @@ the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTI
 
 {{< include "extensions-form.md" >}}
 
-<div class="component-container">
-    <!--start row-->
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-        <div class="component">
-             <div class="component-icon">
-                 <a href="/desktop/extensions-sdk/process/"><img src="/assets/images/process.svg" alt="Process" width="70" height="70"></a>
-                 </div>
-                 <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/process/">The build and publish process</a></h2>
-                <p> Understand the process for building and publishing an extension.</p>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-        <div class="component">
-            <div class="component-icon">
-                 <a href="/desktop/extensions-sdk/quickstart/"><img src="/assets/images/explore.svg" alt="Quickstart" width="70" height="70"></a>
-            </div>
-                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/quickstart/">Quickstart guide</a></h2>
-                <p>Follow the quickstart guide to build a basic Docker Extension quickly.</p>
-         </div>
-     </div>
-     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-        <div class="component">
-            <div class="component-icon">
-                <a href="/desktop/extensions-sdk/design/design-guidelines/"><img src="/assets/images/design.svg" alt="Design quidelines" width="70" height="70"></a>
-            </div>
-                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/design/design-guidelines/">View the design guidelines</a></h2>
-                <p>Ensure your extension aligns to Docker's design guidelines and principles.</p>
-        </div>
-    </div>
-    </div>
-    <!--start row-->
-    <div class="row">
-     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-        <div class="component">
-            <div class="component-icon">
-                 <a href="/desktop/extensions-sdk/extensions/"><img src="/assets/images/publish.svg" alt="Publish" width="70" height="70"></a>
-            </div>
-                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/extensions/">Publish your extension</a></h2>
-                <p>Understand how to publish your extension to the Marketplace.</p>
-        </div>
-     </div>
-     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-        <div class="component">
-          <div class="component-icon">
-                 <a href="/desktop/extensions-sdk/dev/kubernetes/"><img src="/assets/images/sync.svg" alt="Kubernetes" width="70" height="70"></a>
-          </div>
-                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/dev/kubernetes/">Interacting with Kubernetes</a></h2>
-                <p>Find information on how to interact indirectly with a Kubernetes cluster from your Docker Extension.</p>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 block">
-        <div class="component">
-            <div class="component-icon">
-                <a href="/desktop/extensions-sdk/extensions/multi-arch/"><img src="/assets/images/build-multi-platform.svg" alt="Multi-arch" width="70" height="70"></a>
-            </div>
-                <h2 id="docker-extensions"><a href="/desktop/extensions-sdk/extensions/multi-arch/">Multi-arch extensions</a></h2>
-                <p>Build your extension for multiple architectures.</p>
-        </div>
-     </div>
-    </div>
-</div>
+{{< grid >}}

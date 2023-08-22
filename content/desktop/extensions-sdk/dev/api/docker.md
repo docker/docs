@@ -128,7 +128,9 @@ await ddClient.docker.cli.exec(
 );
 ```
 
-> You cannot use this to chain commands in a single `exec()` invocation (like `docker kill $(docker ps -q)` or using pipe between commands).
+> **Note**
+>
+>You cannot use this to chain commands in a single `exec()` invocation (like `docker kill $(docker ps -q)` or using pipe between commands).
 >
 > You need to invoke `exec()` for each command and parse results to pass parameters to the next command if needed.
 

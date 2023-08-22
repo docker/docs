@@ -77,7 +77,9 @@ Then, build and run the documentation using [Docker Compose](../compose/index.md
 docker compose up -d --build
 ```
 
-> You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](../desktop/index.md).
+> **Note**
+>
+>You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](../desktop/index.md).
 > If you don't have Docker Desktop installed, follow the [instructions](../compose/install/index.md) to install Docker Compose.
 
 When the container is built and running, visit [http://localhost:4000](http://localhost:4000) in your web browser to view the docs.
