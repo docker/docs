@@ -10,8 +10,8 @@ Use domain management to manage your domains for Single Sign-On and SCIM, as wel
 
 ## Add and verify a domain
 
-{{< admin-domains product="admin" layer="organization" >}}
+{{% admin-domains product="admin" layer="organization" %}}
 
 ## Domain audit
 
-{{< admin-domain-audit product="admin" >}}
+{{% admin-domain-audit product="admin" %}}

@@ -48,7 +48,7 @@ If you use SAML for your SSO connection, Docker obtains these attributes from th
 > **Important**
 >
 > If none of the email address attributes listed in the previous table are found, SSO will return an error.
-{: .important}
+{ .important}
 
 ## Prerequisites
 

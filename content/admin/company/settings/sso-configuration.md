@@ -10,6 +10,6 @@ Follow the steps on this page to configure SSO for your company. To configure SS
 
 ## Step one: Add and verify your domain
 
-{{< admin-domains product="admin" layer="company" >}}
+{{% admin-domains product="admin" layer="company" %}}
 
-{{< admin-sso-config product="admin" layer="company" >}}
+{{% admin-sso-config product="admin" layer="company" %}}

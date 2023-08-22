@@ -8,4 +8,4 @@ title: SCIM
 
 Follow the steps on this page to manage SCIM for your organization. To manage SCIM for a company, see [SCIM for a company](/admin/company/settings/scim/).
 
-{% include admin-scim.md product="admin" layer="organization"%}
+{{% admin-scim product="admin" layer="organization" %}}

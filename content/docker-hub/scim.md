@@ -6,4 +6,4 @@ direct_from:
 - /docker-hub/company-scim/
 ---
 
-{{< admin-scim >}}
+{{% admin-scim %}}
