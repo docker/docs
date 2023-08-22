@@ -10,6 +10,6 @@ Follow the steps on this page to manage SSO for your company. To manage SSO for 
 
 ## Manage organizations
 
-{{% admin-sso-management-orgs product="admin" %}}
+{{< admin-sso-management-orgs product="admin" >}}
 
-{% include admin-sso-management.md product="admin" layer="company"%}
+{{< admin-sso-management product="admin" layer="company" >}}

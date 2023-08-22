@@ -10,4 +10,4 @@ Use domain management to manage your domains for Single Sign-On and SCIM.
 
 ## Add and verify a domain
 
-{% include admin-domains.md product="admin" layer="company"%}
+{{< admin-domains product="admin" layer="company" >}}
