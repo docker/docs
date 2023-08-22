@@ -1,0 +1,46 @@
+---
+description: Learn about organizations.
+keywords: organizations, admin, overview
+title: Organization administration overview
+grid:
+- title: Manage members
+  description: Explore how to manage members.
+  icon: contact_page
+  link: /admin/organization/members/
+- title: Activity logs
+  description: Learn how to audit the activities of your members.
+  icon: feed
+  link: /admin/organization/activity-logs/
+- title: Image Access Management
+  description: Control which types of images your developers can pull.
+  icon: dynamic_feed
+  link: /admin/organization/image-access/
+- title: Registry Access Management
+  description: Define which registries your developers can access.
+  icon: all_inbox
+  link: /admin/organization/registry-access/
+- title: General settings
+  description: Configure general information or create a company.
+  icon: settings_suggest
+  link: /admin/organization/general-settings/
+- title: SSO & SCIM
+  description: 'Set up [Single Sign-On](/admin/organization/security-settings/sso/)
+    and [SCIM](/admin/organization/security-settings/scim/) for your organization.
+
+    '
+  icon: key
+- title: Domain management
+  description: Add, verify, and audit your domains.
+  link: /admin/organization/security-settings/domains/
+  icon: security
+---
+
+{{< include "admin-early-access.md" >}}
+
+{{< include "admin-org-overview.md" >}}
+
+To create an organization, see [Create your organization](../../docker-hub/orgs.md).
+
+Learn how to administer an organization using Docker Admin in the following sections.
+
+{{< grid >}}

@@ -1,0 +1,35 @@
+<header class="sticky top-0 z-20 h-16 px-4 bg-blue-light-500 dark:bg-blue-dark-200 text-white">
+  <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between">
+    <div class="flex h-full items-center gap-8 md:gap-2">
+      <button x-data tabindex="4" @click="() => {
+      $store.showSidebar = ! $store.showSidebar;
+      const sidebar = document.querySelector('#sidebar');
+      if ($store.showSidebar) {
+        sidebar.classList.replace('md:hidden', 'md:block');
+      } else {
+        sidebar.classList.replace('md:block', 'md:hidden');
+      }
+    }" class="btn-icon-round menu-btn material-symbols-rounded hidden h-full px-4 md:block" aria-label="Menu"
+        id="menu-btn">
+        menu
+      </button>
+      <div>
+        <a href="{{ site.BaseURL }}">
+          <div>
+            {{ readFile "static/assets/images/docker-docs-logo.svg" | safeHTML }}
+          </div>
+        </a>
+      </div>
+      {{ partial "top-nav.html" . }}
+    </div>
+    <div class="flex items-center gap-6">
+      <div id="docsearch"></div>
+      <button id="theme-switch" tabindex="1" class="material-symbols-rounded"
+        x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
+        localStorage.setItem('theme-preference', value);
+        document.firstElementChild.className = value;
+      })" @click="theme = (theme === 'dark' ? 'light' : 'dark')" x-text="`${theme}_mode`"></button>
+    </div>
+  </div>
+
+</header>

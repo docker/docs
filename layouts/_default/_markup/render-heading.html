@@ -1,0 +1,7 @@
+{{ partial "heading.html" (dict
+  "level" .Level
+  "text" (.Text | plainify | safeHTML)
+  "id" (.Attributes.id | default .Anchor)
+  "class" .Attributes.class
+  )
+}}

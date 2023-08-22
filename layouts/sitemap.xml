@@ -1,0 +1,14 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{ printf "<?xml-stylesheet type=\"text/xsl\" href=\"%s/sitemap.xsl\"?>" site.BaseURL | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {{- range where site.Pages "Params.sitemap" "!=" false }}
+    {{- if ne .Params.sitemap false }}
+      <url>
+        <loc>{{ .Permalink}}</loc>
+        <lastmod>{{ .Lastmod }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+      </url>
+    {{- end }}
+  {{- end }}
+</urlset> 

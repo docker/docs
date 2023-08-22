@@ -1,23 +1,16 @@
-variable "JEKYLL_ENV" {
+variable "HUGO_ENV" {
   default = "development"
 }
+
 variable "DOCS_URL" {
-  default = "http://localhost:4000"
+  default = "https://docs.docker.com"
 }
+
 variable "DOCS_SITE_DIR" {
-  default = "_site"
+  default = "public"
 }
 variable "DOCS_ENFORCE_GIT_LOG_HISTORY" {
   default = "0"
-}
-
-target "_common" {
-  args = {
-    JEKYLL_ENV = JEKYLL_ENV
-    DOCS_URL = DOCS_URL
-    DOCS_ENFORCE_GIT_LOG_HISTORY = DOCS_ENFORCE_GIT_LOG_HISTORY
-  }
-  no-cache-filter = ["generate"]
 }
 
 group "default" {
@@ -25,45 +18,26 @@ group "default" {
 }
 
 target "release" {
-  inherits = ["_common"]
+  args = {
+    HUGO_ENV = HUGO_ENV
+    DOCS_URL = DOCS_URL
+  }
   target = "release"
   output = [DOCS_SITE_DIR]
 }
 
-target "vendor" {
-  target = "vendor"
-  output = ["."]
-}
-
 group "validate" {
-  targets = ["htmltest", "mdl"]
+  targets = ["lint", "test"]
 }
 
-target "htmltest" {
-  inherits = ["_common"]
-  target = "htmltest"
+target "test" {
+  target = "test"
   output = ["type=cacheonly"]
 }
 
-target "htmltest-output" {
-  inherits = ["_common"]
-  target = "htmltest-output"
-  output = ["./lint"]
-}
-
-target "mdl" {
-  inherits = ["_common"]
-  target = "mdl"
+target "lint" {
+  target = "lint"
   output = ["type=cacheonly"]
-}
-
-target "mdl-output" {
-  inherits = ["_common"]
-  target = "mdl-output"
-  output = ["./lint"]
-  args = {
-    MDL_JSON = 1
-  }
 }
 
 #

@@ -1,0 +1,13 @@
+{{ $redirects := newScratch }}
+{{- range $i, $e := site.AllPages -}} 
+  {{- if .Params.aliases -}}
+    {{- $target := .RelPermalink -}}
+    {{- range .Params.aliases -}}
+      {{ $redirects.SetInMap "paths" . $target }}
+    {{- end -}}
+    {{- range .Params.redirect_from -}}
+      {{ $redirects.SetInMap "paths" . $target }}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{ $redirects.Get "paths" | jsonify }}
