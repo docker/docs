@@ -150,9 +150,11 @@ $ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychai
 See also, [Directory structures for
 certificates](#directory-structures-for-certificates).
 
-> **Note**: You need to restart Docker Desktop after making any changes to the
-> keychain or to the `~/.docker/certs.d` directory in order for the changes to
-> take effect.
+> **Note**
+>
+> You need to restart Docker Desktop after making any changes to the keychain or
+> to the `~/.docker/certs.d` directory in order for the changes to take effect.
+
 For a complete explanation of how to do this, see the blog post [Adding
 Self-signed Registry Certs to Docker & Docker Desktop for
 Mac](https://blog.container-solutions.com/adding-self-signed-registry-certs-docker-mac).
@@ -167,6 +169,8 @@ When the Docker Desktop application starts, it copies the `~/.docker/certs.d`
 folder on your Mac to the `/etc/docker/certs.d` directory on Moby (the Docker
 Desktop `xhyve` virtual machine).
 
+> **Note**
+>
 > * You need to restart Docker Desktop after making any changes to the keychain
 >   or to the `~/.docker/certs.d` directory in order for the changes to take
 >   effect.
