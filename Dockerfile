@@ -8,7 +8,7 @@ RUN apk --update add nodejs npm git
 
 FROM base as node
 COPY package*.json .
-RUN npm install
+RUN npm install && npm cache clean --force
 
 FROM base as hugo
 ARG HUGO_VERSION=0.116.1
