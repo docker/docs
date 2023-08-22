@@ -209,7 +209,7 @@ You can now start your dev-ready container.
    ```
    
    {{< /tab >}}
-   {{< tab name="Mac / Linux" >}}
+   {{< tab name="Windows" >}}
    In Windows, run this command in PowerShell.
 
    ```powershell
