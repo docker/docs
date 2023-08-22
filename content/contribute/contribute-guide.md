@@ -1,7 +1,7 @@
 ---
 title: Contributing guidelines
 description: Guidelines for contributing to Docker's docs
-keywords: contribute, guide, style guide, docker
+keywords: contribute, guide, style guide
 ---
 
 The live docs are published from the `main` branch. Therefore, you must create pull requests against the `main` branch for all content updates. This includes:
