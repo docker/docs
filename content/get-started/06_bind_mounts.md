@@ -199,7 +199,7 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
 1. Make sure you don't have any `getting-started` containers currently running.
 
-2. Run the following command from the `getting-started/app` directory.
+2. Run the following command from the `getting-started-app` directory.
 
    Run this command in PowerShell.
 
