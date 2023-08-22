@@ -10,7 +10,7 @@ Follow the steps on this page to configure SSO for your organization. To configu
 
 ## Step one: Add and verify your domain
 
-{% include admin-domains.md product="admin" layer="organization"%}
+{{% admin-domains product="admin" layer="organization" %}}
 
 
-{% include admin-sso-config.md product="admin" layer="organization"%}
+{{% admin-sso-config product="admin" layer="organization" %}}
