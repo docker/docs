@@ -21,12 +21,12 @@ cache, ensuring fast builds anywhere and for all team members.
 ## How Hydrobuild works
 
 Using Hydrobuild is no different from running a regular build. You invoke a
-build the same way you normally would, using `docker build`. The difference is
-in where and how that build gets executed.
+build the same way you normally would, using `docker buildx build`. The
+difference is in where and how that build gets executed.
 
-By default when you invoke a `docker build` command, your build runs on a local
-instance of BuildKit, bundled with the Docker daemon. With Hydrobuild, you send
-the build request to a BuildKit instance running remotely, in the cloud.
+By default when you invoke a build command, the build runs on a local instance
+of BuildKit, bundled with the Docker daemon. With Hydrobuild, you send the
+build request to a BuildKit instance running remotely, in the cloud.
 
 The remote builder executes the build steps, and sends the resulting build
 output to the destination that you specify. For example, back to your local
@@ -138,7 +138,7 @@ To run a build using Hydrobuild, invoke a build command and specify the
 name of the builder using the `--builder` flag.
 
 ```console
-$ docker build --builder hydrobuild --tag myorg/some-tag .
+$ docker buildx build --builder hydrobuild --tag myorg/some-tag .
 ```
 
 > **Note**
@@ -154,7 +154,7 @@ If you created a [multi-platform builder](#create-a-multi-platform-builder),
 you can build multi-platform images using the `--platform` flag:
 
 ```console
-$ docker build --builder hydrobuild \
+$ docker buildx build --builder hydrobuild \
   --platform linux/amd64,linux/arm64 \
   --tag myorg/some-tag --push .
 ```
@@ -170,7 +170,7 @@ $ docker build --builder hydrobuild \
 > image store.
 >
 > When building multi-platform images, consider pushing the resulting image to
-> a registry directly, using the `docker build --push` flag.
+> a registry directly, using the `docker buildx build --push` flag.
 
 ### Use by default
 
@@ -180,6 +180,19 @@ make it the selected builder:
 ```console
 $ docker buildx use hydrobuild --global
 ```
+
+> **Note**
+>
+> Changing your default builder with `docker buildx use` only changes the
+> default builder for the `docker buildx build` command. The shorthand `docker
+> build` command will still use the `default` builder unless you specify the
+> `--builder` flag explicitly.
+>
+> If you use build scripts, such as `make`, we recommend that you update your
+> build commands from `docker build` to `docker buildx build`, to avoid any
+> confusion with regards to builder selection. Alternatively, you can run
+> `docker buildx install` to make the default `docker build` command behave
+> like `docker buildx build`, without discrepancies.
 
 ### GitHub Actions
 

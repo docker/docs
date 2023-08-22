@@ -10,4 +10,9 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+{{- range $target, $aliases := site.Data.redirects -}}
+{{- range $aliases }}
+{{- $redirects.SetInMap "paths" . $target -}}
+{{- end -}}
+{{- end -}}
 {{ $redirects.Get "paths" | jsonify }}
