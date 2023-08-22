@@ -47,4 +47,4 @@ section and choose the best installation path for you.
 
 > **Note**
 >
-> If you're looking for information on how to install Docker Engine, see [Docker Engine installation overview](/engine/install/index.md).
+> If you're looking for information on how to install Docker Engine, see [Docker Engine installation overview](/engine/install/).
