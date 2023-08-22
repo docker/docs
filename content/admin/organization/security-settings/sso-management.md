@@ -9,4 +9,4 @@ title: Manage Single Sign-On for an organization
 Follow the steps on this page to manage SSO for an organization. To manage SSO for a company, see [Manage SSO for a company](/admin/company/settings/sso-management/).
 
 
-{% include admin-sso-management.md product="admin" layer="organization"%}
+{{% admin-sso-management product="admin" layer="organization" %}}
