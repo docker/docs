@@ -4,20 +4,19 @@ if (toc) {
   const prose = document.querySelector("article.prose");
   const headings = prose.querySelectorAll("h2, h3");
   // grab all heading anchors on this page
-  const anchorLinks = Array.from(headings)
+  const headingAnchors = Array.from(headings)
     .map((h) => h.previousElementSibling)
-    .map((a) => [a.offsetTop, `${a.name}`])
-    .sort((a, b) => (a[0] > b[0] ? 1 : 0));
+    .map((a) => `${a.name}`);
 
   // find the closest anchor link based on window scrollpos
-  function findClosestHeading(anchorLinks) {
+  function findClosestHeading(headingAnchors) {
     const { innerHeight } = window;
-    for (const anchor of anchorLinks) {
-      const el = document.querySelector(`a[name="${anchor[1]}"]`);
+    for (const anchor of headingAnchors) {
+      const el = document.querySelector(`a[name="${anchor}"]`);
       const { top } = el.getBoundingClientRect();
       // if the heading is visible and within the top 20% of viewport
       if (top > 0 && top < (innerHeight * 0.2)) {
-        return anchor[1];
+        return anchor;
       }
     }
   }
@@ -39,7 +38,7 @@ if (toc) {
       return;
     }
     // grab the anchor id of the closest heading
-    const closestHeading = findClosestHeading(anchorLinks);
+    const closestHeading = findClosestHeading(headingAnchors);
     updateToc(closestHeading);
   }
 
