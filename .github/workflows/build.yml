@@ -30,7 +30,6 @@ jobs:
           set: |
             *.cache-from=type=gha,scope=build
             *.cache-to=type=gha,scope=build,mode=max
-            *.args.HUGO_ENV=production
 
   validate:
     runs-on: ubuntu-20.04
