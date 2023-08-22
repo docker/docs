@@ -4,6 +4,23 @@ description: Overview of what Hardened Docker Desktop is and its key features
 keywords: security, hardened desktop, enhanced container isolation, registry access
   management, settings management root access, admins, docker desktop, image access
   management
+grid:
+  - title: "Settings Management"
+    description: Learn how Settings Management can secure your developers' workflows.
+    icon: "lock"
+    link: "/desktop/hardened-desktop/settings-management/"
+  - title: "Enhanced Container Isolation"
+    description: Understand how Enhanced Container Isolation can prevent container attacks.
+    icon: "security"
+    link: "/desktop/hardened-desktop/enhanced-container-isolation/"
+  - title: "Registry Access Management"
+    description: Control the registries developers can access while using Docker Desktop.
+    icon: "home_storage"
+    link: "/desktop/hardened-desktop/registry-access-management/"
+  - title: "Image Access Management"
+    description: Control the images developers can pull from Docker Hub.
+    icon: "photo_library"
+    link: "/docker-hub/image-access-management/"
 ---
 
 >Note
@@ -26,47 +43,4 @@ The features of Hardened Docker Desktop operate independently of each other. Whe
 
 Docker plans to continue adding more security enhancements to the Hardened Docker Desktop security model.
 
- <div class="component-container">
-    <!--start row-->
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-        <div class="component">
-            <div class="component-icon">
-                 <a href="/desktop/hardened-desktop/settings-management/"><img src="/assets/images/lock.svg" alt="Hardened Docker Desktop" width="70" height="70"></a>
-            </div>
-                <h2 id="hardened-desktop"><a href="/desktop/hardened-desktop/settings-management/">Settings Management </a></h2>
-                <p>Learn how Settings Management can secure your developers' workflows.</p>
-         </div>
-     </div>
-     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-        <div class="component">
-            <div class="component-icon">
-                <a href="/desktop/hardened-desktop/enhanced-container-isolation"><img src="/assets/images/secure.svg" alt="Release notes" width="70" height="70"></a>
-            </div>
-                <h2 id="hardened-desktop"><a href="/desktop/hardened-desktop/enhanced-container-isolation">Enhanced Container Isolation</a></h2>
-                <p>Understand how Enhanced Container Isolation can prevent container attacks. </p>
-        </div>
-    </div>
-    </div>
-</div>
-<div class="component-container">
-    <!--start row-->
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-        <div class="component">
-            <div class="component-icon">
-                 <a href="/desktop/hardened-desktop/registry-access-management/"><img src="/assets/images/registry.svg" alt="Hardened Docker Desktop" width="70" height="70"></a>
-            </div>
-                <h2 id="hardened-desktop"><a href="/desktop/hardened-desktop/registry-access-management/">Registry Access Management</a></h2>
-                <p>Control the registries developers can access while using Docker Desktop.</p>
-         </div>
-     </div>
-     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 block">
-        <div class="component">
-            <div class="component-icon">
-                 <a href="/docker-hub/image-access-management/"><img src="/assets/images/image-access.svg" alt="Hardened Docker Desktop" width="70" height="70"></a>
-            </div>
-                <h2 id="hardened-desktop"><a href="/docker-hub/image-access-management/">Image Access Management</a></h2>
-                <p>Control the images developers can pull from Docker Hub.</p>
-         </div>
-     </div>
-</div>
+{{< grid >}}
