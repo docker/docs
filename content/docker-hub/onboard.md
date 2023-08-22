@@ -9,4 +9,4 @@ aliases:
 - /docker-hub/onboard-business/
 ---
 
-{{< admin-org-onboarding >}}
+{{% admin-org-onboarding %}}
