@@ -167,7 +167,8 @@ Inspecting the tag on Docker Hub shows that the image is available for multiple 
     >
     > If you're using an older version, the Docker daemon reports the following
     > error:
-    > `Multiple platforms feature is currently not supported for docker driver. Please switch to a different driver`.
+    > `Multiple platforms feature is currently not supported for docker driver.`
+    > `Please switch to a different driver`.
     >
     > Install a newer version of Buildx following the instructions on
     > [how to manually download Buildx](../../build/architecture.md#install-buildx).

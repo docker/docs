@@ -31,10 +31,10 @@ and architectures:
 
 
 | Platform                | x86_64 / amd64         | 
-|:------------------------|:-----------------------|
-| [Ubuntu](ubuntu.md)     | [{{% param "yes" %}}](ubuntu.md) |
-| [Debian](debian.md)     | [{{% param "yes" %}}](debian.md) |
-| [Fedora](fedora.md)     | [{{% param "yes" %}}](fedora.md) |
+|:-----------------------|:-----------------------:|
+| [Ubuntu](ubuntu.md)     | ✅ |
+| [Debian](debian.md)     | ✅  |
+| [Fedora](fedora.md)     | ✅ |
 
 
 An experimental package is available for [Arch](archlinux.md)-based distributions. Docker has not tested or verified the installation.
