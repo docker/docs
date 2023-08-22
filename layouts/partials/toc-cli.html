@@ -1,0 +1,20 @@
+<div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
+<nav id="TableOfContents">
+  <ul>
+    {{ range (.Scratch.Get "headings") }}
+      {{/* add left padding depending on level (pl-2, pl-3, pl-4) */}}
+      {{ $slice := strings.Split .text "{#" }}
+      {{ $text := index $slice 0 }}
+      {{ $anchor := index $slice 1 | strings.TrimRight "}" }}
+      <li{{ with .level }} class="pl-{{ . }}"{{ end }}>
+        <a
+          {{ if $anchor }}
+            href="#{{ $anchor }}"
+          {{ else }}
+            href="#{{ $text | anchorize }}"
+          {{ end }}
+          >{{ plainify $text }}</a>
+      </li>
+    {{ end }}
+  </ul>
+</nav>

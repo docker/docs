@@ -1,0 +1,33 @@
+{{ define "left" }}
+  {{ partial "sidebar.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ partial "breadcrumbs-legacy.html" . }}
+  <article class="prose max-w-none dark:prose-invert">
+    <h1>{{ .Title }}</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Term</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $term, $definition := site.Data.glossary }}
+          <tr>
+            <td class="not-prose">
+              <a class="-top-16 relative" name="{{ $term | anchorize }}"></a>
+              {{ $term }}
+            </td>
+            <td>{{ $definition | $.RenderString }}</td>
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </article>
+{{ end }}
+
+{{ define "right" }}
+  {{ partial "aside.html" . }}
+{{ end }}

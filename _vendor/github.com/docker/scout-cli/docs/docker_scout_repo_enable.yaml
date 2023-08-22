@@ -1,0 +1,33 @@
+command: docker scout repo enable
+short: Enable Docker Scout
+long: The docker scout repo enable command enables Docker Scout on repositories.
+usage: docker scout repo enable REPOSITORY|ORG
+pname: docker scout repo
+plink: docker_scout_repo.yaml
+options:
+    - option: filter
+      value_type: string
+      description: Regular expression to filter repositories by name
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

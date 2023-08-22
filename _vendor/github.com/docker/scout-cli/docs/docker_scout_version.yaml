@@ -1,0 +1,29 @@
+command: docker scout version
+short: Show Docker Scout version information
+long: Show Docker Scout version information
+usage: docker scout version
+pname: docker scout
+plink: docker_scout.yaml
+inherited_options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+examples: |-
+    ```console
+    $ docker scout version
+    version: v0.2.2 (go1.19.5 - darwin/arm64)
+    git commit: c15f374b9a39d993da2e8a1db7edc4be4f7c0c1e
+    ```
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+

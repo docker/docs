@@ -1,0 +1,14 @@
+{
+  "title": "{{ .Title }}",
+  "lead": "{{ .Params.lead }}",
+  "description": {{ .Plain | jsonify }},
+  "docs": [
+    {{- range $i, $e := (index site.Taxonomies.tags .Data.Term) }}
+    {{ if $i }},{{ end }}
+      {
+        "title": "{{ .Title }}",
+        "url": "{{ .Permalink}}"
+      }
+    {{ end }}
+  ]
+}

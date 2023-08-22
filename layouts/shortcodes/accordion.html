@@ -1,0 +1,3 @@
+{{ $title := .Get "title" }}
+{{ $body := .Inner }}
+{{ partial "components/accordion.html" (dict "title" $title "body" $body "page" .Page) }}

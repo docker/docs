@@ -1,0 +1,12 @@
+{{ $title := "" }}
+{{ if .LinkTitle }}
+  {{ $title = .LinkTitle }}
+{{ else }}
+  {{ $title = index (findRE `# .*` .RawContent) 0 | strings.TrimLeft "# " }}
+  {{ if not $title }}
+    {{ with .File }}
+      {{ $title = strings.ReplaceRE "[-_]" " " .TranslationBaseName }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $title }}

@@ -1,0 +1,47 @@
+command: docker scout stream
+short: Record an image into a stream (experimental)
+long: |-
+    The docker scout stream command records an image into a deployment stream.
+
+        This command is experimental and its behaviour might change in the future
+
+    Once recorded, streams can be referred to by their name, eg. in the docker scout compare command using --to-stream.
+usage: docker scout stream STREAM IMAGE
+pname: docker scout
+plink: docker_scout.yaml
+options:
+    - option: app
+      value_type: string
+      description: Name of application the image is a part of
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: platform
+      value_type: string
+      description: Platform of image to record
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+inherited_options:
+    - option: debug
+      value_type: bool
+      default_value: "false"
+      description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+experimental: false
+experimentalcli: true
+kubernetes: false
+swarm: false
+

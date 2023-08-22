@@ -1,0 +1,81 @@
+{{ $title := partial "utils/title.html" . }}
+{{ $description := .Description | default .Summary }}
+{{ if .IsHome }}
+  <title>{{ site.Title }}</title>
+{{ else }}
+  <title>
+    {{ printf "%s | %s" $title site.Title }}
+  </title>
+{{ end }}
+{{ if or (eq .Params.sitemap false) (not hugo.IsProduction) }}
+  <meta name="robots" content="noindex" />
+{{ end }}
+<meta name="description" content="{{ $description }}" />
+<meta
+  name="keywords"
+  content="{{ .Keywords | default "docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization" }}"
+/>
+<link rel="canonical" href="{{ .Permalink }}" />
+
+<!-- favicon -->
+<link
+  rel="icon"
+  type="image/x-icon"
+  href="{{ site.BaseURL }}/assets/favicons/docs@2x.ico"
+  sizes="129x128"
+/>
+<link
+  rel="apple-touch-icon"
+  type="image/x-icon"
+  href="{{ site.BaseURL }}/assets/favicons/docs@2x.ico"
+  sizes="129x128"
+/>
+<meta
+  name="msapplication-TileImage"
+  content="{{ site.BaseURL }}/assets/favicons/docs@2x.ico"
+/>
+<meta
+  property="og:image"
+  content="{{ site.BaseURL }}/assets/favicons/docs@2x.ico"
+/>
+<meta name="theme-color" content="#2496ed" />
+
+<!-- SEO -->
+<meta name="twitter:title" itemprop="title name" content="{{ $title }}" />
+<meta
+  name="twitter:description"
+  property="og:description"
+  itemprop="description"
+  content="{{ $description }}"
+/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:domain" content="{{ site.BaseURL }}" />
+<meta name="twitter:site" content="@docker_docs" />
+<meta name="twitter:url" content="https://twitter.com/docker_docs" />
+<meta
+  name="twitter:image:src"
+  content="{{ site.BaseURL }}/assets/images/docs@2x.png"
+/>
+<meta name="twitter:image:alt" content="Docker Documentation" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $description }}" />
+<meta property="og:type" content="website" />
+<meta
+  property="og:updated_time"
+  itemprop="dateUpdated"
+  content="{{ .Lastmod }}"
+/>
+<meta
+  property="og:image"
+  itemprop="image primaryImageOfPage"
+  content="{{ site.BaseURL }}/assets/images/docs@2x.png"
+/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:site_name" content="Docker Documentation" />
+<meta
+  property="article:published_time"
+  itemprop="datePublished"
+  content="{{ .PublishDate | default .Lastmod }}"
+/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","headline":{{ $title | jsonify }},"description":{{ $description | jsonify }},"url":"{{ .Permalink }}"}</script>
