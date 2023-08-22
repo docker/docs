@@ -1,8 +1,8 @@
 ---
-title: "Cache storage backends"
+title: Cache storage backends
 keywords: build, buildx, cache, backend, gha, azblob, s3, registry, local
-redirect_from:
-  - /build/building/cache/backends/
+aliases:
+- /build/building/cache/backends/
 ---
 
 To ensure fast builds, BuildKit automatically caches the build result in its own
@@ -40,13 +40,13 @@ Buildx supports the following cache storage backends:
 - `local`: writes the build cache to a local directory on the filesystem.
 
 - `gha`: uploads the build cache to
-  [GitHub Actions cache](https://docs.github.com/en/rest/actions/cache){:target="blank" rel="noopener" class=""} (beta).
+  [GitHub Actions cache](https://docs.github.com/en/rest/actions/cache) (beta).
 
 - `s3`: uploads the build cache to an
-  [AWS S3 bucket](https://aws.amazon.com/s3/){:target="blank" rel="noopener" class=""} (unreleased).
+  [AWS S3 bucket](https://aws.amazon.com/s3/) (unreleased).
 
 - `azblob`: uploads the build cache to
-  [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/){:target="blank" rel="noopener" class=""}
+  [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
   (unreleased).
 
 ## Command syntax
@@ -78,7 +78,7 @@ $ docker buildx build --push -t <registry>/<image> \
 ## Multiple caches
 
 BuildKit currently only supports
-[a single cache exporter](https://github.com/moby/buildkit/pull/3024){:target="blank" rel="noopener" class=""}. But you
+[a single cache exporter](https://github.com/moby/buildkit/pull/3024). But you
 can import from as many remote caches as you like. For example, a common pattern
 is to use the cache of both the current branch and the main branch. The
 following example shows importing cache from multiple locations using the

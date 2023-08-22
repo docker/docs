@@ -4,11 +4,11 @@ title: Cards
 toc_max: 3
 grid:
 - title: Docker Desktop
-  description: 'Docker on your Desktop.'
+  description: Docker on your Desktop.
   icon: install_desktop
   link: /desktop/
 - title: Docker Engine
-  description: 'Vrrrrooooommm'
+  description: Vrrrrooooommm
   icon: developer_board
   link: /engine/
 - title: Docker Build

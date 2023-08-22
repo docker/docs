@@ -19,7 +19,7 @@ To create a new company:
 >**Important**
 >
 > You must be a company owner to add an organization to a company.
-{: .important}
+{ .important }
 
 There is no limit to the number of organizations you can have under a company layer. All organizations must have a Business subscription.
 
@@ -28,4 +28,3 @@ There is no limit to the number of organizations you can have under a company la
 3. From the company page, select **Add organization**.
 4. Choose the organization you want to add from the drop-down menu.
 5. Select **Add organization** to confirm.
-

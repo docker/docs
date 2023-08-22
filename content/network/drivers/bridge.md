@@ -2,13 +2,13 @@
 title: Bridge network driver
 description: All about using user-defined bridge networks and the default bridge
 keywords: network, bridge, user-defined, standalone
-redirect_from:
-  - /config/containers/bridges/
-  - /engine/userguide/networking/default_network/build-bridges/
-  - /engine/userguide/networking/default_network/custom-docker0/
-  - /engine/userguide/networking/default_network/dockerlinks/
-  - /engine/userguide/networking/work-with-networks/
-  - /network/bridge/
+aliases:
+- /config/containers/bridges/
+- /engine/userguide/networking/default_network/build-bridges/
+- /engine/userguide/networking/default_network/custom-docker0/
+- /engine/userguide/networking/default_network/dockerlinks/
+- /engine/userguide/networking/work-with-networks/
+- /network/bridge/
 ---
 
 In terms of networking, a bridge network is a Link Layer device
@@ -255,7 +255,7 @@ inter-container communications may break when 1000 containers or more connect
 to a single network.
 
 For more information about this limitation, see
-[moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718){: target="_blank" rel="noopener"}.
+[moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718).
 
 ## Next steps
 

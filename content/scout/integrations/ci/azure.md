@@ -4,7 +4,7 @@ keywords: supply chain, security, ci, continuous integration, azure, devops
 title: Integrate Docker Scout with Microsoft Azure DevOps Pipelines
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 The following examples runs in an Azure DevOps-connected repository containing a
 Docker image's definition and contents. Triggered by a commit to the main
@@ -65,4 +65,3 @@ This creates the flow mentioned previously. It builds and tags the image using
 the checked-out Dockerfile, downloads the Docker Scout CLI, and then runs the
 `cves` command against the new tag to generate a CVE report. It only shows
 critical or high-severity vulnerabilities.
-

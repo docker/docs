@@ -1,7 +1,7 @@
 ---
-title: "User defined HCL functions"
+title: User defined HCL functions
 keywords: build, buildx, bake, buildkit, hcl
-redirect_from:
+aliases:
 - /build/customize/bake/hcl-funcs/
 ---
 
@@ -100,7 +100,7 @@ $ TAG=$(git rev-parse --short HEAD) docker buildx bake --print webapp
 
 ## Using the `add` function
 
-You can use [`go-cty` stdlib functions](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib){:target="blank" rel="noopener" class=""}.
+You can use [`go-cty` stdlib functions](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib).
 Here we are using the `add` function.
 
 ```hcl
@@ -147,7 +147,7 @@ $ docker buildx bake --print webapp
 
 ## Defining an `increment` function
 
-It also supports [user defined functions](https://github.com/hashicorp/hcl/tree/main/ext/userfunc){:target="blank" rel="noopener" class=""}.
+It also supports [user defined functions](https://github.com/hashicorp/hcl/tree/main/ext/userfunc).
 The following example defines a simple an `increment` function.
 
 ```hcl

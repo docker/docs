@@ -1,8 +1,8 @@
 ---
 title: Garbage collection
 keywords: build, buildx, buildkit, garbage collection, prune
-redirect_from:
-  - /build/building/cache/garbage-collection/
+aliases:
+- /build/building/cache/garbage-collection/
 ---
 
 While [`docker builder prune`](../../engine/reference/commandline/builder_prune.md)

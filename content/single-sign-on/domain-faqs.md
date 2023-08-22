@@ -27,4 +27,3 @@ Runtime for Docker Desktop if they configure Docker Desktop to require authentic
 ### Do you support IdP-initiated authentication (e.g., Okta tile support)?
 
 We don't support IdP-initiated authentication. Users must initiate login through Docker Desktop or Hub.
-

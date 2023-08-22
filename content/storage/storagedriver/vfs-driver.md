@@ -1,8 +1,8 @@
 ---
 description: Learn how to optimize your use of VFS driver.
-keywords: 'container, storage, driver, vfs'
+keywords: container, storage, driver, vfs
 title: Use the VFS storage driver
-redirect_from:
+aliases:
 - /engine/userguide/storagedriver/vfs-driver/
 ---
 
@@ -131,4 +131,3 @@ same amount of room on disk. This is one of the disadvantages of using the
 
 - [Understand images, containers, and storage drivers](index.md)
 - [Select a storage driver](select-storage-driver.md)
-

@@ -34,4 +34,4 @@ You can add a payment method or update your account's existing payment method at
 4. In the **Payment Information** section, enter the new payment method. 
     The screen refreshes and displays your new payment information alongside your existing information.
 5. Select **Make Default** to ensure that your new payment method applies to all purchases and subscriptions. 
-6. Optional. Remove your existing payment method by selecting the **X** icon. 
+6. Optional. Remove your existing payment method by selecting the **X** icon.

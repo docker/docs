@@ -1,9 +1,10 @@
 ---
 title: Samples overview
-description: Learn how to containerize different types of services by walking through Official Docker samples.
+description: Learn how to containerize different types of services by walking through
+  Official Docker samples.
 cascade:
   layout: samples
-redirect_from:
+aliases:
 - /en/latest/examples/
 - /engine/examples/
 - /examples/

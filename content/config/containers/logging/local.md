@@ -1,10 +1,10 @@
 ---
 description: Describes how to use the local logging driver.
 keywords: local, docker, logging, driver
-redirect_from:
+title: Local File logging driver
+aliases:
 - /engine/reference/logging/local/
 - /engine/admin/logging/local/
-title: Local File logging driver
 ---
 
 The `local` logging driver captures output from container's stdout/stderr and

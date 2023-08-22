@@ -31,7 +31,7 @@ workflow.  They need to be
 
 **Note**: Prior to Docker Engine 1.11, the snapshot key was also generated and stored
 locally client-side.
-Use the Notary CLI to [manage your snapshot key locally again](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#rotate-keys){:target="_blank" rel="noopener" class="_"} for repositories created with newer versions of Docker.
+Use the Notary CLI to [manage your snapshot key locally again](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#rotate-keys) for repositories created with newer versions of Docker.
 
 ## Choose a passphrase
 
@@ -51,7 +51,7 @@ Good practice is to create two encrypted USB keys.
 >
 > It is **very important** that you back up your keys to a safe, secure location.
 The loss of the repository key is recoverable, but the loss of the root key is not.
-{:.warning}
+{ .warning }
 
 The Docker client stores the keys in the `~/.docker/trust/private` directory.
 Before backing them up, you should `tar` them into an archive:
@@ -66,7 +66,7 @@ Docker Content Trust can store and sign with root keys from a Yubikey 4. The
 Yubikey is prioritized over keys stored in the filesystem. When you initialize a
 new repository with content trust, Docker Engine looks for a root key locally. If a
 key is not found and the Yubikey 4 exists, Docker Engine creates a root key in the
-Yubikey 4. Consult the [Notary documentation](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#use-a-yubikey){:target="_blank" rel="noopener" class="_"}
+Yubikey 4. Consult the [Notary documentation](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#use-a-yubikey)
 for more details.
 
 Prior to Docker Engine 1.11, this feature was only in the experimental branch.
@@ -78,7 +78,7 @@ Prior to Docker Engine 1.11, this feature was only in the experimental branch.
 > If a publisher loses keys it means losing the ability to sign images for the repositories in
 question. If you lose a key, send an email to [Docker Hub Support](mailto:hub-support@docker.com).
 As a reminder, the loss of a root key is not recoverable.
-{:.warning}
+{ .warning }
 
 This loss also requires **manual intervention** from every consumer that used a signed
 tag from this repository prior to the loss.  

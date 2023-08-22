@@ -1,8 +1,9 @@
 ---
 description: Pruning unused objects
-keywords: pruning, prune, images, volumes, containers, networks, disk, administration, garbage collection
+keywords: pruning, prune, images, volumes, containers, networks, disk, administration,
+  garbage collection
 title: Prune unused Docker objects
-redirect_from:
+aliases:
 - /engine/admin/pruning/
 ---
 
@@ -174,4 +175,3 @@ Are you sure you want to continue? [y/N] y
 
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
-

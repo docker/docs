@@ -61,4 +61,3 @@ Online storage for Docker images.
 #### Repository
 
 Lets users share container images with their team, customers, or Docker community.
-

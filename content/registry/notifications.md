@@ -1,10 +1,11 @@
 ---
 description: Explains how to work with registry notifications
-keywords: registry, on-prem, images, tags, repository, distribution, notifications, advanced
+keywords: registry, on-prem, images, tags, repository, distribution, notifications,
+  advanced
 title: Work with notifications
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 The Registry supports sending webhook notifications in response to events
 happening within the registry. Notifications are sent in response to manifest

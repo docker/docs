@@ -1,10 +1,11 @@
 ---
 description: Restricting access to your registry using an apache proxy
-keywords: registry, on-prem, images, tags, repository, distribution, authentication, proxy, apache, httpd, TLS, recipe, advanced
+keywords: registry, on-prem, images, tags, repository, distribution, authentication,
+  proxy, apache, httpd, TLS, recipe, advanced
 title: Authenticate proxy with apache
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 ## Use-case
 

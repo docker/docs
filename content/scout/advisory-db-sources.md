@@ -1,10 +1,11 @@
 ---
-description: More details on the Advisory Database and CVE-to-package matching service behind Docker Scout analysis.
+description: More details on the Advisory Database and CVE-to-package matching service
+  behind Docker Scout analysis.
 keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security
 title: Advisory Database sources and matching service
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 Docker Scout is a service that helps developers and security teams build and
 maintain a secure software supply chain. A key component of this is the ability

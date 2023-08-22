@@ -2,11 +2,11 @@
 title: Create an advanced frontend extension
 description: Advanced frontend extension tutorial
 keywords: Docker, extensions, sdk, build
-redirect_from:
-  - /desktop/extensions-sdk/tutorials/react-extension/
-  - /desktop/extensions-sdk/build/set-up/react-extension/
-  - /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
-  - /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
+aliases:
+- /desktop/extensions-sdk/tutorials/react-extension/
+- /desktop/extensions-sdk/build/set-up/react-extension/
+- /desktop/extensions-sdk/build/set-up/minimal-frontend-using-docker-cli/
+- /desktop/extensions-sdk/build/set-up/frontend-extension-tutorial/
 ---
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up an extension with a more advanced frontend.
@@ -23,9 +23,9 @@ The quickest way to create a new extension is to run `docker extension init my-e
 > The `docker extension init` generates a React based extension. But you can still use it as a starting point for
 > your own extension and use any other frontend framework, like Vue, Angular, Svelte, etc. or even stay with
 > vanilla Javascript.
-{: .tip }
+{ .tip }
 
-Although you can start from an empty directory or from the `react-extension` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"},
+Although you can start from an empty directory or from the `react-extension` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples),
 it's highly recommended that you start from the `docker extension init` command and change it to suit your needs.
 
 ```bash
@@ -105,27 +105,27 @@ COPY --from=client-builder /ui/build ui
 
 > **Important**
 >
-> We don't have a working Dockerfile for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue){: target="_blank" rel="noopener" class="_"}
+> We don't have a working Dockerfile for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know if you'd like a Dockerfile for Vue.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Angular" >}}
 
 > **Important**
 >
-> We don't have a working Dockerfile for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular){: target="_blank" rel="noopener" class="_"}
+> We don't have a working Dockerfile for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know if you'd like a Dockerfile for Angular.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Svelte" >}}
 
 > **Important**
 >
-> We don't have a working Dockerfile for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte){: target="_blank" rel="noopener" class="_"}
+> We don't have a working Dockerfile for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know if you'd like a Dockerfile for Svelte.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -208,7 +208,7 @@ command and display the result in a table.
 Replace the `ui/src/App.tsx` file with the following code:
 
 ```tsx
-{% raw %}
+
 // ui/src/App.tsx
 import React, { useEffect } from 'react';
 import {
@@ -281,7 +281,7 @@ export function App() {
     </Stack>
   );
 }
-{% endraw %}
+
 ```
 
 ![Screenshot of the container list.](images/react-extension.png)
@@ -291,27 +291,27 @@ export function App() {
 
 > **Important**
 >
-> We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue){: target="_blank" rel="noopener" class="_"}
+> We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know if you'd like a sample with Vue.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Angular" >}}
 
 > **Important**
 >
-> We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular){: target="_blank" rel="noopener" class="_"}
+> We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know if you'd like a sample with Angular.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Svelte" >}}
 
 > **Important**
 >
-> We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte){: target="_blank" rel="noopener" class="_"}
+> We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know if you'd like a sample with Svelte.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -352,7 +352,7 @@ when you need to debug it.
 >
 > You can turn on [hot reloading](../dev/test-debug.md#hot-reloading-whilst-developing-the-ui) to avoid the need to
 > rebuild the extension every time you make a change.
-{: .tip }
+{ .tip }
 
 ## What's next?
 
@@ -362,4 +362,3 @@ when you need to debug it.
 - Learn more about extensions [architecture](../architecture/index.md).
 - For more information and guidelines on building the UI, see the [Design and UI styling section](../design/design-guidelines.md).
 - If you want to set up user authentication for the extension, see [Authentication](../guides/oauth2-flow.md).
-

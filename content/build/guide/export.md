@@ -1,8 +1,9 @@
 ---
 title: Export binaries
 description: Using Docker builds to create and export executable binaries
-keywords: >
-  build, buildkit, buildx, guide, tutorial, build arguments, arg
+keywords: 'build, buildkit, buildx, guide, tutorial, build arguments, arg
+
+  '
 ---
 
 {% include_relative nav.html selected="6" %}
@@ -50,7 +51,7 @@ stage:
 
 ```diff
   # syntax=docker/dockerfile:1
-  ARG GO_VERSION={{site.example_go_version}}
+  ARG GO_VERSION={{% param "example_go_version" %}}
   FROM golang:${GO_VERSION}-alpine AS base
   WORKDIR /src
   RUN --mount=type=cache,target=/go/pkg/mod/ \
@@ -114,4 +115,4 @@ Related information:
 The next topic of this guide is testing: how you can use Docker to run
 application tests.
 
-[Test](test.md){: .button .primary-btn }
+{{< button text="Test" url="test.md" >}}

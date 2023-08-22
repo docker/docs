@@ -55,5 +55,4 @@ See [SCIM](scim.md) for more information.
 
 ### What's the definition of a company vs an organization?
 
-A company is a collection of organizations that are managed together. An organization is a collection of repositories and teams that are managed together. 
-
+A company is a collection of organizations that are managed together. An organization is a collection of repositories and teams that are managed together.

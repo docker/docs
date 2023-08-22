@@ -40,8 +40,8 @@ Now you can add this as a step to the Dockerfile.
 
 ```diff
   # syntax=docker/dockerfile:1
-  ARG GO_VERSION={{site.example_go_version}}
-+ ARG GOLANGCI_LINT_VERSION={{site.example_golangci_lint_version}}
+  ARG GO_VERSION={{% param "example_go_version" %}}
++ ARG GOLANGCI_LINT_VERSION={{% param "example_golangci_lint_version" %}}
   FROM golang:${GO_VERSION}-alpine AS base
   WORKDIR /src
   RUN --mount=type=cache,target=/go/pkg/mod/ \
@@ -114,4 +114,4 @@ This section has shown an example on how you can use Docker builds to run tests
 The next topic in this guide is multi-platform builds, using emulation and
 cross-compilation.
 
-[Multi-platform](multi-platform.md){: .button .primary-btn }
+{{< button text="Multi-platform" url="multi-platform.md" >}}

@@ -1,8 +1,10 @@
 ---
-description: Explore the Learning center and understand the benefits of signing in to Docker Desktop
-keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual, learning center, guide, sign in
+description: Explore the Learning center and understand the benefits of signing in
+  to Docker Desktop
+keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual,
+  learning center, guide, sign in
 title: Sign in to Docker Desktop
-redirect_from:
+aliases:
 - /desktop/linux/
 - /desktop/linux/index/
 - /desktop/mac/
@@ -43,7 +45,7 @@ In large enterprises where admin access is restricted, administrators can [Confi
 
 ### Credentials management for Linux users
 
-Docker Desktop relies on [`pass`](https://www.passwordstore.org/){: target="_blank" rel="noopener" class="_"} to store credentials in gpg2-encrypted files.
+Docker Desktop relies on [`pass`](https://www.passwordstore.org/) to store credentials in gpg2-encrypted files.
 Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
 Docker Desktop displays a warning if you've not initialized `pass`.
 

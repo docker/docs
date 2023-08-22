@@ -3,6 +3,7 @@ description: components and formatting examples used in Docker's docs
 title: Badges
 toc_max: 3
 ---
+
 ### Examples
 
 {{< badge color=blue text="blue badge" >}}
@@ -20,4 +21,3 @@ You can also make a badge a link.
 ```go
 {{</* badge color=amber text="amber badge" */>}}
 ```
-

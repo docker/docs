@@ -1,11 +1,11 @@
 ---
 description: How to start containers automatically
 keywords: containers, restart, policies, automation, administration
-redirect_from:
+title: Start containers automatically
+aliases:
 - /engine/articles/host_integration/
 - /engine/admin/host_integration/
 - /engine/admin/start-containers-automatically/
-title: Start containers automatically
 ---
 
 Docker provides [restart policies](../../engine/reference/run.md#restart-policies---restart)
@@ -80,7 +80,7 @@ Docker depend on Docker containers, you can use a process manager such as
 >
 > Do not try to combine Docker restart policies with host-level process managers,
 > because this creates conflicts.
-{:.warning}
+{ .warning }
 
 To use a process manager, configure it to start your container or service using
 the same `docker start` or `docker service` command you would normally use to
@@ -98,4 +98,4 @@ running and starts/restart it if not.
 > the container. Docker does not recommend this approach, because it is
 > platform-dependent and even differs within different versions of a given Linux
 > distribution.
-{:.warning}
+{ .warning }

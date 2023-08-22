@@ -136,19 +136,19 @@ $ docker buildx build --push --tag myregistry.com/myimage:latest .
 ## CNI networking
 
 CNI networking for builders can be useful for dealing with network port
-contention during concurrent builds. CNI is [not yet](https://github.com/moby/buildkit/issues/28){:target="blank" rel="noopener" class=""}
+contention during concurrent builds. CNI is [not yet](https://github.com/moby/buildkit/issues/28)
 available in the default BuildKit image. But you can create your own image that
 includes CNI support.
 
 The following Dockerfile example shows a custom BuildKit image with CNI support.
-It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json){:target="blank" rel="noopener" class=""}
+It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json)
 in BuildKit as an example. Feel free to include your own CNI configuration.
 
-{% raw %}
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-ARG BUILDKIT_VERSION=v{{ site.buildkit_version }}
+ARG BUILDKIT_VERSION=v{{% param "buildkit_version" %}}
 ARG CNI_VERSION=v1.0.1
 
 FROM --platform=$BUILDPLATFORM alpine AS cni-plugins
@@ -165,7 +165,7 @@ RUN apk add --no-cache iptables
 COPY --from=cni-plugins /opt/cni/bin /opt/cni/bin
 ADD https://raw.githubusercontent.com/moby/buildkit/${BUILDKIT_VERSION}/hack/fixtures/cni.json /etc/buildkit/cni.json
 ```
-{% endraw %}
+
 
 Now you can build this image, and create a builder instance from it using
 [the `--driver-opt image` option](../../engine/reference/commandline/buildx_create.md#driver-opt):
@@ -211,4 +211,4 @@ requests. This connection limit prevents your build from getting stuck while
 pulling images. The dedicated metadata connection helps reduce the overall build
 time.
 
-More information: [moby/buildkit#2259](https://github.com/moby/buildkit/pull/2259){:target="blank" rel="noopener" class=""}
+More information: [moby/buildkit#2259](https://github.com/moby/buildkit/pull/2259)

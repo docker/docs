@@ -11,7 +11,7 @@ A Software Bill Of Materials (SBOM) is analogous to a packing list for a shipmen
 > **Warning**
 >
 > The `docker sbom` command is currently experimental. This may change or be removed from future releases.
-{: .warning }
+{ .warning }
 
 The experimental `docker sbom` command allows you to generate the SBOM of a container image. Today, it does this by scanning the layers of the image using the [Syft project](https://github.com/anchore/syft) but in future it may read the SBOM from the image itself or elsewhere.
 
@@ -40,7 +40,7 @@ The output includes both system packages and software libraries used by applicat
 
 ## Output formatting and saving outputs
 
-You can view the SBOM output in standard formats like [SPDX](https://spdx.dev){: target="_blank" rel="noopener" class="_"} and [CycloneDX](https://cyclonedx.org){: target="_blank" rel="noopener" class="_"} along with the Syft and GitHub formats using the `--format` option.
+You can view the SBOM output in standard formats like [SPDX](https://spdx.dev) and [CycloneDX](https://cyclonedx.org) along with the Syft and GitHub formats using the `--format` option.
 
 ```console
 $ docker sbom --format spdx-json alpine:3.15
@@ -94,4 +94,4 @@ $ cat sbom.json
 ## Feedback
 
 Thanks for trying the Docker SBOM CLI plugin. We’d love to hear from you. You can provide feedback and report any bugs through the Issues tracker in the
-[docker/sbom-cli-plugin](https://github.com/docker/sbom-cli-plugin){: target="_blank" rel="noopener" class="_"} GitHub repository.
+[docker/sbom-cli-plugin](https://github.com/docker/sbom-cli-plugin) GitHub repository.

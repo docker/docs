@@ -2,7 +2,7 @@
 description: How to write to and view a container's logs
 keywords: docker, logging
 title: View container logs
-redirect_from:
+aliases:
 - /engine/admin/logging/
 - /engine/admin/logging/view_container_logs/
 ---

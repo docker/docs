@@ -1,14 +1,16 @@
 ---
-description: Instructions for installing Docker Desktop Arch package. Mostly meant for hackers who want to try out Docker Desktop on a variety of Arch-based distributions.
-keywords: Arch Linux, install, uninstall, upgrade, update, linux, desktop, docker desktop, docker desktop for linux, dd4l
+description: Instructions for installing Docker Desktop Arch package. Mostly meant
+  for hackers who want to try out Docker Desktop on a variety of Arch-based distributions.
+keywords: Arch Linux, install, uninstall, upgrade, update, linux, desktop, docker
+  desktop, docker desktop for linux, dd4l
 title: Install Docker Desktop on Arch-based distributions
-redirect_from:
-  - /desktop/linux/install/archlinux/
+aliases:
+- /desktop/linux/install/archlinux/
 ---
 
 This topic discusses installation of Docker Desktop from an [Arch package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.0-x86_64.pkg.tar.zst) that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
 
-[Arch package (experimental)](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+{{< button text="Arch package (experimental)" url="https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.0-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 _For checksums, see [Release notes](../release-notes.md)_
 
@@ -39,7 +41,7 @@ $ sudo pacman -S gnome-terminal
 
 ## Launch Docker Desktop
 
-{% include desktop-linux-launch.md %}
+{{< include "desktop-linux-launch.md" >}}
 
 ## Next steps
 

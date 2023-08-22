@@ -1,9 +1,12 @@
 ---
 title: Alternative container runtimes
-description: |
-  Docker Engine uses runc as the default container runtime, but you
+description: 'Docker Engine uses runc as the default container runtime, but you
+
   can specify alternative runtimes using the CLI or by configuring
+
   the daemon
+
+  '
 keywords: engine, runtime, containerd, runtime v2, shim
 ---
 
@@ -14,21 +17,21 @@ By default, containerd uses runc as its container runtime.
 ## What runtimes can I use?
 
 You can use any runtime that implements the containerd 
-[shim API](https://github.com/containerd/containerd/blob/main/runtime/v2/README.md){: target="blank" rel="noopener"}.
+[shim API](https://github.com/containerd/containerd/blob/main/runtime/v2/README.md).
 Such runtimes ship with a containerd shim, and you can use them without any
 additional configuration. See [Use containerd shims](#use-containerd-shims).
 
 Examples of runtimes that implement their own containerd shims include:
 
-- [Wasmtime](https://wasmtime.dev/){: target="blank" rel="noopener"}
-- [gVisor](https://github.com/google/gvisor){: target="blank" rel="noopener"}
-- [Kata Containers](https://katacontainers.io/){: target="blank" rel="noopener"}
+- [Wasmtime](https://wasmtime.dev/)
+- [gVisor](https://github.com/google/gvisor)
+- [Kata Containers](https://katacontainers.io/)
 
 You can also use runtimes designed as drop-in replacements for runc. Such
 runtimes depend on the runc containerd shim for invoking the runtime binary.
 You must manually register such runtimes in the daemon configuration.
 
-[youki](https://github.com/containers/youki){: target="blank" rel="noopener"}
+[youki](https://github.com/containers/youki)
 is one example of a runtime that can function as a runc drop-in replacement.
 Refer to the [youki example](#youki) explaining the setup.
 
@@ -131,7 +134,7 @@ To add youki as a container runtime:
 1. Install youki and its dependencies.
 
    For instructions, refer to the
-   [official setup guide](https://containers.github.io/youki/user/basic_setup.html){: target="\_blank" rel="noopener"}.
+   [official setup guide](https://containers.github.io/youki/user/basic_setup.html).
 
 2. Register youki as a runtime for Docker by editing the Docker daemon
    configuration file, located at `/etc/docker/daemon.json` by default.
@@ -165,7 +168,7 @@ $ docker run --rm --runtime youki hello-world
 ### Wasmtime
 
 Wasmtime is a
-[Bytecode Alliance](https://bytecodealliance.org/){:target="\_blank" rel="noopener"}
+[Bytecode Alliance](https://bytecodealliance.org/)
 project, and a Wasm runtime that lets you run Wasm containers.
 Running Wasm containers with Docker provides two layers of security.
 You get all the benefits from container isolation,

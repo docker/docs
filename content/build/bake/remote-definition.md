@@ -45,7 +45,7 @@ $ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
 ```
 
 As you can see the context is fixed to `https://github.com/docker/cli.git` even if
-[no context is actually defined](https://github.com/docker/cli/blob/2776a6d694f988c0c1df61cad4bfac0f54e481c8/docker-bake.hcl#L17-L26){:target="blank" rel="noopener" class=""}
+[no context is actually defined](https://github.com/docker/cli/blob/2776a6d694f988c0c1df61cad4bfac0f54e481c8/docker-bake.hcl#L17-L26)
 in the definition.
 
 If you want to access the main context for bake command from a bake file

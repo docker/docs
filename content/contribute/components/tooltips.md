@@ -3,6 +3,7 @@ description: components and formatting examples used in Docker's docs
 title: Tooltips
 toc_max: 3
 ---
+
 Tooltips aren't visible on mobile devices or touchscreens, so don't rely on them as the
 only way to communicate important info.
 

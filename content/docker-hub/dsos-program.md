@@ -4,7 +4,7 @@ title: Docker-Sponsored Open Source Program
 keywords: docker hub, hub, insights, analytics, open source, Docker sponsored, program
 ---
 
-[Docker Sponsored Open Source images](https://hub.docker.com/search?q=&image_filter=open_source){:target="_blank" rel="noopener" class="_"} are published and maintained by open-source projects sponsored by Docker through the program.
+[Docker Sponsored Open Source images](https://hub.docker.com/search?q=&image_filter=open_source) are published and maintained by open-source projects sponsored by Docker through the program.
 
 Images that are part of this program have a special badge on Docker Hub making it easier for users to identify projects that Docker has verified as trusted, secure, and active open-source projects.
 
@@ -42,7 +42,7 @@ over the repository can change the repository logo.
 
 #### Set the repository logo
 
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Go to the page of the repository that you want to change the logo for.
 3. Select the upload logo button, represented by a camera icon
    (![Camera icon](images/upload_logo_sm.png){: .inline height="22px" })
@@ -56,7 +56,7 @@ Select the **Clear** button (![Clear button](images/clear_logo_sm.png){: .inline
 
 Removing the logo makes the repository default to using the organization logo, if set, or the following default logo if not.
 
-![Default logo which is a 3D grey cube](images/default_logo_sm.png){: width="50px" }
+![Default logo which is a 3D grey cube](images/default_logo_sm.png)
 
 ### Verified Docker-Sponsored Open Source badge
 
@@ -93,7 +93,7 @@ basis. For more about using this feature, see [Basic vulnerability scanning](/do
 
 ### Who's eligible for the Docker-Sponsored Open Source program?
 
-To qualify for the program, a publisher must share the project namespace in public repositories, meet [the Open Source Initiative definition](https://opensource.org/docs/osd){:target="_blank" rel="noopener" class="_"}, and be in active development with no pathway to commercialization.
+To qualify for the program, a publisher must share the project namespace in public repositories, meet [the Open Source Initiative definition](https://opensource.org/docs/osd), and be in active development with no pathway to commercialization.
 
 Find out more by heading to the
-[Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/){:target="_blank" rel="noopener" class="_"} application page.
+[Docker-Sponsored Open Source Program](https://www.docker.com/community/open-source/application/) application page.

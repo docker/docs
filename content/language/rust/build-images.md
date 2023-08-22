@@ -204,4 +204,4 @@ Related information:
 
 In the next section learn how to run your image as a container.
 
-[Run the image as a container](run-containers.md){: .button .primary-btn}
+{{< button text="Run the image as a container" url="run-containers.md" >}}

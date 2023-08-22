@@ -2,9 +2,9 @@
 title: Migrate to Compose V2
 description: How to migrate from Compose V1 to V2
 keywords: compose, upgrade, migration, v1, v2
-redirect_from:
-  - /compose/compose-v2/
-  - /compose/cli-command-compatibility/
+aliases:
+- /compose/compose-v2/
+- /compose/cli-command-compatibility/
 ---
 
 From July 2023 Compose V1 stopped receiving updates. It’s also no longer available in new releases of Docker Desktop.
@@ -36,7 +36,7 @@ For example, `docker --log-level=debug --tls compose up` enables debug logging f
 > **Tip**
 >
 > Update scripts to use Compose V2 by replacing the hyphen (`-`) with a space, using `docker compose` instead of `docker-compose`.
-{: .tip}
+{ .tip }
 
 ### Service container names
 
@@ -54,7 +54,7 @@ For example, running the Compose command `-p myproject up --scale=1 svc` results
 >
 >In Compose V2, the global `--compatibility` flag or `COMPOSE_COMPATIBILITY` environment variable preserves the Compose V1 behavior to use underscores (`_`) as the word separator.
 As this option must be specified for every Compose V2 command run, it's recommended that you only use this as a temporary measure while transitioning to Compose V2.
-{: .tip}
+{ .tip }
 
 ### Command-line flags and subcommands
 
@@ -94,7 +94,7 @@ verify that values appear as expected.
 >
 > Maintaining backwards compatibility with Compose V1 is typically achievable by ensuring that literal values (no
 interpolation) are single-quoted and values that should have interpolation applied are double-quoted.
-{: .tip}
+{ .tip }
 
 ## What does this mean for my projects that use Compose V1?
 
@@ -117,11 +117,9 @@ Note that even if `--compatibility` flag is used to preserve the V1 naming style
 
 ### Using Compose V2 with Docker-in-Docker
 
-Compose V2 is now included in the [Docker official image on Docker Hub](https://hub.docker.com/_/docker){:
-target="_blank" rel="noopener" class="_"}.
+Compose V2 is now included in the [Docker official image on Docker Hub](https://hub.docker.com/_/docker).
 
-Additionally, a new [docker/compose-bin image on Docker Hub](https://hub.docker.com/r/docker/compose-bin){:
-target="_blank" rel="noopener" class="_"} packages the latest version of Compose V2 for use in multi-stage builds.
+Additionally, a new [docker/compose-bin image on Docker Hub](https://hub.docker.com/r/docker/compose-bin) packages the latest version of Compose V2 for use in multi-stage builds.
 
 ## Can I still use Compose V1 if I want to?
 
@@ -130,12 +128,9 @@ Yes. You can still download and install Compose V1 packages, but you won't get s
 >**Warning**
 >
 > The final Compose V1 release, version 1.29.2, was May 10, 2021. These packages haven't received any security updates since then. Use at your own risk. 
-{: .warning}
+{ .warning }
 
 ## Additional Resources
-- [docker-compose V1 on PyPI](https://pypi.org/project/docker-compose/1.29.2/){:
-  target="_blank" rel="noopener" class="_"}
-- [docker/compose V1 on Docker Hub](https://hub.docker.com/r/docker/compose){:
-  target="_blank" rel="noopener" class="_"}
-- [docker-compose V1 source on GitHub](https://github.com/docker/compose/releases/tag/1.29.2){:
-  target="_blank" rel="noopener" class="_"}
+- [docker-compose V1 on PyPI](https://pypi.org/project/docker-compose/1.29.2/)
+- [docker/compose V1 on Docker Hub](https://hub.docker.com/r/docker/compose)
+- [docker-compose V1 source on GitHub](https://github.com/docker/compose/releases/tag/1.29.2)

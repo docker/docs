@@ -1,11 +1,11 @@
 ---
 description: Describes how to use the fluentd logging driver.
 keywords: Fluentd, docker, logging, driver
-redirect_from:
+title: Fluentd logging driver
+aliases:
 - /engine/reference/logging/fluentd/
 - /reference/logging/fluentd/
 - /engine/admin/logging/fluentd/
-title: Fluentd logging driver
 ---
 
 The `fluentd` logging driver sends container logs to the
@@ -31,7 +31,7 @@ The `docker logs` command is not available for this logging driver.
 Some options are supported by specifying `--log-opt` as many times as needed:
 
  - `fluentd-address`: specify a socket address to connect to the Fluentd daemon, ex `fluentdhost:24224` or `unix:///path/to/fluentd.sock`
- - `tag`: specify a tag for fluentd message, which interprets some markup, ex {% raw %}`{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`{% endraw %}
+ - `tag`: specify a tag for fluentd message, which interprets some markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`
 
 
  To use the `fluentd` driver as the default logging driver, set the `log-driver`

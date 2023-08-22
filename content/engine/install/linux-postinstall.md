@@ -1,11 +1,14 @@
 ---
-description: Find the recommended Docker Engine post-installation steps for Linux users, including how to run Docker as a non-root user and more.   
-keywords: run docker without sudo, docker running as root, docker post install, docker post installation, run docker as non root, docker non root user, how to run docker in linux, how to run docker linux, how to start docker in linux, run docker on linux
+description: Find the recommended Docker Engine post-installation steps for Linux
+  users, including how to run Docker as a non-root user and more.
+keywords: run docker without sudo, docker running as root, docker post install, docker
+  post installation, run docker as non root, docker non root user, how to run docker
+  in linux, how to run docker linux, how to start docker in linux, run docker on linux
 title: Linux post-installation steps for Docker Engine
-redirect_from:
-  - /engine/installation/linux/docker-ee/linux-postinstall/
-  - /engine/installation/linux/linux-postinstall/
-  - /install/linux/linux-postinstall/
+aliases:
+- /engine/installation/linux/docker-ee/linux-postinstall/
+- /engine/installation/linux/linux-postinstall/
+- /install/linux/linux-postinstall/
 ---
 
 These optional post-installation procedures shows you how to configure your
@@ -30,7 +33,7 @@ manually create the group.
 > The `docker` group grants root-level privileges to the user. For
 > details on how this impacts security in your system, see
 > [Docker Daemon Attack Surface](../security/index.md#docker-daemon-attack-surface).
-{: .warning}
+{ .warning }
 
 > **Note**
 >

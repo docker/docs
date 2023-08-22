@@ -1,7 +1,7 @@
 ---
 title: Packaging your software
 keywords: build, buildx, buildkit, getting started, dockerfile
-redirect_from:
+aliases:
 - /build/hellobuild/
 ---
 
@@ -126,7 +126,7 @@ your Dockerfile, and should be the first line in Dockerfiles.
 > We recommend using `docker/dockerfile:1`, which always points to the latest
 > release of the version 1 syntax. BuildKit automatically checks for updates of
 > the syntax before building, making sure you are using the most current version.
-{: .tip }
+{ .tip }
 
 ### Base image
 

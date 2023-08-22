@@ -1,9 +1,10 @@
 ---
-description: How to use Docker Compose's extends keyword to share configuration between files and projects
+description: How to use Docker Compose's extends keyword to share configuration between
+  files and projects
 keywords: fig, composition, compose, docker, orchestration, documentation, docs
 title: Extend your Compose file
-redirect_from:
- - /compose/extends/
+aliases:
+- /compose/extends/
 ---
 
 Docker Compose's [`extends` attribute](../compose-file/05-services.md#extends) lets you share common configurations
@@ -22,7 +23,7 @@ Compose files. Extend files can contain small fragments of configuration.
 Tracking which fragment of a service is relative to which path is difficult and
 confusing, so to keep paths easier to understand, all paths must be defined
 relative to the base file.
-{: .important}
+{ .important }
 
 ## How it works
 

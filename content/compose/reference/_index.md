@@ -1,11 +1,12 @@
 ---
 description: Overview of the Docker Compose CLI
 keywords: fig, composition, compose, docker, orchestration, cli, reference, docker-compose
-redirect_from:
-- /compose/reference/overview/
 title: Overview of docker compose CLI
+aliases:
+- /compose/reference/overview/
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 This page provides the usage information for the `docker compose` Command.
 
@@ -18,9 +19,9 @@ This page provides the usage information for the `docker compose` Command.
 > to support most of the previous `docker-compose` features and flags. You can
 > run Compose V2 by replacing the hyphen (`-`) with a space, using `docker compose`,
 > instead of `docker-compose`.
-{: .important}
+{ .important }
 
-For more information about Docker Compose V2 GA, see the blog post [Announcing Compose V2 General Availability](https://www.docker.com/blog/announcing-compose-v2-general-availability/){: target="_blank" rel="noopener" class="_"}.
+For more information about Docker Compose V2 GA, see the blog post [Announcing Compose V2 General Availability](https://www.docker.com/blog/announcing-compose-v2-general-availability/).
 
 ## Command options overview and help
 

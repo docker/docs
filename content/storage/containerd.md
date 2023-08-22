@@ -48,11 +48,11 @@ The following steps explain how to enable the containerd snapshotters feature.
 After restarting the daemon, running `docker info` shows that you're using
 containerd snapshotter storage drivers.
 
-{% raw %}
+
 ```console
 $ docker info -f '{{ .DriverStatus }}'
 [[driver-type io.containerd.snapshotter.v1]]
 ```
-{% endraw %}
+
 
 Docker Engine uses the `overlayfs` containerd snapshotter by default.

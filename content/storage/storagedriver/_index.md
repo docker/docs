@@ -2,7 +2,7 @@
 description: Learn the technologies that support storage drivers.
 keywords: container, storage, driver, btrfs, devicemapper, overlayfs, vfs, zfs
 title: About storage drivers
-redirect_from:
+aliases:
 - /en/latest/terms/layer/
 - /engine/installation/userguide/storagedriver/
 - /engine/userguide/storagedriver/imagesandcontainers/
@@ -339,7 +339,7 @@ layers are the same.
     Use the `docker image inspect` command to view the cryptographic IDs of the
     layers in each image:
 
-    {% raw %}
+    
     ```console
     $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-base-image:1.0
     [
@@ -347,9 +347,9 @@ layers are the same.
       "sha256:07b4a9068b6af337e8b8f1f1dae3dd14185b2c0003a9a1f0a6fd2587495b204a"
     ]
     ```
-    {% endraw %}
+    
 
-    {% raw %}
+    
     ```console
     $ docker image inspect --format "{{json .RootFS.Layers}}" acme/my-final-image:1.0
     [
@@ -359,7 +359,7 @@ layers are the same.
       "sha256:e84fb818852626e89a09f5143dbc31fe7f0e0a6a24cd8d2eb68062b904337af4"
     ]
     ```
-    {% endraw %}
+    
 
     Notice that the first two layers are identical in both images. The second
     image adds two additional layers. Shared image layers are only stored once
@@ -376,7 +376,7 @@ layers are the same.
     > additional tools such as `awk` or `sed`. To learn more about formatting
     > the output of docker commands using the `--format` flag, refer to the
     > [format command and log output section](../../config/formatting.md).
-    > We also pretty-printed the JSON output using the [`jq` utility](https://stedolan.github.io/jq/){: target="_blank" rel="noopener" class="_" }
+    > We also pretty-printed the JSON output using the [`jq` utility](https://stedolan.github.io/jq/)
     > for readability.
 
 ### Copying makes containers efficient
@@ -450,7 +450,7 @@ examines how much room they take up.
 2.  Run the `docker ps` command with the `--size` option to verify the 5 containers
     are running, and to see each container's size.
 
-    {% raw %}
+    
     ```console
     $ docker ps --size --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Size}}"
 
@@ -461,7 +461,7 @@ examines how much room they take up.
     a5ff32e2b551   acme/my-final-image:1.0   my_container_2   0B (virtual 7.75MB)
     40ebdd763416   acme/my-final-image:1.0   my_container_1   0B (virtual 7.75MB)
     ```
-    {% endraw %}
+    
 
     The output above shows that all containers share the image's read-only layers
     (7.75MB), but no data was written to the container's filesystem, so no additional
@@ -507,7 +507,7 @@ examines how much room they take up.
     shared. The read-only layers of the containers are not affected, and are still
     shared by all containers.
 
-   {% raw %}
+   
     ```console
     $ docker ps --size --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Size}}"
 
@@ -518,7 +518,7 @@ examines how much room they take up.
     a5ff32e2b551   acme/my-final-image:1.0   my_container_2   5B (virtual 7.75MB)
     40ebdd763416   acme/my-final-image:1.0   my_container_1   5B (virtual 7.75MB)
     ```
-   {% endraw %}
+   
 
 The examples above illustrate how copy-on-write filesystems help making containers
 efficient. Not only does copy-on-write save space, but it also reduces container

@@ -2,8 +2,8 @@
 title: Packet filtering and firewalls
 description: How Docker works with packet filtering, iptables, and firewalls
 keywords: network, iptables, firewall
-redirect_from:
-  - /network/iptables/
+aliases:
+- /network/iptables/
 ---
 
 On Linux, Docker manipulates `iptables` rules to provide network isolation.
@@ -55,7 +55,7 @@ $ sudo iptables -I DOCKER-USER -p tcp -m conntrack --ctorigsrc 1.2.3.4 --ctorigd
 > **Important**
 >
 > Using the `conntrack` extension may result in degraded performance.
-{: .important }
+{ .important }
 
 ### Restrict connections to the Docker host
 
@@ -155,7 +155,7 @@ $ docker network create mybridge \
 
 ## Integration with Firewalld
 
-If you are running Docker with [firewalld](https://firewalld.org){: target="blank" rel="noopener" class=“”}
+If you are running Docker with [firewalld](https://firewalld.org)
 on your system with `--iptables` enabled, Docker automatically creates a `firewalld`
 zone called `docker` and inserts all the network interfaces it creates (for example,
 `docker0`) into the `docker` zone to allow seamless networking.
@@ -172,7 +172,7 @@ Restarting `dockerd` daemon inserts the interface into the `docker` zone.
 
 ## Docker and ufw
 
-[Uncomplicated Firewall](https://launchpad.net/ufw){: target="_blank" rel="noopener"}
+[Uncomplicated Firewall](https://launchpad.net/ufw)
 (ufw) is a frontend that ships with Debian and Ubuntu,
 and it lets you manage firewall rules. Docker and ufw use iptables in ways
 that make them incompatible with each other.

@@ -4,7 +4,7 @@ keywords: company, multiple organizations, manage companies
 title: Overview
 ---
 
-{% include admin-company-overview.md %}
+{{< include "admin-company-overview.md" >}}
 
 <div class="component-container">
 <!--start row-->
@@ -38,4 +38,3 @@ title: Overview
      </div>
     </div>
 </div>
-

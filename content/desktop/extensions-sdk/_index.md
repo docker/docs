@@ -2,8 +2,8 @@
 title: Overview of the Extensions SDK
 description: Overall index for Docker Extensions SDK documentation
 keywords: Docker, Extensions, sdk
-redirect_from:
-  - /desktop/extensions-sdk/dev/overview/
+aliases:
+- /desktop/extensions-sdk/dev/overview/
 ---
 
 The resources in this section help you create your own Docker extension.
@@ -20,7 +20,7 @@ For further information, see [Architecture](architecture/index.md).
 You distribute extensions through Docker Hub. However, you can develop them locally without the need to push 
 the extension to Docker Hub. See [Extensions distribution](extensions/DISTRIBUTION.md) for further details.
 
-{% include extensions-form.md %}
+{{< include "extensions-form.md" >}}
 
 <div class="component-container">
     <!--start row-->

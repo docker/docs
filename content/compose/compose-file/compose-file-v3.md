@@ -1,11 +1,14 @@
 ---
-description: Find a quick reference for Docker Compose version 3, including Docker Engine compatibility, memory limitations, and more. 
-keywords: docker compose ports, docker compose version 3, docker-compose memory limit version 3, docker compose 3 memory limit
+description: Find a quick reference for Docker Compose version 3, including Docker
+  Engine compatibility, memory limitations, and more.
+keywords: docker compose ports, docker compose version 3, docker-compose memory limit
+  version 3, docker compose 3 memory limit
 title: Compose file version 3 reference
 toc_max: 4
 toc_min: 1
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 ## Reference and guidelines
 
@@ -17,7 +20,7 @@ There are several versions of the Compose file format – 1, 2, 2.x, and 3.x. Th
 table below is a quick look. For full details on what each version includes and
 how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
-{% include content/compose-matrix.md %}
+{{< include "content/compose-matrix.md" >}}
 
 ## Compose file structure and examples
 
@@ -31,7 +34,7 @@ topic on [Deploying an app to a Swarm](https://github.com/docker/labs/blob/maste
     <i class="chevron fa fa-fw"></i></div>
     <div class="collapse block" id="collapseSample1">
 <pre><code>
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
 
   redis:
@@ -173,7 +176,7 @@ Configuration options that are applied at build time.
 context:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   webapp:
     build: ./dir
@@ -183,7 +186,7 @@ Or, as an object with the path specified under [context](#context) and
 optionally [Dockerfile](#dockerfile) and [args](#args):
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   webapp:
     build:
@@ -208,7 +211,7 @@ This results in an image named `webapp` and tagged `tag`, built from `./dir`.
 > The `build` option is ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
 > The `docker stack` command does not build images before deploying.
-{: .important }
+{ .important }
 
 #### context
 
@@ -419,7 +422,7 @@ cap_drop:
 >
 > The `cap_add` and `cap_drop` options are ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
-{: .important }
+{ .important }
 
 ### cgroup_parent
 
@@ -433,7 +436,7 @@ cgroup_parent: m-executor-abcd
 >
 > The `cgroup_parent` option is ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
-{: .important }
+{ .important }
 
 ### command
 
@@ -482,7 +485,7 @@ the stack deployment fails with a `config not found` error.
 > compose file format.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   redis:
     image: redis:latest
@@ -515,7 +518,7 @@ the service's task containers.
   because they are mounted in a temporary filesystem, so if you set the writable
   bit, it is ignored. The executable bit can be set. If you aren't familiar with
   UNIX file permission modes, you may find this
-  [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
+  [permissions calculator](http://permissions-calculator.org/)
   useful.
 
 The following example sets the name of `my_config` to `redis_config` within the
@@ -524,7 +527,7 @@ to `103`. The `redis` service does not have access to the `my_other_config`
 config.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   redis:
     image: redis:latest
@@ -562,7 +565,7 @@ an error.
 >
 > The `container_name` option is ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
-{: .important }
+{ .important }
 
 ### credential_spec
 
@@ -604,7 +607,7 @@ When configuring a gMSA credential spec for a service, you only need
 to specify a credential spec with `config`, as shown in the following example:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   myservice:
     image: myimage:latest
@@ -632,7 +635,7 @@ behaviors:
 Simple example:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   web:
     build: .
@@ -665,7 +668,7 @@ sub-options only takes effect when deploying to a [swarm](../../engine/swarm/ind
 ignored by `docker-compose up` and `docker-compose run`, except for `resources`.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   redis:
     image: redis:alpine
@@ -703,7 +706,7 @@ in cases where you want to use your own load balancer, or for Hybrid
 Windows and Linux applications.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 
 services:
   wordpress:
@@ -751,7 +754,7 @@ Specify labels for the service. These labels are *only* set on the service,
 and *not* on any containers for the service.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   web:
     image: web
@@ -763,7 +766,7 @@ services:
 To set labels on containers instead, use the `labels` key outside of `deploy`:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   web:
     image: web
@@ -780,7 +783,7 @@ in the [swarm](../../engine/swarm/index.md) topics.)
 
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   worker:
     image: dockersamples/examplevotingapp_worker
@@ -797,7 +800,7 @@ documentation for a full description of the syntax and available types of
 and [specifying the maximum replicas per node](../../engine/reference/commandline/service_create.md#replicas-max-per-node)
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   db:
     image: postgres
@@ -821,7 +824,7 @@ When there are more tasks requested than running nodes, an error
 `no suitable node (max replicas per node limit exceed)` is raised.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   worker:
     image: dockersamples/examplevotingapp_worker
@@ -841,7 +844,7 @@ If the service is `replicated` (which is the default), specify the number of
 containers that should be running at any given time.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   worker:
     image: dockersamples/examplevotingapp_worker
@@ -873,7 +876,7 @@ In this general example, the `redis` service is constrained to use no more than
 and has `20M` of memory and `0.25` CPU time reserved (as always available to it).
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   redis:
     image: redis:alpine
@@ -897,8 +900,8 @@ services or containers in a swarm.
 on non swarm deployments, use
 [Compose file format version 2 CPU, memory, and other resource options](compose-file-v2.md#cpu-and-other-resources).
 If you have further questions, refer to the discussion on the GitHub
-issue [docker/compose/4513](https://github.com/docker/compose/issues/4513){: target="_blank" rel="noopener" class="_"}.
-{: .important}
+issue [docker/compose/4513](https://github.com/docker/compose/issues/4513).
+{ .important }
 
 ##### Out Of Memory Exceptions (OOME)
 
@@ -927,7 +930,7 @@ Configures if and how to restart containers when they exit. Replaces
   decide immediately).
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   redis:
     image: redis:alpine
@@ -972,7 +975,7 @@ updates.
 > file format.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   vote:
     image: dockersamples/examplevotingapp_vote:before
@@ -1024,7 +1027,7 @@ devices:
 >
 > The `devices` option is ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
-{: .important }
+{ .important }
 
 ### dns
 
@@ -1224,7 +1227,7 @@ external_links:
 >
 > The `external_links` option is ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
-{: .important }
+{ .important }
 
 ### extra_hosts
 
@@ -1326,7 +1329,7 @@ Run an init inside the container that forwards signals and reaps processes.
 Set this option to `true` to enable this feature for the service.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   web:
     image: alpine:latest
@@ -1379,7 +1382,7 @@ labels:
 > `--link` is sharing environmental variables between containers. However, you
 > can use other mechanisms such as volumes to share environment variables between
 > containers in a more controlled way.
-{:.warning}
+{ .warning }
 
 Link to containers in another service. Either specify both the service name and
 a link alias (`"SERVICE:ALIAS"`), or just the service name.
@@ -1412,7 +1415,7 @@ Links also express dependency between services in the same way as
 >
 > The `links` option is ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
-{: .important }
+{ .important }
 
 ### logging
 
@@ -1473,7 +1476,7 @@ files are removed to allow storage of new logs.
 Here is an example `docker-compose.yml` file that limits logging storage:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   some-service:
     image: some-service
@@ -1518,7 +1521,7 @@ network_mode: "container:[container name/id]"
 > * This option is ignored when
 >   [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
 > * `network_mode: "host"` cannot be mixed with [links](#links).
-{: .important }
+{ .important }
 
 ### networks
 
@@ -1566,7 +1569,7 @@ the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on
 the `legacy` network.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 
 services:
   web:
@@ -1619,7 +1622,7 @@ Then, reload the docker daemon and edit docker-compose.yml to contain the follow
 An example:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 
 services:
   app:
@@ -1747,7 +1750,7 @@ container is stopped (manually or otherwise).
 >
 > The `restart` option is ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
-{: .important }
+{ .important }
 
 ### secrets
 
@@ -1759,7 +1762,7 @@ configuration. Two different syntax variants are supported.
 > The secret must already exist or be
 > [defined in the top-level `secrets` configuration](#secrets-configuration-reference)
 > of the compose file, or stack deployment fails.
-{: .important }
+{ .important }
 
 For more information on secrets, see [secrets](../../engine/swarm/secrets.md).
 
@@ -1779,7 +1782,7 @@ command or by another stack deployment. If the external secret does not exist,
 the stack deployment fails with a `secret not found` error.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   redis:
     image: redis:latest
@@ -1813,7 +1816,7 @@ the service's task containers.
   in a temporary filesystem, so if you set the writable bit, it is ignored. The
   executable bit can be set. If you aren't familiar with UNIX file permission
   modes, you may find this
-  [permissions calculator](http://permissions-calculator.org/){: target="_blank" rel="noopener" class="_" }
+  [permissions calculator](http://permissions-calculator.org/)
   useful.
 
 The following example sets name of the `my_secret` to `redis_secret` within the
@@ -1822,7 +1825,7 @@ to `103`. The `redis` service does not have access to the `my_other_secret`
 secret.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   redis:
     image: redis:latest
@@ -1858,7 +1861,7 @@ security_opt:
 >
 > The `security_opt` option is ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
-{: .important }
+{ .important }
 
 ### stop_grace_period
 
@@ -1974,7 +1977,7 @@ more information.
 >
 > The `userns_mode` option is ignored when
 > [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md).
-{: .important }
+{ .important }
 
 ### volumes
 
@@ -2002,7 +2005,7 @@ for mounting a named volume. Named volumes must be listed under the top-level
 `volumes` key, as shown.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   web:
     image: nginx:alpine
@@ -2084,7 +2087,7 @@ expressed in the short form.
   - `size`: the size for the tmpfs mount in bytes
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   web:
     image: nginx:alpine
@@ -2139,7 +2142,7 @@ as a named volume to persist the data on the swarm, _and_ is constrained to run
 only on `manager` nodes. Here is the relevant snip-it from that file:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   db:
     image: postgres:9.4
@@ -2221,7 +2224,7 @@ shared with another service as a volume so that it can be periodically backed
 up:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 
 services:
   db:
@@ -2283,7 +2286,7 @@ In the example below, instead of attempting to create a volume called
 called `data` and mount it into the `db` service's containers.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 
 services:
   db:
@@ -2299,7 +2302,7 @@ volumes:
 > Deprecated in [version 3.4](compose-versioning.md#version-34) file format.
 >
 > external.name was deprecated in version 3.4 file format use `name` instead.
-{: .important }
+{ .important }
 
 You can also specify the name of the volume separately from the name used to
 refer to it within the Compose file:
@@ -2319,7 +2322,7 @@ volumes:
 > automatically created when it is defined by a service. As service tasks are
 > scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
 > creates the volume on the local node. To learn more, see [moby/moby#29976](https://github.com/moby/moby/issues/29976).
-{: .important }
+{ .important }
 
 ### labels
 
@@ -2353,7 +2356,7 @@ volumes that contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 volumes:
   data:
     name: my-app-data
@@ -2362,7 +2365,7 @@ volumes:
 It can also be used in conjunction with the `external` property:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 volumes:
   data:
     external: true
@@ -2428,7 +2431,7 @@ Docker has already created automatically) and an alias that Compose can use
 network using the alias.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 services:
   web:
     networks:
@@ -2501,7 +2504,7 @@ Enable IPv6 networking on this network.
 >
 > `enable_ipv6` requires you to use a version 2 Compose file, as this directive
 > is not yet supported in Swarm mode.
-{: .warning }
+{ .warning }
 
 ### ipam
 
@@ -2572,7 +2575,7 @@ looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 
 services:
   proxy:
@@ -2593,13 +2596,13 @@ networks:
 > Deprecated in [version 3.5](compose-versioning.md#version-35) file format.
 >
 > external.name was deprecated in version 3.5 file format use `name` instead.
-{: .important }
+{ .important }
 
 You can also specify the name of the network separately from the name used to
 refer to it within the Compose file:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 networks:
   outside:
     external:
@@ -2615,7 +2618,7 @@ networks which contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 networks:
   network1:
     name: my-app-net
@@ -2624,7 +2627,7 @@ networks:
 It can also be used in conjunction with the `external` property:
 
 ```yaml
-version: "{{ site.compose_file_v3 }}"
+version: "{{% param "compose_file_v3" %}}"
 networks:
   network1:
     external: true
@@ -2749,13 +2752,13 @@ stack.
 
 ## Variable substitution
 
-{% include content/compose-var-sub.md %}
+{{< include "content/compose-var-sub.md" >}}
 
 ## Extension fields
 
 > Added in [version 3.4](compose-versioning.md#version-34) file format.
 
-{% include content/compose-extfields-sub.md %}
+{{< include "content/compose-extfields-sub.md" >}}
 
 ## Compose documentation
 

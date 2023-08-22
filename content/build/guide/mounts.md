@@ -1,8 +1,9 @@
 ---
 title: Mounts
 description: Introduction to cache mounts and bind mounts in builds
-keywords: >
-  build, buildkit, buildx, guide, tutorial, mounts, cache mounts, bind mounts
+keywords: 'build, buildkit, buildx, guide, tutorial, mounts, cache mounts, bind mounts
+
+  '
 ---
 
 {% include_relative nav.html selected="4" %}
@@ -36,7 +37,7 @@ mount the `/go/pkg/mod` directory as a cache mount:
 
 ```diff
   # syntax=docker/dockerfile:1
-  FROM golang:{{site.example_go_version}}-alpine AS base
+  FROM golang:{{% param "example_go_version" %}}-alpine AS base
   WORKDIR /src
   COPY go.mod go.sum .
 - RUN go mod download
@@ -117,7 +118,7 @@ Update the version of the `chi` package that the server component of the
 application uses:
 
 ```console
-$ docker run -v $PWD:$PWD -w $PWD golang:{{site.example_go_version}}-alpine \
+$ docker run -v $PWD:$PWD -w $PWD golang:{{% param "example_go_version" %}}-alpine \
     go get github.com/go-chi/chi/v5@v5.0.8
 ```
 
@@ -151,7 +152,7 @@ the need for the additional `COPY` instruction (and layer) entirely.
 
 ```diff
   # syntax=docker/dockerfile:1
-  FROM golang:{{site.example_go_version}}-alpine AS base
+  FROM golang:{{% param "example_go_version" %}}-alpine AS base
   WORKDIR /src
 - COPY go.mod go.sum .
   RUN --mount=type=cache,target=/go/pkg/mod/ \
@@ -183,7 +184,7 @@ Similarly, you can use the same technique to remove the need for the second
 
 ```diff
   # syntax=docker/dockerfile:1
-  FROM golang:{{site.example_go_version}}-alpine AS base
+  FROM golang:{{% param "example_go_version" %}}-alpine AS base
   WORKDIR /src
   RUN --mount=type=cache,target=/go/pkg/mod/ \
       --mount=type=bind,source=go.sum,target=go.sum \
@@ -225,4 +226,4 @@ Related information:
 The next section of this guide is an introduction to making your builds
 configurable, using build arguments.
 
-[Build arguments](build-args.md){: .button .primary-btn }
+{{< button text="Build arguments" url="build-args.md" >}}

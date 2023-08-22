@@ -161,7 +161,7 @@ $ sudo apt-get install -y docker-ce-rootless-extras
 {{< tab name="Without packages" >}}
 
 If you do not have permission to run package managers like `apt-get` and `dnf`,
-consider using the installation script available at [https://get.docker.com/rootless](https://get.docker.com/rootless){: target="_blank" rel="noopener" class="_" }.
+consider using the installation script available at [https://get.docker.com/rootless](https://get.docker.com/rootless).
 Since static packages are not available for `s390x`, hence it is not supported for `s390x`.
 
 ```console

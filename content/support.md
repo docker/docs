@@ -2,7 +2,7 @@
 description: Get support
 keywords: Support, Docker Desktop, Docker Hub, Hub, Linux, Mac, Windows
 title: Get support
-redirect_from:
+aliases:
 - /desktop/support/
 ---
 
@@ -10,14 +10,14 @@ Find information on how to get support, and the scope of Docker support.
 
 ## How do I get support?
 
-If you have a paid Docker subscription, raise a ticket through [Docker support](https://hub.docker.com/support/contact/){:target="_blank" rel="noopener" class="_"}.
+If you have a paid Docker subscription, raise a ticket through [Docker support](https://hub.docker.com/support/contact/).
 
 All Docker users can seek support through the following resources, where Docker or the community respond on a best effort basis.
-   - [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win){:target="_blank" rel="noopener" class="_"} 
-   - [Docker Desktop for Mac GitHub repo](https://github.com/docker/for-mac){:target="_blank" rel="noopener" class="_"}
-   - [Docker Desktop for Linux GitHub repo](https://github.com/docker/desktop-linux){:target="_blank" rel="noopener" class="_"}
-   - [Docker Community Forums](https://forums.docker.com/){:target="_blank" rel="noopener" class="_"}
-   - [Docker Community Slack](https://dockercommunity.slack.com/){:target="_blank" rel="noopener" class="_"}
+   - [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win) 
+   - [Docker Desktop for Mac GitHub repo](https://github.com/docker/for-mac)
+   - [Docker Desktop for Linux GitHub repo](https://github.com/docker/desktop-linux)
+   - [Docker Community Forums](https://forums.docker.com/)
+   - [Docker Community Slack](https://dockercommunity.slack.com/)
 
 
 ## What support can I get?
@@ -91,7 +91,7 @@ employees who are directly involved in diagnosing Docker Desktop issues.
 
 By default, Docker, Inc. will delete uploaded diagnostics bundles after 30 days. You may also request the removal of a diagnostics bundle by either specifying the diagnostics ID or via your GitHub ID (if the diagnostics ID is mentioned in a GitHub issue). Docker, Inc. will only use the data in the diagnostics bundle to investigate specific user issues but may derive high-level (non personal) metrics such as the rate of issues from it.
 
-For more information, see [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement){: target="_blank" rel="noopener" class="_"}.
+For more information, see [Docker Data Processing Agreement](https://www.docker.com/legal/data-processing-agreement).
 
 ## What can I do before seeking support?
 

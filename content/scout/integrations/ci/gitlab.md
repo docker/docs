@@ -4,7 +4,7 @@ keywords: supply chain, security, ci, continuous integration, gitlab
 title: Integrate Docker Scout with GitLab CI
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 The following examples runs in GitLab CI in a repository containing a Docker
 image's definition and contents. Triggered by a commit, the pipeline builds the
@@ -45,7 +45,7 @@ settings.
 
 Add the following to the YAML file:
 
-{% raw %}
+
 ```yaml
 script:
   - |
@@ -68,7 +68,7 @@ script:
 
   - docker push "$CI_REGISTRY_IMAGE${tag}"
 ```
-{% endraw %}
+
 
 This creates the flow mentioned previously. If the commit was to the default
 branch, Docker Scout generates a CVE report. If the commit was to a different

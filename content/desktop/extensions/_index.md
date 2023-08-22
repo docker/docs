@@ -12,12 +12,12 @@ You can seamlessly connect your favorite development tools to your application d
 
 Anyone can use Docker Extensions and there is no limit to the number of extensions you can install.
 
-![Extensions Marketplace](/assets/images/extensions4.22.png){:width="750px"}
+![Extensions Marketplace](/assets/images/extensions4.22.png)
 
 ## What extensions are available?
 
 There is a mix of partner and community-built extensions and Docker-built extensions.
-You can explore the list of available extensions in [Docker Hub](https://hub.docker.com/search?q=&type=extension){:target="_blank" rel="noopener" class="_"} or in the Extensions Marketplace within Docker Desktop.
+You can explore the list of available extensions in [Docker Hub](https://hub.docker.com/search?q=&type=extension) or in the Extensions Marketplace within Docker Desktop.
 
 To find out more about Docker Extensions, we recommend the video walkthrough from DockerCon 2022:
 

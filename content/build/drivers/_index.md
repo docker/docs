@@ -1,10 +1,10 @@
 ---
-title: "Drivers overview"
+title: Drivers overview
 keywords: build, buildx, driver, builder, docker-container, kubernetes, remote
-redirect_from:
-  - /build/buildx/drivers/
-  - /build/building/drivers/
-  - /build/buildx/multiple-builders/
+aliases:
+- /build/buildx/drivers/
+- /build/building/drivers/
+- /build/buildx/multiple-builders/
 ---
 
 Buildx drivers are configurations for how and where the BuildKit backend runs.

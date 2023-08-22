@@ -8,14 +8,13 @@ provisioning script tailored to your needs. Also refer to the
 [install using the repository](#install-using-the-repository) steps to learn
 about installation steps to install using the package repository. The source code
 for the script is open source, and you can find it in the
-[`docker-install` repository on GitHub](https://github.com/docker/docker-install){:target="_blank"
-rel="noopener" class="_"}.
+[`docker-install` repository on GitHub](https://github.com/docker/docker-install).
 
 <!-- prettier-ignore -->
 Always examine scripts downloaded from the internet before running them locally.
 Before installing, make yourself familiar with potential risks and limitations
 of the convenience script:
-{:.warning}
+{ .warning }
 
 - The script requires `root` or `sudo` privileges to run.
 - The script attempts to detect your Linux distribution and version and

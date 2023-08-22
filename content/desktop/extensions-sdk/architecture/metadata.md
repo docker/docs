@@ -2,7 +2,7 @@
 title: Extension metadata
 description: Docker extension metadata
 keywords: Docker, extensions, sdk, metadata
-redirect_from:
+aliases:
 - /desktop/extensions-sdk/extensions/METADATA
 ---
 

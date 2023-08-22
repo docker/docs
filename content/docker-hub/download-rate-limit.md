@@ -12,18 +12,18 @@ Docker Hub limits the number of Docker image downloads, or pulls, based on the a
 | --------- | ---------- |
 | Anonymous users | 100 pulls per 6 hours per IP address |
 | [Authenticated users](#how-do-i-authenticate-pull-requests)| 200 pulls per 6 hour period |
-| Users with a paid [Docker subscription](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} | Up to 5000 pulls per day |
+| Users with a paid [Docker subscription](https://www.docker.com/pricing) | Up to 5000 pulls per day |
 
 If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
 
-Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"} and [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"} programs. See [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} and [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates){: target="_blank" rel="noopener" class="_"} for details.
+Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/) and [Publisher](https://www.docker.com/partners/programs) programs. See [Docker Pricing](https://www.docker.com/pricing) and [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates) for details.
 
 ## Definition of limits
 
 A user's limit is equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
 advantage of this, you must log in to 
-[Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_"} 
+[Docker Hub](https://hub.docker.com/) 
 as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
 Unauthenticated (anonymous) users will have the limits enforced via IP.
@@ -99,7 +99,7 @@ If you don't see any RateLimit header, it could be because the image or your IP 
 
 To take advantage of the higher limits included in a paid Docker subscription, you must [authenticate pulls](#how-do-i-authenticate-pull-requests) with your user account.
 
-A Pro, Team, or a Business tier doesn't increase limits on your images for other users. See Docker's [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/){: target="_blank" rel="noopener" class="_"}, [Publisher](https://www.docker.com/partners/programs){: target="_blank" rel="noopener" class="_"}, or [Large Organization](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"} offerings.
+A Pro, Team, or a Business tier doesn't increase limits on your images for other users. See Docker's [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/), [Publisher](https://www.docker.com/partners/programs), or [Large Organization](https://www.docker.com/pricing) offerings.
 
 ## How do I authenticate pull requests?
 
@@ -121,27 +121,27 @@ If you're running Docker Swarm, you must use the `-- with-registry-auth` flag to
 
 ### GitHub Actions
 
-If you're using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub){: target="_blank" rel="noopener" class="_"}. If you are using another Action, you must add your username and access token in a similar way for authentication.
+If you're using GitHub Actions to build and push Docker images to Docker Hub, see [login action](https://github.com/docker/login-action#dockerhub). If you are using another Action, you must add your username and access token in a similar way for authentication.
 
 ### Kubernetes
 
-If you're running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/){: target="_blank" rel="noopener" class="_"} for information on authentication.
+If you're running Kubernetes, follow the instructions in [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) for information on authentication.
 
 ### Third-party platforms
 
 If you're using any third-party platforms, follow your provider’s instructions on using registry authentication.
 
-- [Artifactory](https://www.jfrog.com/confluence/display/JFROG/Advanced+Settings#AdvancedSettings-RemoteCredentials){: target="_blank" rel="noopener" class="_"}
-- [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/){: target="_blank" rel="noopener" class="_"}
-- [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html){: target="_blank" rel="noopener" class="_"}
-- [Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml#sep-docreg){: target="_blank" rel="noopener" class="_"}
-- [Chipper CI](https://docs.chipperci.com/builds/docker/#rate-limit-auth){: target="_blank" rel="noopener" class="_"}
-- [CircleCI](https://circleci.com/docs/2.0/private-images/){: target="_blank" rel="noopener" class="_"}
-- [Codefresh](https://codefresh.io/docs/docs/docker-registries/external-docker-registries/docker-hub/){: target="_blank" rel="noopener" class="_"}
-- [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images){: target="_blank" rel="noopener" class="_"}
-- [GitLab](https://docs.gitlab.com/ee/user/packages/container_registry/#authenticate-with-the-container-registry){: target="_blank" rel="noopener" class="_"}
-- [LayerCI](https://layerci.com/docs/advanced-workflows#logging-in-to-docker){: target="_blank" rel="noopener" class="_"}
-- [TeamCity](https://www.jetbrains.com/help/teamcity/integrating-teamcity-with-docker.html#Conforming+with+Docker+download+rate+limits){: target="_blank" rel="noopener" class="_"}
+- [Artifactory](https://www.jfrog.com/confluence/display/JFROG/Advanced+Settings#AdvancedSettings-RemoteCredentials)
+- [AWS CodeBuild](https://aws.amazon.com/blogs/devops/how-to-use-docker-images-from-a-private-registry-in-aws-codebuild-for-your-build-environment/)
+- [AWS ECS/Fargate](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html)
+- [Azure Pipelines](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml#sep-docreg)
+- [Chipper CI](https://docs.chipperci.com/builds/docker/#rate-limit-auth)
+- [CircleCI](https://circleci.com/docs/2.0/private-images/)
+- [Codefresh](https://codefresh.io/docs/docs/docker-registries/external-docker-registries/docker-hub/)
+- [Drone.io](https://docs.drone.io/pipeline/docker/syntax/images/#pulling-private-images)
+- [GitLab](https://docs.gitlab.com/ee/user/packages/container_registry/#authenticate-with-the-container-registry)
+- [LayerCI](https://layerci.com/docs/advanced-workflows#logging-in-to-docker)
+- [TeamCity](https://www.jetbrains.com/help/teamcity/integrating-teamcity-with-docker.html#Conforming+with+Docker+download+rate+limits)
 
 ## Other limits
 

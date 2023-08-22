@@ -12,7 +12,7 @@ Before you publish your image, you need an image to publish. For this guide, use
 
 To get the image, use Docker Desktop to search for the `welcome-to-docker` image, and then select **Pull**.
 
-![Pulling the welcome-to-docker image](images/getting-started-pull.gif){:width="500px"}
+![Pulling the welcome-to-docker image](images/getting-started-pull.gif)
 
 ## Step 2: Sign in to Docker
 
@@ -36,7 +36,7 @@ In Docker Desktop, go to the **Images** tab and find your image. In the **Action
 
 ## Step 5: Verify the image is on Docker Hub
 
-That's it! Your image is now shared on Docker Hub. In your browser, go to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"} and verify that you see the `welcome-to-docker` repository.
+That's it! Your image is now shared on Docker Hub. In your browser, go to [Docker Hub](https://hub.docker.com) and verify that you see the `welcome-to-docker` repository.
 
 ## What's next
 

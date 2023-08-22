@@ -2,7 +2,7 @@
 description: Description of labels, which are used to manage metadata on Docker objects.
 keywords: Usage, user guide, labels, metadata, docker, documentation, examples, annotating
 title: Docker object labels
-redirect_from:
+aliases:
 - /engine/userguide/labels-custom-metadata/
 ---
 

@@ -1,7 +1,7 @@
 ---
-title: "Building from Compose file"
+title: Building from Compose file
 keywords: build, buildx, bake, buildkit, compose
-redirect_from:
+aliases:
 - /build/customize/bake/compose-file/
 ---
 
@@ -97,7 +97,7 @@ $ docker buildx bake --print
 The compose format has some limitations compared to the HCL format:
 
 * Specifying variables or global scope attributes is not yet supported
-* `inherits` service field is not supported, but you can use [YAML anchors](../../compose/compose-file/10-fragments.md){:target="blank" rel="noopener" class=""}
+* `inherits` service field is not supported, but you can use [YAML anchors](../../compose/compose-file/10-fragments.md)
   to reference other services like the example above
 
 ## `.env` file

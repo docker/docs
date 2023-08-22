@@ -86,4 +86,3 @@ They can go to the invitee list in the org view and remove them.
 ### How's the flow for service account authentication different from a UI user account?
 
 It isn't; we don't differentiate the two in product.
-

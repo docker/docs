@@ -1,10 +1,10 @@
 ---
 description: Describes how to use the Graylog Extended Format logging driver.
 keywords: graylog, gelf, logging, driver
-redirect_from:
+title: Graylog Extended Format logging driver
+aliases:
 - /engine/reference/logging/gelf/
 - /engine/admin/logging/gelf/
-title: Graylog Extended Format logging driver
 ---
 
 The `gelf` logging driver is a convenient format that is understood by a number of tools such as

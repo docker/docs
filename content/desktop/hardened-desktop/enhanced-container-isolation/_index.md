@@ -1,5 +1,6 @@
 ---
-description: Enhanced Container Isolation - benefits, why use it, how it differs to Docker rootless, who it is for
+description: Enhanced Container Isolation - benefits, why use it, how it differs to
+  Docker rootless, who it is for
 keywords: containers, rootless, security, sysbox, runtime
 title: What is Enhanced Container Isolation?
 ---
@@ -57,7 +58,7 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 >**Important**
 >
 >Enhanced Container Isolation does not protect Kubernetes pods. For more information on known limitations and workarounds, see [FAQs and known issues](faq.md).
-{: .important}
+{ .important }
 
 ### What host OSes / platforms is Enhanced Container Isolation supported on?
 
@@ -85,7 +86,7 @@ To enable Enhanced Container Isolation as a developer:
 >**Important**
 >
 >Enhanced Container Isolation does not protect containers created prior to enabling ECI. For more information on known limitations and workarounds, see [FAQs and known issues](faq.md).
-{: .important}
+{ .important }
 
 #### As an admin
 
@@ -113,7 +114,7 @@ For this to take effect:
 >Important
   >
   >Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
-  {: .important}
+  { .important }
 
 ### What do users see when this setting is enforced by an admin?
 
@@ -152,7 +153,7 @@ This means that the root user in the container (0) is in fact the root user in t
 Since Enhanced Container Isolation [uses the Sysbox container runtime](how-eci-works.md) embedded in the Docker Desktop Linux VM, another way to determine if a container is running with Enhanced Container Isolation is by using `docker inspect`:
 
 {% highlight liquid %}
-docker inspect --format={% raw %}'{{.HostConfig.Runtime}}'{% endraw %} my_container
+docker inspect --format='{{.HostConfig.Runtime}}' my_container
 {% endhighlight %}
 
 It outputs:

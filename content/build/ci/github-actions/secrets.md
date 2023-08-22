@@ -3,7 +3,7 @@ title: Using secrets with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, secret
 ---
 
-In the following example uses and exposes the [`GITHUB_TOKEN` secret](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret){:target="blank" rel="noopener" class=""}
+In the following example uses and exposes the [`GITHUB_TOKEN` secret](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret)
 as provided by GitHub in your workflow.
 
 First, create a `Dockerfile` that uses the secret:
@@ -18,7 +18,7 @@ RUN --mount=type=secret,id=github_token \
 In this example, the secret name is `github_token`. The following workflow
 exposes this secret using the `secrets` input:
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -51,7 +51,7 @@ jobs:
             "github_token=${{ secrets.GITHUB_TOKEN }}"
 ```
 
-{% endraw %}
+
 
 > **Note**
 >
@@ -62,11 +62,11 @@ jobs:
 >   "MY_SECRET=./secret.txt"
 > ```
 
-If you're using [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets){:target="blank" rel="noopener" class=""}
+If you're using [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 and need to handle multi-line value, you will need to place the key-value pair
 between quotes:
 
-{% raw %}
+
 ```yaml
 secrets: |
   "MYSECRET=${{ secrets.GPG_KEY }}"
@@ -81,7 +81,7 @@ secrets: |
   ccc"
   "JSON_SECRET={""key1"":""value1"",""key2"":""value2""}"
 ```
-{% endraw %}
+
 
 | Key              | Value                               |
 |------------------|-------------------------------------|

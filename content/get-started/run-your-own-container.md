@@ -24,7 +24,7 @@ $ git clone https://github.com/docker/welcome-to-docker
 
 If you don't have Git, download the source and extract it.
 
-[Download the source](https://github.com/docker/welcome-to-docker/archive/refs/heads/main.zip){: .button .primary-btn}
+{{< button text="Download the source" url="https://github.com/docker/welcome-to-docker/archive/refs/heads/main.zip" >}}
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -47,17 +47,17 @@ Building the image may take some time. After your image is built, you can view y
 
 To run your image as a container, go to the **Images** tab, and then select **Run** in the **Actions** column of your image. When the **Optional settings** appear, specify the **Host port** number `8089` and then select **Run**.
 
-![Running an image in Docker Desktop](images/getting-started-run-image.gif){:width="500px"}
+![Running an image in Docker Desktop](images/getting-started-run-image.gif)
 
 ## Step 5: Verify that your container is running
 
-You can use Docker Desktop to view and access running containers. Go to the **Containers** tab to view your container and select the link in the **Port(s)** column or go to [http://localhost:8089](http://localhost:8089){:target="_blank" rel="noopener" class="_"} to verify that the application is running.
+You can use Docker Desktop to view and access running containers. Go to the **Containers** tab to view your container and select the link in the **Port(s)** column or go to [http://localhost:8089](http://localhost:8089) to verify that the application is running.
 
 ## What's next
 
 In this guide, you built your own image. When running containers on Docker Desktop, you don’t need to build your own image from scratch. You can also run images created by others on Docker Hub.
 
-[Run Docker Hub images](./run-docker-hub-images.md){: .button .primary-btn}
+{{< button text="Run Docker Hub images" url="./run-docker-hub-images.md" >}}
 
 ## Dive deeper
 

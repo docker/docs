@@ -1,8 +1,9 @@
 ---
-description: Instructions for installing Docker as a binary. Mostly meant for hackers who want to try out Docker on a variety of environments.
+description: Instructions for installing Docker as a binary. Mostly meant for hackers
+  who want to try out Docker on a variety of environments.
 keywords: binaries, installation, docker, documentation, linux
 title: Install Docker Engine from binaries
-redirect_from:
+aliases:
 - /engine/installation/binaries/
 - /engine/installation/linux/docker-ce/binaries/
 - /install/linux/docker-ce/binaries/
@@ -30,7 +31,7 @@ redirect_from:
 > On Windows and Mac, we recommend that you install [Docker Desktop](../../desktop/index.md)
 > instead. For Linux, we recommend that you follow the instructions specific for
 > your distribution.
-{: .important}
+{ .important }
 
 If you want to try Docker or use it in a testing environment, but you're not on
 a supported platform, you can try installing from static binaries. If possible,
@@ -85,7 +86,7 @@ instructions for enabling and configuring AppArmor or SELinux.
 > If either of the security mechanisms is enabled, do not disable it as a
 > work-around to make Docker or its containers run. Instead, configure it
 > correctly to fix any problems.
-{:.warning}
+{ .warning }
 
 ##### Docker daemon considerations
 
@@ -139,7 +140,7 @@ instructions for enabling and configuring AppArmor or SELinux.
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 ## Install client binaries on macOS
 

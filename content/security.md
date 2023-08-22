@@ -8,9 +8,9 @@ toc_max: 2
 
 ## Text4Shell CVE-2022-42889
 
-[CVE-2022-42889](https://nvd.nist.gov/vuln/detail/CVE-2022-42889){:target="_blank" rel="noopener" class="_"} has been discovered in the popular Apache Commons Text library. Versions of this library up to but not including 1.10.0 are affected by this vulnerability.
+[CVE-2022-42889](https://nvd.nist.gov/vuln/detail/CVE-2022-42889) has been discovered in the popular Apache Commons Text library. Versions of this library up to but not including 1.10.0 are affected by this vulnerability.
 
-We strongly encourage you to update to the latest version of [Apache Commons Text](https://commons.apache.org/proper/commons-text/download_text.cgi){:target="_blank" rel="noopener" class="_"}.
+We strongly encourage you to update to the latest version of [Apache Commons Text](https://commons.apache.org/proper/commons-text/download_text.cgi).
 
 ### Scan images on Docker Hub
 
@@ -27,7 +27,7 @@ the Text4Shell CVE in the vulnerability report. For detailed instructions, see [
 > We will be updating this section with the latest information. We recommend
 > that you revisit this section to view the list of affected images and update
 > images to the patched version as soon as possible to remediate the issue.
-{: .important}
+{ .important }
 
 A number of [Docker Official Images](../docker-hub/official_images.md) contain the vulnerable versions of
 Apache Commons Text. The following table lists Docker Official Images that
@@ -51,7 +51,7 @@ vulnerable for other reasons. We recommend that you also review the guidelines p
 Docker Desktop versions 4.3.0 and 4.3.1 have a bug that may log sensitive information (access token or password) on the user's machine during login. This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user has logged in while on 4.3.0, 4.3.1. Gaining access to this data would require having access to the user’s local files. This vulnerability has been fixed in version 4.3.2 or higher. Users should update to version 4.3.2 and may want to update their password. Users should not send local log files to anyone. Users can manually delete their log files, they can be located in the following folder: `~/Library/Containers/com.docker.docker/Data/log/host/` on Mac, and in `C:\Users\<username>\AppData\Roaming\Docker\log\host\` on Windows. When a user installs 4.3.2 or higher, we will delete their local log files, so there is no risk of leakage after an update.
 
 Additionally, these logs may be included when users upload diagnostics, meaning access tokens and passwords might have been shared with Docker. This only affects users if they are on Docker Desktop 4.3.0, 4.3.1, and the user has logged in while on 4.3.0, 4.3.1 and have gone through the process of submitting diagnostics to Docker. Only Docker support Engineers working on an active support case could have access to the diagnostic files, minimizing leakage risk from these files. We have deleted all potentially sensitive diagnostic files from our data storage and will continue to delete diagnostics reported from the affected versions on an ongoing basis.
-For detailed information, see [CVE-2021-45449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45449){: target="_blank" rel="noopener" class="_"}.
+For detailed information, see [CVE-2021-45449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45449).
 
 
 ### References
@@ -61,8 +61,7 @@ For detailed information, see [CVE-2021-45449](https://cve.mitre.org/cgi-bin/cve
 
 ## Log4j 2 CVE-2021-44228
 
-The [Log4j 2 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
-target="_blank" rel="noopener" class="_"} vulnerability in Log4j 2, a very common Java logging library, allows remote code execution, often from a context that is easily available to an attacker. For example, it was found in Minecraft servers which allowed the commands to be typed into chat logs as these were then sent to the logger. This makes it a very serious vulnerability, as the logging library is used so widely and it may be simple to exploit. Many open source maintainers are working hard with fixes and updates to the software ecosystem.
+The [Log4j 2 CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) vulnerability in Log4j 2, a very common Java logging library, allows remote code execution, often from a context that is easily available to an attacker. For example, it was found in Minecraft servers which allowed the commands to be typed into chat logs as these were then sent to the logger. This makes it a very serious vulnerability, as the logging library is used so widely and it may be simple to exploit. Many open source maintainers are working hard with fixes and updates to the software ecosystem.
 
 The vulnerable versions of Log4j 2 are versions 2.0 to version 2.14.1 inclusive. The first fixed version is 2.15.0. We strongly encourage you to update to the [latest version](https://logging.apache.org/log4j/2.x/download.html) if you can. If you are using a version before 2.0, you are also not vulnerable.
 
@@ -76,13 +75,12 @@ vulnerable versions.
 > CVE-2021-45046
 >
 > As an update to
-> [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
-target="_blank" rel="noopener" class="_"}, the fix made in version 2.15.0 was
+> [CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228), the fix made in version 2.15.0 was
 > incomplete. Additional issues have been identified and are tracked with
-> [CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046){: target="_blank" rel="noopener" class="_"} and
-> [CVE-2021-45105](https://nvd.nist.gov/vuln/detail/CVE-2021-45105){: target="_blank" rel="noopener" class="_"}.
+> [CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046) and
+> [CVE-2021-45105](https://nvd.nist.gov/vuln/detail/CVE-2021-45105).
 > For a more complete fix to this vulnerability, we recommended that you update to 2.17.0 where possible.
-{: .important}
+{ .important }
 
 ### Scan images on Docker Hub
 
@@ -99,7 +97,7 @@ Log4j 2 CVE in the vulnerability report. For detailed instructions, see [Scan im
 > We will be updating this section with the latest information. We recommend
 > that you revisit this section to view the list of affected images and update
 > images to the patched version as soon as possible to remediate the issue.
-{: .important}
+{ .important }
 
 A number of [Docker Official Images](../docker-hub/official_images.md) contain the vulnerable versions of
 Log4j 2 CVE-2021-44228. The following table lists Docker Official Images that
@@ -122,9 +120,8 @@ vulnerable for other reasons. We recommend that you also review the guidelines p
 
 > **Note**
 >
-> Although [xwiki](https://hub.docker.com/_/xwiki){:
-target="_blank" rel="noopener" class="_"} images may be detected as vulnerable
+> Although [xwiki](https://hub.docker.com/_/xwiki) images may be detected as vulnerable
 by some scanners, the authors believe the images are not vulnerable by Log4j 2
 CVE as the API jars do not contain the vulnerability.
-> The [Nuxeo](https://hub.docker.com/_/nuxeo){: target="_blank" rel="noopener" class="_"}
+> The [Nuxeo](https://hub.docker.com/_/nuxeo)
 > image is deprecated and will not be updated.

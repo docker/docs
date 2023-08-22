@@ -43,7 +43,7 @@ Docker Hub sends the following billing-related emails:
 
 ### Does Docker offer academic pricing?
 
-Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target="blank" rel="noopener" class=""}.
+Contact the [Docker Sales Team](https://www.docker.com/company/contact).
 
 ### Do I need to do anything at the end of my subscription term?
 

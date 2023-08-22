@@ -1,9 +1,11 @@
 ---
-description: General overview for the different ways you can work with multiple compose files in Docker Compose
+description: General overview for the different ways you can work with multiple compose
+  files in Docker Compose
 keywords: compose, compose file, merge, extends, include, docker compose
 title: Overview
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 This section contains information on the three key ways you can use multiple Compose files in your Compose application. 
 
@@ -15,4 +17,4 @@ Docker Compose provides three ways to manage this complexity when working with m
 
 - [Extend a Compose file](extends.md) by referring to another Compose file and selecting the bits you want to use in your own application, with the ability to override some attributes.
 - [Merge a set of Compose files](merge.md) together to create a composite Compose file.
-- [Include other Compose files](include.md) directly in to your Compose file. 
+- [Include other Compose files](include.md) directly in to your Compose file.

@@ -59,7 +59,7 @@ Following are the examples of errors on MacOS which indicate that the startup fa
 
 Docker Desktop requires a processor (CPU) that supports virtualization and, more
 specifically, the [Apple Hypervisor
-framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/){:target="_blank" rel="noopener" class="_"}.
+framework](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/).
 Docker Desktop is only compatible with Mac systems that have a CPU that supports the Hypervisor framework. Most Macs built in 2010 and later support it,as described in the Apple Hypervisor Framework documentation about supported hardware:
 
 *Generally, machines with an Intel VT-x feature set that includes Extended Page
@@ -77,7 +77,7 @@ If your Mac supports the Hypervisor Framework, the command prints
 If not, the command prints `kern.hv_support: 0`.
 
 See also, [Hypervisor Framework
-Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/){:target="_blank" rel="noopener" class="_"}
+Reference](https://developer.apple.com/library/mac/documentation/DriversKernelHardware/Reference/Hypervisor/)
 in the Apple documentation, and Docker Desktop [Mac system requirements](../install/mac-install.md#system-requirements).
 
 ### VPNKit keeps breaking
@@ -93,7 +93,7 @@ To continue using VPNKit, add `"networkType":"vpnkit"` to your `settings.json` f
 #### Permissions errors on data directories for shared volumes
 
 When sharing files from Windows, Docker Desktop sets permissions on [shared volumes](../settings/windows.md#file-sharing)
-to a default value of [0777](https://chmodcommand.com/chmod-0777/){:target="_blank" rel="noopener" class="_"}
+to a default value of [0777](https://chmodcommand.com/chmod-0777/)
 (`read`, `write`, `execute` permissions for `user` and for `group`).
 
 The default permissions on shared volumes are not configurable. If you are
@@ -136,7 +136,7 @@ are used, `docker run` fails with syntax errors.
 
 For an example of this issue and the resolution, see this issue on GitHub:
 [Docker RUN fails to execute shell
-script](https://github.com/moby/moby/issues/24388){:target="_blank" rel="noopener" class="_"}.
+script](https://github.com/moby/moby/issues/24388).
 
 #### Path conversion on Windows
 
@@ -233,30 +233,30 @@ Your machine must have the following features for Docker Desktop to function cor
 #### WSL 2 and Windows Home
 
 1. Virtual Machine Platform
-2. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10){:target="_blank" rel="noopener" class="_"}
-3. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
+2. [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+3. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html)
 4. Hypervisor enabled at Windows startup
 
-![WSL 2 enabled](../images/wsl2-enabled.png){:width="600px"}
+![WSL 2 enabled](../images/wsl2-enabled.png)
 
 #### Hyper-V
 
 On Windows 10 Pro or Enterprise, you can also use Hyper-V with the following features enabled:
 
-1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview){:target="_blank" rel="noopener" class="_"}
+1. [Hyper-V](https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-technology-overview)
    installed and working
-2. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html){:target="_blank" rel="noopener" class="_"}
+2. [Virtualization enabled in the BIOS](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html)
 3. Hypervisor enabled at Windows startup
 
-![Hyper-V on Windows features](../images/hyperv-enabled.png){:width="600px"}
+![Hyper-V on Windows features](../images/hyperv-enabled.png)
 
 Docker Desktop requires Hyper-V as well as the Hyper-V Module for Windows
 PowerShell to be installed and enabled. The Docker Desktop installer enables
 it for you.
 
-Docker Desktop also needs two CPU hardware features to use Hyper-V: Virtualization and Second Level Address Translation (SLAT), which is also called Rapid Virtualization Indexing (RVI). On some systems, Virtualization must be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements){:target="_blank" rel="noopener" class="_"} for more details.
+Docker Desktop also needs two CPU hardware features to use Hyper-V: Virtualization and Second Level Address Translation (SLAT), which is also called Rapid Virtualization Indexing (RVI). On some systems, Virtualization must be enabled in the BIOS. The steps required are vendor-specific, but typically the BIOS option is called `Virtualization Technology (VTx)` or something similar. Run the command `systeminfo` to check all required Hyper-V features. See [Pre-requisites for Hyper-V on Windows 10](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/reference/hyper-v-requirements) for more details.
 
-To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install){:target="_blank" rel="noopener" class="_"}. A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker Desktop does not work correctly.
+To install Hyper-V manually, see [Install Hyper-V on Windows 10](https://msdn.microsoft.com/en-us/virtualization/hyperv_on_windows/quick_start/walkthrough_install). A reboot is *required* after installation. If you install Hyper-V without rebooting, Docker Desktop does not work correctly.
 
 From the start menu, type **Turn Windows features on or off** and press enter.
 In the subsequent screen, verify that Hyper-V is enabled.
@@ -266,12 +266,12 @@ In the subsequent screen, verify that Hyper-V is enabled.
 In addition to [Hyper-V](#hyper-v) or [WSL 2](../wsl/index.md), virtualization must be turned on. Check the
 Performance tab on the Task Manager:
 
-![Task Manager](../images/virtualization-enabled.png){:width="700px"}
+![Task Manager](../images/virtualization-enabled.png)
 
 If you manually uninstall Hyper-V, WSL 2 or turn off virtualization,
 Docker Desktop cannot start. 
 
-To turn on nested virtualisation, see [Run Docker Desktop for Windows in a VM or VDI environment](../vm-vdi.md#turn-on-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
+To turn on nested virtualisation, see [Run Docker Desktop for Windows in a VM or VDI environment](../vm-vdi.md#turn-on-nested-virtualization).
 
 #### Hypervisor enabled at Windows startup
 
@@ -284,7 +284,7 @@ Virtual Box) and video game installers turn off hypervisor on boot. To turn it b
 2. Run `bcdedit /set hypervisorlaunchtype auto`.
 3. Restart Windows.
 
-You can also refer to the [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt){:target="_blank" rel="noopener" class="_"} on Code flow guard (CFG) settings.
+You can also refer to the [Microsoft TechNet article](https://social.technet.microsoft.com/Forums/en-US/ee5b1d6b-09e2-49f3-a52c-820aafc316f9/hyperv-doesnt-work-after-upgrade-to-windows-10-1809?forum=win10itprovirt) on Code flow guard (CFG) settings.
 
 #### Turn on nested virtualization
 
@@ -294,7 +294,7 @@ If you are using Hyper-V and you get the following error message when running Do
 The Virtual Machine Management Service failed to start the virtual machine 'DockerDesktopVM' because one of the Hyper-V components is not running
 ```
 
-Try [enabling nested virtualization](../vm-vdi.md#turn-on-nested-virtualization){:target="_blank" rel="noopener" class="_"}.
+Try [enabling nested virtualization](../vm-vdi.md#turn-on-nested-virtualization).
 
 
 ### Windows containers and Windows Server
@@ -302,8 +302,8 @@ Try [enabling nested virtualization](../vm-vdi.md#turn-on-nested-virtualization)
 Docker Desktop is not supported on Windows Server. If you have questions about how to run Windows containers on Windows 10, see
 [Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
 
-A full tutorial is available in [docker/labs](https://github.com/docker/labs){:target="_blank" rel="noopener" class="_"} on
-[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md){:target="_blank" rel="noopener" class="_"}.
+A full tutorial is available in [docker/labs](https://github.com/docker/labs) on
+[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
 
 You can install a native Windows binary which allows you to develop and run
 Windows containers without Docker Desktop. However, if you install Docker this way, you cannot develop or run Linux containers. If you try to run a Linux container on the native Docker daemon, an error occurs:

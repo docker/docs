@@ -10,7 +10,7 @@ This guide will show you how to create, test, and deploy containerized Go applic
 
 > **Acknowledgment**
 >
-> We'd like to thank [Oliver Frolovs](https://www.linkedin.com/in/ofr/){:target="_blank" rel="noopener" class="_"} for his contribution to this guide.
+> We'd like to thank [Oliver Frolovs](https://www.linkedin.com/in/ofr/) for his contribution to this guide.
 
 ## What will you learn?
 
@@ -20,13 +20,13 @@ In this guide, you’ll learn how to:
 * Run the image as a container in your local Docker instance and manage the container's lifecycle.
 * Use multi-stage builds for building small images efficiently while keeping your *Dockerfiles* easy to read and maintain.
 * Use Docker Compose to orchestrate running of multiple related containers together in a development environment.
-* Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions){:target="_blank" rel="noopener" class="_"}
-* Deploy your containerized Go application to Google [Cloud Run](https://cloud.google.com/run/docs/overview/what-is-cloud-run){:target="_blank" rel="noopener" class="_"} serverless platform.
+* Configure a CI/CD pipeline for your application using [GitHub Actions](https://docs.github.com/en/actions)
+* Deploy your containerized Go application to Google [Cloud Run](https://cloud.google.com/run/docs/overview/what-is-cloud-run) serverless platform.
 
 ## Prerequisites
 
 Some basic understanding of Go and its toolchain is assumed. This is not a Go tutorial. If you are new to the language, 
-the [Go website](https://golang.org/){: target="_blank" rel="noopener" class="_"} is a great place to explore, 
+the [Go website](https://golang.org/) is a great place to explore, 
 so *go* (pun intended) check it out!
 
 You also must know some basic [Docker concepts](../../get-started/overview.md) as well as to 
@@ -44,4 +44,4 @@ The aim of this guide is to provide enough examples and instructions for you to 
 
 Let's get started!
 
-[Build your Go image](build-images.md){: .button .primary-btn}
+{{< button text="Build your Go image" url="build-images.md" >}}

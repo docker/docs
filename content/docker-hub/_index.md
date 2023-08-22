@@ -1,33 +1,34 @@
 ---
-description: Learn about Docker Hub features and the administrative tasks available in Docker Hub
+description: Learn about Docker Hub features and the administrative tasks available
+  in Docker Hub
 keywords: Docker, docker, docker hub, hub, overview
 title: Overview of Docker Hub
 grid:
-  - title: "Create a Docker ID"
-    description:
-      "Register and create a new Docker ID."
-    icon: "fingerprint"
-    link: "/docker-id"
-  - title: "Create a repository"
-    description: "Create a repository to share your images with your team, customers, or the Docker community."
-    icon: "explore"
-    link: "/docker-hub/repos"
-  - title: "Quickstart"
-    description: "Step-by-step instructions on getting started on Docker Hub."
-    icon: "checklist"
-    link: "/docker-hub"
-  - title: "Manage access tokens"
-    description: "Create personal access tokens as an alternative to your password."
-    icon: "key"
-    link: "/docker-hub/access-tokens"
-  - title: "Official images"
-    description: "A curated set of Docker repositories hosted on Docker Hub."
-    icon: "verified"
-    link: "/docker-hub/official_images"
-  - title: "Release notes"
-    description: "Find out about new features, improvements, and bug fixes."
-    icon: "note_add"
-    link: "/docker-hub/release-notes"
+- title: Create a Docker ID
+  description: Register and create a new Docker ID.
+  icon: fingerprint
+  link: /docker-id
+- title: Create a repository
+  description: Create a repository to share your images with your team, customers,
+    or the Docker community.
+  icon: explore
+  link: /docker-hub/repos
+- title: Quickstart
+  description: Step-by-step instructions on getting started on Docker Hub.
+  icon: checklist
+  link: /docker-hub
+- title: Manage access tokens
+  description: Create personal access tokens as an alternative to your password.
+  icon: key
+  link: /docker-hub/access-tokens
+- title: Official images
+  description: A curated set of Docker repositories hosted on Docker Hub.
+  icon: verified
+  link: /docker-hub/official_images
+- title: Release notes
+  description: Find out about new features, improvements, and bug fixes.
+  icon: note_add
+  link: /docker-hub/release-notes
 ---
 
 Docker Hub is a service provided by Docker for finding and sharing container images.
@@ -49,8 +50,8 @@ container images from non-commercial open source projects.
 GitHub and Bitbucket and push them to Docker Hub.
 * [Webhooks](webhooks.md): Trigger actions after a successful push
   to a repository to integrate Docker Hub with other services.
-* [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"} tool (currently experimental) and an API that allows you to interact with Docker Hub.
-  * Browse through the [Docker Hub API](/docker-hub/api/latest/){: target="_blank" rel="noopener" class="_"} documentation to explore the supported endpoints.
+* [Docker Hub CLI](https://github.com/docker/hub-tool#readme) tool (currently experimental) and an API that allows you to interact with Docker Hub.
+  * Browse through the [Docker Hub API](/docker-hub/api/latest/) documentation to explore the supported endpoints.
 {{< /tab >}}
 {{< tab name="What administrative tasks can I perform in Docker Hub?" >}}
 * [Create and manage teams and organizations](orgs.md)

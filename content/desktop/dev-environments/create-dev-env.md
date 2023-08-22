@@ -2,10 +2,11 @@
 description: Dev Environments
 keywords: Dev Environments, share, Docker Desktop, Compose, launch
 title: Launch a dev environment
-redirect_from: 
+aliases:
 - /desktop/dev-environments/create-compose-dev-env/
 ---
-{% include dev-envs-changing.md %}
+
+{{< include "dev-envs-changing.md" >}}
 
 You can launch a dev environment from a:
 - Git repository
@@ -17,8 +18,8 @@ This does not conflict with any of the local files or local tooling set up on yo
 
 >Tip
 >
->Install the [Dev Environments browser extension](https://github.com/docker/dev-envs-extension){:target="_blank" rel="noopener" class="_"} for [Chrome](https://chrome.google.com/webstore/detail/docker-dev-environments/gnagpachnalcofcblcgdbofnfakdbeka){:target="_blank" rel="noopener" class="_"} or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/docker-dev-environments/){:target="_blank" rel="noopener" class="_"}, to launch a dev environment faster.
-{: .tip }
+>Install the [Dev Environments browser extension](https://github.com/docker/dev-envs-extension) for [Chrome](https://chrome.google.com/webstore/detail/docker-dev-environments/gnagpachnalcofcblcgdbofnfakdbeka) or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/docker-dev-environments/), to launch a dev environment faster.
+{ .tip }
 
 ## Prerequisites
 
@@ -28,9 +29,9 @@ Dev Environments is available as part of Docker Desktop 3.5.0 release. Download 
 
 To get started with Dev Environments, you must also install the following tools and extension on your machine:
 
-- [Git](https://git-scm.com){:target="_blank" rel="noopener" class="_"}. Make sure add Git to your PATH if you're a Windows user. 
-- [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}
-- [Visual Studio Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers){:target="_blank" rel="noopener" class="_"}
+- [Git](https://git-scm.com). Make sure add Git to your PATH if you're a Windows user. 
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Visual Studio Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
  After Git is installed, restart Docker Desktop. Select **Quit Docker Desktop**, and then start it again.
 
@@ -43,7 +44,7 @@ To get started with Dev Environments, you must also install the following tools 
 > **Important**
 >
 > If you have enabled the WSL 2 integration in Docker Desktop for Windows, make sure you have an SSH agent running in your WSL 2 distribution.
-{: .important}
+{ .important }
 
 <div class="panel panel-default">
     <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse-wsl2-ssh" style="cursor: pointer">
@@ -103,7 +104,7 @@ Docker then clones the repository with your specified branch or tag.
 
 >Note
 >
->Currently, Dev Environments is not able to detect the main language of the subdirectory. You need to define your own base image or services in a `compose-dev.yaml`file located in your subdirectory. For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql){:target="_blank" rel="noopener" class="_"} or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres){:target="_blank" rel="noopener" class="_"}. 
+>Currently, Dev Environments is not able to detect the main language of the subdirectory. You need to define your own base image or services in a `compose-dev.yaml`file located in your subdirectory. For more information on how to configure, see the [React application with a Spring backend and a MySQL database sample](https://github.com/docker/awesome-compose/tree/master/react-java-mysql) or the [Go server with an Nginx proxy and a Postgres database sample](https://github.com/docker/awesome-compose/tree/master/nginx-golang-postgres). 
 
 1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started**.

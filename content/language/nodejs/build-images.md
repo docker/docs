@@ -1,9 +1,10 @@
 ---
-title: "Build your Node image"
-keywords: containers, images, node.js, node, dockerfiles, node, coding, build, push, run
+title: Build your Node image
+keywords: containers, images, node.js, node, dockerfiles, node, coding, build, push,
+  run
 description: Learn how to build your first Docker image by writing a Dockerfile
-redirect_from:
-  - /get-started/nodejs/build-images/
+aliases:
+- /get-started/nodejs/build-images/
 ---
 
 {% include_relative nav.html selected="1" %}
@@ -21,7 +22,7 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 
 To complete this tutorial, you need the following:
 
-- Node.js version 18 or later. [Download Node.js](https://nodejs.org/en/){: target="_blank" rel="noopener" class="_"}
+- Node.js version 18 or later. [Download Node.js](https://nodejs.org/en/)
 - Docker running locally: Follow the instructions to [download and install Docker](../../desktop/index.md).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 
@@ -301,8 +302,8 @@ Our image that was tagged with `:v1.0.0` has been removed but we still have the 
 
 In this module, we took a look at setting up our example Node application that we will use for the rest of the tutorial. We also created a Dockerfile that we used to build our Docker image. Then, we took a look at tagging our images and removing images. In the next module, we’ll take a look at how to:
 
-[Run your image as a container](run-containers.md){: .button .primary-btn}
+{{< button text="Run your image as a container" url="run-containers.md" >}}
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Node.js%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

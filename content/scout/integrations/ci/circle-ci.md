@@ -4,7 +4,7 @@ keywords: supply chain, security, ci, continuous integration, circle ci
 title: Integrate Docker Scout with Circle CI
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 The following examples runs when triggered in CircleCI. When triggered, it
 checks out the "docker/scout-demo-service:latest" image and tag and then uses
@@ -74,4 +74,3 @@ workflows:
     jobs:
       - build
 ```
-

@@ -1,9 +1,10 @@
 ---
-title: "Local and tar exporters"
-keywords: >
-  build, buildx, buildkit, exporter, local, tar
-redirect_from:
-  - /build/building/exporters/local-tar/
+title: Local and tar exporters
+keywords: 'build, buildx, buildkit, exporter, local, tar
+
+  '
+aliases:
+- /build/building/exporters/local-tar/
 ---
 
 The `local` and `tar` exporters output the root filesystem of the build result
@@ -34,4 +35,4 @@ The following table describes the available parameters:
 ## Further reading
 
 For more information on the `local` or `tar` exporters, see the
-[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#local-directory){:target="blank" rel="noopener" class=""}.
+[BuildKit README](https://github.com/moby/buildkit/blob/master/README.md#local-directory).

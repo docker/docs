@@ -2,7 +2,7 @@
 description: Describes how to use the etwlogs logging driver.
 keywords: ETW, docker, logging, driver
 title: ETW logging driver
-redirect_from:
+aliases:
 - /engine/admin/logging/etwlogs/
 ---
 

@@ -30,7 +30,7 @@ configure it in different ways:
 >
 > If you're interested in the history of these variables, check out this blog
 > post on the subject, by the GitLab team:
-> [We need to talk: Can we standardize NO_PROXY?](https://about.gitlab.com/blog/2021/01/27/we-need-to-talk-no-proxy/){: target="_blank" rel="noopener"}.
+> [We need to talk: Can we standardize NO_PROXY?](https://about.gitlab.com/blog/2021/01/27/we-need-to-talk-no-proxy/).
 
 ## Configure the Docker client
 
@@ -59,7 +59,7 @@ Builds and containers use the configuration specified in this file.
 > Environment variables are stored as plain text in the container's configuration,
 > and as such can be inspected through the remote API or committed to an image
 > when using `docker commit`.
-{: .warning }
+{ .warning }
 
 The configuration becomes active after saving the file, you don't need to
 restart Docker. However, the configuration only applies to new containers and
@@ -189,4 +189,3 @@ created from that image.
 
 Embedding proxy settings in images also poses a security risk, as the values
 may include sensitive information.
-

@@ -4,9 +4,9 @@ keywords: company, company users, users, admin, docker admin
 title: Manage company users
 ---
 
-{% include admin-early-access.md %}
+{{< include "admin-early-access.md" >}}
 
-{% include admin-users.md product="admin" layer="company" %}
+{{% admin-users product="admin" layer="company" %}}
 
 ## Manage members on a team
 

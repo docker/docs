@@ -1,8 +1,9 @@
 ---
 description: Learn how to use repositories on Docker Hub
-keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, manage, repos
+keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub,
+  webhooks, docs, documentation, manage, repos
 title: Manage repositories
-redirect_from:
+aliases:
 - /engine/tutorials/dockerrepos/
 ---
 
@@ -15,7 +16,7 @@ redirect_from:
 
 You get one free private repository with your Docker Hub user account (not
 available for organizations you're a member of). If you need more private
-repositories for your user account, upgrade your Docker Hub subscription from your [Billing Information](https://hub.docker.com/billing/plan){: target="_blank" rel="noopener" class="_"} page.
+repositories for your user account, upgrade your Docker Hub subscription from your [Billing Information](https://hub.docker.com/billing/plan) page.
 
 ## Move images between repositories
 
@@ -23,7 +24,7 @@ repositories for your user account, upgrade your Docker Hub subscription from yo
 
 When consolidating personal repositories, you can pull private images from the initial repository and push them into another repository owned by you. To avoid losing your private images, perform the following steps:
 
-1. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} create a new Docker ID and select the personal subscription.
+1. Navigate to [Docker Hub](https://hub.docker.com) create a new Docker ID and select the personal subscription.
 2. Using `docker login` from the CLI, sign in using your original Docker ID and pull your private images.
 3. Tag your private images with your newly created Docker ID, for example:
 
@@ -42,9 +43,9 @@ The private images that existed in your previous account are now available in yo
 
 To avoid losing your private images, you can pull your private images from your personal account and push them to an organization that's owned by you.
 
-1. Navigate to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} and select **Organizations**.
+1. Navigate to [Docker Hub](https://hub.docker.com) and select **Organizations**.
 2. Select the applicable organization and verify that your user account is a member of the organization.
-3. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} using your original Docker ID, and pull your images:
+3. Sign in to [Docker Hub](https://hub.docker.com) using your original Docker ID, and pull your images:
 
    ```console
    $ docker pull namespace1/docker101tutorial
@@ -67,7 +68,7 @@ The private images that existed in your user account are now available for your 
 > **Warning**
 >
 > Deleting a repository deletes all the images it contains and its build settings. This action can't be undone.
-{: .warning}
+{ .warning }
 
 1. Navigate to your repository.
 2. Select the **Settings** tab.

@@ -1,8 +1,9 @@
 ---
 description: Change your Docker Desktop settings on Mac
-keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Mac
+keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker
+  Desktop, Mac
 title: Change Docker Desktop settings on Mac
-redirect_from:
+aliases:
 - /docker-for-mac/mutagen-caching/
 - /docker-for-mac/mutagen/
 - /docker-for-mac/osxfs-caching/
@@ -13,7 +14,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
+- Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
 You can also locate the `settings.json` file at `~/Library/Group Containers/group.com.docker/settings.json`.
@@ -37,13 +38,13 @@ If you choose the integrated terminal, you can run commands in a running contain
     > **Tip**
     >
     > Turn this setting on to make Docker Desktop run faster. 
-    {: .tip}
+    { .tip }
 
 - **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default. 
     >**Tip**
     >
     > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
-    {: .tip}
+    { .tip }
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
@@ -96,7 +97,7 @@ You can also move the disk image to a different location. If you attempt to move
 >**Tip**
 >
 > If you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
-{: .tip} 
+{ .tip } 
 
 ### File sharing
 
@@ -144,7 +145,7 @@ File share settings are:
 >   `Test` will fail.
 >
 > For more information, see [Volume mounting requires file sharing for any project directories outside of `/Users`](../troubleshoot/topics.md)
-{: .tip}
+{ .tip }
 
 ### Proxies
 
@@ -175,7 +176,7 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 ### Network
 
-{% include desktop-network-setting.md %}
+{{< include "desktop-network-setting.md" >}}
 
 ## Docker Engine
 
@@ -206,7 +207,7 @@ Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
 ## Builders
 
-{% include desktop-builders-setting.md %}
+{{< include "desktop-builders-setting.md" >}}
 
 ## Kubernetes
 
@@ -221,7 +222,7 @@ using Docker commands.
 Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources.
 
 For more information about using the Kubernetes integration with Docker Desktop,
-see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+see [Deploy on Kubernetes](../kubernetes.md).
 
 ## Software Updates
 
@@ -254,11 +255,11 @@ For more information about Docker extensions, see [Extensions](../extensions/ind
 
 On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
 
-You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"} from the **Features in development** tab.
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Features in development** tab.
 
 ### Beta features
 
-{% include beta.md %}
+{{< include "beta.md" >}}
 
 #### Use containerd for pulling and storing images
 
@@ -270,7 +271,7 @@ Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This
 
 ### Experimental features
 
-{% include desktop-experimental.md %}
+{{< include "desktop-experimental.md" >}}
 
 ## Advanced
 

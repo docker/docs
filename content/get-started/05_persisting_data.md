@@ -1,6 +1,7 @@
 ---
-title: "Persist the DB"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+title: Persist the DB
+keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
+  docker desktop
 description: Making your DB persistent in your application
 ---
 
@@ -146,7 +147,7 @@ To start the todo app container with the volume mounted:
    > **Tip**
    >
    >  Use the search filter to filter images and only show **Local images**.
-   {: .tip }
+   { .tip }
 
 4. Select your image and then select **Run**.
 5. Select **Optional settings**.
@@ -162,8 +163,8 @@ To start the todo app container with the volume mounted:
 
 1. Once the container starts up, open the app and add a few items to your todo list.
 
-    ![Items added to todo list](images/items-added.png){: style="width: 55%; " }
-    {: .text-center }
+    ![Items added to todo list](images/items-added.png)
+    
 
 2. Stop and remove the container for the todo app. Use Docker Desktop or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
 
@@ -211,4 +212,4 @@ Related information:
 
 Next, you'll learn how you can develop your app more efficiently using bind mounts.
 
-[Use bind mounts](06_bind_mounts.md){: .button  .primary-btn}
+{{< button text="Use bind mounts" url="06_bind_mounts.md" >}}

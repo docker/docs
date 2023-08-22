@@ -1,13 +1,16 @@
 ---
-description: >
-  Integrate JFrog Artifactory and JFrog Container Registry with Docker Scout
-keywords: >
-  docker scout, jfrog, artifactory, jcr, integration, image analysis, security,
+description: 'Integrate JFrog Artifactory and JFrog Container Registry with Docker
+  Scout
+
+  '
+keywords: 'docker scout, jfrog, artifactory, jcr, integration, image analysis, security,
   cves
+
+  '
 title: Artifactory integration
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 Integrating Docker Scout with JFrog Artifactory lets you run image analysis
 automatically on images in Artifactory registries.
@@ -24,21 +27,19 @@ docker login {URL}
 >
 > For cloud-hosted Artifactory you can find the credentials for your Artifactory repository by
 > selecting it in the Artifactory UI and then the **Set Me Up** button.
-{: .tip }
+{ .tip }
 
 ## Remote image analysis
 
 To automatically analyze images running in remote environments you need to deploy the Docker Scout Artifactory agent. The agent is a
 standalone service that analyzes images and uploads the result to Docker Scout.
 You can view the results using the
-[Docker Scout Dashboard](https://scout.docker.com/){: target="\_blank" rel="noopener"
-}.
+[Docker Scout Dashboard](https://scout.docker.com/).
 
 ### How the agent works
 
 The Docker Scout Artifactory agent is available as an
-[image on Docker Hub](https://hub.docker.com/r/docker/artifactory-agent){:
-target="\_blank" rel="noopener" }. The agent works by continuously polling
+[image on Docker Hub](https://hub.docker.com/r/docker/artifactory-agent). The agent works by continuously polling
 Artifactory for new images. When it finds a new image, it performs the following
 steps:
 
@@ -152,7 +153,7 @@ the container. Make sure the mount path you use is the directory containing the
 >
 > Use the `v1` tag of the Artifactory agent image. Don't use the `latest` tag as
 > doing so may incur breaking changes.
-{: .important }
+{ .important }
 
 ```console
 $ docker run \

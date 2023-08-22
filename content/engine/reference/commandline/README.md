@@ -1,3 +1,7 @@
+---
+{}
+---
+
 # About these files
 
 The files in this directory are stub files which include the file

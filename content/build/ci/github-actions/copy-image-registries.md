@@ -6,7 +6,7 @@ keywords: ci, github actions, gha, buildkit, buildx, registry
 [Multi-platform images](../../building/multi-platform.md) built using Buildx can
 be copied from one registry to another using the [`buildx imagetools create` command](../../../engine/reference/commandline/buildx_imagetools_create.md):
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -59,4 +59,3 @@ jobs:
             --tag ghcr.io/user/app:1.0.0 \
             user/app:latest
 ```
-{% endraw %}

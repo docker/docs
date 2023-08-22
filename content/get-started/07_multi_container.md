@@ -1,6 +1,7 @@
 ---
-title: "Multi container apps"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+title: Multi container apps
+keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
+  docker desktop
 description: Using more than one container in your application
 ---
 
@@ -17,7 +18,7 @@ container or run it separately?" In general, each container should do one thing 
 And there are more reasons. So, like the following diagram, it's best to run your app in multiple containers.
 
 ![Todo App connected to MySQL container](images/multi-app-architecture.png)
-{: .text-center }
+
 
 ## Container networking
 
@@ -76,7 +77,7 @@ In the following steps, you'll create the network first and then attach the MySQ
    > **Tip**
    >
    > You'll notice a volume named `todo-mysql-data` in the above command that is mounted at `/var/lib/mysql`, which is where MySQL stores its data. However, you never ran a `docker volume create` command. Docker recognizes you want to use a named volume and creates one automatically for you.
-   {: .tip }
+   { .tip }
 
 3. To confirm you have the database up and running, connect to the database and verify that it connects.
 
@@ -177,7 +178,7 @@ The todo app supports the setting of a few environment variables to specify MySQ
 >
 > While using env vars to set connection settings is generally accepted for development, it's highly discouraged
 > when running applications in production. Diogo Monica, a former lead of security at Docker,
-> [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/){:target="_blank" rel="noopener" class="_"}
+> [wrote a fantastic blog post](https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/)
 > explaining why.
 >
 > A more secure mechanism is to use the secret support provided by your container orchestration framework. In most cases,
@@ -280,4 +281,4 @@ ports, and more. That's a lot to remember and it's certainly making things harde
 In the next section, you'll learn about Docker Compose. With Docker Compose, you can share your application stacks in a
 much easier way and let others spin them up with a single, simple command.
 
-[Use Docker Compose](08_using_compose.md){: .button  .primary-btn}
+{{< button text="Use Docker Compose" url="08_using_compose.md" >}}

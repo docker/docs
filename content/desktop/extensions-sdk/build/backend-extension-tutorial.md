@@ -2,10 +2,10 @@
 title: Add a backend to your extension
 description: Learn how to add a backend to your extension.
 keywords: Docker, extensions, sdk, build
-redirect_from:
-  - /desktop/extensions-sdk/tutorials/minimal-backend-extension/
-  - /desktop/extensions-sdk/build/minimal-backend-extension/
-  - /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/
+aliases:
+- /desktop/extensions-sdk/tutorials/minimal-backend-extension/
+- /desktop/extensions-sdk/build/minimal-backend-extension/
+- /desktop/extensions-sdk/build/set-up/backend-extension-tutorial/
 ---
 
 Your extension can ship a backend part with which the frontend can interact with. This page provides information on why and how to add a backend.
@@ -50,14 +50,14 @@ Here is the extension folder structure with a backend:
 1. Contains everything required to build the backend and copy it in the extension's container filesystem.
 2. The source folder that contains the backend code of the extension.
 
-Although you can start from an empty directory or from the `vm-ui extension` [sample](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"},
+Although you can start from an empty directory or from the `vm-ui extension` [sample](https://github.com/docker/extensions-sdk/tree/main/samples),
 it is highly recommended that you start from the `docker extension init` command and change it to suit your needs.
 
 > **Tip**
 >
 > The `docker extension init` generates a Go backend. But you can still use it as a starting point for
 > your own extension and use any other language like Node.js, Python, Java, .Net, or any other language and framework.
-{: .tip }
+{ .tip }
 
 In this tutorial, the backend service simply exposes one route that returns a JSON payload that says "Hello".
 
@@ -72,7 +72,7 @@ In this tutorial, the backend service simply exposes one route that returns a JS
 > on the host. Also, some Docker Desktop users are running in constrained environments where they
 > can't open ports on their machines. When choosing the language and framework for your backend, make sure it
 > supports sockets connection.
-{: .important}
+{ .important }
 
 {{< tabs group="lang" >}}
 {{< tab name="Go" >}}
@@ -133,36 +133,36 @@ type HTTPMessageBody struct {
 
 > **Important**
 >
-> We don't have a working example for Node yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Node){: target="_blank" rel="noopener" class="_"}
+> We don't have a working example for Node yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Node)
 > and let us know if you'd like a sample for Node.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Python" >}}
 
 > **Important**
 >
-> We don't have a working example for Python yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Python){: target="_blank" rel="noopener" class="_"}
+> We don't have a working example for Python yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Python)
 > and let us know if you'd like a sample for Python.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Java" >}}
 
 > **Important**
 >
-> We don't have a working example for Java yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Java){: target="_blank" rel="noopener" class="_"}
+> We don't have a working example for Java yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Java)
 > and let us know if you'd like a sample for Java.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name=".NET" >}}
 
 > **Important**
 >
-> We don't have a working example for .NET. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=.Net){: target="_blank" rel="noopener" class="_"}
+> We don't have a working example for .NET. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=.Net)
 > and let us know if you'd like a sample for .NET.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -185,7 +185,7 @@ To deploy your Go backend when installing the extension, you need first to confi
 > 
 > To ease version management, you can reuse the same image to build the frontend, build the
 backend service, and package the extension.
-{: .tip }
+{ .tip }
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -217,36 +217,36 @@ CMD /service -socket /run/guest-services/extension-allthethings-extension.sock
 
 > **Important**
 >
-> We don't have a working Dockerfile for Node yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Node){: target="_blank" rel="noopener" class="_"}
+> We don't have a working Dockerfile for Node yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Node)
 > and let us know if you'd like a Dockerfile for Node.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Python" >}}
 
 > **Important**
 >
-> We don't have a working Dockerfile for Python yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Python){: target="_blank" rel="noopener" class="_"}
+> We don't have a working Dockerfile for Python yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Python)
 > and let us know if you'd like a Dockerfile for Python.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Java" >}}
 
 > **Important**
 >
-> We don't have a working Dockerfile for Java yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Java){: target="_blank" rel="noopener" class="_"}
+> We don't have a working Dockerfile for Java yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=Java)
 > and let us know if you'd like a Dockerfile for Java.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name=".NET" >}}
 
 > **Important**
 >
-> We don't have a working Dockerfile for .Net. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=.Net){: target="_blank" rel="noopener" class="_"}
+> We don't have a working Dockerfile for .Net. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.25798127=.Net)
 > and let us know if you'd like a Dockerfile for .Net.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -273,7 +273,7 @@ For more information on the `vm` section of the `metadata.json`, see [Metadata](
 > **Warning**
 >
 > Do not replace the `${DESKTOP_PLUGIN_IMAGE}` placeholder in the `metadata.json` file. The placeholder is replaced automatically with the correct image name when the extension is installed.
-{: .warning}
+{ .warning }
 
 ## Invoke the extension backend from your frontend
 
@@ -288,7 +288,7 @@ extension.vm.service.get` that returns the body of the response.
 Replace the `ui/src/App.tsx` file with the following code:
 
 ```tsx
-{% raw %}
+
 // ui/src/App.tsx
 import React, { useEffect } from 'react';
 import { createDockerDesktopClient } from "@docker/extension-api-client";
@@ -312,7 +312,7 @@ export function App() {
     <Typography>{hello}</Typography>
   );
 }
-{% endraw %}
+
 ```
 
 {{< /tab >}}
@@ -320,27 +320,27 @@ export function App() {
 
 > **Important**
 >
-> We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue){: target="_blank" rel="noopener" class="_"}
+> We don't have an example for Vue yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Vue)
 > and let us know if you'd like a sample with Vue.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Angular" >}}
 
 > **Important**
 >
-> We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular){: target="_blank" rel="noopener" class="_"}
+> We don't have an example for Angular yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Angular)
 > and let us know if you'd like a sample with Angular.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Svelte" >}}
 
 > **Important**
 >
-> We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte){: target="_blank" rel="noopener" class="_"}
+> We don't have an example for Svelte yet. [Fill out the form](https://docs.google.com/forms/d/e/1FAIpQLSdxJDGFJl5oJ06rG7uqtw1rsSBZpUhv_s9HHtw80cytkh2X-Q/viewform?usp=pp_url&entry.1333218187=Svelte)
 > and let us know if you'd like a sample with Svelte.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -365,7 +365,7 @@ Now you can see the backend service running in the **Containers8* tab of the Doc
 >
 > You may need to turn on the **Show system containers** option in **Settings** to see the backend container running.
 > See [Show extension containers](../dev/test-debug.md#show-the-extension-containers) for more information.
-{: .tip }
+{ .tip }
 
 Open Docker Dashboard and select the **Containers** tab. You should see the response from the backend service
 call displayed.

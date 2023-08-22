@@ -2,7 +2,7 @@
 description: Remove seats from your subscription
 keywords: Docker, Docker Hub, subscription, update, remove, seats
 title: Remove seats from your subscription
-redirect_from:
+aliases:
 - /docker-hub/billing/remove-seats/
 ---
 
@@ -17,9 +17,9 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 >**Important**
 >
 >If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to remove seats from your subscription. 
-{: .important}
+{ .important }
 
-1. Log into your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+1. Log into your [Docker Hub](https://hub.docker.com) account.
 
 2. Select **Organizations** and then choose your organization.
 

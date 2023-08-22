@@ -12,7 +12,7 @@ For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
 ## 1.6.0
 
-{% include release-date.html date="2023-06-13" %}
+{{< release-date date="2023-06-13" >}}
 
 ### New
 
@@ -36,7 +36,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.5.2
 
-{% include release-date.html date="2023-02-14" %}
+{{< release-date date="2023-02-14" >}}
 
 ### Bug fixes and enhancements
 
@@ -46,7 +46,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.5.1
 
-{% include release-date.html date="2023-01-18" %}
+{{< release-date date="2023-01-18" >}}
 
 ### Bug fixes and enhancements
 
@@ -54,9 +54,9 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.5.0 (labs)
 
-{% include release-date.html date="2023-01-10" %}
+{{< release-date date="2023-01-10" >}}
 
-{% include dockerfile-labs-channel.md %}
+{{< include "dockerfile-labs-channel.md" >}}
 
 ### New
 
@@ -65,7 +65,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.5.0
 
-{% include release-date.html date="2023-01-10" %}
+{{< release-date date="2023-01-10" >}}
 
 ### New
 
@@ -86,7 +86,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.4.3
 
-{% include release-date.html date="2022-08-23" %}
+{{< release-date date="2022-08-23" >}}
 
 ### Bug fixes and enhancements
 
@@ -97,7 +97,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.4.2
 
-{% include release-date.html date="2022-05-06" %}
+{{< release-date date="2022-05-06" >}}
 
 ### Bug fixes and enhancements
 
@@ -106,7 +106,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.4.1
 
-{% include release-date.html date="2022-04-08" %}
+{{< release-date date="2022-04-08" >}}
 
 ### Bug fixes and enhancements
 
@@ -115,7 +115,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.4.0
 
-{% include release-date.html date="2022-03-09" %}
+{{< release-date date="2022-03-09" >}}
 
 ### New
 
@@ -140,7 +140,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.3.1
 
-{% include release-date.html date="2021-10-04" %}
+{{< release-date date="2021-10-04" >}}
 
 ### Bug fixes and enhancements
 
@@ -148,9 +148,9 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.3.0 (labs)
 
-{% include release-date.html date="2021-07-16" %}
+{{< release-date date="2021-07-16" >}}
 
-{% include dockerfile-labs-channel.md %}
+{{< include "dockerfile-labs-channel.md" >}}
 
 ### New
 
@@ -159,7 +159,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.3.0
 
-{% include release-date.html date="2021-07-16" %}
+{{< release-date date="2021-07-16" >}}
 
 ### New
 
@@ -179,9 +179,9 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.2.1 (labs)
 
-{% include release-date.html date="2020-12-12" %}
+{{< release-date date="2020-12-12" >}}
 
-{% include dockerfile-labs-channel.md %}
+{{< include "dockerfile-labs-channel.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -191,7 +191,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.2.1
 
-{% include release-date.html date="2020-12-12" %}
+{{< release-date date="2020-12-12" >}}
 
 ### Bug fixes and enhancements
 
@@ -200,9 +200,9 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.2.0 (labs)
 
-{% include release-date.html date="2020-12-03" %}
+{{< release-date date="2020-12-03" >}}
 
-{% include dockerfile-labs-channel.md %}
+{{< include "dockerfile-labs-channel.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -210,7 +210,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.2.0
 
-{% include release-date.html date="2020-12-03" %}
+{{< release-date date="2020-12-03" >}}
 
 ### New
 
@@ -229,7 +229,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.1.7
 
-{% include release-date.html date="2020-04-18" %}
+{{< release-date date="2020-04-18" >}}
 
 ### Bug fixes and enhancements
 
@@ -237,9 +237,9 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.1.2 (experimental)
 
-{% include release-date.html date="2019-07-31" %}
+{{< release-date date="2019-07-31" >}}
 
-{% include dockerfile-labs-channel.md %}
+{{< include "dockerfile-labs-channel.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -251,7 +251,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.1.2
 
-{% include release-date.html date="2019-07-31" %}
+{{< release-date date="2019-07-31" >}}
 
 ### Bug fixes and enhancements
 
@@ -261,7 +261,7 @@ The following features have graduated from the labs channel to stable:
 
 ## 1.1.0
 
-{% include release-date.html date="2019-04-27" %}
+{{< release-date date="2019-04-27" >}}
 
 ### New
 

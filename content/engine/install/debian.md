@@ -1,14 +1,14 @@
 ---
 description: Instructions for installing Docker Engine on Debian
-keywords:
-  requirements, apt, installation, debian, install, uninstall, upgrade, update
-redirect_from:
-  - /engine/installation/debian/
-  - /engine/installation/linux/debian/
-  - /engine/installation/linux/docker-ce/debian/
-  - /install/linux/docker-ce/debian/
+keywords: requirements, apt, installation, debian, install, uninstall, upgrade, update
 title: Install Docker Engine on Debian
 toc_max: 4
+aliases:
+- /engine/installation/debian/
+- /engine/installation/linux/debian/
+- /engine/installation/linux/docker-ce/debian/
+- /install/linux/docker-ce/debian/
+download-url-base: https://download.docker.com/linux/debian
 ---
 
 To get started with Docker Engine on Debian, make sure you
@@ -93,7 +93,6 @@ Docker from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/debian" %}
 
 1.  Update the `apt` package index and install packages to allow `apt` to use a
     repository over HTTPS:
@@ -107,7 +106,7 @@ Docker from the repository.
 
     ```console
     $ sudo install -m 0755 -d /etc/apt/keyrings
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    $ curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
     ```
 
@@ -115,7 +114,7 @@ Docker from the repository.
 
     ```console
     $ echo \
-      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
+      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
       "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
       sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
@@ -186,7 +185,7 @@ Docker from the repository.
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -200,8 +199,7 @@ If you can't use Docker's `apt` repository to install Docker Engine, you can
 download the `deb` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
-1. Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){:
-   target="_blank" rel="noopener" class="_" }.
+1. Go to [`{{% param "download-url-base" %}}/dists/`]({{% param "download-url-base" %}}/dists/).
 
 2. Select your Debian version in the list.
 
@@ -243,14 +241,14 @@ download a new file each time you want to upgrade Docker Engine.
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package files and repeat the
 [installation procedure](#install-from-a-package), pointing to the new files.
 
-{% include install-script.md %}
+{{< include "install-script.md" >}}
 
 ## Uninstall Docker Engine
 

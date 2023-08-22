@@ -4,8 +4,8 @@ keywords: Docker Desktop for Windows, edge, release notes
 title: Docker Desktop for Windows Edge Release notes
 toc_min: 1
 toc_max: 2
-redirect_from:
-  - /desktop/windows/release-notes/edge-releases/
+aliases:
+- /desktop/windows/release-notes/edge-releases/
 ---
 
 This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
@@ -18,9 +18,9 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/50534/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/50534/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -37,9 +37,9 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/50261/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -50,9 +50,9 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/50165/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/50165/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -68,9 +68,9 @@ This page contains information about Docker Desktop Edge releases. Edge releases
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/49923/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/49923/Docker%20Desktop%20Installer.exe)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing Docker Desktop.
 
@@ -92,9 +92,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/48975/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -127,9 +127,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/48583/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/48583/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -147,9 +147,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/48173/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -187,9 +187,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/47842/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/47842/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -204,9 +204,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/47622/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/47622/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -231,9 +231,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/47433/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/47433/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
@@ -244,9 +244,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/47357/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/47357/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -275,9 +275,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/46980/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/46980/Docker%20Desktop%20Installer.exe)
 
 ### New
 
@@ -287,8 +287,8 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Upgrades
 
-- [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4){: target="_blank" class="_”}
-- [Kubernetes 1.18.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.6){: target="_blank" class="_”}
+- [Docker ECS integration v1.0.0-beta.4](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.4)
+- [Kubernetes 1.18.6](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.6)
 
 ### Bug fixes and minor changes
 
@@ -300,23 +300,23 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/46784/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/46784/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
-- [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2){: target="_blank" class="_”}
-- [Docker ACI integration 0.1.10](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.10){: target="_blank" class="_”}
+- [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2)
+- [Docker ACI integration 0.1.10](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.10)
 
 ## Docker Desktop Community 2.3.3.1
 2020-07-10
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/46608/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/46608/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
@@ -327,9 +327,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/46574/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/46574/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -346,9 +346,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/46329/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/46329/Docker%20Desktop%20Installer.exe)
 
 ### Security
 
@@ -385,9 +385,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://desktop.docker.com/win/edge/45408/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://desktop.docker.com/win/edge/45408/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -433,9 +433,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/44875/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/44875/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
@@ -451,9 +451,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/44472/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/44472/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -499,9 +499,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/43965/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/43965/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -561,9 +561,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/43066/Docker%20Desktop%20Installer.exe)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing Docker Desktop.
 
@@ -589,9 +589,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/42746/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/42746/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -634,9 +634,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/41561/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/41561/Docker%20Desktop%20Installer.exe)
 
 > **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in the [docker/for-win](https://github.com/docker/for-win/issues) GitHub repository.
 
@@ -670,9 +670,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/40920/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/40920/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
@@ -688,9 +688,9 @@ Windows Insider Preview Slow Ring users running OS builds older than 19025 canno
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/40807/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/40807/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -724,9 +724,9 @@ Windows Insider Preview Slow Ring users running OS builds older than 19025 canno
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/40323/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/40323/Docker%20Desktop%20Installer.exe)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installation.
 
@@ -764,9 +764,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/39357/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/39357/Docker%20Desktop%20Installer.exe)
 
 ### Upgrades
 
@@ -786,9 +786,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/38275/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/38275/Docker%20Desktop%20Installer.exe)
 
 ### Bug fixes and minor changes
 
@@ -800,9 +800,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/38030/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/38030/Docker%20Desktop%20Installer.exe)
 
 #### Upgrades
 
@@ -823,9 +823,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/37260/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/37260/Docker%20Desktop%20Installer.exe)
 
 #### Upgrades
 
@@ -849,9 +849,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/36873/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/36873/Docker%20Desktop%20Installer.exe)
 
 This release contains Kubernetes security improvements. Note that your local Kubernetes PKI and cluster will be reset after installation.
 
@@ -884,9 +884,9 @@ This release contains Kubernetes security improvements. Note that your local Kub
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/35318/Docker%20Desktop%20Installer.exe)
 
 This is the Edge channel, which gives you early access to our newest features. Be aware that some of them may be experimental, and some of them may not ever reach the Stable release.
 
@@ -921,9 +921,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/34207/Docker%20Desktop%20Installer.exe)
 
 * Bug fixes and minor changes
   - Upgrade QEMU from 2.8.0 to 3.1.0 to fix an emulation issue when building and running Java applications on Arm64 devices.
@@ -932,9 +932,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/33772/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/33772/Docker%20Desktop%20Installer.exe)
 
 * Upgrades
   - [Docker 19.03.0-beta3](https://github.com/docker/docker-ce/releases/tag/v19.03.0-beta3)
@@ -971,9 +971,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/31778/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/31778/Docker%20Desktop%20Installer.exe)
 
 * Upgrades
   - [Docker 18.09.3](https://github.com/docker/docker-ce/releases/tag/v18.09.3)
@@ -987,9 +987,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/31274/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/31274/Docker%20Desktop%20Installer.exe)
 
 * Upgrades
   - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
@@ -998,9 +998,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/30972/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/30972/Docker%20Desktop%20Installer.exe)
 
 * Upgrades
   - [Docker Compose 1.24.0-rc1](https://github.com/docker/compose/releases/tag/1.24.0-rc1)
@@ -1017,9 +1017,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/30090/Docker%20Desktop%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/30090/Docker%20Desktop%20Installer.exe)
 
 * Upgrades
   - [Docker 18.09.1](https://github.com/docker/docker-ce/releases/tag/v18.09.1)
@@ -1044,9 +1044,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/29268/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/29268/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
@@ -1058,9 +1058,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/28777/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/28777/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.09.0](https://github.com/docker/docker-ce-packaging/releases/tag/v18.09.0)
@@ -1080,9 +1080,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/19925/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/19925/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.09.0-ce-beta1](https://github.com/docker/docker-ce/releases/tag/v18.09.0-ce-beta1)
@@ -1105,9 +1105,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/19508/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/19508/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.06.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce)
@@ -1127,9 +1127,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/19101/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/19101/Docker%20for%20Windows%20Installer.exe)
 
 * Bug fixes and minor changes
   - Fix bug in automatic feature enabling if "Hyper-V" and "Containers" Windows features are not enabled already when starting Docker Desktop.
@@ -1138,9 +1138,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/19070/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/19070/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.0-ce)
@@ -1149,9 +1149,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/18994/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/18994/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.06.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.06.0-ce-rc3)
@@ -1172,9 +1172,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/18263/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/18263/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [LinuxKit v0.4](https://github.com/linuxkit/linuxkit/releases/tag/v0.4)
@@ -1189,9 +1189,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/17760/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/17760/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.05.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce)
@@ -1209,9 +1209,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/17439/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/17439/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.05.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce-rc1)
@@ -1227,9 +1227,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/17151/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/17151/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.04.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.04.0-ce)
@@ -1239,9 +1239,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/17070/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/17070/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.04.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.04.0-ce-rc2)
@@ -1257,9 +1257,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/16761/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/16761/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.03.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce)
@@ -1272,9 +1272,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/16511/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/16511/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.03.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc4)
@@ -1287,9 +1287,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/16433/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/16433/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.03.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc3)
@@ -1308,9 +1308,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/16164/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.03.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc1)
@@ -1334,9 +1334,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/15732/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/15732/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.02.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce)
@@ -1374,9 +1374,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/15285/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/15285/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
@@ -1391,9 +1391,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/15017/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/15017/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -1435,9 +1435,9 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 > Download Docker Desktop
 >
-> {%- include eula.md -%}
+> 
 >
-> [Download](https://download.docker.com/win/edge/14328/Docker%20for%20Windows%20Installer.exe){: .accept-eula }
+> [Download](https://download.docker.com/win/edge/14328/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.11.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce)
@@ -2945,5 +2945,3 @@ are working on a solution.
 **Networking**
 
   - live debugging Node.js application
-
-{% include eula-modal.html %}

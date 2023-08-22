@@ -2,7 +2,7 @@
 title: Multi-platform images
 description: Introduction to multi-platform images and how to build them
 keywords: build, buildx, buildkit, multi-platform images
-redirect_from:
+aliases:
 - /build/buildx/multiplatform-images/
 - /desktop/multi-arch/
 - /docker-for-mac/multi-arch/
@@ -16,7 +16,7 @@ operating systems, such as Windows.
 When you run an image with multi-platform support, Docker automatically selects
 the image that matches your OS and architecture.
 
-Most of the Docker Official Images on Docker Hub provide a [variety of architectures](https://github.com/docker-library/official-images#architectures-other-than-amd64){:target="blank" rel="noopener" class=""}.
+Most of the Docker Official Images on Docker Hub provide a [variety of architectures](https://github.com/docker-library/official-images#architectures-other-than-amd64).
 For example, the `busybox` image supports `amd64`, `arm32v5`, `arm32v6`,
 `arm32v7`, `arm64v8`, `i386`, `ppc64le`, and `s390x`. When running this image
 on an `x86_64` / `amd64` machine, the `amd64` variant is pulled and run.
@@ -147,7 +147,7 @@ NAME/NODE     DRIVER/ENDPOINT              STATUS   BUILDKIT PLATFORMS
 mybuilder *   docker-container
   mybuilder0  unix:///var/run/docker.sock  running  v0.12.1  linux/amd64, linux/amd64/v2, linux/amd64/v3, linux/arm64, linux/riscv64, linux/ppc64le, linux/s390x, linux/386, linux/mips64le, linux/mips64, linux/arm/v7, linux/arm/v6
 default       docker
-  default     default                      running  v{{ site.buildkit_version }}  linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
+  default     default                      running  v{{% param "buildkit_version" %}}  linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
 ```
 
 ## Example
@@ -255,6 +255,6 @@ multi-architecture support, which means you can run containers for different
 Linux architectures such as `arm`, `mips`, `ppc64le`, and even `s390x`.
 
 This does not require any special configuration in the container itself as it
-uses [qemu-static](https://wiki.qemu.org/Main_Page){:target="blank" rel="noopener" class=""}
+uses [qemu-static](https://wiki.qemu.org/Main_Page)
 from the Docker Desktop VM. Because of this, you can run an ARM container,
 like the `arm32v7` or `ppc64le` variants of the busybox image.

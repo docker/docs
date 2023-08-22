@@ -20,7 +20,7 @@ Deploying a `registry.json` file and forcing users to authenticate is not requir
 - Authenticated users get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](download-rate-limit.md).
 - Blocks users from accessing Docker Desktop until they are added to a specific organization.
 
-{% include configure-registry-json.md %}
+{{< include "configure-registry-json.md" >}}
 
 ## Deploy registry.json to multiple devices
 

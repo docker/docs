@@ -2,7 +2,7 @@
 description: Learn how to optimize your use of ZFS driver.
 keywords: 'container, storage, driver, ZFS '
 title: Use the ZFS storage driver
-redirect_from:
+aliases:
 - /engine/userguide/storagedriver/zfs-driver/
 ---
 
@@ -272,4 +272,3 @@ There are several factors that influence the performance of Docker using the
   by thin provisioning and copy-on-write. Volumes have other benefits, such as
   allowing you to share data among containers and persisting even when no
   running container is using them.
-

@@ -7,7 +7,7 @@ title: Isolate containers with a user namespace
 Linux namespaces provide isolation for running processes, limiting their access
 to system resources without the running process being aware of the limitations.
 For more information on Linux namespaces, see
-[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces){: target="_blank" rel="noopener" class="_" }.
+[Linux namespaces](https://www.linux.com/news/understanding-and-securing-linux-namespaces).
 
 The best way to prevent privilege-escalation attacks from within a container is
 to configure your container's applications to run as unprivileged users. For
@@ -51,7 +51,7 @@ purpose.
 > automatically add the new group to the `/etc/subuid` and `/etc/subgid` files.
 > You are responsible for editing these files and assigning non-overlapping
 > ranges, in this case. This step is covered in [Prerequisites](#prerequisites).
-{: .warning }
+{ .warning }
 
 It is very important that the ranges do not overlap, so that a process cannot gain
 access in a different namespace. On most Linux distributions, system utilities

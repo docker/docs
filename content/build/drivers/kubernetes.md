@@ -1,9 +1,9 @@
 ---
-title: "Kubernetes driver"
+title: Kubernetes driver
 keywords: build, buildx, driver, builder, kubernetes
-redirect_from:
-  - /build/buildx/drivers/kubernetes/
-  - /build/building/drivers/kubernetes/
+aliases:
+- /build/buildx/drivers/kubernetes/
+- /build/building/drivers/kubernetes/
 ---
 
 The Buildx Kubernetes driver allows connecting your local development or CI
@@ -64,7 +64,7 @@ is configurable using the following driver options:
 
   These options allow requesting and limiting the resources available to each
   BuildKit pod according to the official Kubernetes documentation
-  [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/){:target="blank" rel="noopener" class=""}.
+  [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 
 For example, to create 4 replica BuildKit pods:
 
@@ -135,7 +135,7 @@ leveraging the native architecture of nodes.
 ### QEMU
 
 Like the `docker-container` driver, the Kubernetes driver also supports using
-[QEMU](https://www.qemu.org/){:target="blank" rel="noopener" class=""} (user
+[QEMU](https://www.qemu.org/) (user
 mode) to build images for non-native platforms. Include the `--platform` flag
 and specify which platforms you want to output to.
 
@@ -232,8 +232,7 @@ that you want to support.
 
 The Kubernetes driver supports rootless mode. For more information on how
 rootless mode works, and it's requirements, see
-[here](https://github.com/moby/buildkit/blob/master/docs/rootless.md){:target="blank"
-rel="noopener" class=""}.
+[here](https://github.com/moby/buildkit/blob/master/docs/rootless.md).
 
 To turn it on in your cluster, you can use the `rootless=true` driver option:
 
@@ -262,12 +261,10 @@ Prerequisites:
 
 - You have an existing Kubernetes cluster. If you don't already have one, you
   can follow along by installing
-  [minikube](https://minikube.sigs.k8s.io/docs/){:target="blank" rel="noopener"
-  class=""}.
+  [minikube](https://minikube.sigs.k8s.io/docs/).
 - The cluster you want to connect to is accessible via the `kubectl` command,
   with the `KUBECONFIG` environment variable
-  [set appropriately](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable){:target="blank"
-  rel="noopener" class=""} if necessary.
+  [set appropriately](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/#set-the-kubeconfig-environment-variable) if necessary.
 
 1. Create a `buildkit` namespace.
 

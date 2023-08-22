@@ -4,6 +4,6 @@ keywords: image, access, management
 title: Image Access Management
 ---
 
-{% include admin-early-access.md %}
+{{< include "admin-early-access.md" >}}
 
-{% include admin-image-access.md product="admin" %}
+{{% admin-image-access product="admin" %}}

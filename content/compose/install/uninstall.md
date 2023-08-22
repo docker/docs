@@ -51,14 +51,13 @@ Or, if you have installed Compose for all users, run:
 > If you get a **Permission denied** error using either of the above
 > methods, you do not have the permissions allowing you to remove
 > `docker-compose`. To force the removal, prepend `sudo` to either of the above instructions and run it again.
-{: .tip}
+{ .tip }
 
 ### Inspect the location of the Compose CLI plugin
 
 To check where Compose is installed, use:
 
-{% raw %}
+
 ```console
 $ docker info --format '{{range .ClientInfo.Plugins}}{{if eq .Name "compose"}}{{.Path}}{{end}}{{end}}'
 ```
-{% endraw %}

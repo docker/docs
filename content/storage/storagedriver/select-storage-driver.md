@@ -2,7 +2,7 @@
 title: Docker storage drivers
 description: Learn how to select the proper storage driver for your container.
 keywords: container, storage, driver, btrfs, devicemapper, zfs, overlay, overlay2
-redirect_from:
+aliases:
 - /engine/userguide/storagedriver/
 - /engine/userguide/storagedriver/selectadriver/
 - /storage/storagedriver/selectadriver/
@@ -32,8 +32,8 @@ The Docker Engine provides the following storage drivers on Linux:
 The Docker Engine has a prioritized list of which storage driver to use if no
 storage driver is explicitly configured, assuming that the storage driver meets
 the prerequisites, and automatically selects a compatible storage driver. You
-can see the order in the [source code for Docker Engine {{ site.docker_ce_version }}](https://github.com/moby/moby/blob/{{ site.docker_ce_version }}/daemon/graphdriver/driver_linux.go#L52-L53).
-{: id="storage-driver-order" }
+can see the order in the [source code for Docker Engine {{% param "docker_ce_version" %}}](https://github.com/moby/moby/blob/{{% param "docker_ce_version" %}}/daemon/graphdriver/driver_linux.go#L52-L53).
+{ #storage-driver-order }
 
 Some storage drivers require you to use a specific format for the backing filesystem.
 If you have external  requirements to use a specific backing filesystem, this may
@@ -188,7 +188,7 @@ to physical or logical disks on the Docker host.
 > driver. If you revert your changes, you can access the old images and containers
 > again, but any that you pulled or created using the new driver are then
 > inaccessible.
-{:.important}
+{ .important }
 
 ## Related information
 

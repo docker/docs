@@ -2,7 +2,7 @@
 title: Develop with Docker Engine API
 description: Using Docker APIs to automate Docker tasks in your language of choice
 keywords: developing, api
-redirect_from:
+aliases:
 - /engine/reference/api/
 - /engine/reference/api/docker_remote_api/
 - /reference/api/
@@ -119,15 +119,15 @@ You can specify the API version to use, in one of the following ways:
   that is used.
 - For the SDKs, you can also specify the API version programmatically, as a
   parameter to the `client` object. See the
-  [Go constructor](https://pkg.go.dev/github.com/docker/docker/client#NewClientWithOpts){: target="_blank" rel="noopener" class="_"}
+  [Go constructor](https://pkg.go.dev/github.com/docker/docker/client#NewClientWithOpts)
   or the
-  [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html){: target="_blank" rel="noopener" class="_"}.
+  [Python SDK documentation for `client`](https://docker-py.readthedocs.io/en/stable/client.html).
 
 ### API version matrix
 
-{% include api-version-matrix.md %}
+{{< include "api-version-matrix.md" >}}
 
 ### Archived API versions
 
 Documentation for older versions of the API has been archived, but can be found
-in the [docker code repository on GitHub](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api){: target="_blank" rel="noopener" class="_"}
+in the [docker code repository on GitHub](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api)

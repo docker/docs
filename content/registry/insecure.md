@@ -4,7 +4,7 @@ keywords: registry, on-prem, images, tags, repository, distribution, insecure
 title: Test an insecure registry
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 While it's highly recommended to secure your registry using a TLS certificate
 issued by a known CA, you can choose to use self-signed certificates, or use
@@ -15,7 +15,7 @@ involves security trade-offs and additional configuration steps.
 
 > **Warning**:
 > It's not possible to use an insecure registry with basic authentication.
-{:.warning}
+{ .warning }
 
 This procedure configures Docker to entirely disregard security for your
 registry. This is **very** insecure and is not recommended. It exposes your
@@ -57,7 +57,7 @@ Repeat these steps on every Engine host that wants to access your registry.
 
 > **Warning**:
 > Using this along with basic authentication requires to **also** trust the certificate into the OS cert store for some versions of docker (see below)
-{:.warning}
+{ .warning }
 
 This is more secure than the insecure registry solution.
 
@@ -97,11 +97,11 @@ This is more secure than the insecure registry solution.
       3.  Click **Finish**. Restart Docker.
 
     - **Docker Desktop for Mac**: Follow the instructions in
-      [Adding custom CA certificates](../desktop/faqs/macfaqs.md#add-custom-ca-certificates-server-side){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/faqs/macfaqs.md#add-custom-ca-certificates-server-side).
       Restart Docker.
 
     - **Docker Desktop for Windows**: Follow the instructions in
-      [Adding custom CA certificates](../desktop/faqs/windowsfaqs.md#how-do-i-add-custom-ca-certificates){: target="_blank" rel="noopener" class="_"}.
+      [Adding custom CA certificates](../desktop/faqs/windowsfaqs.md#how-do-i-add-custom-ca-certificates).
       Restart Docker.
 
 

@@ -6,7 +6,7 @@ title: Subscription FAQs
 
 ### I want to buy a large number of Docker Business subscription seats. How do I do this? Can I get a discount?
 
-Docker offers volume pricing for Docker Business subscriptions starting at 25 seats. Contact the [Docker Sales Team](https://www.docker.com/pricing/contact-sales/){:target="blank" rel="noopener" class=""} for more information.
+Docker offers volume pricing for Docker Business subscriptions starting at 25 seats. Contact the [Docker Sales Team](https://www.docker.com/pricing/contact-sales/) for more information.
 
 ### How do I access support? What level of support do I get for my subscription?
 
@@ -14,7 +14,7 @@ All Docker Pro, Team, and Business subscribers receive email support for their s
 
 ### Does Docker offer academic pricing?
 
-Contact the [Docker Sales Team](https://www.docker.com/company/contact){:target="blank" rel="noopener" class=""}.
+Contact the [Docker Sales Team](https://www.docker.com/company/contact).
 
 ### What ways can I contribute to Docker content?
 
@@ -36,7 +36,7 @@ Personal subscriptions do not include collaborators for private repositories. If
 
 ### How do I know what new features are in planning for my Docker Pro or Docker Team subscription?
 
-Docker maintains a [public roadmap](https://github.com/docker/roadmap){:target="blank" rel="noopener" class=""} so subscribers can see what new features are in development, as well as request new capabilities.
+Docker maintains a [public roadmap](https://github.com/docker/roadmap) so subscribers can see what new features are in development, as well as request new capabilities.
 
 ### Can I pause or delay my Docker Hub subscription?
 
@@ -48,6 +48,4 @@ Subscriptions are non-transferable.
 
 ### I have more questions regarding the new pricing, who can I reach out to?
 
-If you have any questions that are not covered in the FAQ, [please reach out](https://www.docker.com/company/contact){:target="blank" rel="noopener" class=""} and a member of the Docker team will get back to you.
-
-
+If you have any questions that are not covered in the FAQ, [please reach out](https://www.docker.com/company/contact) and a member of the Docker team will get back to you.

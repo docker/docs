@@ -4,7 +4,7 @@ keywords: registry, service, driver, images, storage,  filesystem
 title: Filesystem storage driver
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 An implementation of the `storagedriver.StorageDriver` interface which uses the local filesystem.
 

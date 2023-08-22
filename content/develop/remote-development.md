@@ -32,11 +32,11 @@ remote resources helps simplify and speed up the inner loop. There are several
 tools available, commercial and open-source, that you can use to enable a hybrid
 local-and-remote development environment. For example:
 
-- [Telepresence](https://app.getambassador.io/auth/realms/production/protocol/openid-connect/auth?client_id=docker-docs&response_type=code&redirect_uri=https%3A%2F%2Fapp.getambassador.io&utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker%26TP){: target="_blank" rel="noopener" class="_" }
-- [CodeZero](https://www.codezero.io/){: target="_blank" rel="noopener" class="_" }
-- [Gefyra](https://gefyra.dev/){: target="_blank" rel="noopener" class="_" }
-- [kubefwd](https://kubefwd.com/){: target="_blank" rel="noopener" class="_" }
-- [ktunnel](https://github.com/omrikiei/ktunnel){: target="_blank" rel="noopener" class="_" }
+- [Telepresence](https://app.getambassador.io/auth/realms/production/protocol/openid-connect/auth?client_id=docker-docs&response_type=code&redirect_uri=https%3A%2F%2Fapp.getambassador.io&utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker%26TP)
+- [CodeZero](https://www.codezero.io/)
+- [Gefyra](https://gefyra.dev/)
+- [kubefwd](https://kubefwd.com/)
+- [ktunnel](https://github.com/omrikiei/ktunnel)
 
 ## Telepresence
 
@@ -72,9 +72,9 @@ You have a few options for how the local containers can integrate with the clust
 
 Telepresence seamlessly integrates with Docker and it's available for you to try today. Check out the following docs to learn more:
 
-- [Telepresence extension for Docker Desktop](https://www.getambassador.io/docs/telepresence/latest/docker/extension?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" }
-- [Telepresence in Docker mode](https://www.getambassador.io/docs/telepresence/latest/docker/cli?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" }
-- [Telepresence for Docker Compose](https://www.getambassador.io/docs/telepresence/latest/docker/compose?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP){: target="_blank" rel="noopener" class="_" }
+- [Telepresence extension for Docker Desktop](https://www.getambassador.io/docs/telepresence/latest/docker/extension?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP)
+- [Telepresence in Docker mode](https://www.getambassador.io/docs/telepresence/latest/docker/cli?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP)
+- [Telepresence for Docker Compose](https://www.getambassador.io/docs/telepresence/latest/docker/compose?utm_source=docker-docs&utm_medium=dockerwebsite&utm_campaign=Docker-TP)
 
 
 ### Docker × Ambassador

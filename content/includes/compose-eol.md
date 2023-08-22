@@ -6,4 +6,4 @@
 > For more information, see [Migrate to Compose V2](/compose/migrate).
 >
 > Docker's documentation refers to and describes Compose V2 functionality. 
-{: .important}
+{ .important }

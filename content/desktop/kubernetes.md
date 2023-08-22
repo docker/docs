@@ -2,7 +2,7 @@
 description: See how you can deploy to Kubernetes on Docker Desktop
 keywords: deploy, kubernetes, kubectl, orchestration, Docker Desktop
 title: Deploy on Kubernetes with Docker Desktop
-redirect_from:
+aliases:
 - /docker-for-windows/kubernetes/
 - /docker-for-mac/kubernetes/
 ---
@@ -40,7 +40,7 @@ at `/usr/local/bin/kubectl` on Mac and at `C:\Program Files\Docker\Docker\Resour
 variable, so you may need to type the full path of the command or add it to
 the `PATH`.
 
-The kubectl binary is not automatically packaged with Docker Desktop for Linux. To install the kubectl command for Linux, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/){:target="_blank" rel="noopener" class="_"}. It should be installed at `/usr/local/bin/kubectl`.
+The kubectl binary is not automatically packaged with Docker Desktop for Linux. To install the kubectl command for Linux, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/). It should be installed at `/usr/local/bin/kubectl`.
 
 If you have already installed `kubectl` and it is
 pointing to some other environment, such as `minikube` or a GKE cluster, ensure you change the context so that `kubectl` is pointing to `docker-desktop`:
@@ -55,7 +55,7 @@ $ kubectl config use-context docker-desktop
 > Run the `kubectl` command in a CMD or PowerShell terminal, otherwise `kubectl config get-contexts` may return an empty result. 
 >
 > If you are using a different terminal and this happens, you can try setting the `kubeconfig` environment variable to the location of the `.kube/config` file. 
-{: .tip}
+{ .tip }
 
 If you installed `kubectl` using Homebrew, or by some other method, and
 experience conflicts, remove `/usr/local/bin/kubectl`.
@@ -70,7 +70,7 @@ docker-desktop       Ready     master    3h        v1.19.7
 ```
 
 For more information about `kubectl`, see the
-[`kubectl` documentation](https://kubernetes.io/docs/reference/kubectl/overview/){:target="_blank" rel="noopener" class="_"}.
+[`kubectl` documentation](https://kubernetes.io/docs/reference/kubectl/overview/).
 
 ## Turn off Kubernetes
 

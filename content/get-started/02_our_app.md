@@ -1,9 +1,12 @@
 ---
-title: "Containerize an application"
-keywords: dockerfile example, Containerize an application, run docker file, running docker file, how to run dockerfile, example dockerfile, how to create a docker container, create dockerfile, simple dockerfile, creating containers
-redirect_from:
+title: Containerize an application
+keywords: dockerfile example, Containerize an application, run docker file, running
+  docker file, how to run dockerfile, example dockerfile, how to create a docker container,
+  create dockerfile, simple dockerfile, creating containers
+description: Follow this step-by-step guide to learn how to create and run a containerized
+  application using Docker
+aliases:
 - /get-started/part2/
-description: Follow this step-by-step guide to learn how to create and run a containerized application using Docker
 ---
 
 For the rest of this guide, you'll be working with a simple todo
@@ -13,14 +16,14 @@ don't worry. This guide doesn't require any prior experience with JavaScript.
 ## Prerequisites
 
 - You have installed the latest version of [Docker Desktop](../get-docker.md).
-- You have installed a [Git client](https://git-scm.com/downloads){:target="_blank" rel="noopener" class="_"}.
-- You have an IDE or a text editor to edit files. Docker recommends using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank" rel="noopener" class="_"}.
+- You have installed a [Git client](https://git-scm.com/downloads).
+- You have an IDE or a text editor to edit files. Docker recommends using [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Get the app
 
 Before you can run the application, you need to get the application source code onto your machine.
 
-1. Clone the [getting-started-app repository](https://github.com/docker/getting-started-app/tree/main){:target="_blank" rel="noopener" class="_"} using the following command:
+1. Clone the [getting-started-app repository](https://github.com/docker/getting-started-app/tree/main) using the following command:
 
    ```console
    $ git clone https://github.com/docker/getting-started-app.git
@@ -131,11 +134,11 @@ Now that you have an image, you can run the application in a container using the
    The command publishes the container's port 3000 to `127.0.0.1:3000` (`localhost:3000`) on the host.
    Without the port mapping, you wouldn't be able to access the application from the host.
 
-2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"}.
+2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
    You should see your app.
 
-   ![Empty todo list](images/todo-list-empty.png){: style="width:450px;margin-top:20px;"}
-   {: .text-center }
+   ![Empty todo list](images/todo-list-empty.png)
+   
 
 3. Add an item or two and see that it works as you expect. You can mark items as complete and remove them. Your frontend is successfully storing items in the backend.
 
@@ -182,4 +185,4 @@ Related information:
 
 Next, you're going to make a modification to your app and learn how to update your running application with a new image. Along the way, you'll learn a few other useful commands.
 
-[Update the application](03_updating_app.md){: .button .primary-btn}
+{{< button text="Update the application" url="03_updating_app.md" >}}

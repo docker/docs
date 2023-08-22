@@ -4,7 +4,6 @@ description: Learn about Docker Context
 keywords: engine, context, cli, kubernetes
 ---
 
-
 ## Introduction
 
 This guide shows how _contexts_ make it easy for a **single Docker CLI** to manage multiple Swarm clusters, multiple Kubernetes clusters, and multiple individual Docker nodes.

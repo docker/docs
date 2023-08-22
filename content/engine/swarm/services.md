@@ -307,7 +307,7 @@ of the image.
 > Thus, if you use content trust, the swarm manager receives the request
 > pre-resolved. In this case, if the client cannot resolve the image to a
 > digest, the request fails.
-{: id="image_resolution_with_trust" }
+{ #image_resolution_with_trust }
 
 If the manager can't resolve the tag to a digest, each worker
 node is responsible for resolving the tag to a digest, and different nodes may
@@ -1009,13 +1009,13 @@ Valid placeholders for the Go template are:
 This example sets the template of the created containers based on the
 service's name and the ID of the node where the container is running:
 
-{% raw %}
+
 ```console
 $ docker service create --name hosttempl \
                         --hostname="{{.Node.ID}}-{{.Service.Name}}"\
                          busybox top
 ```
-{% endraw %}
+
 
 To see the result of using the template, use the `docker service ps` and
 `docker inspect` commands.
@@ -1027,11 +1027,11 @@ ID            NAME         IMAGE                                                
 wo41w8hg8qan  hosttempl.1  busybox:latest@sha256:29f5d56d12684887bdfa50dcd29fc31eea4aaf4ad3bec43daf19026a7ce69912  2e7a8a9c4da2  Running        Running about a minute ago
 ```
 
-{% raw %}
+
 ```console
 $ docker inspect --format="{{.Config.Hostname}}" hosttempl.1.wo41w8hg8qanxwjwsg4kxpprj
 ```
-{% endraw %}
+
 
 ## Learn More
 

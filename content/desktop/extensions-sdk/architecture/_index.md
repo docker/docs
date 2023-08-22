@@ -30,14 +30,14 @@ When Docker Desktop installs the extension, it extracts the UI folder from the e
 Every time users click on the **Extensions** tab, Docker Desktop initializes the extension's UI as if it was the first time. When they navigate away from the tab, both the UI itself and all the sub-processes started by it (if any) are terminated.
 
 The frontend can invoke `docker` commands, communicate with the extension backend, or invoke extension executables
-deployed on the host, through the [Extensions SDK](https://www.npmjs.com/package/@docker/extension-api-client){: target="_blank" rel="noopener" class="_"}.
+deployed on the host, through the [Extensions SDK](https://www.npmjs.com/package/@docker/extension-api-client).
 
 > **Tip**
 >
 > The `docker extension init` generates a React based extension. But you can still use it as a starting point for
 > your own extension and use any other frontend framework, like Vue, Angular, Svelte, etc. or event stay with
 > vanilla Javascript.
-{: .tip }
+{ .tip }
 
 Learn more about [building a frontend](../build/frontend-extension-tutorial.md) for your extension.
 
@@ -56,7 +56,7 @@ file
 >
 > The `docker extension init` generates a Go backend. But you can still use it as a starting point for
 > your own extension and use any other language like Node.js, Python, Java, .Net, or any other language and framework.
-{: .tip }
+{ .tip }
 
 Usually, the backend is made of one container that runs within the Docker Desktop VM. Internally, Docker Desktop creates
 a Docker Compose project, creates the container from the `image` option of the `vm` section of the `metadata.json`, and

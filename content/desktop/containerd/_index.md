@@ -1,7 +1,6 @@
 ---
 title: containerd image store (Beta)
-description:
-  How to activate the containerd integration feature in Docker Desktop
+description: How to activate the containerd integration feature in Docker Desktop
 keywords: Docker, containerd, engine, image store, lazy-pull
 toc_max: 3
 ---
@@ -15,7 +14,7 @@ image and file system management in the Docker Engine.
 > [Beta](../../release-lifecycle.md/#beta). We recommend that you do not use
 > this feature in production environments as this feature may change or be
 > removed from future releases.
-{: .experimental}
+{ .experimental }
 
 ## What is the containerd image store?
 
@@ -63,7 +62,7 @@ images** checkbox.
 > After switching to the containerd image store, images and containers from the
 > default image store won't be visible. All of those containers and images
 > still exist. To see them again, turn off the containerd image store feature.
-{: .tip}
+{ .tip }
 
 ## Building multi-platform images
 
@@ -100,7 +99,7 @@ ERROR: docker exporter does not currently support exporting manifest lists
 Turning on the containerd image store lets you build, and load, multi-platform images
 to your local image store, all while using the default builder.
 
-{% raw %}
+
 
 ```console
 $ docker info --format="{{ .Driver }}"
@@ -129,7 +128,7 @@ user/containerd-multiplatform     latest    7401bb14c229   14 seconds ago   3.38
 user/containerd-multiplatform     latest    7401bb14c229   14 seconds ago   3.26MB
 ```
 
-{% endraw %}
+
 
 You can push the multi-platform image to Docker Hub.
 
@@ -147,7 +146,7 @@ d28bdb47b683: Pushed
 
 Inspecting the tag on Docker Hub shows that the image is available for multiple platforms.
 
-![Multiplatform image tag on Docker Hub](../images/containerd_multiplatform.png){:width="750px"}
+![Multiplatform image tag on Docker Hub](../images/containerd_multiplatform.png)
 
 ## Known issues
 
@@ -190,5 +189,4 @@ Inspecting the tag on Docker Hub shows that the image is available for multiple 
 
 Thanks for trying the new features available with `containerd`. Give feedback or
 report any bugs you may find through the issues tracker on the
-[feedback form](https://dockr.ly/3PODIhD){: target="_blank" rel="noopener"
-class="_"}.
+[feedback form](https://dockr.ly/3PODIhD).

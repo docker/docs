@@ -2,7 +2,7 @@
 title: Create a base image
 description: How to create base images
 keywords: images, base image, examples
-redirect_from:
+aliases:
 - /articles/baseimages/
 - /engine/articles/baseimages/
 - /engine/userguide/eng-image/baseimages/
@@ -30,7 +30,7 @@ ones.
 
 In general, start with a working machine that is running
 the distribution you'd like to package as a parent image, though that is
-not required for some tools like Debian's [Debootstrap](https://wiki.debian.org/Debootstrap){:target="blank" rel="noopener" class=""},
+not required for some tools like Debian's [Debootstrap](https://wiki.debian.org/Debootstrap),
 which you can also use to build Ubuntu images.
 
 It can be as simple as this to create an Ubuntu parent image:
@@ -48,7 +48,7 @@ It can be as simple as this to create an Ubuntu parent image:
     DISTRIB_DESCRIPTION="Ubuntu 20.04 LTS"
 
 There are more example scripts for creating parent images in
-[the Docker GitHub repository](https://github.com/docker/docker/blob/master/contrib){:target="blank" rel="noopener" class=""}.
+[the Docker GitHub repository](https://github.com/docker/docker/blob/master/contrib).
 
 ## Create a simple parent image using scratch
 
@@ -70,7 +70,7 @@ CMD ["/hello"]
 ```
 
 Assuming you built the "hello" executable example by using the source code at
-[https://github.com/docker-library/hello-world](https://github.com/docker-library/hello-world){:target="blank" rel="noopener" class=""},
+[https://github.com/docker-library/hello-world](https://github.com/docker-library/hello-world),
 and you compiled it with the `-static` flag, you can build this Docker
 image using this `docker build` command:
 
@@ -100,7 +100,7 @@ $ docker run --rm hello
 ```
 
 This example creates the hello-world image used in the tutorials.
-If you want to test it out, you can clone [the image repo](https://github.com/docker-library/hello-world){:target="blank" rel="noopener" class=""}.
+If you want to test it out, you can clone [the image repo](https://github.com/docker-library/hello-world).
 
 ## More resources
 

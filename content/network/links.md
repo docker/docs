@@ -1,10 +1,11 @@
 ---
 description: Learn how to connect Docker containers together.
-keywords: Examples, Usage, user guide, links, linking, docker, documentation, examples, names, name, container naming, port, map, network port, network
-redirect_from:
+keywords: Examples, Usage, user guide, links, linking, docker, documentation, examples,
+  names, name, container naming, port, map, network port, network
+title: Legacy container links
+aliases:
 - /userguide/dockerlinks/
 - /engine/userguide/networking/default_network/dockerlinks/
-title: Legacy container links
 ---
 
 >**Warning**
@@ -19,7 +20,7 @@ between containers in a more controlled way.
 >
 > See [Differences between user-defined bridges and the default bridge](drivers/bridge.md#differences-between-user-defined-bridges-and-the-default-bridge)
 > for some alternatives to using `--link`.
-{:.warning}
+{ .warning }
 
 The information in this section explains legacy container links within the
 Docker default `bridge` network which is created automatically when you install
@@ -225,13 +226,13 @@ $ docker run -d -P --name web --link db training/webapp python app.py
 
 Next, inspect your linked containers with `docker inspect`:
 
-{% raw %}
+
 ```console
 $ docker inspect -f "{{ .HostConfig.Links }}" web
 
 [/db:/web/db]
 ```
-{% endraw %}
+
 
 You can see that the `web` container is now linked to the `db` container
 `web/db`. Which allows it to access information about the `db` container.
@@ -270,7 +271,7 @@ target container of information related to the source container.
 > from Docker within a container are made available to *any* container
 > that links to it. This could have serious security implications if sensitive
 > data is stored in them.
-{:.warning}
+{ .warning }
 
 Docker sets an `<alias>_NAME` environment variable for each target container
 listed in the `--link` parameter. For example, if a new container called

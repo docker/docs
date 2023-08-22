@@ -2,7 +2,7 @@
 title: Enable IPv6 support
 description: How to enable IPv6 support in the Docker daemon
 keywords: daemon, network, networking, ipv6
-redirect_from:
+aliases:
 - /engine/userguide/networking/default_network/ipv6/
 ---
 

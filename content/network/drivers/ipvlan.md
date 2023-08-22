@@ -1,9 +1,10 @@
 ---
 title: IPvlan network driver
-description: All about using IPvlan to make your containers appear like physical machines on the network
+description: All about using IPvlan to make your containers appear like physical machines
+  on the network
 keywords: network, ipvlan, l2, l3, standalone
-redirect_from:
-  - /network/ipvlan/
+aliases:
+- /network/ipvlan/
 ---
 
 The IPvlan driver gives users total control over both IPv4 and IPv6 addressing.

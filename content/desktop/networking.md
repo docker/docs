@@ -2,7 +2,7 @@
 description: Understand how networking works on Docker Desktop and see the known limitations
 keywords: networking, docker desktop, proxy, vpn, Linux, Mac, Windows
 title: Explore networking features on Docker Desktop
-redirect_from:
+aliases:
 - /desktop/linux/networking/
 - /docker-for-mac/networking/
 - /mackit/networking/
@@ -164,4 +164,3 @@ $ docker run -d -P --name webserver nginx
 
 See the [run command](../engine/reference/commandline/run.md) for more details on
 publish options used with `docker run`.
-

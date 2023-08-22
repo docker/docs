@@ -18,7 +18,7 @@ However, note that the `inline` cache exporter only supports `min` cache mode.
 To use `max` cache mode, push the image and the cache separately using the
 registry cache exporter with the `cache-to` option, as shown in the [registry cache example](#registry-cache).
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -53,14 +53,14 @@ jobs:
           cache-from: type=registry,ref=user/app:latest
           cache-to: type=inline
 ```
-{% endraw %}
+
 
 ## Registry cache
 
 You can import/export cache from a cache manifest or (special) image
 configuration on the registry with the [registry cache exporter](../../cache/backends/registry.md).
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -95,7 +95,7 @@ jobs:
           cache-from: type=registry,ref=user/app:buildcache
           cache-to: type=registry,ref=user/app:buildcache,mode=max
 ```
-{% endraw %}
+
 
 ## GitHub cache
 
@@ -103,9 +103,9 @@ jobs:
 
 > Experimental
 >
-> This cache exporter is experimental. Please provide feedback on [BuildKit repository](https://github.com/moby/buildkit){:target="blank" rel="noopener" class=""}
+> This cache exporter is experimental. Please provide feedback on [BuildKit repository](https://github.com/moby/buildkit)
 > if you experience any issues.
-{: .experimental }
+{ .experimental }
 
 The [GitHub Actions cache exporter](../../cache/backends/gha.md)
 backend uses the [GitHub Cache API](https://github.com/tonistiigi/go-actions-cache/blob/master/api.md)
@@ -114,7 +114,7 @@ backend in a GitHub Action workflow, as the `url` (`$ACTIONS_CACHE_URL`) and
 `token` (`$ACTIONS_RUNTIME_TOKEN`) attributes only get populated in a workflow
 context.
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -149,7 +149,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 ```
-{% endraw %}
+
 
 ### Cache mounts
 
@@ -165,7 +165,7 @@ cache mount data with your Docker build steps.
 
 The following example shows how to use this workaround with a Go project.
 
-{% raw %}
+
 ```yaml
 name: ci
 on: push
@@ -223,7 +223,7 @@ jobs:
         with:
           cache-source: go-build-cache
 ```
-{% endraw %}
+
 
 For more information about this workaround, refer to the
 [GitHub repository](https://github.com/overmindtech/buildkit-cache-dance).
@@ -232,16 +232,16 @@ For more information about this workaround, refer to the
 
 > **Warning**
 >
-> At the moment, old cache entries aren't deleted, so the cache size [keeps growing](https://github.com/docker/build-push-action/issues/252){:target="blank" rel="noopener" class=""}.
-> The following example uses the `Move cache` step as a workaround (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896){:target="blank" rel="noopener" class=""}
+> At the moment, old cache entries aren't deleted, so the cache size [keeps growing](https://github.com/docker/build-push-action/issues/252).
+> The following example uses the `Move cache` step as a workaround (see [`moby/buildkit#1896`](https://github.com/moby/buildkit/issues/1896)
 > for more info).
-{: .warning }
+{ .warning }
 
-You can also leverage [GitHub cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows){:target="blank" rel="noopener" class=""}
+You can also leverage [GitHub cache](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)
 using the [actions/cache](https://github.com/actions/cache) and [local cache exporter](../../cache/backends/local.md)
 with this action:
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -292,4 +292,3 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 ```
-{% endraw %}

@@ -1,5 +1,6 @@
 ---
-description: Use roles in your organization to control who has access to content, registry, and organization management permissions.
+description: Use roles in your organization to control who has access to content,
+  registry, and organization management permissions.
 keywords: members, teams, organization, company, roles, access
 title: Roles and permissions
 ---

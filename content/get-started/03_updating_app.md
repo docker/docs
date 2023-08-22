@@ -1,6 +1,7 @@
 ---
-title: "Update the application"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+title: Update the application
+keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
+  docker desktop
 description: Making changes to your application
 ---
 
@@ -90,7 +91,7 @@ To remove a container, you first need to stop it. Once it has stopped, you can r
    $ docker run -dp 127.0.0.1:3000:3000 getting-started
    ```
 
-2. Refresh your browser on [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"} and you should see your updated help text.
+2. Refresh your browser on [http://localhost:3000](http://localhost:3000) and you should see your updated help text.
 
 ## Summary
 
@@ -103,4 +104,4 @@ Related information:
 
 Next, you'll learn how to share images with others.
 
-[Share the application](04_sharing_app.md){: .button .primary-btn}
+{{< button text="Share the application" url="04_sharing_app.md" >}}

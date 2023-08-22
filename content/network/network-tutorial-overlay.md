@@ -1,8 +1,9 @@
 ---
 title: Networking with overlay networks
-description: Tutorials for networking with swarm services and standalone containers on multiple Docker daemons
+description: Tutorials for networking with swarm services and standalone containers
+  on multiple Docker daemons
 keywords: networking, bridge, routing, ports, swarm, overlay
-redirect_from:
+aliases:
 - /engine/userguide/networking/get-started-overlay/
 ---
 

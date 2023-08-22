@@ -20,31 +20,31 @@ $ docker run -p 8088:80 -d --name welcome-to-docker docker/welcome-to-docker
 
 You just ran a container! Open Docker Desktop to take a look. This container runs a simple web server that displays HTML text. When working with more complex projects, you'll run different parts in different containers. For example, a different container for the frontend, backend, and database. In this guide, you only have a simple frontend container.
 
-![Docker Desktop with get-started container running](images/getting-started-container.png){:width="500px"}
+![Docker Desktop with get-started container running](images/getting-started-container.png)
 
 ## Step 3: View the frontend
 
-The frontend is accessible on port 8088 of your local host. Select the link in the **Port(s)** column of your container, or visit [http://localhost:8088](http://localhost:8088){:target="_blank" rel="noopener" class="_"} in your browser to check it out.
+The frontend is accessible on port 8088 of your local host. Select the link in the **Port(s)** column of your container, or visit [http://localhost:8088](http://localhost:8088) in your browser to check it out.
 
-![Accessing container frontend from Docker Desktop](images/getting-started-frontend.png){:width="500px"}
+![Accessing container frontend from Docker Desktop](images/getting-started-frontend.png)
 
 ## Step 4: Explore your container
 
 Docker Desktop allows you to easily view and interact with different aspects of your container. Try it out yourself. Select your container and then select **Files** to explore your container's isolated file system.
 
-![Viewing container details in Docker Desktop](images/getting-started-explore-container.gif){:width="500px"}
+![Viewing container details in Docker Desktop](images/getting-started-explore-container.gif)
 
 ## Step 5: Stop your container
 
 The `welcome-to-docker` container continues to run until you stop it. To stop the container in Docker Desktop, go to the **Containers** tab and select the **Stop** icon in the **Actions** column of your container.
 
-![Stopping a container in Docker Desktop](images/getting-started-stop.png){:width="500px"}
+![Stopping a container in Docker Desktop](images/getting-started-stop.png)
 
 ## What's next
 
 In this guide, you explored what a container is. Continue to the next guide to learn what you need to create and run your own container.
 
-[Run your own container](./run-your-own-container.md){: .button .primary-btn}
+{{< button text="Run your own container" url="./run-your-own-container.md" >}}
 
 ## Dive deeper
 

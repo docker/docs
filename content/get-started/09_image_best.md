@@ -1,6 +1,7 @@
 ---
-title: "Image-building best practices"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+title: Image-building best practices
+keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
+  docker desktop
 description: Tips for building images for your application
 ---
 
@@ -96,7 +97,7 @@ dependencies if there was a change to the `package.json`.
     it would possibly overwrite files which were created by the command in the `RUN` step.
     For further details on why this is recommended for Node.js applications and other best practices,
     have a look at their guide on
-    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/){:target="_blank" rel="noopener" class="_"}.
+    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
 3. Build a new image using `docker build`.
 
@@ -220,4 +221,4 @@ Related information:
 
 In the next section, you'll learn about additional resources you can use to continue learning about containers.
 
-[What next](11_what_next.md){: .button  .primary-btn}
+{{< button text="What next" url="11_what_next.md" >}}

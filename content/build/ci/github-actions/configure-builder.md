@@ -5,13 +5,13 @@ keywords: ci, github actions, gha, buildkit, buildx
 ---
 
 This page contains instructions on configuring your BuildKit instances when
-using our [Setup Buildx Action](https://github.com/docker/setup-buildx-action){:target="blank" rel="noopener" class=""}.
+using our [Setup Buildx Action](https://github.com/docker/setup-buildx-action).
 
 ## Version pinning
 
-By default, the action will attempt to use the latest version of [Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""}
+By default, the action will attempt to use the latest version of [Buildx](https://github.com/docker/buildx)
 available on the GitHub Runner (the build client) and the latest release of
-[BuildKit](https://github.com/moby/buildkit){:target="blank" rel="noopener" class=""} (the build server).
+[BuildKit](https://github.com/moby/buildkit) (the build server).
 
 To pin to a specific version of Buildx, use the `version` input. For example,
 to pin to Buildx v0.10.0:
@@ -36,8 +36,8 @@ To pin to a specific version of BuildKit, use the `image` option in the
 ## BuildKit container logs
 
 To display BuildKit container logs when using the `docker-container` driver,
-you must either [enable step debug logging](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging#enabling-step-debug-logging){:target="blank" rel="noopener" class=""},
-or set the `--debug` buildkitd flag in the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:target="blank" rel="noopener" class=""} action:
+you must either [enable step debug logging](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging#enabling-step-debug-logging),
+or set the `--debug` buildkitd flag in the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx) action:
 
 ```yaml
 name: ci
@@ -162,7 +162,7 @@ fields:
 Here is an example using remote nodes with the [`remote` driver](../../drivers/remote.md)
 and [TLS authentication](#tls-authentication):
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -195,7 +195,7 @@ jobs:
           BUILDER_NODE_2_AUTH_TLS_CERT: ${{ secrets.LINUXONE_CERT }}
           BUILDER_NODE_2_AUTH_TLS_KEY: ${{ secrets.LINUXONE_KEY }}
 ```
-{% endraw %}
+
 
 ## Authentication for remote builders
 
@@ -207,7 +207,7 @@ using SSH or TLS.
 To be able to connect to an SSH endpoint using the [`docker-container` driver](../../drivers/docker-container.md),
 you have to set up the SSH private key and configuration on the GitHub Runner:
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -231,7 +231,7 @@ jobs:
         with:
           endpoint: ssh://me@graviton2
 ```
-{% endraw %}
+
 
 ### TLS authentication
 
@@ -246,7 +246,7 @@ certificates for the `tcp://`:
 
 The `<idx>` placeholder is the position of the node in the list of nodes.
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -268,7 +268,7 @@ jobs:
           BUILDER_NODE_0_AUTH_TLS_CERT: ${{ secrets.GRAVITON2_CERT }}
           BUILDER_NODE_0_AUTH_TLS_KEY: ${{ secrets.GRAVITON2_KEY }}
 ```
-{% endraw %}
+
 
 ## Standalone mode
 
@@ -315,7 +315,7 @@ hardware.
 For more information about remote builder, see [`remote` driver](../../drivers/remote.md)
 and the [append builder nodes example](#append-additional-nodes-to-the-builder).
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -358,4 +358,3 @@ jobs:
           context: .
           target: mytarget2
 ```
-{% endraw %}

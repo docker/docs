@@ -32,4 +32,4 @@ From here you can choose to:
 
 From here you can choose to:
 - Download an invoice.
-- Update an invoice with recently [updated billing information](details.md) by selecting the menu icon and then **Update Invoice**. 
+- Update an invoice with recently [updated billing information](details.md) by selecting the menu icon and then **Update Invoice**.

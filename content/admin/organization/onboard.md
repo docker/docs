@@ -6,6 +6,6 @@ toc_min: 1
 toc_max: 2
 ---
 
-{% include admin-early-access.md %}
+{{< include "admin-early-access.md" >}}
 
-{% include admin-org-onboarding.md product="admin" %}
+{{% admin-org-onboarding product="admin" %}}

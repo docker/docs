@@ -72,7 +72,7 @@ starts successfully, it is now listening on the IP address specified in the
 > 
 > Setting `hosts` in the `daemon.json` is not supported on Docker
 > Desktop for Windows or Docker Desktop for Mac.
-{:.important}
+{ .important }
 
 ## Out of memory issues
 

@@ -1,10 +1,10 @@
 ---
 description: Describes how to use the syslog logging driver.
 keywords: syslog, docker, logging, driver
-redirect_from:
+title: Syslog logging driver
+aliases:
 - /engine/reference/logging/syslog/
 - /engine/admin/logging/syslog/
-title: Syslog logging driver
 ---
 
 The `syslog` logging driver routes logs to a `syslog` server. The `syslog` protocol uses

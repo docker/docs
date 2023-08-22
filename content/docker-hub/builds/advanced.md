@@ -2,7 +2,7 @@
 description: Automated builds
 keywords: automated, build, images
 title: Advanced options for Autobuild and Autotest
-redirect_from:
+aliases:
 - /docker-cloud/builds/advanced/
 ---
 
@@ -60,7 +60,7 @@ to perform actions in between these commands.
 >Use these hooks with caution. The contents of these hook files replace the
 basic `docker` commands, so you must include a similar build, test or push
 command in the hook or your automated process does not complete.
-{: .important}
+{ .important }
 
 To override these phases, create a folder called `hooks` in your source code
 repository at the same directory level as your Dockerfile. Create a file called
@@ -68,10 +68,10 @@ repository at the same directory level as your Dockerfile. Create a file called
 builder process can execute, such as `docker` and `bash` commands (prefixed
 appropriately with `#!/bin/bash`).
 
-These hooks run on an instance of [Ubuntu](https://releases.ubuntu.com/){:target="_blank" rel="noopener" class="_"},
+These hooks run on an instance of [Ubuntu](https://releases.ubuntu.com/),
 which includes interpreters
 such as Perl or Python, and utilities such as `git` or `curl`. Refer to the
-[Ubuntu documentation](https://ubuntu.com/){:target="_blank" rel="noopener" class="_"}
+[Ubuntu documentation](https://ubuntu.com/)
 for the full list of available interpreters and utilities.
 
 ## Custom build phase hooks
@@ -117,7 +117,7 @@ $ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
 >
 > A `hooks/build` file overrides the basic [docker build](../../engine/reference/commandline/build.md) command used by the builder, so you must include a similar build command in the hook or
 the automated build fails.
-{: .important}
+{ .important }
 
 Refer to the [docker build documentation](../../engine/reference/commandline/build.md#build-arg)
 to learn more about Docker build-time variables.

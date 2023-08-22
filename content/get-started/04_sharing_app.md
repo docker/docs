@@ -1,9 +1,11 @@
 ---
-title: "Share the application"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop, docker hub, sharing 
-redirect_from:
+title: Share the application
+keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
+  docker desktop, docker hub, sharing
+description: Sharing your image you built for your example application so you can
+  run it else where and other developers can use it
+aliases:
 - /get-started/part3/
-description: Sharing your image you built for your example application so you can run it else where and other developers can use it
 ---
 
 Now that you've built an image, you can share it. To share Docker images, you have to use a Docker
@@ -11,13 +13,13 @@ registry. The default registry is Docker Hub and is where all of the images you'
 
 > **Docker ID**
 >
-> A Docker ID lets you to access Docker Hub, which is the world's largest library and community for container images. Create a [Docker ID](https://hub.docker.com/signup){:target="_blank" rel="noopener" class="_"} for free if you don't have one.
+> A Docker ID lets you to access Docker Hub, which is the world's largest library and community for container images. Create a [Docker ID](https://hub.docker.com/signup) for free if you don't have one.
 
 ## Create a repository
 
 To push an image, you first need to create a repository on Docker Hub.
 
-1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade){:target="_blank" rel="noopener" class="_"} or Sign in to [Docker Hub](https://hub.docker.com){:target="_blank" rel="noopener" class="_"}.
+1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) or Sign in to [Docker Hub](https://hub.docker.com).
 
 2. Select the **Create Repository** button.
 
@@ -27,8 +29,8 @@ To push an image, you first need to create a repository on Docker Hub.
 
 In the following image, you can see an example Docker command from Docker Hub. This command will push to this repository.
 
-![Docker command with push example](images/push-command.png){: style=width:75% }
-{: .text-center }
+![Docker command with push example](images/push-command.png)
+
 
 ## Push the image
 
@@ -79,7 +81,7 @@ new instance that has never seen this container image. To do this, you will use 
 > Docker buildx also supports building multi-platform images. To learn more, see [Multi-platform images](../build/building/multi-platform.md).
 
 
-1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/){:target="_blank" rel="noopener" class="_"}.
+1. Open your browser to [Play with Docker](https://labs.play-with-docker.com/).
 
 2. Select **Login** and then select **docker** from the drop-down list.
 
@@ -87,7 +89,7 @@ new instance that has never seen this container image. To do this, you will use 
 
 4. Select the **ADD NEW INSTANCE** option on the left side bar. If you don't see it, make your browser a little wider. After a few seconds, a terminal window opens in your browser.
 
-    ![Play with Docker add new instance](images/pwd-add-new-instance.png){: style=width:75% }
+    ![Play with Docker add new instance](images/pwd-add-new-instance.png)
 
 5. In the terminal, start your freshly pushed app.
 
@@ -109,7 +111,7 @@ new instance that has never seen this container image. To do this, you will use 
     >
     > For more information about how port mapping works, see
     > [Networking](../network/index.md#published-ports).
-    {: .tip }
+    { .tip }
 
 6. Select the 3000 badge when it appears.
 
@@ -133,4 +135,4 @@ Related information:
 
 In the next section, you'll learn how to persist data in your containerized application.
 
-[Persist the DB](05_persisting_data.md){: .button  .primary-btn}
+{{< button text="Persist the DB" url="05_persisting_data.md" >}}

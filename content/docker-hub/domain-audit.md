@@ -4,4 +4,4 @@ keywords: domain audit, security
 title: Domain audit
 ---
 
-{% include admin-domain-audit.md product="hub" %}
+{{% admin-domain-audit product="hub" %}}

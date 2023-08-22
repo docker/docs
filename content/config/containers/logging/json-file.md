@@ -1,12 +1,11 @@
 ---
 description: Describes how to use the json-file logging driver.
 keywords: json-file, docker, logging, driver
-redirect_from:
+title: JSON File logging driver
+aliases:
 - /engine/reference/logging/json-file/
 - /engine/admin/logging/json-file/
-title: JSON File logging driver
 ---
-
 
 By default, Docker captures the standard output (and standard error) of all your containers,
 and writes them in files using the JSON format. The JSON format annotates each line with its

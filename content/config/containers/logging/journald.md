@@ -1,10 +1,10 @@
 ---
 description: Describes how to use the Journald logging driver.
 keywords: Journald, docker, logging, driver
-redirect_from:
+title: Journald logging driver
+aliases:
 - /engine/reference/logging/journald/
 - /engine/admin/logging/journald/
-title: Journald logging driver
 ---
 
 The `journald` logging driver sends container logs to the

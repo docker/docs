@@ -1,10 +1,11 @@
 ---
 description: How to set up and use certificates with a registry to verify access
-keywords: Usage, registry, repository, client, root, certificate, docker, apache, ssl, tls, documentation, examples, articles, tutorials
-redirect_from:
+keywords: Usage, registry, repository, client, root, certificate, docker, apache,
+  ssl, tls, documentation, examples, articles, tutorials
+title: Verify repository client with certificates
+aliases:
 - /articles/certificates/
 - /engine/articles/certificates/
-title: Verify repository client with certificates
 ---
 
 In [Running Docker with HTTPS](protect-access.md), you learned that, by default,

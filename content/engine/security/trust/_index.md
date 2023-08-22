@@ -2,7 +2,7 @@
 description: Enabling content trust in Docker
 keywords: content, trust, security, docker, documentation
 title: Content trust in Docker
-redirect_from:
+aliases:
 - /engine/security/trust/content_trust/
 - /notary/getting_started/
 - /notary/advanced_usage/
@@ -99,7 +99,7 @@ The following image depicts the various signing keys and their relationships:
 >
 >The root key once lost is not recoverable. If you lose any other key, send an email to [Docker Hub Support](mailto:hub-support@docker.com). This loss also requires manual intervention from every
 consumer that used a signed tag from this repository prior to the loss.
-{:.warning}
+{ .warning }
 
 You should back up the root key somewhere safe. Given that it is only required
 to create new repositories, it is a good idea to store it offline in hardware.
@@ -110,7 +110,7 @@ read how to [manage keys for DCT](trust_key_mng.md).
 
 Within the Docker CLI we can sign and push a container image with the
 `$ docker trust` command syntax. This is built on top of the Notary feature
-set. For more information, see the [Notary GitHub repository](https://github.com/theupdateframework/notary){:target="_blank" rel="noopener" class="_"}.
+set. For more information, see the [Notary GitHub repository](https://github.com/theupdateframework/notary).
 
 A prerequisite for signing an image is a Docker Registry with a Notary server
 attached (Such as the Docker Hub ). Instructions for

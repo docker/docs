@@ -1,9 +1,9 @@
 ---
-title: "Remote driver"
+title: Remote driver
 keywords: build, buildx, driver, builder, remote
-redirect_from:
-  - /build/buildx/drivers/remote/
-  - /build/building/drivers/remote/
+aliases:
+- /build/buildx/drivers/remote/
+- /build/building/drivers/remote/
 ---
 
 The Buildx remote driver allows for more complex custom build workloads,
@@ -35,7 +35,7 @@ pass to `--driver-opt`:
 This guide shows you how to create a setup with a BuildKit daemon listening on a
 Unix socket, and have Buildx connect through it.
 
-1. Ensure that [BuildKit](https://github.com/moby/buildkit){:target="blank" rel="noopener" class=""}
+1. Ensure that [BuildKit](https://github.com/moby/buildkit)
    is installed.
 
    For example, you can launch an instance of buildkitd with:
@@ -44,8 +44,8 @@ Unix socket, and have Buildx connect through it.
    $ sudo ./buildkitd --group $(id -gn) --addr unix://$HOME/buildkitd.sock
    ```
 
-   Alternatively, [see here](https://github.com/moby/buildkit/blob/master/docs/rootless.md){:target="blank" rel="noopener" class=""}
-   for running buildkitd in rootless mode or [here](https://github.com/moby/buildkit/tree/master/examples/systemd){:target="blank" rel="noopener" class=""}
+   Alternatively, [see here](https://github.com/moby/buildkit/blob/master/docs/rootless.md)
+   for running buildkitd in rootless mode or [here](https://github.com/moby/buildkit/tree/master/examples/systemd)
    for examples of running it as a systemd service.
 
 2. Check that you have a Unix socket that you can connect to.
@@ -97,7 +97,7 @@ but this is for illustration purposes.)
 
 1.  Generate certificates for BuildKit.
 
-    You can use the [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""}
+    You can use the [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh)
     script as a starting point. Note that while it's possible to expose BuildKit
     over TCP without using TLS, it's not recommended. Doing so allows arbitrary
     access to BuildKit without credentials.
@@ -150,10 +150,10 @@ pods, the Buildx builder will need to be recreated from within each pod or
 copied between them.
 
 1. Create a Kubernetes deployment of `buildkitd`, as per the instructions
-   [here](https://github.com/moby/buildkit/tree/master/examples/kubernetes){:target="blank" rel="noopener" class=""}.
+   [here](https://github.com/moby/buildkit/tree/master/examples/kubernetes).
 
    Following the guide, create certificates for the BuildKit daemon and client
-   using [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh){:target="blank" rel="noopener" class=""},
+   using [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh),
    and create a deployment of BuildKit pods with a service that connects to
    them.
 

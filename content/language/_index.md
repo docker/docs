@@ -40,4 +40,3 @@ Learn how to set up your Docker environment and start containerizing your applic
         <a href="/language/rust/"><img class="m-auto rounded" src="/language/images/rust-logo.png" alt="Develop with Rust"></a>
     </div>
 </div>
-

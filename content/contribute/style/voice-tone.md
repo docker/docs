@@ -2,7 +2,7 @@
 title: Voice and tone
 description: Docker's voice and tone
 keywords: style guide, voice, tone, content standards
---- 
+---
 
 ## Voice
 

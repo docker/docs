@@ -1,19 +1,23 @@
 ---
-description: Jumpstart your client-side server applications with Docker Engine on Ubuntu. This guide details prerequisites and multiple methods to install.
-keywords: docker install script, ubuntu docker server, ubuntu server docker, install docker engine ubuntu, install docker on ubuntu server, ubuntu 22.04 docker-ce, install docker engine on ubuntu, ubuntu install docker ce, ubuntu install docker engine
-redirect_from:
-  - /ee/docker-ee/ubuntu/
-  - /engine/installation/linux/docker-ce/ubuntu/
-  - /engine/installation/linux/docker-ee/ubuntu/
-  - /engine/installation/linux/ubuntu/
-  - /engine/installation/linux/ubuntulinux/
-  - /engine/installation/ubuntulinux/
-  - /install/linux/docker-ce/ubuntu/
-  - /install/linux/docker-ee/ubuntu/
-  - /install/linux/ubuntu/
-  - /installation/ubuntulinux/
+description: Jumpstart your client-side server applications with Docker Engine on
+  Ubuntu. This guide details prerequisites and multiple methods to install.
+keywords: docker install script, ubuntu docker server, ubuntu server docker, install
+  docker engine ubuntu, install docker on ubuntu server, ubuntu 22.04 docker-ce, install
+  docker engine on ubuntu, ubuntu install docker ce, ubuntu install docker engine
 title: Install Docker Engine on Ubuntu
 toc_max: 4
+aliases:
+- /ee/docker-ee/ubuntu/
+- /engine/installation/linux/docker-ce/ubuntu/
+- /engine/installation/linux/docker-ee/ubuntu/
+- /engine/installation/linux/ubuntu/
+- /engine/installation/linux/ubuntulinux/
+- /engine/installation/ubuntulinux/
+- /install/linux/docker-ce/ubuntu/
+- /install/linux/docker-ee/ubuntu/
+- /install/linux/ubuntu/
+- /installation/ubuntulinux/
+download-url-base: https://download.docker.com/linux/ubuntu
 ---
 
 To get started with Docker Engine on Ubuntu, make sure you
@@ -100,7 +104,6 @@ Docker from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/ubuntu" %}
 
 1.  Update the `apt` package index and install packages to allow `apt` to use a
     repository over HTTPS:
@@ -114,7 +117,7 @@ Docker from the repository.
 
     ```console
     $ sudo install -m 0755 -d /etc/apt/keyrings
-    $ curl -fsSL {{ download-url-base }}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    $ curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
     $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
     ```
 
@@ -122,7 +125,7 @@ Docker from the repository.
 
     ```console
     $ echo \
-      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{ download-url-base }} \
+      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
       "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
       sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     ```
@@ -188,7 +191,7 @@ Docker from the repository.
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -201,7 +204,7 @@ If you can't use Docker's `apt` repository to install Docker Engine, you can
 download the `deb` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
-1. Go to [`{{ download-url-base }}/dists/`]({{ download-url-base }}/dists/){: target="_blank" rel="noopener" class="_" }.
+1. Go to [`{{% param "download-url-base" %}}/dists/`]({{% param "download-url-base" %}}/dists/).
 
 2. Select your Ubuntu version in the list.
 
@@ -243,14 +246,14 @@ download a new file each time you want to upgrade Docker Engine.
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package files and repeat the
 [installation procedure](#install-from-a-package), pointing to the new files.
 
-{% include install-script.md %}
+{{< include "install-script.md" >}}
 
 ## Uninstall Docker Engine
 

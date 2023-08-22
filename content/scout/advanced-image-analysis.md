@@ -4,7 +4,7 @@ keywords: scanning, vulnerabilities, Hub, supply chain, security
 title: Advanced image analysis
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 Advanced image analysis is a Docker Scout feature for Docker Hub.
 
@@ -44,7 +44,7 @@ To activate Advanced image analysis:
 >
 > You can enable Advanced image analysis on repositories in bulk from
 > the [Docker Scout Dashboard settings](./dashboard.md#repository-settings).
-{: .tip }
+{ .tip }
 
 ## Analyze an image
 
@@ -113,5 +113,4 @@ To deactivate Advanced image analysis:
 
 Thank you for trying out the Advanced image analysis feature. Give feedback or
 report any bugs you may find through the issues tracker on the
-[hub-feedback](https://github.com/docker/hub-feedback/issues){: target="_blank"
-rel="noopener" class="_"} GitHub repository.
+[hub-feedback](https://github.com/docker/hub-feedback/issues) GitHub repository.

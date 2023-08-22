@@ -1,13 +1,15 @@
 ---
 title: Deploying Docker containers on Azure
 description: Deploying Docker containers on Azure
-keywords: Docker, Azure, Integration, ACI, context, Compose, cli, deploy, containers, cloud
-redirect_from:
-  - /engine/context/aci-integration/
+keywords: Docker, Azure, Integration, ACI, context, Compose, cli, deploy, containers,
+  cloud
 toc_min: 1
 toc_max: 2
+aliases:
+- /engine/context/aci-integration/
 ---
-{% include aci-ecs-eol.md %}
+
+{{< include "aci-ecs-eol.md" >}}
 
 ## Overview
 
@@ -32,7 +34,7 @@ To deploy Docker containers on Azure, you must meet the following requirements:
 
     Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
-2. Ensure you have an Azure subscription. You can get started with an [Azure free account](https://aka.ms/AA8r2pj){: target="_blank" rel="noopener" class="_"}.
+2. Ensure you have an Azure subscription. You can get started with an [Azure free account](https://aka.ms/AA8r2pj).
 
 ## Run Docker containers on ACI
 
@@ -50,8 +52,8 @@ $ docker login azure
 ```
 
 This opens your web browser and prompts you to enter your Azure login credentials.
-If the Docker CLI cannot open a browser, it will fall back to the [Azure device code flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code){:target="_blank" rel="noopener" class="_"} and lets you connect manually.
-Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/){:target="_blank" rel="noopener" class="_"} login is separated from the Docker CLI Azure login.
+If the Docker CLI cannot open a browser, it will fall back to the [Azure device code flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code) and lets you connect manually.
+Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/) login is separated from the Docker CLI Azure login.
 
 Alternatively, you can log in without interaction (typically in
 scripts or continuous integration scenarios), using an Azure Service
@@ -391,7 +393,7 @@ $ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/inst
 ### Manual install
 
 You can download the Docker ACI Integration CLI from the
-[latest release](https://github.com/docker/compose-cli/releases/latest){: target="_blank" rel="noopener" class="_"} page.
+[latest release](https://github.com/docker/compose-cli/releases/latest) page.
 
 You will then need to make it executable:
 
@@ -469,4 +471,4 @@ $ sudo rm /usr/local/bin/docker /usr/local/bin/com.docker.cli
 
 ## Feedback
 
-Thank you for trying out Docker Azure Integration. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out Docker Azure Integration. Your feedback is very important to us. Let us know your feedback by creating an issue in the [compose-cli](https://github.com/docker/compose-cli) GitHub repository.

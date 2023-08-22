@@ -52,4 +52,3 @@ For information on how to add redirects, see [Source file conventions](file-conv
 ##### Completed a final spelling, punctuation, and grammar check
 
 For more in-depth information on our Style Guide, explore the [grammar](style/grammar.md) or [formatting](style/formatting.md) guides.
-

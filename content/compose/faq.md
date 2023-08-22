@@ -3,7 +3,8 @@ description: Frequently asked questions for Docker Compose
 keywords: documentation, docs,  docker, compose, faq
 title: Compose FAQs
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 ### How do I get help?
 
@@ -11,16 +12,16 @@ Docker Compose is under active development. If you need help, would like to
 contribute, or simply want to talk about the project with like-minded
 individuals, we have a number of open channels for communication.
 
-* To report bugs or file feature requests, use the [issue tracker on Github](https://github.com/docker/compose/issues){: target="blank" rel="noopener" class="_" }.
+* To report bugs or file feature requests, use the [issue tracker on Github](https://github.com/docker/compose/issues).
 
 * To talk about the project with people in real time, join the
-  `#docker-compose` channel on the [Docker Community Slack](https://dockr.ly/slack){: target="blank" rel="noopener" class="_" }.
+  `#docker-compose` channel on the [Docker Community Slack](https://dockr.ly/slack).
 
-* To contribute code submit a [pull request on Github](https://github.com/docker/compose/pulls){: target="blank" rel="noopener" class="_" }.
+* To contribute code submit a [pull request on Github](https://github.com/docker/compose/pulls).
 
 ### Where can I find example Compose files?
 
-There are [many examples of Compose files on GitHub](https://github.com/docker/awesome-compose){: target="blank" rel="noopener" class="_" }.
+There are [many examples of Compose files on GitHub](https://github.com/docker/awesome-compose).
 
 ### What's the difference between `up`, `run`, and `start`?
 
@@ -51,7 +52,7 @@ are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
 
 There has already been a lot written about this problem of
-[processes handling signals](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86){: target="blank" rel="noopener" class="_" }
+[processes handling signals](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
 in containers.
 
 To fix this problem, try the following:
@@ -77,9 +78,9 @@ services:
 ```
 
 * If you can't modify the application, wrap the application in a lightweight init
-system (like [s6](https://skarnet.org/software/s6/){: target="blank" rel="noopener" class="_" }) or a signal proxy (like
-[dumb-init](https://github.com/Yelp/dumb-init){: target="blank" rel="noopener" class="_" } or
-[tini](https://github.com/krallin/tini){: target="blank" rel="noopener" class="_" }).  Either of these wrappers takes care of
+system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
+[dumb-init](https://github.com/Yelp/dumb-init) or
+[tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
 handling `SIGTERM` properly.
 
 ### Can I control service startup order?
@@ -95,7 +96,7 @@ or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envva
 
 ### Can I use JSON instead of YAML for my Compose file?
 
-Yes. [YAML is a superset of JSON](https://stackoverflow.com/a/1729545/444646){: target="blank" rel="noopener" class="_" } so
+Yes. [YAML is a superset of JSON](https://stackoverflow.com/a/1729545/444646) so
 any JSON file should be valid YAML. To use a JSON file with Compose,
 specify the filename to use, for example:
 

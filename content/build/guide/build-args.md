@@ -1,8 +1,9 @@
 ---
 title: Build arguments
 description: Introduction to configurable builds, using build args
-keywords: >
-  build, buildkit, buildx, guide, tutorial, build arguments, arg
+keywords: 'build, buildkit, buildx, guide, tutorial, build arguments, arg
+
+  '
 ---
 
 {% include_relative nav.html selected="5" %}
@@ -14,7 +15,7 @@ uses as a fallback.
 ## Change runtime versions
 
 A practical use case for build arguments is to specify runtime versions for
-build stages. Your image uses the `golang:{{site.example_go_version}}-alpine`
+build stages. Your image uses the `golang:{{% param "example_go_version" %}}-alpine`
 image as a base image.
 But what if someone wanted to use a different version of Go for building the
 application? They could update the version number inside the Dockerfile, but
@@ -23,8 +24,8 @@ has to be. Build arguments make life easier:
 
 ```diff
   # syntax=docker/dockerfile:1
-- FROM golang:{{site.example_go_version}}-alpine AS base
-+ ARG GO_VERSION={{site.example_go_version}}
+- FROM golang:{{% param "example_go_version" %}}-alpine AS base
++ ARG GO_VERSION={{% param "example_go_version" %}}
 + FROM golang:${GO_VERSION}-alpine AS base
   WORKDIR /src
   RUN --mount=type=cache,target=/go/pkg/mod/ \
@@ -52,9 +53,9 @@ has to be. Build arguments make life easier:
 ```
 
 The `ARG` keyword is interpolated in the image name in the `FROM` instruction.
-The default value of the `GO_VERSION` build argument is set to `{{site.example_go_version}}`.
+The default value of the `GO_VERSION` build argument is set to `{{% param "example_go_version" %}}`.
 If the build doesn't receive a `GO_VERSION` build argument, the `FROM` instruction
-resolves to `golang:{{site.example_go_version}}-alpine`.
+resolves to `golang:{{% param "example_go_version" %}}-alpine`.
 
 Try setting a different version of Go to use for building, using the
 `--build-arg` flag for the build command:
@@ -97,7 +98,7 @@ a variable in the code.
 
 ```diff
   # syntax=docker/dockerfile:1
-  ARG GO_VERSION={{site.example_go_version}}
+  ARG GO_VERSION={{% param "example_go_version" %}}
   FROM golang:${GO_VERSION}-alpine AS base
   WORKDIR /src
   RUN --mount=type=cache,target=/go/pkg/mod/ \
@@ -153,4 +154,4 @@ Related information:
 The next section of this guide shows how you can use Docker builds to create not
 only container images, but executable binaries as well.
 
-[Export binaries](export.md){: .button .primary-btn }
+{{< button text="Export binaries" url="export.md" >}}

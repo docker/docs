@@ -1,9 +1,10 @@
 ---
 title: Build attestations
 keywords: build, attestations, sbom, provenance
-description: >
-  Introduction to SBOM and provenance attestations with Docker Build; what they
-  are and why they exist
+description: 'Introduction to SBOM and provenance attestations with Docker Build;
+  what they are and why they exist
+
+  '
 ---
 
 {% include build-feature-state.md buildkit_v=">=0.11" buildx_v=">=0.10" %}
@@ -66,9 +67,9 @@ index in a manifest for the final image.
 
 <!-- prettier-ignore -->
 BuildKit produces attestations in the
-[in-toto format](https://github.com/in-toto/attestation){: target="blank" rel="noopener" class="\_" },
+[in-toto format](https://github.com/in-toto/attestation),
 as defined by the
-[in-toto framework](https://in-toto.io/){: target="blank" rel="noopener" class="\_" },
+[in-toto framework](https://in-toto.io/),
 a standard supported by the Linux Foundation.
 
 Attestations attach to images as a manifest in the image index. The data records

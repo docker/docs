@@ -1,8 +1,9 @@
 ---
 title: OCI artifacts on Docker Hub
 keywords: oci, artifacts, docker hub
-description: >
-  You can use Docker Hub to store software artifacts packaged as OCI artifacts.
+description: 'You can use Docker Hub to store software artifacts packaged as OCI artifacts.
+
+  '
 ---
 
 You can use Docker Hub to store any kind of software artifact, not just

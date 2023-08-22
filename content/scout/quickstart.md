@@ -1,13 +1,15 @@
 ---
 title: Docker Scout quickstart
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
-description: >
-  Learn how to get started with Docker Scout to analyze images and fix vulnerabilities
-redirect_from:
-  - /atomist/get-started/
+description: 'Learn how to get started with Docker Scout to analyze images and fix
+  vulnerabilities
+
+  '
+aliases:
+- /atomist/get-started/
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 Docker Scout analyzes image contents and generates a detailed report of packages
 and vulnerabilities that it detects. It can provide you with
@@ -50,7 +52,7 @@ a vulnerable Node.js application that you can use to follow along.
    > **Important**
    >
    > Make sure you log in to the Docker CLI or Docker Desktop before pushing.
-   {: .important}
+   { .important }
 
 ## Enable Docker Scout
 
@@ -86,7 +88,7 @@ to see vulnerabilities detected by Docker Scout.
    $ docker scout cves <org-name>/scout-demo:v1
    ```
 
-![Screenshot showing highlighting a CVE in Docker Desktop](./images/scout-onboarding-dd-v1-cvve-focus.png){:width="650px"}
+![Screenshot showing highlighting a CVE in Docker Desktop](./images/scout-onboarding-dd-v1-cvve-focus.png)
 
 Docker Scout creates and maintains its vulnerability database by ingesting and
 collating vulnerability data from multiple sources continuously. These sources
@@ -96,7 +98,7 @@ You can find more details in the [Advisory Database sources](./advisory-db-sourc
 > **Tip**
 >
 > Find out how to filter results using the CLI command [`scout cves`](/engine/reference/commandline/scout_cves).
-{: .tip }
+{ .tip }
 
 ## Fix application vulnerabilities
 
@@ -180,8 +182,8 @@ security, compliance, and operations to know what vulnerabilities and issues to 
 >
 > If you are a member of multiple organizations, make sure you select the
 > correct organization from the drop-down in the top right.
-> ![Screenshot showing organization picker in the Docker Scout dashboard](./images/scout-onboarding-org-picker.png){:width="250px"}
-{: .tip }
+> ![Screenshot showing organization picker in the Docker Scout dashboard](./images/scout-onboarding-org-picker.png)
+{ .tip }
 
 ## Comparing image tags
 

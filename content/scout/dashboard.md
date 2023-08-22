@@ -1,13 +1,14 @@
 ---
 description: The Docker Scout Dashboard helps review and share the analysis of images.
-keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security, report, reports, dashboard
+keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security, report,
+  reports, dashboard
 title: Dashboard
-redirect_from:
-  - /scout/reports/
-  - /scout/web-app/
+aliases:
+- /scout/reports/
+- /scout/web-app/
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
  
 The Docker Scout Dashboard helps you share the analysis of images in an organization with your team. Developers can now see an overview of their security status across all their images from both Docker Hub and Artifactory, and get remediation advice at their fingertips. It helps team members in roles such as security, compliance, and operations to know what vulnerabilities and issues they need to focus on.
 
@@ -65,7 +66,7 @@ Each entry in the list shows the following details:
   > **Tip**
   >
   > Compare two image tags by selecting the checkboxes next to them and selecting the **Compare images** button at the top of the list.
-  {: .tip }
+  { .tip }
 
 - The tag version. Clicking the link for version opens [the image layer view](#image-layer-view).
 - The operating system and architecture of the image.

@@ -1,7 +1,10 @@
 ---
 description: Instructions for installing Docker Engine on RHEL
-keywords: requirements, apt, installation, rhel, rpm, install, uninstall, upgrade, update, s390x, ibm-z
-redirect_from:
+keywords: requirements, apt, installation, rhel, rpm, install, uninstall, upgrade,
+  update, s390x, ibm-z
+title: Install Docker Engine on RHEL
+toc_max: 4
+aliases:
 - /ee/docker-ee/rhel/
 - /engine/installation/linux/docker-ce/rhel/
 - /engine/installation/linux/docker-ee/rhel/
@@ -10,8 +13,7 @@ redirect_from:
 - /engine/installation/rhel/
 - /install/linux/docker-ee/rhel/
 - /installation/rhel/
-title: Install Docker Engine on RHEL
-toc_max: 4
+download-url-base: https://download.docker.com/linux/rhel
 ---
 
 To get started with Docker Engine on RHEL, make sure you
@@ -85,14 +87,13 @@ Docker from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/rhel" %}
 
 Install the `yum-utils` package (which provides the `yum-config-manager`
 utility) and set up the repository.
 
 ```console
 $ sudo yum install -y yum-utils
-$ sudo yum-config-manager --add-repo {{ download-url-base }}/docker-ce.repo
+$ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce.repo
 ```
 
 #### Install Docker Engine
@@ -166,7 +167,7 @@ $ sudo yum-config-manager --add-repo {{ download-url-base }}/docker-ce.repo
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -179,7 +180,7 @@ If you can't use Docker's `rpm` repository to install Docker Engine, you can
 download the `.rpm` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
-1. Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
+1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
    and choose your version of RHEL. Then browse to `s390x/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
@@ -211,7 +212,7 @@ download a new file each time you want to upgrade Docker Engine.
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -219,7 +220,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
 [installation procedure](#install-from-a-package), using `yum -y upgrade`
 instead of `yum -y install`, and point to the new files.
 
-{% include install-script.md %}
+{{< include "install-script.md" >}}
 
 ## Uninstall Docker Engine
 

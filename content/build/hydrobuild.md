@@ -11,7 +11,7 @@ sitemap: false
 >
 > If you want to get involved in testing Hydrobuild, you can
 > [sign up for the early access program](https://www.docker.com/build-early-access-program/?utm_source=docs).
-{: .restricted }
+{ .restricted }
 
 Hydrobuild is a service that lets you build your container images faster, both
 locally and in CI. Builds run on cloud infrastructure optimally dimensioned for

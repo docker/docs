@@ -8,4 +8,4 @@ title: Audit logs
 >
 > Audit logs requires a [Docker Team or Business subscription](../subscription/index.md).
 
-{% include admin-org-audit-log.md product="hub" %}
+{{% admin-org-audit-log product="hub" %}}

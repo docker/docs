@@ -6,124 +6,124 @@ toc_max: 2
 ---
 
 This page contains information about the new features, improvements, and bug
-fixes in [Docker Buildx](https://github.com/docker/buildx){:target="blank" rel="noopener" class=""}.
+fixes in [Docker Buildx](https://github.com/docker/buildx).
 
 ## 0.11.2
 
-{% include release-date.html date="2023-07-18" %}
+{{< release-date date="2023-07-18" >}}
 
 The full release note for this release is available
-[on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.2){:target="blank" rel="noopener"}.
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.2).
 
 ### Bug fixes and enhancements
 
 - Fix a regression that caused buildx to not read the `KUBECONFIG` path from the instance store.
-  [docker/buildx#1941](https://github.com/docker/buildx/pull/1941){:target="blank" rel="noopener"}
+  [docker/buildx#1941](https://github.com/docker/buildx/pull/1941)
 - Fix a regression with result handle builds showing up in the build history incorrectly.
-  [docker/buildx#1954](https://github.com/docker/buildx/pull/1954){:target="blank" rel="noopener"}
+  [docker/buildx#1954](https://github.com/docker/buildx/pull/1954)
 
 ## 0.11.1
 
-{% include release-date.html date="2023-07-05" %}
+{{< release-date date="2023-07-05" >}}
 
 The full release note for this release is available
-[on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.1){:target="blank" rel="noopener"}.
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.1).
 
 ### Bug fixes and enhancements
 
 - Fix a regression for bake where services in profiles would not be loaded.
-  [docker/buildx#1903](https://github.com/docker/buildx/pull/1903){:target="blank" rel="noopener"}
+  [docker/buildx#1903](https://github.com/docker/buildx/pull/1903)
 - Fix a regression where `--cgroup-parent` option had no effect during build.
-  [docker/buildx#1913](https://github.com/docker/buildx/pull/1913){:target="blank" rel="noopener"}
+  [docker/buildx#1913](https://github.com/docker/buildx/pull/1913)
 - Fix a regression where valid docker contexts could fail buildx builder name
-  validation. [docker/buildx#1879](https://github.com/docker/buildx/pull/1879){:target="blank" rel="noopener"}
+  validation. [docker/buildx#1879](https://github.com/docker/buildx/pull/1879)
 - Fix a possible panic when terminal is resized during the build.
-  [docker/buildx#1929](https://github.com/docker/buildx/pull/1929){:target="blank" rel="noopener"}
+  [docker/buildx#1929](https://github.com/docker/buildx/pull/1929)
 
 ## 0.11.0
 
-{% include release-date.html date="2023-06-13" %}
+{{< release-date date="2023-06-13" >}}
 
 The full release note for this release is available
-[on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.0){:target="blank" rel="noopener"}.
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.11.0).
 
 ### New
 
 - Bake now supports [matrix builds](../build/bake/reference.md#targetmatrix).
   The new matrix field on `target` lets you create multiple similar targets to
-  remove duplication in bake files. [docker/buildx#1690](https://github.com/docker/buildx/pull/1690){:target="blank" rel="noopener"}
+  remove duplication in bake files. [docker/buildx#1690](https://github.com/docker/buildx/pull/1690)
 - New experimental `--detach` flag for running builds in detached mode.
-  [docker/buildx#1296](https://github.com/docker/buildx/pull/1296){:target="blank" rel="noopener"},
-  [docker/buildx#1620](https://github.com/docker/buildx/pull/1620){:target="blank" rel="noopener"},
-  [docker/buildx#1614](https://github.com/docker/buildx/pull/1614){:target="blank" rel="noopener"},
-  [docker/buildx#1737](https://github.com/docker/buildx/pull/1737){:target="blank" rel="noopener"},
-  [docker/buildx#1755](https://github.com/docker/buildx/pull/1755){:target="blank" rel="noopener"}
-- New experimental [debug monitor mode](https://github.com/docker/buildx/blob/v0.11.0-rc1/docs/guides/debugging.md){:target="blank" rel="noopener"}
+  [docker/buildx#1296](https://github.com/docker/buildx/pull/1296),
+  [docker/buildx#1620](https://github.com/docker/buildx/pull/1620),
+  [docker/buildx#1614](https://github.com/docker/buildx/pull/1614),
+  [docker/buildx#1737](https://github.com/docker/buildx/pull/1737),
+  [docker/buildx#1755](https://github.com/docker/buildx/pull/1755)
+- New experimental [debug monitor mode](https://github.com/docker/buildx/blob/v0.11.0-rc1/docs/guides/debugging.md)
   that lets you start a debug session in your builds.
-  [docker/buildx#1626](https://github.com/docker/buildx/pull/1626){:target="blank" rel="noopener"},
-  [docker/buildx#1640](https://github.com/docker/buildx/pull/1640){:target="blank" rel="noopener"}
+  [docker/buildx#1626](https://github.com/docker/buildx/pull/1626),
+  [docker/buildx#1640](https://github.com/docker/buildx/pull/1640)
 - New [`EXPERIMENTAL_BUILDKIT_SOURCE_POLICY` environment variable](./building/env-vars.md#experimental_buildkit_source_policy)
   for applying a BuildKit source policy file.
-  [docker/buildx#1628](https://github.com/docker/buildx/pull/1628){:target="blank" rel="noopener"}
+  [docker/buildx#1628](https://github.com/docker/buildx/pull/1628)
 
 ### Bug fixes and enhancements
 
 - `--load` now supports loading multi-platform images when the containerd image
   store is enabled.
-  [docker/buildx#1813](https://github.com/docker/buildx/pull/1813){:target="blank" rel="noopener"}
+  [docker/buildx#1813](https://github.com/docker/buildx/pull/1813)
 - Build progress output now displays the name of the builder being used.
-  [docker/buildx#1177](https://github.com/docker/buildx/pull/1177){:target="blank" rel="noopener"}
+  [docker/buildx#1177](https://github.com/docker/buildx/pull/1177)
 - Bake now supports detecting `compose.{yml,yaml}` files.
-  [docker/buildx#1752](https://github.com/docker/buildx/pull/1752){:target="blank" rel="noopener"}
+  [docker/buildx#1752](https://github.com/docker/buildx/pull/1752)
 - Bake now supports new compose build keys `dockerfile_inline` and `additional_contexts`.
-  [docker/buildx#1784](https://github.com/docker/buildx/pull/1784){:target="blank" rel="noopener"}
+  [docker/buildx#1784](https://github.com/docker/buildx/pull/1784)
 - Bake now supports replace HCL function.
-  [docker/buildx#1720](https://github.com/docker/buildx/pull/1720){:target="blank" rel="noopener"}
+  [docker/buildx#1720](https://github.com/docker/buildx/pull/1720)
 - Bake now allows merging multiple similar attestation parameters into a single
   parameter to allow overriding with a single global value.
-  [docker/buildx#1699](https://github.com/docker/buildx/pull/1699){:target="blank" rel="noopener"}
+  [docker/buildx#1699](https://github.com/docker/buildx/pull/1699)
 - Initial support for shell completion.
-  [docker/buildx#1727](https://github.com/docker/buildx/pull/1727){:target="blank" rel="noopener"}
+  [docker/buildx#1727](https://github.com/docker/buildx/pull/1727)
 - BuildKit versions now correctly display in `buildx ls` and `buildx inspect`
   for builders using the `docker` driver.
-  [docker/buildx#1552](https://github.com/docker/buildx/pull/1552){:target="blank" rel="noopener"}
+  [docker/buildx#1552](https://github.com/docker/buildx/pull/1552)
 - Display additional builder node details in buildx inspect view.
-  [docker/buildx#1440](https://github.com/docker/buildx/pull/1440){:target="blank" rel="noopener"},
-  [docker/buildx#1854](https://github.com/docker/buildx/pull/1874){:target="blank" rel="noopener"}
+  [docker/buildx#1440](https://github.com/docker/buildx/pull/1440),
+  [docker/buildx#1854](https://github.com/docker/buildx/pull/1874)
 - Builders using the `remote` driver allow using TLS without proving its own
   key/cert (if BuildKit remote is configured to support it)
-  [docker/buildx#1693](https://github.com/docker/buildx/pull/1693){:target="blank" rel="noopener"}
+  [docker/buildx#1693](https://github.com/docker/buildx/pull/1693)
 - Builders using the `kubernetes` driver support a new `serviceaccount` option,
   which sets the `serviceAccountName` of the Kubernetes pod.
-  [docker/buildx#1597](https://github.com/docker/buildx/pull/1597){:target="blank" rel="noopener"}
+  [docker/buildx#1597](https://github.com/docker/buildx/pull/1597)
 - Builders using the `kubernetes` driver support the `proxy-url` option in the
   kubeconfig file.
-  [docker/buildx#1780](https://github.com/docker/buildx/pull/1780){:target="blank" rel="noopener"}
+  [docker/buildx#1780](https://github.com/docker/buildx/pull/1780)
 - Builders using the `kubernetes` are now automatically assigned a node name if
   no name is explicitly provided.
-  [docker/buildx#1673](https://github.com/docker/buildx/pull/1673){:target="blank" rel="noopener"}
+  [docker/buildx#1673](https://github.com/docker/buildx/pull/1673)
 - Fix invalid path when writing certificates for `docker-container` driver on Windows.
-  [docker/buildx#1831](https://github.com/docker/buildx/pull/1831){:target="blank" rel="noopener"}
+  [docker/buildx#1831](https://github.com/docker/buildx/pull/1831)
 - Fix bake failure when remote bake file is accessed using SSH.
-  [docker/buildx#1711](https://github.com/docker/buildx/pull/1711){:target="blank" rel="noopener"},
-  [docker/buildx#1734](https://github.com/docker/buildx/pull/1734){:target="blank" rel="noopener"}
+  [docker/buildx#1711](https://github.com/docker/buildx/pull/1711),
+  [docker/buildx#1734](https://github.com/docker/buildx/pull/1734)
 - Fix bake failure when remote bake context is incorrectly resolved.
-  [docker/buildx#1783](https://github.com/docker/buildx/pull/1783){:target="blank" rel="noopener"}
+  [docker/buildx#1783](https://github.com/docker/buildx/pull/1783)
 - Fix path resolution of `BAKE_CMD_CONTEXT` and `cwd://` paths in bake contexts.
-  [docker/buildx#1840](https://github.com/docker/buildx/pull/1840){:target="blank" rel="noopener"}
+  [docker/buildx#1840](https://github.com/docker/buildx/pull/1840)
 - Fix mixed OCI and Docker media types when creating images using
   `buildx imagetools create`.
-  [docker/buildx#1797](https://github.com/docker/buildx/pull/1797){:target="blank" rel="noopener"}
+  [docker/buildx#1797](https://github.com/docker/buildx/pull/1797)
 - Fix mismatched image id between `--iidfile` and `-q`.
-  [docker/buildx#1844](https://github.com/docker/buildx/pull/1844){:target="blank" rel="noopener"}
+  [docker/buildx#1844](https://github.com/docker/buildx/pull/1844)
 - Fix AWS authentication when mixing static creds and IAM profiles.
-  [docker/buildx#1816](https://github.com/docker/buildx/pull/1816){:target="blank" rel="noopener"}
+  [docker/buildx#1816](https://github.com/docker/buildx/pull/1816)
 
 ## 0.10.4
 
-{% include release-date.html date="2023-03-06" %}
+{{< release-date date="2023-03-06" >}}
 
-{% include buildx-v0.10-disclaimer.md %}
+{{< include "buildx-v0.10-disclaimer.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -133,9 +133,9 @@ The full release note for this release is available
 
 ## 0.10.3
 
-{% include release-date.html date="2023-02-16" %}
+{{< release-date date="2023-02-16" >}}
 
-{% include buildx-v0.10-disclaimer.md %}
+{{< include "buildx-v0.10-disclaimer.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -147,9 +147,9 @@ The full release note for this release is available
 
 ## 0.10.2
 
-{% include release-date.html date="2023-01-30" %}
+{{< release-date date="2023-01-30" >}}
 
-{% include buildx-v0.10-disclaimer.md %}
+{{< include "buildx-v0.10-disclaimer.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -161,9 +161,9 @@ The full release note for this release is available
 
 ## 0.10.1
 
-{% include release-date.html date="2023-01-27" %}
+{{< release-date date="2023-01-27" >}}
 
-{% include buildx-v0.10-disclaimer.md %}
+{{< include "buildx-v0.10-disclaimer.md" >}}
 
 ### Bug fixes and enhancements
 
@@ -178,9 +178,9 @@ The full release note for this release is available
 
 ## 0.10.0
 
-{% include release-date.html date="2023-01-10" %}
+{{< release-date date="2023-01-10" >}}
 
-{% include buildx-v0.10-disclaimer.md %}
+{{< include "buildx-v0.10-disclaimer.md" >}}
 
 ### New
 
@@ -208,7 +208,7 @@ The full release note for this release is available
   where you can reuse the values from other target definitions. {% include github_issue.md repo="docker/buildx" number="1434" %}
 * Buildx will now automatically forward `SOURCE_DATE_EPOCH` environment variable
   if it is defined in your environment. This feature is meant to be used with 
-  updated [reproducible builds](https://github.com/moby/buildkit/blob/master/docs/build-repro.md){:target="blank" rel="noopener" class=""}
+  updated [reproducible builds](https://github.com/moby/buildkit/blob/master/docs/build-repro.md)
   support in BuildKit v0.11.0+. {% include github_issue.md repo="docker/buildx" number="1482" %}
 * Buildx now remembers the last activity for a builder for better organization
   of builder instances. {% include github_issue.md repo="docker/buildx" number="1439" %}
@@ -246,7 +246,7 @@ The full release note for this release is available
 
 ## 0.9.1
 
-{% include release-date.html date="2022-08-18" %} 
+{{< release-date date="2022-08-18" >}} 
 
 ### Bug fixes and enhancements
 
@@ -254,11 +254,11 @@ The full release note for this release is available
 * Fixed a regression when building Compose files that contain services without a
   build block {% include github_issue.md repo="docker/buildx" number="1277" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.9.1){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.9.1).
 
 ## 0.9.0
 
-{% include release-date.html date="2022-08-17" %} 
+{{< release-date date="2022-08-17" >}} 
 
 ### New 
 
@@ -349,11 +349,11 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Fix image tools commands not handling `--builder` flag correctly {% include github_issue.md repo="docker/buildx" number="1067" %}
 * Fix using custom image together with rootless option {% include github_issue.md repo="docker/buildx" number="1063" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.9.0){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.9.0).
 
 ## 0.8.2
 
-{% include release-date.html date="2022-04-04" %} 
+{{< release-date date="2022-04-04" >}} 
 
 ### Updates
 * Update Compose spec used by `buildx bake` to v1.2.1 to fix parsing ports definition {% include github_issue.md repo="docker/buildx" number="1033" %}
@@ -362,22 +362,22 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Fix possible crash on handling progress streams from BuildKit v0.10 {% include github_issue.md repo="docker/buildx" number="1042" %}
 * Fix parsing groups in `buildx bake` when already loaded by a parent group {% include github_issue.md repo="docker/buildx" number="1021" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.8.2){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.8.2).
 
 ## 0.8.1
 
-{% include release-date.html date="2022-03-21" %}
+{{< release-date date="2022-03-21" >}}
 
 ### Bug fixes and enhancements
 
 * Fix possible panic on handling build context scanning errors {% include github_issue.md repo="docker/buildx" number="1005" %}
 * Allow `.` on Compose target names in `buildx bake` for backward compatibility {% include github_issue.md repo="docker/buildx" number="1018" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.8.1){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.8.1).
 
 ## 0.8.0
 
-{% include release-date.html date="2022-03-09" %}
+{{< release-date date="2022-03-09" >}}
 
 ### New
 
@@ -423,22 +423,22 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Fix printing default group on Bake files {% include github_issue.md repo="docker/buildx" number="884" %}
 * Fix `UsernsMode` when using rootless container {% include github_issue.md repo="docker/buildx" number="887" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.8.0){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.8.0).
 
 ## 0.7.1
 
-{% include release-date.html date="2021-08-25" %}
+{{< release-date date="2021-08-25" >}}
 
 ### Fixes
 
 * Fix issue with matching exclude rules in `.dockerignore` {% include github_issue.md repo="docker/buildx" number="858" %}
 * Fix `bake --print` JSON output for current group {% include github_issue.md repo="docker/buildx" number="857" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.7.1){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.7.1).
 
 ## 0.7.0
 
-{% include release-date.html date="2021-11-10" %}
+{{< release-date date="2021-11-10" >}}
 
 ### New features
 
@@ -479,23 +479,23 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Unsupported build flags now show a warning {% include github_issue.md repo="docker/buildx" number="810" %}
 * Fix reporting error details in some OpenTelemetry traces {% include github_issue.md repo="docker/buildx" number="812" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.7.0){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.7.0).
 
 ## 0.6.3
 
-{% include release-date.html date="2021-08-30" %}
+{{< release-date date="2021-08-30" >}}
 
 ### Fixes
 
 * Fix BuildKit state volume location for Windows clients {% include github_issue.md repo="docker/buildx" number="751" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.6.3){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.6.3).
 
 ## 0.6.2
 
-{% include release-date.html date="2021-08-21" %}
+{{< release-date date="2021-08-21" >}}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.6.2){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.6.2).
 
 ### Fixes
 
@@ -503,7 +503,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 ## 0.6.1
 
-{% include release-date.html date="2021-07-30" %}
+{{< release-date date="2021-07-30" >}}
 
 ### Enhancements
 
@@ -514,11 +514,11 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Duplicate progress env var {% include github_issue.md repo="docker/buildx" number="693" %}
 * Should ignore nil client {% include github_issue.md repo="docker/buildx" number="686" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.6.1){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.6.1).
 
 ## 0.6.0
 
-{% include release-date.html date="2021-07-16" %}
+{{< release-date date="2021-07-16" >}}
 
 ### New features
 
@@ -539,7 +539,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Bake allows variables across multiple files {% include github_issue.md repo="docker/buildx" number="538" %}
 * New quiet mode has been added to progress printer {% include github_issue.md repo="docker/buildx" number="558" %}
 * `kubernetes` driver now supports defining resources/limits {% include github_issue.md repo="docker/buildx" number="618" %}
-* Buildx binaries can now be accessed through [buildx-bin](https://hub.docker.com/r/docker/buildx-bin){:target="blank" rel="noopener" class=""}
+* Buildx binaries can now be accessed through [buildx-bin](https://hub.docker.com/r/docker/buildx-bin)
   Docker image {% include github_issue.md repo="docker/buildx" number="656" %}
 
 ### Enhancements
@@ -563,22 +563,22 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * `imagetools create` command now correctly merges JSON descriptor with old one {% include github_issue.md repo="docker/buildx" number="592" %}
 * Fix building with `--network=none` not requiring extra security entitlements {% include github_issue.md repo="docker/buildx" number="531" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.6.0){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.6.0).
 
 ## 0.5.1
 
-{% include release-date.html date="2020-12-15" %}
+{{< release-date date="2020-12-15" >}}
 
 ### Fixes
 
 * Fix regression on setting `--platform` on `buildx create` outside
   `kubernetes` driver {% include github_issue.md repo="docker/buildx" number="475" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.5.1){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.5.1).
 
 ## 0.5.0
 
-{% include release-date.html date="2020-12-15" %}
+{{< release-date date="2020-12-15" >}}
 
 ### New features
 
@@ -615,11 +615,11 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 * Handle lowercase Dockerfile name as a fallback for backward compatibility {% include github_issue.md repo="docker/buildx" number="444" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.5.0){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.5.0).
 
 ## 0.4.2
 
-{% include release-date.html date="2020-08-22" %}
+{{< release-date date="2020-08-22" >}}
 
 ### New features
 
@@ -636,22 +636,22 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Ensure `--builder` is wired from root options {% include github_issue.md repo="docker/buildx" number="321" %}
 * Remove warning for multi-platform iidfile {% include github_issue.md repo="docker/buildx" number="351" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.4.2){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.4.2).
 
 ## 0.4.1
 
-{% include release-date.html date="2020-05-01" %}
+{{< release-date date="2020-05-01" >}}
 
 ### Fixes
 
 * Fix regression on flag parsing {% include github_issue.md repo="docker/buildx" number="268" %}
 * Fix using pull and no-cache keys in HCL targets {% include github_issue.md repo="docker/buildx" number="268" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.4.1){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.4.1).
 
 ## 0.4.0
 
-{% include release-date.html date="2020-04-30" %}
+{{< release-date date="2020-04-30" >}}
 
 ### New features
 
@@ -667,11 +667,11 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Bake now supports wildcard overrides for multiple targets {% include github_issue.md repo="docker/buildx" number="164" %}
 * Container driver allows setting environment variables via `driver-opt` {% include github_issue.md repo="docker/buildx" number="170" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.4.0){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.4.0).
 
 ## 0.3.1
 
-{% include release-date.html date="2019-09-27" %}
+{{< release-date date="2019-09-27" >}}
 
 ### Enhancements
 
@@ -683,11 +683,11 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 * Running Bake with multiple Compose files now merges targets correctly {% include github_issue.md repo="docker/buildx" number="134" %} 
 * Fix bug when building a Dockerfile from stdin (`build -f -`) {% include github_issue.md repo="docker/buildx" number="153" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.3.1){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.3.1).
 
 ## 0.3.0
 
-{% include release-date.html date="2019-08-02" %}
+{{< release-date date="2019-08-02" >}}
 
 ### New features
 
@@ -705,21 +705,21 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 * Fix bug where `--build-arg foo` would not read `foo` from environment {% include github_issue.md repo="docker/buildx" number="116" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.3.0){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.3.0).
 
 ## 0.2.2
 
-{% include release-date.html date="2019-05-30" %}
+{{< release-date date="2019-05-30" >}}
 
 ### Enhancements
 
 * Change Compose file handling to require valid service specifications {% include github_issue.md repo="docker/buildx" number="87" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.2.2){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.2.2).
 
 ## 0.2.1
 
-{% include release-date.html date="2019-05-25" %}
+{{< release-date date="2019-05-25" >}}
 
 ### New features
 
@@ -735,14 +735,14 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 * Fix parsing target from compose files {% include github_issue.md repo="docker/buildx" number="53" %}
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.2.1){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.2.1).
 
 ## 0.2.0
 
-{% include release-date.html date="2019-04-25" %}
+{{< release-date date="2019-04-25" >}}
 
 ### New features
 
 * First release
 
-For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.2.0){:target="blank" rel="noopener" class=""}.
+For more details, see the complete release notes in the [Buildx GitHub repository](https://github.com/docker/buildx/releases/tag/v0.2.0).

@@ -2,7 +2,7 @@
 title: Develop with Docker Engine SDKs
 description: Using Docker SDKs to automate Docker tasks in your language of choice
 keywords: developing, sdk
-redirect_from:
+aliases:
 - /engine/api/sdks/
 - /develop/sdk/
 ---
@@ -147,15 +147,15 @@ print(client.containers.run("alpine", ["echo", "hello", "world"]))
 ```console
 $ curl --unix-socket /var/run/docker.sock -H "Content-Type: application/json" \
   -d '{"Image": "alpine", "Cmd": ["echo", "hello world"]}' \
-  -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/create
+  -X POST http://localhost/v{{% param "latest_engine_api_version" %}}/containers/create
 {"Id":"1c6594faf5","Warnings":null}
 
-$ curl --unix-socket /var/run/docker.sock -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/start
+$ curl --unix-socket /var/run/docker.sock -X POST http://localhost/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/start
 
-$ curl --unix-socket /var/run/docker.sock -X POST http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/wait
+$ curl --unix-socket /var/run/docker.sock -X POST http://localhost/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/wait
 {"StatusCode":0}
 
-$ curl --unix-socket /var/run/docker.sock "http://localhost/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/logs?stdout=1"
+$ curl --unix-socket /var/run/docker.sock "http://localhost/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/logs?stdout=1"
 hello world
 ```
 
@@ -165,12 +165,12 @@ examples above use `localhost`, but any hostname would work.
 > **Using cURL 7.47.0 or below?**
 >
 > The examples above assume you are using cURL 7.50.0 or above. Older versions of
-> cURL used a [non-standard URL notation](https://github.com/moby/moby/issues/17960){:target="_blank" rel="noopener" class="_"}
+> cURL used a [non-standard URL notation](https://github.com/moby/moby/issues/17960)
 > when using a socket connection.
 > 
 > If you are using an older version of cURL, use `http:/<API version>/` instead,
-> for example, `http:/v{{ site.latest_engine_api_version}}/containers/1c6594faf5/start`
-{: .important}
+> for example, `http:/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/start`
+{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}

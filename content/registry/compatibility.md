@@ -4,7 +4,7 @@ keywords: registry, manifest, images, tags, repository, distribution, digest
 title: Registry compatibility
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 ## Synopsis
 If a manifest is pulled by _digest_ from a registry 2.3 with Docker Engine 1.9
@@ -77,4 +77,3 @@ registry persists to disk.
 
 When the manifest is pulled by digest or tag with any Docker version, a
 _Schema 1_ manifest is returned.
-

@@ -1,5 +1,5 @@
 ---
-title: "Run your Tests using Node.js and Mocha frameworks"
+title: Run your Tests using Node.js and Mocha frameworks
 keywords: Node.js, build, Mocha, test
 description: How to Build and Run your Tests using Node.js and Mocha frameworks
 ---
@@ -320,8 +320,8 @@ In this module, we took a look at running tests as part of our Docker image buil
 
 In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
 
-[Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
+{{< button text="Configure CI/CD" url="configure-ci-cd.md" >}}
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Node.js%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Node.js%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

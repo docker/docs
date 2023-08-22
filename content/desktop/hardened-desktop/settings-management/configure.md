@@ -141,11 +141,11 @@ For settings to take effect:
   >**Important**
   >
   >Selecting **Restart** from the Docker menu isn't enough as it only restarts some components of Docker Desktop.
-  {: .important}
+  { .important }
 
 Docker doesn't automatically mandate that developers re-launch and sign in once a change has been made so as not to disrupt your developers' workflow.
 
 
 In Docker Desktop, developers see the relevant settings grayed out and the message **Locked by your administrator**.
 
-![Proxy settings grayed out with Settings Management](/assets/images/grayed-setting.png){:width="350px"}
+![Proxy settings grayed out with Settings Management](/assets/images/grayed-setting.png)

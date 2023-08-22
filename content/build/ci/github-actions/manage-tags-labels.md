@@ -3,12 +3,12 @@ title: Manage tags and labels with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, tags, labels
 ---
 
-If you want an "automatic" tag management and [OCI Image Format Specification](https://github.com/opencontainers/image-spec/blob/master/annotations.md){:target="blank" rel="noopener" class=""}
+If you want an "automatic" tag management and [OCI Image Format Specification](https://github.com/opencontainers/image-spec/blob/master/annotations.md)
 for labels, you can do it in a dedicated setup step. The following workflow
-will use the [Docker Metadata Action](https://github.com/docker/metadata-action){:target="blank" rel="noopener" class=""}
+will use the [Docker Metadata Action](https://github.com/docker/metadata-action)
 to handle tags and labels based on GitHub Actions events and Git metadata:
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -79,4 +79,3 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 ```
-{% endraw %}

@@ -2,8 +2,8 @@
 title: Quickstart
 description: Guide on how to build an extension quickly
 keywords: quickstart, extensions
-redirect_from:
-  - desktop/extensions-sdk/tutorials/initialize/
+aliases:
+- desktop/extensions-sdk/tutorials/initialize/
 ---
 
 Follow this guide to get started with building a basic Docker extension. The Quickstart guide automatically generates boilerplate files for you.
@@ -11,8 +11,8 @@ Follow this guide to get started with building a basic Docker extension. The Qui
 ## Prerequisites
 
 - [Docker Desktop](../release-notes.md)
-- [NodeJS](https://nodejs.org/){:target="_blank" rel="noopener" class="_"}
-- [Go](https://go.dev/dl/){:target="_blank" rel="noopener" class="_"}
+- [NodeJS](https://nodejs.org/)
+- [Go](https://go.dev/dl/)
 
 > Note
 >
@@ -83,7 +83,7 @@ To remove the extension, run:
 $ docker extension rm <name-of-your-extension>
 ```
 
-{% include extensions-form.md %}
+{{< include "extensions-form.md" >}}
 
 ## What's next
 

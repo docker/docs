@@ -1,12 +1,12 @@
 ---
 description: Frequently asked questions for all platforms
 keywords: desktop, mac, windows, faqs
-redirect_from:
+title: General FAQs for Desktop
+aliases:
 - /mackit/faqs/
 - /docker-for-mac/faqs/
 - /docker-for-windows/faqs/
 - /desktop/faqs/
-title: General FAQs for Desktop
 ---
 
 ### What are the system requirements for Docker Desktop?
@@ -27,13 +27,13 @@ By default, Docker Desktop is installed at the following location:
 
 ### Do I need to pay to use Docker Desktop?
 
-Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. Otherwise, it requires a paid subscription for professional use. Paid subscriptions are also required for government entities. When downloading and installing Docker Desktop, you are asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){: target="_blank" rel="noopener" class="_"}.
+Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open-source projects. Otherwise, it requires a paid subscription for professional use. Paid subscriptions are also required for government entities. When downloading and installing Docker Desktop, you are asked to agree to the [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement).
 
-Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} and [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"} to learn more.
+Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/) and [FAQs](https://www.docker.com/pricing/faq) to learn more.
 
 ### Do I need to pay to create or share Docker Extensions?
 
-No, the [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client){:target="_blank" rel="noopener" class="_"} is licensed under the Apache 2.0 License and is free to use. Anyone can create new Docker Extensions and share them without constraints.
+No, the [Docker Extension SDK](https://www.npmjs.com/package/@docker/extension-api-client) is licensed under the Apache 2.0 License and is free to use. Anyone can create new Docker Extensions and share them without constraints.
 
 ### Do I need to use a specific license when I create a Docker Extension?
 
@@ -69,9 +69,9 @@ You can find information about diagnosing and troubleshooting common issues in t
 
 If you do not find a solution in troubleshooting, browse the Github repositories or create a new issue:
 
-- [docker/for-mac](https://github.com/docker/for-mac/issues){: target="_blank" rel="noopener" class="_"} 
-- [docker/for-win](https://github.com/docker/for-win/issues){: target="_blank" rel="noopener" class="_"}
-- [docker/for-linux](https://github.com/docker/for-linux/issues){: target="_blank" rel="noopener" class="_"}
+- [docker/for-mac](https://github.com/docker/for-mac/issues) 
+- [docker/for-win](https://github.com/docker/for-win/issues)
+- [docker/for-linux](https://github.com/docker/for-linux/issues)
 
 ### How do I connect to the remote Docker Engine API?
 
@@ -79,7 +79,7 @@ To connect to the remote Engine API, you might need to provide the location of t
 
 Mac and Windows WSL 2 users can connect to the Docker Engine through a Unix socket: `unix:///var/run/docker.sock`.
 
-If you are working with applications like [Apache Maven](https://maven.apache.org/){: target="_blank" rel="noopener" class="_"}
+If you are working with applications like [Apache Maven](https://maven.apache.org/)
 that expect settings for `DOCKER_HOST` and `DOCKER_CERT_PATH` environment
 variables, specify these to connect to Docker instances through Unix sockets.
 

@@ -31,4 +31,4 @@ workflows. You don't need to complete this entire guide from start to finish.
 Follow the sections that seem relevant to you, and save the advanced sections at
 the end for later, when you need them.
 
-[Get started](intro.md){: .button .primary-btn }
+{{< button text="Get started" url="intro.md" >}}

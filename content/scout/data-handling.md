@@ -4,7 +4,7 @@ keywords: scanning, supply chain, security, data, metadata
 title: Data collection and storage in Docker Scout
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 Docker Scout image analysis works by collecting metadata from the container
 images that you analyze. This metadata is stored on the Docker Scout platform.

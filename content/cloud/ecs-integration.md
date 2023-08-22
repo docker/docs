@@ -1,13 +1,15 @@
 ---
 title: Deploying Docker containers on ECS
 description: Deploying Docker containers on ECS
-keywords: Docker, AWS, ECS, Integration, context, Compose, cli, deploy, containers, cloud
-redirect_from:
-  - /engine/context/ecs-integration/
+keywords: Docker, AWS, ECS, Integration, context, Compose, cli, deploy, containers,
+  cloud
 toc_min: 1
 toc_max: 2
+aliases:
+- /engine/context/ecs-integration/
 ---
-{% include aci-ecs-eol.md %}
+
+{{< include "aci-ecs-eol.md" >}}
 
 ## Overview
 
@@ -102,7 +104,7 @@ Run the `docker context create ecs myecscontext` command to create an Amazon ECS
 context named `myecscontext`. If you have already installed and configured the AWS CLI,
 the setup command lets you select an existing AWS profile to connect to Amazon.
 Otherwise, you can create a new profile by passing an
-[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys){: target="_blank" rel="noopener" class="_"}.
+[AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys).
 Finally, you can configure your ECS context to retrieve AWS credentials by `AWS_*` environment variables, which is a common way to integrate with
 third-party tools and single-sign-on providers.
 
@@ -139,9 +141,9 @@ stop a full Compose application.
 
   You can also specify a name for the Compose application using the `--project-name` flag during deployment. If no name is specified, a name will be derived from the working directory.
 
-Docker ECS integration converts the Compose application model into a set of AWS resources, described as a [CloudFormation](https://aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} template. The actual mapping is described in [technical documentation](https://github.com/docker/compose-cli/blob/main/docs/ecs-architecture.md){: target="_blank" rel="noopener" class="_"}.
+Docker ECS integration converts the Compose application model into a set of AWS resources, described as a [CloudFormation](https://aws.amazon.com/cloudformation/) template. The actual mapping is described in [technical documentation](https://github.com/docker/compose-cli/blob/main/docs/ecs-architecture.md).
 You can review the generated template using `docker compose convert` command, and follow CloudFormation applying this model within
-[AWS web console](https://console.aws.amazon.com/cloudformation/home){: target="_blank" rel="noopener" class="_"} when you run `docker compose up`, in addition to CloudFormation events being displayed
+[AWS web console](https://console.aws.amazon.com/cloudformation/home) when you run `docker compose up`, in addition to CloudFormation events being displayed
 in your terminal.
 
 - You can view services created for the Compose application on Amazon ECS and
@@ -203,11 +205,11 @@ default behavior is to keep logs forever.
 
 You can also pass `awslogs`
 parameters to your container as standard
-Compose file `logging.driver_opts` elements. See [AWS documentation](https://docs.amazonaws.cn/en_us/AmazonECS/latest/developerguide/using_awslogs.html){:target="_blank" rel="noopener" class="_"} for details on available log driver options.
+Compose file `logging.driver_opts` elements. See [AWS documentation](https://docs.amazonaws.cn/en_us/AmazonECS/latest/developerguide/using_awslogs.html) for details on available log driver options.
 
 ## Private Docker images
 
-The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/){: target="_blank" rel="noopener" class="_"}.
+The Docker Compose CLI automatically configures authorization so you can pull private images from the Amazon ECR registry on the same AWS account. To pull private images from another registry, including Docker Hub, you’ll have to create a Username + Password (or a Username + Token) secret on the [AWS Secrets Manager service](https://docs.aws.amazon.com/secretsmanager/).
 
 For your convenience, the Docker Compose CLI offers the `docker secret` command, so you can manage secrets created on AWS SMS without having to install the AWS CLI.
 
@@ -248,7 +250,7 @@ Service-to-service communication is implemented transparently by default, so you
 
 ### Service names
 
-Services are registered automatically by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html){: target="_blank" rel="noopener" class="_"} during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`.
+Services are registered automatically by the Docker Compose CLI on [AWS Cloud Map](https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html) during application deployment. They are declared as fully qualified domain names of the form: `<service>.<compose_project_name>.local`.
 
 Services can retrieve their dependencies using Compose service names (as they do when deploying locally with docker-compose), or optionally use the fully qualified names.
 
@@ -261,11 +263,11 @@ Services can retrieve their dependencies using Compose service names (as they do
 Services get concurrently scheduled on ECS when a Compose file is deployed. AWS Cloud Map introduces an initial delay for DNS service to be able to resolve your services domain names. Your code needs to support this delay by waiting for dependent services to be ready, or by adding a wait-script as the entrypoint to your Docker image, as documented in [Control startup order](../compose/startup-order.md).
 Note that this need to wait for dependent services in your Compose application also exists when deploying locally with docker-compose, but the delay is typically shorter. Issues might become more visible when deploying to ECS if services do not wait for their dependencies to be available.
 
-Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on){: target="_blank" rel="noopener" class="_"} feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
+Alternatively, you can use the [depends_on](https://github.com/compose-spec/compose-spec/blob/master/spec.md#depends_on) feature of the Compose file format. By doing this, dependent service will be created first, and application deployment will wait for it to be up and running before starting the creation of the dependent services.
 
 ### Service isolation
 
-Service isolation is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html){: target="_blank" rel="noopener" class="_"} rules, allowing services sharing a common Compose file “network” to communicate together using their Compose service names.
+Service isolation is implemented by the [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html) rules, allowing services sharing a common Compose file “network” to communicate together using their Compose service names.
 
 ## Volumes
 
@@ -443,7 +445,7 @@ services:
 
 ## Tuning the CloudFormation template
 
-The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/){: target="_blank" rel="noopener" class="_"} to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
+The Docker Compose CLI relies on [Amazon CloudFormation](https://docs.aws.amazon.com/cloudformation/) to manage the application deployment. To get more control on the created resources, you can use `docker compose convert` to generate a CloudFormation stack file from your Compose file. This allows you to inspect resources it defines, or customize the template for your needs, and then apply the template to AWS using the AWS CLI, or the AWS web console.
 
 Once you have identified the changes required to your CloudFormation template, you can include _overlays_ in your
 Compose file that will be automatically applied on `compose up`. An _overlay_ is a yaml object that uses the same CloudFormation template data structure as the one generated by ECS integration, but only contains attributes to
@@ -456,7 +458,7 @@ their own URL-based HealthCheck mechanism so traffic gets routed. As the Compose
 abstraction (yet), the default one is applied, which queries your service under `/` expecting HTTP status code
 `200`.
 
-You can tweak this behavior using a cloudformation overlay by following the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html){:target="_blank" rel="noopener" class="_"} for
+You can tweak this behavior using a cloudformation overlay by following the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html) for
 configuration reference:
 
 ```yaml
@@ -511,7 +513,7 @@ services:
       - "80:80"
 ```
 
-If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions){: target="_blank" rel="noopener" class="_"} to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
+If your AWS account does not have [permissions](https://github.com/docker/ecs-plugin/blob/master/docs/requirements.md#permissions) to create such resources, or if you want to manage these yourself, you can use the following custom Compose extensions:
 
 - Use `x-aws-cluster` as a top-level element in your Compose file to set the ID
 of an ECS cluster when deploying a Compose application. Otherwise, a
@@ -618,8 +620,8 @@ $ curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/inst
 
 **What does the error `this tool requires the "new ARN resource ID format"` mean?**
 
-This error message means that your account requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/){: target="_blank" rel="noopener" class="_"}.
+This error message means that your account requires the new ARN resource ID format for ECS. To learn more, see [Migrating your Amazon ECS deployment to the new ARN and resource ID format](https://aws.amazon.com/blogs/compute/migrating-your-amazon-ecs-deployment-to-the-new-arn-and-resource-id-format-2/).
 
 ## Feedback
 
-Thank you for trying out the Docker Compose CLI. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli){: target="_blank" rel="noopener" class="_"} GitHub repository.
+Thank you for trying out the Docker Compose CLI. Your feedback is very important to us. Let us know your feedback by creating an issue in the [Compose CLI](https://github.com/docker/compose-cli) GitHub repository.

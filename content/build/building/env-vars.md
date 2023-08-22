@@ -2,8 +2,8 @@
 title: Environment variables for Docker Build
 description: Use environment variables to configure builds
 keywords: docker build, buildx, buildkit, env, environment variables, config
-redirect_from:
-  - /build/buildkit/color-output-controls/
+aliases:
+- /build/buildkit/color-output-controls/
 ---
 
 You can set the following environment variables to enable, disable, or change
@@ -30,7 +30,7 @@ See also
 You can express Boolean values for environment variables in different ways. For
 example, `true`, `1`, and `T` all evaluate to true. Evaluation is done using the
 `strconv.ParseBool` function in the Go standard library. See the
-[reference documentation](https://pkg.go.dev/strconv#ParseBool){: target="_blank" rel="noopener" class="_" }
+[reference documentation](https://pkg.go.dev/strconv#ParseBool)
 for details.
 
 ## BUILDKIT_COLORS
@@ -43,10 +43,10 @@ $ export BUILDKIT_COLORS="run=123,20,245:error=yellow:cancel=blue:warning=white"
 ```
 
 Color values can be any valid RGB hex code, or one of the
-[BuildKit predefined colors](https://github.com/moby/buildkit/blob/master/util/progress/progressui/colors.go){: target="_blank" rel="noopener" class="_" }.
+[BuildKit predefined colors](https://github.com/moby/buildkit/blob/master/util/progress/progressui/colors.go).
 
 Setting `NO_COLOR` to anything turns off colorized output, as recommended by
-[no-color.org](https://no-color.org/){: target="_blank" rel="noopener" class="_" }.
+[no-color.org](https://no-color.org/).
 
 ## BUILDKIT_HOST
 

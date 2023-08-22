@@ -6,7 +6,7 @@ title: Manage members
 
 This section describes how to manage members in your [teams and organizations](../docker-hub/orgs.md).
 
-{% include admin-users.md product="hub" %}
+{{% admin-users product="hub" %}}
 
 ## Add a member to a team
 
@@ -14,7 +14,7 @@ Organization owners can add a member to one or more teams within an organization
 
 To add a member to a team:
 
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **Organizations**, your organization, and then **Members**.
 3. Select the **Action** icon, and then select **Add to team**.
 
@@ -32,7 +32,7 @@ To add a member to a team:
 
 To remove a member from a specific team:
 
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **Organizations**, your organization, **Teams**, and then the team.
 3. Select the **X** next to the user’s name to remove them from the team.
 4. When prompted, select **Remove** to confirm.

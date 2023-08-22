@@ -18,7 +18,7 @@ It provides:
 
 ## Access the Advanced Image Management dashboard
 
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **Repositories**.
 3. Choose a repository.
 4. Select **General** or **Tags**, and then select **Go to Advanced Image Management**.

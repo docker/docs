@@ -3,7 +3,8 @@ description: How Docker Compose sets up networking between containers
 keywords: documentation, docs, docker, compose, orchestration, containers, networking
 title: Networking in Compose
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 By default Compose sets up a single
 [network](../engine/reference/commandline/network_create.md) for your app. Each
@@ -64,7 +65,7 @@ If any containers have connections open to the old container, they are closed. I
 > **Tip**
 >
 > Reference containers by name, not IP, whenever possible. Otherwise you’ll need to constantly update the IP address you use.
-{: .tip }
+{ .tip }
 
 ## Link containers
 

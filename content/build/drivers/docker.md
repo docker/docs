@@ -1,9 +1,9 @@
 ---
-title: "Docker driver"
+title: Docker driver
 keywords: build, buildx, driver, builder, docker
-redirect_from:
-  - /build/buildx/drivers/docker/
-  - /build/building/drivers/docker/
+aliases:
+- /build/buildx/drivers/docker/
+- /build/building/drivers/docker/
 ---
 
 The Buildx Docker driver is the default driver. It uses the BuildKit server

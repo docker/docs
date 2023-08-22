@@ -1,9 +1,9 @@
 ---
 description: Manager administration guide
 keywords: docker, container, swarm, manager, raft
-redirect_from:
-- /engine/swarm/manager-administration-guide/
 title: Administer and maintain a swarm of Docker Engines
+aliases:
+- /engine/swarm/manager-administration-guide/
 ---
 
 When you run a swarm of Docker Engines, **manager nodes** are the key components
@@ -160,21 +160,21 @@ for more information.
 From the command line, run `docker node inspect <id-node>` to query the nodes.
 For instance, to query the reachability of the node as a manager:
 
-{% raw %}
+
 ```console
 $ docker node inspect manager1 --format "{{ .ManagerStatus.Reachability }}"
 reachable
 ```
-{% endraw %}
+
 
 To query the status of the node as a worker that accept tasks:
 
-{% raw %}
+
 ```console
 $ docker node inspect manager1 --format "{{ .Status.State }}"
 ready
 ```
-{% endraw %}
+
 
 From those commands, we can see that `manager1` is both at the status
 `reachable` as a manager and `ready` as a worker.

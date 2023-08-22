@@ -4,7 +4,7 @@ keywords: supply chain, security, ci, continuous integration, jenkins
 title: Integrate Docker Scout with Jenkins
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 You can add the following stage and steps definition to a `Jenkinsfile` to run
 Docker Scout as part of a Jenkins pipeline. The pipeline needs two secrets

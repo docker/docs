@@ -2,9 +2,9 @@
 title: Create a simple extension
 description: Minimal frontend extension tutorial
 keywords: Docker, extensions, sdk, build
-redirect_from:
-  - /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
-  - /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
+aliases:
+- /desktop/extensions-sdk/tutorials/minimal-frontend-extension/
+- /desktop/extensions-sdk/build/set-up/minimal-frontend-extension/
 ---
 
 To start creating your extension, you first need a directory with files which range from the extension’s source code to the required extension-specific files. This page provides information on how to set up a minimal frontend extension based on plain HTML.
@@ -17,7 +17,7 @@ Before you start, make sure you have installed the latest version of [Docker Des
 
 ## Extension folder structure
 
-In the `minimal-frontend` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}, you can find a ready-to-go example that represents a UI Extension built on HTML. We will go through this code example in this tutorial.
+In the `minimal-frontend` [sample folder](https://github.com/docker/extensions-sdk/tree/main/samples), you can find a ready-to-go example that represents a UI Extension built on HTML. We will go through this code example in this tutorial.
 
 Although you can start from an empty directory, it is highly recommended that you start from the template below and change it accordingly to suit your needs.
 

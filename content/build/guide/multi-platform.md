@@ -1,9 +1,7 @@
 ---
 title: Multi-platform
 description: Building for multiple operating systems and architectures
-keywords: >-
-  build, buildkit, buildx, guide, tutorial, multi-platform, emulation,
-  cross-compilation
+keywords: build, buildkit, buildx, guide, tutorial, multi-platform, emulation, cross-compilation
 ---
 
 {% include_relative nav.html selected="8" %}
@@ -112,7 +110,7 @@ When you build using a builder that supports multi-platform builds, the builder
 runs all of the build steps under emulation for each platform that you specify.
 Effectively forking the build into two concurrent processes.
 
-![Build pipelines using emulation](./images/emulation.png){:.invertible}
+![Build pipelines using emulation](./images/emulation.png)
 
 There are, however, a few downsides to running multi-platform builds using
 emulation:
@@ -157,7 +155,7 @@ the pre-defined platform arguments are forked automatically for each platform.
 This is in contrast to builds running under emulation, where the entire build
 pipeline runs per platform.
 
-![Build pipelines using cross-compilation](./images/cross-compilation.png){:.invertible}
+![Build pipelines using cross-compilation](./images/cross-compilation.png)
 
 ### Update the Dockerfile
 
@@ -175,8 +173,8 @@ follows:
 
 ```diff
   # syntax=docker/dockerfile:1
-  ARG GO_VERSION={{site.example_go_version}}
-  ARG GOLANGCI_LINT_VERSION={{site.example_golangci_lint_version}}
+  ARG GO_VERSION={{% param "example_go_version" %}}
+  ARG GOLANGCI_LINT_VERSION={{% param "example_golangci_lint_version" %}}
 - FROM golang:${GO_VERSION}-alpine AS base
 + FROM --platform=$BUILDPLATFORM golang:${GO_VERSION}-alpine AS base
   WORKDIR /src
@@ -262,7 +260,7 @@ Related information:
 - [`docker buildx create` CLI reference](../../engine/reference/commandline/buildx_create.md)
 
 You may also want to consider checking out
-[xx - Dockerfile cross-compilation helpers](https://github.com/tonistiigi/xx){: target="_blank" rel="noopener" }.
+[xx - Dockerfile cross-compilation helpers](https://github.com/tonistiigi/xx).
 `xx` is a Docker image containing utility scripts that make cross-compiling with Docker builds easier.
 
 ## Next steps
@@ -270,4 +268,4 @@ You may also want to consider checking out
 This section is the final part of the Build with Docker guide. The following
 page contains some pointers for where to go next.
 
-[Next steps](next-steps.md){: .button .primary-btn }
+{{< button text="Next steps" url="next-steps.md" >}}

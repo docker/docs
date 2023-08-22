@@ -1,43 +1,48 @@
 ---
-description: Explore more of Docker Desktop, what it has to offer, and its key features. Take the next step by downloading or find additional resources.
-keywords: how to use docker desktop, what is docker desktop used for, what does docker desktop do, using docker desktop
+description: Explore more of Docker Desktop, what it has to offer, and its key features.
+  Take the next step by downloading or find additional resources.
+keywords: how to use docker desktop, what is docker desktop used for, what does docker
+  desktop do, using docker desktop
 title: Overview of Docker Desktop
-redirect_from:
+grid:
+- title: Install Docker Desktop
+  description: 'Install Docker Desktop on
+
+    [Mac](/desktop/install/mac-install/),
+
+    [Windows](/desktop/install/windows-install/), or
+
+    [Linux](/desktop/install/linux-install/).
+
+    '
+  icon: download
+- title: Explore Docker Desktop
+  description: Navigate Docker Desktop and learn about its key features.
+  icon: explore
+  link: /desktop/use-desktop
+- title: View the release notes
+  description: Find out about new features, improvements, and bug fixes.
+  icon: note_add
+  link: /desktop/release-notes
+- title: Browse common FAQs
+  description: Explore general FAQs or FAQs for specific platforms.
+  icon: help
+  link: /desktop/faqs/
+- title: Find additional resources
+  description: Find information on networking features, deploying on Kubernetes, and
+    more.
+  icon: all_inbox
+  link: /desktop/kubernetes
+- title: Give feedback
+  description: Provide feedback on Docker Desktop or Docker Desktop features.
+  icon: sms
+  link: /desktop/feedback
+aliases:
 - /desktop/opensource/
 - /docker-for-mac/dashboard/
 - /docker-for-mac/opensource/
 - /docker-for-windows/dashboard/
 - /docker-for-windows/opensource/
-grid:
-  - title: "Install Docker Desktop"
-    description: |
-      Install Docker Desktop on
-      [Mac](/desktop/install/mac-install/),
-      [Windows](/desktop/install/windows-install/), or
-      [Linux](/desktop/install/linux-install/).
-    icon: "download"
-  - title: "Explore Docker Desktop"
-    description: "Navigate Docker Desktop and learn about its key features."
-    icon: "explore"
-    link: "/desktop/use-desktop"
-  - title: "View the release notes"
-    description: "Find out about new features, improvements, and bug fixes."
-    icon: "note_add"
-    link: "/desktop/release-notes"
-  - title: "Browse common FAQs"
-    description: "Explore general FAQs or FAQs for specific platforms."
-    icon: "help"
-    link: "/desktop/faqs/"
-  - title: "Find additional resources"
-    description:
-      "Find information on networking features, deploying on Kubernetes, and more."
-    icon: "all_inbox"
-    link: "/desktop/kubernetes"
-  - title: "Give feedback"
-    description:
-      "Provide feedback on Docker Desktop or Docker Desktop features."
-    icon: "sms"
-    link: "/desktop/feedback"
 ---
 
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment

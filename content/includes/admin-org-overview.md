@@ -11,4 +11,4 @@ organization.
 
 The following diagram depicts the setup of an organization and how it relates to teams. Teams are an optional feature that owners can use to group members and assign permissions.
 
-![organization-hierarchy](/admin/images/docker-hierarchy-org.svg){: width="700px" }
+![organization-hierarchy](/admin/images/docker-hierarchy-org.svg)

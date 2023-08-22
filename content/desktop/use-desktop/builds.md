@@ -12,7 +12,7 @@ displays a list of all your ongoing and completed builds.
 >
 > The **Builds** view is currently in [Beta](../../release-lifecycle.md/#beta).
 > This feature may change or be removed from future releases.
-{: .experimental }
+{ .experimental }
 
 
 The **Builds** view displays metadata about the build, such as:
@@ -71,4 +71,3 @@ To inspect your builders, and change your default builder, select
 - [Change settings, Windows](../settings/windows.md#builders)
 - [Change settings, Mac](../settings/mac.md#builders)
 - [Change settings, Linux](../settings/linux.md#builders)
-

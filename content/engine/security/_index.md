@@ -1,12 +1,12 @@
 ---
 description: Review of the Docker Daemon attack surface
 keywords: Docker, Docker documentation, security
-redirect_from:
+title: Docker security
+aliases:
 - /articles/security/
 - /engine/articles/security/
 - /engine/security/security/
 - /security/security/
-title: Docker security
 ---
 
 There are four major areas to consider when reviewing Docker security:

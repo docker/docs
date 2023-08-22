@@ -1,7 +1,7 @@
 ---
-title: "Defining additional build contexts and linking targets"
+title: Defining additional build contexts and linking targets
 keywords: build, buildx, bake, buildkit, hcl
-redirect_from:
+aliases:
 - /build/customize/bake/build-contexts/
 ---
 

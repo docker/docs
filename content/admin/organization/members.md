@@ -4,9 +4,9 @@ keywords: members, teams, organizations
 title: Manage members
 ---
 
-{% include admin-early-access.md %}
+{{< include "admin-early-access.md" >}}
 
-{% include admin-users.md product="admin" %}
+{{% admin-users product="admin" %}}
 
 ## Manage members on a team
 

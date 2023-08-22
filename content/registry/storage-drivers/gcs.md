@@ -4,7 +4,7 @@ keywords: registry, service, driver, images, storage,  gcs, google, cloud
 title: Google Cloud Storage driver
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 An implementation of the `storagedriver.StorageDriver` interface which uses Google Cloud for object storage.
 
@@ -18,4 +18,3 @@ An implementation of the `storagedriver.StorageDriver` interface which uses Goog
 | `chunksize`  | no (default 5242880) | This is the chunk size used for uploading large blobs, must be a multiple of 256*1024. |
 
 **Note:** Instead of a key file you can use [Google Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials).
-

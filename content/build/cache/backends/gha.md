@@ -1,8 +1,8 @@
 ---
-title: "GitHub Actions cache"
+title: GitHub Actions cache
 keywords: build, buildx, cache, backend, gha, github, actions
-redirect_from:
-  - /build/building/cache/backends/gha/
+aliases:
+- /build/building/cache/backends/gha/
 ---
 
 > **Warning**
@@ -12,10 +12,10 @@ redirect_from:
 > unstable and may change in future releases.
 
 The GitHub Actions cache utilizes the
-[GitHub-provided Action's cache](https://github.com/actions/cache){:target="blank" rel="noopener" class=""} available
+[GitHub-provided Action's cache](https://github.com/actions/cache) available
 from within your CI execution environment. This is the recommended cache to use
 inside your GitHub action pipelines, as long as your use case falls within the
-[size and usage limits set by GitHub](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy){:target="blank" rel="noopener" class=""}.
+[size and usage limits set by GitHub](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy).
 
 > **Note**
 >
@@ -57,7 +57,7 @@ If the `url` or `token` parameters are left unspecified, the `gha` cache backend
 will fall back to using environment variables. If you invoke the `docker buildx`
 command manually from an inline step, then the variables must be manually
 exposed (using
-[`crazy-max/ghaction-github-runtime`](https://github.com/crazy-max/ghaction-github-runtime){:target="blank" rel="noopener" class=""},
+[`crazy-max/ghaction-github-runtime`](https://github.com/crazy-max/ghaction-github-runtime),
 for example).
 
 ## Scope
@@ -81,14 +81,14 @@ $ docker buildx build --push -t <registry>/<image2> \
   --cache-from type=gha,url=...,token=...,scope=$GITHUB_REF_NAME-image2 .
 ```
 
-GitHub's [cache access restrictions](https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache){:target="blank" rel="noopener" class=""},
+GitHub's [cache access restrictions](https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache),
 still apply. Only the cache for the current branch, the base branch and the
 default branch is accessible by a workflow.
 
 ### Using `docker/build-push-action`
 
 When using the
-[`docker/build-push-action`](https://github.com/docker/build-push-action){:target="blank" rel="noopener" class=""}, the
+[`docker/build-push-action`](https://github.com/docker/build-push-action), the
 `url` and `token` parameters are automatically populated. No need to manually
 specify them, or include any additional workarounds.
 
@@ -110,7 +110,7 @@ For example:
 For an introduction to caching see [Optimizing builds with cache](../index.md).
 
 For more information on the `gha` cache backend, see the
-[BuildKit README](https://github.com/moby/buildkit#github-actions-cache-experimental){:target="blank" rel="noopener" class=""}.
+[BuildKit README](https://github.com/moby/buildkit#github-actions-cache-experimental).
 
 For more information about using GitHub Actions with Docker, see
 [Introduction to GitHub Actions](../../ci/github-actions/index.md)

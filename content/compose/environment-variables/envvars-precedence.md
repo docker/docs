@@ -1,8 +1,9 @@
 ---
 title: Environment variables precedence in Docker Compose
-description: Scenario overview illustrating how environment variables are resolved in Compose
+description: Scenario overview illustrating how environment variables are resolved
+  in Compose
 keywords: compose, environment, env file
-redirect_from:
+aliases:
 - /compose/envvars-precedence/
 ---
 
@@ -52,7 +53,7 @@ $ docker compose exec api node
 > Executing a command within the container that unconditionally sets a variable value overrules any setting in your `compose.yml` file.
 >
 > For example, in a NodeJS project, if you have a `package.json` entry for `scripts.start`, such as `NODE_ENV=test` `node server.js`, any value set for `NODE_ENV` in your Compose file, is ignored when running `npm run start` within the container.
-{: .important}
+{ .important }
 
 ## Advanced example 
 

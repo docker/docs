@@ -55,7 +55,7 @@ Manifests:
 > Having trouble pushing the image?
 >
 > Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
-{: .tip}
+{ .tip }
 
 For more information, see [Multi-platform images](../../../build/building/multi-platform.md) page.
 

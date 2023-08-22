@@ -151,7 +151,7 @@ Using the `--format` option, you can specify a template for the output. All
 provenance-related data is available under the `.Provenance` attribute. For
 example, to get the raw contents of the Provenance in the SLSA format:
 
-{% raw %}
+
 ```console
 $ docker buildx imagetools inspect <namespace>/<image>:<version> \
     --format "{{ json .Provenance.SLSA }}"
@@ -160,13 +160,13 @@ $ docker buildx imagetools inspect <namespace>/<image>:<version> \
   ...
 }
 ```
-{% endraw %}
+
 
 You can also construct more complex expressions using the full functionality of
 Go templates. For example, for provenance generated with `mode=max`, you can
 extract the full source code of the Dockerfile used to build the image:
 
-{% raw %}
+
 ```console
 $ docker buildx imagetools inspect <namespace>/<image>:<version> \
     --format '{{ range (index .Provenance.SLSA.metadata "https://mobyproject.org/buildkit@v1#metadata").source.infos }}{{ if eq .filename "Dockerfile" }}{{ .data }}{{ end }}{{ end }}' | base64 -d
@@ -174,7 +174,7 @@ FROM ubuntu:20.04
 RUN apt-get update
 ...
 ```
-{% endraw %}
+
 
 ## Provenance attestation example
 

@@ -13,11 +13,11 @@ Every extension image must contain a metadata.json file at the root of its files
 
 The Docker image must have several [image labels](labels.md), providing information about the extension. See how to use [extension labels](labels.md) to provide extension overview information.
 
-To package and release an extension, you must build a Docker image (`docker build`), and push the image to [DockerHub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" } (`docker push`) with a specific tag that allows you to manage versions of the extension.
+To package and release an extension, you must build a Docker image (`docker build`), and push the image to [DockerHub](https://hub.docker.com/) (`docker push`) with a specific tag that allows you to manage versions of the extension.
 
 ## Release your extension
 
-Docker image tags must follow semver conventions in order to allow fetching the latest version of the extension, and to know if there are updates available. See [semver.org](https://semver.org/){:target="_blank" rel="noopener" class="_"} to learn more about semantic versioning.
+Docker image tags must follow semver conventions in order to allow fetching the latest version of the extension, and to know if there are updates available. See [semver.org](https://semver.org/) to learn more about semantic versioning.
 
 Extension images must be multi-arch images so that users can install extensions on ARM/AMD hardware. These multi-arch images can include ARM/AMD specific binaries. Mac users will automatically use the right image based on their architecture.
 Extensions that install binaries on the host must also provide Windows binaries in the same extension image. See how to [build a multi-arch image](multi-arch.md) for your extension.

@@ -4,14 +4,14 @@ keywords: documentation, docs, docker, compose, GPU access, NVIDIA, samples
 title: Turn on GPU access with Docker Compose
 ---
 
-Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure you install the [prerequisites](../config/containers/resource_constraints.md#gpu){: target="_blank" rel="noopener" class="_" } if you haven't already done so.
+Compose services can define GPU device reservations if the Docker host contains such devices and the Docker Daemon is set accordingly. For this, make sure you install the [prerequisites](../config/containers/resource_constraints.md#gpu) if you haven't already done so.
 
 The examples in the following sections focus specifically on providing service containers access to GPU devices with Docker Compose. 
-You can use either `docker-compose` or `docker compose` commands. For more information, see [Migrate to Compose V2](migrate.md){: target="_blank" rel="noopener" class="_" }.
+You can use either `docker-compose` or `docker compose` commands. For more information, see [Migrate to Compose V2](migrate.md).
 
 ## Enabling GPU access to service containers
 
-GPUs are referenced in a `compose.yml` file using the [device](compose-file/deploy.md#devices){:target="_blank" rel="noopener" class="_"} attribute from the Compose Deploy specification, within your services that need them. 
+GPUs are referenced in a `compose.yml` file using the [device](compose-file/deploy.md#devices) attribute from the Compose Deploy specification, within your services that need them. 
 
 This provides more granular control over a GPU reservation as custom values can be set for the following device properties: 
 
@@ -27,7 +27,7 @@ This provides more granular control over a GPU reservation as custom values can 
 > You must set the `capabilities` field. Otherwise, it returns an error on service deployment.
 >
 > `count` and `device_ids` are mutually exclusive. You must only define one field at a time.
-{: .important}
+{ .important }
 
 For more information on these properties, see the `deploy` section in the [Compose Specification](compose-file/deploy.md#devices).
 

@@ -3,7 +3,8 @@ title: Using profiles with Compose
 desription: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 Profiles help you adjust the Compose application model for various uses and
 environments by selectively starting services.
@@ -54,7 +55,7 @@ Valid profiles names follow the regex format of `[a-zA-Z0-9][a-zA-Z0-9_.-]+`.
 >
 > The core services of your application shouldn't be assigned `profiles` so
 > they are always enabled and automatically started.
-{: .tip}
+{ .tip }
 
 ## Start specific profiles
 

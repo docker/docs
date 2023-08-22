@@ -1,7 +1,11 @@
 ---
-description: Learn how to install Docker Engine on CentOS. These instructions cover the different installation methods, how to uninstall, and next steps. 
-keywords: install docker centos, centos install docker, docker install centos, yum install docker, install docker centos 7, install docker centos 8, centos docker-ce
-redirect_from:
+description: Learn how to install Docker Engine on CentOS. These instructions cover
+  the different installation methods, how to uninstall, and next steps.
+keywords: install docker centos, centos install docker, docker install centos, yum
+  install docker, install docker centos 7, install docker centos 8, centos docker-ce
+title: Install Docker Engine on CentOS
+toc_max: 4
+aliases:
 - /ee/docker-ee/centos/
 - /engine/installation/centos/
 - /engine/installation/linux/centos/
@@ -10,8 +14,7 @@ redirect_from:
 - /install/linux/centos/
 - /install/linux/docker-ce/centos/
 - /install/linux/docker-ee/centos/
-title: Install Docker Engine on CentOS
-toc_max: 4
+download-url-base: https://download.docker.com/linux/centos
 ---
 
 To get started with Docker Engine on CentOS, make sure you
@@ -31,7 +34,7 @@ CentOS versions:
 
 The `centos-extras` repository must be enabled. This repository is enabled by
 default, but if you have disabled it, you need to
-[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories){: target="_blank" rel="noopener" class="_" }.
+[re-enable it](https://wiki.centos.org/AdditionalResources/Repositories).
 
 ### Uninstall old versions
 
@@ -80,14 +83,13 @@ Docker from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/centos" %}
 
 Install the `yum-utils` package (which provides the `yum-config-manager`
 utility) and set up the repository.
 
 ```console
 $ sudo yum install -y yum-utils
-$ sudo yum-config-manager --add-repo {{ download-url-base }}/docker-ce.repo
+$ sudo yum-config-manager --add-repo {{% param "download-url-base" %}}/docker-ce.repo
 ```
 
 #### Install Docker Engine
@@ -162,7 +164,7 @@ $ sudo yum-config-manager --add-repo {{ download-url-base }}/docker-ce.repo
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -175,7 +177,7 @@ If you can't use Docker's `rpm` repository to install Docker Engine, you can
 download the `.rpm` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
-1. Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
+1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
    and choose your version of CentOS. Then browse to `x86_64/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
@@ -207,7 +209,7 @@ download a new file each time you want to upgrade Docker Engine.
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -215,7 +217,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
 [installation procedure](#install-from-a-package), using `yum -y upgrade`
 instead of `yum -y install`, and point to the new files.
 
-{% include install-script.md %}
+{{< include "install-script.md" >}}
 
 ## Uninstall Docker Engine
 

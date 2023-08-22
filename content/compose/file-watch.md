@@ -1,6 +1,6 @@
 ---
 description: Use File watch to automatically update running services as you work
-keywords: compose, file watch, experimental 
+keywords: compose, file watch, experimental
 title: Automatically update services with file watch in Docker Compose
 ---
 
@@ -66,7 +66,7 @@ image rebuild (e.g. `package.json`).
 > Optimize your `Dockerfile` for speedy
 incremental rebuilds with [image layer caching](/build/cache)
 and [multi-stage builds](/build/building/multi-stage/).
-{: .tip}
+{ .tip }
 
 ### `path` and `target`
 
@@ -134,7 +134,7 @@ This pattern can be followed for many languages and frameworks, such as Python w
 >
 > Looking for a sample project to test things out? Check
 out [`dockersamples/avatars`](https://github.com/dockersamples/avatars) for a demonstration of Compose `watch`.
-{: .tip}
+{ .tip }
 
 ## Feedback
 

@@ -1,5 +1,5 @@
 ---
-title: "Run your image as a container"
+title: Run your image as a container
 keywords: Java, run, image, container,
 description: Learn how to run the image as a container.
 ---
@@ -176,8 +176,8 @@ In this module, we took a look at running containers, publishing ports, and runn
 
 In the next module, we’ll learn how to run a database in a container and connect it to our application. See:
 
-[Use containers for development](develop.md){: .button .primary-btn}
+{{< button text="Use containers for development" url="develop.md" >}}
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Java%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Java%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

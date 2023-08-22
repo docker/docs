@@ -356,7 +356,7 @@ ERROR: failed to solve: failed to compute cache key: failed to calculate checksu
 
 The following example builds an image using a `Dockerfile` that is passed
 through standard input using
-[shell heredocs](https://en.wikipedia.org/wiki/Here_document){: target="_blank" rel="noopener"}:
+[shell heredocs](https://en.wikipedia.org/wiki/Here_document):
 
 ```bash
 docker build -t myimage:latest - <<EOF

@@ -2,7 +2,7 @@
 description: Using bind mounts
 title: Bind mounts
 keywords: storage, persistence, data persistence, mounts, bind mounts
-redirect_from:
+aliases:
 - /engine/admin/volumes/bind-mounts/
 ---
 
@@ -282,7 +282,7 @@ control whether `/mnt/a` and/or `/tmp/a` would exist.
 > Warning
 >
 > Mount propagation doesn't work with Docker Desktop.
-{: .warning }
+{ .warning }
 
 | Propagation setting | Description                                                                                                                                                                                                         |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -297,7 +297,7 @@ Before you can set bind propagation on a mount point, the host filesystem needs
 to already support bind propagation.
 
 For more information about bind propagation, see the
-[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt){: target="_blank" rel="noopener" class="_"}.
+[Linux kernel documentation for shared subtree](https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt).
 
 The following example mounts the `target/` directory into the container twice,
 and the second mount sets both the `ro` option and the `rslave` bind propagation
@@ -352,7 +352,7 @@ inoperable and you may need to relabel the host machine files by hand.
 > **Important**: When using bind mounts with services, selinux labels
 > (`:Z` and `:z`), as well as `:ro` are ignored. See
 > [moby/moby #32579](https://github.com/moby/moby/issues/32579) for details.
-{:.important}
+{ .important }
 
 This example sets the `z` option to specify that multiple containers can share
 the bind mount's contents:

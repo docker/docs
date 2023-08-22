@@ -3,15 +3,15 @@ description: Release notes for Docker Desktop for Mac, Linux, and Windows
 keywords: Docker desktop, release notes, linux, mac, windows
 title: Docker Desktop release notes
 toc_max: 2
-redirect_from:
-  - /docker-for-mac/release-notes/
-  - /docker-for-mac/edge-release-notes/
-  - /desktop/mac/release-notes/
-  - /docker-for-windows/edge-release-notes/
-  - /docker-for-windows/release-notes/
-  - /desktop/windows/release-notes/
-  - /desktop/linux/release-notes/
-  - /mackit/release-notes/
+aliases:
+- /docker-for-mac/release-notes/
+- /docker-for-mac/edge-release-notes/
+- /desktop/mac/release-notes/
+- /docker-for-windows/edge-release-notes/
+- /docker-for-windows/release-notes/
+- /desktop/windows/release-notes/
+- /desktop/linux/release-notes/
+- /mackit/release-notes/
 ---
 
 This page contains information about the new features, improvements, known issues, and bug fixes in Docker Desktop releases.
@@ -20,15 +20,15 @@ This page contains information about the new features, improvements, known issue
 >
 > The information below is applicable to all platforms, unless stated otherwise.
 
-Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1){: target="_blank" rel="noopener" class="_"} to see what's coming next.
+Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
 ## 4.22.0
 
-{% include release-date.html date="2023-08-03" %}
+{{< release-date date="2023-08-03" >}}
 
-{% include desktop-install.md all=true version="4.22.0" build_path="/" %}
+{{< desktop-install all=true version="4.22.0" build_path="/" >}}
 
 ### Upgrades
 
@@ -70,9 +70,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.21.1
 
-{% include release-date.html date="2023-07-03" %}
+{{< release-date date="2023-07-03" >}}
 
-{% include desktop-install.md all=true version="4.21.1" build_path="/114176/" %}
+{{< desktop-install all=true version="4.21.1" build_path="/114176/" >}}
 
 #### For all platforms
 
@@ -84,9 +84,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.21.0
 
-{% include release-date.html date="2023-06-29" %}
+{{< release-date date="2023-06-29" >}}
 
-{% include desktop-install.md all=true version="4.21.0" build_path="/113844/" %}
+{{< desktop-install all=true version="4.21.0" build_path="/113844/" >}}
 
 ### New
 
@@ -136,9 +136,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.20.1
 
-{% include release-date.html date="2023-06-05" %}
+{{< release-date date="2023-06-05" >}}
 
-{% include desktop-install.md all=true version="4.20.1" build_path="/110738/" %}
+{{< desktop-install all=true version="4.20.1" build_path="/110738/" >}}
 
 ### Bug fixes and enhancements
 
@@ -153,9 +153,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.20.0
 
-{% include release-date.html date="2023-05-30" %}
+{{< release-date date="2023-05-30" >}}
 
-{% include desktop-install.md all=true version="4.20.0" build_path="/109717/" %}
+{{< desktop-install all=true version="4.20.0" build_path="/109717/" >}}
 
 ### Upgrades
 
@@ -194,9 +194,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.19.0
 
-{% include release-date.html date="2023-04-27" %}
+{{< release-date date="2023-04-27" >}}
 
-{% include desktop-install.md all=true version="4.19.0" build_path="/106363/" %}
+{{< desktop-install all=true version="4.19.0" build_path="/106363/" >}}
 
 ### New
 
@@ -267,9 +267,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.18.0
 
-{% include release-date.html date="2023-04-03" %}
+{{< release-date date="2023-04-03" >}}
 
-{% include desktop-install.md all=true version="4.18.0" build_path="/104112/" %}
+{{< desktop-install all=true version="4.18.0" build_path="/104112/" >}}
 
 ### New
 
@@ -321,7 +321,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- Fixed [CVE-2023-1802](https://www.cve.org/cverecord?id=CVE-2023-1802){: target="_blank" rel="noopener" class="_"} where a security issue with the Artifactory Integration would cause it to fall back to sending registry credentials over plain HTTP if HTTPS check failed. Only users who have `Access experimental features` enabled are affected. Fixes [docker/for-win#13344](https://github.com/docker/for-win/issues/13344).
+- Fixed [CVE-2023-1802](https://www.cve.org/cverecord?id=CVE-2023-1802) where a security issue with the Artifactory Integration would cause it to fall back to sending registry credentials over plain HTTP if HTTPS check failed. Only users who have `Access experimental features` enabled are affected. Fixes [docker/for-win#13344](https://github.com/docker/for-win/issues/13344).
 
 #### For Mac
 
@@ -333,9 +333,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.17.1
 
-{% include release-date.html date="2023-03-20" %}
+{{< release-date date="2023-03-20" >}}
 
-{% include desktop-install.md win=true version="4.17.1" build_path="/101757/" %}
+{{< desktop-install win=true version="4.17.1" build_path="/101757/" >}}
 
 ### Bug fixes and enhancements
 
@@ -352,9 +352,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.17.0
 
-{% include release-date.html date="2023-02-27" %}
+{{< release-date date="2023-02-27" >}}
 
-{% include desktop-install.md all=true version="4.17.0" build_path="/99724/" %}
+{{< desktop-install all=true version="4.17.0" build_path="/99724/" >}}
 
 ### New
 
@@ -428,14 +428,14 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- Fixed [CVE-2023-0628](https://www.cve.org/cverecord?id=CVE-2023-0628){: target="_blank" rel="noopener" class="_"}, which allows an attacker to execute an arbitrary command inside a Dev Environments container during initialization by tricking a user to open a crafted malicious `docker-desktop://` URL.
-- Fixed [CVE-2023-0629](https://www.cve.org/cverecord?id=CVE-2023-0629){: target="_blank" rel="noopener" class="_"}, which allows an unprivileged user to bypass Enhanced Container Isolation (ECI) restrictions by setting the Docker host to `docker.raw.sock`, or `npipe:////.pipe/docker_engine_linux` on Windows, via the `-H` (`--host`) CLI flag or the `DOCKER_HOST` environment variable and launch containers without the additional hardening features provided by ECI. This does not affect already running containers, nor containers launched through the usual approach (without Docker's raw socket).
+- Fixed [CVE-2023-0628](https://www.cve.org/cverecord?id=CVE-2023-0628), which allows an attacker to execute an arbitrary command inside a Dev Environments container during initialization by tricking a user to open a crafted malicious `docker-desktop://` URL.
+- Fixed [CVE-2023-0629](https://www.cve.org/cverecord?id=CVE-2023-0629), which allows an unprivileged user to bypass Enhanced Container Isolation (ECI) restrictions by setting the Docker host to `docker.raw.sock`, or `npipe:////.pipe/docker_engine_linux` on Windows, via the `-H` (`--host`) CLI flag or the `DOCKER_HOST` environment variable and launch containers without the additional hardening features provided by ECI. This does not affect already running containers, nor containers launched through the usual approach (without Docker's raw socket).
 
 ## 4.16.3
 
-{% include release-date.html date="2023-01-30" %}
+{{< release-date date="2023-01-30" >}}
 
-{% include desktop-install.md win=true version="4.16.3" build_path="/96739/" %}
+{{< desktop-install win=true version="4.16.3" build_path="/96739/" >}}
 
 ### Bug fixes and enhancements
 
@@ -446,9 +446,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.16.2
 
-{% include release-date.html date="2023-01-19" %}
+{{< release-date date="2023-01-19" >}}
 
-{% include desktop-install.md all=true version="4.16.2" build_path="/95914/" %}
+{{< desktop-install all=true version="4.16.2" build_path="/95914/" >}}
 
 ### Bug fixes and enhancements
 
@@ -467,9 +467,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.16.1
 
-{% include release-date.html date="2023-01-13" %}
+{{< release-date date="2023-01-13" >}}
 
-{% include desktop-install.md all=true version="4.16.1" build_path="/95567/" %}
+{{< desktop-install all=true version="4.16.1" build_path="/95567/" >}}
 
 ### Bug fixes and enhancements
 
@@ -479,9 +479,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.16.0
 
-{% include release-date.html date="2023-01-12" %}
+{{< release-date date="2023-01-12" >}}
 
-{% include desktop-install.md all=true version="4.16.0" build_path="/95345/" %}
+{{< desktop-install all=true version="4.16.0" build_path="/95345/" >}}
 
 ### New
 
@@ -543,9 +543,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.15.0
 
-{% include release-date.html date="2022-12-01" %}
+{{< release-date date="2022-12-01" >}}
 
-{% include desktop-install.md all=true version="4.15.0" build_path="/93002/" %}
+{{< desktop-install all=true version="4.15.0" build_path="/93002/" >}}
 
 ### New
 
@@ -596,9 +596,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.14.1
 
-{% include release-date.html date="2022-11-17" %}
+{{< release-date date="2022-11-17" >}}
 
-{% include desktop-install.md all=true version="4.14.1" build_path="/91661/" %}
+{{< desktop-install all=true version="4.14.1" build_path="/91661/" >}}
 
 ### Bug fixes and enhancements
 
@@ -613,9 +613,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.14.0
 
-{% include release-date.html date="2022-11-10" %}
+{{< release-date date="2022-11-10" >}}
 
-{% include desktop-install.md all=true version="4.14.0" build_path="/91374/" %}
+{{< desktop-install all=true version="4.14.0" build_path="/91374/" >}}
 
 ### New
 
@@ -626,7 +626,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### Updates
 
 - [Docker Engine v20.10.21](../engine/release-notes/20.10.md#201021),
-  which contains mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="\_blank" rel="noopener"},
+  which contains mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253),
   and updates the handling of `image:tag@digest` image references.
 - [Docker Compose v2.12.2](https://github.com/docker/compose/releases/tag/v2.12.2)
 - [Containerd v1.6.9](https://github.com/containerd/containerd/releases/tag/v1.6.9)
@@ -674,9 +674,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.13.1
 
-{% include release-date.html date="2022-10-31" %}
+{{< release-date date="2022-10-31" >}}
 
-{% include desktop-install.md all=true version="4.13.1" build_path="/90346/" %}
+{{< desktop-install all=true version="4.13.1" build_path="/90346/" >}}
 
 ### Updates
 
@@ -701,9 +701,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.13.0
 
-{% include release-date.html date="2022-10-19" %}
+{{< release-date date="2022-10-19" >}}
 
-{% include desktop-install.md all=true version="4.13.0" build_path="/89412/" %}
+{{< desktop-install all=true version="4.13.0" build_path="/89412/" >}}
 
 ### New
 
@@ -714,11 +714,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### Updates
 
 - [Docker Scan v0.21.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.21.0)
-- [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879){: target="\_blank" rel="noopener"}, [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880){: target="\_blank" rel="noopener"} and [CVE-2022-41715](https://www.cve.org/CVERecord?id= CVE-2022-41715){: target="\_blank" rel="noopener"}
+- [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879), [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880) and [CVE-2022-41715](https://www.cve.org/CVERecord?id= CVE-2022-41715)
 - Updated Docker Engine and Docker CLI to [v20.10.20](../engine/release-notes/20.10.md#201020),
-  which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253){:target="\_blank" rel="noopener"},
+  which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253),
   and updated handling of `image:tag@digest` image references, as well as a fix for [CVE-2022-36109](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-36109).
-- [Docker Credential Helpers v0.7.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.7.0){: target="blank" rel="noopener" class=""}
+- [Docker Credential Helpers v0.7.0](https://github.com/docker/docker-credential-helpers/releases/tag/v0.7.0)
 - [Docker Compose v2.12.0](https://github.com/docker/compose/releases/tag/v2.12.0)
 - [Kubernetes v1.25.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.25.2)
 - [Qemu 7.0.0](https://wiki.qemu.org/ChangeLog/7.0) used for cpu emulation, inside the Docker Desktop VM.
@@ -768,9 +768,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.12.0
 
-{% include release-date.html date="2022-09-01" %}
+{{< release-date date="2022-09-01" >}}
 
-{% include desktop-install.md all=true version="4.12.0" build_path="/85629/" %}
+{{< desktop-install all=true version="4.12.0" build_path="/85629/" >}}
 
 ### New
 
@@ -848,9 +848,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.11.1
 
-{% include release-date.html date="2022-08-05" %}
+{{< release-date date="2022-08-05" >}}
 
-{% include desktop-install.md all=true version="4.11.1" build_path="/84025/" %}
+{{< desktop-install all=true version="4.11.1" build_path="/84025/" >}}
 
 ### Bug fixes and enhancements
 
@@ -864,9 +864,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.11.0
 
-{% include release-date.html date="2022-07-28" %}
+{{< release-date date="2022-07-28" >}}
 
-{% include desktop-install.md all=true version="4.11.0" build_path="/83626/" %}
+{{< desktop-install all=true version="4.11.0" build_path="/83626/" >}}
 
 ### New
 
@@ -922,9 +922,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.10.1
 
-{% include release-date.html date="2022-07-05" %}
+{{< release-date date="2022-07-05" >}}
 
-{% include desktop-install.md all=true version="4.10.1" build_path="/82475/" %}
+{{< desktop-install all=true version="4.10.1" build_path="/82475/" >}}
 
 ### Bug fixes and enhancements
 
@@ -938,9 +938,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.10.0
 
-{% include release-date.html date="2022-06-30" %}
+{{< release-date date="2022-06-30" >}}
 
-{% include desktop-install.md all=true version="4.10.0" build_path="/82025/" %}
+{{< desktop-install all=true version="4.10.0" build_path="/82025/" >}}
 
 ### New
 
@@ -1008,9 +1008,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.9.1
 
-{% include release-date.html date="2022-06-16" %}
+{{< release-date date="2022-06-16" >}}
 
-{% include desktop-install.md all=true version="4.9.1" build_path="/81317/" %}
+{{< desktop-install all=true version="4.9.1" build_path="/81317/" >}}
 
 ### Bug fixes and enhancements
 
@@ -1020,9 +1020,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.9.0
 
-{% include release-date.html date="2022-06-02" %}
+{{< release-date date="2022-06-02" >}}
 
-{% include desktop-install.md all=true version="4.9.0" build_path="/80466/" %}
+{{< desktop-install all=true version="4.9.0" build_path="/80466/" >}}
 
 ### New
 
@@ -1070,9 +1070,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.8.2
 
-{% include release-date.html date="2022-05-18" %}
+{{< release-date date="2022-05-18" >}}
 
-{% include desktop-install.md all=true version="4.8.2" build_path="/79419/" %}
+{{< desktop-install all=true version="4.8.2" build_path="/79419/" >}}
 
 ### Updates
 
@@ -1092,9 +1092,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.8.1
 
-{% include release-date.html date="2022-05-09" %}
+{{< release-date date="2022-05-09" >}}
 
-{% include desktop-install.md all=true version="4.8.1" build_path="/78998/" %}
+{{< desktop-install all=true version="4.8.1" build_path="/78998/" >}}
 
 ### New
 
@@ -1115,9 +1115,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.8.0
 
-{% include release-date.html date="2022-05-06" %}
+{{< release-date date="2022-05-06" >}}
 
-{% include desktop-install.md all=true version="4.8.0" build_path="/78933/" %}
+{{< desktop-install all=true version="4.8.0" build_path="/78933/" >}}
 
 ### New
 
@@ -1177,9 +1177,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.7.1
 
-{% include release-date.html date="2022-04-19" %}
+{{< release-date date="2022-04-19" >}}
 
-{% include desktop-install.md win=true mac=true version="4.7.1" build_path="/77678/" %}
+{{< desktop-install win=true mac=true version="4.7.1" build_path="/77678/" >}}
 
 ### Bug fixes and enhancements
 
@@ -1194,15 +1194,15 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.7.0
 
-{% include release-date.html date="2022-04-07" %}
+{{< release-date date="2022-04-07" >}}
 
-{% include desktop-install.md win=true mac=true version="4.7.0" build_path="/77141/" %}
+{{< desktop-install win=true mac=true version="4.7.0" build_path="/77141/" >}}
 
 ### New
 
 - IT Administrators can now install Docker Desktop remotely using the command line.
 - Add the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../engine/sbom/index.md).
-- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd){: target="_blank" rel="noopener" class="_"} for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme){: target="_blank" rel="noopener" class="_"}, the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/){: target="_blank" rel="noopener" class="_"}.
+- Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd) for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme), the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/).
 
 ### Updates
 
@@ -1214,7 +1214,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Security
 
-- Update Docker Engine to v20.10.14 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769){: target="_blank" rel="noopener" class="_"}
+- Update Docker Engine to v20.10.14 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769)
 - Update containerd to v1.5.11 to address [CVE-2022-24769](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24769)
 
 ### Bug fixes and enahncements
@@ -1239,9 +1239,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.6.1
 
-{% include release-date.html date="2022-03-22" %}
+{{< release-date date="2022-03-22" >}}
 
-{% include desktop-install.md win=true mac=true version="4.6.1" build_path="/76265/" %}
+{{< desktop-install win=true mac=true version="4.6.1" build_path="/76265/" >}}
 
 ### Updates
 
@@ -1255,9 +1255,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.6.0
 
-{% include release-date.html date="2022-03-14" %}
+{{< release-date date="2022-03-14" >}}
 
-{% include desktop-install.md win=true mac=true version="4.6.0" build_path="/75818/" %}
+{{< desktop-install win=true mac=true version="4.6.0" build_path="/75818/" >}}
 
 ### New
 
@@ -1285,12 +1285,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847){: target="_blank" rel="noopener" class="_"}, aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
+- Fixed [CVE-2022-0847](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0847), aka “Dirty Pipe”, an issue that could enable attackers to modify files in container images on the host, from inside a container.
   If using the WSL 2 backend, you must update WSL 2 by running `wsl --update`.
 
 #### For Windows
 
-- Fixed [CVE-2022-26659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26659){: target="_blank" rel="noopener" class="_"}, which could allow an attacker to overwrite any administrator writable file on the system during the installation or the update of Docker Desktop.
+- Fixed [CVE-2022-26659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-26659), which could allow an attacker to overwrite any administrator writable file on the system during the installation or the update of Docker Desktop.
 
 #### For Mac
 
@@ -1327,9 +1327,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.5.1
 
-{% include release-date.html date="2022-02-15" %}
+{{< release-date date="2022-02-15" >}}
 
-{% include desktop-install.md win=true version="4.5.1" build_path="/74721/" %}
+{{< desktop-install win=true version="4.5.1" build_path="/74721/" >}}
 
 ### Bug fixes and enhancements
 
@@ -1343,28 +1343,28 @@ Alternatively, you can edit the Docker Desktop settings file located at `%APPDAT
 
 ## 4.5.0
 
-{% include release-date.html date="2022-02-10" %}
+{{< release-date date="2022-02-10" >}}
 
-{% include desktop-install.md win=true mac=true version="4.5.0" build_path="/74594/" %}
+{{< desktop-install win=true mac=true version="4.5.0" build_path="/74594/" >}}
 
 ### New
 
-- Docker Desktop 4.5.0 introduces a new version of the Docker menu which creates a consistent user experience across all operating systems. For more information, see the blog post [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/){: target="_blank" rel="noopener" class="_"}
+- Docker Desktop 4.5.0 introduces a new version of the Docker menu which creates a consistent user experience across all operating systems. For more information, see the blog post [New Docker Menu & Improved Release Highlights with Docker Desktop 4.5](https://www.docker.com/blog/new-docker-menu-improved-release-highlights-with-docker-desktop-4-5/)
 - The 'docker version' output now displays the version of Docker Desktop installed on the machine.
 
 ### Updates
 
-- [Amazon ECR Credential Helper v0.6.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.6.0){: target="blank" rel="noopener" class=""}
+- [Amazon ECR Credential Helper v0.6.0](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.6.0)
 
 ### Security
 
 #### For Mac
 
-- Fixed [CVE-2021-44719](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44719){: target="_blank" rel="noopener" class="_"} where Docker Desktop could be used to access any user file on the host from a container, bypassing the allowed list of shared folders.
+- Fixed [CVE-2021-44719](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44719) where Docker Desktop could be used to access any user file on the host from a container, bypassing the allowed list of shared folders.
 
 #### For Windows
 
-- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774){: target="_blank" rel="noopener" class="_"} where Docker Desktop allows attackers to move arbitrary files.
+- Fixed [CVE-2022-23774](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23774) where Docker Desktop allows attackers to move arbitrary files.
 
 ### Bug fixes and enhancements
 
@@ -1393,9 +1393,9 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 ## 4.4.4
 
-{% include release-date.html date="2022-01-24" %}
+{{< release-date date="2022-01-24" >}}
 
-{% include desktop-install.md win=true version="4.4.4" build_path="/73704/" %}
+{{< desktop-install win=true version="4.4.4" build_path="/73704/" >}}
 
 ### Bug fixes and enhancements
 
@@ -1413,9 +1413,9 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 ## 4.4.3
 
-{% include release-date.html date="2022-01-14" %}
+{{< release-date date="2022-01-14" >}}
 
-{% include desktop-install.md win=true version="4.4.3" build_path="/73365/" %}
+{{< desktop-install win=true version="4.4.3" build_path="/73365/" >}}
 
 ### Bug fixes and enhancements
 
@@ -1433,9 +1433,9 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 ## 4.4.2
 
-{% include release-date.html date="22-01-13" %}
+{{< release-date date="22-01-13" >}}
 
-{% include desktop-install.md win=true mac=true version="4.4.2" build_path="/73305/" %}
+{{< desktop-install win=true mac=true version="4.4.2" build_path="/73305/" >}}
 
 ### New
 
@@ -1448,7 +1448,7 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 - [Docker Engine v20.10.12](../engine/release-notes/20.10.md#201012)
 - [Compose v2.2.3](https://github.com/docker/compose/releases/tag/v2.2.3)
 - [Kubernetes 1.22.5](https://github.com/kubernetes/kubernetes/releases/tag/v1.22.5)
-- [docker scan v0.16.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.16.0){: target="_blank" rel="noopener" class="_"}
+- [docker scan v0.16.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.16.0)
 
 ### Security
 
@@ -1488,9 +1488,9 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 ## 4.3.2
 
-{% include release-date.html date="2021-12-21" %}
+{{< release-date date="2021-12-21" >}}
 
-{% include desktop-install.md win=true mac=true version="4.3.2" build_path="/72729/" %}
+{{< desktop-install win=true mac=true version="4.3.2" build_path="/72729/" >}}
 
 ### Security
 
@@ -1501,46 +1501,44 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 ### Upgrades
 
-[docker scan v0.14.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.14.0){: target="_blank" rel="noopener" class="_"}
+[docker scan v0.14.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.14.0)
 
 ### Security
 
 **Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin.
 This new version of `docker scan` is able to detect [Log4j 2
-CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
-target="_blank" rel="noopener" class="_"} and [Log4j 2
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228) and [Log4j 2
 CVE-2021-45046](https://nvd.nist.gov/vuln/detail/CVE-2021-45046)
 
 For more information, read the blog post [Apache Log4j 2
-CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"}.
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 ## 4.3.1
 
-{% include release-date.html date="2021-12-11" %}
+{{< release-date date="2021-12-11" >}}
 
-{% include desktop-install.md win=true mac=true version="4.3.1" build_path="/72247/" %}
+{{< desktop-install win=true mac=true version="4.3.1" build_path="/72247/" >}}
 
 ### Upgrades
 
-[docker scan v0.11.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0){: target="_blank" rel="noopener" class="_"}
+[docker scan v0.11.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0)
 
 ### Security
 
 **Log4j 2 CVE-2021-44228**: We have updated the `docker scan` CLI plugin for you.
 Older versions of `docker scan` in Docker Desktop 4.3.0 and earlier versions are
 not able to detect [Log4j 2
-CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228){:
-target="_blank" rel="noopener" class="_"}.
+CVE-2021-44228](https://nvd.nist.gov/vuln/detail/CVE-2021-44228).
 
 For more information, read the
 blog post [Apache Log4j 2
-CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/){: target="_blank" rel="noopener" class="_"}.
+CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 ## 4.3.0
 
-{% include release-date.html date="2021-12-02" %}
+{{< release-date date="2021-12-02" >}}
 
-{% include desktop-install.md win=true mac=true version="4.3.0" build_path="/71786/" %}
+{{< desktop-install win=true mac=true version="4.3.0" build_path="/71786/" >}}
 
 ### Upgrades
 
@@ -1586,19 +1584,19 @@ actual memory usage. See
 
 ## 4.2.0
 
-{% include release-date.html date="2021-11-09" %}
+{{< release-date date="2021-11-09" >}}
 
-{% include desktop-install.md win=true mac=true version="4.2.0" build_path="/70708/" %}
+{{< desktop-install win=true mac=true version="4.2.0" build_path="/70708/" >}}
 
 ### New
 
 **Pause/Resume**: You can now pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine.
 
-- Ships [Docker Public Roadmap#226](https://github.com/docker/roadmap/issues/226){: target="_blank" rel="noopener" class="_"}
+- Ships [Docker Public Roadmap#226](https://github.com/docker/roadmap/issues/226)
 
 **Software Updates**: The option to turn off automatic check for updates is now available for users on all Docker subscriptions, including Docker Personal and Docker Pro. All update-related settings have been moved to the **Software Updates** section.
 
-- Ships [Docker Public Roadmap#228](https://github.com/docker/roadmap/issues/228){: target="_blank" rel="noopener" class="_"}
+- Ships [Docker Public Roadmap#228](https://github.com/docker/roadmap/issues/228)
 
 **Window management**: The Docker Dashboard window size and position persists when you close and reopen Docker Desktop.
 
@@ -1634,9 +1632,9 @@ actual memory usage. See
 
 ## 4.1.1
 
-{% include release-date.html date="2021-10-12" %}
+{{< release-date date="2021-10-12" >}}
 
-{% include desktop-install.md win=true mac=true version="4.1.1" build_path="/69879/" %}
+{{< desktop-install win=true mac=true version="4.1.1" build_path="/69879/" >}}
 
 ### Bug fixes and minor changes
 
@@ -1655,15 +1653,15 @@ actual memory usage. See
 
 ## 4.1.0
 
-{% include release-date.html date="2021-09-30" %}
+{{< release-date date="2021-09-30" >}}
 
-{% include desktop-install.md win=true mac=true version="4.1.0" build_path="/69386/" %}
+{{< desktop-install win=true mac=true version="4.1.0" build_path="/69386/" >}}
 
 ### New
 
 - **Software Updates**: The Settings tab now includes a new section to help you manage Docker Desktop updates. The **Software Updates** section notifies you whenever there's a new update and allows you to download the update or view information on what's included in the newer version.
 - **Compose V2** You can now specify whether to use Docker Compose V2 in the General settings.
-- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. Ships [Docker Public Roadmap#215](https://github.com/docker/roadmap/issues/215){: target="_blank" rel="noopener" class="_"}
+- **Volume Management**: Volume management is now available for users on any subscription, including Docker Personal. Ships [Docker Public Roadmap#215](https://github.com/docker/roadmap/issues/215)
 
 ### Upgrades
 
@@ -1696,9 +1694,9 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 ## 4.0.1
 
-{% include release-date.html date="2021-09-13" %}
+{{< release-date date="2021-09-13" >}}
 
-{% include desktop-install.md win=true mac=true version="4.0.1" build_path="/68347/" %}
+{{< desktop-install win=true mac=true version="4.0.1" build_path="/68347/" >}}
 
 ### Upgrades
 
@@ -1719,13 +1717,13 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 ## 4.0.0
 
-{% include release-date.html date="2021-08-31" %}
+{{< release-date date="2021-08-31" >}}
 
-{% include desktop-install.md win=true mac=true version="4.0.0" build_path="/67817/" %}
+{{< desktop-install win=true mac=true version="4.0.0" build_path="/67817/" >}}
 
 ### New
 
-Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/){: target="_blank" rel="noopener" class="_" id="dkr_docs_relnotes_btl"} updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses.
+Docker has [announced](https://www.docker.com/blog/updating-product-subscriptions/) updates and extensions to the product subscriptions to increase productivity, collaboration, and added security for our developers and businesses.
 
 The updated [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement) includes a change to the terms for **Docker Desktop**.
 
@@ -1736,7 +1734,7 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 - The existing Docker Free subscription has been renamed **Docker Personal**.
 - **No changes** to Docker Engine or any other upstream **open source** Docker or Moby project.
 
-To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_relnotes_btl"}.
+To understand how these changes affect you, read the [FAQs](https://www.docker.com/pricing/faq).
 For more information, see [Docker subscription overview](../subscription/index.md).
 
 ### Upgrades

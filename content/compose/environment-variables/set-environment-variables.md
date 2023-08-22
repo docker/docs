@@ -2,7 +2,7 @@
 title: Ways to set environment variables in Compose
 description: How to set, use and manage environment variables in Compose
 keywords: compose, orchestration, environment, env file
-redirect_from:
+aliases:
 - /compose/env/
 - /compose/link-env-deprecated/
 ---
@@ -12,7 +12,7 @@ Environment variables are dealt with by either the Compose file or the CLI. Both
 >**Tip**
 >
 > Don't use environment variables to pass sensitive information, such as passwords, in to your containers. Use [secrets](../use-secrets.md) instead.
-{: .tip}
+{ .tip }
 
 ## Compose file
 
@@ -56,7 +56,7 @@ For more information on formatting an environment file, see [Use an environment 
 > Substitution from `.env` files is a Docker Compose CLI feature.
 >
 > It is not supported by Swarm when running `docker stack deploy`.
-{: .important}
+{ .important }
 
 ### Use the `environment` attribute
 
@@ -123,7 +123,7 @@ If an environment variable is not set, Compose substitutes with an empty string.
 > **Important**
 >
 > Values set in the shell environment override those set in the `.env` file, the `environment` attribute, and the `env_file` attribute. For more information, see [Environment variable precedence](envvars-precedence.md).
-{: .important}
+{ .important }
 
 ## CLI
 
@@ -181,7 +181,7 @@ ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
 > **Important**
 >
 > Values set in the shell environment override those set when using the `--env-file` argument in the CLI. For more information, see [Environment variable precedence](envvars-precedence.md)
-{: .important}
+{ .important }
 
 ### Set environment variables with `docker compose run --env`
 

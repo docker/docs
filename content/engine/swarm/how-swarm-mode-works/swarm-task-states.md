@@ -2,7 +2,7 @@
 title: Swarm task states
 description: Learn about tasks that are scheduled on your swarm.
 keywords: swarm, task, service
-redirect_from:
+aliases:
 - /datacenter/ucp/2.2/guides/admin/monitor-and-troubleshoot/troubleshoot-task-state/
 ---
 

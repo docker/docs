@@ -1,7 +1,7 @@
 ---
-title: "Manage builders"
+title: Manage builders
 keywords: build, buildx, builders, buildkit, drivers, backend
-description: 
+description: null
 ---
 
 You can create, inspect, and manage builders using `docker buildx` commands,

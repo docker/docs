@@ -23,10 +23,10 @@ The build process consists of:
 
 > **Tip**
 >
-> Whilst building your extension, make sure you follow the [design](design/design-guidelines.md) and [UI styling](design/index.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance){:target="_blank" rel="noopener" class="_"}.
-{: .tip}
+> Whilst building your extension, make sure you follow the [design](design/design-guidelines.md) and [UI styling](design/index.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
+{ .tip }
 
-For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples){:target="_blank" rel="noopener" class="_"}.
+For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples).
 
 ## Part two: Publish and distribute your extension
 
@@ -34,7 +34,7 @@ Docker Desktop displays published extensions in the Extensions Marketplace. The 
 
 If you want your extension published in the Marketplace, read the [publish documentation](./extensions/publish.md).
 
-{% include extensions-form.md %}
+{{< include "extensions-form.md" >}}
 
 ## What’s next?
 

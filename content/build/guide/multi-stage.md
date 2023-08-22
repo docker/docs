@@ -41,7 +41,7 @@ built in the previous stage are copied over to the filesystem of the new stage.
 
 ```diff
   # syntax=docker/dockerfile:1
-  FROM golang:{{site.example_go_version}}-alpine
+  FROM golang:{{% param "example_go_version" %}}-alpine
   WORKDIR /src
   COPY go.mod go.sum .
   RUN go mod download
@@ -90,8 +90,8 @@ to the final `scratch` image.
 
 ```diff
   # syntax=docker/dockerfile:1
-- FROM golang:{{site.example_go_version}}-alpine
-+ FROM golang:{{site.example_go_version}}-alpine AS base
+- FROM golang:{{% param "example_go_version" %}}-alpine
++ FROM golang:{{% param "example_go_version" %}}-alpine AS base
   WORKDIR /src
   COPY go.mod go.sum .
   RUN go mod download
@@ -129,7 +129,7 @@ unnamed `FROM scratch` stage with two separate stages named `client` and
 
 ```diff
   # syntax=docker/dockerfile:1
-  FROM golang:{{site.example_go_version}}-alpine AS base
+  FROM golang:{{% param "example_go_version" %}}-alpine AS base
   WORKDIR /src
   COPY go.mod go.sum .
   RUN go mod download
@@ -190,4 +190,4 @@ Related information:
 The next section describes how you can use file mounts to further improve build
 speeds.
 
-[Mounts](mounts.md){: .button .primary-btn }
+{{< button text="Mounts" url="mounts.md" >}}

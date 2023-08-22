@@ -1,13 +1,15 @@
 ---
 description: Instructions for installing Docker Engine on Fedora
-keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade, update
-redirect_from:
+keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade,
+  update
+title: Install Docker Engine on Fedora
+toc_max: 4
+aliases:
 - /engine/installation/fedora/
 - /engine/installation/linux/fedora/
 - /engine/installation/linux/docker-ce/fedora/
 - /install/linux/docker-ce/fedora/
-title: Install Docker Engine on Fedora
-toc_max: 4
+download-url-base: https://download.docker.com/linux/fedora
 ---
 
 To get started with Docker Engine on Fedora, make sure you
@@ -73,14 +75,13 @@ Docker from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/fedora" %}
 
 Install the `dnf-plugins-core` package (which provides the commands to manage
 your DNF repositories) and set up the repository.
 
 ```console
 $ sudo dnf -y install dnf-plugins-core
-$ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
+$ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce.repo
 ```
 
 #### Install Docker Engine
@@ -154,7 +155,7 @@ $ sudo dnf config-manager --add-repo {{ download-url-base }}/docker-ce.repo
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -167,7 +168,7 @@ If you can't use Docker's `rpm` repository to install Docker Engine, you can
 download the `.rpm` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
-1. Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
+1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
    and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
@@ -199,7 +200,7 @@ download a new file each time you want to upgrade Docker Engine.
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -207,7 +208,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
 [installation procedure](#install-from-a-package), using `dnf -y upgrade`
 instead of `dnf -y install`, and point to the new files.
 
-{% include install-script.md %}
+{{< include "install-script.md" >}}
 
 ## Uninstall Docker Engine
 

@@ -3,9 +3,9 @@ title: OpenTelemetry support
 keywords: build, buildx buildkit, opentelemetry
 ---
 
-Both Buildx and BuildKit support [OpenTelemetry](https://opentelemetry.io/){:target="blank" rel="noopener" class=""}.
+Both Buildx and BuildKit support [OpenTelemetry](https://opentelemetry.io/).
 
-To capture the trace to [Jaeger](https://github.com/jaegertracing/jaeger){:target="blank" rel="noopener" class=""},
+To capture the trace to [Jaeger](https://github.com/jaegertracing/jaeger),
 set `JAEGER_TRACE` environment variable to the collection address using a
 `driver-opt`.
 

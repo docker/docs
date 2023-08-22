@@ -1,6 +1,7 @@
 ---
 description: Docker Hub Teams & Organizations
-keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker Hub, docs, documentation
+keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker
+  Hub, docs, documentation
 title: Create and manage a team
 ---
 
@@ -50,7 +51,7 @@ To give a team access to a repository
 4. Choose a permission from the **Permissions** drop-down list and select
    **Add**.
 
-    ![Team Repo Permissions](images/team-repo-permission.png){:width="700px"}
+    ![Team Repo Permissions](images/team-repo-permission.png)
 
 Organization owners can also assign members the editor role to grant partial administrative access. See [Roles and permissions](/docker-hub/roles-and-permissions/) for more about the editor role.
 
@@ -96,7 +97,7 @@ To view a team's permissions across all repositories:
 You can also check out the following videos for information about creating Teams
 and Organizations in Docker Hub.
 
-- [Overview of organizations](https://www.youtube-nocookie.com/embed/G7lvSnAqed8){: target="_blank" rel="noopener" class="_"}
-- [Create an organization](https://www.youtube-nocookie.com/embed/b0TKcIqa9Po){: target="_blank" rel="noopener" class="_"}
-- [Working with Teams](https://www.youtube-nocookie.com/embed/MROKmtmWCVI){: target="_blank" rel="noopener" class="_"}
-- [Create Teams](https://www.youtube-nocookie.com/embed/78wbbBoasIc){: target="_blank" rel="noopener" class="_"}
+- [Overview of organizations](https://www.youtube-nocookie.com/embed/G7lvSnAqed8)
+- [Create an organization](https://www.youtube-nocookie.com/embed/b0TKcIqa9Po)
+- [Working with Teams](https://www.youtube-nocookie.com/embed/MROKmtmWCVI)
+- [Create Teams](https://www.youtube-nocookie.com/embed/78wbbBoasIc)

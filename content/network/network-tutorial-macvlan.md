@@ -1,6 +1,7 @@
 ---
 title: Networking using a macvlan network
-description: Tutorials for networking using a macvlan bridge network and 802.1Q trunk bridge network
+description: Tutorials for networking using a macvlan bridge network and 802.1Q trunk
+  bridge network
 keywords: networking, macvlan, 802.1Q, standalone
 ---
 
@@ -221,4 +222,3 @@ you might want to run through these other networking tutorials:
 - [Standalone networking tutorial](network-tutorial-standalone.md)
 - [Overlay networking tutorial](network-tutorial-overlay.md)
 - [Host networking tutorial](network-tutorial-host.md)
-

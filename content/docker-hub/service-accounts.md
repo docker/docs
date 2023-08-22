@@ -3,6 +3,7 @@ description: Docker Service accounts
 keywords: Docker, service, accounts, Docker Hub
 title: Service accounts
 ---
+
 > **Note**
 >
 > Service accounts requires a
@@ -24,7 +25,7 @@ Refer to the following table for details on the Enhanced Service Account add-on 
 | 2 | 10,000-25,000 | $17,950/yr |
 | 3 | 25,000-50,000 | $32,950/yr |
 | 4 | 50,000-100,000 | $58,950/yr |
-| 5 | 100,000+ | [Contact Sales](https://www.docker.com/pricing/contact-sales/){:target="_blank" rel="noopener" class="_"} |
+| 5 | 100,000+ | [Contact Sales](https://www.docker.com/pricing/contact-sales/) |
 
 <sub>*Once you establish the initial Tier, that's the minimum fee for the year. Annual commitment required. The service account may exceed Pulls by up to 25% for up to 20 days during the year without incurring additional fees. Reports on consumption are available upon request. At the end of the initial 1-year term, the appropriate Tier will be established for the following year.<sub>
 
@@ -56,4 +57,4 @@ official images and other public images, you don't have to grant any access perm
 Refer to the following topics for additional information:
 
 - [Mirroring Docker Hub](../registry/recipes/mirror.md)
-- [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates){:target="_blank" rel="noopener" class="_"}
+- [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates)

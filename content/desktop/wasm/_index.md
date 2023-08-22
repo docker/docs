@@ -10,12 +10,11 @@ toc_max: 3
 > The Wasm feature is currently in [Beta](../../release-lifecycle.md/#beta).
 > We recommend that you do not use this feature in production environments as
 > this feature may change or be removed from future releases.
-{: .experimental}
+{ .experimental }
 
 Wasm (short for WebAssembly) is a fast, light alternative to the Linux and
 Windows containers you’re using in Docker today (with
-[some tradeoffs](https://www.docker.com/blog/docker-wasm-technical-preview/){:target="_blank"
-rel="noopener" class="_"}).
+[some tradeoffs](https://www.docker.com/blog/docker-wasm-technical-preview/)).
 
 This page provides information about the new ability to run Wasm applications
 alongside your Linux containers in Docker.
@@ -220,5 +219,4 @@ Update your Docker Desktop to the latest version and try again.
 
 Thanks for trying out Wasm workloads with Docker. Give feedback or report any
 bugs you may find through the issues tracker on the
-[public roadmap item](https://github.com/docker/roadmap/issues/426){:
-target="_blank" rel="noopener" class="_"}.
+[public roadmap item](https://github.com/docker/roadmap/issues/426).

@@ -4,7 +4,8 @@ keywords: documentation, docs, docker, compose, startup, shutdown, order
 title: Control startup and shutdown order in Compose
 notoc: true
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 You can control the order of service startup and shutdown with the
 [depends_on](compose-file/05-services.md#depends_on) option. Compose always starts and stops
@@ -27,4 +28,3 @@ The solution for detecting the ready state of a service is  to use the `conditio
 
 - [`depends_on`](compose-file/05-services.md#depends_on)
 - [`healthcheck`](compose-file/05-services.md#healthcheck)
-

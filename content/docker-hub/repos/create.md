@@ -1,9 +1,10 @@
 ---
 description: Learn how to create repositories on Docker Hub
-keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub, webhooks, docs, documentation, manage, repos
+keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub,
+  webhooks, docs, documentation, manage, repos
 title: Create repositories
 toc_max: 3
-redirect_from:
+aliases:
 - /docker-hub/repos/configure/
 ---
 

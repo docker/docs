@@ -1,8 +1,9 @@
 ---
-title: "Use bind mounts"
-keywords: >
-  get started, setup, orientation, quickstart, intro, concepts, containers,
+title: Use bind mounts
+keywords: 'get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
+
+  '
 description: Using bind mounts in our application
 ---
 
@@ -18,8 +19,7 @@ that you can run processes in the container that watch for filesystem changes
 and respond to them.
 
 In this chapter, you'll see how you can use bind mounts and a tool called
-[nodemon](https://npmjs.com/package/nodemon){:target="_blank" rel="noopener"
-class="_"} to watch for file changes, and then restart the application
+[nodemon](https://npmjs.com/package/nodemon) to watch for file changes, and then restart the application
 automatically. There are equivalent tools in most other languages and
 frameworks.
 
@@ -256,7 +256,7 @@ Run the image with a bind mount.
    > **Tip**
    >
    >  Use the search filter to filter images and only show **Local images**.
-   {: .tip }
+   { .tip }
 
 4. Select your image and then select **Run**.
 5. Select **Optional settings**.
@@ -303,8 +303,7 @@ Update your app on your host machine and see the changes reflected in the contai
    almost immediately. It might take a few seconds for the Node server to
    restart. If you get an error, try refreshing after a few seconds.
 
-   ![Screenshot of updated label for Add button](images/updated-add-button.png){:
-   style="width:75%;" .text-center}
+   ![Screenshot of updated label for Add button](images/updated-add-button.png)
 
 3. Feel free to make any other changes you'd like to make. Each time you make a
    change and save a file, the `nodemon` process restarts the app inside the
@@ -335,5 +334,4 @@ simplicity, you'll keep using a relational database and switch your application
 to use MySQL. But, how should you run MySQL? How do you allow the containers to
 talk to each other? You'll learn about that in the next section.
 
-[Multi container apps](07_multi_container.md){: .button .primary-btn}
-
+{{< button text="Multi container apps" url="07_multi_container.md" >}}

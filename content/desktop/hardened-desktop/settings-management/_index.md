@@ -1,8 +1,10 @@
 ---
-description: Understand how Settings Management works, who it is for, and what the benefits are
+description: Understand how Settings Management works, who it is for, and what the
+  benefits are
 keywords: Settings Management, rootless, docker desktop, hardened desktop
 title: What is Settings Management?
 ---
+
 >**Note**
 >
 >Settings Management is available to Docker Business customers only.
@@ -56,4 +58,4 @@ Docker doesn't automatically mandate that developers re-launch and re-authentica
 
 Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or the `settings.json` file. In addition, if Enhanced Container Isolation is enforced, users can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
 
-![Proxy settings grayed out](/assets/images/grayed-setting.png){:width="350px"}
+![Proxy settings grayed out](/assets/images/grayed-setting.png)

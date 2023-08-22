@@ -3,10 +3,10 @@ title: Push to multi-registries with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, registry
 ---
 
-The following workflow will connect you to Docker Hub and [GitHub Container Registry](https://github.com/docker/login-action#github-container-registry){:target="blank" rel="noopener" class=""}
+The following workflow will connect you to Docker Hub and [GitHub Container Registry](https://github.com/docker/login-action#github-container-registry)
 and push the image to both registries:
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -54,4 +54,3 @@ jobs:
             ghcr.io/user/app:latest
             ghcr.io/user/app:1.0.0
 ```
-{% endraw %}

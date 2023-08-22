@@ -1,8 +1,11 @@
 ---
 title: Overview of the get started guide
-keywords: docker basics, how to start a docker container, container settings, setup docker, how to setup docker, setting up docker, docker container guide, how to get started with docker
-description: Get started with the Docker basics in this comprehensive overview, You'll learn about containers, images, and how to containerize your first application.
-redirect_from:
+keywords: docker basics, how to start a docker container, container settings, setup
+  docker, how to setup docker, setting up docker, docker container guide, how to get
+  started with docker
+description: Get started with the Docker basics in this comprehensive overview, You'll
+  learn about containers, images, and how to containerize your first application.
+aliases:
 - /engine/getstarted-voting-app/
 - /engine/getstarted-voting-app/cleanup/
 - /engine/getstarted-voting-app/create-swarm/
@@ -86,5 +89,4 @@ In this section, you learned about containers and images.
 
 Next, you'll containerize a simple application and get hands-on with the concepts.
 
-[Containerize an application](02_our_app.md){: .button  .primary-btn}
-
+{{< button text="Containerize an application" url="02_our_app.md" >}}

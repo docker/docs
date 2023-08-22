@@ -1,6 +1,7 @@
 ---
 description: Generate a new 2fa recovery code
-keywords: Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication
+keywords: Docker, docker, registry, security, Docker Hub, authentication, two-factor
+  authentication
 title: Generate a new recovery code
 ---
 

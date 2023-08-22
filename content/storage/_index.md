@@ -2,7 +2,7 @@
 description: Overview of persisting data in containers
 title: Manage data in Docker
 keywords: storage, persistence, data persistence, volumes, mounts, bind mounts
-redirect_from:
+aliases:
 - engine/admin/volumes/
 ---
 
@@ -96,7 +96,7 @@ mounts is to think about where the data lives on the Docker host.
   > **container**, including creating, modifying, or deleting important system
   > files or directories. This is a powerful ability which can have security
   > implications, including impacting non-Docker processes on the host system.
-  {: .important }
+  { .important }
 
 - **[tmpfs mounts](tmpfs.md)**: A `tmpfs` mount is not persisted on disk, either
   on the Docker host or within a container. It can be used by a container during

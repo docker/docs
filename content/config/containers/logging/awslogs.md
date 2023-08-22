@@ -1,10 +1,10 @@
 ---
 description: Describes how to use the Amazon CloudWatch Logs logging driver.
 keywords: AWS, Amazon, CloudWatch, logging, driver
-redirect_from:
+title: Amazon CloudWatch Logs logging driver
+aliases:
 - /engine/reference/logging/awslogs/
 - /engine/admin/logging/awslogs/
-title: Amazon CloudWatch Logs logging driver
 ---
 
 The `awslogs` logging driver sends container logs to
@@ -261,8 +261,8 @@ INFO Another message was logged
 ### tag
 
 Specify `tag` as an alternative to the `awslogs-stream` option. `tag` interprets
-Go template markup, such as `{% raw %}{{.ID}}{% endraw %}`, `{% raw %}{{.FullID}}{% endraw %}`
-or `{% raw %}{{.Name}}{% endraw %}` `{% raw %}docker.{{.ID}}{% endraw %}`. See
+Go template markup, such as `{{.ID}}`, `{{.FullID}}`
+or `{{.Name}}` `docker.{{.ID}}`. See
 the [tag option documentation](log_tags.md) for details on supported template
 substitutions.
 
@@ -274,16 +274,16 @@ If not specified, the container ID is used as the log stream.
 > **Note**
 >
 > The CloudWatch log API does not support `:` in the log name. This can cause
-> some issues when using the {% raw %}`{{ .ImageName }}`{% endraw %} as a tag,
+> some issues when using the `{{ .ImageName }}` as a tag,
 > since a docker image has a format of `IMAGE:TAG`, such as `alpine:latest`.
 > Template markup can be used to get the proper format. To get the image name
 > and the first 12 characters of the container ID, you can use:
 > 
-> {% raw %}
+> 
 > ```bash
 > --log-opt tag='{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'
 > ```
-> {% endraw %}
+> 
 > the output is something like: `alpine_latest-bf0072049c76`
 
 ### awslogs-force-flush-interval-seconds

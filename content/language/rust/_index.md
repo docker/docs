@@ -21,4 +21,4 @@ After completing the Rust modules, you should be able to containerize your own R
 
 Start with building your first Rust image.
 
-[Build your first Rust image](build-images.md){: .button .primary-btn}
+{{< button text="Build your first Rust image" url="build-images.md" >}}

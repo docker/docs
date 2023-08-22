@@ -1,7 +1,8 @@
 ---
 title: Product release lifecycle
-description: describes to users the various stages of feature lifecycle from beta to GA.
-keywords: beta, GA, Early Access, 
+description: describes to users the various stages of feature lifecycle from beta
+  to GA.
+keywords: beta, GA, Early Access,
 ---
 
 This page details Docker's product release lifecycle and how Docker defines each stage. It also provides information on the product retirement process. Features and products may progress through some or all of these phases. 
@@ -83,5 +84,3 @@ We may need to accelerate the timeline for retirement of functionality in extenu
 Similarly, integrated third party software or services may need to be retired due to the third-party decision to change or retire their solution. In these situations, the pace of retirement will be out of our control.
 
 However, even under these circumstances, we will provide as much advance notice as possible.
-
-

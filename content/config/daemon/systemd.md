@@ -1,12 +1,12 @@
 ---
 description: Controlling and configuring Docker using systemd
 keywords: dockerd, daemon, systemd, configuration, proxy, networking
-redirect_from:
-  - /articles/host_integration/
-  - /articles/systemd/
-  - /engine/admin/systemd/
-  - /engine/articles/systemd/
 title: Configure the daemon with systemd
+aliases:
+- /articles/host_integration/
+- /articles/systemd/
+- /engine/admin/systemd/
+- /engine/articles/systemd/
 ---
 
 This page describes how to customize daemon settings when using systemd.

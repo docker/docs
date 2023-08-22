@@ -1,13 +1,13 @@
 ---
 description: Set up Automated builds
 keywords: automated, build, images, Docker Hub
-redirect_from:
+title: Set up Automated Builds
+aliases:
 - /docker-hub/builds/automated-build/
 - /docker-cloud/feature-reference/automated-build/
 - /docker-cloud/builds/automated-build/
 - /docker-cloud/builds/
 - /docker-hub/builds/classic/
-title: Set up Automated Builds
 ---
 
 > **Note**
@@ -226,7 +226,7 @@ sources. For example, you might have
 ### Build images with BuildKit
 
 Autobuilds use the BuildKit build system by default. If you want to use the legacy
-Docker build system, add the [environment variable](index.md#environment-variables-for-builds){: target="_blank" rel="noopener" class="_"}
+Docker build system, add the [environment variable](index.md#environment-variables-for-builds)
 `DOCKER_BUILDKIT=0`. Refer to the [BuildKit](../../build/buildkit/index.md)
 page for more information on BuildKit.
 

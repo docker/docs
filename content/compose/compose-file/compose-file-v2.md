@@ -5,7 +5,8 @@ title: Compose file version 2 reference
 toc_max: 4
 toc_min: 1
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 ## Reference and guidelines
 
@@ -17,7 +18,7 @@ There are several versions of the Compose file format – 1, 2, 2.x, and 3.x. Th
 table below is a quick look. For full details on what each version includes and
 how to upgrade, see **[About versions and upgrading](compose-versioning.md)**.
 
-{% include content/compose-matrix.md %}
+{{< include "content/compose-matrix.md" >}}
 
 ## Service configuration reference
 
@@ -50,7 +51,7 @@ definition in version 2.
 
 A set of configuration options to set block IO limits for this service.
 
-    version: "{{ site.compose_file_v2 }}"
+    version: "{{% param "compose_file_v2" %}}"
     services:
       foo:
         image: busybox
@@ -112,7 +113,7 @@ Configuration options that are applied at build time.
 context:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 services:
   webapp:
     build: ./dir
@@ -122,7 +123,7 @@ Or, as an object with the path specified under [context](#context) and
 optionally [Dockerfile](#dockerfile) and [args](#args):
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 services:
   webapp:
     build:
@@ -474,7 +475,7 @@ behaviors:
 Simple example:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 services:
   web:
     build: .
@@ -503,7 +504,7 @@ the healthcheck) before starting.
 Example:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 services:
   web:
     build: .
@@ -783,7 +784,7 @@ details.
 A full example:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 services:
   myservice:
     image: alpine
@@ -880,7 +881,7 @@ Run an init inside the container that forwards signals and reaps processes.
 Set this option to `true` to enable this feature for the service.
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 services:
   web:
     image: alpine:latest
@@ -1068,7 +1069,7 @@ the hostname `db` or `database` on the `new` network, and at `db` or `mysql` on
 the `legacy` network.
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 
 services:
   web:
@@ -1109,7 +1110,7 @@ The corresponding network configuration in the
 An example:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 
 services:
   app:
@@ -1145,7 +1146,7 @@ managed by docker (IPAM driver).
 Example usage:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 services:
   app:
     image: busybox
@@ -1170,7 +1171,7 @@ as it has the highest priority. It then connects to `app_net_3`, then
 `app_net_2`, which uses the default priority value of `0`.
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 services:
   app:
     image: busybox
@@ -1466,7 +1467,7 @@ expressed in the short form.
 
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 services:
   web:
     image: nginx:alpine
@@ -1551,7 +1552,7 @@ restart: "on-failure"
 restart: "unless-stopped"
 ```
 
-{: id="cpu-and-other-resources"}
+{ #cpu-and-other-resources }
 
 ### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
@@ -1645,7 +1646,7 @@ shared with another service as a volume so that it can be periodically backed
 up:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 
 services:
   db:
@@ -1707,7 +1708,7 @@ In the example below, instead of attempting to create a volume called
 called `data` and mount it into the `db` service's containers.
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 
 services:
   db:
@@ -1733,7 +1734,7 @@ volumes:
 > Deprecated in [version 2.1](compose-versioning.md#version-21) file format.
 >
 > external.name was deprecated in version 2.1 file format use `name` instead.
-{: .important }
+{ .important }
 
 ### labels
 
@@ -1769,7 +1770,7 @@ volumes that contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 volumes:
   data:
     name: my-app-data
@@ -1778,7 +1779,7 @@ volumes:
 It can also be used in conjunction with the `external` property:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 volumes:
   data:
     external: true
@@ -1910,7 +1911,7 @@ looks for an existing network simply called `outside` and connect the `proxy`
 service's containers to it.
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 
 services:
   proxy:
@@ -1932,7 +1933,7 @@ You can also specify the name of the network separately from the name used to
 refer to it within the Compose file:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 networks:
   outside:
     external:
@@ -1951,7 +1952,7 @@ networks which contain special characters. The name is used as is
 and will **not** be scoped with the stack name.
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 networks:
   network1:
     name: my-app-net
@@ -1960,7 +1961,7 @@ networks:
 It can also be used in conjunction with the `external` property:
 
 ```yaml
-version: "{{ site.compose_file_v2 }}"
+version: "{{% param "compose_file_v2" %}}"
 networks:
   network1:
     external: true
@@ -1969,13 +1970,13 @@ networks:
 
 ## Variable substitution
 
-{% include content/compose-var-sub.md %}
+{{< include "content/compose-var-sub.md" >}}
 
 ## Extension fields
 
 > Added in [version 2.1](compose-versioning.md#version-21) file format.
 
-{% include content/compose-extfields-sub.md %}
+{{< include "content/compose-extfields-sub.md" >}}
 
 ## Compose documentation
 

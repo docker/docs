@@ -144,4 +144,3 @@ To connect a new Artifactory registry to Docker Desktop:
 
 When signed in, a new **Artifactory** tab appears in the **Images** view.
 By default, the image list shows images sorted by push date: the newest images appear higher in the list.
-

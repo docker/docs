@@ -1,28 +1,28 @@
 ---
 description: Configuring and troubleshooting the Docker daemon
 keywords: docker, daemon, configuration, troubleshooting
-redirect_from:
-  - /articles/chef/
-  - /articles/configuring/
-  - /articles/dsc/
-  - /articles/puppet/
-  - /config/thirdparty/
-  - /config/thirdparty/ansible/
-  - /config/thirdparty/chef/
-  - /config/thirdparty/dsc/
-  - /config/thirdparty/puppet/
-  - /engine/admin/
-  - /engine/admin/ansible/
-  - /engine/admin/chef/
-  - /engine/admin/configuring/
-  - /engine/admin/dsc/
-  - /engine/admin/puppet/
-  - /engine/articles/chef/
-  - /engine/articles/configuring/
-  - /engine/articles/dsc/
-  - /engine/articles/puppet/
-  - /engine/userguide/
 title: Docker daemon configuration overview
+aliases:
+- /articles/chef/
+- /articles/configuring/
+- /articles/dsc/
+- /articles/puppet/
+- /config/thirdparty/
+- /config/thirdparty/ansible/
+- /config/thirdparty/chef/
+- /config/thirdparty/dsc/
+- /config/thirdparty/puppet/
+- /engine/admin/
+- /engine/admin/ansible/
+- /engine/admin/chef/
+- /engine/admin/configuring/
+- /engine/admin/dsc/
+- /engine/admin/puppet/
+- /engine/articles/chef/
+- /engine/articles/configuring/
+- /engine/articles/dsc/
+- /engine/articles/puppet/
+- /engine/userguide/
 ---
 
 This page shows you how to customize the Docker daemon, `dockerd`.

@@ -2,7 +2,7 @@ A company provides a single point of visibility across multiple organizations. T
 
 The following diagram depicts the setup of a company and how it relates to associated organizations.
 
-![company-hierarchy](/admin/images/docker-hierarchy-company.svg){: width="700px" }
+![company-hierarchy](/admin/images/docker-hierarchy-company.svg)
 
 ## Key features
 

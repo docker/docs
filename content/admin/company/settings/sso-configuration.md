@@ -4,7 +4,7 @@ keywords: configure, sso, docker admin
 title: Configure Single Sign-On for a company
 ---
 
-{% include admin-early-access.md %}
+{{< include "admin-early-access.md" >}}
 
 Follow the steps on this page to configure SSO for your company. To configure SSO for an organization, see [Configure SSO for an organization](/admin/organization/security-settings/sso-configuration/).
 

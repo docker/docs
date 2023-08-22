@@ -1,11 +1,13 @@
 ---
 title: Introduction to GitHub Actions
-description: >
-  Docker maintains a set of official GitHub Actions for building Docker images.
+description: 'Docker maintains a set of official GitHub Actions for building Docker
+  images.
+
+  '
 keywords: ci, github actions, gha,  build, introduction, tutorial
-redirect_from:
-  - /ci-cd/github-actions/
-  - /build/ci/github-actions/examples/
+aliases:
+- /ci-cd/github-actions/
+- /build/ci/github-actions/examples/
 ---
 
 GitHub Actions is a popular CI/CD platform for automating your build, test, and
@@ -15,20 +17,20 @@ components for building, annotating, and pushing images.
 
 The following GitHub Actions are available:
 
-- [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images){:target="blank" rel="noopener" class=""}:
+- [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images):
   build and push Docker images with BuildKit.
-- [Docker Login](https://github.com/marketplace/actions/docker-login){:target="blank" rel="noopener" class=""}:
+- [Docker Login](https://github.com/marketplace/actions/docker-login):
   sign in to a Docker registry.
-- [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:target="blank" rel="noopener" class=""}:
+- [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx):
   initiates a BuildKit builder.
-- [Docker Metadata action](https://github.com/marketplace/actions/docker-metadata-action){:target="blank" rel="noopener" class=""}:
+- [Docker Metadata action](https://github.com/marketplace/actions/docker-metadata-action):
   extracts metadata from Git reference and GitHub events.
-- [Docker Setup QEMU](https://github.com/marketplace/actions/docker-setup-qemu){:target="blank" rel="noopener" class=""}:
+- [Docker Setup QEMU](https://github.com/marketplace/actions/docker-setup-qemu):
   installs [QEMU](https://github.com/qemu/qemu) static binaries for multi-arch
   builds.
-- [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake){:target="blank" rel="noopener" class=""}:
+- [Docker Buildx Bake](https://github.com/marketplace/actions/docker-buildx-bake):
   enables using high-level builds with [Bake](../../bake/index.md).
-- [Docker Scout](https://github.com/docker/scout-action){:target="blank" rel="noopener" class=""}:
+- [Docker Scout](https://github.com/docker/scout-action):
   analyze Docker images for security vulnerabilities.
 
 Using Docker's actions provides an easy-to-use interface, while still allowing
@@ -56,7 +58,7 @@ refer to the following sections:
 
 ## Get started with GitHub Actions
 
-{% include gha-tutorial.md %}
+{{< include "gha-tutorial.md" >}}
 
 ## Next steps
 

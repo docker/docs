@@ -3,13 +3,13 @@ title: Docker Engine release notes
 description: Release notes for Docker CE
 keywords: release notes, community
 toc_max: 2
-redirect_from:
-  - /cs-engine/1.12/release-notes/
-  - /cs-engine/1.12/release-notes/release-notes/
-  - /cs-engine/1.12/release-notes/prior-release-notes/
-  - /cs-engine/1.13/release-notes/
-  - /ee/engine/release-notes/
-  - /ee/docker-ee/release-notes/
+aliases:
+- /cs-engine/1.12/release-notes/
+- /cs-engine/1.12/release-notes/release-notes/
+- /cs-engine/1.12/release-notes/prior-release-notes/
+- /cs-engine/1.13/release-notes/
+- /ee/engine/release-notes/
+- /ee/docker-ee/release-notes/
 ---
 
 ## 1.13.1 (2017-02-08)
@@ -814,7 +814,7 @@ installing docker, make sure to update them accordingly.
 + Enable syslog logger to have access to env and labels [#21724](https://github.com/docker/docker/pull/21724)
 + An additional syslog-format option `rfc5424micro` to allow microsecond resolution in syslog timestamp [#21844](https://github.com/docker/docker/pull/21844)
 * Inherit the daemon log options when creating containers [#21153](https://github.com/docker/docker/pull/21153)
-* Remove `docker/` prefix from log messages tag and replace it with `{% raw %}{{.DaemonName}}{% endraw %}` so that users have the option of changing the prefix [#22384](https://github.com/docker/docker/pull/22384)
+* Remove `docker/` prefix from log messages tag and replace it with `{{.DaemonName}}` so that users have the option of changing the prefix [#22384](https://github.com/docker/docker/pull/22384)
 
 ### Networking
 
@@ -830,7 +830,7 @@ installing docker, make sure to update them accordingly.
 * Add container's short-id as default network alias [#21901](https://github.com/docker/docker/pull/21901)
 * `run` options `--dns` and `--net=host` are no longer mutually exclusive [#22408](https://github.com/docker/docker/pull/22408)
 - Fix DNS issue when renaming containers with generated names [#22716](https://github.com/docker/docker/pull/22716)
-- Allow both `{% raw %}network inspect -f {{.Id}}` and `network inspect -f {{.ID}}{% endraw %}` to address inconsistency with inspect output [#23226](https://github.com/docker/docker/pull/23226)
+- Allow both `network inspect -f {{.Id}}` and `network inspect -f {{.ID}}` to address inconsistency with inspect output [#23226](https://github.com/docker/docker/pull/23226)
 
 ### Plugins (experimental)
 
@@ -1374,7 +1374,7 @@ Engine 1.10 migrator can be found on Docker Hub: https://hub.docker.com/r/docker
 
 - Fix `docker login` on windows (#17738)
 - Fix bug with `docker inspect` output when not connected to daemon (#17715)
-- Fix `{% raw %}docker inspect -f {{.HostConfig.Dns}} somecontainer{% endraw %}` (#17680)
+- Fix `docker inspect -f {{.HostConfig.Dns}} somecontainer` (#17680)
 
 ### Builder
 

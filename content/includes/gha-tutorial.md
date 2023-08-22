@@ -65,14 +65,13 @@ Hub.
      the job should run on.
 
 For more information about the YAML syntax used here, see
-[Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions){:
-target="blank" rel="noopener"}.
+[Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions).
 
 ### Step three: Define the workflow steps
 
 Now the essentials: what steps to run, and in what order to run them.
 
-{% raw %}
+
 ```yaml
 jobs:
   build:
@@ -99,20 +98,17 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
 ```
-{% endraw %}
+
 
 The previous YAML snippet contains a sequence of steps that:
 
 1. Checks out the repository on the build machine.
 2. Signs in to Docker Hub, using the
-   [Docker Login](https://github.com/marketplace/actions/docker-login){:
-   target="blank" rel="noopener"} action and your Docker Hub credentials.
+   [Docker Login](https://github.com/marketplace/actions/docker-login) action and your Docker Hub credentials.
 3. Creates a BuildKit builder instance using the
-   [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:
-   target="blank" rel="noopener"} action.
+   [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx) action.
 4. Builds the container image and pushes it to the Docker Hub repository, using
-   [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images){:
-   target="blank" rel="noopener"}.
+   [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images).
 
    The `with` key lists a number of input parameters that configures the step:
 
@@ -125,7 +121,7 @@ The previous YAML snippet contains a sequence of steps that:
 Add these steps to your workflow file. The full workflow configuration should
 look as follows:
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -159,7 +155,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
 ```
-{% endraw %}
+
 
 ### Run the workflow
 
@@ -174,8 +170,7 @@ Save the workflow file and run the job.
    Selecting the workflow shows you the breakdown of all the steps.
 
 3. When the workflow is complete, go to your
-   [repositories on Docker Hub](https://hub.docker.com/repositories){:
-   target="blank" rel="noopener"}.
+   [repositories on Docker Hub](https://hub.docker.com/repositories).
 
    If you see the new repository in that list, it means the GitHub Actions
    successfully pushed the image to Docker Hub!

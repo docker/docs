@@ -3,7 +3,7 @@ title: General FAQs for Docker Hub
 description: Frequently asked administration and security questions
 keywords: onboarding, docker, teams, orgs
 redirect:
- - /docker-hub/onboarding-faqs/
+- /docker-hub/onboarding-faqs/
 ---
 
 ### What is a Docker ID?
@@ -17,8 +17,7 @@ Developers may have multiple Docker IDs in order to separate their Docker IDs th
 
 ### What if my Docker ID is taken?
 
-All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/){: target="_blank" rel="noopener"
-class="_"} can retrieve the Docker ID for you.
+All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
 
 ### What’s an organization?
 

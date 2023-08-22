@@ -2,7 +2,7 @@
 description: Downgrade your Docker subscription
 keywords: Docker Hub, downgrade, subscription, Pro, Team, Free, pricing plan,
 title: Downgrade your subscription
-redirect_from:
+aliases:
 - /docker-hub/cancel-downgrade/
 - /docker-hub/billing/downgrade/
 ---
@@ -11,16 +11,16 @@ You can downgrade your Docker subscription at anytime before the renewal date. T
 
 When you downgrade your subscription, changes are applied immediately and you no longer have access to prior services.
 
-Before you downgrade to a free subscription, you may need to reduce the number of team members and convert any private repositories to public repositories or delete them. For information, see [Docker Pricing](https://www.docker.com/pricing){: target="_blank" rel="noopener" class="_"}.
+Before you downgrade to a free subscription, you may need to reduce the number of team members and convert any private repositories to public repositories or delete them. For information, see [Docker Pricing](https://www.docker.com/pricing).
 
 ## Downgrade your Docker subscription
 
 >**Important**
 >
 >If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to downgrade your subscription. 
-{: .important}
+{ .important }
 
-1. Log in to your [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"} account.
+1. Log in to your [Docker Hub](https://hub.docker.com) account.
 
 2. Select your username in the top-right corner and from the drop-down menu select **Billing**.
 

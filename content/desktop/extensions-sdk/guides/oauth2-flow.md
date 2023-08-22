@@ -2,8 +2,8 @@
 title: OAuth 2.0 flow
 description: Docker extension OAuth 2.0 flow
 keywords: Docker, extensions, sdk, OAuth 2.0
-redirect_from:
-  - /desktop/extensions-sdk/dev/oauth2-flow/
+aliases:
+- /desktop/extensions-sdk/dev/oauth2-flow/
 ---
 
 > Note
@@ -20,7 +20,7 @@ The Authorization Code grant type is used by confidential and public clients to 
 
 After the user returns to the client via the redirect URL, the application gets the authorization code from the URL and uses it to request an access token.
 
-![Flow for OAuth 2.0](images/oauth2-flow.png){: style=width:80% }
+![Flow for OAuth 2.0](images/oauth2-flow.png)
 
 The image above shows that:
 
@@ -57,7 +57,7 @@ You can get the authorization code from the extension UI by listing `docker-desk
 > **Important**
 >
 > Using this feature requires the extension SDK 0.3.3 in Docker Desktop. You need to ensure that the required SDK version for your extension set with `com.docker.desktop.extension.api.version` in [image labels](../extensions/labels.md) is higher than 0.3.3.
-{: .important}
+{ .important }
 
 #### Authorization
 

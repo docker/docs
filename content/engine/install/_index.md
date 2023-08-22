@@ -1,8 +1,11 @@
 ---
-title: Install Docker Engine 
-description: Choose the best method for you to install Docker Engine. This client-server application is available on Linux, Mac, Windows, and as a static binary.
-keywords: install engine, docker engine install, install docker engine, docker engine installation, engine install, docker ce installation, docker ce install, engine installer, installing docker engine, docker server install
-redirect_from:
+title: Install Docker Engine
+description: Choose the best method for you to install Docker Engine. This client-server
+  application is available on Linux, Mac, Windows, and as a static binary.
+keywords: install engine, docker engine install, install docker engine, docker engine
+  installation, engine install, docker ce installation, docker ce install, engine
+  installer, installing docker engine, docker server install
+aliases:
 - /cs-engine/
 - /cs-engine/1.12/
 - /cs-engine/1.12/upgrade/
@@ -26,6 +29,8 @@ redirect_from:
 - /engine/installation/oracle/
 - /enterprise/supported-platforms/
 - /install/linux/docker-ee/oracle/
+'yes': '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin:
+  0 auto"}'
 ---
 
 > **Docker Desktop for Linux**
@@ -34,7 +39,7 @@ redirect_from:
 > Windows as you do on Linux. Docker Desktop for
 > Linux is now GA. For more information, see
 [Docker Desktop for Linux](../../desktop/install/linux-install.md).
-{: .important}
+{ .important }
 
 ## Supported platforms
 
@@ -45,13 +50,12 @@ your preferred operating system below.
 
 ### Desktop
 
-{% assign yes = '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
 | Platform                                                               |                    x86_64 / amd64                     |               arm64 (Apple Silicon)               |
 | :--------------------------------------------------------------------- | :---------------------------------------------------: | :-----------------------------------------------: |
-| [Docker Desktop for Linux](../../desktop/install/linux-install.md)     |  [{{ yes }}](../../desktop/install/linux-install.md)  |                                                   |
-| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md) |   [{{ yes }}](../../desktop/install/mac-install.md)   | [{{ yes }}](../../desktop/install/mac-install.md) |
-| [Docker Desktop for Windows](../../desktop/install/windows-install.md) | [{{ yes }}](../../desktop/install/windows-install.md) |                                                   |
+| [Docker Desktop for Linux](../../desktop/install/linux-install.md)     |  [{{% param "yes" %}}](../../desktop/install/linux-install.md)  |                                                   |
+| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md) |   [{{% param "yes" %}}](../../desktop/install/mac-install.md)   | [{{% param "yes" %}}](../../desktop/install/mac-install.md) |
+| [Docker Desktop for Windows](../../desktop/install/windows-install.md) | [{{% param "yes" %}}](../../desktop/install/windows-install.md) |                                                   |
 
 ### Server
 
@@ -60,14 +64,14 @@ and architectures:
 
 | Platform                              | x86_64 / amd64         | arm64 / aarch64        | arm (32-bit)                    | ppc64le                | s390x                  |
 | :------------------------------------ | :--------------------- | :--------------------- | :------------------------------ | :--------------------- | :--------------------- |
-| [CentOS](centos.md)                   | [{{ yes }}](centos.md) | [{{ yes }}](centos.md) |                                 | [{{ yes }}](centos.md) |                        |
-| [Debian](debian.md)                   | [{{ yes }}](debian.md) | [{{ yes }}](debian.md) | [{{ yes }}](debian.md)          | [{{ yes }}](debian.md) |                        |
-| [Fedora](fedora.md)                   | [{{ yes }}](fedora.md) | [{{ yes }}](fedora.md) |                                 | [{{ yes }}](fedora.md) |                        |
-| [Raspberry Pi OS](raspberry-pi-os.md) |                        |                        | [{{ yes }}](raspberry-pi-os.md) |                        |                        |
-| [RHEL](rhel.md)                       |                        |                        |                                 |                        | [{{ yes }}](rhel.md)   |
-| [SLES](sles.md)                       |                        |                        |                                 |                        | [{{ yes }}](sles.md)   |
-| [Ubuntu](ubuntu.md)                   | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md)          | [{{ yes }}](ubuntu.md) | [{{ yes }}](ubuntu.md) |
-| [Binaries](binaries.md)               | [{{yes}}](binaries.md) | [{{yes}}](binaries.md) | [{{yes}}](binaries.md)          |                        |                        |
+| [CentOS](centos.md)                   | [{{% param "yes" %}}](centos.md) | [{{% param "yes" %}}](centos.md) |                                 | [{{% param "yes" %}}](centos.md) |                        |
+| [Debian](debian.md)                   | [{{% param "yes" %}}](debian.md) | [{{% param "yes" %}}](debian.md) | [{{% param "yes" %}}](debian.md)          | [{{% param "yes" %}}](debian.md) |                        |
+| [Fedora](fedora.md)                   | [{{% param "yes" %}}](fedora.md) | [{{% param "yes" %}}](fedora.md) |                                 | [{{% param "yes" %}}](fedora.md) |                        |
+| [Raspberry Pi OS](raspberry-pi-os.md) |                        |                        | [{{% param "yes" %}}](raspberry-pi-os.md) |                        |                        |
+| [RHEL](rhel.md)                       |                        |                        |                                 |                        | [{{% param "yes" %}}](rhel.md)   |
+| [SLES](sles.md)                       |                        |                        |                                 |                        | [{{% param "yes" %}}](sles.md)   |
+| [Ubuntu](ubuntu.md)                   | [{{% param "yes" %}}](ubuntu.md) | [{{% param "yes" %}}](ubuntu.md) | [{{% param "yes" %}}](ubuntu.md)          | [{{% param "yes" %}}](ubuntu.md) | [{{% param "yes" %}}](ubuntu.md) |
+| [Binaries](binaries.md)               | [{{% param "yes" %}}](binaries.md) | [{{% param "yes" %}}](binaries.md) | [{{% param "yes" %}}](binaries.md)          |                        |                        |
 
 ### Other Linux distros
 
@@ -115,7 +119,7 @@ Docker provides support for Docker products, including Docker Desktop, which use
 Docker Engine as one of its components.
 
 For information about the open source project, refer to the
-[Moby project website](https://mobyproject.org/){:target="_blank" rel="noopener"}.
+[Moby project website](https://mobyproject.org/).
 
 ### Upgrade path
 

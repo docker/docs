@@ -1,11 +1,11 @@
 ---
 description: How to setup and run Docker with SSH or HTTPS
 keywords: docker, docs, article, example, ssh, https, daemon, tls, ca,  certificate
-redirect_from:
+title: Protect the Docker daemon socket
+aliases:
 - /articles/https/
 - /engine/articles/https/
 - /engine/security/https/
-title: Protect the Docker daemon socket
 ---
 
 By default, Docker runs through a non-networked UNIX socket. It can also
@@ -89,7 +89,7 @@ it only connects to servers with a certificate signed by that CA.
 >
 > Using TLS and managing a CA is an advanced topic. Please familiarize yourself
 > with OpenSSL, x509, and TLS before using it in production.
-{:.important}
+{ .important }
 
 ### Create a CA, server and client keys with OpenSSL
 
@@ -271,7 +271,7 @@ $ docker --tlsverify \
 > That means anyone with the keys can give any instructions to your Docker
 > daemon, giving them root access to the machine hosting the daemon. Guard
 > these keys as you would a root password!
-{:.warning}
+{ .warning }
 
 ### Secure by default
 

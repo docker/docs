@@ -2,8 +2,8 @@
 title: Security best practices
 description: Image security best practices guide
 keywords: docker, images, containers, vulnerability, cve
-redirect_from:
-  - /develop/scan-images/
+aliases:
+- /develop/scan-images/
 ---
 
 You can take a few steps to improve the security of your
@@ -30,7 +30,7 @@ Docker verifying the authenticity of the content in their repositories. When you
 pick your base image, look out for the **Official Image** and **Verified Publisher**
 badges.
 
-![Docker Hub Official and Verified Publisher images](images/hub-official-images.png){:width="700px"}
+![Docker Hub Official and Verified Publisher images](images/hub-official-images.png)
 
 When building your own image from a Dockerfile, ensure you choose a minimal base
 image that matches your requirements. A smaller base image not only offers

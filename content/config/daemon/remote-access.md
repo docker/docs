@@ -1,8 +1,9 @@
 ---
-description: >
-  Configuring remote access allows Docker to accept requests from remote hosts
-  by configuring it to listen on an IP address and port as well as the Unix
+description: 'Configuring remote access allows Docker to accept requests from remote
+  hosts by configuring it to listen on an IP address and port as well as the Unix
   socket
+
+  '
 keywords: configuration, daemon, remote access, engine
 title: Configure remote access for Docker daemon
 ---
@@ -23,7 +24,7 @@ refer to the
 > possible for remote non-root users to gain root access on the host. For more
 > information on how to use TLS certificates to secure this connection, check
 > [Protect the Docker daemon socket](../../engine/security/protect-access.md).
-{: .warning}
+{ .warning }
 
 You can configure Docker to accept remote connections. This can be done using
 the `docker.service` systemd unit file for Linux distributions using systemd. Or
@@ -88,4 +89,3 @@ you can use the `daemon.json` file, if your distribution doesn't use systemd.
    $ sudo netstat -lntp | grep dockerd
    tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      3758/dockerd
    ```
-

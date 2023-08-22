@@ -1,8 +1,9 @@
 ---
-title: "Configure CI/CD for your application"
-keywords: ci, cd, ci/cd, continuous integration, continuous deployment, deployment, github, github actions, go, golang, development
+title: Configure CI/CD for your application
+keywords: ci, cd, ci/cd, continuous integration, continuous deployment, deployment,
+  github, github actions, go, golang, development
 description: Learn how to set up CI/CD pipeline for your application.
-redirect_from:
+aliases:
 - /get-started/golang/configure-ci-cd/
 ---
 
@@ -10,7 +11,7 @@ redirect_from:
 
 ## Get started with GitHub Actions
 
-{% include gha-tutorial.md %}
+{{< include "gha-tutorial.md" >}}
 
 ## Next steps
 
@@ -20,8 +21,8 @@ You can also consider deploying your application to a public Cloud provider, suc
 
 In the next module, we’ll look into some options for doing so:
 
-[Deploy your app](deploy.md){: .button .primary-btn}
+{{< button text="Deploy your app" url="deploy.md" >}}
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Golang%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Golang%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

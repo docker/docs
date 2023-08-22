@@ -4,7 +4,7 @@ keywords: registry, garbage, images, tags, repository, distribution
 title: Garbage collection
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 As of v2.4.0 a garbage collector command is included within the registry binary.
 This document describes what this command does and how and why it should be used.

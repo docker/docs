@@ -4,7 +4,7 @@ keywords: registry, manifest, images, signatures, repository, distribution, dige
 title: Docker Registry deprecation
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 This document details functionality or components which are deprecated within
 the registry.

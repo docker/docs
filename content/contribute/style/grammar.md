@@ -3,7 +3,7 @@ title: Grammar and style
 description: Grammar and style guidelines for technical documentation
 keywords: grammar, style, contribute
 toc_max: 2
---- 
+---
 
 Docker documentation should always be written in US English with US grammar. 
 
@@ -168,5 +168,4 @@ Don't use parentheses in technical documentation. They can reduce the readabilit
 
 ## Third party documentation
 
-If you are documenting a task that requires the use of a third-party product, link out to the third-party's documentation. Don't copy the content because it might violate copyright. It can also result in an unnecessary maintenance burden of having to keep the docs up-to-date when the third-party changes or updates their product. It is best practice to link to the single source of truth. 
-
+If you are documenting a task that requires the use of a third-party product, link out to the third-party's documentation. Don't copy the content because it might violate copyright. It can also result in an unnecessary maintenance burden of having to keep the docs up-to-date when the third-party changes or updates their product. It is best practice to link to the single source of truth.

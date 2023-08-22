@@ -3,10 +3,10 @@ title: Local registry with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, registry
 ---
 
-For testing purposes you may need to create a [local registry](https://hub.docker.com/_/registry){:target="blank" rel="noopener" class=""}
+For testing purposes you may need to create a [local registry](https://hub.docker.com/_/registry)
 to push images into:
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -47,4 +47,3 @@ jobs:
         run: |
           docker buildx imagetools inspect localhost:5000/name/app:latest
 ```
-{% endraw %}

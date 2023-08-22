@@ -3,6 +3,7 @@ title: Manage autobuilds
 description: How to manage autobuilds in Docker Hub
 keywords: autobuilds, automated, docker hub, registry
 ---
+
 > **Note**
 >
 > Automated builds require a

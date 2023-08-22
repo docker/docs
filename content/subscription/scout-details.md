@@ -4,9 +4,9 @@ description: Learn about the Docker Scout subscriptions plans and features
 keywords: subscription, free, team, business, features
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
-This page provides an overview of the subscription plans for Docker Scout. To compare features available for each plan, see [Docker Scout Pricing](https://docker.com/products/docker-scout){: target="_blank" rel="noopener" class="_"}.
+This page provides an overview of the subscription plans for Docker Scout. To compare features available for each plan, see [Docker Scout Pricing](https://docker.com/products/docker-scout).
 
 ## Docker Scout Free 
 
@@ -40,4 +40,4 @@ Docker Scout Business includes:
 - All the features available in Docker Scout Team
 - Unlimited Docker Scout-enabled repositories
 
-You can [contact sales](https://www.docker.com/products/docker-scout/){: target="_blank" rel="noopener" class="_"} to buy Docker Scout Business.
+You can [contact sales](https://www.docker.com/products/docker-scout/) to buy Docker Scout Business.

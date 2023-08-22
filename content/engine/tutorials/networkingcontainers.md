@@ -1,10 +1,10 @@
 ---
 description: How to network Docker containers.
 keywords: Examples, Usage, volume, docker, documentation, user guide, data, volumes
-redirect_from:
+title: Network containers
+aliases:
 - /engine/userguide/containers/networkigncontainers/
 - /engine/userguide/networkigncontainers/
-title: Network containers
 ---
 
 If you are working your way through the user guide, you just built and ran a
@@ -143,9 +143,9 @@ Launch a container running a PostgreSQL database and pass it the `--net=my_bridg
 If you inspect your `my_bridge` you can see it has a container attached.
 You can also inspect your container to see where it is connected:
 
-    {% raw %}
+    
     $ docker inspect --format='{{json .NetworkSettings.Networks}}'  db
-    {% endraw %}
+    
 
     {"my_bridge":{"NetworkID":"7d86d31b1478e7cca9ebed7e73aa0fdeec46c5ca29497431d3007d2d9e15ed99",
     "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"10.0.0.1","IPAddress":"10.0.0.254","IPPrefixLen":24,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
@@ -158,18 +158,18 @@ Now, go ahead and start your by now familiar web application. This time don't sp
 
 Which network is your `web` application running under? Inspect the application to verify that it is running in the default `bridge` network.
 
-    {% raw %}
+    
     $ docker inspect --format='{{json .NetworkSettings.Networks}}'  web
-    {% endraw %}
+    
 
     {"bridge":{"NetworkID":"7ea29fc1412292a2d7bba362f9253545fecdfa8ce9a6e37dd10ba8bee7129812",
     "EndpointID":"508b170d56b2ac9e4ef86694b0a76a22dd3df1983404f7321da5649645bf7043","Gateway":"172.17.0.1","IPAddress":"10.0.0.2","IPPrefixLen":24,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02"}}
 
 Then, get the IP address of your `web`
 
-    {% raw %}
+    
     $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' web
-    {% endraw %}
+    
 
     172.17.0.2
 

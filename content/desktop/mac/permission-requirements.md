@@ -1,8 +1,9 @@
 ---
-description: Understand permission requirements for Docker Desktop for Mac and the differences between versions
+description: Understand permission requirements for Docker Desktop for Mac and the
+  differences between versions
 keywords: Docker Desktop, mac, security, install, permissions
 title: Understand permission requirements for Docker Desktop on Mac
-redirect_from:
+aliases:
 - /docker-for-mac/privileged-helper/
 - /desktop/mac/privileged-helper/
 ---
@@ -166,5 +167,3 @@ $ rm /Library/PrivilegedHelperTools/com.docker.vmnetd
 ## Containers running as root within the Linux VM
 
 The Docker daemon and containers run in a lightweight Linux VM managed by Docker. This means that although containers run by default as `root`, this doesn't grant `root` access to the Mac host machine. The Linux VM serves as a security boundary and limits what resources can be accessed from the host. Any directories from the host bind mounted into Docker containers still retain their original permissions.
-
-

@@ -10,7 +10,6 @@ title: Manage SSO
 >
 > You must have a [company](/docker-hub/creating-companies/) to manage more than one organization.
 
-{% include admin-sso-management-orgs.md product="hub" %}
+{{% admin-sso-management-orgs product="hub" %}}
 
 {% include admin-sso-management.md product="hub"%}
-

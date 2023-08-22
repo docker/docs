@@ -1,5 +1,5 @@
 ---
-title: "Run your Rust image as a container"
+title: Run your Rust image as a container
 keywords: rust, run, image, container,
 description: Learn how to run your Rust image as a container.
 ---
@@ -200,4 +200,4 @@ Related information:
 
 In the next section, you’ll learn how to run a database in a container and connect it to a Rust application.
 
-[How to develop your application](develop.md){: .button .primary-btn}
+{{< button text="How to develop your application" url="develop.md" >}}

@@ -12,7 +12,7 @@ The following workflow implements several steps to achieve this:
 2. Test your image
 3. Multi-platform build and push the image
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -64,7 +64,7 @@ jobs:
           push: true
           tags: ${{ env.LATEST_TAG }}
 ```
-{% endraw %}
+
 
 > **Note**
 >

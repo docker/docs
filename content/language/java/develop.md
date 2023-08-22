@@ -1,5 +1,5 @@
 ---
-title: "Use containers for development"
+title: Use containers for development
 keywords: Java, local, development, run,
 description: Learn how to develop your application locally.
 ---
@@ -217,7 +217,7 @@ You should have seen the code break on the marked line and now you are able to u
 
 ![Debugger code breakpoint](images/debugger-breakpoint.png)
 
-You can also activate the live reload option provided by SpringBoot Dev Tools. Check out the [SpringBoot documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-devtools-remote){:target="_blank" rel="noopener" class="_"} for information on how to connect to a remote application.
+You can also activate the live reload option provided by SpringBoot Dev Tools. Check out the [SpringBoot documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-devtools-remote) for information on how to connect to a remote application.
 
 ## Next steps
 
@@ -225,8 +225,8 @@ In this module, we took a look at creating a general development image that we c
 
 In the next module, we’ll take a look at how to run unit tests in Docker. See
 
-[Run your tests](run-tests.md){: .button .primary-btn}
+{{< button text="Run your tests" url="run-tests.md" >}}
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{ site.repo }}/issues/new?title=[Java%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR]({{ site.repo }}/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Java%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

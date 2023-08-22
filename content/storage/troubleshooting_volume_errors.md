@@ -2,7 +2,7 @@
 description: Troubleshooting volume errors
 keywords: cadvisor, troubleshooting, volumes, bind-mounts
 title: Troubleshoot volume errors
-redirect_from:
+aliases:
 - /engine/admin/troubleshooting_volume_errors/
 ---
 

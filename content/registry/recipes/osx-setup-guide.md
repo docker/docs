@@ -1,10 +1,11 @@
 ---
 description: Explains how to run a registry on macOS
-keywords: registry, on-prem, images, tags, repository, distribution, macOS, recipe, advanced
+keywords: registry, on-prem, images, tags, repository, distribution, macOS, recipe,
+  advanced
 title: macOS setup guide
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 ## Use-case
 

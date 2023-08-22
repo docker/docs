@@ -3,12 +3,12 @@ title: History of Docker Compose
 description: History of Compose V1 and Compose YAML schema versioning
 keywords: compose, compose yaml, swarm, migration, compatibility
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 This page provides a brief history of the major versions and file format revisions of Docker Compose.
 
-The currently supported version of Compose is V2, which uses YAML files as defined by the [Compose specification](https://github.com/compose-spec/compose-spec){:
-target="_blank" rel="noopener" class="_"}.
+The currently supported version of Compose is V2, which uses YAML files as defined by the [Compose specification](https://github.com/compose-spec/compose-spec).
 
 For users supporting projects originally targeting older versions of Compose, this can serve as a guide to understanding compatibility and the evolution of changes.
 
@@ -34,7 +34,7 @@ Its usage is historical and files written in this format don't run with Compose 
 
 Compose file format 2.x and 3.x were very similar to each other, but the latter introduced many new options targeted at Swarm deployments.
 
-To address confusion around Compose CLI versioning, Compose file format versioning, and feature parity depending on whether Swarm mode was in use, file format 2.x and 3.x were merged into the [Compose Specification](https://github.com/compose-spec/compose-spec){:target="_blank" rel="noopener" class="_"}.
+To address confusion around Compose CLI versioning, Compose file format versioning, and feature parity depending on whether Swarm mode was in use, file format 2.x and 3.x were merged into the [Compose Specification](https://github.com/compose-spec/compose-spec).
 Unlike the prior file formats, the Compose Specification is rolling and eliminates the `version` field in YAML.
 
 Compose V2 uses the Compose Specification for project definition.

@@ -1,6 +1,7 @@
 ---
 description: Enabling two-factor authentication on Docker Hub
-keywords: Docker, docker, registry, security, Docker Hub, authentication, two-factor authentication
+keywords: Docker, docker, registry, security, Docker Hub, authentication, two-factor
+  authentication
 title: Enable two-factor authentication for Docker Hub
 ---
 

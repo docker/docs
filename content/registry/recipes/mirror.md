@@ -1,12 +1,13 @@
 ---
 description: Setting-up a local mirror for Docker Hub images
-keywords: registry, on-prem, images, tags, repository, distribution, mirror, Hub, recipe, advanced
+keywords: registry, on-prem, images, tags, repository, distribution, mirror, Hub,
+  recipe, advanced
 title: Registry as a pull through cache
-redirect_from:
+aliases:
 - /engine/admin/registry_mirror/
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 ## Use-case
 
@@ -35,7 +36,7 @@ Hub can be mirrored.
 
 > **Note**
 >
-> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates){: target="blank" rel="noopener" class=“”}.
+> Mirrors of Docker Hub are still subject to Docker's [fair usage policy](https://www.docker.com/pricing/resource-consumption-updates).
 
 ### Solution
 

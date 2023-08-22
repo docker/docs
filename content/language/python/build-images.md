@@ -1,5 +1,5 @@
 ---
-title: "Build your Python image"
+title: Build your Python image
 keywords: python, build, images, dockerfile
 description: Learn how to build an image of your Python application
 ---
@@ -20,7 +20,7 @@ dependencies, and any other file system objects required.
 
 ## Sample application
 
-The sample application uses the popular [Flask](https://flask.palletsprojects.com/){: target="_blank" rel="noopener" class="_"} framework.
+The sample application uses the popular [Flask](https://flask.palletsprojects.com/) framework.
 
 Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
 
@@ -30,7 +30,7 @@ $ git clone https://github.com/docker/python-docker
 
 ## Test the application without Docker (optional)
 
-You can test the application locally without Docker before you continue building and running the application with Docker. This section requires you to have Python 3.11 or later installed on your machine. Download and install [Python](https://www.python.org/downloads/){: target="_blank" rel="noopener" class="_"}.
+You can test the application locally without Docker before you continue building and running the application with Docker. This section requires you to have Python 3.11 or later installed on your machine. Download and install [Python](https://www.python.org/downloads/).
 
 Open your terminal and navigate to the working directory you created. Create an environment, install the dependencies, and start the application to make sure it’s running.
 
@@ -194,4 +194,4 @@ Related information:
 
 In the next section learn how to run your image as a container.
 
-[Run the image as a container](run-containers.md){: .button .primary-btn}
+{{< button text="Run the image as a container" url="run-containers.md" >}}

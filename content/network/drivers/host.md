@@ -2,8 +2,8 @@
 title: Host network driver
 description: All about exposing containers on the Docker host's network
 keywords: network, host, standalone
-redirect_from:
-  - /network/host/
+aliases:
+- /network/host/
 ---
 
 If you use the `host` network mode for a container, that container's network

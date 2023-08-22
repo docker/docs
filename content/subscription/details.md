@@ -1,10 +1,10 @@
 ---
 title: Docker subscriptions and features
-description: Understand 
+description: Understand
 keywords: subscription, personal, pro, team, business, features
 ---
 
-This page provides an overview of each tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+This page provides an overview of each tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Personal
 
@@ -18,7 +18,7 @@ Docker Personal includes:
 
 Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours. 
 
-For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Pro
 
@@ -32,7 +32,7 @@ Docker Pro includes:
 - 300 [Vulnerability Scans](../docker-hub/vulnerability-scanning.md)
 - Unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
 
-For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Team
 
@@ -47,7 +47,7 @@ Docker Team includes:
 
 There are also advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [audit logs](../docker-hub/audit-log.md), and more.
 
-For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Business
 
@@ -62,7 +62,7 @@ Docker Business includes:
 - [Single Sign-On](../single-sign-on/index.md)
 - [System for Cross-domain Identity Management](../docker-hub/scim.md) and more.
 
-For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}.
+For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ### Self-serve
 

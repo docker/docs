@@ -1,5 +1,5 @@
 ---
-title: FAQs 
+title: FAQs
 description: Frequently asked questions for Enhanced Container Isolation
 keywords: enhanced container isolation, security, faq, sysbox, Docker Desktop
 toc_max: 2

@@ -4,4 +4,4 @@ keywords: Group Mapping, SCIM, Docker Hub
 title: Group Mapping
 ---
 
-{% include admin-group-mapping.md product="hub" %}
+{{% admin-group-mapping product="hub" %}}

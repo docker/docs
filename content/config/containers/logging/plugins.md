@@ -2,7 +2,7 @@
 description: How to use logging driver plugins
 title: Use a logging driver plugin
 keywords: logging, driver, plugins, monitoring
-redirect_from:
+aliases:
 - /engine/admin/logging/plugins/
 ---
 

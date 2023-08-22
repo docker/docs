@@ -1,9 +1,9 @@
 ---
 description: Overview of using Docker for continuous integration
 keywords: ci, build
-redirect_from:
-  - /ci-cd/best-practices/
 title: Continuous integration with Docker
+aliases:
+- /ci-cd/best-practices/
 ---
 
 Continuous Integration (CI) is the part of the development process where you're
@@ -11,7 +11,7 @@ looking to get your code changes merged with the main branch of the project. At
 this point, development teams run tests and builds to vet that the code changes
 don't cause any unwanted or unexpected behaviors.
 
-![Git branches about to get merged](./images/continuous-integration.svg){: .invertible }
+![Git branches about to get merged](./images/continuous-integration.svg)
 
 There are several uses for Docker at this stage of development, even if you
 don't end up packaging your application as a container image.
@@ -36,10 +36,10 @@ image, just like you would for any other containerized application.
 The following links provide instructions for how you can get started using
 Docker for building your applications in CI:
 
-- [GitHub Actions](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action){:target="blank" rel="noopener" class=""}
-- [GitLab](https://docs.gitlab.com/runner/executors/docker.html){:target="blank" rel="noopener" class=""}
-- [Circle CI](https://circleci.com/docs/using-docker/){:target="blank" rel="noopener" class=""}
-- [Render](https://render.com/docs/docker){:target="blank" rel="noopener" class=""}
+- [GitHub Actions](https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action)
+- [GitLab](https://docs.gitlab.com/runner/executors/docker.html)
+- [Circle CI](https://circleci.com/docs/using-docker/)
+- [Render](https://render.com/docs/docker)
 
 ### Docker in Docker
 
@@ -47,7 +47,7 @@ You can also use a Dockerized build environment to build container images using
 Docker. That is, your build environment runs inside a container which itself is
 equipped to run Docker builds. This method is referred to as "Docker in Docker".
 
-Docker provides an official [Docker image](https://hub.docker.com/_/docker){:target="blank" rel="noopener" class=""}
+Docker provides an official [Docker image](https://hub.docker.com/_/docker)
 that you can use for this purpose.
 
 ## What's next

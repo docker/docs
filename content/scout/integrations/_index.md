@@ -4,7 +4,7 @@ keywords: supply chain, security, integrations, registries, ci, environments
 title: Integrating Docker Scout with other systems
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 By default, Docker Scout integrates with your Docker organization and your
 Docker Scout-enabled repositories on Docker Hub. You can integrate Docker Scout

@@ -4,6 +4,6 @@ keywords: Group Mapping, SCIM, Docker Admin
 title: Group Mapping
 ---
 
-{% include admin-early-access.md %}
+{{< include "admin-early-access.md" >}}
 
-{% include admin-group-mapping.md product="admin" layer="company" %}
+{{% admin-group-mapping product="admin" layer="company" %}}

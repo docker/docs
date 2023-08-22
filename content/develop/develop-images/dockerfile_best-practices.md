@@ -1,13 +1,13 @@
 ---
 description: Hints, tips and guidelines for writing clean, reliable Dockerfiles
 keywords: parent image, images, dockerfile, best practices, hub, official image
-redirect_from:
+title: Best practices for writing Dockerfiles
+aliases:
 - /articles/dockerfile_best-practices/
 - /engine/articles/dockerfile_best-practices/
 - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
 - /docker-cloud/tutorials/optimize-dockerfiles/
 - /engine/userguide/eng-image/dockerfile_best-practices/
-title: Best practices for writing Dockerfiles
 ---
 
 This topic covers recommended best practices and methods for building
@@ -237,7 +237,7 @@ A Dockerfile for a Go application could look like:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM golang:{{site.example_go_version}}-alpine AS build
+FROM golang:{{% param "example_go_version" %}}-alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
@@ -890,5 +890,5 @@ These Official Images have exemplary Dockerfiles:
 * [Dockerfile Reference](../../engine/reference/builder.md)
 * [More about Automated Builds](../../docker-hub/builds/index.md)
 * [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
-* [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker){:target="_blank" rel="noopener" class="_"}
+* [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker)
 * [More about Base Images](../../build/building/base-images.md)

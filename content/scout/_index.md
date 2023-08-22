@@ -1,19 +1,21 @@
 ---
 title: Docker Scout
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
-description: >
-  Docker Scout analyzes your images to help you understand their dependencies and potential vulnerabilities
-redirect_from:
-  - /atomist/
-  - /atomist/try-atomist/
-  - /atomist/configure/settings/
-  - /atomist/configure/advisories/
-  - /atomist/integrate/github/
-  - /atomist/integrate/deploys/
-  - /engine/scan/
+description: 'Docker Scout analyzes your images to help you understand their dependencies
+  and potential vulnerabilities
+
+  '
+aliases:
+- /atomist/
+- /atomist/try-atomist/
+- /atomist/configure/settings/
+- /atomist/configure/advisories/
+- /atomist/integrate/github/
+- /atomist/integrate/deploys/
+- /engine/scan/
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 Container images are often built from layers of other container images and
 software packages. These layers and packages can contain vulnerabilities that
@@ -29,7 +31,7 @@ You can use Docker Scout in [Docker Desktop](#docker-desktop), [Docker Hub](#doc
 and in the [Docker Scout Dashboard](./dashboard.md). Docker Scout also supports integrations with third-party systems,
 refer to [Integrating Docker Scout](./integrations/index.md) for more information.
 
-{% include scout-plans.md %}
+{{< include "scout-plans.md" >}}
 
 ## Quickstart
 
@@ -40,7 +42,7 @@ _The following video shows an end-to-end workflow of using Docker Scout to remed
 > **Quickstart with Docker Scout**
 >
 > For a self-guided quickstart that shows you how to use Docker Scout to identify and remediate vulnerabilities in your images, read the [quickstart](./quickstart.md).
-{: .tip }
+{ .tip }
 
 ## Enabling Docker Scout
 
@@ -109,7 +111,7 @@ and as [a GitHub action](https://github.com/docker/scout-action).
 
 ### Docker Scout Dashboard
 
-The [Docker Scout Dashboard](https://scout.docker.com){: target="\_blank" rel="noopener" }
+The [Docker Scout Dashboard](https://scout.docker.com)
 helps you share the analysis and security status of images in
 an organization with your team. You can also use the dashboard settings to enable
 Docker Scout on multiple images from Docker Hub at once.

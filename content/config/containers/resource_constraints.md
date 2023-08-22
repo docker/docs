@@ -1,10 +1,10 @@
 ---
-redirect_from:
+title: Runtime options with Memory, CPUs, and GPUs
+description: Specify the runtime options for a container
+keywords: docker, daemon, configuration, runtime
+aliases:
 - /engine/articles/systemd/
 - /engine/admin/resource_constraints/
-title: "Runtime options with Memory, CPUs, and GPUs"
-description: "Specify the runtime options for a container"
-keywords: "docker, daemon, configuration, runtime"
 ---
 
 By default, a container has no resource constraints and can use as much of a
@@ -49,7 +49,7 @@ number on the daemon or a container, or by setting `--oom-kill-disable` on a
 container.
 
 For more information about the Linux kernel's OOM management, see
-[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html){: target="_blank" rel="noopener" class="_" }.
+[Out of Memory Management](https://www.kernel.org/doc/gorman/html/understand/understand016.html).
 
 You can mitigate the risk of system instability due to OOME by:
 
@@ -212,7 +212,7 @@ before you can [configure the Docker daemon](#configure-the-docker-daemon) or
 > CPU scheduling and prioritization are advanced kernel-level features. Most
 > users do not need to change these values from their defaults. Setting these
 > values incorrectly can cause your host system to become unstable or unusable.
-{:.warning}
+{ .warning }
 
 #### Configure the host machine's kernel
 

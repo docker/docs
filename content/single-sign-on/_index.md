@@ -4,4 +4,4 @@ keywords: Single Sign-on, SSO, sign-on
 title: Overview
 ---
 
-{% include admin-sso.md product="hub" %}
+{{% admin-sso product="hub" %}}

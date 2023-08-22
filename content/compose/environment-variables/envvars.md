@@ -2,7 +2,7 @@
 description: Compose pre-defined environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
 title: Change pre-defined environment variables in Docker Compose
-redirect_from:
+aliases:
 - /compose/reference/envvars/
 ---
 
@@ -148,7 +148,7 @@ For more information, see [Migrate to Compose V2](../migrate.md).
 
 - `COMPOSE_API_VERSION`
     By default the API version is negotiated with the server. Use `DOCKER_API_VERSION`.  
-    See the [Docker CLI environment variable reference](../../../engine/reference/commandline/cli/#environment-variables){:target="_blank" rel="noopener" class="_"} page.
+    See the [Docker CLI environment variable reference](../../../engine/reference/commandline/cli/#environment-variables) page.
 - `COMPOSE_HTTP_TIMEOUT`
 - `COMPOSE_TLS_VERSION`
 - `COMPOSE_FORCE_WINDOWS_HOST`

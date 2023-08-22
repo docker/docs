@@ -1,6 +1,7 @@
 ---
-title: "Use Docker Compose"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+title: Use Docker Compose
+keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
+  docker desktop
 description: Using Docker Compose for multi-container applications
 ---
 
@@ -246,7 +247,7 @@ Now that you have your `compose.yaml` file, you can start your application.
     view the logs for a specific service, you can add the service name to the end of the logs command (for example,
     `docker compose logs -f app`).
 
-4. At this point, you should be able to open your app in your browser on [http://localhost:3000](http://localhost:3000){:target="_blank" rel="noopener" class="_"} and see it running.
+4. At this point, you should be able to open your app in your browser on [http://localhost:3000](http://localhost:3000) and see it running.
 
 ## See the app stack in Docker Dashboard
 
@@ -269,7 +270,7 @@ for the entire app. The containers will stop and the network will be removed.
 >remove the volumes, you need to add the `--volumes` flag.
 >
 >The Docker Dashboard does not remove volumes when you delete the app stack.
-{: .warning}
+{ .warning }
 
 ## Summary
 
@@ -285,4 +286,4 @@ Related information:
 
 Next, you'll learn about a few best practices you can use to improve your Dockerfile.
 
-[Image-building best practices](09_image_best.md){: .button  .primary-btn}
+{{< button text="Image-building best practices" url="09_image_best.md" >}}

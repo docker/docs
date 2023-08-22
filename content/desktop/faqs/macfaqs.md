@@ -2,7 +2,7 @@
 description: Frequently asked questions
 keywords: desktop, mac, faqs
 title: FAQs for Mac
-redirect_from:
+aliases:
 - /desktop/mac/space/
 - /docker-for-mac/space/
 ---
@@ -155,7 +155,7 @@ certificates](#directory-structures-for-certificates).
 > take effect.
 For a complete explanation of how to do this, see the blog post [Adding
 Self-signed Registry Certs to Docker & Docker Desktop for
-Mac](https://blog.container-solutions.com/adding-self-signed-registry-certs-docker-mac){:target="_blank" rel="noopener" class="_"}.
+Mac](https://blog.container-solutions.com/adding-self-signed-registry-certs-docker-mac).
 
 #### Add client certificates
 
@@ -224,10 +224,9 @@ installed both in Bash and Zsh.
 #### Bash
 
 Bash has [built-in support for
-completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1){:target="_blank"
-class="_"} To activate completion for Docker commands, these files need to be
+completion](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1) To activate completion for Docker commands, these files need to be
 copied or symlinked to your `bash_completion.d/` directory. For example, if you
-installed bash via [Homebrew](https://brew.sh){:target="_blank" rel="noopener" class="_"}:
+installed bash via [Homebrew](https://brew.sh):
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
@@ -252,10 +251,10 @@ fi
 #### Zsh
 
 In Zsh, the [completion
-system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html){:target="_blank" rel="nooopener" class="_"}
+system](http://zsh.sourceforge.net/Doc/Release/Completion-System.html)
 takes care of things. To activate completion for Docker commands,
 these files need to be copied or symlinked to your Zsh `site-functions/`
-directory. For example, if you installed Zsh via [Homebrew](https://brew.sh){:target="_blank" rel="nooopener" class="_"}:
+directory. For example, if you installed Zsh via [Homebrew](https://brew.sh):
 
 ```bash
 etc=/Applications/Docker.app/Contents/Resources/etc
@@ -266,8 +265,7 @@ ln -s $etc/docker-compose.zsh-completion /usr/local/share/zsh/site-functions/_do
 #### Fish-Shell
 
 Fish-shell also supports tab completion [completion
-system](https://fishshell.com/docs/current/#tab-completion){:target="_blank"
-class="_"}. To activate completion for Docker commands,
+system](https://fishshell.com/docs/current/#tab-completion). To activate completion for Docker commands,
 these files need to be copied or symlinked to your Fish-shell `completions/`
 directory.
 

@@ -1,8 +1,9 @@
 ---
 description: Link to GitHub and BitBucket
-keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, trusted, builds, trusted builds, automated builds, GitHub
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, trusted,
+  builds, trusted builds, automated builds, GitHub
 title: Configure Automated builds from GitHub and BitBucket
-redirect_from:
+aliases:
 - /docker-hub/github/
 - /docker-hub/bitbucket/
 - /docker-cloud/builds/link-source/
@@ -28,13 +29,12 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
 3. Select **Link provider** for the source provider you want to link.
 
-    If you want to unlink your current GitHub account and relink to a new GitHub account, make sure to completely logout of [GitHub](https://github.com/){: target="_blank" rel="noopener"
-    class="_"} before linking via Docker Hub.
+    If you want to unlink your current GitHub account and relink to a new GitHub account, make sure to completely logout of [GitHub](https://github.com/) before linking via Docker Hub.
 
 
 4. Review the settings for the **Docker Hub Builder** OAuth application.
 
-    ![Granting access to GitHub account](images/authorize-builder.png){:width="750px"}
+    ![Granting access to GitHub account](images/authorize-builder.png)
 
     >**Note**
     >

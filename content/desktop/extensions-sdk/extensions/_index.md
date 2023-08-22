@@ -14,7 +14,7 @@ Releasing your extension consists of:
 
 - Providing information about your extension: description, screenshots, etc. so users can decide to install your extension
 - [Validating](./validate.md) that the extension is built in the right format and includes the required information
-- Making the extension image available on [Docker Hub](https://hub.docker.com/){: target="_blank" rel="noopener" class="_" }
+- Making the extension image available on [Docker Hub](https://hub.docker.com/)
 
 See [Package and release your extension](DISTRIBUTION.md) for more details about the release process.
 
@@ -41,5 +41,4 @@ Docker extensions published in the Marketplace benefit from update notifications
 
 In addition to providing a description of your extension's features and screenshots, you should also specify additional URLs using [extension labels](labels.md). This direct users to your website for reporting bugs and feedback, and accessing documentation and support.
 
-{% include extensions-form.md %}
-
+{{< include "extensions-form.md" >}}

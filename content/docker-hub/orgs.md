@@ -1,12 +1,13 @@
 ---
 description: Docker Hub Teams & Organizations
-keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker Hub, docs, documentation
+keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker
+  Hub, docs, documentation
 title: Create your organization
-redirect_from:
+aliases:
 - /docker-cloud/orgs/
 ---
 
-{% include admin-org-overview.md %}
+{{< include "admin-org-overview.md" >}}
 
 ## Create an organization
 
@@ -19,12 +20,11 @@ detailed instructions on converting an existing user account to an organization,
 
 To create an organization:
 
-1. Sign in to [Docker Hub](https://hub.docker.com/){: target="_blank"
-rel="noopener" class="_"} using your [Docker ID](../docker-id/index.md) or your email address.
+1. Sign in to [Docker Hub](https://hub.docker.com/) using your [Docker ID](../docker-id/index.md) or your email address.
 2. Select **Organizations** and then **Create Organization** to create a new
    organization.
 3. Choose a plan for your organization and select **Buy Now**. See
-[Docker Pricing](https://www.docker.com/pricing/){: target="_blank" rel="noopener" class="_" id="dkr_docs_subscription_btl"}
+[Docker Pricing](https://www.docker.com/pricing/)
 for details on the features offered in the Team and Business plan.
 
    > **Note**
@@ -114,8 +114,7 @@ You can also access your invoices from this tab.
 You can also check out the following videos for information about creating Teams
 and Organizations in Docker Hub.
 
-- [Overview of organizations](https://www.youtube-nocookie.com/embed/G7lvSnAqed8){: target="_blank" rel="noopener" class="_"}
-- [Create an organization](https://www.youtube-nocookie.com/embed/b0TKcIqa9Po){: target="_blank" rel="noopener" class="_"}
-- [Working with Teams](https://www.youtube-nocookie.com/embed/MROKmtmWCVI){: target="_blank" rel="noopener" class="_"}
-- [Create Teams](https://www.youtube-nocookie.com/embed/78wbbBoasIc){: target="_blank" rel="noopener" class="_"}
-
+- [Overview of organizations](https://www.youtube-nocookie.com/embed/G7lvSnAqed8)
+- [Create an organization](https://www.youtube-nocookie.com/embed/b0TKcIqa9Po)
+- [Working with Teams](https://www.youtube-nocookie.com/embed/MROKmtmWCVI)
+- [Create Teams](https://www.youtube-nocookie.com/embed/78wbbBoasIc)

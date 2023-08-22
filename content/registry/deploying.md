@@ -4,7 +4,7 @@ keywords: registry, on-prem, images, tags, repository, distribution, deployment
 title: Deploy a registry server
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 Before you can deploy a registry, you need to install Docker on the host.
 A registry is an instance of the `registry` image, and runs within Docker.
@@ -33,7 +33,7 @@ The registry is now ready to use.
 > TLS and should ideally use an access-control mechanism. Keep reading and then
 > continue to the [configuration guide](configuration.md) to deploy a
 > production-ready registry.
-{: .important}
+{ .important }
 
 ## Copy an image from Docker Hub to your registry
 
@@ -403,7 +403,7 @@ secrets.
 > credentials as clear text. You must
 > [configure TLS first](deploying.md#run-an-externally-accessible-registry) for
 > authentication to work.
-{:.warning}
+{ .warning }
 
 1.  Create a password file with one entry for the user `testuser`, with password
     `testpassword`:
@@ -503,7 +503,7 @@ registry:
 
 Replace `/path` with the directory which contains the `certs/` and `auth/`
 directories.
-{:.warning}
+{ .warning }
 
 Start your registry by issuing the following command in the directory containing
 the `docker-compose.yml` file:

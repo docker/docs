@@ -1,17 +1,18 @@
 ---
 description: Guidelines for Official Images on Docker Hub
-keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs, official,image, documentation
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs,
+  official,image, documentation
 title: Docker Official Images
-redirect_from:
-  - /docker-hub/official_repos/
+aliases:
+- /docker-hub/official_repos/
 ---
 
-The [Docker Official Images](https://hub.docker.com/search?q=&type=image&image_filter=official){:target="_blank" rel="noopener" class="_"} are a
+The [Docker Official Images](https://hub.docker.com/search?q=&type=image&image_filter=official) are a
 curated set of Docker repositories hosted on Docker Hub.
 
 These images provide essential base repositories that serve as the starting point for the majority of users.
 
-These include operating systems such as [Ubuntu](https://hub.docker.com/_/ubuntu/){:target="_blank" rel="noopener" class="_"} and [Alpine](https://hub.docker.com/_/alpine/){:target="_blank" rel="noopener" class="_"}, programming languages such as [Python](https://hub.docker.com/_/python) and [Node](https://hub.docker.com/_/node), and other essential tools such as [Redis](https://hub.docker.com/_/redis) and [MySQL](https://hub.docker.com/_/mysql).
+These include operating systems such as [Ubuntu](https://hub.docker.com/_/ubuntu/) and [Alpine](https://hub.docker.com/_/alpine/), programming languages such as [Python](https://hub.docker.com/_/python) and [Node](https://hub.docker.com/_/node), and other essential tools such as [Redis](https://hub.docker.com/_/redis) and [MySQL](https://hub.docker.com/_/mysql).
 
 The images are some of the most secure images on Docker Hub. This is particularly important as Docker Official Images are some of the most popular on Docker Hub. Typically Docker Official images have little or no vulnerabilities.
 
@@ -73,8 +74,8 @@ Official Image.
 From a high level, an Official Image starts out as a proposal in the form
 of a set of GitHub pull requests. The following GitHub repositories detail the proposal requirements:
 
-- [docker-library/official-images](https://github.com/docker-library/official-images){:target="_blank" rel="noopener" class="_"}
-- [docker-library/docs](https://github.com/docker-library/docs){:target="_blank" rel="noopener" class="_"}
+- [docker-library/official-images](https://github.com/docker-library/official-images)
+- [docker-library/docs](https://github.com/docker-library/docs)
 
 The Docker Official Images team, with help from community contributors, formally
 review each proposal and provide feedback to the author. This initial review
@@ -82,7 +83,7 @@ process may require a bit of back-and-forth before the proposal is accepted.
 
 There are subjective considerations during the review process. These
 subjective concerns boil down to the basic question: "is this image generally
-useful?" For example, the [Python](https://hub.docker.com/_/python/){:target="_blank" rel="noopener" class="_"}
+useful?" For example, the [Python](https://hub.docker.com/_/python/)
 Docker Official Image is "generally useful" to the larger Python developer
 community, whereas an obscure text adventure game written in Python last week is
 not.

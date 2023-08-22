@@ -1,6 +1,7 @@
 ---
 description: Change your Docker Desktop settings on Linux
-keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker Desktop, Linux
+keywords: settings, preferences, proxy, file sharing, resources, kubernetes, Docker
+  Desktop, Linux
 title: Change Docker Desktop settings on Linux
 ---
 
@@ -8,7 +9,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Settings** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Settings**
+- Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
 ## General
@@ -105,7 +106,7 @@ File share settings are:
 >   such as cache directories or databases, the performance will be much
 >   better if they are stored in the Linux VM, using a [data volume](../../storage/volumes.md)
 >   (named volume) or [data container](../../storage/volumes.md).
-{: .tip}
+{ .tip }
 
 ### Proxies
 
@@ -122,7 +123,7 @@ To prevent developers from accidentally changing the proxy settings, see
 
 ### Network
 
-{% include desktop-network-setting.md %}
+{{< include "desktop-network-setting.md" >}}
 
 ## Docker Engine
 
@@ -161,7 +162,7 @@ Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
 ## Builders
 
-{% include desktop-builders-setting.md %}
+{{< include "desktop-builders-setting.md" >}}
 
 ## Kubernetes
 
@@ -176,7 +177,7 @@ using Docker commands.
 Select **Reset Kubernetes cluster** to delete all stacks and Kubernetes resources.
 
 For more information about using the Kubernetes integration with Docker Desktop,
-see [Deploy on Kubernetes](../kubernetes.md){:target="_blank" rel="noopener" class="_"}.
+see [Deploy on Kubernetes](../kubernetes.md).
 
 ## Software Updates
 
@@ -209,11 +210,11 @@ For more information about Docker extensions, see [Extensions](../extensions/ind
 
 On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
 
-You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/){:target="_blank" rel="noopener" class="_"} from the **Features in development** tab.
+You can also sign up to the [Developer Preview program](https://www.docker.com/community/get-involved/developer-preview/) from the **Features in development** tab.
 
 ### Beta features
 
-{% include beta.md %}
+{{< include "beta.md" >}}
 
 #### Use containerd for pulling and storing images
 
@@ -221,4 +222,4 @@ Turns on the containerd image store. This brings new features like faster contai
 
 ### Experimental features
 
-{% include desktop-experimental.md %}
+{{< include "desktop-experimental.md" >}}

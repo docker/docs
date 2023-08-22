@@ -8,12 +8,12 @@ the `platforms` option, as shown in the following example:
 
 > **Note**
 >
-> - For a list of available platforms, see the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:target="blank" rel="noopener" class=""}
+> - For a list of available platforms, see the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx)
 >   action.
-> - If you want support for more platforms, you can use QEMU with the [Docker Setup QEMU](https://github.com/docker/setup-qemu-action){:target="blank" rel="noopener" class=""}
+> - If you want support for more platforms, you can use QEMU with the [Docker Setup QEMU](https://github.com/docker/setup-qemu-action)
 >   action.
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -50,7 +50,7 @@ jobs:
           push: true
           tags: user/app:latest
 ```
-{% endraw %}
+
 
 ## Distribute build across multiple runners
 
@@ -68,7 +68,7 @@ create a manifest list and push it to Docker Hub.
 This example also uses the [`metadata` action](https://github.com/docker/metadata-action)
 to set tags and labels.
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -174,4 +174,3 @@ jobs:
         run: |
           docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE }}:${{ steps.meta.outputs.version }}
 ```
-{% endraw %}

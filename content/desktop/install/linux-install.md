@@ -1,9 +1,14 @@
 ---
-description: Install Docker on Linux with ease using our step-by-step installation guide covering system requirements, supported platforms, and where to go next.
-keywords: linux, docker linux install, docker linux, linux docker installation, docker for linux, docker desktop for linux, installing docker on linux, docker download linux, how to install docker on linux
+description: Install Docker on Linux with ease using our step-by-step installation
+  guide covering system requirements, supported platforms, and where to go next.
+keywords: linux, docker linux install, docker linux, linux docker installation, docker
+  for linux, docker desktop for linux, installing docker on linux, docker download
+  linux, how to install docker on linux
 title: Install Docker Desktop on Linux
-redirect_from:
+aliases:
 - /desktop/linux/install/
+'yes': '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin:
+  0 auto"}'
 ---
 
 This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
@@ -15,7 +20,7 @@ This page contains information about general system requirements, supported plat
 >This means images and containers deployed on the Linux Docker Engine (before installation) are not available in Docker Desktop for Linux. 
 >
 >For more information see [What is the difference between Docker Desktop for Linux and Docker Engine](../faqs/linuxfaqs.md#what-is-the-difference-between-docker-desktop-for-linux-and-docker-engine). 
-{: .important} 
+{ .important } 
 
 ## Supported platforms
 
@@ -23,14 +28,13 @@ Docker provides `.deb` and `.rpm` packages from the following Linux distribution
 and architectures:
 
 
-{% assign yes = '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin: 0 auto"}' %}
 
 
 | Platform                | x86_64 / amd64         | 
 |:------------------------|:-----------------------|
-| [Ubuntu](ubuntu.md)     | [{{ yes }}](ubuntu.md) |
-| [Debian](debian.md)     | [{{ yes }}](debian.md) |
-| [Fedora](fedora.md)     | [{{ yes }}](fedora.md) |
+| [Ubuntu](ubuntu.md)     | [{{% param "yes" %}}](ubuntu.md) |
+| [Debian](debian.md)     | [{{% param "yes" %}}](debian.md) |
+| [Fedora](fedora.md)     | [{{% param "yes" %}}](fedora.md) |
 
 
 An experimental package is available for [Arch](archlinux.md)-based distributions. Docker has not tested or verified the installation.
@@ -46,7 +50,7 @@ To install Docker Desktop successfully, your Linux host must meet the following 
 - QEMU must be version 5.2 or later. We recommend upgrading to the latest version.
 - systemd init system.
 - Gnome, KDE, or MATE Desktop environment.
-  - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/){:target="_blank" rel="noopener" class="_"}.
+  - For many Linux distros, the Gnome environment does not support tray icons. To add support for tray icons, you need to install a Gnome extension. For example, [AppIndicator](https://extensions.gnome.org/extension/615/appindicator-support/).
 - At least 4 GB of RAM.
 - Enable configuring ID mapping in user namespaces, see [File sharing](../faqs/linuxfaqs.md#how-do-i-enable-file-sharing).
 - Recommended: [Initialize `pass`](../get-started.md#credentials-management-for-linux-users) for credentials management.
@@ -60,7 +64,7 @@ Docker Desktop for Linux runs a Virtual Machine (VM). For more information on wh
 ### KVM virtualization support
 
 
-Docker Desktop runs a VM that requires [KVM support](https://www.linux-kvm.org){:target="_blank" rel="noopener" class="_"}.
+Docker Desktop runs a VM that requires [KVM support](https://www.linux-kvm.org).
 
 The `kvm` module should load automatically if the host has virtualization support. To load the module manually, run:
 
@@ -119,7 +123,7 @@ Sign out and sign back in so that your group membership is re-evaluated.
 > subscription.
 
 Make sure you meet the system requirements outlined earlier and follow the distro-specific prerequisites.
-{: .important} 
+{ .important } 
 
 1. Download the correct package for your Linux distribution and install it with the corresponding package manager. 
  - [Install on Debian](debian.md)
@@ -131,13 +135,13 @@ Make sure you meet the system requirements outlined earlier and follow the distr
 
     ![Docker app in Applications](images/docker-app-in-apps.png)
 
-3. Select **Docker Desktop** to start Docker. <br> The Docker menu (![whale menu](images/whale-x.svg){: .inline}) displays the Docker Subscription Service Agreement.
+3. Select **Docker Desktop** to start Docker. <br> The Docker menu ({{< inline-image src="images/whale-x.svg" alt="whale menu" >}}) displays the Docker Subscription Service Agreement.
 
 4. Select **Accept** to continue. Docker Desktop starts after you accept the terms.
 
    Note that Docker Desktop will not run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
-   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement){:target="_blank" rel="noopener" class="_"}. We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq){: target="_blank" rel="noopener" class="_" id="dkr_docs_desktop_install_btl"}.
+   For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq).
 
 
 ## Where to go next

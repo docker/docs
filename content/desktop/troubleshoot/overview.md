@@ -1,9 +1,10 @@
 ---
-description: Understand how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
+description: Understand how to diagnose and troubleshoot Docker Desktop, and how to
+  check the logs.
 keywords: Linux, Mac, Windows, troubleshooting, logs, issues, Docker Desktop
 toc_max: 2
 title: Troubleshoot Docker Desktop
-redirect_from:
+aliases:
 - /desktop/linux/troubleshoot/
 - /desktop/mac/troubleshoot/
 - /desktop/windows/troubleshoot/
@@ -27,10 +28,10 @@ This page contains information on how to diagnose and troubleshoot Docker Deskto
 
 To navigate to **Troubleshoot** either:
 
-- Select the Docker menu ![whale menu](../images/whale-x.svg){: .inline} and then **Troubleshoot**
+- Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Troubleshoot**
 - Select the **Troubleshoot** icon near the top-right corner of Docker Dashboard
 
-![Troubleshoot menu in Docker Desktop](../images/troubleshoot.png){:width="600px"}
+![Troubleshoot menu in Docker Desktop](../images/troubleshoot.png)
 
 The **Troubleshoot** page contains the following options:
 
@@ -54,11 +55,11 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
 
 1. From **Troubleshoot**, select **Get support**. 
 This opens the in-app **Support** page and starts collecting the diagnostics.
-    ![Diagnose & Feedback](../images/diagnose-support.png){:width="600px"}
+    ![Diagnose & Feedback](../images/diagnose-support.png)
 2. When the diagnostics collection process is complete, select **Upload to get a Diagnostic ID**.
 3. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
 4. Use your diagnostics ID to get help:
-    - If you have a paid Docker subscription, select **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID** field. Then, select **Submit** to request Docker Desktop support.
+    - If you have a paid Docker subscription, select **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/) form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID** field. Then, select **Submit** to request Docker Desktop support.
         > **Note**
         >
         > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
@@ -163,13 +164,13 @@ $ unzip –l /tmp/<your-diagnostics-ID>.zip
 
 #### Use your diagnostics ID to get help
 
-If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/){:target="_blank" rel="noopener" class="_"} form. Fill in the information required and add the ID to the Diagnostics ID field. Make sure you provide the full diagnostics ID, and not just the user ID. Select **Submit** to request Docker Desktop support.
+If you have a paid Docker subscription, open the [Docker Desktop support](https://hub.docker.com/support/desktop/) form. Fill in the information required and add the ID to the Diagnostics ID field. Make sure you provide the full diagnostics ID, and not just the user ID. Select **Submit** to request Docker Desktop support.
     
 If you don't have a paid Docker subscription, create an issue on GitHub:
 
-- [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
-- [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
-- [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
+- [For Linux](https://github.com/docker/desktop-linux/issues)
+- [For Mac](https://github.com/docker/for-mac/issues)
+- [For Windows](https://github.com/docker/for-win/issues)
 
 ### Self-diagnose tool
 
@@ -222,9 +223,9 @@ The tool runs a suite of checks and displays **PASS** or **FAIL** next to each c
 
 You can then create an issue on GitHub:
 
-- [For Linux](https://github.com/docker/desktop-linux/issues){:target="_blank" rel="noopener" class="_"}
-- [For Mac](https://github.com/docker/for-mac/issues){:target="_blank" rel="noopener" class="_"}
-- [For Windows](https://github.com/docker/for-win/issues){:target="_blank" rel="noopener" class="_"}
+- [For Linux](https://github.com/docker/desktop-linux/issues)
+- [For Mac](https://github.com/docker/for-mac/issues)
+- [For Windows](https://github.com/docker/for-win/issues)
 
 ## Check the logs
 

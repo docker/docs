@@ -1,27 +1,27 @@
 ---
 description: Docker Verified Publisher Program
 title: Docker Verified Publisher Program
-redirect_from:
-  - /docker-store/byol/
-  - /docker-store/certify-images/
-  - /docker-store/certify-plugins-logging/
-  - /docker-store/customer_faq/
-  - /docker-store/publisher_faq/
-  - /docker-store/trustchain/
-  - /docker-store/publish/
-  - /docker-hub/publish/publish/
-  - /docker-hub/publish/customer_faq/
-  - /docker-hub/publish/publisher_faq/
-  - /docker-hub/publish/certify-images/
-  - /docker-hub/publish/certify-plugins-logging/
-  - /docker-hub/publish/trustchain/
-  - /docker-hub/publish/byol/
-  - /docker-hub/publish/publisher-center-migration/
-  - /docker-hub/publish/
-  - /docker-hub/publish/repository-logos/
+aliases:
+- /docker-store/byol/
+- /docker-store/certify-images/
+- /docker-store/certify-plugins-logging/
+- /docker-store/customer_faq/
+- /docker-store/publisher_faq/
+- /docker-store/trustchain/
+- /docker-store/publish/
+- /docker-hub/publish/publish/
+- /docker-hub/publish/customer_faq/
+- /docker-hub/publish/publisher_faq/
+- /docker-hub/publish/certify-images/
+- /docker-hub/publish/certify-plugins-logging/
+- /docker-hub/publish/trustchain/
+- /docker-hub/publish/byol/
+- /docker-hub/publish/publisher-center-migration/
+- /docker-hub/publish/
+- /docker-hub/publish/repository-logos/
 ---
 
-[The Docker Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store){:target="_blank" rel="noopener" class="_"} provides high-quality images from commercial publishers verified by Docker.
+[The Docker Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store) provides high-quality images from commercial publishers verified by Docker.
 
 These images help development teams build secure software supply chains, minimizing exposure to malicious content early in the process to save time and money later.
 
@@ -74,7 +74,7 @@ Remove a logo using the clear button (![Clear button](images/clear_logo_sm.png){
 
 Removing the logo makes the repository fallback to using the organization logo, if set, and the default logo if not.
 
-![Default logo which is a 3D grey cube](images/default_logo_sm.png){: width="50px" }
+![Default logo which is a 3D grey cube](images/default_logo_sm.png)
 
 ### Verified publisher badge
 
@@ -85,8 +85,7 @@ to identify projects that Docker has verified as high quality publishers and wit
 
 ### Insights and analytics
 
-The [insights and analytics](/docker-hub/publish/insights-analytics){:
-target="blank" rel="noopener" class=""} service provides usage metrics for how
+The [insights and analytics](/docker-hub/publish/insights-analytics) service provides usage metrics for how
 the community uses Docker images, granting insight into user behavior.
 
 The usage metrics show the number of image pulls by tag or by digest, and breakdowns by
@@ -99,20 +98,17 @@ either a summary or raw format.
 
 ### Vulnerability analysis
 
-[Docker Scout](/scout/){:
-target="blank" rel="noopener" class=""} provides automatic vulnerability analysis
+[Docker Scout](/scout/) provides automatic vulnerability analysis
 for DVP images published to Docker Hub.
 Scanning images ensures that the published content is secure, and proves to
 developers that they can trust the image.
 
 Analysis is enabled on a per-repository
-basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/){:
-target="blank" rel="noopener" class=""} for more information about how to use
+basis, refer to [vulnerability scanning](/docker-hub/vulnerability-scanning/) for more information about how to use
 it.
 
 ### Who's eligible to become a verified publisher?
 
 Any independent software vendor who distributes software on Docker Hub can join
 the Verified Publisher Program. Find out more by heading to the
-[Docker Verified Publisher Program](https://www.docker.com/partners/programs){:target="_blank"
-rel="noopener" class="_"} page.
+[Docker Verified Publisher Program](https://www.docker.com/partners/programs) page.

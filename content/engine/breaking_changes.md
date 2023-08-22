@@ -1,9 +1,9 @@
 ---
-redirect_from:
-- /engine/misc/breaking/
 description: Breaking changes
 keywords: docker, documentation, about, technology, breaking, incompatibilities
 title: Breaking changes and incompatibilities
+aliases:
+- /engine/misc/breaking/
 ---
 
 Every Engine release strives to be backward compatible with its predecessors,

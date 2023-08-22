@@ -1,5 +1,5 @@
 ---
-description: How to uninstall Docker Desktop 
+description: How to uninstall Docker Desktop
 keywords: Windows, unintall, Mac, Linux, Docker Desktop
 title: Uninstall Docker Desktop
 ---
@@ -19,7 +19,7 @@ To uninstall Docker Desktop from your Windows machine:
 > other Docker related data local to the machine, and removes the files generated
 > by the application. Refer to the [back up and restore data](backup-and-restore.md)
 > section to learn how to preserve important data before uninstalling.
-{: .important }
+{ .important }
 
 {{< /tab >}}
 {{< tab name="Mac" >}}
@@ -136,7 +136,7 @@ Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/conf
 > other Docker related data local to the machine, and removes the files generated
 > by the application. Refer to the [back up and restore data](backup-and-restore.md)
 > section to learn how to preserve important data before uninstalling.
-{: .important}
+{ .important }
 
 {{< /tab >}}
 {{< /tabs >}}

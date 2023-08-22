@@ -2,7 +2,7 @@
 description: Understand the accepted syntax for declaring environment variables.
 keywords: fig, composition, compose, docker, orchestration, environment, env file
 title: Use an environment file in Docker Compose
-redirect_from:
+aliases:
 - /compose/env-file/
 ---
 

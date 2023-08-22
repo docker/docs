@@ -4,7 +4,7 @@ keywords: registry, on-prem, images, tags, repository, distribution, use cases, 
 title: About Registry
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 A registry is a storage and content delivery system, holding named Docker
 images, available in different tagged versions.

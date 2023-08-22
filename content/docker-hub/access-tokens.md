@@ -1,10 +1,11 @@
 ---
 title: Create and manage access tokens
-description: Learn how to create and manage your personal Docker Hub access tokens to securely push and pull images programmatically.
+description: Learn how to create and manage your personal Docker Hub access tokens
+  to securely push and pull images programmatically.
 keywords: docker hub, hub, security, PAT, personal access token
 ---
 
-If you are using the [Docker Hub CLI](https://github.com/docker/hub-tool#readme){: target="_blank" rel="noopener" class="_"}
+If you are using the [Docker Hub CLI](https://github.com/docker/hub-tool#readme)
 tool (currently experimental) to access Hub images from the Docker CLI, you can create personal access tokens (PAT) as alternatives to your password.
 
 Compared to passwords, personal access tokens provide the following advantages:
@@ -25,9 +26,9 @@ any time.
 > **Important**
 >
 > Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager for example.
-{: .important}
+{ .important }
 
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+1. Sign in to [Docker Hub](https://hub.docker.com).
 
 2. Select your username in the top-right corner and from the drop-down menu select **Account Settings**.
 

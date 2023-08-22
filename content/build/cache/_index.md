@@ -1,11 +1,12 @@
 ---
 title: Optimizing builds with cache management
 description: Improve your build speeds by taking advantage of the builtin cache
-keywords: >
-  build, buildx, buildkit, dockerfile, image layers, build instructions, build
-  context
-redirect_from:
-  - /build/building/cache/
+keywords: 'build, buildx, buildkit, dockerfile, image layers, build instructions,
+  build context
+
+  '
+aliases:
+- /build/building/cache/
 ---
 
 You will likely find yourself rebuilding the same Docker image over and over
@@ -37,7 +38,7 @@ Each instruction in this Dockerfile translates (roughly) to a layer in your
 final image. You can think of image layers as a stack, with each layer adding
 more content on top of the layers that came before it:
 
-![Image layer diagram](../images/cache-stack.png){:.invertible}
+![Image layer diagram](../images/cache-stack.png)
 
 Whenever a layer changes, that layer will need to be re-built. For example,
 suppose you make a change to your program in the `main.c` file. After this
@@ -49,7 +50,7 @@ If a layer changes, all other layers that come after it are also affected. When
 the layer with the `COPY` command gets invalidated, all layers that follow will
 need to run again, too:
 
-![Image layer diagram, showing cache invalidation](../images/cache-stack-invalidated.png){:.invertible}
+![Image layer diagram, showing cache invalidation](../images/cache-stack-invalidated.png)
 
 And that's the Docker build cache in a nutshell. Once a layer changes, then all
 downstream layers need to be rebuilt as well. Even if they wouldn't build
@@ -199,12 +200,12 @@ layers to a minimum.
 
 #### Use an appropriate base image
 
-Docker provides over 170 pre-built [official images](https://hub.docker.com/search?q=&image_filter=official){:target="blank" rel="noopener" class=""}
+Docker provides over 170 pre-built [official images](https://hub.docker.com/search?q=&image_filter=official)
 for almost every common development scenario. For example, if you're building a
-Java web server, use a dedicated image such as [`eclipse-temurin`](https://hub.docker.com/_/eclipse-temurin/){:target="blank" rel="noopener" class=""}.
+Java web server, use a dedicated image such as [`eclipse-temurin`](https://hub.docker.com/_/eclipse-temurin/).
 Even when there's not an official image for what you might want, Docker provides
-images from [verified publishers](https://hub.docker.com/search?q=&image_filter=store){:target="blank" rel="noopener" class=""}
-and [open source partners](https://hub.docker.com/search?q=&image_filter=open_source){:target="blank" rel="noopener" class=""}
+images from [verified publishers](https://hub.docker.com/search?q=&image_filter=store)
+and [open source partners](https://hub.docker.com/search?q=&image_filter=open_source)
 that can help you on your way. The Docker community often produces third-party
 images to use as well.
 
@@ -273,7 +274,7 @@ RUN echo "the first command" && \
 ```
 
 Another shell feature that allows you to simplify and concatenate commands in a
-neat way are [`heredocs`](https://en.wikipedia.org/wiki/Here_document){:target="blank" rel="noopener" class=""}.
+neat way are [`heredocs`](https://en.wikipedia.org/wiki/Here_document).
 It enables you to create multi-line scripts with good readability:
 
 ```dockerfile

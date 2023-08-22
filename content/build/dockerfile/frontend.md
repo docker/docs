@@ -1,8 +1,8 @@
 ---
 title: Custom Dockerfile syntax
 keywords: build, buildkit, dockerfile, frontend
-redirect_from:
-  - /build/buildkit/dockerfile-frontend/
+aliases:
+- /build/buildkit/dockerfile-frontend/
 ---
 
 ## Dockerfile frontend
@@ -35,7 +35,7 @@ Custom Dockerfile implementations allow you to:
 - Make sure all users are using the same implementation to build your Dockerfile
 - Use the latest features without updating the Docker daemon
 - Try out new features or third-party features before they are integrated in the Docker daemon
-- Use [alternative build definitions, or create your own](https://github.com/moby/buildkit#exploring-llb){:target="blank" rel="noopener" class=""}
+- Use [alternative build definitions, or create your own](https://github.com/moby/buildkit#exploring-llb)
 
 > **Note**
 > 
@@ -52,7 +52,7 @@ channels where new images are released: `stable` and `labs`.
 
 ### Stable channel
 
-The `stable` channel follows [semantic versioning](https://semver.org){:target="blank" rel="noopener" class=""}.
+The `stable` channel follows [semantic versioning](https://semver.org).
 For example:
 
 - `docker/dockerfile:1` - kept updated with the latest `1.x.x` minor _and_ patch
@@ -90,14 +90,14 @@ suffix, for example:
 Choose a channel that best fits your needs. If you want to benefit from
 new features, use the `labs` channel. Images in the `labs` channel contain
 all the features in the `stable` channel, plus early access features.
-Stable features in the `labs` channel follow [semantic versioning](https://semver.org){:target="blank" rel="noopener" class=""},
+Stable features in the `labs` channel follow [semantic versioning](https://semver.org),
 but early access features don't, and newer releases may not be backwards
 compatible. Pin the version to avoid having to deal with breaking changes.
 
 ## Other resources
 
 For documentation on "labs" features, master builds, and nightly feature
-releases, refer to the description in [the BuildKit source repository on GitHub](https://github.com/moby/buildkit/blob/master/README.md){:target="blank" rel="noopener" class=""}.
-For a full list of available images, visit the [`docker/dockerfile` repository on Docker Hub](https://hub.docker.com/r/docker/dockerfile){:target="blank" rel="noopener" class=""},
-and the [`docker/dockerfile-upstream` repository on Docker Hub](https://hub.docker.com/r/docker/dockerfile-upstream){:target="blank" rel="noopener" class=""}
+releases, refer to the description in [the BuildKit source repository on GitHub](https://github.com/moby/buildkit/blob/master/README.md).
+For a full list of available images, visit the [`docker/dockerfile` repository on Docker Hub](https://hub.docker.com/r/docker/dockerfile),
+and the [`docker/dockerfile-upstream` repository on Docker Hub](https://hub.docker.com/r/docker/dockerfile-upstream)
 for development builds.

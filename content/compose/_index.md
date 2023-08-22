@@ -1,42 +1,46 @@
 ---
-description: Learn how to use Docker Compose to define and run multi-container applications with this detailed introduction to the tool. 
-keywords: docker compose, docker-compose, docker compose command, docker compose files, docker compose documentation, using docker compose, compose container, docker compose service
+description: Learn how to use Docker Compose to define and run multi-container applications
+  with this detailed introduction to the tool.
+keywords: docker compose, docker-compose, docker compose command, docker compose files,
+  docker compose documentation, using docker compose, compose container, docker compose
+  service
 title: Docker Compose overview
-redirect_from:
- - /compose/cli-command/
- - /compose/networking/swarm/
- - /compose/overview/
- - /compose/swarm/
- - /compose/completion/
 grid:
-  - title: "Install Compose"
-    description: "Follow the instructions on how to install Docker Compose."
-    icon: "download"
-    link: "/compose/install"
-  - title: "Try Compose"
-    description: "Learn the key concepts of Docker Compose whilst building a simple Python web application."
-    icon: "explore"
-    link: "/compose/gettingstarted"
-  - title: "View the release notes"
-    description: "Find out about the latest enhancements and bug fixes."
-    icon: "note_add"
-    link: "/compose/release-notes"
-  - title: "Understand key features of Compose"
-    description: "Understand its key features and explore common use cases."
-    icon: "help"
-    link: "/compose/features-uses/"
-  - title: "Explore the Compose file reference"
-    description:
-      "Find information on defining services, networks, and volumes for a Docker application."
-    icon: "all_inbox"
-    link: "/compose/compose-file"
-  - title: "Browse common FAQs"
-    description:
-      "Explore general FAQs and find out how to give feedback."
-    icon: "sms"
-    link: "/compose/faq"
+- title: Install Compose
+  description: Follow the instructions on how to install Docker Compose.
+  icon: download
+  link: /compose/install
+- title: Try Compose
+  description: Learn the key concepts of Docker Compose whilst building a simple Python
+    web application.
+  icon: explore
+  link: /compose/gettingstarted
+- title: View the release notes
+  description: Find out about the latest enhancements and bug fixes.
+  icon: note_add
+  link: /compose/release-notes
+- title: Understand key features of Compose
+  description: Understand its key features and explore common use cases.
+  icon: help
+  link: /compose/features-uses/
+- title: Explore the Compose file reference
+  description: Find information on defining services, networks, and volumes for a
+    Docker application.
+  icon: all_inbox
+  link: /compose/compose-file
+- title: Browse common FAQs
+  description: Explore general FAQs and find out how to give feedback.
+  icon: sms
+  link: /compose/faq
+aliases:
+- /compose/cli-command/
+- /compose/networking/swarm/
+- /compose/overview/
+- /compose/swarm/
+- /compose/completion/
 ---
-{% include compose-eol.md %}
+
+{{< include "compose-eol.md" >}}
 
 Compose is a tool for defining and running multi-container Docker applications.
 With Compose, you use a YAML file to configure your application's services.

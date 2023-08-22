@@ -1,10 +1,10 @@
 ---
 description: Automated tests
 keywords: Automated, testing, repository
-redirect_from:
+title: Automated repository tests
+aliases:
 - /docker-cloud/feature-reference/automated-testing/
 - /docker-cloud/builds/automated-testing/
-title: Automated repository tests
 ---
 
 > **Note**
@@ -110,7 +110,7 @@ Docker repository, regardless of the Autotest settings.
     limited on public repositories. Private images are not pulled and
     environment variables defined in Docker Hub are not
     available. Automated builds continue to work as usual.
-    {: .important}
+    { .important }
 
 7. Select **Save** to save the settings, or select **Save and build** to save and
 run an initial test.

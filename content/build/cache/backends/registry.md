@@ -1,8 +1,8 @@
 ---
-title: "Registry cache"
+title: Registry cache
 keywords: build, buildx, cache, backend, registry
-redirect_from:
-  - /build/building/cache/backends/registry/
+aliases:
+- /build/building/cache/backends/registry/
 ---
 
 The `registry` cache storage can be thought of as an extension to the `inline`
@@ -72,4 +72,4 @@ fail, but the build will continue.
 For an introduction to caching see [Optimizing builds with cache](../index.md).
 
 For more information on the `registry` cache backend, see the
-[BuildKit README](https://github.com/moby/buildkit#registry-push-image-and-cache-separately){:target="blank" rel="noopener" class=""}.
+[BuildKit README](https://github.com/moby/buildkit#registry-push-image-and-cache-separately).

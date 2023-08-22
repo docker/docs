@@ -2,8 +2,8 @@
 title: Docker Build architecture
 description: Learn about Docker Build and its components.
 keywords: build, buildkit, buildx, architecture
-redirect_from:
-  - /build/install-buildx/
+aliases:
+- /build/install-buildx/
 ---
 
 Docker Build implements a client-server architecture, where:
@@ -37,7 +37,7 @@ package. Buildx is included in the Docker Engine installation instructions, see
 
 You can also build the CLI plugin from source, or grab a binary from the GitHub
 repository and install it manually. See
-[docker/buildx README](https://github.com/docker/buildx#manual-download){: target="blank" rel="noopener"}
+[docker/buildx README](https://github.com/docker/buildx#manual-download)
 for more information
 
 ## Builders

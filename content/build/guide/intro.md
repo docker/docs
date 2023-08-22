@@ -55,7 +55,7 @@ Here's the Dockerfile used as the starting point for this guide:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM golang:{{site.example_go_version}}-alpine
+FROM golang:{{% param "example_go_version" %}}-alpine
 WORKDIR /src
 COPY . .
 RUN go mod download
@@ -74,9 +74,9 @@ Here’s what this Dockerfile does:
    the `dockerfile:1` syntax which is best practice: it ensures that you have
    access to the latest Docker build features.
 
-2. `FROM golang:{{site.example_go_version}}-alpine`
+2. `FROM golang:{{% param "example_go_version" %}}-alpine`
 
-   The `FROM` instruction uses version `{{site.example_go_version}}-alpine` of the `golang` official image.
+   The `FROM` instruction uses version `{{% param "example_go_version" %}}-alpine` of the `golang` official image.
 
 3. `WORKDIR /src`
 
@@ -169,4 +169,4 @@ Related information:
 
 The next section explores how you can use layer cache to improve build speed.
 
-[Layers](layers.md){: .button .primary-btn }
+{{< button text="Layers" url="layers.md" >}}

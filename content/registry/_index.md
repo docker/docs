@@ -1,12 +1,12 @@
 ---
 description: High-level overview of the Registry
 keywords: registry, on-prem, images, tags, repository, distribution
-redirect_from:
-- /registry/overview/
 title: Docker Registry
+aliases:
+- /registry/overview/
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 ## What it is
 
@@ -14,7 +14,7 @@ The Registry is a stateless, highly scalable server side application that stores
 and lets you distribute Docker images. The Registry is open-source, under the
 permissive [Apache license](https://en.wikipedia.org/wiki/Apache_License).
 You can find the source code on
-[GitHub](https://github.com/distribution/distribution){: target="blank" rel="noopener" class=""}.
+[GitHub](https://github.com/distribution/distribution).
 
 ## Why use it
 

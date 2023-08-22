@@ -1,5 +1,5 @@
 ---
-title: "Use containers for development"
+title: Use containers for development
 keywords: .net, local, development, run,
 description: Learn how to develop your application locally.
 ---
@@ -453,8 +453,8 @@ Now let’s test our application. Using a web browser, access `http://localhost:
 
 In the next module, we’ll take a look at how to write containerized tests in Docker. See:
 
-[Run your tests](run-tests.md){: .button .primary-btn}
+{{< button text="Run your tests" url="run-tests.md" >}}
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[dotnet%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[dotnet%20docs%20feedback]) GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls) to suggest updates.

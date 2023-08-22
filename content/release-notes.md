@@ -3,21 +3,21 @@ description: Release notes for Docker
 keywords: docker, documentation, about, technology, understanding,  release
 title: Docker release notes
 grid:
-  - title: Docker Desktop
-    icon: web_asset
-    link: /desktop/release-notes/
-  - title: Docker Engine
-    icon: settings_suggest
-    link: /desktop/release-notes/
-  - title: Docker Compose
-    icon: storage
-    link: /compose/release-notes/
-  - title: Docker Build
-    icon: construction
-    link: /build/release-notes/
-  - title: Docker Hub
-    icon: widgets
-    link: /docker-hub/release-notes/
+- title: Docker Desktop
+  icon: web_asset
+  link: /desktop/release-notes/
+- title: Docker Engine
+  icon: settings_suggest
+  link: /desktop/release-notes/
+- title: Docker Compose
+  icon: storage
+  link: /compose/release-notes/
+- title: Docker Build
+  icon: construction
+  link: /build/release-notes/
+- title: Docker Hub
+  icon: widgets
+  link: /docker-hub/release-notes/
 ---
 
 Find out what's new in Docker. Release notes contain information about new

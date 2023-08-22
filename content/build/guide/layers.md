@@ -11,7 +11,7 @@ of ordered build instructions. Each instruction in a Dockerfile roughly translat
 to an image layer. The following diagram illustrates how a Dockerfile translates
 into a stack of layers in a container image.
 
-![From Dockerfile to layers](./images/layers.png){:.invertible}
+![From Dockerfile to layers](./images/layers.png)
 
 ## Cached layers
 
@@ -25,7 +25,7 @@ following step (`RUN go mod download`). If you were to change any of the project
 files, then that would invalidate the cache for the `COPY` layer. It also invalidates
 the cache for all of the layers that follow.
 
-![Layer cache is bust](./images/cache-bust.png){:.invertible}
+![Layer cache is bust](./images/cache-bust.png)
 
 Because of the current order of the Dockerfile instructions, the builder must
 download the Go modules again, despite none of the packages having changed since
@@ -47,7 +47,7 @@ For Go to know which dependencies to download, you need to copy the `go.mod` and
 
 ```diff
   # syntax=docker/dockerfile:1
-  FROM golang:{{site.example_go_version}}-alpine
+  FROM golang:{{% param "example_go_version" %}}-alpine
   WORKDIR /src
 - COPY . .
 + COPY go.mod go.sum .
@@ -63,7 +63,7 @@ builder to download the dependencies each time. The `COPY . .` instruction
 appears after the package management instructions, so the builder can reuse the
 `RUN go mod download` layer.
 
-![Reordered](./images/reordered-layers.png){:.invertible}
+![Reordered](./images/reordered-layers.png)
 
 ## Summary
 
@@ -80,4 +80,4 @@ Related information:
 The next section shows how you can make the build run faster, and make the
 resulting output smaller, using multi-stage builds.
 
-[Multi-stage](multi-stage.md){: .button .primary-btn }
+{{< button text="Multi-stage" url="multi-stage.md" >}}

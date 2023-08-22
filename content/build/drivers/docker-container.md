@@ -1,9 +1,9 @@
 ---
-title: "Docker container driver"
+title: Docker container driver
 keywords: build, buildx, driver, builder, docker-container
-redirect_from:
-  - /build/buildx/drivers/docker-container/
-  - /build/building/drivers/docker-container/
+aliases:
+- /build/buildx/drivers/docker-container/
+- /build/building/drivers/docker-container/
 ---
 
 The buildx Docker container driver allows creation of a managed and customizable
@@ -42,7 +42,7 @@ pass to `--driver-opt`:
 ## Usage
 
 When you run a build, Buildx pulls the specified `image` (by default,
-[`moby/buildkit`](https://hub.docker.com/r/moby/buildkit)){:target="blank" rel="noopener" class=""}.
+[`moby/buildkit`](https://hub.docker.com/r/moby/buildkit)).
 When the container has started, Buildx submits the build submitted to the
 containerized build server.
 
@@ -120,7 +120,7 @@ container
 
 ## QEMU
 
-The `docker-container` driver supports using [QEMU](https://www.qemu.org/){:target="blank" rel="noopener" class=""}
+The `docker-container` driver supports using [QEMU](https://www.qemu.org/)
 (user mode) to build non-native platforms. Use the `--platform` flag to specify
 which architectures that you want to build for.
 
@@ -171,12 +171,12 @@ $ docker buildx inspect --bootstrap
 [Inspect the builder container](../../engine/reference/commandline/inspect.md)
 and see what network is being used:
 
-{% raw %}
+
 ```console
 $ docker inspect buildx_buildkit_mybuilder0 --format={{.NetworkSettings.Networks}}
 map[foonet:0xc00018c0c0]
 ```
-{% endraw %}
+
 
 ## Further reading
 

@@ -1,5 +1,5 @@
 ---
-title: "Use containers for development"
+title: Use containers for development
 keywords: python, local, development, run,
 description: Learn how to develop your application locally.
 ---
@@ -239,4 +239,4 @@ Related information:
 
 In the next section, you'll take a look at how to set up a CI/CD pipeline using GitHub Actions.
 
-[Configure CI/CD](configure-ci-cd.md){: .button .primary-btn}
+{{< button text="Configure CI/CD" url="configure-ci-cd.md" >}}

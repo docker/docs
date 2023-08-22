@@ -1,8 +1,9 @@
 ---
 description: Learn how to get started using Docker Hub
-keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, accounts, organizations, repositories, groups, teams
+keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, accounts,
+  organizations, repositories, groups, teams
 title: Docker Hub Quickstart
-redirect_from:
+aliases:
 - /apidocs/docker-cloud/
 - /docker-cloud/
 - /docker-cloud/migration/
@@ -80,7 +81,7 @@ The following section contains step-by-step instructions on how to get started w
 
 ### Step 1: Sign up for a Docker account
 
-Start by creating a [Docker ID](https://hub.docker.com/signup){: target="_blank" rel="noopener" class="_"}.
+Start by creating a [Docker ID](https://hub.docker.com/signup).
 
 A Docker ID grants you access to Docker Hub repositories and lets you explore available images from the community and verified publishers. You also need a Docker ID to share images on Docker Hub.
 
@@ -88,7 +89,7 @@ A Docker ID grants you access to Docker Hub repositories and lets you explore av
 
 To create a repository:
 
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select **Create a Repository** on the Docker Hub welcome page.
 3. Name it **&lt;your-username&gt;/my-private-repo**.
 4. Set the visibility to **Private**.

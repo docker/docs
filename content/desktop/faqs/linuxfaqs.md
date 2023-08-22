@@ -2,7 +2,7 @@
 description: Frequently asked questions
 keywords: desktop, linux, faqs
 title: FAQs for Linux
-redirect_from:
+aliases:
 - /desktop/linux/space/
 ---
 
@@ -40,7 +40,7 @@ $ sudo systemctl disable docker docker.socket containerd
 ```
 
 #### How do I switch between Docker Desktop and Docker Engine
-{: id="context" }
+{ #context }
 
 The Docker CLI can be used to interact with multiple Docker Engines. For example,
 you can use the same Docker CLI to control a local Docker Engine and to control
@@ -103,17 +103,17 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
     Container image vulnerabilities pose a security risk for the host environment. There is a large number of unofficial images that are not guaranteed to be verified for known vulnerabilities. Malicious users can push images to public registries and use different methods to trick users into pulling and running them. The VM approach mitigates this threat as any malware that gains root privileges is restricted to the VM environment without access to the host.
 
-    Why not run rootless Docker? Although this has the benefit of superficially limiting access to the root user so everything looks safer in "top", it allows unprivileged users to gain `CAP_SYS_ADMIN` in their own user namespace and access kernel APIs which are not expecting to be used by unprivileged users, resulting in [vulnerabilities](https://www.openwall.com/lists/oss-security/2022/01/18/7){: target="_blank" rel="noopener" class="_"}.
+    Why not run rootless Docker? Although this has the benefit of superficially limiting access to the root user so everything looks safer in "top", it allows unprivileged users to gain `CAP_SYS_ADMIN` in their own user namespace and access kernel APIs which are not expecting to be used by unprivileged users, resulting in [vulnerabilities](https://www.openwall.com/lists/oss-security/2022/01/18/7).
 
 4. **To provide the benefits of feature parity and enhanced security, with minimal impact on performance**
 
-    The VM utilized by DD4L uses [`virtiofs`](https://virtio-fs.gitlab.io){:target="_blank" rel="noopener" class="_"}, a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with virtiofs.
+    The VM utilized by DD4L uses [`virtiofs`](https://virtio-fs.gitlab.io), a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with virtiofs.
 
     As such, we have adjusted the default memory available to the VM in DD4L. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
 
 ### How do I enable file sharing?
 
-Docker Desktop for Linux uses [virtiofs](https://virtio-fs.gitlab.io/){:target="_blank" rel="noopener"}{:target="_blank" rel="noopener"} as the
+Docker Desktop for Linux uses [virtiofs](https://virtio-fs.gitlab.io/) as the
 default (and currently only) mechanism to enable file sharing between the host
 and Docker Desktop VM. In order not to require elevated privileges, without
 unnecessarily restricting operations on the shared files, Docker Desktop runs

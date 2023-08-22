@@ -1,12 +1,12 @@
 ---
-title: "Deploy to Swarm"
+title: Deploy to Swarm
 keywords: swarm, swarm services, stacks
 description: Learn how to describe and deploy a simple application on Docker Swarm.
-redirect_from:
+aliases:
 - /get-started/part4/
 ---
 
-{% include swarm-mode.md %}
+{{< include "swarm-mode.md" >}}
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ Swarm never creates individual containers like we did in the previous step of th
 
 Let's write a simple stack file to run and manage our Todo app, the container `getting-started` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. Place the following in a file called `bb-stack.yaml`:
 
-{% include swarm-compose-compat.md %}
+{{< include "swarm-compose-compat.md" >}}
 
 ```yaml
 version: '3.7'

@@ -4,10 +4,10 @@ keywords: ci, github actions, gha, buildkit, buildx, docker hub
 ---
 
 You can update the Docker Hub repository description using a third party action
-called [Docker Hub Description](https://github.com/peter-evans/dockerhub-description){:target="blank" rel="noopener" class=""}
+called [Docker Hub Description](https://github.com/peter-evans/dockerhub-description)
 with this action:
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -50,4 +50,3 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: user/app
 ```
-{% endraw %}

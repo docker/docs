@@ -17,7 +17,7 @@ There are two ways to contribute a pull request to the docs repository:
 
     This opens the GitHub editor, which means you don't need to know a lot about Git, or even about Markdown. When you save, Git prompts you to create a fork if you don't already have one, and to create a branch in your fork and submit the pull request.
 
-2. Fork the [docs GitHub repository]({{ site.repo }}). Suggest changes or add new content on your local branch, and submit a pull request (PR) to the `main` branch.
+2. Fork the [docs GitHub repository]({{% param "repo" %}}). Suggest changes or add new content on your local branch, and submit a pull request (PR) to the `main` branch.
 
     This is the manual, more advanced version of selecting 'Edit this page' on a published docs page. Initiating a docs change in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.
 
@@ -67,7 +67,7 @@ A Netlify test runs for each PR created against the `main` branch and deploys th
 On your local machine, clone the docs repository:
 
 ```bash
-git clone {{ site.repo }}.git
+git clone {{% param "repo" %}}.git
 cd docs
 ```
 
@@ -140,4 +140,3 @@ for your operating system. To enable the vale integration for your editor, insta
 The vale rules that implement the Docker style guide are included in the Docker docs repository,
 in the `.github/vale` directory. Vale will automatically apply these rules when invoked in this
 repository.
-

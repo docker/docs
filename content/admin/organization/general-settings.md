@@ -4,7 +4,7 @@ keywords: organization, settings
 title: General settings
 ---
 
-{% include admin-early-access.md %}
+{{< include "admin-early-access.md" >}}
 
 ## Configure general information
 
@@ -19,7 +19,7 @@ This information includes:
 
 To edit this information:
 
-1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+1. Sign in to [Docker Admin](https://admin.docker.com).
 2. In the left navigation, select your organization in the drop-down menu.
 3. Under **Organization Settings**, select **General**.
 4. Specify the organization information and select **Save**.
@@ -28,7 +28,7 @@ To edit this information:
 
 To create a new company:
 
-1. Sign in to [Docker Admin](https://admin.docker.com){: target="_blank" rel="noopener" class="_"}.
+1. Sign in to [Docker Admin](https://admin.docker.com).
 2. In the left navigation, select your organization in the drop-down menu.
 3. Under **Organization Settings**, select **General**.
 4. In the **Organization management** section, select **Create a company**.

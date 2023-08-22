@@ -4,11 +4,11 @@ description: Learn how to buy Docker Scout and manage your subscription
 keywords: payments, billing, subscription, scout
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 Docker Scout lets users secure their software supply chain and continuously observe and improve their security posture. Docker Scout is free for up to 3 repositories. You can buy Docker Scout Team or Docker Scout Business to turn on Docker Scout for additional repositories. See [Docker Scout subscription and features](../subscription/scout-details.md) to select the plan that works for you.
 
-In this section, learn how to buy Docker Scout Team in Docker Hub for your personal account or for an organization. To buy Docker Scout Business, [contact sales](https://www.docker.com/products/docker-scout/){: target="_blank" rel="noopener" class="_"}.
+In this section, learn how to buy Docker Scout Team in Docker Hub for your personal account or for an organization. To buy Docker Scout Business, [contact sales](https://www.docker.com/products/docker-scout/).
 
 ## Personal account
 
@@ -36,7 +36,7 @@ Once your purchase is complete, you receive a confirmation email and a copy of y
 
     >**Note**
     >
-    > If you're an organization with multiple teams, a Docker Scout Business plan may be better. [Contact sales](https://www.docker.com/products/docker-scout/){: target="_blank" rel="noopener" class="_"} to learn more.
+    > If you're an organization with multiple teams, a Docker Scout Business plan may be better. [Contact sales](https://www.docker.com/products/docker-scout/) to learn more.
 
 7. This redirects you to the payment processing page. Enter your email if this field isn't pre-populated. Then, enter your payment information.
 8. Update the quantity of repositories you want to use with Docker Scout. See [Docker Scout subscriptions](../subscription/scout-details.md) to learn more about the number of repositories available for each plan.

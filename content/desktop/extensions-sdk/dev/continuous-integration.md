@@ -1,5 +1,5 @@
 ---
-title: "Continuous Integration (CI)"
+title: Continuous Integration (CI)
 description: Automatically test and validate your extension.
 keywords: Docker, Extensions, sdk, CI, test, regression
 ---
@@ -9,7 +9,7 @@ In order to help validate your extension and ensure it's functional, the Extensi
 > **Important**
 >
 > The [Docker Desktop Action](https://github.com/docker/desktop-action) and the [extension-test-helper library](https://www.npmjs.com/package/@docker/extension-test-helper) are both [experimental](https://docs.docker.com/release-lifecycle/#experimental).
-{: .important }
+{ .important }
 
 ## Setup CI environment with GitHub Actions
 

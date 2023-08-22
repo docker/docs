@@ -1,5 +1,5 @@
 ---
-title: "Configure CI/CD for your application"
+title: Configure CI/CD for your application
 keywords: python, CI/CD, local, development
 description: Learn how to Configure CI/CD for your application
 ---
@@ -8,7 +8,7 @@ description: Learn how to Configure CI/CD for your application
 
 ## Get started with GitHub Actions
 
-{% include gha-tutorial.md %}
+{{< include "gha-tutorial.md" >}}
 
 ## Summary
 
@@ -18,4 +18,4 @@ In this section, you have learned how to set up GitHub Actions workflow to an ex
 
 Next, learn how you can deploy your application.
 
-[Deploy your app](deploy.md){: .button .primary-btn}
+{{< button text="Deploy your app" url="deploy.md" >}}

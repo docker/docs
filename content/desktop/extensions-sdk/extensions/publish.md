@@ -6,13 +6,13 @@ keywords: Docker, extensions, publish
 
 ## Submit your extension to the marketplace
 
-Docker Desktop displays published extensions in the Extensions Marketplace on [Docker Desktop](https://open.docker.com/extensions/marketplace){: target="_blank" rel="noopener" class="_"} and [Docker Hub](https://hub.docker.com/search?q=&type=extension){: target="_blank" rel="noopener" class="_"}.
+Docker Desktop displays published extensions in the Extensions Marketplace on [Docker Desktop](https://open.docker.com/extensions/marketplace) and [Docker Hub](https://hub.docker.com/search?q=&type=extension).
 The Extensions Marketplace is a curated space where developers can discover extensions to improve their developer experience and propose their own extension to be available for all Desktop users.
 
 Whenever you are [ready to publish](./DISTRIBUTION.md) your extension in the Marketplace, you have two publishing options:
 
-[Self-publish your extension](https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+){: target="_blank" rel="noopener" .button .primary-btn }
-[Request that Docker reviews your extension](https://www.docker.com/products/extensions/submissions/){: target="_blank" rel="noopener" .button .primary-btn }
+[Self-publish your extension](https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+)
+[Request that Docker reviews your extension](https://www.docker.com/products/extensions/submissions/)
 
 > **Note**
 >
@@ -34,11 +34,11 @@ These guidelines don't replace Docker's terms of service or guarantee approval:
 - Test your extension with potential users
 - Test your extension for crashes, bugs, and performance issues
 - Test your extension on various platforms (Mac, Windows, Linux)
-- Read the [Terms of Service](https://www.docker.com/legal/extensions_marketplace_developer_agreement/){: target="_blank" rel="noopener" class="_" }
+- Read the [Terms of Service](https://www.docker.com/legal/extensions_marketplace_developer_agreement/)
 
 ### Which publishing option to choose
 
-When submitting an extension to the extensions submissions [repository](https://github.com/docker/extensions-submissions/issues/new/choose){:target="_blank" rel="noopener" class="_" }, you have two publishing options. Publish as either:
+When submitting an extension to the extensions submissions [repository](https://github.com/docker/extensions-submissions/issues/new/choose), you have two publishing options. Publish as either:
 - A Self-published extension
 - A Docker-reviewed extension
 
@@ -55,7 +55,7 @@ evolve/polish your extension. You can request a review from the Docker Extension
 >
 > Docker Desktop caches the list of extensions available in the Marketplace for 12 hours. If you don't see your
 > extension in the Marketplace, you can restart Docker Desktop to force the cache to be refreshed.
-{: .important}
+{ .important }
 
 
 #### Process for Docker-reviewed extensions

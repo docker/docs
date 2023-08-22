@@ -20,7 +20,7 @@ FROM alpine
 RUN echo "Hello World"
 ```
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -48,11 +48,11 @@ jobs:
             alpine=docker-image://alpine:3.16
           tags: myimage:latest
 ```
-{% endraw %}
+
 
 ## Use image in subsequent steps
 
-By default, the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx){:target="blank" rel="noopener" class=""}
+By default, the [Docker Setup Buildx](https://github.com/marketplace/actions/docker-setup-buildx)
 action uses `docker-container` as a build driver, so built Docker images aren't
 loaded automatically.
 
@@ -64,7 +64,7 @@ FROM alpine
 RUN echo "Hello World"
 ```
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -102,7 +102,7 @@ jobs:
             alpine=docker-image://my-base-image:latest
           tags: myimage:latest
 ```
-{% endraw %}
+
 
 ## Using with a container builder
 

@@ -4,6 +4,6 @@ keywords: team, organization, activity, log, audit, activities
 title: Activity logs
 ---
 
-{% include admin-early-access.md %}
+{{< include "admin-early-access.md" >}}
 
-{% include admin-org-audit-log.md product="admin" %}
+{{% admin-org-audit-log product="admin" %}}

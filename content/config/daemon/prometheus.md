@@ -2,7 +2,7 @@
 description: Collecting Docker metrics with Prometheus
 keywords: prometheus, metrics
 title: Collect Docker metrics with Prometheus
-redirect_from:
+aliases:
 - /engine/admin/prometheus/
 - /config/thirdparty/monitoring/
 - /config/thirdparty/prometheus/
@@ -17,7 +17,7 @@ container, and monitor your Docker instance using Prometheus.
 >
 > The available metrics and the names of those metrics are in active
 > development and may change at any time.
-{: .warning }
+{ .warning }
 
 Currently, you can only monitor Docker itself. You cannot currently monitor your
 application using the Docker target.
@@ -172,5 +172,5 @@ level.
 
 ## Next steps
 
-- Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/){: target="_blank" rel="noopener" class="_" }
-- Set up some [alerts](https://prometheus.io/docs/alerting/overview/){: target="_blank" rel="noopener" class="_" }
+- Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/)
+- Set up some [alerts](https://prometheus.io/docs/alerting/overview/)

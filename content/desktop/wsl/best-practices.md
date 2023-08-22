@@ -1,6 +1,6 @@
 ---
 title: Best practices
-description: Best practices for using Docker Desktop with WSL 2 
+description: Best practices for using Docker Desktop with WSL 2
 keywords: wsl, docker desktop, best practices
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Deployment and orchestration"
+title: Deployment and orchestration
 keywords: orchestration, deploy, kubernetes, swarm,
 description: Get oriented on some basics of Docker and install Docker Desktop.
 ---

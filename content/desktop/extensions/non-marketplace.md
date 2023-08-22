@@ -1,6 +1,6 @@
 ---
 description: Extensions
-keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, 
+keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows,
 title: Non-Marketplace extensions
 ---
 
@@ -10,7 +10,7 @@ title: Non-Marketplace extensions
 >
 > Docker Extensions that are not in the Marketplace haven't gone through Docker's review process.
 > Extensions can install binaries, invoke commands and access files on your machine. Installing them is at your own risk.
-{: .warning}
+{ .warning }
 
 The Extensions Marketplace is the trusted and official place to install extensions from within Docker Desktop. These extensions have gone through a review process by Docker. However, other extensions can also be installed in Docker Desktop if you trust the extension author.
 

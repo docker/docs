@@ -1,12 +1,12 @@
 ---
 description: Configure logging driver.
 keywords: docker, logging, driver
-redirect_from:
+title: Configure logging drivers
+aliases:
 - /engine/reference/logging/overview/
 - /engine/reference/logging/
 - /engine/admin/reference/logging/
 - /engine/admin/logging/overview/
-title: Configure logging drivers
 ---
 
 Docker includes multiple logging mechanisms to help you
@@ -84,13 +84,13 @@ To find the current default logging driver for the Docker daemon, run
 `docker info` and search for `Logging Driver`. You can use the following
 command on Linux, macOS, or PowerShell on Windows:
 
-{% raw %}
+
 ```console
 $ docker info --format '{{.LoggingDriver}}'
 
 json-file
 ```
-{% endraw %}
+
 
 > **Note**
 > 
@@ -121,13 +121,13 @@ To find the current logging driver for a running container, if the daemon
 is using the `json-file` logging driver, run the following `docker inspect`
 command, substituting the container name or ID for `<CONTAINER>`:
 
-{% raw %}
+
 ```console
 $ docker inspect -f '{{.HostConfig.LogConfig.Type}}' <CONTAINER>
 
 json-file
 ```
-{% endraw %}
+
 
 ## Configure the delivery mode of log messages from container to log driver
 
@@ -145,7 +145,7 @@ STDERR or STDOUT streams block.
 >
 > When the buffer is full, new messages will not be enqueued.  Dropping messages is often preferred to blocking the
 > log-writing process of an application.
-{: .warning}
+{ .warning }
 
 The `mode` log option controls whether to use the `blocking` (default) or
 `non-blocking` message delivery.

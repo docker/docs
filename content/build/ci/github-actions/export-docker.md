@@ -6,7 +6,7 @@ keywords: ci, github actions, gha, buildkit, buildx, docker
 You may want your build result to be available in the Docker client through
 `docker images` to be able to use it in another step of your workflow:
 
-{% raw %}
+
 ```yaml
 name: ci
 
@@ -37,4 +37,3 @@ jobs:
         run: |
           docker image inspect myimage:latest
 ```
-{% endraw %}

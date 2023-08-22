@@ -1,10 +1,12 @@
 ---
 title: Multi-stage builds
-description: |
-  Learn about multi-stage builds and how you can use
+description: 'Learn about multi-stage builds and how you can use
+
   them to improve your builds and get smaller images
+
+  '
 keywords: build, best practices
-redirect_from:
+aliases:
 - /engine/userguide/eng-image/multistage-build/
 - /develop/develop-images/multistage-build/
 ---

@@ -4,7 +4,7 @@ keywords: registry, service, driver, images, storage, swift
 title: OpenStack Swift storage driver
 ---
 
-{% include registry.md %}
+{{< include "registry.md" >}}
 
 An implementation of the `storagedriver.StorageDriver` interface that uses
 [OpenStack Swift](http://docs.openstack.org/developer/swift/) for object

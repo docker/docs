@@ -2,10 +2,10 @@
 title: Overlay network driver
 description: All about using overlay networks
 keywords: network, overlay, user-defined, swarm, service
-redirect_from:
-  - /config/containers/overlay/
-  - /engine/userguide/networking/overlay-security-model/
-  - /network/overlay/
+aliases:
+- /config/containers/overlay/
+- /engine/userguide/networking/overlay-security-model/
+- /network/overlay/
 ---
 
 The `overlay` network driver creates a distributed network among multiple
@@ -98,7 +98,7 @@ automatically rotate the keys every 12 hours.
 > Overlay network encryption is not supported on Windows. If a Windows node
 > attempts to connect to an encrypted overlay network, no error is detected but
 > the node cannot communicate.
-{: .warning }
+{ .warning }
 
 #### Swarm mode overlay networks and standalone containers
 
@@ -292,7 +292,7 @@ inter-container communications may break when 1000 containers are co-located on
 the same host.
 
 For more information about this limitation, see
-[moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718){: target="_blank" rel="noopener"}.
+[moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718).
 
 ## Next steps
 

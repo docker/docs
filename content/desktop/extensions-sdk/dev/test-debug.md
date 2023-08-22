@@ -1,8 +1,8 @@
 ---
-title: "Test and debug"
+title: Test and debug
 description: Test and debug your extension.
 keywords: Docker, Extensions, sdk, preview, update, Chrome DevTools
-redirect_from:
+aliases:
 - /desktop/extensions-sdk/build/test-debug/
 ---
 
@@ -22,7 +22,7 @@ Each subsequent click on the extension tab also opens Chrome DevTools. To stop t
 $ docker extension dev reset <name-of-your-extensions>
 ```
 
-After an extension is deployed, it is also possible to open Chrome DevTools from the UI extension part using a variation of the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code){:target="_blank" rel="noopener" class="_"}. Click on the extension tab, and then hit the key sequence `up, up, down, down, left, right, left, right, p, d, t`.
+After an extension is deployed, it is also possible to open Chrome DevTools from the UI extension part using a variation of the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code). Click on the extension tab, and then hit the key sequence `up, up, down, down, left, right, left, right, p, d, t`.
 
 ### Hot reloading whilst developing the UI
 

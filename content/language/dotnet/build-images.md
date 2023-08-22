@@ -1,5 +1,5 @@
 ---
-title: "Build your .NET image"
+title: Build your .NET image
 keywords: .net, build, images, dockerfile
 description: Learn how to build your first Docker image by writing a Dockerfile
 ---
@@ -16,9 +16,9 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 
 To complete this tutorial, you need the following:
 
-- .NET SDK version 6.0 or later. [Download .NET SDK](https://dotnet.microsoft.com/download){: target="_blank" rel="noopener" class="_"}.
+- .NET SDK version 6.0 or later. [Download .NET SDK](https://dotnet.microsoft.com/download).
 - Docker running locally. Follow the instructions to [download and install Docker](../../get-docker.md).
-- An IDE or a text editor to edit files. We recommend using [Visual Studio Code](https://code.visualstudio.com/){: target="_blank" rel="noopener" class="_"}.
+- An IDE or a text editor to edit files. We recommend using [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Sample application
 
@@ -290,8 +290,8 @@ Our image that was tagged with `:v1.0.0` has been removed, but we still have the
 
 In this module, we took a look at setting up our example .NET application that we will use for the rest of the tutorial. We also created a Dockerfile that we used to build our Docker image. Then, we took a look at tagging our images and removing images. In the next module we’ll take a look at how to:
 
-[Run your image as a container](run-containers.md){: .button .primary-btn}
+{{< button text="Run your image as a container" url="run-containers.md" >}}
 
 ## Feedback
 
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[dotnet%20docs%20feedback]){:target="_blank" rel="noopener" class="_"} GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls){:target="_blank" rel="noopener" class="_"} to suggest updates.
+Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[dotnet%20docs%20feedback]) GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls) to suggest updates.

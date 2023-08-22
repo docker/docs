@@ -1,6 +1,7 @@
 ---
-title: "What next after getting started"
-keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
+title: What next after getting started
+keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
+  docker desktop
 description: Making sure you have more ideas of what you could do next with your application
 ---
 
@@ -23,8 +24,8 @@ a container quitting) and then work to make the actual state reflect the expecte
 ## Cloud Native Computing Foundation projects
 
 The CNCF is a vendor-neutral home for various open-source projects, including Kubernetes, Prometheus, 
-Envoy, Linkerd, NATS, and more. You can view the [graduated and incubated projects here](https://www.cncf.io/projects/){:target="_blank" rel="noopener" class="_"}
-and the entire [CNCF Landscape here](https://landscape.cncf.io/){:target="_blank" rel="noopener" class="_"}. There are a lot of projects to help
+Envoy, Linkerd, NATS, and more. You can view the [graduated and incubated projects here](https://www.cncf.io/projects/)
+and the entire [CNCF Landscape here](https://landscape.cncf.io/). There are a lot of projects to help
 solve problems around monitoring, logging, security, image registries, messaging, and more.
 
 ## Getting started video workshop
@@ -49,4 +50,3 @@ If you'd like to see how containers are built from scratch, Liz Rice from Aqua S
 ## Language-specific guides
 
 If you are looking for information on how to containerize an application using your favorite language, see the [Language-specific guides](../language/index.md).
-

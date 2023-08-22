@@ -1,7 +1,10 @@
 ---
 description: Instructions for installing Docker Engine on SLES
-keywords: requirements, apt, installation, centos, rpm, sles, install, uninstall, upgrade, update, s390x, ibm-z
-redirect_from:
+keywords: requirements, apt, installation, centos, rpm, sles, install, uninstall,
+  upgrade, update, s390x, ibm-z
+title: Install Docker Engine on SLES
+toc_max: 4
+aliases:
 - /ee/docker-ee/sles/
 - /ee/docker-ee/suse/
 - /engine/installation/linux/docker-ce/sles/
@@ -17,8 +20,7 @@ redirect_from:
 - /install/linux/docker-ee/suse/
 - /install/linux/sles/
 - /installation/sles/
-title: Install Docker Engine on SLES
-toc_max: 4
+download-url-base: https://download.docker.com/linux/sles
 ---
 
 To get started with Docker Engine on SLES, make sure you
@@ -109,12 +111,11 @@ Docker from the repository.
 
 #### Set up the repository
 
-{% assign download-url-base = "https://download.docker.com/linux/sles" %}
 
 Set up the repository.
 
 ```console
-$ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
+$ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 ```
 
 #### Install Docker Engine
@@ -187,7 +188,7 @@ $ sudo zypper addrepo {{ download-url-base }}/docker-ce.repo
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -200,7 +201,7 @@ If you can't use Docker's `rpm` repository to install Docker Engine, you can
 download the `.rpm` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
-1. Go to [{{ download-url-base }}/]({{ download-url-base }}/){: target="_blank" rel="noopener" class="_" }
+1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
    and choose your version of SLES. Then browse to `s390x/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
@@ -232,7 +233,7 @@ download a new file each time you want to upgrade Docker Engine.
 
 You have now successfully installed and started Docker Engine.
 
-{% include root-errors.md %}
+{{< include "root-errors.md" >}}
 
 #### Upgrade Docker Engine
 
@@ -240,7 +241,7 @@ To upgrade Docker Engine, download the newer package files and repeat the
 [installation procedure](#install-from-a-package), using `zypper -y upgrade`
 instead of `zypper -y install`, and point to the new files.
 
-{% include install-script.md %}
+{{< include "install-script.md" >}}
 
 ## Uninstall Docker Engine
 

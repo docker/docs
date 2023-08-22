@@ -2,8 +2,8 @@
 title: None network driver
 description: How to isolate the networking stack of a container using the none driver
 keywords: network, none, standalone
-redirect_from:
-  - /network/none/
+aliases:
+- /network/none/
 ---
 
 If you want to completely isolate the networking stack of a container, you can

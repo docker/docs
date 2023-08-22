@@ -13,7 +13,7 @@ title: Compose file versions and upgrading
 >Make sure you switch to [Compose V2](/compose/compose-file/) with the `docker compose` CLI plugin or by activating the **Use Docker Compose V2** setting in Docker Desktop.
 >
 > For more information, see the [History of Compose](/compose/history/). 
-{: .warning}
+{ .warning }
 
 The Compose file is a [YAML](https://yaml.org) file defining services,
 networks, and volumes for a Docker application.
@@ -31,7 +31,7 @@ compatibility, and [how to upgrade](#upgrading).
 
 ## Compatibility matrix
 
-{% include content/compose-matrix.md %}
+{{< include "content/compose-matrix.md" >}}
 
 > Looking for more detail on Docker and Compose compatibility?
 >
@@ -41,7 +41,7 @@ Compose release is compatible, refer to the [Compose release
 notes](https://github.com/docker/compose/releases/). Each set of release notes
 gives details on which versions of Docker Engine are supported, along
 with compatible Compose file format versions. (See also, the discussion in
-[issue #3404]({{ site.repo }}/issues/3404).)
+[issue #3404]({{% param "repo" %}}/issues/3404).)
 
 
 For details on versions and how to upgrade, see
@@ -118,7 +118,7 @@ discoverable at a hostname that's the same as the service name. This means
 
 Simple example:
 
-    version: "{{ site.compose_file_v2 }}"
+    version: "{{% param "compose_file_v2" %}}"
     services:
       web:
         build: .
@@ -131,7 +131,7 @@ Simple example:
 
 A more extended example, defining volumes and networks:
 
-    version: "{{ site.compose_file_v2 }}"
+    version: "{{% param "compose_file_v2" %}}"
     services:
       web:
         build: .
@@ -164,7 +164,7 @@ Several other options were added to support networking, such as:
 * The [`depends_on`](compose-file-v2.md#depends_on) option can be used in place of links to indicate dependencies
 between services and startup order.
 
-      version: "{{ site.compose_file_v2 }}"
+      version: "{{% param "compose_file_v2" %}}"
       services:
         web:
           build: .
@@ -515,7 +515,7 @@ It's more complicated if you're using particular configuration features:
     named volume called `data`, you must declare a `data` volume in your
     top-level `volumes` section. The whole file might look like this:
 
-        version: "{{ site.compose_file_v2 }}"
+        version: "{{% param "compose_file_v2" %}}"
         services:
           db:
             image: postgres

@@ -3,10 +3,10 @@ title: Macvlan network driver
 description: All about using Macvlan to make your containers appear like physical
   machines on the network
 keywords: network, macvlan, standalone
-redirect_from:
-  - /config/containers/macvlan/
-  - /engine/userguide/networking/get-started-macvlan/
-  - /network/macvlan/
+aliases:
+- /config/containers/macvlan/
+- /engine/userguide/networking/get-started-macvlan/
+- /network/macvlan/
 ---
 
 Some applications, especially legacy applications or applications which monitor

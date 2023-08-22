@@ -1,27 +1,27 @@
 ---
 description: Learn what the Docker Verified Publisher Program is and how it works
 title: Docker Verified Publisher Program
-redirect_from:
-  - /docker-store/byol/
-  - /docker-store/certify-images/
-  - /docker-store/certify-plugins-logging/
-  - /docker-store/customer_faq/
-  - /docker-store/publisher_faq/
-  - /docker-store/trustchain/
-  - /docker-store/publish/
-  - /docker-hub/publish/publish/
-  - /docker-hub/publish/customer_faq/
-  - /docker-hub/publish/publisher_faq/
-  - /docker-hub/publish/certify-images/
-  - /docker-hub/publish/certify-plugins-logging/
-  - /docker-hub/publish/trustchain/
-  - /docker-hub/publish/byol/
-  - /docker-hub/publish/publisher-center-migration/
-  - /docker-hub/publish/
-  - /docker-hub/publish/repository-logos/
+aliases:
+- /docker-store/byol/
+- /docker-store/certify-images/
+- /docker-store/certify-plugins-logging/
+- /docker-store/customer_faq/
+- /docker-store/publisher_faq/
+- /docker-store/trustchain/
+- /docker-store/publish/
+- /docker-hub/publish/publish/
+- /docker-hub/publish/customer_faq/
+- /docker-hub/publish/publisher_faq/
+- /docker-hub/publish/certify-images/
+- /docker-hub/publish/certify-plugins-logging/
+- /docker-hub/publish/trustchain/
+- /docker-hub/publish/byol/
+- /docker-hub/publish/publisher-center-migration/
+- /docker-hub/publish/
+- /docker-hub/publish/repository-logos/
 ---
 
-[The Docker Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store){:target="_blank" rel="noopener" class="_"} provides high-quality images from commercial publishers verified by Docker.
+[The Docker Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store) provides high-quality images from commercial publishers verified by Docker.
 
 These images help development teams build secure software supply chains, minimizing exposure to malicious content early in the process to save time and money later.
 
@@ -60,7 +60,7 @@ over the repository can change the repository logo.
 
 #### Set the repository logo
 
-1. Sign in to [Docker Hub](https://hub.docker.com){: target="_blank" rel="noopener" class="_"}.
+1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Go to the page of the repository that you want to change the logo for.
 3. Select the upload logo button, represented by a camera icon
    (![Camera icon](./images/upload_logo_sm.png){: .inline height="22px" })
@@ -74,7 +74,7 @@ Select the **Clear** button (![Clear button](images/clear_logo_sm.png){: .inline
 
 Removing the logo makes the repository default to using the organization logo, if set, or the following default logo if not.
 
-![Default logo which is a 3D grey cube](images/default_logo_sm.png){: width="50px" }
+![Default logo which is a 3D grey cube](images/default_logo_sm.png)
 
 ### Verified publisher badge
 
@@ -109,5 +109,4 @@ basis. For more about using this feature, see [Basic vulnerability scanning](/do
 
 Any independent software vendor who distributes software on Docker Hub can join
 the Verified Publisher Program. Find out more by heading to the
-[Docker Verified Publisher Program](https://www.docker.com/partners/programs){:target="_blank"
-rel="noopener" class="_"} page.
+[Docker Verified Publisher Program](https://www.docker.com/partners/programs) page.

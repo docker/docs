@@ -1,15 +1,19 @@
 ---
-description: Learn how to install, launch and upgrade Docker Desktop on Ubuntu. This quick guide will cover prerequisites, installation methods, and more.
-keywords: install docker ubuntu, ubuntu install docker, install docker on ubuntu, docker install ubuntu, how to install docker on ubuntu, ubuntu docker install, docker installation on ubuntu, docker ubuntu install, docker installing ubuntu, installing docker on ubuntu, docker desktop for ubuntu
+description: Learn how to install, launch and upgrade Docker Desktop on Ubuntu. This
+  quick guide will cover prerequisites, installation methods, and more.
+keywords: install docker ubuntu, ubuntu install docker, install docker on ubuntu,
+  docker install ubuntu, how to install docker on ubuntu, ubuntu docker install, docker
+  installation on ubuntu, docker ubuntu install, docker installing ubuntu, installing
+  docker on ubuntu, docker desktop for ubuntu
 title: Install Docker Desktop on Ubuntu
 toc_max: 4
-redirect_from:
-  - /desktop/linux/install/ubuntu/
+aliases:
+- /desktop/linux/install/ubuntu/
 ---
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution.
 
-[DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64){: .button .primary-btn }
+{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.0-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 _For checksums, see [Release notes](../release-notes.md)_
 
@@ -77,7 +81,7 @@ The post-install script:
 
 ## Launch Docker Desktop
 
-{% include desktop-linux-launch.md %}
+{{< include "desktop-linux-launch.md" >}}
 
 ## Upgrade Docker Desktop
 
