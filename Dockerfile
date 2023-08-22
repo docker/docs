@@ -8,7 +8,7 @@ RUN apk --update add nodejs npm git
 
 FROM base as node
 COPY package*.json .
-RUN npm install
+RUN npm install && npm cache clean --force
 
 FROM base as hugo
 ARG HUGO_VERSION=0.116.1
@@ -24,7 +24,7 @@ FROM build-base as build
 ARG HUGO_ENV
 ARG DOCS_URL
 COPY . .
-RUN /bin/hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
+RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 
 FROM scratch as release
 COPY --from=build /out /
