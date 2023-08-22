@@ -6,8 +6,6 @@ aliases:
 - /get-started/golang/develop/
 ---
 
-{% include_relative nav.html selected="3" %}
-
 ## Prerequisites
 
 Work through the steps of the [run your image as a container](run-containers.md) module to learn how to manage the lifecycle of your containers.

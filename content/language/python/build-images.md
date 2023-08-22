@@ -4,8 +4,6 @@ keywords: python, build, images, dockerfile
 description: Learn how to build an image of your Python application
 ---
 
-{% include_relative nav.html selected="1" %}
-
 ## Prerequisites
 
 * You have installed the latest version of [Docker Desktop](../../get-docker.md).

@@ -4,8 +4,6 @@ keywords: .net, run, image, container,
 description: Learn how to run the image as a container.
 ---
 
-{% include_relative nav.html selected="2" %}
-
 ## Prerequisites
 
 Work through the steps to build a .NET image in [Build your .NET image](build-images.md).

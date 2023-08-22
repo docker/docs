@@ -4,8 +4,6 @@ keywords: rust, build, images, dockerfile
 description: Learn how to build your first Rust Docker image
 ---
 
-{% include_relative nav.html selected="1" %}
-
 ## Prerequisites
 
 * You have installed the latest version of [Docker Desktop](../../get-docker.md).

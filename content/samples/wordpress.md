@@ -5,5 +5,3 @@ service: wordpress
 aliases:
 - /compose/wordpress/
 ---
-
-{% include_relative samples-body.md %}

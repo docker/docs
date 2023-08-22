@@ -4,8 +4,6 @@ keywords: .net, CI/CD, local, development
 description: Learn how to Configure CI/CD for your application
 ---
 
-{% include_relative nav.html selected="5" %}
-
 ## Get started with GitHub Actions
 
 {{< include "gha-tutorial.md" >}}

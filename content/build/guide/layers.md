@@ -4,8 +4,6 @@ description: Improving the initial Dockerfile using layers
 keywords: build, buildkit, buildx, guide, tutorial, layers
 ---
 
-{% include_relative nav.html selected="2" %}
-
 The order of Dockerfile instructions matters. A Docker build consists of a series
 of ordered build instructions. Each instruction in a Dockerfile roughly translates
 to an image layer. The following diagram illustrates how a Dockerfile translates

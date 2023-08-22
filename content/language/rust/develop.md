@@ -4,8 +4,6 @@ keywords: rust, local, development, run,
 description: Learn how to develop your Rust application locally.
 ---
 
-{% include_relative nav.html selected="3" %}
-
 ## Prerequisites
 
 * You have installed the latest version of [Docker Desktop](../../get-docker.md).

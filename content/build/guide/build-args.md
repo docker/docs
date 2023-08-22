@@ -1,12 +1,8 @@
 ---
 title: Build arguments
 description: Introduction to configurable builds, using build args
-keywords: 'build, buildkit, buildx, guide, tutorial, build arguments, arg
-
-  '
+keywords: build, buildkit, buildx, guide, tutorial, build arguments, arg
 ---
-
-{% include_relative nav.html selected="5" %}
 
 Build arguments is a great way to add flexibility to your builds. You can pass
 build arguments at build-time, and you can set a default value that the builder

@@ -6,8 +6,6 @@ aliases:
 - /get-started/golang/build-images/
 ---
 
-{% include_relative nav.html selected="1" %}
-
 ## Overview
 
 In this section we are going to build a container image. The image includes everything you need 

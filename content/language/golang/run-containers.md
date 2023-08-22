@@ -6,8 +6,6 @@ aliases:
 - /get-started/golang/run-containers/
 ---
 
-{% include_relative nav.html selected="2" %}
-
 ## Prerequisites
 
 Work through the steps to dockerize a Go application in [Build your Go image](build-images.md).

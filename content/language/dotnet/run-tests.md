@@ -4,8 +4,6 @@ keywords: .NET, build, test
 description: How to build and run your tests
 ---
 
-{% include_relative nav.html selected="4" %}
-
 ## Prerequisites
 
 Work through the steps to build an image and run it as a containerized application in [Use containers for development](develop.md).

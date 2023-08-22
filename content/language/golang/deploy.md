@@ -4,8 +4,6 @@ keywords: deploy, ACI, ECS, local, development, Go, Golang, cloud, deployment
 description: Learn how to deploy your application
 ---
 
-{% include_relative nav.html selected="6" %}
-
 {{< include "deploy.md" >}}
 
 ## Feedback

@@ -6,8 +6,6 @@ aliases:
 - /get-started/nodejs/run-containers/
 ---
 
-{% include_relative nav.html selected="2" %}
-
 ## Prerequisites
 
 Work through the steps to build a Node JS image in [Build your Node image](build-images.md).

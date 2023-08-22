@@ -4,8 +4,6 @@ description: An introduction to the Docker Build guide
 keywords: build, buildkit, buildx, guide, tutorial, introduction
 ---
 
-{% include_relative nav.html selected="1" %}
-
 The starting resources for this guide include a simple Go project and a
 Dockerfile. From this starting point, the guide illustrates various ways that
 you can improve how you build the application with Docker.

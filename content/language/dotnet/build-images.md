@@ -4,8 +4,6 @@ keywords: .net, build, images, dockerfile
 description: Learn how to build your first Docker image by writing a Dockerfile
 ---
 
-{% include_relative nav.html selected="1" %}
-
 ## Prerequisites
 
 Work through the [Get started guide](../../get-started/index.md) to understand Docker concepts.

@@ -4,8 +4,6 @@ keywords: Python, run, image, container,
 description: Learn how to run the image as a container.
 ---
 
-{% include_relative nav.html selected="2" %}
-
 ## Prerequisites
 
 Work through the steps to build a Python image in [Build your Python image](build-images.md).
