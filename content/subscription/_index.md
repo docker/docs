@@ -11,7 +11,7 @@ grid:
   icon: upgrade
 - title: Add more seats to your subscription
   link: /subscription/add-seats/
-  icon: contact
+  icon: contact_page
 - title: Explore common FAQs
   link: /subscription/faq/
   icon: help
