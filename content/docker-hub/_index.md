@@ -16,7 +16,7 @@ grid:
 - title: Quickstart
   description: Step-by-step instructions on getting started on Docker Hub.
   icon: checklist
-  link: /docker-hub
+  link: /docker-hub/quickstart
 - title: Manage access tokens
   description: Create personal access tokens as an alternative to your password.
   icon: key
