@@ -1,12 +1,8 @@
 ---
 title: Export binaries
 description: Using Docker builds to create and export executable binaries
-keywords: 'build, buildkit, buildx, guide, tutorial, build arguments, arg
-
-  '
+keywords: build, buildkit, buildx, guide, tutorial, build arguments, arg
 ---
-
-{% include_relative nav.html selected="6" %}
 
 Did you know that you can use Docker to build your application to standalone
 binaries? Sometimes, you don’t want to package and distribute your application

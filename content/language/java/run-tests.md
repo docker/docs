@@ -4,8 +4,6 @@ keywords: Java, build, test
 description: How to build and run your Tests
 ---
 
-{% include_relative nav.html selected="4" %}
-
 ## Prerequisites
 
 Work through the steps to build an image and run it as a containerized application in [Use your container for development](develop.md).

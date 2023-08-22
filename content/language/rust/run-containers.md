@@ -4,8 +4,6 @@ keywords: rust, run, image, container,
 description: Learn how to run your Rust image as a container.
 ---
 
-{% include_relative nav.html selected="2" %}
-
 ## Prerequisite
 
 You have completed  [Build your Rust image](build-images.md) and you have built an image.

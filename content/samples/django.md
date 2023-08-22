@@ -5,5 +5,3 @@ service: django
 aliases:
 - /compose/django/
 ---
-
-{% include_relative samples-body.md %}

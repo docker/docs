@@ -7,8 +7,6 @@ aliases:
 - /get-started/golang/configure-ci-cd/
 ---
 
-{% include_relative nav.html selected="5" %}
-
 ## Get started with GitHub Actions
 
 {{< include "gha-tutorial.md" >}}

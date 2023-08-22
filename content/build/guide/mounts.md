@@ -1,12 +1,8 @@
 ---
 title: Mounts
 description: Introduction to cache mounts and bind mounts in builds
-keywords: 'build, buildkit, buildx, guide, tutorial, mounts, cache mounts, bind mounts
-
-  '
+keywords: build, buildkit, buildx, guide, tutorial, mounts, cache mounts, bind mounts
 ---
-
-{% include_relative nav.html selected="4" %}
 
 This section describes how to use cache mounts and bind mounts with Docker
 builds.

@@ -4,8 +4,6 @@ description: Building for multiple operating systems and architectures
 keywords: build, buildkit, buildx, guide, tutorial, multi-platform, emulation, cross-compilation
 ---
 
-{% include_relative nav.html selected="8" %}
-
 Up until this point in the guide, you've built Linux binaries. This section
 describes how you can support other operating systems, and architectures, using
 multi-platform builds via emulation and cross-compilation.

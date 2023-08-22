@@ -6,8 +6,6 @@ aliases:
 - /get-started/golang/run-tests/
 ---
 
-{% include_relative nav.html selected="4" %}
-
 Testing is an essential part of modern software development. Yet, testing can mean a lot of things to different development teams. In the name of brevity, we'll only take a look at running isolated, high-level, functional tests.
 
 ## Test structure

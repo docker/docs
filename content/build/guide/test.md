@@ -4,8 +4,6 @@ description: Running tests with Docker Build
 keywords: build, buildkit, buildx, guide, tutorial, testing
 ---
 
-{% include_relative nav.html selected="7" %}
-
 This section focuses on testing. The example in this section focuses on linting,
 but the same principles apply for other kinds of tests as well, such as unit
 tests. Code linting is a static analysis of code that helps you detect errors,

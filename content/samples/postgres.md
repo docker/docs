@@ -6,5 +6,3 @@ aliases:
 - /engine/examples/postgresql_service/
 - /samples/postgresql_service/
 ---
-
-{% include_relative samples-body.md %}

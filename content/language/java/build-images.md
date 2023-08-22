@@ -4,8 +4,6 @@ keywords: Java, build, images, dockerfile
 description: Learn how to build your first Docker image by writing a Dockerfile
 ---
 
-{% include_relative nav.html selected="1" %}
-
 ## Prerequisites
 
 * You understand basic [Docker concepts](../../get-started/overview.md).

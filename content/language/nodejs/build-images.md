@@ -7,8 +7,6 @@ aliases:
 - /get-started/nodejs/build-images/
 ---
 
-{% include_relative nav.html selected="1" %}
-
 ## Prerequisites
 
 * You understand basic [Docker concepts](../../get-started/overview.md).

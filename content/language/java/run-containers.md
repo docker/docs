@@ -4,8 +4,6 @@ keywords: Java, run, image, container,
 description: Learn how to run the image as a container.
 ---
 
-{% include_relative nav.html selected="2" %}
-
 ## Prerequisites
 
 Work through the steps to build a Java image in [Build your Java image](build-images.md).

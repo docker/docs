@@ -4,8 +4,6 @@ description: Faster and smaller builds with multi-stage builds
 keywords: build, buildkit, buildx, guide, tutorial, multi-stage
 ---
 
-{% include_relative nav.html selected="3" %}
-
 This section explores multi-stage builds. There are two main reasons for why
 you’d want to use multi-stage builds:
 

@@ -6,8 +6,6 @@ aliases:
 - /get-started/nodejs/develop/
 ---
 
-{% include_relative nav.html selected="3" %}
-
 ## Prerequisites
 
 Work through the steps to build an image and run it as a containerized application in [Run your image as a container](run-containers.md).

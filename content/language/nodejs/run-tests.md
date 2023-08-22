@@ -4,8 +4,6 @@ keywords: Node.js, build, Mocha, test
 description: How to Build and Run your Tests using Node.js and Mocha frameworks
 ---
 
-{% include_relative nav.html selected="4" %}
-
 ## Prerequisites
 
 Work through the steps to build an image and run it as a containerized application in [Use your container for development](develop.md).
