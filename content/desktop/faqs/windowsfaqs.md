@@ -126,9 +126,9 @@ For more information on Windows containers, refer to the following documentation
 >
 > When you switch to Windows containers, the Settings dialog only shows those tabs that are active and apply to your Windows containers:
 >
-  * [General](../settings/windows.md#general)
-  * [Proxies](../settings/windows.md#proxies)
-  * [Daemon](../settings/windows.md#docker-engine)
+>  * [General](../settings/windows.md#general)
+>  * [Proxies](../settings/windows.md#proxies)
+>  * [Daemon](../settings/windows.md#docker-engine)
 
 If you set proxies or daemon configuration in Windows containers mode, these
 apply only on Windows containers. If you switch back to Linux containers,
