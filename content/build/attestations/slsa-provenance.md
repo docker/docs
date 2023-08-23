@@ -4,7 +4,9 @@ keywords: build, attestations, provenance, slsa
 description: Provenance build attestations
 ---
 
-{% include build-feature-state.md buildkit_v=">=0.11" buildx_v=">=0.10" %}
+> **Note**
+>
+> This feature is supported in BuildKit version `>=0.11` and Buildx version `>=0.10`.
 
 The provenance attestations include facts about the build process, including
 details such as:
