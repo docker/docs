@@ -42,6 +42,7 @@ when the tests succeed.
 4. Select the **source repository** to build the Docker images from.
 
    > Note
+   >
    > You might need to specify an organization or user from
    > the source code provider. Once you select a user, source code
    > repositories appear in the **Select repository** drop-down list.

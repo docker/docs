@@ -398,7 +398,8 @@ The simplest way to achieve access restriction is through basic authentication
 This example uses native basic authentication using `htpasswd` to store the
 secrets.
 
-> **Warning**:
+> **Warning**
+>
 > You **cannot** use authentication with authentication schemes that send
 > credentials as clear text. You must
 > [configure TLS first](deploying.md#run-an-externally-accessible-registry) for
@@ -458,9 +459,11 @@ secrets.
     Test that you can now pull an image from the registry or push an image to
     the registry.
 
-> **X509 errors**: X509 errors usually indicate that you are attempting to use
-> a self-signed certificate without configuring the Docker daemon correctly.
-> See [run an insecure registry](insecure.md).
+> **X509 errors**
+>
+> X509 errors usually indicate that you are attempting to use a self-signed
+> certificate without configuring the Docker daemon correctly. See [run an
+> insecure registry](insecure.md).
 
 ### More advanced authentication
 
@@ -503,7 +506,6 @@ registry:
 
 Replace `/path` with the directory which contains the `certs/` and `auth/`
 directories.
-{ .warning }
 
 Start your registry by issuing the following command in the directory containing
 the `docker-compose.yml` file:

@@ -13,7 +13,8 @@ involves security trade-offs and additional configuration steps.
 
 ## Deploy a plain HTTP registry
 
-> **Warning**:
+> **Warning**
+>
 > It's not possible to use an insecure registry with basic authentication.
 { .warning }
 
@@ -55,9 +56,11 @@ Repeat these steps on every Engine host that wants to access your registry.
 
 ## Use self-signed certificates
 
-> **Warning**:
-> Using this along with basic authentication requires to **also** trust the certificate into the OS cert store for some versions of docker (see below)
-{ .warning }
+> **Warning**
+>
+> Using this along with basic authentication requires to **also** trust the
+certificate into the OS cert store for some versions of docker (see below)
+{.warning }
 
 This is more secure than the insecure registry solution.
 

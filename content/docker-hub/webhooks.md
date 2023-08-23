@@ -9,7 +9,7 @@ You can use webhooks to cause an action in another service in response to a push
 ## Create a webhook
 
 To create a webhook:
-1. In your chosen respository, select the **Webhooks** tabThen:
+1. In your chosen repository, select the **Webhooks** tab.
 2. Provide a name for the webhook
 3. Provide a destination webhook URL. This is where webhook POST requests are delivered.
 4. Select **Create**. 
