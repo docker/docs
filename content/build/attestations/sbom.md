@@ -4,7 +4,9 @@ keywords: build, attestations, sbom
 description: SBOM build attestations
 ---
 
-{% include build-feature-state.md buildkit_v=">=0.11" buildx_v=">=0.10" %}
+> **Note**
+>
+> This feature is supported in BuildKit version `>=0.11` and Buildx version `>=0.10`.
 
 Software Bill of Materials (SBOM) attestations describe what software artifacts
 an image contains, and artifacts used to create the image. Metadata included in
