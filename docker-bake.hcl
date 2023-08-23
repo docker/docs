@@ -140,3 +140,11 @@ target "aws-cloudfront-update" {
   no-cache-filter = ["aws-cloudfront-update"]
   output = ["type=cacheonly"]
 }
+
+target "vendor" {
+  target = "vendor"
+  args = {
+    MODULE = null
+  }
+  output = ["."]
+}
