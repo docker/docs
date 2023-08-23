@@ -2,10 +2,14 @@ services:
   server:
     build:
       context: .
-      target: build-base
-    volumes:
-      - "${PWD}:/src"
-      - /src/node_modules
+      target: dev
     ports:
       - "1313:1313"
     entrypoint: ["hugo", "server", "--bind", "0.0.0.0"]
+    x-develop:
+      watch:
+        - action: sync
+          path: .
+          target: /src
+          ignore:
+            - node_modules/

@@ -20,6 +20,9 @@ FROM base as build-base
 COPY --from=hugo $GOPATH/bin/hugo /bin/hugo
 COPY --from=node /src/node_modules /src/node_modules
 
+FROM build-base as dev
+COPY . .
+
 FROM build-base as build
 ARG HUGO_ENV
 ARG DOCS_URL
