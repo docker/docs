@@ -3,27 +3,27 @@
 
 # For more details, see https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
-/build/ @crazy-max @jedevc @dvdksn
+/content/build/ @crazy-max @dvdksn
 
-/compose/ @aevesdocker
+/content/compose/ @aevesdocker
 
-/desktop/ @aevesdocker
+/content/desktop/ @aevesdocker
 
-/desktop/extensions/ @aevesdocker
+/content/desktop/extensions/ @aevesdocker
 
-/desktop/extensions-sdk/ @aevesdocker
+/content/desktop/extensions-sdk/ @aevesdocker
 
-/scout/ @dvdksn
+/content/scout/ @dvdksn
 
-/docker-hub/ @aevesdocker @craig-osterhout @stephaurelio
+/content/docker-hub/ @aevesdocker @craig-osterhout @stephaurelio
 
-/engine/ @dvdksn
+/content/engine/ @dvdksn
 
-/subscription/ @aevesdocker @stephaurelio
+/content/subscription/ @aevesdocker @stephaurelio
 
-/docker-hub/publish/ @aevesdocker
+/content/docker-hub/publish/ @aevesdocker
 
-/docker-hub/official_images/ @aevesdocker
+/content/docker-hub/official_images/ @aevesdocker
 
-/registry/ @dvdksn
+/content/registry/ @dvdksn
 
