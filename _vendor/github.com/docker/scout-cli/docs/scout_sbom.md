@@ -52,7 +52,7 @@ $ docker scout sbom --format list alpine
 ### Only display packages of a specific type
 
 ```console
- $ docker scout sbom --format list --only-package-type apk alpine
+$ docker scout sbom --format list --only-package-type apk alpine
 ```
 
 ### Display the full SBOM as json
