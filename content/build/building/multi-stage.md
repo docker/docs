@@ -56,7 +56,7 @@ None of the build tools required to build the application are included in the
 resulting image.
 
 How does it work? The second `FROM` instruction starts a new build stage with
-the `alpine:latest` image as its base. The `COPY --from=0` line copies just the
+the `scratch` image as its base. The `COPY --from=0` line copies just the
 built artifact from the previous stage into this new stage. The Go SDK and any
 intermediate artifacts are left behind, and not saved in the final image.
 
