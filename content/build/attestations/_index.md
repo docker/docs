@@ -7,7 +7,9 @@ description: 'Introduction to SBOM and provenance attestations with Docker Build
   '
 ---
 
-{% include build-feature-state.md buildkit_v=">=0.11" buildx_v=">=0.10" %}
+> **Note**
+>
+> This feature is supported in BuildKit version `>=0.11` and Buildx version `>=0.10`.
 
 Build attestations describe how an image was built, and what it contains. The
 attestations are created at build-time by BuildKit, and become attached to the
