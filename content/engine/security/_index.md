@@ -221,7 +221,7 @@ only repositories signed with a user-specified root key can be pulled and run.
 This feature provides more insight to administrators than previously available with
 the CLI for enforcing and performing image signature verification. 
 
-For more information on configuring Docker Content Trust Signature Verificiation, go to 
+For more information on configuring Docker Content Trust Signature Verification, go to 
 [Content trust in Docker](trust/index.md).
 
 ## Other kernel security features
