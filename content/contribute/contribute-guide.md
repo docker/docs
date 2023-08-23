@@ -66,35 +66,32 @@ A Netlify test runs for each PR created against the `main` branch and deploys th
 
 On your local machine, clone the docs repository:
 
-```bash
-git clone {{% param "repo" %}}.git
-cd docs
+```console
+$ git clone {{% param "repo" %}}.git
+$ cd docs
 ```
 
 Then, build and run the documentation using [Docker Compose](../compose/index.md):
 
-```bash
-docker compose up -d --build
+```console
+$ docker compose up -d --build
+$ docker compose alpha watch
 ```
 
 > **Note**
 >
 >You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](../desktop/index.md). If you don't have Docker Desktop installed, follow the [instructions](../compose/install/index.md) to install Docker Compose.
 
-When the container is built and running, visit [http://localhost:4000](http://localhost:4000) in your web browser to view the docs.
+When the container is built and running, visit [http://localhost:1313](http://localhost:1313) in your web browser to view the docs.
 
-To rebuild the docs after you made changes, run the `docker compose up` command
-again. This rebuilds the docs, and updates the container with your changes:
+The [Docker Compose `watch`](../compose/file-watch.md) feature causes your
+running container to rebuild itself automatically when you make changes to your
+content files.
 
-```bash
-docker compose up -d --build
-```
+To stop the development container:
 
-To stop the staging container, use the `docker compose down` command:
-
-```bash
-docker compose down
-```
+1. In your terminal, press `<Ctrl+C>` to exit the file watch mode of Compose.
+2. Stop the Compose services with the `docker compose down` command.
 
 ### Build the docs with deployment features enabled
 
