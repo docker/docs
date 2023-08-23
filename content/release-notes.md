@@ -8,7 +8,7 @@ grid:
   link: /desktop/release-notes/
 - title: Docker Engine
   icon: settings_suggest
-  link: /desktop/release-notes/
+  link: /engine/release-notes/
 - title: Docker Compose
   icon: storage
   link: /compose/release-notes/
