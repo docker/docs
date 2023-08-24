@@ -3,14 +3,17 @@
 {{ $sso_navigation := `Navigate to the SSO settings page for your organization or company.
    - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
    - Company: Select **Organizations**, your company, and then **Settings**.` }}
+{{ $group_link := "[Group mapping](/docker-hub/group-mapping)"}}
 
 {{ if eq (.Get "product") "admin" }}
 {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
 {{ $sso_link = "[configured SSO](/admin/organization/security-settings/sso-configuration/)" }}
 {{ $sso_navigation = "Select your organization in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
+{{ $group_link = "[Group mapping](/admin/organization/security-settings/group-mapping/)"}}
 {{ if eq (.Get "layer") "company" }}
 {{ $sso_link = "[configured SSO](/admin/company/settings/sso-configuration/)" }}
 {{ $sso_navigation = "Select your company in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
+{{ $group_link = "[Group mapping](/admin/company/settings/group-mapping)"}}
 {{ end }}
 {{ end }}
 
@@ -67,6 +70,26 @@ If SCIM is disabled, any user provisioned through SCIM will remain in the organi
 3. In the SSO connections table, select the **Actions** icon.
 4. Select **Disable SCIM**.
 
-## Limitations
+## Set up role mapping
 
-Administrators can assign [roles](/docker-hub/roles-and-permissions/) to organization members. However, SCIM doesn't support role management.
+You can assign [roles](/docker-hub/roles-and-permissions/) to members in your organization in the IdP. To assign a role, you can use optional user-level attributes for the person you want to assign a role. In addition to roles, you can set an organization and team to override the default provisioning for the SSO connection.
+
+These mappings are supported for both SCIM and JIT provisioning.
+
+The optional user-level attributes are:
+
+- `dockerRole` - The available roles to assign are `member`, `editor`, or `owner`. For a list of permissions for each role, see [Roles and permissions](/docker-hub/roles-and-permissions/).
+- `dockerOrg` - Setting this attribute overrides the default organization configured for the SSO connection, and won't add them to the default team. If this attribute isn't set, the user is provisioned to the default organization and the default team.
+- `dockerTeam` - Setting this attribute provisions the user to the default org and to the specified team, instead of the SSO connection's default team. This will also create the team if it doesn't exist. You can still use group mapping to provision users to teams in multiple orgs. See {{ $group_link }}.
+
+If you don't assign a role in the IdP, the value of the `dockerRole` attribute defaults to `member`. When you set the attribute, this overrides the default value.
+
+After you set the role in the IdP, you need to sync to push the changes to Docker.
+
+The namespace to use to set up these attributes is `urn:ietf:params:scim:schemas:extension:docker:2.0:User`.
+
+For how to add these attributes, see the documentation for your IdP:
+
+- [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm)
+- [Azure AD](https://learn.microsoft.com/en-us/azure/active-directory-b2c/user-flow-custom-attributes?pivots=b2c-user-flow)
+- [OneLogin](https://developers.onelogin.com/api-docs/1/users/set-custom-attribute)
