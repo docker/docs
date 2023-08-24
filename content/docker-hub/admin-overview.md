@@ -4,7 +4,7 @@ description: landing page for administration topic
 keywords: administration, docker hub, admin
 grid:
 - title: Create your organization
-  icon: contact_page
+  icon: add_business
   description: Explore and set up an organization in Docker Hub.
   link: /docker-hub/orgs/
 - title: Onboard your organization
@@ -18,15 +18,15 @@ grid:
 - title: Enforce sign-in
   description: Configure sign-in for members of your teams and organizations.
   link: /docker-hub/configure-sign-in/
-  icon: key
+  icon: passkey
 - title: Enable Single Sign-On
   description: Understand and use Single Sign-On.
   link: /single-sign-on/
-  icon: group_add
+  icon: key
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
   link: /docker-hub/2fa/
-  icon: security
+  icon: phonelink_lock
 ---
 
 Sign in to Docker Hub to change account settings and carry out administrative or security-related tasks. 

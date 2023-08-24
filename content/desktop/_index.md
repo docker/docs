@@ -18,7 +18,7 @@ grid:
   icon: download
 - title: Explore Docker Desktop
   description: Navigate Docker Desktop and learn about its key features.
-  icon: explore
+  icon: feature_search
   link: /desktop/use-desktop
 - title: View the release notes
   description: Find out about new features, improvements, and bug fixes.
@@ -31,7 +31,7 @@ grid:
 - title: Find additional resources
   description: Find information on networking features, deploying on Kubernetes, and
     more.
-  icon: all_inbox
+  icon: category
   link: /desktop/kubernetes
 - title: Give feedback
   description: Provide feedback on Docker Desktop or Docker Desktop features.
