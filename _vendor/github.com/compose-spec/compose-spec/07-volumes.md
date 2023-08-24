@@ -113,7 +113,7 @@ characters. The name is used as is and is not scoped with the stack name.
 
 ```yml
 volumes:
-  data:
+  db-data:
     name: "my-app-data"
 ```
 

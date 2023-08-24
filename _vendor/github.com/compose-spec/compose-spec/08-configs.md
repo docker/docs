@@ -55,6 +55,3 @@ configs:
 ```
 
 If `external` is set to `true`, all other attributes apart from `name` are irrelevant. If Compose detecs any other attribute, it rejects the Compose file as invalid.
-
-Your Compose file needs to explicitly grant access to the configs to relevant services in your application.
-

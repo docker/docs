@@ -18,6 +18,10 @@ root = "/var/lib/buildkit"
 # insecure-entitlements allows insecure entitlements, disabled by default.
 insecure-entitlements = [ "network.host", "security.insecure" ]
 
+[log]
+  # log formatter: json or text
+  format = "text"
+
 [grpc]
   address = [ "tcp://0.0.0.0:1234" ]
   # debugAddress is address for attaching go profiles and debuggers.
@@ -28,6 +32,10 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
     cert = "/etc/buildkit/tls.crt"
     key = "/etc/buildkit/tls.key"
     ca = "/etc/buildkit/tlsca.crt"
+
+[otel]
+  # OTEL collector trace socket path
+  socketPath = "/run/buildkit/otel-grpc.sock"
 
 # config for build history API that stores information about completed build commands
 [history]
@@ -64,7 +72,7 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
 
   [[worker.oci.gcpolicy]]
     # keepBytes can be an integer number of bytes (e.g. 512000000), a string
-    # with a unit (e.g. "512MB"), or a string percentage of available disk
+    # with a unit (e.g. "512MB"), or a string percentage of the total disk
     # space (e.g. "10%")
     keepBytes = "512MB"
     # keepDuration can be an integer number of seconds (e.g. 172800), or a

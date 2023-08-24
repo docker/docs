@@ -29,7 +29,7 @@ The default service configuration is `attach: true`.
 
 ### build
 
-`build` specifies the build configuration for creating a container image from source, as defined in the [Compsoe Build Specification](build.md).
+`build` specifies the build configuration for creating a container image from source, as defined in the [Compose Build Specification](build.md).
 
 ### blkio_config
 
@@ -541,11 +541,31 @@ empty or undefined.
 
 #### Env_file format
 
-Each line in an `.env` file must be in `VAR[=[VAL]]` format. Lines beginning with `#` are ignored.
-Blank lines are also ignored.
+Each line in an `.env` file must be in `VAR[=[VAL]]` format. The following syntax rules apply:
 
-The value of `VAL` is used as a raw string and not modified at all. If the value is surrounded by quotes, as is often the case for shell variables, the quotes are included in the value passed to containers
-created by Compose.
+- Lines beginning with `#` are processed as comments and ignored.
+- Blank lines are ignored.
+- Unquoted and double-quoted (`"`) values have [parameter expansion](#parameter-expansion) applied.
+- Each line represents a key-value pair. Values can optionally be quoted.
+  - `VAR=VAL` -> `VAL`
+  - `VAR="VAL"` -> `VAL`
+  - `VAR='VAL'` -> `VAL`
+- Inline comments for unquoted values must be preceded with a space.
+  - `VAR=VAL # comment` -> `VAL`
+  - `VAR=VAL# not a comment` -> `VAL# not a comment`
+- Inline comments for quoted values must follow the closing quote.
+  - `VAR="VAL # not a comment"` -> `VAL # not a comment`
+  - `VAR="VAL" # comment` -> `VAL`
+- Single-quoted (`'`) values are used literally.
+  - `VAR='$OTHER'` -> `$OTHER`
+  - `VAR='${OTHER}'` -> `${OTHER}`
+- Quotes can be escaped with `\`.
+  - `VAR='Let\'s go!'` -> `Let's go!`
+  - `VAR="{\"hello\": \"json\"}"` -> `{"hello": "json"}`
+- Common shell escape sequences including `\n`, `\r`, `\t`, and `\\` are supported in double-quoted values.
+  - `VAR="some\tvalue"` -> `some  value`
+  - `VAR='some\tvalue'` -> `some\tvalue`
+  - `VAR=some\tvalue` -> `some\tvalue`
 
 `VAL` may be omitted, in such cases the variable value is an empty string.
 `=VAL` may be omitted, in such cases the variable is unset.

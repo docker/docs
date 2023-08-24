@@ -97,10 +97,16 @@ but this is for illustration purposes.)
 
 1.  Generate certificates for BuildKit.
 
-    You can use the [create-certs.sh](https://github.com/moby/buildkit/blob/master/examples/kubernetes/create-certs.sh)
-    script as a starting point. Note that while it's possible to expose BuildKit
-    over TCP without using TLS, it's not recommended. Doing so allows arbitrary
-    access to BuildKit without credentials.
+    You can use this [bake definition](https://github.com/moby/buildkit/blob/master/examples/create-certs)
+    as a starting point:
+    
+    ```console
+    SAN="localhost 127.0.0.1" docker buildx bake "https://github.com/moby/buildkit.git#master:examples/create-certs"
+    ```
+
+    Note that while it's possible to expose BuildKit over TCP without using 
+    TLS, it's not recommended. Doing so allows arbitrary access to BuildKit
+    without credentials.
 
 2.  With certificates generated in `.certs/`, startup the container:
 
