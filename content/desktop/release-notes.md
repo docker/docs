@@ -34,7 +34,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- Mitigated Docker Desktop startup issues, both during initial start as well as on exit from Resource Saver mode. [docker/for-mac#6933](https://github.com/docker/for-mac/issues/6933)
+- Mitigated several issues impacting Docker Desktop startup and Resource Saver mode. [docker/for-mac#6933](https://github.com/docker/for-mac/issues/6933)
 
 #### For Windows
 
