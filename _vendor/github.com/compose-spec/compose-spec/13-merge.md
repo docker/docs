@@ -85,8 +85,7 @@ Results in a Compose application model equivalent to the YAML tree:
 ```yaml
 services:
   foo:
-    DNS:
-      command: ["echo", "bar"]
+    command: ["echo", "bar"]
 ```
 
 ### Unique resources
