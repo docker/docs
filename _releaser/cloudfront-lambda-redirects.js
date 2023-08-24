@@ -3,13 +3,15 @@
 exports.handler = (event, context, callback) => {
     //console.log("event", JSON.stringify(event));
     const request = event.Records[0].cf.request;
+    const requestUrl = request.uri.replace(/\/$/, "")
 
     const redirects = JSON.parse(`{{.RedirectsJSON}}`);
     for (let key in redirects) {
-        if (key !== request.uri) {
+        const redirectTarget = key.replace(/\/$/, "")
+        if (redirectTarget !== requestUrl) {
             continue;
         }
-        //console.log(`redirect: ${request.uri} to ${redirects[key]}`);
+        //console.log(`redirect: ${requestUrl} to ${redirects[key]}`);
         const response = {
             status: '301',
             statusDescription: 'Moved Permanently',
