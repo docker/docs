@@ -50,7 +50,7 @@ _For checksums, see [Release notes](../release-notes.md)_
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
 {{< /tab >}}
-{{< tab name="Hypver-V backend and Windows containers" >}}
+{{< tab name="Hyper-V backend and Windows containers" >}}
 
 - Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
 - Windows 10 64-bit: Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
