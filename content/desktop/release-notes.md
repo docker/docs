@@ -24,11 +24,27 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.22.1
+
+{{< release-date date="2023-08-24" >}}
+
+{{< desktop-install all=true version="4.22.1" build_path="/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Mitigated several issues impacting Docker Desktop startup and Resource Saver mode. [docker/for-mac#6933](https://github.com/docker/for-mac/issues/6933)
+
+#### For Windows
+
+- Fixed `Clean / Purge data` troubleshoot option on Windows. [docker/for-win#13630](https://github.com/docker/for-win/issues/13630)
+
 ## 4.22.0
 
 {{< release-date date="2023-08-03" >}}
 
-{{< desktop-install all=true version="4.22.0" build_path="/" >}}
+{{< desktop-install all=true version="4.22.0" build_path="/117440/" >}}
 
 ### Upgrades
 
