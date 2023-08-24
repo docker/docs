@@ -34,11 +34,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- Mitigated Docker Desktop startup issues, both during initial start as well as on exit from resource saver mode. [docker/for-mac#6933](https://github.com/docker/for-mac/issues/6933)
+- Mitigated Docker Desktop startup issues, both during initial start as well as on exit from Resource Saver mode. [docker/for-mac#6933](https://github.com/docker/for-mac/issues/6933)
 
 #### For Windows
 
-- Fixed "Clean / Purge data" on Windows. [docker/for-win#13630](https://github.com/docker/for-win/issues/13630)
+- Fixed `Clean / Purge data` troubleshoot option on Windows. [docker/for-win#13630](https://github.com/docker/for-win/issues/13630)
 
 ## 4.22.0
 
