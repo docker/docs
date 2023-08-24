@@ -52,7 +52,7 @@ If you want to access the main context for bake command from a bake file
 that has been imported remotely, you can use the [`BAKE_CMD_CONTEXT` built-in var](reference.md#built-in-variables).
 
 ```console
-$ cat https://raw.githubusercontent.com/tonistiigi/buildx/remote-test/docker-bake.hcl
+$ curl -s https://raw.githubusercontent.com/tonistiigi/buildx/remote-test/docker-bake.hcl
 ```
 
 ```hcl
