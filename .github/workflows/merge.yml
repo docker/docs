@@ -1,5 +1,9 @@
 name: merge
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 # open or update publishing PR when there is a push to main
 on:
   workflow_dispatch:
