@@ -1923,6 +1923,8 @@ Manuals:
         section:
         - title: Artifactory
           path: /scout/integrations/registry/artifactory/
+        - title: Elastic Container Registry
+          path: /scout/integrations/registry/ecr/
       - sectiontitle: Continuous integration
         section:
         - title: GitHub Actions
