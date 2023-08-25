@@ -591,6 +591,8 @@
   - "/go/scout-jenkins/"
 "/scout/integrations/registry/artifactory":
   - /go/scout-artifactory/
+"/scout/integrations/registry/ecr/":
+  - "/go/scout-ecr/"
 
 # Telepresence
 "/develop/remote-development/":
