@@ -4,7 +4,7 @@ keywords: docker scout, ecr, integration, image analysis, security, cves
 title: Integrate Docker Scout with Amazon ECR
 ---
 
-{% include scout-early-access.md %}
+{{< include "scout-early-access.md" >}}
 
 Integrating Docker Scout with Amazon Elastic Container Registry (ECR) lets you
 view image insights for images hosted in ECR repositories. After integrating
@@ -18,7 +18,7 @@ commands.
 To help you integrate Docker Scout with ECR, you can use a CloudFormation stack
 template that creates and configures the necessary AWS resources for
 integrating Docker Scout with your ECR registry. For more details about the AWS
-resources, see [CloudFormation stack template](#cloudformation-stack-template)
+resources, see [CloudFormation stack template](#cloudformation-stack-template).
 
 The following diagram shows how the Docker Scout ECR integration works.
 
@@ -84,7 +84,7 @@ integration.
 Prerequisites:
 
 - You must have access to an AWS account with permission to create resources.
-- You have be an owner of the Docker organization
+- You have be an owner of the Docker organization.
 
 To create the stack:
 
@@ -96,7 +96,6 @@ To create the stack:
    If not, switch organizations using the drop-down menu.
 
 3. Select the **Create on AWS** button.
-{ #create-on-aws }
 
    This opens the **Create stack** wizard in the AWS CloudFormation console in
    a new browser tab. If you're not already signed in to AWS, you're redirected
@@ -129,7 +128,7 @@ Scout, and the analysis results will appear in the Docker Scout Dashboard.
 
 ## Integrate additional registries
 
-To add additional registries,
+To add additional registries:
 
 1. Go to [ECR integrations](https://scout.docker.com/settings/integrations/ecr)
    on the Docker Scout Dashboard.
@@ -139,7 +138,14 @@ To add additional registries,
    If not, switch organizations using the drop-down menu.
 
 3. Select the **Add** button at the top of the list.
-4. Complete the steps for [creating the AWS resources](#create-on-aws)
+4. Complete the steps for creating the AWS resources.
+5. When the resources have been created, return to the
+   [ECR integrations](https://scout.docker.com/settings/integrations/ecr) page
+   in the Docker Scout Dashboard.
+
+   The **Integrated registries** list shows the account ID and region for the
+   ECR registry that you just integrated. If successful, the integration status
+   is **Connected**.
 
 Next, activate Docker Scout for the repositories that you want to analyze in
 [repository settings](../../dashboard.md#repository-settings).
