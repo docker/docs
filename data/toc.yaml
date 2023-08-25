@@ -1909,6 +1909,8 @@ Manuals:
       title: Advisory Database
     - path: /scout/data-handling/
       title: Data handling
+    - path: /scout/policy/
+      title: Policy
     - sectiontitle: Integrations
       section:
       - title: Overview
