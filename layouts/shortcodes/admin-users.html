@@ -4,7 +4,7 @@
 {{ $remove_button := "**Remove member**" }}
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
 {{ $update_role := "Select the role you want to assign, then select **Save**." }}
-{{ $role_mapping_link := "[SCIM for role mapping](/docker-hub/scim/#set-up-role-mapping)" }}
+{{ $role_mapping_link := "[SCIM for role mapping](docker-hub/scim.md#set-up-role-mapping)" }}
 
 {{ if eq (.Get "product") "admin" }}
 {{ $invite_button = "**Invite**" }}
@@ -12,12 +12,12 @@
 {{ $member_navigation := "Select your organization in the left navigation drop-down menu, and then select *Members**." }}
 {{ $remove_button = "**Remove member**" }}
 {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
-{{ $role_mapping_link = "[SCIM for role mapping](/admin/organization/security-settings/scim/#set-up-role-mapping)" }}
+{{ $role_mapping_link = "[SCIM for role mapping](admin/organization/security-settings/scim.md#set-up-role-mapping)" }}
 {{ if eq (.Get "layer") "company" }}
 {{ $member_navigation = "Select your company in the left navigation drop-down menu, and then select **Users**." }}
 {{ $remove_button = "**Remove user**" }}
 {{ $update_role = "Select their organization, select the role you want to assign, and then select **Save**." }}
-{{ $role_mapping_link = "[SCIM for role mapping](/admin/company/settings/scim/#set-up-role-mapping)"}}
+{{ $role_mapping_link = "[SCIM for role mapping](admin/company/settings/scim.md#set-up-role-mapping)"}}
 {{ end }}
 {{ end }}
 
