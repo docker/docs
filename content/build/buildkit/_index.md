@@ -42,8 +42,7 @@ dependency graph that can be used to put together very complex build
 definitions. It also supports features not exposed in Dockerfiles, like direct
 data mounting and nested invocation.
 
-![Directed acyclic graph (DAG)](../images/buildkit-dag.svg){:class="invertible"
-style="width:60%"}
+![Directed acyclic graph (DAG)](../images/buildkit-dag.svg)
 
 Everything about execution and caching of your builds is defined in LLB. The
 caching model is entirely rewritten compared to the legacy builder. Rather than
