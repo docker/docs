@@ -1,18 +1,16 @@
 ---
 title: Docker Scout
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
-description: 'Docker Scout analyzes your images to help you understand their dependencies
+description: Docker Scout analyzes your images to help you understand their dependencies
   and potential vulnerabilities
-
-  '
 aliases:
-- /atomist/
-- /atomist/try-atomist/
-- /atomist/configure/settings/
-- /atomist/configure/advisories/
-- /atomist/integrate/github/
-- /atomist/integrate/deploys/
-- /engine/scan/
+ - /atomist/
+ - /atomist/try-atomist/
+ - /atomist/configure/settings/
+ - /atomist/configure/advisories/
+ - /atomist/integrate/github/
+ - /atomist/integrate/deploys/
+ - /engine/scan/
 ---
 
 {{< include "scout-early-access.md" >}}

@@ -1,12 +1,9 @@
 ---
 title: Docker Scout quickstart
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
-description: 'Learn how to get started with Docker Scout to analyze images and fix
-  vulnerabilities
-
-  '
+description: Learn how to get started with Docker Scout to analyze images and fix vulnerabilities
 aliases:
-- /atomist/get-started/
+  - /atomist/get-started/
 ---
 
 {{< include "scout-early-access.md" >}}
