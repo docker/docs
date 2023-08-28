@@ -77,3 +77,15 @@ The following outlines organization management permissions for member, editor, o
 | Upgrade and downgrade plans                                       | ❌     | ❌     | ✅                 | ✅            |
 
 _\* If not part of a company_
+
+### Docker Scout
+
+The following outlines Docker Scout management permissions for member, editor, and organization owner roles.
+
+| Permission                                            | Member | Editor | Organization owner |
+| :---------------------------------------------------- | :----- | :----- | :----------------- |
+| View and compare analysis results                     | ✅     | ✅     | ✅                 |
+| Upload analysis records                               | ✅     | ✅     | ✅                 |
+| Activate and deactivate Docker Scout for a repository | ❌     | ✅     | ✅                 |
+| Create environments                                   | ❌     | ❌     | ✅                 |
+| Manage registry integrations                          | ❌     | ❌     | ✅                 |
