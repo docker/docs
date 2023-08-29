@@ -1909,6 +1909,8 @@ Manuals:
       title: Advisory Database
     - path: /scout/data-handling/
       title: Data handling
+    - path: /scout/policy/
+      title: Policy
     - sectiontitle: Integrations
       section:
       - title: Overview
@@ -1921,6 +1923,8 @@ Manuals:
         section:
         - title: Artifactory
           path: /scout/integrations/registry/artifactory/
+        - title: Elastic Container Registry
+          path: /scout/integrations/registry/ecr/
       - sectiontitle: Continuous integration
         section:
         - title: GitHub Actions

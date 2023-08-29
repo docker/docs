@@ -1,12 +1,12 @@
 # Docs @ Docker
 
-<img src="assets/images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 50%;">
+<img src="static/assets/images/docker-docs.png" alt="Welcome to Docker Documentation" style="max-width: 50%;">
 
 Welcome to the Docker Documentation repository. This is the source for
 [https://docs.docker.com/](https://docs.docker.com/).
 
 Feel free to send us pull requests and file issues. Our docs are completely
-open source and we deeply appreciate contributions from the Docker community!
+open source, and we deeply appreciate contributions from the Docker community!
 
 ## Provide feedback
 
@@ -34,11 +34,11 @@ We've made it really easy for you to file new issues.
 - Click **Request docs changes** in the right column of every page on
   [docs.docker.com](https://docs.docker.com/) and add the details, or
 
-  ![Request changes link](/assets/images/docs-site-feedback.png)
+  ![Request changes link](/static/assets/images/docs-site-feedback.png)
 
 - Click the **Give feedback** link on the side of every page in the docs.
 
-  ![Docs feedback on each page](/assets/images/feedback-widget.png)
+  ![Docs feedback on each page](/static/assets/images/feedback-widget.png)
 
 ## Contribute to Docker docs
 

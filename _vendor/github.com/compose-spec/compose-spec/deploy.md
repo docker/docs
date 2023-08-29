@@ -1,29 +1,18 @@
-# The Compose Specification - Deployment support
-{:.no_toc}
+# Compose Deploy Specification
 
-*Note:* Deployment is an optional part of the Compose Specification
+> **Note:** 
+>
+> Deploy is an optional part of the Compose Specification
 
-* ToC
-{:toc}
+The Compose Deploy Specification lets you declare additional metadata on services so Compose gets
+relevant data to allocate adequate resources on the platform and configure them to match your needs.
 
-## Introduction
-
-Compose specification is a platform-neutral way to define multi-container applications. A Compose implementation supporting
-deployment of an application model may require some additional metadata as the Compose application model is an abstract way
-to reflect actual infrastructure needs per service, or lifecycle constraints.
-
-Compose Specification Deployment allows users to declare additional metadata on services so Composes gets
-relevant data to allocate adequate resources on the platform and configure them to match user's needs.
-
-## Definitions
-
-The Compose specification is extended to support an optional `deploy` subsection on services. This section defines runtime requirements
-for a service.
+## Attributes
 
 ### endpoint_mode
 
 `endpoint_mode` specifies a service discovery method for external clients connecting to a service. Default and available values
-are platform specific but the Compose specification defines two canonical values:
+are platform specific but the Compose Deploy Specification defines two canonical values:
 
 * `endpoint_mode: vip`: Assigns the service a virtual IP (VIP) that acts as the front end for clients to reach the service
   on a network. Platform routes requests between the client and nodes running the service, without client knowledge of how
@@ -46,7 +35,7 @@ services:
 
 ### labels
 
-`labels` specifies metadata for the service. These labels must only be set on the service and not on any containers for the service.
+`labels` specifies metadata for the service. These labels are only set on the service and not on any containers for the service.
 This assumes the platform has some native concept of "service" that can match the Compose application model.
 
 ```yml
@@ -60,7 +49,7 @@ services:
 
 ### mode
 
-`mode` defines the replication model used to run the service on the  platform. Either `global` (exactly one container per physical node) or `replicated` (a specified number of containers). The default is `replicated`.
+`mode` defines the replication model used to run the service on the  platform. Either `global`, exactly one container per physical node, or `replicated`, a specified number of containers. The default is `replicated`.
 
 ```yml
 services:
@@ -76,7 +65,7 @@ services:
 
 #### constraints
 
-`constraints` defines a required property the platform's node must fulfill to run service container. Can be set either
+`constraints` defines a required property the platform's node must fulfill to run the service container. It can be set either
 by a list or a map with string values.
 
 ```yml
@@ -95,7 +84,7 @@ deploy:
 
 #### preferences
 
-`preferences` defines a property the platform's node should fulfill to run service container. Can be set either
+`preferences` defines a property the platform's node should fulfill to run service container. It can be set either
 by a list or a map with string values.
 
 ```yml
@@ -131,8 +120,8 @@ services:
 `resources` configures physical resource constraints for container to run on platform. Those constraints can be configured
 as:
 
-- `limits`: The platform must prevent container to allocate more
-- `reservations`: The platform must guarantee container can allocate at least the configured amount
+- `limits`: The platform must prevent the container to allocate more.
+- `reservations`: The platform must guarantee the container can allocate at least the configured amount.
 
 ```yml
 services:
@@ -151,7 +140,7 @@ services:
 
 #### cpus
 
-`cpus` configures a limit or reservation for how much of the available CPU resources (as number of cores) a container can use.
+`cpus` configures a limit or reservation for how much of the available CPU resources, as number of cores, a container can use.
 
 #### memory
 
@@ -246,7 +235,7 @@ deploy:
 
 ### restart_policy
 
-`restart_policy` configures if and how to restart containers when they exit. If `restart_policy` is not set, Compose considers the `restart` field set by service configuration.
+`restart_policy` configures if and how to restart containers when they exit. If `restart_policy` is not set, Compose considers the `restart` field set by the service configuration.
 
 - `condition`: One of `none`, `on-failure` or `any` (default: `any`).
 - `delay`: How long to wait between restart attempts, specified as a [duration](11-extension.md#specifying-durations) (default: 0).

@@ -82,9 +82,12 @@ the blobs and if a blob's content address digest is not in the mark set, the
 process deletes it.
 
 
-> **Note**: You should ensure that the registry is in read-only mode or not running at
-> all. If you were to upload an image while garbage collection is running, there is the
-> risk that the image's layers are mistakenly deleted leading to a corrupted image.
+> **Note**
+>
+> You should ensure that the registry is in read-only mode or not running at
+> all. If you were to upload an image while garbage collection is running, there
+> is the risk that the image's layers are mistakenly deleted leading to a
+> corrupted image.
 
 This type of garbage collection is known as stop-the-world garbage collection.
 

@@ -4,6 +4,7 @@
 {{ $remove_button := "**Remove member**" }}
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
 {{ $update_role := "Select the role you want to assign, then select **Save**." }}
+{{ $role_mapping_link := "[SCIM for role mapping](docker-hub/scim.md#set-up-role-mapping)" }}
 
 {{ if eq (.Get "product") "admin" }}
 {{ $invite_button = "**Invite**" }}
@@ -11,10 +12,12 @@
 {{ $member_navigation := "Select your organization in the left navigation drop-down menu, and then select *Members**." }}
 {{ $remove_button = "**Remove member**" }}
 {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
+{{ $role_mapping_link = "[SCIM for role mapping](admin/organization/security-settings/scim.md#set-up-role-mapping)" }}
 {{ if eq (.Get "layer") "company" }}
 {{ $member_navigation = "Select your company in the left navigation drop-down menu, and then select **Users**." }}
 {{ $remove_button = "**Remove user**" }}
 {{ $update_role = "Select their organization, select the role you want to assign, and then select **Save**." }}
+{{ $role_mapping_link = "[SCIM for role mapping](admin/company/settings/scim.md#set-up-role-mapping)"}}
 {{ end }}
 {{ end }}
 
@@ -132,7 +135,7 @@ To remove a member from an organization:
 
 Organization owners can manage [roles](/docker-hub/roles-and-permissions/)
 within an organization. If an organization is part of a company,
-the company owner can also manage that organization's roles.
+the company owner can also manage that organization's roles. If you have SSO enabled, you can use {{ $role_mapping_link }}.
 
 > **Note**
 >

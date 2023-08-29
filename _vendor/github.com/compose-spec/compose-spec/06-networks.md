@@ -63,7 +63,7 @@ The advanced example shows a Compose file which defines two custom networks. The
 driver is not available on the platform.
 
 ```yml
-volumes:
+networks:
   db-data:
     driver: overlay
 ```

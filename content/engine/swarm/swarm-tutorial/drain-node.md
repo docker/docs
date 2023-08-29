@@ -14,7 +14,9 @@ availability. `DRAIN` availability  prevents a node from receiving new tasks
 from the swarm manager. It also means the manager stops tasks running on the
 node and launches replica tasks on a node with `ACTIVE` availability.
 
-> **Important**: Setting a node to `DRAIN` does not remove standalone containers from that node,
+> **Important**: 
+>
+> Setting a node to `DRAIN` does not remove standalone containers from that node,
 > such as those created with `docker run`, `docker compose up`, or the Docker Engine
 > API. A node's status, including `DRAIN`, only affects the node's ability to schedule
 > swarm service workloads.

@@ -43,10 +43,12 @@ you want through the secondary authentication mechanism implemented inside your
 proxy, it also requires that you move TLS termination from the Registry to the
 proxy itself.
 
-> **Note**: Docker does not recommend binding your registry to `localhost:5000` without
-> authentication. This creates a potential loophole in your Docker Registry security.
-> As a result, anyone who can log on to the server where your Docker Registry is running
-> can push images without authentication.
+> **Note**
+>
+>  Docker does not recommend binding your registry to `localhost:5000` without
+> authentication. This creates a potential loophole in your Docker Registry
+> security. As a result, anyone who can log on to the server where your Docker
+> Registry is running can push images without authentication.
 
 Furthermore, introducing an extra http layer in your communication pipeline
 makes it more complex to deploy, maintain, and debug. Make sure the extra
@@ -159,7 +161,9 @@ Review the [requirements](index.md#requirements), then follow these steps.
     $ docker run --rm --entrypoint htpasswd httpd:2 -Bbn testuser testpassword > auth/nginx.htpasswd
     ```
 
-    > **Note**: If you do not want to use `bcrypt`, you can omit the `-B` parameter.
+    > **Note**
+    >
+    > If you do not want to use `bcrypt`, you can omit the `-B` parameter.
 
 4.  Copy your certificate files to the `auth/` directory.
 

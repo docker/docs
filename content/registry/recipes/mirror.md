@@ -96,14 +96,20 @@ proxy:
   password: [password]
 ```
 
-> **Warning**: If you specify a username and password, it's very important to
-> understand that private resources that this user has access to Docker Hub is
-> made available on your mirror. **You must secure your mirror** by
-> implementing authentication if you expect these resources to stay private!
+> **Warning**
+>
+> If you specify a username and password, it's very important to understand that
+> private resources that this user has access to Docker Hub is made available on
+> your mirror. **You must secure your mirror** by implementing authentication if
+> you expect these resources to stay private!
+{ .warning }
 
-> **Warning**: For the scheduler to clean up old entries, `delete` must
-> be enabled in the registry configuration. See
-> [Registry Configuration](../configuration.md) for more details.
+> **Warning**
+>
+> For the scheduler to clean up old entries, `delete` must be enabled in the
+> registry configuration. See [Registry Configuration](../configuration.md) for
+> more details.
+{ .warning }
 
 ### Configure the Docker daemon
 
@@ -119,11 +125,14 @@ and add the `registry-mirrors` key and value, to make the change persistent.
 
 Save the file and reload Docker for the change to take effect.
 
-> Some log messages that appear to be errors are actually informational messages.
+> **Note**
 >
-> Check the `level` field to determine whether
-> the message is warning you about an error or is giving you information.
-> For example, this log message is informational:
+> Some log messages that appear to be errors are actually informational
+> messages.
+>
+> Check the `level` field to determine whether the message is warning you about
+> an error or is giving you information. For example, this log message is
+> informational:
 >
 > ```conf
 > time="2017-06-02T15:47:37Z" level=info msg="error statting local store, serving from upstream: unknown blob" go.version=go1.7.4

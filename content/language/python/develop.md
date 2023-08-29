@@ -34,17 +34,37 @@ $ docker network create postgresnet
 
 Now you can run PostgreSQL in a container and attach to the volume and network that you created above. Docker pulls the image from Hub and runs it for you locally.
 In the following command, option `--mount` is for starting the container with a volume. For more information, see [Docker volumes](../../storage/volumes.md).
+   
+   {{< tabs >}}
+   {{< tab name="Mac / Linux" >}}
 
-```console
-$ docker run --rm -d --mount \
-  "type=volume,src=db-data,target=/var/lib/postgresql/data" \
-  -p 5432:5432 \
-  --network postgresnet \
-  --name db \
-  -e POSTGRES_PASSWORD=mysecretpassword \
-  -e POSTGRES_DB=example \
-  postgres
-```
+   ```console
+   $ docker run --rm -d \
+     --mount type=volume,src=db-data,target=/var/lib/postgresql/data \
+     -p 5432:5432 \
+     --network postgresnet \
+     --name db \
+     -e POSTGRES_PASSWORD=mysecretpassword \
+     -e POSTGRES_DB=example \
+     postgres
+   ```
+
+   {{< /tab >}}
+   {{< tab name="Windows" >}}
+
+   ```powershell
+   $ docker run --rm -d `
+     --mount type=volume,src=db-data,target=/var/lib/postgresql/data `
+     -p 5432:5432 `
+     --network postgresnet `
+     --name db `
+     -e POSTGRES_PASSWORD=mysecretpassword `
+     -e POSTGRES_DB=example `
+     postgres
+   ```
+
+   {{< /tab >}}
+   {{< /tabs >}}
 
 Now, make sure that your PostgreSQL database is running and that you can connect to it. Connect to the running PostgreSQL database inside the container.
 
@@ -90,9 +110,10 @@ You'll need to clone a new repository to get a sample application that includes 
    ? What version of Python do you want to use? 3.11.4
    ? What port do you want your app to listen on? 5000
    ? What is the command to run your app? python3 -m flask run --host=0.0.0.0
-```
+   ```
 
 3. In the cloned repository's directory, run `docker build` to build the image.
+
    ```console
    $ docker build -t python-docker-dev .
    ```
@@ -100,16 +121,33 @@ You'll need to clone a new repository to get a sample application that includes 
 4. If you have any containers running from the previous sections using the name `rest-server` or port 8000, [stop and remove](./run-containers.md/#stop-start-and-name-containers) them now.
 
 5. Run `docker run` with the following options to run the image as a container on the same network as the database.
+   
+   {{< tabs >}}
+   {{< tab name="Mac / Linux" >}}
 
    ```console
-   $ docker run \
-     --rm -d \
+   $ docker run --rm -d \
      --network postgresnet \
      --name rest-server \
      -p 8000:5000 \
      -e POSTGRES_PASSWORD=mysecretpassword \
      python-docker-dev
    ```
+
+   {{< /tab >}}
+   {{< tab name="Windows" >}}
+
+   ```powershell
+   $ docker run --rm -d `
+     --network postgresnet `
+     --name rest-server `
+     -p 8000:5000 `
+     -e POSTGRES_PASSWORD=mysecretpassword `
+     python-docker-dev
+   ```
+
+   {{< /tab >}}
+   {{< /tabs >}}
 
 6. Test that your application is connected to the database and is able to list the widgets.
 
