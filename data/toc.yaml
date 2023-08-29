@@ -2168,6 +2168,8 @@ Contribute:
       title: Cards
     - path: /contribute/components/code-blocks/
       title: Code blocks
+    - path: /contribute/components/icons/
+      title: Icons
     - path: /contribute/components/images/
       title: Images
     - path: /contribute/components/links/
