@@ -43,7 +43,7 @@ Builds and containers use the configuration specified in this file.
  "proxies": {
    "default": {
      "httpProxy": "http://proxy.example.com:3128",
-     "httpsProxy": "https://proxy.example.com:3129",
+     "httpsProxy": "http://proxy.example.com:3129",
      "noProxy": "*.test.example.com,.example.org,127.0.0.0/8"
    }
  }
@@ -70,7 +70,7 @@ The following table describes the available configuration parameters.
 | Property     | Description                                                                         |
 | :----------- | :---------------------------------------------------------------------------------- |
 | `httpProxy`  | Sets the `HTTP_PROXY` and `http_proxy` environment variables and build arguments.   |
-| `httpsProxy` | Sets the `HTTPS_PROXY` and `https_proxy` environment variables and build arguments. |
+| `httpsProxy` | Sets the `HTTPS_PROXY` and `https_proxy` environment variables and build arguments. Note: the URL of the HTTPS proxy is normally *not* itself an HTTPS URL.  |
 | `ftpProxy`   | Sets the `FTP_PROXY` and `ftp_proxy` environment variables and build arguments.     |
 | `noProxy`    | Sets the `NO_PROXY` and `no_proxy` environment variables and build arguments.       |
 | `allProxy`   | Sets the `ALL_PROXY` and `all_proxy` environment variables and build arguments.     |
@@ -123,10 +123,10 @@ EOF
 
 ```console
 #5 [2/2] RUN env | grep -i _PROXY
-#5 0.100 HTTPS_PROXY=https://proxy.example.com:3129
+#5 0.100 HTTPS_PROXY=http://proxy.example.com:3129
 #5 0.100 no_proxy=*.test.example.com,.example.org,127.0.0.0/8
 #5 0.100 NO_PROXY=*.test.example.com,.example.org,127.0.0.0/8
-#5 0.100 https_proxy=https://proxy.example.com:3129
+#5 0.100 https_proxy=http://proxy.example.com:3129
 #5 0.100 http_proxy=http://proxy.example.com:3128
 #5 0.100 HTTP_PROXY=http://proxy.example.com:3128
 #5 DONE 0.1s
@@ -148,7 +148,7 @@ and a no-proxy override for the Docker daemon on address
  "proxies": {
    "default": {
      "httpProxy": "http://proxy.example.com:3128",
-     "httpsProxy": "https://proxy.example.com:3129",
+     "httpsProxy": "http://proxy.example.com:3129",
      "noProxy": "*.test.example.com,.example.org,127.0.0.0/8"
    },
    "tcp://docker-daemon1.example.com": {
