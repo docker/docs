@@ -13,7 +13,7 @@ grid:
   link: /storage
 - title: Networking
   description: Manage network connections between containers.
-  icon: lan
+  icon: network_node
   link: /network
 - title: Container logs
   description: Learn how to view and read container logs.
@@ -33,7 +33,7 @@ grid:
   link: /security
 - title: Deprecated features
   description: Find out what features of Docker Engine you should stop using.
-  icon: note_add
+  icon: folder_delete
   link: /engine/deprecated/
 - title: Release notes
   description: Read the release notes for the latest version.

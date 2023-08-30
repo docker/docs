@@ -8,7 +8,7 @@ grid:
   icon: credit_score
 - title: Update the billing information
   link: /billing/details/
-  icon: contact_page
+  icon: contract_edit
 - title: View billing history
   link: /billing/history/
   icon: payments

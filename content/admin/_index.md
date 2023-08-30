@@ -6,11 +6,11 @@ title: Docker Admin overview
 grid:
 - title: Company administration
   description: Explore how to manage a company in Docker Admin.
-  icon: lan
+  icon: apartment
   link: /admin/company/
 - title: Organization administration
   description: Learn about organization administration in Docker Admin.
-  icon: contact_page
+  icon: store
   link: /admin/organization/
 ---
 
