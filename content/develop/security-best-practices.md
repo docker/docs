@@ -128,7 +128,7 @@ that affect images that you build or use.
   which when enabled automatically scans images when you push them to a Docker Hub
   repository. Requires a [Docker subscription](../subscription/index.md).
 - Docker Hub also supports an early-access
-  [advanced image analysis](../scout/advanced-image-analysis.md) feature, which extends
+  [advanced image analysis](../scout/image-analysis.md) feature, which extends
   the "core" vulnerability scanning solution with enhanced capabilities and more
   detailed and actionable insights.
 - For the CLI, there's the

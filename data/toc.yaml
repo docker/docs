@@ -1901,8 +1901,8 @@ Manuals:
       title: Quickstart
     - path: /scout/image-details-view/
       title: Image details view
-    - path: /scout/advanced-image-analysis/
-      title: Advanced image analysis
+    - path: /scout/image-analysis/
+      title: Image analysis
     - path: /scout/dashboard/
       title: Dashboard
     - path: /scout/advisory-db-sources/
