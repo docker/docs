@@ -13,7 +13,7 @@ Extensions can be composed of three (optional) components:
 - A backend: One or many containerised services running in the Docker Desktop VM
 - Executables: Shell scripts or binaries that Docker Desktop copies on the host when installing the extension
 
-![Overview of the three components of an extension](./images/extensions-architecture.png){{ $image := $image.Resize "600x400" }}
+![Overview of the three components of an extension](./images/extensions-architecture.png)
 
 An extension doesn't necessarily need to have all these components, but at least one of them depending on the extension features. 
 To configure and run those components, Docker Desktop uses a `metadata.json` file. See the
