@@ -1,5 +1,6 @@
 ---
-description: Use roles in your organization to control who has access to content,
+description: >
+  Use roles in your organization to control who has access to content,
   registry, and organization management permissions.
 keywords: members, teams, organization, company, roles, access
 title: Roles and permissions
@@ -30,23 +31,22 @@ The following outlines content and registry permissions for member, editor, and 
 
 Company owners have the same access as organization owners for all associated organizations. See [Company overview](/admin/company/).
 
-| Permission | Member | Editor | Organization owner |
-|:----------------------- |:------ |:-------|:------------------ |
-| Explore images and extensions | ✅ | ✅ | ✅ |
-| Star, favorite, vote, and comment on content | ✅ | ✅ | ✅ |
-| Pull images | ✅ | ✅ | ✅ |
-| Create and publish an extension | ✅ | ✅ | ✅ |
-| Become a Verified, Official, or Open Source publisher | ❌ | ❌ | ✅ |
-| Observe content engagement as a publisher | ❌ | ❌ | ✅ |
-| Create public and private repositories | ❌ | ✅ | ✅ |
-| Edit and delete repositories | ❌ | ✅ | ✅ |
-| Manage tags | ❌ | ✅ | ✅ |
-| View repository activity | ❌ | ❌ | ✅ |
-| Set up Automated builds | ❌ | ❌ | ✅ |
-| Edit build settings | ❌ | ❌ | ✅ |
-| Set up vulnerability analysis with Docker Scout | ❌ | ✅ | ✅ |
-| View teams | ❌ | ✅ | ✅ |
-| Assign team permissions to repositories | ❌ | ✅ | ✅ |
+| Permission                                            | Member | Editor | Organization owner |
+| :---------------------------------------------------- | :----- | :----- | :----------------- |
+| Explore images and extensions                         | ✅     | ✅     | ✅                 |
+| Star, favorite, vote, and comment on content          | ✅     | ✅     | ✅                 |
+| Pull images                                           | ✅     | ✅     | ✅                 |
+| Create and publish an extension                       | ✅     | ✅     | ✅                 |
+| Become a Verified, Official, or Open Source publisher | ❌     | ❌     | ✅                 |
+| Observe content engagement as a publisher             | ❌     | ❌     | ✅                 |
+| Create public and private repositories                | ❌     | ✅     | ✅                 |
+| Edit and delete repositories                          | ❌     | ✅     | ✅                 |
+| Manage tags                                           | ❌     | ✅     | ✅                 |
+| View repository activity                              | ❌     | ❌     | ✅                 |
+| Set up Automated builds                               | ❌     | ❌     | ✅                 |
+| Edit build settings                                   | ❌     | ❌     | ✅                 |
+| View teams                                            | ❌     | ✅     | ✅                 |
+| Assign team permissions to repositories               | ❌     | ✅     | ✅                 |
 
 When you add members to a team, you can manage their repository permissions. For team repository permissions, see [Create and manage a team permissions reference](/docker-hub/manage-a-team/#permissions-reference).
 
@@ -54,26 +54,38 @@ When you add members to a team, you can manage their repository permissions. For
 
 The following outlines organization management permissions for member, editor, organization owner, and company owner roles.
 
-| Permission | Member | Editor | Organization owner | Company owner |
-|:----------------------- |:------ |:-------|:------------------ |:----------- |
-| Create teams | ❌ | ❌ | ✅ | ✅ |
-| Manage teams (including delete) | ❌ | ❌ | ✅ | ✅ |
-| Configure the organization's settings (including linked services) | ❌ | ❌ | ✅ | ✅ |
-| Add organizations to a company | ❌ | ❌ | ✅ | ✅ |
-| Invite members | ❌ | ❌ | ✅ | ✅ |
-| Manage members | ❌ | ❌ | ✅ | ✅ |
-| Manage member roles and permissions | ❌ | ❌ | ✅ | ✅ |
-| View member activity | ❌ | ❌ | ✅ | ✅ |
-| Export and reporting | ❌ | ❌ | ✅ | ✅ |
-| Image Access Management | ❌ | ❌ | ✅ | ✅ |
-| Registry Access Management | ❌ | ❌ | ✅ | ✅ |
-| Set up Single Sign-On (SSO) and SCIM | ❌ | ❌ | ✅ * | ✅ |
-| Require Desktop login | ❌ | ❌ | ✅ * | ✅ |
-| Manage billing information (e.g. billing address) | ❌ | ❌ | ✅ | ✅ |
-| Manage payment methods (e.g. credit card or invoice) | ❌ | ❌ | ✅ | ✅ |
-| View billing history | ❌ | ❌ | ✅ | ✅ |
-| Manage subscriptions | ❌ | ❌ | ✅ | ✅ |
-| Manage seats | ❌ | ❌ | ✅ | ✅ |
-| Upgrade and downgrade plans | ❌ | ❌ | ✅ | ✅ |
+| Permission                                                        | Member | Editor | Organization owner | Company owner |
+| :---------------------------------------------------------------- | :----- | :----- | :----------------- | :------------ |
+| Create teams                                                      | ❌     | ❌     | ✅                 | ✅            |
+| Manage teams (including delete)                                   | ❌     | ❌     | ✅                 | ✅            |
+| Configure the organization's settings (including linked services) | ❌     | ❌     | ✅                 | ✅            |
+| Add organizations to a company                                    | ❌     | ❌     | ✅                 | ✅            |
+| Invite members                                                    | ❌     | ❌     | ✅                 | ✅            |
+| Manage members                                                    | ❌     | ❌     | ✅                 | ✅            |
+| Manage member roles and permissions                               | ❌     | ❌     | ✅                 | ✅            |
+| View member activity                                              | ❌     | ❌     | ✅                 | ✅            |
+| Export and reporting                                              | ❌     | ❌     | ✅                 | ✅            |
+| Image Access Management                                           | ❌     | ❌     | ✅                 | ✅            |
+| Registry Access Management                                        | ❌     | ❌     | ✅                 | ✅            |
+| Set up Single Sign-On (SSO) and SCIM                              | ❌     | ❌     | ✅ \*              | ✅            |
+| Require Desktop login                                             | ❌     | ❌     | ✅ \*              | ✅            |
+| Manage billing information (e.g. billing address)                 | ❌     | ❌     | ✅                 | ✅            |
+| Manage payment methods (e.g. credit card or invoice)              | ❌     | ❌     | ✅                 | ✅            |
+| View billing history                                              | ❌     | ❌     | ✅                 | ✅            |
+| Manage subscriptions                                              | ❌     | ❌     | ✅                 | ✅            |
+| Manage seats                                                      | ❌     | ❌     | ✅                 | ✅            |
+| Upgrade and downgrade plans                                       | ❌     | ❌     | ✅                 | ✅            |
 
-_* If not part of a company_
+_\* If not part of a company_
+
+### Docker Scout
+
+The following outlines Docker Scout management permissions for member, editor, and organization owner roles.
+
+| Permission                                            | Member | Editor | Organization owner |
+| :---------------------------------------------------- | :----- | :----- | :----------------- |
+| View and compare analysis results                     | ✅     | ✅     | ✅                 |
+| Upload analysis records                               | ✅     | ✅     | ✅                 |
+| Activate and deactivate Docker Scout for a repository | ❌     | ✅     | ✅                 |
+| Create environments                                   | ❌     | ❌     | ✅                 |
+| Manage registry integrations                          | ❌     | ❌     | ✅                 |

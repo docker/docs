@@ -1,12 +1,9 @@
 ---
 title: Docker Scout quickstart
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
-description: 'Learn how to get started with Docker Scout to analyze images and fix
-  vulnerabilities
-
-  '
+description: Learn how to get started with Docker Scout to analyze images and fix vulnerabilities
 aliases:
-- /atomist/get-started/
+  - /atomist/get-started/
 ---
 
 {{< include "scout-early-access.md" >}}
@@ -19,7 +16,11 @@ This guide takes a vulnerable container image and shows you how to use Docker
 Scout to identify and fix the vulnerabilities, compare image versions over time,
 and share the results with your team.
 
-## Setup
+The following video shows an end-to-end workflow of using Docker Scout to remediate a reported vulnerability.
+
+<iframe class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/e066986569924555a2546139f5f61349?sid=6e29be62-78ba-4aa7-a1f6-15f96c37d916"></iframe>
+
+## Step 1: Setup
 
 [This example project](https://github.com/docker/scout-demo-service) contains 
 a vulnerable Node.js application that you can use to follow along.
@@ -54,21 +55,23 @@ a vulnerable Node.js application that you can use to follow along.
    > Make sure you log in to the Docker CLI or Docker Desktop before pushing.
    { .important }
 
-## Enable Docker Scout
+## Step 2: Enable Docker Scout
 
 Docker Scout analyzes all local images by default. To analyze images in
 remote repositories, you need to enable it first.
 You can do this from Docker Hub, the Docker Scout Dashboard, and CLI.
 [Find out how in the overview guide](/scout).
 
-1. Use the Docker CLI [`docker scout repo enable`](/engine/reference/commandline/scout_repo_enable)
-   command to enable analysis on an existing repository with the following command:
+1. Sign in to your Docker account with the `docker login` command or use the
+   **Sign in** button in Docker Desktop.
+2. Use the Docker CLI [`docker scout repo enable`](/engine/reference/commandline/scout_repo_enable)
+   command to enable analysis on an existing repository:
 
    ```console
    $ docker scout repo enable <org-name>/scout-demo
    ```
 
-## Analyze image vulnerabilities
+## Step 3: Analyze image vulnerabilities
 
 After building, you can use Docker Desktop or the `docker scout` CLI command 
 to see vulnerabilities detected by Docker Scout.
@@ -93,14 +96,14 @@ to see vulnerabilities detected by Docker Scout.
 Docker Scout creates and maintains its vulnerability database by ingesting and
 collating vulnerability data from multiple sources continuously. These sources
 include many recognizable package repositories and trusted security trackers.
-You can find more details in the [Advisory Database sources](./advisory-db-sources.md) document.
+You can find more details in the [advisory database](./advisory-db-sources.md) documentation.
 
 > **Tip**
 >
 > Find out how to filter results using the CLI command [`scout cves`](/engine/reference/commandline/scout_cves).
 { .tip }
 
-## Fix application vulnerabilities
+## Step 4: Fix application vulnerabilities
 
 The fix suggested by Docker Scout is to update
 the underlying vulnerable express version to 4.17.3 or later.
@@ -130,7 +133,7 @@ the underlying vulnerable express version to 4.17.3 or later.
 Now, viewing the latest tag of the image in Docker Desktop, the Docker Scout
 Dashboard, or CLI, you can see that you have fixed the vulnerability.
 
-## Fix vulnerabilities in base images
+## Step 5: Fix vulnerabilities in base images
 
 In addition to identifying application
 vulnerabilities, Docker Scout also helps you identify and fix issues with the
@@ -164,7 +167,7 @@ base images your images use.
    $ docker scout cves <org-name>/scout-demo:v3
    ```
 
-## Collaborate on vulnerabilities
+## Step 6: Collaborate on vulnerabilities
 
 You can see and share the same vulnerability information about an image and
 the other images in your organization in the [Docker Scout Dashboard](./dashboard.md).
@@ -185,7 +188,7 @@ security, compliance, and operations to know what vulnerabilities and issues to 
 > ![Screenshot showing organization picker in the Docker Scout dashboard](./images/scout-onboarding-org-picker.png)
 { .tip }
 
-## Comparing image tags
+## Step 7: Compare images
 
 Over time as you build and push new tags of images, you can use the Docker Scout
 CLI and Dashboard to compare the changes to vulnerabilities and packages in

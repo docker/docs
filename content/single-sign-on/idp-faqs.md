@@ -48,6 +48,10 @@ We currently do not have any plans to enable IdP initiated logins.
 
 Yes, bot accounts needs a seat, similar to a regular end user, having a non-aliased domain email enabled in the IdP and using a seat in Hub.
 
-### Is it possible to connect Docker Hub directly with a Microsoft Azure Active Directory Group?
+### Is it possible to connect Docker Hub directly with a Microsoft Azure Active Directory (AD) Group?
 
 Yes, Azure AD is supported with SSO for Docker Business, both through a direct integration and through SAML.
+
+### My SSO connection with Azure AD isn't working and I receive an error that the application is misconfigured. How can I troubleshoot this?
+
+Confirm that you've configured the necessary API permissions in Azure AD for your SSO connection. You need to grant admin consent within your Azure AD tenant. See [Azure AD documentation](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal#grant-admin-consent-in-app-registrations).
