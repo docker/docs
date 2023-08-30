@@ -27,7 +27,7 @@ Select the checkboxes for the repositories on which you want to enable Docker Sc
 select **Enable image analysis**.
 
 When you enable image analysis for a repository, Docker Scout analyzes new tags
-automatically when you push to that repository. Find out more in the [Advanced image analysis](./advanced-image-analysis.md) documentation.
+automatically when you push to that repository. Find out more in the [image analysis](./image-analysis.md) documentation.
 
 Disable Docker Scout analysis on selected repositories by selecting **Disable image analysis**.
 

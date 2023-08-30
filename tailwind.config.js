@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./hugo_stats.json","./layouts/**/*.{html,js}"],
+  content: ["./hugo_stats.json","./layouts/**/*.{html,js}", "./content/**/*.md"],
   darkMode: "class",
   theme: {
     extend: {

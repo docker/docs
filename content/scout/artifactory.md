@@ -1,12 +1,6 @@
 ---
-description: 'Integrate JFrog Artifactory and JFrog Container Registry with Docker
-  Scout
-
-  '
-keywords: 'docker scout, jfrog, artifactory, jcr, integration, image analysis, security,
-  cves
-
-  '
+description: Integrate JFrog Artifactory and JFrog Container Registry with Docker Scout
+keywords: docker scout, jfrog, artifactory, jcr, integration, image analysis, security, cves
 title: Artifactory integration
 ---
 
