@@ -345,7 +345,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Known Issues
 
-- Uninstalling Docker Desktop on Mac from the **Troubleshoot** page might trigger an unexpected fatal error popup.
+- Uninstalling Docker Desktop on Mac from the **Troubleshoot** page might trigger an unexpected fatal error po
 
 ## 4.17.1
 
