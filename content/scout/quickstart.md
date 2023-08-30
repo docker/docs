@@ -16,6 +16,10 @@ This guide takes a vulnerable container image and shows you how to use Docker
 Scout to identify and fix the vulnerabilities, compare image versions over time,
 and share the results with your team.
 
+_The following video shows an end-to-end workflow of using Docker Scout to remediate a reported vulnerability_.
+
+<iframe class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/e066986569924555a2546139f5f61349?sid=6e29be62-78ba-4aa7-a1f6-15f96c37d916"></iframe>
+
 ## Setup
 
 [This example project](https://github.com/docker/scout-demo-service) contains 
@@ -90,7 +94,7 @@ to see vulnerabilities detected by Docker Scout.
 Docker Scout creates and maintains its vulnerability database by ingesting and
 collating vulnerability data from multiple sources continuously. These sources
 include many recognizable package repositories and trusted security trackers.
-You can find more details in the [Advisory Database sources](./advisory-db-sources.md) document.
+You can find more details in the [advisory database](./advisory-db-sources.md) documentation.
 
 > **Tip**
 >

@@ -1,16 +1,45 @@
 ---
 title: Docker Scout
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
-description: Docker Scout analyzes your images to help you understand their dependencies
+description:
+  Docker Scout analyzes your images to help you understand their dependencies
   and potential vulnerabilities
 aliases:
- - /atomist/
- - /atomist/try-atomist/
- - /atomist/configure/settings/
- - /atomist/configure/advisories/
- - /atomist/integrate/github/
- - /atomist/integrate/deploys/
- - /engine/scan/
+  - /atomist/
+  - /atomist/try-atomist/
+  - /atomist/configure/settings/
+  - /atomist/configure/advisories/
+  - /atomist/integrate/github/
+  - /atomist/integrate/deploys/
+  - /engine/scan/
+grid:
+  - title: Quickstart
+    link: /scout/quickstart/
+    description: Learn what Docker Scout can do, and how to get started.
+    icon: explore
+  - title: Image analysis
+    link: /scout/image-analysis/
+    description: Reveal and dig into the composition of your images.
+    icon: radar
+  - title: Advisory database
+    link: /scout/advisory-db-sources/
+    description: Learn about the information sources that Docker Scout uses.
+    icon: database
+  - title: Integrations
+    description: |
+      Connect Docker Scout with your CI, registries, and other third-party services.
+    link: /scout/integrations/
+    icon: multiple_stop
+  - title: Dashboard
+    link: /scout/dashboard/
+    description: |
+      The web interface for Docker Scout.
+    icon: dashboard
+  - title: Policy {{< badge color=violet text=Beta >}}
+    link: /scout/policy/
+    description: |
+      Ensure that your artifacts align with supply chain best practices.
+    icon: policy
 ---
 
 {{< include "scout-early-access.md" >}}
@@ -32,19 +61,4 @@ Scout](./integrations/index.md) for more information.
 
 {{< include "scout-plans.md" >}}
 
-## Quickstart
-
-_The following video shows an end-to-end workflow of using Docker Scout to remediate a reported vulnerability_.
-
-<div style="position: relative; padding-bottom: 64.86486486486486%; height: 0;"><iframe src="https://www.loom.com/embed/e066986569924555a2546139f5f61349?sid=6e29be62-78ba-4aa7-a1f6-15f96c37d916" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
-
-> **Quickstart with Docker Scout**
->
-> For a self-guided quickstart that shows you how to use Docker Scout to identify and remediate vulnerabilities in your images, read the [quickstart](./quickstart.md).
-{ .tip }
-
-## Enabling Docker Scout
-
-_The following video shows how to enable Docker Scout on your repositories_.
-
-<div style="position: relative; padding-bottom: 64.86486486486486%; height: 0;"><iframe src="https://www.loom.com/embed/a6fb14ede0a94d0d984edf6cf16604e0?sid=ba34f694-32a6-4b74-b3f8-9cc6b80ef66f" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+{{< grid >}}
