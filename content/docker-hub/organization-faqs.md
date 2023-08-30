@@ -47,7 +47,7 @@ revert it to a personal user account. For prerequisites and instructions, see
 
 ### Our users create Docker Hub accounts through self-service. How do we know when the total number of users for the requested licenses has been met? Is it possible to add more members to the organization than the total number of licenses?
 
-Currently, we don’t have a way to notify you. However, if the number of team
+There isn't any automatic notification when the total number of users for the requested licenses has been met. However, if the number of team
 members exceed the number of licenses, you will receive an error informing you
 to contact the administrator due to lack of seats.
 
