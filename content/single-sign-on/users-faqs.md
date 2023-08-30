@@ -20,11 +20,11 @@ During the SSO setup, you’ll have to specify the company email domains that ar
 
 Users with a public domain email address will be added as guests.
 
-### Can Docker org owners/Admins/company owners approve users to an organization and use a seat, rather than having them automatically added when SSO Is enabled?
+### Can Docker org owners/admins/company owners approve users to an organization and use a seat, rather than having them automatically added when SSO is enabled?
 
-Admins, organization owners and company owners can currently approve users by configuring their permissions through their IdP. That's if the user account is configured in the IdP, the user will be automatically added to the organization in Docker Hub as long as there’s an available seat.
+Admins, organization owners, and company owners can approve users by configuring their permissions through their IdP. If the user account is configured in the IdP, the user will be automatically added to the organization in Docker Hub as long as there’s an available seat.
 
-### How will users be made aware that they're being made a part of a Docker Org?
+### How will users be made aware that they're being made a part of a Docker organzation?
 
 When SSO is enabled, users will be prompted to authenticate through SSO the next time they try to sign in to Docker Hub or Docker Desktop. The system will see the end-user has a domain email associated with the docker ID they're trying to authenticate with, and prompts them to sign in with SSO email and credentials instead.
 
@@ -34,7 +34,7 @@ If users attempt to sign in through the CLI, they must authenticate using a pers
 
 Yes. Admins can force users to authenticate with Docker Desktop by provisioning a [`registry.json`](../docker-hub/configure-sign-in.md) configuration file. The `registry.json` file will force users to authenticate as a user that's configured in the `allowedOrgs` list in the `registry.json` file.
 
-Once SSO enforcement is set up on their Docker Business organisation or company on Hub, when the user is forced to authenticate with Docker Desktop, the SSO enforcement will also force users to authenticate through SSO with their IdP (instead of authenticating using their username and password).
+Once SSO enforcement is set up on their Docker Business organization or company on Hub, when the user is forced to authenticate with Docker Desktop, the SSO enforcement will also force users to authenticate through SSO with their IdP (instead of authenticating using their username and password).
 
 Users may still be able to authenticate as a "guest" account using a non-domain email address. However, they can only authenticate as guests if that non-domain email was invited.
 
