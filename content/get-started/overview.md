@@ -109,7 +109,7 @@ Docker Desktop is an easy-to-install application for your Mac, Windows or Linux 
 ### Docker registries
 
 A Docker registry stores Docker images. Docker Hub is a public
-registry that anyone can use, and Docker is looks for images on
+registry that anyone can use, and Docker looks for images on
 Docker Hub by default. You can even run your own private registry.
 
 When you use the `docker pull` or `docker run` commands, Docker pulls the required images from your configured registry. When you use the `docker push` command, Docker pushes

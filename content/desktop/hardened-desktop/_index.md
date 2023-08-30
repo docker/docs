@@ -7,7 +7,7 @@ keywords: security, hardened desktop, enhanced container isolation, registry acc
 grid:
   - title: "Settings Management"
     description: Learn how Settings Management can secure your developers' workflows.
-    icon: "lock"
+    icon: shield_locked
     link: "/desktop/hardened-desktop/settings-management/"
   - title: "Enhanced Container Isolation"
     description: Understand how Enhanced Container Isolation can prevent container attacks.

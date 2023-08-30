@@ -11,15 +11,15 @@ grid:
 - title: Create a repository
   description: Create a repository to share your images with your team, customers,
     or the Docker community.
-  icon: explore
+  icon: inbox
   link: /docker-hub/repos
 - title: Quickstart
   description: Step-by-step instructions on getting started on Docker Hub.
-  icon: checklist
+  icon: explore
   link: /docker-hub/quickstart
 - title: Manage access tokens
   description: Create personal access tokens as an alternative to your password.
-  icon: key
+  icon: password
   link: /docker-hub/access-tokens
 - title: Official images
   description: A curated set of Docker repositories hosted on Docker Hub.
