@@ -392,3 +392,12 @@ For more information, refer to:
 
 - [docker buildx build --secret](../engine/reference/commandline/buildx_build.md#secret)
 - [docker buildx build --ssh](../engine/reference/commandline/buildx_build.md#ssh)
+
+### How do I unset Hydrobuild as the default builder?
+
+If you've set Hydrobuild as the default builder and want to revert to using the
+default `docker` builder, run the following command:
+
+```console
+$ docker context use default
+```
