@@ -7,6 +7,7 @@ title: Automatically update services with file watch in Docker Compose
 > **Experimental**
 >
 > The Compose file watch feature is currently [Experimental](../release-lifecycle.md).
+{ .experimental }
 
 Use `watch` to automatically update your running Compose services as you edit and save your code.
 
@@ -130,10 +131,9 @@ This pattern can be followed for many languages and frameworks, such as Python w
 3. Run `docker compose alpha watch` to start the file watch mode.
 4. Edit service source files using your preferred IDE or editor.
 
->**Tip**
+>**Looking for a sample project to test things out?**
 >
-> Looking for a sample project to test things out? Check
-out [`dockersamples/avatars`](https://github.com/dockersamples/avatars) for a demonstration of Compose `watch`.
+>  Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars), or [build the docs site locally](../contribute/contribute-guide.md#build-and-preview-the-docs-locally) for a demonstration of Compose `watch`.
 { .tip }
 
 ## Feedback
