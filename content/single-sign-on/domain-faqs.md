@@ -4,7 +4,7 @@ keywords: Docker, Docker Hub, SSO FAQs, single sign-on
 title: Domains
 ---
 
-### Can i add sub-domains?
+### Can I add sub-domains?
 
 Yes, you can add sub-domains to your SSO , however all email addresses should also be on that domain. Verify that your DNS provider supports multiple txt fields for the same domain.
 
