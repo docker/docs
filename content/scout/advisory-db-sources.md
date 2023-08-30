@@ -1,8 +1,8 @@
 ---
-description: More details on the Advisory Database and CVE-to-package matching service
+description: More details on the advisory database and CVE-to-package matching service
   behind Docker Scout analysis.
 keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security
-title: Advisory Database sources and matching service
+title: Advisory database sources and matching service
 ---
 
 {{< include "scout-early-access.md" >}}
@@ -16,10 +16,9 @@ artifacts. This can lead to differing results between tools.
 
 To help you understand why different tools can provide different results when
 assessing software for vulnerabilities, this page explains how the Docker Scout
-Advisory Database vulnerability database and CVE-to-package matching service
-works.
+advisory database and CVE-to-package matching service works.
 
-## Docker Scout’s Advisory Database sources
+## Docker Scout’s advisory database sources
 
 Docker Scout creates and maintains its vulnerability database by ingesting and
 collating vulnerability data from multiple sources continuously. These
@@ -103,7 +102,7 @@ system versions to make more precise matches.
 In summary, Docker Scout’s technique improves matching accuracy and reduces the
 number of results that turn out to be false-positives.
 
-## Package ecosystems supported by the Docker Scout Advisory Database
+## Package ecosystems supported by Docker Scout
 
 By sourcing vulnerability data from the providers above, Docker Scout is able to support analyzing the following package ecosystems:
 
