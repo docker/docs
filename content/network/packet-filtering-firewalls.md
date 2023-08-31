@@ -160,16 +160,6 @@ on your system with `--iptables` enabled, Docker automatically creates a `firewa
 zone called `docker` and inserts all the network interfaces it creates (for example,
 `docker0`) into the `docker` zone to allow seamless networking.
 
-Consider running the following `firewalld` command to remove the docker interface from the zone.
-
-```console
-# Please substitute the appropriate zone and docker interface
-$ firewall-cmd --zone=trusted --remove-interface=docker0 --permanent
-$ firewall-cmd --reload
-```
-
-Restarting `dockerd` daemon inserts the interface into the `docker` zone.
-
 ## Docker and ufw
 
 [Uncomplicated Firewall](https://launchpad.net/ufw)
