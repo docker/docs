@@ -88,7 +88,9 @@ To create a `linux/amd64` builder:
 2. Create a builder that uses the `cloud` driver.
 
    ```console
-   $ docker buildx create --driver cloud --name hydrobuild <org>/<group>
+   $ docker buildx create --driver cloud --name hydrobuild \
+     --platform linux/amd64 \
+     <org>/<group>_linux-amd64
    ```
 
    Replace `<org>` with the Docker organization, and `<group>` with the name
@@ -184,9 +186,9 @@ $ docker buildx use hydrobuild --global
 > **Note**
 >
 > Changing your default builder with `docker buildx use` only changes the
-> default builder for the `docker buildx build` command. The shorthand `docker
-> build` command will still use the `default` builder unless you specify the
-> `--builder` flag explicitly.
+> default builder for the `docker buildx build` command. The `docker build`
+> command still uses the `default` builder, unless you specify the `--builder`
+> flag explicitly.
 >
 > If you use build scripts, such as `make`, we recommend that you update your
 > build commands from `docker build` to `docker buildx build`, to avoid any
@@ -256,6 +258,33 @@ jobs:
 
 This invokes the build from a GitHub Actions workflow, runs the build on
 Hydrobuild, and pushes the image to a Docker Hub registry.
+
+> **Note**
+>
+> The previous example uses a `push: true` configuration for the _Build and
+> push_ GitHub Action. This ensures that the build result is pushed to a
+> registry directly, rather than being loaded back to the image store of the
+> GitHub Actions runner. When using Hydrobuild in CI, this is the recommended
+> workflow, because it speeds up your builds and avoids unnecessary file
+> transfers.
+>
+> If you're not using `push: true`, and if you build an image with a `tag`,
+> Hydrobuild automatically loads the build results back to the client. If you
+> only want to build the artifact without loading the results (as a validation
+> step in pull requests, for example), you can add `outputs: type=cacheonly` to
+> the action configuration:
+>
+> ```yaml
+> - name: Build and push
+>   uses: docker/build-push-action@v4
+>   with:
+>     context: .
+>     tags: user/app:latest
+>     # if this runs in a pull request, export results to build cache
+>     outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || '' }}
+>     # if this doesn't run in a pull request, push to a registry
+>     push: ${{ github.event_name != 'pull_request' }}
+> ```
 
 ## Hydrobuild in Docker Desktop
 
