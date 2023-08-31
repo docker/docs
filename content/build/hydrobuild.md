@@ -88,7 +88,9 @@ To create a `linux/amd64` builder:
 2. Create a builder that uses the `cloud` driver.
 
    ```console
-   $ docker buildx create --driver cloud --name hydrobuild <org>/<group>
+   $ docker buildx create --driver cloud --name hydrobuild \
+     --platform linux/amd64 \
+     <org>/<group>_linux-amd64
    ```
 
    Replace `<org>` with the Docker organization, and `<group>` with the name
