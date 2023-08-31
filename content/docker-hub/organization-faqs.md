@@ -19,6 +19,10 @@ they need to do is select the organization from the
 [Organizations](https://hub.docker.com/orgs) page in Docker Hub, add the Docker ID/Email of the user, and then
 select the owner role from the drop-down menu. See [Organization owner](manage-a-team.md#organization-owner).
 
+### How do I know how many active users are part of my organization?
+
+If your organization uses a Software Asset Management tool, you can use it to find out how many users have Docker Desktop installed. If your organization doesn't use this software, you can run an internal survey to find out who is using Docker Desktop. See [Identify your Docker users and their Docker accounts](../docker-hub/onboard.md#step-1-identify-your-docker-users-and-their-docker-accounts). With a Docker Business subscription, you can manage members in your identity provider and automatically provision them to your Docker organization with [SSO](../single-sign-on/_index.md) or [SCIM](../docker-hub/scim.md).
+
 ### Do users first need to authenticate with Docker before an owner can add them to an organization?
 
 No. Organization owners can invite users through email and also choose a team for them to join within the invite.
@@ -43,7 +47,7 @@ revert it to a personal user account. For prerequisites and instructions, see
 
 ### Our users create Docker Hub accounts through self-service. How do we know when the total number of users for the requested licenses has been met? Is it possible to add more members to the organization than the total number of licenses?
 
-Currently, we don’t have a way to notify you. However, if the number of team
+There isn't any automatic notification when the total number of users for the requested licenses has been met. However, if the number of team
 members exceed the number of licenses, you will receive an error informing you
 to contact the administrator due to lack of seats.
 
