@@ -99,6 +99,8 @@ github.com/moby/buildkit v0.12.1-0.20230717122532-faa0cc7da353 h1:/ZIwqvOF3QKObJ
 github.com/moby/buildkit v0.12.1-0.20230717122532-faa0cc7da353/go.mod h1:+n9GmkxwBCjVz4u7wmiyh+oqvjIjQM+1zk3iJrWfdos=
 github.com/moby/buildkit v0.12.1-0.20230824004934-4376f3861b05 h1:oXcA1w1cswNzFW5TH5QoaAJ2zskZlFNsL8IHo28G3Os=
 github.com/moby/buildkit v0.12.1-0.20230824004934-4376f3861b05/go.mod h1:BIvNtlrvok2xTC734ZNhQVGayvMB1Dz8bFuArWTLnnM=
+github.com/moby/buildkit v0.12.1-0.20230830200556-05eb7287534b h1:VzIGQGWGnrDbzcQSJ28qTUAbNEtmszzuhUrzoqE/52Q=
+github.com/moby/buildkit v0.12.1-0.20230830200556-05eb7287534b/go.mod h1:7/l0VKIyp1hBcGZF2hRpfBgvc0beQ9/hBWw7S+1JM0s=
 github.com/moby/buildkit v0.12.1 h1:vvMG7EZYCiQZpTtXQkvyeyj7HzT1JHhDWj+/aiGIzLM=
 github.com/moby/buildkit v0.12.1/go.mod h1:adB4y0SxxX8trnrY+oEulb48ODLqPO6pKMF0ppGcCoI=
 github.com/moby/buildkit v0.12.2 h1:B7guBgY6sfk4dBlv/ORUxyYlp0UojYaYyATgtNwSCXc=

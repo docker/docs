@@ -11,8 +11,23 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.21.0
+{{< release-date date="2023-08-30" >}}
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.18.3
+
+### Bug fixes and enhancements
+- Changed `docker compose ps` and `docker compose ps --format=json` output to align with Docker CLI.
+- Added support for multi-document YAML files.
+- Added support for loading remote Compose files from Git repos with `include` (experimental).
+- Fixed incorrect proxy variables during build.
+- Fixed truncated container logs on container exit.
+- Fixed "no such service" errors when using `include` with `--profile`.
+- Fixed `.env` overrides when using `include`.
+
 ## 2.20.3
-{{< release-date date="2023-07-19" >}}
+{{< release-date date="2023-08-11" >}}
 
 ### Update
 - Dependencies upgrade: bump golang to 1.21.0
@@ -20,7 +35,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump buildkit to v0.12.1
 
 ### Bug fixes and enhancements
-- Added tar synchronisation in `watch` mode.
+- Improved speed and reliability of `watch` sync.
 - Added builder's name on the first build line.
 - Improved shell completion for `--project-directory` and `--profile`.
 - Fixed build issue with proxy configuration not passing to legacy builder.

@@ -45,13 +45,21 @@ infrastructure. Just connect to your builders, and start building.
 
 To get started with Hydrobuild, you need to:
 
-- Download and install Docker Desktop version 4.22.0 or later.
+- Download and install a version of Buildx that supports Hydrobuild.
+
 - Have a Docker ID that's part of a Docker organization participating in the
   [Hydrobuild early access program](https://www.docker.com/build-early-access-program/?utm_source=docs).
 
-When creating a Hydrobuild builder, you specify a builder endpoint to use. An
-endpoint represents a single, isolated builder. Builder endpoints use the
-following format:
+Docker Desktop 4.22.0 and later versions ship with a Hydrobuild-compatible
+Buildx binary. Alternatively, you can download and install the binary manually
+from [this repository](https://github.com/docker/buildx-desktop).
+
+## Connecting to Hydrobuild
+
+To start building with Hydrobuild, you must create a new builder using the
+`docker buildx create` command. The builder is connected to Hydrobuild through
+an endpoint that you specify. The endpoint represents a single, isolated
+builder. Builder endpoints have the following format:
 
 ```text
 cloud://<org>/<group>_<platform>
@@ -76,7 +84,10 @@ multiple builders of different native architectures. This gives you a
 high-performance build cluster for building multi-platform images natively. See
 [Create a multi-platform builder](#create-a-multi-platform-builder).
 
-The `cloud://` prefix is optional, and can be omitted.
+You can omit the `cloud://` protocol prefix from the endpoint when you create a
+builder using the `cloud` driver. The endpoint format then becomes
+`<org>/<group>_<platform>`. The `docker buildx ls` command shows the full
+endpoint URI, including the prefix.
 
 ### Create a single-platform builder
 
