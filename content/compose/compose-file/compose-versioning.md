@@ -69,7 +69,7 @@ section.
 > **Note** 
 >
 > If you're using [multiple Compose files](../multiple-compose-files/_index.md) or
-> [extending services](../multiple-compose-files/extends.md],
+> [extending services](../multiple-compose-files/extends.md),
 > each file must be of the same version - you cannot, for example,
 > mix version 1 and 2 in a single project.
 
