@@ -1,7 +1,7 @@
 command: docker scout repo list
 short: Repo Docker Scout
 long: |
-    The docker scout repo list command shows all repsitories in an organization.
+    The docker scout repo list command shows all repositories in an organization.
 usage: docker scout repo list ORG
 pname: docker scout repo
 plink: docker_scout_repo.yaml

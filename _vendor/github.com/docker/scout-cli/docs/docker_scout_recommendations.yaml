@@ -46,6 +46,15 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: org
+      value_type: string
+      description: Namespace of the Docker organization
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: output
       shorthand: o
       value_type: string

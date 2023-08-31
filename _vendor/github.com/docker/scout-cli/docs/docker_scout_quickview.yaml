@@ -11,6 +11,24 @@ usage: docker scout quickview [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
 plink: docker_scout.yaml
 options:
+    - option: env
+      value_type: string
+      description: Name of the environment
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: org
+      value_type: string
+      description: Namespace of the Docker organization
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: output
       shorthand: o
       value_type: string
@@ -37,6 +55,15 @@ options:
         Can only be used with --type archive.
       deprecated: false
       hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: stream
+      value_type: string
+      description: Name of stream
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false

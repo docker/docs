@@ -563,12 +563,24 @@ Reference:
       section:
       - path: /engine/reference/commandline/scout/
         title: docker scout
+      - path: /engine/reference/commandline/scout_cache/
+        title: docker scout cache
+      - path: /engine/reference/commandline/scout_cache_df/
+        title: docker scout cache df
+      - path: /engine/reference/commandline/scout_cache_prune/
+        title: docker scout cache prune
       - path: /engine/reference/commandline/scout_compare/
         title: docker scout compare
+      - path: /engine/reference/commandline/scout_config/
+        title: docker scout config
       - path: /engine/reference/commandline/scout_cves/
         title: docker scout cves
-      - path: /engine/reference/commandline/scout_entitlement/
-        title: docker scout entitlement
+      - path: /engine/reference/commandline/scout_enroll/
+        title: docker scout enroll
+      - path: /engine/reference/commandline/scout_environment/
+        title: docker scout environment
+      - path: /engine/reference/commandline/scout_policy/
+        title: docker scout policy
       - path: /engine/reference/commandline/scout_quickview/
         title: docker scout quickview
       - path: /engine/reference/commandline/scout_recommendations/
@@ -587,6 +599,8 @@ Reference:
         title: docker scout stream
       - path: /engine/reference/commandline/scout_version/
         title: docker scout version
+      - path: /engine/reference/commandline/scout_watch/
+        title: docker scout watch
     - path: /engine/reference/commandline/search/
       title: docker search
     - sectiontitle: docker secret

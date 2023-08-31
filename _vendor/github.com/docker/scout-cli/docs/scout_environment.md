@@ -1,7 +1,11 @@
-# docker scout stream
+# docker scout environment
 
 <!---MARKER_GEN_START-->
-Manage streams (experimental)
+Manage environments (experimental)
+
+### Aliases
+
+`docker scout environment`, `docker scout env`
 
 ### Options
 
@@ -17,32 +21,32 @@ Manage streams (experimental)
 
 ## Description
 
-The `docker scout stream` command lists the deployment streams and records an image to it.
+The `docker scout environment` command lists the environments and records images to it.
 
-Once recorded, streams can be referred to by their name, eg. in the `docker scout compare` command using `--to-stream`.
+Once recorded, environments can be referred to by their name, eg. in the `docker scout compare` command using `--to-env`.`
 
 ## Examples
 
-### List existing streams
+### List existing environments
 
 ```console
-$ %[1]s %[2]s
-prod-cluster-123
-stage-cluster-234
+$ docker scout environment
+prod
+staging
 ```
 
-### List images of a stream
+### List images of an environment
 
 ```console
-$ %[1]s %[2]s prod-cluster-123
+$ docker scout environment staging
 namespace/repo:tag@sha256:9a4df4fadc9bbd44c345e473e0688c2066a6583d4741679494ba9228cfd93e1b
 namespace/other-repo:tag@sha256:0001d6ce124855b0a158569c584162097fe0ca8d72519067c2c8e3ce407c580f
 ```
 
-### Record an image to a stream, for a specific platform
+### Record an image to an environment, for a specific platform
 
 ```console
-$ %[1]s %[2]s stage-cluster-234 namespace/repo:stage-latest --platform linux/amd64
+$ docker scout environment staging namespace/repo:stage-latest --platform linux/amd64
 ✓ Pulled
-✓ Successfully recorded namespace/repo:stage-latest in stream stage-cluster-234
+✓ Successfully recorded namespace/repo:stage-latest in environment staging
 ```

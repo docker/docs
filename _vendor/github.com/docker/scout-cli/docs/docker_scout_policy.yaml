@@ -1,14 +1,25 @@
-command: docker scout push
-short: Push an image or image index to Docker Scout (experimental)
+command: docker scout policy
+short: Display the policy results of an image (experimental)
 long: |
-    The `docker scout push` command allows to push an image or image index to Docker Scout.
-usage: docker scout push IMAGE
+    The `docker scout policy` command displays the policy results of an image if there are any.
+usage: docker scout policy [IMAGE | REPO]
 pname: docker scout
 plink: docker_scout.yaml
 options:
-    - option: author
+    - option: env
       value_type: string
-      description: Name of the author of the image
+      description: Name of the environment to compare to.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: exit-code
+      shorthand: e
+      value_type: bool
+      default_value: "false"
+      description: Return exit code '2' if policies are not met.
       deprecated: false
       hidden: false
       experimental: false
@@ -17,7 +28,7 @@ options:
       swarm: false
     - option: org
       value_type: string
-      description: Namespace of the Docker organization to which image will be pushed
+      description: Namespace of the Docker organization
       deprecated: false
       hidden: false
       experimental: false
@@ -34,19 +45,9 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: sbom
-      value_type: bool
-      default_value: "false"
-      description: Create and upload SBOMs
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: timestamp
+    - option: platform
       value_type: string
-      description: Timestamp of image or tag creation
+      description: Platform of image to pull policy results from.
       deprecated: false
       hidden: false
       experimental: false
@@ -65,10 +66,16 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
-    ### Push an image to Docker Scout
+    ### Display the policy results of an image
 
     ```console
-    $ docker scout push --org my-org registry.example.com/repo:tag
+    $ docker scout policy dockerscoutpolicy/customers-api-service:0.0.1
+    ```
+
+    ### Compare policy results for a repository in a specific environment
+
+    ```console
+    $ docker scout policy dockerscoutpolicy/customers-api-service --env production
     ```
 deprecated: false
 experimental: false
