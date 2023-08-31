@@ -129,14 +129,7 @@ builds:
    `<org>` should be the same as for first builder, but this time
    use `linux-arm64` for the platform suffix.
 
-## Use Hydrobuild
-
-To build your applications with Hydrobuild, you can:
-
-- [Use the Docker CLI](#cli) to build from your local development machine
-- [Use GitHub Actions](#github-actions) to build with Hydrobuild in CI
-
-### CLI
+## Use Hydrobuild from the CLI
 
 To run a build using Hydrobuild, invoke a build command and specify the
 name of the builder using the `--builder` flag.
@@ -198,32 +191,28 @@ $ docker buildx use hydrobuild --global
 > `docker buildx install` to make the default `docker build` command behave
 > like `docker buildx build`, without discrepancies.
 
-### GitHub Actions
+## Use Hydrobuild in CI
 
-You can use GitHub Actions in combination with Hydrobuild to achieve faster
-build times, while still leveraging the convenience of GitHub Action workflows.
+Using Hydrobuild in CI can speed up your build pipelines, which means less time
+spent waiting and context switching. You control your CI workflows as usual,
+and delegate the build execution to Hydrobuild.
 
-With this approach, your CI workflows run on a GitHub Actions runner, and the
-runner calls out to the builder to build the image.
+Building with Hydrobuild in CI involve the following steps:
 
-To use Hydrobuild with GitHub Actions, you must first sign in with your Docker
-ID, and then use the `lab` channel of `setup-buildx-action`:
+1. Sign in to a Docker account.
+2. Set up Buildx and create the builder.
+3. Run the build.
 
-```yaml
-- name: Log in to Docker Hub
-  uses: docker/login-action@v2
-  with:
-    username: ${{ secrets.DOCKERHUB_USERNAME }}
-    password: ${{ secrets.DOCKERHUB_TOKEN }}
-- name: Set up Docker Buildx
-  uses: docker/setup-buildx-action@v2
-  with:
-    version: "lab:latest"
-    driver: cloud
-    endpoint: "<org>/default"
-```
+When using Hydrobuild in CI, it's recommended that you push the result to a
+registry directly, rather than loading the image and then pushing it. Pushing
+directly speeds up your builds and avoids unnecessary file transfers.
 
-The following example shows a basic workflow for GitHub Actions with Hydrobuild.
+If you just want to build and discard the output, export the results to the
+build cache using `--output type=cacheonly`, or build without a `tag`.
+Hydrobuild automatically loads the build result if you build a tagged image.
+
+{{< tabs >}}
+{{< tab name="GitHub Actions" >}}
 
 ```yaml
 name: ci
@@ -254,39 +243,111 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          push: true
-          tags: user/app:latest
+          tags: "<org>/<image>"
+          # For pull requests, export results to the build cache.
+          # Otherwise, push to a registry.
+          outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
 ```
 
-This invokes the build from a GitHub Actions workflow, runs the build on
-Hydrobuild, and pushes the image to a Docker Hub registry.
+{{< /tab >}}
+{{< tab name="CircleCI" >}}
 
-> **Note**
->
-> The previous example uses a `push: true` configuration for the _Build and
-> push_ GitHub Action. This ensures that the build result is pushed to a
-> registry directly, rather than being loaded back to the image store of the
-> GitHub Actions runner. When using Hydrobuild in CI, this is the recommended
-> workflow, because it speeds up your builds and avoids unnecessary file
-> transfers.
->
-> If you're not using `push: true`, and if you build an image with a `tag`,
-> Hydrobuild automatically loads the build results back to the client. If you
-> only want to build the artifact without loading the results (as a validation
-> step in pull requests, for example), you can add `outputs: type=cacheonly` to
-> the action configuration:
->
-> ```yaml
-> - name: Build and push
->   uses: docker/build-push-action@v4
->   with:
->     context: .
->     tags: user/app:latest
->     # if this runs in a pull request, export results to build cache
->     outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || '' }}
->     # if this doesn't run in a pull request, push to a registry
->     push: ${{ github.event_name != 'pull_request' }}
-> ```
+```yaml
+version: 2.1
+
+jobs:
+  # Build multi-platform image and push to a registry
+  build_push:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+
+      - run: |
+          mkdir -vp ~/.docker/cli-plugins/
+          ARCH=amd64
+          BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+          curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+          chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      - run: docker buildx create --use --driver cloud "<org>/default"
+
+      - run: |
+          docker buildx build \
+          --platform linux/amd64,linux/arm64 \
+          --push \
+          --tag "<org>/<image>" .
+
+  # Build an image and discard the result
+  build_cache:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+
+      - run: |
+          mkdir -vp ~/.docker/cli-plugins/
+          ARCH=amd64
+          BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+          curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+          chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      - run: docker buildx create --use --driver cloud "<org>/default"
+
+      - run: |
+          docker buildx build \
+          --tag temp \
+          --output type=cacheonly \
+          .
+
+workflows:
+  pull_request:
+    jobs:
+      - build_cache
+  release:
+    jobs:
+      - build_push
+```
+
+{{< /tab >}}
+{{< tab name="Shell" >}}
+
+```bash
+#!/bin/bash
+
+# Get download link for latest buildx binary. Set $ARCH to the CPU architecture (e.g. amd64, arm64)
+ARCH=amd64
+BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+
+# Download docker buildx with Hyrdobuild support
+mkdir -vp ~/.docker/cli-plugins/
+curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+# Login to Docker Hub. For security reasons $DOCKER_PASS should be a Personal Access Token. See https://docs.docker.com/docker-hub/access-tokens/
+echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+
+# Connect to your builder and set it as the default builder
+docker buildx create --use --driver cloud "<org>/default"
+
+# Cache-only image build
+docker buildx build \
+    --tag temp \
+    --output type=cacheonly \
+    .
+
+# Build, tag, and push a multi-arch docker image
+docker buildx build \
+    --platform linux/amd64,linux/arm64 \
+    --push \
+    --tag "<org>/<image>" \
+    .
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Hydrobuild in Docker Desktop
 
