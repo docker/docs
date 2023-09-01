@@ -22,32 +22,7 @@ resources, see [CloudFormation stack template](#cloudformation-stack-template).
 
 The following diagram shows how the Docker Scout ECR integration works.
 
-```mermaid
-sequenceDiagram
-	autonumber
-	box User
-		participant User
-	end
-	box User's AWS
-		participant EventBridge
-		participant SNSTopic
-		participant SecretsManager
-	  participant ECR
-	end
-	box Docker Scout
-		participant Scout API
-	end
-
-	# During setup
-  SNSTopic ->> Scout: CloudFormation Stack Event
-  Scout ->> SecretsManager: Set up Scout credentials for EventBridge
-
-	# After integration
-  User ->> ECR: Push an image
-  EventBridge -->> Scout: Push image Event
-  Scout ->> ECR: Login, and pull image
-  ECR ->> Scout: Pull image
-```
+![How the ECR integration works](../../images/Scout-ECR.png)
 
 After the integration, Docker Scout automatically pulls and analyzes images
 that you push to the ECR registry. Metadata about your images are stored on the
