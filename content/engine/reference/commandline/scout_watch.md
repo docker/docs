@@ -1,7 +1,7 @@
 ---
 datafolder: scout-cli
-datafile: docker_scout_entitlement
-title: docker scout entitlement
+datafile: docker_scout_watch
+title: docker scout watch
 layout: cli
 ---
 
