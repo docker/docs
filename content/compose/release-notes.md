@@ -14,6 +14,10 @@ For more detailed information, see the [release notes in the Compose repo](https
 ## 2.21.0
 {{< release-date date="2023-08-30" >}}
 
+> **Note**
+>
+> - Format of docker compose ps and docker compose ps --format=json changed to better align with docker ps output: see [compose#10918](https://github.com/docker/compose/pull/10918)
+
 ### Update
 - Dependencies upgrade: bump compose-go to v1.18.3
 
