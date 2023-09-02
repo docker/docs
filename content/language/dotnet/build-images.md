@@ -144,6 +144,8 @@ Next, you'll need to run the `dotnet publish` command to build the project.
 RUN dotnet publish -c Release -o /publish
 ```
 
+Note: if you skipped ahead and are using the dotnet `7.0.200` SDK, the command will be `--property:PublishDir=/publish` instead of `-o /publish` (see [here](https://learn.microsoft.com/en-us/dotnet/core/compatibility/sdk/7.0/solution-level-output-no-longer-valid) for details).
+
 Next, you'll specify the image that you'll use to run the application, and define it as the `runtime` stage.
 
 ```dockerfile
