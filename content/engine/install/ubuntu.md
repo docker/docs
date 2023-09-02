@@ -132,7 +132,7 @@ Docker from the repository.
     
     > **Note**
     >
-    > If you use an Ubuntu derivative distro, such as Linux Mint,
+    > If you use an Ubuntu derivative distro, such as Linux Mint or Elementary OS,
     > you may need to use `UBUNTU_CODENAME` instead of `VERSION_CODENAME`.
 
 4. Update the `apt` package index:
