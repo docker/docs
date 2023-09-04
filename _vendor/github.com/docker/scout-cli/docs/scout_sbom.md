@@ -5,14 +5,14 @@ Generate or display SBOM of an image
 
 ### Options
 
-| Name                  | Type          | Default | Description                                                                                                               |
-|:----------------------|:--------------|:--------|:--------------------------------------------------------------------------------------------------------------------------|
-| `--format`            | `string`      | `json`  | Output format:<br>- list: list of packages of the image<br>- json: json representation of the SBOM                        |
-| `--only-package-type` | `stringSlice` |         | Comma separated list of package types (like apk, deb, rpm, npm, pypi, golang, etc)<br>Can only be used with --format list |
-| `-o`, `--output`      | `string`      |         | Write the report to a file.                                                                                               |
-| `--platform`          | `string`      |         | Platform of image to analyze                                                                                              |
-| `--ref`               | `string`      |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with --type archive.           |
-| `--type`              | `string`      | `image` | Type of the image to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>               |
+| Name                  | Type          | Default | Description                                                                                                                             |
+|:----------------------|:--------------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------|
+| `--format`            | `string`      | `json`  | Output format:<br>- list: list of packages of the image<br>- json: json representation of the SBOM                                      |
+| `--only-package-type` | `stringSlice` |         | Comma separated list of package types (like apk, deb, rpm, npm, pypi, golang, etc)<br>Can only be used with --format list               |
+| `-o`, `--output`      | `string`      |         | Write the report to a file.                                                                                                             |
+| `--platform`          | `string`      |         | Platform of image to analyze                                                                                                            |
+| `--ref`               | `string`      |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with --type archive.                         |
+| `--type`              | `string`      | `image` | Type of the image to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>- fs (directory or file)<br> |
 
 
 <!---MARKER_GEN_END-->

@@ -89,6 +89,7 @@ options:
         - image
         - oci-dir
         - archive (docker save tarball)
+        - fs (directory or file)
       deprecated: false
       hidden: false
       experimental: false
