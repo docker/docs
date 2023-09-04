@@ -32,6 +32,7 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
     [Ubuntu](../../engine/install/ubuntu.md/#set-up-the-repository) |
     [CentOS](../../engine/install/centos.md/#set-up-the-repository) |
     [Debian](../../engine/install/debian.md/#install-using-the-repository) |
+    [Raspberry Pi OS](../../engine/install/raspberry-pi-os.md/#install-using-the-repository) |
     [Fedora](../../engine/install/fedora.md/#set-up-the-repository) |
     [RHEL](../../engine/install/rhel.md/#set-up-the-repository) |
     [SLES](../../engine/install/sles.md/#set-up-the-repository).
