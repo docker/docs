@@ -29,7 +29,7 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
 
 1. Set up the repository. Find distro-specific instructions in:
 
-    [Ubuntu](../../engine/install/ubuntu.md/#set-up-the-repository) |
+    [Ubuntu](../../engine/install/ubuntu.md/#install-using-the-repository) |
     [CentOS](../../engine/install/centos.md/#set-up-the-repository) |
     [Debian](../../engine/install/debian.md/#install-using-the-repository) |
     [Raspberry Pi OS](../../engine/install/raspberry-pi-os.md/#install-using-the-repository) |
