@@ -78,69 +78,51 @@ You can install Docker Engine in different ways, depending on your needs:
   the easiest and quickest way to get started.
 
 - Set up and install Docker Engine from
-  [Docker's `apt` repository](#install-using-the-repository).
+  [Docker's Apt repository](#install-using-the-repository).
 
 - [Install it manually](#install-from-a-package) and manage upgrades manually.
 
 - Use a [convenience scripts](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
-### Install using the apt repository {#install-using-the-repository}
+### Install using the Apt repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
-need to set up the Docker repository. Afterward, you can install and update
+need to set up the Docker Apt repository. Afterward, you can install and update
 Docker from the repository.
 
-#### Set up the repository
+1. Set up Docker's Apt repository.
 
+   ```bash
+   # Add Docker's official GPG key:
+   sudo apt-get update
+   sudo apt-get install ca-certificates curl gnupg
+   sudo install -m 0755 -d /etc/apt/keyrings
+   curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+   sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-1.  Update the `apt` package index and install packages to allow `apt` to use a
-    repository over HTTPS:
-
-    ```console
-    $ sudo apt-get update
-    $ sudo apt-get install ca-certificates curl gnupg
-    ```
-
-2.  Add Docker's official GPG key:
-
-    ```console
-    $ sudo install -m 0755 -d /etc/apt/keyrings
-    $ curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
-    ```
-
-3.  Use the following command to set up the repository:
-
-    ```console
-    $ echo \
-      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
-      "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-
-    > **Note**
-    >
-    > If you use a derivative distro, such as Kali Linux,
-    > you may need to substitute the part of this command that's expected to
-    > print the version codename:
-    >
-    > ```console
-    > $(. /etc/os-release && echo "$VERSION_CODENAME")
-    > ```
-
-4. Update the `apt` package index:
-
-   ```console
-   $ sudo apt-get update
+   # Add the repository to Apt sources:
+   echo \
+     "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
+     "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   sudo apt-get update
    ```
 
-#### Install Docker Engine
+   > **Note**
+   >
+   > If you use a derivative distro, such as Kali Linux,
+   > you may need to substitute the part of this command that's expected to
+   > print the version codename:
+   >
+   > ```console
+   > $(. /etc/os-release && echo "$VERSION_CODENAME")
+   > ```
 
-1. Install Docker Engine, containerd, and Docker Compose.
+2. Install the Docker packages.
 
-  {{< tabs >}}
-  {{< tab name="Latest" >}}
+   {{< tabs >}}
+   {{< tab name="Latest" >}}
 
    To install the latest version, run:
 
@@ -148,11 +130,11 @@ Docker from the repository.
    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
   
-  {{< /tab >}}
-  {{< tab name="Specific version" >}}
+   {{< /tab >}}
+   {{< tab name="Specific version" >}}
 
-   To install a specific version of Docker Engine, start by listing the available
-   versions in the repository:
+   To install a specific version of Docker Engine, start by listing the
+   available versions in the repository:
 
    ```console
    # List the available versions:
@@ -160,7 +142,7 @@ Docker from the repository.
 
    5:24.0.0-1~debian.11~bullseye
    5:23.0.6-1~debian.11~bullseye
-   <...>
+   ...
    ```
 
    Select the desired version and install:
@@ -170,11 +152,11 @@ Docker from the repository.
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
   
-  {{< /tab >}}
-  {{< /tabs >}}
+   {{< /tab >}}
+   {{< /tabs >}}
 
-2. Verify that the Docker Engine installation is successful by running the
-   `hello-world` image:
+3. Verify that the installation is successful by running the `hello-world`
+   image:
 
    ```console
    $ sudo docker run hello-world
@@ -189,9 +171,9 @@ You have now successfully installed and started Docker Engine.
 
 #### Upgrade Docker Engine
 
-To upgrade Docker Engine, follow the
-[installation instructions](#install-docker-engine), choosing the new version
-you want to install.
+To upgrade Docker Engine, follow step 2 of the
+[installation instructions](#install-using-the-repository),
+choosing the new version you want to install.
 
 ### Install from a package
 
