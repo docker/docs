@@ -50,7 +50,7 @@ To get started with Hydrobuild, you need to:
 - Have a Docker ID that's part of a Docker organization participating in the
   [Hydrobuild early access program](https://www.docker.com/build-early-access-program/?utm_source=docs).
 
-Docker Desktop 4.22.0 and later versions ship with a Hydrobuild-compatible
+Docker Desktop 4.23.0 and later versions ship with a Hydrobuild-compatible
 Buildx binary. Alternatively, you can download and install the binary manually
 from [this repository](https://github.com/docker/buildx-desktop).
 
@@ -61,30 +61,18 @@ To start building with Hydrobuild, you must create a new builder using the
 an endpoint that you specify. The endpoint represents a single, isolated
 builder. Builder endpoints have the following format:
 
-```text
-cloud://<org>/default_<platform>
-```
+cloud://<org>/default
 
-- `<org>` is the Docker organization that the builder is provisioned for
-- `<platform>` is the native OS and architecture of the builder
+`<org>` is the Docker organization that the builder is provisioned for.
 
-The platform suffix is optional, and if omitted creates a `linux/amd64` builder
-by default. The supported values for `<platform>` are:
-
-- `linux-amd64`
-- `linux-arm64`
-
-You can use the platform suffix to create a multi-node builder, with native
-builders of different architectures. This gives you a high-performance build
-cluster for building multi-platform images. See [Create a multi-platform
-builder](#create-a-multi-platform-builder).
+The builders have native support for the `linux/amd64` and `linux/arm64`
+architectures by default. This gives you a high-performance build cluster for
+building multi-platform images natively.
 
 You can omit the `cloud://` protocol prefix from the endpoint when you create a
 builder using the `cloud` driver.
 
-### Create a single-platform builder
-
-To create a `linux/amd64` builder:
+### Create a builder
 
 1. Sign in to your Docker ID using the Docker Desktop UI or the `docker login`
    command.
@@ -92,42 +80,10 @@ To create a `linux/amd64` builder:
 2. Create a builder that uses the `cloud` driver.
 
    ```console
-   $ docker buildx create --driver cloud --name hydrobuild \
-     --platform linux/amd64 \
-     <org>/default_linux-amd64
+   $ docker buildx create --driver cloud --name hydrobuild <org>/default
    ```
 
    Replace `<org>` with the Docker organization.
-
-### Create a multi-platform builder
-
-To create a builder with support for native `linux/amd64` and `linux/arm64`
-builds:
-
-1. Sign in to your Docker ID using the Docker Desktop UI or the `docker login`
-   command.
-
-2. Create a `linux/amd64` builder that uses the `cloud` driver.
-
-   ```console
-   $ docker buildx create --driver cloud --name hydrobuild \
-     --platform linux/amd64 \
-     <org>/default_linux-amd64
-   ```
-
-   Replace `<org>` with the Docker organization.
-
-3. Create a `linux/arm64` builder and append it to the `hydrobuild` builder you
-   just created.
-
-   ```console
-   $ docker buildx create --append --name hydrobuild \
-     --platform linux/arm64 \
-     <org>/default_linux-arm64
-   ```
-
-   `<org>` should be the same as for first builder, but this time
-   use `linux-arm64` for the platform suffix.
 
 ## Use Hydrobuild from the CLI
 
@@ -135,25 +91,25 @@ To run a build using Hydrobuild, invoke a build command and specify the
 name of the builder using the `--builder` flag.
 
 ```console
-$ docker buildx build --builder hydrobuild --tag myorg/some-tag .
+$ docker buildx build --builder hydrobuild --tag <org>/<image> .
 ```
 
 > **Note**
 >
-> Specifying `--tag` ensures that the build result gets exported to your local
-> image store when the build finishes. If you want to download the results from
-> Hydrobuild without specifying a tag, you must pass the `--load` flag.
+> Building with `--tag` loads the build result to the local image store
+> automatically when the build finishes. To build without a tag and load the
+> result, you must pass the `--load` flag.
 >
 > If you use the containerd image store, you must always pass `--load` to
 > download the results, even if you build with a tag.
 
-If you created a [multi-platform builder](#create-a-multi-platform-builder),
-you can build multi-platform images using the `--platform` flag:
+To build a multi-platform image and push it to a registry:
 
 ```console
 $ docker buildx build --builder hydrobuild \
   --platform linux/amd64,linux/arm64 \
-  --tag myorg/some-tag --push .
+  --tag <org>/<image> \
+  --push .
 ```
 
 > **Note**
