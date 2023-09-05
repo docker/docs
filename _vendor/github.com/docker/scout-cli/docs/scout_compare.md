@@ -29,8 +29,8 @@ Compare two images and display differences (experimental)
 | `--to-env`            | `string`      |         | Name of environment to compare to                                                                                                                                              |
 | `--to-latest`         |               |         | Latest image processed to compare to                                                                                                                                           |
 | `--to-ref`            | `string`      |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with --type archive.                                                                |
-| `--to-type`           | `string`      | `image` | Image type to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>                                                                           |
-| `--type`              | `string`      | `image` | Type of the image to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>                                                                    |
+| `--to-type`           | `string`      | `image` | Image type to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>- fs (directory or file)<br>                                               |
+| `--type`              | `string`      | `image` | Type of the image to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>- fs (directory or file)<br>                                        |
 
 
 <!---MARKER_GEN_END-->

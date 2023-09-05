@@ -11,7 +11,6 @@ cname:
     - docker scout cves
     - docker scout enroll
     - docker scout environment
-    - docker scout policy
     - docker scout quickview
     - docker scout recommendations
     - docker scout repo
@@ -23,7 +22,6 @@ clink:
     - docker_scout_cves.yaml
     - docker_scout_enroll.yaml
     - docker_scout_environment.yaml
-    - docker_scout_policy.yaml
     - docker_scout_quickview.yaml
     - docker_scout_recommendations.yaml
     - docker_scout_repo.yaml
