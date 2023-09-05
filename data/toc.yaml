@@ -1404,6 +1404,8 @@ Manuals:
       title: Prune unused objects
     - path: /config/formatting/
       title: Format command and log output
+    - path: /config/filter/
+      title: Filter commands
     - path: /config/containers/start-containers-automatically/
       title: Start containers automatically
     - path: /config/labels-custom-metadata/

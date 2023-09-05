@@ -613,3 +613,7 @@
   - /go/build-cache-backends/
 "/build/exporters/":
   - /go/build-exporters/
+
+# CLI backlinks
+"/config/filter/":
+  - /go/filter/
