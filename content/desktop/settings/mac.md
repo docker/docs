@@ -62,9 +62,6 @@ If you choose the integrated terminal, you can run commands in a running contain
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
-- **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
-
 - **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively. 
 
 ## Resources
@@ -291,5 +288,6 @@ On the **Advanced** tab, you can reconfigure your initial installation settings:
 
 - **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#binding-privileged-ports).
 
-For more information on each configuration
-and use case, see [Permission requirements](../mac/permission-requirements.md).
+  For more information on each configuration and use case, see [Permission requirements](../mac/permission-requirements.md).
+
+- **Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
