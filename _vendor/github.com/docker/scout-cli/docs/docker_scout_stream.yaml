@@ -8,15 +8,6 @@ usage: docker scout stream [STREAM] [IMAGE]
 pname: docker scout
 plink: docker_scout.yaml
 options:
-    - option: app
-      value_type: string
-      description: Name of application the image is a part of
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
     - option: org
       value_type: string
       description: Namespace of the Docker organization
