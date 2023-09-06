@@ -192,26 +192,25 @@ EOF
 
 Now, start your stack:
 
-    docker compose up -d
+    $ docker compose up -d
 
 Sign in with a "push" authorized user (using `testuserpush` and `testpasswordpush`), then tag and push your first image:
 
   ```console
-  docker login myregistrydomain.com:5043
-  docker tag ubuntu myregistrydomain.com:5043/test
-  docker push myregistrydomain.com:5043/test
+  $ docker login myregistrydomain.com:5043
+  $ docker tag ubuntu myregistrydomain.com:5043/test
+  $ docker push myregistrydomain.com:5043/test
   ```
 
 Now, sign in in with a "pull-only" user (using `testuser` and `testpassword`), then pull back the image:
 
   ```console
-  docker login myregistrydomain.com:5043
-  docker pull myregistrydomain.com:5043/test
+  $ docker login myregistrydomain.com:5043
+  $ docker pull myregistrydomain.com:5043/test
   ```
 
 Verify that the "pull-only" can NOT push:
 
   ```console
-  docker push myregistrydomain.com:5043/test
+  $ docker push myregistrydomain.com:5043/test
   ```
-  

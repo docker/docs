@@ -12,7 +12,7 @@ images, available in different tagged versions.
 For example, with the image `distribution/registry`, with tag `2.1`, users interact with  with a registry by using Docker push and pull commands:
 
   ```console
-  docker pull registry-1.docker.io/distribution/registry:2.1
+  $ docker pull registry-1.docker.io/distribution/registry:2.1
   ```
 
 Storage itself is delegated to drivers. The default storage driver is the local
