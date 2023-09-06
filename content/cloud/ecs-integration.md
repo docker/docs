@@ -13,7 +13,7 @@ aliases:
 
 ## Overview
 
-The Docker Compose CLI enables developers to use native Docker commands to run applications in Amazon Elastic Container Service (ECS) when building cloud-native applications.
+The Docker Compose CLI lets developers use native Docker commands to run applications in Amazon Elastic Container Service (ECS) when building cloud-native applications.
 
 The integration between Docker and Amazon ECS allows developers to use the Docker Compose CLI to:
 
@@ -30,6 +30,7 @@ To deploy Docker containers on ECS, you must meet the following requirements:
 
     - [Download for Mac](../desktop/install/mac-install.md)
     - [Download for Windows](../desktop/install/windows-install.md)
+    - [Download for Linux](../desktop/install/linux-install.md)
 
     Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
@@ -106,7 +107,7 @@ the setup command lets you select an existing AWS profile to connect to Amazon.
 Otherwise, you can create a new profile by passing an
 [AWS access key ID and a secret access key](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys).
 Finally, you can configure your ECS context to retrieve AWS credentials by `AWS_*` environment variables, which is a common way to integrate with
-third-party tools and single-sign-on providers.
+third-party tools and Single Sign-On providers.
 
 ```console
 ? Create a Docker context using:  [Use arrows to move, type to filter]
