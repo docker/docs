@@ -594,10 +594,6 @@
 "/scout/integrations/registry/ecr/":
   - "/go/scout-ecr/"
 
-# Telepresence
-"/develop/remote-development/":
-  - /go/telepresence/
-
 # Build links
 "/desktop/use-desktop/builds/":
   - /go/builds/

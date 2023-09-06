@@ -17,9 +17,9 @@ The Docker Azure Integration enables developers to use native Docker commands to
 
 In addition, the integration between Docker and Microsoft developer technologies allow developers to use the Docker CLI to:
 
-- Easily log into Azure
+- Sign in to Azure
 - Set up an ACI context in one Docker command allowing you to switch from a local context to a cloud context and run applications quickly and easily
-- Simplify single container and multi-container application development using the Compose specification, allowing a developer to invoke fully Docker-compatible commands seamlessly for the first time natively within a cloud container service
+- Simplify single container and multi-container application development using the Compose Specification, allowing a developer to invoke fully Docker-compatible commands seamlessly for the first time natively within a cloud container service
 
 Also see the [full list of container features supported by ACI](aci-container-features.md) and [full list of compose features supported by ACI](aci-compose-features.md).
 
@@ -31,6 +31,7 @@ To deploy Docker containers on Azure, you must meet the following requirements:
 
     - [Download for Mac](../desktop/install/mac-install.md)
     - [Download for Windows](../desktop/install/windows-install.md)
+    - [Download for Linux](../desktop/install/linux-install.md)
 
     Alternatively, install the [Docker Compose CLI for Linux](#install-the-docker-compose-cli-on-linux).
 
@@ -43,35 +44,35 @@ Docker not only runs containers locally, but also enables developers to seamless
 The following sections contain instructions on how to deploy your Docker containers on ACI.
 Also see the [full list of container features supported by ACI](aci-container-features.md).
 
-### Log into Azure
+### Sign in to Azure
 
-Run the following commands to log into Azure:
+Run the following commands to sign in to Azure:
 
 ```console
 $ docker login azure
 ```
 
-This opens your web browser and prompts you to enter your Azure login credentials.
+This opens your web browser and prompts you to enter your Azure sign in credentials.
 If the Docker CLI cannot open a browser, it will fall back to the [Azure device code flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code) and lets you connect manually.
-Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/) login is separated from the Docker CLI Azure login.
+Note that the [Azure command line](https://docs.microsoft.com/en-us/cli/azure/) sign in is separated from the Docker CLI Azure sign in.
 
-Alternatively, you can log in without interaction (typically in
+Alternatively, you can sign in without interaction (typically in
 scripts or continuous integration scenarios), using an Azure Service
 Principal, with `docker login azure --client-id xx --client-secret yy --tenant-id zz`
 
 >**Note**
 >
-> Logging in through the Azure Service Provider obtains an access token valid
+> Signing in through the Azure Service Provider obtains an access token valid
 for a short period (typically 1h), but it does not allow you to automatically
-and transparently refresh this token. You must manually re-login
-when the access token has expired when logging in with a Service Provider.
+and transparently refresh this token. You must manually re-authenticate
+when the access token has expired when signing in with a Service Provider.
 
 You can also use the `--tenant-id` option alone to specify a tenant, if
 you have several ones available in Azure.
 
 ### Create an ACI context
 
-After you have logged in, you need to create a Docker context associated with ACI to deploy containers in ACI.
+After you have signed in, you need to create a Docker context associated with ACI to deploy containers in ACI.
 Creating an ACI context requires an Azure subscription, a [resource group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal), and a region.
 For example, let us create a new context called `myacicontext`:
 
@@ -79,7 +80,7 @@ For example, let us create a new context called `myacicontext`:
 $ docker context create aci myacicontext
 ```
 
-This command automatically uses your Azure login credentials to identify your subscription IDs and resource groups. You can then interactively select the subscription and group that you would like to use. If you prefer, you can specify these options in the CLI using the following flags: `--subscription-id`,
+This command automatically uses your Azure sign in credentials to identify your subscription IDs and resource groups. You can then interactively select the subscription and group that you would like to use. If you prefer, you can specify these options in the CLI using the following flags: `--subscription-id`,
 `--resource-group`, and `--location`.
 
 If you don't have any existing resource groups in your Azure account, the `docker context create aci myacicontext` command creates one for you. You don’t have to specify any additional options to do this.
@@ -94,7 +95,7 @@ default *           moby              Current DOCKER_HOST based configuration   
 
 ### Run a container
 
-Now that you've logged in and created an ACI context, you can start using Docker commands to deploy containers on ACI.
+Now you can start using Docker commands to deploy containers on ACI.
 
 There are two ways to use your new ACI context. You can use the `--context` flag with the Docker command to specify that you would like to run the command using your newly created ACI context.
 
@@ -144,7 +145,7 @@ You can also deploy and manage multi-container applications defined in Compose f
 All containers in the same Compose application are started in the same container group. Service discovery between the containers works using the service name specified in the Compose file.
 Name resolution between containers is achieved by writing service names in the `/etc/hosts` file that is shared automatically by all containers in the container group.
 
-Also see the [full list of compose features supported by ACI](aci-compose-features.md).
+Also see the [full list of Compose features supported by ACI](aci-compose-features.md).
 
 1. Ensure you are using your ACI context. You can do this either by specifying the `--context myacicontext` flag or by setting the default context using the command  `docker context use myacicontext`.
 
