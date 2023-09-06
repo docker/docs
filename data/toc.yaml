@@ -131,8 +131,6 @@ Guides:
     title: Dockerfile best practices
   - path: /develop/security-best-practices/
     title: Security best practices
-  - path: /develop/remote-development/
-    title: Remote development
 
 - sectiontitle: Build with Docker
   section:
