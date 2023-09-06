@@ -14,13 +14,13 @@ This topic covers recommended best practices and methods for building
 efficient images.
 
 Docker builds images automatically by reading the instructions from a
-Dockerfile -- a text file that contains all commands, in order, needed to
+Dockerfile which is a text file that contains all commands, in order, needed to
 build a given image. A Dockerfile adheres to a specific format and set of
 instructions which you can find at [Dockerfile reference](../../engine/reference/builder.md).
 
 A Docker image consists of read-only layers each of which represents a
 Dockerfile instruction. The layers are stacked and each one is a delta of the
-changes from the previous layer. The following is the contents of an example Dockerfile:
+changes from the previous layer. 
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -31,7 +31,7 @@ RUN make /app
 CMD python /app/app.py
 ```
 
-Each instruction creates one layer:
+In the previous example, each instruction creates one layer:
 
 - `FROM` creates a layer from the `ubuntu:22.04` Docker image.
 - `COPY` adds files from your Docker client's current directory.
@@ -62,13 +62,13 @@ stateless fashion.
 
 See [Build context](../../build/building/context.md) for more information.
 
-### Pipe Dockerfile through stdin
+### Pipe a Dockerfile through stdin
 
 Docker has the ability to build images by piping a Dockerfile through stdin
 with a local or remote build context. Piping a Dockerfile through stdin
 can be useful to perform one-off builds without writing a Dockerfile to disk,
 or in situations where the Dockerfile is generated, and should not persist
-afterwards.
+afterward.
 
 > **Note**
 >
@@ -76,7 +76,7 @@ afterwards.
 > for convenience, but any method to provide the Dockerfile on stdin can be
 > used.
 > 
-> For example, the following commands are equivalent: 
+> For example, the following commands are equal: 
 > 
 > ```bash
 > echo -e 'FROM busybox\nRUN echo "hello world"' | docker build -
@@ -157,7 +157,7 @@ Docker to read the Dockerfile from stdin:
 docker build [OPTIONS] -f- PATH
 ```
 
-The example below uses the current directory (`.`) as the build context, and builds
+The following example uses the current directory (`.`) as the build context, and builds
 an image using a Dockerfile that is passed through stdin using a [here
 document](https://tldp.org/LDP/abs/html/here-docs.html).
 
@@ -192,7 +192,7 @@ This syntax can be useful in situations where you want to build an image from a
 repository that doesn't contain a Dockerfile, or if you want to build with a custom
 Dockerfile, without maintaining your own fork of the repository.
 
-The example below builds an image using a Dockerfile from stdin, and adds
+The following example builds an image using a Dockerfile from stdin, and adds
 the `hello.c` file from the [hello-world](https://github.com/docker-library/hello-world) repository on GitHub.
 
 ```bash
@@ -887,8 +887,8 @@ These Official Images have exemplary Dockerfiles:
 
 ## Additional resources:
 
-* [Dockerfile Reference](../../engine/reference/builder.md)
-* [More about Automated Builds](../../docker-hub/builds/index.md)
-* [Guidelines for Creating Docker Official Images](../../docker-hub/official_images.md)
+* [Dockerfile reference](../../engine/reference/builder.md)
+* [More about Automated builds](../../docker-hub/builds/index.md)
+* [Guidelines for creating Docker Official Images](../../docker-hub/official_images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker)
-* [More about Base Images](../../build/building/base-images.md)
+* [More about base images](../../build/building/base-images.md)
