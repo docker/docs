@@ -27,7 +27,7 @@ Production services operation on macOS is out of scope of this document. Be sure
 
 To set up golang on your machine, run:
 
-    ```go
+    ```
     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
     source ~/.gvm/scripts/gvm
     gvm install go1.4.2
@@ -38,7 +38,7 @@ See [How to Write Go Code](https://golang.org/doc/code.html), for more details.
 
 ## Checkout the Docker Distribution source tree
 
-    ```go
+    ```
     mkdir -p $GOPATH/src/github.com/docker
     git clone https://github.com/docker/distribution.git $GOPATH/src/github.com/docker/distribution
     cd $GOPATH/src/github.com/docker/distribution
@@ -46,7 +46,7 @@ See [How to Write Go Code](https://golang.org/doc/code.html), for more details.
 
 ## Build the binary
 
-    ```go
+    ```
     GOPATH=$(PWD)/Godeps/_workspace:$GOPATH make binaries
     sudo mkdir -p /usr/local/libexec
     sudo cp bin/registry /usr/local/libexec/registry
@@ -56,7 +56,7 @@ See [How to Write Go Code](https://golang.org/doc/code.html), for more details.
 
 Copy the registry configuration file in place:
 
-    ```go
+    ```
     mkdir /Users/Shared/Registry
     cp docs/recipes/osx/config.yml /Users/Shared/Registry/config.yml
     ```
@@ -65,7 +65,7 @@ Copy the registry configuration file in place:
 
 Copy the Docker registry plist into place:
 
-    ```go
+    ```
     plutil -lint docs/recipes/osx/com.docker.registry.plist
     cp docs/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
     chmod 644 ~/Library/LaunchAgents/com.docker.registry.plist
@@ -73,19 +73,19 @@ Copy the Docker registry plist into place:
 
 Start the Docker registry:
 
-    ```go
+    ```
     launchctl load ~/Library/LaunchAgents/com.docker.registry.plist
     ```
 
 ### Restart the docker registry service
 
-    ```go
+    ```
     launchctl stop com.docker.registry
     launchctl start com.docker.registry
     ```
 
 ### Unload the docker registry service
 
-    ```go
+    ```
     launchctl unload ~/Library/LaunchAgents/com.docker.registry.plist
     ```

@@ -198,16 +198,16 @@ Review the [requirements](index.md#requirements), then follow these steps.
 
 Now, start your stack:
 
-    ```console
-    $ docker compose up -d
-    ```
+  ```console
+  $ docker compose up -d
+  ```
 
 Login with a "push" authorized user (using `testuser` and `testpassword`), then
 tag and push your first image:
 
-    ```console
-    $ docker login -u=testuser -p=testpassword -e=root@example.ch myregistrydomain.com:5043
-    $ docker tag ubuntu myregistrydomain.com:5043/test
-    $ docker push myregistrydomain.com:5043/test
-    $ docker pull myregistrydomain.com:5043/test
-    ```
+  ```console
+  $ docker login -u=testuser -p=testpassword -e=root@example.ch myregistrydomain.com:5043
+  $ docker tag ubuntu myregistrydomain.com:5043/test
+  $ docker push myregistrydomain.com:5043/test
+  $ docker pull myregistrydomain.com:5043/test
+  ```
