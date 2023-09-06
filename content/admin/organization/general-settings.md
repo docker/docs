@@ -1,7 +1,7 @@
 ---
 description: Learn how about general settings for organizations.
 keywords: organization, settings
-title: General settings
+title: General organization settings
 ---
 
 {{< include "admin-early-access.md" >}}

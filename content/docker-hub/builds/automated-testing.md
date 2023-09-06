@@ -65,7 +65,7 @@ in the `test.yml` files.
 ## Enable Automated tests on a repository
 
 To enable testing on a source code repository, you must first create an
-associated build-repository in Docker Hub.  Your `Autotest` settings are
+associated build-repository in Docker Hub. Your `Autotest` settings are
 configured on the same page as [automated builds](index.md), however
 you do not need to enable Autobuilds to use `Autotest`. Autobuild is enabled per
 branch or tag, and you do not need to enable it at all.

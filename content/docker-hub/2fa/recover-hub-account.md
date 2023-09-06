@@ -1,8 +1,8 @@
 ---
-description: Recover your Docker Hub account
+description: Recover your Docker account
 keywords: Docker, docker, registry, security, Docker Hub, authentication, two-factor
   authentication
-title: Recover your Docker Hub account
+title: Recover your Docker account
 ---
 
 If you have lost access to both your two-factor authentication application and your recovery code:
