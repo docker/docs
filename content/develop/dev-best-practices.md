@@ -5,8 +5,9 @@ keywords: application, development
 ---
 
 The following development patterns have proven to be helpful for people
-building applications with Docker. If you have discovered something we should
-add,
+building applications with Docker. 
+
+If you have discovered something we should add,
 [let us know]({{% param "repo" %}}/issues/new?template=doc_issue.yml&labels=status%2Ftriage).
 
 ## How to keep your images small
@@ -96,5 +97,5 @@ keep image size small:
 | Development                                                         | Production                                                                                                                                                                                                                                       |
 |:--------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Use bind mounts to give your container access to your source code.  | Use volumes to store container data.                                                                                                                                                                                                             |
-| Use Docker Desktop for Mac or Docker Desktop for Windows.           | Use Docker Engine, if possible with [userns mapping](../engine/security/userns-remap.md) for greater isolation of Docker processes from host processes.                                                                                          |
+| Use Docker Desktop for Mac, Linux, or Windows.           | Use Docker Engine, if possible with [userns mapping](../engine/security/userns-remap.md) for greater isolation of Docker processes from host processes.                                                                                          |
 | Don't worry about time drift.                                       | Always run an NTP client on the Docker host and within each container process and sync them all to the same NTP server. If you use swarm services, also ensure that each Docker node syncs its clocks to the same time source as the containers. |
