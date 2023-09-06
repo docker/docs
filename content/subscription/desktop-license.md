@@ -13,7 +13,7 @@ Our [Docker Subscription Service Agreement](https://www.docker.com/legal/docker-
 - Paid subscriptions are also required for government entities.
 - The Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 
-Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/) and [Docker subscription FAQs](https://www.docker.com/pricing/faq) to learn how companies using Docker Desktop may be affected.
+Read the [Blog](https://www.docker.com/blog/updating-product-subscriptions/) and [Docker subscription FAQs](https://www.docker.com/pricing/faq) to learn how this may affect companies using Docker Desktop.
 
 > **Note**
 >
