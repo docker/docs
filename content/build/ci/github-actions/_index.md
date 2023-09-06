@@ -1,13 +1,10 @@
 ---
 title: Introduction to GitHub Actions
-description: 'Docker maintains a set of official GitHub Actions for building Docker
-  images.
-
-  '
+description: Docker maintains a set of official GitHub Actions for building Docker images.
 keywords: ci, github actions, gha,  build, introduction, tutorial
 aliases:
-- /ci-cd/github-actions/
-- /build/ci/github-actions/examples/
+  - /ci-cd/github-actions/
+  - /build/ci/github-actions/examples/
 ---
 
 GitHub Actions is a popular CI/CD platform for automating your build, test, and

@@ -1,13 +1,14 @@
 ---
-title: Drivers overview
+title: Build drivers
+description: Build drivers are configurations for how and where the BuildKit backend runs.
 keywords: build, buildx, driver, builder, docker-container, kubernetes, remote
 aliases:
-- /build/buildx/drivers/
-- /build/building/drivers/
-- /build/buildx/multiple-builders/
+  - /build/buildx/drivers/
+  - /build/building/drivers/
+  - /build/buildx/multiple-builders/
 ---
 
-Buildx drivers are configurations for how and where the BuildKit backend runs.
+Build drivers are configurations for how and where the BuildKit backend runs.
 Driver settings are customizable and allows fine-grained control of the builder.
 Buildx supports the following drivers:
 
@@ -33,8 +34,7 @@ The following table outlines some differences between drivers.
 
 ## What's next
 
-Read about each of the Buildx drivers to learn about how they work and how to
-use them:
+Read about each driver:
 
 - [Docker driver](./docker.md)
 - [Docker container driver](./docker-container.md)

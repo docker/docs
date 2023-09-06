@@ -1,5 +1,6 @@
 ---
 title: Named contexts with GitHub Actions
+description: Use additional contexts in multi-stage builds with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, context
 ---
 
@@ -20,7 +21,6 @@ FROM alpine
 RUN echo "Hello World"
 ```
 
-
 ```yaml
 name: ci
 
@@ -33,14 +33,11 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Build
+      - name: Build
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -48,7 +45,6 @@ jobs:
             alpine=docker-image://alpine:3.16
           tags: myimage:latest
 ```
-
 
 ## Use image in subsequent steps
 
@@ -64,7 +60,6 @@ FROM alpine
 RUN echo "Hello World"
 ```
 
-
 ```yaml
 name: ci
 
@@ -77,24 +72,20 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           driver: docker
-      -
-        name: Build base image
+      - name: Build base image
         uses: docker/build-push-action@v4
         with:
           context: ./base
           file: ./base/Dockerfile
           load: true
           tags: my-base-image:latest
-      -
-        name: Build
+      - name: Build
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -102,7 +93,6 @@ jobs:
             alpine=docker-image://my-base-image:latest
           tags: myimage:latest
 ```
-
 
 ## Using with a container builder
 
@@ -135,28 +125,23 @@ jobs:
         ports:
           - 5000:5000
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           # network=host driver-opt needed to push to local registry
           driver-opts: network=host
-      -
-        name: Build base image
+      - name: Build base image
         uses: docker/build-push-action@v4
         with:
           context: ./base
           file: ./base/Dockerfile
           tags: localhost:5000/my-base-image:latest
           push: true
-      -
-        name: Build
+      - name: Build
         uses: docker/build-push-action@v4
         with:
           context: .

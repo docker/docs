@@ -1,6 +1,7 @@
 ---
 title: Remote Bake file definition
-keywords: build, buildx, bake, file, remote
+description: Build with Bake using a remote file definition using Git or HTTP
+keywords: build, buildx, bake, file, remote, git, http
 ---
 
 You can also build Bake files directly from a remote Git repository or HTTPS URL:
@@ -18,9 +19,7 @@ $ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
 {
   "group": {
     "default": {
-      "targets": [
-        "binary"
-      ]
+      "targets": ["binary"]
     }
   },
   "target": {
@@ -33,12 +32,8 @@ $ docker buildx bake "https://github.com/docker/cli.git#v20.10.11" --print
         "VERSION": ""
       },
       "target": "binary",
-      "platforms": [
-        "local"
-      ],
-      "output": [
-        "build"
-      ]
+      "platforms": ["local"],
+      "output": ["build"]
     }
   }
 }

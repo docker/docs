@@ -1,12 +1,9 @@
 ---
 title: Provenance attestations
-keywords: build, attestations, provenance, slsa
-description: Provenance build attestations
+keywords: build, attestations, provenance, slsa, git, metadata
+description: >
+  Provenance build attestations describe how and where your image was built.
 ---
-
-> **Note**
->
-> This feature is supported in BuildKit version `>=0.11` and Buildx version `>=0.10`.
 
 The provenance attestations include facts about the build process, including
 details such as:
@@ -153,7 +150,6 @@ Using the `--format` option, you can specify a template for the output. All
 provenance-related data is available under the `.Provenance` attribute. For
 example, to get the raw contents of the Provenance in the SLSA format:
 
-
 ```console
 $ docker buildx imagetools inspect <namespace>/<image>:<version> \
     --format "{{ json .Provenance.SLSA }}"
@@ -163,11 +159,9 @@ $ docker buildx imagetools inspect <namespace>/<image>:<version> \
 }
 ```
 
-
 You can also construct more complex expressions using the full functionality of
 Go templates. For example, for provenance generated with `mode=max`, you can
 extract the full source code of the Dockerfile used to build the image:
-
 
 ```console
 $ docker buildx imagetools inspect <namespace>/<image>:<version> \
@@ -176,7 +170,6 @@ FROM ubuntu:20.04
 RUN apt-get update
 ...
 ```
-
 
 ## Provenance attestation example
 

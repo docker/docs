@@ -2,40 +2,36 @@
 title: High-level builds with Bake
 keywords: build, buildx, bake, buildkit, hcl, json, compose
 aliases:
-- /build/customize/bake/
+  - /build/customize/bake/
 ---
 
-> This command is experimental.
+> **Experimental**
 >
-> The design of bake is in early stages, and we are looking for [feedback from users](https://github.com/docker/buildx/issues).
+> Bake is an experimental feature, and we are looking for
+> [feedback from users](https://github.com/docker/buildx/issues).
 { .experimental }
 
-Buildx also aims to provide support for high-level build concepts that go beyond
-invoking a single build command. We want to support building all the images in
-your application together and let the users define project specific reusable
-build flows that can then be easily invoked by anyone.
+Buildx provides support for high-level build orchestration that goes beyond
+invoking a single build command. Bake lets you build all the images in your
+application together. You can define all of the build jobs for your projects in
+a file that can then be easily invoked by anyone.
 
-[BuildKit](https://github.com/moby/buildkit)
-efficiently handles multiple concurrent build requests and de-duplicating work.
-The build commands can be combined with general-purpose command runners
-(for example, `make`). However, these tools generally invoke builds in sequence
-and therefore cannot leverage the full potential of BuildKit parallelization,
-or combine BuildKit's output for the user. For this use case, we have added a
-command called [`docker buildx bake`](../../engine/reference/commandline/buildx_bake.md).
+You can think of Bake as a task runner for Docker builds.
+[BuildKit](https://github.com/moby/buildkit) efficiently handles multiple
+concurrent build requests and de-duplicating work. You can invoke your builds
+using general-purpose task runners, like `make`. However, such tools generally
+invoke builds in a sequence. Therefore they aren't leveraging the full
+potential of BuildKit parallelization. Bake solves this problem.
 
-The `bake` command supports building images from HCL, JSON and Compose files.
-This is similar to [`docker compose build`](../../compose/compose-file/build.md),
-but allowing all the services to be built concurrently as part of a single
-request. If multiple files are specified they are all read and configurations are
-combined.
-
-We recommend using HCL files as its experience is more aligned with buildx UX
-and also allows better code reuse, different target groups and extended features.
+The `docker buildx bake` command supports building images from a configuration
+file in HCL, JSON or YAML format. The YAML format extends the Compose
+Specification, and it's similar to `docker compose build`, except it builds all
+of your services concurrently as part of a single request.
 
 ## Next steps
 
-* [Bake file reference](reference.md)
-* [Configuring builds](configuring-build.md)
-* [User defined HCL functions](hcl-funcs.md)
-* [Defining additional build contexts and linking targets](build-contexts.md)
-* [Building from Compose file](compose-file.md)
+- [Bake file reference](./reference.md)
+- [Configuring builds](./configuring-build.md)
+- [User defined HCL functions](./advanced.md)
+- [Defining additional build contexts and linking targets](./build-contexts.md)
+- [Building from Compose file](./compose-file.md)

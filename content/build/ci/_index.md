@@ -1,9 +1,9 @@
 ---
-description: Overview of using Docker for continuous integration
+description: Using Docker for continuous integration
 keywords: ci, build
 title: Continuous integration with Docker
 aliases:
-- /ci-cd/best-practices/
+  - /ci-cd/best-practices/
 ---
 
 Continuous Integration (CI) is the part of the development process where you're

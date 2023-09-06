@@ -1,6 +1,6 @@
 ---
 title: Create a base image
-description: How to create base images
+description: Learn about base images and how they're created
 keywords: images, base image, examples
 aliases:
 - /articles/baseimages/
@@ -69,7 +69,7 @@ ADD hello /
 CMD ["/hello"]
 ```
 
-Assuming you built the "hello" executable example by using the source code at
+Assuming you built the `hello` executable example by using the source code at
 [https://github.com/docker-library/hello-world](https://github.com/docker-library/hello-world),
 and you compiled it with the `-static` flag, you can build this Docker
 image using this `docker build` command:
@@ -81,7 +81,9 @@ $ docker build --tag hello .
 Don't forget the `.` character at the end, which sets the [build context](../../build/building/context.md)
 to the current directory.
 
-> **Note**: Because Docker Desktop for Mac and Docker Desktop for Windows use a Linux VM,
+> **Note**
+> 
+> Because Docker Desktop for Mac and Docker Desktop for Windows use a Linux VM,
 > you need a Linux binary, rather than a Mac or Windows binary.
 > You can use a Docker container to build it:
 >

@@ -1,8 +1,9 @@
 ---
 title: Local cache
+description: Manage build cache with Amazon S3 buckets
 keywords: build, buildx, cache, backend, local
 aliases:
-- /build/building/cache/backends/local/
+  - /build/building/cache/backends/local/
 ---
 
 The `local` cache store is a simple cache option that stores your cache as files
@@ -35,13 +36,13 @@ The following table describes the available CSV parameters that you can pass to
 | `force-compression` | `cache-to`   | `true`,`false`          | `false` | Forcibly apply compression, see [cache compression][3].              |
 | `ignore-error`      | `cache-to`   | Boolean                 | `false` | Ignore errors caused by failed cache exports.                        |
 
-[1]: index.md#cache-mode
-[2]: index.md#oci-media-types
-[3]: index.md#cache-compression
+[1]: _index.md#cache-mode
+[2]: _index.md#oci-media-types
+[3]: _index.md#cache-compression
 [4]: #cache-versioning
 
 If the `src` cache doesn't exist, then the cache import step will fail, but the
-build will continue.
+build continues.
 
 ## Cache versioning
 
@@ -90,7 +91,7 @@ $ docker buildx build --push -t <registry>/<image> \
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../index.md).
+For an introduction to caching see [Optimizing builds with cache](../_index.md).
 
 For more information on the `local` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#local-directory-1).
