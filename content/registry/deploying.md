@@ -33,7 +33,7 @@ The registry is now ready to use.
 > TLS and should ideally use an access-control mechanism. Keep reading and then
 > continue to the [configuration guide](configuration.md) to deploy a
 > production-ready registry.
-{ .important }
+{ .warning }
 
 ## Copy an image from Docker Hub to your registry
 
@@ -43,13 +43,13 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
 `ubuntu:16.04` and `my-ubuntu` images are deleted locally and the
 `my-ubuntu` image is pulled from the local registry.
 
-1.  Pull the `ubuntu:16.04` image from Docker Hub.
+1. Pull the `ubuntu:16.04` image from Docker Hub.
 
     ```console
     $ docker pull ubuntu:16.04
     ```
 
-2.  Tag the image as `localhost:5000/my-ubuntu`. This creates an additional tag
+2. Tag the image as `localhost:5000/my-ubuntu`. This creates an additional tag
     for the existing image. When the first part of the tag is a hostname and
     port, Docker interprets this as the location of a registry, when pushing.
 
@@ -57,13 +57,13 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
     $ docker tag ubuntu:16.04 localhost:5000/my-ubuntu
     ```
 
-3.  Push the image to the local registry running at `localhost:5000`:
+3. Push the image to the local registry running at `localhost:5000`:
 
     ```console
     $ docker push localhost:5000/my-ubuntu
     ```
 
-4.  Remove the locally-cached `ubuntu:16.04` and `localhost:5000/my-ubuntu`
+4. Remove the locally-cached `ubuntu:16.04` and `localhost:5000/my-ubuntu`
     images, so that you can test pulling the image from your registry. This
     does not remove the `localhost:5000/my-ubuntu` image from your registry.
 
@@ -72,7 +72,7 @@ as `my-ubuntu`, then pushes it to the local registry. Finally, the
     $ docker image remove localhost:5000/my-ubuntu
     ```
 
-5.  Pull the `localhost:5000/my-ubuntu` image from your local registry.
+5. Pull the `localhost:5000/my-ubuntu` image from your local registry.
 
     ```console
     $ docker pull localhost:5000/my-ubuntu
@@ -192,10 +192,10 @@ These examples assume the following:
   on port 443.
 - You have already obtained a certificate from a certificate authority (CA).
 
-If you have been issued an _intermediate_ certificate instead, see
+If you have been issued an intermediate certificate instead, see
 [use an intermediate certificate](#use-an-intermediate-certificate).
 
-1.  Create a `certs` directory.
+1. Create a `certs` directory.
 
     ```console
     $ mkdir -p certs
@@ -205,13 +205,13 @@ If you have been issued an _intermediate_ certificate instead, see
     The following steps assume that the files are named `domain.crt` and
     `domain.key`.
 
-2.  Stop the registry if it is currently running.
+2. Stop the registry if it is currently running.
 
     ```console
     $ docker container stop registry
     ```
 
-3.  Restart the registry, directing it to use the TLS certificate. This command
+3. Restart the registry, directing it to use the TLS certificate. This command
     bind-mounts the `certs/` directory into the container at `/certs/`, and sets
     environment variables that tell the container where to find the `domain.crt`
     and `domain.key` file. The registry runs on port 443, the default HTTPS port.
@@ -228,7 +228,7 @@ If you have been issued an _intermediate_ certificate instead, see
       registry:2
     ```
 
-4.  Docker clients can now pull from and push to your registry using its
+4. Docker clients can now pull from and push to your registry using its
     external address. The following commands demonstrate this:
 
     ```console
@@ -400,13 +400,13 @@ secrets.
 
 > **Warning**
 >
-> You **cannot** use authentication with authentication schemes that send
+> You cannot use authentication with authentication schemes that send
 > credentials as clear text. You must
 > [configure TLS first](deploying.md#run-an-externally-accessible-registry) for
 > authentication to work.
 { .warning }
 
-1.  Create a password file with one entry for the user `testuser`, with password
+1. Create a password file with one entry for the user `testuser`, with password
     `testpassword`:
 
     ```console
@@ -422,13 +422,13 @@ secrets.
     docker run --rm --entrypoint htpasswd httpd:2 -Bbn testuser testpassword | Set-Content -Encoding ASCII auth/htpasswd
     ```
 
-2.  Stop the registry.
+2. Stop the registry.
 
     ```console
     $ docker container stop registry
     ```
 
-3.  Start the registry with basic authentication.
+3. Start the registry with basic authentication.
 
     ```console
     $ docker run -d \
@@ -445,10 +445,10 @@ secrets.
       registry:2
       ```
 
-4.  Try to pull an image from the registry, or push an image to the registry.
+4. Try to pull an image from the registry, or push an image to the registry.
     These commands fail.
 
-5.  Log in to the registry.
+5. Sign in to the registry.
 
     ```console
     $ docker login myregistrydomain.com:5000
@@ -464,6 +464,7 @@ secrets.
 > X509 errors usually indicate that you are attempting to use a self-signed
 > certificate without configuring the Docker daemon correctly. See [run an
 > insecure registry](insecure.md).
+{ .tip }
 
 ### More advanced authentication
 
@@ -482,8 +483,7 @@ leverage a third-party implementation.
 
 ## Deploy your registry using a Compose file
 
-If your registry invocation is advanced, it may be easier to use a Docker
-compose file to deploy it, rather than relying on a specific `docker run`
+If your registry invocation is advanced, it may be easier to use a Compose file to deploy it, rather than relying on a specific `docker run`
 invocation. Use the following example `docker-compose.yml` as a template.
 
 ```yaml
@@ -559,11 +559,14 @@ following:
   4.  When you push images to the registries in the list, their
       non-distributable layers are pushed to the registry.
 
-      > **Warning**: Non-distributable artifacts typically have restrictions on
+      > **Warning**
+      >
+      > Non-distributable artifacts typically have restrictions on
       > how and where they can be distributed and shared. Only use this feature
       > to push artifacts to private registries and ensure that you are in
       > compliance with any terms that cover redistributing non-distributable
       > artifacts.
+      { .warning }
 
 
 ## Next steps

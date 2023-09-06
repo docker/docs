@@ -19,15 +19,14 @@ involves security trade-offs and additional configuration steps.
 { .warning }
 
 This procedure configures Docker to entirely disregard security for your
-registry. This is **very** insecure and is not recommended. It exposes your
+registry. This is very insecure and is not recommended. It exposes your
 registry to trivial man-in-the-middle (MITM) attacks. Only use this solution for
 isolated testing or in a tightly controlled, air-gapped environment.
 
 1.  Edit the `daemon.json` file, whose default location is
     `/etc/docker/daemon.json` on Linux or
     `C:\ProgramData\docker\config\daemon.json` on Windows Server. If you use
-    Docker Desktop for Mac or Docker Desktop for Windows, click the Docker icon, choose
-    **Settings** and then choose **Docker Engine**.
+    Docker Desktop for Mac, Windows, or Linux, navigate to **Settings** and then select the **Docker Engine** tab.
 
     If the `daemon.json` file does not exist, create it. Assuming there are no
     other settings in the file, it should have the following contents:
@@ -42,7 +41,7 @@ isolated testing or in a tightly controlled, air-gapped environment.
 
     With insecure registries enabled, Docker goes through the following steps:
 
-    - First, try using HTTPS.
+    - Try using HTTPS.
       - If HTTPS is available but the certificate is invalid, ignore the error
         about the certificate.
       - If HTTPS is not available, fall back to HTTP.
@@ -51,15 +50,15 @@ isolated testing or in a tightly controlled, air-gapped environment.
 2. Restart Docker for the changes to take effect.
 
 
-Repeat these steps on every Engine host that wants to access your registry.
+Repeat these steps on every engine host that wants to access your registry.
 
 
 ## Use self-signed certificates
 
 > **Warning**
 >
-> Using this along with basic authentication requires to **also** trust the
-certificate into the OS cert store for some versions of docker (see below)
+> Using this along with basic authentication requires to also trust the
+certificate into the OS cert store for some versions of Docker. This is covered below. 
 {.warning }
 
 This is more secure than the insecure registry solution.
@@ -82,11 +81,11 @@ This is more secure than the insecure registry solution.
 3.  Instruct every Docker daemon to trust that certificate. The way to do this
     depends on your OS.
 
-    - **Linux**: Copy the `domain.crt` file to
+    - Linux: Copy the `domain.crt` file to
       `/etc/docker/certs.d/myregistrydomain.com:5000/ca.crt` on every Docker
       host. You do not need to restart Docker.
 
-    - **Windows Server**:
+    - Windows Server:
 
       1.  Open Windows Explorer, right-click the `domain.crt`
           file, and choose Install certificate. When prompted, select the following
@@ -95,15 +94,15 @@ This is more secure than the insecure registry solution.
           | Store location                                | local machine |
           | Place all certificates in the following store | selected      |
 
-      2.  Click **Browser** and select **Trusted Root Certificate Authorities**.
+      2.  Select **Browser** and then select **Trusted Root Certificate Authorities**.
 
-      3.  Click **Finish**. Restart Docker.
+      3.  Select **Finish** and then restart Docker.
 
-    - **Docker Desktop for Mac**: Follow the instructions in
+    - Docker Desktop for Mac: Follow the instructions in
       [Adding custom CA certificates](../desktop/faqs/macfaqs.md#add-custom-ca-certificates-server-side).
       Restart Docker.
 
-    - **Docker Desktop for Windows**: Follow the instructions in
+    - Docker Desktop for Windows: Follow the instructions in
       [Adding custom CA certificates](../desktop/faqs/windowsfaqs.md#how-do-i-add-custom-ca-certificates).
       Restart Docker.
 

@@ -11,13 +11,13 @@ The Registry supports sending webhook notifications in response to events
 happening within the registry. Notifications are sent in response to manifest
 pushes and pulls and layer pushes and pulls. These actions are serialized into
 events. The events are queued into a registry-internal broadcast system which
-queues and dispatches events to [_Endpoints_](notifications.md#endpoints).
+queues and dispatches events to [Endpoints](notifications.md#endpoints).
 
 ![Workflow of registry notifications](images/notifications.png)
 
 ## Endpoints
 
-Notifications are sent to _endpoints_ via HTTP requests. Each configured
+Notifications are sent to endpoints via HTTP requests. Each configured
 endpoint has isolated queues, retry configuration and http targets within each
 instance of a registry. When an action happens within the registry, it is
 converted into an event which is dropped into an inmemory queue. When the
@@ -27,8 +27,8 @@ order is not guaranteed.
 
 ## Configuration
 
-To setup a registry instance to send notifications to endpoints, one must add
-them to the configuration. A simple example follows:
+To setup a registry instance to send notifications to endpoints, you must add
+them to the configuration.
 
 ```yaml
 notifications:
@@ -42,7 +42,7 @@ notifications:
       backoff: 1s
 ```
 
-The above would configure the registry with an endpoint to send events to
+In the previous example, you would configure the registry with an endpoint to send events to
 `https://mylistener.example.com/event`, with the header "Authorization: Bearer
 <your token, if needed>". The request would timeout after 500 milliseconds. If
 5 failures happen consecutively, the registry backs off for 1 second before
@@ -62,8 +62,8 @@ INFO[0000] configuring endpoint alistener (https://mylistener.example.com/event)
 Events have a well-defined JSON structure and are sent as the body of
 notification requests. One or more events are sent in a structure called an
 envelope. Each event has a unique ID that can be used to uniquely identify incoming
-requests, if required. Along with that, an _action_ is provided with a
-_target_, identifying the object mutated during the event.
+requests, if required. Along with that, an action is provided with a
+target, identifying the object mutated during the event.
 
 The fields available in an `event` are described below.
 
@@ -81,8 +81,6 @@ tag | string | Tag identifies a tag name in tag events.
 request | [RequestRecord](https://godoc.org/github.com/docker/distribution/notifications#RequestRecord) | Request covers the request that generated the event.
 actor | [ActorRecord](https://godoc.org/github.com/docker/distribution/notifications#ActorRecord). |  Actor specifies the agent that initiated the event. For most situations, this could be from the authorization context of the request.
 source | [SourceRecord](https://godoc.org/github.com/docker/distribution/notifications#SourceRecord) |  Source identifies the registry node that generated the event. Put differently, while the actor "initiates" the event, the source "generates" it.
-
-
 
 The following is an example of a JSON event, sent in response to the pull of a
 manifest:
@@ -120,7 +118,6 @@ manifest:
 }
 ```
 
-
 The target struct of events which are sent when manifests and blobs are deleted
 contains a subset of the data contained in Get and Put events. Specifically,
 only the digest and repository are sent.
@@ -134,7 +131,9 @@ only the digest and repository are sent.
 }
 ```
 
-> **Note**: As of version 2.1, the `length` field for event targets
+> **Note**
+>
+> As of version 2.1, the `length` field for event targets
 > is being deprecated for the `size` field, bringing the target in line with
 > common nomenclature. Both will continue to be set for the foreseeable
 > future. Newer code should favor `size` but accept either.
@@ -315,7 +314,7 @@ several failures and have since recovered:
 }
 ```
 
-If using notification as part of a larger application, it is _critical_ to
+If using notifications as part of a larger application, it is critical to
 monitor the size ("Pending" above) of the endpoint queues. If failures or
 queue sizes are increasing, it can indicate a larger problem.
 
