@@ -25,16 +25,14 @@ To get started with Docker Engine on Raspberry Pi OS, make sure you
 
 ### OS requirements
 
-To install Docker Engine, you need the 64-bit version or 32-bit version of one of these Raspberry Pi OS
-versions:
+This installation instruction refers to the 32-bit (armhf) version of Raspberry
+Pi OS. If you're using the 64-bit (arm64) version, follow the instructions for
+[Debian](debian.md).
 
-- Raspberry Pi OS Bookworm 12 (testing)
-- Raspberry Pi OS Bullseye 11 (stable)
-- Raspberry Pi OS Buster 10 (oldstable)
+The following OS versions are supported:
 
-Docker Engine for Raspberry Pi OS is compatible with the armhf architecture.
-
-For the 64-bit version of Raspberry Pi OS follow the instructions for [Debian](debian.md).
+- Raspberry Pi OS Bookworm 12 (stable)
+- Raspberry Pi OS Bullseye 11 (oldstable)
 
 ### Uninstall old versions
 
