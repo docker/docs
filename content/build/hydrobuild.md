@@ -62,16 +62,11 @@ an endpoint that you specify. The endpoint represents a single, isolated
 builder. Builder endpoints have the following format:
 
 ```text
-cloud://<org>/<group>_<platform>
+cloud://<org>/default_<platform>
 ```
 
 - `<org>` is the Docker organization that the builder is provisioned for
-- `<group>` is the builder node group
 - `<platform>` is the native OS and architecture of the builder
-
-An organization can contain multiple builder groups. Each builder group is an
-isolated builder, and by creating multiple groups you can assign unique
-builders to different teams in the organization.
 
 The platform suffix is optional, and if omitted creates a `linux/amd64` builder
 by default. The supported values for `<platform>` are:
@@ -79,15 +74,13 @@ by default. The supported values for `<platform>` are:
 - `linux-amd64`
 - `linux-arm64`
 
-You can use the platform suffix to create a multi-node builder group with
-multiple builders of different native architectures. This gives you a
-high-performance build cluster for building multi-platform images natively. See
-[Create a multi-platform builder](#create-a-multi-platform-builder).
+You can use the platform suffix to create a multi-node builder, with native
+builders of different architectures. This gives you a high-performance build
+cluster for building multi-platform images. See [Create a multi-platform
+builder](#create-a-multi-platform-builder).
 
 You can omit the `cloud://` protocol prefix from the endpoint when you create a
-builder using the `cloud` driver. The endpoint format then becomes
-`<org>/<group>_<platform>`. The `docker buildx ls` command shows the full
-endpoint URI, including the prefix.
+builder using the `cloud` driver.
 
 ### Create a single-platform builder
 
@@ -101,11 +94,10 @@ To create a `linux/amd64` builder:
    ```console
    $ docker buildx create --driver cloud --name hydrobuild \
      --platform linux/amd64 \
-     <org>/<group>_linux-amd64
+     <org>/default_linux-amd64
    ```
 
-   Replace `<org>` with the Docker organization, and `<group>` with the name
-   that you want to use for this builder group.
+   Replace `<org>` with the Docker organization.
 
 ### Create a multi-platform builder
 
@@ -120,11 +112,10 @@ builds:
    ```console
    $ docker buildx create --driver cloud --name hydrobuild \
      --platform linux/amd64 \
-     <org>/<group>_linux-amd64
+     <org>/default_linux-amd64
    ```
 
-   Replace `<org>` with the Docker organization, and `<group>` with the name
-   that you want to use for this builder group.
+   Replace `<org>` with the Docker organization.
 
 3. Create a `linux/arm64` builder and append it to the `hydrobuild` builder you
    just created.
@@ -132,10 +123,10 @@ builds:
    ```console
    $ docker buildx create --append --name hydrobuild \
      --platform linux/arm64 \
-     <org>/<group>_linux-arm64
+     <org>/default_linux-arm64
    ```
 
-   `<org>` and `<group>` should be the same as for first builder, but this time
+   `<org>` should be the same as for first builder, but this time
    use `linux-arm64` for the platform suffix.
 
 ## Use Hydrobuild
@@ -229,7 +220,7 @@ ID, and then use the `lab` channel of `setup-buildx-action`:
   with:
     version: "lab:latest"
     driver: cloud
-    endpoint: "<org>/<group>"
+    endpoint: "<org>/default"
 ```
 
 The following example shows a basic workflow for GitHub Actions with Hydrobuild.
@@ -258,7 +249,7 @@ jobs:
         with:
           version: "lab:latest"
           driver: cloud
-          endpoint: "<org>/<group>"
+          endpoint: "<org>/default"
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
