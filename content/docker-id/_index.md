@@ -24,7 +24,7 @@ Your Docker ID becomes your username for hosted Docker services, and [Docker for
 
 4. Enter a password that's at least 9 characters long.
 
-5. Select **Sign up**.
+5. Select **Sign Up**.
 
    Docker sends a verification email to the address you provided.
 
