@@ -117,7 +117,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 Docker containers can be started, stopped and restarted. When we stop a container, it is not removed but the status is changed to stopped and the process inside of the container is stopped. When we ran the `docker ps` command, the default output is to only show running containers. If we pass the `--all` or `-a` for short, we will see all containers on our system, that is stopped containers and running containers.
 
 ```console
-$ docker ps -all
+$ docker ps --all
 
 CONTAINER ID   IMAGE            COMMAND                  CREATED              STATUS                      PORTS     NAMES
 d75e61fcad1e   docker-gs-ping   "/docker-gs-ping"        About a minute ago   Exited (2) 23 seconds ago             inspiring_ishizaka
