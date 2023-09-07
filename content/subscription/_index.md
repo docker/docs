@@ -1,5 +1,5 @@
 ---
-description: Docker subscription overview
+description: Learn about subscription features and how to manage your subscription
 keywords: Docker, pricing, billing, Pro, Team, business, subscription, tier, plan
 title: Docker subscription overview
 grid:
