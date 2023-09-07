@@ -1,5 +1,5 @@
 ---
-description: Upgrading your Docker subscription
+description: Lear how to upgrade your Docker subscription
 keywords: Docker Hub, upgrade, subscription, Pro, Team, business, pricing plan,
 title: Upgrade your subscription
 aliases:
@@ -11,9 +11,9 @@ When you upgrade to a paid subscription, you immediately have access to all the 
 
 ## Upgrade your subscription 
 
-1. Log in to your [Docker Hub](https://hub.docker.com) account.
+1. Sign in to your [Docker Hub](https://hub.docker.com) account.
 
-2. Optional: If you are upgrading from a free user account to a Team or Business subscription and want to keep your account name, [convert your user account into an organization](../docker-hub/convert-account.md).
+2. Optional: If you're upgrading from a free user account to a Team or Business subscription and want to keep your account name, [convert your user account into an organization](../docker-hub/convert-account.md).
 
 3. From the **Billing** section, select the **Plan** tab.
 

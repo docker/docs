@@ -100,7 +100,7 @@ proxy:
 >
 > If you specify a username and password, it's very important to understand that
 > private resources that this user has access to Docker Hub is made available on
-> your mirror. **You must secure your mirror** by implementing authentication if
+> your mirror. You must secure your mirror by implementing authentication if
 > you expect these resources to stay private!
 { .warning }
 

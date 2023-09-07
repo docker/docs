@@ -1,10 +1,10 @@
 ---
 title: OCI and Docker exporters
-keywords: 'build, buildx, buildkit, exporter, oci, docker
-
-  '
+keywords: build, buildx, buildkit, exporter, oci, docker
+description: >
+  The OCI and Docker exporters create an image layout tarball on the local filesystem
 aliases:
-- /build/building/exporters/local-tar/
+  - /build/building/exporters/local-tar/
 ---
 
 The `oci` exporter outputs the build result into an
@@ -31,7 +31,7 @@ $ docker buildx build --output type=docker[,parameters] .
 The following table describes the available parameters:
 
 | Parameter           | Type                                   | Default | Description                                                                                                                           |
-|---------------------|----------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------- | -------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`              | String                                 |         | Specify image name(s)                                                                                                                 |
 | `dest`              | String                                 |         | Path                                                                                                                                  |
 | `tar`               | `true`,`false`                         | `true`  | Bundle the output into a tarball layout                                                                                               |
@@ -41,15 +41,15 @@ The following table describes the available parameters:
 | `oci-mediatypes`    | `true`,`false`                         |         | Use OCI media types in exporter manifests. Defaults to `true` for `type=oci`, and `false` for `type=docker`. See [OCI Media types][2] |
 | `annotation.<key>`  | String                                 |         | Attach an annotation with the respective `key` and `value` to the built image,see [annotations][3]                                    |
 
-[1]: index.md#compression
-[2]: index.md#oci-media-types
+[1]: _index.md#compression
+[2]: _index.md#oci-media-types
 [3]: #annotations
 
 ## Annotations
 
-These exporters support adding OCI annotation using `annotation.*` dot notation
-parameter. The following example sets the `org.opencontainers.image.title`
-annotation for a build:
+These exporters support adding OCI annotation using `annotation` parameter,
+followed by the annotation name using dot notation. The following example sets
+the `org.opencontainers.image.title` annotation:
 
 ```console
 $ docker buildx build \

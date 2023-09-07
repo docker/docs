@@ -1,6 +1,6 @@
 ---
 title: Docker subscriptions and features
-description: Understand
+description: Learn about Docker subscription tiers and their features
 keywords: subscription, personal, pro, team, business, features
 ---
 
@@ -8,7 +8,7 @@ This page provides an overview of each tier. To compare features available in ea
 
 ## Docker Personal
 
-Docker Personal is the new name for the Docker Free subscription. With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
+Docker Personal (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses. Docker Personal allows free use of Docker components including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
 
 Docker Personal includes:
 
@@ -30,7 +30,6 @@ Docker Pro includes:
 - 5000 image [pulls per day](../docker-hub/download-rate-limit.md)
 - [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds
 - 300 [Vulnerability Scans](../docker-hub/vulnerability-scanning.md)
-- Unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
@@ -45,7 +44,7 @@ Docker Team includes:
 - Unlimited [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md)
 - 5000 image [pulls per day](../docker-hub/download-rate-limit.md) for each team member
 
-There are also advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [audit logs](../docker-hub/audit-log.md), and more.
+There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](../docker-hub/roles-and-permissions.md), [audit logs](../docker-hub/audit-log.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
@@ -56,7 +55,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 Docker Business includes:
 - Everything included in Docker Team
 - [Hardened Docker Desktop](../desktop/hardened-desktop/index.md) 
-- [Image Access Management](../docker-hub/image-access-management.md) which allows admins control what content developers can access
+- [Image Access Management](../docker-hub/image-access-management.md) which lets admins control what content developers can access
 - [Registry Access Management](../desktop/hardened-desktop/registry-access-management.md) which lets admins control what registries developers can access
 - [Company layer](../docker-hub/creating-companies.md) to manage multiple organizations and settings
 - [Single Sign-On](../single-sign-on/index.md)

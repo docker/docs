@@ -1,7 +1,7 @@
 ---
-description: Single sign-on overview
-keywords: Single sign-on, SSO, sign-on
-title: Single Sign-On overview
+description: Single Sign-On overview for organizations
+keywords: Single Sign-On, SSO, sign-on
+title: Single Sign-On overview for organizations
 ---
 
 {{< include "admin-early-access.md" >}}

@@ -29,8 +29,6 @@ aliases:
 - /winkit/getting-started/
 ---
 
-## Sign in to Docker Desktop
-
 Docker recommends that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard.
 
 Once signed in, you can access your Docker Hub repositories directly from Docker Desktop.

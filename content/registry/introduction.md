@@ -9,11 +9,11 @@ title: About Registry
 A registry is a storage and content delivery system, holding named Docker
 images, available in different tagged versions.
 
-  > Example: the image `distribution/registry`, with tags `2.0` and `2.1`.
+For example, with the image `distribution/registry`, with tag `2.1`, users interact with  with a registry by using Docker push and pull commands:
 
-Users interact with a registry by using docker push and pull commands.
-
-  > Example: `docker pull registry-1.docker.io/distribution/registry:2.1`.
+  ```console
+  $ docker pull registry-1.docker.io/distribution/registry:2.1
+  ```
 
 Storage itself is delegated to drivers. The default storage driver is the local
 posix filesystem, which is suitable for development or small deployments.
@@ -41,7 +41,7 @@ Image names as used in typical docker commands reflect their origin:
  * `docker pull myregistrydomain:port/foo/bar` instructs docker to contact the registry located at `myregistrydomain:port` to find the image `foo/bar`
 
 You can find out more about the various Docker commands dealing with images in
-the [official Docker engine documentation](../engine/reference/commandline/cli.md).
+the [official Docker Engine documentation](../engine/reference/commandline/cli.md).
 
 ## Use cases
 

@@ -15,15 +15,15 @@ Usually, that includes enterprise setups using LDAP/AD on the backend and a SSO 
 
 ### Alternatives
 
-If you just want authentication for your registry, and are happy maintaining users access separately, you should really consider sticking with the native [basic auth registry feature](../deploying.md#native-basic-auth).
+If you just want authentication for your registry, and are happy maintaining users access separately, you should consider sticking with the native [basic auth registry feature](../deploying.md#native-basic-auth).
 
 ### Solution
 
-With the method presented here, you implement basic authentication for docker engines in a reverse proxy that sits in front of your registry.
+With the method presented here, you implement basic authentication for Docker Engine in a reverse proxy that sits in front of your registry.
 
-While we use a simple htpasswd file as an example, any other apache authentication backend should be fairly easy to implement once you are done with the example.
+While we use a simple `htpasswd` file as an example, any other apache authentication backend should be fairly easy to implement once you are done with the example.
 
-We also implement push restriction (to a limited user group) for the sake of the example. Again, you should modify this to fit your mileage.
+We also implement push restriction (to a limited user group) for the sake of the example. Again, you should modify this to fit your requirements.
 
 ### Gotchas
 
@@ -33,11 +33,9 @@ Furthermore, introducing an extra http layer in your communication pipeline adds
 
 ## Setting things up
 
-Read again [the requirements](index.md#requirements).
+1. Read [the requirements](index.md#requirements).
 
-Ready?
-
-Run the following script:
+2. Run the following script:
 
 ```
 mkdir -p auth
@@ -194,19 +192,27 @@ EOF
 
 Now, start your stack:
 
-    docker compose up -d
+  ```console
+  $ docker compose up -d
+  ```
 
-Log in with a "push" authorized user (using `testuserpush` and `testpasswordpush`), then tag and push your first image:
+Sign in with a "push" authorized user (using `testuserpush` and `testpasswordpush`), then tag and push your first image:
 
-    docker login myregistrydomain.com:5043
-    docker tag ubuntu myregistrydomain.com:5043/test
-    docker push myregistrydomain.com:5043/test
+  ```console
+  $ docker login myregistrydomain.com:5043
+  $ docker tag ubuntu myregistrydomain.com:5043/test
+  $ docker push myregistrydomain.com:5043/test
+  ```
 
-Now, log in with a "pull-only" user (using `testuser` and `testpassword`), then pull back the image:
+Now, sign in with a "pull-only" user (using `testuser` and `testpassword`), then pull back the image:
 
-    docker login myregistrydomain.com:5043
-    docker pull myregistrydomain.com:5043/test
+  ```console
+  $ docker login myregistrydomain.com:5043
+  $ docker pull myregistrydomain.com:5043/test
+  ```
 
-Verify that the "pull-only" can NOT push:
+Verify that the "pull-only" can not push:
 
-    docker push myregistrydomain.com:5043/test
+  ```console
+  $ docker push myregistrydomain.com:5043/test
+  ```

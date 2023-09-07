@@ -110,7 +110,7 @@ storage:
     rootdirectory: /registry/data
 ```
 
-_Sample output from a dry run garbage collection with registry log level set to `info`_
+Below is example output from a dry run garbage collection with registry log level set to `info`
 
 ```
 hello-world

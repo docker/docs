@@ -25,53 +25,67 @@ Production services operation on macOS is out of scope of this document. Be sure
 
 ## Setup golang on your machine
 
-If you know, safely skip to the next section.
+To set up golang on your machine, run:
 
-If you don't, the TLDR is:
+```
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+source ~/.gvm/scripts/gvm
+gvm install go1.4.2
+gvm use go1.4.2
+```
 
-    bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-    source ~/.gvm/scripts/gvm
-    gvm install go1.4.2
-    gvm use go1.4.2
-
-If you want to understand, you should read [How to Write Go Code](https://golang.org/doc/code.html).
+See [How to Write Go Code](https://golang.org/doc/code.html), for more details.
 
 ## Checkout the Docker Distribution source tree
 
-    mkdir -p $GOPATH/src/github.com/docker
-    git clone https://github.com/docker/distribution.git $GOPATH/src/github.com/docker/distribution
-    cd $GOPATH/src/github.com/docker/distribution
+```
+mkdir -p $GOPATH/src/github.com/docker
+git clone https://github.com/docker/distribution.git $GOPATH/src/github.com/docker/distribution
+cd $GOPATH/src/github.com/docker/distribution
+```
 
 ## Build the binary
 
-    GOPATH=$(PWD)/Godeps/_workspace:$GOPATH make binaries
-    sudo mkdir -p /usr/local/libexec
-    sudo cp bin/registry /usr/local/libexec/registry
+```
+GOPATH=$(PWD)/Godeps/_workspace:$GOPATH make binaries
+sudo mkdir -p /usr/local/libexec
+sudo cp bin/registry /usr/local/libexec/registry
+```
 
 ## Setup
 
 Copy the registry configuration file in place:
 
-    mkdir /Users/Shared/Registry
-    cp docs/recipes/osx/config.yml /Users/Shared/Registry/config.yml
+```
+mkdir /Users/Shared/Registry
+cp docs/recipes/osx/config.yml /Users/Shared/Registry/config.yml
+```
 
 ## Run the Docker Registry under launchd
 
 Copy the Docker registry plist into place:
 
-    plutil -lint docs/recipes/osx/com.docker.registry.plist
-    cp docs/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
-    chmod 644 ~/Library/LaunchAgents/com.docker.registry.plist
+```
+plutil -lint docs/recipes/osx/com.docker.registry.plist
+cp docs/recipes/osx/com.docker.registry.plist ~/Library/LaunchAgents/
+chmod 644 ~/Library/LaunchAgents/com.docker.registry.plist
+```
 
 Start the Docker registry:
 
-    launchctl load ~/Library/LaunchAgents/com.docker.registry.plist
+```
+launchctl load ~/Library/LaunchAgents/com.docker.registry.plist
+```
 
 ### Restart the docker registry service
 
-    launchctl stop com.docker.registry
-    launchctl start com.docker.registry
+```
+launchctl stop com.docker.registry
+launchctl start com.docker.registry
+```
 
 ### Unload the docker registry service
 
-    launchctl unload ~/Library/LaunchAgents/com.docker.registry.plist
+```
+launchctl unload ~/Library/LaunchAgents/com.docker.registry.plist
+```

@@ -6,7 +6,7 @@ title: Service accounts
 
 > **Note**
 >
-> Service accounts requires a
+> Service accounts require a
 > [Docker Team, or Business subscription](../subscription/index.md).
 
 A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and don't share Docker IDs with the members in the organization. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
@@ -49,7 +49,7 @@ To create a new service account for your Team account:
 
 > **Note**
 >
-> If you want a read-only PAT just for your open-source repos, or to access
+> If you want a read-only PAT just for your open-source repositories, or to access
 official images and other public images, you don't have to grant any access permissions to the new Docker ID.
 
 ## Additional information
@@ -57,4 +57,4 @@ official images and other public images, you don't have to grant any access perm
 Refer to the following topics for additional information:
 
 - [Mirroring Docker Hub](../registry/recipes/mirror.md)
-- [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates)
+- [Docker pricing FAQs](https://www.docker.com/pricing/faq/)

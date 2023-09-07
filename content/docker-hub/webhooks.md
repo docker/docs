@@ -10,18 +10,18 @@ You can use webhooks to cause an action in another service in response to a push
 
 To create a webhook:
 1. In your chosen repository, select the **Webhooks** tab.
-2. Provide a name for the webhook
+2. Provide a name for the webhook.
 3. Provide a destination webhook URL. This is where webhook POST requests are delivered.
-4. Select **Create**. 
+4. Select **Create**.
 
 ## View webhook delivery history
 
 To view the history of the webhook:
-1. Hover over your webhook under the **Current Webhooks section**. 
+1. Hover over your webhook under the **Current Webhooks section**.
 2. Select the **Menu options** icon.
-3. Select **View History**. 
+3. Select **View History**.
 
-You can then view the delivery history, and whether delivering the POST request was successful or not:
+You can then view the delivery history, and whether delivering the POST request was successful or not.
 
 ## Example webhook payload
 
@@ -79,7 +79,7 @@ The following parameters are recognized in callback data:
 * `target_url`: The URL where the results of the operation can be found. Can be
   retrieved on the Docker Hub.
 
-*Example callback payload:*
+The following is an example of a callback payload:
 
     {
       "state": "success",

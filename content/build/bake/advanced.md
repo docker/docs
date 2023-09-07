@@ -1,15 +1,35 @@
 ---
-title: User defined HCL functions
+title: Advanced Bake patterns and functions
+description: Learn about advanced Bake features, like user-defined functions
 keywords: build, buildx, bake, buildkit, hcl
 aliases:
-- /build/customize/bake/hcl-funcs/
+  - /build/customize/bake/hcl-funcs/
+  - /build/bake/hcl-funcs/
 ---
 
-## Using interpolation to tag an image with the git sha
+HCL functions are great for when you need to manipulate values in more complex ways than just concatenating or appending values.
 
-As shown in the [Bake file reference](reference.md#variable) page, `bake`
+The following sections contain some examples on custom functions and other
+advanced use cases:
+
+- [Interpolate environment variables](#interpolate-environment-variables)
+- [Built-in functions](#built-in-functions)
+- [User-defined functions](#user-defined-functions)
+- [Ternary operators](#ternary-operators)
+- [Variables in functions](#variables-in-functions)
+- [Typed variables](#typed-variables)
+
+## Interpolate environment variables
+
+As shown in the [Bake file reference](reference.md#variable) page, Bake
 supports variable blocks which are assigned to matching environment variables
-or default values:
+or default values.
+
+The following example shows how you can interpolate a `TAG` environment
+variable to populate a variable in the Bake configuration.
+
+{{< tabs >}}
+{{< tab name="HCL" >}}
 
 ```hcl
 # docker-bake.hcl
@@ -26,7 +46,8 @@ target "webapp" {
 }
 ```
 
-alternatively, in json format:
+{{< /tab >}}
+{{< tab name="JSON" >}}
 
 ```json
 {
@@ -48,6 +69,9 @@ alternatively, in json format:
 }
 ```
 
+{{< /tab >}}
+{{< /tabs >}}
+
 ```console
 $ docker buildx bake --print webapp
 ```
@@ -56,18 +80,14 @@ $ docker buildx bake --print webapp
 {
   "group": {
     "default": {
-      "targets": [
-        "webapp"
-      ]
+      "targets": ["webapp"]
     }
   },
   "target": {
     "webapp": {
       "context": ".",
       "dockerfile": "Dockerfile",
-      "tags": [
-        "docker.io/username/webapp:latest"
-      ]
+      "tags": ["docker.io/username/webapp:latest"]
     }
   }
 }
@@ -81,27 +101,23 @@ $ TAG=$(git rev-parse --short HEAD) docker buildx bake --print webapp
 {
   "group": {
     "default": {
-      "targets": [
-        "webapp"
-      ]
+      "targets": ["webapp"]
     }
   },
   "target": {
     "webapp": {
       "context": ".",
       "dockerfile": "Dockerfile",
-      "tags": [
-        "docker.io/username/webapp:985e9e9"
-      ]
+      "tags": ["docker.io/username/webapp:985e9e9"]
     }
   }
 }
 ```
 
-## Using the `add` function
+## Built-in functions
 
-You can use [`go-cty` stdlib functions](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib).
-Here we are using the `add` function.
+You can use [`go-cty` standard library functions](https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib).
+The following example shows the `add` function.
 
 ```hcl
 # docker-bake.hcl
@@ -128,9 +144,7 @@ $ docker buildx bake --print webapp
 {
   "group": {
     "default": {
-      "targets": [
-        "webapp"
-      ]
+      "targets": ["webapp"]
     }
   },
   "target": {
@@ -145,10 +159,13 @@ $ docker buildx bake --print webapp
 }
 ```
 
-## Defining an `increment` function
+## User-defined functions
 
-It also supports [user defined functions](https://github.com/hashicorp/hcl/tree/main/ext/userfunc).
-The following example defines a simple an `increment` function.
+You can create [user-defined functions](https://github.com/hashicorp/hcl/tree/main/ext/userfunc)
+that do just what you want, if the built-in standard library functions don't
+meet your needs.
+
+The following example defines an `increment` function.
 
 ```hcl
 # docker-bake.hcl
@@ -176,9 +193,7 @@ $ docker buildx bake --print webapp
 {
   "group": {
     "default": {
-      "targets": [
-        "webapp"
-      ]
+      "targets": ["webapp"]
     }
   },
   "target": {
@@ -193,10 +208,12 @@ $ docker buildx bake --print webapp
 }
 ```
 
-## Only adding tags if a variable is not empty using an `notequal`
+## Ternary operators
 
-Here we are using the conditional `notequal` function which is just for
-symmetry with the `equal` one.
+You can use ternary operators to conditionally register a value.
+
+The following example adds a tag only when a variable is not empty, using the
+`notequal` function.
 
 ```hcl
 # docker-bake.hcl
@@ -226,27 +243,25 @@ $ docker buildx bake --print webapp
 {
   "group": {
     "default": {
-      "targets": [
-        "webapp"
-      ]
+      "targets": ["webapp"]
     }
   },
   "target": {
     "webapp": {
       "context": ".",
       "dockerfile": "Dockerfile",
-      "tags": [
-        "my-image:latest"
-      ]
+      "tags": ["my-image:latest"]
     }
   }
 }
 ```
 
-## Using variables in functions
+## Variables in functions
 
-You can refer variables to other variables like the target blocks can. Stdlib
-functions can also be called but user functions can't at the moment.
+You can make references to variables and standard library functions inside your
+functions.
+
+You can't reference user-defined functions from other functions.
 
 ```hcl
 # docker-bake.hcl
@@ -272,27 +287,23 @@ $ docker buildx bake --print webapp
 {
   "group": {
     "default": {
-      "targets": [
-        "webapp"
-      ]
+      "targets": ["webapp"]
     }
   },
   "target": {
     "webapp": {
       "context": ".",
       "dockerfile": "Dockerfile",
-      "tags": [
-        "user/repo:v1"
-      ]
+      "tags": ["user/repo:v1"]
     }
   }
 }
 ```
 
-## Using typed variables
+## Typed variables
 
-Non-string variables are also accepted. The value passed with env is parsed
-into suitable type first.
+Non-string variables are supported. Values passed as environment variables are
+coerced into suitable types first.
 
 ```hcl
 # docker-bake.hcl
@@ -306,7 +317,7 @@ variable "IS_FOO" {
 
 target "app" {
   args = {
-    v1 = FOO > 5 ? "higher" : "lower" 
+    v1 = FOO > 5 ? "higher" : "lower"
     v2 = IS_FOO ? "yes" : "no"
   }
 }
@@ -320,9 +331,7 @@ $ docker buildx bake --print app
 {
   "group": {
     "default": {
-      "targets": [
-        "app"
-      ]
+      "targets": ["app"]
     }
   },
   "target": {

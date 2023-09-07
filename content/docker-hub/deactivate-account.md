@@ -8,14 +8,14 @@ You can deactivate an account at any time.
 
 >**Warning**
 >
-> If your Docker Hub account or organization is linked to other Docker products and services, deactivating your account also removes access to those products and services.
+> All Docker products and services that use your Docker account or organization account will be inaccessible after deactivating your account.
 { .warning }
 
 ## Deactivate a user account
 
 ### Prerequisites
 
-Before deactivating your Docker Hub account, ensure that you meet the following requirements:
+Before deactivating your Docker account, ensure that you meet the following requirements:
 
 - You must not be a member of a company or any teams or organizations. You must remove the account from all teams, organizations, or the company.
 
@@ -45,7 +45,7 @@ Once you have completed all the steps above, you can deactivate your account.
 
 ## Deactivate an organization
 
-Before deactivating an organization, please complete the following:
+Before deactivating an organization, complete the following:
 
 - Download any images and tags you want to keep:
   `docker pull -a <image>:<tag>`.

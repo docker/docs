@@ -103,11 +103,11 @@ The following hooks are available:
 Docker Hub allows you to define build environment variables either in the hook
 files, or from the automated build interface, which you can then reference in hooks.
 
-In the following example, we define a build hook that uses `docker build` arguments
-to set the variable `CUSTOM` based on the value of variable we defined using the
-Docker Hub build settings. `$DOCKERFILE_PATH` is a variable that we provide with
-the name of the Dockerfile we wish to build, and `$IMAGE_NAME` is the name of
-the image being built.
+The following example defines a build hook that uses `docker build` arguments to
+set the variable `CUSTOM` based on the value of variable defined using the
+Docker Hub build settings. `$DOCKERFILE_PATH` is a variable that you provide
+with the name of the Dockerfile you want to build, and `$IMAGE_NAME` is the name
+of the image being built.
 
 ```console
 $ docker build --build-arg CUSTOM=$VAR -f $DOCKERFILE_PATH -t $IMAGE_NAME .
@@ -122,7 +122,7 @@ the automated build fails.
 Refer to the [docker build documentation](../../engine/reference/commandline/build.md#build-arg)
 to learn more about Docker build-time variables.
 
-#### Push to multiple repos
+#### Push to multiple repositories
 
 By default the build process pushes the image only to the repository where the
 build settings are configured. If you need to push the same image to multiple
@@ -137,7 +137,7 @@ $ docker push $DOCKER_REPO:$SOURCE_COMMIT
 ## Source repository or branch clones
 
 When Docker Hub pulls a branch from a source code repository, it performs
-a shallow clone, it clones only the tip of the specified branch.  This has the advantage
+a shallow clone, it clones only the tip of the specified branch. This has the advantage
 of minimizing the amount of data transfer necessary from the repository and
 speeding up the build because it pulls only the minimal code necessary.
 
