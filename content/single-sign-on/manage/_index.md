@@ -1,7 +1,7 @@
 ---
-description: Manage SSO
+description: Learn how to manage Single Sign-On for your organization or company.
 keywords: manage, single sign-on, SSO, sign-on
-title: Manage SSO
+title: Manage Single Sign-On
 ---
 
 ## Manage organizations

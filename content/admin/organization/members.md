@@ -1,7 +1,7 @@
 ---
 description: Manage organization members
 keywords: members, teams, organizations
-title: Manage members
+title: Manage organization members
 ---
 
 {{< include "admin-early-access.md" >}}
