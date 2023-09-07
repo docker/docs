@@ -74,7 +74,7 @@ This utility will walk you through creating the following files with sensible de
 Let's get started!
 
 ? What application platform does your project use? Node
-? What version of Rust do you want to use? 18.0.0
+? What version of Node do you want to use? 18.0.0
 ? Which package manager do you want to use? npm
 ? What command do you want to use to start the app: node src/index.js
 ? What port does your server listen on? 3000
