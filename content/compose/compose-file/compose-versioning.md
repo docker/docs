@@ -9,7 +9,7 @@ title: Compose file versions and upgrading
 >This page contains information on the legacy versions of Compose, also collectively referred to as Compose V1.
 >From the end of June 2023 Compose V1 won’t be supported anymore.
 >
->The latest and recommended version of Compose is the [Compose Specification](index.md). 
+>The latest and recommended version of Compose is the [Compose Specification](_index.md). 
 >Make sure you switch to [Compose V2](/compose/compose-file/) with the `docker compose` CLI plugin or by activating the **Use Docker Compose V2** setting in Docker Desktop.
 >
 > For more information, see the [History of Compose](/compose/history/). 
@@ -57,7 +57,7 @@ There are three legacy versions of the Compose file format:
 - Version 2.x. This is specified with a `version: '2'` or `version: '2.1'`, etc., entry at the root of the YAML.
 
 - Version 3.x, designed to be cross-compatible between Compose and the Docker Engine's
-[swarm mode](../../engine/swarm/index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
+[swarm mode](../../engine/swarm/_index.md). This is specified with a `version: '3'` or `version: '3.1'`, etc., entry at the root of the YAML.
 
 The latest and recommended version of the Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). This format merges the 2.x and 3.x versions and is implemented by **Compose 1.27.0+**.
 

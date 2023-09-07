@@ -56,12 +56,12 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 {{< tabs >}}
 {{< tab name="What's included in Docker Desktop?" >}}
 
-- [Docker Engine](../engine/index.md)
+- [Docker Engine](../engine/_index.md)
 - Docker CLI client
-- [Docker Buildx](../build/index.md)
-- [Docker Extensions](extensions/index.md)
-- [Docker Compose](../compose/index.md)
-- [Docker Content Trust](../engine/security/trust/index.md)
+- [Docker Buildx](../build/_index.md)
+- [Docker Extensions](extensions/_index.md)
+- [Docker Compose](../compose/_index.md)
+- [Docker Content Trust](../engine/security/trust/_index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
 - [Credential Helper](https://github.com/docker/docker-credential-helpers/)
 

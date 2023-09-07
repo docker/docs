@@ -146,8 +146,8 @@ Make sure you meet the system requirements outlined earlier and follow the distr
 
 ## Where to go next
 
-- [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
-- [Explore Docker Desktop](../use-desktop/index.md) and all its features.
+- [Get started with Docker](../../get-started/_index.md) provides a general Docker tutorial.
+- [Explore Docker Desktop](../use-desktop/_index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.
 - [Release notes](../release-notes.md) lists component updates, new features, and improvements associated with Docker Desktop releases.

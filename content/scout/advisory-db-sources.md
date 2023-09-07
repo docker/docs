@@ -63,7 +63,7 @@ works in the [image analysis page](./image-analysis.md).
 
 Docker Scout is ideal for analyzing images in Docker Desktop and Docker Hub, but
 the flexibility of the approach also means it can integrate with other systems,
-see [Integrating Docker Scout with other systems](./integrations/index.md).
+see [Integrating Docker Scout with other systems](./integrations/_index.md).
 
 ## How Docker Scout makes more precise matches
 

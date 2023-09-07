@@ -57,7 +57,7 @@ database to identify vulnerabilities in your images.
 You can use Docker Scout in Docker Desktop, Docker Hub, the Docker CLI, and in
 the [Docker Scout Dashboard](./dashboard.md). Docker Scout also supports
 integrations with third-party systems, refer to [Integrating Docker
-Scout](./integrations/index.md) for more information.
+Scout](./integrations/_index.md) for more information.
 
 {{< include "scout-plans.md" >}}
 

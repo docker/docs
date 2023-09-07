@@ -33,7 +33,7 @@ for creating and managing [builders](#builders).
 Docker Buildx is installed by default with Docker Desktop. Docker Engine
 version 23.0 and later requires that you install Buildx from a separate
 package. Buildx is included in the Docker Engine installation instructions, see
-[Install Docker Engine](../engine/install/index.md).
+[Install Docker Engine](../engine/install/_index.md).
 
 You can also build the CLI plugin from source, or grab a binary from the GitHub
 repository and install it manually. See
@@ -48,7 +48,7 @@ A builder may run on the same system as the Buildx client, or it may run
 remotely, on a different system. You can run it as a single node, or as a cluster
 of nodes. Builder nodes may be containers, virtual machines, or physical machines.
 
-For more information, see [Builders](./builders/index.md).
+For more information, see [Builders](./builders/_index.md).
 
 ## BuildKit
 
@@ -83,7 +83,7 @@ Examples of resources that BuildKit can request from Buildx include:
 - SSH sockets
 - Registry authentication tokens
 
-For more information about BuildKit, see [BuildKit](buildkit/index.md).
+For more information about BuildKit, see [BuildKit](buildkit/_index.md).
 
 ## Example build sequence
 

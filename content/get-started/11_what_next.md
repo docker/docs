@@ -49,4 +49,4 @@ If you'd like to see how containers are built from scratch, Liz Rice from Aqua S
 
 ## Language-specific guides
 
-If you are looking for information on how to containerize an application using your favorite language, see the [Language-specific guides](../language/index.md).
+If you are looking for information on how to containerize an application using your favorite language, see the [Language-specific guides](../language/_index.md).

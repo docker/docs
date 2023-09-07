@@ -17,7 +17,7 @@ Access tokens are also valuable for building integrations, as you can issue mult
 any time.
    > **Note**
    >
-   > If you have [two-factor authentication (2FA)](2fa/index.md) enabled on
+   > If you have [two-factor authentication (2FA)](2fa/_index.md) enabled on
    > your account, you must create at least one personal access token. Otherwise,
    > you won't be able to sign in to your account from the Docker CLI.
 
@@ -56,7 +56,7 @@ a password.
 
 > **Note**
 >
-> If you have [two-factor authentication (2FA)](2fa/index.md) enabled, you must
+> If you have [two-factor authentication (2FA)](2fa/_index.md) enabled, you must
 > use a personal access token when logging in from the Docker CLI. 2FA is an
 > optional, but more secure method of authentication.
 

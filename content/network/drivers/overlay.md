@@ -297,6 +297,6 @@ For more information about this limitation, see
 ## Next steps
 
 - Go through the [overlay networking tutorial](../network-tutorial-overlay.md)
-- Learn about [networking from the container's point of view](../index.md)
+- Learn about [networking from the container's point of view](../_index.md)
 - Learn about [standalone bridge networks](bridge.md)
 - Learn about [Macvlan networks](macvlan.md)

@@ -99,4 +99,4 @@ This node joined a swarm as a manager.
 ## Learn More
 
 * `swarm join` [command line reference](../reference/commandline/swarm_join.md)
-* [Swarm mode tutorial](swarm-tutorial/index.md)
+* [Swarm mode tutorial](swarm-tutorial/_index.md)

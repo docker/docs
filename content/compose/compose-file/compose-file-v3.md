@@ -660,7 +660,7 @@ services:
 > Added in [version 3](compose-versioning.md#version-3) file format.
 
 Specify configuration related to the deployment and running of services. The following  
-sub-options only takes effect when deploying to a [swarm](../../engine/swarm/index.md) with
+sub-options only takes effect when deploying to a [swarm](../../engine/swarm/_index.md) with
 [docker stack deploy](../../engine/reference/commandline/stack_deploy.md), and is
 ignored by `docker-compose up` and `docker-compose run`, except for `resources`.
 
@@ -738,7 +738,7 @@ networks:
 The options for `endpoint_mode` also work as flags on the swarm mode CLI command
 [docker service create](../../engine/reference/commandline/service_create.md). For a
 quick list of all swarm related `docker` commands, see
-[Swarm mode CLI commands](../../engine/swarm/index.md#swarm-mode-key-concepts-and-tutorial).
+[Swarm mode CLI commands](../../engine/swarm/_index.md#swarm-mode-key-concepts-and-tutorial).
 
 To learn more about service discovery and networking in swarm mode, see
 [Configure service discovery](../../engine/swarm/networking.md#configure-service-discovery)
@@ -776,7 +776,7 @@ services:
 Either `global` (exactly one container per swarm node) or `replicated` (a
 specified number of containers). The default is `replicated`. (To learn more,
 see [Replicated and global services](../../engine/swarm/how-swarm-mode-works/services.md#replicated-and-global-services)
-in the [swarm](../../engine/swarm/index.md) topics.)
+in the [swarm](../../engine/swarm/_index.md) topics.)
 
 
 ```yaml
@@ -2314,7 +2314,7 @@ volumes:
 > Note when using docker stack deploy
 >
 > External volumes that do not exist _are created_ if you use [docker stack deploy](#deploy) 
-> to launch the app in [swarm mode](../../engine/swarm/index.md) (instead of
+> to launch the app in [swarm mode](../../engine/swarm/_index.md) (instead of
 > [docker compose up](../../engine/reference/commandline/compose_up.md)). In swarm mode, a volume is
 > automatically created when it is defined by a service. As service tasks are
 > scheduled on new nodes, [swarmkit](https://github.com/docker/swarmkit/blob/master/README.md)
@@ -2401,7 +2401,7 @@ how to work with bridge networks, see the Docker Labs tutorial on
 #### overlay
 
 The `overlay` driver creates a named network across multiple nodes in a
-[swarm](../../engine/swarm/index.md).
+[swarm](../../engine/swarm/_index.md).
 
 * For a working example of how to build and use an
 `overlay` network with a service in swarm mode, see the Docker Labs tutorial on
@@ -2759,8 +2759,8 @@ stack.
 
 ## Compose documentation
 
-- [User guide](../index.md)
-- [Installing Compose](../install/index.md)
+- [User guide](../_index.md)
+- [Installing Compose](../install/_index.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
-- [Command line reference](../reference/index.md)
+- [Command line reference](../reference/_index.md)

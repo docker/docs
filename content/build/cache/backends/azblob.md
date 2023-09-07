@@ -17,7 +17,7 @@ The `azblob` cache store uploads your resulting build cache to
 >
 > This cache storage backend requires using a different driver than the default
 > `docker` driver - see more information on selecting a driver
-> [here](../../drivers/index.md). To create a new driver (which can act as a
+> [here](../../drivers/_index.md). To create a new driver (which can act as a
 > simple drop-in replacement):
 >
 > ```console
@@ -44,7 +44,7 @@ The following table describes the available CSV parameters that you can pass to
 | `ignore-error`      | `cache-to`              | Boolean     | `false` | Ignore errors caused by failed cache exports.      |
 
 [1]: #authentication
-[2]: index.md#cache-mode
+[2]: _index.md#cache-mode
 
 ## Authentication
 
@@ -55,7 +55,7 @@ The environment variables are read from the server, not the Buildx client.
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../index.md).
+For an introduction to caching see [Optimizing builds with cache](../_index.md).
 
 For more information on the `azblob` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#azure-blob-storage-cache-experimental).

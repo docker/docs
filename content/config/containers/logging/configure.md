@@ -10,7 +10,7 @@ aliases:
 ---
 
 Docker includes multiple logging mechanisms to help you
-[get information from running containers and services](index.md).
+[get information from running containers and services](_index.md).
 These mechanisms are called logging drivers. Each Docker daemon has a default
 logging driver, which each container uses unless you configure it to use a
 different logging driver, or "log-driver" for short.

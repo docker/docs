@@ -5,7 +5,7 @@ keywords: get started, setup, orientation, quickstart, intro, concepts, containe
 description: Using Docker Compose for multi-container applications
 ---
 
-[Docker Compose](../compose/index.md) is a tool that helps you define and
+[Docker Compose](../compose/_index.md) is a tool that helps you define and
 share multi-container applications. With Compose, you can create a YAML file to define the services
 and with a single command, you can spin everything up or tear it all down.
 
@@ -278,9 +278,9 @@ In this section, you learned about Docker Compose and how it helps you simplify
 the way you define and share multi-service applications.
 
 Related information:
- - [Compose overview](../compose/index.md)
- - [Compose file reference](../compose/compose-file/index.md)
- - [Compose CLI reference](../compose/reference/index.md)
+ - [Compose overview](../compose/_index.md)
+ - [Compose file reference](../compose/compose-file/_index.md)
+ - [Compose CLI reference](../compose/reference/_index.md)
 
 ## Next steps
 

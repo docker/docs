@@ -16,7 +16,7 @@ workloads. For more details see [Under the hood](#under-the-hood).
 Starting with version 4.13, Docker Desktop includes a customized version of
 Sysbox.
 
-When [Enhanced Container Isolation is enabled](index.md#how-do-i-enable-enhanced-container-isolation), containers
+When [Enhanced Container Isolation is enabled](_index.md#how-do-i-enable-enhanced-container-isolation), containers
 created by users through `docker run` or `docker create` are automatically
 launched using Sysbox instead of the standard OCI runc runtime. Users need not
 do anything else and can continue to use containers as usual. For exceptions,

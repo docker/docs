@@ -293,4 +293,4 @@ of continuing.)
 For more information on using cache to do efficient builds, see:
 
 - [Garbage collection](garbage-collection.md)
-- [Cache storage backends](./backends/index.md)
+- [Cache storage backends](./backends/_index.md)

@@ -37,7 +37,7 @@ The **Troubleshoot** page contains the following options:
 
 - **Restart Docker Desktop**.
 
-- **Get support**. Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose) and [Support](../../support/index.md).
+- **Get support**. Users with a paid Docker subscription can use this option to send a support request. Other users can use this option to diagnose any issues in Docker Desktop. For more information, see [Diagnose and feedback](#diagnose) and [Support](../../support/_index.md).
 
 - **Reset Kubernetes cluster**. Select to delete all stacks and Kubernetes resources. For more information, see [Kubernetes](../settings/linux.md#kubernetes).
 
@@ -62,7 +62,7 @@ This opens the in-app **Support** page and starts collecting the diagnostics.
     - If you have a paid Docker subscription, select **Contact Support**. This opens the [Docker Desktop support](https://hub.docker.com/support/desktop/) form. Fill in the information required and add the ID you copied in step three to the **Diagnostics ID** field. Then, select **Submit** to request Docker Desktop support.
         > **Note**
         >
-        > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
+        > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/_index.md).
     - If you don't have a paid Docker subscription, select **Report a Bug** to open a new Docker Desktop issue on GitHub. Complete the information required and ensure you add the diagnostic ID you copied in step three. 
 
 ### Diagnose from the terminal

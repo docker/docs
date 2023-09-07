@@ -116,7 +116,7 @@ roll back to a previous version of the service.
 
 * Learn swarm mode [key concepts](key-concepts.md).
 
-* Get started with the [Swarm mode tutorial](swarm-tutorial/index.md).
+* Get started with the [Swarm mode tutorial](swarm-tutorial/_index.md).
 
 ### Swarm mode CLI commands
 

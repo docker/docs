@@ -41,8 +41,8 @@ The following table describes the available parameters:
 | `oci-mediatypes`    | `true`,`false`                         |         | Use OCI media types in exporter manifests. Defaults to `true` for `type=oci`, and `false` for `type=docker`. See [OCI Media types][2] |
 | `annotation.<key>`  | String                                 |         | Attach an annotation with the respective `key` and `value` to the built image,see [annotations][3]                                    |
 
-[1]: index.md#compression
-[2]: index.md#oci-media-types
+[1]: _index.md#compression
+[2]: _index.md#oci-media-types
 [3]: #annotations
 
 ## Annotations

@@ -34,7 +34,7 @@ volumes:
 ```
 
 For more information about the Compose file, see the
-[Compose file reference](compose-file/index.md).
+[Compose file reference](compose-file/_index.md).
 
 ## Key features of Docker Compose
 
@@ -50,7 +50,7 @@ Compose uses a project name to isolate environments from each other. You can mak
 
 The default project name is the base name of the project directory. You can set
 a custom project name by using the
-[`-p` command line option](reference/index.md) or the
+[`-p` command line option](reference/_index.md) or the
 [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
 The default project directory is the base directory of the Compose file. A custom value
@@ -81,7 +81,7 @@ Compose supports variables in the Compose file. You can use these variables
 to customize your composition for different environments, or different users.
 
 You can extend a Compose file using the `extends` field or by creating multiple
-Compose files. For more details, see [Working with multiple Compose files](multiple-compose-files/index.md).
+Compose files. For more details, see [Working with multiple Compose files](multiple-compose-files/_index.md).
 
 ## Common use cases of Docker Compose
 
@@ -94,7 +94,7 @@ When you're developing software, the ability to run an application in an
 isolated environment and interact with it is crucial. The Compose command
 line tool can be used to create the environment and interact with it.
 
-The [Compose file](compose-file/index.md) provides a way to document and configure
+The [Compose file](compose-file/_index.md) provides a way to document and configure
 all of the application's service dependencies (databases, queues, caches,
 web service APIs, etc). Using the Compose command line tool you can create
 and start one or more containers for each dependency with a single command
@@ -109,7 +109,7 @@ started guide" to a single machine readable Compose file and a few commands.
 An important part of any Continuous Deployment or Continuous Integration process
 is the automated test suite. Automated end-to-end testing requires an
 environment in which to run tests. Compose provides a convenient way to create
-and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file/index.md), you can create and destroy these environments in just a few commands:
+and destroy isolated testing environments for your test suite. By defining the full environment in a [Compose file](compose-file/_index.md), you can create and destroy these environments in just a few commands:
 
 ```console
 $ docker compose up -d

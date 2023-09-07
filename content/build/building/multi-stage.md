@@ -146,7 +146,7 @@ The legacy Docker Engine builder processes all stages of a Dockerfile leading
 up to the selected `--target`. It will build a stage even if the selected
 target doesn't depend on that stage.
 
-[BuildKit](../buildkit/index.md) only builds the stages that the target stage
+[BuildKit](../buildkit/_index.md) only builds the stages that the target stage
 depends on.
 
 For example, given the following Dockerfile:
@@ -163,7 +163,7 @@ FROM base AS stage2
 RUN echo "stage2"
 ```
 
-With [BuildKit enabled](../buildkit/index.md#getting-started), building the
+With [BuildKit enabled](../buildkit/_index.md#getting-started), building the
 `stage2` target in this Dockerfile means only `base` and `stage2` are processed.
 There is no dependency on `stage1`, so it's skipped.
 

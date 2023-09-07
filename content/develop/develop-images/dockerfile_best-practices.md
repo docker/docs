@@ -43,7 +43,7 @@ the running container, such as writing new files, modifying existing files, and
 deleting files, are written to this writable container layer.
 
 For more on image layers and how Docker builds and stores images, see
-[About storage drivers](../../storage/storagedriver/index.md).
+[About storage drivers](../../storage/storagedriver/_index.md).
 
 ## General guidelines and recommendations
 
@@ -285,7 +285,7 @@ processes, and [Apache](https://httpd.apache.org/) can create one process per
 request.
 
 Use your best judgment to keep containers as clean and modular as possible. If
-containers depend on each other, you can use [Docker container networks](../../network/index.md)
+containers depend on each other, you can use [Docker container networks](../../network/_index.md)
 to ensure that these containers can communicate.
 
 ### Minimize the number of layers
@@ -888,7 +888,7 @@ These Official Images have exemplary Dockerfiles:
 ## Additional resources:
 
 * [Dockerfile reference](../../engine/reference/builder.md)
-* [More about Automated builds](../../docker-hub/builds/index.md)
+* [More about Automated builds](../../docker-hub/builds/_index.md)
 * [Guidelines for creating Docker Official Images](../../docker-hub/official_images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker)
 * [More about base images](../../build/building/base-images.md)

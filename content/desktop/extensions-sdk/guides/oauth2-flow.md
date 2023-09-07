@@ -93,4 +93,4 @@ It's highly recommended that you use an external source of storage to store the 
 
 ## What's next
 
-Learn how to [publish and distribute your extension](../extensions/index.md)
+Learn how to [publish and distribute your extension](../extensions/_index.md)

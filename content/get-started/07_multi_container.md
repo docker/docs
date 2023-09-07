@@ -270,7 +270,7 @@ container. You learned a little bit about container networking and service disco
 
 Related information:
  - [docker CLI reference](/engine/reference/commandline/cli/)
- - [Networking overview](../network/index.md)
+ - [Networking overview](../network/_index.md)
 
 ## Next steps
 

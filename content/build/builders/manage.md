@@ -25,7 +25,7 @@ $ docker buildx create --name=<builder-name>
 
 Buildx uses the `docker-container` driver by default if you omit the `--driver`
 flag. For more information about available drivers, see
-[Build drivers](../drivers/index.md).
+[Build drivers](../drivers/_index.md).
 
 ## List available builders
 
@@ -42,7 +42,7 @@ my_builder      docker-container
 ```
 
 The asterisk (`*`) next to the builder name indicates the
-[selected builder](index.md#selected-builder).
+[selected builder](_index.md#selected-builder).
 
 ## Inspect a builder
 

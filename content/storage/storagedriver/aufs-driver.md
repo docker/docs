@@ -229,5 +229,5 @@ The following generic performance best practices also apply to AUFS.
 ## Related information
 
 - [Volumes](../volumes.md)
-- [Understand images, containers, and storage drivers](index.md)
+- [Understand images, containers, and storage drivers](_index.md)
 - [Select a storage driver](select-storage-driver.md)

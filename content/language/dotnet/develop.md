@@ -329,7 +329,7 @@ db
 
 ## Better productivity with Docker Compose
 
-In this section, we’ll create a [Compose file](../../compose/index.md) to start our dotnet-docker app, Adminer, and the PostgreSQL database using a single command.
+In this section, we’ll create a [Compose file](../../compose/_index.md) to start our dotnet-docker app, Adminer, and the PostgreSQL database using a single command.
 
 Open the `dotnet-docker` directory in your IDE or a text editor and create a new file named `docker-compose.yml`. Copy and paste the following contents into the file.
 

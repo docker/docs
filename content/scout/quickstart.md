@@ -219,5 +219,5 @@ different tags of the same image.
 
 - Explore the [Docker Scout Dashboard](/scout/dashboard) to see how you can
   collaborate with your team on vulnerabilities.
-- [Learn how to integrate Docker Scout with other systems](./integrations/index.md).
+- [Learn how to integrate Docker Scout with other systems](./integrations/_index.md).
 - [Find out where Docker Scout gets its vulnerability data](/scout/advisory-db-sources).

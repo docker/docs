@@ -93,7 +93,7 @@ the new key.
 
 ## Related information
 
-* [Content trust in Docker](index.md)
+* [Content trust in Docker](_index.md)
 * [Automation with content trust](trust_automation.md)
 * [Delegations for content trust](trust_delegation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)

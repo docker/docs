@@ -126,7 +126,7 @@ that affect images that you build or use.
 - Docker Hub supports an automatic
   [vulnerability scanning](../docker-hub/vulnerability-scanning.md) feature,
   which when enabled automatically scans images when you push them to a Docker Hub
-  repository. Requires a [Docker subscription](../subscription/index.md).
+  repository. Requires a [Docker subscription](../subscription/_index.md).
 - Docker Hub also supports an early-access
   [advanced image analysis](../scout/image-analysis.md) feature, which extends
   the "core" vulnerability scanning solution with enhanced capabilities and more
@@ -138,7 +138,7 @@ that affect images that you build or use.
   store, that visualizes all of the known vulnerabilities affecting an image.
 
 All of these security features are powered by the same technology:
-[Docker Scout](../scout/index.md). These features help you to achieve a holistic
+[Docker Scout](../scout/_index.md). These features help you to achieve a holistic
 view of your supply chain security, and to provide actionable suggestions for
 what you can do to remediate those vulnerabilities.
 

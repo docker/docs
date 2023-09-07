@@ -7,7 +7,7 @@ aliases:
 
 ## Specification
 
-Bake uses the [compose-spec](../../compose/compose-file/index.md) to
+Bake uses the [compose-spec](../../compose/compose-file/_index.md) to
 parse a compose file and translate each service to a [target](reference.md#target).
 
 ```yaml

@@ -17,7 +17,7 @@ all other resources required by your application.
 To complete this tutorial, you need the following:
 
 - Go version 1.19 or later. Visit the [download page for Go](https://golang.org/dl/) first and install the toolchain.
-- Docker running locally. Follow the [instructions to download and install Docker](../../desktop/index.md).
+- Docker running locally. Follow the [instructions to download and install Docker](../../desktop/_index.md).
 - An IDE or a text editor to edit files. [Visual Studio Code](https://code.visualstudio.com/) is a free and popular choice but you can use anything you feel comfortable with.
 - A Git client. We'll use a command-line based `git` client throughout this module, but you are free to use whatever works for you.
 - A command-line terminal application. The examples shown in this module are from the Linux shell, but they should work in PowerShell, Windows Command Prompt, or OS X Terminal with minimal, if any, modifications.
@@ -343,7 +343,7 @@ built our image named `docker-gs-ping`.
 ## View local images
 
 To see the list of images we have on our local machine, we have two options. One
-is to use the CLI and the other is to use [Docker Desktop](../../desktop/index.md).
+is to use the CLI and the other is to use [Docker Desktop](../../desktop/_index.md).
 Since we are currently working in the terminal, let’s take a look at listing
 images with the CLI.
 

@@ -49,7 +49,7 @@ The following three network concepts are important to swarm services:
   join a swarm. Most users do not need to customize its configuration, but
   Docker allows you to do so.
 
-> **See also** [Networking overview](../../network/index.md) for more details about Swarm networking in general.
+> **See also** [Networking overview](../../network/_index.md) for more details about Swarm networking in general.
 
 ## Firewall considerations
 
@@ -60,7 +60,7 @@ each other over the following ports:
 * Port `4789` UDP (configurable) for the overlay network (including ingress) data path.
 
 When setting up networking in a Swarm, special care should be taken. Consult
-the [tutorial](swarm-tutorial/index.md#open-protocols-and-ports-between-the-hosts)
+the [tutorial](swarm-tutorial/_index.md#open-protocols-and-ports-between-the-hosts)
 for an overview.
 
 ## Create an overlay network
@@ -423,6 +423,6 @@ $ docker swarm join \
 
 * [Deploy services to a swarm](services.md)
 * [Swarm administration guide](admin_guide.md)
-* [Swarm mode tutorial](swarm-tutorial/index.md)
-* [Networking overview](../../network/index.md)
+* [Swarm mode tutorial](swarm-tutorial/_index.md)
+* [Networking overview](../../network/_index.md)
 * [Docker CLI reference](../reference/commandline/docker.md)

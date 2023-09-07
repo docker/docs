@@ -260,6 +260,6 @@ For more information about this limitation, see
 ## Next steps
 
 - Go through the [standalone networking tutorial](../network-tutorial-standalone.md)
-- Learn about [networking from the container's point of view](../index.md)
+- Learn about [networking from the container's point of view](../_index.md)
 - Learn about [overlay networks](overlay.md)
 - Learn about [Macvlan networks](macvlan.md)

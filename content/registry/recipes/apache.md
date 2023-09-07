@@ -33,7 +33,7 @@ Furthermore, introducing an extra http layer in your communication pipeline adds
 
 ## Setting things up
 
-1. Read [the requirements](index.md#requirements).
+1. Read [the requirements](_index.md#requirements).
 
 2. Run the following script:
 

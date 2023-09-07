@@ -14,7 +14,7 @@ Docker Personal includes:
 
 - Unlimited public repositories
 - Unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md)
-- Unlimited [collaborators](../docker-hub/repos/access/index.md#collaborators-and-their-role) for public repositories at no cost per month.
+- Unlimited [collaborators](../docker-hub/repos/access/_index.md#collaborators-and-their-role) for public repositories at no cost per month.
 
 Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours. 
 
@@ -28,7 +28,7 @@ Docker Pro includes:
 - All the features available in Personal
 - Unlimited private repositories
 - 5000 image [pulls per day](../docker-hub/download-rate-limit.md)
-- [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds
+- [Auto Builds](../docker-hub/builds/_index.md) with 5 concurrent builds
 - 300 [Vulnerability Scans](../docker-hub/vulnerability-scanning.md)
 - Unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
 
@@ -41,7 +41,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 Docker Team includes:
 - Everything included in Docker Pro
 - Unlimited teams
-- [Auto Builds](../docker-hub/builds/index.md) with 15 concurrent builds
+- [Auto Builds](../docker-hub/builds/_index.md) with 15 concurrent builds
 - Unlimited [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md)
 - 5000 image [pulls per day](../docker-hub/download-rate-limit.md) for each team member
 
@@ -55,11 +55,11 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 Docker Business includes:
 - Everything included in Docker Team
-- [Hardened Docker Desktop](../desktop/hardened-desktop/index.md) 
+- [Hardened Docker Desktop](../desktop/hardened-desktop/_index.md) 
 - [Image Access Management](../docker-hub/image-access-management.md) which allows admins control what content developers can access
 - [Registry Access Management](../desktop/hardened-desktop/registry-access-management.md) which lets admins control what registries developers can access
 - [Company layer](../docker-hub/creating-companies.md) to manage multiple organizations and settings
-- [Single Sign-On](../single-sign-on/index.md)
+- [Single Sign-On](../single-sign-on/_index.md)
 - [System for Cross-domain Identity Management](../docker-hub/scim.md) and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).

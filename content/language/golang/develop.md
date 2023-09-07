@@ -65,7 +65,7 @@ daed20bbecce   host          host      local
 6aee44f40a39   none          null      local
 ```
 
-Our bridge network `mynet` has been created successfully. The other three networks, named `bridge`, `host`, and `none` are the _default_ networks and they had been created by the Docker itself. While it is not relevant to our current discussion, you can learn more about Docker networking in the [networking overview](../../network/index.md) section.
+Our bridge network `mynet` has been created successfully. The other three networks, named `bridge`, `host`, and `none` are the _default_ networks and they had been created by the Docker itself. While it is not relevant to our current discussion, you can learn more about Docker networking in the [networking overview](../../network/_index.md) section.
 
 ### Choose good names for volumes and networks
 
@@ -572,7 +572,7 @@ networks:
 ```
 
 
-This Docker Compose configuration is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that in the Docker Compose file. The [Docker Compose documentation pages](../../compose/index.md) are quite extensive and include a full reference for the Docker Compose file format.
+This Docker Compose configuration is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that in the Docker Compose file. The [Docker Compose documentation pages](../../compose/_index.md) are quite extensive and include a full reference for the Docker Compose file format.
 
 ### The `.env` file
 
@@ -715,7 +715,7 @@ There are some tangential, yet interesting points that were purposefully not cov
 
 ### Persistent storage
 
-A _managed volume_ isn't the only way to provide your container with persistent storage. It is highly recommended to get acquainted with available storage options and their use cases, covered in the following part of Docker documentation: [Manage data in Docker](../../storage/index.md).
+A _managed volume_ isn't the only way to provide your container with persistent storage. It is highly recommended to get acquainted with available storage options and their use cases, covered in the following part of Docker documentation: [Manage data in Docker](../../storage/_index.md).
 
 ### CockroachDB clusters
 

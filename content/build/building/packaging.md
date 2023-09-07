@@ -111,7 +111,7 @@ Here's a breakdown of what this Dockerfile does:
 
 The first line to add to a Dockerfile is a [`# syntax` parser directive](../../engine/reference/builder.md#syntax).
 While optional, this directive instructs the Docker builder what syntax to use
-when parsing the Dockerfile, and allows older Docker versions with [BuildKit enabled](../buildkit/index.md#getting-started)
+when parsing the Dockerfile, and allows older Docker versions with [BuildKit enabled](../buildkit/_index.md#getting-started)
 to use a specific [Dockerfile frontend](../dockerfile/frontend.md) before
 starting the build. [Parser directives](../../engine/reference/builder.md/#parser-directives)
 must appear before any other comment, whitespace, or Dockerfile instruction in
@@ -270,7 +270,7 @@ Docker host.
 ## Other resources
 
 If you are interested in examples in other languages, such as Go, check out
-our [language-specific guides](../../language/index.md) in the Guides section.
+our [language-specific guides](../../language/_index.md) in the Guides section.
 
 For more information about building, including advanced use cases and patterns,
-refer to the [Build with Docker](../guide/index.md) guide.
+refer to the [Build with Docker](../guide/_index.md) guide.

@@ -481,7 +481,7 @@ No signatures or cannot access registry.example.com/admin/demo
 
 ## Related information
 
-* [Content trust in Docker](index.md)
+* [Content trust in Docker](_index.md)
 * [Manage keys for content trust](trust_key_mng.md)
 * [Automation with content trust](trust_automation.md)
 * [Play in a content trust sandbox](trust_sandbox.md)

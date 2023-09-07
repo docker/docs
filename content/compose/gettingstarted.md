@@ -16,8 +16,8 @@ The concepts demonstrated here should be understandable even if you're not famil
 ## Prerequisites
 
 You need to have Docker Engine and Docker Compose on your machine. You can either:
-- Install [Docker Engine](../get-docker.md) and [Docker Compose](install/index.md) as standalone binaries
-- Install [Docker Desktop](../desktop/index.md) which includes both Docker Engine and Docker Compose
+- Install [Docker Engine](../get-docker.md) and [Docker Compose](install/_index.md) as standalone binaries
+- Install [Docker Desktop](../desktop/_index.md) which includes both Docker Engine and Docker Compose
 
 You don't need to install Python or Redis, as both are provided by Docker images.
 
@@ -118,7 +118,7 @@ This tells Docker to:
 { .important }
 
 For more information on how to write Dockerfiles, see the
-[Docker user guide](../develop/index.md)
+[Docker user guide](../develop/_index.md)
 and the [Dockerfile reference](/engine/reference/builder/).
 
 
@@ -349,6 +349,6 @@ $ docker compose down --volumes
 ## Where to go next
 
 - Try the [Sample apps with Compose](https://github.com/docker/awesome-compose)
-- [Explore the full list of Compose commands](reference/index.md)
-- [Explore the Compose file reference](compose-file/index.md)
-- To learn more about volumes and bind mounts, see [Manage data in Docker](../storage/index.md)
+- [Explore the full list of Compose commands](reference/_index.md)
+- [Explore the Compose file reference](compose-file/_index.md)
+- To learn more about volumes and bind mounts, see [Manage data in Docker](../storage/_index.md)

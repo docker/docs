@@ -13,7 +13,7 @@ manually by a user. This makes it easier to automatically start Docker when the
 machine reboots.
 
 The command to start Docker depends on your operating system. Check the correct
-page under [Install Docker](../../engine/install/index.md).
+page under [Install Docker](../../engine/install/_index.md).
 
 ### Start with systemd
 

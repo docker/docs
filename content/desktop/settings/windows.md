@@ -31,7 +31,7 @@ On the **General** tab, you can configure when to start Docker and specify other
   execution attacks.
 
 - **Use the WSL 2 based engine**. WSL 2 provides better performance than the
-  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../wsl/index.md).
+  Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../wsl/_index.md).
 
 - **Add `*.docker.internal` to the host's `/etc/hosts` file. (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
 
@@ -46,7 +46,7 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Open Docker Desktop dashboard at startup**. Select to automatically open the
   dashboard when starting Docker Desktop.
 
-- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
+- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/_index.md)
     >**Note**
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
@@ -181,7 +181,7 @@ To set a different proxy for Docker Desktop, turn on **Manual proxy configuratio
 upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
 
 To prevent developers from accidentally changing the proxy settings, see
-[Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
+[Settings Management](../hardened-desktop/settings-management/_index.md#what-features-can-i-configure-with-settings-management).
 
 The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY` environment variable.
 
@@ -209,7 +209,7 @@ to set Ubuntu as your default WSL distro, run `wsl --set-default ubuntu`).
 You can also select any additional distributions you would like to enable the WSL 2 integration on.
 
 For more details on configuring Docker Desktop to use WSL 2, see
-[Docker Desktop WSL 2 backend](../wsl/index.md).
+[Docker Desktop WSL 2 backend](../wsl/_index.md).
 
 ## Docker Engine
 
@@ -286,7 +286,7 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](../extensions/index.md).
+For more information about Docker extensions, see [Extensions](../extensions/_index.md).
 
 ## Feature control 
 
@@ -300,7 +300,7 @@ You can also sign up to the [Developer Preview Program](https://www.docker.com/c
 
 #### Use containerd for pulling and storing images
 
-Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
+Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/_index.md).
 
 ### Experimental features
 

@@ -14,7 +14,7 @@ This page describes how to customize daemon settings when using systemd.
 ## Custom Docker daemon options
 
 Most configuration options for the Docker daemon are set using the `daemon.json`
-configuration file. See [Docker daemon configuration overview](./index.md) for
+configuration file. See [Docker daemon configuration overview](./_index.md) for
 more information.
 
 ## Manually create the systemd unit files
@@ -38,7 +38,7 @@ its start-up environment to configure HTTP or HTTPS proxy behavior:
 - `no_proxy`
 
 In Docker Engine version 23.0 and later versions, you may also configure proxy
-behavior for the daemon in the [`daemon.json` file](./index.md#configure-the-docker-daemon):
+behavior for the daemon in the [`daemon.json` file](./_index.md#configure-the-docker-daemon):
 
 ```json
 {

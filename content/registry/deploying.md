@@ -171,7 +171,7 @@ $ docker run -d \
 By default, the registry stores its data on the local filesystem, whether you
 use a bind mount or a volume. You can store the registry data in an Amazon S3
 bucket, Google Cloud Platform, or on another storage back-end by using
-[storage drivers](./storage-drivers/index.md). For more information, see
+[storage drivers](./storage-drivers/_index.md). For more information, see
 [storage configuration options](./configuration.md#storage).
 
 ## Run an externally-accessible registry
@@ -469,7 +469,7 @@ secrets.
 ### More advanced authentication
 
 You may want to leverage more advanced basic auth implementations by using a
-proxy in front of the registry. See the [recipes list](recipes/index.md).
+proxy in front of the registry. See the [recipes list](recipes/_index.md).
 
 The registry also supports delegated authentication which redirects users to a
 specific trusted token server. This approach is more complicated to set up, and
@@ -575,7 +575,7 @@ More specific and advanced information is available in the following sections:
 
  - [Configuration reference](configuration.md)
  - [Working with notifications](notifications.md)
- - [Advanced "recipes"](recipes/index.md)
+ - [Advanced "recipes"](recipes/_index.md)
  - [Registry API](spec/api.md)
- - [Storage driver model](storage-drivers/index.md)
+ - [Storage driver model](storage-drivers/_index.md)
  - [Token authentication](spec/auth/token.md)

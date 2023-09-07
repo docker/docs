@@ -9,7 +9,7 @@ aliases:
 > **Note**
 >
 > Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
+> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
 
 The following options allow you to customize your automated build and automated
 test processes.
@@ -93,8 +93,8 @@ The following hooks are available:
 * `hooks/post_build`
 * `hooks/pre_test`
 * `hooks/post_test`
-* `hooks/pre_push` (only used when executing a build rule or [Automated build](index.md) )
-* `hooks/post_push` (only used when executing a build rule or [Automated build](index.md) )
+* `hooks/pre_push` (only used when executing a build rule or [Automated build](_index.md) )
+* `hooks/post_push` (only used when executing a build rule or [Automated build](_index.md) )
 
 ### Build hook examples
 

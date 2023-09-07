@@ -79,7 +79,7 @@ properly. For more information, see
 
 ## Setting things up
 
-Review the [requirements](index.md#requirements), then follow these steps.
+Review the [requirements](_index.md#requirements), then follow these steps.
 
 1. Create the required directories
 

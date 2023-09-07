@@ -35,7 +35,7 @@ If you choose the integrated terminal, you can run commands in a running contain
 - **Open Docker Desktop dashboard at startup**. Select to automatically open the
   dashboard when starting Docker Desktop.
 
-- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
+- **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/_index.md)
     >**Note**
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
@@ -119,7 +119,7 @@ URL for your HTTP/HTTPS proxies to protect passwords while in transit on the net
 supports TLS 1.3 when communicating with proxies.
 
 To prevent developers from accidentally changing the proxy settings, see
-[Settings Management](../hardened-desktop/settings-management/index.md#what-features-can-i-configure-with-settings-management).
+[Settings Management](../hardened-desktop/settings-management/_index.md#what-features-can-i-configure-with-settings-management).
 
 ### Network
 
@@ -152,7 +152,7 @@ edit the file using your favorite text editor.
 > Only the **Docker Desktop** daemon uses the configuration file under `$HOME/.docker`.
 > If you manually install Docker Engine alongside Docker Desktop, the manually
 > installed instance uses a `daemon.json` configuration file in a  different location.
-> Refer to [Configure the daemon](../../config/daemon/index.md) for more information
+> Refer to [Configure the daemon](../../config/daemon/_index.md) for more information
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 
 To see the full list of possible configuration options, see the 
@@ -204,7 +204,7 @@ Use the **Extensions** tab to:
 - **Allow only extensions distributed through the Docker Marketplace**
 - **Show Docker Extensions system containers**
 
-For more information about Docker extensions, see [Extensions](../extensions/index.md).
+For more information about Docker extensions, see [Extensions](../extensions/_index.md).
 
 ## Features in development
 
@@ -218,7 +218,7 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 #### Use containerd for pulling and storing images
 
-Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
+Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/_index.md).
 
 ### Experimental features
 

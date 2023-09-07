@@ -1980,8 +1980,8 @@ networks:
 
 ## Compose documentation
 
-- [User guide](../index.md)
-- [Installing Compose](../install/index.md)
+- [User guide](../_index.md)
+- [Installing Compose](../install/_index.md)
 - [Compose file versions and upgrading](compose-versioning.md)
 - [Sample apps with Compose](../samples-for-compose.md)
-- [Command line reference](../reference/index.md)
+- [Command line reference](../reference/_index.md)

@@ -6,7 +6,7 @@ keywords: networking, host, standalone
 
 This series of tutorials deals with networking standalone containers which bind
 directly to the Docker host's network, with no network isolation. For other
-networking topics, see the [overview](index.md).
+networking topics, see the [overview](_index.md).
 
 ## Goal
 

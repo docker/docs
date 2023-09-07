@@ -13,7 +13,7 @@ aliases:
 
 After you
 [install Docker](../../../get-docker.md), you can
-[install the Go or Python SDK](index.md#install-the-sdks) and
+[install the Go or Python SDK](_index.md#install-the-sdks) and
 also try out the Docker Engine API.
 
 Each of these examples show how to perform a given Docker operation using the Go

@@ -8,7 +8,7 @@ This page contains a list of resources for application developers who would like
 
 ## Prerequisites
 
-Work through the learning modules in [Get started](../get-started/index.md) to understand how to build an image and run it as a containerized application.
+Work through the learning modules in [Get started](../get-started/_index.md) to understand how to build an image and run it as a containerized application.
 
 ## Develop new apps on Docker
 
@@ -28,13 +28,13 @@ most benefits from Docker.
 - [Docker for Java developers lab](https://github.com/docker/labs/tree/master/developer-tools/java/) 
 - [Port a node.js app to Docker lab](https://github.com/docker/labs/tree/master/developer-tools/nodejs/porting)
 - [Ruby on Rails app on Docker lab](https://github.com/docker/labs/tree/master/developer-tools/ruby)
-- [Dockerize a .Net Core application](../language/dotnet/index.md)
+- [Dockerize a .Net Core application](../language/dotnet/_index.md)
 - [ASP.NET Core application with SQL Server](https://github.com/docker/awesome-compose/tree/master/aspnet-mssql) using Docker Compose
 
 ## Advanced development with the SDK or API
 
 After you can write Dockerfiles or Compose files and use Docker CLI, take it to
 the next level by using Docker Engine SDK for Go/Python or use the HTTP API
-directly. Visit the [Develop with Docker Engine API](../engine/api/index.md)
+directly. Visit the [Develop with Docker Engine API](../engine/api/_index.md)
 section to learn more about developing with the Engine API, where to find SDKs
 for your programming language of choice, and to see some examples.

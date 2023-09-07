@@ -46,13 +46,13 @@ cannot access features that require an active internet
 connection. Additionally, any functionality that requires you to sign won't work while using Docker Desktop offline or in air-gapped environments.
 This includes:
 
-- The resources in the [Learning Center](../use-desktop/index.md)
+- The resources in the [Learning Center](../use-desktop/_index.md)
 - Pulling or pushing an image to Docker Hub
 - [Image Access Management](../../docker-hub/image-access-management.md)
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
 - Viewing remote images in the Docker Dashboard
-- Setting up [Dev Environments](../dev-environments/index.md)
-- Docker build when using [BuildKit](../../build/buildkit/index.md#getting-started).
+- Setting up [Dev Environments](../dev-environments/_index.md)
+- Docker build when using [BuildKit](../../build/buildkit/_index.md#getting-started).
   You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
 - Deploying an app to the cloud through Compose
   [ACI](../../cloud/aci-integration.md) and [ECS](../../cloud/ecs-integration.md)
@@ -92,7 +92,7 @@ $ export DOCKER_HOST=unix:///var/run/docker.sock
 Docker Desktop Windows users can connect to the Docker Engine through a **named pipe**: `npipe:////./pipe/docker_engine`, or **TCP socket** at this URL:
 `tcp://localhost:2375`.
 
-For details, see [Docker Engine API](../../engine/api/index.md).
+For details, see [Docker Engine API](../../engine/api/_index.md).
 
 ### How do I connect from a container to a service on the host?
 

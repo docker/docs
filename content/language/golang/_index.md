@@ -32,9 +32,9 @@ so *go* (pun intended) check it out!
 You also must know some basic [Docker concepts](../../get-started/overview.md) as well as to 
 be at least vaguely familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
 
-Your Docker set-up must have BuildKit enabled. BuildKit is enabled by default for all users on [Docker Desktop](../../desktop/index.md). 
+Your Docker set-up must have BuildKit enabled. BuildKit is enabled by default for all users on [Docker Desktop](../../desktop/_index.md). 
 If you have installed Docker Desktop, you don’t have to manually enable BuildKit. If you are running Docker on Linux, 
-please check out BuildKit [getting started](../../build/buildkit/index.md#getting-started) page.
+please check out BuildKit [getting started](../../build/buildkit/_index.md#getting-started) page.
 
 Some familiarity with the command line is also expected.
 

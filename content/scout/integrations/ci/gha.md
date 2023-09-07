@@ -16,7 +16,7 @@ version.
 
 First, set up the rest of the workflow. There's a lot that's not specific to
 Docker Scout but needed to create the images to compare. For more details on
-those actions and using GitHub Actions with Docker in general, see [the GitHub Actions documentation](../../../build/ci/github-actions/index.md).
+those actions and using GitHub Actions with Docker in general, see [the GitHub Actions documentation](../../../build/ci/github-actions/_index.md).
 
 Add the following to a GitHub Actions YAML file:
 

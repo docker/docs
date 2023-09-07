@@ -11,5 +11,5 @@ aliases:
 
 * [Network containers](networkingcontainers.md)
 * [Manage data in containers](../../storage/volumes.md)
-* [Samples](../../samples/index.md)
-* [Get Started](../../get-started/index.md)
+* [Samples](../../samples/_index.md)
+* [Get Started](../../get-started/_index.md)

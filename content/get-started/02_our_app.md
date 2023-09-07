@@ -179,7 +179,7 @@ Related information:
 
  - [Dockerfile reference](../engine/reference/builder.md)
  - [docker CLI reference](/engine/reference/commandline/cli/)
- - [Build with Docker guide](../build/guide/index.md)
+ - [Build with Docker guide](../build/guide/_index.md)
 
 ## Next steps
 

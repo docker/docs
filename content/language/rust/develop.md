@@ -314,7 +314,7 @@ In this section, you took a look at setting up your Compose file to run your Rus
 
 Related information:
  - [Docker volumes](../../storage/volumes.md)
- - [Compose overview](../../compose/index.md)
+ - [Compose overview](../../compose/_index.md)
 
 ## Next steps
 

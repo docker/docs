@@ -301,7 +301,7 @@ updated. This feature is particularly important if you do use often-changing tag
 such as `latest`, because it ensures that all service tasks use the same version
 of the image.
 
-> **Note**: If [content trust](../security/trust/index.md) is
+> **Note**: If [content trust](../security/trust/_index.md) is
 > enabled, the client actually resolves the image's tag to a digest before
 > contacting the swarm manager, to verify that the image is signed.
 > Thus, if you use content trust, the swarm manager receives the request
@@ -1037,4 +1037,4 @@ $ docker inspect --format="{{.Config.Hostname}}" hosttempl.1.wo41w8hg8qanxwjwsg4
 
 * [Swarm administration guide](admin_guide.md)
 * [Docker Engine command line reference](../reference/commandline/docker.md)
-* [Swarm mode tutorial](swarm-tutorial/index.md)
+* [Swarm mode tutorial](swarm-tutorial/_index.md)

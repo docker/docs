@@ -16,7 +16,7 @@ aliases:
 - /desktop/enterprise/troubleshoot/windows-issues/
 ---
 
-Docker Desktop Enterprise (DDE) has been deprecated and is no longer in active development. Please use [Docker Desktop](../index.md) Community instead.
+Docker Desktop Enterprise (DDE) has been deprecated and is no longer in active development. Please use [Docker Desktop](../_index.md) Community instead.
 
 If you are an existing DDE customer, use our [Support form](https://hub.docker.com/support/desktop/) to request a transition to one of our new [subscription plans](https://www.docker.com/pricing).
 

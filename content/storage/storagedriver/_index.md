@@ -130,7 +130,7 @@ these containers would be SUM (`size` of containers) plus one image size
 This also does not count the following additional ways a container can take up
 disk space:
 
-- Disk space used for log files stored by the [logging-driver](../../config/containers/logging/index.md).
+- Disk space used for log files stored by the [logging-driver](../../config/containers/logging/_index.md).
   This can be non-trivial if your container generates a large amount of logging
   data and log rotation is not configured.
 - Volumes and bind mounts used by the container.
@@ -330,7 +330,7 @@ layers are the same.
     > image for each step for caching purposes, and the `IMAGE` column would show
     > the ID of that image.
     > BuildKit uses its own caching mechanism, and no longer requires intermediate
-    > images for caching. Refer to [BuildKit](../../build/buildkit/index.md)
+    > images for caching. Refer to [BuildKit](../../build/buildkit/_index.md)
     > to learn more about other enhancements made in BuildKit.
 
 

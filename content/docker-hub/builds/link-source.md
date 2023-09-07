@@ -12,14 +12,14 @@ aliases:
 > **Note**
 >
 > Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
+> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
 
 To automate building and testing of your images, you link to your hosted source
 code service to Docker Hub so that it can access your source code
 repositories. You can configure this link for user accounts or
 organizations.
 
-If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](index.md#service-users-for-team-autobuilds) for the team before linking the account as described below.
+If you are linking a source code provider to create autobuilds for a team, follow the instructions to [create a service account](_index.md#service-users-for-team-autobuilds) for the team before linking the account as described below.
 
 ## Link to a GitHub user account
 

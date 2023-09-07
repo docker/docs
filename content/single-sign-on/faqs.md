@@ -18,7 +18,7 @@ Docker supports Service Provider Initiated (SP-initiated) SSO flow. This means u
 
 ### Where can I find detailed instructions on how to configure Docker SSO?
 
-You first need to establish an SSO connection with your identity provider, and the company email domain needs to be verified prior to establishing an SSO connection for your users. For detailed step-by-step instructions on how to configure Docker SSO, see [Single Sign-on](index.md).
+You first need to establish an SSO connection with your identity provider, and the company email domain needs to be verified prior to establishing an SSO connection for your users. For detailed step-by-step instructions on how to configure Docker SSO, see [Single Sign-on](_index.md).
 
 ### Does Docker SSO support multi-factor authentication (MFA)?
 

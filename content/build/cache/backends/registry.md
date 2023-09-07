@@ -21,7 +21,7 @@ everything that the inline cache can do, and more:
 >
 > This cache storage backend requires using a different driver than the default
 > `docker` driver - see more information on selecting a driver
-> [here](../../drivers/index.md). To create a new driver (which can act as a
+> [here](../../drivers/_index.md). To create a new driver (which can act as a
 > simple drop-in replacement):
 >
 > ```console
@@ -53,9 +53,9 @@ The following table describes the available CSV parameters that you can pass to
 | `force-compression` | `cache-to`              | `true`,`false`          | `false` | Forcibly apply compression, see [cache compression][3].              |
 | `ignore-error`      | `cache-to`              | Boolean                 | `false` | Ignore errors caused by failed cache exports.                        |
 
-[1]: index.md#cache-mode
-[2]: index.md#oci-media-types
-[3]: index.md#cache-compression
+[1]: _index.md#cache-mode
+[2]: _index.md#oci-media-types
+[3]: _index.md#cache-compression
 
 You can choose any valid value for `ref`, as long as it's not the same as the
 target location that you push your image to. You might choose different tags
@@ -69,7 +69,7 @@ fail, but the build will continue.
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../index.md).
+For an introduction to caching see [Optimizing builds with cache](../_index.md).
 
 For more information on the `registry` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#registry-push-image-and-cache-separately).

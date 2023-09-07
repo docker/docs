@@ -20,7 +20,7 @@ posix filesystem, which is suitable for development or small deployments.
 Additional cloud-based storage drivers like S3, Microsoft Azure, OpenStack Swift,
 and Aliyun OSS are also supported. People looking into using other storage
 backends may do so by writing their own driver implementing the
-[Storage API](storage-drivers/index.md).
+[Storage API](storage-drivers/_index.md).
 
 Since securing access to your hosted images is paramount, the Registry natively
 supports TLS and basic authentication.

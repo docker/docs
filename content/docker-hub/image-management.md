@@ -7,7 +7,7 @@ title: Advanced Image Management dashboard
 > **Note**
 >
 > Image management requires a
-> [Docker Pro, Team, or Business subscription](../subscription/index.md).
+> [Docker Pro, Team, or Business subscription](../subscription/_index.md).
 
 Advanced Image Management allows you to manage Docker images across all repositories and streamline storage in Docker Hub.
 

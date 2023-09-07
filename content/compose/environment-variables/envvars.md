@@ -59,7 +59,7 @@ underscores, and must begin with a lowercase letter or decimal digit. If the
 `basename` of the project directory or current directory violates this
 constraint, you must use one of the other mechanisms.
 
-See also the [command-line options overview](../reference/index.md#command-options-overview-and-help) and [using `-p` to specify a project name](../reference/index.md#use--p-to-specify-a-project-name).
+See also the [command-line options overview](../reference/_index.md#command-options-overview-and-help) and [using `-p` to specify a project name](../reference/_index.md#use--p-to-specify-a-project-name).
 
 ### COMPOSE\_FILE
 
@@ -74,7 +74,7 @@ The path separator can also be customized using `COMPOSE_PATH_SEPARATOR`.
 
 Example: `COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml`.  
 
-See also the [command-line options overview](../reference/index.md#command-options-overview-and-help) and [using `-f` to specify name and path of one or more Compose files](../reference/index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files).
+See also the [command-line options overview](../reference/_index.md#command-options-overview-and-help) and [using `-f` to specify name and path of one or more Compose files](../reference/_index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files).
 
 ### COMPOSE\_PROFILES
 
@@ -89,7 +89,7 @@ For example, calling `docker compose up`with `COMPOSE_PROFILES=frontend` selects
 Example: `COMPOSE_PROFILES=frontend,debug`  
 This example enables all services matching both the `frontend` and `debug` profiles and services without a profile.
 
-See also [Using profiles with Compose](../profiles.md) and the [`--profile` command-line option](../reference/index.md#use---profile-to-specify-one-or-more-active-profiles).
+See also [Using profiles with Compose](../profiles.md) and the [`--profile` command-line option](../reference/_index.md#use---profile-to-specify-one-or-more-active-profiles).
 
 ### COMPOSE\_CONVERT\_WINDOWS\_PATHS
 

@@ -216,4 +216,4 @@ subnet supports 65 536 IPv6 addresses.
 
 ## Next steps
 
-- [Networking overview](../../network/index.md)
+- [Networking overview](../../network/_index.md)

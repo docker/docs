@@ -13,7 +13,7 @@ aliases:
 > **Note**
 >
 > Automated builds require a
-> [Docker Pro, Team, or Business subscription](../../subscription/index.md).
+> [Docker Pro, Team, or Business subscription](../../subscription/_index.md).
 
 This page contains information on:
 - [Configuring Automated builds](#configure-automated-builds)
@@ -174,7 +174,7 @@ You can configure your automated builds so that pushes to specific branches or t
     > Note
     >
     > You can enter a name, or use a regex to match which source branch or tag
-    > names to build. To learn more, see [regexes](index.md#regexes-and-automated-builds).
+    > names to build. To learn more, see [regexes](_index.md#regexes-and-automated-builds).
 
 4. Enter the tag to apply to Docker images built from this source.
 
@@ -182,7 +182,7 @@ You can configure your automated builds so that pushes to specific branches or t
    >
    > If you configured a regex to select the source, you can reference the
    > capture groups and use its result as part of the tag. To learn more, see
-   > [regexes](index.md#regexes-and-automated-builds).
+   > [regexes](_index.md#regexes-and-automated-builds).
 
 5. Repeat steps 2 through 4 for each new build rule you set up.
 
@@ -227,8 +227,8 @@ sources. For example, you might have
 ### Build images with BuildKit
 
 Autobuilds use the BuildKit build system by default. If you want to use the legacy
-Docker build system, add the [environment variable](index.md#environment-variables-for-builds)
-`DOCKER_BUILDKIT=0`. Refer to the [BuildKit](../../build/buildkit/index.md)
+Docker build system, add the [environment variable](_index.md#environment-variables-for-builds)
+`DOCKER_BUILDKIT=0`. Refer to the [BuildKit](../../build/buildkit/_index.md)
 page for more information on BuildKit.
 
 ## Autobuild for Teams

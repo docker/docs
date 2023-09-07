@@ -32,7 +32,7 @@ manually create the group.
 >
 > The `docker` group grants root-level privileges to the user. For
 > details on how this impacts security in your system, see
-> [Docker Daemon Attack Surface](../security/index.md#docker-daemon-attack-surface).
+> [Docker Daemon Attack Surface](../security/_index.md#docker-daemon-attack-surface).
 { .warning }
 
 > **Note**
@@ -120,7 +120,7 @@ Docker runtime files, or make other customizations, see
 
 ## Configure default logging driver
 
-Docker provides [logging drivers](../../config/containers/logging/index.md) for
+Docker provides [logging drivers](../../config/containers/logging/_index.md) for
 collecting and viewing log data from all containers running on a host. The
 default logging driver, `json-file`, writes log data to JSON-formatted files on
 the host filesystem. Over time, these log files expand in size, leading to
@@ -139,7 +139,7 @@ options:
 
 ## Next steps
 
-- Read the [Get started](../../get-started/index.md) training modules
+- Read the [Get started](../../get-started/_index.md) training modules
   to learn how to build an image and run it as a containerized application.
-- Review the topics in [Develop with Docker](../../develop/index.md) to learn
+- Review the topics in [Develop with Docker](../../develop/_index.md) to learn
   how to build new applications using Docker.

@@ -26,7 +26,7 @@ An organization owner is an administrator who is responsible to manage
 repositories and add team members to the organization. They have full access to
 private repositories, all teams, billing information, and org settings. An org
 owner can also specify [permissions](#permissions-reference) for each team in
-the organization. Only an org owner can enable [SSO](../single-sign-on/index.md)
+the organization. Only an org owner can enable [SSO](../single-sign-on/_index.md)
 for
 the organization. When SSO is enabled for your organization, the org owner can
 also manage users. Docker can auto-provision Docker IDs for new end-users or

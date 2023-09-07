@@ -31,7 +31,7 @@ By default, you can only build for a single platform at a time. If you want to
 build for multiple platforms at once, you can:
 
 - Create a new builder that uses the [`docker-container` driver](../drivers/docker-container.md)
-- Turn on the [containerd snapshotter storage](../../desktop/containerd/index.md)
+- Turn on the [containerd snapshotter storage](../../desktop/containerd/_index.md)
 
 ## Strategies
 
@@ -250,7 +250,7 @@ even when running the commands on a native macOS or Windows developer machine.
 
 ## Support on Docker Desktop
 
-[Docker Desktop](../../desktop/index.md) provides `binfmt_misc`
+[Docker Desktop](../../desktop/_index.md) provides `binfmt_misc`
 multi-architecture support, which means you can run containers for different
 Linux architectures such as `arm`, `mips`, `ppc64le`, and even `s390x`.
 

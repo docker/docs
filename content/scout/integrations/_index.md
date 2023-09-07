@@ -52,4 +52,4 @@ Integrating with environments lets you compare production workloads to other
 versions, in your image repositories or in your other environments.
 
 For more information about environmet integrations, see
-[Environments](./environment/index.md).
+[Environments](./environment/_index.md).

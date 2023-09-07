@@ -186,7 +186,7 @@ Related information:
  - [.dockerignore file reference](../../engine/reference/builder.md#dockerignore-file)
  - [docker init CLI reference](../../engine/reference/commandline/init.md)
  - [docker build CLI reference](../../engine/reference/commandline/build.md)
- - [Build with Docker guide](../../build/guide/index.md)
+ - [Build with Docker guide](../../build/guide/_index.md)
 
 ## Next steps
 

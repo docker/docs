@@ -214,7 +214,7 @@ In this section, you learned a few image building best practices, including laye
 Related information:
  - [.dockerignore](../engine/reference/builder.md#dockerignore-file)
  - [Dockerfile reference](../engine/reference/builder.md)
- - [Build with Docker guide](../build/guide/index.md)
+ - [Build with Docker guide](../build/guide/_index.md)
  - [Dockerfile best practices](../develop/develop-images/dockerfile_best-practices.md)
 
 ## Next steps

@@ -11,7 +11,7 @@ aliases:
 
 * You understand basic [Docker concepts](../../get-started/overview.md).
 * You're familiar with the [Dockerfile format](../../build/building/packaging.md#dockerfile).
-* You have [enabled BuildKit](../../build/buildkit/index.md#getting-started)
+* You have [enabled BuildKit](../../build/buildkit/_index.md#getting-started)
   on your machine.
 
 ## Overview
@@ -21,7 +21,7 @@ Now that we have a good overview of containers and the Docker platform, let’s 
 To complete this tutorial, you need the following:
 
 - Node.js version 18 or later. [Download Node.js](https://nodejs.org/en/)
-- Docker running locally: Follow the instructions to [download and install Docker](../../desktop/index.md).
+- Docker running locally: Follow the instructions to [download and install Docker](../../desktop/_index.md).
 - An IDE or a text editor to edit files. We recommend using Visual Studio Code.
 
 ## Sample application

@@ -129,5 +129,5 @@ same amount of room on disk. This is one of the disadvantages of using the
 
 ## Related information
 
-- [Understand images, containers, and storage drivers](index.md)
+- [Understand images, containers, and storage drivers](_index.md)
 - [Select a storage driver](select-storage-driver.md)

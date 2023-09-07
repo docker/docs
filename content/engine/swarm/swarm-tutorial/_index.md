@@ -19,7 +19,7 @@ The tutorial guides you through the following activities:
 This tutorial uses Docker Engine CLI commands entered on the command line of a
 terminal window.
 
-If you are brand new to Docker, see [About Docker Engine](../../index.md).
+If you are brand new to Docker, see [About Docker Engine](../../_index.md).
 
 ## Set up
 
@@ -49,7 +49,7 @@ work, but you can initialize a swarm, create services, and scale them.
 #### Install Docker Engine on Linux machines
 
 If you are using Linux based physical computers or cloud-provided computers as
-hosts, simply follow the [Linux install instructions](../../install/index.md)
+hosts, simply follow the [Linux install instructions](../../install/_index.md)
 for your platform. Spin up the three machines, and you are ready. You can test both
 single-node and multi-node swarm scenarios on Linux machines.
 

@@ -104,7 +104,7 @@ This is explored later on in this guide.
 Related information:
 
 - [`docker build --output` CLI reference](../../engine/reference/commandline/build.md#output)
-- [Build exporters](../exporters/index.md)
+- [Build exporters](../exporters/_index.md)
 
 ## Next steps
 

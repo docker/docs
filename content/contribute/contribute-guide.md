@@ -71,7 +71,7 @@ $ git clone {{% param "repo" %}}.git
 $ cd docs
 ```
 
-Then, build and run the documentation using [Docker Compose](../compose/index.md):
+Then, build and run the documentation using [Docker Compose](../compose/_index.md):
 
 ```console
 $ docker compose up -d --build
@@ -80,7 +80,7 @@ $ docker compose alpha watch
 
 > **Note**
 >
->You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](../desktop/index.md). If you don't have Docker Desktop installed, follow the [instructions](../compose/install/index.md) to install Docker Compose.
+>You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](../desktop/_index.md). If you don't have Docker Desktop installed, follow the [instructions](../compose/install/_index.md) to install Docker Compose.
 
 When the container is built and running, visit [http://localhost:1313](http://localhost:1313) in your web browser to view the docs.
 

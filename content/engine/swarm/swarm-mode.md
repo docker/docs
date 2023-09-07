@@ -22,7 +22,7 @@ These instructions assume you have installed the Docker Engine 1.12 or later on
 a machine to serve as a manager node in your swarm.
 
 If you haven't already, read through the [swarm mode key concepts](key-concepts.md)
-and try the [swarm mode tutorial](swarm-tutorial/index.md).
+and try the [swarm mode tutorial](swarm-tutorial/_index.md).
 
 ## Create a swarm
 
@@ -215,4 +215,4 @@ To add a worker to this swarm, run the following command:
 
 * [Join nodes to a swarm](join-nodes.md)
 * `swarm init` [command line reference](../reference/commandline/swarm_init.md)
-* [Swarm mode tutorial](swarm-tutorial/index.md)
+* [Swarm mode tutorial](swarm-tutorial/_index.md)

@@ -17,7 +17,7 @@ There are two types of nodes: [**managers**](#manager-nodes) and
 ![Swarm mode cluster](/engine/swarm/images/swarm-diagram.png)
 
 If you haven't already, read through the
-[swarm mode overview](../index.md) and
+[swarm mode overview](../_index.md) and
 [key concepts](../key-concepts.md).
 
 ## Manager nodes
@@ -26,7 +26,7 @@ Manager nodes handle cluster management tasks:
 
 * maintaining cluster state
 * scheduling services
-* serving swarm mode [HTTP API endpoints](../../api/index.md)
+* serving swarm mode [HTTP API endpoints](../../api/_index.md)
 
 Using a [Raft](https://raft.github.io/raft.pdf) implementation, the managers
 maintain a consistent internal state of the entire swarm and all the services

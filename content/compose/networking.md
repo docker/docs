@@ -16,7 +16,7 @@ identical to the container name.
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](reference/index.md){
+> project name with either the [`--project-name` flag](reference/_index.md){
 > or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
 For example, suppose your app is in a directory called `myapp`, and your `compose.yml` looks like this:
@@ -86,12 +86,12 @@ See the [links reference](compose-file/05-services.md#links) for more informatio
 
 ## Multi-host networking
 
-When deploying a Compose application on a Docker Engine with [Swarm mode enabled](../engine/swarm/index.md),
+When deploying a Compose application on a Docker Engine with [Swarm mode enabled](../engine/swarm/_index.md),
 you can make use of the built-in `overlay` driver to enable multi-host communication.
 
 Overlay networks are always created as `attachable`. You can optionally set the [`attachable`](compose-file/06-networks.md#attachable) property to `false`.
 
-Consult the [Swarm mode section](../engine/swarm/index.md), to see how to set up
+Consult the [Swarm mode section](../engine/swarm/_index.md), to see how to set up
 a Swarm cluster, and the [Getting started with multi-host networking](../network/network-tutorial-overlay.md)
 to learn about multi-host overlay networks.
 

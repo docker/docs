@@ -101,7 +101,7 @@ To create a repository:
 
 You need to download Docker Desktop to build, push, and pull container images.
 
-1. Download and install [Docker Desktop](../desktop/index.md).
+1. Download and install [Docker Desktop](../desktop/_index.md).
 
 2. Sign in to Docker Desktop using the Docker ID you created in step one.
 
@@ -184,7 +184,7 @@ You've successfully:
 ### Next steps
 
 - Create an [organization](orgs.md) to use Docker Hub with your team.
-- Automatically build container images from code through [builds](builds/index.md).
+- Automatically build container images from code through [builds](builds/_index.md).
 - [Explore](https://hub.docker.com/explore) official & publisher images.
 - [Upgrade your subscription](https://www.docker.com/pricing) to push additional private Docker images to
 Docker Hub.

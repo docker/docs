@@ -21,7 +21,7 @@ alongside your Linux containers in Docker.
 
 ## Turn on Wasm workloads
 
-Wasm workloads require the [containerd image store](../containerd/index.md)
+Wasm workloads require the [containerd image store](../containerd/_index.md)
 feature to be turned on. If you’re not already using the containerd image store,
 then pre-existing images and containers will be inaccessible.
 
@@ -191,7 +191,7 @@ containerd image store, an error similar to the following displays:
 docker: Error response from daemon: Unknown runtime specified io.containerd.wasmedge.v1.
 ```
 
-[Turn on the containerd feature](../containerd/index.md#turn-on-the-containerd-image-store-feature)
+[Turn on the containerd feature](../containerd/_index.md#turn-on-the-containerd-image-store-feature)
 in Docker Desktop settings and try again.
 
 ### Failed to start shim: failed to resolve runtime path
