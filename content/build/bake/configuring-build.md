@@ -1,8 +1,9 @@
 ---
-title: Configuring builds
+title: Configure builds with Bake
+description: Learn how to create a flexible build configuration with Bake
 keywords: build, buildx, bake, buildkit, hcl, json
 aliases:
-- /build/customize/bake/configuring-build/
+  - /build/customize/bake/configuring-build/
 ---
 
 Bake supports loading build definitions from files, but sometimes you need even
@@ -43,9 +44,7 @@ $ docker buildx bake --print app
 {
   "group": {
     "default": {
-      "targets": [
-        "app"
-      ]
+      "targets": ["app"]
     }
   },
   "target": {
@@ -78,9 +77,7 @@ $ docker buildx bake -f docker-bake.hcl -f env.hcl --print app
 {
   "group": {
     "default": {
-      "targets": [
-        "app"
-      ]
+      "targets": ["app"]
     }
   },
   "target": {
@@ -122,26 +119,19 @@ $ docker buildx bake --print foo bar
 {
   "group": {
     "default": {
-      "targets": [
-        "foo",
-        "bar"
-      ]
+      "targets": ["foo", "bar"]
     }
   },
   "target": {
     "foo": {
       "context": ".",
       "dockerfile": "foo.Dockerfile",
-      "tags": [
-        "foo"
-      ]
+      "tags": ["foo"]
     },
     "bar": {
       "context": ".",
       "dockerfile": "foo.Dockerfile",
-      "tags": [
-        "bar"
-      ]
+      "tags": ["bar"]
     }
   }
 }
@@ -169,9 +159,7 @@ $ docker buildx bake --set app.args.mybuildarg=bar --set app.platform=linux/arm6
 {
   "group": {
     "default": {
-      "targets": [
-        "app"
-      ]
+      "targets": ["app"]
     }
   },
   "target": {
@@ -181,9 +169,7 @@ $ docker buildx bake --set app.args.mybuildarg=bar --set app.platform=linux/arm6
       "args": {
         "mybuildarg": "bar"
       },
-      "platforms": [
-        "linux/arm64"
-      ]
+      "platforms": ["linux/arm64"]
     }
   }
 }
@@ -200,20 +186,20 @@ $ docker buildx bake --set foo*.no-cache               # bypass caching only for
 
 Complete list of overridable fields:
 
-* `args`
-* `cache-from`
-* `cache-to`
-* `context`
-* `dockerfile`
-* `labels`
-* `no-cache`
-* `output`
-* `platform`
-* `pull`
-* `secrets`
-* `ssh`
-* `tags`
-* `target`
+- `args`
+- `cache-from`
+- `cache-to`
+- `context`
+- `dockerfile`
+- `labels`
+- `no-cache`
+- `output`
+- `platform`
+- `pull`
+- `secrets`
+- `ssh`
+- `tags`
+- `target`
 
 ## Using variables in variables across files
 
@@ -258,9 +244,7 @@ $ docker buildx bake -f docker-bake1.hcl -f docker-bake2.hcl --print app
 {
   "group": {
     "default": {
-      "targets": [
-        "app"
-      ]
+      "targets": ["app"]
     }
   },
   "target": {

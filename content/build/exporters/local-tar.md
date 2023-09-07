@@ -1,10 +1,10 @@
 ---
 title: Local and tar exporters
-keywords: 'build, buildx, buildkit, exporter, local, tar
-
-  '
+keywords: build, buildx, buildkit, exporter, local, tar
+description: >
+  The local and tar exporters save the build result to the local filesystem
 aliases:
-- /build/building/exporters/local-tar/
+  - /build/building/exporters/local-tar/
 ---
 
 The `local` and `tar` exporters output the root filesystem of the build result
@@ -20,16 +20,13 @@ Build a container image using the `local` exporter:
 
 ```console
 $ docker buildx build --output type=local[,parameters] .
-```
-
-```console
 $ docker buildx build --output type=tar[,parameters] .
 ```
 
 The following table describes the available parameters:
 
 | Parameter | Type   | Default | Description           |
-|-----------|--------|---------|-----------------------|
+| --------- | ------ | ------- | --------------------- |
 | `dest`    | String |         | Path to copy files to |
 
 ## Further reading

@@ -1718,8 +1718,8 @@ Manuals:
           title: Bake file reference
         - path: /build/bake/configuring-build/
           title: Configuring builds
-        - path: /build/bake/hcl-funcs/
-          title: User defined HCL functions
+        - path: /build/bake/advanced/
+          title: Advanced patterns
         - path: /build/bake/build-contexts/
           title: Build contexts and linking targets
         - path: /build/bake/compose-file/

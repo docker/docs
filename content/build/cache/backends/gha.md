@@ -1,15 +1,16 @@
 ---
 title: GitHub Actions cache
+description: Use the GitHub Actions cache to manage your build cache in CI
 keywords: build, buildx, cache, backend, gha, github, actions
 aliases:
-- /build/building/cache/backends/gha/
+  - /build/building/cache/backends/gha/
 ---
 
-> **Warning**
+> **Experimental**
 >
-> The GitHub Actions cache is a beta feature. You can use it today, in current
-> releases of Buildx and BuildKit. However, the interface and behavior are
-> unstable and may change in future releases.
+> This is an experimental feature. The interface and behavior are unstable and
+> may change in future releases.
+{ .restricted }
 
 The GitHub Actions cache utilizes the
 [GitHub-provided Action's cache](https://github.com/actions/cache) available
@@ -17,16 +18,9 @@ from within your CI execution environment. This is the recommended cache to use
 inside your GitHub action pipelines, as long as your use case falls within the
 [size and usage limits set by GitHub](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy).
 
-> **Note**
->
-> This cache storage backend requires using a different driver than the default
-> `docker` driver - see more information on selecting a driver
-> [here](../../drivers/index.md). To create a new driver (which can act as a
-> simple drop-in replacement):
->
-> ```console
-> $ docker buildx create --use --driver=docker-container
-> ```
+This cache storage backend is not supported with the default `docker` driver.
+To use this feature, create a new builder using a different driver. See
+[Build drivers](../../drivers/_index.md) for more information.
 
 ## Synopsis
 
@@ -49,16 +43,16 @@ The following table describes the available CSV parameters that you can pass to
 
 [1]: #authentication
 [2]: #scope
-[3]: index.md#cache-mode
+[3]: _index.md#cache-mode
 
 ## Authentication
 
 If the `url` or `token` parameters are left unspecified, the `gha` cache backend
 will fall back to using environment variables. If you invoke the `docker buildx`
 command manually from an inline step, then the variables must be manually
-exposed (using
+exposed. Consider using the
 [`crazy-max/ghaction-github-runtime`](https://github.com/crazy-max/ghaction-github-runtime),
-for example).
+GitHub Action as a helper for exposing the variables.
 
 ## Scope
 
@@ -107,10 +101,10 @@ For example:
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../index.md).
+For an introduction to caching see [Optimizing builds with cache](../_index.md).
 
 For more information on the `gha` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#github-actions-cache-experimental).
 
 For more information about using GitHub Actions with Docker, see
-[Introduction to GitHub Actions](../../ci/github-actions/index.md)
+[Introduction to GitHub Actions](../../ci/github-actions/_index.md)

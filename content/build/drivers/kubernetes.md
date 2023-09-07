@@ -1,14 +1,17 @@
 ---
 title: Kubernetes driver
+description: |
+  The Kubernetes driver lets you run BuildKit in a Kubernetes cluster.
+  You can connect to, and run your builds in, the cluster using Buildx.
 keywords: build, buildx, driver, builder, kubernetes
 aliases:
-- /build/buildx/drivers/kubernetes/
-- /build/building/drivers/kubernetes/
+  - /build/buildx/drivers/kubernetes/
+  - /build/building/drivers/kubernetes/
 ---
 
-The Buildx Kubernetes driver allows connecting your local development or CI
-environments to your Kubernetes cluster to allow access to more powerful and
-varied compute resources.
+The Kubernetes driver lets you connect your local development or CI
+environments to builders in a Kubernetes cluster to allow access to more
+powerful compute resources, optionally on multiple native architectures.
 
 ## Synopsis
 
@@ -23,8 +26,8 @@ $ docker buildx create \
   --driver-opt=[key=value,...]
 ```
 
-The following table describes the available driver-specific options that you can
-pass to `--driver-opt`:
+The following table describes the available driver-specific options that you
+can pass to `--driver-opt`:
 
 | Parameter         | Type              | Default                                 | Description                                                                                                                          |
 | ----------------- | ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
@@ -98,7 +101,7 @@ replicas. `sticky` (the default) attempts to connect the same build performed
 multiple times to the same node each time, ensuring better use of local cache.
 
 For more information on scalability, see the options for
-[buildx create](../../engine/reference/commandline/buildx_create.md#driver-opt).
+[`docker buildx create`](../../engine/reference/commandline/buildx_create.md#driver-opt).
 
 ## Node assignment
 
@@ -110,8 +113,8 @@ key-value pairs, where the key is the node label and the value is the label
 text. For example: `"nodeselector=kubernetes.io/arch=arm64"`
 
 The `tolerations` parameter is a semicolon-separated list of taints. It accepts
-the same values as the Kubernetes manifest. Each `tolerations` entry specifies a
-taint key and the value, operator, or effect. For example:
+the same values as the Kubernetes manifest. Each `tolerations` entry specifies
+a taint key and the value, operator, or effect. For example:
 `"tolerations=key=foo,value=bar;key=foo2,operator=exists;key=foo3,effect=NoSchedule"`
 
 Due to quoting rules for shell commands, you must wrap the `nodeselector` and
@@ -128,9 +131,9 @@ $ docker buildx create \
 
 ## Multi-platform builds
 
-The Buildx Kubernetes driver has support for creating
-[multi-platform images](../building/multi-platform.md), either using QEMU or by
-leveraging the native architecture of nodes.
+The Kubernetes driver has support for creating
+[multi-platform images](../building/multi-platform.md),
+either using QEMU or by leveraging the native architecture of nodes.
 
 ### QEMU
 
@@ -154,6 +157,7 @@ $ docker buildx build \
 > QEMU performs full-system emulation of non-native platforms, which is much
 > slower than native builds. Compute-heavy tasks like compilation and
 > compression/decompression will likely take a large performance hit.
+{ .warning }
 
 Using a custom BuildKit image or invoking non-native binaries in builds may
 require that you explicitly turn on QEMU using the `qemu.install` option when
@@ -208,7 +212,7 @@ $ docker buildx create \
   --driver-opt=namespace=buildkit,nodeselector="kubernetes.io/arch=arm64"
 ```
 
-If you list builders now, you should be able to see both nodes present:
+Listing your builders shows both nodes for the `kube` builder:
 
 ```console
 $ docker buildx ls
@@ -218,8 +222,8 @@ kube            kubernetes
   builder-arm64 kubernetes:///kube?deployment=builder-arm64&kubeconfig= running  linux/arm64*
 ```
 
-You should now be able to build multi-arch images with `amd64` and `arm64`
-combined, by specifying those platforms together in your buildx command:
+You can now build multi-arch `amd64` and `arm64` images, by specifying those
+platforms together in your build command:
 
 ```console
 $ docker buildx build --builder=kube --platform=linux/amd64,linux/arm64 -t <user>/<image> --push .
@@ -276,10 +280,9 @@ Prerequisites:
    namespace/buildkit created
    ```
 
-2. Create a new Buildx builder with the Kubernetes driver:
+2. Create a new builder with the Kubernetes driver:
 
    ```console
-   # Remember to specify the namespace in driver options
    $ docker buildx create \
      --bootstrap \
      --name=kube \
@@ -287,7 +290,11 @@ Prerequisites:
      --driver-opt=namespace=buildkit
    ```
 
-3. List available Buildx builders using `docker buildx ls`
+   > **Note**
+   >
+   > Remember to specify the namespace in driver options.
+
+3. List available builders using `docker buildx ls`
 
    ```console
    $ docker buildx ls
@@ -298,7 +305,7 @@ Prerequisites:
      default                default         running linux/amd64, linux/386
    ```
 
-4. Inspect the running pods created by the Buildx driver with `kubectl`.
+4. Inspect the running pods created by the build driver with `kubectl`.
 
    ```console
    $ kubectl -n buildkit get deployments
@@ -310,7 +317,7 @@ Prerequisites:
    kube0-6977cdcb75-k9h9m   1/1     Running   0          32s
    ```
 
-   The buildx driver creates the necessary resources on your cluster in the
+   The build driver creates the necessary resources on your cluster in the
    specified namespace (in this case, `buildkit`), while keeping your driver
    configuration locally.
 

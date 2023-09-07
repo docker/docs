@@ -1,9 +1,12 @@
 ---
 title: Remote driver
+description: |
+  The remote driver lets you connect to a remote BuildKit instance
+  that you set up and configure manually.
 keywords: build, buildx, driver, builder, remote
 aliases:
-- /build/buildx/drivers/remote/
-- /build/building/drivers/remote/
+  - /build/buildx/drivers/remote/
+  - /build/building/drivers/remote/
 ---
 
 The Buildx remote driver allows for more complex custom build workloads,
@@ -35,8 +38,7 @@ pass to `--driver-opt`:
 This guide shows you how to create a setup with a BuildKit daemon listening on a
 Unix socket, and have Buildx connect through it.
 
-1. Ensure that [BuildKit](https://github.com/moby/buildkit)
-   is installed.
+1. Ensure that [BuildKit](https://github.com/moby/buildkit) is installed.
 
    For example, you can launch an instance of buildkitd with:
 
@@ -99,12 +101,12 @@ but this is for illustration purposes.)
 
     You can use this [bake definition](https://github.com/moby/buildkit/blob/master/examples/create-certs)
     as a starting point:
-    
+
     ```console
     SAN="localhost 127.0.0.1" docker buildx bake "https://github.com/moby/buildkit.git#master:examples/create-certs"
     ```
 
-    Note that while it's possible to expose BuildKit over TCP without using 
+    Note that while it's possible to expose BuildKit over TCP without using
     TLS, it's not recommended. Doing so allows arbitrary access to BuildKit
     without credentials.
 
@@ -174,22 +176,16 @@ copied between them.
      tcp://buildkitd.default.svc:1234
    ```
 
-Note that this will only work internally, within the cluster, since the BuildKit
-setup guide only creates a ClusterIP service. To configure the builder to be
-accessible remotely, you can use an appropriately configured ingress, which is
-outside the scope of this guide.
+Note that this only works internally, within the cluster, since the BuildKit
+setup guide only creates a `ClusterIP` service. To access a builder remotely,
+you can set up and use an ingress, which is outside the scope of this guide.
 
-To access the service remotely, use the port forwarding mechanism of `kubectl`:
+### Debug a remote builder in Kubernetes
 
-```console
-$ kubectl port-forward svc/buildkitd 1234:1234
-```
-
-Then you can point the remote driver at `tcp://localhost:1234`.
-
-Alternatively, you can use the `kube-pod://` URL scheme to connect directly to a
-BuildKit pod through the Kubernetes API. Note that this method only connects to
-a single pod in the deployment:
+If you're having trouble accessing a remote builder deployed in Kubernetes, you
+can use the `kube-pod://` URL scheme to connect directly to a BuildKit pod
+through the Kubernetes API. Note that this method only connects to a single pod
+in the deployment.
 
 ```console
 $ kubectl get pods --selector=app=buildkitd -o json | jq -r '.items[].metadata.name
@@ -199,3 +195,11 @@ $ docker buildx create \
   --driver remote \
   kube-pod://buildkitd-XXXXXXXXXX-xxxxx
 ```
+
+Alternatively, use the port forwarding mechanism of `kubectl`:
+
+```console
+$ kubectl port-forward svc/buildkitd 1234:1234
+```
+
+Then you can point the remote driver at `tcp://localhost:1234`.

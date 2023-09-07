@@ -1,11 +1,9 @@
 ---
 title: Exporters overview
-keywords: 'build, buildx, buildkit, exporter, image, registry, local, tar, oci, docker,
-  cacheonly
-
-  '
+description: Build exporters define the output format of your build result
+keywords: build, buildx, buildkit, exporter, image, registry, local, tar, oci, docker, cacheonly
 aliases:
-- /build/building/exporters/
+  - /build/building/exporters/
 ---
 
 Exporters save your build results to a specified output type. You specify the
@@ -36,10 +34,10 @@ $ docker buildx build --tag <registry>/<image> \
   --output type=<TYPE> .
 ```
 
-Most common use cases doesn't require you don't need to specify which exporter
-to use explicitly. You only need to specify the exporter if you intend to
-customize the output somehow, or if you want to save it to disk. The `--load`
-and `--push` options allow Buildx to infer the exporter settings to use.
+Most common use cases don't require that you specify which exporter to use
+explicitly. You only need to specify the exporter if you intend to customize
+the output, or if you want to save it to disk. The `--load` and `--push`
+options allow Buildx to infer the exporter settings to use.
 
 For example, if you use the `--push` option in combination with `--tag`, Buildx
 automatically uses the `image` exporter, and configures the exporter to push the
@@ -152,7 +150,7 @@ $ docker buildx build --output type=tar,dest=<path/to/output> .
 ```
 
 The `local` exporter is useful in [multi-stage builds](../building/multi-stage.md)
-since it allows you to export only a minimal number of build artifacts. For example,
+since it allows you to export only a minimal number of build artifacts, such as
 self-contained binaries.
 
 ### Cache-only export
@@ -248,12 +246,10 @@ the previous compression algorithm.
 
 ### OCI media types
 
-Exporters that output container images, support creating images with either
-Docker media types (the default) or with OCI media types. This is supported by
-the `image`, `registry`, `oci` and `docker` exporters.
+The `image`, `registry`, `oci` and `docker` exporters create container images.
+These exporters support both Docker media types (default) and OCI media types
 
 To export images with OCI media types set, use the `oci-mediatypes` property.
-For example, with the `image` exporter:
 
 ```console
 $ docker buildx build \
