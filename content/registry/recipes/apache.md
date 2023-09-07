@@ -23,7 +23,7 @@ With the method presented here, you implement basic authentication for Docker En
 
 While we use a simple `htpasswd` file as an example, any other apache authentication backend should be fairly easy to implement once you are done with the example.
 
-We also implement push restriction (to a limited user group) for the sake of the example. Again, you should modify this to fit your mileage.
+We also implement push restriction (to a limited user group) for the sake of the example. Again, you should modify this to fit your requirements.
 
 ### Gotchas
 
@@ -33,7 +33,7 @@ Furthermore, introducing an extra http layer in your communication pipeline adds
 
 ## Setting things up
 
-1. Read again [the requirements](index.md#requirements).
+1. Read [the requirements](index.md#requirements).
 
 2. Run the following script:
 
@@ -204,14 +204,14 @@ Sign in with a "push" authorized user (using `testuserpush` and `testpasswordpus
   $ docker push myregistrydomain.com:5043/test
   ```
 
-Now, sign in in with a "pull-only" user (using `testuser` and `testpassword`), then pull back the image:
+Now, sign in with a "pull-only" user (using `testuser` and `testpassword`), then pull back the image:
 
   ```console
   $ docker login myregistrydomain.com:5043
   $ docker pull myregistrydomain.com:5043/test
   ```
 
-Verify that the "pull-only" can NOT push:
+Verify that the "pull-only" can not push:
 
   ```console
   $ docker push myregistrydomain.com:5043/test
