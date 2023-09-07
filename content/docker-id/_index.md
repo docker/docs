@@ -16,15 +16,15 @@ Your Docker ID becomes your username for hosted Docker services, and [Docker for
 
 1. Go to the [Docker Hub signup page](https://hub.docker.com/signup/).
 
-2. Enter a username.
+2. Enter a unique, valid email address.
+
+3. Enter a username.
 
     Your Docker ID must be between 4 and 30 characters long, and can only contain numbers and lowercase letters. Once you create your Docker ID you can't reuse it in the future if you deactivate this account.
 
-3. Enter a unique, valid email address.
-
 4. Enter a password that's at least 9 characters long.
 
-5. Complete the Captcha verification and then select **Sign up**.
+5. Select **Sign Up**.
 
    Docker sends a verification email to the address you provided.
 
