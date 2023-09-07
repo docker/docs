@@ -21,7 +21,7 @@ mechanism fronting their internal http portal.
 ### Alternatives
 
 If you just want authentication for your registry, and are happy maintaining
-users access separately, you should really consider sticking with the native
+users access separately, you should consider sticking with the native
 [basic auth registry feature](../deploying.md#native-basic-auth).
 
 ### Solution
@@ -29,7 +29,7 @@ users access separately, you should really consider sticking with the native
 With the method presented here, you implement basic authentication for docker
 engines in a reverse proxy that sits in front of your registry.
 
-While we use a simple htpasswd file as an example, any other nginx
+While we use a simple `htpasswd` file as an example, any other nginx
 authentication backend should be fairly easy to implement once you are done with
 the example.
 
@@ -47,7 +47,7 @@ proxy itself.
 >
 >  Docker does not recommend binding your registry to `localhost:5000` without
 > authentication. This creates a potential loophole in your Docker Registry
-> security. As a result, anyone who can log on to the server where your Docker
+> security. As a result, anyone who can sign on to the server where your Docker
 > Registry is running can push images without authentication.
 
 Furthermore, introducing an extra http layer in your communication pipeline
@@ -63,8 +63,8 @@ X-Forwarded-For
 X-Forwarded-Proto
 ```
 
-So if you have an Nginx instance sitting behind it, remove these lines from the
-example config below:
+So if you have an Nginx instance sitting behind it, remove these lines from the following
+example config:
 
 ```none
 proxy_set_header  Host              $http_host;   # required for docker client's sake
@@ -81,13 +81,13 @@ properly. For more information, see
 
 Review the [requirements](index.md#requirements), then follow these steps.
 
-1.  Create the required directories
+1. Create the required directories
 
     ```console
     $ mkdir -p auth data
     ```
 
-2.  Create the main nginx configuration. Paste this code block into a new file called `auth/nginx.conf`:
+2. Create the main nginx configuration. Paste this code block into a new file called `auth/nginx.conf`:
 
     ```conf
     events {
@@ -155,7 +155,7 @@ Review the [requirements](index.md#requirements), then follow these steps.
     }
     ```
 
-3.  Create a password file `auth/nginx.htpasswd` for "testuser" and "testpassword".
+3. Create a password file `auth/nginx.htpasswd` for "testuser" and "testpassword".
 
     ```console
     $ docker run --rm --entrypoint htpasswd httpd:2 -Bbn testuser testpassword > auth/nginx.htpasswd
@@ -165,14 +165,14 @@ Review the [requirements](index.md#requirements), then follow these steps.
     >
     > If you do not want to use `bcrypt`, you can omit the `-B` parameter.
 
-4.  Copy your certificate files to the `auth/` directory.
+4. Copy your certificate files to the `auth/` directory.
 
     ```console
     $ cp domain.crt auth
     $ cp domain.key auth
     ```
 
-5.  Create the compose file. Paste the following YAML into a new file called `docker-compose.yml`.
+5. Create the compose file. Paste the following YAML into a new file called `docker-compose.yml`.
 
     ```yaml
     nginx:
@@ -198,12 +198,16 @@ Review the [requirements](index.md#requirements), then follow these steps.
 
 Now, start your stack:
 
-    docker compose up -d
+  ```console
+  $ docker compose up -d
+  ```
 
 Login with a "push" authorized user (using `testuser` and `testpassword`), then
 tag and push your first image:
 
-    docker login -u=testuser -p=testpassword -e=root@example.ch myregistrydomain.com:5043
-    docker tag ubuntu myregistrydomain.com:5043/test
-    docker push myregistrydomain.com:5043/test
-    docker pull myregistrydomain.com:5043/test
+  ```console
+  $ docker login -u=testuser -p=testpassword -e=root@example.ch myregistrydomain.com:5043
+  $ docker tag ubuntu myregistrydomain.com:5043/test
+  $ docker push myregistrydomain.com:5043/test
+  $ docker pull myregistrydomain.com:5043/test
+  ```
