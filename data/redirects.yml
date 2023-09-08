@@ -609,6 +609,8 @@
   - /go/build-cache-backends/
 "/build/exporters/":
   - /go/build-exporters/
+"/build/customize/bake/file-definition/":
+  - /build/bake/reference/
 
 # CLI backlinks
 "/config/filter/":
