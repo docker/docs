@@ -254,7 +254,7 @@ several more.
   `cpuset`, `mem_limit`, `memswap_limit`, `extends`, `group_add`. See
   the [upgrading](#upgrading) guide for how to migrate away from these.
   For more information on `extends`, see
-  [Extending services](../multiple-compose-files/extends.md].
+  [Extending services](../multiple-compose-files/extends.md).
 
 - Added: [deploy](compose-file-v3.md#deploy)
 
@@ -422,7 +422,7 @@ several options have been removed:
 
 -   `extends`: This option has been removed for `version: "3.x"` Compose files.
     For more information on `extends`, see
-    [Extending services](../multiple-compose-files/extends.md].
+    [Extending services](../multiple-compose-files/extends.md).
 -   `group_add`: This option has been removed for `version: "3.x"` Compose files.
 -   `pids_limit`: This option has not been introduced in `version: "3.x"` Compose files.
 -   `link_local_ips` in `networks`: This option has not been introduced in
