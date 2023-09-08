@@ -23,51 +23,51 @@ All containers in Kubernetes are scheduled as pods, which are groups of co-locat
 
 You already wrote a very basic Kubernetes YAML file in the Orchestration overview part of this tutorial. Now, let's write a slightly more sophisticated YAML file to run and manage our Todo app, the container `getting-started` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. Place the following in a file called `bb.yaml`:
 
-    ```yaml
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: bb-demo
-      namespace: default
-    spec:
-      replicas: 1
-      selector:
-        matchLabels:
-          bb: web
-      template:
-        metadata:
-          labels:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: bb-demo
+   namespace: default
+spec:
+   replicas: 1
+   selector:
+      matchLabels:
+         bb: web
+   template:
+      metadata:
+         labels:
             bb: web
-        spec:
-          containers:
-          - name: bb-site
-            image: getting-started
-            imagePullPolicy: Never
-    ---
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: bb-entrypoint
-      namespace: default
-    spec:
-      type: NodePort
-      selector:
-        bb: web
-      ports:
+      spec:
+         containers:
+            - name: bb-site
+              image: getting-started
+              imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: bb-entrypoint
+   namespace: default
+spec:
+   type: NodePort
+   selector:
+      bb: web
+   ports:
       - port: 3000
         targetPort: 3000
         nodePort: 30001
-    ```
+```
 
-    In this Kubernetes YAML file, we have two objects, separated by the `---`:
-    - A `Deployment`, describing a scalable group of identical pods. In this case, you'll get just one `replica`, or copy of your pod, and that pod (which is described under the `template:` key) has just one container in it, based off of your `getting-started` image from the previous step in this tutorial.
-    - A `NodePort` service, which will route traffic from port 30001 on your host to port 3000 inside the pods it routes to, allowing you to reach your Todo app from the network.
+In this Kubernetes YAML file, we have two objects, separated by the `---`:
+- A `Deployment`, describing a scalable group of identical pods. In this case, you'll get just one `replica`, or copy of your pod, and that pod (which is described under the `template:` key) has just one container in it, based off of your `getting-started` image from the previous step in this tutorial.
+- A `NodePort` service, which will route traffic from port 30001 on your host to port 3000 inside the pods it routes to, allowing you to reach your Todo app from the network.
 
-    Also, notice that while Kubernetes YAML can appear long and complicated at first, it almost always follows the same pattern:
-    - The `apiVersion`, which indicates the Kubernetes API that parses this object
-    - The `kind` indicating what sort of object this is
-    - Some `metadata` applying things like names to your objects
-    - The `spec` specifying all the parameters and configurations of your object.
+ Also, notice that while Kubernetes YAML can appear long and complicated at first, it almost always follows the same pattern:
+- The `apiVersion`, which indicates the Kubernetes API that parses this object
+- The `kind` indicating what sort of object this is
+- Some `metadata` applying things like names to your objects
+- The `spec` specifying all the parameters and configurations of your object.
 
 ## Deploy and check your application
 
