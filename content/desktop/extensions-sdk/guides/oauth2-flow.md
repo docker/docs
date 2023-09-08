@@ -20,7 +20,7 @@ The Authorization Code grant type is used by confidential and public clients to 
 
 After the user returns to the client via the redirect URL, the application gets the authorization code from the URL and uses it to request an access token.
 
-![Flow for OAuth 2.0](images/oauth2-flow.png)
+![Flow for OAuth 2.0](images/oauth.png)
 
 The image above shows that:
 
