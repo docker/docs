@@ -40,21 +40,21 @@ The following table describes the configuration resources.
 > The **Cost** column in the table represents an estimated monthly cost of the
 > resources, when integrating an ECR registry that gets 100 images pushed per day.
 
-| Resource type                 | Resource name          | Description                                                                                  | Cost  |
-| ----------------------------- | ---------------------- | -------------------------------------------------------------------------------------------- | ----- |
-| `AWS::SNSTopic::Topic`        | `SNSTopic`             | SNS topic for notifying Docker Scout when the AWS resources have been created.               | Free  |
-| `AWS::SNS::TopicPolicy`       | `TopicPolicy`          | Defines the topic for the initial setup notification.                                        | Free  |
-| `AWS::SecretsManager::Secret` | `ScoutAPICredentials`  | Stores the credentials used by EventBridge to fire events to Scout.                          | $0.42 |
-| `AWS::Events::ApiDestination` | `ApiDestination`       | Sets up the EventBridge connection to Docker Scout for sending ECR push and delete events.   | $0.01 |
-| `AWS::Events::Connection`     | `Connection`           | EventBridge connection credentials to Scout.                                                 | Free  |
-| `AWS::Events::Rule`           | `Rule`                 | Defines the rule to send ECR pushes and deletes to Scout.                                    | Free  |
-| `AWS::IAM::Role`              | `InvokeApiRole`        | Internal role to grant the event access to `ApiDestination`.                                 | Free  |
-| `AWS::IAM::Role`              | `AssumeRoleEcrAccess`  | This role has access to `ScoutAPICredentials` for setting up the Docker Scout integration.   | Free  |
+| Resource type                 | Resource name         | Description                                                                                | Cost  |
+| ----------------------------- | --------------------- | ------------------------------------------------------------------------------------------ | ----- |
+| `AWS::SNSTopic::Topic`        | `SNSTopic`            | SNS topic for notifying Docker Scout when the AWS resources have been created.             | Free  |
+| `AWS::SNS::TopicPolicy`       | `TopicPolicy`         | Defines the topic for the initial setup notification.                                      | Free  |
+| `AWS::SecretsManager::Secret` | `ScoutAPICredentials` | Stores the credentials used by EventBridge to fire events to Scout.                        | $0.42 |
+| `AWS::Events::ApiDestination` | `ApiDestination`      | Sets up the EventBridge connection to Docker Scout for sending ECR push and delete events. | $0.01 |
+| `AWS::Events::Connection`     | `Connection`          | EventBridge connection credentials to Scout.                                               | Free  |
+| `AWS::Events::Rule`           | `DockerScoutEcrRule`  | Defines the rule to send ECR pushes and deletes to Scout.                                  | Free  |
+| `AWS::IAM::Role`              | `InvokeApiRole`       | Internal role to grant the event access to `ApiDestination`.                               | Free  |
+| `AWS::IAM::Role`              | `AssumeRoleEcrAccess` | This role has access to `ScoutAPICredentials` for setting up the Docker Scout integration. | Free  |
 
 ## Integrate your first registry
 
 Create the CloudFormation stack in your AWS account to enable the Docker Scout
-integration. 
+integration.
 
 Prerequisites:
 
@@ -79,8 +79,9 @@ To create the stack:
    If the button is grayed-out, it means you're lacking the necessary
    permissions in the Docker organization.
 
-4. Follow the steps in the **Create stack** wizard until the end, and complete
-   the procedure by creating the resources.
+4. Follow the steps in the **Create stack** wizard until the end. Choose the
+   AWS region you want to integrate. Complete the procedure by creating the
+   resources.
 
    The fields in the wizard are pre-populated by the CloudFormation template,
    so you don't need to edit any of the fields.
@@ -146,7 +147,7 @@ organization.
 > AWS resources in your account.
 >
 > After removing the integration in Docker Scout, go to the AWS console and
-> delete the **ScoutECRIntegration** CloudFormation stack for the integraiton
+> delete the **DockerScoutECRIntegration** CloudFormation stack for the integration
 > that you want to remove.
 { .important }
 
@@ -180,7 +181,7 @@ Scout Dashboard, run the following checks:
   The account ID and region are included in the registry hostname:
   `<aws_account_id>.dkr.ecr.<region>.amazonaws.com/<image>`
 
-- Docker Scout only analyzes images that were pushed *after* the integration
+- Docker Scout only analyzes images that were pushed _after_ the integration
   was created. If you want to analyze images created before the registry was
   integrated, you can push the images to the registry again.
 
