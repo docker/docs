@@ -84,7 +84,7 @@ In this Swarm YAML file, we have just one object, a `service`, describing a scal
 
     This indicates 1/1 containers you asked for as part of your services are up and running. Also, we see that port 8000 on your development machine is getting forwarded to port 3000 in your getting-started container.
 
-3. Open a browser and visit your Todo app at `localhost:8000`; you should see your Todo application, the same as when we ran it as a stand-alone container in Part 2 of the Quickstart tutorial.
+3. Open a browser and visit your Todo app at `localhost:8000`; you should see your Todo application, the same as when we ran it as a stand-alone container in [Part 2](02_our_app.md) of the Quickstart tutorial.
 
 4. Once satisfied, tear down your application:
 
