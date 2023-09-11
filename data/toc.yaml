@@ -93,10 +93,8 @@ Guides:
     section:
     - title: "Overview"
       path: /language/dotnet/
-    - title: "Build images"
-      path: /language/dotnet/build-images/
-    - title: "Run containers"
-      path: /language/dotnet/run-containers/
+    - title: "Containerize your app"
+      path: /language/dotnet/containerize/
     - title: "Develop your app"
       path: /language/dotnet/develop/
     - title: "Run your tests"
