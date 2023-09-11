@@ -24,11 +24,62 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.22.0
+
+{{< release-date date="2023-08-11" >}}
+
+{{< desktop-install all=true version="4.22.0" build_path="/117440/" >}}
+
+### Upgrades
+- [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
+- [Docker Engine v24.0.6](https://docs.docker.com/engine/release-notes/24.0/#2406)
+- [Docker Scout CLI v0.24.1](https://github.com/docker/scout-cli/releases/tag/v0.24.1).
+- Wasm runtimes:
+  - wasmtime, wasmedge revision `d0a1a1cd`.
+  - slight and spin wasm `v0.9.0`.
+
+### New
+
+- Added support for new Wasm runtimes: wws and lunatic.
+- `docker init` now supports ASP.NET
+- Increased performance of exposed ports on macOS, for example with `docker run -p`.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+With Docker Scout, you can now:
+  - Manage temporary and cached files with `docker scout cache`.
+  - Manage environments with `docker scout environment`.
+  - Configure the default organization with `docker scout config`.
+  - List packages of an image with their vulnerabilities with `docker scout cves --format only-packages`.
+  - Enroll an organization with Docker scout with `docker scout enroll`.
+  - Stop, analyze, and compare local file systems with `docker scout cves --type fs`.
+- Fixed a bug where `docker stats` would hang when Docker Desktop was in Resource Saver mode.
+- Fixed a bug where turning off experimental features via **Settings** in the Docker Dashboard would not fully turn off Resource Saver mode.
+- Fixed a bug where the **Containers list** action button was clipped.
+- containerd image store:
+  - Fixed `failed to read config content` error when interacting with some images.
+  - Fixed building Dockerfiles with `FROM scratch` instruction when using the legacy classic builder (`DOCKER_BUILDKIT=0`).
+  -  Fixed `mismatched image rootfs errors` when building images with legacy classic builder (`DOCKER_BUILDKIT=0`).
+  - Fixed `ONBUILD` and `MAINTAINER` Dockerfile instruction
+  - Fixed healthchecks.
+
+#### For Mac
+
+- All users on macOs 12.5 or greater now have VirtioFS turned on by default. This can be reverted in **Settings** in the **General** tab.
+- Improved single-stream TCP throughput.
+- Reinstated the health check for macOS that notifies you if there has been a change on your system which might cause problems running Docker binaries.
+
+#### For Linux
+
+- Fixed a bug where the GUI is killed when opening the Docker Desktop app twice. See [docker/desktop-linux#148](https://github.com/docker/desktop-linux/issues/148).
+
 ## 4.22.1
 
 {{< release-date date="2023-08-24" >}}
 
-{{< desktop-install all=true version="4.22.1" build_path="/" >}}
+{{< desktop-install all=true version="4.22.1" build_path="/118664" >}}
 
 ### Bug fixes and enhancements
 
