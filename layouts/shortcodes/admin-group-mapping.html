@@ -1,9 +1,12 @@
 {{ $scim_link := "[Enable SCIM](/docker-hub/scim/)" }}
+{{ $mapping_link := "[user-level attributes](docker-hub/scim.md#set-up-role-mapping)"}}
 
 {{ if eq (.Get "product") "admin" }}
-{{ $scim_link = "[Enable SCIM](/admin/company/settings/scim/)" }}
-{{ if eq (.Get "layer") "company" }}
 {{ $scim_link = "[Enable SCIM](/admin/organization/security-settings/scim/)" }}
+{{ $mapping_link = "[user-level attributes](admin/organization/security-settings/scim.md#set-up-role-mapping)"}}
+{{ if eq (.Get "layer") "company" }}
+{{ $scim_link = "[Enable SCIM](/admin/company/settings/scim/)" }}
+{{ $mapping_link = "[user-level attributes](admin/company/settings/scim.md#set-up-role-mapping)"}}
 {{ end }}
 {{ end }}
 
@@ -52,6 +55,11 @@ The following lists the supported group mapping attributes:
 | displayName | Name of the group following the group mapping format: `organization:team`. |
 | members | A list of users that are members of this group. |
 | members[x].value | Unique ID of the user that is a member of this group. Members are referenced by ID. |
+
+> **Tip**
+>
+> Group mapping is ideal for adding a user to multiple organizations. If you don't need to set up multi-organization assignment, you can use {{ $mapping_link }}.
+{ .tip }
 
 To take advantage of group mapping, follow the instructions provided by your IdP:
 
