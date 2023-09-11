@@ -17,7 +17,7 @@ tests in Docker when developing and when building.
 
 ## Run tests when developing locally
 
-The sample application already has the jest package for running tests and has tests inside the `spec` directory. When developing locally, you can easily use Compose to run your tests.
+The sample application already has the Jest package for running tests and has tests inside the `spec` directory. When developing locally, you can easily use Compose to run your tests.
 
 Run the following command to run the test script from the `package.json` file inside a container.
 

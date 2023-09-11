@@ -15,7 +15,7 @@ In this section, you'll learn how to use Docker Desktop to deploy your applicati
 
 ## Create a Kubernetes YAML file
 
-In the clone repository's directory, create a file name `docker-node-kubernetes.yaml`. Open the file in an IDE or text editor and add the following contents.
+In the cloned repository's directory, create a file name `docker-node-kubernetes.yaml`. Open the file in an IDE or text editor and add the following contents.
 Replace `DOCKER_USERNAME/REPO_NAME` with your Docker username and the name of the repository that you created in [Configure CI/CD for your Node.js application](configure-ci-cd.md).
 
 ```yaml
@@ -111,7 +111,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    In addition to the default `kubernetes` service, you can see your `todo-entrypoint` service, accepting traffic on port 30001/TCP.
 
-3. Open a browser and visit your app at `localhost:30001`; you should see your
+3. Open a browser and visit your app at `localhost:30001`. You should see your
    application.
 
 4. Run the following command to tear down your application.

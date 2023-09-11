@@ -11,9 +11,9 @@ The Node.js language-specific guide teaches you how to containerize a Node.js ap
 * Containerize and run a Node.js application
 * Set up a local environment to develop a Node.js application using containers
 * Run tests for a Node.js application using containers
-* Configure a CI/CD pipeline for a containerized Node.js application using GitHub Actions.
+* Configure a CI/CD pipeline for a containerized Node.js application using GitHub Actions
 * Deploy your containerized Node.js application locally to Kubernetes to test and debug your deployment
 
 Start by containerizing an existing Node.js application.
 
-{{< button text="Containerize a Node.js" url="containerize.md" >}}
+{{< button text="Containerize a Node.js app" url="containerize.md" >}}

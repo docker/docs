@@ -88,8 +88,7 @@ Before you run the application using Compose, notice that this Compose file uses
 `secrets` and specifies a `password.txt` file to hold the database's password.
 You must create this file as it's not included in the source repository.
 
-In the cloned repository's directory, create a new directory named `db` and
-inside that directory create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add a password of your choice.
+In the cloned repository's directory, create a new directory named `db`. Inside the `db` directory, create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add a password of your choice.
 
 You should now have the following contents in your `docker-nodejs-sample`
 directory.
@@ -139,7 +138,7 @@ In addition to adding a bind mount, you can configure your Dockerfile and `compo
 
 ### Update your Dockerfile for development
 
-Open the Dockerfile in and IDE or text editor. Note that the Dockerfile doesn't
+Open the Dockerfile in an IDE or text editor. Note that the Dockerfile doesn't
 install development dependencies and doesn't run nodemon. You'll
 need to update your Dockerfile to install the development dependencies and run
 nodemon.
@@ -190,7 +189,7 @@ Next, you'll need to update your Compose file to use the new stage.
 
 ### Update your Compose file for development
 
-To run the `dev` stage with Compose, you need to update you `compose.yaml` file.
+To run the `dev` stage with Compose, you need to update your `compose.yaml` file.
 Open your `compose.yaml` file in an IDE or text editor, and then add the
 `target: dev` instruction to target the `dev` stage from your multi-stage
 Dockerfile.
