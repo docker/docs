@@ -661,7 +661,7 @@ rest-server exited with code 1
 # ... omitted output ...
 ```
 
-Because of the way we set up our deployment using `restart_policy`, the failing container is being restarted every 20 seconds. So, in order to fix the problem, we need to log into the database engine and create the user, we've done it before in the []
+Because of the way we set up our deployment using `restart_policy`, the failing container is being restarted every 20 seconds. So, in order to fix the problem, we need to log into the database engine and create the user, we've done it before in [Configure the database engine](#configure-the-database-engine).
 
 This is not a big deal. All we have to do is to connect to CockroachDB instance and run the three SQL commands to create the database and the user, as described above in the _Configure the database engine_ section above.
 
