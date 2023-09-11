@@ -24,11 +24,11 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
-## 4.22.0
+## 4.23.0
 
-{{< release-date date="2023-08-11" >}}
+{{< release-date date="2023-09-11" >}}
 
-{{< desktop-install all=true version="4.22.0" build_path="/117440/" >}}
+{{< desktop-install all=true version="4.23.0" build_path="/" >}}
 
 ### Upgrades
 - [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
