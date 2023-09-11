@@ -80,10 +80,12 @@ builder using the `cloud` driver.
 2. Create a builder that uses the `cloud` driver.
 
    ```console
-   $ docker buildx create --driver cloud --name hydrobuild <org>/default
+   $ docker buildx create --driver cloud <org>/default
    ```
 
    Replace `<org>` with the Docker organization.
+
+   This creates a builder named `cloud-<org>-default`.
 
 ## Use Hydrobuild from the CLI
 
@@ -91,7 +93,7 @@ To run a build using Hydrobuild, invoke a build command and specify the
 name of the builder using the `--builder` flag.
 
 ```console
-$ docker buildx build --builder hydrobuild --tag <org>/<image> .
+$ docker buildx build --builder cloud-<org>-default --tag <org>/<image> .
 ```
 
 > **Note**
@@ -106,7 +108,7 @@ $ docker buildx build --builder hydrobuild --tag <org>/<image> .
 To build a multi-platform image and push it to a registry:
 
 ```console
-$ docker buildx build --builder hydrobuild \
+$ docker buildx build --builder cloud-<org>-default \
   --platform linux/amd64,linux/arm64 \
   --tag <org>/<image> \
   --push .
@@ -131,7 +133,7 @@ If you want to use Hydrobuild by default, you can run the following command to
 make it the selected builder:
 
 ```console
-$ docker buildx use hydrobuild --global
+$ docker buildx use cloud-<org>-default --global
 ```
 
 > **Note**
@@ -418,7 +420,7 @@ If you want to stop using Hydrobuild, and remove it from your system, remove
 the builder using the `docker buildx rm` command.
 
 ```console
-$ docker buildx rm hydrobuild
+$ docker buildx rm cloud-<org>-default
 ```
 
 This doesn't deprovision the builder backend, it only removes the builder from
