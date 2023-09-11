@@ -33,17 +33,15 @@ Guides:
     section:
     - title: "Overview"
       path: /language/nodejs/
-    - title: "Build images"
-      path: /language/nodejs/build-images/
-    - title: "Run containers"
-      path: /language/nodejs/run-containers/
+    - title: "Containerize your app"
+      path: /language/nodejs/containerize/
     - title: "Develop your app"
       path: /language/nodejs/develop/
     - title: "Run your tests"
       path: /language/nodejs/run-tests/
     - title: "Configure CI/CD"
       path: /language/nodejs/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/nodejs/deploy/
   - sectiontitle: Python
     section:
