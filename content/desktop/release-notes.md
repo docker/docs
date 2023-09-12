@@ -79,7 +79,7 @@ With Docker Scout, you can now:
 
 {{< release-date date="2023-08-24" >}}
 
-{{< desktop-install all=true version="4.22.1" build_path="/118664" >}}
+{{< desktop-install all=true version="4.22.1" build_path="/118664/" >}}
 
 ### Bug fixes and enhancements
 
