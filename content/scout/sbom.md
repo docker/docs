@@ -67,17 +67,20 @@ Scout image analysis.
 
 ```console
 $ docker build --tag <org>/<image> \
-  --attest type=sbom,generator=docker/scout-sbom-indexer:latest \
+  --attest type=sbom,generator=docker/scout-sbom-indexer:d3f9c2d \
   --push .
 ```
 
 > **Note**
 >
-> The default, non-containerd image store doesn't currently support images with
-> attestations. To build images with SBOM attestations, you can either turn on
-> the [containerd image store](../desktop/containerd/_index.md) feature, or use
-> a `docker-container` builder together with the `--push` flag to push the
-> image (with attestations) directly to a registry.
+> The Docker Scout SBOM generator is currently only published under the tag
+> `d3f9c2d`.
+
+The default, non-containerd image store doesn't currently support images with
+attestations. To build images with SBOM attestations, you can either turn on
+the [containerd image store](../desktop/containerd/_index.md) feature, or use a
+`docker-container` builder together with the `--push` flag to push the image
+(with attestations) directly to a registry.
 
 ## Extract to file
 
