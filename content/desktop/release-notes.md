@@ -67,7 +67,7 @@ With Docker Scout, you can now:
 
 #### For Mac
 
-- All users on macOS 12.5 or greater now have VirtioFS turned on by default. This can be reverted in **Settings** in the **General** tab.
+- All users on macOS 12.5 or greater now have VirtioFS turned on by default. You can revert this in **Settings** in the **General** tab.
 - Improved single-stream TCP throughput.
 - Reinstated the health check for macOS that notifies you if there has been a change on your system which might cause problems running Docker binaries.
 
