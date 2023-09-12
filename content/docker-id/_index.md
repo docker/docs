@@ -50,7 +50,7 @@ stored in your home directory in `.docker/config.json`. The password is base64-e
 
 ## Troubleshooting
 
-If you run into trouble with your Docker ID account, know that we're here to help! If you want to retrieve or reset your password, [enter your email address](https://id.docker.com/reset-password/) for additional instructions.
+If you run into trouble with your Docker ID account, know that we're here to help! If you want to retrieve or reset your password, [enter your email address](https://login.docker.com/u/login) for additional instructions.
 
 You can use the [Docker forums](https://forums.docker.com/) to ask questions amongst other Docker community members, while our [hub-feedback GitHub repository](https://github.com/docker/hub-feedback) allows you to provide feedback on how we can better improve the experience with Docker Hub.
 
