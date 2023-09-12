@@ -12,6 +12,11 @@
 
 With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams.
 
+> **Tip**
+>
+> Group mapping is ideal for adding a user to multiple organizations. If you don't need to set up multi-organization assignment, you can use {{ $mapping_link }}.
+{ .tip }
+
 ## How group mapping works
 
 IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. These attributes are used by Just-In-Time (JIT) Provisioning to create or update the user’s Docker profile and their associations with organizations and teams on Docker Hub.
@@ -55,11 +60,6 @@ The following lists the supported group mapping attributes:
 | displayName | Name of the group following the group mapping format: `organization:team`. |
 | members | A list of users that are members of this group. |
 | members[x].value | Unique ID of the user that is a member of this group. Members are referenced by ID. |
-
-> **Tip**
->
-> Group mapping is ideal for adding a user to multiple organizations. If you don't need to set up multi-organization assignment, you can use {{ $mapping_link }}.
-{ .tip }
 
 To take advantage of group mapping, follow the instructions provided by your IdP:
 
