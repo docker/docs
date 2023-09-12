@@ -90,7 +90,7 @@ For example:
 
 ```yaml
 - name: Build and push
-  uses: docker/build-push-action@v4
+  uses: docker/build-push-action@v5
   with:
     context: .
     push: true
