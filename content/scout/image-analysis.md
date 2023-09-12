@@ -62,28 +62,23 @@ Prerequisites:
 
 1. Sign in with your Docker ID, either using the `docker login` command or the
    **Sign in** button in Docker Desktop.
-2. Build and tag the image that you want to analyze.
+2. Build and push the image that you want to analyze.
 
    ```console
-   $ docker build --tag <org>/<image>:latest --provenance=true --sbom=true .
+   $ docker build --push --tag <org>/<image:tag> --provenance=true --sbom=true .
    ```
 
-   > **Note**
-   >
-   > Building with the `--provenance=true` and `--sbom=true` flags attach
-   > [build attestations](../build/attestations/_index.md) to the image, which
-   > yields more precise analysis results.
+   Building with the `--provenance=true` and `--sbom=true` flags attaches
+   [build attestations](../build/attestations/_index.md) to the image. Docker
+   Scout uses attestations to provide more fine-grained analysis results.
 
-3. Push the image to Docker Hub to trigger analysis of the image:
+   The default `docker` driver only supports build attestations if you use the
+   [containerd image store](../desktop/containerd/_index.md).
 
-   ```console
-   $ docker push <org>/<imagename>:latest
-   ```
-
-4. Go to the [Docker Scout Dashboard](https://scout.docker.com/)
-5. Sign in with your Docker ID.
-6. Select the Docker organization that contains the image you just pushed.
-7. Go to the **Images** tab. The image appears in the list shortly after you
+3. Go to the [Docker Scout Dashboard](https://scout.docker.com/)
+4. Sign in with your Docker ID.
+5. Select the Docker organization that contains the image you just pushed.
+6. Go to the **Images** tab. The image appears in the list shortly after you
    push it to the registry.
 
    It may take a few minutes for the analysis report to appear. If the analysis
