@@ -215,6 +215,12 @@ an image that implements the
 $ docker buildx build --attest type=sbom,generator=<image> .
 ```
 
+> **Tip**
+>
+> The Docker Scout SBOM generator is available. See
+> [../../scout/sbom.md#attest].
+{ .tip }
+
 ## SBOM attestation example
 
 The following JSON example shows what an SBOM attestation might look like.

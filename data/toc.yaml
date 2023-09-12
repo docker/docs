@@ -1925,6 +1925,8 @@ Manuals:
       title: Data handling
     - path: /scout/policy/
       title: Policy
+    - path: /scout/sbom/
+      title: SBOM
     - sectiontitle: Integrations
       section:
       - title: Overview
