@@ -1,13 +1,21 @@
 {{ $scim_link := "[Enable SCIM](/docker-hub/scim/)" }}
+{{ $mapping_link := "[user-level attributes](docker-hub/scim.md#set-up-role-mapping)"}}
 
 {{ if eq (.Get "product") "admin" }}
-{{ $scim_link = "[Enable SCIM](/admin/company/settings/scim/)" }}
-{{ if eq (.Get "layer") "company" }}
 {{ $scim_link = "[Enable SCIM](/admin/organization/security-settings/scim/)" }}
+{{ $mapping_link = "[user-level attributes](admin/organization/security-settings/scim.md#set-up-role-mapping)"}}
+{{ if eq (.Get "layer") "company" }}
+{{ $scim_link = "[Enable SCIM](/admin/company/settings/scim/)" }}
+{{ $mapping_link = "[user-level attributes](admin/company/settings/scim.md#set-up-role-mapping)"}}
 {{ end }}
 {{ end }}
 
 With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams.
+
+> **Tip**
+>
+> Group mapping is ideal for adding a user to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, you can use {{ $mapping_link }}.
+{ .tip }
 
 ## How group mapping works
 

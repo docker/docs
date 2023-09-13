@@ -13,7 +13,7 @@ registry. The default registry is Docker Hub and is where all of the images you'
 
 > **Docker ID**
 >
-> A Docker ID lets you to access Docker Hub, which is the world's largest library and community for container images. Create a [Docker ID](https://hub.docker.com/signup) for free if you don't have one.
+> A Docker ID lets you access Docker Hub, which is the world's largest library and community for container images. Create a [Docker ID](https://hub.docker.com/signup) for free if you don't have one.
 
 ## Create a repository
 
