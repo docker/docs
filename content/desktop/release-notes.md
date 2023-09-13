@@ -48,7 +48,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-With Docker Scout, you can now:
+- With Docker Scout, you can now:
   - Manage temporary and cached files with `docker scout cache`.
   - Manage environments with `docker scout environment`.
   - Configure the default organization with `docker scout config`.
@@ -74,6 +74,13 @@ With Docker Scout, you can now:
 #### For Linux
 
 - Fixed a bug where the GUI is killed when opening the Docker Desktop app twice. See [docker/desktop-linux#148](https://github.com/docker/desktop-linux/issues/148).
+
+### Security
+
+#### For all platforms
+
+- Security fixes for vulnerabilities related to information leakage and access control bypass.
+
 
 ## 4.22.1
 
