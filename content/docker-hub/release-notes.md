@@ -12,6 +12,10 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 2023-08-28
+
+- Organizations with SSO enabled can assign members to roles, organizations, and teams with [SCIM role mapping](scim.md#set-up-role-mapping). 
+
 ## 2023-07-26
 
 ### New
