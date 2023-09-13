@@ -48,6 +48,23 @@ Once your purchase is complete, you receive a confirmation email and a copy of y
 
 ## Manage your subscription
 
-To access your subscription details, go to the **Billing** section for your personal account or organization that's subscribed. In the **Docker Scout Team** section, select **Change plan**. Here you can find your renewal date, invoice history, or cancel your plan.
+To access your subscription details, go to the **Billing** section for your personal account or organization that's subscribed. In the **Docker Scout Team** section, select **Change plan**. In your billing details portal, you can find your renewal date, invoice history, or cancel your plan.
 
 Renewals charge to the original credit card used to buy Docker Scout Team.
+
+### Cancel your subscription
+
+You can cancel your Docker Scout subscription at anytime. Your subscription features remain available until the end of your billing period.
+
+1. In the billing details portal, find your current plan.
+2. Next to the name of your Docker Scout plan, select **Cancel plan**.
+3. Review the details for your subscription, then select **Cancel plan** to confirm.
+
+### Renew a canceled subscription
+
+You can renew a plan that you canceled at anytime.
+
+1. Find the canceled plan in the billing details portal.
+2. Next to the name of your canceled Docker Scout plan, select **Renew plan**.
+3. Review the details for your subscription. Note that you can't edit the number of repositories or the billing information.
+4. Select **Renew plan** to confirm. Renewals charge to the original credit card used to buy your subscription.
