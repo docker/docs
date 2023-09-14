@@ -75,12 +75,16 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 - Fixed a bug where the GUI is killed when opening the Docker Desktop app twice. See [docker/desktop-linux#148](https://github.com/docker/desktop-linux/issues/148).
 
+#### For Windows
+
+- Fixed a bug where non-admin users would get prompted for credentials when switching to Windows Containers or after disabling WSL and switching to the Hyper-V engine.
+  This issue would occur after an OS restart, or on a cold start of Docker Desktop.
+
 ### Security
 
 #### For all platforms
 
 - Security fixes for vulnerabilities related to information leakage and access control bypass.
-
 
 ## 4.22.1
 
