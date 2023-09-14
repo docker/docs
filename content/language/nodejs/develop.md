@@ -115,6 +115,40 @@ Run the following command to start your application.
 $ docker compose up --build
 ```
 
+> **Note**
+> 
+> If you did enter a password in the password.txt file and get a database connection error or password authentication failed for `POSTGRES_USER: postgres`.
+> This means that there is no initial password set for the user postgres and you have to initialize one. To do that follow the steps below:
+> * press `ctrl+c`
+> * type `docker ps`
+> * ```console
+>   CONTAINER ID   IMAGE                         COMMAND                  CREATED          STATUS                    PORTS                    NAMES
+>   e1381883de9e   docker-nodejs-sample-server   "docker-entrypoint.s…"   12 minutes ago   Up 11 minutes             0.0.0.0:3000->3000/tcp   docker-nodejs-sample-server-1       
+>   0328d9e08bd2   postgres                      "docker-entrypoint.s…"   12 minutes ago   Up 12 minutes (healthy)   5432/tcp                 docker-nodejs-sample-db-1
+>   ```
+> * Type the following into the command line "docker exec -it <your_postgres_CONTAINER_ID_in_here> bash" as done below except that the "CONTAINER ID" will be different in your case.
+>   ```console
+>   $ docker exec -it 0328d9e08bd2 bash
+>   ```
+> * Start postgres sql:
+>   ```console
+>   $ psql
+>   ```
+> * Define the password:
+>   ```console
+>   ALTER ROLE postgres WITH PASSWORD 'your_password_in_here';
+>   ```
+>   Exit out of the postgresql console
+>   ```console
+>   exit
+>   ```
+>   Restart your container by typing the following:
+>   ```console
+>   docker compose down
+>   docker compose up --build
+>   ```
+>   Your todo app should now be working now.
+
 Open a browser and verify that the application is running at [http://localhost:3000](http://localhost:3000).
 
 Add some items to the todo list to test data persistence.
