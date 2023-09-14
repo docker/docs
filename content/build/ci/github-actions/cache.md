@@ -137,12 +137,10 @@ jobs:
 
 BuildKit doesn't preserve cache mounts in the GitHub Actions cache by default.
 If you wish to put your cache mounts into GitHub Actions cache and reuse it
-between builds, you can use a workaround provided by two third-party actions:
+between builds, you can use a workaround provided by
+[`reproducible-containers/buildkit-cache-dance`](https://github.com/reproducible-containers/buildkit-cache-dance).
 
-- `overmindtech/buildkit-cache-dance/extract`
-- `overmindtech/buildkit-cache-dance/inject`
-
-These GitHub Actions creates temporary containers to extract and inject the
+This GitHub Action creates temporary containers to extract and inject the
 cache mount data with your Docker build steps.
 
 The following example shows how to use this workaround with a Go project.
@@ -183,7 +181,9 @@ jobs:
           key: ${{ runner.os }}-go-build-cache-${{ hashFiles('**/go.sum') }}
 
       - name: inject go-build-cache into docker
-        uses: overmindtech/buildkit-cache-dance/inject@306d31a77191f643c0c4a95083f36c6ddccb4a16
+        # v1 was composed of two actions: "inject" and "extract".
+        # v2 is unified to a single action.
+        uses: reproducible-containers/buildkit-cache-dance@v2.1.2
         with:
           cache-source: go-build-cache
 
@@ -198,15 +198,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
-
-      - name: extract go-build-cache from docker
-        uses: overmindtech/buildkit-cache-dance/extract@306d31a77191f643c0c4a95083f36c6ddccb4a16
-        with:
-          cache-source: go-build-cache
 ```
 
 For more information about this workaround, refer to the
-[GitHub repository](https://github.com/overmindtech/buildkit-cache-dance).
+[GitHub repository](https://github.com/reproducible-containers/buildkit-cache-dance).
 
 ### Local cache
 
