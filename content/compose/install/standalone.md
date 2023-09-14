@@ -11,7 +11,7 @@ aliases:
 
 On this page you can find instructions on how to install Compose standalone on Linux or Windows Server, from the command line.
 
-### On Linux
+## On Linux
 > **Compose standalone**
 >
 > Note that Compose standalone uses the `-compose` syntax instead of the current standard syntax `compose`.  
@@ -34,7 +34,7 @@ On this page you can find instructions on how to install Compose standalone on L
    > ```
    { .tip }
 
-### On Windows Server
+## On Windows Server
 
 Follow these instructions if you are running the Docker daemon and client directly
 on Microsoft Windows Server and want to install Docker Compose.
@@ -50,7 +50,7 @@ on Microsoft Windows Server and want to install Docker Compose.
 3. Run the following command to download the latest release of Compose ({{% param "compose_version" %}}):
 
     ```powershell
-     Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{% param "compose_version" %}}/docker-compose-windows-x86_64.exe" -Destination $Env:ProgramFiles\Docker\docker-compose.exe
+    Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{% param "compose_version" %}}/docker-compose-windows-x86_64.exe" -Destination $Env:ProgramFiles\Docker\docker-compose.exe
     ```
 
     > **Note**

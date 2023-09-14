@@ -1952,7 +1952,7 @@ Manuals:
     section:
       - path: /compose/install/
         title: Overview
-      - path: /compose/install/linux/
+      - path: /compose/install/plugin/
         title: Install Compose plugin
       - path: /compose/install/standalone/
         title: Install Compose standalone
