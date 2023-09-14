@@ -54,7 +54,7 @@ Renewals charge to the original credit card used to buy Docker Scout Team.
 
 ### Cancel your subscription
 
-You can cancel your Docker Scout subscription at anytime. Your subscription features remain available until the end of your billing period.
+You can cancel your Docker Scout subscription at anytime. Your subscription features remain available until the end of your billing cycle.
 
 1. In the billing details portal, find your current plan.
 2. Next to the name of your Docker Scout plan, select **Cancel plan**.
@@ -62,7 +62,7 @@ You can cancel your Docker Scout subscription at anytime. Your subscription feat
 
 ### Renew a canceled subscription
 
-You can renew a plan that you canceled at anytime.
+You can renew a canceled subscription any time before the end of the billing cycle. You can find this date in the billing details portal.
 
 1. Find the canceled plan in the billing details portal.
 2. Next to the name of your canceled Docker Scout plan, select **Renew plan**.
