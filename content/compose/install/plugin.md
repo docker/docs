@@ -10,6 +10,8 @@ title: Install the Compose plugin
 aliases:
 - /compose/compose-plugin/
 - /compose/compose-linux/
+redirect_from:
+- /compose/install/linux/
 ---
 
 {{< include "compose-eol.md" >}}
