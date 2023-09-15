@@ -6,4 +6,3 @@ match: $sentence
 exceptions:
   - Vocab/Docker/accept.txt
   - Vocab/Technology/accept.txt
-  - Vocab/Industry/accept.txt
