@@ -26,7 +26,9 @@ Before deactivating your Docker account, ensure that you meet the following requ
 
 - If you are the sole owner of an organization, either assign another member of the organization the owner role and then remove yourself from the organization, or deactivate the organization. Similarly, if you are the sole owner of a company, either add someone else as a company owner and then remove yourself, or deactivate the company.
 
-- If you have an active subscription, [downgrade it to a Docker Personal subscription](../subscription/downgrade.md).
+- If you have an active Docker subscription, [downgrade it to a Docker Personal subscription](../subscription/downgrade.md).
+
+- If you have an active Docker Scout subscription, [cancel your plan](../billing/scout-billing.md#cancel-your-subscription).
 
 - Download any images and tags you want to keep. Use `docker pull -a <image>:<tag>`.
 
@@ -50,7 +52,9 @@ Before deactivating an organization, complete the following:
 - Download any images and tags you want to keep:
   `docker pull -a <image>:<tag>`.
 
--  If you have an active subscription, [downgrade it to a **Docker Free Team** subscription](../subscription/downgrade.md).
+- If you have an active Docker subscription, [downgrade it to a **Docker Free Team** subscription](../subscription/downgrade.md).
+
+- If you have an active Docker Scout subscription, [cancel your plan](../billing/scout-billing.md#cancel-your-subscription).
 
 - Remove all other members within the organization.
 
