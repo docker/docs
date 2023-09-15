@@ -10,8 +10,8 @@ disableKinds:
 
 markup:
   tableOfContents:
-    startLevel: 2
-    endLevel: 3
+    startLevel: 1
+    endLevel: 4
   goldmark:
     extensions:
       typographer: false

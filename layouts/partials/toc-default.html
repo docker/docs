@@ -1,8 +1,44 @@
+{{ page.Scratch.Set "currentLevel" 1 }}
 {{ if ne .Params.notoc true }}
-  {{ if gt (len .TableOfContents) 32 }}
+  {{ with .Fragments.Headings }}
     <div>
       <div class="text-lg pb-2">{{ T "tableOfContents" }}</div>
-      {{ .TableOfContents }}
+      <nav id="TableOfContents">
+        {{ template "walkHeadings" . }}
+      </nav>
     </div>
+  {{ end }}
+{{ end }}
+
+{{ define "walkHeadings" }}
+  {{ $currentLevel := page.Scratch.Get "currentLevel" }}
+  {{ range . }}
+    {{ page.Scratch.Set "currentLevel" (add $currentLevel 1) }}
+    {{ if
+      (not
+        (or
+          (and
+            (isset page.Params "toc_min")
+            (lt $currentLevel page.Params.toc_min)
+          )
+          (and
+            (isset page.Params "toc_max")
+            (gt $currentLevel page.Params.toc_max)
+          )
+        )
+      )
+    }}
+      {{ if (and .ID .Title) }}
+        <ul>
+          <li>
+            <a href="#{{ .ID }}"
+              >{{ .Title }}</a>
+            {{ template "walkHeadings" .Headings }}
+          </li>
+        </ul>
+      {{ else }}
+        {{ template "walkHeadings" .Headings }}
+      {{ end }}
+    {{ end }}
   {{ end }}
 {{ end }}
