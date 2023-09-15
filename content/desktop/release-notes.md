@@ -131,10 +131,14 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Bind mounts are now shown when you [inspect a container](use-desktop/container.md).
 - You can now download Wasm runtimes when the containerd image store is enabled.
 - With [Quick Search](../desktop/use-desktop/_index.md/#quick-search), you can now:
-  - Find any container or Compose app residing on your local system. In addition, you can access environment variables and perform essential actions such as starting, stopping, or deleting containers.
-  - Find public Docker Hub images, local images, or images from remote repositories.
+  - Find any container or Compose app residing on your local system. In
+    addition, you can access environment variables and perform essential actions
+    such as starting, stopping, or deleting containers.
+  - Find public Docker Hub images, local images, or images from remote
+    repositories.
   - Discover more about specific extensions and install them.
-  - Navigate through your volumes and gain insights about the associated containers.
+  - Navigate through your volumes and gain insights about the associated
+    containers.
   - Search and access Docker's documentation.
 
 #### For Mac
