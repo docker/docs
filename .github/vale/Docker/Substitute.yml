@@ -6,11 +6,19 @@ level: suggestion
 action:
   name: replace
 swap:
+  '(?<!Docker)\s Hub': Docker Hub
+  '(?<!Docker)\sScout': Docker Scout
+  k8s: Kubernetes
+  '\b(?:eg|e\.g\.)[\s,]': for example
+  '\b(?:ie|i\.e\.)[\s,]': that is
+  (?:account name|accountname|user name): username
+  (?:drop down|dropdown): drop-down
+  (?:log out|logout): sign out
+  (?:sign on|log on|log in|logon|login): sign in
   above: previous
   adaptor: adapter
-  (?:account name|accountname|user name): username
-  administrate: administer
   admin: administrator
+  administrate: administer
   afterwards: afterward
   allow: let
   allows: lets
@@ -28,24 +36,20 @@ swap:
   click: select
   deselect: clear
   disable: turn off|toggle off
-  (?:drop down|dropdown): drop-down
-  '\b(?:eg|e\.g\.)[\s,]': for example
   enable: turn on|toggle on
   ergo: therefore
   execute: run
   gb: GB
   gbps: Gbps
-  '\b(?:ie|i\.e\.)[\s,]': that is
   kb: KB
   keypress: keystroke
-  (?:log out|logout): sign out
   mb: MB
   mutices: mutexes
   paas: PaaS
   pb: PB
   repo: repository
+  scan: analyze
   scroll: navigate
-  (?:sign on|log on|log in|logon|login): sign in
   tb: TB
   vs: versus
   wish: want
