@@ -17,6 +17,7 @@ There are two ways to contribute a pull request to the docs repository:
 
     This opens the GitHub editor, which means you don't need to know a lot about Git, or even about Markdown. When you save, Git prompts you to create a fork if you don't already have one, and to create a branch in your fork and submit the pull request.
 
+<!-- markdownlint-disable-next-line -->
 2. Fork the [docs GitHub repository]({{% param "repo" %}}). Suggest changes or add new content on your local branch, and submit a pull request (PR) to the `main` branch.
 
     This is the manual, more advanced version of selecting 'Edit this page' on a published docs page. Initiating a docs change in a PR from your own branch gives you more flexibility, as you can submit changes to multiple pages or files under a single pull request, and even create new topics.

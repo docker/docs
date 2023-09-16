@@ -1,1 +1,0 @@
-[{{ include.repo }}#{{ include.number }}](https://github.com/{{ include.repo }}/issues/{{ include.number }})
