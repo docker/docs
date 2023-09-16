@@ -7,8 +7,8 @@ keywords: application, development
 The following development patterns have proven to be helpful for people
 building applications with Docker. 
 
-If you have discovered something we should add,
-[let us know]({{% param "repo" %}}/issues/new?template=doc_issue.yml&labels=status%2Ftriage).
+<!-- markdownlint-disable-next-line -->
+If you have discovered something we should add, [let us know]({{% param "repo" %}}/issues/new?template=doc_issue.yml&labels=status%2Ftriage).
 
 ## How to keep your images small
 
