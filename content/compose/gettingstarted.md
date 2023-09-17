@@ -313,7 +313,7 @@ $ docker compose up -d
 Starting composetest_redis_1...
 Starting composetest_web_1...
 
-$ docker compose ps
+$ docker-compose ps
 
        Name                      Command               State           Ports         
 -------------------------------------------------------------------------------------
@@ -326,16 +326,16 @@ services. For example, to see what environment variables are available to the
 `web` service:
 
 ```console
-$ docker compose run web env
+$ docker-compose run web env
 ```
 
-See `docker compose --help` to see other available commands.
+See `docker-compose --help` to see other available commands.
 
-If you started Compose with `docker compose up -d`, stop
+If you started Compose with `docker-compose up -d`, stop
 your services once you've finished with them:
 
 ```console
-$ docker compose stop
+$ docker-compose stop
 ```
 
 You can bring everything down, removing the containers entirely, with the `down`
@@ -343,7 +343,7 @@ command. Pass `--volumes` to also remove the data volume used by the Redis
 container:
 
 ```console
-$ docker compose down --volumes
+$ docker-compose down --volumes
 ```
 
 ## Where to go next
