@@ -218,7 +218,7 @@ $ docker buildx build --attest type=sbom,generator=<image> .
 > **Tip**
 >
 > The Docker Scout SBOM generator is available. See
-> [../../scout/sbom.md#attest].
+> [Docker Scout SBOMs](../../scout/sbom.md#attest).
 { .tip }
 
 ## SBOM attestation example

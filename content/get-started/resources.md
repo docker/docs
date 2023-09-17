@@ -40,9 +40,9 @@ If books are your preferred learning style, check out these written by the [Dock
 * [Docker in Action 2nd Edition](https://www.manning.com/books/docker-in-action-second-edition) Jeff Nickoloff, Oct 2019
 * [The Kubernetes Book](https://www.amazon.com/Kubernetes-Book-Nigel-Poulton/dp/1521823634/ref=sr_1_3?ie=UTF8&qid=1509660871&sr=8-3&keywords=nigel+poulton), Nigel Poulton, Nov 2018
 * [Docker Deep Dive](https://www.amazon.com/Docker-Deep-Dive-Nigel-Poulton/dp/1521822808/ref=sr_1_1?ie=UTF8&qid=1509660871&sr=8-1&keywords=nigel+poulton), Nigel Poulton, March 2018
-* [Portuguese] [Docker para desenvolvedores](https://leanpub.com/dockerparadesenvolvedores) (2017) by Rafael Gomes
-* [Spanish] [Érase una vez Docker](https://leanpub.com/erase-una-vez-docker), Manuel Morejón, March 2023
-* [Spanish] [Érase una vez Kubernetes](https://leanpub.com/erase-una-vez-kubernetes), Manuel Morejón, Jan 2022
+* \[Portuguese\] [Docker para desenvolvedores](https://leanpub.com/dockerparadesenvolvedores) (2017) by Rafael Gomes
+* \[Spanish\] [Érase una vez Docker](https://leanpub.com/erase-una-vez-docker), Manuel Morejón, March 2023
+* \[Spanish\] [Érase una vez Kubernetes](https://leanpub.com/erase-una-vez-kubernetes), Manuel Morejón, Jan 2022
 
 ## CLI cheat sheet
 
@@ -58,7 +58,7 @@ A number of Docker Captains have also created video courses on Docker and Kubern
 * [Nigel Poulton](https://nigelpoulton.com/video-courses): Kubernetes 101, Getting Started with Kubernetes, Docker and Kubernetes: The Big Picture, Kubernetes Deep Dive, Docker Deep Dive
 * [Arun Gupta](https://www.lynda.com/Docker-tutorials/Docker-Java-developers/576584-2.html): Docker for Java Developers
 * [Ajeet Singh Raina](https://collabnix.com/): Docker and Kubernetes Labs
-* [French] [Luc Juggery](https://www.udemy.com/user/lucjuggery/): Introduction to Kubernetes, The Docker Platform
+* \[French\] [Luc Juggery](https://www.udemy.com/user/lucjuggery/): Introduction to Kubernetes, The Docker Platform
 
 \* Many of the courses are fee-based
 

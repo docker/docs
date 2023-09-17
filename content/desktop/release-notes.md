@@ -34,21 +34,21 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
 - [Docker Engine v24.0.6](https://docs.docker.com/engine/release-notes/24.0/#2406)
 - [Docker Scout CLI v0.24.1](https://github.com/docker/scout-cli/releases/tag/v0.24.1).
-- Wasm runtimes:
+- [Wasm](../desktop/wasm/_index.md) runtimes:
   - wasmtime, wasmedge revision `d0a1a1cd`.
   - slight and spin wasm `v0.9.0`.
 
 ### New
 
 - Added support for new Wasm runtimes: wws and lunatic.
-- `docker init` now supports ASP.NET
+- [`docker init`](../engine/reference/commandline/init.md) now supports ASP.NET
 - Increased performance of exposed ports on macOS, for example with `docker run -p`.
 
 ### Bug fixes and enhancements
 
 #### For all platforms
 
-- With Docker Scout, you can now:
+- With [Docker Scout](../scout/_index.md), you can now:
   - Manage temporary and cached files with `docker scout cache`.
   - Manage environments with `docker scout environment`.
   - Configure the default organization with `docker scout config`.
@@ -134,6 +134,16 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed a bug where turning on Wasm from the UI failed when the system was paused.
 - Bind mounts are now shown when you [inspect a container](use-desktop/container.md).
 - You can now download Wasm runtimes when the containerd image store is enabled.
+- With [Quick Search](../desktop/use-desktop/_index.md/#quick-search), you can now:
+  - Find any container or Compose app residing on your local system. In
+    addition, you can access environment variables and perform essential actions
+    such as starting, stopping, or deleting containers.
+  - Find public Docker Hub images, local images, or images from remote
+    repositories.
+  - Discover more about specific extensions and install them.
+  - Navigate through your volumes and gain insights about the associated
+    containers.
+  - Search and access Docker's documentation.
 
 #### For Mac
 
@@ -792,7 +802,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### Updates
 
 - [Docker Scan v0.21.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.21.0)
-- [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879), [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880) and [CVE-2022-41715](https://www.cve.org/CVERecord?id= CVE-2022-41715)
+- [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879), [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880) and [CVE-2022-41715](https://www.cve.org/CVERecord?id=CVE-2022-41715)
 - Updated Docker Engine and Docker CLI to [v20.10.20](../engine/release-notes/20.10.md#201020),
   which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253),
   and updated handling of `image:tag@digest` image references, as well as a fix for [CVE-2022-36109](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-36109).
@@ -917,7 +927,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed a bug where the Tray menu incorrectly displays "Download will start soon..." after downloading the update. Fixes some issue reported in [for-mac/issues#5677](https://github.com/docker/for-mac/issues/5677)
 - Fixed a bug that didn't restart Docker Desktop after applying an update.
 - Fixed a bug that caused the connection to Docker to be lost when the computer sleeps if a user is using virtualization.framework and restrictive firewall software.
-- Fixed a bug that caused Docker Desktop to run in the background even after a user had quit the application. Fixes [https://github.com/docker/for-mac/issues/6440]
+- Fixed a bug that caused Docker Desktop to run in the background even after a user had quit the application. Fixes [docker/for-mac##6440](https://github.com/docker/for-mac/issues/6440)
 - Disabled both Virtualization Framework and VirtioFS for users running macOS < 12.5
 
 #### For Windows
