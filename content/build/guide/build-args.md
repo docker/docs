@@ -123,8 +123,8 @@ a variable in the code.
   ENTRYPOINT [ "/bin/server" ]
 ```
 
-Now the version of the server when building the binary, without having to update
-the source code. To verify this, you can the `server` target and start a
+Now the version of the server is injected when building the binary, without having to update
+the source code. To verify this, you can build the `server` target and start a
 container with `docker run`. The server outputs `v0.0.1` as the version on
 startup.
 

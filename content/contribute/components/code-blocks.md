@@ -4,8 +4,6 @@ title: Code blocks
 toc_max: 3
 ---
 
-# Code blocks
-
 Rouge provides lots of different code block "hints". If you leave off the hint,
 it tries to guess and sometimes gets it wrong. These are just a few hints that
 we use often.
