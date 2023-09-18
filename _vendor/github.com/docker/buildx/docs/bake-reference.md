@@ -733,7 +733,7 @@ target "default" {
 
 ### `target.target`
 
-Set the target build stage to build.
+Set the target build stage to build. If no target is specified, the target will be the last stage defined in the Dockerfile.
 This is the same as the [`--target` flag][target].
 
 ```hcl

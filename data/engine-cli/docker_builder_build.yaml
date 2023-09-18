@@ -285,7 +285,7 @@ options:
       swarm: false
     - option: target
       value_type: string
-      description: Set the target build stage to build.
+      description: Set the target build stage to build. If no target is specified, the target will be the last stage defined in the Dockerfile.
       deprecated: false
       hidden: false
       experimental: false
