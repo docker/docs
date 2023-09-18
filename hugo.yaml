@@ -124,9 +124,6 @@ menus:
   - name: FAQ
     url: /faq/
     weight: 5
-  - name: Contribute
-    url: /contribute/overview/
-    weight: 6
 
   footer:
     - url: https://www.docker.com/products
