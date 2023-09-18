@@ -39,6 +39,9 @@ The following table describes the configuration resources.
 > Creating these resources incurs a small, recurring cost on the AWS account.
 > The **Cost** column in the table represents an estimated monthly cost of the
 > resources, when integrating an ECR registry that gets 100 images pushed per day.
+>
+> Additionally, an egress cost also applies when Docker Scout pulls the images
+> from ECR. The egress cost is around $0.09 per GB.
 
 | Resource type                 | Resource name         | Description                                                                                | Cost  |
 | ----------------------------- | --------------------- | ------------------------------------------------------------------------------------------ | ----- |
