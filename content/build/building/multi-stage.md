@@ -108,6 +108,11 @@ A few scenarios where this might be useful are:
 - Using a `testing` stage in which your app gets populated with test data, but
   building for production using a different stage which uses real data
 
+> **Note**
+>
+> When no target is specified, the target will be the last stage defined in the
+> Dockerfile.
+
 ## Use an external image as a stage
 
 When using multi-stage builds, you aren't limited to copying from stages you
