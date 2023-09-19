@@ -2073,6 +2073,8 @@ Manuals:
   section:
   - path: /docker-hub/admin-overview/
     title: Overview
+  - path: /docker-hub/orgs/
+    title: Create your organization
   - path: /docker-hub/onboard/
     title: Onboard your organization
   - sectiontitle: Set up your company
@@ -2083,8 +2085,6 @@ Manuals:
       title: Create a company
     - path:  /docker-hub/company-owner/
       title: Manage company owners
-  - path: /docker-hub/orgs/
-    title: Create your organization
   - path: /docker-hub/convert-account/
     title: Convert an account into an organization
   - path: /docker-hub/manage-a-team/
