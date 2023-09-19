@@ -1921,14 +1921,6 @@ Manuals:
         title: Access
       - path: /docker-hub/repos/
         title: Manage
-  - path: /docker-hub/official_images/
-    title: Docker Official images
-  - path: /docker-hub/dvp-program/
-    title: Docker Verified Publisher Program
-  - path: /docker-hub/dsos-program/
-    title: Docker-Sponsored Open Source Program
-  - path: /docker-hub/insights-analytics/
-    title: Insights and analytics
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - path: /docker-hub/webhooks/
@@ -2163,6 +2155,19 @@ Manuals:
     title: Docker Desktop license agreement
   - path: /subscription/scout-details/
     title: Docker Scout subscriptions and features
+
+- sectiontitle: Trusted content
+  section:
+  - path: /trusted-content/
+    title: Overview
+  - path: /trusted-content/official-images/
+    title: Docker Official images
+  - path: /trusted-content/dvp-program/
+    title: Docker Verified Publisher Program
+  - path: /trusted-content/dsos-program/
+    title: Docker-Sponsored Open Source Program
+  - path: /trusted-content/insights-analytics/
+    title: Insights and analytics
 
 - title: Security announcements
   path: /security/

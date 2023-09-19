@@ -4,6 +4,7 @@ description: Discover how to access usage statistics of your images on Docker Hu
 keywords: docker hub, hub, insights, analytics, api, verified publisher
 aliases:
 - /docker-hub/publish/insights-analytics/
+- /docker-hub/insights-analytics/
 ---
 
 Insights and analytics provides usage analytics for Docker Verified

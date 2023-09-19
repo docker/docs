@@ -63,8 +63,8 @@ In the previous example, you can see two example results, `centos` and `ansible/
 The second result shows that it comes from the public repository of a user,
 named `ansible/`, while the first result, `centos`, doesn't explicitly list a
 repository which means that it comes from the top-level namespace for
-[Docker Official Images](../../official_images.md). The `/` character separates
-a user's repository from the image name.
+[Docker Official Images](../../../trusted-content/official-images.md).
+The `/` character separates a user's repository from the image name.
 
 Once you've found the image you want, you can download it with `docker pull <imagename>`:
 

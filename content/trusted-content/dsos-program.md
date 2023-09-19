@@ -2,6 +2,8 @@
 description: Learn about the Docker-Sponsored Open Source Program and how it works
 title: Docker-Sponsored Open Source Program
 keywords: docker hub, hub, insights, analytics, open source, Docker sponsored, program
+aliases:
+  - /docker-hub/dsos-program/
 ---
 
 [Docker Sponsored Open Source images](https://hub.docker.com/search?q=&image_filter=open_source) are published and maintained by open-source projects sponsored by Docker through the program.
