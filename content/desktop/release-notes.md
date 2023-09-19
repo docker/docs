@@ -318,7 +318,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 - Improved `docker scout compare` command to compare two images, now also aliased under `docker scout diff`.
 - Added more details to dashboard errors when a `docker-compose` action fails ([docker/for-win#13378](https://github.com/docker/for-win/issues/13378)).
-- Added support for setting HTTP proxy configuration during installation. This can be done via the `--proxy-http-mode`, `--overrider-proxy-http`, `--override-proxy-https` and `--override-proxy-exclude` installer flags in the case of installation from the CLI on [Mac](/install/mac-install.md#install-from-the-command-line) and [Windows](/install/windows-install.md#install-from-the-command-line), or alternatively by setting the values in the `install-settings.json` file.
+- Added support for setting HTTP proxy configuration during installation. This can be done via the `--proxy-http-mode`, `--overrider-proxy-http`, `--override-proxy-https` and `--override-proxy-exclude` installer flags in the case of installation from the CLI on [Mac](install/mac-install.md#install-from-the-command-line) and [Windows](install/windows-install.md#install-from-the-command-line), or alternatively by setting the values in the `install-settings.json` file.
 - Docker Desktop now stops overriding .docker/config.json `credsStore` keys on application start. Note that if you use a custom credential helper then the CLI `docker login` and `docker logout` does not affect whether the UI is signed in to Docker or not. In general, it is better to sign into Docker via the UI since the UI supports multi-factor authentication.
 - Added a warning about the [forthcoming removal of Compose V1 from Docker Desktop](../compose/migrate.md). Can be suppressed with `COMPOSE_V1_EOL_SILENT=1`.
 - In the Compose config, boolean fields in YAML should be either `true` or `false`. Deprecated YAML 1.1 values such as “on” or “no” now produce a warning.
@@ -452,7 +452,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 - Docker Desktop now ships with Docker Scout. Pull and view analysis for images from Docker Hub and Artifactory repositories, get base image updates and recommended tags and digests, and filter your images on vulnerability information. To learn more, see [Docker Scout](../scout/index.md).
 - `docker scan` has been replaced by `docker scout`. See [Docker Scout CLI](../scout/index.md#docker-scout-cli), for more information.
-- You can now discover extensions that have been autonomously published in the Extensions Marketplace. For more information on self-published extensions, see [Marketplace Extensions](/extensions/marketplace.md).
+- You can now discover extensions that have been autonomously published in the Extensions Marketplace. For more information on self-published extensions, see [Marketplace Extensions](extensions/marketplace.md).
 - **Container File Explorer** is available as an experimental feature. Debug the filesystem within your containers straight from the GUI.
 - You can now search for volumes in **Global Search**.
 
@@ -1191,7 +1191,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### New
 
 - Released [Docker Desktop for Linux](install/linux-install.md).
-- Beta release of [Docker Extensions](/extensions/index.md) and Extensions SDK.
+- Beta release of [Docker Extensions](extensions/index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
@@ -1214,7 +1214,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### New
 
 - Released [Docker Desktop for Linux](install/linux-install.md).
-- Beta release of [Docker Extensions](/extensions/index.md) and Extensions SDK.
+- Beta release of [Docker Extensions](extensions/index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
