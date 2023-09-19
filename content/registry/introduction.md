@@ -9,7 +9,7 @@ title: About Registry
 A registry is a storage and content delivery system, holding named Docker
 images, available in different tagged versions.
 
-For example, with the image `distribution/registry`, with tag `2.1`, users interact with  with a registry by using Docker push and pull commands:
+For example, with the image `distribution/registry`, with tag `2.1`, users interact with a registry by using Docker push and pull commands:
 
   ```console
   $ docker pull registry-1.docker.io/distribution/registry:2.1
