@@ -83,7 +83,7 @@ $ docker compose --profile frontend --profile debug up
 ```
 
 ```console
-$ COMPOSE_PROFILES=frontend,debug docker compose up
+$ COMPOSE_PROFILES=frontend,debug
 ```
 
 ## Auto-starting profiles and dependency resolution
