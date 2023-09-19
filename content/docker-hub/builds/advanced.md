@@ -68,6 +68,9 @@ repository at the same directory level as your Dockerfile. Create a file called
 builder process can execute, such as `docker` and `bash` commands (prefixed
 appropriately with `#!/bin/bash`).
 
+Please note that the current working directory for your hooks is the directory of 
+your dockerfile location ( `DOCKERFILE_PATH` ) and NOT your build context. 
+
 These hooks run on an instance of [Ubuntu](https://releases.ubuntu.com/),
 which includes interpreters
 such as Perl or Python, and utilities such as `git` or `curl`. Refer to the
