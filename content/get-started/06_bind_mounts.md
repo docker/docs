@@ -59,12 +59,21 @@ work.
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows" >}}
+   {{< tab name="Windows-Powershell" >}}
 
    Run this command in PowerShell.
 
    ```powershell
    $ docker run -it --mount "type=bind,src=$pwd,target=/src" ubuntu bash
+   ```
+   
+   {{< /tab >}}
+3. {{< tab name="Windows-CMD" >}}
+
+   Run this command in Command prompt.
+
+   ```Command Prompt
+   > docker run -it --mount "type=bind,src=%cd%,target=/src" ubuntu bash
    ```
    
    {{< /tab >}}
@@ -74,7 +83,7 @@ work.
    current working directory on your host machine (`getting-started-app`), and
    `target` is where that directory should appear inside the container (`/src`).
 
-3. After running the command, Docker starts an interactive `bash` session in the
+4. After running the command, Docker starts an interactive `bash` session in the
    root directory of the container's filesystem.
 
    ```console
@@ -85,7 +94,7 @@ work.
    boot  etc  lib   mnt    proc  run   src   sys  usr
    ```
 
-4. Change directory to the `src` directory.
+5. Change directory to the `src` directory.
 
    This is the directory that you mounted when starting the container. Listing
    the contents of this directory displays the same files as in the
@@ -97,7 +106,7 @@ work.
    Dockerfile  node_modules  package.json  spec  src  yarn.lock
    ```
 
-5. Create a new file named `myfile.txt`.
+6. Create a new file named `myfile.txt`.
 
    ```console
    root@ac1237fad8db:/src# touch myfile.txt
@@ -105,7 +114,7 @@ work.
    Dockerfile  myfile.txt  node_modules  package.json  spec  src  yarn.lock
    ```
 
-6. Open the `getting-started-app` directory on the host and observe that the
+7. Open the `getting-started-app` directory on the host and observe that the
    `myfile.txt` file is in the directory.
 
    ```
@@ -119,15 +128,15 @@ work.
    │ └── yarn.lock
    ```
 
-7. From the host, delete the `myfile.txt` file.
-8. In the container, list the contents of the `app` directory once more. Observe that the file is now gone.
+8. From the host, delete the `myfile.txt` file.
+9. In the container, list the contents of the `app` directory once more. Observe that the file is now gone.
 
    ```console
    root@ac1237fad8db:/src# ls
    Dockerfile  node_modules  package.json  spec  src  yarn.lock
    ```
 
-9. Stop the interactive container session with `Ctrl` + `D`.
+10. Stop the interactive container session with `Ctrl` + `D`.
 
 That's all for a brief introduction to bind mounts. This procedure
 demonstrated how files are shared between the host and the container, and how
