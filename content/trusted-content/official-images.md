@@ -5,6 +5,7 @@ keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, doc
 title: Docker Official Images
 aliases:
 - /docker-hub/official_repos/
+- /docker-hub/official_images/
 ---
 
 The [Docker Official Images](https://hub.docker.com/search?q=&type=image&image_filter=official) are a
@@ -20,7 +21,7 @@ The images exemplify [`Dockerfile` best practices](/engine/userguide/eng-image/d
 
 Images that are part of this program have a special badge on Docker Hub making it easier for you to identify projects that are official Docker images.
 
-![Docker official image badge](./images/official-image-badge-iso.png)
+![Docker official image badge](images/official-image-badge-iso.png)
 
 ## When to use Docker Official Images
 

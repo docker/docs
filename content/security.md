@@ -29,7 +29,7 @@ the Text4Shell CVE in the vulnerability report. For detailed instructions, see [
 > images to the patched version as soon as possible to remediate the issue.
 { .important }
 
-A number of [Docker Official Images](../docker-hub/official_images.md) contain the vulnerable versions of
+A number of [Docker Official Images](../trusted-content/official-images.md) contain the vulnerable versions of
 Apache Commons Text. The following table lists Docker Official Images that
 may contain the vulnerable versions of Apache Commons Text. We are working on updating
 Apache Commons Text in these images to the latest version. Some of these images may not be
@@ -99,7 +99,7 @@ Log4j 2 CVE in the vulnerability report. For detailed instructions, see [Scan im
 > images to the patched version as soon as possible to remediate the issue.
 { .important }
 
-A number of [Docker Official Images](../docker-hub/official_images.md) contain the vulnerable versions of
+A number of [Docker Official Images](../trusted-content/official-images.md) contain the vulnerable versions of
 Log4j 2 CVE-2021-44228. The following table lists Docker Official Images that
 may contain the vulnerable versions of Log4j 2. We are working on updating
 Log4j 2 in these images to the latest version. Some of these images may not be
