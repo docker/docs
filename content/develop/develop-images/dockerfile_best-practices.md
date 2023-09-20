@@ -889,6 +889,6 @@ These Official Images have exemplary Dockerfiles:
 
 * [Dockerfile reference](../../engine/reference/builder.md)
 * [More about Automated builds](../../docker-hub/builds/index.md)
-* [Guidelines for creating Docker Official Images](../../docker-hub/official_images.md)
+* [Guidelines for creating Docker Official Images](../../trusted-content/official-images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker)
 * [More about base images](../../build/building/base-images.md)

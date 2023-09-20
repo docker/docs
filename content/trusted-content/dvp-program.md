@@ -19,6 +19,7 @@ aliases:
 - /docker-hub/publish/publisher-center-migration/
 - /docker-hub/publish/
 - /docker-hub/publish/repository-logos/
+- /docker-hub/dvp-program/
 ---
 
 [The Docker Verified Publisher Program](https://hub.docker.com/search?q=&image_filter=store) provides high-quality images from commercial publishers verified by Docker.

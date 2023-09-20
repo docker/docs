@@ -257,8 +257,7 @@ Each organization page now breaks down into these tabs:
   * The architecture it was built on
   * The OS
   * The user who most recently updated an image for a specific tag
-* The security scan summary for [official images](official_images.md)
-has been updated.
+* The security scan summary for Docker Official Images has been updated.
 
 ### Known Issues
 
