@@ -196,7 +196,7 @@ Dockerfile.
 
 Also, add a new volume to the server service for the bind mount. For this application, you'll mount `./src` from your local machine to `/usr/src/app/src` in the container.
 
-Lastly, expose port `9229` for debugging.
+Lastly, publish port `9229` for debugging.
 
 The following is the updated Compose file.
 
