@@ -14,7 +14,7 @@ The Docker Scout Dashboard helps you share the analysis of images in an organiza
 
 ## Overview
 
-![A screenshot of the Docker Scout vulnerabilities overview](./images/dashboard-overview.png)
+![A screenshot of the Docker Scout Dashboard overview](./images/dashboard-overview.webp?border=true)
 
 The **Overview** tab shows the total number of vulnerabilities across all your Docker Scout-enabled repositories, over time. This calculation takes the most recent image in each repository to avoid including old irrelevant images.
 
@@ -55,7 +55,7 @@ Each entry in the list shows the following details:
 
 ### Repository tag list
 
-![Screenshot of tags for a repository](./images/dashboard-repo-tags.png)
+![Screenshot of tags for a repository](./images/dashboard-repo-tags.webp?border=true)
 
 The repository tag list shows all tags for a repository. You can search for specific tag versions using the search box.
 
@@ -85,11 +85,11 @@ The tabs section of the view shows the following:
 - Select the **Packages** tab to see packages added, removed, or changed in each image. Each entry in the table shows the differences between the versions and vulnerabilities in each image. Select the disclosure triangle next to a package to see more detail on the vulnerabilities changed.
 - Select the **Vulnerabilities** tab to see changes to the vulnerabilities present in each image.
 
-### Image layer view
+### Layer view
 
-![Screenshot showing Docker Scout image hierarchy](./images/dashboard-hierachy.png)
+![Screenshot showing Docker Scout image layers](./images/dashboard-image-layers.webp?border=true)
 
-The image layer view shows a breakdown of the Docker Scout analysis, including
+The layer view shows a breakdown of the Docker Scout analysis, including
 an overview of the digest Secure Hash Algorithms (SHA), version, the image hierarchy (base images), image
 layers, packages, and vulnerabilities.
 
@@ -98,6 +98,23 @@ layers, packages, and vulnerabilities.
 > You can find more details on the elements in the image layer view in [the image details view docs](./image-details-view.md).
 
 Select the **View recommended fixes** button to see instructions to apply the recommended fixes for the image.
+
+### Policy
+
+> **Beta**
+>
+> Policy Evaluation is a [Beta](/release-lifecycle/#beta) feature of Docker
+> Scout. This feature is available to organizations participating in the
+> limited preview program for policies.
+>
+> If you're interested in trying out this feature, reach out using the form on
+> the [Docker Scout product page](https://docker.com/products/docker-scout)
+{ .restricted }
+
+![Screenshot of the policy tab in Docker Scout Dashboard](./images/dashboard-image-policy.webp?border=true)
+
+The policy tab shows you the policy evaluation results for the image.
+For more information about policy, see [Policy Evaluation](./policy.md).
 
 ## Packages
 
@@ -112,6 +129,8 @@ Each entry in the list shows the following details:
 
 ## Base images
 
+![A screenshot of the Docker Scout view showing base images used](./images/dashboard-base-images.webp?border=true)
+
 The **Base images** tab shows all base images used by repositories in an organization.
 
 Each entry in the list shows the following details:
@@ -122,8 +141,6 @@ Each entry in the list shows the following details:
 - The number of packages in the base image.
 
 ### Images using base image
-
-![A screenshot of the Docker Scout view showing images that use a selected base image](./images/dashboard-images-used-by.png)
 
 The **Images** tab shows all images in an organization that use a specific base image.
 
