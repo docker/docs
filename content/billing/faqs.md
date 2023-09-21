@@ -4,6 +4,11 @@ description: Common FAQs related to billing
 keywords: billing, renewal, payments
 ---
 
+> **Early access features**
+>
+> Some users who bought a Docker Pro subscription after September 25, 2023 may have a different user interface experience. If your subscription has early access features, go to **Billing**, then **Payment methods and billing history** to find past invoices and update payment and billing information.
+{ .restricted }
+
 ### Where can I view my billing date?
 
 Navigate to the **Plan** tab in your billing settings. The billing date is located near the bottom-right.
