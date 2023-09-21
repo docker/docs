@@ -88,7 +88,7 @@ Before you run the application using Compose, notice that this Compose file uses
 `secrets` and specifies a `password.txt` file to hold the database's password.
 You must create this file as it's not included in the source repository.
 
-In the cloned repository's directory, create a new directory named `db`. Inside the `db` directory, create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add a password of your choice.
+In the cloned repository's directory, create a new directory named `db`. Inside the `db` directory, create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add a password of your choice. The password must be on a single line with no additional lines in the file.
 
 You should now have the following contents in your `docker-nodejs-sample`
 directory.
@@ -196,6 +196,8 @@ Dockerfile.
 
 Also, add a new volume to the server service for the bind mount. For this application, you'll mount `./src` from your local machine to `/usr/src/app/src` in the container.
 
+Lastly, publish port `9229` for debugging.
+
 The following is the updated Compose file.
 
 ```yaml
@@ -212,6 +214,7 @@ services:
       POSTGRES_DB: example
     ports:
       - 3000:3000
+      - 9229:9229
     depends_on:
       db:
         condition: service_healthy
