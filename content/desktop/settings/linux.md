@@ -40,7 +40,7 @@ If you choose the integrated terminal, you can run commands in a running contain
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
-- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively. 
+- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
 
 ## Resources
 
@@ -67,11 +67,27 @@ Advanced settings are:
 
 - **Disk image location**. Specify the location of the Linux volume where containers and images are stored.
 
-You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it.
+  You can also move the disk image to a different location. If you attempt to
+  move a disk image to a location that already has one, you are asked if you
+  want to use the existing image or replace it.
 
->**Tip**
+- **Resource Saver**. Enable or disable Resource Saver mode, which significantly
+  reduces CPU and memory utilization on the host by automatically turning off
+  the Linux VM when Docker Desktop is idle (i.e., no containers are running).
+  Exit from Resource Saver mode occurs automatically when containers run.
+
+  You can also configure the Resource Saver timeout which indicates how long
+  should Docker Desktop be idle before Resource Saver mode kicks in. Default is
+  5 minutes.
+
+>**Tips**
 >
-> If you feel Docker Desktop starting to get slow or you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
+> * Exit from Resource Saver mode occurs automatically when containers run. Exit
+>   may take a few seconds as Docker Desktop restarts the Linux VM.
+>
+> * If you feel Docker Desktop starting to get slow or you're running
+>   multi-container workloads, increase the memory and disk image space allocation
+{ .tip }
 
 ### File sharing
 
@@ -152,7 +168,7 @@ edit the file using your favorite text editor.
 > Refer to [Configure the daemon](../../config/daemon/index.md) for more information
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 
-To see the full list of possible configuration options, see the 
+To see the full list of possible configuration options, see the
 [dockerd command reference](/engine/reference/commandline/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -193,7 +209,7 @@ when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 
-## Extensions 
+## Extensions
 
 Use the **Extensions** tab to:
 
