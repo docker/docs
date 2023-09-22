@@ -49,7 +49,7 @@ network, and other resources.
 
 ### Advanced
 
-On the **Advanced** tab, you can limit resources available to Docker.
+On the **Advanced** tab, you can limit resources available to the Docker Linux VM.
 
 Advanced settings are:
 
