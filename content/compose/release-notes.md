@@ -16,8 +16,8 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 > **Note**
 >
-> `watch` command is now GA and can be directly used from the root command `docker compose watch`
-> [Check official documentation of the watch feature](./file-watch.md) for more details
+> The `watch` command is now generally available (GA). You can directly use it from the root command `docker compose watch`.
+> For more information, see [File watch](./file-watch.md).
 
 ### Update
 - Dependencies upgrade: bump golang to 1.21.1
