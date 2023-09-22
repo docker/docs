@@ -75,6 +75,7 @@ Snyk
 Solr
 SonarQube
 Syft
+Sysdig
 TCP
 TLS
 Telepresence
