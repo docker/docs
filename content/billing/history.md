@@ -6,7 +6,7 @@ keywords: payments, billing, subscription, invoices
 
 > **Early access features**
 >
-> Some users who bought a Docker Pro subscription after September 25, 2023 may have a different user interface experience. If your subscription has early access features, go to **Billing**, then **Payment methods and billing history** to view your billing history and past invoices.
+> Some users who subscribed to Docker Pro after September 25, 2023 may have a different user interface experience. If your subscription has early access features, go to the **Billing** page for your account, then select the **Payment methods and billing history** link to view your billing history and past invoices.
 { .restricted }
 
 You can view the billing history and download past invoices for a personal account or organization at any time.

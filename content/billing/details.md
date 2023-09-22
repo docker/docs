@@ -6,7 +6,7 @@ keywords: payments, billing, subscription
 
 > **Early access features**
 >
-> Some users who bought a Docker Pro subscription after September 25, 2023 may have a different user interface experience. If your subscription has early access features, go to **Billing**, then **Payment methods and billing history** to update your billing information.
+> Some users who subscribed to Docker Pro after September 25, 2023 may have a different user interface experience. If your subscription has early access features, go to the **Billing** page for your account, then select the **Payment methods and billing history** link to update your billing information.
 { .restricted }
 
 You can update the billing information for your personal account or for an organization. 
