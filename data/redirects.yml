@@ -593,6 +593,8 @@
   - /go/scout-artifactory/
 "/scout/integrations/registry/ecr/":
   - "/go/scout-ecr/"
+"/scout/integrations/registry/sysdig/":
+  - "/go/scout-sysdig/"
 
 # Build links
 "/desktop/use-desktop/builds/":
