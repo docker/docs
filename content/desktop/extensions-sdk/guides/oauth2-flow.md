@@ -8,7 +8,7 @@ aliases:
 
 > Note
 >
-> This page assumes that you already have an Identity Provider (IdP), such as Google, Azure AD or Okta, which handles the authentication process and returns an access token.
+> This page assumes that you already have an Identity Provider (IdP), such as Google, Entra ID (formerly Azure AD) or Okta, which handles the authentication process and returns an access token.
 
 Learn how you can let users authenticate from your Docker Extension using OAuth 2.0 via a web browser, and return them back to your Docker extension.
 

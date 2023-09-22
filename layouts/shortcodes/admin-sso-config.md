@@ -40,9 +40,9 @@
 >
 > If your IdP setup requires an Entity ID and the ACS URL, you must select the
 > **SAML** tab in the **Authentication Method** section. For example, if your
-> Azure AD Open ID Connect (OIDC) setup uses SAML configuration within Azure
-> AD, you must select **SAML**. If you are [configuring Open ID Connect with Azure AD](https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-openid-settings) select
-> **Azure AD** as the authentication method. Also, IdP initiated connections
+> Entra ID (formerly Azure AD) Open ID Connect (OIDC) setup uses SAML configuration within Azure
+> AD, you must select **SAML**. If you are [configuring Open ID Connect with Entra ID (formerly Azure AD)](https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-openid-settings) select
+> **Entra ID (formerly Azure AD)** as the authentication method. Also, IdP initiated connections
 > aren't supported at this time.
 { .important}
 
@@ -89,7 +89,7 @@ After you’ve completed the SSO configuration process in Docker, you can test t
 > You can change this on a per-app basis. To prevent auto-provisioning users, you can create a security group in your IdP and configure the SSO app to authenticate and authorize only those users that are in the security group. Follow the instructions provided by your IdP:
 >
 > - [Okta](https://help.okta.com/en-us/Content/Topics/Security/policies/configure-app-signon-policies.htm)
-> - [AzureAD](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
+> - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
 { .important}
 
 The SSO connection is now created. You can continue to set up SCIM without enforcing SSO log-in. For more information about setting up SCIM, see {{ $scim_link }}.
