@@ -11,6 +11,29 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.22.0
+{{< release-date date="2023-09-21" >}}
+
+> **Note**
+>
+> The `watch` command is now generally available (GA). You can directly use it from the root command `docker compose watch`.
+> For more information, see [File watch](./file-watch.md).
+
+### Update
+- Dependencies upgrade: bump golang to 1.21.1
+- Dependencies upgrade: bump compose-go to v1.19.0
+- Dependencies upgrade: bump buildkit to v0.12.2
+
+### Bug fixes and enhancements
+- Added experimental support for the `publish` command.
+- The command `watch` now builds and launches the project during startup.
+- Added `policy` option to the `--pull` flag.
+- Fixed various race and deadlock conditions for `up` command on exit.
+- Fixed multi-platform issues on build.
+- Enabled services that are explicitly requested even when their `profiles` aren't activated.
+- Fixed  a `config` issue when the declared `env_file` is missing.
+- Passed BuildOptions to `up` and `run` commands.
+
 ## 2.21.0
 {{< release-date date="2023-08-30" >}}
 
