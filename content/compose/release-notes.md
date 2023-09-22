@@ -25,14 +25,14 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump buildkit to v0.12.2
 
 ### Bug fixes and enhancements
-- Added experimental support of `publish` command
-- `watch` now build and launch the project at start
-- Add `policy` option to the `--pull` flag
-- Fixed various race/deadlock conditions for `up` command on exit
-- Fixed for multi-plaform issues on build
-- Enabled services explicitly requested even if their `profiles` aren't activated
-- Fixed `config` bug when declared `env_file` are missing
-- Passed BuildOptions to `up` and `run` commands 
+- Added experimental support for the `publish` command.
+- The command `watch` now builds and launches the project during startup.
+- Added `policy` option to the `--pull` flag.
+- Fixed various race and deadlock conditions for `up` command on exit.
+- Fixed multi-platform issues on build.
+- Enabled services that are explicitly requested even when their `profiles` aren't activated.
+- Fixed  a `config` issue when the declared `env_file` is missing.
+- Passed BuildOptions to `up` and `run` commands.
 
 ## 2.21.0
 {{< release-date date="2023-08-30" >}}
