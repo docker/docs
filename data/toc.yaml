@@ -1893,7 +1893,7 @@ Manuals:
   - path: /compose/networking/
     title: Networking in Compose
   - path: /compose/file-watch/
-    title: Use file watch (Experimental)
+    title: Use file watch
   - path: /compose/production/
     title: Using Compose in production
   - path: /compose/use-secrets/
