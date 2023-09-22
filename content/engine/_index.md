@@ -30,7 +30,7 @@ grid:
 - title: Rootless mode
   description: Run Docker without root privileges.
   icon: security
-  link: /security
+  link: engine/security/rootless
 - title: Deprecated features
   description: Find out what features of Docker Engine you should stop using.
   icon: folder_delete
