@@ -6,7 +6,7 @@ title: Automatically update services with file watch in Docker Compose
 
 > **Note**
 >
-> `watch` is available in Docker Compose version 2.22 and later, and Docker Desktop version 4.24 and later.
+> The Compose file watch feature is available in Docker Compose version 2.22 and later.
 
 Use `watch` to automatically update your running Compose services as you edit and save your code.
 
