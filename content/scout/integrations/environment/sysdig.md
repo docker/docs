@@ -18,6 +18,13 @@ integrates with the Sysdig API to discover the images in your cluster. This
 integration uses Sysdig's Risk Spotlight feature. For more information, see
 [Risk Spotlight Integrations (Sysdig docs)](https://docs.sysdig.com/en/docs/sysdig-secure/integrations-for-sysdig-secure/risk-spotlight-integrations/).
 
+> **Tip**
+>
+> Sysdig offers a free trial for Docker users to try out the new Docker Scout integration.
+>
+> {{< button url=`https://sysdig.com/free-trial-for-docker-customers/` text="Sign up" >}}
+{ .tip }
+
 Each Sysdig integration maps to an environment. When you enable a Sysdig
 integration, you specify the environment name for that cluster, such as
 `production` or `staging`. Docker Scout assigns the images in the cluster to
