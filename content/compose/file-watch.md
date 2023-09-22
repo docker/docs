@@ -4,10 +4,9 @@ keywords: compose, file watch, experimental
 title: Automatically update services with file watch in Docker Compose
 ---
 
-> **Experimental**
+> **Note**
 >
-> The Compose file watch feature is currently [Experimental](../release-lifecycle.md).
-{ .experimental }
+> The Compose file watch feature is available in Docker Compose version 2.22 and later.
 
 Use `watch` to automatically update your running Compose services as you edit and save your code.
 
@@ -99,7 +98,7 @@ services:
   web:
     build: .
     command: npm start
-    x-develop:
+    develop:
       watch:
         - action: sync
           path: ./web
@@ -110,10 +109,10 @@ services:
           path: package.json
 ```
 
-In this example, when running `docker compose up --build --wait`, a container for the `web` service is launched using an image built from the `Dockerfile` in the project root.
+In this example, when running `docker compose watch`, a container for the `web` service is launched using an image built from the `Dockerfile` in the project root.
 The `web` service runs `npm start` for its command, which then launches a development version of the application with Hot Module Reload enabled in the bundler (Webpack, Vite, Turbopack, etc).
 
-After the service is up, running `docker compose alpha watch` starts watch mode.
+After the service is up, the watch mode starts monitoring the target directories and files.
 Then, whenever a source file in the `web/` directory is changed, Compose syncs the file to the corresponding location under `/src/web` inside the container.
 For example, `./web/App.jsx` is copied to `/src/web/App.jsx`.
 
@@ -127,9 +126,8 @@ This pattern can be followed for many languages and frameworks, such as Python w
 ## Use `watch`
 
 1. Add `watch` sections to one or more services in `compose.yaml`.
-2. Launch a Compose project with `docker compose up --build --wait`.
-3. Run `docker compose alpha watch` to start the file watch mode.
-4. Edit service source files using your preferred IDE or editor.
+2. Run `docker compose alpha watch` to launch a Compose project and start the file watch mode.
+3. Edit service source files using your preferred IDE or editor.
 
 >**Looking for a sample project to test things out?**
 >
