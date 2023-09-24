@@ -5,7 +5,7 @@ title: Docker Desktop Resource Saver
 ---
 
 Resource Saver is a new feature (4.24+) that significantly reduces Docker
-Desktop's CPU and memory utilization on the host (by 2 GBs or more!) by
+Desktop's CPU and memory utilization on the host by 2 GBs or more, by
 automatically stopping the Docker Desktop Linux VM when no containers are
 running for a period of time (defaults to 5 minutes).
 
@@ -20,8 +20,9 @@ timer as shown below.
 ![Resource Saver Settings](../images/resource-saver-settings.png)
 
 When Docker Desktop enters Resource Saver mode, a leaf icon is displayed on the
-Docker Desktop status bar as well as in the Docker icon on the system tray. As
-shown, the Linux VM CPU and memory utilization are reduced to zero.
+Docker Desktop status bar (see figure below) as well as in the Docker icon on
+the system tray. As shown, the Linux VM CPU and memory utilization are reduced
+to zero.
 
 ![Resource Saver Status Bar](../images/resource-saver-status-bar.png)
 
@@ -29,19 +30,21 @@ shown, the Linux VM CPU and memory utilization are reduced to zero.
 >
 > Exit from Resource Saver mode occurs automatically when containers run. Exit
 > may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
-> It's generally faster on Mac and Linux, and a bit slower on Windows.
+> It's generally faster on Mac and Linux, and a bit slower on Windows (with Hyper-V).
 
 A bit more info about Resource Saver:
 
 * The Resource Saver timer is configured to 5 minutes by default. That is,
   Docker Desktop will enter Resource Saver mode if no containers are running for
   5 minutes. Depending on your needs, you can adjust this to a lower or higher
-  value. Just keep in mind that exit from Resource Saver mode occurs
-  automatically when containers run, but starting the first such container will
-  incur the Resource Saver exit delay which can take between ~3 -> 10 seconds as
-  Docker Desktop restarts the Linux VM. The restart is generally faster on Mac
-  and Linux, and a bit slower on Windows with Hyper-V. Once the Linux VM is
-  restarted, subsequent container runs will occurs immediately as usual.
+  value.
+
+* Keep in mind that exit from Resource Saver mode occurs automatically when
+  containers run, but starting the first such container will incur the Resource
+  Saver exit delay which can take between ~3 -> 10 seconds as Docker Desktop
+  restarts the Linux VM. The restart is generally faster on Mac and Linux, and a
+  bit slower on Windows with Hyper-V. Once the Linux VM is restarted, subsequent
+  container runs will occurs immediately as usual.
 
 * Resource Saver works a bit differently on Windows with WSL. Instead of
   stopping the WSL VM, it only pauses the Docker Engine inside the
@@ -58,10 +61,7 @@ A bit more info about Resource Saver:
 * When Docker Desktop enters Resource Saver mode, Docker commands that don't run
   containers (e.g., listing container images or volumes) do not necessarily
   trigger an exit from Resource Saver mode as Docker Desktop can serve such
-  commands without unnecessarily waking up the Linux VM. On the other hand,
-  running a container (e.g., via a `docker run` command on the CLI or via the
-  Dashboard GUI) will necessarily cause Docker Desktop to exit Resource Saver
-  mode and resume normal operation.
+  commands without unnecessarily waking up the Linux VM.
 
 * Resource Saver has higher precedence than the older [Pause](pause.md) feature,
   meaning that while Docker Desktop is in Resource Saver mode, manually pausing
@@ -69,6 +69,16 @@ A bit more info about Resource Saver:
   actually stops the Docker Desktop Linux VM). In general, we recommend keeping
   Resource Saver enabled as opposed to disabling it and using the manual Pause
   feature, as it results in much better CPU and memory savings.
+
+* When configuring the Resource Saver timer, if the values available via the
+  Dashboard GUI (Settings -> Resources -> Advanced) are not sufficient for your
+  needs, you can reconfigure it to any value (must be larger than 30 seconds) by
+  changing `autoPauseTimeoutSeconds` in the Docker Desktop `settings.json` file
+  (there's no need to restart Docker Desktop after reconfiguring):
+
+  - **Mac**: `~/Library/Group Containers/group.com.docker/settings.json`
+  - **Windows**: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
+  - **Linux**: `~/.docker/desktop/settings.json`
 
 * Resource Saver was initially introduced in Docker Desktop v4.21 as an
   experimental feature, where it simply paused the Linux VM when no containers
