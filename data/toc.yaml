@@ -639,7 +639,7 @@ Reference:
       - path: /engine/reference/commandline/scout_repo/
         title: docker scout repo
       - path: /engine/reference/commandline/scout_repo_disable/
-        title: docker scout repo disable        
+        title: docker scout repo disable
       - path: /engine/reference/commandline/scout_repo_enable/
         title: docker scout repo enable
       - path: /engine/reference/commandline/scout_repo_list/
@@ -1148,6 +1148,8 @@ Manuals:
           title: Explore Volumes
         - path: /desktop/use-desktop/builds/
           title: Explore Builds (Beta)
+        - path: /desktop/use-desktop/resource-saver/
+          title: Resource Saver Mode
         - path: /desktop/use-desktop/pause/
           title: Pause Docker Desktop
     - sectiontitle: Hardened Docker Desktop
@@ -2226,13 +2228,13 @@ FAQ:
   - sectiontitle: Desktop
     section:
     - path: /desktop/faqs/general/
-      title: General 
+      title: General
     - path: /desktop/faqs/macfaqs/
-      title: Mac 
+      title: Mac
     - path: /desktop/faqs/windowsfaqs/
-      title: Windows 
+      title: Windows
     - path: /desktop/faqs/linuxfaqs/
-      title: Linux 
+      title: Linux
     - path: /desktop/faqs/releases/
       title: Releases
   - sectiontitle: Docker Hub and admin
@@ -2259,4 +2261,3 @@ FAQ:
         title: Manage users
   - path: /subscription/faq/
     title: Subscription
-    
