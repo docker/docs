@@ -99,9 +99,10 @@ Advanced settings are:
 > multi-container workloads, increase the memory and disk image space allocation
 { .tip }
 
-- **Resource Saver**. Enable or disable Resource Saver mode, which significantly
-  reduces CPU and memory utilization on the host by automatically turning off
-  the Linux VM when Docker Desktop is idle (i.e., no containers are running).
+- **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
+  which significantly reduces CPU and memory utilization on the host by
+  automatically turning off the Linux VM when Docker Desktop is idle (i.e., no
+  containers are running).
 
   You can also configure the Resource Saver timeout which indicates how long
   should Docker Desktop be idle before Resource Saver mode kicks in. Default is
@@ -110,7 +111,7 @@ Advanced settings are:
   >**Note**
   >
   > Exit from Resource Saver mode occurs automatically when containers run. Exit
-  > may take a few seconds as Docker Desktop restarts the Linux VM.
+  > may take a few seconds (~3 -> 10 secs) as Docker Desktop restarts the Linux VM.
 
 ### File sharing
 
