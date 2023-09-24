@@ -39,15 +39,21 @@ A bit more info about Resource Saver:
   value. Just keep in mind that exit from Resource Saver mode occurs
   automatically when containers run, but starting the first such container will
   incur the Resource Saver exit delay which can take between ~3 -> 10 seconds as
-  Docker Desktop restarts the Linux VM (the restart is generally faster on Mac
-  and Linux, and a bit slower on Windows with Hyper-V). Once the Linux VM is
+  Docker Desktop restarts the Linux VM. The restart is generally faster on Mac
+  and Linux, and a bit slower on Windows with Hyper-V. Once the Linux VM is
   restarted, subsequent container runs will occurs immediately as usual.
 
-* Resource Saver does not have effect on Windows with WSL. That's because in
-  this scenario there's a single Linux VM shared by all WSL distros, so Docker
-  Desktop can't stop the Linux VM (i.e., the WSL Linux VM is not owned by Docker
-  Desktop). For WSL, we instead recommend that users enable WSL's
-  `autoMemoryReclaim` feature as described in the [Docker Desktop WSL docs](../wsl/_index.md).
+* Resource Saver works a bit differently on Windows with WSL. Instead of
+  stopping the WSL VM, it only pauses the Docker Engine inside the
+  `docker-desktop` WSL distro. That's because in WSL there's a single Linux VM
+  shared by all WSL distros, so Docker Desktop can't stop the Linux VM (i.e.,
+  the WSL Linux VM is not owned by Docker Desktop). As a result, Resource Saver
+  reduces CPU utilization on WSL, but it does not reduce Docker's memory
+  utilization. To reduce memory utilization on WSL, we instead recommend that
+  users enable WSL's `autoMemoryReclaim` feature as described in the
+  [Docker  Desktop WSL docs](../wsl/_index.md). Finally, since Docker Desktop does not
+  stop the Linux VM on WSL, exit from Resource Saver mode is immediate (there's
+  no exit delay).
 
 * When Docker Desktop enters Resource Saver mode, Docker commands that don't run
   containers (e.g., listing container images or volumes) do not necessarily
