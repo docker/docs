@@ -92,6 +92,12 @@ Advanced settings are:
   move a disk image to a location that already has one, you are asked if you
   want to use the existing image or replace it.
 
+>**Tip**
+>
+> If you feel Docker Desktop starting to get slow or you're running
+> multi-container workloads, increase the memory and disk image space allocation
+{ .tip }
+
 - **Resource Saver**. Enable or disable Resource Saver mode, which significantly
   reduces CPU and memory utilization on the host by automatically turning off
   the Linux VM when Docker Desktop is idle (i.e., no containers are running).
@@ -101,14 +107,10 @@ Advanced settings are:
   should Docker Desktop be idle before Resource Saver mode kicks in. Default is
   5 minutes.
 
->**Tips**
->
-> * Exit from Resource Saver mode occurs automatically when containers run. Exit
->   may take a few seconds as Docker Desktop restarts the Linux VM.
->
-> * If you feel Docker Desktop starting to get slow or you're running
->   multi-container workloads, increase the memory and disk image space allocation
-{ .tip }
+  >**Note**
+  >
+  > Exit from Resource Saver mode occurs automatically when containers run. Exit
+  > may take a few seconds as Docker Desktop restarts the Linux VM.
 
 ### File sharing
 
