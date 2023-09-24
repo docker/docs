@@ -10,7 +10,8 @@ automatically stopping the Docker Desktop Linux VM when no containers are
 running for a period of time (defaults to 5 minutes).
 
 This way, Docker Desktop uses minimal system resources when it's idle, thereby
-allowing you to save battery life on your laptop and improve multi-tasking.
+allowing you to save battery life on your laptop and improve your multi-tasking
+experience.
 
 Resource Saver is enabled by default but can be disabled via the Dashboard's
 Settings -> Resources -> Advanced menu. You can also configure the idle
@@ -19,16 +20,18 @@ timer as shown below.
 ![Resource Saver Settings](../images/resource-saver-settings.png)
 
 When Docker Desktop enters Resource Saver mode, a leaf icon is displayed on the
-Docker Desktop status bar as well as in the Docker icon on the system tray:
+Docker Desktop status bar as well as in the Docker icon on the system tray. As
+shown, the Linux VM CPU and memory utilization are reduced to zero.
 
 ![Resource Saver Status Bar](../images/resource-saver-status-bar.png)
 
 >**Note**
 >
 > Exit from Resource Saver mode occurs automatically when containers run. Exit
-> may take a few seconds (~3 -> 10 secs) as Docker Desktop restarts the Linux VM.
+> may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
+> It's generally faster on Mac and Linux, and a bit slower on Windows.
 
-A few notes about Resource Saver:
+A bit more info about Resource Saver:
 
 * The Resource Saver timer is configured to 5 minutes by default. That is,
   Docker Desktop will enter Resource Saver mode if no containers are running for
@@ -40,10 +43,10 @@ A few notes about Resource Saver:
   and Linux, and a bit slower on Windows with Hyper-V). Once the Linux VM is
   restarted, subsequent container runs will occurs immediately as usual.
 
-* Resource Saver is not available on Windows with WSL. That's because in this
-  scenario there's a single Linux VM shared by all WSL distros, so Docker
-  Desktop can't stop the Linux VM (i.e., the WSL Linux VM is not owned by
-  Docker Desktop). For WSL, we instead recommend that users enable WSL's
+* Resource Saver does not have effect on Windows with WSL. That's because in
+  this scenario there's a single Linux VM shared by all WSL distros, so Docker
+  Desktop can't stop the Linux VM (i.e., the WSL Linux VM is not owned by Docker
+  Desktop). For WSL, we instead recommend that users enable WSL's
   `autoMemoryReclaim` feature as described in the [Docker Desktop WSL docs](../wsl/_index.md).
 
 * When Docker Desktop enters Resource Saver mode, Docker commands that don't run
