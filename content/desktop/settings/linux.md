@@ -12,6 +12,8 @@ To navigate to **Settings** either:
 - Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
+You can also locate the `settings.json` file at `~/.docker/desktop/settings.json`.
+
 ## General
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
@@ -40,7 +42,7 @@ If you choose the integrated terminal, you can run commands in a running contain
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
-- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively. 
+- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
 
 ## Resources
 
@@ -152,7 +154,7 @@ edit the file using your favorite text editor.
 > Refer to [Configure the daemon](../../config/daemon/index.md) for more information
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 
-To see the full list of possible configuration options, see the 
+To see the full list of possible configuration options, see the
 [dockerd command reference](/engine/reference/commandline/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -193,7 +195,7 @@ when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 
-## Extensions 
+## Extensions
 
 Use the **Extensions** tab to:
 
