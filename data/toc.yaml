@@ -1970,10 +1970,14 @@ Manuals:
       title: Advisory database
     - path: /scout/data-handling/
       title: Data handling
-    - path: /scout/policy/
-      title: Policy
     - path: /scout/sbom/
       title: SBOM
+    - sectiontitle: Policy
+      section:
+      - path: /scout/policy/
+        title: Overview
+      - path: /scout/policy/view/
+        title: View policy status
     - sectiontitle: Integrations
       section:
       - title: Overview
