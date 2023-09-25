@@ -38,6 +38,7 @@ To add environments to Docker Scout, you can:
 Docker Scout supports the following runtime integrations:
 
 - [Docker Scout GitHub Action](https://github.com/marketplace/actions/docker-scout#record-an-image-deployed-to-a-stream-environment)
+- [CLI client](./cli.md)
 
 > **Note**
 >
