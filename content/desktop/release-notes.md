@@ -84,7 +84,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- Security fixes for vulnerabilities related to information leakage and access control bypass.
+- Fixed [CVE-2023-5165](https://www.cve.org/cverecord?id=CVE-2023-5165) which allows Enhanced Container Isolation bypass via debug shell. The affected functionality is available for Docker Business customers only and assumes an environment where users are not granted local root or Administrator privileges.
+- Fixed [CVE-2023-5166](https://www.cve.org/cverecord?id=CVE-2023-5166) which allows Access Token theft via a crafted extension icon URL.
 
 ### Known Issues
 
@@ -893,13 +894,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- Fix RCE via query parameters in the message-box route in the Electron client.
-- Fix RCE via extension description/changelog which could be abused by a malicious extension.
+- Fixed [CVE-2023-0626](https://www.cve.org/cverecord?id=CVE-2023-0626) which allows RCE via query parameters in the message-box route in the Electron client.
+- Fixed [CVE-2023-0625](https://www.cve.org/cverecord?id=CVE-2023-0625) which allows RCE via extension description/changelog which could be abused by a malicious extension.
 
 #### For Windows
 
-- Fixed a bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
-- Fixed the argument injection to the Docker Desktop installer which may result in local privilege escalation.
+- Fixed [CVE-2023-0627](https://www.cve.org/cverecord?id=CVE-2023-0627) which allows to bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
+- Fixed [CVE-2023-0633](https://www.cve.org/cverecord?id=CVE-2023-0633) in which an argument injection to the Docker Desktop installer which may result in local privilege escalation.
 
 ### Bug fixes and minor enhancements
 
