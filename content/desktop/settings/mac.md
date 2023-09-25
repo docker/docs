@@ -78,7 +78,7 @@ Advanced settings are:
 - **CPU limit**. Specify the maximum number of CPUs to be used by Docker Desktop.
   By default, Docker Desktop is set to use all the processors available on the host machine.
 
-- **Memory limit**. By default, Docker Desktop is set to use up to `2` GB of your host's
+- **Memory limit**. By default, Docker Desktop is set to use up to 50% of your host's
   memory. To increase the RAM, set this to a higher number; to decrease it,
   lower the number.
 
