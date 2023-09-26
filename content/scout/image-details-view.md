@@ -6,8 +6,6 @@ description: The Docker Scout image detail view analyzes images to show their he
   layers, packages, and vulnerabilities
 ---
 
-{{< include "scout-early-access.md" >}}
-
 The image details view shows a breakdown of the Docker Scout analysis. You can
 access the image view from within Docker Desktop and from the image tag
 page on Docker Hub. The view provides a breakdown of the image hierarchy (base

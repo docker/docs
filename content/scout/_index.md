@@ -42,8 +42,6 @@ grid:
     icon: policy
 ---
 
-{{< include "scout-early-access.md" >}}
-
 Container images are often built from layers of other container images and
 software packages. These layers and packages can contain vulnerabilities that
 make your containers and the applications they run vulnerable to attack.

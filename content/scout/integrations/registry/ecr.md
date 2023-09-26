@@ -4,8 +4,6 @@ keywords: docker scout, ecr, integration, image analysis, security, cves
 title: Integrate Docker Scout with Amazon ECR
 ---
 
-{{< include "scout-early-access.md" >}}
-
 Integrating Docker Scout with Amazon Elastic Container Registry (ECR) lets you
 view image insights for images hosted in ECR repositories. After integrating
 Docker Scout with ECR and activating Docker Scout for a repository, pushing an

@@ -8,8 +8,6 @@ aliases:
 - /scout/web-app/
 ---
 
-{{< include "scout-early-access.md" >}}
- 
 The Docker Scout Dashboard helps you share the analysis of images in an organization with your team. Developers can now see an overview of their security status across all their images from both Docker Hub and Artifactory, and get remediation advice at their fingertips. It helps team members in roles such as security, compliance, and operations to know what vulnerabilities and issues they need to focus on.
 
 ## Overview

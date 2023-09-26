@@ -4,8 +4,6 @@ description: Analyze and compare local code using Docker Scout on the command li
 keywords: scout, vulnerabilities, analyze, analysis, cli, packages, sbom, cve, security, local, source, code, supply chain
 ---
 
-{{< include "scout-early-access.md" >}}
-
 You can use the `fs://` protocol prefix with Docker Scout CLI commands to
 analyze your local source code directly, without having to build and push
 container images. The following commands support the `fs://` prefix:

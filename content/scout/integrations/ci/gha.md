@@ -4,8 +4,6 @@ keywords: supply chain, security, ci, continuous integration, github actions
 title: Integrate Docker Scout with GitHub Actions
 ---
 
-{{< include "scout-early-access.md" >}}
-
 You can use [the Docker Scout GitHub action](https://github.com/docker/scout-action) to run Docker Scout CLI commands
 as part of a workflow.
 
