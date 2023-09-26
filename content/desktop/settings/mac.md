@@ -34,13 +34,13 @@ If you choose the integrated terminal, you can run commands in a running contain
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is turned off by default.
 
-- **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`. 
+- **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`.
     > **Tip**
     >
-    > Turn this setting on to make Docker Desktop run faster. 
+    > Turn this setting on to make Docker Desktop run faster.
     { .tip }
 
-- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default. 
+- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default.
     >**Tip**
     >
     > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
@@ -62,7 +62,7 @@ If you choose the integrated terminal, you can run commands in a running contain
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
-- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively. 
+- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
 
 ## Resources
 
@@ -94,7 +94,7 @@ You can also move the disk image to a different location. If you attempt to move
 >**Tip**
 >
 > If you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
-{ .tip } 
+{ .tip }
 
 ### File sharing
 
@@ -197,7 +197,7 @@ You can find this file at `$HOME/.docker/daemon.json`. To change the configurati
 edit the JSON configuration directly from the dashboard in Docker Desktop, or open and
 edit the file using your favorite text editor.
 
-To see the full list of possible configuration options, see the 
+To see the full list of possible configuration options, see the
 [dockerd command reference](/engine/reference/commandline/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -238,7 +238,7 @@ when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 
-## Extensions 
+## Extensions
 
 Use the **Extensions** tab to:
 
@@ -262,9 +262,9 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
 
-#### Use Rosetta for x86/AMD64 emulation on Apple Silicon. 
+#### Use Rosetta for x86/AMD64 emulation on Apple Silicon.
 
-Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. 
+Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab.
 
 ### Experimental features
 
@@ -274,15 +274,15 @@ Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This
 
 On the **Advanced** tab, you can reconfigure your initial installation settings:
 
-- **Choose how to configure the installation of Docker's CLI tools**. 
+- **Choose how to configure the installation of Docker's CLI tools**.
   - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin`
   - **User**: Docker CLI tools are installed in the user directory under `$HOME/.docker/bin`. You must then add `$HOME/.docker/bin` to your PATH. To add `$HOME/.docker/bin` to your path:
-      1. Open your shell configuration file. This is `~/.bashrc` if you're using a bash shell, or `~/.zshrc` if you're using a zsh shell. 
+      1. Open your shell configuration file. This is `~/.bashrc` if you're using a bash shell, or `~/.zshrc` if you're using a zsh shell.
       2. Run the following command:
             ```console
             $ export PATH=$PATH:~/.docker/bin
             ```
-     3. Save and the close the file. Restart your shell to apply the changes to the PATH variable. 
+     3. Save and the close the file. Restart your shell to apply the changes to the PATH variable.
 
 - **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks).
 
