@@ -52,36 +52,40 @@ image.
 2. Select the **Detect images running in my environments** filter.
 3. Find Sysdig in the list, and select **Integrate**.
 
-4. In the **How to integrate** section, enter a configuration name and a Risk
-   Spotlight API token.
-
-   Configuration name is the display name of the Sysdig integration in Docker
-   Scout. The Risk Spotlight API token is the Sysdig token that Docker Scout
-   needs to integrate with Sysdig. For more instructions on how to generate a
-   Risk Spotlight token, See [Risk Spotlight Integrations (Sysdig docs)](https://docs.sysdig.com/en/docs/sysdig-secure/integrations-for-sysdig-secure/risk-spotlight-integrations/#generate-a-token-for-the-integration).
+4. In the **How to integrate** section, enter a configuration name for this
+   integration. Docker Scout uses this label as a display name for the
+   integration.
 
 5. Select **Next**.
-6. Enter the cluster name.
 
-   This corresponds to the `global.clusterConfig.name` configuration parameter
+6. Enter a Risk Spotlight API token and select the region in the drop-down
+   list.
+
+   The Risk Spotlight API token is the Sysdig token that Docker Scout needs to
+   integrate with Sysdig. For more instructions on how to generate a Risk
+   Spotlight token, See [Risk Spotlight Integrations (Sysdig docs)](https://docs.sysdig.com/en/docs/sysdig-secure/integrations-for-sysdig-secure/risk-spotlight-integrations/#generate-a-token-for-the-integration).
+
+   The region corresponds to the `global.sysdig.region` configuration parameter
    set when deploying the Sysdig Agent.
 
 7. Select **Next**.
-8. Select the region in the drop-down list.
 
-   This corresponds to the `global.sysdig.region` configuration parameter set
-   when deploying the Sysdig Agent.
+   After selecting **Next**, Docker Scout connects to Sysdig and retrieves the
+   cluster names for your Sysdig account. Cluster names correspond to the
+   `global.clusterConfig.name` configuration parameter set when deploying
+   Sysdig Agents.
+
+   An error displays if Docker Scout fails to connect to Sysdig using the
+   provided token. If there's an error, you won't be able to continue the
+   integration. Go back and verify that the configuration details are correct.
+
+8. Select a cluster name in the drop-down list.
 
 9. Select **Next**.
 
-   After selecting **Next**, Docker Scout performs a connection test for the
-   configuration you've specified. An error displays if the connection test
-   fails. If there's an error, you won't be able to continue the integration.
-   Go back and verify that the configuration details are correct.
-
 10. Assign an environment name for this cluster.
 
-    You can reuse an existing environment name or create a new one.
+    You can reuse an existing environment or create a new one.
 
 11. Select **Enable integration**.
 
