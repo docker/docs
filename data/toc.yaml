@@ -1149,7 +1149,7 @@ Manuals:
         - path: /desktop/use-desktop/builds/
           title: Explore Builds (Beta)
         - path: /desktop/use-desktop/resource-saver/
-          title: Resource Saver Mode
+          title: Resource Saver mode
         - path: /desktop/use-desktop/pause/
           title: Pause Docker Desktop
     - sectiontitle: Hardened Docker Desktop

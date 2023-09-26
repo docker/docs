@@ -1,10 +1,10 @@
 ---
 description: understand what Docker Desktop Resource Saver is
 keywords: Docker Dashboard, resource saver, manage, containers, gui, dashboard, user manual
-title: Docker Desktop Resource Saver
+title: Docker Desktop's Resource Saver mode
 ---
 
-Resource Saver is a new feature (4.24+) that significantly reduces Docker
+Resource Saver is a new feature .available in Docker Desktop version 4.24 and later, that significantly reduces Docker
 Desktop's CPU and memory utilization on the host by 2 GBs or more, by
 automatically stopping the Docker Desktop Linux VM when no containers are
 running for a period of time (defaults to 5 minutes).
