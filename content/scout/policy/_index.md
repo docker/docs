@@ -60,7 +60,7 @@ Docker Scout ships the following three out-of-the-box policies:
 
 - [Critical and high vulnerabilities with fixes](#critical-and-high-vulnerabilities-with-fixes)
 - [Critical vulnerabilities](#critical-vulnerabilities)
-- [Packages with GPL3+ licenses](#packages-with-gpl3-licenses)
+- [Packages with AGPLv3, GPLv3 licenses](#packages-with-agplv3-gplv3-licenses)
 
 These policies are turned on by default for Scout-enabled repositories. There's
 currently no way to turn off or configure these policies.
@@ -90,10 +90,12 @@ more critical vulnerabilities.
 This policy flags all critical vulnerabilities, whether or not there's a fix
 version available.
 
-### Packages with GPL3+ licenses
+### Packages with AGPLv3, GPLv3 licenses
 
 This policy requires that your artifacts don't contain packages distributed
-under a GPL3+ [copyleft](https://en.wikipedia.org/wiki/Copyleft) license.
+under an AGPLv3 or GPLv3 license. These licenses are protective
+[copyleft](https://en.wikipedia.org/wiki/Copyleft), and may be unsuitable for
+use in your software because of the restrictions they enforce.
 
 This policy is unfulfilled if your artifacts contain one or more packages with
 a violating license.

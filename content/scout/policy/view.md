@@ -72,9 +72,9 @@ version that removes the vulnerability, when a fix version is available. To fix
 the issue, upgrade the package version to the fix version.
 
 For licensing-related policies, the list shows all packages whose license
-doesn't meet the policy criteria. To fix the issue, look for an alternative
-package distributed under a more appropriate license, or cut the dependency by
-reimplementing the functionality in your own code.
+doesn't meet the policy criteria. To fix the issue, find a way to remove the
+dependency to the violating package, for example by looking for an alternative
+package distributed under a more appropriate license.
 
 ## CLI
 
