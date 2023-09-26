@@ -1,27 +1,39 @@
 ---
 description: Use File watch to automatically update running services as you work
 keywords: compose, file watch, experimental
-title: Automatically update services with file watch in Docker Compose
+title: Use Compose Watch
 ---
 
 > **Note**
 >
-> The Compose file watch feature is available in Docker Compose version 2.22 and later.
+> Compose Watch is available in Docker Compose version 2.22 and later.
 
-Use `watch` to automatically update your running Compose services as you edit and save your code.
+Use `watch` to automatically update and preview your running Compose services as you edit and save your code. 
 
 For many projects, this allows for a hands-off development workflow once Compose is running, as services automatically update themselves when you save your work.
-
-You don't need to switch on `watch` for all services in a Compose project. In some instances, only part of the project, for example the Javascript frontend, might be suitable for automatic updates.
 
 `watch` adheres to the following file path rules:
 * All paths are relative to the build context
 * Directories are watched recursively
-* Glob patterns are not supported
+* Glob patterns aren't supported
 * Rules from `.dockerignore` apply
   * Use `include` / `exclude` to override
   * Temporary/backup files for common IDEs (Vim, Emacs, JetBrains, & more) are ignored automatically
   * `.git` directories are ignored automatically
+
+You don't need to switch on `watch` for all services in a Compose project. In some instances, only part of the project, for example the Javascript frontend, might be suitable for automatic updates.
+
+## Compose Watch versus bind mounts
+
+Compose supports sharing a host directory inside service containers. Watch mode does not replace this functionality but exists as a companion specifically suited to developing in containers.
+
+More importantly, `watch` allows for greater granularity than is practical with a bind mount. Watch rules let you ignore specific files or entire directories within the watched tree.
+
+For example, in a JavaScript project, ignoring the `node_modules/` directory has two benefits:
+* Performance. File trees with many small files can cause high I/O load in some configurations
+* Multi-platform. Compiled artifacts cannot be shared if the host OS or architecture is different to the container
+
+For example, in a Node.js project, it's not recommended to sync the `node_modules/` directory. Even though JavaScript is interpreted, `npm` packages can contain native code that is not portable across platforms.
 
 ## Configuration
 
@@ -29,6 +41,9 @@ The `watch` attribute defines a list of rules that control automatic service upd
 
 Each rule requires, a `path` pattern and `action` to take when a modification is detected. There are two possible actions for `watch` and depending on
 the `action`, additional fields might be accepted or required. 
+
+Watch mode can be used with many different languages and frameworks.
+The specific paths and rules will vary project to project, but the concepts remain the same. 
 
 ### `action`
 
@@ -39,18 +54,6 @@ If `action` is set to `sync`, Compose makes sure any changes made to files on yo
 `sync` is ideal for frameworks that support "Hot Reload" or equivalent functionality.
 
 More generally, `sync` rules can be used in place of bind mounts for many development use cases.
-
-##### Comparison to bind mounts
-
-Compose also supports sharing a host directory inside service containers. Watch mode does not replace this functionality but exists as a companion specifically suited to developing in containers.
-
-Most importantly, watch mode allows for greater granularity than is practical with a bind mount. Watch rules allow ignoring specific files or entire directories within the watched tree.
-
-For example, in a JavaScript project, ignoring the `node_modules/` directory has two benefits:
-* Performance. File trees with many small files can cause high I/O load in some configurations
-* Multi-platform. Compiled artifacts cannot be shared if the host OS (e.g. Windows, macOS) or architecture (e.g. arm64) is different than the container
-
-For example, in a Node.js project, it's not recommended to sync the `node_modules/` directory. Even though JavaScript is interpreted, `npm` packages can contain native code that is not portable across platforms.
 
 #### Rebuild
 
@@ -79,8 +82,6 @@ For `path: ./app/html` and a change to `./app/html/index.html`:
 * `target: /assets` -> `/assets/index.html`
 
 ## Example
-Watch mode can be used with many different languages and frameworks.
-The specific paths and rules will vary project to project, but the concepts remain the same. 
 
 This minimal example targets a Node.js application with the following structure:
 ```text
@@ -109,7 +110,7 @@ services:
           path: package.json
 ```
 
-In this example, when running `docker compose watch`, a container for the `web` service is launched using an image built from the `Dockerfile` in the project root.
+In this example, when running `docker compose watch`, a container for the `web` service is launched using an image built from the `Dockerfile` in the project's root.
 The `web` service runs `npm start` for its command, which then launches a development version of the application with Hot Module Reload enabled in the bundler (Webpack, Vite, Turbopack, etc).
 
 After the service is up, the watch mode starts monitoring the target directories and files.
@@ -126,7 +127,7 @@ This pattern can be followed for many languages and frameworks, such as Python w
 ## Use `watch`
 
 1. Add `watch` sections to one or more services in `compose.yaml`.
-2. Run `docker compose alpha watch` to launch a Compose project and start the file watch mode.
+2. Run `docker compose watch` to build and launch a Compose project and start the file watch mode.
 3. Edit service source files using your preferred IDE or editor.
 
 >**Looking for a sample project to test things out?**

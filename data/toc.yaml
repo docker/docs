@@ -630,6 +630,14 @@ Reference:
         title: docker scout enroll
       - path: /engine/reference/commandline/scout_environment/
         title: docker scout environment
+      - path: /engine/reference/commandline/scout_integration/
+        title: docker scout integration
+      - path: /engine/reference/commandline/scout_integration_configure/
+        title: docker scout integration configure
+      - path: /engine/reference/commandline/scout_integration_delete/
+        title: docker scout integration delete
+      - path: /engine/reference/commandline/scout_integration_list/
+        title: docker scout integration list
       - path: /engine/reference/commandline/scout_policy/
         title: docker scout policy
       - path: /engine/reference/commandline/scout_quickview/
@@ -1893,7 +1901,7 @@ Manuals:
   - path: /compose/networking/
     title: Networking in Compose
   - path: /compose/file-watch/
-    title: Use file watch
+    title: Use Compose Watch
   - path: /compose/production/
     title: Using Compose in production
   - path: /compose/use-secrets/
@@ -1986,6 +1994,8 @@ Manuals:
         section:
         - title: Overview
           path: /scout/integrations/environment/
+        - title: Generic
+          path: /scout/integrations/environment/cli/
       - sectiontitle: Container registries
         section:
         - title: Artifactory

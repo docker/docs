@@ -47,6 +47,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: refresh-registry
+      value_type: bool
+      default_value: "false"
+      description: |
+        Refresh the list of repositories of a registry at every run. Only with --registry.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: registry
       value_type: string
       description: Registry to watch

@@ -1,14 +1,15 @@
 command: docker scout policy
-short: Display the policy results of an image (experimental)
+short: |
+    Evaluate policies against an image and display the policy evaluation results (experimental)
 long: |
-    The `docker scout policy` command displays the policy results of an image if there are any.
+    The `docker scout policy` command evaluates policies against an image. The image is indexed into the Scout platform - if it wasn't already - and policies will run against it. The policy results may take a few minutes to become available.
 usage: docker scout policy [IMAGE | REPO]
 pname: docker scout
 plink: docker_scout.yaml
 options:
     - option: env
       value_type: string
-      description: Name of the environment to compare to.
+      description: Name of the environment to compare to
       deprecated: false
       hidden: false
       experimental: false
@@ -19,7 +20,7 @@ options:
       shorthand: e
       value_type: bool
       default_value: "false"
-      description: Return exit code '2' if policies are not met.
+      description: Return exit code '2' if policies are not met, '0' otherwise
       deprecated: false
       hidden: false
       experimental: false
@@ -38,7 +39,7 @@ options:
     - option: output
       shorthand: o
       value_type: string
-      description: Write the report to a file.
+      description: Write the report to a file
       deprecated: false
       hidden: false
       experimental: false
@@ -47,7 +48,7 @@ options:
       swarm: false
     - option: platform
       value_type: string
-      description: Platform of image to pull policy results from.
+      description: Platform of image to pull policy results from
       deprecated: false
       hidden: false
       experimental: false
@@ -66,10 +67,22 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
-    ### Display the policy results of an image
+    ### Evaluate policies against an image and display the results
 
     ```console
     $ docker scout policy dockerscoutpolicy/customers-api-service:0.0.1
+    ```
+
+    ### Evaluate policies against an image for a specific organization
+
+    ```console
+    $ docker scout policy dockerscoutpolicy/customers-api-service:0.0.1 --org dockerscoutpolicy
+    ```
+
+    ### Evaluate policies against an image with a specific platform
+
+    ```console
+    $ docker scout policy dockerscoutpolicy/customers-api-service:0.0.1 --platform linux/amd64
     ```
 
     ### Compare policy results for a repository in a specific environment
