@@ -610,7 +610,7 @@ Reference:
       title: docker run
     - path: /engine/reference/commandline/save/
       title: docker save
-    - sectiontitle: docker scout (Early Access)
+    - sectiontitle: docker scout
       section:
       - path: /engine/reference/commandline/scout/
         title: docker scout
@@ -1964,7 +1964,7 @@ Manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
-- sectiontitle: Docker Scout (Early Access)
+- sectiontitle: Docker Scout
   section:
     - path: /scout/
       title: Overview
