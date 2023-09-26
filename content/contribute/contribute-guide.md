@@ -75,8 +75,7 @@ $ cd docs
 Then, build and run the documentation using [Docker Compose](../compose/index.md):
 
 ```console
-$ docker compose up -d --build
-$ docker compose alpha watch
+$ docker compose watch
 ```
 
 > **Note**
@@ -85,7 +84,7 @@ $ docker compose alpha watch
 
 When the container is built and running, visit [http://localhost:1313](http://localhost:1313) in your web browser to view the docs.
 
-The [Docker Compose `watch`](../compose/file-watch.md) feature causes your
+[Compose `watch`](../compose/file-watch.md) causes your
 running container to rebuild itself automatically when you make changes to your
 content files.
 
