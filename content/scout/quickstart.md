@@ -68,7 +68,7 @@ You can do this from Docker Hub, the Docker Scout Dashboard, and CLI.
    command to enable analysis on an existing repository:
 
    ```console
-   $ docker scout repo enable <org-name>/scout-demo
+   $ docker scout repo enable --org <org-name> <org-name>/scout-demo
    ```
 
 ## Step 3: Analyze image vulnerabilities
