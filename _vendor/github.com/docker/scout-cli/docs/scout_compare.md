@@ -13,6 +13,7 @@ Compare two images and display differences (experimental)
 |:----------------------|:--------------|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-e`, `--exit-code`   |               |         | Return exit code '2' if vulnerability changes are detected                                                                                                                     |
 | `--format`            | `string`      | `text`  | Output format of the generated vulnerability report:<br>- text: default output, plain text with or without colors depending on the terminal<br>- markdown: Markdown output<br> |
+| `--hide-policies`     |               |         | Hide policy status from the output                                                                                                                                             |
 | `--ignore-base`       |               |         | Filter out CVEs introduced from base image                                                                                                                                     |
 | `--ignore-unchanged`  |               |         | Filter out unchanged packages                                                                                                                                                  |
 | `--multi-stage`       |               |         | Show packages from multi-stage Docker builds                                                                                                                                   |
@@ -24,13 +25,11 @@ Compare two images and display differences (experimental)
 | `--org`               | `string`      |         | Namespace of the Docker organization                                                                                                                                           |
 | `-o`, `--output`      | `string`      |         | Write the report to a file.                                                                                                                                                    |
 | `--platform`          | `string`      |         | Platform of image to analyze                                                                                                                                                   |
-| `--ref`               | `string`      |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with --type archive.                                                                |
+| `--ref`               | `string`      |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive.                                                                       |
 | `--to`                | `string`      |         | Image, directory, or archive to compare to                                                                                                                                     |
 | `--to-env`            | `string`      |         | Name of environment to compare to                                                                                                                                              |
 | `--to-latest`         |               |         | Latest image processed to compare to                                                                                                                                           |
-| `--to-ref`            | `string`      |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with --type archive.                                                                |
-| `--to-type`           | `string`      | `image` | Image type to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>- fs (directory or file)<br>                                               |
-| `--type`              | `string`      | `image` | Type of the image to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>- fs (directory or file)<br>                                        |
+| `--to-ref`            | `string`      |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive.                                                                       |
 
 
 <!---MARKER_GEN_END-->
@@ -51,6 +50,7 @@ The following artifact types are supported:
 - Images
 - OCI layout directories
 - Tarball archives, as created by `docker save`
+- Local directory or file
 
 The tool analyzes the provided software artifact, and generates a vulnerability report.
 
@@ -60,7 +60,15 @@ By default, the tool expects an image reference, such as:
 - `curlimages/curl:7.87.0`
 - `mcr.microsoft.com/dotnet/runtime:7.0`
 
-If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` or `--to-type` flag.
+If the artifact you want to analyze is an OCI directory, a tarball archive, a local file or directory,
+or if you want to control from where the image will be resolved, you must prefix the reference with one of the following:
+
+- `image://` (default) use a local image, or fall back to a registry lookup
+- `local://` use an image from the local image store (don't do a registry lookup)
+- `registry://` use an image from a registry (don't use a local image)
+- `oci-dir://` use an OCI layout directory
+- `archive://` use a tarball archive, as created by docker save
+- `fs://` use a local directory or file
 
 ## Examples
 
@@ -68,6 +76,12 @@ If the artifact you want to analyze is an OCI directory or a tarball archive, yo
 
 ```console
 $ docker scout compare --to namespace/repo:latest
+```
+
+### Compare local build to the same tag from the registry
+
+```console
+$ docker scout compare local://namespace/repo:latest --to registry://namespace/repo:latest
 ```
 
 ### Ignore base images
@@ -86,4 +100,10 @@ $ docker scout compare --format markdown --to namespace/repo:latest namespace/re
 
 ```console
 $ docker scout compare --only-package-type maven --only-severity critical --to namespace/repo:latest namespace/repo:v1.2.3-pre
+```
+
+### Show all policy results for both images
+
+```console
+docker scout compare --to namespace/repo:latest namespace/repo:v1.2.3-pre
 ```

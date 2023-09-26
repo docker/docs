@@ -48,8 +48,4 @@ Docker Scout cached SBOMs are located at:
   sha256:174c41d4fbc7f63e1f2bb7d2f7837318050406f2f27e5073a84a84f18b48b883 │ 115 kB
 
 Total: 4 MB
-
-
-What's Next?
-  Delete all cached SBOMs → docker scout prune
 ```

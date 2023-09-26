@@ -5,17 +5,18 @@ Watch repositories in a registry and push images and indexes to Docker Scout (ex
 
 ### Options
 
-| Name           | Type          | Default | Description                                                                         |
-|:---------------|:--------------|:--------|:------------------------------------------------------------------------------------|
-| `--all-images` |               |         | Push all images instead of only the ones pushed during the watch command is running |
-| `--dry-run`    |               |         | Watch images and prepare them, but do not push them                                 |
-| `--interval`   | `int64`       | `60`    | Interval in seconds between checks                                                  |
-| `--org`        | `string`      |         | Namespace of the Docker organization to which image will be pushed                  |
-| `--registry`   | `string`      |         | Registry to watch                                                                   |
-| `--repository` | `stringSlice` |         | Repository to watch                                                                 |
-| `--sbom`       |               |         | Create and upload SBOMs                                                             |
-| `--tag`        | `stringSlice` |         | Regular expression to match tags to watch                                           |
-| `--workers`    | `int`         | `3`     | Number of concurrent workers                                                        |
+| Name                 | Type          | Default | Description                                                                         |
+|:---------------------|:--------------|:--------|:------------------------------------------------------------------------------------|
+| `--all-images`       |               |         | Push all images instead of only the ones pushed during the watch command is running |
+| `--dry-run`          |               |         | Watch images and prepare them, but do not push them                                 |
+| `--interval`         | `int64`       | `60`    | Interval in seconds between checks                                                  |
+| `--org`              | `string`      |         | Namespace of the Docker organization to which image will be pushed                  |
+| `--refresh-registry` |               |         | Refresh the list of repositories of a registry at every run. Only with --registry.  |
+| `--registry`         | `string`      |         | Registry to watch                                                                   |
+| `--repository`       | `stringSlice` |         | Repository to watch                                                                 |
+| `--sbom`             |               |         | Create and upload SBOMs                                                             |
+| `--tag`              | `stringSlice` |         | Regular expression to match tags to watch                                           |
+| `--workers`          | `int`         | `3`     | Number of concurrent workers                                                        |
 
 
 <!---MARKER_GEN_END-->

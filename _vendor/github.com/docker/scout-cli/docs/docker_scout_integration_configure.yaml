@@ -1,13 +1,14 @@
-command: docker scout repo enable
-short: Enable Docker Scout
-long: The docker scout repo enable command enables Docker Scout on repositories.
-usage: docker scout repo enable REPOSITORY
-pname: docker scout repo
-plink: docker_scout_repo.yaml
+command: docker scout integration configure
+short: Configure or update a new integration configuration
+long: |
+    The docker scout integration configure command creates or updates a new integration configuration for an organization.
+usage: docker scout integration configure INTEGRATION
+pname: docker scout integration
+plink: docker_scout_integration.yaml
 options:
-    - option: filter
+    - option: name
       value_type: string
-      description: Regular expression to filter repositories by name
+      description: Name of integration configuration to create
       deprecated: false
       hidden: false
       experimental: false
@@ -23,9 +24,10 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: registry
-      value_type: string
-      description: Container Registry
+    - option: parameter
+      value_type: stringSlice
+      default_value: '[]'
+      description: Integration parameters in the form of --parameter NAME=VALUE
       deprecated: false
       hidden: false
       experimental: false

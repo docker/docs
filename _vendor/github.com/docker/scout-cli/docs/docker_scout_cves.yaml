@@ -10,6 +10,7 @@ long: |-
     - Images
     - OCI layout directories
     - Tarball archives, as created by `docker save`
+    - Local directory or file
 
     The tool analyzes the provided software artifact, and generates a vulnerability report.
 
@@ -19,7 +20,15 @@ long: |-
     - `curlimages/curl:7.87.0`
     - `mcr.microsoft.com/dotnet/runtime:7.0`
 
-    If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` flag.
+    If the artifact you want to analyze is an OCI directory, a tarball archive, a local file or directory,
+    or if you want to control from where the image will be resolved, you must prefix the reference with one of the following:
+
+    - `image://` (default) use a local image, or fall back to a registry lookup
+    - `local://` use an image from the local image store (don't do a registry lookup)
+    - `registry://` use an image from a registry (don't use a local image)
+    - `oci-dir://` use an OCI layout directory
+    - `archive://` use a tarball archive, as created by docker save
+    - `fs://` use a local directory or file
 usage: docker scout cves [OPTIONS] [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
 plink: docker_scout.yaml
@@ -57,11 +66,7 @@ options:
     - option: format
       value_type: string
       default_value: packages
-      description: |-
-        Output format of the generated vulnerability report:
-        - packages: default output, plain text with vulnerabilities grouped by packages
-        - sarif: json Sarif output
-        - markdown: markdown output (including some html tags like collapsible sections)
+      description: "Output format of the generated vulnerability report:\n- packages: default output, plain text with vulnerabilities grouped by packages\n- sarif: json Sarif output\n- spdx: json SPDX output \n- markdown: markdown output (including some html tags like collapsible sections)"
       deprecated: false
       hidden: false
       experimental: false
@@ -214,7 +219,7 @@ options:
       value_type: string
       description: |-
         Reference to use if the provided tarball contains multiple references.
-        Can only be used with --type archive.
+        Can only be used with archive.
       deprecated: false
       hidden: false
       experimental: false
@@ -226,21 +231,6 @@ options:
       description: Name of stream
       deprecated: true
       hidden: true
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: type
-      value_type: string
-      default_value: image
-      description: |-
-        Type of the image to analyze. Can be one of:
-        - image
-        - oci-dir
-        - archive (docker save tarball)
-        - fs (directory or file)
-      deprecated: false
-      hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -302,7 +292,7 @@ examples: |-
     ```console
     $ docker save alpine > alpine.tar
 
-    $ docker scout cves --type archive alpine.tar
+    $ docker scout cves archive://alpine.tar
     Analyzing archive alpine.tar
         ✓ Archive read
         ✓ SBOM of image already cached, 18 packages indexed
@@ -314,12 +304,18 @@ examples: |-
     ```console
     $ skopeo copy --override-os linux docker://alpine oci:alpine
 
-    $ docker scout cves --type oci-dir alpine
+    $ docker scout cves oci-dir://alpine
     Analyzing OCI directory alpine
         ✓ OCI directory read
         ✓ Image stored for indexing
         ✓ Indexed 19 packages
         ✓ No vulnerable package detected
+    ```
+
+    ### Display vulnerabilities from the current directory
+
+    ```console
+    $ docker scout cves fs://.
     ```
 
     ### Export vulnerabilities to a SARIF JSON file
