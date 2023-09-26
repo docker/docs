@@ -35,7 +35,7 @@ grid:
     description: |
       The web interface for Docker Scout.
     icon: dashboard
-  - title: Policy {{< badge color=violet text=Beta >}}
+  - title: Policy {{< badge color=violet text="Early Access" >}}
     link: /scout/policy/
     description: |
       Ensure that your artifacts align with supply chain best practices.

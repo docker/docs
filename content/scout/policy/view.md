@@ -6,14 +6,10 @@ description: |
 keywords: scout, policy, status, vulnerabilities, supply chain, cves, licenses
 ---
 
-> **Beta**
+> **Early Access**
 >
-> Policy Evaluation is a [Beta](/release-lifecycle/#beta) feature of Docker
-> Scout. This feature is available to organizations participating in the
-> limited preview program for policies.
->
-> If you're interested in trying out this feature, reach out using the form on
-> the [Docker Scout product page](https://docker.com/products/docker-scout)
+> Policy Evaluation is an [Early Access](/release-lifecycle/#early-access-ea)
+> feature of Docker Scout.
 { .restricted }
 
 You can track policy status for your artifacts from the [Docker Scout
