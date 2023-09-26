@@ -1,13 +1,14 @@
-command: docker scout repo enable
-short: Enable Docker Scout
-long: The docker scout repo enable command enables Docker Scout on repositories.
-usage: docker scout repo enable REPOSITORY
-pname: docker scout repo
-plink: docker_scout_repo.yaml
+command: docker scout integration list
+short: Integration Docker Scout
+long: |
+    The docker scout integration list configured integrations for an organization.
+usage: docker scout integration list [INTEGRATION]
+pname: docker scout integration
+plink: docker_scout_integration.yaml
 options:
-    - option: filter
+    - option: name
       value_type: string
-      description: Regular expression to filter repositories by name
+      description: Name of integration configuration to list
       deprecated: false
       hidden: false
       experimental: false
@@ -17,15 +18,6 @@ options:
     - option: org
       value_type: string
       description: Namespace of the Docker organization
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: registry
-      value_type: string
-      description: Container Registry
       deprecated: false
       hidden: false
       experimental: false

@@ -16,6 +16,7 @@ long: |-
     - Images
     - OCI layout directories
     - Tarball archives, as created by `docker save`
+    - Local directory or file
 
     The tool analyzes the provided software artifact, and generates a vulnerability report.
 
@@ -25,7 +26,15 @@ long: |-
     - `curlimages/curl:7.87.0`
     - `mcr.microsoft.com/dotnet/runtime:7.0`
 
-    If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` or `--to-type` flag.
+    If the artifact you want to analyze is an OCI directory, a tarball archive, a local file or directory,
+    or if you want to control from where the image will be resolved, you must prefix the reference with one of the following:
+
+    - `image://` (default) use a local image, or fall back to a registry lookup
+    - `local://` use an image from the local image store (don't do a registry lookup)
+    - `registry://` use an image from a registry (don't use a local image)
+    - `oci-dir://` use an OCI layout directory
+    - `archive://` use a tarball archive, as created by docker save
+    - `fs://` use a local directory or file
 usage: docker scout compare --to IMAGE|DIRECTORY|ARCHIVE [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
 plink: docker_scout.yaml
@@ -48,6 +57,16 @@ options:
         Output format of the generated vulnerability report:
         - text: default output, plain text with or without colors depending on the terminal
         - markdown: Markdown output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: hide-policies
+      value_type: bool
+      default_value: "false"
+      description: Hide policy status from the output
       deprecated: false
       hidden: false
       experimental: false
@@ -168,7 +187,7 @@ options:
       value_type: string
       description: |-
         Reference to use if the provided tarball contains multiple references.
-        Can only be used with --type archive.
+        Can only be used with archive.
       deprecated: false
       hidden: false
       experimental: false
@@ -207,7 +226,7 @@ options:
       value_type: string
       description: |-
         Reference to use if the provided tarball contains multiple references.
-        Can only be used with --type archive.
+        Can only be used with archive.
       deprecated: false
       hidden: false
       experimental: false
@@ -219,36 +238,6 @@ options:
       description: Name of stream to compare to
       deprecated: true
       hidden: true
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: to-type
-      value_type: string
-      default_value: image
-      description: |-
-        Image type to analyze. Can be one of:
-        - image
-        - oci-dir
-        - archive (docker save tarball)
-        - fs (directory or file)
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: type
-      value_type: string
-      default_value: image
-      description: |-
-        Type of the image to analyze. Can be one of:
-        - image
-        - oci-dir
-        - archive (docker save tarball)
-        - fs (directory or file)
-      deprecated: false
-      hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -271,6 +260,12 @@ examples: |-
     $ docker scout compare --to namespace/repo:latest
     ```
 
+    ### Compare local build to the same tag from the registry
+
+    ```console
+    $ docker scout compare local://namespace/repo:latest --to registry://namespace/repo:latest
+    ```
+
     ### Ignore base images
 
     ```console
@@ -287,6 +282,12 @@ examples: |-
 
     ```console
     $ docker scout compare --only-package-type maven --only-severity critical --to namespace/repo:latest namespace/repo:v1.2.3-pre
+    ```
+
+    ### Show all policy results for both images
+
+    ```console
+    docker scout compare --to namespace/repo:latest namespace/repo:v1.2.3-pre
     ```
 deprecated: false
 experimental: false
