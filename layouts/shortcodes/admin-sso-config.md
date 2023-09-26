@@ -56,7 +56,7 @@ After your domain is verified, create an SSO connection.
    >
    > You have to verify at least one domain before creating the connections.
 
-4. Select an authentication method, **SAML** or **Azure AD (OIDC)**.
+4. Select an authentication method, **SAML** or **Azure AD (OIDC)**. See [More resources](#more-resources) for a video overview on how to set up SSO with SAML in Entra ID (formerly Azure AD).
 5. Copy the following fields and add them to your IdP:
 
    - SAML: **Entity ID**, **ACS URL**
@@ -111,6 +111,12 @@ Your users must now sign in to Docker with SSO.
 >
 > If SSO isn't enforced, users can choose to sign in with either their Docker ID or SSO.
 { .important}
+
+## More resources
+
+The following video provides an overview of configuring SSO with SAML in Entra ID (formerly Azure AD).
+
+<iframe title="Configure SSO with SAML in Entra ID overview" class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/0a30409381f340cfb01790adbd9aa9b3?sid=7e4e10a7-7f53-437d-b593-8a4886775632"></iframe>
 
 ## What's next?
 
