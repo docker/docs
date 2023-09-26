@@ -10,7 +10,7 @@ Docker Single Sign-on (SSO) is only available with the Docker Business subscript
 
 ### How does Docker SSO work?
 
-Docker Single Sign-on (SSO) allows users to authenticate using their identity providers (IdPs) to access Docker. Docker supports Azure AD and any SAML 2.0 identity providers. When you enable SSO, users are redirected to your provider’s authentication page to authenticate using their email and password.
+Docker Single Sign-on (SSO) allows users to authenticate using their identity providers (IdPs) to access Docker. Docker supports Entra ID (formerly Azure AD) and any SAML 2.0 identity providers. When you enable SSO, users are redirected to your provider’s authentication page to authenticate using their email and password.
 
 ### What SSO flows are supported by Docker?
 
