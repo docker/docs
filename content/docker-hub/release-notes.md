@@ -69,7 +69,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and enhancements
 
-- SCIM is now available for organizations with a Docker Business subscription using an Azure AD identity provider.
+- SCIM is now available for organizations with a Docker Business subscription using an Entra ID (formerly Azure AD) identity provider.
 
 ## 2022-06-23
 
