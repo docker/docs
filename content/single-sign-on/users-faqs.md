@@ -61,7 +61,7 @@ Additionally, you can use the [Docker Hub API](/docker-hub/api/latest/) to compl
 
 ### What's the best way to provision the Docker Subscription without SSO?
 
-Company or organisation owners can invite users through Docker Hub UI, by email address (for any user) or by Docker ID (assuming the user has created a user account on Hub already).
+Company or organization owners can invite users through Docker Hub UI, by email address (for any user) or by Docker ID (assuming the user has created a user account on Hub already).
 
 ### If we add a user manually for the first time, can I register in the dashboard and will the user get an invitation link through email?
 
