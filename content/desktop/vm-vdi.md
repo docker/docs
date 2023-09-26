@@ -12,7 +12,7 @@ To run Docker Desktop in a virtual desktop environment, it is essential nested v
 
 >**Important**
 >
-> Docker does not support running Docker Desktop for Mac inside a VM.
+> Docker doesn't support running Docker Desktop for Mac inside a VM.
 { .important }
 
 ## Virtual desktop support
