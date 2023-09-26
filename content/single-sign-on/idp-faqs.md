@@ -48,7 +48,7 @@ We currently do not have any plans to enable IdP initiated logins.
 
 Yes, bot accounts needs a seat, similar to a regular end user, having a non-aliased domain email enabled in the IdP and using a seat in Hub.
 
-### Is it possible to connect Docker Hub directly with a Microsoft Azure Active Directory (AD) Group?
+### Is it possible to connect Docker Hub directly with a Microsoft Entra (formerly Azure AD) group?
 
 Yes, Entra ID (formerly Azure AD) is supported with SSO for Docker Business, both through a direct integration and through SAML.
 

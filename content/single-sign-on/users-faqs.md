@@ -53,11 +53,11 @@ For detailed prerequisites and instructions on how to enable SSO, see [Configure
 
 When SSO is enabled and enforced, your users just have to sign in using the email address and password.
 
-### Is Docker SSO fully synced with Active Directory (AD)?
+### Is Docker SSO fully synced with the IdP?
 
-Docker doesn’t currently support a full sync with AD. That's, if a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](/docker-hub/members/#remove-a-member-or-invitee) from the organization.
+Docker SSO provides Just In Time (JIT) provisioning by default. This provisioning only happens when a user signs in. If a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](/docker-hub/members/#remove-a-member-or-invitee) from the organization. [SCIM](/docker-hub/scim/) is available to provide full synchronization with users and groups.
 
-Additionally, you can use our APIs to complete this process.
+Additionally, you can use the [Docker Hub API](/docker-hub/api/latest/) to complete this process.
 
 ### What's the best way to provision the Docker Subscription without SSO?
 
