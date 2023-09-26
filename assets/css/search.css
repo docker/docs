@@ -89,6 +89,7 @@ html.dark {
 .DocSearch-Button-Keys {
   display: flex;
   min-width: calc(40px + 0.8em);
+  margin-top: 3px
 }
 .DocSearch-Button-Key {
   align-items: center;
