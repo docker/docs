@@ -1366,21 +1366,23 @@ Manuals:
       title: Overview
     - path: /scout/quickstart/
       title: Quickstart
-    - path: /scout/image-details-view/
-      title: Image details view
-    - path: /scout/image-analysis/
-      title: Image analysis
-    - path: /scout/dashboard/
-      title: Dashboard
-    - path: /scout/local-fs/
-      title: Analyze local files
-    - path: /scout/advisory-db-sources/
-      title: Advisory database
-    - path: /scout/data-handling/
-      title: Data handling
-    - path: /scout/sbom/
-      title: SBOM
-    - sectiontitle: Policy
+    - sectiontitle: Explore Docker Scout
+      section:
+      - path: /scout/dashboard/
+        title: Dashboard
+      - path: /scout/image-details-view/
+        title: Image details view
+      - path: /scout/image-analysis/
+        title: Image analysis
+      - path: /scout/local-fs/
+        title: Analyze local files
+      - path: /scout/sbom/
+        title: SBOM
+      - path: /scout/advisory-db-sources/
+        title: Advisory database
+      - path: /scout/data-handling/
+        title: Data handling
+    - sectiontitle: Policy Evaluation
       section:
       - path: /scout/policy/
         title: Overview
