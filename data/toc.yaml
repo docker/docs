@@ -1418,6 +1418,8 @@ Manuals:
           path: /scout/integrations/ci/circle-ci/
         - title: Jenkins
           path: /scout/integrations/ci/jenkins/
+    - path: /scout/release-notes/
+      title: Release notes
 
 - sectiontitle: Docker Engine
   section:
