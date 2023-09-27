@@ -56,10 +56,13 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
 
     ```console
     $ docker compose version
-    Docker Compose version vN.N.N
     ```
 
-   Where `vN.N.N` is placeholder text standing in for the latest version.
+    Expected output:
+    ```
+    Docker Compose version vN.N.N
+    ```
+    Where `vN.N.N` is placeholder text standing in for the latest version.
 
 ### Update Compose
 
