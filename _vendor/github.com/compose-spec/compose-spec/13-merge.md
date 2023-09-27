@@ -1,6 +1,6 @@
 ## Merge and override
 
-Compose lets you define a Compose application model through multiple Compose files. 
+Compose lets you define a Compose application model through [multiple Compose files](https://docs.docker.com/compose/multiple-compose-files/). 
 When doing so, Compose follows the rules declared in this section to merge Compose files.
 
 ### Mapping

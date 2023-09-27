@@ -14,7 +14,7 @@ is connected to `front-tier` and `back-tier` networks.
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     networks:
       - front-tier
       - back-tier
@@ -134,7 +134,7 @@ networks:
 
 #### enable_ipv6
 
-`enable_ipv6` enables IPv6 networking. 
+`enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](https://docs.docker.com/config/daemon/ipv6/).
 
 ### external
 
@@ -151,12 +151,12 @@ queries the platform for an existing network simply called `outside` and connect
 
 services:
   proxy:
-    image: awesome/proxy
+    image: example/proxy
     networks:
       - outside
       - default
   app:
-    image: awesome/app
+    image: example/app
     networks:
       - default
 
@@ -181,18 +181,18 @@ networks:
 networks:
   mynet1:
     ipam:
-    driver: default
-    config:
-      - subnet: 172.28.0.0/16
-        ip_range: 172.28.5.0/24
-        gateway: 172.28.5.254
-        aux_addresses:
-          host1: 172.28.1.5
-          host2: 172.28.1.6
-          host3: 172.28.1.7
-    options:
-      foo: bar
-      baz: "0"
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
+          ip_range: 172.28.5.0/24
+          gateway: 172.28.5.254
+          aux_addresses:
+            host1: 172.28.1.5
+            host2: 172.28.1.6
+            host3: 172.28.1.7
+      options:
+        foo: bar
+        baz: "0"
 ```
 
 ### internal
@@ -246,4 +246,3 @@ networks:
     external: true
     name: "${NETWORK_ID}"
 ```
-

@@ -969,6 +969,8 @@ Reference:
       title: Compose Build Specification
     - path: /compose/compose-file/deploy/
       title: Compose Deploy Specification
+    - path: /compose/compose-file/develop/
+      title: Compose Develop Specification 
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
