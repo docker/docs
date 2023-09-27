@@ -42,7 +42,7 @@
 > **SAML** tab in the **Authentication Method** section. For example, if your
 > Entra ID (formerly Azure AD) Open ID Connect (OIDC) setup uses SAML configuration within Azure
 > AD, you must select **SAML**. If you are [configuring Open ID Connect with Entra ID (formerly Azure AD)](https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-openid-settings) select
-> **Entra ID (formerly Azure AD)** as the authentication method. Also, IdP initiated connections
+> **Azure AD (OIDC)** as the authentication method. Also, IdP initiated connections
 > aren't supported at this time.
 { .important}
 
