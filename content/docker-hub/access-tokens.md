@@ -75,6 +75,6 @@ You can rename, activate, deactivate, or delete a token as needed.
 
 ## Auto-generated tokens
 
-When you sign in to Docker Desktop, this generates an access token on your behalf. This access token is used when you complete registry actions using the Docker CLI. The token is scoped to have read, write, and delete access. If your Docker Desktop session expires, the token is automatically removed. You can have up to 5 auto-generated tokens associated with your account. These are deleted and created automatically based on usage and creation dates.
+When you sign in to Docker Desktop, this generates an access token on your behalf. This access token is used when you complete registry actions using the Docker CLI. The token is scoped to have Read, Write, and Delete access. If your Docker Desktop session expires, the token is automatically removed. You can have up to 5 auto-generated tokens associated with your account. These are deleted and created automatically based on usage and creation dates.
 
 You can also delete your auto-generated tokens as needed. See [Modify existing tokens](#modify-existing-tokens).
