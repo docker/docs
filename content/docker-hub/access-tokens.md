@@ -65,10 +65,16 @@ a password.
 You can rename, activate, deactivate, or delete a token as needed.
 
 1. Access your tokens under **Account Settings > Security**.
-   This page shows an overview of all your tokens. You can also view the number
+   This page shows an overview of all your tokens, and lists if the token was generated manually or if it was [auto-generated](#auto-generated-tokens). You can also view the number
    of tokens that are activated and deactivated in the toolbar.
 
-2. Choose a token and then select **Delete** or **Edit**, or use the menu on the far right of a token row to bring up the edit screen. 
+2. Select a token and then select **Delete** or **Edit**, or use the actions menu on the far right of a token row to bring up the edit screen.
    You can also select multiple tokens to delete at once.
 
 3. After modifying the token, select **Save**.
+
+## Auto-generated tokens
+
+When you sign in to Docker Desktop, this generates an access token on your behalf. This access token is used when you complete registry actions using the Docker CLI. The token is scoped to have read, write, and delete access. If your Docker Desktop session expires, the token is automatically removed. You can have up to 5 auto-generated tokens associated with your account. These are deleted and created automatically based on usage and creation dates.
+
+You can also delete your auto-generated tokens as needed. See [Modify existing tokens](#modify-existing-tokens).
