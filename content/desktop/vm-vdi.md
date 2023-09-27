@@ -10,6 +10,11 @@ In general, we recommend running Docker Desktop natively on either Mac, Linux, o
 
 To run Docker Desktop in a virtual desktop environment, it is essential nested virtualization is enabled on the virtual machine that provides the virtual desktop. This is because, under the hood, Docker Desktop is using a Linux VM in which it runs Docker Engine and the containers.
 
+>**Important**
+>
+> Docker doesn't support running Docker Desktop for Mac inside a VM.
+{ .important }
+
 ## Virtual desktop support
 
 >Note
