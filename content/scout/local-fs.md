@@ -6,15 +6,15 @@ keywords: scout, vulnerabilities, analyze, analysis, cli, packages, sbom, cve, s
 
 {{< include "scout-early-access.md" >}}
 
-You can use the `--type fs` flag with Docker Scout CLI commands to analyze your
-local source code directly, without having to build and push container images.
-The `--type fs` flag is supported with the following commands:
+You can use the `fs://` protocol prefix with Docker Scout CLI commands to
+analyze your local source code directly, without having to build and push
+container images. The following commands support the `fs://` prefix:
 
 - `docker scout quickview`
 - `docker scout cves`
 - `docker scout compare`
 
-This feature is available in Docker Scout CLI plugin version 0.24.0 and later.
+This feature is available in Docker Scout CLI plugin version 1.0.3 and later.
 
 ## Summary
 
@@ -22,20 +22,18 @@ To get an at-a-glance vulnerability summary of the source code in the current
 working directory:
 
 ```console
-$ docker scout quickview --type fs .
+$ docker scout quickview fs://.
 ```
-
-![Animated example of the quickstart command](./images/quickstart.gif)
 
 ## Details
 
 To view the details of vulnerabilities found in your local source code, you can
-use the `docker scout cves --details --type fs .` command. Combine it with
+use the `docker scout cves --details fs://.` command. Combine it with
 other flags to narrow down the results to the packages and vulnerabilities that
 you're interested in.
 
 ```console
-$ docker scout cves --details --only-severity high --type fs .
+$ docker scout cves --details --only-severity high fs://.
     ✓ File system read
     ✓ Indexed 323 packages
     ✗ Detected 1 vulnerable package with 1 vulnerability
@@ -82,7 +80,7 @@ example compares local source code for the Docker Scout CLI plugin with the
 `docker/scout-cli:latest` image on Docker Hub.
 
 ```console
-$ docker scout compare --type fs . --to docker/scout-cli:latest --ignore-unchanged
+$ docker scout compare fs://. --to docker/scout-cli:latest --ignore-unchanged
 WARN 'docker scout compare' is experimental and its behaviour might change in the future
     ✓ File system read
     ✓ Indexed 268 packages
