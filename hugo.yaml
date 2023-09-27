@@ -344,4 +344,6 @@ module:
         target: content/compose/compose-file/build.md
       - source: deploy.md
         target: content/compose/compose-file/deploy.md
+      - source: develop.md
+        target: content/compose/compose-file/develop.md
 

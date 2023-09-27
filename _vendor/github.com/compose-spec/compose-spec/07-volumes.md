@@ -12,7 +12,7 @@ The following example shows a two-service setup where a database's data director
 ```yml
 services:
   backend:
-    image: awesome/database
+    image: example/database
     volumes:
       - db-data:/etc/data
 
@@ -71,7 +71,7 @@ called `db-data` and mounts it into the `backend` service's containers.
 ```yml
 services:
   backend:
-    image: awesome/database
+    image: example/database
     volumes:
       - db-data:/etc/data
 
