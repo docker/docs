@@ -8,17 +8,11 @@ aliases:
 - /desktop/windows/release-notes/archive/
 ---
 
-This page contains release notes for older versions of Docker Desktop for Windows.
+This page contains release notes for older versions of Docker Desktop for Windows. 
 
 ## Stable Releases of 2018
 
 ### Docker Community Edition 18.06.1-ce-win73 2018-08-29
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/19507/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.06.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce)
@@ -36,12 +30,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 
 ### Docker Community Edition 18.06.0-ce-win72 2018-07-26
 
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/19098/Docker%20for%20Windows%20Installer.exe)
-
 * New
   - Renewed signing certificate. The installer may show a Windows Defender popup until the renewed certificate is allowlisted. Click "More info" to view the app is published by "Docker Inc" and run it.
 
@@ -49,12 +37,6 @@ This page contains release notes for older versions of Docker Desktop for Window
   - Fix bug in automatic feature enabling if "Hyper-V" and "Containers" Windows features are not enabled already when starting Docker Desktop.
 
 ### Docker Community Edition 18.06.0-ce-win70 2018-07-25
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/19075/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.0-ce)
@@ -79,12 +61,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 
 ### Docker Community Edition 18.03.1-ce-win65 2018-04-30
 
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/17513/Docker%20for%20Windows%20Installer.exe)
-
 * Upgrades
   - [Docker 18.03.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.1-ce)
   - [Docker compose 1.21.1](https://github.com/docker/compose/releases/tag/1.21.1)
@@ -96,12 +72,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 
 ### Docker Community Edition 18.03.1-ce-win64 2018-04-26
 
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/17438/Docker%20for%20Windows%20Installer.exe)
-
 * Upgrades
   - [Docker 18.03.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.1-ce)
   - [Docker compose 1.21.0](https://github.com/docker/compose/releases/tag/1.21.0)
@@ -112,12 +82,6 @@ This page contains release notes for older versions of Docker Desktop for Window
   - Fix startup failure due to incompatibility with other programs (like Razer Synapse 3). Fixes [docker/for-win#1723](https://github.com/docker/for-win/issues/1723)
 
 ### Docker Community Edition 18.03.0-ce-win59 2018-03-26
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/16762/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 18.03.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce)
@@ -149,12 +113,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 
 ### Docker Community Edition 17.12.0-ce-win47 2018-01-12
 
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/15139/Docker%20for%20Windows%20Installer.exe)
-
 * Bug fixes and minor changes
   - Fix linuxkit port-forwarder sometimes not being able to start. Fixes [docker/for-win#1506](https://github.com/docker/for-win/issues/1506)
   - Fix certificate management when connecting to a private registry. Fixes [docker/for-win#1512](https://github.com/docker/for-win/issues/1512)
@@ -162,12 +120,6 @@ This page contains release notes for older versions of Docker Desktop for Window
   - Fix icon displaying edge. Fixes [docker/for-win#1508](https://github.com/docker/for-win/issues/1508)
 
 ### Docker Community Edition 17.12.0-ce-win46 2018-01-09
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/15048/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -191,12 +143,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 
 ### Docker Community Edition 17.09.1-ce-win42 2017-12-11
 
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/14687/Docker%20for%20Windows%20Installer.exe)
-
 * Upgrades
   - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
   - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
@@ -212,22 +158,10 @@ This page contains release notes for older versions of Docker Desktop for Window
 
 ### Docker Community Edition 17.09.0-ce-win33 2017-10-06
 
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/13620/Docker%20for%20Windows%20Installer.exe)
-
 * Bug fixes
   - Fix Docker For Windows unable to start in some cases: removed use of libgmp sometimes causing the vpnkit process to die.
 
 ### Docker Community Edition 17.09.0-ce-win32 2017-10-02
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/13529/Docker%20for%20Windows%20Installer.exe)
 
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
@@ -266,23 +200,11 @@ This page contains release notes for older versions of Docker Desktop for Window
 
 ### Docker Community Edition 17.06.2-ce-win27 2017-09-06
 
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/13194/Docker%20for%20Windows%20Installer.exe)
-
 * Upgrades
   - [Docker 17.06.2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce)
   - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
 
 ### Docker Community Edition 17.06.1-ce-rc1-win24 2017-08-24
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/13025/Docker%20for%20Windows%20Installer.exe)
 
 **Upgrades**
 
@@ -296,12 +218,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 - Avoid expanding variables in PATH env variable (Fixes [docker/for-win#859](https://github.com/docker/for-win/issues/859))
 
 ### Docker Community Edition 17.06.0-ce-win18 2017-06-28
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/12627/Docker%20for%20Windows%20Installer.exe)
 
 **Upgrades**
 
@@ -341,23 +257,11 @@ This page contains release notes for older versions of Docker Desktop for Window
 
 ### Docker Community Edition 17.03.1-ce-win12  2017-05-12
 
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/12058/Docker%20for%20Windows%20Installer.exe)
-
 **Upgrades**
 
 - Security fix for CVE-2017-7308
 
 ### Docker Community Edition 17.03.0, 2017-03-02
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/10743/Docker%20for%20Windows%20Installer.exe)
 
 **New**
 
@@ -392,14 +296,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 
 ### Docker for Windows 1.13.1, 2017-02-09
 
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/1.13.1.10072/InstallDocker.msi)
-
-**Upgrades**
-
 - [Docker 1.13.1](https://github.com/docker/docker/releases/tag/v1.13.1)
 - [Docker Compose 1.11.1](https://github.com/docker/compose/releases/tag/1.11.1)
 - Linux kernel 4.9.8
@@ -412,15 +308,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 - Fix in Hyper-V VM setup (should fix `ObjectNotFound` errors)
 
 ### Docker for Windows 1.13.0, 2017-01-19
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/1.13.0.9795/InstallDocker.msi)
-
-**Upgrades**
-
 - [Docker 1.13.0](https://github.com/docker/docker/releases/tag/v1.13.0)
 - [Docker Compose 1.10](https://github.com/docker/compose/releases/tag/1.10.0)
 - [Docker Machine 0.9.0](https://github.com/docker/machine/releases/tag/v0.9.0)
@@ -459,15 +346,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 ## Stable Releases of 2016
 
 ### Docker for Windows 1.12.5, 2016-12-20
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/1.12.5.9503/InstallDocker.msi)
-
-**Upgrades**
-
 - Docker 1.12.5
 - Docker Compose 1.9.0
 
@@ -476,12 +354,6 @@ This page contains release notes for older versions of Docker Desktop for Window
 We did not distribute a 1.12.4 stable release
 
 ### Docker for Windows 1.12.3, 2016-11-09
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/1.12.3.8488/InstallDocker.msi)
 
 **New**
 
@@ -563,20 +435,6 @@ We did not distribute a 1.12.4 stable release
 - Increase default ulimit for memlock (fixes [https://github.com/docker/for-mac/issues/801](https://github.com/docker/for-mac/issues/801))
 
 ### Docker for Windows 1.12.1, 2016-09-16
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/1.12.1.7135/InstallDocker.msi)
-
->**Important Note**:
->
-> The auto-update function in Beta 21 cannot install this update. To install the latest beta manually if you are still on Beta 21, download the installer here:
-
-> [https://download.docker.com/win/beta/InstallDocker.msi](https://download.docker.com/win/beta/InstallDocker.msi)
-
-> This problem is fixed as of Beta 23 for subsequent auto-updates.
 
 **New**
 
@@ -662,14 +520,8 @@ We did not distribute a 1.12.4 stable release
 * Docker automatically disables lingering net adapters. The only way to remove them is manually using `devmgmt.msc`.
 
 ### Docker for Windows 1.12.0, 2016-07-28
-
-> Download Docker Desktop
->
-> 
->
-> [For Windows](https://download.docker.com/win/stable/1.12.0.5968/InstallDocker.msi)
-
-* First stable release
+ 
+- First stable release
 
 **Components**
 
