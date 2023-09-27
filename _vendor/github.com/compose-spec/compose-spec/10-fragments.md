@@ -47,7 +47,7 @@ to avoid repetition but overrides `name` attribute:
 
 services:
   backend:
-    image: awesome/database
+    image: example/database
     volumes:
       - db-data
       - metrics

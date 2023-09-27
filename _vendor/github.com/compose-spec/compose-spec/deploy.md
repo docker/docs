@@ -24,7 +24,7 @@ are platform specific but the Compose Deploy Specification defines two canonical
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     ports:
       - "8080:80"
     deploy:
@@ -41,7 +41,7 @@ This assumes the platform has some native concept of "service" that can match th
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     deploy:
       labels:
         com.example.description: "This label will appear on the web service"
@@ -54,7 +54,7 @@ services:
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     deploy:
       mode: global
 ```
@@ -109,7 +109,7 @@ running at any given time.
 ```yml
 services:
   fronted:
-    image: awesome/webapp
+    image: example/webapp
     deploy:
       mode: replicated
       replicas: 6
@@ -126,7 +126,7 @@ as:
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     deploy:
       resources:
         limits:
