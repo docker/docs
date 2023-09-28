@@ -12,11 +12,11 @@ subscription](../subscription/details.md) and they can circumvent [Docker’s
 security features](../desktop/hardened-desktop/_index.md) for your organization.
 
 To ensure members of your organization always sign in, you can deploy a
-**`registry.json`** configuration file to the machines of your users.
+`registry.json` configuration file to the machines of your users.
 
 ## How is sign-in enforced?
 
-When Docker Desktop starts and it detects a **`registry.json`** file, the
+When Docker Desktop starts and it detects a `registry.json` file, the
 following occurs:
 
 - The following **Sign in required!** prompt appears requiring the user to sign
@@ -43,7 +43,7 @@ following occurs:
 1. Ensure that the user is a member of your organization in Docker. For more
 details, see [Manage members](https://docs.docker.com/docker-hub/members/).
 
-2. Create the registry.json file.
+2. Create the `registry.json` file.
 
     Based on the user's operating system, create a file named `registry.json` at the following location and make sure the file can't be edited by the user.
 
@@ -53,9 +53,9 @@ details, see [Manage members](https://docs.docker.com/docker-hub/members/).
     | Mac | /Library/Application Support/com.docker.docker/registry.json |
     | Linux | /usr/share/docker-desktop/registry/registry.json |
 
-3. Specify your organization in the registry.json file.
+3. Specify your organization in the `registry.json` file.
 
-    Open the registry.json file in a text editor and add the following contents, where **myorg** is replaced with your organization’s name. The file contents are case-sensitive and you must use lowercase letters for your organization's name.
+    Open the `registry.json` file in a text editor and add the following contents, where `myorg`` is replaced with your organization’s name. The file contents are case-sensitive and you must use lowercase letters for your organization's name.
 
 
     ```json
@@ -71,7 +71,7 @@ details, see [Manage members](https://docs.docker.com/docker-hub/members/).
 
 ## Alternative methods to create a registry.json file
 
-You can also use the following alternative methods to create a `registry.json`` file.
+You can also use the following alternative methods to create a `registry.json` file.
 
 ### Download a registry.json file from Docker Hub
 
@@ -79,7 +79,7 @@ In Docker Hub, you can download the `registry.json` file for your organization
 or copy the specific commands to create the file for your organization. To
 download the file or copy the commands, use the following steps.
 
-1. Log in to [Docker Hub](http://hub.docker.com/) as an organization owner.
+1. Sign in to [Docker Hub](http://hub.docker.com/) as an organization owner.
 
 2. Go to **Organizations** > ***Your Organization*** > **Settings**.
 
@@ -88,7 +88,7 @@ download the file or copy the commands, use the following steps.
 
 ### Create a registry.json file when installing Docker Desktop
 
-To create a registry.json file when installing Docker Desktop, use the following instructions based on your user's operating system.
+To create a `registry.json` file when installing Docker Desktop, use the following instructions based on your user's operating system.
 
 {{< tabs >}}
 {{< tab name="Windows" >}}
@@ -114,7 +114,7 @@ C:\Users\Admin> "Docker Desktop Installer.exe" install --allowed-org=myorg
 {{< /tab >}}
 {{< tab name="Mac" >}}
 
-To automatically create a registry.json file when installing Docker Desktop,
+To automatically create a `registry.json` file when installing Docker Desktop,
 download `Docker.dmg` and run the following commands in a terminal from the
 directory containing `Docker.dmg`. Replace `myorg` with your organization's name
 and you must use lowercase letters for your organization's name.
@@ -130,7 +130,7 @@ $ sudo hdiutil detach /Volumes/Docker
 
 ### Create a registry.json file using the command line
 
-To create a registry.json using the command line, use the following instructions based on your user's operating system.
+To create a `registry.json` using the command line, use the following instructions based on your user's operating system.
 
 {{< tabs >}}
 {{< tab name="Windows" >}}
@@ -164,8 +164,10 @@ registry.json BUILTIN\Administrators NT AUTHORITY\SYSTEM Allow  FullControl...
 {{< /tab >}}
 {{< tab name="Mac" >}}
 
-To manually create a `registry.json` file, run the following commands in a terminal
-and replace `myorg` with your organization's name. The file contents are case-sensitive and you must use lowercase letters for your organization's name.
+To manually create a `registry.json` file, run the following commands in a
+terminal and replace `myorg` with your organization's name. The file contents
+are case-sensitive and you must use lowercase letters for your organization's
+name.
 
 ```console
 $ sudo mkdir -p "/Library/Application Support/com.docker.docker"
@@ -230,4 +232,4 @@ $ sudo ls -l /usr/share/docker-desktop/registry/registry.json
 
 ## Deploy registry.json to multiple devices
 
-The previous instructions explain how to create and deploy a registry.json file to a single device. To automatically deploy the registry.json to multiple devices, you must use a third-party solution, such as a mobile device management solution. You can use the previous instructions along with your third-party solution to remotely deploy the registry.json file, or remotely install Docker Desktop with the registry.json file. For more details, see the documentation of your third-party solution.
+The previous instructions explain how to create and deploy a `registry.json` file to a single device. To automatically deploy the `registry.json` to multiple devices, you must use a third-party solution, such as a mobile device management solution. You can use the previous instructions along with your third-party solution to remotely deploy the `registry.json` file, or remotely install Docker Desktop with the `registry.json` file. For more details, see the documentation of your third-party solution.
