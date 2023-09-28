@@ -112,8 +112,8 @@ orchestrator creates a task and the scheduler assigns the task to the new node.
 Good candidates for global services are monitoring agents, anti-virus scanners
 or other types of containers that you want to run on every node in the swarm.
 
-The diagram below shows a three-service replica in yellow and a global service
-in gray.
+The diagram below shows a three-service replica in gray and a global service
+in black.
 
 ![Global vs replicated services](../images/replicated-vs-global.png)
 
