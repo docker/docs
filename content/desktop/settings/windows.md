@@ -51,7 +51,7 @@ On the **General** tab, you can configure when to start Docker and specify other
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
-- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively. 
+- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
 
 ## Resources
 
@@ -70,7 +70,7 @@ containers.
 > mode, you can configure limits on the memory, CPU, and swap size allocated
 > to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
 
-On the **Advanced** tab, you can limit resources available to Docker.
+On the **Advanced** tab, you can limit resources available to the Docker Linux VM.
 
 Advanced settings are:
 
@@ -87,7 +87,29 @@ Advanced settings are:
 
 - **Disk image location**. Specify the location of the Linux volume where containers and images are stored.
 
-You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it.
+  You can also move the disk image to a different location. If you attempt to
+  move a disk image to a location that already has one, you are asked if you
+  want to use the existing image or replace it.
+
+>**Tip**
+>
+> If you feel Docker Desktop starting to get slow or you're running
+> multi-container workloads, increase the memory and disk image space allocation
+{ .tip }
+
+- **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
+  which significantly reduces CPU and memory utilization on the host by
+  automatically turning off the Linux VM when Docker Desktop is idle (i.e., no
+  containers are running).
+
+  You can also configure the Resource Saver timeout which indicates how long
+  should Docker Desktop be idle before Resource Saver mode kicks in. Default is
+  5 minutes.
+
+  >**Note**
+  >
+  > Exit from Resource Saver mode occurs automatically when containers run. Exit
+  > may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
 
 ### File sharing
 
@@ -229,7 +251,7 @@ You can find this file at `$HOME/.docker/daemon.json`. To change the configurati
 edit the JSON configuration directly from the dashboard in Docker Desktop, or open and
 edit the file using your favorite text editor.
 
-To see the full list of possible configuration options, see the 
+To see the full list of possible configuration options, see the
 [dockerd command reference](/engine/reference/commandline/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -284,7 +306,7 @@ Use the **Extensions** tab to:
 
 For more information about Docker extensions, see [Extensions](../extensions/index.md).
 
-## Feature control 
+## Feature control
 
 On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
 

@@ -71,7 +71,7 @@ network, and other resources.
 
 ### Advanced
 
-On the **Advanced** tab, you can limit resources available to Docker.
+On the **Advanced** tab, you can limit resources available to the Docker Linux VM.
 
 Advanced settings are:
 
@@ -88,12 +88,30 @@ Advanced settings are:
 
 - **Disk image location**. Specify the location of the Linux volume where containers and images are stored.
 
-You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it.
+  You can also move the disk image to a different location. If you attempt to
+  move a disk image to a location that already has one, you are asked if you
+  want to use the existing image or replace it.
 
 >**Tip**
 >
-> If you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
+> If you feel Docker Desktop starting to get slow or you're running
+> multi-container workloads, increase the memory and disk image space allocation
 { .tip }
+
+- **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
+  which significantly reduces CPU and memory utilization on the host by
+  automatically turning off the Linux VM when Docker Desktop is idle (i.e., no
+  containers are running).
+
+  You can also configure the Resource Saver timeout which indicates how long
+  should Docker Desktop be idle before Resource Saver mode kicks in. Default is
+  5 minutes.
+
+  >**Note**
+  >
+  > Exit from Resource Saver mode occurs automatically when containers run. Exit
+  > may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
+
 
 ### File sharing
 
