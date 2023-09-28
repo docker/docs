@@ -11,7 +11,7 @@
   {{ end }}
   {{ .Scratch.Set "headings" slice }}
   {{ .Scratch.Set "subheadings" slice }}
-  {{ partial "breadcrumbs-legacy.html" . }}
+  {{ partial "breadcrumbs.html" . }}
   <article class="prose max-w-none dark:prose-invert">
     <h1>{{ .Title }}</h1>
     {{ $data.short | .RenderString (dict "display" "block") }}
