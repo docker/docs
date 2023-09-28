@@ -49,9 +49,9 @@ You can also configure attributes to override default values, such as default te
 | Email address    | `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn"`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"`, `email`                           |
 | Full name        | `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"`, `name`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"`  |
 | Groups (optional) | `"http://schemas.xmlsoap.org/claims/Group"`, `"http://schemas.microsoft.com/ws/2008/06/identity/claims/groups"`, `Groups`, `groups` |
-| Docker Org        | `dockerOrg`   |
-| Docker Team       | `dockerTeam`  |
-| Docker Role       | `dockerRole`  |
+| Docker Org (optional)        | `dockerOrg`   |
+| Docker Team (optional)     | `dockerTeam`  |
+| Docker Role (optional)      | `dockerRole`  |
 
 > **Important**
 >
