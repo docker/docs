@@ -6,7 +6,7 @@ title: Identity providers
 
 ### Is it possible to use more than one IdP with Docker SSO?
 
-No. You can only configure Docker SSO to work with a single IdP. A domain can only be associated with a single IdP. Docker supports Azure AD and identity providers that support SAML 2.0.
+No. You can only configure Docker SSO to work with a single IdP. A domain can only be associated with a single IdP. Docker supports Entra ID (formerly Azure AD) and identity providers that support SAML 2.0.
 
 ### Is it possible to change my identity provider after configuring SSO?
 
@@ -18,7 +18,7 @@ To enable SSO in Docker, you need the following from your IdP:
 
 * **SAML**: Entity ID, ACS URL, Single Logout URL and the public X.509 certificate
 
-* **Azure AD**: Client ID, Client Secret, AD Domain.
+* **Entra ID (formerly Azure AD)**: Client ID, Client Secret, AD Domain.
 
 ### What happens if my existing certificate expires?
 
@@ -48,10 +48,10 @@ We currently do not have any plans to enable IdP initiated logins.
 
 Yes, bot accounts needs a seat, similar to a regular end user, having a non-aliased domain email enabled in the IdP and using a seat in Hub.
 
-### Is it possible to connect Docker Hub directly with a Microsoft Azure Active Directory (AD) Group?
+### Is it possible to connect Docker Hub directly with a Microsoft Entra (formerly Azure AD) group?
 
-Yes, Azure AD is supported with SSO for Docker Business, both through a direct integration and through SAML.
+Yes, Entra ID (formerly Azure AD) is supported with SSO for Docker Business, both through a direct integration and through SAML.
 
-### My SSO connection with Azure AD isn't working and I receive an error that the application is misconfigured. How can I troubleshoot this?
+### My SSO connection with Entra ID (formerly Azure AD) isn't working and I receive an error that the application is misconfigured. How can I troubleshoot this?
 
-Confirm that you've configured the necessary API permissions in Azure AD for your SSO connection. You need to grant admin consent within your Azure AD tenant. See [Azure AD documentation](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal#grant-admin-consent-in-app-registrations).
+Confirm that you've configured the necessary API permissions in Entra ID (formerly Azure AD) for your SSO connection. You need to grant admin consent within your Entra ID (formerly Azure AD) tenant. See [Entra ID (formerly Azure AD) documentation](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal#grant-admin-consent-in-app-registrations).

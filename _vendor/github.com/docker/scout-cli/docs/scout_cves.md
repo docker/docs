@@ -9,31 +9,30 @@ Display CVEs identified in a software artifact
 
 ### Options
 
-| Name                   | Type          | Default    | Description                                                                                                                                                                                                                                                   |
-|:-----------------------|:--------------|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--details`            |               |            | Print details on default text output                                                                                                                                                                                                                          |
-| `--env`                | `string`      |            | Name of environment                                                                                                                                                                                                                                           |
-| `-e`, `--exit-code`    |               |            | Return exit code '2' if vulnerabilities are detected                                                                                                                                                                                                          |
-| `--format`             | `string`      | `packages` | Output format of the generated vulnerability report:<br>- packages: default output, plain text with vulnerabilities grouped by packages<br>- sarif: json Sarif output<br>- markdown: markdown output (including some html tags like collapsible sections)<br> |
-| `--ignore-base`        |               |            | Filter out CVEs introduced from base image                                                                                                                                                                                                                    |
-| `--locations`          |               |            | Print package locations including file paths and layer diff_id                                                                                                                                                                                                |
-| `--multi-stage`        |               |            | Show packages from multi-stage Docker builds                                                                                                                                                                                                                  |
-| `--only-cve-id`        | `stringSlice` |            | Comma separated list of CVE ids (like CVE-2021-45105) to search for                                                                                                                                                                                           |
-| `--only-fixed`         |               |            | Filter to fixable CVEs                                                                                                                                                                                                                                        |
-| `--only-package`       | `stringSlice` |            | Comma separated regular expressions to filter packages by                                                                                                                                                                                                     |
-| `--only-package-type`  | `stringSlice` |            | Comma separated list of package types (like apk, deb, rpm, npm, pypi, golang, etc)                                                                                                                                                                            |
-| `--only-severity`      | `stringSlice` |            | Comma separated list of severities (critical, high, medium, low, unspecified) to filter CVEs by                                                                                                                                                               |
-| `--only-stage`         | `stringSlice` |            | Comma separated list of multi-stage Docker build stage names                                                                                                                                                                                                  |
-| `--only-unfixed`       |               |            | Filter to unfixed CVEs                                                                                                                                                                                                                                        |
-| `--only-vuln-packages` |               |            | When used with --format=only-packages ignore packages with no vulnerabilities                                                                                                                                                                                 |
-| `--org`                | `string`      |            | Namespace of the Docker organization                                                                                                                                                                                                                          |
-| `-o`, `--output`       | `string`      |            | Write the report to a file.                                                                                                                                                                                                                                   |
-| `--platform`           | `string`      |            | Platform of image to analyze                                                                                                                                                                                                                                  |
-| `--ref`                | `string`      |            | Reference to use if the provided tarball contains multiple references.<br>Can only be used with --type archive.                                                                                                                                               |
-| `--type`               | `string`      | `image`    | Type of the image to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>- fs (directory or file)<br>                                                                                                                       |
-| `--vex`                |               |            | Apply VEX statements to filter CVEs                                                                                                                                                                                                                           |
-| `--vex-author`         | `stringSlice` |            | List of VEX statement authors to accept                                                                                                                                                                                                                       |
-| `--vex-location`       | `stringSlice` |            | File location of directory or file containing VEX statements                                                                                                                                                                                                  |
+| Name                   | Type          | Default    | Description                                                                                                                                                                                                                                                                                |
+|:-----------------------|:--------------|:-----------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--details`            |               |            | Print details on default text output                                                                                                                                                                                                                                                       |
+| `--env`                | `string`      |            | Name of environment                                                                                                                                                                                                                                                                        |
+| `-e`, `--exit-code`    |               |            | Return exit code '2' if vulnerabilities are detected                                                                                                                                                                                                                                       |
+| `--format`             | `string`      | `packages` | Output format of the generated vulnerability report:<br>- packages: default output, plain text with vulnerabilities grouped by packages<br>- sarif: json Sarif output<br>- spdx: json SPDX output <br>- markdown: markdown output (including some html tags like collapsible sections)<br> |
+| `--ignore-base`        |               |            | Filter out CVEs introduced from base image                                                                                                                                                                                                                                                 |
+| `--locations`          |               |            | Print package locations including file paths and layer diff_id                                                                                                                                                                                                                             |
+| `--multi-stage`        |               |            | Show packages from multi-stage Docker builds                                                                                                                                                                                                                                               |
+| `--only-cve-id`        | `stringSlice` |            | Comma separated list of CVE ids (like CVE-2021-45105) to search for                                                                                                                                                                                                                        |
+| `--only-fixed`         |               |            | Filter to fixable CVEs                                                                                                                                                                                                                                                                     |
+| `--only-package`       | `stringSlice` |            | Comma separated regular expressions to filter packages by                                                                                                                                                                                                                                  |
+| `--only-package-type`  | `stringSlice` |            | Comma separated list of package types (like apk, deb, rpm, npm, pypi, golang, etc)                                                                                                                                                                                                         |
+| `--only-severity`      | `stringSlice` |            | Comma separated list of severities (critical, high, medium, low, unspecified) to filter CVEs by                                                                                                                                                                                            |
+| `--only-stage`         | `stringSlice` |            | Comma separated list of multi-stage Docker build stage names                                                                                                                                                                                                                               |
+| `--only-unfixed`       |               |            | Filter to unfixed CVEs                                                                                                                                                                                                                                                                     |
+| `--only-vuln-packages` |               |            | When used with --format=only-packages ignore packages with no vulnerabilities                                                                                                                                                                                                              |
+| `--org`                | `string`      |            | Namespace of the Docker organization                                                                                                                                                                                                                                                       |
+| `-o`, `--output`       | `string`      |            | Write the report to a file.                                                                                                                                                                                                                                                                |
+| `--platform`           | `string`      |            | Platform of image to analyze                                                                                                                                                                                                                                                               |
+| `--ref`                | `string`      |            | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive.                                                                                                                                                                                   |
+| `--vex`                |               |            | Apply VEX statements to filter CVEs                                                                                                                                                                                                                                                        |
+| `--vex-author`         | `stringSlice` |            | List of VEX statement authors to accept                                                                                                                                                                                                                                                    |
+| `--vex-location`       | `stringSlice` |            | File location of directory or file containing VEX statements                                                                                                                                                                                                                               |
 
 
 <!---MARKER_GEN_END-->
@@ -49,6 +48,7 @@ The following artifact types are supported:
 - Images
 - OCI layout directories
 - Tarball archives, as created by `docker save`
+- Local directory or file
 
 The tool analyzes the provided software artifact, and generates a vulnerability report.
 
@@ -58,7 +58,15 @@ By default, the tool expects an image reference, such as:
 - `curlimages/curl:7.87.0`
 - `mcr.microsoft.com/dotnet/runtime:7.0`
 
-If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` flag.
+If the artifact you want to analyze is an OCI directory, a tarball archive, a local file or directory,
+or if you want to control from where the image will be resolved, you must prefix the reference with one of the following:
+
+- `image://` (default) use a local image, or fall back to a registry lookup
+- `local://` use an image from the local image store (don't do a registry lookup)
+- `registry://` use an image from a registry (don't use a local image)
+- `oci-dir://` use an OCI layout directory
+- `archive://` use a tarball archive, as created by docker save
+- `fs://` use a local directory or file
 
 ## Examples
 
@@ -77,7 +85,7 @@ Analyzing image alpine
 ```console
 $ docker save alpine > alpine.tar
 
-$ docker scout cves --type archive alpine.tar
+$ docker scout cves archive://alpine.tar
 Analyzing archive alpine.tar
     ✓ Archive read
     ✓ SBOM of image already cached, 18 packages indexed
@@ -89,12 +97,18 @@ Analyzing archive alpine.tar
 ```console
 $ skopeo copy --override-os linux docker://alpine oci:alpine
 
-$ docker scout cves --type oci-dir alpine
+$ docker scout cves oci-dir://alpine
 Analyzing OCI directory alpine
     ✓ OCI directory read
     ✓ Image stored for indexing
     ✓ Indexed 19 packages
     ✓ No vulnerable package detected
+```
+
+### Display vulnerabilities from the current directory
+
+```console
+$ docker scout cves fs://.
 ```
 
 ### Export vulnerabilities to a SARIF JSON file

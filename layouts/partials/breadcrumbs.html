@@ -2,12 +2,8 @@
 {{ $ctx := . }}
 
 
-<nav class="py-2 gap-2 flex items-center overflow-hidden">
-  <a class="link" href="{{ site.BaseURL }}"
-    ><span class="material-symbols-rounded">home</span></a
-  >
+<nav class="py-4 gap-4 flex items-center overflow-hidden text-gray-light dark:text-gray-dark">
   {{ with ($scratch.GetSortedMapValues "sections") }}
-    <span>/</span>
     {{ range $i, $e := . }}
       {{- if $i -}}
         <span>/</span>
@@ -17,6 +13,6 @@
   {{- end -}}
   {{- with $scratch.Get "lastsection" -}}
   <span>/</span>
-  <a href="{{ .path }}" class="link whitespace-nowrap">{{ markdownify .title }}</a>
+  <span>{{ markdownify .title }}</span>
   {{- end -}}
 </nav>

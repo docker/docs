@@ -29,7 +29,7 @@ with established best practices.
 ## How it works
 
 When you activate Docker Scout for a repository, images that you push are
-[automatically analyzed](./image-analysis.md). The analysis gives you insights
+[automatically analyzed](../image-analysis.md). The analysis gives you insights
 about the composition of your images, including what packages they contain and
 what vulnerabilities they're exposed to. Policy Evaluation builds on top of the
 image analysis feature, interpreting the analysis results against the rules
@@ -97,69 +97,3 @@ under a GPL3+ [copyleft](https://en.wikipedia.org/wiki/Copyleft) license.
 
 This policy is unfulfilled if your artifacts contain one or more packages with
 a violating license.
-
-## View policy status
-
-The **Overview** tab of the [Docker Scout Dashboard](https://scout.docker.com/)
-displays a summary of recent changes in policy for your repositories.
-This summary shows images that have seen the most change in their policy
-evaluation between the most recent image and the previous image.
-
-![Policy overview](./images/policy-overview.webp)
-
-### Policy status per repository
-
-The **Images** tab shows the current policy status, and recent policy trend,
-for all images in the selected environment. The **Policy status** column in the
-list shows:
-
-- Number of fulfilled policies versus the total number of policies
-- Recent policy trends
-
-![Policy status in the image list](./images/policy-image-list.webp)
-
-The policy trend, denoted by the directional arrows, indicates whether an image
-is better, worse, or unchanged in terms of policy, compared to the previous
-image in the same environment.
-
-- The green arrow pointing upwards shows the number of policies that got better
-  in the latest pushed image.
-- The red arrow pointing downwards shows the number of policies that got worse
-  in the latest pushed image.
-- The bidirectional gray arrow shows the number of policies that were unchanged
-  in the latest version of this image.
-
-If you select a repository, you can open the **Policy** tab for a detailed
-description of the policy delta for the most recently analyzed image and its
-predecessor.
-
-### Detailed evaluation results
-
-To view the full results of an evaluation of an image, select the image in
-the Docker Scout Dashboard and open the **Policy** tab. This shows a
-breakdown for all policy violations for the current image.
-
-![Detailed Policy Evaluation results](./images/policy-detailed-results.webp)
-
-## Remediate policy violations
-
-To remediate issues in your artifacts that cause policy violations, you can use
-the tag view in the Docker Scout Dashboard.
-
-1. Go to the **Images** view in the Docker Scout Dashboard.
-2. In the list of repositories, select the image that you want to improve.
-3. Select an image.
-4. Open the **Policy** tab.
-
-The **Policy** tab shows you all of the policy violations for the current
-image. Expand the policy menus to learn which packages in the image are
-causing the evaluation to fail.
-
-For vulnerability-related policies, if a package has an available fix version
-that removes the vulnerability, that fix version is displayed in the policy
-list. To remediate the issue, upgrade the package version to the fix version.
-
-For licensing-related policies, the list shows all packages whose license
-doesn't meet the policy criteria. To fix the issue, look for an alternative
-package distributed under a more appropriate license, or cut the dependency by
-reimplementing the functionality in your own code.

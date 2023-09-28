@@ -418,6 +418,10 @@ Compose guarantees dependency services marked with
 
 `deploy` specifies the configuration for the deployment and lifecycle of services, as defined [in the Compose Deploy Specification](deploy.md).
 
+### develop
+
+`develop` specifies the development configuration for maintaining a container in sync with source, as defined in the [Development Section](develop.md).
+
 ### device_cgroup_rules
 
 `device_cgroup_rules` defines a list of device cgroup rules for this container.
@@ -1138,18 +1142,18 @@ is able to reach same `backend` service at `backend` or `mysql` on the `admin` n
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     networks:
       - front-tier
       - back-tier
 
   monitoring:
-    image: awesome/monitoring
+    image: example/monitoring
     networks:
       - admin
 
   backend:
-    image: awesome/backend
+    image: example/backend
     networks:
       back-tier:
         aliases:
@@ -1174,7 +1178,7 @@ The corresponding network configuration in the [top-level networks section](06-n
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     networks:
       front-tier:
         ipv4_address: 172.16.238.10
@@ -1492,7 +1496,7 @@ to the contents of the file `./server.cert`.
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     secrets:
       - server-certificate
 secrets:
@@ -1525,7 +1529,7 @@ the secret's lifecycle is not directly managed by Compose.
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     secrets:
       - source: server-certificate
         target: server.cert
@@ -1667,7 +1671,7 @@ and a bind mount defined for a single service.
 ```yml
 services:
   backend:
-    image: awesome/backend
+    image: example/backend
     volumes:
       - type: volume
         source: db-data

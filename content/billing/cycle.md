@@ -4,6 +4,11 @@ description: Learn to change your billing cycle for your Docker subscription
 keywords: billing, cycle, payments, subscription
 ---
 
+> **Early access features**
+>
+> Some users who subscribed to Docker Pro after September 25, 2023 may have a different user interface experience. These users can't change their billing cycle from monthly to annual.
+{ .restricted }
+
 You can pay for a Pro or Team subscription on a monthly or yearly billing cycle.
 
 If you have a monthly billing cycle, you can choose to switch to an annual billing cycle. Note that it's not possible to switch from an annual billing cycle to monthly.

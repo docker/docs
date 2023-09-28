@@ -1,8 +1,10 @@
 command: docker scout repo list
-short: Repo Docker Scout
-long: |
+short: List Docker Scout repositories
+long: |-
     The docker scout repo list command shows all repositories in an organization.
-usage: docker scout repo list ORG
+
+    If ORG is not provided the default configured organization will be used.
+usage: docker scout repo list
 pname: docker scout repo
 plink: docker_scout_repo.yaml
 options:
@@ -29,6 +31,27 @@ options:
       value_type: bool
       default_value: "false"
       description: Filter to enabled repositories only
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-registry
+      value_type: string
+      description: |-
+        Filter to a specific registry only:
+        - hub.docker.com
+        - ecr (AWS ECR)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: org
+      value_type: string
+      description: Namespace of the Docker organization
       deprecated: false
       hidden: false
       experimental: false

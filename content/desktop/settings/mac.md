@@ -113,6 +113,7 @@ Advanced settings are:
   > Exit from Resource Saver mode occurs automatically when containers run. Exit
   > may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
 
+
 ### File sharing
 
 Use File sharing to allow local directories on your machine to be shared with
