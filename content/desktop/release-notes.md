@@ -32,8 +32,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### New
 
-- New Notification Center available to all users.
-- Resource Saver available to all users. This feature can be configured from the **Resources** tab in **Settings**. For more information see [Docker Desktop's Resource Saver mode](resource-saver.md)
+- New Notification center available to all users.
+- Compose File Watch available to all users. For more information, see [Use Compose Watch](../compose/file-watch.md).
+- Resource Saver available to all users. This feature can be configured from the **Resources** tab in **Settings**. For more information see [Docker Desktop's Resource Saver mode](use-desktop/resource-saver.md).
+- You can now view and manage the Docker Engine state, with pause, stop, and resume, directly from the Docker Dashboard.
 
 ### Upgrades
 
@@ -52,7 +54,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Docker Init:
   - Fixed an issue formatting Dockerfile file paths for ASP.NET projects on Windows.
   - Improved performance on language detection for large directories with lots of files.
-- Added a timeout to polling for resource usage stats used by the Containers dashboard. Fixes [docker/for-mac#6962](https://github.com/docker/for-mac/issues/6962).
+- Added a timeout to polling for resource usage stats used by the **Containers** view. Fixes [docker/for-mac#6962](https://github.com/docker/for-mac/issues/6962).
 - containerd integration:
   - Implemented push/pull/save image events.
   - Implemented pulling legacy schema1 images.
@@ -66,9 +68,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
   - Fixed `docker images` (without `--all`) showing intermediate layers (created by the legacy classic builder).
   - Fixed `docker diff` containing extra differences.
   - Changed `docker pull` output to match the output with containerd integration disabled.
-- You can now view and manage the Docker Engine state from the dashboard.
 - Fixed a grammatical error in Kubernetes status message. See [docker/for-mac#6971](https://github.com/docker/for-mac/issues/6971).
-- Docker containers use all host CPU cores by default.
+- Docker containers now use all host CPU cores by default.
 - Improved inter-process security in dashboard UI.
 
 #### For Mac
