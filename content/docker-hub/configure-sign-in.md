@@ -164,7 +164,7 @@ registry.json BUILTIN\Administrators NT AUTHORITY\SYSTEM Allow  FullControl...
 {{< /tab >}}
 {{< tab name="Mac" >}}
 
-To manually create a `registry.json` file, run the following commands in a
+To use the CLI to create a `registry.json` file, run the following commands in a
 terminal and replace `myorg` with your organization's name. The file contents
 are case-sensitive and you must use lowercase letters for your organization's
 name.
