@@ -55,9 +55,8 @@ loads it through a binary registered in the `binfmt_misc` handler.
 
 > **Note**
 >
-> QEMU performs full-system emulation of non-native platforms, which is much
-> slower than native builds. Compute-heavy tasks like compilation and
-> compression or decompression likely results in a large performance hit.
+> Emulation with QEMU can be much slower than native builds, especially for
+> compute-heavy tasks like compilation and compression or decompression.
 >
 > Use [cross-compilation](#cross-compilation) instead, if possible.
 

@@ -135,11 +135,10 @@ $ docker buildx build \
   --push .
 ```
 
-> **Warning**
+> **Note**
 >
-> QEMU performs full-system emulation of non-native platforms, which is much
-> slower than native builds. Compute-heavy tasks like compilation and
-> compression/decompression will likely take a large performance hit.
+> Emulation with QEMU can be much slower than native builds, especially for
+> compute-heavy tasks like compilation and compression or decompression.
 
 ## Custom network
 
