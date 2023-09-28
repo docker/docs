@@ -75,17 +75,16 @@ On the **Advanced** tab, you can limit resources available to Docker.
 
 Advanced settings are:
 
-- **CPUs**. By default, Docker Desktop is set to use half the number of processors
-  available on the host machine. To increase processing power, set this to a
-  higher number; to decrease, lower the number.
+- **CPU limit**. Specify the maximum number of CPUs to be used by Docker Desktop.
+  By default, Docker Desktop is set to use all the processors available on the host machine.
 
-- **Memory**. By default, Docker Desktop is set to use `2` GB  of your host's
+- **Memory limit**. By default, Docker Desktop is set to use up to 50% of your host's
   memory. To increase the RAM, set this to a higher number; to decrease it,
   lower the number.
 
 - **Swap**. Configure swap file size as needed. The default is 1 GB.
 
-- **Disk image size**. Specify the size of the disk image.
+- **Virtual disk limit**. Specify the maximum size of the disk image.
 
 - **Disk image location**. Specify the location of the Linux volume where containers and images are stored.
 
