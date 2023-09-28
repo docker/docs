@@ -4,7 +4,7 @@
   {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
 <style>
 /* hide img injected by prod scripts */
-body > footer ~ img { display: none }
+body > img { display: none }
 </style>
 {{ end }}
 <link href="{{ $styles.Permalink }}" rel="stylesheet" />

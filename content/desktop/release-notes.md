@@ -24,11 +24,75 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+# 4.24.0
+
+{{< release-date date="2023-09-28" >}}
+
+{{< desktop-install all=true version="4.24.0" build_path="/" >}}
+
+### New
+
+- New Notification center available to all users.
+- Compose File Watch available to all users. For more information, see [Use Compose Watch](../compose/file-watch.md).
+- Resource Saver available to all users. This feature can be configured from the **Resources** tab in **Settings**. For more information see [Docker Desktop's Resource Saver mode](use-desktop/resource-saver.md).
+- You can now view and manage the Docker Engine state, with pause, stop, and resume, directly from the Docker Dashboard.
+
+### Upgrades
+
+- [Compose v2.22.0](https://github.com/docker/compose/releases/tag/v2.22.0)
+- [Go 1.21.1](https://github.com/golang/go/releases/tag/go1.21.1)
+- [Wasm](../desktop/wasm/_index.md) runtimes:
+  - wasmtime, wasmedge `v0.2.0`.
+  - lunatic, slight, spin, and wws`v0.9.1`.
+  - Added wasmer wasm shims.
+
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker Init:
+  - Fixed an issue formatting Dockerfile file paths for ASP.NET projects on Windows.
+  - Improved performance on language detection for large directories with lots of files.
+- Added a timeout to polling for resource usage stats used by the **Containers** view. Fixes [docker/for-mac#6962](https://github.com/docker/for-mac/issues/6962).
+- containerd integration:
+  - Implemented push/pull/save image events.
+  - Implemented pulling legacy schema1 images.
+  - Implemented `docker push --all-tags`.
+  - Implemented counting containers using a specific image (visible for example in `docker system df -v`).
+  - Validated pulled image names are not reserved.
+  - Handle `userns-remap` daemon setting.
+  - Fixed legacy builder build errors when multiple COPY/ADD instructions are used.
+  - Fixed `docker load` causing pool corruption which could some subsequent image related operations.
+  - Fixed not being able to reference images via truncated digest with a `sha256:` prefix.
+  - Fixed `docker images` (without `--all`) showing intermediate layers (created by the legacy classic builder).
+  - Fixed `docker diff` containing extra differences.
+  - Changed `docker pull` output to match the output with containerd integration disabled.
+- Fixed a grammatical error in Kubernetes status message. See [docker/for-mac#6971](https://github.com/docker/for-mac/issues/6971).
+- Docker containers now use all host CPU cores by default.
+- Improved inter-process security in dashboard UI.
+
+#### For Mac
+
+- Fixed a kernel panic on Apple silicon Macs with macOS version below 12.5. Fixes [docker/for-mac#6975](https://github.com/docker/for-mac/issues/6975).
+- Fixed a bug where Docker Desktop failed to start if invalid directories were included in `filesharingDirectories`. Fixes [docker/for-mac#6980](https://github.com/docker/for-mac/issues/6980).
+- Fixed a bug where installer is creating root-owned directories. Fixes [docker/for-mac#6984](https://github.com/docker/for-mac/issues/6984).
+- Fixed a bug where installer is failing on setting up the docker socket when missing `/Library/LaunchDaemons`. Fixes [docker/for-mac#6967](https://github.com/docker/for-mac/issues/6967).
+- Fixed a permission denied error when binding a privileged port to a non-localhost IP on macOS. Fixes [docker/for-mac#697](https://github.com/docker/for-mac/issues/6977).
+- Fixed a resource leak introduced in 4.23. Related to [docker/for-mac#6953](https://github.com/docker/for-mac/issues/6953).
+
+#### For Windows
+
+- Fixed a bug where a "Docker Desktop service not running" popup appeared when service is already running. See [docker/for-win#13679](https://github.com/docker/for-win/issues/13679).
+- Fixed a bug that caused Docker Desktop fail to start on Windows hosts. Fixes [docker/for-win#13662](https://github.com/docker/for-win/issues/13662).
+- Modified the Docker Desktop resource saver feature to skip reducing kernel memory on WSL when no containers are running, as this was causing timeouts in some cases. Instead, users are encouraged to enable "autoMemoryReclaim" on WSL directly via the .wslconfig file (available since WSL 1.3.10).
+
+
 ## 4.23.0
 
 {{< release-date date="2023-09-11" >}}
 
-{{< desktop-install all=true version="4.23.0" build_path="/" >}}
+{{< desktop-install all=true version="4.23.0" build_path="/120376/" >}}
 
 ### Upgrades
 - [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
