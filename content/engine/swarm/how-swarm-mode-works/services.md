@@ -66,6 +66,7 @@ current version of Docker only supports container tasks.
 The diagram below shows how swarm mode accepts service create requests and
 schedules tasks to worker nodes.
 
+![Services flow](../images/services-lifecyle.png)
 
 ### Pending services
 
