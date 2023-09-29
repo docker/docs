@@ -78,5 +78,5 @@ no exit delay).
 
 Give feedback or report any bugs you may find  create an issue on the appropriate Docker
   Desktop GitHub repository:
-  - [for-mac](https://github.com/docker/for-mac),
-  - [for-win](https://github.com/docker/for-win)).
+  - [for-mac](https://github.com/docker/for-mac)
+  - [for-win](https://github.com/docker/for-win)
