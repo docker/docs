@@ -32,9 +32,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### New
 
-- New Notification center available to all users.
-- Compose File Watch available to all users. For more information, see [Use Compose Watch](../compose/file-watch.md).
-- Resource Saver available to all users. This feature can be configured from the **Resources** tab in **Settings**. For more information see [Docker Desktop's Resource Saver mode](use-desktop/resource-saver.md).
+- The new Notification center is now available to all users so you can be notified of new releases, installation progress updates, and more. Select the bell icon in the bottom-right corner of the Docker Dashboard to access the notification center.
+- Compose Watch is now available to all users. For more information, see [Use Compose Watch](../compose/file-watch.md).
+- Resource Saver is now available to all users and is enabled by default. To configure this feature, navigate to the **Resources** tab in **Settings**. For more information see [Docker Desktop's Resource Saver mode](use-desktop/resource-saver.md).
 - You can now view and manage the Docker Engine state, with pause, stop, and resume, directly from the Docker Dashboard.
 
 ### Upgrades
