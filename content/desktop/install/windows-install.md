@@ -37,7 +37,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 - WSL version 1.1.3.0 or later.
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
-- Windows 10 64-bit: Home or Pro 21H2 (build 19045) or higher, or Enterprise or Education 21H2 (build 19045) or higher.
+- Windows 10 64-bit: Home or Pro 21H2 (build 19045) or higher, or Enterprise or Education 21H2 (build 19045) or higher. 
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run
@@ -48,6 +48,16 @@ _For checksums, see [Release notes](../release-notes.md)_
   - BIOS-level hardware virtualization support must be turned on in the
     BIOS settings. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
+
+> **Important**
+>
+> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
+> Windows Home or Education editions only allow you to run Linux containers.
+{ .important }
+
+> **Note**
+>
+> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
 
 {{< /tab >}}
 {{< tab name="Hyper-V backend and Windows containers" >}}
@@ -67,12 +77,18 @@ _For checksums, see [Release notes](../release-notes.md)_
     BIOS settings. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
-{{< /tab >}}
-{{< /tabs >}}
+> **Important**
+>
+> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
+> Windows Home or Education editions only allow you to run Linux containers.
+{ .important }
 
 > **Note**
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
@@ -94,10 +110,6 @@ Looking for information on using Windows containers?
 - Docker Container Platform for Windows [articles and blog
   posts](https://www.docker.com/microsoft/) on the Docker website.
 
-> **Note**
->
-> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
-> Windows Home or Education editions only allow you to run Linux containers.
 
 ## Install Docker Desktop on Windows
 
