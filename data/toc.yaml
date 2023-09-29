@@ -1998,6 +1998,8 @@ Manuals:
         section:
         - title: Overview
           path: /scout/integrations/environment/
+        - title: Sysdig
+          path: /scout/integrations/environment/sysdig/
         - title: Generic
           path: /scout/integrations/environment/cli/
       - sectiontitle: Container registries

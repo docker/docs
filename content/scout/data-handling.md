@@ -11,9 +11,10 @@ images that you analyze. This metadata is stored on the Docker Scout platform.
 
 ## Data transmission
 
-Docker Scout collects and sends the following image metadata to the platform.
+This section describes the data that Docker Scout collects and sends to the
+platform.
 
-Docker and OCI image metadata:
+### Image metadata
 
 - Image creation timestamp
 - Image digest
@@ -25,7 +26,7 @@ Docker and OCI image metadata:
 - Operating system type and version
 - Registry URL and type
 
-Software Bill of Materials (SBOM) metadata:
+### SBOM metadata
 
 - Package URLs (PURL)
 - Package author and description
@@ -44,6 +45,18 @@ about new CVEs (and other risks, such as leaked secrets), it "overlays" this
 information on the SBOM. If there's a match, the results of the match are
 displayed in the user interfaces where Docker Scout data is surfaced, such as
 the Docker Scout Dashboard and in Docker Desktop.
+
+### Environment metadata
+
+If you integrate Docker Scout with your runtime environment via the [Sysdig
+integration](./integrations/environment/sysdig.md), the Docker Scout data plane
+collects the following data points:
+
+- Kubernetes namespace
+- Workload name
+- Workload type (for example, DaemonSet)
+
+### Local analysis
 
 For images analyzed locally on a developer's machine, Docker Scout only
 transmits PURLs and layer digests. This data is not persistently stored on the
