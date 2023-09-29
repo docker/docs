@@ -55,7 +55,7 @@ details, see [Manage members](https://docs.docker.com/docker-hub/members/).
 
 3. Specify your organization in the `registry.json` file.
 
-    Open the `registry.json` file in a text editor and add the following contents, where `myorg`` is replaced with your organization’s name. The file contents are case-sensitive and you must use lowercase letters for your organization's name.
+    Open the `registry.json` file in a text editor and add the following contents, where `myorg` is replaced with your organization’s name. The file contents are case-sensitive and you must use lowercase letters for your organization's name.
 
 
     ```json
