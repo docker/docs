@@ -31,7 +31,7 @@ changing `autoPauseTimeoutSeconds` in the Docker Desktop `settings.json` file:
 There's no need to restart Docker Desktop after reconfiguring. 
 
 When Docker Desktop enters Resource Saver mode, a leaf icon displays on the
-Docker Desktop status bar as well as in the Docker icon on
+Docker Desktop status bar as well as on the Docker icon in
 the system tray. The following image shows the Linux VM CPU and memory utilization reduced
 to zero when Resource Saver mode is on. 
 
