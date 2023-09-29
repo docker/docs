@@ -52,9 +52,9 @@ To access your subscription details, go to the **Billing** section for your pers
 
 Renewals charge to the original credit card used to buy Docker Scout Team.
 
-### Update number of repositories for an active subscription
+### Update number of repositories for your subscription
 
-To add or remove the number of repositories associated with your active subscription, [contact support](https://hub.docker.com/support/contact).
+To add or remove the number of repositories associated with your subscription, [contact support](https://hub.docker.com/support/contact).
 
 ### Cancel your subscription
 
