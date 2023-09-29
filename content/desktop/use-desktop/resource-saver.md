@@ -42,11 +42,12 @@ containers, for example listing container images or volumes, don't necessarily
 trigger an exit from Resource Saver mode as Docker Desktop can serve such
 commands without unnecessarily waking up the Linux VM.
 
->**Note**
+> **Note**
 >
-> Exit from Resource Saver mode occurs automatically when containers run. Exit
-> may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
-> It's generally faster on Mac and Linux, and a bit slower on Windows (with Hyper-V).
+> Docker Desktop exits the Resource Saver mode automatically when it needs to.
+> Commands that cause an exit from Resource Saver take a little longer to execute
+> (about 3 to 10 seconds) as Docker Desktop restarts the Linux VM.
+> It's generally faster on Mac and Linux, and slower on Windows with Hyper-V.
 > Once the Linux VM is restarted, subsequent container runs occur immediately as usual.
 
 ## Resource Saver mode versus Pause
