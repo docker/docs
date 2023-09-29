@@ -36,8 +36,8 @@ _For checksums, see [Release notes](../release-notes.md)_
 {{< tab name="WSL 2 backend" >}}
 
 - WSL version 1.1.3.0 or later.
-- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher. Note: Home and Education editions only support Linux containers. Pro and Enterprise editions support Windows containers and Linux containers.
-- Windows 10 64-bit: Home or Pro 21H2 (build 19045) or higher, or Enterprise or Education 21H2 (build 19045) or higher. Note: Home and Education editions only support Linux containers. Pro and Enterprise editions support Windows containers and Linux containers.
+- Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
+- Windows 10 64-bit: Home or Pro 21H2 (build 19045) or higher, or Enterprise or Education 21H2 (build 19045) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run
@@ -52,8 +52,8 @@ _For checksums, see [Release notes](../release-notes.md)_
 {{< /tab >}}
 {{< tab name="Hyper-V backend and Windows containers" >}}
 
-- Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher. Note: Education editions only support Linux containers. Pro and Enterprise editions support Windows containers and Linux containers.
-- Windows 10 64-bit: Pro 21H2 (build 19045) or higher, or Enterprise or Education 21H2 (build 19045) or higher. Note: Education editions only support Linux containers. Pro and Enterprise editions support Windows containers and Linux containers.
+- Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
+- Windows 10 64-bit: Pro 21H2 (build 19045) or higher, or Enterprise or Education 21H2 (build 19045) or higher.
 
   For Windows 10 and Windows 11 Home, see the system requirements in the WSL 2 backend tab.
 
@@ -69,6 +69,12 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 {{< /tab >}}
 {{< /tabs >}}
+
+> **Important**
+>
+> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
+> Windows Home or Education editions only allow you to run Linux containers.
+{ .important }
 
 > **Note**
 >
@@ -94,10 +100,6 @@ Looking for information on using Windows containers?
 - Docker Container Platform for Windows [articles and blog
   posts](https://www.docker.com/microsoft/) on the Docker website.
 
-> **Note**
->
-> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
-> Windows Home or Education editions only allow you to run Linux containers.
 
 ## Install Docker Desktop on Windows
 
