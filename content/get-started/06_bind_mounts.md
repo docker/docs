@@ -61,7 +61,6 @@ work.
    {{< /tab >}}
    {{< tab name="Windows (PowerShell)" >}}
 
-   Run this command in PowerShell.
 
    ```powershell
    $ docker run -it --mount "type=bind,src=$pwd,target=/src" ubuntu bash
