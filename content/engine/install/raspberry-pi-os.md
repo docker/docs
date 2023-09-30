@@ -102,8 +102,8 @@ Docker from the repository.
 
    # Set up Docker's Apt repository:
    echo \
-     "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
-     "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
+     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
    sudo apt-get update
    ```
