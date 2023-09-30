@@ -135,7 +135,7 @@ work.
    Dockerfile  node_modules  package.json  spec  src  yarn.lock
    ```
 
-10. Stop the interactive container session with `Ctrl` + `D`.
+9. Stop the interactive container session with `Ctrl` + `D`.
 
 That's all for a brief introduction to bind mounts. This procedure
 demonstrated how files are shared between the host and the container, and how
