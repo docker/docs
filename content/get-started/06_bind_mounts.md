@@ -94,7 +94,7 @@ work.
    boot  etc  lib   mnt    proc  run   src   sys  usr
    ```
 
-5. Change directory to the `src` directory.
+4. Change directory to the `src` directory.
 
    This is the directory that you mounted when starting the container. Listing
    the contents of this directory displays the same files as in the
