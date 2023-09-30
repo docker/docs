@@ -59,7 +59,7 @@ work.
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows-Powershell" >}}
+   {{< tab name="Windows (PowerShell)" >}}
 
    Run this command in PowerShell.
 
