@@ -114,7 +114,7 @@ work.
    Dockerfile  myfile.txt  node_modules  package.json  spec  src  yarn.lock
    ```
 
-7. Open the `getting-started-app` directory on the host and observe that the
+6. Open the `getting-started-app` directory on the host and observe that the
    `myfile.txt` file is in the directory.
 
    ```
