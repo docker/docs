@@ -128,7 +128,7 @@ work.
    │ └── yarn.lock
    ```
 
-8. From the host, delete the `myfile.txt` file.
+7. From the host, delete the `myfile.txt` file.
 9. In the container, list the contents of the `app` directory once more. Observe that the file is now gone.
 
    ```console
