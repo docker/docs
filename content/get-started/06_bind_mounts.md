@@ -70,7 +70,6 @@ work.
    {{< /tab >}}
    {{< tab name="Windows-CMD" >}}
 
-   Run this command in Command prompt.
 
    ```Command Prompt
    > docker run -it --mount "type=bind,src=%cd%,target=/src" ubuntu bash
