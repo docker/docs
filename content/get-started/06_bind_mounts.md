@@ -83,7 +83,7 @@ work.
    current working directory on your host machine (`getting-started-app`), and
    `target` is where that directory should appear inside the container (`/src`).
 
-4. After running the command, Docker starts an interactive `bash` session in the
+3. After running the command, Docker starts an interactive `bash` session in the
    root directory of the container's filesystem.
 
    ```console
