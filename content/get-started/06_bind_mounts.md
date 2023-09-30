@@ -68,7 +68,7 @@ work.
    ```
    
    {{< /tab >}}
-3. {{< tab name="Windows-CMD" >}}
+   {{< tab name="Windows-CMD" >}}
 
    Run this command in Command prompt.
 
