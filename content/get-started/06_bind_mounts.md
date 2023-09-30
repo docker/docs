@@ -129,7 +129,7 @@ work.
    ```
 
 7. From the host, delete the `myfile.txt` file.
-9. In the container, list the contents of the `app` directory once more. Observe that the file is now gone.
+8. In the container, list the contents of the `app` directory once more. Observe that the file is now gone.
 
    ```console
    root@ac1237fad8db:/src# ls
