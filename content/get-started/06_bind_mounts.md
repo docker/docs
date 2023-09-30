@@ -106,7 +106,7 @@ work.
    Dockerfile  node_modules  package.json  spec  src  yarn.lock
    ```
 
-6. Create a new file named `myfile.txt`.
+5. Create a new file named `myfile.txt`.
 
    ```console
    root@ac1237fad8db:/src# touch myfile.txt
