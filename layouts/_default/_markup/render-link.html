@@ -12,8 +12,8 @@
     ></a
   >
 {{- else if (strings.HasPrefix $url "/") -}}
-  {{/* absolute link, use absURL */}}
-  <a class="link" href="{{ absURL $url }}">{{ .Text | safeHTML }}</a>
+  {{/* absolute link, use url as-is */}}
+  <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
 {{- else -}}
   {{/* check if the file links to index.md */}}
   {{- if (strings.FindRE `([^_]|^)index.md` $url 1) -}}
