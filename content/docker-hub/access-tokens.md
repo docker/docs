@@ -36,7 +36,7 @@ any time.
 
 4. Add a description for your token. Use something that indicates the use case or purpose of the token.
    
-5. Set the access permissions. 
+5. Set the access permissions.
    The access permissions are scopes that set restrictions in your
    repositories. For example, for Read & Write permissions, an automation
    pipeline can build an image and then push it to a repository. However, it
