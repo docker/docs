@@ -1,10 +1,9 @@
 ---
 title: Use bind mounts
-keywords: 'get started, setup, orientation, quickstart, intro, concepts, containers,
-  docker desktop
-
-  '
+keywords: get started, setup, orientation, quickstart, intro, concepts, containers, docker desktop
 description: Using bind mounts in our application
+aliases:
+- /get-started/06_bind_mounts/
 ---
 
 In [part 5](./05_persisting_data.md), you used a volume mount to persist the
@@ -43,7 +42,7 @@ work.
 
 > **Note**
 >
-> If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
+> If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
 
 1. Open a terminal and change directory to the `getting-started-app`
    directory.

@@ -2,6 +2,8 @@
 title: Deployment and orchestration
 keywords: orchestration, deploy, kubernetes, swarm,
 description: Get oriented on some basics of Docker and install Docker Desktop.
+aliases:
+- /get-started/orchestration/
 ---
 
 Containerization provides an opportunity to move and scale applications to

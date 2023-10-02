@@ -4,14 +4,15 @@ keywords: swarm, swarm services, stacks
 description: Learn how to describe and deploy a simple application on Docker Swarm.
 aliases:
 - /get-started/part4/
+- /get-started/swarm-deploy/
 ---
 
 {{< include "swarm-mode.md" >}}
 
 ## Prerequisites
 
-- Download and install Docker Desktop as described in [Get Docker](../get-docker.md).
-- Work through containerizing an application in [Part 2](02_our_app.md).
+- Download and install Docker Desktop as described in [Get Docker](../../get-docker.md).
+- Work through containerizing an application in [Part 2](../get-started/02_our_app.md).
 - Make sure that Swarm is enabled on your Docker Desktop by typing `docker system info`, and looking for a message `Swarm: active` (you might have to scroll up a little).
 
   If Swarm isn't running, simply type `docker swarm init` in a shell prompt to set it up.
@@ -26,7 +27,7 @@ In order to validate that our containerized application works well on Swarm, we'
 
 Swarm never creates individual containers like we did in the previous step of this tutorial. Instead, all Swarm workloads are scheduled as services, which are scalable groups of containers with added networking features maintained automatically by Swarm. Furthermore, all Swarm objects can and should be described in manifests called stack files. These YAML files describe all the components and configurations of your Swarm app, and can be used to easily create and destroy your app in any Swarm environment.
 
-Let's write a simple stack file to run and manage our Todo app, the container `getting-started` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. Place the following in a file called `bb-stack.yaml`:
+Let's write a simple stack file to run and manage our Todo app, the container `getting-started` image created in [Part 2](../get-started/02_our_app.md) of the Quickstart tutorial. Place the following in a file called `bb-stack.yaml`:
 
 {{< include "swarm-compose-compat.md" >}}
 
@@ -40,7 +41,7 @@ services:
       - "8000:3000"
 ```
 
-In this Swarm YAML file, we have just one object, a `service`, describing a scalable group of identical containers. In this case, you'll get just one container (the default), and that container will be based on your `getting-started` image created in [Part 2](02_our_app.md) of the Quickstart tutorial. In addition, We've asked Swarm to forward all traffic arriving at port 8000 on our development machine to port 3000 inside our getting-started container.
+In this Swarm YAML file, we have just one object, a `service`, describing a scalable group of identical containers. In this case, you'll get just one container (the default), and that container will be based on your `getting-started` image created in [Part 2](../get-started/02_our_app.md) of the Quickstart tutorial. In addition, We've asked Swarm to forward all traffic arriving at port 8000 on our development machine to port 3000 inside our getting-started container.
 
 > **Kubernetes Services and Swarm Services are very different** 
 >
@@ -84,7 +85,7 @@ In this Swarm YAML file, we have just one object, a `service`, describing a scal
 
     This indicates 1/1 containers you asked for as part of your services are up and running. Also, we see that port 8000 on your development machine is getting forwarded to port 3000 in your getting-started container.
 
-3. Open a browser and visit your Todo app at `localhost:8000`; you should see your Todo application, the same as when we ran it as a stand-alone container in [Part 2](02_our_app.md) of the Quickstart tutorial.
+3. Open a browser and visit your Todo app at `localhost:8000`; you should see your Todo application, the same as when we ran it as a stand-alone container in [Part 2](../get-started/02_our_app.md) of the Quickstart tutorial.
 
 4. Once satisfied, tear down your application:
 
@@ -102,8 +103,8 @@ In addition to deploying to Swarm, we have also described our application as a s
 
 Further documentation for all new Swarm objects and CLI commands used in this article are available here:
 
- - [Swarm Mode](../engine/swarm/index.md)
- - [Swarm Mode Services](../engine/swarm/how-swarm-mode-works/services.md)
- - [Swarm Stacks](../engine/swarm/stack-deploy.md)
+ - [Swarm Mode](../../engine/swarm/_index.md)
+ - [Swarm Mode Services](../../engine/swarm/how-swarm-mode-works/services.md)
+ - [Swarm Stacks](../../engine/swarm/stack-deploy.md)
  - [`docker stack *`](/engine/reference/commandline/stack/)
  - [`docker service *`](/engine/reference/commandline/service/)

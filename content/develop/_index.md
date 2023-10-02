@@ -8,7 +8,7 @@ This page contains a list of resources for application developers who would like
 
 ## Prerequisites
 
-Work through the learning modules in [Get started](../get-started/index.md) to understand how to build an image and run it as a containerized application.
+Work through the learning modules in [Get started](../guides/get-started/_index.md) to understand how to build an image and run it as a containerized application.
 
 ## Develop new apps on Docker
 
@@ -19,8 +19,8 @@ most benefits from Docker.
 - Learn how to [build an image](../engine/reference/builder.md) using a Dockerfile
 - Use [multi-stage builds](../build/building/multi-stage.md) to keep your images lean
 - Manage application data using [volumes](../storage/volumes.md) and [bind mounts](../storage/bind-mounts.md)
-- [Scale your app with Kubernetes](../get-started/kube-deploy.md) 
-- [Scale your app as a Swarm service](../get-started/swarm-deploy.md) 
+- [Scale your app with Kubernetes](../guides/deployment//kube-deploy.md) 
+- [Scale your app as a Swarm service](../guides/deployment//swarm-deploy.md) 
 - [General application development best practices](dev-best-practices.md)
 
 ## Learn about language-specific app development with Docker

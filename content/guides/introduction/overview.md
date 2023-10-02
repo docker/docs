@@ -11,6 +11,7 @@ aliases:
 - /engine/introduction/understanding-docker/
 - /engine/understanding-docker/
 - /engine/docker-overview/
+- /get-started/overview/
 ---
 
 Docker is an open platform for developing, shipping, and running applications.
@@ -104,7 +105,7 @@ Docker API. The Docker client can communicate with more than one daemon.
 
 ### Docker Desktop
 
-Docker Desktop is an easy-to-install application for your Mac, Windows or Linux environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](../desktop/index.md).
+Docker Desktop is an easy-to-install application for your Mac, Windows or Linux environment that enables you to build and share containerized applications and microservices. Docker Desktop includes the Docker daemon (`dockerd`), the Docker client (`docker`), Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper. For more information, see [Docker Desktop](../../desktop/_index.md).
 
 ### Docker registries
 
@@ -200,5 +201,5 @@ in a separate namespace and its access is limited to that namespace.
 
 ## Next steps
 
-- [Install Docker](../get-docker.md)
+- [Install Docker](../../get-docker.md)
 - [Get started with Docker](index.md)

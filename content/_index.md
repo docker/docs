@@ -7,7 +7,7 @@ grid:
   image:
     dark: /assets/images/rocket-dark.svg
     light: /assets/images/rocket.svg
-  link: /get-started/
+  link: /guides/get-started/
   description: Learn Docker basics and the benefits of containerizing your applications.
 - title: Download and install
   image:
@@ -19,7 +19,7 @@ grid:
   image:
     dark: /assets/images/guides-dark.svg
     light: /assets/images/guides.svg
-  link: /get-started/overview/
+  link: /guides/introduction/overview/
   description: Learn how to set up your Docker environment and start containerizing
     your applications.
 - title: Language-specific guides

@@ -197,7 +197,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 ## Where to go next
 
-- [Get started with Docker](/get-started/) is a tutorial that teaches you how to deploy a multi-service stack.
+- [Get started with Docker](/guides/get-started/) is a tutorial that teaches you how to deploy a multi-service stack.
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, and
   how to get support.

@@ -110,7 +110,7 @@ params:
 menus:
   main:
   - name: Guides
-    url: /get-started/overview/
+    url: /guides/introduction/overview/
     weight: 1
   - name: Manuals
     url: /desktop/
@@ -178,7 +178,7 @@ menus:
     - url: https://www.docker.com/use-cases
       name: Use cases
       parent: Developers
-    - url: /get-started/
+    - url: /guides/get-started/
       name: Get started
       parent: Developers
     - url: https://www.docker.com/blog/

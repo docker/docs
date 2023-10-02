@@ -3,6 +3,8 @@ title: Educational resources
 keywords: get started, setup, orientation, quickstart, intro, concepts, kubernetes,
   docker desktop
 description: Get started resources learning docker
+aliases:
+- /get-started/resources/
 ---
 
 Docker and the broader community of Docker experts have put together many different ways to get further training and hands-on experience with Docker. Expand your understanding of Docker and Kubernetes with these additional free and paid resources.

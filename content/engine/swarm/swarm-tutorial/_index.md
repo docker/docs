@@ -34,7 +34,7 @@ To run this tutorial, you need the following:
 This tutorial requires three Linux hosts which have Docker installed and can
 communicate over a network. These can be physical machines, virtual machines,
 Amazon EC2 instances, or hosted in some other way. Check out
-[Getting started - Swarms](../../../get-started/swarm-deploy.md#prerequisites)
+[Getting started - Swarms](../../../guides/deployment/swarm-deploy.md#prerequisites)
 for one possible set-up for the hosts.
 
 One of these machines is a manager (called `manager1`) and two of them are

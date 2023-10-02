@@ -3,6 +3,8 @@ title: Persist the DB
 keywords: get started, setup, orientation, quickstart, intro, concepts, containers,
   docker desktop
 description: Making your DB persistent in your application
+aliases:
+- /get-started/05_persisting_data/
 ---
 
 In case you didn't notice, your todo list is empty every single time
@@ -21,7 +23,7 @@ What you'll see is that the files created in one container aren't available in a
 
 > **Note**
 >
-> If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
+> If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
 
 1. Start an `ubuntu` container that will create a file named `/data.txt` with a random number
    between 1 and 10000.
@@ -80,7 +82,7 @@ With the previous experiment, you saw that each container starts from the image 
 While containers can create, update, and delete files, those changes are lost when you remove the container 
 and Docker isolates all changes to that container. With volumes, you can change all of this.
 
-[Volumes](../storage/volumes.md) provide the ability to connect specific filesystem paths of 
+[Volumes](../../storage/volumes.md) provide the ability to connect specific filesystem paths of 
 the container back to the host machine. If you mount a directory in the container, changes in that
 directory are also seen on the host machine. If you mount that same directory across container restarts, you'd see
 the same files.
@@ -206,7 +208,7 @@ In this section, you learned how to persist container data.
 Related information:
 
  - [docker CLI reference](/engine/reference/commandline/cli/)
- - [Volumes](../storage/volumes.md)
+ - [Volumes](../../storage/volumes.md)
 
 ## Next steps
 
