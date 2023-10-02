@@ -578,6 +578,8 @@
   - /go/scout-quickstart/
 "/scout/ci/":
   - /go/scout-ci/
+"/scout/policy/":
+  - /go/scout-policy/
 # integrations
 "/scout/integrations/ci/gha/":
   - "/go/scout-gha/"
