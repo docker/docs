@@ -295,7 +295,7 @@ On the **Advanced** tab, you can reconfigure your initial installation settings:
   - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin`
   - **User**: Docker CLI tools are installed in the user directory under `$HOME/.docker/bin`. You must then add `$HOME/.docker/bin` to your PATH. To add `$HOME/.docker/bin` to your path:
       1. Open your shell configuration file. This is `~/.bashrc` if you're using a bash shell, or `~/.zshrc` if you're using a zsh shell.
-      2. Run the following command:
+      2. Copy and paste the following:
             ```console
             $ export PATH=$PATH:~/.docker/bin
             ```
