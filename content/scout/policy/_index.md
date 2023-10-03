@@ -60,7 +60,8 @@ Docker Scout ships the following three out-of-the-box policies:
 
 - [Critical and high vulnerabilities with fixes](#critical-and-high-vulnerabilities-with-fixes)
 - [Critical vulnerabilities](#critical-vulnerabilities)
-- [Packages with GPL3+ licenses](#packages-with-gpl3-licenses)
+- [Packages with AGPLv3, GPLv3 licenses](#packages-with-agplv3-gplv3-licenses)
+- [Base images not up-to-date](#base-images-not-up-to-date)
 
 These policies are turned on by default for Scout-enabled repositories. There's
 currently no way to turn off or configure these policies.
@@ -90,10 +91,37 @@ more critical vulnerabilities.
 This policy flags all critical vulnerabilities, whether or not there's a fix
 version available.
 
-### Packages with GPL3+ licenses
+### Packages with AGPLv3, GPLv3 licenses
 
 This policy requires that your artifacts don't contain packages distributed
-under a GPL3+ [copyleft](https://en.wikipedia.org/wiki/Copyleft) license.
+under an AGPLv3 or GPLv3 license. These licenses are protective
+[copyleft](https://en.wikipedia.org/wiki/Copyleft), and may be unsuitable for
+use in your software because of the restrictions they enforce.
 
 This policy is unfulfilled if your artifacts contain one or more packages with
 a violating license.
+
+### Base images not up-to-date
+
+This policy requires that the base images you use are up-to-date.
+
+It's unfulfilled when the tag you used to build your image points to a
+different digest than what you're using. If there's a mismatch in digests, that
+means the base image you're using is out of date.
+
+#### No base image data
+
+There are cases when it's not possible to determine whether or not the base
+image is up-to-date. In such cases, the **Base images not up-to-date** policy
+gets flagged as having **No data**.
+
+This occurs when:
+
+- Docker Scout doesn't know what base image tag you used
+- The base image version you used has multiple tags, but not all tags are out
+  of date
+
+To make sure that Docker Scout always knows about your base image, you can
+attach [provenance attestations](../../build/attestations/slsa-provenance.md)
+at build-time. Docker Scout uses provenance attestations to find out the base
+image version.

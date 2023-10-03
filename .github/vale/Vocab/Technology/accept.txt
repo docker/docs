@@ -1,3 +1,4 @@
+AGPLv3
 APIs?
 ARM
 AWS
@@ -25,6 +26,7 @@ Fargate
 Fedora
 Flink
 GPG
+GPLv3
 GRUB
 GeoNetwork
 Git
