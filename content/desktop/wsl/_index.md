@@ -26,13 +26,9 @@ Before you turn on the Docker Desktop WSL 2 feature, ensure you have:
 
 >**Tip**
 >
-> For a better experience on WSL, consider enabling the WSL `autoMemoryReclaim` feature available since WSL 1.3.10 (experimental).
-> You can do this by adding the following to the `.wslconfig` file and restarting WSL.
->
-> ```
-> [experimental]
-> autoMemoryReclaim=true
-> ```
+> For a better experience on WSL, consider enabling the WSL
+> [autoMemoryReclaim](https://learn.microsoft.com/en-us/windows/wsl/wsl-config)
+> setting available since WSL 1.3.10 (experimental).
 >
 > This feature causes the Windows host to better reclaim unused memory inside
 > the WSL virtual machine, thereby resulting in better memory availability to
