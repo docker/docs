@@ -1103,8 +1103,10 @@ Samples:
       title: Prometheus
     - path: /samples/wordpress/
       title: WordPress
-- sectiontitle: Other services
+- sectiontitle: Other samples
   section:
+    - path: /samples/ai-ml/
+      title: AI/ML
     - path: /samples/cloudflared/
       title: Cloudflared
     - path: /samples/elasticsearch/

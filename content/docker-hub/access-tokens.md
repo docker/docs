@@ -36,7 +36,7 @@ any time.
 
 4. Add a description for your token. Use something that indicates the use case or purpose of the token.
    
-5. Set the access permissions. 
+5. Set the access permissions.
    The access permissions are scopes that set restrictions in your
    repositories. For example, for Read & Write permissions, an automation
    pipeline can build an image and then push it to a repository. However, it
@@ -65,10 +65,16 @@ a password.
 You can rename, activate, deactivate, or delete a token as needed.
 
 1. Access your tokens under **Account Settings > Security**.
-   This page shows an overview of all your tokens. You can also view the number
+   This page shows an overview of all your tokens, and lists if the token was generated manually or if it was [auto-generated](#auto-generated-tokens). You can also view the number
    of tokens that are activated and deactivated in the toolbar.
 
-2. Choose a token and then select **Delete** or **Edit**, or use the menu on the far right of a token row to bring up the edit screen. 
+2. Select a token and then select **Delete** or **Edit**, or use the actions menu on the far right of a token row to bring up the edit screen.
    You can also select multiple tokens to delete at once.
 
 3. After modifying the token, select **Save**.
+
+## Auto-generated tokens
+
+When you sign in to your Docker account with Docker Desktop, Docker Desktop generates an authentication token on your behalf. When you interact with Docker Hub using the Docker CLI, the CLI uses this token for authentication. The token scope has Read, Write, and Delete access. If your Docker Desktop session expires, the token is automatically removed locally.
+
+You can have up to 5 auto-generated tokens associated with your account. These are deleted and created automatically based on usage and creation dates. You can also delete your auto-generated tokens as needed. See [Modify existing tokens](#modify-existing-tokens).
