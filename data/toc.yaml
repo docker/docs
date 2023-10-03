@@ -125,8 +125,14 @@ Guides:
     title: Overview
   - path: /develop/dev-best-practices/
     title: Development best practices
-  - path: /develop/develop-images/dockerfile_best-practices/
-    title: Dockerfile best practices
+  - sectiontitle: Dockerfile best practices
+    section:
+    - path: /develop/develop-images/dockerfile_best-practices/
+      title: Overview
+    - path: /develop/develop-images/guidelines/
+      title: General guidelines 
+    - path: /develop/develop-images/instructions/
+      title: Best practices for Dockerfile instructions
   - path: /develop/security-best-practices/
     title: Security best practices
 
