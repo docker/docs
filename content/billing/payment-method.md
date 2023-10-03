@@ -6,7 +6,7 @@ keywords: payments, billing, subscription
 
 > **Early access features**
 >
-> Some users who subscribed to Docker Pro after September 25, 2023 may have a different user interface experience. If your subscription has early access features, go to the **Billing** page for your account, then select the **Payment methods and billing history** link to add or update a payment method.
+> If you subscribed to Docker Pro after September 25, 2023, you may have a different user interface experience. To add or update a payment method, go to the **Billing** page for your account, then select the **Payment methods and billing history** link.
 { .restricted }
 
 This page describes how to add or update a payment method for your personal account or for an organization. 
