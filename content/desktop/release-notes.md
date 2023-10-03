@@ -24,11 +24,23 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+# 4.24.1
+
+{{< release-date date="2023-10-04" >}}
+
+{{< desktop-install win=true version="4.24.1" build_path="/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Fixed a bug on Docker Desktop for Windows where the Docker Dashboard wouldn't display container logs correctly. Fixes [docker/for-win#13714](https://github.com/docker/for-win/issues/13714).
+
 # 4.24.0
 
 {{< release-date date="2023-09-28" >}}
 
-{{< desktop-install all=true version="4.24.0" build_path="/" >}}
+{{< desktop-install all=true version="4.24.0" build_path="/122432/" >}}
 
 ### New
 
