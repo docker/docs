@@ -103,7 +103,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For Mac
 
-- Creating a container with the port 53 fails with the error address `already in use`. As a workaround, deactivate network acceleration by adding `"kernelForUDP": false`, in the settings file located at `~/Library/Group Containers/group.com.docker/settings.json`.
+- Creating a container with the port 53 fails with the error address `already in use`. As a workaround, deactivate network acceleration by adding `"kernelForUDP": false`, in the `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
 ## 4.23.0
 
 {{< release-date date="2023-09-11" >}}
