@@ -616,7 +616,7 @@ Reference:
       title: docker run
     - path: /engine/reference/commandline/save/
       title: docker save
-    - sectiontitle: docker scout (Early Access)
+    - sectiontitle: docker scout
       section:
       - path: /engine/reference/commandline/scout/
         title: docker scout
@@ -1367,6 +1367,68 @@ Manuals:
                   path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
+
+- sectiontitle: Docker Scout
+  section:
+    - path: /scout/
+      title: Overview
+    - path: /scout/quickstart/
+      title: Quickstart
+    - sectiontitle: Explore Docker Scout
+      section:
+      - path: /scout/dashboard/
+        title: Dashboard
+      - path: /scout/image-details-view/
+        title: Image details view
+      - path: /scout/image-analysis/
+        title: Image analysis
+      - path: /scout/local-fs/
+        title: Analyze local files
+      - path: /scout/sbom/
+        title: SBOM
+      - path: /scout/advisory-db-sources/
+        title: Advisory database
+      - path: /scout/data-handling/
+        title: Data handling
+    - sectiontitle: Policy Evaluation
+      section:
+      - path: /scout/policy/
+        title: Overview
+      - path: /scout/policy/view/
+        title: View policy status
+    - sectiontitle: Integrations
+      section:
+      - title: Overview
+        path: /scout/integrations/
+      - sectiontitle: Environment monitoring
+        section:
+        - title: Overview
+          path: /scout/integrations/environment/
+        - title: Sysdig
+          path: /scout/integrations/environment/sysdig/
+        - title: Generic
+          path: /scout/integrations/environment/cli/
+      - sectiontitle: Container registries
+        section:
+        - title: Artifactory
+          path: /scout/integrations/registry/artifactory/
+        - title: Elastic Container Registry
+          path: /scout/integrations/registry/ecr/
+      - sectiontitle: Continuous integration
+        section:
+        - title: GitHub Actions
+          path: /scout/integrations/ci/gha/
+        - title: GitLab
+          path: /scout/integrations/ci/gitlab/
+        - title: Microsoft Azure DevOps Pipelines
+          path: /scout/integrations/ci/azure/
+        - title: Circle CI
+          path: /scout/integrations/ci/circle-ci/
+        - title: Jenkins
+          path: /scout/integrations/ci/jenkins/
+    - path: /scout/release-notes/
+      title: Release notes
+
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
@@ -1971,63 +2033,6 @@ Manuals:
     title: OCI artifacts
   - path: /docker-hub/release-notes/
     title: Release notes
-
-- sectiontitle: Docker Scout (Early Access)
-  section:
-    - path: /scout/
-      title: Overview
-    - path: /scout/quickstart/
-      title: Quickstart
-    - path: /scout/image-details-view/
-      title: Image details view
-    - path: /scout/image-analysis/
-      title: Image analysis
-    - path: /scout/dashboard/
-      title: Dashboard
-    - path: /scout/local-fs/
-      title: Analyze local files
-    - path: /scout/advisory-db-sources/
-      title: Advisory database
-    - path: /scout/data-handling/
-      title: Data handling
-    - path: /scout/sbom/
-      title: SBOM
-    - sectiontitle: Policy
-      section:
-      - path: /scout/policy/
-        title: Overview
-      - path: /scout/policy/view/
-        title: View policy status
-    - sectiontitle: Integrations
-      section:
-      - title: Overview
-        path: /scout/integrations/
-      - sectiontitle: Environment monitoring
-        section:
-        - title: Overview
-          path: /scout/integrations/environment/
-        - title: Sysdig
-          path: /scout/integrations/environment/sysdig/
-        - title: Generic
-          path: /scout/integrations/environment/cli/
-      - sectiontitle: Container registries
-        section:
-        - title: Artifactory
-          path: /scout/integrations/registry/artifactory/
-        - title: Elastic Container Registry
-          path: /scout/integrations/registry/ecr/
-      - sectiontitle: Continuous integration
-        section:
-        - title: GitHub Actions
-          path: /scout/integrations/ci/gha/
-        - title: GitLab
-          path: /scout/integrations/ci/gitlab/
-        - title: Microsoft Azure DevOps Pipelines
-          path: /scout/integrations/ci/azure/
-        - title: Circle CI
-          path: /scout/integrations/ci/circle-ci/
-        - title: Jenkins
-          path: /scout/integrations/ci/jenkins/
 
 - sectiontitle: Docker Admin (Early Access)
   section:

@@ -8,8 +8,6 @@ aliases:
   - /scout/advanced-image-analysis/
 ---
 
-{{< include "scout-early-access.md" >}}
-
 When you activate image analysis for a repository, Docker Scout analyzes new
 images automatically when you push to that repository. Docker Scout image
 analysis is more than point-in-time scanning, the analysis gets reevaluated

@@ -6,8 +6,6 @@ aliases:
   - /atomist/get-started/
 ---
 
-{{< include "scout-early-access.md" >}}
-
 Docker Scout analyzes image contents and generates a detailed report of packages
 and vulnerabilities that it detects. It can provide you with
 suggestions for how to remediate issues discovered by image analysis.

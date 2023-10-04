@@ -4,8 +4,6 @@ description: Learn about the Docker Scout subscriptions plans and features
 keywords: subscription, free, team, business, features
 ---
 
-{{< include "scout-early-access.md" >}}
-
 This page provides an overview of the subscription plans for Docker Scout. To compare features available for each plan, see [Docker Scout Pricing](https://docker.com/products/docker-scout).
 
 ## Docker Scout Free 

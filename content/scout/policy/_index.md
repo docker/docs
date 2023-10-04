@@ -7,14 +7,10 @@ description: |
   requirements over time
 ---
 
-> **Beta**
+> **Early Access**
 >
-> Policy Evaluation is a [Beta](/release-lifecycle/#beta) feature of Docker
-> Scout. This feature is available to organizations participating in the
-> limited preview program for policies.
->
-> If you're interested in trying out this feature, reach out using the form on
-> the [Docker Scout product page](https://docker.com/products/docker-scout)
+> Policy Evaluation is an [Early Access](/release-lifecycle/#early-access-ea)
+> feature of Docker Scout.
 { .restricted }
 
 In software supply chain management, maintaining the security and reliability

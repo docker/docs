@@ -7,8 +7,6 @@ aliases:
 - /scout/ci/
 ---
 
-{{< include "scout-early-access.md" >}}
-
 You can analyze Docker images in continuous integration pipelines as you build
 them using a GitHub action or the Docker Scout CLI plugin.
 
