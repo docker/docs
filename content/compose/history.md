@@ -43,6 +43,6 @@ Compose file format 2.x and 3.x are very similar to each other, but the latter i
 
 To address confusion around Compose CLI versioning, Compose file format versioning, and feature parity depending on whether Swarm mode was in use, file format 2.x and 3.x were merged into the [Compose Specification](compose-file/_index.md). 
 
-Compose V2 uses the Compose Specification for project definition. Unlike the prior file formats, the Compose Specification is rolling and makes the `version` top-level element optional. Compose V2 also makes use of optional specifications - [Deploy](compose-file/build.md), [Develop](compose-file/develop.md) and [Build](compose-file/deploy.md).
+Compose V2 uses the Compose Specification for project definition. Unlike the prior file formats, the Compose Specification is rolling and makes the `version` top-level element optional. Compose V2 also makes use of optional specifications - [Deploy](compose-file/deploy.md), [Develop](compose-file/develop.md) and [Build](compose-file/build.md).
 
 To make [migration](migrate.md) easier, Compose V2 has backwards compatibility for certain elements that have been deprecated or changed between Compose file format 2.x/3.x and the Compose Specification.
