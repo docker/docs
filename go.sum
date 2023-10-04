@@ -36,6 +36,12 @@ github.com/containerd/fuse-overlayfs-snapshotter v1.0.2/go.mod h1:nRZceC8a7dRm3A
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/distribution/distribution v2.8.2+incompatible h1:k9+4DKdOG+quPFZXT/mUsiQrGu9vYCp+dXpuPkuqhk8=
 github.com/distribution/distribution v2.8.2+incompatible/go.mod h1:EgLm2NgWtdKgzF9NpMzUKgzmR7AMmb0VQi2B+ZzDRjc=
+github.com/distribution/distribution v2.8.3+incompatible h1:RlpEXBLq/WPXYvBYMDAmBX/SnhD67qwtvW/DzKc8pAo=
+github.com/distribution/distribution v2.8.3+incompatible/go.mod h1:EgLm2NgWtdKgzF9NpMzUKgzmR7AMmb0VQi2B+ZzDRjc=
+github.com/distribution/distribution v2.8.4-0.20231004140828-d607c6ccb937+incompatible h1:P+KGSuf9hFRNDeS5I8fnEkExK8W/GOr6mzn8aCkVzSU=
+github.com/distribution/distribution v2.8.4-0.20231004140828-d607c6ccb937+incompatible/go.mod h1:EgLm2NgWtdKgzF9NpMzUKgzmR7AMmb0VQi2B+ZzDRjc=
+github.com/distribution/reference v0.5.0 h1:/FUIFXtfc/x2gpa5/VGfiGLuOIdYa1t65IKK2OFGvA0=
+github.com/distribution/reference v0.5.0/go.mod h1:BbU0aIcezP1/5jX/8MP0YiH4SdvB5Y4f/wlDRiLyi3E=
 github.com/docker/buildx v0.11.0 h1:DNCOIYT/7J0sPBlU/ozEhFd4MtbnbFByn45yeTMHXVU=
 github.com/docker/buildx v0.11.0/go.mod h1:Yq7ZNjrwXKzW0uSFMk46dl5Gl903k5+bp6U4apsM5rs=
 github.com/docker/buildx v0.11.1 h1:xfmrAkOJrN+NLRcwhZn1iBgJVAK1dEBEv8lWu1Wxg14=
@@ -130,6 +136,8 @@ github.com/opencontainers/image-spec v1.1.0-rc3 h1:fzg1mXZFj8YdPeNkRXMg+zb88BFV0
 github.com/opencontainers/image-spec v1.1.0-rc3/go.mod h1:X4pATf0uXsnn3g5aiGIsVnJBR4mxhKzfwmvK/B2NTm8=
 github.com/opencontainers/image-spec v1.1.0-rc4 h1:oOxKUJWnFC4YGHCCMNql1x4YaDfYBTS5Y4x/Cgeo1E0=
 github.com/opencontainers/image-spec v1.1.0-rc4/go.mod h1:X4pATf0uXsnn3g5aiGIsVnJBR4mxhKzfwmvK/B2NTm8=
+github.com/opencontainers/image-spec v1.1.0-rc5 h1:Ygwkfw9bpDvs+c9E34SdgGOj41dX/cbdlwvlWt0pnFI=
+github.com/opencontainers/image-spec v1.1.0-rc5/go.mod h1:X4pATf0uXsnn3g5aiGIsVnJBR4mxhKzfwmvK/B2NTm8=
 github.com/opentracing/opentracing-go v1.2.0/go.mod h1:GxEUsuufX4nBwe+T+Wl9TAgYrxe9dPLANfrWvHYVTgc=
 github.com/peterbourgon/diskv v2.0.1+incompatible/go.mod h1:uqqh8zWWbv1HBMNONnaR/tNboyR3/BZd58JJSHlUSCU=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
