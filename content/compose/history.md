@@ -1,14 +1,18 @@
 ---
-title: History of Docker Compose
+title: History and development of Docker Compose
 description: History of Compose V1 and Compose YAML schema versioning
 keywords: compose, compose yaml, swarm, migration, compatibility
 ---
 
 {{< include "compose-eol.md" >}}
 
-This page provides a brief history of the major versions and file format revisions of Docker Compose.
+This page provides:
+ - A brief history of the development of Docker Compose
+ - A clear explanation of the major versions and file formats that make up Compose V1 and Compose V2
+ - The main differences between Compose V1 and Compose V2
 
-The currently supported version of Compose is V2, which uses YAML files as defined by the [Compose specification](https://github.com/compose-spec/compose-spec).
+
+The currently supported version of Compose is V2 and is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec).
 
 For users supporting projects originally targeting older versions of Compose, this can serve as a guide to understanding compatibility and the evolution of changes.
 
