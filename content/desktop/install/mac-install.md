@@ -33,11 +33,12 @@ This page contains download URLs, information about system requirements, and ins
 {{< tabs >}}
 {{< tab name="Mac with Intel chip" >}}
 
-- macOS must be version 11 or newer. That is Big Sur (11), Monterey (12), or Ventura (13). We recommend upgrading to the latest version of macOS.
+- A supported version of macOS.
 
-  > **Note**
+  > **Important**
   >
   > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
+  { .important }
 
 - At least 4 GB of RAM.
 
