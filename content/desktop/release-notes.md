@@ -24,11 +24,23 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+# 4.24.1
+
+{{< release-date date="2023-10-04" >}}
+
+{{< desktop-install win=true version="4.24.1" build_path="/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Fixed a bug on Docker Desktop for Windows where the Docker Dashboard wouldn't display container logs correctly. Fixes [docker/for-win#13714](https://github.com/docker/for-win/issues/13714).
+
 # 4.24.0
 
 {{< release-date date="2023-09-28" >}}
 
-{{< desktop-install all=true version="4.24.0" build_path="/" >}}
+{{< desktop-install all=true version="4.24.0" build_path="/122432/" >}}
 
 ### New
 
@@ -87,7 +99,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed a bug that caused Docker Desktop fail to start on Windows hosts. Fixes [docker/for-win#13662](https://github.com/docker/for-win/issues/13662).
 - Modified the Docker Desktop resource saver feature to skip reducing kernel memory on WSL when no containers are running, as this was causing timeouts in some cases. Instead, users are encouraged to enable "autoMemoryReclaim" on WSL directly via the .wslconfig file (available since WSL 1.3.10).
 
+### Known issues
 
+#### For Mac
+
+- Creating a container with the port 53 fails with the error address `already in use`. As a workaround, deactivate network acceleration by adding `"kernelForUDP": false`, in the `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
 ## 4.23.0
 
 {{< release-date date="2023-09-11" >}}
