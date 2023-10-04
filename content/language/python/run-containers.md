@@ -183,6 +183,6 @@ Related information:
 
 ## Next steps
 
-In the next section, you’ll learn how to run a database in a container and connect it to a Rust application.
+In the next section, you’ll learn how to run a database in a container and connect it to a Python application.
 
 {{< button text="How to develop your application" url="develop.md" >}}
