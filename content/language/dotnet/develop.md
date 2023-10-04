@@ -4,7 +4,7 @@ keywords: .net, development
 description: Learn how to develop your .NET application locally using containers.
 ---
 
-# Prerequisites
+## Prerequisites
 
 Complete [Containerize a .NET application](containerize.md).
 
@@ -212,9 +212,9 @@ Press `ctrl+c` in the terminal to stop your application.
 
 ## Automatically update services
 
-Use Compose file watch to automatically update your running Compose services as you edit and save your code. For more details about file watch, see [Automatically update services with file watch in Docker Compose](../../compose/file-watch.md).
+Use Compose Watch to automatically update your running Compose services as you edit and save your code. For more details about Compose Watch, see [Use Compose Watch](../../compose/file-watch.md).
 
-Open your `compose.yaml` file in an IDE or text editor and then add the file watch instructions. The following is the updated `compose.yaml` file.
+Open your `compose.yaml` file in an IDE or text editor and then add the Compose Watch instructions. The following is the updated `compose.yaml` file.
 
 ```yaml
 services:
@@ -255,7 +255,7 @@ secrets:
   db-password:
     file: db/password.txt
 ```
-Run the following command to run your application with file watch.
+Run the following command to run your application with Compose Watch.
 
 ```console
 $ docker compose watch
@@ -279,7 +279,7 @@ Press `ctrl+c` in the terminal to stop your application.
 
 ## Create a development container
 
-At this point, when you run your containerized application, it's using the .NET runtime image. While this small image is good for production, it lacks the SDK tools and dependencies you may need when developing. You probably also don't need to run `dotnet publish` when developing. You can use multi-stage builds to build stages for both development and production in the same Dockerfile. For more details, see [Multi-stage builds](../../build/building/multi-stage.md).
+At this point, when you run your containerized application, it's using the .NET runtime image. While this small image is good for production, it lacks the SDK tools and dependencies you may need when developing. Also, during development, you may not need to run `dotnet publish`. You can use multi-stage builds to build stages for both development and production in the same Dockerfile. For more details, see [Multi-stage builds](../../build/building/multi-stage.md).
 
 Add a new development stage to your Dockerfile and update your `compose.yaml` file to use this stage for local development.
 
@@ -366,7 +366,7 @@ Your containerized application will now use the `mcr.microsoft.com/dotnet/sdk:6.
 ## Summary
 
 In this section, you took a look at setting up your Compose file to add a local
-database and persist data. You also learned how to use Compose file watch to automatically rebuild and run your container when you update your code. And finally, you learned how to create a development container that contains the SDK tools and dependencies needed for development.
+database and persist data. You also learned how to use Compose Watch to automatically rebuild and run your container when you update your code. And finally, you learned how to create a development container that contains the SDK tools and dependencies needed for development.
 
 Related information:
  - [Compose file reference](/compose/compose-file/)

@@ -84,7 +84,6 @@ directory.
 │ ├── .git/
 │ ├── src/
 │ ├── .dockerignore
-│ ├── .gitignore
 │ ├── compose.yaml
 │ ├── Dockerfile
 │ ├── README.Docker.md

@@ -43,13 +43,15 @@ Create a GitHub repository, configure the Docker Hub secrets, and push your sour
    $ git remote set-url origin https://github.com/your-username/your-repository.git
    ```
 
-7.  In your local repository on your machine, run the following command to rename the branch to main.
+7. In your local repository on your machine, run the following command to rename
+   the branch to main.
 
    ```console
    $ git branch -M main
    ```
 
-8. Run the following commands to stage, commit, and then push your local repository to GitHub.
+8. Run the following commands to stage, commit, and then push your local
+   repository to GitHub.
 
    ```console
    $ git add -A
