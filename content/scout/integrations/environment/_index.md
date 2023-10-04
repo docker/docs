@@ -6,8 +6,6 @@ keywords: supply chain, security, streams, environments, workloads, deployments
 title: Integrating Docker Scout with environments
 ---
 
-{{< include "scout-early-access.md" >}}
-
 You can integrate Docker Scout with your runtime environments, and get insights
 for your running workloads. This gives you a real-time view of your security
 status for your deployed artifacts.

@@ -12,5 +12,3 @@ repository on GitHub:
 
 https://github.com/docker/scout-cli
 -->
-
-{{< include "scout-early-access.md" >}}

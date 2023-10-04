@@ -6,8 +6,6 @@ aliases:
   - /scout/artifactory/
 ---
 
-{{< include "scout-early-access.md" >}}
-
 Integrating Docker Scout with JFrog Artifactory lets you run image analysis
 automatically on images in Artifactory registries.
 

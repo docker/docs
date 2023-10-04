@@ -35,14 +35,17 @@ grid:
     description: |
       The web interface for Docker Scout.
     icon: dashboard
-  - title: Policy {{< badge color=violet text=Beta >}}
+  - title: Policy {{< badge color=violet text="Early Access" >}}
     link: /scout/policy/
     description: |
       Ensure that your artifacts align with supply chain best practices.
     icon: policy
+  - title: Upgrade
+    link: /billing/scout-billing/
+    description: |
+      The free plan includes up to 3 repositories. Upgrade for more.
+    icon: upgrade
 ---
-
-{{< include "scout-early-access.md" >}}
 
 Container images are often built from layers of other container images and
 software packages. These layers and packages can contain vulnerabilities that
@@ -58,7 +61,5 @@ You can use Docker Scout in Docker Desktop, Docker Hub, the Docker CLI, and in
 the [Docker Scout Dashboard](./dashboard.md). Docker Scout also supports
 integrations with third-party systems, refer to [Integrating Docker
 Scout](./integrations/index.md) for more information.
-
-{{< include "scout-plans.md" >}}
 
 {{< grid >}}

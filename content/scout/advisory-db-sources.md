@@ -5,8 +5,6 @@ keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security
 title: Advisory database sources and matching service
 ---
 
-{{< include "scout-early-access.md" >}}
-
 Docker Scout is a service that helps developers and security teams build and
 maintain a secure software supply chain. A key component of this is the ability
 to assess your software artifacts against a reliable source of vulnerability
