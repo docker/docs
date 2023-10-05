@@ -1957,7 +1957,7 @@ Manuals:
     - path: /compose/environment-variables/env-file/
       title: Use an environment file
     - path: /compose/environment-variables/envvars/
-      title: Change pre-defined environment variables
+      title: Set or change pre-defined environment variables
   - path: /compose/profiles/
     title: Using service profiles
   - sectiontitle: Working with multiple Compose files
