@@ -59,12 +59,19 @@ work.
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows" >}}
+   {{< tab name="Windows (PowerShell)" >}}
 
-   Run this command in PowerShell.
 
    ```powershell
    $ docker run -it --mount "type=bind,src=$pwd,target=/src" ubuntu bash
+   ```
+   
+   {{< /tab >}}
+   {{< tab name="Windows (CMD)" >}}
+
+
+   ```Command Prompt
+   > docker run -it --mount "type=bind,src=%cd%,target=/src" ubuntu bash
    ```
    
    {{< /tab >}}
