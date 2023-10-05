@@ -67,7 +67,7 @@ work.
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows-CMD" >}}
+   {{< tab name="Windows (CMD)" >}}
 
 
    ```Command Prompt
