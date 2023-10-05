@@ -1,14 +1,14 @@
 ---
 description: Compose pre-defined environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
-title: Change pre-defined environment variables in Docker Compose
+title: Set or change pre-defined environment variables in Docker Compose
 aliases:
 - /compose/reference/envvars/
 ---
 
 Compose already comes with pre-defined environment variables. 
 
-This page contains information on how you can change the following pre-defined environment variables if you need to:
+This page contains information on how you can set or change the following pre-defined environment variables if you need to:
 
 - `COMPOSE_CONVERT_WINDOWS_PATHS`
 - `COMPOSE_FILE`
@@ -26,7 +26,7 @@ Compose also inherits common Docker CLI environment variables, such as `DOCKER_H
 
 ## Methods to override 
 
-You can change the pre-defined environment variables:
+You can set or change the pre-defined environment variables:
 - Within your Compose file using the [`environment` attribute](set-environment-variables.md#use-the-environment-attribute)
 - With an [environment file](env-file.md) 
 - From the command line
