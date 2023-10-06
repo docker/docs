@@ -52,7 +52,7 @@ Renewals charge to the original credit card used to buy Docker Scout Team.
 
 ### Update number of repositories for your subscription
 
-To add or remove the number of repositories associated with your subscription, [contact support](https://hub.docker.com/support/contact).
+To add or remove the number of repositories associated with your subscription, [contact support](https://hub.docker.com/support/contact?topic=Billing&subtopic=Upgrade%20subscription&subject=I%20would%20like%20to%20change%20my%20Scout%20repository%20limit&description=to%20X%20repositories).
 
 ### Cancel your subscription
 
