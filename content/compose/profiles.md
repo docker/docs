@@ -170,7 +170,7 @@ db:
   profiles: ["debug", "dev"]
 ```
 
-or start a profile of `db` explicitly:
+or start the `dev` profile explicitly:
 
 ```console
 # Profiles "debug" is started automatically by targeting phpmyadmin
