@@ -27,7 +27,7 @@ Docker Scout Team includes:
 - All the features available in Docker Scout Free
 - In addition to 3 Docker Scout-enabled repositories, add up to 100 repositories when you buy your subscription
 
-You can buy Docker Scout Team in Docker Hub. See [Docker Scout billing](../billing/scout-billing.md). To learn more about pricing per repository, [Docker Scout Pricing](https://www.docker.com/products/docker-scout/).
+You can buy Docker Scout Team in Docker Hub. See [Docker Scout billing](../billing/scout-billing.md). To learn more about pricing per repository, see [Docker Scout Pricing](https://www.docker.com/products/docker-scout/).
 
 ## Docker Scout Business
 
