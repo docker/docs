@@ -10,6 +10,6 @@ With a company, administrators can:
 
 - View and manage all nested organizations and configure settings centrally.
 - Carefully control access to the company and company settings.
-- Have up to ten unique users assigned the company owner role without occupying a purchased seat.
+- Have up to ten unique users assigned the company owner role.
 - Configure SSO and SCIM for all nested organizations.
 - Enforce SSO for all users in the company.
