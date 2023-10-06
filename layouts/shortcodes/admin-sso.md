@@ -28,7 +28,7 @@ Before enabling SSO in Docker, administrators must first configure their IdP to 
 
 After establishing the connection between the IdP server and Docker, administrators sign in to {{ $product_name }} and complete the SSO enablement process.
 
-When you enable SSO for your company, a first-time user can sign in to Docker Hub using their company's domain email address. They're then added to your company and assigned to the company team in the organization.
+When you enable SSO for your company, a first-time user can sign in to Docker Hub using their company's domain email address. They're then added to your company, assigned to an organization, and optionally assigned to a team.
 
 Administrators can then choose to enforce SSO login and effortlessly manage SSO connections for their individual company.
 
