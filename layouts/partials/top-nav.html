@@ -4,9 +4,9 @@
   <nav>
     <ul class="box-content flex mt-1 gap-4 md:hidden">
       {{ range site.Menus.main }}
-      <li class="opacity-100 border-b-4 hover:opacity-100
+      <li class="border-b-4
           {{- if not (eq $firstSection .Name) }}
-            opacity-60 border-blue-light dark:border-blue-dark-200 hover:border-blue-light-600 dark:hover:border-blue-dark-100
+            border-blue-light dark:border-blue-dark-200 hover:border-blue-light-600 dark:hover:border-blue-dark-100
           {{- end }}">
         <a class="block py-1 px-2" href="{{ .URL }}">{{ .Name }}</a>
       </li>
