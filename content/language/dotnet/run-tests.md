@@ -1,142 +1,117 @@
 ---
-title: Run your tests
-keywords: .NET, build, test
-description: How to build and run your tests
+title: Run .NET tests in a container
+keywords: .NET, test
+description: Learn how to run your .NET tests in a container.
 ---
 
 ## Prerequisites
 
-Work through the steps to build an image and run it as a containerized application in [Use containers for development](develop.md).
+Complete all the previous sections of this guide, starting with [Containerize a .NET application](containerize.md).
 
-## Introduction
+## Overview
 
-Testing is an essential part of modern software development. In combination with 3rd party frameworks or services, Docker helps to test applications without mocks or complicated environment configurations fast and reliably.
+Testing is an essential part of modern software development. Testing can mean a
+lot of things to different development teams. There are unit tests, integration
+tests and end-to-end testing. In this guide you take a look at running your unit
+tests in Docker when developing and when building.
 
-## Add .NET test project
+## Run tests when developing locally
 
-To test our sample application, we create a standalone test project from a template using the .NET CLI. On your local machine, open a terminal, change the directory to the `dotnet-docker` directory and run the following command:
+The sample application already has an xUnit test inside the `tests` directory. When developing locally, you can use Compose to run your tests.
 
-```console
-$ cd /path/to/dotnet-docker
-$ dotnet new xunit -n myWebApp.Tests -o tests
-```
-
-Next, we'll update the test project and add the Testcontainers for .NET package that allows us to run tests against Docker resources (PostgreSQL container). Switch to the `tests` directory and run the following command:
+Run the following command in the `docker-dotnet-sample` directory to run the tests inside a container.
 
 ```console
-$ dotnet add package Testcontainers --version 2.3.0
+$ docker compose run --build --rm server dotnet test /source/tests
 ```
 
-## Add a test
-
-Open the test project in your favorite IDE and replace the contents of `UnitTest1.cs` with the following code:
-
-```c#
-using System.Net;
-using DotNet.Testcontainers.Builders;
-using DotNet.Testcontainers.Containers;
-using DotNet.Testcontainers.Networks;
-
-public sealed class UnitTest1 : IAsyncLifetime, IDisposable
-{
-    private const ushort HttpPort = 80;
-
-    private readonly CancellationTokenSource _cts = new(TimeSpan.FromMinutes(1));
-
-    private readonly IDockerNetwork _network;
-
-    private readonly IDockerContainer _dbContainer;
-
-    private readonly IDockerContainer _appContainer;
-
-    public UnitTest1()
-    {
-        _network = new TestcontainersNetworkBuilder()
-            .WithName(Guid.NewGuid().ToString("D"))
-            .Build();
-
-        _dbContainer = new TestcontainersBuilder<TestcontainersContainer>()
-            .WithImage("postgres")
-            .WithNetwork(_network)
-            .WithNetworkAliases("db")
-            .WithVolumeMount("postgres-data", "/var/lib/postgresql/data")
-            .Build();
-
-        _appContainer = new TestcontainersBuilder<TestcontainersContainer>()
-            .WithImage("dotnet-docker")
-            .WithNetwork(_network)
-            .WithPortBinding(HttpPort, true)
-            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(HttpPort))
-            .Build();
-    }
-
-    public async Task InitializeAsync()
-    {
-        await _network.CreateAsync(_cts.Token)
-            .ConfigureAwait(false);
-
-        await _dbContainer.StartAsync(_cts.Token)
-            .ConfigureAwait(false);
-
-        await _appContainer.StartAsync(_cts.Token)
-            .ConfigureAwait(false);
-    }
-
-    public Task DisposeAsync()
-    {
-        return Task.CompletedTask;
-    }
-
-    public void Dispose()
-    {
-        _cts.Dispose();
-    }
-
-    [Fact]
-    public async Task Test1()
-    {
-        using var httpClient = new HttpClient();
-        httpClient.BaseAddress = new UriBuilder("http", _appContainer.Hostname, _appContainer.GetMappedPublicPort(HttpPort)).Uri;
-
-        var httpResponseMessage = await httpClient.GetAsync(string.Empty)
-            .ConfigureAwait(false);
-
-        var body = await httpResponseMessage.Content.ReadAsStringAsync()
-            .ConfigureAwait(false);
-
-        Assert.Equal(HttpStatusCode.OK, httpResponseMessage.StatusCode);
-        Assert.Contains("Welcome", body);
-    }
-}
-```
-
-The test class picks up the configurations and lessons we learned in the previous steps. It connects our application and database through a custom Docker network and runs an HTTP request against our application. As you can see, running containerized tests allows us to test applications without mocks or complicated environment configurations. The tests run on any Docker-API compatible environments including CI.
-
-## Run the test
-
-Before you run the test, [stop](run-containers.md#stop-start-and-name-containers) any running containers from the previous sections.
-
-To run the test, change directory to the `dotnet-docker` directory and run the following `dotnet test` command:
-
-```console
-$ dotnet test tests
-```
-
-You should see output like the following:
+You should see output that contains the following.
 
 ```console
 Starting test execution, please wait...
 A total of 1 test files matched the specified pattern.
 
-Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - myWebApp.Tests.dll (net6.0)
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - /source/tests/bin/Debug/net6.0/tests.dll (net6.0)
 ```
+
+To learn more about the command, see [docker compose run](/engine/reference/commandline/compose_run/).
+
+## Run tests when building
+
+To run your tests when building, you need to update your Dockerfile. You can create a new test stage that runs the tests, or run the tests in the existing build stage. For this guide, update the Dockerfile to run the tests in the build stage.
+
+The following is the updated Dockerfile.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
+ARG TARGETARCH
+COPY . /source
+WORKDIR /source/src
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet publish -a ${TARGETARCH/amd64/x64} --use-current-runtime --self-contained false -o /app
+RUN dotnet test /source/tests
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS development
+COPY . /source
+WORKDIR /source/src
+CMD dotnet run --no-launch-profile
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS final
+WORKDIR /app
+COPY --from=build /app .
+ARG UID=10001
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    appuser
+USER appuser
+ENTRYPOINT ["dotnet", "myWebApp.dll"]
+```
+
+Run the following command to build an image using the build stage as the target and view the test results. Include `--progress=plain` to view the build output, `--no-cache` to ensure the tests always run, and `--target build` to target the build stage.
+
+```console
+$ docker build -t dotnet-docker-image-test --progress=plain --no-cache --target build .
+```
+
+You should see output containing the following.
+
+```console
+#11 [build 5/5] RUN dotnet test /source/tests
+#11 1.564   Determining projects to restore...
+#11 3.421   Restored /source/src/myWebApp.csproj (in 1.02 sec).
+#11 19.42   Restored /source/tests/tests.csproj (in 17.05 sec).
+#11 27.91   myWebApp -> /source/src/bin/Debug/net6.0/myWebApp.dll
+#11 28.47   tests -> /source/tests/bin/Debug/net6.0/tests.dll
+#11 28.49 Test run for /source/tests/bin/Debug/net6.0/tests.dll (.NETCoreApp,Version=v6.0)
+#11 28.67 Microsoft (R) Test Execution Command Line Tool Version 17.3.3 (x64)
+#11 28.67 Copyright (c) Microsoft Corporation.  All rights reserved.
+#11 28.68
+#11 28.97 Starting test execution, please wait...
+#11 29.03 A total of 1 test files matched the specified pattern.
+#11 32.07
+#11 32.08 Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: < 1 ms - /source/tests/bin/Debug/net6.0/tests.dll (net6.0)
+#11 DONE 32.2s
+```
+
+To learn more about building and running tests, see the [Build with Docker guide](../../build/guide/_index.md).
+
+## Summary
+
+In this section, you learned how to run tests when developing locally using Compose and how to run tests when building your image.
+
+Related information:
+ - [docker compose run](/engine/reference/commandline/compose_run/)
+ - [Build with Docker guide](../../build/guide/index.md)
 
 ## Next steps
 
-In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
+Next, you’ll learn how to set up a CI/CD pipeline using GitHub Actions.
 
 {{< button text="Configure CI/CD" url="configure-ci-cd.md" >}}
-
-## Feedback
-
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs](https://github.com/docker/docker.github.io/issues/new?title=[dotnet%20docs%20feedback]) GitHub repository. Alternatively, [create a PR](https://github.com/docker/docker.github.io/pulls) to suggest updates.
