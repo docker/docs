@@ -21,6 +21,7 @@ This page contains information on how you can set or change the following pre-de
 - `COMPOSE_PATH_SEPARATOR`
 - `COMPOSE_ANSI`
 - `COMPOSE_STATUS_STDOUT`
+- `COMPOSE_ENV_FILES`
 
 Compose also inherits common Docker CLI environment variables, such as `DOCKER_HOST` and `DOCKER_CONTEXT`. See [Docker CLI environment variable reference](/engine/reference/commandline/cli/#environment-variables) for details.
 
@@ -140,6 +141,13 @@ The default value is false to clearly separate the output streams between Compos
   * `true` or `1`, to enable,
   * `false` or `0`, to disable.
 * Defaults to: `0`.
+
+### COMPOSE\_ENV\_FILES
+
+Lets you specify which environment files Compose should use.
+
+Default:
+Example:
 
 ## Unsupported in Compose V2
 
