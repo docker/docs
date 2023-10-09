@@ -54,58 +54,103 @@ Docker Desktop 4.23.0 and later versions ship with a Hydrobuild-compatible
 Buildx binary. Alternatively, you can download and install the binary manually
 from [this repository](https://github.com/docker/buildx-desktop).
 
-## Connecting to Hydrobuild
+## Connect to Hydrobuild
 
-To start building with Hydrobuild, you must create a new builder using the
-`docker buildx create` command. The builder is connected to Hydrobuild through
-an endpoint that you specify. The endpoint represents a single, isolated
-builder. Builder endpoints have the following format:
+To start using Hydrobuild, you must first add the builder's endpoint to your
+local Docker configuration.
 
-cloud://<org>/default
+{{< tabs group="ui" >}}
+{{< tab name="CLI" >}}
 
-`<org>` is the Docker organization that the builder is provisioned for.
-
-The builders have native support for the `linux/amd64` and `linux/arm64`
-architectures by default. This gives you a high-performance build cluster for
-building multi-platform images natively.
-
-You can omit the `cloud://` protocol prefix from the endpoint when you create a
-builder using the `cloud` driver.
-
-### Create a builder
-
-1. Sign in to your Docker ID using the Docker Desktop UI or the `docker login`
-   command.
-
-2. Create a builder that uses the `cloud` driver.
+1. Sign in to your Docker account
 
    ```console
-   $ docker buildx create --driver cloud <org>/default
+   $ docker login
    ```
 
-   Replace `<org>` with the Docker organization.
+2. Add the Hydrobuild endpoint.
 
-   This creates a builder named `cloud-<org>-default`.
+   ```console
+   $ docker buildx create --driver cloud <ORG>/default
+   ```
+
+   Replace `<ORG>` with the Docker Hub namespace of your Docker organization.
+
+This creates a builder named `cloud-<org>-default`.
+
+{{< /tab >}}
+{{< tab name="GUI" >}}
+
+Enable the [Builds view](../desktop/use-desktop/builds.md) in Docker Desktop
+and complete the following steps:
+
+1. Sign in to your Docker account using the **Sign in** button in Docker Desktop.
+
+2. Open the Docker Desktop settings and navigate to the **Builders** tab.
+
+3. Under **Available builders**, select **Create builder**.
+
+   ![Create builder GUI screenshot](./images/create-builder-gui.webp)
+
+{{< /tab >}}
+{{< /tabs >}}
+
+The builder has native support for the `linux/amd64` and `linux/arm64`
+architectures. This gives you a high-performance build cluster for building
+multi-platform images natively.
 
 ## Use Hydrobuild from the CLI
 
-To run a build using Hydrobuild, invoke a build command and specify the
-name of the builder using the `--builder` flag.
+To build using Hydrobuild, invoke a build command and specify the name of the
+builder using the `--builder` flag.
 
 ```console
 $ docker buildx build --builder cloud-<org>-default --tag <org>/<image> .
 ```
 
-> **Note**
->
-> Building with `--tag` loads the build result to the local image store
-> automatically when the build finishes. To build without a tag and load the
-> result, you must pass the `--load` flag.
->
-> If you use the containerd image store, you must always pass `--load` to
-> download the results, even if you build with a tag.
+If you want to use Hydrobuild without having to specify the `--builder` flag
+each time, you can set it as the default builder.
 
-To build a multi-platform image and push it to a registry:
+{{< tabs group="ui" >}}
+{{< tab name="CLI" >}}
+
+Run the following command:
+
+```console
+$ docker buildx use cloud-<org>-default --global
+```
+
+{{< /tab >}}
+{{< tab name="GUI" >}}
+
+1. Open the Docker Desktop settings and navigate to the **Builders** tab.
+2. Find the Hydrobuild builder under **Available builders**.
+3. Open the drop-down menu and select **Use**.
+
+   ![Selecting Hydrobuild as default using the GUI](./images/set-default-builder-gui.webp)
+
+{{< /tab >}}
+{{< /tabs >}}
+
+Changing your default builder with `docker buildx use` only changes the default
+builder for the `docker buildx build` command. The `docker build` command still
+uses the `default` builder, unless you specify the `--builder` flag explicitly.
+
+If you use build scripts, such as `make`, we recommend that you update your
+build commands from `docker build` to `docker buildx build`, to avoid any
+confusion with regards to builder selection. Alternatively, you can run `docker
+buildx install` to make the default `docker build` command behave like `docker
+buildx build`, without discrepancies.
+
+## Loading build results
+
+Building with `--tag` loads the build result to the local image store
+automatically when the build finishes. To build without a tag and load the
+result, you must pass the `--load` flag.
+
+Loading the build result for multi-platform images is not supported. Use the
+`docker buildx build --push` flag when building multi-platform images to push
+the output to a registry.
 
 ```console
 $ docker buildx build --builder cloud-<org>-default \
@@ -114,40 +159,33 @@ $ docker buildx build --builder cloud-<org>-default \
   --push .
 ```
 
-> **Note**
->
-> If you build multi-platform images, you won't be able to load the images back
-> to your local image store unless you turn on the containerd image store
-> feature, and use the `--load` flag.
->
-> Using the containerd image store with Hydrobuild currently results in slower
-> transfers of build output to the client, compared to when you use the default
-> image store.
->
-> When building multi-platform images, consider pushing the resulting image to
-> a registry directly, using the `docker buildx build --push` flag.
-
-### Use by default
-
-If you want to use Hydrobuild by default, you can run the following command to
-make it the selected builder:
+If you want to build with a tag, but you don't want to load the results to your
+local image store, you export the build results to the build cache only:
 
 ```console
-$ docker buildx use cloud-<org>-default --global
+$ docker buildx build --builder cloud-<org>-default \
+  --platform linux/amd64,linux/arm64 \
+  --tag <org>/<image> \
+  --output type=cacheonly .
 ```
 
-> **Note**
->
-> Changing your default builder with `docker buildx use` only changes the
-> default builder for the `docker buildx build` command. The `docker build`
-> command still uses the `default` builder, unless you specify the `--builder`
-> flag explicitly.
->
-> If you use build scripts, such as `make`, we recommend that you update your
-> build commands from `docker build` to `docker buildx build`, to avoid any
-> confusion with regards to builder selection. Alternatively, you can run
-> `docker buildx install` to make the default `docker build` command behave
-> like `docker buildx build`, without discrepancies.
+## Multi-platform builds
+
+To run multi-platform builds, you must specify all of the platforms that you
+want to build for using the `--platform` flag.
+
+```console
+$ docker buildx build --builder cloud-<org>-default \
+  --platform linux/amd64,linux/arm64 \
+  --tag <org>/<image> \
+  --push .
+```
+
+If you don't specify the platform, Hydrobuild automatically builds for the
+architecture matching your local environment.
+
+To learn more about building for multiple platforms, refer to [Multi-platform
+builds](./building/multi-platform.md).
 
 ## Use Hydrobuild in CI
 
@@ -166,8 +204,9 @@ registry directly, rather than loading the image and then pushing it. Pushing
 directly speeds up your builds and avoids unnecessary file transfers.
 
 If you just want to build and discard the output, export the results to the
-build cache using `--output type=cacheonly`, or build without a `tag`.
-Hydrobuild automatically loads the build result if you build a tagged image.
+build cache or build without tagging the image. Hydrobuild automatically loads
+the build result if you build a tagged image. See [Loading build
+results](#loading-build-results) for details.
 
 {{< tabs >}}
 {{< tab name="GitHub Actions" >}}
@@ -451,3 +490,27 @@ default `docker` builder, run the following command:
 ```console
 $ docker context use default
 ```
+
+### How do I manage the build cache with Hydrobuild?
+
+You don't need to manage the builder's cache manually. The system manages it
+for you through [garbage collection](./cache/garbage-collection.md).
+
+Hydrobuild uses the following garbage collection limits:
+
+- Size: 90% of 1TB
+- Age: cache not used in the past 180 days
+- Number of build history records: 10 000
+
+Old cache is automatically removed if you hit any of these limits. You can
+check your current cache state using the [`docker buildx du`
+command](../engine/reference/commandline/buildx_du.md).
+
+To clear the builder's cache manually, you can use the [`docker buildx prune`
+command](../engine/reference/commandline/buildx_prune.md) command. This works
+like pruning the cache for any other builder.
+
+> **Note**
+>
+> Pruning Hydrobuild cache also removes the cache for other team members using
+> the same builder.
