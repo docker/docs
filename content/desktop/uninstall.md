@@ -54,22 +54,39 @@ Once Docker Desktop has been removed, users must remove the `credsStore` and `cu
 {{< /tab >}}
 {{< tab name="Ubuntu" >}}
 
-To remove Docker Desktop for Ubuntu, run:
+### Remove Docker Desktop
 
-```console
-$ sudo apt remove docker-desktop
+1. Run the following command to remove Docker Desktop:
 ```
-
-For a complete cleanup, remove configuration and data files at `$HOME/.docker/desktop`, the symlink at `/usr/local/bin/com.docker.cli`, and purge
-the remaining systemd service files.
-
-```console
-$ rm -r $HOME/.docker/desktop
-$ sudo rm /usr/local/bin/com.docker.cli
-$ sudo apt purge docker-desktop
+sudo apt remove docker-desktop
 ```
+2. Remove configuration and data files:
+```
+rm -r $HOME/.docker/desktop
+```
+3. Remove the symlink:
+```
+sudo rm /usr/local/bin/com.docker.cli
+```
+4. Purge remaining systemd service files:
+```
+sudo apt purge docker-desktop
+```
+5. Remove the credsStore and currentContext properties from `$HOME/.docker/config.json`:
+```
+sudo nano $HOME/.docker/config.json
+```
+Remove the following lines:
+```
+{
+  "credsStore": "desktop",
+  "currentContext": "desktop"
+}
+```
+6. Save and exit the file.
+7. Delete any edited configuration files manually.
 
-Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/config.json`. Additionally, you must delete any edited configuration files manually. 
+That's it! You have successfully removed Docker Desktop for Ubuntu.
 
 {{< /tab >}}
 {{< tab name="Debian" >}}
