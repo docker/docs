@@ -118,7 +118,9 @@ Docker from the repository.
    > ```console
    > $(. /etc/os-release && echo "$VERSION_CODENAME")
    > ```
-   > with the codename for the equivalent version of Debian.
+   >
+   > Replace this part with the codename of the corresponding Debian release,
+   > such as `bookworm`.
 
 2. Install the Docker packages.
 
