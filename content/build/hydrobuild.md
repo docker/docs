@@ -451,3 +451,27 @@ default `docker` builder, run the following command:
 ```console
 $ docker context use default
 ```
+
+### How do I manage the build cache with Hydrobuild?
+
+You don't need to manage the builder's cache manually. The system manages it
+for you through [garbage collection](./cache/garbage-collection.md).
+
+Hydrobuild uses the following garbage collection limits:
+
+- Size: 90% of 1TB
+- Age: cache not used in the past 180 days
+- Number of build history records: 10 000
+
+Old cache is automatically removed if you hit any of these limits. You can
+check your current cache state using the [`docker buildx du`
+command](../engine/reference/commandline/buildx_du.md).
+
+To clear the builder's cache manually, you can use the [`docker buildx prune`
+command](../engine/reference/commandline/buildx_prune.md) command. This works
+like pruning the cache for any other builder.
+
+> **Note**
+>
+> Pruning Hydrobuild cache also removes the cache for other team members using
+> the same builder.
