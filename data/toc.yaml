@@ -1784,7 +1784,7 @@ Manuals:
         - path: /build/building/packaging/
           title: Packaging your software
         - path: /build/building/context/
-          title: Build context
+          title: Context
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/multi-platform/
