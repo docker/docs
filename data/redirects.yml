@@ -576,6 +576,8 @@
   - /go/docker-scout/
 "/scout/quickstart/":
   - /go/scout-quickstart/
+"/scout/dashboard/":
+  - /go/scout-dashboard/
 "/scout/ci/":
   - /go/scout-ci/
 "/scout/policy/":
@@ -595,6 +597,8 @@
   - /go/scout-artifactory/
 "/scout/integrations/registry/ecr/":
   - "/go/scout-ecr/"
+"/scout/integrations/environment/":
+  - "/go/scout-env/"
 "/scout/integrations/environment/sysdig/":
   - "/go/scout-sysdig/"
 
