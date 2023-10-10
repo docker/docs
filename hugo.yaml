@@ -296,18 +296,6 @@ module:
         - source: docs/ecs-compose-features.md
           target: content/cloud/ecs-compose-features.md
 
-    - path: github.com/distribution/distribution
-      mounts:
-      - source: docs
-        target: content/registry
-        excludeFiles:
-        - "**/index.md"
-        - "**/api.md.tmpl"
-      - source: docs/spec/index.md
-        target: content/registry/spec/_index.md
-      - source: docs/spec/auth/index.md
-        target: content/registry/spec/auth/_index.md
-
     - path: github.com/compose-spec/compose-spec
       mounts:
       - source: 01-status.md
