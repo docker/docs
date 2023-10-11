@@ -26,8 +26,8 @@ To get started with Docker Engine on Raspberry Pi OS, make sure you
 ### OS requirements
 
 This installation instruction refers to the 32-bit (armhf) version of Raspberry
-Pi OS. If you're using the 64-bit (arm64) version, follow the instructions for
-[Debian](debian.md).
+Pi OS. **If you're using the 64-bit (arm64) version, follow the instructions for
+[Debian](debian.md).**
 
 The following OS versions are supported:
 
@@ -86,6 +86,11 @@ You can install Docker Engine in different ways, depending on your needs:
 
 ### Install using the apt repository {#install-using-the-repository}
 
+> **Note**
+>
+> As a reminder, for 64-bit (arm64) Raspbian follow the [Debian](debian.md)
+> instructions, _not_ this section.
+
 Before you install Docker Engine for the first time on a new host machine, you
 need to set up the Docker Apt repository. Afterward, you can install and update
 Docker from the repository.
@@ -100,7 +105,7 @@ Docker from the repository.
    curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
    sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-   # Set up Docker's Apt repository:
+   # Set up Docker's Apt repository for 32-bit Raspbian OS:
    echo \
      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
      "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
