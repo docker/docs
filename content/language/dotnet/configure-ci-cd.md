@@ -144,6 +144,6 @@ Related information:
 
 ## Next steps
 
-Next, learn how you can deploy your application.
+Next, learn how you can locally test and debug your workloads on Kubernetes before deploying.
 
-{{< button text="Deploy your app" url="./deploy.md" >}}
+{{< button text="Develop using Kubernetes" url="./deploy.md" >}}
