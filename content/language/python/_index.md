@@ -6,18 +6,13 @@ toc_min: 1
 toc_max: 2
 ---
 
-The Python getting started guide teaches you how to containerize a Python application using Docker. In this guide, you'll learn how to:
+The Python language-specific guide teaches you how to containerize a Python application using Docker. In this guide, you’ll learn how to:
 
-* Create a new Dockerfile which contains instructions required to build a Python image
-* Build an image and run the newly built image as a container
-* Set up volumes and networking
-* Orchestrate containers using Compose
-* Use containers for development
-* Configure a CI/CD pipeline for your application using GitHub Actions
-* Deploy your application to the cloud
+* Containerize and run a Node.js application
+* Set up a local environment to develop a Python application using containers
+* Configure a CI/CD pipeline for a containerized Python application using GitHub Actions
+* Deploy your containerized Python application locally to Kubernetes to test and debug your deployment
 
-After completing the Python getting started modules, you should be able to containerize your own Python application based on the examples and instructions provided in this guide.
+Start by containerizing an existing Python application.
 
-Let's get started!
-
-{{< button text="Build your first Python image" url="build-images.md" >}}
+{{< button text="Containerize a Python app" url="containerize.md" >}}
