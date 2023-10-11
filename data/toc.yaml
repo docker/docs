@@ -1448,7 +1448,7 @@ Manuals:
     - path: /engine/install/ubuntu/
       title: Ubuntu
     - path: /engine/install/raspberry-pi-os/
-      title: Raspbian
+      title: Raspberry Pi OS (32-bit)
     - path: /engine/install/binaries/
       title: Binaries
     - path: /engine/install/linux-postinstall/
