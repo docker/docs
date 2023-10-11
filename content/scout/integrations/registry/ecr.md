@@ -95,8 +95,10 @@ The ECR integration is now active. For Docker Scout to start analyzing images
 in the registry, you need to activate it for each repository. Refer to
 [repository settings](../../dashboard.md#repository-settings).
 
-After activating repositories, images that you push will be analyzed by Docker
-Scout, and the analysis results will appear in the Docker Scout Dashboard.
+After activating repositories, images that you push are analyzed by Docker
+Scout. The analysis results appear in the Docker Scout Dashboard.
+If your repository already contains images, Docker Scout pulls and analyzes the
+latest image version automatically.
 
 ## Integrate additional registries
 
@@ -176,13 +178,3 @@ Scout Dashboard:
 
   The account ID and region are included in the registry hostname:
   `<aws_account_id>.dkr.ecr.<region>.amazonaws.com/<image>`
-
-- Docker Scout only analyzes images that were pushed _after_ the integration
-  was created. If you want to analyze images created before the registry was
-  integrated, you can push the images to the registry again.
-
-  ```console
-  $ docker login <aws_account_id>.dkr.ecr.<region>.amazonaws.com/<image>
-  $ docker pull <aws_account_id>.dkr.ecr.<region>.amazonaws.com/<image>
-  $ docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/<image>
-  ```
