@@ -31,6 +31,11 @@ repositories per Docker organization. You can update your Docker Scout plan if
 you need additional repositories, see [Docker Scout
 billing](../billing/scout-billing.md).
 
+Before you can activate image analysis for a repository, ensure that the
+registry is integrated with Docker Scout. Docker Hub is integrated by default.
+For information about integrating Docker Scout with registries and other
+systems, see [Integrating Docker Scout](./integrations/_index.md)
+
 > **Note**
 >
 > You must have the **Editor** or **Owner** role in the Docker organization to
@@ -45,18 +50,14 @@ To activate image analysis:
 5. Select the repositories that you want to enable.
 6. Select **Enable image analysis**.
 
+If your repositories already contain images, Docker Scout pulls and analyzes
+the latest images automatically.
+
 ## Analyze registry images
 
-To trigger image analysis for an image in a registry, push the image to a registry that's
-integrated with Docker Scout, to a repository where image analysis is
-activated.
-
-Prerequisites:
-
-- The registry must be integrated with Docker Scout. Docker Hub is integrated
-  by default.
-- You must [activate Docker Scout](#activate-image-analysis) for the
-  repository, before pushing the image.
+To trigger image analysis for an image in a registry, push the image to a
+registry that's integrated with Docker Scout, to a repository where image
+analysis is activated.
 
 1. Sign in with your Docker ID, either using the `docker login` command or the
    **Sign in** button in Docker Desktop.
