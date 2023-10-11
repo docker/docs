@@ -24,7 +24,7 @@ In your `docker-dotnet-sample` directory, create a file name
 `docker-dotnet-kubernetes.yaml`. Open the file in an IDE or text editor and add
 the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
 username and the name of the repository that you created in [Configure CI/CD for
-your Node.js application](configure-ci-cd.md).
+your.NET application](configure-ci-cd.md).
 
 ```yaml
 apiVersion: apps/v1
@@ -137,7 +137,7 @@ In this Kubernetes YAML file, there are four objects, separated by the `---`. In
  - A Deployment, describing a scalable group of identical pods. In this case,
    you'll get just one replica, or copy of your pod, and that pod (which is
    described under the template: key) has just one container in it, based off of
-    the image built by GitHub Actions in [Configure CI/CD for your Node.js application](configure-ci-cd.md).
+    the image built by GitHub Actions in [Configure CI/CD for your .NET application](configure-ci-cd.md).
  - A NodePort service, which will route traffic from port 30001 on your host to
    port 8080 inside the pods it routes to, allowing you to reach your app
    from the network.
