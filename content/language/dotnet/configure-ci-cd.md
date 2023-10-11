@@ -146,4 +146,4 @@ Related information:
 
 Next, learn how you can locally test and debug your workloads on Kubernetes before deploying.
 
-{{< button text="Develop using Kubernetes" url="./deploy.md" >}}
+{{< button text="Test your deployment" url="./deploy.md" >}}
