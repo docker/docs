@@ -24,11 +24,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+# 4.24.2
+
+{{< release-date date="2023-10-12" >}}
+
+{{< desktop-install all=true version="4.24.1" build_path="/124339/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where Docker Desktop would send multiple requests to `notify.bugsnag.com`. Fixes [docker/for-win#13722](https://github.com/docker/for-win/issues/13722).
+- Fixed a performance regression for PyTorch.
+
 # 4.24.1
 
 {{< release-date date="2023-10-04" >}}
 
-{{< desktop-install win=true version="4.24.1" build_path="/" >}}
+{{< desktop-install win=true version="4.24.1" build_path="/123237/" >}}
 
 ### Bug fixes and enhancements
 
