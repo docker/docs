@@ -370,6 +370,8 @@ Reference:
           title: docker compose up
         - path: /engine/reference/commandline/compose_version/
           title: docker compose version
+        - path: /engine/reference/commandline/compose_watch/
+          title: docker compose watch
     - sectiontitle: docker config
       section:
       - path: /engine/reference/commandline/config/
