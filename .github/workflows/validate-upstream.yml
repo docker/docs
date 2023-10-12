@@ -1,5 +1,4 @@
 # reusable workflow to validate docs from upstream repository for which pages are remotely fetched
-# - repo: upstream repository (e.g., https://github.com/docker/buildx)
 # - data-files-id: id of the artifact (using actions/upload-artifact) containing the YAML data files to validate (optional)
 # - data-files-folder: folder in _data containing the files to download and copy to (e.g., buildx)
 name: validate-upstream
