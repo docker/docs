@@ -347,3 +347,8 @@ module:
       - source: develop.md
         target: content/compose/compose-file/develop.md
 
+    - path: github.com/docker/compose/v2
+      mounts:
+        - source: docs/reference
+          target: data/compose-cli
+          includeFiles: "*.yaml"

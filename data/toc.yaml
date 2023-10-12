@@ -316,6 +316,16 @@ Reference:
           title: overview
         - path: /compose/environment-variables/envvars/
           title: environment variables
+        - path: /engine/reference/commandline/compose_alpha/
+          title: docker compose alpha
+        - path: /engine/reference/commandline/compose_alpha_dry-run/
+          title: docker compose alpha dry-run
+        - path: /engine/reference/commandline/compose_alpha_publish/
+          title: docker compose alpha publish
+        - path: /engine/reference/commandline/compose_alpha_scale/
+          title: docker compose alpha scale
+        - path: /engine/reference/commandline/compose_alpha_viz/
+          title: docker compose alpha viz
         - path: /engine/reference/commandline/compose/
           title: docker compose
         - path: /engine/reference/commandline/compose_build/
@@ -370,6 +380,10 @@ Reference:
           title: docker compose up
         - path: /engine/reference/commandline/compose_version/
           title: docker compose version
+        - path: /engine/reference/commandline/compose_wait/
+          title: docker compose wait
+        - path: /engine/reference/commandline/compose_watch/
+          title: docker compose watch
     - sectiontitle: docker config
       section:
       - path: /engine/reference/commandline/config/
