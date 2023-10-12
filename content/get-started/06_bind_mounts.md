@@ -309,14 +309,15 @@ Update your app on your host machine and see the changes reflected in the contai
    Save the file.
 
 2. Refresh the page in your web browser, and you should see the change reflected
-   almost immediately because of the bind mount. Nodemon detects the
-   change and restarts the server. It might take a few seconds for the Node
-   server to restart. If you get an error, try refreshing after a few seconds.
+   almost immediately because of the bind mount. Nodemon detects the change and
+   restarts the server. It might take a few seconds for the Node server to
+   restart. If you get an error, try refreshing after a few seconds.
 
    ![Screenshot of updated label for Add button](images/updated-add-button.png)
 
 3. Feel free to make any other changes you'd like to make. Each time you make a
-   change and save a file, the change is reflected in the container because of the bind mount. When Nodemon detects a change, it restarts the app inside the
+   change and save a file, the change is reflected in the container because of
+   the bind mount. When Nodemon detects a change, it restarts the app inside the
    container automatically. When you're done, stop the container and build your
    new image using:
 
