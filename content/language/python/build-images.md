@@ -34,7 +34,7 @@ Open your terminal and navigate to the working directory you created. Create an 
 ```console
 $ cd /path/to/python-docker
 $ python3 -m venv .venv
-$ source .venv/bin/activate
+$ source .venv/Scripts/activate
 (.venv) $ python3 -m pip install -r requirements.txt
 (.venv) $ python3 -m flask run
 ```
@@ -91,7 +91,7 @@ The build command optionally takes a `--tag` flag. The tag sets the name of the 
 Build the Docker image.
 
 ```console
-$ docker build --tag python-docker .
+$ docker compose up --build
 ```
 
 You should get output similar to the following.
