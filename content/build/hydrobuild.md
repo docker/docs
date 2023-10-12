@@ -391,10 +391,10 @@ more efficient:
 
 ### Dockerignore files
 
-Using a [`.dockerignore` file](./building/context.md#dockerignore), you can be
+Using a [`.dockerignore` file](./building/context.md#dockerignore-files), you can be
 explicit about which local files that you don’t want to include in the build
-context. Files caught by the [glob patterns](../engine/reference/builder.md#dockerignore-file)
-you specify in your ignore-file are not transferred to the remote builder.
+context. Files caught by the glob patterns you specify in your ignore-file are
+not transferred to the remote builder.
 
 Some examples of things you might want to add to your `.dockerignore` file are:
 

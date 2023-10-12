@@ -4,48 +4,57 @@ description: Learn how to use the build context to access files from your Docker
 keywords: build, buildx, buildkit, context, git, tarball, stdin
 ---
 
-The [`docker build`](../../engine/reference/commandline/build.md) or
-[`docker buildx build`](../../engine/reference/commandline/buildx_build.md)
-commands build Docker images from a [Dockerfile](../../engine/reference/builder.md)
-and a "context".
+The `docker build` and `docker buildx build` commands build Docker images from
+a [Dockerfile](../../engine/reference/builder.md) and a context.
 
-The build context is the argument that you pass to the build command:
+## What is a build context?
+
+The build context is the set of files that your build can access.
+The positional argument that you pass to the build command specifies the
+context that you want to use for the build:
 
 ```console
 $ docker build [OPTIONS] PATH | URL | -
                          ^^^^^^^^^^^^^^
 ```
 
-## What is a build context?
-
 You can pass any of the following inputs as the context for a build:
 
 - The relative or absolute path to a local directory
-- The address of a remote Git repository, tarball, or plain-text file
-- A piped plain-text file or a tarball using standard input
+- A remote URL of a Git repository, tarball, or plain-text file
+- A plain-text file or tarball piped to the `docker build` command through standard input
 
 ### Filesystem contexts
 
-When your build context is a local directory, a remote Git repository, or a tar file,
-then that becomes the set of files that the builder can access during the build.
-Build instructions can refer to any of the files and directories in the context.
-For example, when you use a [`COPY` instruction](../../engine/reference/builder.md#copy),
-the builder copies the file or directory from the build context, into the build container.
+When your build context is a local directory, a remote Git repository, or a tar
+file, then that becomes the set of files that the builder can access during the
+build. Build instructions such as `COPY` and `ADD` can refer to any of the
+files and directories in the context.
+
 A filesystem build context is processed recursively:
 
 - When you specify a local directory or a tarball, all subdirectories are included
 - When you specify a remote Git repository, the repository and all submodules are included
 
+For more information about the different types of filesystem contexts that you
+can use with your builds, see:
+
+- [Local files](#local-context)
+- [Git repositories](#git-repositories)
+- [Remote tarballs](#remote-tarballs)
+
 ### Text file contexts
 
 When your build context is a plain-text file, the builder interprets the file
-as a Dockerfile. With this approach, the builder doesn't receive a filesystem context.
-For more information about building with a text file context, see [Text files](#text-files).
+as a Dockerfile. With this approach, the build doesn't use a filesystem context.
 
-## Local directories and tarballs
+For more information, see [empty build context](#empty-context).
 
-The following example shows a build command that uses the current directory
-(`.`) as a build context:
+## Local context
+
+To use a local build context, you can specify a relative or absolute filepath
+to the `docker build` command. The following example shows a build command that
+uses the current directory (`.`) as a build context:
 
 ```console
 $ docker build .
@@ -56,11 +65,16 @@ $ docker build .
 ...
 ```
 
-This makes files and directories in the current working directory available
-to the builder. The builder loads the files that it needs from the build context,
-when it needs them.
+This makes files and directories in the current working directory available to
+the builder. The builder loads the files it needs from the build context when
+needed.
 
-For example, given the following directory structure:
+You can also use local tarballs as build context, by piping the tarball
+contents to the `docker build` command. See [Tarballs](#local-tarballs).
+
+### Local directories
+
+Consider the following directory structure:
 
 ```
 .
@@ -71,8 +85,8 @@ For example, given the following directory structure:
 └── package-lock.json
 ```
 
-Dockerfile instructions can reference and include these files in the build
-if you pass the directory as a context.
+Dockerfile instructions can reference and include these files in the build if
+you pass this directory as a context.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -83,46 +97,93 @@ RUN npm ci
 COPY index.ts src .
 ```
 
-### `.dockerignore`
-
-You can use a [`.dockerignore`](../../engine/reference/builder.md#dockerignore-file)
-file to exclude some files or directories from being sent:
-
-```gitignore
-# .dockerignore
-node_modules
-bar
+```console
+$ docker build .
 ```
 
-A `.dockerignore` file located at the root of build context is automatically
-detected and used.
+### Local context with Dockerfile from stdin
 
-If you use multiple Dockerfiles, you can use different ignore-files for each
-Dockerfile. You do so using a special naming convention for the ignore-files.
-Place your ignore-file in the same directory as the Dockerfile, and prefix the
-ignore-file with the name of the Dockerfile.
-
-For example:
+Use the following syntax to build an image using files on your local
+filesystem, while using a Dockerfile from stdin.
 
 ```console
-.
-├── index.ts
-├── src/
-├── docker
-│   ├── build.Dockerfile
-│   ├── build.Dockerfile.dockerignore
-│   ├── lint.Dockerfile
-│   ├── lint.Dockerfile.dockerignore
-│   ├── test.Dockerfile
-│   └── test.Dockerfile.dockerignore
-├── package.json
-└── package-lock.json
+$ docker build -f- <PATH>
 ```
 
-A Dockerfile-specific ignore-file takes precedence over the `.dockerignore`
-file at the root of the build context if both exist.
+The syntax uses the -f (or --file) option to specify the Dockerfile to use, and
+it uses a hyphen (-) as filename to instruct Docker to read the Dockerfile from
+stdin.
 
-## Git repositories
+The following example uses the current directory (.) as the build context, and
+builds an image using a Dockerfile passed through stdin using a here-document.
+
+```bash
+# create a directory to work in
+mkdir example
+cd example
+
+# create an example file
+touch somefile.txt
+
+# build an image using the current directory as context
+# and a Dockerfile passed through stdin
+docker build -t myimage:latest -f- . <<EOF
+FROM busybox
+COPY somefile.txt ./
+RUN cat /somefile.txt
+EOF
+```
+
+### Local tarballs
+
+When you pipe a tarball to the build command, the build uses the contents of
+the tarball as a filesystem context.
+
+For example, given the following project directory:
+
+```text
+.
+├── Dockerfile
+├── Makefile
+├── README.md
+├── main.c
+├── scripts
+├── src
+└── test.Dockerfile
+```
+
+You can create a tarball of the directory and pipe it to the build for use as
+a context:
+
+```console
+$ tar czf foo.tar.gz *
+$ docker build - < foo.tar.gz
+```
+
+The build resolves the Dockerfile from the tarball context. You can use the
+`--file` flag to specify the name and location of the Dockerfile relative to
+the root of the tarball. The following command builds using `test.Dockerfile`
+in the tarball:
+
+```console
+$ docker build --file test.Dockerfile - < foo.tar.gz
+```
+
+## Remote context
+
+You can specify the address of a remote Git repository, tarball, or plain-text
+file as your build context.
+
+- For Git repositories, the builder automatically clones the repository. See
+  [Git repositories](#git-repositories).
+- For tarballs, the builder downloads and extracts the contents of the tarball.
+  See [Tarballs](#remote-tarballs).
+
+If the remote tarball is a text file, the builder receives no [filesystem
+context](#filesystem-contexts), and instead assumes that the remote
+file is a Dockerfile. See [Empty build context](#empty-context).
+
+### Git repositories
 
 When you pass a URL pointing to the location of a Git repository as an argument
 to `docker build`, the builder uses the repository as the build context.
@@ -139,7 +200,7 @@ $ docker build https://github.com/user/myrepo.git
 By default, the builder clones the latest commit on the default branch of the
 repository that you specify.
 
-### URL fragments
+#### URL fragments
 
 You can append URL fragments to the Git repository address to make the builder
 clone a specific branch, tag, and subdirectory of a repository.
@@ -170,7 +231,7 @@ contexts:
 | `myrepo.git#mytag:myfolder`    | `refs/tags/mytag`             | `/myfolder`        |
 | `myrepo.git#mybranch:myfolder` | `refs/heads/mybranch`         | `/myfolder`        |
 
-### Keep `.git` directory
+#### Keep `.git` directory
 
 By default, BuildKit doesn't keep the `.git` directory when using Git contexts.
 You can configure BuildKit to keep the directory by setting the
@@ -191,7 +252,7 @@ $ docker build \
   https://github.com/user/myrepo.git#main
 ```
 
-### Private repositories
+#### Private repositories
 
 When you specify a Git context that's also a private repository, the builder
 needs you to provide the necessary authentication credentials. You can use
@@ -218,12 +279,39 @@ $ GIT_AUTH_TOKEN=<token> docker buildx build \
 
 > **Note**
 >
-> Don't use `--build-arg` for secrets, except for
-> [HTTP proxies](../../network/proxy.md#set-proxy-using-the-cli)
+> Don't use `--build-arg` for secrets.
+
+### Remote context with Dockerfile from stdin
+
+Use the following syntax to build an image using files on your local
+filesystem, while using a Dockerfile from stdin.
+
+```console
+$ docker build -f- <URL>
+```
+
+The syntax uses the -f (or --file) option to specify the Dockerfile to use, and
+it uses a hyphen (-) as filename to instruct Docker to read the Dockerfile from
+stdin.
+
+This can be useful in situations where you want to build an image from a
+repository that doesn't contain a Dockerfile. Or if you want to build with a
+custom Dockerfile, without maintaining your own fork of the repository.
+
+The following example builds an image using a Dockerfile from stdin, and adds
+the `hello.c` file from the [hello-world](https://github.com/docker-library/hello-world)
+repository on GitHub.
+
+```bash
+docker build -t myimage:latest -f- https://github.com/docker-library/hello-world.git <<EOF
+FROM busybox
+COPY hello.c ./
+EOF
+```
 
 ### Remote tarballs
 
-If you pass the URL to a remote tarball, then the URL itself is sent to the builder.
+If you pass the URL to a remote tarball, the URL itself is sent to the builder.
 
 ```console
 $ docker build http://server/context.tar.gz
@@ -235,98 +323,64 @@ $ docker build http://server/context.tar.gz
 ...
 ```
 
-The download operation will be performed on the host the daemon is running on,
-which is not necessarily the same host from which the build command is being
-issued. The daemon will fetch `context.tar.gz` and use it as the build context.
-Tarball contexts must be tar archives conforming to the standard `tar` Unix
-format and can be compressed with any one of the `xz`, `bzip2`, `gzip` or
+The download operation will be performed on the host where the BuildKit daemon
+is running. Note that if you're using a remote Docker context or a remote
+builder, that's not necessarily the same machine as where you issue the build
+command. BuildKit fetches the `context.tar.gz` and uses it as the build
+context. Tarball contexts must be tar archives conforming to the standard `tar`
+Unix format and can be compressed with any one of the `xz`, `bzip2`, `gzip` or
 `identity` (no compression) formats.
 
-## Pipes
-
-When you pass a single dash `-` as the argument to the build command, you can
-pipe a plain-text file or a tarball as the context:
-
-```console
-$ docker build - PIPE
-```
-
-For example:
-
-```console
-$ docker build - < Dockerfile
-$ docker build - < archive.tar
-$ docker build - <<EOF
-FROM node:alpine
-COPY . .
-RUN npm ci
-EOF
-```
-
-### Tarballs
-
-When you pipe a tarball to the build command, the build uses the contents of
-the tarball as a filesystem context.
-
-For example, given the following project directory:
-
-```
-.
-├── Dockerfile
-├── Makefile
-├── README.md
-├── main.c
-├── scripts
-├── src
-└── test.Dockerfile
-```
-
-You can create a tarball of the directory and pipe it to the build for use as
-a context:
-
-```console
-$ tar czf foo.tar.gz *
-$ docker build - < foo.tar.gz
-```
-
-The build resolves the Dockerfile from the tarball context. You can use the
-`--file` flag to specify the name and location of the Dockerfile relative to
-the root of the tarball. The following command builds using `test.Dockerfile`
-in the tarball:
-
-```console
-$ docker build --file test.Dockerfile - < foo.tar.gz
-```
-
-### Text files
+## Empty context
 
 When you use a text file as the build context, the builder interprets the file
 as a Dockerfile. Using a text file as context means that the build has no
-filesystem context. This can be useful when your build doesn't require any
-local files. This means there's no filesystem context when building.
+filesystem context.
+
+You can build with an empty build context when your Dockerfile doesn't depend
+on any local files.
+
+### How to build without a context
 
 You can pass the text file using a standard input stream, or by pointing at the
 URL of a remote text file.
 
+{{< tabs >}}
+{{< tab name="Unix pipe" >}}
+
 ```console
 $ docker build - < Dockerfile
 ```
 
-With PowerShell on Windows, you can run:
+{{< /tab >}}
+{{< tab name="PowerShell" >}}
 
 ```powershell
 Get-Content Dockerfile | docker build -
 ```
 
-To use a remote text file, pass the URL of the text file as the argument to the
-build command:
+{{< /tab >}}
+{{< tab name="Heredocs" >}}
+
+```bash
+docker build -t myimage:latest - <<EOF
+FROM busybox
+RUN echo "hello world"
+EOF
+```
+
+{{< /tab >}}
+{{< tab name="Remote file" >}}
 
 ```console
 $ docker build https://raw.githubusercontent.com/dvdksn/clockbox/main/Dockerfile
 ```
 
-Again, this means that the build has no filesystem context,
-so Dockerfile commands such as `COPY` can't refer to local files:
+{{< /tab >}}
+{{< /tabs >}}
+
+When you build without a filesystem context, Dockerfile instructions such as
+`COPY` can't refer to local files:
 
 ```console
 $ ls
@@ -352,18 +406,143 @@ Dockerfile:2
 ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref 7ab2bb61-0c28-432e-abf5-a4c3440bc6b6::4lgfpdf54n5uqxnv9v6ymg7ih: "/main.c": not found
 ```
 
-#### Build using heredocs
+## .dockerignore files
 
-The following example builds an image using a `Dockerfile` that is passed
-through standard input using
-[shell heredocs](https://en.wikipedia.org/wiki/Here_document):
+You can use a `.dockerignore` file to exclude files or directories from the
+build context.
 
-```bash
-docker build -t myimage:latest - <<EOF
-FROM busybox
-RUN echo "hello world"
-EOF
+```gitignore
+# .dockerignore
+node_modules
+bar
 ```
 
-This approach is useful when you want to quickly run a build command with a
-Dockerfile that's short and concise.
+This helps avoid sending unwanted files and directories to the builder,
+improving build speed, especially when using a remote builder.
+
+### Filename and location
+
+When you run a build command, the build client looks for a file named
+`.dockerignore` in the root directory of the context. If this file exists, the
+files and directories that match patterns in the files are removed from the
+build context before it's sent to the builder.
+
+If you use multiple Dockerfiles, you can use different ignore-files for each
+Dockerfile. You do so using a special naming convention for the ignore-files.
+Place your ignore-file in the same directory as the Dockerfile, and prefix the
+ignore-file with the name of the Dockerfile, as shown in the following example.
+
+```text
+.
+├── index.ts
+├── src/
+├── docker
+│   ├── build.Dockerfile
+│   ├── build.Dockerfile.dockerignore
+│   ├── lint.Dockerfile
+│   ├── lint.Dockerfile.dockerignore
+│   ├── test.Dockerfile
+│   └── test.Dockerfile.dockerignore
+├── package.json
+└── package-lock.json
+```
+
+A Dockerfile-specific ignore-file takes precedence over the `.dockerignore`
+file at the root of the build context if both exist.
+
+### Syntax
+
+The `.dockerignore` file is a newline-separated list of patterns similar to the
+file globs of Unix shells. For the purposes of matching, the root of the
+context is considered to be both the working and the root directory. For
+example, the patterns `/foo/bar` and `foo/bar` both exclude a file or directory
+named `bar` in the `foo` subdirectory of `PATH` or in the root of the Git
+repository located at `URL`. Neither excludes anything else.
+
+If a line in `.dockerignore` file starts with `#` in column 1, then this line
+is considered as a comment and is ignored before interpreted by the CLI.
+
+If you're interested in learning the precise details of the `.dockerignore`
+pattern matching logic, check out the
+[moby/patternmatcher repository](https://github.com/moby/patternmatcher/tree/main/ignorefile)
+on GitHub, which contains the source code.
+
+#### Matching
+
+The following code snippet shows an example `.dockerignore` file.
+
+```gitignore
+# comment
+*/temp*
+*/*/temp*
+temp?
+```
+
+This file causes the following build behavior:
+
+| Rule        | Behavior                                                                                                                                                                                                      |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `# comment` | Ignored.                                                                                                                                                                                                      |
+| `*/temp*`   | Exclude files and directories whose names start with `temp` in any immediate subdirectory of the root. For example, the plain file `/somedir/temporary.txt` is excluded, as is the directory `/somedir/temp`. |
+| `*/*/temp*` | Exclude files and directories starting with `temp` from any subdirectory that is two levels below the root. For example, `/somedir/subdir/temporary.txt` is excluded.                                         |
+| `temp?`     | Exclude files and directories in the root directory whose names are a one-character extension of `temp`. For example, `/tempa` and `/tempb` are excluded.                                                     |
+
+Matching is done using Go's
+[`filepath.Match` function](https://golang.org/pkg/path/filepath#Match) rules.
+A preprocessing step uses Go's
+[`filepath.Clean` function](https://golang.org/pkg/path/filepath/#Clean)
+to trim whitespace and remove `.` and `..`.
+Lines that are blank after preprocessing are ignored.
+
+> **Note**
+>
+> For historical reasons, the pattern `.` is ignored.
+
+Beyond Go's `filepath.Match` rules, Docker also supports a special wildcard
+string `**` that matches any number of directories (including zero). For
+example, `**/*.go` excludes all files that end with `.go` found anywhere in the
+build context.
+
+You can use the `.dockerignore` file to exclude the `Dockerfile` and
+`.dockerignore` files. These files are still sent to the builder as they're
+needed for running the build. But you can't copy the files into the image using
+`ADD`, `COPY`, or bind mounts.
+
+#### Negating matches
+
+You can prepend lines with a `!` (exclamation mark) to make exceptions to
+exclusions. The following is an example `.dockerignore` file that uses this
+mechanism:
+
+```gitignore
+*.md
+!README.md
+```
+
+All markdown files right under the context directory _except_ `README.md` are
+excluded from the context. Note that markdown files under subdirectories are
+still included.
+
+The placement of `!` exception rules influences the behavior: the last line of
+the `.dockerignore` that matches a particular file determines whether it's
+included or excluded. Consider the following example:
+
+```gitignore
+*.md
+!README*.md
+README-secret.md
+```
+
+No markdown files are included in the context except README files other than
+`README-secret.md`.
+
+Now consider this example:
+
+```gitignore
+*.md
+README-secret.md
+!README*.md
+```
+
+All of the README files are included. The middle line has no effect because
+`!README*.md` matches `README-secret.md` and comes last.

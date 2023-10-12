@@ -198,7 +198,7 @@ The next instruction uses the
 COPY hello.py /
 ```
 
-A [build context](context.md) is the set of files that you can access
+A [build context](./context.md) is the set of files that you can access
 in Dockerfile instructions such as `COPY` and `ADD`.
 
 After the `COPY` instruction, the `hello.py` file is added to the filesystem
@@ -253,7 +253,7 @@ $ docker build -t test:latest .
 The `-t test:latest` option specifies the name and tag of the image.
 
 The single dot (`.`) at the end of the command sets the
-[build context](context.md) to the current directory. This means that the
+[build context](./context.md) to the current directory. This means that the
 build expects to find the Dockerfile and the `hello.py` file in the directory
 where the command is invoked. If those files aren't there, the build fails.
 
