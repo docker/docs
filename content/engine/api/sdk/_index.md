@@ -187,6 +187,7 @@ file them with the library maintainers.
 |:----------------------|:----------------------------------------------------------------------------|
 | C                     | [libdocker](https://github.com/danielsuo/libdocker)                         |
 | C#                    | [Docker.DotNet](https://github.com/ahmetalpbalkan/Docker.DotNet)            |
+| C++                   | [docker-cpp](https://github.com/perkss/docker-cpp)                          |
 | C++                   | [lasote/docker_client](https://github.com/lasote/docker_client)             |
 | Clojure               | [clj-docker-client](https://github.com/into-docker/clj-docker-client)       |
 | Clojure               | [contajners](https://github.com/lispyclouds/contajners)                     |
