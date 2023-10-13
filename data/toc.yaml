@@ -2106,7 +2106,7 @@ Manuals:
       - path: /admin/organization/security-settings/group-mapping/
         title: Group mapping
 
-- sectiontitle: Administration and security
+- sectiontitle: Administration 
   section:
   - path: /docker-hub/admin-overview/
     title: Overview
@@ -2142,20 +2142,6 @@ Manuals:
     title: SCIM
   - path: /docker-hub/group-mapping/
     title: Group mapping
-  - sectiontitle: Security and authentication
-    section:
-      - path: /docker-hub/access-tokens/
-        title: Create and manage access tokens
-      - sectiontitle: Two-factor authentication
-        section:
-          - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
-          - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
-          - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
   - path: /docker-hub/configure-sign-in/
     title: Enforce sign-in for Desktop
   - path: /docker-hub/audit-log/
@@ -2179,9 +2165,22 @@ Manuals:
     section:
     - path: /security/for-developers/
       title: Overview
+    - path: /security/for-developers/access-tokens/
+      title: Create and manage access tokens
+    - sectiontitle: Two-factor authentication
+      section:
+      - path: /security/for-developers/2fa/
+        title: Enable two-factor authentication 
+      - path: /security/for-developers/2fa/disable-2fa/
+        title: Disable two-factor authentication
+      - path: /security/for-developers/2fa/recover-hub-account/
+        title: Recover your Docker Hub account
+      - path: /security/for-developers/2fa/new-recovery-code/
+        title: Generate a new recovery code
   - path: /security/security-guides/
     title: Security guides
   - path: /security/security-announcements/
+    title: Security announcements
 
 - sectiontitle: Billing
   section:

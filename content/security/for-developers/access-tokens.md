@@ -3,6 +3,8 @@ title: Create and manage access tokens
 description: Learn how to create and manage your personal Docker Hub access tokens
   to securely push and pull images programmatically.
 keywords: docker hub, hub, security, PAT, personal access token
+aliases: 
+- /docker-hub/access-tokens/
 ---
 
 If you are using the [Docker Hub CLI](https://github.com/docker/hub-tool#readme)
