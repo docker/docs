@@ -2177,8 +2177,6 @@ Manuals:
         title: Recover your Docker Hub account
       - path: /security/for-developers/2fa/new-recovery-code/
         title: Generate a new recovery code
-  - path: /security/security-guides/
-    title: Security guides
   - path: /security/security-announcements/
     title: Security announcements
 

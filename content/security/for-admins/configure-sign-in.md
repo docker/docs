@@ -3,6 +3,8 @@ description: Configure registry.json to enforce users to sign into Docker Deskto
 toc_max: 2
 keywords: authentication, registry.json, configure,
 title: Enforce sign-in for Desktop
+aliases:
+- /docker-hub/configure-sign-in/
 ---
 
 By default, members of your organization can use Docker Desktop without signing
@@ -41,7 +43,7 @@ following occurs:
 ## Create a registry.json file to enforce sign-in
 
 1. Ensure that the user is a member of your organization in Docker. For more
-details, see [Manage members](https://docs.docker.com/docker-hub/members/).
+details, see [Manage members](../../docker-hub/members.md).
 
 2. Create the `registry.json` file.
 
