@@ -157,6 +157,7 @@ RUN --mount=type=cache,target=/root/.cache/go-build go mod download
 
 COPY ./src ./
 RUN --mount=type=cache,target=/root/.cache/go-build && go build -o /bin/app /build/src
+...
 ```
 
 Example CI action
