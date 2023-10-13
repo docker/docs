@@ -323,7 +323,7 @@ mkdir -vp ~/.docker/cli-plugins/
 curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-# Login to Docker Hub. For security reasons $DOCKER_PASS should be a Personal Access Token. See https://docs.docker.com/docker-hub/access-tokens/
+# Login to Docker Hub. For security reasons $DOCKER_PASS should be a Personal Access Token. See https://docs.docker.com/security/for-developers/access-tokens/
 echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
 
 # Connect to your builder and set it as the default builder
