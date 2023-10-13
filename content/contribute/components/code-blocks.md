@@ -8,6 +8,18 @@ Rouge provides lots of different code block "hints". If you leave off the hint,
 it tries to guess and sometimes gets it wrong. These are just a few hints that
 we use often.
 
+## Variables
+
+If your example contains a placeholder value that's subject to change,
+use the format `<[A-Z_]+>` for the placeholder value: `<MY_VARIABLE>`
+
+```none
+export name=<MY_NAME>
+```
+
+This syntax is reserved for variable names, and will cause the variable to
+be rendered in a special color and font style.
+
 ## Bash
 
 Use the `bash` language code block when you want to show a Bash script:
