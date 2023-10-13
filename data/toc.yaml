@@ -2142,8 +2142,6 @@ Manuals:
     title: SCIM
   - path: /docker-hub/group-mapping/
     title: Group mapping
-  - path: /docker-hub/configure-sign-in/
-    title: Enforce sign-in for Desktop
   - path: /docker-hub/audit-log/
     title: Audit logs
   - path: /docker-hub/domain-audit/
@@ -2161,6 +2159,8 @@ Manuals:
     section:
     - path: /security/for-admins/
       title: Overview
+    - path: /security/for-admins/configure-sign-in/
+      title: Enforce sign in
   - sectiontitle: For developers
     section:
     - path: /security/for-developers/
