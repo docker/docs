@@ -2166,6 +2166,22 @@ Manuals:
     title: Image Access Management
   - path: /docker-hub/deactivate-account/
     title: Deactivate an account or organization
+
+- sectiontitle: Security
+  section:
+  - path: /security/
+    title: Overview
+  - sectiontitle: For admins
+    section:
+    - path: /security/for-admins/
+      title: Overview
+  - sectiontitle: For developers
+    section:
+    - path: /security/for-developers/
+      title: Overview
+  - path: /security/security-guides/
+    title: Security guides
+
 - sectiontitle: Billing
   section:
   - path: /billing/
