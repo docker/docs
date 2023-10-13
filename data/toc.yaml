@@ -1942,7 +1942,7 @@ Manuals:
   - path: /compose/features-uses/
     title: Key features and use cases
   - path: /compose/history/
-    title: History of Compose
+    title: History and development of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/

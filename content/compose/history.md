@@ -1,45 +1,48 @@
 ---
-title: History of Docker Compose
+title: History and development of Docker Compose
 description: History of Compose V1 and Compose YAML schema versioning
 keywords: compose, compose yaml, swarm, migration, compatibility
 ---
 
 {{< include "compose-eol.md" >}}
 
-This page provides a brief history of the major versions and file format revisions of Docker Compose.
+This page provides:
+ - A brief history of the development of the Docker Compose CLI
+ - A clear explanation of the major versions and file formats that make up Compose V1 and Compose V2
+ - The main differences between Compose V1 and Compose V2 
 
-The currently supported version of Compose is V2, which uses YAML files as defined by the [Compose specification](https://github.com/compose-spec/compose-spec).
+## Introduction
 
-For users supporting projects originally targeting older versions of Compose, this can serve as a guide to understanding compatibility and the evolution of changes.
+![Image showing the main differences between Compose V1 and Compose V2](images/v1-versus-v2.png)
 
-## Docker Compose CLI versioning
-There are two major versions of Docker Compose, otherwise known as the command-line binary.
+The image above shows that the currently supported version of the Docker Compose CLI is Compose V2 which is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec).
 
-Compose V1 was first released in 2014. It was written in Python, and is invoked as `docker-compose`.
-Typically, Compose V1 projects include a `version` field in YAML with values ranging from `2.0` to `3.8`.
+It also provides a quick snapshot of the differences in file formats, command-line syntax, and top-level elements. This is covered in more detail in the following sections.
 
-Compose V2 was announced in 2020, is written in Go, and is invoked as `docker compose`.
-Compose V2 ignores the `version` field in YAML.
+### Docker Compose CLI versioning
 
-## Compose file format versioning
-With Compose V1, projects declared a Compose file format version in YAML.
+Version one of the Docker Compose command-line binary was first released in 2014. It was written in Python, and is invoked with `docker-compose`.
+Typically, Compose V1 projects include a top-level `version` element in the `compose.yml` file, with values ranging from `2.0` to `3.8`, which refer to the specific [file formats](#compose-file-format-versioning).
+
+Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with `docker compose`.
+Compose V2 ignores the `version` top-level element in the `compose.yml` file. 
+
+### Compose file format versioning
+
+The Docker Compose CLIs are defined by specific file formats. 
 
 Three major versions of the Compose file format for Compose V1 were released:
 - [Compose file format 1](./compose-file/compose-versioning.md##version-1-to-2x) with Compose 1.0.0 in 2014
 - [Compose file format 2.x](./compose-file/compose-file-v2.md) with Compose 1.6.0 in 2016
 - [Compose file format 3.x](./compose-file/compose-file-v3.md) with Compose 1.10.0 in 2017
 
-Compose file format 1 was substantially different than all following formats, lacking a top-level `services` key.
+Compose file format 1 is substantially different to all the following formats as it lacks a top-level `services` key.
 Its usage is historical and files written in this format don't run with Compose V2.
 
-Compose file format 2.x and 3.x were very similar to each other, but the latter introduced many new options targeted at Swarm deployments.
+Compose file format 2.x and 3.x are very similar to each other, but the latter introduced many new options targeted at Swarm deployments.
 
-To address confusion around Compose CLI versioning, Compose file format versioning, and feature parity depending on whether Swarm mode was in use, file format 2.x and 3.x were merged into the [Compose Specification](https://github.com/compose-spec/compose-spec).
-Unlike the prior file formats, the Compose Specification is rolling and eliminates the `version` field in YAML.
+To address confusion around Compose CLI versioning, Compose file format versioning, and feature parity depending on whether Swarm mode was in use, file format 2.x and 3.x were merged into the [Compose Specification](compose-file/_index.md). 
 
-Compose V2 uses the Compose Specification for project definition.
-The `version` field should be omitted and is ignored if present.
+Compose V2 uses the Compose Specification for project definition. Unlike the prior file formats, the Compose Specification is rolling and makes the `version` top-level element optional. Compose V2 also makes use of optional specifications - [Deploy](compose-file/deploy.md), [Develop](compose-file/develop.md) and [Build](compose-file/build.md).
 
-To make migration easier, Compose V2 has backwards compatibility for certain elements that have been deprecated or changed between Compose file format 2.x/3.x and the Compose Specification.
-In these cases, a warning is logged when running Compose V2 commands, and you should update your YAML accordingly.
-Future versions of Compose may return an error in these cases.
+To make [migration](migrate.md) easier, Compose V2 has backwards compatibility for certain elements that have been deprecated or changed between Compose file format 2.x/3.x and the Compose Specification.
