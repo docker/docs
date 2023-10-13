@@ -19,7 +19,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 To install Docker Desktop successfully, you must:
 
 - Meet the [system requirements](linux-install.md#system-requirements).
-- Have a 64-bit version of Debian 11.
+- Have a 64-bit version of Debian 12.
 - Uninstall the tech preview or beta version of Docker Desktop for Linux. Run:
 
   ```console
