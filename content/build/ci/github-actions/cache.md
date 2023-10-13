@@ -145,20 +145,18 @@ cache mount data with your Docker build steps.
 
 The following example shows how to use this workaround with a Go project.
 
-
 Example Dockerfile in `build/package/Dockerfile`
 ```Dockerfile
 FROM golang:1.21.1-alpine as base-build
 
 WORKDIR /build
-RUN go env -w GOCACHE=/go-cache
-RUN go env -w GOMODCACHE=/gomod-cache
+RUN go env -w GOMODCACHE=/root/.cache/go-build
 
 COPY go.mod go.sum ./
-RUN --mount=type=cache,target=/gomod-cache go mod download
+RUN --mount=type=cache,target=/root/.cache/go-build go mod download
 
 COPY ./src ./
-RUN --mount=type=cache,target=/gomod-cache --mount=type=cache,target=/go-cache && go build -o /bin/app /build/src
+RUN --mount=type=cache,target=/root/.cache/go-build && go build -o /bin/app /build/src
 ```
 
 Example CI action
