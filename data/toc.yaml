@@ -2181,6 +2181,7 @@ Manuals:
       title: Overview
   - path: /security/security-guides/
     title: Security guides
+  - path: /security/security-announcements/
 
 - sectiontitle: Billing
   section:
@@ -2229,9 +2230,6 @@ Manuals:
     title: Docker-Sponsored Open Source Program
   - path: /trusted-content/insights-analytics/
     title: Insights and analytics
-
-- title: Security announcements
-  path: /security/
 
 - sectiontitle: Open-source projects
   section:
