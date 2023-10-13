@@ -190,10 +190,11 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
    ```console
    $ docker logs -f <container-id>
-   nodemon src/index.js
+   nodemon -L src/index.js
    [nodemon] 2.0.20
    [nodemon] to restart at any time, enter `rs`
-   [nodemon] watching dir(s): *.*
+   [nodemon] watching path(s): *.*
+   [nodemon] watching extensions: js,mjs,json
    [nodemon] starting `node src/index.js`
    Using sqlite database at /etc/todos/todo.db
    Listening on port 3000
@@ -238,10 +239,11 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
    ```console
    $ docker logs -f <container-id>
-   nodemon src/index.js
+   nodemon -L src/index.js
    [nodemon] 2.0.20
    [nodemon] to restart at any time, enter `rs`
-   [nodemon] watching dir(s): *.*
+   [nodemon] watching path(s): *.*
+   [nodemon] watching extensions: js,mjs,json
    [nodemon] starting `node src/index.js`
    Using sqlite database at /etc/todos/todo.db
    Listening on port 3000
@@ -271,7 +273,7 @@ Run the image with a bind mount.
 7. In **Container path**, specify `/app`.
 8. Select **Run**.
 
-You can watch the container logs using Docker Desktop
+You can watch the container logs using Docker Desktop.
 
 1. Select **Containers** in Docker Desktop.
 2. Select your container name.
@@ -279,11 +281,11 @@ You can watch the container logs using Docker Desktop
 You'll know you're ready to go when you see this:
 
 ```console
-$ docker logs -f <container-id>
-nodemon src/index.js
+nodemon -L src/index.js
 [nodemon] 2.0.20
 [nodemon] to restart at any time, enter `rs`
-[nodemon] watching dir(s): *.*
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
 [nodemon] starting `node src/index.js`
 Using sqlite database at /etc/todos/todo.db
 Listening on port 3000
@@ -307,13 +309,15 @@ Update your app on your host machine and see the changes reflected in the contai
    Save the file.
 
 2. Refresh the page in your web browser, and you should see the change reflected
-   almost immediately. It might take a few seconds for the Node server to
+   almost immediately because of the bind mount. Nodemon detects the change and
+   restarts the server. It might take a few seconds for the Node server to
    restart. If you get an error, try refreshing after a few seconds.
 
    ![Screenshot of updated label for Add button](images/updated-add-button.png)
 
 3. Feel free to make any other changes you'd like to make. Each time you make a
-   change and save a file, the `nodemon` process restarts the app inside the
+   change and save a file, the change is reflected in the container because of
+   the bind mount. When Nodemon detects a change, it restarts the app inside the
    container automatically. When you're done, stop the container and build your
    new image using:
 
