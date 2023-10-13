@@ -80,7 +80,7 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 ```
 
-### Leverage build cache
+## Leverage build cache
 
 When building an image, Docker steps through the instructions in your
 Dockerfile, executing each in the order specified. For each instruction, Docker
