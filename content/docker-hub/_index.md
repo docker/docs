@@ -17,10 +17,6 @@ grid:
   description: Step-by-step instructions on getting started on Docker Hub.
   icon: explore
   link: /docker-hub/quickstart
-- title: Manage access tokens
-  description: Create personal access tokens as an alternative to your password.
-  icon: password
-  link: /docker-hub/access-tokens
 - title: Release notes
   description: Find out about new features, improvements, and bug fixes.
   icon: note_add
