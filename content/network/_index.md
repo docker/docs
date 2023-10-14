@@ -79,14 +79,9 @@ A container receives an IP address out of the IP subnet of the network.
 The Docker daemon performs dynamic subnetting and IP address allocation for containers.
 Each network also has a default subnet mask and gateway.
 
-When you connect an existing container to a different network using `docker network connect`,
-you can use the `--ip` or `--ip6` flags on that command
-to specify the container's IP address on the additional network.
-
-When a container starts, it can only attach to a single network, using the `--network` flag.
-You can connect a running container to multiple networks using the `docker network connect` command.
-When you start a container using the `--network` flag,
-you can specify the IP address for the container on that network using the `--ip` or `--ip6` flags.
+When a container starts, it can only attaches to a single network, using the `--network` flag.
+You can connect a running container to additional networks using the `docker network connect` command.
+In both cases, you can use the `--ip` or `--ip6` flags to specify the container's IP address on that particular network.
 
 In the same way, a container's hostname defaults to be the container's ID in Docker.
 You can override the hostname using `--hostname`.
