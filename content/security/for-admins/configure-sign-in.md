@@ -23,7 +23,7 @@ following occurs:
 
 - The following **Sign in required!** prompt appears requiring the user to sign
   in as a member of your organization to use Docker Desktop. ![Enforce Sign-in
-  Prompt](./images/enforce-sign-in.png?w=400)
+  Prompt](../images/enforce-sign-in.png?w=400)
 - When a user signs in to an account that isn’t a member of your organization,
   they will be automatically signed out and can’t use Docker Desktop. The user
   can select **Sign in** and try again.
