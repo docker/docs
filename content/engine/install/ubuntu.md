@@ -59,6 +59,7 @@ The unofficial packages to uninstall are:
 
 - `docker.io`
 - `docker-compose`
+- `docker-compose-v2`
 - `docker-doc`
 - `podman-docker`
 
@@ -70,7 +71,7 @@ conflicts with the versions bundled with Docker Engine.
 Run the following command to uninstall all conflicting packages:
 
 ```console
-$ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+$ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
 
 `apt-get` might report that you have none of these packages installed.
