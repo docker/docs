@@ -12,24 +12,6 @@
   {{ $invite_link = "[Invite members](/admin/organization/members/)" }}
 {{ end }}
 
-Domain audit identifies uncaptured users in an organization. Uncaptured users are Docker users who have authenticated to Docker using an email address associated with one of your verified domains, but they're not a member of your organization in Docker. You can audit domains on organizations that are part of the Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
-
-Uncaptured users who access Docker Desktop in your environment may pose a security risk because your organization's security settings, like Image Access Management and Registry Access Management, aren't applied to a user's session. In addition, you won't have visibility into the activity of uncaptured users. You can add uncaptured users to your organization to gain visibility into their activity and apply your organization's security settings.
-
-Domain audit can't identify the following Docker users in your environment:
-
-- Users who access Docker Desktop without authenticating
-- Users who authenticate using an account that doesn't have an email address associated with one of your verified domains
-
-Although domain audit can't identify all Docker users in your environment, you can enforce sign-in to prevent unidentifiable users from accessing Docker Desktop in your environment. For more details about enforcing sign-in, see [Configure registry.json to enforce sign-in](/docker-hub/configure-sign-in/).
-
-### Audit your domains for uncaptured users
-
-Before you audit your domains, the following prerequisites are required:
-
-- Your organization must be part of a Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
-- You must add and verify your domains.
-
 To audit your domains:
 
 1. Sign in to {{ $product_link }}.

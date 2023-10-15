@@ -2060,8 +2060,6 @@ Manuals:
       title: Manage users
     - path: /admin/company/owners/
       title: Manage company owners
-    - path: /admin/company/settings/domains/
-      title: Domain management
     - sectiontitle: SSO & SCIM
       section:
       - path: /admin/company/settings/sso/
@@ -2091,8 +2089,6 @@ Manuals:
       title: Registry Access Management
     - path: /admin/organization/general-settings/
       title: General settings
-    - path: /admin/organization/security-settings/domains/
-      title: Domain management
     - sectiontitle: SSO & SCIM
       section:
       - path: /admin/organization/security-settings/sso/
@@ -2161,6 +2157,8 @@ Manuals:
       title: Overview
     - path: /security/for-admins/configure-sign-in/
       title: Enforce sign in
+    - path: /security/for-admins/domain-audit/
+      title: Domain audit
   - sectiontitle: For developers
     section:
     - path: /security/for-developers/
