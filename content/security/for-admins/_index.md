@@ -23,6 +23,10 @@ grid:
   description: Configure sign-in for members of your teams and organizations.
   link: /security/for-admins/configure-sign-in/
   icon: passkey
+- title: Domain audit
+  description: Identify uncaptured users in your organization.
+  link: /security/for-admins/domain-audit/
+  icon: person_search
 ---
 
 

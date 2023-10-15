@@ -2140,8 +2140,6 @@ Manuals:
     title: Group mapping
   - path: /docker-hub/audit-log/
     title: Audit logs
-  - path: /docker-hub/domain-audit/
-    title: Domain audit
   - path: /docker-hub/image-access-management/
     title: Image Access Management
   - path: /docker-hub/deactivate-account/
