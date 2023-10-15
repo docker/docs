@@ -14,11 +14,11 @@ grid:
 - title: Registry Access Management
   description: Control the registries developers can access while using Docker Desktop.
   icon: home_storage
-  link: /desktop/hardened-desktop/registry-access-management/
+  link: /security/for-admins/registry-access-management/
 - title: Image Access Management
   description: Control the images developers can pull from Docker Hub.
   icon: photo_library
-  link: /docker-hub/image-access-management/
+  link: /security/for-admins/image-access-management/
 - title: Enforce sign-in
   description: Configure sign-in for members of your teams and organizations.
   link: /security/for-admins/configure-sign-in/

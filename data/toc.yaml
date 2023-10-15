@@ -1202,10 +1202,10 @@ Manuals:
             title: Key features and benefits
           - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
             title: FAQs and known issues
-        - path: /desktop/hardened-desktop/registry-access-management/
-          title: Registry Access Management
-        - path: /desktop/hardened-desktop/image-access-management/
+        - path: /security/for-admins/image-access-management/
           title: Image Access Management
+        - path: /security/for-admins/registry-access-management/
+          title: Registry Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -2083,10 +2083,6 @@ Manuals:
       title: Manage members
     - path: /admin/organization/activity-logs/
       title: Activity logs
-    - path: /admin/organization/image-access/
-      title: Image Access Management
-    - path: /admin/organization/registry-access/
-      title: Registry Access Management
     - path: /admin/organization/general-settings/
       title: General settings
     - sectiontitle: SSO & SCIM
@@ -2140,8 +2136,6 @@ Manuals:
     title: Group mapping
   - path: /docker-hub/audit-log/
     title: Audit logs
-  - path: /docker-hub/image-access-management/
-    title: Image Access Management
   - path: /docker-hub/deactivate-account/
     title: Deactivate an account or organization
 
@@ -2157,6 +2151,10 @@ Manuals:
       title: Enforce sign in
     - path: /security/for-admins/domain-audit/
       title: Domain audit
+    - path: /security/for-admins/image-access-management/
+      title: Image Access Management
+    - path: /security/for-admins/registry-access-management/
+      title: Registry Access Management
   - sectiontitle: For developers
     section:
     - path: /security/for-developers/
