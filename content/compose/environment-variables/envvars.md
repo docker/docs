@@ -144,10 +144,9 @@ The default value is false to clearly separate the output streams between Compos
 
 ### COMPOSE\_ENV\_FILES
 
-Lets you specify which environment files Compose should use.
+Lets you specify which environment files Compose should use if `--env-file` isn't used.
 
-Default:
-Example:
+When using multiple environment files, use a comma as a separator. 
 
 ## Unsupported in Compose V2
 
