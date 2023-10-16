@@ -79,7 +79,7 @@ cpe:<cpe_version>:<part>:<vendor>:<product>:<version>:<update>:<edition>:<langua
 ```
 
 For example `cpe:*:*:*:calendar:*:*:*:*:*:*:*` returns a match on anything with
-the product name “calendar”. If there is a vulnerability present in an NPM
+the product name “calendar”. If there is a vulnerability present in an npm
 package, this CPE match would also return packages and modules for all other
 languages too.
 
