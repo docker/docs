@@ -47,23 +47,23 @@ trackers, including:
 - [Wolfi Security Feed](https://packages.wolfi.dev/os/security.json)
 - [Chainguard Security Feed](https://packages.cgr.dev/chainguard/security.json)
 
-Docker Scout correlates this data by making a full inventory of a container
-image and storing that inventory in a [software bill of materials
-(SBOM)](https://ntia.gov/sites/default/files/publications/sbom_at_a_glance_apr2021_0.pdf).
+Docker Scout correlates the vulnerability data from these advisories with the
+Software Bill of Materials (SBOM) of container images to detect what
+vulnerabilities affect an image. The SBOM summarizes the contents of an image,
+and Docker Scout stores the SBOM in its database.
 
-The SBOM summarizes the contents of the image and how the contents got there
-meaning that when there is information about a new vulnerability, Docker Scout
-correlates it with the SBOM. If Docker Scout finds a match for a vulnerability,
-it can identify the artifact that’s now vulnerable, why, and where it’s in use.
+When there is information about a new vulnerability, Docker Scout correlates
+the vulnerable package with the SBOMs in the database to identify affected
+images.
 
-When a customer enrolls with Docker Scout, the organization receives their own
-instance of the database. This database tracks timestamped metadata about your
+When you enable Docker Scout for your organization, you receive your own
+instance of the database. The database tracks timestamped metadata about your
 images that Docker Scout can then match to CVEs. Find more details on how this
 works in the [image analysis page](./image-analysis.md).
 
-Docker Scout is ideal for analyzing images in Docker Desktop and Docker Hub, but
-the flexibility of the approach also means it can integrate with other systems,
-see [Integrating Docker Scout with other systems](./integrations/index.md).
+Docker Scout image analysis integrates seamlessly with Docker Desktop and
+Docker Hub, and you can also enable integrations with other systems, see
+[Integrating Docker Scout with other systems](./integrations/index.md).
 
 ## How Docker Scout makes more precise matches
 
