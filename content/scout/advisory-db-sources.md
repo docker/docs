@@ -21,9 +21,10 @@ advisory database and CVE-to-package matching service works.
 Docker Scout creates and maintains its vulnerability database by ingesting and
 collating vulnerability data from multiple sources continuously. These
 sources include many recognizable package repositories and trusted security
-trackers, such as:
+trackers, including:
 
 - [Alpine secdb](https://secdb.alpinelinux.org/)
+- [AlmaLinux Security Advisory](https://errata.almalinux.org/)
 - [Amazon Linux Security Center](https://alas.aws.amazon.com/)
 - [CISA Known Exploited Vulnerability
   Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
@@ -39,6 +40,7 @@ trackers, such as:
 - [Python Packaging Advisory
   Database](https://github.com/pypa/advisory-database)
 - [RedHat Security Data](https://www.redhat.com/security/data/metrics/)
+- [Rocky Linux Security Advisory](https://errata.rockylinux.org/)
 - [RustSec Advisory Database](https://github.com/rustsec/advisory-db)
 - [SUSE Security CVRF](http://ftp.suse.com/pub/projects/security/cvrf/)
 - [Ubuntu CVE Tracker](https://people.canonical.com/~ubuntu-security/cve/)
