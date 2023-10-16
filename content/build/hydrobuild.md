@@ -74,9 +74,9 @@ local Docker configuration.
    $ docker buildx create --driver cloud <ORG>/default
    ```
 
-   Replace `<ORG>` with the Docker Hub namespace of your Docker organization.
+   Replace `ORG` with the Docker Hub namespace of your Docker organization.
 
-This creates a builder named `cloud-<org>-default`.
+This creates a builder named `cloud-ORG-default`.
 
 {{< /tab >}}
 {{< tab name="GUI" >}}
@@ -105,7 +105,7 @@ To build using Hydrobuild, invoke a build command and specify the name of the
 builder using the `--builder` flag.
 
 ```console
-$ docker buildx build --builder cloud-<org>-default --tag <org>/<image> .
+$ docker buildx build --builder cloud-<ORG>-default --tag <IMAGE> .
 ```
 
 If you want to use Hydrobuild without having to specify the `--builder` flag
@@ -117,7 +117,7 @@ each time, you can set it as the default builder.
 Run the following command:
 
 ```console
-$ docker buildx use cloud-<org>-default --global
+$ docker buildx use cloud-<ORG>-default --global
 ```
 
 {{< /tab >}}
@@ -153,9 +153,9 @@ Loading the build result for multi-platform images is not supported. Use the
 the output to a registry.
 
 ```console
-$ docker buildx build --builder cloud-<org>-default \
+$ docker buildx build --builder cloud-<ORG>-default \
   --platform linux/amd64,linux/arm64 \
-  --tag <org>/<image> \
+  --tag <IMAGE> \
   --push .
 ```
 
@@ -163,9 +163,9 @@ If you want to build with a tag, but you don't want to load the results to your
 local image store, you can export the build results to the build cache only:
 
 ```console
-$ docker buildx build --builder cloud-<org>-default \
+$ docker buildx build --builder cloud-<ORG>-default \
   --platform linux/amd64,linux/arm64 \
-  --tag <org>/<image> \
+  --tag <IMAGE> \
   --output type=cacheonly .
 ```
 
@@ -175,9 +175,9 @@ To run multi-platform builds, you must specify all of the platforms that you
 want to build for using the `--platform` flag.
 
 ```console
-$ docker buildx build --builder cloud-<org>-default \
+$ docker buildx build --builder cloud-<ORG>-default \
   --platform linux/amd64,linux/arm64 \
-  --tag <org>/<image> \
+  --tag <IMAGE> \
   --push .
 ```
 
@@ -235,12 +235,12 @@ jobs:
         with:
           version: "lab:latest"
           driver: cloud
-          endpoint: "<org>/default"
+          endpoint: "<ORG>/default"
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
-          tags: "<org>/<image>"
+          tags: "<IMAGE>"
           # For pull requests, export results to the build cache.
           # Otherwise, push to a registry.
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
@@ -268,13 +268,13 @@ jobs:
           chmod a+x ~/.docker/cli-plugins/docker-buildx
 
       - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-      - run: docker buildx create --use --driver cloud "<org>/default"
+      - run: docker buildx create --use --driver cloud "<ORG>/default"
 
       - run: |
           docker buildx build \
           --platform linux/amd64,linux/arm64 \
           --push \
-          --tag "<org>/<image>" .
+          --tag "<IMAGE>" .
 
   # Build an image and discard the result
   build_cache:
@@ -291,7 +291,7 @@ jobs:
           chmod a+x ~/.docker/cli-plugins/docker-buildx
 
       - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-      - run: docker buildx create --use --driver cloud "<org>/default"
+      - run: docker buildx create --use --driver cloud "<ORG>/default"
 
       - run: |
           docker buildx build \
@@ -327,7 +327,7 @@ chmod a+x ~/.docker/cli-plugins/docker-buildx
 echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
 
 # Connect to your builder and set it as the default builder
-docker buildx create --use --driver cloud "<org>/default"
+docker buildx create --use --driver cloud "<ORG>/default"
 
 # Cache-only image build
 docker buildx build \
@@ -339,7 +339,7 @@ docker buildx build \
 docker buildx build \
     --platform linux/amd64,linux/arm64 \
     --push \
-    --tag "<org>/<image>" \
+    --tag "<IMAGE>" \
     .
 ```
 
@@ -459,7 +459,7 @@ If you want to stop using Hydrobuild, and remove it from your system, remove
 the builder using the `docker buildx rm` command.
 
 ```console
-$ docker buildx rm cloud-<org>-default
+$ docker buildx rm cloud-<ORG>-default
 ```
 
 This doesn't deprovision the builder backend, it only removes the builder from
