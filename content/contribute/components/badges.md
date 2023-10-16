@@ -20,4 +20,5 @@ You can also make a badge a link.
 
 ```go
 {{</* badge color=amber text="amber badge" */>}}
+[{{</* badge color="blue" text="badge with a link" */>}}](../overview.md)
 ```
