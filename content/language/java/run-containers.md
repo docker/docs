@@ -1,5 +1,5 @@
 ---
-title: Run your image as a container
+title: Run your Java image as a container
 keywords: Java, run, image, container,
 description: Learn how to run the image as a container.
 ---

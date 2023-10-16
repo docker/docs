@@ -1,7 +1,7 @@
 ---
 description: Containerize Go apps using Docker
 keywords: docker, getting started, go, golang, language, dockerfile
-title: What will you learn in this module?
+title: Go language-specific guide
 toc_min: 1
 toc_max: 2
 ---

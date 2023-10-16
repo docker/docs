@@ -1,5 +1,5 @@
 ---
-title: Run your image as a container
+title: Run your Go image as a container
 keywords: get started, go, golang, run, container
 description: Learn how to run the image as a container.
 aliases:

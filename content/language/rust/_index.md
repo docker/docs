@@ -1,7 +1,7 @@
 ---
 description: Containerize Rust apps using Docker
 keywords: Docker, getting started, Rust, language
-title: What will you learn in this module?
+title: Rust langauge-specific guide
 toc_min: 1
 toc_max: 2
 ---

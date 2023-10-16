@@ -1,5 +1,5 @@
 ---
-title: Configure CI/CD for your application
+title: Configure CI/CD for your Java application
 keywords: Java, CI/CD, local, development
 description: Learn how to Configure CI/CD for your application
 ---
