@@ -1,6 +1,6 @@
 title: Docker Docs
 baseURL: https://docs.docker.com
-refLinksErrorLevel: WARNING
+refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
