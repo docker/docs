@@ -160,7 +160,7 @@ $ docker buildx build --builder cloud-<org>-default \
 ```
 
 If you want to build with a tag, but you don't want to load the results to your
-local image store, you export the build results to the build cache only:
+local image store, you can export the build results to the build cache only:
 
 ```console
 $ docker buildx build --builder cloud-<org>-default \
