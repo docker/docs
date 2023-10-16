@@ -117,6 +117,7 @@ macvlan
 mfsymlinks
 minikube
 musl
+npm
 osquery
 osxfs
 paravirtualization
