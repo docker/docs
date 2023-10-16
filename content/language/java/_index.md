@@ -1,5 +1,5 @@
 ---
-title: Getting started with Java
+title: Java language-specific guide
 keywords: Docker, getting started, java, language
 description: Containerize Java apps using Docker
 toc_min: 1

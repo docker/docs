@@ -1,5 +1,5 @@
 ---
-title: Use containers for development
+title: Use containers for Go development
 keywords: get started, go, golang, local, development
 description: Learn how to develop your application locally.
 aliases:

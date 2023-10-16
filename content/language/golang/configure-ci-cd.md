@@ -1,5 +1,5 @@
 ---
-title: Configure CI/CD for your application
+title: Configure CI/CD for your Go application
 keywords: ci, cd, ci/cd, continuous integration, continuous deployment, deployment,
   github, github actions, go, golang, development
 description: Learn how to set up CI/CD pipeline for your application.
