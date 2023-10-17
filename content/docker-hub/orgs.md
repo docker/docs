@@ -46,6 +46,12 @@ public images you publish. You can update the company name anytime by navigating
 to your organization's **Settings** page.
 6. Select **Continue to Org size** and then specify the number of users (seats)
 you require.
+
+   > **Early access features**
+   >
+   > If you buy a subscription for Docker Team or Business after October 23, 2023, you may have a different user interface experience. Select **Continue** to continue to the billing portal. Here you can select the quantity of seats for your organization. Then, follow the on-screen instructions to pay for your subscription. You can disregard steps 7 and 8.
+   { .restricted }
+
 7. Select **Continue to payment**.
 8. Follow the on-screen instructions to pay for your subscription.
 
@@ -108,6 +114,11 @@ configure your organization.
 - **Billing**: Displays information about your existing
 [Docker subscription (plan)](../subscription/index.md) and your billing history.
 You can also access your invoices from this tab.
+
+> **Early access features**
+>
+> If you subscribed to Docker Team or Business after October 23, 2023, you may have a different user interface experience. To access invoices and payment information, go to the **Billing** page, then select the **Payment methods and billing history** link.
+{ .restricted }
 
 ## Videos
 
