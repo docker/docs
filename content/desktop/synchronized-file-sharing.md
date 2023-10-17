@@ -1,6 +1,7 @@
 ---
 title: Synchronized file sharing
 description: Get started with Synchronized file sharing on Docker Desktop.
+sitemap: false
 ---
 
 > **Early Access**
