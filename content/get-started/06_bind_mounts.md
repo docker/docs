@@ -18,6 +18,11 @@ changes you make to the code immediately, as soon as you save a file. This means
 that you can run processes in the container that watch for filesystem changes
 and respond to them.
 
+To view which parts of your filesystem you can share with containers, see
+the file sharing setting for [Mac](../desktop/settings/mac.md/#file-sharing),
+[Windows](../desktop/settings/windows.md/#file-sharing), or
+[Linux](../desktop/settings/linux.md/#file-sharing).
+
 In this chapter, you'll see how you can use bind mounts and a tool called
 [nodemon](https://npmjs.com/package/nodemon) to watch for file changes, and then restart the application
 automatically. There are equivalent tools in most other languages and
