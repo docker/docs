@@ -45,10 +45,10 @@ work.
 >
 > If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
 
-1. In the Docker Desktop Dashboard, view the file sharing setting. This setting
-defines which parts of your filesystem you can share with containers. For
-details about accessing the setting, see the topic for
-[Mac](../desktop/settings/mac.md/#file-sharing),
+1. Verify that your `getting-started-app` directory is in a directory defined in
+Docker Desktop's file sharing setting. This setting defines which parts of your
+filesystem you can share with containers. For details about accessing the
+setting, see the topic for [Mac](../desktop/settings/mac.md/#file-sharing),
 [Windows](../desktop/settings/windows.md/#file-sharing), or
 [Linux](../desktop/settings/linux.md/#file-sharing).
 
