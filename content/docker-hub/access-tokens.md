@@ -5,8 +5,8 @@ description: Learn how to create and manage your personal Docker Hub access toke
 keywords: docker hub, hub, security, PAT, personal access token
 ---
 
-If you are using the [Docker Hub CLI](https://github.com/docker/hub-tool#readme)
-tool (currently experimental) to access Hub images from the Docker CLI, you can create personal access tokens (PAT) as alternatives to your password.
+If you're using the [Docker Hub CLI](https://github.com/docker/hub-tool#readme)
+tool (currently experimental) to access Hub images from the Docker CLI, you can create personal access tokens (PAT) to use as alteratives to your password.
 
 Compared to passwords, personal access tokens provide the following advantages:
 
@@ -47,12 +47,15 @@ any time.
 
 ## Use an access token
 
-You can use an access token anywhere that requires your Docker Hub
-password.
+You can use an access token in place of your password when you log in using Docker CLI.
 
-When logging in from your Docker CLI client (`docker login --username <username>`),
-omit the password in the login command. Instead, enter your token when asked for
-a password.
+Log in from your Docker CLI client with the following command, replacing `YOUR_USERNAME` with your Docker ID:
+
+```console
+$ docker login --username <YOUR_USERNAME>
+```
+
+When prompted for a password, enter your personal access token instead of a password.
 
 > **Note**
 >
