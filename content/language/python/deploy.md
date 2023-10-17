@@ -15,8 +15,11 @@ In this section, you'll learn how to use Docker Desktop to deploy your applicati
 
 ## Create a Kubernetes YAML file
 
-In your `python-docker-dev` directory, create a file name `docker-python-kubernetes.yaml`. Open the file in an IDE or text editor and add the following contents.
-Replace `DOCKER_USERNAME/REPO_NAME` with your Docker username and the name of the repository that you created in [Configure CI/CD for your Python application](configure-ci-cd.md).
+In your `python-docker-dev` directory, create a file named
+`docker-python-kubernetes.yaml`. Open the file in an IDE or text editor and add
+the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
+username and the name of the repository that you created in [Configure CI/CD for
+your Python application](configure-ci-cd.md).
 
 ```yaml
 apiVersion: apps/v1
@@ -60,9 +63,10 @@ spec:
 In this Kubernetes YAML file, there are two objects, separated by the `---`:
 
  - A Deployment, describing a scalable group of identical pods. In this case,
-   you'll get just one replica, or copy of your pod, and that pod (which is
-   described under the template: key) has just one container in it, based off of
-    the image built by GitHub Actions in [Configure CI/CD for your Python application](configure-ci-cd.md).
+   you'll get just one replica, or copy of your pod. That pod, which is
+   described under `template`, has just one container in it. The
+    container is using the image built by GitHub Actions in [Configure CI/CD for
+    your Python application](configure-ci-cd.md).
  - A NodePort service, which will route traffic from port 30001 on your host to
    port 3000 inside the pods it routes to, allowing you to reach your app
    from the network.

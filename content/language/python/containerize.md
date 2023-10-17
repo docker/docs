@@ -96,7 +96,7 @@ terminal.
 $ docker compose up --build
 ```
 
-Open a browser and view the application at [http://localhost:5000](http://localhost:5000). You should see a simple flask application.
+Open a browser and view the application at [http://localhost:5000](http://localhost:5000). You should see a simple Flask application.
 
 In the terminal, press `ctrl`+`c` to stop the application.
 
@@ -112,7 +112,7 @@ $ docker compose up --build -d
 
 Open a browser and view the application at [http://localhost:5000](http://localhost:5000).
 
-You should see a simple flask application.
+You should see a simple Flask application.
 
 In the terminal, run the following command to stop the application.
 
