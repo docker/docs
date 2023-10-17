@@ -6,7 +6,7 @@ keywords: billing, renewal, payments
 
 > **Early access features**
 >
-> If you're subscribed to Docker Pro, you may have a different user interface experience. To find past invoices and update payment and billing information, go to the **Billing** page for your account, then select the **Payment methods and billing history** link.
+> If you're subscribed to Docker Pro or subscribed to Docker Team or Business after October 23, 2023, you may have a different user interface experience. To find past invoices and update payment and billing information, go to the **Billing** page for your account, then select the **Payment methods and billing history** link.
 { .restricted }
 
 ### Where can I view my billing date?

@@ -9,7 +9,7 @@ aliases:
 
 > **Early access features**
 >
-> If you're subscribed to Docker Pro, you may have a different downgrade experience. When you downgrade a Docker Pro subscription purchased after this date, changes don't apply immediately and access to paid features is available until the next billing cycle. View the **Billing** details for your account to verify.
+> If you're subscribed to Docker Pro or subscribed to Docker Team or Business after October 23, 2023, you may have a different downgrade experience. When you downgrade a Docker Pro subscription purchased after this date, changes don't apply immediately and access to paid features is available until the next billing cycle. View the **Billing** details for your account to verify.
 { .restricted }
 
 You can downgrade your Docker subscription at anytime before the renewal date. The unused portion of the subscription isn't refundable or creditable.

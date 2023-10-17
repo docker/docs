@@ -6,7 +6,7 @@ keywords: payments, billing, subscription
 
 > **Early access features**
 >
-> If you're subscribed to Docker Pro, you may have a different user interface experience. To update your billing information, go to the **Billing** page for your account, then select the **Payment methods and billing history** link.
+> If you're subscribed to Docker Pro or subscribed to Docker Team or Business after October 23, 2023, you may have a different user interface experience. To update your billing information, go to the **Billing** page for your account, then select the **Payment methods and billing history** link.
 { .restricted }
 
 You can update the billing information for your personal account or for an organization. 
