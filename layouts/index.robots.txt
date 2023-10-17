@@ -2,7 +2,6 @@
 User-agent: *
 
 Disallow: /build/hydrobuild/
-Disallow: /desktop/synchronized-file-sharing/
 
 Sitemap: {{ site.BaseURL }}/sitemap.xml
 {{- else -}}
