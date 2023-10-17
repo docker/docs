@@ -90,4 +90,4 @@ Synchronized file sharing is essentially a replacement for the Mutagen extension
 
 ## Feedback
 
-Thanks for trying the new Synchronized file sharing feature. Give feedback or report any bugs you may find through the issues tracker on the [feedback form](TBD).
+Thanks for trying the new Synchronized file sharing feature. Give feedback or report any bugs you may find through the issues tracker on the feedback form.
