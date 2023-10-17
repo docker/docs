@@ -15,7 +15,7 @@ There are two ways to contribute a pull request to the docs repository:
 
 1. You can select the **Edit this page** option in the right column of every page on [https://docs.docker.com/](/).
 
-    This opens the GitHub editor, which means you don't need to know a lot about Git, or even about Markdown. When you save, Git prompts you to create a fork if you don't already have one, and to create a branch in your fork and submit the pull request.
+    This opens the GitHub editor, which means you don't need to know a lot about Git, or even about Markdown. When you save, GitHub prompts you to create a fork if you don't already have one, and to create a branch in your fork and submit the pull request.
 
 <!-- markdownlint-disable-next-line -->
 2. Fork the [docs GitHub repository]({{% param "repo" %}}). Suggest changes or add new content on your local branch, and submit a pull request (PR) to the `main` branch.
@@ -28,14 +28,14 @@ There are two ways to contribute a pull request to the docs repository:
 
 Here’s a list of some of the important files:
 
-- `/_data/toc.yaml` defines the left-hand navigation for the docs.
-- `/js/docs.js` defines most of the docs-specific JS such as the table of contents (ToC) generation and menu syncing.
-- `/css/style.scss` defines the docs-specific style rules.
-- `/_layouts/docs.html` is the HTML template file, which defines the header and footer, and includes all the JS/CSS that serves the docs content.
+- `/content` contains all the pages. The site uses filesystem-based routing, so the filepath of the source files correspond to the url subpath.
+- `/data/toc.yaml` defines the left-hand navigation for the docs.
+- `/layouts` contains the html templates used to generate the HTML pages.
 
-### Files not edited here
-
-Some files and directories are maintained in the upstream repositories. You can find a list of such files in `_config_production.yml`. Pull requests against these files will be rejected.
+CLI reference documentation is generated from code, and is not maintained in
+this repository. (They're only vendored here, either manually in `/data` or
+automatically in `/_vendor`.) To update CLI reference docs, refer to the
+corresponding repository containing the CLI source code.
 
 ## Pull request guidelines
 
@@ -72,7 +72,7 @@ $ git clone {{% param "repo" %}}.git
 $ cd docs
 ```
 
-Then, build and run the documentation using [Docker Compose](../compose/index.md):
+Then, build and run the documentation using [Docker Compose](../compose/_index.md):
 
 ```console
 $ docker compose watch
@@ -80,7 +80,7 @@ $ docker compose watch
 
 > **Note**
 >
->You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](../desktop/index.md). If you don't have Docker Desktop installed, follow the [instructions](../compose/install/index.md) to install Docker Compose.
+>You need Docker Compose to build and run the docs locally. Docker Compose is included with [Docker Desktop](../desktop/_index.md). If you don't have Docker Desktop installed, follow the [instructions](../compose/install/index.md) to install Docker Compose.
 
 When the container is built and running, visit [http://localhost:1313](http://localhost:1313) in your web browser to view the docs.
 
@@ -93,48 +93,27 @@ To stop the development container:
 1. In your terminal, press `<Ctrl+C>` to exit the file watch mode of Compose.
 2. Stop the Compose services with the `docker compose down` command.
 
-### Build the docs with deployment features enabled
-
-The default configuration for local builds of the documentation disables some
-features to allow for a shorter build-time. The following options differ between
-local builds, and builds that are deployed to [docs.docker.com](/):
-
-- search auto-completion, and generation of `js/metadata.json`
-- Google Analytics
-- page feedback
-- `sitemap.xml` generation
-- minification of stylesheets (`css/style.css`)
-- adjusting "edit this page" links for content in other repositories
-
-If you want to contribute in these areas, you can perform a "production" build
-locally. To preview the documentation with deployment features enabled, set the `JEKYLL_ENV` environment variable when building the documentation:
-
-```bash
-JEKYLL_ENV=production docker compose up --build
-```
-
-When the container is built and running, visit [http://localhost:4000](http://localhost:4000) in your web browser to view the docs.
-
-To rebuild the docs after you make changes, repeat the steps above.
-
 ### Test the docs locally
 
-We use a command-line tool called [vale](https://vale.sh/) to check the style and help you find
-errors in your writing. We highly recommend that you use vale to lint your documentation before
-you submit your pull request.
+For testing the documentation, we use: 
+- a command-line tool called [vale](https://vale.sh/) to check the style and help you find errors in your writing.
+- [wjdp/htmltest](https://github.com/wjdp/htmltest) for proofing HTML markup and checking for broken links
 
-You can run vale as a stand-alone tool using the command-line, or you can integrate it with
-your editor to get real-time feedback on your writing.
+You can use Buildx to run all the tests locally before you create your pull
+request:
 
-To get started, follow the [vale installation instructions](https://vale.sh/docs/vale-cli/installation/)
-for your operating system. To enable the vale integration for your editor, install the relevant plugin:
+```console
+$ docker buildx bake validate
+```
+
+You can also integrate `vale` with your text editor to get real-time feedback
+on your writing. Refer to the relevant plugin for your editor:
 
 - [VS Code](https://github.com/chrischinchilla/vale-vscode)
-- [Neovim](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#vale)
+- [Neovim](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vale_ls)
 - [Emacs](https://github.com/tpeacock19/flymake-vale)
 - [Jetbrains](https://vale.sh/docs/integrations/jetbrains/)
 - [Sublime Text](https://github.com/errata-ai/LSP-vale-ls)
 
-The vale rules that implement the Docker style guide are included in the Docker docs repository,
-in the `.github/vale` directory. Vale will automatically apply these rules when invoked in this
-repository.
+The `vale` rules that implement the Docker style guide are included in the
+Docker docs repository, in the `.github/vale` directory.

@@ -83,7 +83,10 @@ tags:
       The Advanced Image Management API endpoints allow you to manage Docker
       images across all repositories.
 
-      For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/).
+      **<span style="color: red;">Deprecated</span>**: Advanced Image
+      Management is deprecated, and scheduled for removal on November 15th, 2023.
+
+      For more information, see [Deprecation of Advanced Image Management](https://github.com/docker/roadmap/issues/534)
   - name: audit-logs
     x-displayName: Audit Logs
     description: |
@@ -307,6 +310,7 @@ paths:
           $ref: "#/components/responses/NotFound"
   /v2/namespaces/{namespace}/repositories/{repository}/images-summary:
     get:
+      deprecated: true
       tags:
         - images
       summary: Get summary of repository's images
@@ -353,6 +357,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
   /v2/namespaces/{namespace}/repositories/{repository}/images:
     get:
+      deprecated: true
       tags:
         - images
       summary: Get details of repository's images
@@ -446,6 +451,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
   /v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags:
     get:
+      deprecated: true
       tags:
         - images
       summary: Get image's tags
@@ -503,6 +509,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
   /v2/namespaces/{namespace}/delete-images:
     post:
+      deprecated: true
       tags:
         - images
       summary: Delete images

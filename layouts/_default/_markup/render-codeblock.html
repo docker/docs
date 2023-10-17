@@ -1,13 +1,22 @@
-<div class="group relative">
+{{ $innerHTML := highlight .Inner .Type
+| replaceRE
+  `&lt;([A-Z_]+)?&gt;`
+  `<var
+    class="text-violet-light dark:text-violet-dark font-bold"
+    >$1</var>`
+}}
+
+<div x-data class="group relative">
   <button
-    x-data="{ code: '{{ strings.ReplaceRE `(?sm)^\$\s+` "" .Inner | base64Encode }}' }"
     class="material-symbols-rounded hidden group-hover:block absolute top-3 right-3 text-gray-light-300 dark:text-gray-dark-600"
     title="Copy"
-    @click="window.navigator.clipboard.writeText(atob(code));
+    @click="window.navigator.clipboard.writeText($refs.code.textContent.replaceAll(/^\$\s*/gm, ''));
     $el.textContent='check_circle';
     setTimeout(() => $el.textContent='content_copy', 2000);"
   >
     content_copy
   </button>
-  {{ highlight .Inner .Type }}
+  <div x-ref="code">
+  {{- safeHTML $innerHTML  -}}
+  </div>
 </div>

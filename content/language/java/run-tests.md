@@ -1,5 +1,5 @@
 ---
-title: Run your tests
+title: Run your Java tests
 keywords: Java, build, test
 description: How to build and run your Tests
 ---
