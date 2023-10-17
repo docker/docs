@@ -18,11 +18,6 @@ changes you make to the code immediately, as soon as you save a file. This means
 that you can run processes in the container that watch for filesystem changes
 and respond to them.
 
-To view which parts of your filesystem you can share with containers, see
-the file sharing setting for [Mac](../desktop/settings/mac.md/#file-sharing),
-[Windows](../desktop/settings/windows.md/#file-sharing), or
-[Linux](../desktop/settings/linux.md/#file-sharing).
-
 In this chapter, you'll see how you can use bind mounts and a tool called
 [nodemon](https://npmjs.com/package/nodemon) to watch for file changes, and then restart the application
 automatically. There are equivalent tools in most other languages and
@@ -50,10 +45,17 @@ work.
 >
 > If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
 
-1. Open a terminal and change directory to the `getting-started-app`
+1. Open Docker Desktop and view the file sharing setting. This setting
+defines which parts of your filesystem you can share with containers. For
+details about accessing the setting, see the topic for
+[Mac](../desktop/settings/mac.md/#file-sharing),
+[Windows](../desktop/settings/windows.md/#file-sharing), or
+[Linux](../desktop/settings/linux.md/#file-sharing).
+
+2. Open a terminal and change directory to the `getting-started-app`
    directory.
 
-2. Run the following command to start `bash` in an `ubuntu` container with a
+3. Run the following command to start `bash` in an `ubuntu` container with a
    bind mount.
 
    {{< tabs >}}
@@ -86,7 +88,7 @@ work.
    current working directory on your host machine (`getting-started-app`), and
    `target` is where that directory should appear inside the container (`/src`).
 
-3. After running the command, Docker starts an interactive `bash` session in the
+4. After running the command, Docker starts an interactive `bash` session in the
    root directory of the container's filesystem.
 
    ```console
@@ -97,7 +99,7 @@ work.
    boot  etc  lib   mnt    proc  run   src   sys  usr
    ```
 
-4. Change directory to the `src` directory.
+5. Change directory to the `src` directory.
 
    This is the directory that you mounted when starting the container. Listing
    the contents of this directory displays the same files as in the
@@ -109,7 +111,7 @@ work.
    Dockerfile  node_modules  package.json  spec  src  yarn.lock
    ```
 
-5. Create a new file named `myfile.txt`.
+6. Create a new file named `myfile.txt`.
 
    ```console
    root@ac1237fad8db:/src# touch myfile.txt
@@ -117,7 +119,7 @@ work.
    Dockerfile  myfile.txt  node_modules  package.json  spec  src  yarn.lock
    ```
 
-6. Open the `getting-started-app` directory on the host and observe that the
+7. Open the `getting-started-app` directory on the host and observe that the
    `myfile.txt` file is in the directory.
 
    ```
@@ -131,15 +133,15 @@ work.
    │ └── yarn.lock
    ```
 
-7. From the host, delete the `myfile.txt` file.
-8. In the container, list the contents of the `app` directory once more. Observe that the file is now gone.
+8. From the host, delete the `myfile.txt` file.
+9. In the container, list the contents of the `app` directory once more. Observe that the file is now gone.
 
    ```console
    root@ac1237fad8db:/src# ls
    Dockerfile  node_modules  package.json  spec  src  yarn.lock
    ```
 
-9. Stop the interactive container session with `Ctrl` + `D`.
+10. Stop the interactive container session with `Ctrl` + `D`.
 
 That's all for a brief introduction to bind mounts. This procedure
 demonstrated how files are shared between the host and the container, and how
