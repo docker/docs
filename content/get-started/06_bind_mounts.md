@@ -45,7 +45,7 @@ work.
 >
 > If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
 
-1. Open Docker Desktop and view the file sharing setting. This setting
+1. In the Docker Desktop Dashboard, view the file sharing setting. This setting
 defines which parts of your filesystem you can share with containers. For
 details about accessing the setting, see the topic for
 [Mac](../desktop/settings/mac.md/#file-sharing),
