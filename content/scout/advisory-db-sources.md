@@ -83,7 +83,7 @@ the product name “calendar”. If there is a vulnerability present in an npm
 package, this CPE match would also return packages and modules for all other
 languages too.
 
-Instead, Docker Scout matches CVEs to SBOMs using [package URL (PURL)
+Instead, Docker Scout matches CVEs to SBOMs using [Package URL (PURL)
 links](https://github.com/package-url/purl-spec) that are a more precise,
 universal schema for matching software packages. A PURL link can help you only
 identify the relevant packages with far less false positives.
@@ -95,8 +95,8 @@ language and version.
 pkg:npm/calendar@12.0.2
 ```
 
-This only matches a node package with the name “calendar” and the version
-“12.0.2”. For relevant packages, you can specify architectures and operating
+This only matches a node package with the name `calendar` and the version
+`12.0.2`. For relevant packages, you can specify architectures and operating
 system versions to make more precise matches.
 
 In summary, Docker Scout’s technique improves matching accuracy and reduces the
@@ -104,7 +104,9 @@ number of results that turn out to be false-positives.
 
 ## Package ecosystems supported by Docker Scout
 
-By sourcing vulnerability data from the providers above, Docker Scout is able to support analyzing the following package ecosystems:
+By sourcing vulnerability data from the [advisory
+databases](#docker-scouts-advisory-database-sources), Docker Scout is able to
+support analyzing the following package ecosystems:
 
 - .NET
 - GitHub packages
