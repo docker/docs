@@ -11,11 +11,6 @@ title: Known issues
 {{< tab name="For Mac with Intel chip" >}}
 * The Mac Activity Monitor reports that Docker is using twice the amount of memory it's actually using. This is due to a bug in MacOS. We have written [a detailed report](https://docs.google.com/document/d/17ZiQC1Tp9iH320K-uqVLyiJmk4DHJ3c4zgQetJiKYQM/edit?usp=sharing) on this.
 
-* You might encounter errors when using `docker-compose up` with Docker Desktop
-  (`ValueError: Extra Data`). We've identified this is likely related to data
-  and/or events being passed all at once rather than one by one, so sometimes
-  the data comes back as 2+ objects concatenated and causes an error.
-
 * Force-ejecting the `.dmg` after running `Docker.app` from it can cause the
   whale icon to become unresponsive, Docker tasks to show as not responding in
   the Activity Monitor, and for some processes to consume a large amount of CPU

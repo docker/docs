@@ -12,7 +12,7 @@ It also provides clarity on running containers as `root` as opposed to having `A
 
 ## Permission requirements
 
-While Docker Desktop on Windows can be run without having `Administrator` privileges, it does require them during installation. On installation you recieve a UAC prompt which allows a privileged helper service to be installed. After that, Docker Desktop can be run without administrator privileges, provided you are members of the `docker-users` group. If you performed the installation, you are automatically added to this group, but other users must be added manually. This allows the administrator to control who has access to Docker Desktop.
+While Docker Desktop on Windows can be run without having `Administrator` privileges, it does require them during installation. On installation you receive a UAC prompt which allows a privileged helper service to be installed. After that, Docker Desktop can be run without administrator privileges, provided you are members of the `docker-users` group. If you performed the installation, you are automatically added to this group, but other users must be added manually. This allows the administrator to control who has access to Docker Desktop.
 
 The reason for this approach is that Docker Desktop needs to perform a limited set of privileged operations which are conducted by the privileged helper process `com.docker.service`. This approach allows, following the principle of least privilege, `Administrator` access to be used only for the operations for which it is absolutely necessary, while still being able to use Docker Desktop as an unprivileged user.
 
@@ -35,7 +35,7 @@ The service performs the following functionalities:
 
 The service start mode depends on which container engine is selected, and, for WSL, on whether it is needed to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file. This is controlled by a setting under `Use the WSL 2 based engine` in the settings page. When this is set, WSL engine behaves the same as Hyper-V. So:
 - With Windows containers, or Hyper-v Linux containers, the service is started when the system boots and runs all the time, even when Docker Desktop isn't running. This is required so you can launch Docker Desktop without admin privileges. 
-- With WSL2 Linux containers, the service isn't necessary and therefore doesn't run automatically when the system boots. When you switche to Windows containers or Hyper-v Linux containers, or chooses to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file, a UAC prompt is displayed which asks you to accept the privileged operation to start the service. If accepted, the service is started and set to start automatically upon the next Windows boot.
+- With WSL2 Linux containers, the service isn't necessary and therefore doesn't run automatically when the system boots. When you switch to Windows containers or Hyper-v Linux containers, or chooses to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file, a UAC prompt is displayed which asks you to accept the privileged operation to start the service. If accepted, the service is started and set to start automatically upon the next Windows boot.
 
 ## Containers running as root within the Linux VM
 

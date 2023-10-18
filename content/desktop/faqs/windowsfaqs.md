@@ -32,7 +32,7 @@ Docker Desktop displays the **Docker Desktop - Access Denied** error if a Window
 
 If your admin account is different to your user account, add the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users* and Groups** > **Groups** > **docker-users**.
 
-Right-click to add the user to the group. Log out and log back in for the changes to take effect.
+Right-click to add the user to the group. Sign out and sign back in for the changes to take effect.
 
 ### Why does Docker Desktop fail to start when anti-virus software is installed?
 
@@ -100,7 +100,7 @@ To learn more about how to set the client TLS certificate for verification, see
 [Verify repository client with certificates](../../engine/security/certificates.md)
 in the Docker Engine topics.
 
-## How do I switch between Windows and Linux containers
+### How do I switch between Windows and Linux containers
 
 From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
 the Docker CLI talks to. Select **Switch to Windows containers** to use Windows

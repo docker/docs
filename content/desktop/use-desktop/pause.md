@@ -10,7 +10,8 @@ You can manually pause Docker Desktop by selecting the Docker menu {{< inline-im
 
 When you manually pause Docker Desktop, a paused status displays on the Docker menu and on the Docker Dashboard. You can still access the **Settings** and the **Troubleshoot** menu.
 
->**Note**
+>**Tip**
 >
-> The Resource Saver feature (v4.24+) is enabled by default and provides better
+> The Resource Saver feature, available in Docker Desktop version 4.24 and later, is enabled by default and provides better
 > CPU and memory savings and the manual Pause feature. See [here](resource-saver.md) for more info.
+{ .tip }
