@@ -12,7 +12,7 @@ The .NET getting started guide teaches you how to create a containerized .NET ap
 * Set up a local environment to develop a .NET application using containers
 * Run tests for a .NET application using containers
 * Configure a CI/CD pipeline for a containerized .NET application using GitHub Actions
-* Deploy your application to the cloud
+* Deploy your containerized application locally to Kubernetes to test and debug your deployment
 
 After completing the .NET getting started modules, you should be able to containerize your own .NET application based on the examples and instructions provided in this guide.
 

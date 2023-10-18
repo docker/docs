@@ -99,7 +99,7 @@ Guides:
       path: /language/dotnet/run-tests/
     - title: "Configure CI/CD"
       path: /language/dotnet/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/dotnet/deploy/
   - sectiontitle: Rust
     section:
