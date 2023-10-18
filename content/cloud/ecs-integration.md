@@ -216,7 +216,7 @@ For your convenience, the Docker Compose CLI offers the `docker secret` command,
 
 First, create a `token.json` file to define your DockerHub username and access token.
 
-For instructions on how to generate access tokens, see [Managing access tokens](../docker-hub/access-tokens.md).
+For instructions on how to generate access tokens, see [Managing access tokens](../security/for-developers/access-tokens.md)
 
 ```json
 {

@@ -48,7 +48,7 @@ This includes:
 
 - The resources in the [Learning Center](../use-desktop/index.md)
 - Pulling or pushing an image to Docker Hub
-- [Image Access Management](../../docker-hub/image-access-management.md)
+- [Image Access Management](../../security/for-developers/access-tokens.md)
 - [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
 - Viewing remote images in the Docker Dashboard
 - Setting up [Dev Environments](../dev-environments/index.md)

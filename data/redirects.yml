@@ -81,7 +81,7 @@
 # provide a short, permanent link to refer to a topic in the documentation.
 # For example, the docker CLI can output https://docs.docker.com/go/some-topic
 # in its help output, which can be redirected to elsewhere in the documentation.
-"/docker-hub/access-tokens/":
+"/security/for-developers/access-tokens/":
   - /go/access-tokens/
 "/desktop/mac/apple-silicon/":
   - /go/apple-silicon/

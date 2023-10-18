@@ -38,7 +38,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- The new [domain audit](../docker-hub/domain-audit.md) feature lets you audit your domains for users who aren't a member of your organization.
+- The new domain audit feature lets you audit your domains for users who aren't a member of your organization.
 
 
 ## 2022-09-26
@@ -51,7 +51,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and enhancements
 
-- In Docker Hub, you can now download a [registry.json](../docker-hub/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
+- In Docker Hub, you can now download a [registry.json](../security/for-admins/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
 
 ## 2022-09-19
 
@@ -188,7 +188,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 ## 2019-10-21
 
 ### New features
-* **Beta:** Docker Hub now supports [two-factor authentication (2FA)](2fa/index.md). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
+* **Beta:** Docker Hub now supports two-factor authentication (2FA). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
 
     > If you lose both your 2FA authentication device and recovery code, you may
     > not be able to recover your account.

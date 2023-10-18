@@ -21,7 +21,7 @@ These techniques include:
 
 When Enhanced Container Isolation is enabled, these mechanisms are applied automatically and with minimal functional or performance impact to developers. Developers continue to use Docker Desktop as usual, but the containers they launch are more strongly isolated.
 
-Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by IT admins, for instance through [Registry Access Management policies](../registry-access-management.md) or with [Settings Management](../settings-management/index.md).
+Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by IT admins, for instance through [Registry Access Management policies](../../../security/for-admins/registry-access-management.md) or with [Settings Management](../settings-management/index.md).
 
 >**Note**
 >
@@ -90,7 +90,7 @@ To enable Enhanced Container Isolation as a developer:
 
 #### As an admin
 
-To enable Enhanced Container Isolation as an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Enhanced Container Isolation feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+To enable Enhanced Container Isolation as an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../security/for-admins/configure-sign-in.md). This is because the Enhanced Container Isolation feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 Next, you must [create and configure the `admin-settings.json` file](../settings-management/configure.md) and specify:
 

@@ -45,7 +45,7 @@ You can also sign in through the CLI using the `docker login` command. For more 
 > When you use the `docker login` command, your credentials are
 stored in your home directory in `.docker/config.json`. The password is base64-encoded in this file.
 >
-> We recommend using one of the [Docker credential helpers](https://github.com/docker/docker-credential-helpers) for secure storage of passwords. For extra security, you can also use a [personal access token](../docker-hub/access-tokens.md) to log in instead, which is still encoded in this file (without a Docker credential helper) but doesn't allow admin actions (such as changing the password).
+> We recommend using one of the [Docker credential helpers](https://github.com/docker/docker-credential-helpers) for secure storage of passwords. For extra security, you can also use a [personal access token](../security/for-developers/access-tokens.md) to log in instead, which is still encoded in this file (without a Docker credential helper) but doesn't allow admin actions (such as changing the password).
 { .warning }
 
 ## Troubleshooting
