@@ -113,8 +113,8 @@ The previous example is truncated. The full output also includes a full package
 delta for the comparison. The delta shows what packages were added, removed,
 and changed between the versions.
 
-The compare output includes VCS provenance for both the local source code and
-the compare target, when available.
+The compare output includes version control provenance for both the local
+source code and the compare target, when available.
 
 ## Learn more
 

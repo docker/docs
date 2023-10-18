@@ -21,7 +21,7 @@ By default, this prints the SBOM in a JSON format to stdout.
 
 > **Note**
 >
-> The JSON format produced by `docker scout sbom` is not SPDX-JSON. To generate
+> The JSON format produced by `docker scout sbom` isn't SPDX-JSON. To generate
 > SPDX, use the SBOM generator plugin for BuildKit, see [Attach the SBOM as a
 > build attestation](#attest).
 
@@ -84,7 +84,7 @@ the [containerd image store](../desktop/containerd/_index.md) feature, or use a
 
 ## Extract to file
 
-The command for extracting the SBOM of an image to an SDPX JSON file is
+The command for extracting the SBOM of an image to an SPDX JSON file is
 different depending on whether the image has been pushed to a registry or if
 it's a local image.
 
@@ -100,7 +100,7 @@ $ docker buildx imagetools inspect <image> --format "{{ json .SBOM }}" > sbom.sp
 
 ### Local image
 
-To extract the SDPX file for a local image, build the image with the `local`
+To extract the SPDX file for a local image, build the image with the `local`
 exporter and use the `scout-sbom-indexer` SBOM generator plugin.
 
 The following command saves the SBOM to a file at `build/sbom.spdx.json`.
