@@ -27,9 +27,7 @@ Create a GitHub repository, configure the Docker Hub secrets, and push your sour
 
 3. Create a new secret named `DOCKER_USERNAME` and your Docker ID as value.
 
-4. Create a new [Personal Access Token
-   (PAT)](/docker-hub/access-tokens/#create-an-access-token) for Docker Hub. You
-   can name this token `python-docker`.
+4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `python-docker`.
 
 5. Add the PAT as a second secret in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
