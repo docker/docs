@@ -36,6 +36,22 @@ grid_developers:
   description: Create personal access tokens as an alternative to your password.
   icon: password
   link: /security/for-developers/access-tokens/
+- title: Docker Scout
+  description: Explore how Docker Scout can help you create a more secure software supply chain.
+  icon: query_stats
+  link: /scout/
+- title: Static vulnerability scanning
+  description: Automatically run a point-in-time scan on your Docker images for vulnerabilities.
+  icon: image_search
+  link: /docker-hub/vulnerability-scanning/
+- title: Docker Engine security
+  description: Understand how to keep Docker Engine secure.
+  icon: security
+  link: /engine/security/
+- title: Secrets in Docker Compose
+  description: Learn how to use secrets in Docker Compose
+  icon: privacy_tip
+  link: /compose/use-secrets/
 ---
 
 Docker provides security guardrails for both administrators and developers. 
