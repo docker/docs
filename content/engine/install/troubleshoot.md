@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot Docker Engine installation
-description: Diagnose and resolve error messages related to the Docker Engine installation
-keywords: Docker Engine, troubleshooting, error, Linux
+description: Learn how to diagnose and resolve error messages related to the Docker Engine installation.
+keywords: Docker Engine, troubleshooting, error, Linux, install Docker Engine
 ---
 
 This page contains instructions for troubleshooting and diagnosing the Docker
@@ -119,7 +119,7 @@ public nameservers aren't adequate. You have two choices:
 - Specify DNS servers for Docker to use.
 - Turn off `dnsmasq`.
 
-  Turning off `dnsmasq` adds the IP addresses of actual DNS nameserver to
+  Turning off `dnsmasq` adds the IP addresses of actual DNS nameservers to
   `/etc/resolv.conf`, and you lose the benefits of `dnsmasq`.
 
 You only need to use one of these methods.
@@ -234,7 +234,7 @@ Two common firewall daemons are:
 - [firewalld](https://firewalld.org), often used for RPM-based systems.
 
 Consult the documentation for your OS and firewall. The following information
-might help you get started. These settings used in this instruction are
+might help you get started. The settings used in this instruction are
 permissive, and you may want to use a different configuration that locks your
 system down more.
 
