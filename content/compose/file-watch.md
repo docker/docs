@@ -13,7 +13,7 @@ Use `watch` to automatically update and preview your running Compose services as
 For many projects, this allows for a hands-off development workflow once Compose is running, as services automatically update themselves when you save your work.
 
 `watch` adheres to the following file path rules:
-* All paths are relative to the build context
+* All paths are relative to the project directory
 * Directories are watched recursively
 * Glob patterns aren't supported
 * Rules from `.dockerignore` apply
