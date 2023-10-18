@@ -33,7 +33,7 @@ CentOS versions:
 - CentOS 9 (stream)
 
 The `centos-extras` repository must be enabled. This repository is enabled by
-default, but if you have disabled it, you need to re-enable it.
+default. If you have disabled it, you need to re-enable it.
 
 ### Uninstall old versions
 
