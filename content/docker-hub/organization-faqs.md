@@ -31,7 +31,7 @@ No. Organization owners can invite users through email and also choose a team fo
 
 Yes. You can [enforce sign-in](../security/for-admins/configure-sign-in.md) and some benefits are:
 
-- Administrators can enforce features like [Image Access Management](../docker-hub/image-access-management.md) and [Registry Access Management](../security/for-admins/registry-access-management.md).
+- Administrators can enforce features like [Image Access Management](../security/for-admins/image-access-management.md) and [Registry Access Management](../security/for-admins/registry-access-management.md).
  - Administrators can ensure compliance by blocking Docker Desktop usage for users who do not sign in as members of the organization.
 
 ### If a user has their personal email associated with a user account in Docker Hub, do they have to convert to using the org’s domain before they can be invited to join an organization?

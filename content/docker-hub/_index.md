@@ -47,7 +47,7 @@ GitHub and Bitbucket and push them to Docker Hub.
 * Use [Group mapping](group-mapping.md)
 * [Carry out domain audits](domain-audit.md)
 * [Use Image Access Management](image-access-management.md) to control developers' access to certain types of images
-* [Turn on Registry Access Management](../desktop/hardened-desktop/registry-access-management.md)
+* [Turn on Registry Access Management](../security/for-admins/registry-access-management.md)
 {{< /tab >}}
 {{< /tabs >}}
 
