@@ -1,6 +1,7 @@
 ---
-description: Instructions for installing Docker Engine on RHEL
-keywords: requirements, apt, installation, rhel, rpm, install, uninstall, upgrade,
+description: Learn how to install Docker Engine on RHEL. These instructions cover
+  the different installation methods, how to uninstall, and next steps.
+keywords: requirements, apt, installation, rhel, rpm, install, install docker engine, uninstall, upgrade,
   update, s390x, ibm-z
 title: Install Docker Engine on RHEL
 toc_max: 4
@@ -39,7 +40,7 @@ RHEL versions:
 
 ### Uninstall old versions
 
-Older versions of Docker went by the names of `docker` or `docker-engine`.
+Older versions of Docker went by `docker` or `docker-engine`.
 Uninstall any such older versions before attempting to install a new version,
 along with associated dependencies. Also uninstall `Podman` and the associated
 dependencies if installed already:
@@ -64,20 +65,7 @@ automatically removed when you uninstall Docker.
 
 ## Installation methods
 
-You can install Docker Engine in different ways, depending on your needs:
-
-- You can
-  [set up Docker's repositories](#install-using-the-repository) and install
-  from them, for ease of installation and upgrade tasks. This is the
-  recommended approach.
-
-- You can download the RPM package and
-  [install it manually](#install-from-a-package) and manage
-  upgrades completely manually. This is useful in situations such as installing
-  Docker on air-gapped systems with no access to the internet.
-
-- In testing and development environments, you can use automated
-  [convenience scripts](#install-using-the-convenience-script) to install Docker.
+{{< include "engine-install-methods-rpm.md" >}}
 
 ### Install using the rpm repository {#install-using-the-repository}
 
@@ -181,10 +169,10 @@ download the `.rpm` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
 1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
-   and choose your version of RHEL. Then browse to `s390x/stable/Packages/`
+   and choose your version of RHEL. Then go to `s390x/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
-2. Install Docker Engine, changing the path below to the path where you downloaded
+2. Install Docker Engine, changing the following path to the path where you downloaded
    the Docker package.
 
    ```console

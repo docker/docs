@@ -1,6 +1,7 @@
 ---
-description: Instructions for installing Docker Engine on a 32-bit Raspberry Pi OS system
-keywords: requirements, apt, installation, Raspberry Pi OS, install, uninstall, upgrade,
+description: Learn how to install Docker Engine on a 32-bit Raspberry Pi OS system. These instructions cover
+  the different installation methods, how to uninstall, and next steps.
+keywords: requirements, apt, installation, install docker engine, Raspberry Pi OS, install, uninstall, upgrade,
   update
 title: Install Docker Engine on Raspberry Pi OS (32-bit)
 toc_max: 4
@@ -32,15 +33,14 @@ To get started with Docker Engine on Raspberry Pi OS, make sure you
 
 ### OS requirements
 
-The following OS versions are supported:
+To install Docker Engine, you need one of the following OS versions:
 
 - 32-bit Raspberry Pi OS Bookworm 12 (stable)
 - 32-bit Raspberry Pi OS Bullseye 11 (oldstable)
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you must first make sure that any
-conflicting packages are uninstalled.
+Before you can install Docker Engine, you need to uninstall any conflicting packages.
 
 Distro maintainers provide an unofficial distributions of Docker packages in
 APT. You must uninstall these packages before you can install the official
@@ -73,19 +73,7 @@ clean installation, and prefer to clean up any existing data, read the
 
 ## Installation methods
 
-You can install Docker Engine in different ways, depending on your needs:
-
-- Docker Engine comes bundled with
-  [Docker Desktop for Linux](../../desktop/install/linux-install.md). This is
-  the easiest and quickest way to get started.
-
-- Set up and install Docker Engine from
-  [Docker's `apt` repository](#install-using-the-repository).
-
-- [Install it manually](#install-from-a-package) and manage upgrades manually.
-
-- Use a [convenience scripts](#install-using-the-convenience-script). Only
-  recommended for testing and development environments.
+{{< include "engine-install-methods-apt.md" >}}
 
 ### Install using the apt repository {#install-using-the-repository}
 

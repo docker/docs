@@ -38,7 +38,7 @@ default, but if you have disabled it, you need to
 
 ### Uninstall old versions
 
-Older versions of Docker went by the names of `docker` or `docker-engine`.
+Older versions of Docker went by `docker` or `docker-engine`.
 Uninstall any such older versions before attempting to install a new version,
 along with associated dependencies.
 
@@ -60,20 +60,7 @@ automatically removed when you uninstall Docker.
 
 ## Installation methods
 
-You can install Docker Engine in different ways, depending on your needs:
-
-- You can
-  [set up Docker's repositories](#install-using-the-repository) and install
-  from them, for ease of installation and upgrade tasks. This is the
-  recommended approach.
-
-- You can download the RPM package and
-  [install it manually](#install-from-a-package) and manage
-  upgrades completely manually. This is useful in situations such as installing
-  Docker on air-gapped systems with no access to the internet.
-
-- In testing and development environments, you can use automated
-  [convenience scripts](#install-using-the-convenience-script) to install Docker.
+{{< include "engine-install-methods-rpm.md" >}}
 
 ### Install using the rpm repository {#install-using-the-repository}
 
@@ -82,7 +69,6 @@ need to set up the Docker repository. Afterward, you can install and update
 Docker from the repository.
 
 #### Set up the repository
-
 
 Install the `yum-utils` package (which provides the `yum-config-manager`
 utility) and set up the repository.
@@ -181,7 +167,7 @@ download a new file each time you want to upgrade Docker Engine.
    and choose your version of CentOS. Then browse to `x86_64/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
-2. Install Docker Engine, changing the path below to the path where you downloaded
+2. Install Docker Engine, changing the following path to the path where you downloaded
    the Docker package.
 
    ```console
