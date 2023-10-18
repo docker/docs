@@ -2145,8 +2145,6 @@ Manuals:
     title: Overview
   - sectiontitle: For admins
     section:
-    - path: /security/for-admins/
-      title: Overview
     - path: /security/for-admins/configure-sign-in/
       title: Enforce sign in
     - path: /security/for-admins/domain-audit/
@@ -2157,8 +2155,6 @@ Manuals:
       title: Registry Access Management
   - sectiontitle: For developers
     section:
-    - path: /security/for-developers/
-      title: Overview
     - path: /security/for-developers/access-tokens/
       title: Create and manage access tokens
     - sectiontitle: Two-factor authentication
