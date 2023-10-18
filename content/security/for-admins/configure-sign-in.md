@@ -10,8 +10,8 @@ aliases:
 By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
 receive the [benefits of your organization’s
-subscription](../subscription/details.md) and they can circumvent [Docker’s
-security features](../desktop/hardened-desktop/_index.md) for your organization.
+subscription](../../subscription/details.md) and they can circumvent [Docker’s
+security features](../../desktop/hardened-desktop/_index.md) for your organization.
 
 To ensure members of your organization always sign in, you can deploy a
 `registry.json` configuration file to the machines of your users.
@@ -37,7 +37,7 @@ following occurs:
 > Enforcing sign-in to Docker Desktop isn't the same as enforcing SSO. To ensure
 > that your users always sign in using their SSO credentials, you must also
 > enforce SSO. For more details, see [Single Sign-On
-> overview](../single-sign-on/_index.md).
+> overview](../../single-sign-on/_index.md).
 
 
 ## Create a registry.json file to enforce sign-in

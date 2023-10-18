@@ -13,7 +13,7 @@ Docker Personal (formerly Docker Free) is ideal for open-source communities, ind
 Docker Personal includes:
 
 - Unlimited public repositories
-- Unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md)
+- Unlimited [Scoped Access Tokens](../security/for-developers/access-tokens.md)
 - Unlimited [collaborators](../docker-hub/repos/access/index.md#collaborators-and-their-role) for public repositories at no cost per month.
 
 Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours. 

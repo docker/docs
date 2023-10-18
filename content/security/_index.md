@@ -49,7 +49,7 @@ grid_developers:
   icon: security
   link: /engine/security/
 - title: Secrets in Docker Compose
-  description: Learn how to use secrets in Docker Compose
+  description: Learn how to use secrets in Docker Compose.
   icon: privacy_tip
   link: /compose/use-secrets/
 ---

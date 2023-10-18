@@ -1,14 +1,12 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
-{{ $ram_navigation := "Select your organization in the left navigation drop-down menu, and then select **Registry Access**." }}
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
-  {{ $ram_navigation = "Select **Organizations**, your organization, **Settings**, and then select **Registry Access**." }}
 {{ end }}
 
 To configure Registry Access Management permissions, perform the following steps:
 
 1. Sign in to {{ $product_link }}.
-2. {{ $ram_navigation }}
+2. Select **Organizations**, your organization, **Settings**, and then select **Registry Access**.
 3. Enable Registry Access Management to set the permissions for your registry.
 
    > **Note**
