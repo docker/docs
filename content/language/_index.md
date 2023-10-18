@@ -1,5 +1,5 @@
 ---
-description: :Language-specific guides overview
+description: Language-specific guides overview
 keywords: guides, docker, language, node, java, python, go, golang, .net
 title: Language-specific guides overview
 toc_min: 1
