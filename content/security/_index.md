@@ -27,6 +27,10 @@ grid_admins:
   description: Identify uncaptured users in your organization.
   link: /security/for-admins/domain-audit/
   icon: person_search
+- title: Docker Scout
+  description: Explore how Docker Scout can help you create a more secure software supply chain.
+  icon: query_stats
+  link: /scout/
 grid_developers: 
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
@@ -36,10 +40,6 @@ grid_developers:
   description: Create personal access tokens as an alternative to your password.
   icon: password
   link: /security/for-developers/access-tokens/
-- title: Docker Scout
-  description: Explore how Docker Scout can help you create a more secure software supply chain.
-  icon: query_stats
-  link: /scout/
 - title: Static vulnerability scanning
   description: Automatically run a point-in-time scan on your Docker images for vulnerabilities.
   icon: image_search
