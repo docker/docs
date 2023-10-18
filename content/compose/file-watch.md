@@ -45,6 +45,14 @@ the `action`, additional fields might be accepted or required.
 Watch mode can be used with many different languages and frameworks.
 The specific paths and rules will vary project to project, but the concepts remain the same. 
 
+### Prerequisites
+
+To work properly `watch` relies on common executables, so be sure your service image will contain the following binaries:
+* stat
+* mkdir
+* rmdir
+* tar
+
 ### `action`
 
 #### Sync
