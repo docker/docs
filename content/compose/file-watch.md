@@ -64,6 +64,13 @@ The behavior is the same as running `docker compose up --build <svc>`.
 Rebuild is ideal for compiled languages or as fallbacks for modifications to particular files that require a full
 image rebuild (e.g. `package.json`).
 
+#### Sync + Restart
+
+If `action` is set to `sync+restart`, Compose synchronizes your changes with the service containers and restarts it. 
+
+`sync+restart` is ideal when config file changes, and you don't need to rebuild the image but just restart the main process of the service containers. 
+It will work well when you update a database configuration or your `nginx.conf` file for example
+
 >**Tip**
 >
 > Optimize your `Dockerfile` for speedy
