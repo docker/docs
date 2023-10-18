@@ -57,15 +57,15 @@ collects the following data points:
 ### Local analysis
 
 For images analyzed locally on a developer's machine, Docker Scout only
-transmits PURLs and layer digests. This data is not persistently stored on the
+transmits PURLs and layer digests. This data isn't persistently stored on the
 Docker Scout platform; it's only used to run the analysis.
 
 ## Data storage
 
 For the purposes of providing the Docker Scout service, data is stored using:
 
-- Amazon Web Services (AWS) on servers located in US-EAST, USA
-- Google Cloud Platform (GCP) on servers located in US-EAST, USA
+- Amazon Web Services (AWS) on servers located in US East
+- Google Cloud Platform (GCP) on servers located in US East
 
 Data is used according to the processes described at
 [docker.com/legal](https://www.docker.com/legal/) to provide the key

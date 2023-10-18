@@ -122,7 +122,7 @@ Add the following to the YAML file:
 - name: Docker Scout
   id: docker-scout
   if: ${{ github.event_name == 'pull_request' }}
-  uses: docker/scout-action@dd36f5b0295baffa006aa6623371f226cc03e506
+  uses: docker/scout-action@v1
   with:
     command: compare
     image: ${{ steps.meta.outputs.tags }}

@@ -20,7 +20,7 @@ The following video shows an end-to-end workflow of using Docker Scout to remedi
 
 ## Step 1: Setup
 
-[This example project](https://github.com/docker/scout-demo-service) contains 
+[This example project](https://github.com/docker/scout-demo-service) contains
 a vulnerable Node.js application that you can use to follow along.
 
 1. Clone its repository:
@@ -35,17 +35,17 @@ a vulnerable Node.js application that you can use to follow along.
    $ cd scout-demo-service
    ```
 
-3. Build the image, naming it to match the organization you will push it to, 
-   and tag it as "v1":
+3. Build the image, naming it to match the organization you will push it to,
+   and tag it as `v1`:
 
    ```console
-   $ docker build -t <org-name>/scout-demo:v1 .
+   $ docker build -t <ORG_NAME>/scout-demo:v1 .
    ```
 
 4. Create and push the repository on Docker Hub:
 
    ```console
-   $ docker push <org-name>/scout-demo:v1
+   $ docker push <ORG_NAME>/scout-demo:v1
    ```
 
    > **Important**
@@ -66,27 +66,27 @@ You can do this from Docker Hub, the Docker Scout Dashboard, and CLI.
    command to enable analysis on an existing repository:
 
    ```console
-   $ docker scout repo enable --org <org-name> <org-name>/scout-demo
+   $ docker scout repo enable --org <ORG_NAME> <ORG_NAME>/scout-demo
    ```
 
 ## Step 3: Analyze image vulnerabilities
 
-After building, you can use Docker Desktop or the `docker scout` CLI command 
+After building, you can use Docker Desktop or the `docker scout` CLI command
 to see vulnerabilities detected by Docker Scout.
 
-1. Using Docker Desktop, select the image name in the **Images** view to see 
-   the image layer view. In the image hierarchy section, you can see which layers 
+1. Using Docker Desktop, select the image name in the **Images** view to see
+   the image layer view. In the image hierarchy section, you can see which layers
    introduce vulnerabilities and the details of those.
 
 2. Select layer 5 to focus on the vulnerability introduced in that layer.
 
-3. Toggle the disclosure triangle next to **express 4.17.1** and then the CVE ID (in this case, "CVE-2022-24999⁠") to see details of the
+3. Toggle the disclosure triangle next to **express 4.17.1** and then the CVE ID (in this case, `CVE-2022-24999`) to see details of the
    vulnerability.
 
    You can also use the Docker CLI to see the same results.
 
    ```console
-   $ docker scout cves <org-name>/scout-demo:v1
+   $ docker scout cves <ORG_NAME>/scout-demo:v1
    ```
 
 ![Screenshot showing highlighting a CVE in Docker Desktop](./images/scout-onboarding-dd-v1-cvve-focus.png)
@@ -99,7 +99,7 @@ You can find more details in the [advisory database](./advisory-db-sources.md) d
 > **Tip**
 >
 > Find out how to filter results using the CLI command [`scout cves`](/engine/reference/commandline/scout_cves).
-{ .tip }
+> { .tip }
 
 ## Step 4: Fix application vulnerabilities
 
@@ -119,13 +119,13 @@ the underlying vulnerable express version to 4.17.3 or later.
 2. Rebuild the image, giving it a new version tag:
 
    ```console
-   $ docker build -t <org-name>/scout-demo:v2 .
+   $ docker build -t <ORG_NAME>/scout-demo:v2 .
    ```
 
 3. Push the image to the same repository on Docker Hub using a new version tag:
 
    ```console
-   $ docker push <org-name>/scout-demo:v2
+   $ docker push <ORG_NAME>/scout-demo:v2
    ```
 
 Now, viewing the latest tag of the image in Docker Desktop, the Docker Scout
@@ -147,13 +147,13 @@ base images your images use.
 3. Rebuild the image, again with a new tag:
 
    ```console
-   $ docker build -t <org-name>/scout-demo:v3 .
+   $ docker build -t <ORG_NAME>/scout-demo:v3 .
    ```
 
 4. Push it to Docker Hub using the new version tag:
 
    ```console
-   $ docker push <org-name>/scout-demo:v3
+   $ docker push <ORG_NAME>/scout-demo:v3
    ```
 
 5. Select the new image tag in Docker Desktop or the Docker Scout Dashboard and you
@@ -162,7 +162,7 @@ base images your images use.
    You can see the same using the Docker CLI command:
 
    ```console
-   $ docker scout cves <org-name>/scout-demo:v3
+   $ docker scout cves <ORG_NAME>/scout-demo:v3
    ```
 
 ## Step 6: Collaborate on vulnerabilities
@@ -176,8 +176,8 @@ security, compliance, and operations to know what vulnerabilities and issues to 
 
 1. Select the **Images** tab on the [Docker Scout Dashboard](https://scout.docker.com).
 2. Select any of the tags under
-    the **Most Recent Image** column, and you can see the same vulnerability
-    information as you saw in Docker Desktop and the Docker CLI and share this link with anyone else in your organization.
+   the **Most Recent Image** column, and you can see the same vulnerability
+   information as you saw in Docker Desktop and the Docker CLI and share this link with anyone else in your organization.
 
 > **Tip**
 >
@@ -192,26 +192,38 @@ Over time as you build and push new tags of images, you can use the Docker Scout
 CLI and Dashboard to compare the changes to vulnerabilities and packages in
 different tags of the same image.
 
-1. On the Docker Scout Dashboard, select the repository to compare from the
-    **Images** list. In this case, **scout-demo**.
-2. Choose two of the tags you
-    pushed in the last steps, for example, **v1** and **v3**, and then select **Compare images**.
+{{< tabs >}}
+{{< tab name="Dashboard" >}}
 
-    The **Image comparison** view shows you the differences between the two tags.
-    The page's top part summarizes the two tags, including the differences between
-    vulnerabilities and base image tags.
+On the Docker Scout Dashboard, select the repository to compare from the
+**Images** list. In this case, **scout-demo**.
 
-    In the bottom part of the page, you can see the changes in packages and
-    vulnerabilities between the two tags. In the row for "express", you can see the
-    version change from 4.17.1 to 4.17.3. Switch to the **Vulnerabilities** tab to
-    see the changes in vulnerabilities between the two tags. You can see that
-    "CVE-2022-24999⁠" isn't present under the **v3** tag.
+Choose two of the tags you pushed in the last steps, for example, **v1** and
+**v3**, and then select **Compare images**.
 
-3. You can also use the `scout compare` CLI command to see the same results.
+The **Image comparison** view shows you the differences between the two tags.
+The page's top part summarizes the two tags, including the differences between
+vulnerabilities and base image tags.
 
-   ```console
-   $ docker scout compare --to <org-name>/scout-demo:v1 <org-name>/scout-demo:v3
-   ```
+In the bottom part of the page, you can see the changes in packages and
+vulnerabilities between the two tags. In the row for "express", you can see the
+version change from 4.17.1 to 4.17.3. Switch to the **Vulnerabilities** tab to
+see the changes in vulnerabilities between the two tags. You can see that
+`CVE-2022-24999` isn't present under the **v3** tag.
+
+{{< /tab >}}
+{{< tab name="CLI" >}}
+{{< /tab >}}
+
+Use the `docker scout compare` command to see the compare two image versions.
+Pass the image that you want to compare as a positional argument to the
+command, and specify the base image to compare with using the `--to` flag.
+
+```console
+$ docker scout compare --to <ORG_NAME>/scout-demo:v1 <ORG_NAME>/scout-demo:v3
+```
+
+{{< /tabs >}}
 
 ## What's next?
 
