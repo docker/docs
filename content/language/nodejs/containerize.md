@@ -34,7 +34,7 @@ $ git clone https://github.com/docker/docker-nodejs-sample
 
 You can test the application locally without Docker before you continue building
 and running the application with Docker. This section requires you to have
-Node.js 18 or later installed on your machine. Download and install
+Node.js 18 installed on your machine. Download and install
 [Node.js](https://nodejs.org/).
 
 Open a terminal, change directory to the `docker-nodejs-sample` directory, and
