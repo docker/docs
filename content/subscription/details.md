@@ -13,7 +13,7 @@ Docker Personal (formerly Docker Free) is ideal for open-source communities, ind
 Docker Personal includes:
 
 - Unlimited public repositories
-- Unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md)
+- Unlimited [Scoped Access Tokens](../security/for-developers/access-tokens.md)
 - Unlimited [collaborators](../docker-hub/repos/access/index.md#collaborators-and-their-role) for public repositories at no cost per month.
 
 Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours. 
@@ -55,8 +55,8 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 Docker Business includes:
 - Everything included in Docker Team
 - [Hardened Docker Desktop](../desktop/hardened-desktop/index.md) 
-- [Image Access Management](../docker-hub/image-access-management.md) which lets admins control what content developers can access
-- [Registry Access Management](../desktop/hardened-desktop/registry-access-management.md) which lets admins control what registries developers can access
+- [Image Access Management](../security/for-admins/image-access-management.md) which lets admins control what content developers can access
+- [Registry Access Management](../security/for-admins/registry-access-management.md) which lets admins control what registries developers can access
 - [Company layer](../docker-hub/creating-companies.md) to manage multiple organizations and settings
 - [Single Sign-On](../single-sign-on/index.md)
 - [System for Cross-domain Identity Management](../docker-hub/scim.md) and more.

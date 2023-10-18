@@ -3,13 +3,15 @@ description: Configure registry.json to enforce users to sign into Docker Deskto
 toc_max: 2
 keywords: authentication, registry.json, configure,
 title: Enforce sign-in for Desktop
+aliases:
+- /docker-hub/configure-sign-in/
 ---
 
 By default, members of your organization can use Docker Desktop without signing
 in. When users don’t sign in as a member of your organization, they don’t
 receive the [benefits of your organization’s
-subscription](../subscription/details.md) and they can circumvent [Docker’s
-security features](../desktop/hardened-desktop/_index.md) for your organization.
+subscription](../../subscription/details.md) and they can circumvent [Docker’s
+security features](../../desktop/hardened-desktop/_index.md) for your organization.
 
 To ensure members of your organization always sign in, you can deploy a
 `registry.json` configuration file to the machines of your users.
@@ -21,7 +23,7 @@ following occurs:
 
 - The following **Sign in required!** prompt appears requiring the user to sign
   in as a member of your organization to use Docker Desktop. ![Enforce Sign-in
-  Prompt](./images/enforce-sign-in.png?w=400)
+  Prompt](../images/enforce-sign-in.png?w=400)
 - When a user signs in to an account that isn’t a member of your organization,
   they will be automatically signed out and can’t use Docker Desktop. The user
   can select **Sign in** and try again.
@@ -35,13 +37,13 @@ following occurs:
 > Enforcing sign-in to Docker Desktop isn't the same as enforcing SSO. To ensure
 > that your users always sign in using their SSO credentials, you must also
 > enforce SSO. For more details, see [Single Sign-On
-> overview](../single-sign-on/_index.md).
+> overview](../../single-sign-on/_index.md).
 
 
 ## Create a registry.json file to enforce sign-in
 
 1. Ensure that the user is a member of your organization in Docker. For more
-details, see [Manage members](https://docs.docker.com/docker-hub/members/).
+details, see [Manage members](../../docker-hub/members.md).
 
 2. Create the `registry.json` file.
 
