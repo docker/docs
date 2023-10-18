@@ -28,7 +28,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-10-12" >}}
 
-{{< desktop-install all=true version="4.24.1" build_path="/124339/" >}}
+{{< desktop-install all=true version="4.24.2" build_path="/124339/" >}}
 
 ### Bug fixes and enhancements
 
