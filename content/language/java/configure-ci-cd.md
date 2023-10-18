@@ -10,8 +10,8 @@ description: Learn how to Configure CI/CD for your application
 
 ## Next steps
 
-In this module, you have learned how to set up GitHub Actions workflow to an existing Docker project, optimize your workflow to improve build times and reduce the number of pull requests, and finally, we learnt how to push only specific versions to Docker Hub. You can also set up nightly tests against the latest tag, test each PR, or do something more elegant with the tags you're using and make use of the Git tag for the same tag in your image.
+In this module, you have learned how to set up GitHub Actions workflow to an existing Docker project, optimize your workflow to improve build times, and reduce the number of pull requests. Finally, you learned how to push only specific versions to Docker Hub. You can also set up nightly tests against the latest tag, test each PR, or do something more elegant with the tags you're using and make use of the Git tag for the same tag in your image.
 
-You can also consider deploying your application. For detailed instructions, see:
+You can also consider deploying your application.
 
 {{< button text="Deploy your application" url="deploy.md" >}}
