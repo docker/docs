@@ -17,8 +17,8 @@ It is available with [Docker Desktop 4.13.0 and later](../../release-notes.md).
 
 ### Who is it for?
 
-- For organizations who wish to configure Docker Desktop to be within their organization's centralized control.
-- For organizations who want to create a standardized Docker Desktop environment at scale.
+- For organizations that want to configure Docker Desktop to be within their organization's centralized control.
+- For organizations that want to create a standardized Docker Desktop environment at scale.
 - For Docker Business customers who want to confidently manage their use of Docker Desktop within tightly regulated environments.
 
 ### How does it work?

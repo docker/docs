@@ -45,8 +45,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
-  - Turn on BIOS-level hardware virtualization support in the
-    BIOS settings. For more information, see
+  - Enable hardware virtualization in BIOS. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
 > **Important**

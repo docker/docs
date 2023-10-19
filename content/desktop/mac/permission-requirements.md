@@ -47,7 +47,7 @@ The only time Docker Desktop may start the privileged process is for binding pri
 {{< /tab >}}
 {{< tab name="Versions prior to 4.15" >}}
 
-Versions prior to 4.15 of Docker Desktop for Mac require `root` access to be granted on the first run. The first time that Docker Desktop launches you receive an admin prompt to grant permission for the installation of the `com.docker.vmnetd` privileged helper service. For subsequent runs, `root` privileges aren't required. Following the principle of least privilege, this approach allows `root` access to be used only for the operations for which it's absolutely necessary, while still being able to use Docker Desktop as an unprivileged user. 
+Versions prior to 4.15 of Docker Desktop for Mac require `root` access to be granted on the first run. The first time that Docker Desktop launches you receive an admin prompt to grant permission for the installation of the `com.docker.vmnetd` privileged helper service. For subsequent runs, `root` privileges aren't required. Following the principle of least privilege, this approach allows `root` access to be used only for the operations for which it's absolutely necessary, while still being able to use Docker Desktop as an unprivileged user.
 All privileged operations are run using the privileged helper process `com.docker.vmnetd`.
 
 {{< /tab >}}
@@ -55,7 +55,7 @@ All privileged operations are run using the privileged helper process `com.docke
 
 ### Installing symlinks
 
-The Docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop ensures the Docker CLI is on your PATH without having to reconfigure shells, sign out then sign back in for example. As on most systems `/usr/local/bin` is on the PATH by default, and so Docker Desktop creates symlinks for all Docker binaries in it.
+The Docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop creates symlinks for the binaries in `/usr/local/bin`, which means they're automatically included in `PATH` on most systems.
 
 {{< tabs >}}
 {{< tab name="Version 4.18 and later" >}}
