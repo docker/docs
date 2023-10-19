@@ -5,9 +5,8 @@ keywords: registry, on-prem, images, tags, repository, distribution, mirror, Hub
 title: Registry as a pull through cache
 aliases:
 - /engine/admin/registry_mirror/
+- /registry/recipes/mirror/
 ---
-
-{{< include "registry.md" >}}
 
 ## Use-case
 
@@ -107,8 +106,7 @@ proxy:
 > **Warning**
 >
 > For the scheduler to clean up old entries, `delete` must be enabled in the
-> registry configuration. See [Registry Configuration](../configuration.md) for
-> more details.
+> registry configuration.
 { .warning }
 
 ### Configure the Docker daemon

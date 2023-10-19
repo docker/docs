@@ -891,8 +891,6 @@ Reference:
         path: /docker-hub/api/dvp/
       - title: Deprecated API
         path: /docker-hub/api/deprecated/
-  - title: Registry API
-    path: /registry/spec/api/
   - sectiontitle: Docker Extension SDK API
     section:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
@@ -993,46 +991,6 @@ Reference:
           title: Version 3
         - path: /compose/compose-file/compose-file-v2/
           title: Version 2
-- sectiontitle: Drivers and specifications
-  section:
-  - sectiontitle: Registry image manifests
-    section:
-    - path: /registry/spec/manifest-v2-1/
-      title: Image manifest v 2, schema 1
-    - path: /registry/spec/manifest-v2-2/
-      title: Image manifest v 2, schema 2
-    - path: /registry/spec/deprecated-schema-v1/
-      title: Update deprecated schema v1 images
-  - sectiontitle: Registry token authorization
-    section:
-    - path: /registry/spec/auth/
-      title: Docker Registry token authentication
-    - path: /registry/spec/auth/jwt/
-      title: Token authentication implementation
-    - path: /registry/spec/auth/oauth/
-      title: Oauth2 token authentication
-    - path: /registry/spec/auth/scope/
-      title: Token scope documentation
-    - path: /registry/spec/auth/token/
-      title: Token authentication specification
-  - sectiontitle: Registry storage drivers
-    section:
-    - path: /registry/storage-drivers/
-      title: Storage driver overview
-    - path: /registry/storage-drivers/oss/
-      title: Aliyun OSS storage driver
-    - path: /registry/storage-drivers/filesystem/
-      title: Filesystem storage driver
-    - path: /registry/storage-drivers/gcs/
-      title: GCS storage driver
-    - path: /registry/storage-drivers/inmemory/
-      title: In-memory storage driver
-    - path: /registry/storage-drivers/azure/
-      title: Microsoft Azure storage driver
-    - path: /registry/storage-drivers/s3/
-      title: S3 storage driver
-    - path: /registry/storage-drivers/swift/
-      title: Swift storage driver
 - path: /glossary/
   title: Glossary
 
@@ -2209,43 +2167,6 @@ Manuals:
     title: Docker-Sponsored Open Source Program
   - path: /trusted-content/insights-analytics/
     title: Insights and analytics
-
-- sectiontitle: Open-source projects
-  section:
-  - sectiontitle: Docker Registry
-    section:
-    - path: /registry/
-      title: Registry overview
-    - path: /registry/introduction/
-      title: Understand the Registry
-    - path: /registry/deploying/
-      title: Deploy a registry server
-    - path: /registry/configuration/
-      title: Configure a registry
-    - path: /registry/notifications/
-      title: Work with notifications
-    - sectiontitle: Recipes
-      section:
-      - path: /registry/recipes/
-        title: Recipes overview
-      - path: /registry/recipes/apache/
-        title: Authenticating proxy with apache
-      - path: /registry/recipes/nginx/
-        title: Authenticating proxy with nginx
-      - path: /registry/recipes/mirror/
-        title: Mirroring Docker Hub
-      - path: /registry/recipes/osx-setup-guide/
-        title: Running on macOS
-      - path: /registry/garbage-collection/
-        title: Garbage collection
-      - path: /registry/insecure/
-        title: Testing an insecure registry
-    - path: /registry/deprecated/
-      title: Deprecated features
-    - path: /registry/compatibility/
-      title: Compatibility
-    - path: /registry/help/
-      title: Getting help
 
 - path: /release-notes/
   title: Release notes
