@@ -49,7 +49,7 @@ you require.
 
    > **Early access features**
    >
-   > If you buy a subscription for Docker Team or Business after October 23, 2023, you may have a different user interface experience. Select **Continue** to continue to the billing portal. Here you can select the quantity of seats for your organization. Then, follow the on-screen instructions to pay for your subscription. You can disregard steps 7 and 8.
+   > If you buy a subscription for Docker Team or Business after October 23, 2023, you may have a different user interface experience. Select **Purchase** to continue to the billing portal. Here you can select the quantity of seats for your organization. Then, follow the on-screen instructions to pay for your subscription. You can disregard steps 7 and 8.
    { .restricted }
 
 7. Select **Continue to payment**.
