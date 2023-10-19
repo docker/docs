@@ -47,7 +47,7 @@ The specific paths and rules will vary project to project, but the concepts rema
 
 ### Prerequisites
 
-To work properly `watch` relies on common executables, so be sure your service image will contain the following binaries:
+In order to work properly, `watch` relies on common executables. Make sure your service image contains the following binaries:
 * stat
 * mkdir
 * rmdir
