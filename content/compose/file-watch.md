@@ -13,7 +13,7 @@ Use `watch` to automatically update and preview your running Compose services as
 For many projects, this allows for a hands-off development workflow once Compose is running, as services automatically update themselves when you save your work.
 
 `watch` adheres to the following file path rules:
-* All paths are relative to the build context
+* All paths are relative to the project directory
 * Directories are watched recursively
 * Glob patterns aren't supported
 * Rules from `.dockerignore` apply
@@ -45,6 +45,14 @@ the `action`, additional fields might be accepted or required.
 Watch mode can be used with many different languages and frameworks.
 The specific paths and rules will vary project to project, but the concepts remain the same. 
 
+### Prerequisites
+
+In order to work properly, `watch` relies on common executables. Make sure your service image contains the following binaries:
+* stat
+* mkdir
+* rmdir
+* tar
+
 ### `action`
 
 #### Sync
@@ -63,6 +71,13 @@ The behavior is the same as running `docker compose up --build <svc>`.
 
 Rebuild is ideal for compiled languages or as fallbacks for modifications to particular files that require a full
 image rebuild (e.g. `package.json`).
+
+#### Sync + Restart
+
+If `action` is set to `sync+restart`, Compose synchronizes your changes with the service containers and restarts it. 
+
+`sync+restart` is ideal when config file changes, and you don't need to rebuild the image but just restart the main process of the service containers. 
+It will work well when you update a database configuration or your `nginx.conf` file for example
 
 >**Tip**
 >
