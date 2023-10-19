@@ -37,7 +37,7 @@ You can add a payment method or update your account's existing payment method at
 2. From the drop-down menu select **Billing**. 
 3. Select the organization account you want to update.
 4. Select the **Payment Methods** tab.
-4. In the **Payment Information** section, enter the new payment method. 
+5. In the **Payment Information** section, enter the new payment method. 
     The screen refreshes and displays your new payment information alongside your existing information.
-5. Select **Make Default** to ensure that your new payment method applies to all purchases and subscriptions. 
-6. Optional. Remove your existing payment method by selecting the **X** icon.
+6. Select **Make Default** to ensure that your new payment method applies to all purchases and subscriptions. 
+7. Optional. Remove your existing payment method by selecting the **X** icon.
