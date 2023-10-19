@@ -2,7 +2,7 @@
 title: Containerize a Node.js application
 keywords: node.js, node, containerize, initialize
 description: Learn how to containerize a Node.js application.
-redirect_from:
+aliases:
   - /get-started/nodejs/build-images/
   - /language/nodejs/build-images/
   - /language/nodejs/run-containers/

@@ -24,7 +24,7 @@ following keys are supported. The title, description, and keywords are required.
 | title          | yes      | The page title. This is added to the HTML output as a `<h1>` level header.                                                                                                                                    |
 | description    | yes      | A sentence that describes the page contents. This is added to the HTML metadata. It’s not rendered on the page.                                                                                               |
 | keywords       | yes      | A comma-separated list of keywords. These are added to the HTML metadata.                                                                                                                                     |
-| redirect_from  | no       | A YAML list of pages which should redirect to the current page. At build time, each page listed here is created as an HTML stub containing a 302 redirect to this page.                                       |
+| aliases  | no       | A YAML list of pages which should redirect to the current page. At build time, each page listed here is created as an HTML stub containing a 302 redirect to this page.                                       |
 | notoc          | no       | Either `true` or `false`. If `true`, no in-page TOC is generated for the HTML output of this page. Defaults to `false`. Appropriate for some landing pages that have no in-page headings.                     |
 | toc_min        | no       | Ignored if `notoc` is set to `true`. The minimum heading level included in the in-page TOC. Defaults to `2`, to show `<h2>` headings as the minimum.                                                          |
 | toc_max        | no       | Ignored if `notoc` is set to `false`. The maximum heading level included in the in-page TOC. Defaults to `3`, to show `<h3>` headings. Set to the same as `toc_min` to only show `toc_min` level of headings. |
@@ -40,7 +40,7 @@ the metadata elements in the front matter isn't important.
 description: Instructions for installing Docker Engine on Ubuntu
 keywords: requirements, apt, installation, ubuntu, install, uninstall, upgrade, update
 title: Install Docker Engine on Ubuntu
-redirect_from:
+aliases:
 - /ee/docker-ee/ubuntu/
 - /engine/installation/linux/docker-ce/ubuntu/
 - /engine/installation/linux/docker-ee/ubuntu/
@@ -57,7 +57,7 @@ toc_max: 4
 
 ## Body
 
-The body of the page (with the exception of keywords) starts after the front matter 
+The body of the page (with the exception of keywords) starts after the front matter.
 
 ### Text length
 
