@@ -1,0 +1,10 @@
+# this file lets you add descriptions and keywords
+# to files without modifying the file.
+#
+# Useful for upstream pages where we don't want to
+# or can't add front matter to the source!
+#
+# To add descriptions and keywords for a page,
+# add a key with the path of the page file,
+# relative to the content directory. For upstream
+# page files, that's the target of the file mount.
