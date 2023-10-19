@@ -9,8 +9,9 @@ redirect:
 ### What is a Docker ID?
 
 A Docker ID is a username to access Docker Hub repositories and hosted Docker
-services. All you need is an email address to create a Docker ID. Your Docker ID must be between 4 and 30 characters long, and can only contain
+services. All you need is an email address to create a Docker ID, or you can sign up with your Google or GitHub account. Your Docker ID must be between 4 and 30 characters long, and can only contain
 numbers and lowercase letters. You cannot use any special characters or spaces.
+
 For more information, see [Docker ID](../docker-id/index.md). If your admin enforces [Single sign-on (SSO)](../single-sign-on/index.md), a Docker ID is provisioned for new users.
 
 Developers may have multiple Docker IDs in order to separate their Docker IDs that are associated with an organization in Docker Business or Team, and their personal use Docker IDs.
