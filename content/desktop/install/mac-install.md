@@ -57,7 +57,8 @@ Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to ins
 
 ## Install and run Docker Desktop on Mac
 
-### Install interactively
+{{< tabs >}}
+{{< tab name="Install interactively" >}}
 
 1. Double-click `Docker.dmg` to open the installer, then drag the Docker icon to
     the **Applications** folder.
@@ -65,9 +66,13 @@ Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to ins
 
 2. Double-click `Docker.app` in the **Applications** folder to start Docker.
 
-3. The Docker menu ({{< inline-image src="images/whale-x.svg" alt="whale menu" >}}) displays the Docker Subscription Service Agreement.
+3. The Docker menu displays the Docker Subscription Service Agreement.
 
-    {{< include "desktop-license-update.md" >}}
+    Here’s a summary of the key points: 
+    - Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
+    - Otherwise, it requires a paid subscription for professional use.
+    - Paid subscriptions are also required for government entities.
+    - Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 
 4. Select **Accept** to continue. 
 
@@ -79,7 +84,8 @@ Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to ins
    - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](../settings/mac.md#advanced), for more information and how to set the location of the Docker CLI tools.
 6. Select **Finish**. If you have applied any of the above configurations that require a password in step 5, enter your password to confirm your choice.  
 
-### Install from the command line
+{{< /tab >}}
+{{< tab name="Install from the command line" >}}
 
 After downloading `Docker.dmg`, run the following commands in a terminal to install Docker Desktop in the **Applications** folder:
 
@@ -104,7 +110,10 @@ The `install` command accepts the following flags:
 - `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-exclude=<hosts/domains>`: Bypasses proxy settings for the hosts and domains. It's a comma-separated list.
 
-## Where to go next
+{{< /tab >}}
+{{< /tabs >}}
+
+## Where to go next 
 
 - [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.

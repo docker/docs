@@ -56,5 +56,5 @@ official images and other public images, you don't have to grant any access perm
 
 Refer to the following topics for additional information:
 
-- [Mirroring Docker Hub](../registry/recipes/mirror.md)
+- [Mirroring Docker Hub](./mirror.md)
 - [Docker pricing FAQs](https://www.docker.com/pricing/faq/)

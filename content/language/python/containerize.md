@@ -2,7 +2,7 @@
 title: Containerize a Python application
 keywords: python, flask, containerize, initialize
 description: Learn how to containerize a Python application.
-redirect_from:
+aliases:
   - /language/python/build-images/
   - /language/python/run-containers/
 ---

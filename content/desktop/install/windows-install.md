@@ -45,8 +45,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
-  - BIOS-level hardware virtualization support must be turned on in the
-    BIOS settings. For more information, see
+  - Enable hardware virtualization in BIOS. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
 > **Important**
@@ -67,13 +66,13 @@ _For checksums, see [Release notes](../release-notes.md)_
 
   For Windows 10 and Windows 11 Home, see the system requirements in the WSL 2 backend tab.
 
-- Hyper-V and Containers Windows features must be turned on.
+- Turn on Hyper-V and Containers Windows features.
 - The following hardware prerequisites are required to successfully run Client
   Hyper-V on Windows 10:
 
   - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
-  - BIOS-level hardware virtualization support must be turned on in the
+  - Turn on BIOS-level hardware virtualization support in the
     BIOS settings. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
@@ -98,7 +97,7 @@ Running Docker Desktop inside a VMware ESXi or Azure VM is supported for Docker 
 It requires enabling nested virtualization on the hypervisor first.
 For more information, see [Running Docker Desktop in a VM or VDI environment](../vm-vdi.md).
 
-### About Windows containers
+{{< accordion title="About Windows containers" >}}
 
 Looking for information on using Windows containers?
 
@@ -110,10 +109,12 @@ Looking for information on using Windows containers?
 - Docker Container Platform for Windows [articles and blog
   posts](https://www.docker.com/microsoft/) on the Docker website.
 
+{{< /accordion >}}
 
 ## Install Docker Desktop on Windows
 
-### Install interactively
+{{< tabs >}}
+{{< tab name="Install interactively" >}}
 
 1. Double-click **Docker Desktop Installer.exe** to run the installer.
 
@@ -128,7 +129,8 @@ Looking for information on using Windows containers?
 5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an **administrator** and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
    Sign out and sign back in for the changes to take effect.
 
-### Install from the command line
+{{< /tab >}}
+{{< tab name="Install from the command line" >}}
 
 After downloading **Docker Desktop Installer.exe**, run the following command in a terminal to install Docker Desktop:
 
@@ -175,6 +177,8 @@ If your admin account is different to your user account, you must add the user t
 ```console
 $ net localgroup docker-users <user> /add
 ```
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Start Docker Desktop
 

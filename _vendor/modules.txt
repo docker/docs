@@ -4,6 +4,5 @@
 # github.com/docker/scout-cli v1.0.2
 # github.com/docker/cli v24.0.6+incompatible
 # github.com/docker/compose-cli v1.0.35
-# github.com/distribution/distribution v2.8.4-0.20231004140828-d607c6ccb937+incompatible
 # github.com/compose-spec/compose-spec v0.0.0-20230927132538-f223c5150d5d
-# github.com/docker/compose/v2 v2.22.0
+# github.com/docker/compose/v2 v2.23.0

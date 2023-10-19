@@ -24,7 +24,7 @@ docker dev [OPTIONS] COMMAND
 | `create`             | Create a new dev environment             |
 | `list`               | Lists all dev environments               |
 | `logs`               | Traces logs from a dev environment       |
-| `open`               | Open Dev Envrionment with the IDE        |
+| `open`               | Open Dev Environment with the IDE        |
 | `rm`                 | Removes a dev environment                |
 | `start`              | Starts a dev environment                 |
 | `stop`               | Stops a dev environment                  |

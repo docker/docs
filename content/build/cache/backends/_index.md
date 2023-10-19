@@ -1,6 +1,6 @@
 ---
 title: Cache storage backends
-descripton: |
+description: |
   Cache backends let you manage your build cache externally.
   External cache is useful to create a shared cache that can help
   speed up inner loop and CI builds.

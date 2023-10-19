@@ -11,6 +11,22 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.23.0
+{{< release-date date="2023-10-18" >}}
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.20.0
+- Dependencies upgrade: bump containerd to 1.7.7
+
+### Bug fixes and enhancements
+- Added dry-run support for publish command
+- Added `COMPOSE_ENV_FILES` env variable to pass a list of env files
+- Added `sync+restart` action to `compose watch`
+- Aligned `compose ps` output with Docker CLI by default and introduced `--no-trunc` to keep the previous behaviour
+- Fixed hashes inconsistency between `up` and `configure`
+- Enabled profiles when `down` ran with explicit service names
+- Fixed an issue when the pull policy provided was invalid
+
 ## 2.22.0
 {{< release-date date="2023-09-21" >}}
 
