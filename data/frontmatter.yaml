@@ -8,3 +8,11 @@
 # add a key with the path of the page file,
 # relative to the content directory. For upstream
 # page files, that's the target of the file mount.
+
+engine/reference/builder.md:
+  description: |
+    Find all the available commands you can use in a Dockerfile
+    and learn how to use them, including COPY, ARG, ENTRYPOINT, and more.
+  keywords: |
+    dockerfile, docker file, docker copy, dockerfile exec, docker entrypoint,
+    dockerfile entrypoint, dockerfile arg, docker args, entrypoint, shell dockerfile
