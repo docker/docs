@@ -51,7 +51,7 @@ To install Docker Desktop successfully, you must:
 Recommended approach to install Docker Desktop on Ubuntu:
 
 1. Set up Docker's package repository.
-   See [Install using the Apt repository, step 1](../../engine/install/ubuntu.md#install-using-the-repository).
+   See [Install using the `apt` repository, step 1](../../engine/install/ubuntu.md#install-using-the-repository).
 
 2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.24.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 

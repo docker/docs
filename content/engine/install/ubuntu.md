@@ -82,15 +82,27 @@ clean installation, and prefer to clean up any existing data, read the
 
 ## Installation methods
 
-{{< include "engine-install-methods-apt.md" >}}
+You can install Docker Engine in different ways, depending on your needs:
 
-### Install using the Apt repository {#install-using-the-repository}
+- Docker Engine comes bundled with
+  [Docker Desktop for Linux](../../desktop/install/linux-install.md). This is
+  the easiest and quickest way to get started.
+
+- Set up and install Docker Engine from
+  [Docker's `apt` repository](#install-using-the-repository).
+
+- [Install it manually](#install-from-a-package) and manage upgrades manually.
+
+- Use a [convenience script](#install-using-the-convenience-script). Only
+  recommended for testing and development environments.
+
+### Install using the `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
 need to set up the Docker repository. Afterward, you can install and update
 Docker from the repository.
 
-1. Set up Docker's Apt repository.
+1. Set up Docker's `apt` repository.
 
    ```bash
    # Add Docker's official GPG key:
