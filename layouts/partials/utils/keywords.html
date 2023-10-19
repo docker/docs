@@ -1,0 +1,14 @@
+{{ $keywords := "" }}
+{{ if .Keywords }}
+  {{ $keywords = .Keywords }}
+{{ else }}
+  {{ $keywords = "docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization" }}
+  {{ with .File }}
+    {{ with (index (site.Data.frontmatter) .Path) }}
+      {{ with .keywords }}
+        {{ $keywords = strings.Replace . "\n" " " | strings.TrimRight " " }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $keywords }}
