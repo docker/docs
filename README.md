@@ -11,7 +11,7 @@ open source, and we deeply appreciate contributions from the Docker community!
 ## Provide feedback
 
 We’d love to hear your feedback. Please file documentation issues only in the
-docs GitHub repository. You can file a new issue to suggest improvements or if
+Docs GitHub repository. You can file a new issue to suggest improvements or if
 you see any errors in the existing documentation.
 
 Before submitting a new issue, check whether the issue has already been
@@ -25,10 +25,10 @@ through the Docker Pro, Team, and Business subscriptions. See [Docker
 Pricing](https://www.docker.com/pricing) for details.
 
 If you have an idea for a new feature or behavior change in a specific aspect of
-Docker, or have found a product bug, file that issue in the project's code
+Docker or have found a product bug, file that issue in the project's code
 repository.
 
-We've made it really easy for you to file new issues.
+We've made it easy for you to file new issues.
 
 - Click **[New issue](https://github.com/docker/docs/issues/new)** on the docs repository and fill in the details, or
 - Click **Request docs changes** in the right column of every page on
@@ -44,9 +44,9 @@ We've made it really easy for you to file new issues.
 
 We value your contribution. We'd like to make it as easy as possible to submit
 your contributions to the Docker docs repository. Changes to the docs are
-handled through pull requests against the `master` branch. To learn how to
+handled through pull requests against the master branch. To learn how to
 contribute, see our [Contribute section](https://docs.docker.com/contribute/overview/).
 
 ## Copyright and license
 
-Copyright 2013-2023 Docker, inc, released under the <a href="https://github.com/docker/docs/blob/main/LICENSE">Apache 2.0 license</a> .
+Copyright 2013-2023 Docker, Inc., released under the <a href="https://github.com/docker/docs/blob/main/LICENSE">Apache 2.0 license</a> .
