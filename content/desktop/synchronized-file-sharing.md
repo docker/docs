@@ -8,7 +8,7 @@ sitemap: false
 >
 > Synchronized file sharing is an early-access feature. 
 >
-> If you want to test out Synchronized file sharing, you can
+> If you would like to be considered for Synchronized file sharing testing, you can
 > [sign up for the early access program](https://www.docker.com/build-early-access-program/?utm_source=docs).
 { .restricted }
 
@@ -37,12 +37,20 @@ After creating a file share instance, any container using a bind mount that refe
 > Synchronized file sharing isn't available on WSL or when using Windows containers. 
 { .important }
 
-## Set up - TBD
+## Set up
 
+Before you get started with Synchronized file sharing, you need to:
 
-- DB customer
-- Signed in to DD 
-- DD version 4.25
+- Download and install [Docker Desktop version 4.25](release-notes.md)
+- Have a Pro, Team, or Business subscription
+- Have a Docker ID that's part of a Docker organization participating in the Early access program
+
+To enable Synchronized file sharing:
+1. Sign in to Docker Desktop.
+2. Anywhere within the Docker Dashboard, enter the Konami Code which has the key sequence of `up, up, down, down, left, right, left, b, a`.
+3. From the list of experimental features, select **Mutagen File Sharing**.
+
+You can now create your first file share instance.
 
 ## Create a file share instance 
 
@@ -80,7 +88,7 @@ In general, the contents of your `.syncignore` file should be similar to what yo
 
 ### What is the difference between Synchronized file sharing and the Mutagen extension?
 
-Synchronized file sharing is essentially a replacement for the Mutagen extension. However, it provides an improved user experience and the ability to use a [`.syncignore` file](#use-syncignore). You also no longer have to set the default ownership on files as this is now handled automatically.
+Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/), Synchronized file sharing is essentially the direct integration of the Mutagen extension into Docker Desktop. However, Synchronized file sharing provides an improved user experience and the ability to use a [`.syncignore` file](#use-syncignore). You also no longer have to set the default ownership on files as this is now handled automatically.
 
 ## Known issues
 
