@@ -15,13 +15,6 @@ aliases:
 - /docker-for-windows/troubleshoot/
 ---
 
-{{< cta
-  header="This feature requires a paid Docker subscription"
-  body="Docker Desktop offers support for developers subscribed to a Pro, Team, or a Business tier. Upgrade now to benefit from Docker Support."
-  url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
-  cta="Upgrade now"
->}}
-
 This page contains information on how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
 
 ## Troubleshoot menu

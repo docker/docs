@@ -1,7 +1,7 @@
 ---
 title: History and development of Docker Compose
 description: History of Compose V1 and Compose YAML schema versioning
-keywords: compose, compose yaml, swarm, migration, compatibility
+keywords: compose, compose yaml, swarm, migration, compatibility, docker compose vs docker-compose
 ---
 
 {{< include "compose-eol.md" >}}

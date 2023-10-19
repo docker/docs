@@ -14,7 +14,7 @@ It also provides clarity on running containers as `root` as opposed to having `r
 
 ## Permission requirements
 
-Docker Desktop for Mac is run as an unprivileged user. However, certain functionalities are required for Docker Desktop to perform a limited set of privileged configurations such as:
+Docker Desktop for Mac is run as an unprivileged user. However, Docker Desktop requires certain functionalities to perform a limited set of privileged configurations such as:
  - [Installing symlinks](#installing-symlinks) in`/usr/local/bin`. 
  - [Binding privileged ports](#binding-privileged-ports) that are less than 1024. The so-called "privileged ports" are not generally used as a security boundary, however operating systems still prevent unprivileged processes from binding them which breaks commands like `docker run -p 127.0.0.1:80:80 docker/getting-started`.
  - [Ensuring `localhost` and `kubernetes.docker.internal` are defined](#ensuring-localhost-and-kubernetesdockerinternal-are-defined) in `/etc/hosts`. Some old macOS installs don't have `localhost` in `/etc/hosts`, which causes Docker to fail. Defining the DNS name `kubernetes.docker.internal` allows Docker to share Kubernetes contexts with containers.
@@ -27,7 +27,7 @@ Depending on which version of Docker Desktop for Mac is used, privileged access 
 
 From version 4.18 and later, Docker Desktop for Mac provides greater control over functionality that's enabled during installation. 
 
-The first time Docker Desktop for Mac launches, you are presented with an installation window where you can choose to either use the default settings, which work for most developers and require privileged access to be granted, or use advanced settings. 
+The first time Docker Desktop for Mac launches, it presents an installation window where you can choose to either use the default settings, which work for most developers and requires you to grant privileged access, or use advanced settings. 
 
 If you work in an environment with elevated security requirements, for instance where local administrative access is prohibited, then you can use the advanced settings to remove the need for granting privileged access. You can configure:
 - The location of the Docker CLI tools either in the system or user directory
@@ -47,7 +47,7 @@ The only time Docker Desktop may start the privileged process is for binding pri
 {{< /tab >}}
 {{< tab name="Versions prior to 4.15" >}}
 
-Versions prior to 4.15 of Docker Desktop for Mac require `root` access to be granted on the first run. The first time that Docker Desktop is launched you receive an admin prompt to grant permission for the installation of the `com.docker.vmnetd` privileged helper service. For subsequent runs, `root` privileges aren't required. Following the principle of least privilege, this approach allows `root` access to be used only for the operations for which it's absolutely necessary, while still being able to use Docker Desktop as an unprivileged user. 
+Versions prior to 4.15 of Docker Desktop for Mac require `root` access to be granted on the first run. The first time that Docker Desktop launches you receive an admin prompt to grant permission for the installation of the `com.docker.vmnetd` privileged helper service. For subsequent runs, `root` privileges aren't required. Following the principle of least privilege, this approach allows `root` access to be used only for the operations for which it's absolutely necessary, while still being able to use Docker Desktop as an unprivileged user.
 All privileged operations are run using the privileged helper process `com.docker.vmnetd`.
 
 {{< /tab >}}
@@ -55,7 +55,7 @@ All privileged operations are run using the privileged helper process `com.docke
 
 ### Installing symlinks
 
-The Docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop ensures the Docker CLI is on your PATH without having to reconfigure shells, log out then log back in for example. As on most systems `/usr/local/bin` is on the PATH by default, and so Docker Desktop creates symlinks for all Docker binaries in it.
+The Docker binaries are installed by default in `/Applications/Docker.app/Contents/Resources/bin`. Docker Desktop creates symlinks for the binaries in `/usr/local/bin`, which means they're automatically included in `PATH` on most systems.
 
 {{< tabs >}}
 {{< tab name="Version 4.18 and later" >}}

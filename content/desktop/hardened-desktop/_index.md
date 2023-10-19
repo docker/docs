@@ -41,6 +41,4 @@ Hardened Docker Desktop includes:
 
 The features of Hardened Docker Desktop operate independently of each other. When used together, these mechanisms defend against attacks at different functional layers of the developer workflow, providing a defense-in-depth approach to securing developer environments.
 
-Docker plans to continue adding more security enhancements to the Hardened Docker Desktop security model.
-
 {{< grid >}}

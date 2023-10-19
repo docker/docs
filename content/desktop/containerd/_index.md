@@ -18,11 +18,11 @@ image and file system management in the Docker Engine.
 
 ## What is the containerd image store?
 
-containerd is a container runtime that manages the container lifecycle, and
+`containerd` is a container runtime that manages the container lifecycle, and
 provides image and filesystem management. It's a low-level building block,
 designed to be integrated into other systems, such as Docker and Kubernetes.
 
-Docker Engine already uses containerd for container lifecycle management, which
+Docker Engine already uses `containerd` for container lifecycle management, which
 includes creating, starting, and stopping containers. This page describes the
 next step of containerd integration for Docker Engine: the image store.
 
@@ -34,7 +34,7 @@ Docker Engine, including:
   or [nydus][2] and [dragonfly][3] for peer-to-peer image distribution.
 - Natively store and build multi-platform images, and other OCI content types
   that may emerge in the future.
-- Ability to run Wasm containers
+- Ability to run [Wasm](../wasm/_index.md) containers
 
 [1]: https://github.com/containerd/stargz-snapshotter
 [2]: https://github.com/containerd/nydus-snapshotter
@@ -50,9 +50,10 @@ The containerd image store beta feature is turned off by default.
 To start using the feature:
 
 1. Navigate to **Settings**.
-2. Select the **Beta** features tab.
+2. From the **Features in development** tab, select **Beta features**.
 3. Next to **Use containerd for pulling and storing images**, select the
    checkbox.
+4. Select **Apply & Restart**
 
 To turn off this feature, clear the **Use containerd for pulling and storing 
 images** checkbox.
