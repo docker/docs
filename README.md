@@ -42,9 +42,9 @@ We've made it easy for you to file new issues.
 
 ## Contribute to Docker docs
 
-We value your contribution. We'd like to make it as easy as possible to submit
+We value your contribution. We want to make it as easy as possible to submit
 your contributions to the Docker docs repository. Changes to the docs are
-handled through pull requests against the master branch. To learn how to
+handled through pull requests against the `master` branch. To learn how to
 contribute, see our [Contribute section](https://docs.docker.com/contribute/overview/).
 
 ## Copyright and license
