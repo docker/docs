@@ -26,9 +26,11 @@ trackers, including:
 - [Alpine secdb](https://secdb.alpinelinux.org/)
 - [AlmaLinux Security Advisory](https://errata.almalinux.org/)
 - [Amazon Linux Security Center](https://alas.aws.amazon.com/)
+- [Bitnami Vulnerability Database](https://github.com/bitnami/vulndb)
 - [CISA Known Exploited Vulnerability
   Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
 - [Debian Security Bug Tracker](https://security-tracker.debian.org/tracker/)
+- [Exploit Prediction Scoring System (EPSS)](https://api.first.org/epss/)
 - [GitHub Advisory Database](https://github.com/advisories/)
 - [GitLab Advisory
   Database](https://gitlab.com/gitlab-org/advisories-community/)
