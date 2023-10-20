@@ -1406,7 +1406,7 @@ Manuals:
     - path: /engine/install/fedora/
       title: Fedora
     - path: /engine/install/rhel/
-      title: RHEL
+      title: RHEL (s390x)
     - path: /engine/install/sles/
       title: SLES
     - path: /engine/install/ubuntu/
