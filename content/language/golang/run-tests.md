@@ -6,11 +6,11 @@ aliases:
 - /get-started/golang/run-tests/
 ---
 
-Testing is an essential part of modern software development. Yet, testing can mean a lot of things to different development teams. In the name of brevity, we'll only take a look at running isolated, high-level, functional tests.
+Testing is an essential part of modern software development. Yet, testing can mean a lot of things to different development teams. In the name of brevity, you'll only take a look at running isolated, high-level, functional tests.
 
 ## Test structure
 
-Each test is meant to verify a single business requirement for our example application. The following test is an excerpt from `main_test.go` test suite in our example application.
+Each test is meant to verify a single business requirement for the example application. The following test is an excerpt from `main_test.go` test suite in the example application.
 
 
 ```go
@@ -50,7 +50,7 @@ func TestRespondsWithLove(t *testing.T) {
 ```
 
 
-As you can see, this is a high-level test, unconcerned with the implementation details of our example application.
+As you can see, this is a high-level test, unconcerned with the implementation details of the example application.
 
 * the test is using [`ory/dockertest`](https://github.com/ory/dockertest) Go module;
 * the test assumes that the Docker engine instance is running on the same machine where the test is being run.
@@ -59,7 +59,7 @@ The second test in `main_test.go` has almost identical structure but it tests _a
 
 ## Run tests locally
 
-In order to run the tests, we must make sure that our application Docker image is up-to-date.
+In order to run the tests, you must make sure that your application Docker image is up-to-date.
 
 ```console
 $ docker build -t docker-gs-ping:latest .
@@ -67,18 +67,18 @@ $ docker build -t docker-gs-ping:latest .
 ...
 ```
 
-In the above example we've omitted most of the output, only displaying the first line indicating that the build was successful.
+The previous example omitted most of the output, only displaying the first line indicating that the build was successful.
 
-Note, that the image is tagged with `latest` which is the same label we've chosen to use in our `main_test.go` tests.
+Note, that the image is tagged with `latest` which is the same label you've chosen to use in your `main_test.go` tests.
 
-Now that the Docker image for our application had been built, we can run the tests that depend on it:
+Now that the Docker image for your application had been built, you can run the tests that depend on it:
 
 ```console
 $ go test ./...
 ok      github.com/docker/docker-gs-ping       2.564s
 ```
 
-That was a bit... underwhelming? Let's ask it to print a bit more detail, just to be sure:
+Use the option to print a bit more detail, just to be sure:
 
 ```console
 $ go test -v ./...
@@ -92,16 +92,12 @@ PASS
 ok      github.com/docker/docker-gs-ping       6.670s
 ```
 
-So, the tests do, indeed, pass. Note, how retrying using exponential back-off helped avoiding failing tests while the containers are being initialised. What happens in each test is that `ory/dockertest` module connects to the local Docker engine instance and instructs it to spin up a container using the image, identified by the tag `docker-gs-ping:latest`. Starting up a container may take a while, so our tests retry accessing the container until the container is ready to respond to requests.
+So, the tests do, indeed, pass. Note, how retrying using exponential back-off helped avoiding failing tests while the containers are being initialized. What happens in each test is that `ory/dockertest` module connects to the local Docker engine instance and instructs it to spin up a container using the image, identified by the tag `docker-gs-ping:latest`. Starting up a container may take a while, so your tests retry accessing the container until the container is ready to respond to requests.
 
 ## Next steps
 
-In this module, we've seen an example of using Docker for isolated functional testing of an example Go application. There are many different ways to test an application and we have only considered the high-level, functional testing. This, however, feeds naturally into the next topic, where we are going to set up our tests to run in an automated pipeline.
+In this module, you've seen an example of using Docker for isolated functional testing of an example Go application. There are many different ways to test an application and you have only considered the high-level, functional testing. This, however, feeds naturally into the next topic, where you're going to set up your tests to run in an automated pipeline.
 
-In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
+In the next module, you’ll take a look at how to set up a CI/CD pipeline using GitHub Actions.
 
 {{< button text="Configure CI/CD" url="configure-ci-cd.md" >}}
-
-## Feedback
-
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Golang%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

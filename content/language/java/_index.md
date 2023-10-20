@@ -1,6 +1,6 @@
 ---
 title: Java language-specific guide
-keywords: Docker, getting started, java, language
+keywords: java, getting started
 description: Containerize Java apps using Docker
 toc_min: 1
 toc_max: 2
@@ -18,6 +18,6 @@ The Java getting started guide teaches you how to create a containerized Spring 
 
 After completing the Java getting started modules, you should be able to containerize your own Java application based on the examples and instructions provided in this guide.
 
-Let’s get started!
+Get started building your first Java image.
 
 {{< button text="Build your first Java image" url="build-images.md" >}}
