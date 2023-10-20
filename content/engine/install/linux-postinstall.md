@@ -11,7 +11,7 @@ aliases:
 - /install/linux/linux-postinstall/
 ---
 
-These optional post-installation procedures shows you how to configure your
+These optional post-installation procedures describe how to configure your
 Linux host machine to work better with Docker.
 
 ## Manage Docker as a non-root user

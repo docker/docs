@@ -1,6 +1,7 @@
 ---
-description: Instructions for installing Docker Engine on a 32-bit Raspberry Pi OS system
-keywords: requirements, apt, installation, Raspberry Pi OS, install, uninstall, upgrade,
+description: Learn how to install Docker Engine on a 32-bit Raspberry Pi OS system. These instructions cover
+  the different installation methods, how to uninstall, and next steps.
+keywords: requirements, apt, installation, install docker engine, Raspberry Pi OS, install, uninstall, upgrade,
   update
 title: Install Docker Engine on Raspberry Pi OS (32-bit)
 toc_max: 4
@@ -32,15 +33,14 @@ To get started with Docker Engine on Raspberry Pi OS, make sure you
 
 ### OS requirements
 
-The following OS versions are supported:
+To install Docker Engine, you need one of the following OS versions:
 
 - 32-bit Raspberry Pi OS Bookworm 12 (stable)
 - 32-bit Raspberry Pi OS Bullseye 11 (oldstable)
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you must first make sure that any
-conflicting packages are uninstalled.
+Before you can install Docker Engine, you need to uninstall any conflicting packages.
 
 Distro maintainers provide an unofficial distributions of Docker packages in
 APT. You must uninstall these packages before you can install the official
@@ -84,16 +84,16 @@ You can install Docker Engine in different ways, depending on your needs:
 
 - [Install it manually](#install-from-a-package) and manage upgrades manually.
 
-- Use a [convenience scripts](#install-using-the-convenience-script). Only
+- Use a [convenience script](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
-### Install using the apt repository {#install-using-the-repository}
+### Install using the `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
-need to set up the Docker Apt repository. Afterward, you can install and update
+need to set up the Docker `apt` repository. Afterward, you can install and update
 Docker from the repository.
 
-1. Set up Docker's Apt repository.
+1. Set up Docker's `apt` repository.
 
    ```bash
    # Add Docker's official GPG key:
@@ -103,7 +103,7 @@ Docker from the repository.
    curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
    sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-   # Set up Docker's Apt repository:
+   # Set up Docker's APT repository:
    echo \
      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
      "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \

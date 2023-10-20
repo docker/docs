@@ -1,6 +1,6 @@
 ---
 description: Jumpstart your client-side server applications with Docker Engine on
-  Ubuntu. This guide details prerequisites and multiple methods to install.
+  Ubuntu. This guide details prerequisites and multiple methods to install Docker Engine on Ubuntu.
 keywords: docker install script, ubuntu docker server, ubuntu server docker, install
   docker engine ubuntu, install docker on ubuntu server, ubuntu 22.04 docker-ce, install
   docker engine on ubuntu, ubuntu install docker ce, ubuntu install docker engine
@@ -48,10 +48,9 @@ s390x, and ppc64le (ppc64el) architectures.
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you must first make sure that any
-conflicting packages are uninstalled.
+Before you can install Docker Engine, you need to uninstall any conflicting packages.
 
-Distro maintainers provide an unofficial distributions of Docker packages in
+Distro maintainers provide unofficial distributions of Docker packages in
 APT. You must uninstall these packages before you can install the official
 version of Docker Engine.
 
@@ -90,20 +89,20 @@ You can install Docker Engine in different ways, depending on your needs:
   the easiest and quickest way to get started.
 
 - Set up and install Docker Engine from
-  [Docker's Apt repository](#install-using-the-repository).
+  [Docker's `apt` repository](#install-using-the-repository).
 
 - [Install it manually](#install-from-a-package) and manage upgrades manually.
 
 - Use a [convenience script](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
-### Install using the Apt repository {#install-using-the-repository}
+### Install using the `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
 need to set up the Docker repository. Afterward, you can install and update
 Docker from the repository.
 
-1. Set up Docker's Apt repository.
+1. Set up Docker's `apt` repository.
 
    ```bash
    # Add Docker's official GPG key:
