@@ -225,7 +225,7 @@ Hello, Docker!!!
 
 Press `ctrl+c` in the terminal to stop your application.
 
-# Summary
+## Summary
 
 In this section, you took a look at setting up your Compose file to add a local
 database and persist data. You also learned how to use Compose Watch to automatically rebuild and run your container when you update your code.

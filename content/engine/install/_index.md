@@ -1,10 +1,10 @@
 ---
 title: Install Docker Engine
-description: Choose the best method for you to install Docker Engine. This client-server
+description: Learn how to choose the best method for you to install Docker Engine. This client-server
   application is available on Linux, Mac, Windows, and as a static binary.
 keywords: install engine, docker engine install, install docker engine, docker engine
   installation, engine install, docker ce installation, docker ce install, engine
-  installer, installing docker engine, docker server install
+  installer, installing docker engine, docker server install, docker desktop vs docker engine
 aliases:
 - /cs-engine/
 - /cs-engine/1.12/
@@ -53,9 +53,9 @@ your preferred operating system below.
 
 | Platform                                                               |                    x86_64 / amd64                     |               arm64 (Apple Silicon)               |
 | :--------------------------------------------------------------------- | :---------------------------------------------------: | :-----------------------------------------------: |
-| [Docker Desktop for Linux](../../desktop/install/linux-install.md)     |  [ ✅  ](../../desktop/install/linux-install.md)  |                                                   |
-| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md) |   [ ✅  ](../../desktop/install/mac-install.md)   | [ ✅  ](../../desktop/install/mac-install.md) |
-| [Docker Desktop for Windows](../../desktop/install/windows-install.md) | [ ✅  ](../../desktop/install/windows-install.md) |                                                   |
+| [Docker Desktop for Linux](../../desktop/install/linux-install.md)     | [✅](../../desktop/install/linux-install.md)          |                                                   |
+| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md) | [✅](../../desktop/install/mac-install.md)            | [✅](../../desktop/install/mac-install.md)        |
+| [Docker Desktop for Windows](../../desktop/install/windows-install.md) | [✅](../../desktop/install/windows-install.md)        |                                                   |
 
 ### Server
 
@@ -64,36 +64,36 @@ and architectures:
 
 | Platform                                       | x86_64 / amd64      | arm64 / aarch64     | arm (32-bit)               | ppc64le           | s390x             |
 | :--------------------------------------------- | :------------------ | :------------------ | :------------------------- | :---------------- | :---------------- |
-| [CentOS](centos.md)                            | [ ✅ ](centos.md)   | [ ✅ ](centos.md)   |                            | [ ✅ ](centos.md) |                   |
-| [Debian](debian.md)                            | [ ✅ ](debian.md)   | [ ✅ ](debian.md)   | [ ✅ ](debian.md)          | [ ✅ ](debian.md) |                   |
-| [Fedora](fedora.md)                            | [ ✅ ](fedora.md)   | [ ✅ ](fedora.md)   |                            | [ ✅ ](fedora.md) |                   |
-| [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                     |                     | [ ✅ ](raspberry-pi-os.md) |                   |                   |
-| [RHEL](rhel.md)                                |                     |                     |                            |                   | [ ✅ ](rhel.md)   |
-| [SLES](sles.md)                                |                     |                     |                            |                   | [ ✅ ](sles.md)   |
-| [Ubuntu](ubuntu.md)                            | [ ✅ ](ubuntu.md)   | [ ✅ ](ubuntu.md)   | [ ✅ ](ubuntu.md)          | [ ✅ ](ubuntu.md) | [ ✅ ](ubuntu.md) |
-| [Binaries](binaries.md)                        | [ ✅ ](binaries.md) | [ ✅ ](binaries.md) | [ ✅ ](binaries.md)        |                   |                   |
+| [CentOS](centos.md)                            | [✅](centos.md)     | [✅](centos.md)     |                            | [✅](centos.md)   |                   |
+| [Debian](debian.md)                            | [✅](debian.md)     | [✅](debian.md)     | [✅](debian.md)            | [✅](debian.md)   |                   |
+| [Fedora](fedora.md)                            | [✅](fedora.md)     | [✅](fedora.md)     |                            | [✅](fedora.md)   |                   |
+| [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                     |                     | [✅](raspberry-pi-os.md)   |                   |                   |
+| [RHEL](rhel.md)                                |                     |                     |                            |                   | [✅](rhel.md)     |
+| [SLES](sles.md)                                |                     |                     |                            |                   | [✅](sles.md)     |
+| [Ubuntu](ubuntu.md)                            | [✅](ubuntu.md)     | [✅](ubuntu.md)     | [✅](ubuntu.md)            | [✅](ubuntu.md)   | [✅](ubuntu.md)   |
+| [Binaries](binaries.md)                        | [✅](binaries.md)   | [✅](binaries.md)   | [✅](binaries.md)          |                   |                   |
 
 ### Other Linux distros
 
 > **Note**
 >
-> While the instructions below may work, Docker doesn't test or verify
+> While the following instructions may work, Docker doesn't test or verify
 > installation on distro derivatives.
 
-- Users of Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
+- If you use Debian derivatives such as "BunsenLabs Linux", "Kali Linux" or 
   "LMDE" (Debian-based Mint) should follow the installation instructions for
-  [Debian](debian.md), substituting the version of their distro for the
+  [Debian](debian.md), substitute the version of your distro for the
   corresponding Debian release. Refer to the documentation of your distro to find
   which Debian release corresponds with your derivative version.
-- Likewise, users of Ubuntu derivatives such as "Kubuntu", "Lubuntu" or "Xubuntu"
-  should follow the installation instructions for [Ubuntu](ubuntu.md),
-  substituting the version of their distro for the corresponding Ubuntu release.
+- Likewise, if you use Ubuntu derivatives such as "Kubuntu", "Lubuntu" or "Xubuntu"
+  you should follow the installation instructions for [Ubuntu](ubuntu.md),
+  substituting the version of your distro for the corresponding Ubuntu release.
   Refer to the documentation of your distro to find which Ubuntu release
   corresponds with your derivative version.
 - Some Linux distros provide a package of Docker Engine through their
   package repositories. These packages are built and maintained by the Linux
   distro's package maintainers and may have differences in configuration
-  or built from modified source code. Docker isn't involved in releasing these
+  or are built from modified source code. Docker isn't involved in releasing these
   packages and you should report any bugs or issues involving these packages to
   your Linux distro's issue tracker.
 
@@ -104,8 +104,8 @@ These binaries are statically linked and you can use them on any Linux distro.
 
 Docker Engine has two types of update channels, **stable** and **test**:
 
-* The **Stable** channel gives you the latest versions released for general availability.
-* The **Test** channel gives you pre-release versions that are ready for testing before
+* The **stable** channel gives you the latest versions released for general availability.
+* The **test** channel gives you pre-release versions that are ready for testing before
   general availability.
 
 Use the test channel with caution. Pre-release versions include experimental and

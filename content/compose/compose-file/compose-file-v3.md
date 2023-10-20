@@ -415,12 +415,6 @@ cap_drop:
   - SYS_ADMIN
 ```
 
-> Note when using docker stack deploy
->
-> The `cap_add` and `cap_drop` options are ignored when
-> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
-{ .important }
-
 ### cgroup_parent
 
 Specify an optional parent cgroup for the container.
