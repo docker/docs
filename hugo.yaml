@@ -91,20 +91,16 @@ params:
   docs_url: https://docs.docker.com
 
   latest_engine_api_version: "1.43"
-  docker_ce_version: "24.0.0"
-  compose_v1_version: "1.29.2"
+  docker_ce_version: "24.0.6"
   compose_version: "v2.23.0"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  machine_version: "0.16.0"
-  distribution_version: "2.7"
-  compose_switch_version: "1.0.4"
-  buildkit_version: "0.12.1"
+  buildkit_version: "0.12.3"
 
-  example_go_version: "1.20"
+  example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
 
-  min_api_threshold: 1.40
+  min_api_threshold: 1.41
 
 
 menus:
