@@ -97,7 +97,7 @@ params:
   compose_file_v2: "2.4"
   buildkit_version: "0.12.3"
 
-  example_go_version: "1.20"
+  example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
 
   min_api_threshold: 1.40
