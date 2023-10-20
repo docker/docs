@@ -95,7 +95,6 @@ params:
   compose_version: "v2.23.0"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  distribution_version: "2.7"
   compose_switch_version: "1.0.4"
   buildkit_version: "0.12.1"
 
