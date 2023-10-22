@@ -167,7 +167,7 @@ a more fine-grained cache between runs. For example, when installing packages,
 you don't always need to fetch all of your packages from the internet each time.
 You only need the ones that have changed.
 
-To solve this problem, you can use `RUN --mount type=cache`. For example, for
+To solve this problem, you can use `RUN --mount=type=cache`. For example, for
 your Debian-based image you might use the following:
 
 ```dockerfile
