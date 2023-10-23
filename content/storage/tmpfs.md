@@ -35,10 +35,10 @@ containers.
 In general, `--mount` is more explicit and verbose. The biggest difference is
 that the `--tmpfs` flag does not support any configurable options.
 
-- **`--tmpfs`**: Mounts a `tmpfs` mount without allowing you to specify any
+- `--tmpfs`: Mounts a `tmpfs` mount without allowing you to specify any
   configurable options, and can only be used with standalone containers.
 
-- **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
+- `--mount`: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `--tmpfs`:
   - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
