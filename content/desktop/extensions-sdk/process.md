@@ -1,6 +1,6 @@
 ---
 description: Understand the process of creating an extension.
-title: The create and publish process
+title: The build and publish process
 keyword: Docker Extensions, sdk, build, create, publish
 ---
 
