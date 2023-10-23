@@ -16,7 +16,6 @@ Docker Hub limits the number of Docker image downloads, or pulls, based on the a
 
 If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
 
-Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/) and [Publisher](https://www.docker.com/partners/programs) programs. See [Docker Pricing](https://www.docker.com/pricing) and [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates) for details.
 
 ## Definition of limits
 
@@ -28,14 +27,15 @@ as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
 Unauthenticated (anonymous) users will have the limits enforced via IP.
 
+- Pulls are accounted to the user doing the pull, not to the owner of the image.
 - A pull request is defined as up to two `GET` requests on registry 
 manifest URLs (`/v2/*/manifests/*`).
 - A normal image pull makes a 
 single manifest request.
 - A pull request for a multi-arch image makes two 
 manifest requests. 
-- `HEAD` requests aren't counted. 
-
+- `HEAD` requests aren't counted.
+- Some images are unlimited through our [Docker Sponsored Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/) and [Docker Verified Publisher](https://www.docker.com/partners/programs) programs.
 
 ## How do I know my pull requests are being limited?
 
