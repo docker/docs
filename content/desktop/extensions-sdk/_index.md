@@ -5,12 +5,12 @@ keywords: Docker, Extensions, sdk
 aliases:
 - /desktop/extensions-sdk/dev/overview/
 grid:
-  - title: "The build and publish process"
-    description: Understand the process for building and publishing an extension.
+  - title: "The create and publish process"
+    description: Understand the process for creating and publishing an extension.
     icon: "checklist"
     link: "/desktop/extensions-sdk/process/"
   - title: "Quickstart guide"
-    description: Follow the quickstart guide to build a basic Docker Extension quickly.
+    description: Follow the quickstart guide to create a basic Docker Extension quickly.
     icon: "explore"
     link: "/desktop/extensions-sdk/quickstart/"
   - title: "View the design guidelines"
@@ -26,14 +26,14 @@ grid:
     icon: "multiple_stop"
     link: "/desktop/extensions-sdk/dev/kubernetes/"
   - title: "Multi-arch extensions"
-    description: Build your extension for multiple architectures.
+    description: Create your extension for multiple architectures.
     icon: "content_copy"
     link: "/desktop/extensions-sdk/extensions/multi-arch/"
 ---
 
 The resources in this section help you create your own Docker extension.
 
-The Docker CLI tool provides a set of commands to help you build and publish your extension, packaged as a 
+The Docker CLI tool provides a set of commands to help you create and publish your extension, packaged as a 
 specially formatted Docker image.
 
 At the root of the image filesystem is a `metadata.json` file which describes the content of the extension. 

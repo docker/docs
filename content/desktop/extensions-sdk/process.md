@@ -1,6 +1,6 @@
 ---
 description: Understand the process of creating an extension.
-title: The build and publish process
+title: The create and publish process
 keyword: Docker Extensions, sdk, build, create, publish
 ---
 
@@ -23,7 +23,7 @@ The build process consists of:
 
 > **Tip**
 >
-> Whilst building your extension, make sure you follow the [design](design/design-guidelines.md) and [UI styling](design/index.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
+> Whilst creating your extension, make sure you follow the [design](design/design-guidelines.md) and [UI styling](design/index.md) guidelines to ensure visual consistency and [level AA accessibility standards](https://www.w3.org/WAI/WCAG2AA-Conformance).
 { .tip }
 
 For further inspiration, see the other examples in the [samples folder](https://github.com/docker/extensions-sdk/tree/main/samples).
