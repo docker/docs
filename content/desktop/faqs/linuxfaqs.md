@@ -6,7 +6,11 @@ aliases:
 - /desktop/linux/space/
 ---
 
-### What is the difference between Docker Desktop for Linux and Docker Engine
+### What is the difference between Docker Desktop for Linux and Docker Engine?
+
+Docker Desktop for Linux provides a user-friendly graphical interface that simplifies the management of containers and services. It includes Docker Engine as this is the core technology that powers Docker containers. Docker Desktop for Linux also comes with additional features like Docker Scout and Docker Extensions.
+
+## Can I have both Docker Desktop for Linux and Docker Engine installed on my machine?
 
 Docker Desktop for Linux and Docker Engine can be installed side-by-side on the
 same machine. Docker Desktop for Linux stores containers and images in an isolated
@@ -39,7 +43,7 @@ disable the Docker Engine service, and to prevent it from starting automatically
 $ sudo systemctl disable docker docker.socket containerd
 ```
 
-#### How do I switch between Docker Desktop and Docker Engine
+#### How do I switch between Docker Desktop and Docker Engine?
 
 
 The Docker CLI can be used to interact with multiple Docker Engines. For example,
