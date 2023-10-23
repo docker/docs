@@ -28,8 +28,6 @@ For developers who:
 
 A Synchronized file share behaves just like a virtual file share, but takes advantage of Mutagen's high-performance, low-latency code synchronization engine to create a synchronized cache of the host files on an ext4 filesystem within the Docker Desktop VM. If you make filesystem changes on the host or in the VM’s containers it propagates via bidirectional synchronization.
 
-Synchronized file sharing also adds an additional Docker Context, `desktop-linux-mutagen`, which uses Docker socket middleware to automatically replace bind mounts with in-VM caches whenever possible.
-
 After creating a file share instance, any container using a bind mount that references a host filesystem location which matches the stated synchronized file share host location, is provided by the Synchronized file sharing feature. Bind mounts that don't satisfy this condition are passed to the normal virtual filesystem bind-mounting mechanism, for example VirtioFS or gRPC-FUSE.
 
 > **Important**
@@ -49,8 +47,9 @@ To enable Synchronized file sharing:
 1. Sign in to Docker Desktop.
 2. Anywhere within the Docker Dashboard, enter the Konami Code which has the key sequence of `up, up, down, down, left, right, left, b, a`.
 3. From the list of experimental features, select **Mutagen File Sharing**.
+4. At the bottom of the list, select **Go back to dashboard**
 
-You can now create your first file share instance.
+Synchronized file sharing is now enabled and ready for you to create your first file share instance.
 
 ## Create a file share instance 
 
@@ -61,7 +60,11 @@ To create a synchronized file share:
 
 File shares take a few seconds to initialize as files are copied into the Docker Desktop VM. During this time, the status indicator displays **Preparing**.
 
-When the status indicator displays **Watching for filesystem changes**, your files are available to the VM through all the standard bind mount mechanisms, whether that's `-vm` in the command line or specified in your `compose.yml` file.
+When the status indicator displays **Watching for filesystem changes**, your files are available to the VM through all the standard bind mount mechanisms, whether that's `-v` in the command line or specified in your `compose.yml` file.
+
+>**Note**
+>
+> When you create a new service, setting the [bind mount option consistency](../engine/reference/commandline/secret_create.md#options-for-bind-mounts) to `:consistent` bypasses synchronized file sharing. 
 
 ## Explore your file share instance
 
@@ -80,9 +83,10 @@ Selecting a file share instance expands the dropdown and exposes this informatio
 You can use a `.syncignore` file at the root of each file share, to exclude local files from your file share instance. It supports the same syntax as `.dockerignore` files and excludes, and/or re-includes, paths from synchronization. `.syncignore` files are ignored at any location other than the root of the file share.
  
 Some example of things you might want to add to your `.syncignore` file are:
-- ?
+- Large dependency directories, for example `node_modules` and `composer` directories (unless you rely on accessing them via a bind mount)
+- `.git directories` (again, unless you need them)
 
-In general, the contents of your `.syncignore` file should be similar to what you have in your `.gitignore` file.
+In general, the contents of your `.syncignore` file can include things anything that's going to cost you time to sync up-front and cost you storage. 
 
 ## Frequently asked questions
 
@@ -92,10 +96,16 @@ Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/
 
 ## Known issues
 
-- Synchronized file sharing currently doesn't work with [Resource Saver mode](use-desktop/resource-saver.md). Make sure you turn off Resource Saver mode before using Synchronized file sharing.
-
 - Upon launching Docker Desktop, it can take between 5-10 seconds for Synchronized file sharing to fully initialize. During this window, file share instances display as **Connecting** and any new containers created during this window won't replace bind mounts with Synchronized file sharing.
+
+- `.syncignore` changes won't cause deletion until file share recreation. Files that become ignored due to a modification to ``.syncignore`` are left in place, but no longer update through synchronization.
+
+- Case conflicts, due to Linux being case-sensitive and macOS/Windows only being case-preserving, display as **File exists** problems in the GUI.
+
+- File share instances mounted into [ECI](hardened-desktop/enhanced-container-isolation/_index.md) containers are currently read-only.
+
+- You cannot remove a file share instance during the initial synchronization. You have to wait for it to complete before **Delete** has any effect.
 
 ## Feedback
 
-Thanks for trying the new Synchronized file sharing feature. Give feedback or report any bugs you may find through the issues tracker on the feedback form.
+Thanks for trying the new Synchronized file sharing feature. Give feedback or report any bugs you may find through the #docker-eap-sync-file-share Slack channel.
