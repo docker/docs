@@ -165,7 +165,7 @@ Docker from the repository.
    `hello-world` image.
 
    ```console
-   $ sudo docker run hello-world
+   $ sudo docker run --rm hello-world
    ```
 
    This command downloads a test image and runs it in a container. When the
