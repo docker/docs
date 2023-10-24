@@ -86,7 +86,7 @@ Some example of things you might want to add to your `.syncignore` file are:
 - Large dependency directories, for example `node_modules` and `composer` directories (unless you rely on accessing them via a bind mount)
 - `.git directories` (again, unless you need them)
 
-In general, the contents of your `.syncignore` file can include things anything that's going to cost you time to sync up-front and cost you storage. 
+In general, use your ``.syncignore`` file to exclude items that aren't critical to your workflow, especially those that would be slow to sync or use significant storage.
 
 ## Frequently asked questions
 
@@ -100,11 +100,13 @@ Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/
 
 - `.syncignore` changes won't cause deletion until file share recreation. Files that become ignored due to a modification to ``.syncignore`` are left in place, but no longer update through synchronization.
 
-- Case conflicts, due to Linux being case-sensitive and macOS/Windows only being case-preserving, display as **File exists** problems in the GUI.
+- Case conflicts, due to Linux being case-sensitive and macOS/Windows only being case-preserving, display as **File exists** problems in the GUI. These can be ignored. However, if they persist, you can report the issue in the issue in the #docker-eap-sync-file-share Slack channel.
 
 - File share instances mounted into [ECI](hardened-desktop/enhanced-container-isolation/_index.md) containers are currently read-only.
 
 - You cannot remove a file share instance during the initial synchronization. You have to wait for it to complete before **Delete** has any effect.
+
+- Synchronized file sharing proactively reports temporary issues, which can result in occasional **Conflict** and **Problem** indicators appearing in the GUI during synchronization. These can be ignored. However, if they persist, you can report the issue in the issue in the #docker-eap-sync-file-share Slack channel.
 
 ## Feedback
 
