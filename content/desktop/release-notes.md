@@ -24,11 +24,71 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
-## 4.24.2
+## 4.25.0
+
+{{< release-date date="2023-10-26" >}}
+
+{{< desktop-install all=true version="4.25.0" build_path="/" >}}
+
+### Upgrades
+
+- [Compose v2.23.0](https://github.com/docker/compose/releases/tag/v2.23.0)
+- [Docker Scout CLI v1.0.9](https://github.com/docker/scout-cli/releases/tag/v1.0.9).
+- [Kubernetes v1.28.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.2)
+- [cri-dockerd v0.3.4](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.4)
+- [CNI plugins v1.3.0](https://github.com/containernetworking/plugins/releases/tag/v1.3.0)
+- [cri-tools v1.28.0](https://github.com/kubernetes-sigs/cri-tools/releases/tag/v1.28.0)
+### New
+
+- Rosetta is now available for all users on MacOS 13 or greater, providing faster emulation of Intel-based images on Apple Silicon.
+- Docker Desktop will now detect if a WSL version is out of date. If an out dated version of WSL is detected, you can now optionally allow Docker Desktop automatically updates the installation or manually update WSL outside of Docker Desktop.
+- Installation pre-requisites for Windows is now higher than 19043 for both GAC and LTSC.
+- Prevent Docker Desktop users from enabling Docker Scout image analysis via settings in `admin-settings.json`.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a spacing problem in the `Accept License` pop-up.
+- Fixed a bug where the **Notifications drawer** changed size when navigating between **notifications list** and **Notification details** view.
+- containerd integration:
+  - `docker push` now supports `Layer already exists` and `Mounted from` progress statuses.
+  - `docker save` is now able to export images from all tags of the repository.
+  - Hide push upload progress of manifests, configs and indexes (small json blobs) to match the original push behavior.
+  - Fixed `docker diff` containing extra differences.
+  - Fixed `docker history` not showing intermediate image IDs for images built with the classic builder.
+  - Fixed `docker load` not being able to load images from compressed tar archives.
+  - Fixed registry mirrors not working.
+  - Fixed `docker diff` not working correctly when called multiple times concurrently for the same container.
+  - Fixed `docker push` not reusing layers when pushing layers to different repositories on the same registry.
+- Docker Init:
+  - Fixed outdated links to Docker documentation included in generated files
+  - Add support for ASP.NET Core 8 (in addition to 6 and 7)
+- Fixed a bug that caused a failure when installing Wasm shims.
+- Fixed a bug where Docker Desktop exits the [Resource Saver mode](https://docs.docker.com/desktop/use-desktop/resource-saver/) every 15 minutes, or, if the timer is set above 15 minutes, the resource saver mode never kicks in.
+- Promoted the **Enable background SBOM indexing** option to **General settings**.
+- Docker Desktop now uses `com.docker.backend` as main process for faster bootstrap, better error handling, unified architecture.
+
+#### For Mac
+
+- Enhanced error messaging when an update cannot be completed if the user doesn't match the owner of `Docker.app`. Fixes [docker/for-mac#7000](https://github.com/docker/for-mac/issues/7000).
+- Fixed a bug where "Re-apply configuration" might not work when `/var/run/docker.sock` is mis-configured.
+- Do not overwrite `ECRCredentialHelper` if already present in `/usr/local/bin`.
+
+
+#### For Windows
+
+- Fixed an issue where `Switch to Windows Containers` would show in the tray menu on Windows Home Editions. Fixes [docker/for-win#13715](https://github.com/docker/for-win/issues/13715)
+
+#### For Linux
+
+- Fixed a bug in `docker login`. Fixes  [docker/docker-credential-helpers#299](https://github.com/docker/docker-credential-helpers/issues/299)
+
+## 4.25.0
 
 {{< release-date date="2023-10-12" >}}
 
-{{< desktop-install all=true version="4.24.2" build_path="/124339/" >}}
+{{< desktop-install all=true version="4.25.0" build_path="/124339/" >}}
 
 ### Bug fixes and enhancements
 
