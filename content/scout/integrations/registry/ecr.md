@@ -41,16 +41,17 @@ The following table describes the configuration resources.
 > Additionally, an egress cost also applies when Docker Scout pulls the images
 > from ECR. The egress cost is around $0.09 per GB.
 
-| Resource type                 | Resource name         | Description                                                                                | Cost  |
-| ----------------------------- | --------------------- | ------------------------------------------------------------------------------------------ | ----- |
-| `AWS::SNSTopic::Topic`        | `SNSTopic`            | SNS topic for notifying Docker Scout when the AWS resources have been created.             | Free  |
-| `AWS::SNS::TopicPolicy`       | `TopicPolicy`         | Defines the topic for the initial setup notification.                                      | Free  |
-| `AWS::SecretsManager::Secret` | `ScoutAPICredentials` | Stores the credentials used by EventBridge to fire events to Scout.                        | $0.42 |
-| `AWS::Events::ApiDestination` | `ApiDestination`      | Sets up the EventBridge connection to Docker Scout for sending ECR push and delete events. | $0.01 |
-| `AWS::Events::Connection`     | `Connection`          | EventBridge connection credentials to Scout.                                               | Free  |
-| `AWS::Events::Rule`           | `DockerScoutEcrRule`  | Defines the rule to send ECR pushes and deletes to Scout.                                  | Free  |
-| `AWS::IAM::Role`              | `InvokeApiRole`       | Internal role to grant the event access to `ApiDestination`.                               | Free  |
-| `AWS::IAM::Role`              | `AssumeRoleEcrAccess` | This role has access to `ScoutAPICredentials` for setting up the Docker Scout integration. | Free  |
+| Resource type                 | Resource name                 | Description                                                                                | Cost  |
+| ----------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------ | ----- |
+| `AWS::SNSTopic::Topic`        | `SNSTopic`                    | SNS topic for notifying Docker Scout when the AWS resources have been created.             | Free  |
+| `AWS::SNS::TopicPolicy`       | `TopicPolicy`                 | Defines the topic for the initial setup notification.                                      | Free  |
+| `AWS::SecretsManager::Secret` | `ScoutAPICredentials`         | Stores the credentials used by EventBridge to fire events to Scout.                        | $0.42 |
+| `AWS::Events::ApiDestination` | `ApiDestination`              | Sets up the EventBridge connection to Docker Scout for sending ECR push and delete events. | $0.01 |
+| `AWS::Events::Connection`     | `Connection`                  | EventBridge connection credentials to Scout.                                               | Free  |
+| `AWS::Events::Rule`           | `DockerScoutEcrRule`          | Defines the rule to send ECR pushes and deletes to Scout.                                  | Free  |
+| `AWS::Events::Rule`           | `DockerScoutRepoDeletedRule`  | Defines the rule to send ECR repository deletes to Scout.                                  | Free  |
+| `AWS::IAM::Role`              | `InvokeApiRole`               | Internal role to grant the event access to `ApiDestination`.                               | Free  |
+| `AWS::IAM::Role`              | `AssumeRoleEcrAccess`         | This role has access to `ScoutAPICredentials` for setting up the Docker Scout integration. | Free  |
 
 ## Integrate your first registry
 
