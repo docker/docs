@@ -54,7 +54,7 @@ Your Docker ID becomes your username for hosted Docker services, and [Docker for
 
 ## Sign in
 
-Once you register and verify your Docker ID email address, you can sign in to [your Docker account](https://login.docker.com/u/login/). You can sign in with your email address or username and password, or with your Google or GitHub account. See [Sign in with your social provider](#sign-in-with-your-social-provider).
+Once you register and verify your Docker ID email address, you can sign in to [your Docker account](https://login.docker.com/u/login/). You can sign in with your email address (or username) and password. Or, you can sign in with your social provider. See [Sign in with your social provider](#sign-in-with-your-social-provider).
 
 You can also sign in through the CLI using the `docker login` command. For more information, see [`docker login`](../engine/reference/commandline/login.md).
 
