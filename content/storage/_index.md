@@ -1,7 +1,7 @@
 ---
 description: Overview of persisting data in containers
 title: Manage data in Docker
-keywords: storage, persistence, data persistence, volumes, mounts, bind mounts
+keywords: storage, persistence, data persistence, volumes, mounts, bind mounts, tmpfs
 aliases:
 - engine/admin/volumes/
 ---
@@ -20,14 +20,12 @@ container layer. This means that:
   _data volumes_, which write directly to the host filesystem.
 
 Docker has two options for containers to store files on the host machine, so
-that the files are persisted even after the container stops: _volumes_, and
-_bind mounts_. 
+that the files are persisted even after the container stops: volumes, and
+bind mounts. 
 
 Docker also supports containers storing files in-memory on the host machine. Such files are not persisted.
-If you're running Docker on Linux, _tmpfs mount_ is used to store files in the host's system memory.
-If you're running Docker on Windows, _named pipe_ is used to store files in the host's system memory.
-
-Keep reading for more information about persisting data or taking advantage of in-memory files.
+If you're running Docker on Linux, `tmpfs` mount is used to store files in the host's system memory.
+If you're running Docker on Windows, named pipe is used to store files in the host's system memory.
 
 ## Choose the right type of mount
 
@@ -40,21 +38,21 @@ mounts is to think about where the data lives on the Docker host.
 
 ![Types of mounts and where they live on the Docker host](images/types-of-mounts.png)
 
-- **Volumes** are stored in a part of the host filesystem which is _managed by
+- Volumes are stored in a part of the host filesystem which is _managed by
   Docker_ (`/var/lib/docker/volumes/` on Linux). Non-Docker processes should not
   modify this part of the filesystem. Volumes are the best way to persist data
   in Docker.
 
-- **Bind mounts** may be stored *anywhere* on the host system. They may even be
+- Bind mounts may be stored anywhere on the host system. They may even be
   important system files or directories. Non-Docker processes on the Docker host
   or a Docker container can modify them at any time.
 
-- **`tmpfs` mounts** are stored in the host system's memory only, and are never
+- `tmpfs` mounts are stored in the host system's memory only, and are never
   written to the host system's filesystem.
 
 ### More details about mount types
 
-- **[Volumes](volumes.md)**: Created and managed by Docker. You can create a
+- [Volumes](volumes.md): Created and managed by Docker. You can create a
   volume explicitly using the `docker volume create` command, or Docker can
   create a volume during container or service creation.
 
@@ -69,31 +67,33 @@ mounts is to think about where the data lives on the Docker host.
   and is not removed automatically. You can remove unused volumes using `docker
   volume prune`.
 
-  When you mount a volume, it may be **named** or **anonymous**. Anonymous
+  When you mount a volume, it may be named or anonymous. Anonymous
   volumes are not given an explicit name when they are first mounted into a
   container, so Docker gives them a random name that is guaranteed to be unique
   within a given Docker host. Besides the name, named and anonymous volumes
   behave in the same ways.
 
-  Volumes also support the use of _volume drivers_, which allow you to store
+  Volumes also support the use of volume drivers, which allow you to store
   your data on remote hosts or cloud providers, among other possibilities.
 
-- **[Bind mounts](bind-mounts.md)**: Available since the early days of Docker.
+- [Bind mounts](bind-mounts.md): Available since the early days of Docker.
   Bind mounts have limited functionality compared to volumes. When you use a
-  bind mount, a file or directory on the _host machine_ is mounted into a
+  bind mount, a file or directory on the host machine is mounted into a
   container. The file or directory is referenced by its full path on the host
-  machine. The file or directory does not need to exist on the Docker host
+  machine. The file or directory doesn't need to exist on the Docker host
   already. It is created on demand if it does not yet exist. Bind mounts are
   very performant, but they rely on the host machine's filesystem having a
   specific directory structure available. If you are developing new Docker
   applications, consider using named volumes instead. You can't use
   Docker CLI commands to directly manage bind mounts.
 
-  > Bind mounts allow access to sensitive files
+  > **Important**
+  >
+  > Bind mounts allow access to sensitive files.
   >
   > One side effect of using bind mounts, for better or for worse,
-  > is that you can change the **host** filesystem via processes running in a
-  > **container**, including creating, modifying, or deleting important system
+  > is that you can change the host filesystem via processes running in a
+  > container, including creating, modifying, or deleting important system
   > files or directories. This is a powerful ability which can have security
   > implications, including impacting non-Docker processes on the host system.
   { .important }
