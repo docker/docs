@@ -91,16 +91,16 @@ If you need to specify volume driver options, you must use `--mount`.
 >
 > ```console
 > $ docker service create \
->         --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
->         --name myservice \
->         <IMAGE>
+>  --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
+>  --name myservice \
+>  <IMAGE>
 > ```
 { .warning }
 
 The examples below show both the `--mount` and `-v` syntax where possible, with
 `--mount` first.
 
-### Differences between `-v` and `--mount` behavior
+### Differences between `-v` and `--mount` behavior 
 
 As opposed to bind mounts, all options for volumes are available for both
 `--mount` and `-v` flags.

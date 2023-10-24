@@ -350,7 +350,7 @@ Use extreme caution with these options. Bind-mounting a system directory
 such as `/home` or `/usr` with the `Z` option renders your host machine
 inoperable and you may need to relabel the host machine files by hand.
 
-> **Important**:
+> **Important**
 >
 > When using bind mounts with services, selinux labels
 > (`:Z` and `:z`), as well as `:ro` are ignored. See
