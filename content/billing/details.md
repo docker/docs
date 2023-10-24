@@ -6,7 +6,7 @@ keywords: payments, billing, subscription
 
 > **Early access features**
 >
-> If you're subscribed to Docker Pro, you may have a different user interface experience. To update your billing information, go to the **Billing** page for your account, then select the **Payment methods and billing history** link.
+> If you're subscribed to Docker Pro or subscribed to Docker Team or Business after October 23, 2023, you may have a different user interface experience. To update your billing information, go to the **Billing** page for your account, then select the **Payment methods and billing history** link.
 { .restricted }
 
 You can update the billing information for your personal account or for an organization. 
@@ -27,8 +27,9 @@ The billing information provided appears on all your billing invoices. The email
 >
 > You must be an organization owner to make changes to the billing information.
 
-1. In Docker Hub, select **Organizations**.
-2. Select the organization that you want to change the payment method for. 
-3. Select the **Billing** tab and then **Payment Methods**.
-4. In the **Billing Information** section, enter your updated billing details. 
-5. Select **Update**.
+1. Select your username in the top-right corner of Docker Hub.
+2. From the drop-down menu select **Billing**.
+3. Select the organization that you want to change the payment method for. 
+4. Select the **Payment Methods** tab.
+5. In the **Billing Information** section, enter your updated billing details. 
+6. Select **Update**.

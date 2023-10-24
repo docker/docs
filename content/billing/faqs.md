@@ -6,7 +6,7 @@ keywords: billing, renewal, payments
 
 > **Early access features**
 >
-> If you're subscribed to Docker Pro, you may have a different user interface experience. To find past invoices and update payment and billing information, go to the **Billing** page for your account, then select the **Payment methods and billing history** link.
+> If you're subscribed to Docker Pro or subscribed to Docker Team or Business after October 23, 2023, you may have a different user interface experience. To find past invoices and update payment and billing information, go to the **Billing** page for your account, then select the **Payment methods and billing history** link.
 { .restricted }
 
 ### Where can I view my billing date?
@@ -71,7 +71,7 @@ If you use a coupon to pay for a subscription, when the coupon expires, your pay
 Update your billing information to include your VAT number:
 
 1. Sign in to Docker Hub.
-2. For organizations, select **Organizations**, your organization, and then **Billing**. For user accounts, select **Your Account** in the top-right corner, then **Billing**.
+2. For user accounts, Select your username in the top-right corner, then **Billing**. For organizations, select the name of the organization.
 3. Select **Payment Methods**.
 4. In the **Billing Information** section, enter your information in the **VAT/Tax ID** field.
 5. Select **Update**.
@@ -84,13 +84,15 @@ To download your updated invoice:
 
 For user accounts:
 
-1. Select **Your Account** in the top-right corner of Docker Hub.
+1. Select your username in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. Select the **Payment Methods** tab, then update the email field in the **Billing Information** section.
 4. Select **Update**.
 
 For organizations:
 
-1. In Docker Hub, select **Organization**, your organization, and then **Billing**.
-2. Select the **Payment Methods** tab, then update the email field in the **Billing Information** section.
-3. Select **Update**.
+1. Select you username in the top-right corner of Docker Hub.
+2. From the drop-down menu select **Billing**.
+3. Select the name of the organization.
+4. Select the **Payment Methods** tab, then update the email field in the **Billing Information** section.
+5. Select **Update**.
