@@ -239,3 +239,7 @@ Turns on the containerd image store. This brings new features like faster contai
 ### Experimental features
 
 {{< include "desktop-experimental.md" >}}
+
+## Notifications
+
+{{< include "desktop-notifications-settings.md" >}}
