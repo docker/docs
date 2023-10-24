@@ -62,16 +62,16 @@ your preferred operating system below.
 Docker provides `.deb` and `.rpm` packages from the following Linux distros
 and architectures:
 
-| Platform                                       | x86_64 / amd64      | arm64 / aarch64     | arm (32-bit)               | ppc64le           | s390x             |
-| :--------------------------------------------- | :------------------ | :------------------ | :------------------------- | :---------------- | :---------------- |
-| [CentOS](centos.md)                            | [✅](centos.md)     | [✅](centos.md)     |                            | [✅](centos.md)   |                   |
-| [Debian](debian.md)                            | [✅](debian.md)     | [✅](debian.md)     | [✅](debian.md)            | [✅](debian.md)   |                   |
-| [Fedora](fedora.md)                            | [✅](fedora.md)     | [✅](fedora.md)     |                            | [✅](fedora.md)   |                   |
-| [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                     |                     | [✅](raspberry-pi-os.md)   |                   |                   |
-| [RHEL](rhel.md)                                |                     |                     |                            |                   | [✅](rhel.md)     |
-| [SLES](sles.md)                                |                     |                     |                            |                   | [✅](sles.md)     |
-| [Ubuntu](ubuntu.md)                            | [✅](ubuntu.md)     | [✅](ubuntu.md)     | [✅](ubuntu.md)            | [✅](ubuntu.md)   | [✅](ubuntu.md)   |
-| [Binaries](binaries.md)                        | [✅](binaries.md)   | [✅](binaries.md)   | [✅](binaries.md)          |                   |                   |
+| Platform                                       | x86_64 / amd64    | arm64 / aarch64   | arm (32-bit)             | ppc64le         | s390x           |
+| :--------------------------------------------- | :---------------- | :---------------- | :----------------------- | :-------------- | :-------------- |
+| [CentOS](centos.md)                            | [✅](centos.md)   | [✅](centos.md)   |                          | [✅](centos.md) |                 |
+| [Debian](debian.md)                            | [✅](debian.md)   | [✅](debian.md)   | [✅](debian.md)          | [✅](debian.md) |                 |
+| [Fedora](fedora.md)                            | [✅](fedora.md)   | [✅](fedora.md)   |                          | [✅](fedora.md) |                 |
+| [Raspberry Pi OS (32-bit)](raspberry-pi-os.md) |                   |                   | [✅](raspberry-pi-os.md) |                 |                 |
+| [RHEL (s390x)](rhel.md)                        |                   |                   |                          |                 | [✅](rhel.md)   |
+| [SLES](sles.md)                                |                   |                   |                          |                 | [✅](sles.md)   |
+| [Ubuntu](ubuntu.md)                            | [✅](ubuntu.md)   | [✅](ubuntu.md)   | [✅](ubuntu.md)          | [✅](ubuntu.md) | [✅](ubuntu.md) |
+| [Binaries](binaries.md)                        | [✅](binaries.md) | [✅](binaries.md) | [✅](binaries.md)        |                 |                 |
 
 ### Other Linux distros
 
