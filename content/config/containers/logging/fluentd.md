@@ -119,7 +119,7 @@ connection is established. Defaults to `false`.
 
 Sets the number of events buffered on the memory. Records will be stored in memory
 up to this number. If the buffer is full, the call to record logs will fail.
-The default is 8192.
+The default is 1048576.
 (https://github.com/fluent/fluent-logger-golang/tree/master#bufferlimit)
 
 ### fluentd-retry-wait
