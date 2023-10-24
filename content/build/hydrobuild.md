@@ -247,6 +247,52 @@ jobs:
 ```
 
 {{< /tab >}}
+{{< tab name="GitLab" >}}
+
+```yaml
+default:
+  image: docker:24-dind
+  services:
+    - docker:24-dind
+  before_script:
+    - docker info
+    - echo "$DOCKER_PAT" | docker login --username "$DOCKER_USER" --password-stdin
+    - |
+      apk add curl jq
+      ARCH=${CI_RUNNER_EXECUTABLE_ARCH#*/}
+      BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+      mkdir -vp ~/.docker/cli-plugins/
+      curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+      chmod a+x ~/.docker/cli-plugins/docker-buildx
+    - docker buildx create --use --driver cloud ${DOCKER_ORG}/default
+
+variables:
+  IMAGE_NAME: <IMAGE>
+  DOCKER_ORG: <ORG>
+
+# Build multi-platform image and push to a registry
+build_push:
+  stage: build
+  script:
+    - |
+      docker buildx build \
+        --platform linux/amd64,linux/arm64 \
+        --tag "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}" \
+        --push .
+
+# Build an image and discard the result
+build_cache:
+  stage: build
+  script:
+    - |
+      docker buildx build \
+        --platform linux/amd64,linux/arm64 \
+        --tag "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}" \
+        --output type=cacheonly \
+        --push .
+```
+
+{{< /tab >}}
 {{< tab name="CircleCI" >}}
 
 ```yaml
