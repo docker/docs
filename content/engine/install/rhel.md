@@ -3,7 +3,7 @@ description: Learn how to install Docker Engine on RHEL. These instructions cove
   the different installation methods, how to uninstall, and next steps.
 keywords: requirements, apt, installation, rhel, rpm, install, install docker engine, uninstall, upgrade,
   update, s390x, ibm-z
-title: Install Docker Engine on RHEL
+title: Install Docker Engine on RHEL (s390x)
 toc_max: 4
 aliases:
 - /ee/docker-ee/rhel/
@@ -17,17 +17,21 @@ aliases:
 download-url-base: https://download.docker.com/linux/rhel
 ---
 
+> **Note**
+>
+> The installation instructions on this page refer to packages for RHEL on the
+> **s390x** architecture (IBM Z). Other architectures, including x86_64, aren't
+> yet supported for RHEL.
+>
+> For other architectures, you may be able to install the CentOS packages.
+> Refer to [Install Docker Engine on CentOS](centos.md).
+{ .warning }
+
 To get started with Docker Engine on RHEL, make sure you
 [meet the prerequisites](#prerequisites), and then follow the
 [installation steps](#installation-methods).
 
 ## Prerequisites
-
-> **Note**
->
-> We currently only provide packages for RHEL on s390x (IBM Z). Other architectures
-> are not yet supported for RHEL, but you may be able to install the CentOS packages
-> on RHEL. Refer to the [Install Docker Engine on CentOS](centos.md) page for details.
 
 ### OS requirements
 

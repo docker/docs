@@ -253,8 +253,6 @@ several more.
 - Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`,
   `cpuset`, `mem_limit`, `memswap_limit`, `extends`, `group_add`. See
   the [upgrading](#upgrading) guide for how to migrate away from these.
-  For more information on `extends`, see
-  [Extending services](../multiple-compose-files/extends.md).
 
 - Added: [deploy](compose-file-v3.md#deploy)
 

@@ -37,7 +37,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 - WSL version 1.1.3.0 or later.
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
-- Windows 10 64-bit: Home or Pro 21H2 (build 19045) or higher, or Enterprise or Education 21H2 (build 19045) or higher. 
+- Windows 10 64-bit: Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run

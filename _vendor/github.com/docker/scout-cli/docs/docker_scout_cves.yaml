@@ -124,6 +124,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: only-metric
+      value_type: stringSlice
+      default_value: '[]'
+      description: |
+        Comma separated list of CVSS metrics (like AV:N or PR:L) to filter CVEs by
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: only-package
       value_type: stringSlice
       default_value: '[]'
@@ -170,6 +181,16 @@ options:
       value_type: bool
       default_value: "false"
       description: Filter to unfixed CVEs
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-vex-affected
+      value_type: bool
+      default_value: "false"
+      description: Filter CVEs by VEX statements with status not affected
       deprecated: false
       hidden: false
       experimental: false
@@ -239,8 +260,8 @@ options:
       value_type: bool
       default_value: "false"
       description: Apply VEX statements to filter CVEs
-      deprecated: false
-      hidden: false
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
