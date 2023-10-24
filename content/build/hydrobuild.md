@@ -228,8 +228,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PAT }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
@@ -313,7 +313,7 @@ jobs:
           curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
           chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      - run: echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
       - run: docker buildx create --use --driver cloud "<ORG>/default"
 
       - run: |
@@ -336,7 +336,7 @@ jobs:
           curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
           chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      - run: echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
       - run: docker buildx create --use --driver cloud "<ORG>/default"
 
       - run: |
@@ -369,8 +369,8 @@ mkdir -vp ~/.docker/cli-plugins/
 curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-# Login to Docker Hub. For security reasons $DOCKER_PASS should be a Personal Access Token. See https://docs.docker.com/security/for-developers/access-tokens/
-echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+# Login to Docker Hub. For security reasons $DOCKER_PAT should be a Personal Access Token. See https://docs.docker.com/security/for-developers/access-tokens/
+echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
 
 # Connect to your builder and set it as the default builder
 docker buildx create --use --driver cloud "<ORG>/default"
