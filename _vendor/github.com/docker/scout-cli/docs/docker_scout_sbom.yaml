@@ -42,6 +42,7 @@ options:
         Output format:
         - list: list of packages of the image
         - json: json representation of the SBOM
+        - spdx: spdx representation of the SBOM
       deprecated: false
       hidden: false
       experimental: false
