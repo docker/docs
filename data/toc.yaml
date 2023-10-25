@@ -1154,8 +1154,6 @@ Manuals:
             title: How does it work?
           - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
             title: Key features and benefits
-          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
-            title: FAQs and known issues
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -2218,3 +2216,9 @@ FAQ:
         title: Manage users
   - path: /subscription/faq/
     title: Subscription
+  - sectiontitle: Security
+    section:
+    - path: /faq/security/general/
+      title: Security
+    - path: /faq/security/eci-faq/
+      title: Enhanced Container Isolation
