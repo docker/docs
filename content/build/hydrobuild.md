@@ -228,8 +228,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PAT }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
@@ -244,6 +244,52 @@ jobs:
           # For pull requests, export results to the build cache.
           # Otherwise, push to a registry.
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
+```
+
+{{< /tab >}}
+{{< tab name="GitLab" >}}
+
+```yaml
+default:
+  image: docker:24-dind
+  services:
+    - docker:24-dind
+  before_script:
+    - docker info
+    - echo "$DOCKER_PAT" | docker login --username "$DOCKER_USER" --password-stdin
+    - |
+      apk add curl jq
+      ARCH=${CI_RUNNER_EXECUTABLE_ARCH#*/}
+      BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+      mkdir -vp ~/.docker/cli-plugins/
+      curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+      chmod a+x ~/.docker/cli-plugins/docker-buildx
+    - docker buildx create --use --driver cloud ${DOCKER_ORG}/default
+
+variables:
+  IMAGE_NAME: <IMAGE>
+  DOCKER_ORG: <ORG>
+
+# Build multi-platform image and push to a registry
+build_push:
+  stage: build
+  script:
+    - |
+      docker buildx build \
+        --platform linux/amd64,linux/arm64 \
+        --tag "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}" \
+        --push .
+
+# Build an image and discard the result
+build_cache:
+  stage: build
+  script:
+    - |
+      docker buildx build \
+        --platform linux/amd64,linux/arm64 \
+        --tag "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}" \
+        --output type=cacheonly \
+        --push .
 ```
 
 {{< /tab >}}
@@ -267,7 +313,7 @@ jobs:
           curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
           chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      - run: echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
       - run: docker buildx create --use --driver cloud "<ORG>/default"
 
       - run: |
@@ -290,7 +336,7 @@ jobs:
           curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
           chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-      - run: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      - run: echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
       - run: docker buildx create --use --driver cloud "<ORG>/default"
 
       - run: |
@@ -309,6 +355,84 @@ workflows:
 ```
 
 {{< /tab >}}
+{{< tab name="Buildkite" >}}
+
+The following example sets up a Buildkite pipeline using Hydrobuild. The
+example assumes that the pipeline name is `build-push-docker` and that you
+manage the Docker access token using environment hooks, but feel free to adapt
+this to your needs.
+
+Add the following `environment` hook agent's hook directory:
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+if [[ "$BUILDKITE_PIPELINE_NAME" == "build-push-docker" ]]; then
+ export DOCKER_PAT="<DOCKER_PERSONAL_ACCESS_TOKEN>"
+fi
+```
+
+Create a `pipeline.yml` that uses the `docker-login` plugin:
+
+```yaml
+env:
+  DOCKER_ORG: <ORG>
+  IMAGE_NAME: <IMAGE>
+
+steps:
+  - command: ./build.sh
+    key: build-push
+    plugins:
+      - docker-login#v2.1.0:
+          username: <DOCKER_USER>
+          password-env: DOCKER_PAT # the variable name in the environment hook
+```
+
+Create the `build.sh` script:
+
+```bash
+DOCKER_DIR=/usr/libexec/docker
+
+# Get download link for latest buildx binary.
+# Set $ARCH to the CPU architecture (e.g. amd64, arm64)
+UNAME_ARCH=`uname -m`
+case $UNAME_ARCH in
+  aarch64)
+    ARCH="arm64";
+    ;;
+  amd64)
+    ARCH="amd64";
+    ;;
+  *)
+    ARCH="amd64";
+    ;;
+esac
+BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+
+# Download docker buildx with Hyrdobuild support
+curl --silent -L --output $DOCKER_DIR/cli-plugins/docker-buildx $BUILDX_URL
+chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+# Connect to your builder and set it as the default builder
+docker buildx create --use --driver cloud "$DOCKER_ORG/default"
+
+# Cache-only image build
+docker buildx build \
+    --platform linux/amd64,linux/arm64 \
+    --tag "$IMAGE_NAME:$BUILDKITE_COMMIT" \
+    --output type=cacheonly \
+    .
+
+# Build, tag, and push a multi-arch docker image
+docker buildx build \
+    --platform linux/amd64,linux/arm64 \
+    --push \
+    --tag "$IMAGE_NAME:$BUILDKITE_COMMIT" \
+    .
+```
+
+{{< /tab >}}
 {{< tab name="Shell" >}}
 
 ```bash
@@ -323,8 +447,8 @@ mkdir -vp ~/.docker/cli-plugins/
 curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
 chmod a+x ~/.docker/cli-plugins/docker-buildx
 
-# Login to Docker Hub. For security reasons $DOCKER_PASS should be a Personal Access Token. See https://docs.docker.com/security/for-developers/access-tokens/
-echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+# Login to Docker Hub. For security reasons $DOCKER_PAT should be a Personal Access Token. See https://docs.docker.com/security/for-developers/access-tokens/
+echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
 
 # Connect to your builder and set it as the default builder
 docker buildx create --use --driver cloud "<ORG>/default"
