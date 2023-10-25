@@ -108,6 +108,8 @@ Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/
 
 - Synchronized file sharing proactively reports temporary issues, which can result in occasional **Conflict** and **Problem** indicators appearing in the GUI during synchronization. These can be ignored. However, if they persist, you can report the issue in the issue in the #docker-eap-sync-file-share Slack channel.
 
+- If you switch from WSL2 to Hyper-V on Windows, Docker Desktop needs to be fully restarted.
+
 ## Feedback
 
 Thanks for trying the new Synchronized file sharing feature. Give feedback or report any bugs you may find through the #docker-eap-sync-file-share Slack channel.
