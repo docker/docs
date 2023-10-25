@@ -355,6 +355,84 @@ workflows:
 ```
 
 {{< /tab >}}
+{{< tab name="Buildkite" >}}
+
+The following example sets up a Buildkite pipeline using Hydrobuild. The
+example assumes that the pipeline name is `build-push-docker` and that you
+manage the Docker access token using environment hooks, but feel free to adapt
+this to your needs.
+
+Add the following `environment` hook agent's hook directory:
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+if [[ "$BUILDKITE_PIPELINE_NAME" == "build-push-docker" ]]; then
+ export DOCKER_PAT="<DOCKER_PERSONAL_ACCESS_TOKEN>"
+fi
+```
+
+Create a `pipeline.yml` that uses the `docker-login` plugin:
+
+```yaml
+env:
+  DOCKER_ORG: <ORG>
+  IMAGE_NAME: <IMAGE>
+
+steps:
+  - command: ./build.sh
+    key: build-push
+    plugins:
+      - docker-login#v2.1.0:
+          username: <DOCKER_USER>
+          password-env: DOCKER_PAT # the variable name in the environment hook
+```
+
+Create the `build.sh` script:
+
+```bash
+DOCKER_DIR=/usr/libexec/docker
+
+# Get download link for latest buildx binary.
+# Set $ARCH to the CPU architecture (e.g. amd64, arm64)
+UNAME_ARCH=`uname -m`
+case $UNAME_ARCH in
+  aarch64)
+    ARCH="arm64";
+    ;;
+  amd64)
+    ARCH="amd64";
+    ;;
+  *)
+    ARCH="amd64";
+    ;;
+esac
+BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+
+# Download docker buildx with Hyrdobuild support
+curl --silent -L --output $DOCKER_DIR/cli-plugins/docker-buildx $BUILDX_URL
+chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+# Connect to your builder and set it as the default builder
+docker buildx create --use --driver cloud "$DOCKER_ORG/default"
+
+# Cache-only image build
+docker buildx build \
+    --platform linux/amd64,linux/arm64 \
+    --tag "$IMAGE_NAME:$BUILDKITE_COMMIT" \
+    --output type=cacheonly \
+    .
+
+# Build, tag, and push a multi-arch docker image
+docker buildx build \
+    --platform linux/amd64,linux/arm64 \
+    --push \
+    --tag "$IMAGE_NAME:$BUILDKITE_COMMIT" \
+    .
+```
+
+{{< /tab >}}
 {{< tab name="Shell" >}}
 
 ```bash
