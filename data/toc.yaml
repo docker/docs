@@ -2219,6 +2219,6 @@ FAQ:
   - sectiontitle: Security
     section:
     - path: /faq/security/general/
-      title: Security
+      title: General
     - path: /faq/security/eci-faq/
       title: Enhanced Container Isolation
