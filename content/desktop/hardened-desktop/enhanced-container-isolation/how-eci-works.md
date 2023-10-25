@@ -20,7 +20,7 @@ When [Enhanced Container Isolation is enabled](index.md#how-do-i-enable-enhanced
 created by users through `docker run` or `docker create` are automatically
 launched using Sysbox instead of the standard OCI runc runtime. Users need not
 do anything else and can continue to use containers as usual. For exceptions,
-see [FAQs and known issues](faq.md).
+see [FAQs](../../../faq/security/eci-faq.md).
 
 Even containers that use the insecure `--privileged` flag can now be run
 securely with Enhanced Container Isolation, such that they can no longer be used
