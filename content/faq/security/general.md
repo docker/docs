@@ -1,7 +1,7 @@
 ---
-description: Security FAQs
+description: Find the answers to common security related FAQs
 keywords: Docker, Docker Hub, Docker Desktop secuirty FAQs, secuirty, platform
-title: Secuirty FAQs
+title: Security FAQs
 ---
 
 ## How does Docker Desktop handle and store authentication information?

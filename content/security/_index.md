@@ -58,7 +58,7 @@ grid_resources:
   icon: help
   link: /faq/security/general/
 - title: Security best practices
-  description: Understand the small steps you can take to improve the security of your container.
+  description: Understand the steps you can take to improve the security of your container.
   icon: category
   link: /develop/security-best-practices/
 ---
