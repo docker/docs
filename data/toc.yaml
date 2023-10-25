@@ -113,7 +113,7 @@ Guides:
       path: /language/rust/develop/
     - title: "Configure CI/CD"
       path: /language/rust/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/rust/deploy/
 - sectiontitle: Develop with Docker
   section:
