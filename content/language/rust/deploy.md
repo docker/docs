@@ -49,16 +49,22 @@ spec:
           name: server
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
-              hostPort: 8080
+            - containerPort: 8000
+              hostPort: 5000
               protocol: TCP
           env:
+            - name: ADDRESS
+              value: 0.0.0.0:8000
             - name: PG_DBNAME
               value: example
-            - name: PG_PASSWORD
-              value: mysecretpassword
             - name: PG_HOST
               value: db
+            - name: PG_PASSWORD
+              value: mysecretpassword
+            - name: PG_USER
+              value: postgres
+            - name: RUST_LOG
+              value: debug
           resources: {}
       restartPolicy: Always
 status: {}
@@ -88,6 +94,8 @@ spec:
               value: example
             - name: POSTGRES_PASSWORD
               value: mysecretpassword
+            - name: POSTGRES_USER
+              value: postgres
           image: postgres
           name: db
           ports:
@@ -107,9 +115,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - name: "8080"
-      port: 8080
-      targetPort: 80
+    - name: "5000"
+      port: 5000
+      targetPort: 8000
       nodePort: 30001
   selector:
     service: server
@@ -134,13 +142,13 @@ status:
   loadBalancer: {}
 ```
 
-In this Kubernetes YAML file, there are two objects, separated by the `---`:
+In this Kubernetes YAML file, there are four objects, separated by the `---`. In addition to a Service and Deployment for the database, the other two objects are:
 
  - A Deployment, describing a scalable group of identical pods. In this case,
    you'll get just one replica, or copy of your pod. That pod, which is
-   described under `template`, has just one container in it. The
-    container is created from the image built by GitHub Actions in [Configure CI/CD for
-    your Python application](configure-ci-cd.md).
+   described under `template`, has just one container in it. The container is
+    created from the image built by GitHub Actions in [Configure CI/CD for your
+    Rust application](configure-ci-cd.md).
  - A NodePort service, which will route traffic from port 30001 on your host to
    port 5000 inside the pods it routes to, allowing you to reach your app
    from the network.
@@ -149,18 +157,20 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
 ## Deploy and check your application
 
-1. In a terminal, navigate to `python-docker-dev` and deploy your application to
-   Kubernetes.
+1. In a terminal, navigate to `docker-rust-postgres` and deploy your application
+   to Kubernetes.
 
    ```console
-   $ kubectl apply -f docker-python-kubernetes.yaml
+   $ kubectl apply -f docker-rust-kubernetes.yaml
    ```
 
    You should see output that looks like the following, indicating your Kubernetes objects were created successfully.
 
    ```shell
-   deployment.apps/docker-python-demo created
-   service/service-entrypoint created
+   deployment.apps/server created
+   deployment.apps/db created
+   service/server created
+   service/db created
    ```
 
 2. Make sure everything worked by listing your deployments.
@@ -173,10 +183,11 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    ```shell
    NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
-   docker-python-demo   1/1     1            1           15s
+   db       1/1     1            1           2m21s
+   server   1/1     1            1           2m21s
    ```
 
-   This indicates all one of the pods you asked for in your YAML are up and running. Do the same check for your services.
+   This indicates all of the pods you asked for in your YAML are up and running. Do the same check for your services.
 
    ```console
    $ kubectl get services
@@ -185,25 +196,25 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    You should get output like the following.
 
    ```shell
-   NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-   kubernetes           ClusterIP   10.96.0.1       <none>        443/TCP          23h
-   service-entrypoint   NodePort    10.99.128.230   <none>        5000:30001/TCP   75s
+   NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+   db           ClusterIP   10.105.167.81    <none>        5432/TCP         109s
+   kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP          9d
+   server       NodePort    10.101.235.213   <none>        5000:30001/TCP   109s
    ```
 
    In addition to the default `kubernetes` service, you can see your `service-entrypoint` service, accepting traffic on port 30001/TCP.
 
-3. In a terminal, curl the service. Note that a database was not deployed in
-   this example.
+3. In a terminal, curl the service.
 
    ```console
-   $ curl http://localhost:30001/
-   Hello, Docker!!!
+   $ curl http://localhost:30001/users
+   [{"id":1,"login":"root"}]
    ```
 
 4. Run the following command to tear down your application.
 
    ```console
-   $ kubectl delete -f docker-python-kubernetes.yaml
+   $ kubectl delete -f docker-rust-kubernetes.yaml
    ```
 
 ## Summary
