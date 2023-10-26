@@ -45,7 +45,7 @@ Before you get started with Synchronized file sharing, you need to:
 To enable Synchronized file sharing:
 1. Sign in to Docker Desktop.
 2. In **Settings**, navigate to the **File sharing** tab within the **Resources** section. 
-3. On your keyboard, press and hold the `Shift` key along with the `Command` key (Mac) or `Windows`, then click anywhere within the description text to reveal a pop-up.
+3. On your keyboard, press and hold the `Shift` key along with the `Command` key (Mac) or `Windows` key (Windows), then click anywhere within the description text to reveal a pop-up.
 4. Select **Restart**. The Docker Dashboard closes.
 
 When you re-open the Docker Dashboard, Synchronized file sharing is enabled and ready for you to create your first file share instance.
