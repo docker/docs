@@ -17,7 +17,7 @@ application.
 
 To complete this tutorial, you need the following:
 
-- Go version 1.19 or later. Visit the [download page for Go](https://golang.org/dl/) first and install the toolchain.
+- Go supported versions (1.20+). Visit the [download page for Go](https://golang.org/dl/) first and install the toolchain.
 - Docker running locally. Follow the [instructions to download and install Docker](../../desktop/index.md).
 - An IDE or a text editor to edit files. [Visual Studio Code](https://code.visualstudio.com/) is a free and popular choice but you can use anything you feel comfortable with.
 - A Git client. This guide uses a command-line based `git` client, but you are free to use whatever works for you.
