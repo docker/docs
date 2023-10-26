@@ -1652,7 +1652,7 @@ Manuals:
       - path: /config/containers/runmetrics/
         title: Collect runtime metrics
       - path: /config/containers/multi-service_container/
-        title: Run multiple services in a container
+        title: Run multiple processes in a container
       - path: /config/daemon/prometheus/
         title: Collect metrics with Prometheus
     - sectiontitle: Daemon configuration
