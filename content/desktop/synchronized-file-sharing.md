@@ -18,7 +18,7 @@ Synchronized file sharing is an alternative file sharing mechanism powered by [M
  
 ## Who is it for?
 
-For developers who: 
+Synchronized file sharing is for developers who: 
 - Have large repositories or monorepos with 100 000 files or more totaling hundreds of megabytes or even gigabytes.
 - Are using virtual filesystems, such as VirtioFS, gRPC FUSE, and osxfs, which are no longer scaling well with their codebases. 
 - Regularly encounter performance limitations.
@@ -26,7 +26,7 @@ For developers who:
 
 ## How does Synchronized file sharing work?
 
-A Synchronized file share behaves just like a virtual file share, but takes advantage of Mutagen's high-performance, low-latency code synchronization engine to create a synchronized cache of the host files on an ext4 filesystem within the Docker Desktop VM. If you make filesystem changes on the host or in the VM’s containers it propagates via bidirectional synchronization.
+A Synchronized file share behaves just like a virtual file share, but takes advantage of Mutagen's high-performance, low-latency code synchronization engine to create a synchronized cache of the host files on an ext4 filesystem within the Docker Desktop VM. If you make filesystem changes on the host or in the VM’s containers, it propagates via bidirectional synchronization.
 
 After creating a file share instance, any container using a bind mount that points to a location on the host filesystem matching the specified synchronized file share location, utilizes the Synchronized file sharing feature. Bind mounts that don't satisfy this condition are passed to the normal virtual filesystem bind-mounting mechanism, for example VirtioFS or gRPC-FUSE.
 
@@ -97,7 +97,7 @@ Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/
 
 - Upon launching Docker Desktop, it can take between 5-10 seconds for Synchronized file sharing to fully initialize. During this window, file share instances display as **Connecting** and any new containers created during this window won't replace bind mounts with Synchronized file sharing.
 
-- `.syncignore` changes won't cause deletion until file share recreation. In other words, files that become ignored due to a modification to `.syncignore` are left in place, but no longer update through synchronization.
+- Changes made to `.syncignore` don't lead to immediate deletions unless the file share is recreated. In other words, files that are newly ignored due to modifications in the `.syncignore` file remain in their current location, but are no longer updated during synchronization.
 
 - Case conflicts, due to Linux being case-sensitive and macOS/Windows only being case-preserving, display as **File exists** problems in the GUI. These can be ignored. However, if they persist, you can report the issue.
 
