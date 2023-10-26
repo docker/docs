@@ -46,6 +46,9 @@ If you choose the integrated terminal, you can run commands in a running contain
     > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
     { .tip }
 
+
+- **Use Rosetta for x86/AMD64 emulation on Apple Silicon**. Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. You must also be on macOS Ventura or later. 
+
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
   troubleshoot the application. Clear the checkbox to opt out. Docker may
@@ -282,10 +285,6 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 #### Use containerd for pulling and storing images
 
 Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
-
-#### Use Rosetta for x86/AMD64 emulation on Apple Silicon.
-
-Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab.
 
 ### Experimental features
 
