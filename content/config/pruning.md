@@ -175,3 +175,15 @@ Are you sure you want to continue? [y/N] y
 
 By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
+
+By default, all unused containers, networks, images (both dangling and unreferenced)
+are removed. You can limit the scope using the 
+`--filter` flag. For instance, the following command removes items older than 24 hours:
+
+```console
+$ docker system prune --filter "until=24h"
+```
+
+Other filtering expressions are available. See the
+[`docker system prune` reference](../engine/reference/commandline/system_prune.md)
+for more examples.
