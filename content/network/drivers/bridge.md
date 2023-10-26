@@ -15,14 +15,14 @@ In terms of networking, a bridge network is a Link Layer device
 which forwards traffic between network segments. A bridge can be a hardware
 device or a software device running within a host machine's kernel.
 
-In terms of Docker, a bridge network uses a software bridge which allows
-containers connected to the same bridge network to communicate, while providing
-isolation from containers which are not connected to that bridge network. The
+In terms of Docker, a bridge network uses a software bridge which lets
+containers connected to the same bridge network communicate, while providing
+isolation from containers that aren't connected to that bridge network. The
 Docker bridge driver automatically installs rules in the host machine so that
-containers on different bridge networks cannot communicate directly with each
+containers on different bridge networks can't communicate directly with each
 other.
 
-Bridge networks apply to containers running on the **same** Docker daemon host.
+Bridge networks apply to containers running on the same Docker daemon host.
 For communication among containers running on different Docker daemon hosts, you
 can either manage routing at the OS level, or you can use an
 [overlay network](overlay.md).
@@ -82,7 +82,7 @@ network.**
 
   Originally, the only way to share environment variables between two containers
   was to link them using the [`--link` flag](../links.md). This type of
-  variable sharing is not possible with user-defined networks. However, there
+  variable sharing isn't possible with user-defined networks. However, there
   are superior ways to share environment variables. A few ideas:
 
   - Multiple containers can mount a file or directory containing the shared
@@ -219,7 +219,7 @@ recommended for production use. Configuring it is a manual operation, and it has
 If you do not specify a network using the `--network` flag, and you do specify a
 network driver, your container is connected to the default `bridge` network by
 default. Containers connected to the default `bridge` network can communicate,
-but only by IP address, unless they are linked using the
+but only by IP address, unless they're linked using the
 [legacy `--link` flag](../links.md).
 
 ### Configure the default bridge network
