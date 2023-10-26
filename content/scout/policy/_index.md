@@ -52,7 +52,7 @@ open-source licenses.
 
 ## Default policies
 
-Docker Scout ships the following three out-of-the-box policies:
+Docker Scout ships the following four out-of-the-box policies:
 
 - [Critical and high vulnerabilities with fixes](#critical-and-high-vulnerabilities-with-fixes)
 - [Critical vulnerabilities](#critical-vulnerabilities)
