@@ -69,7 +69,7 @@ Guides:
       path: /language/java/run-tests/
     - title: "Configure CI/CD"
       path: /language/java/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/java/deploy/
   - sectiontitle: Go
     section:
