@@ -312,3 +312,7 @@ On the **Advanced** tab, you can reconfigure your initial installation settings:
   For more information on each configuration and use case, see [Permission requirements](../mac/permission-requirements.md).
 
 - **Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
+
+## Notifications
+
+{{< include "desktop-notifications-settings.md" >}}
