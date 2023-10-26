@@ -39,6 +39,7 @@ Using the `admin-settings.json` file, admins can:
 - Configure Docker Engine
 - Turn off Docker Desktop's ability to checks for updates
 - Turn off Docker Extensions
+- Turn off Docker Scout SBOM indexing
 
 For more details on the syntax and options admins can set, see [Configure Settings Management](configure.md).
 

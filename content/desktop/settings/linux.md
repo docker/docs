@@ -44,6 +44,10 @@ If you choose the integrated terminal, you can run commands in a running contain
 
 - **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
 
+- **SBOM Indexing**. When this option is enabled, inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout.
+
+- **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
+
 ## Resources
 
 The **Resources** tab allows you to configure CPU, memory, disk, proxies,
