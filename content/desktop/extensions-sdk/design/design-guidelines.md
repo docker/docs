@@ -4,15 +4,15 @@ description: Docker extension design
 keywords: Docker, extensions, design
 ---
 
-At Docker, we aim to build tools that integrate into a user's existing workflows rather than requiring them to adopt new ones. We strongly recommend that you follow these guidelines when building extensions. We review and approve your Marketplace publication based on these requirements.
+At Docker, we aim to build tools that integrate into a user's existing workflows rather than requiring them to adopt new ones. We strongly recommend that you follow these guidelines when creating extensions. We review and approve your Marketplace publication based on these requirements.
 
-Here is a simple checklist to go through when building your extension:
+Here is a simple checklist to go through when creating your extension:
 - Is it easy to get started?
 - Is it easy to use?
 - Is it easy to get help when needed?
 
 
-## Build a consistent experience with Docker Desktop.
+## Create a consistent experience with Docker Desktop.
 
 Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-mui-theme) and the [Docker Extensions Styleguide](https://www.figma.com/file/U7pLWfEf6IQKUHLhdateBI/Docker-Design-Guidelines?node-id=1%3A28771) to ensure that your extension feels like it is part of Docker Desktop to create a seamless experience for users.
 
@@ -54,7 +54,7 @@ Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-
 
 ## Onboarding new users
 
-When building your extension, ensure that first time users of the extension and your product can understand its value-add and adopt it easily. Ensure you include contextual help within the extension.
+When creating your extension, ensure that first time users of the extension and your product can understand its value-add and adopt it easily. Ensure you include contextual help within the extension.
 
 - Ensure that all necessary information is added to the extensions Marketplace as well as the extensions detail page. This should include:
   - Screenshots of the extension. Note that the recommended size for screenshots is 2400x1600 pixels. 
