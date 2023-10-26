@@ -1662,7 +1662,7 @@ Manuals:
       - path: /config/daemon/systemd/
         title: Configure with systemd
       - path: /config/containers/live-restore/
-        title: Keep containers alive during daemon downtime
+        title: Live restore
       - path: /config/daemon/troubleshoot/
         title: Troubleshoot
       - path: /config/daemon/remote-access/
