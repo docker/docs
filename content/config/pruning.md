@@ -177,7 +177,7 @@ By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
 
 By default, all unused containers, networks, images (both dangling and unreferenced)
-are removed. If you are using docker {{< badge color=blue text="API 1.28+" >}}, you can limit the scope using the 
+are removed. You can limit the scope using the 
 `--filter` flag. For instance, the following command removes items older than 24 hours:
 
 ```console
