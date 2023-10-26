@@ -1,5 +1,5 @@
 ---
-description: Pruning unused objects
+description: Free up disk space by removing unused resources with the prune command
 keywords: pruning, prune, images, volumes, containers, networks, disk, administration,
   garbage collection
 title: Prune unused Docker objects
@@ -9,7 +9,7 @@ aliases:
 
 Docker takes a conservative approach to cleaning up unused objects (often
 referred to as "garbage collection"), such as images, containers, volumes, and
-networks: these objects are generally not removed unless you explicitly ask
+networks. These objects are generally not removed unless you explicitly ask
 Docker to do so. This can cause Docker to use extra disk space. For each type of
 object, Docker provides a `prune` command. In addition, you can use `docker
 system prune` to clean up multiple types of objects at once. This topic shows
@@ -19,7 +19,7 @@ how to use these `prune` commands.
 
 The `docker image prune` command allows you to clean up unused images. By
 default, `docker image prune` only cleans up _dangling_ images. A dangling image
-is one that is not tagged and is not referenced by any container. To remove
+is one that isn't tagged, and isn't referenced by any container. To remove
 dangling images:
 
 ```console
@@ -29,7 +29,7 @@ WARNING! This will remove all dangling images.
 Are you sure you want to continue? [y/N] y
 ```
 
-To remove all images which are not used by existing containers, use the `-a`
+To remove all images which aren't used by existing containers, use the `-a`
 flag:
 
 ```console
@@ -56,7 +56,7 @@ for more examples.
 
 ## Prune containers
 
-When you stop a container, it is not automatically removed unless you started it
+When you stop a container, it isn't automatically removed unless you started it
 with the `--rm` flag. To see all containers on the Docker host, including
 stopped containers, use `docker ps -a`. You may be surprised how many containers
 exist, especially on a development system! A stopped container's writable layers
@@ -70,7 +70,7 @@ WARNING! This will remove all stopped containers.
 Are you sure you want to continue? [y/N] y
 ```
 
-By default, you are prompted to continue. To bypass the prompt, use the `-f` or
+By default, you're prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
 
 By default, all stopped containers are removed. You can limit the scope using
@@ -103,7 +103,7 @@ By default, you are prompted to continue. To bypass the prompt, use the `-f` or
 
 By default, all unused volumes are removed. You can limit the scope using
 the `--filter` flag. For instance, the following command only removes
-volumes which are not labelled with the `keep` label:
+volumes which aren't labelled with the `keep` label:
 
 ```console
 $ docker volume prune --filter "label!=keep"
@@ -127,7 +127,7 @@ WARNING! This will remove all networks not used by at least one container.
 Are you sure you want to continue? [y/N] y
 ```
 
-By default, you are prompted to continue. To bypass the prompt, use the `-f` or
+By default, you're prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
 
 By default, all unused networks are removed. You can limit the scope using
@@ -145,7 +145,7 @@ for more examples.
 ## Prune everything
 
 The `docker system prune` command is a shortcut that prunes images, containers,
-and networks. Volumes are not pruned by default, and you must specify the
+and networks. Volumes aren't pruned by default, and you must specify the
 `--volumes` flag for `docker system prune` to prune volumes.
 
 ```console
@@ -173,12 +173,12 @@ WARNING! This will remove:
 Are you sure you want to continue? [y/N] y
 ```
 
-By default, you are prompted to continue. To bypass the prompt, use the `-f` or
+By default, you're prompted to continue. To bypass the prompt, use the `-f` or
 `--force` flag.
 
-By default, all unused containers, networks, images (both dangling and unreferenced)
-are removed. You can limit the scope using the 
-`--filter` flag. For instance, the following command removes items older than 24 hours:
+By default, all unused containers, networks, and images are removed. You can
+limit the scope using the `--filter` flag. For instance, the following command
+removes items older than 24 hours:
 
 ```console
 $ docker system prune --filter "until=24h"
