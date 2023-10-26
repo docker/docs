@@ -10,7 +10,7 @@ grid:
     icon: "checklist"
     link: "/desktop/extensions-sdk/process/"
   - title: "Quickstart guide"
-    description: Follow the quickstart guide to build a basic Docker Extension quickly.
+    description: Follow the quickstart guide to create a basic Docker Extension quickly.
     icon: "explore"
     link: "/desktop/extensions-sdk/quickstart/"
   - title: "View the design guidelines"
