@@ -3,6 +3,8 @@ title: FAQs
 description: Frequently asked questions for Enhanced Container Isolation
 keywords: enhanced container isolation, security, faq, sysbox, Docker Desktop
 toc_max: 2
+aliases:
+- /desktop/hardened-desktop/enhanced-container-isolation/faq/
 ---
 
 ### Do I need to change the way I use Docker when Enhanced Container Isolation is switched on?

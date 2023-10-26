@@ -52,6 +52,15 @@ grid_developers:
   description: Learn how to use secrets in Docker Compose.
   icon: privacy_tip
   link: /compose/use-secrets/
+grid_resources:
+- title: Security FAQs
+  description: Explore common security FAQs.
+  icon: help
+  link: /faq/security/general/
+- title: Security best practices
+  description: Understand the steps you can take to improve the security of your container.
+  icon: category
+  link: /develop/security-best-practices/
 ---
 
 Docker provides security guardrails for both administrators and developers. 
@@ -72,3 +81,7 @@ Explore the security features Docker offers to satisfy your company's security p
 See how you can protect your local environments, infrastructure, and networks without impeding productivity.
 
 {{< grid grid_developers >}}  
+
+## Further resources
+
+{{< grid grid_resources >}}

@@ -57,7 +57,7 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 
 >**Important**
 >
->Enhanced Container Isolation does not protect Kubernetes pods. For more information on known limitations and workarounds, see [FAQs and known issues](faq.md).
+>Enhanced Container Isolation does not protect Kubernetes pods. For more information on known limitations and workarounds, see [FAQs](../../../faq/security/eci-faq.md).
 { .important }
 
 ### What host OSes / platforms is Enhanced Container Isolation supported on?
@@ -85,7 +85,7 @@ To enable Enhanced Container Isolation as a developer:
 
 >**Important**
 >
->Enhanced Container Isolation does not protect containers created prior to enabling ECI. For more information on known limitations and workarounds, see [FAQs and known issues](faq.md).
+>Enhanced Container Isolation does not protect containers created prior to enabling ECI. For more information on known limitations and workarounds, see [FAQs](../../../faq/security/eci-faq.md).
 { .important }
 
 #### As an admin
