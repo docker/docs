@@ -1652,7 +1652,7 @@ Manuals:
       - path: /config/containers/runmetrics/
         title: Collect runtime metrics
       - path: /config/containers/multi-service_container/
-        title: Run multiple services in a container
+        title: Run multiple processes in a container
       - path: /config/daemon/prometheus/
         title: Collect metrics with Prometheus
     - sectiontitle: Daemon configuration
@@ -1662,7 +1662,7 @@ Manuals:
       - path: /config/daemon/systemd/
         title: Configure with systemd
       - path: /config/containers/live-restore/
-        title: Keep containers alive during daemon downtime
+        title: Live restore
       - path: /config/daemon/troubleshoot/
         title: Troubleshoot
       - path: /config/daemon/remote-access/

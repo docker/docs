@@ -1,10 +1,10 @@
 ---
-description: Describes how to use the Journald logging driver.
-keywords: Journald, docker, logging, driver
+description: Learn how to use the Journald logging driver with Docker Engine
+keywords: journald, systemd-journald, docker, logging, driver
 title: Journald logging driver
 aliases:
-- /engine/reference/logging/journald/
-- /engine/admin/logging/journald/
+  - /engine/reference/logging/journald/
+  - /engine/admin/logging/journald/
 ---
 
 The `journald` logging driver sends container logs to the
@@ -15,13 +15,13 @@ Log entries can be retrieved using the `journalctl` command, through use of the
 In addition to the text of the log message itself, the `journald` log driver
 stores the following metadata in the journal with each message:
 
-| Field                                | Description                                                                                                                                            |
-|:-------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `CONTAINER_ID`                       | The container ID truncated to 12 characters.                                                                                                           |
-| `CONTAINER_ID_FULL`                  | The full 64-character container ID.                                                                                                                    |
-| `CONTAINER_NAME`                     | The container name at the time it was started. If you use `docker rename` to rename a container, the new name is not reflected in the journal entries. |
-| `CONTAINER_TAG`, `SYSLOG_IDENTIFIER` | The container tag ([log tag option documentation](log_tags.md)).                                                                                       |
-| `CONTAINER_PARTIAL_MESSAGE`          | A field that flags log integrity. Improve logging of long log lines.                                                                                   |
+| Field                                | Description                                                                                                                                           |
+| :----------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CONTAINER_ID`                       | The container ID truncated to 12 characters.                                                                                                          |
+| `CONTAINER_ID_FULL`                  | The full 64-character container ID.                                                                                                                   |
+| `CONTAINER_NAME`                     | The container name at the time it was started. If you use `docker rename` to rename a container, the new name isn't reflected in the journal entries. |
+| `CONTAINER_TAG`, `SYSLOG_IDENTIFIER` | The container tag ([log tag option documentation](log_tags.md)).                                                                                      |
+| `CONTAINER_PARTIAL_MESSAGE`          | A field that flags log integrity. Improve logging of long log lines.                                                                                  |
 
 ## Usage
 
@@ -55,18 +55,18 @@ Use the `--log-opt NAME=VALUE` flag to specify additional `journald` logging
 driver options.
 
 | Option         | Required | Description                                                                                                                                                                   |
-|:---------------|:---------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `tag`          | optional | Specify template to set `CONTAINER_TAG` and `SYSLOG_IDENTIFIER` value in journald logs. Refer to [log tag option documentation](log_tags.md) to customize the log tag format. |
 | `labels`       | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for the container.                                                 |
 | `labels-regex` | optional | Similar to and compatible with labels. A regular expression to match logging-related labels. Used for advanced [log tag options](log_tags.md).                                |
 | `env`          | optional | Comma-separated list of keys of environment variables, which should be included in message, if these variables are specified for the container.                               |
-| `env-regex`    | optional | Similar to and compatible with env. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                    |
+| `env-regex`    | optional | Similar to and compatible with `env`. A regular expression to match logging-related environment variables. Used for advanced [log tag options](log_tags.md).                    |
 
-If a collision occurs between label and env keys, the value of the env takes
-precedence. Each option adds additional fields to the attributes of a logging
-message.
+If a collision occurs between `label` and `env` options, the value of the `env`
+takes precedence. Each option adds additional fields to the attributes of a
+logging message.
 
-Below is an example of the logging options required to log to journald.
+The following is an example of the logging options required to log to journald.
 
 ```console
 $ docker run \
@@ -79,7 +79,7 @@ $ docker run \
 ```
 
 This configuration also directs the driver to include in the payload the label
-location, and the environment variable TEST.  If the `--env "TEST=false"`
+location, and the environment variable `TEST`. If the `--env "TEST=false"`
 or `--label location=west` arguments were omitted, the corresponding key would
 not be set in the journald log.
 
@@ -87,7 +87,7 @@ not be set in the journald log.
 
 The value logged in the `CONTAINER_NAME` field is the name of the container that
 was set at startup. If you use `docker rename` to rename a container, the new
-name **is not reflected** in the journal entries. Journal entries continue
+name isn't reflected in the journal entries. Journal entries continue
 to use the original name.
 
 ## Retrieve log messages with `journalctl`
