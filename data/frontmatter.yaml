@@ -9,6 +9,28 @@
 # relative to the content directory. For upstream
 # page files, that's the target of the file mount.
 
+build/attestations/attestation-storage.md:
+  description: |
+    How SBOM and provenance attestations are stored for images.
+  keywords: |
+    build, attestations, sbom, provenance, storage, manifest
+
+build/attestations/slsa-definitions.md:
+  description: |
+    How BuildKit populates the fields in the SLSA provenance attestations.
+  keywords: |
+    build, attestations, provenance, slsa, definitions, reference
+
+build/bake/reference.md:
+  description: |
+    Learn about the syntax and available commands for the Buildx Bake file.
+  keywords: |
+    build, reference, buildx, bake, hcl
+
+build/buildkit/toml-configuration.md:
+  keywords: |
+    build, buildkit, configuration
+
 engine/reference/builder.md:
   description: |
     Find all the available commands you can use in a Dockerfile
