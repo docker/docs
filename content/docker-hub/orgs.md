@@ -20,7 +20,7 @@ detailed instructions on converting an existing user account to an organization,
 
 To create an organization:
 
-1. Sign in to [Docker Hub](https://hub.docker.com/) using your [Docker ID](../docker-id/index.md) or your email address.
+1. Sign in to [Docker Hub](https://hub.docker.com/) using your [Docker ID](../docker-id/index.md), your email address, or your social provider.
 2. Select **Organizations** and then **Create Organization** to create a new
    organization.
 3. Choose a plan for your organization and select **Buy Now**. See

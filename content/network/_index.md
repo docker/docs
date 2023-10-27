@@ -1,7 +1,7 @@
 ---
 title: Networking overview
-description: How networking works from the container's point of view
-keywords: networking, container, standalone
+description: Learn how networking works from the container's point of view
+keywords: networking, container, standalone, IP address, DNS resolution
 aliases:
 - /articles/networking/
 - /config/containers/container-networking/
@@ -69,7 +69,7 @@ Here are some examples:
 
 If you want to make a container accessible to other containers,
 it isn't necessary to publish the container's ports.
-Inter-container communication is enabled by connecting the containers to the
+You can enable inter-container communication by connecting the containers to the
 same network, usually a [bridge network](./drivers/bridge.md).
 
 ## IP address and hostname
@@ -79,7 +79,7 @@ A container receives an IP address out of the IP subnet of the network.
 The Docker daemon performs dynamic subnetting and IP address allocation for containers.
 Each network also has a default subnet mask and gateway.
 
-When a container starts, it can only attaches to a single network, using the `--network` flag.
+When a container starts, it can only attach to a single network, using the `--network` flag.
 You can connect a running container to additional networks using the `docker network connect` command.
 In both cases, you can use the `--ip` or `--ip6` flags to specify the container's IP address on that particular network.
 
@@ -106,7 +106,7 @@ configuration.
 | Flag           | Description                                                                                                                                                                                                                                                         |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--dns`        | The IP address of a DNS server. To specify multiple DNS servers, use multiple `--dns` flags. If the container can't reach any of the IP addresses you specify, it uses Google's public DNS server at `8.8.8.8`. This allows containers to resolve internet domains. |
-| `--dns-search` | A DNS search domain to search non-fully-qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                                            |
+| `--dns-search` | A DNS search domain to search non-fully qualified hostnames. To specify multiple DNS search prefixes, use multiple `--dns-search` flags.                                                                                                                            |
 | `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                                            |
 | `--hostname`   | The hostname a container uses for itself. Defaults to the container's ID if not specified.                                                                                                                                                                          |
 
@@ -123,8 +123,8 @@ against the embedded DNS server.
 
 It's rare that the external DNS server is faster than the embedded one. But
 things like garbage collection, or large numbers of concurrent DNS requests,
-can result in a roundtrip to the external server being faster than local
-resolution, on some occasions.
+can sometimes result in a round trip to the external server being faster than local
+resolution.
 
 ### Custom hosts
 

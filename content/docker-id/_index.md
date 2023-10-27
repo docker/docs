@@ -38,6 +38,11 @@ Your Docker ID becomes your username for hosted Docker services, and [Docker for
 
 ### Sign up with Google or GitHub
 
+> **Important**
+>
+> To sign up with your social provider, make sure you verify your email address with your provider before you begin.
+{ .important }
+
 1. Go to the [Docker sign-up page](https://hub.docker.com/signup/).
 
 2. Select your social provider, Google or GitHub.
@@ -67,6 +72,11 @@ stored in your home directory in `.docker/config.json`. The password is base64-e
 { .warning }
 
 ### Sign in with your social provider
+
+> **Important**
+>
+> To sign in with your social provider, make sure you verify your email address with your provider before you begin.
+{ .important }
 
 Optionally, you can sign in to an existing Docker account with your Google or GitHub account. If a Docker account exists with the same email address as the primary email for your social provider, your Docker account will automatically be linked to the social profile. This lets you sign in with your social provider.
 

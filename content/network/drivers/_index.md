@@ -1,6 +1,6 @@
 ---
 title: Network drivers overview
-description: Overview of Docker network drivers and related concepts
+description: Learn the basics of Docker network drivers
 keywords: networking, drivers, bridge, routing, routing mesh, overlay, ports
 ---
 
