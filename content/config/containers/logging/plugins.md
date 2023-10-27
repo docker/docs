@@ -1,9 +1,9 @@
 ---
-description: How to use logging driver plugins
+description: Learn about logging driver plugins for extending and customizing Docker's logging capabilities
 title: Use a logging driver plugin
 keywords: logging, driver, plugins, monitoring
 aliases:
-- /engine/admin/logging/plugins/
+  - /engine/admin/logging/plugins/
 ---
 
 Docker logging plugins allow you to extend and customize Docker's logging
@@ -23,7 +23,7 @@ a specific plugin using `docker inspect`.
 
 ## Configure the plugin as the default logging driver
 
-After the plugin is installed, you can configure the Docker daemon to use it as
+When the plugin is installed, you can configure the Docker daemon to use it as
 the default by setting the plugin's name as the value of the `log-driver`
 key in the `daemon.json`, as detailed in the
 [logging overview](configure.md#configure-the-default-logging-driver). If the
