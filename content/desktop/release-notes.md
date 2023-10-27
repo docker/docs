@@ -89,11 +89,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Mac
 
 - Upgrading to MacOS 14 can cause Docker Desktop to also update to a latest version even if the auto update option is disabled.
-- Docker Desktop uninstall from the command line is not available. As a workaround, you may [uninstall Docker Desktop from the Dashboard](https://docs.docker.com/desktop/uninstall/).
+- Uninstalling Docker Desktop from the command line is not available. As a workaround, you can [uninstall Docker Desktop from the Dashboard](https://docs.docker.com/desktop/uninstall/).
 
 #### For Windows
 
-- **Switch to Windows containers** option in the tray menu may not show up on Windows. As a workaround, edit the [Docker Desktop settings](https://docs.docker.com/desktop/settings/windows/) and set `"displaySwitchWinLinContainers": true`.
+- **Switch to Windows containers** option in the tray menu may not show up on Windows. As a workaround, edit the [`settings.json` file](https://docs.docker.com/desktop/settings/windows/) and set `"displaySwitchWinLinContainers": true`.
 
 ## 4.24.2
 
