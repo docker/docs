@@ -1,19 +1,19 @@
 ---
-description: How to write to and view a container's logs
+description: Learn how to write to, view, and configure a container's logs
 keywords: docker, logging
 title: View container logs
 aliases:
-- /engine/admin/logging/
-- /engine/admin/logging/view_container_logs/
+  - /engine/admin/logging/
+  - /engine/admin/logging/view_container_logs/
 ---
 
 The `docker logs` command shows information logged by a running container. The
 `docker service logs` command shows information logged by all containers
-participating in a service. The information that is logged and the format of the
+participating in a service. The information that's logged and the format of the
 log depends almost entirely on the container's endpoint command.
 
 By default, `docker logs` or `docker service logs` shows the command's output
-just as it would appear if you ran the command interactively in a terminal. UNIX
+just as it would appear if you ran the command interactively in a terminal. Unix
 and Linux commands typically open three I/O streams when they run, called
 `STDIN`, `STDOUT`, and `STDERR`. `STDIN` is the command's input stream, which
 may include input from the keyboard or input from another command. `STDOUT` is

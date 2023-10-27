@@ -1,10 +1,10 @@
 ---
-description: Describes how to use the Amazon CloudWatch Logs logging driver.
+description: Learn how to use the Amazon CloudWatch Logs logging driver with Docker Engine
 keywords: AWS, Amazon, CloudWatch, logging, driver
 title: Amazon CloudWatch Logs logging driver
 aliases:
-- /engine/reference/logging/awslogs/
-- /engine/admin/logging/awslogs/
+  - /engine/reference/logging/awslogs/
+  - /engine/admin/logging/awslogs/
 ---
 
 The `awslogs` logging driver sends container logs to
@@ -51,7 +51,7 @@ myservice:
     options:
       awslogs-region: us-east-1
 ```
-          
+
 ## Amazon CloudWatch Logs options
 
 You can add logging options to the `daemon.json` to set Docker-wide defaults,
@@ -108,7 +108,7 @@ specified, the container ID is used as the log stream.
 
 ### awslogs-create-group
 
-Log driver returns an error by default if the log group does not exist. However, you can set the
+Log driver returns an error by default if the log group doesn't exist. However, you can set the
 `awslogs-create-group` to `true` to automatically create the log group as needed.
 The `awslogs-create-group` option defaults to `false`.
 
@@ -128,7 +128,7 @@ $ docker run \
 
 ### awslogs-datetime-format
 
-The `awslogs-datetime-format` option defines a multiline start pattern in [Python
+The `awslogs-datetime-format` option defines a multi-line start pattern in [Python
 `strftime` format](https://strftime.org). A log message consists of a line that
 matches the pattern and any following lines that don't match the pattern. Thus
 the matched line is the delimiter between log messages.
@@ -141,10 +141,9 @@ single entry.
 This option always takes precedence if both `awslogs-datetime-format` and
 `awslogs-multiline-pattern` are configured.
 
-
 > **Note**
 >
-> Multiline logging performs regular expression parsing and matching of all log
+> Multi-line logging performs regular expression parsing and matching of all log
 > messages, which may have a negative impact on logging performance.
 
 Consider the following log stream, where new log messages start with a
@@ -152,7 +151,7 @@ timestamp:
 
 ```console
 [May 01, 2017 19:00:01] A message was logged
-[May 01, 2017 19:00:04] Another multiline message was logged
+[May 01, 2017 19:00:04] Another multi-line message was logged
 Some random message
 with some random words
 [May 01, 2017 19:01:32] Another message was logged
@@ -178,7 +177,7 @@ This parses the logs into the following CloudWatch log events:
 [May 01, 2017 19:00:01] A message was logged
 
 # Second event
-[May 01, 2017 19:00:04] Another multiline message was logged
+[May 01, 2017 19:00:04] Another multi-line message was logged
 Some random message
 with some random words
 
@@ -189,7 +188,7 @@ with some random words
 The following `strftime` codes are supported:
 
 | Code | Meaning                                                          | Example  |
-|:-----|:-----------------------------------------------------------------|:---------|
+| :--- | :--------------------------------------------------------------- | :------- |
 | `%a` | Weekday abbreviated name.                                        | Mon      |
 | `%A` | Weekday full name.                                               | Monday   |
 | `%w` | Weekday as a decimal number where 0 is Sunday and 6 is Saturday. | 0        |
@@ -212,15 +211,16 @@ The following `strftime` codes are supported:
 
 ### awslogs-multiline-pattern
 
-The `awslogs-multiline-pattern` option defines a multiline start pattern using a
+The `awslogs-multiline-pattern` option defines a multi-line start pattern using a
 regular expression. A log message consists of a line that matches the pattern
 and any following lines that don't match the pattern. Thus the matched line is
 the delimiter between log messages.
 
 This option is ignored if `awslogs-datetime-format` is also configured.
 
-> **Note**:
-> Multiline logging performs regular expression parsing and matching of all log
+> **Note**
+>
+> Multi-line logging performs regular expression parsing and matching of all log
 > messages. This may have a negative impact on logging performance.
 
 Consider the following log stream, where each log message should start with the
@@ -228,7 +228,7 @@ pattern `INFO`:
 
 ```console
 INFO A message was logged
-INFO Another multiline message was logged
+INFO Another multi-line message was logged
      Some random message
 INFO Another message was logged
 ```
@@ -251,7 +251,7 @@ This parses the logs into the following CloudWatch log events:
 INFO A message was logged
 
 # Second event
-INFO Another multiline message was logged
+INFO Another multi-line message was logged
      Some random message
 
 # Third event
@@ -273,22 +273,21 @@ If not specified, the container ID is used as the log stream.
 
 > **Note**
 >
-> The CloudWatch log API does not support `:` in the log name. This can cause
+> The CloudWatch log API doesn't support `:` in the log name. This can cause
 > some issues when using the `{{ .ImageName }}` as a tag,
-> since a docker image has a format of `IMAGE:TAG`, such as `alpine:latest`.
+> since a Docker image has a format of `IMAGE:TAG`, such as `alpine:latest`.
 > Template markup can be used to get the proper format. To get the image name
 > and the first 12 characters of the container ID, you can use:
-> 
-> 
+>
 > ```bash
 > --log-opt tag='{{ with split .ImageName ":" }}{{join . "_"}}{{end}}-{{.ID}}'
 > ```
-> 
+>
 > the output is something like: `alpine_latest-bf0072049c76`
 
 ### awslogs-force-flush-interval-seconds
 
-The `awslogs` driver periodically flushs logs to CloudWatch.
+The `awslogs` driver periodically flushes logs to CloudWatch.
 
 The `awslogs-force-flush-interval-seconds` option changes log flush interval seconds.
 
@@ -319,10 +318,7 @@ and `logs:PutLogEvents` actions, as shown in the following example.
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": [
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
+      "Action": ["logs:CreateLogStream", "logs:PutLogEvents"],
       "Effect": "Allow",
       "Resource": "*"
     }

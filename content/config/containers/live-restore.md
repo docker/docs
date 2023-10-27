@@ -1,9 +1,9 @@
 ---
-description: How to keep containers running when the daemon isn't available.
+description: Learn how to keep containers running when the daemon isn't available
 keywords: docker, upgrade, daemon, dockerd, live-restore, daemonless container
-title: Keep containers alive during daemon downtime
+title: Live restore
 aliases:
-- /engine/admin/live-restore/
+  - /engine/admin/live-restore/
 ---
 
 By default, when the Docker daemon terminates, it shuts down running containers.
@@ -14,7 +14,7 @@ or upgrades.
 
 > **Note**
 >
-> Live restore is not supported on Windows containers, but it does work for
+> Live restore isn't supported for Windows containers, but it does work for
 > Linux containers running on Docker Desktop for Windows.
 
 ## Enable live restore
@@ -22,7 +22,7 @@ or upgrades.
 There are two ways to enable the live restore setting to keep containers alive
 when the daemon becomes unavailable. **Only do one of the following**.
 
-* Add the configuration to the daemon configuration file. On Linux, this
+- Add the configuration to the daemon configuration file. On Linux, this
   defaults to `/etc/docker/daemon.json`. On Docker Desktop for Mac or Docker
   Desktop for Windows, select the Docker icon from the task bar, then click
   **Settings** -> **Docker Engine**.
@@ -40,11 +40,10 @@ when the daemon becomes unavailable. **Only do one of the following**.
     `systemd`, then use the command `systemctl reload docker`. Otherwise, send a
     `SIGHUP` signal to the `dockerd` process.
 
-* If you prefer, you can start the `dockerd` process manually with the
-  `--live-restore` flag. This approach is not recommended because it does not
+- If you prefer, you can start the `dockerd` process manually with the
+  `--live-restore` flag. This approach isn't recommended because it doesn't
   set up the environment that `systemd` or another process manager would use
   when starting the Docker process. This can cause unexpected behavior.
-
 
 ## Live restore during upgrades
 
@@ -54,12 +53,12 @@ major (`YY.MM`) daemon upgrades.
 
 If you skip releases during an upgrade, the daemon may not restore its
 connection to the containers. If the daemon can't restore the connection, it
-cannot manage the running containers and you must stop them manually.
+can't manage the running containers and you must stop them manually.
 
 ## Live restore upon restart
 
 The live restore option only works to restore containers if the daemon options,
-such as bridge IP addresses and graph driver, did not change. If any of these
+such as bridge IP addresses and graph driver, didn't change. If any of these
 daemon-level configuration options have changed, the live restore may not work
 and you may need to manually stop the containers.
 
@@ -71,12 +70,12 @@ data. The default buffer size is 64K. If the buffers fill, you must restart
 the Docker daemon to flush them.
 
 On Linux, you can modify the kernel's buffer size by changing
-`/proc/sys/fs/pipe-max-size`. You cannot modify the buffer size on Docker Desktop for
+`/proc/sys/fs/pipe-max-size`. You can't modify the buffer size on Docker Desktop for
 Mac or Docker Desktop for Windows.
 
-## Live restore and swarm mode
+## Live restore and Swarm mode
 
-The live restore option only pertains to standalone containers, and not to swarm
-services. Swarm services are managed by swarm managers. If swarm managers are
-not available, swarm services continue to run on worker nodes but cannot be
-managed until enough swarm managers are available to maintain a quorum.
+The live restore option only pertains to standalone containers, and not to Swarm
+services. Swarm services are managed by Swarm managers. If Swarm managers are
+not available, Swarm services continue to run on worker nodes but can't be
+managed until enough Swarm managers are available to maintain a quorum.
