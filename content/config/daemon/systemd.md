@@ -1,12 +1,12 @@
 ---
-description: Controlling and configuring Docker using systemd
+description: Learn about controlling and configuring the Docker daemon using systemd
 keywords: dockerd, daemon, systemd, configuration, proxy, networking
 title: Configure the daemon with systemd
 aliases:
-- /articles/host_integration/
-- /articles/systemd/
-- /engine/admin/systemd/
-- /engine/articles/systemd/
+  - /articles/host_integration/
+  - /articles/systemd/
+  - /engine/admin/systemd/
+  - /engine/articles/systemd/
 ---
 
 This page describes how to customize daemon settings when using systemd.
@@ -22,7 +22,7 @@ more information.
 When installing the binary without a package manager, you may want to integrate
 Docker with systemd. For this, install the two unit files (`service` and
 `socket`) from
-[the github repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
+[the GitHub repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
 to `/etc/systemd/system`.
 
 ### Configure the Docker daemon to use a proxy server {#httphttps-proxy}
@@ -52,7 +52,7 @@ behavior for the daemon in the [`daemon.json` file](./index.md#configure-the-doc
 
 These configurations override the default `docker.service` systemd file.
 
-If you are behind an HTTP or HTTPS proxy server, for example in corporate
+If you're behind an HTTP or HTTPS proxy server, for example in corporate
 settings, the daemon proxy configurations must be specified in the systemd
 service file, not in the `daemon.json` file or using environment variables.
 
@@ -68,6 +68,7 @@ service file, not in the `daemon.json` file or using environment variables.
 
 {{< tabs >}}
 {{< tab name="regular install" >}}
+
 1. Create a systemd drop-in directory for the `docker` service:
 
    ```console
@@ -104,7 +105,7 @@ service file, not in the `daemon.json` file or using environment variables.
    > Special characters in the proxy value, such as `#?!()[]{}`, must be double
    > escaped using `%%`. For example:
    >
-   > ```
+   > ```systemd
    > [Service]
    > Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:3128/"
    > ```
@@ -127,7 +128,7 @@ service file, not in the `daemon.json` file or using environment variables.
    - Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`) and
      domain names (`foo.example.com:80`)
 
-   Config example:
+   Example:
 
    ```systemd
    [Service]
@@ -151,8 +152,10 @@ service file, not in the `daemon.json` file or using environment variables.
 
    Environment=HTTP_PROXY=http://proxy.example.com:3128 HTTPS_PROXY=https://proxy.example.com:3129 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
    ```
+
 {{< /tab >}}
 {{< tab name="rootless mode" >}}
+
 1. Create a systemd drop-in directory for the `docker` service:
 
    ```console
@@ -189,7 +192,7 @@ service file, not in the `daemon.json` file or using environment variables.
    > Special characters in the proxy value, such as `#?!()[]{}`, must be double
    > escaped using `%%`. For example:
    >
-   > ```
+   > ```systemd
    > [Service]
    > Environment="HTTP_PROXY=http://domain%%5Cuser:complex%%23pass@proxy.example.com:3128/"
    > ```
@@ -212,7 +215,7 @@ service file, not in the `daemon.json` file or using environment variables.
    - Literal port numbers are accepted by IP address prefixes (`1.2.3.4:80`) and
      domain names (`foo.example.com:80`)
 
-   Config example:
+   Example:
 
    ```systemd
    [Service]
@@ -236,5 +239,6 @@ service file, not in the `daemon.json` file or using environment variables.
 
    Environment=HTTP_PROXY=http://proxy.example.com:3128 HTTPS_PROXY=https://proxy.example.com:3129 NO_PROXY=localhost,127.0.0.1,docker-registry.example.com,.corp
    ```
+
 {{< /tab >}}
 {{< /tabs >}}
