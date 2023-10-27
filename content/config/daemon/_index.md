@@ -1,28 +1,28 @@
 ---
-description: Configuring and troubleshooting the Docker daemon
-keywords: docker, daemon, configuration, troubleshooting
+description: Configuring the Docker daemon
+keywords: docker, daemon, configuration
 title: Docker daemon configuration overview
 aliases:
-- /articles/chef/
-- /articles/configuring/
-- /articles/dsc/
-- /articles/puppet/
-- /config/thirdparty/
-- /config/thirdparty/ansible/
-- /config/thirdparty/chef/
-- /config/thirdparty/dsc/
-- /config/thirdparty/puppet/
-- /engine/admin/
-- /engine/admin/ansible/
-- /engine/admin/chef/
-- /engine/admin/configuring/
-- /engine/admin/dsc/
-- /engine/admin/puppet/
-- /engine/articles/chef/
-- /engine/articles/configuring/
-- /engine/articles/dsc/
-- /engine/articles/puppet/
-- /engine/userguide/
+  - /articles/chef/
+  - /articles/configuring/
+  - /articles/dsc/
+  - /articles/puppet/
+  - /config/thirdparty/
+  - /config/thirdparty/ansible/
+  - /config/thirdparty/chef/
+  - /config/thirdparty/dsc/
+  - /config/thirdparty/puppet/
+  - /engine/admin/
+  - /engine/admin/ansible/
+  - /engine/admin/chef/
+  - /engine/admin/configuring/
+  - /engine/admin/dsc/
+  - /engine/admin/puppet/
+  - /engine/articles/chef/
+  - /engine/articles/configuring/
+  - /engine/articles/dsc/
+  - /engine/articles/puppet/
+  - /engine/userguide/
 ---
 
 This page shows you how to customize the Docker daemon, `dockerd`.
@@ -51,23 +51,6 @@ won't start and prints an error message.
 To configure the Docker daemon using a JSON file, create a file at
 `/etc/docker/daemon.json` on Linux systems, or
 `C:\ProgramData\docker\config\daemon.json` on Windows.
-
-Here's what the configuration file might look like:
-
-```json
-{
-  "builder": {
-    "gc": {
-      "defaultKeepStorage": "20GB",
-      "enabled": true
-    }
-  },
-  "experimental": false
-}
-```
-
-In addition to Docker Desktop default values, this configuration enables garbage
-collection at a 20GB threshold, and enables buildkit.
 
 Using this configuration file, run the Docker daemon in debug mode, using TLS, and
 listen for traffic routed to `192.168.59.3` on port `2376`. You can learn what
