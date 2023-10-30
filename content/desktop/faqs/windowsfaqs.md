@@ -20,12 +20,6 @@ If you are running Windows 10 Home (starting with build 19045), you can install 
 
 No, running Docker Desktop on Windows Server is not supported.
 
-### How do I run Windows containers on Windows Server?
-
-You can install a native Windows binary which allows you to develop and run
-Windows containers without Docker Desktop. For more information, see the tutorial about running Windows containers on Windows Server in
-[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
-
 ### Why do I see the `Docker Desktop Access Denied` error message when I try to start Docker Desktop?
 
 Docker Desktop displays the **Docker Desktop - Access Denied** error if a Windows user is not part of the **docker-users** group.
