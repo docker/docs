@@ -5,6 +5,7 @@ title: Registry Access Management
 aliases:
 - /desktop/hardened-desktop/registry-access-management/
 - /admin/organization/registry-access/
+- /docker-hub/registry-access-management/
 ---
 
 > Note

@@ -38,3 +38,75 @@ engine/reference/builder.md:
   keywords: |
     dockerfile, docker file, docker copy, dockerfile exec, docker entrypoint,
     dockerfile entrypoint, dockerfile arg, docker args, entrypoint, shell dockerfile
+
+compose/compose-file/01-status.md:
+  description: |
+    Understand about the status of the Compose Specification, which is the most recent Compose file format used to define multi-containers applications.
+  keywords: |
+    compose, compose specification, status, compose file reference
+
+compose/compose-file/02-model.md:
+  description: |
+    Learn about the compose application model.
+  keywords: |
+    compose, compose specification, application model, compose file reference
+
+compose/compose-file/03-compose-file.md:
+  description: |
+    Understand the compose file. 
+  keywords: |
+    compose, compose specification, compose yaml file, compose file reference
+
+compose/compose-file/05-services.md:
+  description: |
+    Explore all the attributes the services top-level element can have. 
+  keywords: |
+    compose, compose specification, services, compose file reference
+
+compose/compose-file/06-networks.md:
+  description: |
+    Explore all the attributes the networks top-level element can have. 
+  keywords: |
+    compose, compose specification, networks, compose file reference
+
+compose/compose-file/07-volumes.md:
+  description: |
+    Explore all the attributes the volumes top-level element can have. 
+  keywords: |
+    compose, compose specification, volumes, compose file reference
+
+compose/compose-file/08-configs.md:
+  description: |
+    Explore all the attributes the configs top-level element can have. 
+  keywords: |
+    compose, compose specification, configs, compose file reference
+
+compose/compose-file/09-secrets.md:
+  description: |
+    Explore all the attributes the secrets top-level element can have. 
+  keywords: |
+    compose, compose specification, secrets, compose file reference
+
+compose/compose-file/14-include.md:
+  description: |
+    Explore all the attributes the includes top-level element can have. 
+  keywords: |
+    compose, compose specification, includes, compose file reference
+
+compose/compose-file/build.md:
+  description: |
+    Learn about the optional Build Specification. 
+  keywords: |
+    compose, build specification, compose file reference
+
+compose/compose-file/deploy.md:
+  description: |
+    Learn about the optional Deploy Specification. 
+  keywords: |
+    compose, deploy specification, compose file reference
+
+compose/compose-file/develop.md:
+  description: |
+    Learn about the optional Develop Specification. 
+  keywords: |
+    compose, develop specification, compose file reference
