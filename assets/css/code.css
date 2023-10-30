@@ -378,6 +378,7 @@
     }
     /* GenericPrompt */
     .gp {
+      user-select: none;
       color: #8f5902;
     }
     /* GenericStrong */
