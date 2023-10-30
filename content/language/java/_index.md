@@ -14,7 +14,7 @@ The Java getting started guide teaches you how to create a containerized Spring 
 * Set up a local development environment to connect a database to the container
 * Use Docker Compose to run the Spring Boot application
 * Configure a CI/CD pipeline for your application using GitHub Actions
-* Deploy your application to the cloud
+* Deploy your containerized application locally to Kubernetes to test and debug your deployment
 
 After completing the Java getting started modules, you should be able to containerize your own Java application based on the examples and instructions provided in this guide.
 
