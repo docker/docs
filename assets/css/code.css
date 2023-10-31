@@ -1,28 +1,26 @@
-.prose {
-  pre {
-    @apply rounded-sm border border-gray-light-200 p-3 dark:border-gray-dark-400;
+.highlight, :not(pre) > code {
+  font-size: .875em;
+  border: 1px solid;
+  border-radius: theme("spacing.1");
+  border-color: theme("colors.gray.light.300");
+  .dark & {
+    background: theme("colors.gray.dark.200");
+    border-color: theme("colors.gray.dark.300");
   }
-  :not(pre) > code {
-    display: inline-block;
-    margin: 0 !important;
-    white-space: nowrap;
-    font-weight: 400;
-    padding: 0 4px;
-    border: 1px solid;
-    border-radius: theme("spacing.1");
-    background: theme("colors.gray.light.200");
-    border-color: theme("colors.gray.light.300");
-    .dark & {
-      background: theme("colors.gray.dark.200");
-      border-color: theme("colors.gray.dark.300");
-    }
-  }
-  code::before {
-    content: "";
-  }
-  code::after {
-    content: "";
-  }
+}
+
+.highlight {
+  @apply p-3 my-4 overflow-x-auto;
+  background: theme("colors.white");
+}
+
+:not(pre) > code {
+  background: theme("colors.gray.light.200");
+  display: inline-block;
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 400;
+  padding: 0 4px;
 }
 
 .chroma {
@@ -380,6 +378,7 @@
     }
     /* GenericPrompt */
     .gp {
+      user-select: none;
       color: #8f5902;
     }
     /* GenericStrong */
