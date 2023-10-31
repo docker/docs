@@ -50,11 +50,22 @@ spec:
           image: busybox:1.28
           command: ['sh', '-c', 'until nc -zv db 5432; do echo "waiting for db"; sleep 2; done;']
       containers:
-        - image: DOCKER_USERNAME/REPO_NAME
+        - env:
+            - name: PGDATABASE
+              value: mydb
+            - name: PGPASSWORD
+              value: whatever
+            - name: PGHOST
+              value: db
+            - name: PGPORT
+              value: "5432"
+            - name: PGUSER
+              value: postgres
+          image: DOCKER_USERNAME/REPO_NAME
           name: server
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               hostPort: 8080
               protocol: TCP
           resources: {}
@@ -83,9 +94,11 @@ spec:
       containers:
         - env:
             - name: POSTGRES_DB
-              value: example
+              value: mydb
             - name: POSTGRES_PASSWORD
-              value: example
+              value: whatever
+            - name: POSTGRES_USER
+              value: postgres
           image: postgres
           name: db
           ports:
@@ -107,7 +120,7 @@ spec:
   ports:
     - name: "8080"
       port: 8080
-      targetPort: 80
+      targetPort: 8080
       nodePort: 30001
   selector:
     service: server
@@ -194,8 +207,20 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    In addition to the default `kubernetes` service, you can see your `server` service and `db` service. The `server` service is accepting traffic on port 30001/TCP.
 
-3. Open a browser and visit your app at `localhost:30001`. You should see your
-   application.
+3. Open a terminal and curl your application to verify that it's working.
+
+   ```console
+   $ curl --request POST \
+     --url http://localhost:30001/send \
+     --header 'content-type: application/json' \
+     --data '{"value": "Hello, Oliver!"}'
+   ```
+
+   You should get the following message back.
+
+   ```json
+   {"value":"Hello, Oliver!"}
+   ```
 
 4. Run the following command to tear down your application.
 
