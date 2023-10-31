@@ -85,7 +85,7 @@ Guides:
       path: /language/golang/run-tests/
     - title: "Configure CI/CD"
       path: /language/golang/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/golang/deploy/
   - sectiontitle: C# (.NET)
     section:
