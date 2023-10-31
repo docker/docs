@@ -273,7 +273,7 @@ func initStore() (*sql.DB, error) {
 	}
 
 	if _, err := db.Exec(
-		"CREATE TABLE IF NOT EXISTS message (value STRING PRIMARY KEY)"); err != nil {
+		"CREATE TABLE IF NOT EXISTS message (value TEXT PRIMARY KEY)"); err != nil {
 		return nil, err
 	}
 
