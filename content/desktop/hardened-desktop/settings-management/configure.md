@@ -22,7 +22,7 @@ Settings Management is designed specifically for organizations who don’t give 
 You can either use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
 
 To set it up manually:
-1. Create a new, empty JSON file and name it `admin-settings`.
+1. Create a new, empty JSON file and name it `admin-settings.json`.
 2. Save the `admin-settings.json` file on your developers' machines in the following locations:
 
     - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
