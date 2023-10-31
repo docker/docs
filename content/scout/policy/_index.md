@@ -52,12 +52,13 @@ open-source licenses.
 
 ## Default policies
 
-Docker Scout ships the following three out-of-the-box policies:
+Docker Scout ships the following out-of-the-box policies:
 
 - [Critical and high vulnerabilities with fixes](#critical-and-high-vulnerabilities-with-fixes)
 - [Critical vulnerabilities](#critical-vulnerabilities)
 - [Packages with AGPLv3, GPLv3 licenses](#packages-with-agplv3-gplv3-licenses)
 - [Base images not up-to-date](#base-images-not-up-to-date)
+- [High-profile vulnerabilities](#high-profile-vulnerabilities)
 
 These policies are turned on by default for Scout-enabled repositories. There's
 currently no way to turn off or configure these policies.
@@ -121,3 +122,16 @@ To make sure that Docker Scout always knows about your base image, you can
 attach [provenance attestations](../../build/attestations/slsa-provenance.md)
 at build-time. Docker Scout uses provenance attestations to find out the base
 image version.
+
+### High-profile vulnerabilities
+
+This policy requires that your artifacts don't contain vulnerabilities from
+Docker Scout’s curated list. This list is kept up-to-date with newly disclosed
+vulnerabilities that are widely recognized to be risky.
+
+The list includes the following vulnerabilities:
+
+- [CVE-2014-0160 (OpenSSL Heartbleed)](https://scout.docker.com/v/CVE-2014-0160)
+- [CVE-2021-44228 (Log4Shell)](https://scout.docker.com/v/CVE-2021-44228)
+- [CVE-2023-38545 (cURL SOCKS5 heap buffer overflow)](https://scout.docker.com/v/CVE-2023-38545)
+- [CVE-2023-44487 (HTTP/2 Rapid Reset)](https://scout.docker.com/v/CVE-2023-44487)
