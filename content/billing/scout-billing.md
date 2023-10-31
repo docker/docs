@@ -52,7 +52,7 @@ Renewals charge to the original credit card used to buy Docker Scout Team. You c
 
 ### Update number of repositories for your subscription
 
-You can add or remove the number of repositories associated with your subscription at any time.
+You can add or remove the number of repositories associated with your subscription.
 
 To add repositories:
 
@@ -73,6 +73,10 @@ To remove repositories:
 5. Enter the number of repositories you want to remove, then select **Remove**.
 
 The number of repositories updates on your next billing cycle.
+
+> **Note**
+>
+> Note that you can't add repositories while repository removal is pending. You can add repositories again during the next billing cycle.
 
 ### Cancel your subscription
 
