@@ -76,7 +76,7 @@ The number of repositories updates on your next billing cycle.
 
 > **Note**
 >
-> Note that you can't add repositories while repository removal is pending. You can add repositories again during the next billing cycle.
+> You can't add repositories while repository removal is pending. You can add repositories again during the next billing cycle.
 
 ### Cancel your subscription
 
