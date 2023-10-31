@@ -169,12 +169,12 @@ Now that you have started and configured the database engine, you can switch you
 The example application for this module is an extended version of `docker-gs-ping` application you've used in the previous modules. You have two options:
 
 * You can update your local copy of `docker-gs-ping` to match the new extended version presented in this chapter; or
-* You can clone the [docker/docker-gs-ping-roach](https://github.com/docker/docker-gs-ping-roach) repository. This latter approach is recommended.
+* You can clone the [docker/docker-gs-ping-dev](https://github.com/docker/docker-gs-ping-dev) repository. This latter approach is recommended.
 
 To checkout the example application, run:
 
 ```console
-$ git clone https://github.com/docker/docker-gs-ping-roach.git
+$ git clone https://github.com/docker/docker-gs-ping-dev.git
 # ... output omitted ...
 ```
 
