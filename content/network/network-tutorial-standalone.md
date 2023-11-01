@@ -604,7 +604,7 @@ connected to both networks.
 
 9.  Stop and remove all containers and the `alpine-net` network.
 
-    ```
+    ```console
     $ docker container stop alpine1 alpine2 alpine3 alpine4
 
     $ docker container rm alpine1 alpine2 alpine3 alpine4

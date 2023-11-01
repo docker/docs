@@ -31,7 +31,7 @@ Before you can run the application, you need to get the application source code 
 
 2. View the contents of the cloned repository. You should see the following files and sub-directories.
 
-   ```
+   ```text
    ├── getting-started-app/
    │ ├── package.json
    │ ├── README.md

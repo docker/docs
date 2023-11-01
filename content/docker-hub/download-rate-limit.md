@@ -41,7 +41,7 @@ manifest requests.
 
 When you issue a pull request and you are over the limit, Docker Hub returns a `429` response code with the following body when the manifest is requested:
 
-```
+```text
 You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
 ```
 
@@ -51,7 +51,7 @@ This error message appears in the Docker CLI or in the Docker Engine logs.
 
 Valid API requests to Hub usually include the following rate limit headers in the response:
 
-```
+```text
 ratelimit-limit    
 ratelimit-remaining
 docker-ratelimit-source
