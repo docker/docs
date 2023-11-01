@@ -209,7 +209,7 @@ the dataset it was created from (the snapshots of its parent layers). Read
 operations are fast, even if the data being read is from a deep layer.
 This diagram illustrates how block sharing works:
 
-![ZFS block sharing](images/zpool_blocks.jpg)
+![ZFS block sharing](images/zpool_blocks.webp)
 
 
 ### Writing files
