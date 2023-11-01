@@ -46,13 +46,37 @@ Once your purchase is complete, you receive a confirmation email and a copy of y
 
 ## Manage your subscription
 
-To access your subscription details, go to the **Billing** section for your personal account or organization that's subscribed. In the **Docker Scout Team** section, select **Change plan** to go to the billing details portal. In the billing details portal, you can find your renewal date, invoice history, or cancel your plan.
+To access your subscription details, go to the **Billing** section for your personal account or organization that's subscribed. In the **Docker Scout Team** section, select **Change plan** to go to the billing details portal. In the billing details portal, you can find your renewal date, invoice history, payment methods, or cancel your plan.
 
-Renewals charge to the original credit card used to buy Docker Scout Team.
+Renewals charge to the original credit card used to buy Docker Scout Team. You can manage your payment methods in the billing details portal.
 
 ### Update number of repositories for your subscription
 
-To add or remove the number of repositories associated with your subscription, [contact support](https://hub.docker.com/support/contact?topic=Billing&subtopic=Upgrade%20subscription&subject=I%20would%20like%20to%20change%20my%20Scout%20repository%20limit&description=to%20X%20repositories).
+You can add or remove the number of repositories associated with your subscription.
+
+To add repositories:
+
+1. In Docker Hub, select **Organizations**.
+2. Select the organization namespace.
+3. Select the **Billing** tab to find your active Docker Scout plan.
+4. Select **Add repositories**.
+5. Enter the number of repositories you want to add, then select **Purchase**.
+
+This purchase charges your default payment method.
+
+To remove repositories:
+
+1. In Docker Hub, select **Organizations**.
+2. Select the organization namespace.
+3. Select the **Billing** tab to find your active Docker Scout plan.
+4. Select **Remove repositories**.
+5. Enter the number of repositories you want to remove, then select **Remove**.
+
+The number of repositories updates on your next billing cycle.
+
+> **Note**
+>
+> You can't add repositories while repository removal is pending. You can add repositories again during the next billing cycle.
 
 ### Cancel your subscription
 
