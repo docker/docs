@@ -76,7 +76,7 @@ This can return a lot of false positives which you need to triage.
 
 The typical structure of a CPE match looks like this:
 
-```
+```text
 cpe:<cpe_version>:<part>:<vendor>:<product>:<version>:<update>:<edition>:<language>:<sw_edition>:<target_sw>:<target_hw>:<other>
 ```
 
@@ -93,7 +93,7 @@ identify the relevant packages with far less false positives.
 Continuing this example, a PURL can match the specific package name to a
 language and version.
 
-```
+```text
 pkg:npm/calendar@12.0.2
 ```
 

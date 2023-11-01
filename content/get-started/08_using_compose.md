@@ -18,16 +18,16 @@ on GitHub/GitLab doing exactly this now.
 
 In the `getting-started-app` directory, create a file named `compose.yaml`.
 
-   ```
-   ├── getting-started-app/
-   │ ├── Dockerfile
-   │ ├── compose.yaml
-   │ ├── node_modules/
-   │ ├── package.json
-   │ ├── spec/
-   │ ├── src/
-   │ └── yarn.lock
-   ```
+```text
+├── getting-started-app/
+│ ├── Dockerfile
+│ ├── compose.yaml
+│ ├── node_modules/
+│ ├── package.json
+│ ├── spec/
+│ ├── src/
+│ └── yarn.lock
+```
 
 ## Define the app service
 
