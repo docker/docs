@@ -72,6 +72,12 @@ This guide contains step-by-step instructions on how to get started with Docker.
 - Deploy Docker applications using multiple containers with a database.
 - Run applications using Docker Compose.
 
+> **Note**
+>
+> Before diving in, try the 5-minute hands-on
+> [walkthroughs](../guides/walkthroughs/_index.md) to get more familiar with
+> Docker Desktop.
+
 ## What is a container?
 
 A container is a sandboxed process running on a host machine that is isolated from all other processes running on that host machine. That isolation leverages [kernel namespaces and cgroups](https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504),
