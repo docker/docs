@@ -87,6 +87,6 @@ You can go to the invitee list in the org view and remove them.
 
 No, we don't differentiate the two in product.
 
-### Is employee information visible in Docker Hub?
+### Is user information visible in Docker Hub?
 
-All Docker accounts have a public profile associated with their namespace. If you don't want employee information (for example, full name) to be visible, you can remove those attributes from your SSO and SCIM mappings. Alternatively, you can use a different identifier to replace a user's full name.
+All Docker accounts have a public profile associated with their namespace. If you don't want user information (for example, full name) to be visible, you can remove those attributes from your SSO and SCIM mappings. Alternatively, you can use a different identifier to replace a user's full name.
