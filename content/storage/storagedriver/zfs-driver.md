@@ -150,7 +150,7 @@ ZFS uses the following objects:
 
 The process of creating a clone:
 
-![ZFS snapshots and clones](images/zfs_clones.jpg)
+![ZFS snapshots and clones](images/zfs_clones.webp)
 
 
 1.  A read-only snapshot is created from the filesystem.
@@ -175,7 +175,7 @@ on a ZFS Snapshot of the top layer of the image it's created from.
 The diagram below shows how this is put together with a running container based
 on a two-layer image.
 
-![ZFS pool for Docker container](images/zfs_zpool.jpg)
+![ZFS pool for Docker container](images/zfs_zpool.webp)
 
 When you start a container, the following steps happen in order:
 

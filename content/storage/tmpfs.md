@@ -18,7 +18,7 @@ As opposed to volumes and bind mounts, a `tmpfs` mount is temporary, and only
 persisted in the host memory. When the container stops, the `tmpfs` mount is
 removed, and files written there won't be persisted.
 
-![tmpfs on the Docker host](images/types-of-mounts-tmpfs.png)
+![tmpfs on the Docker host](images/types-of-mounts-tmpfs.webp)
 
 This is useful to temporarily store sensitive files that you don't want to
 persist in either the host or the container writable layer.

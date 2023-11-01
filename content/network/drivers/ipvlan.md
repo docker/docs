@@ -98,7 +98,7 @@ To help understand how this mode interacts with other hosts, the following
 figure shows the same layer 2 segment between two Docker hosts that applies to
 and IPvlan L2 mode.
 
-![Multiple IPvlan hosts](images/macvlan-bridge-ipvlan-l2.png)
+![Multiple IPvlan hosts](images/macvlan-bridge-ipvlan-l2.webp)
 
 The following will create the exact same network as the network `db_net` created
 earlier, with the driver defaults for `--gateway=192.168.1.1` and `-o ipvlan_mode=l2`.
@@ -307,7 +307,7 @@ upstream network will not know about without route distribution. For those
 curious how IPvlan L3 will fit into container networking, see the following
 examples.
 
-![Docker IPvlan L2 mode](images/ipvlan-l3.png)
+![Docker IPvlan L2 mode](images/ipvlan-l3.webp)
 
 IPvlan L3 mode drops all broadcast and multicast traffic. This reason alone
 makes IPvlan L3 mode a prime candidate for those looking for massive scale and
