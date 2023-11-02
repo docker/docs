@@ -84,7 +84,7 @@ tags:
       images across all repositories.
 
       **<span style="color: red;">Deprecated</span>**: Advanced Image
-      Management is deprecated, and scheduled for removal on November 15th, 2023.
+      Management is deprecated, and scheduled for removal on December 11th, 2023.
 
       For more information, see [Deprecation of Advanced Image Management](https://github.com/docker/roadmap/issues/534)
   - name: audit-logs
