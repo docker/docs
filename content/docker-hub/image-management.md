@@ -7,7 +7,7 @@ title: Advanced Image Management dashboard
 > **Deprecated**
 >
 > The Advanced Image Management dashboard and API are deprecated, and scheduled
-> for removal on November 15th, 2023. You can continue to use the **Tags** in
+> for removal on December 11th, 2023. You can continue to use the **Tags** in
 > Docker Hub to manage tags for your repository.
 >
 > For more information, see [Deprecation of Advanced Image Management](https://github.com/docker/roadmap/issues/534)
