@@ -122,7 +122,7 @@ setting, see the topic for [Mac](../desktop/settings/mac.md/#file-sharing),
 7. Open the `getting-started-app` directory on the host and observe that the
    `myfile.txt` file is in the directory.
 
-   ```
+   ```text
    ├── getting-started-app/
    │ ├── Dockerfile
    │ ├── myfile.txt

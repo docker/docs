@@ -3314,7 +3314,8 @@ Thanks @ryanbrainard and @d11wtq!
    For example, if you have a `web` service which depends on a `db` service, `fig run web ...` will start the `db` service.
 
  - Environment variables can now be resolved from the environment that Fig is running in. Just specify it as a blank variable in your `fig.yml` and, if set, it'll be resolved:
-   ```
+
+   ```yaml
    environment:
      RACK_ENV: development
      SESSION_SECRET:
@@ -3322,7 +3323,7 @@ Thanks @ryanbrainard and @d11wtq!
 
  - `volumes_from` is now supported in `fig.yml`. All of the volumes from the specified services and containers will be mounted:
 
-   ```
+   ```yaml
    volumes_from:
     - service_name
     - container_name
@@ -3330,7 +3331,7 @@ Thanks @ryanbrainard and @d11wtq!
 
  - A host address can now be specified in `ports`:
 
-   ```
+   ```yaml
    ports:
     - "0.0.0.0:8000:8000"
     - "127.0.0.1:8001:8001"
