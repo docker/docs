@@ -48,7 +48,7 @@ Conversion will have the following effects:
 
 1. Ensure you have removed your user account from any company or teams or organizations. Also make sure that you have a new Docker ID before you convert an account. See the [Prerequisites](#prerequisites) section for details.
 
-2. In the top-right of Docker Hub, select your username and then from the drop-down menu, select **Account Settings**.
+2. In the top-right of Docker Hub, select your account name and then from the drop-down menu, select **Account Settings**.
 
 3. From the **Convert Account** tab, select **Convert to Organization**.
 
