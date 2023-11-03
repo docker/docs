@@ -32,13 +32,13 @@ Before you convert a user account to an organization, ensure that you meet the f
 
 ## Effects of converting an account into an organization
 
-Conversion will have the following effects:
+Consider the following effects of converting your account:
 
-- The email address for the account will be removed, and organization owners will receive notification emails instead. You'll be able to reuse the removed email address for another account after converting.
+- This process removes the email address for the account, and organization owners will receive notification emails instead. You'll be able to reuse the removed email address for another account after converting.
 
 - The current plan will cancel and your new subscription will start.
 
-- Repository namespaces and names won't change, but any repository collaborators will be removed. Once you convert the account, you'll need to add those users as team members.
+- Repository namespaces and names won't change, but converting your account removes any repository collaborators. Once you convert the account, you'll need to add those users as team members.
 
 - Existing automated builds will appear as if they were set up by the first owner added to the organization. See [Convert an account into an organization](#convert-an-account-into-an-organization) for steps on adding the first owner.
 
