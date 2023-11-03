@@ -26,7 +26,7 @@ Before you downgrade to a free subscription, you may need to reduce the number o
 
 3. Choose either your personal account or an organization to downgrade. 
 
-4. On the **Plan** tab, select **Change plan**.
+4. In the **Plan** section, select **Change plan**.
 
 5. On the **Change Plan** page, select the plan you'd like to downgrade to. 
 
