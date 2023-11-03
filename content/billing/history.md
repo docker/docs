@@ -13,8 +13,7 @@ You can view the billing history and download past invoices for a personal accou
 3. Select the **Payment methods and billing history** link.
     You can find your past invoices in the **Invoice History** section.
 
-From here you can choose to:
-- Download an invoice.
+From here you can download an invoice.
 
 ## Organization
 
@@ -28,5 +27,4 @@ From here you can choose to:
 4. Select the **Payment methods and billing history** link.
     You can find your past invoices in the **Invoice History** section.
 
-From here you can choose to:
-- Download an invoice.
+From here you can download an invoice.

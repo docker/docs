@@ -9,7 +9,7 @@ aliases:
 
 You can downgrade your Docker subscription at anytime before the renewal date. The unused portion of the subscription isn't refundable or creditable.
 
-When you downgrade your subscription, you have access to paid features is available until the next billing cycle. The downgrade takes effect on the next billing cycle.
+When you downgrade your subscription, access to paid features is available until the next billing cycle. The downgrade takes effect on the next billing cycle.
 
 Before you downgrade to a free subscription, you may need to reduce the number of team members and convert any private repositories to public repositories or delete them. For information, see [Docker Pricing](https://www.docker.com/pricing).
 

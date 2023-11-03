@@ -20,7 +20,7 @@ You can add a payment method or update your account's existing payment method at
 4. In the **Payment Method** section, select **Add payment method**.
 5. Enter your new payment information, then select **Add**.
 6. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
-7. Optional. You can remove non-default payment methods by selecting the **Actions** icon, then select **Delete**.
+7. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
 
 ## Organization 
 
@@ -35,4 +35,4 @@ You can add a payment method or update your account's existing payment method at
 5. In the **Payment Method** section, select **Add payment method**.
 6. Enter your new payment information, then select **Add**.
 7. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
-8. Optional. You can remove non-default payment methods by selecting the **Actions** icon, then select **Delete**.
+8. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
