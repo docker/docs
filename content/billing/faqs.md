@@ -70,7 +70,7 @@ Update your billing information to include your VAT number:
 3. Select the **Payment methods and billing history** link.
 4. In the **Billing Information** section, select **Update information**.
 5. In the **Tax ID** section, select the ID type and enter your VAT number.
-5. Select **Save**.
+6. Select **Save**.
 
 Your VAT number will be included on your next invoice.
 
