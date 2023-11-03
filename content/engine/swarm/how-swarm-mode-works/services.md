@@ -31,7 +31,7 @@ For example, imagine you want to load balance between three instances of an HTTP
 listener. The diagram below shows an HTTP listener service with three replicas.
 Each of the three instances of the listener is a task in the swarm.
 
-![ HTTP listener service with three replicas](../images/services-diagram.webp)
+![ HTTP listener service with three replicas](../images/services-diagram.webp?w=550)
 
 A container is an isolated process. In the swarm mode model, each task invokes
 exactly one container. A task is analogous to a “slot” where the scheduler
@@ -66,7 +66,7 @@ current version of Docker only supports container tasks.
 The diagram below shows how swarm mode accepts service create requests and
 schedules tasks to worker nodes.
 
-![Services flow](../images/service-lifecycle.webp)
+![Services flow](../images/service-lifecycle.webp?w=700)
 
 ### Pending services
 
@@ -115,7 +115,7 @@ or other types of containers that you want to run on every node in the swarm.
 The diagram below shows a three-service replica in gray and a global service
 in black.
 
-![Global vs replicated services](../images/replicated-vs-global.webp)
+![Global vs replicated services](../images/replicated-vs-global.webp?w=450)
 
 ## Learn more
 
