@@ -14,7 +14,7 @@ Engine 1.12 or later in swarm mode.
 There are two types of nodes: [**managers**](#manager-nodes) and
 [**workers**](#worker-nodes).
 
-![Swarm mode cluster](/engine/swarm/images/swarm-diagram.png)
+![Swarm mode cluster](/engine/swarm/images/swarm-diagram.webp)
 
 If you haven't already, read through the
 [swarm mode overview](../index.md) and

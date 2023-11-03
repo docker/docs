@@ -213,7 +213,7 @@ The unified view is exposed through a directory called `merged` which is
 effectively the containers mount point. The diagram shows how Docker constructs
 map to OverlayFS constructs.
 
-![How Docker constructs map to OverlayFS constructs](images/overlay_constructs.jpg)
+![How Docker constructs map to OverlayFS constructs](images/overlay_constructs.webp)
 
 Where the image layer and the container layer contain the same files, the
 container layer "wins" and obscures the existence of the same files in the image

@@ -302,52 +302,61 @@ For more information about `ENV`, see [Dockerfile reference for the ENV instruct
 
 ### ADD or COPY
 
-Although `ADD` and `COPY` are functionally similar, generally speaking, `COPY`
-is preferred. That’s because it’s more transparent than `ADD`. `COPY` only
-supports the basic copying of local files into the container, while `ADD` has
-some features (like local-only tar extraction and remote URL support) that are
-not immediately obvious. Consequently, the best use for `ADD` is local tar file
-auto-extraction into the image, as in `ADD rootfs.tar.xz /`.
+`ADD` and `COPY` are functionally similar. `COPY` supports basic copying of
+files into the container, from the [build context](../../build/building/context.md)
+or from a stage in a [multi-stage build](../../build/building/multi-stage.md).
+`ADD` supports features for fetching files from remote HTTPS and Git URLs, and
+extracting tar files automatically when adding files from the build context.
 
-If you have multiple Dockerfile steps that use different files from your
-context, `COPY` them individually, rather than all at once. If
-a specifically required file changes, then this ensures that
-only that step's build cache is invalidated, forcing only that step to be run again.
-
-For example:
+You'll mostly want to use `COPY` for copying files from one stage to another in
+a multi-stage build. If you need to add files from the build context to the
+container temporarily to execute a `RUN` instruction, you can often substitute
+the `COPY` instruction with a bind mount instead. For example, to temporarily
+add a `requirements.txt` file for a `RUN pip install` instruction:
 
 ```dockerfile
-COPY requirements.txt /tmp/
-RUN pip install --requirement /tmp/requirements.txt
-COPY . /tmp/
+RUN --mount=type=bind,source=requirements.txt,target=/tmp/requirements.txt \
+    pip install --requirement /tmp/requirements.txt
 ```
 
-Results in fewer cache invalidations for the `RUN` step, than if you put the
-`COPY . /tmp/` before it.
+Bind mounts are more efficient than `COPY` for including files from the build
+context in the container. Note that bind-mounted files are only added
+temporarily for a single `RUN` instruction, and don't persist in the final
+image. If you need to include files from the build context in the final image,
+use `COPY`.
 
-Because image size matters, using `ADD` to fetch packages from remote URLs is
-strongly discouraged; you should use `curl` or `wget` instead. That way you can
-delete the files you no longer need after they've been extracted and you don't
-have to add another layer in your image. For example, you should avoid doing
-things like:
+The `ADD` instruction is best for when you need to download a remote artifact
+as part of your build. `ADD` is better than manually adding files using
+something like `wget` and `tar`, because it ensures a more precise build cache.
+`ADD` also has built-in support for checksum validation of the remote
+resources, and a protocol for parsing branches, tags, and subdirectories from
+[Git URLs](../../engine/reference/commandline/build.md#git-repositories).
+
+The following example uses `ADD` to download a .NET installer. Combined with
+multi-stage builds, only the .NET runtime remains in the final stage, no
+intermediate files.
 
 ```dockerfile
-ADD https://example.com/big.tar.xz /usr/src/things/
-RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
-RUN make -C /usr/src/things all
+# syntax=docker/dockerfile:1
+
+FROM scratch AS src
+ARG DOTNET_VERSION=8.0.0-preview.6.23329.7
+ADD --checksum=sha256:270d731bd08040c6a3228115de1f74b91cf441c584139ff8f8f6503447cebdbb \
+    https://dotnetcli.azureedge.net/dotnet/Runtime/$DOTNET_VERSION/dotnet-runtime-$DOTNET_VERSION-linux-arm64.tar.gz /dotnet.tar.gz
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.0-preview.6-bookworm-slim-arm64v8 AS installer
+
+# Retrieve .NET Runtime
+RUN --mount=from=src,target=/src <<EOF
+mkdir -p /dotnet
+tar -oxzf /src/dotnet.tar.gz -C /dotnet
+EOF
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.0-preview.6-bookworm-slim-arm64v8
+
+COPY --from=installer /dotnet /usr/share/dotnet
+RUN ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 ```
-
-And instead, do something like:
-
-```dockerfile
-RUN mkdir -p /usr/src/things \
-    && curl -SL https://example.com/big.tar.xz \
-    | tar -xJC /usr/src/things \
-    && make -C /usr/src/things all
-```
-
-For other items, like files and directories, that don't require the tar
-auto-extraction capability of `ADD`, you should always use `COPY`.
 
 For more information about `ADD` or `COPY`, see the following:
 - [Dockerfile reference for the ADD instruction](../../engine/reference/builder.md#add)
