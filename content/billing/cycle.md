@@ -12,4 +12,4 @@ For questions about your billing cycle, [contact support](https://hub.docker.com
 
 ## More resources
 
-[Billing faqs](faqs.md)
+[Billing FAQs](faqs.md)
