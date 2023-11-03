@@ -25,7 +25,8 @@ The billing information provided appears on all your billing invoices. The email
 
 1. Select your username in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
-3. Select the organization that you want to change the payment method for. 
-4. In the **Billing Information** section, select **Update information**.
-5. Enter your updated billing details.
-6. Select **Save**. 
+3. Select the organization that you want to change the payment method for.
+4. Select the **Payment methods and billing history** link.
+5. In the **Billing Information** section, select **Update information**.
+6. Enter your updated billing details.
+7. Select **Save**.
