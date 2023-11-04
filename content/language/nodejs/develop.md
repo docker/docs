@@ -93,21 +93,20 @@ In the cloned repository's directory, create a new directory named `db`. Inside 
 You should now have the following contents in your `docker-nodejs-sample`
 directory.
 
-   ```
-   ├── docker-nodejs-sample/
-   │ ├── db/
-   │ │ └── password.txt
-   │ ├── spec/
-   │ ├── src/
-   │ ├── .dockerignore
-   │ ├── .gitignore
-   │ ├── compose.yaml
-   │ ├── Dockerfile
-   │ ├── package-lock.json
-   │ ├── package.json
-   │ └── README.md
-   ```
-
+```text
+├── docker-nodejs-sample/
+│ ├── db/
+│ │ └── password.txt
+│ ├── spec/
+│ ├── src/
+│ ├── .dockerignore
+│ ├── .gitignore
+│ ├── compose.yaml
+│ ├── Dockerfile
+│ ├── package-lock.json
+│ ├── package.json
+│ └── README.md
+```
 
 Run the following command to start your application.
 

@@ -22,7 +22,7 @@ To run an image inside of a container, you use the `docker run` command. It requ
 $ docker run docker-gs-ping
 ```
 
-```
+```text
    ____    __
   / __/___/ /  ___
  / _// __/ _ \/ _ \

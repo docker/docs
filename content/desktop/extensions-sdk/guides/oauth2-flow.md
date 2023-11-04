@@ -69,7 +69,7 @@ Next, you exchange the authorization code for an access token.
 
 The extension must send a `POST` request to the oauth authorization server with the following parameters:
 
-```
+```text
 POST https://authorization-server.com/token
 &client_id=T70hJ3ls5VTYG8ylX3CZsfIu
 &client_secret=YABbyHQShPeO1T3NDQZP8q5m3Jpb_UPNmIzqhLDCScSnRyVG

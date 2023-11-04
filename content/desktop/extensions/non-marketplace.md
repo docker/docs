@@ -33,7 +33,7 @@ Go to the Docker Dashboard to see the new extension installed.
 Regardless whether the extension was installed from the Marketplace or manually by using the Extensions CLI, you can use the `docker extension ls` command to display the list of extensions installed.
 As part of the output you'll see the extension ID, the provider, version, the title and whether it runs a backend container or has deployed binaries to the host, for example:
 
-```
+```console
 $ docker extension ls
 ID                  PROVIDER            VERSION             UI                    VM                  HOST
 john/my-extension   John                latest              1 tab(My-Extension)   Running(1)          -

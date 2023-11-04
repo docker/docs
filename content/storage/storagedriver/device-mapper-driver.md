@@ -536,33 +536,34 @@ thin pool is 100 GB, and is increased to 200 GB.
 
 5.  Reload the devicemapper thin pool.
 
-    a.  Get the pool name first. The pool name is the first field, delimited by
-        ` :`. This command extracts it.
+    a. Get the pool name first. The pool name is the first field, delimited by
+    `:`. This command extracts it.
 
-            $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
+    ```console
+    $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
+    docker-8:1-123141-pool
+    ```
 
-            docker-8:1-123141-pool
+    b. Dump the device mapper table for the thin pool.
 
-    b.  Dump the device mapper table for the thin pool.
+    ```console
+    $ sudo dmsetup table docker-8:1-123141-pool
+    0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
+    ```
 
-            $ sudo dmsetup table docker-8:1-123141-pool
+    c. Calculate the total sectors of the thin pool using the second field
+    of the output. The number is expressed in 512-k sectors. A 100G file has
+    209715200 512-k sectors. If you double this number to 200G, you get
+    419430400 512-k sectors.
 
-            0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
+    d. Reload the thin pool with the new sector number, using the following
+    three `dmsetup`  commands.
 
-    c.  Calculate the total sectors of the thin pool using the second field
-        of the output. The number is expressed in 512-k sectors. A 100G file has
-        209715200 512-k sectors. If you double this number to 200G, you get
-        419430400 512-k sectors.
-
-    d.  Reload the thin pool with the new sector number, using the following
-        three `dmsetup`  commands.
-
-            $ sudo dmsetup suspend docker-8:1-123141-pool
-
-            $ sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing'
-
-            $ sudo dmsetup resume docker-8:1-123141-pool
-
+    ```console
+    $ sudo dmsetup suspend docker-8:1-123141-pool
+    $ sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing'
+    $ sudo dmsetup resume docker-8:1-123141-pool
+    ```
 
 #### Resize a direct-lvm thin pool
 

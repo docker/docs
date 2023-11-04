@@ -61,7 +61,7 @@ For other drivers, garbage collection can be configured using the
 
 Default garbage collection policies apply to all builders if not set:
 
-```
+```text
 GC Policy rule#0:
         All:            false
         Filters:        type==source.local,type==exec.cachemount,type==source.git.checkout

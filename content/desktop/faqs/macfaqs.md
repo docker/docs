@@ -184,7 +184,7 @@ Desktop `xhyve` virtual machine).
 If you have this directory structure, you do not need to manually add the CA
 certificate to your Mac OS system login:
 
-```
+```text
 /Users/<user>/.docker/certs.d/
 └── <MyRegistry>:<Port>
    ├── ca.crt
@@ -195,7 +195,7 @@ certificate to your Mac OS system login:
 The following further illustrates and explains a configuration with custom
 certificates:
 
-```
+```text
 /etc/docker/certs.d/        <-- Certificate directory
 └── localhost:5000          <-- Hostname:port
    ├── client.cert          <-- Client certificate
@@ -207,7 +207,7 @@ certificates:
 You can also have this directory structure, as long as the CA certificate is
 also in your keychain.
 
-```
+```text
 /Users/<user>/.docker/certs.d/
 └── <MyRegistry>:<Port>
     ├── client.cert

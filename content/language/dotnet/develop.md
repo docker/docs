@@ -40,7 +40,7 @@ In the `add-db` branch, only the .NET application has been updated. None of the 
 
 You should now have the following in your `docker-dotnet-sample` directory.
 
-```
+```text
 ├── docker-dotnet-sample/
 │ ├── .git/
 │ ├── src/
@@ -128,7 +128,7 @@ You must create this file as it's not included in the source repository.
 In the `docker-dotnet-sample` directory, create a new directory named `db` and
 inside that directory create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add the following password. The password must be on a single line, with no additional lines in the file.
 
-```
+```text
 example
 ```
 
@@ -136,7 +136,7 @@ Save and close the `password.txt` file.
 
 You should now have the following in your `docker-dotnet-sample` directory.
 
-```
+```text
 ├── docker-dotnet-sample/
 │ ├── .git/
 │ ├── db/

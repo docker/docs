@@ -100,7 +100,7 @@ Before you run the application using Compose, notice that this Compose file spec
 
 In the cloned repository's directory, create a new directory named `db` and inside that directory create a file named `password.txt` that contains the password for the database. Using your favorite IDE or text editor, add the following contents to the `password.txt` file.
 
-```
+```text
 mysecretpassword
 ```
 
@@ -109,17 +109,17 @@ Save and close the `password.txt` file.
 You should now have the following contents in your `python-docker-dev`
 directory.
 
-   ```
-   ├── python-docker-dev/
-   │ ├── db/
-   │ │ └── password.txt
-   │ ├── app.py
-   │ ├── requirements.txt
-   │ ├── .dockerignore
-   │ ├── compose.yaml
-   │ ├── Dockerfile
-   │ └── README.md
-   ```
+```text
+├── python-docker-dev/
+│ ├── db/
+│ │ └── password.txt
+│ ├── app.py
+│ ├── requirements.txt
+│ ├── .dockerignore
+│ ├── compose.yaml
+│ ├── Dockerfile
+│ └── README.md
+```
 
 Now, run the following `docker compose up` command to start your application.
 

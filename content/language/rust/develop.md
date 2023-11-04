@@ -72,7 +72,7 @@ For the sample application, you'll use a variation of the backend from the react
 
 1. Clone the sample application repository using the following command.
 
-   ```
+   ```console
    $ git clone https://github.com/docker/docker-rust-postgres
    ```
 
@@ -200,7 +200,7 @@ For the sample application, you'll use a variation of the backend from the react
 
    You should get a response like the following.
 
-   ```
+   ```json
    [{"id":1,"login":"root"}]
    ```
 
@@ -282,7 +282,7 @@ Before you run the application using Compose, notice that this Compose file spec
 
 In the cloned repository's directory, create a new directory named `db` and inside that directory create a file named `password.txt` that contains the password for the database. Using your favorite IDE or text editor, add the following contents to the `password.txt` file.
 
-```
+```text
 mysecretpassword
 ```
 
@@ -304,7 +304,7 @@ $ curl http://localhost:8000/users
 
 You should receive the following response:
 
-```
+```json
 [{"id":1,"login":"root"}]
 ```
 

@@ -126,14 +126,14 @@ Make sure you meet the system requirements outlined earlier and follow the distr
 { .important } 
 
 1. Download the correct package for your Linux distribution and install it with the corresponding package manager. 
- - [Install on Debian](debian.md)
- - [Install on Fedora](fedora.md)
- - [Install on Ubuntu](ubuntu.md)
- - [Install on Arch](archlinux.md) 
+   - [Install on Debian](debian.md)
+   - [Install on Fedora](fedora.md)
+   - [Install on Ubuntu](ubuntu.md)
+   - [Install on Arch](archlinux.md) 
 
 2. Open your **Applications** menu in Gnome/KDE Desktop and search for **Docker Desktop**.
 
-    ![Docker app in Applications](images/docker-app-in-apps.png)
+   ![Docker app in Applications](images/docker-app-in-apps.png)
 
 3. Select **Docker Desktop** to start Docker. <br> The Docker menu ({{< inline-image src="images/whale-x.svg" alt="whale menu" >}}) displays the Docker Subscription Service Agreement.
 
