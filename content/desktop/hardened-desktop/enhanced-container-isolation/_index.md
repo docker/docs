@@ -124,13 +124,13 @@ When Enhanced Container Isolation is enabled, users see:
 
 To check, run:
 
-```
+```console
 $ docker run --rm alpine cat /proc/self/uid_map
 ```
 
 The following output displays:
 
-```
+```text
          0     100000      65536
 ```
 
@@ -144,7 +144,7 @@ further details, see [How Enhanced Container Isolation works](how-eci-works.md).
 
 In contrast, without ECI the Linux user namespace is not used for containers, the following displays:
 
-```
+```text
          0          0 4294967295
 ```
 
@@ -158,7 +158,7 @@ $ docker inspect --format='{{.HostConfig.Runtime}}' my_container
 
 It outputs:
 
-```
+```text
 sysbox-runc
 ```
 

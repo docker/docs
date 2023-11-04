@@ -1102,12 +1102,14 @@ RACK_ENV=development
 ```
 
 Compose also recognizes inline comments, like in:
-```
+
+```sh
 MY_VAR = value # this is a comment
 ```
 
 To avoid interpreting "#" as an inline comment, use the quotation marks:
-```
+
+```sh
 MY_VAR = "All the # inside are taken as part of the value"
 ```
 
@@ -2412,7 +2414,7 @@ Use the host's networking stack, or no networking. Equivalent to
 `docker stack` commands. If you use the `docker-compose` command,
 use [network_mode](#network_mode) instead.
 
-If you want to use a particular network on a common build, use [network] as
+If you want to use a particular network on a common build, use `network` as
 mentioned in the second yaml file example.
 
 The syntax for using built-in networks such as `host` and `none` is a little

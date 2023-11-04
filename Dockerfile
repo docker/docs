@@ -35,7 +35,10 @@ COPY --from=build /out /
 FROM davidanson/markdownlint-cli2:v0.10.0 as lint
 USER root
 RUN --mount=type=bind,target=. \
-    /usr/local/bin/markdownlint-cli2 content/**/*.md
+    /usr/local/bin/markdownlint-cli2 \
+    "content/**/*.md" \
+    "#content/engine/release-notes/*.md" \
+    "#content/desktop/previous-versions/*.md"
 
 FROM wjdp/htmltest:v${HTMLTEST_VERSION} as test
 WORKDIR /test

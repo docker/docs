@@ -151,7 +151,7 @@ CMD ["./mvnw", "spring-boot:run"]
 
 To increase the performance of the build, and as a general best practice, Docker recommends that you create a `.dockerignore` file in the same directory as the Dockerfile. For this tutorial, your `.dockerignore` file should contain just one line:
 
-```
+```text
 target
 ```
 

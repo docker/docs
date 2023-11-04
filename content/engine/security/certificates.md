@@ -43,7 +43,7 @@ repository.
 
 The following illustrates a configuration with custom certificates:
 
-```
+```text
     /etc/docker/certs.d/        <-- Certificate directory
     └── localhost:5000          <-- Hostname:port
        ├── client.cert          <-- Client certificate
@@ -79,13 +79,13 @@ as client certificates. If a CA certificate is accidentally given the extension
 `.cert` instead of the correct `.crt` extension, the Docker daemon logs the
 following error message:
 
-```
+```text
 Missing key KEY_NAME for client certificate CERT_NAME. CA certificates should use the extension .crt.
 ```
 
 If the Docker registry is accessed without a port number, do not add the port to the directory name.  The following shows the configuration for a registry on default port 443 which is accessed with `docker login my-https.registry.example.com`:
 
-```
+```text
     /etc/docker/certs.d/
     └── my-https.registry.example.com          <-- Hostname without port
        ├── client.cert

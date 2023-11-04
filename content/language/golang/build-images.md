@@ -106,7 +106,7 @@ $ go run main.go
 This should compile and start the server as a foreground application, outputting
 the banner, as illustrated in the following figure.
 
-```
+```text
    ____    __
   / __/___/ /  ___
  / _// __/ _ \/ _ \
@@ -426,7 +426,7 @@ $ docker image ls
 
 You will see that the tag `v1.0` is no longer in the list of images kept by your Docker instance.
 
-```
+```text
 REPOSITORY                       TAG       IMAGE ID       CREATED         SIZE
 docker-gs-ping                   latest    7f153fbcc0a8   7 minutes ago   1.11GB
 ...
@@ -506,7 +506,7 @@ $ docker build -t docker-gs-ping:multistage -f Dockerfile.multistage .
 Comparing the sizes of `docker-gs-ping:multistage` and `docker-gs-ping:latest`
 you see a few orders-of-magnitude difference.
 
-```
+```console
 $ docker image ls
 REPOSITORY       TAG          IMAGE ID       CREATED              SIZE
 docker-gs-ping   multistage   e3fdde09f172   About a minute ago   28.1MB

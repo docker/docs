@@ -347,20 +347,20 @@ Successfully removed ben from registry.example.com/admin/demo
 #### Troubleshooting
 
 1) If you see an error that there are no usable keys in `targets/releases`, you 
-will need to add additional delegations using `docker trust signer add` before 
-resigning images.
+   will need to add additional delegations using `docker trust signer add` before 
+   resigning images.
 
-```console
-WARN[0000] role targets/releases has fewer keys than its threshold of 1; it will not be usable until keys are added to it
-```
+   ```text
+   WARN[0000] role targets/releases has fewer keys than its threshold of 1; it will not be usable until keys are added to it
+   ```
 
 2) If you have added additional delegations already and are seeing an error 
-message that there are no valid signatures in `targest/releases`, you will need
-to resign the `targets/releases` delegation file with the Notary CLI.
+   message that there are no valid signatures in `targest/releases`, you will need
+   to resign the `targets/releases` delegation file with the Notary CLI.
 
-```console
-WARN[0000] Error getting targets/releases: valid signatures did not meet threshold for targets/releases 
-```
+   ```text
+   WARN[0000] Error getting targets/releases: valid signatures did not meet threshold for targets/releases 
+   ```
 
 Resigning the delegation file is done with the `$ notary witness` command
 
@@ -381,53 +381,53 @@ and the role specific to that signer `targets/<name>`.
 
 1) We will need to grab the Key ID from the Notary Server
 
-```console
-$ notary delegation list registry.example.com/admin/demo
+   ```console
+   $ notary delegation list registry.example.com/admin/demo
 
-ROLE                PATHS             KEY IDS                                                             THRESHOLD
-----                -----             -------                                                             ---------
-targets/jeff        "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
-                                      1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    
-targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
-                                      1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    
-```
+   ROLE                PATHS             KEY IDS                                                             THRESHOLD
+   ----                -----             -------                                                             ---------
+   targets/jeff        "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
+                                         1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    
+   targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1
+                                         1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    
+   ```
 
 2) Remove from the `targets/releases` delegation
 
-```console
-$ notary delegation remove registry.example.com/admin/demo targets/releases 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
-
-Auto-publishing changes to registry.example.com/admin/demo
-Enter username: admin
-Enter password: 
-Enter passphrase for targets key with ID b0014f8: 
-Successfully published changes for repository registry.example.com/admin/demo
-```
+   ```console
+   $ notary delegation remove registry.example.com/admin/demo targets/releases 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
+   
+   Auto-publishing changes to registry.example.com/admin/demo
+   Enter username: admin
+   Enter password: 
+   Enter passphrase for targets key with ID b0014f8: 
+   Successfully published changes for repository registry.example.com/admin/demo
+   ```
 
 3) Remove from the `targets/<name>` delegation
 
-```console
-$ notary delegation remove registry.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
-
-Removal of delegation role targets/jeff with keys [5570b88df0736c468493247a07e235e35cf3641270c944d0e9e8899922fc6f99], to repository "registry.example.com/admin/demo" staged for next publish.
-
-Auto-publishing changes to registry.example.com/admin/demo
-Enter username: admin    
-Enter password: 
-Enter passphrase for targets key with ID b0014f8: 
-Successfully published changes for repository registry.example.com/admin/demo
-```
+   ```console
+   $ notary delegation remove registry.example.com/admin/demo targets/jeff 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 --publish
+   
+   Removal of delegation role targets/jeff with keys [5570b88df0736c468493247a07e235e35cf3641270c944d0e9e8899922fc6f99], to repository "registry.example.com/admin/demo" staged for next publish.
+   
+   Auto-publishing changes to registry.example.com/admin/demo
+   Enter username: admin    
+   Enter password: 
+   Enter passphrase for targets key with ID b0014f8: 
+   Successfully published changes for repository registry.example.com/admin/demo
+   ```
 
 4) Check the remaining delegation list 
 
-```console
-$ notary delegation list registry.example.com/admin/demo
-
-ROLE                PATHS             KEY IDS                                                             THRESHOLD
-----                -----             -------                                                             ---------
-targets/jeff        "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1    
-targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1    
-```
+   ```console
+   $ notary delegation list registry.example.com/admin/demo
+   
+   ROLE                PATHS             KEY IDS                                                             THRESHOLD
+   ----                -----             -------                                                             ---------
+   targets/jeff        "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1    
+   targets/releases    "" <all paths>    8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    1    
+   ```
 
 ### Removing a local Delegation Private Key
 
@@ -437,26 +437,26 @@ the `$ notary key remove` command.
 
 1) We will need to get the Key ID from the local Docker Trust store
 
-```console
-$ notary key list
-
-ROLE       GUN                          KEY ID                                                              LOCATION
-----       ---                          ------                                                              --------
-root                                    f6c6a4b00fefd8751f86194c7d87a3bede444540eb3378c4a11ce10852ab1f96    /home/ubuntu/.docker/trust/private
-admin                                   8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    /home/ubuntu/.docker/trust/private
-jeff                                    1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    /home/ubuntu/.docker/trust/private
-targets    ...example.com/admin/demo    c819f2eda8fba2810ec6a7f95f051c90276c87fddfc3039058856fad061c009d    /home/ubuntu/.docker/trust/private
-```
+   ```console
+   $ notary key list
+   
+   ROLE       GUN                          KEY ID                                                              LOCATION
+   ----       ---                          ------                                                              --------
+   root                                    f6c6a4b00fefd8751f86194c7d87a3bede444540eb3378c4a11ce10852ab1f96    /home/ubuntu/.docker/trust/private
+   admin                                   8fb597cbaf196f0781628b2f52bff6b3912e4e8075720378fda60d17232bbcf9    /home/ubuntu/.docker/trust/private
+   jeff                                    1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1    /home/ubuntu/.docker/trust/private
+   targets    ...example.com/admin/demo    c819f2eda8fba2810ec6a7f95f051c90276c87fddfc3039058856fad061c009d    /home/ubuntu/.docker/trust/private
+   ```
 
 2) Remove the key from the local Docker Trust store
 
-```console
-$ notary key remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
-
-Are you sure you want to remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 (role jeff) from /home/ubuntu/.docker/trust/private?  (yes/no)  y
-
-Deleted 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 (role jeff) from /home/ubuntu/.docker/trust/private.
-```
+   ```console
+   $ notary key remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1
+   
+   Are you sure you want to remove 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 (role jeff) from /home/ubuntu/.docker/trust/private?  (yes/no)  y
+   
+   Deleted 1091060d7bfd938dfa5be703fa057974f9322a4faef6f580334f3d6df44c02d1 (role jeff) from /home/ubuntu/.docker/trust/private.
+   ```
 
 ## Removing all trust data from a Repository
 

@@ -96,7 +96,7 @@ services:
       dockerfile: Dockerfile
 ```
 
-```
+```sh
 # .env
 TAG=v1.1.0
 ```
