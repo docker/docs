@@ -626,7 +626,7 @@ You passed the `--build` flag so Docker will compile your image and then start i
 
 Since your set-up is now run by Docker Compose, it has assigned it a project name, so you get a new volume for your CockroachDB instance. This means that your application will fail to connect to the database, because the database doesn't exist in this new volume. The terminal displays an authentication error for the database:
 
-```
+```text
 # ... omitted output ...
 rest-server             | 2021/05/10 00:54:25 failed to initialise the store: pq: password authentication failed for user totoro
 roach                   | *

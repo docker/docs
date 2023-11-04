@@ -79,7 +79,7 @@ Let's get started!
 You should now have the following contents in your `docker-dotnet-sample`
 directory.
 
-```
+```text
 ├── docker-dotnet-sample/
 │ ├── .git/
 │ ├── src/

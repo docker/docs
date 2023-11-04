@@ -71,7 +71,7 @@ below resources with regard to AppArmor profile syntax.
 In this example, you create a custom AppArmor profile for Nginx. Below is the
 custom profile.
 
-```
+```c
 #include <tunables/global>
 
 
@@ -147,7 +147,7 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
 ```
 
 1. Save the custom profile to disk in the
-`/etc/apparmor.d/containers/docker-nginx` file.
+   `/etc/apparmor.d/containers/docker-nginx` file.
 
    The file path in this example is not a requirement. In production, you could
    use another.
@@ -208,7 +208,7 @@ regard to AppArmor.
 AppArmor sends quite verbose messaging to `dmesg`. Usually an AppArmor line
 looks like the following:
 
-```
+```text
 [ 5442.864673] audit: type=1400 audit(1453830992.845:37): apparmor="ALLOWED" operation="open" profile="/usr/bin/docker" name="/home/jessie/docker/man/man1/docker-attach.1" pid=10923 comm="docker" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
 ```
 
@@ -217,7 +217,7 @@ user has the `docker-engine` (Docker Engine Daemon) profile loaded.
 
 Look at another log line:
 
-```
+```text
 [ 3256.689120] type=1400 audit(1405454041.341:73): apparmor="DENIED" operation="ptrace" profile="docker-default" pid=17651 comm="docker" requested_mask="receive" denied_mask="receive"
 ```
 

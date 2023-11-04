@@ -12,7 +12,7 @@ It is available with [Docker Desktop 4.13.0 and later](../release-notes.md).
 
 ### Usage
 
-```
+```bash
 docker dev [OPTIONS] COMMAND
 ```
 

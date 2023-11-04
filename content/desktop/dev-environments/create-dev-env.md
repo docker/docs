@@ -50,7 +50,7 @@ To get started with Dev Environments, you must also install the following tools 
 
 If your WSL 2 distribution doesn't have an `ssh-agent` running, you can append this script at the end of your profile file (that is: ~/.profile, ~/.zshrc, ...).
 
-```
+```bash
 SSH_ENV="$HOME/.ssh/agent-environment"
 function start_agent {
     echo "Initialising new SSH agent..."

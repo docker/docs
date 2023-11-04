@@ -187,7 +187,7 @@ This section contains instructions on how to resolve common issues.
 If you try to run a Wasm container before you have opted in to use the
 containerd image store, an error similar to the following displays:
 
-```
+```text
 docker: Error response from daemon: Unknown runtime specified io.containerd.wasmedge.v1.
 ```
 
@@ -199,7 +199,7 @@ in Docker Desktop settings and try again.
 If you use an older version of Docker Desktop that doesn't support running Wasm
 workloads, you will see an error message similar to the following:
 
-```
+```text
 docker: Error response from daemon: failed to start shim: failed to resolve runtime path: runtime "io.containerd.wasmedge.v1" binary not installed "containerd-shim-wasmedge-v1": file does not exist: unknown.
 ```
 

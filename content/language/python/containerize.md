@@ -72,15 +72,15 @@ Let's get started!
 You should now have the following contents in your `python-docker`
 directory.
 
-   ```
-   ├── python-docker/
-   │ ├── app.py
-   │ ├── requirements.txt
-   │ ├── .dockerignore
-   │ ├── compose.yaml
-   │ ├── Dockerfile
-   │ └── README.md
-   ```
+```text
+├── python-docker/
+│ ├── app.py
+│ ├── requirements.txt
+│ ├── .dockerignore
+│ ├── compose.yaml
+│ ├── Dockerfile
+│ └── README.md
+```
 
 To learn more about the files that `docker init` added, see the following:
  - [Dockerfile](../../engine/reference/builder.md)

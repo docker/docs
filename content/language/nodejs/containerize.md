@@ -83,18 +83,18 @@ Let's get started!
 You should now have the following contents in your `docker-nodejs-sample`
 directory.
 
-   ```
-   ├── docker-nodejs-sample/
-   │ ├── spec/
-   │ ├── src/
-   │ ├── .dockerignore
-   │ ├── .gitignore
-   │ ├── compose.yaml
-   │ ├── Dockerfile
-   │ ├── package-lock.json
-   │ ├── package.json
-   │ └── README.md
-   ```
+```text
+├── docker-nodejs-sample/
+│ ├── spec/
+│ ├── src/
+│ ├── .dockerignore
+│ ├── .gitignore
+│ ├── compose.yaml
+│ ├── Dockerfile
+│ ├── package-lock.json
+│ ├── package.json
+│ └── README.md
+```
 
 To learn more about the files that `docker init` added, see the following:
  - [Dockerfile](../../engine/reference/builder.md)

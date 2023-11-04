@@ -121,8 +121,8 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 
 1. Install Docker Engine, containerd, and Docker Compose:
 
-  {{< tabs >}}
-  {{< tab name="Latest" >}}
+   {{< tabs >}}
+   {{< tab name="Latest" >}}
 
    To install the latest version, run:
 
@@ -136,8 +136,8 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
   
-  {{< /tab >}}
-  {{< tab name="Specific version" >}}
+   {{< /tab >}}
+   {{< tab name="Specific version" >}}
 
    To install a specific version, start by listing the available versions in
    the repository:
@@ -166,8 +166,8 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
   
-  {{< /tab >}}
-  {{< /tabs >}}
+   {{< /tab >}}
+   {{< /tabs >}}
 
 2. Start Docker.
 
@@ -200,6 +200,7 @@ If you can't use Docker's `rpm` repository to install Docker Engine, you can
 download the `.rpm` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
+<!-- markdownlint-disable-next-line -->
 1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
    and choose your version of SLES. Then browse to `s390x/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.

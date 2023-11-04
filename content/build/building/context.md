@@ -76,7 +76,7 @@ contents to the `docker build` command. See [Tarballs](#local-tarballs).
 
 Consider the following directory structure:
 
-```
+```text
 .
 ├── index.ts
 ├── src/

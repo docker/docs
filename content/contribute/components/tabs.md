@@ -36,7 +36,7 @@ fmt.Println("hello world")
 
 ## Markup
 
-````
+````markdown
 {{</* tabs */>}}
 {{</* tab name="JavaScript" */>}}
 
