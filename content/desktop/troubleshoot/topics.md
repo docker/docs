@@ -264,7 +264,7 @@ In the subsequent screen, verify that Hyper-V is enabled.
 #### Virtualization must be turned on
 
 In addition to [Hyper-V](#hyper-v) or [WSL 2](../wsl/index.md), virtualization must be turned on. Check the
-Performance tab on the Task Manager:
+Performance tab on the Task Manager, or you can use the Command Prompt to type systeminfo. If you see the line Hyper-V Requirements:   A hypervisor has been detected. Features required for Hyper-V will not be displayed., then virtualization is enabled.:
 
 ![Task Manager](../images/virtualization-enabled.png)
 
