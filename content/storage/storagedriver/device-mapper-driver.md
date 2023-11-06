@@ -741,7 +741,7 @@ container, it is a snapshot of the image the container is based on. The followin
 example shows a Docker host with two running containers. The first is a `ubuntu`
 container and the second is a `busybox` container.
 
-![Ubuntu and busybox image layers](images/two_dm_container.webp)
+![Ubuntu and busybox image layers](images/two_dm_container.webp?w=450&h=100)
 
 ## How container reads and writes work with `devicemapper`
 
@@ -751,7 +751,7 @@ With `devicemapper`, reads happen at the block level. The diagram below shows
 the high level process for reading a single block (`0x44f`) in an example
 container.
 
-![Reading a block with devicemapper](images/dm_container.webp)
+![Reading a block with devicemapper](images/dm_container.webp?w=650)
 
 An application makes a read request for block `0x44f` in the container. Because
 the container is a thin snapshot of an image, it doesn't have the block, but it
