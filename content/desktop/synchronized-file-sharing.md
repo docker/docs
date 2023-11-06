@@ -111,4 +111,4 @@ Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/
 
 ## Feedback
 
-To give feedback, report bugs, or receive support, email `desktop-preview@docker.com`. There is also have a dedicated Slack channel. To join, simply send an email to the provided address. 
+To give feedback, report bugs, or receive support, email `desktop-preview@docker.com`. There is also a dedicated Slack channel. To join, simply send an email to the provided address.
