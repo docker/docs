@@ -73,7 +73,7 @@ writing new files, modifying existing files, and deleting files, are written to
 this thin writable container layer. The diagram below shows a container based
 on an `ubuntu:15.04` image.
 
-![Layers of a container based on the Ubuntu image](images/container-layers.webp)
+![Layers of a container based on the Ubuntu image](images/container-layers.webp?w=450&h=300)
 
 A _storage driver_ handles the details about the way these layers interact with
 each other. Different storage drivers are available, which have advantages
@@ -91,7 +91,7 @@ stored in this container layer, multiple containers can share access to the same
 underlying image and yet have their own data state. The diagram below shows
 multiple containers sharing the same Ubuntu 15.04 image.
 
-![Containers sharing the same image](images/sharing-layers.webp)
+![Containers sharing the same image](images/sharing-layers.webp?w=600&h=300)
 
 Docker uses storage drivers to manage the contents of the image layers and the
 writable container layer. Each storage driver handles the implementation
