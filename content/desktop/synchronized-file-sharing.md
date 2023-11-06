@@ -108,3 +108,7 @@ Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/
 - Synchronized file sharing proactively reports temporary issues, which can result in occasional **Conflict** and **Problem** indicators appearing in the GUI during synchronization. These can be ignored. However, if they persist, you can report the issue.
 
 - If you switch from WSL2 to Hyper-V on Windows, Docker Desktop needs to be fully restarted.
+
+## Feedback
+
+To give feedback, report bugs,  or receive support, email `desktop-preview@docker.com`. There is also have a dedicated Slack channel. To join, simply send an email to the provided address. 
