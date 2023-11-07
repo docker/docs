@@ -95,6 +95,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 - **Switch to Windows containers** option in the tray menu may not show up on Windows. As a workaround, edit the [`settings.json` file](https://docs.docker.com/desktop/settings/windows/) and set `"displaySwitchWinLinContainers": true`.
 
+#### For all platforms
+- Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**. 
+
 ## 4.24.2
 
 {{< release-date date="2023-10-12" >}}
