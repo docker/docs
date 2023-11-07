@@ -2,6 +2,8 @@
 title: Publish your image
 keywords: get started, quick start, intro, concepts
 description: Learn how to publish your image to Docker Hub
+aliases:
+- /get-started/publish-your-own-image/
 ---
 
 Follow this walkthrough to learn how to publish and share your images on Docker Hub.
@@ -28,21 +30,11 @@ Select **Sign in** on the top-right of Docker Desktop to either sign in or creat
 
 Before you can publish your image, you need to rename it so that Docker Hub knows that the image is yours. In a terminal, run the following command to rename your image. Replace `YOUR-USERNAME` with your Docker ID.
 
+{{< include "open-terminal.md" >}}
+
 ```console
 $ docker tag docker/welcome-to-docker YOUR-USERNAME/welcome-to-docker
 ```
-
-> **Tip**
->
-> To run Docker commands, you must use a terminal. Based on your
-> operating system, you can open a terminal by doing the following:
->
-> For Windows, press `Windows Key`+`r`, in `Open` specify `cmd`, and then select
-> **OK**.
->
-> For Mac, select the **Launchpad** icon in the Dock, specify `Terminal` in the
-> search field, then select **Terminal**.
-{ .tip }
 
 ## Step 4: Push your image to Docker Hub
 

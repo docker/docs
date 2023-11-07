@@ -60,21 +60,11 @@ The `volumes` element tells Compose to mount the local folder `./app` to `/usr/s
 
 In a terminal, run the follow commands to bring up your application.
 
+{{< include "open-terminal.md" >}}
+
 ```console
 docker compose up -d
 ```
-
-> **Tip**
->
-> To run Docker commands, you must use a terminal. Based on your
-> operating system, you can open a terminal by doing the following:
->
-> For Windows, press `Windows Key`+`r`, in `Open` specify `cmd`, and then select
-> **OK**.
->
-> For Mac, select the **Launchpad** icon in the Dock, specify `Terminal` in the
-> search field, then select **Terminal**.
-{ .tip }
 
 ## Step 4: Develop the application
 

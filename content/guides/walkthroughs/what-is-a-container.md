@@ -2,6 +2,8 @@
 title: What is a container?
 keywords: get started, quick start, intro, concepts
 description: Learn what a container is by seeing and inspecting a running container.
+aliases:
+- /get-started/what-is-a-container/
 ---
 
 A container is an isolated environment for your code. This means that a

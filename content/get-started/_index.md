@@ -58,11 +58,6 @@ aliases:
 - /windows/step_six/
 - /windows/step_three/
 - /windows/step_two/
-- /get-started/what-is-a-container/
-- /get-started/run-your-own-container/
-- /get-started/run-docker-hub-images/
-- /get-started/publish-your-own-image/
-- /get-started/hands-on-overview/
 ---
 
 This guide contains step-by-step instructions on how to get started with Docker. This guide shows you how to:

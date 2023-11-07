@@ -27,6 +27,8 @@ grid:
   - title: "Publish your image"
     description: Publish and share you images on Docker Hub
     link: "/engine/"
+aliases:
+- /get-started/hands-on-overview/
 ---
 
 Get introduced to Docker Desktop in these 5-minute hands-on guides.

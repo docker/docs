@@ -2,6 +2,8 @@
 title: How do I run a container?
 keywords: get started, quick start, intro, concepts
 description: Learn how to build your own image and run it as a container
+aliases:
+- /get-started/run-your-own-container/
 ---
 
 In this walkthrough, you'll learn the basic steps of building an image and running your own container. This walkthrough uses a sample Node.js application, but it's not necessary to know Node.js.
@@ -40,10 +42,11 @@ Dockerfile. A Dockerfile describes what goes into a container. This sample alrea
 
 ![Viewing Dockefile contents](images/getting-started-dockerfile.png?w=400)
 
-
 ## Step 3: Build your first image
 
 An image is like a blueprint for a container. You always need an image to run a container. In a terminal, run the following commands to build the image. Replace `/path/to/welcome-to-docker/` with the path to your `welcome-to-docker` directory.
+
+{{< include "open-terminal.md" >}}
 
 ```console
 $ cd /path/to/welcome-to-docker/
@@ -53,18 +56,6 @@ $ docker build -t welcome-to-docker .
 ```
 
 Building the image may take some time. After your image is built, you can view your image in the **Images** tab in Docker Desktop.
-
-> **Tip**
->
-> To run Docker commands, you must use a terminal. Based on your
-> operating system, you can open a terminal by doing the following:
->
-> For Windows, press `Windows Key`+`r`, in `Open` specify `cmd`, and then select
-> **OK**.
->
-> For Mac, select the **Launchpad** icon in the Dock, specify `Terminal` in the
-> search field, then select **Terminal**.
-{ .tip }
 
 ## Step 4: Run your container
 

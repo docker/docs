@@ -14,24 +14,14 @@ Before you start, [get Docker Desktop](../../get-docker.md).
 
 Choose one of your own applications that you would like to containerize, and in a terminal, run the following commands. Replace `/path/to/your/project/` with the directory containing your project.
 
+{{< include "open-terminal.md" >}}
+
 ```console
 $ cd /path/to/your/project/
 ```
 ```console
 $ docker init
 ```
-
-> **Tip**
->
-> To run Docker commands, you must use a terminal. Based on your
-> operating system, you can open a terminal by doing the following:
->
-> For Windows, press `Windows Key`+`r`, in `Open` specify `cmd`, and then select
-> **OK**.
->
-> For Mac, select the **Launchpad** icon in the Dock, specify `Terminal` in the
-> search field, then select **Terminal**.
-{ .tip }
 
 ## Step 2: Follow the on-screen prompts
 

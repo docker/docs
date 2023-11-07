@@ -2,6 +2,8 @@
 title: Run Docker Hub images
 keywords: get started, quick start, intro, concepts
 description: Learn how to run Docker Hub images
+aliases:
+- /get-started/run-docker-hub-images/
 ---
 
 You can share and store images in Docker Hub

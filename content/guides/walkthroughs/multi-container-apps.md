@@ -45,6 +45,8 @@ View the files of the sample application. Notice that it has a `compose.yaml` fi
 
 To run the multi-container application, open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your applications directory
 
+{{< include "open-terminal.md" >}}
+
 ```console
 $ cd /path/to/multi-container-app/
 $ docker compose up -d
@@ -52,18 +54,6 @@ $ docker compose up -d
 ```console
 $ docker compose up -d
 ```
-
-> **Tip**
->
-> To run Docker commands, you must use a terminal. Based on your
-> operating system, you can open a terminal by doing the following:
->
-> For Windows, press `Windows Key`+`r`, in `Open` specify `cmd`, and then select
-> **OK**.
->
-> For Mac, select the **Launchpad** icon in the Dock, specify `Terminal` in the
-> search field, then select **Terminal**.
-{ .tip }
 
 ## Step 4: View the frontend and add todos
 
