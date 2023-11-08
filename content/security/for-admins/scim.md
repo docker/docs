@@ -6,7 +6,7 @@ direct_from:
 - /docker-hub/company-scim/
 - /docker-hub/scim/
 - /admin/company/settings/scim/
--/admin/organization/security-settings/scim/
+- /admin/organization/security-settings/scim/
 ---
 
 This section is for administrators who want to enable System for Cross-domain Identity Management (SCIM) 2.0 for their business. It is available for Docker Business customers.
