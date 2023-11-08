@@ -19,12 +19,12 @@ grid:
 - title: Configure Single Sign-On
   description: Discover how to configure SSO for your entire company.
   icon: key
-  link: /admin/company/settings/sso/
+  link: /security/for-admins/single-sign-on/
 - title: Set up SCIM
   description: Set up SCIM to automatically provision and deprovision users in your
     company.
   icon: checklist
-  link: /admin/company/settings/scim/
+  link: /security/for-admins/SCIM/
 - title: Domain management
   description: Add and verify your domains.
   icon: domain_verification

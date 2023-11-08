@@ -1,11 +1,11 @@
 ---
 description: Overview of Single Sign-On
-keywords: Single Sign-On, SSO, sign-on
+keywords: Single Sign-On, SSO, sign-on, admin, docker hub, docker admin, security
 title: Single Sign-On overview
 aliases:
 - /single-sign-on/
 - /admin/company/settings/sso/
-
+- /admin/organization/security-settings/sso-management/
 ---
 
 SSO allows users to authenticate using their identity providers (IdPs) to access Docker. SSO is available for a whole company, and all associated organizations, or an individual organization that has a Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
@@ -66,4 +66,4 @@ In addition, you should add all email addresses to your IdP.
 ## What's next?
 
 - Start [configuring SSO](configure/_index.md)
-- Explore the [FAQs](/single-sign-on/faqs/)
+- Explore the [FAQs](../../../faq/security/single-sign-on/faqs.md)

@@ -64,7 +64,7 @@ After you’ve completed the SSO configuration process in Docker, you can test t
 > - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
 { .important}
 
-The SSO connection is now created. You can continue to set up SCIM without enforcing SSO log-in. For more information about setting up SCIM, see [Set up SCIM](/admin/organization/security-settings/scim/).
+The SSO connection is now created. You can continue to set up SCIM without enforcing SSO log-in. For more information about setting up SCIM, see [Set up SCIM](/security/for-admins/scim.md).
 
 ## Optional step four: Enforce SSO
 
@@ -92,6 +92,6 @@ The following video provides an overview of configuring SSO with SAML in Entra I
 
 ## What's next?
 
-- [Set up SCIM](/admin/organization/security-settings/scim/)
-- [Enable Group mapping](/admin/organization/security-settings/group-mapping/)
-- [Manage your SSO connections](/admin/organization/security-settings/sso-management/)
+- [Set up SCIM](/security/for-admins/scim.md)
+- [Enable Group mapping](/security/for-admins/group-mapping.md)
+- [Manage your SSO connections](/security/for-admins/single-sign-on/mange.md)

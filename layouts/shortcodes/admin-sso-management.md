@@ -85,5 +85,5 @@ To remove a user:
 
 ## What's next?
 
-- [Set up SCIM](/admin/company/settings/scim/)
-- [Enable Group mapping](/admin/company/settings/group-mapping/)
+- [Set up SCIM](/security/for-admins/scim.md)
+- [Enable Group mapping](/security/for-admins/group-mapping.md)

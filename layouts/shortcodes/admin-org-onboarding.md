@@ -1,11 +1,11 @@
-{{ $sso_link := "[Configure SSO](/single-sign-on/)" }}
-{{ $scim_link := "[Configure SCIM](/docker-hub/scim/)" }}
+{{ $sso_link := "[Configure SSO](/security/for-admins/single-sign-on/)" }}
+{{ $scim_link := "[Configure SCIM](/security/for-admins/scim/)" }}
 {{ $members_link := "[Invite members](/docker-hub/members/)" }}
 {{ $audit_link := "[Audit your domains](/docker-hub/domain-audit/)" }}
 
 {{ if eq (.Get "product") "admin" }}
-  {{ $sso_link = "[Configure SSO](/admin/organization/security-settings/sso/)" }}
-  {{ $scim_link = "[Configure SCIM](/admin/organization/security-settings/scim/)" }}
+  {{ $sso_link = "[Configure SSO](/security/for-admins/single-sign-on/)" }}
+  {{ $scim_link = "[Configure SCIM](/security/for-admins/scim/)" }}
   {{ $members_link = "[Invite members](/admin/organization/members/)" }}
   {{ $audit_link = "[Audit your domains](/admin/organization/security-settings/domains/)" }}
 {{ end }}
