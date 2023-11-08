@@ -16,7 +16,7 @@ When SSO is enabled, users are redirected to your IdP's authentication page to s
 
 The following diagram shows how SSO operates and is managed in Docker Hub and Docker Desktop. In addition, it provides information on how to authenticate between your IdP.
 
-![SSO architecture](/single-sign-on/images/SSO.png)
+![SSO architecture](images/SSO.png)
 
 ## How to set it up
 
@@ -51,7 +51,7 @@ You can also configure attributes to override default values, such as default te
 
 > **Important**
 >
-> If none of the email address attributes listed in the previous table are found, SSO will return an error.
+> If none of the email address attributes listed in the previous table are found, SSO returns an error.
 { .important}
 
 ## Prerequisites

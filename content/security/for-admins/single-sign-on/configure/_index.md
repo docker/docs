@@ -40,10 +40,20 @@ Follow the steps on this page to configure SSO for your organization or company.
 {{< /tab >}}
 {{< tab name="Docker Admin" >}}
 
-{{% admin-sso-config product="admins" %}}
+{{% admin-sso-config product="admin" %}}
 
 {{< /tab >}}
 {{< /tabs >}}
 
+## More resources
 
+The following video provides an overview of configuring SSO with SAML in Entra ID (formerly Azure AD).
+
+<iframe title="Configure SSO with SAML in Entra ID overview" class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/0a30409381f340cfb01790adbd9aa9b3?sid=7e4e10a7-7f53-437d-b593-8a4886775632"></iframe>
+
+## What's next?
+
+- [Set up SCIM](../../scim.md)
+- [Enable Group mapping](../../group-mapping.md)
+- [Manage your SSO connections](../manage/_index.md)
 

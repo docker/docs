@@ -82,8 +82,3 @@ To remove a user:
 2. {{ $member_navigation }}
 3. Select the action icon next to a user’s name, and then select {{ $remove_button }}.
 4. Follow the on-screen instructions to remove the user.
-
-## What's next?
-
-- [Set up SCIM](/security/for-admins/scim.md)
-- [Enable Group mapping](/security/for-admins/group-mapping.md)

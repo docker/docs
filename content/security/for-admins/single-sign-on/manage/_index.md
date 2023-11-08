@@ -45,4 +45,8 @@ aliases:
 {{< /tab >}}
 {{< /tabs >}}
 
+ ## What's next?
+
+- [Set up SCIM](../../scim.md)
+- [Enable Group mapping](../../group-mapping.md)
 

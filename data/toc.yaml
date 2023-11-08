@@ -2188,15 +2188,15 @@ FAQ:
       title: Enhanced Container Isolation
     - sectiontitle: Single Sign-On
       section:
-      - path: /security/single-sign-on/faqs/
+      - path: /faq/security/single-sign-on/faqs/
         title: General
-      - path: /security/single-sign-on/saml-faqs/
+      - path: /faq/security/single-sign-on/saml-faqs/
         title: SAML
-      - path: /security/single-sign-on/idp-faqs/
+      - path: /faq/security/single-sign-on/idp-faqs/
         title: Identity providers
-      - path: /security/single-sign-on/domain-faqs/
+      - path: /faq/security/single-sign-on/domain-faqs/
         title: Domains
-      - path: /security/single-sign-on/enforcement-faqs/
+      - path: /faq/security/single-sign-on/enforcement-faqs/
         title: Enforcement
-      - path: /security/single-sign-on/users-faqs/
+      - path: /faq/security/single-sign-on/users-faqs/
         title: Manage users

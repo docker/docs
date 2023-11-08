@@ -84,14 +84,3 @@ Your users must now sign in to Docker with SSO.
 > If SSO isn't enforced, users can choose to sign in with either their Docker ID or SSO.
 { .important}
 
-## More resources
-
-The following video provides an overview of configuring SSO with SAML in Entra ID (formerly Azure AD).
-
-<iframe title="Configure SSO with SAML in Entra ID overview" class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/0a30409381f340cfb01790adbd9aa9b3?sid=7e4e10a7-7f53-437d-b593-8a4886775632"></iframe>
-
-## What's next?
-
-- [Set up SCIM](/security/for-admins/scim.md)
-- [Enable Group mapping](/security/for-admins/group-mapping.md)
-- [Manage your SSO connections](/security/for-admins/single-sign-on/mange.md)
