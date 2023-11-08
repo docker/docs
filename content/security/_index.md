@@ -73,6 +73,10 @@ grid_resources:
   description: Understand the steps you can take to improve the security of your container.
   icon: category
   link: /develop/security-best-practices/
+- title: Docker Scout
+  description: Explore how Docker Scout can help you create a more secure software supply chain.
+  icon: query_stats
+  link: /scout/
 ---
 
 Docker provides security guardrails for both administrators and developers. 
