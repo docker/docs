@@ -54,7 +54,7 @@ When you add members to a team, you can manage their repository permissions. For
 
 See the following diagram for an example of how permissions may work for a user. In this example, the first permission check is for the role: member or editor. Editors have administrative permissions for repositories across the namespace of the organization. Members may have administrative permissions for a repository if they're a member of a team that grants those permissions.
 
-![User repository permissions within an organization](./images/roles-and-permissions-member-editor-roles.png)
+![User repository permissions within an organization](../images/roles-and-permissions-member-editor-roles.png)
 
 ### Organization management permissions
 
