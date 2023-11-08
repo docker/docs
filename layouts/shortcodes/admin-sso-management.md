@@ -10,7 +10,7 @@
   {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
   {{ $invite_button = "**Invite**" }}
   {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM**." }}
-  {{ $member_navigation = `Navigate to the user management page for your organization or company. 
+  {{ $member_navigation := `Navigate to the user management page for your organization or company. 
     - Organization: Select your organization in the left navigation drop-down menu, and then select **Members**.
     - Company: Select your company in the left navigation drop-down menu, and then select **Users**.` }}
   {{ $remove_button = "**Remove member**, if you're an organization, or **Remove user**, is you're a company" }}
