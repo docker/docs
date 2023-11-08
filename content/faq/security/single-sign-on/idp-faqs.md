@@ -2,6 +2,8 @@
 description: Single Sign-on FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
 title: Identity providers
+aliases:
+- /single-sign-on/idp-faqs/
 ---
 
 ### Is it possible to use more than one IdP with Docker SSO?

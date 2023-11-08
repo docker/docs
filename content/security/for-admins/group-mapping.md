@@ -1,20 +1,18 @@
-{{ $scim_link := "[Enable SCIM](/docker-hub/scim/)" }}
-{{ $mapping_link := "[user-level attributes](docker-hub/scim.md#set-up-role-mapping)"}}
-
-{{ if eq (.Get "product") "admin" }}
-{{ $scim_link = "[Enable SCIM](/admin/organization/security-settings/scim/)" }}
-{{ $mapping_link = "[user-level attributes](admin/organization/security-settings/scim.md#set-up-role-mapping)"}}
-{{ if eq (.Get "layer") "company" }}
-{{ $scim_link = "[Enable SCIM](/admin/company/settings/scim/)" }}
-{{ $mapping_link = "[user-level attributes](admin/company/settings/scim.md#set-up-role-mapping)"}}
-{{ end }}
-{{ end }}
+---
+description: Group mapping in Docker Hub
+keywords: Group Mapping, SCIM, Docker Hub
+title: Group Mapping
+aliases:
+- /admin/company/settings/group-mapping/
+- /admin/organization/security-settings/group-mapping/
+- /docker-hub/group-mapping/
+---
 
 With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams.
 
 > **Tip**
 >
-> Group mapping is ideal for adding a user to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, you can use {{ $mapping_link }}.
+> Group mapping is ideal for adding a user to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, you can use [user-level attributes](scim.md#set-up-role-mapping).
 { .tip }
 
 ## How group mapping works
@@ -71,5 +69,5 @@ Once complete, a user who signs in to Docker through SSO is automatically added 
 
 > **Tip**
 >
-> {{ $scim_link }} to take advantage of automatic user provisioning and de-provisioning. If you don't enable SCIM users are only automatically provisioned. You have to de-provision them manually.
+> [Enable SCIM](scim.md) to take advantage of automatic user provisioning and de-provisioning. If you don't enable SCIM users are only automatically provisioned. You have to de-provision them manually.
 { .tip }

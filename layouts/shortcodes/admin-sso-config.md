@@ -2,39 +2,11 @@
 {{ $sso_navigation := `Navigate to the SSO settings page for your organization or company.
    - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
    - Company: Select **Organizations**, your company, and then **Settings**.` }}
-{{ $domain_navigation := `Navigate to the domain settings page for your organization or company.
-   - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
-   - Company: Select **Organizations**, your company, and then **Settings**.` }}
-{{ $member_navigation := "Select **Organizations, your organization, and then **Members**." }}
-{{ $invite_button := "**Invite members**" }}
-{{ $remove_button := "**Remove member**" }}
-{{ $scim_link := "[Set up SCIM](/docker-hub/scim/)" }}
-{{ $mapping_link := "[Enable Group mapping](/docker-hub/group-mapping/)" }}
-{{ $sso_mgmt_link := "[Manage your SSO connections](/single-sign-on/manage/)" }}
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
-  {{ $invite_button = "**Invite**" }}
-  {{ $remove_button = "**Remove member**" }}
-  {{ $sso_navigation = "Select your organization in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
-  {{ $member_navigation = "Select your organization in the left navigation drop-down menu, and then select **Members**." }}
-  {{ $domain_navigation = "Select your organization in the left navigation drop-down menu, and then select **Domain management**." }}
-  {{ $remove_button = "**Remove member**" }}
-  {{ $scim_link = "[Set up SCIM](/admin/organization/security-settings/scim/)" }}
-  {{ $mapping_link = "[Enable Group mapping](/admin/organization/security-settings/group-mapping/)" }}
-  {{ $sso_mgmt_link = "[Manage your SSO connections](/admin/organization/security-settings/sso-management/)" }}
-{{ if eq (.Get "layer") "company" }}
-  {{ $sso_navigation = "Select your company in the left navigation drop-down menu, and then select **SSO & SCIM**." }}
-  {{ $domain_navigation = "Select your company in the left navigation drop-down menu, and then select **Domain management**." }}
-  {{ $member_navigation = "Select your organization in the left navigation drop-down menu, and then select **Users**." }}
-  {{ $remove_button = "**Remove user**" }}
-  {{ $scim_link = "[Set up SCIM](/admin/company/settings/scim/)" }}
-  {{ $mapping_link = "[Enable Group mapping](/admin/company/settings/group-mapping/)" }}
-  {{ $sso_mgmt_link = "[Manage your SSO connections](/admin/company/settings/sso-management/)" }}
+  {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
 {{ end }}
-{{ end }}
-
-## Step two: Create an SSO connection
 
 > **Important**
 >
@@ -92,7 +64,7 @@ After you’ve completed the SSO configuration process in Docker, you can test t
 > - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users)
 { .important}
 
-The SSO connection is now created. You can continue to set up SCIM without enforcing SSO log-in. For more information about setting up SCIM, see {{ $scim_link }}.
+The SSO connection is now created. You can continue to set up SCIM without enforcing SSO log-in. For more information about setting up SCIM, see [Set up SCIM](/admin/organization/security-settings/scim/).
 
 ## Optional step four: Enforce SSO
 
@@ -120,6 +92,6 @@ The following video provides an overview of configuring SSO with SAML in Entra I
 
 ## What's next?
 
-- {{ $sso_mgmt_link }}
-- {{ $scim_link }}
-- {{ $mapping_link }}
+- [Set up SCIM](/admin/organization/security-settings/scim/)
+- [Enable Group mapping](/admin/organization/security-settings/group-mapping/)
+- [Manage your SSO connections](/admin/organization/security-settings/sso-management/)

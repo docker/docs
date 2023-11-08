@@ -2,6 +2,8 @@
 description: Single Sign-on FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
 title: SAML
+aliases:
+- /single-sign-on/saml-faqs/
 ---
 
 ### Does SAML authentication require additional attributes?
