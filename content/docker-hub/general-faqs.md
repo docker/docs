@@ -65,7 +65,7 @@ The organization owner can also add additional owners to help them manage users,
 ### Can I configure multiple SSO identity providers (IdPs) to authenticate users to a single org?
 
 Docker SSO allows only one IdP configuration per organization. For more
-information, see [Configure SSO](../security/for-admins/single-sign-on/index.md) and [SSO FAQs](../faq/security/single-sign-on/faqs.md).
+information, see [Configure SSO](../security/for-admins/single-sign-on/configure/_index.md) and [SSO FAQs](../faq/security/single-sign-on/faqs.md).
 
 ### What is a service account?
 

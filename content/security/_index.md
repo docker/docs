@@ -42,7 +42,7 @@ grid_admins:
 - title: Roles and permissions
   description: Assign roles to individuals giving them different permissions within an organization. 
   icon: badge
-  link: /scout/
+  link: /security/for-admins/roles-and-permissions/
 grid_developers: 
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
