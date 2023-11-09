@@ -1,14 +1,14 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
 {{ $domain_navigation := "Select **Organizations**, your organization, **Settings**, and then **Security**." }}
-{{ $sso_link := "[SSO](/single-sign-on/)" }}
-{{ $scim_link := "[SCIM](/docker-hub/scim/)" }}
+{{ $sso_link := "[SSO](/security/for-admins/single-sign-on/)" }}
+{{ $scim_link := "[SCIM](/security/for-admins/scim/)" }}
 {{ $invite_link := "[Invite members](/docker-hub/members/)" }}
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
   {{ $domain_navigation = "Select your organization in the left navigation drop-down menu, and then select **Domain management**." }}
-  {{ $sso_link = "[SSO](/admin/organization/security-settings/sso/)" }}
-  {{ $scim_link = "[SCIM](/admin/organization/security-settings/scim/)" }}
+  {{ $sso_link = "[SSO](/security/for-admins/single-sign-on/)" }}
+  {{ $scim_link = "[SCIM](/security/for-admins/scim/)" }}
   {{ $invite_link = "[Invite members](/admin/organization/members/)" }}
 {{ end }}
 

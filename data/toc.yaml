@@ -2010,18 +2010,6 @@ Manuals:
       title: Manage users
     - path: /admin/company/owners/
       title: Manage company owners
-    - sectiontitle: SSO & SCIM
-      section:
-      - path: /admin/company/settings/sso/
-        title: Single Sign-On overview
-      - path: /admin/company/settings/sso-configuration/
-        title: Configure Single Sign-On
-      - path: /admin/company/settings/sso-management/
-        title: Manage Single Sign-On
-      - path: /admin/company/settings/scim/
-        title: SCIM
-      - path: /admin/company/settings/group-mapping/
-        title: Group mapping
 
   - sectiontitle: Organization administration
     section:
@@ -2035,18 +2023,6 @@ Manuals:
       title: Activity logs
     - path: /admin/organization/general-settings/
       title: General settings
-    - sectiontitle: SSO & SCIM
-      section:
-      - path: /admin/organization/security-settings/sso/
-        title: Single Sign-On overview
-      - path: /admin/organization/security-settings/sso-configuration/
-        title: Configure Single Sign-On
-      - path: /admin/organization/security-settings/sso-management/
-        title: Manage Single Sign-On
-      - path: /admin/organization/security-settings/scim/
-        title: SCIM
-      - path: /admin/organization/security-settings/group-mapping/
-        title: Group mapping
 
 - sectiontitle: Administration 
   section:
@@ -2070,20 +2046,6 @@ Manuals:
     title: Create and manage a team
   - path: /docker-hub/members/
     title: Manage members
-  - path: /docker-hub/roles-and-permissions/
-    title: Roles and permissions
-  - sectiontitle: Single Sign-on
-    section:
-      -  path: /single-sign-on/
-         title: Overview
-      -  path: /single-sign-on/configure/
-         title: Configure
-      -  path: /single-sign-on/manage/
-         title: Manage
-  - path: /docker-hub/scim/
-    title: SCIM
-  - path: /docker-hub/group-mapping/
-    title: Group mapping
   - path: /docker-hub/audit-log/
     title: Audit logs
   - path: /docker-hub/deactivate-account/
@@ -2095,8 +2057,22 @@ Manuals:
     title: Overview
   - sectiontitle: For admins
     section:
+    - sectiontitle: Single Sign-on
+      section:
+      -  path: /security/for-admins/single-sign-on/
+         title: Overview
+      -  path: /security/for-admins/single-sign-on/configure/
+         title: Configure
+      -  path: /security/for-admins/single-sign-on/manage/
+         title: Manage
+    - path: /security/for-admins/scim/
+      title: SCIM
+    - path: /security/for-admins/group-mapping/
+      title: Group mapping
     - path: /security/for-admins/configure-sign-in/
       title: Enforce sign in
+    - path: /security/for-admins/roles-and-permissions/
+      title: Roles and permissions
     - path: /security/for-admins/domain-audit/
       title: Domain audit
     - path: /security/for-admins/image-access-management/
@@ -2202,20 +2178,6 @@ FAQ:
       title: Organization
     - path: /docker-hub/company-faqs/
       title: Company
-    - sectiontitle: Single Sign-On
-      section:
-      - path: /single-sign-on/faqs/
-        title: General
-      - path: /single-sign-on/saml-faqs/
-        title: SAML
-      - path: /single-sign-on/idp-faqs/
-        title: Identity providers
-      - path: /single-sign-on/domain-faqs/
-        title: Domains
-      - path: /single-sign-on/enforcement-faqs/
-        title: Enforcement
-      - path: /single-sign-on/users-faqs/
-        title: Manage users
   - path: /subscription/faq/
     title: Subscription
   - sectiontitle: Security
@@ -2224,3 +2186,17 @@ FAQ:
       title: General
     - path: /faq/security/eci-faq/
       title: Enhanced Container Isolation
+    - sectiontitle: Single Sign-On
+      section:
+      - path: /faq/security/single-sign-on/faqs/
+        title: General
+      - path: /faq/security/single-sign-on/saml-faqs/
+        title: SAML
+      - path: /faq/security/single-sign-on/idp-faqs/
+        title: Identity providers
+      - path: /faq/security/single-sign-on/domain-faqs/
+        title: Domains
+      - path: /faq/security/single-sign-on/enforcement-faqs/
+        title: Enforcement
+      - path: /faq/security/single-sign-on/users-faqs/
+        title: Manage users

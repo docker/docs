@@ -31,6 +31,18 @@ grid_admins:
   description: Explore how Docker Scout can help you create a more secure software supply chain.
   icon: query_stats
   link: /scout/
+- title: SSO
+  description: Learn how to configure SSO for your company or organization.
+  icon: key
+  link: /security/for-admins/single-sign-on/
+- title: SCIM
+  description: Set up SCIM to automatically provision and deprovision users.
+  icon: checklist
+  link: /security/for-admins/scim/
+- title: Roles and permissions
+  description: Assign roles to individuals giving them different permissions within an organization. 
+  icon: badge
+  link: /security/for-admins/roles-and-permissions/
 grid_developers: 
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
@@ -61,6 +73,10 @@ grid_resources:
   description: Understand the steps you can take to improve the security of your container.
   icon: category
   link: /develop/security-best-practices/
+- title: Docker Scout
+  description: Explore how Docker Scout can help you create a more secure software supply chain.
+  icon: query_stats
+  link: /scout/
 ---
 
 Docker provides security guardrails for both administrators and developers. 

@@ -2,6 +2,8 @@
 description: Single Sign-on FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
 title: Enforcement
+aliases:
+- /single-sign-on/enforcement-faqs/
 ---
 
 ### We currently have a Docker Team subscription. How do we enable SSO?
@@ -18,7 +20,7 @@ Yes. You must verify a domain before using it with an SSO connection.
 
 ### Does Docker SSO support authenticating through the command line?
 
-Yes. When SSO is enforced, you can access the Docker CLI through Personal Access Tokens (PATs).  Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](../security/for-developers/access-tokens.md).
+Yes. When SSO is enforced, you can access the Docker CLI through Personal Access Tokens (PATs).  Each user must create a PAT to access the CLI. To learn how to create a PAT, see [Manage access tokens](../../../security/for-developers/access-tokens.md).
 
 ### How does SSO affect our automation systems and CI/CD pipelines?
 
@@ -60,5 +62,5 @@ No. They are different features that you can use separately or together.
 Enforcing SSO ensures that users sign in using their SSO credentials instead of their Docker ID. One of the benefits is that SSO enables you to better manage user credentials.
 
 Enforcing sign-in to Docker Desktop ensures that users always sign in to an
-account that's a member of your organization. The benefits are that your organization's security settings are always applied to the user's session and your users always receive the benefits of your subscription. For more details, see [Enforce sign-in for Desktop](../security/for-admins/configure-sign-in.md).
+account that's a member of your organization. The benefits are that your organization's security settings are always applied to the user's session and your users always receive the benefits of your subscription. For more details, see [Enforce sign-in for Desktop](../../../security/for-admins/configure-sign-in.md).
 

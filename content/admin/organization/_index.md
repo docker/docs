@@ -24,8 +24,8 @@ grid:
   icon: settings_suggest
   link: /admin/organization/general-settings/
 - title: SSO & SCIM
-  description: 'Set up [Single Sign-On](/admin/organization/security-settings/sso/)
-    and [SCIM](/admin/organization/security-settings/scim/) for your organization.
+  description: 'Set up [Single Sign-On](/security/for-admins/single-sign-on/)
+    and [SCIM](/security/for-admins/scim/) for your organization.
 
     '
   icon: key
