@@ -54,16 +54,16 @@ open-source licenses.
 
 Docker Scout ships the following out-of-the-box policies:
 
-- [Critical and high vulnerabilities with fixes](#critical-and-high-vulnerabilities-with-fixes)
+- [Fixable critical and high vulnerabilities](#fixable-critical-and-high-vulnerabilities)
 - [Critical vulnerabilities](#critical-vulnerabilities)
-- [Packages with AGPLv3, GPLv3 licenses](#packages-with-agplv3-gplv3-licenses)
-- [Base images not up-to-date](#base-images-not-up-to-date)
+- [Copyleft licenses](#copyleft-licenses)
+- [Outdated base images](#outdated-base-images)
 - [High-profile vulnerabilities](#high-profile-vulnerabilities)
 
 These policies are turned on by default for Scout-enabled repositories. There's
 currently no way to turn off or configure these policies.
 
-### Critical and high vulnerabilities with fixes
+### Fixable critical and high vulnerabilities
 
 This policy requires that your artifacts aren't exposed to known
 vulnerabilities with a critical or high severity, and where there's a fix
@@ -88,7 +88,7 @@ more critical vulnerabilities.
 This policy flags all critical vulnerabilities, whether or not there's a fix
 version available.
 
-### Packages with AGPLv3, GPLv3 licenses
+### Copyleft licenses
 
 This policy requires that your artifacts don't contain packages distributed
 under an AGPLv3 or GPLv3 license. These licenses are protective
@@ -98,7 +98,7 @@ use in your software because of the restrictions they enforce.
 This policy is unfulfilled if your artifacts contain one or more packages with
 a violating license.
 
-### Base images not up-to-date
+### Outdated base images
 
 This policy requires that the base images you use are up-to-date.
 
@@ -109,7 +109,7 @@ means the base image you're using is out of date.
 #### No base image data
 
 There are cases when it's not possible to determine whether or not the base
-image is up-to-date. In such cases, the **Base images not up-to-date** policy
+image is up-to-date. In such cases, the **Outdated base images** policy
 gets flagged as having **No data**.
 
 This occurs when:
