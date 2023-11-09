@@ -24,6 +24,28 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.25.1
+
+{{< release-date date="2023-10-13" >}}
+
+{{< desktop-install all=true version="4.25.1" build_path="/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Set sysctl vm.max_map_count to 262144. See [docker/for-mac#7047](https://github.com/docker/for-mac/issues/7047)
+
+#### For Mac
+
+- Fixed a bug when swap is disabled. Fixes [docker/for-mac#7045](https://github.com/docker/for-mac/issues/7045) and [docker/for-mac#7044](https://github.com/docker/for-mac/issues/7044).
+
+#### For Windows
+
+- Fixed an issue where **Switch to Windows Containers** would not appear on the tray menu for some users. See [docker/for-win#13761](https://github.com/docker/for-win/issues/13761).
+- Fixed a bug where WSL integration would not work for users using a shell other than `sh`. See [docker/for-win#13764](https://github.com/docker/for-win/issues/13764).
+- Re-added `DockerCli.exe`.
+
 ## 4.25.0
 
 {{< release-date date="2023-10-26" >}}
