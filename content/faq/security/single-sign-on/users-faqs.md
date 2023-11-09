@@ -2,6 +2,8 @@
 description: Single Sign-on FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
 title: Manage users
+aliases: 
+- /single-sign-on/users-faqs/
 ---
 
 ### How do I manage users when using SSO?
@@ -32,7 +34,7 @@ If users attempt to sign in through the CLI, they must authenticate using a pers
 
 ### Is it possible to force users of Docker Desktop to authenticate, and/or authenticate using their company’s domain?
 
-Yes. Admins can force users to authenticate with Docker Desktop by provisioning a [`registry.json`](../security/for-admins/configure-sign-in.md) configuration file. The `registry.json` file will force users to authenticate as a user that's configured in the `allowedOrgs` list in the `registry.json` file.
+Yes. Admins can force users to authenticate with Docker Desktop by provisioning a [`registry.json`](../../../security/for-admins/configure-sign-in.md) configuration file. The `registry.json` file will force users to authenticate as a user that's configured in the `allowedOrgs` list in the `registry.json` file.
 
 Once SSO enforcement is set up on their Docker Business organization or company on Hub, when the user is forced to authenticate with Docker Desktop, the SSO enforcement will also force users to authenticate through SSO with their IdP (instead of authenticating using their username and password).
 
@@ -55,7 +57,7 @@ When SSO is enabled and enforced, your users just have to sign in using the emai
 
 ### Is Docker SSO fully synced with the IdP?
 
-Docker SSO provides Just-In-Time (JIT) provisioning by default. This provisioning only happens when a user signs in. If a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](/docker-hub/members/#remove-a-member-or-invitee) from the organization. [SCIM](/docker-hub/scim/) is available to provide full synchronization with users and groups.
+Docker SSO provides Just-In-Time (JIT) provisioning by default. This provisioning only happens when a user signs in. If a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](/docker-hub/members/#remove-a-member-or-invitee) from the organization. [SCIM](../../../security/for-admins/scim.md) is available to provide full synchronization with users and groups.
 
 Additionally, you can use the [Docker Hub API](/docker-hub/api/latest/) to complete this process.
 

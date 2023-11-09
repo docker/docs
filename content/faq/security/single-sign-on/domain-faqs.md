@@ -2,6 +2,8 @@
 description: Single Sign-on FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
 title: Domains
+aliases:
+- /single-sign-on/domain-faqs/
 ---
 
 ### Can I add sub-domains?

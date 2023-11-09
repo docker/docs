@@ -6,7 +6,7 @@ title: Manage company owners
 
 {{< include "admin-early-access.md" >}}
 
-As a company owner, you can configure [Single Sign-on (SSO)](./settings/sso.md) and [System for Cross-domain Identity Management (SCIM)](./settings/scim.md) for all organizations under the company.
+As a company owner, you can configure [Single Sign-on (SSO)](../../security/for-admins/single-sign-on/_index.md) and [System for Cross-domain Identity Management (SCIM)](../../security/for-admins/scim.md) for all organizations under the company.
 
 ## Add a company owner
 

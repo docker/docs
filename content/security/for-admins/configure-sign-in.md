@@ -37,7 +37,7 @@ following occurs:
 > Enforcing sign-in to Docker Desktop isn't the same as enforcing SSO. To ensure
 > that your users always sign in using their SSO credentials, you must also
 > enforce SSO. For more details, see [Single Sign-On
-> overview](../../single-sign-on/_index.md).
+> overview](single-sign-on/_index.md).
 
 
 ## Create a registry.json file to enforce sign-in

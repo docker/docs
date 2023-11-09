@@ -1,20 +1,18 @@
-{{ $scim_link := "[Enable SCIM](/docker-hub/scim/)" }}
-{{ $mapping_link := "[user-level attributes](docker-hub/scim.md#set-up-role-mapping)"}}
-
-{{ if eq (.Get "product") "admin" }}
-{{ $scim_link = "[Enable SCIM](/admin/organization/security-settings/scim/)" }}
-{{ $mapping_link = "[user-level attributes](admin/organization/security-settings/scim.md#set-up-role-mapping)"}}
-{{ if eq (.Get "layer") "company" }}
-{{ $scim_link = "[Enable SCIM](/admin/company/settings/scim/)" }}
-{{ $mapping_link = "[user-level attributes](admin/company/settings/scim.md#set-up-role-mapping)"}}
-{{ end }}
-{{ end }}
+---
+description: Group mapping for administrators
+keywords: Group Mapping, SCIM, Docker Hub, Docker Admin, admin, security
+title: Group Mapping
+aliases:
+- /admin/company/settings/group-mapping/
+- /admin/organization/security-settings/group-mapping/
+- /docker-hub/group-mapping/
+---
 
 With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams.
 
 > **Tip**
 >
-> Group mapping is ideal for adding a user to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, you can use {{ $mapping_link }}.
+> Group mapping is ideal for adding a user to multiple organizations or multiple teams within one organization. If you don't need to set up multi-organization or multi-team assignment, you can use [user-level attributes](scim.md#set-up-role-mapping).
 { .tip }
 
 ## How group mapping works
@@ -37,7 +35,7 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
    b) If the IdP didn't provide group mappings, it checks if the user is already a member of the organization, or if the SSO connection is for multiple organizations (only at company level) and if the user is a member of any of those organizations. If the user is not a member, it adds the user to the default team and organization configured in the SSO connection.
 
-![JIT provisioning](/docker-hub/images/group-mapping.png)
+![JIT provisioning](../images/group-mapping.png)
 
 ## Use group mapping
 
@@ -59,7 +57,7 @@ The following lists the supported group mapping attributes:
 | id | Unique ID of the group in UUID format. This attribute is read-only. |
 | displayName | Name of the group following the group mapping format: `organization:team`. |
 | members | A list of users that are members of this group. |
-| members[x].value | Unique ID of the user that is a member of this group. Members are referenced by ID. |
+| members(x).value | Unique ID of the user that is a member of this group. Members are referenced by ID. |
 
 To take advantage of group mapping, follow the instructions provided by your IdP:
 
@@ -71,5 +69,5 @@ Once complete, a user who signs in to Docker through SSO is automatically added 
 
 > **Tip**
 >
-> {{ $scim_link }} to take advantage of automatic user provisioning and de-provisioning. If you don't enable SCIM users are only automatically provisioned. You have to de-provision them manually.
+> [Enable SCIM](scim.md) to take advantage of automatic user provisioning and de-provisioning. If you don't enable SCIM users are only automatically provisioned. You have to de-provision them manually.
 { .tip }

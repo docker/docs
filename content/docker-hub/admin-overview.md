@@ -13,7 +13,7 @@ grid:
   description: Learn how to onboard users to your organization.
 - title: Enable Single Sign-On
   description: Understand and use Single Sign-On.
-  link: /single-sign-on/
+  link: /security/for-admins/single-sign-on/
   icon: key
 ---
 

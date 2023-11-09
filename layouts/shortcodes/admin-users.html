@@ -4,7 +4,7 @@
 {{ $remove_button := "**Remove member**" }}
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
 {{ $update_role := "Select the role you want to assign, then select **Save**." }}
-{{ $role_mapping_link := "[SCIM for role mapping](docker-hub/scim.md#set-up-role-mapping)" }}
+{{ $role_mapping_link := "[SCIM for role mapping](/security/for-admins/scim/)" }}
 {{ $export_fields := `The CSV file for an organization contains the following fields:
 * **Name**: The user's name.
 * **Username**: The user's Docker ID.
@@ -21,7 +21,7 @@
 {{ $member_navigation := "Select your organization in the left navigation drop-down menu, and then select *Members**." }}
 {{ $remove_button = "**Remove member**" }}
 {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
-{{ $role_mapping_link = "[SCIM for role mapping](admin/organization/security-settings/scim.md#set-up-role-mapping)" }}
+{{ $role_mapping_link = "[SCIM for role mapping](/security/for-admins/scim/)" }}
 {{ if eq (.Get "layer") "company" }}
 {{ $export_fields = `The CSV file for a company contains the following fields:
 * **Name**: The user's name.
@@ -33,7 +33,7 @@
 {{ $member_navigation = "Select your company in the left navigation drop-down menu, and then select **Users**." }}
 {{ $remove_button = "**Remove user**" }}
 {{ $update_role = "Select their organization, select the role you want to assign, and then select **Save**." }}
-{{ $role_mapping_link = "[SCIM for role mapping](admin/company/settings/scim.md#set-up-role-mapping)"}}
+{{ $role_mapping_link = "[SCIM for role mapping](/security/for-admins/scim/)"}}
 {{ end }}
 {{ end }}
 
@@ -59,7 +59,7 @@ of members to your organization via CSV file, see the next section.
    > **Note**
    >
    > When you invite members, you assign them a role.
-   > See [Roles and permissions](/docker-hub/roles-and-permissions/)
+   > See [Roles and permissions](/security/for-admins/roles-and-permissions/)
    > for details about the access permissions for each role.
 
    Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept
@@ -123,7 +123,7 @@ To invite multiple members to an organization via a CSV file containing email ad
    > **Note**
    >
    > When you invite members, you assign them a role.
-   > See [Roles and permissions](/docker-hub/roles-and-permissions/)
+   > See [Roles and permissions](/security/for-admins/roles-and-permissions/)
    > for details about the access permissions for each role.
 
 Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept
@@ -149,7 +149,7 @@ To remove a member from an organization:
 
 ## Update a member role
 
-Organization owners can manage [roles](/docker-hub/roles-and-permissions/)
+Organization owners can manage [roles](/security/for-admins/roles-and-permissions/)
 within an organization. If an organization is part of a company,
 the company owner can also manage that organization's roles. If you have SSO enabled, you can use {{ $role_mapping_link }}.
 

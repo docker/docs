@@ -47,7 +47,7 @@ Contact your designated CSM team member or Docker Support with a list of the Doc
 
 ### How does a company owner manage SSO/SCIM settings from my new parent company?
 
-See your [SCIM](scim.md) and [SSO](../single-sign-on/configure/index.md) settings.
+See your [SCIM](scim.md) and [SSO](../security/for-admins/single-sign-on/configure/index.md) settings.
 
 ### How does a company owner enable group mapping in my IdP?
 
