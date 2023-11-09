@@ -90,14 +90,14 @@ For both administrators and developers, Docker provides security-specific produc
 
 Explore the security features Docker offers to satisfy your company's security policies.
 
-{{< grid grid_admins >}} 
+{{< grid items="grid_admins" >}} 
 
 ## For developers
 
 See how you can protect your local environments, infrastructure, and networks without impeding productivity.
 
-{{< grid grid_developers >}}  
+{{< grid items="grid_developers" >}}
 
 ## Further resources
 
-{{< grid grid_resources >}}
+{{< grid items="grid_resources" >}}
