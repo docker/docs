@@ -115,6 +115,8 @@
   - /go/deprecated/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
+"/engine/reference/commandline/login/#credential-stores":
+  - /go/credential-store/
 "/cloud/ecs-integration/":
   - /go/compose-ecs-eol/
 "/compose/migrate/":
