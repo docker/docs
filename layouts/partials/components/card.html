@@ -1,31 +1,54 @@
+{{ if (and .image .icon) }}
+  {{ errorf "card: don't use both image and icon: %s" . }}
+{{ end }}
 <div class="not-prose overflow-x-hidden">
   {{ if .link }}
-    <a class="h-full" href="{{ .link }}">
-  {{ end }}
-    <div
-      class="h-full bg-white flex flex-col gap-2 rounded-sm p-4
+  <a class="h-full" href="{{ .link }}">
+    {{ end }}
+    <div class="h-full bg-white rounded-sm
              border border-gray-light-100 drop-shadow-sm dark:bg-gray-dark-200 dark:border-gray-dark-400
              {{ if .link }}hover:drop-shadow-lg hover:border-gray-light-200 hover:dark:border-gray-dark{{ end }}">
-      <div class="flex gap-4 items-center">
-        {{ if .image }}
-          <img class="w-[32px]" src="{{ .image }}" alt="">
-        {{ else if .icon }}
-          <span
-            class="material-symbols-rounded text-[32px]"
-            >{{ .icon }}</span
-          >
-        {{ end }}
-        <div>
-          <div class="text-xl text-gray-light-800 leading-snug dark:text-white flex items-center gap-2">
+      {{ if .image }}
+      {{/* use the "tall image" layout */}}
+      <div class="flex gap-2 items-stretch">
+        <div class="basis-1/3">
+          <img class="h-full w-full object-cover" src="{{ .image }}" alt="">
+        </div>
+        <div class="basis-2/3 flex flex-col gap-2 p-4">
+          <div class="text-xl text-gray-light-800 leading-snug dark:text-white flex gap-2">
             {{ markdownify .title }}
+          </div>
+          <div class="text-gray-light-500 leading-snug dark:text-gray-dark-700">
+            {{ .description | markdownify }}
           </div>
         </div>
       </div>
-      <div class="text-gray-light-500 leading-snug dark:text-gray-dark-700">
-        {{ .description | markdownify }}
+      {{ else }}
+      {{/* use the default layout */}}
+      <div class="flex flex-col gap-2 p-4">
+        <div class="flex gap-4 items-center">
+          {{ with .icon }}
+            {{ if strings.ContainsAny . "/." }}
+            {{/* image file */}}
+            <img class="w-[32px]" src="{{ . }}" alt="">
+            {{ else }}
+            {{/* icon ligature */}}
+            <span class="material-symbols-rounded text-[32px]">{{ . }}</span>
+            {{ end }}
+          {{ end }}
+          <div>
+            <div class="text-xl text-gray-light-800 leading-snug dark:text-white flex items-center gap-2">
+              {{ markdownify .title }}
+            </div>
+          </div>
+        </div>
+        <div class="text-gray-light-500 leading-snug dark:text-gray-dark-700">
+          {{ .description | markdownify }}
+        </div>
       </div>
+      {{ end }}
     </div>
-  {{ if .link }}
-    </a>
+    {{ if .link }}
+  </a>
   {{ end }}
 </div>
