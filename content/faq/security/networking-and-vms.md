@@ -1,5 +1,5 @@
 ---
-description: Find the answers to common security related FAQs
+description: Find the answers to FAQs related to networking and virtualization
 keywords: Docker, Docker Hub, Docker Desktop secuirty FAQs, secuirty, platform, networks, vms
 title: Network and VM FAQs
 ---
@@ -16,7 +16,7 @@ There is no direct way to enforce that through Docker Desktop but it would inher
 
 The Docker network settings are entirely local within the VM and have no effect on the system.
 
-### Can I apply rules on container network traffic (via local firewall/vpnclient)? 
+### Can I apply rules on container network traffic via a local firewall or VPN client?
 
 For network connectivity, Docker Desktop uses a user-space process (`com.docker.vpnkit`), which inherits constraints like firewall rules, VPN, http proxy properties etc, from the user that launched it.
 

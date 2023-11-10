@@ -10,13 +10,13 @@ If you’ve discovered a security vulnerability in Docker, we encourage you to r
 
 ### How are passwords managed when SSO isn't used? 
 
-Passwords are encrypted and salt-hashed. If you use application level passwords instead of SSO, you are responsible for ensuring that your employees know how to pick strong passwords, don't share passwords, and don't reuse passwords across multiple systems. 
+Passwords are encrypted and salt-hashed. If you use application-level passwords instead of SSO, you are responsible for ensuring that your employees know how to pick strong passwords, don't share passwords, and don't reuse passwords across multiple systems. 
 
 ### Does Docker require password resets when SSO isn't used? 
 
 Passwords aren't required to be periodically reset. NIST no longer recommends password resets as part of best practice.
 
-### Does Docker lockout users after failed sign ins? 
+### Does Docker lockout users after failed sign-ins? 
 
 Docker Hub’s global setting for system lockout is after 10 failed sign in attempts in a period of 5 minutes, and the lockout duration is 5 minutes. The same global policy applies to authenticated Docker Desktop users and Docker Scout, both of which use Docker Hub for authentication.
 
@@ -24,11 +24,11 @@ Docker Hub’s global setting for system lockout is after 10 failed sign in atte
 
 This would be configured through SSO using your IDP. Check with your IDP.
 
-### How are sessions managed and do they timeout? 
+### How are sessions managed and do they expire?
 
 Sessions are managed through the IdP if configured.  
 
-Docker Desktop has 30 day timeouts, as long as the user doesn't go longer than 7 days without using Docker Desktop. For Docker Hub, sessions are managed through the IDP if configured. If using the application level sign in, users are signed out due to inactivity after 14 days and must sign in again after 30 days.
+Docker Desktop sessions expire after 30 days, or after 7 days of inactivity. For Docker Hub, sessions are managed through the IdP if configured. If you use application-level sign-in, users are signed out due to inactivity after 14 days and must sign in again after 30 days.
 
 ### How does Docker attribute downloads to us and what data is used to classify/verify the user is part of our organization? 
 
@@ -42,11 +42,11 @@ Some users (very few in comparison) actually authenticate by signing in to Docke
 
 ### How does Docker distinguish between employee users and contractor users? 
 
-Organizations set up in Docker use verified domains and any team member with an email domain other than what's verified is noted as a "Guest" in that org.
+Organizations set up in Docker use verified domains and any team member with an email domain other than what's verified is noted as a "Guest" in that organization.
 
 ### How long are Docker Hub logs available? 
 
-Docker provides various types of audit logs and log retention varies. For example, Hub Activity logs are available for 90 days. You are responsible for exporting logs or setting up drivers to their own internal systems.  
+Docker provides various types of audit logs and log retention varies. For example, Docker Hub Activity logs are available for 90 days. You are responsible for exporting logs or setting up drivers to their own internal systems.  
 
 ### Can I export a list of all users with their assigned roles and privileges and if so, in what format?
 
@@ -58,11 +58,11 @@ Docker Desktop utilizes the host operating system's secure key management for ha
 
 ### How does Docker Hub secure passwords in storage and in transit? 
 
-This is applicable only when Docker Hub's application level password is used vs SSO/SAML. When SSO is used, Docker Hub does not store passwords. Application level passwords are hashed in storage (SHA-256) and encrypted in transit (TLS).
+This is applicable only when Docker Hub's application-level password is used vs SSO/SAML. When SSO is used, Docker Hub does not store passwords. Application-level passwords are hashed in storage (SHA-256) and encrypted in transit (TLS).
 
 ### How do we de-provision access to CLI users who use personal access tokens instead of our IdP? We use SSO but not SCIM. 
 
-If SCIM is not enabled, you have to manually remove PAT users from the org in our system. When SCIM is used this is automated.
+If SCIM is not enabled, you have to manually remove PAT users from the organization in our system. When SCIM is used this is automated.
 
 ### What metadata is collected from container images that Scout analyzes?
 
@@ -70,13 +70,13 @@ For information about the metadata stored by Docker Scout, [Data handling](../..
 
 ### To which portions of the host filesystem do containers have read and write access? Can containers running as root gain access to admin owned files or directories on the host? 
 
-File sharing (bind mount from the host filesystem) uses a user-space crafted file server (running in com.docker.backend as the user running docker desktop), so containers can’t gain any access that the user on the host doesn’t already have.
+File sharing (bind mount from the host filesystem) uses a user-space crafted file server (running in `com.docker.backend` as the user running Docker Desktop), so containers can’t gain any access that the user on the host doesn’t already have.
 
 ### How are Extensions within the Marketplace vetting for security prior to placement? 
 
 Security vetting for extensions is on our roadmap however this vetting is not currently done. 
 
-At present in the marketplace, there are two types of extensions - reviewed and self-published. Reviewed extensions are used and reviewed by the Publisher team against a set of criteria, and if they pass they are included in the marketplace with a **Reviewed** label. Self-published extensions are automatically placed in the marketplace with a **Not reviewed** label. 
+At present in the marketplace, there are two types of extensions - reviewed and self-published. Reviewed extensions are used and reviewed against a set of criteria, and if they pass they are included in the marketplace with a **Reviewed** label. Self-published extensions are automatically placed in the marketplace with a **Not reviewed** label. 
 
 Note that even if an extension is reviewed, it is only reviewed on the first publish. Any updates afterwards are not reviewed. Extensions are not covered as part of Docker’s Third-Party Risk Management Program.
 

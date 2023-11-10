@@ -1,5 +1,5 @@
 ---
-description: Find the answers to common security related FAQs
+description: Find the answers to common Docker Desktop settings FAQs
 keywords: Docker, Docker Hub, Docker Desktop secuirty FAQs, secuirty, platform
 title: Settings Management FAQs
 ---
