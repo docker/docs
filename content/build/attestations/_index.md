@@ -49,6 +49,19 @@ $ docker buildx build --sbom=true --provenance=true .
 
 > **Note**
 >
+> The default image store doesn't support attestations. If you're using the
+> default image store and you build an image using the default `docker` driver,
+> or using a different driver with the `--load` flag, the attestations are
+> lost.
+>
+> To make sure the attestations are preserved, you can:
+>
+> - Use a `docker-container` driver with the `--push` flag to push the image to
+>   a registry directly.
+> - Enable the [containerd image store](../../desktop/containerd/_index.md).
+
+> **Note**
+>
 > Provenance attestations are enabled by default, with the `mode=min` option.
 > You can disable provenance attestations using the `--provenance=false` flag,
 > or by setting the [`BUILDX_NO_DEFAULT_ATTESTATIONS`](../building/env-vars.md#buildx_no_default_attestations) environment variable.
