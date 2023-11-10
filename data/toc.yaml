@@ -138,6 +138,20 @@ Guides:
       path: /language/rust/configure-ci-cd/
     - title: "Test your deployment"
       path: /language/rust/deploy/
+  - sectiontitle: PHP
+    section:
+    - title: "Overview"
+      path: /language/php/
+    - title: "Containerize your app"
+      path: /language/php/containerize/
+    - title: "Develop your app"
+      path: /language/php/develop/
+    - title: "Run your tests"
+      path: /language/php/run-tests/
+    - title: "Configure CI/CD"
+      path: /language/php/configure-ci-cd/
+    - title: "Test your deployment"
+      path: /language/rust/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/

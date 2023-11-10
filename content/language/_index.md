@@ -42,4 +42,7 @@ Learn how to containerize your applications and start developing using Docker. C
     <div class="flex items-center flex-1 shadow p-4">
         <a href="/language/rust/"><img class="m-auto rounded" src="/language/images/rust-logo.webp" alt="Develop with Rust"></a>
     </div>
+    <div class="flex items-center flex-1 shadow p-4">
+        <a href="/language/php/"><img class="m-auto rounded" src="/language/images/php-logo.webp" alt="Develop with PHP"></a>
+    </div>
 </div>
