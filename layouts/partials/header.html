@@ -24,11 +24,19 @@
     </div>
     <div class="flex items-center gap-6">
       <div id="docsearch"></div>
-      <button id="theme-switch" tabindex="1" class="material-symbols-rounded"
-        x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
+      <div x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="
+      $watch('theme', value => {
         localStorage.setItem('theme-preference', value);
         document.firstElementChild.className = value;
-      })" @click="theme = (theme === 'dark' ? 'light' : 'dark')" x-text="`${theme}_mode`"></button>
+        const images = document.querySelectorAll('.theme-image');
+        images.forEach(image => {
+          const darkModeSrc = image.dataset.darkSrc;
+          const lightModeSrc = image.dataset.lightSrc;
+          image.src = value === 'dark' ? darkModeSrc : lightModeSrc;
+        });
+      })">
+      <button id="theme-switch" tabindex="1" class="material-symbols-rounded"
+      @click="theme = theme === 'dark' ? 'light' : 'dark'" x-text="`${theme}_mode`"></button>
     </div>
   </div>
 

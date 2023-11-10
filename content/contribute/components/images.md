@@ -20,6 +20,8 @@ toc_max: 3
 
   ![a small image](/assets/images/footer_moby_icon.png?border=true)
 
+- Image that works in both light and dark mode:
+  {{< dynamic-image lightSrc="/assets/images/dd-light.webp" darkSrc="/assets/images/dd-dark.webp" >}}
 
 ## HTML and Markdown
 
@@ -37,4 +39,7 @@ toc_max: 3
 - Image with a border, also set with a query parameter: `?border=true`
 
   ![a small image](/assets/images/footer_moby_icon.png?border=true)
+
+- Image that works in both light and dark mode:
+  {{</* dynamic-image lightSrc="/assets/images/dd-light.webp" darkSrc="/assets/images/dd-dark.webp" */>}}
 ```

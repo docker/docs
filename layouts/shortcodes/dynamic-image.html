@@ -1,0 +1,15 @@
+{{ $theme := "<script>document.currentScript.parentElement.setAttribute('data-theme', localStorage.getItem('theme-preference') || 'light');</script>" }}
+{{ $theme | safeHTML }}
+<img class="theme-image"
+    data-light-src="{{ .Get "lightSrc" }}"
+    data-dark-src="{{ .Get "darkSrc" }}"
+    src="{{ .Get "lightSrc" }}" />
+<script>
+    const image = document.currentScript.parentElement.querySelector('.theme-image');
+    const darkModeSrc = image.getAttribute('data-dark-src');
+    const lightModeSrc = image.getAttribute('data-light-src');
+    document.addEventListener('DOMContentLoaded', () => {
+        const theme = localStorage.getItem('theme-preference') || 'light';
+        image.src = theme === 'dark' ? darkModeSrc : lightModeSrc;
+    });
+</script>
