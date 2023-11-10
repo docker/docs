@@ -59,6 +59,7 @@ Docker Scout ships the following out-of-the-box policies:
 - [Copyleft licenses](#copyleft-licenses)
 - [Outdated base images](#outdated-base-images)
 - [High-profile vulnerabilities](#high-profile-vulnerabilities)
+- [Supply chain attestations](#supply-chain-attestations)
 
 These policies are turned on by default for Scout-enabled repositories. There's
 currently no way to turn off or configure these policies.
@@ -135,3 +136,23 @@ The list includes the following vulnerabilities:
 - [CVE-2021-44228 (Log4Shell)](https://scout.docker.com/v/CVE-2021-44228)
 - [CVE-2023-38545 (cURL SOCKS5 heap buffer overflow)](https://scout.docker.com/v/CVE-2023-38545)
 - [CVE-2023-44487 (HTTP/2 Rapid Reset)](https://scout.docker.com/v/CVE-2023-44487)
+
+### Supply chain attestations
+
+The Supply chain attestations policy requires that your artifacts have
+[SBOM](../../build/attestations/sbom.md) and
+[provenance](../../build/attestations/slsa-provenance.md) attestations.
+
+This policy is unfulfilled if an artifact lacks either an SBOM attestation or a
+provenance attestation, or if the provenance attestation lacks information
+about the Git repository and base images being used. To ensure compliance,
+update your build command to attach these attestations at build-time:
+
+```console
+$ docker buildx build --provenance=true --sbom=true -t <IMAGE> --push .
+```
+
+BuildKit automatically detects the Git repository and base images when this
+information is available in the build context. For more information about
+building with attestations, see
+[Attestations](../../build/attestations/_index.md).
