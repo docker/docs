@@ -1,7 +1,7 @@
 ---
 title: Containerize a .NET application
 keywords: .net, containerize, initialize
-description: Learn how to containerize an  ASP.NET application.
+description: Learn how to containerize an ASP.NET application.
 aliases:
 - /language/dotnet/build-images/
 - /language/dotnet/run-containers/
