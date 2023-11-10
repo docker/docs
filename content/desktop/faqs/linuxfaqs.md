@@ -6,11 +6,11 @@ aliases:
 - /desktop/linux/space/
 ---
 
-## What is the difference between Docker Desktop for Linux and Docker Engine?
+### What is the difference between Docker Desktop for Linux and Docker Engine?
 
 Docker Desktop for Linux provides a user-friendly graphical interface that simplifies the management of containers and services. It includes Docker Engine as this is the core technology that powers Docker containers. Docker Desktop for Linux also comes with additional features like Docker Scout and Docker Extensions.
 
-## Can I have both Docker Desktop for Linux and Docker Engine installed on my machine?
+### Can I have both Docker Desktop for Linux and Docker Engine installed on my machine?
 
 Docker Desktop for Linux and Docker Engine can be installed side-by-side on the
 same machine. Docker Desktop for Linux stores containers and images in an isolated
@@ -43,7 +43,7 @@ disable the Docker Engine service, and to prevent it from starting automatically
 $ sudo systemctl disable docker docker.socket containerd
 ```
 
-### How do I switch between Docker Desktop and Docker Engine?
+#### How do I switch between Docker Desktop and Docker Engine?
 
 
 The Docker CLI can be used to interact with multiple Docker Engines. For example,
@@ -88,7 +88,7 @@ Current context is now "desktop-linux"
 
 Refer to the [Docker Context documentation](../../engine/context/working-with-contexts.md) for more details.
 
-## Why does Docker Desktop for Linux run a VM?
+### Why does Docker Desktop for Linux run a VM?
 
 Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
@@ -115,7 +115,7 @@ Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
     As such, we have adjusted the default memory available to the VM in DD4L. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
 
-## How do I enable file sharing?
+### How do I enable file sharing?
 
 Docker Desktop for Linux uses [virtiofs](https://virtio-fs.gitlab.io/) as the
 default (and currently only) mechanism to enable file sharing between the host
@@ -167,16 +167,16 @@ easy access to such a file on the host. The problem is resolved by creating
 a group with the new GID and adding our user to it, or by setting a recursive
 ACL (see `setfacl(1)`) for folders shared with the Docker Desktop VM.
 
-## Where does Docker Desktop store Linux containers?
+### Where does Docker Desktop store Linux containers?
 Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Linux filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory on the host's filesystem.
 
-### Where is the disk image file?
+#### Where is the disk image file?
 
 To locate the disk image file, select **Settings** from the Docker Dashboard then **Advanced** from the **Resources** tab.
 
 The **Advanced** tab displays the location of the disk image. It also displays the maximum size of the disk image and the actual space the disk image is consuming. Note that other tools might display space usage of the file in terms of the maximum file size, and not the actual file size.
 
-#### What if the file is too large?
+##### What if the file is too large?
 
 If the disk image file is too large, you can:
 
@@ -184,7 +184,7 @@ If the disk image file is too large, you can:
 - Delete unnecessary containers and images
 - Reduce the maximum allowable size of the file
 
-#### How do I move the file to a bigger drive?
+##### How do I move the file to a bigger drive?
 
 To move the disk image file to a different location:
 
@@ -196,7 +196,7 @@ To move the disk image file to a different location:
 
 Do not move the file directly in Finder as this can cause Docker Desktop to lose track of the file.
 
-#### How do I delete unnecessary containers and images?
+##### How do I delete unnecessary containers and images?
 
 Check whether you have any unnecessary containers and images. If your client and daemon API are running version 1.25 or later (use the `docker version` command on the client to check your client and daemon API versions), you can see the detailed space usage information by running:
 
@@ -246,7 +246,7 @@ $ ls -klsh Docker.raw
 
 In this example, the actual size of the disk is `2333548` KB, whereas the maximum size of the disk is `64` GB.
 
-#### How do I reduce the maximum size of the file?
+##### How do I reduce the maximum size of the file?
 
 To reduce the maximum size of the disk image file:
 
