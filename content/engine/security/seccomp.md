@@ -26,7 +26,7 @@ protective while providing wide application compatibility. The default Docker
 profile can be found
 [here](https://github.com/moby/moby/blob/master/profiles/seccomp/default.json).
 
-In effect, the profile is a allowlist which denies access to system calls by
+In effect, the profile is an allowlist which denies access to system calls by
 default, then allowlists specific system calls. The profile works by defining a
 `defaultAction` of `SCMP_ACT_ERRNO` and overriding that action only for specific
 system calls. The effect of `SCMP_ACT_ERRNO` is to cause a `Permission Denied`
