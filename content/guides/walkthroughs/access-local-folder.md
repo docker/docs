@@ -4,7 +4,7 @@ keywords: get started, quick start, intro, concepts
 description: Learn how to access a local folder from a container
 ---
 
-This walkthrough shows you how to access a local folder from a container. To better understand some concepts in this walkthrough, complete the [Multi-container applications](./multi-container-apps.md) walkthrough first.
+This walkthrough shows you how to access a local folder from a container. To better understand some concepts in this walkthrough, complete the [Run multi-container applications](./multi-container-apps.md) walkthrough first.
 
 Docker isolates all content, code, and data in a container from your local filesystem. By default, containers can't access directories in your local filesystem.
 

@@ -44,7 +44,7 @@ Dockerfile. A Dockerfile describes what goes into a container. This sample alrea
 
 ## Step 3: Build your first image
 
-An image is like a blueprint for a container. You always need an image to run a container. In a terminal, run the following commands to build the image. Replace `/path/to/welcome-to-docker/` with the path to your `welcome-to-docker` directory.
+You always need an image to run a container. In a terminal, run the following commands to build the image. Replace `/path/to/welcome-to-docker/` with the path to your `welcome-to-docker` directory.
 
 {{< include "open-terminal.md" >}}
 

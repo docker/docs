@@ -19,9 +19,7 @@ Before you start, [get Docker Desktop](../../get-docker.md).
 
 ## Step 1: Set up the walkthrough
 
-The first thing you need is a running container. For this guide, use the
-pre-made `welcome-to-docker` image. An image is like a blueprint for a
-container. Do the following to set up the walkthrough.
+The first thing you need is a running container. Use the following instructions to run a container.
 
 1. Open Docker Desktop and select the search.
 2. Specify `docker/welcome-to-docker` in the search and then select **Run**.
