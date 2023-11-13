@@ -1,13 +1,13 @@
 ---
-title: Ways to set environment variables in Compose
-description: How to set, use and manage environment variables in Compose
+title: Ways to use environment variables with Compose
+description: How to set, use and manage environment variables with Compose
 keywords: compose, orchestration, environment, env file
 aliases:
 - /compose/env/
 - /compose/link-env-deprecated/
 ---
 
-Environment variables are dealt with by either the Compose file or the CLI. Both have multiple ways you can substitute in or set your environment variables. This is outlined below. 
+With Compose, there are multiple ways you can set environment variables in your containers. You can use either your Compose file, or the CLI. 
 
 >**Tip**
 >
@@ -44,7 +44,9 @@ services:
     image: 'webapp:v1.5'
 ```
 
-The `.env` file should be placed at the root of the project directory next to your `compose.yaml` file. You can use an alternative path with one of the following methods:
+The `.env` file should be placed at the root of the project directory next to your `compose.yaml` file. 
+
+Alternatively, you can place your `.env` file elsewhere and then use one of the following methods:
 - The [`--file` option in the CLI](../reference/index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
 - The [`--env-file` option in the CLI](#substitute-with---env-file)
 - Using the [`env_file` attribute in the Compose file](../compose-file/05-services.md#env_file)
@@ -60,7 +62,7 @@ For more information on formatting an environment file, see [Use an environment 
 
 ### Use the `environment` attribute
 
-You can set environment variables in a service's containers with the
+You can set environment variables directly in your Compose file, with the
 [`environment` attribute](../compose-file/05-services.md#environment) in your Compose file. It works in the same way as `docker run -e VARIABLE=VALUE ...`
 
 ```yaml
