@@ -71,6 +71,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For Mac
 
+- Minimum OS version to install or update Docker Desktop on macOS is now macOS Monterey (version 12) or later.
 - Enhanced error messaging when an update cannot be completed if the user doesn't match the owner of `Docker.app`. Fixes [docker/for-mac#7000](https://github.com/docker/for-mac/issues/7000).
 - Fixed a bug where **Re-apply configuration** might not work when `/var/run/docker.sock` is mis-configured.
 - Docker Desktop doesn't overwrite `ECRCredentialHelper` if already present in `/usr/local/bin`.
