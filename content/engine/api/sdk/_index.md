@@ -205,6 +205,7 @@ file them with the library maintainers.
 | Perl                  | [Eixo::Docker](https://github.com/alambike/eixo-docker)                     |
 | PHP                   | [Docker-PHP](https://github.com/docker-php/docker-php)                      |
 | Ruby                  | [docker-api](https://github.com/swipely/docker-api)                         |
+| Rust                  | [bollard](https://github.com/fussybeaver/bollard)                           |
 | Rust                  | [docker-rust](https://github.com/abh1nav/docker-rust)                       |
 | Rust                  | [shiplift](https://github.com/softprops/shiplift)                           |
 | Scala                 | [tugboat](https://github.com/softprops/tugboat)                             |
