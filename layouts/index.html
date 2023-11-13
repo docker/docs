@@ -238,6 +238,7 @@
                   x-on:change="os = $event.target.value">
                   <option value="windows">Windows</option>
                   <option value="mac">Mac</option>
+                  <option value="linux">Linux</option>
                 </select>
               </div>
               <div class="w-2/4 md:w-full flex flex-col gap-4">
@@ -250,16 +251,22 @@
                 <h2 class="text-xl">Popular articles</h2>
                 <ul class="space-y-3" x-show="os === 'windows'">
                   <li><a class="link" href="/desktop/windows/wsl/">Docker Desktop WSL 2 backend</a></li>
-                  <li><a class="link" href="/desktop/use-desktop/">Docker Desktop Dashboard</a></li>
-                  <li><a class="link" href="/desktop/kubernetes/">Deploy on Kubernetes</a></li>
+                  <li><a class="link" href="/desktop/use-desktop/">Explore Docker Desktop</a></li>
+                  <li><a class="link" href="/desktop/vm-vdi/">VM and VDI support</a></li>
                   <li><a class="link" href="/desktop/windows/release-notes/">Release notes</a></li>
-                  <li><a class="link" href="/desktop/windows/troubleshoot/">Logs and troubleshooting</a></li>
+                  <li><a class="link" href="/desktop/windows/containerd/">containerd image store</a></li>
                 </ul>
                 <ul class="space-y-3" x-show="os === 'mac'">
-                  <li><a class="link" href="/desktop/use-desktop/">Docker Desktop Dashboard</a></li>
+                  <li><a class="link" href="/desktop/use-desktop/">Explore Docker Desktop</a></li>
                   <li><a class="link" href="/desktop/install/mac-install/">Install Docker Desktop on Mac</a></li>
-                  <li><a class="link" href="/desktop/mac/networking/">Networking features in Docker Desktop</a></li>
+                  <li><a class="link" href="/desktop/release-notes/">Release notes</a></li>
+                  <li><a class="link" href="/desktop/mac/permission-requirements/">Understand permission requirements</a></li>
                 </ul>
+                <ul class="space-y-3" x-show="os === 'linux'">
+                  <li><a class="link" href="/desktop/use-desktop/">Explore Docker Desktop</a></li>
+                <li><a class="link" href="/desktop/install/linux-install/">Install Docker Desktop on Linux</a></li>
+                <li><a class="link" href="/desktop/release-notes/">Release notes</a></li>
+              </ul>
               </div>
             </div>
             <div class="flex justify-items-center gap-6 py-8 sm:flex-col" aria-role="tab"
@@ -339,6 +346,7 @@
                       variables in Compose</a>
                   </li>
                   <li><a class="link" href="/compose/networking/">Networking in Compose</a></li>
+                  <li><a class="link" href="/compose/file-watch/">Use Compose Watch</a></li>
                 </ul>
               </div>
             </div>
