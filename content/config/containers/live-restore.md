@@ -1,4 +1,4 @@
----
+contrib/init/systemd/docker.socket---
 description: Learn how to keep containers running when the daemon isn't available
 keywords: docker, upgrade, daemon, dockerd, live-restore, daemonless container
 title: Live restore
