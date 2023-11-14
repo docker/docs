@@ -156,3 +156,9 @@ BuildKit automatically detects the Git repository and base images when this
 information is available in the build context. For more information about
 building with attestations, see
 [Attestations](../../build/attestations/_index.md).
+
+> **Note**
+>
+> Docker Scout is currently unable to discern the difference between using
+> `scratch` as a base image and having no base image provenance. As a result,
+> images based on `scratch` always fail the Supply chain attestations policy.
