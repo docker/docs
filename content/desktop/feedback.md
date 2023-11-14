@@ -34,7 +34,7 @@ GitHub](https://github.com/docker/desktop-linux/issues)
 
 #### Feedback via Community Slack channels
 
-You can also provide feedback through the following [Docker Community Slack](https://www.docker.com/community/) channels:
+You can also provide feedback through the following [Docker Community Slack](https://dockr.ly/comm-slack) channels:
 
 - #docker-desktop-mac
 - #docker-desktop-windows

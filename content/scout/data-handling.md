@@ -14,6 +14,8 @@ platform.
 
 ### Image metadata
 
+Docker Scout collects the following image metadata:
+
 - Image creation timestamp
 - Image digest
 - Ports exposed by the image
@@ -24,7 +26,26 @@ platform.
 - Operating system type and version
 - Registry URL and type
 
+Image digests are created for each layer of an image when the image is built
+and pushed to a registry. They are SHA256 digests of the contents of a layer.
+Docker Scout doesn't create the digests; they're read from the image manifest.
+
+The digests are matched against your own private images and Docker's database
+of public images to identify images that share the same layers. The image that
+shares most of the layers is considered a base image match for the image that's
+currently being analyzed.
+
 ### SBOM metadata
+
+SBOM metadata is used to match package types and versions with public
+vulnerability data to infer whether a package is considered vulnerable.
+When the Docker Scout platform receives information from its advisory database
+about new CVEs (and other risks, such as leaked secrets), it "overlays" this
+information on the SBOM. If there's a match, the results of the match are
+displayed in the user interfaces where Docker Scout data is surfaced, such as
+the Docker Scout Dashboard and in Docker Desktop.
+
+Docker Scout collects the SBOM metadata:
 
 - Package URLs (PURL)
 - Package author and description
@@ -36,13 +57,10 @@ platform.
 - The type of direct dependency
 - Total package count
 
-SBOM metadata is used to match package types and versions with public
-vulnerability data to infer whether a package is considered vulnerable.
-When the Docker Scout platform receives information from its advisory database
-about new CVEs (and other risks, such as leaked secrets), it "overlays" this
-information on the SBOM. If there's a match, the results of the match are
-displayed in the user interfaces where Docker Scout data is surfaced, such as
-the Docker Scout Dashboard and in Docker Desktop.
+The PURLs in Docker Scout follow the
+[purl-spec](https://github.com/package-url/purl-spec) specification. Package
+information is derived from the contents of image, including OS-level programs
+and packages, and application-level packages such as maven, npm, and so on.
 
 ### Environment metadata
 
