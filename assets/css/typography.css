@@ -1,9 +1,6 @@
 .prose {
   li {
     @apply mt-1 mb-1;
-    & > :first-child, & > :last-child {
-      @apply m-0;
-    }
   }
   a {
     font-weight: 400;
