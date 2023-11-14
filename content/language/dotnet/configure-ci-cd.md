@@ -108,6 +108,7 @@ to Docker Hub.
            with:
              context: .
              push: true
+             platforms: linux/amd64,linux/arm64
              target: final
              tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
