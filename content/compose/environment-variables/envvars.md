@@ -147,7 +147,7 @@ Lets you specify which environment files Compose should use if `--env-file` isn'
 When using multiple environment files, use a comma as a separator. For example, 
 
 ```console
-COMPOSE_ENV_FILES=envfile1.env,envfile2.env
+COMPOSE_ENV_FILES=.env.envfile1, .env.envfile2
 ```
 
 If `COMPOSE_ENV_FILES` is not set, and you don't provide `--env-file` in the CLI, Docker Compose uses the default behavior, which is to look for an `.env` file in the project directory.

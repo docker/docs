@@ -22,7 +22,7 @@ Be aware that each method is subject to [environment variable precedence](envvar
 
 An `.env` file in Docker Compose is a text file used to define environment variables that should be made available to Docker containers when running `docker compose up`. This file typically contains key-value pairs of environment variables, and it allows you to centralize and manage configuration in one place. The `.env` file is useful if you have multiple environment variables you need to store.
 
-The `.env` file is the default method for setting environment variables in your containers. The `.env` file should be placed at the root of the project directory next to your `compose.yaml` file. For more information on formatting an environment file, see [Use an environment file](env-file.md).
+The `.env` file is the default method for setting environment variables in your containers. The `.env` file should be placed at the root of the project directory next to your `compose.yaml` file. For more information on formatting an environment file, see [Syntax for environment files](env-file.md).
 
 Below is a simple example: 
 
@@ -50,16 +50,16 @@ services:
 
 #### Additional information 
 
-- If you define an environment variable in your `.env` file, you can reference it directly in your `compose.yml` with the `environment` attribute. For example, if your `.env` file contains the environment variable `DATABASE_URL=mysql://user:password@db:3306/mydatabase` and your `compose.yml` file looks like this:
+- If you define an environment variable in your `.env` file, you can reference it directly in your `compose.yml` with the [`environment` attribute](../compose-file/05-services.md#environment). For example, if your `.env` file contains the environment variable `DEBUG=1` and your `compose.yml` file looks like this:
   ```yaml
     services:
       webapp:
         image: my-webapp-image
         environment:
-          - DATABASE_URL=${DATABASE_URL}
+          - DEBUG=${DEBUG}
   ```
-  Docker Compose replaces `${DATABASE_URL}` with the value from the `.env` file
-- You can use multiple `.env` files in your `compose.yml` with the `env_file` attribute, and Docker Compose reads them in the order specified. If the same variable is defined in multiple files, the last definition takes precedence:
+  Docker Compose replaces `${DEBUG}` with the value from the `.env` file
+- You can use multiple `.env` files in your `compose.yml` with the [`env_file` attribute](../compose-file/05-services.md#env_file), and Docker Compose reads them in the order specified. If the same variable is defined in multiple files, the last definition takes precedence:
   ```yaml
   services:
     webapp:
@@ -238,3 +238,9 @@ $ docker compose run -e DEBUG=1 web python console.py
   ```
 
   The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
+
+  ## Further resources
+  - [Understand environment variable precedence](envvars-precedence.md).
+  - [Set or change predefined environment variables](envvars.md)
+  - [Explore best practices](best-practices.md)
+  - [Understand the syntax and formatting guidelines for environment files](env-file.md)

@@ -7,7 +7,7 @@ keywords: compose, orchestration, environment, env file
 
 {{< include "compose-eol.md" >}}
 
-Use environment variables to pass configuration information to containers at runtime. Environment variables are key-value pairs that contain data that can be used by processes running inside a Docker container. They are often used to configure application settings, database connection strings, API keys, and other parameters that may vary between different environments, such as development, testing, and production.  
+Use environment variables to pass configuration information to containers at runtime. Environment variables are key-value pairs that contain data that can be used by processes running inside a Docker container. They are often used to configure application settings and other parameters that may vary between different environments, such as development, testing, and production.  
 
 > **Tip**
 >
@@ -19,6 +19,6 @@ This section covers:
 - [How environment variable precedence works](envvars-precedence.md).
 - The correct syntax for an [environment file](env-file.md).
 - Changing pre-defined [environment variables](envvars.md).
-- Some [best practices](best-practices.md)
+- Some [best practices](best-practices.md).
 
 
