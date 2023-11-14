@@ -44,7 +44,7 @@ jobs:
         # name as the data file, but with a .md extension.
         name: Copy data files
         if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
