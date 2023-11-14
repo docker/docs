@@ -42,11 +42,18 @@ This page contains download URLs, information about system requirements, and ins
 
 - At least 4 GB of RAM.
 
-- VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop.
-
 {{< /tab >}}
 {{< tab name="Mac with Apple silicon" >}}
 
+- A supported version of macOS.
+
+  > **Important**
+  >
+  > Docker supports Docker Desktop on the most recent versions of macOS. That is, the current release of macOS and the previous two releases. As new major versions of macOS are made generally available, Docker stops supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases).
+  { .important }
+
+- At least 4 GB of RAM.
+  
 Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to install Rosetta 2. There are a few optional command line tools that still require Rosetta 2 when using Darwin/AMD64. See [Known issues](../troubleshoot/known-issues.md). However, to get the best experience, we recommend that you install Rosetta 2. To install Rosetta 2 manually from the command line, run the following command:
 
   ```console
