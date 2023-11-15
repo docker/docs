@@ -27,18 +27,33 @@ grid:
 >
 >Hardened Docker Desktop is available to Docker Business customers only.
 
+## What is Hardened Docker Desktop?
+
 Hardened Docker Desktop is a group of security features for Docker Desktop, designed to improve the security of developer environments without impacting developer experience or productivity.
 
-It is for security conscious organizations who don’t give their users root or admin access on their machines, and who would like Docker Desktop to be within their organization’s centralized control.
+It lets admins define and enforce robust security settings. It guarantees that developers and the containers they deploy are unable to intentionally or unintentionally circumvent these settings. Additionally, Hardened Docker Desktop enhances container isolation, which helps mitigate potential security threats, and ensures that malicious payloads cannot breach the Docker Desktop Linux VM and the underlying host.
 
-Hardened Docker Desktop moves the ownership boundary for Docker Desktop configuration to the organization, meaning that any security controls admins set cannot be altered by the user of Docker Desktop.
+## Who is it for?
 
-Hardened Docker Desktop includes:
+It is for security conscious organizations who:
+- Don’t give their users root or admin access on their machines
+- Would like Docker Desktop to be within their organization’s centralized control 
+- Have certain compliance obligations
+
+## What does Hardened Docker Desktop include?
+
+It includes:
 - Settings Management, which helps admins to confidently manage and control the usage of Docker Desktop within their organization.
-- Enhanced Container Isolation, a setting that instantly enhances security by preventing containers from running as root in Docker Desktop’s Linux VM and ensures that any configurations set using Settings Management cannot be bypassed or modified by containers.
-- Registry Access Management, which allows admins to control the registries developers can access.
-- Image Access Management, which gives admins control over which images developers can pull from Docker Hub.
+- Enhanced Container Isolation (ECI), a setting that instantly enhances security by preventing containers from running as root in Docker Desktop’s Linux VM and ensures that any configurations set using Settings Management cannot be bypassed or modified by containers.
+- Registry Access Management (RAM), which allows admins to control the registries developers can access.
+- Image Access Management (IAM), which gives admins control over which images developers can pull from Docker Hub.
 
-The features of Hardened Docker Desktop operate independently of each other. When used together, these mechanisms defend against attacks at different functional layers of the developer workflow, providing a defense-in-depth approach to securing developer environments.
+### How does it help my organisation?
+
+Hardened Desktop features work independently but collectively to create a defense-in-depth strategy, safeguarding developer workstations against attacks across various functional layers, such as configuring Docker Desktop, pulling container images, and running container images. This multi-layered defense approach ensures comprehensive security.
+
+It helps mitigate against threats such as:
+ - Malware and supply chain attacks. RAM and IAM prevent developers from accessing certain container registries and image types, significantly lowering the risk of malicious payloads. Additionally, ECI restricts the impact of containers with malicious payloads by running them without root privileges inside a Linux user namespace.
+ - Local admin rights an insider threats. Settings Management configures and locks various Docker Desktop settings, such as proxy settings, ECI, and prevents exposure of the Docker API. This helps admins enforce company policies.
 
 {{< grid >}}
