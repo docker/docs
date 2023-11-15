@@ -8,7 +8,7 @@ This walkthrough shows you how to access a local folder from a container. To bet
 
 Docker isolates all content, code, and data in a container from your local filesystem. By default, containers can't access directories in your local filesystem.
 
-![Data isolation diagram](images/getting-started-isolation.png?w=400)
+![Data isolation diagram](images/getting-started-isolation.webp?w=400)
 
 Sometimes, you may want to access a directory from your local filesystem. To do this, you can use bind mounts.
 
@@ -41,7 +41,7 @@ Download the source and extract it.
 
 Add a bind mount to access data on your system from a container. A bind mount lets you share a directory from your host's filesystem into the container.
 
-![Bind mount diagram](images/getting-started-bindmount.png?w=400)
+![Bind mount diagram](images/getting-started-bindmount.webp?w=400)
 
 To add a bind mount to this project, open the `compose.yaml` file in a code or text editor, and then uncomment the following lines.
 
@@ -58,12 +58,15 @@ The `volumes` element tells Compose to mount the local folder `./app` to `/usr/s
 
 ## Step 3: Run the application
 
-In a terminal, run the follow commands to bring up your application.
+In a terminal, run the follow commands to bring up your application. Replace `/path/to/multi-container-app/` with the path to your applications directory.
 
 {{< include "open-terminal.md" >}}
 
 ```console
-docker compose up -d
+$ cd /path/to/multi-container-app/
+```
+```console
+$ docker compose up -d
 ```
 
 ## Step 4: Develop the application

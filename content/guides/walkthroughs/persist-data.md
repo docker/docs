@@ -8,7 +8,7 @@ This walkthrough shows you how to persist data between containers. To better und
 
 Docker isolates all content, code, and data in a container from your local filesystem. When you delete a container, Docker deletes all the content within that container.
 
-![Data isolation diagram](images/getting-started-isolation.png?w=400)
+![Data isolation diagram](images/getting-started-isolation.webp?w=400)
 
 Sometimes, you may want to persist the data that a container generates. To do this, you can use volumes.
 
@@ -41,7 +41,7 @@ Download the source and extract it.
 
 To persist data after you delete a container, use a volume. A volume is a location in your local filesystem, automatically managed by Docker Desktop.
 
-![Volume diagram](images/getting-started-volume.png?w=400)
+![Volume diagram](images/getting-started-volume.webp?w=400)
 
 To add a volume to this project, open the `compose.yaml` file in a code or text editor, and then uncomment the following lines.
 
@@ -62,7 +62,7 @@ The top-level `volumes` element defines and configures a volume named `database`
 
 ## Step 3: Run the application
 
-To run the multi-container application, open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your applications directory
+To run the multi-container application, open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your applications directory.
 
 {{< include "open-terminal.md" >}}
 
@@ -77,7 +77,7 @@ $ docker compose up -d
 
 In the **Containers** tab of Docker Desktop, you should now have an application stack with two containers running (the todo-app, and todo-database).
 
-To view the frontend and add todos, do the following:
+To view the frontend and add todos:
 
 1. In Docker Desktop, expand the application stack in **Containers**.
 2. Select the link to port **3000** in the **Port(s)** column or open [https://localhost:3000](https://localhost:3000)⁠.
@@ -87,12 +87,12 @@ To view the frontend and add todos, do the following:
 
 Now, no matter how often you delete and recreate the containers, Docker Desktop persists your data and it's accessible to any container on your system by mounting the `database` volume. Docker Desktop looks for the `database` volume and creates it if it doesn't exist.
 
-To delete the application stack, do the following:
+To delete the application stack:
 
 1. Open the **Containers** tab of Docker Desktop
 2. Select the Delete icon next to your application stack.
 
-![Deleting the application stack](images/getting-started-delete-stack.png?w=300&border=true)
+![Deleting the application stack](images/getting-started-delete-stack.webp?w=300&border=true)
 
 After you delete the application stack, follow the steps from [Step 3: Run the
 application](#step-3-run-the-application) to run the application again. Note

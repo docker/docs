@@ -33,23 +33,22 @@ Download the source and extract it.
 
 The sample application is a simple todo application built using ExpressJS and Node.js. The application saves all todos in a MongoDB database. You don't need to know any of these technologies to continue with the walkthrough.
 
-![The sample app architecture](images/getting-started-multi-container.png?w=400)
+![The sample app architecture](images/getting-started-multi-container.webp?w=400)
 
 ## Step 2: Dig into the Compose file
 
 View the files of the sample application. Notice that it has a `compose.yaml` file. This file tells Docker how to run your application. Open the `compose.yaml` file in a code or text editor to view what it contains.
 
-![Viewing the Compose file](images/getting-started-compose.png?w=400)
+![Viewing the Compose file](images/getting-started-compose.webp?w=400)
 
 ## Step 3: Run the application
 
-To run the multi-container application, open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your applications directory
+To run the multi-container application, open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your applications directory.
 
 {{< include "open-terminal.md" >}}
 
 ```console
 $ cd /path/to/multi-container-app/
-$ docker compose up -d
 ```
 ```console
 $ docker compose up -d
@@ -59,23 +58,40 @@ $ docker compose up -d
 
 In the **Containers** tab of Docker Desktop, you should now have an application stack with two containers running (the todo-app, and todo-database).
 
-To view the frontend, do the following:
+To view the frontend:
 
 1. In Docker Desktop, expand the application stack in **Containers**.
 2. Select the link to port **3000** in the **Port(s)** column or open [https://localhost:3000](https://localhost:3000)⁠.
 
 Add some todo tasks in the frontend, and then open [https://localhost:3000](https://localhost:3000) in a new browser tab. Notice that the tasks are still visible.
 
-## Step 5: Delete everything and start over
+## Step 5: Develop in your containers
+
+When developing with Docker, you may need to automatically update and preview your running services as you edit and save your code. You can use Docker Compose Watch for this.
+
+To run Compose Watch and see the real-time changes:
+
+1. Open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your applications directory.
+   ```console
+   $ cd /path/to/multi-container-app/
+   ```
+   ```console
+   $ docker compose watch
+   ```
+2. Open `app/views/todos.ejs` in a text or code editor, then change the text on line 18.
+3. Save the changes in `app/views/todos.ejs`.
+4. View your application at [https://localhost:3000](https://localhost:3000) to see the changes in real-time.
+
+## Step 6: Delete everything and start over
 
 Having your configuration stored in a Compose file has another advantage, you can easily delete everything and start over.
 
-To delete the application stack, do the following:
+To delete the application stack:
 
 1. Open the **Containers** tab of Docker Desktop
 2. Select the Delete icon next to your application stack.
 
-![Deleting the application stack](images/getting-started-delete-stack.png?w=300&border=true)
+![Deleting the application stack](images/getting-started-delete-stack.webp?w=300&border=true)
 
 After you delete the application stack, follow the steps from [Step 3: Run the
 application](#step-3-run-the-application) to run the application again. Note
@@ -84,13 +100,14 @@ created don't persist.
 
 ## Summary
 
-In this walkthrough, you ran a multi-container application with Docker Compose. You also deleted the application stack along with all of the data.
+In this walkthrough, you ran a multi-container application with Docker Compose. You also learned how to develop in containers and how to delete the application stack along with all of the data.
 
 Related information:
 
 - Deep dive into the [Docker Compose manual](../../compose/_index.md)
-- Learn about Compose commands in the [Docker Compose CLI reference](../../compose/reference/_index.md)
+- Reference Compose commands in the [Docker Compose CLI reference](../../compose/reference/_index.md)
 - Explore samples in the [Awesome Compose GitHub repository](https://github.com/docker/awesome-compose)
+- Learn how to implement Compose Watch for your projects in [Use Compose Watch](../../compose/file-watch.md)
 
 ## Next steps
 
