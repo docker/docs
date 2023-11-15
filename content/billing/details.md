@@ -8,7 +8,7 @@ You can update the billing information for your personal account or for an organ
 
 > **Important**
 >
-> You can't update an existing invoice that you already paid.
+> You can't update an existing invoice, including paid and unpaid invoices.
 { .important }
 
 The billing information provided appears on all your billing invoices. The email address provided is where Docker sends all invoices and other billing-related communication. For more information on the billing emails you receive, see [FAQs](faqs.md#what-billing-related-emails-will-i-receive-from-docker-hub).
