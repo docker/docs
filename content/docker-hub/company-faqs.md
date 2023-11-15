@@ -30,14 +30,14 @@ Company owners can navigate to the **Organizations** page to view all their nest
 
 ### What features are supported at the company level?
 
-You can manage domain verification, Single Sign-on, and System for Cross-domain Identity Management (SCIM) at the company level. You can manage the following features at the organization level:
+You can manage domain verification, Single Sign-on, and System for Cross-domain Identity Management (SCIM) at the company level. The following features aren't supported at the company level, but you can manage them at the organization level:
 
 - Image Access Management
 - Registry Access Management
 - User management
 - Billing
 
-You can manage users at the company level when you use Docker Admin. 
+To view and manage users across all the organizations under your company, you can [manage users at the company level](../admin/company/users.md) when you use Docker Admin.
 
 Domain audit is not supported for companies or organizations within a company.
 

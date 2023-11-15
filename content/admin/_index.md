@@ -24,7 +24,7 @@ The [Docker Admin](https://admin.docker.com) console provides administrators wit
   - Company owner: A company can have multiple owners. Company owners have company-wide observability and can manage company-wide settings that apply to all associated organizations. In addition, company owners have the same access as organization owners for all associated organizations.
 - Organization: An organization is a collection of teams and repositories. Docker Team and Business subscribers must have at least one organization.
   - Organization owner: An organization can have multiple owners. Organization owners have observability into their organization and can manage its users and settings.
-- Team (optional): A team is a group of Docker members that belong to an organization. Organization and company owners can group members into additional teams to configure repository permissions on a per-team basis. Using teams to group members is optional.
+- Team: A team is a group of Docker members that belong to an organization. Organization and company owners can group members into additional teams to configure repository permissions on a per-team basis. Using teams to group members is optional.
 - Member: A member is a Docker user that's a member of an organization. Organization and company owners can assign roles to members to define their permissions.
 
 {{< grid >}}
