@@ -115,7 +115,7 @@ The following examples show you how to set up and use alternative container
 runtimes with Docker Engine.
 
 - [youki](#youki)
-- [Wasmtime](#youki)
+- [Wasmtime](#wasmtime)
 
 ### youki
 
