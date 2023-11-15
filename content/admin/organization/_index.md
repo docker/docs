@@ -33,6 +33,10 @@ grid:
   description: Add, verify, and audit your domains.
   link: /admin/organization/security-settings/domains/
   icon: domain_verification
+- title: FAQs
+  description: Explore common organization FAQs.
+  link: /docker-hub/organization-faqs/
+  icon: help
 ---
 
 {{< include "admin-early-access.md" >}}

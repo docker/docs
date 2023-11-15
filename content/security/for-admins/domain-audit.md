@@ -26,6 +26,11 @@ Before you audit your domains, the following prerequisites are required:
 - Your organization must be part of a Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../../subscription/upgrade.md).
 - You must add and verify your domains.
 
+> **Important**
+>
+> Domain audit is not supported for companies or organizations within a company.
+{ .important }
+
 ## Audit your domains for uncaptured users
 
 {{< tabs >}}
