@@ -63,7 +63,7 @@ This creates 2 files:
 - `admin-settings.json`, which activates the private marketplace feature once it’s applied to Docker Desktop on your developers’ machines
 - `extensions.txt`, which determines which extensions to list in your private marketplace.
 
-## Step two: Changing private marketplace behaviour
+## Step two: Set the private marketplace behaviour
 
 The generated `admin-settings.json` file includes various settings you can modify.
 
@@ -105,7 +105,7 @@ This list can include different types of extension images:
  
 > **Important**
 > 
-> Your developers will only be able to install the version of the extension that you’ve listed.
+> Your developers can only install the version of the extension that you’ve listed.
 { .important}
 
 ## Step four: Generate the private marketplace
