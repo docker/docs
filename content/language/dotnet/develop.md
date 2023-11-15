@@ -24,17 +24,17 @@ application](containerize.md).
 
 To get the updated code, you need to checkout the `add-db` branch. For the changes you made in [Containerize a .NET application](containerize.md), for this section, you can stash them. In a terminal, run the following commands in the `docker-dotnet-sample` directory.
 
-Stash any previous changes.
+1. Stash any previous changes.
 
-```console
-$ git stash -u
-```
+   ```console
+   $ git stash -u
+   ```
 
-Check out the new branch with the updated application.
+2. Check out the new branch with the updated application.
 
-```console
-$ git checkout add-db
-```
+   ```console
+   $ git checkout add-db
+   ```
 
 In the `add-db` branch, only the .NET application has been updated. None of the Docker assets have been updated yet.
 

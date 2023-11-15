@@ -228,7 +228,7 @@ so on.
 For external access, your users can execute `docker run` with a flag indicating
 how to map the specified port to the port of their choice.
 For container linking, Docker provides environment variables for the path from
-the recipient container back to the source (ie, `MYSQL_PORT_3306_TCP`).
+the recipient container back to the source (for example, `MYSQL_PORT_3306_TCP`).
 
 For more information about `EXPOSE`, see [Dockerfile reference for the EXPOSE instruction](../../engine/reference/builder.md#expose).
 
@@ -240,7 +240,7 @@ example, `ENV PATH=/usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
 just works.
 
 The `ENV` instruction is also useful for providing the required environment
-variables specific to services you wish to containerize, such as Postgres’s
+variables specific to services you want to containerize, such as Postgres’s
 `PGDATA`.
 
 Lastly, `ENV` can also be used to set commonly used version numbers so that
@@ -427,7 +427,7 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["postgres"]
 ```
 
-This script allows the user to interact with Postgres in several ways.
+This script lets you interact with Postgres in several ways.
 
 It can simply start Postgres:
 
@@ -435,13 +435,13 @@ It can simply start Postgres:
 $ docker run postgres
 ```
 
-Or, it can be used to run Postgres and pass parameters to the server:
+Or, you can use it to run Postgres and pass parameters to the server:
 
 ```console
 $ docker run postgres postgres --help
 ```
 
-Lastly, it could also be used to start a totally different tool, such as Bash:
+Lastly, you can use it to start a totally different tool, such as Bash:
 
 ```console
 $ docker run --rm -it postgres bash
@@ -451,7 +451,7 @@ For more information about `ENTRYPOINT`, see [Dockerfile reference for the ENTRY
 
 ### VOLUME
 
-The `VOLUME` instruction should be used to expose any database storage area,
+YOu should use the `VOLUME` instruction to expose any database storage area,
 configuration storage, or files and folders created by your Docker container. You
 are strongly encouraged to use `VOLUME` for any combination of mutable or user-serviceable
 parts of your image.

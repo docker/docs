@@ -87,7 +87,7 @@ daemon. The Docker client and daemon communicate using a REST API, over UNIX
 sockets or a network interface. Another Docker client is Docker Compose,
 that lets you work with applications consisting of a set of containers.
 
-![Docker Architecture diagram](images/docker-architecture.png)
+![Docker Architecture diagram](images/docker-architecture.webp)
 
 ### The Docker daemon
 

@@ -14,14 +14,14 @@ Docker Hub limits the number of Docker image downloads, or pulls, based on the a
 | [Authenticated users](#how-do-i-authenticate-pull-requests)| 200 pulls per 6 hour period |
 | Users with a paid [Docker subscription](https://www.docker.com/pricing) | Up to 5000 pulls per day |
 
-If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
+If you require a higher number of pulls, you can also buy an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
 
 
 ## Definition of limits
 
 A user's limit is equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
-advantage of this, you must log in to 
+advantage of this, you must sign in to 
 [Docker Hub](https://hub.docker.com/) 
 as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
@@ -89,7 +89,7 @@ ratelimit-remaining: 76;w=21600
 docker-ratelimit-source: 192.0.2.1
 ```
 
-In the example above, the pull limit is 100 pulls per 21600 seconds (6 hours), and there are 76 pulls remaining.
+In the previous example, the pull limit is 100 pulls per 21600 seconds (6 hours), and there are 76 pulls remaining.
 
 ### I don't see any RateLimit headers
 

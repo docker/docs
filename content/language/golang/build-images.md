@@ -295,7 +295,7 @@ FROM golang:1.19
 
 ## Build the image
 
-Now that you've created our `Dockerfile`, build an image from it. The `docker
+Now that you've created your `Dockerfile`, build an image from it. The `docker
 build` command creates Docker images from the `Dockerfile` and a context. A
 build context is the set of files located in the specified path or URL. The
 Docker build process can access any of the files located in the context.
