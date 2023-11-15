@@ -29,6 +29,10 @@ grid:
   description: Add and verify your domains.
   icon: domain_verification
   link: /admin/company/settings/domains/
+- title: FAQs
+  description: Explore common company FAQs.
+  link: /docker-hub/company-faqs/
+  icon: help
 ---
 
 {{< include "admin-early-access.md" >}}
