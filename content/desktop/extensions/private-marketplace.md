@@ -27,36 +27,36 @@ Docker Extensions' private marketplace feature makes use of [Settings Management
 
 1. Create a folder locally for the content that will be deployed to your developers’ machines:
 
-```bash
-mkdir myMarketplace
-cd myMarketplace
-```
+   ```bash
+   mkdir myMarketplace
+   cd myMarketplace
+   ```
 
 2. Initialize the configuration files for your marketplace:
 
-{{< tabs >}}
-{{< tab name="Mac" >}}
+   {{< tabs >}}
+   {{< tab name="Mac" >}}
 
-```bash
-/Applications/Docker.app/Contents/Resources/bin/extension-admin init
-```
+   ```bash
+   /Applications/Docker.app/Contents/Resources/bin/extension-admin init
+   ```
 
-{{< /tab >}}
-{{< tab name="Windows" >}}
+   {{< /tab >}}
+   {{< tab name="Windows" >}}
 
-```bash
-C:\Program Files\Docker\Docker\resources\bin\extension-admin init
-```
+   ```bash
+   C:\Program Files\Docker\Docker\resources\bin\extension-admin init
+   ```
 
-{{< /tab >}}
-{{< tab name="Linux" >}}
+   {{< /tab >}}
+   {{< tab name="Linux" >}}
 
-```bash
-/opt/docker-desktop/extension-admin init
-```
+   ```bash
+   /opt/docker-desktop/extension-admin init
+   ```
 
-{{< /tab >}}
-{{< /tabs >}}
+   {{< /tab >}}
+   {{< /tabs >}}
 
 This creates 2 files:
 
@@ -74,12 +74,12 @@ Each setting has a `value` that you can set, including a `locked` field that all
 - `onlyMarketplaceExtensions` allows or blocks users from installing other extensions by using the command line. Teams developing new extensions must have this setting unlocked (`"locked": false`) to install and test extensions being developed
 - `extensionsPrivateMarketplaceAdminContactURL` defines a contact link for users to request new extensions in the private marketplace. If `value` is empty then no link is shown to your developers on Docker Desktop, otherwise this can be either an HTTP link or a “mailto:” link. For example,
 
-  ```json
-  "extensionsPrivateMarketplaceAdminContactURL": {
-    "locked": true,
-    "value": "mailto:admin@acme.com"
-  }
-  ```
+   ```json
+   "extensionsPrivateMarketplaceAdminContactURL": {
+   "locked": true,
+   "value": "mailto:admin@acme.com"
+   }
+   ```
 
 To find out more information about the `admin-settings.json` file, see [Settings Management](../hardened-desktop/settings-management/_index.md).
 
@@ -100,11 +100,9 @@ If no tag is provided, the latest tag available for the image is used. You can a
 This list can include different types of extension images: 
  
 - Extensions from the public marketplace or any public image stored in Docker Hub,
-- Extension images stored in Docker Hub as private images,*
-- Extension images stored in a private registry.*
+- Extension images stored in Docker Hub as private images. Users need to be signed in and have pull access to these images.
+- Extension images stored in a private registry. Users need to be signed in and have pull access to these images.
  
-> * Users need to be signed in and have pull access to these images.
-
 > **Important**
 > 
 > Your developers will only be able to install the version of the extension that you’ve listed.
@@ -148,29 +146,29 @@ We recommend you try the private marketplace on your Docker Desktop installation
 
 1. Copy the relevant generated files to the location where Docker Desktop reads its configuration files.
 
-{{< tabs >}}
-{{< tab name="Mac" >}}
+   {{< tabs >}}
+   {{< tab name="Mac" >}}
 
-```bash
-sudo /Applications/Docker.app/Contents/Resources/bin/extension-admin apply
-```
+   ```bash
+   sudo /Applications/Docker.app/Contents/Resources/bin/extension-admin apply
+   ```
 
-{{< /tab >}}
-{{< tab name="Windows (run as admin)" >}}
+   {{< /tab >}}
+   {{< tab name="Windows (run as admin)" >}}
 
-```bash
-C:\Program Files\Docker\Docker\resources\bin\extension-admin apply
-```
+   ```bash
+   C:\Program Files\Docker\Docker\resources\bin\extension-admin apply
+   ```
 
-{{< /tab >}}
-{{< tab name="Linux" >}}
+   {{< /tab >}}
+   {{< tab name="Linux" >}}
 
-```bash
-sudo /opt/docker-desktop/extension-admin apply
-```
+   ```bash
+   sudo /opt/docker-desktop/extension-admin apply
+   ```
 
-{{< /tab >}}
-{{< /tabs >}}
+   {{< /tab >}}
+   {{< /tabs >}}
 
 2. Quit and reopen Docker Desktop. 
 3. Sign in with an Docker account.
