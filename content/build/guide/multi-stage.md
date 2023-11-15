@@ -159,7 +159,7 @@ And now you can build the client and server programs as separate Docker images
 ```console
 $ docker build --tag=buildme-client --target=client .
 $ docker build --tag=buildme-server --target=server .
-$ docker images buildme 
+$ docker images "buildme*" 
 REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
 buildme-client   latest    659105f8e6d7   20 seconds ago   4.25MB
 buildme-server   latest    666d492d9f13   5 seconds ago    4.2MB
