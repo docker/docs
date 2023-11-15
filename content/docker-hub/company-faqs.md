@@ -36,9 +36,10 @@ You can manage domain verification, Single Sign-on, and System for Cross-domain 
 - Registry Access Management
 - User management
 - Billing
-- Domain audit
 
-You can manage users at the company level when you use Docker Admin.
+You can manage users at the company level when you use Docker Admin. 
+
+Domain audit is not supported for companies or organizations within a company.
 
 ### What's required to create a company name?
 
