@@ -4,7 +4,7 @@ description: Discover how to view your billing history in Docker Hub
 keywords: payments, billing, subscription, invoices
 ---
 
-You can view the billing history and download past invoices for a personal account or organization at any time.
+You can view the billing history and download past invoices for a personal account or organization.
 
 ## Personal account
 
