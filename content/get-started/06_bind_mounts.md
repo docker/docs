@@ -320,7 +320,7 @@ Update your app on your host machine and see the changes reflected in the contai
    restarts the server. It might take a few seconds for the Node server to
    restart. If you get an error, try refreshing after a few seconds.
 
-   ![Screenshot of updated label for Add button](images/updated-add-button.png)
+   ![Screenshot of updated label for Add button](images/updated-add-button.webp)
 
 3. Feel free to make any other changes you'd like to make. Each time you make a
    change and save a file, the change is reflected in the container because of

@@ -61,7 +61,7 @@ Once you have created a repository, you can start using `docker push` to push
 images.
 
 To push an image to Docker Hub, you must first name your local image using your
-Docker Hub username and the repository name that you created.
+Docker ID and the repository name that you created.
 
 If you want to add multiple images to a repository, add a specific `:<tag>` to them, for example `docs/base:testing`. If it's not specified, the tag defaults to `latest`.
 

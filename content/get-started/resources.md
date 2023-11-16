@@ -9,11 +9,11 @@ Docker and the broader community of Docker experts have put together many differ
 
 ## Hosted labs
 
-These self-paced and hands-on workshops use a free, hosted environment ([Play with Kubernetes](https://labs.play-with-k8s.com/)) that does not require any installation. Follow along and learn more about Kubernetes.
+These self-paced and hands-on workshops use a free, hosted environment ([Play with Kubernetes](https://labs.play-with-k8s.com/)) that doesn't require any installation. Follow along and learn more about Kubernetes.
 
 * [Kubernetes Workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/)
 
-* Labs are free but require registration with a Docker ID.
+\* Labs are free but require registration with a Docker ID.
 
 ## Self-guided tutorials
 

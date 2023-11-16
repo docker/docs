@@ -17,7 +17,7 @@ All Docker users can seek support through the following resources, where Docker 
    - [Docker Desktop for Mac GitHub repo](https://github.com/docker/for-mac)
    - [Docker Desktop for Linux GitHub repo](https://github.com/docker/desktop-linux)
    - [Docker Community Forums](https://forums.docker.com/)
-   - [Docker Community Slack](https://dockercommunity.slack.com/)
+   - [Docker Community Slack](http://dockr.ly/comm-slack)
 
 
 ## What support can I get?
