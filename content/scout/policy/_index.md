@@ -11,7 +11,7 @@ description: |
 >
 > Policy Evaluation is an [Early Access](/release-lifecycle/#early-access-ea)
 > feature of Docker Scout.
-{ .restricted }
+> { .restricted }
 
 In software supply chain management, maintaining the security and reliability
 of artifacts is a top priority. Policy Evaluation in Docker Scout introduces a
@@ -22,7 +22,7 @@ perform, relative to your rules and thresholds, over time.
 Learn how you can use Policy Evaluation to ensure that your artifacts align
 with established best practices.
 
-## How it works
+## How Policy Evaluation works
 
 When you activate Docker Scout for a repository, images that you push are
 [automatically analyzed](../image-analysis.md). The analysis gives you insights
@@ -33,7 +33,7 @@ defined by policies.
 
 A policy defines one or more criteria that your artifacts should fulfill. For
 example, one of the default policies in Docker Scout is the **Critical
-vulnerabilities** policy, which proclaims that your artifacts must not contain
+vulnerabilities** policy, which requires that your artifacts must not contain
 any critical vulnerabilities. If an artifact contains one or more
 vulnerabilities with a critical severity, that artifact fails the evaluation.
 
@@ -47,8 +47,8 @@ policy.
 
 Policies don't necessarily have to be related to application security and
 vulnerabilities. You can use policies to measure and track other aspects of
-supply chain management as well, such as base image dependencies and
-open-source licenses.
+supply chain management as well, such as open-source license usage and base
+image up-to-dateness.
 
 ## Default policies
 
@@ -61,16 +61,17 @@ Docker Scout ships the following out-of-the-box policies:
 - [High-profile vulnerabilities](#high-profile-vulnerabilities)
 - [Supply chain attestations](#supply-chain-attestations)
 
-These policies are turned on by default for Scout-enabled repositories. There's
+These policies are enabled by default for Scout-enabled repositories. There's
 currently no way to turn off or configure these policies.
 
 ### Fixable critical and high vulnerabilities
 
-This policy requires that your artifacts aren't exposed to known
-vulnerabilities with a critical or high severity, and where there's a fix
-version available. Essentially, this means that there's an easy fix that you
-can deploy for images that fail this policy: upgrade the vulnerable package to
-a version containing a fix for the vulnerability.
+The **Fixable critical and high vulnerabilities** policy requires that your
+artifacts aren't exposed to known vulnerabilities with a critical or high
+severity, and where there's a fix version available. Essentially, this means
+that there's an easy fix that you can deploy for images that fail this policy:
+upgrade the vulnerable package to a version containing a fix for the
+vulnerability.
 
 This policy only flags vulnerabilities that were published more than 30
 days ago, with the rationale that newly discovered vulnerabilities
@@ -82,26 +83,28 @@ or high-severity vulnerability, where a fix version is available.
 
 ### Critical vulnerabilities
 
-This policy requires that your artifacts contain no known critical
-vulnerabilities. The policy is unfulfilled if your artifact contains one or
-more critical vulnerabilities.
+The **Critical vulnerabilities** policy requires that your artifacts contain no
+known critical vulnerabilities. The policy is unfulfilled if your artifact
+contains one or more critical vulnerabilities.
 
 This policy flags all critical vulnerabilities, whether or not there's a fix
-version available.
+version available, and regardless of how long it's been since the vulnerability
+was first disclosed.
 
 ### Copyleft licenses
 
-This policy requires that your artifacts don't contain packages distributed
-under an AGPLv3 or GPLv3 license. These licenses are protective
-[copyleft](https://en.wikipedia.org/wiki/Copyleft), and may be unsuitable for
-use in your software because of the restrictions they enforce.
+The **Copyleft licenses** policy requires that your artifacts don't contain
+packages distributed under an AGPLv3 or GPLv3 license. These licenses are
+protective [copyleft](https://en.wikipedia.org/wiki/Copyleft), and may be
+unsuitable for use in your software because of the restrictions they enforce.
 
 This policy is unfulfilled if your artifacts contain one or more packages with
 a violating license.
 
 ### Outdated base images
 
-This policy requires that the base images you use are up-to-date.
+The **Outdated base images** policy requires that the base images you use are
+up-to-date.
 
 It's unfulfilled when the tag you used to build your image points to a
 different digest than what you're using. If there's a mismatch in digests, that
@@ -126,9 +129,10 @@ image version.
 
 ### High-profile vulnerabilities
 
-This policy requires that your artifacts don't contain vulnerabilities from
-Docker Scout’s curated list. This list is kept up-to-date with newly disclosed
-vulnerabilities that are widely recognized to be risky.
+The **High-profile vulnerabilities** policy requires that your artifacts don't
+contain vulnerabilities from Docker Scout’s curated list. This list is kept
+up-to-date with newly disclosed vulnerabilities that are widely recognized to
+be risky.
 
 The list includes the following vulnerabilities:
 
@@ -139,7 +143,7 @@ The list includes the following vulnerabilities:
 
 ### Supply chain attestations
 
-The Supply chain attestations policy requires that your artifacts have
+The **Supply chain attestations** policy requires that your artifacts have
 [SBOM](../../build/attestations/sbom.md) and
 [provenance](../../build/attestations/slsa-provenance.md) attestations.
 
