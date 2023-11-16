@@ -35,7 +35,7 @@ Open your terminal and navigate to the working directory you created. Create an 
 ```console
 $ cd /path/to/python-docker
 $ python3 -m venv .venv
-$ source .venv/bin/activate
+$ source .venv/Scripts/activate
 (.venv) $ python3 -m pip install -r requirements.txt
 (.venv) $ python3 -m flask run
 ```
