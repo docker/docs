@@ -49,9 +49,9 @@ The new Registry Access Management policy takes effect after the developer succe
 
 ## Caveats
 
-There are certain limitations when using Registry Access Management; they are as follows:
+There are certain limitations when using Registry Access Management:
 
-- Windows image pulls, and image builds are not restricted
+- Windows image pulls and image builds are not restricted by default. For Registry Access Management to take effect on Windows Container mode, you must allow the Windows Docker daemon to use Docker Desktop's internal proxy by selecting the [Use proxy for Windows Docker daemon](../../desktop/settings/windows.md/#proxies) setting.
 - Builds such as `docker buildx` using a Kubernetes driver are not restricted
 - Builds such as `docker buildx` using a custom docker-container driver are not restricted
 - Blocking is DNS-based; you must use a registry's access control mechanisms to distinguish between “push” and “pull”
