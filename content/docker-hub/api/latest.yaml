@@ -559,7 +559,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
   /v2/auditlogs/{account}:
     get:
-      summary: Returns list of audit log  events
+      summary: Returns list of audit log events
       description: Get audit log events for a given namespace.
       operationId: AuditLogs_GetAuditLogs
       responses:
