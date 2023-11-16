@@ -11,7 +11,7 @@ description: |
 >
 > Policy Evaluation is an [Early Access](/release-lifecycle/#early-access-ea)
 > feature of Docker Scout.
-> { .restricted }
+{ .restricted }
 
 In software supply chain management, maintaining the security and reliability
 of artifacts is a top priority. Policy Evaluation in Docker Scout introduces a
@@ -61,25 +61,31 @@ Docker Scout ships the following out-of-the-box policies:
 - [High-profile vulnerabilities](#high-profile-vulnerabilities)
 - [Supply chain attestations](#supply-chain-attestations)
 
-These policies are enabled by default for Scout-enabled repositories. There's
-currently no way to turn off or configure these policies.
+Policies are enabled by default for Scout-enabled repositories. If you want to
+customize the criteria of a policy, you can create custom policies based on the
+default, out-of-the-box policies. You can also disable a policy altogether if
+it isn't relevant to you. For more information, see [Configure
+policies](./configure.md).
 
 ### Fixable critical and high vulnerabilities
 
 The **Fixable critical and high vulnerabilities** policy requires that your
-artifacts aren't exposed to known vulnerabilities with a critical or high
-severity, and where there's a fix version available. Essentially, this means
-that there's an easy fix that you can deploy for images that fail this policy:
-upgrade the vulnerable package to a version containing a fix for the
-vulnerability.
+artifacts aren't exposed to known vulnerabilities where there's a fix version
+available. Essentially, this means that there's an easy fix that you can deploy
+for images that fail this policy: upgrade the vulnerable package to a version
+containing a fix for the vulnerability.
 
-This policy only flags vulnerabilities that were published more than 30
-days ago, with the rationale that newly discovered vulnerabilities
-shouldn't cause your evaluations to fail until you've had a chance to
-address them.
+This policy only flags critical and high severity vulnerabilities that were
+published more than 30 days ago. The rationale for only flagging
+vulnerabilities of a certain age is that newly discovered vulnerabilities
+shouldn't cause your evaluations to fail until you've had a chance to address
+them.
 
 This policy is unfulfilled if an artifact is affected by one or more critical-
 or high-severity vulnerability, where a fix version is available.
+
+You can configure the severity level and age thresholds by creating a custom
+policy. For more information, see [Configure policies](./configure.md).
 
 ### Critical vulnerabilities
 
@@ -91,6 +97,9 @@ This policy flags all critical vulnerabilities, whether or not there's a fix
 version available, and regardless of how long it's been since the vulnerability
 was first disclosed.
 
+You can configure the severity level by creating a custom policy, see
+[Configure policies](./configure.md).
+
 ### Copyleft licenses
 
 The **Copyleft licenses** policy requires that your artifacts don't contain
@@ -100,6 +109,9 @@ unsuitable for use in your software because of the restrictions they enforce.
 
 This policy is unfulfilled if your artifacts contain one or more packages with
 a violating license.
+
+You can configure the list of licenses by creating a custom policy, see
+[Configure policies](./configure.md).
 
 ### Outdated base images
 
@@ -140,6 +152,9 @@ The list includes the following vulnerabilities:
 - [CVE-2021-44228 (Log4Shell)](https://scout.docker.com/v/CVE-2021-44228)
 - [CVE-2023-38545 (cURL SOCKS5 heap buffer overflow)](https://scout.docker.com/v/CVE-2023-38545)
 - [CVE-2023-44487 (HTTP/2 Rapid Reset)](https://scout.docker.com/v/CVE-2023-44487)
+
+You can configure the CVEs included in this list by creating a custom policy.
+For more information, see [Configure policies](./configure.md).
 
 ### Supply chain attestations
 
