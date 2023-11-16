@@ -31,7 +31,9 @@ grid:
 
 Hardened Docker Desktop is a group of security features for Docker Desktop, designed to improve the security of developer environments without impacting developer experience or productivity.
 
-It lets admins define and enforce robust security settings. It guarantees that developers and the containers they deploy are unable to intentionally or unintentionally circumvent these settings. Additionally, Hardened Docker Desktop enhances container isolation, which helps mitigate potential security threats, and ensures that malicious payloads cannot breach the Docker Desktop Linux VM and the underlying host.
+It lets admins define and enforce robust security settings. It guarantees that developers and the containers they deploy are unable to intentionally or unintentionally circumvent these settings. Additionally, you can enhance container isolation, which helps mitigate potential security threats such as malicious payloads breaching the Docker Desktop Linux VM and the underlying host.
+
+Hardened Docker Desktop moves the ownership boundary for Docker Desktop configuration to the organization, meaning that any security controls admins set cannot be altered by the user of Docker Desktop.
 
 ## Who is it for?
 
@@ -50,10 +52,10 @@ It includes:
 
 ### How does it help my organisation?
 
-Hardened Desktop features work independently but collectively to create a defense-in-depth strategy, safeguarding developer workstations against attacks across various functional layers, such as configuring Docker Desktop, pulling container images, and running container images. This multi-layered defense approach ensures comprehensive security.
+Hardened Desktop features work independently but collectively to create a defense-in-depth strategy, safeguarding developer workstations against potential attacks across various functional layers, such as configuring Docker Desktop, pulling container images, and running container images. This multi-layered defense approach ensures comprehensive security.
 
 It helps mitigate against threats such as:
  - Malware and supply chain attacks. RAM and IAM prevent developers from accessing certain container registries and image types, significantly lowering the risk of malicious payloads. Additionally, ECI restricts the impact of containers with malicious payloads by running them without root privileges inside a Linux user namespace.
- - Local admin rights an insider threats. Settings Management configures and locks various Docker Desktop settings, such as proxy settings, ECI, and prevents exposure of the Docker API. This helps admins enforce company policies.
+ - Insider threats. Settings Management configures and locks various Docker Desktop settings, such as proxy settings, ECI, and prevents exposure of the Docker API. This helps admins enforce company policies and prevents developers from introducing insecure configurations, intentionally or unintentionally.
 
 {{< grid >}}
