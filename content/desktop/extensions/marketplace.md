@@ -11,7 +11,7 @@ There are two types of extensions available in the Extensions Marketplace:
 Docker-reviewed extensions are manually reviewed by the Docker Extensions team to ensure an extra level of trust
 and quality. They appear as **Reviewed** in the Marketplace.
 
-Self-published extensions are autonomously published by extension developers. They appear as **Not reviewed** in the Marketplace.
+Self-published extensions are autonomously published by extension developers and go through an automated validation process. They appear as **Not reviewed** in the Marketplace.
 
 ## Install an extension
 
