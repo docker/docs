@@ -25,6 +25,28 @@ Guides:
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
+
+- sectiontitle: Walkthroughs
+  section:
+    - title: "Overview"
+      path: /guides/walkthroughs/
+    - title: "What is a container?"
+      path: /guides/walkthroughs/what-is-a-container/
+    - title: "How do I run a container?"
+      path: /guides/walkthroughs/run-a-container/
+    - title: "Run Docker Hub images"
+      path: /guides/walkthroughs/run-hub-images/
+    - title: "Run multi-container applications"
+      path: /guides/walkthroughs/multi-container-apps/
+    - title: "Persist data between containers"
+      path: /guides/walkthroughs/persist-data/
+    - title: "Access a local folder"
+      path: /guides/walkthroughs/access-local-folder/
+    - title: "Containerize your application"
+      path: /guides/walkthroughs/containerize-your-app/
+    - title: "Publish your image"
+      path: /guides/walkthroughs/publish-your-image/
+
 - sectiontitle: Language-specific guides
   section:
   - path: /language/

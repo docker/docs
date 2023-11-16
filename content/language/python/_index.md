@@ -1,7 +1,7 @@
 ---
 description: Containerize Python apps using Docker
 keywords: Docker, getting started, Python, language
-title: What will you learn in this module?
+title: Python language-specific guide
 toc_min: 1
 toc_max: 2
 ---

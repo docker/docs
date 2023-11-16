@@ -29,7 +29,7 @@ To push an image, you first need to create a repository on Docker Hub.
 
 In the following image, you can see an example Docker command from Docker Hub. This command will push to this repository.
 
-![Docker command with push example](images/push-command.png)
+![Docker command with push example](images/push-command.webp)
 
 
 ## Push the image
@@ -89,7 +89,7 @@ new instance that has never seen this container image. To do this, you will use 
 
 4. Select the **ADD NEW INSTANCE** option on the left side bar. If you don't see it, make your browser a little wider. After a few seconds, a terminal window opens in your browser.
 
-    ![Play with Docker add new instance](images/pwd-add-new-instance.png)
+    ![Play with Docker add new instance](images/pwd-add-new-instance.webp)
 
 5. In the terminal, start your freshly pushed app.
 

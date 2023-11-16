@@ -58,11 +58,6 @@ aliases:
 - /windows/step_six/
 - /windows/step_three/
 - /windows/step_two/
-- /get-started/what-is-a-container/
-- /get-started/run-your-own-container/
-- /get-started/run-docker-hub-images/
-- /get-started/publish-your-own-image/
-- /get-started/hands-on-overview/
 ---
 
 This guide contains step-by-step instructions on how to get started with Docker. This guide shows you how to:
@@ -71,6 +66,12 @@ This guide contains step-by-step instructions on how to get started with Docker.
 - Share images using Docker Hub.
 - Deploy Docker applications using multiple containers with a database.
 - Run applications using Docker Compose.
+
+> **Note**
+>
+> Before diving in, try the 5-minute hands-on
+> [walkthroughs](../guides/walkthroughs/_index.md) to get more familiar with
+> Docker Desktop.
 
 ## What is a container?
 

@@ -82,10 +82,10 @@ Optionally, you can sign in to an existing Docker account with your Google or Gi
 
 If you try to sign in with your social provider and don't have a Docker account yet, a new account will be created for you. Follow the on-screen instructions to create a Docker ID using your social provider.
 
+## Reset your password at sign in
+
+To reset your password, enter your email address on the [Sign in](https://login.docker.com/u/login) page and continue to sign in. When prompted for your password, select **Forgot password?**.
+
 ## Troubleshooting
 
-If you run into trouble with your Docker ID account, know that we're here to help! If you want to retrieve or reset your password, [enter your email address](https://login.docker.com/u/login) for additional instructions.
-
-You can use the [Docker forums](https://forums.docker.com/) to ask questions amongst other Docker community members, while our [hub-feedback GitHub repository](https://github.com/docker/hub-feedback) allows you to provide feedback on how we can better improve the experience with Docker Hub.
-
-If you still need any help, [create a support ticket](https://hub.docker.com/support/contact/) and let us know how we can help you.
+For support and troubleshooting information, see [Get support](../support.md).
