@@ -11,6 +11,26 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.23.1
+{{< release-date date="2023-11-16" >}}
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.20.1
+
+### Bug fixes and enhancements
+- align with OCI artifact best practices
+- introduce --resolve-image-digests for publish to seal service images
+- improve watch configuration logging
+- reject compose file using secrets|configs.driver or template_driver
+- fail start if depependency is missing by @ndeloof in #11110
+- fix SIGTERM support to stop/kill stack
+- fix --hash regression
+- fix for "Application failed to start after update" when an external network is on a watched service
+- fix --pull documentation
+- fix #11170 add newline in cmd/compose/build.go
+- render quiet after filtering applied
+- Strip project prefix from docker-compose up output
+
 ## 2.23.0
 {{< release-date date="2023-10-18" >}}
 
