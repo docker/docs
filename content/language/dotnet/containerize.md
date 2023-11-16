@@ -70,7 +70,7 @@ This utility will walk you through creating the following files with sensible de
 
 Let's get started!
 
-? What application platform does your project use? ASP.NET
+? What application platform does your project use? ASP.NET Core
 ? What's the name of your solution's main project? myWebApp
 ? What version of .NET do you want to use? 6.0
 ? What local port do you want to use to access your server? 8080
