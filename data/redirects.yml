@@ -584,6 +584,8 @@
   - /go/scout-ci/
 "/scout/policy/":
   - /go/scout-policy/
+"/scout/policy/configure/":
+  - /go/scout-configure-policy/
 # integrations
 "/scout/integrations/ci/gha/":
   - "/go/scout-gha/"
