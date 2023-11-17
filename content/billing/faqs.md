@@ -6,7 +6,7 @@ keywords: billing, renewal, payments, faq
 
 ### Where can I view my billing date?
 
-Navigate to the **Plan** tab in your billing settings to view your current plan. You can fined the billing date near the bottom-right of your plan details.
+Navigate to the **Plan** tab in your billing settings to view your current plan. You can find the billing date near the bottom-right of your plan details.
 
 ### What credit and debit cards are supported?
 
