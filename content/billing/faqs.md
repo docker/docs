@@ -1,12 +1,12 @@
 ---
 title: Billing FAQs
-description: Common FAQs related to billing
-keywords: billing, renewal, payments
+description: Frequently asked questions related to billing
+keywords: billing, renewal, payments, faq
 ---
 
 ### Where can I view my billing date?
 
-Navigate to the **Plan** tab in your billing settings. The billing date is located near the bottom-right.
+Navigate to the **Plan** tab in your billing settings to view your current plan. You can fined the billing date near the bottom-right of your plan details.
 
 ### What credit and debit cards are supported?
 
@@ -28,7 +28,7 @@ If your subscription payment fails, there is a grace period of 15 days, includin
 
 Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt. 
 
-Once the grace period is over and the invoice is still not paid, the subscription is downgraded to a free plan and all paid features are disabled.
+Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free plan and all paid features are disabled.
 
 ### What billing-related emails will I receive from Docker Hub?
 
@@ -59,7 +59,7 @@ A coupon can be used when you:
 
 You are asked to enter your coupon code when you confirm or enter your payment method. 
 
-If you use a coupon to pay for a subscription, when the coupon expires, your payment method is charged the full cost of your subscription. If you do not have a saved payment method, your account is downgraded to a free subscription.
+If you use a coupon to pay for a subscription, when the coupon expires, your payment method is charged the full cost of your subscription. If you don't have a saved payment method, your account will downgrade to a free subscription.
 
 ### How do I include my VAT number on my invoice?
 

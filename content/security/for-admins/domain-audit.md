@@ -1,6 +1,6 @@
 ---
-description: Audit your domains for uncaptured users.
-keywords: domain audit, security
+description: Learn how to audit your domains for uncaptured users.
+keywords: domain audit, security, identify users, manage users
 title: Domain audit
 aliases:
 - /docker-hub/domain-audit/
@@ -21,7 +21,7 @@ Although domain audit can't identify all Docker users in your environment, you c
 
 ## Prerequisites
 
-Before you audit your domains, the following prerequisites are required:
+Before you audit your domains, review the following required prerequisites:
 
 - Your organization must be part of a Docker Business subscription. To upgrade your existing account to a Docker Business subscription, see [Upgrade your subscription](../../subscription/upgrade.md).
 - You must add and verify your domains.
