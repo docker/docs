@@ -1,7 +1,7 @@
 ---
 datafolder: buildx
-datafile: docker_buildx_debug-shell
-title: docker buildx debug-shell
+datafile: docker_buildx_debug_build
+title: docker buildx debug_build
 layout: cli
 ---
 
