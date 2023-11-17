@@ -134,7 +134,7 @@ EOF
 
 ### Configure proxy settings per daemon
 
-The `default` key under `proxies` in `daemon.json` configures the proxy
+The `proxies` in `daemon.json` configures the proxy
 settings for all daemons that the client connects to.
 To configure the proxies for individual daemons,
 use the address of the daemon instead of the `default` key.
