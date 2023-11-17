@@ -8,6 +8,99 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.12.0
+
+{{< release-date date="2023-11-16" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.12.0).
+
+### New
+
+- New `--annotation` flag for the `buildx build`, and an `annotations` key in the Bake file, that lets you add OCI Annotations to build results.
+  [#2020](https://github.com/docker/buildx/pull/2020),
+  [#2098](https://github.com/docker/buildx/pull/2098)
+- New experimental debugging features, including a new `debug` command and an interactive debugging console.
+  This feature currently requires setting `BUILDX_EXPERIMENTAL=1`.
+  [#2006](https://github.com/docker/buildx/pull/2006),
+  [#1896](https://github.com/docker/buildx/pull/1896),
+  [#1970](https://github.com/docker/buildx/pull/1970),
+  [#1914](https://github.com/docker/buildx/pull/1914),
+  [#2026](https://github.com/docker/buildx/pull/2026),
+  [#2086](https://github.com/docker/buildx/pull/2086)
+
+### Bug fixes and enhancements
+
+- The special `host-gateway` IP mapping can now be used with the `--add-host` flag during build.
+  [#1894](https://github.com/docker/buildx/pull/1894),
+  [#2083](https://github.com/docker/buildx/pull/2083)
+- Bake now allows adding local source files when building from remote definition.
+  [#1838](https://github.com/docker/buildx/pull/1838)
+- The status of uploading build results to Docker is now shown interactively on progress bar.
+  [#1994](https://github.com/docker/buildx/pull/1994)
+- Error handling has been improved when bootstrapping multi-node build clusters.
+  [#1869](https://github.com/docker/buildx/pull/1869)
+- The `buildx imagetools create` command now allows adding annotation when creating new images in the registry.
+  [#1965](https://github.com/docker/buildx/pull/1965)
+- OpenTelemetry build trace delegation from buildx is now possible with Docker and Remote driver.
+  [#2034](https://github.com/docker/buildx/pull/2034)
+- Bake command now shows all files where the build definition was loaded from on the progress bar.
+  [#2076](https://github.com/docker/buildx/pull/2076)
+- Bake files now allow the same attributes to be defined in multiple definition files.
+  [#1062](https://github.com/docker/buildx/pull/1062)
+- Using the Bake command with a remote definition now allows this definition to use local Dockerfiles.
+  [#2015](https://github.com/docker/buildx/pull/2015)
+- Docker container driver now explicitly sets BuildKit config path to make sure configurations are loaded from same location for both mainline and rootless images.
+  [#2093](https://github.com/docker/buildx/pull/2093)
+- Improve performance of detecting when BuildKit instance has completed booting.
+  [#1934](https://github.com/docker/buildx/pull/1934)
+- Container driver now accepts many new driver options for defining the resource limits for BuildKit container.
+  [#2048](https://github.com/docker/buildx/pull/2048)
+- Inspection commands formatting has been improved.
+  [#2068](https://github.com/docker/buildx/pull/2068)
+- Error messages about driver capabilities have been improved.
+  [#1998](https://github.com/docker/buildx/pull/1998)
+- Improve errors when invoking Bake command without targets.
+  [#2100](https://github.com/docker/buildx/pull/2100)
+- Allow enabling debug logs with environment variables when running in standalone mode.
+  [#1821](https://github.com/docker/buildx/pull/1821)
+- When using Docker driver the default image resolve mode has been updated to prefer local Docker images for backward compatibility.
+  [#1886](https://github.com/docker/buildx/pull/1886)
+- Kubernetes driver now allows setting custom annotations and labels to the BuildKit deployments and pods.
+  [#1938](https://github.com/docker/buildx/pull/1938)
+- Kubernetes driver now allows setting authentication token with endpoint configuration.
+  [#1891](https://github.com/docker/buildx/pull/1891)
+- Fix possible issue with chained targets in Bake that could result in build failing or local source for a target uploaded multiple times.
+  [#2113](https://github.com/docker/buildx/pull/2113)
+- Fix issue when accessing global target properties when using the matrix feature of the Bake command.
+  [#2106](https://github.com/docker/buildx/pull/2106)
+- Fixes for formatting validation of certain build flags
+  [#2040](https://github.com/docker/buildx/pull/2040)
+- Fixes to avoid locking certain commands unnecessarily while booting builder nodes.
+  [#2066](https://github.com/docker/buildx/pull/2066)
+- Fix cases where multiple builds try to bootstrap the same builder instance in parallel.
+  [#2000](https://github.com/docker/buildx/pull/2000)
+- Fix cases where errors on uploading build results to Docker could be dropped in some cases.
+  [#1927](https://github.com/docker/buildx/pull/1927)
+- Fix detecting capabilities for missing attestation support based on build output.
+  [#1988](https://github.com/docker/buildx/pull/1988)
+- Fix the build for loading in Bake remote definition to not show up in build history records.
+  [#1961](https://github.com/docker/buildx/pull/1961),
+  [#1954](https://github.com/docker/buildx/pull/1954)
+- Fix errors when building Compose files using the that define profiles with Bake.
+  [#1903](https://github.com/docker/buildx/pull/1903)
+- Fix possible time correction errors on progress bar.
+  [#1968](https://github.com/docker/buildx/pull/1968)
+- Fix passing custom cgroup parent to builds that used the new controller interface.
+  [#1913](https://github.com/docker/buildx/pull/1913)
+
+### Packaging
+
+- Compose support has been updated to 1.20, enabling "include" functionality when using the Bake command.
+  [#1971](https://github.com/docker/buildx/pull/1971),
+  [#2065](https://github.com/docker/buildx/pull/2065),
+  [#2094](https://github.com/docker/buildx/pull/2094)
+
 ## 0.11.2
 
 {{< release-date date="2023-07-18" >}}
