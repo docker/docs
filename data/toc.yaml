@@ -1907,6 +1907,8 @@ Manuals:
             title: Copy image between registries
           - path: /build/ci/github-actions/update-dockerhub-desc/
             title: Update Docker Hub repo description
+          - path: /build/ci/github-actions/attestations/
+            title: SBOM and provenance attestations
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
