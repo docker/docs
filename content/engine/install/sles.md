@@ -40,26 +40,16 @@ To get started with Docker Engine on SLES, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 SLES versions:
 
-- SLES 15-SP3 on s390x (IBM Z)
 - SLES 15-SP4 on s390x (IBM Z)
+- SLES 15-SP5 on s390x (IBM Z)
 
-You must enable the [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.3&arch=s390x)
+You must enable the [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.5&arch=s390x)
 repositories.
 
-You must enable the [OpenSUSE `SELinux` repository](https://download.opensuse.org/repositories/security). This repository is not added by default, and you need to enable
-it for the version of SLES you are running. Run the following commands to add it:
-
-For SLES 15-SP3:
+You must add the [OpenSUSE `SELinux` repository](https://download.opensuse.org/repositories/security:/SELinux/). This repository is not added by default. Run the following commands to add it:
 
 ```console
-$ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP3/security:SELinux.repo"
-$ sudo zypper addrepo $opensuse_repo
-```
-
-For SLES 15-SP4:
-
-```console
-$ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/15.4/security:SELinux.repo"
+$ opensuse_repo="https://download.opensuse.org/repositories/security:/SELinux/openSUSE_Factory/security:SELinux.repo"
 $ sudo zypper addrepo $opensuse_repo
 ```
 
