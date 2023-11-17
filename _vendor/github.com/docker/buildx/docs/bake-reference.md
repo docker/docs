@@ -12,18 +12,118 @@ You can define your Bake file in the following file formats:
 
 By default, Bake uses the following lookup order to find the configuration file:
 
-1. `docker-bake.override.hcl`
-2. `docker-bake.hcl`
-3. `docker-bake.override.json`
-4. `docker-bake.json`
-5. `docker-compose.yaml`
-6. `docker-compose.yml`
+1. `compose.yaml`
+2. `compose.yml`
+3. `docker-compose.yml`
+4. `docker-compose.yaml`
+5. `docker-bake.json`
+6. `docker-bake.override.json`
+7. `docker-bake.hcl`
+8. `docker-bake.override.hcl`
 
-Bake searches for the file in the current working directory.
 You can specify the file location explicitly using the `--file` flag:
 
 ```console
-$ docker buildx bake --file=../docker/bake.hcl --print
+$ docker buildx bake --file ../docker/bake.hcl --print
+```
+
+If you don't specify a file explicitly, Bake searches for the file in the
+current working directory. If more than one Bake file is found, all files are
+merged into a single definition. Files are merged according to the lookup
+order. That means that if your project contains both a `compose.yaml` file and
+a `docker-bake.hcl` file, Bake loads the `compose.yaml` file first, and then
+the `docker-bake.hcl` file.
+
+If merged files contain duplicate attribute definitions, those definitions are
+either merged or overridden by the last occurrence, depending on the attribute.
+The following attributes are overridden by the last occurrence:
+
+- `target.cache-to`
+- `target.dockerfile-inline`
+- `target.dockerfile`
+- `target.outputs`
+- `target.platforms`
+- `target.pull`
+- `target.tags`
+- `target.target`
+
+For example, if `compose.yaml` and `docker-bake.hcl` both define the `tags`
+attribute, the `docker-bake.hcl` is used.
+
+```console
+$ cat compose.yaml
+services:
+  webapp:
+    build:
+      context: .
+      tags:
+        - bar
+$ cat docker-bake.hcl
+target "webapp" {
+  tags = ["foo"]
+}
+$ docker buildx bake --print webapp
+{
+  "group": {
+    "default": {
+      "targets": [
+        "webapp"
+      ]
+    }
+  },
+  "target": {
+    "webapp": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "tags": [
+        "foo"
+      ]
+    }
+  }
+}
+```
+
+All other attributes are merged. For example, if `compose.yaml` and
+`docker-bake.hcl` both define unique entries for the `labels` attribute, all
+entries are included. Duplicate entries for the same label are overridden.
+
+```console
+$ cat compose.yaml
+services:
+  webapp:
+    build:
+      context: .
+      labels: 
+        com.example.foo: "foo"
+        com.example.name: "Alice"
+$ cat docker-bake.hcl
+target "webapp" {
+  labels = {
+    "com.example.bar" = "bar"
+    "com.example.name" = "Bob"
+  }
+}
+$ docker buildx bake --print webapp
+{
+  "group": {
+    "default": {
+      "targets": [
+        "webapp"
+      ]
+    }
+  },
+  "target": {
+    "webapp": {
+      "context": ".",
+      "dockerfile": "Dockerfile",
+      "labels": {
+        "com.example.foo": "foo",
+        "com.example.bar": "bar",
+        "com.example.name": "Bob"
+      }
+    }
+  }
+}
 ```
 
 ## Syntax
@@ -115,6 +215,7 @@ The following table shows the complete list of attributes that you can assign to
 | Name                                            | Type    | Description                                                          |
 | ----------------------------------------------- | ------- | -------------------------------------------------------------------- |
 | [`args`](#targetargs)                           | Map     | Build arguments                                                      |
+| [`annotations`](#targetannotations)             | List    | Exporter annotations                                                 |
 | [`attest`](#targetattest)                       | List    | Build attestations                                                   |
 | [`cache-from`](#targetcache-from)               | List    | External cache sources                                               |
 | [`cache-to`](#targetcache-to)                   | List    | External cache destinations                                          |
@@ -168,6 +269,26 @@ target "db" {
   }
   dockerfile = "db.Dockerfile"
   tags = ["docker.io/username/db"]
+}
+```
+
+### `target.annotations`
+
+The `annotations` attribute is a shortcut to allow you to easily set a list of
+annotations on the target.
+
+```hcl
+target "default" {
+  output = ["type=image,name=foo"]
+  annotations = ["key=value"]
+}
+```
+
+is the same as
+
+```hcl
+target "default" {
+  output = ["type=image,name=foo,annotation.key=value"]
 }
 ```
 

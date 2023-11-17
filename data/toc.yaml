@@ -292,8 +292,10 @@ Reference:
           title: docker buildx build
         - path: /engine/reference/commandline/buildx_create/
           title: docker buildx create
-        - path: /engine/reference/commandline/buildx_debug-shell/
-          title: docker buildx debug-shell
+        - path: /engine/reference/commandline/buildx_debug/
+          title: docker buildx debug
+        - path: /engine/reference/commandline/buildx_debug_build/
+          title: docker buildx debug build
         - path: /engine/reference/commandline/buildx_du/
           title: docker buildx du
         - path: /engine/reference/commandline/buildx_imagetools/

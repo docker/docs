@@ -1,14 +1,37 @@
-command: docker buildx debug-shell
-short: Start a monitor
-long: Start a monitor
-usage: docker buildx debug-shell
+command: docker buildx debug
+short: Start debugger
+long: Start debugger
+usage: docker buildx debug
 pname: docker buildx
 plink: docker_buildx.yaml
+cname:
+    - docker buildx debug build
+clink:
+    - docker_buildx_debug_build.yaml
 options:
     - option: detach
       value_type: bool
       default_value: "true"
-      description: Detach buildx server (supported only on linux)
+      description: Detach buildx server for the monitor (supported only on linux)
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: true
+      kubernetes: false
+      swarm: false
+    - option: invoke
+      value_type: string
+      description: Launch a monitor with executing specified command
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: true
+      kubernetes: false
+      swarm: false
+    - option: "on"
+      value_type: string
+      default_value: error
+      description: When to launch the monitor ([always, error])
       deprecated: false
       hidden: false
       experimental: false
@@ -19,7 +42,7 @@ options:
       value_type: string
       default_value: auto
       description: |
-        Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container output
+        Set type of progress output (`auto`, `plain`, `tty`) for the monitor. Use plain to show container output
       deprecated: false
       hidden: false
       experimental: false
@@ -28,7 +51,7 @@ options:
       swarm: false
     - option: root
       value_type: string
-      description: Specify root directory of server to connect
+      description: Specify root directory of server to connect for the monitor
       deprecated: false
       hidden: false
       experimental: false
@@ -38,7 +61,7 @@ options:
     - option: server-config
       value_type: string
       description: |
-        Specify buildx server config file (used only when launching new server)
+        Specify buildx server config file for the monitor (used only when launching new server)
       deprecated: false
       hidden: false
       experimental: false
