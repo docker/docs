@@ -12,7 +12,7 @@ SSO allows users to authenticate using their identity providers (IdPs) to access
 
 ## How it works
 
-When SSO is enabled, users are redirected to your IdP's authentication page to sign in. They cannot authenticate using their Docker login credentials (Docker ID and password). Docker currently supports Service Provider Initiated SSO flow. Your users must sign in to Docker Hub or Docker Desktop to initiate the SSO authentication process.
+When you enable SSO, this redirects to your IdP's authentication page to sign in. They can't authenticate using their Docker login credentials (Docker ID and password). Docker supports Service Provider Initiated SSO flow. Your users must sign in to Docker Hub or Docker Desktop to initiate the SSO authentication process.
 
 The following diagram shows how SSO operates and is managed in Docker Hub and Docker Desktop. In addition, it provides information on how to authenticate between your IdP.
 
@@ -22,21 +22,21 @@ The following diagram shows how SSO operates and is managed in Docker Hub and Do
 
 Before enabling SSO in Docker, administrators must first configure their IdP to work with Docker. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
 
-After establishing the connection between the IdP server and Docker, administrators sign in to Docker Hub or Docker Admin and complete the SSO enablement process.
+After establishing the connection between the IdP server and Docker, administrators sign in to Docker Hub or Docker Admin and complete SSO enablement.
 
 When you enable SSO for your company, a first-time user can sign in to Docker Hub using their company's domain email address. They're then added to your company, assigned to an organization, and optionally assigned to a team.
 
-Administrators can then choose to enforce SSO login and effortlessly manage SSO connections for their individual company.
+Administrators can then choose to enforce SSO sign-in and manage SSO connections for their individual company.
 
 ### SSO attributes
 
 When a user signs in using SSO, Docker obtains the following attributes from the IdP:
 
-- **Email address** - this is the unique identifier of the user
+- **Email address** - unique identifier of the user
 - **Full name** - name of the user
 - **Groups (optional)** - list of groups to which the user belongs
 
-If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those listed above. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work. 
+If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those in the previous list. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work. 
 
 You can also configure attributes to override default values, such as default team or organization. See [role mapping](../scim.md#set-up-role-mapping).
 

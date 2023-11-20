@@ -12,12 +12,12 @@ Docker Compose is under active development. If you need help, would like to
 contribute, or simply want to talk about the project with like-minded
 individuals, we have a number of open channels for communication.
 
-* To report bugs or file feature requests, use the [issue tracker on Github](https://github.com/docker/compose/issues).
+- To report bugs or file feature requests, use the [issue tracker on Github](https://github.com/docker/compose/issues).
 
-* To talk about the project with people in real time, join the
+- To talk about the project with people in real time, join the
   `#docker-compose` channel on the [Docker Community Slack](https://dockr.ly/slack).
 
-* To contribute code submit a [pull request on Github](https://github.com/docker/compose/pulls).
+- To contribute code submit a [pull request on Github](https://github.com/docker/compose/pulls).
 
 ### Where can I find example Compose files?
 
@@ -55,7 +55,7 @@ containers.
 
 The `docker compose stop` command attempts to stop a container by sending a `SIGTERM`. It then waits
 for a [default timeout of 10 seconds](../engine/reference/commandline/compose_stop.md). After the timeout,
-a `SIGKILL` is sent to the container to forcefully kill it.  If you
+a `SIGKILL` is sent to the container to forcefully kill it. If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
 
@@ -65,7 +65,7 @@ in containers.
 
 To fix this problem, try the following:
 
-* Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
+- Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
 in your Dockerfile.
 
   For example use `["program", "arg1", "arg2"]` not `"program arg1 arg2"`.
@@ -73,19 +73,19 @@ in your Dockerfile.
   doesn't handle signals properly. Compose always uses the JSON form, so don't
   worry if you override the command or entrypoint in your Compose file.
 
-* If you are able, modify the application that you're running to
+- If you are able, modify the application that you're running to
 add an explicit signal handler for `SIGTERM`.
 
-* Set the `stop_signal` to a signal which the application knows how to handle:
+- Set the `stop_signal` to a signal which the application knows how to handle:
 
-```yaml
-services:
-  web:
-    build: .
-    stop_signal: SIGINT
-```
+  ```yaml
+  services:
+    web:
+      build: .
+      stop_signal: SIGINT
+  ```
 
-* If you can't modify the application, wrap the application in a lightweight init
+- If you can't modify the application, wrap the application in a lightweight init
 system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
 [dumb-init](https://github.com/Yelp/dumb-init) or
 [tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
@@ -98,7 +98,7 @@ Yes, see [Controlling startup order](startup-order.md).
 ### How do I run multiple copies of a Compose file on the same host?
 
 Compose uses the project name to create unique identifiers for all of a
-project's  containers and other resources. To run multiple copies of a project,
+project's containers and other resources. To run multiple copies of a project,
 set a custom project name using the [`-p` command line option](reference/index.md)
 or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
@@ -119,7 +119,7 @@ You can add your code to the image using `COPY` or `ADD` directive in a
 Docker image, for example when you're sending code to another environment
 (production, CI, etc).
 
-You should use a `volume` if you want to make changes to your code and see them
+Use a `volume` if you want to make changes to your code and see them
 reflected immediately, for example when you're developing code and your server
 supports hot code reloading or live-reload.
 
