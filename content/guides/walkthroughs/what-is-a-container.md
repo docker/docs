@@ -15,7 +15,7 @@ use Docker Desktop to manage and explore your containers.
 In this walkthrough, you'll view and explore an actual container in Docker
 Desktop.
 
-Before you start, [get Docker Desktop](../../get-docker.md).
+{{< include "guides-get-docker.md" >}}
 
 ## Step 1: Set up the walkthrough
 

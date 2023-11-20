@@ -5,47 +5,48 @@ Guides:
   path: /get-docker/
 - sectiontitle: Get started
   section:
-    - title: "Part 1: Overview"
-      path: /get-started/
-    - title: "Part 2: Containerize an application"
-      path: /get-started/02_our_app/
-    - title: "Part 3: Update the application"
-      path: /get-started/03_updating_app/
-    - title: "Part 4: Share the application"
-      path: /get-started/04_sharing_app/
-    - title: "Part 5: Persist the DB"
-      path: /get-started/05_persisting_data/
-    - title: "Part 6: Use bind mounts"
-      path: /get-started/06_bind_mounts/
-    - title: "Part 7: Multi-container apps"
-      path: /get-started/07_multi_container/
-    - title: "Part 8: Use Docker Compose"
-      path: /get-started/08_using_compose/
-    - title: "Part 9: Image-building best practices"
-      path: /get-started/09_image_best/
-    - title: "Part 10: What next?"
-      path: /get-started/11_what_next/
-
-- sectiontitle: Walkthroughs
-  section:
     - title: "Overview"
-      path: /guides/walkthroughs/
-    - title: "What is a container?"
-      path: /guides/walkthroughs/what-is-a-container/
-    - title: "How do I run a container?"
-      path: /guides/walkthroughs/run-a-container/
-    - title: "Run Docker Hub images"
-      path: /guides/walkthroughs/run-hub-images/
-    - title: "Run multi-container applications"
-      path: /guides/walkthroughs/multi-container-apps/
-    - title: "Persist data between containers"
-      path: /guides/walkthroughs/persist-data/
-    - title: "Access a local folder"
-      path: /guides/walkthroughs/access-local-folder/
-    - title: "Containerize your application"
-      path: /guides/walkthroughs/containerize-your-app/
-    - title: "Publish your image"
-      path: /guides/walkthroughs/publish-your-image/
+      path: /guides/get-started/
+    - sectiontitle: "Quick hands-on guides"
+      section:
+      - title: "What is a container?"
+        path: /guides/walkthroughs/what-is-a-container/
+      - title: "Run a container"
+        path: /guides/walkthroughs/run-a-container/
+      - title: "Run Docker Hub images"
+        path: /guides/walkthroughs/run-hub-images/
+      - title: "Run multi-container applications"
+        path: /guides/walkthroughs/multi-container-apps/
+      - title: "Persist container data"
+        path: /guides/walkthroughs/persist-data/
+      - title: "Access a local folder"
+        path: /guides/walkthroughs/access-local-folder/
+      - title: "Containerize your application"
+        path: /guides/walkthroughs/containerize-your-app/
+      - title: "Publish your image"
+        path: /guides/walkthroughs/publish-your-image/
+    - sectiontitle: "Getting started guide"
+      section:
+      - title: "Part 1: Overview"
+        path: /get-started/
+      - title: "Part 2: Containerize an application"
+        path: /get-started/02_our_app/
+      - title: "Part 3: Update the application"
+        path: /get-started/03_updating_app/
+      - title: "Part 4: Share the application"
+        path: /get-started/04_sharing_app/
+      - title: "Part 5: Persist the DB"
+        path: /get-started/05_persisting_data/
+      - title: "Part 6: Use bind mounts"
+        path: /get-started/06_bind_mounts/
+      - title: "Part 7: Multi-container apps"
+        path: /get-started/07_multi_container/
+      - title: "Part 8: Use Docker Compose"
+        path: /get-started/08_using_compose/
+      - title: "Part 9: Image-building best practices"
+        path: /get-started/09_image_best/
+      - title: "Part 10: What next?"
+        path: /get-started/11_what_next/
 
 - sectiontitle: Language-specific guides
   section:

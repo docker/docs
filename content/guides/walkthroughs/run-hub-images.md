@@ -11,7 +11,7 @@ You can share and store images in Docker Hub
 images created by developers that you can run locally. You can search for Docker
 Hub images and run them directly from Docker Desktop.
 
-Before you start, [get Docker Desktop](../../get-docker.md).
+{{< include "guides-get-docker.md" >}}
 
 ## Step 1: Search for the image
 

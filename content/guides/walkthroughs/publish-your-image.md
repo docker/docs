@@ -8,7 +8,7 @@ aliases:
 
 Follow this walkthrough to learn how to publish and share your images on Docker Hub.
 
-Before you start, [get Docker Desktop](../../get-docker.md).
+{{< include "guides-get-docker.md" >}}
 
 ## Step 1: Get the example image
 

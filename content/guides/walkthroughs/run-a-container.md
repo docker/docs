@@ -10,7 +10,7 @@ In this walkthrough, you'll learn the basic steps of building an image and runni
 
 ![Running an image in Docker Desktop](images/getting-started-run-intro.webp?w=400)
 
-Before you start, [get Docker Desktop](../../get-docker.md).
+{{< include "guides-get-docker.md" >}}
 
 ## Step 1: Get the sample application
 
