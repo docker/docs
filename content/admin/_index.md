@@ -18,7 +18,7 @@ grid:
 
 The [Docker Admin](https://admin.docker.com) console provides administrators with centralized observability, access management, and controls for their company and organizations. To provide these features, Docker uses the following hierarchy and roles.
 
-![Docker hierarchy](./images/docker-admin-structure.png)
+![Docker hierarchy](./images/docker-admin-structure.webp)
 
 - Company: A company simplifies the management of Docker organizations and settings. Creating a company is optional and only available to Docker Business subscribers.
   - Company owner: A company can have multiple owners. Company owners have company-wide observability and can manage company-wide settings that apply to all associated organizations. In addition, company owners have the same access as organization owners for all associated organizations.
