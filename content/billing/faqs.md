@@ -59,7 +59,7 @@ A coupon can be used when you:
 
 You are asked to enter your coupon code when you confirm or enter your payment method. 
 
-If you use a coupon to pay for a subscription, when the coupon expires, your payment method is charged the full cost of your subscription. If you don't have a saved payment method, your account will downgrade to a free subscription.
+If you use a coupon to pay for a subscription, when the coupon expires, your payment method is charged the full cost of your subscription. If you don't have a saved payment method, your account downgrades to a free subscription.
 
 ### How do I include my VAT number on my invoice?
 
