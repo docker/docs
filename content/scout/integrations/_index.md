@@ -52,3 +52,19 @@ versions, in your image repositories or in your other environments.
 
 For more information about environment integrations, see
 [Environments](./environment/index.md).
+
+### Code quality
+
+Integrating Docker Scout with code analysis tools enables quality checks
+directly on source code, helping you keep track of bugs, security issues, test
+coverage, and more. In addition to image analysis and environment monitoring,
+code quality gates let you shift left your supply chain management with Docker
+Scout.
+
+Once you enable a code quality integration, Docker Scout includes the code
+quality assessments as policy evaluation results for the repositories where
+you've enabled the integration.
+
+The following code quality integrations are available:
+
+- [SonarQube](sonarqube.md)

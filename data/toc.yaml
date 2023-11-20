@@ -1407,6 +1407,10 @@ Manuals:
           path: /scout/integrations/ci/circle-ci/
         - title: Jenkins
           path: /scout/integrations/ci/jenkins/
+      - sectiontitle: Code quality
+        section:
+        - title: SonarQube
+          path: /scout/integrations/code-quality/sonarqube/
     - path: /scout/release-notes/
       title: Release notes
 

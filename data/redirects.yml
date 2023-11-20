@@ -607,6 +607,8 @@
   - "/go/scout-sysdig/"
 "/scout/integrations/registry/acr/":
   - "/go/scout-acr/"
+"/scout/integrations/code-quality/sonarqube/":
+  - "/go/scout-sq/"
 
 # Build links
 "/desktop/use-desktop/builds/":
