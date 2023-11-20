@@ -43,7 +43,7 @@ View the files of the sample application. Notice that it has a `compose.yaml` fi
 
 ## Step 3: Run the application
 
-To run the multi-container application, open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your applications directory.
+To run the multi-container application, open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your application's directory.
 
 {{< include "open-terminal.md" >}}
 
@@ -53,6 +53,8 @@ $ cd /path/to/multi-container-app/
 ```console
 $ docker compose up -d
 ```
+
+In the previous command, the `-d` flag tells Docker Compose to run in detached mode.
 
 ## Step 4: View the frontend and add todos
 
@@ -71,7 +73,7 @@ When developing with Docker, you may need to automatically update and preview yo
 
 To run Compose Watch and see the real-time changes:
 
-1. Open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your applications directory.
+1. Open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your application's directory.
    ```console
    $ cd /path/to/multi-container-app/
    ```

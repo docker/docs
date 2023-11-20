@@ -55,6 +55,10 @@ $ cd /path/to/welcome-to-docker/
 $ docker build -t welcome-to-docker .
 ```
 
+In the previous command, the `-t` flag tags your image with a name,
+`welcome-to-docker` in this case. And the `.` lets Docker know where it can find
+the Dockerfile.
+
 Building the image may take some time. After your image is built, you can view your image in the **Images** tab in Docker Desktop.
 
 ## Step 4: Run your container
