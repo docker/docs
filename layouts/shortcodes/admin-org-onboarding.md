@@ -15,7 +15,7 @@ Onboarding your organization allows you to gain visibility into the activity of 
 ## Prerequisites
 
 Before you start to onboard your organization, ensure that you:
-- Have a Docker Team or Business subcription. See [Pricing & Subscriptions](https://www.docker.com/pricing/) for details.
+- Have a Docker Team or Business subscription. See [Pricing & Subscriptions](https://www.docker.com/pricing/) for details.
 
   > **Note**
   >
