@@ -40,8 +40,6 @@ You can set the logging driver for a specific container by using the
 $ docker run --log-driver=gcplogs ...
 ```
 
-The `docker logs` command isn't available for this logging driver.
-
 If Docker detects that it's running in a Google Cloud Project, it discovers
 configuration from the
 [instance metadata service](https://cloud.google.com/compute/docs/metadata).

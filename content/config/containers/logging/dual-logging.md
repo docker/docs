@@ -1,46 +1,30 @@
 ---
-description:
+description: >
   Learn how to read container logs locally when using a third party logging
   solution.
-keywords:
-  docker, logging, driver, dual logging, dual-logging, cache, ring-buffer,
+keywords: >
+  docker, logging, driver, dual logging, dual logging, cache, ring-buffer,
   configuration
 title: Use docker logs with remote logging drivers
 ---
 
 ## Overview
 
-Prior to Docker Engine 20.10, the [`docker logs` command](../../../engine/reference/commandline/logs.md)
-could only be used with logging drivers that supported for containers using the
-`local`, `json-file`, or `journald` log drivers. However, many third party logging
-drivers had no support for locally reading logs using `docker logs`
-
-This created multiple problems when attempting to gather log data in an
-automated and standard way. Log information could only be accessed and viewed
-through the third-party solution in the format specified by that
-third-party tool.
-
-Starting with Docker Engine 20.10, you can use `docker logs` to read container
-logs regardless of the configured logging driver or plugin. This capability,
-referred to as "dual logging", allows you to use `docker logs` to read container
-logs locally in a consistent format, regardless of the log driver used, because
-the engine is configured to log information to the “local” logging driver. Refer
-to [Configure the default logging driver](configure.md) for additional information.
-
-Dual logging uses the [`local`](local.md) logging driver to act as cache for
-reading the latest logs of your containers. By default, the cache has log-file
-rotation enabled, and is limited to a maximum of 5 files of 20MB each (before
+You can use the `docker logs` command to read container logs regardless of the
+configured logging driver or plugin. Docker Engine uses the [`local`](local.md)
+logging driver to act as cache for reading the latest logs of your containers.
+This is called dual logging. By default, the cache has log-file rotation
+enabled, and is limited to a maximum of 5 files of 20 MB each (before
 compression) per container.
 
 Refer to the [configuration options](#configuration-options) section to customize
-these defaults, or to the [disable dual-logging](#disable-the-dual-logging-cache)
+these defaults, or to the [disable dual logging](#disable-the-dual-logging-cache)
 section to disable this feature.
 
 ## Prerequisites
 
-No configuration changes are needed to use dual logging. Docker Engine 20.10 and
-up automatically enable dual logging if the configured logging driver doesn't
-support reading logs.
+Docker Engine automatically enables dual logging if the configured logging
+driver doesn't support reading logs.
 
 The following examples show the result of running a `docker logs` command with
 and without dual logging availability:
@@ -124,7 +108,7 @@ as a default, with dual logging caching enabled:
 
 ### Configuration options
 
-The "dual logging" cache accepts the same configuration options as the
+The dual logging cache accepts the same configuration options as the
 [`local` logging driver](local.md), but with a `cache-` prefix. These options
 can be specified per container, and defaults for new containers can be set using
 the [daemon configuration file](/engine/reference/commandline/dockerd/#daemon-configuration-file).
