@@ -24,7 +24,6 @@ driver sends the following metadata in the structured log message:
 | `source`         | `stdout` or `stderr`                                                                                                                                   |
 | `log`            | The container log                                                                                                                                      |
 
-The `docker logs` command isn't available for this logging driver.
 
 ## Usage
 
