@@ -61,7 +61,7 @@ Recommended approach to install Docker Desktop on Ubuntu:
    $ sudo apt-get update
    $ sudo apt-get install ./docker-desktop-<version>-<arch>.deb
    ```
-
+`<version>` and `<arch>` are to be replaced with the actual version and architecture of the downloaded .deb file
    > **Note**
    >
    > At the end of the installation process, `apt` displays an error due to installing a downloaded package. You
@@ -92,7 +92,7 @@ You need to download the new package each time you want to upgrade Docker Deskto
 ```console
 $ sudo apt-get install ./docker-desktop-<version>-<arch>.deb
 ```
-
+`<version>` and `<arch>` are to be replaced with the actual version and architecture of the downloaded .deb file
 ## Next steps
 
 - Take a look at the [Get started](../../get-started/index.md) training modules to learn how to build an image and run it as a containerized application.
