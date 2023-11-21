@@ -3,6 +3,8 @@ datafolder: buildx
 datafile: docker_buildx_debug
 title: docker buildx debug
 layout: cli
+aliases:
+ - /engine/reference/commandline/buildx_debug-shell/
 ---
 
 <!--
