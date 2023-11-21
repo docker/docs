@@ -1,19 +1,20 @@
-## Merge and override
+# Merge and override
 
 Compose lets you define a Compose application model through [multiple Compose files](https://docs.docker.com/compose/multiple-compose-files/). 
 When doing so, Compose follows the rules declared in this section to merge Compose files.
 
-### Mapping
+## Mapping
 
 A YAML `mapping` gets merged by adding missing entries and merging the conflicting ones.
 
 Merging the following example YAML trees:
+
 ```yaml
 services:
   foo:
     key1: value1
     key2: value2
-```    
+```
 
 ```yaml
 services:
@@ -32,17 +33,18 @@ services:
     key3: value3
 ```
 
-### Sequence
+## Sequence
 
 A YAML `sequence` is merged by appending values from the overriding Compose file to the previous one.
 
 Merging the following example YAML trees:
+
 ```yaml
 services:
   foo:
     DNS:
       - 1.1.1.1
-```    
+```
 
 ```yaml
 services:
@@ -68,11 +70,12 @@ services:
 When merging Compose files that use the services attributes [command](05-services.md#command), [entrypoint](05-services.md#entrypoint) and [healthcheck: `test`](05-services.md#healthcheck), the value is overridden by the latest Compose file, and not appended.
 
 Merging the following example YAML trees:
+
 ```yaml
 services:
   foo:
     command: ["echo", "foo"]
-```    
+```
 
 ```yaml
 services:
@@ -103,12 +106,13 @@ While these types are modeled in a Compose file as a sequence, they have special
 When merging Compose files, Compose appends new entries that do not violate a uniqueness constraint and merge entries that share a unique key.
 
 Merging the following example YAML trees:
+
 ```yaml
 services:
   foo:
     volumes:
       - foo:/work
-```    
+```
 
 ```yaml
 services:
@@ -138,6 +142,7 @@ array `[]` (with `!reset null` or `!reset []`) so that it is clear that resultin
 cleared.
 
 Merging the following example YAML trees:
+
 ```yaml
 services:
   foo:
@@ -148,7 +153,7 @@ services:
       FOO: BAR
     ports:
       - "8080:80"            
-```    
+```
 
 ```yaml
 services:

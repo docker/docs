@@ -1,4 +1,4 @@
-## Compose file
+# Compose file
 
 The Compose file is a [YAML](http://yaml.org/) file defining:
 - [Version](04-version-and-name.md) (Optional)
