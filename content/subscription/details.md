@@ -4,19 +4,21 @@ description: Learn about Docker subscription tiers and their features
 keywords: subscription, personal, pro, team, business, features
 ---
 
+A Docker subscription allows the use of Docker components including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
+
 This page provides an overview of each tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Personal
 
-Docker Personal (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses. Docker Personal allows free use of Docker components including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
-
+Docker Personal (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses.
 Docker Personal includes:
 
 - Unlimited public repositories
 - Unlimited [Scoped Access Tokens](../security/for-developers/access-tokens.md)
 - Unlimited [collaborators](../docker-hub/repos/access.md#collaborators-and-their-role) for public repositories at no cost per month.
+- Access to [Docker Scout Free](./scout-details.md#docker-scout-free) to get started with software supply chain security.
 
-Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours. 
+Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
