@@ -24,11 +24,27 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.25.2
+
+{{< release-date date="2023-11-21" >}}
+
+{{< desktop-install all=true version="4.25.2" build_path="/129061/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where a blank UI would appear after submitting a response in the **Welcome Survey**.
+
+#### For Windows
+
+- Fixed a bug where Docker Desktop on WSL 2 would shut down dockerd unexpectedly when idle. Fixes [docker/for-win#13789](https://github.com/docker/for-win/issues/13789)
+
 ## 4.25.1
 
 {{< release-date date="2023-11-13" >}}
 
-{{< desktop-install all=true version="4.25.1" build_path="/" >}}
+{{< desktop-install all=true version="4.25.1" build_path="/128006/" >}}
 
 ### Bug fixes and enhancements
 
