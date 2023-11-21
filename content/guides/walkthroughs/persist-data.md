@@ -62,7 +62,7 @@ The top-level `volumes` element defines and configures a volume named `database`
 
 ## Step 3: Run the application
 
-To run the multi-container application, open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your applications directory.
+To run the multi-container application, open a terminal and run the following commands. Replace `/path/to/multi-container-app/` with the path to your application's directory.
 
 {{< include "open-terminal.md" >}}
 

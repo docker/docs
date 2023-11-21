@@ -44,23 +44,16 @@ organization after you've created it.
 displays the company name on your organization page and in the details of any
 public images you publish. You can update the company name anytime by navigating
 to your organization's **Settings** page.
-6. Select **Continue to Org size** and then specify the number of users (seats)
-you require.
-
-   > **Early access features**
-   >
-   > If you buy a subscription for Docker Team or Business after October 23, 2023, you may have a different user interface experience. Select **Purchase** to continue to the billing portal. Here you can select the quantity of seats for your organization. Then, follow the on-screen instructions to pay for your subscription. You can disregard steps 7 and 8.
-   { .restricted }
-
-7. Select **Continue to payment**.
-8. Follow the on-screen instructions to pay for your subscription.
+6. Select **Purchase** to continue to the billing portal.
+7. In the billing portal, select **Qty** to update the number of seats you require, then select **Update**.
+8. (Optional) Select annual or monthly billing cycle.
+9. Follow the on-screen instructions to pay for your subscription.
 
    > **Note**
    >
    > If you've already paid for a subscription for the new organization through
    > a Docker sales representative, then don't enter payment information.
-   > Instead, select **Organizations** to verify that the organization has been
-   > created.
+   > Instead, select **Back** to return to Docker Hub from the billing portal, then select **Organizations** to verify that the organization has been created.
 
 You've now created an organization.
 
@@ -112,13 +105,7 @@ configure your organization.
    organization's **Settings** page.
 
 - **Billing**: Displays information about your existing
-[Docker subscription (plan)](../subscription/index.md) and your billing history.
-You can also access your invoices from this tab.
-
-> **Early access features**
->
-> If you subscribed to Docker Team or Business after October 23, 2023, you may have a different user interface experience. To access invoices and payment information, go to the **Billing** page, then select the **Payment methods and billing history** link.
-{ .restricted }
+[Docker subscription (plan)](../subscription/index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../billing/history.md).
 
 ## Videos
 

@@ -46,7 +46,7 @@ Once your purchase is complete, you receive a confirmation email and a copy of y
 
 ## Manage your subscription
 
-To access your subscription details, go to the **Billing** section for your personal account or organization that's subscribed. In the **Docker Scout Team** section, select **Change plan** to go to the billing details portal. In the billing details portal, you can find your renewal date, invoice history, payment methods, or cancel your plan.
+To access your subscription details, go to the **Billing** section for your personal account or organization that's subscribed. Select **Payment methods and billing history** to go to the billing details portal. In the billing details portal, you can find your renewal date, invoice history, and payment methods.
 
 Renewals charge to the original credit card used to buy Docker Scout Team. You can manage your payment methods in the billing details portal.
 
@@ -78,20 +78,20 @@ The number of repositories updates on your next billing cycle.
 >
 > You can't add repositories while repository removal is pending. You can add repositories again during the next billing cycle.
 
-### Cancel your subscription
+### Downgrade your subscription
 
-You can cancel your Docker Scout subscription at anytime. Your subscription features remain available until the end of your billing cycle.
+You can downgrade your Docker Scout Team subscription at anytime before the renewal date. Your subscription features remain available until the end of your billing cycle.
 
-1. In the billing details portal, find your current plan.
-2. Next to the name of your Docker Scout plan, select **Cancel plan**.
-3. Review the details for your subscription, then select **Cancel plan** to confirm.
+1. In Docker Hub, select your username in the top-right corner and from the drop-down menu select **Billing**.
+2. Select the namespace of either your personal account or organization.
+3. Find your Docker Scout plan, then select **Change plan**.
+4. Select **Downgrade**, then review the warning message.
+5. To confirm the downgrade, select **Continue**.
 
-### Renew a canceled subscription
+### Cancel your subscription downgrade
 
-You can renew a canceled subscription any time before the end of the billing cycle. You can find this date in the details for your current plan.
+You can cancel a subscription downgrade at anytime before the end of the billing cycle. You can find this date in the details for your current plan.
 
-1. Find the canceled plan in the billing details portal.
-2. Optional: you can update your payment method here before you renew the plan. Otherwise, your renewal charges to the original payment method.
-3. Next to the name of your canceled Docker Scout plan, select **Renew plan**.
-4. Review the details for your subscription. Note that you can't edit the number of repositories or the billing information.
-5. Select **Renew plan** to confirm.
+1. In Docker Hub, select your username in the top-right corner and from the drop-down menu select **Billing**.
+2. Select the namespace of either your personal account or organization.
+3. Find your Docker Scout plan, then select **Cancel the downgrade**.

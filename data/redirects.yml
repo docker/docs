@@ -621,6 +621,8 @@
   - /go/build-exporters/
 "/build/bake/reference/":
   - /build/customize/bake/file-definition/
+"/build/ci/github-actions/attestations/":
+  - /go/build-attestations-gha/
 
 # CLI backlinks
 "/config/filter/":

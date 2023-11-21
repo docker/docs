@@ -17,7 +17,7 @@ With directory group-to-team provisioning from your IdP, user updates will autom
 
 ## How group mapping works
 
-IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. These attributes are used by Just-In-Time (JIT) Provisioning to create or update the user’s Docker profile and their associations with organizations and teams on Docker Hub.
+IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. Just-In-Time (JIT) Provisioning uses these attributes to create or update the user’s Docker profile and their associations with organizations and teams on Docker Hub.
 
 Docker uses the email address of the user to identify them on the platform. Every Docker account must have a unique email address at all times.
 
@@ -33,7 +33,7 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
    a) If the IdP provided group mappings for the user, the user gets added to the organizations and teams indicated by the group mappings.
 
-   b) If the IdP didn't provide group mappings, it checks if the user is already a member of the organization, or if the SSO connection is for multiple organizations (only at company level) and if the user is a member of any of those organizations. If the user is not a member, it adds the user to the default team and organization configured in the SSO connection.
+   b) If the IdP didn't provide group mappings, it checks if the user is already a member of the organization, or if the SSO connection is for multiple organizations (only at company level) and if the user is a member of any of those organizations. If the user isn't a member, it adds the user to the default team and organization configured in the SSO connection.
 
 ![JIT provisioning](../images/group-mapping.png)
 
@@ -47,7 +47,7 @@ You can use this format to add a user to multiple organizations. For example, if
 
 >**Tip**
 >
->Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, a group is created if it doesn’t already exist.
+>Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, this creates a group if it doesn’t already exist.
 { .tip}
 
 The following lists the supported group mapping attributes:

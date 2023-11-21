@@ -98,7 +98,7 @@ To create a `registry.json` file when installing Docker Desktop, use the followi
 To automatically create a `registry.json` file when installing Docker Desktop,
 download `Docker Desktop Installer.exe` and run one of the following commands
 from the directory containing `Docker Desktop Installer.exe`. Replace `myorg`
-with your organization's name and you must use lowercase letters for your
+with your organization's name. You must use lowercase letters for your
 organization's name.
 
 If you're using PowerShell:
@@ -118,8 +118,7 @@ C:\Users\Admin> "Docker Desktop Installer.exe" install --allowed-org=myorg
 
 To automatically create a `registry.json` file when installing Docker Desktop,
 download `Docker.dmg` and run the following commands in a terminal from the
-directory containing `Docker.dmg`. Replace `myorg` with your organization's name
-and you must use lowercase letters for your organization's name.
+directory containing `Docker.dmg`. Replace `myorg` with your organization's name. You must use lowercase letters for your organization's name.
 
 ```console
 $ sudo hdiutil attach Docker.dmg
@@ -148,8 +147,7 @@ PS>  Set-Content /ProgramData/DockerDesktop/registry.json '{"allowedOrgs":["myor
 
 This creates the `registry.json` file at
 `C:\ProgramData\DockerDesktop\registry.json` and includes the organization
-information the user belongs to. Make sure this file can't be edited by the
-user, only by the administrator:
+information the user belongs to. Make sure that the user can't edit this file, but only the administrator can:
 
 ```console
 PS C:\ProgramData\DockerDesktop> Get-Acl .\registry.json
@@ -178,8 +176,8 @@ $ echo '{"allowedOrgs":["myorg"]}' | sudo tee "/Library/Application Support/com.
 
 This creates (or updates, if the file already exists) the `registry.json` file
 at `/Library/Application Support/com.docker.docker/registry.json` and includes
-the organization information the user belongs to. Make sure the file has the
-expected content and can't be edited by the user, only by the administrator.
+the organization information the user belongs to. Make sure that the file has the
+expected content, and that the user can't edit this file, but only the administrator can.
 
 Verify that the content of the file contains the correct information:
 
@@ -212,7 +210,7 @@ $ echo '{"allowedOrgs":["myorg"]}' | sudo tee /usr/share/docker-desktop/registry
 This creates (or updates, if the file already exists) the `registry.json` file
 at `/usr/share/docker-desktop/registry/registry.json` and includes the
 organization information to which the user belongs. Make sure the file has the
-expected content and can't be edited by the user, only by root.
+expected content and that the user can't edit this file, only the root can.
 
 Verify that the content of the file contains the correct information:
 
