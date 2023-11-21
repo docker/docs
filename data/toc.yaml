@@ -1380,6 +1380,8 @@ Manuals:
         title: Overview
       - path: /scout/policy/view/
         title: View policy status
+      - path: /scout/policy/configure/
+        title: Configure policies
       - path: /scout/policy/ci/
         title: Policy Evaluation in CI
     - sectiontitle: Integrations
