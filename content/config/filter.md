@@ -39,7 +39,7 @@ alpine       3.16      a8cbb8c69ee7   40 minutes ago   8.67MB
 alpine       latest    7144f7bab3d4   40 minutes ago   11.7MB
 ```
 
-The available fields (`reference` in this case) depends on the command you run.
+The available fields (`reference` in this case) depend on the command you run.
 Some filters expect an exact match. Others handle partial matches. Some filters
 let you use regular expressions.
 
@@ -49,8 +49,8 @@ about the supported filtering capabilities for each command.
 ## Combining filters
 
 You can combine multiple filters by passing multiple `--filter` flags. The
-following example shows how to print all images that don't match
-`alpine:latest` or `busybox` - a logical `OR`.
+following example shows how to print all images that match `alpine:latest` or
+`busybox` - a logical `OR`.
 
 ```console
 $ docker images
@@ -71,17 +71,17 @@ busybox      glibc     7338d0c72c65   2 hours ago   6.09MB
 ### Multiple negated filters
 
 Some commands support negated filters on [labels](./labels-custom-metadata.md).
-Negated filters only consider results don't match the specified patterns. The
-following command prunes all containers that aren't labeled `foo`.
+Negated filters only consider results that don't match the specified patterns.
+The following command prunes all containers that aren't labeled `foo`.
 
 ```console
 $ docker container prune --filter "label!=foo"
 ```
 
 There's a catch in combining multiple negated label filters. Multiple negated
-filters a single negative constraint - a logical `AND`. The following command
-prunes all containers except those labeled both `foo` and `bar`. Containers
-labeled either `foo` or `bar`, but not both, will be pruned.
+filters create a single negative constraint - a logical `AND`. The following 
+command prunes all containers except those labeled both `foo` and `bar`.
+Containers labeled either `foo` or `bar`, but not both, will be pruned.
 
 ```console
 $ docker container prune --filter "label!=foo" --filter "label!=bar"
