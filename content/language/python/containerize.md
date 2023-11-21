@@ -32,6 +32,15 @@ You can test the application locally without Docker before you continue building
 
 Open your terminal and navigate to the working directory you created. Create an environment, install the dependencies, and start the application to make sure it’s running.
 
+Linux:
+```console
+$ cd /path/to/python-docker
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+(.venv) $ python3 -m pip install -r requirements.txt
+(.venv) $ python3 -m flask run
+```
+Windows:
 ```console
 $ cd /path/to/python-docker
 $ python3 -m venv .venv
