@@ -1,0 +1,39 @@
+area/release:
+  - .github/**
+  - _releaser/**
+
+area/build:
+  - content/build/*
+  - _vendor/github.com/moby/buildkit/**
+  - _vendor/github.com/docker/buildx/**
+
+area/compose:
+  - content/compose/**
+  - _vendor/github.com/docker/compose/**
+  - _vendor/github.com/docker/compose-spec/**
+
+area/desktop:
+  - content/desktop/**
+
+area/engine:
+  - content/engine/**
+  - content/config/**
+
+area/security:
+  - content/security/**
+
+area/get-started:
+  - content/get-started/**
+
+area/networking:
+  - content/network/**
+
+area/hub:
+  - content/docker-hub/**
+
+area/cli:
+  - content/engine/reference/commandline/**
+  - _vendor/github.com/docker/cli/**
+
+area/api:
+  - content/engine/api/**
