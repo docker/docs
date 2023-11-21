@@ -103,9 +103,9 @@ steps:
 
 This creates workflow steps to:
 
-1. Check out the repository
-2. Set up Docker buildx
-3. Authenticate to the registry
+1. Check out the repository.
+2. Set up Docker buildx.
+3. Authenticate to the registry.
 4. Extract metadata from Git reference and GitHub events.
 5. Build and push the Docker image to the registry.
 
