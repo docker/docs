@@ -1252,7 +1252,7 @@ healthcheck:
   interval: 1m30s
   timeout: 10s
   retries: 3
-  start_period: 40s
+  start_period: 2m
 ```
 
 `interval`, `timeout` and `start_period` are specified as

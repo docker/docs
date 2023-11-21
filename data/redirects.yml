@@ -631,3 +631,13 @@
 # Docker Init
 "/develop/develop-images/instructions/#user":
   - /go/dockerfile-user-best-practices/
+"/develop/develop-images/instructions/#apt-get":
+  - /go/dockerfile-aptget-best-practices/
+"/build/building/context/#dockerignore-files":
+  - /go/build-context-dockerignore/
+"/compose/compose-file":
+  - /go/compose-spec-reference/
+"/engine/reference/builder":
+  - /go/dockerfile-reference/
+"/get-started/04_sharing_app":
+  - /go/get-started-sharing/

@@ -198,14 +198,6 @@ see more options.
 | [`gcplogs`](gcplogs.md)       | Writes log messages to Google Cloud Platform (GCP) Logging.                                                 |
 | [`logentries`](logentries.md) | Writes log messages to Rapid7 Logentries.                                                                   |
 
-> **Note**
->
-> When using Docker Engine 19.03 or older, the [`docker logs` command](../../../engine/reference/commandline/logs.md)
-> is only functional for the `local`, `json-file` and `journald` logging drivers.
-> Docker 20.10 and up introduces "dual logging", which uses a local buffer that
-> allows you to use the `docker logs` command for any logging driver. Refer to
-> [reading logs when using remote logging drivers](dual-logging.md) for details.
-
 ## Limitations of logging drivers
 
 - Reading log information requires decompressing rotated log files, which causes
