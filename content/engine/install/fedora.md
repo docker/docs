@@ -24,8 +24,8 @@ To get started with Docker Engine on Fedora, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 Fedora versions:
 
-- Fedora 37
 - Fedora 38
+- Fedora 39
 
 ### Uninstall old versions
 
