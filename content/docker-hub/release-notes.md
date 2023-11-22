@@ -12,6 +12,11 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 2023-12-11
+
+- The Advanced Image Management feature, along with the corresponding API endpoints, has been retired.
+  See [docker/roadmap#534](https://github.com/docker/roadmap/issues/534).
+
 ## 2023-08-28
 
 - Organizations with SSO enabled can assign members to roles, organizations, and teams with [SCIM role mapping](scim.md#set-up-role-mapping). 
@@ -117,7 +122,6 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 ### Enhancement
 
 When managing the content of your repositories, you can now filter the results based on the currentness of the tags and more easily identify your untagged images.
-For more information, see  [Advanced Management Dashboard](image-management.md).
 
 For Docker Hub API documentation, see [Docker Hub API Reference](api/latest.md#operation/GetNamespacesRepositoriesImages).
 
@@ -143,7 +147,7 @@ For details on how to update your billing information, see [Update billing infor
 
 **Advanced Image Management dashboard**
 
-Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories. For more information, see [Advanced Image Management dashboard](image-management.md).
+Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories.
 
 ## 2021-01-25
 
