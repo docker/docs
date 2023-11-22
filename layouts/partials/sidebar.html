@@ -53,10 +53,10 @@
 {{ $isCurrent := eq (urls.Parse $ctx.Permalink).Path .entry.path }}
 <li class="pl-4 sidebar-hover rounded
   {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
-  <span class="flex items-center">
-    <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate"
-      href="{{ .entry.path }}" title="{{ markdownify .entry.title }}">{{ markdownify .entry.title }}</a>
-  </span>
+  <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
+      href="{{ .entry.path }}" title="{{ markdownify .entry.title }}"
+      ><span>{{ markdownify .entry.title }}</span>
+  </a>
 </li>
 {{ end }}
 {{ end }}
