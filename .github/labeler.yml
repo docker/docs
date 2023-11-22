@@ -83,7 +83,8 @@ area/storage:
 hugo:
   - layouts/**
   - hugo.yaml
-  - *.config.js
+  - tailwind.config.js
+  - postcss.config.js
   - assets/**
 
 dependencies:
