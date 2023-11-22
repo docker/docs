@@ -40,6 +40,9 @@ to run Wasm workloads:
 - `io.containerd.spin.v1`
 - `io.containerd.wasmedge.v1`
 - `io.containerd.wasmtime.v1`
+- `io.containerd.lunatic.v1`
+- `io.containerd.wws.v1`
+- `io.containerd.wasmer.v1`
 
 ## Usage examples
 
