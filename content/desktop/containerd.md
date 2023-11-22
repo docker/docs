@@ -11,7 +11,7 @@ image and file system management in the Docker Engine.
 > **Beta**
 >
 > The containerd image store feature is currently in
-> [Beta](../../release-lifecycle.md/#beta). We recommend that you do not use
+> [Beta](../release-lifecycle.md/#beta). We recommend that you do not use
 > this feature in production environments as this feature may change or be
 > removed from future releases.
 { .experimental }
@@ -34,7 +34,7 @@ Docker Engine, including:
   or [nydus][2] and [dragonfly][3] for peer-to-peer image distribution.
 - Natively store and build multi-platform images, and other OCI content types
   that may emerge in the future.
-- Ability to run [Wasm](../wasm/_index.md) containers
+- Ability to run [Wasm](wasm.md) containers
 
 [1]: https://github.com/containerd/stargz-snapshotter
 [2]: https://github.com/containerd/nydus-snapshotter
@@ -147,7 +147,7 @@ d28bdb47b683: Pushed
 
 Inspecting the tag on Docker Hub shows that the image is available for multiple platforms.
 
-![Multiplatform image tag on Docker Hub](../images/containerd_multiplatform.png)
+![Multiplatform image tag on Docker Hub](images/containerd_multiplatform.png)
 
 ## Known issues
 

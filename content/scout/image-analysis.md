@@ -72,7 +72,7 @@ analysis is activated.
    Scout uses attestations to provide more fine-grained analysis results.
 
    The default `docker` driver only supports build attestations if you use the
-   [containerd image store](../desktop/containerd/_index.md).
+   [containerd image store](../desktop/containerd.md).
 
 3. Go to the [Docker Scout Dashboard](https://scout.docker.com/)
 4. Sign in with your Docker ID.
