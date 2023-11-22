@@ -43,25 +43,25 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
 
         ```console
         $ sudo apt-get update
-        $ sudo apt-get install docker-compose-plugin
+        $ sudo apt-get install docker-compose
         ```
     * For RPM-based distros, run:
 
         ```console
         $ sudo yum update
-        $ sudo yum install docker-compose-plugin
+        $ sudo yum install docker-compose
         ```
 
 3.  Verify that Docker Compose is installed correctly by checking the version.
 
     ```console
-    $ docker compose version
+    $ docker-compose version
     ```
 
     Expected output:
 
     ```text
-    Docker Compose version vN.N.N
+    docker-compose version vN.N.N
     ```
 
     Where `vN.N.N` is placeholder text standing in for the latest version.
@@ -74,13 +74,13 @@ To update the Compose plugin, run the following commands:
 
     ```console
     $ sudo apt-get update
-    $ sudo apt-get install docker-compose-plugin
+    $ sudo apt-get install docker-compose
     ```
 * For RPM-based distros, run:
 
     ```console
     $ sudo yum update
-    $ sudo yum install docker-compose-plugin
+    $ sudo yum install docker-compose
     ```
 
 ## Install the plugin manually
