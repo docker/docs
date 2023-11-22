@@ -16,17 +16,77 @@ aliases:
 Container networking refers to the ability for containers to connect to and
 communicate with each other, or to non-Docker workloads.
 
-A container has no information about what kind of network it's attached to,
-or whether their peers are also Docker workloads or not.
-A container only sees a network interface with an IP address,
-a gateway, a routing table, DNS services, and other networking details.
-That is, unless the container uses the `none` network driver.
+Containers have networking enabled by default, and they can make outgoing
+connections. A container has no information about what kind of network it's
+attached to, or whether their peers are also Docker workloads or not. A
+container only sees a network interface with an IP address, a gateway, a
+routing table, DNS services, and other networking details. That is, unless the
+container uses the `none` network driver.
 
 This page describes networking from the point of view of the container,
 and the concepts around container networking.
 This page doesn't describe OS-specific details about how Docker networks work.
 For information about how Docker manipulates `iptables` rules on Linux,
 see [Packet filtering and firewalls](packet-filtering-firewalls.md).
+
+## User-defined networks
+
+You can create custom, user-defined networks, and connect multiple containers
+to the same network. Once connected to a user-defined network, containers can
+communicate with each other using container IP addresses or container names.
+
+The following example creates a network using the `bridge` network driver and
+running a container in the created network:
+
+```console
+$ docker network create -d bridge my-net
+$ docker run --network=my-net -itd --name=container3 busybox
+```
+
+### Drivers
+
+The following network drivers are available by default, and provide core
+networking functionality:
+
+| Driver    | Description                                                              |
+| :-------- | :----------------------------------------------------------------------- |
+| `bridge`  | The default network driver.                                              |
+| `host`    | Remove network isolation between the container and the Docker host.      |
+| `none`    | Completely isolate a container from the host and other containers.       |
+| `overlay` | Overlay networks connect multiple Docker daemons together.               |
+| `ipvlan`  | IPvlan networks provide full control over both IPv4 and IPv6 addressing. |
+| `macvlan` | Assign a MAC address to a container.                                     |
+
+For more information about the different drivers, see [Network drivers
+overview](./drivers/_index.md).
+
+## Container networks
+
+In addition to user-defined networks, you can attach a container to another
+container's networking stack directly, using the `--network
+container:<name|id>` flag format.
+
+The following flags aren't supported for containers using the `container:`
+networking mode:
+
+- `--add-host`
+- `--hostname`
+- `--dns`
+- `--dns-search`
+- `--dns-option`
+- `--mac-address`
+- `--publish`
+- `--publish-all`
+- `--expose`
+
+The following example runs a Redis container, with Redis binding to
+`localhost`, then running the `redis-cli` command and connecting to the Redis
+server over the `localhost` interface.
+
+```console
+$ docker run -d --name redis example/redis --bind 127.0.0.1
+$ docker run --rm -it --network container:redis example/redis-cli -h 127.0.0.1
+```
 
 ## Published ports
 
@@ -38,12 +98,12 @@ This creates a firewall rule in the host,
 mapping a container port to a port on the Docker host to the outside world.
 Here are some examples:
 
-| Flag value                      | Description                                                                                                                                            |
-| ------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------  |
-| `-p 8080:80`                    | Map port `8080` on the Docker host to TCP port `80` in the container.                                                                                  |
+| Flag value                      | Description                                                                                                                                             |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-p 8080:80`                    | Map port `8080` on the Docker host to TCP port `80` in the container.                                                                                   |
 | `-p 192.168.1.100:8080:80`      | Map port `8080` on the Docker host IP `192.168.1.100` to TCP port `80` in the container.                                                                |
 | `-p 8080:80/udp`                | Map port `8080` on the Docker host to UDP port `80` in the container.                                                                                   |
-| `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port `8080` on the Docker host to TCP port `80` in the container, and map UDP port `8080` on the Docker host to UDP port `80` in the container.|
+| `-p 8080:80/tcp -p 8080:80/udp` | Map TCP port `8080` on the Docker host to TCP port `80` in the container, and map UDP port `8080` on the Docker host to UDP port `80` in the container. |
 
 > **Important**
 >
@@ -90,8 +150,11 @@ you can use the `--alias` flag to specify an additional network alias for the co
 
 ## DNS services
 
-By default, containers inherit the DNS settings of the host,
-as defined in the `/etc/resolv.conf` configuration file.
+Containers use the same DNS servers as the host by default, but you can
+override this with `--dns`.
+
+By default, containers inherit the DNS settings as defined in the
+`/etc/resolv.conf` configuration file.
 Containers that attach to the default `bridge` network receive a copy of this file.
 Containers that attach to a
 [custom network](network-tutorial-standalone.md#use-user-defined-bridge-networks)
@@ -128,10 +191,12 @@ resolution.
 
 ### Custom hosts
 
-Custom hosts, defined in `/etc/hosts` on the host machine, aren't inherited by containers.
-To pass additional hosts into container, refer to
-[add entries to container hosts file](../engine/reference/commandline/run.md#add-host)
-in the `docker run` reference documentation.
+Your container will have lines in `/etc/hosts` which define the hostname of the
+container itself, as well as `localhost` and a few other common things. Custom
+hosts, defined in `/etc/hosts` on the host machine, aren't inherited by
+containers. To pass additional hosts into container, refer to [add entries to
+container hosts file](../engine/reference/commandline/run.md#add-host) in the
+`docker run` reference documentation.
 
 ## Proxy server
 
