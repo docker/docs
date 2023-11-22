@@ -176,7 +176,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 - [Compose v2.22.0](https://github.com/docker/compose/releases/tag/v2.22.0)
 - [Go 1.21.1](https://github.com/golang/go/releases/tag/go1.21.1)
-- [Wasm](../desktop/wasm/_index.md) runtimes:
+- [Wasm](../desktop/wasm.md) runtimes:
   - wasmtime, wasmedge `v0.2.0`.
   - lunatic, slight, spin, and wws`v0.9.1`.
   - Added wasmer wasm shims.
@@ -237,7 +237,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
 - [Docker Engine v24.0.6](https://docs.docker.com/engine/release-notes/24.0/#2406)
 - [Docker Scout CLI v0.24.1](https://github.com/docker/scout-cli/releases/tag/v0.24.1).
-- [Wasm](../desktop/wasm/_index.md) runtimes:
+- [Wasm](../desktop/wasm.md) runtimes:
   - wasmtime, wasmedge revision `d0a1a1cd`.
   - slight and spin wasm `v0.9.0`.
 

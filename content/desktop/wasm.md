@@ -7,7 +7,7 @@ toc_max: 3
 
 > **Beta**
 >
-> The Wasm feature is currently in [Beta](../../release-lifecycle.md/#beta).
+> The Wasm feature is currently in [Beta](../release-lifecycle.md/#beta).
 > We recommend that you do not use this feature in production environments as
 > this feature may change or be removed from future releases.
 { .experimental }
@@ -21,7 +21,7 @@ alongside your Linux containers in Docker.
 
 ## Turn on Wasm workloads
 
-Wasm workloads require the [containerd image store](../containerd/index.md)
+Wasm workloads require the [containerd image store](containerd.md)
 feature to be turned on. If you’re not already using the containerd image store,
 then pre-existing images and containers will be inaccessible.
 
@@ -191,7 +191,7 @@ containerd image store, an error similar to the following displays:
 docker: Error response from daemon: Unknown runtime specified io.containerd.wasmedge.v1.
 ```
 
-[Turn on the containerd feature](../containerd/index.md#turn-on-the-containerd-image-store-feature)
+[Turn on the containerd feature](containerd.md#turn-on-the-containerd-image-store-feature)
 in Docker Desktop settings and try again.
 
 ### Failed to start shim: failed to resolve runtime path
