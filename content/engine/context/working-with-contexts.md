@@ -84,7 +84,7 @@ The following example creates a new context called `docker-test` and specifies
 the host endpoint of the context to TCP socket `tcp://docker:2375`.
 
 ```console
-$ docker context create docker-test --docker tcp://docker:2375
+$ docker context create docker-test --docker host=tcp://docker:2375
 docker-test
 Successfully created context "docker-test"
 ```
