@@ -27,10 +27,10 @@ Docker Extensions' private marketplace feature makes use of [Settings Management
 
 1. Create a folder locally for the content that will be deployed to your developers’ machines:
 
-   ```console
-   $ mkdir my-marketplace
-   $ cd my-marketplace
-   ```
+  ```console
+  $ mkdir my-marketplace
+  $ cd my-marketplace
+  ```
 
 2. Initialize the configuration files for your marketplace:
 
@@ -74,12 +74,12 @@ Each setting has a `value` that you can set, including a `locked` field that all
 - `onlyMarketplaceExtensions` allows or blocks users from installing other extensions by using the command line. Teams developing new extensions must have this setting unlocked (`"locked": false`) to install and test extensions being developed
 - `extensionsPrivateMarketplaceAdminContactURL` defines a contact link for users to request new extensions in the private marketplace. If `value` is empty then no link is shown to your developers on Docker Desktop, otherwise this can be either an HTTP link or a “mailto:” link. For example,
 
-   ```json
-   "extensionsPrivateMarketplaceAdminContactURL": {
-   "locked": true,
-   "value": "mailto:admin@acme.com"
-   }
-   ```
+  ```json
+  "extensionsPrivateMarketplaceAdminContactURL": {
+  "locked": true,
+  "value": "mailto:admin@acme.com"
+  }
+  ```
 
 To find out more information about the `admin-settings.json` file, see [Settings Management](../hardened-desktop/settings-management/_index.md).
 
