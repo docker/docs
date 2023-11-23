@@ -19,7 +19,7 @@ Docker Extensions' private marketplace feature makes use of [Settings Management
 
 ## Prerequisites
 
-- [Download and install Docker Desktop 4.25.0 or later](https://docs.docker.com/desktop/release-notes/).
+- [Download and install Docker Desktop 4.26.0 or later](https://docs.docker.com/desktop/release-notes/).
 - You must be an administrator for your organization.
 - You have the ability to push the `extension-marketplace` folder and `admin-settings.json` file to the locations specified below through device management software such as [Jamf](https://www.jamf.com/).
 
@@ -60,7 +60,7 @@ Docker Extensions' private marketplace feature makes use of [Settings Management
 
 This creates 2 files:
 
-- `admin-settings.json`, which activates the private marketplace feature once it’s applied to Docker Desktop on your developers’ machines
+- `admin-settings.json`, which activates the private marketplace feature once it’s applied to Docker Desktop on your developers’ machines.
 - `extensions.txt`, which determines which extensions to list in your private marketplace.
 
 ## Step two: Set the private marketplace behaviour
