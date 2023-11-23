@@ -1,4 +1,4 @@
-## The Compose application model
+# The Compose application model
 
 The Compose Specification lets you define a platform-agnostic container based application. Such an application is designed as a set of containers which have to both run together with adequate shared resources and communication channels.
 
@@ -24,7 +24,7 @@ Compose offers a way for users to set a custom project name and override this na
 
 Project names must contain only lowercase letters, decimal digits, dashes, and underscores, and must begin with a lowercase letter or decimal digit.
 
-### Illustrative example
+## Illustrative example
 
 The following example illustrates the Compose Specification concepts outlined above. The example is non-normative.
 

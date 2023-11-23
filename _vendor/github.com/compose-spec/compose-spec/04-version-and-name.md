@@ -1,3 +1,5 @@
+# Version and name top-level elements
+
 ## Version top-level element
 
 The top-level `version` property is defined by the Compose Specification for backward compatibility. It is only informative.

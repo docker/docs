@@ -4,8 +4,10 @@
 
 {{ define "main" }}
   {{ partial "breadcrumbs.html" . }}
-  <article class="prose max-w-none dark:prose-invert">
-    <h1>{{ .Title }}</h1>
+  <article class="DocSearch-content prose max-w-none dark:prose-invert">
+    {{ with .Title }}
+    <h1 id="{{ anchorize . }}">{{ . }}</h1>
+    {{ end }}
     <table>
       <thead>
         <tr>
