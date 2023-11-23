@@ -1,5 +1,6 @@
 @layer components {
-  .highlight,
+  .syntax-light,
+  .syntax-dark,
   :not(pre) > code {
     font-size: 0.875em;
     border: 1px solid;
@@ -21,8 +22,12 @@
     padding: 0 4px;
   }
 
+  .syntax-light,
+  .syntax-dark {
+    @apply w-full overflow-x-auto p-3;
+  }
+
   .highlight {
-    @apply my-4 overflow-x-auto p-3;
 
     /* LineTableTD */
     .lntd {

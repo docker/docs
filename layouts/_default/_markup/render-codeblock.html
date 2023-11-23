@@ -1,14 +1,5 @@
-<div class="group relative">
-  <button
-    x-data="{ code: '{{encoding.Base64Encode .Inner}}' }"
-    class="material-symbols-rounded hidden group-hover:block absolute top-3 right-3 text-gray-light-300 dark:text-gray-dark-600"
-    title="Copy"
-    @click="window.navigator.clipboard.writeText(atob(code).replaceAll(/^\$\s*/gm, ''));
-    $el.textContent='check_circle';
-    setTimeout(() => $el.textContent='content_copy', 2000);"
-  >
-    content_copy
-  </button>
+<div class="group relative my-4">
+  {{ partial "components/copy.html" .Inner }}
   {{ $result := transform.HighlightCodeBlock . }}
   <div class="syntax-light dark:syntax-dark">
     {{ $result.Wrapped }}
