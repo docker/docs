@@ -1269,8 +1269,6 @@ Manuals:
           title: Manage non-Marketplace extensions
         - path: /desktop/extensions/settings-feedback/
           title: Change settings and give feedback
-        - path: /desktop/extensions/private-marketplace/
-          title: Configure a private marketplace (Beta)
     - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
