@@ -29,7 +29,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Fixed `--pull` documentation.
 - Added a new line in cmd/compose/build.go.
 - Compose is rendered quiet after filtering applied.
-- Striped project prefix from `docker-compose up` output
+- Stripped project prefix from `docker-compose up` output.
 
 ## 2.23.0
 {{< release-date date="2023-10-18" >}}
