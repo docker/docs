@@ -27,10 +27,10 @@ Docker Extensions' private marketplace feature makes use of [Settings Management
 
 1. Create a folder locally for the content that will be deployed to your developers’ machines:
 
-  ```console
-  $ mkdir my-marketplace
-  $ cd my-marketplace
-  ```
+   ```console
+   $ mkdir my-marketplace
+   $ cd my-marketplace
+   ```
 
 2. Initialize the configuration files for your marketplace:
 
