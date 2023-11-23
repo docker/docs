@@ -43,6 +43,10 @@ grid_admins:
   description: Assign roles to individuals giving them different permissions within an organization. 
   icon: badge
   link: /security/for-admins/roles-and-permissions/
+- title: Private marketplace for Extensions (Early Access)
+  description: Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
+  icon: storefront
+  link: /desktop/extensions/private-marketplace/
 grid_developers: 
 - title: Set up two-factor authentication
   description: Add an extra layer of authentication to your Docker account.
