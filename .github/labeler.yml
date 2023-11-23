@@ -15,14 +15,20 @@ area/compose:
   - _vendor/github.com/compose-spec/compose-spec/**
 
 area/desktop:
-  - content/desktop/**
-  - '!content/desktop/extensions/**'
-  - '!content/desktop/extensions-sdk/**'
+  - any:
+      [
+        content/desktop/**,
+        "!content/desktop/extensions/**",
+        "!content/desktop/extensions-sdk/**",
+      ]
 
 area/engine:
-  - content/engine/**
-  - content/config/**
-  - '!content/engine/reference/commandline/*'
+  - any:
+      [
+        content/engine/**,
+        content/config/**,
+        "!content/engine/reference/commandline/*",
+      ]
 
 area/install:
   - content/desktop/install/**

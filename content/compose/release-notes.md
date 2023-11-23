@@ -11,6 +11,27 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.23.3
+{{< release-date date="2023-11-22" >}}
+
+### Update
+- Dependencies upgrade: bump buildx to v0.12.0
+
+## 2.23.2
+{{< release-date date="2023-11-21" >}}
+
+### Update
+- Dependencies upgrade: bump buildkit 0.12.3 
+- Dependencies upgrade: bump docker 24.0.7 
+- Dependencies upgrade: bump cli 24.0.7 
+- Dependencies upgrade: bump 1.20.2
+
+### Bug fixes and enhancements
+- Compose now supports `builds.tags` with `push` command.
+- Compose Watch now re-builds service images at startup.
+- Now `--remove-orphans` doesn't manage disabled services as orphaned.
+- Compose displays `Building` output log only if there is at least one service to build.
+
 ## 2.23.1
 {{< release-date date="2023-11-16" >}}
 
@@ -18,18 +39,18 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump compose-go to v1.20.1
 
 ### Bug fixes and enhancements
-- align with OCI artifact best practices
-- introduce --resolve-image-digests for publish to seal service images
-- improve watch configuration logging
-- reject compose file using secrets|configs.driver or template_driver
-- fail start if depependency is missing by @ndeloof in #11110
-- fix SIGTERM support to stop/kill stack
-- fix --hash regression
-- fix for "Application failed to start after update" when an external network is on a watched service
-- fix --pull documentation
-- fix #11170 add newline in cmd/compose/build.go
-- render quiet after filtering applied
-- Strip project prefix from docker-compose up output
+- Aligned Compose with OCI artifact best practices.
+- Introduced `--resolve-image-digests` so users can seal service images by digest when publishing a Compose application.
+- Improved Compose Watch configuration logging.
+- Compose now rejects a Compose file using `secrets|configs.driver` or `template_driver`.
+- Compose now fails to start if a dependency is missing. 
+- Fixed SIGTERM support to stop/kill stack.
+- Fixed a `--hash` regression.
+- Fixed "Application failed to start after update" when an external network is on a watched service.
+- Fixed `--pull` documentation.
+- Fixed display by adding newline in cmd/compose/build.go.
+- Compose is rendered quiet after filtering applied.
+- Stripped project prefix from docker-compose up output.
 
 ## 2.23.0
 {{< release-date date="2023-10-18" >}}
