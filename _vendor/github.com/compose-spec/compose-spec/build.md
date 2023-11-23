@@ -485,6 +485,23 @@ tags:
   - "registry/username/myrepos:my-other-tag"
 ```
 
+### ulimits
+
+`ulimits` overrides the default ulimits for a container. It's specified either as an integer for a single limit
+or as mapping for soft/hard limits.
+
+```yml
+services:
+  frontend:
+    build:
+      context: .
+      ulimits:
+        nproc: 65535
+        nofile:
+          soft: 20000
+          hard: 40000
+```
+
 ### platforms
 
 `platforms` defines a list of target [platforms](05-services.md#platform).

@@ -1,4 +1,4 @@
-## Fragments
+# Fragments
 
 With Compose, you can use built-in [YAML](https://www.yaml.org/spec/1.2/spec.html#id2765878) features to make your Compose file neater and more efficient. Anchors and aliases let you create re-usable blocks. This is useful if you start to find common configurations that span multiple services. Having re-usable blocks minimizes potential mistakes.
 
@@ -6,7 +6,7 @@ Anchors are created using the `&` sign. The sign is followed by an alias name. Y
 
 You can use more than one anchor and alias in a single Compose file.
 
-### Example 1
+## Example 1
 
 ```yml
 volumes:
@@ -19,7 +19,7 @@ In the example above, a `default-volume` anchor is created based on the `db-data
 
 Anchor resolution takes place before [variables interpolation](12-interpolation.md), so variables can't be used to set anchors or aliases.
 
-### Example 2
+## Example 2
 
 ```yml
 services:
@@ -36,7 +36,7 @@ services:
 
 If you have an anchor that you want to use in more than one service, use it in conjunction with an [extension](11-extension.md) to make your Compose file easier to maintain.
 
-### Example 3
+## Example 3
 
 You may want to partially override values. Compose follows the rule outlined by [YAML merge type](https://yaml.org/type/merge.html). 
 
@@ -60,7 +60,7 @@ volumes:
     name: "metrics"
 ```
 
-### Example 4
+## Example 4
 
 You can also extend the anchor to add additional values.
 

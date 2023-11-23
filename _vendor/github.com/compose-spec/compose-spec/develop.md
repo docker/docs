@@ -51,7 +51,8 @@ Compose to monitor source code for changes. For more information, see [Use Compo
 `action` defines the action to take when changes are detected. If `action` is set to:
 
 - `rebuild`, Compose rebuilds the service image based on the `build` section and recreates the service with the updated image.
-- `sync`, Compose keeps the existing service container(s) running, but synchronizes source files with container content according to the `target` attribute. 
+- `sync`, Compose keeps the existing service container(s) running, but synchronizes source files with container content according to the `target` attribute.
+- `sync+restart`, Compose synchronizes source files with container content according to the `target` attribute, and then restarts the container.
 
 
 #### ignore

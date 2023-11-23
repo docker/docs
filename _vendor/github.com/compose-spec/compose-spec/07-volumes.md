@@ -1,10 +1,10 @@
-## Volumes top-level element
+# Volumes top-level element
 
 Volumes are persistent data stores implemented by the container engine. Compose offers a neutral way for services to mount volumes, and configuration parameters to allocate them to infrastructure.
 
-The top-level `volumes` declaration lets you configure named volumes that can be reused across multiple services. To use a volume across multiple services, you must explicitly grant each service access by using the [volumes](05-services.md) attribute. The `volumes` attribute has additional syntax that provides more granular control.
+The top-level `volumes` declaration lets you configure named volumes that can be reused across multiple services. To use a volume across multiple services, you must explicitly grant each service access by using the [volumes](05-services.md#volumes) attribute within the `services` top-level element. The `volumes` attribute has additional syntax that provides more granular control.
 
-### Example
+## Example
 
 The following example shows a two-service setup where a database's data directory is shared with another service as a volume, named
 `db-data`, so that it can be periodically backed up.
@@ -29,12 +29,12 @@ The `db-data` volume is mounted at the `/var/lib/backup/data` and `/etc/data` co
 
 Running `docker compose up` creates the volume if it doesn't already exist. Otherwise, the existing volume is used and is recreated if it's manually deleted outside of Compose.
 
-### Attributes
+## Attributes
 
 An entry under the top-level `volumes` section can be empty, in which case it uses the container engine's default configuration for
 creating a volume. Optionally, you can configure it with the following keys:
 
-#### driver
+### driver
 
 Specifies which volume driver should be used. Default and available values are platform specific. If the driver is not available, Compose returns an error and doesn't deploy the application.
 
@@ -44,7 +44,7 @@ volumes:
     driver: foobar
 ```
 
-#### driver_opts
+### driver_opts
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver for this volume. The options are driver-dependent.
 
@@ -57,7 +57,7 @@ volumes:
       device: ":/docker/example"
 ```
 
-#### external
+### external
 
 If set to `true`:
  - `external` specifies that this volume already exists on the platform and its lifecycle is managed outside
@@ -80,7 +80,7 @@ volumes:
     external: true
 ```
 
-#### labels
+### labels
 
 `labels` are used to add metadata to volumes. You can use either an array or a dictionary.
 
@@ -106,7 +106,7 @@ volumes:
 
 Compose sets `com.docker.compose.project` and `com.docker.compose.volume` labels.
 
-#### name
+### name
 
 `name` sets a custom name for a volume. The name field can be used to reference volumes that contain special
 characters. The name is used as is and is not scoped with the stack name.

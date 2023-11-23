@@ -32,6 +32,8 @@ github.com/compose-spec/compose-spec v0.0.0-20230824062516-848a47ad5d0e h1:qmkQE
 github.com/compose-spec/compose-spec v0.0.0-20230824062516-848a47ad5d0e/go.mod h1:SkxF2HOKkzpp+mNdvGONzi3g2shI/M94GkMgsE0JLuk=
 github.com/compose-spec/compose-spec v0.0.0-20230927132538-f223c5150d5d h1:EHvVBP6ZYAz5KXU5/iA3K6Z7G7haxPm44g/08tueZSw=
 github.com/compose-spec/compose-spec v0.0.0-20230927132538-f223c5150d5d/go.mod h1:SkxF2HOKkzpp+mNdvGONzi3g2shI/M94GkMgsE0JLuk=
+github.com/compose-spec/compose-spec v0.0.0-20231121152139-478928e7c9f8 h1:WQU6c3MGdIxVcDRC+Qstk9bJuYvHLvbyfkN8fStL1Qk=
+github.com/compose-spec/compose-spec v0.0.0-20231121152139-478928e7c9f8/go.mod h1:SkxF2HOKkzpp+mNdvGONzi3g2shI/M94GkMgsE0JLuk=
 github.com/containerd/fuse-overlayfs-snapshotter v1.0.2/go.mod h1:nRZceC8a7dRm3Ao6cJAwuJWPFiBPaibHiFntRUnzhwU=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/distribution/distribution v2.8.2+incompatible h1:k9+4DKdOG+quPFZXT/mUsiQrGu9vYCp+dXpuPkuqhk8=
