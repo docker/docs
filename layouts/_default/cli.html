@@ -12,8 +12,10 @@
   {{ .Scratch.Set "headings" slice }}
   {{ .Scratch.Set "subheadings" slice }}
   {{ partial "breadcrumbs.html" . }}
-  <article class="prose max-w-none dark:prose-invert">
-    <h1>{{ .Title }}</h1>
+  <article class="DocSearch-content prose max-w-none dark:prose-invert">
+    {{ with .Title }}
+    <h1 id="{{ anchorize . }}">{{ . }}</h1>
+    {{ end }}
     {{ $data.short | .RenderString (dict "display" "block") }}
     {{ if $data.deprecated }}
       <blockquote class="warning">

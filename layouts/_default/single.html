@@ -4,9 +4,9 @@
 
 {{ define "main" }}
   {{ partial "breadcrumbs.html" . }}
-  <article class="prose max-w-none dark:prose-invert">
+  <article class="DocSearch-content prose max-w-none dark:prose-invert">
     {{ with .Title }}
-    <h1>{{ . }}</h1>
+    <h1 id="{{ anchorize . }}">{{ . }}</h1>
     {{ end }}
     {{ .Content }}
   </article>
