@@ -60,7 +60,7 @@ Docker Extensions' private marketplace feature makes use of [Settings Management
 
 This creates 2 files:
 
-- `admin-settings.json`, which activates the private marketplace feature once it’s applied to Docker Desktop on your developers’ machines
+- `admin-settings.json`, which activates the private marketplace feature once it’s applied to Docker Desktop on your developers’ machines.
 - `extensions.txt`, which determines which extensions to list in your private marketplace.
 
 ## Step two: Set the private marketplace behaviour
