@@ -6,7 +6,7 @@
   {{ partial "breadcrumbs.html" . }}
   <article class="DocSearch-content prose max-w-none dark:prose-invert">
     {{ with .Title }}
-    <h1 id="{{ anchorize . }}">{{ . }}</h1>
+    <h1 id="{{ anchorize . }}" class="scroll-mt-36">{{ . }}</h1>
     {{ end }}
     <table>
       <thead>
