@@ -76,8 +76,8 @@ Each setting has a `value` that you can set, including a `locked` field that all
 
   ```json
   "extensionsPrivateMarketplaceAdminContactURL": {
-  "locked": true,
-  "value": "mailto:admin@acme.com"
+    "locked": true,
+    "value": "mailto:admin@acme.com"
   }
   ```
 
