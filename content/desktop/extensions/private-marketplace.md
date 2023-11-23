@@ -4,12 +4,12 @@ keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, Marketplace, m
 title: Configure a private marketplace for extensions
 ---
 
-> **Early Access**
+> **Beta**
 >
-> Docker Extensions` private marketplace is an [early access](../../release-lifecycle#early-access-ea) feature
+> Docker Extensions` private marketplace is in [beta](../../release-lifecycle#beta).
 >
 > It's available to Docker Business customers only.
-{ .restricted }
+{ .experimental }
 
 Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
 
@@ -27,9 +27,9 @@ Docker Extensions' private marketplace feature makes use of [Settings Management
 
 1. Create a folder locally for the content that will be deployed to your developers’ machines:
 
-   ```bash
-   mkdir myMarketplace
-   cd myMarketplace
+   ```console
+   $ mkdir my-marketplace
+   $ cd my-marketplace
    ```
 
 2. Initialize the configuration files for your marketplace:
@@ -37,22 +37,22 @@ Docker Extensions' private marketplace feature makes use of [Settings Management
    {{< tabs >}}
    {{< tab name="Mac" >}}
 
-   ```bash
-   /Applications/Docker.app/Contents/Resources/bin/extension-admin init
+   ```console
+   $ /Applications/Docker.app/Contents/Resources/bin/extension-admin init
    ```
 
    {{< /tab >}}
    {{< tab name="Windows" >}}
 
-   ```bash
-   C:\Program Files\Docker\Docker\resources\bin\extension-admin init
+   ```console
+   $ C:\Program Files\Docker\Docker\resources\bin\extension-admin init
    ```
 
    {{< /tab >}}
    {{< tab name="Linux" >}}
 
-   ```bash
-   /opt/docker-desktop/extension-admin init
+   ```console
+   $ /opt/docker-desktop/extension-admin init
    ```
 
    {{< /tab >}}
@@ -115,22 +115,22 @@ Once the list in `extensions.txt` is ready, you can generate the marketplace:
 {{< tabs >}}
 {{< tab name="Mac" >}}
 
-```bash
-/Applications/Docker.app/Contents/Resources/bin/extension-admin generate
+```console
+$ /Applications/Docker.app/Contents/Resources/bin/extension-admin generate
 ```
 
 {{< /tab >}}
 {{< tab name="Windows" >}}
 
-```bash
-C:\Program Files\Docker\Docker\resources\bin\extension-admin generate
+```console
+$ C:\Program Files\Docker\Docker\resources\bin\extension-admin generate
 ```
 
 {{< /tab >}}
 {{< tab name="Linux" >}}
 
-```bash
-/opt/docker-desktop/extension-admin generate
+```console
+$ /opt/docker-desktop/extension-admin generate
 ```
 
 {{< /tab >}}
@@ -149,22 +149,22 @@ We recommend you try the private marketplace on your Docker Desktop installation
    {{< tabs >}}
    {{< tab name="Mac" >}}
 
-   ```bash
-   sudo /Applications/Docker.app/Contents/Resources/bin/extension-admin apply
+   ```console
+   $ sudo /Applications/Docker.app/Contents/Resources/bin/extension-admin apply
    ```
 
    {{< /tab >}}
    {{< tab name="Windows (run as admin)" >}}
 
-   ```bash
-   C:\Program Files\Docker\Docker\resources\bin\extension-admin apply
+   ```console
+   $ C:\Program Files\Docker\Docker\resources\bin\extension-admin apply
    ```
 
    {{< /tab >}}
    {{< tab name="Linux" >}}
 
-   ```bash
-   sudo /opt/docker-desktop/extension-admin apply
+   ```console
+   $ sudo /opt/docker-desktop/extension-admin apply
    ```
 
    {{< /tab >}}
@@ -183,3 +183,6 @@ Once you’ve confirmed that the private marketplace configuration works, the fi
 
 Make sure your developers are signed in to Docker Desktop in order for the private marketplace configuration to take effect. As an administrator, you should [configure a registry.json to enforce Docker Desktop sign-in](../../security/for-admins/configure-sign-in.md).
 
+## Feedback
+
+Give feedback or report any bugs you may find by emailing `extensions@docker.com`.
