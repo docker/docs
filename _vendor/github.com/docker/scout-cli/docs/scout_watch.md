@@ -23,7 +23,8 @@ Watch repositories in a registry and push images and indexes to Docker Scout (ex
 
 ## Description
 
-The `docker scout watch` command watches repositories in a registry and pushes images or image indexes to Docker Scout.
+The `docker scout watch` command watches repositories in a registry
+and pushes images or analysis results to Docker Scout.
 
 ## Examples
 

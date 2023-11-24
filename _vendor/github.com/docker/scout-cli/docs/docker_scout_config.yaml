@@ -4,7 +4,8 @@ long: |-
     `docker scout config` allows you to list, get and set Docker Scout configuration.
 
     Available configuration key:
-    - `organization`: Namespace of the Docker organization to be used by default if it cannot be inferred from the image reference
+
+    - `organization`: Namespace of the Docker organization to be used by default.
 usage: docker scout config [KEY] [VALUE]
 pname: docker scout
 plink: docker_scout.yaml
@@ -13,6 +14,16 @@ inherited_options:
       value_type: bool
       default_value: "false"
       description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
       deprecated: false
       hidden: true
       experimental: false

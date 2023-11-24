@@ -18,7 +18,7 @@ Push an image or image index to Docker Scout (experimental)
 
 ## Description
 
-The `docker scout push` command allows to push an image or image index to Docker Scout.
+The `docker scout push` command lets you push an image or analysis result to Docker Scout.
 
 ## Examples
 

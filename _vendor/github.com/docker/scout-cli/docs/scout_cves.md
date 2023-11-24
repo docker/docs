@@ -42,7 +42,7 @@ Display CVEs identified in a software artifact
 
 The `docker scout cves` command analyzes a software artifact for vulnerabilities.
 
-If no image is specified, the most recently built image will be used.
+If no image is specified, the most recently built image is used.
 
 The following artifact types are supported:
 
@@ -50,8 +50,6 @@ The following artifact types are supported:
 - OCI layout directories
 - Tarball archives, as created by `docker save`
 - Local directory or file
-
-The tool analyzes the provided software artifact, and generates a vulnerability report.
 
 By default, the tool expects an image reference, such as:
 
@@ -66,7 +64,7 @@ or if you want to control from where the image will be resolved, you must prefix
 - `local://` use an image from the local image store (don't do a registry lookup)
 - `registry://` use an image from a registry (don't use a local image)
 - `oci-dir://` use an OCI layout directory
-- `archive://` use a tarball archive, as created by docker save
+- `archive://` use a tarball archive, as created by `docker save`
 - `fs://` use a local directory or file
 
 ## Examples
@@ -124,7 +122,7 @@ Analyzing image alpine
 
 ### Display markdown output
 
-The markdown output also contains HTML tags to have a better rendering. This output can be used for instance in Pull Request comments.
+The following example shows how to generate the vulnerability report as markdown.
 
 ```console
 $ docker scout cves --format markdown alpine
@@ -145,11 +143,10 @@ $ docker scout cves --format markdown alpine
 ...
 ```
 
-### List all packages of a certain typethat are vulnerable
+### List all vulnerable packages of a certain type
 
-The output will show the list of the packages of the image, that can be filtered, with the summary of vulnerabilities for each.
-
-By default even packages with no vulnerabilities will be displayed.
+The following example shows how to generate a list of packages, only including
+packages of the specified type, and only showing packages that are vulnerable.
 
 ```console
 $ docker scout cves --format only-packages --only-package-type golang --only-vuln-packages golang:1.18.0

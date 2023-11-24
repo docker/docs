@@ -20,9 +20,16 @@ Manage environments (experimental)
 
 ## Description
 
-The `docker scout environment` command lists the environments and records images to it.
+The `docker scout environment` command lists the environments.
+If you pass an image reference, the image is recorded to the specified environment.
 
-Once recorded, environments can be referred to by their name, eg. in the `docker scout compare` command using `--to-env`.`
+Once recorded, environments can be referred to by their name. For example,
+you can refer to the `production` environment with the `docker scout compare`
+command as follows:
+
+```console
+$ docker scout compare --to-env production
+```
 
 ## Examples
 
