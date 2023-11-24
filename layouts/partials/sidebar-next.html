@@ -1,0 +1,74 @@
+{{/* Render the top-nav in sidebar for small screens */}}
+<nav class="text-sm py-4 hidden gap-4 pl-4 md:flex flex-col justify-evenly">
+  <div class="text-gray-light dark:text-gray-dark">Main sections</div>
+  {{ range site.Menus.main }}
+  <div class="pl-2 underline-offset-8 decoration-2 hover:underline decoration-blue-light dark:decoration-blue-dark hover:opacity-75
+      {{- if eq .Identifier page.FirstSection }}
+        underline
+      {{- end }}">
+    <a href="{{ .URL }}">{{ .Name }}</a>
+  </div>
+  {{ end }}
+</nav>
+<hr>
+<nav id="sectiontree" class="text-sm w-[300px] md:w-full flex flex-col gap-2 px-3">
+  <div class="hidden md:block pt-4 text-gray-light dark:text-gray-dark">This section</div>
+  {{/* The current page is in the table of contents */}}
+  <ul>
+    <li class="pl-4 sidebar-hover rounded
+      {{ if eq page .FirstSection }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
+      <a {{ if eq page .FirstSection }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
+          href="{{ .FirstSection.Permalink }}" title="{{ .FirstSection.LinkTitle }}"
+          ><span>{{ .FirstSection.LinkTitle }}</span>
+      </a>
+    </li>
+    {{/* Traverse the pages under the current top-level section */}}
+    {{ template "walkSections" page.FirstSection }}
+  </ul>
+</nav>
+
+{{/* Recursive template for sidebar items */}}
+{{ define "walkSections" }}
+{{ range .Pages }}
+{{ if eq .Kind "section" }}
+<li
+  x-data="{ expanded: false }"
+  x-init="expanded = !!$el.querySelector('[aria-current]')"
+  :data-expanded="expanded">
+    {{ if eq .Params.sitemap false }}
+    <div class="flex items-center rounded sidebar-hover pl-4{{ if eq page . }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
+      <a {{ if eq page . }}aria-current="page" {{ end }}
+        class="w-full py-2 truncate block"
+        href="{{ .Permalink }}" title="{{ .LinkTitle }}"
+        >{{ .LinkTitle }}</a>
+      <button
+        @click="expanded = ! expanded"
+        class="material-symbols-rounded px-4 md:text-[28px]"
+        x-text="expanded ? 'expand_less' : 'expand_more'"></button>
+    </div>
+    {{ else }}
+    <button
+      class="w-full flex items-center rounded sidebar-hover pl-4{{ if eq page . }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}"
+      @click="expanded = ! expanded">
+      <span
+        class="text-left w-full py-2 truncate block"
+        {{ if eq page . }}aria-current="page" {{ end }}>{{ .LinkTitle }}</span>
+      <span class="material-symbols-rounded px-4 md:text-[28px]" x-text="expanded ? 'expand_less' : 'expand_more'"></span>
+    </button>
+    {{ end }}
+  <ul x-show="expanded" x-collapse class="ml-3 md:ml-[21px]">
+    {{ template "walkSections" . }}
+  </ul>
+</li>
+{{ else }}
+{{/* entry is a page */}}
+<li class="pl-4 sidebar-hover rounded
+  {{ if eq page . }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
+  <a {{ if eq page . }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
+      href="{{ .Permalink }}" title="{{ .LinkTitle }}"
+      ><span>{{ .LinkTitle }}</span>
+  </a>
+</li>
+{{ end }}
+{{ end }}
+{{ end }}
