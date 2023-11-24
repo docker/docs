@@ -1,3 +1,19 @@
+{{ if eq .Params.legacytoc false }}
+<div>
+  <nav>
+    <ul class="box-content flex mt-1 gap-4 md:hidden">
+      {{ range site.Menus.main }}
+      <li class="border-b-4
+            {{- if not (page.FirstSection.IsMenuCurrent .Menu .) }}
+            border-blue-light dark:border-blue-dark-200 hover:border-blue-light-600 dark:hover:border-blue-dark-100
+          {{- end }}">
+        <a class="block py-1 px-2" href="{{ .URL }}">{{ .Name }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+</div>
+{{ else }}
 {{ $scratch := partialCached "utils/tocparser.html" . . }}
 {{ $firstSection := (index ($scratch.GetSortedMapValues "sections") 0).title }}
 <div>
@@ -14,3 +30,4 @@
     </ul>
   </nav>
 </div>
+{{ end }}

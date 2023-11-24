@@ -1,9 +1,17 @@
 {{ define "left" }}
-  {{ partial "sidebar.html" . }}
+  {{ if eq .Params.legacytoc false }}
+    {{ partial "sidebar-next.html" . }}
+  {{ else }}
+    {{ partial "sidebar.html" . }}
+  {{ end }}
 {{ end }}
 
 {{ define "main" }}
-  {{ partial "breadcrumbs.html" . }}
+  {{ if eq .Params.legacytoc false }}
+    {{ partial "breadcrumbs-next.html" . }}
+  {{ else }}
+    {{ partial "breadcrumbs.html" . }}
+  {{ end }}
   <article class="DocSearch-content prose max-w-none dark:prose-invert">
     {{ with .Title }}
     <h1 id="{{ anchorize . }}">{{ . }}</h1>
