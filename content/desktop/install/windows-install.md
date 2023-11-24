@@ -62,7 +62,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 > **Should I use Hyper-V or WSL?**
 >
-> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. HyperV and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
+> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
 { .tip }
 
 {{< /tab >}}
