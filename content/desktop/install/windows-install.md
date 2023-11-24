@@ -16,6 +16,7 @@ aliases:
 - /install/windows/docker-ee/
 - /install/windows/ee-preview/
 - /installation/windows/
+- /desktop/win/configuring-wsl/
 ---
 
 This page contains the download URL, information about system requirements, and instructions on how to install Docker Desktop for Windows.
