@@ -102,6 +102,10 @@ params:
 
   min_api_threshold: 1.41
 
+cascade:
+  - legacytoc: false
+    _target:
+      path: /samples/**
 
 menus:
   main:
@@ -115,7 +119,7 @@ menus:
     url: /reference/
     weight: 3
   - name: Samples
-    url: /samples/
+    pageref: /samples/
     weight: 4
   - name: FAQ
     url: /faq/
