@@ -60,6 +60,11 @@ _For checksums, see [Release notes](../release-notes.md)_
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
 
+> **Should I use Hyper-V or WSL?**
+>
+> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
+{ .tip }
+
 {{< /tab >}}
 {{< tab name="Hyper-V backend and Windows containers" >}}
 
