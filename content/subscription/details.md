@@ -4,7 +4,7 @@ description: Learn about Docker subscription tiers and their features
 keywords: subscription, personal, pro, team, business, features
 ---
 
-A Docker subscription allows the use of Docker components including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
+A Docker subscription allows the use of Docker components including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Docker Official Images, and more.
 
 This page provides an overview of each tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
