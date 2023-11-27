@@ -57,7 +57,7 @@ Let's get started!
 You should now have the following contents in your `docker-php-sample`
 directory.
 
-```
+```shell
 ├── docker-php-sample/
 │ ├── .git/
 │ ├── src/

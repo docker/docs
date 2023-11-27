@@ -49,7 +49,7 @@ COPY ./src /var/www/html
 USER www-data
 ```
 
-###  Update the compose.yaml file to add a db and persist data
+### Update the compose.yaml file to add a db and persist data
 
 Open the `compose.yaml` file in an IDE or text editor. You'll notice it
 already contains commented-out instructions for a PostgreSQL database and volume.
@@ -118,7 +118,7 @@ You must create this file as it's not included in the source repository.
 In the `docker-php-sample` directory, create a new directory named `db` and
 inside that directory create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add the following password. The password must be on a single line, with no additional lines in the file.
 
-```
+```shell
 example
 ```
 
@@ -126,7 +126,7 @@ Save and close the `password.txt` file.
 
 You should now have the following in your `docker-php-sample` directory.
 
-```
+```shell
 ├── docker-php-sample/
 │ ├── .git/
 │ ├── db/
