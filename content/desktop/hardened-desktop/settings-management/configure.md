@@ -147,9 +147,9 @@ The following `admin-settings.json` code and table provides an example of the re
 |`analyticsEnabled`|  |If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |
 |`extensionsEnabled`|  |If `value` is set to false, Docker extensions are disabled. |
 |`scout`|| Setting `useBackgroundIndexing` to `false` disables automatic indexing of images loaded to the image store. Setting `sbomIndexing` to `false` prevents the manual indexing triggered by inspecting an image in Docker Desktop.<br><br>**Note**: Users can still use the `docker scout` CLI commands to index images, even if indexing is disabled in Settings Management. |
-| `allowExperimentalFeatures`| If `locked` is set to `true`, users are no longer able to access or use experimental features.|
-| `allowBetaFeatures`| If `locked` is set to `true`, users are no longer able to access or use beta features.|
-| `blockDockerLoad` | If `value` is set to `true`, users are no longer able to run [`docker load`](../../../engine/reference/commandline/load.md).|
+| `allowExperimentalFeatures`| | If `locked` is set to `true`, users are no longer able to access or use experimental features.|
+| `allowBetaFeatures`| | If `locked` is set to `true`, users are no longer able to access or use beta features.|
+| `blockDockerLoad` | | If `value` is set to `true`, users are no longer able to run [`docker load`](../../../engine/reference/commandline/load.md).|
 
 ### Step three: Re-launch Docker Desktop
 >**Note**
