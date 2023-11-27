@@ -8,12 +8,13 @@ Show Docker Scout disk usage
 
 ## Description
 
-Docker Scout stores temporary files to generate SBOMs of images and cache the results to not generate or fetch them again.
+Docker Scout uses a temporary cache storage for generating image SBOMs.
+The cache helps avoid regenerating or fetching resources unnecessarily.
 
-This `docker scout cache df` command will list all the temporary and cached data on the host. Each is identified by the
-digest of the image.
+This `docker scout cache df` command shows the cached data on the host.
+Each cache entry is identified by the digest of the image.
 
-Those data can be deleted using the `docker scout cache prune` command.
+You can use the `docker scout cache prune` command to delete cache data at any time.
 
 ## Examples
 
