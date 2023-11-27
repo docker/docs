@@ -185,22 +185,8 @@ Guides:
     path: /get-started/kube-deploy/
   - title: "Deploy to Swarm"
     path: /get-started/swarm-deploy/
-  - sectiontitle: Cloud integrations
-    section:
-    - path: /cloud/aci-integration/
-      title: Docker and ACI
-    - path: /cloud/aci-container-features/
-      title: ACI container features
-    - path: /cloud/aci-compose-features/
-      title: ACI Compose features
-    - path: /cloud/ecs-integration/
-      title: Docker and ECS
-    - path: /cloud/ecs-architecture/
-      title: Docker ECS integration architecture
-    - path: /cloud/ecs-compose-features/
-      title: ECS Compose features
-    - path: /cloud/ecs-compose-examples/
-      title: ECS Compose examples
+  - title: Cloud integrations
+    path: /cloud/
 - path: /get-started/resources/
   title: "Educational resources"
 
