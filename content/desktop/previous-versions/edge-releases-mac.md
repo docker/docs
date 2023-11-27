@@ -165,7 +165,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ### New
 
 - In partnership with Snyk, Docker Desktop launches vulnerability scanning for Docker local images.
-- Docker ECS plugin has been replaced by [ECS cloud integration](/engine/context/ecs-integration/)
+- Docker ECS plugin has been replaced by ECS cloud integration
 - Docker UI:
   - The Images view now has search and filter options.
   - You can now push an image to Docker Hub using the Remote repositories drop-down menu.
@@ -249,7 +249,7 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ### Upgrades
 
-- Beta release of [Docker ECS integration v1.0.0-beta.1](/engine/context/ecs-integration/)
+- Beta release of Docker ECS integration v1.0.0-beta.1
 - [Docker ACI integration v0.1.7](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.7)
 - [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
 

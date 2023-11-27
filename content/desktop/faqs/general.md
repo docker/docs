@@ -54,9 +54,8 @@ This includes:
 - Setting up [Dev Environments](../dev-environments/index.md)
 - Docker build when using [BuildKit](../../build/buildkit/index.md#getting-started).
   You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
-- Deploying an app to the cloud through Compose
-  [ACI](../../cloud/aci-integration.md) and [ECS](../../cloud/ecs-integration.md)
-  integrations
+- Deploying an app to the cloud through the Docker Compose
+  [ACI and ECS](https://github.com/docker/compose-cli/tree/main/docs) integrations
 - [Kubernetes](../kubernetes.md) (Images are download when you enable Kubernetes for the first time)
 - Check for updates
 - [In-app diagnostics](../troubleshoot/overview.md#diagnose-from-the-app) (including the [Self-diagnose tool](../troubleshoot/overview.md#diagnose-from-the-app))
