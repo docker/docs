@@ -18,11 +18,14 @@ Generate or display SBOM of an image
 
 ## Description
 
-The `docker scout sbom` command analyzes a software artifact to generate the corresponding Software Bill Of Materials (SBOM).
+The `docker scout sbom` command analyzes a software artifact to generate a
+Software Bill Of Materials (SBOM).
 
-The SBOM can be used to list all packages, or the ones from a specific type (as dep, maven, etc).
+The SBOM contains a list of all packages in the image.
+You can use the `--format` flag to filter the output of the command
+to display only packages of a specific type.
 
-If no image is specified, the most recently built image will be used.
+If no image is specified, the most recently built image is used.
 
 The following artifact types are supported:
 
@@ -30,8 +33,6 @@ The following artifact types are supported:
 - OCI layout directories
 - Tarball archives, as created by `docker save`
 - Local directory or file
-
-The tool analyzes the provided software artifact, and generates a vulnerability report.
 
 By default, the tool expects an image reference, such as:
 
@@ -46,7 +47,7 @@ or if you want to control from where the image will be resolved, you must prefix
 - `local://` use an image from the local image store (don't do a registry lookup)
 - `registry://` use an image from a registry (don't use a local image)
 - `oci-dir://` use an OCI layout directory
-- `archive://` use a tarball archive, as created by docker save
+- `archive://` use a tarball archive, as created by `docker save`
 - `fs://` use a local directory or file
 
 ## Examples
@@ -63,13 +64,13 @@ $ docker scout sbom --format list alpine
  $ docker scout sbom --format list --only-package-type apk alpine
 ```
 
-### Display the full SBOM as json
+### Display the full SBOM in JSON format
 
 ```console
 $ docker scout sbom alpine
 ```
 
-### Display the full SBOM of the most recently buitl image
+### Display the full SBOM of the most recently built image
 
 ```console
 $ docker scout sbom

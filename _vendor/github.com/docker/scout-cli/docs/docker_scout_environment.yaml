@@ -2,9 +2,16 @@ command: docker scout environment
 aliases: docker scout environment, docker scout env
 short: Manage environments (experimental)
 long: |-
-    The `docker scout environment` command lists the environments and records images to it.
+    The `docker scout environment` command lists the environments.
+    If you pass an image reference, the image is recorded to the specified environment.
 
-    Once recorded, environments can be referred to by their name, eg. in the `docker scout compare` command using `--to-env`.`
+    Once recorded, environments can be referred to by their name. For example,
+    you can refer to the `production` environment with the `docker scout compare`
+    command as follows:
+
+    ```console
+    $ docker scout compare --to-env production
+    ```
 usage: docker scout environment [ENVIRONMENT] [IMAGE]
 pname: docker scout
 plink: docker_scout.yaml
@@ -42,6 +49,16 @@ inherited_options:
       value_type: bool
       default_value: "false"
       description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
       deprecated: false
       hidden: true
       experimental: false

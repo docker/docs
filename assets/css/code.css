@@ -23,7 +23,7 @@
   padding: 0 4px;
 }
 
-.chroma {
+.highlight {
   /* LineTableTD */
   .lntd {
     vertical-align: top;
@@ -33,12 +33,20 @@
   }
   /* LineTable */
   .lntable {
+    display: table;
+    width: 100%;
     border-spacing: 0;
     padding: 0;
     margin: 0;
     border: 0;
+    /* LineNumberColumnHighlight */
+    .lntd:first-child .hl {
+      display: block;
+    }
   }
-  @at-root .light {
+
+  /* LightTheme */
+  .light & {
     /* Other */
     .x {
       color: #000000;
@@ -52,7 +60,12 @@
     }
     /* LineHighlight */
     .hl {
-      background-color: #ffffcc;
+      background-color: #e5f2fc;
+    }
+    .lntd:first-child .hl,
+    & > .chroma > code > .hl {
+      margin-left: -4px;
+      border-left: 4px solid #c0e0fa;
     }
     /* LineNumbersTable */
     .lnt {
@@ -407,7 +420,7 @@
     }
   }
 
-  @at-root .dark {
+  .dark & {
     /* Other */
     .x {
     }
@@ -419,7 +432,12 @@
     }
     /* LineHighlight */
     .hl {
-      background-color: #ffffcc;
+      background-color: theme('colors.gray.dark.300');
+    }
+    .lntd:first-child .hl,
+    & > .chroma > code > .hl {
+      margin-left: -4px;
+      border-left: 4px solid theme('colors.gray.dark.400');
     }
     /* LineNumbersTable */
     .lnt {
