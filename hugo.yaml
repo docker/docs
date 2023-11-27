@@ -279,19 +279,6 @@ module:
         - source: docs/reference/commandline/dockerd.md
           target: content/engine/reference/commandline/dockerd.md
 
-    - path: github.com/docker/compose-cli
-      mounts:
-        - source: docs/aci-compose-features.md
-          target: content/cloud/aci-compose-features.md
-        - source: docs/aci-container-features.md
-          target: content/cloud/aci-container-features.md
-        - source: docs/ecs-architecture.md
-          target: content/cloud/ecs-architecture.md
-        - source: docs/ecs-compose-examples.md
-          target: content/cloud/ecs-compose-examples.md
-        - source: docs/ecs-compose-features.md
-          target: content/cloud/ecs-compose-features.md
-
     - path: github.com/compose-spec/compose-spec
       mounts:
       - source: 01-status.md
