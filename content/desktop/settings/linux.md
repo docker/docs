@@ -18,10 +18,13 @@ You can also locate the `settings.json` file at `~/.docker/desktop/settings.json
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
-- **Start Docker Desktop when you log in**. Select to automatically start Docker
+- **Start Docker Desktop when you sign in**. Select to automatically start Docker
   Desktop when you sign in to your machine.
 
-- **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
+- **Open Docker Dashboard when Docker Desktop starts**. Select to automatically open the
+  dashboard when starting Docker Desktop.
+
+- **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
 
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
 If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
@@ -33,9 +36,6 @@ If you choose the integrated terminal, you can run commands in a running contain
 
 - **Show weekly tips**. Select to display useful advice and suggestions about
   using Docker.
-
-- **Open Docker Desktop dashboard at startup**. Select to automatically open the
-  dashboard when starting Docker Desktop.
 
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
     >**Note**
