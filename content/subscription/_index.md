@@ -32,15 +32,7 @@ aliases:
 - /docker-hub/billing/faq/
 ---
 
-A Docker subscription allows the use of Docker components including:
-
-- Docker Desktop
-- Docker Engine
-- Docker CLI
-- Docker Compose
-- Docker Hub
-
-and more.
+A Docker subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.
 
 Use the resources here to decide what subscription you need, manage an existing subscription, or explore additional products like Docker Scout.
 

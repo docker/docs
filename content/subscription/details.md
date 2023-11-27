@@ -4,13 +4,11 @@ description: Learn about Docker subscription tiers and their features
 keywords: subscription, personal, pro, team, business, features
 ---
 
-A Docker subscription allows the use of Docker components including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Docker Official Images, and more.
-
 This page provides an overview of each tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Personal
 
-Docker Personal (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses.
+Docker Personal (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses, and includes the free use of Docker components including Docker Desktop and Docker Hub.
 Docker Personal includes:
 
 - Unlimited public repositories
@@ -37,7 +35,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 ## Docker Team
 
-**Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
+**Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities. A Docker Team subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.
 
 Docker Team includes:
 - Everything included in Docker Pro
@@ -52,7 +50,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 ## Docker Business
 
-**Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and speed up their secure software supply chain initiatives.
+**Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and speed up their secure software supply chain initiatives. A Docker Business subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.
 
 Docker Business includes:
 - Everything included in Docker Team
