@@ -4,12 +4,12 @@ keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows, Marketplace, m
 title: Configure a private marketplace for extensions
 ---
 
-> **Beta**
+> **Experimental**
 >
-> Docker Extensions` private marketplace is in [beta](../../release-lifecycle#beta).
+> Docker Extensions` private marketplace is currently [experimental](../../release-lifecycle#experimental).
 >
 > It's available to Docker Business customers only.
-{ .experimental }
+{ .restricted }
 
 Learn how to configure and set up a private marketplace with a curated list of extensions for your Docker Desktop users.
 
