@@ -1,16 +1,10 @@
 ---
-description: 'Integrate JFrog Artifactory and JFrog Container Registry with Docker
-  Scout
-
-  '
-keywords: 'docker scout, jfrog, artifactory, jcr, integration, image analysis, security,
-  cves
-
-  '
+description: Integrate JFrog Artifactory and JFrog Container Registry with Docker Scout
+keywords: docker scout, jfrog, artifactory, jcr, integration, image analysis, security, cves
 title: Artifactory integration
+aliases:
+  - /scout/artifactory/
 ---
-
-{{< include "scout-early-access.md" >}}
 
 Integrating Docker Scout with JFrog Artifactory lets you run image analysis
 automatically on images in Artifactory registries.

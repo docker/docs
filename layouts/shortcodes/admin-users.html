@@ -4,20 +4,36 @@
 {{ $remove_button := "**Remove member**" }}
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
 {{ $update_role := "Select the role you want to assign, then select **Save**." }}
-{{ $role_mapping_link := "[SCIM for role mapping](docker-hub/scim.md#set-up-role-mapping)" }}
+{{ $role_mapping_link := "[SCIM for role mapping](/security/for-admins/scim/)" }}
+{{ $export_fields := `The CSV file for an organization contains the following fields:
+* **Name**: The user's name.
+* **Username**: The user's Docker ID.
+* **Email**: The user's email address.
+* **Type**: The type of user. For example, **Invitee** for users who have not accepted the organization's invite,
+  or **User** for users who are members of the organization.
+* **Role**: The user's role in the organization. For example, **Member** or **Owner**.
+* **Teams**: The teams where the user is a member. A team is not listed for invitees.
+* **Date Joined**: The time and date when the user was invited to the organization.` }}
 
 {{ if eq (.Get "product") "admin" }}
 {{ $invite_button = "**Invite**" }}
 {{ $export_button = "the **Action** icon and then select **Export users as CSV**" }}
-{{ $member_navigation := "Select your organization in the left navigation drop-down menu, and then select *Members**." }}
+{{ $member_navigation = "Select your organization in the left navigation drop-down menu, and then select **Members**." }}
 {{ $remove_button = "**Remove member**" }}
 {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
-{{ $role_mapping_link = "[SCIM for role mapping](admin/organization/security-settings/scim.md#set-up-role-mapping)" }}
+{{ $role_mapping_link = "[SCIM for role mapping](/security/for-admins/scim/)" }}
 {{ if eq (.Get "layer") "company" }}
+{{ $export_fields = `The CSV file for a company contains the following fields:
+* **Name**: The user's name.
+* **Username**: The user's Docker ID.
+* **Email**: The user's email address.
+* **Member of Organizations**: All organizations the user is a member of within a company.
+* **Invited to Organizations**: All organizations the user is an invitee of within a company.
+* **Account Created**: The time and date when the user account was created.` }}
 {{ $member_navigation = "Select your company in the left navigation drop-down menu, and then select **Users**." }}
 {{ $remove_button = "**Remove user**" }}
 {{ $update_role = "Select their organization, select the role you want to assign, and then select **Save**." }}
-{{ $role_mapping_link = "[SCIM for role mapping](admin/company/settings/scim.md#set-up-role-mapping)"}}
+{{ $role_mapping_link = "[SCIM for role mapping](/security/for-admins/scim/)"}}
 {{ end }}
 {{ end }}
 
@@ -43,7 +59,7 @@ of members to your organization via CSV file, see the next section.
    > **Note**
    >
    > When you invite members, you assign them a role.
-   > See [Roles and permissions](/docker-hub/roles-and-permissions/)
+   > See [Roles and permissions](/security/for-admins/roles-and-permissions/)
    > for details about the access permissions for each role.
 
    Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept
@@ -107,7 +123,7 @@ To invite multiple members to an organization via a CSV file containing email ad
    > **Note**
    >
    > When you invite members, you assign them a role.
-   > See [Roles and permissions](/docker-hub/roles-and-permissions/)
+   > See [Roles and permissions](/security/for-admins/roles-and-permissions/)
    > for details about the access permissions for each role.
 
 Pending invitations appear in the table. The invitees receive an email with a link to Docker Hub where they can accept
@@ -133,7 +149,7 @@ To remove a member from an organization:
 
 ## Update a member role
 
-Organization owners can manage [roles](/docker-hub/roles-and-permissions/)
+Organization owners can manage [roles](/security/for-admins/roles-and-permissions/)
 within an organization. If an organization is part of a company,
 the company owner can also manage that organization's roles. If you have SSO enabled, you can use {{ $role_mapping_link }}.
 
@@ -153,19 +169,7 @@ To update a member role:
 ## Export members
 
 Owners can export a CSV file containing all members.
-The CSV file may contain the following fields:
-
-* **Name**: The user's name.
-* **Username**: The user's Docker ID.
-* **Email**: The user's email address.
-* **Type**: The type of user. For example, **Invitee** for users who have not accepted the organization's invite,
-  or **User** for users who are members of the organization.
-* **Permission**: The user's organization permissions. For example, **Member** or **Owner**.
-* **Teams**: The teams where the user is a member. A team is not listed for invitees.
-* **Date Joined**: The time and date when the user was invited to the organization.
-* **Member of Organizations**: All organizations the user is a member of within a company.
-* **Invited to Organizations**: All organizations the user is an invitee of within a company.
-* **Account Created**: The time and date when the user account was created.
+{{ $export_fields }}
 
 To export a CSV file of the members:
 

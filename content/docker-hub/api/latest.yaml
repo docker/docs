@@ -43,11 +43,11 @@ tags:
 
       The `X-Retry-After` header is a unix timestamp of when you can call the API again.
 
-      *Note: These rate limits are separate from anti-abuse and Docker Hub
+      **Note**: These rate limits are separate from anti-abuse and Docker Hub
 
       download, or pull rate limiting. To learn more about Docker Hub pull rate
 
-      limiting, see [Docker Hub download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).*
+      limiting, see [Docker Hub download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).
   - name: authentication
     x-displayName: Authentication
     description: |
@@ -55,14 +55,14 @@ tags:
       Docker credentials before using them.
 
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending 
-      on your plan (Free, Pro, or Team) and your account's permissions.
+      on your plan (Personal, Pro, or Team) and your account's permissions.
 
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
   - name: access-tokens
     x-displayName: Personal Access Tokens
     description: |
       The Personal Access Token endpoints lets you manage personal access tokens. For more 
-      information, see [Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
+      information, see [Access Tokens](https://docs.docker.com/security/for-developers/access-tokens/).
 
       You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) 
       or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer 
@@ -83,14 +83,17 @@ tags:
       The Advanced Image Management API endpoints allow you to manage Docker
       images across all repositories.
 
-      For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/).
+      **<span style="color: red;">Deprecated</span>**: Advanced Image
+      Management is deprecated, and scheduled for removal on December 11th, 2023.
+
+      For more information, see [Deprecation of Advanced Image Management](https://github.com/docker/roadmap/issues/534).
   - name: audit-logs
     x-displayName: Audit Logs
     description: |
       The Audit Logs API endpoints allow you to query audit log events across a
       namespace.
 
-      For more information, see [Audit Log](https://docs.docker.com/docker-hub/audit-log/)
+      For more information, see [Audit Log](https://docs.docker.com/docker-hub/audit-log/).
   - name: org-settings
     x-displayName: Org Settings
     description: |
@@ -99,13 +102,13 @@ tags:
   - name: repositories
     x-displayName: Repositories
     description: |
-      The repository endpoints allow you to manage your repository's
-      configuration like description.
+      The repository endpoints allow you to access your repository's
+      tags.
   - name: scim
     x-displayName: SCIM
     description: |
       SCIM is a provisioning system that lets you manage users within your identity provider (IdP).
-      For more information, see [System for Cross-domain Identity management](https://docs.docker.com/docker-hub/scim/).
+      For more information, see [System for Cross-domain Identity management](https://docs.docker.com/security/for-admins/scim/).
 x-tagGroups:
   - name: General
     tags:
@@ -158,10 +161,10 @@ paths:
     post:
       tags:
         - authentication
-      summary: Second factor authentication.
+      summary: Second factor authentication
       operationId: PostUsers2FALogin
       description: |
-        When user has 2FA enabled, this is the second call to perform after
+        When a user has two-factor authentication (2FA) enabled, this is the second call to perform after
         `/v2/users/login` call.
 
         Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
@@ -307,6 +310,7 @@ paths:
           $ref: "#/components/responses/NotFound"
   /v2/namespaces/{namespace}/repositories/{repository}/images-summary:
     get:
+      deprecated: true
       tags:
         - images
       summary: Get summary of repository's images
@@ -353,6 +357,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
   /v2/namespaces/{namespace}/repositories/{repository}/images:
     get:
+      deprecated: true
       tags:
         - images
       summary: Get details of repository's images
@@ -446,6 +451,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
   /v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags:
     get:
+      deprecated: true
       tags:
         - images
       summary: Get image's tags
@@ -503,6 +509,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
   /v2/namespaces/{namespace}/delete-images:
     post:
+      deprecated: true
       tags:
         - images
       summary: Delete images
@@ -552,7 +559,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
   /v2/auditlogs/{account}:
     get:
-      summary: Returns list of audit log  events.
+      summary: Returns list of audit log events
       description: Get audit log events for a given namespace.
       operationId: AuditLogs_GetAuditLogs
       responses:
@@ -665,7 +672,7 @@ paths:
         - audit-logs
   /v2/auditlogs/{account}/actions:
     get:
-      summary: Returns list of audit log actions.
+      summary: Returns list of audit log actions
       description:
         Get audit log actions for a namespace to be used as a filter for
         querying audit events.
@@ -982,7 +989,7 @@ paths:
         and `count` query parameters to receive paginated results.
 
         **Sorting:**<br>
-        Sorting lets you to specify the order of returned resources by specifying
+        Sorting lets you specify the order of returned resources by specifying
         a combination of `sortBy` and `sortOrder` query parameters.
 
         The `sortBy` parameter specifies the attribute whose value will be used

@@ -1,8 +1,9 @@
 command: docker buildx imagetools
 short: Commands to work on images in registry
 long: |-
-    Imagetools contains commands for working with manifest lists in the registry.
-    These commands are useful for inspecting multi-platform build results.
+    The `imagetools` commands contains subcommands for working with manifest lists
+    in container registries. These commands are useful for inspecting manifests
+    to check multi-platform configuration and attestations.
 pname: docker buildx
 plink: docker_buildx.yaml
 cname:

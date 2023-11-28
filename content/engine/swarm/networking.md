@@ -227,7 +227,7 @@ If you need more than 256 IP addresses, do not increase the IP block size. You c
 endpoint mode with an external load balancer, or use multiple smaller overlay networks. See 
 [Configure service discovery](#configure-service-discovery) for more information about different endpoint modes.
 
-#### Configure encryption of application data
+#### Configure encryption of application data {#encryption}
 
 Management and control plane data related to a swarm is always encrypted.
 For more details about the encryption mechanisms, see the
@@ -239,6 +239,11 @@ network create`. This enables IPSEC encryption at the level of the vxlan. This
 encryption imposes a non-negligible performance penalty, so you should test this
 option before using it in production.
 
+> **Note**
+>
+> You must [customize the automatically created ingress](#customize-ingress)
+> to enable encryption. By default, all ingress traffic is unencrypted, as encryption
+> is a network-level option.
 
 ## Attach a service to an overlay network
 
@@ -294,12 +299,13 @@ round robin (DNSRR). You can configure this per service.
   `--endpoint-mode dnsrr` when creating a new service or updating an existing
   one.
 
-## Customize the ingress network
+## Customize the ingress network {#customize-ingress}
 
 Most users never need to configure the `ingress` network, but Docker allows you
 to do so. This can be useful if the automatically-chosen subnet
 conflicts with one that already exists on your network, or you need to customize
-other low-level network settings such as the MTU.
+other low-level network settings such as the MTU, or if you want to
+[enable encryption](#encryption).
 
 Customizing the `ingress` network involves removing and recreating it. This is
 usually done before you create any services in the swarm. If you have existing

@@ -7,8 +7,6 @@ aliases:
 - /scout/ci/
 ---
 
-{{< include "scout-early-access.md" >}}
-
 You can analyze Docker images in continuous integration pipelines as you build
 them using a GitHub action or the Docker Scout CLI plugin.
 
@@ -19,3 +17,7 @@ Available integrations:
 - [Microsoft Azure DevOps Pipelines](azure.md)
 - [Circle CI](circle-ci.md)
 - [Jenkins](jenkins.md)
+
+You can also add runtime integration as part of your CI/CD pipeline, which lets
+you assign an image to an environment, such as `production` or `staging`, when
+you deploy it. For more information, see [Environment monitoring](../environment/_index.md).

@@ -15,14 +15,14 @@ Settings Management is designed specifically for organizations who don’t give 
 ### Prerequisites
 
 - [Download and install Docker Desktop 4.13.0 or later](../../release-notes.md).
-- As an admin, you need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+- As an admin, you need to [configure a registry.json to enforce sign-in](../../../security/for-admins/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 ### Step one: Create the `admin-settings.json` file and save it in the correct location
 
 You can either use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
 
 To set it up manually:
-1. Create a new, empty JSON file and name it `admin-settings`.
+1. Create a new, empty JSON file and name it `admin-settings.json`.
 2. Save the `admin-settings.json` file on your developers' machines in the following locations:
 
     - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
@@ -108,6 +108,11 @@ The following `admin-settings.json` code and table provides an example of the re
   "extensionsEnabled": {
     "value": false,
     "locked": true
+  },
+  "scout": {
+    "locked": false,
+    "sbomIndexing": true,
+    "useBackgroundIndexing": true
   }
 }
 ```
@@ -129,6 +134,7 @@ The following `admin-settings.json` code and table provides an example of the re
 |`disableUpdate`|  |If `value` is set to true, checking for and notifications about Docker Desktop updates is disabled.|
 |`analyticsEnabled`|  |If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |
 |`extensionsEnabled`|  |If `value` is set to false, Docker extensions are disabled. |
+|`scout`|| Setting `useBackgroundIndexing` to `false` disables automatic indexing of images loaded to the image store. Setting `sbomIndexing` to `false` prevents the manual indexing triggered by inspecting an image in Docker Desktop.<br><br>**Note**: Users can still use the `docker scout` CLI commands to index images, even if indexing is disabled in Settings Management. |
 
 ### Step three: Re-launch Docker Desktop
 >**Note**

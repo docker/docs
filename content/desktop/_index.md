@@ -18,7 +18,7 @@ grid:
   icon: download
 - title: Explore Docker Desktop
   description: Navigate Docker Desktop and learn about its key features.
-  icon: explore
+  icon: feature_search
   link: /desktop/use-desktop
 - title: View the release notes
   description: Find out about new features, improvements, and bug fixes.
@@ -31,7 +31,7 @@ grid:
 - title: Find additional resources
   description: Find information on networking features, deploying on Kubernetes, and
     more.
-  icon: all_inbox
+  icon: category
   link: /desktop/kubernetes
 - title: Give feedback
   description: Provide feedback on Docker Desktop or Docker Desktop features.
@@ -48,7 +48,7 @@ aliases:
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
 that lets you to build, share, and run containerized applications and microservices. 
 
-It provides a straightforward GUI (Graphical User Interface) that lets you manage your containers, applications, and images directly from your machine. Docker Desktop can be used either on its own or as a complementary tool to the CLI. 
+It provides a straightforward GUI (Graphical User Interface) that lets you manage your containers, applications, and images directly from your machine. You can use Docker Desktop either on its own or as a complementary tool to the CLI. 
 
 Docker Desktop reduces the time spent on complex setups so you can focus on writing code. It takes care of port mappings, file system concerns, and other default settings, and is regularly updated with bug fixes and security updates.
 
@@ -58,6 +58,7 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 
 - [Docker Engine](../engine/index.md)
 - Docker CLI client
+- [Docker Scout](../scout/_index.md) (additional subscription may apply)
 - [Docker Buildx](../build/index.md)
 - [Docker Extensions](extensions/index.md)
 - [Docker Compose](../compose/index.md)

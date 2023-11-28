@@ -1,22 +1,19 @@
 ---
-description: Containerize Node.js apps using Docker
-keywords: Docker, getting started, node, node.js, language
-title: What will you learn in this module?
+description: Containerize and develop Node.js apps using Docker
+keywords: getting started, node, node.js
+title: Node.js language-specific guide
 toc_min: 1
 toc_max: 2
 ---
 
-The Node.js getting started guide teaches you how to create a containerized Node.js application using Docker. In this guide, you’ll learn how to:
+The Node.js language-specific guide teaches you how to containerize a Node.js application using Docker. In this guide, you’ll learn how to:
 
-* Create a simple Node.js application
-* Create a new Dockerfile which contains instructions required to build a Node.js image
-* Run the newly built image as a container
-* Set up a local development environment to connect a database to the container
-* Use Docker Compose to run the Node.js application
-* Configure a CI/CD pipeline for your application using GitHub Actions.
+* Containerize and run a Node.js application
+* Set up a local environment to develop a Node.js application using containers
+* Run tests for a Node.js application using containers
+* Configure a CI/CD pipeline for a containerized Node.js application using GitHub Actions
+* Deploy your containerized Node.js application locally to Kubernetes to test and debug your deployment
 
-After completing the Node.js getting started modules, you should be able to containerize your own Node.js application based on the examples and instructions provided in this guide.
+Start by containerizing an existing Node.js application.
 
-Let's get started!
-
-{{< button text="Build your Node.js image" url="build-images.md" >}}
+{{< button text="Containerize a Node.js app" url="containerize.md" >}}

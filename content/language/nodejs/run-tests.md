@@ -1,325 +1,174 @@
 ---
-title: Run your Tests using Node.js and Mocha frameworks
-keywords: Node.js, build, Mocha, test
-description: How to Build and Run your Tests using Node.js and Mocha frameworks
+title: Run Node.js tests in a container
+keywords: node.js, node, test
+description: Learn how to run your Node.js tests in a container.
 ---
 
 ## Prerequisites
 
-Work through the steps to build an image and run it as a containerized application in [Use your container for development](develop.md).
+Complete all the previous sections of this guide, starting with [Containerize a Node.js application](containerize.md).
 
-## Introduction
+## Overview
 
-Testing is an essential part of modern software development. Testing can mean a lot of things to different development teams. There are unit tests, integration tests and end-to-end testing. In this guide we take a look at running your unit tests in Docker.
+Testing is an essential part of modern software development. Testing can mean a
+lot of things to different development teams. There are unit tests, integration
+tests and end-to-end testing. In this guide you take a look at running your unit
+tests in Docker when developing and when building.
 
-## Create a test
+## Run tests when developing locally
 
-Let's define a Mocha test in a `./test` directory within our application.
+The sample application already has the Jest package for running tests and has tests inside the `spec` directory. When developing locally, you can use Compose to run your tests.
 
-```console
-$ mkdir -p test
-```
-
-Save the following code in `./test/test.js`.
-
-```javascript
-var assert = require('assert');
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal([1, 2, 3].indexOf(4), -1);
-    });
-  });
-});
-```
-
-### Running locally and testing the application
-
-Let’s build our Docker image and confirm everything is running properly. Run the following command to build and run your Docker image in a container.
+Run the following command to run the test script from the `package.json` file inside a container.
 
 ```console
-$ docker compose -f docker-compose.dev.yml up --build
+$ docker compose run server npm run test
 ```
 
-Now let’s test our application by POSTing a JSON payload and then make an HTTP GET request to make sure our JSON was saved correctly.
+To learn more about the command, see [docker compose run](/engine/reference/commandline/compose_run/).
+
+You should see output like the following.
 
 ```console
-$ curl --request POST \
-  --url http://localhost:8000/test \
-  --header 'content-type: application/json' \
-  --data '{"msg": "testing"}'
+> docker-nodejs@1.0.0 test
+> jest
+
+ PASS  spec/routes/deleteItem.spec.js
+ PASS  spec/routes/getItems.spec.js
+ PASS  spec/routes/addItem.spec.js
+ PASS  spec/routes/updateItem.spec.js
+ PASS  spec/persistence/sqlite.spec.js
+  ● Console
+
+    console.log
+      Using sqlite database at /tmp/todo.db
+
+      at Database.log (src/persistence/sqlite.js:18:25)
+
+    console.log
+      Using sqlite database at /tmp/todo.db
+
+      at Database.log (src/persistence/sqlite.js:18:25)
+
+    console.log
+      Using sqlite database at /tmp/todo.db
+
+      at Database.log (src/persistence/sqlite.js:18:25)
+
+    console.log
+      Using sqlite database at /tmp/todo.db
+
+      at Database.log (src/persistence/sqlite.js:18:25)
+
+    console.log
+      Using sqlite database at /tmp/todo.db
+
+      at Database.log (src/persistence/sqlite.js:18:25)
+
+
+Test Suites: 5 passed, 5 total
+Tests:       9 passed, 9 total
+Snapshots:   0 total
+Time:        2.008 s
+Ran all test suites.
 ```
 
-Now, perform a GET request to the same endpoint to make sure our JSON payload was saved and retrieved correctly. The “id” and “createDate” will be different for you.
+## Run tests when building
 
-```console
-$ curl http://localhost:8000/test
+To run your tests when building, you need to update your Dockerfile to add a new test stage.
 
-{"code":"success","payload":[{"msg":"testing","id":"e88acedb-203d-4a7d-8269-1df6c1377512","createDate":"2020-10-11T23:21:16.378Z"}]}
-```
-
-## Install Mocha
-
-Run the following command to install Mocha and add it to the developer dependencies:
-
-```console
-$ npm install --save-dev mocha
-```
-
-## Update package.json and Dockerfile to run tests
-
-Okay, now that we know our application is running properly, let’s try and run our tests inside of the container. We’ll use the same docker run command we used above but this time, we’ll override the CMD that is inside of our container with npm run test. This will invoke the command that is in the package.json file under the “script” section. See below.
-
-```javascript
-{
-...
-  "scripts": {
-    "test": "mocha ./**/*.js",
-    "start": "nodemon --inspect=0.0.0.0:9229 -L server.js"
-  },
-...
-}
-```
-
-Below is the Docker command to start the container and run tests:
-
-```console
-$ docker compose -f docker-compose.dev.yml run notes npm run test
-```
-
-When you run the tests, you should get an error like the following:
-
-```console
-> mocha ./**/*.js
-
-sh: mocha: not found
-```
-
-The current Dockerfile does not install dev dependencies in the image, so mocha cannot be found. To fix this, you can update the Dockerfile to install the dev dependencies.
+The following is the updated Dockerfile.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM node:18-alpine
-ENV NODE_ENV=production
+ARG NODE_VERSION=18.0.0
 
-WORKDIR /app
+FROM node:${NODE_VERSION}-alpine as base
+WORKDIR /usr/src/app
+EXPOSE 3000
 
-COPY ["package.json", "package-lock.json*", "./"]
-
-RUN npm install --include=dev
-
+FROM base as dev
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --include=dev
+USER node
 COPY . .
-
-CMD ["node", "server.js"]
-```
-
-Run the command again, and this time rebuild the image to use the new Dockerfile.
-
-```console
-$ docker compose -f docker-compose.dev.yml run --build notes npm run test
-```
-
-When you run the tests this time, you should get the following output:
-
-```console
-> mocha ./**/*.js
-
-  Array
-    #indexOf()
-      ✔ should return -1 when the value is not present
-
-  1 passing (6ms)
-```
-
-This image with dev dependencies installed is not suitable for a production image. Rather than creating multiple Dockerfiles, we can create a multi-stage Dockerfile to create an image for testing and an image for production.
-
-### Multi-stage Dockerfile for testing
-
-In addition to running the tests on command, we can run them when we build our image, using a multi-stage Dockerfile. The following Dockerfile will run our tests and build our production image.
-
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM node:18-alpine as base
-
-WORKDIR /code
-
-COPY package.json package.json
-COPY package-lock.json package-lock.json
-
-FROM base as test
-RUN npm ci
-COPY . .
-CMD ["npm", "run", "test"]
+CMD npm run dev
 
 FROM base as prod
-RUN npm ci --production
+ENV NODE_ENV production
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --omit=dev
+USER node
 COPY . .
-CMD ["node", "server.js"]
-```
-
-We first add a label `as base` to the `FROM node:18-alpine` statement. This allows us to refer to this build stage in other build stages. Next we add a new build stage labeled test. We will use this stage for running our tests.
-
-Now let’s rebuild our image and run our tests. We will run the same docker build command as above but this time we will add the `--target test` flag so that we specifically run the test build stage.
-
-```console
-$ docker build -t node-docker --target test .
-[+] Building 66.5s (12/12) FINISHED
- => [internal] load build definition from Dockerfile                                                                                                                 0.0s
- => => transferring dockerfile: 662B                                                                                                                                 0.0s
- => [internal] load .dockerignore
- ...
-  => [internal] load build context                                                                                                                                    4.2s
- => => transferring context: 9.00MB                                                                                                                                  4.1s
- => [base 2/4] WORKDIR /code                                                                                                                                         0.2s
- => [base 3/4] COPY package.json package.json                                                                                                                        0.0s
- => [base 4/4] COPY package-lock.json package-lock.json                                                                                                              0.0s
- => [test 1/2] RUN npm ci                                                                                                                                            6.5s
- => [test 2/2] COPY . .
-```
-
-Now that our test image is built, we can run it in a container and see if our tests pass.
-
-```console
-$ docker run -it --rm -p 8000:8000 node-docker
-
-> node-docker@1.0.0 test /code
-> mocha ./**/*.js
-
-
-
-  Array
-    #indexOf()
-      ✓ should return -1 when the value is not present
-
-
-  1 passing (12ms)
-
-```
-
-I’ve truncated the build output but you can see that the Mocha test runner completed and all our tests passed.
-
-This is great but at the moment we have to run two docker commands to build and run our tests. We can improve this slightly by using a RUN statement instead of the CMD statement in the test stage. The CMD statement is not executed during the building of the image but is executed when you run the image in a container. While with the RUN statement, our tests will be run during the building of the image and stop the build when they fail.
-
-Update your Dockerfile with the highlighted line below.
-
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM node:18-alpine as base
-
-WORKDIR /code
-
-COPY package.json package.json
-COPY package-lock.json package-lock.json
+CMD node src/index.js
 
 FROM base as test
-RUN npm ci
+ENV NODE_ENV test
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --include=dev
+USER node
 COPY . .
 RUN npm run test
-
-FROM base as prod
-RUN npm ci --production
-COPY . .
-CMD ["node", "server.js"]
 ```
 
-Now to run our tests, we just need to run the docker build command as above.
+Instead of using `CMD` in the test stage, use `RUN` to run the tests. The reason is that the `CMD` instruction runs when the container runs, and the `RUN` instruction runs when the image is being built and the build will fail if the tests fail.
+
+Run the following command to build a new image using the test stage as the target and view the test results. Include `--progress=plain` to view the build output, `--no-cache` to ensure the tests always run, and `--target test` to target the test stage.
 
 ```console
-$ docker build -t node-docker --target test .
-[+] Building 8.9s (13/13) FINISHED
- => [internal] load build definition from Dockerfile      0.0s
- => => transferring dockerfile: 650B                      0.0s
- => [internal] load .dockerignore                         0.0s
- => => transferring context: 2B
-
-> node-docker@1.0.0 test /code
-> mocha ./**/*.js
-
-
-
-  Array
-    #indexOf()
-      ✓ should return -1 when the value is not present
-
-
-  1 passing (9ms)
-
-Removing intermediate container beadc36b293a
- ---> 445b80e59acd
-Successfully built 445b80e59acd
-Successfully tagged node-docker:latest
- ```
-
-I’ve truncated the output again for simplicity but you can see that our tests are run and passed. Let’s break one of the tests and observe the output when our tests fail.
-
-Open the test/test.js file and change line 5 as follows.
-
-```shell
-     1	var assert = require('assert');
-     2	describe('Array', function() {
-     3	  describe('#indexOf()', function() {
-     4	    it('should return -1 when the value is not present', function() {
-     5	      assert.equal([1, 2, 3].indexOf(3), -1);
-     6	    });
-     7	  });
-     8	});
+$ docker build -t node-docker-image-test --progress=plain --no-cache --target test .
 ```
 
-Now, run the same docker build command from above and observe that the build fails and the failing testing information is printed to the console.
+To learn more about building and running tests, see the [Build with Docker guide](../../build/guide/_index.md).
+
+You should see output containing the following.
 
 ```console
-$ docker build -t node-docker --target test .
-Sending build context to Docker daemon  22.35MB
-Step 1/8 : FROM node:18-alpine as base
- ---> 995ff80c793e
 ...
-Step 8/8 : RUN npm run test
- ---> Running in b96d114a336b
 
-> node-docker@1.0.0 test /code
-> mocha ./**/*.js
+#11 [test 3/3] RUN npm run test
+#11 1.058
+#11 1.058 > docker-nodejs@1.0.0 test
+#11 1.058 > jest
+#11 1.058
+#11 3.765 PASS spec/routes/getItems.spec.js
+#11 3.767 PASS spec/routes/deleteItem.spec.js
+#11 3.783 PASS spec/routes/updateItem.spec.js
+#11 3.806 PASS spec/routes/addItem.spec.js
+#11 4.179 PASS spec/persistence/sqlite.spec.js
+#11 4.207
+#11 4.208 Test Suites: 5 passed, 5 total
+#11 4.208 Tests:       9 passed, 9 total
+#11 4.208 Snapshots:   0 total
+#11 4.208 Time:        2.168 s
+#11 4.208 Ran all test suites.
+#11 4.265 npm notice
+#11 4.265 npm notice New major version of npm available! 8.6.0 -> 9.8.1
+#11 4.265 npm notice Changelog: <https://github.com/npm/cli/releases/tag/v9.8.1>
+#11 4.265 npm notice Run `npm install -g npm@9.8.1` to update!
+#11 4.266 npm notice
+#11 DONE 4.3s
 
-
-
-  Array
-    #indexOf()
-      1) should return -1 when the value is not present
-
-
-  0 passing (12ms)
-  1 failing
-
-  1) Array
-       #indexOf()
-         should return -1 when the value is not present:
-
-      AssertionError [ERR_ASSERTION]: 2 == -1
-      + expected - actual
-
-      -2
-      +-1
-      
-      at Context.<anonymous> (test/test.js:5:14)
-      at processImmediate (internal/timers.js:461:21)
-
-
-
-npm ERR! code ELIFECYCLE
-npm ERR! errno 1
-npm ERR! node-docker@1.0.0 test: `mocha ./**/*.js`
-npm ERR! Exit status 1
 ...
 ```
+
+## Summary
+
+In this section, you learned how to run tests when developing locally using Compose and how to run tests when building your image.
+
+Related information:
+ - [docker compose run](/engine/reference/commandline/compose_run/)
+ - [Build with Docker guide](../../build/guide/index.md)
 
 ## Next steps
 
-In this module, we took a look at running tests as part of our Docker image build process.
-
-In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
+Next, you’ll learn how to set up a CI/CD pipeline using GitHub Actions.
 
 {{< button text="Configure CI/CD" url="configure-ci-cd.md" >}}
-
-## Feedback
-
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Node.js%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

@@ -4,32 +4,27 @@ description: Discover how to view your billing history in Docker Hub
 keywords: payments, billing, subscription, invoices
 ---
 
-You can view the billing history and download past invoices for a personal account or organization at any time.
+You can view the billing history and download past invoices for a personal account or organization.
 
 ## Personal account
 
-1. Select **Your Account** in the top-right corner of Docker Hub.
+1. Select your username in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
-3. Select the **Payment Methods** tab and then **Billing History**.
-    This page lists past invoices. 
+3. Select the **Payment methods and billing history** link.
+    You can find your past invoices in the **Invoice History** section.
 
-From here you can choose to:
-- Download an invoice.
-- Update an invoice with recently [updated billing information](details.md) by selecting the menu icon and then **Update Invoice**. 
+From here you can download an invoice.
 
-
-
-## Organization 
+## Organization
 
 > **Note**
 >
 > You must be an owner of the organization to view the billing history. 
 
-1. In Docker Hub, select **Organizations**.
-2. Select the organization that you want to change the payment method for. 
-3. Select the **Payment Methods** tab and then **Billing History**.
-    This page lists past invoices. 
+1. Select your username in the top-right corner of Docker Hub.
+2. From the drop-down menu select **Billing**.
+3. Select the organization that you want to change the payment method for. 
+4. Select the **Payment methods and billing history** link.
+    You can find your past invoices in the **Invoice History** section.
 
-From here you can choose to:
-- Download an invoice.
-- Update an invoice with recently [updated billing information](details.md) by selecting the menu icon and then **Update Invoice**.
+From here you can download an invoice.

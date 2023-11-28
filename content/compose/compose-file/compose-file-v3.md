@@ -28,12 +28,10 @@ Here is a sample Compose file from the voting app sample used in the
 [Docker for Beginners lab](https://github.com/docker/labs/tree/master/beginner/)
 topic on [Deploying an app to a Swarm](https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md):
 
-<div class="panel panel-default">
-    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapseSample1" style="cursor: pointer">
-    Example Compose file version 3
-    <i class="chevron fa fa-fw"></i></div>
-    <div class="collapse block" id="collapseSample1">
-<pre><code>
+    
+{{< accordion title="Example Compose file version 3" >}}
+
+```yml
 version: "{{% param "compose_file_v3" %}}"
 services:
 
@@ -130,9 +128,8 @@ networks:
 
 volumes:
   db-data:
-</code></pre>
-    </div>
-</div>
+```
+{{< /accordion >}}
 
 The topics on this reference page are organized alphabetically by top-level key
 to reflect the structure of the Compose file itself. Top-level keys that define
@@ -417,12 +414,6 @@ cap_drop:
   - NET_ADMIN
   - SYS_ADMIN
 ```
-
-> Note when using docker stack deploy
->
-> The `cap_add` and `cap_drop` options are ignored when
-> [deploying a stack in swarm mode](../../engine/reference/commandline/stack_deploy.md)
-{ .important }
 
 ### cgroup_parent
 
@@ -1111,12 +1102,14 @@ RACK_ENV=development
 ```
 
 Compose also recognizes inline comments, like in:
-```
+
+```sh
 MY_VAR = value # this is a comment
 ```
 
 To avoid interpreting "#" as an inline comment, use the quotation marks:
-```
+
+```sh
 MY_VAR = "All the # inside are taken as part of the value"
 ```
 
@@ -1259,7 +1252,7 @@ healthcheck:
   interval: 1m30s
   timeout: 10s
   retries: 3
-  start_period: 40s
+  start_period: 2m
 ```
 
 `interval`, `timeout` and `start_period` are specified as
@@ -2421,7 +2414,7 @@ Use the host's networking stack, or no networking. Equivalent to
 `docker stack` commands. If you use the `docker-compose` command,
 use [network_mode](#network_mode) instead.
 
-If you want to use a particular network on a common build, use [network] as
+If you want to use a particular network on a common build, use `network` as
 mentioned in the second yaml file example.
 
 The syntax for using built-in networks such as `host` and `none` is a little

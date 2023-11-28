@@ -1,11 +1,11 @@
 ---
-description: Describes how to use the fluentd logging driver.
+description: Learn how to use the fluentd logging driver
 keywords: Fluentd, docker, logging, driver
 title: Fluentd logging driver
 aliases:
-- /engine/reference/logging/fluentd/
-- /reference/logging/fluentd/
-- /engine/admin/logging/fluentd/
+  - /engine/reference/logging/fluentd/
+  - /reference/logging/fluentd/
+  - /engine/admin/logging/fluentd/
 ---
 
 The `fluentd` logging driver sends container logs to the
@@ -18,40 +18,37 @@ In addition to the log message itself, the `fluentd` log
 driver sends the following metadata in the structured log message:
 
 | Field            | Description                                                                                                                                            |
-|:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `container_id`   | The full 64-character container ID.                                                                                                                    |
-| `container_name` | The container name at the time it was started. If you use `docker rename` to rename a container, the new name is not reflected in the journal entries. |
+| `container_name` | The container name at the time it was started. If you use `docker rename` to rename a container, the new name isn't reflected in the journal entries. |
 | `source`         | `stdout` or `stderr`                                                                                                                                   |
 | `log`            | The container log                                                                                                                                      |
 
-The `docker logs` command is not available for this logging driver.
 
 ## Usage
 
 Some options are supported by specifying `--log-opt` as many times as needed:
 
- - `fluentd-address`: specify a socket address to connect to the Fluentd daemon, ex `fluentdhost:24224` or `unix:///path/to/fluentd.sock`
- - `tag`: specify a tag for fluentd message, which interprets some markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`
+- `fluentd-address`: specify a socket address to connect to the Fluentd daemon, ex `fluentdhost:24224` or `unix:///path/to/fluentd.sock`.
+- `tag`: specify a tag for Fluentd messages. Supports some Go template markup, ex `{{.ID}}`, `{{.FullID}}` or `{{.Name}}` `docker.{{.ID}}`.
 
-
- To use the `fluentd` driver as the default logging driver, set the `log-driver`
- and `log-opt` keys to appropriate values in the `daemon.json` file, which is
- located in `/etc/docker/` on Linux hosts or
- `C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
- +configuring Docker using `daemon.json`, see
- +[daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
+To use the `fluentd` driver as the default logging driver, set the `log-driver`
+and `log-opt` keys to appropriate values in the `daemon.json` file, which is
+located in `/etc/docker/` on Linux hosts or
+`C:\ProgramData\docker\config\daemon.json` on Windows Server. For more about
+configuring Docker using `daemon.json`, see [daemon.json](../../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
 
 The following example sets the log driver to `fluentd` and sets the
 `fluentd-address` option.
 
- ```json
- {
-   "log-driver": "fluentd",
-   "log-opts": {
-     "fluentd-address": "fluentdhost:24224"
-   }
- }
- ```
+```json
+{
+  "log-driver": "fluentd",
+  "log-opts": {
+    "fluentd-address": "fluentdhost:24224"
+  }
+}
+```
 
 Restart Docker for the changes to take effect.
 
@@ -65,13 +62,17 @@ Restart Docker for the changes to take effect.
 To set the logging driver for a specific container, pass the
 `--log-driver` option to `docker run`:
 
-    docker run --log-driver=fluentd ...
+```text
+docker run --log-driver=fluentd ...
+```
 
 Before using this logging driver, launch a Fluentd daemon. The logging driver
 connects to this daemon through `localhost:24224` by default. Use the
 `fluentd-address` option to connect to a different address.
 
-    docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+```text
+docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+```
 
 If container cannot connect to the Fluentd daemon, the container stops
 immediately unless the `fluentd-async` option is used.
@@ -97,7 +98,6 @@ By default, Docker uses the first 12 characters of the container ID to tag log m
 Refer to the [log tag option documentation](log_tags.md) for customizing
 the log tag format.
 
-
 ### labels, labels-regex, env, and env-regex
 
 The `labels` and `env` options each take a comma-separated list of keys. If
@@ -119,7 +119,7 @@ connection is established. Defaults to `false`.
 
 Sets the number of events buffered on the memory. Records will be stored in memory
 up to this number. If the buffer is full, the call to record logs will fail.
-The default is 8192.
+The default is 1048576.
 (https://github.com/fluent/fluent-logger-golang/tree/master#bufferlimit)
 
 ### fluentd-retry-wait
@@ -128,7 +128,7 @@ How long to wait between retries. Defaults to 1 second.
 
 ### fluentd-max-retries
 
-The maximum number of retries. Defaults to `4294967295` (2**32 - 1).
+The maximum number of retries. Defaults to `4294967295` (2\*\*32 - 1).
 
 ### fluentd-sub-second-precision
 
@@ -148,20 +148,26 @@ aggregate store.
 
 ### Test container loggers
 
-1. Write a configuration file (`test.conf`) to dump input logs:
+1.  Write a configuration file (`test.conf`) to dump input logs:
 
-        <source>
-          @type forward
-        </source>
+    ```none
+    <source>
+      @type forward
+    </source>
 
-        <match *>
-          @type stdout
-        </match>
+    <match *>
+      @type stdout
+    </match>
+    ```none
 
-2. Launch Fluentd container with this configuration file:
+2.  Launch Fluentd container with this configuration file:
 
-        $ docker run -it -p 24224:24224 -v /path/to/conf/test.conf:/fluentd/etc/test.conf -e FLUENTD_CONF=test.conf fluent/fluentd:latest
+    ```none
+    $ docker run -it -p 24224:24224 -v /path/to/conf/test.conf:/fluentd/etc/test.conf -e FLUENTD_CONF=test.conf fluent/fluentd:latest
+    ```
 
-3. Start one or more containers with the `fluentd` logging driver:
+3.  Start one or more containers with the `fluentd` logging driver:
 
-        $ docker run --log-driver=fluentd your/application
+    ```none
+    $ docker run --log-driver=fluentd your/application
+    ```

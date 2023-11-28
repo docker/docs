@@ -9,5 +9,9 @@
   "no-space-in-code": true,
   "no-space-in-links": true,
   "ol-prefix": {"style": "ordered"},
-  "no-reversed-links": true
+  "no-reversed-links": true,
+  "reference-links-images": {
+    "shortcut_syntax": true
+  },
+  "fenced-code-language": true
 }

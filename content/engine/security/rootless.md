@@ -390,7 +390,7 @@ For example:
 
 ### Errors when starting the Docker daemon
 
-**[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: operation not permitted**
+**\[rootlesskit:parent\] error: failed to start the child: fork/exec /proc/self/exe: operation not permitted**
 
 This error occurs mostly when the value of `/proc/sys/kernel/unprivileged_userns_clone` is set to 0:
 
@@ -402,7 +402,7 @@ $ cat /proc/sys/kernel/unprivileged_userns_clone
 To fix this issue, add  `kernel.unprivileged_userns_clone=1` to
 `/etc/sysctl.conf` (or `/etc/sysctl.d`) and run `sudo sysctl --system`.
 
-**[rootlesskit:parent] error: failed to start the child: fork/exec /proc/self/exe: no space left on device**
+**\[rootlesskit:parent\] error: failed to start the child: fork/exec /proc/self/exe: no space left on device**
 
 This error occurs mostly when the value of `/proc/sys/user/max_user_namespaces` is too small:
 
@@ -414,7 +414,7 @@ $ cat /proc/sys/user/max_user_namespaces
 To fix this issue, add  `user.max_user_namespaces=28633` to
 `/etc/sysctl.conf` (or `/etc/sysctl.d`) and run `sudo sysctl --system`.
 
-**[rootlesskit:parent] error: failed to setup UID/GID map: failed to compute uid/gid map: No subuid ranges found for user 1001 ("testuser")**
+**\[rootlesskit:parent\] error: failed to setup UID/GID map: failed to compute uid/gid map: No subuid ranges found for user 1001 ("testuser")**
 
 This error occurs when `/etc/subuid` and `/etc/subgid` are not configured. See [Prerequisites](#prerequisites).
 

@@ -12,6 +12,8 @@ To navigate to **Settings** either:
 - Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
+You can also locate the `settings.json` file at `~/.docker/desktop/settings.json`.
+
 ## General
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
@@ -40,10 +42,11 @@ If you choose the integrated terminal, you can run commands in a running contain
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
-- **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
+- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
 
-- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively. 
+- **SBOM Indexing**. When this option is enabled, inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout.
+
+- **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
 ## Resources
 
@@ -52,29 +55,46 @@ network, and other resources.
 
 ### Advanced
 
-On the **Advanced** tab, you can limit resources available to Docker.
+On the **Advanced** tab, you can limit resources available to the Docker Linux VM.
 
 Advanced settings are:
 
-- **CPUs**. By default, Docker Desktop is set to use half the number of processors
-  available on the host machine. To increase processing power, set this to a
-  higher number; to decrease, lower the number.
+- **CPU limit**. Specify the maximum number of CPUs to be used by Docker Desktop.
+  By default, Docker Desktop is set to use all the processors available on the host machine.
 
-- **Memory**. By default, Docker Desktop is set to use 25% of your host's
+- **Memory limit**. By default, Docker Desktop is set to use up to 25% of your host's
   memory. To increase the RAM, set this to a higher number; to decrease it,
   lower the number.
 
 - **Swap**. Configure swap file size as needed. The default is 1 GB.
 
-- **Disk image size**. Specify the size of the disk image.
+- **Virtual disk limit**. Specify the maximum size of the disk image.
 
 - **Disk image location**. Specify the location of the Linux volume where containers and images are stored.
 
-You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it.
+  You can also move the disk image to a different location. If you attempt to
+  move a disk image to a location that already has one, you are asked if you
+  want to use the existing image or replace it.
 
 >**Tip**
 >
-> If you feel Docker Desktop starting to get slow or you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
+> If you feel Docker Desktop starting to get slow or you're running
+> multi-container workloads, increase the memory and disk image space allocation
+{ .tip }
+
+- **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
+  which significantly reduces CPU and memory utilization on the host by
+  automatically turning off the Linux VM when Docker Desktop is idle (i.e., no
+  containers are running).
+
+  You can also configure the Resource Saver timeout which indicates how long
+  should Docker Desktop be idle before Resource Saver mode kicks in. Default is
+  5 minutes.
+
+  >**Note**
+  >
+  > Exit from Resource Saver mode occurs automatically when containers run. Exit
+  > may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
 
 ### File sharing
 
@@ -155,7 +175,7 @@ edit the file using your favorite text editor.
 > Refer to [Configure the daemon](../../config/daemon/index.md) for more information
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 
-To see the full list of possible configuration options, see the 
+To see the full list of possible configuration options, see the
 [dockerd command reference](/engine/reference/commandline/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -196,7 +216,7 @@ when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 
-## Extensions 
+## Extensions
 
 Use the **Extensions** tab to:
 
@@ -223,3 +243,7 @@ Turns on the containerd image store. This brings new features like faster contai
 ### Experimental features
 
 {{< include "desktop-experimental.md" >}}
+
+## Notifications
+
+{{< include "desktop-notifications-settings.md" >}}

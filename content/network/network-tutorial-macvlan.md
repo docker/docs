@@ -31,6 +31,8 @@ container to it.
 - The examples assume your ethernet interface is `eth0`. If your device has a
   different name, use that instead.
 
+- The `macvlan` driver is not supported in rootless mode.
+
 ## Bridge example
 
 In the simple bridge example, your traffic flows through `eth0` and Docker

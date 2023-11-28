@@ -1,31 +1,29 @@
-.prose {
-  pre {
-    @apply rounded-sm border border-gray-light-200 p-3 dark:border-gray-dark-400;
-  }
-  :not(pre) > code {
-    display: inline-block;
-    margin: 0 !important;
-    white-space: nowrap;
-    font-weight: 400;
-    padding: 0 4px;
-    border: 1px solid;
-    border-radius: theme("spacing.1");
-    background: theme("colors.gray.light.200");
-    border-color: theme("colors.gray.light.300");
-    .dark & {
-      background: theme("colors.gray.dark.200");
-      border-color: theme("colors.gray.dark.300");
-    }
-  }
-  code::before {
-    content: "";
-  }
-  code::after {
-    content: "";
+.highlight, :not(pre) > code {
+  font-size: .875em;
+  border: 1px solid;
+  border-radius: theme("spacing.1");
+  border-color: theme("colors.gray.light.300");
+  .dark & {
+    background: theme("colors.gray.dark.200");
+    border-color: theme("colors.gray.dark.300");
   }
 }
 
-.chroma {
+.highlight {
+  @apply p-3 my-4 overflow-x-auto;
+  background: theme("colors.white");
+}
+
+:not(pre) > code {
+  background: theme("colors.gray.light.200");
+  display: inline-block;
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 400;
+  padding: 0 4px;
+}
+
+.highlight {
   /* LineTableTD */
   .lntd {
     vertical-align: top;
@@ -35,12 +33,20 @@
   }
   /* LineTable */
   .lntable {
+    display: table;
+    width: 100%;
     border-spacing: 0;
     padding: 0;
     margin: 0;
     border: 0;
+    /* LineNumberColumnHighlight */
+    .lntd:first-child .hl {
+      display: block;
+    }
   }
-  @at-root .light {
+
+  /* LightTheme */
+  .light & {
     /* Other */
     .x {
       color: #000000;
@@ -54,7 +60,12 @@
     }
     /* LineHighlight */
     .hl {
-      background-color: #ffffcc;
+      background-color: #e5f2fc;
+    }
+    .lntd:first-child .hl,
+    & > .chroma > code > .hl {
+      margin-left: -4px;
+      border-left: 4px solid #c0e0fa;
     }
     /* LineNumbersTable */
     .lnt {
@@ -380,6 +391,7 @@
     }
     /* GenericPrompt */
     .gp {
+      user-select: none;
       color: #8f5902;
     }
     /* GenericStrong */
@@ -408,7 +420,7 @@
     }
   }
 
-  @at-root .dark {
+  .dark & {
     /* Other */
     .x {
     }
@@ -420,7 +432,12 @@
     }
     /* LineHighlight */
     .hl {
-      background-color: #ffffcc;
+      background-color: theme('colors.gray.dark.300');
+    }
+    .lntd:first-child .hl,
+    & > .chroma > code > .hl {
+      margin-left: -4px;
+      border-left: 4px solid theme('colors.gray.dark.400');
     }
     /* LineNumbersTable */
     .lnt {

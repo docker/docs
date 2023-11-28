@@ -14,13 +14,13 @@ You can add a payment method or update your account's existing payment method at
 
 ## Personal account
 
-1. Select **Your Account** in the top-right corner of Docker Hub.
+1. Select your username in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
-3. Select the **Payment Methods** tab. 
-4. In the **Payment information** section, enter the new payment method. 
-    The screen refreshes and displays your new payment information alongside your existing information.
-5. Select **Make Default** to ensure that your new payment method applies to all purchases and subscriptions. 
-6. Optional. Remove your existing payment method by selecting the **X** icon.
+3. Select the **Payment methods and billing history** link.
+4. In the **Payment Method** section, select **Add payment method**.
+5. Enter your new payment information, then select **Add**.
+6. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
+7. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.
 
 ## Organization 
 
@@ -28,10 +28,11 @@ You can add a payment method or update your account's existing payment method at
 >
 > You must be an organization owner to make changes to the payment information.
 
-1. In Docker Hub, select **Organizations**.
-2. Select the organization that you want to change the payment method for. 
-3. Select the **Billing** tab and then **Payment Methods**.
-4. In the **Payment Information** section, enter the new payment method. 
-    The screen refreshes and displays your new payment information alongside your existing information.
-5. Select **Make Default** to ensure that your new payment method applies to all purchases and subscriptions. 
-6. Optional. Remove your existing payment method by selecting the **X** icon.
+1. Select your username in the top-right corner of Docker Hub.
+2. From the drop-down menu select **Billing**. 
+3. Select the organization account you want to update.
+4. Select the **Payment methods and billing history** link.
+5. In the **Payment Method** section, select **Add payment method**.
+6. Enter your new payment information, then select **Add**.
+7. Select the **Actions** icon, then select **Make default** to ensure that your new payment method applies to all purchases and subscriptions.
+8. Optional. You can remove non-default payment methods by selecting the **Actions** icon. Then, select **Delete**.

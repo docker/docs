@@ -1,8 +1,9 @@
 ---
 title: Custom Dockerfile syntax
+description: Dive deep into the Dockerfile frontend, and learn about custom frontends
 keywords: build, buildkit, dockerfile, frontend
 aliases:
-- /build/buildkit/dockerfile-frontend/
+  - /build/buildkit/dockerfile-frontend/
 ---
 
 ## Dockerfile frontend
@@ -38,7 +39,7 @@ Custom Dockerfile implementations allow you to:
 - Use [alternative build definitions, or create your own](https://github.com/moby/buildkit#exploring-llb)
 
 > **Note**
-> 
+>
 > BuildKit also ships with a built-in Dockerfile frontend, but it's recommended
 > to use an external image to make sure that all users use the same version on
 > the builder and to pick up bugfixes automatically without waiting for a new
@@ -57,7 +58,7 @@ For example:
 
 - `docker/dockerfile:1` - kept updated with the latest `1.x.x` minor _and_ patch
   release.
-- `docker/dockerfile:1.2` -  kept updated with the latest `1.2.x` patch release,
+- `docker/dockerfile:1.2` - kept updated with the latest `1.2.x` patch release,
   and stops receiving updates once version `1.3.0` is released.
 - `docker/dockerfile:1.2.1` - immutable: never updated.
 
@@ -82,7 +83,7 @@ suffix, for example:
 - `docker/dockerfile:labs` - latest release on `labs` channel.
 - `docker/dockerfile:1-labs` - same as `dockerfile:1`, with experimental
   features enabled.
-- `docker/dockerfile:1.2-labs` -  same as `dockerfile:1.2`, with experimental
+- `docker/dockerfile:1.2-labs` - same as `dockerfile:1.2`, with experimental
   features enabled.
 - `docker/dockerfile:1.2.1-labs` - immutable: never updated. Same as
   `dockerfile:1.2.1`, with experimental features enabled.
@@ -96,7 +97,7 @@ compatible. Pin the version to avoid having to deal with breaking changes.
 
 ## Other resources
 
-For documentation on "labs" features, master builds, and nightly feature
+For documentation on `labs` features, master builds, and nightly feature
 releases, refer to the description in [the BuildKit source repository on GitHub](https://github.com/moby/buildkit/blob/master/README.md).
 For a full list of available images, visit the [`docker/dockerfile` repository on Docker Hub](https://hub.docker.com/r/docker/dockerfile),
 and the [`docker/dockerfile-upstream` repository on Docker Hub](https://hub.docker.com/r/docker/dockerfile-upstream)

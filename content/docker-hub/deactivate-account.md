@@ -8,14 +8,14 @@ You can deactivate an account at any time.
 
 >**Warning**
 >
-> If your Docker Hub account or organization is linked to other Docker products and services, deactivating your account also removes access to those products and services.
+> All Docker products and services that use your Docker account or organization account will be inaccessible after deactivating your account.
 { .warning }
 
 ## Deactivate a user account
 
 ### Prerequisites
 
-Before deactivating your Docker Hub account, ensure that you meet the following requirements:
+Before deactivating your Docker account, ensure that you meet the following requirements:
 
 - You must not be a member of a company or any teams or organizations. You must remove the account from all teams, organizations, or the company.
 
@@ -26,7 +26,9 @@ Before deactivating your Docker Hub account, ensure that you meet the following 
 
 - If you are the sole owner of an organization, either assign another member of the organization the owner role and then remove yourself from the organization, or deactivate the organization. Similarly, if you are the sole owner of a company, either add someone else as a company owner and then remove yourself, or deactivate the company.
 
-- If you have an active subscription, [downgrade it to a Docker Personal subscription](../subscription/downgrade.md).
+- If you have an active Docker subscription, [downgrade it to a Docker Personal subscription](../subscription/downgrade.md).
+
+- If you have an active Docker Scout subscription, [downgrade it to a Docker Scout Free subscription](../billing/scout-billing.md#downgrade-your-subscription).
 
 - Download any images and tags you want to keep. Use `docker pull -a <image>:<tag>`.
 
@@ -45,12 +47,14 @@ Once you have completed all the steps above, you can deactivate your account.
 
 ## Deactivate an organization
 
-Before deactivating an organization, please complete the following:
+Before deactivating an organization, complete the following:
 
 - Download any images and tags you want to keep:
   `docker pull -a <image>:<tag>`.
 
--  If you have an active subscription, [downgrade it to a **Docker Free Team** subscription](../subscription/downgrade.md).
+- If you have an active Docker subscription, [downgrade it to a **Docker Free Team** subscription](../subscription/downgrade.md).
+
+- If you have an active Docker Scout subscription, [downgrade it to a Docker Scout Free subscription](../billing/scout-billing.md#downgrade-your-subscription).
 
 - Remove all other members within the organization.
 

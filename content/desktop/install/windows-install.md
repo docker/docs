@@ -37,7 +37,9 @@ _For checksums, see [Release notes](../release-notes.md)_
 
 - WSL version 1.1.3.0 or later.
 - Windows 11 64-bit: Home or Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
-- Windows 10 64-bit: Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
+- Windows 10 64-bit: 
+  - We recommend Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
+  - Minimum required is Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
 - Turn on the WSL 2 feature on Windows. For detailed instructions, refer to the
   [Microsoft documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 - The following hardware prerequisites are required to successfully run
@@ -45,34 +47,56 @@ _For checksums, see [Release notes](../release-notes.md)_
 
   - 64-bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
-  - BIOS-level hardware virtualization support must be turned on in the
-    BIOS settings. For more information, see
+  - Enable hardware virtualization in BIOS. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
+
+> **Important**
+>
+> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
+> Windows Home or Education editions only allow you to run Linux containers.
+{ .important }
+
+> **Note**
+>
+> Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+
+> **Should I use Hyper-V or WSL?**
+>
+> Docker Desktop's functionality remains consistent on both WSL and Hyper-V, without a preference for either architecture. Hyper-V and WSL have their own advantages and disadvantages, depending on your specific set up and your planned use case. 
+{ .tip }
 
 {{< /tab >}}
 {{< tab name="Hyper-V backend and Windows containers" >}}
 
 - Windows 11 64-bit: Pro version 21H2 or higher, or Enterprise or Education version 21H2 or higher.
-- Windows 10 64-bit: Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
+- Windows 10 64-bit:
+  - We recommend Home or Pro 22H2 (build 19045) or higher, or Enterprise or Education 22H2 (build 19045) or higher. 
+  - Minimum required is Home or Pro 21H2 (build 19044) or higher, or Enterprise or Education 21H2 (build 19044) or higher.
 
   For Windows 10 and Windows 11 Home, see the system requirements in the WSL 2 backend tab.
 
-- Hyper-V and Containers Windows features must be turned on.
+- Turn on Hyper-V and Containers Windows features.
 - The following hardware prerequisites are required to successfully run Client
   Hyper-V on Windows 10:
 
   - 64 bit processor with [Second Level Address Translation (SLAT)](https://en.wikipedia.org/wiki/Second_Level_Address_Translation)
   - 4GB system RAM
-  - BIOS-level hardware virtualization support must be turned on in the
+  - Turn on BIOS-level hardware virtualization support in the
     BIOS settings. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
-{{< /tab >}}
-{{< /tabs >}}
+> **Important**
+>
+> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
+> Windows Home or Education editions only allow you to run Linux containers.
+{ .important }
 
 > **Note**
 >
 > Docker only supports Docker Desktop on Windows for those versions of Windows that are still within [Microsoft’s servicing timeline](https://support.microsoft.com/en-us/help/13853/windows-lifecycle-fact-sheet).
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Containers and images created with Docker Desktop are shared between all
 user accounts on machines where it is installed. This is because all Windows
@@ -82,26 +106,22 @@ Running Docker Desktop inside a VMware ESXi or Azure VM is supported for Docker 
 It requires enabling nested virtualization on the hypervisor first.
 For more information, see [Running Docker Desktop in a VM or VDI environment](../vm-vdi.md).
 
-### About Windows containers
+{{< accordion title="About Windows containers" >}}
 
 Looking for information on using Windows containers?
 
 * [Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers)
   describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned below.
-- [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
-  provides a tutorial on how to set up and run Windows containers on Windows 10, Windows Server 2016 and Windows Server 2019. It shows you how to use a MusicStore application
-  with Windows containers.
+- [Getting Started with Windows Containers](https://learn.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=dockerce)
 - Docker Container Platform for Windows [articles and blog
   posts](https://www.docker.com/microsoft/) on the Docker website.
 
-> **Note**
->
-> To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
-> Windows Home or Education editions only allow you to run Linux containers.
+{{< /accordion >}}
 
 ## Install Docker Desktop on Windows
 
-### Install interactively
+{{< tabs >}}
+{{< tab name="Install interactively" >}}
 
 1. Double-click **Docker Desktop Installer.exe** to run the installer.
 
@@ -116,7 +136,8 @@ Looking for information on using Windows containers?
 5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an **administrator** and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
    Sign out and sign back in for the changes to take effect.
 
-### Install from the command line
+{{< /tab >}}
+{{< tab name="Install from the command line" >}}
 
 After downloading **Docker Desktop Installer.exe**, run the following command in a terminal to install Docker Desktop:
 
@@ -132,7 +153,7 @@ Start-Process 'Docker Desktop Installer.exe' -Wait install
 
 If using the Windows Command Prompt:
 
-```
+```sh
 start /w "" "Docker Desktop Installer.exe" install
 ```
 
@@ -145,7 +166,12 @@ The `install` command accepts the following flags:
 - `--installation-dir=<path>`: Changes the default installation location (`C:\Program Files\Docker\Docker`)
 - `--admin-settings`: Automatically creates an `admin-settings.json` file which is used by admins to control certain Docker Desktop settings on client machines within their organization. For more information, see [Settings Management](../hardened-desktop/settings-management/index.md).
   - It must be used together with the `--allowed-org=<org name>` flag. 
-  - For example: `--allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'`
+  - For example:
+
+    ```text
+    --allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"
+    ```
+
 - `--proxy-http-mode=<mode>`: Sets the HTTP Proxy mode, `system` (default) or `manual`
 - `--override-proxy-http=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests, requires `--proxy-http-mode` to be `manual`
 - `--override-proxy-https=<URL>`: Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests, requires `--proxy-http-mode` to be `manual`
@@ -160,6 +186,8 @@ If your admin account is different to your user account, you must add the user t
 ```console
 $ net localgroup docker-users <user> /add
 ```
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Start Docker Desktop
 

@@ -25,6 +25,28 @@ Guides:
       path: /get-started/09_image_best/
     - title: "Part 10: What next?"
       path: /get-started/11_what_next/
+
+- sectiontitle: Walkthroughs
+  section:
+    - title: "Overview"
+      path: /guides/walkthroughs/
+    - title: "What is a container?"
+      path: /guides/walkthroughs/what-is-a-container/
+    - title: "How do I run a container?"
+      path: /guides/walkthroughs/run-a-container/
+    - title: "Run Docker Hub images"
+      path: /guides/walkthroughs/run-hub-images/
+    - title: "Run multi-container applications"
+      path: /guides/walkthroughs/multi-container-apps/
+    - title: "Persist data between containers"
+      path: /guides/walkthroughs/persist-data/
+    - title: "Access a local folder"
+      path: /guides/walkthroughs/access-local-folder/
+    - title: "Containerize your application"
+      path: /guides/walkthroughs/containerize-your-app/
+    - title: "Publish your image"
+      path: /guides/walkthroughs/publish-your-image/
+
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -33,31 +55,27 @@ Guides:
     section:
     - title: "Overview"
       path: /language/nodejs/
-    - title: "Build images"
-      path: /language/nodejs/build-images/
-    - title: "Run containers"
-      path: /language/nodejs/run-containers/
+    - title: "Containerize your app"
+      path: /language/nodejs/containerize/
     - title: "Develop your app"
       path: /language/nodejs/develop/
     - title: "Run your tests"
       path: /language/nodejs/run-tests/
     - title: "Configure CI/CD"
       path: /language/nodejs/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/nodejs/deploy/
   - sectiontitle: Python
     section:
     - title: "Overview"
       path: /language/python/
-    - title: "Build images"
-      path: /language/python/build-images/
-    - title: "Run containers"
-      path: /language/python/run-containers/
+    - title: "Containerize your app"
+      path: /language/python/containerize/
     - title: "Develop your app"
       path: /language/python/develop/
     - title: "Configure CI/CD"
       path: /language/python/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/python/deploy/
   - sectiontitle: Java
     section:
@@ -73,7 +91,7 @@ Guides:
       path: /language/java/run-tests/
     - title: "Configure CI/CD"
       path: /language/java/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/java/deploy/
   - sectiontitle: Go
     section:
@@ -89,23 +107,21 @@ Guides:
       path: /language/golang/run-tests/
     - title: "Configure CI/CD"
       path: /language/golang/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/golang/deploy/
   - sectiontitle: C# (.NET)
     section:
     - title: "Overview"
       path: /language/dotnet/
-    - title: "Build images"
-      path: /language/dotnet/build-images/
-    - title: "Run containers"
-      path: /language/dotnet/run-containers/
+    - title: "Containerize your app"
+      path: /language/dotnet/containerize/
     - title: "Develop your app"
       path: /language/dotnet/develop/
     - title: "Run your tests"
       path: /language/dotnet/run-tests/
     - title: "Configure CI/CD"
       path: /language/dotnet/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/dotnet/deploy/
   - sectiontitle: Rust
     section:
@@ -119,7 +135,7 @@ Guides:
       path: /language/rust/develop/
     - title: "Configure CI/CD"
       path: /language/rust/configure-ci-cd/
-    - title: "Deploy your app"
+    - title: "Test your deployment"
       path: /language/rust/deploy/
 - sectiontitle: Develop with Docker
   section:
@@ -127,12 +143,16 @@ Guides:
     title: Overview
   - path: /develop/dev-best-practices/
     title: Development best practices
-  - path: /develop/develop-images/dockerfile_best-practices/
-    title: Dockerfile best practices
+  - sectiontitle: Dockerfile best practices
+    section:
+    - path: /develop/develop-images/dockerfile_best-practices/
+      title: Overview
+    - path: /develop/develop-images/guidelines/
+      title: General guidelines 
+    - path: /develop/develop-images/instructions/
+      title: Best practices for Dockerfile instructions
   - path: /develop/security-best-practices/
     title: Security best practices
-  - path: /develop/remote-development/
-    title: Remote development
 
 - sectiontitle: Build with Docker
   section:
@@ -165,24 +185,63 @@ Guides:
     path: /get-started/kube-deploy/
   - title: "Deploy to Swarm"
     path: /get-started/swarm-deploy/
-  - sectiontitle: Cloud integrations
-    section:
-    - path: /cloud/aci-integration/
-      title: Docker and ACI
-    - path: /cloud/aci-container-features/
-      title: ACI container features
-    - path: /cloud/aci-compose-features/
-      title: ACI Compose features
-    - path: /cloud/ecs-integration/
-      title: Docker and ECS
-    - path: /cloud/ecs-architecture/
-      title: Docker ECS integration architecture
-    - path: /cloud/ecs-compose-features/
-      title: ECS Compose features
-    - path: /cloud/ecs-compose-examples/
-      title: ECS Compose examples
+  - title: Cloud integrations
+    path: /cloud/
 - path: /get-started/resources/
   title: "Educational resources"
+
+- sectiontitle: Contribute
+  section:
+  - path: /contribute/overview/
+    title: Contribute to Docker's docs
+  - path: /contribute/contribute-guide/
+    title: Contribution guidelines
+  - sectiontitle: Style guide
+    section:
+    - path: /contribute/style/grammar/
+      title: Grammar and style
+    - path: /contribute/style/formatting/
+      title: Formatting
+    - path: /contribute/style/recommended-words/
+      title: Recommended word list
+    - path: /contribute/style/terminology/
+      title: Docker terminology
+    - path: /contribute/style/voice-tone/
+      title: Voice and tone
+  - path: /contribute/file-conventions/
+    title: Source file conventions
+  - path: /contribute/ui/
+    title: UI elements in content
+  - sectiontitle: Useful components
+    section:
+    - path: /contribute/components/accordions/
+      title: Accordions
+    - path: /contribute/components/badges/
+      title: Badges
+    - path: /contribute/components/call-outs/
+      title: Callouts
+    - path: /contribute/components/cards/
+      title: Cards
+    - path: /contribute/components/code-blocks/
+      title: Code blocks
+    - path: /contribute/components/icons/
+      title: Icons
+    - path: /contribute/components/images/
+      title: Images
+    - path: /contribute/components/links/
+      title: Links
+    - path: /contribute/components/lists/
+      title: Lists
+    - path: /contribute/components/tables/
+      title: Tables
+    - path: /contribute/components/tabs/
+      title: Tabs
+    - path: /contribute/components/videos/
+      title: Videos
+    - path: /contribute/components/buttons/
+      title: Buttons
+  - path: /contribute/checklist/
+    title: Writing checklist
 
 Reference:
 - path: /reference/
@@ -219,8 +278,10 @@ Reference:
           title: docker buildx build
         - path: /engine/reference/commandline/buildx_create/
           title: docker buildx create
-        - path: /engine/reference/commandline/buildx_debug-shell/
-          title: docker buildx debug-shell
+        - path: /engine/reference/commandline/buildx_debug/
+          title: docker buildx debug
+        - path: /engine/reference/commandline/buildx_debug_build/
+          title: docker buildx debug build
         - path: /engine/reference/commandline/buildx_du/
           title: docker buildx du
         - path: /engine/reference/commandline/buildx_imagetools/
@@ -261,6 +322,16 @@ Reference:
           title: overview
         - path: /compose/environment-variables/envvars/
           title: environment variables
+        - path: /engine/reference/commandline/compose_alpha/
+          title: docker compose alpha
+        - path: /engine/reference/commandline/compose_alpha_dry-run/
+          title: docker compose alpha dry-run
+        - path: /engine/reference/commandline/compose_alpha_publish/
+          title: docker compose alpha publish
+        - path: /engine/reference/commandline/compose_alpha_scale/
+          title: docker compose alpha scale
+        - path: /engine/reference/commandline/compose_alpha_viz/
+          title: docker compose alpha viz
         - path: /engine/reference/commandline/compose/
           title: docker compose
         - path: /engine/reference/commandline/compose_build/
@@ -315,6 +386,10 @@ Reference:
           title: docker compose up
         - path: /engine/reference/commandline/compose_version/
           title: docker compose version
+        - path: /engine/reference/commandline/compose_wait/
+          title: docker compose wait
+        - path: /engine/reference/commandline/compose_watch/
+          title: docker compose watch
     - sectiontitle: docker config
       section:
       - path: /engine/reference/commandline/config/
@@ -559,16 +634,36 @@ Reference:
       title: docker run
     - path: /engine/reference/commandline/save/
       title: docker save
-    - sectiontitle: docker scout (Early Access)
+    - sectiontitle: docker scout
       section:
       - path: /engine/reference/commandline/scout/
         title: docker scout
+      - path: /engine/reference/commandline/scout_cache/
+        title: docker scout cache
+      - path: /engine/reference/commandline/scout_cache_df/
+        title: docker scout cache df
+      - path: /engine/reference/commandline/scout_cache_prune/
+        title: docker scout cache prune
       - path: /engine/reference/commandline/scout_compare/
         title: docker scout compare
+      - path: /engine/reference/commandline/scout_config/
+        title: docker scout config
       - path: /engine/reference/commandline/scout_cves/
         title: docker scout cves
-      - path: /engine/reference/commandline/scout_entitlement/
-        title: docker scout entitlement
+      - path: /engine/reference/commandline/scout_enroll/
+        title: docker scout enroll
+      - path: /engine/reference/commandline/scout_environment/
+        title: docker scout environment
+      - path: /engine/reference/commandline/scout_integration/
+        title: docker scout integration
+      - path: /engine/reference/commandline/scout_integration_configure/
+        title: docker scout integration configure
+      - path: /engine/reference/commandline/scout_integration_delete/
+        title: docker scout integration delete
+      - path: /engine/reference/commandline/scout_integration_list/
+        title: docker scout integration list
+      - path: /engine/reference/commandline/scout_policy/
+        title: docker scout policy
       - path: /engine/reference/commandline/scout_quickview/
         title: docker scout quickview
       - path: /engine/reference/commandline/scout_recommendations/
@@ -576,7 +671,7 @@ Reference:
       - path: /engine/reference/commandline/scout_repo/
         title: docker scout repo
       - path: /engine/reference/commandline/scout_repo_disable/
-        title: docker scout repo disable        
+        title: docker scout repo disable
       - path: /engine/reference/commandline/scout_repo_enable/
         title: docker scout repo enable
       - path: /engine/reference/commandline/scout_repo_list/
@@ -587,6 +682,8 @@ Reference:
         title: docker scout stream
       - path: /engine/reference/commandline/scout_version/
         title: docker scout version
+      - path: /engine/reference/commandline/scout_watch/
+        title: docker scout watch
     - path: /engine/reference/commandline/search/
       title: docker search
     - sectiontitle: docker secret
@@ -804,8 +901,6 @@ Reference:
         path: /docker-hub/api/dvp/
       - title: Deprecated API
         path: /docker-hub/api/deprecated/
-  - title: Registry API
-    path: /registry/spec/api/
   - sectiontitle: Docker Extension SDK API
     section:
       - path: /desktop/extensions-sdk/dev/api/reference/interfaces/DesktopUI/
@@ -896,6 +991,8 @@ Reference:
       title: Compose Build Specification
     - path: /compose/compose-file/deploy/
       title: Compose Deploy Specification
+    - path: /compose/compose-file/develop/
+      title: Compose Develop Specification 
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
@@ -904,46 +1001,6 @@ Reference:
           title: Version 3
         - path: /compose/compose-file/compose-file-v2/
           title: Version 2
-- sectiontitle: Drivers and specifications
-  section:
-  - sectiontitle: Registry image manifests
-    section:
-    - path: /registry/spec/manifest-v2-1/
-      title: Image manifest v 2, schema 1
-    - path: /registry/spec/manifest-v2-2/
-      title: Image manifest v 2, schema 2
-    - path: /registry/spec/deprecated-schema-v1/
-      title: Update deprecated schema v1 images
-  - sectiontitle: Registry token authorization
-    section:
-    - path: /registry/spec/auth/
-      title: Docker Registry token authentication
-    - path: /registry/spec/auth/jwt/
-      title: Token authentication implementation
-    - path: /registry/spec/auth/oauth/
-      title: Oauth2 token authentication
-    - path: /registry/spec/auth/scope/
-      title: Token scope documentation
-    - path: /registry/spec/auth/token/
-      title: Token authentication specification
-  - sectiontitle: Registry storage drivers
-    section:
-    - path: /registry/storage-drivers/
-      title: Storage driver overview
-    - path: /registry/storage-drivers/oss/
-      title: Aliyun OSS storage driver
-    - path: /registry/storage-drivers/filesystem/
-      title: Filesystem storage driver
-    - path: /registry/storage-drivers/gcs/
-      title: GCS storage driver
-    - path: /registry/storage-drivers/inmemory/
-      title: In-memory storage driver
-    - path: /registry/storage-drivers/azure/
-      title: Microsoft Azure storage driver
-    - path: /registry/storage-drivers/s3/
-      title: S3 storage driver
-    - path: /registry/storage-drivers/swift/
-      title: Swift storage driver
 - path: /glossary/
   title: Glossary
 
@@ -1022,8 +1079,10 @@ Samples:
       title: Prometheus
     - path: /samples/wordpress/
       title: WordPress
-- sectiontitle: Other services
+- sectiontitle: Other samples
   section:
+    - path: /samples/ai-ml/
+      title: AI/ML
     - path: /samples/cloudflared/
       title: Cloudflared
     - path: /samples/elasticsearch/
@@ -1083,6 +1142,8 @@ Manuals:
           title: Explore Volumes
         - path: /desktop/use-desktop/builds/
           title: Explore Builds (Beta)
+        - path: /desktop/use-desktop/resource-saver/
+          title: Resource Saver mode
         - path: /desktop/use-desktop/pause/
           title: Pause Docker Desktop
     - sectiontitle: Hardened Docker Desktop
@@ -1103,12 +1164,6 @@ Manuals:
             title: How does it work?
           - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
             title: Key features and benefits
-          - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
-            title: FAQs and known issues
-        - path: /desktop/hardened-desktop/registry-access-management/
-          title: Registry Access Management
-        - path: /desktop/hardened-desktop/image-access-management/
-          title: Image Access Management
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1282,6 +1337,72 @@ Manuals:
                   path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
+
+- sectiontitle: Docker Scout
+  section:
+    - path: /scout/
+      title: Overview
+    - path: /scout/quickstart/
+      title: Quickstart
+    - sectiontitle: Explore Docker Scout
+      section:
+      - path: /scout/dashboard/
+        title: Dashboard
+      - path: /scout/image-details-view/
+        title: Image details view
+      - path: /scout/image-analysis/
+        title: Image analysis
+      - path: /scout/local-fs/
+        title: Analyze local files
+      - path: /scout/sbom/
+        title: SBOM
+      - path: /scout/advisory-db-sources/
+        title: Advisory database
+      - path: /scout/data-handling/
+        title: Data handling
+    - sectiontitle: Policy Evaluation
+      section:
+      - path: /scout/policy/
+        title: Overview
+      - path: /scout/policy/view/
+        title: View policy status
+      - path: /scout/policy/configure/
+        title: Configure policies
+      - path: /scout/policy/ci/
+        title: Policy Evaluation in CI
+    - sectiontitle: Integrations
+      section:
+      - title: Overview
+        path: /scout/integrations/
+      - sectiontitle: Environment monitoring
+        section:
+        - title: Overview
+          path: /scout/integrations/environment/
+        - title: Sysdig
+          path: /scout/integrations/environment/sysdig/
+        - title: Generic
+          path: /scout/integrations/environment/cli/
+      - sectiontitle: Container registries
+        section:
+        - title: Artifactory
+          path: /scout/integrations/registry/artifactory/
+        - title: Elastic Container Registry
+          path: /scout/integrations/registry/ecr/
+      - sectiontitle: Continuous integration
+        section:
+        - title: GitHub Actions
+          path: /scout/integrations/ci/gha/
+        - title: GitLab
+          path: /scout/integrations/ci/gitlab/
+        - title: Microsoft Azure DevOps Pipelines
+          path: /scout/integrations/ci/azure/
+        - title: Circle CI
+          path: /scout/integrations/ci/circle-ci/
+        - title: Jenkins
+          path: /scout/integrations/ci/jenkins/
+    - path: /scout/release-notes/
+      title: Release notes
+
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
@@ -1297,13 +1418,13 @@ Manuals:
     - path: /engine/install/fedora/
       title: Fedora
     - path: /engine/install/rhel/
-      title: RHEL
+      title: RHEL (s390x)
     - path: /engine/install/sles/
       title: SLES
     - path: /engine/install/ubuntu/
       title: Ubuntu
     - path: /engine/install/raspberry-pi-os/
-      title: Raspbian
+      title: Raspberry Pi OS (32-bit)
     - path: /engine/install/binaries/
       title: Binaries
     - path: /engine/install/linux-postinstall/
@@ -1390,6 +1511,8 @@ Manuals:
       title: Prune unused objects
     - path: /config/formatting/
       title: Format command and log output
+    - path: /config/filter/
+      title: Filter commands
     - path: /config/containers/start-containers-automatically/
       title: Start containers automatically
     - path: /config/labels-custom-metadata/
@@ -1543,7 +1666,7 @@ Manuals:
       - path: /config/containers/runmetrics/
         title: Collect runtime metrics
       - path: /config/containers/multi-service_container/
-        title: Run multiple services in a container
+        title: Run multiple processes in a container
       - path: /config/daemon/prometheus/
         title: Collect metrics with Prometheus
     - sectiontitle: Daemon configuration
@@ -1553,7 +1676,7 @@ Manuals:
       - path: /config/daemon/systemd/
         title: Configure with systemd
       - path: /config/containers/live-restore/
-        title: Keep containers alive during daemon downtime
+        title: Live restore
       - path: /config/daemon/troubleshoot/
         title: Troubleshoot
       - path: /config/daemon/remote-access/
@@ -1635,13 +1758,15 @@ Manuals:
         - path: /build/building/packaging/
           title: Packaging your software
         - path: /build/building/context/
-          title: Build context
+          title: Context
         - path: /build/building/multi-stage/
           title: Multi-stage builds
         - path: /build/building/multi-platform/
           title: Multi-platform images
         - path: /build/building/env-vars/
           title: Environment variables
+        - path: /build/building/secrets/
+          title: Build secrets
         - path: /build/building/opentelemetry/
           title: OpenTelemetry support
         - path: /build/building/base-images/
@@ -1704,8 +1829,8 @@ Manuals:
           title: Bake file reference
         - path: /build/bake/configuring-build/
           title: Configuring builds
-        - path: /build/bake/hcl-funcs/
-          title: User defined HCL functions
+        - path: /build/bake/advanced/
+          title: Advanced patterns
         - path: /build/bake/build-contexts/
           title: Build contexts and linking targets
         - path: /build/bake/compose-file/
@@ -1772,6 +1897,8 @@ Manuals:
             title: Copy image between registries
           - path: /build/ci/github-actions/update-dockerhub-desc/
             title: Update Docker Hub repo description
+          - path: /build/ci/github-actions/attestations/
+            title: SBOM and provenance attestations
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
@@ -1781,7 +1908,7 @@ Manuals:
   - path: /compose/features-uses/
     title: Key features and use cases
   - path: /compose/history/
-    title: History of Compose
+    title: History and development of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
@@ -1808,7 +1935,7 @@ Manuals:
     - path: /compose/environment-variables/env-file/
       title: Use an environment file
     - path: /compose/environment-variables/envvars/
-      title: Change pre-defined environment variables
+      title: Set or change pre-defined environment variables
   - path: /compose/profiles/
     title: Using service profiles
   - sectiontitle: Working with multiple Compose files
@@ -1826,7 +1953,7 @@ Manuals:
   - path: /compose/networking/
     title: Networking in Compose
   - path: /compose/file-watch/
-    title: Automatically update services with file watch (Experimental)
+    title: Use Compose Watch
   - path: /compose/production/
     title: Using Compose in production
   - path: /compose/use-secrets/
@@ -1854,14 +1981,6 @@ Manuals:
         title: Access
       - path: /docker-hub/repos/
         title: Manage
-  - path: /docker-hub/official_images/
-    title: Docker Official images
-  - path: /docker-hub/dvp-program/
-    title: Docker Verified Publisher Program
-  - path: /docker-hub/dsos-program/
-    title: Docker-Sponsored Open Source Program
-  - path: /docker-hub/insights-analytics/
-    title: Insights and analytics
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - path: /docker-hub/webhooks/
@@ -1888,55 +2007,12 @@ Manuals:
     title: Vulnerability scanning
   - path: /docker-hub/image-management/
     title: Advanced Image Management
+  - path: /registry/
+    title: Registry
   - path: /docker-hub/oci-artifacts/
     title: OCI artifacts
   - path: /docker-hub/release-notes/
     title: Release notes
-
-- sectiontitle: Docker Scout (Early Access)
-  section:
-    - path: /scout/
-      title: Overview
-    - path: /scout/quickstart/
-      title: Quickstart
-    - path: /scout/image-details-view/
-      title: Image details view
-    - path: /scout/advanced-image-analysis/
-      title: Advanced image analysis
-    - path: /scout/dashboard/
-      title: Dashboard
-    - path: /scout/advisory-db-sources/
-      title: Advisory Database
-    - path: /scout/data-handling/
-      title: Data handling
-    - path: /scout/policy/
-      title: Policy
-    - sectiontitle: Integrations
-      section:
-      - title: Overview
-        path: /scout/integrations/
-      - sectiontitle: Environment monitoring
-        section:
-        - title: Overview
-          path: /scout/integrations/environment/
-      - sectiontitle: Container registries
-        section:
-        - title: Artifactory
-          path: /scout/integrations/registry/artifactory/
-        - title: Elastic Container Registry
-          path: /scout/integrations/registry/ecr/
-      - sectiontitle: Continuous integration
-        section:
-        - title: GitHub Actions
-          path: /scout/integrations/ci/gha/
-        - title: GitLab
-          path: /scout/integrations/ci/gitlab/
-        - title: Microsoft Azure DevOps Pipelines
-          path: /scout/integrations/ci/azure/
-        - title: Circle CI
-          path: /scout/integrations/ci/circle-ci/
-        - title: Jenkins
-          path: /scout/integrations/ci/jenkins/
 
 - sectiontitle: Docker Admin (Early Access)
   section:
@@ -1952,20 +2028,6 @@ Manuals:
       title: Manage users
     - path: /admin/company/owners/
       title: Manage company owners
-    - path: /admin/company/settings/domains/
-      title: Domain management
-    - sectiontitle: SSO & SCIM
-      section:
-      - path: /admin/company/settings/sso/
-        title: Single Sign-On overview
-      - path: /admin/company/settings/sso-configuration/
-        title: Configure Single Sign-On
-      - path: /admin/company/settings/sso-management/
-        title: Manage Single Sign-On
-      - path: /admin/company/settings/scim/
-        title: SCIM
-      - path: /admin/company/settings/group-mapping/
-        title: Group mapping
 
   - sectiontitle: Organization administration
     section:
@@ -1977,31 +2039,15 @@ Manuals:
       title: Manage members
     - path: /admin/organization/activity-logs/
       title: Activity logs
-    - path: /admin/organization/image-access/
-      title: Image Access Management
-    - path: /admin/organization/registry-access/
-      title: Registry Access Management
     - path: /admin/organization/general-settings/
       title: General settings
-    - path: /admin/organization/security-settings/domains/
-      title: Domain management
-    - sectiontitle: SSO & SCIM
-      section:
-      - path: /admin/organization/security-settings/sso/
-        title: Single Sign-On overview
-      - path: /admin/organization/security-settings/sso-configuration/
-        title: Configure Single Sign-On
-      - path: /admin/organization/security-settings/sso-management/
-        title: Manage Single Sign-On
-      - path: /admin/organization/security-settings/scim/
-        title: SCIM
-      - path: /admin/organization/security-settings/group-mapping/
-        title: Group mapping
 
-- sectiontitle: Administration and security
+- sectiontitle: Administration 
   section:
   - path: /docker-hub/admin-overview/
     title: Overview
+  - path: /docker-hub/orgs/
+    title: Create your organization
   - path: /docker-hub/onboard/
     title: Onboard your organization
   - sectiontitle: Set up your company
@@ -2012,52 +2058,62 @@ Manuals:
       title: Create a company
     - path:  /docker-hub/company-owner/
       title: Manage company owners
-  - path: /docker-hub/orgs/
-    title: Create your organization
   - path: /docker-hub/convert-account/
     title: Convert an account into an organization
   - path: /docker-hub/manage-a-team/
     title: Create and manage a team
   - path: /docker-hub/members/
     title: Manage members
-  - path: /docker-hub/roles-and-permissions/
-    title: Roles and permissions
-  - sectiontitle: Single Sign-on
-    section:
-      -  path: /single-sign-on/
-         title: Overview
-      -  path: /single-sign-on/configure/
-         title: Configure
-      -  path: /single-sign-on/manage/
-         title: Manage
-  - path: /docker-hub/scim/
-    title: SCIM
-  - path: /docker-hub/group-mapping/
-    title: Group mapping
-  - sectiontitle: Security and authentication
-    section:
-      - path: /docker-hub/access-tokens/
-        title: Create and manage access tokens
-      - sectiontitle: Two-factor authentication
-        section:
-          - path: /docker-hub/2fa/
-            title: Enable two-factor authentication
-          - path: /docker-hub/2fa/disable-2fa/
-            title: Disable two-factor authentication
-          - path: /docker-hub/2fa/recover-hub-account/
-            title: Recover your Docker Hub account
-          - path: /docker-hub/2fa/new-recovery-code/
-            title: Generate a new recovery code
-  - path: /docker-hub/configure-sign-in/
-    title: Enforce sign-in for Desktop
   - path: /docker-hub/audit-log/
     title: Audit logs
-  - path: /docker-hub/domain-audit/
-    title: Domain audit
-  - path: /docker-hub/image-access-management/
-    title: Image Access Management
   - path: /docker-hub/deactivate-account/
     title: Deactivate an account or organization
+
+- sectiontitle: Security
+  section:
+  - path: /security/
+    title: Overview
+  - sectiontitle: For admins
+    section:
+    - sectiontitle: Single Sign-on
+      section:
+      -  path: /security/for-admins/single-sign-on/
+         title: Overview
+      -  path: /security/for-admins/single-sign-on/configure/
+         title: Configure
+      -  path: /security/for-admins/single-sign-on/manage/
+         title: Manage
+    - path: /security/for-admins/scim/
+      title: SCIM
+    - path: /security/for-admins/group-mapping/
+      title: Group mapping
+    - path: /security/for-admins/configure-sign-in/
+      title: Enforce sign in
+    - path: /security/for-admins/roles-and-permissions/
+      title: Roles and permissions
+    - path: /security/for-admins/domain-audit/
+      title: Domain audit
+    - path: /security/for-admins/image-access-management/
+      title: Image Access Management
+    - path: /security/for-admins/registry-access-management/
+      title: Registry Access Management
+  - sectiontitle: For developers
+    section:
+    - path: /security/for-developers/access-tokens/
+      title: Create and manage access tokens
+    - sectiontitle: Two-factor authentication
+      section:
+      - path: /security/for-developers/2fa/
+        title: Enable two-factor authentication 
+      - path: /security/for-developers/2fa/disable-2fa/
+        title: Disable two-factor authentication
+      - path: /security/for-developers/2fa/recover-hub-account/
+        title: Recover your Docker Hub account
+      - path: /security/for-developers/2fa/new-recovery-code/
+        title: Generate a new recovery code
+  - path: /security/security-announcements/
+    title: Security announcements
+
 - sectiontitle: Billing
   section:
   - path: /billing/
@@ -2093,45 +2149,18 @@ Manuals:
   - path: /subscription/scout-details/
     title: Docker Scout subscriptions and features
 
-- title: Security announcements
-  path: /security/
-
-- sectiontitle: Open-source projects
+- sectiontitle: Trusted content
   section:
-  - sectiontitle: Docker Registry
-    section:
-    - path: /registry/
-      title: Registry overview
-    - path: /registry/introduction/
-      title: Understand the Registry
-    - path: /registry/deploying/
-      title: Deploy a registry server
-    - path: /registry/configuration/
-      title: Configure a registry
-    - path: /registry/notifications/
-      title: Work with notifications
-    - sectiontitle: Recipes
-      section:
-      - path: /registry/recipes/
-        title: Recipes overview
-      - path: /registry/recipes/apache/
-        title: Authenticating proxy with apache
-      - path: /registry/recipes/nginx/
-        title: Authenticating proxy with nginx
-      - path: /registry/recipes/mirror/
-        title: Mirroring Docker Hub
-      - path: /registry/recipes/osx-setup-guide/
-        title: Running on macOS
-      - path: /registry/garbage-collection/
-        title: Garbage collection
-      - path: /registry/insecure/
-        title: Testing an insecure registry
-    - path: /registry/deprecated/
-      title: Deprecated features
-    - path: /registry/compatibility/
-      title: Compatibility
-    - path: /registry/help/
-      title: Getting help
+  - path: /trusted-content/
+    title: Overview
+  - path: /trusted-content/official-images/
+    title: Docker Official images
+  - path: /trusted-content/dvp-program/
+    title: Docker Verified Publisher Program
+  - path: /trusted-content/dsos-program/
+    title: Docker-Sponsored Open Source Program
+  - path: /trusted-content/insights-analytics/
+    title: Insights and analytics
 
 - path: /release-notes/
   title: Release notes
@@ -2139,57 +2168,6 @@ Manuals:
   title: Get support
 - path: /release-lifecycle/
   title: Product release lifecycle
-Contribute:
-  - path: /contribute/overview/
-    title: Contribute to Docker's docs
-  - path: /contribute/contribute-guide/
-    title: Contribution guidelines
-  - sectiontitle: Style guide
-    section:
-    - path: /contribute/style/grammar/
-      title: Grammar and style
-    - path: /contribute/style/formatting/
-      title: Formatting
-    - path: /contribute/style/recommended-words/
-      title: Recommended word list
-    - path: /contribute/style/terminology/
-      title: Docker terminology
-    - path: /contribute/style/voice-tone/
-      title: Voice and tone
-  - path: /contribute/file-conventions/
-    title: Source file conventions
-  - path: /contribute/ui/
-    title: UI elements in content
-  - sectiontitle: Useful components
-    section:
-    - path: /contribute/components/accordions/
-      title: Accordions
-    - path: /contribute/components/badges/
-      title: Badges
-    - path: /contribute/components/call-outs/
-      title: Callouts
-    - path: /contribute/components/cards/
-      title: Cards
-    - path: /contribute/components/code-blocks/
-      title: Code blocks
-    - path: /contribute/components/images/
-      title: Images
-    - path: /contribute/components/links/
-      title: Links
-    - path: /contribute/components/lists/
-      title: Lists
-    - path: /contribute/components/tables/
-      title: Tables
-    - path: /contribute/components/tabs/
-      title: Tabs
-    - path: /contribute/components/tooltips/
-      title: Tooltips
-    - path: /contribute/components/videos/
-      title: Videos
-    - path: /contribute/components/buttons/
-      title: Buttons
-  - path: /contribute/checklist/
-    title: Writing checklist
 
 FAQ:
   - path: /faq/
@@ -2201,13 +2179,13 @@ FAQ:
   - sectiontitle: Desktop
     section:
     - path: /desktop/faqs/general/
-      title: General 
+      title: General
     - path: /desktop/faqs/macfaqs/
-      title: Mac 
+      title: Mac
     - path: /desktop/faqs/windowsfaqs/
-      title: Windows 
+      title: Windows
     - path: /desktop/faqs/linuxfaqs/
-      title: Linux 
+      title: Linux
     - path: /desktop/faqs/releases/
       title: Releases
   - sectiontitle: Docker Hub and admin
@@ -2218,20 +2196,29 @@ FAQ:
       title: Organization
     - path: /docker-hub/company-faqs/
       title: Company
-    - sectiontitle: Single Sign-On
-      section:
-      - path: /single-sign-on/faqs/
-        title: General
-      - path: /single-sign-on/saml-faqs/
-        title: SAML
-      - path: /single-sign-on/idp-faqs/
-        title: Identity providers
-      - path: /single-sign-on/domain-faqs/
-        title: Domains
-      - path: /single-sign-on/enforcement-faqs/
-        title: Enforcement
-      - path: /single-sign-on/users-faqs/
-        title: Manage users
   - path: /subscription/faq/
     title: Subscription
-    
+  - sectiontitle: Security
+    section:
+    - path: /faq/security/general/
+      title: General
+    - path: /faq/security/networking-and-vms/
+      title: Networking and VMs
+    - path: /faq/security/settings-management/
+      title: Settings Management
+    - path: /faq/security/eci-faq/
+      title: Enhanced Container Isolation
+    - sectiontitle: Single Sign-On
+      section:
+      - path: /faq/security/single-sign-on/faqs/
+        title: General
+      - path: /faq/security/single-sign-on/saml-faqs/
+        title: SAML
+      - path: /faq/security/single-sign-on/idp-faqs/
+        title: Identity providers
+      - path: /faq/security/single-sign-on/domain-faqs/
+        title: Domains
+      - path: /faq/security/single-sign-on/enforcement-faqs/
+        title: Enforcement
+      - path: /faq/security/single-sign-on/users-faqs/
+        title: Manage users

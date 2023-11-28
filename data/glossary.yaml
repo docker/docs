@@ -66,7 +66,7 @@ Docker: |
   - The Docker project as a whole, which is a platform for developers and sysadmins to develop, ship, and run applications
   - The docker daemon process running on the host which manages images and containers (also called Docker Engine)
 Docker Business: |
-  Docker Buisness is a Docker subscription. Docker Business offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and accelerate their secure software supply chain initiatives.
+  Docker Business is a Docker subscription. Docker Business offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and accelerate their secure software supply chain initiatives.
 Docker Desktop: |
   Docker Desktop is an easy-to-install, lightweight
   Docker development environment. Docker Desktop is available for [Mac](#docker-desktop-for-mac), [Windows](#docker-desktop-for-windows), and [Linux](#docker-desktop-for-linux), providing developers a consistent experience across platforms. Docker Desktop includes Docker Engine, Docker CLI client, Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper.

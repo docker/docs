@@ -51,10 +51,11 @@ On the **General** tab, you can configure when to start Docker and specify other
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
-- **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
+- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
 
-- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively. 
+- **SBOM Indexing**. When this option is enabled, inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout.
+
+- **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
 ## Resources
 
@@ -68,30 +69,51 @@ containers.
 
 > **Note**
 >
-> The **Advanced** tab is only available in Hyper-V mode, because Windows manages
+> The **Resource allocation** options in the **Advanced** tab are only available in Hyper-V mode, because Windows manages
 > the resources in WSL 2 mode and Windows container mode. In WSL 2
 > mode, you can configure limits on the memory, CPU, and swap size allocated
 > to the [WSL 2 utility VM](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
 
-On the **Advanced** tab, you can limit resources available to Docker.
+On the **Advanced** tab, you can limit resources available to the Docker Linux VM.
 
 Advanced settings are:
 
-- **CPUs**. By default, Docker Desktop is set to use half the number of processors
-  available on the host machine. To increase processing power, set this to a
-  higher number; to decrease, lower the number.
+- **CPU limit**. Specify the maximum number of CPUs to be used by Docker Desktop.
+  By default, Docker Desktop is set to use all the processors available on the host machine.
 
-- **Memory**. By default, Docker Desktop is set to use `2` GB  of your host's
+- **Memory limit**. By default, Docker Desktop is set to use up to `2` GB of your host's
   memory. To increase the RAM, set this to a higher number; to decrease it,
   lower the number.
 
 - **Swap**. Configure swap file size as needed. The default is 1 GB.
 
-- **Disk image size**. Specify the size of the disk image.
+- **Virtual disk limit**. Specify the maximum size of the disk image.
 
 - **Disk image location**. Specify the location of the Linux volume where containers and images are stored.
 
-You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it.
+  You can also move the disk image to a different location. If you attempt to
+  move a disk image to a location that already has one, you are asked if you
+  want to use the existing image or replace it.
+
+>**Tip**
+>
+> If you feel Docker Desktop starting to get slow or you're running
+> multi-container workloads, increase the memory and disk image space allocation
+{ .tip }
+
+- **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
+  which significantly reduces CPU and memory utilization on the host by
+  automatically turning off the Linux VM when Docker Desktop is idle (i.e., no
+  containers are running).
+
+  You can also configure the Resource Saver timeout which indicates how long
+  should Docker Desktop be idle before Resource Saver mode kicks in. Default is
+  5 minutes.
+
+  >**Note**
+  >
+  > Exit from Resource Saver mode occurs automatically when containers run. Exit
+  > may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
 
 ### File sharing
 
@@ -233,7 +255,7 @@ You can find this file at `$HOME/.docker/daemon.json`. To change the configurati
 edit the JSON configuration directly from the dashboard in Docker Desktop, or open and
 edit the file using your favorite text editor.
 
-To see the full list of possible configuration options, see the 
+To see the full list of possible configuration options, see the
 [dockerd command reference](/engine/reference/commandline/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -288,7 +310,7 @@ Use the **Extensions** tab to:
 
 For more information about Docker extensions, see [Extensions](../extensions/index.md).
 
-## Feature control 
+## Feature control
 
 On the **Feature control** tab you can control your settings for **Beta features** and **Experimental features**.
 
@@ -305,3 +327,7 @@ Turns on the containerd image store. This brings new features like faster contai
 ### Experimental features
 
 {{< include "desktop-experimental.md" >}}
+
+## Notifications
+
+{{< include "desktop-notifications-settings.md" >}}

@@ -2,5 +2,9 @@
 {{ $styles = $styles | resources.PostCSS }}
 {{ if hugo.IsProduction }}
   {{ $styles = $styles | minify | fingerprint | resources.PostProcess }}
+<style>
+/* hide img injected by prod scripts */
+body > img { display: none }
+</style>
 {{ end }}
 <link href="{{ $styles.Permalink }}" rel="stylesheet" />

@@ -1,5 +1,5 @@
 ---
-title: Use containers for development
+title: Use containers for Java development
 keywords: Java, local, development, run,
 description: Learn how to develop your application locally.
 ---
@@ -10,30 +10,30 @@ Work through the steps to build an image and run it as a containerized applicati
 
 ## Introduction
 
-In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.
+In this module, you’ll walk through setting up a local development environment for the application you built in the previous modules. You’ll use Docker to build your images and Docker Compose to make everything a whole lot easier.
 
 ## Run a database in a container
 
-First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a Compose file which allows us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
+First, you’ll take a look at running a database in a container and how you use volumes and networking to persist your data and allow your application to talk with the database. Then you’ll pull everything together into a Compose file which allows you to set up and run a local development environment with one command. Finally, you’ll take a look at connecting a debugger to your application running inside a container.
 
-Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, we can use the Docker Official Image for MySQL and run it in a container.
+Instead of downloading MySQL, installing, configuring, and then running the MySQL database as a service, you can use the Docker Official Image for MySQL and run it in a container.
 
-Before we run MySQL in a container, we'll create a couple of volumes that Docker can manage to store our persistent data and configuration. Let’s use the managed volumes feature that Docker provides instead of using bind mounts. You can read all about [Using volumes](../../storage/volumes.md) in our documentation.
+Before you run MySQL in a container, you'll create a couple of volumes that Docker can manage to store your persistent data and configuration. Use the managed volumes feature that Docker provides instead of using bind mounts. For more details, see [Using volumes](../../storage/volumes.md).
 
-Let’s create our volumes now. We’ll create one for the data and one for configuration of MySQL.
+Create your volumes now. You’ll create one for the data and one for configuration of MySQL.
 
 ```console
 $ docker volume create mysql_data
 $ docker volume create mysql_config
 ```
 
-Now we’ll create a network that our application and database will use to talk to each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
+Now you’ll create a network that your application and database will use to talk to each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which you can use when creating your connection string.
 
 ```console
 $ docker network create mysqlnet
 ```
 
-Now, let's run MySQL in a container and attach to the volumes and network we created above. Docker pulls the image from Hub and runs it locally.
+Now, run MySQL in a container and attach to the volumes and network you created. Docker pulls the image from Hub and runs it locally.
 
 ```console
 $ docker run -it --rm -d -v mysql_data:/var/lib/mysql \
@@ -45,21 +45,21 @@ $ docker run -it --rm -d -v mysql_data:/var/lib/mysql \
 -p 3306:3306 mysql:8.0
 ```
 
-Okay, now that we have a running MySQL, let’s update our Dockerfile to activate the MySQL Spring profile defined in the application and switch from an in-memory H2 database to the MySQL server we just created.
+Now that you have a running MySQL, update your Dockerfile to activate the MySQL Spring profile defined in the application and switch from an in-memory H2 database to the MySQL server you just created.
 
-We only need to add the MySQL profile as an argument to the `CMD` definition.
+You only need to add the MySQL profile as an argument to the `CMD` definition.
 
 ```dockerfile
 CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql"]
 ```
 
-Let's build our image.
+Build your image.
 
 ```console
 $ docker build --tag java-docker .
 ```
 
-Now, let’s run our container. This time, we need to set the `MYSQL_URL` environment variable so that our application knows what connection string to use to access the database. We’ll do this using the `docker run` command.
+Now, run your container. This time, you need to set the `MYSQL_URL` environment variable so that your application knows what connection string to use to access the database. You’ll do this using the `docker run` command.
 
 ```console
 $ docker run --rm -d \
@@ -69,7 +69,7 @@ $ docker run --rm -d \
 -p 8080:8080 java-docker
 ```
 
-Let’s test that our application is connected to the database and is able to list Veterinarians.
+Test that your application is connected to the database and is able to list Veterinarians.
 
 ```console
 $ curl  --request GET \
@@ -77,7 +77,7 @@ $ curl  --request GET \
   --header 'content-type: application/json'
 ```
 
-You should receive the following json back from our service.
+You should receive the following json back from your service.
 
 ```json
 {"vetList":[{"id":1,"firstName":"James","lastName":"Carter","specialties":[],"nrOfSpecialties":0,"new":false},{"id":2,"firstName":"Helen","lastName":"Leary","specialties":[{"id":1,"name":"radiology","new":false}],"nrOfSpecialties":1,"new":false},{"id":3,"firstName":"Linda","lastName":"Douglas","specialties":[{"id":3,"name":"dentistry","new":false},{"id":2,"name":"surgery","new":false}],"nrOfSpecialties":2,"new":false},{"id":4,"firstName":"Rafael","lastName":"Ortega","specialties":[{"id":2,"name":"surgery","new":false}],"nrOfSpecialties":1,"new":false},{"id":5,"firstName":"Henry","lastName":"Stevens","specialties":[{"id":1,"name":"radiology","new":false}],"nrOfSpecialties":1,"new":false},{"id":6,"firstName":"Sharon","lastName":"Jenkins","specialties":[],"nrOfSpecialties":0,"new":false}]}
@@ -85,11 +85,11 @@ You should receive the following json back from our service.
 
 ## Multi-stage Dockerfile for development
 
-Let’s take a look at updating our Dockerfile to produce a final image which is ready for production as well as a dedicated step to produce a development image.
+Now you can update your Dockerfile to produce a final image which is ready for production as well as a dedicated step to produce a development image.
 
-We’ll also set up the Dockerfile to start the application in debug mode in the development container so that we can connect a debugger to the running Java process.
+You’ll also set up the Dockerfile to start the application in debug mode in the development container so that you can connect a debugger to the running Java process.
 
-Below is a multi-stage Dockerfile that we will use to build our production image and our development image. Replace the contents of your Dockerfile with the following.
+The following is a multi-stage Dockerfile that you'll use to build your production image and your development image. Replace the contents of your Dockerfile with the following.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -113,13 +113,13 @@ COPY --from=build /app/target/spring-petclinic-*.jar /spring-petclinic.jar
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/spring-petclinic.jar"]
 ```
 
-We first add a label to the `FROM eclipse-temurin:17-jdk-jammy` statement. This allows us to refer to this build stage in other build stages. Next, we added a new build stage labeled `development`.
+You first add a label to the `FROM eclipse-temurin:17-jdk-jammy` statement. This allows you to refer to this build stage in other build stages. Next, you added a new build stage labeled `development`.
 
-We expose port 8000 and declare the debug configuration for the JVM so that we can attach a debugger.
+You expose port 8000 and declare the debug configuration for the JVM so that you can attach a debugger.
 
 ## Use Compose to develop locally
 
-We can now create a Compose file to start our development container and the MySQL database using a single command.
+You can now create a Compose file to start your development container and the MySQL database using a single command.
 
 Open the `petclinic` in your IDE or a text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the following commands into the file.
 
@@ -159,21 +159,21 @@ volumes:
   mysql_config:
 ```
 
-This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that using a Compose file.
+This Compose file is super convenient as you don't have to type all the parameters to pass to the `docker run` command. You can declaratively do that using a Compose file.
 
-Another really cool feature of using a Compose file is that we have service resolution set up to use the service names. Therefore, we are now able to use `mysqlserver` in our connection string. The reason we use `mysqlserver` is because that is what we've named our MySQL service as in the Compose file.
+Another Compose feature is that you have service resolution set up to use the service names. Therefore, you are now able to use `mysqlserver` in your connection string. The reason you use `mysqlserver` is because that's what you've named your MySQL service as in the Compose file.
 
-Now, to start our application and to confirm that it is running properly.
+Now, to start your application and to confirm that it's running.
 
 ```console
 $ docker compose -f docker-compose.dev.yml up --build
 ```
 
-We pass the `--build` flag so Docker will compile our image and then starts the containers. You should see similar output if it runs successfully:
+You pass the `--build` flag so Docker will compile your image and then starts the containers. You should see similar output if it runs successfully:
 
-![Java Compose output](images/java-compose-output.png)
+![Java Compose output](images/java-compose-output.webp)
 
-Now let’s test our API endpoint. Run the following curl commands:
+Now, test your API endpoint. Run the following curl command:
 
 ```console
 $ curl  --request GET \
@@ -189,23 +189,23 @@ You should receive the following response:
 
 ## Connect a Debugger
 
-We’ll use the debugger that comes with the IntelliJ IDEA. You can use the community version of this IDE. Open your project in IntelliJ IDEA and then go to the **Run** menu > **Edit Configuration**. Add a new Remote JVM Debug configuration similar to the following:
+You’ll use the debugger that comes with the IntelliJ IDEA. You can use the community version of this IDE. Open your project in IntelliJ IDEA, go to the **Run** menu, and then **Edit Configuration**. Add a new Remote JVM Debug configuration similar to the following:
 
-![Java Connect a Debugger](images/connect-debugger.png)
+![Java Connect a Debugger](images/connect-debugger.webp)
 
-Let's set a breakpoint
+Set a breakpoint.
 
-Open the following file `src/main/java/org/springframework/samples/petclinic/vet/VetController.java` and add a breakpoint inside the `showResourcesVetList` function.
+Open `src/main/java/org/springframework/samples/petclinic/vet/VetController.java` and add a breakpoint inside the `showResourcesVetList` function.
 
-Start your debug session, **Run** menu and then **Debug _NameOfYourConfiguration_**
+To start your debug session, select the **Run** menu and then **Debug _NameOfYourConfiguration_**.
 
-![Debug menu](images/debug-menu.png)
+![Debug menu](images/debug-menu.webp?w=300)
 
 You should now see the connection in the logs of your Compose application.
 
-![Compose log file ](images/compose-logs.png)
+![Compose log file ](images/compose-logs.webp)
 
-We can now call the server endpoint.
+You can now call the server endpoint.
 
 ```console
 $ curl --request GET --url http://localhost:8080/vets
@@ -213,18 +213,14 @@ $ curl --request GET --url http://localhost:8080/vets
 
 You should have seen the code break on the marked line and now you are able to use the debugger just like you would normally. You can also inspect and watch variables, set conditional breakpoints, view stack traces and a do bunch of other stuff.
 
-![Debugger code breakpoint](images/debugger-breakpoint.png)
+![Debugger code breakpoint](images/debugger-breakpoint.webp)
 
 You can also activate the live reload option provided by SpringBoot Dev Tools. Check out the [SpringBoot documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-devtools-remote) for information on how to connect to a remote application.
 
 ## Next steps
 
-In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to expose the debugging port and configure Spring Boot to live reload our changes.
+In this module, you took a look at creating a general development image that you can use pretty much like your normal command line. You also set up your Compose file to expose the debugging port and configure Spring Boot to live reload your changes.
 
-In the next module, we’ll take a look at how to run unit tests in Docker. See
+In the next module, you’ll take a look at how to run unit tests in Docker.
 
 {{< button text="Run your tests" url="run-tests.md" >}}
-
-## Feedback
-
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Java%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

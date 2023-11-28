@@ -20,13 +20,13 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       -
         name: Build
-        uses: docker/bake-action@v3
+        uses: docker/bake-action@v4
         with:
           files: |
             docker-bake.hcl
@@ -46,13 +46,13 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       -
         name: Validate
-        uses: docker/bake-action@v3
+        uses: docker/bake-action@v4
         with:
           files: |
             docker-bake.hcl
@@ -69,13 +69,13 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       -
         name: Build
-        uses: docker/bake-action@v3
+        uses: docker/bake-action@v4
         with:
           files: |
             docker-bake.hcl

@@ -81,7 +81,7 @@
 # provide a short, permanent link to refer to a topic in the documentation.
 # For example, the docker CLI can output https://docs.docker.com/go/some-topic
 # in its help output, which can be redirected to elsewhere in the documentation.
-"/docker-hub/access-tokens/":
+"/security/for-developers/access-tokens/":
   - /go/access-tokens/
 "/desktop/mac/apple-silicon/":
   - /go/apple-silicon/
@@ -115,6 +115,8 @@
   - /go/deprecated/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
+"/engine/reference/commandline/login/#credential-stores":
+  - /go/credential-store/
 "/cloud/ecs-integration/":
   - /go/compose-ecs-eol/
 "/compose/migrate/":
@@ -576,8 +578,14 @@
   - /go/docker-scout/
 "/scout/quickstart/":
   - /go/scout-quickstart/
+"/scout/dashboard/":
+  - /go/scout-dashboard/
 "/scout/ci/":
   - /go/scout-ci/
+"/scout/policy/":
+  - /go/scout-policy/
+"/scout/policy/configure/":
+  - /go/scout-configure-policy/
 # integrations
 "/scout/integrations/ci/gha/":
   - "/go/scout-gha/"
@@ -593,10 +601,10 @@
   - /go/scout-artifactory/
 "/scout/integrations/registry/ecr/":
   - "/go/scout-ecr/"
-
-# Telepresence
-"/develop/remote-development/":
-  - /go/telepresence/
+"/scout/integrations/environment/":
+  - "/go/scout-env/"
+"/scout/integrations/environment/sysdig/":
+  - "/go/scout-sysdig/"
 
 # Build links
 "/desktop/use-desktop/builds/":
@@ -613,3 +621,25 @@
   - /go/build-cache-backends/
 "/build/exporters/":
   - /go/build-exporters/
+"/build/bake/reference/":
+  - /build/customize/bake/file-definition/
+"/build/ci/github-actions/attestations/":
+  - /go/build-attestations-gha/
+
+# CLI backlinks
+"/config/filter/":
+  - /go/filter/
+
+# Docker Init
+"/develop/develop-images/instructions/#user":
+  - /go/dockerfile-user-best-practices/
+"/develop/develop-images/instructions/#apt-get":
+  - /go/dockerfile-aptget-best-practices/
+"/build/building/context/#dockerignore-files":
+  - /go/build-context-dockerignore/
+"/compose/compose-file":
+  - /go/compose-spec-reference/
+"/engine/reference/builder":
+  - /go/dockerfile-reference/
+"/get-started/04_sharing_app":
+  - /go/get-started-sharing/

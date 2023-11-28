@@ -3,17 +3,17 @@ short: Display available base image updates and remediation recommendations
 long: |-
     The `docker scout recommendations` command display recommendations for base images updates.
     It analyzes the image and display recommendations to refresh or update the base image.
-    For each recommendation it shows a list of benefits like less vulnerabilities, smaller image, etc.
+    For each recommendation it shows a list of benefits, such as
+    fewer vulnerabilities or smaller image size.
 
-    If no image is specified, the most recently built image will be used.
+    If no image is specified, the most recently built image is used.
 
     The following artifact types are supported:
 
     - Images
     - OCI layout directories
     - Tarball archives, as created by `docker save`
-
-    The tool analyzes the provided software artifact, and generates base image updates and remediation recommendations.
+    - Local directory or file
 
     By default, the tool expects an image reference, such as:
 
@@ -21,7 +21,15 @@ long: |-
     - `curlimages/curl:7.87.0`
     - `mcr.microsoft.com/dotnet/runtime:7.0`
 
-    If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` flag.
+    If the artifact you want to analyze is an OCI directory, a tarball archive, a local file or directory,
+    or if you want to control from where the image will be resolved, you must prefix the reference with one of the following:
+
+    - `image://` (default) use a local image, or fall back to a registry lookup
+    - `local://` use an image from the local image store (don't do a registry lookup)
+    - `registry://` use an image from a registry (don't use a local image)
+    - `oci-dir://` use an OCI layout directory
+    - `archive://` use a tarball archive, as created by `docker save`
+    - `fs://` use a local directory or file
 usage: docker scout recommendations [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
 plink: docker_scout.yaml
@@ -40,6 +48,15 @@ options:
       value_type: bool
       default_value: "false"
       description: Only display base image update recommendations
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: org
+      value_type: string
+      description: Namespace of the Docker organization
       deprecated: false
       hidden: false
       experimental: false
@@ -69,7 +86,7 @@ options:
       value_type: string
       description: |-
         Reference to use if the provided tarball contains multiple references.
-        Can only be used with --type archive.
+        Can only be used with archive.
       deprecated: false
       hidden: false
       experimental: false
@@ -85,25 +102,21 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: type
-      value_type: string
-      default_value: image
-      description: |-
-        Type of the image to analyze. Can be one of:
-        - image
-        - oci-dir
-        - archive (docker save tarball)
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
 inherited_options:
     - option: debug
       value_type: bool
       default_value: "false"
       description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
       deprecated: false
       hidden: true
       experimental: false

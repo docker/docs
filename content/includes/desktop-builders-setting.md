@@ -7,13 +7,14 @@ If you have turned on the
 To inspect builders, find the builder that you want to inspect and select the
 expand icon. You can only inspect active builders.
 
-The detailed builder view shows:
+Inspecting an active builder shows:
 
-- Builder status
-- Information about the BuildKit runtime
-- Capabilities and driver type
-- Supported platforms
+- BuildKit version
+- Status
+- Driver type
+- Supported capabilities and platforms
 - Disk usage
+- Endpoint address
 
 ### Select a different builder
 

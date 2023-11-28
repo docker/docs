@@ -17,8 +17,8 @@ It is available with [Docker Desktop 4.13.0 and later](../../release-notes.md).
 
 ### Who is it for?
 
-- For Organizations who wish to configure Docker Desktop to be within their organization's centralized control.
-- For Organizations who want to create a standardized Docker Desktop environment at scale.
+- For organizations that want to configure Docker Desktop to be within their organization's centralized control.
+- For organizations that want to create a standardized Docker Desktop environment at scale.
 - For Docker Business customers who want to confidently manage their use of Docker Desktop within tightly regulated environments.
 
 ### How does it work?
@@ -39,12 +39,13 @@ Using the `admin-settings.json` file, admins can:
 - Configure Docker Engine
 - Turn off Docker Desktop's ability to checks for updates
 - Turn off Docker Extensions
+- Turn off Docker Scout SBOM indexing
 
 For more details on the syntax and options admins can set, see [Configure Settings Management](configure.md).
 
 ### How do I set up and enforce Settings Management?
 
-As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Settings Management feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+As an administrator, you first need to [configure a registry.json to enforce sign-in](../../../security/for-admins/configure-sign-in.md). This is because the Settings Management feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 Next, you must either manually [create and configure the admin-settings.json file](configure.md), or use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location.
 

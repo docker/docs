@@ -1,9 +1,9 @@
 ---
-description: Describes how to use the Google Cloud Logging driver.
+description: Learn how to use the Google Cloud Logging driver with Docker Engine
 keywords: gcplogs, google, docker, logging, driver
 title: Google Cloud Logging driver
 aliases:
-- /engine/admin/logging/gcplogs/
+  - /engine/admin/logging/gcplogs/
 ---
 
 The Google Cloud Logging driver sends container logs to
@@ -36,12 +36,11 @@ Restart Docker for the changes to take effect.
 You can set the logging driver for a specific container by using the
 `--log-driver` option to `docker run`:
 
-    docker run --log-driver=gcplogs ...
+```console
+$ docker run --log-driver=gcplogs ...
+```
 
-This log driver does not implement a reader so it is incompatible with
-`docker logs`.
-
-If Docker detects that it is running in a Google Cloud Project, it discovers
+If Docker detects that it's running in a Google Cloud Project, it discovers
 configuration from the
 [instance metadata service](https://cloud.google.com/compute/docs/metadata).
 Otherwise, the user must specify
@@ -49,12 +48,12 @@ which project to log to using the `--gcp-project` log option and Docker
 attempts to obtain credentials from the
 [Google Application Default Credential](https://developers.google.com/identity/protocols/application-default-credentials).
 The `--gcp-project` flag takes precedence over information discovered from the
-metadata server so a Docker daemon running in a Google Cloud Project can be
-overridden to log to a different Google Cloud Project using `--gcp-project`.
+metadata server, so a Docker daemon running in a Google Cloud project can be
+overridden to log to a different project using `--gcp-project`.
 
 Docker fetches the values for zone, instance name and instance ID from Google
 Cloud metadata server. Those values can be provided via options if metadata
-server is not available. They do not override the values from metadata server.
+server isn't available. They don't override the values from metadata server.
 
 ## gcplogs options
 
@@ -62,8 +61,8 @@ You can use the `--log-opt NAME=VALUE` flag to specify these additional Google
 Cloud Logging driver options:
 
 | Option          | Required | Description                                                                                                                                                  |
-|:----------------|:---------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `gcp-project`   | optional | Which GCP project to log to. Defaults to discovering this value from the GCE metadata service.                                                               |
+| :-------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gcp-project`   | optional | Which Google Cloud project to log to. Defaults to discovering this value from the Google Cloud metadata server.                                                               |
 | `gcp-log-cmd`   | optional | Whether to log the command that the container was started with. Defaults to false.                                                                           |
 | `labels`        | optional | Comma-separated list of keys of labels, which should be included in message, if these labels are specified for the container.                                |
 | `labels-regex`  | optional | Similar to and compatible with `labels`. A regular expression to match logging-related labels. Used for advanced [log tag options](log_tags.md).             |
@@ -77,8 +76,8 @@ If there is collision between `label` and `env` keys, the value of the `env`
 takes precedence. Both options add additional fields to the attributes of a
 logging message.
 
-Below is an example of the logging options required to log to the default
-logging destination which is discovered by querying the GCE metadata server.
+The following is an example of the logging options required to log to the default
+logging destination which is discovered by querying the Google Cloud metadata server.
 
 ```console
 $ docker run \
@@ -95,8 +94,14 @@ This configuration also directs the driver to include in the payload the label
 `location`, the environment variable `ENV`, and the command used to start the
 container.
 
-An example of the logging options for running outside of GCE (the daemon must be
-configured with GOOGLE_APPLICATION_CREDENTIALS):
+The following example shows logging options for running outside of Google
+Cloud. The `GOOGLE_APPLICATION_CREDENTIALS` environment variable must be set
+for the daemon, for example via systemd:
+
+```ini
+[Service]
+Environment="GOOGLE_APPLICATION_CREDENTIALS=uQWVCPkMTI34bpssr1HI"
+```
 
 ```console
 $ docker run \

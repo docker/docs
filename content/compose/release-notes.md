@@ -11,8 +11,107 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.23.3
+{{< release-date date="2023-11-22" >}}
+
+### Update
+- Dependencies upgrade: bump buildx to v0.12.0
+
+## 2.23.2
+{{< release-date date="2023-11-21" >}}
+
+### Update
+- Dependencies upgrade: bump buildkit 0.12.3 
+- Dependencies upgrade: bump docker 24.0.7 
+- Dependencies upgrade: bump cli 24.0.7 
+- Dependencies upgrade: bump 1.20.2
+
+### Bug fixes and enhancements
+- Compose now supports `builds.tags` with `push` command.
+- Compose Watch now re-builds service images at startup.
+- Now `--remove-orphans` doesn't manage disabled services as orphaned.
+- Compose displays `Building` output log only if there is at least one service to build.
+
+## 2.23.1
+{{< release-date date="2023-11-16" >}}
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.20.1
+
+### Bug fixes and enhancements
+- Aligned Compose with OCI artifact best practices.
+- Introduced `--resolve-image-digests` so users can seal service images by digest when publishing a Compose application.
+- Improved Compose Watch configuration logging.
+- Compose now rejects a Compose file using `secrets|configs.driver` or `template_driver`.
+- Compose now fails to start if a dependency is missing. 
+- Fixed SIGTERM support to stop/kill stack.
+- Fixed a `--hash` regression.
+- Fixed "Application failed to start after update" when an external network is on a watched service.
+- Fixed `--pull` documentation.
+- Fixed display by adding newline in cmd/compose/build.go.
+- Compose is rendered quiet after filtering applied.
+- Stripped project prefix from docker-compose up output.
+
+## 2.23.0
+{{< release-date date="2023-10-18" >}}
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.20.0
+- Dependencies upgrade: bump containerd to 1.7.7
+
+### Bug fixes and enhancements
+- Added dry-run support for publish command
+- Added `COMPOSE_ENV_FILES` env variable to pass a list of env files
+- Added `sync+restart` action to `compose watch`
+- Aligned `compose ps` output with Docker CLI by default and introduced `--no-trunc` to keep the previous behaviour
+- Fixed hashes inconsistency between `up` and `configure`
+- Enabled profiles when `down` ran with explicit service names
+- Fixed an issue when the pull policy provided was invalid
+
+## 2.22.0
+{{< release-date date="2023-09-21" >}}
+
+> **Note**
+>
+> The `watch` command is now generally available (GA). You can directly use it from the root command `docker compose watch`.
+> For more information, see [File watch](./file-watch.md).
+
+### Update
+- Dependencies upgrade: bump golang to 1.21.1
+- Dependencies upgrade: bump compose-go to v1.19.0
+- Dependencies upgrade: bump buildkit to v0.12.2
+
+### Bug fixes and enhancements
+- Added experimental support for the `publish` command.
+- The command `watch` now builds and launches the project during startup.
+- Added `policy` option to the `--pull` flag.
+- Fixed various race and deadlock conditions for `up` command on exit.
+- Fixed multi-platform issues on build.
+- Enabled services that are explicitly requested even when their `profiles` aren't activated.
+- Fixed  a `config` issue when the declared `env_file` is missing.
+- Passed BuildOptions to `up` and `run` commands.
+
+## 2.21.0
+{{< release-date date="2023-08-30" >}}
+
+> **Note**
+>
+> The format of `docker compose ps` and `docker compose ps --format=json` changed to better align with `docker ps` output. See [compose#10918](https://github.com/docker/compose/pull/10918).
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.18.3
+
+### Bug fixes and enhancements
+- Changed `docker compose ps` and `docker compose ps --format=json` output to align with Docker CLI.
+- Added support for multi-document YAML files.
+- Added support for loading remote Compose files from Git repos with `include` (experimental).
+- Fixed incorrect proxy variables during build.
+- Fixed truncated container logs on container exit.
+- Fixed "no such service" errors when using `include` with `--profile`.
+- Fixed `.env` overrides when using `include`.
+
 ## 2.20.3
-{{< release-date date="2023-07-19" >}}
+{{< release-date date="2023-08-11" >}}
 
 ### Update
 - Dependencies upgrade: bump golang to 1.21.0
@@ -20,7 +119,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump buildkit to v0.12.1
 
 ### Bug fixes and enhancements
-- Added tar synchronisation in `watch` mode.
+- Improved speed and reliability of `watch` sync.
 - Added builder's name on the first build line.
 - Improved shell completion for `--project-directory` and `--profile`.
 - Fixed build issue with proxy configuration not passing to legacy builder.
@@ -3256,7 +3355,8 @@ Thanks @ryanbrainard and @d11wtq!
    For example, if you have a `web` service which depends on a `db` service, `fig run web ...` will start the `db` service.
 
  - Environment variables can now be resolved from the environment that Fig is running in. Just specify it as a blank variable in your `fig.yml` and, if set, it'll be resolved:
-   ```
+
+   ```yaml
    environment:
      RACK_ENV: development
      SESSION_SECRET:
@@ -3264,7 +3364,7 @@ Thanks @ryanbrainard and @d11wtq!
 
  - `volumes_from` is now supported in `fig.yml`. All of the volumes from the specified services and containers will be mounted:
 
-   ```
+   ```yaml
    volumes_from:
     - service_name
     - container_name
@@ -3272,7 +3372,7 @@ Thanks @ryanbrainard and @d11wtq!
 
  - A host address can now be specified in `ports`:
 
-   ```
+   ```yaml
    ports:
     - "0.0.0.0:8000:8000"
     - "127.0.0.1:8001:8001"

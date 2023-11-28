@@ -1,14 +1,14 @@
 ---
 title: Inline cache
+description: Embed the build cache into the image
 keywords: build, buildx, cache, backend, inline
 aliases:
-- /build/building/cache/backends/inline/
+  - /build/building/cache/backends/inline/
 ---
 
 The `inline` cache storage backend is the simplest way to get an external cache
 and is easy to get started using if you're already building and pushing an
-image. Inline cache is the only cache backend supported by the default `docker`
-driver.
+image.
 
 The downside of inline cache is that it doesn't scale with multi-stage builds
 as well as the other drivers do. It also doesn't offer separation between your

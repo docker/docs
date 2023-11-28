@@ -1,31 +1,8 @@
 {{- if hugo.IsProduction -}}
 User-agent: *
 
-# Docker Engine archives
-Disallow: /edge/
-Disallow: /v1.4/
-Disallow: /v1.5/
-Disallow: /v1.6/
-Disallow: /v1.7/
-Disallow: /v1.8/
-Disallow: /v1.9/
-Disallow: /v1.10/
-Disallow: /v1.11/
-Disallow: /v1.12/
-Disallow: /v1.13/
-Disallow: /v17.03/
-Disallow: /v17.06/
-Disallow: /v17.09/
-Disallow: /v17.12/
-Disallow: /v18.03/
-Disallow: /v18.09/
-
-# Docker Datacenter archives
-Disallow: /datacenter/
-Disallow: /ee/
-
-Disallow: /apidocs/v*
 Disallow: /build/hydrobuild/
+Disallow: /desktop/synchronized-file-sharing/
 
 Sitemap: {{ site.BaseURL }}/sitemap.xml
 {{- else -}}

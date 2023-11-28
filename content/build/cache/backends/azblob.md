@@ -1,28 +1,23 @@
 ---
 title: Azure Blob Storage cache
+description: Manage build cache with Azure blob storage
 keywords: build, buildx, cache, backend, azblob, azure
 aliases:
-- /build/building/cache/backends/azblob/
+  - /build/building/cache/backends/azblob/
 ---
 
-> **Warning**
+> **Experimental**
 >
-> This cache backend is unreleased. You can use it today, by using the
-> `moby/buildkit:master` image in your Buildx driver.
+> This is an experimental feature. The interface and behavior are unstable and
+> may change in future releases.
+{ .restricted }
 
 The `azblob` cache store uploads your resulting build cache to
 [Azure's blob storage service](https://azure.microsoft.com/en-us/services/storage/blobs/).
 
-> **Note**
->
-> This cache storage backend requires using a different driver than the default
-> `docker` driver - see more information on selecting a driver
-> [here](../../drivers/index.md). To create a new driver (which can act as a
-> simple drop-in replacement):
->
-> ```console
-> $ docker buildx create --use --driver=docker-container
-> ```
+This cache storage backend is not supported with the default `docker` driver.
+To use this feature, create a new builder using a different driver. See
+[Build drivers](../../drivers/_index.md) for more information.
 
 ## Synopsis
 
@@ -44,7 +39,7 @@ The following table describes the available CSV parameters that you can pass to
 | `ignore-error`      | `cache-to`              | Boolean     | `false` | Ignore errors caused by failed cache exports.      |
 
 [1]: #authentication
-[2]: index.md#cache-mode
+[2]: _index.md#cache-mode
 
 ## Authentication
 
@@ -55,7 +50,7 @@ The environment variables are read from the server, not the Buildx client.
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../index.md).
+For an introduction to caching see [Optimizing builds with cache](../_index.md).
 
 For more information on the `azblob` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#azure-blob-storage-cache-experimental).

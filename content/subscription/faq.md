@@ -19,8 +19,8 @@ Contact the [Docker Sales Team](https://www.docker.com/company/contact).
 ### What ways can I contribute to Docker content?
 
 Docker offers two programs:
-- [Docker-Sponsored Open Source Program (DSOS)](../docker-hub/dsos-program.md)
-- [Docker Verified Publisher (DVP)](../docker-hub/dvp-program.md)
+- [Docker-Sponsored Open Source Program (DSOS)](../trusted-content/dsos-program.md)
+- [Docker Verified Publisher (DVP)](../trusted-content/dvp-program.md)
 
 ### Do I need to do anything at the end of my subscription term?
 
@@ -38,7 +38,7 @@ Personal subscriptions do not include collaborators for private repositories. If
 
 Docker maintains a [public roadmap](https://github.com/docker/roadmap) so subscribers can see what new features are in development, as well as request new capabilities.
 
-### Can I pause or delay my Docker Hub subscription?
+### Can I pause or delay my Docker subscription?
 
 You can't pause or delay a subscription. If a subscription invoice hasn't been paid on the due date, there's a 15 day grace period, including the due date.
 
@@ -49,3 +49,7 @@ Subscriptions are non-transferable.
 ### I have more questions regarding the new pricing, who can I reach out to?
 
 If you have any questions that are not covered in the FAQ, [please reach out](https://www.docker.com/company/contact) and a member of the Docker team will get back to you.
+
+### Is Docker Scout included with my Docker Subscription?
+
+If you have a Docker subscription, you automatically have access to a Docker Scout Free subscription. This lets you enable Docker Scout on up to 3 repositories. To enable Docker Scout for additional repositories, you can [upgrade your plan](../billing/scout-billing.md).

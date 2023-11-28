@@ -103,7 +103,7 @@ For more information about supported integrations, see
 
 ### Hub
 
-Switching to the **Hub** tab prompts you to sign in to your Docke Hub account, if you're not already signed in.
+Switching to the **Hub** tab prompts you to sign in to your Docker Hub account, if you're not already signed in.
 When signed in, it shows you a list of images in Docker Hub organizations and repositories that you have access to.
 
 Select an organization from the drop-down to view a list of repositories for that organization.

@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry support
+description: Analyze telemetry data for builds
 keywords: build, buildx buildkit, opentelemetry
 ---
 

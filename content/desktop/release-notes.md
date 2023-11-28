@@ -24,11 +24,281 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.25.2
+
+{{< release-date date="2023-11-21" >}}
+
+{{< desktop-install all=true version="4.25.2" build_path="/129061/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where a blank UI would appear after submitting a response in the **Welcome Survey**.
+
+#### For Windows
+
+- Fixed a bug where Docker Desktop on WSL 2 would shut down dockerd unexpectedly when idle. Fixes [docker/for-win#13789](https://github.com/docker/for-win/issues/13789)
+
+## 4.25.1
+
+{{< release-date date="2023-11-13" >}}
+
+{{< desktop-install all=true version="4.25.1" build_path="/128006/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a regression in 4.25 where Docker would not start if the swap file was corrupt. Corrupt swap files will be re-created on next boot.
+- Fixed a bug when swap is disabled. Fixes [docker/for-mac#7045](https://github.com/docker/for-mac/issues/7045), [docker/for-mac#7044](https://github.com/docker/for-mac/issues/7044) and [docker/for-win#13779](https://github.com/docker/for-win/issues/13779).
+- The `sysctl vm.max_map_count` is now set to 262144. See [docker/for-mac#7047](https://github.com/docker/for-mac/issues/7047)
+
+#### For Windows
+
+- Fixed an issue where **Switch to Windows Containers** would not appear on the tray menu for some users. See [docker/for-win#13761](https://github.com/docker/for-win/issues/13761).
+- Fixed a bug where the WSL integration would not work for users using a shell other than `sh`. See [docker/for-win#13764](https://github.com/docker/for-win/issues/13764).
+- Re-added `DockerCli.exe`.
+
+## 4.25.0
+
+{{< release-date date="2023-10-26" >}}
+
+{{< desktop-install all=true version="4.25.0" build_path="/126437/" >}}
+
+### New
+
+- Rosetta is now Generally Available for all users on macOS 13 or later. It provides faster emulation of Intel-based images on Apple Silicon. To use Rosetta, see [Settings](settings/mac.md). Rosetta is enabled by default on macOS 14.1 and later.
+- Docker Desktop now detects if a WSL version is out of date. If an out dated version of WSL is detected, you can allow Docker Desktop to automatically update the installation or you can manually update WSL outside of Docker Desktop.
+- New installations of Docker Desktop for Windows now require a Windows version of 19044 or later.
+- Administrators now have the ability to control Docker Scout image analysis  in [Settings Management](hardened-desktop/settings-management/configure.md).
+
+### Upgrades
+
+- [Compose v2.23.0](https://github.com/docker/compose/releases/tag/v2.23.0)
+- [Docker Scout CLI v1.0.9](https://github.com/docker/scout-cli/releases/tag/v1.0.9).
+- [Kubernetes v1.28.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.28.2)
+  - [cri-dockerd v0.3.4](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.4)
+  - [CNI plugins v1.3.0](https://github.com/containernetworking/plugins/releases/tag/v1.3.0)
+  - [cri-tools v1.28.0](https://github.com/kubernetes-sigs/cri-tools/releases/tag/v1.28.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a spacing problem in the `Accept License` pop-up.
+- Fixed a bug where the **Notifications drawer** changed size when navigating between **Notifications list** and **Notification details** view.
+- containerd integration:
+  - `docker push` now supports `Layer already exists` and `Mounted from` progress statuses.
+  - `docker save` is now able to export images from all tags of the repository.
+  - Hide push upload progress of manifests, configs and indexes (small json blobs) to match the original push behavior.
+  - Fixed `docker diff` containing extra differences.
+  - Fixed `docker history` not showing intermediate image IDs for images built with the classic builder.
+  - Fixed `docker load` not being able to load images from compressed tar archives.
+  - Fixed registry mirrors not working.
+  - Fixed `docker diff` not working correctly when called multiple times concurrently for the same container.
+  - Fixed `docker push` not reusing layers when pushing layers to different repositories on the same registry.
+- Docker Init:
+  - Fixed outdated links to Docker documentation included in generated files
+  - Add support for ASP.NET Core 8 (in addition to 6 and 7)
+- Fixed a bug that caused a failure when installing Wasm shims.
+- Fixed a bug where Docker Desktop exits the [Resource Saver mode](https://docs.docker.com/desktop/use-desktop/resource-saver/) every 15 minutes, or, if the timer is set above 15 minutes, the resource saver mode never kicks in.
+- Promoted the **Enable background SBOM indexing** option to **General settings**.
+
+#### For Mac
+
+- Minimum OS version to install or update Docker Desktop on macOS is now macOS Monterey (version 12) or later.
+- Enhanced error messaging when an update cannot be completed if the user doesn't match the owner of `Docker.app`. Fixes [docker/for-mac#7000](https://github.com/docker/for-mac/issues/7000).
+- Fixed a bug where **Re-apply configuration** might not work when `/var/run/docker.sock` is mis-configured.
+- Docker Desktop doesn't overwrite `ECRCredentialHelper` if already present in `/usr/local/bin`.
+
+#### For Windows
+
+- Fixed an issue where **Switch to Windows Containers** would show in the tray menu on Windows Home Editions. Fixes [docker/for-win#13715](https://github.com/docker/for-win/issues/13715)
+
+#### For Linux
+
+- Fixed a bug in `docker login`. Fixes  [docker/docker-credential-helpers#299](https://github.com/docker/docker-credential-helpers/issues/299)
+
+### Known Issues
+
+#### For Mac
+
+- Upgrading to MacOS 14 can cause Docker Desktop to also update to a latest version even if the auto update option is disabled.
+- Uninstalling Docker Desktop from the command line is not available. As a workaround, you can [uninstall Docker Desktop from the Dashboard](https://docs.docker.com/desktop/uninstall/).
+
+#### For Windows
+
+- **Switch to Windows containers** option in the tray menu may not show up on Windows. As a workaround, edit the [`settings.json` file](https://docs.docker.com/desktop/settings/windows/) and set `"displaySwitchWinLinContainers": true`.
+
+#### For all platforms
+- Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**. 
+
+## 4.24.2
+
+{{< release-date date="2023-10-12" >}}
+
+{{< desktop-install all=true version="4.24.2" build_path="/124339/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where Docker Desktop would send multiple requests to `notify.bugsnag.com`. Fixes [docker/for-win#13722](https://github.com/docker/for-win/issues/13722).
+- Fixed a performance regression for PyTorch.
+
+## 4.24.1
+
+{{< release-date date="2023-10-04" >}}
+
+{{< desktop-install win=true version="4.24.1" build_path="/123237/" >}}
+
+### Bug fixes and enhancements
+
+#### For Windows
+
+- Fixed a bug on Docker Desktop for Windows where the Docker Dashboard wouldn't display container logs correctly. Fixes [docker/for-win#13714](https://github.com/docker/for-win/issues/13714).
+
+## 4.24.0
+
+{{< release-date date="2023-09-28" >}}
+
+{{< desktop-install all=true version="4.24.0" build_path="/122432/" >}}
+
+### New
+
+- The new Notification center is now available to all users so you can be notified of new releases, installation progress updates, and more. Select the bell icon in the bottom-right corner of the Docker Dashboard to access the notification center.
+- Compose Watch is now available to all users. For more information, see [Use Compose Watch](../compose/file-watch.md).
+- Resource Saver is now available to all users and is enabled by default. To configure this feature, navigate to the **Resources** tab in **Settings**. For more information see [Docker Desktop's Resource Saver mode](use-desktop/resource-saver.md).
+- You can now view and manage the Docker Engine state, with pause, stop, and resume, directly from the Docker Dashboard.
+
+### Upgrades
+
+- [Compose v2.22.0](https://github.com/docker/compose/releases/tag/v2.22.0)
+- [Go 1.21.1](https://github.com/golang/go/releases/tag/go1.21.1)
+- [Wasm](../desktop/wasm.md) runtimes:
+  - wasmtime, wasmedge `v0.2.0`.
+  - lunatic, slight, spin, and wws`v0.9.1`.
+  - Added wasmer wasm shims.
+
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Docker Init:
+  - Fixed an issue formatting Dockerfile file paths for ASP.NET projects on Windows.
+  - Improved performance on language detection for large directories with lots of files.
+- Added a timeout to polling for resource usage stats used by the **Containers** view. Fixes [docker/for-mac#6962](https://github.com/docker/for-mac/issues/6962).
+- containerd integration:
+  - Implemented push/pull/save image events.
+  - Implemented pulling legacy schema1 images.
+  - Implemented `docker push --all-tags`.
+  - Implemented counting containers using a specific image (visible for example in `docker system df -v`).
+  - Validated pulled image names are not reserved.
+  - Handle `userns-remap` daemon setting.
+  - Fixed legacy builder build errors when multiple COPY/ADD instructions are used.
+  - Fixed `docker load` causing pool corruption which could some subsequent image related operations.
+  - Fixed not being able to reference images via truncated digest with a `sha256:` prefix.
+  - Fixed `docker images` (without `--all`) showing intermediate layers (created by the legacy classic builder).
+  - Fixed `docker diff` containing extra differences.
+  - Changed `docker pull` output to match the output with containerd integration disabled.
+- Fixed a grammatical error in Kubernetes status message. See [docker/for-mac#6971](https://github.com/docker/for-mac/issues/6971).
+- Docker containers now use all host CPU cores by default.
+- Improved inter-process security in dashboard UI.
+
+#### For Mac
+
+- Fixed a kernel panic on Apple silicon Macs with macOS version below 12.5. Fixes [docker/for-mac#6975](https://github.com/docker/for-mac/issues/6975).
+- Fixed a bug where Docker Desktop failed to start if invalid directories were included in `filesharingDirectories`. Fixes [docker/for-mac#6980](https://github.com/docker/for-mac/issues/6980).
+- Fixed a bug where installer is creating root-owned directories. Fixes [docker/for-mac#6984](https://github.com/docker/for-mac/issues/6984).
+- Fixed a bug where installer is failing on setting up the docker socket when missing `/Library/LaunchDaemons`. Fixes [docker/for-mac#6967](https://github.com/docker/for-mac/issues/6967).
+- Fixed a permission denied error when binding a privileged port to a non-localhost IP on macOS. Fixes [docker/for-mac#697](https://github.com/docker/for-mac/issues/6977).
+- Fixed a resource leak introduced in 4.23. Related to [docker/for-mac#6953](https://github.com/docker/for-mac/issues/6953).
+
+#### For Windows
+
+- Fixed a bug where a "Docker Desktop service not running" popup appeared when service is already running. See [docker/for-win#13679](https://github.com/docker/for-win/issues/13679).
+- Fixed a bug that caused Docker Desktop fail to start on Windows hosts. Fixes [docker/for-win#13662](https://github.com/docker/for-win/issues/13662).
+- Modified the Docker Desktop resource saver feature to skip reducing kernel memory on WSL when no containers are running, as this was causing timeouts in some cases. Instead, users are encouraged to enable "autoMemoryReclaim" on WSL directly via the .wslconfig file (available since WSL 1.3.10).
+
+### Known issues
+
+#### For Mac
+
+- Creating a container with the port 53 fails with the error address `already in use`. As a workaround, deactivate network acceleration by adding `"kernelForUDP": false`, in the `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
+## 4.23.0
+
+{{< release-date date="2023-09-11" >}}
+
+{{< desktop-install all=true version="4.23.0" build_path="/120376/" >}}
+
+### Upgrades
+- [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
+- [Docker Engine v24.0.6](https://docs.docker.com/engine/release-notes/24.0/#2406)
+- [Docker Scout CLI v0.24.1](https://github.com/docker/scout-cli/releases/tag/v0.24.1).
+- [Wasm](../desktop/wasm.md) runtimes:
+  - wasmtime, wasmedge revision `d0a1a1cd`.
+  - slight and spin wasm `v0.9.0`.
+
+### New
+
+- Added support for new Wasm runtimes: wws and lunatic.
+- [`docker init`](../engine/reference/commandline/init.md) now supports ASP.NET
+- Increased performance of exposed ports on macOS, for example with `docker run -p`.
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- With [Docker Scout](../scout/_index.md), you can now:
+  - Manage temporary and cached files with `docker scout cache`.
+  - Manage environments with `docker scout environment`.
+  - Configure the default organization with `docker scout config`.
+  - List packages of an image with their vulnerabilities with `docker scout cves --format only-packages`.
+  - Enroll an organization with Docker scout with `docker scout enroll`.
+  - Stop, analyze, and compare local file systems with `docker scout cves --type fs`.
+- Fixed a bug where `docker stats` would hang when Docker Desktop was in Resource Saver mode.
+- Fixed a bug where turning off experimental features via **Settings** in the Docker Dashboard would not fully turn off Resource Saver mode.
+- Fixed a bug where the **Containers list** action button was clipped.
+- containerd image store:
+  - Fixed `failed to read config content` error when interacting with some images.
+  - Fixed building Dockerfiles with `FROM scratch` instruction when using the legacy classic builder (`DOCKER_BUILDKIT=0`).
+  - Fixed `mismatched image rootfs errors` when building images with legacy classic builder (`DOCKER_BUILDKIT=0`).
+  - Fixed `ONBUILD` and `MAINTAINER` Dockerfile instruction
+  - Fixed healthchecks.
+
+#### For Mac
+
+- All users on macOS 12.5 or greater now have VirtioFS turned on by default. You can revert this in **Settings** in the **General** tab.
+- Improved single-stream TCP throughput.
+- Reinstated the health check for macOS that notifies you if there has been a change on your system which might cause problems running Docker binaries.
+
+#### For Linux
+
+- Fixed a bug where the GUI is killed when opening the Docker Desktop app twice. See [docker/desktop-linux#148](https://github.com/docker/desktop-linux/issues/148).
+
+#### For Windows
+
+- Fixed a bug where non-admin users would get prompted for credentials when switching to Windows Containers or after disabling WSL and switching to the Hyper-V engine.
+  This issue would occur after an OS restart, or on a cold start of Docker Desktop.
+
+### Security
+
+#### For all platforms
+
+- Fixed [CVE-2023-5165](https://www.cve.org/cverecord?id=CVE-2023-5165) which allows Enhanced Container Isolation bypass via debug shell. The affected functionality is available for Docker Business customers only and assumes an environment where users are not granted local root or Administrator privileges.
+- Fixed [CVE-2023-5166](https://www.cve.org/cverecord?id=CVE-2023-5166) which allows Access Token theft via a crafted extension icon URL.
+
+### Known Issues
+
+- Binding a priviledged port on Docker Desktop does not work on macOS. As a workaround you can expose the port on all interfaces (using `0.0.0.0`) or using localhost (using `127.0.0.1`).
+
 ## 4.22.1
 
 {{< release-date date="2023-08-24" >}}
 
-{{< desktop-install all=true version="4.22.1" build_path="/" >}}
+{{< desktop-install all=true version="4.22.1" build_path="/118664/" >}}
 
 ### Bug fixes and enhancements
 
@@ -72,6 +342,16 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed a bug where turning on Wasm from the UI failed when the system was paused.
 - Bind mounts are now shown when you [inspect a container](use-desktop/container.md).
 - You can now download Wasm runtimes when the containerd image store is enabled.
+- With [Quick Search](../desktop/use-desktop/_index.md/#quick-search), you can now:
+  - Find any container or Compose app residing on your local system. In
+    addition, you can access environment variables and perform essential actions
+    such as starting, stopping, or deleting containers.
+  - Find public Docker Hub images, local images, or images from remote
+    repositories.
+  - Discover more about specific extensions and install them.
+  - Navigate through your volumes and gain insights about the associated
+    containers.
+  - Search and access Docker's documentation.
 
 #### For Mac
 
@@ -242,7 +522,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 - Improved `docker scout compare` command to compare two images, now also aliased under `docker scout diff`.
 - Added more details to dashboard errors when a `docker-compose` action fails ([docker/for-win#13378](https://github.com/docker/for-win/issues/13378)).
-- Added support for setting HTTP proxy configuration during installation. This can be done via the `--proxy-http-mode`, `--overrider-proxy-http`, `--override-proxy-https` and `--override-proxy-exclude` installer flags in the case of installation from the CLI on [Mac](/install/mac-install.md#install-from-the-command-line) and [Windows](/install/windows-install.md#install-from-the-command-line), or alternatively by setting the values in the `install-settings.json` file.
+- Added support for setting HTTP proxy configuration during installation. This can be done via the `--proxy-http-mode`, `--overrider-proxy-http`, `--override-proxy-https` and `--override-proxy-exclude` installer flags in the case of installation from the CLI on [Mac](install/mac-install.md#install-from-the-command-line) and [Windows](install/windows-install.md#install-from-the-command-line), or alternatively by setting the values in the `install-settings.json` file.
 - Docker Desktop now stops overriding .docker/config.json `credsStore` keys on application start. Note that if you use a custom credential helper then the CLI `docker login` and `docker logout` does not affect whether the UI is signed in to Docker or not. In general, it is better to sign into Docker via the UI since the UI supports multi-factor authentication.
 - Added a warning about the [forthcoming removal of Compose V1 from Docker Desktop](../compose/migrate.md). Can be suppressed with `COMPOSE_V1_EOL_SILENT=1`.
 - In the Compose config, boolean fields in YAML should be either `true` or `false`. Deprecated YAML 1.1 values such as “on” or “no” now produce a warning.
@@ -351,8 +631,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-03-20" >}}
 
-{{< desktop-install win=true version="4.17.1" build_path="/101757/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Windows
@@ -370,13 +648,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-02-27" >}}
 
-{{< desktop-install all=true version="4.17.0" build_path="/99724/" >}}
-
 ### New
 
 - Docker Desktop now ships with Docker Scout. Pull and view analysis for images from Docker Hub and Artifactory repositories, get base image updates and recommended tags and digests, and filter your images on vulnerability information. To learn more, see [Docker Scout](../scout/index.md).
 - `docker scan` has been replaced by `docker scout`. See [Docker Scout CLI](../scout/index.md#docker-scout-cli), for more information.
-- You can now discover extensions that have been autonomously published in the Extensions Marketplace. For more information on self-published extensions, see [Marketplace Extensions](/extensions/marketplace.md).
+- You can now discover extensions that have been autonomously published in the Extensions Marketplace. For more information on self-published extensions, see [Marketplace Extensions](extensions/marketplace.md).
 - **Container File Explorer** is available as an experimental feature. Debug the filesystem within your containers straight from the GUI.
 - You can now search for volumes in **Global Search**.
 
@@ -451,8 +727,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-01-30" >}}
 
-{{< desktop-install win=true version="4.16.3" build_path="/96739/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Windows
@@ -463,8 +737,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.16.2
 
 {{< release-date date="2023-01-19" >}}
-
-{{< desktop-install all=true version="4.16.2" build_path="/95914/" >}}
 
 ### Bug fixes and enhancements
 
@@ -485,8 +757,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-01-13" >}}
 
-{{< desktop-install all=true version="4.16.1" build_path="/95567/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -496,8 +766,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.16.0
 
 {{< release-date date="2023-01-12" >}}
-
-{{< desktop-install all=true version="4.16.0" build_path="/95345/" >}}
 
 ### New
 
@@ -561,8 +829,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-12-01" >}}
 
-{{< desktop-install all=true version="4.15.0" build_path="/93002/" >}}
-
 ### New
 
 - Substantial performance improvements for macOS users with the option of enabling the new VirtioFS file sharing technology. Available for macOS 12.5 and above.
@@ -614,8 +880,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-11-17" >}}
 
-{{< desktop-install all=true version="4.14.1" build_path="/91661/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -630,8 +894,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.14.0
 
 {{< release-date date="2022-11-10" >}}
-
-{{< desktop-install all=true version="4.14.0" build_path="/91374/" >}}
 
 ### New
 
@@ -692,8 +954,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-10-31" >}}
 
-{{< desktop-install all=true version="4.13.1" build_path="/90346/" >}}
-
 ### Updates
 
 - [Docker Compose v2.12.1](https://github.com/docker/compose/releases/tag/v2.12.1)
@@ -719,8 +979,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-10-19" >}}
 
-{{< desktop-install all=true version="4.13.0" build_path="/89412/" >}}
-
 ### New
 
 - Two new security features have been introduced for Docker Business users, Settings Management and Enhanced Container Isolation. Read more about Docker Desktop’s new [Hardened Docker Desktop security model](hardened-desktop/index.md).
@@ -730,7 +988,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### Updates
 
 - [Docker Scan v0.21.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.21.0)
-- [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879), [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880) and [CVE-2022-41715](https://www.cve.org/CVERecord?id= CVE-2022-41715)
+- [Go 1.19.2](https://github.com/golang/go/releases/tag/go1.19.2) to address [CVE-2022-2879](https://www.cve.org/CVERecord?id=CVE-2022-2879), [CVE-2022-2880](https://www.cve.org/CVERecord?id=CVE-2022-2880) and [CVE-2022-41715](https://www.cve.org/CVERecord?id=CVE-2022-41715)
 - Updated Docker Engine and Docker CLI to [v20.10.20](../engine/release-notes/20.10.md#201020),
   which contain mitigations against a Git vulnerability, tracked in [CVE-2022-39253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-39253),
   and updated handling of `image:tag@digest` image references, as well as a fix for [CVE-2022-36109](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-36109).
@@ -786,8 +1044,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-09-01" >}}
 
-{{< desktop-install all=true version="4.12.0" build_path="/85629/" >}}
-
 ### New
 
 - Added the ability to use containerd for pulling and storing images. This is an experimental feature.
@@ -817,13 +1073,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- Fix RCE via query parameters in the message-box route in the Electron client.
-- Fix RCE via extension description/changelog which could be abused by a malicious extension.
+- Fixed [CVE-2023-0626](https://www.cve.org/cverecord?id=CVE-2023-0626) which allows RCE via query parameters in the message-box route in the Electron client.
+- Fixed [CVE-2023-0625](https://www.cve.org/cverecord?id=CVE-2023-0625) which allows RCE via extension description/changelog which could be abused by a malicious extension.
 
 #### For Windows
 
-- Fixed a bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
-- Fixed the argument injection to the Docker Desktop installer which may result in local privilege escalation.
+- Fixed [CVE-2023-0627](https://www.cve.org/cverecord?id=CVE-2023-0627) which allows to bypass for the `--no-windows-containers` installation flag which was introduced in version 4.11. This flag allows administrators to disable the use of Windows containers.
+- Fixed [CVE-2023-0633](https://www.cve.org/cverecord?id=CVE-2023-0633) in which an argument injection to the Docker Desktop installer which may result in local privilege escalation.
 
 ### Bug fixes and minor enhancements
 
@@ -855,7 +1111,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed a bug where the Tray menu incorrectly displays "Download will start soon..." after downloading the update. Fixes some issue reported in [for-mac/issues#5677](https://github.com/docker/for-mac/issues/5677)
 - Fixed a bug that didn't restart Docker Desktop after applying an update.
 - Fixed a bug that caused the connection to Docker to be lost when the computer sleeps if a user is using virtualization.framework and restrictive firewall software.
-- Fixed a bug that caused Docker Desktop to run in the background even after a user had quit the application. Fixes [https://github.com/docker/for-mac/issues/6440]
+- Fixed a bug that caused Docker Desktop to run in the background even after a user had quit the application. Fixes [docker/for-mac##6440](https://github.com/docker/for-mac/issues/6440)
 - Disabled both Virtualization Framework and VirtioFS for users running macOS < 12.5
 
 #### For Windows
@@ -865,8 +1121,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.11.1
 
 {{< release-date date="2022-08-05" >}}
-
-{{< desktop-install all=true version="4.11.1" build_path="/84025/" >}}
 
 ### Bug fixes and enhancements
 
@@ -881,8 +1135,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.11.0
 
 {{< release-date date="2022-07-28" >}}
-
-{{< desktop-install all=true version="4.11.0" build_path="/83626/" >}}
 
 ### New
 
@@ -940,8 +1192,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-07-05" >}}
 
-{{< desktop-install all=true version="4.10.1" build_path="/82475/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Windows
@@ -955,8 +1205,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.10.0
 
 {{< release-date date="2022-06-30" >}}
-
-{{< desktop-install all=true version="4.10.0" build_path="/82025/" >}}
 
 ### New
 
@@ -1038,8 +1286,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-06-02" >}}
 
-{{< desktop-install all=true version="4.9.0" build_path="/80466/" >}}
-
 ### New
 
 - Added additional guides on the homepage for: Elasticsearch, MariaDB, Memcached, MySQL, RabbitMQ and Ubuntu.
@@ -1088,8 +1334,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-05-18" >}}
 
-{{< desktop-install all=true version="4.8.2" build_path="/79419/" >}}
-
 ### Updates
 
 - [Compose v2.5.1](https://github.com/docker/compose/releases/tag/v2.5.1)
@@ -1110,12 +1354,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-05-09" >}}
 
-{{< desktop-install all=true version="4.8.1" build_path="/78998/" >}}
-
 ### New
 
 - Released [Docker Desktop for Linux](install/linux-install.md).
-- Beta release of [Docker Extensions](/extensions/index.md) and Extensions SDK.
+- Beta release of [Docker Extensions](extensions/index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
@@ -1133,12 +1375,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-05-06" >}}
 
-{{< desktop-install all=true version="4.8.0" build_path="/78933/" >}}
-
 ### New
 
 - Released [Docker Desktop for Linux](install/linux-install.md).
-- Beta release of [Docker Extensions](/extensions/index.md) and Extensions SDK.
+- Beta release of [Docker Extensions](extensions/index.md) and Extensions SDK.
 - Created a Docker Homepage where you can run popular images and discover how to use them.
 - [Compose V2 is now GA](https://www.docker.com/blog/announcing-compose-v2-general-availability/)
 
@@ -1195,8 +1435,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-04-19" >}}
 
-{{< desktop-install win=true mac=true version="4.7.1" build_path="/77678/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -1211,8 +1449,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.7.0
 
 {{< release-date date="2022-04-07" >}}
-
-{{< desktop-install win=true mac=true version="4.7.0" build_path="/77141/" >}}
 
 ### New
 
@@ -1257,8 +1493,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-03-22" >}}
 
-{{< desktop-install win=true mac=true version="4.6.1" build_path="/76265/" >}}
-
 ### Updates
 
 - [Buildx 0.8.1](https://github.com/docker/buildx/releases/tag/v0.8.1)
@@ -1272,8 +1506,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.6.0
 
 {{< release-date date="2022-03-14" >}}
-
-{{< desktop-install win=true mac=true version="4.6.0" build_path="/75818/" >}}
 
 ### New
 
@@ -1345,8 +1577,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2022-02-15" >}}
 
-{{< desktop-install win=true version="4.5.1" build_path="/74721/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Windows
@@ -1360,8 +1590,6 @@ Alternatively, you can edit the Docker Desktop settings file located at `%APPDAT
 ## 4.5.0
 
 {{< release-date date="2022-02-10" >}}
-
-{{< desktop-install win=true mac=true version="4.5.0" build_path="/74594/" >}}
 
 ### New
 
@@ -1411,8 +1639,6 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 {{< release-date date="2022-01-24" >}}
 
-{{< desktop-install win=true version="4.4.4" build_path="/73704/" >}}
-
 ### Bug fixes and enhancements
 
 #### For Windows
@@ -1430,8 +1656,6 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 ## 4.4.3
 
 {{< release-date date="2022-01-14" >}}
-
-{{< desktop-install win=true version="4.4.3" build_path="/73365/" >}}
 
 ### Bug fixes and enhancements
 
@@ -1451,12 +1675,10 @@ Installing Docker Desktop 4.5.0 from scratch has a bug which defaults Docker Des
 
 {{< release-date date="22-01-13" >}}
 
-{{< desktop-install win=true mac=true version="4.4.2" build_path="/73305/" >}}
-
 ### New
 
 - Easy, Secure sign in with Auth0 and Single Sign-on
-  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../single-sign-on/index.md).
+  - Single Sign-on: Users with a Docker Business subscription can now configure SSO to authenticate using their identity providers (IdPs) to access Docker. For more information, see [Single Sign-on](../security/for-admins/single-sign-on/index.md).
   - Signing in to Docker Desktop now takes you through the browser so that you get all the benefits of auto-filling from password managers.
 
 ### Upgrades
@@ -1506,8 +1728,6 @@ This only affects users if they are on Docker Desktop 4.3.0, 4.3.1 and the user 
 
 {{< release-date date="2021-12-21" >}}
 
-{{< desktop-install win=true mac=true version="4.3.2" build_path="/72729/" >}}
-
 ### Security
 
 - Fixed [CVE-2021-45449](../security/index.md#cve-2021-45449) that affects users currently on Docker Desktop version 4.3.0 or 4.3.1.
@@ -1533,8 +1753,6 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 {{< release-date date="2021-12-11" >}}
 
-{{< desktop-install win=true mac=true version="4.3.1" build_path="/72247/" >}}
-
 ### Upgrades
 
 [docker scan v0.11.0](https://github.com/docker/scan-cli-plugin/releases/tag/v0.11.0)
@@ -1553,8 +1771,6 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 ## 4.3.0
 
 {{< release-date date="2021-12-02" >}}
-
-{{< desktop-install win=true mac=true version="4.3.0" build_path="/71786/" >}}
 
 ### Upgrades
 
@@ -1602,8 +1818,6 @@ actual memory usage. See
 
 {{< release-date date="2021-11-09" >}}
 
-{{< desktop-install win=true mac=true version="4.2.0" build_path="/70708/" >}}
-
 ### New
 
 **Pause/Resume**: You can now pause your Docker Desktop session when you are not actively using it and save CPU resources on your machine.
@@ -1650,8 +1864,6 @@ actual memory usage. See
 
 {{< release-date date="2021-10-12" >}}
 
-{{< desktop-install win=true mac=true version="4.1.1" build_path="/69879/" >}}
-
 ### Bug fixes and minor changes
 
 #### For Mac
@@ -1670,8 +1882,6 @@ actual memory usage. See
 ## 4.1.0
 
 {{< release-date date="2021-09-30" >}}
-
-{{< desktop-install win=true mac=true version="4.1.0" build_path="/69386/" >}}
 
 ### New
 
@@ -1712,8 +1922,6 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 
 {{< release-date date="2021-09-13" >}}
 
-{{< desktop-install win=true mac=true version="4.0.1" build_path="/68347/" >}}
-
 ### Upgrades
 
 - [Compose V2 RC3](https://github.com/docker/compose/releases/tag/v2.0.0-rc.3)
@@ -1734,8 +1942,6 @@ Docker Desktop may fail to start when upgrading to 4.1.0 on some WSL-based distr
 ## 4.0.0
 
 {{< release-date date="2021-08-31" >}}
-
-{{< desktop-install win=true mac=true version="4.0.0" build_path="/67817/" >}}
 
 ### New
 

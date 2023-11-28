@@ -9,6 +9,16 @@ usage: docker buildx imagetools create [OPTIONS] [SOURCE] [SOURCE...]
 pname: docker buildx imagetools
 plink: docker_buildx_imagetools.yaml
 options:
+    - option: annotation
+      value_type: stringArray
+      default_value: '[]'
+      description: Add annotation to the image
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: append
       value_type: bool
       default_value: "false"

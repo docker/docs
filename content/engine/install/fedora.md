@@ -1,6 +1,7 @@
 ---
-description: Instructions for installing Docker Engine on Fedora
-keywords: requirements, apt, installation, fedora, rpm, install, uninstall, upgrade,
+description: Learn how to install Docker Engine on Fedora. These instructions cover
+  the different installation methods, how to uninstall, and next steps.
+keywords: requirements, apt, installation, fedora, install fedora, install docker engine, rpm, install, uninstall, upgrade,
   update
 title: Install Docker Engine on Fedora
 toc_max: 4
@@ -23,12 +24,12 @@ To get started with Docker Engine on Fedora, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 Fedora versions:
 
-- Fedora 37
 - Fedora 38
+- Fedora 39
 
 ### Uninstall old versions
 
-Older versions of Docker went by the names of `docker` or `docker-engine`.
+Older versions of Docker went by `docker` or `docker-engine`.
 Uninstall any such older versions before attempting to install a new version,
 along with associated dependencies.
 
@@ -59,8 +60,8 @@ You can install Docker Engine in different ways, depending on your needs:
   from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
 
-- You can download the RPM package and
-  [install it manually](#install-from-a-package) and manage
+- You can download the RPM package,
+  [install it manually](#install-from-a-package), and manage
   upgrades completely manually. This is useful in situations such as installing
   Docker on air-gapped systems with no access to the internet.
 
@@ -75,7 +76,6 @@ Docker from the repository.
 
 #### Set up the repository
 
-
 Install the `dnf-plugins-core` package (which provides the commands to manage
 your DNF repositories) and set up the repository.
 
@@ -88,9 +88,9 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
 1. Install Docker Engine, containerd, and Docker Compose:
 
-  {{< tabs >}}
-  {{< tab name="Latest" >}}
-  
+   {{< tabs >}}
+   {{< tab name="Latest" >}}
+   
    To install the latest version, run:
 
    ```console
@@ -103,8 +103,8 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
 
-  {{< /tab >}}
-  {{< tab name="Specific version" >}}
+   {{< /tab >}}
+   {{< tab name="Specific version" >}}
 
    To install a specific version, start by listing the available versions in
    the repository:
@@ -133,9 +133,9 @@ $ sudo dnf config-manager --add-repo {{% param "download-url-base" %}}/docker-ce
 
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
-  
-  {{< /tab >}}
-  {{< /tabs >}}
+   
+   {{< /tab >}}
+   {{< /tabs >}}
 
 2. Start Docker.
 
@@ -168,11 +168,12 @@ If you can't use Docker's `rpm` repository to install Docker Engine, you can
 download the `.rpm` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
+<!-- markdownlint-disable-next-line -->
 1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
    and choose your version of Fedora. Then browse to `x86_64/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
-2. Install Docker Engine, changing the path below to the path where you downloaded
+2. Install Docker Engine, changing the following path to the path where you downloaded
    the Docker package.
 
    ```console

@@ -45,10 +45,17 @@ work.
 >
 > If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
 
-1. Open a terminal and change directory to the `getting-started-app`
+1. Verify that your `getting-started-app` directory is in a directory defined in
+Docker Desktop's file sharing setting. This setting defines which parts of your
+filesystem you can share with containers. For details about accessing the
+setting, see the topic for [Mac](../desktop/settings/mac.md/#file-sharing),
+[Windows](../desktop/settings/windows.md/#file-sharing), or
+[Linux](../desktop/settings/linux.md/#file-sharing).
+
+2. Open a terminal and change directory to the `getting-started-app`
    directory.
 
-2. Run the following command to start `bash` in an `ubuntu` container with a
+3. Run the following command to start `bash` in an `ubuntu` container with a
    bind mount.
 
    {{< tabs >}}
@@ -59,12 +66,19 @@ work.
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows" >}}
+   {{< tab name="Windows (PowerShell)" >}}
 
-   Run this command in PowerShell.
 
    ```powershell
    $ docker run -it --mount "type=bind,src=$pwd,target=/src" ubuntu bash
+   ```
+   
+   {{< /tab >}}
+   {{< tab name="Windows (CMD)" >}}
+
+
+   ```Command Prompt
+   > docker run -it --mount "type=bind,src=%cd%,target=/src" ubuntu bash
    ```
    
    {{< /tab >}}
@@ -74,7 +88,7 @@ work.
    current working directory on your host machine (`getting-started-app`), and
    `target` is where that directory should appear inside the container (`/src`).
 
-3. After running the command, Docker starts an interactive `bash` session in the
+4. After running the command, Docker starts an interactive `bash` session in the
    root directory of the container's filesystem.
 
    ```console
@@ -85,7 +99,7 @@ work.
    boot  etc  lib   mnt    proc  run   src   sys  usr
    ```
 
-4. Change directory to the `src` directory.
+5. Change directory to the `src` directory.
 
    This is the directory that you mounted when starting the container. Listing
    the contents of this directory displays the same files as in the
@@ -97,7 +111,7 @@ work.
    Dockerfile  node_modules  package.json  spec  src  yarn.lock
    ```
 
-5. Create a new file named `myfile.txt`.
+6. Create a new file named `myfile.txt`.
 
    ```console
    root@ac1237fad8db:/src# touch myfile.txt
@@ -105,10 +119,10 @@ work.
    Dockerfile  myfile.txt  node_modules  package.json  spec  src  yarn.lock
    ```
 
-6. Open the `getting-started-app` directory on the host and observe that the
+7. Open the `getting-started-app` directory on the host and observe that the
    `myfile.txt` file is in the directory.
 
-   ```
+   ```text
    ├── getting-started-app/
    │ ├── Dockerfile
    │ ├── myfile.txt
@@ -119,15 +133,15 @@ work.
    │ └── yarn.lock
    ```
 
-7. From the host, delete the `myfile.txt` file.
-8. In the container, list the contents of the `app` directory once more. Observe that the file is now gone.
+8. From the host, delete the `myfile.txt` file.
+9. In the container, list the contents of the `app` directory once more. Observe that the file is now gone.
 
    ```console
    root@ac1237fad8db:/src# ls
    Dockerfile  node_modules  package.json  spec  src  yarn.lock
    ```
 
-9. Stop the interactive container session with `Ctrl` + `D`.
+10. Stop the interactive container session with `Ctrl` + `D`.
 
 That's all for a brief introduction to bind mounts. This procedure
 demonstrated how files are shared between the host and the container, and how
@@ -183,10 +197,11 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
    ```console
    $ docker logs -f <container-id>
-   nodemon src/index.js
+   nodemon -L src/index.js
    [nodemon] 2.0.20
    [nodemon] to restart at any time, enter `rs`
-   [nodemon] watching dir(s): *.*
+   [nodemon] watching path(s): *.*
+   [nodemon] watching extensions: js,mjs,json
    [nodemon] starting `node src/index.js`
    Using sqlite database at /etc/todos/todo.db
    Listening on port 3000
@@ -231,10 +246,11 @@ You can use the CLI or Docker Desktop to run your container with a bind mount.
 
    ```console
    $ docker logs -f <container-id>
-   nodemon src/index.js
+   nodemon -L src/index.js
    [nodemon] 2.0.20
    [nodemon] to restart at any time, enter `rs`
-   [nodemon] watching dir(s): *.*
+   [nodemon] watching path(s): *.*
+   [nodemon] watching extensions: js,mjs,json
    [nodemon] starting `node src/index.js`
    Using sqlite database at /etc/todos/todo.db
    Listening on port 3000
@@ -264,7 +280,7 @@ Run the image with a bind mount.
 7. In **Container path**, specify `/app`.
 8. Select **Run**.
 
-You can watch the container logs using Docker Desktop
+You can watch the container logs using Docker Desktop.
 
 1. Select **Containers** in Docker Desktop.
 2. Select your container name.
@@ -272,11 +288,11 @@ You can watch the container logs using Docker Desktop
 You'll know you're ready to go when you see this:
 
 ```console
-$ docker logs -f <container-id>
-nodemon src/index.js
+nodemon -L src/index.js
 [nodemon] 2.0.20
 [nodemon] to restart at any time, enter `rs`
-[nodemon] watching dir(s): *.*
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
 [nodemon] starting `node src/index.js`
 Using sqlite database at /etc/todos/todo.db
 Listening on port 3000
@@ -300,13 +316,15 @@ Update your app on your host machine and see the changes reflected in the contai
    Save the file.
 
 2. Refresh the page in your web browser, and you should see the change reflected
-   almost immediately. It might take a few seconds for the Node server to
+   almost immediately because of the bind mount. Nodemon detects the change and
+   restarts the server. It might take a few seconds for the Node server to
    restart. If you get an error, try refreshing after a few seconds.
 
-   ![Screenshot of updated label for Add button](images/updated-add-button.png)
+   ![Screenshot of updated label for Add button](images/updated-add-button.webp)
 
 3. Feel free to make any other changes you'd like to make. Each time you make a
-   change and save a file, the `nodemon` process restarts the app inside the
+   change and save a file, the change is reflected in the container because of
+   the bind mount. When Nodemon detects a change, it restarts the app inside the
    container automatically. When you're done, stop the container and build your
    new image using:
 

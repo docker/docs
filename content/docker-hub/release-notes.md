@@ -12,6 +12,10 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 2023-08-28
+
+- Organizations with SSO enabled can assign members to roles, organizations, and teams with [SCIM role mapping](scim.md#set-up-role-mapping). 
+
 ## 2023-07-26
 
 ### New
@@ -34,7 +38,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- The new [domain audit](../docker-hub/domain-audit.md) feature lets you audit your domains for users who aren't a member of your organization.
+- The new domain audit feature lets you audit your domains for users who aren't a member of your organization.
 
 
 ## 2022-09-26
@@ -47,7 +51,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and enhancements
 
-- In Docker Hub, you can now download a [registry.json](../docker-hub/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
+- In Docker Hub, you can now download a [registry.json](../security/for-admins/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
 
 ## 2022-09-19
 
@@ -65,7 +69,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and enhancements
 
-- SCIM is now available for organizations with a Docker Business subscription using an Azure AD identity provider.
+- SCIM is now available for organizations with a Docker Business subscription using an Entra ID (formerly Azure AD) identity provider.
 
 ## 2022-06-23
 
@@ -155,7 +159,7 @@ For more information about this feature and for instructions on how to use it, s
 
 The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos/access/index.md#view-repository-tags).
 
-# 2020-10-07
+## 2020-10-07
 
 ### New feature
 
@@ -184,7 +188,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 ## 2019-10-21
 
 ### New features
-* **Beta:** Docker Hub now supports [two-factor authentication (2FA)](2fa/index.md). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
+* **Beta:** Docker Hub now supports two-factor authentication (2FA). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
 
     > If you lose both your 2FA authentication device and recovery code, you may
     > not be able to recover your account.
@@ -253,8 +257,7 @@ Each organization page now breaks down into these tabs:
   * The architecture it was built on
   * The OS
   * The user who most recently updated an image for a specific tag
-* The security scan summary for [official images](official_images.md)
-has been updated.
+* The security scan summary for Docker Official Images has been updated.
 
 ### Known Issues
 

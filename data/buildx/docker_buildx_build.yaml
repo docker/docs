@@ -6,8 +6,8 @@ long: |-
     to the UI of `docker build` command and takes the same flags and arguments.
 
     For documentation on most of these flags, refer to the [`docker build`
-    documentation](/engine/reference/commandline/build/). In
-    here we'll document a subset of the new flags.
+    documentation](/engine/reference/commandline/build/).
+    This page describes a subset of the new flags.
 usage: docker buildx build [OPTIONS] PATH | URL | -
 pname: docker buildx
 plink: docker_buildx.yaml
@@ -29,6 +29,16 @@ options:
       description: |
         Allow extra privileged entitlement (e.g., `network.host`, `security.insecure`)
       details_url: '#allow'
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: annotation
+      value_type: stringArray
+      default_value: '[]'
+      description: Add annotation to the image
       deprecated: false
       hidden: false
       experimental: false
@@ -94,7 +104,7 @@ options:
       swarm: false
     - option: cgroup-parent
       value_type: string
-      description: Optional parent cgroup for the container
+      description: Set the parent cgroup for the `RUN` instructions during build
       details_url: /engine/reference/commandline/build/#cgroup-parent
       deprecated: false
       hidden: false
@@ -199,15 +209,6 @@ options:
       hidden: false
       experimental: false
       experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: invoke
-      value_type: string
-      description: Invoke a command after the build
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: true
       kubernetes: false
       swarm: false
     - option: isolation
@@ -527,7 +528,7 @@ inherited_options:
 examples: |-
     ### Create attestations (--attest) {#attest}
 
-    ```
+    ```text
     --attest=type=sbom,...
     --attest=type=provenance,...
     ```
@@ -554,7 +555,7 @@ examples: |-
 
     ### Allow extra privileged entitlement (--allow) {#allow}
 
-    ```
+    ```text
     --allow=ENTITLEMENT
     ```
 
@@ -565,9 +566,7 @@ examples: |-
       [related Dockerfile extensions](/engine/reference/builder/#run---securitysandbox).
 
     For entitlements to be enabled, the `buildkitd` daemon also needs to allow them
-    with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](buildx_create.md#buildkitd-flags))
-
-    **Examples**
+    with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](buildx_create.md#buildkitd-flags)).
 
     ```console
     $ docker buildx create --use --name insecure-builder --buildkitd-flags '--allow-insecure-entitlement security.insecure'
@@ -578,24 +577,21 @@ examples: |-
 
     Same as [`docker build` command](/engine/reference/commandline/build/#build-arg).
 
-    There are also useful built-in build args like:
+    There are also useful built-in build arguments, such as:
 
-    * `BUILDKIT_CONTEXT_KEEP_GIT_DIR=<bool>` trigger git context to keep the `.git` directory
-    * `BUILDKIT_INLINE_BUILDINFO_ATTRS=<bool>` inline build info attributes in image config or not
-    * `BUILDKIT_INLINE_CACHE=<bool>` inline cache metadata to image config or not
-    * `BUILDKIT_MULTI_PLATFORM=<bool>` opt into deterministic output regardless of multi-platform output or not
+    * `BUILDKIT_CONTEXT_KEEP_GIT_DIR=<bool>`: trigger git context to keep the `.git` directory
+    * `BUILDKIT_INLINE_CACHE=<bool>`: inline cache metadata to image config or not
+    * `BUILDKIT_MULTI_PLATFORM=<bool>`: opt into deterministic output regardless of multi-platform output or not
 
     ```console
     $ docker buildx build --build-arg BUILDKIT_MULTI_PLATFORM=1 .
     ```
 
-    > **Note**
-    >
-    > More built-in build args can be found in [Dockerfile reference docs](/engine/reference/builder/#buildkit-built-in-build-args).
+    Learn more about the built-in build arguments in the [Dockerfile reference docs](/engine/reference/builder/#buildkit-built-in-build-args).
 
     ### Additional build contexts (--build-context) {#build-context}
 
-    ```
+    ```text
     --build-context=name=VALUE
     ```
 
@@ -623,7 +619,7 @@ examples: |-
     COPY --from=project myfile /
     ```
 
-    #### Source image from OCI layout directory {#source-oci-layout}
+    #### Use an OCI layout directory as build context {#source-oci-layout}
 
     Source an image from a local [OCI layout compliant directory](https://github.com/opencontainers/image-spec/blob/main/image-layout.md),
     either by tag, or by digest:
@@ -651,7 +647,7 @@ examples: |-
 
     ### Use an external cache source for a build (--cache-from) {#cache-from}
 
-    ```
+    ```text
     --cache-from=[NAME|type=TYPE[,KEY=VALUE]]
     ```
 
@@ -687,7 +683,7 @@ examples: |-
 
     ### Export build cache to an external cache destination (--cache-to) {#cache-to}
 
-    ```
+    ```text
     --cache-to=[NAME|type=TYPE[,KEY=VALUE]]
     ```
 
@@ -704,9 +700,8 @@ examples: |-
     - [`s3` type](https://github.com/moby/buildkit#s3-cache-experimental) exports
       cache to a S3 bucket.
 
-    `docker` driver currently only supports exporting inline cache metadata to image
-    configuration. Alternatively, `--build-arg BUILDKIT_INLINE_CACHE=1` can be used
-    to trigger inline cache exporter.
+    The `docker` driver only supports cache exports using the `inline` and `local`
+    cache backends.
 
     Attribute key:
 
@@ -740,28 +735,9 @@ examples: |-
     $ docker buildx build --load --metadata-file metadata.json .
     $ cat metadata.json
     ```
+
     ```json
     {
-      "containerimage.buildinfo": {
-        "frontend": "dockerfile.v0",
-        "attrs": {
-          "context": "https://github.com/crazy-max/buildkit-buildsources-test.git#master",
-          "filename": "Dockerfile",
-          "source": "docker/dockerfile:master"
-        },
-        "sources": [
-          {
-            "type": "docker-image",
-            "ref": "docker.io/docker/buildx-bin:0.6.1@sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0",
-            "pin": "sha256:a652ced4a4141977c7daaed0a074dcd9844a78d7d2615465b12f433ae6dd29f0"
-          },
-          {
-            "type": "docker-image",
-            "ref": "docker.io/library/alpine:3.13",
-            "pin": "sha256:026f721af4cf2843e07bba648e158fb35ecc876d822130633cc49f707f0fc88c"
-          }
-        ]
-      },
       "containerimage.config.digest": "sha256:2937f66a9722f7f4a2df583de2f8cb97fc9196059a410e7f00072fc918930e66",
       "containerimage.descriptor": {
         "annotations": {
@@ -778,14 +754,14 @@ examples: |-
 
     ### Set the export action for the build result (-o, --output) {#output}
 
-    ```
+    ```text
     -o, --output=[PATH,-,type=TYPE[,KEY=VALUE]
     ```
 
     Sets the export action for the build result. In `docker build` all builds finish
     by creating a container image and exporting it to `docker images`. `buildx` makes
     this step configurable allowing results to be exported directly to the client,
-    oci image tarballs, registry etc.
+    OCI image tarballs, registry etc.
 
     Buildx with `docker` driver currently only supports local, tarball exporter and
     image exporter. `docker-container` driver supports all the exporters.
@@ -840,15 +816,15 @@ examples: |-
     specification](https://github.com/docker/docker/blob/v20.10.2/image/spec/v1.2.md)
     tarball on the client. Tarballs created by this exporter are also OCI compatible.
 
-    Currently, multi-platform images cannot be exported with the `docker` export type.
-    The most common usecase for multi-platform images is to directly push to a registry
-    (see [`registry`](#registry)).
+    The default image store in Docker Engine doesn't support loading multi-platform
+    images. You can enable the containerd image store, or push multi-platform images
+    is to directly push to a registry, see [`registry`](#registry).
 
     Attribute keys:
 
-    - `dest` - destination path where tarball will be written. If not specified the
-      tar will be loaded automatically to the current docker instance.
-    - `context` - name for the docker context where to import the result
+    - `dest` - destination path where tarball will be written. If not specified,
+      the tar will be loaded automatically to the local image store.
+    - `context` - name for the Docker context where to import the result
 
     #### `image`
 
@@ -859,7 +835,7 @@ examples: |-
     Attribute keys:
 
     - `name` - name (references) for the new image.
-    - `push` - boolean to automatically push the image.
+    - `push` - Boolean to automatically push the image.
 
     #### `registry`
 
@@ -867,7 +843,7 @@ examples: |-
 
     ### Set the target platforms for the build (--platform) {#platform}
 
-    ```
+    ```text
     --platform=value[,value]
     ```
 
@@ -896,12 +872,12 @@ examples: |-
     instance supports by running `docker buildx inspect --bootstrap`.
 
     Inside a `Dockerfile`, you can access the current platform value through
-    `TARGETPLATFORM` build argument. Please refer to the [`docker build`
+    `TARGETPLATFORM` build argument. Refer to the [`docker build`
     documentation](/engine/reference/builder/#automatic-platform-args-in-the-global-scope)
     for the full description of automatic platform argument variants .
 
-    The formatting for the platform specifier is defined in the [containerd source
-    code](https://github.com/containerd/containerd/blob/v1.4.3/platforms/platforms.go#L63).
+    You can find the formatting definition for the platform specifier in the
+    [containerd source code](https://github.com/containerd/containerd/blob/v1.4.3/platforms/platforms.go#L63).
 
     ```console
     $ docker buildx build --platform=linux/arm64 .
@@ -911,11 +887,11 @@ examples: |-
 
     ### Set type of progress output (--progress) {#progress}
 
-    ```
+    ```text
     --progress=VALUE
     ```
 
-    Set type of progress output (auto, plain, tty). Use plain to show container
+    Set type of progress output (`auto`, `plain`, `tty`). Use plain to show container
     output (default "auto").
 
     > **Note**
@@ -949,15 +925,18 @@ examples: |-
     `--provenance=mode=max` can be used as an abbreviation for
     `--attest=type=provenance,mode=max`.
 
-    Additionally, `--provenance` can be used with boolean values to broadly enable
-    or disable provenance attestations. For example, `--provenance=false` can be
-    used to disable all provenance attestations, while `--provenance=true` can be
-    used to enable all provenance attestations.
+    Additionally, `--provenance` can be used with Boolean values to enable or disable
+    provenance attestations. For example, `--provenance=false` disables all provenance attestations,
+    while `--provenance=true` enables all provenance attestations.
 
     By default, a minimal provenance attestation will be created for the build
-    result, which will only be attached for images pushed to registries.
+    result. Note that the default image store in Docker Engine doesn't support
+    attestations. Provenance attestations only persist for images pushed directly
+    to a registry if you use the default image store. Alternatively, you can switch
+    to using the containerd image store.
 
-    For more information, see [here](/build/attestations/slsa-provenance/).
+    For more information about provenance attestations, see
+    [here](/build/attestations/slsa-provenance/).
 
     ### Push the build result to a registry (--push) {#push}
 
@@ -971,15 +950,19 @@ examples: |-
     `--sbom=generator=<user>/<generator-image>` can be used as an abbreviation for
     `--attest=type=sbom,generator=<user>/<generator-image>`.
 
-    Additionally, `--sbom` can be used with boolean values to broadly enable or
-    disable SBOM attestations. For example, `--sbom=false` can be used to disable
-    all SBOM attestations.
+    Additionally, `--sbom` can be used with Boolean values to enable or disable
+    SBOM attestations. For example, `--sbom=false` disables all SBOM attestations.
+
+    Note that the default image store in Docker Engine doesn't support
+    attestations. Provenance attestations only persist for images pushed directly
+    to a registry if you use the default image store. Alternatively, you can switch
+    to using the containerd image store.
 
     For more information, see [here](/build/attestations/sbom/).
 
     ### Secret to expose to the build (--secret) {#secret}
 
-    ```
+    ```text
     --secret=[type=TYPE[,KEY=VALUE]
     ```
 
@@ -992,7 +975,7 @@ examples: |-
 
     Attribute keys:
 
-    - `id` - ID of the secret. Defaults to basename of the `src` path.
+    - `id` - ID of the secret. Defaults to base name of the `src` path.
     - `src`, `source` - Secret filename. `id` used if unset.
 
     ```dockerfile
@@ -1034,7 +1017,7 @@ examples: |-
 
     ### SSH agent socket or keys to expose to the build (--ssh) {#ssh}
 
-    ```
+    ```text
     --ssh=default|<id>[=<socket>|<key>[,<key>]]
     ```
 
@@ -1074,8 +1057,8 @@ examples: |-
 
     > **Note**
     >
-    > If you do not provide a `hard limit`, the `soft limit` is used
-    > for both values. If no `ulimits` are set, they are inherited from
+    > If you don't provide a `hard limit`, the `soft limit` is used
+    > for both values. If no `ulimits` are set, they're inherited from
     > the default `ulimits` set on the daemon.
 deprecated: false
 hidden: false

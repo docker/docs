@@ -39,7 +39,7 @@ chains signing content as part of their release process.
 
 An individual image record has the following identifier:
 
-```
+```text
 [REGISTRY_HOST[:REGISTRY_PORT]/]REPOSITORY[:TAG]
 ```
 

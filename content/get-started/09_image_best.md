@@ -92,12 +92,9 @@ dependencies if there was a change to the `package.json`.
 
     `.dockerignore` files are an easy way to selectively copy only image relevant files.
     You can read more about this
-    [here](../engine/reference/builder.md#dockerignore-file).
+    [here](../build/building/context.md#dockerignore-files).
     In this case, the `node_modules` folder should be omitted in the second `COPY` step because otherwise,
     it would possibly overwrite files which were created by the command in the `RUN` step.
-    For further details on why this is recommended for Node.js applications and other best practices,
-    have a look at their guide on
-    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
 3. Build a new image using `docker build`.
 
@@ -204,7 +201,7 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 ```
 
-In the previous Dockerfile example, it uses the `node:18` image to perform the build (maximizing layer caching) and then copyies the output
+In the previous Dockerfile example, it uses the `node:18` image to perform the build (maximizing layer caching) and then copies the output
 into an nginx container.
 
 ## Summary
@@ -212,7 +209,7 @@ into an nginx container.
 In this section, you learned a few image building best practices, including layer caching and multi-stage builds.
 
 Related information:
- - [.dockerignore](../engine/reference/builder.md#dockerignore-file)
+ - [.dockerignore](../build/building/context.md#dockerignore-files)
  - [Dockerfile reference](../engine/reference/builder.md)
  - [Build with Docker guide](../build/guide/index.md)
  - [Dockerfile best practices](../develop/develop-images/dockerfile_best-practices.md)

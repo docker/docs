@@ -3,15 +3,14 @@ short: Display CVEs identified in a software artifact
 long: |-
     The `docker scout cves` command analyzes a software artifact for vulnerabilities.
 
-    If no image is specified, the most recently built image will be used.
+    If no image is specified, the most recently built image is used.
 
     The following artifact types are supported:
 
     - Images
     - OCI layout directories
     - Tarball archives, as created by `docker save`
-
-    The tool analyzes the provided software artifact, and generates a vulnerability report.
+    - Local directory or file
 
     By default, the tool expects an image reference, such as:
 
@@ -19,7 +18,15 @@ long: |-
     - `curlimages/curl:7.87.0`
     - `mcr.microsoft.com/dotnet/runtime:7.0`
 
-    If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` flag.
+    If the artifact you want to analyze is an OCI directory, a tarball archive, a local file or directory,
+    or if you want to control from where the image will be resolved, you must prefix the reference with one of the following:
+
+    - `image://` (default) use a local image, or fall back to a registry lookup
+    - `local://` use an image from the local image store (don't do a registry lookup)
+    - `registry://` use an image from a registry (don't use a local image)
+    - `oci-dir://` use an OCI layout directory
+    - `archive://` use a tarball archive, as created by `docker save`
+    - `fs://` use a local directory or file
 usage: docker scout cves [OPTIONS] [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
 plink: docker_scout.yaml
@@ -28,6 +35,15 @@ options:
       value_type: bool
       default_value: "false"
       description: Print details on default text output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: env
+      value_type: string
+      description: Name of environment
       deprecated: false
       hidden: false
       experimental: false
@@ -48,11 +64,7 @@ options:
     - option: format
       value_type: string
       default_value: packages
-      description: |-
-        Output format of the generated vulnerability report:
-        - packages: default output, plain text with vulnerabilities grouped by packages
-        - sarif: json Sarif output
-        - markdown: markdown output
+      description: "Output format of the generated vulnerability report:\n- packages: default output, plain text with vulnerabilities grouped by packages\n- sarif: json Sarif output\n- spdx: json SPDX output \n- markdown: markdown output (including some html tags like collapsible sections)"
       deprecated: false
       hidden: false
       experimental: false
@@ -110,6 +122,27 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: only-metric
+      value_type: stringSlice
+      default_value: '[]'
+      description: |
+        Comma separated list of CVSS metrics (like AV:N or PR:L) to filter CVEs by
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-package
+      value_type: stringSlice
+      default_value: '[]'
+      description: Comma separated regular expressions to filter packages by
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: only-package-type
       value_type: stringSlice
       default_value: '[]'
@@ -152,6 +185,36 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: only-vex-affected
+      value_type: bool
+      default_value: "false"
+      description: Filter CVEs by VEX statements with status not affected
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: only-vuln-packages
+      value_type: bool
+      default_value: "false"
+      description: |
+        When used with --format=only-packages ignore packages with no vulnerabilities
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: org
+      value_type: string
+      description: Namespace of the Docker organization
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: output
       shorthand: o
       value_type: string
@@ -175,21 +238,46 @@ options:
       value_type: string
       description: |-
         Reference to use if the provided tarball contains multiple references.
-        Can only be used with --type archive.
+        Can only be used with archive.
       deprecated: false
       hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false
       swarm: false
-    - option: type
+    - option: stream
       value_type: string
-      default_value: image
-      description: |-
-        Type of the image to analyze. Can be one of:
-        - image
-        - oci-dir
-        - archive (docker save tarball)
+      description: Name of stream
+      deprecated: true
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: vex
+      value_type: bool
+      default_value: "false"
+      description: Apply VEX statements to filter CVEs
+      deprecated: true
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: vex-author
+      value_type: stringSlice
+      default_value: '[]'
+      description: List of VEX statement authors to accept
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: vex-location
+      value_type: stringSlice
+      default_value: '[]'
+      description: File location of directory or file containing VEX statements
       deprecated: false
       hidden: false
       experimental: false
@@ -201,6 +289,16 @@ inherited_options:
       value_type: bool
       default_value: "false"
       description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
       deprecated: false
       hidden: true
       experimental: false
@@ -223,7 +321,7 @@ examples: |-
     ```console
     $ docker save alpine > alpine.tar
 
-    $ docker scout cves --type archive alpine.tar
+    $ docker scout cves archive://alpine.tar
     Analyzing archive alpine.tar
         ✓ Archive read
         ✓ SBOM of image already cached, 18 packages indexed
@@ -235,12 +333,18 @@ examples: |-
     ```console
     $ skopeo copy --override-os linux docker://alpine oci:alpine
 
-    $ docker scout cves --type oci-dir alpine
+    $ docker scout cves oci-dir://alpine
     Analyzing OCI directory alpine
         ✓ OCI directory read
         ✓ Image stored for indexing
         ✓ Indexed 19 packages
         ✓ No vulnerable package detected
+    ```
+
+    ### Display vulnerabilities from the current directory
+
+    ```console
+    $ docker scout cves fs://.
     ```
 
     ### Export vulnerabilities to a SARIF JSON file
@@ -251,6 +355,45 @@ examples: |-
         ✓ SBOM of image already cached, 18 packages indexed
         ✓ No vulnerable package detected
         ✓ Report written to alpine.sarif.json
+    ```
+
+    ### Display markdown output
+
+    The following example shows how to generate the vulnerability report as markdown.
+
+    ```console
+    $ docker scout cves --format markdown alpine
+        ✓ Pulled
+        ✓ SBOM of image already cached, 19 packages indexed
+        ✗ Detected 1 vulnerable package with 3 vulnerabilities
+    <h2>:mag: Vulnerabilities of <code>alpine</code></h2>
+
+    <details open="true"><summary>:package: Image Reference</strong> <code>alpine</code></summary>
+    <table>
+    <tr><td>digest</td><td><code>sha256:e3bd82196e98898cae9fe7fbfd6e2436530485974dc4fb3b7ddb69134eda2407</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/high-0-lightgrey"/> <img alt="medium: 2" src="https://img.shields.io/badge/medium-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+    <tr><td>platform</td><td>linux/arm64</td></tr>
+    <tr><td>size</td><td>3.3 MB</td></tr>
+    <tr><td>packages</td><td>19</td></tr>
+    </table>
+    </details></table>
+    </details>
+    ...
+    ```
+
+    ### List all vulnerable packages of a certain type
+
+    The following example shows how to generate a list of packages, only including
+    packages of the specified type, and only showing packages that are vulnerable.
+
+    ```console
+    $ docker scout cves --format only-packages --only-package-type golang --only-vuln-packages golang:1.18.0
+        ✓ Pulled
+        ✓ SBOM of image already cached, 296 packages indexed
+        ✗ Detected 1 vulnerable package with 40 vulnerabilities
+
+       Name   Version   Type         Vulnerabilities
+    ───────────────────────────────────────────────────────────
+      stdlib  1.18     golang     2C    29H     8M     1L
     ```
 deprecated: false
 experimental: false

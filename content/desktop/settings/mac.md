@@ -34,17 +34,20 @@ If you choose the integrated terminal, you can run commands in a running contain
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is turned off by default.
 
-- **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`. 
+- **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`.
     > **Tip**
     >
-    > Turn this setting on to make Docker Desktop run faster. 
+    > Turn this setting on to make Docker Desktop run faster.
     { .tip }
 
-- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default. 
+- **Choose file sharing implementation for your containers**. Choose whether you want to share files using **VirtioFS**, **gRPC FUSE**, or **osxfs**. VirtioFS is only available for macOS versions 12.5 and above, and is turned on by default.
     >**Tip**
     >
     > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
     { .tip }
+
+
+- **Use Rosetta for x86/AMD64 emulation on Apple Silicon**. Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. You must also be on macOS Ventura or later. 
 
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
@@ -62,10 +65,11 @@ If you choose the integrated terminal, you can run commands in a running contain
     >
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
-- **Use Docker Compose V2**. Select to enable the `docker-compose` command to
-  use Docker Compose V2. For more information, see [Migrate to Compose V2](../../compose/migrate.md).
+- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
 
-- **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively. 
+- **SBOM Indexing**. When this option is enabled, inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout.
+
+- **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
 ## Resources
 
@@ -74,30 +78,47 @@ network, and other resources.
 
 ### Advanced
 
-On the **Advanced** tab, you can limit resources available to Docker.
+On the **Advanced** tab, you can limit resources available to the Docker Linux VM.
 
 Advanced settings are:
 
-- **CPUs**. By default, Docker Desktop is set to use half the number of processors
-  available on the host machine. To increase processing power, set this to a
-  higher number; to decrease, lower the number.
+- **CPU limit**. Specify the maximum number of CPUs to be used by Docker Desktop.
+  By default, Docker Desktop is set to use all the processors available on the host machine.
 
-- **Memory**. By default, Docker Desktop is set to use `2` GB  of your host's
+- **Memory limit**. By default, Docker Desktop is set to use up to 50% of your host's
   memory. To increase the RAM, set this to a higher number; to decrease it,
   lower the number.
 
 - **Swap**. Configure swap file size as needed. The default is 1 GB.
 
-- **Disk image size**. Specify the size of the disk image.
+- **Virtual disk limit**. Specify the maximum size of the disk image.
 
 - **Disk image location**. Specify the location of the Linux volume where containers and images are stored.
 
-You can also move the disk image to a different location. If you attempt to move a disk image to a location that already has one, you are asked if you want to use the existing image or replace it.
+  You can also move the disk image to a different location. If you attempt to
+  move a disk image to a location that already has one, you are asked if you
+  want to use the existing image or replace it.
 
 >**Tip**
 >
-> If you're running multi-container workloads, increase the memory and disk image space allocation to something higher.
-{ .tip } 
+> If you feel Docker Desktop starting to get slow or you're running
+> multi-container workloads, increase the memory and disk image space allocation
+{ .tip }
+
+- **Resource Saver**. Enable or disable [Resource Saver mode](../use-desktop/resource-saver.md),
+  which significantly reduces CPU and memory utilization on the host by
+  automatically turning off the Linux VM when Docker Desktop is idle (i.e., no
+  containers are running).
+
+  You can also configure the Resource Saver timeout which indicates how long
+  should Docker Desktop be idle before Resource Saver mode kicks in. Default is
+  5 minutes.
+
+  >**Note**
+  >
+  > Exit from Resource Saver mode occurs automatically when containers run. Exit
+  > may take a few seconds (~3 to 10 secs) as Docker Desktop restarts the Linux VM.
+
 
 ### File sharing
 
@@ -200,7 +221,7 @@ You can find this file at `$HOME/.docker/daemon.json`. To change the configurati
 edit the JSON configuration directly from the dashboard in Docker Desktop, or open and
 edit the file using your favorite text editor.
 
-To see the full list of possible configuration options, see the 
+To see the full list of possible configuration options, see the
 [dockerd command reference](/engine/reference/commandline/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
@@ -241,7 +262,7 @@ when an update becomes available. After downloading the update, select
 **Apply and Restart** to install the update. You can do this either through the
 Docker menu or in the **Updates** section in the Docker Dashboard.
 
-## Extensions 
+## Extensions
 
 Use the **Extensions** tab to:
 
@@ -265,10 +286,6 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
 
-#### Use Rosetta for x86/AMD64 emulation on Apple Silicon. 
-
-Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. 
-
 ### Experimental features
 
 {{< include "desktop-experimental.md" >}}
@@ -277,19 +294,24 @@ Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This
 
 On the **Advanced** tab, you can reconfigure your initial installation settings:
 
-- **Choose how to configure the installation of Docker's CLI tools**. 
+- **Choose how to configure the installation of Docker's CLI tools**.
   - **System**: Docker CLI tools are installed in the system directory under `/usr/local/bin`
   - **User**: Docker CLI tools are installed in the user directory under `$HOME/.docker/bin`. You must then add `$HOME/.docker/bin` to your PATH. To add `$HOME/.docker/bin` to your path:
-      1. Open your shell configuration file. This is `~/.bashrc` if you're using a bash shell, or `~/.zshrc` if you're using a zsh shell. 
-      2. Run the following command:
+      1. Open your shell configuration file. This is `~/.bashrc` if you're using a bash shell, or `~/.zshrc` if you're using a zsh shell.
+      2. Copy and paste the following:
             ```console
             $ export PATH=$PATH:~/.docker/bin
             ```
-     3. Save and the close the file. Restart your shell to apply the changes to the PATH variable. 
+     3. Save and the close the file. Restart your shell to apply the changes to the PATH variable.
 
 - **Enable default Docker socket (Requires password)**. Creates `/var/run/docker.sock` which some third party clients may use to communicate with Docker Desktop. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#installing-symlinks).
 
 - **Enable privileged port mapping (Requires password)**. Starts the privileged helper process which binds the ports that are between 1 and 1024. For more information, see [permission requirements for macOS](../mac/permission-requirements.md#binding-privileged-ports).
 
-For more information on each configuration
-and use case, see [Permission requirements](../mac/permission-requirements.md).
+  For more information on each configuration and use case, see [Permission requirements](../mac/permission-requirements.md).
+
+- **Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
+
+## Notifications
+
+{{< include "desktop-notifications-settings.md" >}}

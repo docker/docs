@@ -1,8 +1,0 @@
-extends: existence
-message: "Avoid using words like '%s', the docs should describe the product as is."
-link: https://docs.docker.com/contribute/style/recommended-words/
-level: warning
-ignorecase: true
-tokens:
-  - At this time
-  - Currently

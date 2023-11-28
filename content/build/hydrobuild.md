@@ -45,181 +45,171 @@ infrastructure. Just connect to your builders, and start building.
 
 To get started with Hydrobuild, you need to:
 
-- Download and install Docker Desktop version 4.22.0 or later.
+- Download and install a version of Buildx that supports Hydrobuild.
+
 - Have a Docker ID that's part of a Docker organization participating in the
   [Hydrobuild early access program](https://www.docker.com/build-early-access-program/?utm_source=docs).
 
-When creating a Hydrobuild builder, you specify a builder endpoint to use. An
-endpoint represents a single, isolated builder. Builder endpoints use the
-following format:
+Docker Desktop 4.23.0 and later versions ship with a Hydrobuild-compatible
+Buildx binary. Alternatively, you can download and install the binary manually
+from [this repository](https://github.com/docker/buildx-desktop).
 
-```text
-cloud://<org>/<group>_<platform>
-```
+## Connect to Hydrobuild
 
-- `<org>` is the Docker organization that the builder is provisioned for
-- `<group>` is the builder node group
-- `<platform>` is the native OS and architecture of the builder
+To start using Hydrobuild, you must first add the builder's endpoint to your
+local Docker configuration.
 
-An organization can contain multiple builder groups. Each builder group is an
-isolated builder, and by creating multiple groups you can assign unique
-builders to different teams in the organization.
+{{< tabs group="ui" >}}
+{{< tab name="CLI" >}}
 
-The platform suffix is optional, and if omitted creates a `linux/amd64` builder
-by default. The supported values for `<platform>` are:
-
-- `linux-amd64`
-- `linux-arm64`
-
-You can use the platform suffix to create a multi-node builder group with
-multiple builders of different native architectures. This gives you a
-high-performance build cluster for building multi-platform images natively. See
-[Create a multi-platform builder](#create-a-multi-platform-builder).
-
-The `cloud://` prefix is optional, and can be omitted.
-
-### Create a single-platform builder
-
-To create a `linux/amd64` builder:
-
-1. Sign in to your Docker ID using the Docker Desktop UI or the `docker login`
-   command.
-
-2. Create a builder that uses the `cloud` driver.
+1. Sign in to your Docker account
 
    ```console
-   $ docker buildx create --driver cloud --name hydrobuild <org>/<group>
+   $ docker login
    ```
 
-   Replace `<org>` with the Docker organization, and `<group>` with the name
-   that you want to use for this builder group.
-
-### Create a multi-platform builder
-
-To create a builder with support for native `linux/amd64` and `linux/arm64`
-builds:
-
-1. Sign in to your Docker ID using the Docker Desktop UI or the `docker login`
-   command.
-
-2. Create a `linux/amd64` builder that uses the `cloud` driver.
+2. Add the Hydrobuild endpoint.
 
    ```console
-   $ docker buildx create --driver cloud --name hydrobuild \
-     --platform linux/amd64 \
-     <org>/<group>_linux-amd64
+   $ docker buildx create --driver cloud <ORG>/default
    ```
 
-   Replace `<org>` with the Docker organization, and `<group>` with the name
-   that you want to use for this builder group.
+   Replace `ORG` with the Docker Hub namespace of your Docker organization.
 
-3. Create a `linux/arm64` builder and append it to the `hydrobuild` builder you
-   just created.
+This creates a builder named `cloud-ORG-default`.
 
-   ```console
-   $ docker buildx create --append --name hydrobuild \
-     --platform linux/arm64 \
-     <org>/<group>_linux-arm64
-   ```
+{{< /tab >}}
+{{< tab name="GUI" >}}
 
-   `<org>` and `<group>` should be the same as for first builder, but this time
-   use `linux-arm64` for the platform suffix.
+Enable the [Builds view](../desktop/use-desktop/builds.md) in Docker Desktop
+and complete the following steps:
 
-## Use Hydrobuild
+1. Sign in to your Docker account using the **Sign in** button in Docker Desktop.
 
-To build your applications with Hydrobuild, you can:
+2. Open the Docker Desktop settings and navigate to the **Builders** tab.
 
-- [Use the Docker CLI](#cli) to build from your local development machine
-- [Use GitHub Actions](#github-actions) to build with Hydrobuild in CI
+3. Under **Available builders**, select **Create builder**.
 
-### CLI
+   ![Create builder GUI screenshot](./images/create-builder-gui.webp)
 
-To run a build using Hydrobuild, invoke a build command and specify the
-name of the builder using the `--builder` flag.
+{{< /tab >}}
+{{< /tabs >}}
+
+The builder has native support for the `linux/amd64` and `linux/arm64`
+architectures. This gives you a high-performance build cluster for building
+multi-platform images natively.
+
+## Use Hydrobuild from the CLI
+
+To build using Hydrobuild, invoke a build command and specify the name of the
+builder using the `--builder` flag.
 
 ```console
-$ docker buildx build --builder hydrobuild --tag myorg/some-tag .
+$ docker buildx build --builder cloud-<ORG>-default --tag <IMAGE> .
 ```
 
-> **Note**
->
-> Specifying `--tag` ensures that the build result gets exported to your local
-> image store when the build finishes. If you want to download the results from
-> Hydrobuild without specifying a tag, you must pass the `--load` flag.
->
-> If you use the containerd image store, you must always pass `--load` to
-> download the results, even if you build with a tag.
+If you want to use Hydrobuild without having to specify the `--builder` flag
+each time, you can set it as the default builder.
 
-If you created a [multi-platform builder](#create-a-multi-platform-builder),
-you can build multi-platform images using the `--platform` flag:
+{{< tabs group="ui" >}}
+{{< tab name="CLI" >}}
+
+Run the following command:
 
 ```console
-$ docker buildx build --builder hydrobuild \
+$ docker buildx use cloud-<ORG>-default --global
+```
+
+{{< /tab >}}
+{{< tab name="GUI" >}}
+
+1. Open the Docker Desktop settings and navigate to the **Builders** tab.
+2. Find the Hydrobuild builder under **Available builders**.
+3. Open the drop-down menu and select **Use**.
+
+   ![Selecting Hydrobuild as default using the GUI](./images/set-default-builder-gui.webp)
+
+{{< /tab >}}
+{{< /tabs >}}
+
+Changing your default builder with `docker buildx use` only changes the default
+builder for the `docker buildx build` command. The `docker build` command still
+uses the `default` builder, unless you specify the `--builder` flag explicitly.
+
+If you use build scripts, such as `make`, we recommend that you update your
+build commands from `docker build` to `docker buildx build`, to avoid any
+confusion with regards to builder selection. Alternatively, you can run `docker
+buildx install` to make the default `docker build` command behave like `docker
+buildx build`, without discrepancies.
+
+## Loading build results
+
+Building with `--tag` loads the build result to the local image store
+automatically when the build finishes. To build without a tag and load the
+result, you must pass the `--load` flag.
+
+Loading the build result for multi-platform images is not supported. Use the
+`docker buildx build --push` flag when building multi-platform images to push
+the output to a registry.
+
+```console
+$ docker buildx build --builder cloud-<ORG>-default \
   --platform linux/amd64,linux/arm64 \
-  --tag myorg/some-tag --push .
+  --tag <IMAGE> \
+  --push .
 ```
 
-> **Note**
->
-> If you build multi-platform images, you won't be able to load the images back
-> to your local image store unless you turn on the containerd image store
-> feature, and use the `--load` flag.
->
-> Using the containerd image store with Hydrobuild currently results in slower
-> transfers of build output to the client, compared to when you use the default
-> image store.
->
-> When building multi-platform images, consider pushing the resulting image to
-> a registry directly, using the `docker buildx build --push` flag.
-
-### Use by default
-
-If you want to use Hydrobuild by default, you can run the following command to
-make it the selected builder:
+If you want to build with a tag, but you don't want to load the results to your
+local image store, you can export the build results to the build cache only:
 
 ```console
-$ docker buildx use hydrobuild --global
+$ docker buildx build --builder cloud-<ORG>-default \
+  --platform linux/amd64,linux/arm64 \
+  --tag <IMAGE> \
+  --output type=cacheonly .
 ```
 
-> **Note**
->
-> Changing your default builder with `docker buildx use` only changes the
-> default builder for the `docker buildx build` command. The shorthand `docker
-> build` command will still use the `default` builder unless you specify the
-> `--builder` flag explicitly.
->
-> If you use build scripts, such as `make`, we recommend that you update your
-> build commands from `docker build` to `docker buildx build`, to avoid any
-> confusion with regards to builder selection. Alternatively, you can run
-> `docker buildx install` to make the default `docker build` command behave
-> like `docker buildx build`, without discrepancies.
+## Multi-platform builds
 
-### GitHub Actions
+To run multi-platform builds, you must specify all of the platforms that you
+want to build for using the `--platform` flag.
 
-You can use GitHub Actions in combination with Hydrobuild to achieve faster
-build times, while still leveraging the convenience of GitHub Action workflows.
-
-With this approach, your CI workflows run on a GitHub Actions runner, and the
-runner calls out to the builder to build the image.
-
-To use Hydrobuild with GitHub Actions, you must first sign in with your Docker
-ID, and then use the `lab` channel of `setup-buildx-action`:
-
-```yaml
-- name: Log in to Docker Hub
-  uses: docker/login-action@v2
-  with:
-    username: ${{ secrets.DOCKERHUB_USERNAME }}
-    password: ${{ secrets.DOCKERHUB_TOKEN }}
-- name: Set up Docker Buildx
-  uses: docker/setup-buildx-action@v2
-  with:
-    version: "lab:latest"
-    driver: cloud
-    endpoint: "<org>/<group>"
+```console
+$ docker buildx build --builder cloud-<ORG>-default \
+  --platform linux/amd64,linux/arm64 \
+  --tag <IMAGE> \
+  --push .
 ```
 
-The following example shows a basic workflow for GitHub Actions with Hydrobuild.
+If you don't specify the platform, Hydrobuild automatically builds for the
+architecture matching your local environment.
+
+To learn more about building for multiple platforms, refer to [Multi-platform
+builds](./building/multi-platform.md).
+
+## Use Hydrobuild in CI
+
+Using Hydrobuild in CI can speed up your build pipelines, which means less time
+spent waiting and context switching. You control your CI workflows as usual,
+and delegate the build execution to Hydrobuild.
+
+Building with Hydrobuild in CI involve the following steps:
+
+1. Sign in to a Docker account.
+2. Set up Buildx and create the builder.
+3. Run the build.
+
+When using Hydrobuild in CI, it's recommended that you push the result to a
+registry directly, rather than loading the image and then pushing it. Pushing
+directly speeds up your builds and avoids unnecessary file transfers.
+
+If you just want to build and discard the output, export the results to the
+build cache or build without tagging the image. Hydrobuild automatically loads
+the build result if you build a tagged image. See [Loading build
+results](#loading-build-results) for details.
+
+{{< tabs >}}
+{{< tab name="GitHub Actions" >}}
 
 ```yaml
 name: ci
@@ -234,28 +224,287 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PAT }}
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
         with:
           version: "lab:latest"
           driver: cloud
-          endpoint: "<org>/<group>"
+          endpoint: "<ORG>/default"
       - name: Build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
-          push: true
-          tags: user/app:latest
+          tags: "<IMAGE>"
+          # For pull requests, export results to the build cache.
+          # Otherwise, push to a registry.
+          outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
 ```
 
-This invokes the build from a GitHub Actions workflow, runs the build on
-Hydrobuild, and pushes the image to a Docker Hub registry.
+{{< /tab >}}
+{{< tab name="GitLab" >}}
+
+```yaml
+default:
+  image: docker:24-dind
+  services:
+    - docker:24-dind
+  before_script:
+    - docker info
+    - echo "$DOCKER_PAT" | docker login --username "$DOCKER_USER" --password-stdin
+    - |
+      apk add curl jq
+      ARCH=${CI_RUNNER_EXECUTABLE_ARCH#*/}
+      BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+      mkdir -vp ~/.docker/cli-plugins/
+      curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+      chmod a+x ~/.docker/cli-plugins/docker-buildx
+    - docker buildx create --use --driver cloud ${DOCKER_ORG}/default
+
+variables:
+  IMAGE_NAME: <IMAGE>
+  DOCKER_ORG: <ORG>
+
+# Build multi-platform image and push to a registry
+build_push:
+  stage: build
+  script:
+    - |
+      docker buildx build \
+        --platform linux/amd64,linux/arm64 \
+        --tag "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}" \
+        --push .
+
+# Build an image and discard the result
+build_cache:
+  stage: build
+  script:
+    - |
+      docker buildx build \
+        --platform linux/amd64,linux/arm64 \
+        --tag "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}" \
+        --output type=cacheonly \
+        --push .
+```
+
+{{< /tab >}}
+{{< tab name="CircleCI" >}}
+
+```yaml
+version: 2.1
+
+jobs:
+  # Build multi-platform image and push to a registry
+  build_push:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+
+      - run: |
+          mkdir -vp ~/.docker/cli-plugins/
+          ARCH=amd64
+          BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+          curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+          chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+      - run: echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
+      - run: docker buildx create --use --driver cloud "<ORG>/default"
+
+      - run: |
+          docker buildx build \
+          --platform linux/amd64,linux/arm64 \
+          --push \
+          --tag "<IMAGE>" .
+
+  # Build an image and discard the result
+  build_cache:
+    machine:
+      image: ubuntu-2204:current
+    steps:
+      - checkout
+
+      - run: |
+          mkdir -vp ~/.docker/cli-plugins/
+          ARCH=amd64
+          BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+          curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+          chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+      - run: echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
+      - run: docker buildx create --use --driver cloud "<ORG>/default"
+
+      - run: |
+          docker buildx build \
+          --tag temp \
+          --output type=cacheonly \
+          .
+
+workflows:
+  pull_request:
+    jobs:
+      - build_cache
+  release:
+    jobs:
+      - build_push
+```
+
+{{< /tab >}}
+{{< tab name="Buildkite" >}}
+
+The following example sets up a Buildkite pipeline using Hydrobuild. The
+example assumes that the pipeline name is `build-push-docker` and that you
+manage the Docker access token using environment hooks, but feel free to adapt
+this to your needs.
+
+Add the following `environment` hook agent's hook directory:
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+if [[ "$BUILDKITE_PIPELINE_NAME" == "build-push-docker" ]]; then
+ export DOCKER_PAT="<DOCKER_PERSONAL_ACCESS_TOKEN>"
+fi
+```
+
+Create a `pipeline.yml` that uses the `docker-login` plugin:
+
+```yaml
+env:
+  DOCKER_ORG: <ORG>
+  IMAGE_NAME: <IMAGE>
+
+steps:
+  - command: ./build.sh
+    key: build-push
+    plugins:
+      - docker-login#v2.1.0:
+          username: <DOCKER_USER>
+          password-env: DOCKER_PAT # the variable name in the environment hook
+```
+
+Create the `build.sh` script:
+
+```bash
+DOCKER_DIR=/usr/libexec/docker
+
+# Get download link for latest buildx binary.
+# Set $ARCH to the CPU architecture (e.g. amd64, arm64)
+UNAME_ARCH=`uname -m`
+case $UNAME_ARCH in
+  aarch64)
+    ARCH="arm64";
+    ;;
+  amd64)
+    ARCH="amd64";
+    ;;
+  *)
+    ARCH="amd64";
+    ;;
+esac
+BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+
+# Download docker buildx with Hyrdobuild support
+curl --silent -L --output $DOCKER_DIR/cli-plugins/docker-buildx $BUILDX_URL
+chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+# Connect to your builder and set it as the default builder
+docker buildx create --use --driver cloud "$DOCKER_ORG/default"
+
+# Cache-only image build
+docker buildx build \
+    --platform linux/amd64,linux/arm64 \
+    --tag "$IMAGE_NAME:$BUILDKITE_COMMIT" \
+    --output type=cacheonly \
+    .
+
+# Build, tag, and push a multi-arch docker image
+docker buildx build \
+    --platform linux/amd64,linux/arm64 \
+    --push \
+    --tag "$IMAGE_NAME:$BUILDKITE_COMMIT" \
+    .
+```
+
+{{< /tab >}}
+{{< tab name="Jenkins" >}}
+
+```groovy
+pipeline {
+  agent any
+
+  environment {
+    ARCH = 'amd64'
+    DOCKER_PAT = credentials('docker-personal-access-token')
+    DOCKER_USER = credentials('docker-username')
+    DOCKER_ORG = '<ORG>'
+    IMAGE_NAME = '<IMAGE>'
+  }
+
+  stages {
+    stage('Build') {
+      environment {
+        BUILDX_URL = sh (returnStdout: true, script: 'curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\\"linux-$ARCH\\"))"').trim()
+      }
+      steps {
+        sh 'mkdir -vp ~/.docker/cli-plugins/'
+        sh 'curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL'
+        sh 'chmod a+x ~/.docker/cli-plugins/docker-buildx'
+        sh 'echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin'
+        sh 'docker buildx create --use --driver cloud "$DOCKER_ORG/default"'
+        // Cache-only build
+        sh 'docker buildx build --platform linux/amd64,linux/arm64 --tag "$IMAGE_NAME" --output type=cacheonly .'
+        // Build and push a multi-platform image
+        sh 'docker buildx build --platform linux/amd64,linux/arm64 --push --tag "$IMAGE_NAME" .'
+      }
+    }
+  }
+}
+```
+
+{{< /tab >}}
+{{< tab name="Shell" >}}
+
+```bash
+#!/bin/bash
+
+# Get download link for latest buildx binary. Set $ARCH to the CPU architecture (e.g. amd64, arm64)
+ARCH=amd64
+BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+
+# Download docker buildx with Hyrdobuild support
+mkdir -vp ~/.docker/cli-plugins/
+curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+chmod a+x ~/.docker/cli-plugins/docker-buildx
+
+# Login to Docker Hub. For security reasons $DOCKER_PAT should be a Personal Access Token. See https://docs.docker.com/security/for-developers/access-tokens/
+echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
+
+# Connect to your builder and set it as the default builder
+docker buildx create --use --driver cloud "<ORG>/default"
+
+# Cache-only image build
+docker buildx build \
+    --tag temp \
+    --output type=cacheonly \
+    .
+
+# Build, tag, and push a multi-arch docker image
+docker buildx build \
+    --platform linux/amd64,linux/arm64 \
+    --push \
+    --tag "<IMAGE>" \
+    .
+```
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Hydrobuild in Docker Desktop
 
@@ -302,10 +551,10 @@ more efficient:
 
 ### Dockerignore files
 
-Using a [`.dockerignore` file](./building/context.md#dockerignore), you can be
+Using a [`.dockerignore` file](./building/context.md#dockerignore-files), you can be
 explicit about which local files that you don’t want to include in the build
-context. Files caught by the [glob patterns](../engine/reference/builder.md#dockerignore-file)
-you specify in your ignore-file are not transferred to the remote builder.
+context. Files caught by the glob patterns you specify in your ignore-file are
+not transferred to the remote builder.
 
 Some examples of things you might want to add to your `.dockerignore` file are:
 
@@ -370,7 +619,7 @@ If you want to stop using Hydrobuild, and remove it from your system, remove
 the builder using the `docker buildx rm` command.
 
 ```console
-$ docker buildx rm hydrobuild
+$ docker buildx rm cloud-<ORG>-default
 ```
 
 This doesn't deprovision the builder backend, it only removes the builder from
@@ -392,3 +641,36 @@ For more information, refer to:
 
 - [docker buildx build --secret](../engine/reference/commandline/buildx_build.md#secret)
 - [docker buildx build --ssh](../engine/reference/commandline/buildx_build.md#ssh)
+
+### How do I unset Hydrobuild as the default builder?
+
+If you've set Hydrobuild as the default builder and want to revert to using the
+default `docker` builder, run the following command:
+
+```console
+$ docker context use default
+```
+
+### How do I manage the build cache with Hydrobuild?
+
+You don't need to manage the builder's cache manually. The system manages it
+for you through [garbage collection](./cache/garbage-collection.md).
+
+Hydrobuild uses the following garbage collection limits:
+
+- Size: 90% of 1TB
+- Age: cache not used in the past 180 days
+- Number of build history records: 10 000
+
+Old cache is automatically removed if you hit any of these limits. You can
+check your current cache state using the [`docker buildx du`
+command](../engine/reference/commandline/buildx_du.md).
+
+To clear the builder's cache manually, you can use the [`docker buildx prune`
+command](../engine/reference/commandline/buildx_prune.md) command. This works
+like pruning the cache for any other builder.
+
+> **Note**
+>
+> Pruning Hydrobuild cache also removes the cache for other team members using
+> the same builder.

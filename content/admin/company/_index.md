@@ -6,29 +6,33 @@ grid:
 - title: Manage organizations
   description: Learn how to add and manage organizations as well as seats within your
     company.
-  icon: note_add
+  icon: store
   link: /admin/company/organizations/
 - title: Manage users
   description: Explore how to manage users in all organizations.
-  icon: contact_page
+  icon: group_add
   link: /admin/company/users/
 - title: Manage company owners
   description: Find out more about company owners and how to manage them.
-  icon: group_add
+  icon: supervised_user_circle
   link: /admin/company/owners/
 - title: Configure Single Sign-On
   description: Discover how to configure SSO for your entire company.
   icon: key
-  link: /admin/company/settings/sso/
+  link: /security/for-admins/single-sign-on/
 - title: Set up SCIM
   description: Set up SCIM to automatically provision and deprovision users in your
     company.
   icon: checklist
-  link: /admin/company/settings/scim/
+  link: /security/for-admins/scim/
 - title: Domain management
   description: Add and verify your domains.
-  icon: security
+  icon: domain_verification
   link: /admin/company/settings/domains/
+- title: FAQs
+  description: Explore common company FAQs.
+  link: /docker-hub/company-faqs/
+  icon: help
 ---
 
 {{< include "admin-early-access.md" >}}

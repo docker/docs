@@ -91,7 +91,7 @@ const containers = await ddClient.docker.listContainers();
 
 `Promise`<`unknown`\>
 
-___
+---
 
 ### listImages
 
@@ -107,7 +107,7 @@ const images = await ddClient.docker.listImages();
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `options?` | `any` | (Optional). A JSON like `{ "all": true, "filters": JSON.stringify({ dangling: ["true"] }), "digests": true * }` * * For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/engine/api/v1.41/#tag/Image). |
+| `options?` | `any` | (Optional). A JSON like `{ "all": true, "filters": JSON.stringify({ dangling: ["true"] }), "digests": true * }` For more information about the different properties see [the Docker API endpoint documentation](https://docs.docker.com/engine/api/v1.41/#tag/Image). |
 
 #### Returns
 

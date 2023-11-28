@@ -1,6 +1,6 @@
 title: Docker Docs
 baseURL: https://docs.docker.com
-refLinksErrorLevel: WARNING
+refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
@@ -91,20 +91,16 @@ params:
   docs_url: https://docs.docker.com
 
   latest_engine_api_version: "1.43"
-  docker_ce_version: "24.0.0"
-  compose_v1_version: "1.29.2"
-  compose_version: "v2.20.3"
+  docker_ce_version: "24.0.7"
+  compose_version: "v2.23.3"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  machine_version: "0.16.0"
-  distribution_version: "2.7"
-  compose_switch_version: "1.0.4"
-  buildkit_version: "0.12.1"
+  buildkit_version: "0.12.3"
 
-  example_go_version: "1.20"
+  example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
 
-  min_api_threshold: 1.40
+  min_api_threshold: 1.41
 
 
 menus:
@@ -124,9 +120,6 @@ menus:
   - name: FAQ
     url: /faq/
     weight: 5
-  - name: Contribute
-    url: /contribute/overview/
-    weight: 6
 
   footer:
     - url: https://www.docker.com/products
@@ -286,31 +279,6 @@ module:
         - source: docs/reference/commandline/dockerd.md
           target: content/engine/reference/commandline/dockerd.md
 
-    - path: github.com/docker/compose-cli
-      mounts:
-        - source: docs/aci-compose-features.md
-          target: content/cloud/aci-compose-features.md
-        - source: docs/aci-container-features.md
-          target: content/cloud/aci-container-features.md
-        - source: docs/ecs-architecture.md
-          target: content/cloud/ecs-architecture.md
-        - source: docs/ecs-compose-examples.md
-          target: content/cloud/ecs-compose-examples.md
-        - source: docs/ecs-compose-features.md
-          target: content/cloud/ecs-compose-features.md
-
-    - path: github.com/distribution/distribution
-      mounts:
-      - source: docs
-        target: content/registry
-        excludeFiles:
-        - "**/index.md"
-        - "**/api.md.tmpl"
-      - source: docs/spec/index.md
-        target: content/registry/spec/_index.md
-      - source: docs/spec/auth/index.md
-        target: content/registry/spec/auth/_index.md
-
     - path: github.com/compose-spec/compose-spec
       mounts:
       - source: 01-status.md
@@ -347,4 +315,11 @@ module:
         target: content/compose/compose-file/build.md
       - source: deploy.md
         target: content/compose/compose-file/deploy.md
+      - source: develop.md
+        target: content/compose/compose-file/develop.md
 
+    - path: github.com/docker/compose/v2
+      mounts:
+        - source: docs/reference
+          target: data/compose-cli
+          includeFiles: "*.yaml"

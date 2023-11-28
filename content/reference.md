@@ -53,11 +53,6 @@ grid_specs:
   description: Outlines the Docker Registry authentication schemes.
   icon: key
   link: /registry/spec/auth/
-- title: Registry storage drivers
-  description: Enables support for given cloud providers when storing images with
-    Registry.
-  icon: shelves
-  link: /registry/storage-drivers/
 aliases:
 - /app/working-with-app/
 - /engine/reference/commandline/app/
@@ -85,16 +80,16 @@ various APIs, CLIs, drivers and specifications, and file formats.
 
 ## File formats
 
-{{< grid grid_files >}}
+{{< grid items="grid_files" >}}
 
 ## Command-line interfaces (CLIs)
 
-{{< grid grid_clis >}}
+{{< grid items="grid_clis" >}}
 
 ## Application programming interfaces (APIs)
 
-{{< grid grid_apis >}}
+{{< grid items="grid_apis" >}}
 
 ## Drivers and specifications
 
-{{< grid grid_specs >}}
+{{< grid items="grid_specs" >}}

@@ -1,5 +1,5 @@
 ---
-description: Remove seats from your subscription
+description: Learn how to remove seats from your subscription
 keywords: Docker, Docker Hub, subscription, update, remove, seats
 title: Remove seats from your subscription
 aliases:
@@ -8,9 +8,9 @@ aliases:
 
 You can remove seats from your Team or Business subscription at anytime. 
 
-If you remove seats in the middle of the billing cycle, changes are applied immediately and are reflected in the next billing cycle. Any unused portion of the subscription for removed seats isn't refundable or creditable.
+If you remove seats in the middle of the billing cycle, changes apply in the next billing cycle. Any unused portion of the subscription for removed seats isn't refundable or creditable.
 
-For example, if you receive your billing on the 8th of every month for 10 seats and you want to remove 2 seats on the 15th of the month, the 2 seats are removed immediately. Your payment for 8 seats begins the next month. If you are on the annual subscription, the 2 seats are removed immediately, and your payment for the 8 seats begins next year.
+For example, if you receive your billing on the 8th of every month for 10 seats and you want to remove 2 seats on the 15th of the month, the 2 seats will be removed from your subscription the next month. Your payment for 8 seats begins on the next billing cycle. If you're on the annual subscription, the 2 seats are still available until the next year, and your payment for the 8 seats begins on the next billing cycle.
 
 ## Remove seats from a monthly or an annual subscription
 
@@ -19,7 +19,7 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 >If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to remove seats from your subscription. 
 { .important }
 
-1. Log into your [Docker Hub](https://hub.docker.com) account.
+1. Sign in to your [Docker Hub](https://hub.docker.com) account.
 
 2. Select **Organizations** and then choose your organization.
 
@@ -29,4 +29,4 @@ For example, if you receive your billing on the 8th of every month for 10 seats 
 
 5. The **Billing** tab confirms the seat removal and the details on when the changes take effect.
 
-To cancel the removal of seats, select **Cancel seats downgrade**.
+To cancel the removal of seats, [contact support](https://hub.docker.com/support/contact/).

@@ -29,9 +29,10 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
 
 1. Set up the repository. Find distro-specific instructions in:
 
-    [Ubuntu](../../engine/install/ubuntu.md/#set-up-the-repository) |
+    [Ubuntu](../../engine/install/ubuntu.md/#install-using-the-repository) |
     [CentOS](../../engine/install/centos.md/#set-up-the-repository) |
-    [Debian](../../engine/install/debian.md/#set-up-the-repository) |
+    [Debian](../../engine/install/debian.md/#install-using-the-repository) |
+    [Raspberry Pi OS](../../engine/install/raspberry-pi-os.md/#install-using-the-repository) |
     [Fedora](../../engine/install/fedora.md/#set-up-the-repository) |
     [RHEL](../../engine/install/rhel.md/#set-up-the-repository) |
     [SLES](../../engine/install/sles.md/#set-up-the-repository).
@@ -55,10 +56,15 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
 
     ```console
     $ docker compose version
+    ```
+
+    Expected output:
+
+    ```text
     Docker Compose version vN.N.N
     ```
 
-   Where `vN.N.N` is placeholder text standing in for the latest version.
+    Where `vN.N.N` is placeholder text standing in for the latest version.
 
 ### Update Compose
 

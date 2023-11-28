@@ -1,5 +1,5 @@
 {{ $title := partial "utils/title.html" . }}
-{{ $description := .Description | default .Summary }}
+{{ $description := partial "utils/description.html" . }}
 {{ if .IsHome }}
   <title>{{ site.Title }}</title>
 {{ else }}
@@ -13,7 +13,7 @@
 <meta name="description" content="{{ $description }}" />
 <meta
   name="keywords"
-  content="{{ .Keywords | default "docker, docker open source, docker platform, distributed applications, microservices, containers, docker containers, docker software, docker virtualization" }}"
+  content="{{- partial "utils/keywords.html" . -}}"
 />
 <link rel="canonical" href="{{ .Permalink }}" />
 

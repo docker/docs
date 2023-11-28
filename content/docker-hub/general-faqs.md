@@ -1,6 +1,6 @@
 ---
 title: General FAQs for Docker Hub
-description: Frequently asked administration and security questions
+description: Frequently asked administration questions
 keywords: onboarding, docker, teams, orgs
 redirect:
 - /docker-hub/onboarding-faqs/
@@ -8,10 +8,10 @@ redirect:
 
 ### What is a Docker ID?
 
-A Docker ID is a username to access Docker Hub repositories and hosted Docker
-services. All you need is an email address to create a Docker ID. Your Docker ID must be between 4 and 30 characters long, and can only contain
+A Docker ID is a username for your Docker account that lets you access Docker products. All you need is an email address to create a Docker ID, or you can sign up with your Google or GitHub account. Your Docker ID must be between 4 and 30 characters long, and can only contain
 numbers and lowercase letters. You cannot use any special characters or spaces.
-For more information, see [Docker ID](../docker-id/index.md). If your admin enforces [Single sign-on (SSO)](../single-sign-on/index.md), a Docker ID is provisioned for new users.
+
+For more information, see [Docker ID](../docker-id/index.md). If your admin enforces [Single sign-on (SSO)](../security/for-admins/single-sign-on/index.md), a Docker ID is provisioned for new users.
 
 Developers may have multiple Docker IDs in order to separate their Docker IDs that are associated with an organization in Docker Business or Team, and their personal use Docker IDs.
 
@@ -65,7 +65,7 @@ The organization owner can also add additional owners to help them manage users,
 ### Can I configure multiple SSO identity providers (IdPs) to authenticate users to a single org?
 
 Docker SSO allows only one IdP configuration per organization. For more
-information, see [Configure SSO](../single-sign-on/index.md) and [SSO FAQs](../single-sign-on/faqs.md).
+information, see [Configure SSO](../security/for-admins/single-sign-on/configure/_index.md) and [SSO FAQs](../faq/security/single-sign-on/faqs.md).
 
 ### What is a service account?
 

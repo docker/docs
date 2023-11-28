@@ -18,6 +18,9 @@ grid:
 - title: Docker Hub
   icon: widgets
   link: /docker-hub/release-notes/
+- title: Docker Scout
+  icon: query_stats
+  link: /scout/release-notes/
 ---
 
 Find out what's new in Docker. Release notes contain information about new

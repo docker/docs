@@ -1,6 +1,7 @@
 ---
-description: Instructions for installing Docker Engine on SLES
-keywords: requirements, apt, installation, centos, rpm, sles, install, uninstall,
+description: Learn how to install Docker Engine on SLES. These instructions cover
+  the different installation methods, how to uninstall, and next steps.
+keywords: requirements, apt, installation, install docker engine, centos, rpm, sles, install, uninstall,
   upgrade, update, s390x, ibm-z
 title: Install Docker Engine on SLES
 toc_max: 4
@@ -39,33 +40,22 @@ To get started with Docker Engine on SLES, make sure you
 To install Docker Engine, you need a maintained version of one of the following
 SLES versions:
 
-- SLES 15-SP3 on s390x (IBM Z)
 - SLES 15-SP4 on s390x (IBM Z)
+- SLES 15-SP5 on s390x (IBM Z)
 
-The [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.3&arch=s390x)
-repositories must be enabled.
+You must enable the [`SCC SUSE`](https://scc.suse.com/packages?name=SUSE%20Linux%20Enterprise%20Server&version=15.5&arch=s390x)
+repositories.
 
-The [OpenSUSE `SELinux` repository](https://download.opensuse.org/repositories/security)
-must be enabled. This repository is not added by default, and you need to enable
-it for the version of SLES you are running. Run the following commands to add it:
-
-For SLES 15-SP3:
+You must add the [OpenSUSE `SELinux` repository](https://download.opensuse.org/repositories/security:/SELinux/). This repository is not added by default. Run the following commands to add it:
 
 ```console
-$ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/SLE_15_SP3/security:SELinux.repo"
-$ sudo zypper addrepo $opensuse_repo
-```
-
-For SLES 15-SP4:
-
-```console
-$ opensuse_repo="https://download.opensuse.org/repositories/security:SELinux/15.4/security:SELinux.repo"
+$ opensuse_repo="https://download.opensuse.org/repositories/security:/SELinux/openSUSE_Factory/security:SELinux.repo"
 $ sudo zypper addrepo $opensuse_repo
 ```
 
 ### Uninstall old versions
 
-Older versions of Docker went by the names of `docker` or `docker-engine`.
+Older versions of Docker went by `docker` or `docker-engine`.
 Uninstall any such older versions before attempting to install a new version,
 along with associated dependencies.
 
@@ -95,8 +85,8 @@ You can install Docker Engine in different ways, depending on your needs:
   from them, for ease of installation and upgrade tasks. This is the
   recommended approach.
 
-- You can download the RPM package and
-  [install it manually](#install-from-a-package) and manage
+- You can download the RPM package,
+  [install it manually](#install-from-a-package), and manage
   upgrades completely manually. This is useful in situations such as installing
   Docker on air-gapped systems with no access to the internet.
 
@@ -111,7 +101,6 @@ Docker from the repository.
 
 #### Set up the repository
 
-
 Set up the repository.
 
 ```console
@@ -122,8 +111,8 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
 
 1. Install Docker Engine, containerd, and Docker Compose:
 
-  {{< tabs >}}
-  {{< tab name="Latest" >}}
+   {{< tabs >}}
+   {{< tab name="Latest" >}}
 
    To install the latest version, run:
 
@@ -137,8 +126,8 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
   
-  {{< /tab >}}
-  {{< tab name="Specific version" >}}
+   {{< /tab >}}
+   {{< tab name="Specific version" >}}
 
    To install a specific version, start by listing the available versions in
    the repository:
@@ -167,8 +156,8 @@ $ sudo zypper addrepo {{% param "download-url-base" %}}/docker-ce.repo
    This command installs Docker, but it doesn't start Docker. It also creates a
    `docker` group, however, it doesn't add any users to the group by default.
   
-  {{< /tab >}}
-  {{< /tabs >}}
+   {{< /tab >}}
+   {{< /tabs >}}
 
 2. Start Docker.
 
@@ -201,11 +190,12 @@ If you can't use Docker's `rpm` repository to install Docker Engine, you can
 download the `.rpm` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
+<!-- markdownlint-disable-next-line -->
 1. Go to [{{% param "download-url-base" %}}/]({{% param "download-url-base" %}}/)
    and choose your version of SLES. Then browse to `s390x/stable/Packages/`
    and download the `.rpm` file for the Docker version you want to install.
 
-2. Install Docker Engine, changing the path below to the path where you downloaded
+2. Install Docker Engine, changing the following path to the path where you downloaded
    the Docker package.
 
    ```console

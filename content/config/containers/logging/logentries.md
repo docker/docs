@@ -1,9 +1,9 @@
 ---
 title: Logentries logging driver
-description: Describes how to use the logentries logging driver.
+description: Learn how to use the logentries logging driver with Docker Engine
 keywords: logentries, docker, logging, driver
 aliases:
-- /engine/admin/logging/logentries/
+  - /engine/admin/logging/logentries/
 ---
 
 The `logentries` logging driver sends container logs to the
@@ -13,8 +13,8 @@ The `logentries` logging driver sends container logs to the
 
 Some options are supported by specifying `--log-opt` as many times as needed:
 
- - `logentries-token`: specify the logentries log set token
- - `line-only`: send raw payload only
+- `logentries-token`: specify the Logentries log set token
+- `line-only`: send raw payload only
 
 Configure the default logging driver by passing the
 `--log-driver` option to the Docker daemon:
@@ -43,7 +43,7 @@ Users can use the `--log-opt NAME=VALUE` flag to specify additional Logentries l
 
 ### logentries-token
 
-You need to provide your log set token for logentries driver to work:
+You need to provide your log set token for the Logentries driver to work:
 
 ```console
 $ docker run --log-driver=logentries --log-opt logentries-token=abcd1234-12ab-34cd-5678-0123456789ab

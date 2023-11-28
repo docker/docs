@@ -1,4 +1,4 @@
-## The Compose application model
+# The Compose application model
 
 The Compose Specification lets you define a platform-agnostic container based application. Such an application is designed as a set of containers which have to both run together with adequate shared resources and communication channels.
 
@@ -16,7 +16,7 @@ A [secret](09-secrets.md) is a specific flavor of configuration data for sensiti
 >
 > With volumes, configs and secrets you can have a simple declaration at the top-level and then add more platform-specific information at the service level.
 
-A project is an individual deployment of an application specification on a platform. A project's name, set with the the top-level [`name`](04-version-and-name.md) attribute, is used to group
+A project is an individual deployment of an application specification on a platform. A project's name, set with the top-level [`name`](04-version-and-name.md) attribute, is used to group
 resources together and isolate them from other applications or other installation of the same Compose specified application with distinct parameters. If you are creating resources on a platform, you must prefix resource names by project and
 set the label `com.docker.compose.project`.
 
@@ -24,7 +24,7 @@ Compose offers a way for users to set a custom project name and override this na
 
 Project names must contain only lowercase letters, decimal digits, dashes, and underscores, and must begin with a lowercase letter or decimal digit.
 
-### Illustrative example
+## Illustrative example
 
 The following example illustrates the Compose Specification concepts outlined above. The example is non-normative.
 
@@ -82,7 +82,7 @@ The example application is composed of the following parts:
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     ports:
       - "443:8043"
     networks:
@@ -94,7 +94,7 @@ services:
       - server-certificate
 
   backend:
-    image: awesome/database
+    image: example/database
     volumes:
       - db-data:/etc/data
     networks:

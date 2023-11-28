@@ -7,13 +7,13 @@
     target="_blank"
     rel="noopener"
     >{{ .Text | safeHTML }}<span
-      class="ml-1 align-top text-[1em] material-symbols-rounded"
+      class="select-none ml-1 align-top text-[1em] material-symbols-rounded"
       >open_in_new</span
     ></a
   >
 {{- else if (strings.HasPrefix $url "/") -}}
-  {{/* absolute link, use absURL */}}
-  <a class="link" href="{{ absURL $url }}">{{ .Text | safeHTML }}</a>
+  {{/* absolute link, use url as-is */}}
+  <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>
 {{- else -}}
   {{/* check if the file links to index.md */}}
   {{- if (strings.FindRE `([^_]|^)index.md` $url 1) -}}

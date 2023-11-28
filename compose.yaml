@@ -6,7 +6,7 @@ services:
     ports:
       - "1313:1313"
     entrypoint: ["hugo", "server", "--bind", "0.0.0.0"]
-    x-develop:
+    develop:
       watch:
         - action: sync
           path: .

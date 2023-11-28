@@ -3,9 +3,11 @@
 {{ end }}
 
 {{ define "main" }}
-  {{ partial "breadcrumbs-legacy.html" . }}
-  <article class="prose max-w-none dark:prose-invert">
-    <h1>{{ .Title }}</h1>
+  {{ partial "breadcrumbs.html" . }}
+  <article class="DocSearch-content prose max-w-none dark:prose-invert">
+    {{ with .Title }}
+    <h1 id="{{ anchorize . }}" class="scroll-mt-36">{{ . }}</h1>
+    {{ end }}
     <table>
       <thead>
         <tr>

@@ -19,6 +19,7 @@ long: |-
   
   After running `docker init`, you can choose one of the following templates:
     
+    * ASP.NET Core: Suitable for an ASP.NET Core application.
     * Go: Suitable for a Go server application.
     * Node: Suitable for a Node server application.
     * Python: Suitable for a Python server application.
@@ -69,6 +70,7 @@ examples: |-
   
   ? What application platform does your project use?  [Use arrows to move, type to filter]
   > Go - (detected) suitable for a Go server application
+    ASP.NET Core - suitable for an ASP.NET Core application
     Python - suitable for a Python server application
     Node - suitable for a Node server application
     Rust - suitable for a Rust server application
@@ -171,6 +173,30 @@ examples: |-
   Your application will be available at http://localhost:8000
   ```
   
+  ### Example of selecting ASP.NET Core
+  
+  The following example shows the prompts that appear after selecting `ASP.NET Core` and example input. The ASP.NET Core template also creates a `README.Docker.md` file with additional information about building and deploying your application.
+  
+  ```console
+  ? What application platform does your project use? ASP.NET Core
+  ? What's the name of your solution's main project? myapp
+  ? What version of .NET do you want to use? 6.0
+  ? What local port do you want to use to access your server? 8000
+  
+  CREATED: .dockerignore
+  CREATED: Dockerfile
+  CREATED: compose.yaml
+  CREATED: README.Docker.md
+  
+  ✔ Your Docker files are ready!
+  
+  Take a moment to review them and tailor them to your application.
+  
+  When you're ready, start your application by running: docker compose up --build
+  
+  Your application will be available at http://localhost:8000
+  ```
+
   ### Example of selecting Other
   
   The following example shows the output after selecting `Other`.

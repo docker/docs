@@ -1,12 +1,12 @@
-## Networks top-level element
+# Networks top-level element
 
 Networks are the layer that allow services to communicate with each other.
 
-The top-level `networks` element lets you configure named networks that can be reused across multiple services. To use a network across multiple services, you must explicitly grant each service access by using the [networks](05-services.md) attribute. The `networks` top-level element has additional syntax that provides more granular control.
+The top-level `networks` element lets you configure named networks that can be reused across multiple services. To use a network across multiple services, you must explicitly grant each service access by using the [networks](05-services.md) attribute within the `services` top-level element. The `networks` top-level element has additional syntax that provides more granular control.
 
-### Examples
+## Examples
 
-#### Basic example
+### Basic example
 
 In the following example, at runtime, networks `front-tier` and `back-tier` are created and the `frontend` service
 is connected to `front-tier` and `back-tier` networks.
@@ -14,7 +14,7 @@ is connected to `front-tier` and `back-tier` networks.
 ```yml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     networks:
       - front-tier
       - back-tier
@@ -24,7 +24,7 @@ networks:
   back-tier:
 ```
 
-#### Advanced example
+### Advanced example
 
 ```yml
 services:
@@ -52,12 +52,13 @@ networks:
     driver_opts:
       foo: "1"
       bar: "2"
-``` 
+```
 
 The advanced example shows a Compose file which defines two custom networks. The `proxy` service is isolated from the `db` service, because they do not share a network in common. Only `app` can talk to both.
 
-### Attributes 
-#### driver
+## Attributes
+
+### driver
 
 `driver` specifies which driver should be used for this network. Compose returns an error if the
 driver is not available on the platform.
@@ -74,7 +75,7 @@ Default and available values are platform specific. Compose supports the followi
 - `host`: Use the host's networking stack.
 - `none`: Turn off networking.
 
-##### host or none
+#### host or none
 
 The syntax for using built-in networks such as `host` and `none` is different, as such networks implicitly exist outside
 the scope of Compose. To use them, you must define an external network with the name `host` or `none` and
@@ -106,7 +107,7 @@ networks:
     name: none
 ```
 
-#### driver_opts
+### driver_opts
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
 driver-dependent. Consult the driver's documentation for more information. 
@@ -119,7 +120,7 @@ networks:
       baz: 1
 ```
 
-#### attachable
+### attachable
 
 If `attachable` is set to `true`, then standalone containers should be able to attach to this network, in addition to services.
 If a standalone container attaches to the network, it can communicate with services and other standalone containers
@@ -132,11 +133,11 @@ networks:
     attachable: true
 ```
 
-#### enable_ipv6
+### enable_ipv6
 
-`enable_ipv6` enables IPv6 networking. 
+`enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](https://docs.docker.com/config/daemon/ipv6/).
 
-### external
+## external
 
 If set to `true`:
  - `external` specifies that this network’s lifecycle is maintained outside of that of the application.
@@ -151,12 +152,12 @@ queries the platform for an existing network simply called `outside` and connect
 
 services:
   proxy:
-    image: awesome/proxy
+    image: example/proxy
     networks:
       - outside
       - default
   app:
-    image: awesome/app
+    image: example/app
     networks:
       - default
 
@@ -165,7 +166,7 @@ networks:
     external: true
 ```
 
-#### ipam
+### ipam
 
 `ipam` specifies a custom IPAM configuration. This is an object with several properties, each of which is optional:
 
@@ -181,26 +182,26 @@ networks:
 networks:
   mynet1:
     ipam:
-    driver: default
-    config:
-      - subnet: 172.28.0.0/16
-        ip_range: 172.28.5.0/24
-        gateway: 172.28.5.254
-        aux_addresses:
-          host1: 172.28.1.5
-          host2: 172.28.1.6
-          host3: 172.28.1.7
-    options:
-      foo: bar
-      baz: "0"
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
+          ip_range: 172.28.5.0/24
+          gateway: 172.28.5.254
+          aux_addresses:
+            host1: 172.28.1.5
+            host2: 172.28.1.6
+            host3: 172.28.1.7
+      options:
+        foo: bar
+        baz: "0"
 ```
 
-### internal
+## internal
 
 By default, Compose provides external connectivity to networks. `internal`, when set to `true`, allows you to
 create an externally isolated network.
 
-### labels
+## labels
 
 Add metadata to containers using `labels`. You can use either an array or a dictionary.
 
@@ -226,7 +227,7 @@ networks:
 
 Compose sets `com.docker.compose.project` and `com.docker.compose.network` labels.
 
-### name
+## name
 
 `name` sets a custom name for the network. The name field can be used to reference networks which contain special characters.
 The name is used as is and is not scoped with the project name.
@@ -246,4 +247,3 @@ networks:
     external: true
     name: "${NETWORK_ID}"
 ```
-

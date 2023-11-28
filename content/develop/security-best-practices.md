@@ -12,7 +12,7 @@ container. This includes:
 1. [Choosing the right base image](#choose-the-right-base-image) from a trusted source and keeping it small
 2. [Using multi-stage builds](#use-multi-stage-builds)
 3. [Rebuilding images](#rebuild-images)
-4. [Check your image for vulnerabilities](#check-your-image-for-vulnerabilities)
+4. [Checking your image for vulnerabilities](#check-your-image-for-vulnerabilities)
 
 ### Choose the right base image
 
@@ -21,16 +21,16 @@ image. When choosing an image, ensure it's built from a trusted source and keep
 it small.
 
 Docker Hub has more than 8.3 million repositories. Some of these images are
-[Official Images](../docker-hub/official_images.md), which are published by
+[Official Images](../trusted-content/official-images.md), which are published by
 Docker as a curated set of Docker open source and drop-in solution repositories.
 Docker also offers images that are published by
-[Verified Publishers](../docker-hub/dvp-program.md). These high-quality images
+[Verified Publishers](../trusted-content/dvp-program.md). These high-quality images
 are published and maintained by the organizations partnering with Docker, with
 Docker verifying the authenticity of the content in their repositories. When you
 pick your base image, look out for the **Official Image** and **Verified Publisher**
 badges.
 
-![Docker Hub Official and Verified Publisher images](images/hub-official-images.png)
+![Docker Hub Official and Verified Publisher images](images/hub-official-images.webp)
 
 When building your own image from a Dockerfile, ensure you choose a minimal base
 image that matches your requirements. A smaller base image not only offers
@@ -58,7 +58,7 @@ image. This can result in a concise final image.
 This method of creating a tiny image doesn't only significantly reduce
 complexity, but also reduces the chance of implementing vulnerable artifacts in your
 image. Therefore, instead of images that are built on images, that again are
-built on other images, multi-stage builds allow you to 'cherry pick' your
+built on other images, multi-stage builds let you 'cherry pick' your
 artifacts without inheriting the vulnerabilities from the base images on which
 they rely.
 
@@ -68,7 +68,7 @@ For detailed information on how to configure multi-stage builds, see
 ### Rebuild images
 
 A Docker image is built from a Dockerfile. A Dockerfile contains a set of
-instructions which allows you to automate the steps you would normally
+instructions which lets you automate the steps you would normally
 (manually) take to create an image. Additionally, it can include some imported
 libraries and install custom software. These appear as instructions in the
 Dockerfile.
@@ -86,7 +86,7 @@ FROM ubuntu:latest
 RUN apt-get -y update && apt-get install -y python
 ```
 
-We recommend that you rebuild your Docker image regularly to prevent known
+Docker recommends that you rebuild your Docker image regularly to prevent known
 vulnerabilities that have been addressed. When rebuilding, use the option
 `--no-cache` to avoid cache hits and to ensure a fresh download.
 
@@ -128,7 +128,7 @@ that affect images that you build or use.
   which when enabled automatically scans images when you push them to a Docker Hub
   repository. Requires a [Docker subscription](../subscription/index.md).
 - Docker Hub also supports an early-access
-  [advanced image analysis](../scout/advanced-image-analysis.md) feature, which extends
+  [advanced image analysis](../scout/image-analysis.md) feature, which extends
   the "core" vulnerability scanning solution with enhanced capabilities and more
   detailed and actionable insights.
 - For the CLI, there's the

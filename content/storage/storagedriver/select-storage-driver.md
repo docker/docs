@@ -29,11 +29,15 @@ The Docker Engine provides the following storage drivers on Linux:
 | `vfs`              | The `vfs` storage driver is intended for testing purposes, and for situations where no copy-on-write filesystem can be used. Performance of this storage driver is poor, and is not generally recommended for production use.                                                                                                                                                                                   |
 | `devicemapper`     | The `devicemapper` storage driver requires `direct-lvm` for production environments, because `loopback-lvm`, while zero-configuration, has very poor performance. `devicemapper` was the recommended storage driver for CentOS and RHEL, as their kernel version did not support `overlay2`. However, current versions of CentOS and RHEL now have support for `overlay2`, which is now the recommended driver. |
 
+<!-- markdownlint-disable reference-links-images -->
+
 The Docker Engine has a prioritized list of which storage driver to use if no
 storage driver is explicitly configured, assuming that the storage driver meets
 the prerequisites, and automatically selects a compatible storage driver. You
-can see the order in the [source code for Docker Engine {{% param "docker_ce_version" %}}](https://github.com/moby/moby/blob/{{% param "docker_ce_version" %}}/daemon/graphdriver/driver_linux.go#L52-L53).
+can see the order in the [source code for Docker Engine {{% param "docker_ce_version" %}}](https://github.com/moby/moby/blob/v{{% param "docker_ce_version" %}}/daemon/graphdriver/driver_linux.go#L52-L53).
 { #storage-driver-order }
+
+<!-- markdownlint-enable reference-links-images -->
 
 Some storage drivers require you to use a specific format for the backing filesystem.
 If you have external  requirements to use a specific backing filesystem, this may

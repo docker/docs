@@ -14,12 +14,6 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 ### Docker Community Edition 18.06.1-ce-mac73 2018-08-29
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/26764/Docker.dmg)
-
 * Upgrades
   - [Docker 18.06.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce)
 
@@ -27,12 +21,6 @@ This page contains release notes for older versions of Docker Desktop for Mac.
   - Fix local DNS failing to resolve inside containers.
 
 ### Docker Community Edition 18.06.0-ce-mac70 2018-07-25
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/26399/Docker.dmg)
 
 * Upgrades
   - [Docker 18.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.0-ce)
@@ -63,12 +51,6 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 ### Docker Community Edition 18.03.1-ce-mac65 2018-04-30
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/24312/Docker.dmg)
-
 * Upgrades
   - [Docker 18.03.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.1-ce)
   - [Docker compose 1.21.1](https://github.com/docker/compose/releases/tag/1.21.1)
@@ -78,12 +60,6 @@ This page contains release notes for older versions of Docker Desktop for Mac.
   - Fix Docker for Mac not starting due to socket file paths being too long (typically HOME folder path being too long). Fixes [docker/for-mac#2727](https://github.com/docker/for-mac/issues/2727), [docker/for-mac#2731](https://github.com/docker/for-mac/issues/2731).
 
 ### Docker Community Edition 18.03.1-ce-mac64 2018-04-26
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/24245/Docker.dmg)
 
 * Upgrades
   - [Docker 18.03.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.1-ce)
@@ -95,22 +71,10 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 ### Docker Community Edition 18.03.0-ce-mac60 2018-03-30
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/23751/Docker.dmg)
-
 * Bug fixes and minor changes
   - Fix Upgrade straight from 17.09 versions where Docker for Mac cannot restart once the upgrade has been performed. Fixes [docker/for-mac#2739](https://github.com/docker/for-mac/issues/2739)
 
 ### Docker Community Edition 18.03.0-ce-mac59 2018-03-26
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/23608/Docker.dmg)
 
 * Upgrades
   - [Docker 18.03.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce)
@@ -138,23 +102,11 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 ### Docker Community Edition 17.12.0-ce-mac55 2018-02-27
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/23011/Docker.dmg)
-
 * Bug fixes and minor changes
   - Revert the default disk format to qcow2 for users running macOS 10.13 (High Sierra). There are confirmed reports of file corruption using the raw format which uses sparse files on APFS. Note this change only takes effect after a reset to factory defaults (from the Whale menu -> Preferences -> Reset). Related to [docker/for-mac#2625](https://github.com/docker/for-mac/issues/2625)
   - Fix VPNKit proxy for docker.for.mac.http.internal.
 
 ### Docker Community Edition 17.12.0-ce-mac49 2018-01-19
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/21805/Docker.dmg)
 
 * Bug fixes and minor changes
   - Fix error during resize/create Docker.raw disk image in some cases. Fixes [docker/for-mac#2383](https://github.com/docker/for-mac/issues/2383), [docker/for-mac#2447](https://github.com/docker/for-mac/issues/2447), [docker/for-mac#2453], (https://github.com/docker/for-mac/issues/2453), [docker/for-mac#2420](https://github.com/docker/for-mac/issues/2420)
@@ -167,23 +119,11 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 ### Docker Community Edition 17.12.0-ce-mac47 2018-01-12
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/21698/Docker.dmg)
-
 * Bug fixes and minor changes
   - Fix for `docker push` to an insecure registry. Fixes [docker/for-mac#2392](https://github.com/docker/for-mac/issues/2392)
   - Separate internal ports used to proxy HTTP and HTTPS content.
 
 ### Docker Community Edition 17.12.0-ce-mac46 2018-01-09
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/21698/Docker.dmg)
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -211,12 +151,6 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 ### Docker Community Edition 17.09.1-ce-mac42 2017-12-11
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/21090/Docker.dmg)
-
 * Upgrades
   - [Docker 17.09.1-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.1-ce)
   - [Docker compose 1.17.1](https://github.com/docker/compose/releases/tag/1.17.1)
@@ -227,33 +161,13 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 ### Docker Community Edition 17.09.0-ce-mac35 2017-10-06
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/stable/19611/Docker.dmg)
-
 * Bug fix
   - Fix Docker For Mac unable to start in some cases : removed use of libgmp sometimes causing the vpnkit process to die.
 
 ### Docker Community Edition 17.09.0-ce-mac33 2017-10-03
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/19543/Docker.dmg)
-
-* Bug fix
   - Do not show Toolbox migration assistant when there are existing Docker For Mac data.
 
 ### Docker Community Edition 17.09.0-ce-mac32 2017-10-02
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/19506/Docker.dmg)
 
 * Upgrades
   - [Docker 17.09.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.09.0-ce)
@@ -288,25 +202,15 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 ### Docker Community Edition 17.06.2-ce-mac27 2017-09-06
 
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/19124/Docker.dmg)
+**Upgrades**
 
-* Upgrades
   - [Docker 17.06.2-ce](https://github.com/docker/docker-ce/releases/tag/v17.06.2-ce)
   - [Docker Machine 0.12.2](https://github.com/docker/machine/releases/tag/v0.12.2)
 
 ### Docker Community Edition 17.06.1-ce-mac24, 2017-08-21
 
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/18950/Docker.dmg)
-
 **Upgrades**
+
 - [Docker 17.06.1-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v17.06.1-ce-rc1)
 - Linux Kernel 4.9.36
 - AUFS 20170703
@@ -317,13 +221,7 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 - Avoid unnecessary VM reboot (when changing proxy exclude, but no proxy set). Fixes [docker/for-mac#1809](https://github.com/docker/for-mac/issues/1809), [docker/for-mac#1801](https://github.com/docker/for-mac/issues/1801)
 
-### Docker Community Edition 17.06.0-ce-mac18, 2017-06-28
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/18433/Docker.dmg)
+### Docker Community Edition 17.06.0-ce-mac18, 2017-06-28s
 
 **Upgrades**
 
@@ -366,42 +264,23 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 - Disk trimming should work as expected
 - Diagnostics now contains more settings data
 
-### Docker Community Edition 17.03.1-ce-mac12, 2017-05-12
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/17661/Docker.dmg)
+### Docker Community Edition 17.03.1-ce-mac12, 2017-05-12s
 
 **Upgrades**
 
 - Security fix for CVE-2017-7308
 
-### Docker Community Edition 17.03.1-ce-mac5, 2017-03-29
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/16048/Docker.dmg)
+### Docker Community Edition 17.03.1-ce-mac5, 2017-03-29s
 
 **Upgrades**
 
 - [Docker Credential Helpers 0.4.2](https://github.com/docker/docker-credential-helpers/releases/tag/v0.4.2)
 
 
-### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02
+### Docker Community Edition 17.03.0-ce-mac1, 2017-03-02- Renamed to Docker Community Edition
 
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/15583/Docker.dmg)
+**New** 
 
-**New**
-
-- Renamed to Docker Community Edition
 - Integration with Docker Cloud: control remote Swarms from the local CLI and view your repositories. This feature is going to be rolled out to all users progressively
 - Docker will now securely store your IDs in the macOS keychain
 
@@ -439,13 +318,7 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 - HyperKit: Dump guest physical and linear address from VMCS when dumping state
 - HyperKit: Kernel boots with panic=1 arg
 
-### Docker for Mac 1.13.1, 2017-02-09
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/15353/Docker.dmg)
+### Docker for Mac 1.13.1, 2017-02-09s
 
 **Upgrades**
 
@@ -460,13 +333,7 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 - `daemon.json` should render nicely in the UI
 - Allow to reset faulty `daemon.json` through a link in advanced subpanel
 
-### Docker for Mac 1.13.0, 2017-01-19
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/15072/Docker.dmg)
+### Docker for Mac 1.13.0, 2017-01-19s
 
 **Upgrades**
 
@@ -518,13 +385,7 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 ## Stable Releases of 2016
 
-### Docker for Mac 1.12.5, 2016-12-20
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/14777/Docker.dmg)
+### Docker for Mac 1.12.5, 2016-12-20s
 
 **Upgrades**
 
@@ -535,13 +396,7 @@ This page contains release notes for older versions of Docker Desktop for Mac.
 
 We did not distribute a 1.12.4 stable release
 
-### Docker for Mac 1.12.3, 2016-11-09
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/13776/Docker.dmg)
+### Docker for Mac 1.12.3, 2016-11-09s
 
 **Upgrades**
 
@@ -607,12 +462,6 @@ We did not distribute a 1.12.4 stable release
 - Increase default ulimit for memlock (fixes [docker/for-mac#801](https://github.com/docker/for-mac/issues/801))
 
 ### Docker for Mac 1.12.1, 2016-09-16
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/1.12.1.12133/Docker.dmg)
 
 **New**
 
@@ -690,15 +539,9 @@ We did not distribute a 1.12.4 stable release
 
 * HyperKit updated with `dtrace` support and lock fixes
 
-### Docker for Mac 2016-08-11 1.12.0-a
+### Docker for Mac 2016-08-11 1.12.0-afix release contains osxfs improvements. 
 
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/11213/Docker.dmg)
-
-This bug fix release contains osxfs improvements. The fixed issues may have
+The fixed issues may have
 been seen as failures with apt-get and npm in containers, missed inotify
 events or unexpected unmounts.
 
@@ -713,15 +556,7 @@ events or unexpected unmounts.
 * osxfs: fixed an issue causing volumes mounted under other mounts to spontaneously unmount
 
 
-### Docker for Mac 1.12.0, 2016-07-28
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/stable/10871/Docker.dmg)
-
-* First stable release
+### Docker for Mac 1.12.0, 2016-07-28table release
 
 **Components**
 

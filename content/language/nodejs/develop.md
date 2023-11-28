@@ -1,246 +1,290 @@
 ---
-title: Use containers for development
-keywords: get started, NodeJS, local, development
-description: Learn how to develop your application locally.
+title: Use containers for Node.js development
+keywords: node, node.js, development
+description: Learn how to develop your Node.js application locally using containers.
 aliases:
 - /get-started/nodejs/develop/
 ---
 
 ## Prerequisites
 
-Work through the steps to build an image and run it as a containerized application in [Run your image as a container](run-containers.md).
+Complete [Containerize a Node.js application](containerize.md).
 
-## Introduction
+## Overview
 
-In this module, we’ll walk through setting up a local development environment for the application we built in the previous modules. We’ll use Docker to build our images and Docker Compose to make everything a whole lot easier.
+In this section, you'll learn how to set up a development environment for your containerized application. This includes:
+ - Adding a local database and persisting data
+ - Configuring your container to run a development environment
+ - Debugging your containerized application
 
-## Local database and containers
+## Add a local database and persist data
 
-First, we’ll take a look at running a database in a container and how we use volumes and networking to persist our data and allow our application to talk with the database. Then we’ll pull everything together into a compose file which will allow us to setup and run a local development environment with one command. Finally, we’ll take a look at connecting a debugger to our application running inside a container.
+You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
 
-Instead of downloading MongoDB, installing, configuring and then running the Mongo database as a service, we can use the Docker Official Image for MongoDB and run it in a container.
+Open the `compose.yaml` file in an IDE or text editor. You'll notice it
+already contains commented-out instructions for a Postgres database and volume.
 
-Before we run MongoDB in a container, we want to create a couple of volumes that Docker can manage to store our persistent data and configuration. Let's use the managed volumes feature that docker provides instead of using bind mounts. For more information, see [Use volumes](../../storage/volumes.md).
+Open `src/persistence/postgres.js` in an IDE or text editor. You'll notice that
+this application uses a Postgres database and requires some environment
+variables in order to connect to the database. The `compose.yaml` file doesn't
+have these variables defined.
 
-Let’s create our volumes now. We’ll create one for the data and one for configuration of MongoDB.
+You need to update the following items in the `compose.yaml` file:
+ - Uncomment all of the database instructions.
+ - Add the environment variables under the server service.
+ - Add `secrets` to the server service for the database password.
 
-```console
-$ docker volume create mongodb
-$ docker volume create mongodb_config
-```
-
-Now we’ll create a network that our application and database will use to talk with each other. The network is called a user-defined bridge network and gives us a nice DNS lookup service which we can use when creating our connection string.
-
-```console
-$ docker network create mongodb
-```
-
-Now we can run MongoDB in a container and attach to the volumes and network we created above. Docker will pull the image from Hub and run it for you locally.
-
-```console
-$ docker run -it --rm -d -v mongodb:/data/db \
-  -v mongodb_config:/data/configdb -p 27017:27017 \
-  --network mongodb \
-  --name mongodb \
-  mongo
-```
-
-Okay, now that we have a running MongoDB, let’s update `server.js` to use MongoDB and not an in-memory data store.
-
-```javascript
-const ronin 		= require( 'ronin-server' )
-const database  = require( 'ronin-database' )
-const mocks 		= require( 'ronin-mocks' )
-
-async function main() {
-
-    try {
-    await database.connect( process.env.CONNECTIONSTRING )
-    
-    const server = ronin.server({
-            port: process.env.SERVER_PORT
-        })
-
-        server.use( '/', mocks.server( server.Router()) )
-
-    const result = await server.start()
-        console.info( result )
-    
-    } catch( error ) {
-        console.error( error )
-    }
-}
-
-main()
-```
-
-We’ve added the `ronin-database` module and we updated the code to connect to the database and set the in-memory flag to false. We now need to rebuild our image so it contains our changes.
-
-First let’s add the `ronin-database` module to our application using npm.
-
-```console
-$ npm install ronin-database
-```
-
-Now we can build our image.
-
-```console
-$ docker build --tag node-docker .
-```
-
-Now, let’s run our container. But this time we’ll need to set the `CONNECTIONSTRING` environment variable so our application knows what connection string to use to access the database. We’ll do this right in the `docker run` command.
-
-```console
-$ docker run \
-  -it --rm -d \
-  --network mongodb \
-  --name rest-server \
-  -p 8000:8000 \
-  -e CONNECTIONSTRING=mongodb://mongodb:27017/notes \
-  node-docker
-```
-
-The `notes` at the end of the connection string is the desired name for our database.
-
-Let’s test that our application is connected to the database and is able to add a note.
-
-```console
-$ curl --request POST \
-  --url http://localhost:8000/notes \
-  --header 'content-type: application/json' \
-  --data '{"name": "this is a note", "text": "this is a note that I wanted to take while I was working on writing a blog post.", "owner": "peter"}'
-```
-
-You should receive the following json back from our service.
-
-```json
-{"code":"success","payload":{"_id":"5efd0a1552cd422b59d4f994","name":"this is a note","text":"this is a note that I wanted to take while I was working on writing a blog post.","owner":"peter","createDate":"2020-07-01T22:11:33.256Z"}}
-```
-
-## Use Compose to develop locally
-
-In this section, we’ll create a Compose file to start our node-docker and the MongoDB with one command. We’ll also set up the Compose file to start the node-docker in debug mode so that we can connect a debugger to the running node process.
-
-Open the notes-service in your IDE or text editor and create a new file named `docker-compose.dev.yml`. Copy and paste the below commands into the file.
+The following is the updated `compose.yaml` file.
 
 ```yaml
-version: '3.8'
-
 services:
- notes:
-  build:
-   context: .
-  ports:
-   - 8000:8000
-   - 9229:9229
-  environment:
-   - SERVER_PORT=8000
-   - CONNECTIONSTRING=mongodb://mongo:27017/notes
-  volumes:
-   - ./:/app
-   - /app/node_modules
-  command: npm run debug
-
- mongo:
-  image: mongo:4.2.8
-  ports:
-   - 27017:27017
-  volumes:
-   - mongodb:/data/db
-   - mongodb_config:/data/configdb
+  server:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
+      POSTGRES_DB: example
+    ports:
+      - 3000:3000
+    depends_on:
+      db:
+        condition: service_healthy
+    secrets:
+      - db-password
+  db:
+    image: postgres
+    restart: always
+    user: postgres
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=example
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
- mongodb:
- mongodb_config:
+  db-data:
+secrets:
+  db-password:
+    file: db/password.txt
 ```
 
-This Compose file is super convenient as we do not have to type all the parameters to pass to the `docker run` command. We can declaratively do that in the Compose file.
+> **Note**
+>
+> To learn more about the instructions in the Compose file, see [Compose file
+> reference](/compose/compose-file/).
 
-We are exposing `port 9229` so that we can attach a debugger. With `volumes`,  we are also mapping our local source code into the running container so that we can make changes in our text editor and have those changes picked up in the container.
+Before you run the application using Compose, notice that this Compose file uses
+`secrets` and specifies a `password.txt` file to hold the database's password.
+You must create this file as it's not included in the source repository.
 
-One other really cool feature of using a Compose file is that we have service resolution set up to use the service names. So we are now able to use `“mongo”` in our connection string. The reason we use mongo is because that is what we have named our MongoDB service in the Compose file as.
+In the cloned repository's directory, create a new directory named `db`. Inside the `db` directory, create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add a password of your choice. The password must be on a single line with no additional lines in the file.
 
-To start our application in debug mode, we need to add a line to our `package.json` file to tell npm how to start our application in debug mode.
+You should now have the following contents in your `docker-nodejs-sample`
+directory.
 
-Open the `package.json` file and add the following line to the scripts section:
-
-```json
-  "debug": "nodemon --inspect=0.0.0.0:9229 -L server.js"
+```text
+├── docker-nodejs-sample/
+│ ├── db/
+│ │ └── password.txt
+│ ├── spec/
+│ ├── src/
+│ ├── .dockerignore
+│ ├── .gitignore
+│ ├── compose.yaml
+│ ├── Dockerfile
+│ ├── package-lock.json
+│ ├── package.json
+│ └── README.md
 ```
 
-As you can see, we are going to use nodemon. Nodemon starts our server in debug mode and also watches for files that have changed, and restarts our server. Let’s run the following command in a terminal to install nodemon into our project directory.
-
-```json
-$ npm install nodemon
-```
-
-Let’s start our application and confirm that it is running properly.
+Run the following command to start your application.
 
 ```console
-$ docker compose -f docker-compose.dev.yml up --build
+$ docker compose up --build
 ```
 
-We pass the `--build` flag so Docker compiles our image and then starts it.
+Open a browser and verify that the application is running at [http://localhost:3000](http://localhost:3000).
 
-If all goes well, you should see something similar:
+Add some items to the todo list to test data persistence.
 
-  ![Screenshot of image being compiled](images/node-compile.png)
+After adding some items to the todo list, press `ctrl+c` in the terminal to stop your application.
 
-Now let’s test our API endpoint. Run the following curl command:
+In the terminal, run `docker compose rm` to remove your containers and then run `docker compose up` to run your application again.
 
 ```console
-$ curl --request GET --url http://localhost:8000/notes
+$ docker compose rm
+$ docker compose up --build
 ```
 
-You should receive the following response:
+Refresh [http://localhost:3000](http://localhost:3000) in your browser and verify that the todo items persisted, even after the containers were removed and ran again.
 
-```json
-{"code":"success","meta":{"total":0,"count":0},"payload":[]}
+## Configure and run a development container
+
+You can use a bind mount to mount your source code into the container. The container can then see the changes you make to the code immediately, as soon as you save a file. This means that you can run processes, like nodemon, in the container that watch for filesystem changes and respond to them. To learn more about bind mounts, see [Storage overview](../../storage/index.md).
+
+In addition to adding a bind mount, you can configure your Dockerfile and `compose.yaml` file to install development dependencies and run development tools.
+
+### Update your Dockerfile for development
+
+Open the Dockerfile in an IDE or text editor. Note that the Dockerfile doesn't
+install development dependencies and doesn't run nodemon. You'll
+need to update your Dockerfile to install the development dependencies and run
+nodemon.
+
+Rather than creating one Dockerfile for production, and another Dockerfile for
+development, you can use one multi-stage Dockerfile for both.
+
+Update your Dockerfile to the following multi-stage Dockerfile.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+ARG NODE_VERSION=18.0.0
+
+FROM node:${NODE_VERSION}-alpine as base
+WORKDIR /usr/src/app
+EXPOSE 3000
+
+FROM base as dev
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --include=dev
+USER node
+COPY . .
+CMD npm run dev
+
+FROM base as prod
+ENV NODE_ENV production
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --omit=dev
+USER node
+COPY . .
+CMD node src/index.js
 ```
 
-## Connect a debugger
+In the Dockerfile, you first add a label `as base` to the `FROM
+node:${NODE_VERSION}-alpine` statement. This allows you to refer to this build
+stage in other build stages. Next, you add a new build stage labeled `dev` to
+install your dev dependencies and start the container using `npm run dev`.
+Finally, you add a stage labeled `prod` that omits the dev dependencies and runs
+your application using `node src/index.js`. To learn more about multi-stage
+builds, see [Multi-stage builds](../../build/building/multi-stage.md).
 
-We’ll use the debugger that comes with the Chrome browser. Open Chrome on your machine and then type the following into the address bar.
+Next, you'll need to update your Compose file to use the new stage.
 
-`about:inspect`
+### Update your Compose file for development
 
-It opens the following screen.
+To run the `dev` stage with Compose, you need to update your `compose.yaml` file.
+Open your `compose.yaml` file in an IDE or text editor, and then add the
+`target: dev` instruction to target the `dev` stage from your multi-stage
+Dockerfile.
 
-  ![Imaging showing Chrome inspect with DevTools](images/chrome-inspect.png)
+Also, add a new volume to the server service for the bind mount. For this application, you'll mount `./src` from your local machine to `/usr/src/app/src` in the container.
 
-Select **Configure**. This opens the **Target discovery settings**. Specify the target `127.0.0.1:9229` if it does not exist and then select **Done**.
+Lastly, publish port `9229` for debugging.
 
-Select the **Open dedicated DevTools for Node** link. This opens the DevTools that are connected to the running Node.js process inside our container.
+The following is the updated Compose file.
 
-Let’s change the source code and then set a breakpoint.
-
-Add the following code above the existing `server.use()` statement, and save the file. Make sure that the `return` statement is on a line of its own, as shown here, so you can set the breakpoint appropriately.
-
-```js
- server.use( '/foo', (req, res) => {
-   return res.json({ "foo": "bar" })
- })
+```yaml
+services:
+  server:
+    build:
+      context: .
+      target: dev
+    environment:
+      NODE_ENV: production
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
+      POSTGRES_DB: example
+    ports:
+      - 3000:3000
+      - 9229:9229
+    depends_on:
+      db:
+        condition: service_healthy
+    secrets:
+      - db-password
+    volumes:
+      - ./src:/usr/src/app/src
+  db:
+    image: postgres
+    restart: always
+    user: postgres
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=example
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: db/password.txt
 ```
 
-If you take a look at the terminal where our Compose application is running, you’ll see that nodemon noticed the changes and reloaded our application.
+### Run your development container and debug your application
 
- ![Image of terminal noticing change and reloading](images/nodemon.png)
-
-Navigate back to the Chrome DevTools and set a breakpoint on the line containing the `return res.json({ "foo": "bar" })` statement, and then run the following curl command to trigger the breakpoint.
+Run the following command to run your application with the new changes to the `Dockerfile` and `compose.yaml` file.
 
 ```console
-$ curl --request GET --url http://localhost:8000/foo
+$ docker compose up --build
 ```
 
-You should have seen the code stop at the breakpoint and now you are able to use the debugger just like you would normally. You can inspect and watch variables, set conditional breakpoints, view stack traces, etc.
+Open a browser and verify that the application is running at [http://localhost:3000](http://localhost:3000).
+
+Any changes to the application's source files on your local machine will now be
+immediately reflected in the running container.
+
+Open `docker-nodejs-sample/src/static/js/app.js` in an IDE or text editor and update the button text on line 109 from `Add Item` to `Add`.
+
+```diff
++                         {submitting ? 'Adding...' : 'Add'}
+-                         {submitting ? 'Adding...' : 'Add Item'}
+```
+
+Refresh [http://localhost:3000](http://localhost:3000) in your browser and verify that the updated text appears.
+
+You can now connect an inspector client to your application for debugging. For
+more details about inspector clients, see the [Node.js
+documentation](https://nodejs.org/en/docs/guides/debugging-getting-started).
+
+## Summary
+
+In this section, you took a look at setting up your Compose file to add a mock
+database and persist data. You also learned how to create a multi-stage
+Dockerfile and set up a bind mount for development.
+
+Related information:
+ - [Volumes top-level element](/compose/compose-file/07-volumes/)
+ - [Services top-level element](/compose/compose-file/05-services/)
+ - [Multi-stage builds](../../build/building/multi-stage.md)
 
 ## Next steps
 
-In this module, we took a look at creating a general development image that we can use pretty much like our normal command line. We also set up our Compose file to map our source code into the running container and exposed the debugging port.
-
-In the next module, we’ll take a look at how to run unit tests in Docker. See:
+In the next section, you'll learn how to run unit tests using Docker.
 
 {{< button text="Run your tests" url="run-tests.md" >}}
-
-## Feedback
-
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Node.js%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

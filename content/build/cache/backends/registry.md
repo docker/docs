@@ -1,8 +1,9 @@
 ---
 title: Registry cache
+description: Manage build cache with an OCI registry
 keywords: build, buildx, cache, backend, registry
 aliases:
-- /build/building/cache/backends/registry/
+  - /build/building/cache/backends/registry/
 ---
 
 The `registry` cache storage can be thought of as an extension to the `inline`
@@ -17,16 +18,9 @@ everything that the inline cache can do, and more:
 - It works with other exporters for more flexibility, instead of only the
   `image` exporter.
 
-> **Note**
->
-> This cache storage backend requires using a different driver than the default
-> `docker` driver - see more information on selecting a driver
-> [here](../../drivers/index.md). To create a new driver (which can act as a
-> simple drop-in replacement):
->
-> ```console
-> $ docker buildx create --use --driver=docker-container
-> ```
+This cache storage backend is not supported with the default `docker` driver.
+To use this feature, create a new builder using a different driver. See
+[Build drivers](../../drivers/_index.md) for more information.
 
 ## Synopsis
 
@@ -53,9 +47,9 @@ The following table describes the available CSV parameters that you can pass to
 | `force-compression` | `cache-to`              | `true`,`false`          | `false` | Forcibly apply compression, see [cache compression][3].              |
 | `ignore-error`      | `cache-to`              | Boolean                 | `false` | Ignore errors caused by failed cache exports.                        |
 
-[1]: index.md#cache-mode
-[2]: index.md#oci-media-types
-[3]: index.md#cache-compression
+[1]: _index.md#cache-mode
+[2]: _index.md#oci-media-types
+[3]: _index.md#cache-compression
 
 You can choose any valid value for `ref`, as long as it's not the same as the
 target location that you push your image to. You might choose different tags
@@ -65,11 +59,11 @@ target location that you push your image to. You might choose different tags
 strategy that you want to use for separating your image from your cache images.
 
 If the `--cache-from` target doesn't exist, then the cache import step will
-fail, but the build will continue.
+fail, but the build continues.
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../index.md).
+For an introduction to caching see [Optimizing builds with cache](../_index.md).
 
 For more information on the `registry` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#registry-push-image-and-cache-separately).

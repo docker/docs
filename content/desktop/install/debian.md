@@ -10,7 +10,7 @@ aliases:
 
 This page contains information on how to install, launch, and upgrade Docker Desktop on a Debian distribution.
 
-{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
+{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/docker-desktop-4.25.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 _For checksums, see [Release notes](../release-notes.md)_
 
@@ -19,7 +19,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 To install Docker Desktop successfully, you must:
 
 - Meet the [system requirements](linux-install.md#system-requirements).
-- Have a 64-bit version of Debian 11.
+- Have a 64-bit version of Debian 12.
 - Uninstall the tech preview or beta version of Docker Desktop for Linux. Run:
 
   ```console
@@ -50,9 +50,10 @@ To install Docker Desktop successfully, you must:
 
 Recommended approach to install Docker Desktop on Debian:
 
-1. Set up [Docker's package repository](../../engine/install/debian.md#set-up-the-repository).
+1. Set up Docker's `apt` repository.
+   See [Install using the `apt` repository, step 1](../../engine/install/debian.md#install-using-the-repository).
 
-2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.25.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with apt as follows:
 
@@ -66,7 +67,7 @@ Recommended approach to install Docker Desktop on Debian:
   > At the end of the installation process, `apt` displays an error due to installing a downloaded package. You
   > can ignore this error message.
   >
-  > ```
+  > ```text
   > N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
   > ```
 

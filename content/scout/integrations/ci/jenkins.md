@@ -4,8 +4,6 @@ keywords: supply chain, security, ci, continuous integration, jenkins
 title: Integrate Docker Scout with Jenkins
 ---
 
-{{< include "scout-early-access.md" >}}
-
 You can add the following stage and steps definition to a `Jenkinsfile` to run
 Docker Scout as part of a Jenkins pipeline. The pipeline needs two secrets
 defined to authenticate with Docker Hub: `DOCKER_HUB_USER` and `DOCKER_HUB_PAT`
@@ -22,7 +20,7 @@ stage('Analyze image') {
         sh 'echo $DOCKER_HUB_PAT | docker login -u $DOCKER_HUB_USER --password-stdin'
 
         // Analyze and fail on critical or high vulnerabilities
-        sh 'docker-scout cves $IMAGE_TAG --exit-code --only-serverity critical,high'
+        sh 'docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
     }
 }
 ```

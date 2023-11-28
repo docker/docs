@@ -1,6 +1,6 @@
 ---
 description: Jumpstart your client-side server applications with Docker Engine on
-  Ubuntu. This guide details prerequisites and multiple methods to install.
+  Ubuntu. This guide details prerequisites and multiple methods to install Docker Engine on Ubuntu.
 keywords: docker install script, ubuntu docker server, ubuntu server docker, install
   docker engine ubuntu, install docker on ubuntu server, ubuntu 22.04 docker-ce, install
   docker engine on ubuntu, ubuntu install docker ce, ubuntu install docker engine
@@ -38,8 +38,8 @@ To get started with Docker Engine on Ubuntu, make sure you
 To install Docker Engine, you need the 64-bit version of one of these Ubuntu
 versions:
 
+- Ubuntu Mantic 23.10
 - Ubuntu Lunar 23.04
-- Ubuntu Kinetic 22.10
 - Ubuntu Jammy 22.04 (LTS)
 - Ubuntu Focal 20.04 (LTS)
 
@@ -48,10 +48,9 @@ s390x, and ppc64le (ppc64el) architectures.
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you must first make sure that any
-conflicting packages are uninstalled.
+Before you can install Docker Engine, you need to uninstall any conflicting packages.
 
-Distro maintainers provide an unofficial distributions of Docker packages in
+Distro maintainers provide unofficial distributions of Docker packages in
 APT. You must uninstall these packages before you can install the official
 version of Docker Engine.
 
@@ -59,6 +58,7 @@ The unofficial packages to uninstall are:
 
 - `docker.io`
 - `docker-compose`
+- `docker-compose-v2`
 - `docker-doc`
 - `podman-docker`
 
@@ -70,7 +70,7 @@ conflicts with the versions bundled with Docker Engine.
 Run the following command to uninstall all conflicting packages:
 
 ```console
-$ for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+$ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
 
 `apt-get` might report that you have none of these packages installed.
@@ -96,57 +96,39 @@ You can install Docker Engine in different ways, depending on your needs:
 - Use a [convenience script](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
-### Install using the apt repository {#install-using-the-repository}
+### Install using the `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
 need to set up the Docker repository. Afterward, you can install and update
 Docker from the repository.
 
-#### Set up the repository
+1. Set up Docker's `apt` repository.
 
+   ```bash
+   # Add Docker's official GPG key:
+   sudo apt-get update
+   sudo apt-get install ca-certificates curl gnupg
+   sudo install -m 0755 -d /etc/apt/keyrings
+   curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+   sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-1.  Update the `apt` package index and install packages to allow `apt` to use a
-    repository over HTTPS:
-
-    ```console
-    $ sudo apt-get update
-    $ sudo apt-get install ca-certificates curl gnupg
-    ```
-
-2.  Add Docker's official GPG key:
-
-    ```console
-    $ sudo install -m 0755 -d /etc/apt/keyrings
-    $ curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    $ sudo chmod a+r /etc/apt/keyrings/docker.gpg
-    ```
-
-3.  Use the following command to set up the repository:
-
-    ```console
-    $ echo \
-      "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
-      "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
-    
-    > **Note**
-    >
-    > If you use an Ubuntu derivative distro, such as Linux Mint,
-    > you may need to use `UBUNTU_CODENAME` instead of `VERSION_CODENAME`.
-
-4. Update the `apt` package index:
-
-   ```console
-   $ sudo apt-get update
+   # Add the repository to Apt sources:
+   echo \
+     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
+     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   sudo apt-get update
    ```
 
-#### Install Docker Engine
+   > **Note**
+   >
+   > If you use an Ubuntu derivative distro, such as Linux Mint,
+   > you may need to use `UBUNTU_CODENAME` instead of `VERSION_CODENAME`.
 
-1. Install Docker Engine, containerd, and Docker Compose.
+2. Install the Docker packages.
 
-  {{< tabs >}}
-  {{< tab name="Latest" >}}
+   {{< tabs >}}
+   {{< tab name="Latest" >}}
 
    To install the latest version, run:
 
@@ -154,11 +136,11 @@ Docker from the repository.
    $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
    ```
   
-  {{< /tab >}}
-  {{< tab name="Specific version" >}}
+   {{< /tab >}}
+   {{< tab name="Specific version" >}}
 
-   To install a specific version of Docker Engine, start by listing the available
-   versions in the repository:
+   To install a specific version of Docker Engine, start by listing the
+   available versions in the repository:
 
    ```console
    # List the available versions:
@@ -166,7 +148,7 @@ Docker from the repository.
 
    5:24.0.0-1~ubuntu.22.04~jammy
    5:23.0.6-1~ubuntu.22.04~jammy
-   <...>
+   ...
    ```
 
    Select the desired version and install:
@@ -176,10 +158,10 @@ Docker from the repository.
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
   
-  {{< /tab >}}
-  {{< /tabs >}}
+   {{< /tab >}}
+   {{< /tabs >}}
 
-2. Verify that the Docker Engine installation is successful by running the
+3. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
 
    ```console
@@ -195,7 +177,8 @@ You have now successfully installed and started Docker Engine.
 
 #### Upgrade Docker Engine
 
-To upgrade Docker Engine, follow the [installation instructions](#install-using-the-repository),
+To upgrade Docker Engine, follow step 2 of the
+[installation instructions](#install-using-the-repository),
 choosing the new version you want to install.
 
 ### Install from a package
@@ -204,6 +187,7 @@ If you can't use Docker's `apt` repository to install Docker Engine, you can
 download the `deb` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
+<!-- markdownlint-disable-next-line -->
 1. Go to [`{{% param "download-url-base" %}}/dists/`]({{% param "download-url-base" %}}/dists/).
 
 2. Select your Ubuntu version in the list.

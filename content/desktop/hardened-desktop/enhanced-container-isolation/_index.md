@@ -21,7 +21,7 @@ These techniques include:
 
 When Enhanced Container Isolation is enabled, these mechanisms are applied automatically and with minimal functional or performance impact to developers. Developers continue to use Docker Desktop as usual, but the containers they launch are more strongly isolated.
 
-Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by IT admins, for instance through [Registry Access Management policies](../registry-access-management.md) or with [Settings Management](../settings-management/index.md).
+Enhanced Container Isolation ensures stronger container isolation and also locks in any security configurations that have been created by IT admins, for instance through [Registry Access Management policies](../../../security/for-admins/registry-access-management.md) or with [Settings Management](../settings-management/index.md).
 
 >**Note**
 >
@@ -57,7 +57,7 @@ For more information on how Enhanced Container Isolation work, see [How does it 
 
 >**Important**
 >
->Enhanced Container Isolation does not protect Kubernetes pods. For more information on known limitations and workarounds, see [FAQs and known issues](faq.md).
+>Enhanced Container Isolation does not protect Kubernetes pods. For more information on known limitations and workarounds, see [FAQs](../../../faq/security/eci-faq.md).
 { .important }
 
 ### What host OSes / platforms is Enhanced Container Isolation supported on?
@@ -85,12 +85,12 @@ To enable Enhanced Container Isolation as a developer:
 
 >**Important**
 >
->Enhanced Container Isolation does not protect containers created prior to enabling ECI. For more information on known limitations and workarounds, see [FAQs and known issues](faq.md).
+>Enhanced Container Isolation does not protect containers created prior to enabling ECI. For more information on known limitations and workarounds, see [FAQs](../../../faq/security/eci-faq.md).
 { .important }
 
 #### As an admin
 
-To enable Enhanced Container Isolation as an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because the Enhanced Container Isolation feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+To enable Enhanced Container Isolation as an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../security/for-admins/configure-sign-in.md). This is because the Enhanced Container Isolation feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 Next, you must [create and configure the `admin-settings.json` file](../settings-management/configure.md) and specify:
 
@@ -124,13 +124,13 @@ When Enhanced Container Isolation is enabled, users see:
 
 To check, run:
 
-```
+```console
 $ docker run --rm alpine cat /proc/self/uid_map
 ```
 
 The following output displays:
 
-```
+```text
          0     100000      65536
 ```
 
@@ -144,7 +144,7 @@ further details, see [How Enhanced Container Isolation works](how-eci-works.md).
 
 In contrast, without ECI the Linux user namespace is not used for containers, the following displays:
 
-```
+```text
          0          0 4294967295
 ```
 
@@ -158,7 +158,7 @@ $ docker inspect --format='{{.HostConfig.Runtime}}' my_container
 
 It outputs:
 
-```
+```text
 sysbox-runc
 ```
 

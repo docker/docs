@@ -1,8 +1,9 @@
 ---
-title: Garbage collection
-keywords: build, buildx, buildkit, garbage collection, prune
+title: Build garbage collection
+description: Learn about garbage collection in the BuildKit daemon
+keywords: build, buildx, buildkit, garbage collection, prune, gc
 aliases:
-- /build/building/cache/garbage-collection/
+  - /build/building/cache/garbage-collection/
 ---
 
 While [`docker builder prune`](../../engine/reference/commandline/builder_prune.md)
@@ -31,9 +32,9 @@ file:
       "enabled": true,
       "defaultKeepStorage": "10GB",
       "policy": [
-          {"keepStorage": "10GB", "filter": ["unused-for=2200h"]},
-          {"keepStorage": "50GB", "filter": ["unused-for=3300h"]},
-          {"keepStorage": "100GB", "all": true}
+        { "keepStorage": "10GB", "filter": ["unused-for=2200h"] },
+        { "keepStorage": "50GB", "filter": ["unused-for=3300h"] },
+        { "keepStorage": "100GB", "all": true }
       ]
     }
   }
@@ -58,10 +59,9 @@ For other drivers, garbage collection can be configured using the
 
 ## Default policies
 
-Default garbage collection policies are applied to all builders if not
-already set:
+Default garbage collection policies apply to all builders if not set:
 
-```
+```text
 GC Policy rule#0:
         All:            false
         Filters:        type==source.local,type==exec.cachemount,type==source.git.checkout
@@ -79,14 +79,14 @@ GC Policy rule#3:
         Keep Bytes:     26GB
 ```
 
-* `rule#0`: if build cache uses more than 512MB delete the most easily
+- `rule#0`: if build cache uses more than 512MB delete the most easily
   reproducible data after it has not been used for 2 days.
-* `rule#1`: remove any data not used for 60 days.
-* `rule#2`: keep the unshared build cache under cap.
-* `rule#3`: if previous policies were insufficient start deleting internal data
+- `rule#1`: remove any data not used for 60 days.
+- `rule#2`: keep the unshared build cache under cap.
+- `rule#3`: if previous policies were insufficient start deleting internal data
   to keep build cache under cap.
 
 > **Note**
 >
-> "Keep bytes" defaults to 10% of the size of the disk. If the disk size cannot
-> be determined, it defaults to 2GB.
+> `Keep Bytes` defaults to 10% of the size of the disk. If the disk size cannot
+> be determined, it uses 2GB as a fallback.

@@ -6,7 +6,7 @@ aliases:
 - desktop/extensions-sdk/tutorials/initialize/
 ---
 
-Follow this guide to get started with building a basic Docker extension. The Quickstart guide automatically generates boilerplate files for you.
+Follow this guide to get started with creating a basic Docker extension. The Quickstart guide automatically generates boilerplate files for you.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ Follow this guide to get started with building a basic Docker extension. The Qui
 
 > Note
 >
-> NodeJS and Go are only required when you follow the quickstart guide to build an extension. It uses the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
+> NodeJS and Go are only required when you follow the quickstart guide to create an extension. It uses the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
 
 ## Step one: Set up your directory
 

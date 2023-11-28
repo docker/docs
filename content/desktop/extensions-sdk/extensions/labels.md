@@ -45,7 +45,7 @@ Here is the list of labels you need to specify when building your extension:
 
 You can validate that the image labels render as you expect.
 
-When you build and install your unpublished extension, you can preview the extension in the Marketplace **Managed** tab. You can see how the extension labels render in the list and in the details page of the extension.
+When you create and install your unpublished extension, you can preview the extension in the Marketplace **Managed** tab. You can see how the extension labels render in the list and in the details page of the extension.
 
 > Preview extensions already listed in Marketplace
 >

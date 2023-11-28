@@ -334,104 +334,9 @@ that set `abc` to `bye`.
 
 ## .dockerignore file
 
-Before the docker CLI sends the context to the docker daemon, it looks
-for a file named `.dockerignore` in the root directory of the context.
-If this file exists, the CLI modifies the context to exclude files and
-directories that match patterns in it.  This helps to avoid
-unnecessarily sending large or sensitive files and directories to the
-daemon and potentially adding them to images using `ADD` or `COPY`.
-
-The CLI interprets the `.dockerignore` file as a newline-separated
-list of patterns similar to the file globs of Unix shells.  For the
-purposes of matching, the root of the context is considered to be both
-the working and the root directory.  For example, the patterns
-`/foo/bar` and `foo/bar` both exclude a file or directory named `bar`
-in the `foo` subdirectory of `PATH` or in the root of the git
-repository located at `URL`.  Neither excludes anything else.
-
-If a line in `.dockerignore` file starts with `#` in column 1, then this line is
-considered as a comment and is ignored before interpreted by the CLI.
-
-Here is an example `.dockerignore` file:
-
-```gitignore
-# comment
-*/temp*
-*/*/temp*
-temp?
-```
-
-This file causes the following build behavior:
-
-| Rule        | Behavior                                                                                                                                                                                                       |
-|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `# comment` | Ignored.                                                                                                                                                                                                       |
-| `*/temp*`   | Exclude files and directories whose names start with `temp` in any immediate subdirectory of the root.  For example, the plain file `/somedir/temporary.txt` is excluded, as is the directory `/somedir/temp`. |
-| `*/*/temp*` | Exclude files and directories starting with `temp` from any subdirectory that is two levels below the root. For example, `/somedir/subdir/temporary.txt` is excluded.                                          |
-| `temp?`     | Exclude files and directories in the root directory whose names are a one-character extension of `temp`.  For example, `/tempa` and `/tempb` are excluded.                                                     |
-
-
-Matching is done using Go's
-[filepath.Match](https://golang.org/pkg/path/filepath#Match) rules.  A
-preprocessing step removes leading and trailing whitespace and
-eliminates `.` and `..` elements using Go's
-[filepath.Clean](https://golang.org/pkg/path/filepath/#Clean).  Lines
-that are blank after preprocessing are ignored.
-
-Beyond Go's filepath.Match rules, Docker also supports a special
-wildcard string `**` that matches any number of directories (including
-zero). For example, `**/*.go` will exclude all files that end with `.go`
-that are found in all directories, including the root of the build context.
-
-Lines starting with `!` (exclamation mark) can be used to make exceptions
-to exclusions.  The following is an example `.dockerignore` file that
-uses this mechanism:
-
-```gitignore
-*.md
-!README.md
-```
-
-All markdown files right under the context directory *except* `README.md`
-are excluded from the context. Note that markdown files under subdirectories
-are still included.
-
-The placement of `!` exception rules influences the behavior: the last
-line of the `.dockerignore` that matches a particular file determines
-whether it is included or excluded.  Consider the following example:
-
-```gitignore
-*.md
-!README*.md
-README-secret.md
-```
-
-No markdown files are included in the context except README files other than
-`README-secret.md`.
-
-Now consider this example:
-
-```gitignore
-*.md
-README-secret.md
-!README*.md
-```
-
-All of the README files are included.  The middle line has no effect because
-`!README*.md` matches `README-secret.md` and comes last.
-
-You can even use the `.dockerignore` file to exclude the `Dockerfile`
-and `.dockerignore` files.  These files are still sent to the daemon
-because it needs them to do its job.  But the `ADD` and `COPY` instructions
-do not copy them to the image.
-
-Finally, you may want to specify which files to include in the
-context, rather than which to exclude. To achieve this, specify `*` as
-the first pattern, followed by one or more `!` exception patterns.
-
-> **Note**
->
-> For historical reasons, the pattern `.` is ignored.
+You can use `.dockerignore` file to exclude files and directories from the
+build context. For more information, see
+[.dockerignore file](https://docs.docker.com/build/building/context#dockerignore-files/).
 
 ## FROM
 
@@ -802,7 +707,7 @@ The command is run in the host's network environment (similar to
 > which needs to be enabled when starting the buildkitd daemon with
 > `--allow-insecure-entitlement network.host` flag or in [buildkitd config](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md),
 > and for a build request with [`--allow network.host` flag](https://docs.docker.com/engine/reference/commandline/buildx_build/#allow).
-{:.warning}
+{ .warning }
 
 ## RUN --security
 
@@ -822,7 +727,7 @@ This is equivalent to running `docker run --privileged`.
 > enabled when starting the buildkitd daemon with
 > `--allow-insecure-entitlement security.insecure` flag or in [buildkitd config](https://github.com/moby/buildkit/blob/master/docs/buildkitd.toml.md),
 > and for a build request with [`--allow security.insecure` flag](https://docs.docker.com/engine/reference/commandline/buildx_build/#allow).
-{:.warning}
+{ .warning }
 
 #### Example: check entitlements
 
@@ -1552,6 +1457,46 @@ path, using `--link` is always recommended. The performance of `--link` is
 equivalent or better than the default behavior and, it creates much better
 conditions for cache reuse.
 
+
+## COPY --parents
+
+> **Note**
+>
+> Available in [`docker/dockerfile-upstream:master-labs`](#syntax).
+> Will be included in `docker/dockerfile:1.6-labs`.
+
+```dockerfile
+COPY [--parents[=<boolean>]] <src>... <dest>
+```
+
+The `--parents` flag preserves parent directories for `src` entries. This flag defaults to `false`.
+
+```dockerfile
+# syntax=docker/dockerfile-upstream:master-labs
+FROM scratch
+
+COPY ./x/a.txt ./y/a.txt /no_parents/
+COPY --parents ./x/a.txt ./y/a.txt /parents/
+
+# /no_parents/a.txt
+# /parents/x/a.txt
+# /parents/y/a.txt
+```
+
+This behavior is analogous to the [Linux `cp` utility's](https://www.man7.org/linux/man-pages/man1/cp.1.html)
+`--parents` flag.
+
+Note that, without the `--parents` flag specified, any filename collision will
+fail the Linux `cp` operation with an explicit error message
+(`cp: will not overwrite just-created './x/a.txt' with './y/a.txt'`), where the
+Buildkit will silently overwrite the target file at the destination.
+
+While it is possible to preserve the directory structure for `COPY`
+instructions consisting of only one `src` entry, usually it is more beneficial
+to keep the layer count in the resulting image as low as possible. Therefore,
+with the `--parents` flag, the Buildkit is capable of packing multiple
+`COPY` instructions together, keeping the directory structure intact.
+
 ## ENTRYPOINT
 
 ENTRYPOINT has two forms:
@@ -2013,7 +1958,7 @@ ARG buildno
 > 
 > Refer to the [`RUN --mount=type=secret`](#run---mounttypesecret) section to
 > learn about secure ways to use secrets when building images.
-{:.warning}
+{ .warning }
 
 ### Default values
 
@@ -2210,7 +2155,7 @@ RUN echo "I'm building for $TARGETPLATFORM"
 | `BUILDKIT_CACHE_MOUNT_NS`             | String | Set optional cache ID namespace.                                                                                                                                                                               |
 | `BUILDKIT_CONTEXT_KEEP_GIT_DIR`       | Bool   | Trigger git context to keep the `.git` directory.                                                                                                                                                              |
 | `BUILDKIT_INLINE_CACHE`[^2]           | Bool   | Inline cache metadata to image config or not.                                                                                                                                                                  |
-| `BUILDKIT_MULTI_PLATFORM`             | Bool   | Opt into determnistic output regardless of multi-platform output or not.                                                                                                                                       |
+| `BUILDKIT_MULTI_PLATFORM`             | Bool   | Opt into deterministic output regardless of multi-platform output or not.                                                                                                                                      |
 | `BUILDKIT_SANDBOX_HOSTNAME`           | String | Set the hostname (default `buildkitsandbox`)                                                                                                                                                                   |
 | `BUILDKIT_SYNTAX`                     | String | Set frontend image                                                                                                                                                                                             |
 | `SOURCE_DATE_EPOCH`                   | Int    | Set the UNIX timestamp for created image and layers. More info from [reproducible builds](https://reproducible-builds.org/docs/source-date-epoch/). Supported since Dockerfile 1.5, BuildKit 0.11              |
@@ -2411,6 +2356,7 @@ However, if a health check succeeds during the start period, the container is co
 started and all consecutive failures will be counted towards the maximum number of retries.
 
 **start interval** is the time between health checks during the start period.
+This option requires Docker Engine version 25.0 or later.
 
 There can only be one `HEALTHCHECK` instruction in a Dockerfile. If you list
 more than one then only the last `HEALTHCHECK` will take effect.

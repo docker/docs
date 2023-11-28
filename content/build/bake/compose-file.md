@@ -1,8 +1,9 @@
 ---
-title: Building from Compose file
-keywords: build, buildx, bake, buildkit, compose
+title: Building with Bake from a Compose file
+description: Build your compose services with Bake
+keywords: build, buildx, bake, buildkit, compose, yaml
 aliases:
-- /build/customize/bake/compose-file/
+  - /build/customize/bake/compose-file/
 ---
 
 ## Specification
@@ -13,7 +14,7 @@ parse a compose file and translate each service to a [target](reference.md#targe
 ```yaml
 # docker-compose.yml
 services:
-  webapp-dev: 
+  webapp-dev:
     build: &build-dev
       dockerfile: Dockerfile.webapp
       tags:
@@ -45,50 +46,29 @@ $ docker buildx bake --print
 {
   "group": {
     "default": {
-      "targets": [
-        "db",
-        "webapp-dev",
-        "webapp-release"
-      ]
+      "targets": ["db", "webapp-dev", "webapp-release"]
     }
   },
   "target": {
     "db": {
       "context": ".",
       "dockerfile": "Dockerfile.db",
-      "tags": [
-        "docker.io/username/db"
-      ]
+      "tags": ["docker.io/username/db"]
     },
     "webapp-dev": {
       "context": ".",
       "dockerfile": "Dockerfile.webapp",
-      "tags": [
-        "docker.io/username/webapp:latest"
-      ],
-      "cache-from": [
-        "docker.io/username/webapp:cache"
-      ],
-      "cache-to": [
-        "docker.io/username/webapp:cache"
-      ]
+      "tags": ["docker.io/username/webapp:latest"],
+      "cache-from": ["docker.io/username/webapp:cache"],
+      "cache-to": ["docker.io/username/webapp:cache"]
     },
     "webapp-release": {
       "context": ".",
       "dockerfile": "Dockerfile.webapp",
-      "tags": [
-        "docker.io/username/webapp:latest"
-      ],
-      "cache-from": [
-        "docker.io/username/webapp:cache"
-      ],
-      "cache-to": [
-        "docker.io/username/webapp:cache"
-      ],
-      "platforms": [
-        "linux/amd64",
-        "linux/arm64"
-      ]
+      "tags": ["docker.io/username/webapp:latest"],
+      "cache-from": ["docker.io/username/webapp:cache"],
+      "cache-to": ["docker.io/username/webapp:cache"],
+      "platforms": ["linux/amd64", "linux/arm64"]
     }
   }
 }
@@ -96,9 +76,9 @@ $ docker buildx bake --print
 
 The compose format has some limitations compared to the HCL format:
 
-* Specifying variables or global scope attributes is not yet supported
-* `inherits` service field is not supported, but you can use [YAML anchors](../../compose/compose-file/10-fragments.md)
-  to reference other services like the example above
+- Specifying variables or global scope attributes is not yet supported
+- `inherits` service field is not supported, but you can use [YAML anchors](../../compose/compose-file/10-fragments.md)
+  to reference other services, as demonstrated in the previous example with `&build-dev`.
 
 ## `.env` file
 
@@ -116,7 +96,7 @@ services:
       dockerfile: Dockerfile
 ```
 
-```
+```sh
 # .env
 TAG=v1.1.0
 ```
@@ -129,18 +109,14 @@ $ docker buildx bake --print
 {
   "group": {
     "default": {
-      "targets": [
-        "webapp"
-      ]
+      "targets": ["webapp"]
     }
   },
   "target": {
     "webapp": {
       "context": ".",
       "dockerfile": "Dockerfile",
-      "tags": [
-        "docker.io/username/webapp:v1.1.0"
-      ]
+      "tags": ["docker.io/username/webapp:v1.1.0"]
     }
   }
 }
@@ -153,9 +129,9 @@ $ docker buildx bake --print
 
 ## Extension field with `x-bake`
 
-Even if some fields are not (yet) available in the compose specification, you
-can use the [special extension](../../compose/compose-file/11-extension.md)
-field `x-bake` in your compose file to evaluate extra fields:
+Where some fields are not available in the compose specification, you can use
+the [special extension](../../compose/compose-file/11-extension.md) field
+`x-bake` in your compose file to evaluate extra fields:
 
 ```yaml
 # docker-compose.yml
@@ -206,10 +182,7 @@ $ docker buildx bake --print
 {
   "group": {
     "default": {
-      "targets": [
-        "aws",
-        "addon"
-      ]
+      "targets": ["aws", "addon"]
     }
   },
   "target": {
@@ -220,21 +193,10 @@ $ docker buildx bake --print
         "CT_ECR": "foo",
         "CT_TAG": "bar"
       },
-      "tags": [
-        "ct-addon:foo",
-        "ct-addon:alp"
-      ],
-      "cache-from": [
-        "user/app:cache",
-        "type=local,src=path/to/cache"
-      ],
-      "cache-to": [
-        "type=local,dest=path/to/cache"
-      ],
-      "platforms": [
-        "linux/amd64",
-        "linux/arm64"
-      ],
+      "tags": ["ct-addon:foo", "ct-addon:alp"],
+      "cache-from": ["user/app:cache", "type=local,src=path/to/cache"],
+      "cache-to": ["type=local,dest=path/to/cache"],
+      "platforms": ["linux/amd64", "linux/arm64"],
       "pull": true
     },
     "aws": {
@@ -244,19 +206,10 @@ $ docker buildx bake --print
         "CT_ECR": "foo",
         "CT_TAG": "bar"
       },
-      "tags": [
-        "ct-fake-aws:bar"
-      ],
-      "secret": [
-        "id=mysecret,src=./secret",
-        "id=mysecret2,src=./secret2"
-      ],
-      "platforms": [
-        "linux/arm64"
-      ],
-      "output": [
-        "type=docker"
-      ],
+      "tags": ["ct-fake-aws:bar"],
+      "secret": ["id=mysecret,src=./secret", "id=mysecret2,src=./secret2"],
+      "platforms": ["linux/arm64"],
+      "output": ["type=docker"],
       "no-cache": true
     }
   }
@@ -265,14 +218,14 @@ $ docker buildx bake --print
 
 Complete list of valid fields for `x-bake`:
 
-* `cache-from`
-* `cache-to`
-* `contexts`
-* `no-cache`
-* `no-cache-filter`
-* `output`
-* `platforms`
-* `pull`
-* `secret`
-* `ssh`
-* `tags`
+- `cache-from`
+- `cache-to`
+- `contexts`
+- `no-cache`
+- `no-cache-filter`
+- `output`
+- `platforms`
+- `pull`
+- `secret`
+- `ssh`
+- `tags`

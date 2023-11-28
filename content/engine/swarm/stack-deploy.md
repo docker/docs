@@ -119,13 +119,13 @@ counter whenever you visit it.
 
     ```none
       services:
-      web:
-        image: 127.0.0.1:5000/stackdemo
-        build: .
-        ports:
-          - "8000:8000"
-      redis:
-        image: redis:alpine
+        web:
+          image: 127.0.0.1:5000/stackdemo
+          build: .
+          ports:
+            - "8000:8000"
+        redis:
+          image: redis:alpine
     ```
 
     The image for the web app is built using the Dockerfile defined

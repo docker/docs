@@ -31,7 +31,7 @@ of the convenience script:
   using the script to update an existing installation, dependencies may not be
   updated to the expected version, resulting in outdated versions.
 
-> Tip: preview script steps before running
+> **Tip: preview script steps before running**
 >
 > You can run the script with the `--dry-run` option to learn what steps the
 > script will run when invoked:

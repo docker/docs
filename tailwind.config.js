@@ -1,12 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./hugo_stats.json","./layouts/**/*.{html,js}"],
+  content: ["./hugo_stats.json","./layouts/**/*.{html,js}", "./content/**/*.md", "assets/js/**/*.js"],
   darkMode: "class",
   theme: {
     extend: {
       typography: (theme) => ({
         DEFAULT: {
           css: {
+            pre: false,
+            code: false,
+            'pre code': false,
+            'code::before': false,
+            'code::after': false,
+            table: false,
             // light colors for prose
             "--tw-prose-body": theme("colors.black"),
             "--tw-prose-headings": theme("colors.black"),
@@ -19,9 +25,6 @@ module.exports = {
             "--tw-prose-quotes": theme("colors.black"),
             "--tw-prose-quote-borders": theme("colors.blue.light.500"),
             "--tw-prose-captions": theme("colors.gray.light.600"),
-            "--tw-prose-code": theme("colors.black"),
-            "--tw-prose-pre-code": theme("colors.gray.light.800"),
-            "--tw-prose-pre-bg": theme("colors.white"),
             "--tw-prose-th-borders": theme("colors.gray.light.200"),
             "--tw-prose-td-borders": theme("colors.gray.light.200"),
 
@@ -37,9 +40,6 @@ module.exports = {
             "--tw-prose-invert-quotes": theme("colors.white"),
             "--tw-prose-invert-quote-borders": theme("colors.blue.dark.500"),
             "--tw-prose-invert-captions": theme("colors.gray.dark.600"),
-            "--tw-prose-invert-code": theme("colors.white"),
-            "--tw-prose-invert-pre-code": theme("colors.background.light"),
-            "--tw-prose-invert-pre-bg": theme("colors.gray.dark.200"),
             "--tw-prose-invert-th-borders": theme("colors.gray.dark.200"),
             "--tw-prose-invert-td-borders": theme("colors.gray.dark.200"),
           },

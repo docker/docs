@@ -1,0 +1,100 @@
+area/release:
+  - .github/**
+  - _releaser/**
+  - netlify.toml
+
+area/build:
+  - content/build/**
+  - _vendor/github.com/moby/buildkit/**
+  - _vendor/github.com/docker/buildx/**
+  - content/engine/commandline/build*
+
+area/compose:
+  - content/compose/**
+  - _vendor/github.com/docker/compose/**
+  - _vendor/github.com/compose-spec/compose-spec/**
+
+area/desktop:
+  - any:
+      [
+        content/desktop/**,
+        "!content/desktop/extensions/**",
+        "!content/desktop/extensions-sdk/**",
+      ]
+
+area/engine:
+  - any:
+      [
+        content/engine/**,
+        content/config/**,
+        "!content/engine/reference/commandline/*",
+      ]
+
+area/install:
+  - content/desktop/install/**
+  - content/engine/install/**
+
+area/swarm:
+  - content/engine/swarm/**
+
+area/security:
+  - content/security/**
+
+area/get-started:
+  - content/get-started/**
+  - content/language/**
+
+area/networking:
+  - content/network/**
+  - content/config/ipv6.md
+
+area/hub:
+  - content/docker-hub/**
+
+area/cli:
+  - content/engine/reference/commandline/**
+  - _vendor/github.com/docker/cli/**
+
+area/api:
+  - content/engine/api/**
+  - content/docker-hub/api/**
+  - _vendor/github.com/moby/moby/docs/api/*
+
+area/scout:
+  - content/scout/**
+  - _vendor/github.com/docker/scout-cli/**
+
+area/billing:
+  - content/billing/**
+
+area/subscription:
+  - content/subscription/**
+
+area/admin:
+  - content/admin/**
+
+area/configuration:
+  - content/config/**
+
+area/extensions:
+  - content/desktop/extensions/**
+  - content/desktop/extensions-sdk/**
+
+area/samples:
+  - content/samples/**
+
+area/storage:
+  - content/storage/**
+
+hugo:
+  - layouts/**
+  - hugo.yaml
+  - tailwind.config.js
+  - postcss.config.js
+  - assets/**
+
+dependencies:
+  - go.mod
+  - go.sum
+  - package*.json
+  - _vendor/**

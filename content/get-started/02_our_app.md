@@ -31,7 +31,7 @@ Before you can run the application, you need to get the application source code 
 
 2. View the contents of the cloned repository. You should see the following files and sub-directories.
 
-   ```
+   ```text
    ├── getting-started-app/
    │ ├── package.json
    │ ├── README.md
@@ -137,7 +137,7 @@ Now that you have an image, you can run the application in a container using the
 2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
    You should see your app.
 
-   ![Empty todo list](images/todo-list-empty.png)
+   ![Empty todo list](images/todo-list-empty.webp)
    
 
 3. Add an item or two and see that it works as you expect. You can mark items as complete and remove them. Your frontend is successfully storing items in the backend.
@@ -166,7 +166,7 @@ df784548666d        getting-started     "docker-entrypoint.s…"   2 minutes ago
 
 In Docker Desktop, select the **Containers** tab to see a list of your containers.
 
-![Docker Desktop with get-started container running](images/dashboard-two-containers.png)
+![Docker Desktop with get-started container running](images/dashboard-two-containers.webp)
 
 {{< /tab >}}
 {{< /tabs >}}

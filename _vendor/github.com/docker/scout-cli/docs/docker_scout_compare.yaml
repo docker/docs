@@ -2,22 +2,22 @@ command: docker scout compare
 aliases: docker scout compare, docker scout diff
 short: Compare two images and display differences (experimental)
 long: |-
-    The `docker scout compare` command analyzes two images and displays a comparison of both.
+    The `docker scout compare` command analyzes two images and displays a comparison.
 
     > This command is **experimental** and its behaviour might change in the future
 
-    The main usage is to compare two versions of the same image.
-    For instance when a new image is built and compared to the version running in production.
+    The intended use of this command is to compare two versions of the same image.
+    For instance, when a new image is built and compared to the version running in production.
 
-    If no image is specified, the most recently built image will be used.
+    If no image is specified, the most recently built image is used
+    as a comparison target.
 
     The following artifact types are supported:
 
     - Images
     - OCI layout directories
     - Tarball archives, as created by `docker save`
-
-    The tool analyzes the provided software artifact, and generates a vulnerability report.
+    - Local directory or file
 
     By default, the tool expects an image reference, such as:
 
@@ -25,7 +25,15 @@ long: |-
     - `curlimages/curl:7.87.0`
     - `mcr.microsoft.com/dotnet/runtime:7.0`
 
-    If the artifact you want to analyze is an OCI directory or a tarball archive, you must use the `--type` or `--to-type` flag.
+    If the artifact you want to analyze is an OCI directory, a tarball archive, a local file or directory,
+    or if you want to control from where the image will be resolved, you must prefix the reference with one of the following:
+
+    - `image://` (default) use a local image, or fall back to a registry lookup
+    - `local://` use an image from the local image store (don't do a registry lookup)
+    - `registry://` use an image from a registry (don't use a local image)
+    - `oci-dir://` use an OCI layout directory
+    - `archive://` use a tarball archive, as created by `docker save`
+    - `fs://` use a local directory or file
 usage: docker scout compare --to IMAGE|DIRECTORY|ARCHIVE [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
 plink: docker_scout.yaml
@@ -35,6 +43,18 @@ options:
       value_type: bool
       default_value: "false"
       description: Return exit code '2' if vulnerability changes are detected
+      deprecated: true
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: exit-on
+      shorthand: x
+      value_type: stringSlice
+      default_value: '[]'
+      description: |
+        Comma separated list of conditions to fail the action step if worse, options are: vulnerability, policy
       deprecated: false
       hidden: false
       experimental: false
@@ -48,6 +68,16 @@ options:
         Output format of the generated vulnerability report:
         - text: default output, plain text with or without colors depending on the terminal
         - markdown: Markdown output
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: hide-policies
+      value_type: bool
+      default_value: "false"
+      description: Hide policy status from the output
       deprecated: false
       hidden: false
       experimental: false
@@ -136,6 +166,15 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: org
+      value_type: string
+      description: Namespace of the Docker organization
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: output
       shorthand: o
       value_type: string
@@ -159,7 +198,7 @@ options:
       value_type: string
       description: |-
         Reference to use if the provided tarball contains multiple references.
-        Can only be used with --type archive.
+        Can only be used with archive.
       deprecated: false
       hidden: false
       experimental: false
@@ -169,6 +208,15 @@ options:
     - option: to
       value_type: string
       description: Image, directory, or archive to compare to
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: to-env
+      value_type: string
+      description: Name of environment to compare to
       deprecated: false
       hidden: false
       experimental: false
@@ -189,7 +237,7 @@ options:
       value_type: string
       description: |-
         Reference to use if the provided tarball contains multiple references.
-        Can only be used with --type archive.
+        Can only be used with archive.
       deprecated: false
       hidden: false
       experimental: false
@@ -199,36 +247,8 @@ options:
     - option: to-stream
       value_type: string
       description: Name of stream to compare to
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: to-type
-      value_type: string
-      default_value: image
-      description: |-
-        Image type to analyze. Can be one of:
-        - image
-        - oci-dir
-        - archive (docker save tarball)
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: type
-      value_type: string
-      default_value: image
-      description: |-
-        Type of the image to analyze. Can be one of:
-        - image
-        - oci-dir
-        - archive (docker save tarball)
-      deprecated: false
-      hidden: false
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -244,11 +264,27 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 examples: |-
     ### Compare the most recently built image to the latest tag
 
     ```console
     $ docker scout compare --to namespace/repo:latest
+    ```
+
+    ### Compare local build to the same tag from the registry
+
+    ```console
+    $ docker scout compare local://namespace/repo:latest --to registry://namespace/repo:latest
     ```
 
     ### Ignore base images
@@ -267,6 +303,12 @@ examples: |-
 
     ```console
     $ docker scout compare --only-package-type maven --only-severity critical --to namespace/repo:latest namespace/repo:v1.2.3-pre
+    ```
+
+    ### Show all policy results for both images
+
+    ```console
+    docker scout compare --to namespace/repo:latest namespace/repo:v1.2.3-pre
     ```
 deprecated: false
 experimental: false

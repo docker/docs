@@ -395,3 +395,10 @@ samples:
       - wordpress
       - mariadb
       - postgres
+  - title: AI/ML with Docker
+    url: https://github.com/docker/genai-stack
+    description: Get started with AI and ML using Docker, Neo4j, LangChain, and Ollama
+    dev_env: false
+    services:
+      - python
+      - aiml

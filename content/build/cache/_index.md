@@ -1,28 +1,20 @@
 ---
 title: Optimizing builds with cache management
-description: Improve your build speeds by taking advantage of the builtin cache
-keywords: 'build, buildx, buildkit, dockerfile, image layers, build instructions,
-  build context
-
-  '
+description: Improve your build speed with effective use of the build cache
+keywords: build, buildx, buildkit, dockerfile, image layers, build instructions, build context
 aliases:
-- /build/building/cache/
+  - /build/building/cache/
 ---
 
-You will likely find yourself rebuilding the same Docker image over and over
-again. Whether it's for the next release of your software, or locally during
-development. Because building images is a common task, Docker provides several
-tools that speed up builds.
-
-The most important feature for improving build speeds is Docker's build cache.
+When you build the same Docker image multiple times, knowing how to optimize
+the build cache is a great tool for making sure the builds run fast.
 
 ## How does the build cache work?
 
 Understanding Docker's build cache helps you write better Dockerfiles that
 result in faster builds.
 
-Have a look at the following example, which shows a simple Dockerfile for a
-program written in C.
+The following example shows a small Dockerfile for a program written in C.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -34,9 +26,9 @@ WORKDIR /src/
 RUN make build
 ```
 
-Each instruction in this Dockerfile translates (roughly) to a layer in your
-final image. You can think of image layers as a stack, with each layer adding
-more content on top of the layers that came before it:
+Each instruction in this Dockerfile translates to a layer in your final image.
+You can think of image layers as a stack, with each layer adding more content
+on top of the layers that came before it:
 
 ![Image layer diagram](../images/cache-stack.png)
 
@@ -73,16 +65,16 @@ anything differently, they still need to re-run.
 Now that you understand how the cache works, you can begin to use the cache to
 your advantage. While the cache will automatically work on any `docker build`
 that you run, you can often refactor your Dockerfile to get even better
-performance. These optimizations can save precious seconds (or even minutes) off
-of your builds.
+performance. These optimizations can save precious seconds (or even minutes)
+off of your builds.
 
 ### Order your layers
 
-Putting the commands in your Dockerfile into a logical order is a great place to
-start. Because a change causes a rebuild for steps that follow, try to make
+Putting the commands in your Dockerfile into a logical order is a great place
+to start. Because a change causes a rebuild for steps that follow, try to make
 expensive steps appear near the beginning of the Dockerfile. Steps that change
-often should appear near the end of the Dockerfile, to avoid triggering rebuilds
-of layers that haven't changed.
+often should appear near the end of the Dockerfile, to avoid triggering
+rebuilds of layers that haven't changed.
 
 Consider the following example. A Dockerfile snippet that runs a JavaScript
 build from the source files in the current directory:
@@ -97,8 +89,8 @@ RUN npm build     # Run build
 ```
 
 This Dockerfile is rather inefficient. Updating any file causes a reinstall of
-all dependencies every time you build the Docker image even if the
-dependencies didn't change since last time!
+all dependencies every time you build the Docker image even if the dependencies
+didn't change since last time!
 
 Instead, the `COPY` command can be split in two. First, copy over the package
 management files (in this case, `package.json` and `yarn.lock`). Then, install
@@ -130,7 +122,7 @@ To get started, here are a few tips and tricks:
 
 Be considerate of what files you add to the image.
 
-Running a command like `COPY . /src` will `COPY` your entire [build context](../building/context.md)
+Running a command like `COPY . /src` will copy your entire [build context](../building/context.md)
 into the image. If you've got logs, package manager artifacts, or even previous
 build results in your current directory, those will also be copied over. This
 could make your image larger than it needs to be, especially as those files are
@@ -152,7 +144,7 @@ COPY . /src
 ```
 
 You can also create a
-[`.dockerignore` file](../../engine/reference/builder.md#dockerignore-file),
+[`.dockerignore` file](../../build/building/context.md#dockerignore-files),
 and use that to specify which files and directories to exclude from the build
 context.
 
@@ -214,13 +206,12 @@ by default.
 
 #### Use multi-stage builds
 
-<!-- x-link to multi-stage builds once we have some reworked content for that -->
-
-Multi-stage builds let you split up your Dockerfile into multiple distinct
-stages. Each stage completes a step in the build process, and you can bridge the
-different stages to create your final image at the end. The Docker builder will
-work out dependencies between the stages and run them using the most efficient
-strategy. This even allows you to run multiple builds concurrently.
+[Multi-stage builds](../building/multi-stage.md) let you split up your
+Dockerfile into multiple distinct stages. Each stage completes a step in the
+build process, and you can bridge the different stages to create your final
+image at the end. The Docker builder will work out dependencies between the
+stages and run them using the most efficient strategy. This even allows you to
+run multiple builds concurrently.
 
 Multi-stage builds use two or more `FROM` commands. The following example
 illustrates building a simple web server that serves HTML from your `docs`

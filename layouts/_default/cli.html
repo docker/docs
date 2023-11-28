@@ -11,9 +11,11 @@
   {{ end }}
   {{ .Scratch.Set "headings" slice }}
   {{ .Scratch.Set "subheadings" slice }}
-  {{ partial "breadcrumbs-legacy.html" . }}
-  <article class="prose max-w-none dark:prose-invert">
-    <h1>{{ .Title }}</h1>
+  {{ partial "breadcrumbs.html" . }}
+  <article class="DocSearch-content prose max-w-none dark:prose-invert">
+    {{ with .Title }}
+    <h1 id="{{ anchorize . }}" class="scroll-mt-36">{{ . }}</h1>
+    {{ end }}
     {{ $data.short | .RenderString (dict "display" "block") }}
     {{ if $data.deprecated }}
       <blockquote class="warning">
@@ -85,7 +87,12 @@
             <tr>
               <td>{{ with .option }}<code>--{{ . }}</code>{{ end }}</td>
               <td>{{ with .shorthand }}<code>-{{ . }}</code>{{ end }}</td>
-              <td>{{ with .default_value }}<code>{{ . }}</code>{{ end }}</td>
+              {{ $skipDefault := `[],map[],false,0,0s,default,'',""` }}
+              <td>
+                {{ with .default_value }}
+                  {{ cond (in $skipDefault .) "" (printf "<code>%s</code>" . | safeHTML) }}
+                {{ end }}
+              </td>
               <td>
                 {{ with .min_api_version }}
                   {{ partial "components/badge.html" (dict "color" "blue" "content" (printf "API %s+" .)) }}

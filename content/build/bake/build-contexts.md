@@ -1,18 +1,28 @@
 ---
 title: Defining additional build contexts and linking targets
+description: |
+  Additional contexts are useful when you want to pin image versions,
+  or reference the output of other targets
 keywords: build, buildx, bake, buildkit, hcl
 aliases:
-- /build/customize/bake/build-contexts/
+  - /build/customize/bake/build-contexts/
 ---
 
-In addition to the main `context` key that defines the build context each target
-can also define additional named contexts with a map defined with key `contexts`.
-These values map to the `--build-context` flag in the [build command](../../engine/reference/commandline/buildx_build.md#build-context).
+In addition to the main `context` key that defines the build context, each
+target can also define additional named contexts with a map defined with key
+`contexts`. These values map to the `--build-context` flag in the [build
+command](../../engine/reference/commandline/buildx_build.md#build-context).
 
-Inside the Dockerfile these contexts can be used with the `FROM` instruction or `--from` flag.
+Inside the Dockerfile these contexts can be used with the `FROM` instruction or
+`--from` flag.
 
-The value can be a local source directory, container image (with `docker-image://` prefix),
-Git URL, HTTP URL or a name of another target in the Bake file (with `target:` prefix).
+Supported context values are:
+
+- Local filesystem directories
+- Container images
+- Git URLs
+- HTTP URLs
+- Name of another target in the Bake file
 
 ## Pinning alpine image
 
@@ -74,6 +84,6 @@ target "app" {
 }
 ```
 
-Please note that in most cases you should just use a single multi-stage
-Dockerfile with multiple targets for similar behavior. This case is recommended
-when you have multiple Dockerfiles that can't be easily merged into one.
+In most cases you should just use a single multi-stage Dockerfile with multiple
+targets for similar behavior. This case is only recommended when you have
+multiple Dockerfiles that can't be easily merged into one.

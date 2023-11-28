@@ -23,10 +23,10 @@ significantly reduce the delay between writing code and running it in production
 ## The Docker platform
 
 Docker provides the ability to package and run an application in a loosely isolated
-environment called a container. The isolation and security lets you to run many
+environment called a container. The isolation and security lets you run many
 containers simultaneously on a given host. Containers are lightweight and contain
 everything needed to run the application, so you don't need to rely on what's
- installed on the host. You can share containers while you work,
+installed on the host. You can share containers while you work,
 and be sure that everyone you share with gets the same container that works in the
 same way.
 
@@ -87,7 +87,7 @@ daemon. The Docker client and daemon communicate using a REST API, over UNIX
 sockets or a network interface. Another Docker client is Docker Compose,
 that lets you work with applications consisting of a set of containers.
 
-![Docker Architecture diagram](/assets/images/architecture.svg)
+![Docker Architecture diagram](images/docker-architecture.webp)
 
 ### The Docker daemon
 
@@ -124,7 +124,7 @@ of those objects.
 #### Images
 
 An image is a read-only template with instructions for creating a Docker
-container. Often, an image is_based on another image, with some additional
+container. Often, an image is based on another image, with some additional
 customization. For example, you may build an image which is based on the `ubuntu`
 image, but installs the Apache web server and your application, as well as the
 configuration details needed to make your application run.

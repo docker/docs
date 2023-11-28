@@ -45,11 +45,11 @@ The following example illustrates Compose Build Specification concepts with a co
 ```yaml
 services:
   frontend:
-    image: awesome/webapp
+    image: example/webapp
     build: ./webapp
 
   backend:
-    image: awesome/database
+    image: example/database
     build:
       context: backend
       dockerfile: ../backend.Dockerfile
@@ -60,11 +60,11 @@ services:
 
 When used to build service images from source, the Compose file creates three Docker images:
 
-* `awesome/webapp`: A Docker image is built using `webapp` sub-directory, within the Compose file's parent folder, as the Docker build context. Lack of a `Dockerfile` within this folder throws an error.
-* `awesome/database`: A Docker image is built using `backend` sub-directory within the Compose file parent folder. `backend.Dockerfile` file is used to define build steps, this file is searched relative to the context path, which means `..` resolves to the Compose file parent folder, so `backend.Dockerfile` is a sibling file.
+* `example/webapp`: A Docker image is built using `webapp` sub-directory, within the Compose file's parent folder, as the Docker build context. Lack of a `Dockerfile` within this folder throws an error.
+* `example/database`: A Docker image is built using `backend` sub-directory within the Compose file parent folder. `backend.Dockerfile` file is used to define build steps, this file is searched relative to the context path, which means `..` resolves to the Compose file parent folder, so `backend.Dockerfile` is a sibling file.
 * A Docker image is built using the `custom` directory with the user's HOME as the Docker context. Compose displays a warning about the non-portable path used to build image.
 
-On push, both `awesome/webapp` and `awesome/database` Docker images are pushed to the default registry. The `custom` service image is skipped as no `image` attribute is set and Compose displays a warning about this missing attribute.
+On push, both `example/webapp` and `example/database` Docker images are pushed to the default registry. The `custom` service image is skipped as no `image` attribute is set and Compose displays a warning about this missing attribute.
 
 ## Attributes
 
@@ -353,6 +353,30 @@ has been updated on registry (see [pull](#pull)).
 `pull` requires the image builder to pull referenced images (`FROM` Dockerfile directive), even if those are already
 available in the local image store.
 
+### network
+
+Set the network containers connect to for the `RUN` instructions during build.
+
+```yaml
+build:
+  context: .
+  network: host
+```  
+
+```yaml
+build:
+  context: .
+  network: custom_network_1
+```
+
+Use `none` to disable networking during build:
+
+```yaml
+build:
+  context: .
+  network: none
+```
+
 ### shm_size
 
 `shm_size` sets the size of the shared memory (`/dev/shm` partition on Linux) allocated for building Docker images. Specify
@@ -459,6 +483,23 @@ the `image` [property defined in the service section](05-services.md#image)
 tags:
   - "myimage:mytag"
   - "registry/username/myrepos:my-other-tag"
+```
+
+### ulimits
+
+`ulimits` overrides the default ulimits for a container. It's specified either as an integer for a single limit
+or as mapping for soft/hard limits.
+
+```yml
+services:
+  frontend:
+    build:
+      context: .
+      ulimits:
+        nproc: 65535
+        nofile:
+          soft: 20000
+          hard: 40000
 ```
 
 ### platforms

@@ -26,5 +26,5 @@ Learn how to containerize different types of services by walking through Officia
 ## Platforms
 [Gitea](../samples/gitea.md) \| [Nextcloud](../samples/nextcloud.md) \| [Portainer](../samples/portainer.md) \|  [Prometheus](../samples/prometheus.md) \| [WordPress](../samples/wordpress.md)
 
-## Other services
-[Cloudflared](../samples/cloudflared.md) \| [Elasticsearch / Logstash / Kibana](../samples/elasticsearch.md) \| [Minecraft](../samples/minecraft.md) \| [NGINX](../samples/nginx.md) \| [Pi-hole](../samples/pi-hole.md) \| [Plex](../samples/plex.md) \| [Traefik](../samples/traefik.md) \| [WireGuard](../samples/wireguard.md)
+## Other samples
+[AI/ML](../samples/ai-ml.md) \| [Cloudflared](../samples/cloudflared.md) \| [Elasticsearch / Logstash / Kibana](../samples/elasticsearch.md) \| [Minecraft](../samples/minecraft.md) \| [NGINX](../samples/nginx.md) \| [Pi-hole](../samples/pi-hole.md) \| [Plex](../samples/plex.md) \| [Traefik](../samples/traefik.md) \| [WireGuard](../samples/wireguard.md)

@@ -144,7 +144,6 @@ The following Dockerfile example shows a custom BuildKit image with CNI support.
 It uses the [CNI config for integration tests](https://github.com/moby/buildkit/blob/master//hack/fixtures/cni.json)
 in BuildKit as an example. Feel free to include your own CNI configuration.
 
-
 ```dockerfile
 # syntax=docker/dockerfile:1
 
@@ -165,7 +164,6 @@ RUN apk add --no-cache iptables
 COPY --from=cni-plugins /opt/cni/bin /opt/cni/bin
 ADD https://raw.githubusercontent.com/moby/buildkit/${BUILDKIT_VERSION}/hack/fixtures/cni.json /etc/buildkit/cni.json
 ```
-
 
 Now you can build this image, and create a builder instance from it using
 [the `--driver-opt image` option](../../engine/reference/commandline/buildx_create.md#driver-opt):

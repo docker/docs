@@ -1,5 +1,5 @@
 ---
-description: Add seats to your subscription
+description: Learn how to add seats to an existing subscription
 keywords: Docker, Docker Hub, subscription, update, add, seats
 title: Add seats to your subscription
 aliases:
@@ -15,7 +15,7 @@ When you add seats to your subscription in the middle of your billing cycle, you
 >If you have a [sales-assisted Docker Business subscription](details.md#sales-assisted), contact your account manager to add seats to your subscription. 
 { .important }
 
-1. Log into your [Docker Hub](https://hub.docker.com) account.
+1. Sign in to your [Docker Hub](https://hub.docker.com) account.
 
 2. Select **Organizations** and then choose your organization.
 
@@ -27,4 +27,4 @@ When you add seats to your subscription in the middle of your billing cycle, you
 5. Select **Purchase** to confirm. 
     The **Billing** tab displays the new number of seats. 
 
-6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../docker-hub/members.md).
+6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../docker-hub/members.md#add-a-member-to-a-team).

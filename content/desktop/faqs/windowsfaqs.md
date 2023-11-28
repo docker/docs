@@ -14,17 +14,11 @@ Docker Desktop uses the Windows Hyper-V features. While older Windows versions h
 
 ### Can I install Docker Desktop on Windows 10 Home?
 
-If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) with the [WSL 2 backend](../wsl/index.md).
+If you are running Windows 10 Home (starting with build 19045), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) with the [WSL 2 backend](../wsl/index.md).
 
 ### Can I run Docker Desktop on Windows Server?
 
 No, running Docker Desktop on Windows Server is not supported.
-
-### How do I run Windows containers on Windows Server?
-
-You can install a native Windows binary which allows you to develop and run
-Windows containers without Docker Desktop. For more information, see the tutorial about running Windows containers on Windows Server in
-[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
 
 ### Why do I see the `Docker Desktop Access Denied` error message when I try to start Docker Desktop?
 
@@ -32,7 +26,7 @@ Docker Desktop displays the **Docker Desktop - Access Denied** error if a Window
 
 If your admin account is different to your user account, add the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users* and Groups** > **Groups** > **docker-users**.
 
-Right-click to add the user to the group. Log out and log back in for the changes to take effect.
+Right-click to add the user to the group. Sign out and sign back in for the changes to take effect.
 
 ### Why does Docker Desktop fail to start when anti-virus software is installed?
 
@@ -100,7 +94,7 @@ To learn more about how to set the client TLS certificate for verification, see
 [Verify repository client with certificates](../../engine/security/certificates.md)
 in the Docker Engine topics.
 
-## How do I switch between Windows and Linux containers
+### How do I switch between Windows and Linux containers
 
 From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
 the Docker CLI talks to. Select **Switch to Windows containers** to use Windows

@@ -13,7 +13,7 @@ aliases:
 
 This page contains information on how to install, launch and upgrade Docker Desktop on an Ubuntu distribution.
 
-{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
+{{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/docker-desktop-4.25.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 _For checksums, see [Release notes](../release-notes.md)_
 
@@ -22,7 +22,7 @@ _For checksums, see [Release notes](../release-notes.md)_
 To install Docker Desktop successfully, you must:
 
 - Meet the [system requirements](linux-install.md#system-requirements)
-- Have a 64-bit version of either Ubuntu Jammy Jellyfish 22.04 (LTS) or Ubuntu Impish Indri 21.10.
+- Have a 64-bit version of either the latest LTS version (Ubuntu Jammy Jellyfish 22.04) or the current non-LTS version (Ubuntu Mantic Minotaur 23.10).
   Docker Desktop is supported on `x86_64` (or `amd64`) architecture.
 - For non-Gnome Desktop environments, `gnome-terminal` must be installed:
   ```console
@@ -50,9 +50,10 @@ To install Docker Desktop successfully, you must:
 
 Recommended approach to install Docker Desktop on Ubuntu:
 
-1. Set up [Docker's package repository](../../engine/install/ubuntu.md#set-up-the-repository).
+1. Set up Docker's package repository.
+   See [Install using the `apt` repository, step 1](../../engine/install/ubuntu.md#install-using-the-repository).
 
-2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
+2. Download latest [DEB package](https://desktop.docker.com/linux/main/amd64/docker-desktop-4.25.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64).
 
 3. Install the package with apt as follows:
 
@@ -66,7 +67,7 @@ Recommended approach to install Docker Desktop on Ubuntu:
    > At the end of the installation process, `apt` displays an error due to installing a downloaded package. You
    > can ignore this error message.
    >
-   > ```
+   > ```text
    > N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
    > ```
 

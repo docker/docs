@@ -1,6 +1,6 @@
 ---
 title: Docker subscriptions and features
-description: Understand
+description: Learn about Docker subscription tiers and their features
 keywords: subscription, personal, pro, team, business, features
 ---
 
@@ -8,15 +8,15 @@ This page provides an overview of each tier. To compare features available in ea
 
 ## Docker Personal
 
-Docker Personal is the new name for the Docker Free subscription. With its focus on the open-source communities, individual developers, education, and small businesses, Docker Personal will continue to allow free use of Docker components including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
-
+Docker Personal (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses, and includes the free use of Docker components including Docker Desktop and Docker Hub.
 Docker Personal includes:
 
 - Unlimited public repositories
-- Unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md)
-- Unlimited [collaborators](../docker-hub/repos/access/index.md#collaborators-and-their-role) for public repositories at no cost per month.
+- Unlimited [Scoped Access Tokens](../security/for-developers/access-tokens.md)
+- Unlimited [collaborators](../docker-hub/repos/access.md#collaborators-and-their-role) for public repositories at no cost per month.
+- Access to [Docker Scout Free](./scout-details.md#docker-scout-free) to get started with software supply chain security.
 
-Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours. 
+Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
@@ -30,13 +30,12 @@ Docker Pro includes:
 - 5000 image [pulls per day](../docker-hub/download-rate-limit.md)
 - [Auto Builds](../docker-hub/builds/index.md) with 5 concurrent builds
 - 300 [Vulnerability Scans](../docker-hub/vulnerability-scanning.md)
-- Unlimited [Scoped Access Tokens](../docker-hub/access-tokens.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Team
 
-**Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
+**Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities. A Docker Team subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.
 
 Docker Team includes:
 - Everything included in Docker Pro
@@ -45,22 +44,22 @@ Docker Team includes:
 - Unlimited [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md)
 - 5000 image [pulls per day](../docker-hub/download-rate-limit.md) for each team member
 
-There are also advanced collaboration and management tools, including organization and team management with Role Based Access Control (RBAC) for the whole team, [audit logs](../docker-hub/audit-log.md), and more.
+There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](../security/for-admins/roles-and-permissions.md), [audit logs](../docker-hub/audit-log.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
 ## Docker Business
 
-**Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and speed up their secure software supply chain initiatives.
+**Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and speed up their secure software supply chain initiatives. A Docker Business subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.
 
 Docker Business includes:
 - Everything included in Docker Team
 - [Hardened Docker Desktop](../desktop/hardened-desktop/index.md) 
-- [Image Access Management](../docker-hub/image-access-management.md) which allows admins control what content developers can access
-- [Registry Access Management](../desktop/hardened-desktop/registry-access-management.md) which lets admins control what registries developers can access
+- [Image Access Management](../security/for-admins/image-access-management.md) which lets admins control what content developers can access
+- [Registry Access Management](../security/for-admins/registry-access-management.md) which lets admins control what registries developers can access
 - [Company layer](../docker-hub/creating-companies.md) to manage multiple organizations and settings
-- [Single Sign-On](../single-sign-on/index.md)
-- [System for Cross-domain Identity Management](../docker-hub/scim.md) and more.
+- [Single Sign-On](../security/for-admins/single-sign-on/index.md)
+- [System for Cross-domain Identity Management](../security/for-admins/scim.md) and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 

@@ -51,9 +51,9 @@ To move the disk image file to a different location:
 
 1. Select **Settings** then  **Advanced** from the **Resources** tab.
 
-2. In the **Disk image location** section, click **Browse** and choose a new location for the disk image.
+2. In the **Disk image location** section, select **Browse** and choose a new location for the disk image.
 
-3. Click **Apply & Restart** for the changes to take effect.
+3. Select **Apply & Restart** for the changes to take effect.
 
 Do not move the file directly in Finder as this can cause Docker Desktop to lose track of the file.
 
@@ -115,7 +115,7 @@ To reduce the maximum size of the disk image file:
 
 2. The **Disk image size** section contains a slider that allows you to change the maximum size of the disk image. Adjust the slider to set a lower limit.
 
-3. Click **Apply & Restart**.
+3. Select **Apply & Restart**.
 
 When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images will be lost.
 
@@ -184,7 +184,7 @@ Desktop `xhyve` virtual machine).
 If you have this directory structure, you do not need to manually add the CA
 certificate to your Mac OS system login:
 
-```
+```text
 /Users/<user>/.docker/certs.d/
 └── <MyRegistry>:<Port>
    ├── ca.crt
@@ -195,7 +195,7 @@ certificate to your Mac OS system login:
 The following further illustrates and explains a configuration with custom
 certificates:
 
-```
+```text
 /etc/docker/certs.d/        <-- Certificate directory
 └── localhost:5000          <-- Hostname:port
    ├── client.cert          <-- Client certificate
@@ -207,7 +207,7 @@ certificates:
 You can also have this directory structure, as long as the CA certificate is
 also in your keychain.
 
-```
+```text
 /Users/<user>/.docker/certs.d/
 └── <MyRegistry>:<Port>
     ├── client.cert

@@ -1,7 +1,7 @@
 command: docker buildx stop
 short: Stop builder instance
 long: |-
-    Stops the specified or current builder. This will not prevent buildx build to
+    Stops the specified or current builder. This does not prevent buildx build to
     restart the builder. The implementation of stop depends on the driver.
 usage: docker buildx stop [NAME]
 pname: docker buildx

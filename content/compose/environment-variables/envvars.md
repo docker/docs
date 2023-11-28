@@ -1,14 +1,14 @@
 ---
 description: Compose pre-defined environment variables
 keywords: fig, composition, compose, docker, orchestration, cli, reference
-title: Change pre-defined environment variables in Docker Compose
+title: Set or change pre-defined environment variables in Docker Compose
 aliases:
 - /compose/reference/envvars/
 ---
 
 Compose already comes with pre-defined environment variables. 
 
-This page contains information on how you can change the following pre-defined environment variables if you need to:
+This page contains information on how you can set or change the following pre-defined environment variables if you need to:
 
 - `COMPOSE_CONVERT_WINDOWS_PATHS`
 - `COMPOSE_FILE`
@@ -21,12 +21,13 @@ This page contains information on how you can change the following pre-defined e
 - `COMPOSE_PATH_SEPARATOR`
 - `COMPOSE_ANSI`
 - `COMPOSE_STATUS_STDOUT`
+- `COMPOSE_ENV_FILES`
 
 Compose also inherits common Docker CLI environment variables, such as `DOCKER_HOST` and `DOCKER_CONTEXT`. See [Docker CLI environment variable reference](/engine/reference/commandline/cli/#environment-variables) for details.
 
 ## Methods to override 
 
-You can change the pre-defined environment variables:
+You can set or change the pre-defined environment variables:
 - Within your Compose file using the [`environment` attribute](set-environment-variables.md#use-the-environment-attribute)
 - With an [environment file](env-file.md) 
 - From the command line
@@ -140,6 +141,12 @@ The default value is false to clearly separate the output streams between Compos
   * `true` or `1`, to enable,
   * `false` or `0`, to disable.
 * Defaults to: `0`.
+
+### COMPOSE\_ENV\_FILES
+
+Lets you specify which environment files Compose should use if `--env-file` isn't used.
+
+When using multiple environment files, use a comma as a separator. 
 
 ## Unsupported in Compose V2
 

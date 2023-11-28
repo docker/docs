@@ -1,8 +1,12 @@
 ---
 title: Cache storage backends
+description: |
+  Cache backends let you manage your build cache externally.
+  External cache is useful to create a shared cache that can help
+  speed up inner loop and CI builds.
 keywords: build, buildx, cache, backend, gha, azblob, s3, registry, local
 aliases:
-- /build/building/cache/backends/
+  - /build/building/cache/backends/
 ---
 
 To ensure fast builds, BuildKit automatically caches the build result in its own
@@ -14,7 +18,7 @@ environments usually have little-to-no persistence between runs, but it's still
 important to keep the runtime of image builds as low as possible.
 
 The default `docker` driver supports the `inline` and `local` cache backends.
-Other cache backends require you to select an alternative
+Other cache backends require you to select a different
 [driver](../../drivers/index.md).
 
 > **Warning**
@@ -24,6 +28,7 @@ Other cache backends require you to select an alternative
 > [`--secret` option](../../../engine/reference/commandline/buildx_build/#secret).
 > Manually managing secrets using `COPY` or `ARG` could result in leaked
 > credentials.
+{ .warning }
 
 ## Backends
 
@@ -32,7 +37,7 @@ Buildx supports the following cache storage backends:
 - `inline`: embeds the build cache into the image.
 
   The inline cache gets pushed to the same location as the main output result.
-  Note that this only works for the `image` exporter.
+  This only works with the [`image` exporter](../../exporters/image-registry.md).
 
 - `registry`: embeds the build cache into a separate image, and pushes to a
   dedicated location separate from the main output.

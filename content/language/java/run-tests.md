@@ -1,7 +1,7 @@
 ---
-title: Run your tests
+title: Run your Java tests
 keywords: Java, build, test
-description: How to build and run your Tests
+description: How to build and run your Java tests
 ---
 
 ## Prerequisites
@@ -10,11 +10,11 @@ Work through the steps to build an image and run it as a containerized applicati
 
 ## Introduction
 
-Testing is an essential part of modern software development. Testing can mean a lot of things to different development teams. There are unit tests, integration tests and end-to-end testing. In this guide we take a look at running your unit tests in Docker.
+Testing is an essential part of modern software development. Testing can mean a lot of things to different development teams. There are unit tests, integration tests and end-to-end testing. In this guide you'll take a look at running your unit tests in Docker.
 
 ## Refactor Dockerfile to run tests
 
-The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. We can use the following Docker command to start the container and run tests:
+The **Spring Pet Clinic** source code has already tests defined in the test directory `src/test/java/org/springframework/samples/petclinic`. You can use the following Docker command to start the container and run tests:
 
 ```console
 $ docker run -it --rm --name springboot-test java-docker ./mvnw test
@@ -31,7 +31,7 @@ $ docker run -it --rm --name springboot-test java-docker ./mvnw test
 
 ### Multi-stage Dockerfile for testing
 
-Let’s take a look at pulling the testing commands into our Dockerfile. Below is our updated multi-stage Dockerfile that we will use to build our test image. Replace the contents of your Dockerfile with the following.
+Now, you'll learn how to pull the testing commands into your Dockerfile. The following is your updated multi-stage Dockerfile that you'll use to build your test image. Replace the contents of your Dockerfile with the following.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -59,9 +59,9 @@ COPY --from=build /app/target/spring-petclinic-*.jar /spring-petclinic.jar
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/spring-petclinic.jar"]
 ```
 
-We added a new build stage labeled `test`. We'll use this stage for running our tests.
+You added a new build stage labeled `test`. You'll use this stage for running your tests.
 
-Now let’s rebuild our image and run our tests. We will run the `docker build` command as above, but this time we will add the `--target test` flag so that we specifically run the test build stage.
+Now, rebuild your image and run your tests. You'll run the `docker build` command like you did previously, but this time you'll add the `--target test` flag so that you specifically run the test build stage.
 
 ```console
 $ docker build -t java-docker --target test .
@@ -71,7 +71,7 @@ $ docker build -t java-docker --target test .
  => => naming to docker.io/library/java-docker
 ```
 
-Now that our test image is built, we can run it as a container and see if our tests pass.
+Now that your test image is built, you can run it as a container and see if your tests pass.
 
 ```console
 $ docker run -it --rm --name springboot-test java-docker
@@ -91,9 +91,9 @@ $ docker run -it --rm --name springboot-test java-docker
 [INFO] Total time:  01:22 min
 ```
 
-The build output is truncated, but you can see that the Maven test runner was successful and all our tests passed.
+The build output is truncated, but you can see that the Maven test runner was successful and all your tests passed.
 
-This is great. However, we'll have to run two Docker commands to build and run our tests. We can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement is not executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, our tests run when building the image, and stop the build when they fail.
+This is great. However, you'll have to run two Docker commands to build and run your tests. You can improve this slightly by using a `RUN` statement instead of the `CMD` statement in the test stage. The `CMD` statement isn't executed during the building of the image, but is executed when you run the image in a container. When using the `RUN` statement, your tests run when building the image, and stop the build when they fail.
 
 Update your Dockerfile with the following.
 
@@ -122,7 +122,7 @@ COPY --from=build /app/target/spring-petclinic-*.jar /spring-petclinic.jar
 CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/spring-petclinic.jar"]
 ```
 
-Now, to run our tests, we just need to run the `docker build` command as above.
+Now, to run your tests, you just need to run the `docker build` command.
 
 ```console
 $ docker build -t java-docker --target test .
@@ -138,21 +138,16 @@ $ docker build -t java-docker --target test .
 => => naming to docker.io/library/java-docker
 ```
 
-The build output is truncated for simplicity, but you can see that our tests ran successfully and passed. Let’s break one of the tests and observe the output when our tests fail.
+The build output is truncated for simplicity, but you can see that your tests ran successfully and passed. Look at one of the tests and observe the output when your tests fail.
 
-Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change the assertion 
+Open the `src/test/java/org/springframework/samples/petclinic/model/ValidatorTests.java` file and change the following assertion.
 
-```java
-assertThat(violation.getMessage()).isEqualTo("must not be empty");
+```diff
+- assertThat(violation.getMessage()).isEqualTo("must not be empty");
++ assertThat(violation.getMessage()).isEqualTo("must be empty");
 ```
 
-with the following.
-
-```java
-assertThat(violation.getMessage()).isEqualTo("must be empty");
-```
-
-Now, run the `docker build` command from above and observe that the build fails and the failing testing information is printed to the console.
+Now, run the `docker build` command and observe that the build fails and the failing testing information is printed to the console.
 
 ```console
 $ docker build -t java-docker --target test .
@@ -165,12 +160,8 @@ executor failed running [./mvnw test]: exit code: 1
 
 ## Next steps
 
-In this module, we took a look at running tests as part of our Docker image build process.
+In this module, you took a look at running tests as part of your Docker image build process.
 
-In the next module, we’ll take a look at how to set up a CI/CD pipeline using GitHub Actions. See:
+In the next module, you’ll take a look at how to set up a CI/CD pipeline using GitHub Actions.
 
 {{< button text="Configure CI/CD" url="configure-ci-cd.md" >}}
-
-## Feedback
-
-Help us improve this topic by providing your feedback. Let us know what you think by creating an issue in the [Docker Docs]({{% param "repo" %}}/issues/new?title=[Java%20docs%20feedback]) GitHub repository. Alternatively, [create a PR]({{% param "repo" %}}/pulls) to suggest updates.

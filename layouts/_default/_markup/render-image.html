@@ -6,6 +6,7 @@
 {{ $params := (urls.Parse $imagePath).Query }}
 {{ $width := index $params "w" }}
 {{ $height := index $params "h" }}
+{{ $border := index $params "border" }}
 
 
 <div
@@ -23,7 +24,7 @@
       height="{{ index . 0 }}"
     {{ end }}
     {{ with .Title }}title="{{ . }}"{{ end }}
-    class="rounded-2xl"
+    class="rounded mx-auto{{ with $border }} border border-divider-light dark:border-divider-dark{{end}}"
   />
   <template x-teleport="body">
     <div

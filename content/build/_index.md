@@ -15,7 +15,7 @@ grid:
 - title: Multi-platform images
   description: Build, push, pull, and run images seamlessly on different computer
     architectures.
-  icon: home_storage
+  icon: content_copy
   link: /build/building/multi-platform/
 - title: Architecture
   description: Explore BuildKit, the open source build engine.

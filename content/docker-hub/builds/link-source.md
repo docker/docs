@@ -2,7 +2,7 @@
 description: Link to GitHub and BitBucket
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, trusted,
   builds, trusted builds, automated builds, GitHub
-title: Configure Automated builds from GitHub and BitBucket
+title: Configure automated builds from GitHub and BitBucket
 aliases:
 - /docker-hub/github/
 - /docker-hub/bitbucket/
@@ -29,7 +29,7 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
 3. Select **Link provider** for the source provider you want to link.
 
-    If you want to unlink your current GitHub account and relink to a new GitHub account, make sure to completely logout of [GitHub](https://github.com/) before linking via Docker Hub.
+    If you want to unlink your current GitHub account and relink to a new GitHub account, make sure to completely sign out of [GitHub](https://github.com/) before linking via Docker Hub.
 
 
 4. Review the settings for the **Docker Hub Builder** OAuth application.
@@ -83,12 +83,12 @@ To revoke Docker Hub's access to an organization's GitHub repositories:
 
 1. From your GitHub Account settings, locate the **Organization settings** section at the lower left.
 
-2. Click the organization you want to revoke Docker Hub's access to.
+2. Select the organization you want to revoke Docker Hub's access to.
 
-3. From the Organization Profile menu, click **Third-party access**.
+3. From the Organization Profile menu, select **Third-party access**.
     The page displays a list of third party applications and their access status.
 
-4. Click the pencil icon next to Docker Hub Builder.
+4. Select the pencil icon next to Docker Hub Builder.
 
 5. On the next page, select **Deny access**.
 

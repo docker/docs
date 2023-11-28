@@ -9,12 +9,14 @@ Quick overview of an image
 
 ### Options
 
-| Name             | Type     | Default | Description                                                                                                     |
-|:-----------------|:---------|:--------|:----------------------------------------------------------------------------------------------------------------|
-| `-o`, `--output` | `string` |         | Write the report to a file.                                                                                     |
-| `--platform`     | `string` |         | Platform of image to analyze                                                                                    |
-| `--ref`          | `string` |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with --type archive. |
-| `--type`         | `string` | `image` | Type of the image to analyze. Can be one of:<br>- image<br>- oci-dir<br>- archive (docker save tarball)<br>     |
+| Name             | Type     | Default | Description                                                                                              |
+|:-----------------|:---------|:--------|:---------------------------------------------------------------------------------------------------------|
+| `--env`          | `string` |         | Name of the environment                                                                                  |
+| `--latest`       |          |         | Latest indexed image                                                                                     |
+| `--org`          | `string` |         | Namespace of the Docker organization                                                                     |
+| `-o`, `--output` | `string` |         | Write the report to a file.                                                                              |
+| `--platform`     | `string` |         | Platform of image to analyze                                                                             |
+| `--ref`          | `string` |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive. |
 
 
 <!---MARKER_GEN_END-->
@@ -22,10 +24,34 @@ Quick overview of an image
 ## Description
 
 The `docker scout quickview` command displays a quick overview of an image.
-It displays a summary of the vulnerabilities in the image and the vulnerabilities from the base image.
-If available it also displays base image refresh and update recommendations.
+It displays a summary of the vulnerabilities in the specified image
+and vulnerabilities from the base image.
+If available, it also displays base image refresh and update recommendations.
 
-If no image is specified, the most recently built image will be used.
+If no image is specified, the most recently built image is used.
+
+The following artifact types are supported:
+
+- Images
+- OCI layout directories
+- Tarball archives, as created by `docker save`
+- Local directory or file
+
+By default, the tool expects an image reference, such as:
+
+- `redis`
+- `curlimages/curl:7.87.0`
+- `mcr.microsoft.com/dotnet/runtime:7.0`
+
+If the artifact you want to analyze is an OCI directory, a tarball archive, a local file or directory,
+or if you want to control from where the image will be resolved, you must prefix the reference with one of the following:
+
+- `image://` (default) use a local image, or fall back to a registry lookup
+- `local://` use an image from the local image store (don't do a registry lookup)
+- `registry://` use an image from a registry (don't use a local image)
+- `oci-dir://` use an OCI layout directory
+- `archive://` use a tarball archive, as created by `docker save`
+- `fs://` use a local directory or file
 
 ## Examples
 
@@ -43,11 +69,6 @@ $ docker scout quickview golang:1.19.4
                                                      │    -5     -1     -3     -6     -6
   Updated base image  buildpack-deps:sid-scm         │    0C     0H     1M    29L
                                                      │    -5     -1     -2    -19     -6
-
-  │ Know more about vulnerabilities:
-  │    docker scout cves golang:1.19.4
-  │ Know more about base image update recommendations:
-  │    docker scout recommendations golang:1.19.4
 ```
 
 ### Quick overview of the most recently built image

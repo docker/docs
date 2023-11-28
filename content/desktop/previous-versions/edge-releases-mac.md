@@ -8,19 +8,13 @@ aliases:
 - /desktop/mac/release-notes/edge-releases/
 ---
 
-This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release.
+This page contains information about Docker Desktop Edge releases. Edge releases give you early access to our newest features. Note that some of the features may be experimental, and some of them may not ever reach the Stable release. 
 
 For Docker Desktop system requirements, see
 [What to know before you install](../install/mac-install.md#system-requirements).
 
 ## Docker Desktop Community 2.5.4
 2020-12-07
-
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/edge/50534/Docker.dmg)
 
 ### Upgrades
 
@@ -38,12 +32,6 @@ For Docker Desktop system requirements, see
 ## Docker Desktop Community 2.5.3
 2020-11-30
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/50261/Docker.dmg)
-
 ### Upgrades
 
 - [Compose CLI v1.0.3](https://github.com/docker/compose-cli/releases/tag/v1.0.3)
@@ -55,12 +43,6 @@ For Docker Desktop system requirements, see
 
 ## Docker Desktop Community 2.5.2
 2020-11-26
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/50165/Docker.dmg)
 
 ### New
 
@@ -75,12 +57,6 @@ For Docker Desktop system requirements, see
 
 ## Docker Desktop Community 2.5.1.0
 2020-11-18
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/49923/Docker.dmg)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing Docker Desktop.
 
@@ -102,12 +78,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ## Docker Desktop Community 2.4.2.0
 2020-10-19
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/48975/Docker.dmg)
 
 ### New
 
@@ -137,12 +107,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 ## Docker Desktop Community 2.4.1.0
 2020-10-01
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/48583/Docker.dmg)
-
 ### Upgrades
 
 - [Docker Compose CLI - 0.1.18](https://github.com/docker/compose-cli)
@@ -158,12 +122,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ## Docker Desktop Community 2.3.7.0
 2020-09-17
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/48173/Docker.dmg)
 
 ### New
 
@@ -193,12 +151,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ## Docker Desktop Community 2.3.6.1
 2020-09-08
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/47792/Docker.dmg)
-
 ### Upgrades
 
 - [Docker Compose 1.27.0](https://github.com/docker/compose/releases/tag/1.27.0)
@@ -210,16 +162,10 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ## Docker Desktop Community 2.3.6.0
 2020-09-01
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/47622/Docker.dmg)
-
 ### New
 
 - In partnership with Snyk, Docker Desktop launches vulnerability scanning for Docker local images.
-- Docker ECS plugin has been replaced by [ECS cloud integration](/engine/context/ecs-integration/)
+- Docker ECS plugin has been replaced by ECS cloud integration
 - Docker UI:
   - The Images view now has search and filter options.
   - You can now push an image to Docker Hub using the Remote repositories drop-down menu.
@@ -240,12 +186,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ## Docker Desktop Community 2.3.5.0
 2020-08-21
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/47376/Docker.dmg)
 
 ### New
 
@@ -275,12 +215,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ## Docker Desktop Community 2.3.4.0
 2020-07-28
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/46980/Docker.dmg)
-
 ### New
 
 - Docker Desktop introduces the new **Images** view to the Docker Dashboard. The Images view allows users to view a list of Docker images on the disk, run an image as a container, pull the latest version of an image from Docker Hub, inspect images, and remove any unwanted images from the disk.
@@ -300,12 +234,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ## Docker Desktop Community 2.3.3.2
 2020-07-21
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://desktop.docker.com/mac/edge/46784/Docker.dmg)
-
 ### Upgrades
 
 - [Docker ECS integration v1.0.0-beta.2](https://github.com/docker/ecs-plugin/releases/tag/v1.0.0-beta.2)
@@ -319,15 +247,9 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ## Docker Desktop Community 2.3.3.0
 2020-07-09
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/46574/Docker.dmg)
-
 ### Upgrades
 
-- Beta release of [Docker ECS integration v1.0.0-beta.1](/engine/context/ecs-integration/)
+- Beta release of Docker ECS integration v1.0.0-beta.1
 - [Docker ACI integration v0.1.7](https://github.com/docker/aci-integration-beta/releases/tag/v0.1.7)
 - [Docker Compose 1.26.2](https://github.com/docker/compose/releases/tag/1.26.2)
 
@@ -340,12 +262,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 
 ## Docker Desktop Community 2.3.2.0
 2020-06-25
-
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/46268/Docker.dmg)
 
 ### Upgrades
 
@@ -368,12 +284,6 @@ the `--privileged` flag. See [docker/for-win#8326](https://github.com/docker/for
 ## Docker Desktop Community 2.3.1.0
 2020-05-20
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://desktop.docker.com/mac/edge/45408/Docker.dmg)
-
 ### New
 
 Docker Desktop introduces a directory caching mechanism to greatly improve disk performance in containers. This feature uses [mutagen.io](https://mutagen.io/) to sync files between the host and the containers and benefits from native disk performance.
@@ -393,11 +303,6 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 ## Docker Desktop Community 2.3.0.1
 2020-04-28
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/edge/44875/Docker.dmg)
 
 ### Bug fixes and minor changes
 
@@ -406,11 +311,6 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 ## Docker Desktop Community 2.3.0.0
 2020-04-20
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/edge/44472/Docker.dmg)
 
 ### Upgrades
 
@@ -433,11 +333,6 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 ## Docker Desktop Community 2.2.3.0
 2020-04-02
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/edge/43965/Docker.dmg)
 
 ### Upgrades
 
@@ -469,11 +364,6 @@ We appreciate you trying out an early version of the Mutagen file sync feature. 
 ## Docker Desktop Community 2.2.2.0
 2020-03-02
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/edge/43066/Docker.dmg)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installing Docker Desktop.
 
@@ -490,11 +380,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 ## Docker Desktop Community 2.2.1.0
 2020-02-12
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/edge/42746/Docker.dmg)
 
 ### Upgrades
 
@@ -504,13 +389,10 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 ## Docker Desktop Community 2.1.7.0
 2019-12-11
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/edge/41561/Docker.dmg)
 
-> **Note:** Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
+> **Note** 
+>
+> Docker Desktop Edge 2.1.7.0 is the release candidate for the upcoming major Stable release. Please help us test this version before the wider release and report any issues in the [docker/for-mac](https://github.com/docker/for-mac/issues) GitHub repository.
 
 ### Upgrades
 
@@ -530,11 +412,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 ## Docker Desktop Community 2.1.6.0
 2019-11-18
 
-> Download Docker Desktop
->
-> 
->
-> [Mac with Intel chip](https://download.docker.com/mac/edge/40807/Docker.dmg)
 
 ### Upgrades
 
@@ -553,11 +430,6 @@ Added the ability to start and stop Compose-based applications and view combined
 ## Docker Desktop Community 2.1.5.0
 2019-11-04
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/40323/Docker.dmg)
 
 This release contains a Kubernetes upgrade. Note that your local Kubernetes cluster will be reset after installation.
 
@@ -586,11 +458,6 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 ## Docker Desktop Community 2.1.4.0
 2019-10-15
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/39357/Docker.dmg)
 
 ### Upgrades
 
@@ -609,11 +476,6 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 ## Docker Desktop Community 2.1.3.0
 2019-09-16
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/38275/Docker.dmg)
 
 ### Bug fixes and minor changes
 
@@ -625,11 +487,6 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 ## Docker Desktop Community 2.1.2.0
 2019-09-09
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/38030/Docker.dmg)
 
 #### Upgrades
 
@@ -648,11 +505,6 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 ## Docker Desktop Community 2.1.1.0
 2019-08-12
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/37260/Docker.dmg)
 
 #### Upgrades
 
@@ -669,11 +521,6 @@ Fixed an issue that caused VMs running on older hardware with macOS Catalina to 
 ## Docker Desktop Community 2.1.0.0 
 2019-07-26
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/36792/Docker.dmg)
 
 This release contains Kubernetes security improvements. Note that your local Kubernetes PKI and cluster will be reset after installation.
 
@@ -701,11 +548,6 @@ This release contains Kubernetes security improvements. Note that your local Kub
 
 ## Docker Community Edition 2.0.5.0 2019-06-12
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/35318/Docker.dmg)
 
 This is the Edge channel, which gives you early access to our newest features. Be aware that some of them may be experimental, and some of them may not ever reach the Stable release.
 
@@ -733,22 +575,12 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ## Docker Community Edition 2.0.4.1 2019-05-07
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/34207/Docker.dmg)
 
 * Bug fixes and minor changes
   - Upgrade QEMU from 2.8.0 to 3.1.0 to fix an emulation issue when building and running Java applications on Arm64 devices.
 
 ## Docker Community Edition 2.0.4.0 2019-04-30
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/33772/Docker.dmg)
 
 * Upgrades
   - [Docker 19.03.0-beta3](https://github.com/docker/docker-ce/releases/tag/v19.03.0-beta3)
@@ -780,11 +612,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ## Docker Community Edition 2.0.3.0 2019-03-05
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/31778/Docker.dmg)
 
 * Upgrades
   - [Docker 18.09.3](https://github.com/docker/docker-ce/releases/tag/v18.09.3)
@@ -795,22 +622,12 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 2.0.2.1 2019-02-15
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/31274/Docker.dmg)
 
 * Upgrades
   - [Docker 18.09.2](https://github.com/docker/docker-ce/releases/tag/v18.09.2), fixes [CVE-2019-5736](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736)
 
 ## Docker Community Edition 2.0.2.0 2019-02-06
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/30972/Docker.dmg)
 
 * Upgrades
   - [Docker Compose 1.24.0-rc1](https://github.com/docker/compose/releases/tag/1.24.0-rc1)
@@ -827,11 +644,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ## Docker Community Edition 2.0.1.0 2019-01-11
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/30090/Docker.dmg)
 
 * Upgrades
   - [Docker 18.09.1](https://github.com/docker/docker-ce/releases/tag/v18.09.1)
@@ -853,11 +665,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 2.0.0.0-mac82 2018-12-07
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/29268/Docker.dmg)
 
 * Upgrades
   - [Docker compose 1.23.2](https://github.com/docker/compose/releases/tag/1.23.2)
@@ -865,11 +672,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 2.0.0.0-mac77 2018-11-14
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/28700/Docker.dmg)
 
 * Upgrades
   - [Docker 18.09.0](https://github.com/docker/docker-ce-packaging/releases/tag/v18.09.0)
@@ -884,11 +686,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 2.0.0.0-beta1-mac75 2018-09-14
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/27117/Docker.dmg)
 
 * Upgrades
   - [Docker 18.09.0-ce-beta1](https://github.com/docker/docker-ce/releases/tag/v18.09.0-ce-beta1)
@@ -906,11 +703,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.06.1-ce-mac74 2018-08-29
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/26766/Docker.dmg)
 
 * Upgrades
   - [Docker 18.06.1-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.1-ce)
@@ -920,11 +712,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.06.0-ce-mac69 2018-07-25
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/26398/Docker.dmg)
 
 * Upgrades
   - [Docker 18.06.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.06.0-ce)
@@ -935,11 +722,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.06.0-ce-rc3-mac68 2018-07-19
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/26342/Docker.dmg)
 
 * Upgrades
   - [Docker 18.06.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.06.0-ce-rc3)
@@ -959,11 +741,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.05.0-ce-mac67 2018-06-07
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/25042/Docker.dmg)
 
 * Upgrades
   - [LinuxKit v0.4](https://github.com/linuxkit/linuxkit/releases/tag/v0.4)
@@ -980,11 +757,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.05.0-ce-mac66 2018-05-17
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/24545/Docker.dmg)
 
 * Upgrades
   - [Docker 18.05.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce)
@@ -1004,11 +776,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.05.0-ce-rc1-mac63 2018-04-26
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/24246/Docker.dmg)
 
 * Upgrades
   - [Docker 18.05.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.05.0-ce-rc1)
@@ -1022,11 +789,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.04.0-ce-mac62 2018-04-12
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23965/Docker.dmg)
 
 * Upgrades
   - [Docker 18.04.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.04.0-ce)
@@ -1034,11 +796,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.04.0-ce-rc2-mac61 2018-04-09
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23890/Docker.dmg)
 
 * Upgrades
   - [Docker 18.04.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.04.0-ce-rc2)
@@ -1052,11 +809,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.03.0-ce-mac58 2018-03-26
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23607/Docker.dmg)
 
 * Upgrades
   - [Docker 18.03.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce)
@@ -1064,11 +816,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.03.0-ce-rc4-mac57 2018-03-15
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23352/Docker.dmg)
 
 * Upgrades
   - [Docker 18.03.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc4)
@@ -1080,11 +827,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.03.0-ce-rc3-mac56 2018-03-13
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23287/Docker.dmg)
 
 * Upgrades
   - [Docker 18.03.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc3)
@@ -1099,11 +841,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.03.0-ce-rc1-mac54 2018-02-27
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/23022/Docker.dmg)
 
 * Upgrades
   - [Docker 18.03.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.03.0-ce-rc1)
@@ -1121,11 +858,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.02.0-ce-mac53 2018-02-09
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22617/Docker.dmg)
 
 * Upgrades
   - [Docker 18.02.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce)
@@ -1138,11 +870,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.02.0-ce-rc2-mac51 2018-02-02
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22446/Docker.dmg)
 
 * Upgrades
   - [Docker 18.02.0-ce-rc2](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc2)
@@ -1156,11 +883,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.02.0-ce-rc1-mac50 2018-01-26
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22256/Docker.dmg)
 
 * Upgrades
   - [Docker 18.02.0-ce-rc1](https://github.com/docker/docker-ce/releases/tag/v18.02.0-ce-rc1)
@@ -1172,11 +894,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 18.01.0-ce-mac48 2018-01-19
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/22004/Docker.dmg)
 
 * Upgrades
   - [Docker 18.01.0-ce](https://github.com/docker/docker-ce/releases/tag/v18.01.0-ce)
@@ -1201,11 +918,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 17.12.0-ce-mac45 2018-01-05
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/21669/Docker.dmg)
 
 * Upgrades
   - [Docker 17.12.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce)
@@ -1221,11 +933,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 17.12.0-ce-rc4-mac44 2017-12-21
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/21438/Docker.dmg)
 
 * Upgrades
   - [Docker 17.12.0-ce-rc4](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc4)
@@ -1237,11 +944,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 17.12.0-ce-rc3-mac43 2017-12-15
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/21270/Docker.dmg)
 
 * Upgrades
   - [Docker 17.12.0-ce-rc3](https://github.com/docker/docker-ce/releases/tag/v17.12.0-ce-rc3)
@@ -1268,11 +970,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 ### Docker Community Edition 17.11.0-ce-mac40 2017-11-22
 
-> Download Docker Desktop
->
-> 
->
-> [Download for Mac with Intel chip](https://download.docker.com/mac/edge/20561/Docker.dmg)
 
 * Upgrades
   - [Docker 17.11.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.11.0-ce)
@@ -1315,12 +1012,6 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 
 
 ### Docker Community Edition 17.10.0-ce-mac36 2017-10-24
-
-> Download Docker Desktop
->
-> 
->
-> [Download](https://download.docker.com/mac/edge/19824/Docker.dmg)
 
 * Upgrades
   - [Docker 17.10.0-ce](https://github.com/docker/docker-ce/releases/tag/v17.10.0-ce)

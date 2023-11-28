@@ -6,7 +6,7 @@
 {{ $firstSection := (index ($scratch.GetSortedMapValues "sections") 0).title }}
 
 {{/* Render the top-nav in sidebar for small screens */}}
-<nav class="py-4 hidden gap-4 pl-3 md:flex flex-col justify-evenly">
+<nav class="text-sm py-4 hidden gap-4 pl-4 md:flex flex-col justify-evenly">
   <div class="text-gray-light dark:text-gray-dark">Main sections</div>
   {{ range site.Menus.main }}
   <div class="pl-2 underline-offset-8 decoration-2 hover:underline decoration-blue-light dark:decoration-blue-dark hover:opacity-75
@@ -19,8 +19,8 @@
 </nav>
 {{ if $firstSection }}
 <hr>
-<nav id="sectiontree" class="w-[300px] md:w-full flex flex-col gap-2">
-  <div class="hidden md:block pl-3 pt-4 text-gray-light dark:text-gray-dark">This section</div>
+<nav id="sectiontree" class="text-sm w-[300px] md:w-full flex flex-col gap-2 px-3">
+  <div class="hidden md:block pt-4 text-gray-light dark:text-gray-dark">This section</div>
   {{/* The current page is in the table of contents */}}
   <ul>
     {{/* Walk the toc.yaml nodes under the current main section */}}
@@ -37,12 +37,12 @@
 {{ if .entry.sectiontitle }}
 {{/* .entry is a section */}}
 <li x-data="{ expanded: false }" x-init="expanded = !!$el.querySelector('a[aria-current]')" :data-expanded="expanded">
-  <button @click="expanded = ! expanded" class="sidebar-hover w-full flex items-center justify-between pr-3">
-    <span class="pl-3 py-2 truncate">{{ markdownify .entry.sectiontitle }}</span>
-    <span class="material-symbols-rounded -my-1 md:text-[28px]" x-text="expanded ? 'expand_more' : 'chevron_right'">
+  <button @click="expanded = ! expanded" class="rounded px-4 sidebar-hover w-full flex items-center justify-between">
+    <span class="py-2 truncate">{{ markdownify .entry.sectiontitle }}</span>
+    <span class="material-symbols-rounded -my-1 md:text-[28px]" x-text="expanded ? 'expand_less' : 'expand_more'">
     </span>
   </button>
-  <ul x-show="expanded" class="ml-3 md:ml-[21px]">
+  <ul x-show="expanded" x-collapse class="ml-3 md:ml-[21px]">
     {{ range .entry.section }}
     {{ template "tocRender" (dict "entry" . "ctx" $ctx) }}
     {{ end }}
@@ -51,13 +51,12 @@
 {{ else }}
 {{/* .entry is a page */}}
 {{ $isCurrent := eq (urls.Parse $ctx.Permalink).Path .entry.path }}
-<li {{ if $isCurrent }} class="pl-3 box-border border-l-4 border-blue-light
-          dark:border-blue-dark sidebar-hover bg-blue-light-200
-          dark:bg-blue-dark-100" {{ else }} class="pl-3 sidebar-hover" {{ end }}>
-  <span class="flex items-center">
-    <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate hover:font-medium"
-      href="{{ .entry.path }}" title="{{ markdownify .entry.title }}">{{ markdownify .entry.title }}</a>
-  </span>
+<li class="pl-4 sidebar-hover rounded
+  {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
+  <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
+      href="{{ .entry.path }}" title="{{ markdownify .entry.title }}"
+      ><span>{{ markdownify .entry.title }}</span>
+  </a>
 </li>
 {{ end }}
 {{ end }}

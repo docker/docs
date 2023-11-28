@@ -21,16 +21,16 @@ grid:
   link: /compose/release-notes
 - title: Understand key features of Compose
   description: Understand its key features and explore common use cases.
-  icon: help
+  icon: category
   link: /compose/features-uses/
 - title: Explore the Compose file reference
   description: Find information on defining services, networks, and volumes for a
     Docker application.
-  icon: all_inbox
+  icon: feature_search
   link: /compose/compose-file
 - title: Browse common FAQs
   description: Explore general FAQs and find out how to give feedback.
-  icon: sms
+  icon: help
   link: /compose/faq
 aliases:
 - /compose/cli-command/

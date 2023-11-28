@@ -1,7 +1,7 @@
 ---
-title: Troubleshoot the Docker daemon
-description: Configuring and troubleshooting the Docker daemon
-keywords: docker, daemon, configuration, troubleshooting
+title: Troubleshooting the Docker daemon
+description: Learn how to troubleshoot errors and misconfigurations in the Docker daemon
+keywords: docker, daemon, configuration, troubleshooting, error, fail to start
 ---
 
 This page describes how to troubleshoot and debug the daemon if you run into
@@ -29,9 +29,11 @@ If you see an error similar to this one and you are starting the daemon manually
 with flags, you may need to adjust your flags or the `daemon.json` to remove the
 conflict.
 
-> **Note**: If you see this specific error, continue to the
-> [next section](#use-the-hosts-key-in-daemonjson-with-systemd) for a
-> workaround.
+> **Note**
+>
+> If you see this specific error, continue to the
+> [next section](#use-the-hosts-key-in-daemonjson-with-systemd)
+> for a workaround.
 
 If you are starting Docker using your operating system's init scripts, you may
 need to override the defaults in these scripts in ways that are specific to the
@@ -39,7 +41,7 @@ operating system.
 
 ### Use the hosts key in daemon.json with systemd
 
-One notable example of a configuration conflict that is difficult to
+One notable example of a configuration conflict that's difficult to
 troubleshoot is when you want to specify a different daemon address from the
 default. Docker listens on a socket by default. On Debian and Ubuntu systems
 using `systemd`, this means that a host flag `-H` is always used when starting
@@ -48,9 +50,9 @@ configuration conflict (as in the above message) and Docker fails to start.
 
 To work around this problem, create a new file
 `/etc/systemd/system/docker.service.d/docker.conf` with the following contents,
-to remove the `-H` argument that is used when starting the daemon by default.
+to remove the `-H` argument that's used when starting the daemon by default.
 
-```none
+```systemd
 [Service]
 ExecStart=
 ExecStart=/usr/bin/dockerd
@@ -59,18 +61,20 @@ ExecStart=/usr/bin/dockerd
 There are other times when you might need to configure `systemd` with Docker,
 such as [configuring a HTTP or HTTPS proxy](systemd.md#httphttps-proxy).
 
-> **Note**: If you override this option and then do not specify a `hosts` entry
-> in the `daemon.json` or a `-H` flag when starting Docker manually, Docker
-> fails to start.
+> **Note**
+>
+> If you override this option without specifying a `hosts` entry in the
+> `daemon.json` or a `-H` flag when starting Docker manually, Docker fails to
+> start.
 
 Run `sudo systemctl daemon-reload` before attempting to start Docker. If Docker
-starts successfully, it is now listening on the IP address specified in the
+starts successfully, it's now listening on the IP address specified in the
 `hosts` key of the `daemon.json` instead of a socket.
 
 <!-- prettier-ignore -->
 > **Important**
 > 
-> Setting `hosts` in the `daemon.json` is not supported on Docker
+> Setting `hosts` in the `daemon.json` isn't supported on Docker
 > Desktop for Windows or Docker Desktop for Mac.
 { .important }
 

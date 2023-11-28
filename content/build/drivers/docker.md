@@ -1,9 +1,12 @@
 ---
 title: Docker driver
+description: |
+  The Docker driver is the default driver.
+  It uses the BuildKit bundled with the Docker Engine.
 keywords: build, buildx, driver, builder, docker
 aliases:
-- /build/buildx/drivers/docker/
-- /build/building/drivers/docker/
+  - /build/buildx/drivers/docker/
+  - /build/building/drivers/docker/
 ---
 
 The Buildx Docker driver is the default driver. It uses the BuildKit server

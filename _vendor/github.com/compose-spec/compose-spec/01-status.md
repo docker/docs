@@ -1,8 +1,8 @@
-## Status of this document
+# Status of this document
 
 This document specifies the Compose file format used to define multi-containers applications. Distribution of this document is unlimited.
 
-### Requirements and optional attributes
+## Requirements and optional attributes
 
 The Compose specification includes properties designed to target a local [OCI](https://opencontainers.org/) container runtime,
 exposing Linux kernel specific configuration options, but also some Windows container specific properties. It is also designed for cloud platform features related to resource placement on a cluster, replicated application distribution, and scalability.

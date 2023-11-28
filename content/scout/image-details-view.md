@@ -6,17 +6,11 @@ description: The Docker Scout image detail view analyzes images to show their he
   layers, packages, and vulnerabilities
 ---
 
-{{< include "scout-early-access.md" >}}
-
 The image details view shows a breakdown of the Docker Scout analysis. You can
-access the image view from within Docker Desktop and from the image tag
-page on Docker Hub. The view provides a breakdown of the image hierarchy (base
-images), image layers, packages, and vulnerabilities.
-
-The image view lets you inspect the composition of an image from different
-perspectives. The view displays vulnerabilities and packages that an image
-contains. You can choose whether you want to see data for the image as a whole,
-or for a specific base image or layer.
+access the image view from the Docker Scout Dashboard, the Docker Desktop
+**Images** view, and from the image tag page on Docker Hub. The image details
+show a breakdown of the image hierarchy (base images), image layers, packages,
+and vulnerabilities.
 
 ![The image details view in Docker Desktop](./images/dd-image-view.png)
 
@@ -26,15 +20,14 @@ in this SBOM to query for matching Common Vulnerabilities and Exposures (CVEs) i
 
 ## Image hierarchy
 
-The image you inspect may have one or more base images represented under **Image hierarchy**.
-This means the author of the image used other images as starting
-points when building the image. Often these base images are either operating
-system images such as Debian, Ubuntu, and Alpine, or programming language images
-such as PHP, Python, and Java.
+The image you inspect may have one or more base images represented under
+**Image hierarchy**. This means the author of the image used other images as
+starting points when building the image. Often these base images are either
+operating system images such as Debian, Ubuntu, and Alpine, or programming
+language images such as PHP, Python, and Java.
 
-Selecting each image in the chain
-lets you see which layers originate from each base image. Selecting the **ALL**
-row reselects all the layers and base images for the entire image.
+Selecting each image in the chain lets you see which layers originate from each
+base image. Selecting the **ALL** row selects all layers and base images.
 
 One or more of the base images may have updates available, which may include
 updated security patches that remove vulnerabilities from your image. Any base
@@ -125,8 +118,8 @@ requires you to update the Dockerfile and re-build the image.
 
 #### Refresh base image
 
-This tab shows if the selected base image tag is the latest available
-version, or if it's outdated.
+This tab shows if the selected base image tag is the latest available version,
+or if it's outdated.
 
 If the base image tag used to build the current image isn't the latest, then the
 delta between the two versions shows in this window. The delta information
@@ -142,8 +135,9 @@ run to re-build the image using the latest version.
 
 #### Change base image
 
-This tab shows different alternative tags that you can use, and
-outlines the benefits and disadvantages of each tag version. Selecting the base image shows recommended options for that tag.
+This tab shows different alternative tags that you can use, and outlines the
+benefits and disadvantages of each tag version. Selecting the base image shows
+recommended options for that tag.
 
 For example, if the image you're inspecting is using an old version of `debian`
 as a base image, it shows recommendations for newer and more secure versions

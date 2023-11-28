@@ -1,17 +1,16 @@
 ---
 title: Test before push with GitHub Actions
+description: Here's how you can validate an image, before pushing it to a registry
 keywords: ci, github actions, gha, buildkit, buildx, test
 ---
 
 In some cases, you might want to validate that the image works as expected
-before pushing it.
-
-The following workflow implements several steps to achieve this:
+before pushing it. The following workflow implements several steps to achieve
+this:
 
 1. Build and export the image to Docker
 2. Test your image
 3. Multi-platform build and push the image
-
 
 ```yaml
 name: ci
@@ -29,35 +28,28 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and export to Docker
-        uses: docker/build-push-action@v4
+      - name: Build and export to Docker
+        uses: docker/build-push-action@v5
         with:
           context: .
           load: true
           tags: ${{ env.TEST_TAG }}
-      -
-        name: Test
+      - name: Test
         run: |
           docker run --rm ${{ env.TEST_TAG }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v4
+      - name: Build and push
+        uses: docker/build-push-action@v5
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -65,10 +57,9 @@ jobs:
           tags: ${{ env.LATEST_TAG }}
 ```
 
-
 > **Note**
 >
-> This workflow doesn't actually build the `linux/amd64` image twice. The image
-> is built once, and the following steps uses the internal cache for from the
-> first `Build and push` step. The second `Build and push` step only builds
+> The `linux/amd64` image is only built once in this workflow. The image is
+> built once, and the following steps use the internal cache from the first
+> `Build and push` step. The second `Build and push` step only builds
 > `linux/arm64`.

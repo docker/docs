@@ -6,7 +6,7 @@ title: Service accounts
 
 > **Note**
 >
-> Service accounts requires a
+> Service accounts require a
 > [Docker Team, or Business subscription](../subscription/index.md).
 
 A service account is a Docker ID used for automated management of container images or containerized applications. Service accounts are typically used in automated workflows, and don't share Docker IDs with the members in the organization. Common use cases for service accounts include mirroring content on Docker Hub, or tying in image pulls from your CI/CD process.
@@ -31,11 +31,12 @@ Refer to the following table for details on the Enhanced Service Account add-on 
 
 ## How a pull is defined
 
+- Pulls are accounted to the user doing the pull, not to the owner of the image.
 - A pull request is defined as up to two `GET` requests on registry manifest URLs (`/v2/*/manifests/*`).
 - A normal image pull makes a single manifest request.
-- A pull request for a multi-arch image makes two manifest requests.
+- A pull request for a multi-arch image makes two manifest requests. 
 - `HEAD` requests aren't counted.
-- Limits are applied based on the user doing the pull, and not based on the image being pulled or its owner.
+- Some images are unlimited through our [Docker Sponsored Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/) and [Docker Verified Publisher](https://www.docker.com/partners/programs) programs.
 
 ## Creating a new service account
 
@@ -45,16 +46,16 @@ To create a new service account for your Team account:
 2. Create a [team](manage-a-team.md) in your organization and grant it read-only access to your private repositories.
 3. Add the new Docker ID to your [organization](orgs.md).
 4. Add the new Docker ID  to the [team](manage-a-team.md) you created earlier.
-5. Create a new [personal access token (PAT)](/access-tokens.md) from the user account and use it for CI.
+5. Create a new [personal access token (PAT)](access-tokens.md) from the user account and use it for CI.
 
 > **Note**
 >
-> If you want a read-only PAT just for your open-source repos, or to access
+> If you want a read-only PAT just for your open-source repositories, or to access
 official images and other public images, you don't have to grant any access permissions to the new Docker ID.
 
 ## Additional information
 
 Refer to the following topics for additional information:
 
-- [Mirroring Docker Hub](../registry/recipes/mirror.md)
-- [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates)
+- [Mirroring Docker Hub](./mirror.md)
+- [Docker pricing FAQs](https://www.docker.com/pricing/faq/)

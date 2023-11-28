@@ -1,12 +1,10 @@
 ---
 title: SBOM attestations
-keywords: build, attestations, sbom
-description: SBOM build attestations
+keywords: build, attestations, sbom, spdx, metadata, packages
+description: |
+  SBOM build attestations describe the contents of your image,
+  and the packages used to build it.
 ---
-
-> **Note**
->
-> This feature is supported in BuildKit version `>=0.11` and Buildx version `>=0.10`.
 
 Software Bill of Materials (SBOM) attestations describe what software artifacts
 an image contains, and artifacts used to create the image. Metadata included in
@@ -161,7 +159,7 @@ includes the information that Alpine Linux and Hugo were used to create the webs
 Building this image with the `local` exporter creates two JSON files:
 
 ```console
-$ docker buildx build \ 
+$ docker buildx build \
   --sbom=true \
   --output type=local,dest=out .
 $ ls -1 out | grep sbom
@@ -178,7 +176,6 @@ Using the `--format` option, you can specify a template for the output. All
 SBOM-related data is available under the `.SBOM` attribute. For example, to get
 the raw contents of an SBOM in SPDX format:
 
-
 ```console
 $ docker buildx imagetools inspect <namespace>/<image>:<version> \
     --format "{{ json .SBOM.SPDX }}"
@@ -188,11 +185,9 @@ $ docker buildx imagetools inspect <namespace>/<image>:<version> \
 }
 ```
 
-
 You can also construct more complex expressions using the full functionality
 of Go templates. For example, you can list all the installed packages and their
 version identifiers:
-
 
 ```console
 $ docker buildx imagetools inspect <namespace>/<image>:<version> \
@@ -203,7 +198,6 @@ base-files@11ubuntu5.6
 base-passwd@3.5.47
 ...
 ```
-
 
 ## SBOM generator
 
@@ -220,6 +214,12 @@ an image that implements the
 ```console
 $ docker buildx build --attest type=sbom,generator=<image> .
 ```
+
+> **Tip**
+>
+> The Docker Scout SBOM generator is available. See
+> [Docker Scout SBOMs](../../scout/sbom.md#attest).
+{ .tip }
 
 ## SBOM attestation example
 

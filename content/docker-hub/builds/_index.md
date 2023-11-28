@@ -49,7 +49,7 @@ when the tests succeed.
 
 5. Optional: Enable [autotests](automated-testing.md#enable-automated-tests-on-a-repository).
 
-6. Review the default **Build Rules**
+6. Review the default **Build Rules**.
 
     Build rules control what Docker Hub builds into images from the contents
     of the source code repository, and how the resulting images are tagged
@@ -231,7 +231,7 @@ Docker build system, add the [environment variable](index.md#environment-variabl
 `DOCKER_BUILDKIT=0`. Refer to the [BuildKit](../../build/buildkit/index.md)
 page for more information on BuildKit.
 
-## Autobuild for Teams
+## Autobuild for teams
 
 When you create an automated build repository in your own user account, you
 can start, cancel, and retry builds, and edit and delete your own repositories.

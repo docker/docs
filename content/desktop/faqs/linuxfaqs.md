@@ -6,7 +6,11 @@ aliases:
 - /desktop/linux/space/
 ---
 
-### What is the difference between Docker Desktop for Linux and Docker Engine
+### What is the difference between Docker Desktop for Linux and Docker Engine?
+
+Docker Desktop for Linux provides a user-friendly graphical interface that simplifies the management of containers and services. It includes Docker Engine as this is the core technology that powers Docker containers. Docker Desktop for Linux also comes with additional features like Docker Scout and Docker Extensions.
+
+### Can I have both Docker Desktop for Linux and Docker Engine installed on my machine?
 
 Docker Desktop for Linux and Docker Engine can be installed side-by-side on the
 same machine. Docker Desktop for Linux stores containers and images in an isolated
@@ -39,8 +43,8 @@ disable the Docker Engine service, and to prevent it from starting automatically
 $ sudo systemctl disable docker docker.socket containerd
 ```
 
-#### How do I switch between Docker Desktop and Docker Engine
-{ #context }
+#### How do I switch between Docker Desktop and Docker Engine?
+
 
 The Docker CLI can be used to interact with multiple Docker Engines. For example,
 you can use the same Docker CLI to control a local Docker Engine and to control
@@ -186,9 +190,9 @@ To move the disk image file to a different location:
 
 1. Select **Settings** then  **Advanced** from the **Resources** tab.
 
-2. In the **Disk image location** section, click **Browse** and choose a new location for the disk image.
+2. In the **Disk image location** section, select **Browse** and choose a new location for the disk image.
 
-3. Click **Apply & Restart** for the changes to take effect.
+3. Select **Apply & Restart** for the changes to take effect.
 
 Do not move the file directly in Finder as this can cause Docker Desktop to lose track of the file.
 
@@ -250,6 +254,6 @@ To reduce the maximum size of the disk image file:
 
 2. The **Disk image size** section contains a slider that allows you to change the maximum size of the disk image. Adjust the slider to set a lower limit.
 
-3. Click **Apply & Restart**.
+3. Select **Apply & Restart**.
 
 When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images will be lost.

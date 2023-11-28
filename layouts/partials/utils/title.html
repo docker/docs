@@ -3,8 +3,13 @@
   {{ $title = .LinkTitle }}
 {{ else }}
   {{ $title = index (findRE `# .*` .RawContent) 0 | strings.TrimLeft "# " }}
-  {{ if not $title }}
-    {{ with .File }}
+  {{ with .File }}
+    {{ with (index (site.Data.frontmatter) .Path) }}
+      {{ with .title }}
+        {{ $title = . }}
+      {{ end }}
+    {{ end }}
+    {{ if not $title }}
       {{ $title = strings.ReplaceRE "[-_]" " " .TranslationBaseName }}
     {{ end }}
   {{ end }}

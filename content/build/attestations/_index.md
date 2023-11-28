@@ -1,15 +1,10 @@
 ---
 title: Build attestations
-keywords: build, attestations, sbom, provenance
-description: 'Introduction to SBOM and provenance attestations with Docker Build;
-  what they are and why they exist
-
-  '
+keywords: build, attestations, sbom, provenance, metadata
+description: |
+  Introduction to SBOM and provenance attestations with Docker Build,
+  what they are, and why they exist
 ---
-
-> **Note**
->
-> This feature is supported in BuildKit version `>=0.11` and Buildx version `>=0.10`.
 
 Build attestations describe how an image was built, and what it contains. The
 attestations are created at build-time by BuildKit, and become attached to the
@@ -54,6 +49,19 @@ $ docker buildx build --sbom=true --provenance=true .
 
 > **Note**
 >
+> The default image store doesn't support attestations. If you're using the
+> default image store and you build an image using the default `docker` driver,
+> or using a different driver with the `--load` flag, the attestations are
+> lost.
+>
+> To make sure the attestations are preserved, you can:
+>
+> - Use a `docker-container` driver with the `--push` flag to push the image to
+>   a registry directly.
+> - Enable the [containerd image store](../../desktop/containerd.md).
+
+> **Note**
+>
 > Provenance attestations are enabled by default, with the `mode=min` option.
 > You can disable provenance attestations using the `--provenance=false` flag,
 > or by setting the [`BUILDX_NO_DEFAULT_ATTESTATIONS`](../building/env-vars.md#buildx_no_default_attestations) environment variable.
@@ -67,11 +75,8 @@ index in a manifest for the final image.
 
 ## Storage
 
-<!-- prettier-ignore -->
-BuildKit produces attestations in the
-[in-toto format](https://github.com/in-toto/attestation),
-as defined by the
-[in-toto framework](https://in-toto.io/),
+BuildKit produces attestations in the [in-toto format](https://github.com/in-toto/attestation),
+as defined by the [in-toto framework](https://in-toto.io/),
 a standard supported by the Linux Foundation.
 
 Attestations attach to images as a manifest in the image index. The data records
@@ -149,7 +154,6 @@ attestation.
 }
 ```
 
-<!-- prettier-ignore -->
 To deep-dive into the specifics about how attestations are stored, see
 [Image Attestation Storage (BuildKit)](attestation-storage.md).
 

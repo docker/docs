@@ -18,7 +18,7 @@ to pin to Buildx v0.10.0:
 
 ```yaml
 - name: Set up Docker Buildx
-  uses: docker/setup-buildx-action@v2
+  uses: docker/setup-buildx-action@v3
   with:
     version: v0.10.0
 ```
@@ -28,7 +28,7 @@ To pin to a specific version of BuildKit, use the `image` option in the
 
 ```yaml
 - name: Set up Docker Buildx
-  uses: docker/setup-buildx-action@v2
+  uses: docker/setup-buildx-action@v3
   with:
     driver-opts: image=moby/buildkit:v0.11.0
 ```
@@ -49,17 +49,14 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
         with:
           buildkitd-flags: --debug
-      -
-        name: Build
-        uses: docker/build-push-action@v4
+      - name: Build
+        uses: docker/build-push-action@v5
         with:
           context: .
 ```
@@ -89,12 +86,10 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
         with:
           config-inline: |
             [registry."docker.io"]
@@ -128,12 +123,10 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
         with:
           config: .github/buildkitd.toml
 ```
@@ -152,7 +145,7 @@ intrinsically linked to GitHub Actions: you can only use strings in the input
 fields:
 
 | Name              | Type   | Description                                                                                                                                                                                                                                                             |
-|-------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `name`            | String | [Name of the node](../../../engine/reference/commandline/buildx_create.md#node). If empty, it's the name of the builder it belongs to, with an index number suffix. This is useful to set it if you want to modify/remove a node in an underlying step of you workflow. |
 | `endpoint`        | String | [Docker context or endpoint](../../../engine/reference/commandline/buildx_create.md#description) of the node to add to the builder                                                                                                                                      |
 | `driver-opts`     | List   | List of additional [driver-specific options](../../../engine/reference/commandline/buildx_create.md#driver-opt)                                                                                                                                                         |
@@ -161,7 +154,6 @@ fields:
 
 Here is an example using remote nodes with the [`remote` driver](../../drivers/remote.md)
 and [TLS authentication](#tls-authentication):
-
 
 ```yaml
 name: ci
@@ -173,9 +165,8 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
         with:
           driver: remote
           endpoint: tcp://oneprovider:1234
@@ -196,7 +187,6 @@ jobs:
           BUILDER_NODE_2_AUTH_TLS_KEY: ${{ secrets.LINUXONE_KEY }}
 ```
 
-
 ## Authentication for remote builders
 
 The following examples show how to handle authentication for remote builders,
@@ -206,7 +196,6 @@ using SSH or TLS.
 
 To be able to connect to an SSH endpoint using the [`docker-container` driver](../../drivers/docker-container.md),
 you have to set up the SSH private key and configuration on the GitHub Runner:
-
 
 ```yaml
 name: ci
@@ -218,20 +207,17 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Set up SSH
+      - name: Set up SSH
         uses: MrSquaare/ssh-setup-action@523473d91581ccbf89565e12b40faba93f2708bd # v1.1.0
         with:
           host: graviton2
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           private-key-name: aws_graviton2
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
         with:
           endpoint: ssh://me@graviton2
 ```
-
 
 ### TLS authentication
 
@@ -246,7 +232,6 @@ certificates for the `tcp://`:
 
 The `<idx>` placeholder is the position of the node in the list of nodes.
 
-
 ```yaml
 name: ci
 
@@ -257,9 +242,8 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
         with:
           driver: remote
           endpoint: tcp://graviton2:1234
@@ -268,7 +252,6 @@ jobs:
           BUILDER_NODE_0_AUTH_TLS_CERT: ${{ secrets.GRAVITON2_CERT }}
           BUILDER_NODE_0_AUTH_TLS_KEY: ${{ secrets.GRAVITON2_KEY }}
 ```
-
 
 ## Standalone mode
 
@@ -287,16 +270,13 @@ jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
         with:
           driver: kubernetes
-      -
-        name: Build
+      - name: Build
         run: |
           buildx build .
 ```
@@ -315,7 +295,6 @@ hardware.
 For more information about remote builder, see [`remote` driver](../../drivers/remote.md)
 and the [append builder nodes example](#append-additional-nodes-to-the-builder).
 
-
 ```yaml
 name: ci
 
@@ -328,31 +307,24 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        uses: docker/setup-buildx-action@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
         id: builder1
-      -
-        uses: docker/setup-buildx-action@v2
+      - uses: docker/setup-buildx-action@v3
         id: builder2
-      -
-        name: Builder 1 name
+      - name: Builder 1 name
         run: echo ${{ steps.builder1.outputs.name }}
-      -
-        name: Builder 2 name
+      - name: Builder 2 name
         run: echo ${{ steps.builder2.outputs.name }}
-      -
-        name: Build against builder1
-        uses: docker/build-push-action@v4
+      - name: Build against builder1
+        uses: docker/build-push-action@v5
         with:
           builder: ${{ steps.builder1.outputs.name }}
           context: .
           target: mytarget1
-      -
-        name: Build against builder2
-        uses: docker/build-push-action@v4
+      - name: Build against builder2
+        uses: docker/build-push-action@v5
         with:
           builder: ${{ steps.builder2.outputs.name }}
           context: .

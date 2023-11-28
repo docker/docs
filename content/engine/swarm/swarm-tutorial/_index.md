@@ -90,9 +90,9 @@ additional hardening is suggested:
 * [Customize the default ingress network](../networking.md) to use encryption
 * Only accept encrypted packets on the Data Path Port:
 
-```
+```bash
 # Example iptables rule (order and other tools may require customization)
-iptables -I INPUT -m udp —-dport 4789 -m policy --dir in --pol none -j DROP
+iptables -I INPUT -m udp --dport 4789 -m policy --dir in --pol none -j DROP
 ```
 
 ## What's next?

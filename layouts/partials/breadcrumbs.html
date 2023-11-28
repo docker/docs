@@ -1,0 +1,18 @@
+{{ $scratch := partialCached "utils/tocparser.html" . . }}
+{{ $ctx := . }}
+
+
+<nav id="breadcrumbs" class="py-4 gap-4 flex items-center overflow-hidden text-gray-light dark:text-gray-dark">
+  {{ with ($scratch.GetSortedMapValues "sections") }}
+    {{ range $i, $e := . }}
+      {{- if $i -}}
+        <span>/</span>
+      {{- end -}}
+      <a href="{{ $e.path }}" class="link whitespace-nowrap">{{ markdownify $e.title }}</a>
+    {{- end -}}
+  {{- end -}}
+  {{- with $scratch.Get "lastsection" -}}
+  <span>/</span>
+  <span>{{ markdownify .title }}</span>
+  {{- end -}}
+</nav>
