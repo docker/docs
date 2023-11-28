@@ -9,17 +9,10 @@
 # - There is no maximum line length, for ease of editing and pretty diffs.
 # - operationIds are in the format "NounVerb", with a singular noun.
 
-swagger: "2.0"
-schemes:
-  - "http"
-  - "https"
-produces:
-  - "application/json"
-  - "text/plain"
-consumes:
-  - "application/json"
-  - "text/plain"
-basePath: "/v1.43"
+openapi: 3.0.0
+servers:
+  - url: http://localhost/v1.43
+
 info:
   title: "Docker Engine API"
   version: "1.43"

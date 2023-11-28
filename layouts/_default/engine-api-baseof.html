@@ -1,38 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Docker Engine API {{ .File.BaseFileName }} Reference</title>
-    <!-- needed for adaptive design -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description"
-        content="Reference documentation and Swagger (OpenAPI) specification for the {{ .File.BaseFileName }} version of the API served by Docker Engine." />
     <meta charset="utf-8" />
-    <!-- favicon -->
-    <meta name="msapplication-TileImage" content="{{ site.BaseURL }}/assets/favicons/docs@2x.ico" />
-    <meta property="og:image" content="{{ site.BaseURL }}/assets/favicons/docs@2x.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1" />
     <link rel="apple-touch-icon" type="image/x-icon" href="{{ site.BaseURL }}/assets/favicons/docs@2x.ico"
         sizes="129x128" />
     <link rel="icon" type="image/x-icon" href="{{ site.BaseURL }}/assets/favicons/docs@2x.ico" sizes="129x128" />
-    <!-- make the latest API version the canonical page as that's what we want users to be using mostly -->
-    <link rel="canonical" href="{{ site.BaseURL }}/engine/api/v{{ site.Params.latest_engine_api_version }}/" />
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .menu-content>div:first-child {
-            background-color: #086dd7;
-            padding: 16px;
-        }
+      body {
+        margin: 0;
+      }
     </style>
-</head>
-
-<body>
-    <redoc spec-url="/reference/engine/{{ .File.BaseFileName }}.yaml" hide-hostname="true" suppress-warnings="true"
-        lazy-rendering></redoc>
-    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
-</body>
-
+  </head>
+  <body>
+    <script
+      id="api-reference"
+      data-url="/reference/engine/{{ .File.BaseFileName }}.yaml"
+      data-proxy-url="https://api.scalar.com/request-proxy"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+  </body>
 </html>
