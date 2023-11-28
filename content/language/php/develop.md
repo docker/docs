@@ -24,30 +24,27 @@ To do this for the sample application, you'll need to do the following:
 
 ### Update the Dockerfile to install extensions
 
-To install PHP extensions, you need to update the `Dockerfile`. The following is the updated `Dockerfile` that installs the `pdo` and `pdo_pgsql` extensions.
+To install PHP extensions, you need to update the `Dockerfile`. Open your Dockerfile in a IDE or text editor and then update the contents. The following is the updated `Dockerfile` that installs the `pdo` and `pdo_pgsql` extensions.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
 
 FROM composer:lts as deps
-
 WORKDIR /app
-
 RUN --mount=type=bind,source=composer.json,target=composer.json \
     --mount=type=bind,source=composer.lock,target=composer.lock \
     --mount=type=cache,target=/tmp/cache \
     composer install --no-dev --no-interaction
 
 FROM php:8.2-apache as final
-
 RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-
 COPY --from=deps app/vendor/ /var/www/html/vendor
 COPY ./src /var/www/html
-
 USER www-data
 ```
+
+For more details about installing PHP extensions, see the [Official Docker Image for PHP](https://hub.docker.com/_/php).
 
 ### Update the compose.yaml file to add a db and persist data
 
@@ -56,7 +53,7 @@ already contains commented-out instructions for a PostgreSQL database and volume
 
 Open the `src/database.php` file in an IDE or text editor. You'll notice that it reads environment variables in order to connect to the database.
 
-In the `compose.yaml`` file, you'll need to do update the following:
+In the `compose.yaml` file, you'll need to update the following:
 1. Uncomment the database instructions.
 2. Add a secret to the server service to pass in the database password.
 3. Add the database connection environment variables to the server service.
@@ -136,6 +133,8 @@ You should now have the following in your `docker-php-sample` directory.
 │ ├── .dockerignore
 │ ├── .gitignore
 │ ├── compose.yaml
+│ ├── composer.json
+│ ├── composer.lock
 │ ├── Dockerfile
 │ ├── README.Docker.md
 │ └── README.md
@@ -160,7 +159,7 @@ $ docker compose rm
 $ docker compose up --build
 ```
 
-Refresh [http://localhost:9000/database.php](http://localhost:9000/database.php) in your browser and verify that the previous count still exists.
+Refresh [http://localhost:9000/database.php](http://localhost:9000/database.php) in your browser and verify that the previous count still exists. Without a volume, the database data wouldn't persist after you remove the container.
 
 Press `ctrl+c` in the terminal to stop your application.
 
@@ -237,25 +236,20 @@ Press `ctrl+c` in the terminal to stop Compose Watch. Run `docker compose down` 
 
 At this point, when you run your containerized application, Composer isn't installing the dev dependencies. While this small image is good for production, it lacks the tools and dependencies you may need when developing and it doesn't include the `tests` directory. You can use multi-stage builds to build stages for both development and production in the same Dockerfile. For more details, see [Multi-stage builds](../../build/building/multi-stage.md).
 
-While you probably don't need a multi-stage build to optimize a development image, the example below uses it so that you can see how both the development stages and the production stages can be built while sharing some common stages.
-
-
 The following is the updated Dockerfile.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM composer:lts as deps
-
+FROM composer:lts as prod-deps
 WORKDIR /app
-
-FROM deps as prod-deps
 RUN --mount=type=bind,source=./composer.json,target=composer.json \
     --mount=type=bind,source=./composer.lock,target=composer.lock \
     --mount=type=cache,target=/tmp/cache \
     composer install --no-dev --no-interaction
 
-FROM deps as dev-deps
+FROM composer:lts as dev-deps
+WORKDIR /app
 RUN --mount=type=bind,source=./composer.json,target=composer.json \
     --mount=type=bind,source=./composer.lock,target=composer.lock \
     --mount=type=cache,target=/tmp/cache \
@@ -269,7 +263,6 @@ FROM base as development
 COPY ./tests /var/www/html/tests
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY --from=dev-deps app/vendor/ /var/www/html/vendor
-USER www-data
 
 FROM base as final
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -329,7 +322,19 @@ secrets:
     file: db/password.txt
 ```
 
-Your containerized application will now install the dev dependencies. Continue to the next section to learn how you can run tests.
+Your containerized application will now install the dev dependencies.
+
+Run the following command to start your application.
+
+```console
+$ docker compose up --build
+```
+
+Open a browser and view the application at [http://localhost:9000/hello.php](http://localhost:9000/hello.php). You should still see the simple "Hello, Docker!" application.
+
+Press `ctrl+c` in the terminal to stop your application.
+
+While the application appears the same, you can now make use of the dev dependencies. Continue to the next section to learn how you can run tests using Docker.
 
 ## Summary
 
@@ -340,6 +345,7 @@ Related information:
  - [Compose file reference](/compose/compose-file/)
  - [Compose file watch](../../compose/file-watch.md)
  - [Multi-stage builds](../../build/building/multi-stage.md)
+ - [Official Docker Image for PHP](https://hub.docker.com/_/php)
 
 ## Next steps
 

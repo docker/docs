@@ -63,7 +63,10 @@ directory.
 │ ├── src/
 │ ├── tests/
 │ ├── .dockerignore
+│ ├── .gitignore
 │ ├── compose.yaml
+│ ├── composer.json
+│ ├── composer.lock
 │ ├── Dockerfile
 │ ├── README.Docker.md
 │ └── README.md

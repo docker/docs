@@ -151,7 +151,7 @@ Guides:
     - title: "Configure CI/CD"
       path: /language/php/configure-ci-cd/
     - title: "Test your deployment"
-      path: /language/rust/deploy/
+      path: /language/php/deploy/
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
