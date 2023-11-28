@@ -25,6 +25,7 @@ The following container registry integrations are available:
 
 - [Artifactory](./registry/artifactory.md)
 - [Amazon Elastic Container Registry](./registry/ecr.md)
+- [Azure Container Registry](./registry/acr.md) {{< badge color=violet text=Beta >}}
 
 ### Continuous Integration
 

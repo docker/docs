@@ -1402,6 +1402,8 @@ Manuals:
           path: /scout/integrations/registry/artifactory/
         - title: Elastic Container Registry
           path: /scout/integrations/registry/ecr/
+        - title: Azure Container Registry
+          path: /scout/integrations/registry/acr/
       - sectiontitle: Continuous integration
         section:
         - title: GitHub Actions
