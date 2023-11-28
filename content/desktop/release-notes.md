@@ -26,17 +26,16 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.26.0
 
-{{< release-date date="2023-11-30" >}}
+{{< release-date date="2023-12-04" >}}
 
-{{< desktop-install all=true version="4.26.0" build_path="/TBD/" >}}
+{{< desktop-install all=true version="4.26.0" build_path="/130397/" >}}
 
 ### New
 
-- Organization admins can now control the access to Beta and Experimental features via Docker Desktop's [Features in development](https://docs.docker.com/desktop/settings/mac/#features-in-development).
-- Improved the text and position of the startup options in Settings.
-- Introduced four new version update states in the footer: user call-to-action for update and restart, including download progress.
-- Docker init (Beta) now supports PHP with Apache + Composer.
-- Builds view is now GA. You can now inspect builds, troubleshoot errors, and optimize build speed.
+- Administrators can now control access to beta and experimental features in the **Features in development** tab with [Settings Management](hardened-desktop/settings-management/configure.md).
+- Introduced four new version update states in the footer.
+- `docker init` (Beta) now supports PHP with Apache + Composer.
+- The [**Builds** view](use-desktop/builds.md) is now GA. You can now inspect builds, troubleshoot errors, and optimize build speed.
 
 ### Upgrades
 
@@ -59,7 +58,9 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For all platforms
 
 - You can now provide feedback from the commandline by using `docker feedback`.
-- Fixed a bug  where enabling containerd image store and wasm simultaneously would not enable wasm.
+- Improved the text and position of the startup options in the **General** settings tab.
+- Redesigned the dashboard's header bar, added links to other Docker resources, improved display of account information.
+- Fixed a bug  where enabling the containerd image store and Wasm simultaneously would not enable Wasm.
 - containerd integration:
   - Fixed `docker push/pull` authentication not being sent to non-DockerHub registries in cases where `ServerAddress` is not provided.
   - Fixed `docker history` reporting wrong IDs and tags.
@@ -72,28 +73,26 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Docker Init:
   - Improved cross-compilation in Dockerfiles for Golang and Rust.
   - Improved caching in Dockerfile for ASP.NET Core.
-- You can now switch between different contexts from the UI.
 - Docker Desktop now gives more detailed information about pending updates in the dashboard footer.
-- [Settings Management](hardened-desktop/settings-management/index.md) now lets you turn off Experimental and Beta features for your organisation.
-- Fixed a bug in Enhanced Container Isolation mode where "docker run --init" was failing.
+- Fixed a bug in Enhanced Container Isolation mode where `docker run --init` was failing.
 - Fixed a bug where a notification prompting the user to download a new version of Docker Desktop remained visible after the user started downloading the new version.
 - Added a notification that indicates when Docker Desktop is installing a new version.
-- Fixed a bug where the cursor changed to pointer when the user hovered over a notification that has no call to action.
+- Fixed a bug where the cursor changed to a pointer when the user hovered over a notification that has no call to action.
 
 #### For Mac
 
 - Fixed an issue where Rosetta would not work with PHP. Fixes [docker/for-mac#6773](https://github.com/docker/for-mac/issues/6773)  and [docker/for-mac#7037](https://github.com/docker/for-mac/issues/7037).
-- Fixed several issues related to Rosetta not work. Fixed [[docker/for-mac#6973](https://github.com/docker/for-mac/issues/6973), [[docker/for-mac#7009](https://github.com/docker/for-mac/issues/7009), [[docker/for-mac#7068](https://github.com/docker/for-mac/issues/7068) and [[docker/for-mac#7075](https://github.com/docker/for-mac/issues/7075)
-- Improved performance of NodeJS under Rosetta.
-- Fixed the `Unable to open /proc/self/exe` Rosetta errors.
-- Fixed a bug were the setting `Start Docker Desktop when you log` would not work. Fixes [docker/for-mac#7052](https://github.com/docker/for-mac/issues/7052).
-- You can now use enable the use of Kernel networking path for UDP through the UI. Fixes [docker/for-mac#7008](https://github.com/docker/for-mac/issues/7008).
+- Fixed several issues related to Rosetta not working. Fixed [[docker/for-mac#6973](https://github.com/docker/for-mac/issues/6973), [[docker/for-mac#7009](https://github.com/docker/for-mac/issues/7009), [[docker/for-mac#7068](https://github.com/docker/for-mac/issues/7068) and [[docker/for-mac#7075](https://github.com/docker/for-mac/issues/7075)
+- Improved the performance of NodeJS under Rosetta.
+- Fixed the **Unable to open /proc/self/exe** Rosetta errors.
+- Fixed a bug were the setting **Start Docker Desktop when you sign in** would not work. Fixes [docker/for-mac#7052](https://github.com/docker/for-mac/issues/7052).
+- You can now enable the use of Kernel networking path for UDP through the UI. Fixes [docker/for-mac#7008](https://github.com/docker/for-mac/issues/7008).
 - Fixed a regression where the `uninstall` CLI tool was missing.
 
 #### For Windows
 
 - Added support for WSL mirrored mode networking (requires WSL `v2.0.4` and up).
-- Added missing signatures on DLL and VBS files
+- Added missing signatures on DLL and VBS files.
 
 ## 4.25.2
 
