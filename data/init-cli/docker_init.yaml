@@ -72,11 +72,12 @@ examples: |-
   Let's get started!
   
   ? What application platform does your project use?  [Use arrows to move, type to filter]
-  > Go - (detected) suitable for a Go server application
-    ASP.NET Core - suitable for an ASP.NET Core application
+  > PHP with Apache - (detected) suitable for a PHP web application
+    Go - (detected) suitable for a Go server application
     Python - suitable for a Python server application
     Node - suitable for a Node server application
     Rust - suitable for a Rust server application
+    ASP.NET Core - suitable for an ASP.NET Core application
     Other - general purpose starting point for containerizing your application
     Don't see something you need? Let us know!
     Quit
@@ -104,6 +105,8 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:3333
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
   
   ### Example of selecting Node
@@ -131,6 +134,8 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:8000
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
   
   ### Example of selecting Python
@@ -155,6 +160,8 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:8000
+  
+  Consult README.Docker.md for more information about using the generated files.
   ```
   
   ### Example of selecting Rust
@@ -178,6 +185,8 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:8000
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
   
   ### Example of selecting ASP.NET Core
@@ -202,11 +211,13 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:8000
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
 
   ### Example of selecting PHP with Apache
   
-  The following example shows the prompts that appear after selecting `PHP with Apache` and example input. The PHP with Apache template is suitable for both pure PHP applications and applications using Composer as a dependency manager.
+  The following example shows the prompts that appear after selecting `PHP with Apache` and example input. The PHP with Apache template is suitable for both pure PHP applications and applications using Composer as a dependency manager. After running `docker init`, you must manually add any PHP extensions that are required by your application to the Dockerfile.
   
   ```console
   ? What application platform does your project use? PHP with Apache
@@ -222,10 +233,14 @@ examples: |-
   ✔ Your Docker files are ready!
   
   Take a moment to review them and tailor them to your application.
+
+  If your application requires specific PHP extensions, you can follow the instructions in the Dockerfile to add them.
   
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:9000
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
 
   ### Example of selecting Other
@@ -245,5 +260,7 @@ examples: |-
   Take a moment to review them and tailor them to your application.
   
   When you're ready, start your application by running: docker compose up --build
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
 
