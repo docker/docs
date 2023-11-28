@@ -16,7 +16,7 @@ long: |-
     >
     > You can't recover overwritten files.
     > To back up an existing file before selecting to overwrite it, rename the file or copy it to another directory.
-    {: .warning}
+    { .warning }
   
   After running `docker init`, you can choose one of the following templates:
     
