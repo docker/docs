@@ -60,6 +60,7 @@ This utility will walk you through creating the following files with sensible de
   - .dockerignore
   - Dockerfile
   - compose.yaml
+  - README.Docker.md
 
 Let's get started!
 
@@ -79,6 +80,7 @@ directory.
 │ ├── .dockerignore
 │ ├── compose.yaml
 │ ├── Dockerfile
+│ ├── README.Docker.md
 │ └── README.md
 ```
 

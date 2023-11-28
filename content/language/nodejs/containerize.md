@@ -70,6 +70,7 @@ This utility will walk you through creating the following files with sensible de
   - .dockerignore
   - Dockerfile
   - compose.yaml
+  - README.Docker.md
 
 Let's get started!
 
@@ -93,6 +94,7 @@ directory.
 │ ├── Dockerfile
 │ ├── package-lock.json
 │ ├── package.json
+│ ├── README.Docker.md
 │ └── README.md
 ```
 

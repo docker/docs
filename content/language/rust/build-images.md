@@ -62,6 +62,7 @@ This utility will walk you through creating the following files with sensible de
   - .dockerignore
   - Dockerfile
   - compose.yaml
+  - README.Docker.md
 
 Let's get started!
 
@@ -70,11 +71,12 @@ Let's get started!
 ? What port does your server listen on? 8000
 ```
 
-You should now have the following 3 new files in your `docker-rust-hello`
+You should now have the following new files in your `docker-rust-hello`
 directory:
  - Dockerfile
  - .dockerignore
  - compose.yaml
+ - README.Docker.md
 
 For building an image, only the Dockerfile is necessary. Open the Dockerfile
 in your favorite IDE or text editor and see what it contains. To learn more

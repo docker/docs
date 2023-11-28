@@ -8,6 +8,7 @@ long: |-
     * .dockerignore
     * Dockerfile
     * compose.yaml
+    * README.Docker.md
     
     If any of the files already exist, a prompt appears and provides a warning as well as giving you the option to overwrite all the files.
     
@@ -22,6 +23,7 @@ long: |-
     * ASP.NET Core: Suitable for an ASP.NET Core application.
     * Go: Suitable for a Go server application.
     * Node: Suitable for a Node server application.
+    * PHP with Apache: Suitable for a PHP web application.
     * Python: Suitable for a Python server application.
     * Rust: Suitable for a Rust server application.
     * Other: General purpose starting point for containerizing your application.
@@ -65,6 +67,7 @@ examples: |-
     - .dockerignore
     - Dockerfile
     - compose.yaml
+    - README.Docker.md
   
   Let's get started!
   
@@ -92,6 +95,7 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
@@ -118,6 +122,7 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
@@ -141,6 +146,7 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
@@ -163,6 +169,7 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
@@ -175,7 +182,7 @@ examples: |-
   
   ### Example of selecting ASP.NET Core
   
-  The following example shows the prompts that appear after selecting `ASP.NET Core` and example input. The ASP.NET Core template also creates a `README.Docker.md` file with additional information about building and deploying your application.
+  The following example shows the prompts that appear after selecting `ASP.NET Core` and example input.
   
   ```console
   ? What application platform does your project use? ASP.NET Core
@@ -197,6 +204,30 @@ examples: |-
   Your application will be available at http://localhost:8000
   ```
 
+  ### Example of selecting PHP with Apache
+  
+  The following example shows the prompts that appear after selecting `PHP with Apache` and example input. The PHP with Apache template is suitable for both pure PHP applications and applications using Composer as a dependency manager.
+  
+  ```console
+  ? What application platform does your project use? PHP with Apache
+  ? What version of PHP do you want to use? 8.2
+  ? What's the relative directory (with a leading .) for your app? ./src
+  ? What local port do you want to use to access your server? 9000
+  
+  CREATED: .dockerignore
+  CREATED: Dockerfile
+  CREATED: compose.yaml
+  CREATED: README.Docker.md
+  
+  ✔ Your Docker files are ready!
+  
+  Take a moment to review them and tailor them to your application.
+  
+  When you're ready, start your application by running: docker compose up --build
+  
+  Your application will be available at http://localhost:9000
+  ```
+
   ### Example of selecting Other
   
   The following example shows the output after selecting `Other`.
@@ -207,6 +238,7 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
