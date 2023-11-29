@@ -182,15 +182,35 @@ cb36e310aa7e   docker-dotnet-server   "dotnet myWebApp.dll"    About a minute ag
 39fdcf0aff7b   postgres               "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   5432/tcp               docker-dotnet-db-1
 ```
 
-In the previous example, the container ID is `39fdcf0aff7b`. Run the following command to run the `psql` command inside your database container and insert a record into the database. Replace the container ID with your own container ID.
+In the previous example, the container ID is `39fdcf0aff7b`. Run the following command to start a bash shell in the postgres container. Replace the container ID with your own container ID.
 
 ```console
-$ docker exec 39fdcf0aff7b psql -d example -U postgres -c "INSERT INTO \"Students\" (\"ID\", \"LastName\", \"FirstMidName\", \"EnrollmentDate\") VALUES (DEFAULT, 'Whale', 'Moby', '2013-03-20');"
+$ docker exec -it 39fdcf0aff7b bash
 ```
+
+Then run the following command to connect to the database.
+
+```console
+postgres@39fdcf0aff7b:/$ psql -d example -U postgres
+```
+
+And finally, insert a record into the database.
+
+```console
+example=# INSERT INTO "Students" ("ID", "LastName", "FirstMidName", "EnrollmentDate") VALUES (DEFAULT, 'Whale', 'Moby', '2013-03-20');
+```
+
 You should see output like the following.
 
 ```console
 INSERT 0 1
+```
+
+Exit the container shell by running `exit` twice.
+
+```console
+example=# exit
+postgres@39fdcf0aff7b:/$ exit
 ```
 
 ## Verify that data persists in the database
