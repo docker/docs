@@ -2,13 +2,10 @@
 title: Contribute to Docker's docs
 toc_max: 1
 aliases:
-- /CONTRIBUTING/
 - /opensource/
+- /contribute/overview/
+- /contribute/contribute-guide/
 grid:
-- title: Contribution guidelines
-  description: Learn about the process of contributing to our docs.
-  icon: description
-  link: /contribute/contribute-guide
 - title: Grammar and style
   description: Explore Docker's grammar and style guide
   icon: menu_book
@@ -29,18 +26,26 @@ grid:
   description: Explore commonly used Docker terms.
   icon: spellcheck
   link: /contribute/style/terminology
+- title: Voice and tone
+  description: Learn about how we use voice and tone in our writing.
+  icon: voice_selection
+  link: /contribute/style/voice-tone
 ---
 
-We deeply value documentation contributions from the Docker community. We'd like to make it as easy
-as possible for you to work in this repository. The following sections guide you through the process of contributing to Docker documentation.
+We value documentation contributions from the Docker community. We'd like to
+make it as easy as possible for you to contribute to the Docker documentation.
+
+Find the contribution guidelines in
+[CONTRIBUTING.md](https://github.com/docker/docs/blob/main/CONTRIBUTING.md) in
+the `docker/docs` GitHub repository. Use the following links to review our
+style guide and instructions on how to use our page templates and components.
 
 {{< grid >}}
 
 ### Additional resources
 
-We also provide:
+See also:
 
 - A section of useful components you can add to your documentation.
 - Information on Docker's [tone and voice](style/voice-tone.md).
 - A [writing checklist](checklist.md) to help you when you're contributing to Docker's documentation.
-- A command-line tool called vale to check the style and [help you find errors in your writing](contribute-guide.md#test-the-docs-locally).
