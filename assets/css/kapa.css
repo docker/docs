@@ -1,0 +1,17 @@
+.mantine-Modal-root {
+  ol {
+    list-style-type: decimal;
+  }
+
+  .mantine-List-root {
+    min-width: 100%;
+  }
+
+  .mantine-List-itemWrapper {
+    max-width: 100%;
+  }
+
+  .mantine-Prism-copy {
+    background-color: rgb(20, 21, 23)
+  }
+}
