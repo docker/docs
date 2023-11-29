@@ -62,7 +62,7 @@ spec:
     nodePort: 30001
 ```
 
-In this Kubernetes YAML file, there are two objects, separated by the `---`. In addition to a Service and Deployment for the database, the other two objects are:
+In this Kubernetes YAML file, there are two objects, separated by the `---`:
 
  - A Deployment, describing a scalable group of identical pods. In this case,
    you'll get just one replica, or copy of your pod. That pod, which is
