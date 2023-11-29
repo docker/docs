@@ -236,6 +236,7 @@ jobs:
           version: "lab:latest"
           driver: cloud
           endpoint: "<ORG>/default"
+          install: true
       - name: Build and push
         uses: docker/build-push-action@v5
         with:

@@ -8,15 +8,15 @@ This page provides an overview of each tier. To compare features available in ea
 
 ## Docker Personal
 
-Docker Personal (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses. Docker Personal allows free use of Docker components including the Docker CLI, Docker Compose, Docker Engine, Docker Desktop, Docker Hub, Kubernetes, Docker Build and Docker BuildKit, Docker Official Images, and more.
-
+Docker Personal (formerly Docker Free) is ideal for open-source communities, individual developers, education, and small businesses, and includes the free use of Docker components including Docker Desktop and Docker Hub.
 Docker Personal includes:
 
 - Unlimited public repositories
 - Unlimited [Scoped Access Tokens](../security/for-developers/access-tokens.md)
 - Unlimited [collaborators](../docker-hub/repos/access.md#collaborators-and-their-role) for public repositories at no cost per month.
+- Access to [Docker Scout Free](./scout-details.md#docker-scout-free) to get started with software supply chain security.
 
-Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours. 
+Additionally, anonymous users get 100 pulls every 6 hours and users that sign in to Docker get 200 pulls every 6 hours.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
@@ -35,7 +35,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 ## Docker Team
 
-**Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities.
+**Docker Team** offers capabilities for collaboration, productivity, and security across organizations. It enables groups of developers to unlock the full power of collaboration and sharing combined with essential security features and team management capabilities. A Docker Team subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.
 
 Docker Team includes:
 - Everything included in Docker Pro
@@ -50,7 +50,7 @@ For a list of features available in each tier, see [Docker Pricing](https://www.
 
 ## Docker Business
 
-**Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and speed up their secure software supply chain initiatives.
+**Docker Business** offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and speed up their secure software supply chain initiatives. A Docker Business subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.
 
 Docker Business includes:
 - Everything included in Docker Team

@@ -6,9 +6,9 @@ keywords: subscription, free, team, business, features
 
 This page provides an overview of the subscription plans for Docker Scout. To compare features available for each plan, see [Docker Scout Pricing](https://docker.com/products/docker-scout).
 
-## Docker Scout Free 
+## Docker Scout Free
 
-Docker Scout Free is available for both personal accounts and organizations. This plan is ideal for individual developers getting started with software supply chain security.
+Docker Scout Free is available for both personal accounts and organizations. If you have a Docker subscription, you automatically have access to Docker Scout Free. This plan is ideal for individual developers getting started with software supply chain security.
 
 Docker Scout Free includes:
 
