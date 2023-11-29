@@ -4,7 +4,9 @@ description: Learn about Docker subscription tiers and their features
 keywords: subscription, personal, pro, team, business, features
 ---
 
-This page provides an overview of each tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
+You can do more with Docker with a Docker subscription, like add collaborators, create scoped access tokens, create private repositories, and more. This page provides an overview of each subscription tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
+
+You can also subscribe to Docker Scout. See [Docker Scout subscriptions and features](./scout-details.md).
 
 ## Docker Personal
 
