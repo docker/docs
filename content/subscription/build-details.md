@@ -45,6 +45,8 @@ You can upgrade the starter plan for any tier to enhance your developers' experi
 - Option to buy reserve minutes
 - Increased shared cache
 
+To learn how to buy this subscription, see [Docker Hydrobuild billing](../billing/build-billing.md).
+
 ## Docker Hydrobuild Enterprise
 
 For enterprise features such as paying via invoice and additional build minutes, [contact sales](https://www.docker.com/pricing/contact-sales/).
