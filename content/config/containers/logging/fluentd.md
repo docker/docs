@@ -150,7 +150,7 @@ aggregate store.
 
 1.  Write a configuration file (`test.conf`) to dump input logs:
 
-    ```none
+    ```text
     <source>
       @type forward
     </source>
@@ -158,16 +158,16 @@ aggregate store.
     <match *>
       @type stdout
     </match>
-    ```none
+    ```
 
 2.  Launch Fluentd container with this configuration file:
 
-    ```none
+    ```text
     $ docker run -it -p 24224:24224 -v /path/to/conf/test.conf:/fluentd/etc/test.conf -e FLUENTD_CONF=test.conf fluent/fluentd:latest
     ```
 
 3.  Start one or more containers with the `fluentd` logging driver:
 
-    ```none
+    ```text
     $ docker run --log-driver=fluentd your/application
     ```
