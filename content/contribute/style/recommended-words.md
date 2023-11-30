@@ -28,7 +28,7 @@ Write out `administrator` on first use. Use `admin` if it's the name of a UI lab
 
 #### allows
 
-Don't use. Instead, use `lets``.
+Don't use. Instead, use `lets`.
 
 #### as of this writing
 
