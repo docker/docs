@@ -1362,6 +1362,8 @@ Manuals:
         title: Analyze local files
       - path: /scout/sbom/
         title: SBOM
+      - path: /scout/env-vars/
+        title: Environment variables
     - sectiontitle: Policy Evaluation
       section:
       - path: /scout/policy/
