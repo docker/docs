@@ -16,7 +16,7 @@ To uninstall Docker Desktop from your Windows machine:
 You can also uninstall Docker Desktop from the CLI. Run:
 
 ```console
-$ Docker Desktop Installer.exe Uninstall --quiet
+$ Docker Desktop Installer.exe uninstall --quiet
 ```
 
 {{< /tab >}}
