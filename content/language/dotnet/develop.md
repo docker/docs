@@ -206,7 +206,7 @@ You should see output like the following.
 INSERT 0 1
 ```
 
-Exit the container shell by running `exit` twice.
+Close the database connection and exit the container shell by running `exit` twice.
 
 ```console
 example=# exit
