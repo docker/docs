@@ -32,7 +32,7 @@ If you have an existing [Docker subscription](./details.md), Hydrobuild is inclu
 - Option to onboard up to 100 members
 - Can buy additional seats to add more minutes
 
-### Docker Busines plus Hydrobuild
+### Docker Business plus Hydrobuild
 
 - All the features listed for Docker Team plus Hydrobuild
 - 800 build minutes every month
