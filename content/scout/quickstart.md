@@ -213,7 +213,6 @@ see the changes in vulnerabilities between the two tags. You can see that
 
 {{< /tab >}}
 {{< tab name="CLI" >}}
-{{< /tab >}}
 
 Use the `docker scout compare` command to see the compare two image versions.
 Pass the image that you want to compare as a positional argument to the
@@ -223,6 +222,7 @@ command, and specify the base image to compare with using the `--to` flag.
 $ docker scout compare --to <ORG_NAME>/scout-demo:v1 <ORG_NAME>/scout-demo:v3
 ```
 
+{{< /tab >}}
 {{< /tabs >}}
 
 ## What's next?
