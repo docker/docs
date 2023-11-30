@@ -23,7 +23,7 @@ If you have an existing [Docker subscription](./details.md), Hydrobuild is inclu
 - 100 build minutes every month
 - Available for one user
 - 4 parallel builds
-- Option to purchbuyase an additional seat
+- Option to buy an additional seat
 - Can buy extra buckets of minutes at any time
 
 ### Docker Team plus Hydrobuild
