@@ -29,38 +29,17 @@ aliases:
 - /engine/installation/oracle/
 - /enterprise/supported-platforms/
 - /install/linux/docker-ee/oracle/
-'yes': '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin:
-  0 auto"}'
 ---
 
-> **Docker Desktop for Linux**
->
-> Docker Desktop helps you build, share, and run containers on Mac and
-> Windows as you do on Linux. Docker Desktop for
-> Linux is now GA. For more information, see
-[Docker Desktop for Linux](../../desktop/install/linux-install.md).
-{ .important }
+This section describes how to install Docker Engine on Linux, also known as
+Docker CE. Docker Engine is also available for Windows, macOS, and Linux,
+through Docker Desktop. For instructions on how to install Docker Desktop, see:
+
+- [Docker Desktop for Linux](../../desktop/install/linux-install.md)
+- [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md)
+- [Docker Desktop for Windows](../../desktop/install/windows-install.md)
 
 ## Supported platforms
-
-Docker Engine is available on a variety of [Linux distros](../../desktop/install/linux-install.md),
-[macOS](../../desktop/install/mac-install.md), and [Windows 10](../../desktop/install/windows-install.md)
-through Docker Desktop, and as a [static binary installation](binaries.md). Find
-your preferred operating system below.
-
-### Desktop
-
-
-| Platform                                                               |                    x86_64 / amd64                     |               arm64 (Apple Silicon)               |
-| :--------------------------------------------------------------------- | :---------------------------------------------------: | :-----------------------------------------------: |
-| [Docker Desktop for Linux](../../desktop/install/linux-install.md)     | [✅](../../desktop/install/linux-install.md)          |                                                   |
-| [Docker Desktop for Mac (macOS)](../../desktop/install/mac-install.md) | [✅](../../desktop/install/mac-install.md)            | [✅](../../desktop/install/mac-install.md)        |
-| [Docker Desktop for Windows](../../desktop/install/windows-install.md) | [✅](../../desktop/install/windows-install.md)        |                                                   |
-
-### Server
-
-Docker provides `.deb` and `.rpm` packages from the following Linux distros
-and architectures:
 
 | Platform                                       | x86_64 / amd64    | arm64 / aarch64   | arm (32-bit)             | ppc64le         | s390x           |
 | :--------------------------------------------- | :---------------- | :---------------- | :----------------------- | :-------------- | :-------------- |
