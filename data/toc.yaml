@@ -2128,6 +2128,8 @@ Manuals:
     title: Change your billing cycle
   - path: /billing/scout-billing/
     title: Docker Scout billing
+  - path: /billing/build-billing/
+    title: Docker Hydrobuild billing
 
 
 - sectiontitle: Subscription
@@ -2148,6 +2150,8 @@ Manuals:
     title: Docker Desktop license agreement
   - path: /subscription/scout-details/
     title: Docker Scout subscriptions and features
+  - path: /subscription/build-details/
+    title: Docker Hydrobuild subscriptions and features
 
 - sectiontitle: Trusted content
   section:
