@@ -1141,7 +1141,7 @@ Manuals:
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
         - path: /desktop/use-desktop/builds/
-          title: Explore Builds (Beta)
+          title: Explore Builds 
         - path: /desktop/use-desktop/resource-saver/
           title: Resource Saver mode
         - path: /desktop/use-desktop/pause/
