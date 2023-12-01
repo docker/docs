@@ -451,7 +451,7 @@ For more information about `ENTRYPOINT`, see [Dockerfile reference for the ENTRY
 
 ### VOLUME
 
-YOu should use the `VOLUME` instruction to expose any database storage area,
+You should use the `VOLUME` instruction to expose any database storage area,
 configuration storage, or files and folders created by your Docker container. You
 are strongly encouraged to use `VOLUME` for any combination of mutable or user-serviceable
 parts of your image.

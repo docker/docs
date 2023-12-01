@@ -605,6 +605,8 @@
   - "/go/scout-env/"
 "/scout/integrations/environment/sysdig/":
   - "/go/scout-sysdig/"
+"/scout/integrations/registry/acr/":
+  - "/go/scout-acr/"
 
 # Build links
 "/desktop/use-desktop/builds/":
