@@ -32,7 +32,7 @@ Here you can find your invoice history, download your invoices, and manage your 
 
 You can downgrade your subscription at any time.
 
-1. Go to the [Docker Cloud Build dashboard](https://www.build.docker.com).
+1. Sign in to your Docker account and go to the [Docker Cloud Build dashboard](https://www.build.docker.com).
 2. Select **Settings and billing**.
 3. Select **Change plan**.
 4. Select **Downgrade**.
