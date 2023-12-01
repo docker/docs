@@ -44,7 +44,7 @@ To push your image to Docker Hub:
 2. In the **Actions** column for your image, select the **Show image actions** icon.
 3. Select **Push to Hub**.
 
-![Pushing an image to Docker Hub](images/getting-started-push.webp?w=700&border=true)
+![Pushing an image to Docker Hub](images/getting-started-push.webp?border=true)
 
 Go to [Docker Hub](https://hub.docker.com)⁠ and verify that the list of your repositories now contains `YOUR-USERNAME/welcome-to-docker`.
 

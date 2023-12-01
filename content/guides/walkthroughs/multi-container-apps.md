@@ -91,7 +91,7 @@ To delete the application stack:
 1. Open the **Containers** tab of Docker Desktop
 2. Select the Delete icon next to your application stack.
 
-![Deleting the application stack](images/getting-started-delete-stack.webp?w=650&border=true)
+![Deleting the application stack](images/getting-started-delete-stack.webp?border=true)
 
 After you delete the application stack, follow the steps from [Step 3: Run the
 application](#step-3-run-the-application) to run the application again. Note

@@ -67,14 +67,14 @@ To run your image as a container:
 2. Next to your image, select **Run**.
 3. Expand the **Optional settings**.
 4. In **Host port**, specify `8089`.
-   ![Specifying host port 8089](images/getting-started-run-image.webp?w=400&border=true)
+   ![Specifying host port 8089](images/getting-started-run-image.webp?w=500&border=true)
 5. Select **Run**.
 
 ## Step 5: View the frontend
 
 You can use Docker Desktop to access your running container. Select the link next to your container in Docker Desktop or go to [http://localhost:8089](http://localhost:8089) to view the frontend.
 
-![Selecting the container link](images/getting-started-frontend-2.webp?w=650&border=true)
+![Selecting the container link](images/getting-started-frontend-2.webp?border=true)
 
 ## Summary
 
