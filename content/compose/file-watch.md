@@ -145,9 +145,11 @@ This pattern can be followed for many languages and frameworks, such as Python w
 2. Run `docker compose watch` to build and launch a Compose project and start the file watch mode.
 3. Edit service source files using your preferred IDE or editor.
 
->**Looking for a sample project to test things out?**
+> **Looking for a sample project to test things out?**
 >
->  Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars), or [build the docs site locally](../contribute/contribute-guide.md#build-and-preview-the-docs-locally) for a demonstration of Compose `watch`.
+> Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
+> or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
+> for a demonstration of Compose `watch`.
 { .tip }
 
 ## Feedback

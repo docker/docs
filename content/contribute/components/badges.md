@@ -14,7 +14,7 @@ toc_max: 3
 
 You can also make a badge a link.
 
-[{{< badge color="blue" text="badge with a link" >}}](../overview.md)
+[{{< badge color="blue" text="badge with a link" >}}](../_index.md)
 
 ### Markup
 
