@@ -1350,16 +1350,20 @@ Manuals:
         title: Dashboard
       - path: /scout/image-details-view/
         title: Image details view
+      - path: /scout/advisory-db-sources/
+        title: Advisory database
+      - path: /scout/data-handling/
+        title: Data handling
+    - sectiontitle: Use Docker Scout
+      section:
       - path: /scout/image-analysis/
         title: Image analysis
       - path: /scout/local-fs/
         title: Analyze local files
       - path: /scout/sbom/
         title: SBOM
-      - path: /scout/advisory-db-sources/
-        title: Advisory database
-      - path: /scout/data-handling/
-        title: Data handling
+      - path: /scout/env-vars/
+        title: Environment variables
     - sectiontitle: Policy Evaluation
       section:
       - path: /scout/policy/
