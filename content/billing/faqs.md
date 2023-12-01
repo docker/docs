@@ -20,11 +20,11 @@ Navigate to the **Plan** tab in your billing settings to view your current plan.
 
 ### What happens if my subscription payment fails?
 
-If your subscription payment fails, there is a grace period of 15 days, including the due date. Docker retries to collect the payment 8 times using the following schedule:
+If your subscription payment fails, there is a grace period of 15 days, including the due date. Docker retries to collect the payment 3 times using the following schedule:
 
-- Next day after the due date (aka day 1 after the due date)
-- Next day after the first retry (aka day 2 after the due date)
-- Then every other day (aka day 4, 6, 8, 10, 12, 14 after the due date)
+- 3 days after the due date
+- 5 days after the previous attempt
+- 7 days after the previous attempt
 
 Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt. 
 
