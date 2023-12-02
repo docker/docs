@@ -1,20 +1,27 @@
 ---
-description: Docker Admin provides administrators with centralized observability,
-  access management, and controls for their company and organizations.
-keywords: admin, administration, company, organization
-title: Docker Admin overview
+description: Discover manuals on administration for accounts, organizations, and companies.
+keywords: admin, administration, company, organization, Docker Admin, user accounts, account management
+title: Administration overview
 grid:
 - title: Company administration
-  description: Explore how to manage a company in Docker Admin.
+  description: Explore how to manage a company.
   icon: apartment
   link: /admin/company/
 - title: Organization administration
-  description: Learn about organization administration in Docker Admin.
+  description: Learn about organization administration.
   icon: store
   link: /admin/organization/
+- title: Company FAQ
+  description: Discover common questions and answers about companies.
+  icon: help
+  link: /docker-hub/company-faqs/
+- title: Organization FAQ
+  description: Explore popular FAQ topics about organizations.
+  icon: help
+  link: /docker-hub/organization-faqs/
 ---
 
-{{< include "admin-early-access.md" >}}
+Administrators can manage companies and organizations using Docker Hub or Docker Admin (Early Access). Docker Admin is available in Early Access to all company owners and organization owners that have a Docker Business or Docker Team subscription.
 
 The [Docker Admin](https://admin.docker.com) console provides administrators with centralized observability, access management, and controls for their company and organizations. To provide these features, Docker uses the following hierarchy and roles.
 

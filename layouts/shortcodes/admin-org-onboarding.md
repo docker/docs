@@ -19,7 +19,7 @@ Before you start to onboard your organization, ensure that you:
 
   > **Note**
   >
-  > When purchasing a subscription through [Pricing & Subscriptions](https://www.docker.com/pricing/), the on-screen instructions guide you through creating an organization. If you have purchased a subscription through Docker Sales and you have not yet created an organization, see [Create an organization](/docker-hub/orgs#create-an-organization).
+  > When purchasing a subscription through [Pricing & Subscriptions](https://www.docker.com/pricing/), the on-screen instructions guide you through creating an organization. If you have purchased a subscription through Docker Sales and you have not yet created an organization, see [Create an organization](/admin/organization/orgs).
 
 - Familiarize yourself with Docker concepts and terminology in the [glossary](/glossary/) and [FAQs](/docker-hub/general-faqs/).
 

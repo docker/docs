@@ -6,7 +6,7 @@ grid:
 - title: Create your organization
   icon: add_business
   description: Explore and set up an organization in Docker Hub.
-  link: /docker-hub/orgs/
+  link: /admin/organization/orgs/
 - title: Onboard your organization
   icon: explore
   link: /docker-hub/onboard/

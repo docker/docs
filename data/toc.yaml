@@ -2014,7 +2014,7 @@ Manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
-- sectiontitle: Docker Admin (Early Access)
+- sectiontitle: Administration
   section:
   - path: /admin/
     title: Overview
@@ -2033,6 +2033,8 @@ Manuals:
     section:
     - path: /admin/organization/
       title: Overview
+    - path: /admin/organization/orgs/
+      title: Create your organization
     - path: /admin/organization/onboard/
       title: Onboard your organization
     - path: /admin/organization/members/
@@ -2041,15 +2043,13 @@ Manuals:
       title: Activity logs
     - path: /admin/organization/general-settings/
       title: General settings
+  - path: /admin/deactivate-account/
+    title: Deactivate your account
 
-- sectiontitle: Administration 
+- sectiontitle: Administration (old)
   section:
   - path: /docker-hub/admin-overview/
     title: Overview
-  - path: /docker-hub/orgs/
-    title: Create your organization
-  - path: /docker-hub/onboard/
-    title: Onboard your organization
   - sectiontitle: Set up your company
     section:
     - path: /docker-hub/creating-companies/
@@ -2066,8 +2066,6 @@ Manuals:
     title: Manage members
   - path: /docker-hub/audit-log/
     title: Audit logs
-  - path: /docker-hub/deactivate-account/
-    title: Deactivate an account or organization
 
 - sectiontitle: Security
   section:

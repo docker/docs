@@ -4,7 +4,7 @@ keywords: members, teams, organizations
 title: Manage members
 ---
 
-This section describes how to manage members in your [teams and organizations](../docker-hub/orgs.md).
+This section describes how to manage members in your [teams and organizations](../admin/organization/orgs.md).
 
 {{% admin-users product="hub" %}}
 
