@@ -6,11 +6,11 @@ aliases:
 - /compose/env-file/
 ---
 
-This page provides information on the syntax rules and guidelines when using an `.env` file. It specifies how to structure these files, defines the rules for commenting, and explains how values are processed. Additionally, it introduces the concept of interpolation, which allows the use of variables within environment files.
+This page provides information on the syntax rules and guidelines when using an `.env` file. It defines the rules for commenting, and explains how values are processed. Additionally, it introduces the concept of interpolation, which allows the use of variables within environment files.
 
 > **Important**
 >
-> Remember, environment variables from an environment file have lower precedence than those from any other [method](set-environment-variables.md).
+> Environment variables from an environment file have lower precedence than those from any other [method](set-environment-variables.md).
 For more information, see [Environment variables precedence](envvars-precedence.md).
 { .important }
 

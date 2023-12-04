@@ -1,6 +1,6 @@
 ---
 title: Ways to set environment variables with Compose
-description: How to set, use and manage environment variables with Compose
+description: How to set, use ,and manage environment variables with Compose
 keywords: compose, orchestration, environment, env file
 aliases:
 - /compose/env/
@@ -95,8 +95,7 @@ web:
 See [`environment` attribute](../compose-file/05-services.md#environment) for more examples on how to use it. 
 
 #### Additional information 
-- You can choose not to set a value and pass the environment variables from your shell straight through to a
-service's containers. It works in the same way as `docker run -e VARIABLE ...`:
+- You can choose not to set a value and pass the environment variables from your shell straight through to your containers. It works in the same way as `docker run -e VARIABLE ...`:
   ```yaml
   web:
     environment:
@@ -129,12 +128,12 @@ web:
 - Environment variables declared in the `.env` file cannot then be referenced again separately in the Compose file.
 - If you use both the `env_file` and `environment` attribute, environment variables set by `environment` take precedence.
 - The paths to your `.env` file, specified in the `env_file` attribute,  are relative to the location of your `compose.yml` file. 
-- Values in your `.env` files can be overriden from the command line by using [`docker-compose up -e`](#set-environment-variables-with-docker-compose-run---env).
+- Values in your `.env` files can be overriden from the command line by using [`docker compose up -e`](#set-environment-variables-with-docker-compose-run---env).
 - Your `.env` files can be overriden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
 
 ### Substitute from the shell 
 
-You can use existing environment variables from your host machine or from the shell environment where you execute docker-compose commands. This allows you to dynamically inject values into your Docker Compose configuration at runtime.
+You can use existing environment variables from your host machine or from the shell environment where you execute `docker compose` commands. This allows you to dynamically inject values into your Docker Compose configuration at runtime.
 
 For example, suppose the shell contains `POSTGRES_VERSION=9.3` and you supply the following configuration:
 
@@ -213,7 +212,7 @@ $ docker compose --env-file ./config/.env.dev up
   ERROR: Couldn't find env file: /home/user/./doesnotexist/.env.dev
   ```
 
-- You can use multiple --env-file options to specify multiple environment files, and Docker Compose will read them in order. Later files can override variables from earlier files.
+- You can use multiple `--env-file` options to specify multiple environment files, and Docker Compose reads them in order. Later files can override variables from earlier files.
   ```console
   $ docker compose --env-file .env --env-file .env.override up
   ```
@@ -239,8 +238,8 @@ $ docker compose run -e DEBUG=1 web python console.py
 
   The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
 
-  ## Further resources
-  - [Understand environment variable precedence](envvars-precedence.md).
-  - [Set or change predefined environment variables](envvars.md)
-  - [Explore best practices](best-practices.md)
-  - [Understand the syntax and formatting guidelines for environment files](env-file.md)
+## Further resources
+- [Understand environment variable precedence](envvars-precedence.md).
+- [Set or change predefined environment variables](envvars.md)
+- [Explore best practices](best-practices.md)
+- [Understand the syntax and formatting guidelines for environment files](env-file.md)
