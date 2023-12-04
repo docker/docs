@@ -1,6 +1,6 @@
 ---
 title: Test your PHP deployment
-keywords: deploy, .php, local, development
+keywords: deploy, php, local, development
 description: Learn how to deploy your application
 ---
 
@@ -36,26 +36,26 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      todo: web
+      hello-php: web
   template:
     metadata:
       labels:
-        todo: web
+        hello-php: web
     spec:
       containers:
-      - name: todo-site
+      - name: hello-site
         image: DOCKER_USERNAME/REPO_NAME
         imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: todo-entrypoint
+  name: php-entrypoint
   namespace: default
 spec:
   type: NodePort
   selector:
-    todo: web
+    hello-php: web
   ports:
   - port: 80
     targetPort: 80
@@ -88,7 +88,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    ```shell
    deployment.apps/docker-php-demo created
-   service/todo-entrypoint created
+   service/php-entrypoint created
    ```
 
 2. Make sure everything worked by listing your deployments.
@@ -115,10 +115,10 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    ```shell
    NAME              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
    kubernetes        ClusterIP   10.96.0.1        <none>        443/TCP          7d22h
-   todo-entrypoint   NodePort    10.111.101.229   <none>        80:30001/TCP     33s
+   php-entrypoint    NodePort    10.111.101.229   <none>        80:30001/TCP     33s
    ```
 
-   In addition to the default `kubernetes` service, you can see your `server` service and `db` service. The `server` service is accepting traffic on port 30001/TCP.
+   In addition to the default `kubernetes` service, you can see your `php-entrypoint` service. The `php-entrypoint` service is accepting traffic on port 30001/TCP.
 
 3. Open a browser and visit your app at
    [http://localhost:30001/hello.php](http://localhost:30001/hello.php). You
