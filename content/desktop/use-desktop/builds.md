@@ -1,5 +1,5 @@
 ---
-title: Explore Builds (Beta)
+title: Explore Builds
 description: Understand how to use the Builds view in Docker Desktop
 keywords: Docker Dashboard, manage, gui, dashboard, builders, builds
 ---
