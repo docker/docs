@@ -6,7 +6,7 @@ description: Learn how to use Docker to run multi-container applications
 
 If you've already completed the [How do I run a container?](./run-a-container.md) walkthrough, you learned that you must start each container individually. Imagine how great it would be if a tool could start multiple containers with a single command. That tool is Docker Compose.
 
-Before you start, [get Docker Desktop](../../get-docker.md).
+{{< include "guides-get-docker.md" >}}
 
 ## Step 1: Get the sample application
 
@@ -33,13 +33,11 @@ Download the source and extract it.
 
 The sample application is a simple todo application built using ExpressJS and Node.js. The application saves all todos in a MongoDB database. You don't need to know any of these technologies to continue with the walkthrough.
 
-![The sample app architecture](images/getting-started-multi-container.webp?w=400)
+![The sample app architecture](images/getting-started-multi-container.webp?w=450&border=true)
 
 ## Step 2: Dig into the Compose file
 
 View the files of the sample application. Notice that it has a `compose.yaml` file. This file tells Docker how to run your application. Open the `compose.yaml` file in a code or text editor to view what it contains.
-
-![Viewing the Compose file](images/getting-started-compose.webp?w=400)
 
 ## Step 3: Run the application
 
@@ -93,7 +91,7 @@ To delete the application stack:
 1. Open the **Containers** tab of Docker Desktop
 2. Select the Delete icon next to your application stack.
 
-![Deleting the application stack](images/getting-started-delete-stack.webp?w=300&border=true)
+![Deleting the application stack](images/getting-started-delete-stack.webp?border=true)
 
 After you delete the application stack, follow the steps from [Step 3: Run the
 application](#step-3-run-the-application) to run the application again. Note
@@ -115,4 +113,4 @@ Related information:
 
 Continue to the next walkthrough to learn how to persist data even after deleting the application stack.
 
-{{< button url="./persist-data.md" text="Persist data between containers" >}}
+{{< button url="./persist-data.md" text="Persist container data" >}}

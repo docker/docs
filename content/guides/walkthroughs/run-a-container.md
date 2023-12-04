@@ -8,9 +8,9 @@ aliases:
 
 In this walkthrough, you'll learn the basic steps of building an image and running your own container. This walkthrough uses a sample Node.js application, but it's not necessary to know Node.js.
 
-![Running an image in Docker Desktop](images/getting-started-run-intro.webp?w=400)
+![Running an image in Docker Desktop](images/getting-started-run-intro.webp?w=450&border=true)
 
-Before you start, [get Docker Desktop](../../get-docker.md).
+{{< include "guides-get-docker.md" >}}
 
 ## Step 1: Get the sample application
 
@@ -40,8 +40,6 @@ Download the source and extract it.
 To run your code in a container, the most fundamental thing you need is a
 Dockerfile. A Dockerfile describes what goes into a container. This sample already contains a `Dockerfile`. For your own projects, you'll need to create your own `Dockerfile`. You can open the `Dockerfile` in a code or text editor and explore its contents.
 
-![Viewing Dockefile contents](images/getting-started-dockerfile.webp?w=400)
-
 ## Step 3: Build your first image
 
 You always need an image to run a container. In a terminal, run the following commands to build the image. Replace `/path/to/welcome-to-docker/` with the path to your `welcome-to-docker` directory.
@@ -69,14 +67,14 @@ To run your image as a container:
 2. Next to your image, select **Run**.
 3. Expand the **Optional settings**.
 4. In **Host port**, specify `8089`.
-   ![Specifying host port 8089](images/getting-started-run-image.webp?w=250&border=true)
+   ![Specifying host port 8089](images/getting-started-run-image.webp?w=500&border=true)
 5. Select **Run**.
 
 ## Step 5: View the frontend
 
 You can use Docker Desktop to access your running container. Select the link next to your container in Docker Desktop or go to [http://localhost:8089](http://localhost:8089) to view the frontend.
 
-![Selecting the container link](images/getting-started-frontend-2.webp?w=300&border=true)
+![Selecting the container link](images/getting-started-frontend-2.webp?border=true)
 
 ## Summary
 

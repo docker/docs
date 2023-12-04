@@ -37,7 +37,7 @@ Docker Desktop downloads and installs the following runtimes that you can use
 to run Wasm workloads:
 
 - `io.containerd.slight.v1`
-- `io.containerd.spin.v1`
+- `io.containerd.spin.v2`
 - `io.containerd.wasmedge.v1`
 - `io.containerd.wasmtime.v1`
 - `io.containerd.lunatic.v1`

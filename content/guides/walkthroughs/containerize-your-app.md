@@ -8,7 +8,7 @@ When working with containers, you typically need to create a `Dockerfile` to def
 
 To help you create these files, Docker Desktop has the `docker init` command. Run this command in a terminal within your project folder. `docker init` creates all the required files to containerize your application. This walkthrough shows you how this works.
 
-Before you start, [get Docker Desktop](../../get-docker.md).
+{{< include "guides-get-docker.md" >}}
 
 ## Step 1: Run the command to create Docker assets
 
