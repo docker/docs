@@ -12,7 +12,8 @@ Docker isolates all content, code, and data in a container from your local files
 
 Sometimes, you may want to access a directory from your local filesystem. To do this, you can use bind mounts.
 
-Before you start, [get Docker Desktop](../../get-docker.md).
+{{< include "guides-get-docker.md" >}}
+
 
 ## Step 1: Get the sample application
 

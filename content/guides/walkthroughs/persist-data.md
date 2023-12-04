@@ -1,7 +1,7 @@
 ---
-title: Persist data between containers
+title: Persist container data
 keywords: get started, quick start, intro, concepts
-description: Learn how to persist data between containers
+description: Learn how to persist container data
 ---
 
 This walkthrough shows you how to persist data between containers. To better understand some concepts in this walkthrough, complete the [Run multi-container applications](./multi-container-apps.md) walkthrough first.
@@ -12,7 +12,7 @@ Docker isolates all content, code, and data in a container from your local files
 
 Sometimes, you may want to persist the data that a container generates. To do this, you can use volumes.
 
-Before you start, [get Docker Desktop](../../get-docker.md).
+{{< include "guides-get-docker.md" >}}
 
 ## Step 1: Get the sample application
 
@@ -92,7 +92,7 @@ To delete the application stack:
 1. Open the **Containers** tab of Docker Desktop
 2. Select the Delete icon next to your application stack.
 
-![Deleting the application stack](images/getting-started-delete-stack.webp?w=300&border=true)
+![Deleting the application stack](images/getting-started-delete-stack.webp?border=true)
 
 After you delete the application stack, follow the steps from [Step 3: Run the
 application](#step-3-run-the-application) to run the application again. Note
