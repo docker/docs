@@ -106,13 +106,25 @@ The following `admin-settings.json` code and table provides an example of the re
     "value": true
   },
   "extensionsEnabled": {
-    "value": false,
-    "locked": true
+    "locked": true,
+    "value": false    
   },
   "scout": {
     "locked": false,
     "sbomIndexing": true,
     "useBackgroundIndexing": true
+  },
+  "allowExperimentalFeatures": {
+    "locked": false,
+    "value": false
+  },
+  "allowBetaFeatures": {
+    "locked": false,
+    "value": false
+  },
+  "blockDockerLoad": {
+    "locked": false,
+    "value": true    
   }
 }
 ```
@@ -135,6 +147,9 @@ The following `admin-settings.json` code and table provides an example of the re
 |`analyticsEnabled`|  |If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |
 |`extensionsEnabled`|  |If `value` is set to false, Docker extensions are disabled. |
 |`scout`|| Setting `useBackgroundIndexing` to `false` disables automatic indexing of images loaded to the image store. Setting `sbomIndexing` to `false` prevents the manual indexing triggered by inspecting an image in Docker Desktop.<br><br>**Note**: Users can still use the `docker scout` CLI commands to index images, even if indexing is disabled in Settings Management. |
+| `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|
+| `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|
+| `blockDockerLoad` | | If `value` is set to `true`, users are no longer able to run [`docker load`](../../../engine/reference/commandline/load.md) and receive an error if they try to.|
 
 ### Step three: Re-launch Docker Desktop
 >**Note**
