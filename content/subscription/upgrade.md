@@ -1,5 +1,5 @@
 ---
-description: Lear how to upgrade your Docker subscription
+description: Learn how to upgrade your Docker subscription
 keywords: Docker Hub, upgrade, subscription, Pro, Team, business, pricing plan,
 title: Upgrade your subscription
 aliases:
