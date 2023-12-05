@@ -8,6 +8,7 @@ long: |-
     * .dockerignore
     * Dockerfile
     * compose.yaml
+    * README.Docker.md
     
     If any of the files already exist, a prompt appears and provides a warning as well as giving you the option to overwrite all the files.
     
@@ -15,13 +16,14 @@ long: |-
     >
     > You can't recover overwritten files.
     > To back up an existing file before selecting to overwrite it, rename the file or copy it to another directory.
-    {: .warning}
+    { .warning }
   
   After running `docker init`, you can choose one of the following templates:
     
     * ASP.NET Core: Suitable for an ASP.NET Core application.
     * Go: Suitable for a Go server application.
     * Node: Suitable for a Node server application.
+    * PHP with Apache: Suitable for a PHP web application.
     * Python: Suitable for a Python server application.
     * Rust: Suitable for a Rust server application.
     * Other: General purpose starting point for containerizing your application.
@@ -65,15 +67,17 @@ examples: |-
     - .dockerignore
     - Dockerfile
     - compose.yaml
+    - README.Docker.md
   
   Let's get started!
   
   ? What application platform does your project use?  [Use arrows to move, type to filter]
-  > Go - (detected) suitable for a Go server application
-    ASP.NET Core - suitable for an ASP.NET Core application
+  > PHP with Apache - (detected) suitable for a PHP web application
+    Go - (detected) suitable for a Go server application
     Python - suitable for a Python server application
     Node - suitable for a Node server application
     Rust - suitable for a Rust server application
+    ASP.NET Core - suitable for an ASP.NET Core application
     Other - general purpose starting point for containerizing your application
     Don't see something you need? Let us know!
     Quit
@@ -92,6 +96,7 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
@@ -100,6 +105,8 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:3333
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
   
   ### Example of selecting Node
@@ -118,6 +125,7 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
@@ -126,6 +134,8 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:8000
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
   
   ### Example of selecting Python
@@ -141,6 +151,7 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
@@ -149,6 +160,8 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:8000
+  
+  Consult README.Docker.md for more information about using the generated files.
   ```
   
   ### Example of selecting Rust
@@ -163,6 +176,7 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
@@ -171,11 +185,13 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:8000
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
   
   ### Example of selecting ASP.NET Core
   
-  The following example shows the prompts that appear after selecting `ASP.NET Core` and example input. The ASP.NET Core template also creates a `README.Docker.md` file with additional information about building and deploying your application.
+  The following example shows the prompts that appear after selecting `ASP.NET Core` and example input.
   
   ```console
   ? What application platform does your project use? ASP.NET Core
@@ -195,6 +211,36 @@ examples: |-
   When you're ready, start your application by running: docker compose up --build
   
   Your application will be available at http://localhost:8000
+
+  Consult README.Docker.md for more information about using the generated files.
+  ```
+
+  ### Example of selecting PHP with Apache
+  
+  The following example shows the prompts that appear after selecting `PHP with Apache` and example input. The PHP with Apache template is suitable for both pure PHP applications and applications using Composer as a dependency manager. After running `docker init`, you must manually add any PHP extensions that are required by your application to the Dockerfile.
+  
+  ```console
+  ? What application platform does your project use? PHP with Apache
+  ? What version of PHP do you want to use? 8.2
+  ? What's the relative directory (with a leading .) for your app? ./src
+  ? What local port do you want to use to access your server? 9000
+  
+  CREATED: .dockerignore
+  CREATED: Dockerfile
+  CREATED: compose.yaml
+  CREATED: README.Docker.md
+  
+  ✔ Your Docker files are ready!
+  
+  Take a moment to review them and tailor them to your application.
+
+  If your application requires specific PHP extensions, you can follow the instructions in the Dockerfile to add them.
+  
+  When you're ready, start your application by running: docker compose up --build
+  
+  Your application will be available at http://localhost:9000
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
 
   ### Example of selecting Other
@@ -207,11 +253,14 @@ examples: |-
   CREATED: .dockerignore
   CREATED: Dockerfile
   CREATED: compose.yaml
+  CREATED: README.Docker.md
   
   ✔ Your Docker files are ready!
   
   Take a moment to review them and tailor them to your application.
   
   When you're ready, start your application by running: docker compose up --build
+
+  Consult README.Docker.md for more information about using the generated files.
   ```
 

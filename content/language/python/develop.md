@@ -35,6 +35,7 @@ You'll need to clone a new repository to get a sample application that includes 
      - .dockerignore
      - Dockerfile
      - compose.yaml
+     - README.Docker.md
 
    Let's get started!
 
@@ -118,6 +119,7 @@ directory.
 │ ├── .dockerignore
 │ ├── compose.yaml
 │ ├── Dockerfile
+│ ├── README.Docker.md
 │ └── README.md
 ```
 

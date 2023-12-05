@@ -86,6 +86,7 @@ For the sample application, you'll use a variation of the backend from the react
      - .dockerignore
      - Dockerfile
      - compose.yaml
+     - README.Docker.md
 
    Let's get started!
 
