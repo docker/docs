@@ -1790,6 +1790,8 @@ Manuals:
           title: Environment variables
         - path: /build/building/secrets/
           title: Build secrets
+        - path: /build/building/annotations/
+          title: Annotations
         - path: /build/building/opentelemetry/
           title: OpenTelemetry support
         - path: /build/building/base-images/
@@ -1922,6 +1924,8 @@ Manuals:
             title: Update Docker Hub repo description
           - path: /build/ci/github-actions/attestations/
             title: SBOM and provenance attestations
+          - path: /build/ci/github-actions/annotations/
+            title: Annotations
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
