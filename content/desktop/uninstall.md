@@ -17,7 +17,7 @@ You can also uninstall Docker Desktop from the CLI:
 
 1. Locate the installer:
    ```console
-   $ C:\Program Files\Docker\Docker\Docker Desktok Installer.exe
+   $ C:\Program Files\Docker\Docker\Docker Desktop Installer.exe
    ```
 2. Uninstall Docker Desktop. 
  - In PowerShell, run:
