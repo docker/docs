@@ -41,10 +41,10 @@ In large enterprises where admin access is restricted, administrators can [Confi
 >
 > Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity. 
 
-### Credentials management for Linux users
+### Signing in with Docker Desktop for Linux
 
-Docker Desktop relies on [`pass`](https://www.passwordstore.org/) to store credentials in gpg2-encrypted files.
-Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
+Docker Desktop for Linux relies on [`pass`](https://www.passwordstore.org/) to store credentials in gpg2-encrypted files.
+Before signing in to Docker Desktop with your [Docker ID](../docker-id/_index.md), you must initialize `pass`.
 Docker Desktop displays a warning if you've not initialized `pass`.
 
 You can initialize pass by using a gpg key. To generate a gpg key, run:
@@ -55,7 +55,7 @@ $ gpg --generate-key
 
 The following is an example similar to what you see once you run the previous command:
 
-```console
+```hcl {hl_lines=12}
 ...
 GnuPG needs to construct a user ID to identify your key.
 
@@ -84,7 +84,7 @@ mkdir: created directory '/home/molly/.password-store/'
 Password store initialized for <generated_gpg-id_public_key>
 ```
 
-Once you initialize `pass`, you can sign in on the Docker Dashboard and pull your private images.
+Once you initialize `pass`, you can sign in and pull your private images.
 When Docker CLI or Docker Desktop use credentials, a user prompt may pop up for the password you set during the gpg key generation.
 
 ```console
