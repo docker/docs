@@ -57,7 +57,7 @@ When SSO is enabled and enforced, your users just have to sign in using the emai
 
 ### Is Docker SSO fully synced with the IdP?
 
-Docker SSO provides Just-In-Time (JIT) provisioning by default. This provisioning only happens when a user signs in. If a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](/docker-hub/members/#remove-a-member-or-invitee) from the organization. [SCIM](../../../security/for-admins/scim.md) is available to provide full synchronization with users and groups.
+Docker SSO provides Just-In-Time (JIT) provisioning by default. This provisioning only happens when a user signs in. If a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](../../../admin/organization/members.md#remove-a-member-or-invitee) from the organization. [SCIM](../../../security/for-admins/scim.md) is available to provide full synchronization with users and groups.
 
 Additionally, you can use the [Docker Hub API](/docker-hub/api/latest/) to complete this process.
 

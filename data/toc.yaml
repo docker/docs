@@ -2039,6 +2039,8 @@ Manuals:
       title: Onboard your organization
     - path: /admin/organization/members/
       title: Manage members
+    - path: /admin/organization/manage-a-team/
+      title: Create and manage teams
     - path: /admin/organization/activity-logs/
       title: Activity logs
     - path: /admin/organization/general-settings/
@@ -2060,12 +2062,6 @@ Manuals:
       title: Manage company owners
   - path: /docker-hub/convert-account/
     title: Convert an account into an organization
-  - path: /docker-hub/manage-a-team/
-    title: Create and manage a team
-  - path: /docker-hub/members/
-    title: Manage members
-  - path: /docker-hub/audit-log/
-    title: Audit logs
 
 - sectiontitle: Security
   section:

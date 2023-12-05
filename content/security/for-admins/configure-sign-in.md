@@ -43,7 +43,7 @@ following occurs:
 ## Create a registry.json file to enforce sign-in
 
 1. Ensure that the user is a member of your organization in Docker. For more
-details, see [Manage members](../../docker-hub/members.md).
+details, see [Manage members](../../admin/organization/members.md).
 
 2. Create the `registry.json` file.
 

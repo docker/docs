@@ -1,10 +1,12 @@
 ---
-description: Learn how about general settings for organizations.
+description: Learn how to manage general settings for organizations.
 keywords: organization, settings
 title: General organization settings
 ---
 
 {{< include "admin-early-access.md" >}}
+
+This section describes how to manage general settings in Docker Admin.
 
 ## Configure general information
 

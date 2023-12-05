@@ -75,4 +75,4 @@ A [service account](../docker-hub/service-accounts.md) is a Docker ID used for a
 
 Only someone with access to the Docker account can deactivate the account. For more details, see [Deactivating an account](../admin/deactivate-account.md/).
 
-If the user is a member of your organization, you can remove the user from your organization. For more details, see [Remove a member or invitee](/docker-hub/members/#remove-a-member-or-invitee).
+If the user is a member of your organization, you can remove the user from your organization. For more details, see [Remove a member or invitee](../admin/organization/members.md#remove-a-member-or-invitee).

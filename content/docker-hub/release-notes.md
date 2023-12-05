@@ -57,7 +57,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and enhancements
 
-- You can now [export a CSV file of members](../docker-hub/members.md/#export-members) from organizations that you own.
+- You can now [export a CSV file of members](../admin/organization/members.md/#export-members) from organizations that you own.
 
 ## 2022-07-22
 

@@ -8,7 +8,10 @@ aliases:
 - /docker-hub/orgs/
 ---
 
-{{< include "admin-org-overview.md" >}}
+This section describes how to create an organization. Before you begin:
+
+- You need a [Docker ID](../../docker-id/_index.md).
+- Review the [Docker subscriptions and features](../../subscription/details.md) to determine what plan to choose for your organization.
 
 ## Create an organization
 
@@ -87,7 +90,7 @@ configure your organization.
   can invite new members using the **Invite members** button. See [Manage members](./members.md) for details.
 
 - **Teams**: Displays a list of existing teams and the number of
-  members in each team. See [Create a team](../../docker-hub/manage-a-team.md) for details.
+  members in each team. See [Create a team](./manage-a-team.md) for details.
 
 - **Repositories**: Displays a list of repositories associated with the
   organization. See [Repositories](../../docker-hub/repos/index.md) for detailed information about

@@ -50,7 +50,7 @@ Docker provides various types of audit logs and log retention varies. For exampl
 
 ### Can I export a list of all users with their assigned roles and privileges and if so, in what format?
 
-Using the [Export Members](../../docker-hub/members.md) feature, customers can export to CSV a list of their users with role and team information. 
+Using the [Export Members](../../admin/organization/members.md#export-members) feature, customers can export to CSV a list of their users with role and team information. 
 
 ### How does Docker Desktop handle and store authentication information?
 

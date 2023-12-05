@@ -44,7 +44,7 @@ Docker Team includes:
 - Unlimited [Vulnerability Scanning](../docker-hub/vulnerability-scanning.md)
 - 5000 image [pulls per day](../docker-hub/download-rate-limit.md) for each team member
 
-There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](../security/for-admins/roles-and-permissions.md), [audit logs](../docker-hub/audit-log.md), and more.
+There are also advanced collaboration and management tools, including organization and team management with [Role Based Access Control (RBAC)](../security/for-admins/roles-and-permissions.md), [audit logs](../admin/organization/activity-logs.md), and more.
 
 For a list of features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 

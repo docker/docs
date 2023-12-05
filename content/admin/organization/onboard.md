@@ -15,7 +15,7 @@ Learn how to onboard your organization using Docker Hub or Docker Admin.
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
-{{% admin-org-onboarding %}}
+{{% admin-org-onboarding product="hub" %}}
 
 {{< /tab >}}
 {{< tab name="Docker Admin" >}}
