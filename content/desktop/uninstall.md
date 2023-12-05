@@ -13,12 +13,34 @@ To uninstall Docker Desktop from your Windows machine:
 2. Select **Docker Desktop** from the **Apps & features** list and then select **Uninstall**.
 3. Select **Uninstall** to confirm your selection.
 
-You can also uninstall Docker Desktop from the CLI. Run:
+You can also uninstall Docker Desktop from the CLI:
+
+1. Locate the installer:
+   ```console
+   $ C:\Program Files\Docker\Docker\Docker Desktok Installer.exe
+   ```
+2. Uninstall Docker Desktop. 
+ - In PowerShell, run:
+    ```console
+    $ Start-Process 'Docker Desktop Installer.exe' -Wait uninstall
+    ```
+ - In the Command Prompt, run:
+    ```console
+    $ start /w "" "Docker Desktop Installer.exe" uninstall
+    ```
+
+After uninstalling Docker Desktop, there may be some residual files left behind which you can remove manually. These are:
 
 ```console
-$ Docker Desktop Installer.exe uninstall --quiet
+C:\ProgramData\Docker
+C:\ProgramData\DockerDesktop
+C:\Program Files\Docker
+C:\Users\<your user name>\AppData\Local\Docker
+C:\Users\<your user name>\AppData\Roaming\Docker
+C:\Users\<your user name>\AppData\Roaming\Docker Desktop
+C:\Users\<your user name>\.docker
 ```
-
+ 
 {{< /tab >}}
 {{< tab name="Mac" >}}
 
@@ -31,6 +53,14 @@ You can also uninstall Docker Desktop from the CLI. Run:
 
 ```console
 $ /Applications/Docker.app/Contents/MacOS/uninstall
+```
+
+After uninstalling Docker Desktop, there may be some residual files left behind which you can remove:
+
+```console
+$ rm -rf ~/Library/Group\ Containers/group.com.docker
+$ rm -rf ~/Library/Containers/com.docker.docker
+$ rm -rf ~/.docker
 ```
 
 {{< /tab >}}
