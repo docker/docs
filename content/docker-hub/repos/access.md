@@ -18,7 +18,7 @@ repository from that repository's **Settings** page.
 > **Note**
 >
 > A collaborator can't add other collaborators. Only the owner of
-> the repository has administrative access.
+> the repository has administrative access. Also, organizations can't add collaborators. Organization owners can control repository access with member roles and teams. See [Roles and permissions](../../security/for-admins/roles-and-permissions.md).
 
 You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
