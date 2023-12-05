@@ -86,7 +86,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    You should see output that looks like the following, indicating your Kubernetes objects were created successfully.
 
-   ```shell
+   ```text
    deployment.apps/docker-php-demo created
    service/php-entrypoint created
    ```
@@ -112,7 +112,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    You should get output like the following.
 
-   ```shell
+   ```text
    NAME              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
    kubernetes        ClusterIP   10.96.0.1        <none>        443/TCP          7d22h
    php-entrypoint    NodePort    10.111.101.229   <none>        80:30001/TCP     33s

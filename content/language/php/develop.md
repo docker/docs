@@ -12,7 +12,9 @@ Complete [Containerize a PHP application](containerize.md).
 
 In this section, you'll learn how to set up a development environment for your containerized application. This includes:
  - Adding a local database and persisting data
- - Configuring Compose to automatically update your running Compose services as you edit and save your code
+ - Adding phpMyAdmin to interact with the database
+ - Configuring Compose to automatically update your running Compose services as
+   you edit and save your code
  - Creating a development container that contains the dev dependencies
 
 ## Add a local database and persist data
@@ -24,7 +26,9 @@ To do this for the sample application, you'll need to do the following:
 
 ### Update the Dockerfile to install extensions
 
-To install PHP extensions, you need to update the `Dockerfile`. Open your Dockerfile in a IDE or text editor and then update the contents. The following is the updated `Dockerfile` that installs the `pdo` and `pdo_pgsql` extensions.
+To install PHP extensions, you need to update the `Dockerfile`. Open your
+Dockerfile in an IDE or text editor and then update the contents. The following
+is the updated `Dockerfile` that installs the `pdo` and `pdo_mysql` extensions.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -37,7 +41,7 @@ RUN --mount=type=bind,source=composer.json,target=composer.json \
     composer install --no-dev --no-interaction
 
 FROM php:8.2-apache as final
-RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
+RUN docker-php-ext-install pdo pdo_mysql
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --from=deps app/vendor/ /var/www/html/vendor
 COPY ./src /var/www/html
@@ -49,12 +53,12 @@ For more details about installing PHP extensions, see the [Official Docker Image
 ### Update the compose.yaml file to add a db and persist data
 
 Open the `compose.yaml` file in an IDE or text editor. You'll notice it
-already contains commented-out instructions for a PostgreSQL database and volume.
+already contains commented-out instructions for a PostgreSQL database and volume. For this application, you'll use MariaDB. For more details about MariaDB, see the [MariaDB Official Docker image](https://hub.docker.com/_/mariadb).
 
 Open the `src/database.php` file in an IDE or text editor. You'll notice that it reads environment variables in order to connect to the database.
 
 In the `compose.yaml` file, you'll need to update the following:
-1. Uncomment the database instructions.
+1. Uncomment and update the database instructions for MariaDB.
 2. Add a secret to the server service to pass in the database password.
 3. Add the database connection environment variables to the server service.
 4. Uncomment the volume instructions to persist data.
@@ -63,44 +67,44 @@ The following is the updated `compose.yaml` file.
 
 ```yaml
 services:
-  server:
-    build:
-      context: .
-    ports:
-      - 9000:80
-    depends_on:
-      db:
-        condition: service_healthy
-    secrets:
-      - db-password
-    environment:
-      - PASSWORD_FILE_PATH=/run/secrets/db-password
-      - DB_HOST=db
-      - DB_NAME=example
-      - DB_USER=postgres
-  db:
-    image: postgres
-    restart: always
-    user: postgres
-    secrets:
-      - db-password
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=example
-      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-    expose:
-      - 5432
-    healthcheck:
-      test: [ "CMD", "pg_isready" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+ server:
+   build:
+     context: .
+   ports:
+     - 9000:80
+   depends_on:
+     db:
+       condition: service_healthy
+   secrets:
+     - db-password
+   environment:
+     - PASSWORD_FILE_PATH=/run/secrets/db-password
+     - DB_HOST=db
+     - DB_NAME=example
+     - DB_USER=root
+ db:
+   image: mariadb
+   restart: always
+   user: root
+   secrets:
+     - db-password
+   volumes:
+     - db-data:/var/lib/mysql
+   environment:
+     - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+     - MARIADB_DATABASE=example
+   expose:
+     - 3306
+   healthcheck:
+     test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
+     interval: 10s
+     timeout: 5s
+     retries: 5
 volumes:
-  db-data:
+ db-data:
 secrets:
-  db-password:
-    file: db/password.txt
+ db-password:
+   file: db/password.txt
 ```
 
 > **Note**
@@ -115,7 +119,7 @@ You must create this file as it's not included in the source repository.
 In the `docker-php-sample` directory, create a new directory named `db` and
 inside that directory create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add the following password. The password must be on a single line, with no additional lines in the file.
 
-```shell
+```text
 example
 ```
 
@@ -123,7 +127,7 @@ Save and close the `password.txt` file.
 
 You should now have the following in your `docker-php-sample` directory.
 
-```shell
+```text
 ├── docker-php-sample/
 │ ├── .git/
 │ ├── db/
@@ -163,6 +167,72 @@ Refresh [http://localhost:9000/database.php](http://localhost:9000/database.php)
 
 Press `ctrl+c` in the terminal to stop your application.
 
+## Add phpMyAdmin to interact with the database
+
+You can easily add services to your application stack by updating the `compose.yaml` file.
+
+Update your `compose.yaml` to add a new service for phpMyAdmin. For more details, see the [phpMyAdmin Official Docker Image](https://hub.docker.com/_/phpmyadmin). The following is the updated `compose.yaml` file.
+
+```yaml
+services:
+ server:
+   build:
+     context: .
+   ports:
+     - 9000:80
+   depends_on:
+     db:
+       condition: service_healthy
+   secrets:
+     - db-password
+   environment:
+     - PASSWORD_FILE_PATH=/run/secrets/db-password
+     - DB_HOST=db
+     - DB_NAME=example
+     - DB_USER=root
+ db:
+   image: mariadb
+   restart: always
+   user: root
+   secrets:
+     - db-password
+   volumes:
+     - db-data:/var/lib/mysql
+   environment:
+     - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+     - MARIADB_DATABASE=example
+   expose:
+     - 3306
+   healthcheck:
+     test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
+     interval: 10s
+     timeout: 5s
+     retries: 5
+ phpmyadmin:
+   image: phpmyadmin
+   ports:
+     - 8080:80
+   depends_on:
+     - db
+   environment:
+     - PMA_HOST=db
+volumes:
+ db-data:
+secrets:
+ db-password:
+   file: db/password.txt
+```
+
+In the terminal, run `docker compose up` to run your application again.
+
+```console
+$ docker compose up --build
+```
+
+Open [http://localhost:8080](http://localhost:8080) in your browser to access phpMyAdmin. Log in using `root` as the username and `example` as the password. You can now interact with the database through phpMyAdmin.
+
+Press `ctrl+c` in the terminal to stop your application.
+
 ## Automatically update services
 
 Use Compose Watch to automatically update your running Compose services as you edit and save your code. For more details about Compose Watch, see [Use Compose Watch](../../compose/file-watch.md).
@@ -171,44 +241,52 @@ Open your `compose.yaml` file in an IDE or text editor and then add the Compose 
 
 ```yaml
 services:
-  server:
-    build:
-      context: .
-    ports:
-      - 9000:80
-    depends_on:
-      db:
-        condition: service_healthy
-    secrets:
-      - db-password
-    environment:
-      - PASSWORD_FILE_PATH=/run/secrets/db-password
-      - DB_HOST=db
-      - DB_NAME=example
-      - DB_USER=postgres
-    develop:
-      watch:
-        - action: sync
-          path: ./src
-          target: /var/www/html
-  db:
-    image: postgres
-    restart: always
-    user: postgres
-    secrets:
-      - db-password
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=example
-      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-    expose:
-      - 5432
-    healthcheck:
-      test: [ "CMD", "pg_isready" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+ server:
+   build:
+     context: .
+   ports:
+     - 9000:80
+   depends_on:
+     db:
+       condition: service_healthy
+   secrets:
+     - db-password
+   environment:
+     - PASSWORD_FILE_PATH=/run/secrets/db-password
+     - DB_HOST=db
+     - DB_NAME=example
+     - DB_USER=root
+   develop:
+     watch:
+       - action: sync
+         path: ./src
+         target: /var/www/html
+ db:
+   image: mariadb
+   restart: always
+   user: root
+   secrets:
+     - db-password
+   volumes:
+     - db-data:/var/lib/mysql
+   environment:
+     - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+     - MARIADB_DATABASE=example
+   expose:
+     - 3306
+   healthcheck:
+     test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
+     interval: 10s
+     timeout: 5s
+     retries: 5
+ phpmyadmin:
+   image: phpmyadmin
+   ports:
+     - 8080:80
+   depends_on:
+     - db
+   environment:
+     - PMA_HOST=db
 volumes:
   db-data:
 secrets:
@@ -256,7 +334,7 @@ RUN --mount=type=bind,source=./composer.json,target=composer.json \
     composer install --no-interaction
 
 FROM php:8.2-apache as base
-RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
+RUN docker-php-ext-install pdo pdo_mysql
 COPY ./src /var/www/html
 
 FROM base as development
@@ -276,50 +354,58 @@ The following is the updated `compose.yaml` file.
 
 ```yaml
 services:
-  server:
-    build:
-      context: .
-      target: development
-    ports:
-      - 9000:80
-    depends_on:
-      db:
-        condition: service_healthy
-    secrets:
-      - db-password
-    environment:
-      - PASSWORD_FILE_PATH=/run/secrets/db-password
-      - DB_HOST=db
-      - DB_NAME=example
-      - DB_USER=postgres
-    develop:
-      watch:
-        - action: sync
-          path: ./src
-          target: /var/www/html
-  db:
-    image: postgres
-    restart: always
-    user: postgres
-    secrets:
-      - db-password
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=example
-      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-    expose:
-      - 5432
-    healthcheck:
-      test: [ "CMD", "pg_isready" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+ server:
+   build:
+     context: .
+     target: development
+   ports:
+     - 9000:80
+   depends_on:
+     db:
+       condition: service_healthy
+   secrets:
+     - db-password
+   environment:
+     - PASSWORD_FILE_PATH=/run/secrets/db-password
+     - DB_HOST=db
+     - DB_NAME=example
+     - DB_USER=root
+   develop:
+     watch:
+       - action: sync
+         path: ./src
+         target: /var/www/html
+ db:
+   image: mariadb
+   restart: always
+   user: root
+   secrets:
+     - db-password
+   volumes:
+     - db-data:/var/lib/mysql
+   environment:
+     - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+     - MARIADB_DATABASE=example
+   expose:
+     - 3306
+   healthcheck:
+     test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
+     interval: 10s
+     timeout: 5s
+     retries: 5
+ phpmyadmin:
+   image: phpmyadmin
+   ports:
+     - 8080:80
+   depends_on:
+     - db
+   environment:
+     - PMA_HOST=db
 volumes:
-  db-data:
+ db-data:
 secrets:
-  db-password:
-    file: db/password.txt
+ db-password:
+   file: db/password.txt
 ```
 
 Your containerized application will now install the dev dependencies.

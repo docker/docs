@@ -18,7 +18,7 @@ application.
 
 ## Get the sample applications
 
-In this guide, you will use a pre-built PHP application. The application uses Composer for dependency management. You'll serve the application via an Apache web server.
+In this guide, you will use a pre-built PHP application. The application uses Composer for library dependency management. You'll serve the application via an Apache web server.
 
 Open a terminal, change directory to a directory that you want to work in, and
 run the following command to clone the repository.
@@ -57,7 +57,7 @@ Let's get started!
 You should now have the following contents in your `docker-php-sample`
 directory.
 
-```shell
+```text
 ├── docker-php-sample/
 │ ├── .git/
 │ ├── src/
