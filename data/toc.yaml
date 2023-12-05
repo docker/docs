@@ -1524,8 +1524,6 @@ Manuals:
       title: Start containers automatically
     - path: /config/labels-custom-metadata/
       title: Labels
-    - path: /engine/sbom/
-      title: Docker SBOM (Experimental)
   - sectiontitle: Logging
     section:
     - sectiontitle: Container logs
