@@ -2022,6 +2022,8 @@ Manuals:
     section:
     - path: /admin/company/
       title: Overview
+    - path: /admin/company/new-company/
+      title: Create a company
     - path: /admin/company/organizations/
       title: Manage organizations
     - path: /admin/company/users/
@@ -2045,23 +2047,10 @@ Manuals:
       title: Activity logs
     - path: /admin/organization/general-settings/
       title: General settings
+  - path: /admin/convert-account/
+    title: Convert an account into an organization
   - path: /admin/deactivate-account/
     title: Deactivate your account
-
-- sectiontitle: Administration (old)
-  section:
-  - path: /docker-hub/admin-overview/
-    title: Overview
-  - sectiontitle: Set up your company
-    section:
-    - path: /docker-hub/creating-companies/
-      title: Overview
-    - path: /docker-hub/new-company/
-      title: Create a company
-    - path:  /docker-hub/company-owner/
-      title: Manage company owners
-  - path: /docker-hub/convert-account/
-    title: Convert an account into an organization
 
 - sectiontitle: Security
   section:

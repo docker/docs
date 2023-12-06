@@ -57,7 +57,7 @@ Docker Business includes:
 - [Hardened Docker Desktop](../desktop/hardened-desktop/index.md) 
 - [Image Access Management](../security/for-admins/image-access-management.md) which lets admins control what content developers can access
 - [Registry Access Management](../security/for-admins/registry-access-management.md) which lets admins control what registries developers can access
-- [Company layer](../docker-hub/creating-companies.md) to manage multiple organizations and settings
+- [Company layer](../admin/company/_index.md) to manage multiple organizations and settings
 - [Single Sign-On](../security/for-admins/single-sign-on/index.md)
 - [System for Cross-domain Identity Management](../security/for-admins/scim.md) and more.
 

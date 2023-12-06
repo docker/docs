@@ -43,7 +43,7 @@ Yes. When SSO is enabled for your organization, each user must sign in with the 
 Yes. You can convert your user account to an organization account. Once you
 convert a user account into an organization, it is not possible to
 revert it to a personal user account. For prerequisites and instructions, see
-[Convert an account into an organization](convert-account.md).
+[Convert an account into an organization](../admin/convert-account.md).
 
 ### Our users create Docker Hub accounts through self-service. How do we know when the total number of users for the requested licenses has been met? Is it possible to add more members to the organization than the total number of licenses?
 

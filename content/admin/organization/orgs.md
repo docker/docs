@@ -20,7 +20,7 @@ organization using the **Create Organization** option in Docker Hub, or you can
 convert an existing user account to an organization. The following section
 contains instructions on how to create a new organization. For prerequisites and
 detailed instructions on converting an existing user account to an organization, see
-[Convert an account into an organization](../../docker-hub/convert-account.md).
+[Convert an account into an organization](../convert-account.md).
 
 To create an organization:
 
@@ -42,7 +42,7 @@ organization after you've created it.
 
    > **Note**
    >
-   > You can't use the same name for the organization and your Docker ID. If you want to use your Docker ID as the organization name, then you must first [convert your account into an organization](../../docker-hub/convert-account.md).
+   > You can't use the same name for the organization and your Docker ID. If you want to use your Docker ID as the organization name, then you must first [convert your account into an organization](../convert-account.md).
 
 5. Enter the name of your company. This is the full name of your company. Docker
 displays the company name on your organization page and in the details of any
@@ -72,7 +72,7 @@ To view an organization:
       >
       > You can't _directly_ log in to an organization. This is especially
       > important to note if you create an organization by
-      [converting a user account](../../docker-hub/convert-account.md), as conversion means you lose the ability to log into that
+      [converting a user account](../convert-account.md), as conversion means you lose the ability to log into that
       > "account", since it no longer exists. To view the organization you 
       > need to log in with the new owner account assigned during the
       > conversion or another account that was added as a member. If you 

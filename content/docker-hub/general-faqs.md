@@ -45,7 +45,7 @@ A **Team** is a group of Docker users that belong to an organization. An organiz
 
 ### What's a company?
 
-A **Company** is a management layer that centralizes administration of multiple organizations. Administrators can add organizations with a Docker Business subscription to a company and configure settings for all organizations under the company. See [Set up your company](creating-companies.md).
+A **Company** is a management layer that centralizes administration of multiple organizations. Administrators can add organizations with a Docker Business subscription to a company and configure settings for all organizations under the company. See [Company overview](../admin/company/_index.md).
 
 ### Who is an organization owner?
 
