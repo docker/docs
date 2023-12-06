@@ -55,7 +55,7 @@ $ gpg --generate-key
 
 The following is an example similar to what you see once you run the previous command:
 
-```hcl {hl_lines=12}
+```console {hl_lines=12}
 ...
 GnuPG needs to construct a user ID to identify your key.
 

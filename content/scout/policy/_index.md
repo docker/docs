@@ -60,6 +60,7 @@ Docker Scout ships the following out-of-the-box policies:
 - [Outdated base images](#outdated-base-images)
 - [High-profile vulnerabilities](#high-profile-vulnerabilities)
 - [Supply chain attestations](#supply-chain-attestations)
+- [Quality gates passed](#quality-gates-passed)
 
 Policies are enabled by default for Scout-enabled repositories. If you want to
 customize the criteria of a policy, you can create custom policies based on the
@@ -181,3 +182,35 @@ building with attestations, see
 > Docker Scout is currently unable to discern the difference between using
 > `scratch` as a base image and having no base image provenance. As a result,
 > images based on `scratch` always fail the Supply chain attestations policy.
+
+### Quality gates passed
+
+The Quality gates passed policy builds on the [SonarQube
+integration](../integrations/code-quality/sonarqube.md) to assess the quality
+of your source code. This policy works by ingesting the SonarQube code analysis
+results into Docker Scout.
+
+You define the criteria for this policy using SonarQube's [quality
+gates](https://docs.sonarsource.com/sonarqube/latest/user-guide/quality-gates/).
+SonarQube evaluates your source code against the quality gates you've defined
+in SonarQube. Docker Scout surfaces the SonarQube assessment as a Docker Scout
+policy.
+
+Docker Scout uses [provenance](../../build/attestations/slsa-provenance.md)
+attestations or the `org.opencontainers.image.revision` OCI annotation to link
+SonarQube analysis results with container images. In addition to enabling the
+SonarQube integration, you must also make sure that your images has either the
+attestation or the label.
+
+![Git commit SHA links image with SonarQube analysis](../images/scout-sq-commit-sha.webp)
+
+Once you push an image and policy evaluation completes, the results from the
+SonarQube quality gates display as a policy in the Docker Scout Dashboard, and
+in the CLI.
+
+> **Note**
+>
+> Docker Scout can only access SonarQube analyses created after the integration
+> is enabled. Docker Scout doesn't have access to historic evaluations. Trigger
+> a SonarQube analysis and policy evaluation after enabling the integration to
+> view the results in Docker Scout.
