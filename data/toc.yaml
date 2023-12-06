@@ -2129,7 +2129,7 @@ Manuals:
   - path: /billing/scout-billing/
     title: Docker Scout billing
   - path: /billing/build-billing/
-    title: Docker Hydrobuild billing
+    title: Docker Cloud Build billing
 
 
 - sectiontitle: Subscription
@@ -2151,7 +2151,7 @@ Manuals:
   - path: /subscription/scout-details/
     title: Docker Scout subscriptions and features
   - path: /subscription/build-details/
-    title: Docker Hydrobuild subscriptions and features
+    title: Docker Cloud Build subscriptions and features
 
 - sectiontitle: Trusted content
   section:

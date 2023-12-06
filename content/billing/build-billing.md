@@ -1,12 +1,12 @@
 ---
-title: Docker Hydrobuild billing
-description: Learn how to buy a Docker Hydrobuild subscription.
-keywords: payments, billing, subscription, build, cloud, cloud build, remote builder, hydrobuild
+title: Docker Cloud Build billing
+description: Learn how to buy a Docker Cloud Build subscription.
+keywords: payments, billing, subscription, build, cloud, cloud build, remote builder
 ---
 
-Hydrobuild is a next-generation build tool that enables improved build speed, a shared build cache, and native multi-platform builds. Hydrobuild is available for free with an existing Docker subscription. To buy additional seats and increase your available build minutes, you can buy a subscription to enhance your builds.
+Cloud Build is a next-gen build tool that enables improved build speed, a shared build cache, and native multi-platform builds. Cloud Build is available for free with an existing Docker subscription. To buy additional seats and increase your available build minutes, you can buy a subscription to enhance your builds.
 
-In this section, learn how to set up and manage billing for your Hydrobuild subscription. To learn about the subscription tiers, see [Hydrobuild subscriptions and features](../subscription/build-details.md).
+In this section, learn how to set up and manage billing for your Cloud Build subscription. To learn about the subscription tiers, see [Cloud Build subscriptions and features](../subscription/build-details.md).
 
 ## Buy your subscription
 

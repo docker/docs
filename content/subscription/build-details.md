@@ -1,16 +1,16 @@
 ---
-title: Docker Hydrobuild subscriptions and features
-description: Learn about the Docker Hydrobuild subscriptions plans and features
-keywords: subscription, pro, team, business, features, build, cloud, cloud build, remote builder, hydrobuild
+title: Docker Cloud Build subscriptions and features
+description: Learn about the Docker Cloud Build subscriptions plans and features
+keywords: subscription, pro, team, business, features, build, cloud, cloud build, remote builder
 ---
 
-You can enhance your teams' builds with a Hydrobuild subscription. This page describes the features available for the different subscription tiers.
+You can enhance your teams' builds with a Cloud Build subscription. This page describes the features available for the different subscription tiers.
 
-## Docker Hydrobuild Starter
+## Docker Cloud Build Starter
 
-If you have an existing [Docker subscription](./details.md), Hydrobuild is included. The features available vary depending on your subscription tier.
+If you have an existing [Docker subscription](./details.md), Cloud Build is included. The features available vary depending on your subscription tier.
 
-### Docker Personal plus Hydrobuild
+### Docker Personal plus Cloud Build
 
 - 50 build minutes every month
 - Available for one user
@@ -18,7 +18,7 @@ If you have an existing [Docker subscription](./details.md), Hydrobuild is inclu
 - Option to buy an additional seat
 - Can buy extra buckets of minutes at any time
 
-### Docker Pro plus Hydrobuild
+### Docker Pro plus Cloud Build
 
 - 100 build minutes every month
 - Available for one user
@@ -26,18 +26,18 @@ If you have an existing [Docker subscription](./details.md), Hydrobuild is inclu
 - Option to buy an additional seat
 - Can buy extra buckets of minutes at any time
 
-### Docker Team plus Hydrobuild
+### Docker Team plus Cloud Build
 
 - 400 build minutes every month
 - Option to onboard up to 100 members
 - Can buy additional seats to add more minutes
 
-### Docker Business plus Hydrobuild
+### Docker Business plus Cloud Build
 
-- All the features listed for Docker Team plus Hydrobuild
+- All the features listed for Docker Team plus Cloud Build
 - 800 build minutes every month
 
-## Docker Hydrobuild Paid
+## Docker Cloud Build Paid
 
 You can upgrade the starter plan for any tier to enhance your developers' experience with the following features:
 
@@ -45,8 +45,8 @@ You can upgrade the starter plan for any tier to enhance your developers' experi
 - Option to buy reserve minutes
 - Increased shared cache
 
-To learn how to buy this subscription, see [Docker Hydrobuild billing](../billing/build-billing.md).
+To learn how to buy this subscription, see [Docker Cloud Build billing](../billing/build-billing.md).
 
-## Docker Hydrobuild Enterprise
+## Docker Cloud Build Enterprise
 
 For enterprise features such as paying via invoice and additional build minutes, [contact sales](https://www.docker.com/pricing/contact-sales/).
