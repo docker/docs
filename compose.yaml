@@ -1,5 +1,8 @@
 services:
   server:
+    dns:
+     - 8.8.8.8
+     - 8.8.4.4
     build:
       context: .
       target: dev

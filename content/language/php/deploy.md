@@ -99,7 +99,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    Your deployment should be listed as follows:
 
-   ```shell
+   ```text
    NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
    docker-php-demo      1/1     1            1           6s
    ```

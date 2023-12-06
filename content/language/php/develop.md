@@ -28,25 +28,25 @@ To do this for the sample application, you'll need to do the following:
 
 To install PHP extensions, you need to update the `Dockerfile`. Open your
 Dockerfile in an IDE or text editor and then update the contents. The following
-is the updated `Dockerfile` that installs the `pdo` and `pdo_mysql` extensions.
-All comments have been removed.
+`Dockerfile` includes one new line that installs the `pdo` and `pdo_mysql`
+extensions. All comments have been removed.
 
-```diff
-   # syntax=docker/dockerfile:1
-   
-   FROM composer:lts as deps
-   WORKDIR /app
-   RUN --mount=type=bind,source=composer.json,target=composer.json \
-       --mount=type=bind,source=composer.lock,target=composer.lock \
-       --mount=type=cache,target=/tmp/cache \
-       composer install --no-dev --no-interaction
-   
-   FROM php:8.2-apache as final
-+  RUN docker-php-ext-install pdo pdo_mysql
-   RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-   COPY --from=deps app/vendor/ /var/www/html/vendor
-   COPY ./src /var/www/html
-   USER www-data
+```dockerfile {hl_lines=11}
+# syntax=docker/dockerfile:1
+
+FROM composer:lts as deps
+WORKDIR /app
+RUN --mount=type=bind,source=composer.json,target=composer.json \
+    --mount=type=bind,source=composer.lock,target=composer.lock \
+    --mount=type=cache,target=/tmp/cache \
+    composer install --no-dev --no-interaction
+
+FROM php:8.2-apache as final
+RUN docker-php-ext-install pdo pdo_mysql
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+COPY --from=deps app/vendor/ /var/www/html/vendor
+COPY ./src /var/www/html
+USER www-data
 ```
 
 For more details about installing PHP extensions, see the [Official Docker Image for PHP](https://hub.docker.com/_/php).
@@ -174,7 +174,7 @@ You can easily add services to your application stack by updating the `compose.y
 
 Update your `compose.yaml` to add a new service for phpMyAdmin. For more details, see the [phpMyAdmin Official Docker Image](https://hub.docker.com/_/phpmyadmin). The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines=35-42}
+```yaml {hl_lines="35-42"}
 services:
   server:
     build:
@@ -240,7 +240,7 @@ Use Compose Watch to automatically update your running Compose services as you e
 
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines=17-21}
+```yaml {hl_lines="17-21"}
 services:
   server:
     build:
@@ -316,11 +316,11 @@ Press `ctrl+c` in the terminal to stop Compose Watch. Run `docker compose down` 
 At this point, when you run your containerized application, Composer isn't installing the dev dependencies. While this small image is good for production, it lacks the tools and dependencies you may need when developing and it doesn't include the `tests` directory. You can use multi-stage builds to build stages for both development and production in the same Dockerfile. For more details, see [Multi-stage builds](../../build/building/multi-stage.md).
 
 In the `Dockerfile`, you'll need to update the following:
-1. Split the `deps` staged into two stages. One for production and one for
-   development.
+1. Split the `deps` staged into two stages. One stage for production
+   (`prod-deps`) and one stage (`dev-deps`) to install development dependencies.
 2. Create a common `base` stage.
-3. Split the `final` stage into two stages. One for production and one for
-   development.
+3. Create a new `development` stage for development.
+4. Update the 'final` stage to copy dependencies from the new `prod-deps` stage.
 
 The following is the `Dockerfile` before and after the changes.
 
@@ -383,7 +383,8 @@ USER www-data
 {{< /tabs >}}
 
 
-Update your `compose.yaml` file to target the development stage.
+Update your `compose.yaml` file by adding an instruction to target the
+development stage.
 
 The following is the updated section of the `compose.yaml` file.
 
@@ -393,6 +394,7 @@ services:
     build:
       context: .
       target: development
+      # ...
 ```
 
 Your containerized application will now install the dev dependencies.
@@ -415,9 +417,10 @@ In this section, you took a look at setting up your Compose file to add a local
 database and persist data. You also learned how to use Compose Watch to automatically sync your application when you update your code. And finally, you learned how to create a development container that contains the dependencies needed for development.
 
 Related information:
+ - [Build with Docker guide](../../build/guide/index.md)
  - [Compose file reference](/compose/compose-file/)
  - [Compose file watch](../../compose/file-watch.md)
- - [Multi-stage builds](../../build/building/multi-stage.md)
+ - [Dockerfile reference](../../engine/reference/builder.md)
  - [Official Docker Image for PHP](https://hub.docker.com/_/php)
 
 ## Next steps

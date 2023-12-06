@@ -45,7 +45,7 @@ To run your tests when building, you need to update your Dockerfile. Create a ne
 
 The following is the updated Dockerfile.
 
-```dockerfile
+```dockerfile {hl_lines="26-28"}
 # syntax=docker/dockerfile:1
 
 FROM composer:lts as prod-deps
@@ -81,10 +81,10 @@ COPY --from=prod-deps app/vendor/ /var/www/html/vendor
 USER www-data
 ```
 
-Run the following command to build an image using the test stage as the target and view the test results. Include `--progress=plain` to view the build output, `--no-cache` to ensure the tests always run, and `--target test` to target the test stage.
+Run the following command to build an image using the test stage as the target and view the test results. Include `--progress plain` to view the build output, `--no-cache` to ensure the tests always run, and `--target test` to target the test stage.
 
 ```console
-$ docker build -t php-docker-image-test --progress=plain --no-cache --target test .
+$ docker build -t php-docker-image-test --progress plain --no-cache --target test .
 ```
 
 You should see output containing the following.
