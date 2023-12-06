@@ -29,23 +29,24 @@ To do this for the sample application, you'll need to do the following:
 To install PHP extensions, you need to update the `Dockerfile`. Open your
 Dockerfile in an IDE or text editor and then update the contents. The following
 is the updated `Dockerfile` that installs the `pdo` and `pdo_mysql` extensions.
+All comments have been removed.
 
-```dockerfile
-# syntax=docker/dockerfile:1
-
-FROM composer:lts as deps
-WORKDIR /app
-RUN --mount=type=bind,source=composer.json,target=composer.json \
-    --mount=type=bind,source=composer.lock,target=composer.lock \
-    --mount=type=cache,target=/tmp/cache \
-    composer install --no-dev --no-interaction
-
-FROM php:8.2-apache as final
-RUN docker-php-ext-install pdo pdo_mysql
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-COPY --from=deps app/vendor/ /var/www/html/vendor
-COPY ./src /var/www/html
-USER www-data
+```diff
+   # syntax=docker/dockerfile:1
+   
+   FROM composer:lts as deps
+   WORKDIR /app
+   RUN --mount=type=bind,source=composer.json,target=composer.json \
+       --mount=type=bind,source=composer.lock,target=composer.lock \
+       --mount=type=cache,target=/tmp/cache \
+       composer install --no-dev --no-interaction
+   
+   FROM php:8.2-apache as final
++  RUN docker-php-ext-install pdo pdo_mysql
+   RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+   COPY --from=deps app/vendor/ /var/www/html/vendor
+   COPY ./src /var/www/html
+   USER www-data
 ```
 
 For more details about installing PHP extensions, see the [Official Docker Image for PHP](https://hub.docker.com/_/php).
@@ -63,48 +64,48 @@ In the `compose.yaml` file, you'll need to update the following:
 3. Add the database connection environment variables to the server service.
 4. Uncomment the volume instructions to persist data.
 
-The following is the updated `compose.yaml` file.
+The following is the updated `compose.yaml` file. All comments have been removed.
 
 ```yaml
 services:
- server:
-   build:
-     context: .
-   ports:
-     - 9000:80
-   depends_on:
-     db:
-       condition: service_healthy
-   secrets:
-     - db-password
-   environment:
-     - PASSWORD_FILE_PATH=/run/secrets/db-password
-     - DB_HOST=db
-     - DB_NAME=example
-     - DB_USER=root
- db:
-   image: mariadb
-   restart: always
-   user: root
-   secrets:
-     - db-password
-   volumes:
-     - db-data:/var/lib/mysql
-   environment:
-     - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
-     - MARIADB_DATABASE=example
-   expose:
-     - 3306
-   healthcheck:
-     test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
-     interval: 10s
-     timeout: 5s
-     retries: 5
+  server:
+    build:
+      context: .
+    ports:
+      - 9000:80
+    depends_on:
+      db:
+        condition: service_healthy
+    secrets:
+      - db-password
+    environment:
+      - PASSWORD_FILE_PATH=/run/secrets/db-password
+      - DB_HOST=db
+      - DB_NAME=example
+      - DB_USER=root
+  db:
+    image: mariadb
+    restart: always
+    user: root
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+      - MARIADB_DATABASE=example
+    expose:
+      - 3306
+    healthcheck:
+      test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect",  "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
- db-data:
+  db-data:
 secrets:
- db-password:
-   file: db/password.txt
+  db-password:
+    file: db/password.txt
 ```
 
 > **Note**
@@ -173,54 +174,54 @@ You can easily add services to your application stack by updating the `compose.y
 
 Update your `compose.yaml` to add a new service for phpMyAdmin. For more details, see the [phpMyAdmin Official Docker Image](https://hub.docker.com/_/phpmyadmin). The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml {hl_lines=35-42}
 services:
- server:
-   build:
-     context: .
-   ports:
-     - 9000:80
-   depends_on:
-     db:
-       condition: service_healthy
-   secrets:
-     - db-password
-   environment:
-     - PASSWORD_FILE_PATH=/run/secrets/db-password
-     - DB_HOST=db
-     - DB_NAME=example
-     - DB_USER=root
- db:
-   image: mariadb
-   restart: always
-   user: root
-   secrets:
-     - db-password
-   volumes:
-     - db-data:/var/lib/mysql
-   environment:
-     - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
-     - MARIADB_DATABASE=example
-   expose:
-     - 3306
-   healthcheck:
-     test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
-     interval: 10s
-     timeout: 5s
-     retries: 5
- phpmyadmin:
-   image: phpmyadmin
-   ports:
-     - 8080:80
-   depends_on:
-     - db
-   environment:
-     - PMA_HOST=db
+  server:
+    build:
+      context: .
+    ports:
+      - 9000:80
+    depends_on:
+      db:
+        condition: service_healthy
+    secrets:
+      - db-password
+    environment:
+      - PASSWORD_FILE_PATH=/run/secrets/db-password
+      - DB_HOST=db
+      - DB_NAME=example
+      - DB_USER=root
+  db:
+    image: mariadb
+    restart: always
+    user: root
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+      - MARIADB_DATABASE=example
+    expose:
+      - 3306
+    healthcheck:
+      test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect",  "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    environment:
+      - PMA_HOST=db
 volumes:
- db-data:
+  db-data:
 secrets:
- db-password:
-   file: db/password.txt
+  db-password:
+    file: db/password.txt
 ```
 
 In the terminal, run `docker compose up` to run your application again.
@@ -239,54 +240,54 @@ Use Compose Watch to automatically update your running Compose services as you e
 
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml {hl_lines=17-21}
 services:
- server:
-   build:
-     context: .
-   ports:
-     - 9000:80
-   depends_on:
-     db:
-       condition: service_healthy
-   secrets:
-     - db-password
-   environment:
-     - PASSWORD_FILE_PATH=/run/secrets/db-password
-     - DB_HOST=db
-     - DB_NAME=example
-     - DB_USER=root
-   develop:
-     watch:
-       - action: sync
-         path: ./src
-         target: /var/www/html
- db:
-   image: mariadb
-   restart: always
-   user: root
-   secrets:
-     - db-password
-   volumes:
-     - db-data:/var/lib/mysql
-   environment:
-     - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
-     - MARIADB_DATABASE=example
-   expose:
-     - 3306
-   healthcheck:
-     test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
-     interval: 10s
-     timeout: 5s
-     retries: 5
- phpmyadmin:
-   image: phpmyadmin
-   ports:
-     - 8080:80
-   depends_on:
-     - db
-   environment:
-     - PMA_HOST=db
+  server:
+    build:
+      context: .
+    ports:
+      - 9000:80
+    depends_on:
+      db:
+        condition: service_healthy
+    secrets:
+      - db-password
+    environment:
+      - PASSWORD_FILE_PATH=/run/secrets/db-password
+      - DB_HOST=db
+      - DB_NAME=example
+      - DB_USER=root
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /var/www/html
+  db:
+    image: mariadb
+    restart: always
+    user: root
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+      - MARIADB_DATABASE=example
+    expose:
+      - 3306
+    healthcheck:
+      test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect",  "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    environment:
+      - PMA_HOST=db
 volumes:
   db-data:
 secrets:
@@ -314,7 +315,37 @@ Press `ctrl+c` in the terminal to stop Compose Watch. Run `docker compose down` 
 
 At this point, when you run your containerized application, Composer isn't installing the dev dependencies. While this small image is good for production, it lacks the tools and dependencies you may need when developing and it doesn't include the `tests` directory. You can use multi-stage builds to build stages for both development and production in the same Dockerfile. For more details, see [Multi-stage builds](../../build/building/multi-stage.md).
 
-The following is the updated Dockerfile.
+In the `Dockerfile`, you'll need to update the following:
+1. Split the `deps` staged into two stages. One for production and one for
+   development.
+2. Create a common `base` stage.
+3. Split the `final` stage into two stages. One for production and one for
+   development.
+
+The following is the `Dockerfile` before and after the changes.
+
+{{< tabs >}}
+{{< tab name="Before" >}}
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM composer:lts as deps
+WORKDIR /app
+RUN --mount=type=bind,source=composer.json,target=composer.json \
+    --mount=type=bind,source=composer.lock,target=composer.lock \
+    --mount=type=cache,target=/tmp/cache \
+    composer install --no-dev --no-interaction
+
+FROM php:8.2-apache as final
+RUN docker-php-ext-install pdo pdo_mysql
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+COPY --from=deps app/vendor/ /var/www/html/vendor
+COPY ./src /var/www/html
+USER www-data
+```
+{{< /tab >}}
+{{< tab name="After" >}}
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -348,64 +379,20 @@ COPY --from=prod-deps app/vendor/ /var/www/html/vendor
 USER www-data
 ```
 
+{{< /tab >}}
+{{< /tabs >}}
+
+
 Update your `compose.yaml` file to target the development stage.
 
-The following is the updated `compose.yaml` file.
+The following is the updated section of the `compose.yaml` file.
 
-```yaml
+```yaml {hl_lines=5}
 services:
- server:
-   build:
-     context: .
-     target: development
-   ports:
-     - 9000:80
-   depends_on:
-     db:
-       condition: service_healthy
-   secrets:
-     - db-password
-   environment:
-     - PASSWORD_FILE_PATH=/run/secrets/db-password
-     - DB_HOST=db
-     - DB_NAME=example
-     - DB_USER=root
-   develop:
-     watch:
-       - action: sync
-         path: ./src
-         target: /var/www/html
- db:
-   image: mariadb
-   restart: always
-   user: root
-   secrets:
-     - db-password
-   volumes:
-     - db-data:/var/lib/mysql
-   environment:
-     - MARIADB_ROOT_PASSWORD_FILE=/run/secrets/db-password
-     - MARIADB_DATABASE=example
-   expose:
-     - 3306
-   healthcheck:
-     test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect", "--innodb_initialized"]
-     interval: 10s
-     timeout: 5s
-     retries: 5
- phpmyadmin:
-   image: phpmyadmin
-   ports:
-     - 8080:80
-   depends_on:
-     - db
-   environment:
-     - PMA_HOST=db
-volumes:
- db-data:
-secrets:
- db-password:
-   file: db/password.txt
+  server:
+    build:
+      context: .
+      target: development
 ```
 
 Your containerized application will now install the dev dependencies.

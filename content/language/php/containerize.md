@@ -34,7 +34,10 @@ The sample application is a basic hello world application and an application tha
 Now that you have an application, you can use `docker init` to create the
 necessary Docker assets to containerize your application. Inside the
 `docker-php-sample` directory, run the `docker init` command in a terminal.
-Refer to the following example to answer the prompts from `docker init`.
+`docker init` provides some default configuration, but you'll need to answer a
+few questions about your application. For example, this application uses PHP
+version 8.2. Refer to the following `docker init` example and use the same
+answers for your prompts.
 
 ```console
 $ docker init
@@ -117,10 +120,7 @@ In this section, you learned how you can containerize and run a simple PHP
 application using Docker.
 
 Related information:
- - [Dockerfile reference](../../engine/reference/builder.md)
- - [Build with Docker guide](../../build/guide/index.md)
- - [.dockerignore file reference](../../engine/reference/builder.md#dockerignore-file)
- - [Docker Compose overview](../../compose/_index.md)
+ - [docker init reference](../../engine/reference/commandline/init.md)
 
 ## Next steps
 
