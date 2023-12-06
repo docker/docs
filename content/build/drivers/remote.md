@@ -188,7 +188,7 @@ through the Kubernetes API. Note that this method only connects to a single pod
 in the deployment.
 
 ```console
-$ kubectl get pods --selector=app=buildkitd -o json | jq -r '.items[].metadata.name
+$ kubectl get pods --selector=app=buildkitd -o json | jq -r '.items[].metadata.name'
 buildkitd-XXXXXXXXXX-xxxxx
 $ docker buildx create \
   --name remote-container \
