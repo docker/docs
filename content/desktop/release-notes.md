@@ -88,7 +88,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed a bug were the setting **Start Docker Desktop when you sign in** would not work. Fixes [docker/for-mac#7052](https://github.com/docker/for-mac/issues/7052).
 - You can now enable the use of Kernel networking path for UDP through the UI. Fixes [docker/for-mac#7008](https://github.com/docker/for-mac/issues/7008).
 - Fixed a regression where the `uninstall` CLI tool was missing.
-- Addressed an issue causing Docker Desktop to be unresponsive when analytics are disabled in admin-settings.
+- Addressed an issue which caused Docker Desktop to become unresponsive when analytics were disabled with Settings Management. 
 
 #### For Windows
 
