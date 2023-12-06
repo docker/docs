@@ -10,22 +10,6 @@ The **Builds** view is a simple interface that lets you inspect your build
 history and manage builders using Docker Desktop. By default, it
 displays a list of all your ongoing and completed builds.
 
-> **Beta feature**
->
-> The **Builds** view is currently in [Beta](../../release-lifecycle.md/#beta).
-> This feature may change or be removed from future releases.
-{ .experimental }
-
-## Turn on the Builds view
-
-1. Navigate to **Settings**.
-2. Select **Features in development**.
-3. In the **Beta features** tab, select the **Display Builds view** checkbox.
-4. Select **Apply & restart** for the changes to take effect.
-
-After the restart, the **Builds** view and the **Builders** settings menu
-appear.
-
 ## Show build list
 
 Select the **Builds** view in the Docker Dashboard to open the build list.

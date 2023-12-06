@@ -22,7 +22,7 @@ The **Learning center** view helps you get started with quick in-app walkthrough
 For a more detailed guide about getting started, see
 [Get started](../../get-started/index.md).
 
-The **Builds** view, currently in beta, lets you inspect your build history and manage builders. By default, it displays a list of all your ongoing and completed builds. [Explore builds](builds.md).
+The **Builds** view lets you inspect your build history and manage builders. By default, it displays a list of all your ongoing and completed builds. [Explore builds](builds.md).
 
 In addition, the Docker Dashboard allows you to:
 
