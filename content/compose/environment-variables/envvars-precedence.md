@@ -65,7 +65,7 @@ Each column represents a context from where you can set a value, or substitute i
 
 The columns `Host OS environment` and `.env file` is listed only as an illustration lookup. In reality, they don't result in a variable in the container by itself.
 
-Each row represents a combination of contexts where `TAG` is set, substituted, or both. The **Result** column indicates the final value for TAG in each scenario.
+Each row represents a combination of contexts where `TAG` is set, substituted, or both. The **Result** column indicates the final value for `TAG` in each scenario.
 
 
 |  # |  `docker compose run --env`  |  `environment` attribute  |  `env_file` attribute  |  Image `ENV` |  `Host OS` environment  |  `.env` file      | |  Result  |

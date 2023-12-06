@@ -1,6 +1,6 @@
 ---
 title: Ways to set environment variables with Compose
-description: How to set, use ,and manage environment variables with Compose
+description: How to set, use, and manage environment variables with Compose
 keywords: compose, orchestration, environment, env file
 aliases:
 - /compose/env/
@@ -69,10 +69,10 @@ services:
         - .env.override
   ```
 - You can place your `.env` file in a location other than the root of your project's directory, and then use one of the following methods so Compose can navigate to it:
-  - The [`--file` option in the CLI](../reference/index.md#use--f-to-specify-name-and-path-of-one-or-more-compose-files) 
+  - The [`--env-file` option in the CLI](#substitute-with---env-file)
   - Using the [`env_file` attribute in the Compose file](../compose-file/05-services.md#env_file)
-- Values in your `.env` file can be overriden from the command line by using [`docker-compose up -e`](#set-environment-variables-with-docker-compose-run---env).
-- Your `.env` file can be overriden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
+- Values in your `.env` file can be overridden from the command line by using [`docker-compose up -e`](#set-environment-variables-with-docker-compose-run---env).
+- Your `.env` file can be overridden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
 
 > **Important**
 >
@@ -128,7 +128,7 @@ web:
 - Environment variables declared in the `.env` file cannot then be referenced again separately in the Compose file.
 - If you use both the `env_file` and `environment` attribute, environment variables set by `environment` take precedence.
 - The paths to your `.env` file, specified in the `env_file` attribute,  are relative to the location of your `compose.yml` file. 
-- Values in your `.env` files can be overriden from the command line by using [`docker compose up -e`](#set-environment-variables-with-docker-compose-run---env).
+- Values in your `.env` files can be overridden from the command line by using [`docker compose up -e`](#set-environment-variables-with-docker-compose-run---env).
 - Your `.env` files can be overriden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
 
 ### Substitute from the shell 
