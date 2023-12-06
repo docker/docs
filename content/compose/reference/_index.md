@@ -8,20 +8,7 @@ aliases:
 
 {{< include "compose-eol.md" >}}
 
-This page provides the usage information for the `docker compose` Command.
-
-> Important
->
-> The new Compose V2, which supports the `compose` command as part of the Docker
-> CLI, is now available.
->
-> Compose V2 integrates compose functions into the Docker platform, continuing
-> to support most of the previous `docker-compose` features and flags. You can
-> run Compose V2 by replacing the hyphen (`-`) with a space, using `docker compose`,
-> instead of `docker-compose`.
-{ .important }
-
-For more information about Docker Compose V2 GA, see the blog post [Announcing Compose V2 General Availability](https://www.docker.com/blog/announcing-compose-v2-general-availability/).
+This page provides usage information for the `docker compose` command.
 
 ## Command options overview and help
 
@@ -36,7 +23,7 @@ Define and run multi-container applications with Docker.
 Options:
       --ansi string                Control when to print ANSI control characters ("never"|"always"|"auto") (default "auto")
       --compatibility              Run compose in backward compatibility mode
-      --env-file stringArray       Specify an alternate environment file.
+      --env-file stringArray       Specify an alternate environment file
   -f, --file stringArray           Compose configuration files
       --parallel int               Control max parallelism, -1 for unlimited (default -1)
       --profile stringArray        Specify a profile to enable
@@ -91,10 +78,10 @@ add to their predecessors.
 For example, consider this command line:
 
 ```console
-$ docker compose -f docker-compose.yml -f docker-compose.admin.yml run backup_db
+$ docker compose -f compose.yml -f compose.admin.yml run backup_db
 ```
 
-The `docker-compose.yml` file might specify a `webapp` service.
+The `compose.yml` file might specify a `webapp` service.
 
 ```yaml
 webapp:
@@ -105,7 +92,7 @@ webapp:
     - "/data"
 ```
 
-If the `docker-compose.admin.yml` also specifies this same service, any matching
+If the `compose.admin.yml` also specifies this same service, any matching
 fields override the previous file. New values, add to the `webapp` service
 configuration.
 
@@ -126,12 +113,12 @@ relative to the current working directory.
 
 The `-f` flag is optional. If you don't provide this flag on the command line,
 Compose traverses the working directory and its parent directories looking for a
-`docker-compose.yml` and a `docker-compose.override.yml` file. You must supply
-at least the `docker-compose.yml` file. If both files are present on the same
+`compose.yml` and a `compose.override.yml` file. You must supply
+at least the `compose.yml` file. If both files are present on the same
 directory level, Compose combines the two files into a single configuration.
 
-The configuration in the `docker-compose.override.yml` file is applied over and
-in addition to the values in the `docker-compose.yml` file.
+The configuration in the `compose.override.yml` file is applied over and
+in addition to the values in the `compose.yml` file.
 
 ### Specifying a path to a single Compose file
 
@@ -142,15 +129,15 @@ in an environment file.
 
 For an example of using the `-f` option at the command line, suppose you are
 running the [Compose Rails sample](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/README.md), and
-have a `docker-compose.yml` file in a directory called `sandbox/rails`. You can
+have a `compose.yml` file in a directory called `sandbox/rails`. You can
 use a command like [docker compose pull](../../engine/reference/commandline/compose_pull.md) to get the
 postgres image for the `db` service from anywhere by using the `-f` flag as
-follows: `docker compose -f ~/sandbox/rails/docker-compose.yml pull db`
+follows: `docker compose -f ~/sandbox/rails/compose.yml pull db`
 
 Here's the full example:
 
 ```console
-$ docker compose -f ~/sandbox/rails/docker-compose.yml pull db
+$ docker compose -f ~/sandbox/rails/compose.yml pull db
 Pulling db (postgres:latest)...
 latest: Pulling from library/postgres
 ef0380f84d05: Pull complete
