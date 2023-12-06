@@ -1,7 +1,7 @@
 ---
 title: Builders
 keywords: build, buildx, builders, buildkit, drivers, backend
-description: null
+description: Learn about builders and how to manage them
 ---
 
 A builder is a BuildKit daemon that you can use to run your builds. BuildKit
@@ -10,13 +10,6 @@ container image or other artifacts.
 
 You can create and manage builders, inspect them, and even connect to builders
 running remotely. You interact with builders using the Docker CLI.
-
-> **Builds in Docker Desktop**
->
-> The [Docker Desktop Builds view](../../desktop/use-desktop/builds.md)
-> is a [Beta](../../release-lifecycle.md#beta) feature that lets you
-> view and manage builders using Docker Desktop.
-{ .experimental }
 
 ## Default builder
 

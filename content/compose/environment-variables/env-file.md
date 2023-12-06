@@ -1,17 +1,25 @@
 ---
-description: Understand the accepted syntax for declaring environment variables.
+description: Understand the accepted syntax for declaring environment variables with an environment file
 keywords: fig, composition, compose, docker, orchestration, environment, env file
-title: Use an environment file in Docker Compose
+title: Syntax for environment files in Docker Compose
 aliases:
 - /compose/env-file/
 ---
+
+This page provides information on the syntax rules and guidelines when using an `.env` file. It defines the rules for commenting, and explains how values are processed. Additionally, it introduces the concept of interpolation, which allows the use of variables within environment files.
+
+> **Important**
+>
+> Environment variables from an environment file have lower precedence than those from any other [method](set-environment-variables.md).
+For more information, see [Environment variables precedence](envvars-precedence.md).
+{ .important }
 
 ## Syntax
 The following syntax rules apply to environment files:
 
 - Lines beginning with `#` are processed as comments and ignored.
 - Blank lines are ignored.
-- Unquoted and double-quoted (`"`) values have [parameter expansion](#parameter-expansion) applied.
+- Unquoted and double-quoted (`"`) values have [interpolation](#interpolation) applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
@@ -33,9 +41,9 @@ The following syntax rules apply to environment files:
   - `VAR='some\tvalue'` -> `some\tvalue`
   - `VAR=some\tvalue` -> `some\tvalue`
 
-### Parameter expansion
-Compose supports parameter expansion in environment files.
-Parameter expansion is applied for unquoted and double-quoted values.
+### Interpolation
+Compose supports interpolation in environment files.
+Interpolation is applied for unquoted and double-quoted values.
 Both braced (`${VAR}`) and unbraced (`$VAR`) expressions are supported.
 
 For braced expressions, the following formats are supported:
@@ -51,7 +59,5 @@ For braced expressions, the following formats are supported:
   - `${VAR:+replacement}` -> `replacement` if `VAR` is set and non-empty, otherwise empty
   - `${VAR+replacement}` -> `replacement` if `VAR` is set, otherwise empty
 
-## Precedence
 
-Environment variables from an environment file have lower precedence than those passed via the command-line or via the `environment` attribute in the `compose.yml` file.
-For more information, see [Environment variables precedence](envvars-precedence.md).
+
