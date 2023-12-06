@@ -72,8 +72,7 @@ Keep the following in mind when using restart policies:
 
 If restart policies don't suit your needs, such as when processes outside
 Docker depend on Docker containers, you can use a process manager such as
-[upstart](http://upstart.ubuntu.com/),
-[systemd](https://freedesktop.org/wiki/Software/systemd/), or
+[systemd](https://freedesktop.org/wiki/Software/systemd/) or
 [supervisor](http://supervisord.org/) instead.
 
 > **Warning**

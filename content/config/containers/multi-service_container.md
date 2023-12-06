@@ -25,8 +25,8 @@ your process falls into this category, you can use the `--init` option when you
 run the container. The `--init` flag inserts a tiny init-process into the
 container as the main process, and handles reaping of all processes when the
 container exits. Handling such processes this way is superior to using a
-full-fledged init process such as `sysvinit`, `upstart`, or `systemd` to handle
-process lifecycle within your container.
+full-fledged init process such as `sysvinit` or `systemd` to handle process
+lifecycle within your container.
 
 If you need to run more than one service within a container, you can achieve
 this in a few different ways.
