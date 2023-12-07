@@ -134,13 +134,25 @@ Now that you have an image, you can run the application in a container using the
    The command publishes the container's port 3000 to `127.0.0.1:3000` (`localhost:3000`) on the host.
    Without the port mapping, you wouldn't be able to access the application from the host.
 
-2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
+   Note: If the container fails to start and only displays a long hash (e.g., `26b18b8a64c0fd30c8aa88217c9be9c89246e455aca6ac908d6d80bca6d697d`), you may need to run the container in interactive mode.
+   You can try the following command:
+  
+   ```console
+   $ docker run -p 3000:3000 -it getting-started:latest
+   ```
+   This command performs the following actions:
+   
+   `-it`: Runs the container in interactive mode and attaches your terminal to it, providing live output and allowing interaction with the container using the command line.
+
+   You can learn more about Docker's run commands here: https://docs.docker.com/engine/reference/commandline/run
+
+3. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
    You should see your app.
 
    ![Empty todo list](images/todo-list-empty.webp)
    
 
-3. Add an item or two and see that it works as you expect. You can mark items as complete and remove them. Your frontend is successfully storing items in the backend.
+4. Add an item or two and see that it works as you expect. You can mark items as complete and remove them. Your frontend is successfully storing items in the backend.
 
 
 At this point, you have a running todo list manager with a few items.
