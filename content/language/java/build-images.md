@@ -31,44 +31,6 @@ $ git clone https://github.com/spring-projects/spring-petclinic.git
 $ cd spring-petclinic
 ```
 
-## Test the application without Docker (optional)
-
-In this step, you'll test the application locally without Docker, before you
-continue with building and running the application with Docker. This section
-requires you to have Java OpenJDK version 15 or later installed on your machine.
-[Download and install Java](https://jdk.java.net/)
-
-If you prefer to not install Java on your machine, you can skip this step, and
-continue straight to the next section, in which you'll build and run the
-application in Docker. Building or running the application in Docker doesn't
-require you to have Java installed on your machine.
-
-Start your application and make sure it's running. Maven will manage all the project processes (compiling, tests, packaging, etc). The **Spring Pets Clinic** project you cloned earlier contains an embedded version of Maven. Therefore, you don't need to install Maven on your local machine.
-
-Open your terminal and navigate to the working directory you created and run the following command:
-
-```console
-$ ./mvnw spring-boot:run
-```
-
-This downloads the dependencies, builds the project, and starts it.
-
-To test that the application is working, open a new browser and navigate to `http://localhost:8080`.
-
-Switch back to the terminal where your server is running and you should see the following requests in the server logs. The data will be different on your machine.
-
-```console
-o.s.s.petclinic.PetClinicApplication     : Started
-PetClinicApplication in 11.743 seconds (JVM running for 12.364)
-```
-
-Great! You verified that the application works. At this stage, you've completed
-testing the server script locally.
-
-Press `CTRL-c` from within the terminal session where the server is running to stop it.
-
-You'll now continue to build and run the application in Docker.
-
 ## Create a Dockerfile for Java
 
 Create a file named `Dockerfile` in the root of your project folder.
