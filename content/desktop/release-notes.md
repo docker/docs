@@ -95,6 +95,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Added support for WSL mirrored mode networking (requires WSL `v2.0.4` and up).
 - Added missing signatures on DLL and VBS files.
 
+### Known issues
+
+#### For Windows
+
+- Docker CLI doesn’t work when using WSL 2 integration on an older Linux distribution (for example, Ubuntu 20.04) which uses a `glibc` version older than `2.32`. This will be fixed in future releases. See [docker/for-win#13824](https://github.com/docker/for-win/issues/13824).
+  
 ## 4.25.2
 
 {{< release-date date="2023-11-21" >}}
