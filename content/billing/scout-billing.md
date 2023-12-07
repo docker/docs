@@ -82,7 +82,7 @@ The number of repositories updates on your next billing cycle.
 
 You can downgrade your Docker Scout Team subscription at anytime before the renewal date. Your subscription features remain available until the end of your billing cycle.
 
-1. In Docker Hub, Select your avatar in the top-right corner and from the drop-down menu select **Billing**.
+1. In Docker Hub, select your avatar in the top-right corner and from the drop-down menu select **Billing**.
 2. Select the namespace of either your personal account or organization.
 3. Find your Docker Scout plan, then select **Change plan**.
 4. Select **Downgrade**, then review the warning message.
