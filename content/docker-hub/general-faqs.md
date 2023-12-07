@@ -27,10 +27,6 @@ or email address and by selecting a team the user should be part of. An
 organization owner can also add additional organization owners to help them
 manage users, teams, and repositories in the organization. See [Create your organization](orgs.md).
 
-### How many organizations can I create?
-
-To begin, you should set up your first organization and contact the Customer Success team at customer-success@docker.com to add the additional organizations. Also, if you are enabling SSO, it is configured based on your domain, not your organization.
-
 ### What's an organization name or namespace?
 
 The organization name, sometimes referred to as the organization namespace or the org ID, is the unique identifier of a Docker organization. The organization name cannot be the same as an existing Docker ID.
