@@ -66,5 +66,6 @@ Continue to the language-specific guides to learn how you can use Docker to cont
 - [Go](../../language/golang/_index.md)
 - [Java](../../language/java/_index.md)
 - [Node.js](../../language/nodejs/_index.md)
+- [PHP](../../language/php/_index.md)
 - [Python](../../language/python/_index.md)
 - [Rust](../../language/rust/_index.md)
