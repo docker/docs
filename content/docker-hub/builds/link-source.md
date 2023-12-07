@@ -25,7 +25,7 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
 1. Sign in to Docker Hub.
 
-2. Select **Account Settings** in the top-right drop-down navigation, then select the **Linked Accounts** tab.
+2. Select **My Account** in the top-right drop-down navigation, then select the **Linked Accounts** tab.
 
 3. Select **Link provider** for the source provider you want to link.
 
@@ -97,7 +97,7 @@ To revoke Docker Hub's access to an organization's GitHub repositories:
 To revoke Docker Hub's access to your GitHub account, you must unlink it both
 from Docker Hub, and from your GitHub account.
 
-1. Select **Account Settings** in the top-right drop-down navigation, then open
+1. Select **My Account** in the top-right drop-down navigation, then open
 the **Linked Accounts** section.
 
 2. Select the plug icon next to the source provider you want to remove.
@@ -119,7 +119,7 @@ code provider.
 
 1. Sign in to Docker Hub using your Docker ID.
 
-2. Select **Account Settings** in the top-right drop-down navigation, then select the **Linked Accounts** tab.
+2. Select **My Account** in the top-right drop-down navigation, then select the **Linked Accounts** tab.
 
 3. Select **Link provider** for the source provider you want to link.
 
@@ -135,7 +135,7 @@ unlink it both from Docker Hub, and from your Bitbucket account.
 
 1. Sign in to Docker Hub.
 
-2. Select **Account Settings** in the top-right drop-down navigation, then open
+2. Select **My Account** in the top-right drop-down navigation, then open
 the **Linked Accounts** section.
 
 3. Select the **Plug** icon next to the source provider you want to remove.
