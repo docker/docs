@@ -10,7 +10,7 @@ In this section, learn how to buy Docker Scout Team in Docker Hub for your perso
 
 ## Personal account
 
-1. Select your username in the top-right corner of Docker Hub.
+1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. In the **Plan** section, navigate to the **Docker Scout** plan section. The default plan is **Docker Scout Free**. 
 4. Next to the plan name, select **Buy now**.
@@ -82,7 +82,7 @@ The number of repositories updates on your next billing cycle.
 
 You can downgrade your Docker Scout Team subscription at anytime before the renewal date. Your subscription features remain available until the end of your billing cycle.
 
-1. In Docker Hub, select your username in the top-right corner and from the drop-down menu select **Billing**.
+1. In Docker Hub, select your avatar in the top-right corner and from the drop-down menu select **Billing**.
 2. Select the namespace of either your personal account or organization.
 3. Find your Docker Scout plan, then select **Change plan**.
 4. Select **Downgrade**, then review the warning message.
@@ -92,6 +92,6 @@ You can downgrade your Docker Scout Team subscription at anytime before the rene
 
 You can cancel a subscription downgrade at anytime before the end of the billing cycle. You can find this date in the details for your current plan.
 
-1. In Docker Hub, select your username in the top-right corner and from the drop-down menu select **Billing**.
+1. In Docker Hub, Select your avatar in the top-right corner and from the drop-down menu select **Billing**.
 2. Select the namespace of either your personal account or organization.
 3. Find your Docker Scout plan, then select **Cancel the downgrade**.
