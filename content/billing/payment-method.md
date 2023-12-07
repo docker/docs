@@ -14,7 +14,7 @@ You can add a payment method or update your account's existing payment method at
 
 ## Personal account
 
-1. Select your username in the top-right corner of Docker Hub.
+1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. Select the **Payment methods and billing history** link.
 4. In the **Payment Method** section, select **Add payment method**.
@@ -28,7 +28,7 @@ You can add a payment method or update your account's existing payment method at
 >
 > You must be an organization owner to make changes to the payment information.
 
-1. Select your username in the top-right corner of Docker Hub.
+1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**. 
 3. Select the organization account you want to update.
 4. Select the **Payment methods and billing history** link.
