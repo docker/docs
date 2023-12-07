@@ -320,7 +320,7 @@ In the `Dockerfile`, you'll need to update the following:
    (`prod-deps`) and one stage (`dev-deps`) to install development dependencies.
 2. Create a common `base` stage.
 3. Create a new `development` stage for development.
-4. Update the 'final` stage to copy dependencies from the new `prod-deps` stage.
+4. Update the `final` stage to copy dependencies from the new `prod-deps` stage.
 
 The following is the `Dockerfile` before and after the changes.
 
