@@ -1,5 +1,5 @@
 .prose table {
-  @apply block overflow-x-auto text-base;
+  @apply table w-full text-base sm:block overflow-x-auto;
   thead tr {
     @apply bg-gray-light-300 dark:bg-gray-dark-300
   }
