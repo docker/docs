@@ -128,11 +128,16 @@ Now that you have an image, you can run the application in a container using the
    ```
 
    The `-d` flag (short for `--detach`) runs the container in the background.
-   The `-p` flag (short for `--publish`) creates a port mapping between the host and the container.
-   The `-p` flag takes a string value in the format of `HOST:CONTAINER`,
-   where `HOST` is the address on the host, and `CONTAINER` is the port on the container.
-   The command publishes the container's port 3000 to `127.0.0.1:3000` (`localhost:3000`) on the host.
-   Without the port mapping, you wouldn't be able to access the application from the host.
+   This means that Docker starts your container and returns you to the terminal
+   prompt. You can verify that a container is running by viewing it in Docker
+   Dashboard under **Containers**, or by running `docker ps` in the terminal.
+
+   The `-p` flag (short for `--publish`) creates a port mapping between the host
+   and the container. The `-p` flag takes a string value in the format of
+   `HOST:CONTAINER`, where `HOST` is the address on the host, and `CONTAINER` is
+   the port on the container. The command publishes the container's port 3000 to
+   `127.0.0.1:3000` (`localhost:3000`) on the host. Without the port mapping,
+   you wouldn't be able to access the application from the host.
 
 2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
    You should see your app.
