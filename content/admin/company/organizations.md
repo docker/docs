@@ -6,7 +6,7 @@ title: Manage organizations
 
 {{< include "admin-early-access.md" >}}
 
-You can manage companies in Docker Admin.
+You can manage organizations in Docker Admin.
 
 ## View all organizations
 
