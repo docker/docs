@@ -59,6 +59,8 @@ func main() {
 	}
 
 	defer reader.Close()
+	// cli.ImagePull is asynchronous. The reader needs to be read completely for the pull operation to complete.
+	// If you are not interested in copying to stdout, consider using io.Discard instead of os.Stdout.
 	io.Copy(os.Stdout, reader)
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
