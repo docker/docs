@@ -1,7 +1,7 @@
 ---
-title: General FAQs for Docker Hub
+title: General FAQs for Docker accounts
 description: Frequently asked administration questions
-keywords: onboarding, docker, teams, orgs
+keywords: onboarding, docker, teams, orgs, account management
 redirect:
 - /docker-hub/onboarding-faqs/
 ---

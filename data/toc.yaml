@@ -2171,7 +2171,7 @@ FAQ:
       title: Linux
     - path: /desktop/faqs/releases/
       title: Releases
-  - sectiontitle: Docker Hub and admin
+  - sectiontitle: Docker account and admin
     section:
     - path: /docker-hub/general-faqs/
       title: General
