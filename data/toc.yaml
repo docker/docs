@@ -152,6 +152,18 @@ Guides:
       path: /language/php/configure-ci-cd/
     - title: "Test your deployment"
       path: /language/php/deploy/
+
+- sectiontitle: Use-case guides
+  section:
+    - sectiontitle: Generative AI
+      section:
+      - path: /guides/use-case/genai-pdf-bot/
+        title: Overview
+      - path: /guides/use-case/genai-pdf-bot/containerize/
+        title: Containerize your app
+      - path: /guides/use-case/genai-pdf-bot/develop/
+        title: Develop your app
+
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
