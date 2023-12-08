@@ -27,7 +27,7 @@ final image as a JSON-encoded SPDX document, using the format defined by the
 
 ## Create SBOM attestations
 
-To create a provenance attestation, pass the `--attest type=sbom` option to the
+To create an SBOM attestation, pass the `--attest type=sbom` option to the
 `docker buildx build` command:
 
 ```console
