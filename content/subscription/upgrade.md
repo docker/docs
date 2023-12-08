@@ -13,7 +13,7 @@ When you upgrade to a paid subscription, you immediately have access to all the 
 
 1. Sign in to your [Docker Hub](https://hub.docker.com) account.
 
-2. Optional: If you're upgrading from a free user account to a Team or Business subscription and want to keep your account name, [convert your user account into an organization](../docker-hub/convert-account.md).
+2. Optional: If you're upgrading from a free user account to a Team or Business subscription and want to keep your account name, [convert your user account into an organization](../admin/convert-account.md).
 
 3. Select your username in the top-right corner of Docker Hub.
 
