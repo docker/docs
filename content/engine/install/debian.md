@@ -26,6 +26,11 @@ To get started with Docker Engine on Debian, make sure you
 > [Docker and ufw](../../network/packet-filtering-firewalls.md#docker-and-ufw).
 
 ### OS requirements
+> **Note**
+>
+> Even though Ubuntu is a Debian based distribution, if you are installing
+> Docker on Ubuntu, please refer to
+> [Install Docker Engine on Ubuntu](ubuntu.md).
 
 To install Docker Engine, you need the 64-bit version of one of these Debian
 versions:
