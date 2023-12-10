@@ -29,6 +29,10 @@
   @apply text-blue-light dark:text-blue-dark underline-offset-2 underline;
 }
 
+.invertible {
+  @apply dark:filter dark:invert dark:hue-rotate-180;
+}
+
 hr {
   @apply border-divider-light dark:border-divider-dark;
 }
