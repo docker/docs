@@ -175,7 +175,7 @@ long: |-
 
     If a format (`--format`) is specified, the given template will be executed
     instead of the default
-    format. Go's [text/template](https://golang.org/pkg/text/template/) package
+    format. Go's [text/template](https://pkg.go.dev/text/template) package
     describes all the details of the format.
 
     If a format is set to `{{json .}}`, the events are streamed as valid JSON
@@ -196,7 +196,11 @@ options:
       swarm: false
     - option: format
       value_type: string
-      description: Format the output using the given Go template
+      description: |-
+        Format output using a custom template:
+        'json':             Print in JSON format
+        'TEMPLATE':         Print output using the given Go template.
+        Refer to https://docs.docker.com/go/formatting/ for more information about formatting output with templates
       deprecated: false
       hidden: false
       experimental: false
@@ -432,8 +436,11 @@ examples: |-
 
     #### Format as JSON
 
+    To list events in JSON format, use the `json` directive, which is the equivalent
+    of `--format '{{ json . }}`.
+
     ```console
-    $ docker events --format '{{json .}}'
+    $ docker events --format json
 
     {"status":"create","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
     {"status":"attach","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
@@ -441,6 +448,8 @@ examples: |-
     {"status":"start","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f42..
     {"status":"resize","id":"196016a57679bf42424484918746a9474cd905dd993c4d0f4..
     ```
+
+    .
 deprecated: false
 experimental: false
 experimentalcli: false
