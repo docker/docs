@@ -84,7 +84,7 @@ test your site locally first. Local tests check for broken links, incorrectly
 formatted markup, and other things. To run the tests:
 
 ```console
-$ docker build bake validate
+$ docker buildx bake validate
 ```
 
 If this command doesn't result in any errors, you're good to go!
