@@ -62,6 +62,10 @@ github.com/docker/cli v24.0.6+incompatible h1:fF+XCQCgJjjQNIMjzaSmiKJSCcfcXb3TWT
 github.com/docker/cli v24.0.6+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v24.0.8-0.20231106123152-48ec4f339e2b+incompatible h1:tXZk7C97vINae9YYzPtqoClal32VoMl8gz6gLjJ6Kdg=
 github.com/docker/cli v24.0.8-0.20231106123152-48ec4f339e2b+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v24.0.8-0.20231211210310-fb2f337bc1b1+incompatible h1:3hcKPFXxdqoVzoIrjNF1NNb36kzFiEimwUegOhw0pC0=
+github.com/docker/cli v24.0.8-0.20231211210310-fb2f337bc1b1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v25.0.0-beta.1+incompatible h1:bJzIgR4mKNpceAwwi19SqZK0AbztMc3nQTgnvxxyY/A=
+github.com/docker/cli v25.0.0-beta.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose-cli v1.0.35 h1:uZyEHLalfqBS2PiTpA1LAULyJmuQ+YtZg7nG4Xl3/Cc=
 github.com/docker/compose-cli v1.0.35/go.mod h1:mSXI4hFLpRU3EtI8NTo32bNwI0UXSr8jnq+/rYjGAUU=
 github.com/docker/compose/v2 v2.22.0 h1:3rRz4L7tPU75wRsV8JZh2/aTgerQvPa1cpzZN+tHqUY=
