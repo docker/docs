@@ -126,7 +126,7 @@ or in the **Past builds** list below the history tab.
 To inspect your builders, and change your default builder, select **Builder
 settings** to open the settings menu.
 
-![Builder settings drop-down](../images/manage-builder-dropdown.webp)
+![Builder settings drop-down](../images/build-ui-manage-builders.webp)
 
 For more information about managing builders, see:
 

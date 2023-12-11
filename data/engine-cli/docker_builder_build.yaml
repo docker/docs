@@ -36,7 +36,7 @@ options:
       swarm: false
     - option: cgroup-parent
       value_type: string
-      description: Optional parent cgroup for the container
+      description: Set the parent cgroup for the `RUN` instructions during build
       deprecated: false
       hidden: false
       experimental: false

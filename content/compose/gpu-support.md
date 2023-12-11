@@ -36,7 +36,7 @@ For more information on these properties, see the `deploy` section in the [Compo
 ```yaml
 services:
   test:
-    image: nvidia/cuda:10.2-base
+    image: nvidia/cuda:12.3.1-base-ubuntu20.04
     command: nvidia-smi
     deploy:
       resources:

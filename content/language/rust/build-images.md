@@ -23,33 +23,6 @@ Clone the sample application to use with this guide. Open a terminal, change dir
 $ git clone https://github.com/docker/docker-rust-hello
 ```
 
-## Test the application without Docker (optional)
-You can test the application locally without Docker before you continue building and running the application with Docker. This section requires you to have Rust 1.70.0 or later installed on your machine. Download and install [Rust](https://www.rust-lang.org/tools/install).
-
-Open a terminal, change directory to the `docker-rust-hello` directory, and run the following command to run the application:
-
-```console
-$ cargo run
-```
-
-When the application has completed compiling, you should see a line similar to the following:
-
-```console
-Rocket has launched from http://127.0.0.1:8000
-```
-
-Open a new terminal and curl the application.
-
-```console
-$ curl http://localhost:8000
-```
-
-You should see output similar to the following.
-
-```console
-Hello, Docker!
-```
-
 ## Create a Dockerfile for Rust
 
 Now that you have an application, you can use `docker init` to create a Dockerfile for it. Inside the `docker-rust-hello` directory, run the `docker init` command. Refer to the following example to answer the prompts from `docker init`.

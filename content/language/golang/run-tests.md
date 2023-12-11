@@ -6,98 +6,91 @@ aliases:
 - /get-started/golang/run-tests/
 ---
 
-Testing is an essential part of modern software development. Yet, testing can mean a lot of things to different development teams. In the name of brevity, you'll only take a look at running isolated, high-level, functional tests.
+## Prerequisites
 
-## Test structure
+Complete the [Build your Go image](build-images.md) section of this guide.
 
-Each test is meant to verify a single business requirement for the example application. The following test is an excerpt from `main_test.go` test suite in the example application.
+## Overview
 
+Testing is an essential part of modern software development. Testing can mean a
+lot of things to different development teams. There are unit tests, integration
+tests and end-to-end testing. In this guide you take a look at running your unit
+tests in Docker when building.
 
-```go
-func TestRespondsWithLove(t *testing.T) {
+For this section, use the `docker-gs-ping` project that you cloned in [Build
+your Go image](build-images.md).
 
-	pool, err := dockertest.NewPool("")
-	require.NoError(t, err, "could not connect to Docker")
+## Run tests when building
 
-	resource, err := pool.Run("docker-gs-ping", "latest", []string{})
-	require.NoError(t, err, "could not start container")
+To run your tests when building, you need to add a test stage to the
+`Dockerfile.multistage`. The `Dockerfile.multistage` in the sample application's
+repository already has the following content:
 
-	t.Cleanup(func() {
-		require.NoError(t, pool.Purge(resource), "failed to remove container")
-	})
+```dockerfile {hl_lines="15-17"}
+# syntax=docker/dockerfile:1
 
-	var resp *http.Response
+# Build the application from source
+FROM golang:1.19 AS build-stage
 
-	err = pool.Retry(func() error {
-		resp, err = http.Get(fmt.Sprint("http://localhost:", resource.GetPort("8080/tcp"), "/"))
-		if err != nil {
-			t.Log("container not ready, waiting...")
-			return err
-		}
-		return nil
-	})
-	require.NoError(t, err, "HTTP error")
-	defer resp.Body.Close()
+WORKDIR /app
 
-	require.Equal(t, http.StatusOK, resp.StatusCode, "HTTP status code")
+COPY go.mod go.sum ./
+RUN go mod download
 
-	body, err := io.ReadAll(resp.Body)
-	require.NoError(t, err, "failed to read HTTP body")
+COPY *.go ./
 
-	// Finally, test the business requirement!
-	require.Contains(t, string(body), "<3", "does not respond with love?")
-}
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+
+# Run the tests in the container
+FROM build-stage AS run-test-stage
+RUN go test -v ./...
+
+# Deploy the application binary into a lean image
+FROM gcr.io/distroless/base-debian11 AS build-release-stage
+
+WORKDIR /
+
+COPY --from=build-stage /docker-gs-ping /docker-gs-ping
+
+EXPOSE 8080
+
+USER nonroot:nonroot
+
+ENTRYPOINT ["/docker-gs-ping"]
 ```
 
-
-As you can see, this is a high-level test, unconcerned with the implementation details of the example application.
-
-* the test is using [`ory/dockertest`](https://github.com/ory/dockertest) Go module;
-* the test assumes that the Docker engine instance is running on the same machine where the test is being run.
-
-The second test in `main_test.go` has almost identical structure but it tests _another_ business requirement of our application. You are welcome to have a look at all available tests in [`docker-gs-ping/main_test.go`](https://github.com/docker/docker-gs-ping/blob/main/main_test.go).
-
-## Run tests locally
-
-In order to run the tests, you must make sure that your application Docker image is up-to-date.
+Run the following command to build an image using the `run-test-stage` stage as the target and view the test results. Include `--progress plain` to view the build output, `--no-cache` to ensure the tests always run, and `--target run-test-stage` to target the test stage.
 
 ```console
-$ docker build -t docker-gs-ping:latest .
-[+] Building 3.0s (13/13) FINISHED
-...
+$ docker build -f Dockerfile.multistage -t docker-gs-ping-test --progress plain --no-cache --target run-test-stage .
 ```
 
-The previous example omitted most of the output, only displaying the first line indicating that the build was successful.
+You should see output containing the following.
 
-Note, that the image is tagged with `latest` which is the same label you've chosen to use in your `main_test.go` tests.
-
-Now that the Docker image for your application had been built, you can run the tests that depend on it:
-
-```console
-$ go test ./...
-ok      github.com/docker/docker-gs-ping       2.564s
+```text
+#13 [run-test-stage 1/1] RUN go test -v ./...
+#13 4.915 === RUN   TestIntMinBasic
+#13 4.915 --- PASS: TestIntMinBasic (0.00s)
+#13 4.915 === RUN   TestIntMinTableDriven
+#13 4.915 === RUN   TestIntMinTableDriven/0,1
+#13 4.915 === RUN   TestIntMinTableDriven/1,0
+#13 4.915 === RUN   TestIntMinTableDriven/2,-2
+#13 4.915 === RUN   TestIntMinTableDriven/0,-1
+#13 4.915 === RUN   TestIntMinTableDriven/-1,0
+#13 4.915 --- PASS: TestIntMinTableDriven (0.00s)
+#13 4.915     --- PASS: TestIntMinTableDriven/0,1 (0.00s)
+#13 4.915     --- PASS: TestIntMinTableDriven/1,0 (0.00s)
+#13 4.915     --- PASS: TestIntMinTableDriven/2,-2 (0.00s)
+#13 4.915     --- PASS: TestIntMinTableDriven/0,-1 (0.00s)
+#13 4.915     --- PASS: TestIntMinTableDriven/-1,0 (0.00s)
+#13 4.915 PASS
 ```
 
-Use the option to print a bit more detail, just to be sure:
-
-```console
-$ go test -v ./...
-=== RUN   TestRespondsWithLove
-    main_test.go:47: container not ready, waiting...
---- PASS: TestRespondsWithLove (5.24s)
-=== RUN   TestHealthCheck
-    main_test.go:83: container not ready, waiting...
---- PASS: TestHealthCheck (1.40s)
-PASS
-ok      github.com/docker/docker-gs-ping       6.670s
-```
-
-So, the tests do, indeed, pass. Note, how retrying using exponential back-off helped avoiding failing tests while the containers are being initialized. What happens in each test is that `ory/dockertest` module connects to the local Docker engine instance and instructs it to spin up a container using the image, identified by the tag `docker-gs-ping:latest`. Starting up a container may take a while, so your tests retry accessing the container until the container is ready to respond to requests.
+To learn more about building and running tests, see the [Build with Docker guide](../../build/guide/_index.md).
 
 ## Next steps
 
-In this module, you've seen an example of using Docker for isolated functional testing of an example Go application. There are many different ways to test an application and you have only considered the high-level, functional testing. This, however, feeds naturally into the next topic, where you're going to set up your tests to run in an automated pipeline.
-
-In the next module, you’ll take a look at how to set up a CI/CD pipeline using GitHub Actions.
+In this section, you learned how to run tests when building your image. Next,
+you’ll learn how to set up a CI/CD pipeline using GitHub Actions.
 
 {{< button text="Configure CI/CD" url="configure-ci-cd.md" >}}
