@@ -2032,8 +2032,6 @@ Manuals:
         title: Link to GitHub and BitBucket
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
-  - path: /docker-hub/image-management/
-    title: Advanced Image Management
   - path: /registry/
     title: Registry
   - path: /docker-hub/oci-artifacts/
