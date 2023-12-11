@@ -33,24 +33,6 @@ run the following command to clone the repository.
 $ git clone https://github.com/docker/docker-dotnet-sample
 ```
 
-## Test the simple application without Docker (optional)
-
-You can test the sample application locally without Docker before you continue
-building and running the application with Docker. This section requires you to
-have the .NET SDK version 6.0 installed on your machine. Download and install
-[.NET 6.0 SDK](https://dotnet.microsoft.com/download).
-
-Open a terminal, change directory to the `docker-dotnet-sample/src` directory,
-and run the following command.
-
-```console
-$ dotnet run --urls http://localhost:5000
-```
-
-Open a browser and view the application at [http://localhost:5000](http://localhost:5000). You should see a simple web application.
-
-In the terminal, press `ctrl`+`c` to stop the application.
-
 ## Initialize Docker assets
 
 Now that you have an application, you can use `docker init` to create the

@@ -17,7 +17,6 @@ application.
 
 To complete this tutorial, you need the following:
 
-- Go version 1.19 or later. Visit the [download page for Go](https://golang.org/dl/) first and install the toolchain.
 - Docker running locally. Follow the [instructions to download and install Docker](../../desktop/index.md).
 - An IDE or a text editor to edit files. [Visual Studio Code](https://code.visualstudio.com/) is a free and popular choice but you can use anything you feel comfortable with.
 - A Git client. This guide uses a command-line based `git` client, but you are free to use whatever works for you.
@@ -92,44 +91,6 @@ func IntMin(a, b int) int {
 	return b
 }
 ```
-
-## Smoke test the application
-
-Start your application and make sure it’s running. Open your
-terminal and navigate to the directory into which you cloned the project's repository.
-From now on, this guide will refer to this directory as the **project directory**.
-
-```console
-$ go run main.go
-```
-
-This should compile and start the server as a foreground application, outputting
-the banner, as illustrated in the following figure.
-
-```text
-   ____    __
-  / __/___/ /  ___
- / _// __/ _ \/ _ \
-/___/\__/_//_/\___/ v4.10.2
-High performance, minimalist Go web framework
-https://echo.labstack.com
-____________________________________O/_______
-                                    O\
-⇨ http server started on [::]:8080
-```
-
-Run a quick smoke test by accessing the application on `http://localhost:8080`. 
-You can use your favourite web browser, or even a `curl` command in the terminal:
-
-```console
-$ curl http://localhost:8080/
-Hello, Docker! <3
-```
-
-This verifies that the application builds locally and you can start it without an error.
-That's a milestone to celebrate!
-
-Now you're ready to containerize it.
 
 ## Create a Dockerfile for the application
 
