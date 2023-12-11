@@ -48,8 +48,6 @@ RUN htmltest
 
 FROM build-base as update-modules
 ARG MODULE="-u"
-WORKDIR /src
-COPY . .
 RUN hugo mod get ${MODULE}
 RUN hugo mod vendor
 
