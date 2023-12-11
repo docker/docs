@@ -15,16 +15,12 @@ If you have an existing [Docker subscription](./details.md), Build Cloud is incl
 - 50 build minutes every month
 - Available for one user
 - 1 parallel build
-- Option to buy an additional seat
-- Can buy extra buckets of minutes at any time
 
 ### Docker Pro plus Build Cloud
 
 - 100 build minutes every month
 - Available for one user
 - 4 parallel builds
-- Option to buy an additional seat
-- Can buy extra buckets of minutes at any time
 
 ### Docker Team plus Build Cloud
 

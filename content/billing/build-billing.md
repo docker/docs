@@ -10,7 +10,7 @@ In this section, learn how to set up and manage billing for your Build Cloud sub
 
 ## Buy your subscription
 
-1. Go to the [Docker Build Cloud dashboard](https://www.build.docker.com). If you're not already signed in to your Docker account, do so now.
+1. Go to the [Docker Build Cloud dashboard](https://build.docker.com/). If you're not already signed in to your Docker account, do so now.
 2. Choose the user account you want to use to subscribe. This can be a personal account, or an organization account. To buy a subscription for an organization, you need to be an organization owner.
 3. Review the plans, then select **Buy now**.
 4. For organizations: Select the number of seats you want to buy, then select **Continue to payment**.
@@ -22,7 +22,7 @@ Subscriptions charge monthly to the default payment method.
 
 You can view your billing history at any time.
 
-1. Sign in to your Docker account and go to the [Docker Build Cloud dashboard](https://www.build.docker.com).
+1. Sign in to your Docker account and go to the [Docker Build Cloud dashboard](https://build.docker.com/).
 2. Select **Settings and billing**.
 3. Select the **Payment methods and billing history** link to go to the billing portal.
 
@@ -32,7 +32,7 @@ Here you can find your invoice history, download your invoices, and manage your 
 
 You can downgrade your subscription at any time.
 
-1. Sign in to your Docker account and go to the [Docker Build Cloud dashboard](https://www.build.docker.com).
+1. Sign in to your Docker account and go to the [Docker Build Cloud dashboard](https://build.docker.com/).
 2. Select **Settings and billing**.
 3. Select **Change plan**.
 4. Select **Downgrade**.
