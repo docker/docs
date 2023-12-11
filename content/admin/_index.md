@@ -19,6 +19,10 @@ grid:
   description: Explore popular FAQ topics about organizations.
   icon: help
   link: /docker-hub/organization-faqs/
+- title: Security
+  description: Explore security features for administrators.
+  icon: shield_locked
+  link: /security/
 ---
 
 Administrators can manage companies and organizations using Docker Hub or Docker Admin (Early Access). Docker Admin is available in Early Access to all company owners and organization owners that have a Docker Business or Docker Team subscription.

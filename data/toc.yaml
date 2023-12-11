@@ -2018,19 +2018,6 @@ Manuals:
   section:
   - path: /admin/
     title: Overview
-  - sectiontitle: Company administration
-    section:
-    - path: /admin/company/
-      title: Overview
-    - path: /admin/company/new-company/
-      title: Create a company
-    - path: /admin/company/organizations/
-      title: Manage organizations
-    - path: /admin/company/users/
-      title: Manage users
-    - path: /admin/company/owners/
-      title: Manage company owners
-
   - sectiontitle: Organization administration
     section:
     - path: /admin/organization/
@@ -2047,6 +2034,18 @@ Manuals:
       title: Activity logs
     - path: /admin/organization/general-settings/
       title: General settings
+  - sectiontitle: Company administration
+    section:
+    - path: /admin/company/
+      title: Overview
+    - path: /admin/company/new-company/
+      title: Create a company
+    - path: /admin/company/organizations/
+      title: Manage organizations
+    - path: /admin/company/users/
+      title: Manage users
+    - path: /admin/company/owners/
+      title: Manage company owners
   - path: /admin/convert-account/
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
