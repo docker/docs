@@ -7,6 +7,10 @@ grid:
   description: Explore what you can do with your Docker subscription.
   link: /subscription/details/
   icon: feature_search
+- title: Docker Scout subscriptions and features
+  description: Discover how a Docker Scout subscription can help you create a more secure supply chain.
+  link: /subscription/scout-details/
+  icon: query_stats
 - title: Upgrade your subscription
   description: Learn how to upgrade your plan to the next level.
   link: /subscription/upgrade/
@@ -19,10 +23,6 @@ grid:
   description: Find the answers you need and explore common questions.
   link: /subscription/faq/
   icon: help
-- title: Docker Scout subscriptions and features
-  description: Discover how a Docker Scout subscription can help you create a more secure supply chain.
-  link: /subscription/scout-details/
-  icon: query_stats
 - title: Docker Desktop license agreement
   description: Review the terms of the Docker Subscription Service Agreement.
   link: /subscription/desktop-license/
