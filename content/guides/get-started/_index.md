@@ -2,6 +2,8 @@
 title: Overview of get started
 keywords: get started, quick start, intro, concepts
 description: Learn how to get started with Docker and Docker Desktop
+aliases:
+- /guides/walkthroughs/
 
 grid:
   - title: "What is a container?"
