@@ -351,8 +351,6 @@ Reference:
           title: docker compose build
         - path: /engine/reference/commandline/compose_config/
           title: docker compose config
-        - path: /engine/reference/commandline/compose_convert/
-          title: docker compose convert
         - path: /engine/reference/commandline/compose_cp/
           title: docker compose cp
         - path: /engine/reference/commandline/compose_create/
