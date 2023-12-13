@@ -1,12 +1,12 @@
 ---
-description: Company FAQs
-keywords: Docker, Docker Hub, SSO FAQs, single sign-on
+description: Organization FAQs
+keywords: Docker, Docker Hub, SSO FAQs, single sign-on, organizations, administration
 title: FAQs on organizations
 ---
 
 ### What if the Docker ID I want for my organization or company is taken?
 
-This depends on the state of the namespace, if trademark claims exist for the organization or company Docker ID, a manual flow for legal review is required.
+All Docker IDs are first-come, first-served except for companies that have a US Trademark on a username. If you have a trademark for your namespace, [Docker Support](https://hub.docker.com/support/contact/) can retrieve the Docker ID for you.
 
 ### What if I want to create more than 3 organizations?
 
@@ -14,10 +14,7 @@ You can create multiple organizations or multiple teams under a single company. 
 
 ### How do I add an organization owner?
 
-An existing owner can add additional team members as organization owners. All
-they need to do is select the organization from the
-[Organizations](https://hub.docker.com/orgs) page in Docker Hub, add the Docker ID/Email of the user, and then
-select the owner role from the drop-down menu. See [Organization owner](manage-a-team.md#organization-owner).
+An existing owner can add additional team members as organization owners. You can invite a member and assign them the owner role in [Docker Hub](members.md#invite-members) or [Docker Admin](../admin/organization/members.md#invite-members).
 
 ### How do I know how many active users are part of my organization?
 
@@ -32,16 +29,16 @@ No. Organization owners can invite users through email and also choose a team fo
 Yes. You can [enforce sign-in](../security/for-admins/configure-sign-in.md) and some benefits are:
 
 - Administrators can enforce features like [Image Access Management](../security/for-admins/image-access-management.md) and [Registry Access Management](../security/for-admins/registry-access-management.md).
- - Administrators can ensure compliance by blocking Docker Desktop usage for users who do not sign in as members of the organization.
+ - Administrators can ensure compliance by blocking Docker Desktop usage for users who don't sign in as members of the organization.
 
-### If a user has their personal email associated with a user account in Docker Hub, do they have to convert to using the org’s domain before they can be invited to join an organization?
+### If a user has their personal email associated with a user account in Docker Hub, do they have to convert to using the organization's domain before they can be invited to join an organization?
 
 Yes. When SSO is enabled for your organization, each user must sign in with the company’s domain. However, the user can retain their personal credentials and create a new Docker ID associated with their organization's domain.
 
 ### Can I convert my personal user account (Docker ID) to an organization account?
 
 Yes. You can convert your user account to an organization account. Once you
-convert a user account into an organization, it is not possible to
+convert a user account into an organization, it's not possible to
 revert it to a personal user account. For prerequisites and instructions, see
 [Convert an account into an organization](convert-account.md).
 
@@ -53,7 +50,7 @@ to contact the administrator due to lack of seats.
 
 ### How can I merge organizations in Docker Hub?
 
-Reach out to your Support contact if you need to consolidate organizations.
+Reach out to your Support contact if you need to merge organizations.
 
 ### Do organization invitees take up seats?
 
@@ -69,16 +66,15 @@ Yes. Organization owners will take up a seat.
 
 User may refer to a Docker user with a Docker ID.
 
-An invitee is a user who has been invited to join an organization, but has not yet accepted their invitation.
+An invitee is a user that an administrator has invited to join an organization, but has not yet accepted their invitation.
 
 Seats is the number of planned members within an organization.
 
 Member may refer to a user that has received and accepted an invitation to join an organization. Member can also refer to a member of a team within an organization.
 
+### If there are two organizations and a user belongs to both organizations, do they take up two seats?
 
-### If there are two organizations and a user belongs to both orgs, do they take up two seats?
-
-Yes. In a scenario where a user belongs to two orgs, they take up one seat in each organization.
+Yes. In a scenario where a user belongs to two organizations, they take up one seat in each organization.
 
 ### Is it possible to set permissions for repositories within an organization?
 
@@ -86,7 +82,7 @@ Yes. You can configure repository access on a per-team basis. For example, you
 can specify that all teams within an organization have **Read and Write** access
 to repositories A and B, whereas only specific teams have **Admin** access. Org
 owners have full administrative access to all repositories within the
-organization. See [Configure repository permissions for a team](manage-a-team.md#configure-repository-permissions-for-a-team).
+organization. See [Configure repository permissions for a team](manage-a-team.md#configure-repository-permissions-for-a-team). Administrators can also assign members the editor role, which grants administrative permissions for repositories across the namespace of the organization. See [Roles and permissions](../security/for-admins/roles-and-permissions.md).
 
 ### Does my organization need to use Docker's registry?
 
