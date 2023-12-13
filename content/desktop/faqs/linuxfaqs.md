@@ -1,7 +1,7 @@
 ---
-description: Frequently asked questions
+description: Frequently asked questions for Docker Desktop for Linux
 keywords: desktop, linux, faqs
-title: FAQs for Linux
+title: FAQs for Docker Desktop for Linux
 aliases:
 - /desktop/linux/space/
 ---
@@ -92,32 +92,32 @@ Refer to the [Docker Context documentation](../../engine/context/working-with-co
 
 Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
-1. **To ensure that Docker Desktop provides a consistent experience across platforms**.
+1. To ensure that Docker Desktop provides a consistent experience across platforms.
 
-    During research, the most frequently cited reason for users wanting Docker Desktop for Linux (DD4L) was to ensure a consistent Docker Desktop
+    During research, the most frequently cited reason for users wanting Docker Desktop for Linux was to ensure a consistent Docker Desktop
     experience with feature parity across all major operating systems. Utilizing
     a VM ensures that the Docker Desktop experience for Linux users will closely
     match that of Windows and macOS.
 
-2. **To make use of new kernel features**
+2. To make use of new kernel features.
 
     Sometimes we want to make use of new operating system features. Because we control the kernel and the OS inside the VM, we can roll these out to all users immediately, even to users who are intentionally sticking on an LTS version of their machine OS.
 
-3. **To enhance security**
+3. To enhance security.
 
     Container image vulnerabilities pose a security risk for the host environment. There is a large number of unofficial images that are not guaranteed to be verified for known vulnerabilities. Malicious users can push images to public registries and use different methods to trick users into pulling and running them. The VM approach mitigates this threat as any malware that gains root privileges is restricted to the VM environment without access to the host.
 
     Why not run rootless Docker? Although this has the benefit of superficially limiting access to the root user so everything looks safer in "top", it allows unprivileged users to gain `CAP_SYS_ADMIN` in their own user namespace and access kernel APIs which are not expecting to be used by unprivileged users, resulting in [vulnerabilities](https://www.openwall.com/lists/oss-security/2022/01/18/7).
 
-4. **To provide the benefits of feature parity and enhanced security, with minimal impact on performance**
+4. To provide the benefits of feature parity and enhanced security, with minimal impact on performance.
 
-    The VM utilized by DD4L uses [`virtiofs`](https://virtio-fs.gitlab.io), a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with virtiofs.
+    The VM utilized by Docker Desktop for Linux uses [`VirtioFS`](https://virtio-fs.gitlab.io), a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with VirtioFS.
 
-    As such, we have adjusted the default memory available to the VM in DD4L. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
+    As such, we have adjusted the default memory available to the VM in Docker Desktop for Linux. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
 
 ### How do I enable file sharing?
 
-Docker Desktop for Linux uses [virtiofs](https://virtio-fs.gitlab.io/) as the
+Docker Desktop for Linux uses [VirtioFS](https://virtio-fs.gitlab.io/) as the
 default (and currently only) mechanism to enable file sharing between the host
 and Docker Desktop VM. In order not to require elevated privileges, without
 unnecessarily restricting operations on the shared files, Docker Desktop runs
@@ -210,7 +210,7 @@ Alternatively, to list images, run:
 $ docker image ls
 ```
 
-and then, to list containers, run:
+To list containers, run:
 
 ```console
 $ docker container ls -a
@@ -256,4 +256,4 @@ To reduce the maximum size of the disk image file:
 
 3. Select **Apply & Restart**.
 
-When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images will be lost.
+When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images are lost.
