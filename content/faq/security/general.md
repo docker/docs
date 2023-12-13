@@ -84,5 +84,5 @@ Note that even if an extension is reviewed, it's only reviewed on the first publ
 
 Currently this isn't possible. 
 
-With [Registry Access Management](../../security/for-admins/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries that are allowed. This is done through the Registry Access Management dashboard on Docker Hub. 
+With [Registry Access Management](../../security/for-admins/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard on Docker Hub. 
 
