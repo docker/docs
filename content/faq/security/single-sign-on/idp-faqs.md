@@ -1,5 +1,5 @@
 ---
-description: Single-sign On IdP FAQs
+description: Single Sign-on IdP FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, IdP
 title: Identity providers
 aliases:

@@ -1,5 +1,5 @@
 ---
-description: Single-sign On SAML FAQs
+description: Single Sign-on SAML FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, SAML
 title: SAML
 aliases:
