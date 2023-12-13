@@ -1646,7 +1646,7 @@ Manuals:
         title: Drain a node
       - path: /engine/swarm/ingress/
         title: Use Swarm mode routing mesh
-    - sectiontitle: How swarm mode works
+    - sectiontitle: How Swarm mode works
       section:
       - path: /engine/swarm/how-swarm-mode-works/nodes/
         title: How nodes work
@@ -1657,7 +1657,7 @@ Manuals:
       - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
         title: Swarm task states
     - path: /engine/swarm/swarm-mode/
-      title: Run Docker in swarm mode
+      title: Run Docker in Swarm mode
     - path: /engine/swarm/join-nodes/
       title: Join nodes to a swarm
     - path: /engine/swarm/manage-nodes/
@@ -1677,7 +1677,7 @@ Manuals:
     - path: /engine/swarm/admin_guide/
       title: Swarm administration guide
     - path: /engine/swarm/raft/
-      title: Raft consensus in swarm mode
+      title: Raft consensus in Swarm mode
   - sectiontitle: Advanced concepts
     section:
     - sectiontitle: Container runtime
