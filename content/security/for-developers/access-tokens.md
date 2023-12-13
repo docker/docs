@@ -7,20 +7,15 @@ aliases:
 - /docker-hub/access-tokens/
 ---
 
-You can create personal access tokens (PAT) to use as alternatives to your password for Docker CLI authentication.
+You can create a personal access token (PAT) to use as an alternative to your password for Docker CLI authentication.
 
-Compared to passwords, personal access tokens provide the following advantages:
+Compared to passwords, PATs provide the following advantages:
 
 - You can investigate when the PAT was last used and then disable or delete it if you find any suspicious activity.
 - When using an access token, you can't perform any admin activity on the account, including changing the password. It protects your account if your computer is compromised.
   
 Access tokens are also valuable for building integrations, as you can issue multiple tokens, one for each integration, and revoke them at
 any time.
-   > **Note**
-   >
-   > If you have [two-factor authentication (2FA)](2fa/index.md) enabled on
-   > your account, you must create at least one personal access token. Otherwise,
-   > you won't be able to sign in to your account from the Docker CLI.
 
 ## Create an access token
 
@@ -48,9 +43,9 @@ any time.
 
 ## Use an access token
 
-You can use an access token in place of your password when you log in using Docker CLI.
+You can use an access token in place of your password when you sign in using Docker CLI.
 
-Log in from your Docker CLI client with the following command, replacing `YOUR_USERNAME` with your Docker ID:
+Sign in from your Docker CLI client with the following command, replacing `YOUR_USERNAME` with your Docker ID:
 
 ```console
 $ docker login --username <YOUR_USERNAME>
