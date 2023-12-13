@@ -1,13 +1,13 @@
 ---
 description: Scale the service running in the swarm
-keywords: tutorial, cluster management, swarm mode, scale
+keywords: tutorial, cluster management, swarm mode, scale, get started
 title: Scale the service in the swarm
 notoc: true
 ---
 
 Once you have [deployed a service](deploy-service.md) to a swarm, you are ready
 to use the Docker CLI to scale the number of containers in
-the service. Containers running in a service are called "tasks."
+the service. Containers running in a service are called tasks.
 
 1.  If you haven't already, open a terminal and ssh into the machine where you
     run your manager node. For example, the tutorial uses a machine named
@@ -58,7 +58,8 @@ the service. Containers running in a service are called "tasks."
     If you want to see the containers running on other nodes, ssh into
     those nodes and run the `docker ps` command.
 
-## What's next?
+## Next steps
 
-At this point in the tutorial, you're finished with the `helloworld` service.
-The next step shows how to [delete the service](delete-service.md).
+At this point in the tutorial, you're finished with the `helloworld` service. Next, you'll delete the service
+
+{{< button text="Delete the service" url="delete-service.md" >}}

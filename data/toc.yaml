@@ -1645,7 +1645,7 @@ Manuals:
       - path: /engine/swarm/swarm-tutorial/drain-node/
         title: Drain a node
       - path: /engine/swarm/ingress/
-        title: Use swarm mode routing mesh
+        title: Use Swarm mode routing mesh
     - sectiontitle: How swarm mode works
       section:
       - path: /engine/swarm/how-swarm-mode-works/nodes/

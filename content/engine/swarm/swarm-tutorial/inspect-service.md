@@ -1,6 +1,6 @@
 ---
 description: Inspect the application
-keywords: tutorial, cluster management, swarm mode
+keywords: tutorial, cluster management, swarm mode, get started
 title: Inspect a service on the swarm
 notoc: true
 ---
@@ -34,8 +34,11 @@ the Docker CLI to see details about the service running in the swarm.
     Endpoint Mode:  vip
     ```
 
-    >**Tip**: To return the service details in json format, run the same command
+    >**Tip**
+    >
+    > To return the service details in json format, run the same command
     without the `--pretty` flag.
+    { .tip }
 
     ```console
     [manager1]$ docker service inspect helloworld
@@ -107,8 +110,11 @@ the Docker CLI to see details about the service running in the swarm.
 4.  Run `docker ps` on the node where the task is running to see details about
     the container for the task.
 
-    >**Tip**: If `helloworld` is running on a node other than your manager node,
+    >**Tip**
+    >
+    > If `helloworld` is running on a node other than your manager node,
     you must ssh to that node.
+    { .tip }
 
     ```console
     [worker2]$ docker ps
@@ -117,7 +123,8 @@ the Docker CLI to see details about the service running in the swarm.
     e609dde94e47        alpine:latest       "ping docker.com"   3 minutes ago       Up 3 minutes                            helloworld.1.8p1vev3fq5zm0mi8g0as41w35
     ```
 
-## What's next?
+## Next steps
 
-Next, you can [change the scale](scale-service.md) for the service running in
-the swarm.
+Next, you'll change the scale for the service running in the swarm.
+
+{{< button text="Change the scale" url="scale-service.md" >}}

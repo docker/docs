@@ -1,24 +1,24 @@
 ---
 description: Drain nodes on the swarm
-keywords: tutorial, cluster management, swarm, service, drain
+keywords: tutorial, cluster management, swarm, service, drain, get started
 title: Drain a node on the swarm
 notoc: true
 ---
 
-In earlier steps of the tutorial, all the nodes have been running with `ACTIVE`
-availability. The swarm manager can assign tasks to any `ACTIVE` node, so up to
+In earlier steps of the tutorial, all the nodes have been running with `Active`
+availability. The swarm manager can assign tasks to any `Active` node, so up to
 now all nodes have been available to receive tasks.
 
-Sometimes, such as planned maintenance times, you need to set a node to `DRAIN`
-availability. `DRAIN` availability  prevents a node from receiving new tasks
+Sometimes, such as planned maintenance times, you need to set a node to `Drain`
+availability. `Drain` availability  prevents a node from receiving new tasks
 from the swarm manager. It also means the manager stops tasks running on the
-node and launches replica tasks on a node with `ACTIVE` availability.
+node and launches replica tasks on a node with `Active` availability.
 
 > **Important**: 
 >
-> Setting a node to `DRAIN` does not remove standalone containers from that node,
+> Setting a node to `Drain` does not remove standalone containers from that node,
 > such as those created with `docker run`, `docker compose up`, or the Docker Engine
-> API. A node's status, including `DRAIN`, only affects the node's ability to schedule
+> API. A node's status, including `Drain`, only affects the node's ability to schedule
 > swarm service workloads.
 { .important }
 
@@ -83,7 +83,7 @@ had a task assigned to it:
     ...snip...
     ```
 
-    The drained node shows `Drain` for `AVAILABILITY`.
+    The drained node shows `Drain` for `Availability`.
 
 7.  Run `docker service ps redis` to see how the swarm manager updated the
 task assignments for the `redis` service:
@@ -131,6 +131,8 @@ drained node to an active state:
     * when you set another node to `Drain` availability
     * when a task fails on another active node
 
-## What's next?
+## Next steps
 
-Learn how to [use a swarm mode routing mesh](../ingress.md).
+Next, you'll learn how to use a Swarm mode routing mesh
+
+{{< button text="Use a Swarm mode routing mesh" url="../ingress.md" >}}
