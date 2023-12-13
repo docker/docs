@@ -40,7 +40,7 @@ Yes, you can choose to not enforce, and users have the option to use either Dock
 
 ### SSO is enforced, but one of our users is connected to several organizations (and several email addresses) and is able to bypass SSO and sign in through username and password. Why is this happening?
 
-They can bypass SSO if the email they're using to sign in doesn't match the organization email that's used for SSO enforcement.
+Users can bypass SSO if the email they're using to sign in doesn't match the organization email that's used for SSO enforcement.
 
 ### Is there a way to test this functionality in a test tenant with Okta before going to production?
 

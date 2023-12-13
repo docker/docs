@@ -21,7 +21,7 @@ All Docker IDs are first-come, first-served except for companies that have a US 
 
 ### What’s an organization?
 
-An organization in Docker is a collection of teams and repositories that administrators can manage together. Docker users become members of an organization once they're associated with that organization by an organization owner. An organization owner is a user with administrative access to the organization. They can create new teams and add members to an existing team using their Docker ID or email address and by selecting a team the user should be part of. An organization owner can also add additional organization owners to help them manage users, teams, and repositories in the organization. See [Create your organization](orgs.md).
+An organization in Docker is a collection of teams and repositories that are managed together by administrators. Docker users become members of an organization once they're associated with that organization by an organization owner. An [organization owner](#who-is-an-organization-owner) is a user with administrative access to the organization. For more information on creating organizations, see [Create your organization](orgs.md).
 
 ### What's an organization name or namespace?
 

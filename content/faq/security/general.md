@@ -20,7 +20,7 @@ Passwords aren't required to be periodically reset. NIST no longer recommends pa
 
 Docker Hub’s global setting for system lockout is after 10 failed sign in attempts in a period of 5 minutes, and the lockout duration is 5 minutes. The same global policy applies to authenticated Docker Desktop users and Docker Scout, both of which use Docker Hub for authentication.
 
-### Do you support physical Multi-factor authentication (MFA) with YubiKeys? 
+### Do you support physical MFA with YubiKeys? 
 
 You can configure this through SSO using your IdP. Check with your IdP if they support physical MFA.
 
@@ -82,7 +82,5 @@ Note that even if an extension is reviewed, it's only reviewed on the first publ
 
 ### Can I disable private repos in my organization via a setting to make sure nobody is pushing images into Docker Hub? 
 
-Currently this isn't possible. 
-
-With [Registry Access Management](../../security/for-admins/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard on Docker Hub. 
+No. With [Registry Access Management](../../security/for-admins/registry-access-management.md) (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard on Docker Hub. 
 

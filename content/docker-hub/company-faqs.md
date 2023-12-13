@@ -1,6 +1,6 @@
 ---
 description: Company FAQs
-keywords: Docker, Docker Hub, SSO FAQs, single sign-on, comapany, administration, company management
+keywords: Docker, Docker Hub, SSO FAQs, single sign-on, company, administration, company management
 title: FAQs on companies
 ---
 
@@ -59,4 +59,4 @@ See [SCIM](scim.md) and [Group mapping](../security/for-admins/group-mapping.md)
 
 ### What's the definition of a company vs an organization?
 
-A company is a collection of organizations that administrators can manage together. An organization is a collection of repositories and teams that administrators can together.
+A company is a collection of organizations that are managed together. An organization is a collection of repositories and teams that are managed together.
