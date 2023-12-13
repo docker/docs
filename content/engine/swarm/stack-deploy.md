@@ -136,7 +136,7 @@ counter whenever you visit it.
 
 ## Test the app with Compose
 
-1.  Start the app with `docker compose up`. This builds the web app image,
+1.  Start the app with `docker-compose up`. This builds the web app image,
     pulls the Redis image if you don't already have it, and creates two
     containers.
 
@@ -145,7 +145,7 @@ counter whenever you visit it.
     single node. You can safely ignore this.
 
     ```none
-    $ docker compose up -d
+    $ docker-compose up -d
 
     WARNING: The Docker Engine you're using is running in swarm mode.
 
@@ -161,10 +161,10 @@ counter whenever you visit it.
     Creating stackdemo_web_1
     ```
 
-2.  Check that the app is running with `docker compose ps`:
+2.  Check that the app is running with `docker-compose ps`:
 
     ```console
-    $ docker compose ps
+    $ docker-compose ps
 
           Name                     Command               State           Ports
     -----------------------------------------------------------------------------------
@@ -188,7 +188,7 @@ counter whenever you visit it.
 3.  Bring the app down:
 
     ```console
-    $ docker compose down --volumes
+    $ docker-compose down --volumes
 
     Stopping stackdemo_web_1 ... done
     Stopping stackdemo_redis_1 ... done
@@ -204,7 +204,7 @@ To distribute the web app's image across the swarm, it needs to be pushed to the
 registry you set up earlier. With Compose, this is very simple:
 
 ```console
-$ docker compose push
+$ docker-compose push
 
 Pushing web (127.0.0.1:5000/stackdemo:latest)...
 The push refers to a repository [127.0.0.1:5000/stackdemo]
