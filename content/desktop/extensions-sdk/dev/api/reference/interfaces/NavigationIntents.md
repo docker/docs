@@ -16,7 +16,7 @@ skip_read_time: true
 
 ▸ **viewContainers**(): `Promise`<`void`\>
 
-Navigate to the containers window in Docker Desktop.
+Navigate to the **Containers** tab in Docker Desktop.
 
 ```typescript
 ddClient.desktopUI.navigate.viewContainers()
@@ -32,7 +32,7 @@ ___
 
 ▸ **viewContainer**(`id`): `Promise`<`void`\>
 
-Navigate to the container window in Docker Desktop.
+Navigate to the **Container** tab in Docker Desktop.
 
 ```typescript
 await ddClient.desktopUI.navigate.viewContainer(id)
@@ -56,7 +56,7 @@ ___
 
 ▸ **viewContainerLogs**(`id`): `Promise`<`void`\>
 
-Navigate to the container logs window in Docker Desktop.
+Navigate to the **Container logs** tab in Docker Desktop.
 
 ```typescript
 await ddClient.desktopUI.navigate.viewContainerLogs(id)
@@ -80,7 +80,7 @@ ___
 
 ▸ **viewContainerInspect**(`id`): `Promise`<`void`\>
 
-Navigate to the container inspect window in Docker Desktop.
+Navigate to the **Inspect container** view in Docker Desktop.
 
 ```typescript
 await ddClient.desktopUI.navigate.viewContainerInspect(id)
@@ -158,7 +158,7 @@ ___
 
 ▸ **viewImages**(): `Promise`<`void`\>
 
-Navigate to the images window in Docker Desktop.
+Navigate to the **Images** tab in Docker Desktop.
 
 ```typescript
 await ddClient.desktopUI.navigate.viewImages()
@@ -220,7 +220,7 @@ ___
 
 ▸ **viewVolumes**(): `Promise`<`void`\>
 
-Navigate to the volumes window in Docker Desktop.
+Navigate to the **Volumes** tab in Docker Desktop.
 
 ```typescript
 ddClient.desktopUI.navigate.viewVolumes()
