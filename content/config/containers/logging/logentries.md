@@ -1,10 +1,22 @@
 ---
-title: Logentries logging driver
+title: Logentries logging driver (deprecated)
 description: Learn how to use the logentries logging driver with Docker Engine
 keywords: logentries, docker, logging, driver
 aliases:
   - /engine/admin/logging/logentries/
 ---
+
+> **Deprecated**
+>
+> The logentries service is no longer in operation since November 15, 2022,
+> and the logentries driver [has been deprecated](../../../engine/deprecated.md#logentries-logging-driver).
+> 
+> This driver will be removed in Docker Engine v25.0, and you must migrate to
+> a supported logging driver before upgrading to Docker Engine v25.0. Read the
+> [Configure logging drivers](configure.md) page for an overview of supported
+> logging drivers.
+{ .warning }
+
 
 The `logentries` logging driver sends container logs to the
 [Logentries](https://logentries.com/) server.

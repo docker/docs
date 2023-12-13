@@ -196,7 +196,7 @@ see more options.
 | [`splunk`](splunk.md)         | Writes log messages to `splunk` using the HTTP Event Collector.                                             |
 | [`etwlogs`](etwlogs.md)       | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms.         |
 | [`gcplogs`](gcplogs.md)       | Writes log messages to Google Cloud Platform (GCP) Logging.                                                 |
-| [`logentries`](logentries.md) | Writes log messages to Rapid7 Logentries.                                                                   |
+| [`logentries`](logentries.md) ([deprecated](../../../../engine/deprecated.md#logentries-logging-driver)) | Writes log messages to Rapid7 Logentries. |
 
 ## Limitations of logging drivers
 
