@@ -1,7 +1,7 @@
 ---
-description: IdP FAQs
+description: Single-sign On IdP FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, IdP
-title: FAQs on identity providers
+title: Identity providers
 aliases:
 - /single-sign-on/idp-faqs/
 ---
@@ -42,9 +42,9 @@ You can add a bot account to your IDP and create an access token for it to repla
 
 Yes, bot accounts need a seat, similar to a regular end user, having a non-aliased domain email enabled in the IdP and using a seat in Hub.
 
-### Does Docker plan to release SAML just in time provisioning?
+### Does Docker plan to release SAML Just-In-Time (JIT) provisioning?
 
-The SSO implementation is already "just in time". Admininstrators don't have to create user's accounts on Hub, they can just enable it on the IdP and have the users sign in through their domain email on Hub.
+The SSO implementation is already Just-In-Time. Administrators don't have to create user's accounts on Hub, they can just enable it on the IdP and have the users sign in through their domain email on Hub.
 
 ### Will there be IdP-initiated logins?
 

@@ -1,5 +1,5 @@
 ---
-description: Subscription FAQs
+description: FAQs on Docker subscriptions
 keywords: Docker, Docker Hub, subscription FAQs, subscription, platform
 title: Subscription FAQs
 ---
@@ -22,7 +22,7 @@ No. All monthly and annual subscriptions are automatically renewed at the end of
 
 ### What happens if I pay for an annual subscription and add more seats later?
 
-When you add seats to your plan in the middle of your billing cycle, a prorated amount is charged for the additional seats.
+When you add seats to your plan in the middle of your billing cycle, you're charged a prorated amount for the additional seats.
 
 ### What happens to my collaborators when I move to a Personal subscription?
 

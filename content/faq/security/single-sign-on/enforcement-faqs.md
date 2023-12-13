@@ -1,6 +1,6 @@
 ---
-description: Single Sign-on FAQs
-keywords: Docker, Docker Hub, SSO FAQs, single sign-on
+description: Single Sign-on enforcement FAQs
+keywords: Docker, Docker Hub, SSO FAQs, single sign-on, enforce SSO, SSO enforcement
 title: Enforcement
 aliases:
 - /single-sign-on/enforcement-faqs/
@@ -8,7 +8,7 @@ aliases:
 
 ### We currently have a Docker Team subscription. How do we enable SSO?
 
-SSO is available with a Docker Business subscription. To enable SSO, you must first upgrade your subscription to a Docker Business subscription. To learn how to upgrade your existing account, see [Upgrade your subscription](https://www.docker.com/pricing).
+SSO is available with a Docker Business subscription. To enable SSO, you must first upgrade your subscription to a Docker Business subscription. To learn how to upgrade your existing account, see [Upgrade your subscription](../../../subscription/upgrade.md).
 
 ### How do service accounts work with SSO?
 
@@ -26,7 +26,7 @@ Yes. When SSO is enforced, you can access the Docker CLI through Personal Access
 
 Before enforcing SSO, you must create PATs for automation systems and CI/CD pipelines and use the tokens instead of a password.
 
-### I have a user working on projects within Docker Desktop but authenticated with personal or no email. After they purchase Docker Business licenses, they will implement and enforce SSO through Okta to manage their users. When this user signs on SSO, is their work on DD compromised/impacted with the migration to the new account?
+### I have a user working on projects within Docker Desktop but authenticated with personal or no email. After they buy Docker Business licenses, they will implement and enforce SSO through Okta to manage their users. When this user signs on SSO, is their work on DD compromised/impacted with the migration to the new account?
 
 If they already have their organization email on their account, then it will be migrated to SSO.
 
@@ -34,13 +34,13 @@ If they already have their organization email on their account, then it will be 
 
 SSO enforcement will apply to any domain email user, and automatically add that user to the Docker Hub org that enables enforcement. The admin could remove users from the org manually, but those users wouldn't be able to authenticate if SSO is enforced.
 
-### Can I enable SSO and hold off on the domain verification and enforcement options?
+### Can I enable SSO and hold off on the enforcement option?
 
-Yes, they can choose to not enforce, and users have the option to use either Docker ID (standard email/password) or email address (SSO) at the sign-in screen.
+Yes, you can choose to not enforce, and users have the option to use either Docker ID (standard email/password) or email address (SSO) at the sign-in screen.
 
-### SSO is enforced, but one of our users is connected to several organizations (and several email-addresses) and is able to bypass SSO and login through userid and password. Why is this happening?
+### SSO is enforced, but one of our users is connected to several organizations (and several email addresses) and is able to bypass SSO and sign in through username and password. Why is this happening?
 
-They can bypass SSO if the email they're using to sign in doesn't match the organization email being used when SSO is enforced.
+They can bypass SSO if the email they're using to sign in doesn't match the organization email that's used for SSO enforcement.
 
 ### Is there a way to test this functionality in a test tenant with Okta before going to production?
 
@@ -48,8 +48,8 @@ Yes, you can create a test organization. Companies can set up a new 5 seat Busin
 
 ### Once we enable SSO for Docker Desktop, what's the impact to the flow for Build systems that use service accounts?
 
-If SSO is enabled, there is no impact for now. We'll continue to support either username/password or personal access token sign-in.
-However, if you **enforce** SSO:
+If you enable SSO, there is no impact for now. We'll continue to support either username/password or personal access token sign-in.
+However, if you enforce SSO:
 
 * Service Account domain email addresses must be unaliased and enabled in their IdP
 * Username/password and personal access token will still work (but only if they exist, which they won't for new accounts)
