@@ -78,7 +78,7 @@ $ docker run -d \
 ```
 
 {{< /tab >}}
-{{< tab name="`-v`" >}}
+{{< tab name="`-tmpfs`" >}}
 
 ```console
 $ docker run -d \
