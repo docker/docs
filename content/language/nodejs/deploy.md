@@ -126,6 +126,10 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
    ```console
    $ kubectl delete -f docker-node-kubernetes.yaml
    ```
+5. If step 3 does not load, use `kubectl port-forward` command to instruct Kubernetes to set up port forwarding to route traffice from port `30001` on your local machine to port `3000` on the Kubernetes cluster.
+   ```console
+   $ kubectl port-forward docker-nodejs-demo-95ddcb6f4-qmb2d 30001:3000
+   ```
 
 ## Summary
 
