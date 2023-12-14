@@ -50,6 +50,10 @@ This can give you information in realtime about your running container workloads
 Integrating with environments lets you compare production workloads to other
 versions, in your image repositories or in your other environments.
 
+The following environment monitoring integrations are available
+
+- [Sysdig](./environment/sysdig.md)
+
 For more information about environment integrations, see
 [Environments](./environment/index.md).
 
