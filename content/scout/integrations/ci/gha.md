@@ -52,7 +52,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      pull_request: write
+      pull-requests: write
 
 steps:
   - name: Checkout repository
