@@ -33,7 +33,7 @@ to true. The callback is then invoked once for each line.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `data` | { `stdout`: `string` ; `stderr?`: `undefined`  } \| { `stdout?`: `undefined` ; `stderr`: `string`  } | Output content. Can include either stdout string, or stderr string, one at a time. |
+| `data` | `{ stdout: string; stderr?: undefined } \| { stdout?: undefined; stderr: string }` | Output content. Can include either stdout string, or stderr string, one at a time. |
 
 ##### Returns
 
