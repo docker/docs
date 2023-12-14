@@ -39,6 +39,7 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: Add annotation to the image
+      details_url: '#annotation'
       deprecated: false
       hidden: false
       experimental: false
@@ -526,6 +527,52 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
+    ### Create annotations (--annotation) {#annotation}
+
+    ```text
+    --annotation="key=value"
+    --annotation="[type:]key=value"
+    ```
+
+    Add OCI annotations to the image index, manifest, or descriptor.
+    The following example adds the `foo=bar` annotation to the image manifests:
+
+    ```console
+    $ docker buildx build -t TAG --annotation "foo=bar" --push .
+    ```
+
+    You can optionally add a type prefix to specify the level of the annotation. By
+    default, the image manifest is annotated. The following example adds the
+    `foo=bar` annotation the image index instead of the manifests:
+
+    ```console
+    $ docker buildx build -t TAG --annotation "index:foo=bar" --push .
+    ```
+
+    You can specify multiple types, separated by a comma (,) to add the annotation
+    to multiple image components. The following example adds the `foo=bar`
+    annotation to image index, descriptors, manifests:
+
+    ```console
+    $ docker buildx build -t TAG --annotation "index,manifest,manifest-descriptor:foo=bar" --push .
+    ```
+
+    You can also specify a platform qualifier in square brackets (`[os/arch]`) in
+    the type prefix, to apply the annotation to a subset of manifests with the
+    matching platform. The following example adds the `foo=bar` annotation only to
+    the manifest with the `linux/amd64` platform:
+
+    ```console
+    $ docker buildx build -t TAG --annotation "manifest[linux/amd64]:foo=bar" --push .
+    ```
+
+    Wildcards are not supported in the platform qualifier; you can't specify a type
+    prefix like `manifest[linux/*]` to add annotations only to manifests which has
+    `linux` as the OS platform.
+
+    For more information about annotations, see
+    [Annotations](/build/building/annotations/).
+
     ### Create attestations (--attest) {#attest}
 
     ```text
