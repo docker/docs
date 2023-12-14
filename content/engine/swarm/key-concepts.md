@@ -90,13 +90,13 @@ run on the assigned node or fail.
 
 The swarm manager uses ingress load balancing to expose the services you
 want to make available externally to the swarm. The swarm manager can
-automatically assign the service a PublishedPort or you can configure a
-PublishedPort for the service. You can specify any unused port. If you do not
+automatically assign the service a published port or you can configure a
+published port for the service. You can specify any unused port. If you do not
 specify a port, the swarm manager assigns the service a port in the 30000-32767
 range.
 
 External components, such as cloud load balancers, can access the service on the
-PublishedPort of any node in the cluster whether or not the node is currently
+published port of any node in the cluster whether or not the node is currently
 running the task for the service. All nodes in the swarm route ingress
 connections to a running task instance.
 

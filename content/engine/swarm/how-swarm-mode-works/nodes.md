@@ -6,10 +6,10 @@ aliases:
 - /engine/swarm/how-swarm-mode-works/
 ---
 
-Swarm mode, introduced in Docker Engine 1.12, lets you create a
+Swarm mode lets you create a
 cluster of one or more Docker Engines called a swarm. A swarm consists
 of one or more nodes: physical or virtual machines running Docker
-Engine 1.12 or later in Swarm mode.
+Engine.
 
 There are two types of nodes: [managers](#manager-nodes) and
 [workers](#worker-nodes).
@@ -46,6 +46,7 @@ manager nodes.
 Docker recommends a maximum of seven manager nodes for a swarm.
 
     >**Important**
+    >
     > Adding more managers does NOT mean increased
     > scalability or higher performance. In general, the opposite is true.
     { .important }
