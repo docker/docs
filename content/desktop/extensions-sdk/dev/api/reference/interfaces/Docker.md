@@ -16,7 +16,7 @@ skip_read_time: true
 
 • `Readonly` **cli**: [`DockerCommand`](DockerCommand.md)
 
-You can also directly execute the docker binary.
+You can also directly execute the Docker binary.
 
 ```typescript
 const output = await ddClient.docker.cli.exec("volume", [
@@ -39,7 +39,7 @@ For convenience, the command result object also has methods to easily parse it d
 
 ---
 
-Streams the output as a result of the execution of a docker command.
+Streams the output as a result of the execution of a Docker command.
 It is useful when the output of the command is too long, or you need to get the output as a stream.
 
 ```typescript

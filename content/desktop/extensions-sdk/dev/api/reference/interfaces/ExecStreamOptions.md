@@ -33,7 +33,7 @@ to true. The callback is then invoked once for each line.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `data` | { `stdout`: `string` ; `stderr?`: `undefined`  } \| { `stdout?`: `undefined` ; `stderr`: `string`  } | output content. Can include either stdout string, or stderr string, one at a time. |
+| `data` | `{ stdout: string; stderr?: undefined } \| { stdout?: undefined; stderr: string }` | Output content. Can include either stdout string, or stderr string, one at a time. |
 
 ##### Returns
 
@@ -55,7 +55,7 @@ Invoked to report error if the executed command errors.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `error` | `any` | the error happening in the executed command |
+| `error` | `any` | The error happening in the executed command |
 
 ##### Returns
 
@@ -77,7 +77,7 @@ Invoked when process exits.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `exitCode` | `number` | the process exit code |
+| `exitCode` | `number` | The process exit code |
 
 ##### Returns
 

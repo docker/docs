@@ -1,5 +1,5 @@
 ---
-description: Frequently asked questions for all platforms
+description: Frequently asked Docker Desktop questions for all platforms
 keywords: desktop, mac, windows, faqs
 title: FAQs on Docker Desktop releases
 ---
@@ -14,7 +14,7 @@ Each Docker Desktop release is also delivered as a full installer for new users.
 
 ### How frequent will new releases be?
 
-New releases are available roughly monthly, unless there are critical fixes that need to be released sooner.
+New releases are available roughly every month, unless there are critical fixes that need to be released sooner.
 
 ### How do I ensure that all users on my team are using the same version?
 

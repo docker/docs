@@ -18,7 +18,7 @@ skip_read_time: true
 
 Executes a command in the host.
 
-For example, execute the shipped binary `kubectl -h` command in the **host**:
+For example, execute the shipped binary `kubectl -h` command in the host:
 
 ```typescript
 await ddClient.extension.host.cli.exec("kubectl", ["-h"]);
@@ -28,7 +28,7 @@ await ddClient.extension.host.cli.exec("kubectl", ["-h"]);
 
 Streams the output of the command executed in the backend container or in the host.
 
-Provided the `kubectl` binary is shipped as part of your extension, you can spawn the `kubectl -h` command in the **host**:
+Provided the `kubectl` binary is shipped as part of your extension, you can spawn the `kubectl -h` command in the host:
 
 ```typescript
 await ddClient.extension.host.cli.exec("kubectl", ["-h"], {
