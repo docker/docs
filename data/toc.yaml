@@ -1645,8 +1645,8 @@ Manuals:
       - path: /engine/swarm/swarm-tutorial/drain-node/
         title: Drain a node
       - path: /engine/swarm/ingress/
-        title: Use swarm mode routing mesh
-    - sectiontitle: How swarm mode works
+        title: Use Swarm mode routing mesh
+    - sectiontitle: How Swarm mode works
       section:
       - path: /engine/swarm/how-swarm-mode-works/nodes/
         title: How nodes work
@@ -1657,7 +1657,7 @@ Manuals:
       - path: /engine/swarm/how-swarm-mode-works/swarm-task-states/
         title: Swarm task states
     - path: /engine/swarm/swarm-mode/
-      title: Run Docker in swarm mode
+      title: Run Docker in Swarm mode
     - path: /engine/swarm/join-nodes/
       title: Join nodes to a swarm
     - path: /engine/swarm/manage-nodes/
@@ -1677,7 +1677,7 @@ Manuals:
     - path: /engine/swarm/admin_guide/
       title: Swarm administration guide
     - path: /engine/swarm/raft/
-      title: Raft consensus in swarm mode
+      title: Raft consensus in Swarm mode
   - sectiontitle: Advanced concepts
     section:
     - sectiontitle: Container runtime
@@ -1790,6 +1790,8 @@ Manuals:
           title: Environment variables
         - path: /build/building/secrets/
           title: Build secrets
+        - path: /build/building/annotations/
+          title: Annotations
         - path: /build/building/opentelemetry/
           title: OpenTelemetry support
         - path: /build/building/base-images/
@@ -1922,6 +1924,8 @@ Manuals:
             title: Update Docker Hub repo description
           - path: /build/ci/github-actions/attestations/
             title: SBOM and provenance attestations
+          - path: /build/ci/github-actions/annotations/
+            title: Annotations
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose

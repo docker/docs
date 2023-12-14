@@ -1,7 +1,7 @@
 ---
 description: Release notes for Docker
-keywords: docker, documentation, about, technology, understanding,  release
-title: Docker release notes
+keywords: docker, documentation, about, technology, understanding,  release, scout, desktop, hub, compose, build, engine
+title: Release notes for Docker
 grid:
 - title: Docker Desktop
   icon: web_asset

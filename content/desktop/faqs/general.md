@@ -1,5 +1,5 @@
 ---
-description: Frequently asked questions for all platforms
+description: Frequently asked Docker Desktop questions for all platforms
 keywords: desktop, mac, windows, faqs
 title: General FAQs for Desktop
 aliases:
@@ -43,30 +43,27 @@ No, there is no constraint on how each extension should be licensed, this is up 
 
 Yes, you can use Docker Desktop offline. However, you
 cannot access features that require an active internet
-connection. Additionally, any functionality that requires you to sign won't work while using Docker Desktop offline or in air-gapped environments.
+connection. Additionally, any functionality that requires you to sign in won't work while using Docker Desktop offline or in air-gapped environments.
 This includes:
 
 - The resources in the [Learning Center](../use-desktop/index.md)
 - Pulling or pushing an image to Docker Hub
 - [Image Access Management](../../security/for-developers/access-tokens.md)
-- [Vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
+- [Static vulnerability scanning](../../docker-hub/vulnerability-scanning.md)
 - Viewing remote images in the Docker Dashboard
 - Setting up [Dev Environments](../dev-environments/index.md)
-- Docker build when using [BuildKit](../../build/buildkit/index.md#getting-started).
+- Docker Build when using [BuildKit](../../build/buildkit/index.md#getting-started).
   You can work around this by disabling BuildKit. Run `DOCKER_BUILDKIT=0 docker build .` to disable BuildKit.
-- Deploying an app to the cloud through the Docker Compose
-  [ACI and ECS](https://github.com/docker/compose-cli/tree/main/docs) integrations
 - [Kubernetes](../kubernetes.md) (Images are download when you enable Kubernetes for the first time)
-- Check for updates
+- Checking for updates
 - [In-app diagnostics](../troubleshoot/overview.md#diagnose-from-the-app) (including the [Self-diagnose tool](../troubleshoot/overview.md#diagnose-from-the-app))
-- Tip of the week
 - Sending usage statistics
 
 ### Where can I find information about diagnosing and troubleshooting Docker Desktop issues?
 
 You can find information about diagnosing and troubleshooting common issues in the [Troubleshooting topic](../troubleshoot/overview.md).
 
-If you do not find a solution in troubleshooting, browse the Github repositories or create a new issue:
+If you do not find a solution in troubleshooting, browse the GitHub repositories or create a new issue:
 
 - [docker/for-mac](https://github.com/docker/for-mac/issues)
 - [docker/for-win](https://github.com/docker/for-win/issues)
@@ -103,7 +100,7 @@ For more information and examples, see [how to connect from a container to a ser
 
 ### Can I pass through a USB device to a container?
 
-Unfortunately, it is not possible to pass through a USB device (or a
+It is not possible to pass through a USB device (or a
 serial port) to a container as it requires support at the hypervisor level.
 
 ### Can I run Docker Desktop in nested virtualization scenarios?
@@ -118,8 +115,9 @@ or have some visual artifacts.
 
 To work around this issue, disable hardware acceleration by creating a `"disableHardwareAcceleration": true` entry in Docker Desktop's `settings.json` file. You can find this file at:
 
-- **Mac**: `~/Library/Group Containers/group.com.docker/settings.json`
-- **Windows**: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
+- Mac: `~/Library/Group Containers/group.com.docker/settings.json`
+- Windows: `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`
+- Linux: `~/.docker/desktop/settings.json.`
 
 After updating the `settings.json` file, close and restart Docker Desktop to apply the changes.
 

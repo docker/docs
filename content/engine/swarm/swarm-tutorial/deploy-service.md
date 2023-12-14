@@ -1,6 +1,6 @@
 ---
 description: Deploy a service to the swarm
-keywords: tutorial, cluster management, swarm mode
+keywords: tutorial, cluster management, swarm mode, get started
 title: Deploy a service to the swarm
 notoc: true
 ---
@@ -35,6 +35,8 @@ is not a requirement to deploy a service.
     9uk4639qpg7n  helloworld  1/1    alpine  ping docker.com
     ```
 
-## What's next?
+## Next steps
 
-Now you've deployed a service to the swarm, you're ready to [inspect the service](inspect-service.md).
+Now you're ready to inspect the service.
+
+{{< button text="Deploy a service" url="inspect-service.md" >}}

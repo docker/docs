@@ -113,7 +113,8 @@
                   {{ partial "components/badge.html" (dict "color" "blue" "content" "Swarm") }}
                 {{ end }}
                 {{ if .description }}
-                  {{ $.RenderString .description }}
+                  {{/* replace newlines in long desc with break tags */}}
+                  {{ markdownify (strings.Replace .description "\n" "<br>") }}
                 {{ end }}
               </td>
             </tr>

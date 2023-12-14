@@ -13,6 +13,7 @@ options:
       value_type: stringArray
       default_value: '[]'
       description: Add annotation to the image
+      details_url: '#annotation'
       deprecated: false
       hidden: false
       experimental: false
@@ -88,6 +89,34 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
+    ### Add annotations to an image (--annotation) {#annotation}
+
+    The `--annotation` flag lets you add annotations the image index, manifest,
+    and descriptors when creating a new image.
+
+    The following command creates a `foo/bar:latest` image with the
+    `org.opencontainers.image.authors` annotation on the image index.
+
+    ```console
+    $ docker buildx imagetools create \
+      --annotation "index:org.opencontainers.image.authors=dvdksn" \
+      --tag foo/bar:latest \
+      foo/bar:alpha foo/bar:beta foo/bar:gamma
+    ```
+
+    > **Note**
+    >
+    > The `imagetools create` command supports adding annotations to the image
+    > index and descriptor, using the following type prefixes:
+    >
+    > - `index:`
+    > - `manifest-descriptor:`
+    >
+    > It doesn't support annotating manifests or OCI layouts.
+
+    For more information about annotations, see
+    [Annotations](/build/building/annotations/).
+
     ### Append new sources to an existing manifest list (--append) {#append}
 
     Use the `--append` flag to append the new sources to an existing manifest list
@@ -103,7 +132,7 @@ examples: |-
 
     ### Read source descriptor from a file (-f, --file) {#file}
 
-    ```
+    ```text
     -f FILE or --file FILE
     ```
 
@@ -124,7 +153,7 @@ examples: |-
 
     ### Set reference for new image  (-t, --tag) {#tag}
 
-    ```
+    ```text
     -t IMAGE or --tag IMAGE
     ```
 

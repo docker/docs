@@ -52,6 +52,8 @@ github.com/docker/buildx v0.11.2 h1:R3p9F0gnI4FwvQ0p40UwdX1T4ugap4UWxY3TFHoP4Ws=
 github.com/docker/buildx v0.11.2/go.mod h1:CWAABt10iIuGpleypA3103mplDfcGu0A2AvT03xfpTc=
 github.com/docker/buildx v0.12.0 h1:pI4jr4SeH9oHa0SmMvH/lz+Rdqkg+dRa9H/1VXbYgws=
 github.com/docker/buildx v0.12.0/go.mod h1:SBLnQH9q+77aVvpvS5LLIly9+nHVlwscl5GEegGMD5g=
+github.com/docker/buildx v0.12.1-0.20231214091505-b68ee824c673 h1:mZ2+TyEERNA4GY2xO3kIa7ZhfmUNwveIMxGYWV126dA=
+github.com/docker/buildx v0.12.1-0.20231214091505-b68ee824c673/go.mod h1:SBLnQH9q+77aVvpvS5LLIly9+nHVlwscl5GEegGMD5g=
 github.com/docker/cli v24.0.2+incompatible h1:QdqR7znue1mtkXIJ+ruQMGQhpw2JzMJLRXp6zpzF6tM=
 github.com/docker/cli v24.0.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v24.0.4+incompatible h1:Y3bYF9ekNTm2VFz5U/0BlMdJy73D+Y1iAAZ8l63Ydzw=
@@ -64,6 +66,8 @@ github.com/docker/cli v24.0.8-0.20231106123152-48ec4f339e2b+incompatible h1:tXZk
 github.com/docker/cli v24.0.8-0.20231106123152-48ec4f339e2b+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v24.0.8-0.20231211210310-fb2f337bc1b1+incompatible h1:3hcKPFXxdqoVzoIrjNF1NNb36kzFiEimwUegOhw0pC0=
 github.com/docker/cli v24.0.8-0.20231211210310-fb2f337bc1b1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v24.0.8-0.20231213094340-0f82fd88610a+incompatible h1:OSAexdrbbGYSMOdaskqxEQR9N3CNv59ypbhD032P1TI=
+github.com/docker/cli v24.0.8-0.20231213094340-0f82fd88610a+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v25.0.0-beta.1+incompatible h1:bJzIgR4mKNpceAwwi19SqZK0AbztMc3nQTgnvxxyY/A=
 github.com/docker/cli v25.0.0-beta.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose-cli v1.0.35 h1:uZyEHLalfqBS2PiTpA1LAULyJmuQ+YtZg7nG4Xl3/Cc=
@@ -149,6 +153,8 @@ github.com/moby/buildkit v0.13.0-beta1.0.20231011101155-c444964c2e8f h1:CEiXZq08
 github.com/moby/buildkit v0.13.0-beta1.0.20231011101155-c444964c2e8f/go.mod h1:oSHnUZH7sNtAFLyeN1syf46SuzMThKsCQaioNEqJVUk=
 github.com/moby/buildkit v0.13.0-beta1.0.20231113205014-1efcd30d9dd6 h1:gfbjHMadWpzz9Jbbo4l73lrkNrP2YvNsKIIg8e5Ra4s=
 github.com/moby/buildkit v0.13.0-beta1.0.20231113205014-1efcd30d9dd6/go.mod h1:VE6gCOYRW2hbxnxtt7udKkYMF73YdvkgIrGhkB0EiDA=
+github.com/moby/buildkit v0.13.0-beta1.0.20231214000015-a960fe501f00 h1:Ymp+x/hsr6M6R+6j4XVyGaRrhAt1MnGXoN+ZkQ+TuuA=
+github.com/moby/buildkit v0.13.0-beta1.0.20231214000015-a960fe501f00/go.mod h1:6MddWPSL5jxy+W8eMMHWDOfZzzRRKWXPZqajw72YHBc=
 github.com/moby/locker v1.0.1/go.mod h1:S7SDdo5zpBK84bzzVlKr2V0hz+7x9hWbYC/kq7oQppc=
 github.com/moby/moby v24.0.2+incompatible h1:yH+5dRHH1x3XRKzl1THA2aGTy6CHYnkt5N924ADMax8=
 github.com/moby/moby v24.0.2+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=

@@ -1,5 +1,5 @@
 ---
-description: Enabling two-factor authentication on Docker Hub
+description: Learn how to enable two-factor authentication on Docker Hub
 keywords: Docker, docker, registry, security, Docker Hub, authentication, two-factor
   authentication
 title: Enable two-factor authentication for Docker Hub
@@ -25,7 +25,7 @@ Authenticator with a registered YubiKey.
 
 ## Enable two-factor authentication
 
-1. Sign to your Docker Hub account. 
+1. Sign in to your Docker Hub account. 
 2. Select your avatar and then from the drop-down menu, select **My Account**. 
 3. Select the **Security** tab and then select **Enable Two-Factor Authentication**.
     The next page reminds you to download an authenticator app.
@@ -36,7 +36,7 @@ Authenticator with a registered YubiKey.
 
 6. Select **Next** and then open your authenticator app. 
     You can choose between scanning the QR code or entering a text code into your authenticator app. 
-7. Once you have linked your authenticator app, enter the six-digit code to in text field and then select **Next**.
+7. Once you have linked your authenticator app, enter the six-digit code in text field and then select **Next**.
 
 Two-factor authentication is now enabled. The next time you sign
-in to your Docker Hub account, you will be asked for a security code.
+in to your Docker Hub account, you are asked for a security code.

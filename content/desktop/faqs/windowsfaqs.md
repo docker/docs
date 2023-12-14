@@ -1,7 +1,7 @@
 ---
-description: Frequently asked questions
+description: Frequently asked questions for Docker Desktop for Windows
 keywords: desktop, windows, faqs
-title: FAQs for Windows
+title: FAQs for Docker Desktop for Windows
 ---
 
 ### Can I use VirtualBox alongside Docker Desktop?
@@ -58,7 +58,7 @@ See the [Stack Overflow post](https://stackoverflow.com/questions/67746843/clear
 
 ### How do I add custom CA certificates?
 
-You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server certificates, and **client certificates**, to authenticate to registries.
+You can add trusted Certificate Authorities (CAs) to your Docker daemon to verify registry server certificates, and client certificates, to authenticate to registries.
 
 Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
 intermediate). Docker recognizes certs stored under Trust Root
@@ -84,7 +84,7 @@ directory on Moby (the Docker Desktop virtual machine running on Hyper-V).
 You need to restart Docker Desktop after making any changes to the keychain
 or to the `~/.docker/certs.d` directory in order for the changes to take effect.
 
-The registry cannot be listed as an _insecure registry_ (see
+The registry cannot be listed as an insecure registry (see
 [Docker Daemon](../settings/windows.md#docker-engine)). Docker Desktop ignores
 certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from the registry
@@ -116,9 +116,9 @@ For more information on Windows containers, refer to the following documentation
 - To understand how to connect to Windows containers from the local host, see
   [I want to connect to a container from Windows](../networking.md#i-want-to-connect-to-a-container-from-the-host)
 
-> Settings dialog changes with Windows containers
+> **Note**
 >
-> When you switch to Windows containers, the Settings dialog only shows those tabs that are active and apply to your Windows containers:
+> When you switch to Windows containers, **Settings** only shows those tabs that are active and apply to your Windows containers. These are:
 >
 >  * [General](../settings/windows.md#general)
 >  * [Proxies](../settings/windows.md#proxies)

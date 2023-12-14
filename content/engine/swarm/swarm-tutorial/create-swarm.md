@@ -1,6 +1,6 @@
 ---
 description: Initialize the swarm
-keywords: tutorial, cluster management, swarm mode
+keywords: tutorial, cluster management, swarm mode, get started, docker engine
 title: Create a swarm
 notoc: true
 ---
@@ -73,10 +73,11 @@ machines.
     The `*` next to the node ID indicates that you're currently connected on
     this node.
 
-    Docker Engine swarm mode automatically names the node with the machine host
+    Docker Engine Swarm mode automatically names the node with the machine host
     name. The tutorial covers other columns in later steps.
 
-## What's next?
+## Next steps
 
-In the next section of the tutorial, we [add two more nodes](add-nodes.md) to
-the cluster.
+Next, you'll add two more nodes to the cluster. 
+
+{{< button text="Add two more nodes" url="add-nodes.md" >}}

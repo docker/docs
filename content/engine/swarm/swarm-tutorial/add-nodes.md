@@ -1,6 +1,6 @@
 ---
 description: Add nodes to the swarm
-keywords: tutorial, cluster management, swarm
+keywords: tutorial, cluster management, swarm, get started
 title: Add nodes to the swarm
 notoc: true
 ---
@@ -70,5 +70,6 @@ to add worker nodes.
 
 ## What's next?
 
-Now your swarm consists of a manager and two worker nodes. In the next step of
-the tutorial, you [deploy a service](deploy-service.md) to the swarm.
+Now your swarm consists of a manager and two worker nodes. Next, you'll deploy a service.
+
+{{< button text="Deploy a service" url="deploy-service.md" >}}

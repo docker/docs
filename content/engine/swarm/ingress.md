@@ -1,18 +1,18 @@
 ---
 description: Use the routing mesh to publish services externally to a swarm
 keywords: guide, swarm mode, swarm, network, ingress, routing mesh
-title: Use swarm mode routing mesh
+title: Use Swarm mode routing mesh
 ---
 
-Docker Engine swarm mode makes it easy to publish ports for services to make
+Docker Engine Swarm mode makes it easy to publish ports for services to make
 them available to resources outside the swarm. All nodes participate in an
-ingress **routing mesh**. The routing mesh enables each node in the swarm to
+ingress routing mesh. The routing mesh enables each node in the swarm to
 accept connections on published ports for any service running in the swarm, even
 if there's no task running on the node. The routing mesh routes all
 incoming requests to published ports on available nodes to an active container.
 
 To use the ingress network in the swarm, you need to have the following
-ports open between the swarm nodes before you enable swarm mode:
+ports open between the swarm nodes before you enable Swarm mode:
 
 * Port `7946` TCP/UDP for container network discovery.
 * Port `4789` UDP (configurable) for the container ingress network.
@@ -42,7 +42,9 @@ $ docker service create \
   <IMAGE>
 ```
 
-> **Note**: The older form of this syntax is a colon-separated string, where
+> **Note**
+>
+> The older form of this syntax is a colon-separated string, where
 > the published port is first and the target port is second, such as
 > `-p 8080:80`. The new syntax is preferred because it is easier to read and
 > allows more flexibility.
@@ -107,7 +109,7 @@ set the `protocol` key to either `tcp` or `udp`.
 
 #### TCP only
 
-**Long syntax:**
+Long syntax:
 
 ```console
 $ docker service create --name dns-cache \
@@ -115,7 +117,7 @@ $ docker service create --name dns-cache \
   dns-cache
 ```
 
-**Short syntax:**
+Short syntax:
 
 ```console
 $ docker service create --name dns-cache \
@@ -125,7 +127,7 @@ $ docker service create --name dns-cache \
 
 #### TCP and UDP
 
-**Long syntax:**
+Long syntax:
 
 ```console
 $ docker service create --name dns-cache \
@@ -134,7 +136,7 @@ $ docker service create --name dns-cache \
   dns-cache
 ```
 
-**Short syntax:**
+Short syntax:
 
 ```console
 $ docker service create --name dns-cache \
@@ -145,7 +147,7 @@ $ docker service create --name dns-cache \
 
 #### UDP only
 
-**Long syntax:**
+Long syntax:
 
 ```console
 $ docker service create --name dns-cache \
@@ -153,7 +155,7 @@ $ docker service create --name dns-cache \
   dns-cache
 ```
 
-**Short syntax:**
+Short syntax:
 
 ```console
 $ docker service create --name dns-cache \
