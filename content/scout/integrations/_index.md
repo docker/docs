@@ -7,7 +7,7 @@ title: Integrating Docker Scout with other systems
 By default, Docker Scout integrates with your Docker organization and your
 Docker Scout-enabled repositories on Docker Hub. You can integrate Docker Scout
 with additional third-party systems to get access to even more insights,
-including realtime information about you running workloads.
+including real-time information about you running workloads.
 
 ## Integration categories
 
@@ -45,7 +45,7 @@ The following CI integrations are available:
 ### Environment monitoring
 
 Environment monitoring refers to integrating Docker Scout with your deployments.
-This can give you information in realtime about your running container workloads.
+This can give you information in real-time about your running container workloads.
 
 Integrating with environments lets you compare production workloads to other
 versions, in your image repositories or in your other environments.
