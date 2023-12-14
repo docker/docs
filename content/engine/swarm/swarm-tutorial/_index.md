@@ -1,7 +1,7 @@
 ---
-description: Getting Started tutorial for Docker Engine swarm mode
-keywords: tutorial, cluster management, swarm mode
-title: Getting started with swarm mode
+description: Getting Started tutorial for Docker Engine Swarm mode
+keywords: tutorial, cluster management, swarm mode, docker engine, get started
+title: Getting started with Swarm mode
 toc_max: 4
 ---
 
@@ -9,12 +9,12 @@ This tutorial introduces you to the features of Docker Engine Swarm mode. You
 may want to familiarize yourself with the [key concepts](../key-concepts.md)
 before you begin.
 
-The tutorial guides you through the following activities:
+The tutorial guides you through:
 
-* initializing a cluster of Docker Engines in swarm mode
-* adding nodes to the swarm
-* deploying application services to the swarm
-* managing the swarm once you have everything running
+* Initializing a cluster of Docker Engines in swarm mode
+* Adding nodes to the swarm
+* Deploying application services to the swarm
+* Managing the swarm once you have everything running
 
 This tutorial uses Docker Engine CLI commands entered on the command line of a
 terminal window.
@@ -23,11 +23,11 @@ If you are brand new to Docker, see [About Docker Engine](../../index.md).
 
 ## Set up
 
-To run this tutorial, you need the following:
+To run this tutorial, you need:
 
-* [three Linux hosts which can communicate over a network, with Docker installed](#three-networked-host-machines)
-* [the IP address of the manager machine](#the-ip-address-of-the-manager-machine)
-* [open ports between the hosts](#open-protocols-and-ports-between-the-hosts)
+* [Three Linux hosts which can communicate over a network, with Docker installed](#three-networked-host-machines)
+* [The IP address of the manager machine](#the-ip-address-of-the-manager-machine)
+* [Open ports between the hosts](#open-protocols-and-ports-between-the-hosts)
 
 ### Three networked host machines
 
@@ -40,11 +40,11 @@ for one possible set-up for the hosts.
 One of these machines is a manager (called `manager1`) and two of them are
 workers (`worker1` and `worker2`).
 
-
->**Note**: You can follow many of the tutorial steps to test single-node swarm
-as well, in which case you need only one host. Multi-node commands do not
-work, but you can initialize a swarm, create services, and scale them.
-
+>**Note**
+>
+> You can follow many of the tutorial steps to test single-node swarm
+> as well, in which case you need only one host. Multi-node commands do not
+> work, but you can initialize a swarm, create services, and scale them.
 
 #### Install Docker Engine on Linux machines
 
@@ -76,7 +76,7 @@ The following ports must be available. On some systems, these ports are open by 
 * Port `4789` UDP (configurable) for overlay network traffic
 
 If you plan on creating an overlay network with encryption (`--opt encrypted`),
-you also need to ensure **IP protocol 50** (**IPSec ESP**) traffic is allowed.
+you also need to ensure IP protocol 50 (IPSec ESP) traffic is allowed.
 
 Port `4789` is the default value for the Swarm data path port, also known as the VXLAN port.
 It is important to prevent any untrusted traffic from reaching this port, as VXLAN does not
@@ -95,6 +95,8 @@ additional hardening is suggested:
 iptables -I INPUT -m udp --dport 4789 -m policy --dir in --pol none -j DROP
 ```
 
-## What's next?
+## Next steps
 
-After you have set up your environment, you are ready to [create a swarm](create-swarm.md).
+Next, you'll create a swarm. 
+
+{{< button text="Create a swarm" url="create-swarm.md" >}}

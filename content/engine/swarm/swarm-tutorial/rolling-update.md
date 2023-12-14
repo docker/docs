@@ -146,6 +146,8 @@ Redis 3.0.7 container image using rolling updates.
     `redis:3.0.6` while others are running `redis:3.0.7`. The output above shows
     the state once the rolling updates are done.
 
-## What's next?
+## Next steps
 
-Next, learn about how to [drain a node](drain-node.md) in the swarm.
+Next, you'll learn how to drain a node in the swarm.
+
+{{< button text="Drain a node" url="drain-node.md" >}}

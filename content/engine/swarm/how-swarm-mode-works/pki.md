@@ -4,7 +4,7 @@ keywords: swarm, security, tls, pki,
 title: Manage swarm security with public key infrastructure (PKI)
 ---
 
-The swarm mode public key infrastructure (PKI) system built into Docker
+The Swarm mode public key infrastructure (PKI) system built into Docker
 makes it simple to securely deploy a container orchestration system. The nodes
 in a swarm use mutual Transport Layer Security (TLS) to authenticate, authorize,
 and encrypt the communications with other nodes in the swarm.
@@ -17,7 +17,7 @@ externally-generated root CA, using the `--external-ca` flag of the
 [docker swarm init](../../reference/commandline/swarm_init.md) command.
 
 The manager node also generates two tokens to use when you join additional nodes
-to the swarm: one **worker token** and one **manager token**. Each token
+to the swarm: one worker token and one manager token. Each token
 includes the digest of the root CA's certificate and a randomly generated
 secret. When a node joins the swarm, the joining node uses the digest to
 validate the root CA certificate from the remote manager. The remote manager
@@ -103,4 +103,4 @@ root CA, and do not contain any intermediates.
 ## Learn More
 
 * Read about how [nodes](nodes.md) work.
-* Learn how swarm mode [services](services.md) work.
+* Learn how Swarm mode [services](services.md) work.

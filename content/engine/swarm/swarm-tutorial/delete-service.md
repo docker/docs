@@ -1,6 +1,6 @@
 ---
 description: Remove the service from the swarm
-keywords: tutorial, cluster management, swarm, service
+keywords: tutorial, cluster management, swarm, service, get started
 title: Delete the service running on the swarm
 notoc: true
 ---
@@ -49,7 +49,8 @@ you can delete the service from the swarm.
 
     ```
 
-## What's next?
+## Next steps
 
-In the next step of the tutorial, you set up a new service and apply a
-[rolling update](rolling-update.md).
+Next, you'll set up a new service and apply a rolling update.
+
+{{< button text="Apply rolling updates" url="rolling-update.md" >}}
