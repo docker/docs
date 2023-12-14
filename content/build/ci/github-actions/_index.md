@@ -38,20 +38,7 @@ flexibility for customizing build parameters.
 If you're looking for examples on how to use the Docker GitHub Actions,
 refer to the following sections:
 
-- [Cache management](cache.md)
-- [Configuring your builder](configure-builder.md)
-- [Copy image between registries](copy-image-registries.md)
-- [Export to Docker](export-docker.md)
-- [Local registry](local-registry.md)
-- [Manage tags and labels](manage-tags-labels.md)
-- [Multi-platform image](multi-platform.md)
-- [Named contexts](named-contexts.md)
-- [Push to multiple registries](push-multi-registries.md)
-- [Secrets](secrets.md)
-- [Share built image between jobs](share-image-jobs.md)
-- [Test before push](test-before-push.md)
-- [Update Docker Hub repository description](update-dockerhub-desc.md)
-- [SBOM and provenance attestations](attestations.md)
+{{% sectionlinks %}}
 
 ## Get started with GitHub Actions
 
