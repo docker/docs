@@ -274,13 +274,13 @@ target "db" {
 
 ### `target.annotations`
 
-The `annotations` attribute is a shortcut to allow you to easily set a list of
-annotations on the target.
+The `annotations` attribute lets you add annotations to images built with bake.
+The key takes a list of annotations, in the format of `KEY=VALUE`.
 
 ```hcl
 target "default" {
   output = ["type=image,name=foo"]
-  annotations = ["key=value"]
+  annotations = ["org.opencontainers.image.authors=dvdksn"]
 }
 ```
 
@@ -288,9 +288,24 @@ is the same as
 
 ```hcl
 target "default" {
-  output = ["type=image,name=foo,annotation.key=value"]
+  output = ["type=image,name=foo,annotation.org.opencontainers.image.authors=dvdksn"]
 }
 ```
+
+By default, the annotation is added to image manifests. You can configure the
+level of the annotations by adding a prefix to the annotation, containing a
+comma-separated list of all the levels that you want to annotate. The following
+example adds annotations to both the image index and manifests.
+
+```hcl
+target "default" {
+  output = ["type=image,name=foo"]
+  annotations = ["index,manifest:org.opencontainers.image.authors=dvdksn"]
+}
+```
+
+Read about the supported levels in
+[Specifying annotation levels](https://docs.docker.com/build/building/annotations/#specifying-annotation-levels).
 
 ### `target.attest`
 
