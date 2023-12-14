@@ -1,6 +1,6 @@
 ---
 description:
-  Docker Scout can integrate with runtime environments to give you realtime
+  Docker Scout can integrate with runtime environments to give you real-time
   insights about your software supply chain.
 keywords: supply chain, security, streams, environments, workloads, deployments
 title: Integrating Docker Scout with environments
