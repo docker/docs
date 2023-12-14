@@ -24,7 +24,7 @@ In addition, the Docker Dashboard allows you to:
 - Navigate to the **Settings** menu to configure your Docker Desktop settings. Select the **Settings** icon in the Dashboard header.
 - Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
 - Be notified of new releases, installation progress updates, and more in the **Notifications center**. Select the bell icon in the bottom-right corner of the Docker Dashboard to access the notification center.
-- Access the **Learning center** from navigation bar. It helps you get started with quick in-app walkthroughs and other resources for learning about Docker. 
+- Access the **Learning center** from navigation bar. It helps you get started with quick in-app walkthroughs and provides other resources for learning about Docker. 
 - Get to the [Docker Scout](../../scout/_index.md) dashboard.
 - Check the system status of Docker services.
 
