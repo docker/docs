@@ -1,10 +1,10 @@
 ---
 description: Company FAQs
-keywords: Docker, Docker Hub, SSO FAQs, single sign-on
+keywords: Docker, Docker Hub, SSO FAQs, single sign-on, company, administration, company management
 title: FAQs on companies
 ---
 
-### Are existing subscriptions affected when a company is created and organizations are added to the company?
+### Are existing subscriptions affected when you create a company and add organizations to it?
 
 You can manage subscriptions and related billing details at the organization level.
 
@@ -39,21 +39,21 @@ You can manage domain verification, Single Sign-on, and System for Cross-domain 
 
 To view and manage users across all the organizations under your company, you can [manage users at the company level](../admin/company/users.md) when you use Docker Admin.
 
-Domain audit is not supported for companies or organizations within a company.
+Domain audit isn't supported for companies or organizations within a company.
 
 ### What's required to create a company name?
 
-A company name must be unique to that of its child organization. If a child organization requires the same name as a company, we suggest modifying slightly. For example, **Docker Inc** (parent company), **Docker** (child organization).
+A company name must be unique to that of its child organization. If a child organization requires the same name as a company, you should modify it slightly. For example, **Docker Inc** (parent company), **Docker** (child organization).
 
 ### How does a company owner add an organization to the company?
 
 You can add organizations to a company in [Docker Admin](../admin/company/organizations.md/#add-organizations-to-a-company.md) or [Docker Hub](./new-company.md/#add-organizations-to-a-company.md).
 
-### How does a company owner manage SSO/SCIM settings from my new parent company?
+### How does a company owner manage SSO/SCIM settings from a company?
 
 See your [SCIM](scim.md) and [SSO](../security/for-admins/single-sign-on/configure/index.md) settings.
 
-### How does a company owner enable group mapping in my IdP?
+### How does a company owner enable group mapping in an IdP?
 
 See [SCIM](scim.md) and [Group mapping](../security/for-admins/group-mapping.md) for more information.
 
