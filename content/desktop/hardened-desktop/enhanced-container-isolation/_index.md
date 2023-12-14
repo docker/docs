@@ -136,7 +136,7 @@ The following output displays:
 
 This indicates that the container's root user (0) maps to unprivileged user
 (100000) in the Docker Desktop VM, and that the mapping extends for a range of
-64K user-IDs. With If a container process were to escape the container, it would
+64K user-IDs. If a container process were to escape the container, it would
 find itself without privileges at the VM level. The user-ID mapping varies with
 each new container, as each container gets an exclusive range of host User-IDs
 for isolation. User-ID mapping is automatically managed by Docker Desktop. For
