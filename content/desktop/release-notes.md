@@ -24,6 +24,22 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.26.1
+
+{{< release-date date="2023-12-14" >}}
+
+{{< desktop-install all=true version="4.26.1" build_path="/131620/" >}}
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Updated feedback links inside Docker Desktop to ensure they continue to work correctly
+
+#### For Windows
+
+- Switch the CLI binaries to a version compatible with older versions of glibc, such as used in Ubuntu 20.04 fixes [docker/for-win#13824](https://github.com/docker/for-win/issues/13824)
+
 ## 4.26.0
 
 {{< release-date date="2023-12-04" >}}
