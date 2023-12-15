@@ -358,7 +358,7 @@ points to and updates the service tasks to use that digest.
 
 > **Note**
 >
-> If you use [content trust](#image_resolution_with_trust), the Docker
+> If you use [content trust](../security/trust/index.md), the Docker
 > client resolves image and the swarm manager receives the image and digest,
 >  rather than a tag.
 
