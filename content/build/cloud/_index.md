@@ -60,7 +60,7 @@ Once you've signed up and created a builder, continue by [setting up the
 builder in your local environment](./setup.md).
 
 For more information about the available subscription plans, see [Docker Build Cloud
-subscriptions and features](/subscriptions/build-details).
+subscriptions and features](../../subscription/build-details.md).
 
 ## Frequently asked questions
 
