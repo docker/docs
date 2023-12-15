@@ -43,6 +43,6 @@ grid:
 
 To create an organization, see [Create your organization](../organization/orgs.md).
 
-Learn how to administer an organization using Docker Admin in the following sections.
+Learn how to administer an organization in the following sections.
 
 {{< grid >}}

@@ -4,6 +4,12 @@ description: Learn how to create a company.
 keywords: company, hub, organization, company owner, Docker Admin, company management
 ---
 
+You can create a new company in Docker Hub or Docker Admin. Before you begin, make sure you're the owner of the organization you want to add to the new company. The organization also needs to have a Docker Business subscription.
+
+{{< tabs >}}
+
+{{< tab name="Docker Hub" >}}
+
 ## Create a company
 
 To create a new company:
@@ -39,3 +45,29 @@ There is no limit to the number of organizations you can have under a company la
 3. From the company page, select **Add organization**.
 4. Choose the organization you want to add from the drop-down menu.
 5. Select **Add organization** to confirm.
+
+{{< /tab >}}
+
+{{< tab name="Docker Admin" >}}
+
+## Create a company
+
+To create a new company:
+
+1. In Docker Admin, navigate to the organization you want to place under a company. The organization must have a Business subscription, and you must be an owner of the organization.
+2. Under **Organization Settings**, select **General**.
+3. In the **Organization management** section, select **Create a company**.
+4. Enter a unique name for your company, then select **Continue**.
+
+    > **Tip**
+    >
+    > The name for your company can't be the same as an existing user, organization, or company namespace.
+    { .tip }
+
+5. Review the company migration details and then select **Create company**.
+
+For more information on how you can add organizations to your company, see [Add organizations to a company](./organizations.md#add-organizations-to-a-company).
+
+{{< /tab >}}
+
+{{< /tabs >}}
