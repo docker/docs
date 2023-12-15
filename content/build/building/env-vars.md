@@ -10,7 +10,7 @@ You can set the following environment variables to enable, disable, or change
 the behavior of features related to building:
 
 | Variable                                                                    | Type              | Description                                          |
-|-----------------------------------------------------------------------------|-------------------|------------------------------------------------------|
+| --------------------------------------------------------------------------- | ----------------- | ---------------------------------------------------- |
 | [BUILDKIT_COLORS](#buildkit_colors)                                         | String            | Configure text color for the terminal output.        |
 | [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.             |
 | [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                   |

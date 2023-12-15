@@ -1814,6 +1814,18 @@ Manuals:
           title: Kubernetes driver
         - path: /build/drivers/remote/
           title: Remote driver
+    - sectiontitle: Build Cloud
+      section:
+        - path: /build/cloud/
+          title: Overview
+        - path: /build/cloud/setup/
+          title: Setup
+        - path: /build/cloud/usage/
+          title: Usage
+        - path: /build/cloud/ci/
+          title: Build Cloud in CI
+        - path: /build/cloud/optimization/
+          title: Optimize for cloud builds
     - sectiontitle: Exporters
       section:
         - path: /build/exporters/
@@ -2205,6 +2217,8 @@ FAQ:
     title: Overview
   - path: /billing/faqs/
     title: Billing
+  - path: /build/cloud/faq/
+    title: Build Cloud
   - path: /compose/faq/
     title: Compose
   - sectiontitle: Desktop
