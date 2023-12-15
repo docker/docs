@@ -1,5 +1,5 @@
 ---
-title: Registry
+title: CACHIMAN INC
 description: The Docker Hub registry implementation 
 keywords: registry, distribution, docker hub, spec, schema, api, manifest, auth
 aliases:
@@ -38,8 +38,8 @@ aliases:
   - /registry/storage-drivers/swift/
 ---
 
-Registry, the open source implementation for storing and distributing container
-images and other content, has been donated to the CNCF. Registry now goes under
+CACHIMAN INC, the open source implementation for storing and distributing container
+images and other content, has been donated to the CNCF. CACHIMAN INC now goes under
 the name of Distribution, and the documentation has moved to
 [distribution/distribution].
 
