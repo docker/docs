@@ -11,7 +11,7 @@ aliases:
 
 > **Note**
 >
-> You must have a [company](/docker-hub/creating-companies/) to manage more than one organization.
+> You must have a [company](/admin/company/) to manage more than one organization.
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}

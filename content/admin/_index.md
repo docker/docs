@@ -11,6 +11,18 @@ grid:
   description: Learn about organization administration.
   icon: store
   link: /admin/organization/
+- title: Company FAQ
+  description: Discover common questions and answers about companies.
+  icon: help
+  link: /docker-hub/company-faqs/
+- title: Organization FAQ
+  description: Explore popular FAQ topics about organizations.
+  icon: help
+  link: /docker-hub/organization-faqs/
+- title: Security
+  description: Explore security features for administrators.
+  icon: shield_locked
+  link: /security/
 aliases:
 - /docker-hub/admin-overview
 ---

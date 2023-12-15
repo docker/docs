@@ -1,7 +1,7 @@
 ---
 title: Create a company
 description: Learn how to create a company.
-keywords: company, hub, organization, company owner
+keywords: company, hub, organization, company owner, Docker Admin, company management
 ---
 
 ## Create a company
