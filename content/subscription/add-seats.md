@@ -27,4 +27,4 @@ When you add seats to your subscription in the middle of your billing cycle, you
 5. Select **Purchase** to confirm. 
     The **Billing** tab displays the new number of seats. 
 
-6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../docker-hub/members.md#add-a-member-to-a-team).
+6. Navigate to the **Members** tab to add new members. For more information, see [Add a member to a team](../admin/organization/members.md#add-a-member-to-a-team).

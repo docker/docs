@@ -43,7 +43,7 @@ grid:
 
 {{< include "admin-org-overview.md" >}}
 
-To create an organization, see [Create your organization](../../docker-hub/orgs.md).
+To create an organization, see [Create your organization](../organization/orgs.md).
 
 Learn how to administer an organization using Docker Admin in the following sections.
 

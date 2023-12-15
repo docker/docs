@@ -1,8 +1,10 @@
 ---
-description: Docker Hub Teams & Organizations
+description: Learn how to create and manage teams for your organization
 keywords: Docker, docker, registry, teams, organizations, plans, Dockerfile, Docker
-  Hub, docs, documentation
+  Hub, docs, documentation, repository permissions
 title: Create and manage a team
+aliases:
+- /docker-hub/manage-a-team/
 ---
 
 A team is a group of Docker users that belong to an organization. An
@@ -26,7 +28,7 @@ An organization owner is an administrator who is responsible to manage
 repositories and add team members to the organization. They have full access to
 private repositories, all teams, billing information, and org settings. An org
 owner can also specify [permissions](#permissions-reference) for each team in
-the organization. Only an org owner can enable [SSO](../security/for-admins/single-sign-on/index.md)
+the organization. Only an org owner can enable [SSO](../../security/for-admins/single-sign-on/_index.md)
 for
 the organization. When SSO is enabled for your organization, the org owner can
 also manage users. Docker can auto-provision Docker IDs for new end-users or
@@ -51,9 +53,9 @@ To give a team access to a repository
 4. Choose a permission from the **Permissions** drop-down list and select
    **Add**.
 
-    ![Team Repo Permissions](images/team-repo-permission.png)
+    ![Team Repo Permissions](../images/team-repo-permission.png)
 
-Organization owners can also assign members the editor role to grant partial administrative access. See [Roles and permissions](/security/for-admins/roles-and-permissions/) for more about the editor role.
+Organization owners can also assign members the editor role to grant partial administrative access. See [Roles and permissions](../../security/for-admins/roles-and-permissions.md) for more about the editor role.
 
 ### Permissions reference
 
