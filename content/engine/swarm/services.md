@@ -259,7 +259,7 @@ different ways, depending on your desired outcome.
 An image version can be expressed in several different ways:
 
 - If you specify a tag, the manager (or the Docker client, if you use
-  [content trust](#image_resolution_with_trust)) resolves that tag to a digest.
+  [content trust](../security/trust/index.md)) resolves that tag to a digest.
   When the request to create a container task is received on a worker node, the
   worker node only sees the digest, not the tag.
 
