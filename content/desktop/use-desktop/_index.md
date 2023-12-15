@@ -17,11 +17,6 @@ The **Images** view displays a list of your Docker images and allows you to run 
 
 The **Volumes** view displays a list of volumes and allows you to easily create and delete volumes and see which ones are being used. For more information, see [Explore volumes](volumes.md).
 
-The **Learning center** view helps you get started with quick in-app walkthroughs and other resources for learning about Docker. 
-
-For a more detailed guide about getting started, see
-[Get started](../../get-started/index.md).
-
 The **Builds** view lets you inspect your build history and manage builders. By default, it displays a list of all your ongoing and completed builds. [Explore builds](builds.md).
 
 In addition, the Docker Dashboard allows you to:
@@ -29,6 +24,11 @@ In addition, the Docker Dashboard allows you to:
 - Navigate to the **Settings** menu to configure your Docker Desktop settings. Select the **Settings** icon in the Dashboard header.
 - Access the **Troubleshoot** menu to debug and perform restart operations. Select the **Troubleshoot** icon in the Dashboard header.
 - Be notified of new releases, installation progress updates, and more in the **Notifications center**. Select the bell icon in the bottom-right corner of the Docker Dashboard to access the notification center.
+- Access the **Learning center** from the Dashboard header. It helps you get started with quick in-app walkthroughs and provides other resources for learning about Docker. 
+
+  For a more detailed guide about getting started, see [Get started](../../get-started/index.md).
+- Get to the [Docker Scout](../../scout/_index.md) dashboard.
+- Check the status of Docker services.
 
 ## Quick search
 
@@ -51,18 +51,16 @@ Docker Desktop also provides an easy-access tray icon that appears in the taskba
 To display the Docker menu, select the {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}} icon. It displays the following options:
 
 - **Dashboard**. This takes you to the Docker Dashboard.
-- **Sign in/Create Docker ID**
+- **Sign in/Sign up**
 - **Settings**
 - **Check for updates**
 - **Troubleshoot**
 - **Give feedback**
 - **Switch to Windows containers** (if you're on Windows)
 - **About Docker Desktop**. Contains information on the versions you are running, and links to the Subscription Service Agreement for example.
-- **Learning center**
 - **Docker Hub**
 - **Documentation**
 - **Extensions**
 - **Kubernetes**
-- **Pause**
 - **Restart**
 - **Quit Docker Desktop**
