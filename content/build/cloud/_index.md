@@ -3,7 +3,7 @@ title: Docker Build Cloud
 description: Get started with Docker Build Cloud
 keywords: build, cloud, cloud build, remote builder
 aliases:
-  - /hydrobuild/
+  - /build/hydrobuild/
 ---
 
 Docker Build Cloud is a service that lets you build your container images
