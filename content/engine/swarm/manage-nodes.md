@@ -4,12 +4,12 @@ keywords: guide, swarm mode, node
 title: Manage nodes in a swarm
 ---
 
-As part of the swarm management lifecycle, you may need to view or update a node as follows:
+As part of the swarm management lifecycle, you may need to:
 
-* [list nodes in the swarm](#list-nodes)
-* [inspect an individual node](#inspect-an-individual-node)
-* [update a node](#update-a-node)
-* [leave the swarm](#leave-the-swarm)
+* [List nodes in the swarm](#list-nodes)
+* [Inspect an individual node](#inspect-an-individual-node)
+* [Update a node](#update-a-node)
+* [Leave the swarm](#leave-the-swarm)
 
 ## List nodes
 
@@ -85,21 +85,21 @@ Engine Version:         1.12.0-dev
 
 ## Update a node
 
-You can modify node attributes as follows:
+You can modify node attributes to:
 
-* [change node availability](#change-node-availability)
-* [add or remove label metadata](#add-or-remove-label-metadata)
-* [change a node role](#promote-or-demote-a-node)
+* [Change node availability](#change-node-availability)
+* [Add or remove label metadata](#add-or-remove-label-metadata)
+* [Change a node role](#promote-or-demote-a-node)
 
 ### Change node availability
 
 Changing node availability lets you:
 
-* drain a manager node so that it only performs swarm management tasks and is
+* Drain a manager node so that it only performs swarm management tasks and is
   unavailable for task assignment.
-* drain a node so you can take it down for maintenance.
-* pause a node so it can't receive new tasks.
-* restore unavailable or paused nodes availability status.
+* Drain a node so you can take it down for maintenance.
+* Pause a node so it can't receive new tasks.
+* Restore unavailable or paused nodes availability status.
 
 For example, to change a manager node to `Drain` availability:
 
@@ -157,7 +157,9 @@ You can promote a worker node to the manager role. This is useful when a
 manager node becomes unavailable or if you want to take a manager offline for
 maintenance. Similarly, you can demote a manager node to the worker role.
 
-> **Note**: Regardless of your reason to promote or demote
+> **Note**
+>
+> Regardless of your reason to promote or demote
 > a node, you must always maintain a quorum of manager nodes in the
 > swarm. For more information refer to the [Swarm administration guide](admin_guide.md).
 
@@ -216,7 +218,7 @@ $ docker swarm leave
 Node left the swarm.
 ```
 
-When a node leaves the swarm, the Docker Engine stops running in swarm
+When a node leaves the swarm, Docker Engine stops running in Swarm
 mode. The orchestrator no longer schedules tasks to the node.
 
 If the node is a manager node, you receive a warning about maintaining the
@@ -227,7 +229,7 @@ disaster recovery measures.
 For information about maintaining a quorum and disaster recovery, refer to the
 [Swarm administration guide](admin_guide.md).
 
-After a node leaves the swarm, you can run the `docker node rm` command on a
+After a node leaves the swarm, you can run `docker node rm` on a
 manager node to remove the node from the node list.
 
 For instance:
