@@ -79,11 +79,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - linux/amd64
-          - linux/arm/v6
-          - linux/arm/v7
-          - linux/arm64
+        include:
+          - platform: linux/amd64
+            platform_dir: linux-amd64
+          - platform: linux/arm/v6
+            platform_dir: linux-amd-v6
+          - platform: linux/arm/v7
+            platform_dir: linux-arm-v7
+          - platform: linux/arm64
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -115,9 +118,9 @@ jobs:
           digest="${{ steps.build.outputs.digest }}"
           touch "/tmp/digests/${digest#sha256:}"
       - name: Upload digest
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: digests
+          name: ${{ matrix.platform_dir}}
           path: /tmp/digests/*
           if-no-files-found: error
           retention-days: 1
@@ -128,10 +131,14 @@ jobs:
       - build
     steps:
       - name: Download digests
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
+        id: download
         with:
-          name: digests
-          path: /tmp/digests
+          path: /tmp/download
+      - name: Copy all artifacts from sub-directories to /tmp/digests
+        run: |
+          mkdir /tmp/digests
+          cp ${{steps.download.outputs.download-path}}/**/* /tmp/digests
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Docker meta
