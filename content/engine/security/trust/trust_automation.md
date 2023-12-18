@@ -29,7 +29,7 @@ Successfully imported key from delegation.key
 
 ## Add a delegation public key
 
-If you initialise a repository at the same time as adding a delegation
+If you initialize a repository at the same time as adding a delegation
 public key, then you will need to use the local Notary Canonical Root Key's 
 passphrase to create the repositories trust data. If the repository has already 
 been initiated then you only need the repositories passphrase. 
