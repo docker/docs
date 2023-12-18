@@ -6,6 +6,8 @@ title: Manage company users
 
 {{< include "admin-early-access.md" >}}
 
+You can manage users at the company-level in Docker Admin.
+
 {{% admin-users product="admin" layer="company" %}}
 
 ## Manage members on a team

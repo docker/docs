@@ -14,11 +14,11 @@ grid:
 - title: Company FAQ
   description: Discover common questions and answers about companies.
   icon: help
-  link: /docker-hub/company-faqs/
+  link: /faq/admin/company-faqs/
 - title: Organization FAQ
   description: Explore popular FAQ topics about organizations.
   icon: help
-  link: /docker-hub/organization-faqs/
+  link: /faq/admin/organization-faqs/
 - title: Security
   description: Explore security features for administrators.
   icon: shield_locked
