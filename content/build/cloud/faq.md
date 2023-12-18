@@ -61,3 +61,9 @@ command. This works like pruning the cache for any other builder.
 >
 > Pruning a cloud builder's cache also removes the cache for other team members
 > using the same builder.
+
+### Can I use Docker Build Cloud with a registry behind a VPN?
+
+No, you can't use Docker Build Cloud with a private registry or registry mirror
+behind a VPN. All endpoints invoked with Docker Build Cloud, including OCI
+registries, must be accessible over the internet.
