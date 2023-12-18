@@ -16,7 +16,7 @@ You can create multiple organizations or multiple teams under a single company. 
 
 ### How do I add an organization owner?
 
-An existing owner can add additional team members as organization owners. You can invite a member and assign them the owner role in [Docker Hub](members.md#invite-members) or [Docker Admin](../../admin/organization/members.md#invite-members).
+An existing owner can add additional team members as organization owners. You can [invite a member](../../admin/organization/members.md#invite-members) and assign them the owner role in Docker Hub or the Docker Admin Console.
 
 ### How do I know how many active users are part of my organization?
 

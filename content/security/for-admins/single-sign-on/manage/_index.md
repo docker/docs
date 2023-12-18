@@ -1,6 +1,6 @@
 ---
 description: Learn how to manage Single Sign-On for your organization or company.
-keywords: manage, single sign-on, SSO, sign-on, docker hub, docker admin, admin, security
+keywords: manage, single sign-on, SSO, sign-on, docker hub, admin console, admin, security
 title: Manage Single Sign-On
 aliases:
 - /admin/company/settings/sso-management/
@@ -19,7 +19,7 @@ aliases:
 {{% admin-sso-management-orgs product="hub" %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 
@@ -36,7 +36,7 @@ aliases:
 {{% admin-sso-management product="hub" %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 

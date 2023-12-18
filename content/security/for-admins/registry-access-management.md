@@ -34,7 +34,7 @@ You need to [configure a registry.json to enforce sign-in](/docker-hub/configure
 {{% admin-registry-access product="hub" %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 

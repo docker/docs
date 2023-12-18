@@ -2,7 +2,7 @@
 description: >
   Use roles in your organization to control who has access to content,
   registry, and organization management permissions.
-keywords: members, teams, organization, company, roles, access, docker hub, docker admin, security 
+keywords: members, teams, organization, company, roles, access, docker hub, admin console, security 
 title: Roles and permissions
 aliases:
 - /docker-hub/roles-and-permissions/
@@ -21,7 +21,7 @@ The following roles are available to assign:
 - **Organization owner** - Full organization administrative access. Organization owners can manage organization repositories, teams, members, settings, and billing.
 - **Company owner** - In addition to the permissions of an organization owner, company owners can configure settings for their associated organizations.
 
-Owners can manage roles for members of an organization on [Docker Hub](/admin/organization/members/#update-a-member-role), as well members of an [organization](/admin/organization/members/#update-a-member-role) or a [company](/admin/company/users/#update-a-member-role) on [Docker Admin](/admin/).
+Owners can manage roles for members of an organization on [Docker Hub](/admin/organization/members/#update-a-member-role), as well members of an [organization](/admin/organization/members/#update-a-member-role) or a [company](/admin/company/users/#update-a-member-role) in the [Docker Admin Console](/admin/).
 
 ## Permissions
 

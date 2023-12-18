@@ -4,7 +4,7 @@
 {{ $scim_link := "[SCIM](/security/for-admins/scim/)" }}
 
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
+  {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
   {{ $domain_navigation = "Select your organization in the left navigation drop-down menu, and then select **Domain management**." }}
   {{ $sso_link = "[SSO](/security/for-admins/single-sign-on/)" }}
   {{ $scim_link = "[SCIM](/security/for-admins/scim/)" }}

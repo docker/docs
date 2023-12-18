@@ -28,13 +28,13 @@ As a company owner, you can configure [Single Sign-on (SSO)](../../security/for-
     ![remove-owner](../images/remove-owner.png)
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 
 ## Add a company owner
 
-1. Sign in to [Docker Admin](https://admin.docker.com).
+1. Sign in to the [Admin Console](https://admin.docker.com).
 2. In the left navigation, select your company in the drop-down menu.
 3. Select **Company Owners**.
 4. Select **Add Owner**.
@@ -43,7 +43,7 @@ As a company owner, you can configure [Single Sign-on (SSO)](../../security/for-
 
 ## Remove a company owner
 
-1. Sign in to [Docker Admin](https://admin.docker.com).
+1. Sign in to the [Admin Console](https://admin.docker.com).
 2. In the left navigation, select your company in the drop-down menu.
 3. Select **Company Owners**.
 4. Select the **Action** icon in the row of the company owner that your want to remove.

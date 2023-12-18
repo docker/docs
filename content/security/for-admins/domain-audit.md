@@ -39,7 +39,7 @@ Before you audit your domains, review the following required prerequisites:
 {{% admin-domain-audit product="hub" %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 

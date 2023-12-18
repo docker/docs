@@ -1,12 +1,12 @@
 ---
-description: Learn how to manage organization members in Docker Hub and Docker Admin.
+description: Learn how to manage organization members in Docker Hub and Docker Admin Console.
 keywords: members, teams, organizations, invite members, manage team members
 title: Manage organization members
 aliases:
 - /docker-hub/members/
 ---
 
-Learn how to manage members for your organization in Docker Hub and Docker Admin.
+Learn how to manage members for your organization in Docker Hub and the Docker Admin Console.
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
@@ -14,7 +14,7 @@ Learn how to manage members for your organization in Docker Hub and Docker Admin
 {{% admin-users product="hub" %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 
@@ -37,14 +37,14 @@ To add a member to a team:
 2. Select **Organizations**, your organization, and then **Members**.
 3. Select the **Action** icon, and then select **Add to team**.
 
-    > **Note**
-    >
-    > You can also navigate to **Organizations** > **Your Organization** > **Teams** > **Your Team Name** and select **Add Member**. Select a member from the drop-down list to add them to the team or search by Docker ID or email.
+   > **Note**
+   >
+   > You can also navigate to **Organizations** > **Your Organization** > **Teams** > **Your Team Name** and select **Add Member**. Select a member from the drop-down list to add them to the team or search by Docker ID or email.
 4. Select the team and then select **Add**.
 
-    > **Note**
-    >
-    > The invitee must first accept the invitation to join the organization before being added to the team.
+   > **Note**
+   >
+   > The invitee must first accept the invitation to join the organization before being added to the team.
 ### Remove a member from a team
 
 To remove a member from a specific team:

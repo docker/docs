@@ -10,7 +10,7 @@ aliases:
 - /docker-hub/onboard-business/
 ---
 
-Learn how to onboard your organization using Docker Hub or Docker Admin.
+Learn how to onboard your organization using Docker Hub or the Docker Admin Console.
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
@@ -18,7 +18,7 @@ Learn how to onboard your organization using Docker Hub or Docker Admin.
 {{% admin-org-onboarding product="hub" %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 

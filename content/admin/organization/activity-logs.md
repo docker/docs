@@ -13,7 +13,7 @@ With activity logs, owners can view and track:
  - The date when a change was made
  - Who initiated the change
 
- For example, activity logs display activities such as the date when a repository was created or deleted, the member who created the repository, the name of the repository, and when there was a change to the privacy settings.
+For example, activity logs display activities such as the date when a repository was created or deleted, the member who created the repository, the name of the repository, and when there was a change to the privacy settings.
 
 Owners can also see the activity logs for their repository if the repository is part of the organization subscribed to a Docker Business or Team plan.
 
@@ -27,7 +27,7 @@ Owners can also see the activity logs for their repository if the repository is 
 {{% admin-org-audit-log product="hub" %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 

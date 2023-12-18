@@ -2,7 +2,7 @@
 {{ $iam_navigation := "Select **Organizations**, your organization, **Settings**, and then select **Image Access**." }}
 
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
+  {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
   {{ $iam_navigation = "Select your organization in the left navigation drop-down menu, and then select **Image Access**." }}
 {{ end }}
 
