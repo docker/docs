@@ -26,7 +26,7 @@ the image repository:
 	service that isn't directly exposed to the internet and are encrypted at rest. Use the Notary CLI to [manage your snapshot key locally](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#rotate-keys).
 
 Delegation keys are optional, and not generated as part of the normal `docker`
-workflow.  They need to be
+workflow. They need to be
 [manually generated and added to the repository](trust_delegation.md#creating-delegation-keys).
 
 ## Choose a passphrase
