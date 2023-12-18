@@ -13,7 +13,7 @@ impacting your production images.
 Before working through this sandbox, you should have read through the
 [trust overview](index.md).
 
-### Prerequisites
+## Prerequisites
 
 These instructions assume you are running in Linux or macOS. You can run
 this sandbox on a local machine or on a virtual machine. You need to
@@ -67,10 +67,10 @@ the `trustsandbox` container, the Notary server, and the Registry server.
         $ mkdir trustsandbox
         $ cd trustsandbox
 
-2. Create a file called `docker-compose.yml` with your favorite editor.  For example, using vim:
+2. Create a file called `compose.yml` with your favorite editor.  For example, using vim:
 
-        $ touch docker-compose.yml
-        $ vim docker-compose.yml
+        $ touch compose.yml
+        $ vim compose.yml
 
 3. Add the following to the new file.
 

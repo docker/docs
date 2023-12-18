@@ -45,7 +45,10 @@ testuser:231072:65536
 
 ### Distribution-specific hint
 
-> Note: We recommend that you use the Ubuntu kernel.
+> **Tip**
+>
+> We recommend that you use the Ubuntu kernel.
+{ .tip }
 
 {{< tabs >}}
 {{< tab name="Ubuntu" >}}
@@ -431,7 +434,8 @@ $ mkdir -p $XDG_RUNTIME_DIR
 $ dockerd-rootless.sh
 ```
 
-> **Note**:
+> **Note**
+>
 > You must remove the directory every time you log out.
 
 On a systemd host, log into the host using `pam_systemd` (see below).

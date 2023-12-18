@@ -11,12 +11,12 @@ aliases:
 
 There are four major areas to consider when reviewing Docker security:
 
- - the intrinsic security of the kernel and its support for
-   namespaces and cgroups;
- - the attack surface of the Docker daemon itself;
- - loopholes in the container configuration profile, either by default,
+ - The intrinsic security of the kernel and its support for
+   namespaces and cgroups
+ - The attack surface of the Docker daemon itself
+ - Loopholes in the container configuration profile, either by default,
    or when customized by users.
- - the "hardening" security features of the kernel and how they
+ - The "hardening" security features of the kernel and how they
    interact with containers.
 
 ## Kernel namespaces
@@ -26,18 +26,18 @@ similar security features. When you start a container with
 `docker run`, behind the scenes Docker creates a set of namespaces and control
 groups for the container.
 
-**Namespaces provide the first and most straightforward form of
-isolation**: processes running within a container cannot see, and even
+Namespaces provide the first and most straightforward form of
+isolation. Processes running within a container cannot see, and even
 less affect, processes running in another container, or in the host
 system.
 
-**Each container also gets its own network stack**, meaning that a
+Each container also gets its own network stack, meaning that a
 container doesn't get privileged access to the sockets or interfaces
 of another container. Of course, if the host system is setup
 accordingly, containers can interact with each other through their
 respective network interfaces — just like they can interact with
 external hosts. When you specify public ports for your containers or use
-[*links*](../../network/links.md)
+[links](../../network/links.md)
 then IP traffic is allowed between containers. They can ping each other,
 send/receive UDP packets, and establish TCP connections, but that can be
 restricted if necessary. From a network architecture point of view, all
@@ -60,7 +60,7 @@ in 2005, so both the design and the implementation are pretty mature.
 
 ## Control groups
 
-Control Groups are another key component of Linux Containers. They
+Control Groups are another key component of Linux containers. They
 implement resource accounting and limiting. They provide many
 useful metrics, but they also help ensure that each container gets
 its fair share of memory, CPU, disk I/O; and, more importantly, that a
@@ -84,8 +84,8 @@ Docker daemon. This daemon requires `root` privileges unless you opt-in
 to [Rootless mode](rootless.md), and you should therefore be aware of
 some important details.
 
-First of all, **only trusted users should be allowed to control your
-Docker daemon**. This is a direct consequence of some powerful Docker
+First of all, only trusted users should be allowed to control your
+Docker daemon. This is a direct consequence of some powerful Docker
 features. Specifically, Docker allows you to share a directory between
 the Docker host and a guest container; and it allows you to do so
 without limiting the access rights of the container. This means that you
@@ -147,9 +147,7 @@ fine-grained access control system. Processes (like web servers) that
 just need to bind on a port below 1024 do not need to run as root: they
 can just be granted the `net_bind_service` capability instead. And there
 are many other capabilities, for almost all the specific areas where root
-privileges are usually needed.
-
-This means a lot for container security; let's see why!
+privileges are usually needed. This means a lot for container security.
 
 Typical servers run several processes as `root`, including the SSH daemon,
 `cron` daemon, logging daemons, kernel modules, network configuration tools,
@@ -157,34 +155,33 @@ and more. A container is different, because almost all of those tasks are
 handled by the infrastructure around the container:
 
  - SSH access are typically managed by a single server running on
-   the Docker host;
+   the Docker host
  - `cron`, when necessary, should run as a user
    process, dedicated and tailored for the app that needs its
-   scheduling service, rather than as a platform-wide facility;
- - log management is also typically handed to Docker, or to
-   third-party services like Loggly or Splunk;
- - hardware management is irrelevant, meaning that you never need to
+   scheduling service, rather than as a platform-wide facility
+ - Log management is also typically handed to Docker, or to
+   third-party services like Loggly or Splunk
+ - Hardware management is irrelevant, meaning that you never need to
    run `udevd` or equivalent daemons within
-   containers;
- - network management happens outside of the containers, enforcing
+   containers
+ - Network management happens outside of the containers, enforcing
    separation of concerns as much as possible, meaning that a container
    should never need to perform `ifconfig`,
    `route`, or ip commands (except when a container
    is specifically engineered to behave like a router or firewall, of
-   course).
+   course)
 
 This means that in most cases, containers do not need "real" root
-privileges *at all*. And therefore, containers can run with a reduced
+privileges at all* And therefore, containers can run with a reduced
 capability set; meaning that "root" within a container has much less
 privileges than the real "root". For instance, it is possible to:
 
- - deny all "mount" operations;
- - deny access to raw sockets (to prevent packet spoofing);
- - deny access to some filesystem operations, like creating new device
+ - Deny all "mount" operations
+ - Deny access to raw sockets (to prevent packet spoofing)
+ - Deny access to some filesystem operations, like creating new device
    nodes, changing the owner of files, or altering attributes (including
-   the immutable flag);
- - deny module loading;
- - and many others.
+   the immutable flag)
+ - Deny module loading
 
 This means that even if an intruder manages to escalate to root within a
 container, it is much harder to do serious damage, or to escalate
@@ -209,9 +206,9 @@ capability removal, or less secure through the addition of capabilities.
 The best practice for users would be to remove all capabilities except
 those explicitly required for their processes.
 
-## Docker Content Trust Signature Verification
+## Docker Content Trust signature verification
 
-The Docker Engine can be configured to only run signed images. The Docker Content 
+Docker Engine can be configured to only run signed images. The Docker Content 
 Trust signature verification feature is built directly into the `dockerd` binary.  
 This is configured in the Dockerd configuration file. 
 

@@ -13,7 +13,9 @@ Docker automatically generates and loads a default profile for containers named
 `docker-default`. The Docker binary generates this profile in `tmpfs` and then
 loads it into the kernel.
 
-> **Note**: This profile is used on containers, _not_ on the Docker Daemon.
+> **Note**
+>
+> This profile is used on containers, not on the Docker daemon.
 
 A profile for the Docker Engine daemon exists but it is not currently installed
 with the `deb` packages. If you are interested in the source for the daemon
@@ -44,7 +46,7 @@ To load a new profile into AppArmor for use with containers:
 $ apparmor_parser -r -W /path/to/your_profile
 ```
 
-Then, run the custom profile with `--security-opt` like so:
+Then, run the custom profile with `--security-opt`:
 
 ```console
 $ docker run --rm -it --security-opt apparmor=your_profile hello-world
@@ -193,7 +195,7 @@ profile docker-nginx flags=(attach_disconnected,mediate_deleted) {
    ```
 
 
-Congrats! You just deployed a container secured with a custom apparmor profile!
+You just deployed a container secured with a custom apparmor profile.
 
 
 ## Debug AppArmor
@@ -213,7 +215,7 @@ looks like the following:
 ```
 
 In the above example, you can see `profile=/usr/bin/docker`. This means the
-user has the `docker-engine` (Docker Engine Daemon) profile loaded.
+user has the `docker-engine` (Docker Engine daemon) profile loaded.
 
 Look at another log line:
 
@@ -266,14 +268,14 @@ and auditing in `dmesg` anything outside the bounds of the `docker-default`
 profile.
 
 The output above also shows the `/usr/bin/docker` (Docker Engine daemon) profile
-is running in `complain` mode. This means AppArmor _only_ logs to `dmesg`
+is running in `complain` mode. This means AppArmor only logs to `dmesg`
 activity outside the bounds of the profile. (Except in the case of Ubuntu
 Trusty, where some interesting behaviors are enforced.)
 
-## Contribute Docker's AppArmor code
+## Contribute to Docker's AppArmor code
 
 Advanced users and package managers can find a profile for `/usr/bin/docker`
-(Docker Engine Daemon) underneath
+(Docker Engine daemon) underneath
 [contrib/apparmor](https://github.com/moby/moby/tree/master/contrib/apparmor)
 in the Docker Engine source repository.
 

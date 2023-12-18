@@ -8,9 +8,8 @@ It is very common for Docker Content Trust to be built into existing automation
 systems. To allow tools to wrap Docker and push trusted content, there are 
 environment variables that can be passed through to the client. 
 
-This guide follows the steps as described 
-[here](index.md#signing-images-with-docker-content-trust) so please read 
-that and understand its prerequisites. 
+This guide follows the steps as described in
+[Signing images with Docker Content Trust](index.md#signing-images-with-docker-content-trust). Make sure you understand and follow the prerequisites.
 
 When working directly with the Notary client, it uses its [own set of environment variables](https://github.com/theupdateframework/notary/blob/master/docs/reference/client-config.md#environment-variables-optional).
 
@@ -30,7 +29,7 @@ Successfully imported key from delegation.key
 
 ## Add a delegation public key
 
-If you initialising a repository at the same time as adding a Delegation
+If you initialise a repository at the same time as adding a delegation
 public key, then you will need to use the local Notary Canonical Root Key's 
 passphrase to create the repositories trust data. If the repository has already 
 been initiated then you only need the repositories passphrase. 

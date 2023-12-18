@@ -76,7 +76,7 @@ These arguments are blocked by `CAP_NET_ADMIN`, which Docker does not allow by
 default.
 
 
-Bugs *not* mitigated:
+Bugs not mitigated:
 
 * [CVE-2015-3290](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3290),
 [5157](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5157): Bugs in
