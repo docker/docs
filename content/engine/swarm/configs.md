@@ -18,7 +18,9 @@ any time, and services can share a config. You can even use configs in
 conjunction with environment variables or labels, for maximum flexibility.
 Config values can be generic strings or binary content (up to 500 kb in size).
 
-> **Note**: Docker configs are only available to swarm services, not to
+> **Note**
+>
+> Docker configs are only available to swarm services, not to
 > standalone containers. To use this feature, consider adapting your container
 > to run as a service with a scale of 1.
 
@@ -121,7 +123,9 @@ Use these links to read about specific commands, or continue to the
 This section includes graduated examples which illustrate how to use
 Docker configs.
 
-> **Note**: These examples use a single-Engine swarm and unscaled services for
+> **Note**
+>
+> These examples use a single-engine swarm and unscaled services for
 > simplicity. The examples use Linux containers, but Windows containers also
 > support configs.
 

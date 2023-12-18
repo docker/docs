@@ -11,25 +11,25 @@ This topic discusses how to manage the application data for your swarm services.
 ## Swarm and types of traffic
 A Docker swarm generates two different kinds of traffic:
 
-- **Control and management plane traffic**: This includes swarm management
+- Control and management plane traffic: This includes swarm management
   messages, such as requests to join or leave the swarm. This traffic is
   always encrypted.
 
-- **Application data plane traffic**: This includes container traffic and
+- Application data plane traffic: This includes container traffic and
   traffic to and from external clients.
 
 ## Key network concepts
 
 The following three network concepts are important to swarm services:
 
-- **Overlay networks** manage communications among the Docker daemons
+- Overlay networks manage communications among the Docker daemons
   participating in the swarm. You can create overlay networks, in the same way
   as user-defined networks for standalone containers. You can attach a service
   to one or more existing overlay networks as well, to enable service-to-service
   communication. Overlay networks are Docker networks that use the `overlay`
   network driver.
 
-- The **ingress network** is a special overlay network that facilitates
+- The ingress network is a special overlay network that facilitates
   load balancing among a service's nodes. When any swarm node receives a
   request on a published port, it hands that request off to a module called
   `IPVS`. `IPVS` keeps track of all the IP addresses participating in that
@@ -40,7 +40,7 @@ The following three network concepts are important to swarm services:
   swarm. Most users do not need to customize its configuration, but Docker allows
   you to do so.
 
-- The **docker_gwbridge** is a bridge network that connects the overlay
+- The docker_gwbridge is a bridge network that connects the overlay
   networks (including the `ingress` network) to an individual Docker daemon's
   physical network. By default, each container a service is running is connected
   to its local Docker daemon host's `docker_gwbridge` network.
@@ -49,7 +49,10 @@ The following three network concepts are important to swarm services:
   join a swarm. Most users do not need to customize its configuration, but
   Docker allows you to do so.
 
-> **See also** [Networking overview](../../network/index.md) for more details about Swarm networking in general.
+> **Tip**
+>
+> See also [Networking overview](../../network/index.md) for more details about Swarm networking in general.
+{ .tip }
 
 ## Firewall considerations
 
@@ -216,7 +219,9 @@ Multiple pools can be configured if discontiguous address space is required. How
 
 The default mask length can be configured and is the same for all networks. It is set to `/24` by default. To change the default subnet mask length, use the `--default-addr-pool-mask-length` command line option.
 
-> **Note**: Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation.
+> **Note**
+>
+> Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation.
 
 ##### Overlay network size limitations
 
@@ -269,7 +274,7 @@ from any swarm node which is joined to the swarm and is in a `running` state.
 
 ### Configure service discovery
 
-**Service discovery** is the mechanism Docker uses to route a request from your
+Service discovery is the mechanism Docker uses to route a request from your
 service's external clients to an individual swarm node, without the client
 needing to know how many nodes are participating in the service or their
 IP addresses or ports. You don't need to publish ports which are used between
@@ -348,7 +353,9 @@ services which publish ports, such as a WordPress service which publishes port
       my-ingress
     ```
 
-    > **Note**: You can name your `ingress` network something other than
+    > **Note**
+    >
+    > You can name your `ingress` network something other than
     > `ingress`, but you can only have one. An attempt to create a second one
     > fails.
 

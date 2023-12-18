@@ -5,20 +5,20 @@ title: Deploy services to a swarm
 toc_max: 4
 ---
 
-Swarm services use a *declarative* model, which means that you define the
+Swarm services use a declarative model, which means that you define the
 desired state of the service, and rely upon Docker to maintain this state. The
 state includes information such as (but not limited to):
 
-- the image name and tag the service containers should run
-- how many containers participate in the service
-- whether any ports are exposed to clients outside the swarm
-- whether the service should start automatically when Docker starts
-- the specific behavior that happens when the service is restarted (such as
+- The image name and tag the service containers should run
+- How many containers participate in the service
+- Whether any ports are exposed to clients outside the swarm
+- Whether the service should start automatically when Docker starts
+- The specific behavior that happens when the service is restarted (such as
   whether a rolling restart is used)
-- characteristics of the nodes where the service can run (such as resource
+- Characteristics of the nodes where the service can run (such as resource
   constraints and placement preferences)
 
-For an overview of swarm mode, see [Swarm mode key concepts](key-concepts.md).
+For an overview of Swarm mode, see [Swarm mode key concepts](key-concepts.md).
 For an overview of how services work, see
 [How services work](how-swarm-mode-works/services.md).
 
@@ -76,26 +76,27 @@ For more details about image tag resolution, see
 
 ### gMSA for Swarm
 
-*This example will only work for a windows container* 
+> **Note**
+>
+> This example only works for a Windows container.
 
-Swarm now allows using a Docker Config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they're used on. 
+Swarm now allows using a Docker config as a gMSA credential spec - a requirement for Active Directory-authenticated applications. This reduces the burden of distributing credential specs to the nodes they're used on. 
 
 The following example assumes a gMSA and its credential spec (called credspec.json) already exists, and that the nodes being deployed to are correctly configured for the gMSA.
 
-To use a Config as a credential spec, first create the Docker Config containing the credential spec:
-
+To use a config as a credential spec, first create the Docker config containing the credential spec:
 
 ```console
 $ docker config create credspec credspec.json
 ```
 
-Now, you should have a Docker Config named credspec, and you can create a service using this credential spec. To do so, use the --credential-spec flag with the config name, like this:
+Now, you should have a Docker config named credspec, and you can create a service using this credential spec. To do so, use the --credential-spec flag with the config name, like this:
 
 ```console
 $ docker service create --credential-spec="config://credspec" <your image>
 ```
 
-Your service will use the gMSA credential spec when it starts, but unlike a typical Docker Config (used by passing the --config flag), the credential spec will not be mounted into the container.
+Your service uses the gMSA credential spec when it starts, but unlike a typical Docker config (used by passing the --config flag), the credential spec is not mounted into the container.
 
 ### Create a service using an image on a private registry
 
@@ -119,9 +120,11 @@ nodes are able to log into the registry and pull the image.
 
 ### Provide credential specs for managed service accounts
 
- In Enterprise Edition 3.0, security is improved through the centralized distribution and management of Group Managed Service Account(gMSA) credentials using Docker Config functionality. Swarm now allows using a Docker Config as a gMSA credential spec, which reduces the burden of distributing credential specs to the nodes on which they are used. 
+ In Enterprise Edition 3.0, security is improved through the centralized distribution and management of Group Managed Service Account(gMSA) credentials using Docker config functionality. Swarm now allows using a Docker config as a gMSA credential spec, which reduces the burden of distributing credential specs to the nodes on which they are used. 
 
- **Note**: This option is only applicable to services using Windows containers.
+> **Note**
+>
+> This option is only applicable to services using Windows containers.
 
  Credential spec files are applied at runtime, eliminating the need for host-based credential spec files or registry entries - no gMSA credentials are written to disk on worker nodes. You can make credential specs available to Docker Engine running swarm kit worker nodes before a container starts. When deploying a service using a gMSA-based config, the credential spec is passed directly to the runtime of containers in that service.
 
@@ -142,7 +145,7 @@ $ echo $contents > contents.json
 
 Make sure that the nodes to which you are deploying are correctly configured for the gMSA.
 
- To use a Config as a credential spec, create a Docker Config in a credential spec file named `credpspec.json`. 
+ To use a config as a credential spec, create a Docker config in a credential spec file named `credpspec.json`. 
  You can specify any name for the name of the `config`. 
 
 ```console
@@ -155,7 +158,7 @@ Now you can create a service using this credential spec. Specify the `--credenti
 $ docker service create --credential-spec="config://credspec" <your image>
 ```
 
- Your service uses the gMSA credential spec when it starts, but unlike a typical Docker Config (used by passing the --config flag), the credential spec is not mounted into the container.
+ Your service uses the gMSA credential spec when it starts, but unlike a typical Docker config (used by passing the --config flag), the credential spec is not mounted into the container.
 
 ## Update a service
 
@@ -219,9 +222,9 @@ one of those commands with the `--help` flag.
 You can configure the following options for the runtime environment in the
 container:
 
-* environment variables using the `--env` flag
-* the working directory inside the container using the `--workdir` flag
-* the username or UID using the `--user` flag
+* Environment variables using the `--env` flag
+* The working directory inside the container using the `--workdir` flag
+* The username or UID using the `--user` flag
 
 The following service's containers have an environment variable `$MYVAR`
 set to `myvalue`, run from the `/tmp/` directory, and run as the
@@ -256,7 +259,7 @@ different ways, depending on your desired outcome.
 An image version can be expressed in several different ways:
 
 - If you specify a tag, the manager (or the Docker client, if you use
-  [content trust](#image_resolution_with_trust)) resolves that tag to a digest.
+  [content trust](../security/trust/index.md)) resolves that tag to a digest.
   When the request to create a container task is received on a worker node, the
   worker node only sees the digest, not the tag.
 
@@ -301,13 +304,14 @@ updated. This feature is particularly important if you do use often-changing tag
 such as `latest`, because it ensures that all service tasks use the same version
 of the image.
 
-> **Note**: If [content trust](../security/trust/index.md) is
+> **Note**>
+>
+> If [content trust](../security/trust/index.md) is
 > enabled, the client actually resolves the image's tag to a digest before
 > contacting the swarm manager, to verify that the image is signed.
 > Thus, if you use content trust, the swarm manager receives the request
 > pre-resolved. In this case, if the client cannot resolve the image to a
 > digest, the request fails.
-{ #image_resolution_with_trust }
 
 If the manager can't resolve the tag to a digest, each worker
 node is responsible for resolving the tag to a digest, and different nodes may
@@ -352,7 +356,9 @@ When you run `service update` with the `--image` flag, the swarm manager queries
 Docker Hub or your private Docker registry for the digest the tag currently
 points to and updates the service tasks to use that digest.
 
-> **Note**: If you use [content trust](#image_resolution_with_trust), the Docker
+> **Note**
+>
+> If you use [content trust](../security/trust/index.md), the Docker
 > client resolves image and the swarm manager receives the image and digest,
 >  rather than a tag.
 
@@ -418,7 +424,7 @@ Keep reading for more information and use cases for each of these methods.
 
 To publish a service's ports externally to the swarm, use the
 `--publish <PUBLISHED-PORT>:<SERVICE-PORT>` flag. The swarm makes the service
-accessible at the published port **on every swarm node**. If an external host
+accessible at the published port on every swarm node. If an external host
 connects to that port on any swarm node, the routing mesh routes it to a task.
 The external host does not need to know the IP addresses or internally-used
 ports of the service tasks to interact with the service. When a user or process
@@ -439,7 +445,7 @@ $ docker service create --name my_web \
 ```
 
 Three tasks run on up to three nodes. You don't need to know which nodes
-are running the tasks; connecting to port 8080 on **any** of the 10 nodes
+are running the tasks; connecting to port 8080 on any of the 10 nodes
 connects you to one of the three `nginx` tasks. You can test this using `curl`.
 The following example assumes that `localhost` is one of the swarm nodes. If
 this is not the case, or `localhost` does not resolve to an IP address on your
@@ -468,7 +474,9 @@ control of the process for routing requests to your service's tasks. To publish
 a service's port directly on the node where it is running, use the `mode=host`
 option to the `--publish` flag.
 
-> **Note**: If you publish a service's ports directly on the swarm node using
+> **Note**
+>
+> If you publish a service's ports directly on the swarm node using
 > `mode=host` and also set `published=<PORT>` this creates an implicit
 > limitation that you can only run one task for that service on a given swarm
 > node. You can work around this by specifying `published` without a port
@@ -483,7 +491,7 @@ option to the `--publish` flag.
 [nginx](https://hub.docker.com/_/nginx/) is an open source reverse proxy, load
 balancer, HTTP cache, and a web server. If you run nginx as a service using the
 routing mesh, connecting to the nginx port on any swarm node shows you the
-web page for (effectively) **a random swarm node** running the service.
+web page for (effectively) a random swarm node running the service.
 
 The following example runs nginx as a service on each node in your swarm and
 exposes nginx port locally on each swarm node.
@@ -500,7 +508,9 @@ You can reach the nginx server on port 8080 of every swarm node. If you add a
 node to the swarm, a nginx task is started on it. You cannot start another
 service or container on any swarm node which binds to port 8080.
 
-> **Note**: This is a naive example. Creating an application-layer
+> **Note**
+>
+> This is a purely illustrative example. Creating an application-layer
 > routing framework for a multi-tiered service is complex and out of scope for
 > this topic.
 
@@ -556,9 +566,13 @@ flag. For more information, see
 
 ### Customize a service's isolation mode
 
+> **Important**
+>
+> This setting applies to Windows hosts only and is ignored for Linux hosts.
+{ .important }
+
 Docker allows you to specify a swarm service's isolation
-mode. **This setting applies to Windows hosts only and is ignored for Linux
-hosts.** The isolation mode can be one of the following:
+mode. The isolation mode can be one of the following:
 
 - `default`: Use the default isolation mode configured for the Docker host, as
   configured by the `-exec-opt` flag or `exec-opts` array in `daemon.json`. If
@@ -568,7 +582,9 @@ hosts.** The isolation mode can be one of the following:
 
 - `process`: Run the service tasks as a separate process on the host.
 
-  > **Note**: `process` isolation mode is only supported on Windows Server.
+  > **Note**
+  >
+  > `process` isolation mode is only supported on Windows Server.
   > Windows 10 only supports `hyperv` isolation mode.
 
 - `hyperv`: Run the service tasks as isolated `hyperv` tasks. This increases
@@ -697,7 +713,7 @@ $ docker service create \
   nginx
 ```
 
-You can also use the `constraint` service-level key in a `docker-compose.yml`
+You can also use the `constraint` service-level key in a `compose.yml`
 file.
 
 If you specify multiple placement constraints, the service only deploys onto
@@ -733,6 +749,8 @@ Placement preferences are not strictly enforced. If no node has the label
 you specify in your preference, the service is deployed as though the
 preference were not set.
 
+> **Note**
+>
 > Placement preferences are ignored for global services.
 
 The following example sets a preference to spread the deployment across nodes
@@ -748,13 +766,13 @@ $ docker service create \
   redis:3.0.6
 ```
 
-> Missing or null labels
+> **Note**
 >
 > Nodes which are missing the label used to spread still receive
 > task assignments. As a group, these nodes receive tasks in equal
 > proportion to any of the other groups identified by a specific label
 > value. In a sense, a missing label is the same as having the label with
-> a null value attached to it. If the service should **only** run on
+> a null value attached to it. If the service should only run on
 > nodes with the label being used for the spread preference, the
 > preference should be combined with a constraint.
 
@@ -963,7 +981,9 @@ The following examples show bind mount syntax:
     <IMAGE>
   ```
 
-> **Important**: Bind mounts can be useful but they can also cause problems. In
+> **Important**
+>
+> Bind mounts can be useful but they can also cause problems. In
 > most cases, it is recommended that you architect your application such that
 > mounting paths from the host is unnecessary. The main risks include the
 > following:
@@ -979,6 +999,7 @@ The following examples show bind mount syntax:
 > - Host bind mounts are non-portable. When you use bind mounts, there is no
 >   guarantee that your application runs the same way in development as it does
 >   in production.
+{ .important }
 
 ### Create services using templates
 
