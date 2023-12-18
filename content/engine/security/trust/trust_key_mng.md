@@ -23,15 +23,11 @@ the image repository:
 
 - The timestamp and snapshot keys are safely generated and stored in a signing server
 	that is deployed alongside the Docker registry. These keys are generated in a backend
-	service that isn't directly exposed to the internet and are encrypted at rest.
+	service that isn't directly exposed to the internet and are encrypted at rest. Use the Notary CLI to [manage your snapshot key locally](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#rotate-keys).
 
 Delegation keys are optional, and not generated as part of the normal `docker`
 workflow.  They need to be
 [manually generated and added to the repository](trust_delegation.md#creating-delegation-keys).
-
->**Note**
->
-> Use the Notary CLI to [manage your snapshot key locally again](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#rotate-keys)..
 
 ## Choose a passphrase
 
