@@ -2,6 +2,8 @@
 title: Deactivating an account or an organization
 description: Learn how to deactivate a Docker Hub account or an organization
 keywords: Docker Hub, delete, deactivate, account, organization
+aliases:
+- /docker-hub/deactivate-account/
 ---
 
 You can deactivate an account at any time. 

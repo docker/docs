@@ -2053,59 +2053,41 @@ Manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
-- sectiontitle: Docker Admin (Early Access)
+- sectiontitle: Administration
   section:
   - path: /admin/
     title: Overview
+  - sectiontitle: Organization administration
+    section:
+    - path: /admin/organization/
+      title: Overview
+    - path: /admin/organization/orgs/
+      title: Create your organization
+    - path: /admin/organization/onboard/
+      title: Onboard your organization
+    - path: /admin/organization/members/
+      title: Manage members
+    - path: /admin/organization/manage-a-team/
+      title: Create and manage a team
+    - path: /admin/organization/activity-logs/
+      title: Activity logs
+    - path: /admin/organization/general-settings/
+      title: General settings
   - sectiontitle: Company administration
     section:
     - path: /admin/company/
       title: Overview
+    - path: /admin/company/new-company/
+      title: Create a company
     - path: /admin/company/organizations/
       title: Manage organizations
     - path: /admin/company/users/
       title: Manage users
     - path: /admin/company/owners/
       title: Manage company owners
-
-  - sectiontitle: Organization administration
-    section:
-    - path: /admin/organization/
-      title: Overview
-    - path: /admin/organization/onboard/
-      title: Onboard your organization
-    - path: /admin/organization/members/
-      title: Manage members
-    - path: /admin/organization/activity-logs/
-      title: Activity logs
-    - path: /admin/organization/general-settings/
-      title: General settings
-
-- sectiontitle: Administration 
-  section:
-  - path: /docker-hub/admin-overview/
-    title: Overview
-  - path: /docker-hub/orgs/
-    title: Create your organization
-  - path: /docker-hub/onboard/
-    title: Onboard your organization
-  - sectiontitle: Set up your company
-    section:
-    - path: /docker-hub/creating-companies/
-      title: Overview
-    - path: /docker-hub/new-company/
-      title: Create a company
-    - path:  /docker-hub/company-owner/
-      title: Manage company owners
-  - path: /docker-hub/convert-account/
+  - path: /admin/convert-account/
     title: Convert an account into an organization
-  - path: /docker-hub/manage-a-team/
-    title: Create and manage a team
-  - path: /docker-hub/members/
-    title: Manage members
-  - path: /docker-hub/audit-log/
-    title: Audit logs
-  - path: /docker-hub/deactivate-account/
+  - path: /admin/deactivate-account/
     title: Deactivate an account or organization
 
 - sectiontitle: Security
@@ -2233,13 +2215,13 @@ FAQ:
       title: Linux
     - path: /desktop/faqs/releases/
       title: Releases
-  - sectiontitle: Docker Hub and admin
+  - sectiontitle: Docker account and admin
     section:
-    - path: /docker-hub/general-faqs/
+    - path: /faq/admin/general-faqs/
       title: General
-    - path: /docker-hub/organization-faqs/
+    - path: /faq/admin/organization-faqs/
       title: Organization
-    - path: /docker-hub/company-faqs/
+    - path: /faq/admin/company-faqs/
       title: Company
   - path: /subscription/faq/
     title: Subscription

@@ -44,7 +44,7 @@ You must make sure you have [configured SSO](single-sign-on/configure/_index.md)
 {{% admin-scim %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 

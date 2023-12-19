@@ -1,6 +1,6 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
 {{ if eq (.Get "product") "admin" }}
-  {{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
+  {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
 {{ end }}
 
 To configure Registry Access Management permissions, perform the following steps:

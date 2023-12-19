@@ -21,7 +21,7 @@ Follow the steps on this page to configure SSO for your organization or company.
 {{% admin-domains product="hub" %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 
@@ -38,7 +38,7 @@ Follow the steps on this page to configure SSO for your organization or company.
 {{% admin-sso-config product="hub" %}}
 
 {{< /tab >}}
-{{< tab name="Docker Admin" >}}
+{{< tab name="Admin Console" >}}
 
 {{% admin-sso-config product="admin" %}}
 

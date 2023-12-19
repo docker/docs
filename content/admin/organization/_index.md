@@ -35,16 +35,14 @@ grid:
   icon: domain_verification
 - title: FAQs
   description: Explore common organization FAQs.
-  link: /docker-hub/organization-faqs/
+  link: /faq/admin/organization-faqs/
   icon: help
 ---
 
-{{< include "admin-early-access.md" >}}
-
 {{< include "admin-org-overview.md" >}}
 
-To create an organization, see [Create your organization](../../docker-hub/orgs.md).
+To create an organization, see [Create your organization](../organization/orgs.md).
 
-Learn how to administer an organization using Docker Admin in the following sections.
+Learn how to administer an organization in the following sections.
 
 {{< grid >}}

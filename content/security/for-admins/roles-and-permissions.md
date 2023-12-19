@@ -2,7 +2,7 @@
 description: >
   Use roles in your organization to control who has access to content,
   registry, and organization management permissions.
-keywords: members, teams, organization, company, roles, access, docker hub, docker admin, security 
+keywords: members, teams, organization, company, roles, access, docker hub, admin console, security 
 title: Roles and permissions
 aliases:
 - /docker-hub/roles-and-permissions/
@@ -21,7 +21,7 @@ The following roles are available to assign:
 - **Organization owner** - Full organization administrative access. Organization owners can manage organization repositories, teams, members, settings, and billing.
 - **Company owner** - In addition to the permissions of an organization owner, company owners can configure settings for their associated organizations.
 
-Owners can manage roles for members of an organization on [Docker Hub](/docker-hub/members/#update-a-member-role), as well members of an [organization](/admin/organization/members/#update-a-member-role) or a [company](/admin/company/users/#update-a-member-role) on [Docker Admin](/admin/).
+Owners can manage roles for members of an organization on [Docker Hub](/admin/organization/members/#update-a-member-role), as well members of an [organization](/admin/organization/members/#update-a-member-role) or a [company](/admin/company/users/#update-a-member-role) in the [Docker Admin Console](/admin/).
 
 ## Permissions
 
@@ -50,7 +50,7 @@ Company owners have the same access as organization owners for all associated or
 | View teams                                            | ❌     | ✅     | ✅                 |
 | Assign team permissions to repositories               | ❌     | ✅     | ✅                 |
 
-When you add members to a team, you can manage their repository permissions. For team repository permissions, see [Create and manage a team permissions reference](/docker-hub/manage-a-team/#permissions-reference).
+When you add members to a team, you can manage their repository permissions. For team repository permissions, see [Create and manage a team permissions reference](/admin/organization/manage-a-team/#permissions-reference).
 
 See the following diagram for an example of how permissions may work for a user. In this example, the first permission check is for the role: member or editor. Editors have administrative permissions for repositories across the namespace of the organization. Members may have administrative permissions for a repository if they're a member of a team that grants those permissions.
 

@@ -27,7 +27,7 @@ Docker Hub is a service provided by Docker for finding and sharing container ima
 
 It's the world’s largest repository of container images with an array of content sources including container community developers, open source projects, and independent software vendors (ISV) building and distributing their code in containers.
 
-Docker Hub is also where you can go to [change your Docker account settings and carry out administrative tasks](admin-overview.md).
+Docker Hub is also where you can go to [change your Docker account settings and carry out administrative tasks](/admin/). If you have a Docker Team or Business subscription, you can also carry out administrative tasks in the [Docker Admin Console](https://admin.docker.com).
 
 {{< tabs >}}
 {{< tab name="What key features are included in Docker Hub?" >}}
@@ -41,7 +41,7 @@ GitHub and Bitbucket and push them to Docker Hub.
 {{< /tab >}}
 {{< tab name="What administrative tasks can I perform in Docker Hub?" >}}
 * [Create and manage teams and organizations](orgs.md)
-* [Create a company](creating-companies.md)
+* [Create a company](../admin/company/new-company.md)
 * [Enforce sign in](configure-sign-in.md)
 * Set up [SSO](../security/for-admins/single-sign-on/index.md) and [SCIM](../security/for-admins/scim.md)
 * Use [Group mapping](group-mapping.md)
