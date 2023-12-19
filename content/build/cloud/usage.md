@@ -49,6 +49,25 @@ confusion with regards to builder selection. Alternatively, you can run `docker
 buildx install` to make the default `docker build` command behave like `docker
 buildx build`, without discrepancies.
 
+## Use with Docker Compose
+
+To build with Docker Build Cloud using `docker compose build`, first set the
+cloud builder as your selected builder, then run your build.
+
+> **Note**
+>
+> Make sure you're using a supported version of Docker Compose, see
+> [Prerequisites](setup.md#prerequisites).
+
+```console
+$ docker buildx use cloud-<ORG>-<BUILDER_NAME>
+$ docker compose build
+```
+
+In addition to `docker buildx use`, you can also use the `docker compose build
+--builder` flag or the [`BUILDX_BUILDER` environment
+variable](../building/env-vars.md#buildx_builder) to select the cloud builder.
+
 ## Loading build results
 
 Building with `--tag` loads the build result to the local image store
