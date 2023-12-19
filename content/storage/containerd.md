@@ -1,7 +1,7 @@
 ---
 title: containerd image store with Docker Engine
 keywords: containerd, snapshotters, image store, docker engine
-description: Enabling the containerd image store on Docker Engine
+description: Learn how to enable the containerd image store on Docker Engine
 ---
 
 > **Note**
@@ -48,11 +48,9 @@ The following steps explain how to enable the containerd snapshotters feature.
 After restarting the daemon, running `docker info` shows that you're using
 containerd snapshotter storage drivers.
 
-
 ```console
 $ docker info -f '{{ .DriverStatus }}'
 [[driver-type io.containerd.snapshotter.v1]]
 ```
-
 
 Docker Engine uses the `overlayfs` containerd snapshotter by default.
