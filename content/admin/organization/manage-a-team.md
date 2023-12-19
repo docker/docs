@@ -7,6 +7,8 @@ aliases:
 - /docker-hub/manage-a-team/
 ---
 
+You can manage teams for your organization in Docker Hub.
+
 A team is a group of Docker users that belong to an organization. An
 organization can have multiple teams. An
 organization owner can then create new teams and add members to an existing team

@@ -26,26 +26,6 @@ To create a new company:
 
 5. Review the company migration details and then select **Create company**.
 
-## Add organizations to a company
-
->**Important**
->
-> You must be a company owner to add an organization to a company. You must also be an organization owner of the organization you wish to add.
-{ .important }
-
-There is no limit to the number of organizations you can have under a company layer. All organizations must have a Business subscription.
-
->**Important**
->
-> Once you add an organization to a company, you can't remove it from the company.
-{ .important }
-
-1. In Docker Hub, select **Organizations**.
-2. Select your company.
-3. From the company page, select **Add organization**.
-4. Choose the organization you want to add from the drop-down menu.
-5. Select **Add organization** to confirm.
-
 {{< /tab >}}
 
 {{< tab name="Admin Console" >}}
@@ -73,3 +53,9 @@ For more information on how you can add organizations to your company, see [Add 
 {{< /tab >}}
 
 {{< /tabs >}}
+
+## Next steps
+
+- [Manage organizations](./organizations.md)
+- [Manage company users](./users.md)
+- [Manage company owners](./owners.md)
