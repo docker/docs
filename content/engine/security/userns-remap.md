@@ -34,7 +34,7 @@ outside of the namespace, the process is running as an unprivileged high-number
 UID on the host, which does not even map to a real user. This means the process
 has no privileges on the host system at all.
 
-> Multiple ranges
+> **Note**
 >
 > It is possible to assign multiple subordinate ranges for a given user or group
 > by adding multiple non-overlapping mappings for the same user or group in the
@@ -47,7 +47,9 @@ specify an existing user and/or group, or you can specify `default`. If you
 specify `default`, a user and group `dockremap` is created and used for this
 purpose.
 
-> **Warning**: Some distributions, such as RHEL and CentOS 7.3, do not
+> **Warning**
+>
+> Some distributions, such as RHEL and CentOS 7.3, do not
 > automatically add the new group to the `/etc/subuid` and `/etc/subgid` files.
 > You are responsible for editing these files and assigning non-overlapping
 > ranges, in this case. This step is covered in [Prerequisites](#prerequisites).
@@ -107,7 +109,7 @@ avoid these situations.
     avoid overlap.
 
     If you want to use the `dockremap` user automatically created by Docker,
-    check for the `dockremap` entry in these files **after**
+    check for the `dockremap` entry in these files after
     configuring and restarting Docker.
 
 3.  If there are any locations on the Docker host where the unprivileged
@@ -160,7 +162,9 @@ $ dockerd --userns-remap="testuser:testuser"
     }
     ```
 
-    > **Note**: To use the `dockremap` user and have Docker create it for you,
+    > **Note**
+    >
+    > To use the `dockremap` user and have Docker create it for you,
     > set the value to `default` rather than `testuser`.
 
     Save the file and restart Docker.
@@ -254,8 +258,8 @@ What this means is that the whole container filesystem will belong to the user s
 The following standard Docker features are incompatible with running a Docker
 daemon with user namespaces enabled:
 
-- sharing PID or NET namespaces with the host (`--pid=host` or `--network=host`).
-- external (volume or storage) drivers which are unaware or incapable of using
+- Sharing PID or NET namespaces with the host (`--pid=host` or `--network=host`).
+- External (volume or storage) drivers which are unaware or incapable of using
   daemon user mappings.
 - Using the `--privileged` mode flag on `docker run` without also specifying
   `--userns=host`.
