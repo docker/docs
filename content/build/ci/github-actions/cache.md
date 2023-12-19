@@ -156,7 +156,7 @@ COPY go.mod go.sum ./
 RUN --mount=type=cache,target=/root/.cache/go-build go mod download
 
 COPY ./src ./
-RUN --mount=type=cache,target=/root/.cache/go-build && go build -o /bin/app /build/src
+RUN --mount=type=cache,target=/root/.cache/go-build go build -o /bin/app /build/src
 ...
 ```
 
