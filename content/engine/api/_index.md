@@ -1,6 +1,6 @@
 ---
 title: Develop with Docker Engine API
-description: Learn how you can use Docker Engine API and SDKs for the language of your choice.
+description: Learn how you can use Docker Engine API and SDKs in the language of your choice.
 keywords: developing, api, Docker Engine API, API versions, SDK versions
 aliases:
 - /engine/reference/api/
