@@ -286,7 +286,8 @@ $ curl --unix-socket /var/run/docker.sock http://localhost/v{{% param "latest_en
 Now that you know what containers exist, you can perform operations on them.
 This example stops all running containers.
 
-> **Note** 
+> **Note**
+>
 > Don't run this on a production server. Also, if you're' using swarm
 > services, the containers stop, but Docker creates new ones to keep
 > the service running in its configured state.
