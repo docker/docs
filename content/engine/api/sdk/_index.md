@@ -163,7 +163,7 @@ examples use `localhost`, but any hostname would work.
 
 > **Important**
 >
-> The previous assume you're using cURL 7.50.0 or above. Older versions of
+> The previous examples assume you're using cURL 7.50.0 or above. Older versions of
 > cURL used a [non-standard URL notation](https://github.com/moby/moby/issues/17960)
 > when using a socket connection.
 >
