@@ -6,7 +6,7 @@ aliases:
 - /engine/userguide/storagedriver/vfs-driver/
 ---
 
-The VFS storage driver is not a union filesystem; instead, each layer is a
+The VFS storage driver isn't a union filesystem. Each layer is a
 directory on disk, and there is no copy-on-write support. To create a new
 layer, a "deep copy" is done of the previous layer. This leads to lower
 performance and more space used on disk than other storage drivers. However, it
@@ -21,7 +21,7 @@ mechanism to verify other storage back-ends against, in a testing environment.
    $ sudo systemctl stop docker
    ```
 
-2.  Edit `/etc/docker/daemon.json`. If it does not yet exist, create it. Assuming
+2.  Edit `/etc/docker/daemon.json`. If it doesn't yet exist, create it. Assuming
     that the file was empty, add the following contents.
 
     ```json
@@ -40,7 +40,7 @@ mechanism to verify other storage back-ends against, in a testing environment.
     }
     ```
 
-    Docker does not start if the `daemon.json` file contains badly-formed JSON.
+    Docker doesn't start if the `daemon.json` file contains invalid JSON.
 
 3.  Start Docker.
 
@@ -62,16 +62,15 @@ Docker is now using the `vfs` storage driver. Docker has automatically
 created the `/var/lib/docker/vfs/` directory, which contains all the layers
 used by running containers.
 
-
 ## How the `vfs` storage driver works
 
-VFS is not a union filesystem. Instead, each image layer and the writable
-container layer are represented on the Docker host as subdirectories within
-`/var/lib/docker/`. The union mount provides the unified view of all layers. The
-directory names do not directly correspond to the IDs of the layers themselves.
+Each image layer and the writable container layer are represented on the Docker
+host as subdirectories within `/var/lib/docker/`. The union mount provides the
+unified view of all layers. The directory names don't directly correspond to
+the IDs of the layers themselves.
 
-VFS does not support copy-on-write (COW), so each time a new layer is created,
-it is a deep copy of its parent layer. These layers are all located under
+VFS doesn't support copy-on-write (COW). Each time a new layer is created,
+it's a deep copy of its parent layer. These layers are all located under
 `/var/lib/docker/vfs/dir/`.
 
 ### Example: Image and container on-disk constructs
@@ -122,10 +121,10 @@ $ du -sh /var/lib/docker/vfs/dir/*
 104M	/var/lib/docker/vfs/dir/e92be7a4a4e3ccbb7dd87695bca1a0ea373d4f673f455491b1342b33ed91446b
 ```
 
-The above output shows that three layers each take 104M and two take 125M. These
-directories have only small differences from each other, but take up nearly the
-same amount of room on disk. This is one of the disadvantages of using the
-`vfs` storage driver.
+The above output shows that three layers each take 104M and two take 125M.
+These directories have only small differences from each other, but they all
+consume the same amount of disk space. This is one of the disadvantages of
+using the `vfs` storage driver.
 
 ## Related information
 

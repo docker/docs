@@ -83,7 +83,7 @@ tags:
       The Audit Logs API endpoints allow you to query audit log events across a
       namespace.
 
-      For more information, see [Audit Log](https://docs.docker.com/docker-hub/audit-log/).
+      For more information, see [Audit Log](https://docs.docker.com/admin/organization/activity-logs/).
   - name: org-settings
     x-displayName: Org Settings
     description: |

@@ -9,9 +9,9 @@ grid:
 - title: Billing
   icon: credit_score
   link: /billing/faqs/
-- title: Docker Hub
+- title: Docker account
   icon: lan
-  link: /docker-hub/general-faqs/
+  link: /faq/admin/general-faqs/
 - title: Enforcing Single Sign-On
   icon: key
   link: /single-sign-on/enforcement-faqs/

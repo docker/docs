@@ -1,10 +1,12 @@
 ---
-description: Learn how about general settings for organizations.
-keywords: organization, settings
+description: Learn how to manage general settings for organizations.
+keywords: organization, settings, Admin Console
 title: General organization settings
 ---
 
 {{< include "admin-early-access.md" >}}
+
+This section describes how to manage general settings in the Docker Admin Console.
 
 ## Configure general information
 
@@ -19,7 +21,7 @@ This information includes:
 
 To edit this information:
 
-1. Sign in to [Docker Admin](https://admin.docker.com).
+1. Sign in to the [Admin Console](https://admin.docker.com).
 2. In the left navigation, select your organization in the drop-down menu.
 3. Under **Organization Settings**, select **General**.
 4. Specify the organization information and select **Save**.
@@ -28,7 +30,7 @@ To edit this information:
 
 To create a new company:
 
-1. Sign in to [Docker Admin](https://admin.docker.com).
+1. Sign in to the [Admin Console](https://admin.docker.com).
 2. In the left navigation, select your organization in the drop-down menu.
 3. Under **Organization Settings**, select **General**.
 4. In the **Organization management** section, select **Create a company**.

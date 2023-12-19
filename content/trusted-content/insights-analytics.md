@@ -120,7 +120,7 @@ represents an image pull.
 
 [1]: #action-classification-rules
 [2]: /registry/spec/api/
-[3]: /docker-hub/orgs/
+[3]: /admin/organization/orgs/
 [4]: /docker-hub/repos/
 
 ### Summary data

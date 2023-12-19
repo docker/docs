@@ -1,6 +1,6 @@
 ---
 description: Overview of Single Sign-On
-keywords: Single Sign-On, SSO, sign-on, admin, docker hub, docker admin, security
+keywords: Single Sign-On, SSO, sign-on, admin, docker hub, admin console, security
 title: Single Sign-On overview
 aliases:
 - /single-sign-on/
@@ -22,7 +22,7 @@ The following diagram shows how SSO operates and is managed in Docker Hub and Do
 
 Before enabling SSO in Docker, administrators must first configure their IdP to work with Docker. Docker provides the Assertion Consumer Service (ACS) URL and the Entity ID. Administrators use this information to establish a connection between their IdP server and Docker Hub.
 
-After establishing the connection between the IdP server and Docker, administrators sign in to Docker Hub or Docker Admin and complete SSO enablement.
+After establishing the connection between the IdP server and Docker, administrators sign in to Docker Hub or the Docker Admin Console and complete SSO enablement.
 
 When you enable SSO for your company, a first-time user can sign in to Docker Hub using their company's domain email address. They're then added to your company, assigned to an organization, and optionally assigned to a team.
 

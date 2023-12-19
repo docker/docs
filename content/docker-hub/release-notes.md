@@ -62,7 +62,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and enhancements
 
-- You can now [export a CSV file of members](../docker-hub/members.md/#export-members) from organizations that you own.
+- You can now [export a CSV file of members](../admin/organization//members.md/#export-members) from organizations that you own.
 
 ## 2022-07-22
 
@@ -155,7 +155,7 @@ Docker introduces the Advanced Image Management dashboard that enables you to vi
 
 Docker introduces Audit logs, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
 
-For more information about this feature and for instructions on how to use it, see [Audit logs](audit-log.md).
+For more information about this feature and for instructions on how to use it, see [Activity logs](../admin/organization/activity-logs.md).
 
 ## 2020-11-10
 
