@@ -4,9 +4,9 @@ keywords: docker scout, acr, azure, integration, image analysis, security, cves
 title: Azure Container Registry integration
 ---
 
-> **Beta feature**
+> **Early Access feature**
 >
-> The Azure Container Registry (ACR) integration is currently in [Beta](../../../release-lifecycle.md#beta).
+> The Azure Container Registry (ACR) integration is currently in [Early Access](../../../release-lifecycle.md#early-access-ea).
 { .experimental }
 
 Integrating Docker Scout with Azure Container Registry (ACR) lets you view
