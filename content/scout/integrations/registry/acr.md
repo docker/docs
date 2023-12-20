@@ -89,7 +89,7 @@ the Azure resources.
      container registry. The Docker Scout resources must be deployed to the
      same resource group as the registry.
 
-   - **Registry name**: the filed will be prefilled with the subdomain of the
+   - **Registry name**: the field is pre-filled with the subdomain of the
      registry hostname.
 
 8. Select **Review + create**, and then **Create** to deploy the template.
