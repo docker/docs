@@ -75,48 +75,38 @@ the Azure resources.
    Docker Scout Dashboard.
 2. Select the **Analyze my images from another registry** filter option.
 3. Find **Azure Container Registry** in the list, and select **Integrate**.
-4. In the **How to integrate** section, enter a configuration name for this
-   integration. Docker Scout uses this label as a display name for the
-   integration.
+4. In the **How to integrate** section, enter the **Registry hostname** of the
+   registry you want to integrate.
 5. Select **Next**.
-6. Copy the webhook URL.
-7. Select **Deploy to Azure** to open the template deployment wizard in Azure.
+6. Select **Deploy to Azure** to open the template deployment wizard in Azure.
 
    You may be prompted to sign in to your Azure account if you're not already
    signed in.
 
-8. In the template wizard, configure your deployment:
+7. In the template wizard, configure your deployment:
 
    - **Resource group**: enter the same resource group as you're using for the
      container registry. The Docker Scout resources must be deployed to the
      same resource group as the registry.
 
-   - **Docker Scout Webhook**: paste the webhook you copied from Docker Scout
-     earlier.
+   - **Registry name**: the filed will be prefilled with the subdomain of the
+     registry hostname.
 
-   - **Registry name**: enter the name of the ACR registry that you want to
-     integrate. The registry name is the same as the subdomain of the registry
-     hostname.
+8. Select **Review + create**, and then **Create** to deploy the template.
 
-9. Select **Review + create**, and then **Create** to deploy the template.
+9. Wait until the deployment is complete.
+10. In the **Deployment details** section click on the newly created resource
+    of the type **Container registry token**. Generate a new password for this token.
+    
+    Alternatively, use the search function in Azure to navigate to the
+    **Container registry** resource that you're looking to integrate, and
+    generate the new password for the created access token.
 
-10. Wait until the deployment is complete.
-11. Use the search function in Azure to navigate to the **Container registry**
-    resource that you're looking to integrate.
-
-12. On the container registry page, select **Tokens** under **Registry
-    permissions**.
-
-13. Select the `docker-scout-readonly-token` and generate a new password for
-    this token.
-
-14. Copy the generated password and head back to the Docker Scout Dashboard to
+11. Copy the generated password and head back to the Docker Scout Dashboard to
     finalize the integration.
 
-15. Enter the **Registry hostname** and paste the generated password into the
-    **Registry token** field.
-
-16. Select **Enable integration**.
+12. Paste the generated password into the **Registry token** field.
+13. Select **Enable integration**.
 
 After selecting **Enable integration**, Docker Scout performs a connection test
 to verify the integration. If the verification was successful, you're
