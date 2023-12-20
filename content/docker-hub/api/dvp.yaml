@@ -134,7 +134,7 @@ paths:
       security: []
       tags:
         - authentication
-      summary: Second factor authentication.
+      summary: Second factor authentication
       operationId: PostUsers2FALogin
       description: |
         When a user has 2FA enabled, this is the second call to perform after
@@ -171,7 +171,7 @@ paths:
     get:
       tags: [discovery]
       summary: Get namespaces and repos
-      description: Gets a list of your namespaces and repos which have data available
+      description: Gets a list of your namespaces and repos which have data available.
       operationId: getNamespaces
       responses:
         '200':
@@ -184,7 +184,7 @@ paths:
     get:
       tags: [discovery]
       summary: Get user's namespaces
-      description: Get metadata associated with the namespaces the user has access to, including extra repos associated with the namespaces
+      description: Get metadata associated with the namespaces the user has access to, including extra repos associated with the namespaces.
       operationId: getUserNamespaces
       responses:
         '200':
@@ -201,7 +201,7 @@ paths:
     get:
       tags: [discovery]
       summary: Get namespace
-      description: Gets metadata associated with specified namespace, including extra repos associated with the namespace
+      description: Gets metadata associated with specified namespace, including extra repos associated with the namespace.
       operationId: getNamespace
       parameters:
         - in: path
@@ -221,7 +221,7 @@ paths:
     get:
       tags: [namespaces]
       summary: Get pull data
-      description: Gets pull for the given namespace
+      description: Gets pulls for the given namespace.
       operationId: getNamespacePulls
       parameters:
         - in: path
@@ -261,7 +261,7 @@ paths:
     get:
       tags: [namespaces]
       summary: Get pull data
-      description: Gets pull for the given repo
+      description: Gets pulls for the given repo.
       operationId: getRepoPulls
       parameters:
         - in: path
@@ -307,7 +307,7 @@ paths:
     get:
       tags: [namespaces]
       summary: Get years with data
-      description: Gets a list of years that have data for the given namespace
+      description: Gets a list of years that have data for the given namespace.
       operationId: getNamespaceYears
       parameters:
         - in: path
@@ -327,7 +327,7 @@ paths:
     get:
       tags: [namespaces]
       summary: Get timespans with data
-      description: Gets a list of timespans of the given type that have data for the given namespace and year
+      description: Gets a list of timespans of the given type that have data for the given namespace and year.
       operationId: getNamespaceTimespans
       parameters:
         - in: path
@@ -359,7 +359,7 @@ paths:
     get:
       tags: [namespaces]
       summary: Get namespace metadata for timespan
-      description: Gets info about data for the given namespace and timespan
+      description: Gets info about data for the given namespace and timespan.
       operationId: getNamespaceTimespanMetadata
       parameters:
         - in: path
@@ -399,7 +399,7 @@ paths:
     get:
       tags: [namespaces]
       summary: Get namespace data for timespan
-      description: Gets a list of URLs that can be used to download the pull data for the given namespace and timespan
+      description: Gets a list of URLs that can be used to download the pull data for the given namespace and timespan.
       operationId: getNamespaceDataByTimespan
       parameters:
         - in: path
@@ -443,7 +443,7 @@ paths:
     get:
       tags: [namespaces]
       summary: Get pull data for multiple repos
-      description: Gets pull for the given repos
+      description: Gets pull for the given repos.
       operationId: getManyReposPulls
       parameters:
         - in: query
@@ -524,7 +524,7 @@ components:
           nullable: false
         login_2fa_token:
           description:
-            Short time lived token to be used on `/v2/users/2fa-login` to
+            Short-lived token to be used on `/v2/users/2fa-login` to
             complete the authentication. This field is present only if 2FA is
             enabled.
           type: string
