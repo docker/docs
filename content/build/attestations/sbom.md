@@ -37,6 +37,9 @@ $ docker buildx build --tag <namespace>/<image>:<version> \
 
 Alternatively, you can use the shorthand `--sbom=true` option instead of `--attest type=sbom`.
 
+For an example on how to add SBOM attestations with GitHub Actions, see
+[Add attestations with GitHub Actions](../ci/github-actions/attestations.md).
+
 ## Verify SBOM attestations
 
 Always validate the generated SBOM for your image before you push your image to a registry.
