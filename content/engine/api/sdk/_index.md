@@ -1,15 +1,15 @@
 ---
 title: Develop with Docker Engine SDKs
-description: Using Docker SDKs to automate Docker tasks in your language of choice
-keywords: developing, sdk
+description: Learn how to use Docker Engine SDKs to automate Docker tasks in your language of choice
+keywords: developing, sdk, Docker Engine SDKs, install SDKs, SDK versions
 aliases:
 - /engine/api/sdks/
 - /develop/sdk/
 ---
 
 Docker provides an API for interacting with the Docker daemon (called the Docker
-Engine API), as well as SDKs for Go and Python. The SDKs allow you to build and
-scale Docker apps and solutions quickly and easily. If Go or Python don't work
+Engine API), as well as SDKs for Go and Python. The SDKs allow you to efficiently build and
+scale Docker apps and solutions. If Go or Python don't work
 for you, you can use the Docker Engine API directly.
 
 The Docker Engine API is a RESTful API accessed by an HTTP client such as `wget` or
@@ -26,23 +26,22 @@ installed and coexist together.
 $ go get github.com/docker/docker/client
 ```
 
-The client requires a recent version of Go. Run `go version` and ensure that you 
-are running a currently supported version of Go
+The client requires a recent version of Go. Run `go version` and ensure that you're running a currently supported version of Go.
 
 
-[Read the full Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
+For more information, see [Docker Engine Go SDK reference](https://godoc.org/github.com/docker/docker/client).
 
 ### Python SDK
 
-- **Recommended**: Run `pip install docker`.
+- Recommended: Run `pip install docker`.
 
-- **If you can't use `pip`**:
+- If you can't use `pip`:
 
   1.  [Download the package directly](https://pypi.python.org/pypi/docker/).
-  2.  Extract it and change to the extracted directory,
+  2.  Extract it and change to the extracted directory.
   3.  Run `python setup.py install`.
 
-[Read the full Docker Engine Python SDK reference](https://docker-py.readthedocs.io/).
+For more information, see [Docker Engine Python SDK reference](https://docker-py.readthedocs.io/).
 
 ## View the API reference
 
@@ -52,8 +51,8 @@ or [choose a specific version](/engine/api/version-history/).
 
 ## Versioned API and SDK
 
-The version of the Docker Engine API you should use depends upon the version of
-your Docker daemon and Docker client. Refer to the [versioned API and SDK](/engine/api/#versioned-api-and-sdk)
+The version of the Docker Engine API you should use depends on the version of
+your Docker daemon and Docker client. See the [versioned API and SDK](/engine/api/#versioned-api-and-sdk)
 section in the API documentation for details.
 
 ## SDK and API quickstart
@@ -68,7 +67,7 @@ code:
   that supports the feature, and prefer the latest version you can use.
 - Otherwise, continue to use the version that your code is already using.
 
-As an example, the `docker run` command can be easily implemented using the
+As an example, the `docker run` command can be implemented using the
 Docker API directly, or using the Python or Go SDK.
 
 {{< tabs >}}
@@ -159,17 +158,17 @@ $ curl --unix-socket /var/run/docker.sock "http://localhost/v{{% param "latest_e
 hello world
 ```
 
-When using cURL to connect over a Unix socket, the hostname is not important. The
-examples above use `localhost`, but any hostname would work.
+When using cURL to connect over a Unix socket, the hostname is not important. The previous
+examples use `localhost`, but any hostname would work.
 
-> **Using cURL 7.47.0 or below?**
+> **Important**
 >
-> The examples above assume you are using cURL 7.50.0 or above. Older versions of
+> The previous examples assume you're using cURL 7.50.0 or above. Older versions of
 > cURL used a [non-standard URL notation](https://github.com/moby/moby/issues/17960)
 > when using a socket connection.
-> 
-> If you are using an older version of cURL, use `http:/<API version>/` instead,
-> for example, `http:/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/start`
+>
+> If you're' using an older version of cURL, use `http:/<API version>/` instead,
+> for example: `http:/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/start`.
 { .important }
 
 {{< /tab >}}
@@ -180,7 +179,7 @@ For more examples, take a look at the [SDK examples](examples.md).
 ## Unofficial libraries
 
 There are a number of community supported libraries available for other
-languages. They have not been tested by Docker, so if you run into any issues,
+languages. They haven't been tested by Docker, so if you run into any issues,
 file them with the library maintainers.
 
 | Language              | Library                                                                     |

@@ -38,3 +38,4 @@ are running, any additional builds go into a queue to be run later.
 The maximum number of pending builds in the queue is 30 and Docker Hub discards further
 requests. The number of concurrent builds for Pro is 5 and
 for Team and Business is 15.
+Automated builds can handle images of up to 10 GB in size.
