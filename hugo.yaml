@@ -37,7 +37,8 @@ related:
   toLower: false
 
 build:
-  writeStats: true
+  buildStats:
+    enabled: true
   cachebusters:
     - source: assets/watching/hugo_stats\.json
       target: styles\.css
