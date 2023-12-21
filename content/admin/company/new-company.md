@@ -2,6 +2,8 @@
 title: Create a company
 description: Learn how to create a company.
 keywords: company, hub, organization, company owner, Admin Console, company management
+aliases:
+- /docker-hub/new-company/
 ---
 
 You can create a new company in Docker Hub or Docker Admin Console. Before you begin, make sure you're the owner of the organization you want to add to the new company. The organization also needs to have a Docker Business subscription.
