@@ -2010,8 +2010,6 @@ Manuals:
   section:
   - path: /docker-hub/
     title: Overview
-  - path: /docker-id/
-    title: Create an account
   - path: /docker-hub/quickstart/
     title: Quickstart
   - sectiontitle: Repositories
@@ -2052,6 +2050,15 @@ Manuals:
     title: OCI artifacts
   - path: /docker-hub/release-notes/
     title: Release notes
+
+- sectiontitle: Docker account
+  section:
+  - path: /docker-account/
+    title: Overview
+  - path: /docker-id/
+    title: Create an account
+  - path: /docker-account/manage-account/
+    title: Manage an account
 
 - sectiontitle: Administration
   section:
