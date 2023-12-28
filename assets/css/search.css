@@ -14,8 +14,8 @@
   --docsearch-modal-shadow: inset 1px 1px 0 0 hsla(0, 0%, 100%, 0.5),
     0 3px 8px 0 #555a64;
   --docsearch-searchbox-height: 56px;
-  --docsearch-button-background: theme(colors.blue.light.600);
-  --docsearch-button-focus-background: theme(colors.blue.light.700);
+  --docsearch-button-background: rgb(255 255 255 / 10%);
+  --docsearch-button-focus-background: rgb(255 255 255 / 20%);
   --docsearch-searchbox-background: theme(colors.white);
   --docsearch-searchbox-shadow: inset 0 0 0 2px var(--docsearch-primary-color);
   --docsearch-hit-height: 56px;
@@ -36,8 +36,6 @@ html.dark {
   --docsearch-container-background: rgba(9, 10, 17, 0.8);
   --docsearch-modal-background: #15172a;
   --docsearch-modal-shadow: inset 1px 1px 0 0 #2c2e40, 0 3px 8px 0 #000309;
-  --docsearch-button-background: theme(colors.blue.dark.300);
-  --docsearch-button-focus-background: theme(colors.blue.dark.400);
   --docsearch-searchbox-background: theme(colors.black);
   --docsearch-hit-color: #bec3c9;
   --docsearch-hit-shadow: none;
