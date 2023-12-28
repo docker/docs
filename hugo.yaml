@@ -37,16 +37,17 @@ related:
   toLower: false
 
 build:
-  writeStats: true
+  buildStats:
+    enabled: true
   cachebusters:
-    - source: "assets/watching/hugo_stats\\.json"
-      target: "styles\\.css"
-    - source: "(postcss|tailwind)\\.config\\.js"
-      target: "css"
-    - source: "assets/.*\\.(js|ts|jsx|tsx)"
-      target: "js"
-    - source: "(assets|layouts)/.*\\.(.*)$"
-      target: "$1"
+    - source: assets/watching/hugo_stats\.json
+      target: styles\.css
+    - source: (postcss|tailwind)\.config\.js
+      target: css
+    - source: assets/.*\.js
+      target: js
+    - source: (assets|layouts)/.*\.(.*)$
+      target: "$2"
 
 outputFormats:
   redirects:
