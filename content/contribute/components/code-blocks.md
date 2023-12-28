@@ -20,6 +20,86 @@ export name=<MY_NAME>
 This syntax is reserved for variable names, and will cause the variable to
 be rendered in a special color and font style.
 
+## Interactive code
+
+> **Experimental**
+>
+> This component is experimental. The API, appearance, and features may change.
+{ .experimental }
+
+This feature is realized using [codapi](https://codapi.org/). You can make code
+blocks executable by setting an `interactive` attribute on the code block.
+
+````md
+```bash {interactive=true}
+function greet() {
+  echo "Hello $1"
+}
+
+greet "World"
+```
+````
+
+A **Run** button appears below the code block.
+
+```bash {interactive=true}
+function greet() {
+  echo "Hello $1"
+}
+
+greet "World"
+```
+
+You can make the code blocks editable by setting `editor=true`. This adds an
+**Edit** button to the right of the **Run** button.
+
+```bash {interactive=true,editor=true}
+function greet() {
+  echo "Hello $1"
+}
+
+greet "World"
+```
+
+### Known limitations
+
+Syntax highlighting
+
+: Focusing on an editable code block causes syntax highlighting to go away.
+  This happens because syntax highlighting is created using HTML elements
+  injected at build-time, representing the syntax tree detected by the lexer.
+
+  When focused, code blocks are re-injected with the plain text code, without
+  the wrapper elements representing the syntax tree.
+
+  For better compatibility with editable code blocks, we should consider moving
+  off the built-in `chroma` generator to something like `highlight.js` instead,
+  which handles syntax highlighting on the fly, at runtime.
+
+Languages
+
+: This prototype uses codapi cloud. The available execution sandboxes and their
+  configurations cover only a narrow set of the code examples in our docs.
+  Notably, there's no sandbox which includes the Docker runtime and CLI, as well
+  as other fundamental tools like `curl`.
+
+Formatting
+
+: Many of our examples weren't originally written and formatted as runnable
+  examples. For example, `console` blocks often contain a mix of input/output
+  lines, which would either require re-formatting or some form of pre-processing
+  before it's sent to an execution environment, filtering output lines and
+  stripping prefixes.
+
+Unsupported features
+
+: codapi supports features that aren't covered in this prototype, including:
+
+  - [Code cells](https://github.com/nalgeon/codapi-js/blob/main/docs/html.md#code-cells)
+  - [Custom actions](https://github.com/nalgeon/codapi-js/blob/main/docs/html.md#custom-actions)
+  - [Files](https://github.com/nalgeon/codapi-js/blob/main/docs/html.md#files)
+  - [Templates](https://github.com/nalgeon/codapi-js/blob/main/docs/html.md#templates)
+
 ## Bash
 
 Use the `bash` language code block when you want to show a Bash script:

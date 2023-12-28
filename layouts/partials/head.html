@@ -61,3 +61,5 @@
 {{ $mermaid := resources.Get "js/mermaid.js" | js.Build (dict "minify" true) }}
 <script>{{ $mermaid.Content | safeJS }}</script>
 {{ end }}
+{{ $codapi := resources.Get "js/codapi.js" | resources.Fingerprint "sha512" }}
+<script defer src="{{ $codapi.Permalink }}" integrity="{{ $codapi.Data.Integrity }}"></script>

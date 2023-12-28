@@ -11,3 +11,6 @@
   </button>
   {{- highlight .Inner .Type .Options -}}
 </div>
+{{ if .Attributes.interactive }}
+<codapi-snippet class="not-prose" sandbox="{{ .Type }}" {{ if .Attributes.editor }} editor="basic"{{ end }}></codapi-snippet>
+{{ end }}

@@ -231,6 +231,8 @@ module:
       target: assets
     - source: hugo_stats.json
       target: assets/watching/hugo_stats.json
+    - source: node_modules/@antonz/codapi/dist/snippet.js
+      target: assets/js/codapi.js
   imports:
 
     - path: github.com/moby/moby

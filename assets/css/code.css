@@ -1,4 +1,4 @@
-.highlight, :not(pre) > code {
+pre, :not(pre) > code {
   font-size: .875em;
   border: 1px solid;
   border-radius: theme("spacing.1");
@@ -9,9 +9,13 @@
   }
 }
 
-.highlight {
+pre {
   @apply p-3 my-4 overflow-x-auto;
   background: theme("colors.white");
+}
+
+code {
+ @apply focus-visible:outline-none
 }
 
 :not(pre) > code {

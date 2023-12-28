@@ -15,6 +15,7 @@
   "homepage": "https://docs.docker.com/",
   "devDependencies": {
     "@alpinejs/collapse": "^3.11.1",
+    "@antonz/codapi": "^0.11.0",
     "@docsearch/js": "^3.5.2",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@tailwindcss/typography": "^0.5.8",
