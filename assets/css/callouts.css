@@ -6,7 +6,7 @@
  * */
 
 .prose blockquote {
-  @apply bg-blue-light-100 p-4 font-normal not-italic dark:bg-blue-dark-100;
+  @apply bg-blue-light-100 p-4 font-normal not-italic dark:bg-blue-dark-100 text-blue-light-600 dark:text-blue-dark-800;
   quotes: none;
   > *:first-child {
     @apply relative ml-5 mt-0 before:absolute before:-left-5 before:font-icons before:content-['info'];
@@ -16,21 +16,21 @@
   }
 
   &.warning {
-    @apply border-l-red-light bg-red-light-100 dark:border-l-red-dark dark:bg-red-dark-100;
+    @apply border-l-red-light bg-red-light-100 text-red-light-600 dark:border-l-red-dark dark:bg-red-dark-100 dark:text-red-dark-800;
     > *:first-child {
       @apply before:content-['dangerous'];
     }
   }
 
   &.important {
-    @apply border-l-amber-light bg-amber-light-100 dark:border-l-amber-dark dark:bg-amber-dark-100;
+    @apply border-l-amber-light bg-amber-light-100 text-amber-light-600 dark:border-l-amber-dark dark:bg-amber-dark-100 dark:text-amber-dark-800;
     > *:first-child {
       @apply before:content-['warning'];
     }
   }
 
   &.tip {
-    @apply border-l-green-light bg-green-light-100 dark:border-l-green-dark dark:bg-green-dark-100;
+    @apply border-l-green-light bg-green-light-100 text-green-light-600 dark:border-l-green-dark dark:bg-green-dark-100 dark:text-green-dark-800;
     > *:first-child {
       @apply before:content-['lightbulb'];
     }
@@ -42,7 +42,7 @@
     }
   }
   &.restricted {
-    @apply border-l-violet-light bg-violet-light-100 dark:border-l-violet-dark dark:bg-violet-dark-100;
+    @apply border-l-violet-light bg-violet-light-100 text-violet-light-600 dark:border-l-violet-dark dark:bg-violet-dark-100 dark:text-violet-dark-800;
     > *:first-child {
       @apply before:content-['rocket\_launch'];
     }
