@@ -6,10 +6,10 @@
  * */
 
 .prose blockquote {
-  @apply bg-blue-light-100 p-4 font-normal not-italic dark:bg-blue-dark-100 text-blue-light-600 dark:text-blue-dark-800;
+  @apply bg-blue-light-100 py-4 px-6 font-normal not-italic dark:bg-blue-dark-100 text-blue-light-600 dark:text-blue-dark-800;
   quotes: none;
   > *:first-child {
-    @apply relative ml-5 mt-0 before:absolute before:-left-5 before:font-icons before:content-['info'];
+    @apply relative ml-6 mt-0 before:absolute before:-left-6 before:font-icons before:content-['info'];
   }
   *:last-child {
     @apply mb-0 after:content-none;
