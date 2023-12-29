@@ -5,10 +5,10 @@ title: Manage swarm service networks
 toc_max: 3
 ---
 
-This topic discusses how to manage the application data for your swarm services.
-
+This page describes networking for swarm services.
 
 ## Swarm and types of traffic
+
 A Docker swarm generates two different kinds of traffic:
 
 - Control and management plane traffic: This includes swarm management
@@ -66,7 +66,19 @@ When setting up networking in a Swarm, special care should be taken. Consult
 the [tutorial](swarm-tutorial/index.md#open-protocols-and-ports-between-the-hosts)
 for an overview.
 
-## Create an overlay network
+## Overlay networking
+
+When you initialize a swarm or join a Docker host to an existing swarm, two
+new networks are created on that Docker host:
+
+- An overlay network called `ingress`, which handles the control and data traffic
+  related to swarm services. When you create a swarm service and do not
+  connect it to a user-defined overlay network, it connects to the `ingress`
+  network by default.
+- A bridge network called `docker_gwbridge`, which connects the individual
+  Docker daemon to the other daemons participating in the swarm.
+
+### Create an overlay network
 
 To create an overlay network, specify the `overlay` driver when using the
 `docker network create` command:
@@ -431,6 +443,54 @@ $ docker swarm join \
   --data-path-addr eth1 \
   192.168.99.100:2377
 ```
+
+## Publish ports on an overlay network
+
+Swarm services connected to the same overlay network effectively expose all
+ports to each other. For a port to be accessible outside of the service, that
+port must be _published_ using the `-p` or `--publish` flag on `docker service
+create` or `docker service update`. Both the legacy colon-separated syntax and
+the newer comma-separated value syntax are supported. The longer syntax is
+preferred because it is somewhat self-documenting.
+
+<table>
+<thead>
+<tr>
+<th>Flag value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tr>
+<td><tt>-p 8080:80</tt> or<br /><tt>-p published=8080,target=80</tt></td>
+<td>Map TCP port 80 on the service to port 8080 on the routing mesh.</td>
+</tr>
+<tr>
+<td><tt>-p 8080:80/udp</tt> or<br /><tt>-p published=8080,target=80,protocol=udp</tt></td>
+<td>Map UDP port 80 on the service to port 8080 on the routing mesh.</td>
+</tr>
+<tr>
+<td><tt>-p 8080:80/tcp -p 8080:80/udp</tt> or <br /><tt>-p published=8080,target=80,protocol=tcp -p published=8080,target=80,protocol=udp</tt></td>
+<td>Map TCP port 80 on the service to TCP port 8080 on the routing mesh, and map UDP port 80 on the service to UDP port 8080 on the routing mesh.</td>
+</tr>
+</table>
+
+## Bypass the routing mesh for a swarm service
+
+By default, swarm services which publish ports do so using the routing mesh.
+When you connect to a published port on any swarm node (whether it is running a
+given service or not), you are redirected to a worker which is running that
+service, transparently. Effectively, Docker acts as a load balancer for your
+swarm services. Services using the routing mesh are running in virtual IP (VIP)
+mode. Even a service running on each node (by means of the `--mode global`
+flag) uses the routing mesh. When using the routing mesh, there is no guarantee
+about which Docker node services client requests.
+
+To bypass the routing mesh, you can start a service using DNS Round Robin
+(DNSRR) mode, by setting the `--endpoint-mode` flag to `dnsrr`. You must run
+your own load balancer in front of the service. A DNS query for the service name
+on the Docker host returns a list of IP addresses for the nodes running the
+service. Configure your load balancer to consume this list and balance the
+traffic across the nodes.
 
 ## Learn more
 
