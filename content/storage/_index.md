@@ -73,11 +73,13 @@ running container is using a volume, the volume is still available to Docker
 and isn't removed automatically. You can remove unused volumes using `docker
 volume prune`.
 
-When you mount a volume, it may be named or anonymous. Anonymous
-volumes aren't given an explicit name when they're first mounted into a
-container, so Docker gives them a random name that's guaranteed to be unique
-within a given Docker host. Besides the name, named and anonymous volumes
-behave in the same ways.
+When you mount a volume, it may be named or anonymous. Anonymous volumes are
+given a random name that's guaranteed to be unique within a given Docker host.
+Just like named volumes, anonymous volumes persist even if you remove the
+container that uses them, except if you use the `--rm` flag when creating the
+container. Docker automatically removes anonymous volume mounts for containers
+created with the `--rm` flag. See [Remove anonymous
+volumes](volumes.md#remove-anonymous-volumes).
 
 Volumes also support the use of volume drivers, which allow you to store
 your data on remote hosts or cloud providers, among other possibilities.
