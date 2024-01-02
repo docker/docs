@@ -64,3 +64,5 @@ For information on personal access tokens (PAT), see [Create and manage access t
 You can take administrative actions for your account in Account center.
 
 For more information on converting your account, see [Convert an account into an organization](../admin/convert-account.md).
+
+For information on deactivating your account, see [Deactivating a user account](./deactivate-user-account.md).
