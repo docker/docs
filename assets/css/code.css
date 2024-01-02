@@ -9,14 +9,6 @@
   }
 }
 
-:not(pre) > code {
-  /* !important because of specificity issue with blockquote typography */
-  color: theme(colors.black) !important;
-  .dark blockquote & {
-    color: theme(colors.white) !important;
-  }
-}
-
 .highlight {
   @apply p-3 my-4 overflow-x-auto;
   background: theme("colors.white");
