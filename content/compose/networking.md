@@ -9,8 +9,7 @@ title: Networking in Compose
 By default Compose sets up a single
 [network](../engine/reference/commandline/network_create.md) for your app. Each
 container for a service joins the default network and is both reachable by
-other containers on that network, and discoverable by them at a hostname
-identical to the container name.
+other containers on that network, and discoverable by the container name.
 
 > **Note**
 >
@@ -41,7 +40,7 @@ When you run `docker compose up`, the following happens:
 3.  A container is created using `db`'s configuration. It joins the network
     `myapp_default` under the name `db`.
 
-Each container can now look up the hostname `web` or `db` and
+Each container can now look up the name `web` or `db` and
 get back the appropriate container's IP address. For example, `web`'s
 application code could connect to the URL `postgres://db:5432` and start
 using the Postgres database.
@@ -69,7 +68,7 @@ If any containers have connections open to the old container, they are closed. I
 
 ## Link containers
 
-Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate. By default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at the hostnames `db` and `database`:
+Links allow you to define extra aliases by which a service is reachable from another service. They are not required to enable services to communicate. By default, any service can reach any other service at that service's name. In the following example, `db` is reachable from `web` at the names `db` and `database`:
 
 ```yaml
 services:
