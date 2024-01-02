@@ -113,7 +113,7 @@ counter whenever you visit it.
 
 5.  Create a file called `compose.yml` and paste this in:
 
-    ```none
+    ```yaml
       services:
         web:
           image: 127.0.0.1:5000/stackdemo
@@ -140,7 +140,7 @@ counter whenever you visit it.
     Compose doesn't take advantage of swarm mode, and deploys everything to a
     single node. You can safely ignore this.
 
-    ```none
+    ```console
     $ docker compose up -d
 
     WARNING: The Docker Engine you're using is running in swarm mode.
