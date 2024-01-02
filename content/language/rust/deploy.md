@@ -7,7 +7,7 @@ description: Learn how to test your Rust deployment locally using Kubernetes
 ## Prerequisites
 
 - Complete the previous sections of this guide, starting with [Develop your Rust application](develop.md).
-- [Turn on Kubernetes](/desktop/kubernetes/#turn-on-kubernetes) in Docker Desktop.
+- [Turn on Kubernetes](/desktop/kubernetes/#install-and-turn-on-kubernetes) in Docker Desktop.
 
 ## Overview
 
