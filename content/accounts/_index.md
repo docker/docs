@@ -10,7 +10,7 @@ grid:
 - title: Manage account
   description: Learn how to manage the settings for your account.
   icon: settings_suggest
-  link: /docker-account/manage-account/
+  link: /accounts/manage-account/
 - title: Docker account FAQ
   description: Explore popular FAQ topics about organizations.
   icon: help

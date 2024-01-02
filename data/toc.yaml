@@ -2053,11 +2053,11 @@ Manuals:
 
 - sectiontitle: Docker account
   section:
-  - path: /docker-account/
+  - path: /accounts/
     title: Overview
   - path: /docker-id/
     title: Create an account
-  - path: /docker-account/manage-account/
+  - path: /accounts/manage-account/
     title: Manage an account
 
 - sectiontitle: Administration
