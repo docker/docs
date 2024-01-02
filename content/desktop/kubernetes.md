@@ -19,14 +19,13 @@ workloads.
 
 ## Install and turn on Kubernetes
 
-To turn on Kubernetes in Docker Desktop:
 1. From the Docker Dashboard, select the **Settings**.
 2. Select **Kubernetes** from the left sidebar. 
 3. Next to **Enable Kubernetes**, select the checkbox.
 4. Select **Apply & Restart** to save the settings and then select **Install** to confirm. This instantiates images required to run the Kubernetes server as containers, and installs the `/usr/local/bin/kubectl` command on your machine.
    > **Important**
    >
-   > The kubectl binary is not automatically packaged with Docker Desktop for Linux. To install the kubectl command for Linux, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/). It should be installed at `/usr/local/bin/kubectl`.
+   > The `kubectl` binary is not automatically packaged with Docker Desktop for Linux. To install the kubectl command for Linux, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/). It should be installed at `/usr/local/bin/kubectl`.
    { .important}
 
 By default, Kubernetes containers are hidden from commands like `docker ps`, because managing them manually is not supported. Most users do not need this option. To see these internal containers, select **Show system containers (advanced)**. 
@@ -74,7 +73,7 @@ docker-desktop       Ready     master    3h        v1.19.7
 For more information about `kubectl`, see the
 [`kubectl` documentation](https://kubernetes.io/docs/reference/kubectl/overview/).
 
-## Turn off Kubernetes
+## Turn off and uninstall Kubernetes
 
 To turn off Kubernetes in Docker Desktop:
 1. From the Docker Dashboard, select the **Settings** icon.
