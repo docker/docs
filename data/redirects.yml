@@ -629,6 +629,8 @@
   - /build/customize/bake/file-definition/
 "/build/ci/github-actions/attestations/":
   - /go/build-attestations-gha/
+"/build/attestations/":
+  - /go/attestations/
 
 # CLI backlinks
 "/config/filter/":
