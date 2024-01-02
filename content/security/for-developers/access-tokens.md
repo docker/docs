@@ -24,11 +24,13 @@ any time.
 > Treat access tokens like your password and keep them secret. Store your tokens securely in a credential manager for example.
 { .important }
 
-1. Sign in to [Docker Hub](https://hub.docker.com).
+1. Sign in to your [Docker account](https://account.docker.com/login).
 
 2. Select your avatar in the top-right corner and from the drop-down menu select **My Account**.
 
-3. Select the **Security** tab and then **New Access Token**.
+3. In the **Security** section, select **Personal Access Tokens**.
+
+4. Select **Generate new token**.
 
 4. Add a description for your token. Use something that indicates the use case or purpose of the token.
    
@@ -36,7 +38,7 @@ any time.
    The access permissions are scopes that set restrictions in your
    repositories. For example, for Read & Write permissions, an automation
    pipeline can build an image and then push it to a repository. However, it
-   can not delete the repository.
+   can't delete the repository.
 
 6. Select **Generate** and then copy the token that appears on the screen and save it. You won't be able
    to retrieve the token once you close this prompt.
@@ -61,16 +63,18 @@ When prompted for a password, enter your personal access token instead of a pass
 
 ## Modify existing tokens
 
-You can rename, activate, deactivate, or delete a token as needed.
+You can rename, activate, deactivate, or delete a token as needed. You can access your tokens in your settings in Account Center.
 
-1. Access your tokens under **My Account > Security**.
-   This page shows an overview of all your tokens, and lists if the token was generated manually or if it was [auto-generated](#auto-generated-tokens). You can also view the number
-   of tokens that are activated and deactivated in the toolbar.
+1. Sign in to your [Docker account](https://account.docker.com/login).
 
-2. Select a token and then select **Delete** or **Edit**, or use the actions menu on the far right of a token row to bring up the edit screen.
-   You can also select multiple tokens to delete at once.
+2. Select your avatar in the top-right corner and from the drop-down menu select **My Account**.
 
-3. After modifying the token, select **Save**.
+3. In the **Security** section, select **Personal Access Tokens**.
+   This page shows an overview of all your tokens, the token status, and lists if the token was generated manually or if it was [auto-generated](#auto-generated-tokens). 
+
+4. Select the actions menu on the far right of a token row, then select **Deactivate**, **Edit**, or **Delete** to modify the token.
+
+5. After modifying the token, select **Save**.
 
 ## Auto-generated tokens
 
