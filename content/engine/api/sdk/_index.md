@@ -194,7 +194,6 @@ file them with the library maintainers.
 | Gradle                | [gradle-docker-plugin](https://github.com/gesellix/gradle-docker-plugin)    |
 | Groovy                | [docker-client](https://github.com/gesellix/docker-client)                  |
 | Haskell               | [docker-hs](https://github.com/denibertovic/docker-hs)                      |
-| HTML (Web Components) | [docker-elements](https://github.com/kapalhq/docker-elements)               |
 | Java                  | [docker-client](https://github.com/spotify/docker-client)                   |
 | Java                  | [docker-java](https://github.com/docker-java/docker-java)                   |
 | Java                  | [docker-java-api](https://github.com/amihaiemil/docker-java-api)            |
