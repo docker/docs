@@ -2059,6 +2059,8 @@ Manuals:
     title: Create an account
   - path: /accounts/manage-account/
     title: Manage an account
+  - path: /accounts/deactivate-user-account/
+    title: Deactivate an account
 
 - sectiontitle: Administration
   section:
@@ -2095,7 +2097,7 @@ Manuals:
   - path: /admin/convert-account/
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
-    title: Deactivate an account or organization
+    title: Deactivate an organization
 
 - sectiontitle: Security
   section:
