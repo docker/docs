@@ -8,7 +8,7 @@ description: Learn how to deploy your Go application
 
 - Complete all the previous sections of this guide, starting with [Build
   your Go image](build-images.md).
-- [Turn on Kubernetes](/desktop/kubernetes/#turn-on-kubernetes) in Docker
+- [Turn on Kubernetes](/desktop/kubernetes/#install-and-turn-on-kubernetes) in Docker
   Desktop.
 
 ## Overview
