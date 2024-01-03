@@ -45,7 +45,6 @@ Your invoice includes the following:
 - Date due
 - Your bill to information
 - Amount due
-- Due date
 - Description of your order, quantity if applicable, unit price, and amount
 
 The information listed in the Bill to section is based on your billing information. Not all fields are required. The billing information includes the following:
