@@ -10,7 +10,7 @@ Sign in to Hub, then:
 
 1. Select your user avatar to open the drop-down menu.
 2. Select **Billing**.
-3. Select the account or organization name to view the billing details.
+3. Select the user or organization account to view the billing details.
 
 Here you can find your renewal date near the bottom-right of your plan details.
 
@@ -65,7 +65,7 @@ You receive your invoice when the subscription renews. To verify your renewal da
 
 1. Select your user avatar to open the drop-down menu.
 2. Select **Billing**.
-3. Select the account or organization name to view the billing details. Here you can find your renewal date and the renewal amount.
+3. Select the user or organization account to view the billing details. Here you can find your renewal date and the renewal amount.
 
 ### What billing-related emails will I receive from Docker Hub?
 
