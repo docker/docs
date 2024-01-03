@@ -5,22 +5,34 @@ title: Integrate Docker Scout with Jenkins
 ---
 
 You can add the following stage and steps definition to a `Jenkinsfile` to run
-Docker Scout as part of a Jenkins pipeline. The pipeline needs two secrets
-defined to authenticate with Docker Hub: `DOCKER_HUB_USER` and `DOCKER_HUB_PAT`
-It also needs an environment variable defined for the image and tag.
+Docker Scout as part of a Jenkins pipeline. The pipeline needs a `DOCKER_HUB`
+credential containing the username and password for authenticating to Docker
+Hub. It also needs an environment variable defined for the image and tag.
 
 ```groovy
-…
-stage('Analyze image') {
-    steps {
-        // Install Docker Scout
-        sh 'curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin'
-        
-        // Log into Docker Hub
-        sh 'echo $DOCKER_HUB_PAT | docker login -u $DOCKER_HUB_USER --password-stdin'
+pipeline {
+    agent {
+        // Agent details
+    }
 
-        // Analyze and fail on critical or high vulnerabilities
-        sh 'docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
+    environment {
+        DOCKER_HUB = credentials('jenkins-docker-hub-credentials')
+        IMAGE_TAG  = 'myorg/scout-demo-service:latest'
+    }
+
+    stages {
+        stage('Analyze image') {
+            steps {
+                // Install Docker Scout
+                sh 'curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin'
+
+                // Log into Docker Hub
+                sh 'echo $DOCKER_HUB_PSW | docker login -u $DOCKER_HUB_USR --password-stdin'
+
+                // Analyze and fail on critical or high vulnerabilities
+                sh 'docker-scout cves $IMAGE_TAG --exit-code --only-severity critical,high'
+            }
+        }
     }
 }
 ```
