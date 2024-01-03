@@ -17,13 +17,12 @@ destinations.
 In addition to the log message itself, the `fluentd` log
 driver sends the following metadata in the structured log message:
 
-| Field            | Description                                                                                                                                            |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `container_id`   | The full 64-character container ID.                                                                                                                    |
+| Field            | Description                                                                                                                                           |
+| :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `container_id`   | The full 64-character container ID.                                                                                                                   |
 | `container_name` | The container name at the time it was started. If you use `docker rename` to rename a container, the new name isn't reflected in the journal entries. |
-| `source`         | `stdout` or `stderr`                                                                                                                                   |
-| `log`            | The container log                                                                                                                                      |
-
+| `source`         | `stdout` or `stderr`                                                                                                                                  |
+| `log`            | The container log                                                                                                                                     |
 
 ## Usage
 
@@ -62,16 +61,16 @@ Restart Docker for the changes to take effect.
 To set the logging driver for a specific container, pass the
 `--log-driver` option to `docker run`:
 
-```text
-docker run --log-driver=fluentd ...
+```console
+$ docker run --log-driver=fluentd ...
 ```
 
 Before using this logging driver, launch a Fluentd daemon. The logging driver
 connects to this daemon through `localhost:24224` by default. Use the
 `fluentd-address` option to connect to a different address.
 
-```text
-docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+```console
+$ docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
 ```
 
 If container cannot connect to the Fluentd daemon, the container stops
@@ -86,9 +85,11 @@ Users can use the `--log-opt NAME=VALUE` flag to specify additional Fluentd logg
 By default, the logging driver connects to `localhost:24224`. Supply the
 `fluentd-address` option to connect to a different address. `tcp`(default) and `unix` sockets are supported.
 
-    docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
-    docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
-    docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
+```console
+$ docker run --log-driver=fluentd --log-opt fluentd-address=fluentdhost:24224
+$ docker run --log-driver=fluentd --log-opt fluentd-address=tcp://fluentdhost:24224
+$ docker run --log-driver=fluentd --log-opt fluentd-address=unix:///path/to/fluentd.sock
+```
 
 Two of the above specify the same address, because `tcp` is default.
 
@@ -162,12 +163,12 @@ aggregate store.
 
 2.  Launch Fluentd container with this configuration file:
 
-    ```text
+    ```console
     $ docker run -it -p 24224:24224 -v /path/to/conf/test.conf:/fluentd/etc/test.conf -e FLUENTD_CONF=test.conf fluent/fluentd:latest
     ```
 
 3.  Start one or more containers with the `fluentd` logging driver:
 
-    ```text
+    ```console
     $ docker run --log-driver=fluentd your/application
     ```
