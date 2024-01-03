@@ -1,18 +1,20 @@
-#TableOfContents {
-  nav {
-    @apply border-l-2 border-divider-light;
-  }
-  ul ul {
-    @apply pl-2;
-  }
-  a {
-    @apply max-w-full truncate py-1 block hover:font-medium hover:no-underline pl-2;
-    &[aria-current="true"],
-    &:hover {
-      @apply font-medium text-black dark:text-white border-l-2 border-l-gray-light bg-gradient-to-r from-gray-light-100 dark:border-l-gray-dark dark:from-gray-dark-200;
+@layer components {
+  #TableOfContents {
+    nav {
+      @apply border-l-2 border-divider-light;
     }
-    &:not([aria-current="true"]) {
-      @apply text-gray-light-600 dark:text-gray-dark-700 hover:text-black dark:hover:text-white;
+    ul ul {
+      @apply pl-2;
+    }
+    a {
+      @apply block max-w-full truncate py-1 pl-2 hover:font-medium hover:no-underline;
+      &[aria-current="true"],
+      &:hover {
+        @apply border-l-2 border-l-gray-light bg-gradient-to-r from-gray-light-100 font-medium text-black dark:border-l-gray-dark dark:from-gray-dark-200 dark:text-white;
+      }
+      &:not([aria-current="true"]) {
+        @apply text-gray-light-600 hover:text-black dark:text-gray-dark-700 dark:hover:text-white;
+      }
     }
   }
 }

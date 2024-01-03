@@ -9,5 +9,8 @@
   >
     content_copy
   </button>
-  {{- highlight .Inner .Type .Options -}}
+  {{ $result := transform.HighlightCodeBlock . }}
+  <div class="syntax-light dark:syntax-dark">
+    {{ $result.Wrapped }}
+  </div>
 </div>
