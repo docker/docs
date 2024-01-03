@@ -64,7 +64,7 @@ operations are defined as follows:
 
 | Build operation      | Description                                                                                                                                                                     |
 | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Local file transfers | Time spend transferring local files from the client to the builder.                                                                                                             |
+| Local file transfers | Time spent transferring local files from the client to the builder.                                                                                                             |
 | File operations      | Any operations that involve creating and copying files in the build. For example, the `COPY`, `WORKDIR`, `ADD` instructions in a Dockerfile frontend all incur file operations. |
 | Image pulls          | Time spent pulling images.                                                                                                                                                      |
 | Executions           | Container executions, for example commands defined as `RUN` instructions in a Dockerfile frontend.                                                                              |
