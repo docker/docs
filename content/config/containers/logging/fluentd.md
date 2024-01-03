@@ -116,6 +116,13 @@ logging-related environment variables and labels. It is used for advanced
 Docker connects to Fluentd in the background. Messages are buffered until the
 connection is established. Defaults to `false`.
 
+### fluentd-async-reconnect-interval
+
+When `fluentd-async` is enabled, the `fluentd-async-reconnect-interval` option
+defines the interval, in milliseconds, at which the connection to
+`fluentd-address` is re-established. This option is useful if the address
+resolves to one or more IP addresses, for example a Consul service address.
+
 ### fluentd-buffer-limit
 
 Sets the number of events buffered on the memory. Records will be stored in memory
