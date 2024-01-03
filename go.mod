@@ -15,4 +15,4 @@ require (
 )
 
 // buildkit depends on cli v25 beta1, pin to v24
-replace github.com/docker/cli => github.com/docker/cli v24.0.8-0.20231213094340-0f82fd88610a+incompatible
+replace github.com/docker/cli => github.com/docker/cli v24.0.8-0.20240103162225-b0c5946ba5d8+incompatible
