@@ -10,10 +10,10 @@
 2. {{ $iam_navigation }}
 3. Enable Image Access Management to set the permissions for the following categories of images you can manage:
 
-  - **Organization Images**: When Image Access Management is enabled, images from your organization are always allowed. These images can be public or private created by members within your organization.
+  - **Organization Images**: Images from your organization are always allowed by default. These images can be public or private created by members within your organization.
   - **Docker Official Images**: A curated set of Docker repositories hosted on Hub. They provide OS repositories, best practices for Dockerfiles, drop-in solutions, and applies security updates on time.
-  - **Docker Verified Publisher Images**: published by Docker partners that are part of the Verified Publisher program and are qualified to be included in the developer secure supply chain. You can set permissions to **Allowed** or **Restricted**.
-  - **Community Images**: Images are always disabled when Image Access Management is enabled. These images are not trusted because various Docker Hub users contribute them and pose security risks.
+  - **Docker Verified Publisher Images**: Images published by Docker partners that are part of the Verified Publisher program and are qualified to be included in the developer secure supply chain.
+  - **Community Images**: These images are disabled by default when Image Access Management is enabled because various users contribute them and they may pose security risks. This category includes Docker-Sponsored Open Source images.
 
   > **Note**
   >
