@@ -1,8 +1,8 @@
 ---
-description: Disable two-factor authentication on Docker Hub
+description: Disable two-factor authentication on your Docker account.
 keywords: Docker, docker, registry, security, Docker Hub, authentication, two-factor
-  authentication
-title: Disable two-factor authentication on Docker Hub
+  authentication, Docker account
+title: Disable two-factor authentication on your Docker account
 aliases: 
 - /docker-hub/2fa/disable-2fa/
 ---
@@ -13,7 +13,7 @@ aliases:
 > Docker account.
 { .warning }
 
-1. Sign in to your Docker account.
+1. Sign in to your [Docker account](https://account.docker.com/login).
 2. Select your avatar and then from the dropdown menu, then select **My Account**.
 3. Navigate to the **Security** section, then select the arrow icon.
 4. Enter your password, then select **Confirm**.

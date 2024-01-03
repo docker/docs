@@ -8,7 +8,7 @@ You can manage the settings for your Docker account in Account Center. Here you 
 
 > **Tip**
 >
-> If your account is associated with an organizations that enforces Single Sign-On (SSO), you may not have permissions to update your account settings. You need to contact your administrator to update your settings.
+> If your account is associated with an organization that enforces Single Sign-On (SSO), you may not have permissions to update your account settings. You need to contact your administrator to update your settings.
 { .tip }
 
 ## Update general settings

@@ -2138,7 +2138,7 @@ Manuals:
       - path: /security/for-developers/2fa/disable-2fa/
         title: Disable two-factor authentication
       - path: /security/for-developers/2fa/recover-hub-account/
-        title: Recover your Docker Hub account
+        title: Recover your Docker account
       - path: /security/for-developers/2fa/new-recovery-code/
         title: Generate a new recovery code
   - path: /security/security-announcements/
