@@ -14,7 +14,7 @@ security code is required in addition to your password.
 When you enable two-factor authentication, you are also provided with a recovery
 code. Each recovery code is unique and specific to your account. You can use
 this code to recover your account in case you lose access to your authenticator
-app. See [Recover your Docker Hub account](recover-hub-account/).
+app. See [Recover your Docker account](recover-hub-account/).
 
 
 ## Prerequisites
