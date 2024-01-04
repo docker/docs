@@ -128,7 +128,7 @@ web:
 - Environment variables declared in the `.env` file cannot then be referenced again separately in the Compose file.
 - If you use both the `env_file` and `environment` attribute, environment variables set by `environment` take precedence.
 - The paths to your `.env` file, specified in the `env_file` attribute,  are relative to the location of your `compose.yml` file. 
-- Values in your `.env` files can be overridden from the command line by using [`docker compose up -e`](#set-environment-variables-with-docker-compose-run---env).
+- Values in your `.env` files can be overridden from the command line by using [`docker compose run -e`](#set-environment-variables-with-docker-compose-run---env).
 - Your `.env` files can be overriden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
 
 ### Substitute from the shell 
