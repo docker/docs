@@ -214,7 +214,7 @@ real-world example, continue to
 
 5.  Verify that the secret is not available if you commit the container.
 
-    ```none
+    ```console
     $ docker commit $(docker ps --filter name=redis -q) committed_redis
 
     $ docker run --rm -it committed_redis cat /run/secrets/my_secret_data
@@ -249,7 +249,7 @@ real-world example, continue to
     to the secret. The container ID is different, because the
     `service update` command redeploys the service.
 
-    ```none
+    ```console
     $ docker container exec -it $(docker ps --filter name=redis -q) cat /run/secrets/my_secret_data
 
     cat: can't open '/run/secrets/my_secret_data': No such file or directory
@@ -284,24 +284,24 @@ This example assumes that you have PowerShell installed.
 
 2.  If you have not already done so, initialize or join the swarm.
 
-    ```powershell
-    docker swarm init
+    ```console
+    > docker swarm init
     ```
 
 3.  Save the `index.html` file as a swarm secret named `homepage`.
 
-    ```powershell
-    docker secret create homepage index.html
+    ```console
+    > docker secret create homepage index.html
     ```
 
 4.  Create an IIS service and grant it access to the `homepage` secret.
 
-    ```powershell
-    docker service create
-        --name my-iis
-        --publish published=8000,target=8000
-        --secret src=homepage,target="\inetpub\wwwroot\index.html"
-        microsoft/iis:nanoserver  
+    ```console
+    > docker service create `
+        --name my-iis `
+        --publish published=8000,target=8000 `
+        --secret src=homepage,target="\inetpub\wwwroot\index.html" `
+        microsoft/iis:nanoserver
     ```
 
     > **Note**
@@ -315,10 +315,10 @@ This example assumes that you have PowerShell installed.
 
 6.  Remove the service and the secret.
 
-    ```powershell
-    docker service rm my-iis
-    docker secret rm homepage
-    docker image remove secret-test
+    ```console
+    > docker service rm my-iis
+    > docker secret rm homepage
+    > docker image remove secret-test
     ```
 
 ### Intermediate example: Use secrets with a Nginx service
@@ -360,7 +360,7 @@ generate the site key and certificate, name the files `site.key` and
     the following contents into it. This constrains the root CA to signing leaf
     certificates and not intermediate CAs.
 
-    ```none
+    ```ini
     [root_ca]
     basicConstraints = critical,CA:TRUE,pathlen:1
     keyUsage = critical, nonRepudiation, cRLSign, keyCertSign
@@ -394,7 +394,7 @@ generate the site key and certificate, name the files `site.key` and
     certificate so that it can only be used to authenticate a server and
     can't be used to sign certificates.
 
-    ```none
+    ```ini
     [server]
     authorityKeyIdentifier=keyid,issuer
     basicConstraints = critical,CA:FALSE
@@ -425,7 +425,7 @@ generate the site key and certificate, name the files `site.key` and
     In the current directory, create a new file called `site.conf` with the
     following contents:
 
-    ```none
+    ```nginx
     server {
         listen                443 ssl;
         server_name           localhost;
