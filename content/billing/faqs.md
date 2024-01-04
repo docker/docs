@@ -47,6 +47,8 @@ Your invoice includes the following:
 - Amount due
 - Description of your order, quantity if applicable, unit price, and amount
 
+Amounts are in United States dollar (USD). USD is the supported currency for billing invoices.
+
 The information listed in the Bill to section is based on your billing information. Not all fields are required. The billing information includes the following:
 
 - Name (required) - the name of the administrator or company.
