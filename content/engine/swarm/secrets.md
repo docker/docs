@@ -748,11 +748,6 @@ line.
     wvnh0siktqr3  mysql  replicated  1/1       mysql:latest
     ```
 
-    At this point, you could actually revoke the `mysql` service's access to the
-    `mysql_password` and `mysql_root_password` secrets because the passwords
-    have been saved in the MySQL system database. Don't do that for now, because
-    we use them later to facilitate rotating the MySQL password.
-
 5.  Now that MySQL is set up, create a WordPress service that connects to the
     MySQL service. The WordPress service has the following characteristics:
 
