@@ -61,9 +61,9 @@ In the **Containers** tab of Docker Desktop, you should now have an application 
 To view the frontend:
 
 1. In Docker Desktop, expand the application stack in **Containers**.
-2. Select the link to port **3000** in the **Port(s)** column or open [https://localhost:3000](https://localhost:3000)⁠.
+2. Select the link to port **3000** in the **Port(s)** column or open [http://localhost:3000](http://localhost:3000)⁠.
 
-Add some todo tasks in the frontend, and then open [https://localhost:3000](https://localhost:3000) in a new browser tab. Notice that the tasks are still visible.
+Add some todo tasks in the frontend, and then open [http://localhost:3000](http://localhost:3000) in a new browser tab. Notice that the tasks are still visible.
 
 ## Step 5: Develop in your containers
 
@@ -80,7 +80,7 @@ To run Compose Watch and see the real-time changes:
    ```
 2. Open `app/views/todos.ejs` in a text or code editor, then change the text on line 18.
 3. Save the changes in `app/views/todos.ejs`.
-4. View your application at [https://localhost:3000](https://localhost:3000) to see the changes in real-time.
+4. View your application at [http://localhost:3000](http://localhost:3000) to see the changes in real-time.
 
 ## Step 6: Delete everything and start over
 
