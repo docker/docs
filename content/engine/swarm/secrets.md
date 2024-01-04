@@ -763,9 +763,7 @@ line.
       nodes.
     - Has access to the `mysql_password` secret, but specifies a different
       target file name within the container. The WordPress container uses
-      the mount point `/run/secrets/wp_db_password`. Also specifies that the
-      secret is not group-or-world-readable, by setting the mode to
-      `0400`.
+      the mount point `/run/secrets/wp_db_password`.
     - Sets the environment variable `WORDPRESS_DB_PASSWORD_FILE` to the file
       path where the secret is mounted. The WordPress service reads the
       MySQL password string from that file and add it to the `wp-config.php`
@@ -783,7 +781,7 @@ line.
          --network mysql_private \
          --publish published=30000,target=80 \
          --mount type=volume,source=wpdata,destination=/var/www/html \
-         --secret source=mysql_password,target=wp_db_password,mode=0400 \
+         --secret source=mysql_password,target=wp_db_password \
          -e WORDPRESS_DB_USER="wordpress" \
          -e WORDPRESS_DB_PASSWORD_FILE="/run/secrets/wp_db_password" \
          -e WORDPRESS_DB_HOST="mysql:3306" \
@@ -908,14 +906,13 @@ use it, then remove the old secret.
     ```
 
 4.  Update the `wordpress` service to use the new password, keeping the target
-    path at `/run/secrets/wp_db_password` and keeping the file permissions at
-    `0400`.  This triggers a rolling restart of the WordPress service and
-    the new secret is used.
+    path at `/run/secrets/wp_db_password`. This triggers a rolling restart of
+    the WordPress service and the new secret is used.
 
     ```console
     $ docker service update \
          --secret-rm mysql_password \
-         --secret-add source=mysql_password_v2,target=wp_db_password,mode=0400 \
+         --secret-add source=mysql_password_v2,target=wp_db_password \
          wordpress    
     ```
 
