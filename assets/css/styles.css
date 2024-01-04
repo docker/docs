@@ -46,3 +46,8 @@ hr {
 }
 
 /* see also: tailwind.config.js */
+
+a.glossary-tooltip {
+  color: blueviolet;
+  text-decoration-style: dashed;
+}

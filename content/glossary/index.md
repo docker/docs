@@ -1,6 +1,5 @@
 ---
 title: Glossary
-layout: glossary
 noedit: true
 default_active_tag: fundamental
 weight: 5
@@ -9,3 +8,5 @@ card:
   weight: 10
   title: Glossary
 ---
+
+This is an important glossary.
