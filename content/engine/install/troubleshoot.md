@@ -1,4 +1,3 @@
----
 title: Troubleshoot Docker Engine installation
 description: Learn how to diagnose and resolve error messages related to the Docker Engine installation.
 keywords: Docker Engine, troubleshooting, error, Linux, install Docker Engine
