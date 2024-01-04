@@ -10,7 +10,7 @@ aliases:
 - /engine/installation/linux/fedora/
 - /engine/installation/linux/docker-ce/fedora/
 - /install/linux/docker-ce/fedora/
-download-url-base: https://download.docker.com/linux/fedora
+download-url-base: https://download.docker.com/linux/centos
 ---
 
 To get started with Docker Engine on Fedora, make sure you
