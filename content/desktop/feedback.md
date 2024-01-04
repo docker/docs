@@ -11,6 +11,10 @@ There are many ways you can provide feedback on Docker Desktop or Docker Desktop
 
 On each Docker Dashboard view, there is a **Give feedback** link. This sends you to a Google feedback form where you can share your feedback and ideas.
 
+You can also use the `docker feedback` command to submit feedback directly from the command line.
+
+<script async id="asciicast-KkC0fFrhV8nAzvXUGqay06UXx" src="https://asciinema.org/a/KkC0fFrhV8nAzvXUGqay06UXx.js"></script>
+
 #### Feedback via Docker Community forums
 
 To get help from the community, review current user topics, join or start a
