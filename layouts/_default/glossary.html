@@ -3,11 +3,14 @@
 {{ end }}
 
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
+{{ partial "breadcrumbs.html" . }}
+<article class="DocSearch-content prose max-w-none dark:prose-invert">
+  {{ with .Title }}
+  <h1 class="scroll-mt-36">{{ . }}</h1>
+  {{ end }}
 <link href="{{ "css/glossary.css" | relURL }}" rel="stylesheet">
 <script src="{{ "js/glossary.js" | relURL }}"></script>
-<p>{{ T "layouts_docs_glossary_description" }}</p>
-<p>{{ T "layouts_docs_glossary_click_details_before" }} <a href="javascript:void(0)" class="no-underline">[+]</a> {{ T "layouts_docs_glossary_click_details_after" }}</p>
+<p>This glossary is intended to be a comprehensive, standardized list of Docker terminology. It includes technical terms that are specific to Docker, as well as more general terms that provide useful context.</p>
 {{ partial "glossary-terms.html" . }}
 {{ $glossary_items := $.Scratch.Get "glossary_items" }}
 {{ with $glossary_items }}
@@ -23,15 +26,12 @@
 	<li class="{{ $.Scratch.Get "tag_classes" }} hide" data-show-count="0">
 		<div id="{{ $term_identifier }}" class="term-anchor"></div>
 		<div>
-			<div class="term-name"><b>{{ .Title }}</b><a href="{{ printf "#%s" $term_identifier }}" class="permalink hide">LINK</a></div>
+			<div class="term-name">{{ .Title }}:</div>
 			{{ with .Params.aka }}
 			{{ T "layouts_docs_glossary_aka" }}:<i>{{ delimit . ", " }}</i>
 			<br>
 			{{ end }}
-			<span class="preview-text">{{ .Summary }} <a href="javascript:void(0)" class="click-controller no-underline" data-target="{{ .Params.id }}">[+]</a></span>
-			<div id="{{ .Params.id }}" class="hide">
-				{{ .Content | strings.TrimPrefix .Summary | safeHTML }}
-			</div>
+      {{ .Content | strings.TrimPrefix .Summary | safeHTML }}
 		</div>
 	</li>
 	{{ end }}

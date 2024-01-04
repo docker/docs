@@ -52,7 +52,6 @@ It provides a straightforward GUI (Graphical User Interface) that lets you manag
 
 Docker Desktop reduces the time spent on complex setups so you can focus on writing code. It takes care of port mappings, file system concerns, and other default settings, and is regularly updated with bug fixes and security updates.
 
-
 {{< tabs >}}
 {{< tab name="What's included in Docker Desktop?" >}}
 

@@ -8,6 +8,4 @@ tags:
 ---
 This is a test. 
 
-<!--more-->
-
 This is a longer test.
