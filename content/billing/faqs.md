@@ -24,6 +24,10 @@ Here you can find your renewal date near the bottom-right of your plan details.
 - Diners
 - UnionPay
 
+### What currency is supported?
+
+United States dollar (USD).
+
 ### What happens if my subscription payment fails?
 
 If your subscription payment fails, there is a grace period of 15 days, including the due date. Docker retries to collect the payment 3 times using the following schedule:
@@ -46,6 +50,8 @@ Your invoice includes the following:
 - Your bill to information
 - Amount due
 - Description of your order, quantity if applicable, unit price, and amount
+
+Amounts are in USD.
 
 The information listed in the Bill to section is based on your billing information. Not all fields are required. The billing information includes the following:
 
