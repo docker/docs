@@ -1,11 +1,12 @@
 ---
 title: Glossary
+description: Glossary of terms used around Docker
+keywords: glossary, docker, terms, definitions
 layout: glossary
-noedit: true
-default_active_tag: fundamental
-weight: 5
-card:
-  name: reference
-  weight: 10
-  title: Glossary
+notoc: true
+skip_feedback: true
+skip_read_time: true
+aliases:
+- /engine/reference/glossary/
+- /reference/glossary/
 ---

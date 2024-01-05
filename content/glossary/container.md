@@ -2,10 +2,14 @@
 title: Container
 id: container
 short_description: >
-  This is a testy test to test you.
-tags:
-- tool
+   A container is a runtime instance of a Docker image.
 ---
-This is a test. 
+A container is a runtime instance of a [docker image](#image).
 
-This is a longer test.
+A Docker container consists of
+
+- A Docker image
+- An execution environment
+- A standard set of instructions
+
+The concept is borrowed from shipping containers, which define a standard to ship goods globally. Docker defines a standard to ship software.
