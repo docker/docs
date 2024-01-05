@@ -74,8 +74,8 @@ Desktop in organizations with stringent security requirements.
 ### Enhanced Container Isolation vs Rootless Docker
 
 [Rootless Docker](/engine/security/rootless/) allows the Docker Engine, and by
-extension the containers, to run without root privileges natively a Linux host. This
-allows non-root users install and run Docker natively on Linux.
+extension the containers, to run without root privileges natively on a Linux host. This
+allows non-root users to install and run Docker natively on Linux.
 
 Rootless Docker is not supported within Docker Desktop. While it's a valuable
 feature when running Docker natively on Linux, its value within Docker Desktop
