@@ -74,7 +74,7 @@ $ docker buildx build --tag <registry>/<image> --load .
 Building images using the `docker` driver are automatically loaded to the local
 image store.
 
-Images loaded to the image store are available to for `docker run` immediately
+Images loaded to the image store are available to `docker run` immediately
 after the build finishes, and you'll see them in the list of images when you run
 the `docker images` command.
 
