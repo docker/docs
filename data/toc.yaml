@@ -2039,6 +2039,8 @@ Manuals:
         title: Link to GitHub and BitBucket
   - path: /docker-hub/vulnerability-scanning/
     title: Vulnerability scanning
+  - path: /docker-hub/mirror/
+    title: Mirroring
   - path: /registry/
     title: Registry
   - path: /docker-hub/oci-artifacts/
