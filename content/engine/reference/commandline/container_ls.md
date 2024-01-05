@@ -4,6 +4,7 @@ datafile: docker_container_ls
 title: docker container ls
 aliases:
 - /edge/engine/reference/commandline/container_ls/
+- /engine/reference/commandline/ps/
 layout: cli
 ---
 

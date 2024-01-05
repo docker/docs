@@ -4,6 +4,7 @@ datafile: docker_system_info
 title: docker system info
 aliases:
 - /edge/engine/reference/commandline/system_info/
+- /engine/reference/commandline/info/
 layout: cli
 ---
 

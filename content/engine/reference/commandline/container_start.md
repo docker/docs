@@ -4,6 +4,7 @@ datafile: docker_container_start
 title: docker container start
 aliases:
 - /edge/engine/reference/commandline/container_start/
+- /engine/reference/commandline/start/
 layout: cli
 ---
 

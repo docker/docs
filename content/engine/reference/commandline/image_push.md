@@ -4,6 +4,7 @@ datafile: docker_image_push
 title: docker image push
 aliases:
 - /edge/engine/reference/commandline/image_push/
+- /engine/reference/commandline/push/
 layout: cli
 ---
 

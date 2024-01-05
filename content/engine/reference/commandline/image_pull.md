@@ -4,6 +4,7 @@ datafile: docker_image_pull
 title: docker image pull
 aliases:
 - /edge/engine/reference/commandline/image_pull/
+- /engine/reference/commandline/pull/
 layout: cli
 ---
 

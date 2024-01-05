@@ -4,6 +4,7 @@ datafile: docker_container_cp
 title: docker container cp
 aliases:
 - /edge/engine/reference/commandline/container_cp/
+- /engine/reference/commandline/cp/
 layout: cli
 ---
 

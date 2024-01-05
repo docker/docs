@@ -82,7 +82,7 @@ Related information:
 
 - Deep dive into [bind mounts](../../storage/bind-mounts.md)
 - Learn about using bind mounts in Compose in the [Compose file reference](../../compose/compose-file/_index.md)
-- Explore using bind mounts via the CLI in the [Docker run reference](/engine/reference/run/#volume-shared-filesystems)
+- Explore using bind mounts via the CLI in the [Docker run reference](/engine/reference/commandline/container_run/#mount)
 
 ## Next steps
 

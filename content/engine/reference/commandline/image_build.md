@@ -4,6 +4,8 @@ datafile: docker_image_build
 title: docker image build
 aliases:
 - /edge/engine/reference/commandline/image_build/
+- /engine/reference/commandline/build/
+- /engine/reference/commandline/builder_build/
 layout: cli
 ---
 

@@ -4,6 +4,7 @@ datafile: docker_image_rm
 title: docker image rm
 aliases:
 - /edge/engine/reference/commandline/image_rm/
+- /engine/reference/commandline/rmi/
 layout: cli
 ---
 

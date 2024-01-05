@@ -4,6 +4,7 @@ datafile: docker_container_exec
 title: docker container exec
 aliases:
 - /edge/engine/reference/commandline/container_exec/
+- /engine/reference/commandline/exec/
 layout: cli
 ---
 

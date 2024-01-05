@@ -4,6 +4,7 @@ datafile: docker_image_ls
 title: docker image ls
 aliases:
 - /edge/engine/reference/commandline/image_ls/
+- /engine/reference/commandline/images/
 layout: cli
 ---
 

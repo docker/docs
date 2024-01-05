@@ -4,6 +4,7 @@ datafile: docker_container_port
 title: docker container port
 aliases:
 - /edge/engine/reference/commandline/container_port/
+- /engine/reference/commandline/port/
 layout: cli
 ---
 

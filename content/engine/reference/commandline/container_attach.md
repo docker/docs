@@ -4,6 +4,7 @@ datafile: docker_container_attach
 title: docker container attach
 aliases:
 - /edge/engine/reference/commandline/container_attach/
+- /engine/reference/commandline/attach/
 layout: cli
 ---
 
