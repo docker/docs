@@ -14,7 +14,7 @@ title: Network reachability between containers in Compose
 
 There are multiple ways to connect to other containers within Docker Compose. Each approach has its own nuances. General users only need the service name.
 
-| Computer name | Naming rules           | Containers                                   |
+| Name          | Naming rules           | Containers                                   |
 |---------------|------------------------|----------------------------------------------|
 | service       | Define custom name.    | Applies to first container only.  | 
 | container     | Default name is `project_name-service_name-number`. Define custom name with `container_name:` key.  | Unique per container.  |
