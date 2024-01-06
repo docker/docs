@@ -182,3 +182,4 @@ For full details of the network configuration options available, see the followi
 
 - [Top-level `networks` element](compose-file/06-networks.md)
 - [Service-level `networks` attribute](compose-file/05-services.md#networks)
+- [Network reachability between containers](network_reachability.md#networks)
