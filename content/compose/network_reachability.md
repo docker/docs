@@ -16,11 +16,11 @@ There are multiple ways to connect to other containers within Docker Compose. Ea
 
 | Name          | Naming rules           | Containers                                   |
 |---------------|------------------------|----------------------------------------------|
-| service       | Define custom name.    | Applies to first container only.  | 
+| service       | Required field.        | Applies to first container only.  | 
 | container     | Default name is `project_name-service_name-number`. Define custom name with `container_name:` key.  | Unique per container.  |
 | alias         | Define custom alias with `aliases:` key which is nested under `networks:` key.  | Applies to first container only. | 
 | links         | Define custom extra aliases. A cycle is not allowed i.e. A->B->A. | Applies to all containers of that service. |
-| hostname      | Default name is `[container_id]`. Define custom name with `hostname:` key. | Default name is unique per container. Custom name applies to all containers of that service. |
+| hostname      | Default name is `$CONTAINER_ID`. Define custom name with `hostname:` key. | Default name is unique per container. Custom name applies to all containers of that service. |
 | extra_hosts   | Define custom domain names. `"host.docker.internal:host-gateway"` maps Docker DNS to Host PC. Useful for contacting URLs external to the docker network. | Applies to all containers of that service. | 
 | IP address    | Default or custom IP address is possible. Useful for troubleshooting connectivity. | Unique per container. | 
 
