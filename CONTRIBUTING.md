@@ -46,9 +46,11 @@ Help make reviewing easier by following these guidelines:
 
 ### Local setup
 
-You can use Docker (surprise) to build and serve the files locally. This
-requires Docker Desktop version 4.24 or later, or Docker Engine with Docker
-Compose version 2.22 or later.
+You can use Docker (surprise) to build and serve the files locally. 
+
+> [!IMPORTANT]  
+> This requires Docker Desktop version **4.24** or later, or Docker Engine with Docker
+> Compose version [**2.22**](https://docs.docker.com/compose/file-watch/) or later.
 
 1. Clone the repository:
 
