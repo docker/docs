@@ -80,7 +80,7 @@ To run Compose Watch and see the real-time changes:
    ```
 2. Open `app/views/todos.ejs` in a text or code editor, then change the text on line 18.
 3. Save the changes in `app/views/todos.ejs`.
-4. View your application at [https://localhost:3000](https://localhost:3000) to see the changes in real-time.
+4. View your application at [http://localhost:3000](http://localhost:3000) to see the changes in real-time.
 
 ## Step 6: Delete everything and start over
 
