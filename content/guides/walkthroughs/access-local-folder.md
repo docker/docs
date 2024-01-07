@@ -72,7 +72,7 @@ $ docker compose up -d
 
 ## Step 4: Develop the application
 
-Now, you can take advantage of the container’s environment while you develop the application on your local system. Any changes you make to the application on your local system are reflected in the container. In your local directory, open `app/views/todos.ejs` in an code or text editor, update the `Enter your task` string, and save the file. Visit or refresh [localhost:3001](https://localhost:3001)⁠ to view the changes.
+Now, you can take advantage of the container’s environment while you develop the application on your local system. Any changes you make to the application on your local system are reflected in the container. In your local directory, open `app/views/todos.ejs` in an code or text editor, update the `Enter your task` string, and save the file. Visit or refresh [localhost:3001](http://localhost:3001)⁠ to view the changes.
 
 ## Summary
 
