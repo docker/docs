@@ -80,7 +80,7 @@ In the **Containers** tab of Docker Desktop, you should now have an application 
 To view the frontend and add todos:
 
 1. In Docker Desktop, expand the application stack in **Containers**.
-2. Select the link to port **3000** in the **Port(s)** column or open [https://localhost:3000](https://localhost:3000)⁠.
+2. Select the link to port **3000** in the **Port(s)** column or open [http://localhost:3000](http://localhost:3000)⁠.
 3. Add some todo tasks in the frontend.
 
 ## Step 5: Delete the application stack and run new containers
