@@ -1,0 +1,13 @@
+@layer base {
+  @page {
+    /* Page margins for print */
+    margin: 2cm;
+  }
+
+  @media print {
+    /* Colorize the h1. Why? Why not. */
+    h1 {
+      color: theme("colors.blue.light.500") !important;
+    }
+  }
+}

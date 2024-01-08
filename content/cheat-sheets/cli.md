@@ -42,7 +42,7 @@ need to rely on what is currently installed on the host. You can easily share
 containers while you work, and be sure that everyone you share with gets the
 same container that works in the same way.
 
-<a href="javascript:print();">Print this page</a>
+<a class="print:hidden" href="javascript:print();">Print this page</a>
 
 ## General commands
 
