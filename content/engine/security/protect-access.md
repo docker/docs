@@ -201,7 +201,9 @@ $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 To make the key suitable for client authentication, create a new extensions
 config file:
 
-    $ echo extendedKeyUsage = clientAuth > extfile-client.cnf
+```console
+$ echo extendedKeyUsage = clientAuth > extfile-client.cnf
+```
 
 Now, generate the signed certificate:
 
