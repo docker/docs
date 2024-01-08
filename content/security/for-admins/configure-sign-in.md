@@ -71,6 +71,11 @@ details, see [Manage members](/admin/organization/members/).
     Start Docker Desktop on the user’s machine and verify that the **Sign in
     required!** prompt appears.
 
+    > **Tip**
+    >
+    > If your users have issues starting Docker Desktop after you enforce sign-in, they may need to update to the latest version. This feature is available with [Docker Desktop 4.4.2 and later](../../desktop/release-notes.md).
+    { .tip }
+
 ## Alternative methods to create a registry.json file
 
 You can also use the following alternative methods to create a `registry.json` file.
