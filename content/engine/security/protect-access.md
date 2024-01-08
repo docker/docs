@@ -159,7 +159,9 @@ $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 >> extfile.cnf
 Set the Docker daemon key's extended usage attributes to be used only for
 server authentication:
 
-    $ echo extendedKeyUsage = serverAuth >> extfile.cnf
+```console
+$ echo extendedKeyUsage = serverAuth >> extfile.cnf
+```
 
 Now, generate the signed certificate:
 
@@ -199,7 +201,9 @@ $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 To make the key suitable for client authentication, create a new extensions
 config file:
 
-    $ echo extendedKeyUsage = clientAuth > extfile-client.cnf
+```console
+$ echo extendedKeyUsage = clientAuth > extfile-client.cnf
+```
 
 Now, generate the signed certificate:
 
