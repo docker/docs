@@ -1005,6 +1005,8 @@ Reference:
           title: Version 2
 - path: /glossary/
   title: Glossary
+- path: /cheat-sheets/cli/
+  title: CLI cheat sheet
 
 
 

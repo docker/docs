@@ -64,6 +64,8 @@ module.exports = {
       md: { max: "1024px" },
       lg: { max: "1280px" },
       xl: { max: "1440px" },
+      print: { raw: 'print' },
+      screen: { raw: 'screen' },
     },
 
     colors: {
