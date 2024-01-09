@@ -179,6 +179,16 @@ Guides:
         title: Text summarization
     - path: /scout/guides/vex/
       title: Suppress CVEs with VEX
+    - sectiontitle: Data science with JupyterLab
+      section:
+      - path: /guides/use-case/jupyter/
+        title: Overview
+      - path: /guides/use-case/jupyter/run-jupyter/
+        title: Run JupyterLab
+      - path: /guides/use-case/jupyter/customize/
+        title: Customize your environment
+      - path: /guides/use-case/jupyter/share/
+        title: Share your environment and notebooks
 
 - sectiontitle: Develop with Docker
   section:
