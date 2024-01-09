@@ -50,7 +50,7 @@ vulnerabilities. You can use policies to measure and track other aspects of
 supply chain management as well, such as open-source license usage and base
 image up-to-dateness.
 
-## Default policies
+## Out-of-the-box policies
 
 Docker Scout ships the following out-of-the-box policies:
 
@@ -62,10 +62,10 @@ Docker Scout ships the following out-of-the-box policies:
 - [Supply chain attestations](#supply-chain-attestations)
 - [Quality gates passed](#quality-gates-passed)
 
-Policies are enabled by default for Scout-enabled repositories. If you want to
-customize the criteria of a policy, you can create custom policies based on the
-default, out-of-the-box policies. You can also disable a policy altogether if
-it isn't relevant to you. For more information, see [Configure
+To give you a head start, Scout enables several policies by default for your
+Scout-enabled repositories. You can customize the default configurations to
+reflect internal requirements and standards. You can also disable a policy
+altogether if it isn't relevant to you. For more information, see [Configure
 policies](./configure.md).
 
 ### Fixable critical and high vulnerabilities
