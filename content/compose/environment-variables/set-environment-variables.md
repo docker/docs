@@ -50,6 +50,15 @@ services:
 
 #### Additional information 
 
+- As of Docker Compose version 2.24.0, you can set your `.env` file to be optional by using the `env_file` attribute. When `required` is set to `false` and the `.env` file is missing, Compose silently ignores the entry.
+  ```yaml
+  env_file:
+    - path: ./default.env
+      required: true # default
+    - path: ./override.env
+      required: false
+  ``` 
+
 - If you define an environment variable in your `.env` file, you can reference it directly in your `compose.yml` with the [`environment` attribute](../compose-file/05-services.md#environment). For example, if your `.env` file contains the environment variable `DEBUG=1` and your `compose.yml` file looks like this:
   ```yaml
     services:
@@ -130,6 +139,15 @@ web:
 - The paths to your `.env` file, specified in the `env_file` attribute,  are relative to the location of your `compose.yml` file. 
 - Values in your `.env` files can be overridden from the command line by using [`docker compose up -e`](#set-environment-variables-with-docker-compose-run---env).
 - Your `.env` files can be overriden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
+- As of Docker Compose version 2.24.0, you can set your `.env` file to be optional by using the `required` field. When `required` is set to `false` and the `.env` file is missing,
+Compose silently ignores the entry.
+  ```yaml
+  env_file:
+    - path: ./default.env
+      required: true # default
+    - path: ./override.env
+      required: false
+  ``` 
 
 ### Substitute from the shell 
 
