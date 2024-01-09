@@ -68,7 +68,7 @@ on your network, your container appears to be physically attached to the network
 3.  Inspect the `my-macvlan-alpine` container and notice the `MacAddress` key
     within the `Networks` key:
 
-    ```none
+    ```console
     $ docker container inspect my-macvlan-alpine
 
     ...truncated...
@@ -162,7 +162,7 @@ be physically attached to the network.
 3.  Inspect the `my-second-macvlan-alpine` container and notice the `MacAddress`
     key within the `Networks` key:
 
-    ```none
+    ```console
     $ docker container inspect my-second-macvlan-alpine
 
     ...truncated...
@@ -217,9 +217,6 @@ be physically attached to the network.
     ```
 
 ## Other networking tutorials
-
-Now that you have completed the networking tutorial for `macvlan` networks,
-you might want to run through these other networking tutorials:
 
 - [Standalone networking tutorial](network-tutorial-standalone.md)
 - [Overlay networking tutorial](network-tutorial-overlay.md)

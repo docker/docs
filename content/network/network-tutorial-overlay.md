@@ -168,7 +168,9 @@ connect a service to each of them.
     service will publish port 80 to the outside world. All of the service
     task containers can communicate with each other without opening any ports.
 
-    > **Note**: Services can only be created on a manager.
+    > **Note**
+    >
+    > Services can only be created on a manager.
 
     ```console
     $ docker service create \
@@ -222,7 +224,9 @@ connect a service to each of them.
     `nginx-net-2` and notice that all the service task containers are connected
     to it.
 
-    > **Note**: Even though overlay networks are automatically created on swarm
+    > **Note**
+    >
+    > Even though overlay networks are automatically created on swarm
     > worker nodes as needed, they are not automatically removed.
 
 8.  Clean up the service and the networks. From `manager`, run the following
@@ -369,6 +373,8 @@ example also uses Linux hosts, but the same commands work on Windows.
     fb635f5ece59563e7b8b99556f816d24e6949a5f6a5b1fbd92ca244db17a4342
     ```
 
+    > **Note**
+    >
     > Automatic DNS container discovery only works with unique container names.
 
 6. On `host2`, verify that `test-net` was created (and has the same NETWORK ID as `test-net` on `host1`):
@@ -455,8 +461,8 @@ need to have Docker installed and running.
     The default `bridge` network is listed, along with `host` and `none`. The
     latter two are not fully-fledged networks, but are used to start a container
     connected directly to the Docker daemon host's networking stack, or to start
-    a container with no network devices. **This tutorial will connect two
-    containers to the `bridge` network.**
+    a container with no network devices. This tutorial will connect two
+    containers to the `bridge` network.
 
 2.  Start two `alpine` containers running `ash`, which is Alpine's default shell
     rather than `bash`. The `-dit` flags mean to start the container detached
@@ -633,9 +639,6 @@ learn about user-defined bridge networks, continue to the
 [next tutorial](network-tutorial-standalone.md#use-user-defined-bridge-networks).
 
 ## Other networking tutorials
-
-Now that you have completed the networking tutorials for overlay networks,
-you might want to run through these other networking tutorials:
 
 - [Host networking tutorial](network-tutorial-host.md)
 - [Standalone networking tutorial](network-tutorial-standalone.md)
