@@ -31,9 +31,10 @@ To set it up manually:
 
     By placing this file in the above protected directories, end users are unable to modify it.
 
-    >**Note**
+    > **Important**
     >
     > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified above through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
+    { .important }
 
 ### Step two: Configure the settings you want to lock in
 

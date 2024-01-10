@@ -1258,7 +1258,7 @@ Manuals:
         - path: /desktop/extensions/settings-feedback/
           title: Change settings and give feedback
         - path: /desktop/extensions/private-marketplace/
-          title: Configure a private marketplace (Beta)
+          title: Configure a private marketplace (Experimental)
     - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/

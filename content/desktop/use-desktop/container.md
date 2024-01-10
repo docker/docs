@@ -47,7 +47,7 @@ Select **Inspect** to view low-level information about the container. It display
 
 ### Integrated terminal
 
-From the **Terminal** tab, lets you use the integrated terminal, on a running container, directly within Docker Desktop. You are able to quickly run commands within your container so you can understand its current state or debug when something goes wrong.
+From the **Exec** tab, lets you use the integrated terminal, on a running container, directly within Docker Desktop. You are able to quickly run commands within your container so you can understand its current state or debug when something goes wrong.
 
 Using the integrated terminal is the same as running `docker exec -it <container-id> /bin/sh`, or `docker exec -it <container-id> cmd.exe` if you are using Windows containers, in your external terminal. It also:
 
@@ -57,7 +57,7 @@ Using the integrated terminal is the same as running `docker exec -it <container
 
 To open the integrated terminal, either:
 - Hover over your running container and select the **Show container actions** menu. From the drop-down menu, select **Open in terminal**.
-- Select the container and then select the **Terminal** tab.
+- Select the container and then select the **Exec** tab.
 
 To use your external terminal, navigate to the **General** tab in **Settings** and select the **System default** option under **Choose your terminal**.
 
@@ -69,3 +69,8 @@ To use your external terminal, navigate to the **General** tab in **Settings** a
     - Drag and drop files and folders between the host and the container
     - Delete unnecessary files when you right-click on a file
     - Download file and folders from the container straight to the host
+
+## Additional resources
+- [What is a container](../../guides/walkthroughs/what-is-a-container.md)
+- [Run a container](../../guides/walkthroughs/run-a-container.md)
+- [Run multi-container applications](../../guides/walkthroughs/multi-container-apps.md)

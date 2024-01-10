@@ -67,13 +67,13 @@ Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to ins
 {{< tabs >}}
 {{< tab name="Install interactively" >}}
 
-1. Double-click `Docker.dmg` to open the installer, then drag the Docker icon to
-    the **Applications** folder.
+1. Download the installer using the download buttons at the top of the page, or from the [release notes](../release-notes.md).
 
+2. Double-click `Docker.dmg` to open the installer, then drag the Docker icon to the **Applications** folder.
 
-2. Double-click `Docker.app` in the **Applications** folder to start Docker.
+3. Double-click `Docker.app` in the **Applications** folder to start Docker.
 
-3. The Docker menu displays the Docker Subscription Service Agreement.
+4. The Docker menu displays the Docker Subscription Service Agreement.
 
     Here’s a summary of the key points: 
     - Docker Desktop is free for small businesses (fewer than 250 employees AND less than $10 million in annual revenue), personal use, education, and non-commercial open source projects.
@@ -81,20 +81,20 @@ Beginning with Docker Desktop 4.3.0, we have removed the hard requirement to ins
     - Paid subscriptions are also required for government entities.
     - Docker Pro, Team, and Business subscriptions include commercial use of Docker Desktop.
 
-4. Select **Accept** to continue. 
+5. Select **Accept** to continue. 
 
    Note that Docker Desktop won't run if you do not agree to the terms. You can choose to accept the terms at a later date by opening Docker Desktop.
 
    For more information, see [Docker Desktop Subscription Service Agreement](https://www.docker.com/legal/docker-subscription-service-agreement). We recommend that you also read the [FAQs](https://www.docker.com/pricing/faq).
-5. From the installation window, select either: 
+6. From the installation window, select either: 
    - **Use recommended settings (Requires password)**. This let's Docker Desktop automatically set the necessary configuration settings. 
    - **Use advanced settings**. You can then set the location of the Docker CLI tools either in the system or user directory, enable the default Docker socket, and enable privileged port mapping. See [Settings](../settings/mac.md#advanced), for more information and how to set the location of the Docker CLI tools.
-6. Select **Finish**. If you have applied any of the above configurations that require a password in step 5, enter your password to confirm your choice.  
+7. Select **Finish**. If you have applied any of the above configurations that require a password in step 6, enter your password to confirm your choice.  
 
 {{< /tab >}}
 {{< tab name="Install from the command line" >}}
 
-After downloading `Docker.dmg`, run the following commands in a terminal to install Docker Desktop in the **Applications** folder:
+After downloading `Docker.dmg` from either the download buttons at the top of the page or from the [release notes](../release-notes.md), run the following commands in a terminal to install Docker Desktop in the **Applications** folder:
 
 ```console
 $ sudo hdiutil attach Docker.dmg
@@ -122,7 +122,7 @@ The `install` command accepts the following flags:
 
 ## Where to go next 
 
-- [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
+- [Get started with Docker](../../guides/get-started/_index.md).
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how
   to run and submit diagnostics, and submit issues.
