@@ -19,7 +19,7 @@ describes how to achieve that, and what caveats you need to be aware of.
 
 ## Add iptables policies before Docker's rules
 
-Docker installs two custom `iptables`` chains named `DOCKER-USER` and `DOCKER`,
+Docker installs two custom `iptables` chains named `DOCKER-USER` and `DOCKER`,
 and it ensures that incoming packets are always checked by these two chains
 first. These chains are part of the `FORWARD` chain.
 
