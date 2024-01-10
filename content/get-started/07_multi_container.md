@@ -56,9 +56,7 @@ In the following steps, you'll create the network first and then attach the MySQ
    ```
 
    {{< /tab >}}
-   {{< tab name="Windows" >}}
-
-   In Windows, run this command in PowerShell.
+   {{< tab name="Windows (PowerShell)" >}}
 
    ```powershell
    $ docker run -d `
@@ -66,6 +64,18 @@ In the following steps, you'll create the network first and then attach the MySQ
        -v todo-mysql-data:/var/lib/mysql `
        -e MYSQL_ROOT_PASSWORD=secret `
        -e MYSQL_DATABASE=todos `
+       mysql:8.0
+   ```
+   
+   {{< /tab >}}
+   {{< tab name="Windows (Command Prompt)" >}}
+
+   ```console
+   $ docker run -d ^
+       --network todo-app --network-alias mysql ^
+       -v todo-mysql-data:/var/lib/mysql ^
+       -e MYSQL_ROOT_PASSWORD=secret ^
+       -e MYSQL_DATABASE=todos ^
        mysql:8.0
    ```
    
@@ -209,7 +219,7 @@ You can now start your dev-ready container.
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows" >}}
+   {{< tab name="Windows (PowerShell)" >}}
    In Windows, run this command in PowerShell.
 
    ```powershell
@@ -221,6 +231,22 @@ You can now start your dev-ready container.
      -e MYSQL_PASSWORD=secret `
      -e MYSQL_DB=todos `
      node:18-alpine `
+     sh -c "yarn install && yarn run dev"
+   ```
+
+   {{< /tab >}}
+   {{< tab name="Windows (Command Prompt)" >}}
+   In Windows, run this command in Command Prompt.
+
+   ```console
+   $ docker run -dp 127.0.0.1:3000:3000 ^
+     -w /app -v "%cd%:/app" ^
+     --network todo-app ^
+     -e MYSQL_HOST=mysql ^
+     -e MYSQL_USER=root ^
+     -e MYSQL_PASSWORD=secret ^
+     -e MYSQL_DB=todos ^
+     node:18-alpine ^
      sh -c "yarn install && yarn run dev"
    ```
 

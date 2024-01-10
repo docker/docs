@@ -74,11 +74,11 @@ setting, see the topic for [Mac](../desktop/settings/mac.md/#file-sharing),
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows (CMD)" >}}
+   {{< tab name="Windows (Command Prompt)" >}}
 
 
-   ```Command Prompt
-   > docker run -it --mount "type=bind,src=%cd%,target=/src" ubuntu bash
+   ```console
+   $ docker run -it --mount "type=bind,src=%cd%,target=/src" ubuntu bash
    ```
    
    {{< /tab >}}

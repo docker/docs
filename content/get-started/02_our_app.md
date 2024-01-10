@@ -47,7 +47,7 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
 1. In the `getting-started-app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands to create a Dockerfile based on your operating system.
 
    {{< tabs >}}
-   {{< tab name="Mac / Linux" >}}
+   {{< tab name="Mac / Linux / Windows (Git Bash)" >}}
 
    In the terminal, run the following commands.
 
@@ -64,7 +64,7 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
    ```
 
    {{< /tab >}}
-   {{< tab name="Windows" >}}
+   {{< tab name="Windows (Command Prompt)" >}}
 
    In the Windows Command Prompt, run the following commands.
 
@@ -78,6 +78,23 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
 
    ```console
    $ type nul > Dockerfile
+   ```
+
+   {{< /tab >}}
+   {{< tab name="Windows (PowerShell)" >}}
+
+   In the Windows PowerShell, run the following commands.
+
+   Make sure you're in the `getting-started-app` directory. Replace `\path\to\getting-started-app` with the path to your `getting-started-app` directory.
+
+   ```console
+   $ cd \path\to\getting-started-app
+   ```
+
+   Create an empty file named `Dockerfile`.
+
+   ```powershell
+   $ New-Item -Path . -Name Dockerfile -ItemType File
    ```
 
    {{< /tab >}}
