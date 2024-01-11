@@ -93,14 +93,6 @@ running:
 $ dockerd --help
 ```
 
-Many specific configuration options are discussed throughout the Docker
-documentation. Some places to go next include:
-
-- [Automatically start containers](../containers/start-containers-automatically.md)
-- [Limit a container's resources](../containers/resource_constraints.md)
-- [Configure storage drivers](../../storage/storagedriver/select-storage-driver.md)
-- [Container security](../../engine/security/index.md)
-
 You can configure most daemon options using the `daemon.json` file. One thing
 you can't configure using daemon.json mechanism is an HTTP proxy. For
 instructions on using a proxy, see
@@ -130,3 +122,13 @@ Since the state of a Docker daemon is kept on this directory, make sure you use
 a dedicated directory for each daemon. If two daemons share the same directory,
 for example, an NFS share, you are going to experience errors that are difficult
 to troubleshoot.
+
+## Next steps
+
+Many specific configuration options are discussed throughout the Docker
+documentation. Some places to go next include:
+
+- [Automatically start containers](../containers/start-containers-automatically.md)
+- [Limit a container's resources](../containers/resource_constraints.md)
+- [Configure storage drivers](../../storage/storagedriver/select-storage-driver.md)
+- [Container security](../../engine/security/index.md)
