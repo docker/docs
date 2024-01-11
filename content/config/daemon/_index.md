@@ -93,11 +93,6 @@ running:
 $ dockerd --help
 ```
 
-You can configure most daemon options using the `daemon.json` file. One thing
-you can't configure using daemon.json mechanism is an HTTP proxy. For
-instructions on using a proxy, see
-[Configure Docker to use a proxy server](../../network/proxy.md).
-
 ## Daemon data directory
 
 The Docker daemon persists all data in a single directory. This tracks
