@@ -72,3 +72,13 @@ you've enabled the integration.
 The following code quality integrations are available:
 
 - [SonarQube](sonarqube.md)
+
+### Source code management
+
+Integrate Docker Scout with your version control system to get guided
+remediation advice on how to address issues detected by Docker Scout image
+analysis, directly in your repositories.
+
+The following source code management integrations are available:
+
+- [GitHub](source-code-management/github.md) {{< badge color=violet text=Beta >}}

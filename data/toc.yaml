@@ -1378,6 +1378,8 @@ Manuals:
         title: Configure policies
       - path: /scout/policy/ci/
         title: Policy Evaluation in CI
+      - path: /scout/policy/remediation/
+        title: Remediation
     - sectiontitle: Integrations
       section:
       - title: Overview
@@ -1414,6 +1416,10 @@ Manuals:
         section:
         - title: SonarQube
           path: /scout/integrations/code-quality/sonarqube/
+      - sectiontitle: Source code management
+        section:
+        - title: GitHub
+          path: /scout/integrations/source-code-management/github/
     - path: /scout/release-notes/
       title: Release notes
 
