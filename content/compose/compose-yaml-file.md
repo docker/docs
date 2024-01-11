@@ -1,5 +1,5 @@
 ---
-title: Understand the Compose application model
+title: Understand the Compose file
 description: Understand the Compose application model with an illustrative example 
 keywords: compose, docker compose, compose specification, compose model 
 aliases:
