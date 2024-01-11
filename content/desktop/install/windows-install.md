@@ -124,23 +124,28 @@ Looking for information on using Windows containers?
 {{< tabs >}}
 {{< tab name="Install interactively" >}}
 
-1. Double-click **Docker Desktop Installer.exe** to run the installer.
+1. Download the installer using the download button at the top of the page, or from the [release notes](../release-notes.md).
 
-2. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
+2. Double-click `Docker Desktop Installer.exe` to run the installer.
+
+3. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
 
    If your system only supports one of the two options, you will not be able to select which backend to use.
 
-3. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
+4. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
-4. When the installation is successful, select **Close** to complete the installation process.
+5. When the installation is successful, select **Close** to complete the installation process.
 
-5. If your admin account is different to your user account, you must add the user to the **docker-users** group. Run **Computer Management** as an **administrator** and navigate to **Local Users and Groups** > **Groups** > **docker-users**. Right-click to add the user to the group.
-   Sign out and sign back in for the changes to take effect.
+If your admin account is different to your user account, you must add the user to the **docker-users** group:
+1. Run **Computer Management** as an **administrator**.
+2. Navigate to **Local Users and Groups** > **Groups** > **docker-users**. 
+3. Right-click to add the user to the group.
+4. Sign out and sign back in for the changes to take effect.
 
 {{< /tab >}}
 {{< tab name="Install from the command line" >}}
 
-After downloading **Docker Desktop Installer.exe**, run the following command in a terminal to install Docker Desktop:
+After downloading `Docker Desktop Installer.exe`, run the following command in a terminal to install Docker Desktop:
 
 ```console
 $ "Docker Desktop Installer.exe" install
@@ -182,6 +187,12 @@ The `install` command accepts the following flags:
 - `--wsl-default-data-root=<path>`: Specifies the default location for the WSL distribution disk.
 - `--always-run-service`: Lets users switch to Windows containers without needing admin rights. 
 
+> **Note**
+>
+> If you're using PowerShell, you need to use the `ArgumentList` parameter before any flags. 
+> For example:
+> `Start-Process 'Docker Desktop Installer.exe' -Wait -ArgumentList 'install', '--accept-license`
+
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 
 ```console
@@ -211,7 +222,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 ## Where to go next
 
-- [Get started with Docker](/get-started/) is a tutorial that teaches you how to deploy a multi-service stack.
+- [Get started with Docker](../../guides/get-started/_index.md).
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, and
   how to get support.

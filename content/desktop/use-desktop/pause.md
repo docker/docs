@@ -13,5 +13,5 @@ When you manually pause Docker Desktop, a paused status displays on the Docker m
 >**Tip**
 >
 > The Resource Saver feature, available in Docker Desktop version 4.24 and later, is enabled by default and provides better
-> CPU and memory savings and the manual Pause feature. See [here](resource-saver.md) for more info.
+> CPU and memory savings than the manual Pause feature. See [here](resource-saver.md) for more info.
 { .tip }

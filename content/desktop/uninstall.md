@@ -4,6 +4,13 @@ keywords: Windows, unintall, Mac, Linux, Docker Desktop
 title: Uninstall Docker Desktop
 ---
 
+> **Warning**
+>
+> Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
+> other Docker-related data local to the machine, and removes the files generated
+> by the application. To learn how to preserve important data before uninstalling, refer to the [back up and restore data](backup-and-restore.md) section .
+{ .warning }
+
 {{< tabs >}}
 {{< tab name="Windows" >}}
 
@@ -108,7 +115,7 @@ $ sudo rm /usr/local/bin/com.docker.cli
 $ sudo apt purge docker-desktop
 ```
 
-Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/config.json`. Additionally, you must delete any edited configuration files manually.  preserve important data before uninstalling.
+Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/config.json`. Additionally, you must delete any edited configuration files manually.
 
 {{< /tab >}}
 {{< tab name="Fedora" >}}
@@ -152,9 +159,4 @@ Remove the `credsStore` and `currentContext` properties from `$HOME/.docker/conf
 {{< /tab >}}
 {{< /tabs >}}
 
-> **Important**
->
-> Uninstalling Docker Desktop destroys Docker containers, images, volumes, and
-> other Docker-related data local to the machine, and removes the files generated
-> by the application. To learn how to preserve important data before uninstalling, refer to the [back up and restore data](backup-and-restore.md) section .
-{ .important }
+

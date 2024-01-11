@@ -4,7 +4,7 @@
 {{- $linux := .Get "linux" -}}
 {{- $version := .Get "version" -}}
 {{- $build_path := .Get "build_path" -}}
-<blockquote {{ if eq $build_path "/" }}class="tip" {{ end }}>
+<blockquote {{ if eq $build_path "/" }} class="tip" {{ end }}>
   <p>Download Docker Desktop</p>
   <p>
     {{- if or $all $win }}
