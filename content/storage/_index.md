@@ -106,6 +106,12 @@ You can't use Docker CLI commands to directly manage bind mounts.
 > non-Docker processes on the host system.
 { .important }
 
+> **Tip**
+>
+> Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase?
+> Checkout [Synchronized File Shares](../desktop/synchronized-file-sharing.md) which provides fast and flexible host-to-VM file sharing by replacing bind mounts with synchronized filesystem caches.
+{ .tip }
+
 ### tmpfs
 
 A `tmpfs` mount isn't persisted on disk, either on the Docker host or within a

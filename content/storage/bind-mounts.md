@@ -23,6 +23,12 @@ manage bind mounts.
 
 ![Bind mounts on the Docker host](images/types-of-mounts-bind.webp?w=450&h=300)
 
+> **Tip**
+>
+> Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase?
+> Checkout [Synchronized File Shares](../desktop/synchronized-file-sharing.md) which provides fast and flexible host-to-VM file sharing by replacing bind mounts with synchronized filesystem caches.
+{ .tip }
+
 ## Choose the -v or --mount flag
 
 In general, `--mount` is more explicit and verbose. The biggest difference is that

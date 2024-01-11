@@ -1182,6 +1182,8 @@ Manuals:
       title: containerd image store (Beta)
     - path: /desktop/wasm/
       title: Wasm workloads (Beta)
+    - path: /desktop/synchronized-file-sharing/
+      title: Synchronized file shares
     - sectiontitle: WSL
       section:
         - path: /desktop/wsl/
