@@ -62,7 +62,7 @@ title: Known issues
 {{< tab name="For Mac with Apple silicon" >}}
 - On Apple silicon in native `arm64` containers, older versions of `libssl` such as `debian:buster`, `ubuntu:20.04`, and `centos:8` will segfault when connected to some TLS servers, for example, `curl https://dl.yarnpkg.com`. The bug is fixed in newer versions of `libssl` in `debian:bullseye`, `ubuntu:21.04`, and `fedora:35`.
 - Some command line tools do not work when Rosetta 2 is not installed.
-  - The old version 1.x of `docker-compose`. Use Compose V2 instead. Either type `docker compose` or enable the **Use Docker Compose V2** option in the [General preferences tab](../settings/mac.md#general).
+  - The old version 1.x of `docker-compose`. Use Compose V2 instead - type `docker compose`.
   - The `docker-credential-ecr-login` credential helper.
 - Some images do not support the ARM64 architecture. You can add `--platform linux/amd64` to run (or build) an Intel image using emulation.
 

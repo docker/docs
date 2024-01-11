@@ -38,8 +38,8 @@ Client: Docker Engine - Community
 <...>
 ```
 
-To enable Docker Desktop to start on login, from the Docker menu, select
-**Settings** > **General** > **Start Docker Desktop when you log in**.
+To enable Docker Desktop to start on sign in, from the Docker menu, select
+**Settings** > **General** > **Start Docker Desktop when you sign in to your computer**.
 
 Alternatively, open a terminal and run:
 

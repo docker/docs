@@ -9,7 +9,7 @@ aliases:
 
 When you open Docker Desktop, the Docker Dashboard displays.
 
-![Docker Dashboard on Containers view](../images/dashboard.PNG)
+![Docker Dashboard on Containers view](../images/dashboard.webp)
 
 The **Containers** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](container.md).
 

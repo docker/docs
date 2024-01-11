@@ -23,11 +23,11 @@ grid:
     link: "/security/for-admins/image-access-management/"
 ---
 
->Note
+> **Note**
 >
->Hardened Docker Desktop is available to Docker Business customers only.
+> Hardened Docker Desktop is available to Docker Business customers only.
 
-## What is Hardened Docker Desktop?
+### What is Hardened Docker Desktop?
 
 Hardened Docker Desktop is a group of security features for Docker Desktop, designed to improve the security of developer environments without impacting developer experience or productivity.
 
@@ -35,14 +35,14 @@ It lets admins define and enforce robust security settings. It guarantees that d
 
 Hardened Docker Desktop moves the ownership boundary for Docker Desktop configuration to the organization, meaning that any security controls admins set cannot be altered by the user of Docker Desktop.
 
-## Who is it for?
+### Who is it for?
 
 It is for security conscious organizations who:
 - Don’t give their users root or admin access on their machines
 - Would like Docker Desktop to be within their organization’s centralized control 
 - Have certain compliance obligations
 
-## What does Hardened Docker Desktop include?
+### What does Hardened Docker Desktop include?
 
 It includes:
 - Settings Management, which helps admins to confidently manage and control the usage of Docker Desktop within their organization.
