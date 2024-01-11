@@ -48,17 +48,31 @@ You can use both of these options together as long as you don't specify the same
 option both as a flag and in the JSON file. If that happens, the Docker daemon
 won't start and prints an error message.
 
-To configure the Docker daemon using a JSON file, create a file at
-`/etc/docker/daemon.json` on Linux systems, or
-`C:\ProgramData\docker\config\daemon.json` on Windows.
+### Configuration file
 
-Using this configuration file, run the Docker daemon in debug mode, using TLS, and
-listen for traffic routed to `192.168.59.3` on port `2376`. You can learn what
-configuration options are available in the
+The following table shows the location where the Docker daemon expects to find
+the configuration file by default, depending on your system and how you're
+running the daemon.
+
+| OS and configuration | File location                              |
+| -------------------- | ------------------------------------------ |
+| Linux, regular setup | `/etc/docker/daemon.json`                  |
+| Linux, rootless mode | `~/.config/docker/daemon.json`             |
+| Windows              | `C:\ProgramData\docker\config\daemon.json` |
+
+For rootless mode, the daemon respects the `XDG_CONFIG_HOME` variable. If set,
+the expected file location is `$XDG_CONFIG_HOME/docker/daemon.json`.
+
+You can also explicitly specify the location of the configuration file on
+startup, using the `dockerd --config-file` flag.
+
+You can learn what configuration options are available in the
 [dockerd reference docs](../../engine/reference/commandline/dockerd.md#daemon-configuration-file)
 
-You can also start the Docker daemon manually and configure it using flags. This
-can be useful for troubleshooting problems.
+### Configuration using flags
+
+You can also start the Docker daemon manually and configure it using flags.
+This can be useful for troubleshooting problems.
 
 Here's an example of how to manually start the Docker daemon, using the same
 configurations as shown in the previous JSON configuration:
