@@ -127,3 +127,4 @@ documentation. Some places to go next include:
 - [Limit a container's resources](../containers/resource_constraints.md)
 - [Configure storage drivers](../../storage/storagedriver/select-storage-driver.md)
 - [Container security](../../engine/security/index.md)
+- [Configure the Docker daemon to use a proxy](./systemd.md#httphttps-proxy)
