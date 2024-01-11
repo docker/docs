@@ -64,7 +64,7 @@ You can use a `.syncignore` file at the root of each file share, to exclude loca
  
 Some example of things you might want to add to your `.syncignore` file are:
 - Large dependency directories, for example `node_modules` and `composer` directories (unless you rely on accessing them via a bind mount)
-- `.git directories` (again, unless you need them)
+- `.git` directories (again, unless you need them)
 
 In general, use your `.syncignore` file to exclude items that aren't critical to your workflow, especially those that would be slow to sync or use significant storage.
 
