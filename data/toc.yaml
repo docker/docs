@@ -1941,7 +1941,7 @@ Manuals:
     title: Key features and use cases
   - path: /compose/compose-application-model/
     title: Understand the Compose application model
-  - path: /compose/compose-file/
+  - path: /compose/compose-yaml-file/
     title: Understand the Compose file
   - path: /compose/history/
     title: History and development of Compose
