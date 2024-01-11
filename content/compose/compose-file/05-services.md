@@ -745,7 +745,7 @@ extra_hosts:
 Compose creates a matching entry with the IP address and hostname in the container's network
 configuration, which means for Linux `/etc/hosts` get extra lines:
 
-```
+```console
 162.242.195.82  somehost
 50.31.209.229   otherhost
 ::1             myhostv6
@@ -1167,7 +1167,7 @@ of memory starvation.
 ## oom_score_adj
 
 `oom_score_adj` tunes the preference for containers to be killed by platform in case of memory starvation. Value must
-be within [-1000,1000] range.
+be within -1000,1000 range.
 
 ## pid
 

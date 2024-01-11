@@ -317,7 +317,7 @@ extra_hosts:
 Compose creates matching entry with the IP address and hostname in the container's network
 configuration, which means for Linux `/etc/hosts` will get extra lines:
 
-```
+```text
 162.242.195.82  somehost
 50.31.209.229   otherhost
 ::1             myhostv6
