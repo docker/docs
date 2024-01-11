@@ -55,14 +55,11 @@ host.
 
 4.  Stop the container. It will be removed automatically as it was started using the `--rm` option.
 
-    ```basn
+    ```console
     docker container stop my_nginx
     ```
 
 ## Other networking tutorials
-
-Now that you have completed the networking tutorials for standalone containers,
-you might want to run through these other networking tutorials:
 
 - [Standalone networking tutorial](network-tutorial-standalone.md)
 - [Overlay networking tutorial](network-tutorial-overlay.md)

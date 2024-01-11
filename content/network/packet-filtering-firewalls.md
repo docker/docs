@@ -19,7 +19,7 @@ describes how to achieve that, and what caveats you need to be aware of.
 
 ## Add iptables policies before Docker's rules
 
-Docker installs two custom iptables chains named `DOCKER-USER` and `DOCKER`,
+Docker installs two custom `iptables` chains named `DOCKER-USER` and `DOCKER`,
 and it ensures that incoming packets are always checked by these two chains
 first. These chains are part of the `FORWARD` chain.
 
@@ -68,7 +68,7 @@ following rule restricts external access from all IP addresses except `192.168.1
 $ iptables -I DOCKER-USER -i ext_if ! -s 192.168.1.1 -j DROP
 ```
 
-Please note that you will need to change `ext_if` to correspond with your
+You will need to change `ext_if` to correspond with your
 host's actual external interface. You could instead allow connections from a
 source subnet. The following rule only allows access from the subnet `192.168.1.0/24`:
 
@@ -153,7 +153,7 @@ $ docker network create mybridge \
   -o "com.docker.network.bridge.host_binding_ipv4=127.0.0.1"
 ```
 
-## Integration with Firewalld
+## Integration with firewalld
 
 If you are running Docker with [firewalld](https://firewalld.org)
 on your system with `--iptables` enabled, Docker automatically creates a `firewalld`
