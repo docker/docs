@@ -66,7 +66,7 @@ the expected file location is `$XDG_CONFIG_HOME/docker/daemon.json`.
 You can also explicitly specify the location of the configuration file on
 startup, using the `dockerd --config-file` flag.
 
-You can learn what configuration options are available in the
+Learn about the available configuration options in the
 [dockerd reference docs](../../engine/reference/commandline/dockerd.md#daemon-configuration-file)
 
 ### Configuration using flags
@@ -85,7 +85,7 @@ $ dockerd --debug \
   --host tcp://192.168.59.3:2376
 ```
 
-You can learn what configuration options are available in the
+Learn about the available configuration options in the
 [dockerd reference docs](../../engine/reference/commandline/dockerd.md), or by
 running:
 
