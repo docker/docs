@@ -959,12 +959,6 @@ Reference:
       section:
       - path: /compose/compose-file/
         title: Overview
-      - path: /compose/compose-file/01-status/
-        title: Status of the specification
-      - path: /compose/compose-file/02-model/
-        title: Compose application model
-      - path: /compose/compose-file/03-compose-file/
-        title: The Compose file
       - path: /compose/compose-file/04-version-and-name/
         title: Version and name top-level element
       - path: /compose/compose-file/05-services/
@@ -1945,6 +1939,10 @@ Manuals:
     title: Overview
   - path: /compose/features-uses/
     title: Key features and use cases
+  - path: /compose/compose-application-model/
+    title: Understand the Compose application model
+  - path: /compose/compose-file/
+    title: Understand the Compose file
   - path: /compose/history/
     title: History and development of Compose
   - sectiontitle: Install Docker Compose
