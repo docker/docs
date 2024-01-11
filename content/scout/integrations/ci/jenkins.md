@@ -40,3 +40,10 @@ pipeline {
 This installs Docker Scout, logs into Docker Hub, and then runs Docker Scout to
 generate a CVE report for an image and tag. It only shows critical or
 high-severity vulnerabilities.
+
+> **Note**
+>
+> If you're seeing a `permission denied` error related to the image cache, try
+> setting the [`DOCKER_SCOUT_CACHE_DIR`](../../env-vars.md) environment
+> variable to a writable directory. Or alternatively, disable local caching
+> entirely with `DOCKER_SCOUT_NO_CACHE=true`.
