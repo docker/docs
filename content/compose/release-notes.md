@@ -17,9 +17,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 ### Update
 - Dependencies upgrade: bump cli to 25.0.0-beta.3
 - Dependencies upgrade: bump compose-go to 2.0.0-beta.3
-- Dependencies upgrade: bump ddev to 1.22.4 
 - Dependencies upgrade: bump golang to 1.21.6 
-- Dependencies upgrade: bump golangci-lint to 1.55.2
 
 ### Bug fixes and enhancements
 - Introduce `docker compose attach` to attach local standard input, output, and error streams to a service's running container
