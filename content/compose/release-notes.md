@@ -35,7 +35,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Build do not require environment to be resolved
 - Send out a cancel event on SIGINT/SIGTERM signal for `compose up`
 - Fix log by exposing services ports when `--verbose`
-- Fix configs are mounted under /<id>
+- Fix configs are mounted under /\<id\>
 - Fix combination of `--pull always --no-build`
 - Fix race condition in log printer
 - Fix `docker compose up` teardown when command context is cancelled
