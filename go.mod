@@ -6,7 +6,7 @@ toolchain go1.21.1
 
 require (
 	github.com/compose-spec/compose-spec v0.0.0-20231121152139-478928e7c9f8 // indirect
-	github.com/docker/buildx v0.12.1-0.20231214091505-b68ee824c673 // indirect
+	github.com/docker/buildx v0.12.1 // indirect
 	github.com/docker/cli v25.0.0-rc.1+incompatible // indirect
 	github.com/docker/compose/v2 v2.24.0 // indirect
 	github.com/docker/scout-cli v1.2.0 // indirect
