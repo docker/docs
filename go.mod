@@ -9,8 +9,9 @@ require (
 	github.com/docker/cli v25.0.0-rc.1+incompatible // indirect
 	github.com/docker/compose/v2 v2.24.0 // indirect
 	github.com/docker/scout-cli v1.2.0 // indirect
-	github.com/moby/buildkit v0.13.0-beta1.0.20231219135447-957cb50df991 // indirect
+	github.com/moby/buildkit v0.13.0-beta1.0.20240116143623-28ce478b1fde // indirect
 	github.com/moby/moby v24.0.5+incompatible // indirect
+	github.com/moby/moby v24.0.8-0.20240109122856-854ca341c0f6+incompatible // indirect
 )
 
 // buildkit depends on cli v25 beta1, pin to v24
