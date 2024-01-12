@@ -32,7 +32,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Build now does not require environment to be resolved.
 - Compose now sends out a cancel event on SIGINT/SIGTERM signal for `compose up`.
 - Fixed log by exposing services ports when `--verbose`.
-- Fix configs are mounted under /\<id\>
+- Fixed inlined and environment-defined configs to be mounted under /\<id\> until an explicit target is set.
 - Fixed combination of `--pull always --no-build`.
 - Fixed race condition in log printer.
 - Fixed `docker compose up` teardown when command context is cancelled.
