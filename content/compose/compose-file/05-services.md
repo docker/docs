@@ -4,6 +4,167 @@ description: Explore all the attributes the services top-level element can have.
 keywords: compose, compose specification, services, compose file reference
 ---
 
+A service is an abstract definition of a computing resource within an application which can be scaled or replaced
+independently from other components. Services are backed by a set of containers, run by the platform
+according to replication requirements and placement constraints. As services are backed by containers, they are defined
+by a Docker image and set of runtime arguments. All containers within a service are identically created with these
+arguments.
+
+A Compose file must declare a `services` top-level element as a map whose keys are string representations of service names,
+and whose values are service definitions. A service  definition contains the configuration that is applied to each
+service container.
+
+Each service may also include a `build` section, which defines how to create the Docker image for the service.
+Compose supports building docker images using this service definition. If not used, the `build` section is ignored and the Compose file is still considered valid. Build support is an optional aspect of the Compose Specification, and is
+described in detail in the [Compose Build Specification](build.md) documentation.
+
+Each service defines runtime constraints and requirements to run its containers. The `deploy` section groups
+these constraints and allows the platform to adjust the deployment strategy to best match containers' needs with
+available resources. Deploy support is an optional aspect of the Compose Specification, and is
+described in detail in the [Compose Deploy Specification](deploy.md) documentation.
+If not implemented the `deploy` section is ignored and the Compose file is still considered valid.
+
+## attach
+
+When `attach` is defined and set to `false` Compose does not collect service logs,
+until you explicitly request it to.
+
+The default service configuration is `attach: true`.
+
+## build
+
+`build` specifies the build configuration for creating a container image from source, as defined in the [Compose Build Specification](build.md).
+
+## blkio_config
+
+`blkio_config` defines a set of configuration options to set block IO limits for a service.
+
+```yml
+services:
+  foo:
+    image: busybox
+    blkio_config:
+       weight: 300
+       weight_device:
+         - path: /dev/sda
+           weight: 400
+       device_read_bps:
+         - path: /dev/sdb
+           rate: '12mb'
+       device_read_iops:
+         - path: /dev/sdb
+           rate: 120
+       device_write_bps:
+         - path: /dev/sdb
+           rate: '1024k'
+       device_write_iops:
+         - path: /dev/sdb
+           rate: 30
+```
+
+### device_read_bps, device_write_bps
+
+Set a limit in bytes per second for read / write operations on a given device.
+Each item in the list must have two keys:
+
+- `path`: Defines the symbolic path to the affected device.
+- `rate`: Either as an integer value representing the number of bytes or as a string expressing a byte value.
+
+### device_read_iops, device_write_iops
+
+Set a limit in operations per second for read / write operations on a given device.
+Each item in the list must have two keys:
+
+- `path`: Defines the symbolic path to the affected device.
+- `rate`: As an integer value representing the permitted number of operations per second.
+
+### weight
+
+Modify the proportion of bandwidth allocated to a service relative to other services.
+Takes an integer value between 10 and 1000, with 500 being the default.
+
+### weight_device
+
+Fine-tune bandwidth allocation by device. Each item in the list must have two keys:
+
+- `path`: Defines the symbolic path to the affected device.
+- `weight`: An integer value between 10 and 1000.
+
+## cpu_count
+
+`cpu_count` defines the number of usable CPUs for service container.
+
+## cpu_percent
+
+`cpu_percent` defines the usable percentage of the available CPUs.
+
+## cpu_shares
+
+`cpu_shares` defines, as integer value, a service container's relative CPU weight versus other containers.
+
+## cpu_period
+
+`cpu_period` configures CPU CFS (Completely Fair Scheduler) period when a platform is based
+on Linux kernel.
+
+## cpu_quota
+
+`cpu_quota` configures CPU CFS (Completely Fair Scheduler) quota when a platform is based
+on Linux kernel.
+
+## cpu_rt_runtime
+
+`cpu_rt_runtime` configures CPU allocation parameters for platforms with support for realtime scheduler. It can be either
+an integer value using microseconds as unit or a [duration](11-extension.md#specifying-durations).
+
+```yml
+ cpu_rt_runtime: '400ms'
+ cpu_rt_runtime: 95000`
+```
+
+## cpu_rt_period
+
+`cpu_rt_period` configures CPU allocation parameters for platforms with support for realtime scheduler. It can be either
+an integer value using microseconds as unit or a [duration](11-extension.md#specifying-durations).
+
+```yml
+ cpu_rt_period: '1400us'
+ cpu_rt_period: 11000`
+```
+
+## cpus
+
+_DEPRECATED: use [deploy.limits.cpus](deploy.md#cpus)_
+
+`cpus` define the number of (potentially virtual) CPUs to allocate to service containers. This is a fractional number.
+`0.000` means no limit.
+
+## cpuset
+
+`cpuset` defines the explicit CPUs in which to allow execution. Can be a range `0-3` or a list `0,1`
+
+## cap_add
+
+`cap_add` specifies additional container [capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html)
+as strings.
+
+```yaml
+cap_add:
+  - ALL
+```
+
+## cap_drop
+
+`cap_drop` specifies container [capabilities](https://man7.org/linux/man-pages/man7/capabilities.7.html) to drop
+as strings.
+
+```yaml
+cap_drop:
+  - NET_ADMIN
+  - SYS_ADMIN
+```
+
+## cgroup
 `cgroup` specifies the cgroup namespace to join. When unset, it is the container runtime's decision to
 select which cgroup namespace to use, if supported.
 
