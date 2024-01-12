@@ -15,7 +15,6 @@ For more detailed information, see the [release notes in the Compose repo](https
 {{< release-date date="2024-01-11" >}}
 
 ### Update
-- Dependencies upgrade: bump docker cli v1.25 beta1 
 - Dependencies upgrade: bump cli to 25.0.0-beta.3
 - Dependencies upgrade: bump compose-go to 2.0.0-beta.3
 - Dependencies upgrade: bump ddev to 1.22.4 
