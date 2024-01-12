@@ -20,22 +20,22 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump golang to 1.21.6 
 
 ### Bug fixes and enhancements
-- Introduce `docker compose attach` to attach local standard input, output, and error streams to a service's running container
-- Introduce `docker compose stats` to display a live stream of container(s) resource usage statistics
-- Introduce `docker compose ps --orphans` to include/exclude services not declared
-- Introduce `docker compose logs --index` to select a replica container 
-- Introduce `docker compose build --with-dependencies` to also build dependencies 
-- Add source policies for build
-- Include disabled services for shell completion
-- Restore `Project` in ps json output
-- Add OCI 1.0 fallback support for AWS ECR
-- Build do not require environment to be resolved
-- Send out a cancel event on SIGINT/SIGTERM signal for `compose up`
-- Fix log by exposing services ports when `--verbose`
+- Introduced `docker compose attach` to attach local standard input, output, and error streams to a service's running container.
+- Introduced `docker compose stats` to display a live stream of container(s) resource usage statistics.
+- Introduced `docker compose ps --orphans` to include/exclude services not declared.
+- Introduced `docker compose logs --index` to select a replica container. 
+- Introduced `docker compose build --with-dependencies` to also build dependencies. 
+- Added source policies for build.
+- Included disabled services for shell completion.
+- Restored `Project` in ps JSON output.
+- Added OCI 1.0 fallback support for AWS ECR.
+- Build now does not require environment to be resolved.
+- Compose now sends out a cancel event on SIGINT/SIGTERM signal for `compose up`.
+- Fixed log by exposing services ports when `--verbose`.
 - Fix configs are mounted under /\<id\>
-- Fix combination of `--pull always --no-build`
-- Fix race condition in log printer
-- Fix `docker compose up` teardown when command context is cancelled
+- Fixed combination of `--pull always --no-build`.
+- Fixed race condition in log printer.
+- Fixed `docker compose up` teardown when command context is cancelled.
 
 ## 2.23.3
 {{< release-date date="2023-11-22" >}}
