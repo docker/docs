@@ -1,4 +1,8 @@
-# Secrets top-level element
+---
+title: Secrets top-level elements
+description: Explore all the attributes the secrets top-level element can have.
+keywords: compose, compose specification, secrets, compose file reference
+---
 
 Secrets are a flavor of [Configs](08-configs.md) focusing on sensitive data, with specific constraint for this usage. 
 

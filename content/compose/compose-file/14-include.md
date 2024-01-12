@@ -1,4 +1,8 @@
-# Include
+---
+title: Include
+description: Learn about include
+keywords: compose, compose specification, include, compose file reference
+---
 
 A Compose application can declare dependency on another Compose application. This is useful if:
 - You want to reuse other Compose files.
