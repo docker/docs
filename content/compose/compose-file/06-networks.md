@@ -1,4 +1,8 @@
-# Networks top-level element
+---
+title: Networks top-level elements
+description: Explore all the attributes the networks top-level element can have.
+keywords: compose, compose specification, networks, compose file reference
+---
 
 Networks are the layer that allow services to communicate with each other.
 
@@ -135,7 +139,7 @@ networks:
 
 ### enable_ipv6
 
-`enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](https://docs.docker.com/config/daemon/ipv6/).
+`enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](../../config/daemon/ipv6.md).
 
 ## external
 

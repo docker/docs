@@ -1,4 +1,8 @@
-# Services top-level element
+---
+title: Services top-level elements
+description: Explore all the attributes the services top-level element can have.
+keywords: compose, compose specification, services, compose file reference
+---
 
 A service is an abstract definition of a computing resource within an application which can be scaled or replaced
 independently from other components. Services are backed by a set of containers, run by the platform
@@ -161,7 +165,6 @@ cap_drop:
 ```
 
 ## cgroup
-
 `cgroup` specifies the cgroup namespace to join. When unset, it is the container runtime's decision to
 select which cgroup namespace to use, if supported.
 
@@ -537,6 +540,18 @@ env_file:
   - ./b.env
 ```
 
+List elements can also be declared as a mapping, which then lets you set an additional
+attribute `required`. This defaults to `true`. When `required` is set to `false` and the `.env` file is missing,
+Compose silently ignores the entry.
+
+```yml
+env_file:
+  - path: ./default.env
+    required: true # default
+  - path: ./override.env
+    required: false
+```
+
 Relative path are resolved from the Compose file's parent folder. As absolute paths prevent the Compose
 file from being portable, Compose warns you when such a path is used to set `env_file`.
 
@@ -612,14 +627,18 @@ When both `env_file` and `environment` are set for a service, values set by `env
 
 ## expose
 
-`expose` defines the ports that Compose exposes from the container. These ports must be
+`expose` defines the (incoming) port or a range of ports that Compose exposes from the container. These ports must be
 accessible to linked services and should not be published to the host machine. Only the internal container
 ports can be specified.
+
+Syntax is `<portnum>/[<proto>]` or `<startport-endport>/[<proto>]` for a port range.
+When not explicitly set, `tcp` protocol is used.
 
 ```yml
 expose:
   - "3000"
   - "8000"
+  - "8080-8085/tcp
 ```
 
 > **Note**
@@ -850,12 +869,28 @@ external_links:
 `extra_hosts` adds hostname mappings to the container network interface configuration (`/etc/hosts` for Linux).
 
 ### Short syntax
-Short syntax uses plain strings in a list. Values must set hostname and IP address for additional hosts in the form of `HOSTNAME:IP`.
+Short syntax uses plain strings in a list. Values must set hostname and IP address for additional hosts in the form of `HOSTNAME=IP`.
+
+```yml
+extra_hosts:
+  - "somehost=162.242.195.82"
+  - "otherhost=50.31.209.229"
+  - "myhostv6=::1"
+```
+
+IPv6 addresses can be enclosed in square brackets, for example:
+
+```yml
+extra_hosts:
+  - "myhostv6=[::1]"
+```
+
+The separator `=` is preferred, but `:` can also be used. For example:
 
 ```yml
 extra_hosts:
   - "somehost:162.242.195.82"
-  - "otherhost:50.31.209.229"
+  - "myhostv6:::1"
 ```
 
 ### Long syntax
@@ -865,14 +900,16 @@ Alternatively, `extra_hosts` can be set as a mapping between hostname(s) and IP(
 extra_hosts:
   somehost: "162.242.195.82"
   otherhost: "50.31.209.229"
+  myhostv6: "::1"
 ```
 
 Compose creates a matching entry with the IP address and hostname in the container's network
 configuration, which means for Linux `/etc/hosts` get extra lines:
 
-```
+```console
 162.242.195.82  somehost
 50.31.209.229   otherhost
+::1             myhostv6
 ```
 
 ## group_add
@@ -1291,7 +1328,7 @@ of memory starvation.
 ## oom_score_adj
 
 `oom_score_adj` tunes the preference for containers to be killed by platform in case of memory starvation. Value must
-be within [-1000,1000] range.
+be within -1000,1000 range.
 
 ## pid
 
@@ -1300,7 +1337,7 @@ Supported values are platform specific.
 
 ## pids_limit
 
-_DEPRECATED: use [deploy.reservations.pids](deploy.md#pids)_
+_DEPRECATED: use [deploy.resources.limits.pids](deploy.md#pids)_
 
 `pids_limit` tunes a container’s PIDs limit. Set to -1 for unlimited PIDs.
 
@@ -1347,7 +1384,7 @@ If host IP is not set, it binds to all network interfaces. Ports can be either a
 value or a range. Host and container must use equivalent ranges.
 
 Either specify both ports (`HOST:CONTAINER`), or just the container port. In the latter case,
-Compose automatically allocates any unassigned port of the host.
+the container runtime automatically allocates any unassigned port of the host.
 
 `HOST:CONTAINER` should always be specified as a (quoted) string, to avoid conflicts
 with [yaml base-60 float](https://yaml.org/type/float.html).
@@ -1380,8 +1417,8 @@ expressed in the short form.
 - `target`: The container port
 - `published`: The publicly exposed port. It is defined as a string and can be set as a range using syntax `start-end`. It means the actual port is assigned a remaining available port, within the set range.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
-- `protocol`: The port protocol (`tcp` or `udp`), unspecified means any protocol.
-- `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced.
+- `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
+- `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
 
 ```yml
 ports:
@@ -1473,9 +1510,8 @@ web:
 
 ## scale
 
-_DEPRECATED: use [deploy/replicas](deploy.md#replicas)_
-
 `scale` specifies the default number of containers to deploy for this service.
+When both are set, `scale` must be consistent with the `replicas` attribute in the [Deploy Specification](deploy.md#replicas).
 
 ## secrets
 

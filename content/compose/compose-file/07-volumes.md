@@ -1,4 +1,8 @@
-# Volumes top-level element
+---
+title: Volumes top-level elements
+description: Explore all the attributes the volumes top-level element can have.
+keywords: compose, compose specification, volumes, compose file reference
+---
 
 Volumes are persistent data stores implemented by the container engine. Compose offers a neutral way for services to mount volumes, and configuration parameters to allocate them to infrastructure.
 
@@ -137,4 +141,3 @@ volumes:
     external:
       name: actual-name-of-volume
 ```
-
