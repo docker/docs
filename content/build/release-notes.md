@@ -8,6 +8,18 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.12.1
+
+{{< release-date date="2024-01-12" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.12.1).
+
+### Bug fixes and enhancements
+
+- Fix incorrect validation of some `--driver-opt` values that could cause a panic and corrupt state to be stored.
+  [docker/buildx#2176](https://github.com/docker/buildx/pull/2176)
+
 ## 0.12.0
 
 {{< release-date date="2023-11-16" >}}
