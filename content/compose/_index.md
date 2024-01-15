@@ -6,6 +6,14 @@ keywords: docker compose, docker-compose, docker compose command, docker compose
   service
 title: Docker Compose overview
 grid:
+- title: Why use Compose?
+  description: Understand Docker Compose's key benefits
+  icon: feature_search
+  link: /compose/intro/features-uses/
+- title: How Compose works 
+  description: Understand how Compose works
+  icon: category
+  link: /compose/compose-application-model/
 - title: Install Compose
   description: Follow the instructions on how to install Docker Compose.
   icon: download
@@ -19,19 +27,19 @@ grid:
   description: Find out about the latest enhancements and bug fixes.
   icon: note_add
   link: /compose/release-notes
-- title: Understand key features of Compose
-  description: Understand its key features and explore common use cases.
-  icon: category
-  link: /compose/features-uses/
 - title: Explore the Compose file reference
   description: Find information on defining services, networks, and volumes for a
     Docker application.
-  icon: feature_search
+  icon: polyline
   link: /compose/compose-file
 - title: Browse common FAQs
   description: Explore general FAQs and find out how to give feedback.
   icon: help
   link: /compose/faq
+- title: Migrate to Compose V2
+  description: Learn how to migrate from Compose V1 to V2
+  icon: folder_delete
+  link: /compose/migrate/
 aliases:
 - /compose/cli-command/
 - /compose/networking/swarm/
@@ -42,10 +50,11 @@ aliases:
 
 {{< include "compose-eol.md" >}}
 
-Compose is a tool for defining and running multi-container Docker applications.
-With Compose, you use a YAML file to configure your application's services.
-Then, with a single command, you create and start all the services
-from your configuration.
+Docker Compose is a tool for defining and running multi-container applications. 
+It is the key to unlocking a streamlined and efficient development and deployment experience. 
+
+Compose simplifies the orchestration of your entire application stack, making it easy to manage services, networks, and storage volumes in a single, comprehensible YAML configuration file. Then, with a single command, you create and start all the services
+from your configuration file.
 
 Compose works in all environments; production, staging, development, testing, as
 well as CI workflows. It also has commands for managing the whole lifecycle of your application:
@@ -54,12 +63,5 @@ well as CI workflows. It also has commands for managing the whole lifecycle of y
  * View the status of running services
  * Stream the log output of running services
  * Run a one-off command on a service
-
-The key features of Compose that make it effective are:
-
-* [Have multiple isolated environments on a single host](features-uses.md#have-multiple-isolated-environments-on-a-single-host)
-* [Preserve volume data when containers are created](features-uses.md#preserves-volume-data-when-containers-are-created)
-* [Only recreate containers that have changed](features-uses.md#only-recreate-containers-that-have-changed)
-* [Support variables and moving a composition between environments](features-uses.md#supports-variables-and-moving-a-composition-between-environments)
 
 {{< grid >}}
