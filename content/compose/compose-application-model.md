@@ -74,7 +74,7 @@ Both services communicate with each other on an isolated back-tier network, whil
     direction LR
     id4[External\nUser] ---id5(((443)))--->|Frontend\nNetwork| B1
     style id4 stroke:#000,stroke-width:2px
-    B1 --Backend\nNetwork--> B2
+    B1 --Backend\nNetwork--> B2 
 ```
 
 The example application is composed of the following parts:
