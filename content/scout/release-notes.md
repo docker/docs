@@ -12,6 +12,101 @@ the `docker/scout-cli` [GitHub repository](https://github.com/docker/scout-cli/r
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
 for what's coming next.
 
+## 2024-01-12
+
+New **Default non-root user** policy, which flags images that would run as the
+`root` superuser with full system administration privileges by default.
+Specifying a non-root default user for your images can help strengthen your
+runtime security.
+
+For more information, see [Default non-root user](./policy/_index.md#default-non-root-user).
+
+## 2024-01-11
+
+[Beta](../release-lifecycle.md#beta) launch of a new GitHub app for integrating
+Docker Scout with your source code management, and a remediation feature for
+helping you improve policy compliance.
+
+Remediation is a new capability for Docker Scout to provide contextual,
+recommended actions based on policy evaluation results on how you can improve
+compliance.
+
+The GitHub integration enhances the remediation feature. With the integration
+enabled, Docker Scout is able to connect analysis results to the source. This
+additional context about how your images are built is used to generate better,
+more precise recommendations.
+
+For more information about the types of recommendations that Docker Scout can
+provide to help you improve policy compliance, see
+[Remediation](./policy/remediation.md).
+
+For more information about how to authorize the Docker Scout GitHub app on your
+source repositories, see
+[Integrate Docker Scout with GitHub](./integrations/source-code-management/github.md).
+
+## 2023-12-20
+
+**Azure Container Registry** integration graduated from
+[Beta](../release-lifecycle.md#beta) to
+[Early Access](../release-lifecycle.md#early-access-ea).
+
+For more information and setup instructions, see
+[Integrate Azure Container Registry](./integrations/registry/acr.md).
+
+## 2023-12-06
+
+New [SonarQube](https://www.sonarsource.com/products/sonarqube/) integration
+and related policy. SonarQube is an open-source platform for continuous
+inspection of code quality. This integration lets you add SonarQube's quality
+gates as a policy evaluation in Docker Scout. Enable the integration, push your
+images, and see the SonarQube quality gate conditions surfaced in the new
+**Quality gates passed** policy.
+
+For more information, see:
+
+- [Integration and setup instructions](./integrations/code-quality/sonarqube.md)
+- [Quality gates passed policy](./policy/_index.md#quality-gates-passed)
+
+## 2023-12-01
+
+[Beta](../release-lifecycle.md#beta) release of a new **Azure Container
+Registry** (ACR) integration, which lets Docker Scout pull and analyze images
+in ACR repositories automatically.
+
+To learn more about the integration and how to get started, see
+[Integrate Azure Container Registry](./integrations/registry/acr.md).
+
+## 2023-11-21
+
+New **configurable policies** feature, which enables you to tweak the
+out-of-the-box policies according to your preferences, or disable them entirely
+if they don't quite match your needs. Some examples of how you can adapt
+policies for your organization include:
+
+- Change the severity-thresholds that vulnerability-related policies use
+- Customize the list of "high-profile vulnerabilities"
+- Add or remove software licenses to flag as "copyleft"
+
+For more information, see [Configurable policies](./policy/configure.md).
+
+## 2023-11-10
+
+New **Supply chain attestations** policy for helping you track whether your
+images are built with SBOM and provenance attestations. Adding attestations to
+images is a good first step in improving your supply chain conduct, and is
+often a prerequisite for doing more.
+
+See [Supply chain attestations policy](./policy/_index.md#supply-chain-attestations)
+for details.
+
+## 2023-11-01
+
+New **High-profile vulnerabilities** policy, which ensures your artifacts are
+free from a curated list of vulnerabilities widely recognized to be risky.
+
+For more information, see
+[High-profile vulnerabilities policy](./policy/_index.md#high-profile-vulnerabilities).
+
 ## 2023-10-04
 
 This marks the General Availability (GA) release of Docker Scout.
