@@ -239,3 +239,36 @@ specify a non-root default user for the runtime stage.
 To make your images compliant with this policy, use the
 [`USER`](../../engine/reference/builder.md#user) Dockerfile instruction to set
 a default user that doesn't have root privileges for the runtime stage.
+
+The following Dockerfile snippets shows the difference between a compliant and
+non-compliant image.
+
+{{< tabs >}}
+{{< tab name="Non-compliant" >}}
+
+```dockerfile
+FROM alpine AS builder
+COPY Makefile ./src /
+RUN make build
+
+FROM alpine AS runtime
+COPY --from=builder bin/production /app
+ENTRYPOINT ["/app/production"]
+```
+
+{{< /tab >}}
+{{< tab name="Compliant" >}}
+
+```dockerfile {hl_lines=7}
+FROM alpine AS builder
+COPY Makefile ./src /
+RUN make build
+
+FROM alpine AS runtime
+COPY --from=builder bin/production /app
+USER nonroot
+ENTRYPOINT ["/app/production"]
+```
+
+{{< /tab >}}
+{{< /tabs >}}
