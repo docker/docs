@@ -24,7 +24,7 @@ Synchronized File Shares is for developers who:
 
 A Synchronized file share behaves just like a virtual file share, but takes advantage of Mutagen's high-performance, low-latency code synchronization engine to create a synchronized cache of the host files on an ext4 filesystem within the Docker Desktop VM. If you make filesystem changes on the host or in the VM’s containers, it propagates via bidirectional synchronization.
 
-After creating a file share instance, any container using a bind mount that points to a location on the host filesystem matching the specified synchronized file share location, utilizes the Synchronized File Shares feature. Bind mounts that don't satisfy this condition are passed to the normal virtual filesystem bind-mounting mechanism, for example VirtioFS or gRPC-FUSE.
+After creating a file share instance, any container using a bind mount that points to a location on the host filesystem matching the specified synchronized file share location, utilizes the Synchronized File Shares feature. Bind mounts that don't satisfy this condition are passed to the normal virtual filesystem [bind-mounting mechanism](../storage/bind-mounts.md), for example VirtioFS or gRPC-FUSE.
 
 > **Important**
 >
@@ -33,12 +33,13 @@ After creating a file share instance, any container using a bind mount that poin
 
 ## Create a file share instance 
 
-To create a synchronized file share:
-1. In **Settings**, navigate to the **File sharing** tab within the **Resources** section. 
-2. In the **Synchronized File Shares** section, select the **plus** icon.
-3. Select a host folder to share. The synchronized file share should initialize and be usable.
+To create a file share instance:
+1. Sign in to Docker Desktop.
+2. In **Settings**, navigate to the **File sharing** tab within the **Resources** section. 
+3. In the **Synchronized File Shares** section, select the **plus** icon.
+4. Select a host folder to share. The synchronized file share should initialize and be usable.
 
-File shares take a few seconds to initialize as files are copied into the Docker Desktop VM. During this time, the status indicator displays **Preparing**.
+File shares take a few seconds to initialize as files are copied into the Docker Desktop VM. During this time, the status indicator displays **Preparing**. There is also a status icon in the footer of the Docker Dashboard that keeps you updated.
 
 When the status indicator displays **Watching for filesystem changes**, your files are available to the VM through all the standard bind mount mechanisms, whether that's `-v` in the command line or specified in your `compose.yml` file.
 
@@ -92,4 +93,4 @@ Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/
 
 ## Feedback
 
-To give feedback, report bugs, or receive support, email `desktop-preview@docker.com`. There is also a dedicated Slack channel. To join, simply send an email to the provided address.
+To give feedback, report bugs, or receive support (TODO)
