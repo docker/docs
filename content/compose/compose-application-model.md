@@ -7,7 +7,7 @@ aliases:
 - /compose/compose-yaml-file/
 ---
 
-Docker Compose works based on a declarative configuration specified in a YAML file, usually named `compose.yml`. 
+Docker Compose works based on a declarative configuration specified in a YAML file, usually named `compose.yaml`. 
 
 The `compose.yml` file follows the rules provided by the [Compose Specification](compose-file/_index.md) in how to define multi-container applications. The Compose Specification in Docker Docs is the Docker Compose implementation of the formal [Compose Specification](https://github.com/compose-spec/compose-spec). 
 
@@ -35,7 +35,7 @@ Compose offers a way for you to set a custom project name and override this name
 
 {{< /accordion >}}
 
-You then interact with Docker Compose through the [Compose CLI](reference/_index.md). Commands such as `docker compose up` are used to start the application, while `docker compose down` stops and removes the containers.
+You then interact with your Compose application through the [Compose CLI](reference/_index.md). Commands such as `docker compose up` are used to start the application, while `docker compose down` stops and removes the containers.
 
 ## The Compose file
 
