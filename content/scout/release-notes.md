@@ -16,8 +16,6 @@ for what's coming next.
 
 This marks the General Availability (GA) release of Docker Scout.
 
-### New
-
 The following new features are included in this release:
 
 - [Policy Evaluation](#policy-evaluation) (Early Access)
@@ -25,7 +23,7 @@ The following new features are included in this release:
 - [Sysdig integration](#sysdig-integration)
 - [JFrog Artifactory integration](#jfrog-artifactory-integration)
 
-#### Policy evaluation
+### Policy evaluation
 
 Policy Evaluation is an early access feature that helps you ensure software
 integrity and track how your artifacts are doing over time. This release ships
@@ -48,7 +46,7 @@ You can view and evaluate policy status for images using the Docker Scout
 Dashboard and the `docker scout policy` CLI command. For more information,
 refer to the [Policy Evaluation documentation](./policy/_index.md).
 
-#### Amazon ECR integration
+### Amazon ECR integration
 
 The new Amazon Elastic Container Registry (ECR) integration enables image
 analysis for images hosted in ECR repositories.
@@ -63,7 +61,7 @@ repositories, activating Docker Scout for specific repositories, and removing
 the integration if needed. To learn more, refer to the [Amazon ECR integration
 documentation](./integrations/registry/ecr.md).
 
-#### Sysdig integration
+### Sysdig integration
 
 The new Sysdig integration gives you real-time security insights for your
 Kubernetes runtime environments.
@@ -76,7 +74,7 @@ into memory, using VEX documents.
 For more information and getting started, see [Sysdig integration
 documentation](./integrations/environment/sysdig.md).
 
-#### JFrog Artifactory integration
+### JFrog Artifactory integration
 
 The new JFrog Artifactory integration enables automatic image analysis on
 Artifactory registries.
