@@ -1498,7 +1498,7 @@ The default number of restart retries is 1.
 ```
 
 You can find more detailed information on restart policies in the
-[Restart Policies (--restart)](../../../_vendor/github.com/docker/cli/docs/reference/run.md#restart-policies---restart)
+[Restart Policies (--restart)](/engine/reference/run/#restart-policies---restart)
 section of the Docker run reference page.
 
 ## runtime
