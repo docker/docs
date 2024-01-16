@@ -229,7 +229,10 @@ default `root` user. To comply with this policy, images must specify a non-root
 user in the image configuration. Images violate this policy if they don't
 specify a non-root default user for the runtime stage.
 
-In instances where an image does not adhere to this policy, the evaluation result will communicate through the `Explicit` property whether the Dockerfile explicitly specifies the use of the `USER root` instruction. This information serves to enhance developers' comprehension regarding the deliberate or inadvertent setting of the `root` user, aiding in the identification of intentional configurations.
+For non-compliant images, evaluation results show whether or not the `root`
+user was set explicitly for the image. This helps you distinguish between
+policy violations caused by images where the `root` user is implicit, and
+images where `root` is set on purpose.
 
 The following Dockerfile runs as `root` by default despite not being explicitly set:
 ```Dockerfile
@@ -237,7 +240,7 @@ FROM alpine
 RUN echo "Hi"
 ```
 
-Whereas in the case below the `root` user is explictly set:
+Whereas in the following case, the `root` user is explicitly set:
 
 ```Dockerfile
 FROM alpine
