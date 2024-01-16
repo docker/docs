@@ -581,23 +581,49 @@ $ systemctl --user restart docker
 
 **`docker run -p` does not propagate source IP addresses**
 
-This is because Docker with rootless mode uses RootlessKit's builtin port driver by default.
+This is because Docker in rootless mode uses RootlessKit's `builtin` port
+driver by default, which doesn't support source IP propagation. To enable
+source IP propagation, you can:
 
-The source IP addresses can be propagated by creating `~/.config/systemd/user/docker.service.d/override.conf` with the following content:
+- Use the `slirp4netns` RootlessKit port driver
+- Use the `pasta` RootlessKit network driver, with the `implicit` port driver
 
-```systemd
-[Service]
-Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"
-```
+The `pasta` network driver is experimental, but provides improved throughput
+performance compared to the `slirp4netns` port driver. The `pasta` driver
+requires Docker Engine version 25.0 or later.
 
-And then restart the daemon:
-```console
-$ systemctl --user daemon-reload
-$ systemctl --user restart docker
-```
+To change the RootlessKit networking configuration:
 
-Note that this configuration decreases throughput.
-See [RootlessKit documentation](https://github.com/rootless-containers/rootlesskit/tree/v0.13.0#port-drivers) for the benchmark result.
+1. Create a file at `~/.config/systemd/user/docker.service.d/override.conf`.
+2. Add the following contents, depending on which configuration you would like to use:
+
+   - `slirp4netns`
+
+      ```systemd
+      [Service]
+      Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_NET=slirp4netns"
+      Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=slirp4netns"
+      ```
+
+   - `pasta` network driver with `implicit` port driver
+
+      ```systemd
+      [Service]
+      Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_NET=pasta"
+      Environment="DOCKERD_ROOTLESS_ROOTLESSKIT_PORT_DRIVER=implicit"
+      ```
+
+3. Restart the daemon:
+
+   ```console
+   $ systemctl --user daemon-reload
+   $ systemctl --user restart docker
+   ```
+
+For more information about networking options for RootlessKit, see:
+
+- [Network drivers](https://github.com/rootless-containers/rootlesskit/blob/v2.0.0/docs/network.md)
+- [Port drivers](https://github.com/rootless-containers/rootlesskit/blob/v2.0.0/docs/port.md)
 
 ### Tips for debugging
 **Entering into `dockerd` namespaces**
