@@ -1,6 +1,6 @@
 ---
 title: Containerize a generative AI application
-keywords: python, generative ai, genai, llm, neo4j, ollama, containerize, intitialize, langchain
+keywords: python, generative ai, genai, llm, neo4j, ollama, containerize, intitialize, langchain, openai
 description: Learn how to containerize a generative AI (GenAI) application.
 ---
 
@@ -99,9 +99,22 @@ terminal.
 $ docker compose up --build
 ```
 
-Open a browser and view the application at [http://localhost:8000](http://localhost:8000). You should see a simple Streamlit application.
+Docker builds and runs your application. Depending on your network connection, it may take several minutes to download all the dependencies. You'll see a message like the following in the terminal when the application is running.
 
-The application requires a Neo4j database service and an Ollama LLM service to function. If you have access to services that you ran outside of Docker, specify the connection information and try it out. If you don't have the services running, continue with this guide to learn how you can run all these services with Docker.
+```console
+server-1  |   You can now view your Streamlit app in your browser.
+server-1  |
+server-1  |   URL: http://0.0.0.0:8000
+server-1  |
+```
+
+Open a browser and view the application at [http://localhost:8000](http://localhost:8000). You should see a simple Streamlit application. The application may take a few minutes to download the embedding model. While the download is in progress, **Running** appears in the top-right corner.
+
+The application requires a Neo4j database service and an LLM service to
+function. If you have access to services that you ran outside of Docker, specify
+the connection information and try it out. If you don't have the services
+running, continue with this guide to learn how you can run some or all of these
+services with Docker.
 
 In the terminal, press `ctrl`+`c` to stop the application.
 
