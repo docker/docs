@@ -1485,7 +1485,6 @@ If `pull_policy` and `build` are both present, Compose builds the image by defau
 - `always`: The policy always restarts the container until its removal.
 - `on-failure[:max-retries]`: The policy restarts the container if the exit code indicates an error.
 Optionally, limit the number of restart retries the Docker daemon attempts.
-The default number of restart retries is 1.
 - `unless-stopped`: The policy restarts the container irrespective of the exit code but stops
   restarting when the service is stopped or removed.
 
