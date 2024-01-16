@@ -639,6 +639,8 @@
   - /go/attestations/
 "/build/attestations/slsa-provenance/":
   - /go/provenance/
+"/build/cloud/":
+  - /go/docker-build-cloud/
 
 # CLI backlinks
 "/config/filter/":
