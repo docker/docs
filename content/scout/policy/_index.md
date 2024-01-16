@@ -229,6 +229,25 @@ default `root` user. To comply with this policy, images must specify a non-root
 user in the image configuration. Images violate this policy if they don't
 specify a non-root default user for the runtime stage.
 
+For non-compliant images, evaluation results show whether or not the `root`
+user was set explicitly for the image. This helps you distinguish between
+policy violations caused by images where the `root` user is implicit, and
+images where `root` is set on purpose.
+
+The following Dockerfile runs as `root` by default despite not being explicitly set:
+```Dockerfile
+FROM alpine
+RUN echo "Hi"
+```
+
+Whereas in the following case, the `root` user is explicitly set:
+
+```Dockerfile
+FROM alpine
+USER root
+RUN echo "Hi"
+```
+
 > **Note**
 >
 > This policy only checks for the default user of the image, as set in the
