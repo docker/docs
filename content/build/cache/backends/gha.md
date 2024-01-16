@@ -13,9 +13,10 @@ aliases:
 { .restricted }
 
 The GitHub Actions cache utilizes the
-[GitHub-provided Action's cache](https://github.com/actions/cache) available
-from within your CI execution environment. This is the recommended cache to use
-inside your GitHub action pipelines, as long as your use case falls within the
+[GitHub-provided Action's cache](https://github.com/actions/cache) or other
+cache services supporting the GitHub Actions cache protocol. This is the
+recommended cache to use inside your GitHub Actions workflows, as long as your
+use case falls within the
 [size and usage limits set by GitHub](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy).
 
 This cache storage backend is not supported with the default `docker` driver.

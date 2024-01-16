@@ -35,7 +35,9 @@ $ git clone https://github.com/docker/docker-nodejs-sample
 Now that you have an application, you can use `docker init` to create the
 necessary Docker assets to containerize your application. Inside the
 `docker-nodejs-sample` directory, run the `docker init` command in a terminal.
-Refer to the following example to answer the prompts from `docker init`.
+`docker init` provides some default configuration, but you'll need to answer a
+few questions about your application. Refer to the following example to answer
+the prompts from `docker init` and use the same answers for your prompts.
 
 ```console
 $ docker init

@@ -229,6 +229,25 @@ default `root` user. To comply with this policy, images must specify a non-root
 user in the image configuration. Images violate this policy if they don't
 specify a non-root default user for the runtime stage.
 
+For non-compliant images, evaluation results show whether or not the `root`
+user was set explicitly for the image. This helps you distinguish between
+policy violations caused by images where the `root` user is implicit, and
+images where `root` is set on purpose.
+
+The following Dockerfile runs as `root` by default despite not being explicitly set:
+```Dockerfile
+FROM alpine
+RUN echo "Hi"
+```
+
+Whereas in the following case, the `root` user is explicitly set:
+
+```Dockerfile
+FROM alpine
+USER root
+RUN echo "Hi"
+```
+
 > **Note**
 >
 > This policy only checks for the default user of the image, as set in the
@@ -239,3 +258,36 @@ specify a non-root default user for the runtime stage.
 To make your images compliant with this policy, use the
 [`USER`](../../engine/reference/builder.md#user) Dockerfile instruction to set
 a default user that doesn't have root privileges for the runtime stage.
+
+The following Dockerfile snippets shows the difference between a compliant and
+non-compliant image.
+
+{{< tabs >}}
+{{< tab name="Non-compliant" >}}
+
+```dockerfile
+FROM alpine AS builder
+COPY Makefile ./src /
+RUN make build
+
+FROM alpine AS runtime
+COPY --from=builder bin/production /app
+ENTRYPOINT ["/app/production"]
+```
+
+{{< /tab >}}
+{{< tab name="Compliant" >}}
+
+```dockerfile {hl_lines=7}
+FROM alpine AS builder
+COPY Makefile ./src /
+RUN make build
+
+FROM alpine AS runtime
+COPY --from=builder bin/production /app
+USER nonroot
+ENTRYPOINT ["/app/production"]
+```
+
+{{< /tab >}}
+{{< /tabs >}}

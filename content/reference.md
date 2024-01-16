@@ -3,7 +3,6 @@ title: Reference documentation
 description: This section includes the reference documentation for the Docker platform’s
   various APIs, CLIs, and file formats.
 notoc: true
-skip_read_time: true
 grid_files:
 - title: Dockerfile
   description: Defines the contents and startup behavior of a single container.

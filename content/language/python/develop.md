@@ -51,7 +51,7 @@ You can use containers to set up local services, like a database. In this sectio
 
 In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. `docker init` handled creating most of the instructions, but you'll need to update it for your unique application.
 
-In the `compose.yaml` file, you need to uncomment all of the database instructions. In addition, you need to add the database password as an environment variable to the server service.
+In the `compose.yaml` file, you need to uncomment all of the database instructions. In addition, you need to add the database password file as an environment variable to the server service and specify the secret file to use .
 
 The following is the updated `compose.yaml` file.
 
@@ -63,10 +63,12 @@ services:
     ports:
       - 5000:5000
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     depends_on:
       db:
         condition: service_healthy
+    secrets:
+      - db-password
   db:
     image: postgres
     restart: always
@@ -163,10 +165,12 @@ services:
     ports:
       - 5000:5000
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
     depends_on:
       db:
         condition: service_healthy
+    secrets:
+      - db-password
     develop:
       watch:
         - action: rebuild
