@@ -107,15 +107,41 @@ Running Docker Desktop inside a VMware ESXi or Azure VM is supported for Docker 
 It requires enabling nested virtualization on the hypervisor first.
 For more information, see [Running Docker Desktop in a VM or VDI environment](../vm-vdi.md).
 
-{{< accordion title="About Windows containers" >}}
+{{< accordion title="How do I switch between Windows and Linux containers?" >}}
 
-Looking for information on using Windows containers?
+From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
+the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
+containers, or select **Switch to Linux containers** to use Linux containers
+(the default).
 
-* [Switch between Windows and Linux containers](../faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers)
-  describes how you can toggle between Linux and Windows containers in Docker Desktop and points you to the tutorial mentioned below.
-- [Getting Started with Windows Containers](https://learn.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=dockerce)
-- Docker Container Platform for Windows [articles and blog
-  posts](https://www.docker.com/microsoft/) on the Docker website.
+For more information on Windows containers, refer to the following documentation:
+
+- Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
+
+- [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/)
+  gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
+
+- [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
+  shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/)
+  application with Windows containers. The MusicStore is a standard .NET application and,
+  [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
+
+- To understand how to connect to Windows containers from the local host, see
+  [I want to connect to a container from Windows](../networking.md#i-want-to-connect-to-a-container-from-the-host)
+
+> **Note**
+>
+> When you switch to Windows containers, **Settings** only shows those tabs that are active and apply to your Windows containers. These are:
+>
+>  * [General](../settings/windows.md#general)
+>  * [Proxies](../settings/windows.md#proxies)
+>  * [Daemon](../settings/windows.md#docker-engine)
+
+If you set proxies or daemon configuration in Windows containers mode, these
+apply only on Windows containers. If you switch back to Linux containers,
+proxies and daemon configurations return to what you had set for Linux
+containers. Your Windows container settings are retained and become available
+again when you switch back.
 
 {{< /accordion >}}
 
@@ -126,7 +152,7 @@ Looking for information on using Windows containers?
 
 1. Download the installer using the download button at the top of the page, or from the [release notes](../release-notes.md).
 
-2. Double-click `Docker Desktop Installer.exe` to run the installer.
+2. Double-click `Docker Desktop Installer.exe` to run the installer. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 
 3. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
 
@@ -162,6 +188,8 @@ If using the Windows Command Prompt:
 ```sh
 start /w "" "Docker Desktop Installer.exe" install
 ```
+
+By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 
 The `install` command accepts the following flags:
 - `--quiet`: Suppresses information output when running the installer 

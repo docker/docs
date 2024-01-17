@@ -2000,6 +2000,8 @@ Manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
+  - path: /compose/feedback/
+    title: Give feedback
   - path: /compose/release-notes/
     title: Release notes
 
