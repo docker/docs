@@ -6,14 +6,18 @@ keywords: enhanced container isolation, Docker Desktop, Docker socket, bind moun
 
 This section describes configuration specific to Enhanced Container Isolation (ECI).
 
-### Docker Socket Mount Permissions
+### Enabling ECI
+
+ECI may be enabled by users or admins, as described [here](_index.md#how-do-i-enable-enhanced-container-isolation)
+
+### Docker Socket Mount Permissions (Beta)
 
 > Note
 >
-> This feature is available since Docker Desktop 4.27 and it's currently in "beta".
+> This feature is available since Docker Desktop 4.27 and it's currently in [Beta](../../../release-lifecycle.md/#beta).
 
-By default, when ECI is enabled (see [Settings Management](../settings-management/configure.md)),
-Docker Desktop does not allow bind-mounting the Docker Engine socket into containers:
+By default, when ECI is enabled, Docker Desktop does not allow bind-mounting the
+Docker Engine socket into containers:
 
 ```console
 $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock docker:cli
