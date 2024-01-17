@@ -4,10 +4,6 @@ title: How does it work?
 keywords: set up, enhanced container isolation, rootless, security
 ---
 
-> Note
->
-> Enhanced Container Isolation is available to Docker Business customers only.
-
 Docker implements Enhanced Container Isolation by using the [Sysbox
 container runtime](https://github.com/nestybox/sysbox). Sysbox is a fork of the
 standard OCI runc runtime that was modified to enhance standard container isolation and

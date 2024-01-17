@@ -8,7 +8,7 @@ This section describes configuration specific to Enhanced Container Isolation (E
 
 ### Enabling ECI
 
-ECI may be enabled by users or admins, as described [here](_index.md#how-do-i-enable-enhanced-container-isolation)
+ECI may be enabled by users or admins, as described [here](_index.md#how-do-i-enable-enhanced-container-isolation).
 
 ### Docker Socket Mount Permissions (Beta)
 
