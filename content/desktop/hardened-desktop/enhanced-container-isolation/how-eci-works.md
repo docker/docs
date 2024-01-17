@@ -33,7 +33,7 @@ to breach the Docker Desktop Virtual Machine (VM) or other containers.
 > but all user containers are implicitly launched with Sysbox.
 
 Enhanced Container Isolation is not the same as Docker Engine's userns-remap
-mode or Rootless Docker. This is explained further below. 
+mode or Rootless Docker. This is explained further below.
 
 ### Under the hood
 
@@ -67,7 +67,7 @@ Userns-remap mode is similar to Enhanced Container Isolation in that both improv
 container isolation by leveraging the Linux user-namespace.
 
 However, Enhanced Container Isolation is much more advanced since it assigns
-exclusive user-namespace mappings per container automatically and add several
+exclusive user-namespace mappings per container automatically and adds several
 other [container isolation features](#under-the-hood) meant to secure Docker
 Desktop in organizations with stringent security requirements.
 

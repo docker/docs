@@ -48,7 +48,7 @@ In addition, the following restrictions are imposed:
 
 - Containers can no longer share namespaces with the Docker Desktop VM (e.g., `--network=host`, `--pid=host` are disallowed).
 - Containers can no longer modify configuration files inside the Docker Desktop VM (e.g., mounting any VM directory into the container is disallowed).
-- Containers can no longer access the Docker engine (e.g., mounting the Docker engine's socket into the container is restricted); this prevents malicious containers from gaining control of the Docker engine.
+- Containers can no longer access the Docker engine (e.g., mounting the Docker engine's socket into the container is restricted); this prevents malicious containers from gaining control of the Docker engine. Admins may relax this for trusted container images, as explained [here](config.md).
 - Console access to the Docker Desktop VM is forbidden for all users.
 
 These features and restrictions ensure that containers are better secured at runtime, with minimal impact to developer experience and productivity.
@@ -90,21 +90,30 @@ To enable Enhanced Container Isolation as a developer:
 
 #### As an admin
 
-To enable Enhanced Container Isolation as an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../security/for-admins/configure-sign-in.md). This is because the Enhanced Container Isolation feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+To enable Enhanced Container Isolation as an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../security/for-admins/configure-sign-in.md).
+This is because the Enhanced Container Isolation feature requires a Docker
+Business subscription and therefore your Docker Desktop users must authenticate
+to your organization for this configuration to take effect.
 
 Next, you must [create and configure the `admin-settings.json` file](../settings-management/configure.md) and specify:
 
 ```JSON
 {
- "configurationFileVersion": 2,
- "enhancedContainerIsolation": {
+  "configurationFileVersion": 2,
+  "enhancedContainerIsolation": {
     "value": true,
     "locked": true
-    }
+  }
 }
 ```
 
-By setting `"value": true`, the admin ensures ECI is enabled by default. By setting `"locked": true`, the admin ensures ECI can't be disabled by developers. If you wish to give developers the ability to disable the feature, set `"locked": false`.
+By setting `"value": true`, the admin ensures ECI is enabled by default. By
+setting `"locked": true`, the admin ensures ECI can't be disabled by
+developers. If you wish to give developers the ability to disable the feature,
+set `"locked": false`.
+
+In addition, starting with Docker Desktop 4.27, admins can also configure Docker
+socket mount permissions for containers, as described [here](config.md).
 
 For this to take effect:
 

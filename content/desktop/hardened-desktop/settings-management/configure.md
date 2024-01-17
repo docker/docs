@@ -70,7 +70,19 @@ The following `admin-settings.json` code and table provides an example of the re
   },
   "enhancedContainerIsolation": {
     "locked": true,
-    "value": true
+    "value": true,
+    "dockerSocketMount": {
+      "imageList": {
+        "images": [
+          "docker.io/localstack/localstack:*",
+          "docker.io/testcontainers/ryuk:*"
+        ]
+      },
+      "commandList": {
+        "type": "deny",
+        "commands": ["push"]
+      }
+    }
   },
   "linuxVM": {
     "wslEngineEnabled": {
@@ -108,7 +120,7 @@ The following `admin-settings.json` code and table provides an example of the re
   },
   "extensionsEnabled": {
     "locked": true,
-    "value": false    
+    "value": false
   },
   "scout": {
     "locked": false,
@@ -125,7 +137,7 @@ The following `admin-settings.json` code and table provides an example of the re
   },
   "blockDockerLoad": {
     "locked": false,
-    "value": true    
+    "value": true
   }
 }
 ```
@@ -136,7 +148,10 @@ The following `admin-settings.json` code and table provides an example of the re
 | `exposeDockerAPIOnTCP2375` | <span class="badge badge-info">Windows only</span>| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
 | `proxy` |   |If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores and values set for `http`, `https` and `exclude`. Change `mode` to `manual` to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property, for example `"https": "http://myotherproxy.com:4321"`. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy. |
 &nbsp; &nbsp; &nbsp; &nbsp;`windowsDockerdPort`  | <span class="badge badge-info">Windows only</span> | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port. The default value is -1 which disables the option. Note: This is available for Windows containers only. |
-| `enhancedContainerIsolation`  |  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md).| 
+| `enhancedContainerIsolation`  |  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md).|
+| &nbsp; &nbsp; &nbsp; &nbsp;`dockerSocketMount` |  | By default, enhanced container isolation blocks bind-mounting the Docker Engine socket into containers (e.g., `docker run -v /var/run/docker.sock:/var/run/docker.sock ...`). This config allows admins to relax this in a controlled way. See [here](../enhanced-container-isolation/config.md) for more info. |
+| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `imageList` |  | Indicates which container images are allowed to bind-mount the Docker Engine socket. |
+| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `commandList` |  | Restricts the commands that containers can issue via the bind-mounted Docker Engine socket. |
 | `linuxVM` |   |Parameters and settings related to Linux VM options - grouped together here for convenience. |
 | &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  | <span class="badge badge-info">Windows only</span> | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag.
 | &nbsp;&nbsp; &nbsp; &nbsp;`dockerDaemonOptions`|  |If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/engine/reference/commandline/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |
