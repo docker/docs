@@ -17,6 +17,15 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 - The Advanced Image Management feature, along with the corresponding API endpoints, has been retired.
   See [docker/roadmap#534](https://github.com/docker/roadmap/issues/534).
 
+  The following API endpoints have been removed:
+
+  ```text
+  /namespaces/{namespace}/repositories/{repository}/images
+  /namespaces/{namespace}/repositories/{repository}/images/{digest}/tags
+  /namespaces/{namespace}/repositories/{repository}/images-summary
+  /namespaces/{namespace}/delete-images
+  ```
+
 ## 2023-08-28
 
 - Organizations with SSO enabled can assign members to roles, organizations, and teams with [SCIM role mapping](scim.md#set-up-role-mapping). 

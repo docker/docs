@@ -1483,7 +1483,8 @@ If `pull_policy` and `build` are both present, Compose builds the image by defau
 
 - `no`: The default restart policy. It does not restart the container under any circumstances.
 - `always`: The policy always restarts the container until its removal.
-- `on-failure`: The policy restarts the container if the exit code indicates an error.
+- `on-failure[:max-retries]`: The policy restarts the container if the exit code indicates an error.
+Optionally, limit the number of restart retries the Docker daemon attempts.
 - `unless-stopped`: The policy restarts the container irrespective of the exit code but stops
   restarting when the service is stopped or removed.
 
@@ -1491,8 +1492,13 @@ If `pull_policy` and `build` are both present, Compose builds the image by defau
     restart: "no"
     restart: always
     restart: on-failure
+    restart: on-failure:3
     restart: unless-stopped
 ```
+
+You can find more detailed information on restart policies in the
+[Restart Policies (--restart)](/engine/reference/run/#restart-policies---restart)
+section of the Docker run reference page.
 
 ## runtime
 
