@@ -8,9 +8,9 @@ This section describes configuration specific to Enhanced Container Isolation (E
 
 ### Docker Socket Mount Permissions
 
->**Note**
+> Note
 >
->This feature is available since Docker Desktop 4.27 and it's currently in "beta".
+> This feature is available since Docker Desktop 4.27 and it's currently in "beta".
 
 By default, when ECI is enabled (see [Settings Management](../settings-management/configure.md)),
 Docker Desktop does not allow bind-mounting the Docker Engine socket into containers:
@@ -98,9 +98,9 @@ $ docker run -it -v /var/run/docker.sock:/var/run/docker.sock docker:cli sh
 / #
 ```
 
->**Note**
+> Note
 >
->Be restrictive on the images you allow, as described in [Recommendations](#recommendations) below.
+> Be restrictive on the images you allow, as described in [Recommendations](#recommendations) below.
 
 In general, it's easiest to specify the image using the tag wildcard format
 (e.g., `<image-name>:*`) because this way the image list in the
@@ -258,7 +258,7 @@ Whether to configure the list as an allow or deny list depends on the use case.
 | scout                | Docker Scout |
 | trust                | Manage trust on Docker images |
 
-> **Note**
+> Note
 >
 > Docker socket mount permissions do not apply when running "true"
 > Docker-in-Docker (i.e., when running the Docker Engine inside a container). In
