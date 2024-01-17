@@ -1,0 +1,24 @@
+{{ $collapse := .Get "collapse" | default false }}
+<div x-data="{ collapse: {{$collapse}} }" class="not-prose relative pt-4 mb-6">
+   {{ $codeblocks := strings.FindRESubmatch "`{3,}(.*?)\n((.|\n)*?)`{3,}" .InnerDeindent 2 }}
+   {{ $input := index $codeblocks 0 }}
+   {{ $inputLang := index $input 1 }}
+   {{ $inputCode := index $input 2 }}
+   {{ $output := index $codeblocks 1 }}
+   {{ $outputLang := index $output 1 }}
+   {{ $outputCode := index $output 2 }}
+   <button
+      class="absolute z-10 right-4 -top-3 rounded-t px-2 pt-1 text-white text-sm
+      bg-blue-light-500 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark-500"
+      @click="collapse = ! collapse" x-text="collapse ? 'Show output' : 'Hide output'">Toggle output</button>
+   <div class="group relative">
+      {{ partial "components/copy.html" $inputCode }}
+      <div class="syntax-light dark:syntax-dark">
+         {{- highlight $inputCode $inputLang }}
+         <div x-show="!collapse" x-collapse>
+         <hr class="text-divider-light dark:text-divider-dark">
+            {{- highlight $outputCode $outputLang }}
+         </div>
+      </div>
+   </div>
+</div>

@@ -20,6 +20,64 @@ export name=<MY_NAME>
 This syntax is reserved for variable names, and will cause the variable to
 be rendered in a special color and font style.
 
+## Collapsible code blocks
+
+You can use the `io` shortcode to create collapsible input/output code blocks.
+These code blocks have two sections: a top section for the input command, and
+a bottom section for the output of the command.
+
+The shortcode only accepts a pair of code blocks, no more or less. It isn't
+possible to pass attributes or options, such as `linenos`, to these code blocks.
+If you do, they will be ignored.
+
+The copy button only copies the input command for collapsible code blocks.
+You can set the code block to be expanded or collapsed on page load.
+By default, it's expanded, and the output is shown.
+
+The following is a default (non-collapsed) code block pair.
+
+{{< io >}}
+
+```console
+$ docker inspect foo
+```
+
+```json
+{ "foo": 1 }
+```
+
+{{< /io >}}
+
+The following is a `collapsed=true` code block pair.
+
+{{< io collapse=true >}}
+
+```console
+$ docker inspect foo
+```
+
+```json
+{ "foo": 1 }
+```
+
+{{< /io >}}
+
+Markup for the collapsed version:
+
+````markdown
+{{</* io collapse=true */>}}
+
+```console
+$ docker inspect foo
+```
+
+```json
+{ "foo": 1 }
+```
+
+{{</* /io */>}}
+````
+
 ## Bash
 
 Use the `bash` language code block when you want to show a Bash script:

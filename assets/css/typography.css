@@ -11,7 +11,7 @@
       font-weight: 400;
     }
     hr {
-      @apply mb-4 mt-8;
+      @apply my-4;
     }
     h1 {
       @apply my-4 text-4xl;

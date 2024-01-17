@@ -1,0 +1,7 @@
+<button x-data="{ code: '{{encoding.Base64Encode .}}' }"
+  class="material-symbols-rounded absolute right-3 top-3 hidden text-gray-light-300 group-hover:block dark:text-gray-dark-600"
+  title="Copy" @click="window.navigator.clipboard.writeText(atob(code).replaceAll(/^\$\s*/gm, ''));
+    $el.textContent='check_circle';
+    setTimeout(() => $el.textContent='content_copy', 2000);">
+  content_copy
+</button>
