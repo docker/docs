@@ -8,9 +8,9 @@
 <body
   class="bg-background-light dark:bg-background-dark text-base divide-y divide-divider-light dark:divide-divider-dark flex flex-col h-max dark:text-white">
   {{ partial "header.html" . }}
-  <main class="min-h-screen flex items-stretch">
+  <main class="flex items-stretch">
     <div id="sidebar"
-      class="z-10 flex flex-col items-end sticky top-16 h-[calc(100vh-theme(space.16))] overflow-y-scroll flex-shrink-0 flex-grow md:fixed md:w-screen md:hidden bg-background-light dark:bg-gray-dark-100">
+      class="print:hidden z-10 flex flex-col items-end sticky top-16 h-[calc(100vh-theme(space.16))] overflow-y-scroll flex-shrink-0 flex-grow md:fixed md:w-screen md:hidden bg-background-light dark:bg-gray-dark-100">
       {{ block "left" . }}
       {{ end }}
     </div>
@@ -18,12 +18,12 @@
       {{ block "main" . }}
       {{ end }}
     </div>
-    <div class="sticky w-[300px] top-16 p-5 h-[calc(100vh-theme(space.16))] flex-grow overflow-y-auto lg:hidden">
+    <div class="print:hidden sticky w-[300px] top-16 p-5 h-[calc(100vh-theme(space.16))] flex-grow overflow-y-auto lg:hidden">
       {{ block "right" . }}
       {{ end }}
     </div>
   </main>
-  <footer>
+  <footer class="print:hidden">
     {{ partialCached "footer.html" . }}
   </footer>
 </body>

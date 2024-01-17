@@ -4,6 +4,7 @@
 @import "/assets/css/global";
 @import "/assets/css/typography";
 @import "/assets/css/search";
+@import "/assets/css/print";
 
 @import "tailwindcss/components";
 @import "/assets/css/code";

@@ -1,7 +1,9 @@
+const plugin = require('tailwindcss/plugin')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./hugo_stats.json","./layouts/**/*.{html,js}", "./content/**/*.md", "assets/js/**/*.js"],
-  darkMode: "class",
+  darkMode: null,
   theme: {
     extend: {
       typography: (theme) => ({
@@ -64,6 +66,8 @@ module.exports = {
       md: { max: "1024px" },
       lg: { max: "1280px" },
       xl: { max: "1440px" },
+      print: { raw: 'print' },
+      screen: { raw: 'screen' },
     },
 
     colors: {
@@ -254,5 +258,11 @@ module.exports = {
       icons: ["Material Symbols Rounded"],
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    // disable dark mode for @media print
+    plugin(function({ addVariant }) {
+      addVariant('dark', '@media not print { .dark & }')
+    }),
+    require("@tailwindcss/typography")
+  ],
 };
