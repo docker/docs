@@ -1238,7 +1238,16 @@ Manuals:
         title: Older versions for Windows
       - path: /desktop/previous-versions/archive-mac/
         title: Older versions for Mac
-
+- sectiontitle: Docker DevCloud
+  section:
+    - path: /devcloud/
+      title: Overview
+    - path: /devcloud/use-devcloud/
+      title: Use Docker DevCloud
+    - path: /devcloud/switch/
+      title: Adjust and switch engines
+    - path: /devcloud/troubleshoot/
+      title: Troubleshooting and known issues
 - sectiontitle: Docker Extensions
   section:
     - path: /desktop/extensions/
