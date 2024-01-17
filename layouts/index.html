@@ -1,590 +1,283 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
   {{ partial "head.html" . }}
 </head>
 
-<body
-  class="flex h-max flex-col divide-y divide-divider-light bg-background-light text-base dark:divide-divider-dark dark:bg-background-dark dark:text-white">
+<body class="flex h-max flex-col bg-background-light text-base dark:bg-background-dark dark:text-white">
+  <div class="absolute -z-10 w-full">
+    <svg class="dark:hidden" viewBox="0 0 1616 797" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1066.69 797L0 136.789V0H1616V488.038L1066.69 797Z" fill="#EFEFF2" />
+    </svg>
+    <svg class="hidden dark:block" viewBox="0 0 1616 797" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1066.69 797L0 136.789V0H1616V488.038L1066.69 797Z" fill="#080B0E" fill-opacity="0.3" />
+    </svg>
+  </div>
   {{ partial "header.html" . }}
-  <main class="flex w-full min-h-screen flex-col gap-4 items-stretch self-center">
-    <div id="sidebar"
-      class="hidden z-10 top-16 h-full md:fixed md:w-screen md:hidden bg-gray-light-100 dark:bg-gray-dark-100">
-      {{ partial "sidebar.html" . }}
-    </div>
-    <div class="flex w-[1200px] flex-col gap-4 items-stretch self-center py-6 lg:w-full">
-      <div class="flex flex-col items-center p-6">
-        <h1 class="py-2 text-center text-3xl md:text-2xl">
-          What can we help you find?
-        </h1>
+  <main class="flex min-h-screen w-full flex-col items-stretch self-center">
+    <div class="flex w-[1200px] flex-col items-stretch gap-20 self-center py-20 lg:w-full lg:px-4">
+      <div class="bg-pattern-blue-light dark:bg-pattern-blue-dark relative overflow-hidden rounded drop-shadow">
+        <div class="flex h-full flex-col items-start justify-between gap-4 p-8">
+          <div class="flex items-center gap-6">
+            <span class="icon-svg text-violet-light dark:text-violet-dark">
+              {{ partial "icon" "play_circle" }}</span>
+            <h1 class="text-2xl">Get Docker</h1>
+          </div>
+          <p>
+            Learn how to install Docker for Mac, Windows, or Linux and explore
+            our developer tools.
+          </p>
+          <a href="/get-docker/"
+            class="mt-20 flex cursor-pointer items-center gap-2 rounded bg-blue-light p-2 px-4 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">
+            <span class="icon-svg">{{ partial "icon" "download"}}</span>
+            Get Docker
+          </a>
+        </div>
+        <div class="absolute bottom-0 right-0 origin-bottom-right md:scale-50">
+          <img class="dark:hidden" src="/assets/images/app-wf-light-1.svg" />
+          <img class="hidden dark:block" src="/assets/images/app-wf-dark-1.svg" />
+        </div>
       </div>
 
-      <div class="grid grid-cols-3 gap-4 p-6 sm:flex sm:flex-col xl:grid-cols-2">
-        {{ range .Params.grid }}
-        <div>
-          <a class="h-full" href="{{ .link }}">
-            <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
-              <div class="flex items-center gap-4">
-                <img class="hidden w-[64px] dark:block" src="{{ .image.dark }}" />
-                <img class="w-[64px] dark:hidden" src="{{ .image.light }}" />
-                <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    {{ .title }}
-                  </div>
-                </div>
-              </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                {{ .description | markdownify }}
-              </div>
-            </div>
-          </a>
-        </div>
-        {{ end }}
-      </div>
-
-      <div class="mx-6 text-white border border-blue-light dark:border-blue-dark">
-        {{ $banner := resources.Get "images/banner.webp" }}
-        <div class="bg-cover" style="background-image: url('{{ $banner.Permalink }}')">
-          <div class="grid p-12 gap-8 grid-cols-2 sm:grid-cols-1 items-center">
-            {{ $dbcLogo := resources.Get "images/build-cloud-white.svg" }}
-            <img class="w-full" src="{{ $dbcLogo.Permalink }}" />
-            <div class="flex flex-col gap-4 text-base">
-              <p>
-                Docker Build Cloud is a next-generation build service that
-                accelerates your builds using remote builders with
-                end-to-end encryption, a shared build cache for teams, and
-                native multi-platform builds. Get started today for free.
-              </p>
-              <div class="flex gap-4">
-                <a href="https://build.docker.com/"
-                  class="transition cursor-pointer duration-300 py-2 px-4 rounded bg-blue-dark hover:bg-blue-light-600 text-white">Dashboard</a>
-                <a href="/build/cloud/"
-                  class="transition cursor-pointer duration-300 py-2 px-4 rounded bg-blue-dark hover:bg-blue-light-600 text-white">Docs</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex mx-auto w-[1200px] flex-col gap-4 p-6 lg:w-full">
-      <div class="grid grid-cols-3 gap-4 sm:flex sm:flex-col xl:grid-cols-2">
-        <div class="col-start-1 col-end-3 bg-white p-6 dark:bg-gray-dark-200">
-          <div x-data="{ selected: 'explore' }" aria-role="tabpanel">
-            <div aria-role="tablist" class="space-x-2">
-              <button class="p-1" :class="selected === 'explore' &&
-          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'" @click="selected = 'explore'">
-                Explore Docker
-              </button>
-              <button class="p-1" :class="selected === 'faq' &&
-          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'" @click="selected = 'faq'">
-                Browse FAQs
-              </button>
-              <button class="p-1" :class="selected === 'support' &&
-          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'" @click="selected = 'support'">
-                Get support
-              </button>
-            </div>
-            <hr />
-            <div>
-              <div class="flex justify-items-center py-4 sm:flex-col" aria-role="tab"
-                :class="selected !== 'explore' && 'hidden'">
-                <ul class="w-full space-y-3">
-                  <li>
-                    <a class="link" href="/engine/reference/builder/">Write a Dockerfile</a>
-                  </li>
-                  <li>
-                    <a class="link" href="/network/">Manage container networking</a>
-                  </li>
-                  <li>
-                    <a class="link" href="/compose/compose-file/">Write a Docker Compose file</a>
-                  </li>
-                  <li>
-                    <a class="link" href="/storage/">Work with volumes and mounts</a>
-                  </li>
-                  <li>
-                    <a class="link" href="/get-started/04_sharing_app/">Share images on Docker Hub</a>
-                  </li>
-                </ul>
-                <ul class="w-full space-y-3">
-                  <li>
-                    <a class="link" href="/config/daemon/">Configure the Docker daemon</a>
-                  </li>
-                  <li>
-                    <a class="link" href="/get-started/02_our_app/">Build and run an image</a>
-                  </li>
-                  <li>
-                    <a class="link" href="/config/labels-custom-metadata/">Manage Docker objects</a>
-                  </li>
-                  <li>
-                    <a class="link" href="/build/building/multi-stage/">Multi-stage builds</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="flex justify-items-center py-4 sm:flex-col" aria-role="tab"
-                :class="selected !== 'faq' && 'hidden'">
-                <div class="w-full">
-                  <h2 class="text-lg mb-2">Common FAQs</h6>
-                    <ul class="space-y-3">
-                      <li>
-                        <a class="link" href="https://github.com/docker/awesome-compose" target="_blank"
-                          rel="noopener">Where can I find example Compose files?</a>
-                      </li>
-                      <li>
-                        <a class="link"
-                          href="/desktop/faqs/general/#how-do-i-connect-from-a-container-to-a-service-on-the-host">How
-                          do I connect from a container to a service?</a>
-                      </li>
-                      <li>
-                        <a class="link" href="/get-started/04_sharing_app/">How do I share images on Docker Hub?</a>
-                      </li>
-                    </ul>
-                </div>
-                <div class="w-full">
-                  <h2 class="text-lg mb-2">Products</h6>
-                    <ul class="space-y-3">
-                      <li>
-                        <a class="link" href="/desktop/faqs/general/">Docker Desktop</a>
-                      </li>
-                      <li>
-                        <a href="/desktop/faqs/macfaqs/" class="link">Docker Desktop for Mac</a>
-                      </li>
-                      <li>
-                        <a class="link" href="/desktop/faqs/windowsfaqs/">Docker Desktop for Windows</a>
-                      </li>
-                      <li>
-                        <a class="link" href="/desktop/faqs/linuxfaqs/">Docker Desktop for Linux</a>
-                      </li>
-                      <li>
-                        <a class="link" href="/faq/security/single-sign-on/faqs/">Docker Single Sign-on</a>
-                      </li>
-                    </ul>
-                </div>
-              </div>
-              <div class="flex" aria-role="tab" :class="selected !== 'support' && 'hidden'">
-                <div class="w-full">
-                  <ul class="py-4 space-y-3">
-                    <li>
-                      <a class="link" href="/support/">Get support</a>
-                    </li>
-                    <li>
-                      <a class="link" href="https://dockercommunity.slack.com/" target="_blank" rel="noopener">Docker
-                        community Slack</a>
-                    </li>
-                    <li>
-                      <a class="link" href="https://docker.com/company/contact/" target="_blank" rel="noopener">Contact
-                        Docker</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="bg-white p-6 space-y-3 dark:bg-gray-dark-200">
-          <h2 class="text-xl mb-2">Popular videos</h2>
-          <p>Watch the most popular videos from DockerCon.</p>
-          <a class="link flex gap-4 items-center" href="https://youtu.be/gAGEar5HQoU">
-            <img src="/assets/images/video.svg" width="65" height="44" />
-            <p>How to get started with Docker</p>
-          </a>
-          <a class="link flex gap-4 items-center" href="https://youtu.be/xmLVNpyJ530?t=30">
-            <img src="/assets/images/video.svg" width="65" height="44" />
-            <p>How to to build and test your Docker images in the Cloud</p>
-          </a>
-          <a class="link flex gap-4 items-center" href="https://youtu.be/QeQ2MH5f_BE?t=31">
-            <img src="/assets/images/video.svg" width="65" height="44" />
-            <p>Simplify all the things with Docker Compose</p>
-          </a>
-        </div>
-      </div>
-      <div class="bg-white p-6 dark:bg-gray-dark-200">
-        <div x-data="{ selected: 'desktop' }" aria-role="tabpanel">
-          <div aria-role="tablist" class="space-x-2">
-            <button class="p-1" :class="selected === 'desktop' &&
-          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'" @click="selected = 'desktop'">
-              Desktop
-            </button>
-            <button class="p-1" :class="selected === 'engine' &&
-          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'" @click="selected = 'engine'">
-              Engine
-            </button>
-            <button class="p-1" :class="selected === 'build' &&
-          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'" @click="selected = 'build'">
-              Build
-            </button>
-            <button class="p-1" :class="selected === 'compose' &&
-          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'" @click="selected = 'compose'">
-              Compose
-            </button>
-            <button class="p-1" :class="selected === 'hub' &&
-          'border-blue-light-500 border-b-4 dark:border-b-blue-dark-600'" @click="selected = 'hub'">
-              Hub
-            </button>
-          </div>
-          <hr />
+      <div>
+        <div class="grid grid-cols-3 gap-4 sm:flex sm:flex-col md:grid-cols-1">
           <div>
-            <div x-data="{os: 'windows'}" class="flex gap-6 py-8 md:flex-col" aria-role="tab"
-              :class="selected !== 'desktop' && 'hidden'">
-              <div class="w-1/4 md:w-full flex flex-col gap-4 self-center items-center">
-                <img class="h-[130px]" src="/assets/images/laptop.svg">
-                <h2 class="text-xl">Docker Desktop</h2>
-                <select class="p-2 rounded-sm bg-gray-light-100 dark:bg-gray-dark-100"
-                  x-on:change="os = $event.target.value">
-                  <option value="windows">Windows</option>
-                  <option value="mac">Mac</option>
-                  <option value="linux">Linux</option>
-                </select>
+            <a class="h-full" href="/get-started/overview/">
+              <div
+                class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
+                <div class="flex items-center gap-4">
+                  <span class="icon-svg text-violet-light dark:text-violet-dark">
+                    {{ partial "icon" "developer_guide" }}
+                  </span>
+                  <div>
+                    <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
+                      Guides
+                    </div>
+                  </div>
+                </div>
+                <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
+                  Learn the basics and benefits of containerizing your
+                  application.
+                </div>
               </div>
-              <div class="w-2/4 md:w-full flex flex-col gap-4">
-                <h2 class="text-xl">Getting started with Docker Desktop</h2>
-                <p>Take a walkthrough that covers writing your first app, data storage, networking, and swarms, and ends
-                  with your app running on production servers in the cloud.</p>
-                <a class="link" href="/get-started/">Learn Docker</a>
+            </a>
+          </div>
+
+          <div>
+            <a class="h-full" href="/manuals/">
+              <div
+                class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
+                <div class="flex items-center gap-4">
+                  <span class="icon-svg text-violet-light dark:text-violet-dark">
+                    {{ partial "icon" "description" }}
+                  </span>
+                  <div>
+                    <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
+                      Manuals
+                    </div>
+                  </div>
+                </div>
+                <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
+                  Learn how to install, set up, configure, and use Docker
+                  products.
+                </div>
               </div>
-              <div class="w-1/4 md:w-full ">
-                <h2 class="text-xl">Popular articles</h2>
-                <ul class="space-y-3" x-show="os === 'windows'">
-                  <li><a class="link" href="/desktop/windows/wsl/">Docker Desktop WSL 2 backend</a></li>
-                  <li><a class="link" href="/desktop/use-desktop/">Explore Docker Desktop</a></li>
-                  <li><a class="link" href="/desktop/vm-vdi/">VM and VDI support</a></li>
-                  <li><a class="link" href="/desktop/windows/release-notes/">Release notes</a></li>
-                  <li><a class="link" href="/desktop/containerd/">containerd image store</a></li>
-                </ul>
-                <ul class="space-y-3" x-show="os === 'mac'">
-                  <li><a class="link" href="/desktop/use-desktop/">Explore Docker Desktop</a></li>
-                  <li><a class="link" href="/desktop/install/mac-install/">Install Docker Desktop on Mac</a></li>
-                  <li><a class="link" href="/desktop/release-notes/">Release notes</a></li>
-                  <li><a class="link" href="/desktop/mac/permission-requirements/">Understand permission requirements</a></li>
-                </ul>
-                <ul class="space-y-3" x-show="os === 'linux'">
-                  <li><a class="link" href="/desktop/use-desktop/">Explore Docker Desktop</a></li>
-                <li><a class="link" href="/desktop/install/linux-install/">Install Docker Desktop on Linux</a></li>
-                <li><a class="link" href="/desktop/release-notes/">Release notes</a></li>
-              </ul>
+            </a>
+          </div>
+
+          <div>
+            <a class="h-full" href="/reference/">
+              <div
+                class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
+                <div class="flex items-center gap-4">
+                  <span class="icon-svg text-violet-light dark:text-violet-dark">
+                    {{ partial "icon" "terminal" }}
+                  </span>
+                  <div>
+                    <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
+                      Reference
+                    </div>
+                  </div>
+                </div>
+                <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
+                  Browse the CLI and API documentation.
+                </div>
               </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="z-10 grid grid-cols-2 gap-20 md:grid-cols-1">
+        <div class="bg-pattern-verde-light dark:bg-pattern-verde-dark relative rounded p-6 drop-shadow">
+          <div class="flex h-full flex-col items-start justify-between gap-12">
+            <div class="flex flex-col gap-4">
+              <h2 class="font-medium">Getting started</h2>
+              <p class="text-xl">
+                Learn Docker basics and the benefits of containerizing your
+                applications.
+              </p>
             </div>
-            <div class="flex justify-items-center gap-6 py-8 sm:flex-col" aria-role="tab"
-              :class="selected !== 'engine' && 'hidden'">
-              <div class="w-1/4 md:w-full flex flex-col gap-4 self-center items-center">
-                <img class="h-[130px]" src="/assets/images/engine.svg">
-                <h2 class="text-xl">Docker Engine</h2>
-              </div>
-              <div class="w-2/4 md:w-full flex flex-col gap-4">
-                <h2 class="text-xl">Getting started with Docker Engine</h2>
-                <p>Take a walkthrough that covers writing your first app, data storage, networking, and swarms, and ends
-                  with your app running on production servers in the cloud.</p>
-                <a class="link" href="/get-started/">Learn Docker</a>
-              </div>
-              <div class="w-1/4 md:w-full ">
-                <h2 class="text-xl">Popular articles</h2>
-                <ul class="space-y-3">
-                  <li><a class="link" href="/engine/install/ubuntu/">Install Docker Engine on
-                      Ubuntu</a></li>
-                  <li><a class="link" href="/engine/reference/commandline/run/">Run a command in
-                      a container</a></li>
-                  <li><a class="link" href="/engine/reference/builder/">Dockerfile reference</a>
-                  </li>
-                  <li><a class="link" href="/engine/reference/commandline/dockerd/#description">Docker daemon
-                      reference</a></li>
-                  <li><a class="link" href="/engine/reference/commandline/build/">Docker build
-                      reference</a></li>
-                </ul>
-              </div>
+            <div>
+              <a href="/guides/get-started/"
+                class="flex cursor-pointer items-center gap-2 rounded bg-blue-light p-2 px-4 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">
+                Get started
+              </a>
             </div>
-            <div class="flex justify-items-center gap-6 py-8 sm:flex-col" aria-role="tab"
-              :class="selected !== 'build' && 'hidden'">
-              <div class="w-1/4 md:w-full flex flex-col gap-4 self-center items-center">
-                <img class="h-[130px]" src="/assets/images/whale-car.png">
-                <h2 class="text-xl">Docker Build</h2>
+          </div>
+          <div class="absolute bottom-0 right-0 origin-bottom-right sm:scale-75">
+            <img class="dark:hidden" src="/assets/images/app-wf-light-2.svg" />
+            <img class="hidden dark:block" src="/assets/images/app-wf-dark-2.svg" />
+          </div>
+        </div>
+        <div class="rounded-[6px] bg-gradient-to-br from-blue-light-400 to-magenta-light-400 dark:from-blue-dark-400 dark:to-magenta-dark-400 p-[2px] drop-shadow">
+          <div class="bg-pattern-purple-light dark:bg-pattern-purple-dark rounded p-6">
+            <div class="flex flex-col gap-12">
+              <div class="flex flex-col gap-4">
+                <h2 class="font-medium">Featured</h2>
+                <p class="text-xl">
+                  Accelerate your builds with cloud capabilities.
+                </p>
+                <p>
+                  End-to-end encryption, a shared build cache for teams, and
+                  native multi-platform builds. Get started today for free.
+                </p>
               </div>
-              <div class="w-2/4 md:w-full flex flex-col gap-4">
-                <h2 class="text-xl">Getting started with Docker Build</h2>
-                <p>Take a walkthrough that covers writing your first app, data storage, networking, and swarms, and ends
-                  with your app running on production servers in the cloud.</p>
-                <a class="link" href="/get-started/">Learn Docker</a>
-              </div>
-              <div class="w-1/4 md:w-full ">
-                <h2 class="text-xl">Popular articles</h2>
-                <ul class="space-y-3">
-                  <li><a class="link" href="/build/">Overview of Docker Build</a></li>
-                  <li><a class="link" href="/engine/reference/builder/">Dockerfile reference</a>
-                  </li>
-                  <li><a class="link" href="/build/building/packaging/">Packaging your
-                      software</a></li>
-                  <li><a class="link" href="/build/building/multi-stage/">Multi-stage builds</a>
-                  </li>
-                  <li><a class="link" href="/build/building/multi-platform/">Multi-platform
-                      images</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="flex justify-items-center gap-6 py-8 sm:flex-col" aria-role="tab"
-              :class="selected !== 'compose' && 'hidden'">
-              <div class="w-1/4 md:w-full flex flex-col gap-4 self-center items-center">
-                <img class="h-[130px]" src="/assets/images/Compose.png">
-                <h2 class="text-xl">Docker Compose</h2>
-              </div>
-              <div class="w-2/4 md:w-full flex flex-col gap-4">
-                <h2 class="text-xl">Getting started with Docker Compose</h2>
-                <p>Take a walkthrough that covers writing your first app, data storage, networking, and swarms, and ends
-                  with your app running on production servers in the cloud.</p>
-                <a class="link" href="/get-started/">Learn Docker</a>
-              </div>
-              <div class="w-1/4 md:w-full ">
-                <h2 class="text-xl">Popular articles</h2>
-                <ul class="space-y-3">
-                  <li><a class="link" href="/compose/install/">Install Docker Compose</a></li>
-                  <li><a class="link" href="/compose/gettingstarted/">Getting started with Docker
-                      Compose</a></li>
-                  <li><a class="link" href="/compose/environment-variables/">Environment
-                      variables in Compose</a>
-                  </li>
-                  <li><a class="link" href="/compose/networking/">Networking in Compose</a></li>
-                  <li><a class="link" href="/compose/file-watch/">Use Compose Watch</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="flex justify-items-center gap-6 py-8 sm:flex-col" aria-role="tab"
-              :class="selected !== 'hub' && 'hidden'">
-              <div class="w-1/4 md:w-full flex flex-col gap-4 self-center items-center">
-                <img class="h-[130px]" src="/assets/images/hub.svg">
-                <h2 class="text-xl">Docker Hub</h2>
-              </div>
-              <div class="w-2/4 md:w-full flex flex-col gap-4">
-                <h2 class="text-xl">Getting started with Docker Hub</h2>
-                <p>Take a walkthrough that covers writing your first app, data storage, networking, and swarms, and ends
-                  with your app running on production servers in the cloud.</p>
-                <a class="link" href="/get-started/">Learn Docker</a>
-              </div>
-              <div class="w-1/4 md:w-full ">
-                <h2 class="text-xl">Popular articles</h2>
-                <ul class="space-y-3">
-                  <li><a class="link" href="/docker-hub/official_images/">Docker Hub official
-                      images</a></li>
-                  <li><a class="link" href="/docker-hub/repos/">Create Docker Hub
-                      repositories</a></li>
-                  <li><a class="link" href="/docker-hub/builds/">Set up automated builds</a>
-                  </li>
-                  <li><a class="link" href="/docker-hub/access-tokens/">Manage access tokens</a>
-                  </li>
-                  <li><a class="link" href="/docker-hub/webhooks/">Docker Hub webhooks</a></li>
-                </ul>
+              <div class="grid grid-cols-3 gap-4 justify-self-end sm:grid-cols-2">
+                <a href="https://build.docker.com/"
+                  class="cursor-pointer rounded bg-blue-light px-4 py-2 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">Dashboard</a>
+                <a href="/build/cloud/"
+                  class="cursor-pointer rounded bg-blue-light px-4 py-2 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">Docs</a>
+                <div class="ml-auto sm:col-start-2">
+                  {{ $dbcLogoWhite := resources.Get "images/build-cloud-white.svg" }}
+                  {{ $dbcLogoLight := resources.Get "images/build-cloud-light.svg" }}
+                  <img class="hidden h-full w-full dark:block" src="{{ $dbcLogoWhite.Permalink }}" />
+                  <img class="h-full w-full dark:hidden" src="{{ $dbcLogoLight.Permalink }}" />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="flex gap-4 mx-auto w-[1200px] lg:w-full p-6 sm:flex-col">
-      <div class="w-full">
-        <h2 class="text-3xl">Best practices</h2>
-        <ul class="w-full space-y-3">
-          <li>
-            <a class="link" href="/develop/develop-images/dockerfile_best-practices/">Best
-              practices for writing a Dockerfile</a>
-          </li>
-          <li>
-            <a class="link" href="/develop/develop-images/dockerfile_best-practices/">Best
-              practices for writing a Docker Compose file</a>
-          </li>
-          <li>
-            <a class="link" href="/develop/dev-best-practices/">Docker development best
-              practices</a>
-          </li>
-          <li>
-            <a class="link" href="/engine/security/">Docker security best practices</a>
-          </li>
-        </ul>
-      </div>
-      <div class="w-full">
-        <h2 class="text-3xl">Develop with Docker</h2>
-        <ul class="w-full space-y-3">
-          <li>
-            <a class="link" href="/language/nodejs/">Containerize a Node.js app using Docker</a>
-          </li>
-          <li>
-            <a class="link" href="/language/python/">Containerize a Python app using Docker</a>
-          </li>
-          <li>
-            <a class="link" href="/language/java/">Containerize a Java app using Docker</a>
-          </li>
-          <li>
-            <a class="link" href="/language/golang/">Containerize a Go app using Docker</a>
-          </li>
-          <li>
-            <a class="link" href="/samples/">View more languages and frameworks in Docker
-              samples</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="flex mx-auto w-[1200px] flex-col p-6 lg:w-full">
-      <h2 class="text-3xl">Play with Docker</h2>
-      <div class="grid grid-cols-3 gap-4 p-6 sm:flex sm:flex-col xl:grid-cols-2">
-        <div>
-          <a class="h-full" href="/get-started/">
+
+      <div>
+        <h2 class="mb-4 text-xl">Browse by section</h2>
+        <div class="grid grid-cols-4 gap-4 sm:flex sm:flex-col lg:grid-cols-2 xl:grid-cols-3">
+          {{ range .Params.grid }}
+          <div>
             <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
+              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm dark:border-gray-dark-400 dark:bg-gray-dark-200">
               <div class="flex items-center gap-4">
+                <span class="icon-svg text-gray-light dark:text-gray-dark">{{ partial "icon" .icon }}</span>
                 <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    Tutorial
-                  </div>
+                  <div class="text-xl">{{ .title }}</div>
                 </div>
               </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                Self-paced tutorials to increase your Docker knowledge.
-              </div>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a class="h-full" href="https://labs.play-with-docker.com/">
-            <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
-              <div class="flex items-center gap-4">
-                <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    Lab environment
+              <div class="flex h-full flex-col justify-between gap-4">
+                <p>{{ .description | markdownify }}</p>
+                <nav class="flex flex-col gap-2">
+                  {{ range .links }}
+                  <div>
+                    <span class="icon-svg text-gray-light dark:text-gray-dark">{{ partial "icon" "arrow_right" }}</span>
+                    <a class="link" href="{{ .url }}">{{ .text }}</a>
                   </div>
-                </div>
-              </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                Complete a workshop without installing anything using this Docker playground.
+                  {{ end }}
+                </nav>
               </div>
             </div>
-          </a>
-        </div>
-        <div>
-          <a class="h-full" href="/get-started/resources/">
-            <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
-              <div class="flex items-center gap-4">
-                <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    Community training
-                  </div>
-                </div>
-              </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                Free and paid learning materials from Docker captains.
-              </div>
-            </div>
-          </a>
+          </div>
+          {{ end }}
         </div>
       </div>
     </div>
-    <div class="flex mx-auto w-[1200px] flex-col p-6 lg:w-full">
-      <h2 class="text-3xl">Community resources</h2>
-      <div class="grid grid-cols-3 gap-4 p-6 sm:flex sm:flex-col xl:grid-cols-2">
-        <div>
-          <a class="h-full" href="https://www.meetup.com/pro/docker/">
-            <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
-              <div class="flex items-center gap-4">
-                <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    Find a local meetup
-                  </div>
-                </div>
-              </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                Attend one of the 200+ Docker Meetups around the globe.
-              </div>
-            </div>
-          </a>
+
+    <div
+      class="relative flex h-[334px] items-center justify-center overflow-hidden bg-gray-light-100 dark:bg-gray-dark-200 sm:h-full sm:py-8">
+      <div class="w-[1200px] px-4">
+        <div class="flex max-w-[66%] flex-col gap-8 sm:max-w-full">
+          <h2 class="text-2xl">Community resources</h2>
+          <p>
+            Find fellow Docker enthusiasts, engage in insightful discussions,
+            share knowledge, and collaborate on projects. Our communities
+            offer a rich online experience for developers to create valuable
+            connections that challenge and inspire!
+          </p>
+          <div class="flex gap-4 sm:flex-col">
+            <a href="https://forums.docker.com/"
+              class="cursor-pointer rounded bg-white px-4 py-2 text-blue-light hover:bg-gray-light-100 dark:bg-gray-dark-400 dark:text-white dark:hover:bg-gray-dark-500">
+              Visit Docker Forum
+            </a>
+            <a href="https://dockr.ly/comm-slack"
+              class="cursor-pointer rounded bg-white px-4 py-2 text-blue-light hover:bg-gray-light-100 dark:bg-gray-dark-400 dark:text-white dark:hover:bg-gray-dark-500">
+              Join Docker Slack
+            </a>
+            <a href="https://www.docker.com/community/captains/"
+              class="cursor-pointer rounded bg-white px-4 py-2 text-blue-light hover:bg-gray-light-100 dark:bg-gray-dark-400 dark:text-white dark:hover:bg-gray-dark-500">
+              Find your Docker Captain
+            </a>
+          </div>
         </div>
-        <div>
-          <a class="h-full" href="https://www.docker.com/events/">
-            <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
-              <div class="flex items-center gap-4">
-                <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    Upcoming events
-                  </div>
-                </div>
-              </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                Learn from experts and get to know Docker.
-              </div>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a class="h-full" href="https://www.meetup.com/pro/docker/">
-            <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
-              <div class="flex items-center gap-4">
-                <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    Tune in monthly
-                  </div>
-                </div>
-              </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                Join the Virtual Docker Meetup Group and online meetups every month.
-              </div>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a class="h-full" href="https://www.docker.com/newsletter-subscription">
-            <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
-              <div class="flex items-center gap-4">
-                <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    Community news
-                  </div>
-                </div>
-              </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                The Docker Weekly is an email newsletter with the latest content on DOcker and the event agenda for
-                the
-                upcoming weeks.
-              </div>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a class="h-full" href="https://www.docker.com/community/captains/">
-            <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
-              <div class="flex items-center gap-4">
-                <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    Meet the captains
-                  </div>
-                </div>
-              </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                Select members of the community that are both experts in their field and are passionate about sharing
-                their Docker knowledge with others.
-              </div>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a class="h-full" href="/get-started/resources/">
-            <div
-              class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
-              <div class="flex items-center gap-4">
-                <div>
-                  <div class="text-xl leading-snug text-gray-light-800 dark:text-white">
-                    Educational resources
-                  </div>
-                </div>
-              </div>
-              <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                Expand your understanding of Docker with these additional resources.
-              </div>
-            </div>
-          </a>
-        </div>
+      </div>
+      <div class="absolute right-0 top-0 sm:hidden">
+        <svg class="dark:hidden" width="555" height="334" viewBox="0 0 555 334" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <g style="mix-blend-mode: multiply">
+            <path d="M0 249.997L283.445 0H555V334H89.8843L0 249.997Z" fill="url(#paint0_linear_129_29139)" />
+          </g>
+          <g style="mix-blend-mode: multiply">
+            <path d="M80 84.003L363.445 334H554.5V0H169.884L80 84.003Z" fill="url(#paint1_linear_129_29139)" />
+          </g>
+          <g style="mix-blend-mode: multiply">
+            <path d="M279 334L555 104V182.33V254.174V334H279Z" fill="url(#paint2_linear_129_29139)" />
+          </g>
+          <defs>
+            <linearGradient id="paint0_linear_129_29139" x1="18.5" y1="61.5" x2="502" y2="240.5"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#C0E0FA" />
+              <stop offset="1" stop-color="#EFEFF2" />
+            </linearGradient>
+            <linearGradient id="paint1_linear_129_29139" x1="98.5" y1="272.5" x2="582" y2="93.5"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#F7ECFF" />
+              <stop offset="1" stop-color="#EFEFF2" />
+            </linearGradient>
+            <linearGradient id="paint2_linear_129_29139" x1="282.381" y1="-33.7561" x2="1315.56" y2="352.19"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#C6EAE1" />
+              <stop offset="1" stop-color="#EFEFF2" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <svg class="hidden dark:block" width="555" height="334" viewBox="0 0 555 334" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <g style="mix-blend-mode: multiply">
+            <path d="M0 249.997L283.445 0H555V334H89.8843L0 249.997Z" fill="url(#paint0_linear_129_29443)" />
+          </g>
+          <g style="mix-blend-mode: multiply">
+            <path d="M80 84.003L363.445 334H554.5V0H169.884L80 84.003Z" fill="url(#paint1_linear_129_29443)" />
+          </g>
+          <g style="mix-blend-mode: multiply">
+            <path d="M279 334L555 104V182.33V254.174V334H279Z" fill="url(#paint2_linear_129_29443)" />
+          </g>
+          <defs>
+            <linearGradient id="paint0_linear_129_29443" x1="18.5" y1="61.5" x2="502" y2="240.5"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#C0E0FA" />
+              <stop offset="1" stop-color="#EFEFF2" />
+            </linearGradient>
+            <linearGradient id="paint1_linear_129_29443" x1="98.5" y1="272.5" x2="582" y2="93.5"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#F7ECFF" />
+              <stop offset="1" stop-color="#EFEFF2" />
+            </linearGradient>
+            <linearGradient id="paint2_linear_129_29443" x1="282.381" y1="-33.7561" x2="1315.56" y2="352.19"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#C6EAE1" />
+              <stop offset="1" stop-color="#EFEFF2" />
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
     </div>
   </main>
