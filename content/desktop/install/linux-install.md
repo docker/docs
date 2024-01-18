@@ -13,7 +13,7 @@ aliases:
 
 This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
 
->Important
+> **Important**
 >
 >Docker Desktop on Linux runs a Virtual Machine (VM) which creates and uses a custom docker context, `desktop-linux`, on startup. 
 >
@@ -41,7 +41,7 @@ An experimental package is available for [Arch](archlinux.md)-based distribution
 
 Docker supports Docker Desktop on the current LTS release of the aforementioned distributions and the most recent version. As new versions are made available, Docker stops supporting the oldest version and supports the newest version.
 
-## System requirements
+## General system requirements
 
 To install Docker Desktop successfully, your Linux host must meet the following general requirements:
 
@@ -59,7 +59,7 @@ Docker Desktop for Linux runs a Virtual Machine (VM). For more information on wh
 
 > **Note**
 >
-> Docker does not provide support for running Docker Desktop in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
+> Docker does not provide support for running Docker Desktop for Linux in nested virtualization scenarios. We recommend that you run Docker Desktop for Linux natively on supported distributions.
 
 ### KVM virtualization support
 
@@ -122,7 +122,9 @@ Sign out and sign back in so that your group membership is re-evaluated.
 > employees OR more than $10 million USD in annual revenue) requires a paid
 > subscription.
 
-Make sure you meet the system requirements outlined earlier and follow the distro-specific prerequisites.
+> **Important**
+>
+> Make sure you meet the system requirements outlined earlier and follow the distro-specific prerequisites.
 { .important } 
 
 1. Download the correct package for your Linux distribution and install it with the corresponding package manager. 
@@ -146,7 +148,7 @@ Make sure you meet the system requirements outlined earlier and follow the distr
 
 ## Where to go next
 
-- [Get started with Docker](../../get-started/index.md) provides a general Docker tutorial.
+- [Get started with Docker](../../guides/get-started/_index.md).
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, how to run and submit diagnostics, and submit issues.
 - [FAQs](../faqs/general.md) provide answers to frequently asked questions.

@@ -8,9 +8,9 @@ keywords: set up, enhanced container isolation, rootless, security
 >
 > Enhanced Container Isolation is available to Docker Business customers only.
 
-Enhanced Container Isolation hardens container isolation using the [Sysbox
+Docker implements Enhanced Container Isolation by using the [Sysbox
 container runtime](https://github.com/nestybox/sysbox). Sysbox is a fork of the
-standard OCI runc runtime that was modified to enhance container isolation and
+standard OCI runc runtime that was modified to enhance standard container isolation and
 workloads. For more details see [Under the hood](#under-the-hood).
 
 Starting with version 4.13, Docker Desktop includes a customized version of
@@ -74,8 +74,8 @@ Desktop in organizations with stringent security requirements.
 ### Enhanced Container Isolation vs Rootless Docker
 
 [Rootless Docker](/engine/security/rootless/) allows the Docker Engine, and by
-extension the containers, to run without root privileges natively a Linux host. This
-allows non-root users install and run Docker natively on Linux.
+extension the containers, to run without root privileges natively on a Linux host. This
+allows non-root users to install and run Docker natively on Linux.
 
 Rootless Docker is not supported within Docker Desktop. While it's a valuable
 feature when running Docker natively on Linux, its value within Docker Desktop

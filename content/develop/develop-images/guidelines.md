@@ -117,3 +117,66 @@ frequently changed where possible.
 
 For more information about the Docker build cache and how to optimize your
 builds, see [cache management](../../build/cache/_index.md).
+
+## Pin base image versions
+
+Image tags are mutable, meaning a publisher can update a tag to point to a new
+image. This is a useful because it lets publishers update tags to point to
+newer versions of an image. And as an image consumer, it means you
+automatically get the new version when you re-build your image.
+
+For example, if you specify `FROM alpine:3.19` in your Dockerfile, `3.19`
+resolves to the latest patch version for `3.19`.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine:3.19
+```
+
+At one point in time, the `3.19` tag might point to version 3.19.1 of the
+image. If you rebuild the image 3 months later, the same tag might point to a
+different version, such as 3.19.4. This publishing workflow is best practice,
+and most publishers use this tagging strategy, but it isn't enforced.
+
+The downside with this is that you're not guaranteed to get the same for every
+build. This could result in breaking changes, and it means you also don't have
+an audit trail of the exact image versions that you're using.
+
+To fully secure your supply chain integrity, you can pin the image version to a
+specific digest. By pinning your images to a digest, you're guaranteed to
+always use the same image version, even if a publisher replaces the tag with a
+new image. For example, the following Dockerfile pins the Alpine image to the
+same tag as earlier, `3.19`, but this time with a digest reference as well.
+
+```dockerfile
+# syntax=docker/dockerfile:1
+FROM alpine:3.19@sha256:13b7e62e8df80264dbb747995705a986aa530415763a6c58f84a3ca8af9a5bcd
+```
+
+With this Dockerfile, even if the publisher updates the `3.19` tag, your builds
+would still use the pinned image version:
+`13b7e62e8df80264dbb747995705a986aa530415763a6c58f84a3ca8af9a5bcd`.
+
+While this helps you avoid unexpected changes, it's also more tedious to have
+to look up and include the image digest for base image versions manually each
+time you want to update it. And you're opting out of automated security fixes,
+which is likely something you want to get.
+
+Docker Scout has a built-in [**Outdated base images**
+policy](../../scout/policy/_index.md#outdated-base-images) that checks for
+whether the base image version you're using is in fact the latest version. This
+policy also checks if pinned digests in your Dockerfile correspond to the
+correct version. If a publisher updates an image that you've pinned, the policy
+evaluation returns a non-compliant status, indicating that you should update
+your image.
+
+Docker Scout also supports an automated remediation workflow for keeping your
+base images up-to-date. When a new image digest is available, Docker Scout can
+automatically raise a pull request on your repository to update your
+Dockerfiles to use the latest version. This is better than using a tag that
+changes the version automatically, because you're in control and you have an
+audit trail of when and how the change occurred.
+
+For more information about automatically updating your base images with Docker
+Scout, see
+[Remediation](../../scout/policy/remediation.md#automatic-base-image-updates)

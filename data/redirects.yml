@@ -586,6 +586,8 @@
   - /go/scout-policy/
 "/scout/policy/configure/":
   - /go/scout-configure-policy/
+"/develop/develop-images/guidelines/#pin-base-image-versions":
+  - /go/base-image-pinning/
 # integrations
 "/scout/integrations/ci/gha/":
   - "/go/scout-gha/"
@@ -609,6 +611,8 @@
   - "/go/scout-acr/"
 "/scout/integrations/code-quality/sonarqube/":
   - "/go/scout-sq/"
+"/scout/integrations/source-code-management/github/":
+  - "/go/scout-github/"
 
 # Build links
 "/desktop/use-desktop/builds/":
@@ -619,6 +623,8 @@
   - /go/builders/selected/
 "https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
   - /go/build-eap/
+"https://build.docker.com/":
+  - /go/build-ga/
 "/build/building/multi-platform/":
   - /go/build-multi-platform/
 "/build/cache/backends/":
@@ -629,6 +635,10 @@
   - /build/customize/bake/file-definition/
 "/build/ci/github-actions/attestations/":
   - /go/build-attestations-gha/
+"/build/attestations/":
+  - /go/attestations/
+"/build/attestations/slsa-provenance/":
+  - /go/provenance/
 
 # CLI backlinks
 "/config/filter/":

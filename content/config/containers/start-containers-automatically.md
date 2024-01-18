@@ -68,6 +68,73 @@ Keep the following in mind when using restart policies:
   Swarm services, see
   [flags related to service restart](../../engine/reference/commandline/service_create.md).
 
+### Restarting foreground containers
+
+When you run a container in the foreground, stopping a container causes the
+attached CLI to exit as well, regardless of the restart policy of the
+container. This behavior is illustrated in the following example.
+
+1. Create a Dockerfile that prints the numbers 1 to 5 and then exits.
+
+   ```dockerfile
+   FROM busybox:latest
+   COPY --chmod=755 <<"EOF" /start.sh
+   echo "Starting..."
+   for i in $(seq 1 5); do
+     echo "$i"
+     sleep 1
+   done
+   echo "Exiting..."
+   exit 1
+   EOF
+   ENTRYPOINT /start.sh
+   ```
+
+2. Build an image from the Dockerfile.
+
+   ```console
+   $ docker build -t startstop .
+   ```
+
+3. Run a container from the image, specifying `always` for its restart policy.
+
+   The container prints the numbers 1..5 to stdout, and then exits. This causes
+   the attached CLI to exit as well.
+
+   ```console
+   $ docker run --restart always startstop
+   Starting...
+   1
+   2
+   3
+   4
+   5
+   Exiting...
+   $
+   ```
+
+4. Running `docker ps` shows that is still running or restarting, thanks to the
+   restart policy. The CLI session has already exited, however. It doesn't
+   survive the initial container exit.
+
+   ```console
+   $ docker ps
+   CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS     NAMES
+   081991b35afe   startstop   "/bin/sh -c /start.sh"   9 seconds ago   Up 4 seconds             gallant_easley
+   ```
+
+5. You can re-attach your terminal to the container between restarts, using the
+   `docker container attach` command. It's detached again the next time the
+   container exits.
+
+   ```console
+   $ docker container attach 081991b35afe
+   4
+   5
+   Exiting...
+   $
+   ```
+
 ## Use a process manager
 
 If restart policies don't suit your needs, such as when processes outside

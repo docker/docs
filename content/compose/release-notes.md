@@ -11,6 +11,47 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.1
+{{< release-date date="2024-01-18" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0-rc3
+- Dependencies upgrade: bump docker to 25.0.0-rc3
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.1
+- Dependencies upgrade: bump containerd to 1.7.12
+
+### Bug fixes and enhancements
+Reworked the display of container status during `up`
+Fixed the engine version required to use `healthcheck.start_interval`
+Removed `watch` subcommand from the `alpha` command
+Fixed a bug when handling received signals
+
+## 2.24.0
+{{< release-date date="2024-01-11" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0-beta.3
+- Dependencies upgrade: bump compose-go to 2.0.0-beta.3
+- Dependencies upgrade: bump golang to 1.21.6 
+
+### Bug fixes and enhancements
+- Introduced `docker compose attach` to attach local standard input, output, and error streams to a service's running container.
+- Introduced `docker compose stats` to display a live stream of container(s) resource usage statistics.
+- Introduced `docker compose ps --orphans` to include/exclude services not declared.
+- Introduced `docker compose logs --index` to select a replica container. 
+- Introduced `docker compose build --with-dependencies` to also build dependencies. 
+- Added source policies for build.
+- Included disabled services for shell completion.
+- Restored `Project` in ps JSON output.
+- Added OCI 1.0 fallback support for AWS ECR.
+- Build now does not require environment to be resolved.
+- Compose now sends out a cancel event on SIGINT/SIGTERM signal for `compose up`.
+- Fixed log by exposing services ports when `--verbose`.
+- Fixed inlined and environment-defined configs to be mounted under /\<id\> until an explicit target is set.
+- Fixed combination of `--pull always --no-build`.
+- Fixed race condition in log printer.
+- Fixed `docker compose up` teardown when command context is cancelled.
+
 ## 2.23.3
 {{< release-date date="2023-11-22" >}}
 

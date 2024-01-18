@@ -32,7 +32,7 @@ long: |-
     
     * [.dockerignore](../../../engine/reference/builder.md#dockerignore-file)
     * [Dockerfile](../../../engine/reference/builder.md)
-    * [compose.yaml](../../../compose/compose-file/03-compose-file.md)
+    * [compose.yaml](../../../compose/compose-application-model.md)
 
 usage: docker init [OPTIONS]
 pname: docker

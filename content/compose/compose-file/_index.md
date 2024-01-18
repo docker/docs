@@ -8,18 +8,6 @@ title: Overview
 toc_max: 4
 toc_min: 1
 grid:
-- title: Status of the Specification
-  description: Read about the status of the specification.
-  icon: select_check_box
-  link: /compose/compose-file/01-status/
-- title: The Compose application model
-  description: Learn about the Compose application model.
-  icon: storage
-  link: /compose/compose-file/02-model/
-- title: The Compose file
-  description: Understand the Compose file.
-  icon: web_stories
-  link: /compose/compose-file/03-compose-file/
 - title: Version and name top-level element
   description: Understand version and name attributes for Compose.
   icon: feed
@@ -51,16 +39,18 @@ aliases:
 
 >**New to Compose?**
 >
-> Find more information about the [key features and use cases of Docker Compose](../features-uses.md) or [try the get started guide](../gettingstarted.md).
+> Find more information about the [key features and use cases of Docker Compose](../intro/features-uses.md) or [try the get started guide](../gettingstarted.md).
 { .tip }
 
-The [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md) is the latest and recommended version of the Compose file format. It helps you define a [Compose file](03-compose-file.md) which is used to configure your Docker application’s services, networks, volumes, and more.
+The Compose Specification is the latest and recommended version of the Compose file format. It helps you define a [Compose file](../compose-application-model.md) which is used to configure your Docker application’s services, networks, volumes, and more.
 
-Legacy versions 2.x and 3.x of the Compose file format were merged into the Compose Specification. It is  implemented in versions 1.27.0 and above (also known as Compose V2) of the Docker Compose CLI.
+Legacy versions 2.x and 3.x of the Compose file format were merged into the Compose Specification. It is implemented in versions 1.27.0 and above (also known as Compose V2) of the Docker Compose CLI.
+
+The Compose Specification on Docker Docs is the Docker Compose implementation. If you wish to implement your own version of the Compose Specification, see the [Compose Specication repository](https://github.com/compose-spec/compose-spec).
 
 > **Note**
 >
-> Compose V1 no longer receives updates and will not be available in new releases of Docker Desktop after June 2023.
+> Compose V1 no longer receives updates and is not available in new releases of Docker Desktop.
 >
 > Compose V2 is included with all currently supported versions of Docker Desktop.
 > For more information, see [Migrate to Compose V2](/compose/migrate).

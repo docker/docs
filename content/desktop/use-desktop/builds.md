@@ -35,7 +35,9 @@ that you've removed from your system, or builders that have been stopped.
 To inspect a build, select the build that you want to view in the list.
 The inspection view contains a number of tabs:
 
-### Info tab
+{{< tabs >}}
+{{< tab name="Info" >}}
+
 
 The **Info** tab displays details about the build.
 
@@ -64,7 +66,7 @@ operations are defined as follows:
 
 | Build operation      | Description                                                                                                                                                                     |
 | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Local file transfers | Time spend transferring local files from the client to the builder.                                                                                                             |
+| Local file transfers | Time spent transferring local files from the client to the builder.                                                                                                             |
 | File operations      | Any operations that involve creating and copying files in the build. For example, the `COPY`, `WORKDIR`, `ADD` instructions in a Dockerfile frontend all incur file operations. |
 | Image pulls          | Time spent pulling images.                                                                                                                                                      |
 | Executions           | Container executions, for example commands defined as `RUN` instructions in a Dockerfile frontend.                                                                              |
@@ -93,24 +95,28 @@ The **Build results** section shows a summary of the generated build artifacts,
 including the image manifest media type and digest, and information about build
 attestations such as SBOM and provenance data.
 
-### Source tab
+{{< /tab >}}
+{{< tab name="Sources" >}}
 
 The **Source** tab shows the [frontend](../../build/dockerfile/frontend.md)
 used to create the build.
 
-### Error tab
+{{< /tab >}}
+{{< tab name="Error" >}}
 
 The **Error** tab appears if the build finished with an error.
 
 If the error was caused by an issue with the frontend, this tab displays the
 frontend source with the error message inline where the build failed.
 
-### Logs tab
+{{< /tab >}}
+{{< tab name="Logs" >}}
 
 The **Logs** tab displays the build logs. If the build is currently running,
 the logs are updated in real-time.
 
-### History tab
+{{< /tab >}}
+{{< tab name="History" >}}
 
 The **History** tab displays statistics data about completed builds.
 
@@ -120,6 +126,9 @@ identifying trends and changes in your build operations over time.
 
 You can navigate to and inspect a related build by selecting it in the chart,
 or in the **Past builds** list below the history tab.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Manage builders
 

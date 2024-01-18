@@ -125,7 +125,7 @@ Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
 
-By default the `/Users`, `/Volume`, `/private`, `/tmp` and `/var/folders` directory are shared.
+By default the `/Users`, `/Volumes`, `/private`, `/tmp` and `/var/folders` directory are shared.
 If your project is outside this directory then it must be added to the list,
 otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
 
@@ -291,6 +291,10 @@ Turns on the containerd image store. This brings new features like faster contai
 
 {{< include "desktop-experimental.md" >}}
 
+## Notifications
+
+{{< include "desktop-notifications-settings.md" >}}
+
 ## Advanced
 
 On the **Advanced** tab, you can reconfigure your initial installation settings:
@@ -320,6 +324,4 @@ On the **Advanced** tab, you can reconfigure your initial installation settings:
   
   You are notified if changes are found and are able to restore the configuration directly from the notification.
 
-## Notifications
 
-{{< include "desktop-notifications-settings.md" >}}

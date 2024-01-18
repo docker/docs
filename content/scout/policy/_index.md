@@ -50,7 +50,7 @@ vulnerabilities. You can use policies to measure and track other aspects of
 supply chain management as well, such as open-source license usage and base
 image up-to-dateness.
 
-## Default policies
+## Out-of-the-box policies
 
 Docker Scout ships the following out-of-the-box policies:
 
@@ -61,11 +61,12 @@ Docker Scout ships the following out-of-the-box policies:
 - [High-profile vulnerabilities](#high-profile-vulnerabilities)
 - [Supply chain attestations](#supply-chain-attestations)
 - [Quality gates passed](#quality-gates-passed)
+- [Default non-root user](#default-non-root-user)
 
-Policies are enabled by default for Scout-enabled repositories. If you want to
-customize the criteria of a policy, you can create custom policies based on the
-default, out-of-the-box policies. You can also disable a policy altogether if
-it isn't relevant to you. For more information, see [Configure
+To give you a head start, Scout enables several policies by default for your
+Scout-enabled repositories. You can customize the default configurations to
+reflect internal requirements and standards. You can also disable a policy
+altogether if it isn't relevant to you. For more information, see [Configure
 policies](./configure.md).
 
 ### Fixable critical and high vulnerabilities
@@ -214,3 +215,79 @@ in the CLI.
 > is enabled. Docker Scout doesn't have access to historic evaluations. Trigger
 > a SonarQube analysis and policy evaluation after enabling the integration to
 > view the results in Docker Scout.
+
+### Default non-root user
+
+By default, containers run as the `root` superuser with full system
+administration privileges inside the container, unless the Dockerfile specifies
+a different default user. Running containers as a privileged user weakens their
+runtime security, as it means any code that runs in the container can perform
+administrative actions. 
+
+The **Default non-root user** policy detects images that are set to run as the
+default `root` user. To comply with this policy, images must specify a non-root
+user in the image configuration. Images violate this policy if they don't
+specify a non-root default user for the runtime stage.
+
+For non-compliant images, evaluation results show whether or not the `root`
+user was set explicitly for the image. This helps you distinguish between
+policy violations caused by images where the `root` user is implicit, and
+images where `root` is set on purpose.
+
+The following Dockerfile runs as `root` by default despite not being explicitly set:
+```Dockerfile
+FROM alpine
+RUN echo "Hi"
+```
+
+Whereas in the following case, the `root` user is explicitly set:
+
+```Dockerfile
+FROM alpine
+USER root
+RUN echo "Hi"
+```
+
+> **Note**
+>
+> This policy only checks for the default user of the image, as set in the
+> image configuration blob. Even if you do specify a non-root default user,
+> it's still possible to override the default user at runtime, for example by
+> using the `--user` flag for the `docker run` command.
+
+To make your images compliant with this policy, use the
+[`USER`](../../engine/reference/builder.md#user) Dockerfile instruction to set
+a default user that doesn't have root privileges for the runtime stage.
+
+The following Dockerfile snippets shows the difference between a compliant and
+non-compliant image.
+
+{{< tabs >}}
+{{< tab name="Non-compliant" >}}
+
+```dockerfile
+FROM alpine AS builder
+COPY Makefile ./src /
+RUN make build
+
+FROM alpine AS runtime
+COPY --from=builder bin/production /app
+ENTRYPOINT ["/app/production"]
+```
+
+{{< /tab >}}
+{{< tab name="Compliant" >}}
+
+```dockerfile {hl_lines=7}
+FROM alpine AS builder
+COPY Makefile ./src /
+RUN make build
+
+FROM alpine AS runtime
+COPY --from=builder bin/production /app
+USER nonroot
+ENTRYPOINT ["/app/production"]
+```
+
+{{< /tab >}}
+{{< /tabs >}}

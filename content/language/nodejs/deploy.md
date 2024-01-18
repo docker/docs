@@ -7,7 +7,7 @@ description: Learn how to deploy locally to test and debug your Kubernetes deplo
 ## Prerequisites
 
 - Complete all the previous sections of this guide, starting with [Containerize a Node.js application](containerize.md).
-- [Turn on Kubernetes](/desktop/kubernetes/#turn-on-kubernetes) in Docker Desktop.
+- [Turn on Kubernetes](/desktop/kubernetes/#install-and-turn-on-kubernetes) in Docker Desktop.
 
 ## Overview
 

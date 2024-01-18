@@ -37,16 +37,17 @@ related:
   toLower: false
 
 build:
-  writeStats: true
+  buildStats:
+    enabled: true
   cachebusters:
-    - source: "assets/watching/hugo_stats\\.json"
-      target: "styles\\.css"
-    - source: "(postcss|tailwind)\\.config\\.js"
-      target: "css"
-    - source: "assets/.*\\.(js|ts|jsx|tsx)"
-      target: "js"
-    - source: "(assets|layouts)/.*\\.(.*)$"
-      target: "$1"
+    - source: assets/watching/hugo_stats\.json
+      target: styles\.css
+    - source: (postcss|tailwind)\.config\.js
+      target: css
+    - source: assets/.*\.js
+      target: js
+    - source: (assets|layouts)/.*\.(.*)$
+      target: "$2"
 
 outputFormats:
   redirects:
@@ -92,7 +93,7 @@ params:
 
   latest_engine_api_version: "1.43"
   docker_ce_version: "24.0.7"
-  compose_version: "v2.23.3"
+  compose_version: "v2.24.1"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
   buildkit_version: "0.12.3"
@@ -109,7 +110,7 @@ menus:
     url: /get-started/overview/
     weight: 1
   - name: Manuals
-    url: /desktop/
+    url: /manuals/
     weight: 2
   - name: Reference
     url: /reference/
@@ -178,7 +179,7 @@ menus:
       name: Get started
       parent: Developers
     - url: https://www.docker.com/blog/
-      name: Block
+      name: Blog
       parent: Developers
     - url: https://www.docker.com/docker-community
       name: Community
@@ -278,45 +279,6 @@ module:
           target: content/engine/reference/commandline/cli.md
         - source: docs/reference/commandline/dockerd.md
           target: content/engine/reference/commandline/dockerd.md
-
-    - path: github.com/compose-spec/compose-spec
-      mounts:
-      - source: 01-status.md
-        target: content/compose/compose-file/01-status.md
-      - source: 02-model.md
-        target: content/compose/compose-file/02-model.md
-      - source: 03-compose-file.md
-        target: content/compose/compose-file/03-compose-file.md
-      - source: 04-version-and-name.md
-        target: content/compose/compose-file/04-version-and-name.md
-      - source: 05-services.md
-        target: content/compose/compose-file/05-services.md
-      - source: 06-networks.md
-        target: content/compose/compose-file/06-networks.md
-      - source: 07-volumes.md
-        target: content/compose/compose-file/07-volumes.md
-      - source: 08-configs.md
-        target: content/compose/compose-file/08-configs.md
-      - source: 09-secrets.md
-        target: content/compose/compose-file/09-secrets.md
-      - source: 10-fragments.md
-        target: content/compose/compose-file/10-fragments.md
-      - source: 11-extension.md
-        target: content/compose/compose-file/11-extension.md
-      - source: 12-interpolation.md
-        target: content/compose/compose-file/12-interpolation.md
-      - source: 13-merge.md
-        target: content/compose/compose-file/13-merge.md
-      - source: 14-include.md
-        target: content/compose/compose-file/14-include.md
-      - source: 15-profiles.md
-        target: content/compose/compose-file/15-profiles.md
-      - source: build.md
-        target: content/compose/compose-file/build.md
-      - source: deploy.md
-        target: content/compose/compose-file/deploy.md
-      - source: develop.md
-        target: content/compose/compose-file/develop.md
 
     - path: github.com/docker/compose/v2
       mounts:

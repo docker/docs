@@ -1,0 +1,38 @@
+/* global styles */
+
+@layer base {
+  [x-cloak] {
+    display: none !important;
+  }
+
+  :root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* utility classes */
+
+@layer utilities {
+  .link {
+    @apply text-blue-light underline underline-offset-2 dark:text-blue-dark;
+  }
+
+  .external-link {
+    .icon:after {
+      @apply text-base ml-1;
+    }
+  }
+
+  .invertible {
+    @apply dark:hue-rotate-180 dark:invert dark:filter;
+  }
+
+  .sidebar-hover {
+    @apply hover:bg-gray-light-200 hover:dark:bg-gray-dark-200;
+  }
+
+  .sidebar-underline {
+    @apply underline decoration-blue-light decoration-4 underline-offset-4 dark:decoration-blue-dark;
+  }
+}

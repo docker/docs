@@ -25,7 +25,12 @@ $ git clone https://github.com/docker/docker-rust-hello
 
 ## Create a Dockerfile for Rust
 
-Now that you have an application, you can use `docker init` to create a Dockerfile for it. Inside the `docker-rust-hello` directory, run the `docker init` command. Refer to the following example to answer the prompts from `docker init`.
+Now that you have an application, you can use `docker init` to create a
+Dockerfile for it. Inside the `docker-rust-hello` directory, run the `docker
+init` command. `docker init` provides some default configuration, but you'll
+need to answer a few questions about your application. Refer to the following
+example to answer the prompts from `docker init` and use the same answers for
+your prompts.
 
 ```console
 $ docker init

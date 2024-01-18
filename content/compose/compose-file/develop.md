@@ -1,4 +1,8 @@
-# Compose Develop Specification 
+---
+title: Compose Develop Specification
+description: Learn about the Compose Develop Specification
+keywords: compose, compose specification, compose file reference, compose develop specification
+---
 
 > **Note:** 
 >
@@ -44,7 +48,7 @@ The `develop` subsection defines configuration options that are applied by Compo
 ### watch
 
 The `watch` attribute defines a list of rules that control automatic service updates based on local file changes. `watch` is a sequence, each individual item in the sequence defines a rule to be applied by 
-Compose to monitor source code for changes. For more information, see [Use Compose Watch](https://docs.docker.com/compose/file-watch/).
+Compose to monitor source code for changes. For more information, see [Use Compose Watch](../file-watch.md).
 
 #### action
 
@@ -78,4 +82,3 @@ inside the path, which doesn't match any `ignore` rule, triggers the configured 
 
 `target` attribute only applies when `action` is configured for `sync`. Files within `path` with changes are synchronized
 with container filesystem, so that the latter is always running with up-to-date content.
-

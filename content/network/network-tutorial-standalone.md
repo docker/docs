@@ -9,8 +9,8 @@ For networking with swarm services, see
 [Networking with swarm services](network-tutorial-overlay.md). If you need to
 learn more about Docker networking in general, see the [overview](index.md).
 
-This topic includes three different tutorials. You can run each of them on
-Linux, Windows, or a Mac, but for the last two, you need a second Docker
+This topic includes two different tutorials. You can run each of them on
+Linux, Windows, or a Mac, but for the last one, you need a second Docker
 host running elsewhere.
 
 - [Use the default bridge network](#use-the-default-bridge-network) demonstrates
@@ -49,8 +49,8 @@ need to have Docker installed and running.
     The default `bridge` network is listed, along with `host` and `none`. The
     latter two are not fully-fledged networks, but are used to start a container
     connected directly to the Docker daemon host's networking stack, or to start
-    a container with no network devices. **This tutorial will connect two
-    containers to the `bridge` network.**
+    a container with no network devices. This tutorial will connect two
+    containers to the `bridge` network.
 
 2.  Start two `alpine` containers running `ash`, which is Alpine's default shell
     rather than `bash`. The `-dit` flags mean to start the container detached
@@ -433,7 +433,7 @@ connected to both networks.
 
 5.  On user-defined networks like `alpine-net`, containers can not only
     communicate by IP address, but can also resolve a container name to an IP
-    address. This capability is called **automatic service discovery**. Let's
+    address. This capability is called automatic service discovery. Let's
     connect to `alpine1` and test this out. `alpine1` should be able to resolve
     `alpine2` and `alpine4` (and `alpine1`, itself) to IP addresses.
     
@@ -614,9 +614,6 @@ connected to both networks.
 
 
 ## Other networking tutorials
-
-Now that you have completed the networking tutorials for standalone containers,
-you might want to run through these other networking tutorials:
 
 - [Host networking tutorial](network-tutorial-host.md)
 - [Overlay networking tutorial](network-tutorial-overlay.md)

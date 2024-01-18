@@ -77,19 +77,10 @@ Select the image from the list, select the **More options** button and select **
 >
 > To remove an image used by a running or a stopped container, you must first remove the associated container.
 
-You can remove individual images or use the **Clean up** option to delete unused and dangling images.
-
 An unused image is an image which is not used by any running or stopped containers. An image becomes dangling when you build a new version of the image with the same tag.
 
-To remove individual images, select the image from the list, select the **More options** button and select **Remove**
+To remove individual images, select the bin icon. 
 
-To remove an unused or a dangling image:
-
-1. Select the **Clean up** option from the **Images on disk** status bar.
-2. Use the **Unused** or **Dangling** check boxes to select the type of images you would like to remove.
-
-    The **Clean up** images status bar displays the total space you can reclaim by removing the selected images.
-3. Select **Remove** to confirm.
 
 ## Interact with remote repositories
 
@@ -144,3 +135,7 @@ To connect a new Artifactory registry to Docker Desktop:
 
 When signed in, a new **Artifactory** tab appears in the **Images** view.
 By default, the image list shows images sorted by push date: the newest images appear higher in the list.
+
+## Additional resources
+- [Run Docker Hub images](../../guides/walkthroughs/run-hub-images.md)
+- [Publish your image](../../guides/walkthroughs/publish-your-image.md)

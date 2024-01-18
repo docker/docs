@@ -36,3 +36,6 @@ To delete a file or a folder from the volume, select **Remove** from the **More 
 Removing a volume deletes the volume and all its data. 
 
 To remove a volume, hover over the volume and then select the **Delete** icon. Alternatively, select the volume from the list and then select the **Delete** button.
+
+## Additional resources
+- [Persist container data](../../guides/walkthroughs/persist-data.md)

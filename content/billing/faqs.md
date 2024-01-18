@@ -6,7 +6,13 @@ keywords: billing, renewal, payments, faq
 
 ### Where can I view my billing date?
 
-Navigate to the **Plan** tab in your billing settings to view your current plan. You can find the billing date near the bottom-right of your plan details.
+Sign in to Hub, then:
+
+1. Select your user avatar to open the drop-down menu.
+2. Select **Billing**.
+3. Select the user or organization account to view the billing details.
+
+Here you can find your renewal date near the bottom-right of your plan details.
 
 ### What credit and debit cards are supported?
 
@@ -17,6 +23,10 @@ Navigate to the **Plan** tab in your billing settings to view your current plan.
 - JCB
 - Diners
 - UnionPay
+
+### What currency is supported?
+
+United States dollar (USD).
 
 ### What happens if my subscription payment fails?
 
@@ -29,6 +39,39 @@ If your subscription payment fails, there is a grace period of 15 days, includin
 Docker also sends an email notification `Action Required - Credit Card Payment Failed` with an attached unpaid invoice after each failed payment attempt. 
 
 Once the grace period is over and the invoice is still not paid, the subscription downgrades to a free plan and all paid features are disabled.
+
+### What information is included on my billing invoice?
+
+Your invoice includes the following:
+
+- Invoice number
+- Date of issue
+- Date due
+- Your bill to information
+- Amount due
+- Description of your order, quantity if applicable, unit price, and amount
+
+Amounts are in USD.
+
+The information listed in the Bill to section is based on your billing information. Not all fields are required. The billing information includes the following:
+
+- Name (required) - the name of the administrator or company.
+- Email address (required) - the email address that receives all billing-related emails for the account.
+- Address (required)
+- Phone number
+- Tax ID or VAT
+
+### How can I make changes to a billing invoice?
+
+You can’t make changes to a paid or unpaid billing invoice. When you update your billing information, this change won't update an existing invoice. If you need to update your billing information, make sure you do so before your subscription renewal date when your invoice is finalized. For more information, see [Update the billing information](details.md).
+
+### When during the billing cycle do I receive my invoice?
+
+You receive your invoice when the subscription renews. To verify your renewal date, sign in to Hub, then:
+
+1. Select your user avatar to open the drop-down menu.
+2. Select **Billing**.
+3. Select the user or organization account to view the billing details. Here you can find your renewal date and the renewal amount.
 
 ### What billing-related emails will I receive from Docker Hub?
 

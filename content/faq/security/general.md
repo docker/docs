@@ -76,9 +76,7 @@ File sharing (bind mount from the host filesystem) uses a user-space crafted fil
 
 Security vetting for extensions is on our roadmap however this vetting isn't currently done. 
 
-At present in the marketplace, there are two types of extensions: reviewed and self-published. Reviewed extensions are used and reviewed against a set of criteria, and if they pass, they're included in the marketplace with a **Reviewed** label. Self-published extensions are automatically placed in the marketplace with a **Not reviewed** label. 
-
-Note that even if an extension is reviewed, it's only reviewed on the first publish. Any updates afterwards aren't reviewed. Extensions aren't covered as part of Docker’s Third-Party Risk Management Program.
+Extensions are not covered as part of Docker’s Third-Party Risk Management Program.
 
 ### Can I disable private repos in my organization via a setting to make sure nobody is pushing images into Docker Hub? 
 

@@ -51,7 +51,6 @@ You'll now define this service in the `compose.yaml` file.
    The name will automatically become a network alias, which will be useful when defining your MySQL service.
 
    ```yaml
-
    services:
      app:
        image: node:18-alpine

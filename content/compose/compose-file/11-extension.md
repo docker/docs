@@ -1,4 +1,8 @@
-# Extension
+---
+title: Extensions
+description: Understand how to use extensions
+keywords: compose, compose specification, extensions, compose file reference
+---
 
 As with [Fragments](10-fragments.md), Extensions can be used to make your Compose file more efficient and easier to maintain. Extensions can also be used with [anchors and aliases](10-fragments.md).
 
@@ -125,7 +129,7 @@ This section is informative. At the time of writing, the following prefixes are 
 Values express a byte value as a string in `{amount}{byte unit}` format:
 The supported units are `b` (bytes), `k` or `kb` (kilo bytes), `m` or `mb` (mega bytes) and `g` or `gb` (giga bytes).
 
-```
+```text
     2b
     1024kb
     2048k
@@ -139,7 +143,7 @@ Values express a duration as a string in the form of `{value}{unit}`.
 The supported units are `us` (microseconds), `ms` (milliseconds), `s` (seconds), `m` (minutes) and `h` (hours).
 Values can combine multiple values without separator.
 
-```
+```text
   10ms
   40s
   1m30s

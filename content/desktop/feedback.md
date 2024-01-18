@@ -7,11 +7,15 @@ title: Give feedback
 
 There are many ways you can provide feedback on Docker Desktop or Docker Desktop features.
 
-#### In-product feedback
+### In-product feedback
 
 On each Docker Dashboard view, there is a **Give feedback** link. This sends you to a Google feedback form where you can share your feedback and ideas.
 
-#### Feedback via Docker Community forums
+You can also use the `docker feedback` command to submit feedback directly from the command line.
+
+<script async id="asciicast-KkC0fFrhV8nAzvXUGqay06UXx" src="https://asciinema.org/a/KkC0fFrhV8nAzvXUGqay06UXx.js"></script>
+
+### Feedback via Docker Community forums
 
 To get help from the community, review current user topics, join or start a
 discussion, sign in to the appropriate Docker forums:
@@ -21,7 +25,7 @@ forum](https://forums.docker.com/c/docker-for-mac)
 - [Docker Desktop for Windows forum](https://forums.docker.com/c/docker-for-windows)
 - [Docker Desktop for Linux forum](https://forums.docker.com/c/docker-desktop-for-linux/60)
 
-#### Report bugs or problems on GitHub
+### Report bugs or problems on GitHub
 
 To report bugs or problems, visit:
 - [Docker Desktop for Mac issues on
@@ -32,7 +36,7 @@ GitHub](https://github.com/docker/desktop-linux/issues)
 - [Dev Environments issues on Github](https://github.com/docker/dev-environments/issues)
 - [Docker Extensions issues on GitHub](https://github.com/docker/extensions-sdk/issues)
 
-#### Feedback via Community Slack channels
+### Feedback via Community Slack channels
 
 You can also provide feedback through the following [Docker Community Slack](https://dockr.ly/comm-slack) channels:
 

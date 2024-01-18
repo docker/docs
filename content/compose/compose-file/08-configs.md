@@ -1,4 +1,8 @@
-# Configs top-level element
+---
+title: Configs top-level elements
+description: Explore all the attributes the configs top-level element can have.
+keywords: compose, compose specification, configs, compose file reference
+---
 
 Configs allow services to adapt their behaviour without the need to rebuild a Docker image.
 

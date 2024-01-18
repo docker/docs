@@ -26,14 +26,12 @@ array of profile names:
 services:
   frontend:
     image: frontend
-    profiles: ["frontend"]
+    profiles: [frontend]
 
   phpmyadmin:
     image: phpmyadmin
-    depends_on:
-      - db
-    profiles:
-      - debug
+    depends_on: [db]
+    profiles: [debug]
 
   backend:
     image: backend

@@ -1,7 +1,5 @@
 ## sidebar/aside/toc strings:
 
-readingTime:
-  other: "{{ . }} minute read"
 editPage:
   other: Edit this page
 requestChanges:

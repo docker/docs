@@ -29,19 +29,23 @@ aliases:
 - /winkit/getting-started/
 ---
 
-Docker recommends that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard.
+Docker recommends that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard. 
 
-Once signed in, you can access your Docker Hub repositories directly from Docker Desktop.
+In large enterprises where admin access is restricted, administrators can [Configure registry.json to enforce sign-in](../security/for-admins/configure-sign-in.md). 
 
-Authenticated users also get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
+## Benefits of signing in
 
-In large enterprises where admin access is restricted, administrators can [Configure registry.json to enforce sign-in](../security/for-admins/configure-sign-in.md). Enforcing developers to authenticate through Docker Desktop also allows administrators to improve their organization’s security posture for containerized development by taking advantage of [Hardened Desktop](hardened-desktop/index.md).
+- You can access your Docker Hub repositories directly from Docker Desktop.
+
+- Authenticated users also get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
+
+- Improve your organization’s security posture for containerized development by taking advantage of [Hardened Desktop](hardened-desktop/index.md).
 
 > **Note**
 >
 > Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity. 
 
-### Signing in with Docker Desktop for Linux
+## Signing in with Docker Desktop for Linux
 
 Docker Desktop for Linux relies on [`pass`](https://www.passwordstore.org/) to store credentials in gpg2-encrypted files.
 Before signing in to Docker Desktop with your [Docker ID](../docker-id/_index.md), you must initialize `pass`.
