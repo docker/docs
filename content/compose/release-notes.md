@@ -21,7 +21,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump containerd to 1.7.12
 
 ### Bug fixes and enhancements
-Rework the display of container status during `up`
+Reworked the display of container status during `up`
 Fixed the engine version required to use `healthcheck.start_interval`
 Removed `watch` subcommand from the `alpha` command
 Fixed a bug when handling received signals
