@@ -1,5 +1,5 @@
-Guides:
-- title: Docker overview
+Get Started:
+- title: About Docker
   path: /get-started/overview/
 - title: Get Docker
   path: /get-docker/
@@ -47,7 +47,13 @@ Guides:
         path: /get-started/09_image_best/
       - title: "Part 10: What next?"
         path: /get-started/11_what_next/
+- path: /get-started/resources/
+  title: "Educational resources"
+- path: /glossary/
+  title: Glossary
 
+
+Guides:
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -202,8 +208,6 @@ Guides:
     path: /get-started/swarm-deploy/
   - title: Cloud integrations
     path: /cloud/
-- path: /get-started/resources/
-  title: "Educational resources"
 
 - sectiontitle: Contribute
   section:
@@ -997,9 +1001,6 @@ Reference:
           title: Version 3
         - path: /compose/compose-file/compose-file-v2/
           title: Version 2
-- path: /glossary/
-  title: Glossary
-
 
 
 Samples:
@@ -1097,7 +1098,7 @@ Samples:
       title: Wireguard
 
 
-Manuals:
+Developer tools:
 - sectiontitle: Docker Desktop
   section:
     - path: /desktop/
@@ -1335,88 +1336,6 @@ Manuals:
                   path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
                 - title: API Reference
                   path: /desktop/extensions-sdk/dev/api/reference/README/
-
-- sectiontitle: Docker Scout
-  section:
-    - path: /scout/
-      title: Overview
-    - path: /scout/quickstart/
-      title: Quickstart
-    - sectiontitle: Explore Docker Scout
-      section:
-      - path: /scout/dashboard/
-        title: Dashboard
-      - path: /scout/image-details-view/
-        title: Image details view
-      - path: /scout/advisory-db-sources/
-        title: Advisory database
-      - path: /scout/data-handling/
-        title: Data handling
-    - sectiontitle: Use Docker Scout
-      section:
-      - path: /scout/image-analysis/
-        title: Image analysis
-      - path: /scout/local-fs/
-        title: Analyze local files
-      - path: /scout/sbom/
-        title: SBOM
-      - path: /scout/env-vars/
-        title: Environment variables
-    - sectiontitle: Policy Evaluation
-      section:
-      - path: /scout/policy/
-        title: Overview
-      - path: /scout/policy/view/
-        title: View policy status
-      - path: /scout/policy/configure/
-        title: Configure policies
-      - path: /scout/policy/ci/
-        title: Policy Evaluation in CI
-      - path: /scout/policy/remediation/
-        title: Remediation
-    - sectiontitle: Integrations
-      section:
-      - title: Overview
-        path: /scout/integrations/
-      - sectiontitle: Environment monitoring
-        section:
-        - title: Overview
-          path: /scout/integrations/environment/
-        - title: Sysdig
-          path: /scout/integrations/environment/sysdig/
-        - title: Generic
-          path: /scout/integrations/environment/cli/
-      - sectiontitle: Container registries
-        section:
-        - title: Artifactory
-          path: /scout/integrations/registry/artifactory/
-        - title: Elastic Container Registry
-          path: /scout/integrations/registry/ecr/
-        - title: Azure Container Registry
-          path: /scout/integrations/registry/acr/
-      - sectiontitle: Continuous integration
-        section:
-        - title: GitHub Actions
-          path: /scout/integrations/ci/gha/
-        - title: GitLab
-          path: /scout/integrations/ci/gitlab/
-        - title: Microsoft Azure DevOps Pipelines
-          path: /scout/integrations/ci/azure/
-        - title: Circle CI
-          path: /scout/integrations/ci/circle-ci/
-        - title: Jenkins
-          path: /scout/integrations/ci/jenkins/
-      - sectiontitle: Code quality
-        section:
-        - title: SonarQube
-          path: /scout/integrations/code-quality/sonarqube/
-      - sectiontitle: Source code management
-        section:
-        - title: GitHub
-          path: /scout/integrations/source-code-management/github/
-    - path: /scout/release-notes/
-      title: Release notes
-
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
@@ -2003,6 +1922,88 @@ Manuals:
   - path: /compose/release-notes/
     title: Release notes
 
+
+Services:
+- sectiontitle: Docker Scout
+  section:
+    - path: /scout/
+      title: Overview
+    - path: /scout/quickstart/
+      title: Quickstart
+    - sectiontitle: Explore Docker Scout
+      section:
+      - path: /scout/dashboard/
+        title: Dashboard
+      - path: /scout/image-details-view/
+        title: Image details view
+      - path: /scout/advisory-db-sources/
+        title: Advisory database
+      - path: /scout/data-handling/
+        title: Data handling
+    - sectiontitle: Use Docker Scout
+      section:
+      - path: /scout/image-analysis/
+        title: Image analysis
+      - path: /scout/local-fs/
+        title: Analyze local files
+      - path: /scout/sbom/
+        title: SBOM
+      - path: /scout/env-vars/
+        title: Environment variables
+    - sectiontitle: Policy Evaluation
+      section:
+      - path: /scout/policy/
+        title: Overview
+      - path: /scout/policy/view/
+        title: View policy status
+      - path: /scout/policy/configure/
+        title: Configure policies
+      - path: /scout/policy/ci/
+        title: Policy Evaluation in CI
+      - path: /scout/policy/remediation/
+        title: Remediation
+    - sectiontitle: Integrations
+      section:
+      - title: Overview
+        path: /scout/integrations/
+      - sectiontitle: Environment monitoring
+        section:
+        - title: Overview
+          path: /scout/integrations/environment/
+        - title: Sysdig
+          path: /scout/integrations/environment/sysdig/
+        - title: Generic
+          path: /scout/integrations/environment/cli/
+      - sectiontitle: Container registries
+        section:
+        - title: Artifactory
+          path: /scout/integrations/registry/artifactory/
+        - title: Elastic Container Registry
+          path: /scout/integrations/registry/ecr/
+        - title: Azure Container Registry
+          path: /scout/integrations/registry/acr/
+      - sectiontitle: Continuous integration
+        section:
+        - title: GitHub Actions
+          path: /scout/integrations/ci/gha/
+        - title: GitLab
+          path: /scout/integrations/ci/gitlab/
+        - title: Microsoft Azure DevOps Pipelines
+          path: /scout/integrations/ci/azure/
+        - title: Circle CI
+          path: /scout/integrations/ci/circle-ci/
+        - title: Jenkins
+          path: /scout/integrations/ci/jenkins/
+      - sectiontitle: Code quality
+        section:
+        - title: SonarQube
+          path: /scout/integrations/code-quality/sonarqube/
+      - sectiontitle: Source code management
+        section:
+        - title: GitHub
+          path: /scout/integrations/source-code-management/github/
+    - path: /scout/release-notes/
+      title: Release notes
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
@@ -2051,7 +2052,43 @@ Manuals:
     title: OCI artifacts
   - path: /docker-hub/release-notes/
     title: Release notes
+- sectiontitle: Trusted content
+  section:
+  - path: /trusted-content/
+    title: Overview
+  - path: /trusted-content/official-images/
+    title: Docker Official images
+  - path: /trusted-content/dvp-program/
+    title: Docker Verified Publisher Program
+  - path: /trusted-content/dsos-program/
+    title: Docker-Sponsored Open Source Program
+  - path: /trusted-content/insights-analytics/
+    title: Insights and analytics
+- path: /release-notes/
+  title: Release notes
+- path: /release-lifecycle/
+  title: Product release lifecycle
+- sectiontitle: FAQs
+  section: 
+  - path: /build/cloud/faq/
+    title: Build Cloud
+  - path: /compose/faq/
+    title: Compose
+  - sectiontitle: Desktop
+    section:
+    - path: /desktop/faqs/general/
+      title: General
+    - path: /desktop/faqs/macfaqs/
+      title: Mac
+    - path: /desktop/faqs/windowsfaqs/
+      title: Windows
+    - path: /desktop/faqs/linuxfaqs/
+      title: Linux
+    - path: /desktop/faqs/releases/
+      title: Releases
 
+
+Account management:
 - sectiontitle: Administration
   section:
   - path: /admin/
@@ -2088,7 +2125,6 @@ Manuals:
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
     title: Deactivate an account or organization
-
 - sectiontitle: Security
   section:
   - path: /security/
@@ -2133,7 +2169,6 @@ Manuals:
         title: Generate a new recovery code
   - path: /security/security-announcements/
     title: Security announcements
-
 - sectiontitle: Billing
   section:
   - path: /billing/
@@ -2150,8 +2185,6 @@ Manuals:
     title: Docker Scout billing
   - path: /billing/build-billing/
     title: Docker Build Cloud billing
-
-
 - sectiontitle: Subscription
   section:
   - path: /subscription/
@@ -2172,56 +2205,20 @@ Manuals:
     title: Docker Scout subscriptions and features
   - path: /subscription/build-details/
     title: Docker Build Cloud subscriptions and features
-
-- sectiontitle: Trusted content
-  section:
-  - path: /trusted-content/
-    title: Overview
-  - path: /trusted-content/official-images/
-    title: Docker Official images
-  - path: /trusted-content/dvp-program/
-    title: Docker Verified Publisher Program
-  - path: /trusted-content/dsos-program/
-    title: Docker-Sponsored Open Source Program
-  - path: /trusted-content/insights-analytics/
-    title: Insights and analytics
-
-- path: /release-notes/
-  title: Release notes
 - path: /support/
   title: Get support
-- path: /release-lifecycle/
-  title: Product release lifecycle
-
-FAQ:
-  - path: /faq/
-    title: Overview
+- sectiontitle: FAQs
+  section:
   - path: /billing/faqs/
     title: Billing
-  - path: /build/cloud/faq/
-    title: Build Cloud
-  - path: /compose/faq/
-    title: Compose
-  - sectiontitle: Desktop
-    section:
-    - path: /desktop/faqs/general/
-      title: General
-    - path: /desktop/faqs/macfaqs/
-      title: Mac
-    - path: /desktop/faqs/windowsfaqs/
-      title: Windows
-    - path: /desktop/faqs/linuxfaqs/
-      title: Linux
-    - path: /desktop/faqs/releases/
-      title: Releases
   - sectiontitle: Docker account and admin
     section:
-    - path: /faq/admin/general-faqs/
-      title: General
-    - path: /faq/admin/organization-faqs/
-      title: Organization
-    - path: /faq/admin/company-faqs/
-      title: Company
+     - path: /faq/admin/general-faqs/
+       title: General
+     - path: /faq/admin/organization-faqs/
+       title: Organization
+     - path: /faq/admin/company-faqs/
+       title: Company
   - path: /subscription/faq/
     title: Subscription
   - sectiontitle: Security
@@ -2248,3 +2245,6 @@ FAQ:
         title: Enforcement
       - path: /faq/security/single-sign-on/users-faqs/
         title: Manage users
+
+
+  
