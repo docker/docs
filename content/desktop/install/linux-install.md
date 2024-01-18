@@ -59,8 +59,7 @@ disable the Docker Engine service, and to prevent it from starting automatically
 $ sudo systemctl disable docker docker.socket containerd
 ```
 
-### Switching between Docker Desktop and Docker Engine?
-
+### Switching between Docker Desktop and Docker Engine
 
 The Docker CLI can be used to interact with multiple Docker Engines. For example,
 you can use the same Docker CLI to control a local Docker Engine and to control
