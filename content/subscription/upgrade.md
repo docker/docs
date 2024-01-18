@@ -21,11 +21,6 @@ When you upgrade to a paid subscription, you immediately have access to all the 
 
 5. In the **Plan** section, select **Change plan** and then choose the plan you'd like to upgrade to.
 
-    >**Tip**
-    >
-    > To upgrade to a Business subscription, [contact support](https://hub.docker.com/support/contact/).
-    { .tip }
-
 6. Follow the on-screen instructions.
 
     If you have a [coupon](../billing/faqs.md#how-do-i-redeem-a-coupon) to use, you can enter it during this step.
