@@ -8,7 +8,7 @@ aliases:
 ---
 
 Docker Compose's [`extends` attribute](../compose-file/05-services.md#extends) lets you share common configurations
-among different files, or even different projects entirely. 
+among different files, or even different projects entirely.
 
 Extending services
 is useful if you have several services that reuse a common set of configuration
