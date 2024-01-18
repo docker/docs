@@ -27,7 +27,7 @@ relative to the base file.
 
 ## How it works
 
-When defining any service in your `compose.yaml` file, you can declare that you are
+When defining any service in your `docker-compose.yml` file, you can declare that you are
 extending another service:
 
 ```yaml
@@ -39,7 +39,7 @@ services:
 ```
 
 This instructs Compose to re-use the configuration for the `webapp` service
-defined in the `common-services.yaml` file. Suppose that `common-services.yaml`
+defined in the `common-services.yml` file. Suppose that `common-services.yml`
 looks like this:
 
 ```yaml
@@ -57,7 +57,7 @@ In this case, you get exactly the same result as if you wrote
 values defined directly under `web`.
 
 You can go further and define, or re-define, configuration locally in
-`compose.yaml`:
+`docker-compose.yml`:
 
 ```yaml
 services:
@@ -100,7 +100,7 @@ have a common configuration. The example below is a Compose app with
 two services, a web application and a queue worker. Both services use the same
 codebase and share many configuration options.
 
-The `common.yaml` file defines the common configuration:
+The `common.yml` file defines the common configuration:
 
 ```yaml
 services:
@@ -112,14 +112,14 @@ services:
     cpu_shares: 5
 ```
 
-The `docker-compose.yaml` defines the concrete services which use the
+The `docker-compose.yml` defines the concrete services which use the
 common configuration:
 
 ```yaml
 services:
   webapp:
     extends:
-      file: common.yaml
+      file: common.yml
       service: app
     command: /code/run_web_app
     ports:
@@ -130,7 +130,7 @@ services:
 
   queue_worker:
     extends:
-      file: common.yaml
+      file: common.yml
       service: app
     command: /code/run_worker
     depends_on:
@@ -150,7 +150,7 @@ services:
   web:
     image: example/my_web_app:latest
     depends_on:
-       db
+      - db
 
   db:
     image: postgres:latest
@@ -162,9 +162,9 @@ export or backup.
 ```yaml
 services:
   dbadmin:
-     build: database_admin/
-     depends_on:
-        - db
+    build: database_admin/
+    depends_on:
+      - db
 ```
 
 To start a normal environment, run `docker compose up -d`. To run a database
@@ -175,8 +175,7 @@ $ docker compose -f docker-compose.yml -f docker-compose.admin.yml \
   run dbadmin db-backup
 ```
 
-Compose extends files in
-the order they're specified on the command line.
+Compose extends files in the order they're specified on the command line.
 
 ## Exceptions and limitations
 
@@ -187,7 +186,10 @@ dependencies between services are clearly visible when reading the current file.
 Defining these locally also ensures that changes to the referenced file don't
 break anything.
 
-`extends` is useful if you only need a single service to be shared and you are familiar with the file you're extending to, so you can to tweak the configuration. But this isn’t an acceptable solution when you want to re-use someone else's unfamiliar configurations and you don’t know about its own dependencies.
+`extends` is useful if you only need a single service to be shared and you are 
+familiar with the file you're extending to, so you can to tweak the configuration.
+But this isn’t an acceptable solution when you want to re-use someone else's
+unfamiliar configurations and you don’t know about its own dependencies.
 
 ## Reference information
 
