@@ -30,7 +30,7 @@
           {{ with .icon }}
             {{ if strings.ContainsAny . "/." }}
             {{/* image file */}}
-            <img class="w-[32px]" src="{{ . }}" alt="">
+            <img class="w-[32px] invertible" src="{{ . }}" alt="">
             {{ else }}
             {{/* icon ligature */}}
             <span class="material-symbols-rounded text-[32px]">{{ . }}</span>
