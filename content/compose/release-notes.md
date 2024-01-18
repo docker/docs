@@ -11,6 +11,21 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.1
+{{< release-date date="2024-01-18" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0-rc3
+- Dependencies upgrade: bump docker to 25.0.0-rc3
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.1
+- Dependencies upgrade: bump containerd to 1.7.12
+
+### Bug fixes and enhancements
+Rework the display of container status during `up`
+Fixed the engine version required to use `healthcheck.start_interval`
+Removed `watch` subcommand from the `alpha` command
+Fixed a bug when handling received signals
+
 ## 2.24.0
 {{< release-date date="2024-01-11" >}}
 
