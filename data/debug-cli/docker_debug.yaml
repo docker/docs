@@ -1,0 +1,162 @@
+command: docker debug
+short: Get a shell into any container or image.
+long: |-
+  Get an enhanced shell with additional tools into any container or image.  
+  
+  The shell contains the following builtin commands:
+  - `install [tool1] [tool2]`: Add Nix packages from: https://search.nixos.org/packages.
+  - `uninstall [tool1] [tool2]`: Uninstall NixOS package(s).
+  - `entrypoint`: Print/lint/run the entrypoint.
+  - `builtins`: Show builtin commands.
+
+  For images and stopped containers, all changes are discarded when leaving the
+  shell. At no point, do changes affect the actual image or container. When
+  accessing running or paused containers, all filesystem changes are directly
+  visible to the container. The `/nix` directory is never visible to the actual
+  image or container.
+usage: debug [OPTIONS] {CONTAINER|IMAGE}
+pname: docker
+plink: docker.yaml
+options:
+    - option: shell
+      value_type: shell
+      default_value: "auto"
+      description: "Select a shell. Supported: `bash`, `fish`, `zsh`, `auto`."
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: command
+      shorthand: c
+      value_type: string
+      default_value: false
+      description: Evaluate the specified commands instead, passing additional positional arguments through $argv.
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: host
+      value_type: string
+      default_value: false
+      description: "Daemon docker socket to connect to. E.g.: `ssh://root@example.org`, `unix:///some/path/docker.sock`"
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: version
+      value_type: bool
+      default_value: "false"
+      description: Display version of the docker-debug plugin
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+deprecated: false
+experimental: false
+experimentalcli: false
+kubernetes: false
+swarm: false
+examples: |-
+  ### Example 1: Get a shell into any image
+  This example pulls an nginx image and gets a shell into it without ever running a container.
+  
+  ```console
+  $ docker pull nginx
+  $ docker debug nginx
+  
+  Builtin commands:
+  - install [tool1] [tool2] ...    Add Nix packages from: https://search.nixos.org/packages
+  - uninstall [tool1] [tool2] ...  Uninstall NixOS package(s).
+  - entrypoint                     Print/lint/run the entrypoint.
+  - builtins                       Show builtin commands.
+  
+  Checks:
+  ✓ distro:            Debian GNU/Linux 12 (bookworm)
+  ✓ entrypoint linter: no errors (run 'entrypoint' for details)
+
+  Note: This is a sandbox shell. All changes will not affect the actual image.
+                                                                                                                     Version: 0.0.18 (BETA)
+  root@a8758716bb6a / [nginx:latest]
+  docker >
+  ```
+  
+  The console now has a shell in the read-only filesystem of the nginx image.
+  You can now run `entrypoint` to inspect the entrypoint or run `builtins` to
+  see all builtin commands.
+  
+  ### Example 2: Dumping a file from an image to stdout by using the -c mode
+  
+  Use the `-c` (`--command`) flag to directly evaluate a command instead of
+  running the shell in interactive mode.
+  
+  The following example dumps the default `index.html` file of nginx to stdout.
+
+  ```console
+  $ docker pull nginx
+  $ docker debug nginx -c "cat /usr/share/nginx/html/index.html"
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <title>Welcome to nginx!</title>
+  <style>
+  html { color-scheme: light dark; }
+  body { width: 35em; margin: 0 auto;
+  font-family: Tahoma, Verdana, Arial, sans-serif; }
+  </style>
+  </head>
+  <body>
+  <h1>Welcome to nginx!</h1>
+  <p>If you see this page, the nginx web server is successfully installed and
+  working. Further configuration is required.</p>
+  
+  <p>For online documentation and support please refer to
+  <a href="http://nginx.org/">nginx.org</a>.<br/>
+  Commercial support is available at
+  <a href="http://nginx.com/">nginx.com</a>.</p>
+  
+  <p><em>Thank you for using nginx.</em></p>
+  </body>
+  </html>
+  ```
+  
+  ### Example 3: Get a shell into a stopped container via SSH
+  
+  Use the `--host` flag to connect to a different Docker Engine other than the
+  default.
+  
+  The following example connects to a remote Docker instance via SSH.
+  
+  ```console
+  $ docker debug --host ssh://root@example.org my-container
+  ```
+  
+  The `--host` flag may be used with all other examples, including getting a
+  shell into an image.
+  
+  Example 4: Get a shell into a running container that has no shell
+  
+  ```console
+  $ docker run --detach --rm --volume=/var/run/docker.sock:/var/run/docker.sock -p 8080:8080 --name my-container amir20/dozzle
+  $ docker debug my-container
+  ```
+  
+  Once the shell is attached to the container, you can add further tools with
+  the built-in `install` command. For example, run `install nmap`. Adding
+  further tools to your debugging shell does not modify the target container. 
+  
+  The built-in `forward` command lets you use remote tools. The following example starts a web file browser.
+  
+  ```console
+  $ forward --port 9000:9012 -- webfsd -F -p 9012
+  ```
+  
+  You can access the file browser on your host's browser at
+  http://localhost:9000.
