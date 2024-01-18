@@ -1098,6 +1098,8 @@ Samples:
 
 
 Manuals:
+- path: /manuals/
+  title: Overview
 - sectiontitle: Docker Desktop
   section:
     - path: /desktop/
