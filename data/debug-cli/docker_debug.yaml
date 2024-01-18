@@ -75,7 +75,6 @@ examples: |-
   This example pulls an nginx image and gets a shell into it without ever running a container.
   
   ```console
-  $ docker pull nginx
   $ docker debug nginx
   
   Builtin commands:
@@ -106,7 +105,6 @@ examples: |-
   The following example dumps the default `index.html` file of nginx to stdout.
 
   ```console
-  $ docker pull nginx
   $ docker debug nginx -c "cat /usr/share/nginx/html/index.html"
   <!DOCTYPE html>
   <html>
@@ -161,7 +159,7 @@ examples: |-
   The built-in `forward` command lets you use remote tools. The following example starts a web file browser.
   
   ```console
-  $ forward --port 9000:9012 -- webfsd -F -p 9012
+  docker > forward --port 9000:9012 -- webfsd -F -p 9012
   ```
   
   You can access the file browser on your host's browser at
