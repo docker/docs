@@ -145,7 +145,7 @@ examples: |-
   The `--host` flag may be used with all other examples, including getting a
   shell into an image.
   
-  Example 4: Get a shell into a running container that has no shell
+  ### Example 4: Get a shell into a running container that has no shell
   
   ```console
   $ docker run --detach --rm --volume=/var/run/docker.sock:/var/run/docker.sock -p 8080:8080 --name my-container amir20/dozzle
