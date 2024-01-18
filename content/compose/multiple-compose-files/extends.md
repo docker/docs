@@ -150,7 +150,7 @@ services:
   web:
     image: example/my_web_app:latest
     depends_on:
-       db
+      - db
 
   db:
     image: postgres:latest
