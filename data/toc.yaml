@@ -491,6 +491,8 @@ Reference:
         title: docker context update
       - path: /engine/reference/commandline/context_use/
         title: docker context use
+  - path: /engine/reference/commandline/debug/
+    title: docker debug (Beta)
   - path: /engine/reference/commandline/exec/
     title: docker exec
   - sectiontitle: docker image
