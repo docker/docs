@@ -1937,14 +1937,12 @@ Manuals:
   section:
   - path: /compose/
     title: Overview
-  - path: /compose/features-uses/
-    title: Key features and use cases
-  - path: /compose/compose-application-model/
-    title: Understand the Compose application model
-  - path: /compose/compose-yaml-file/
-    title: Understand the Compose file
-  - path: /compose/history/
-    title: History and development of Compose
+  - sectiontitle: Introduction to Compose
+    section:
+    - path: /compose/intro/features-uses/
+      title: Why use Compose?
+    - path: /compose/intro/history/
+      title: History and development of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
@@ -1955,11 +1953,10 @@ Manuals:
         title: Install Compose standalone
       - path: /compose/install/uninstall/
         title: Uninstall Compose
-  - path: /compose/migrate/
-    title: Migrate to Compose V2
+  - path: /compose/compose-application-model/
+    title: How Compose works
   - path: /compose/gettingstarted/
-    title: Try Docker Compose
-
+    title: Try Compose
   - sectiontitle: Environment variables
     section:
     - path: /compose/environment-variables/
@@ -2000,6 +1997,8 @@ Manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
+  - path: /compose/migrate/
+    title: Migrate to Compose V2
   - path: /compose/release-notes/
     title: Release notes
 
