@@ -86,6 +86,8 @@ github.com/docker/compose/v2 v2.23.3 h1:2p2biZqpUvPzC8J7nDl+ankVQNCCAk2IZJ4eg1S+
 github.com/docker/compose/v2 v2.23.3/go.mod h1:lUweVMN13YR0a9M7qdKulTSMS1kYdAysYNJlFEnDMCw=
 github.com/docker/compose/v2 v2.24.0 h1:Gvmg3E5/Rqa4G340sYcUk/DIegT5Nod2ZV3MqR248j8=
 github.com/docker/compose/v2 v2.24.0/go.mod h1:sDypMTKq6Mrp0W5NZ6+uiqxR9zEukI1RVuFRqwBTljs=
+github.com/docker/compose/v2 v2.24.1 h1:Mk14AOkxetMKrWb1bOnx7bEfS+v/moaCZnU69QqUw6A=
+github.com/docker/compose/v2 v2.24.1/go.mod h1:rrqu0bPBN/HD2wRSNwVN+V9SDfhVQnKxF1DP9B9WOdI=
 github.com/docker/distribution v2.8.2+incompatible h1:T3de5rq0dB1j30rp0sA2rER+m322EBzniBPB6ZIzuh8=
 github.com/docker/distribution v2.8.2+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/go v1.5.1-1.0.20160303222718-d30aec9fd63c/go.mod h1:CADgU4DSXK5QUlFslkQu2yW2TKzFZcXq/leZfM0UH5Q=
@@ -117,6 +119,8 @@ github.com/docker/scout-cli v1.0.9 h1:P2Rs+HhVOIoSJZ1fcVuSDaxvV/8dCJTFdb3shrQtj5
 github.com/docker/scout-cli v1.0.9/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/docker/scout-cli v1.2.0 h1:cjtsf7s2f6NO9OxgXWPW3DGxaTKVU58JKmVtaVMc0RA=
 github.com/docker/scout-cli v1.2.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
+github.com/docker/scout-cli v1.3.0 h1:mL9y1yB/DR/dAar71z0w8u8et9o2272Mrjxtb59ds3M=
+github.com/docker/scout-cli v1.3.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/elazarl/goproxy v0.0.0-20191011121108-aa519ddbe484/go.mod h1:Ro8st/ElPeALwNFlcTpWmkr6IoMFfkjXAvTHpevnDsM=
 github.com/evanphx/json-patch v4.9.0+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
