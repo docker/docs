@@ -1,7 +1,12 @@
 command: docker debug
 short: Get a shell into any container or image.
 long: |-
-  Get an enhanced shell with additional tools into any container or image.  
+  > **Note**
+  >
+  > Docker Debug requires a [Pro, Team, or Business subcription](/subscription/details/).
+  > You must [sign in](/desktop/get-started/) to use this command.
+
+  Get an enhanced shell with additional tools into any container or image.
   
   The shell contains the following builtin commands:
   - `install [tool1] [tool2]`: Add Nix packages from: https://search.nixos.org/packages.
@@ -14,6 +19,7 @@ long: |-
   accessing running or paused containers, all filesystem changes are directly
   visible to the container. The `/nix` directory is never visible to the actual
   image or container.
+  
 usage: debug [OPTIONS] {CONTAINER|IMAGE}
 pname: docker
 plink: docker.yaml
