@@ -162,9 +162,9 @@ export or backup.
 ```yaml
 services:
   dbadmin:
-     build: database_admin/
-     depends_on:
-        - db
+    build: database_admin/
+    depends_on:
+      - db
 ```
 
 To start a normal environment, run `docker compose up -d`. To run a database
