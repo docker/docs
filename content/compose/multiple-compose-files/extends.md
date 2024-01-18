@@ -40,7 +40,7 @@ services:
 ```
 
 This instructs Compose to re-use the configuration for the `webapp` service
-defined in the `common-services.yml` file. Suppose that `common-services.yml`
+defined in the `common-services.yaml` file. Suppose that `common-services.yaml`
 looks like this:
 
 ```yaml
