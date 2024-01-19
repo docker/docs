@@ -38,7 +38,7 @@ related:
 
 build:
   buildStats:
-    enabled: true
+    enable: true
   cachebusters:
     - source: assets/watching/hugo_stats\.json
       target: styles\.css
