@@ -85,6 +85,14 @@
   - /go/access-tokens/
 "/desktop/mac/apple-silicon/":
   - /go/apple-silicon/
+"/engine/api/#deprecated-api-versions":
+  - /engine/api/v1.23/
+  - /engine/api/v1.22/
+  - /engine/api/v1.21/
+  - /engine/api/v1.20/
+  - /engine/api/v1.19/
+  - /engine/api/v1.18/
+
 "/engine/security/#docker-daemon-attack-surface":
   # Details about the "Docker Daemon attack surface". This redirect is currently
   # used in warnings printed by the Docker Engine, and in the installation script
