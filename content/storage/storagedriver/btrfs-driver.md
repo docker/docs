@@ -158,7 +158,7 @@ $ sudo btrfs filesystem balance /var/lib/docker
 
 ## How the `btrfs` storage driver works
 
-The `btrfs` storage driver works differently from `devicemapper` or other
+The `btrfs` storage driver works differently from other
 storage drivers in that your entire `/var/lib/docker/` directory is stored on a
 Btrfs volume.
 

@@ -9,7 +9,7 @@ aliases:
 > **Deprecated**
 >
 > The Device Mapper driver [has been deprecated](../../../engine/deprecated.md#device-mapper-storage-driver),
-> and will be removed in Docker Engine v25.0. If you are using Device Mapper,
+> and is removed in Docker Engine v25.0. If you are using Device Mapper,
 > you must migrate to a supported storage driver before upgrading to Docker
 > Engine v25.0. Read the [Docker storage drivers](select-storage-driver.md)
 > page for supported storage drivers.
