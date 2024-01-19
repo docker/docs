@@ -165,24 +165,16 @@ The **Supply chain attestations** policy requires that your artifacts have
 [provenance](../../build/attestations/slsa-provenance.md) attestations.
 
 This policy is unfulfilled if an artifact lacks either an SBOM attestation or a
-provenance attestation, or if the provenance attestation lacks information
-about the Git repository and base images being used. To ensure compliance,
+provenance attestation with max mode. To ensure compliance,
 update your build command to attach these attestations at build-time:
 
 ```console
-$ docker buildx build --provenance=true --sbom=true -t <IMAGE> --push .
+$ docker buildx build --provenance=mode=max --sbom=true -t <IMAGE> --push .
 ```
 
-BuildKit automatically detects the Git repository and base images when this
-information is available in the build context. For more information about
+For more information about
 building with attestations, see
 [Attestations](../../build/attestations/_index.md).
-
-> **Note**
->
-> Docker Scout is currently unable to discern the difference between using
-> `scratch` as a base image and having no base image provenance. As a result,
-> images based on `scratch` always fail the Supply chain attestations policy.
 
 ### Quality gates passed
 
