@@ -4,6 +4,7 @@ datafile: docker_container_update
 title: docker container update
 aliases:
 - /edge/engine/reference/commandline/container_update/
+- /engine/reference/commandline/update/
 layout: cli
 ---
 

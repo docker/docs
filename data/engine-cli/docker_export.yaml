@@ -1,14 +1,7 @@
 command: docker export
 aliases: docker container export, docker export
 short: Export a container's filesystem as a tar archive
-long: |-
-    The `docker export` command does not export the contents of volumes associated
-    with the container. If a volume is mounted on top of an existing directory in
-    the container, `docker export` will export the contents of the *underlying*
-    directory, not the contents of the volume.
-
-    Refer to [Backup, restore, or migrate data volumes](/storage/volumes/#back-up-restore-or-migrate-data-volumes)
-    in the user guide for examples on exporting data in a volume.
+long: Export a container's filesystem as a tar archive
 usage: docker export [OPTIONS] CONTAINER
 pname: docker
 plink: docker.yaml
@@ -34,16 +27,6 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-examples: |-
-    Each of these commands has the same result.
-
-    ```console
-    $ docker export red_panda > latest.tar
-    ```
-
-    ```console
-    $ docker export --output="latest.tar" red_panda
-    ```
 deprecated: false
 experimental: false
 experimentalcli: false

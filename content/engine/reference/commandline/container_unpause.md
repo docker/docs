@@ -4,6 +4,7 @@ datafile: docker_container_unpause
 title: docker container unpause
 aliases:
 - /edge/engine/reference/commandline/container_unpause/
+- /engine/reference/commandline/unpause/
 layout: cli
 ---
 

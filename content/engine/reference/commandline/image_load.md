@@ -4,6 +4,7 @@ datafile: docker_image_load
 title: docker image load
 aliases:
 - /edge/engine/reference/commandline/image_load/
+- /engine/reference/commandline/load/
 layout: cli
 ---
 

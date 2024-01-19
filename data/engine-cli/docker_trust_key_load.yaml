@@ -1,7 +1,7 @@
 command: docker trust key load
 short: Load a private key file for signing
 long: |-
-    `docker trust key load` adds private keys to the local docker trust keystore.
+    `docker trust key load` adds private keys to the local Docker trust keystore.
 
     To add a signer to a repository use `docker trust signer add`.
 usage: docker trust key load [OPTIONS] KEYFILE

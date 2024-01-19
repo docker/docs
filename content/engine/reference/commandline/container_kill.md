@@ -4,6 +4,7 @@ datafile: docker_container_kill
 title: docker container kill
 aliases:
 - /edge/engine/reference/commandline/container_kill/
+- /engine/reference/commandline/kill/
 layout: cli
 ---
 

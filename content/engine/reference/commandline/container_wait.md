@@ -4,6 +4,7 @@ datafile: docker_container_wait
 title: docker container wait
 aliases:
 - /edge/engine/reference/commandline/container_wait/
+- /engine/reference/commandline/wait/
 layout: cli
 ---
 

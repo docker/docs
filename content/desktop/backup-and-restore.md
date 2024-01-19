@@ -14,7 +14,7 @@ computer, for example.
 
 ## Save your data
 
-1. Commit your containers to an image with [`docker container commit`](../engine/reference/commandline/commit.md).
+1. Commit your containers to an image with [`docker container commit`](../engine/reference/commandline/container_commit.md).
 
    Committing a container stores the container filesystem changes and some of the
    container's configuration, for example labels and environment-variables, as a local image. Be aware that environment variables may contain sensitive
@@ -26,13 +26,13 @@ computer, for example.
 
    If you used a [named volume](../storage/index.md#more-details-about-mount-types) to store container data, such as databases, refer to the [back up, restore, or migrate data volumes](../storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section.
 
-2. Use [`docker push`](../engine/reference/commandline/push.md) to push any
+2. Use [`docker push`](../engine/reference/commandline/image_push.md) to push any
    images you have built locally and want to keep to the [Docker Hub registry](../docker-hub/index.md).
    
    Make sure to configure the [repository's visibility as "private"](../docker-hub/repos/index.md)
    for images that should not be publicly accessible. 
 
-   Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](../engine/reference/commandline/save.md)
+   Alternatively, use [`docker image save -o images.tar image1 [image2 ...]`](../engine/reference/commandline/image_save.md)
    to save any images you want to keep to a local tar file. 
 
 After backing up your data, you can uninstall the current version of Docker Desktop
@@ -40,13 +40,13 @@ and [install a different version](release-notes.md) or reset Docker Desktop to f
 
 ## Restore your data
 
-1. Use [`docker pull`](../engine/reference/commandline/pull.md) to restore images
+1. Use [`docker pull`](../engine/reference/commandline/image_pull.md) to restore images
    you pushed to Docker Hub.
 
-   If you backed up your images to a local tar file, use [`docker image load -i images.tar`](../engine/reference/commandline/load.md)
+   If you backed up your images to a local tar file, use [`docker image load -i images.tar`](../engine/reference/commandline/image_load.md)
    to restore previously saved images.
 
-2. Re-create your containers if needed, using [`docker run`](../engine/reference/commandline/run.md),
+2. Re-create your containers if needed, using [`docker run`](../engine/reference/commandline/container_run.md),
    or [Docker Compose](../compose/index.md).
 
 Refer to the [backup, restore, or migrate data volumes](../storage/volumes.md#back-up-restore-or-migrate-data-volumes) page in the storage section to restore volume data.

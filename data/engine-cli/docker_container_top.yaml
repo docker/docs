@@ -1,7 +1,7 @@
 command: docker container top
 aliases: docker container top, docker top
 short: Display the running processes of a container
-long: See [docker top](top.md) for more information.
+long: Display the running processes of a container
 usage: docker container top CONTAINER [ps OPTIONS]
 pname: docker container
 plink: docker_container.yaml

@@ -4,6 +4,7 @@ datafile: docker_image_import
 title: docker image import
 aliases:
 - /edge/engine/reference/commandline/image_import/
+- /engine/reference/commandline/import/
 layout: cli
 ---
 
