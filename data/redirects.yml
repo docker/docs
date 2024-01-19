@@ -641,6 +641,8 @@
   - /go/build-eap/
 "https://build.docker.com/":
   - /go/build-ga/
+"https://www.docker.com/products/build-cloud/":
+  - /go/docker-build-cloud/
 
 # CLI backlinks
 "/config/filter/":
