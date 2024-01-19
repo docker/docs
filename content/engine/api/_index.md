@@ -151,14 +151,12 @@ You can specify the API version to use in any of the following ways:
 | 1.13.1         | [1.26](/engine/api/v1.26/) | [changes](/engine/api/version-history/#v126-api-changes) |
 | 1.13           | [1.25](/engine/api/v1.26/) | [changes](/engine/api/version-history/#v125-api-changes) |
 | 1.12           | [1.24](/engine/api/v1.24/) | [changes](/engine/api/version-history/#v124-api-changes) |
-| 1.11           | [1.23](/engine/api/v1.23/) | [changes](/engine/api/version-history/#v123-api-changes) |
-| 1.10           | [1.22](/engine/api/v1.22/) | [changes](/engine/api/version-history/#v122-api-changes) |
-| 1.9            | [1.21](/engine/api/v1.21/) | [changes](/engine/api/version-history/#v121-api-changes) |
-| 1.8            | [1.20](/engine/api/v1.20/) | [changes](/engine/api/version-history/#v120-api-changes) |
-| 1.7            | [1.19](/engine/api/v1.19/) | [changes](/engine/api/version-history/#v119-api-changes) |
-| 1.6            | [1.18](/engine/api/v1.18/) | [changes](/engine/api/version-history/#v118-api-changes) |
 
-### Archived API versions
+### Deprecated API versions
 
-You can find archived documentation for older versions of the API
-in the [Docker code repository on GitHub](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api)
+API versions before v1.24 are [deprecated](/engine/deprecated/#deprecate-legacy-api-versions).
+You can find archived documentation for deprecated versions of the API in the
+code repository on GitHub:
+
+- [Documentation for API versions 1.23 and before](https://github.com/moby/moby/tree/v24.0.7/docs/api).
+- [Documentation for API versions 1.6 and before](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api).

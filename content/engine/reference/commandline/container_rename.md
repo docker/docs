@@ -4,6 +4,7 @@ datafile: docker_container_rename
 title: docker container rename
 aliases:
 - /edge/engine/reference/commandline/container_rename/
+- /engine/reference/commandline/rename/
 layout: cli
 ---
 

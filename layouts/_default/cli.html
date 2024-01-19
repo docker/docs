@@ -13,8 +13,16 @@
   {{ .Scratch.Set "subheadings" slice }}
   {{ partial "breadcrumbs.html" . }}
   <article class="DocSearch-content prose max-w-none dark:prose-invert">
-    {{ with .Title }}
-    <h1 class="scroll-mt-36">{{ . }}</h1>
+    {{ if ne .LinkTitle .Title }}
+    {{/*
+      we use linkTitle for surfacing popular aliases like "docker run"
+      if linkTitle is set, use both alias and canonical cmd as title
+    */}}
+    <h1 class="scroll-mt-36">{{ .LinkTitle }}<span
+      class="text-gray-light dark:text-gray-dark"> ({{ .Title }})</span>
+    </h1>
+    {{ else }}
+    <h1 class="scroll-mt-36">{{ .Title }}</h1>
     {{ end }}
     {{ $data.short | .RenderString (dict "display" "block") }}
     {{ if $data.deprecated }}
@@ -56,6 +64,17 @@
       {{ partial "heading.html" $heading }}
       {{ $.Scratch.Add "headings" $heading }}
       {{ highlight (strings.Replace . "\t" "") "console" }}
+    {{ end }}
+    {{ with $data.aliases }}
+      {{ $heading := dict "level" 2 "text" "Aliases" }}
+      {{ partial "heading.html" $heading }}
+      {{ $aliases := strings.Split . ", " }}
+      <p>The following commands are equivalent and redirect here:</p>
+      <ul>
+      {{ range $aliases }}
+        <li><code>{{ . }}</code></li>
+      {{ end }}
+      </ul>
     {{ end }}
     {{ with $data.long }}
       {{ $heading := dict "level" 2 "text" "Description" }}

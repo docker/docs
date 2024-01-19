@@ -1,7 +1,11 @@
 command: docker container stop
 aliases: docker container stop, docker stop
 short: Stop one or more running containers
-long: See [docker stop](stop.md) for more information.
+long: |-
+    The main process inside the container will receive `SIGTERM`, and after a grace
+    period, `SIGKILL`. The first signal can be changed with the `STOPSIGNAL`
+    instruction in the container's Dockerfile, or the `--stop-signal` option to
+    `docker run`.
 usage: docker container stop [OPTIONS] CONTAINER [CONTAINER...]
 pname: docker container
 plink: docker_container.yaml
@@ -38,6 +42,10 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+examples: |-
+    ```console
+    $ docker stop my_container
+    ```
 deprecated: false
 experimental: false
 experimentalcli: false

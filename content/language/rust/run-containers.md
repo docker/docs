@@ -192,7 +192,7 @@ That’s better! You can now easily identify your container based on the name.
 In this section, you took a look at running containers. You also took a look at managing containers by starting, stopping, and restarting them. And finally, you looked at naming your containers so they are more easily identifiable.
 
 Related information:
- - [docker run CLI reference](../../engine/reference/commandline/run.md)
+ - [docker run CLI reference](../../engine/reference/commandline/container_run.md)
 
 ## Next steps
 

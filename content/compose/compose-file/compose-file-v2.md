@@ -273,7 +273,7 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 Specify a build’s container isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](../../engine/reference/commandline/run.md#isolation)
+[Docker Engine docs](../../engine/reference/commandline/container_run.md#isolation)
 for details.
 
 If unspecified, Compose will use the `isolation` value found in the service's definition
@@ -778,7 +778,7 @@ host system to be added. An example of where this is useful is when multiple
 containers (running as different users) need to all read or write the same
 file on the host system. That file can be owned by a group shared by all the
 containers, and specified in `group_add`. See the
-[Docker documentation](../../engine/reference/run.md#additional-groups) for more
+[Docker documentation](../../engine/reference/commandline/container_run.md#additional-groups) for more
 details.
 
 A full example:
@@ -900,7 +900,7 @@ services:
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](../../engine/reference/commandline/run.md#isolation)
+[Docker Engine docs](../../engine/reference/commandline/container_run.md#isolation)
 for details.
 
 ### labels
@@ -1557,7 +1557,7 @@ restart: "unless-stopped"
 ### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](../../engine/reference/run.md#runtime-constraints-on-resources) counterpart.
+[docker run](../../engine/reference/commandline/container_run.md#runtime-constraints-on-resources) counterpart.
 
 > Added in [version 2.2](compose-versioning.md#version-22) file format.
 >

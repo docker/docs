@@ -1,9 +1,11 @@
 ---
 datafolder: engine-cli
 datafile: docker_container_run
+linkTitle: docker run
 title: docker container run
 aliases:
 - /edge/engine/reference/commandline/container_rm/
+- /engine/reference/commandline/run/
 layout: cli
 ---
 

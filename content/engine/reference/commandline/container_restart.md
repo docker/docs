@@ -4,6 +4,7 @@ datafile: docker_container_restart
 title: docker container restart
 aliases:
 - /edge/engine/reference/commandline/container_restart/
+- /engine/reference/commandline/restart/
 layout: cli
 ---
 
