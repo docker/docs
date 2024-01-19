@@ -1543,8 +1543,6 @@ Manuals:
         section:
         - path: /config/containers/logging/local/
           title: Local file logging driver
-        - path: /config/containers/logging/logentries/
-          title: Logentries logging driver
         - path: /config/containers/logging/json-file/
           title: JSON File logging driver
         - path: /config/containers/logging/gelf/
