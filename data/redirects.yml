@@ -571,6 +571,8 @@
   - /feedback/extension/
 "https://docs.google.com/forms/u/1/d/e/1FAIpQLScgzKwqQyr7BmnphdrcGTO3wkye_McHJVsWzOIgEESfqmditQ/formResponse":
   - /feedback/runtime/
+"https://docs.google.com/forms/d/e/1FAIpQLSeqCJNB45MeKO_ofBO4ZvglZ0cevMMD_FYzncKoZNwqz_9bxg/viewform":
+  - /feedback/desktop-build/
 
 # Docker Scout
 "/scout/":
