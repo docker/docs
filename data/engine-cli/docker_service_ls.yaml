@@ -2,7 +2,7 @@ command: docker service ls
 aliases: docker service ls, docker service list
 short: List services
 long: |-
-    This command lists services are running in the swarm.
+    This command lists services that are running in the swarm.
 
     > **Note**
     >
@@ -76,7 +76,7 @@ examples: |-
     hh08h9uu8uwr  job       replicated-job  1/1 (3/5 completed)  nginx:latest
     ```
 
-    The `REPLICAS` column shows both the *actual* and *desired* number of tasks for
+    The `REPLICAS` column shows both the actual and desired number of tasks for
     the service. If the service is in `replicated-job` or `global-job`, it will
     additionally show the completion status of the job as completed tasks over
     total tasks the job will execute.
@@ -84,7 +84,7 @@ examples: |-
     ### Filtering (--filter) {#filter}
 
     The filtering flag (`-f` or `--filter`) format is of "key=value". If there is more
-    than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`)
+    than one filter, then pass multiple flags (e.g., `--filter "foo=bar" --filter "bif=baz"`).
 
     The currently supported filters are:
 
@@ -95,7 +95,9 @@ examples: |-
 
     #### id
 
-    The `id` filter matches all or part of a service's id.
+    The `id` filter matches all or the prefix of a service's ID.
+
+    The following filter matches services with an ID starting with `0bcjw`:
 
     ```console
     $ docker service ls -f "id=0bcjw"
@@ -143,9 +145,9 @@ examples: |-
 
     #### name
 
-    The `name` filter matches on all or part of a service's name.
+    The `name` filter matches on all or the prefix of a service's name.
 
-    The following filter matches services with a name containing `redis`.
+    The following filter matches services with a name starting with `redis`.
 
     ```console
     $ docker service ls --filter name=redis

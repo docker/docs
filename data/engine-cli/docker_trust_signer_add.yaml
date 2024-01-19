@@ -26,7 +26,7 @@ inherited_options:
       kubernetes: false
       swarm: false
 examples: |-
-    ### Add a signer to a repo
+    ### Add a signer to a repository
 
     To add a new signer, `alice`, to this repository:
 
