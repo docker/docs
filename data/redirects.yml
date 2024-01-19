@@ -614,31 +614,33 @@
 "/scout/integrations/source-code-management/github/":
   - "/go/scout-github/"
 
-# Build links
+# Build links (internal)
+"/build/bake/reference/":
+  - /build/customize/bake/file-definition/
 "/desktop/use-desktop/builds/":
   - /go/builds/
 "/build/builders/":
   - /go/builders/
 "/build/builders/#selected-builder":
   - /go/builders/selected/
-"https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
-  - /go/build-eap/
-"https://build.docker.com/":
-  - /go/build-ga/
 "/build/building/multi-platform/":
   - /go/build-multi-platform/
 "/build/cache/backends/":
   - /go/build-cache-backends/
 "/build/exporters/":
   - /go/build-exporters/
-"/build/bake/reference/":
-  - /build/customize/bake/file-definition/
 "/build/ci/github-actions/attestations/":
   - /go/build-attestations-gha/
 "/build/attestations/":
   - /go/attestations/
 "/build/attestations/slsa-provenance/":
   - /go/provenance/
+
+# Build links (external)
+"https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
+  - /go/build-eap/
+"https://build.docker.com/":
+  - /go/build-ga/
 
 # CLI backlinks
 "/config/filter/":
