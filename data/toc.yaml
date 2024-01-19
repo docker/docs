@@ -1,4 +1,4 @@
-Guides:
+Get started:
 - title: Docker overview
   path: /get-started/overview/
 - title: Get Docker
@@ -47,6 +47,9 @@ Guides:
         path: /get-started/09_image_best/
       - title: "Part 10: What next?"
         path: /get-started/11_what_next/
+
+Guides:
+
 
 - sectiontitle: Language-specific guides
   section:
