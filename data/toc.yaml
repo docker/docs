@@ -1,4 +1,4 @@
-Guides:
+Get started:
 - title: Docker overview
   path: /get-started/overview/
 - title: Get Docker
@@ -47,7 +47,12 @@ Guides:
         path: /get-started/09_image_best/
       - title: "Part 10: What next?"
         path: /get-started/11_what_next/
+- path: /get-started/resources/
+  title: "Educational resources"
+- path: /glossary/
+  title: Glossary
 
+Guides:
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -214,8 +219,6 @@ Guides:
     path: /get-started/swarm-deploy/
   - title: Cloud integrations
     path: /cloud/
-- path: /get-started/resources/
-  title: "Educational resources"
 
 - sectiontitle: Contribute
   section:
@@ -1009,8 +1012,6 @@ Reference:
           title: Version 3
         - path: /compose/compose-file/compose-file-v2/
           title: Version 2
-- path: /glossary/
-  title: Glossary
 
 
 
@@ -1109,9 +1110,179 @@ Samples:
       title: Wireguard
 
 
-Manuals:
-- path: /manuals/
-  title: Overview
+Build: 
+- sectiontitle: Docker Build
+  section:
+    - path: /build/
+      title: Overview
+    - path: /build/architecture/
+      title: Architecture
+    - sectiontitle: Building images
+      section:
+        - path: /build/building/packaging/
+          title: Packaging your software
+        - path: /build/building/context/
+          title: Context
+        - path: /build/building/multi-stage/
+          title: Multi-stage builds
+        - path: /build/building/multi-platform/
+          title: Multi-platform images
+        - path: /build/building/env-vars/
+          title: Environment variables
+        - path: /build/building/secrets/
+          title: Build secrets
+        - path: /build/building/annotations/
+          title: Annotations
+        - path: /build/building/opentelemetry/
+          title: OpenTelemetry support
+        - path: /build/building/base-images/
+          title: Create your own base image
+    - sectiontitle: Builders
+      section:
+        - path: /build/builders/
+          title: Builders overview
+        - path: /build/builders/manage/
+          title: Manage builders
+    - sectiontitle: Drivers
+      section:
+        - path: /build/drivers/
+          title: Drivers overview
+        - path: /build/drivers/docker/
+          title: Docker driver
+        - path: /build/drivers/docker-container/
+          title: Docker container driver
+        - path: /build/drivers/kubernetes/
+          title: Kubernetes driver
+        - path: /build/drivers/remote/
+          title: Remote driver
+    - sectiontitle: Build Cloud
+      section:
+        - path: /build/cloud/
+          title: Overview
+        - path: /build/cloud/setup/
+          title: Setup
+        - path: /build/cloud/usage/
+          title: Usage
+        - path: /build/cloud/ci/
+          title: Build Cloud in CI
+        - path: /build/cloud/optimization/
+          title: Optimize for cloud builds
+    - sectiontitle: Exporters
+      section:
+        - path: /build/exporters/
+          title: Overview
+        - path: /build/exporters/image-registry/
+          title: Image and registry exporters
+        - path: /build/exporters/local-tar/
+          title: Local and tar exporters
+        - path: /build/exporters/oci-docker/
+          title: OCI and Docker exporters
+    - sectiontitle: Cache
+      section:
+        - path: /build/cache/
+          title: Optimizing builds with cache
+        - path: /build/cache/garbage-collection/
+          title: Garbage collection
+        - sectiontitle: Cache backends
+          section:
+            - path: /build/cache/backends/
+              title: Overview
+            - path: /build/cache/backends/inline/
+              title: Inline
+            - path: /build/cache/backends/local/
+              title: Local
+            - path: /build/cache/backends/registry/
+              title: Registry
+            - path: /build/cache/backends/gha/
+              title: GitHub Actions
+            - path: /build/cache/backends/azblob/
+              title: Azure Blob Storage
+            - path: /build/cache/backends/s3/
+              title: Amazon S3
+    - sectiontitle: Bake
+      section:
+        - path: /build/bake/
+          title: Overview
+        - path: /build/bake/reference/
+          title: Bake file reference
+        - path: /build/bake/configuring-build/
+          title: Configuring builds
+        - path: /build/bake/advanced/
+          title: Advanced patterns
+        - path: /build/bake/build-contexts/
+          title: Build contexts and linking targets
+        - path: /build/bake/compose-file/
+          title: Building from Compose file
+        - path: /build/bake/remote-definition/
+          title: Remote Bake file definition
+    - sectiontitle: Attestations
+      section:
+        - path: /build/attestations/
+          title: Overview
+        - path: /build/attestations/sbom/
+          title: SBOM
+        - path: /build/attestations/slsa-provenance/
+          title: Provenance
+        - path: /build/attestations/slsa-definitions/
+          title: SLSA definitions
+        - path: /build/attestations/attestation-storage/
+          title: Attestation storage
+    - sectiontitle: Dockerfile
+      section:
+        - path: /build/dockerfile/frontend/
+          title: Custom Dockerfile syntax
+        - path: /build/dockerfile/release-notes/
+          title: Release notes
+    - sectiontitle: BuildKit
+      section:
+        - path: /build/buildkit/
+          title: Overview
+        - path: /build/buildkit/configure/
+          title: Configure
+        - path: /build/buildkit/toml-configuration/
+          title: TOML configuration
+    - sectiontitle: Continuous integration
+      section:
+        - path: /build/ci/
+          title: CI with Docker
+        - sectiontitle: GitHub Actions
+          section:
+          - path: /build/ci/github-actions/
+            title: Introduction
+          - path: /build/ci/github-actions/configure-builder/
+            title: Configuring your builder
+          - path: /build/ci/github-actions/multi-platform/
+            title: Multi-platform image
+          - path: /build/ci/github-actions/secrets/
+            title: Secrets
+          - path: /build/ci/github-actions/push-multi-registries/
+            title: Push to multiple registries
+          - path: /build/ci/github-actions/manage-tags-labels/
+            title: Manage tags and labels
+          - path: /build/ci/github-actions/cache/
+            title: Cache management
+          - path: /build/ci/github-actions/export-docker/
+            title: Export to Docker
+          - path: /build/ci/github-actions/test-before-push/
+            title: Test before push
+          - path: /build/ci/github-actions/local-registry/
+            title: Local registry
+          - path: /build/ci/github-actions/share-image-jobs/
+            title: Share built image between jobs
+          - path: /build/ci/github-actions/named-contexts/
+            title: Named contexts
+          - path: /build/ci/github-actions/copy-image-registries/
+            title: Copy image between registries
+          - path: /build/ci/github-actions/update-dockerhub-desc/
+            title: Update Docker Hub repo description
+          - path: /build/ci/github-actions/attestations/
+            title: SBOM and provenance attestations
+          - path: /build/ci/github-actions/annotations/
+            title: Annotations
+    - path: /build/release-notes/
+      title: Release notes
+
+Run:
 - sectiontitle: Docker Desktop
   section:
     - path: /desktop/
@@ -1252,185 +1423,6 @@ Manuals:
         title: Older versions for Windows
       - path: /desktop/previous-versions/archive-mac/
         title: Older versions for Mac
-
-- sectiontitle: Docker Extensions
-  section:
-    - path: /desktop/extensions/
-      title: What are Docker Extensions?
-    - sectiontitle: Extensions on Docker Desktop
-      section:
-        - path: /desktop/extensions/marketplace/
-          title: Manage Marketplace extensions
-        - path: /desktop/extensions/non-marketplace/
-          title: Manage non-Marketplace extensions
-        - path: /desktop/extensions/settings-feedback/
-          title: Change settings and give feedback
-        - path: /desktop/extensions/private-marketplace/
-          title: Configure a private marketplace (Experimental)
-    - sectiontitle: Extensions SDK
-      section:
-        - path: /desktop/extensions-sdk/
-          title: Overview
-        - path: /desktop/extensions-sdk/process/
-          title: The build and publish process
-        - path: /desktop/extensions-sdk/quickstart/
-          title: Quickstart
-        - sectiontitle: "Part one: Build"
-          section:
-            - title: Create a simple extension
-              path: /desktop/extensions-sdk/build/minimal-frontend-extension/
-            - title: Create an advanced frontend extension
-              path: /desktop/extensions-sdk/build/frontend-extension-tutorial/
-            - title: Add a backend to your extension
-              path: /desktop/extensions-sdk/build/backend-extension-tutorial/
-        - sectiontitle: "Part two: Publish"
-          section:
-            - title: Overview
-              path: /desktop/extensions-sdk/extensions/
-            - title: Labels
-              path: /desktop/extensions-sdk/extensions/labels/
-            - title: Validate
-              path: /desktop/extensions-sdk/extensions/validate/
-            - title: Package and release your extension
-              path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
-            - title: Generate a share link
-              path: /desktop/extensions-sdk/extensions/share/
-            - title: Publish in the marketplace
-              path: /desktop/extensions-sdk/extensions/publish/
-            - title: Build multi-arch extensions
-              path: /desktop/extensions-sdk/extensions/multi-arch/
-        - sectiontitle: "Architecture"
-          section:
-            - title: Overview
-              path: /desktop/extensions-sdk/architecture/
-            - title: Metadata
-              path: /desktop/extensions-sdk/architecture/metadata/
-            - title: Security
-              path: /desktop/extensions-sdk/architecture/security/
-        - sectiontitle: "Design and UI styling"
-          section:
-             - title: UI styling guidelines
-               path: /desktop/extensions-sdk/design/
-             - title: Guidelines
-               path: /desktop/extensions-sdk/design/design-guidelines/
-             - title: Docker design principles
-               path: /desktop/extensions-sdk/design/design-principles/
-             - title: MUI best practices
-               path: /desktop/extensions-sdk/design/mui-best-practices/
-        - sectiontitle: "Developer Guides"
-          section:
-            - title: Invoke host binaries
-              path: /desktop/extensions-sdk/guides/invoke-host-binaries/
-            - title: Use the Docker socket from the extension backend
-              path: /desktop/extensions-sdk/guides/use-docker-socket-from-backend/
-            - title: Interacting with Kubernetes
-              path: /desktop/extensions-sdk/guides/kubernetes/
-            - title: Authentication
-              path: /desktop/extensions-sdk/guides/oauth2-flow/
-        - sectiontitle: Developer SDK tools
-          section:
-            - title: "Test and debug"
-              path: /desktop/extensions-sdk/dev/test-debug/
-            - title: "Continuous integration"
-              path: /desktop/extensions-sdk/dev/continuous-integration/
-            - title: CLI reference
-              path: /desktop/extensions-sdk/dev/usage/
-            - sectiontitle: Extension APIs
-              section:
-                - title: Overview
-                  path: /desktop/extensions-sdk/dev/api/overview/
-                - title: Extension Backend
-                  path: /desktop/extensions-sdk/dev/api/backend/
-                - title: Docker
-                  path: /desktop/extensions-sdk/dev/api/docker/
-                - title: Dashboard
-                  path: /desktop/extensions-sdk/dev/api/dashboard/
-                - title: Navigation
-                  path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
-                - title: API Reference
-                  path: /desktop/extensions-sdk/dev/api/reference/README/
-
-- sectiontitle: Docker Scout
-  section:
-    - path: /scout/
-      title: Overview
-    - path: /scout/quickstart/
-      title: Quickstart
-    - sectiontitle: Explore Docker Scout
-      section:
-      - path: /scout/dashboard/
-        title: Dashboard
-      - path: /scout/image-details-view/
-        title: Image details view
-      - path: /scout/advisory-db-sources/
-        title: Advisory database
-      - path: /scout/data-handling/
-        title: Data handling
-    - sectiontitle: Use Docker Scout
-      section:
-      - path: /scout/image-analysis/
-        title: Image analysis
-      - path: /scout/local-fs/
-        title: Analyze local files
-      - path: /scout/sbom/
-        title: SBOM
-      - path: /scout/env-vars/
-        title: Environment variables
-    - sectiontitle: Policy Evaluation
-      section:
-      - path: /scout/policy/
-        title: Overview
-      - path: /scout/policy/view/
-        title: View policy status
-      - path: /scout/policy/configure/
-        title: Configure policies
-      - path: /scout/policy/ci/
-        title: Policy Evaluation in CI
-      - path: /scout/policy/remediation/
-        title: Remediation
-    - sectiontitle: Integrations
-      section:
-      - title: Overview
-        path: /scout/integrations/
-      - sectiontitle: Environment monitoring
-        section:
-        - title: Overview
-          path: /scout/integrations/environment/
-        - title: Sysdig
-          path: /scout/integrations/environment/sysdig/
-        - title: Generic
-          path: /scout/integrations/environment/cli/
-      - sectiontitle: Container registries
-        section:
-        - title: Artifactory
-          path: /scout/integrations/registry/artifactory/
-        - title: Elastic Container Registry
-          path: /scout/integrations/registry/ecr/
-        - title: Azure Container Registry
-          path: /scout/integrations/registry/acr/
-      - sectiontitle: Continuous integration
-        section:
-        - title: GitHub Actions
-          path: /scout/integrations/ci/gha/
-        - title: GitLab
-          path: /scout/integrations/ci/gitlab/
-        - title: Microsoft Azure DevOps Pipelines
-          path: /scout/integrations/ci/azure/
-        - title: Circle CI
-          path: /scout/integrations/ci/circle-ci/
-        - title: Jenkins
-          path: /scout/integrations/ci/jenkins/
-      - sectiontitle: Code quality
-        section:
-        - title: SonarQube
-          path: /scout/integrations/code-quality/sonarqube/
-      - sectiontitle: Source code management
-        section:
-        - title: GitHub
-          path: /scout/integrations/source-code-management/github/
-    - path: /scout/release-notes/
-      title: Release notes
-
 - sectiontitle: Docker Engine
   section:
   - path: /engine/
@@ -1777,176 +1769,7 @@ Manuals:
         title: Engine 17.03
       - path: /engine/release-notes/prior-releases/
         title: Engine 1.13 and earlier
-- sectiontitle: Docker Build
-  section:
-    - path: /build/
-      title: Overview
-    - path: /build/architecture/
-      title: Architecture
-    - sectiontitle: Building images
-      section:
-        - path: /build/building/packaging/
-          title: Packaging your software
-        - path: /build/building/context/
-          title: Context
-        - path: /build/building/multi-stage/
-          title: Multi-stage builds
-        - path: /build/building/multi-platform/
-          title: Multi-platform images
-        - path: /build/building/env-vars/
-          title: Environment variables
-        - path: /build/building/secrets/
-          title: Build secrets
-        - path: /build/building/annotations/
-          title: Annotations
-        - path: /build/building/opentelemetry/
-          title: OpenTelemetry support
-        - path: /build/building/base-images/
-          title: Create your own base image
-    - sectiontitle: Builders
-      section:
-        - path: /build/builders/
-          title: Builders overview
-        - path: /build/builders/manage/
-          title: Manage builders
-    - sectiontitle: Drivers
-      section:
-        - path: /build/drivers/
-          title: Drivers overview
-        - path: /build/drivers/docker/
-          title: Docker driver
-        - path: /build/drivers/docker-container/
-          title: Docker container driver
-        - path: /build/drivers/kubernetes/
-          title: Kubernetes driver
-        - path: /build/drivers/remote/
-          title: Remote driver
-    - sectiontitle: Build Cloud
-      section:
-        - path: /build/cloud/
-          title: Overview
-        - path: /build/cloud/setup/
-          title: Setup
-        - path: /build/cloud/usage/
-          title: Usage
-        - path: /build/cloud/ci/
-          title: Build Cloud in CI
-        - path: /build/cloud/optimization/
-          title: Optimize for cloud builds
-    - sectiontitle: Exporters
-      section:
-        - path: /build/exporters/
-          title: Overview
-        - path: /build/exporters/image-registry/
-          title: Image and registry exporters
-        - path: /build/exporters/local-tar/
-          title: Local and tar exporters
-        - path: /build/exporters/oci-docker/
-          title: OCI and Docker exporters
-    - sectiontitle: Cache
-      section:
-        - path: /build/cache/
-          title: Optimizing builds with cache
-        - path: /build/cache/garbage-collection/
-          title: Garbage collection
-        - sectiontitle: Cache backends
-          section:
-            - path: /build/cache/backends/
-              title: Overview
-            - path: /build/cache/backends/inline/
-              title: Inline
-            - path: /build/cache/backends/local/
-              title: Local
-            - path: /build/cache/backends/registry/
-              title: Registry
-            - path: /build/cache/backends/gha/
-              title: GitHub Actions
-            - path: /build/cache/backends/azblob/
-              title: Azure Blob Storage
-            - path: /build/cache/backends/s3/
-              title: Amazon S3
-    - sectiontitle: Bake
-      section:
-        - path: /build/bake/
-          title: Overview
-        - path: /build/bake/reference/
-          title: Bake file reference
-        - path: /build/bake/configuring-build/
-          title: Configuring builds
-        - path: /build/bake/advanced/
-          title: Advanced patterns
-        - path: /build/bake/build-contexts/
-          title: Build contexts and linking targets
-        - path: /build/bake/compose-file/
-          title: Building from Compose file
-        - path: /build/bake/remote-definition/
-          title: Remote Bake file definition
-    - sectiontitle: Attestations
-      section:
-        - path: /build/attestations/
-          title: Overview
-        - path: /build/attestations/sbom/
-          title: SBOM
-        - path: /build/attestations/slsa-provenance/
-          title: Provenance
-        - path: /build/attestations/slsa-definitions/
-          title: SLSA definitions
-        - path: /build/attestations/attestation-storage/
-          title: Attestation storage
-    - sectiontitle: Dockerfile
-      section:
-        - path: /build/dockerfile/frontend/
-          title: Custom Dockerfile syntax
-        - path: /build/dockerfile/release-notes/
-          title: Release notes
-    - sectiontitle: BuildKit
-      section:
-        - path: /build/buildkit/
-          title: Overview
-        - path: /build/buildkit/configure/
-          title: Configure
-        - path: /build/buildkit/toml-configuration/
-          title: TOML configuration
-    - sectiontitle: Continuous integration
-      section:
-        - path: /build/ci/
-          title: CI with Docker
-        - sectiontitle: GitHub Actions
-          section:
-          - path: /build/ci/github-actions/
-            title: Introduction
-          - path: /build/ci/github-actions/configure-builder/
-            title: Configuring your builder
-          - path: /build/ci/github-actions/multi-platform/
-            title: Multi-platform image
-          - path: /build/ci/github-actions/secrets/
-            title: Secrets
-          - path: /build/ci/github-actions/push-multi-registries/
-            title: Push to multiple registries
-          - path: /build/ci/github-actions/manage-tags-labels/
-            title: Manage tags and labels
-          - path: /build/ci/github-actions/cache/
-            title: Cache management
-          - path: /build/ci/github-actions/export-docker/
-            title: Export to Docker
-          - path: /build/ci/github-actions/test-before-push/
-            title: Test before push
-          - path: /build/ci/github-actions/local-registry/
-            title: Local registry
-          - path: /build/ci/github-actions/share-image-jobs/
-            title: Share built image between jobs
-          - path: /build/ci/github-actions/named-contexts/
-            title: Named contexts
-          - path: /build/ci/github-actions/copy-image-registries/
-            title: Copy image between registries
-          - path: /build/ci/github-actions/update-dockerhub-desc/
-            title: Update Docker Hub repo description
-          - path: /build/ci/github-actions/attestations/
-            title: SBOM and provenance attestations
-          - path: /build/ci/github-actions/annotations/
-            title: Annotations
-    - path: /build/release-notes/
-      title: Release notes
+
 - sectiontitle: Docker Compose
   section:
   - path: /compose/
@@ -2015,7 +1838,205 @@ Manuals:
     title: Migrate to Compose V2
   - path: /compose/release-notes/
     title: Release notes
+- sectiontitle: FAQ
+  section:
+  - sectiontitle: Trusted content
+    section:
+    - path: /trusted-content/
+      title: Overview
+    - path: /trusted-content/official-images/
+      title: Docker Official images
+    - path: /trusted-content/dvp-program/
+      title: Docker Verified Publisher Program
+    - path: /trusted-content/dsos-program/
+      title: Docker-Sponsored Open Source Program
+    - path: /trusted-content/insights-analytics/
+      title: Insights and analytics
+- path: /release-notes/
+  title: Release notes
+- path: /support/
+  title: Get support
+- path: /release-lifecycle/
+  title: Product release lifecycle
 
+Share and verify:
+- sectiontitle: Docker Extensions
+  section:
+    - path: /desktop/extensions/
+      title: What are Docker Extensions?
+    - sectiontitle: Extensions on Docker Desktop
+      section:
+        - path: /desktop/extensions/marketplace/
+          title: Manage Marketplace extensions
+        - path: /desktop/extensions/non-marketplace/
+          title: Manage non-Marketplace extensions
+        - path: /desktop/extensions/settings-feedback/
+          title: Change settings and give feedback
+        - path: /desktop/extensions/private-marketplace/
+          title: Configure a private marketplace (Experimental)
+    - sectiontitle: Extensions SDK
+      section:
+        - path: /desktop/extensions-sdk/
+          title: Overview
+        - path: /desktop/extensions-sdk/process/
+          title: The build and publish process
+        - path: /desktop/extensions-sdk/quickstart/
+          title: Quickstart
+        - sectiontitle: "Part one: Build"
+          section:
+            - title: Create a simple extension
+              path: /desktop/extensions-sdk/build/minimal-frontend-extension/
+            - title: Create an advanced frontend extension
+              path: /desktop/extensions-sdk/build/frontend-extension-tutorial/
+            - title: Add a backend to your extension
+              path: /desktop/extensions-sdk/build/backend-extension-tutorial/
+        - sectiontitle: "Part two: Publish"
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/extensions/
+            - title: Labels
+              path: /desktop/extensions-sdk/extensions/labels/
+            - title: Validate
+              path: /desktop/extensions-sdk/extensions/validate/
+            - title: Package and release your extension
+              path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
+            - title: Generate a share link
+              path: /desktop/extensions-sdk/extensions/share/
+            - title: Publish in the marketplace
+              path: /desktop/extensions-sdk/extensions/publish/
+            - title: Build multi-arch extensions
+              path: /desktop/extensions-sdk/extensions/multi-arch/
+        - sectiontitle: "Architecture"
+          section:
+            - title: Overview
+              path: /desktop/extensions-sdk/architecture/
+            - title: Metadata
+              path: /desktop/extensions-sdk/architecture/metadata/
+            - title: Security
+              path: /desktop/extensions-sdk/architecture/security/
+        - sectiontitle: "Design and UI styling"
+          section:
+             - title: UI styling guidelines
+               path: /desktop/extensions-sdk/design/
+             - title: Guidelines
+               path: /desktop/extensions-sdk/design/design-guidelines/
+             - title: Docker design principles
+               path: /desktop/extensions-sdk/design/design-principles/
+             - title: MUI best practices
+               path: /desktop/extensions-sdk/design/mui-best-practices/
+        - sectiontitle: "Developer Guides"
+          section:
+            - title: Invoke host binaries
+              path: /desktop/extensions-sdk/guides/invoke-host-binaries/
+            - title: Use the Docker socket from the extension backend
+              path: /desktop/extensions-sdk/guides/use-docker-socket-from-backend/
+            - title: Interacting with Kubernetes
+              path: /desktop/extensions-sdk/guides/kubernetes/
+            - title: Authentication
+              path: /desktop/extensions-sdk/guides/oauth2-flow/
+        - sectiontitle: Developer SDK tools
+          section:
+            - title: "Test and debug"
+              path: /desktop/extensions-sdk/dev/test-debug/
+            - title: "Continuous integration"
+              path: /desktop/extensions-sdk/dev/continuous-integration/
+            - title: CLI reference
+              path: /desktop/extensions-sdk/dev/usage/
+            - sectiontitle: Extension APIs
+              section:
+                - title: Overview
+                  path: /desktop/extensions-sdk/dev/api/overview/
+                - title: Extension Backend
+                  path: /desktop/extensions-sdk/dev/api/backend/
+                - title: Docker
+                  path: /desktop/extensions-sdk/dev/api/docker/
+                - title: Dashboard
+                  path: /desktop/extensions-sdk/dev/api/dashboard/
+                - title: Navigation
+                  path: /desktop/extensions-sdk/dev/api/dashboard-routes-navigation/
+                - title: API Reference
+                  path: /desktop/extensions-sdk/dev/api/reference/README/
+
+- sectiontitle: Docker Scout
+  section:
+    - path: /scout/
+      title: Overview
+    - path: /scout/quickstart/
+      title: Quickstart
+    - sectiontitle: Explore Docker Scout
+      section:
+      - path: /scout/dashboard/
+        title: Dashboard
+      - path: /scout/image-details-view/
+        title: Image details view
+      - path: /scout/advisory-db-sources/
+        title: Advisory database
+      - path: /scout/data-handling/
+        title: Data handling
+    - sectiontitle: Use Docker Scout
+      section:
+      - path: /scout/image-analysis/
+        title: Image analysis
+      - path: /scout/local-fs/
+        title: Analyze local files
+      - path: /scout/sbom/
+        title: SBOM
+      - path: /scout/env-vars/
+        title: Environment variables
+    - sectiontitle: Policy Evaluation
+      section:
+      - path: /scout/policy/
+        title: Overview
+      - path: /scout/policy/view/
+        title: View policy status
+      - path: /scout/policy/configure/
+        title: Configure policies
+      - path: /scout/policy/ci/
+        title: Policy Evaluation in CI
+      - path: /scout/policy/remediation/
+        title: Remediation
+    - sectiontitle: Integrations
+      section:
+      - title: Overview
+        path: /scout/integrations/
+      - sectiontitle: Environment monitoring
+        section:
+        - title: Overview
+          path: /scout/integrations/environment/
+        - title: Sysdig
+          path: /scout/integrations/environment/sysdig/
+        - title: Generic
+          path: /scout/integrations/environment/cli/
+      - sectiontitle: Container registries
+        section:
+        - title: Artifactory
+          path: /scout/integrations/registry/artifactory/
+        - title: Elastic Container Registry
+          path: /scout/integrations/registry/ecr/
+        - title: Azure Container Registry
+          path: /scout/integrations/registry/acr/
+      - sectiontitle: Continuous integration
+        section:
+        - title: GitHub Actions
+          path: /scout/integrations/ci/gha/
+        - title: GitLab
+          path: /scout/integrations/ci/gitlab/
+        - title: Microsoft Azure DevOps Pipelines
+          path: /scout/integrations/ci/azure/
+        - title: Circle CI
+          path: /scout/integrations/ci/circle-ci/
+        - title: Jenkins
+          path: /scout/integrations/ci/jenkins/
+      - sectiontitle: Code quality
+        section:
+        - title: SonarQube
+          path: /scout/integrations/code-quality/sonarqube/
+      - sectiontitle: Source code management
+        section:
+        - title: GitHub
+          path: /scout/integrations/source-code-management/github/
+    - path: /scout/release-notes/
+      title: Release notes
 - sectiontitle: Docker Hub
   section:
   - path: /docker-hub/
@@ -2064,7 +2085,27 @@ Manuals:
     title: OCI artifacts
   - path: /docker-hub/release-notes/
     title: Release notes
+- sectiontitle: Trusted content
+  section:
+  - path: /trusted-content/
+    title: Overview
+  - path: /trusted-content/official-images/
+    title: Docker Official images
+  - path: /trusted-content/dvp-program/
+    title: Docker Verified Publisher Program
+  - path: /trusted-content/dsos-program/
+    title: Docker-Sponsored Open Source Program
+  - path: /trusted-content/insights-analytics/
+    title: Insights and analytics
+- path: /release-notes/
+  title: Release notes
+- path: /support/
+  title: Get support
+- path: /release-lifecycle/
+  title: Product release lifecycle
 
+
+Account management:
 - sectiontitle: Administration
   section:
   - path: /admin/
@@ -2185,20 +2226,6 @@ Manuals:
     title: Docker Scout subscriptions and features
   - path: /subscription/build-details/
     title: Docker Build Cloud subscriptions and features
-
-- sectiontitle: Trusted content
-  section:
-  - path: /trusted-content/
-    title: Overview
-  - path: /trusted-content/official-images/
-    title: Docker Official images
-  - path: /trusted-content/dvp-program/
-    title: Docker Verified Publisher Program
-  - path: /trusted-content/dsos-program/
-    title: Docker-Sponsored Open Source Program
-  - path: /trusted-content/insights-analytics/
-    title: Insights and analytics
-
 - path: /release-notes/
   title: Release notes
 - path: /support/
@@ -2206,27 +2233,8 @@ Manuals:
 - path: /release-lifecycle/
   title: Product release lifecycle
 
-FAQ:
-  - path: /faq/
-    title: Overview
-  - path: /billing/faqs/
-    title: Billing
-  - path: /build/cloud/faq/
-    title: Build Cloud
-  - path: /compose/faq/
-    title: Compose
-  - sectiontitle: Desktop
-    section:
-    - path: /desktop/faqs/general/
-      title: General
-    - path: /desktop/faqs/macfaqs/
-      title: Mac
-    - path: /desktop/faqs/windowsfaqs/
-      title: Windows
-    - path: /desktop/faqs/linuxfaqs/
-      title: Linux
-    - path: /desktop/faqs/releases/
-      title: Releases
+- sectiontitle: FAQ
+  section:
   - sectiontitle: Docker account and admin
     section:
     - path: /faq/admin/general-faqs/
