@@ -90,7 +90,7 @@ A [Docker ID](../docker-id/_index.md) grants you access to Docker Hub repositori
 To create a repository:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. On the Repositories page, Select **Create repository**.
+2. On the Repositories page, select **Create repository**.
 3. Name it **&lt;your-username&gt;/my-private-repo**.
 4. Set the visibility to **Private**.
 5. Select **Create**.
