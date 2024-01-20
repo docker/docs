@@ -159,4 +159,4 @@ You can find archived documentation for deprecated versions of the API in the
 code repository on GitHub:
 
 - [Documentation for API versions 1.23 and before](https://github.com/moby/moby/tree/v24.0.7/docs/api).
-- [Documentation for API versions 1.6 and before](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api).
+- [Documentation for API versions 1.17 and before](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api).
