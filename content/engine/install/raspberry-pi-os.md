@@ -132,15 +132,15 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:24.0.0-1~raspbian.11~bullseye
-   5:23.0.6-1~raspbian.11~bullseye
+   5:25.0.0-1~raspbian.12~bookworm
+   5:24.0.7-1~raspbian.12~bookworm
    ...
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:24.0.0-1~raspbian.11~bullseye
+   $ VERSION_STRING=5:25.0.0-1~raspbian.12~bookworm
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
 
