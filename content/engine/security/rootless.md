@@ -292,7 +292,7 @@ To run Rootless Docker inside "rootful" Docker, use the `docker:<version>-dind-r
 image instead of `docker:<version>-dind`.
 
 ```console
-$ docker run -d --name dind-rootless --privileged docker:24.0-dind-rootless
+$ docker run -d --name dind-rootless --privileged docker:25.0-dind-rootless
 ```
 
 The `docker:<version>-dind-rootless` image runs as a non-root user (UID 1000).

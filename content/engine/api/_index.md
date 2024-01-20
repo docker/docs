@@ -73,22 +73,22 @@ To see the highest version of the API your Docker daemon and client support, use
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           24.0.0
- API version:       1.43
- Go version:        go1.20.4
- Git commit:        98fdcd7
- Built:             Mon May 15 18:48:45 2023
- OS/Arch:           linux/arm64
+ Version:           25.0.0
+ API version:       1.44
+ Go version:        go1.21.6
+ Git commit:        e758fe5
+ Built:             Thu Jan 18 17:11:25 2024
+ OS/Arch:           linux/amd64
  Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          24.0.0
-  API version:      1.43 (minimum version 1.12)
-  Go version:       go1.20.4
-  Git commit:       1331b8c
-  Built:            Mon May 15 18:48:45 2023
-  OS/Arch:          linux/arm64
+  Version:          25.0.0
+  API version:      1.44 (minimum version 1.24)
+  Go version:       go1.21.6
+  Git commit:       615dfdf
+  Built:            Thu Jan 18 17:09:47 2024
+  OS/Arch:          linux/amd64
   Experimental:     false
   ...
 ```
@@ -99,14 +99,14 @@ You can specify the API version to use in any of the following ways:
   that incorporates the API version with the features you need.
 - When using `curl` directly, specify the version as the first part of the URL.
   For instance, if the endpoint is `/containers/` you can use
-  `/v1.42/containers/`.
+  `/v1.44/containers/`.
 - To force the Docker CLI or the Docker Engine SDKs to use an older version
   of the API than the version reported by `docker version`, set the
   environment variable `DOCKER_API_VERSION` to the correct version. This works
   on Linux, Windows, or macOS clients.
 
   ```console
-  $ DOCKER_API_VERSION='1.41'
+  $ DOCKER_API_VERSION='1.43'
   ```
 
   While the environment variable is set, that version of the API is used, even
@@ -158,5 +158,5 @@ API versions before v1.24 are [deprecated](/engine/deprecated/#deprecate-legacy-
 You can find archived documentation for deprecated versions of the API in the
 code repository on GitHub:
 
-- [Documentation for API versions 1.23 and before](https://github.com/moby/moby/tree/v24.0.7/docs/api).
+- [Documentation for API versions 1.23 and before](https://github.com/moby/moby/tree/v25.0.0/docs/api).
 - [Documentation for API versions 1.17 and before](https://github.com/moby/moby/tree/v1.9.1/docs/reference/api).

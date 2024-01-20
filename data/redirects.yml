@@ -115,7 +115,7 @@
   # used in warnings printed by the Docker Engine when pulling deprecated image
   # formats:
   #
-  #   - Docker Image Specification v1.0.0 (https://github.com/moby/moby/blob/v24.0.0/image/spec/v1.md)
+  #   - Docker Image Specification v1.0.0 (https://github.com/moby/moby/blob/v25.0.0/image/spec/v1.md)
   #   - Docker Image manifest version 2, schema 1 (https://github.com/distribution/distribution/blob/ff2bce27319a0a0bca924820c353fae3b9046e91/docs/spec/manifest-v2-1.md)
   #
   # TODO(thaJeztah) We need a better page describing the image formats (and deprecated ones)
