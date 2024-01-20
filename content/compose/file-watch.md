@@ -59,7 +59,7 @@ by the configured user, use the `COPY --chown` flag:
 
 ```dockerfile
 # Run as a non-privileged user
-RUN adduser -ms /bin/bash -u 1001 app
+RUN useradd -ms /bin/bash -u 1001 app
 USER app
 
 # Copy source files into application directory
