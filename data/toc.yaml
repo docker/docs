@@ -1468,9 +1468,9 @@ Manuals:
   - sectiontitle: Containers
     section:
     - path: /engine/reference/run/
-      title: Docker run reference
+      title: Running containers
     - path: /config/containers/resource_constraints/
-      title: Configure runtime resource constraints
+      title: Configure resource constraints
     - path: /config/containers/multi-service_container/
       title: Run multiple processes in a container
     - path: /config/containers/start-containers-automatically/
@@ -1478,7 +1478,7 @@ Manuals:
   - sectiontitle: CLI
     section:
     - path: /engine/reference/commandline/cli/
-      title: Use the Docker command line
+      title: Use the Docker CLI
     - path: /config/filter/
       title: Filter commands
     - path: /config/formatting/
@@ -1564,7 +1564,7 @@ Manuals:
     - path: /config/daemon/logs/
       title: Daemon logs
     - path: /config/containers/runmetrics/
-      title: Collect runtime metrics
+      title: Runtime metrics
     - path: /config/daemon/prometheus/
       title: Collect metrics with Prometheus
   - sectiontitle: Security
