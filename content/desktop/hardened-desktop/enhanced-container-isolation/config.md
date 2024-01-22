@@ -1,7 +1,7 @@
 ---
-description: Configuration for Enhanced Container Isolation
+description: Advanced Configuration for Enhanced Container Isolation
 title: Enhanced Container Isolation Configuration
-keywords: enhanced container isolation, Docker Desktop, Docker socket, bind mount
+keywords: enhanced container isolation, Docker Desktop, Docker socket, bind mount, configuration
 ---
 
 This section describes configuration specific to Enhanced Container Isolation (ECI).
@@ -10,11 +10,15 @@ This section describes configuration specific to Enhanced Container Isolation (E
 
 ECI may be enabled by users or admins, as described [here](_index.md#how-do-i-enable-enhanced-container-isolation).
 
+The sections below describe optional, advanced configurations for ECI.
+
 ### Docker Socket Mount Permissions (Beta)
 
 > Note
 >
-> This feature is available since Docker Desktop 4.27 and it's currently in [Beta](../../../release-lifecycle.md/#beta).
+> This feature is available since Docker Desktop 4.27 and it's currently in
+> [Beta](../../../release-lifecycle.md/#beta). It does not yet work on Windows
+> hosts when Docker Desktop configured to use WSL (but does work with Hyper-V).
 
 By default, when ECI is enabled, Docker Desktop does not allow bind-mounting the
 Docker Engine socket into containers:
@@ -222,7 +226,7 @@ Whether to configure the list as an allow or deny list depends on the use case.
     the resulting container uses a the Linux user-namespace, sensitive system
     calls are vetted, etc.)
 
-#### Caveats & Limitations
+#### Caveats and Limitations
 
 * Docker Socket Mount permissions don't yet work on Docker Desktop on Windows
   hosts with WSL (but they work on Hyper-V). Support for WSL is expected to be
@@ -231,10 +235,10 @@ Whether to configure the list as an allow or deny list depends on the use case.
 * When Docker Desktop is restarted, it's possible that an image that is allowed
   to mount the Docker socket is unexpectedly blocked from doing so. This can
   happen when the image digest changes in the remote repository (e.g., a
-  ":latest" image was updated) and the user's local copy of that image (e.g.,
-  from a prior `docker pull`) no longer matches the digest in the remote
-  repository. In this case, the user needs to remove the local image and pull it
-  again (e.g., `docker rm <image>` and `docker pull <image>`).
+  ":latest" image was updated) and the local copy of that image (e.g., from a
+  prior `docker pull`) no longer matches the digest in the remote repository. In
+  this case, remove the local image and pull it again (e.g., `docker rm <image>`
+  and `docker pull <image>`).
 
 * It's not possible to allow Docker socket bind-mounts on images that are not on
   a registry (e.g., images built locally and not yet pushed to a
@@ -248,7 +252,7 @@ Whether to configure the list as an allow or deny list depends on the use case.
 
 * The following commands are not yet supported in the `commandList`:
 
-| Unsupported Command  | Description |
+| Unsupported command  | Description |
 | :------------------- | :---------- |
 | compose              | Docker compose |
 | dev                  | Docker dev environments |

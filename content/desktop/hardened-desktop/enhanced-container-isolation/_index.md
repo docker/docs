@@ -48,7 +48,7 @@ In addition, the following restrictions are imposed:
 
 - Containers can no longer share namespaces with the Docker Desktop VM (e.g., `--network=host`, `--pid=host` are disallowed).
 - Containers can no longer modify configuration files inside the Docker Desktop VM (e.g., mounting any VM directory into the container is disallowed).
-- Containers can no longer access the Docker engine (e.g., mounting the Docker engine's socket into the container is restricted); this prevents malicious containers from gaining control of the Docker engine. Admins may relax this for trusted container images, as explained [here](config.md).
+- Containers can no longer access the Docker engine (e.g., mounting the Docker engine's socket into the container is restricted); this prevents malicious containers from gaining control of the Docker engine. Admins can relax this for [trusted container images](config.md).
 - Console access to the Docker Desktop VM is forbidden for all users.
 
 These features and restrictions ensure that containers are better secured at runtime, with minimal impact to developer experience and productivity.

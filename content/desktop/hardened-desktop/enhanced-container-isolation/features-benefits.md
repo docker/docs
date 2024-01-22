@@ -173,8 +173,7 @@ $ docker run -it --rm -v $HOME:/mnt alpine
 > (/var/run/docker.sock) into a container, as doing so essentially grants the
 > container control of Docker Engine, thus breaking container isolation. However,
 > as some legitimate use cases require this, it's possible to relax
-> this restriction for trusted container images. See [Docker Socket Mount Permissions](config.md#docker-socket-mount-permissions)
-> for further details on how to do this.
+> this restriction for trusted container images. See [Docker socket mount permissions](config.md#docker-socket-mount-permissions).
 
 ### Vetting sensitive system calls
 

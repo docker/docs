@@ -1157,7 +1157,7 @@ Manuals:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/
             title: What is Enhanced Container Isolation?
           - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
-            title: Configuration
+            title: Advanced Configuration (Beta)
           - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
             title: How does it work?
           - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
