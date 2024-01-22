@@ -24,6 +24,64 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.27.0
+
+{{< release-date date="2023-12-14" >}}
+
+{{< desktop-install all=true version="4.27.0" build_path="/TBD/" >}}
+
+### New
+
+- Docker init now supports Java and is generally available to all users (GA)
+- Synchronized File Shares are designed to provide fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
+- Beta - Get a debug shell into any container or image with the new `docker debug` command.
+- Organization admin can now configure docker socket mount restrictions when ECI is enabled.
+- [containerd Image Store](https://docs.docker.com/desktop/containerd/) support is now generally available to all users
+
+### Upgrades
+
+- [Amazon ECR Credential Helper v0.7.1](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.7.1)
+- [Buildx v0.12.1](https://github.com/docker/buildx/releases/tag/v0.12.1)
+- [Containerd v1.6.27](https://github.com/containerd/containerd/releases/tag/v1.6.27)
+- [Docker Credential Helpers v0.8.1](https://github.com/docker/docker-credential-helpers/releases/tag/v0.8.1)
+- [Runc v1.1.11](https://github.com/opencontainers/runc/releases/tag/v1.1.11)
+- [Docker Engine v25.0.0](https://docs.docker.com/engine/release-notes/25.0/)
+- [Kubernetes v1.29.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.1)
+- [Docker Scout v1.3.0](https://github.com/docker/scout-cli/releases/tag/v1.3.0)
+- Docker Debug v0.0.22
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- The docker scan command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the docker scout command.
+- Fixed a bug where automatic updates would not be downloaded when the **Always download updates** checkbox was selected.
+- Fixed typo in the dashboard tooltip. Fixes [docker/for-mac#7132](https://github.com/docker/for-mac/issues/7132)
+- Improved signal handling behavior (e.g. when pressing Ctrl-C in the terminal while running a `docker` command).
+- Enhanced Container Isolation (ECI) allows Docker socket mounts with user-configurable restrictions. Refer to the [Docker Desktop ECI docs](https://docs.docker.com/desktop/hardened-desktop/enhanced-container-isolation/) for further info.
+- Re-add kernel modules required by `minikube start --cni=cilium`.
+- Fixed a bug that caused installation screen appearing again when admin controls are enabled after login.
+- Fixed a bug where Docker would not start if a shared folder is no longer present.
+- Fixed the number of available CPUs displayed in the Containers section of the Dashboard.
+- Re-add kernel modules for `btrfs`, `xfs`, `vfat`, `exfat`, `ntfs3`, `f2fs`, `squashfs`, `udf`, `9p` and `autofs`.
+- Container usage charts have been moved to a vertical "Resource usage" drawer to allow for more space in the containers list. Accessing the usage charts remains the same via the "Show charts" button.
+- Fixed a bug where clicking 'Close Application' at sign-in was leaving behind a hung  backend process.
+- Fixed a bug causing Docker Desktop being unresponsive when analytics is disabled in `admin-settings`.
+
+#### For Mac
+
+- Enabled `Huge Pages` and fixed PHP segmentation fault with Rosetta. Fixes [docker/for-mac#7117](https://github.com/docker/for-mac/issues/7117).
+- Fixed `xvfb` under Rosetta. Fixes [docker/for-mac#7122](https://github.com/docker/for-mac/issues/7122)
+- Fixed `ERR_WORKER_INVALID_EXEC_ARGV` error under Rosetta. [docker/for-mac#6998](https://github.com/docker/for-mac/issues/6998).
+- Fixed a bug where Docker Desktop could deadlock if `admin-settings.json` was syntactically invalid.
+
+#### For Windows
+
+- Fixed a bug that was preventing UTF-16 strings from being encoded to UTF-8 for some locales. Fixes [docker/for-win#13868](https://github.com/docker/for-win/issues/13868).
+- Fixed a bug where the credentials store configuration would reset on app restart with the WSL integration. Fixes [docker/for-win#13529](https://github.com/docker/for-win/issues/13529).
+- Fixed an issue that prevented the correct WSL engine errors from propagating to the user.
+- Fixed an issue that would cause Docker Desktop to hang when quitting from Windows Containers mode.
+
 ## 4.26.1
 
 {{< release-date date="2023-12-14" >}}
