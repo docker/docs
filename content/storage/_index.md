@@ -109,7 +109,7 @@ You can't use Docker CLI commands to directly manage bind mounts.
 > **Tip**
 >
 > Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase?
-> Check out [Synchronized File Shares](../desktop/synchronized-file-sharing.md) which provides fast and flexible host-to-VM file sharing by replacing bind mounts with synchronized filesystem caches.
+> Check out [Synchronized File Shares](../desktop/synchronized-file-sharing.md), which provides fast and flexible host-to-VM file sharing by replacing bind mounts with synchronized filesystem caches.
 { .tip }
 
 ### tmpfs

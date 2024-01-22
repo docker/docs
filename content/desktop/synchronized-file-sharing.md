@@ -6,15 +6,15 @@ keyword: mutagen, file sharing, docker desktop, bind mounts
 
 > **Note**
 >
-> Synchronized File Shares is available for customers with a Docker subscription. 
+> Synchronized File Shares is available for customers with a Docker Pro, Team, or Business subscription. 
 
-Synchronized File Shares is an alternative file sharing mechanism powered by [Mutagen](https://mutagen.io/). It provides fast and flexible host-to-VM file sharing by replacing bind mounts with synchronized filesystem caches. 
+Synchronized File Shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing by replacing bind mounts with synchronized filesystem caches. 
 
-![Image of Synchronized file shares pane](images/synched-file-sharing.png)
+![Image of Synchronized file shares pane](images/synched-file-shares.webp)
  
 ## Who is it for?
 
-Synchronized File Shares is for developers who: 
+Synchronized File Shares is ideal for developers who: 
 - Have large repositories or monorepos with 100 000 files or more totaling hundreds of megabytes or even gigabytes.
 - Are using virtual filesystems, such as VirtioFS, gRPC FUSE, and osxfs, which are no longer scaling well with their codebases. 
 - Regularly encounter performance limitations.
@@ -22,9 +22,9 @@ Synchronized File Shares is for developers who:
 
 ## How does Synchronized File Shares work?
 
-A Synchronized file share behaves just like a virtual file share, but takes advantage of Mutagen's high-performance, low-latency code synchronization engine to create a synchronized cache of the host files on an ext4 filesystem within the Docker Desktop VM. If you make filesystem changes on the host or in the VM’s containers, it propagates via bidirectional synchronization.
+A Synchronized file share behaves just like a virtual file share, but takes advantage of a high-performance, low-latency code synchronization engine to create a synchronized cache of the host files on an ext4 filesystem within the Docker Desktop VM. If you make filesystem changes on the host or in the VM’s containers, it propagates via bidirectional synchronization.
 
-After creating a file share instance, any container using a bind mount that points to a location on the host filesystem matching the specified synchronized file share location, utilizes the Synchronized File Shares feature. Bind mounts that don't satisfy this condition are passed to the normal virtual filesystem [bind-mounting mechanism](../storage/bind-mounts.md), for example VirtioFS or gRPC-FUSE.
+After creating a file share instance, any container using a bind mount that points to a location on the host filesystem matching the specified synchronized file share location, or a subdirectory within it,  utilizes the Synchronized File Shares feature. Bind mounts that don't satisfy this condition are passed to the normal virtual filesystem [bind-mounting mechanism](../storage/bind-mounts.md), for example VirtioFS or gRPC-FUSE.
 
 > **Important**
 >
@@ -36,7 +36,7 @@ After creating a file share instance, any container using a bind mount that poin
 To create a file share instance:
 1. Sign in to Docker Desktop.
 2. In **Settings**, navigate to the **File sharing** tab within the **Resources** section. 
-3. In the **Synchronized File Shares** section, select the **plus** icon.
+3. In the **Synchronized File Shares** section, select the **Create share** icon.
 4. Select a host folder to share. The synchronized file share should initialize and be usable.
 
 File shares take a few seconds to initialize as files are copied into the Docker Desktop VM. During this time, the status indicator displays **Preparing**. There is also a status icon in the footer of the Docker Dashboard that keeps you updated.
@@ -69,15 +69,7 @@ Some example of things you might want to add to your `.syncignore` file are:
 
 In general, use your `.syncignore` file to exclude items that aren't critical to your workflow, especially those that would be slow to sync or use significant storage.
 
-## Frequently asked questions
-
-### What is the difference between Synchronized File Shares and the Mutagen extension?
-
-Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/), Synchronized File Shares is essentially the direct integration of the Mutagen extension into Docker Desktop. However, Synchronized File Shares provides an improved user experience and the ability to use a [`.syncignore` file](#use-syncignore). You also no longer have to set the default ownership on files as this is now handled automatically.
-
 ## Known issues
-
-- Upon launching Docker Desktop, it can take between 5-10 seconds for Synchronized File Shares to fully initialize. During this window, file share instances display as **Connecting** and any new containers created during this window won't replace bind mounts with Synchronized File Shares.
 
 - Changes made to `.syncignore` don't lead to immediate deletions unless the file share is recreated. In other words, files that are newly ignored due to modifications in the `.syncignore` file remain in their current location, but are no longer updated during synchronization.
 
@@ -90,6 +82,8 @@ Since Docker [acquired Mutagen](https://www.docker.com/blog/mutagen-acquisition/
 - Synchronized File Shares proactively reports temporary issues, which can result in occasional **Conflict** and **Problem** indicators appearing in the GUI during synchronization. These can be ignored. However, if they persist, you can report the issue.
 
 - If you switch from WSL2 to Hyper-V on Windows, Docker Desktop needs to be fully restarted.
+
+- POSIX-style Windows paths are not supported. Avoid setting the [`COMPOSE_CONVERT_WINDOWS_PATHS`](../compose/environment-variables/envvars.md#compose_convert_windows_paths) environment variable in Docker Compose.
 
 ## Feedback
 
