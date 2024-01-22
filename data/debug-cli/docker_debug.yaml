@@ -1,168 +1,154 @@
 command: docker debug
-short: Get a shell into any container or image.
+short: Get a shell into any container or image. Replacement for docker exec.
 long: |-
   > **Note**
   >
   > Docker Debug requires a [Pro, Team, or Business subcription](/subscription/details/).
   > You must [sign in](/desktop/get-started/) to use this command.
 
-  Get an enhanced shell with additional tools into any container or image.
-
-  The shell contains the following builtin commands:
+  Docker debug allows you to follow best practices and keep your images small and secure so they only contain the bare minimum to run your application.
+  That is it helps you to create and work with slim images/containers as they often are very hard to debug because all tools have been removed 
+  and thus standard debug approaches like `docker exec -it my-app bash` won't work.
+  Docker debug also helps you debug any other image or container.
+  With `docker debug` you can get a debug shell into any container/image, even if it doesn't contain a shell. 
+  You don't need to modify the image for debugging but also `docker debug` won't modify it either however it still allows you to debug it.
+  Docker debug brings it's own toolbox that you can easily customise.
+  The toolbox comes with many standard linux tools pre-installed, such as `vim`, `nano`, `htop` or `curl`.
+  Use the builtin `install` command to add any missing tool available on https://search.nixos.org/packages.
+  It supports `bash`/`fish`/`zsh` and by default will try to auto-detect your shell.
+  
+  
+  Custom builtin tools:
   - `install [tool1] [tool2]`: Add Nix packages from: https://search.nixos.org/packages.
   - `uninstall [tool1] [tool2]`: Uninstall Nix packages.
   - `entrypoint`: Print, lint, or run the entrypoint.
-  - `builtins`: Show builtin commands.
+  - `builtins`: Show custom builtin tools.
   
-  The shell already has many popular tools installed, for example `vim`, `nano`,
-  and `htop`. Use the builtin `install` and `uninstall` commands to manage the
-  tools. Any tool installed in the shell is available to all future debug
-  sessions. The tools are not installed in the actual image or container that
-  you are debugging.
-  
-  For images and stopped containers, all changes are discarded when leaving the
-  shell. At no point, do changes affect the actual image or container. When
-  accessing running or paused containers, all filesystem changes are directly
-  visible to the container. The `/nix` directory is never visible to the actual
-  image or container.
-  
+  > **Note**
+  >
+  > For images and stopped containers, all changes are discarded when leaving the shell. 
+  > At no point, do changes affect the actual image or container. 
+  > When accessing running or paused containers, all filesystem changes are directly visible to the container. 
+  > The `/nix` directory is never visible to the actual image or container.
+
+
 usage: debug [OPTIONS] {CONTAINER|IMAGE}
 pname: docker
 plink: docker.yaml
 options:
-    - option: shell
-      value_type: shell
-      default_value: "auto"
-      description: "Select a shell. Supported: `bash`, `fish`, `zsh`, `auto`."
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: command
-      shorthand: c
-      value_type: string
-      default_value: false
-      description: Evaluate the specified commands instead of starting an interactive session.
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
-    - option: host
-      value_type: string
-      default_value: false
-      description: "Daemon docker socket to connect to. E.g.: `ssh://root@example.org`, `unix:///some/path/docker.sock`"
-      deprecated: false
-      hidden: false
-      experimental: false
-      experimentalcli: false
-      kubernetes: false
-      swarm: false
+  - option: shell
+    value_type: shell
+    default_value: "auto"
+    description: "Select a shell. Supported: `bash`, `fish`, `zsh`, `auto`."
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+  - option: command
+    shorthand: c
+    value_type: string
+    default_value: false
+    description: Evaluate the specified commands instead of starting an interactive session.
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
+  - option: host
+    value_type: string
+    default_value: false
+    description: "Daemon docker socket to connect to. E.g.: `ssh://root@example.org`, `unix:///some/path/docker.sock`"
+    deprecated: false
+    hidden: false
+    experimental: false
+    experimentalcli: false
+    kubernetes: false
+    swarm: false
 deprecated: false
 experimental: false
 experimentalcli: false
 kubernetes: false
 swarm: false
 examples: |-
-  ### Examples using the options
-  #### Example of using --shell
+  ### Debugging containers that have no shell (slim containers)
+  
+  The `hello-world` image is very simple and only contains the `/hello` binary.
+  It's a good example for a slim image.
+  There are no other tools, e.g., no shell.
 
-  The following example shows how to use the `--shell` option to select a shell.
-  The example gets a shell into the `nginx` image using the `fish` shell and
-  runs `echo $SHELL` to verify that the shell is `fish`. It then runs `exit` to
-  exit the interactive session.
+  Let's run a container from the `hello-world` image:
   
   ```console
-  $ docker debug --shell fish nginx
-
-  Builtin commands:
-  - install [tool1] [tool2] ...    Add Nix packages from: https://search.nixos.org/packages
-  - uninstall [tool1] [tool2] ...  Uninstall NixOS package(s).
-  - entrypoint                     Print/lint/run the entrypoint.
-  - builtins                       Show builtin commands.
-
-  Checks:
-  ✓ distro:            Debian GNU/Linux 12 (bookworm)
-  ✓ entrypoint linter: no errors (run 'entrypoint' for details)
-
-  Note: This is a sandbox shell. All changes will not affect the actual image.
-                                                                                                                     Version: 0.0.18 (BETA)
-  root@a8758716bb6a / [nginx:latest]
-  
-  docker > echo $SHELL
-  fish
-
-  docker > exit
+  $ docker run --name my-app hello-world
   ```
   
-  If `--shell` isn't specified, the default `auto` is used. You can also get a
-  shell into an image that doesn't include a shell. The following example shows
-  how to get a shell into the `hello-world` image and then run `cat /etc/shells`
-  to verify that there isn't a shell available in the image.
+  The container exits immediately. To get a debug shell inside, simply run:
+  
+  ```console
+  $ docker debug my-app
+  ```
+  
+  The debug shell allows us to e.g. inspect the filesystem:
+  
+  ```console
+  docker > ls
+  dev  etc  hello  nix  proc  sys
+  ```
+  
+  The file `/hello` is the binary that was executed when running the container.
+  We can confirm this by running it directly:
+  
+  ```console
+  docker > /hello
+  ```
+  
+  which produces the same output.
+  
+  ### Debugging (slim) images
+  
+  We can debug images directly by running:
   
   ```console
   $ docker debug hello-world
   ...
-  docker > cat /etc/shells
-  cat: /etc/shells: No such file or directory
+  docker > ls
+  dev  etc  hello  nix  proc  sys
   ```
-
-  #### Example of using --command
   
-  The following example shows how to use the `--command` option to evaluate a
-  command instead of starting an interactive session. The example runs the `cat`
-  command in the nginx image without starting an interactive session.
+  We don't even need to pull the image as `docker debug` will do this automatically like the `docker run` command.
+  
+  ### Modifying files of a running container
+  
+  Docker debug allows you to modify files in any running container. 
+  The toolbox comes with `vim` and `nano` preinstalled.
+  
+  Let's run an nginx container and change the default index.html:
   
   ```console
-  $ docker debug --command "cat /usr/share/nginx/html/index.html" nginx
-
-  <!DOCTYPE html>
-  <html>
-  <head>
-  <title>Welcome to nginx!</title>
-  <style>
-  html { color-scheme: light dark; }
-  body { width: 35em; margin: 0 auto;
-  font-family: Tahoma, Verdana, Arial, sans-serif; }
-  </style>
-  </head>
-  <body>
-  <h1>Welcome to nginx!</h1>
-  <p>If you see this page, the nginx web server is successfully installed and
-  working. Further configuration is required.</p>
-  
-  <p>For online documentation and support please refer to
-  <a href="http://nginx.org/">nginx.org</a>.<br/>
-  Commercial support is available at
-  <a href="http://nginx.com/">nginx.com</a>.</p>
-  
-  <p><em>Thank you for using nginx.</em></p>
-  </body>
-  </html>
+  $ docker run -d --name web-app -p 8080:80 nginx
+  d3d6074d0ea901c96cac8e49e6dad21359616bef3dc0623b3c2dfa536c31dfdb
   ```
   
-  #### Example of using --host
-  
-  The following examples shows how to use the `--host` option. The first example uses SSH to connect to a remote Docker instance at `example.org` as the `root` user, and get a shell into the `my-container` container.
+  To confirm nginx is running, open a browser and navigate to http://localhost:8080.
+  You should see the default nginx page.
+  Let's change it using vim:
   
   ```console
-  $ docker debug --host ssh://root@example.org my-container
+  vim /usr/share/nginx/html/index.html
   ```
   
-  The following example connects to a different local Docker Engine, and gets a
-  shell into the `my-container` container.
+  E.g., change the title to "Welcome to my app!" and save the file.
+  Now, reload the page in the browser and you should see the updated page.
   
-  ```console
-  $ docker debug --host=unix:///some/path/docker.sock my-container
-  ```
-
-  ### Examples of using the builtin commands
-  #### Example of using the install and uninstall commands
+  ### Managing your toolbox using the `install` command
   
-  The following example shows how to use the `install` command to add Nix packages. The example installs Nmap and then runs `nmap --version` to show that it's installed. It then runs a container and tries to run `nmap` to verify that the tool isn't installed in the actual image.
+  The builtin `install` command allows you to add any tool from https://search.nixos.org/packages to the toolbox.
+  Keep in mind adding a tool never modifies the actual image or container.
+  Tools get just added to your toolbox.
+  E.g., let's install `nmap`:
   
   ```console
   $ docker debug nginx
@@ -183,22 +169,9 @@ examples: |-
   Compiled with: liblua-5.3.6 openssl-3.0.11 libssh2-1.11.0 nmap-libz-1.2.12 libpcre-8.45 libpcap-1.10.4 nmap-libdnet-1.12 ipv6
   Compiled without:
   Available nsock engines: epoll poll select
-  
-  docker > exit
-
-  $ docker run --rm nginx nmap --version
-  /docker-entrypoint.sh: 47: exec: nmap: not found
   ```
   
-  Nmap is now installed only in the debug shell. The changes aren't applied to
-  the actual image or container. Nmap will be available in all future debug
-  sessions.
-  
-  The following example shows that Nmap is now available in a future debug
-  session when debugging a different image. In the previous example, Nmap was
-  installed during the interactive session for the `nginx` image. In this
-  example, Nmap is ran without installing it during an interactive sesion for
-  the `hello-world` image.
+  You can confirm `nmap` is now part of your toolbox, e.g., by getting a debug shell into a different image:
   
   ```console
   $ docker debug hello-world
@@ -214,24 +187,27 @@ examples: |-
   docker > exit
   ```
   
-  Use `uninstall` to remove tools. Uninstalled tools are no longer available in future debug sessions. The following example shows how to uninstall Nmap and then run `nmap --version` to verify that it's no longer installed.
+  `nmap` is still there.
+  
+  
+  ### Understanding the default startup command of a container (entry points)
+  
+  Docker debug comes with a builtin tool `entrypoint`.
+  E.g., if we enter the `hello-world` image, we can confirm the entrypoint is `/hello`:
   
   ```console
-  $ docker debug ubuntu
+  $ docker debug hello-world
   ...
-  docker > uninstall nmap
-  uninstalling 'nmap-7.93'
-  building '/nix/store/f7awdcrllpdc9ss4vnx945hxm062n4lk-user-environment.drv'...
-  
-  docker > nmap --version
-  bash: nmap: command not found
+  docker > entrypoint --print
+  /hello
   ```
   
-  #### Example of using the entrypoint command
-
-  The following examples show how to use the `entrypoint` command to print, lint, or run the entrypoint.
+  The `entrypoint` command evaluates the `ENTRYPOINT` and `CMD` statement of the underlying image 
+  and allows to print, lint, or run the resulting actual entrypoint.
+  However, keeping all the corner cases of https://docs.docker.com/engine/reference/builder/#understand-how-cmd-and-entrypoint-interact in mind can be tricky so `entrypoint` can be a great help in many situations.
   
-  The following example runs `entrypoint` without any options.
+  Let's use `entrypoint` to investigate what actually happens when the nginx image is run:
+  
   ```console
   $ docker debug nginx
   ...
@@ -263,22 +239,8 @@ examples: |-
   - https://docs.docker.com/engine/reference/builder/#understand-how-cmd-and-entrypoint-interact
   ```
   
-  The following example runs `entrypoint --lint` to lint the entrypoint. Linting
-  checks for common issues with the entrypoint, such as mixing shell and exec
-  form, using the entrypoint shell form more than once, and missing the
-  entrypoint. For more information, see [Shell and exec form](/engine/reference/builder/#shell-and-exec-form).
-  
-  ```console
-  $ docker debug nginx
-  ...
-  docker > entrypoint --lint
-  Lint results:
-  PASS: '/docker-entrypoint.sh' found
-  PASS: no mixing of shell and exec form
-  PASS: no double use of shell form
-  ```
-  
-  The following example runs `entrypoint --run` to run the entrypoint.
+  It tells us that on startup of the nginx image, a script `/docker-entrypoint.sh` is executed with the arguments `nginx -g daemon off;`.
+  We can test the entrypoint by using the `--run` option:
   
   ```console
   $ docker debug nginx
@@ -303,72 +265,54 @@ examples: |-
   ...
   ```
   
-  Press `Ctrl`+`C` to exit running the entrypoint.
+  This actually starts nginx in our debug shell without having to actually run a container.
+  We can shutdown nginx by pressing `Ctrl`+`C`.
   
-  The following example run `entrypoint --print` to print the entrypoint.
+  ### Running commands directly (e.g., for scripting)
+  
+  Use the `--command` option to evaluate a command directly instead of starting an interactive session. 
+  This is similar to e.g., `bash -c "arg1 arg2 ..."`.
+  The example runs the `cat` command in the nginx image without starting an interactive session.
   
   ```console
-  $ docker debug nginx
-  ...
-  docker > entrypoint --print
-  /bin/bash
-  ```
-  
-  ### Other examples
-  
-  #### Example of modifying the filesystem of a running container
-  
-  When accessing running or paused containers, all filesystem changes are
-  directly visible to the container. The `/nix` directory is never visible to
-  the actual image or container.
+  $ docker debug --command "cat /usr/share/nginx/html/index.html" nginx
 
-  The following example:
-  1. Creates and runs a container.
-  2. Opens a shell into the container using `docker debug`.
-  3. Creates a file in the debug shell.
-  4. Lists the file using `docker exec` to verify that the file is visible outside of the debug shell.
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <title>Welcome to nginx!</title>
+  <style>
+  html { color-scheme: light dark; }
+  body { width: 35em; margin: 0 auto;
+  font-family: Tahoma, Verdana, Arial, sans-serif; }
+  </style>
+  </head>
+  <body>
+  <h1>Welcome to nginx!</h1>
+  <p>If you see this page, the nginx web server is successfully installed and
+  working. Further configuration is required.</p>
   
-  ```console
-  $ docker run -d --name my-container nginx
-  d3d6074d0ea901c96cac8e49e6dad21359616bef3dc0623b3c2dfa536c31dfdb
+  <p>For online documentation and support please refer to
+  <a href="http://nginx.org/">nginx.org</a>.<br/>
+  Commercial support is available at
+  <a href="http://nginx.com/">nginx.com</a>.</p>
   
-  $ docker debug my-container
-  ...
-  docker > touch myfile
-  
-  docker > exit
-  
-  $ docker exec my-container ls | grep myfile
-  myfile
+  <p><em>Thank you for using nginx.</em></p>
+  </body>
+  </html>
   ```
-  #### Example of modifying the filesystem of a stopped container
   
-  For images and stopped containers, all changes are discarded when leaving the
-  shell.
+  ### Remote debugging using the --host option
   
-  The following example:
-  1. Creates and runs a container.
-  2. Stops the container.
-  3. Opens a shell into the stopped container using `docker debug`.
-  4. Creates a file in the debug shell
-  5. Restarts the container.
-  6. Lists the file using `docker exec` to verify that the file isn't visible outside of the debug shell.
+  The following examples shows how to use the `--host` option. The first example uses SSH to connect to a remote Docker instance at `example.org` as the `root` user, and get a shell into the `my-container` container.
   
   ```console
-  $ docker run -d --name my-container nginx
-  d3d6074d0ea901c96cac8e49e6dad21359616bef3dc0623b3c2dfa536c31dfdb
+  $ docker debug --host ssh://root@example.org my-container
+  ```
   
-  $ docker stop my-container
-  my-container
+  The following example connects to a different local Docker Engine, and gets a
+  shell into the `my-container` container.
   
-  $ docker debug my-container
-  ...
-  docker > touch my-other-file
-  
-  docker > exit
-  
-  $ docker start my-container
-  
-  $ docker exec my-container ls | grep my-other-file
-  -
+  ```console
+  $ docker debug --host=unix:///some/path/docker.sock my-container
   ```
