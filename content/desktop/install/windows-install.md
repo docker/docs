@@ -174,8 +174,8 @@ The `install` command accepts the following flags:
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example:
 
-    ```text
-    --allowed-org=<org name> --admin-settings="{'configurationFileVersion': 2, 'enhancedContainerIsolation': {'value': true, 'locked': false}}"
+    ```console
+    --allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'
     ```
 
 - `--proxy-http-mode=<mode>`: Sets the HTTP Proxy mode, `system` (default) or `manual`
@@ -191,7 +191,9 @@ The `install` command accepts the following flags:
 >
 > If you're using PowerShell, you need to use the `ArgumentList` parameter before any flags. 
 > For example:
-> `Start-Process 'Docker Desktop Installer.exe' -Wait -ArgumentList 'install', '--accept-license`
+> ```powershell
+> Start-Process 'Docker Desktop Installer.exe' -Wait -ArgumentList 'install', '--accept-license'
+> ```
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 
