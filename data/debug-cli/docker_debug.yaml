@@ -10,7 +10,7 @@ long: |-
   With Docker Debug, you can debug your images while they contain the bare minimum to run your application.
   It does this by letting you create and work with slim images or containers that are often difficult to debug because all tools have been removed. 
   For example, while typical debug approaches like `docker exec -it my-app bash` may not work on a slim container, `docker debug` will work.
-  Docker debug also helps you debug any other image or container.
+  
   With `docker debug` you can get a debug shell into any container or image, even if they don't contain a shell. 
   You don't need to modify the image to use Docker Debug. 
   However, using Docker Debug still won't modify your image.
@@ -22,9 +22,9 @@ long: |-
   
   
   Custom builtin tools:
-  - `install [tool1] [tool2]`: Add Nix packages from: https://search.nixos.org/packages.
+  - `install [tool1] [tool2]`: Add Nix packages from: https://search.nixos.org/packages, see [example](#managing-your-toolbox-using-the-install-command).
   - `uninstall [tool1] [tool2]`: Uninstall Nix packages.
-  - `entrypoint`: Print, lint, or run the entrypoint.
+  - `entrypoint`: Print, lint, or run the entrypoint, see [example](#understanding-the-default-startup-command-of-a-container-entry-points).
   - `builtins`: Show custom builtin tools.
   
   > **Note**
@@ -53,7 +53,7 @@ options:
     shorthand: c
     value_type: string
     default_value: false
-    description: Evaluate the specified commands instead of starting an interactive session.
+    description: Evaluate the specified commands instead of starting an interactive session, see [example](#running-commands-directly-eg-for-scripting).
     deprecated: false
     hidden: false
     experimental: false
@@ -63,7 +63,7 @@ options:
   - option: host
     value_type: string
     default_value: false
-    description: "Daemon docker socket to connect to. E.g.: `ssh://root@example.org`, `unix:///some/path/docker.sock`"
+    description: "Daemon docker socket to connect to. E.g.: `ssh://root@example.org`, `unix:///some/path/docker.sock`, see [example](#remote-debugging-using-the---host-option)."
     deprecated: false
     hidden: false
     experimental: false
