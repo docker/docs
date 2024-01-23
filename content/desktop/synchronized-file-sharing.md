@@ -1,6 +1,6 @@
 ---
-title: Synchronized File Shares
-description: Get started with Synchronized File Shares on Docker Desktop.
+title: Synchronized file shares
+description: Get started with Synchronized file shares on Docker Desktop.
 keyword: mutagen, file sharing, docker desktop, bind mounts
 ---
 
