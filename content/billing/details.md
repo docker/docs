@@ -41,13 +41,13 @@ The billing information provided appears on all your billing invoices. The email
 Docker Hub sends the following billing-related emails:
 
 - Confirmation of a new subscription.
-- Confirmation of paid invoices. 
-- Notifications of credit or debit card payment failures. 
-- Notifications of credit or debit card expiration. 
-- Confirmation of a cancelled subscription 
+- Confirmation of paid invoices.
+- Notifications of credit or debit card payment failures.
+- Notifications of credit or debit card expiration.
+- Confirmation of a cancelled subscription
 - Reminders of subscription renewals for annual subscribers. This is sent 14 days before the renewal date.
 
-The following steps describe how to update the email address that receives billing invoices.
+You can update the email address that receives billing invoices at any time.
 
 ### Personal account
 
