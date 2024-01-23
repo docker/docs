@@ -1,21 +1,24 @@
 command: docker debug
-short: Get a shell into any container or image. Replacement for docker exec.
+short: Get a shell into any container or image. Replacement for `docker exec`.
 long: |-
   > **Note**
   >
   > Docker Debug requires a [Pro, Team, or Business subcription](/subscription/details/).
   > You must [sign in](/desktop/get-started/) to use this command.
 
-  Docker debug allows you to follow best practices and keep your images small and secure so they only contain the bare minimum to run your application.
-  That is it helps you to create and work with slim images/containers as they often are very hard to debug because all tools have been removed 
-  and thus standard debug approaches like `docker exec -it my-app bash` won't work.
+  Docker Debug helps you follow best practices by keeping your images small and secure. 
+  With Docker Debug, you can debug your images while they contain the bare minimum to run your application.
+  It does this by letting you create and work with slim images or containers that are often difficult to debug because all tools have been removed. 
+  For example, while typical debug approaches like `docker exec -it my-app bash` may not work on a slim container, `docker debug` will work.
   Docker debug also helps you debug any other image or container.
-  With `docker debug` you can get a debug shell into any container/image, even if it doesn't contain a shell. 
-  You don't need to modify the image for debugging but also `docker debug` won't modify it either however it still allows you to debug it.
-  Docker debug brings it's own toolbox that you can easily customise.
-  The toolbox comes with many standard linux tools pre-installed, such as `vim`, `nano`, `htop` or `curl`.
-  Use the builtin `install` command to add any missing tool available on https://search.nixos.org/packages.
-  It supports `bash`/`fish`/`zsh` and by default will try to auto-detect your shell.
+  With `docker debug` you can get a debug shell into any container or image, even if they don't contain a shell. 
+  You don't need to modify the image to use Docker Debug. 
+  However, using Docker Debug still won't modify your image.
+  Docker Debug brings its own toolbox that you can easily customize.
+  The toolbox comes with many standard Linux tools pre-installed, such as `vim`, `nano`, `htop`, and `curl`.
+  Use the builtin `install` command to add additional tools available on https://search.nixos.org/packages.
+  Docker Debug supports `bash`, `fish`, and `zsh`. 
+  By default it tries to auto-detect your shell.
   
   
   Custom builtin tools:
@@ -76,22 +79,22 @@ examples: |-
   ### Debugging containers that have no shell (slim containers)
   
   The `hello-world` image is very simple and only contains the `/hello` binary.
-  It's a good example for a slim image.
-  There are no other tools, e.g., no shell.
+  It's a good example of a slim image.
+  There are no other tools and no shell.
 
-  Let's run a container from the `hello-world` image:
+  Run a container from the `hello-world` image:
   
   ```console
   $ docker run --name my-app hello-world
   ```
   
-  The container exits immediately. To get a debug shell inside, simply run:
+  The container exits immediately. To get a debug shell inside, run:
   
   ```console
   $ docker debug my-app
   ```
   
-  The debug shell allows us to e.g. inspect the filesystem:
+  The debug shell allows you to inspect the filesystem:
   
   ```console
   docker > ls
@@ -99,17 +102,17 @@ examples: |-
   ```
   
   The file `/hello` is the binary that was executed when running the container.
-  We can confirm this by running it directly:
+  You can confirm this by running it directly:
   
   ```console
   docker > /hello
   ```
   
-  which produces the same output.
+  After running the binary, it produces the same output.
   
   ### Debugging (slim) images
   
-  We can debug images directly by running:
+  You can debug images directly by running:
   
   ```console
   $ docker debug hello-world
@@ -118,14 +121,14 @@ examples: |-
   dev  etc  hello  nix  proc  sys
   ```
   
-  We don't even need to pull the image as `docker debug` will do this automatically like the `docker run` command.
+  You don't even need to pull the image as `docker debug` will do this automatically like the `docker run` command.
   
   ### Modifying files of a running container
   
-  Docker debug allows you to modify files in any running container. 
-  The toolbox comes with `vim` and `nano` preinstalled.
+  Docker debug lets you modify files in any running container. 
+  The toolbox comes with `vim` and `nano` pre-installed.
   
-  Let's run an nginx container and change the default index.html:
+  Run an nginx container and change the default `index.html`:
   
   ```console
   $ docker run -d --name web-app -p 8080:80 nginx
@@ -134,21 +137,21 @@ examples: |-
   
   To confirm nginx is running, open a browser and navigate to http://localhost:8080.
   You should see the default nginx page.
-  Let's change it using vim:
+  Now, change it using vim:
   
   ```console
   vim /usr/share/nginx/html/index.html
   ```
   
-  E.g., change the title to "Welcome to my app!" and save the file.
+  Change the title to "Welcome to my app!" and save the file.
   Now, reload the page in the browser and you should see the updated page.
   
   ### Managing your toolbox using the `install` command
   
-  The builtin `install` command allows you to add any tool from https://search.nixos.org/packages to the toolbox.
+  The builtin `install` command lets you add any tool from https://search.nixos.org/packages to the toolbox.
   Keep in mind adding a tool never modifies the actual image or container.
-  Tools get just added to your toolbox.
-  E.g., let's install `nmap`:
+  Tools get added to only your toolbox.
+  Run `docker debug` and then install `nmap`:
   
   ```console
   $ docker debug nginx
@@ -171,7 +174,7 @@ examples: |-
   Available nsock engines: epoll poll select
   ```
   
-  You can confirm `nmap` is now part of your toolbox, e.g., by getting a debug shell into a different image:
+  You can confirm `nmap` is now part of your toolbox by getting a debug shell into a different image:
   
   ```console
   $ docker debug hello-world
@@ -192,8 +195,8 @@ examples: |-
   
   ### Understanding the default startup command of a container (entry points)
   
-  Docker debug comes with a builtin tool `entrypoint`.
-  E.g., if we enter the `hello-world` image, we can confirm the entrypoint is `/hello`:
+  Docker debug comes with a builtin tool, `entrypoint`.
+  Enter the `hello-world` image and confirm the entrypoint is `/hello`:
   
   ```console
   $ docker debug hello-world
@@ -203,10 +206,11 @@ examples: |-
   ```
   
   The `entrypoint` command evaluates the `ENTRYPOINT` and `CMD` statement of the underlying image 
-  and allows to print, lint, or run the resulting actual entrypoint.
-  However, keeping all the corner cases of https://docs.docker.com/engine/reference/builder/#understand-how-cmd-and-entrypoint-interact in mind can be tricky so `entrypoint` can be a great help in many situations.
+  and lets you print, lint, or run the resulting entrypoint.
+  However, it can be difficult to understand all the corner cases from [Understand how CMD and ENTRYPOINT interact](/engine/reference/builder/#understand-how-cmd-and-entrypoint-interact). 
+  In these situations, `entrypoint` can help.
   
-  Let's use `entrypoint` to investigate what actually happens when the nginx image is run:
+  Use `entrypoint` to investigate what actually happens when the nginx image is ran:
   
   ```console
   $ docker debug nginx
@@ -239,8 +243,8 @@ examples: |-
   - https://docs.docker.com/engine/reference/builder/#understand-how-cmd-and-entrypoint-interact
   ```
   
-  It tells us that on startup of the nginx image, a script `/docker-entrypoint.sh` is executed with the arguments `nginx -g daemon off;`.
-  We can test the entrypoint by using the `--run` option:
+  The output tells you that on startup of the nginx image, a script `/docker-entrypoint.sh` is executed with the arguments `nginx -g daemon off;`.
+  You can test the entrypoint by using the `--run` option:
   
   ```console
   $ docker debug nginx
@@ -265,14 +269,14 @@ examples: |-
   ...
   ```
   
-  This actually starts nginx in our debug shell without having to actually run a container.
-  We can shutdown nginx by pressing `Ctrl`+`C`.
+  This starts nginx in your debug shell without having to actually run a container.
+  You can shutdown nginx by pressing `Ctrl`+`C`.
   
   ### Running commands directly (e.g., for scripting)
   
   Use the `--command` option to evaluate a command directly instead of starting an interactive session. 
-  This is similar to e.g., `bash -c "arg1 arg2 ..."`.
-  The example runs the `cat` command in the nginx image without starting an interactive session.
+  For example, this is similar to `bash -c "arg1 arg2 ..."`.
+  The following example runs the `cat` command in the nginx image without starting an interactive session.
   
   ```console
   $ docker debug --command "cat /usr/share/nginx/html/index.html" nginx
