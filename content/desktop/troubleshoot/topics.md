@@ -341,7 +341,7 @@ C:\Program Files\Docker\docker.exe:
 
 Docker Desktop displays the **Docker Desktop - Access Denied** error if a Windows user is not part of the **docker-users** group.
 
-If your admin account is different to your user account, add the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users* and Groups** > **Groups** > **docker-users**.
+If your admin account is different to your user account, add the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users and Groups** > **Groups** > **docker-users**.
 
 Right-click to add the user to the group. Sign out and sign back in for the changes to take effect.
 

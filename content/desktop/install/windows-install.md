@@ -3,7 +3,7 @@ description: Get started with Docker for Windows. This guide covers system requi
   where to download, and instructions on how to install and update.
 keywords: docker for windows, docker windows, docker desktop for windows, docker on
   windows, install docker windows, install docker on windows, docker windows 10, docker
-  run on windows, installing docker for windows
+  run on windows, installing docker for windows, windows containers, wsl, hyper-v
 title: Install Docker Desktop on Windows
 aliases:
 - /desktop/windows/install/
@@ -118,7 +118,7 @@ For more information on Windows containers, refer to the following documentation
 
 - Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
 
-- [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/)
+- [Build and Run Your First Windows Server Container (Blog Post)](https://www.docker.com/blog/build-your-first-docker-windows-server-container/)
   gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
 
 - [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)

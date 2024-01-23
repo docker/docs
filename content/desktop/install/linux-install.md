@@ -3,7 +3,7 @@ description: Install Docker on Linux with ease using our step-by-step installati
   guide covering system requirements, supported platforms, and where to go next.
 keywords: linux, docker linux install, docker linux, linux docker installation, docker
   for linux, docker desktop for linux, installing docker on linux, docker download
-  linux, how to install docker on linux
+  linux, how to install docker on linux, linux vs docker engine, switch docker contexts
 title: Install Docker Desktop on Linux
 aliases:
 - /desktop/linux/install/
@@ -85,7 +85,7 @@ desktop-linux                                             unix:///home/<user>/.d
 If you have both Docker Desktop and Docker Engine installed on the same machine,
 you can run the `docker context use` command to switch between the Docker Desktop
 and Docker Engine contexts. For example, use the "default" context to interact
-with the Docker Engine;
+with the Docker Engine:
 
 ```console
 $ docker context use default
