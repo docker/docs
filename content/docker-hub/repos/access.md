@@ -10,7 +10,9 @@ Within your repository, you can give others access to push and pull to your repo
 ## Collaborators and their role
 
 A collaborator is someone you want to give access to a private repository. Once designated, they can `push` and `pull` to your repositories. They're not
-allowed to perform any administrative tasks such as deleting the repository or changing its status from private to public.
+allowed to perform any administrative tasks such as deleting the repository or changing its status from private to public. 
+
+Only personal account repositories can use collaborators. You can add unlimited collaborators to public repositories, and [Docker Pro](../../subscription/details.md#docker-pro) accounts can add up to 1 collaborator on private repositories. Organization repositories can't use collaborators. Organization owners can control repository access with [member roles](../../security/for-admins/roles-and-permissions.md) and [teams](../../admin/organization/manage-a-team.md).
 
 You can choose collaborators and manage their access to a private
 repository from that repository's **Settings** page.
@@ -18,7 +20,7 @@ repository from that repository's **Settings** page.
 > **Note**
 >
 > A collaborator can't add other collaborators. Only the owner of
-> the repository has administrative access. Also, you can't add collaborators to organization repositories. Organization owners can control repository access with member roles and teams. See [Roles and permissions](../../security/for-admins/roles-and-permissions.md).
+> the repository has administrative access.
 
 You can also assign more granular collaborator rights ("Read", "Write", or
 "Admin") on Docker Hub by using organizations and teams. For more information
