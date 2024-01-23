@@ -11,6 +11,13 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.2
+{{< release-date date="2024-01-22" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0 GA
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.2
+
 ## 2.24.1
 {{< release-date date="2024-01-18" >}}
 
