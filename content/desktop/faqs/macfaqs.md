@@ -7,10 +7,6 @@ aliases:
 - /docker-for-mac/space/
 ---
 
-### What is Docker.app?
-
-`Docker.app` is Docker Desktop on Mac. It bundles the Docker client and Docker Engine. `Docker.app` uses the macOS Hypervisor.framework to run containers.
-
 ### What is HyperKit?
 
 HyperKit is a hypervisor built on top of the Hypervisor.framework in macOS. It runs entirely in userspace and has no other dependencies.

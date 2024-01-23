@@ -12,6 +12,16 @@ the `docker/scout-cli` [GitHub repository](https://github.com/docker/scout-cli/r
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
 for what's coming next.
 
+## 2024-01-23
+
+New **Unapproved base images** policy, which lets you restrict which base
+images you allow in your builds. You define the allowed base images using a
+pattern. Base images whose image reference don't match the specified patterns
+cause the policy to fail.
+
+For more information, see
+[Unapproved base images](./policy/_index.md#unapproved-base-images).
+
 ## 2024-01-12
 
 New **Default non-root user** policy, which flags images that would run as the
