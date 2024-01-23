@@ -6,21 +6,21 @@ keyword: mutagen, file sharing, docker desktop, bind mounts
 
 > **Note**
 >
-> Synchronized File Shares is available for customers with a Docker Pro, Team, or Business subscription. 
+> Synchronized file shares is available for customers with a Docker Pro, Team, or Business subscription. 
 
-Synchronized File Shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing by replacing bind mounts with synchronized filesystem caches. 
+Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. 
 
 ![Image of Synchronized file shares pane](images/synched-file-shares.webp)
  
 ## Who is it for?
 
-Synchronized File Shares is ideal for developers who: 
+Synchronized file shares is ideal for developers who: 
 - Have large repositories or monorepos with 100 000 files or more totaling hundreds of megabytes or even gigabytes.
 - Are using virtual filesystems, such as VirtioFS, gRPC FUSE, and osxfs, which are no longer scaling well with their codebases. 
 - Regularly encounter performance limitations.
 - Don't want to worry about file ownership or spend time resolving conflicting file-ownership information when modifying multiple containers.
 
-## How does Synchronized File Shares work?
+## How does Synchronized file shares work?
 
 A Synchronized file share behaves just like a virtual file share, but takes advantage of a high-performance, low-latency code synchronization engine to create a synchronized cache of the host files on an ext4 filesystem within the Docker Desktop VM. If you make filesystem changes on the host or in the VM’s containers, it propagates via bidirectional synchronization.
 
@@ -28,7 +28,7 @@ After creating a file share instance, any container using a bind mount that poin
 
 > **Important**
 >
-> Synchronized File Shares isn't available on WSL or when using Windows containers. 
+> Synchronized file shares isn't available on WSL or when using Windows containers. 
 { .important }
 
 ## Create a file share instance 
@@ -45,11 +45,11 @@ When the status indicator displays **Watching for filesystem changes**, your fil
 
 >**Note**
 >
-> When you create a new service, setting the [bind mount option consistency](../engine/reference/commandline/secret_create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized File Shares. 
+> When you create a new service, setting the [bind mount option consistency](../engine/reference/commandline/secret_create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
 
 ## Explore your file share instance
 
-The **Synchronized File Shares** section displays all your file share instances and provides useful information about each instance including:
+The **Synchronized file shares** section displays all your file share instances and provides useful information about each instance including:
 - The origin of the file share content
 - A status update
 - How much space each file share is using
@@ -79,12 +79,16 @@ In general, use your `.syncignore` file to exclude items that aren't critical to
 
 - You cannot remove a file share instance during the initial synchronization. You have to wait for it to complete before **Delete** has any effect.
 
-- Synchronized File Shares proactively reports temporary issues, which can result in occasional **Conflict** and **Problem** indicators appearing in the GUI during synchronization. These can be ignored. However, if they persist, you can report the issue.
+- Synchronized file shares proactively reports temporary issues, which can result in occasional **Conflict** and **Problem** indicators appearing in the GUI during synchronization. These can be ignored. However, if they persist, you can report the issue.
 
 - If you switch from WSL2 to Hyper-V on Windows, Docker Desktop needs to be fully restarted.
 
 - POSIX-style Windows paths are not supported. Avoid setting the [`COMPOSE_CONVERT_WINDOWS_PATHS`](../compose/environment-variables/envvars.md#compose_convert_windows_paths) environment variable in Docker Compose.
 
-## Feedback
+## Feedback and support
 
-To give feedback, report bugs, or receive support (TODO)
+To give feedback or report bugs, visit:
+
+- [Docker Desktop for Mac issues on GitHub](https://github.com/docker/for-mac/issues)
+- [Docker Desktop for Windows issues on GitHub](https://github.com/docker/for-win/issues)
+- [Docker Desktop for Linux issues on GitHub](https://github.com/docker/desktop-linux/issues)
