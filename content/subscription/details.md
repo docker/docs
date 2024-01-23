@@ -1,12 +1,20 @@
 ---
 title: Docker subscriptions and features
 description: Learn about Docker subscription tiers and their features
-keywords: subscription, personal, pro, team, business, features
+keywords: subscription, personal, pro, team, business, features, docker core subscription, docker core
 ---
 
-You can do more with Docker with a Docker subscription, such as add collaborators, create scoped access tokens, and create private repositories. This page provides an overview of each subscription tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
+You can do more with Docker with a Docker Core subscription, such as add collaborators, create scoped access tokens, and create private repositories. This page provides an overview of each subscription tier. To compare features available in each tier, see [Docker Pricing](https://www.docker.com/pricing/).
 
-You can also subscribe to Docker Scout. See [Docker Scout subscriptions and features](./scout-details.md).
+The following describes some of the key features included with your Docker Core subscription:
+
+![Docker Core subscription diagram](images/subscription-diagram.webp)
+
+Docker Scout is included for 3 repositories. You can purchase a Docker Scout subscription to enable more repositories. See [Docker Scout subscriptions and features](./scout-details.md).
+
+Docker Build Cloud Starter is also included. For more information, see [Docker Build Cloud subscriptions and features](./build-details.md).
+
+Docker maintains a [public roadmap](https://github.com/docker/roadmap) so subscribers can see what new features are in development, as well as request new capabilities.
 
 ## Docker Personal
 
@@ -77,3 +85,7 @@ A self-serve Docker Business subscription is where everything is set up by you. 
 ### Sales-assisted
 
 A sales-assisted Docker Business subscription where everything is set up and managed by a dedicated Docker account manager.
+
+### Support for subscriptions
+
+All Docker Pro, Team, and Business subscribers receive email support for their subscriptions. Additional premium support is available for Docker Business customers. [Contact sales](https://www.docker.com/pricing/contact-sales/) for more information about premium support programs.
