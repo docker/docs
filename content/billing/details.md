@@ -38,7 +38,7 @@ The billing information provided appears on all your billing invoices. The email
 
 ## Update your email address that receives billing invoices
 
-Docker Hub sends the following billing-related emails:
+Docker sends the following billing-related emails:
 
 - Confirmation of a new subscription.
 - Confirmation of paid invoices.

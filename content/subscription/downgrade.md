@@ -15,7 +15,7 @@ Before you downgrade to a free subscription, you may need to reduce the number o
 
 > **Important**
 >
-> If you downgrade from a Pro subscription to a Personal subscription, note that Personal subscriptions don't include collaborators for private repositories. If you have collaborators when you move to a Personal subscription from a paid subscription you need to remove all collaborators. If you haven't removed collaborators within 30 days of moving to a free plan, all collaborators are automatically removed from your account.
+> If you downgrade your personal account from a Pro subscription to a Personal subscription, note that Personal subscriptions don't include collaborators for private repositories. If you have collaborators when you move to a Personal subscription from a paid subscription you need to remove all collaborators. If you haven't removed collaborators within 30 days of moving to a free plan, all collaborators are automatically removed from your account.
 { .important }
 
 ## Downgrade your Docker subscription
