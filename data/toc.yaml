@@ -1945,6 +1945,8 @@ Manuals:
     title: Control startup order
   - path: /compose/samples-for-compose/
     title: Sample apps with Compose
+  - path: /compose/feedback/
+    title: Give feedback
   - path: /compose/migrate/
     title: Migrate to Compose V2
   - path: /compose/release-notes/

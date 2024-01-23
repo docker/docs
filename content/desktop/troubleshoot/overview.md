@@ -43,6 +43,15 @@ Docker Desktop to their initial state, the same as when Docker Desktop was first
 If you are a Mac or Linux user, you also have the option to **Uninstall** Docker Desktop from your system.
 
 ## Diagnose
+ 
+> **Tip**
+>
+> If you do not find a solution in troubleshooting, browse the GitHub repositories or create a new issue:
+>
+> - [docker/for-mac](https://github.com/docker/for-mac/issues)
+> - [docker/for-win](https://github.com/docker/for-win/issues)
+> - [docker/for-linux](https://github.com/docker/for-linux/issues)
+{ .tip }
 
 ### Diagnose from the app
 
