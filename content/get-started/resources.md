@@ -7,6 +7,12 @@ description: Get started resources learning docker
 
 Docker and the broader community of Docker experts have put together many different ways to get further training and hands-on experience with Docker. Expand your understanding of Docker and Kubernetes with these additional free and paid resources.
 
+## Docker Training
+
+Expand your knowledge on all things Docker with [basic to advanced trainings from Docker experts](https://www.docker.com/resources/trainings/). 
+
+You can find recorded content at your own convenience, or register for a live session to participate in Q&A.
+
 ## Hosted labs
 
 These self-paced and hands-on workshops use a free, hosted environment ([Play with Kubernetes](https://labs.play-with-k8s.com/)) that doesn't require any installation. Follow along and learn more about Kubernetes.

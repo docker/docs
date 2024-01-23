@@ -4,6 +4,7 @@ datafile: docker_container_commit
 title: docker container commit
 aliases:
 - /edge/engine/reference/commandline/container_commit/
+- /engine/reference/commandline/commit/
 layout: cli
 ---
 

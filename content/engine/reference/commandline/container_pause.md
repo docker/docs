@@ -4,6 +4,7 @@ datafile: docker_container_pause
 title: docker container pause
 aliases:
 - /edge/engine/reference/commandline/container_pause/
+- /engine/reference/commandline/pause/
 layout: cli
 ---
 

@@ -1,5 +1,5 @@
 <header class="sticky top-0 z-20 h-16 px-4 text-white bg-gradient-to-r from-accent-light to-blue-light-500 dark:from-accent-dark dark:to-blue-dark-100">
-  <div class="mx-auto flex h-full max-w-[1440px] items-center justify-between">
+  <div class="mx-auto flex h-full max-w-[1400px] items-center justify-between">
     <div class="flex h-full items-center gap-8 md:gap-2">
       <button x-data tabindex="4" @click="() => {
       $store.showSidebar = ! $store.showSidebar;
@@ -14,9 +14,10 @@
         menu
       </button>
       <div>
+        {{/* main logo */}}
         <a href="{{ site.BaseURL }}">
           <div>
-            {{ readFile "static/assets/images/docker-docs-logo.svg" | safeHTML }}
+            {{- (resources.Get "images/docs-logo-white-full.svg").Content | safe.HTML -}}
           </div>
         </a>
       </div>

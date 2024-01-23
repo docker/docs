@@ -4,6 +4,7 @@ datafile: docker_image_save
 title: docker image save
 aliases:
 - /edge/engine/reference/commandline/image_save/
+- /engine/reference/commandline/save/
 layout: cli
 ---
 

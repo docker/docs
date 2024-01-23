@@ -1,9 +1,11 @@
 ---
 datafolder: engine-cli
 datafile: docker_image_push
+linkTitle: docker push
 title: docker image push
 aliases:
 - /edge/engine/reference/commandline/image_push/
+- /engine/reference/commandline/push/
 layout: cli
 ---
 

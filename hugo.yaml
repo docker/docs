@@ -38,7 +38,7 @@ related:
 
 build:
   buildStats:
-    enabled: true
+    enable: true
   cachebusters:
     - source: assets/watching/hugo_stats\.json
       target: styles\.css
@@ -91,9 +91,9 @@ params:
   repo: https://github.com/docker/docs
   docs_url: https://docs.docker.com
 
-  latest_engine_api_version: "1.43"
-  docker_ce_version: "24.0.7"
-  compose_version: "v2.24.0"
+  latest_engine_api_version: "1.44"
+  docker_ce_version: "25.0.0"
+  compose_version: "v2.24.2"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
   buildkit_version: "0.12.3"
@@ -110,7 +110,7 @@ menus:
     url: /get-started/overview/
     weight: 1
   - name: Manuals
-    url: /desktop/
+    url: /manuals/
     weight: 2
   - name: Reference
     url: /reference/

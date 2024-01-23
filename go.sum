@@ -74,6 +74,8 @@ github.com/docker/cli v24.0.8-0.20240103162225-b0c5946ba5d8+incompatible h1:hHBH
 github.com/docker/cli v24.0.8-0.20240103162225-b0c5946ba5d8+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v25.0.0-beta.1+incompatible h1:bJzIgR4mKNpceAwwi19SqZK0AbztMc3nQTgnvxxyY/A=
 github.com/docker/cli v25.0.0-beta.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v25.0.1-0.20240119143135-01f933261885+incompatible h1:UkZcGfKrx1PUDTT/TEzeYpyeRvNVbNqsj01yasxHuvA=
+github.com/docker/cli v25.0.1-0.20240119143135-01f933261885+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose-cli v1.0.35 h1:uZyEHLalfqBS2PiTpA1LAULyJmuQ+YtZg7nG4Xl3/Cc=
 github.com/docker/compose-cli v1.0.35/go.mod h1:mSXI4hFLpRU3EtI8NTo32bNwI0UXSr8jnq+/rYjGAUU=
 github.com/docker/compose/v2 v2.22.0 h1:3rRz4L7tPU75wRsV8JZh2/aTgerQvPa1cpzZN+tHqUY=
@@ -86,6 +88,12 @@ github.com/docker/compose/v2 v2.23.3 h1:2p2biZqpUvPzC8J7nDl+ankVQNCCAk2IZJ4eg1S+
 github.com/docker/compose/v2 v2.23.3/go.mod h1:lUweVMN13YR0a9M7qdKulTSMS1kYdAysYNJlFEnDMCw=
 github.com/docker/compose/v2 v2.24.0 h1:Gvmg3E5/Rqa4G340sYcUk/DIegT5Nod2ZV3MqR248j8=
 github.com/docker/compose/v2 v2.24.0/go.mod h1:sDypMTKq6Mrp0W5NZ6+uiqxR9zEukI1RVuFRqwBTljs=
+github.com/docker/compose/v2 v2.24.1 h1:Mk14AOkxetMKrWb1bOnx7bEfS+v/moaCZnU69QqUw6A=
+github.com/docker/compose/v2 v2.24.1/go.mod h1:rrqu0bPBN/HD2wRSNwVN+V9SDfhVQnKxF1DP9B9WOdI=
+github.com/docker/compose/v2 v2.24.2-0.20240119115212-388169011f47 h1:4vvuN0itjUryASt/WgrrLt7Tat7L53Ovt6Y1tLmVZPQ=
+github.com/docker/compose/v2 v2.24.2-0.20240119115212-388169011f47/go.mod h1:YMMi6kNJdi3gELhMyhdnZinMiZvSWoyAl6i7XoeqFDg=
+github.com/docker/compose/v2 v2.24.2 h1:uxH1Be7w/T2eozzgcftsTuOVOsxsOruJwJFLu6wsC6I=
+github.com/docker/compose/v2 v2.24.2/go.mod h1:0PmmvCX+jo4kCp9JJxFY/Za7nCPwSzzRcX/g8y2gXTA=
 github.com/docker/distribution v2.8.2+incompatible h1:T3de5rq0dB1j30rp0sA2rER+m322EBzniBPB6ZIzuh8=
 github.com/docker/distribution v2.8.2+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/go v1.5.1-1.0.20160303222718-d30aec9fd63c/go.mod h1:CADgU4DSXK5QUlFslkQu2yW2TKzFZcXq/leZfM0UH5Q=
@@ -117,6 +125,8 @@ github.com/docker/scout-cli v1.0.9 h1:P2Rs+HhVOIoSJZ1fcVuSDaxvV/8dCJTFdb3shrQtj5
 github.com/docker/scout-cli v1.0.9/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/docker/scout-cli v1.2.0 h1:cjtsf7s2f6NO9OxgXWPW3DGxaTKVU58JKmVtaVMc0RA=
 github.com/docker/scout-cli v1.2.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
+github.com/docker/scout-cli v1.3.0 h1:mL9y1yB/DR/dAar71z0w8u8et9o2272Mrjxtb59ds3M=
+github.com/docker/scout-cli v1.3.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/elazarl/goproxy v0.0.0-20191011121108-aa519ddbe484/go.mod h1:Ro8st/ElPeALwNFlcTpWmkr6IoMFfkjXAvTHpevnDsM=
 github.com/evanphx/json-patch v4.9.0+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
@@ -174,6 +184,8 @@ github.com/moby/moby v24.0.5+incompatible h1:uUbydai/Y9J7Ybt+lFI3zBdnsMYXnXE9vEc
 github.com/moby/moby v24.0.5+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/moby v24.0.8-0.20240109122856-854ca341c0f6+incompatible h1:bwE6hpc+Kq+UhTMUOdepQYXDBIqQENvj/LuuRJmTpAs=
 github.com/moby/moby v24.0.8-0.20240109122856-854ca341c0f6+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v25.0.0+incompatible h1:KIFudkwXNK+kBrnCxWZNwhEf/jJzdjQAP7EF/awywMI=
+github.com/moby/moby v25.0.0+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/sys/symlink v0.1.0/go.mod h1:GGDODQmbFOjFsXvfLVn3+ZRxkch54RkSiGqsZeMYowQ=
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/morikuni/aec v1.0.0/go.mod h1:BbKIizmSmc5MMPqRYbxO4ZU0S0+P200+tUnFx7PXmsc=

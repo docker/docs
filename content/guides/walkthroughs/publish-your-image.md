@@ -55,7 +55,7 @@ In this walkthrough, you pushed and shared an image on Docker Hub.
 Related information:
 
 - Deep dive into the [Docker Hub manual](../../docker-hub/_index.md)
-- Learn more about the [docker tag](../../engine/reference/commandline/tag.md)
+- Learn more about the [docker tag](../../engine/reference/commandline/image_tag.md)
   command
 
 ## Next steps

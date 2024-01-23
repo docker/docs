@@ -4,6 +4,7 @@ datafile: docker_container_create
 title: docker container create
 aliases:
 - /edge/engine/reference/commandline/container_create/
+- /engine/reference/commandline/create/
 layout: cli
 ---
 

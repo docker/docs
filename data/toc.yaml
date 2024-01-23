@@ -152,6 +152,18 @@ Guides:
       path: /language/php/configure-ci-cd/
     - title: "Test your deployment"
       path: /language/php/deploy/
+
+- sectiontitle: Use-case guides
+  section:
+    - sectiontitle: Generative AI
+      section:
+      - path: /guides/use-case/genai-pdf-bot/
+        title: Overview
+      - path: /guides/use-case/genai-pdf-bot/containerize/
+        title: Containerize your app
+      - path: /guides/use-case/genai-pdf-bot/develop/
+        title: Develop your app
+
 - sectiontitle: Develop with Docker
   section:
   - path: /develop/
@@ -263,8 +275,6 @@ Reference:
   section:
   - path: /engine/reference/commandline/docker/
     title: docker (base command)
-  - path: /engine/reference/commandline/attach/
-    title: docker attach
   - path: /engine/reference/commandline/build/
     title: docker build
   - sectiontitle: docker builder
@@ -321,8 +331,6 @@ Reference:
       title: docker checkpoint ls
     - path: /engine/reference/commandline/checkpoint_rm/
       title: docker checkpoint rm
-  - path: /engine/reference/commandline/commit/
-    title: docker commit
   - sectiontitle: docker compose
     section:
       - path: /compose/reference/
@@ -483,20 +491,8 @@ Reference:
         title: docker context update
       - path: /engine/reference/commandline/context_use/
         title: docker context use
-  - path: /engine/reference/commandline/cp/
-    title: docker cp
-  - path: /engine/reference/commandline/create/
-    title: docker create
-  - path: /engine/reference/commandline/diff/
-    title: docker diff
-  - path: /engine/reference/commandline/events/
-    title: docker events
   - path: /engine/reference/commandline/exec/
     title: docker exec
-  - path: /engine/reference/commandline/export/
-    title: docker export
-  - path: /engine/reference/commandline/history/
-    title: docker history
   - sectiontitle: docker image
     section:
     - path: /engine/reference/commandline/image/
@@ -527,24 +523,16 @@ Reference:
       title: docker image tag
   - path: /engine/reference/commandline/images/
     title: docker images
-  - path: /engine/reference/commandline/import/
-    title: docker import
   - path: /engine/reference/commandline/info/
     title: docker info
   - path: /engine/reference/commandline/init/
     title: docker init (Beta)
   - path: /engine/reference/commandline/inspect/
     title: docker inspect
-  - path: /engine/reference/commandline/kill/
-    title: docker kill
-  - path: /engine/reference/commandline/load/
-    title: docker load
   - path: /engine/reference/commandline/login/
     title: docker login
   - path: /engine/reference/commandline/logout/
     title: docker logout
-  - path: /engine/reference/commandline/logs/
-    title: docker logs
   - sectiontitle: docker manifest
     section:
     - path: /engine/reference/commandline/manifest/
@@ -595,8 +583,6 @@ Reference:
       title: docker node rm
     - path: /engine/reference/commandline/node_update/
       title: docker node update
-  - path: /engine/reference/commandline/pause/
-    title: docker pause
   - sectiontitle: docker plugin
     section:
     - path: /engine/reference/commandline/plugin/
@@ -619,26 +605,14 @@ Reference:
       title: docker plugin set
     - path: /engine/reference/commandline/plugin_upgrade/
       title: docker plugin upgrade
-  - path: /engine/reference/commandline/port/
-    title: docker port
   - path: /engine/reference/commandline/ps/
     title: docker ps
   - path: /engine/reference/commandline/pull/
     title: docker pull
   - path: /engine/reference/commandline/push/
     title: docker push
-  - path: /engine/reference/commandline/rename/
-    title: docker rename
-  - path: /engine/reference/commandline/restart/
-    title: docker restart
-  - path: /engine/reference/commandline/rm/
-    title: docker rm
-  - path: /engine/reference/commandline/rmi/
-    title: docker rmi
   - path: /engine/reference/commandline/run/
     title: docker run
-  - path: /engine/reference/commandline/save/
-    title: docker save
   - sectiontitle: docker scout
     section:
     - path: /engine/reference/commandline/scout/
@@ -741,12 +715,6 @@ Reference:
       title: docker stack rm
     - path: /engine/reference/commandline/stack_services/
       title: docker stack services
-  - path: /engine/reference/commandline/start/
-    title: docker start
-  - path: /engine/reference/commandline/stats/
-    title: docker stats
-  - path: /engine/reference/commandline/stop/
-    title: docker stop
   - sectiontitle: docker swarm
     section:
     - path: /engine/reference/commandline/swarm/
@@ -779,10 +747,6 @@ Reference:
       title: docker system info
     - path: /engine/reference/commandline/system_prune/
       title: docker system prune
-  - path: /engine/reference/commandline/tag/
-    title: docker tag
-  - path: /engine/reference/commandline/top/
-    title: docker top
   - sectiontitle: docker trust
     section:
     - path: /engine/reference/commandline/trust/
@@ -805,10 +769,6 @@ Reference:
       title: docker trust signer add
     - path: /engine/reference/commandline/trust_signer_remove/
       title: docker trust signer remove
-  - path: /engine/reference/commandline/unpause/
-    title: docker unpause
-  - path: /engine/reference/commandline/update/
-    title: docker update
   - path: /engine/reference/commandline/version/
     title: docker version
   - sectiontitle: docker volume
@@ -825,8 +785,6 @@ Reference:
       title: docker volume rm
     - path: /engine/reference/commandline/volume_update/
       title: docker volume update
-  - path: /engine/reference/commandline/wait/
-    title: docker wait
 - title: Dockerfile reference
   path: /engine/reference/builder/
 - title: Daemon CLI (dockerd)
@@ -885,18 +843,6 @@ Reference:
         title: v1.25 reference
       - path: /engine/api/v1.24/
         title: v1.24 reference
-      - path: /engine/api/v1.23/
-        title: v1.23 reference
-      - path: /engine/api/v1.22/
-        title: v1.22 reference
-      - path: /engine/api/v1.21/
-        title: v1.21 reference
-      - path: /engine/api/v1.20/
-        title: v1.20 reference
-      - path: /engine/api/v1.19/
-        title: v1.19 reference
-      - path: /engine/api/v1.18/
-        title: v1.18 reference
   - sectiontitle: Docker Hub API
     section:
       - title: Docker Hub API
@@ -1098,6 +1044,8 @@ Samples:
 
 
 Manuals:
+- path: /manuals/
+  title: Overview
 - sectiontitle: Docker Desktop
   section:
     - path: /desktop/
@@ -1595,8 +1543,6 @@ Manuals:
         section:
         - path: /config/containers/logging/local/
           title: Local file logging driver
-        - path: /config/containers/logging/logentries/
-          title: Logentries logging driver
         - path: /config/containers/logging/json-file/
           title: JSON File logging driver
         - path: /config/containers/logging/gelf/
@@ -1719,10 +1665,12 @@ Manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/24.0/
-      title: Engine 24.0
+    - path: /engine/release-notes/25.0/
+      title: Engine 25.0
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/24.0/
+        title: Engine 24.0
       - path: /engine/release-notes/23.0/
         title: Engine 23.0
       - path: /engine/release-notes/20.10/
@@ -1937,14 +1885,12 @@ Manuals:
   section:
   - path: /compose/
     title: Overview
-  - path: /compose/features-uses/
-    title: Key features and use cases
-  - path: /compose/compose-application-model/
-    title: Understand the Compose application model
-  - path: /compose/compose-yaml-file/
-    title: Understand the Compose file
-  - path: /compose/history/
-    title: History and development of Compose
+  - sectiontitle: Introduction to Compose
+    section:
+    - path: /compose/intro/features-uses/
+      title: Why use Compose?
+    - path: /compose/intro/history/
+      title: History and development of Compose
   - sectiontitle: Install Docker Compose
     section:
       - path: /compose/install/
@@ -1955,11 +1901,10 @@ Manuals:
         title: Install Compose standalone
       - path: /compose/install/uninstall/
         title: Uninstall Compose
-  - path: /compose/migrate/
-    title: Migrate to Compose V2
+  - path: /compose/compose-application-model/
+    title: How Compose works
   - path: /compose/gettingstarted/
-    title: Try Docker Compose
-
+    title: Try Compose
   - sectiontitle: Environment variables
     section:
     - path: /compose/environment-variables/
@@ -2002,6 +1947,8 @@ Manuals:
     title: Sample apps with Compose
   - path: /compose/feedback/
     title: Give feedback
+  - path: /compose/migrate/
+    title: Migrate to Compose V2
   - path: /compose/release-notes/
     title: Release notes
 

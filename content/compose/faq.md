@@ -12,7 +12,7 @@ Version one of the Docker Compose command-line binary was first released in 2014
 
 Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with `docker compose`. Compose V2 ignores the version top-level element in the compose.yml file.
 
-For further information, see [History and development of Compose](history.md).
+For further information, see [History and development of Compose](intro/history.md).
 
 ### What's the difference between `up`, `run`, and `start`?
 

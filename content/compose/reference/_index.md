@@ -176,6 +176,25 @@ underscores, and must begin with a lowercase letter or decimal digit. If the
 `basename` of the project directory or current directory violates this
 constraint, you must use one of the other mechanisms.
 
+### Have multiple isolated environments on a single host
+
+Compose uses a project name to isolate environments from each other. You can make use of this project name in several different contexts:
+
+* On a dev host, to create multiple copies of a single environment, such as when you want to run a stable copy for each feature branch of a project
+* On a CI server, to keep builds from interfering with each other, you can set
+  the project name to a unique build number
+* On a shared host or dev host, to prevent different projects, which may use the
+  same service names, from interfering with each other
+
+The default project name is the base name of the project directory. You can set
+a custom project name by using the
+[`-p` command line option](reference/index.md) or the
+[`COMPOSE_PROJECT_NAME` environment variable](../environment-variables/envvars.md#compose_project_name).
+
+The default project directory is the base directory of the Compose file. A custom value
+for it can be defined with the `--project-directory` command line option.
+
+
 ## Use `--profile` to specify one or more active profiles
 
 Calling `docker compose --profile frontend up` will start the services with the

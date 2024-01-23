@@ -11,6 +11,28 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.2
+{{< release-date date="2024-01-22" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0 GA
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.2
+
+## 2.24.1
+{{< release-date date="2024-01-18" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0-rc3
+- Dependencies upgrade: bump docker to 25.0.0-rc3
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.1
+- Dependencies upgrade: bump containerd to 1.7.12
+
+### Bug fixes and enhancements
+- Reworked the display of container status during `up`
+- Fixed the engine version required to use `healthcheck.start_interval`
+- Removed `watch` subcommand from the `alpha` command
+- Fixed a bug when handling received signals
+
 ## 2.24.0
 {{< release-date date="2024-01-11" >}}
 
@@ -3230,8 +3252,8 @@ Several new configuration keys have been added to `docker-compose.yml`:
 - `pid: host`, like `docker run --pid=host`, lets you reuse the same PID namespace as the host machine.
 - `cpuset`, like `docker run --cpuset-cpus`, lets you specify which CPUs to allow execution in.
 - `read_only`, like `docker run --read-only`, lets you mount a container's filesystem as read-only.
-- `security_opt`, like `docker run --security-opt`, lets you specify [security options](/engine/reference/run/#security-configuration).
-- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/run/#logging-drivers---log-driver).
+- `security_opt`, like `docker run --security-opt`, lets you specify [security options](/engine/reference/commandline/container_run/#security-opt).
+- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/commandline/container_run/#log-driver).
 
 ### Bug fixes
 

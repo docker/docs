@@ -42,9 +42,9 @@ grid:
 aliases:
 - /edge/
 - /engine/ce-ee-node-activate/
+- /engine/migration/
 - /engine/misc/
 - /linux/
-- /manuals/
 ---
 
 Docker Engine is an open source containerization technology for building and
