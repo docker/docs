@@ -26,7 +26,7 @@ The application uses [LangChain](https://www.langchain.com/) for orchestration, 
 Clone the sample application. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
 
 ```console
-$ git clone https://github.com/docker/docker-genai-sample
+$ git clone https://github.com/craig-osterhout/docker-genai-sample
 ```
 
 You should now have the following files in your `docker-genai-sample` directory.
