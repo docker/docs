@@ -174,7 +174,7 @@ The `install` command accepts the following flags:
   - It must be used together with the `--allowed-org=<org name>` flag. 
   - For example:
 
-    ```console
+    ```text
     --allowed-org=<org name> --admin-settings='{"configurationFileVersion": 2, "enhancedContainerIsolation": {"value": true, "locked": false}}'
     ```
 
