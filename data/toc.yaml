@@ -1755,7 +1755,7 @@ Manuals:
           title: Kubernetes driver
         - path: /build/drivers/remote/
           title: Remote driver
-    - sectiontitle: Build Cloud
+    - sectiontitle: Build Cloud {{< badge color=violet text=New >}}
       section:
         - path: /build/cloud/
           title: Overview
