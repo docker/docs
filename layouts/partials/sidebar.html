@@ -18,14 +18,18 @@
   {{ end }}
 </nav>
 {{ if $firstSection }}
+{{ $allSections := slice }}
+{{ range $i, $e := ($scratch.GetSortedMapValues "sections") }}
+{{ $allSections = $allSections | append (index $e "title") }}
+{{ end }}
 <hr>
-<nav id="sectiontree" class="text-sm w-[300px] md:w-full flex flex-col gap-2 px-3">
-  <div class="hidden md:block pt-4 text-gray-light dark:text-gray-dark">This section</div>
+<nav id="sectiontree" class="text-sm w-[300px] md:w-full flex flex-col">
+  <div class="hidden md:block p-4 text-gray-light dark:text-gray-dark">This section</div>
   {{/* The current page is in the table of contents */}}
   <ul>
     {{/* Walk the toc.yaml nodes under the current main section */}}
     {{ range (index site.Data.toc $firstSection) }}
-    {{ template "tocRender" (dict "ctx" $ctx "entry" .) }}
+    {{ template "tocRender" (dict "ctx" $ctx "entry" . "sections" $allSections) }}
     {{ end }}
   </ul>
 </nav>
@@ -34,17 +38,19 @@
 {{/* Recursive template for sidebar items */}}
 {{ define "tocRender" }}
 {{ $ctx := .ctx }}
+{{ $sections := .sections }}
 {{ if .entry.sectiontitle }}
+{{ $expanded := in $sections .entry.sectiontitle }}
 {{/* .entry is a section */}}
-<li x-data="{ expanded: false }" x-init="expanded = !!$el.querySelector('a[aria-current]')" :data-expanded="expanded">
-  <button @click="expanded = ! expanded" class="rounded px-4 sidebar-hover w-full flex items-center justify-between">
+<li>
+  {{/* See event handler in assets/js/src/sidebar.js */}}
+  <button class="rounded px-4 sidebar-hover w-full flex items-center justify-between">
     <span class="py-2 truncate flex items-center gap-2">{{ markdownify .entry.sectiontitle }}</span>
-    <span class="material-symbols-rounded -my-1 md:text-[28px]" x-text="expanded ? 'expand_less' : 'expand_more'">
-    </span>
+    <span class="icon" data-icon="{{ cond $expanded "expand_less" "expand_more"}}"></span>
   </button>
-  <ul x-show="expanded" x-collapse class="ml-3 md:ml-[21px]">
+  <ul class="{{if not $expanded}}hidden {{end}}ml-3 md:ml-[21px]">
     {{ range .entry.section }}
-    {{ template "tocRender" (dict "entry" . "ctx" $ctx) }}
+    {{ template "tocRender" (dict "entry" . "ctx" $ctx "sections" $sections ) }}
     {{ end }}
   </ul>
 </li>
