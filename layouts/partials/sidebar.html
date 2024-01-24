@@ -38,7 +38,7 @@
 {{/* .entry is a section */}}
 <li x-data="{ expanded: false }" x-init="expanded = !!$el.querySelector('a[aria-current]')" :data-expanded="expanded">
   <button @click="expanded = ! expanded" class="rounded px-4 sidebar-hover w-full flex items-center justify-between">
-    <span class="py-2 truncate">{{ markdownify .entry.sectiontitle }}</span>
+    <span class="py-2 truncate flex items-center gap-2">{{ markdownify .entry.sectiontitle }}</span>
     <span class="material-symbols-rounded -my-1 md:text-[28px]" x-text="expanded ? 'expand_less' : 'expand_more'">
     </span>
   </button>
@@ -55,7 +55,7 @@
   {{ if $isCurrent }} bg-gray-light-200 dark:bg-gray-dark-200{{ end }}">
   <a {{ if $isCurrent }}aria-current="page" {{ end }} class="py-2 w-full truncate block"
       href="{{ .entry.path }}" title="{{ markdownify .entry.title }}"
-      ><span>{{ markdownify .entry.title }}</span>
+      ><span class="flex items-center gap-2">{{ markdownify .entry.title }}</span>
   </a>
 </li>
 {{ end }}

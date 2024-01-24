@@ -8,11 +8,11 @@
       {{- if $i -}}
         <span>/</span>
       {{- end -}}
-      <a href="{{ $e.path }}" class="link whitespace-nowrap">{{ markdownify $e.title }}</a>
+      <a href="{{ $e.path }}" class="flex items-center gap-2 link whitespace-nowrap">{{ markdownify $e.title }}</a>
     {{- end -}}
   {{- end -}}
   {{- with $scratch.Get "lastsection" -}}
   <span>/</span>
-  <span>{{ markdownify .title }}</span>
+  <span class="flex items-center gap-2">{{ markdownify .title }}</span>
   {{- end -}}
 </nav>
