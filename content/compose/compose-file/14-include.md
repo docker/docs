@@ -111,3 +111,7 @@ include:
 
 The local project's environment has precedence over the values set by the Compose file, so that the local project can
 override values for customization.
+
+## Additional resources
+
+For more information on using `include`, see [Working with multiple Compose files](../multiple-compose-files/_index.md)

@@ -71,6 +71,10 @@ The above commands would both start your application with the `debug` profile en
 In the example, `compose.yml` file above, this starts the services `backend`,
 `db` and `phpmyadmin`.
 
+You can also enable
+multiple profiles, e.g. with `docker compose --profile frontend --profile debug up`
+the profiles `frontend` and `debug` will be enabled.
+
 ### Start multiple profiles
 
 Multiple profiles can be specified by passing multiple `--profile` flags or
