@@ -6,7 +6,7 @@ long: |-
   > Docker Debug requires a [Pro, Team, or Business subcription](/subscription/details/).
   > You must [sign in](/desktop/get-started/) to use this command.
 
-  Docker Debug helps you follow best practices by keeping your images small and secure. 
+  Docker Debug is a CLI command that helps you follow best practices by keeping your images small and secure. 
   With Docker Debug, you can debug your images while they contain the bare minimum to run your application.
   It does this by letting you create and work with slim images or containers that are often difficult to debug because all tools have been removed. 
   For example, while typical debug approaches like `docker exec -it my-app bash` may not work on a slim container, `docker debug` will work.
@@ -195,7 +195,7 @@ examples: |-
   
   ### Understanding the default startup command of a container (entry points)
   
-  Docker debug comes with a builtin tool, `entrypoint`.
+  Docker Debug comes with a builtin tool, `entrypoint`.
   Enter the `hello-world` image and confirm the entrypoint is `/hello`:
   
   ```console
@@ -210,7 +210,7 @@ examples: |-
   However, it can be difficult to understand all the corner cases from [Understand how CMD and ENTRYPOINT interact](/engine/reference/builder/#understand-how-cmd-and-entrypoint-interact). 
   In these situations, `entrypoint` can help.
   
-  Use `entrypoint` to investigate what actually happens when the nginx image is ran:
+  Use `entrypoint` to investigate what actually happens when you run a container from the Nginx image:
   
   ```console
   $ docker debug nginx
