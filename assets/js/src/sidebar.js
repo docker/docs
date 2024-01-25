@@ -1,13 +1,9 @@
 function toggleMenuItem(event) {
   const section = event.currentTarget.parentElement;
-  const icon = section.querySelector(".icon");
+  const icons = event.currentTarget.querySelectorAll(".icon-svg");
   const subsection = section.querySelector("ul");
   subsection.classList.toggle("hidden");
-  if (subsection.classList.contains("hidden")) {
-    icon.setAttribute("data-icon", "expand_more");
-  } else {
-    icon.setAttribute("data-icon", "expand_less");
-  }
+  icons.forEach(i => i.classList.toggle('hidden'))
 }
 
 const sectiontree = document.querySelector("#sectiontree");

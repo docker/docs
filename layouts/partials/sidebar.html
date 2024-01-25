@@ -45,8 +45,15 @@
 <li>
   {{/* See event handler in assets/js/src/sidebar.js */}}
   <button class="rounded px-4 sidebar-hover w-full flex items-center justify-between">
-    <span class="py-2 truncate flex items-center gap-2">{{ markdownify .entry.sectiontitle }}</span>
-    <span class="icon" data-icon="{{ cond $expanded "expand_less" "expand_more"}}"></span>
+    <span class="py-2 truncate flex items-center gap-2">
+      {{ markdownify .entry.sectiontitle }}
+    </span>
+    <span class="icon-svg {{ if $expanded }}hidden{{ end }}">
+      {{ partial "icon" "expand_more" }}
+    </span>
+    <span class="icon-svg {{ if not $expanded }}hidden{{ end }}">
+      {{ partial "icon" "expand_less" }}
+    </span>
   </button>
   <ul class="{{if not $expanded}}hidden {{end}}ml-3 md:ml-[21px]">
     {{ range .entry.section }}
