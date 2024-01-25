@@ -1129,7 +1129,7 @@ Manuals:
     - path: /desktop/wasm/
       title: Wasm workloads (Beta)
     - path: /desktop/synchronized-file-sharing/
-      title: Synchronized File Shares
+      title: Synchronized file shares {{< badge color=violet text=New >}}
     - sectiontitle: WSL
       section:
         - path: /desktop/wsl/
