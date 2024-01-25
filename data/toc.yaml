@@ -1935,14 +1935,12 @@ Manuals:
     section:
     - path: /compose/multiple-compose-files/
       title: Overview
-    - path: /compose/multiple-compose-files/extends/
-      title: Extend
     - path: /compose/multiple-compose-files/merge/
       title: Merge
+    - path: /compose/multiple-compose-files/extends/
+      title: Extend
     - path: /compose/multiple-compose-files/include/
       title: Include
-    - path: /compose/multiple-compose-files/specify-multiple-files/
-      title: Specify multiple Compose files in the command line
   - path: /compose/startup-order/
     title: Control startup order
   - path: /compose/gpu-support/

@@ -4,39 +4,37 @@ description: Understand the different ways you can set a project name in Compose
 keywords: name, compose, project, -p flag, name top-level element
 ---
 
-## Use `-p` to specify a project name
+In Compose, the default project name is derived from the base name of the project directory. However, you have the flexibility to set a custom project name. This page offers examples of scenarios where custom project names prove beneficial, outlines the various methods to set a project name, and provides the order of precedence for each approach.
 
-Each configuration has a project name which Compose can set in different ways. The level of precedence (from highest to lowest) for each method is as follows: 
+> **Note**
+>
+> The default project directory is the base directory of the Compose file. A custom value can also be set
+> for it using the `--project-directory` command line option.
 
-1. The `-p` command line flag 
-2. The [COMPOSE_PROJECT_NAME environment variable][]
-3. The top level `name:` variable from the config file (or the last `name:` from
-  a series of config files specified using `-f`)
-4. The `basename` of the project directory containing the config file (or
-  containing the first config file specified using `-f`)
-5. The `basename` of the current directory if no config file is specified
-
-
-
-Project names must contain only lowercase letters, decimal digits, dashes, and
-underscores, and must begin with a lowercase letter or decimal digit. If the
-`basename` of the project directory or current directory violates this
-constraint, you must use one of the other mechanisms.
-
-### Have multiple isolated environments on a single host
+## Example use cases
 
 Compose uses a project name to isolate environments from each other. You can make use of this project name in several different contexts:
 
-* On a dev host, to create multiple copies of a single environment, such as when you want to run a stable copy for each feature branch of a project
-* On a CI server, to keep builds from interfering with each other, you can set
-  the project name to a unique build number
-* On a shared host or dev host, to prevent different projects, which may use the
-  same service names, from interfering with each other
+- On a development host: Create multiple copies of a single environment, useful for running stable copies for each feature branch of a project.
+- On a CI server: Prevent interference between builds by setting the project name to a unique build number.
+- On a shared or development host: Avoid interference between different projects that might share the same service names.
 
-The default project name is the base name of the project directory. You can set
-a custom project name by using the
-[`-p` command line option](reference/index.md) or the
-[`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
+## Set a project name
 
-The default project directory is the base directory of the Compose file. A custom value
-for it can be defined with the `--project-directory` command line option.
+Project names must contain only lowercase letters, decimal digits, dashes, and
+underscores, and must begin with a lowercase letter or decimal digit. If the
+base name of the project directory or current directory violates this
+constraint, alternative mechanisms are available.
+
+The precedence order for each method, from highest to lowest, is as follows:
+
+1. The `-p` command line flag. 
+2. The [COMPOSE_PROJECT_NAME environment variable](environment-variables/envvars.md).
+3. The [top-level `name:` attribute](compose-file/04-version-and-name.md) in your Compose file. Or the last `name:` if you [specify multiple Compose files](multiple-compose-files/specify-multiple-files.md) in the command line with the `-f` flag.
+4. The base name of the project directory containing your Compose file. Or the base name of the first Compose file if you if you [specify multiple Compose files](multiple-compose-files/specify-multiple-files.md) in the command line with the `-f` flag. 
+5. The base name of the current directory if no Compose file is specified
+
+## What's next?
+
+- Read up on [working with multiple Compose files](multiple-compose-files/_index.md)
+- Explore some [sample apps](samples-for-compose.md)
