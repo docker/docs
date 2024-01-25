@@ -231,6 +231,9 @@ module:
       target: assets
     - source: hugo_stats.json
       target: assets/watching/hugo_stats.json
+    - source: node_modules/@material-symbols/svg-400/rounded
+      target: assets/icons
+
   imports:
 
     - path: github.com/moby/moby

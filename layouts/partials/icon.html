@@ -1,0 +1,8 @@
+{{- $svg := resources.Get (fmt.Printf "icons/%s-fill.svg" .) }}
+{{- if not $svg }}
+  {{- errorf "Failed to get icon: %s" . }}
+{{ end }}
+{{- if not $svg.Content }}
+  {{- errorf "Failed to get icon: %s" . }}
+{{- end }}
+{{- safe.HTML $svg.Content -}}

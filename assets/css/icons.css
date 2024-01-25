@@ -1,19 +1,11 @@
 @layer utilities {
-  .icon {
-    font-family: "Material Symbols Rounded";
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px; /* Preferred icon size */
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-  }
-
-  .icon:after {
-    content: attr(data-icon);
+  .icon-svg {
+    svg {
+      font-size: 24px;
+      width: 1em;
+      height: 1em;
+      display: inline-block;
+      fill: currentColor;
+    }
   }
 }

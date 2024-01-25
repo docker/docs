@@ -21,7 +21,7 @@ grid:
   link: /admin/organization/registry-access/
 - title: General settings
   description: Configure general information or create a company.
-  icon: settings_suggest
+  icon: settings
   link: /admin/organization/general-settings/
 - title: SSO & SCIM
   description: 'Set up [Single Sign-On](/security/for-admins/single-sign-on/)
