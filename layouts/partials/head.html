@@ -37,8 +37,8 @@
   </script>
 {{ end }}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=optional" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=optional" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=fallback" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=fallback" />
 {{ partial "utils/css.html" . }}
 {{ $theme := resources.Get "js/theme.js" | js.Build (dict "minify" true) }}
 <script>{{ $theme.Content | safeJS }}</script>
