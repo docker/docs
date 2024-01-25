@@ -35,7 +35,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Docker init now supports Java and is generally available to all users.
 - [Synchronized File Shares](synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
 - Organization admins can now configure Docker socket mount permissions when ECI is enabled.
-  [Containerd Image Store](containerd.md) support is now generally available to all users.
+-  [Containerd Image Store](containerd.md) support is now generally available to all users.
 - Get a debug shell into any container or image with the new `docker debug` command (Beta).
 
 ### Upgrades
