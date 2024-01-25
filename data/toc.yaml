@@ -175,7 +175,7 @@ Guides:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Overview
     - path: /develop/develop-images/guidelines/
-      title: General guidelines 
+      title: General guidelines
     - path: /develop/develop-images/instructions/
       title: Best practices for Dockerfile instructions
   - path: /develop/security-best-practices/
@@ -936,7 +936,7 @@ Reference:
     - path: /compose/compose-file/deploy/
       title: Compose Deploy Specification
     - path: /compose/compose-file/develop/
-      title: Compose Develop Specification 
+      title: Compose Develop Specification
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
@@ -1087,7 +1087,7 @@ Manuals:
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
         - path: /desktop/use-desktop/builds/
-          title: Explore Builds 
+          title: Explore Builds
         - path: /desktop/use-desktop/resource-saver/
           title: Resource Saver mode
         - path: /desktop/use-desktop/pause/
@@ -1106,6 +1106,8 @@ Manuals:
           section:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/
             title: What is Enhanced Container Isolation?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
+            title: Advanced Configuration (Beta)
           - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
             title: How does it work?
           - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
@@ -2077,7 +2079,7 @@ Manuals:
     - sectiontitle: Two-factor authentication
       section:
       - path: /security/for-developers/2fa/
-        title: Enable two-factor authentication 
+        title: Enable two-factor authentication
       - path: /security/for-developers/2fa/disable-2fa/
         title: Disable two-factor authentication
       - path: /security/for-developers/2fa/recover-hub-account/
