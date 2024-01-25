@@ -24,6 +24,85 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.27.0
+
+{{< release-date date="2024-01-25" >}}
+
+{{< desktop-install all=true version="4.27.0" build_path="/135262/" >}}
+
+### New
+
+- Docker init now supports Java and is generally available to all users.
+- [Synchronized File Shares](synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
+- Organization admins can now configure Docker socket mount permissions when ECI is enabled.
+-  [Containerd Image Store](containerd.md) support is now generally available to all users.
+- Get a debug shell into any container or image with the new `docker debug` command (Beta).
+- Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with Private Extensions Marketplace enabled (Beta)
+
+### Upgrades
+
+- [Amazon ECR Credential Helper v0.7.1](https://github.com/awslabs/amazon-ecr-credential-helper/releases/tag/v0.7.1)
+- [Buildx v0.12.1](https://github.com/docker/buildx/releases/tag/v0.12.1)
+- [Containerd v1.6.27](https://github.com/containerd/containerd/releases/tag/v1.6.27)
+- [Compose v2.24.3](https://github.com/docker/compose/releases/tag/v2.24.3)
+- [Docker Credential Helpers v0.8.1](https://github.com/docker/docker-credential-helpers/releases/tag/v0.8.1)
+- [Runc v1.1.11](https://github.com/opencontainers/runc/releases/tag/v1.1.11)
+- [Docker Engine v25.0.0](https://docs.docker.com/engine/release-notes/25.0/)
+- [Kubernetes v1.29.1](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.1)
+- [Docker Scout v1.3.0](https://github.com/docker/scout-cli/releases/tag/v1.3.0)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](../engine/reference/commandline/scout.md).
+- Fixed a bug where automatic updates would not download when the **Always download updates** checkbox was selected.
+- Fixed typo in the dashboard tooltip. Fixes [docker/for-mac#7132](https://github.com/docker/for-mac/issues/7132)
+- Improved signal handling behavior (e.g. when pressing Ctrl-C in the terminal while running a `docker` command).
+- Re-added kernel modules required by `minikube start --cni=cilium`.
+- Fixed a bug that caused the installation screen to appear again when admin controls are enabled after sign in.
+- Fixed a bug where Docker would not start if a shared folder is no longer present.
+- Fixed the number of available CPUs displayed in the **Containers** section of the Dashboard.
+- Re-added kernel modules for `btrfs`, `xfs`, `vfat`, `exfat`, `ntfs3`, `f2fs`, `squashfs`, `udf`, `9p` and `autofs`.
+- Container usage charts have been moved to a vertical **Resource usage** side panel to allow for more space in the containers list. Accessing the usage charts remains the same via the **Show charts** button.
+- Fixed a bug where selecting **Close Application** at sign-in was leaving behind a hung backend process.
+- Fixed a bug which caused Docker Desktop to become unresponsive when analytics is disabled through Settings Management.
+- Docker init:
+  - Added support for containerizing a Java server
+  - Various fixes on Windows
+- Builder settings:
+  - You can now refresh storage data for your builder at any point in time.
+  - You can now delete the build history for a builder.
+- Build UI:
+  - An error message is now shown when a build record cannot be removed.
+  - Fixed an issue where a cloud builder could not be created in rootless mode on macOS.
+  - Inline cache and Git source are now properly handled in the **Build timing** section of the **Info** tab.
+  - The Builder used and the author invoking the build is now displayed in past builds on the **History** tab.
+  - Several improvements made to better link past builds on the **History** tab.
+  - Several improvements to make the build name more accurate.
+  - Fixed stuck builds in the **Active builds** list when a builder cannot be reached.
+  - Fixed an issue preventing the build record from being deleted in some circumstances.
+  - Fixed an issue where build names could be empty.
+  - Fixed a general issue with the Builds view when Resource saver mode is enabled.
+
+#### For Mac
+
+- Enabled `Huge Pages` and fixed PHP segmentation fault with Rosetta. Fixes [docker/for-mac#7117](https://github.com/docker/for-mac/issues/7117).
+- Fixed `xvfb` under Rosetta. Fixes [docker/for-mac#7122](https://github.com/docker/for-mac/issues/7122)
+- Fixed `ERR_WORKER_INVALID_EXEC_ARGV` error under Rosetta. [docker/for-mac#6998](https://github.com/docker/for-mac/issues/6998).
+- Fixed a bug where Docker Desktop could deadlock if `admin-settings.json` was syntactically invalid.
+
+#### For Windows
+
+- Fixed a bug that prevented UTF-16 strings from being encoded to UTF-8 for some locales. Fixes [docker/for-win#13868](https://github.com/docker/for-win/issues/13868).
+- Fixed a bug where the credentials store configuration would reset on app restart with the WSL integration. Fixes [docker/for-win#13529](https://github.com/docker/for-win/issues/13529).
+- Fixed an issue that prevented the correct WSL engine errors from propagating to the user.
+- Fixed an issue that would cause Docker Desktop to hang when quitting from Windows Containers mode.
+
+### Known issues
+
+- When using Setting Management, the settings that are not set in the `admin-settings.json` will be reset to default when Docker Desktop starts.
+
 ## 4.26.1
 
 {{< release-date date="2023-12-14" >}}

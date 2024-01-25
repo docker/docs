@@ -22,7 +22,7 @@ configured to use either Hyper-V or WSL version 2.
 > it returns a version number prior to 1.1.3.0, update WSL to the latest version
 > by typing `wsl --update` in a Windows command or PowerShell terminal.
 
-Note,however, that ECI on WSL is not as secure as on Hyper-V because:
+Note however that ECI on WSL is not as secure as on Hyper-V because:
 
 * While ECI on WSL still hardens containers so that malicious workloads can't
   easily breach Docker Desktop's Linux VM, ECI on WSL can't prevent Docker
@@ -63,11 +63,11 @@ these won't work properly.
 
 ### Kubernetes pods are not yet protected
 Kubernetes pods are not yet protected by ECI. A malicious or privileged pod can
-compromise the Docker Desktop Linux VM and bypass security controls. 
+compromise the Docker Desktop Linux VM and bypass security controls.
 
 ### Extension containers are not yet protected
 Extension containers are also not yet protected by ECI. Ensure you extension
-containers come from trusted entities to avoid issues. 
+containers come from trusted entities to avoid issues.
 
 ### Docker Desktop dev environments are not yet protected
 Containers launched by the Docker Desktop Dev Environments feature are not yet

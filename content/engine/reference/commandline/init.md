@@ -12,6 +12,3 @@ in the source repository on GitHub:
 
 https://github.com/docker/docker-init
 -->
-> **Beta**
->
-> The Docker Init plugin is currently in [Beta](../../../release-lifecycle.md#beta). Docker recommends that you do not use this in production environments.

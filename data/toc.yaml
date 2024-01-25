@@ -175,7 +175,7 @@ Guides:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Overview
     - path: /develop/develop-images/guidelines/
-      title: General guidelines 
+      title: General guidelines
     - path: /develop/develop-images/instructions/
       title: Best practices for Dockerfile instructions
   - path: /develop/security-best-practices/
@@ -491,6 +491,8 @@ Reference:
         title: docker context update
       - path: /engine/reference/commandline/context_use/
         title: docker context use
+  - path: /engine/reference/commandline/debug/
+    title: docker debug (Beta)
   - path: /engine/reference/commandline/exec/
     title: docker exec
   - sectiontitle: docker image
@@ -526,7 +528,7 @@ Reference:
   - path: /engine/reference/commandline/info/
     title: docker info
   - path: /engine/reference/commandline/init/
-    title: docker init (Beta)
+    title: docker init
   - path: /engine/reference/commandline/inspect/
     title: docker inspect
   - path: /engine/reference/commandline/login/
@@ -934,7 +936,7 @@ Reference:
     - path: /compose/compose-file/deploy/
       title: Compose Deploy Specification
     - path: /compose/compose-file/develop/
-      title: Compose Develop Specification 
+      title: Compose Develop Specification
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
@@ -1085,7 +1087,7 @@ Manuals:
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
         - path: /desktop/use-desktop/builds/
-          title: Explore Builds 
+          title: Explore Builds
         - path: /desktop/use-desktop/resource-saver/
           title: Resource Saver mode
         - path: /desktop/use-desktop/pause/
@@ -1104,6 +1106,8 @@ Manuals:
           section:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/
             title: What is Enhanced Container Isolation?
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
+            title: Advanced Configuration (Beta)
           - path: /desktop/hardened-desktop/enhanced-container-isolation/how-eci-works/
             title: How does it work?
           - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
@@ -1121,9 +1125,11 @@ Manuals:
         - path: /desktop/dev-environments/dev-cli/
           title: Use the docker dev CLI plugin
     - path: /desktop/containerd/
-      title: containerd image store (Beta)
+      title: containerd image store
     - path: /desktop/wasm/
       title: Wasm workloads (Beta)
+    - path: /desktop/synchronized-file-sharing/
+      title: Synchronized File Shares
     - sectiontitle: WSL
       section:
         - path: /desktop/wsl/
@@ -1200,7 +1206,7 @@ Manuals:
         - path: /desktop/extensions/settings-feedback/
           title: Change settings and give feedback
         - path: /desktop/extensions/private-marketplace/
-          title: Configure a private marketplace (Experimental)
+          title: Configure a private marketplace (Beta)
     - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
@@ -2073,7 +2079,7 @@ Manuals:
     - sectiontitle: Two-factor authentication
       section:
       - path: /security/for-developers/2fa/
-        title: Enable two-factor authentication 
+        title: Enable two-factor authentication
       - path: /security/for-developers/2fa/disable-2fa/
         title: Disable two-factor authentication
       - path: /security/for-developers/2fa/recover-hub-account/
