@@ -9,7 +9,7 @@
   {{ partial "header.html" . }}
   <main class="grid grid-cols-main md:flex xl:grid-cols-main-xl">
     <div id="sidebar"
-      class="sticky top-16 h-[calc(100lvh-theme(space.16))] overflow-y-scroll flex flex-row-reverse dark:bg-gray-dark-100 md:fixed md:z-10 md:hidden md:h-screen md:w-screen">
+      class="sticky top-16 h-[calc(100lvh-theme(space.16))] overflow-y-scroll flex flex-row-reverse bg-background-light dark:bg-gray-dark-100 md:fixed md:z-10 md:hidden md:h-screen md:w-screen">
       {{ block "left" . }}
       {{ end }}
     </div>
