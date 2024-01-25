@@ -9,9 +9,8 @@
       } else {
         sidebar.classList.replace('md:block', 'md:hidden');
       }
-    }" class="btn-icon-round menu-btn material-symbols-rounded hidden h-full px-4 md:block" aria-label="Menu"
-        id="menu-btn">
-        menu
+      }" class="icon-svg hidden px-4 md:block" aria-label="Menu">
+        {{ partial "icon" "menu" }}
       </button>
       <div>
         {{/* main logo */}}
@@ -25,11 +24,14 @@
     </div>
     <div class="flex items-center gap-6">
       <div id="docsearch"></div>
-      <button id="theme-switch" tabindex="1" class="material-symbols-rounded"
+      <button id="theme-switch" tabindex="1" class="svg-icon"
         x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
         localStorage.setItem('theme-preference', value);
         document.firstElementChild.className = value;
-      })" @click="theme = (theme === 'dark' ? 'light' : 'dark')" x-text="`${theme}_mode`"></button>
+      })" @click="theme = (theme === 'dark' ? 'light' : 'dark')">
+        <span class="icon-svg dark:hidden">{{ partial "icon" "light_mode"}}</span>
+        <span class="icon-svg hidden dark:block">{{ partial "icon" "dark_mode"}}</span>
+      </button>
     </div>
   </div>
 
