@@ -37,6 +37,12 @@ If you choose the integrated terminal, you can run commands in a running contain
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is turned off by default.
 
+- **Use containerd for pulling and storing images**.
+  Turns on the containerd image store.
+  This brings new features like faster container startup performance by lazy-pulling images,
+  and the ability to run Wasm applications with Docker.
+  For more information, see [containerd image store](../containerd.md).
+
 - **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`.
     > **Tip**
     >
@@ -282,10 +288,6 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 ### Beta features
 
 {{< include "beta.md" >}}
-
-#### Use containerd for pulling and storing images
-
-Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
 
 ### Experimental features
 

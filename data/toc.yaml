@@ -1125,7 +1125,7 @@ Manuals:
         - path: /desktop/dev-environments/dev-cli/
           title: Use the docker dev CLI plugin
     - path: /desktop/containerd/
-      title: containerd image store (Beta)
+      title: containerd image store
     - path: /desktop/wasm/
       title: Wasm workloads (Beta)
     - path: /desktop/synchronized-file-sharing/
