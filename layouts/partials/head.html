@@ -60,3 +60,4 @@
 {{ $mermaid := resources.Get "js/mermaid.js" | js.Build (dict "minify" true) }}
 <script>{{ $mermaid.Content | safeJS }}</script>
 {{ end }}
+{{ partialCached "utils/resources.html" . }}
