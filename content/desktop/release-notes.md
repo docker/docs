@@ -37,6 +37,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Organization admins can now configure Docker socket mount permissions when ECI is enabled.
 -  [Containerd Image Store](containerd.md) support is now generally available to all users.
 - Get a debug shell into any container or image with the new `docker debug` command (Beta).
+- Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with Private Extensions Marketplace enabled (Beta)
 
 ### Upgrades
 
