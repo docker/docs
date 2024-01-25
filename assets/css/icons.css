@@ -1,4 +1,13 @@
 @layer utilities {
+  .icon-svg {
+    svg {
+      font-size: 24px;
+      width: 1em;
+      height: 1em;
+      fill: currentColor;
+    }
+  }
+
   .icon {
     font-family: "Material Symbols Rounded";
     font-weight: normal;
