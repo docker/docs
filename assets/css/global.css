@@ -19,8 +19,8 @@
   }
 
   .external-link {
-    .icon:after {
-      @apply text-base ml-1;
+    .icon-svg svg {
+      @apply text-base ml-1 align-top;
     }
   }
 

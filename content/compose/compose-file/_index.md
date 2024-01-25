@@ -26,7 +26,7 @@ grid:
   link: /compose/compose-file/07-volumes/
 - title: Configs top-level element
   description: Find out about configs in Compose.
-  icon: settings_suggest
+  icon: settings
   link: /compose/compose-file/08-configs/
 - title: Secrets top-level element
   description: Learn about secrets in Compose.
