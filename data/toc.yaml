@@ -526,7 +526,7 @@ Reference:
   - path: /engine/reference/commandline/info/
     title: docker info
   - path: /engine/reference/commandline/init/
-    title: docker init (Beta)
+    title: docker init
   - path: /engine/reference/commandline/inspect/
     title: docker inspect
   - path: /engine/reference/commandline/login/
