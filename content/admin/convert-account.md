@@ -6,9 +6,14 @@ aliases:
 - /docker-hub/convert-account/
 ---
 
+> **Tip**
+>
+> You can convert your personal account with a Docker Personal subscription to an organization. If you need to convert a personal account with a Docker Pro subscription, [contact support](https://hub.docker.com/support/contact).
+{ .tip }
+
 You can convert an existing user account to an organization. This is useful if you need multiple users to access your account and the repositories that it’s connected to. Converting it to an organization gives you better control over permissions for these users through [teams](manage-a-team.md) and [roles](roles-and-permissions.md).
 
-When you convert a user account to an organization, the account is migrated to a Team plan that requires a paid subscription. For more information, see [Docker Pricing](https://www.docker.com/pricing).
+When you convert a user account to an organization, the account is migrated to a Docker Team plan.
 
 > **Important**
 >
