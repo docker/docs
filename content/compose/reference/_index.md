@@ -23,7 +23,7 @@ Define and run multi-container applications with Docker.
 Options:
       --ansi string                Control when to print ANSI control characters ("never"|"always"|"auto") (default "auto")
       --compatibility              Run compose in backward compatibility mode
-      -- dry-run                   Execute command in dry run mode
+      --dry-run                    Execute command in dry run mode
       --env-file stringArray       Specify an alternate environment file
   -f, --file stringArray           Compose configuration files
       --parallel int               Control max parallelism, -1 for unlimited (default -1)
@@ -76,6 +76,6 @@ You can use Docker Compose binary, `docker compose [-f <arg>...] [options]
 - [How Compose works](../compose-application-model.md)
 - [Try Compose](../gettingstarted.md)
 - [Specify a project name](../project-name.md)
-- [Using Environment variables](../environment-variables/_index.md)
+- [Using environment variables](../environment-variables/_index.md)
 - [Working with multiple Compose files](../multiple-compose-files/_index.md)
 - [Compose Specification](../compose-file/_index.md)

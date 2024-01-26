@@ -19,7 +19,9 @@ the rules described below and in the
 ## How to merge multiple Compose files
 
 To use multiple override files, or an override file with a different name, you
-can either use the pre-defined [COMPOSE_FILE](../environment-variables/envvars.md#compose_file] environment variable, or use the `-f` option to specify the list of files. Compose merges files in
+can either use the pre-defined [COMPOSE_FILE](../environment-variables/envvars.md#compose_file) environment variable, or use the `-f` option to specify the list of files. 
+
+Compose merges files in
 the order they're specified on the command line. Subsequent files may merge, override, or
 add to their predecessors.
 

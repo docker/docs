@@ -1891,7 +1891,7 @@ Manuals:
       title: Why use Compose?
     - path: /compose/intro/history/
       title: History and development of Compose
-  - sectiontitle: Install Docker Compose
+  - sectiontitle: Install
     section:
       - path: /compose/install/
         title: Overview
@@ -1944,11 +1944,11 @@ Manuals:
   - path: /compose/startup-order/
     title: Control startup order
   - path: /compose/gpu-support/
-    title: GPU support in Compose
+    title: GPU support
   - path: /compose/networking/
-    title: Networking in Compose
+    title: Networking
   - path: /compose/samples-for-compose/
-    title: Sample apps with Compose
+    title: Sample apps
   - path: /compose/migrate/
     title: Migrate to Compose V2
   - path: /compose/release-notes/

@@ -4,7 +4,9 @@ description: Understand the different ways you can set a project name in Compose
 keywords: name, compose, project, -p flag, name top-level element
 ---
 
-In Compose, the default project name is derived from the base name of the project directory. However, you have the flexibility to set a custom project name. This page offers examples of scenarios where custom project names prove beneficial, outlines the various methods to set a project name, and provides the order of precedence for each approach.
+In Compose, the default project name is derived from the base name of the project directory. However, you have the flexibility to set a custom project name. 
+
+This page offers examples of scenarios where custom project names can be helpful, outlines the various methods to set a project name, and provides the order of precedence for each approach.
 
 > **Note**
 >
@@ -30,11 +32,11 @@ The precedence order for each method, from highest to lowest, is as follows:
 
 1. The `-p` command line flag. 
 2. The [COMPOSE_PROJECT_NAME environment variable](environment-variables/envvars.md).
-3. The [top-level `name:` attribute](compose-file/04-version-and-name.md) in your Compose file. Or the last `name:` if you [specify multiple Compose files](multiple-compose-files/specify-multiple-files.md) in the command line with the `-f` flag.
-4. The base name of the project directory containing your Compose file. Or the base name of the first Compose file if you if you [specify multiple Compose files](multiple-compose-files/specify-multiple-files.md) in the command line with the `-f` flag. 
-5. The base name of the current directory if no Compose file is specified
+3. The [top-level `name:` attribute](compose-file/04-version-and-name.md) in your Compose file. Or the last `name:` if you [specify multiple Compose files](multiple-compose-files/merge.md) in the command line with the `-f` flag.
+4. The base name of the project directory containing your Compose file. Or the base name of the first Compose file if you if you [specify multiple Compose files](multiple-compose-files/merge.md) in the command line with the `-f` flag. 
+5. The base name of the current directory if no Compose file is specified.
 
 ## What's next?
 
-- Read up on [working with multiple Compose files](multiple-compose-files/_index.md)
-- Explore some [sample apps](samples-for-compose.md)
+- Read up on [working with multiple Compose files](multiple-compose-files/_index.md).
+- Explore some [sample apps](samples-for-compose.md).

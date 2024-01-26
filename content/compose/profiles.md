@@ -4,8 +4,6 @@ desription: How to use profiles with Docker Compose
 keywords: cli, compose, profile, profiles reference
 ---
 
-{{< include "compose-eol.md" >}}
-
 Profiles help you adjust the Compose application model for various uses and
 environments by selectively starting services.
 This is achieved by assigning each service to zero or more profiles. If
