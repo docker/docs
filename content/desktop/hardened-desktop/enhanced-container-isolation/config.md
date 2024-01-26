@@ -1,24 +1,21 @@
 ---
 description: Advanced Configuration for Enhanced Container Isolation
-title: Enhanced Container Isolation Configuration
+title: Advanced configuration options
 keywords: enhanced container isolation, Docker Desktop, Docker socket, bind mount, configuration
 ---
 
-This section describes configuration specific to Enhanced Container Isolation (ECI).
-
-### Enabling ECI
-
-ECI may be enabled by users or admins, as described [here](_index.md#how-do-i-enable-enhanced-container-isolation).
-
-The sections below describe optional, advanced configurations for ECI.
-
-### Docker Socket Mount Permissions (Beta)
-
-> Note
+> **Note**
 >
-> This feature is available since Docker Desktop 4.27 and it's currently in
-> [Beta](../../../release-lifecycle.md/#beta). It does not yet work on Windows
-> hosts when Docker Desktop configured to use WSL (but does work with Hyper-V).
+> This feature is available with Docker Desktop version 4.27 and later. It's currently in
+> [Beta](../../../release-lifecycle.md/#beta). 
+
+This page describes optional, advanced configurations for ECI, once [ECI is enabled](_index/#how-do-i-enable-enhanced-container-isolation).
+
+## Docker socket mount permissions 
+
+> **Important**
+>
+> It does not yet work on Windows hosts when Docker Desktop configured to use WSL, but does work with Hyper-V.
 
 By default, when ECI is enabled, Docker Desktop does not allow bind-mounting the
 Docker Engine socket into containers:
@@ -31,10 +28,10 @@ This prevents malicious containers from gaining access to the Docker Engine, as
 such access could allow them to perform supply chain attacks (e.g., build and
 push malicious images into the organization's repositories) or similar.
 
-However, some legitimate use-cases require containers to have access to the
+However, some legitimate use cases require containers to have access to the
 Docker Engine socket. For example, the popular [TestContainers](https://testcontainers.com/)
 framework sometimes bind-mounts the Docker Engine socket into containers to
-manage them, perform post-test cleanup, etc.
+manage them or perform post-test cleanup.
 
 Starting with Docker Desktop 4.27, admins can optionally configure ECI to allow
 bind mounting the Docker Engine socket into containers, but in a controlled way.
@@ -69,7 +66,7 @@ As shown above, there are two configurations for bind-mounting the Docker
 socket into containers: the `imageList` and the `commandList`. These are
 described below.
 
-#### Image List
+### Image list
 
 The `imageList` is a list of container images that are allowed to bind-mount the
 Docker socket. By default the list is empty (i.e., no containers are allowed to
@@ -78,7 +75,7 @@ images to the list, using either of these formats:
 
 | Image Reference Format  | Description |
 | :---------------------- | :---------- |
-| `<image_name>[:<tag>]`  | Name of the image, with optional tag; if tag is omitted, the `:latest` tag is used; if tag is the wildcard `*`, then it means "any tag for that image." |
+| `<image_name>[:<tag>]`  | Name of the image, with optional tag. If the tag is omitted, the `:latest` tag is used. If the tag is the wildcard `*`, then it means "any tag for that image." |
 | `<image_name>@<digest>` | Name of the image, with a specific repository digest (e.g., as reported by `docker buildx imagetools inspect <image>`). This means only the image that matches that name and digest is allowed. |
 
 The image name follows the standard convention, so it can point to any registry
@@ -106,15 +103,15 @@ $ docker run -it -v /var/run/docker.sock:/var/run/docker.sock docker:cli sh
 / #
 ```
 
-> Note
+> **Tip**
 >
 > Be restrictive on the images you allow, as described in [Recommendations](#recommendations) below.
+{ .tip }
 
-In general, it's easiest to specify the image using the tag wildcard format
-(e.g., `<image-name>:*`) because this way the image list in the
-`admin-settings.json` file need not be updated whenever a new version of the
-image is used. Alternatively, one can use an immutable tag (e.g., `:latest`),
-but it does not work always work as well as the wildcard because, for example,
+In general, it's easier to specify the image using the tag wildcard format
+(e.g., `<image-name>:*`) because then `imageList` doesn't need to be updated whenever a new version of the
+image is used. Alternatively, you can use an immutable tag (e.g., `:latest`),
+but it does not always work as well as the wildcard because, for example,
 TestContainers uses specific versions of the image, not necessarily the latest
 one.
 
@@ -135,17 +132,17 @@ $ docker tag <disallowed_image> <allowed_image>
 $ docker run -v /var/run/docker.sock:/var/run/docker.sock <allowed_image>
 ```
 
-then the tag operation will succeed, but the `docker run` command will fail
+then the tag operation succeeds, but the `docker run` command fails
 because the image digest of the disallowed image won't match that of the allowed
 ones in the repository.
 
-#### Command List
+### Command List
 
 The `commandList` restricts the Docker commands that a container can issue via a
 bind-mounted Docker socket when ECI is enabled. It acts as a complementary
 security mechanism to the `imageList` (i.e., like a second line of defense).
 
-For example, say the `imageList` (see prior section) is configured to allow
+For example, say the `imageList` is configured to allow
 image `docker:cli` to mount the Docker socket, and a container is started with
 it:
 
@@ -167,7 +164,7 @@ Each command in the list is specified by its name, as reported by `docker
 --help` (e.g., "ps", "build", "pull", "push", etc.) In addition, the following
 command wildcards are allowed to block an entire group of commands:
 
-| Command Wildcard  | Description |
+| Command wildcard  | Description |
 | :---------------- | :---------- |
 | "container\*"     | Refers to all "docker container ..." commands |
 | "image\*"         | Refers to all "docker image ..." commands |
@@ -186,7 +183,7 @@ on the Docker socket:
 }
 ```
 
-Thus, if inside the container, one issues either of those commands on the
+Thus, if inside the container, you issue either of those commands on the
 bind-mounted Docker socket, they will be blocked:
 
 ```console
@@ -205,13 +202,13 @@ Note that if the `commandList` had been configured as an "allow" list, then the
 effect would be the opposite: only the listed commands would have been allowed.
 Whether to configure the list as an allow or deny list depends on the use case.
 
-#### Recommendations
+### Recommendations
 
-* Be restrictive on the list container images for which you allow bind-mounting
+* Be restrictive on the list of container images for which you allow bind-mounting
   of the Docker socket (i.e., the `imageList`). Generally, only allow this for
-  images that absolutely needed and that you trust.
+  images that are absolutely needed and that you trust.
 
-* Admins should use the tag wildcard format if possible in the `imageList`
+* Use the tag wildcard format if possible in the `imageList`
   (e.g., `<image_name>:*`), as this eliminates the need to update the
   `admin-settings.json` file due to image tag changes.
 
@@ -226,7 +223,7 @@ Whether to configure the list as an allow or deny list depends on the use case.
     the resulting container uses a the Linux user-namespace, sensitive system
     calls are vetted, etc.)
 
-#### Caveats and Limitations
+### Caveats and limitations
 
 * Docker Socket Mount permissions don't yet work on Docker Desktop on Windows
   hosts with WSL (but they work on Hyper-V). Support for WSL is expected to be
@@ -266,7 +263,7 @@ Whether to configure the list as an allow or deny list depends on the use case.
 | scout                | Docker Scout |
 | trust                | Manage trust on Docker images |
 
-> Note
+> **Note**
 >
 > Docker socket mount permissions do not apply when running "true"
 > Docker-in-Docker (i.e., when running the Docker Engine inside a container). In

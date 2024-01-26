@@ -66,7 +66,7 @@ this. The combination of the Linux user-namespace and other security techniques
 used by Sysbox ensures that processes inside a privileged container can only
 access resources assigned to the container.
 
-> Note
+> **Note**
 >
 > Enhanced Container Isolation does not prevent users from launching privileged
 > containers, but rather runs them securely by ensuring that they can only
@@ -167,7 +167,7 @@ $ docker run -it --rm -v $HOME:/mnt alpine
 / #
 ```
 
-> Note
+> **Note**
 >
 > By default, Enhanced Container Isolation won't allow bind mounting the Docker Engine socket
 > (/var/run/docker.sock) into a container, as doing so essentially grants the
