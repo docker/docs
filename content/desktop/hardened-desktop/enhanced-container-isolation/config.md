@@ -9,7 +9,7 @@ keywords: enhanced container isolation, Docker Desktop, Docker socket, bind moun
 > This feature is available with Docker Desktop version 4.27 and later. It's currently in
 > [Beta](../../../release-lifecycle.md/#beta). 
 
-This page describes optional, advanced configurations for ECI, once [ECI is enabled](_index/#how-do-i-enable-enhanced-container-isolation).
+This page describes optional, advanced configurations for ECI, once ECI is enabled.
 
 ## Docker socket mount permissions 
 
