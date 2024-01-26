@@ -114,7 +114,7 @@ redirected to the Azure registry summary page, which shows you all your Azure
 integrations for the current organization.
 
 Next, activate Docker Scout for the repositories that you want to analyze in
-[repository settings](../../dashboard.md#repository-settings). When you enable
+[repository settings](../../dashboard.md#repository-settings).
 
 After activating repositories, images that you push are analyzed by Docker
 Scout. The analysis results appear in the Docker Scout Dashboard.
