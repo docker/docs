@@ -101,7 +101,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Known issues
 
+#### For all platforms
 - When using Setting Management, the settings that are not set in the `admin-settings.json` will be reset to default when Docker Desktop starts.
+
+#### For Mac
+- Updating to 4.27.0 from the **Software updates** sometimes hangs. As a workaround, use the 4.27.0 installer from this page.
 
 ## 4.26.1
 
