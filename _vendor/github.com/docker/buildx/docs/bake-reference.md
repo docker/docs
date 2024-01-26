@@ -1069,13 +1069,13 @@ target "webapp-dev" {
 
 [attestations]: https://docs.docker.com/build/attestations/
 [bake_stdlib]: https://github.com/docker/buildx/blob/master/bake/hclparser/stdlib.go
-[build-arg]: https://docs.docker.com/engine/reference/commandline/build/#build-arg
+[build-arg]: https://docs.docker.com/engine/reference/commandline/image_build/#build-arg
 [build-context]: https://docs.docker.com/engine/reference/commandline/buildx_build/#build-context
 [cache-backends]: https://docs.docker.com/build/cache/backends/
 [cache-from]: https://docs.docker.com/engine/reference/commandline/buildx_build/#cache-from
 [cache-to]: https://docs.docker.com/engine/reference/commandline/buildx_build/#cache-to
 [context]: https://docs.docker.com/engine/reference/commandline/buildx_build/#build-context
-[file]: https://docs.docker.com/engine/reference/commandline/build/#file
+[file]: https://docs.docker.com/engine/reference/commandline/image_build/#file
 [go-cty]: https://github.com/zclconf/go-cty/tree/main/cty/function/stdlib
 [hcl-funcs]: https://docs.docker.com/build/bake/hcl-funcs/
 [output]: https://docs.docker.com/engine/reference/commandline/buildx_build/#output
@@ -1083,6 +1083,6 @@ target "webapp-dev" {
 [run_mount_secret]: https://docs.docker.com/engine/reference/builder/#run---mounttypesecret
 [secret]: https://docs.docker.com/engine/reference/commandline/buildx_build/#secret
 [ssh]: https://docs.docker.com/engine/reference/commandline/buildx_build/#ssh
-[tag]: https://docs.docker.com/engine/reference/commandline/build/#tag
-[target]: https://docs.docker.com/engine/reference/commandline/build/#target
+[tag]: https://docs.docker.com/engine/reference/commandline/image_build/#tag
+[target]: https://docs.docker.com/engine/reference/commandline/image_build/#target
 [userfunc]: https://github.com/hashicorp/hcl/tree/main/ext/userfunc
