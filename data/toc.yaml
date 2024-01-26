@@ -165,6 +165,20 @@ Guides:
           title: Develop your app
       - path: /guides/use-case/genai-video-bot/
         title: Video transcription and chat
+    - sectiontitle: Natural language processing
+      section:
+      - path: /guides/use-case/nlp/
+        title: Overview
+      - path: /guides/use-case/nlp/language-translation/
+        title: Language translation
+      - path: /guides/use-case/nlp/named-entity-recognition/
+        title: Named entity recognition
+      - path: /guides/use-case/nlp/sentiment-analysis/
+        title: Sentiment analysis
+      - path: /guides/use-case/nlp/text-classification/
+        title: Text classification
+      - path: /guides/use-case/nlp/text-summarization/
+        title: Text summarization
 
 - sectiontitle: Develop with Docker
   section:
