@@ -19,6 +19,10 @@ grid:
   description: Explore how to buy and manage a Docker Scout subscription.
   link: /billing/scout-billing/
   icon: query_stats
+- title: Docker Build Cloud billing
+  description: Learn how to buy and manage a Docker Build Cloud subscription.
+  link: /billing/build-billing/
+  icon: build
 - title: Billing FAQs
   description: Find the answers you need and explore common questions.
   link: /billing/faqs/
