@@ -185,7 +185,7 @@ services:
 ### Replace value
 
 While `!reset` can be used to remove a declaration from a Compose file using an override file, `!override` allows you 
-to fully replace an attribute, bypassing the standard merge rules. A typical example is to fully replace a resource definition, to rely on a distinct model but using same name.
+to fully replace an attribute, bypassing the standard merge rules. A typical example is to fully replace a resource definition, to rely on a distinct model but using the same name.
 
 Merging the following example YAML trees:
 
