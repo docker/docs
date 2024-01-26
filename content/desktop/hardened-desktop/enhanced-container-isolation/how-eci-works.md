@@ -22,7 +22,7 @@ Even containers that use the insecure `--privileged` flag can now be run
 securely with Enhanced Container Isolation, such that they can no longer be used
 to breach the Docker Desktop Virtual Machine (VM) or other containers.
 
-> Note
+> **Note**
 >
 > When Enhanced Container Isolation is enabled in Docker Desktop, the Docker CLI
 > "--runtime" flag is ignored. Docker's default runtime continues to be "runc",
