@@ -109,7 +109,7 @@ Docker from the repository.
    sudo apt-get update
    sudo apt-get install ca-certificates curl gnupg
    sudo install -m 0755 -d /etc/apt/keyrings
-   curl -fsSL {{% param "download-url-base" %}}/gpg -O /etc/apt/keyrings/docker.asc
+   curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
    
    # Add the repository to Apt sources:
    echo \
