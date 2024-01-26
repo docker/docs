@@ -8,6 +8,7 @@ keywords: enhanced container isolation, Docker Desktop, Docker socket, bind moun
 >
 > This feature is available with Docker Desktop version 4.27 and later. It's currently in
 > [Beta](../../../release-lifecycle.md/#beta). 
+{ .experimental }
 
 This page describes optional, advanced configurations for ECI, once ECI is enabled.
 
@@ -16,6 +17,7 @@ This page describes optional, advanced configurations for ECI, once ECI is enabl
 > **Important**
 >
 > It does not yet work on Windows hosts when Docker Desktop configured to use WSL, but does work with Hyper-V.
+{ .important }
 
 By default, when ECI is enabled, Docker Desktop does not allow bind-mounting the
 Docker Engine socket into containers:
@@ -136,7 +138,7 @@ then the tag operation succeeds, but the `docker run` command fails
 because the image digest of the disallowed image won't match that of the allowed
 ones in the repository.
 
-### Command List
+### Command list
 
 The `commandList` restricts the Docker commands that a container can issue via a
 bind-mounted Docker socket when ECI is enabled. It acts as a complementary
