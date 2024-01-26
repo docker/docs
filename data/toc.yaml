@@ -1,8 +1,6 @@
 Guides:
 - title: Docker overview
   path: /get-started/overview/
-- title: Get Docker
-  path: /get-docker/
 - sectiontitle: Get started
   section:
     - title: "Overview"
@@ -1048,6 +1046,8 @@ Samples:
 Manuals:
 - path: /manuals/
   title: Overview
+- title: Get Docker
+  path: /get-docker/
 - sectiontitle: Docker Desktop
   section:
     - path: /desktop/
