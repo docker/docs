@@ -1,6 +1,7 @@
 <header class="sticky top-0 z-20 h-16 px-4 text-white bg-gradient-to-r from-accent-light to-blue-light-500 dark:from-accent-dark dark:to-blue-dark-100">
   <div class="mx-auto flex h-full max-w-[1400px] items-center justify-between">
     <div class="flex h-full items-center gap-8 md:gap-2">
+      {{ if not .IsHome }}
       <button x-data tabindex="4" @click="() => {
       $store.showSidebar = ! $store.showSidebar;
       const sidebar = document.querySelector('#sidebar');
@@ -12,6 +13,7 @@
       }" class="icon-svg hidden px-4 md:block" aria-label="Menu">
         {{ partial "icon" "menu" }}
       </button>
+      {{ end }}
       <div>
         {{/* main logo */}}
         <a href="{{ site.BaseURL }}">
