@@ -4,10 +4,6 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      gridTemplateColumns: {
-        "main": 'minmax(300px, 1fr) 840px minmax(300px, 1fr)',
-        "main-xl": '300px 840px minmax(0, 1fr)',
-      },
       typography: (theme) => ({
         DEFAULT: {
           css: {

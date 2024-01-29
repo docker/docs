@@ -4,7 +4,7 @@ description: Learn about the Docker Build Cloud subscriptions plans and features
 keywords: subscription, pro, team, business, features, build, cloud, Build Cloud, remote builder
 ---
 
-You can enhance your teams' builds with a Build Cloud subscription. This page describes the features available for the different subscription tiers.
+You can enhance your teams' builds with a Build Cloud subscription. This page describes the features available for the different subscription tiers. To compare features available for each tier, see [Docker Build Cloud pricing](https://www.docker.com/products/build-cloud/#pricing).
 
 ## Docker Build Cloud Starter
 
