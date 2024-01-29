@@ -59,7 +59,8 @@ by the configured user, use the `COPY --chown` flag:
 
 ```dockerfile
 # Run as a non-privileged user
-RUN adduser -ms /bin/bash -u 1001 app
+FROM node:18-alpine
+RUN useradd -ms /bin/sh -u 1001 app
 USER app
 
 # Copy source files into application directory

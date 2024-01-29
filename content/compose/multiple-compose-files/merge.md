@@ -83,8 +83,21 @@ relative to the base file.
 
 - When you use multiple Compose files, all paths in the files are relative to the first configuration file specified with `-f`. You can  use the `--project-directory` option to override this base path.
 
-- You can use a `-f` with `-` (dash) as the filename to read the configuration from `stdin`. When `stdin` is used, all paths in the configuration are relative to the current working directory.
-
+- You can use a `-f` with `-` (dash) as the filename to read the configuration from `stdin`. For example: 
+   ```console
+   $ docker compose -f - <<EOF
+     webapp:
+       image: examples/web
+       ports:
+        - "8000:8000"
+       volumes:
+        - "/data"
+       environment:
+        - DEBUG=1
+     EOF
+   ```
+   When `stdin` is used, all paths in the configuration are relative to the current working directory.
+   
 - You can use the `-f` flag to specify a path to a Compose file that is not located in the current directory, either from the command line or by setting up a [COMPOSE_FILE environment variable](../environment-variables/envvars.md#compose_file) in your shell or in an environment file.
 
    For example  suppose you are running the [Compose Rails sample](https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/rails/README.md), and have a `compose.yml` file in a directory called `sandbox/rails`. You can use a command like [docker compose pull](../../engine/reference/commandline/compose_pull.md) to get the postgres image for the `db` service from anywhere by using the `-f` flag as follows: `docker compose -f ~/sandbox/rails/compose.yml pull db`
