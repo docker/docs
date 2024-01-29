@@ -12,6 +12,15 @@ the `docker/scout-cli` [GitHub repository](https://github.com/docker/scout-cli/r
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
 for what's coming next.
 
+## 2024-01-26
+
+**Azure Container Registry** integration graduated from
+[Early Access](../release-lifecycle.md#early-access-ea) to
+[General Availability](../release-lifecycle.md#genera-availability-ga).
+
+For more information and setup instructions, see
+[Integrate Azure Container Registry](./integrations/registry/acr.md).
+
 ## 2024-01-23
 
 New **Unapproved base images** policy, which lets you restrict which base
