@@ -155,12 +155,16 @@ Guides:
   section:
     - sectiontitle: Generative AI
       section:
-      - path: /guides/use-case/genai-pdf-bot/
-        title: Overview
-      - path: /guides/use-case/genai-pdf-bot/containerize/
-        title: Containerize your app
-      - path: /guides/use-case/genai-pdf-bot/develop/
-        title: Develop your app
+      - sectiontitle: PDF analysis and chat
+        section:
+        - path: /guides/use-case/genai-pdf-bot/
+          title: Overview
+        - path: /guides/use-case/genai-pdf-bot/containerize/
+          title: Containerize your app
+        - path: /guides/use-case/genai-pdf-bot/develop/
+          title: Develop your app
+      - path: /guides/use-case/genai-video-bot/
+        title: Video transcription and chat
 
 - sectiontitle: Develop with Docker
   section:
