@@ -24,6 +24,27 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.27.1
+
+{{< release-date date="2023-02-01" >}}
+
+{{< desktop-install all=true version="4.27.1" build_path="/LO-TBD/" >}}
+
+### Upgrades
+
+- [Compose v2.24.4](https://github.com/docker/compose/releases/tag/v2.24.4)
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where the diagnostics ID would not be printed correctly when uploading diagnostics from the terminal.
+
+#### For Mac
+
+- Re-added kernel modules needed by `Istio`. Fixes [docker/for-mac#7148](https://github.com/docker/for-mac/issues/7148)
+- Node now uses all the cores available under Rosetta.
+
 ## 4.27.0
 
 {{< release-date date="2024-01-25" >}}
