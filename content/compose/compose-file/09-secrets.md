@@ -35,3 +35,7 @@ secrets:
   token:
     environment: "OAUTH_TOKEN"
 ```
+
+## Additional resources
+
+For more information, see [How to use secrets in Compose](../use-secrets.md).

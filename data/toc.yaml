@@ -335,8 +335,6 @@ Reference:
     section:
       - path: /compose/reference/
         title: overview
-      - path: /compose/environment-variables/envvars/
-        title: environment variables
       - path: /engine/reference/commandline/compose_alpha/
         title: docker compose alpha
       - path: /engine/reference/commandline/compose_alpha_dry-run/
