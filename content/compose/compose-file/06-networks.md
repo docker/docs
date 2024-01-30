@@ -73,7 +73,7 @@ networks:
     driver: overlay
 ```
 
-Default and available values are platform specific. Compose supports the following drivers:
+Compose supports the following drivers:
 `none` and `host`
 
 - `host`: Use the host's networking stack.
@@ -251,3 +251,7 @@ networks:
     external: true
     name: "${NETWORK_ID}"
 ```
+
+## Additional resources
+
+For more examples, see [Networking in Compose](../networking.md).
