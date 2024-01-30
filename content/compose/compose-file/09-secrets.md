@@ -13,9 +13,6 @@ application. The source of the secret is either `file` or `environment`.
 
 - `file`: The secret is created with the contents of the file at the specified path.
 - `environment`: The secret is created with the value of an environment variable.
-- `name`: The name of the secret object in Docker. This field can be used to
-  reference secrets that contain special characters. The name is used as is
-  and isn't scoped with the project name.
 
 ## Example 1
 
@@ -38,18 +35,3 @@ secrets:
   token:
     environment: "OAUTH_TOKEN"
 ```
-
-## Example 3
-
-External secrets lookup can also use a distinct key by specifying a `name`. 
-
-The following example modifies the previous example to look up a secret using the name `CERTIFICATE_KEY`. The actual lookup key is set at deployment time by the [interpolation](12-interpolation.md) of
-variables, but exposed to containers as hard-coded ID `server-certificate`.
-
-```yml
-secrets:
-  server-certificate:
-    external: true
-    name: "${CERTIFICATE_KEY}"
-```
-

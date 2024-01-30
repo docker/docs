@@ -11,7 +11,7 @@ This page offers examples of scenarios where custom project names can be helpful
 > **Note**
 >
 > The default project directory is the base directory of the Compose file. A custom value can also be set
-> for it using the `--project-directory` command line option.
+> for it using the [`--project-directory` command line option](reference/_index.md).
 
 ## Example use cases
 
