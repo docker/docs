@@ -11,6 +11,25 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.4
+{{< release-date date="2024-01-29" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.1
+- Dependencies upgrade: bump docker to 25.0.1
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.3
+
+### Bug fixes and enhancements
+- Fixed issue when checking external network existence when swarm is enabled
+- Added support for `storage_opt` attribute
+
+## 2.24.3
+{{< release-date date="2024-01-24" >}}
+
+This release fixes build issue with Docker Desktop for Windows introduced in Compose v2.24.0
+### Update
+- Use a custom version of `fsutils` library
+
 ## 2.24.2
 {{< release-date date="2024-01-22" >}}
 
