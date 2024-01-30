@@ -22,18 +22,11 @@ from the Compose file's parent folder. If it is absolute, the path prevents the 
 
 ## Using `build` and `image`
 
-When a `build` subsection is present for a service, the `image` attribute for that service is ignored. This is because Compose can build an image from source, and the details of the build are specified in the build section. 
+When Compose is confronted with both a `build` subsection for a service and an `image` attribute. It follows the rules defined by the [`pull_policy`](05-services.md#pull_policy) attribute. 
 
-When a service definition also includes the `pull_policy`
+If `pull_policy` is missing in the service definition, Compose attempts to pull the image first and then builds from source if the image isn't found in the registry or platform cache. 
 
-
-## Consistency with `image`
-
-When a service definition includes both the `image` attribute and a `build` section, Compose can't
-guarantee a pulled image is strictly equivalent to building the same image from source. Without any explicit
-user directives, Compose with `build` support first tries to pull the image, then builds from source
-if the image is not found on registry. Compose may offer options to customize this behaviour by user
-request.
+If `pull_policy` and build are both present, Compose ignores the `image` attribute and builds the image by default.
 
 ## Publishing built images
 
