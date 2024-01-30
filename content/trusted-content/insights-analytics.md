@@ -8,7 +8,7 @@ aliases:
 ---
 
 Insights and analytics provides usage analytics for Docker Verified
-Publisher (DVP) and Docker-Sponsored Open Source (DSOS) images on Docker Hub. This includes self-serve access to metrics as both raw data and summary data for a desired time span. You can view the number of image pulls by tag or by digest, and get breakdowns by geolocation, cloud provider, client, and more.
+Publisher (DVP) and Docker-Sponsored Open Source (DSOS) images on Docker Hub. This includes self-serve access to image and extension usage metrics for a desired time span. You can also dispay the number of image pulls by tag or by digest, and get breakdowns by geolocation, cloud provider, client, and more.
 
 <!-- prettier-ignore -->
 > **Tip**
@@ -18,11 +18,11 @@ Publisher (DVP) and Docker-Sponsored Open Source (DSOS) images on Docker Hub. Th
 to learn more about the programs.
 { .tip }
 
-## View the analytics data
+## View the images analytics data
 
 You can find analytics data for your repositories on the **Insights and
 analytics** dashboard at the following URL:
-`https://hub.docker.com/orgs/{namespace}/insights`. The dashboard contains a
+`https://hub.docker.com/orgs/{namespace}/insights/images`. The dashboard contains a
 visualization of the usage data and a table where you can download
 the data as CSV files.
 
@@ -52,6 +52,12 @@ Selecting the icon generates a link that's copied to your clipboard. The link
 preserves the display selections you made. When someone follows the link, the
 **Insights and analytics** page opens and displays the chart with the same
 configuration as you had set up when creating the link.
+
+## Extension analytics data
+
+If you have published Docker Extensions in the Extension marketplace, you can also get analytics about your extension usage, available as CSV files.
+You can download extension CSV reports from the **Insights and analytics** dashboard at the following URL:
+`https://hub.docker.com/orgs/{namespace}/insights/extensions`. If your Docker namespace contains extensions known in the marketplace, you will see a tab "Extensions" listing CSV files for your extension(s).
 
 ## Exporting analytics data
 
@@ -94,7 +100,7 @@ points and with different structure.
 The following sections describe the available data points for each format. The
 **Date added** column shows when the field was first introduced.
 
-### Raw data
+### Image Pulls Raw data
 
 The raw data format contains the following data points. Each row in the CSV file
 represents an image pull.
@@ -118,12 +124,12 @@ represents an image pull.
 | Domain                        | Request origin domain, see [Privacy](#privacy).                                                              | October 11, 2022  |
 | Owner                         | The name of the organization that owns the repository.                                                       | December 19, 2022 |
 
-[1]: #action-classification-rules
+[1]: #image-pulls-action-classification-rules
 [2]: /registry/spec/api/
 [3]: /admin/organization/orgs/
 [4]: /docker-hub/repos/
 
-### Summary data
+### Image Pulls Summary data
 
 There are two levels of summary data available:
 
@@ -142,7 +148,7 @@ span:
 | Version check     | HEAD by tag, not followed by a GET                      | January 1, 2022   |
 | Owner             | The name of the organization that owns the repository.  | December 19, 2022 |
 
-### Action classification rules
+### Image Pulls Action classification rules
 
 An action represents the multiple request events associated with a
 `docker pull`. Pulls are grouped by category to make the data more meaningful
@@ -174,6 +180,37 @@ pulls. To provide feedback or ask questions about these rules,
 | HEAD           | digest    | GET by same digest                                              | Pull by digest   | Image is single-arch and/or image is multi-arch but some part of the image already exists on the local machine |
 | HEAD           | digest    | GET by same digest, then a second GET by different digest       | Pull by Digest   | Image is multi-arch                                                                                            |
 
+### Extension Summary data
+
+There are two levels of extension summary data available:
+
+- Core summary, with basic extension usage information: number of extension installs, uninstalls, and total install all times
+
+The coresummary data file contain the following data points for the selected time
+span:
+
+| Data point        | Description                                             | Date added        |
+| ----------------- | ------------------------------------------------------- | ----------------- |
+| Installs          | Number of installs for the extension                    | Feb 1, 2024       |
+| TotalInstalls     | Number of installs for the extension all times          | Feb 1, 2024       |
+| Uninstalls        | Number of uninstalls for the extension                  | Feb 1, 2024       |
+| TotalUninstalls   | Number of uninstalls for the extension all times        | Feb 1, 2024       |
+| Updates           | Number of updates for the extension                     | Feb 1, 2024       |
+
+- Premium summary, with advanced extension usage information: installs, uninstalls by unique users, extension opening by unique users.
+
+The coresummary data file contain the following data points for the selected time
+span:
+
+| Data point        | Description                                             | Date added        |
+| ----------------- | ------------------------------------------------------- | ----------------- |
+| Installs          | Number of installs for the extension                    | Feb 1, 2024       |
+| UniqueInstalls    | Number of unique users installing the extension         | Feb 1, 2024       |
+| Uninstalls        | Number of uninstalls for the extension                  | Feb 1, 2024       |
+| UniqueUninstalls  | Number of unique users uninstalling the extension       | Feb 1, 2024       |
+| Usage             | Number of openings of the extension tab                 | Feb 1, 2024       |
+| UniqueUsage       | Number of unique users openings the extension tab       | Feb 1, 2024       |
+
 ## Changes in data over time
 
 The insights and analytics service is continuously improved to increase the
@@ -198,11 +235,11 @@ consumers of content on Docker Hub remain completely anonymous.
 > analytics data.
 { .important }
 
-The summary dataset includes unique IP address count. This data point only
+The Image pulls summary dataset includes unique IP address count. This data point only
 includes the number of distinct unique IP addresses that request an image.
 Individual IP addresses are never shared.
 
-The raw dataset includes user IP domains as a data point. This is the domain name
+The Image pulls raw dataset includes user IP domains as a data point. This is the domain name
 associated with the IP address used to pull an image. If the IP type is
 `business`, the domain represents the company or organization associated with
 that IP address (for example, `docker.com`). For any other IP type that's not
