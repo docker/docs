@@ -11,6 +11,12 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.5
+{{< release-date date="2024-01-30" >}}
+
+### Bug fixes and enhancements
+- Fixed "failed to solve: changes out of order" errors when building images on Windows.
+
 ## 2.24.4
 {{< release-date date="2024-01-29" >}}
 
