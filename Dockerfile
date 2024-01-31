@@ -32,7 +32,7 @@ RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 FROM scratch as release
 COPY --from=build /out /
 
-FROM davidanson/markdownlint-cli2:v0.10.0 as lint
+FROM davidanson/markdownlint-cli2:v0.12.1 as lint
 USER root
 RUN --mount=type=bind,target=. \
     /usr/local/bin/markdownlint-cli2 \
