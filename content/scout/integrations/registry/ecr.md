@@ -65,10 +65,9 @@ Prerequisites:
 
 To create the stack:
 
-1. Go to [Integrations](https://scout.docker.com/settings/integrations/) on the
-   Docker Scout Dashboard.
-2. Select **Integrate** on **Elastic Container Registry**.
-3. Select the **Create on AWS** button.
+1. Go to the [ECR integration page](https://scout.docker.com/settings/integrations/ecr/)
+   on the Docker Scout Dashboard.
+2. Select the **Create on AWS** button.
 
    This opens the **Create stack** wizard in the AWS CloudFormation console in
    a new browser tab. If you're not already signed in to AWS, you're redirected
@@ -77,14 +76,14 @@ To create the stack:
    If the button is grayed-out, it means you're lacking the necessary
    permissions in the Docker organization.
 
-4. Follow the steps in the **Create stack** wizard until the end. Choose the
+3. Follow the steps in the **Create stack** wizard until the end. Choose the
    AWS region you want to integrate. Complete the procedure by creating the
    resources.
 
    The fields in the wizard are pre-populated by the CloudFormation template,
    so you don't need to edit any of the fields.
 
-5. When the resources have been created (the CloudFormation status shows
+4. When the resources have been created (the CloudFormation status shows
    `CREATE_COMPLETE` in the AWS console), return to the ECR integrations page
    in the Docker Scout Dashboard.
 
@@ -93,8 +92,8 @@ To create the stack:
    is **Connected**.
 
 The ECR integration is now active. For Docker Scout to start analyzing images
-in the registry, you need to activate it for each repository. Refer to
-[repository settings](../../dashboard.md#repository-settings).
+in the registry, you need to activate it for each repository in
+[Repository settings](https://scout.docker.com/settings/repos/).
 
 After activating repositories, images that you push are analyzed by Docker
 Scout. The analysis results appear in the Docker Scout Dashboard.
@@ -105,12 +104,11 @@ latest image version automatically.
 
 To add additional registries:
 
-1. Go to [Integrations](https://scout.docker.com/settings/integrations/) on the
-   Docker Scout Dashboard.
-2. Select **Manage** on **Elastic Container Registry**.
-3. Select the **Add** button at the top of the list.
-4. Complete the steps for creating the AWS resources.
-5. When the resources have been created, return to the ECR integrations page in
+1. Go to the [ECR integration page](https://scout.docker.com/settings/integrations/ecr/)
+   on the Docker Scout Dashboard.
+2. Select the **Add** button at the top of the list.
+3. Complete the steps for creating the AWS resources.
+4. When the resources have been created, return to the ECR integrations page in
    the Docker Scout Dashboard.
 
    The **Integrated registries** list shows the account ID and region for the
@@ -118,23 +116,22 @@ To add additional registries:
    is **Connected**.
 
 Next, activate Docker Scout for the repositories that you want to analyze in
-[repository settings](../../dashboard.md#repository-settings).
+[repository settings](https://scout.docker.com/settings/repos/).
 
 ## Remove integration
 
 To remove an integrated ECR registry, you must be an owner of the Docker
 organization.
 
-1. Go to [Integrations](https://scout.docker.com/settings/integrations/) on
-   the Docker Scout Dashboard.
-2. Select **Manage** on **Elastic Container Registry**.
-3. Find the registry that you want to remove in the list of integrated
+1. Go to the [ECR integration page](https://scout.docker.com/settings/integrations/ecr/)
+   on the Docker Scout Dashboard.
+2. Find the registry that you want to remove in the list of integrated
    registries, and select the remove icon in the **Actions** column.
 
    If the remove icon is disabled, it means that you're lacking the necessary
    permissions in the Docker organization.
 
-4. In the dialog that opens, confirm by selecting **Remove**.
+3. In the dialog that opens, confirm by selecting **Remove**.
 
 > **Important**
 >
@@ -150,12 +147,8 @@ organization.
 
 ### Unable to integrate registry
 
-Check the **Status** of the integration on the ECR integrations page in the
-Docker Scout Dashboard:
-
-1. Go to [Integrations](https://scout.docker.com/settings/integrations/) on the
-   Docker Scout Dashboard.
-2. Select **Manage** on **Elastic Container Registry**.
+Check the **Status** of the integration on the [ECR integration page](https://scout.docker.com/settings/integrations/ecr/)
+in the Docker Scout Dashboard.
 
 - If the status is **Pending** for a prolonged period of time, it's an
   indication that the integration was not yet completed on the AWS side. Select
@@ -172,7 +165,7 @@ If image analysis results for your ECR images aren't showing up in the Docker
 Scout Dashboard:
 
 - Ensure that you've activated Docker Scout for the repository. View and manage
-  active repositories in [Repository settings](../../dashboard.md#repository-settings).
+  active repositories in [Repository settings](https://scout.docker.com/settings/repos/).
 
 - Ensure that the AWS account ID and region for your registry is listed on the
   ECR integrations page.
