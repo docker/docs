@@ -12,7 +12,7 @@ COPY package*.json .
 RUN npm install && npm cache clean --force
 
 FROM base as hugo
-ARG HUGO_VERSION=0.116.1
+ARG HUGO_VERSION=0.122.0
 ARG TARGETARCH
 WORKDIR /bin
 RUN go install github.com/gohugoio/hugo@v${HUGO_VERSION}
