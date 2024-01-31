@@ -1,7 +1,7 @@
 ---
 description: Explore a generative AI video analysis app that uses Docker, OpenAI, and Pinecone.
 keywords:  python, generative ai, genai, llm, whisper, pinecone, openai, whisper
-title: GenAI video analysis application
+title: GenAI video transcription and chat
 ---
 
 ## Overview
@@ -25,11 +25,12 @@ The project showcases the following technologies:
 > [David Cardozo](https://www.davidcardozo.com/) for his contribution
 > to this guide.
 
-## Requirements
-- [OpenAI API Key](https://platform.openai.com/api-keys)
-- [Pinecone API Key](https://app.pinecone.io/)
-- [Docker Desktop](../../../get-docker.md)
-- [Git client](https://git-scm.com/downloads)
+## Prerequisites
+
+- You have an [OpenAI API Key](https://platform.openai.com/api-keys).
+- You have a [Pinecone API Key](https://app.pinecone.io/).
+- You have installed the latest version of [Docker Desktop](../../../get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.
+- You have a [Git client](https://git-scm.com/downloads). The examples in this section use a command-line based Git client, but you can use any client.
 
 ## About the application
 
@@ -56,8 +57,19 @@ addition, it provides timestamps from the video that can help you find the sourc
    ```
 
 2. Specify your API keys. In the `docker-genai` directory, create a text file
-   called `.env` and specify your API keys inside. See the `env.example` file
-   for the variable names and file format.
+   called `.env` and specify your API keys inside. The following is the contents of the `.env.example` file that you can refer to as an example.
+
+   ```text
+   #----------------------------------------------------------------------------
+   # OpenAI
+   #----------------------------------------------------------------------------
+   OPENAI_TOKEN=your-api-key # Replace your-api-key with your personal API key
+
+   #----------------------------------------------------------------------------
+   # Pinecone
+   #----------------------------------------------------------------------------
+   PINECONE_TOKEN=your-api-key # Replace your-api-key with your personal API key
+   ```
 
 3. Build and run the application. In a terminal, change directory to your
    `docker-genai` directory and run the following command.
