@@ -84,7 +84,7 @@ FROM ubuntu:22.04
 
 # install app dependencies
 RUN apt-get update && apt-get install -y python3 python3-pip
-RUN pip install flask==2.1.*
+RUN pip install flask==3.0.*
 
 # install app
 COPY hello.py /
@@ -181,7 +181,7 @@ The second `RUN` instruction installs the `flask` dependency required by the
 Python application.
 
 ```dockerfile
-RUN pip install flask==2.1.*
+RUN pip install flask==3.0.*
 ```
 
 A prerequisite for this instruction is that `pip` is installed into the build
