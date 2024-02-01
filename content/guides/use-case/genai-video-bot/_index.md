@@ -138,7 +138,7 @@ how to use the service.
    
    ![Asking a question to the Dockerbot](images/bot.webp)
    
-   As you can see in the previous image, the Dockerbot answers the question and
+   In this example, the Dockerbot answers the question and
    provides links to the video with timestamps, which may contain more
    information about the answer.
 
