@@ -17,7 +17,7 @@ As a company owner, you can configure [Single Sign-on (SSO)](../../security/for-
 2. In the **Overview** tab, select **Add owner** and enter their Docker ID or email address.
 3. After you find the user, select **Add company owner**.
 
-Once you've selected **Add Owner**, you can view the user in the **Company owners** table.
+Once you've added the new owner, you can view the user in the **Company owners** table.
 
 ![company-overview](../images/company-overview.png)
 
