@@ -110,7 +110,7 @@ Use callouts to emphasize selected information on a page.
 | Important    | Use an Important tag to signal to the reader where actions may cause issues of a lower magnitude.                                                                                   | Yellow               |
 |              | ✅ Example: Update to the Docker Desktop terms                                                                                                                                      |                      |
 | Note         | Use the Note tag for information that may not apply to all readers, or if the information is tangential to a topic.                                                                 | Blue                 |
-|              | ✅ Example: Deleting a repository deletes all the images it contains and its build settings. This action cannot be undone.                                                          |
+|              | ✅ Example: Deleting a repository deletes all the images it contains and its build settings. This action cannot be undone.                                                          |                      |
 
 For information on how to add callouts to your content, see [Useful component and formatting examples](../components/call-outs.md).
 

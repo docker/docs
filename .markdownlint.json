@@ -13,5 +13,7 @@
   "reference-links-images": {
     "shortcut_syntax": true
   },
-  "fenced-code-language": true
+  "fenced-code-language": true,
+  "table-pipe-style": true,
+  "table-column-count": true
 }
