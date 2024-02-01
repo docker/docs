@@ -136,13 +136,18 @@ well as:
 - Source maps describing the relationship between build steps and image layers.
 
 When possible, you should prefer `mode=max` as it contains significantly more
-detailed information for analysis. However, on some builds it may not be
-appropriate, as it includes the values of
-[build arguments](../../engine/reference/commandline/buildx_build.md#build-arg)
-and metadata about secrets and SSH mounts. If you pass sensitive information
-using build arguments, consider refactoring builds to pass secret values using
-[build secrets](../../engine/reference/commandline/buildx_build.md#secret), to
-prevent leaking of sensitive information.
+detailed information for analysis.
+
+> **Warning**
+>
+> Note that `mode=max` exposes the values of
+> [build arguments](../../engine/reference/commandline/buildx_build.md#build-arg).
+>
+> If you're misusing build arguments to pass credentials, authentication
+> tokens, or other secrets, you should refactor your build to pass the secrets using
+> [secret mounts](../../engine/reference/commandline/buildx_build.md#secret) instead.
+> Secret mounts don't leak outside of the build and are never included in provenance attestations.
+{.warning}
 
 ## Inspecting Provenance
 

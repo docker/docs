@@ -24,6 +24,24 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.27.1
+
+{{< release-date date="2023-02-01" >}}
+
+{{< desktop-install all=true version="4.27.1" build_path="/136059/" >}}
+
+### Upgrades
+
+- [Docker Engine v25.0.2](https://docs.docker.com/engine/release-notes/25.0/#2502)
+- [Containerd v1.6.28](https://github.com/containerd/containerd/releases/tag/v1.6.28)
+- [Runc v1.1.12](https://github.com/opencontainers/runc/releases/tag/v1.1.12)
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Fixed a bug that caused Docker Desktop to hang when applying an update.
+
 ## 4.27.0
 
 {{< release-date date="2024-01-25" >}}
