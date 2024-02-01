@@ -73,6 +73,8 @@ networks:
     driver: bridge
 ```
 
+For more information on drivers and available options, see [Network drivers](../../network/drivers/_index.md).
+
 ### driver_opts
 
 `driver_opts` specifies a list of options as key-value pairs to pass to the driver. These options are
