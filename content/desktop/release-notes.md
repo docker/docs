@@ -26,15 +26,15 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.27.1
 
-{{< release-date date="2023-02-01" >}}
+{{< release-date date="2024-02-01" >}}
 
 {{< desktop-install all=true version="4.27.1" build_path="/136059/" >}}
 
 ### Upgrades
 
-- [Docker Engine v25.0.2](https://docs.docker.com/engine/release-notes/25.0/#2502)
+- [Docker Engine v25.0.2](https://docs.docker.com/engine/release-notes/25.0/#2502) which contains a fix for [CVE-2024-24557](https://scout.docker.com/vulnerabilities/id/CVE-2024-24557), [CVE-2024-23650](https://scout.docker.com/vulnerabilities/id/CVE-2024-23650), [CVE-2024-23651](https://scout.docker.com/vulnerabilities/id/CVE-2024-23651), [CVE-2024-23652](https://scout.docker.com/vulnerabilities/id/CVE-2024-23652) and [CVE-2024-23653](https://scout.docker.com/vulnerabilities/id/CVE-2024-23653)
 - [Containerd v1.6.28](https://github.com/containerd/containerd/releases/tag/v1.6.28)
-- [Runc v1.1.12](https://github.com/opencontainers/runc/releases/tag/v1.1.12)
+- [Runc v1.1.12](https://github.com/opencontainers/runc/releases/tag/v1.1.12) which contains a fix for [CVE-2024-21626](https://scout.docker.com/vulnerabilities/id/CVE-2024-21626)
 
 ### Bug fixes and enhancements
 
