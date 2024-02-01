@@ -185,6 +185,8 @@ github.com/moby/buildkit v0.13.0-beta1.0.20240116143623-28ce478b1fde h1:t6dpbzyD
 github.com/moby/buildkit v0.13.0-beta1.0.20240116143623-28ce478b1fde/go.mod h1:NK6kY+05bXjxhEmtGEMAwvSJ19gagBukPz6N4FFzlNs=
 github.com/moby/buildkit v0.13.0-beta1.0.20240126101002-6bd81372ad6f h1:weCt2sfZGVAeThzpVyv4ibC0oFfvSxtbiTE7W77wXpc=
 github.com/moby/buildkit v0.13.0-beta1.0.20240126101002-6bd81372ad6f/go.mod h1:vEcIVw63dZyhTgbcyQWXlZrtrKnvFoSI8LhfV+Vj0Jg=
+github.com/moby/buildkit v0.13.0-beta3.0.20240201135300-d906167d0b34 h1:9oIm9T7YyDxRAXvP7y605G3TZmPGZjFvRHbbMJcIDy8=
+github.com/moby/buildkit v0.13.0-beta3.0.20240201135300-d906167d0b34/go.mod h1:tSWWhq1EDM0eB3ngMNDiH2hOOW9fXTyn2uXuOraCLlE=
 github.com/moby/locker v1.0.1/go.mod h1:S7SDdo5zpBK84bzzVlKr2V0hz+7x9hWbYC/kq7oQppc=
 github.com/moby/moby v24.0.2+incompatible h1:yH+5dRHH1x3XRKzl1THA2aGTy6CHYnkt5N924ADMax8=
 github.com/moby/moby v24.0.2+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
