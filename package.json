@@ -27,8 +27,8 @@
     "tailwindcss": "^3.2.4"
   },
   "devDependencies": {
-    "markdownlint": "^0.27.0",
-    "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.5.3"
+    "markdownlint": "^0.33.0",
+    "prettier": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.11"
   }
 }
