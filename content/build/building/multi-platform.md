@@ -193,7 +193,7 @@ cURL installed for multiple architectures:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM alpine:3.16
+FROM alpine:{{% param "example_alpine_version" %}}
 RUN apk add curl
 ```
 
