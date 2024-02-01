@@ -2,6 +2,7 @@
   "default": false,
   "hr-style": true,
   "heading-start-left": true,
+  "single-h1": true,
   "no-missing-space-atx": true,
   "no-multiple-space-atx": true,
   "no-missing-space-closed-atx": true,

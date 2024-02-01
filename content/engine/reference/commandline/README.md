@@ -22,7 +22,7 @@ The output files are composed from two sources:
   Specifically, the Markdown inside the `## Description` and `## Examples`
   headings are parsed. Submit corrections to the text in those repositories.
 
-# Updating the YAML files
+## Updating the YAML files
 
 The process for generating the YAML files is still in flux. Check with
 @thaJeztah. Be sure to generate the YAML files with the correct
