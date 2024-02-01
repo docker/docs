@@ -2865,7 +2865,7 @@ naming scheme accordingly before upgrading.
 ## 1.6.0
 (2016-01-15)
 
-### Major Features:
+### Major Features
 
 -   Compose 1.6 introduces a new format for `docker-compose.yml` which lets
     you define networks and volumes in the Compose file as well as services. It
@@ -2913,7 +2913,7 @@ naming scheme accordingly before upgrading.
     `docker-compose up SERVICE` on a service with dependencies, those are started
     as well.
 
-### New Features:
+### New Features
 
 -   Added a new command `config` which validates and prints the Compose
     configuration after interpolating variables, resolving relative paths, and

@@ -9,7 +9,7 @@ toc_max: 2
 
 Readers pay fractionally more attention to headings, bulleted lists, and links, so it's important to ensure the first two to three words in those items "front load" information as much as possible.
 
-### Best practice:
+### Best practice
 
 - Headings and subheadings should let the reader know what they will find on the page.
 - They should describe succinctly and accurately what the content is about.
@@ -21,7 +21,7 @@ Readers pay fractionally more attention to headings, bulleted lists, and links, 
 
 Page titles should be action orientated. For example: - _Enable SCIM_ - _Install Docker Desktop_
 
-### Best practice:
+### Best practice
 
 - Make sure the title of your page and the table of contents (TOC) entry matches.
 - If you want to use a ‘:’ in a page title in the table of contents (\_toc.yaml), you must wrap the entire title in “” to avoid breaking the build.
@@ -31,7 +31,7 @@ Page titles should be action orientated. For example: - _Enable SCIM_ - _Install
 
 Images, including screenshots, can help a reader better understand a concept. However, you should use them sparingly as they tend to go out-of-date.
 
-### Best practice:
+### Best practice
 
 - When you take screenshots:
   - Don’t use lorem ipsum text. Try to replicate how someone would use the feature in a real-world scenario, and use realistic text.
@@ -52,7 +52,7 @@ When people follow links, they can often lose their train of thought and fail to
 
 The best links offer readers another way to scan information.
 
-### Best practice:
+### Best practice
 
 - Use plain language that doesn't mislead or promise too much.
 - Be short and descriptive (around five words is best).
@@ -72,7 +72,7 @@ To apply inline code style, wrap the text in a single backtick (`).
 
 For information on how to add code blocks to your content, see [Useful component and formatting examples](../components/code-blocks.md).
 
-### Best practice for commands:
+### Best practice for commands
 
 - Command prompt and shell:
   - For a non-privileged shell, prefix commands in code blocks with the $ prompt symbol.
@@ -89,7 +89,7 @@ For information on how to add code blocks to your content, see [Useful component
   - Use pipes ( \| ) between mutually exclusive arguments.
   - Use three dots ( ... ) after repeated arguments.
 
-### Best practice for code:
+### Best practice for code
 
 - Indent code blocks by 3 spaces when you nest a code block under a list item.
 - Use three dots ( ... ) when you omit code.
@@ -98,7 +98,7 @@ For information on how to add code blocks to your content, see [Useful component
 
 Use callouts to emphasize selected information on a page.
 
-### Best practice:
+### Best practice
 
 - Format the word Warning, Important, or Note in bold. Don't bold the content within the callout.
 - It's good practice to avoid placing a lot of text callouts on one page. They can create a cluttered appearance if used to excess, and you'll diminish their impact.
@@ -149,7 +149,7 @@ Use tables to describe complex information in a straightforward manner.
 
 Note that in many cases, an unordered list is enough to describe a list of items with a single, simple description per item. But, if you have data that’s best described by a matrix, tables are the best choice.
 
-### Best practice:
+### Best practice
 
 - Use sentence case for table headings.
 - To keep tables accessible and scannable, tables shouldn't have any empty cells. If there is no otherwise meaningful value for a cell, consider entering N/A for ‘not applicable’ or None.
