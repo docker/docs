@@ -103,7 +103,7 @@ CMD ["flask", "run"]
 
 This tells Docker to:
 
-* Build an image starting with the Python 3.7 image.
+* Build an image starting with the Python 3.10 image.
 * Set the working directory to `/code`.
 * Set environment variables used by the `flask` command.
 * Install gcc and other dependencies
