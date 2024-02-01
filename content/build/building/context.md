@@ -411,7 +411,7 @@ ERROR: failed to solve: failed to compute cache key: failed to calculate checksu
 You can use a `.dockerignore` file to exclude files or directories from the
 build context.
 
-```gitignore
+```text
 # .dockerignore
 node_modules
 bar
@@ -471,7 +471,7 @@ on GitHub, which contains the source code.
 
 The following code snippet shows an example `.dockerignore` file.
 
-```gitignore
+```text
 # comment
 */temp*
 */*/temp*
@@ -514,7 +514,7 @@ You can prepend lines with a `!` (exclamation mark) to make exceptions to
 exclusions. The following is an example `.dockerignore` file that uses this
 mechanism:
 
-```gitignore
+```text
 *.md
 !README.md
 ```
@@ -527,7 +527,7 @@ The placement of `!` exception rules influences the behavior: the last line of
 the `.dockerignore` that matches a particular file determines whether it's
 included or excluded. Consider the following example:
 
-```gitignore
+```text
 *.md
 !README*.md
 README-secret.md
@@ -538,7 +538,7 @@ No markdown files are included in the context except README files other than
 
 Now consider this example:
 
-```gitignore
+```text
 *.md
 README-secret.md
 !README*.md
