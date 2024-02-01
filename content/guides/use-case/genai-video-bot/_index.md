@@ -94,7 +94,7 @@ Whisper model to generate transcriptions of videos and stores them in a Pinecone
 database. The following steps show how to use the service.
 
 1. Open a browser and access the yt-whisper service at [http://localhost:8503](http://localhost:8503).
-2. Once the application appears, in **Youtube URL** specify a Youtube video URL
+2. Once the application appears, in the **Youtube URL** field specify a Youtube video URL
    and select **Submit**. The following example uses
    [https://www.youtube.com/watch?v=yaQZFhrW0fU](https://www.youtube.com/watch?v=yaQZFhrW0fU).
 
