@@ -24,7 +24,7 @@ from the Compose file's parent folder. If it is absolute, the path prevents the 
 
 When Compose is confronted with both a `build` subsection for a service and an `image` attribute. It follows the rules defined by the [`pull_policy`](05-services.md#pull_policy) attribute. 
 
-If `pull_policy` is missing in the service definition, Compose attempts to pull the image first and then builds from source if the image isn't found in the registry or platform cache. 
+If `pull_policy` is missing from the service definition, Compose attempts to pull the image first and then builds from source if the image isn't found in the registry or platform cache. 
 
 
 ## Publishing built images
