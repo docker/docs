@@ -1,5 +1,8 @@
 ---
-{}
+_build:
+  list: never
+  publishResources: false
+  render: never
 ---
 
 # About these files
