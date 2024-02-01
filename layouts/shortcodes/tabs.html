@@ -1,16 +1,23 @@
 {{ with .Inner }}{{/* don't do anything, just call it */}}{{ end }}
-{{ $default := (index (.Scratch.Get "tabs") 0).name }}
+{{ $first := urlize (index (.Scratch.Get "tabs") 0).name }}
 {{ $group := .Get "group" }}
-
+{{ $groupID := fmt.Printf "tabgroup-%s" (urlize $group) }}
+{{ $persist := .Get "persist" }}
 
 <div
-  x-data="{ selected: '{{ $default | urlize }}' }"
   {{ with $group }}
-    @tab-select.window="$event.detail.group === '{{ . }}' ? selected =
-    $event.detail.name : null"
+    {{ if $persist }}
+      x-data="{ selected: $persist('{{$first}}').as('{{$groupID}}') }"
+    {{ else }}
+      x-data="{ selected: '{{$first}}' }"
+    {{ end }}
+    @tab-select.window="$event.detail.group === '{{ . }}'
+      ? selected = $event.detail.name
+      : null"
+  {{ else }}
+    x-data="{ selected: '{{ $first }}' }"
   {{ end }}
-  aria-role="tabpanel"
->
+  aria-role="tabpanel">
   <div aria-role="tablist" class="space-x-2">
     {{ range (.Scratch.Get "tabs") }}
       <button

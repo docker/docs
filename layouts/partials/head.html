@@ -40,12 +40,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=fallback" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=fallback" />
 {{ partial "utils/css.html" . }}
-{{ $theme := resources.Get "js/theme.js" | js.Build (dict "minify" true) }}
+{{ $theme := resources.Get "js/theme.js" }}
 <script>{{ $theme.Content | safeJS }}</script>
 {{ $js := resources.Match "js/src/**.js"
   | resources.Concat "scripts.js"
   | js.Build (dict
-    "minify" true
     "params" (dict
       "apikey" site.Params.algolia.apikey
       "appid" site.Params.algolia.appid
