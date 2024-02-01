@@ -77,9 +77,13 @@ When you mount a volume, it may be named or anonymous. Anonymous volumes are
 given a random name that's guaranteed to be unique within a given Docker host.
 Just like named volumes, anonymous volumes persist even if you remove the
 container that uses them, except if you use the `--rm` flag when creating the
-container. Docker automatically removes anonymous volume mounts for containers
-created with the `--rm` flag. See [Remove anonymous
-volumes](volumes.md#remove-anonymous-volumes).
+container, in which case the anonymous volume is destroyed.
+See [Remove anonymous volumes](volumes.md#remove-anonymous-volumes).
+If you create multiple containers after each other that use anonymous volumes,
+each container creates its own volume.
+Anonymous volumes aren't reused or shared between containers automatically.
+To share an anonymous volume between two or more containers,
+you must mount the anonymous volume using the random volume ID.
 
 Volumes also support the use of volume drivers, which allow you to store
 your data on remote hosts or cloud providers, among other possibilities.
