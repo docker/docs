@@ -26,7 +26,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ## 4.27.1
 
-{{< release-date date="2023-02-01" >}}
+{{< release-date date="2024-02-01" >}}
 
 {{< desktop-install all=true version="4.27.1" build_path="/136059/" >}}
 
