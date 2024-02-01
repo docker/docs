@@ -11,12 +11,6 @@ keywords: compose, compose specification, compose file reference, compose build 
 A Compose implementation which focuses on running an application on a local machine needs to also support (re)building the application from source. The Compose Build Specification lets you define the build process within a Compose file
 in a portable way.
 
-## Definitions
-
-Only a subset of Compose file services can be defined under a `build`
-subsection, others may make use of the `image` attribute. When a `build` subsection is present for a service, Compose ignores the `image` attribute for the corresponding service, as Compose
-can build an image from source.
-
 `build` can be either specified as a single string defining a context path, or as a detailed build definition.
 
 In the former case, the whole path is used as a Docker context to execute a Docker build, looking for a canonical
@@ -24,23 +18,18 @@ In the former case, the whole path is used as a Docker context to execute a Dock
 from the Compose file's parent folder. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning. 
 
 In the later case, build arguments can be specified, including an alternate `Dockerfile` location. The path can be absolute or relative. If it is relative, it is resolved
-from the Compose file's parent folder. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning..
+from the Compose file's parent folder. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning.
 
-## Consistency with `image`
+## Using `build` and `image`
 
-When a service definition includes both the `image` attribute and a `build` section, Compose can't
-guarantee a pulled image is strictly equivalent to building the same image from source. Without any explicit
-user directives, Compose with `build` support first tries to pull the image, then builds from source
-if the image is not found on registry. Compose may offer options to customize this behaviour by user
-request.
+When Compose is confronted with both a `build` subsection for a service and an `image` attribute. It follows the rules defined by the [`pull_policy`](05-services.md#pull_policy) attribute. 
+
+If `pull_policy` is missing from the service definition, Compose attempts to pull the image first and then builds from source if the image isn't found in the registry or platform cache. 
+
 
 ## Publishing built images
 
 Compose with `build` support offers an option to push built images to a registry. When doing so, it doesn't try to push service images without an `image` attribute. Compose warns you about the missing `image` attribute which prevents images being pushed.
-
-A Compose implementation may offer a mechanism to compute an `image` attribute for services when not explicitly
-declared in a yaml file. In such cases, the resulting Compose configuration is considered to have a valid `image`
-attribute, whenever the actual raw yaml file doesn't explicitly declare one.
 
 ## Illustrative example
 
