@@ -26,7 +26,6 @@ When Compose is confronted with both a `build` subsection for a service and an `
 
 If `pull_policy` is missing in the service definition, Compose attempts to pull the image first and then builds from source if the image isn't found in the registry or platform cache. 
 
-If `pull_policy` and `build` are both present, Compose ignores the `image` attribute and builds the image by default.
 
 ## Publishing built images
 
