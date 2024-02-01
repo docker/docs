@@ -13,7 +13,7 @@
     "url": "https://github.com/docker/docs/issues"
   },
   "homepage": "https://docs.docker.com/",
-  "devDependencies": {
+  "dependencies": {
     "@alpinejs/collapse": "^3.11.1",
     "@docsearch/js": "^3.5.2",
     "@material-symbols/svg-400": "^0.14.6",
@@ -21,13 +21,15 @@
     "@tailwindcss/typography": "^0.5.8",
     "alpinejs": "^3.12.3",
     "autoprefixer": "^10.4.14",
-    "markdownlint": "^0.27.0",
     "mermaid": "^10.3.1",
     "postcss": "^8.4.19",
     "postcss-cli": "^10.1.0",
     "postcss-import": "^15.1.0",
-    "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.5.3",
     "tailwindcss": "^3.2.4"
+  },
+  "devDependencies": {
+    "markdownlint": "^0.27.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.3"
   }
 }

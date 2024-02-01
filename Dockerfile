@@ -9,7 +9,8 @@ RUN apk --update add nodejs npm git gcompat
 
 FROM base as node
 COPY package*.json .
-RUN npm install && npm cache clean --force
+ENV NODE_ENV=production
+RUN npm install
 
 FROM base as hugo
 ARG HUGO_VERSION=0.122.0
