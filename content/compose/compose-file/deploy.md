@@ -15,8 +15,7 @@ relevant data to allocate adequate resources on the platform and configure them 
 
 ### endpoint_mode
 
-`endpoint_mode` specifies a service discovery method for external clients connecting to a service. Default and available values
-are platform specific but the Compose Deploy Specification defines two canonical values:
+`endpoint_mode` specifies a service discovery method for external clients connecting to a service. The Compose Deploy Specification defines two canonical values:
 
 * `endpoint_mode: vip`: Assigns the service a virtual IP (VIP) that acts as the front end for clients to reach the service
   on a network. Platform routes requests between the client and nodes running the service, without client knowledge of how
