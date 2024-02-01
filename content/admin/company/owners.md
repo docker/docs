@@ -19,7 +19,7 @@ As a company owner, you can configure [Single Sign-on (SSO)](../../security/for-
 
 Once you've selected **Add Owner**, you can view the user in the **Company owners** table.
 
-    ![company-overview](../images/company-overview.png)
+![company-overview](../images/company-overview.png)
 
 ## Remove a company owner
 
