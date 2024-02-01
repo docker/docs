@@ -56,8 +56,4 @@
 }}
 <script defer src="{{ $js.Permalink }}"></script>
 <link rel="preconnect" href="https://{{ site.Params.algolia.appid }}-dsn.algolia.net" crossorigin />
-{{ if .Page.Store.Get "hasMermaid" }}
-{{ $mermaid := resources.Get "js/mermaid.js" | js.Build (dict "minify" true) }}
-<script>{{ $mermaid.Content | safeJS }}</script>
-{{ end }}
 {{ partialCached "utils/resources.html" . }}
