@@ -11,6 +11,7 @@
   "no-space-in-emphasis": true,
   "no-space-in-code": true,
   "no-space-in-links": true,
+  "no-empty-links": true,
   "ol-prefix": {"style": "ordered"},
   "no-reversed-links": true,
   "reference-links-images": {
