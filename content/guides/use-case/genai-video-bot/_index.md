@@ -89,7 +89,7 @@ addition, it provides timestamps from the video that can help you find the sourc
 
 ## Using the yt-whisper service
 
-The yt-whisper service is YouTube video processing service that uses the OpenAI
+The yt-whisper service is a YouTube video processing service that uses the OpenAI
 Whisper model to generate transcriptions of videos and stores them in a Pinecone
 database. The following steps show how to use the service.
 
