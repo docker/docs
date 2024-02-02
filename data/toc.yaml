@@ -1,14 +1,14 @@
 Guides:
 - title: Docker overview
-  path: /guides/overview/
+  path: /get-started/overview/
 - sectiontitle: Get started
   section:
     - title: "Overview"
       path: /guides/get-started/
     - title: "Get Docker Desktop"
       path: /guides/get-started/get-docker-desktop/
-    - title: "Developing with containers"
-      path: /guides/get-started/developing-with-containers/
+    - title: "Develop with containers"
+      path: /guides/get-started/develop-with-containers/
     - title: "Build and push your first image"
       path: /guides/get-started/build-and-push-first-image/
     - title: "Fix image policy issues"
