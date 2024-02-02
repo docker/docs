@@ -19,8 +19,6 @@ As a company owner, you can configure [Single Sign-on (SSO)](../../security/for-
 
 Once you've added the new owner, you can view the user in the **Company owners** table.
 
-![company-overview](../images/company-overview.png)
-
 ## Remove a company owner
 
 1. Sign in to [Docker Hub](https://hub.docker.com/), navigate to the **Organizations** page, and select your company.
