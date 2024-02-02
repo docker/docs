@@ -6,7 +6,7 @@ description: Learn how to develop locally using Kubernetes
 
 ## Prerequisites
 
-- Complete all the previous sections of this guide, starting with [Build your Java image](build-images.md).
+- Complete all the previous sections of this guide, starting with [Containerize your app](containerize.md).
 - [Turn on Kubernetes](/desktop/kubernetes/#install-and-turn-on-kubernetes) in Docker Desktop.
 
 ## Overview
