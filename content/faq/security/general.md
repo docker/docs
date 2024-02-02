@@ -60,7 +60,7 @@ Docker Desktop utilizes the host operating system's secure key management for ha
 
 This is applicable only when using Docker Hub's application-level password versus SSO/SAML. When using SSO, Docker Hub doesn't store passwords. Application-level passwords are hashed in storage (SHA-256) and encrypted in transit (TLS).
 
-### How do we de-provision access to CLI users who use personal access tokens instead of our IdP? We use SSO but not SCIM. 
+### How do we de-provision access to CLI users who use personal access tokens instead of our IdP? We use SSO but not SCIM
 
 If SCIM isn't enabled, you have to manually remove PAT users from the organization in our system. Using SCIM automates this.
 

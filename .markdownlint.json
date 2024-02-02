@@ -1,6 +1,9 @@
 {
   "default": false,
   "hr-style": true,
+  "heading-start-left": true,
+  "single-h1": true,
+  "no-trailing-punctuation": true,
   "no-missing-space-atx": true,
   "no-multiple-space-atx": true,
   "no-missing-space-closed-atx": true,
@@ -8,10 +11,13 @@
   "no-space-in-emphasis": true,
   "no-space-in-code": true,
   "no-space-in-links": true,
+  "no-empty-links": true,
   "ol-prefix": {"style": "ordered"},
   "no-reversed-links": true,
   "reference-links-images": {
     "shortcut_syntax": true
   },
-  "fenced-code-language": true
+  "fenced-code-language": true,
+  "table-pipe-style": true,
+  "table-column-count": true
 }
