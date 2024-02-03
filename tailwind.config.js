@@ -264,7 +264,7 @@ module.exports = {
 
     fontFamily: {
       sans: [
-        "Roboto",
+        "Roboto Flex",
         "system-ui",
         "-apple-system",
         "BlinkMacSystemFont",
