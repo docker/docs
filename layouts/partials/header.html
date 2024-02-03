@@ -2,7 +2,7 @@
   <div class="mx-auto flex h-full max-w-[1400px] items-center justify-between">
     <div class="flex h-full items-center gap-8 md:gap-2">
       {{ if not .IsHome }}
-      <button x-data tabindex="4" @click="() => {
+      <button x-data @click="() => {
       $store.showSidebar = ! $store.showSidebar;
       const sidebar = document.querySelector('#sidebar');
       if ($store.showSidebar) {
@@ -26,7 +26,7 @@
     </div>
     <div class="flex items-center gap-6">
       <div id="docsearch"></div>
-      <button id="theme-switch" tabindex="1" class="svg-icon"
+      <button id="theme-switch" class="svg-icon"
         x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
         localStorage.setItem('theme-preference', value);
         document.firstElementChild.className = value;
