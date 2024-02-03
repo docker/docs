@@ -25,7 +25,7 @@ The following lists the supported provisioning features:
 
 The following table lists the supported attributes. Note that your attribute mappings must match for SSO to prevent duplicating your members.
 
-| Attribute    | Description
+| Attribute    | Description |
 |:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
 | userName             | User's primary email address. This is the unique identifier of the user. |
 | name.givenName | User’s first name |

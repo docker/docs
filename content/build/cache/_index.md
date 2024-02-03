@@ -243,7 +243,7 @@ stages in parallel. Only the instructions in the `site` stage will end up as
 layers in the final image. The entire `git` history doesn't get embedded into
 the final result, which helps keep the image small and secure.
 
-#### Combine commands together wherever possible.
+#### Combine commands together wherever possible
 
 Most Dockerfile commands, and `RUN` commands in particular, can often be joined
 together. For example, instead of using `RUN` like this:

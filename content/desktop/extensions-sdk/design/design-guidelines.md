@@ -12,7 +12,7 @@ Here is a simple checklist to go through when creating your extension:
 - Is it easy to get help when needed?
 
 
-## Create a consistent experience with Docker Desktop.
+## Create a consistent experience with Docker Desktop
 
 Use the [Docker Material UI Theme](https://www.npmjs.com/package/@docker/docker-mui-theme) and the [Docker Extensions Styleguide](https://www.figma.com/file/U7pLWfEf6IQKUHLhdateBI/Docker-Design-Guidelines?node-id=1%3A28771) to ensure that your extension feels like it is part of Docker Desktop to create a seamless experience for users.
 
