@@ -66,6 +66,7 @@ outputs:
     - html
     - redirects
     - robots
+    - rss
   term:
     - html
     - json

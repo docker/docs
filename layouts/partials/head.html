@@ -57,3 +57,6 @@
 <script defer src="{{ $js.Permalink }}"></script>
 <link rel="preconnect" href="https://{{ site.Params.algolia.appid }}-dsn.algolia.net" crossorigin />
 {{ partialCached "utils/resources.html" . }}
+{{ with .OutputFormats.Get "rss" -}}
+  {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+{{ end }}
