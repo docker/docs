@@ -26,7 +26,7 @@
     </div>
     <div class="flex items-center gap-6">
       <div id="docsearch"></div>
-      <button id="theme-switch" class="svg-icon"
+      <button aria-label="Theme switch" id="theme-switch" class="svg-icon"
         x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
         localStorage.setItem('theme-preference', value);
         document.firstElementChild.className = value;
