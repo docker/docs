@@ -621,6 +621,10 @@ Reference:
     section:
     - path: /engine/reference/commandline/scout/
       title: docker scout
+    - path: /engine/reference/commandline/scout_attestation/
+      title: docker scout attestation
+    - path: /engine/reference/commandline/scout_attestation_add/
+      title: docker scout attestation add
     - path: /engine/reference/commandline/scout_cache/
       title: docker scout cache
     - path: /engine/reference/commandline/scout_cache_df/
