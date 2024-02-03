@@ -10,5 +10,5 @@ require (
 	github.com/docker/compose/v2 v2.24.5 // indirect
 	github.com/docker/scout-cli v1.3.0 // indirect
 	github.com/moby/buildkit v0.13.0-beta3.0.20240201135300-d906167d0b34 // indirect
-	github.com/moby/moby v25.0.0+incompatible // indirect
+	github.com/moby/moby v25.0.3-0.20240203133757-341a7978a541+incompatible // indirect
 )
