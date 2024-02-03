@@ -135,6 +135,8 @@ github.com/docker/scout-cli v1.2.0 h1:cjtsf7s2f6NO9OxgXWPW3DGxaTKVU58JKmVtaVMc0R
 github.com/docker/scout-cli v1.2.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/docker/scout-cli v1.3.0 h1:mL9y1yB/DR/dAar71z0w8u8et9o2272Mrjxtb59ds3M=
 github.com/docker/scout-cli v1.3.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
+github.com/docker/scout-cli v1.4.1 h1:jRHO3LI3x2eMrvObKC6uadoRATbwZSXm1NafSzo9Cu4=
+github.com/docker/scout-cli v1.4.1/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/elazarl/goproxy v0.0.0-20191011121108-aa519ddbe484/go.mod h1:Ro8st/ElPeALwNFlcTpWmkr6IoMFfkjXAvTHpevnDsM=
 github.com/evanphx/json-patch v4.9.0+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
@@ -198,6 +200,8 @@ github.com/moby/moby v24.0.8-0.20240109122856-854ca341c0f6+incompatible h1:bwE6h
 github.com/moby/moby v24.0.8-0.20240109122856-854ca341c0f6+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/moby v25.0.0+incompatible h1:KIFudkwXNK+kBrnCxWZNwhEf/jJzdjQAP7EF/awywMI=
 github.com/moby/moby v25.0.0+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v25.0.3-0.20240203133757-341a7978a541+incompatible h1:0Vgi62q5Zo4E0wl1ZBj8bRq9rZeOGK+xwz1SBr3Naz8=
+github.com/moby/moby v25.0.3-0.20240203133757-341a7978a541+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/sys/symlink v0.1.0/go.mod h1:GGDODQmbFOjFsXvfLVn3+ZRxkch54RkSiGqsZeMYowQ=
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/morikuni/aec v1.0.0/go.mod h1:BbKIizmSmc5MMPqRYbxO4ZU0S0+P200+tUnFx7PXmsc=
