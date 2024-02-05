@@ -19,8 +19,8 @@ grid:
   description: Define which registries your developers can access.
   icon: home_storage
   link: /admin/organization/registry-access/
-- title: General settings
-  description: Configure general information or create a company.
+- title: Organization settings
+  description: Configure information for your organization and manage settings.
   icon: settings
   link: /admin/organization/general-settings/
 - title: SSO & SCIM
