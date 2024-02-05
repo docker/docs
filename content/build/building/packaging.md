@@ -84,7 +84,7 @@ FROM ubuntu:22.04
 
 # install app dependencies
 RUN apt-get update && apt-get install -y python3 python3-pip
-RUN pip install flask==2.1.*
+RUN pip install flask==3.0.*
 
 # install app
 COPY hello.py /
@@ -92,7 +92,7 @@ COPY hello.py /
 # final configuration
 ENV FLASK_APP=hello
 EXPOSE 8000
-CMD flask run --host 0.0.0.0 --port 8000
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 Here's a breakdown of what this Dockerfile does:
@@ -181,7 +181,7 @@ The second `RUN` instruction installs the `flask` dependency required by the
 Python application.
 
 ```dockerfile
-RUN pip install flask==2.1.*
+RUN pip install flask==3.0.*
 ```
 
 A prerequisite for this instruction is that `pip` is installed into the build
@@ -235,11 +235,21 @@ Finally, [`CMD` instruction](../../engine/reference/builder.md#cmd) sets the
 command that is run when the user starts a container based on this image.
 
 ```dockerfile
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+This command starts the flask development server listening on all addresses
+on port `8000`. The example here uses the "exec form" version of `CMD`.
+It's also possible to use the "shell form":
+
+```dockerfile
 CMD flask run --host 0.0.0.0 --port 8000
 ```
 
-In this case we'll start the flask development server listening on all addresses
-on port `8000`.
+There are subtle differences between these two versions,
+for example in how they trap signals like `SIGTERM` and `SIGKILL`.
+For more information about these differences, see
+[Shell and exec form](../../engine/reference/builder.md#shell-and-exec-form)
 
 ## Building
 

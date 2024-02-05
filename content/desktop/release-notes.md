@@ -117,6 +117,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed an issue that prevented the correct WSL engine errors from propagating to the user.
 - Fixed an issue that would cause Docker Desktop to hang when quitting from Windows Containers mode.
 
+### Security
+
+#### For Windows
+
+- Mitigated several DLL side-loading vulnerabilities in the Docker Desktop installer on Windows, reported by Suman Kumar Chakraborty ([@Hijack-Everything](https://github.com/Hijack-Everything))
+
 ### Known issues
 
 #### For all platforms
