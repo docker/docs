@@ -150,8 +150,8 @@
                 <a href="/build/cloud/"
                   class="cursor-pointer rounded bg-blue-light px-4 py-2 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">Docs</a>
                 <div class="ml-auto sm:col-start-2">
-                  {{ $dbcLogoWhite := resources.Get "images/build-cloud-white.svg" }}
-                  {{ $dbcLogoLight := resources.Get "images/build-cloud-light.svg" }}
+                  {{ $dbcLogoWhite := resources.Get "logos/build-cloud-white.svg" }}
+                  {{ $dbcLogoLight := resources.Get "logos/build-cloud-light.svg" }}
                   <img class="hidden h-full w-full dark:block" alt="Docker Build Cloud logo" src="{{ $dbcLogoWhite.Permalink }}" />
                   <img class="h-full w-full dark:hidden" alt="Docker Build Cloud logo" src="{{ $dbcLogoLight.Permalink }}" />
                 </div>
