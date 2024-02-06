@@ -88,6 +88,7 @@ A [Docker ID](../docker-id/_index.md) grants you access to Docker Hub repositori
 > **Tip**
 >
 > Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+{ .tip }
 
 ### Step 2: Create your first repository
 

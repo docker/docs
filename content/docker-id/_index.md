@@ -15,6 +15,7 @@ Your Docker ID becomes your username for hosted Docker services, and [Docker for
 > **Tip**
 >
 > Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+{ .tip }
 
 ## Create a Docker ID
 
