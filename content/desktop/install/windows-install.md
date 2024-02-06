@@ -28,8 +28,8 @@ _For checksums, see [Release notes](../release-notes.md)_
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) requires a paid
-> subscription.
+> employees OR more than $10 million USD in annual revenue) requires a [paid
+> subscription](https://www.docker.com/pricing/).
 
 ## System requirements
 
@@ -252,6 +252,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 ## Where to go next
 
+- Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what Docker can offer you.
 - [Get started with Docker](../../guides/get-started/_index.md).
 - [Explore Docker Desktop](../use-desktop/index.md) and all its features.
 - [Troubleshooting](../troubleshoot/overview.md) describes common problems, workarounds, and
