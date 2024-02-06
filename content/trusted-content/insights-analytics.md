@@ -209,7 +209,7 @@ span:
 | Uninstalls        | Number of uninstalls for the extension                  | Feb 1, 2024       |
 | UniqueUninstalls  | Number of unique users uninstalling the extension       | Feb 1, 2024       |
 | Usage             | Number of openings of the extension tab                 | Feb 1, 2024       |
-| UniqueUsage       | Number of unique users openings the extension tab       | Feb 1, 2024       |
+| UniqueUsers       | Number of unique users openings the extension tab       | Feb 1, 2024       |
 
 ## Changes in data over time
 
