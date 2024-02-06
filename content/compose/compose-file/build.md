@@ -17,12 +17,12 @@ In the former case, the whole path is used as a Docker context to execute a Dock
 `Dockerfile` at the root of the directory. The path can be absolute or relative. If it is relative, it is resolved
 from the Compose file's parent folder. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning. 
 
-In the later case, build arguments can be specified, including an alternate `Dockerfile` location. The path can be absolute or relative. If it is relative, it is resolved
+In the latter case, build arguments can be specified, including an alternate `Dockerfile` location. The path can be absolute or relative. If it is relative, it is resolved
 from the Compose file's parent folder. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning.
 
 ## Using `build` and `image`
 
-When Compose is confronted with both a `build` subsection for a service and an `image` attribute. It follows the rules defined by the [`pull_policy`](05-services.md#pull_policy) attribute. 
+When Compose is confronted with both a `build` subsection for a service and an `image` attribute, it follows the rules defined by the [`pull_policy`](05-services.md#pull_policy) attribute. 
 
 If `pull_policy` is missing from the service definition, Compose attempts to pull the image first and then builds from source if the image isn't found in the registry or platform cache. 
 

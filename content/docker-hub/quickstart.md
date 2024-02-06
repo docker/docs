@@ -79,11 +79,16 @@ aliases:
 
 The following section contains step-by-step instructions on how to get started with Docker Hub.
 
-### Step 1: Sign up for a Docker account
+### Step 1: Sign up for a free Docker account
 
 Start by creating a [Docker ID](https://hub.docker.com/signup).
 
 A [Docker ID](../docker-id/_index.md) grants you access to Docker Hub repositories and lets you explore available images from the community and verified publishers. You also need a Docker ID to share images on Docker Hub.
+
+> **Tip**
+>
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+{ .tip }
 
 ### Step 2: Create your first repository
 
