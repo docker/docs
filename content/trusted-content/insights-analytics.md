@@ -8,7 +8,7 @@ aliases:
 ---
 
 Insights and analytics provides usage analytics for Docker Verified
-Publisher (DVP) and Docker-Sponsored Open Source (DSOS) images on Docker Hub. This includes self-serve access to image and extension usage metrics for a desired time span. You can also dispay the number of image pulls by tag or by digest, and get breakdowns by geolocation, cloud provider, client, and more.
+Publisher (DVP) and Docker-Sponsored Open Source (DSOS) images on Docker Hub. This includes self-serve access to image and extension usage metrics for a desired time span. You can also display the number of image pulls by tag or by digest, and get breakdowns by geolocation, cloud provider, client, and more.
 
 <!-- prettier-ignore -->
 > **Tip**
@@ -57,7 +57,7 @@ configuration as you had set up when creating the link.
 
 If you have published Docker Extensions in the Extension marketplace, you can also get analytics about your extension usage, available as CSV files.
 You can download extension CSV reports from the **Insights and analytics** dashboard at the following URL:
-`https://hub.docker.com/orgs/{namespace}/insights/extensions`. If your Docker namespace contains extensions known in the marketplace, you will see a tab "Extensions" listing CSV files for your extension(s).
+`https://hub.docker.com/orgs/{namespace}/insights/extensions`. If your Docker namespace contains extensions known in the marketplace, you will see an **Extensions** tab listing CSV files for your extension(s).
 
 ## Exporting analytics data
 
@@ -100,7 +100,7 @@ points and with different structure.
 The following sections describe the available data points for each format. The
 **Date added** column shows when the field was first introduced.
 
-### Image Pulls Raw data
+### Image pulls raw data
 
 The raw data format contains the following data points. Each row in the CSV file
 represents an image pull.
@@ -129,7 +129,7 @@ represents an image pull.
 [3]: /admin/organization/orgs/
 [4]: /docker-hub/repos/
 
-### Image Pulls Summary data
+### Image pulls summary data
 
 There are two levels of summary data available:
 
@@ -148,7 +148,7 @@ span:
 | Version check     | HEAD by tag, not followed by a GET                      | January 1, 2022   |
 | Owner             | The name of the organization that owns the repository.  | December 19, 2022 |
 
-### Image Pulls Action classification rules
+### Image pulls action classification rules
 
 An action represents the multiple request events associated with a
 `docker pull`. Pulls are grouped by category to make the data more meaningful
@@ -186,7 +186,7 @@ There are two levels of extension summary data available:
 
 - Core summary, with basic extension usage information: number of extension installs, uninstalls, and total install all times
 
-The coresummary data file contain the following data points for the selected time
+The core-summary-data file contains the following data points for the selected time
 span:
 
 | Data point        | Description                                             | Date added        |
@@ -199,7 +199,7 @@ span:
 
 - Premium summary, with advanced extension usage information: installs, uninstalls by unique users, extension opening by unique users.
 
-The coresummary data file contain the following data points for the selected time
+The core-summary-data file contains the following data points for the selected time
 span:
 
 | Data point        | Description                                             | Date added        |
@@ -235,11 +235,11 @@ consumers of content on Docker Hub remain completely anonymous.
 > analytics data.
 { .important }
 
-The Image pulls summary dataset includes unique IP address count. This data point only
+The image pulls summary dataset includes unique IP address count. This data point only
 includes the number of distinct unique IP addresses that request an image.
 Individual IP addresses are never shared.
 
-The Image pulls raw dataset includes user IP domains as a data point. This is the domain name
+The image pulls raw dataset includes user IP domains as a data point. This is the domain name
 associated with the IP address used to pull an image. If the IP type is
 `business`, the domain represents the company or organization associated with
 that IP address (for example, `docker.com`). For any other IP type that's not
