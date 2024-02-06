@@ -18,7 +18,7 @@ Publisher (DVP) and Docker-Sponsored Open Source (DSOS) images on Docker Hub. Th
 to learn more about the programs.
 { .tip }
 
-## View the images analytics data
+## View the image's analytics data
 
 You can find analytics data for your repositories on the **Insights and
 analytics** dashboard at the following URL:
