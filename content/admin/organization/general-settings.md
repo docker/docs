@@ -1,5 +1,5 @@
 ---
-description: Learn how to manage settings for organizations using the Admin Console.
+description: Learn how to manage settings for organizations using Docker Admin Console.
 keywords: organization, settings, Admin Console
 title: General organization settings
 ---
