@@ -24,6 +24,39 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.27.2
+
+{{< release-date date="2024-02-08" >}}
+
+{{< desktop-install all=true version="4.27.2" build_path="/137060/" >}}
+
+### Upgrades
+
+- [Compose v2.24.5](https://github.com/docker/compose/releases/tag/v2.24.5)
+- [Docker Scout CLI v1.4.1](https://github.com/docker/scout-cli/releases/tag/v1.4.1)
+- Docker Debug v0.0.24
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where the diagnostics ID would not print correctly when uploading diagnostics from the terminal.
+- Fixed a bug where the default settings values were being reset to default on startup, when using Settings Management.
+- Docker Scout:
+  - Updated dependencies to address Leaky Vessels series of CVEs ([CVE-2024-21626](https://github.com/advisories/GHSA-xr7r-f8xq-vfvv), [CVE-2024-24557](https://github.com/advisories/GHSA-xw73-rw38-6vjc))
+  - Added initial VEX document to document false positive [CVE-2020-8911](https://github.com/advisories/GHSA-f5pg-7wfw-84q9) and [CVE-2020-8912](https://github.com/advisories/GHSA-7f33-f4f5-xwgw)
+  - Added support for cosign SBOM attestations
+  - Added support for VEX in-toto attestations
+- Docker Debug:
+  - Fixed a bug when pulling the image behind resource accesses management
+  - Fixed connection issues
+
+#### For Mac
+
+- Re-added kernel modules needed by `Istio`. Fixes [docker/for-mac#7148](https://github.com/docker/for-mac/issues/7148).
+- Node now uses all the cores available under Rosetta.
+- Fixed an issue with `php-fpm`. Fixes [docker/for-mac#7037](https://github.com/docker/for-mac/issues/7037).
+
 ## 4.27.1
 
 {{< release-date date="2024-02-01" >}}
@@ -53,7 +86,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Docker init now supports Java and is generally available to all users.
 - [Synchronized File Shares](synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
 - Organization admins can now [configure Docker socket mount permissions](hardened-desktop/enhanced-container-isolation/config.md) when ECI is enabled.
--  [Containerd Image Store](containerd.md) support is now generally available to all users.
+- [Containerd Image Store](containerd.md) support is now generally available to all users.
 - Get a debug shell into any container or image with the new [`docker debug` command](../engine/reference/commandline/debug.md) (Beta).
 - Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with [Private Extensions Marketplace](extensions/private-marketplace.md) enabled (Beta)
 

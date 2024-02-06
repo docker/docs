@@ -8,9 +8,9 @@ aliases:
 - /desktop/linux/install/archlinux/
 ---
 
-This topic discusses installation of Docker Desktop from an [Arch package](https://desktop.docker.com/linux/main/amd64/136059/docker-desktop-4.27.1-x86_64.pkg.tar.zst) that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
+This topic discusses installation of Docker Desktop from an [Arch package](https://desktop.docker.com/linux/main/amd64/137060/docker-desktop-4.27.2-x86_64.pkg.tar.zst) that Docker provides in addition to the supported platforms. Docker has not tested or verified the installation.
 
-{{< button text="Arch package (experimental)" url="https://desktop.docker.com/linux/main/amd64/136059/docker-desktop-4.27.1-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
+{{< button text="Arch package (experimental)" url="https://desktop.docker.com/linux/main/amd64/137060/docker-desktop-4.27.2-x86_64.pkg.tar.zst?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
 
 _For checksums, see [Release notes](../release-notes.md)_
 
