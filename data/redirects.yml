@@ -661,8 +661,9 @@
 # Build links (external)
 "https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
   - /go/build-eap/
-"https://www.docker.com/products/build-cloud/":
+"https://www.docker.com/products/build-cloud/?utm_campaign=2024-02-02-banner_dbc_ga&utm_medium=in-product-ad&utm_source=desktop_v4":
   - /go/build-ga/
+"https://www.docker.com/products/build-cloud/?utm_campaign=2024-02-02-dbc_cli&utm_medium=in-product-ad&utm_source=desktop_v4"
   - /go/docker-build-cloud/
 
 # CLI backlinks
