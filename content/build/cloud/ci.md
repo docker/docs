@@ -295,37 +295,31 @@ Using the `build.sh` shell script in your `.travis.yml` file under the `install`
 {{< tabs >}}
 {{< tab name="Travis CI" >}}
 
-
 ```yaml
-language: node_js
-node_js:
-  - "14"
+language: minimal 
+dist: jammy 
 
 services:
   - docker
 
 env:
   global:
-    - IMAGE_NAME=IMAGE
+    - IMAGE_NAME=username/repo
 
-before_install:
-  - echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
-  - sudo apt-get update && sudo apt-get install -y jq
-  - npm --version
-  - npm config set loglevel verbose
-  - npm config set progress false
-  - npm cache clean --force
-  - sudo apt-get update
-  - sudo apt-get install -y build-essential
- 
-install:
-  - |
-    set -e 
-    chmod +x ./build_cloud.sh; ./build_cloud.sh
-    npm install --verbose
-    
-script:
-  - docker buildx create --name $USERNAME --use
+before_install: |
+  echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
+  sudo apt-get update && sudo apt-get install -y jq build-essential
+  npm --version
+  npm config set loglevel verbose
+  npm config set progress false
+  npm cache clean --force
+
+install: |
+  set -e 
+  chmod +x ./build_cloud.sh; ./build_cloud.sh
+
+script: |
+  docker buildx create --name username --use
 ```
 
 {{< /tab >}}
