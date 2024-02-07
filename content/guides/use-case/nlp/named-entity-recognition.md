@@ -21,12 +21,15 @@ The application processes input text to identify and print named entities, like 
 
 1. Open a terminal, and clone the sample application's repository using the
    following command.
+
    ```console
    $ git clone https://github.com/harsh4870/Docker-NLP.git
    ```
+
 2. Verify that you cloned the repository.
 
    You should see the following files in your `Docker-NLP` directory.
+
    ```text
    01_sentiment_analysis.py
    02_name_entity_recognition.py
@@ -44,6 +47,7 @@ The application processes input text to identify and print named entities, like 
 The source code for the name recognition application is in the `Docker-NLP/02_name_entity_recognition.py` file. Open `02_name_entity_recognition.py` in a text or code editor to explore its contents in the following steps.
 
 1. Import the required libraries.
+
    ```python
    import spacy
    ```
@@ -52,6 +56,7 @@ The source code for the name recognition application is in the `Docker-NLP/02_na
    used for natural language processing (NLP).
 
 2. Load the language model.
+
    ```python
    nlp = spacy.load("en_core_web_sm")
    ```
@@ -62,17 +67,21 @@ The source code for the name recognition application is in the `Docker-NLP/02_na
    recognition.
 
 3. Specify the main execution block.
+
    ```python
    if __name__ == "__main__":
    ```
+
    This Python idiom ensures that the following code block runs only if this
    script is the main program. It provides flexibility, allowing the script to
    function both as a standalone program and as an imported module.
 
 4. Create an infinite loop for continuous input.
+
    ```python
       while True:
    ```
+
    This while loop runs indefinitely until it's explicitly broken. It lets
    the user continuously enter text for entity recognition until they decide
    to exit.
@@ -82,38 +91,46 @@ The source code for the name recognition application is in the `Docker-NLP/02_na
    ```python
    input_text = input("Enter the text for entity recognition (type 'exit' to end): ")
    ```
+
    This line prompts the user to enter text. The program will then perform entity recognition on this text.
 
 6. Define an exit condition.
+
    ```python
    if input_text.lower() == 'exit':
       print("Exiting...")
       break
    ```
+
    If the user types something, the program converts the input to lowercase and
    compares it to `exit`. If they match, the program prints **Exiting...** and
    breaks out of the while loop, effectively ending the program.
 
 7. Perform named entity recognition.
+
    ```python
    doc = nlp(input_text)
 
    for ent in doc.ents:
       print(f"Entity: {ent.text}, Type: {ent.label_}")
    ```
+
    - `doc = nlp(input_text)`: Here, the nlp model processes the user-input text. This creates a Doc object which contains various NLP attributes, including identified entities.
    - `for ent in doc.ents:`: This loop iterates over the entities found in the text.
    - `print(f"Entity: {ent.text}, Type: {ent.label_}")`: For each entity, it prints the entity text and its type (like PERSON, ORG, or GPE).
 
 
 8. Create `requirements.txt`.
+
    The sample application already contains the `requirements.txt` file to specify the necessary packages that the application imports. Open `requirements.txt` in a code or text editor to explore its contents.
+
    ```text
    # 02 named_entity_recognition
    spacy==3.7.2
 
    ...
    ```
+
    Only the `spacy` package is required for the named recognition application.
 
 ## Explore the application environment
@@ -137,6 +154,7 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    ```dockerfile
    FROM python:3.8-slim
    ```
+
    This command sets the foundation for the build. `python:3.8-slim` is a
    lightweight version of the Python 3.8 image, optimized for size and speed.
    Using this slim image reduces the overall size of your Docker image, leading
@@ -145,9 +163,11 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    need the full standard Python image.
 
 2. Set the working directory.
+
    ```dockerfile
    WORKDIR /app
    ```
+
    `WORKDIR` sets the current working directory within the Docker image. By
    setting it to `/app`, you ensure that all subsequent commands in the
    Dockerfile (like `COPY` and `RUN`) are executed in this directory. This also
@@ -155,9 +175,11 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    contained in a specific directory.
 
 3. Copy the requirements file into the image.
+
    ```dockerfile
    COPY requirements.txt /app
    ```
+
    The `COPY` command transfers the `requirements.txt` file from
    your local machine into the Docker image. This file lists all Python
    dependencies required by the application. Copying it into the container
@@ -165,25 +187,31 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    inside the image environment.
 
 4. Install the Python dependencies in the image.
+
    ```dockerfile
    RUN pip install --no-cache-dir -r requirements.txt
    ```
+
    This line uses `pip`, Python's package installer, to install the packages
    listed in `requirements.txt`. The `--no-cache-dir` option disables
    the cache, which reduces the size of the Docker image by not storing the
    unnecessary cache data.
 
 5. Run additional commands.
+
    ```dockerfile
    RUN python -m spacy download en_core_web_sm
    ```
+
    This step is specific to NLP applications that require the spaCy library. It downloads the `en_core_web_sm` model, which is a small English language model for spaCy.
 
 6. Copy the application code into the image.
+
    ```dockerfile
    COPY *.py /app
    COPY entrypoint.sh /app
    ```
+
    These commands copy your Python scripts and the `entrypoint.sh` script into
    the image's `/app` directory. This is crucial because the container needs
    these scripts to run the application. The `entrypoint.sh` script is
@@ -191,17 +219,21 @@ The following steps explain each part of the `Dockerfile`. For more details, see
    container.
 
 7. Set permissions for the `entrypoint.sh` script.
+
    ```dockerfile
    RUN chmod +x /app/entrypoint.sh
    ```
+
    This command modifies the file permissions of `entrypoint.sh`, making it
    executable. This step is necessary to ensure that the Docker container can
    run this script to start the application.
 
 8. Set the entry point.
+
    ```dockerfile
    ENTRYPOINT ["/app/entrypoint.sh"]
    ```
+
     The `ENTRYPOINT` instruction configures the container to run `entrypoint.sh`
     as its default executable. This means that when the container starts, it
     automatically executes the script.
@@ -215,11 +247,15 @@ The following steps explain each part of the `Dockerfile`. For more details, see
 To run the application using Docker:
 
 1. Build the image.
+
    In a terminal, run the following command inside the directory of where the `Dockerfile` is located.
+
    ```console
    $ docker build -t basic-nlp .
    ```
+
    The following is a break down of the command:
+
    - `docker build`: This is the primary command used to build a Docker image
      from a Dockerfile and a context. The context is typically a set of files at
      a specified location, often the directory containing the Dockerfile.
@@ -242,11 +278,15 @@ To run the application using Docker:
    return to the prompt when it's complete.
 
 2. Run the image as a container.
+
    In a terminal, run the following command.
+
    ```console
    $ docker run -it basic-nlp 02_name_entity_recognition.py
    ```
+
    The following is a break down of the command:
+
    - `docker run`: This is the primary command used to run a new container from
      a Docker image.
    - `-it`: This is a combination of two options:
@@ -273,11 +313,15 @@ To run the application using Docker:
    > then rebuild the image. For more details, see [Avoid unexpected syntax errors, use Unix style line endings for files in containers](/desktop/troubleshoot/topics/#avoid-unexpected-syntax-errors-use-unix-style-line-endings-for-files-in-containers).
 
    You will see the following in your console after the container starts.
+
    ```console
    Enter the text for entity recognition (type 'exit' to end):
    ```
+
 3. Test the application.
+
    Enter some information to get the named entity recognition.
+
    ```console
    Enter the text for entity recognition (type 'exit' to end): Apple Inc. is planning to open a new store in San Francisco. Tim Cook is the CEO of Apple.
    
