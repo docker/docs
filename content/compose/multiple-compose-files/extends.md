@@ -194,11 +194,11 @@ dependencies.
 
 ## Relative paths
 
-When using `extends` with a `file` pointing to another folder, relative paths 
+When using `extends` with a `file` attribute which points to another folder, relative paths 
 declared by the service being extended are converted so they still point to the
-same file, when used by the extending service, as illustrated by this example:
+same file when used by the extending service. This is illustrated in the following example:
 
-Considering compose file:
+Base Compose file:
 ```yaml
 services:
   webapp:
@@ -208,16 +208,16 @@ services:
       service: base
 ```
 
-and the commons/compose.yaml file:
+The `commons/compose.yaml` file:
 ```yaml
 services:
   base:
     env_file: ./container.env
 ```
 
-the resulting service will refer as expected to the original `container.env` file
-within the `commons` directory. This can be confirmed using `docker compose config`
-to inspect the actual model:
+The resulting service refers to the original `container.env` file
+within the `commons` directory. This can be confirmed with `docker compose config`
+which inspects the actual model:
 ```yaml
 services:
   webapp:

@@ -38,8 +38,8 @@ This means the team managing `serviceB` can refactor its own database component 
 
 ## Include and overrides
 
-Compose will report an error if any resource from `include` conflicts with one from the including compose file. This rule is set to prevent
-unexpected conflicts with resources defined by the included compose file author. Still, in some circumstances user might want to tweak the
+Compose reports an error if any resource from `include` conflicts with resources from the included Compose file. This rule prevents
+unexpected conflicts with resources defined by the included compose file author. However, there may be some circumstances where you might want to tweak the
 included model. This can be achieved by adding an override file to the include directive:
 ```yaml
 include:
@@ -48,11 +48,11 @@ include:
       - override.yaml  # local override for third-party model
 ```
 
-The main limitation with this approach is that one need to maintain a dedicated override file per include. For complex projects with multiple
-includes this would result into many compose files.
+The main limitation with this approach is that you need to maintain a dedicated override file per include. For complex projects with multiple
+includes this would result into many Compose files.
 
 The other option is to use a `compose.override.yaml` file. While conflicts will be rejected from the file using `include` when same
-resource is declared, a global compose override can override the resulting merged model, as demonstrated in following example:
+resource is declared, a global Compose override file can override the resulting merged model, as demonstrated in following example:
 
 Main `compose.yaml` file:
 ```yaml
@@ -75,7 +75,7 @@ services:
       - ./data:/data
 ```
 
-Combined together, this allows the end-user to benefits from third-party reusable components, and adjust the Compose model for his needs.
+Combined together, this allows you to benefit from third-party reusable components, and adjust the Compose model for your needs.
 
 ## Reference information
 
