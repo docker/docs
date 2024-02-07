@@ -192,6 +192,40 @@ configuration. But this isn’t an acceptable solution when you want to re-use
 someone else's unfamiliar configurations and you don’t know about its own
 dependencies.
 
+## Relative paths
+
+When using `extends` with a `file` attribute which points to another folder, relative paths 
+declared by the service being extended are converted so they still point to the
+same file when used by the extending service. This is illustrated in the following example:
+
+Base Compose file:
+```yaml
+services:
+  webapp:
+    image: example
+    extends:
+      file: ../commons/compose.yaml
+      service: base
+```
+
+The `commons/compose.yaml` file:
+```yaml
+services:
+  base:
+    env_file: ./container.env
+```
+
+The resulting service refers to the original `container.env` file
+within the `commons` directory. This can be confirmed with `docker compose config`
+which inspects the actual model:
+```yaml
+services:
+  webapp:
+    image: example
+    env_file: 
+      - ../commons/container.env
+```
+
 ## Reference information
 
 - [`extends`](../compose-file/05-services.md#extends)
