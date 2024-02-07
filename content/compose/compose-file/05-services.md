@@ -40,6 +40,8 @@ annotations:
 
 ## attach
 
+> Available with Docker Compose version 2.20.0 and later
+
 When `attach` is defined and set to `false` Compose does not collect service logs,
 until you explicitly request it to.
 
@@ -437,6 +439,8 @@ Compose guarantees dependency services marked with
 
 ## develop
 
+> Available with Docker Compose version 2.22.0 and later.
+
 `develop` specifies the development configuration for maintaining a container in sync with source, as defined in the [Development Section](develop.md).
 
 ## device_cgroup_rules
@@ -565,6 +569,7 @@ env_file:
   - path: ./override.env
     required: false
 ```
+> `required` attribute is available with Docker Compose version 2.24.0 or later.
 
 Relative path are resolved from the Compose file's parent folder. As absolute paths prevent the Compose
 file from being portable, Compose warns you when such a path is used to set `env_file`.
@@ -1108,6 +1113,8 @@ The `driver` name specifies a logging driver for the service's containers. The d
 are platform specific. Driver specific options can be set with `options` as key-value pairs.
 
 ## mac_address
+
+> Available with Docker Compose version 2.24.0 and later.
 
 `mac_address` sets a MAC address for the service container.
 

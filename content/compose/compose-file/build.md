@@ -496,6 +496,8 @@ tags:
 
 ### ulimits
 
+> Available with Docker Compose version 2.24.0 and later.
+
 `ulimits` overrides the default ulimits for a container. It's specified either as an integer for a single limit
 or as mapping for soft/hard limits.
 
