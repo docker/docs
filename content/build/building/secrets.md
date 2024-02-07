@@ -23,6 +23,12 @@ mount.
 RUN --mount=type=secret,id=mytoken \
     TOKEN=$(cat /run/secrets/mytoken) ...
 ```
+To mount multiple secret, then use following command
+
+```dockerfile
+RUN --mount=type=secret,id=mytoken1,id=mytoken2 \
+    TOKEN1=$(cat /run/secrets/mytoken1) TOKEN2=$(cat /run/secrets/mytoken2) ...
+```
 
 To pass a secret to a build, use the [`docker build --secret`
 flag](../../engine/reference/commandline/buildx_build.md#secret), or the
