@@ -36,7 +36,12 @@ When a user signs in using SSO, Docker obtains the following attributes from the
 - **Full name** - name of the user
 - **Groups (optional)** - list of groups to which the user belongs
 
-If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those in the previous list. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work. 
+If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those in the previous list. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work.
+
+> **Important**
+>
+>SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](../scim.md#set-up-scim), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For example, to make sure that the full name of a user displays in your organization, you would create a `name` attribute in your IdP and ensure the value includes their first name and last name. The exact syntax for these values (for example, `user.firstName + " " + user.lastName`) varies depending on your IdP.
+{.important}
 
 You can also configure attributes to override default values, such as default team or organization. See [role mapping](../scim.md#set-up-role-mapping).
 
@@ -51,7 +56,7 @@ You can also configure attributes to override default values, such as default te
 
 > **Important**
 >
-> If none of the email address attributes listed in the previous table are found, SSO returns an error.
+> If none of the email address attributes listed in the previous table are found, SSO returns an error. Also, if the `Full name` attribute isn't set, then the name will be displayed as the value of the `Email address`.
 { .important}
 
 ## Prerequisites
