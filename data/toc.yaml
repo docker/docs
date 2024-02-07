@@ -2034,7 +2034,7 @@ Manuals:
     - path: /admin/organization/activity-logs/
       title: Activity logs
     - path: /admin/organization/general-settings/
-      title: General settings
+      title: Organization settings
   - sectiontitle: Company administration
     section:
     - path: /admin/company/
