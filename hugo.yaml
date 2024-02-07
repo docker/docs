@@ -70,7 +70,8 @@ outputs:
     - html
     - json
 
-taxonomies:
+imaging:
+  resampleFilter: CatmullRom
 
 languages:
   en:

@@ -1,10 +1,6 @@
-{{ $src := .Get "src" }}
+{{ $src := (resources.Get (.Get "src")).Permalink }}
 {{ $alt := .Get "alt" }}
 {{ $title := .Get "title" }}
-
-{{ if and (eq .Page.Kind "page") (not (hasPrefix $src "/")) }}
-  {{ $src = (printf "../%s" $src) }}
-{{ end }}
 
 <img
   src="{{ $src }}"
