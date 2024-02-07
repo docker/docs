@@ -310,6 +310,38 @@ pipeline {
 ```
 
 {{< /tab >}}
+{{< tab name="Travis CI" >}}
+
+```yaml
+language: minimal 
+dist: jammy 
+
+services:
+  - docker
+
+env:
+  global:
+    - IMAGE_NAME=username/repo
+
+before_install: |
+  echo "$DOCKER_PAT" | docker login --username "$DOCKER_USER" --password-stdin
+
+install: |
+  set -e 
+  BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$TRAVIS_CPU_ARCH\"))")
+  mkdir -vp ~/.docker/cli-plugins/
+  curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+  chmod a+x ~/.docker/cli-plugins/docker-buildx
+  docker buildx create --use --driver cloud "<ORG>/default"
+
+script: |
+  docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  --push \
+  --tag "$IMAGE_NAME" .
+```
+
+{{< /tab >}}
 {{< tab name="BitBucket Pipelines" >}}
 
 ```yaml
