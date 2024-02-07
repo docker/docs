@@ -15,6 +15,7 @@
   class="cursor-pointer hover:opacity-90"
 >
   <img
+    loading="lazy"
     src="{{ $imagePath }}"
     alt="{{ .Text }}"
     {{ with $width }}
@@ -39,6 +40,7 @@
         {{ partial "icon" "close" }}
       </button>
       <img
+        loading="lazy"
         class="rounded max-w-full max-h-full"
         src="{{ $imagePath }}"
         alt="{{ .Text }}"
