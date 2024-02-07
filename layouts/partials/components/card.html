@@ -12,7 +12,7 @@
       {{/* use the "tall image" layout */}}
       <div class="flex gap-2 items-stretch">
         <div class="basis-1/3">
-          <img class="h-full w-full object-cover" src="{{ .image }}" alt="">
+          <img class="h-full w-full object-cover" src="{{ (resources.Get .image).Permalink }}" alt="">
         </div>
         <div class="basis-2/3 flex flex-col gap-2 p-4">
           <div class="text-xl text-gray-light-800 leading-snug dark:text-white flex gap-2">
@@ -30,7 +30,7 @@
           {{ with .icon }}
             {{ if strings.ContainsAny . "/." }}
             {{/* image file */}}
-            <img class="w-[32px] invertible" src="{{ . }}" alt="">
+            <img class="w-[32px] invertible" src="{{ (resources.Get .).Permalink }}" alt="">
             {{ else }}
             {{/* icon ligature */}}
             <span class="icon-svg">{{ partial "icon" . }}</span>

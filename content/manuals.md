@@ -7,11 +7,11 @@ skip_read_time: true
 development:
 - title: Docker Desktop
   description: Your command center for container development.
-  icon: /assets/icons/Whale.svg
+  icon: images/Whale.svg
   link: /desktop/
 - title: Docker Compose
   description: Define and run multi-container applications.
-  icon: /assets/icons/Compose.svg
+  icon: images/Compose.svg
   link: /compose/
 - title: Docker Build
   description: Build and ship any application anywhere.
@@ -32,7 +32,7 @@ services:
   link: /docker-hub/
 - title: Docker Scout
   description: Image analysis and policy evaluation.
-  icon: /assets/icons/Scout.svg
+  icon: images/Scout.svg
   link: /scout/
 - title: Trusted content
   description: Curated, high-quality content from trusted sources.

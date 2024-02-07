@@ -8,28 +8,28 @@ aliases:
 grid:
   - title: "What is a container?"
     link: "/guides/walkthroughs/what-is-a-container/"
-    image: "/guides/walkthroughs/images/what-is-a-container.webp"
+    image: "images/guides/walkthroughs/what-is-a-container.webp"
   - title: "Run a container"
-    image: "/guides/walkthroughs/images/how-do-i-run-a-container.webp"
+    image: "images/guides/walkthroughs/how-do-i-run-a-container.webp"
     link: "/guides/walkthroughs/run-a-container/"
   - title: "Run Docker Hub images"
-    image: "/guides/walkthroughs/images/run-docker-hub-images.webp"
+    image: "images/guides/walkthroughs/run-docker-hub-images.webp"
     link: "/guides/walkthroughs/run-hub-images/"
   - title: "Multi-container apps"
-    image: "/guides/walkthroughs/images/multi-container-apps.webp"
+    image: "images/guides/walkthroughs/multi-container-apps.webp"
     link: "/guides/walkthroughs/multi-container-apps/"
   - title: "Persist container data"
     link: "/guides/walkthroughs/persist-data/"
-    image: "/guides/walkthroughs/images/persist-data.webp"
+    image: "images/guides/walkthroughs/persist-data.webp"
   - title: "Access a local folder"
     link: "/guides/walkthroughs/access-local-folder/"
-    image: "/guides/walkthroughs/images/bind-mounts.webp"
+    image: "images/guides/walkthroughs/bind-mounts.webp"
   - title: "Containerize your application"
     link: "/guides/walkthroughs/containerize-your-app/"
-    image: "/guides/walkthroughs/images/containerize-app.webp"
+    image: "images/guides/walkthroughs/containerize-app.webp"
   - title: "Publish your image to Docker Hub"
     link: "/guides/walkthroughs/publish-your-image/"
-    image: "/guides/walkthroughs/images/publish-your-images.webp"
+    image: "images/guides/walkthroughs/publish-your-images.webp"
 aliases:
 - /get-started/hands-on-overview/
 ---
@@ -53,5 +53,5 @@ Dive deeper into Docker and containerization concepts in this end-to-end guide.
   title="Getting started guide"
   link=/get-started/
   description="A 45-minute guide where you start by containerizing a simple application and then follow along to develop it into a multi-container application."
-  icon="/assets/images/rocket.svg"
+  icon="images/rocket.svg"
 >}}
