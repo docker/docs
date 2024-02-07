@@ -16,7 +16,7 @@ When you enable SSO, this redirects to your IdP's authentication page to sign in
 
 The following diagram shows how SSO operates and is managed in Docker Hub and Docker Desktop. In addition, it provides information on how to authenticate between your IdP.
 
-![SSO architecture](images/SSO.png)
+![SSO architecture](images/security/for-admins/single-sign-on/SSO.png)
 
 ## How to set it up
 

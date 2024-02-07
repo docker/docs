@@ -7,8 +7,6 @@ keywords: linux, docker linux install, docker linux, linux docker installation, 
 title: Install Docker Desktop on Linux
 aliases:
 - /desktop/linux/install/
-'yes': '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin:
-  0 auto"}'
 ---
 
 This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
@@ -219,7 +217,7 @@ Sign out and sign back in so that your group membership is re-evaluated.
 
 2. Open your **Applications** menu in Gnome/KDE Desktop and search for **Docker Desktop**.
 
-   ![Docker app in Applications](images/docker-app-in-apps.png)
+   ![Docker app in Applications](images/desktop/install/docker-app-in-apps.png)
 
 3. Select **Docker Desktop** to start Docker. <br> The Docker menu ({{< inline-image src="images/whale-x.svg" alt="whale menu" >}}) displays the Docker Subscription Service Agreement.
 

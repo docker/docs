@@ -63,7 +63,7 @@ jobs:
 
 Logs will be available at the end of a job:
 
-![BuildKit container logs](images/buildkit-container-logs.png)
+![BuildKit container logs](images/build/ci/github-actions/buildkit-container-logs.png)
 
 ## BuildKit Daemon configuration
 

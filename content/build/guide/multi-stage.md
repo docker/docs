@@ -111,7 +111,7 @@ to the final `scratch` image.
 Now, instead of first building the binaries one after the other, the
 `build-client` and `build-server` stages are executed simultaneously.
 
-![Stages executing in parallel](./images/parallelism.gif)
+![Stages executing in parallel](images/build/guide/parallelism.gif)
 
 ## Build targets
 

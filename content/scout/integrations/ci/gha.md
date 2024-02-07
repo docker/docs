@@ -155,11 +155,11 @@ showing only what's changed.
 The GitHub Action outputs the comparison results in a pull request comment by
 default.
 
-![A screenshot showing the results of Docker Scout output in a GitHub Action](../../images/gha-output.webp)
+![A screenshot showing the results of Docker Scout output in a GitHub Action](images/scout/gha-output.webp)
 
 Expand the **Policies** section to view the difference in policy compliance
 between the two images. Note that while the new image in this example isn't
 fully compliant, the output shows that the standing for the new image has
 improved compared to the baseline.
 
-![GHA policy evaluation output](../../images/gha-policy-eval.webp)
+![GHA policy evaluation output](images/scout/gha-policy-eval.webp)

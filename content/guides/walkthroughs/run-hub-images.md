@@ -20,7 +20,7 @@ You can search for Docker Hub images on Docker Desktop. To search for the image 
 1. Open Docker Desktop and select the search.
 2. Specify `docker/welcome-to-docker` in the search.
 
-![Search Docker Desktop for the welcome-to-docker image](images/getting-started-search.webp?w=650&border=true)
+![Search Docker Desktop for the welcome-to-docker image](images/guides/walkthroughs/getting-started-search.webp)
 
 ## Step 2: Run the image
 
@@ -29,7 +29,7 @@ To run the `docker/welcome-to-docker` image:
 1. After finding the image using search, select **Run**.
 2. Expand the **Optional settings**.
 3. In **Host port**, specify `8090`.
-   ![Specifying host port 8090](images/getting-started-run.webp?w=500&border=true)
+   ![Specifying host port 8090](images/guides/walkthroughs/getting-started-run.webp)
 4. Select **Run**.
 
 > **Note**
@@ -44,7 +44,7 @@ To run the `docker/welcome-to-docker` image:
 
 That's it! The container is ready to use. Go to the **Containers** tab in Docker Desktop to view the container.
 
-![Viewing the Containers tab in Docker Desktop](images/getting-started-view.webp?border=true)
+![Viewing the Containers tab in Docker Desktop](images/guides/walkthroughs/getting-started-view.webp)
 
 ## Summary
 

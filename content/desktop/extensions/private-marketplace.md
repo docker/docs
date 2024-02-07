@@ -174,7 +174,7 @@ We recommend you try the private marketplace on your Docker Desktop installation
 
 When you select the **Extensions** tab, you should see the private marketplace listing only the extensions you have allowed in `extensions.txt`.
 
-![Extensions Private Marketplace](/assets/images/extensions-private-marketplace.webp)
+![Extensions Private Marketplace](images/extensions-private-marketplace.webp)
 
 ## Step six: Distribute the private marketplace to your developers’ machines
 

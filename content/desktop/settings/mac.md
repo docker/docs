@@ -14,7 +14,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Settings** either:
 
-- Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Settings**
+- Select the Docker menu {{< inline-image src="images/desktop/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
 You can also locate the `settings.json` file at `~/Library/Group Containers/group.com.docker/settings.json`.

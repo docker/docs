@@ -76,7 +76,7 @@ The unification process is referred to as a _union mount_.
 
 The diagram below shows a Docker container based on the `ubuntu:latest` image.
 
-![Layers of an Ubuntu container](images/aufs_layers.webp) 
+![Layers of an Ubuntu container](images/storage/storagedriver/aufs_layers.webp) 
 
 Each image layer, and the container layer, are represented on the Docker host as
 subdirectories within `/var/lib/docker/`. The union mount provides the unified

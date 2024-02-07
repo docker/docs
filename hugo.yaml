@@ -275,6 +275,8 @@ module:
           excludefiles: "index.md"
         - source: docs/extend/index.md
           target: content/engine/extend/_index.md
+        - source: docs/extend/images
+          target: assets/images
         - source: docs/deprecated.md
           target: content/engine/deprecated.md
         - source: docs/reference/run.md

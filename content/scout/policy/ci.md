@@ -149,7 +149,7 @@ The following screenshot shows what the GitHub PR comment looks like when a
 policy evaluation check fails because policy has become worse in the PR image
 compared to baseline.
 
-![Policy evaluation comment in GitHub PR](../images/scout-policy-eval-ci.webp)
+![Policy evaluation comment in GitHub PR](images/scout/scout-policy-eval-ci.webp)
 
 This example has demonstrated how to run policy evaluation in CI with GitHub
 Actions. Docker Scout also supports other CI platforms. For more information,

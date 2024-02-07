@@ -237,7 +237,7 @@ Docker Desktop does not start automatically after installation. To start Docker 
 
 1. Search for Docker, and select **Docker Desktop** in the search results.
 
-   ![Search for Docker app](images/docker-app-search.png)
+   ![Search for Docker app](images/desktop/install/docker-app-search.png)
 
 2. The Docker menu ({{< inline-image src="images/whale-x.svg" alt="whale menu" >}}) displays the Docker Subscription Service Agreement.
 

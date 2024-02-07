@@ -34,9 +34,9 @@ After your domain is verified, create an SSO connection.
    - SAML: **Entity ID**, **ACS URL**
    - Azure AD (OIDC): **Redirect URL**
 
-   ![SAML](/docker-hub/images/saml-create-connection.png)
+   ![SAML](images/docker-hub/saml-create-connection.png)
 
-   ![Azure AD](/docker-hub/images/azure-create-connection.png)
+   ![Azure AD](images/docker-hub/azure-create-connection.png)
 
 6. From your IdP, copy and paste the following values into the settings in the Docker console:
 

@@ -9,7 +9,7 @@ aliases:
 
 When you open Docker Desktop, the Docker Dashboard displays.
 
-![Docker Dashboard on Containers view](../images/dashboard.webp)
+![Docker Dashboard on Containers view](images/desktop/dashboard.webp)
 
 The **Containers** view provides a runtime view of all your containers and applications. It allows you to interact with containers and applications, and manage the lifecycle of your applications directly from your machine. This view also provides an intuitive interface to perform common actions to inspect, interact with, and manage your Docker objects including containers and Docker Compose-based applications. For more information, see [Explore running containers and applications](container.md).
 
@@ -46,9 +46,9 @@ From the Docker Dashboard you can use Quick Search, which is located in the Dash
 
 ## The Docker menu
 
-Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is referred to as the Docker menu {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}}.
+Docker Desktop also provides an easy-access tray icon that appears in the taskbar and is referred to as the Docker menu {{< inline-image src="images/whale-x.svg" alt="whale menu" >}}.
 
-To display the Docker menu, select the {{< inline-image src="../../assets/images/whale-x.svg" alt="whale menu" >}} icon. It displays the following options:
+To display the Docker menu, select the {{< inline-image src="images/whale-x.svg" alt="whale menu" >}} icon. It displays the following options:
 
 - **Dashboard**. This takes you to the Docker Dashboard.
 - **Sign in/Sign up**

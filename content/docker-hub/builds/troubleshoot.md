@@ -14,7 +14,7 @@ keywords: docker hub, troubleshoot, automated builds, autobuilds
 If a build fails, a **Retry** icon appears next to the build report line on the
 **General** and **Builds** tabs. The **Build report** page and **Timeline logs** also display a **Retry** button.
 
-![Timeline view showing the retry build button](images/retry-build.png)
+![Timeline view showing the retry build button](images/docker-hub/builds/retry-build.png)
 
 > **Note**
 >

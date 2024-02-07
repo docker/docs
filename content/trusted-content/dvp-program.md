@@ -28,7 +28,7 @@ These images help development teams build secure software supply chains, minimiz
 
 Images that are part of this program have a special badge on Docker Hub making it easier for users to identify projects that Docker has verified as high-quality commercial publishers.
 
-![Docker-Sponsored Open Source badge](./images/verified-publisher-badge-iso.png)
+![Docker-Sponsored Open Source badge](images/trusted-content/verified-publisher-badge-iso.png)
 
 ## For content publishers
 
@@ -64,26 +64,26 @@ over the repository can change the repository logo.
 1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Go to the page of the repository that you want to change the logo for.
 3. Select the upload logo button, represented by a camera icon ({{< inline-image
-   src="./images/upload_logo_sm.png" alt="camera icon" >}}) overlaying the
+   src="images/trusted-content/upload_logo_sm.png" alt="camera icon" >}}) overlaying the
 current repository logo.
 4. In the dialog that opens, select the PNG image that you want to upload to
    set it as the logo for the repository.
 
 #### Remove the logo
 
-Select the **Clear** button ({{< inline-image src="images/clear_logo_sm.png"
+Select the **Clear** button ({{< inline-image src="images/trusted-content/clear_logo_sm.png"
 alt="clear button" >}}) to remove a logo.
 
 Removing the logo makes the repository default to using the organization logo, if set, or the following default logo if not.
 
-![Default logo which is a 3D grey cube](images/default_logo_sm.png)
+![Default logo which is a 3D grey cube](images/trusted-content/default_logo_sm.png)
 
 ### Verified publisher badge
 
 Images that are part of this program have a badge on Docker Hub making it easier for developers
 to identify projects that Docker has verified as high quality publishers and with content they can trust.
 
-![Docker, Inc. org with a verified publisher badge](./images/verified-publisher-badge.png)
+![Docker, Inc. org with a verified publisher badge](images/trusted-content/verified-publisher-badge.png)
 
 ### Insights and analytics
 
@@ -93,7 +93,7 @@ the community uses Docker images, granting insight into user behavior.
 The usage metrics show the number of image pulls by tag or by digest, and breakdowns by
 geolocation, cloud provider, client, and more.
 
-![The insights and analytics tab on the Docker Hub website](./images/insights-and-analytics-tab.png)
+![The insights and analytics tab on the Docker Hub website](images/trusted-content/insights-and-analytics-tab.png)
 
 You can select the time span for which you want to view analytics data. You can also export the data in either a summary or raw format.
 

@@ -1,13 +1,10 @@
-{{ $imagePath := .Destination }}
-{{ if and (eq .Page.Kind "page") (not (hasPrefix .Destination "/")) }}
-  {{ $imagePath = (printf "../%s" .Destination) }}
+{{ $image := .Destination }}
+{{ if not (strings.HasPrefix "http" $image) }}
+  {{ $image = resources.Get .Destination }}
+  {{ if not $image }}
+    {{ errorf "couldn't resolve image: '%s'\n    page: %s" .Destination .Page.File.Filename }}
+  {{ end }}
 {{ end }}
-
-{{ $params := (urls.Parse $imagePath).Query }}
-{{ $width := index $params "w" }}
-{{ $height := index $params "h" }}
-{{ $border := index $params "border" }}
-
 
 <div
   x-data="{ zoom: false }"
@@ -15,16 +12,12 @@
   class="cursor-pointer hover:opacity-90"
 >
   <img
-    src="{{ $imagePath }}"
+    src="{{ $image.Permalink }}"
     alt="{{ .Text }}"
-    {{ with $width }}
-      width="{{ index . 0 }}"
+    {{ with .Title }}
+      title="{{ . }}"
     {{ end }}
-    {{ with $height }}
-      height="{{ index . 0 }}"
-    {{ end }}
-    {{ with .Title }}title="{{ . }}"{{ end }}
-    class="rounded mx-auto{{ with $border }} border border-divider-light dark:border-divider-dark{{end}}"
+    class="rounded mx-auto"
   />
   <template x-teleport="body">
     <div
@@ -40,7 +33,7 @@
       </button>
       <img
         class="rounded max-w-full max-h-full"
-        src="{{ $imagePath }}"
+        src="{{ $image.Permalink }}"
         alt="{{ .Text }}"
         {{ with .Title }}title="{{ . }}"{{ end }}
       />

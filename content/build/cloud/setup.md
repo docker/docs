@@ -61,7 +61,7 @@ This creates a builder named `cloud-ORG-BUILDER_NAME`.
 
 3. Under **Available builders**, select **Create builder**.
 
-   ![Create builder GUI screenshot](/build/images/create-builder-gui.webp)
+   ![Create builder GUI screenshot](images/build/create-builder-gui.webp)
 
 {{< /tab >}}
 {{< /tabs >}}

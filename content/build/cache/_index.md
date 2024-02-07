@@ -30,7 +30,7 @@ Each instruction in this Dockerfile translates to a layer in your final image.
 You can think of image layers as a stack, with each layer adding more content
 on top of the layers that came before it:
 
-![Image layer diagram](../images/cache-stack.png)
+![Image layer diagram](images/build/cache-stack.png)
 
 Whenever a layer changes, that layer will need to be re-built. For example,
 suppose you make a change to your program in the `main.c` file. After this
@@ -42,7 +42,7 @@ If a layer changes, all other layers that come after it are also affected. When
 the layer with the `COPY` command gets invalidated, all layers that follow will
 need to run again, too:
 
-![Image layer diagram, showing cache invalidation](../images/cache-stack-invalidated.png)
+![Image layer diagram, showing cache invalidation](images/build/cache-stack-invalidated.png)
 
 And that's the Docker build cache in a nutshell. Once a layer changes, then all
 downstream layers need to be rebuilt as well. Even if they wouldn't build

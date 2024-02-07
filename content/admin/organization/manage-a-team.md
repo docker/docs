@@ -55,7 +55,7 @@ To give a team access to a repository
 4. Choose a permission from the **Permissions** drop-down list and select
    **Add**.
 
-    ![Team Repo Permissions](../images/team-repo-permission.png)
+    ![Team Repo Permissions](images/admin/team-repo-permission.png)
 
 Organization owners can also assign members the editor role to grant partial administrative access. See [Roles and permissions](../../security/for-admins/roles-and-permissions.md) for more about the editor role.
 

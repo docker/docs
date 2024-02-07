@@ -182,7 +182,7 @@ SonarQube analysis results with container images. In addition to enabling the
 SonarQube integration, you must also make sure that your images has either the
 attestation or the label.
 
-![Git commit SHA links image with SonarQube analysis](../images/scout-sq-commit-sha.webp)
+![Git commit SHA links image with SonarQube analysis](images/scout/scout-sq-commit-sha.webp)
 
 Once you push an image and policy evaluation completes, the results from the
 SonarQube quality gates display as a policy in the Docker Scout Dashboard, and

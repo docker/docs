@@ -17,7 +17,7 @@ vulnerabilities and issues they need to focus on.
 
 ## Overview
 
-![A screenshot of the Docker Scout Dashboard overview](./images/dashboard-overview.webp?border=true)
+![A screenshot of the Docker Scout Dashboard overview](images/scout/dashboard-overview.webp)
 
 The **Overview** tab provides a summary for the repositories in the selected
 organization.
@@ -60,7 +60,7 @@ Each entry in the list shows the following details:
 
 ### Repository tag list
 
-![Screenshot of tags for a repository](./images/dashboard-repo-tags.webp?border=true)
+![Screenshot of tags for a repository](images/scout/dashboard-repo-tags.webp)
 
 There are two tabs on this page:
 
@@ -108,7 +108,7 @@ policy compliance for the image: **Policy status** and **Image layers**.
 {{< tabs >}}
 {{< tab name="Policy status" >}}
 
-![Screenshot of the policy tab in the image details view](./images/dashboard-image-policies.webp?border=true)
+![Screenshot of the policy tab in the image details view](images/scout/dashboard-image-policies.webp)
 
 The policy tab shows you the policy evaluation results for the image. Use the
 **View details** and **View fixes** links to the right to view the full
@@ -120,7 +120,7 @@ For more information about policy, see [Policy Evaluation](./policy/_index.md).
 {{< /tab >}}
 {{< tab name="Image layers" >}}
 
-![Screenshot showing Docker Scout image layers](./images/dashboard-image-layers.webp?border=true)
+![Screenshot showing Docker Scout image layers](images/scout/dashboard-image-layers.webp)
 
 The layer view shows a breakdown of the Docker Scout analysis, including
 an overview of the digest Secure Hash Algorithms (SHA), version, the image hierarchy (base images), image
@@ -135,7 +135,7 @@ layers, packages, and vulnerabilities.
 
 ## Policies
 
-![A screenshot of the Docker Scout policies view](./images/dashboard-policies-view.webp?border=true)
+![A screenshot of the Docker Scout policies view](images/scout/dashboard-policies-view.webp)
 
 The **Policies** view shows a breakdown of policy compliance for all of the
 images in the selected organization and environment. You can use the **Image**
@@ -145,7 +145,7 @@ For more information about policies, see [Policy Evaluation](./policy/_index.md)
 
 ## Base images
 
-![A screenshot of the Docker Scout view showing base images used](./images/dashboard-base-images.webp?border=true)
+![A screenshot of the Docker Scout view showing base images used](images/scout/dashboard-base-images.webp)
 
 The **Base images** view shows all base images used by repositories in an organization.
 

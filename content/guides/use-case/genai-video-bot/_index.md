@@ -98,7 +98,7 @@ database. The following steps show how to use the service.
    and select **Submit**. The following example uses
    [https://www.youtube.com/watch?v=yaQZFhrW0fU](https://www.youtube.com/watch?v=yaQZFhrW0fU).
 
-   ![Submitting a video in the yt-whisper service](images/yt-whisper.webp)
+   ![Submitting a video in the yt-whisper service](images/guides/use-case/genai-video-bot/yt-whisper.webp)
 
    The yt-whisper service downloads the audio of the video, uses Whisper to
    transcribe it into a WebVTT (`*.vtt`) format (which you can download), then
@@ -109,7 +109,7 @@ database. The following steps show how to use the service.
    you which videos have been indexed in Pinecone. It also provides a button to
    download the transcript.
 
-   ![A processed video in the yt-whisper service](images/yt-whisper-2.webp)
+   ![A processed video in the yt-whisper service](images/guides/use-case/genai-video-bot/yt-whisper-2.webp)
 
    You can now access the dockerbot service on port `8504` and ask questions
    about the videos.
@@ -136,7 +136,7 @@ how to use the service.
    example,
    [https://www.youtube.com/watch?v=yaQZFhrW0fU](https://www.youtube.com/watch?v=yaQZFhrW0fU).
    
-   ![Asking a question to the Dockerbot](images/bot.webp)
+   ![Asking a question to the Dockerbot](images/guides/use-case/genai-video-bot/bot.webp)
    
    In this example, the Dockerbot answers the question and
    provides links to the video with timestamps, which may contain more
@@ -164,7 +164,7 @@ The following image shows the application's high-level service architecture, whi
 - OpenAI: A remote third-party service.
 - Pinecone: A remote third-party service.
 
-![Application architecture diagram](images/architecture.webp)
+![Application architecture diagram](images/guides/use-case/genai-video-bot/architecture.webp)
 
 ## Explore the technologies used and their role
 
@@ -205,7 +205,7 @@ relevance to user input, facilitating efficient search and response generation
 in the application. For more details, see OpenAI's
 [Embeddings](https://platform.openai.com/docs/guides/embeddings) documentation.
 
-![Embedding diagram](images/embeddings.webp)
+![Embedding diagram](images/guides/use-case/genai-video-bot/embeddings.webp)
 
 ### Chat completions
 

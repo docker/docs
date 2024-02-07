@@ -30,7 +30,7 @@ container's writable layer, because a volume doesn't increase the size of the
 containers using it, and the volume's contents exist outside the lifecycle of a
 given container.
 
-![Volumes on the Docker host](images/types-of-mounts-volume.webp?w=450&h=300)
+![Volumes on the Docker host](images/storage/types-of-mounts-volume.webp)
 
 If your container generates non-persistent state data, consider using a
 [tmpfs mount](tmpfs.md) to avoid storing the data anywhere permanently, and to
@@ -408,7 +408,7 @@ $ docker volume rm nginx-vol
 When building fault-tolerant applications, you may need to configure multiple
 replicas of the same service to have access to the same files.
 
-![shared storage](images/volumes-shared-storage.webp)
+![shared storage](images/storage/volumes-shared-storage.webp)
 
 There are several ways to achieve this when developing your applications.
 One is to add logic to your application to store files on a cloud object

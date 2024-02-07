@@ -116,7 +116,7 @@ container. Docker Desktop does this by default. The host IP is exposed as the
 
 Verify that the Docker target is listed at `http://localhost:9090/targets/`.
 
-![Prometheus targets page](images/prometheus-targets.webp)
+![Prometheus targets page](images/config/daemon/prometheus-targets.webp)
 
 > **Note**
 >
@@ -130,7 +130,7 @@ from the combo box to the right of the **Execute** button, and click
 **Execute**. The screenshot below shows the graph for
 `engine_daemon_network_actions_seconds_count`.
 
-![Idle Prometheus report](images/prometheus-graph_idle.webp)
+![Idle Prometheus report](images/config/daemon/prometheus-graph_idle.webp)
 
 The graph shows a pretty idle Docker instance, unless you're already running
 active workloads on your system.
@@ -146,7 +146,7 @@ Wait a few seconds (the default scrape interval is 15 seconds) and reload your
 graph. You should see an uptick in the graph, showing the increased network
 traffic caused by the container you just ran.
 
-![Prometheus report showing traffic](images/prometheus-graph_load.webp)
+![Prometheus report showing traffic](images/config/daemon/prometheus-graph_load.webp)
 
 ## Next steps
 

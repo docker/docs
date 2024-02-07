@@ -11,7 +11,7 @@ Docker Build implements a client-server architecture, where:
 - Buildx is the client and the user interface for running and managing builds
 - BuildKit is the server, or builder, that handles the build execution.
 
-![Build high-level architecture](./images/build-high-level-arch.png)
+![Build high-level architecture](images/build/build-high-level-arch.png)
 
 As of Docker Engine 23.0 and Docker Desktop 4.19, Buildx is the default build
 client.
@@ -90,4 +90,4 @@ For more information about BuildKit, see [BuildKit](buildkit/index.md).
 The following diagram shows an example build sequence involving Buildx and
 BuildKit.
 
-![Buildx and BuildKit sequence diagram](./images/build-execution.png)
+![Buildx and BuildKit sequence diagram](images/build/build-execution.png)

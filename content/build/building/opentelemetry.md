@@ -35,4 +35,4 @@ $ docker buildx inspect --bootstrap
 
 Buildx commands should be traced at `http://127.0.0.1:16686/`:
 
-![OpenTelemetry Buildx Bake](../images/opentelemetry.png)
+![OpenTelemetry Buildx Bake](images/build/opentelemetry.png)

@@ -8,7 +8,7 @@ This walkthrough shows you how to persist data between containers. To better und
 
 Docker isolates all content, code, and data in a container from your local filesystem. When you delete a container, Docker deletes all the content within that container.
 
-![Data isolation diagram](images/getting-started-isolation.webp?w=400)
+![Data isolation diagram](images/guides/walkthroughs/getting-started-isolation.webp)
 
 Sometimes, you may want to persist the data that a container generates. To do this, you can use volumes.
 
@@ -41,7 +41,7 @@ Download the source and extract it.
 
 To persist data after you delete a container, use a volume. A volume is a location in your local filesystem, automatically managed by Docker Desktop.
 
-![Volume diagram](images/getting-started-volume.webp?w=400)
+![Volume diagram](images/guides/walkthroughs/getting-started-volume.webp)
 
 To add a volume to this project, open the `compose.yaml` file in a code or text editor, and then uncomment the following lines.
 
@@ -92,7 +92,7 @@ To delete the application stack:
 1. Open the **Containers** tab of Docker Desktop
 2. Select the Delete icon next to your application stack.
 
-![Deleting the application stack](images/getting-started-delete-stack.webp?border=true)
+![Deleting the application stack](images/guides/walkthroughs/getting-started-delete-stack.webp)
 
 After you delete the application stack, follow the steps from [Step 3: Run the
 application](#step-3-run-the-application) to run the application again. Note

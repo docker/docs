@@ -60,4 +60,4 @@ Docker doesn't automatically mandate that developers re-launch and re-authentica
 
 Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or the `settings.json` file. In addition, if Enhanced Container Isolation is enforced, users can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
 
-![Proxy settings grayed out](/assets/images/grayed-setting.png)
+![Proxy settings grayed out](images/grayed-setting.png)

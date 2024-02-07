@@ -4,7 +4,7 @@ description: Understand how to use the Builds view in Docker Desktop
 keywords: Docker Dashboard, manage, gui, dashboard, builders, builds
 ---
 
-![Builds view in Docker Desktop](../images/builds-view.webp)
+![Builds view in Docker Desktop](images/desktop/builds-view.webp)
 
 The **Builds** view is a simple interface that lets you inspect your build
 history and manage builders using Docker Desktop. By default, it
@@ -45,7 +45,7 @@ If you're inspecting a multi-platform build, the drop-down menu in the
 top-right of this tab lets you filter the information down to a specific
 platform:
 
-![Platform filter](../images/build-ui-platform-menu.webp?w=400)
+![Platform filter](images/desktop/build-ui-platform-menu.webp)
 
 The **Source details** section shows the filepath to the
 [frontend](../../build/dockerfile/frontend.md) that was used and, if available,
@@ -59,7 +59,7 @@ execution from various angles.
 - **Cache usage** shows the extent to which build operations were cached.
 - **Parallel execution** shows how much of the build execution time was spent running steps in parallel.
 
-![Build timing charts](../images/build-ui-timing-chart.webp)
+![Build timing charts](images/desktop/build-ui-timing-chart.webp)
 
 The chart colors and legend keys describe the different build operations. Build
 operations are defined as follows:
@@ -135,7 +135,7 @@ or in the **Past builds** list below the history tab.
 To inspect your builders, and change your default builder, select **Builder
 settings** to open the settings menu.
 
-![Builder settings drop-down](../images/build-ui-manage-builders.webp)
+![Builder settings drop-down](images/desktop/build-ui-manage-builders.webp)
 
 For more information about managing builders, see:
 

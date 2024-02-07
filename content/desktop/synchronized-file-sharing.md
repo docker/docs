@@ -10,7 +10,7 @@ keyword: mutagen, file sharing, docker desktop, bind mounts
 
 Synchronized file shares is an alternative file sharing mechanism that provides fast and flexible host-to-VM file sharing, enhancing bind mount performance through the use of synchronized filesystem caches. 
 
-![Image of Synchronized file shares pane](images/synched-file-shares.webp)
+![Image of Synchronized file shares pane](images/desktop/synched-file-shares.webp)
  
 ## Who is it for?
 

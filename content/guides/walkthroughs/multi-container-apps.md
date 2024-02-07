@@ -33,7 +33,7 @@ Download the source and extract it.
 
 The sample application is a simple todo application built using ExpressJS and Node.js. The application saves all todos in a MongoDB database. You don't need to know any of these technologies to continue with the walkthrough.
 
-![The sample app architecture](images/getting-started-multi-container.webp?w=450&border=true)
+![The sample app architecture](images/guides/walkthroughs/getting-started-multi-container.webp)
 
 ## Step 2: Dig into the Compose file
 
@@ -91,7 +91,7 @@ To delete the application stack:
 1. Open the **Containers** tab of Docker Desktop
 2. Select the Delete icon next to your application stack.
 
-![Deleting the application stack](images/getting-started-delete-stack.webp?border=true)
+![Deleting the application stack](images/guides/walkthroughs/getting-started-delete-stack.webp)
 
 After you delete the application stack, follow the steps from [Step 3: Run the
 application](#step-3-run-the-application) to run the application again. Note

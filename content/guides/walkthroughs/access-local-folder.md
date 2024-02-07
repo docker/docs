@@ -8,7 +8,7 @@ This walkthrough shows you how to access a local folder from a container. To bet
 
 Docker isolates all content, code, and data in a container from your local filesystem. By default, containers can't access directories in your local filesystem.
 
-![Data isolation diagram](images/getting-started-isolation.webp?w=400)
+![Data isolation diagram](images/guides/walkthroughs/getting-started-isolation.webp)
 
 Sometimes, you may want to access a directory from your local filesystem. To do this, you can use bind mounts.
 
@@ -42,7 +42,7 @@ Download the source and extract it.
 
 Add a bind mount to access data on your system from a container. A bind mount lets you share a directory from your host's filesystem into the container.
 
-![Bind mount diagram](images/getting-started-bindmount.webp?w=400)
+![Bind mount diagram](images/guides/walkthroughs/getting-started-bindmount.webp)
 
 To add a bind mount to this project, open the `compose.yaml` file in a code or text editor, and then uncomment the following lines.
 

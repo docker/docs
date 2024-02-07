@@ -34,7 +34,7 @@ $ docker buildx use cloud-<ORG>-<BUILDER_NAME> --global
 2. Find the cloud builder under **Available builders**.
 3. Open the drop-down menu and select **Use**.
 
-   ![Selecting the cloud builder as default using the Docker Desktop GUI](/build/images/set-default-builder-gui.webp)
+   ![Selecting the cloud builder as default using the Docker Desktop GUI](images/build/set-default-builder-gui.webp)
 
 {{< /tab >}}
 {{< /tabs >}}

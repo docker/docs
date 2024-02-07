@@ -108,7 +108,7 @@ When you build using a builder that supports multi-platform builds, the builder
 runs all of the build steps under emulation for each platform that you specify.
 Effectively forking the build into two concurrent processes.
 
-![Build pipelines using emulation](./images/emulation.png)
+![Build pipelines using emulation](images/build/guide/emulation.png)
 
 There are, however, a few downsides to running multi-platform builds using
 emulation:
@@ -153,7 +153,7 @@ the pre-defined platform arguments are forked automatically for each platform.
 This is in contrast to builds running under emulation, where the entire build
 pipeline runs per platform.
 
-![Build pipelines using cross-compilation](./images/cross-compilation.png)
+![Build pipelines using cross-compilation](images/build/guide/cross-compilation.png)
 
 ### Update the Dockerfile
 

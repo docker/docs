@@ -26,7 +26,7 @@ The first thing you need is a running container. Use the following instructions 
 3. Expand the **Optional settings**.
 4. In **Container name**, specify `welcome-to-docker`.
 5. In **Host port**, specify `8088`.
-   ![Specifying host port 8088](images/getting-started-setup.webp?w=500&border=true)
+   ![Specifying host port 8088](images/guides/walkthroughs/getting-started-setup.webp)
 6. Select **Run**.
 
 ## Step 2: View containers on Docker Desktop
@@ -43,7 +43,7 @@ The frontend is accessible on port 8088 of your local host. Select the link in
 the **Port(s)** column of your container, or visit
 [http://localhost:8088](http://localhost:8088) in your browser to view it.
 
-![Accessing container frontend from Docker Desktop](images/getting-started-frontend.webp?border=true)
+![Accessing container frontend from Docker Desktop](images/guides/walkthroughs/getting-started-frontend.webp)
 
 ## Step 4: Explore your container
 
@@ -51,7 +51,7 @@ Docker Desktop lets you easily view and interact with different aspects of your
 container. Try it out yourself. Select your container and then select **Files**
 to explore your container's isolated file system.
 
-![Viewing container details in Docker Desktop](images/getting-started-explore-container.webp?border=true)
+![Viewing container details in Docker Desktop](images/guides/walkthroughs/getting-started-explore-container.webp)
 
 ## Step 5: Stop your container
 
@@ -59,7 +59,7 @@ The `welcome-to-docker` container continues to run until you stop it. To stop
 the container in Docker Desktop, go to the **Containers** tab and select the
 **Stop** icon in the **Actions** column of your container.
 
-![Stopping a container in Docker Desktop](images/getting-started-stop.webp?border=true)
+![Stopping a container in Docker Desktop](images/guides/walkthroughs/getting-started-stop.webp)
 
 ## Summary
 

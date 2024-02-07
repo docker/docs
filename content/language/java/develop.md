@@ -171,7 +171,7 @@ $ docker compose -f docker-compose.dev.yml up --build
 
 You pass the `--build` flag so Docker will compile your image and then starts the containers. You should see similar output if it runs successfully:
 
-![Java Compose output](images/java-compose-output.webp)
+![Java Compose output](images/language/java/java-compose-output.webp)
 
 Now, test your API endpoint. Run the following curl command:
 
@@ -191,7 +191,7 @@ You should receive the following response:
 
 You’ll use the debugger that comes with the IntelliJ IDEA. You can use the community version of this IDE. Open your project in IntelliJ IDEA, go to the **Run** menu, and then **Edit Configuration**. Add a new Remote JVM Debug configuration similar to the following:
 
-![Java Connect a Debugger](images/connect-debugger.webp)
+![Java Connect a Debugger](images/language/java/connect-debugger.webp)
 
 Set a breakpoint.
 
@@ -199,11 +199,11 @@ Open `src/main/java/org/springframework/samples/petclinic/vet/VetController.java
 
 To start your debug session, select the **Run** menu and then **Debug _NameOfYourConfiguration_**.
 
-![Debug menu](images/debug-menu.webp?w=300)
+![Debug menu](images/language/java/debug-menu.webp)
 
 You should now see the connection in the logs of your Compose application.
 
-![Compose log file ](images/compose-logs.webp)
+![Compose log file ](images/language/java/compose-logs.webp)
 
 You can now call the server endpoint.
 
@@ -213,7 +213,7 @@ $ curl --request GET --url http://localhost:8080/vets
 
 You should have seen the code break on the marked line and now you are able to use the debugger just like you would normally. You can also inspect and watch variables, set conditional breakpoints, view stack traces and a do bunch of other stuff.
 
-![Debugger code breakpoint](images/debugger-breakpoint.webp)
+![Debugger code breakpoint](images/language/java/debugger-breakpoint.webp)
 
 You can also activate the live reload option provided by SpringBoot Dev Tools. Check out the [SpringBoot documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-devtools-remote) for information on how to connect to a remote application.
 

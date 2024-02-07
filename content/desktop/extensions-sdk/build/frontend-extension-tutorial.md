@@ -197,7 +197,7 @@ provide you with type definitions for the extension APIs and auto-completion in 
 npm install @docker/extension-api-client-types --save-dev
 ```
 
-![Auto completion in an IDE](images/types-autocomplete.png)
+![Auto completion in an IDE](images/desktop/extensions-sdk/build/types-autocomplete.png)
 
 For example, you can use the `docker.cli.exec` function to get the list of all the containers via the `docker ps --all`
 command and display the result in a table.
@@ -284,7 +284,7 @@ export function App() {
 
 ```
 
-![Screenshot of the container list.](images/react-extension.png)
+![Screenshot of the container list.](images/desktop/extensions-sdk/build/react-extension.png)
 
 {{< /tab >}}
 {{< tab name="Vue" >}}

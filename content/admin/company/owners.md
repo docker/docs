@@ -25,7 +25,7 @@ Once you've added the new owner, you can view the user in the **Company owners**
 2. In the **Overview** tab, find the company owner you want to remove.
 3. Select the **Action** icon and remove the owner.
 
-    ![remove-owner](../images/remove-owner.png)
+    ![remove-owner](images/admin/remove-owner.png)
 
 {{< /tab >}}
 {{< tab name="Admin Console" >}}

@@ -163,7 +163,7 @@ To start the todo app container with the volume mounted:
 
 1. Once the container starts up, open the app and add a few items to your todo list.
 
-    ![Items added to todo list](images/items-added.webp)
+    ![Items added to todo list](images/get-started/items-added.webp)
     
 
 2. Stop and remove the container for the todo app. Use Docker Desktop or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.

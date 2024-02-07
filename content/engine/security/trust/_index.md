@@ -58,7 +58,7 @@ tag could be unsigned while the `3.1.6` tag could be signed. It is the
 responsibility of the image publisher to decide if an image tag is signed or
 not. In this representation, some image tags are signed, others are not:
 
-![Signed tags](images/tag_signing.png)
+![Signed tags](images/engine/security/trust/tag_signing.png)
 
 Publishers can choose to sign a specific tag or not. As a result, the content of
 an unsigned tag and that of a signed tag with the same name may not match. For
@@ -74,7 +74,7 @@ Enabling DCT is a bit like applying a "filter" to your registry. Consumers "see"
 only signed image tags and the less desirable, unsigned image tags are
 "invisible" to them.
 
-![Trust view](images/trust_view.png)
+![Trust view](images/engine/security/trust/trust_view.png)
 
 To the consumer who has not enabled DCT, nothing about how they work with Docker
 images changes. Every image is visible regardless of whether it is signed or
@@ -93,7 +93,7 @@ of the following classes of keys:
 
 The following image depicts the various signing keys and their relationships:
 
-![Content Trust components](images/trust_components.png)
+![Content Trust components](images/engine/security/trust/trust_components.png)
 
 > **Warning**
 >

@@ -8,7 +8,7 @@ Extensions use image labels to provide additional information such as title, des
 
 This information is then displayed as an overview of the extension, so users can choose to install it
 
-![An extension overveiw, generated from labels](images/marketplace-details.png)
+![An extension overveiw, generated from labels](images/desktop/extensions-sdk/extensions/marketplace-details.png)
 
 You can define [Image labels](../../../engine/reference/builder.md#label) in the extension's `Dockerfile`.
 
@@ -54,4 +54,4 @@ When you create and install your unpublished extension, you can preview the exte
 > You can re-tag your image in order to have a different image name that's not listed as a published extension.
 > Use `docker tag org/published-extension unpublished-extension` and then `docker extension install unpublished-extension`.
 
-![List preview](images/list-preview.png)
+![List preview](images/desktop/extensions-sdk/extensions/list-preview.png)

@@ -33,7 +33,7 @@ The network named `bridge` is a special network. Unless you tell it otherwise, D
 
     74695c9cea6d9810718fddadc01a727a5dd3ce6a69d09752239736c030599741
 
-![bridge1](bridge1.png)
+![bridge1](images/engine/tutorials/bridge1.png)
 
 Inspecting the network is an easy way to find out the container's IP address.
 
@@ -154,7 +154,7 @@ Now, go ahead and start your by now familiar web application. This time don't sp
 
     $ docker run -d --name web training/webapp python app.py
 
-![bridge2](bridge2.png)
+![bridge2](images/engine/tutorials/bridge2.png)
 
 Which network is your `web` application running under? Inspect the application to verify that it is running in the default `bridge` network.
 
@@ -191,7 +191,7 @@ Docker networking allows you to attach a container to as many networks as you li
     $ docker network connect my_bridge web
 
 
-![bridge3](bridge3.png)
+![bridge3](images/engine/tutorials/bridge3.png)
 
 Open a shell into the `db` application again and try the ping command. This time just use the container name `web` rather than the IP address.
 

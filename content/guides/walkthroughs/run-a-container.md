@@ -8,7 +8,7 @@ aliases:
 
 In this walkthrough, you'll learn the basic steps of building an image and running your own container. This walkthrough uses a sample Node.js application, but it's not necessary to know Node.js.
 
-![Running an image in Docker Desktop](images/getting-started-run-intro.webp?w=450&border=true)
+![Running an image in Docker Desktop](images/guides/walkthroughs/getting-started-run-intro.webp)
 
 {{< include "guides-get-docker.md" >}}
 
@@ -67,14 +67,14 @@ To run your image as a container:
 2. Next to your image, select **Run**.
 3. Expand the **Optional settings**.
 4. In **Host port**, specify `8089`.
-   ![Specifying host port 8089](images/getting-started-run-image.webp?w=500&border=true)
+   ![Specifying host port 8089](images/guides/walkthroughs/getting-started-run-image.webp)
 5. Select **Run**.
 
 ## Step 5: View the frontend
 
 You can use Docker Desktop to access your running container. Select the link next to your container in Docker Desktop or go to [http://localhost:8089](http://localhost:8089) to view the frontend.
 
-![Selecting the container link](images/getting-started-frontend-2.webp?border=true)
+![Selecting the container link](images/guides/walkthroughs/getting-started-frontend-2.webp)
 
 ## Summary
 

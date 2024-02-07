@@ -15,7 +15,7 @@ This page provides:
 
 ## Introduction
 
-![Image showing the main differences between Compose V1 and Compose V2](../images/v1-versus-v2.png)
+![Image showing the main differences between Compose V1 and Compose V2](images/compose/v1-versus-v2.png)
 
 The image above shows that the currently supported version of the Docker Compose CLI is Compose V2 which is defined by the [Compose Specification](../compose-file/_index.md).
 

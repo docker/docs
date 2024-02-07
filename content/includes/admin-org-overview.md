@@ -11,4 +11,4 @@ organization.
 
 The following diagram depicts the setup of an organization and how it relates to teams. Teams are an optional feature that owners can use to group members and assign permissions.
 
-![organization-hierarchy](/admin/images/org-structure.webp)
+![organization-hierarchy](images/admin/org-structure.webp)

@@ -21,7 +21,7 @@ available. If you are developing new Docker applications, consider using
 [named volumes](volumes.md) instead. You can't use Docker CLI commands to directly
 manage bind mounts.
 
-![Bind mounts on the Docker host](images/types-of-mounts-bind.webp?w=450&h=300)
+![Bind mounts on the Docker host](images/storage/types-of-mounts-bind.webp)
 
 > **Tip**
 >

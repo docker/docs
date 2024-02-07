@@ -48,7 +48,7 @@ needs more information about the image.
 To view recommended actions for an image, hover over one of the images in the
 list to reveal a **View fixes** button.
 
-![Remediation for policy violations](../images/remediation.png)
+![Remediation for policy violations](images/scout/remediation.png)
 
 Select the **View fixes** button to opens the remediation side panel containing
 recommended actions for your image.

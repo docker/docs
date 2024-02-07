@@ -34,7 +34,7 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
 4. Review the settings for the **Docker Hub Builder** OAuth application.
 
-    ![Granting access to GitHub account](images/authorize-builder.png)
+    ![Granting access to GitHub account](images/docker-hub/builds/authorize-builder.png)
 
     >**Note**
     >

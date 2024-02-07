@@ -18,13 +18,13 @@ To get the example image:
 2. In the search bar, specify `docker/welcome-to-docker`.
 3. Select **Pull** to pull the image from Docker Hub to you computer.
 
-![Search Docker Desktop for the welcome-to-docker image](images/getting-started-search.webp?w=650&border=true)
+![Search Docker Desktop for the welcome-to-docker image](images/guides/walkthroughs/getting-started-search.webp)
 
 ## Step 2: Sign in to Docker
 
 Select **Sign in** on the top-right of Docker Desktop to either sign in or create a new Docker account.
 
-![Signing in to Docker Desktop](images/getting-started-signin.webp?w=300&border=true)
+![Signing in to Docker Desktop](images/guides/walkthroughs/getting-started-signin.webp)
 
 ## Step 3: Rename your image
 
@@ -44,9 +44,9 @@ To push your image to Docker Hub:
 2. In the **Actions** column for your image, select the **Show image actions** icon.
 3. Select **Push to Hub**.
 
-![Pushing an image to Docker Hub](images/getting-started-push.webp?border=true)
+![Pushing an image to Docker Hub](images/guides/walkthroughs/getting-started-push.webp)
 
-Go to [Docker Hub](https://hub.docker.com)⁠ and verify that the list of your repositories now contains `YOUR-USERNAME/welcome-to-docker`.
+Go to [Docker Hub](https://hub.docker.com) and verify that the list of your repositories now contains `YOUR-USERNAME/welcome-to-docker`.
 
 ## Summary
 

@@ -21,10 +21,10 @@ This page contains information on how to diagnose and troubleshoot Docker Deskto
 
 To navigate to **Troubleshoot** either:
 
-- Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Troubleshoot**
+- Select the Docker menu {{< inline-image src="images/whale-x.svg" alt="whale menu" >}} and then **Troubleshoot**
 - Select the **Troubleshoot** icon near the top-right corner of Docker Dashboard
 
-![Troubleshoot menu in Docker Desktop](../images/troubleshoot.png)
+![Troubleshoot menu in Docker Desktop](images/desktop/troubleshoot.png)
 
 The **Troubleshoot** page contains the following options:
 
@@ -57,7 +57,7 @@ If you are a Mac or Linux user, you also have the option to **Uninstall** Docker
 
 1. From **Troubleshoot**, select **Get support**. 
 This opens the in-app **Support** page and starts collecting the diagnostics.
-    ![Diagnose & Feedback](../images/diagnose-support.png)
+    ![Diagnose & Feedback](images/desktop/diagnose-support.png)
 2. When the diagnostics collection process is complete, select **Upload to get a Diagnostic ID**.
 3. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
 4. Use your diagnostics ID to get help:
@@ -272,7 +272,7 @@ Spotlight Search.
 
 To read the Docker app log messages, type `docker` in the Console window search bar and press Enter. Then select `ANY` to expand the drop-down list next to your `docker` search entry, and select `Process`.
 
-![Mac Console search for Docker app](../images/console.png)
+![Mac Console search for Docker app](images/desktop/console.png)
 
 You can use the Console Log Query to search logs, filter the results in various
 ways, and create reports.

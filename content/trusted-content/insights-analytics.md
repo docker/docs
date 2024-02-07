@@ -32,7 +32,7 @@ To view data in the chart:
 - Select the time interval: 3, 6, or 12 months
 - Select one or more repositories in the list
 
-![Insights and analytics chart visualization](./images/chart.png)
+![Insights and analytics chart visualization](images/trusted-content/chart.png)
 
 <!-- prettier-ignore -->
 > **Tip**
@@ -46,7 +46,7 @@ To view data in the chart:
 You can share the visualization with others using the **Share** icon above the chart.
 This is a convenient way to share statistics with others in your organization.
 
-![Chart share icon](./images/chart-share-icon.png)
+![Chart share icon](images/trusted-content/chart-share-icon.png)
 
 Selecting the icon generates a link that's copied to your clipboard. The link
 preserves the display selections you made. When someone follows the link, the
@@ -71,14 +71,14 @@ Export usage data for your organization's images using the Docker Hub website by
 
 2.  Choose your organization and select **Insights and analytics**.
 
-    ![Organization overview page, with the Insights and Analytics tab](./images/organization-tabs.png)
+    ![Organization overview page, with the Insights and Analytics tab](images/trusted-content/organization-tabs.png)
 
 3.  Set the time span for which you want to export analytics data.
 
     The downloadable CSV files for summary and raw data appear on the right-hand
     side.
 
-    ![Filtering options and download links for analytics data](./images/download-analytics-data.png)
+    ![Filtering options and download links for analytics data](images/trusted-content/download-analytics-data.png)
 
 ### Export data using the API
 

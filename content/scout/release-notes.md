@@ -143,7 +143,7 @@ Policy Evaluation is an early access feature that helps you ensure software
 integrity and track how your artifacts are doing over time. This release ships
 with four out-of-the-box policies, enabled by default for all organizations.
 
-![Policy overview in Dashboard](./images/release-notes/policy-ea.webp)
+![Policy overview in Dashboard](images/scout/release-notes/policy-ea.webp)
 
 - **Base images not up-to-date** evaluates whether the base images are out of
   date, and require updating. Up-to-date base images help you ensure that your
@@ -193,7 +193,7 @@ documentation](./integrations/environment/sysdig.md).
 The new JFrog Artifactory integration enables automatic image analysis on
 Artifactory registries.
 
-![Animation of how to integrate Artifactory](./images/release-notes/artifactory-agent.gif)
+![Animation of how to integrate Artifactory](images/scout/release-notes/artifactory-agent.gif)
 
 The integration involves deploying a Docker Scout Artifactory agent that polls
 for new images, performs analysis, and uploads results to Docker Scout, all

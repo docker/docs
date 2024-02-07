@@ -136,7 +136,7 @@ d28bdb47b683: Pushed
 
 Inspecting the tag on Docker Hub shows that the image is available for multiple platforms.
 
-![Multiplatform image tag on Docker Hub](images/containerd_multiplatform.png)
+![Multiplatform image tag on Docker Hub](images/desktop/containerd_multiplatform.png)
 
 ## Known issues
 

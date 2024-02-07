@@ -200,7 +200,7 @@ Docker image locally.
 
 5. Your repository in Docker Hub should now display a new `latest` tag under **Tags**:
 
-    ![Tag created](images/index-tag.webp)
+    ![Tag created](images/docker-hub/index-tag.webp)
 
 You've successfully:
 

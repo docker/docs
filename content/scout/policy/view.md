@@ -22,7 +22,7 @@ displays a summary of recent changes in policy for your repositories.
 This summary shows images that have seen the most change in their policy
 evaluation between the most recent image and the previous image.
 
-![Policy overview](../images/policy-overview.webp)
+![Policy overview](images/scout/policy-overview.webp)
 
 ### Policy status per repository
 
@@ -33,7 +33,7 @@ list shows:
 - Number of fulfilled policies versus the total number of policies
 - Recent policy trends
 
-![Policy status in the image list](../images/policy-image-list.webp)
+![Policy status in the image list](images/scout/policy-image-list.webp)
 
 The policy trend, denoted by the directional arrows, indicates whether an image
 is better, worse, or unchanged in terms of policy, compared to the previous
@@ -56,12 +56,12 @@ To view the full evaluation results for an image, navigate to the image tag in
 the Docker Scout Dashboard and open the **Policy** tab. This shows a breakdown
 for all policy violations for the current image.
 
-![Detailed Policy Evaluation results](../images/policy-detailed-results.webp)
+![Detailed Policy Evaluation results](images/scout/policy-detailed-results.webp)
 
 This view also provides recommendations on how to improve improve policy status
 for violated policies.
 
-![Policy details in the tag view](../images/policy-tag-view.webp)
+![Policy details in the tag view](images/scout/policy-tag-view.webp)
 
 For vulnerability-related policies, the policy details view displays the fix
 version that removes the vulnerability, when a fix version is available. To fix

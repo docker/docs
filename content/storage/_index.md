@@ -36,7 +36,7 @@ in the container's filesystem.
 An easy way to visualize the difference among volumes, bind mounts, and `tmpfs`
 mounts is to think about where the data lives on the Docker host.
 
-![Types of mounts and where they live on the Docker host](images/types-of-mounts.webp?w=450&h=300)
+![Types of mounts and where they live on the Docker host](images/storage/types-of-mounts.webp)
 
 - Volumes are stored in a part of the host filesystem which is _managed by
   Docker_ (`/var/lib/docker/volumes/` on Linux). Non-Docker processes should not

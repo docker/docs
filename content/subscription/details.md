@@ -8,7 +8,7 @@ You can do more with Docker with a Docker Core subscription, such as add collabo
 
 The following describes some of the key features included with your Docker Core subscription:
 
-![Docker Core subscription diagram](images/subscription-diagram.webp)
+![Docker Core subscription diagram](images/subscription/subscription-diagram.webp)
 
 3 Docker Scout-enabled repositories for advanced remote image analysis. You can purchase a Docker Scout subscription to enable more repositories. See [Docker Scout subscriptions and features](./scout-details.md).
 

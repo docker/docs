@@ -20,7 +20,7 @@ resources, see [CloudFormation stack template](#cloudformation-stack-template).
 
 The following diagram shows how the Docker Scout ECR integration works.
 
-![How the ECR integration works](../../images/Scout-ECR.png)
+![How the ECR integration works](images/scout/Scout-ECR.png)
 
 After the integration, Docker Scout automatically pulls and analyzes images
 that you push to the ECR registry. Metadata about your images are stored on the

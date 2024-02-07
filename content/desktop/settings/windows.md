@@ -9,7 +9,7 @@ This page provides information on how to configure and manage your Docker Deskto
 
 To navigate to **Settings** either:
 
-- Select the Docker menu {{< inline-image src="../images/whale-x.svg" alt="whale menu" >}} and then **Settings**
+- Select the Docker menu {{< inline-image src="images/whale-x.svg" alt="whale menu" >}} and then **Settings**
 - Select the **Settings** icon from the Docker Dashboard.
 
 You can also locate the `settings.json` file at `C:\Users\[USERNAME]\AppData\Roaming\Docker\settings.json`.
@@ -185,7 +185,7 @@ popup asking if you want to share the specified folder.
 You can select to **Share it**, in which case it is added to your Docker Desktop Shared Folders list and available to
 containers. Alternatively, you can opt not to share it by selecting **Cancel**.
 
-![Shared folder on demand](../images/shared-folder-on-demand.png)
+![Shared folder on demand](images/desktop/shared-folder-on-demand.png)
 
 ### Proxies
 

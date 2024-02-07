@@ -185,7 +185,7 @@ image pulled from the Docker Hub registry.
    Hello World! I have been seen 1 times.
    ```
 
-   ![hello world in browser](images/quick-hello-world-1.png)
+   ![hello world in browser](images/compose/quick-hello-world-1.png)
 
 3. Refresh the page.
 
@@ -195,7 +195,7 @@ image pulled from the Docker Hub registry.
    Hello World! I have been seen 2 times.
    ```
 
-   ![hello world in browser](images/quick-hello-world-2.png)
+   ![hello world in browser](images/compose/quick-hello-world-2.png)
 
 4. Switch to another terminal window, and type `docker image ls` to list local images.
 
@@ -299,7 +299,7 @@ return 'Hello from Docker! I have been seen {} times.\n'.format(count)
 Refresh the app in your browser. The greeting should be updated, and the
 counter should still be incrementing.
 
-![hello world in browser](images/quick-hello-world-3.png)
+![hello world in browser](images/compose/quick-hello-world-3.png)
 
 ## Step 8: Experiment with some other commands
 
