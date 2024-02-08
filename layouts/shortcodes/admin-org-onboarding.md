@@ -1,13 +1,3 @@
-{{ $sso_link := "[Configure SSO](/security/for-admins/single-sign-on/)" }}
-{{ $scim_link := "[Configure SCIM](/security/for-admins/scim/)" }}
-{{ $audit_link := "[Audit your domains](/docker-hub/domain-audit/)" }}
-
-{{ if eq (.Get "product") "admin" }}
-  {{ $sso_link = "[Configure SSO](/security/for-admins/single-sign-on/)" }}
-  {{ $scim_link = "[Configure SCIM](/security/for-admins/scim/)" }}
-  {{ $audit_link = "[Audit your domains](/admin/organization/security-settings/domains/)" }}
-{{ end }}
-
 Onboarding your organization allows you to gain visibility into the activity of your users and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](/subscription/details/).
 
 In this guide, you'll learn how to get started with the following:
@@ -60,8 +50,9 @@ To add a member, invite a user and assign them the member role. For more details
 Configuring SSO and SCIM is optional and only available to Docker Business subscribers. To upgrade a Docker Team subscription to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
 
 You can manage your members in your identity provider and automatically provision them to your Docker organization with SSO and SCIM. See the following for more details.
-   - {{ $sso_link }} to authenticate and add members when they sign in to Docker through your identity provider.
-   - {{ $scim_link }} to automatically provision, add, and de-provision members to Docker through your identity provider.
+   - [Configure SSO](/security/for-admins/single-sign-on/) to authenticate and add members when they sign in to Docker through your identity provider.
+   - Optional: [Enforce SSO](/security/for-admins/single-sign-on/configure/#optional-step-four-enforce-sso) to ensure that users must sign in to Docker with SSO.
+   - [Configure SCIM](/security/for-admins/scim/) to automatically provision, add, and de-provision members to Docker through your identity provider.
 
 
 ## Step 5: Enforce sign-in for Docker Desktop
@@ -73,6 +64,6 @@ By default, members of your organization can use Docker Desktop on their machine
 - [Create](/docker-hub/repos/create/) and [manage](/docker-hub/repos/) repositories.
 - Create [teams](/admin/organization/manage-a-team/) for fine-grained repository access.
 - Configure [Hardened Docker Desktop](/desktop/hardened-desktop/) to improve your organization’s security posture for containerized development.
-- {{ $audit_link }} to ensure that all Docker users in your domain are part of your organization.
+- [Audit your domains](/docker-hub/domain-audit/) to ensure that all Docker users in your domain are part of your organization.
 
 Your Docker subscription provides many more additional features. To learn more, see [Docker subscriptions and features](/subscription/details/).
