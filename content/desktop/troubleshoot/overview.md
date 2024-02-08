@@ -186,10 +186,10 @@ Docker Desktop contains a self-diagnose tool which can help you identify some co
    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
    ```
 
-2. Run the self-diagnose tool:
+2. In PowerShell, run the self-diagnose tool:
 
    ```console
-   $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
+   $ & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
    ```
 
 {{< /tab >}}
