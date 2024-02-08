@@ -34,6 +34,10 @@ Docker Build Cloud provides several benefits over local builds:
 
 And the best part: you don't need to worry about managing builders or
 infrastructure. Just connect to your builders, and start building.
+Each cloud builder provisioned to an organization is completely
+isolated to a single Amazon EC2 instance, with a dedicated EBS volume for build
+cache, and end-to-end encryption. That means there are no shared processes or
+data between cloud builders.
 
 > **Note**
 >

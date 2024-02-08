@@ -15,13 +15,6 @@ aliases:
 - [Can I use Docker Build Cloud with a registry behind a VPN?](#can-i-use-docker-build-cloud-with-a-registry-behind-a-vpn)
 <!--toc:end-->
 
-### Are builders shared between organizations?
-
-No. Each cloud builder provisioned to an organization is completely
-isolated to a single Amazon EC2 instance, with a dedicated EBS volume for build
-cache, and end-to-end encryption. That means there are no shared processes or
-data between cloud builders.
-
 ### Do I need to add my secrets to the builder to access private resources?
 
 No. Your interface to Docker Build Cloud is Buildx, and you can use the existing
