@@ -183,3 +183,10 @@ $ docker context use default
 
 This doesn't remove the builder from your system.
 It only changes the builder that's automatically selected to run your builds.
+
+## Registries on internal networks
+
+It isn't possible to use Docker Build Cloud with a private registry
+or registry mirror on an internal network behind a VPN.
+All endpoints that a cloud builder interacts with,
+including OCI registries, must be accessible over the internet.

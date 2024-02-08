@@ -4,6 +4,7 @@ description: Get started with Docker Build Cloud
 keywords: build, cloud, cloud build, remote builder
 aliases:
   - /build/hydrobuild/
+  - /build/cloud/faq/
 ---
 
 Docker Build Cloud is a service that lets you build your container images
@@ -65,8 +66,3 @@ builder in your local environment](./setup.md).
 
 For more information about the available subscription plans, see [Docker Build Cloud
 subscriptions and features](../../subscription/build-details.md).
-
-## Frequently asked questions
-
-The [Docker Build Cloud FAQ](./faq.md) page lists common questions and answers about
-Docker Build Cloud.
