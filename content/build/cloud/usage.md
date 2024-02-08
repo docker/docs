@@ -152,6 +152,24 @@ For more information, refer to:
 - [`docker buildx build --secret`](/engine/reference/commandline/buildx_build/#secret)
 - [`docker buildx build --ssh`](/engine/reference/commandline/buildx_build/#ssh)
 
+## Managing build cache
+
+You don't need to manage Docker Build Cloud cache manually.
+The system manages it for you through [garbage collection](/build/cache/garbage-collection/).
+
+Old cache is automatically removed if you hit your storage limit.
+You can check your current cache state using the
+[`docker buildx du` command](/engine/reference/commandline/buildx_du/).
+
+To clear the builder's cache manually,
+use the [`docker buildx prune` command](/engine/reference/commandline/buildx_prune/).
+This works like pruning the cache for any other builder.
+
+> **Warning**
+>
+> Pruning a cloud builder's cache also removes the cache for other team members
+> using the same builder.
+{ .warning }
 
 ## Unset Docker Build Cloud as the default builder
 
