@@ -7,11 +7,11 @@ description: Build and push your first image
 Now that you've updated the to-do app, let's create a container image for the application and share it on Docker Hub! To do so, we will need to do the following:
 
 1. Sign in with your Docker account
-1. Create an image repository on Docker Hub
-1. Build the container image
-1. Push it to Docker Hub
+2. Create an image repository on Docker Hub
+3. Build the container image
+4. Push it to Docker Hub
 
-[ VIDEO WILL GO HERE ]
+VIDEO WILL GO HERE
 
 
 ## Intro to Docker Hub
@@ -36,9 +36,9 @@ In order to push images to Docker Hub, you will need to sign in with a Docker ac
 
 1. Open the Docker Desktop dashboard.
 
-1. Click on the **Sign in** button in the top-right corner.
+2. Click on the **Sign in** button in the top-right corner.
 
-1. If needed, create an account and then complete the login flow.
+3. If needed, create an account and then complete the login flow.
 
 When you're done, you should see the **Sign in** button turn into a profile picture.
 
@@ -48,15 +48,15 @@ Now that you have an account, let's create an image repository. Just as a git re
 
 1. Go to [Docker Hub](https://hub.docker.com).
 
-1. Click the **Create repository** button.
+2. Click the **Create repository** button.
 
-1. On the **Create repository** page, enter the following information:
+3. On the **Create repository** page, enter the following information:
 
     - **Repository name** - `getting-started-todo-app`
     - **Short description** - feel free to enter a description if you'd like
     - **Visibility** - select **Public** to allow others to pull your customized to-do app
 
-1. Click the **Create** button to create the repository.
+4. Click the **Create** button to create the repository.
 
 
 ## Build and push the image
@@ -81,7 +81,7 @@ Now that you have a repository, you are ready to build and push your image. An i
 
 1. Open a terminal to the root of the project.
 
-1. Build the project by running the following command, swapping out `DOCKER_USERNAME` with your username.
+2. Build the project by running the following command, swapping out `DOCKER_USERNAME` with your username.
 
     ```bash
     docker build -t <DOCKER_USERNAME>/getting-started-todo-app .
@@ -93,7 +93,7 @@ Now that you have a repository, you are ready to build and push your image. An i
     docker build -t mobydock/getting-started-todo-app .
     ```
 
-1. To verify the image exists locally, you can use the `docker image ls` command:
+3. To verify the image exists locally, you can use the `docker image ls` command:
 
     ```plaintext
     > docker image ls
@@ -102,7 +102,7 @@ Now that you have a repository, you are ready to build and push your image. An i
     ...
     ```
 
-1. To push the image, use the `docker push` command. Be sure to replace `<DOCKER_USERNAME>` with your username:
+4. To push the image, use the `docker push` command. Be sure to replace `<DOCKER_USERNAME>` with your username:
 
     ```bash
     docker push <DOCKER_USERNAME>/getting-started-todo-app
@@ -117,21 +117,21 @@ Now that you have a repository, you are ready to build and push your image. An i
 
     ![Screenshot of VS Code showing the right-click menu and "Build Image" menu item](images/build-vscode-menu-item.webp?h=450&w=300)
 
-1. In the dialog that appears, enter a name of `DOCKER_USERNAME/getting-started-todo-app`, replacing `DOCKER_USERNAME` with your Docker username. 
+2. In the dialog that appears, enter a name of `DOCKER_USERNAME/getting-started-todo-app`, replacing `DOCKER_USERNAME` with your Docker username. 
 
-1. After pressing **Enter**, you'll see a terminal appear where the build will occur. Once it's completed, feel free to close the terminal.
+3. After pressing **Enter**, you'll see a terminal appear where the build will occur. Once it's completed, feel free to close the terminal.
 
-1. Open the Docker extension for VS Code by clicking on the Docker logo in the left nav menu.
+4. Open the Docker extension for VS Code by clicking on the Docker logo in the left nav menu.
 
-1. Find the image you created. It'll have a name of `docker.io/DOCKER_USERNAME/getting-started-todo-app`. 
+5. Find the image you created. It'll have a name of `docker.io/DOCKER_USERNAME/getting-started-todo-app`. 
 
-1. Expand the image to view the tags (or different versions) of the image. You should see a tag named `latest`, which is the default tag given to an image.
+6. Expand the image to view the tags (or different versions) of the image. You should see a tag named `latest`, which is the default tag given to an image.
 
-1. Right-click on the **latest** item and select the **Push...** option.
+7. Right-click on the **latest** item and select the **Push...** option.
 
     ![Screenshot of the Docker extension and the right-click menu to push an image](images/build-vscode-push-image.webp)
 
-1. Press **Enter** to confirm and then watch as your image is pushed to Docker Hub! Depending on your upload speeds, it might take a moment to push the image.
+8. Press **Enter** to confirm and then watch as your image is pushed to Docker Hub! Depending on your upload speeds, it might take a moment to push the image.
 
     Once the upload is finished, feel free to close the terminal.
 
