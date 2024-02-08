@@ -20,7 +20,7 @@ export name=<MY_NAME>
 This syntax is reserved for variable names, and will cause the variable to
 be rendered in a special color and font style.
 
-## Code highlighting
+## Highlight lines
 
 ```text {hl_lines=[7,8]}
 incoming := map[string]interface{}{
