@@ -65,7 +65,7 @@ services:
       webapp:
         image: my-webapp-image
         environment:
-          - DEBUG=${DEBUG}
+          DEBUG=${DEBUG}
   ```
   Docker Compose replaces `${DEBUG}` with the value from the `.env` file
 - You can use multiple `.env` files in your `compose.yml` with the [`env_file` attribute](../compose-file/05-services.md#env_file), and Docker Compose reads them in the order specified. If the same variable is defined in multiple files, the last definition takes precedence:
@@ -98,7 +98,7 @@ You can set environment variables directly in your Compose file without using an
 ```yaml
 web:
   environment:
-    - DEBUG=1
+    DEBUG=1
 ```
 
 See [`environment` attribute](../compose-file/05-services.md#environment) for more examples on how to use it. 
@@ -108,7 +108,7 @@ See [`environment` attribute](../compose-file/05-services.md#environment) for mo
   ```yaml
   web:
     environment:
-      - DEBUG
+      DEBUG
   ```
   The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run. 
   Note that in this case no warning is issued if the `DEBUG` variable in the shell environment is not set. 
@@ -117,7 +117,7 @@ See [`environment` attribute](../compose-file/05-services.md#environment) for mo
   ```yaml
   web:
     environment:
-      - DEBUG=${DEBUG}
+      DEBUG=${DEBUG}
   ```
   The result is similar to the one above but Compose gives you a warning if the `DEBUG` variable is not set in the shell environment.
 
