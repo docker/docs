@@ -1419,18 +1419,21 @@ expressed in the short form.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
 - `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
+- `name`: A human-readable name for the port, used to document it's usage within the service.
 
 ```yml
 ports:
-  - target: 80
+  - name: http
+    target: 80
     host_ip: 127.0.0.1
     published: "8080"
     protocol: tcp
     mode: host
 
-  - target: 80
+  - name: https
+    target: 443
     host_ip: 127.0.0.1
-    published: "8000-9000"
+    published: "8083-9000"
     protocol: tcp
     mode: host
 ```
