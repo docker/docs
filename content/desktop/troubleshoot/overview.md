@@ -81,10 +81,10 @@ Docker Desktop cannot start.
    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
    ```
 
-2. Create and upload the diagnostics ID. Run:
+2. Create and upload the diagnostics ID. In PowerShell, run:
 
    ```console
-   $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
+   $ & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
    ```
 
 After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
