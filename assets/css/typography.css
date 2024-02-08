@@ -14,10 +14,9 @@
   /* Roboto Flex */
   @font-face {
     font-family: 'Roboto Flex';
-    src: url('/assets/fonts/RobotoFlex.woff2') format('woff2 supports variations'),
-         url('/assets/fonts/RobotoFlex.woff2') format('woff2-variations');
+    src: url('/assets/fonts/RobotoFlex.woff2') format('woff2');
     font-weight: 100 1000; /* Range of weights Roboto Flex supports */
-    font-stretch: 25% 151%; /* Range of width Roboto Flex supports */
+    font-stretch: 100%; /* Range of width Roboto Flex supports */
     font-style: oblique 0deg 10deg; /* Range of oblique angle Roboto Flex supports */
     font-display: fallback;
   }
