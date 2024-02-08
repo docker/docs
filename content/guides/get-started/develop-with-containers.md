@@ -25,7 +25,7 @@ VIDEO WILL GO HERE
 1. Once you have the project, start the development environment using Docker Compose.
 
 
-   {{< tabs >}}
+   {{< tabs group="cli-or-vs-code" persist=true >}}
    {{< tab name="CLI" >}}
 
    To start the project using the CLI, run the following command:
