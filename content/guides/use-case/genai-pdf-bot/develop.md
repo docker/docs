@@ -138,8 +138,8 @@ To run Ollama in a container and provide GPU access:
            reservations:
              devices:
                - driver: nvidia
-               count: all
-               capabilities: [gpu]
+                 count: all
+                 capabilities: [gpu]
    volumes:
      ollama_volume:
    ```
