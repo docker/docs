@@ -10,6 +10,13 @@
 
 Onboarding your organization allows you to gain visibility into the activity of your users and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](/subscription/details/).
 
+In this guide, you'll learn how to get started with the following:
+
+- Identify your users to help you efficiently allocate your subscription seats
+- Invite members and owners to your organization
+- Secure authentication and authorization for your organization using Single Sign-On (SSO) and System for Cross-domain Identity Management (SCIM)
+- Enforce sign-on for Docker Desktop to ensure security best practices
+
 ## Prerequisites
 
 Before you start to onboard your organization, ensure that you:
@@ -50,10 +57,10 @@ To add a member, invite a user and assign them the member role. For more details
 
 ## Step 4: Manage members with SSO and SCIM
 
-Configuring Single Sign-On (SSO) or System for Cross-domain Identity Management (SCIM) is optional and only available to Docker Business subscribers. To upgrade a Docker Team subscription to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
+Configuring SSO and SCIM is optional and only available to Docker Business subscribers. To upgrade a Docker Team subscription to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
 
-You can manage your members in your identity provider and automatically provision them to your Docker organization with SSO or SCIM. See the following for more details.
-   - {{ $sso_link }} to automatically provision and add members when they sign in to Docker through your identity provider.
+You can manage your members in your identity provider and automatically provision them to your Docker organization with SSO and SCIM. See the following for more details.
+   - {{ $sso_link }} to authenticate and add members when they sign in to Docker through your identity provider.
    - {{ $scim_link }} to automatically provision, add, and de-provision members to Docker through your identity provider.
 
 

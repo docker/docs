@@ -6,6 +6,7 @@ redirect:
 - /docker-hub/onboarding-faqs/
 aliases:
 - /docker-hub/general-faqs/
+- /docker-hub/onboarding-faqs/
 ---
 
 ### What is a Docker ID?
