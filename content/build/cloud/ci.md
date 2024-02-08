@@ -290,7 +290,7 @@ pipeline {
   }
 }
 ```
-Using the `build.sh` shell script in your `.travis.yml` file under the `install` hook. In this example Travis CI is using Node: 
+Using the `build.sh` shell script in your `.travis.yml` file under the `install` hook, then making it executable:
 
 {{< tabs >}}
 {{< tab name="Travis CI" >}}
@@ -308,15 +308,11 @@ env:
 
 before_install: |
   echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
-  sudo apt-get update && sudo apt-get install -y jq build-essential
-  npm --version
-  npm config set loglevel verbose
-  npm config set progress false
-  npm cache clean --force
 
 install: |
   set -e 
-  chmod +x ./build_cloud.sh; ./build_cloud.sh
+  chmod +x ./build_cloud.sh
+  ./build_cloud.sh
 
 script: |
   docker buildx create --name username --use
