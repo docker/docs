@@ -20,6 +20,36 @@ export name=<MY_NAME>
 This syntax is reserved for variable names, and will cause the variable to
 be rendered in a special color and font style.
 
+## Code highlighting
+
+```text {hl_lines=[7,8]}
+incoming := map[string]interface{}{
+    "asdf": 1,
+    "qwer": []interface{}{},
+    "zxcv": []interface{}{
+        map[string]interface{}{},
+        true,
+        int(1e9),
+        "tyui",
+    },
+}    
+```
+
+````markdown
+```go {hl_lines=[7,8]}
+incoming := map[string]interface{}{
+    "asdf": 1,
+    "qwer": []interface{}{},
+    "zxcv": []interface{}{
+        map[string]interface{}{},
+        true,
+        int(1e9),
+        "tyui",
+    },
+}   
+```
+````
+
 ## Bash
 
 Use the `bash` language code block when you want to show a Bash script:
