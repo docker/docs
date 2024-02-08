@@ -15,18 +15,6 @@ aliases:
 - [Can I use Docker Build Cloud with a registry behind a VPN?](#can-i-use-docker-build-cloud-with-a-registry-behind-a-vpn)
 <!--toc:end-->
 
-### How do I remove Docker Build Cloud from my system?
-
-If you want to stop using Docker Build Cloud, remove the cloud builder using
-the `docker buildx rm` command.
-
-```console
-$ docker buildx rm cloud-<ORG>-default
-```
-
-This doesn't deprovision the builder backend, it only removes the builder from
-your local Docker client.
-
 ### Are builders shared between organizations?
 
 No. Each cloud builder provisioned to an organization is completely
