@@ -36,33 +36,36 @@
     @apply underline decoration-blue-light decoration-4 underline-offset-4 dark:decoration-blue-dark;
   }
 
-  .bg-pattern-blue-light {
-    background: linear-gradient(to right, theme(colors.white / 50%), theme(colors.white / 70%)), url('/assets/images/bg-pattern-blue.webp');
-    @apply bg-no-repeat bg-cover;
+  .bg-pattern-blue {
+    background-color: theme(colors.white / 50%);
+    background-image: url('/assets/images/bg-pattern-blue.webp');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: none;
+    .dark & {
+      background-color: theme(colors.black / 70%);
+    }
   }
 
-  .bg-pattern-purple-light {
-    background: linear-gradient(to right, theme(colors.white / 50%), theme(colors.white / 70%)), url('/assets/images/bg-pattern-purple.webp');
-    @apply bg-no-repeat bg-cover;
+  .bg-pattern-purple {
+    background-color: theme(colors.white / 50%);
+    background-image: url('/assets/images/bg-pattern-purple.webp');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: none;
+    .dark & {
+      background-color: theme(colors.black / 70%);
+    }
   }
 
-  .bg-pattern-verde-light {
-    background: linear-gradient(to right, theme(colors.white / 50%), theme(colors.white / 70%)), url('/assets/images/bg-pattern-verde.webp');
-    @apply bg-no-repeat bg-cover;
-  }
-
-  .bg-pattern-blue-dark {
-    background: linear-gradient(to right, theme(colors.black / 70%), theme(colors.black / 70%)), url('/assets/images/bg-pattern-blue.webp');
-    @apply bg-no-repeat bg-cover;
-  }
-
-  .bg-pattern-purple-dark {
-    background: linear-gradient(to right, theme(colors.black / 70%), theme(colors.black / 70%)), url('/assets/images/bg-pattern-purple.webp');
-    @apply bg-no-repeat bg-cover;
-  }
-
-  .bg-pattern-verde-dark {
-    background: linear-gradient(to right, theme(colors.black / 70%), theme(colors.black / 70%)), url('/assets/images/bg-pattern-verde.webp');
-    @apply bg-no-repeat bg-cover;
+  .bg-pattern-verde {
+    background-color: theme(colors.white / 50%);
+    background-image: url('/assets/images/bg-pattern-verde.webp');
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-repeat: none;
+    .dark & {
+      background-color: theme(colors.black / 70%);
+    }
   }
 }
