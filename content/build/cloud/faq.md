@@ -25,15 +25,6 @@ For more information, refer to:
 - [`docker buildx build --secret`](/engine/reference/commandline/buildx_build/#secret)
 - [`docker buildx build --ssh`](/engine/reference/commandline/buildx_build/#ssh)
 
-### How do I unset Docker Build Cloud as the default builder?
-
-If you've set a cloud builder as the default builder and want to revert to using the
-default `docker` builder, run the following command:
-
-```console
-$ docker context use default
-```
-
 ### How do I manage the build cache with Docker Build Cloud?
 
 You don't need to manage the builder's cache manually. The system manages it

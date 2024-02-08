@@ -130,3 +130,16 @@ Teams using a shared builder get access to information such as:
 This lets you and your team work collaboratively on troubleshooting and
 improving build speeds, without having to send build logs and benchmarks back
 and forth between each other.
+
+## Unset Docker Build Cloud as the default builder
+
+If you've set a cloud builder as the default builder
+and want to revert to the default `docker` builder,
+run the following command:
+
+```console
+$ docker context use default
+```
+
+This doesn't remove the builder from your system.
+It only changes the builder that's automatically selected to run your builds.
