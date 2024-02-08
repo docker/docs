@@ -15,16 +15,6 @@ aliases:
 - [Can I use Docker Build Cloud with a registry behind a VPN?](#can-i-use-docker-build-cloud-with-a-registry-behind-a-vpn)
 <!--toc:end-->
 
-### Do I need to add my secrets to the builder to access private resources?
-
-No. Your interface to Docker Build Cloud is Buildx, and you can use the existing
-`--secret` and `--ssh` CLI flags for managing build secrets.
-
-For more information, refer to:
-
-- [`docker buildx build --secret`](/engine/reference/commandline/buildx_build/#secret)
-- [`docker buildx build --ssh`](/engine/reference/commandline/buildx_build/#ssh)
-
 ### How do I manage the build cache with Docker Build Cloud?
 
 You don't need to manage the builder's cache manually. The system manages it
