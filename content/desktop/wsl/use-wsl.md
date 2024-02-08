@@ -30,20 +30,20 @@ The following section describes how to start developing your applications using 
 >
 > GPU support is only available in Docker Desktop for Windows with the WSL2 backend.
 
-With Docker Desktop version 3.1.0 and later,  WSL 2 GPU Paravirtualization (GPU-PV) on NVIDIA GPUs is supported. To enable WSL 2 GPU Paravirtualization, you need:
+With Docker Desktop version 3.1.0 and later, WSL 2 GPU Paravirtualization (GPU-PV) on NVIDIA GPUs is supported. To enable WSL 2 GPU Paravirtualization, you need:
 
 - A machine with an NVIDIA GPU
-- The latest Windows Insider version from the Dev Preview ring
-- [Beta drivers](https://developer.nvidia.com/cuda/wsl) from NVIDIA supporting WSL 2 GPU Paravirtualization
+- Up to date Windows 10 or Windows 11 installation
+- [Up to date drivers](https://developer.nvidia.com/cuda/wsl) from NVIDIA supporting WSL 2 GPU Paravirtualization
 - Update WSL 2 Linux kernel to the latest version using `wsl --update` from an elevated command prompt
 - Make sure the WSL 2 backend is turned on in Docker Desktop
 
-To validate that everything works as expected, run the following command to run a short benchmark on your GPU:
+To validate that everything works as expected, execute a `docker run` command with the `--gpus=all` flag. For example, the following will run a short benchmark on your GPU:
 
 ```console
 $ docker run --rm -it --gpus=all nvcr.io/nvidia/k8s/cuda-sample:nbody nbody -gpu -benchmark
 ```
-The following displays:
+The output will be similar to:
 
 ```console
 Run "nbody -benchmark [-numbodies=<numBodies>]" to measure performance.
@@ -71,4 +71,11 @@ GPU Device 0: "GeForce RTX 2060 with Max-Q Design" with compute capability 7.5
 30720 bodies, total time for 10 iterations: 69.280 ms
 = 136.219 billion interactions per second
 = 2724.379 single-precision GFLOP/s at 20 flops per interaction
+```
+
+Or if you wanted to try something more useful you could use the official [Ollama image](https://hub.docker.com/r/ollama/ollama) to run the Llama2 large language model.
+
+```console
+$ docker run --gpus=all -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+$ docker exec -it ollama ollama run llama2
 ```
