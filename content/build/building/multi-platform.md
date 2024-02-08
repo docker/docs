@@ -61,7 +61,7 @@ loads it through a binary registered in the `binfmt_misc` handler.
 > Use [multiple native nodes](#multiple-native-nodes) or
 > [cross-compilation](#cross-compilation) instead, if possible.
 
-## Support on Docker Desktop
+#### Support on Docker Desktop
 
 [Docker Desktop](../../desktop/index.md) provides `binfmt_misc`
 multi-architecture support, which means you can run containers for different
