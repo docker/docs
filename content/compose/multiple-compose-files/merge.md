@@ -96,6 +96,7 @@ relative to the base file.
         - DEBUG=1
      EOF
    ```
+   
    When `stdin` is used, all paths in the configuration are relative to the current working directory.
    
 - You can use the `-f` flag to specify a path to a Compose file that is not located in the current directory, either from the command line or by setting up a [COMPOSE_FILE environment variable](../environment-variables/envvars.md#compose_file) in your shell or in an environment file.
