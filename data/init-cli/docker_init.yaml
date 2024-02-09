@@ -35,8 +35,8 @@ long: |-
   
   After `docker init` has completed, you may need to modify the created files and tailor them to your project. Visit the following topics to learn more about the files:
     
-    * [.dockerignore](../../../engine/reference/builder.md#dockerignore-file)
-    * [Dockerfile](../../../engine/reference/builder.md)
+    * [.dockerignore](../../../reference/dockerfile.md#dockerignore-file)
+    * [Dockerfile](../../../reference/dockerfile.md)
     * [compose.yaml](../../../compose/compose-application-model.md)
 
 usage: docker init [OPTIONS]

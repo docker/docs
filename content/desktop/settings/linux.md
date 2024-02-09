@@ -179,7 +179,7 @@ edit the file using your favorite text editor.
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 
 To see the full list of possible configuration options, see the
-[dockerd command reference](/engine/reference/commandline/dockerd/).
+[dockerd command reference](/reference/cli/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
 

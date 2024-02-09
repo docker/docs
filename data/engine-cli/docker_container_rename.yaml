@@ -21,6 +21,7 @@ examples: |-
     $ docker rename my_container my_new_container
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

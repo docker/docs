@@ -125,7 +125,7 @@
 "/build/architecture/#install-buildx":
   # Instructions on installing Buildx. Redirect used in Docker CLI.
   - /go/buildx/
-"/engine/reference/commandline/compose_build/":
+"/reference/cli/docker/compose/build/":
   - /go/compose-native-build/
 "/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user":
   # Details about how to give "non-root" users access to a privileged Docker
@@ -135,7 +135,7 @@
   - /go/deprecated/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
-"/engine/reference/commandline/login/#credential-stores":
+"/reference/cli/docker/login/#credential-stores":
   - /go/credential-store/
 "/cloud/ecs-integration/":
   - /go/compose-ecs-eol/
@@ -681,7 +681,8 @@
   - /go/build-context-dockerignore/
 "/compose/compose-file":
   - /go/compose-spec-reference/
-"/engine/reference/builder":
+"/reference/dockerfile":
   - /go/dockerfile-reference/
+  - /engine/reference/builder/
 "/get-started/04_sharing_app":
   - /go/get-started-sharing/

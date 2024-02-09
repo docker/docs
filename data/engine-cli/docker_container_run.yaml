@@ -1754,7 +1754,7 @@ examples: |-
 
     These `a`, `ctrl-a`, `X`, or `ctrl-\\` values are all examples of valid key
     sequences. To configure a different configuration default key sequence for all
-    containers, see [**Configuration file** section](cli.md#configuration-files).
+    containers, see [**Configuration file** section](/engine/reference/commandline/cli/#configuration-files).
 
     ### Add host device to container (--device) {#device}
 
@@ -1855,7 +1855,7 @@ examples: |-
       on the system running the daemon, in one of the configured CDI specification
       directories.
     - The CDI feature has been enabled on the daemon side, see [Enable CDI
-      devices](dockerd.md#enable-cdi-devices).
+      devices](/reference/cli/dockerd/#enable-cdi-devices).
 
     ### Attach to STDIN/STDOUT/STDERR (-a, --attach) {#attach}
 
@@ -1899,7 +1899,7 @@ examples: |-
     > Linux: it ignores any signal with the default action. So, the process
     > doesn't terminate on `SIGINT` or `SIGTERM` unless it's coded to do so.
 
-    See also [the `docker cp` command](container_cp.md).
+    See also [the `docker cp` command](/reference/cli/docker/container/cp/).
 
     ### Keep STDIN open (-i, --interactive) {#interactive}
 
@@ -2064,8 +2064,8 @@ examples: |-
     If the container exits, Docker restarts it.
 
     When a restart policy is active on a container, it shows as either `Up` or
-    `Restarting` in [`docker ps`](container_ls.md). It can also be useful to use
-    [`docker events`](system_events.md) to see the restart policy in effect.
+    `Restarting` in [`docker ps`](/reference/cli/docker/container/ls/). It can also be useful to use
+    [`docker events`](/reference/cli/docker/system/events/) to see the restart policy in effect.
 
     An increasing delay (double the previous delay, starting at 100 milliseconds)
     is added before each restart to prevent flooding the server. This means the
@@ -2096,7 +2096,7 @@ examples: |-
     #### Inspect container restarts
 
     The number of (attempted) restarts for a container can be obtained using the
-    [`docker inspect`](inspect.md) command. For example, to get the number of
+    [`docker inspect`](/reference/cli/docker/inspect/) command. For example, to get the number of
     restarts for container "my-container";
 
     ```console
@@ -2273,7 +2273,7 @@ examples: |-
     for instance `SIGKILL`, or an unsigned number that matches a position in the
     kernel's syscall table, for instance `9`.
 
-    The default value is defined by [`STOPSIGNAL`](/engine/reference/builder/#stopsignal)
+    The default value is defined by [`STOPSIGNAL`](/reference/dockerfile/#stopsignal)
     in the image, or `SIGTERM` if the image has no `STOPSIGNAL` defined.
 
     ### Optional security options (--security-opt) {#security-opt}
@@ -2461,6 +2461,7 @@ examples: |-
     - Sysctls beginning with `net.*`
     - If you use the `--network=host` option using these sysctls are not allowed.
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

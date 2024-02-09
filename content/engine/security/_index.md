@@ -255,7 +255,7 @@ to a non uid-0 user outside the container, which can help to mitigate the
 risks of container breakout. This facility is available but not enabled
 by default.
 
-Refer to the [daemon command](../reference/commandline/dockerd.md#daemon-user-namespace-options)
+Refer to the [daemon command](../../reference/cli/dockerd.md#daemon-user-namespace-options)
 in the command line reference for more information on this feature.
 Additional information on the implementation of User Namespaces in Docker
 can be found in

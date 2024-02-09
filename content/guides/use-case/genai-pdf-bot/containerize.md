@@ -89,8 +89,8 @@ directory.
 ```
 
 To learn more about the files that `docker init` added, see the following:
- - [Dockerfile](../../../engine/reference/builder.md)
- - [.dockerignore](../../../engine/reference/builder.md#dockerignore-file)
+ - [Dockerfile](../../../reference/dockerfile.md)
+ - [.dockerignore](../../../reference/dockerfile.md#dockerignore-file)
  - [compose.yaml](../../../compose/compose-file/_index.md)
 
 
@@ -128,7 +128,7 @@ In this section, you learned how you can containerize and run your GenAI
 application using Docker.
 
 Related information:
- - [docker init CLI reference](../../../engine/reference/commandline/init.md)
+ - [docker init CLI reference](../../../reference/cli/docker/init.md)
 
 ## Next steps
 

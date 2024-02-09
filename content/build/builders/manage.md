@@ -16,7 +16,7 @@ that use other drivers, such as the
 which runs the BuildKit daemon in a container.
 
 Use the
-[`docker buildx create`](../../engine/reference/commandline/buildx_create.md)
+[`docker buildx create`](../../reference/cli/docker/buildx/create.md)
 command to create a builder.
 
 ```console
@@ -100,7 +100,7 @@ Total:        2.01GB
 ## Remove a builder
 
 Use the
-[`docker buildx remove`](../../engine/reference/commandline/buildx_create.md)
+[`docker buildx remove`](../../reference/cli/docker/buildx/create.md)
 command to remove a builder.
 
 ```console

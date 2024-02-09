@@ -152,7 +152,7 @@ You need to download Docker Desktop to build, push, and pull container images.
 
 ### Step 5: Build and push a container image to Docker Hub from your computer
 
-1. Start by creating a [Dockerfile](../engine/reference/builder.md) to specify your application as shown below:
+1. Start by creating a [Dockerfile](../reference/dockerfile.md) to specify your application as shown below:
 
    ```dockerfile
    # syntax=docker/dockerfile:1

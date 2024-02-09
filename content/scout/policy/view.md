@@ -106,4 +106,4 @@ Policy status:  FAILED  (1/3 policies violated)
 ```
 
 For more information about the command, refer to the [CLI
-reference](../../engine/reference/commandline/scout_policy.md).
+reference](../../reference/cli/docker/scout/policy.md).

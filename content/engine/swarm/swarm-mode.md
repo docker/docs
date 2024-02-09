@@ -28,7 +28,7 @@ and try the [Swarm mode tutorial](swarm-tutorial/index.md).
 
 When you run the command to create a swarm, Docker Engine starts running in Swarm mode.
 
-Run [`docker swarm init`](../reference/commandline/swarm_init.md)
+Run [`docker swarm init`](../../reference/cli/docker/swarm/init.md)
 to create a single-node swarm on the current node. The engine sets up the swarm
 as follows:
 
@@ -107,7 +107,7 @@ all the subnets are exhausted.
 
 Refer to the following pages for more information:
 - [Swarm networking](./networking.md) for more information about the default address pool usage
-- `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md) for more detail on the `--default-addr-pool` flag.
+- `docker swarm init` [CLI reference](../../reference/cli/docker/swarm/init.md) for more detail on the `--default-addr-pool` flag.
 
 ### Configure the advertise address
 
@@ -133,7 +133,7 @@ you use for access from outside that region. In this case, specify the external
 address with `--advertise-addr` so that the node can propagate that information
 to other nodes that subsequently connect to it.
 
-Refer to the `docker swarm init` [CLI reference](../reference/commandline/swarm_init.md)
+Refer to the `docker swarm init` [CLI reference](../../reference/cli/docker/swarm/init.md)
 for more detail on the advertise address.
 
 ### View the join command or update a swarm join token
@@ -214,5 +214,5 @@ To add a worker to this swarm, run the following command:
 ## Learn more
 
 * [Join nodes to a swarm](join-nodes.md)
-* `swarm init` [command line reference](../reference/commandline/swarm_init.md)
+* `swarm init` [command line reference](../../reference/cli/docker/swarm/init.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)

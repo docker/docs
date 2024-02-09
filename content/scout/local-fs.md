@@ -120,6 +120,6 @@ source code and the compare target, when available.
 
 Read about the commands and supported flags in the CLI reference documentation:
 
-- [`docker scout quickview`](../engine/reference/commandline/scout_compare.md)
-- [`docker scout cves`](../engine/reference/commandline/scout_compare.md)
-- [`docker scout compare`](../engine/reference/commandline/scout_compare.md)
+- [`docker scout quickview`](../reference/cli/docker/scout/compare.md)
+- [`docker scout cves`](../reference/cli/docker/scout/compare.md)
+- [`docker scout compare`](../reference/cli/docker/scout/compare.md)

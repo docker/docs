@@ -104,7 +104,7 @@ For the sample application, you'll use a variation of the backend from the react
 
    # Comments are provided throughout this file to help you get started.
    # If you need more help, visit the Dockerfile reference guide at
-   # https://docs.docker.com/engine/reference/builder/
+   # https://docs.docker.com/reference/dockerfile/
    
    ################################################################################
    # Create a stage for building the application.

@@ -143,7 +143,7 @@ configurable, and inject values at build-time.
 
 Related information:
 
-- [`ARG` Dockerfile reference](../../engine/reference/builder.md#arg)
+- [`ARG` Dockerfile reference](../../reference/dockerfile.md#arg)
 
 ## Next steps
 

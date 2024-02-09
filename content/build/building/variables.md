@@ -116,8 +116,8 @@ $ docker build --build-arg NODE_VERSION=current .
 
 For more information on how to use build arguments, refer to:
 
-- [`ARG` Dockerfile reference](../../engine/reference/commandline/builder.md#arg)
-- [`docker build --build-arg` reference](../../engine/reference/commandline/image_build.md#build-arg)
+- [`ARG` Dockerfile reference](../../reference/dockerfile.md#arg)
+- [`docker build --build-arg` reference](../../reference/cli/docker/image/build.md#build-arg)
 
 ## `ENV` usage example
 
@@ -167,7 +167,7 @@ using them can lead to unintended side-effects for the application's runtime.
 
 For more information on how to use environment variables in builds, refer to:
 
-- [`ENV` Dockerfile reference](../../engine/reference/commandline/builder.md#env)
+- [`ENV` Dockerfile reference](../../reference/dockerfile.md#env)
 
 ## Scoping
 
@@ -264,7 +264,7 @@ RUN GOOS=$TARGETOS go build -o ./exe .
 ```
 
 For more information about multi-platform build arguments, refer to
-[Multi-platform arguments](/engine/reference/builder/#automatic-platform-args-in-the-global-scope)
+[Multi-platform arguments](../../reference/dockerfile.md#automatic-platform-args-in-the-global-scope)
 
 ### Proxy arguments
 
@@ -293,7 +293,7 @@ $ docker build --build-arg HTTP_PROXY=https://my-proxy.example.com .
 ```
 
 For more information about proxy build arguments, refer to
-[Proxy arguments](/engine/reference/builder/#predefined-args).
+[Proxy arguments](../../reference/dockerfile.md#predefined-args).
 
 ## Build tool configuration variables
 
@@ -319,7 +319,7 @@ They're used to configure the Buildx client, or the BuildKit daemon.
 | [EXPERIMENTAL_BUILDKIT_SOURCE_POLICY](#experimental_buildkit_source_policy) | String            | Specify a BuildKit source policy file.               |
 
 BuildKit also supports a few additional configuration parameters. Refer to
-[BuildKit built-in build args](../../engine/reference/builder.md#buildkit-built-in-build-args).
+[BuildKit built-in build args](../../reference/dockerfile.md#buildkit-built-in-build-args).
 
 You can express Boolean values for environment variables in different ways.
 For example, `true`, `1`, and `T` all evaluate to true.

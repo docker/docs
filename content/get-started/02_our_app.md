@@ -199,8 +199,8 @@ In this section, you learned the basics about creating a Dockerfile to build an 
 
 Related information:
 
- - [Dockerfile reference](../engine/reference/builder.md)
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [Dockerfile reference](../reference/dockerfile.md)
+ - [docker CLI reference](/reference/cli/docker/)
  - [Build with Docker guide](../build/guide/index.md)
 
 ## Next steps

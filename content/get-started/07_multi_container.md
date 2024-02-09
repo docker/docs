@@ -295,7 +295,7 @@ At this point, you have an application that now stores its data in an external d
 container. You learned a little bit about container networking and service discovery using DNS.
 
 Related information:
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [docker CLI reference](/reference/cli/docker/)
  - [Networking overview](../network/index.md)
 
 ## Next steps

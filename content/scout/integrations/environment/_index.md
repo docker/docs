@@ -79,7 +79,7 @@ comparing the image built from the code in the PR to the corresponding image in
 staging or production.
 
 You can also compare with streams using the `--to-env` flag on the
-[`docker scout compare`](../../../engine/reference/commandline/scout_compare.md)
+[`docker scout compare`](../../../reference/cli/docker/scout/compare.md)
 CLI command:
 
 ```console
