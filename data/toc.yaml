@@ -2177,8 +2177,6 @@ FAQ:
     title: Overview
   - path: /billing/faqs/
     title: Billing
-  - path: /build/cloud/faq/
-    title: Build Cloud
   - path: /compose/faq/
     title: Compose
   - sectiontitle: Desktop
