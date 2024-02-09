@@ -1160,6 +1160,8 @@ Manuals:
           title: Use WSL
         - path: /desktop/wsl/best-practices/
           title: Best practices
+    - path: /desktop/gpu/
+      title: GPU support
     - sectiontitle: Additional resources
       section:
         - path: /desktop/kubernetes/
