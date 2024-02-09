@@ -222,8 +222,7 @@ Services can only access configs when explicitly granted by the `configs` attrib
 Compose reports an error if `config` doesn't exist on the platform or isn't defined in the
 [`configs` top-level element](08-configs.md) in the Compose file.
 
-There are two syntaxes defined for configs. To remain compliant to this specification, an implementation
-must support both syntaxes. Implementations must allow use of both short and long syntaxes within the same document.
+There are two syntaxes defined for configs.
 
 You can grant a service access to multiple configs, and you can mix long and short syntax.
 
@@ -1023,9 +1022,7 @@ The init binary that is used is platform specific.
 
 ## ipc
 
-`ipc` configures the IPC isolation mode set by the service container. Available
-values are platform specific, but Compose defines specific values
-which must be implemented as described if supported:
+`ipc` configures the IPC isolation mode set by the service container.
 
 - `shareable`: Gives the container its own private IPC namespace, with a
   possibility to share it with other containers.
@@ -1071,10 +1068,6 @@ The `com.docker.compose` label prefix is reserved. Specifying labels with this p
 results in a runtime error.
 
 ## links
-
-> **Note**
->
-> Availability of the `links` attribute is implementation specific.
 
 `links` defines a network link to containers in another service. Either specify both the service name and
 a link alias (`SERVICE:ALIAS`), or just the service name.
@@ -1154,7 +1147,7 @@ There is a performance penalty for applications that swap memory to disk often.
 
 ## network_mode
 
-`network_mode` sets a service container's network mode. Available values are platform specific, but Compose defines specific values which must be implemented as described if supported:
+`network_mode` sets a service container's network mode. 
 
 - `none`: Turns off all container networking.
 - `host`: Gives the container raw access to the host's network interface.
@@ -1268,7 +1261,7 @@ networks:
 
 `link_local_ips` specifies a list of link-local IPs. Link-local IPs are special IPs which belong to a well
 known subnet and are purely managed by the operator, usually dependent on the architecture where they are
-deployed. Implementation is platform specific.
+deployed.
 
 Example:
 
@@ -1467,8 +1460,6 @@ services:
   `if_not_present` is considered an alias for this value for backward compatibility.
 * `build`: Compose builds the image. Compose rebuilds the image if it's already present.
 
-If `pull_policy` and `build` are both present, Compose builds the image by default. This behavior may be overridden in the toolchain, depending on the implementation. 
-
 ## read_only
 
 `read_only` configures the service container to be created with a read-only filesystem.
@@ -1500,7 +1491,6 @@ section of the Docker run reference page.
 
 `runtime` specifies which runtime to use for the service’s containers.
 
-The value of `runtime` is specific to the implementation.
 For example, `runtime` can be the name of [an implementation of OCI Runtime Spec](https://github.com/opencontainers/runtime-spec/blob/master/implementations.md), such as "runc".
 
 ```yml
@@ -1562,9 +1552,7 @@ the service's containers.
 - `mode`: The [permissions](https://wintelguy.com/permissions-calc.pl) for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation.
   The default value is world-readable permissions (mode `0444`).
-  The writable bit must be ignored if set. The executable bit may be set.
-
-Note that the `uid`, `gid`, and `mode` attributes are implementation specific. 
+  The writable bit must be ignored if set. The executable bit may be set. 
 
 The following example sets the name of the `server-certificate` secret file to `server.crt`
 within the container, sets the mode to `0440` (group-readable), and sets the user and group
