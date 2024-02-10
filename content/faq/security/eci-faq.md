@@ -9,7 +9,7 @@ aliases:
 
 ### Do I need to change the way I use Docker when Enhanced Container Isolation is switched on?
 
-No, you can continue to use Docker as usual. 
+No, you can continue to use Docker as usual.
 
 ### Do all container workloads work well with Enhanced Container Isolation?
 
@@ -50,14 +50,23 @@ VM into the container.
 It doesn't restrict bind mounts of your host machine files into the container,
 as configured via Docker Desktop's **Settings** > **Resources** > **File Sharing**.
 
+It's also possible to configure ECI to allow bind-mounts of the Docker engine socket
+into trusted containers. See [ECI Docker socket mount permissions](../../desktop/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions).
+
 ### Does Enhanced Container Isolation protect all containers launched with Docker Desktop?
 
-It protects all containers launched by users via `docker create` and `docker run`. It does not yet protect Docker Desktop Kubernetes pods, ExtensioncContainers, and Dev Environments.
+Not yet; it protects all containers launched by users via `docker create` and
+`docker run`. In addition, it protects containers implicitly used by `docker build`, when
+using the [docker-container build driver](../../build/drivers/_index.md).
+
+It does not yet protect containers implicitly used by `docker build` with the
+`docker` build driver, nor Docker Desktop Kubernetes pods, Extension Containers,
+and [Dev Environments Containers](../../desktop/dev-environments/_index.md).
 
 ### Does Enhanced Container Isolation protect containers launched prior to enabling ECI?
 
 No. Containers created prior to switching on ECI are not protected. Therefore, we
-recommend removing all containers prior to switching on ECI. 
+recommend removing all containers prior to switching on ECI.
 
 ### Does Enhanced Container Isolation affect the performance of containers?
 
