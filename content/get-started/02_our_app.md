@@ -147,7 +147,7 @@ Now that you have an image, you can run the application in a container using the
    The `-d` flag (short for `--detach`) runs the container in the background.
    This means that Docker starts your container and returns you to the terminal
    prompt. You can verify that a container is running by viewing it in Docker
-   Dashboard under **Containers**, or by running `docker ps` in the terminal.
+   Dashboard under **Containers**, or by running `docker ls` in the terminal.
 
    The `-p` flag (short for `--publish`) creates a port mapping between the host
    and the container. The `-p` flag takes a string value in the format of
