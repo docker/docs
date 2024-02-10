@@ -114,8 +114,15 @@ as the `--tmpfs` flag does not support them.
 
 | Option       | Description                                                                                           |
 |:-------------|:------------------------------------------------------------------------------------------------------|
-| `tmpfs-size` | Size of the tmpfs mount in bytes. Unlimited by default.                                               |
+| `tmpfs-size` | Size of the tmpfs mount in bytes. Unlimited by default. [^1]                                          |
 | `tmpfs-mode` | File mode of the tmpfs in octal. For instance, `700` or `0770`. Defaults to `1777` or world-writable. |
+
+[^1]: Keep in mind that while an unlimited size allows for flexibility,
+it also means that a process within the container could potentially consume
+a significant amount of the host's memory if not monitored or controlled.
+This could impact the host system and other containers running on it.
+Therefore, it's often a good practice to set a reasonable size limit
+on `tmpfs` mounts to prevent potential resource exhaustion issues.
 
 The following example sets the `tmpfs-mode` to `1770`, so that it is not
 world-readable within the container.
