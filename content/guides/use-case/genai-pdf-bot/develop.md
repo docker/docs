@@ -84,7 +84,7 @@ The sample application supports both [Ollama](https://ollama.ai/) and [OpenAI](h
 
 While all platforms can use any of the previous scenarios, the performance and
 GPU support may vary. You can use the following guidelines to help you choose the appropriate option:
-- Run Ollama in a container if you're on Linux or Windows 11, you
+- Run Ollama in a container if you're on Linux, and using a native installation of the Docker Engine, or Windows 10/11, and using Docker Desktop, you
   have a CUDA-supported GPU, and your system has at least 8 GB of RAM.
 - Run Ollama outside of a container if you're on an Apple silicon Mac.
 - Use OpenAI if the previous two scenarios don't apply to you.
@@ -98,8 +98,8 @@ When running Ollama in a container, you should have a CUDA-supported GPU. While 
 
 To run Ollama in a container and provide GPU access:
 1. Install the prerequisites.
-   - For Linux, install the [NVIDIA Container Toolkilt](https://github.com/NVIDIA/nvidia-container-toolkit).
-   - For Windows 11, install the latest [NVIDIA driver](https://www.nvidia.com/Download/index.aspx).
+   - For Docker Engine on Linux, install the [NVIDIA Container Toolkilt](https://github.com/NVIDIA/nvidia-container-toolkit).
+   - For Docker Desktop on Windows 10/11, install the latest [NVIDIA driver](https://www.nvidia.com/Download/index.aspx) and make sure you are using the [WSL2 backend](../../../desktop/wsl/index.md/#turn-on-docker-desktop-wsl-2)
 2. Add the Ollama service and a volume in your `compose.yaml`. The following is
    the updated `compose.yaml`:
 

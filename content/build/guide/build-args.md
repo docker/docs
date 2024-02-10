@@ -40,11 +40,11 @@ has to be. Build arguments make life easier:
       go build -o /bin/server ./cmd/server
 
   FROM scratch AS client
-  COPY --from=build /bin/client /bin/
+  COPY --from=build-client /bin/client /bin/
   ENTRYPOINT [ "/bin/client" ]
 
   FROM scratch AS server
-  COPY --from=build /bin/server /bin/
+  COPY --from=build-server /bin/server /bin/
   ENTRYPOINT [ "/bin/server" ]
 ```
 

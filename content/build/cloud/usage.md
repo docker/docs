@@ -130,3 +130,63 @@ Teams using a shared builder get access to information such as:
 This lets you and your team work collaboratively on troubleshooting and
 improving build speeds, without having to send build logs and benchmarks back
 and forth between each other.
+
+## Use secrets with Docker Build Cloud
+
+To use build secrets with Docker Build Cloud,
+such as authentication credentials or tokens,
+use the `--secret` and `--ssh` CLI flags for the `docker buildx` command.
+The traffic is end-to-end encrypted and secrets are never stored in the build cache.
+
+> **Warning**
+>
+> If you're misusing build arguments to pass credentials, authentication
+> tokens, or other secrets, you should refactor your build to pass the secrets using
+> [secret mounts](../../engine/reference/commandline/buildx_build.md#secret) instead.
+> Build arguments are stored in the cache and their values are exposed through attestations.
+> Secret mounts don't leak outside of the build and are never included in attestations.
+{.warning}
+
+For more information, refer to:
+
+- [`docker buildx build --secret`](/engine/reference/commandline/buildx_build/#secret)
+- [`docker buildx build --ssh`](/engine/reference/commandline/buildx_build/#ssh)
+
+## Managing build cache
+
+You don't need to manage Docker Build Cloud cache manually.
+The system manages it for you through [garbage collection](/build/cache/garbage-collection/).
+
+Old cache is automatically removed if you hit your storage limit.
+You can check your current cache state using the
+[`docker buildx du` command](/engine/reference/commandline/buildx_du/).
+
+To clear the builder's cache manually,
+use the [`docker buildx prune` command](/engine/reference/commandline/buildx_prune/).
+This works like pruning the cache for any other builder.
+
+> **Warning**
+>
+> Pruning a cloud builder's cache also removes the cache for other team members
+> using the same builder.
+{ .warning }
+
+## Unset Docker Build Cloud as the default builder
+
+If you've set a cloud builder as the default builder
+and want to revert to the default `docker` builder,
+run the following command:
+
+```console
+$ docker context use default
+```
+
+This doesn't remove the builder from your system.
+It only changes the builder that's automatically selected to run your builds.
+
+## Registries on internal networks
+
+It isn't possible to use Docker Build Cloud with a private registry
+or registry mirror on an internal network behind a VPN.
+All endpoints that a cloud builder interacts with,
+including OCI registries, must be accessible over the internet.
