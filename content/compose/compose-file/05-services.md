@@ -222,7 +222,7 @@ Services can only access configs when explicitly granted by the `configs` attrib
 Compose reports an error if `config` doesn't exist on the platform or isn't defined in the
 [`configs` top-level element](08-configs.md) in the Compose file.
 
-There are two syntaxes defined for configs.
+There are two syntaxes defined for configs: a short syntax and a long syntax.
 
 You can grant a service access to multiple configs, and you can mix long and short syntax.
 
@@ -1151,7 +1151,7 @@ There is a performance penalty for applications that swap memory to disk often.
 
 - `none`: Turns off all container networking.
 - `host`: Gives the container raw access to the host's network interface.
-- `service:{name}`: Gives the containers access to the specified service only.
+- `service:{name}`: Gives the containers access to the specified service only. For more information, see [Container networks](../../network/_index.md#container-networks).
 
 ```yml
     network_mode: "host"
@@ -1499,6 +1499,8 @@ web:
   command: true
   runtime: runc
 ```
+
+The default is `runc`. To use a different runtime, see [Alternative runtimes](../../engine/alternative-runtimes.md).
 
 ## scale
 
