@@ -34,6 +34,11 @@ The following table lists the supported attributes. Note that your attribute map
 
 For additional details about supported attributes and SCIM, see [Docker Hub API SCIM reference](/docker-hub/api/latest/#tag/scim).
 
+> **Important**
+>
+>SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](scim.md#set-up-scim), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For more information, see [SSO attributes](../for-admins/single-sign-on/_index.md#sso-attributes).
+{.important}
+
 ## Set up SCIM
 
 You must make sure you have [configured SSO](single-sign-on/configure/_index.md) before you enable SCIM. Enforcing SSO isn't required.
