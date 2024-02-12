@@ -64,13 +64,13 @@ See [ECI Docker socket mount permissions](../../desktop/hardened-desktop/enhance
 
 ### Does ECI protect all containers launched with Docker Desktop?
 
-Not yet; it protects all containers launched by users via `docker create` and
+Not yet. It protects all containers launched by users via `docker create` and
 `docker run`. In addition, it protects containers implicitly used by `docker build`, when
 using the [docker-container build driver](../../build/drivers/_index.md).
 
 It does not yet protect containers implicitly used by `docker build` with the
-`docker` build driver, nor Docker Desktop Kubernetes pods, Extension Containers,
-and [Dev Environments Containers](../../desktop/dev-environments/_index.md).
+`docker` build driver, nor Docker Desktop Kubernetes pods, Extension containers,
+and [Dev Environments containers](../../desktop/dev-environments/_index.md).
 
 ### Does ECI protect containers launched prior to enabling ECI?
 
