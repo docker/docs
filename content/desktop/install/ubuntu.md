@@ -53,7 +53,7 @@ Recommended approach to install Docker Desktop on Ubuntu:
    > N: Download is performed unsandboxed as root, as file '/home/user/Downloads/docker-desktop.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
    > ```
 
-There are a few post-install configuration steps done through the post-install script contained in the deb package.
+There are a few post-install configuration steps done through the post-install script contained in the deb package, search for `ls -l /var/lib/dpkg/info/docker*`.
 
 The post-install script:
 
