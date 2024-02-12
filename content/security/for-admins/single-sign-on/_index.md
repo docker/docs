@@ -40,7 +40,7 @@ If you use SAML for your SSO connection, Docker obtains these attributes from th
 
 > **Important**
 >
->SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](../scim.md#set-up-scim), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For example, to make sure that the full name of a user displays in your organization, you would create a `name` attribute in your IdP and ensure the value includes their first name and last name. The exact syntax for these values (for example, `user.firstName + " " + user.lastName`) varies depending on your IdP.
+>SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](../scim.md#set-up-scim), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For example, to make sure that the full name of a user displays in your organization, you would set a `name` attribute in your SAML attributes and ensure the value includes their first name and last name. The exact method for setting these values (for example, constructing it with `user.firstName + " " + user.lastName`) varies depending on your IdP.
 {.important}
 
 You can also configure attributes to override default values, such as default team or organization. See [role mapping](../scim.md#set-up-role-mapping).
