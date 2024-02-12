@@ -101,6 +101,7 @@ params:
   example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
   example_alpine_version: "1.19"
+  example_node_version: "20"
 
   min_api_threshold: 1.41
 
