@@ -15,16 +15,16 @@ aliases:
 Learn how to containerize different types of services by walking through Official Docker samples.
 
 ## Databases
-[MariaDB](../samples/mariadb.md) \| [MongoDB](../samples/mongodb.md) \| [MS-SQL](../samples/ms-sql.md) \| [MySQL](../samples/mysql.md) \| [PostgreSQL](../samples/postgres.md) \| [Redis](../samples/redis.md)
+[MariaDB](databases/mariadb.md) \| [MongoDB](databases/mongodb.md) \| [MS-SQL](databases/ms-sql.md) \| [MySQL](databases/mysql.md) \| [PostgreSQL](databases/postgres.md) \| [Redis](databases/redis.md)
 
 ## Frameworks
-[.NET](../samples/dotnet.md) \| [Angular](../samples/angular.md) \| [Django](../samples/django.md) \| [Express](../samples/express.md) \|[FastAPI](../samples/fastapi.md) \| [Flask](../samples/flask.md) \| [Node.js](../samples/nodejs.md) \| [React](../samples/react.md) \| [Rails](../samples/rails.md) \| [Spark](../samples/spark.md) \| [Spring Boot](../samples/spring.md) \| [Vue.js](../samples/vuejs.md)
+[.NET](frameworks/dotnet.md) \| [Angular](frameworks/angular.md) \| [Django](frameworks/django.md) \| [Express](frameworks/express.md) \|[FastAPI](frameworks/fastapi.md) \| [Flask](frameworks/flask.md) \| [Node.js](frameworks/nodejs.md) \| [React](frameworks/react.md) \| [Rails](frameworks/rails.md) \| [Spark](frameworks/spark.md) \| [Spring Boot](frameworks/spring.md) \| [Vue.js](frameworks/vuejs.md)
 
 ## Languages
-[Go](../samples/go.md) \| [Java](../samples/java.md) \| [JavaScript](../samples/javascript.md) \| [PHP](../samples/php.md) \| [Python](../samples/python.md) \| [Ruby](../samples/ruby.md) \| [Rust](../samples/rust.md) \| [TypeScript](../samples/typescript.md)
+[Go](languages/go.md) \| [Java](languages/java.md) \| [JavaScript](languages/javascript.md) \| [PHP](languages/php.md) \| [Python](languages/python.md) \| [Ruby](languages/ruby.md) \| [Rust](languages/rust.md) \| [TypeScript](languages/typescript.md)
 
 ## Platforms
-[Gitea](../samples/gitea.md) \| [Nextcloud](../samples/nextcloud.md) \| [Portainer](../samples/portainer.md) \|  [Prometheus](../samples/prometheus.md) \| [WordPress](../samples/wordpress.md)
+[Gitea](platforms/gitea.md) \| [Nextcloud](platforms/nextcloud.md) \| [Portainer](platforms/portainer.md) \|  [Prometheus](platforms/prometheus.md) \| [WordPress](platforms/wordpress.md)
 
 ## Other samples
-[AI/ML](../samples/ai-ml.md) \| [Cloudflared](../samples/cloudflared.md) \| [Elasticsearch / Logstash / Kibana](../samples/elasticsearch.md) \| [Minecraft](../samples/minecraft.md) \| [NGINX](../samples/nginx.md) \| [Pi-hole](../samples/pi-hole.md) \| [Plex](../samples/plex.md) \| [Traefik](../samples/traefik.md) \| [WireGuard](../samples/wireguard.md)
+[AI/ML](other/ai-ml.md) \| [Cloudflared](other/cloudflared.md) \| [Elasticsearch / Logstash / Kibana](other/elasticsearch.md) \| [Minecraft](other/minecraft.md) \| [NGINX](other/nginx.md) \| [Pi-hole](other/pi-hole.md) \| [Plex](other/plex.md) \| [Traefik](other/traefik.md) \| [WireGuard](other/wireguard.md)

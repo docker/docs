@@ -1,0 +1,10 @@
+<nav id="breadcrumbs" class="py-4 gap-4 flex items-center overflow-hidden text-gray-light dark:text-gray-dark">
+  {{ range $i, $e := .Ancestors.Reverse }}
+    {{- if $i -}}
+      <span>/</span>
+    {{- end -}}
+    <a href="{{ .Permalink }}" class="link whitespace-nowrap">{{ .LinkTitle }}</a>
+  {{- end -}}
+  <span>/</span>
+  <span aria-current="page">{{ .LinkTitle }}</span>
+</nav>
