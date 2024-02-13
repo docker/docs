@@ -15,7 +15,7 @@ This page offers examples of scenarios where custom project names can be helpful
 
 ## Example use cases
 
-Compose uses a project name to isolate environments from each other. You can make use of this project name in several different contexts:
+Compose uses a project name to isolate environments from each other. There are multiple contexts where a project name is useful:
 
 - On a development host: Create multiple copies of a single environment, useful for running stable copies for each feature branch of a project.
 - On a CI server: Prevent interference between builds by setting the project name to a unique build number.

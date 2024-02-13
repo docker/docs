@@ -184,4 +184,4 @@ services:
 
 ## Additional resources
 
-For more information on how merge can be used to create a composite compose file, see [Working with multiple Compose files](../multiple-compose-files/_index.md)
+For more information on how merge can be used to create a composite Compose file, see [Working with multiple Compose files](../multiple-compose-files/_index.md)
