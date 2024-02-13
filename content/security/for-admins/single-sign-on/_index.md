@@ -63,7 +63,7 @@ You can also configure attributes to override default values, such as default te
 
 * You must first notify your company about the new SSO login procedures.
 * Verify that your members have Docker Desktop version 4.4.2, or later, installed on their machines.
-* If your organization uses the Docker Hub CLI, new org members must [create a Personal Access Token (PAT)](/docker-hub/access-tokens/) to sign in to the CLI. There is a grace period for existing users, which will expire in the near future. Before the grace period ends, your users can sign in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
+* If your organization uses the Docker Hub CLI, we recommend that members [create a Personal Access Token (PAT)](/docker-hub/access-tokens/) to sign in to the CLI instead of with a username and password. Docker may deprecate signing in to the CLI with a username and password in the future, so using a PAT instead is a best practice to prevent potential issues with authentication.
 In addition, you should add all email addresses to your IdP.
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs.
 * For your service accounts, add your additional domains or enable it in your IdP.
