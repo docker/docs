@@ -366,6 +366,7 @@ Sets the type of the BuildKit progress output. Valid values are:
 - `auto` (default)
 - `plain`
 - `tty`
+- `rawjson`
 
 Usage:
 
