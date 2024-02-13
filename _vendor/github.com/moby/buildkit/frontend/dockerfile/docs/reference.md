@@ -1260,12 +1260,9 @@ doesn't support authentication.
 `ADD` obeys the following rules:
 
 - The `<src>` path must be inside the build context;
-  you can't use `COPY ../something /something`, because the builder can only
+  you can't use `ADD ../something /something`, because the builder can only
   access files from the context, and `../something` specifies a parent file or
   directory of the build context root.
-
-- If `<src>` is a directory, the entire contents of the directory are copied,
-  including filesystem metadata.
 
 - If `<src>` is a URL and `<dest>` does end with a trailing slash, then the
   filename is inferred from the URL and the file is downloaded to
@@ -1308,8 +1305,8 @@ doesn't support authentication.
   use of a wildcard, then `<dest>` must be a directory, and it must end with
   a slash `/`.
 
-- If `<dest>` doesn't end with a trailing slash, it will be considered a
-  regular file and the contents of `<src>` will be written at `<dest>`.
+- If `<src>` is a file, and `<dest>` doesn't end with a trailing slash,
+  the contents of `<src>` will be written as filename `<dest>`.
 
 - If `<dest>` doesn't exist, it's created, along with all missing directories
   in its path.
@@ -1487,8 +1484,8 @@ attempted to be used instead.
   use of a wildcard, then `<dest>` must be a directory, and it must end with
   a slash `/`.
 
-- If `<dest>` doesn't end with a trailing slash, it will be considered a
-  regular file and the contents of `<src>` will be written at `<dest>`.
+- If `<src>` is a file, and `<dest>` doesn't end with a trailing slash,
+  the contents of `<src>` will be written as filename `<dest>`.
 
 - If `<dest>` doesn't exist, it's created, along with all missing directories
   in its path.
@@ -2034,8 +2031,23 @@ ARG <name>[=<default value>]
 
 The `ARG` instruction defines a variable that users can pass at build-time to
 the builder with the `docker build` command using the `--build-arg <varname>=<value>`
-flag. If a user specifies a build argument that was not
-defined in the Dockerfile, the build outputs a warning.
+flag.
+
+> **Warning**
+>
+> It isn't recommended to use build arguments for passing secrets such as
+> user credentials, API tokens, etc. Build arguments are visible in the
+> `docker history` command and in `max` mode provenance attestations,
+> which are attached to the image by default if you use the Buildx GitHub Actions
+> and your GitHub repository is public.
+>
+> Refer to the [`RUN --mount=type=secret`](#run---mounttypesecret) section to
+> learn about secure ways to use secrets when building images.
+{ .warning }
+
+
+If you specify a build argument that wasn't defined in the Dockerfile,
+the build outputs a warning.
 
 ```console
 [Warning] One or more build-args [foo] were not consumed.
@@ -2050,16 +2062,6 @@ ARG user1
 ARG buildno
 # ...
 ```
-
-> **Warning**
->
-> It is not recommended to use build-time variables for passing secrets like
-> GitHub keys, user credentials etc. Build-time variable values are visible to
-> any user of the image with the `docker history` command.
->
-> Refer to the [`RUN --mount=type=secret`](#run---mounttypesecret) section to
-> learn about secure ways to use secrets when building images.
-{ .warning }
 
 ### Default values
 

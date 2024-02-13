@@ -41,7 +41,7 @@ grid_apis:
   link: /docker-hub/api/latest/
 - title: DVP Data API
   description: API for Docker Verified Publishers to fetch analytics data.
-  icon: auto_graph
+  icon: area_chart
   link: /docker-hub/api/dvp/
 grid_specs:
 - title: Image specification

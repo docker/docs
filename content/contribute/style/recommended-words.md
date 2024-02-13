@@ -86,7 +86,11 @@ _In Docker Desktop 4.1 and lower._
 
 What might be easy for you might not be easy for others. Try eliminating this word from the sentence because usually the same meaning can be conveyed without it.
 
+<!-- markdownlint-disable no-trailing-punctuation -->
+
 #### e.g.
+
+<!-- markdownlint-enable no-trailing-punctuation -->
 
 Don't use. Instead, use phrases like `for example` or `such as`.
 
@@ -160,9 +164,9 @@ _Turn on the dark mode toggle._
 
 Use `upgrade` when describing a higher subscription tier
 
-#### vs.
+#### vs
 
-Don't use `vs.` as an abbreviation for versus; instead, use the unabbreviated `versus`.
+Don't use `vs` or `vs.` as an abbreviation for versus; instead, use the unabbreviated `versus`.
 
 #### we
 

@@ -182,6 +182,31 @@ services:
     ports: []
 ```
 
+### Replace value
+
+While `!reset` can be used to remove a declaration from a Compose file using an override file, `!override` allows you 
+to fully replace an attribute, bypassing the standard merge rules. A typical example is to fully replace a resource definition, to rely on a distinct model but using the same name.
+
+Merging the following example YAML trees:
+
+```yaml
+networks:
+  foo:
+    # this is production configuration
+    name: production-overlay-network
+    driver: overlay
+    driver-opts: (...)
+```
+
+```yaml
+networks:
+  # this is development configuration
+  foo: !override {}
+```
+
+Results in a Compose application model equivalent to the override YAML tree.
+
 ## Additional resources
 
 For more information on how merge can be used to create a composite Compose file, see [Working with multiple Compose files](../multiple-compose-files/_index.md)
+

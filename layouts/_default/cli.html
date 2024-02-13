@@ -96,16 +96,24 @@
         <thead>
           <tr>
             <th>Option</th>
-            <th>Short</th>
             <th>Default</th>
             <th>Description</th>
           </tr>
         </thead>
         <tbody>
-          {{ range . }}
+          {{ range where . "hidden" false }}
             <tr>
-              <td>{{ with .option }}<code>--{{ . }}</code>{{ end }}</td>
-              <td>{{ with .shorthand }}<code>-{{ . }}</code>{{ end }}</td>
+              {{ $short := .shorthand }}
+              {{ $long := .option }}
+              <td>
+                {{ with .details_url }}
+                <a class="link" href="{{ . }}">
+                  <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                </a>
+                {{ else }}
+                <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                {{ end }}
+              </td>
               {{ $skipDefault := `[],map[],false,0,0s,default,'',""` }}
               <td>
                 {{ with .default_value }}

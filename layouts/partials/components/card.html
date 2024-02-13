@@ -33,7 +33,7 @@
             <img class="w-[32px] invertible" src="{{ . }}" alt="">
             {{ else }}
             {{/* icon ligature */}}
-            <span class="material-symbols-rounded text-[32px]">{{ . }}</span>
+            <span class="icon-svg">{{ partial "icon" . }}</span>
             {{ end }}
           {{ end }}
           <div>

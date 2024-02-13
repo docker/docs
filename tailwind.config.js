@@ -160,6 +160,32 @@ module.exports = {
         },
       },
 
+      magenta: {
+        light: {
+          DEFAULT: "#C918C0",
+          100: "#FFE6FB",
+          200: "#FFC9F6",
+          300: "#FFA6F0",
+          400: "#E950E2",
+          500: "#C918C0",
+          600: "#AB00A4",
+          700: "#830080",
+          800: "#440040",
+        },
+        dark: {
+          DEFAULT: "#E950E2",
+          100: "#7E0078",
+          200: "#92008B",
+          300: "#AB00A4",
+          400: "#CC18C4",
+          500: "#E950E2",
+          600: "#FF6FF9",
+          700: "#FF8AFA",
+          800: "#FFA4FB",
+        },
+      },
+
+
       blue: {
         light: {
           DEFAULT: "#086dd7",
@@ -238,7 +264,7 @@ module.exports = {
 
     fontFamily: {
       sans: [
-        "Roboto",
+        "Roboto Flex",
         "system-ui",
         "-apple-system",
         "BlinkMacSystemFont",

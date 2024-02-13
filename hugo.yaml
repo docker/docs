@@ -93,13 +93,14 @@ params:
 
   latest_engine_api_version: "1.44"
   docker_ce_version: "25.0.0"
-  compose_version: "v2.24.2"
+  compose_version: "v2.24.5"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
   buildkit_version: "0.12.3"
 
   example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
+  example_alpine_version: "1.19"
 
   min_api_threshold: 1.41
 
@@ -231,6 +232,9 @@ module:
       target: assets
     - source: hugo_stats.json
       target: assets/watching/hugo_stats.json
+    - source: node_modules/@material-symbols/svg-400/rounded
+      target: assets/icons
+
   imports:
 
     - path: github.com/moby/moby

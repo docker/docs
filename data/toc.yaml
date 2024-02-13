@@ -1,8 +1,6 @@
 Guides:
 - title: Docker overview
   path: /get-started/overview/
-- title: Get Docker
-  path: /get-docker/
 - sectiontitle: Get started
   section:
     - title: "Overview"
@@ -157,12 +155,30 @@ Guides:
   section:
     - sectiontitle: Generative AI
       section:
-      - path: /guides/use-case/genai-pdf-bot/
+      - sectiontitle: PDF analysis and chat
+        section:
+        - path: /guides/use-case/genai-pdf-bot/
+          title: Overview
+        - path: /guides/use-case/genai-pdf-bot/containerize/
+          title: Containerize your app
+        - path: /guides/use-case/genai-pdf-bot/develop/
+          title: Develop your app
+      - path: /guides/use-case/genai-video-bot/
+        title: Video transcription and chat
+    - sectiontitle: Natural language processing
+      section:
+      - path: /guides/use-case/nlp/
         title: Overview
-      - path: /guides/use-case/genai-pdf-bot/containerize/
-        title: Containerize your app
-      - path: /guides/use-case/genai-pdf-bot/develop/
-        title: Develop your app
+      - path: /guides/use-case/nlp/language-translation/
+        title: Language translation
+      - path: /guides/use-case/nlp/named-entity-recognition/
+        title: Named entity recognition
+      - path: /guides/use-case/nlp/sentiment-analysis/
+        title: Sentiment analysis
+      - path: /guides/use-case/nlp/text-classification/
+        title: Text classification
+      - path: /guides/use-case/nlp/text-summarization/
+        title: Text summarization
 
 - sectiontitle: Develop with Docker
   section:
@@ -175,7 +191,7 @@ Guides:
     - path: /develop/develop-images/dockerfile_best-practices/
       title: Overview
     - path: /develop/develop-images/guidelines/
-      title: General guidelines 
+      title: General guidelines
     - path: /develop/develop-images/instructions/
       title: Best practices for Dockerfile instructions
   - path: /develop/security-best-practices/
@@ -489,6 +505,8 @@ Reference:
         title: docker context update
       - path: /engine/reference/commandline/context_use/
         title: docker context use
+  - path: /engine/reference/commandline/debug/
+    title: docker debug (Beta)
   - path: /engine/reference/commandline/exec/
     title: docker exec
   - sectiontitle: docker image
@@ -524,7 +542,7 @@ Reference:
   - path: /engine/reference/commandline/info/
     title: docker info
   - path: /engine/reference/commandline/init/
-    title: docker init (Beta)
+    title: docker init
   - path: /engine/reference/commandline/inspect/
     title: docker inspect
   - path: /engine/reference/commandline/login/
@@ -615,6 +633,10 @@ Reference:
     section:
     - path: /engine/reference/commandline/scout/
       title: docker scout
+    - path: /engine/reference/commandline/scout_attestation/
+      title: docker scout attestation
+    - path: /engine/reference/commandline/scout_attestation_add/
+      title: docker scout attestation add
     - path: /engine/reference/commandline/scout_cache/
       title: docker scout cache
     - path: /engine/reference/commandline/scout_cache_df/
@@ -932,7 +954,7 @@ Reference:
     - path: /compose/compose-file/deploy/
       title: Compose Deploy Specification
     - path: /compose/compose-file/develop/
-      title: Compose Develop Specification 
+      title: Compose Develop Specification
     - sectiontitle: Legacy versions
       section:
         - path: /compose/compose-file/compose-versioning/
@@ -1044,6 +1066,8 @@ Samples:
 Manuals:
 - path: /manuals/
   title: Overview
+- title: Get Docker
+  path: /get-docker/
 - sectiontitle: Docker Desktop
   section:
     - path: /desktop/
@@ -1083,7 +1107,7 @@ Manuals:
         - path: /desktop/use-desktop/volumes/
           title: Explore Volumes
         - path: /desktop/use-desktop/builds/
-          title: Explore Builds 
+          title: Explore Builds
         - path: /desktop/use-desktop/resource-saver/
           title: Resource Saver mode
         - path: /desktop/use-desktop/pause/
@@ -1106,6 +1130,8 @@ Manuals:
             title: How does it work?
           - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
             title: Key features and benefits
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
+            title: Advanced configuration options (Beta)
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1119,9 +1145,11 @@ Manuals:
         - path: /desktop/dev-environments/dev-cli/
           title: Use the docker dev CLI plugin
     - path: /desktop/containerd/
-      title: containerd image store (Beta)
+      title: containerd image store
     - path: /desktop/wasm/
       title: Wasm workloads (Beta)
+    - path: /desktop/synchronized-file-sharing/
+      title: Synchronized file shares {{< badge color=violet text=New >}}
     - sectiontitle: WSL
       section:
         - path: /desktop/wsl/
@@ -1130,6 +1158,8 @@ Manuals:
           title: Use WSL
         - path: /desktop/wsl/best-practices/
           title: Best practices
+    - path: /desktop/gpu/
+      title: GPU support
     - sectiontitle: Additional resources
       section:
         - path: /desktop/kubernetes/
@@ -1198,7 +1228,7 @@ Manuals:
         - path: /desktop/extensions/settings-feedback/
           title: Change settings and give feedback
         - path: /desktop/extensions/private-marketplace/
-          title: Configure a private marketplace (Experimental)
+          title: Configure a private marketplace (Beta)
     - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
@@ -1753,7 +1783,7 @@ Manuals:
           title: Kubernetes driver
         - path: /build/drivers/remote/
           title: Remote driver
-    - sectiontitle: Build Cloud
+    - sectiontitle: Build Cloud {{< badge color=violet text=New >}}
       section:
         - path: /build/cloud/
           title: Overview
@@ -1947,6 +1977,8 @@ Manuals:
     title: Networking
   - path: /compose/samples-for-compose/
     title: Sample apps
+  - path: /compose/feedback/
+    title: Give feedback
   - path: /compose/migrate/
     title: Migrate to Compose V2
   - path: /compose/release-notes/
@@ -2020,7 +2052,7 @@ Manuals:
     - path: /admin/organization/activity-logs/
       title: Activity logs
     - path: /admin/organization/general-settings/
-      title: General settings
+      title: Organization settings
   - sectiontitle: Company administration
     section:
     - path: /admin/company/
@@ -2073,7 +2105,7 @@ Manuals:
     - sectiontitle: Two-factor authentication
       section:
       - path: /security/for-developers/2fa/
-        title: Enable two-factor authentication 
+        title: Enable two-factor authentication
       - path: /security/for-developers/2fa/disable-2fa/
         title: Disable two-factor authentication
       - path: /security/for-developers/2fa/recover-hub-account/
@@ -2147,8 +2179,6 @@ FAQ:
     title: Overview
   - path: /billing/faqs/
     title: Billing
-  - path: /build/cloud/faq/
-    title: Build Cloud
   - path: /compose/faq/
     title: Compose
   - sectiontitle: Desktop

@@ -70,46 +70,10 @@ driver is not available on the platform.
 ```yml
 networks:
   db-data:
-    driver: overlay
+    driver: bridge
 ```
 
-Default and available values are platform specific. Compose supports the following drivers:
-`none` and `host`
-
-- `host`: Use the host's networking stack.
-- `none`: Turn off networking.
-
-#### host or none
-
-The syntax for using built-in networks such as `host` and `none` is different, as such networks implicitly exist outside
-the scope of Compose. To use them, you must define an external network with the name `host` or `none` and
-an alias that Compose can use (`hostnet` and `nonet` in the following example), then grant the service
-access to that network using its alias.
-
-```yml
-services:
-  web:
-    networks:
-      hostnet: {}
-
-networks:
-  hostnet:
-    external: true
-    name: host
-```
-
-```yml
-services:
-  web:
-    ...
-    networks:
-      nonet: {}
-
-networks:
-  nonet:
-    external: true
-    name: none
-```
+For more information on drivers and available options, see [Network drivers](../../network/drivers/_index.md).
 
 ### driver_opts
 
@@ -251,3 +215,7 @@ networks:
     external: true
     name: "${NETWORK_ID}"
 ```
+
+## Additional resources
+
+For more examples, see [Networking in Compose](../networking.md).

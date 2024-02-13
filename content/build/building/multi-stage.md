@@ -1,10 +1,8 @@
 ---
 title: Multi-stage builds
-description: 'Learn about multi-stage builds and how you can use
-
+description: |
+  Learn about multi-stage builds and how you can use
   them to improve your builds and get smaller images
-
-  '
 keywords: build, best practices
 aliases:
 - /engine/userguide/eng-image/multistage-build/
@@ -22,11 +20,11 @@ stage of the build. You can selectively copy artifacts from one stage to
 another, leaving behind everything you don't want in the final image.
 
 The following Dockerfile has two separate stages: one for building a binary,
-and another where we copy the binary into.
+and another where the binary gets copied from the first stage into the next stage.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM golang:1.21
+FROM golang:{{% param "example_go_version" %}}
 WORKDIR /src
 COPY <<EOF ./main.go
 package main
@@ -71,7 +69,7 @@ Dockerfile are re-ordered later, the `COPY` doesn't break.
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM golang:1.21 as build
+FROM golang:{{% param "example_go_version" %}} as build
 WORKDIR /src
 COPY <<EOF /src/main.go
 package main

@@ -74,7 +74,6 @@ Before you deploy the agent, ensure that you meet the prerequisites:
   - Your JFrog Artifactory instance
   - `hub.docker.com`, port 443, for authenticating with Docker
   - `api.dso.docker.com`, port 443, for transacting data to Docker Scout
-- The server isn't behind a proxy
 - The registries are Docker V2 registries. V1 registries aren't supported.
 
 The agent supports all versions of JFrog Artifactory and JFrog Container

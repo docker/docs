@@ -2,6 +2,9 @@
 # - module-name: the name of the module, without github.com prefix (e.g., docker/buildx)
 # - data-files-id: id of the artifact (using actions/upload-artifact) containing the YAML data files to validate (optional)
 # - data-files-folder: folder in _data containing the files to download and copy to (e.g., buildx)
+# if changes are made in this workflow, please keep commit sha updated on downstream workflows:
+# - https://github.com/docker/buildx/blob/master/.github/workflows/docs-upstream.yml
+# - https://github.com/docker/compose/blob/main/.github/workflows/docs-upstream.yml
 name: validate-upstream
 
 on:
@@ -31,7 +34,7 @@ jobs:
           repository: docker/docs
       -
         name: Download data files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         if: ${{ inputs.data-files-id != '' && inputs.data-files-folder != '' }}
         with:
           name: ${{ inputs.data-files-id }}

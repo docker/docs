@@ -12,7 +12,7 @@ Manage environments (experimental)
 | Name             | Type     | Default | Description                          |
 |:-----------------|:---------|:--------|:-------------------------------------|
 | `--org`          | `string` |         | Namespace of the Docker organization |
-| `-o`, `--output` | `string` |         | Write the report to a file.          |
+| `-o`, `--output` | `string` |         | Write the report to a file           |
 | `--platform`     | `string` |         | Platform of image to record          |
 
 

@@ -61,6 +61,19 @@ loads it through a binary registered in the `binfmt_misc` handler.
 > Use [multiple native nodes](#multiple-native-nodes) or
 > [cross-compilation](#cross-compilation) instead, if possible.
 
+#### Support on Docker Desktop
+
+[Docker Desktop](../../desktop/index.md) provides `binfmt_misc`
+multi-architecture support, which means you can run containers for different
+Linux architectures such as `arm`, `mips`, `ppc64le`, and even `s390x`.
+
+This doesn't require any special configuration in the container itself as it
+uses [qemu-static](https://wiki.qemu.org/Main_Page)
+from the Docker Desktop VM. Because of this, you can run an ARM container,
+like the `arm32v7` or `ppc64le` variants of the busybox image.
+
+#### QEMU without Docker Desktop
+
 For QEMU binaries registered with `binfmt_misc` on the host OS to work
 transparently inside containers, they must be statically compiled and
 registered with the `fix_binary` flag. This requires a kernel version 4.8 or
@@ -180,7 +193,7 @@ cURL installed for multiple architectures:
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM alpine:3.16
+FROM alpine:{{% param "example_alpine_version" %}}
 RUN apk add curl
 ```
 
@@ -266,14 +279,3 @@ armv7l
 
 In the above example, `uname -m` returns `aarch64` and `armv7l` as expected,
 even when running the commands on a native macOS or Windows developer machine.
-
-## Support on Docker Desktop
-
-[Docker Desktop](../../desktop/index.md) provides `binfmt_misc`
-multi-architecture support, which means you can run containers for different
-Linux architectures such as `arm`, `mips`, `ppc64le`, and even `s390x`.
-
-This does not require any special configuration in the container itself as it
-uses [qemu-static](https://wiki.qemu.org/Main_Page)
-from the Docker Desktop VM. Because of this, you can run an ARM container,
-like the `arm32v7` or `ppc64le` variants of the busybox image.

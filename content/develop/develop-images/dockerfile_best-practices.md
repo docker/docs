@@ -44,7 +44,7 @@ When you run an image and generate a container, you add a new writable layer, al
 the running container, such as writing new files, modifying existing files, and
 deleting files, are written to this writable container layer.
 
-## Additional resources:
+## Additional resources
 
 * [Dockerfile reference](../../engine/reference/builder.md)
 * [More about Automated builds](../../docker-hub/builds/index.md)

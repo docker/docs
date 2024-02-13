@@ -97,6 +97,28 @@ Reclaimable:  2.01GB
 Total:        2.01GB
 ```
 
+## Remove a builder
+
+Use the
+[`docker buildx remove`](../../engine/reference/commandline/buildx_create.md)
+command to remove a builder.
+
+```console
+$ docker buildx rm <builder-name>
+```
+
+If you remove your currently selected builder,
+the default `docker` builder is automatically selected.
+You can't remove the default builder.
+
+Local build cache for the builder is also removed.
+
+### Removing remote builders
+
+Removing a remote builder doesn't affect the remote build cache.
+It also doesn't stop the remote BuildKit daemon.
+It only removes your connection to the builder.
+
 ## Manage builders with Docker Desktop
 
 If you have turned on the

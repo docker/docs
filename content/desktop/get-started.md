@@ -33,6 +33,10 @@ Docker recommends that you authenticate using the **Sign in** option in the top-
 
 In large enterprises where admin access is restricted, administrators can [Configure registry.json to enforce sign-in](../security/for-admins/configure-sign-in.md). 
 
+> **Tip**
+>
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+
 ## Benefits of signing in
 
 - You can access your Docker Hub repositories directly from Docker Desktop.

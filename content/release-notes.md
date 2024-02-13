@@ -7,7 +7,7 @@ grid:
   icon: web_asset
   link: /desktop/release-notes/
 - title: Docker Engine
-  icon: settings_suggest
+  icon: developer_board
   link: /engine/release-notes/
 - title: Docker Compose
   icon: storage
