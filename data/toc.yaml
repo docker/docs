@@ -1334,8 +1334,8 @@ Manuals:
       section:
       - path: /scout/image-analysis/
         title: Image analysis
-      - path: /scout/local-fs/
-        title: Analyze local files
+      - path: /scout/image-prefix/
+        title: Specify artifact type or location
       - path: /scout/sbom/
         title: SBOM
       - path: /scout/env-vars/
