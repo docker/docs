@@ -1,7 +1,7 @@
 ---
 description: Configure registry.json to enforce users to sign into Docker Desktop
 toc_max: 2
-keywords: authentication, registry.json, configure,
+keywords: authentication, registry.json, configure, enforce sign-in
 title: Enforce sign-in for Desktop
 aliases:
 - /docker-hub/configure-sign-in/
