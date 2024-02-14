@@ -50,4 +50,4 @@ To learn how to buy this subscription, see [Docker Build Cloud billing](../billi
 
 ## Docker Build Cloud Enterprise
 
-For enterprise features such as paying via invoice and additional build minutes, [contact sales](https://www.docker.com/products/build-cloud/?source=docs#contact_sales).
+For enterprise features such as paying via invoice and additional build minutes, [contact sales](https://www.docker.com/products/build-cloud/#contact_sales).
