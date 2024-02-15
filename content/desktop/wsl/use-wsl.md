@@ -14,6 +14,7 @@ The following section describes how to start developing your applications using 
     ```console
     $ wsl
     ```
+3. Navigate to your project directory and then type:
 
     ```console
     $ code .
@@ -21,5 +22,6 @@ The following section describes how to start developing your applications using 
 
     This opens a new VS Code window connected remotely to your default Linux distro which you can check in the bottom corner of the screen.
 
-    Alternatively, you can type the name of your default Linux distro in your Start menu, open it, and then run `code .`
-3. When you are in VS Code, you can use the terminal in VS Code to pull your code and start working natively from your Windows machine.
+
+Alternatively, ou can open your default Linux distribution from the Start menu, navigate to your project directory, and then run code .
+

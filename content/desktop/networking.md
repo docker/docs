@@ -108,8 +108,8 @@ ping the Windows containers.
 
 ### Per-container IP addressing is not possible
 
-The Docker-bridge network is not reachable from the host.
-However if you are a Windows user, it works with Windows containers.
+This is because the Docker `bridge` network is not reachable from the host.
+However if you are a Windows user, per-container IP addressing is possible with Windows containers.
 
 ## Use cases and workarounds 
 
