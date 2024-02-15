@@ -74,7 +74,7 @@ The following outlines organization management permissions for member, editor, o
 | Image Access Management                                           | ❌     | ❌     | ✅                 | ✅            |
 | Registry Access Management                                        | ❌     | ❌     | ✅                 | ✅            |
 | Set up Single Sign-On (SSO) and SCIM                              | ❌     | ❌     | ✅ \*              | ✅            |
-| Require Desktop sign-in                                           | ❌     | ❌     | ✅ \*              | ✅            |
+| Require Docker Desktop sign-in                                    | ❌     | ❌     | ✅ \*              | ✅            |
 | Manage billing information (e.g. billing address)                 | ❌     | ❌     | ✅                 | ✅            |
 | Manage payment methods (e.g. credit card or invoice)              | ❌     | ❌     | ✅                 | ✅            |
 | View billing history                                              | ❌     | ❌     | ✅                 | ✅            |
