@@ -30,6 +30,10 @@ This page contains information about general system requirements, supported plat
 
 {{< accordion title=" What is the difference between Docker Desktop for Linux and Docker Engine?" >}}
 
+> **Important**
+>
+> For commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees OR with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.
+
 Docker Desktop for Linux provides a user-friendly graphical interface that simplifies the management of containers and services. It includes Docker Engine as this is the core technology that powers Docker containers. Docker Desktop for Linux also comes with additional features like Docker Scout and Docker Extensions.
 
 #### Installing Docker Desktop and Docker Engine
