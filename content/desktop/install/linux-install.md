@@ -11,6 +11,12 @@ aliases:
   0 auto"}'
 ---
 
+> **Docker Desktop terms**
+>
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) requires a [paid
+> subscription](https://www.docker.com/pricing/).
+
 This page contains information about general system requirements, supported platforms, and instructions on how to install Docker Desktop for Linux.
 
 > **Important**
@@ -198,12 +204,6 @@ Sign out and sign back in so that your group membership is re-evaluated.
 
 
 ## Generic installation steps
-
-> **Docker Desktop terms**
->
-> Commercial use of Docker Desktop in larger enterprises (more than 250
-> employees OR more than $10 million USD in annual revenue) requires a [paid
-> subscription](https://www.docker.com/pricing/).
 
 > **Important**
 >

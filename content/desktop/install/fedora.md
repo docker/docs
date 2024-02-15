@@ -8,6 +8,12 @@ aliases:
 - /desktop/linux/install/fedora/
 ---
 
+> **Docker Desktop terms**
+>
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) requires a [paid
+> subscription](https://www.docker.com/pricing/).
+
 This page contains information on how to install, launch and upgrade Docker Desktop on a Fedora distribution.
 
 {{< button text="RPM package" url="https://desktop.docker.com/linux/main/amd64/137060/docker-desktop-4.27.2-x86_64.rpm?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}

@@ -72,4 +72,9 @@ For more details, see
 
 The Docker Engine is licensed under the Apache License, Version 2.0. See
 [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license
-text.
+text. 
+
+However, for commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees OR with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.
+
+
+However, commercial use of Docker Engine aquired through Docker Desktop in larger enterprises (more than 250 employees OR more than $10 million USD in annual revenue) requires a [paid subscription](https://www.docker.com/pricing/).
