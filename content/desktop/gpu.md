@@ -17,7 +17,7 @@ Docker Desktop for Windows supports WSL 2 GPU Paravirtualization (GPU-PV) on NVI
 - Up to date Windows 10 or Windows 11 installation
 - [Up to date drivers](https://developer.nvidia.com/cuda/wsl) from NVIDIA supporting WSL 2 GPU Paravirtualization
 - The latest version of the WSL 2 Linux kernel. Use `wsl --update` on the command line
-- Make sure the [WSL 2 backend is turned on](wsl/index.md/#turn-on-docker-desktop-wsl-2) in Docker Desktop
+- To make sure the [WSL 2 backend is turned on](wsl/index.md/#turn-on-docker-desktop-wsl-2) in Docker Desktop
 
 To validate that everything works as expected, execute a `docker run` command with the `--gpus=all` flag. For example, the following will run a short benchmark on your GPU:
 
