@@ -19,17 +19,17 @@ aliases:
 - /desktop/win/configuring-wsl/
 ---
 
-This page contains the download URL, information about system requirements, and instructions on how to install Docker Desktop for Windows.
-
-{{< button text="Docker Desktop for Windows" url="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe" >}}
-
-_For checksums, see [Release notes](../release-notes.md)_
-
 > **Docker Desktop terms**
 >
 > Commercial use of Docker Desktop in larger enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
+
+This page contains the download URL, information about system requirements, and instructions on how to install Docker Desktop for Windows.
+
+{{< button text="Docker Desktop for Windows" url="https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe" >}}
+
+_For checksums, see [Release notes](../release-notes.md)_
 
 ## System requirements
 

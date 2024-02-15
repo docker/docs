@@ -136,7 +136,7 @@ and forth between each other.
 To use build secrets with Docker Build Cloud,
 such as authentication credentials or tokens,
 use the `--secret` and `--ssh` CLI flags for the `docker buildx` command.
-The traffic is end-to-end encrypted and secrets are never stored in the build cache.
+The traffic is encrypted and secrets are never stored in the build cache.
 
 > **Warning**
 >

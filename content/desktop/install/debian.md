@@ -8,6 +8,12 @@ aliases:
 - /desktop/linux/install/debian/
 ---
 
+> **Docker Desktop terms**
+>
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) requires a [paid
+> subscription](https://www.docker.com/pricing/).
+
 This page contains information on how to install, launch, and upgrade Docker Desktop on a Debian distribution.
 
 {{< button text="DEB package" url="https://desktop.docker.com/linux/main/amd64/137060/docker-desktop-4.27.2-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" >}}
