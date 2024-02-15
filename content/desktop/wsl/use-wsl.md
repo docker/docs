@@ -23,5 +23,5 @@ The following section describes how to start developing your applications using 
     This opens a new VS Code window connected remotely to your default Linux distro which you can check in the bottom corner of the screen.
 
 
-Alternatively, you can open your default Linux distribution from the Start menu, navigate to your project directory, and then run code .
+Alternatively, you can open your default Linux distribution from the **Start** menu, navigate to your project directory, and then run `code .`
 
