@@ -6,9 +6,6 @@ level: suggestion
 action:
   name: replace
 swap:
-  '(?<!Docker)\s Hub': Docker Hub
-  '(?<!Docker)\sScout': Docker Scout
-  k8s: Kubernetes
   '\b(?:eg|e\.g\.)[\s,]': for example
   '\b(?:ie|i\.e\.)[\s,]': that is
   (?:account name|accountname|user name): username
@@ -29,27 +26,17 @@ swap:
   anti-spyware: antispyware
   anti-virus: antivirus
   appendixes: appendices
-  assembler: assembly language
+  assembler: assembly
   below: following
   check box: checkbox
   check boxes: checkboxes
   click: select
   deselect: clear
-  disable: turn off|toggle off
-  enable: turn on|toggle on
   ergo: therefore
-  execute: run
-  gb: GB
-  gbps: Gbps
-  kb: KB
   keypress: keystroke
-  mb: MB
   mutices: mutexes
-  paas: PaaS
-  pb: PB
   repo: repository
   scan: analyze
   scroll: navigate
-  tb: TB
   vs: versus
   wish: want

@@ -1,7 +1,10 @@
 extends: existence
 message: "'%s' should have one space."
 level: error
+scope:
+  - list
+  - heading
+  - paragraph
 nonword: true
 tokens:
-  - "[a-z][.?!] {2,}[A-Z]"
-  - "[a-z][.?!][A-Z]"
+  - " {2,}"
