@@ -76,7 +76,7 @@ $ docker build \
     --platform=linux/amd64,linux/arm64,linux/arm/v7 .
 ```
 
-This command uses emulation to run the same build four times, once for each
+This command uses emulation to run the same build three times, once for each
 platform. The build results are exported to a `bin` directory.
 
 ```text
@@ -94,7 +94,7 @@ bin
 
 When you build for multiple platforms concurrently,
 BuildKit runs all of the build steps under emulation for each platform that you specify.
-Effectively forking the build into two concurrent processes.
+Effectively forking the build into multiple concurrent processes.
 
 ![Build pipelines using emulation](./images/emulation.png)
 
