@@ -80,7 +80,7 @@ Uncomment the database instructions in the `compose.yaml` file.
 
 The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml {hl_lines="8-33"}
 services:
   server:
     build:
@@ -236,7 +236,7 @@ Use Compose Watch to automatically update your running Compose services as you e
 
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml  {hl_lines="11-14"}
 services:
   server:
     build:
@@ -305,7 +305,7 @@ Add a new development stage to your Dockerfile and update your `compose.yaml` fi
 
 The following is the updated Dockerfile.
 
-```Dockerfile
+```Dockerfile {hl_lines="10-13"}
 # syntax=docker/dockerfile:1
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
@@ -338,7 +338,7 @@ ENTRYPOINT ["dotnet", "myWebApp.dll"]
 
 The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml  {hl_lines="5"}
 services:
   server:
     build:

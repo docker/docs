@@ -75,7 +75,7 @@ ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 
 Docker started your container in the background and printed the Container ID on the terminal.
 
-Again, make sure that our container is running properly. Run the same curl command from above.
+Again, make sure that your container is running properly. Run the previous curl command.
 
 ```console
 $ curl http://localhost:3001
@@ -153,7 +153,7 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED         
 
 Notice that the container you just restarted has been started in detached mode. Also, observe the status of the container is "Up X seconds". When you restart a container, it starts with the same flags or commands that it was originally started with.
 
-Now, stop and remove all of your containers and take a look at fixing the random naming issue. Stop the container you just started. Find the name of your running container and replace the name in the command below with the name of the container on your system.
+Now, stop and remove all of your containers and take a look at fixing the random naming issue. Stop the container you just started. Find the name of your running container and replace the name in the following command with the name of the container on your system.
 
 ```console
 $ docker stop wonderful_kalam

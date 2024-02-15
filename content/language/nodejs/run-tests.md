@@ -79,7 +79,7 @@ To run your tests when building, you need to update your Dockerfile to add a new
 
 The following is the updated Dockerfile.
 
-```dockerfile
+```dockerfile {hl_lines="28-36"}
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=18.0.0
