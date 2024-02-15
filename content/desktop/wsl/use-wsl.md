@@ -9,7 +9,7 @@ The following section describes how to start developing your applications using 
 ## Develop with Docker and WSL 2
 
 1. Open VS Code and install the [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension. This extension lets you work with a remote server in the Linux distro and your IDE client still on Windows.
-2. Start working in VS Code remotely. To do this, open your terminal and type:
+2. Open your terminal and type:
 
     ```console
     $ wsl
@@ -23,5 +23,5 @@ The following section describes how to start developing your applications using 
     This opens a new VS Code window connected remotely to your default Linux distro which you can check in the bottom corner of the screen.
 
 
-Alternatively, ou can open your default Linux distribution from the Start menu, navigate to your project directory, and then run code .
+Alternatively, you can open your default Linux distribution from the Start menu, navigate to your project directory, and then run code .
 
