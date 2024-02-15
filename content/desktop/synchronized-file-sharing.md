@@ -45,7 +45,7 @@ When the status indicator displays **Watching for filesystem changes**, your fil
 
 >**Note**
 >
-> When you create a new service, setting the [bind mount option consistency](../engine/reference/commandline/secret_create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
+> When you create a new service, setting the [bind mount option consistency](../engine/reference/commandline/service_create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares.
 
 ## Explore your file share instance
 

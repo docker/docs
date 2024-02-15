@@ -3,6 +3,10 @@ description: Learn about organizations.
 keywords: organizations, admin, overview
 title: Organization administration overview
 grid:
+- title: Onboard your organization
+  description: Learn how to onboard and secure your organization.
+  icon: explore
+  link: /admin/organization/onboard
 - title: Manage members
   description: Explore how to manage members.
   icon: group_add

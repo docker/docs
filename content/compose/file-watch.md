@@ -59,7 +59,8 @@ by the configured user, use the `COPY --chown` flag:
 
 ```dockerfile
 # Run as a non-privileged user
-RUN adduser -ms /bin/bash -u 1001 app
+FROM node:18-alpine
+RUN useradd -ms /bin/sh -u 1001 app
 USER app
 
 # Copy source files into application directory
@@ -168,3 +169,7 @@ This pattern can be followed for many languages and frameworks, such as Python w
 ## Feedback
 
 We are actively looking for feedback on this feature. Give feedback or report any bugs you may find in the [Compose Specification repository](https://github.com/compose-spec/compose-spec/pull/253).
+
+## Reference
+
+- [Compose Develop Specification](compose-file/develop.md)

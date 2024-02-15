@@ -36,7 +36,12 @@ When a user signs in using SSO, Docker obtains the following attributes from the
 - **Full name** - name of the user
 - **Groups (optional)** - list of groups to which the user belongs
 
-If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those in the previous list. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work. 
+If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those in the previous list. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work.
+
+> **Important**
+>
+>SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](../scim.md#set-up-scim), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For example, to make sure that the full name of a user displays in your organization, you would set a `name` attribute in your SAML attributes and ensure the value includes their first name and last name. The exact method for setting these values (for example, constructing it with `user.firstName + " " + user.lastName`) varies depending on your IdP.
+{.important}
 
 You can also configure attributes to override default values, such as default team or organization. See [role mapping](../scim.md#set-up-role-mapping).
 
@@ -51,14 +56,14 @@ You can also configure attributes to override default values, such as default te
 
 > **Important**
 >
-> If none of the email address attributes listed in the previous table are found, SSO returns an error.
+> If none of the email address attributes listed in the previous table are found, SSO returns an error. Also, if the `Full name` attribute isn't set, then the name will be displayed as the value of the `Email address`.
 { .important}
 
 ## Prerequisites
 
 * You must first notify your company about the new SSO login procedures.
 * Verify that your members have Docker Desktop version 4.4.2, or later, installed on their machines.
-* If your organization uses the Docker Hub CLI, new org members must [create a Personal Access Token (PAT)](/docker-hub/access-tokens/) to sign in to the CLI. There is a grace period for existing users, which will expire in the near future. Before the grace period ends, your users can sign in from Docker Desktop CLI using their previous credentials until PATs are mandatory.
+* If your organization uses the Docker Hub CLI, we recommend that members [create a Personal Access Token (PAT)](/docker-hub/access-tokens/) to sign in to the CLI instead of with a username and password. Docker may deprecate signing in to the CLI with a username and password in the future, so using a PAT instead is a best practice to prevent potential issues with authentication.
 In addition, you should add all email addresses to your IdP.
 * Confirm that all CI/CD pipelines have replaced their passwords with PATs.
 * For your service accounts, add your additional domains or enable it in your IdP.

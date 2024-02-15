@@ -11,6 +11,10 @@ grid:
   description: Learn about organization administration.
   icon: store
   link: /admin/organization/
+- title: Onboard your organization
+  description: Learn how to onboard and secure your organization.
+  icon: explore
+  link: /admin/organization/onboard
 - title: Company FAQ
   description: Discover common questions and answers about companies.
   icon: help

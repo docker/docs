@@ -4,6 +4,8 @@ description: Learn about include
 keywords: compose, compose specification, include, compose file reference
 ---
 
+> Available with Docker Compose version 2.20.0 and later.
+
 A Compose application can declare dependency on another Compose application. This is useful if:
 - You want to reuse other Compose files.
 - You need to factor out parts of your application model into separate Compose files so they can be managed separately or shared with others.
@@ -111,3 +113,7 @@ include:
 
 The local project's environment has precedence over the values set by the Compose file, so that the local project can
 override values for customization.
+
+## Additional resources
+
+For more information on using `include`, see [Working with multiple Compose files](../multiple-compose-files/_index.md)

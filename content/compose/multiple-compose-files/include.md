@@ -6,7 +6,7 @@ title: Include
 
 > **Note**
 >
-> `include` is available in Docker Compose version 2.20 and later, and Docker Desktop version 4.22 and later. 
+> `include` is available in Docker Compose version 2.20.3 and later, and Docker Desktop version 4.22 and later. 
 
 With the [`include` top-level element](../compose-file/14-include.md), you can include a separate Compose file directly in your local Compose file. This solves the relative path problem that [`extends`](extends.md) and [merge](merge.md) present. 
 
