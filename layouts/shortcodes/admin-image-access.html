@@ -3,17 +3,17 @@
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
-  {{ $iam_navigation = "Select your organization in the left navigation drop-down menu, and then select **Image Access**." }}
+  {{ $iam_navigation = "Select your organization in the left navigation drop-down menu, and then select **Image access**." }}
 {{ end }}
 
 1. Sign in to {{ $product_link }}.
 2. {{ $iam_navigation }}
 3. Enable Image Access Management to set the permissions for the following categories of images you can manage:
 
-  - **Organization Images**: Images from your organization are always allowed by default. These images can be public or private created by members within your organization.
+  - **Organization images**: Images from your organization are always allowed by default. These images can be public or private created by members within your organization.
   - **Docker Official Images**: A curated set of Docker repositories hosted on Hub. They provide OS repositories, best practices for Dockerfiles, drop-in solutions, and applies security updates on time.
   - **Docker Verified Publisher Images**: Images published by Docker partners that are part of the Verified Publisher program and are qualified to be included in the developer secure supply chain.
-  - **Community Images**: These images are disabled by default when Image Access Management is enabled because various users contribute them and they may pose security risks. This category includes Docker-Sponsored Open Source images.
+  - **Community images**: These images are disabled by default when Image Access Management is enabled because various users contribute them and they may pose security risks. This category includes Docker-Sponsored Open Source images.
 
   > **Note**
   >
