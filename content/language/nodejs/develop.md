@@ -148,7 +148,7 @@ development, you can use one multi-stage Dockerfile for both.
 
 Update your Dockerfile to the following multi-stage Dockerfile.
 
-```dockerfile {hl_lines="5-27"}
+```dockerfile {hl_lines="5-26"}
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=18.0.0
@@ -167,7 +167,6 @@ COPY . .
 CMD npm run dev
 
 FROM base as prod
-ENV NODE_ENV production
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \

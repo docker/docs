@@ -75,7 +75,7 @@ ce02b3179f0f10085db9edfccd731101868f58631bdf918ca490ff6fd223a93b
 
 Docker started your container in the background and printed the Container ID on the terminal.
 
-Again, make sure that your container is running properly. Run the previous curl command.
+Again, make sure that your container is running properly. Run the curl command again.
 
 ```console
 $ curl http://localhost:3001
