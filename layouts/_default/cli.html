@@ -25,6 +25,7 @@
     <h1 class="scroll-mt-36">{{ .Title }}</h1>
     {{ end }}
     {{ $data.short | .RenderString (dict "display" "block") }}
+    {{ .Content }}
     {{ if $data.deprecated }}
       <blockquote class="warning">
         <p><strong>This command is deprecated</strong></p>
@@ -161,7 +162,6 @@
       {{ end }}
       {{ $.RenderString (dict "display" "block") . }}
     {{ end }}
-    {{ .Content }}
   </article>
 {{ end }}
 
