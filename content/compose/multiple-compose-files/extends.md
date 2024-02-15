@@ -65,6 +65,8 @@ To include the service `webapp` in the final project when extending services fro
 ```yaml
 services:
   web:
+    build: alpine
+    command: echo
     extends:
       file: common-services.yml
       service: webapp
