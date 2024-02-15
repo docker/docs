@@ -656,7 +656,7 @@ When not explicitly set, `tcp` protocol is used.
 expose:
   - "3000"
   - "8000"
-  - "8080-8085/tcp
+  - "8080-8085/tcp"
 ```
 
 > **Note**
@@ -1151,7 +1151,7 @@ There is a performance penalty for applications that swap memory to disk often.
 
 - `none`: Turns off all container networking.
 - `host`: Gives the container raw access to the host's network interface.
-- `service:{name}`: Gives the containers access to the specified service only. For more information, see [Container networks](../../network/_index.md#container-networks).
+- `service:{name}`: Gives the containers access to the specified service only.
 
 ```yml
     network_mode: "host"
