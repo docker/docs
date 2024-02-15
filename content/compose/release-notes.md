@@ -11,6 +11,18 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.6
+{{< release-date date="2024-02-15" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.3
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.7
+
+### Bug fixes and enhancements
+- Fixed issue of `.env` file loading when project file is set via `COMPOSE_FILE` variable
+- Aligned `ps --status=exited` behaviour with the Docker CLI behaviour
+- Fixed a deadlock when collecting large logs
+
 ## 2.24.5
 {{< release-date date="2024-01-30" >}}
 
