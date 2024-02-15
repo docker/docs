@@ -60,7 +60,7 @@ You get exactly the same result as if you wrote
 `docker-compose.yml` with the same `build`, `ports` and `volumes` configuration
 values defined directly under `web`.
 
-To include the service `webapp` in the final project when extending services from another file, you need to explicitly include both services in your current Compose file. For example:
+To include the service `webapp` in the final project when extending services from another file, you need to explicitly include both services in your current Compose file. For example (note this is a non-normative example):
 
 ```yaml
 services:
