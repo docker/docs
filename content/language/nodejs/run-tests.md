@@ -79,7 +79,7 @@ To run your tests when building, you need to update your Dockerfile to add a new
 
 The following is the updated Dockerfile.
 
-```dockerfile
+```dockerfile {hl_lines="27-35"}
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=18.0.0
@@ -98,7 +98,6 @@ COPY . .
 CMD npm run dev
 
 FROM base as prod
-ENV NODE_ENV production
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \

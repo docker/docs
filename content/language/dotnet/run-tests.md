@@ -42,7 +42,7 @@ To run your tests when building, you need to update your Dockerfile. You can cre
 
 The following is the updated Dockerfile.
 
-```dockerfile
+```dockerfile  {hl_lines="9"}
 # syntax=docker/dockerfile:1
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
