@@ -19,7 +19,7 @@ To get started on your UI, follow the steps below.
 
 Docker Desktop's UI is written in React and [MUI](https://mui.com/) (using Material UI to specific). This is the only officially supported framework for building extensions, and the one that our `init` command automatically configures for you. Using it brings significant benefits to authors:
 
-- You can use our [Material UI theme](https://www.npmjs.com/package/@docker/docker-mui-theme) to automatically replicate Docker Desktop's look & feel.
+- You can use our [Material UI theme](https://www.npmjs.com/package/@docker/docker-mui-theme) to automatically replicate Docker Desktop's look and feel.
 - In future, we'll release utilities and components specifically targeting this combination (e.g. custom MUI components, or React hooks for interacting with Docker).
 
 Read our [MUI best practices](mui-best-practices.md) guide to learn future-proof ways to use MUI with Docker Desktop.
