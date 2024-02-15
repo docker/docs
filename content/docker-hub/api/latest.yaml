@@ -1689,6 +1689,8 @@ components:
           type: string
           description: Friendly name for you to identify the token.
           example: My read only token
+          minLength: 1
+          maxLength: 100
         scopes:
           type: array
           description: |
@@ -1730,6 +1732,8 @@ components:
         token_label:
           type: string
           example: My read only token
+          minLength: 1
+          maxLength: 100
         is_active:
           type: boolean
           example: false
