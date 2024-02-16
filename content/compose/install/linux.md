@@ -55,7 +55,7 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
 3.  Verify that Docker Compose is installed correctly by checking the version.
 
     ```console
-    $ docker compose version
+    $ docker-compose version
     ```
 
     Expected output:
