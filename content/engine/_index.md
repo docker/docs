@@ -60,7 +60,7 @@ application with:
 
 The CLI uses [Docker APIs](api/index.md) to control or interact with the Docker
 daemon through scripting or direct CLI commands. Many other Docker applications
-use the underlying API and CLI. The daemon creates and manage Docker objects,
+use the underlying API and CLI. The daemon creates and manages Docker objects,
 such as images, containers, networks, and volumes.
 
 For more details, see
