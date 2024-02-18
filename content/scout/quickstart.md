@@ -134,7 +134,7 @@ it isn't the most effective way to improve your supply chain conduct.
 
 Docker Scout also supports policy evaluation,
 a higher-level concept for detecting and fixing issues in your images.
-Policies are a set of customizable rules that lets organizations track whether
+Policies are a set of customizable rules that let organizations track whether
 images are compliant with their supply chain requirements.
 
 Because policy rules are specific to each organization,
