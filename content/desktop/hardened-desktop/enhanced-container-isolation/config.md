@@ -231,7 +231,6 @@ Whether to configure the list as an allow or deny list depends on the use case.
   hosts with WSL (but they work on Hyper-V). Support for WSL is expected to be
   added soon.
 
-
 * When Docker Desktop is restarted, it's possible that an image that is allowed
   to mount the Docker socket is unexpectedly blocked from doing so. This can
   happen when the image digest changes in the remote repository (e.g., a
