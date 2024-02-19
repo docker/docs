@@ -112,6 +112,21 @@ menus:
     weight: 1
   - name: Manuals
     url: /manuals/
+    params:
+      children:
+        # These should match the first-level TOC keys in site data
+        - Administration
+        - Billing
+        - Docker Build
+        - Docker Compose
+        - Docker Desktop
+        - Docker Engine
+        - Docker Extensions
+        - Docker Hub
+        - Docker Scout
+        - Security
+        - Subscription
+        - Trusted content
     weight: 2
   - name: Reference
     url: /reference/

@@ -4,7 +4,7 @@
   <nav>
     <ul class="box-content flex mt-1 gap-4 md:hidden">
       {{ range site.Menus.main }}
-      <li {{- if eq $firstSection .Name }} class="border-b-4" {{- end }}>
+      <li {{- if or (eq $firstSection .Name) (in .Params.children $firstSection) }} class="border-b-4" {{- end }}>
         <a class="block py-1 px-2" href="{{ .URL }}">{{ .Name }}</a>
       </li>
       {{ end }}
