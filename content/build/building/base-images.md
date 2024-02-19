@@ -104,6 +104,12 @@ $ docker run --rm hello
 This example creates the hello-world image used in the tutorials.
 If you want to test it out, you can clone [the image repo](https://github.com/docker-library/hello-world).
 
+## On the various kernel filesystems ....
+
+A quick note ... I'm doing a Dockerfile implementation of Linux From Scratch ( http://linuxfromscratch.org/ ), which builds a cross compiler, chroots into a new partition, and then uses the cross compiler to build a new system ... similar to the stages that gentoo goes from, but it's designed for the student to do it by hand.
+
+Anyway, I had no idea how to get /proc, /dev, /sys and such mounted when I copied my newly build image into the root directory of the scratch image ... turns out you don't have to, the system just kinda does it for you.  I did the copy, did a ```docker run```, and there were /proc, /sys, and /dev, in all their glory.  So if you are like me, and came here looking for the secret, the secret is there is no secret.  Just do it.
+
 ## More resources
 
 There are lots of resources available to help you write your `Dockerfile`.
