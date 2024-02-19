@@ -290,6 +290,33 @@ pipeline {
   }
 }
 ```
+Using the `build.sh` shell script in your `.travis.yml` file under the `install` hook, then making it executable:
+
+{{< tabs >}}
+{{< tab name="Travis CI" >}}
+
+```yaml
+language: minimal 
+dist: jammy 
+
+services:
+  - docker
+
+env:
+  global:
+    - IMAGE_NAME=username/repo
+
+before_install: |
+  echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
+
+install: |
+  set -e 
+  chmod +x ./build_cloud.sh
+  ./build_cloud.sh
+
+script: |
+  docker buildx create --name username --use
+```
 
 {{< /tab >}}
 {{< tab name="Shell" >}}
