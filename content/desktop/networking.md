@@ -53,7 +53,7 @@ See:
 - [Proxies on Mac](settings/mac.md#proxies)
 - [Proxies on Windows](settings/windows.md#proxies)
 
-### SOCKS5 proxy support
+### SOCKS5 proxy support (Beta)
 
 SOCKS (Socket Secure) is a protocol that facilitates the routing of network packets between a client and a server through a proxy server. It provides a way to enhance privacy, security, and network performance for users and applications.
 
