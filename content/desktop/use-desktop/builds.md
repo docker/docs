@@ -76,7 +76,7 @@ operations are defined as follows:
 | SBOM                 | Time spent generating the [SBOM attestation](../../build/attestations/sbom.md).                                                                                                 |
 | Idle                 | Idle time for build workers, which can happen if you have configured a [max parallelism limit](../../build/buildkit/configure.md#max-parallelism).                              |
 
-The **Dependencies** section shows images and remote resources used to during
+The **Dependencies** section shows images and remote resources used during
 the build. Resources listed here include:
 
 - Container images used during the build
