@@ -17,7 +17,7 @@ By default, containerd uses runc as its container runtime.
 ## What runtimes can I use?
 
 You can use any runtime that implements the containerd 
-[shim API](https://github.com/containerd/containerd/blob/main/runtime/v2/README.md).
+[shim API](https://github.com/containerd/containerd/blob/main/core/runtime/v2/README.md).
 Such runtimes ship with a containerd shim, and you can use them without any
 additional configuration. See [Use containerd shims](#use-containerd-shims).
 
