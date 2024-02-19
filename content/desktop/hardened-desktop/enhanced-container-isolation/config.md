@@ -14,6 +14,11 @@ This page describes optional, advanced configurations for ECI, once ECI is enabl
 
 ## Docker socket mount permissions
 
+> **Important**
+>
+> It does not yet work on Windows hosts when Docker Desktop configured to use WSL, but does work with Hyper-V.
+{ .important }
+
 By default, when ECI is enabled, Docker Desktop does not allow bind-mounting the
 Docker Engine socket into containers:
 
@@ -221,6 +226,11 @@ Whether to configure the list as an allow or deny list depends on the use case.
     calls are vetted, etc.)
 
 ### Caveats and limitations
+
+* Docker Socket Mount permissions don't yet work on Docker Desktop on Windows
+  hosts with WSL (but they work on Hyper-V). Support for WSL is expected to be
+  added soon.
+
 
 * When Docker Desktop is restarted, it's possible that an image that is allowed
   to mount the Docker socket is unexpectedly blocked from doing so. This can
