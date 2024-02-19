@@ -138,6 +138,29 @@ The following `admin-settings.json` code and table provides an example of the re
   "blockDockerLoad": {
     "locked": false,
     "value": true
+  },
+  {
+	"configurationFileVersion": 2,
+	"filesharingAllowedDirectories": [
+	  {
+	    "path": "$HOME",
+	    "sharedByDefault": true
+	  },
+	  {
+	    "path":"$TMP",
+	    "sharedByDefault": false
+	  }
+	]
+}, 
+{
+  "configurationFileVersion": 2,
+  "useVirtualizationFrameworkVirtioFS": {
+    "locked": true,
+    "value": true 
+  },
+  "useGrpcfuse": {
+    "locked": true,
+    "value": true 
   }
 }
 ```
@@ -166,6 +189,9 @@ The following `admin-settings.json` code and table provides an example of the re
 | `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|
 | `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|
 | `blockDockerLoad` | | If `value` is set to `true`, users are no longer able to run [`docker load`](../../../engine/reference/commandline/image_load.md) and receive an error if they try to.|
+| `filesharingAllowedDirectories` |  | Specify which paths your developers can add file shares to. Accepts `$HOME`, `$TMP`, or `$TEMP` as `path` variables. This specifices the allowed parent directory and subdirectories. If `sharedByDefault` is set to `true`, only the resolved paths should will be on the allow list. |
+| `useVirtualizationFrameworkVirtioFS`|  <span class="badge badge-info">macOS only</span> | If `value` is set to `true`, VirtioFS is set as the file sharing mechanism. Note: If both `useVirtualizationFrameworkVirtioFS` and `useGrpcfuse` have `value` set to `true`, VirtioFS takes precedence. Likewise, if both `useVirtualizationFrameworkVirtioFS` and `useGrpcfuse` have `value` set to `false`, osxfs is set as the file sharing mechanism. |
+| `useGrpcfuse` | <span class="badge badge-info">macOS only</span> | If `value` is set to `true`, gRPC Fuse is set as the file sharing mechanism. |
 
 ### Step three: Re-launch Docker Desktop
 >**Note**
