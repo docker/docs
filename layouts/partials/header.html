@@ -25,7 +25,52 @@
       {{ partial "top-nav.html" . }}
     </div>
     <div class="flex items-center gap-6">
-      <div id="docsearch"></div>
+      <div
+        x-data="{ open: false }"
+        @keyup.escape.window="open = false"
+        >
+        <!-- search button -->
+        <button @click="
+          open = true;
+          await $nextTick();
+          focusSearch()
+          ">
+          <span class="icon-svg">{{ partial "icon" "search"}}</span>
+        </button>
+        <!-- search modal -->
+        <div
+          class="flex justify-center w-lvw z-10 fixed left-0 top-0 my-12"
+          role="dialog"
+          tabindex="-1"
+          x-show="open"
+          x-cloak
+          x-transition>
+          <div class="w-[840px] md:w-full md:m-4"
+            @click.away="open = false"
+            >
+            <div id="pagefind"></div>
+          </div>
+        </div>
+        <!-- search modal backdrop -->
+        <div
+          class="w-full h-full bg-background-dark/70 top-0 left-0 fixed"
+          x-show="open" x-cloak></div>
+        <!-- register pagefind handler on modal -->
+        <script>
+          window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({
+              element: "#pagefind",
+              showSubResults: true,
+              showImages: false,
+            });
+          });
+
+          function focusSearch(open) {
+            const input = document.querySelector(".pagefind-ui__search-input")
+            input.focus()
+          }
+        </script>
+      </div>
       <button aria-label="Theme switch" id="theme-switch" class="svg-icon"
         x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
         localStorage.setItem('theme-preference', value);

@@ -2,8 +2,10 @@
 
 ARG GO_VERSION=1.21
 ARG HTMLTEST_VERSION=0.17.0
+ARG XX_VERSION=1.4.0
+ARG ALPINE_VERSION=3.19
 
-FROM golang:${GO_VERSION}-alpine as base
+FROM golang:${GO_VERSION}-alpine${ALPINE_VERSION} as base
 WORKDIR /src
 RUN apk --update add nodejs npm git gcompat
 
@@ -31,8 +33,25 @@ ARG HUGO_ENV
 ARG DOCS_URL
 RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 
+FROM --platform=$BUILDPLATFORM tonistiigi/xx:${XX_VERSION} AS xx
+
+FROM alpine:${ALPINE_VERSION} as pagefind
+ARG TARGETPLATFORM
+ARG PAGEFIND_VERSION=1.0.4
+COPY --from=xx / /
+WORKDIR /tmp/pagefind
+RUN wget -O "pagefind.tar.gz" \
+    "https://github.com/CloudCannon/pagefind/releases/download/v${PAGEFIND_VERSION}/pagefind-v${PAGEFIND_VERSION}-$(xx-info alpine-arch)-unknown-linux-musl.tar.gz"
+RUN tar -xf "pagefind.tar.gz" pagefind
+COPY --from=build /out ./public
+RUN ./pagefind --site "public" --output-path /pagefind
+
+FROM scratch AS index
+COPY --from=pagefind /pagefind .
+
 FROM scratch as release
 COPY --from=build /out /
+COPY --from=pagefind /pagefind .
 
 FROM davidanson/markdownlint-cli2:v0.12.1 as lint
 USER root

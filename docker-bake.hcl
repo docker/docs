@@ -40,6 +40,12 @@ target "lint" {
   output = ["type=cacheonly"]
 }
 
+target "index" {
+  # generate a new local search index
+  target = "index"
+  output = ["type=local,dest=static/pagefind"]
+}
+
 #
 # releaser targets are defined in _releaser/Dockerfile
 # and are used for Netlify and AWS S3 deployment

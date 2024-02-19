@@ -15,7 +15,6 @@
   "homepage": "https://docs.docker.com/",
   "dependencies": {
     "@alpinejs/collapse": "^3.13.5",
-    "@docsearch/js": "^3.5.2",
     "@material-symbols/svg-400": "^0.14.6",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@tailwindcss/typography": "^0.5.10",

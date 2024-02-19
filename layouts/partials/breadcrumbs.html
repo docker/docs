@@ -1,9 +1,11 @@
 {{ $scratch := partialCached "utils/tocparser.html" . . }}
 {{ $ctx := . }}
 
-
-<nav id="breadcrumbs" class="py-4 gap-4 flex items-center text-gray-light dark:text-gray-dark max-w-full min-w-0">
-  {{ with ($scratch.GetSortedMapValues "sections") }}
+{{ $crumbtrail := $scratch.GetSortedMapValues "sections" }}
+<nav data-pagefind-ignore
+     {{ with (index $crumbtrail 0) }} data-pagefind-filter="section:{{ .title }}" {{ end }}
+     id="breadcrumbs" class="py-4 gap-4 flex items-center text-gray-light dark:text-gray-dark max-w-full min-w-0">
+  {{ with $crumbtrail }}
     {{ range $i, $e := . }}
       {{- if $i -}}
         <span>/</span>
