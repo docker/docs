@@ -59,9 +59,7 @@ This creates a builder named `cloud-ORG-BUILDER_NAME`.
 
 2. Open the Docker Desktop settings and navigate to the **Builders** tab.
 
-3. Under **Available builders**, select **Create builder**.
-
-   ![Create builder GUI screenshot](/build/images/create-builder-gui.webp)
+3. Under **Available builders**, select **Connect to builder**.
 
 {{< /tab >}}
 {{< /tabs >}}
