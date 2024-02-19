@@ -1079,7 +1079,7 @@ The following is a full example of the allowed configuration options on Linux:
   "proxies": {
     "http-proxy": "http://proxy.example.com:80",
     "https-proxy": "https://proxy.example.com:443",
-    "no-proxy": "*.test.example.com,.example.org",
+    "no-proxy": "*.test.example.com,.example.org"
   },
   "icc": false,
   "init": false,
