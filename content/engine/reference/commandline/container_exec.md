@@ -12,7 +12,7 @@ layout: cli
 > **Introducing Docker Debug**
 >
 > To easily get a debug shell into any container, use `docker debug`. Docker
-> Debug is a replacement for debugging with` docker exec`. With it, you can get
+> Debug is a replacement for debugging with `docker exec`. With it, you can get
 > a shell into any container or image, even slim ones, without modifications.
 > Plus, you can bring along your favorite debugging tools in its customizable
 > toolbox.
