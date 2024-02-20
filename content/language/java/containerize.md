@@ -7,11 +7,6 @@ aliases:
  - /language/java/run-containers/
 ---
 
-## Overview
-
-This section walks you through containerizing and running a Java
-application.
-
 ## Prerequisites
 
 - You have installed the latest version of [Docker Desktop](../../../get-docker.md).
@@ -19,6 +14,11 @@ application.
   work only with the latest version of Docker Desktop.
 * You have a [Git client](https://git-scm.com/downloads). The examples in this
   section use a command-line based Git client, but you can use any client.
+
+## Overview
+
+This section walks you through containerizing and running a Java
+application.
 
 ## Get the sample applications
 
