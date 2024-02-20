@@ -24,6 +24,7 @@ In this guide, you will learn about:
 If you want to follow along the steps of this guide, you'll need the following:
 
 - The latest version of Docker Desktop
+- The [containerd image store](../../desktop/containerd.md) must be enabled
 - Git
 - A [Docker account](../../docker-id/_index.md)
 - A GitHub account

@@ -66,7 +66,7 @@ $ docker compose build
 
 In addition to `docker buildx use`, you can also use the `docker compose build
 --builder` flag or the [`BUILDX_BUILDER` environment
-variable](../building/env-vars.md#buildx_builder) to select the cloud builder.
+variable](../building/variables.md#buildx_builder) to select the cloud builder.
 
 ## Loading build results
 
