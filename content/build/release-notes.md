@@ -167,7 +167,7 @@ The full release note for this release is available
   that lets you start a debug session in your builds.
   [docker/buildx#1626](https://github.com/docker/buildx/pull/1626),
   [docker/buildx#1640](https://github.com/docker/buildx/pull/1640)
-- New [`EXPERIMENTAL_BUILDKIT_SOURCE_POLICY` environment variable](./building/env-vars.md#experimental_buildkit_source_policy)
+- New [`EXPERIMENTAL_BUILDKIT_SOURCE_POLICY` environment variable](./building/variables.md#experimental_buildkit_source_policy)
   for applying a BuildKit source policy file.
   [docker/buildx#1628](https://github.com/docker/buildx/pull/1628)
 

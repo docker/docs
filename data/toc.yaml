@@ -1755,10 +1755,10 @@ Manuals:
           title: Context
         - path: /build/building/multi-stage/
           title: Multi-stage builds
+        - path: /build/building/variables/
+          title: Variables
         - path: /build/building/multi-platform/
           title: Multi-platform images
-        - path: /build/building/env-vars/
-          title: Environment variables
         - path: /build/building/secrets/
           title: Build secrets
         - path: /build/building/annotations/
