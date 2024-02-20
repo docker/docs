@@ -33,7 +33,7 @@ Here you can find:
 - How many repositories are Scout-enabled
 - Your subscription renewal date
 
-Renewals charge to the original credit card used to buy Docker Scout Team. To update your payment method, see [Add or update a payment method](/payment-method).
+Renewals charge to the original credit card used to buy Docker Scout Team. To update your payment method, see [Add or update a payment method](/billing/payment-method/).
 
 ### Update number of repositories for your subscription
 
