@@ -10,7 +10,11 @@ long: |-
     * compose.yaml
     * README.Docker.md
     
-    If any of the files already exist, a prompt appears and provides a warning as well as giving you the option to overwrite all the files.
+    If any of the files already exist, a prompt appears and provides a warning
+    as well as giving you the option to overwrite all the files. If
+    `docker-compose.yaml` already exists instead of `compose.yaml`, `docker
+    init` can overwrite it, using `docker-compose.yaml`as the name for the
+    Compose file.
     
     > **Warning**
     >
