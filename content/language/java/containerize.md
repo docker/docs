@@ -61,12 +61,19 @@ WARNING: The following Docker files already exist in this directory:
 ? What port does your server listen on? 8080
 ```
 
+In the previous example, notice the `WARNING`. `docker-compose.yaml` already
+exists, so `docker init` overwrites that file rather than creating a new
+`compose.yaml` file. This prevents having multiple Compose files in the
+directory. Both names are supported, but Compose prefers the canonical
+`compose.yaml`.
+
 You should now have the following three new files in your `spring-petclinic`
 directory.
 
 - [Dockerfile](../../engine/reference/builder.md)
 - [.dockerignore](../../engine/reference/builder.md#dockerignore-file)
 - [docker-compose.yaml](../../compose/compose-file/_index.md)
+
 
 You can open the files in a code or text editor, then read the comments to learn
 more about the instructions, or visit the links in the previous list.
