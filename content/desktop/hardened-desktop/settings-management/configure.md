@@ -139,8 +139,6 @@ The following `admin-settings.json` code and table provides an example of the re
     "locked": false,
     "value": true
   },
-  {
-	"configurationFileVersion": 2,
 	"filesharingAllowedDirectories": [
 	  {
 	    "path": "$HOME",
@@ -150,19 +148,18 @@ The following `admin-settings.json` code and table provides an example of the re
 	    "path":"$TMP",
 	    "sharedByDefault": false
 	  }
-	]
-}, 
-{
-  "configurationFileVersion": 2,
+	], 
+  {
   "useVirtualizationFrameworkVirtioFS": {
     "locked": true,
     "value": true 
-  },
+    },
   "useGrpcfuse": {
     "locked": true,
     "value": true 
+    }
   }
-}
+} 
 ```
 
 | Parameter                        |   | Description                      |
