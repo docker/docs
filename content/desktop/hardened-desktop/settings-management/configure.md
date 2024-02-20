@@ -139,16 +139,16 @@ The following `admin-settings.json` code and table provides an example of the re
     "locked": false,
     "value": true
   },
-	"filesharingAllowedDirectories": [
-	  {
-	    "path": "$HOME",
-	    "sharedByDefault": true
-	  },
-	  {
-	    "path":"$TMP",
-	    "sharedByDefault": false
-	  }
-	], 
+  "filesharingAllowedDirectories": [
+    {
+      "path": "$HOME",
+      "sharedByDefault": true
+    },
+    {
+      "path":"$TMP",
+      "sharedByDefault": false
+    }
+  ], 
   "useVirtualizationFrameworkVirtioFS": {
     "locked": true,
     "value": true 
