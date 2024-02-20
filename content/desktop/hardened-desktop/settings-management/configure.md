@@ -149,15 +149,13 @@ The following `admin-settings.json` code and table provides an example of the re
 	    "sharedByDefault": false
 	  }
 	], 
-  {
   "useVirtualizationFrameworkVirtioFS": {
     "locked": true,
     "value": true 
-    },
+  },
   "useGrpcfuse": {
     "locked": true,
     "value": true 
-    }
   }
 } 
 ```
