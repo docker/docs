@@ -395,5 +395,5 @@ down to the original scale. You can use `docker service ps` to assess the curren
 balance of your service across nodes.
 
 See also
-[`docker service scale`](../reference/commandline/service_scale.md) and
-[`docker service ps`](../reference/commandline/service_ps.md).
+[`docker service scale`](../../reference/cli/docker/service/scale.md) and
+[`docker service ps`](../../reference/cli/docker/service/ps.md).

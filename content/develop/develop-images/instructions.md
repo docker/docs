@@ -14,7 +14,7 @@ images. Docker recommends the [Alpine image](https://hub.docker.com/_/alpine/) a
 is tightly controlled and small in size (currently under 6 MB), while still
 being a full Linux distribution.
 
-For more information about the `FROM` instruction, see [Dockerfile reference for the FROM instruction](../../engine/reference/builder.md#from).
+For more information about the `FROM` instruction, see [Dockerfile reference for the FROM instruction](../../reference/dockerfile.md#from).
 
 ### LABEL
 
@@ -60,7 +60,7 @@ See [Understanding object labels](../../config/labels-custom-metadata.md)
 for guidelines about acceptable label keys and values. For information about
 querying labels, refer to the items related to filtering in
 [Managing labels on objects](../../config/labels-custom-metadata.md#manage-labels-on-objects).
-See also [LABEL](../../engine/reference/builder.md#label) in the Dockerfile reference.
+See also [LABEL](../../reference/dockerfile.md#label) in the Dockerfile reference.
 
 ### RUN
 
@@ -68,7 +68,7 @@ Split long or complex `RUN` statements on multiple lines separated with
 backslashes to make your Dockerfile more readable, understandable, and
 maintainable.
 
-For more information about `RUN`, see [Dockerfile reference for the RUN instruction](../../engine/reference/builder.md#run).
+For more information about `RUN`, see [Dockerfile reference for the RUN instruction](../../reference/dockerfile.md#run).
 
 #### apt-get
 
@@ -211,11 +211,11 @@ python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
 ["php", "-a"]`. Using this form means that when you execute something like
 `docker run -it python`, you’ll get dropped into a usable shell, ready to go.
 `CMD` should rarely be used in the manner of `CMD ["param", "param"]` in
-conjunction with [`ENTRYPOINT`](../../engine/reference/builder.md#entrypoint), unless
+conjunction with [`ENTRYPOINT`](../../reference/dockerfile.md#entrypoint), unless
 you and your expected users are already quite familiar with how `ENTRYPOINT`
 works.
 
-For more information about `CMD`, see [Dockerfile reference for the CMD instruction](../../engine/reference/builder.md#cmd).
+For more information about `CMD`, see [Dockerfile reference for the CMD instruction](../../reference/dockerfile.md#cmd).
 
 ### EXPOSE
 
@@ -230,7 +230,7 @@ how to map the specified port to the port of their choice.
 For container linking, Docker provides environment variables for the path from
 the recipient container back to the source (for example, `MYSQL_PORT_3306_TCP`).
 
-For more information about `EXPOSE`, see [Dockerfile reference for the EXPOSE instruction](../../engine/reference/builder.md#expose).
+For more information about `EXPOSE`, see [Dockerfile reference for the EXPOSE instruction](../../reference/dockerfile.md#expose).
 
 ### ENV
 
@@ -298,7 +298,7 @@ $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ```
 
-For more information about `ENV`, see [Dockerfile reference for the ENV instruction](../../engine/reference/builder.md#env).
+For more information about `ENV`, see [Dockerfile reference for the ENV instruction](../../reference/dockerfile.md#env).
 
 ### ADD or COPY
 
@@ -330,7 +330,7 @@ as part of your build. `ADD` is better than manually adding files using
 something like `wget` and `tar`, because it ensures a more precise build cache.
 `ADD` also has built-in support for checksum validation of the remote
 resources, and a protocol for parsing branches, tags, and subdirectories from
-[Git URLs](../../engine/reference/commandline/image_build.md#git-repositories).
+[Git URLs](../../reference/cli/docker/image/build.md#git-repositories).
 
 The following example uses `ADD` to download a .NET installer. Combined with
 multi-stage builds, only the .NET runtime remains in the final stage, no
@@ -359,8 +359,8 @@ RUN ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 ```
 
 For more information about `ADD` or `COPY`, see the following:
-- [Dockerfile reference for the ADD instruction](../../engine/reference/builder.md#add)
-- [Dockerfile reference for the COPY instruction](../../engine/reference/builder.md#copy)
+- [Dockerfile reference for the ADD instruction](../../reference/dockerfile.md#add)
+- [Dockerfile reference for the COPY instruction](../../reference/dockerfile.md#copy)
 
 
 ### ENTRYPOINT
@@ -416,7 +416,7 @@ exec "$@"
 ```
 
 
-This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec) so that the final running application becomes the container's PID 1. This allows the application to receive any Unix signals sent to the container. For more information, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).
+This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec) so that the final running application becomes the container's PID 1. This allows the application to receive any Unix signals sent to the container. For more information, see the [`ENTRYPOINT` reference](../../reference/dockerfile.md#entrypoint).
 
 In the following example, a helper script is copied into the container and run via `ENTRYPOINT` on
 container start:
@@ -447,7 +447,7 @@ Lastly, you can use it to start a totally different tool, such as Bash:
 $ docker run --rm -it postgres bash
 ```
 
-For more information about `ENTRYPOINT`, see [Dockerfile reference for the ENTRYPOINT instruction](../../engine/reference/builder.md#entrypoint).
+For more information about `ENTRYPOINT`, see [Dockerfile reference for the ENTRYPOINT instruction](../../reference/dockerfile.md#entrypoint).
 
 ### VOLUME
 
@@ -456,7 +456,7 @@ configuration storage, or files and folders created by your Docker container. Yo
 are strongly encouraged to use `VOLUME` for any combination of mutable or user-serviceable
 parts of your image.
 
-For more information about `VOLUME`, see [Dockerfile reference for the VOLUME instruction](../../engine/reference/builder.md#volume).
+For more information about `VOLUME`, see [Dockerfile reference for the VOLUME instruction](../../reference/dockerfile.md#volume).
 
 ### USER
 
@@ -493,7 +493,7 @@ running it as non-`root`, consider using [“gosu”](https://github.com/tianon/
 Lastly, to reduce layers and complexity, avoid switching `USER` back and forth
 frequently.
 
-For more information about `USER`, see [Dockerfile reference for the USER instruction](../../engine/reference/builder.md#user).
+For more information about `USER`, see [Dockerfile reference for the USER instruction](../../reference/dockerfile.md#user).
 
 ### WORKDIR
 
@@ -502,7 +502,7 @@ For clarity and reliability, you should always use absolute paths for your
 like `RUN cd … && do-something`, which are hard to read, troubleshoot, and
 maintain.
 
-For more information about `WORKDIR`, see [Dockerfile reference for the WORKDIR instruction](../../engine/reference/builder.md#workdir).
+For more information about `WORKDIR`, see [Dockerfile reference for the WORKDIR instruction](../../reference/dockerfile.md#workdir).
 
 ### ONBUILD
 
@@ -527,4 +527,4 @@ fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the Dockerfile author to make a choice.
 
-For more information about `ONBUILD`, see [Dockerfile reference for the ONBUILD instruction](../../engine/reference/builder.md#onbuild).
+For more information about `ONBUILD`, see [Dockerfile reference for the ONBUILD instruction](../../reference/dockerfile.md#onbuild).

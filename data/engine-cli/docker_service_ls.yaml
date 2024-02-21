@@ -88,10 +88,10 @@ examples: |-
 
     The currently supported filters are:
 
-    * [id](service_ls.md#id)
-    * [label](service_ls.md#label)
-    * [mode](service_ls.md#mode)
-    * [name](service_ls.md#name)
+    * [id](/reference/cli/docker/service/ls/#id)
+    * [label](/reference/cli/docker/service/ls/#label)
+    * [mode](/reference/cli/docker/service/ls/#mode)
+    * [name](/reference/cli/docker/service/ls/#name)
 
     #### id
 
@@ -192,6 +192,7 @@ examples: |-
     {"ID":"ssniordqolsi","Image":"hello-world:latest","Mode":"replicated","Name":"hello","Ports":"","Replicas":"0/1"}
     ```
 deprecated: false
+hidden: false
 min_api_version: "1.24"
 experimental: false
 experimentalcli: false

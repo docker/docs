@@ -52,11 +52,11 @@ containerizing your applications. Docker Engine acts as a client-server
 application with:
 
 - A server with a long-running daemon process
-  [`dockerd`](/engine/reference/commandline/dockerd).
+  [`dockerd`](/reference/cli/dockerd).
 - APIs which specify interfaces that programs can use to talk to and instruct
   the Docker daemon.
 - A command line interface (CLI) client
-  [`docker`](/engine/reference/commandline/cli/).
+  [`docker`](/reference/cli/docker/).
 
 The CLI uses [Docker APIs](api/index.md) to control or interact with the Docker
 daemon through scripting or direct CLI commands. Many other Docker applications

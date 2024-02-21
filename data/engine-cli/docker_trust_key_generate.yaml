@@ -60,6 +60,7 @@ examples: |-
     alice.pub
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

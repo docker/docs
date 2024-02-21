@@ -6,8 +6,8 @@ aliases:
   - /build/building/cache/garbage-collection/
 ---
 
-While [`docker builder prune`](../../engine/reference/commandline/builder_prune.md)
-or [`docker buildx prune`](../../engine/reference/commandline/buildx_prune.md)
+While [`docker builder prune`](../../reference/cli/docker/builder/prune.md)
+or [`docker buildx prune`](../../reference/cli/docker/buildx/prune.md)
 commands run at once, garbage collection runs periodically and follows an
 ordered list of prune policies.
 
@@ -22,7 +22,7 @@ Depending on the [driver](../drivers/index.md) used by your builder instance,
 the garbage collection will use a different configuration file.
 
 If you're using the [`docker` driver](../drivers/docker.md), garbage collection
-can be configured in the [Docker Daemon configuration](../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
+can be configured in the [Docker Daemon configuration](../../reference/cli/dockerd.md#daemon-configuration-file).
 file:
 
 ```json

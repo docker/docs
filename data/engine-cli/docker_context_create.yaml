@@ -98,8 +98,9 @@ examples: |-
     Docker endpoints configurations, as well as the description can be modified with
     `docker context update`.
 
-    Refer to the [`docker context update` reference](context_update.md) for details.
+    Refer to the [`docker context update` reference](/reference/cli/docker/context/update/) for details.
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

@@ -119,7 +119,7 @@ examples: |-
     The number of items in the task history is determined by the
     `--task-history-limit` option that was set when initializing the swarm. You can
     change the task history retention limit using the
-    [`docker swarm update`](swarm_update.md) command.
+    [`docker swarm update`](/reference/cli/docker/swarm/update/) command.
 
     When deploying a service, docker resolves the digest for the service's image,
     and pins the service to that digest. The digest is not shown by default, but is
@@ -227,6 +227,7 @@ examples: |-
     top.3: busybox
     ```
 deprecated: false
+hidden: false
 min_api_version: "1.24"
 experimental: false
 experimentalcli: false

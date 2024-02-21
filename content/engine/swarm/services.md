@@ -213,8 +213,8 @@ define a configuration at service creation, you can also update an existing
 service's configuration in a similar way.
 
 See the command-line references for
-[`docker service create`](../reference/commandline/service_create.md) and
-[`docker service update`](../reference/commandline/service_update.md), or run
+[`docker service create`](../../reference/cli/docker/service/create.md) and
+[`docker service update`](../../reference/cli/docker/service/update.md), or run
 one of those commands with the `--help` flag.
 
 ### Configure the runtime environment
@@ -671,7 +671,7 @@ Service constraints let you set criteria for a node to meet before the scheduler
 deploys a service to the node. You can apply constraints to the
 service based upon node attributes and metadata or engine metadata. For more
 information on constraints, refer to the `docker service create`
-[CLI reference](../reference/commandline/service_create.md).
+[CLI reference](../../reference/cli/docker/service/create.md).
 
 #### Reserve memory or CPUs for a service
 
@@ -734,7 +734,7 @@ and CPU/memory constraints. Be careful not to use settings that are not
 possible to fulfill.
 
 For more information on constraints, refer to the `docker service create`
-[CLI reference](../reference/commandline/service_create.md).
+[CLI reference](../../reference/cli/docker/service/create.md).
 
 #### Placement preferences
 
@@ -1057,5 +1057,5 @@ $ docker inspect --format="{{.Config.Hostname}}" hosttempl.1.wo41w8hg8qanxwjwsg4
 ## Learn More
 
 * [Swarm administration guide](admin_guide.md)
-* [Docker Engine command line reference](../reference/commandline/docker.md)
+* [Docker Engine command line reference](../../reference/cli/docker/)
 * [Swarm mode tutorial](swarm-tutorial/index.md)

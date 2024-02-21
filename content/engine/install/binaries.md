@@ -92,7 +92,7 @@ instructions for enabling and configuring AppArmor or SELinux.
   [Enabling `seccomp` for Docker](../security/seccomp.md).
 
 - Enable user namespaces if possible. See the
-  [Daemon user namespace options](/engine/reference/commandline/dockerd/#daemon-user-namespace-options).
+  [Daemon user namespace options](/reference/cli/dockerd/#daemon-user-namespace-options).
 
 ### Install static binaries
 

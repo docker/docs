@@ -190,8 +190,9 @@ examples: |-
 
     These `a`, `ctrl-a`, `X`, or `ctrl-\\` values are all examples of valid key
     sequences. To configure a different configuration default key sequence for all
-    containers, see [**Configuration file** section](cli.md#configuration-files).
+    containers, see [**Configuration file** section](/engine/reference/commandline/cli/#configuration-files).
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

@@ -15,7 +15,7 @@ on when you should set such limits and the possible implications of setting them
 
 Many of these features require your kernel to support Linux capabilities. To
 check for support, you can use the
-[`docker info`](../../engine/reference/commandline/system_info.md) command. If a capability
+[`docker info`](../../reference/cli/docker/system/info.md) command. If a capability
 is disabled in your kernel, you may see a warning at the end of the output like
 the following:
 

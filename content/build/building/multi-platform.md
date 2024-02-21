@@ -148,7 +148,7 @@ COPY --from=build /log /log
 
 ## Getting started
 
-Run the [`docker buildx ls` command](../../engine/reference/commandline/buildx_ls.md)
+Run the [`docker buildx ls` command](../../reference/cli/docker/buildx/ls.md)
 to list the existing builders:
 
 ```console
@@ -235,7 +235,7 @@ $ docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t <userna
 > * The `--push` flag generates a multi-arch manifest and pushes all the images
 >   to Docker Hub.
 
-Inspect the image using [`docker buildx imagetools` command](../../engine/reference/commandline/buildx_imagetools.md):
+Inspect the image using [`docker buildx imagetools` command](../../reference/cli/docker/buildx/imagetools/_index.md):
 
 ```console
 $ docker buildx imagetools inspect <username>/<image>:latest

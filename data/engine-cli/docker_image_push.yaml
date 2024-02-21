@@ -5,7 +5,7 @@ long: |-
     Use `docker image push` to share your images to the [Docker Hub](https://hub.docker.com)
     registry or to a self-hosted one.
 
-    Refer to the [`docker image tag`](image_tag.md) reference for more information
+    Refer to the [`docker image tag`](/reference/cli/docker/image/tag/) reference for more information
     about valid image and tag names.
 
     Killing the `docker image push` process, for example by pressing `CTRL-c` while it is
@@ -15,14 +15,14 @@ long: |-
     The actual amount of data that's pushed will be compressed before sending, so
     the uploaded size will not be reflected by the progress bar.
 
-    Registry credentials are managed by [docker login](login.md).
+    Registry credentials are managed by [docker login](/reference/cli/docker/login/).
 
     ### Concurrent uploads
 
     By default the Docker daemon will push five layers of an image at a time.
     If you are on a low bandwidth connection this may cause timeout issues and you may want to lower
     this via the `--max-concurrent-uploads` daemon option. See the
-    [daemon documentation](dockerd.md) for more details.
+    [daemon documentation](/reference/cli/dockerd/) for more details.
 usage: docker image push [OPTIONS] NAME[:TAG]
 pname: docker image
 plink: docker_image.yaml
@@ -75,7 +75,7 @@ examples: |-
     ### Push a new image to a registry
 
     First save the new image by finding the container ID (using [`docker container
-    ls`](container_ls.md)) and then committing it to a new image name. Note that
+    ls`](/reference/cli/docker/container/ls/)) and then committing it to a new image name. Note that
     only `a-z0-9-_.` are allowed when naming images:
 
     ```console
@@ -148,6 +148,7 @@ examples: |-
     v1.0.1: digest: sha256:edafc0a0fb057813850d1ba44014914ca02d671ae247107ca70c94db686e7de6 size: 4527
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

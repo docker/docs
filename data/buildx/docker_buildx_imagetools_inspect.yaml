@@ -78,7 +78,7 @@ inherited_options:
 examples: |-
     ### Override the configured builder instance (--builder) {#builder}
 
-    Same as [`buildx --builder`](buildx.md#builder).
+    Same as [`buildx --builder`](/reference/cli/docker/buildx/#builder).
 
     ### Format the output (--format) {#format}
 

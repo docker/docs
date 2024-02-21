@@ -107,7 +107,7 @@ use the `runtimes` option in the daemon configuration file.
    ```
 
 For more information about the configuration options for containerd shims, see
-[Configure containerd shims](./reference/commandline/dockerd.md#configure-containerd-shims).
+[Configure containerd shims](./../reference/cli/dockerd.md#configure-containerd-shims).
 
 ## Examples
 
@@ -127,7 +127,7 @@ youki functions as a drop-in replacement for runc, meaning it relies on the
 runc shim to invoke the runtime binary. When you register runtimes acting as
 runc replacements, you configure the path to the runtime executable, and
 optionally a set of runtime arguments. For more information, see
-[Configure runc drop-in replacements](./reference/commandline/dockerd.md#configure-runc-drop-in-replacements).
+[Configure runc drop-in replacements](./../reference/cli/dockerd.md#configure-runc-drop-in-replacements).
 
 To add youki as a container runtime:
 
@@ -233,6 +233,6 @@ $ docker run --rm \
 ## Related information
 
 - To learn more about the configuration options for container runtimes,
-  see [Configure container runtimes](./reference/commandline/dockerd.md#configure-container-runtimes).
+  see [Configure container runtimes](./../reference/cli/dockerd.md#configure-container-runtimes).
 - You can configure which runtime that the daemon should use as its default.
-  Refer to [Configure the default container runtime](./reference/commandline/dockerd.md#configure-the-default-container-runtime).
+  Refer to [Configure the default container runtime](./../reference/cli/dockerd.md#configure-the-default-container-runtime).

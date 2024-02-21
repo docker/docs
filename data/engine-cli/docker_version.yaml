@@ -59,7 +59,7 @@ long: |-
     on your local machine to control a Docker Engine running on a remote machine,
     which can be (for example) a machine running in the cloud or inside a virtual machine.
 
-    The following example switches the Docker CLI to use a [context](context.md)
+    The following example switches the Docker CLI to use a [context](/reference/cli/docker/context/)
     named `remote-test-server`, which runs an older version of the Docker Engine
     on a Linux server:
 
@@ -199,6 +199,7 @@ examples: |-
     {"Client":"Version":"23.0.3","ApiVersion":"1.42", ...}
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

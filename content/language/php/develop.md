@@ -420,7 +420,7 @@ Related information:
  - [Build with Docker guide](../../build/guide/index.md)
  - [Compose file reference](/compose/compose-file/)
  - [Compose file watch](../../compose/file-watch.md)
- - [Dockerfile reference](../../engine/reference/builder.md)
+ - [Dockerfile reference](../../reference/dockerfile.md)
  - [Official Docker Image for PHP](https://hub.docker.com/_/php)
 
 ## Next steps
