@@ -95,3 +95,19 @@ The following outlines Docker Scout management permissions for member, editor, a
 | Activate and deactivate Docker Scout for a repository | ❌     | ✅     | ✅                 |
 | Create environments                                   | ❌     | ❌     | ✅                 |
 | Manage registry integrations                          | ❌     | ❌     | ✅                 |
+
+### Docker Build Cloud
+
+The following outlines Docker Build Cloud management permissions for member, editor, and organization owner roles.
+
+| Permission                   | Member | Editor | Organization owner |
+| ---------------------------- | :----- | :----- | :----------------- |
+| Sign up for starter plan     | ✅     | ✅     | ✅                 |
+| Use a cloud builder          | ✅ \*  | ✅ \*  | ✅ \*              |
+| Manage seat allocation       | ✅     | ✅     | ✅                 |
+| Create and remove builders   | ✅     | ✅     | ✅                 |
+| Buy seats or reduce seat cap | ❌     | ❌     | ✅                 |
+| Buy minutes                  | ❌     | ❌     | ✅                 |
+| Manage subscription          | ❌     | ❌     | ✅                 |
+
+_\* Requires a Docker Build Cloud seat allocation_
