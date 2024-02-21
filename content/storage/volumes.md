@@ -154,8 +154,7 @@ the volume for you. The following example mounts the volume `myvol2` into
 `/app/` in the container.
 
 The `-v` and `--mount` examples below produce the same result. You can't run
-them both unless you remove the `devtest` container and the `myvol2` volume
-after running the first one.
+them both unless you remove the `devtest` container after running the first one.
 
 {{< tabs >}}
 {{< tab name="`--mount`" >}}
