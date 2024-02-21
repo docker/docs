@@ -81,7 +81,7 @@ RUN pip install --no-cache-dir matplotlib scikit-learn
 The `RUN` instruction executes commands on top of the current image. In this
 case, it's running `pip install --no-cache-dir matplotlib scikit-learn` to install dependencies. You can also use the `RUN` instruction to install JupyterLab extensions.
 
-For more information about Dockerfile instructions, see the [Dockerfile reference](/engine/reference/builder/). For more recipes, see the [Docker Stacks documentation](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/recipes.html).
+For more information about Dockerfile instructions, see the [Dockerfile reference](/reference/dockerfile/). For more recipes, see the [Docker Stacks documentation](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/recipes.html).
 
 ## Build your environment into an image
 
