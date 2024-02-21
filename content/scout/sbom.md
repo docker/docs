@@ -54,7 +54,7 @@ $ docker scout sbom --format list alpine
 ```
 
 For more information about the `docker scout sbom` command, refer to the [CLI
-reference](../engine/reference/commandline/scout_sbom.md).
+reference](../reference/cli/docker/scout/sbom.md).
 
 ## Attach as build attestation {#attest}
 

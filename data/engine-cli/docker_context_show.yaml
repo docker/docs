@@ -20,7 +20,7 @@ inherited_options:
 examples: |-
     ### Print the current context
 
-    The following example prints the currently used [`docker context`](context.md):
+    The following example prints the currently used [`docker context`](/reference/cli/docker/context/):
 
     ```console
     $ docker context show'
@@ -59,6 +59,7 @@ examples: |-
     context: default>
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

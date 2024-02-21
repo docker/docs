@@ -45,7 +45,7 @@ included with Docker, you can also implement and use [logging driver plugins](pl
 To configure the Docker daemon to default to a specific logging driver, set the
 value of `log-driver` to the name of the logging driver in the `daemon.json`
 configuration file. Refer to the "daemon configuration file" section in the
-[`dockerd` reference manual](/engine/reference/commandline/dockerd/#daemon-configuration-file)
+[`dockerd` reference manual](/reference/cli/dockerd/#daemon-configuration-file)
 for details.
 
 The default logging driver is `json-file`. The following example sets the default

@@ -250,7 +250,7 @@ module:
     - path: github.com/moby/buildkit
       mounts:
         - source: frontend/dockerfile/docs/reference.md
-          target: content/engine/reference/builder.md
+          target: content/reference/dockerfile.md
         - source: docs/buildkitd.toml.md
           target: content/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
@@ -282,8 +282,8 @@ module:
           target: content/engine/reference/run.md
         - source: docs/reference/commandline/cli.md
           target: content/engine/reference/commandline/cli.md
-        - source: docs/reference/commandline/dockerd.md
-          target: content/engine/reference/commandline/dockerd.md
+        - source: docs/reference/dockerd.md
+          target: content/reference/cli/dockerd.md
 
     - path: github.com/docker/compose/v2
       mounts:

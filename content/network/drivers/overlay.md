@@ -187,7 +187,7 @@ from the swarm.
 4.  Create or re-create the `docker_gwbridge` bridge manually with your custom
     settings, using the `docker network create` command.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](../../engine/reference/commandline/network_create.md#bridge-driver-options).
+    options, see [Bridge driver options](../../reference/cli/docker/network/create.md#bridge-driver-options).
 
     ```console
     $ docker network create \

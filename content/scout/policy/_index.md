@@ -235,7 +235,7 @@ RUN echo "Hi"
 > using the `--user` flag for the `docker run` command.
 
 To make your images compliant with this policy, use the
-[`USER`](../../engine/reference/builder.md#user) Dockerfile instruction to set
+[`USER`](../../reference/dockerfile.md#user) Dockerfile instruction to set
 a default user that doesn't have root privileges for the runtime stage.
 
 The following Dockerfile snippets shows the difference between a compliant and

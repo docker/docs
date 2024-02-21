@@ -31,7 +31,7 @@ build/buildkit/toml-configuration.md:
   keywords: |
     build, buildkit, configuration
 
-engine/reference/builder.md:
+reference/dockerfile.md:
   description: |
     Find all the available commands you can use in a Dockerfile
     and learn how to use them, including COPY, ARG, ENTRYPOINT, and more.

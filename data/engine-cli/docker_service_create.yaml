@@ -851,7 +851,7 @@ examples: |-
     ### Create a service with secrets (--secret) {#secret}
 
     Use the `--secret` flag to give a container access to a
-    [secret](secret_create.md).
+    [secret](/reference/cli/docker/secret/create/).
 
     Create a service specifying a secret:
 
@@ -883,7 +883,7 @@ examples: |-
     ### Create a service with configs (--config) {#config}
 
     Use the `--config` flag to give a container access to a
-    [config](config_create.md).
+    [config](/reference/cli/docker/config/create/).
 
     Create a service with a config. The config will be mounted into `redis-config`,
     be owned by the user who runs the command inside the container (often `root`),
@@ -920,7 +920,7 @@ examples: |-
       redis:3.0.6
     ```
 
-    When you run a [service update](service_update.md), the scheduler updates a
+    When you run a [service update](/reference/cli/docker/service/update/), the scheduler updates a
     maximum of 2 tasks at a time, with `10s` between updates. For more information,
     refer to the [rolling updates
     tutorial](/engine/swarm/swarm-tutorial/rolling-update/).
@@ -1027,7 +1027,7 @@ examples: |-
         <td>
           <p>The type of mount, can be either <tt>volume</tt>, <tt>bind</tt>, <tt>tmpfs</tt>, or <tt>npipe</tt>. Defaults to <tt>volume</tt> if no type is specified.</p>
           <ul>
-            <li><tt>volume</tt>: mounts a <a href="/engine/reference/commandline/volume_create/">managed volume</a>
+            <li><tt>volume</tt>: mounts a <a href="/reference/cli/docker/volume/create/">managed volume</a>
             into the container.</li> <li><tt>bind</tt>:
             bind-mounts a directory or file from the host into the container.</li>
             <li><tt>tmpfs</tt>: mount a tmpfs in the container</li>
@@ -1380,7 +1380,7 @@ examples: |-
 
     `engine.labels` apply to Docker Engine labels like operating system, drivers,
     etc. Swarm administrators add `node.labels` for operational purposes by using
-    the [`docker node update`](node_update.md) command.
+    the [`docker node update`](/reference/cli/docker/node/update/) command.
 
     For example, the following limits tasks for the redis service to nodes where the
     node type label equals queue:
@@ -1878,6 +1878,7 @@ examples: |-
     whole have a "done" state, except insofar as every Node meeting the job's
     constraints has a Completed task.
 deprecated: false
+hidden: false
 min_api_version: "1.24"
 experimental: false
 experimentalcli: false

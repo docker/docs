@@ -90,7 +90,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - [Synchronized File Shares](synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
 - Organization admins can now [configure Docker socket mount permissions](hardened-desktop/enhanced-container-isolation/config.md) when ECI is enabled.
 - [Containerd Image Store](containerd.md) support is now generally available to all users.
-- Get a debug shell into any container or image with the new [`docker debug` command](../engine/reference/commandline/debug.md) (Beta).
+- Get a debug shell into any container or image with the new [`docker debug` command](../reference/cli/docker/debug.md) (Beta).
 - Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with [Private Extensions Marketplace](extensions/private-marketplace.md) enabled (Beta)
 
 ### Upgrades
@@ -109,7 +109,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](../engine/reference/commandline/scout.md).
+- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](../reference/cli/docker/scout/_index.md).
 - Fixed a bug where automatic updates would not download when the **Always download updates** checkbox was selected.
 - Fixed typo in the dashboard tooltip. Fixes [docker/for-mac#7132](https://github.com/docker/for-mac/issues/7132)
 - Improved signal handling behavior (e.g. when pressing Ctrl-C in the terminal while running a `docker` command).
@@ -480,7 +480,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### New
 
 - Added support for new Wasm runtimes: wws and lunatic.
-- [`docker init`](../engine/reference/commandline/init.md) now supports ASP.NET
+- [`docker init`](../reference/cli/docker/init.md) now supports ASP.NET
 - Increased performance of exposed ports on macOS, for example with `docker run -p`.
 
 ### Bug fixes and enhancements
@@ -741,7 +741,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Removed
 
-- Removed `docker scan` command. To continue learning about the vulnerabilities of your images, and many other features, use the new `docker scout` command. Run `docker scout --help`, or [read the docs to learn more](../engine/reference/commandline/scout.md).
+- Removed `docker scan` command. To continue learning about the vulnerabilities of your images, and many other features, use the new `docker scout` command. Run `docker scout --help`, or [read the docs to learn more](../reference/cli/docker/scout/_index.md).
 
 ### Upgrades
 
@@ -2040,7 +2040,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 Docker Dashboard incorrectly displays the container memory usage as zero on
 Hyper-V based machines.
-You can use the [`docker stats`](../engine/reference/commandline/container_stats.md)
+You can use the [`docker stats`](../reference/cli/docker/container/stats.md)
 command on the command line as a workaround to view the
 actual memory usage. See
 [docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076).

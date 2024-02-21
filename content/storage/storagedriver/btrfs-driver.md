@@ -112,7 +112,7 @@ This procedure is essentially identical on SLES and Ubuntu.
    ```
 
    See all storage options for each storage driver in the
-   [daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
+   [daemon reference documentation](/reference/cli/dockerd/#options-per-storage-driver)
 
 7. Start Docker. When it's running, verify that `btrfs` is being used as the
    storage driver.

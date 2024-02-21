@@ -8,7 +8,7 @@ aliases:
 
 Exporters save your build results to a specified output type. You specify the
 exporter to use with the
-[`--output` CLI option](../../engine/reference/commandline/buildx_build/#output).
+[`--output` CLI option](../../reference/cli/docker/buildx/build.md#output).
 Buildx supports the following exporters:
 
 - `image`: exports the build result to a container image.

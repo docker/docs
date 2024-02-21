@@ -4,7 +4,7 @@ long: |-
     Join tokens are secrets that allow a node to join the swarm. There are two
     different join tokens available, one for the worker role and one for the manager
     role. You pass the token using the `--token` flag when you run
-    [swarm join](swarm_join.md). Nodes use the join token only when they join the
+    [swarm join](/reference/cli/docker/swarm/join/). Nodes use the join token only when they join the
     swarm.
 
     > **Note**
@@ -121,6 +121,7 @@ examples: |-
 
     Only print the token. Do not print a complete command for joining.
 deprecated: false
+hidden: false
 min_api_version: "1.24"
 experimental: false
 experimentalcli: false

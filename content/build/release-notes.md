@@ -323,7 +323,7 @@ The full release note for this release is available
 - Bake definition now supports null values for [variables](bake/reference.md#variable) and [labels](bake/reference.md#targetlabels)
   for build arguments and labels to use the defaults set in the Dockerfile.
   [docker/buildx#1449](https://github.com/docker/buildx/issues/1449)
-- The [`buildx imagetools inspect` command](../engine/reference/commandline/buildx_imagetools_inspect.md)
+- The [`buildx imagetools inspect` command](../reference/cli/docker/buildx/imagetools/inspect.md)
   now supports showing SBOM and Provenance data.
   [docker/buildx#1444](https://github.com/docker/buildx/issues/1444),
   [docker/buildx#1498](https://github.com/docker/buildx/issues/1498)
@@ -385,7 +385,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 - You can now load Dockerfile from standard input even when the build context is
   coming from external Git or HTTP URL. [docker/buildx#994](https://github.com/docker/buildx/issues/994)
 - Build commands now support new the build context type `oci-layout://` for loading
-  [build context from local OCI layout directories](../engine/reference/commandline/buildx_build.md#source-oci-layout).
+  [build context from local OCI layout directories](../reference/cli/docker/buildx/build.md#source-oci-layout).
   Note that this feature depends on an unreleased BuildKit feature and builder
   instance from `moby/buildkit:master` needs to be used until BuildKit v0.11 is
   released. [docker/buildx#1173](https://github.com/docker/buildx/issues/1173)
@@ -500,7 +500,7 @@ For more details, see the complete release notes in the [Buildx GitHub repositor
 
 ### New
 
-- Build command now accepts `--build-context` flag to [define additional named build contexts](/engine/reference/commandline/buildx_build/#build-context)
+- Build command now accepts `--build-context` flag to [define additional named build contexts](/reference/cli/docker/buildx/build/#build-context)
   for your builds. [docker/buildx#904](https://github.com/docker/buildx/issues/904)
 - Bake definitions now support [defining dependencies between targets](bake/build-contexts.md)
   and using the result of one target in another build.

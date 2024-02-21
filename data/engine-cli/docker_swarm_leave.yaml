@@ -57,9 +57,10 @@ examples: |-
 
     The node will still appear in the node list, and marked as `down`. It no longer
     affects swarm operation, but a long list of `down` nodes can clutter the node
-    list. To remove an inactive node from the list, use the [`node rm`](node_rm.md)
+    list. To remove an inactive node from the list, use the [`node rm`](/reference/cli/docker/node/rm/)
     command.
 deprecated: false
+hidden: false
 min_api_version: "1.24"
 experimental: false
 experimentalcli: false

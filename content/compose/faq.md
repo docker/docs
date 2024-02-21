@@ -37,7 +37,7 @@ containers.
 ### Why do my services take 10 seconds to recreate or stop?
 
 The `docker compose stop` command attempts to stop a container by sending a `SIGTERM`. It then waits
-for a [default timeout of 10 seconds](../engine/reference/commandline/compose_stop.md). After the timeout,
+for a [default timeout of 10 seconds](../reference/cli/docker/compose/stop.md). After the timeout,
 a `SIGKILL` is sent to the container to forcefully kill it. If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.

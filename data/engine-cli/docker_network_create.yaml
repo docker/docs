@@ -393,6 +393,7 @@ examples: |-
     node1$ docker network create -d macvlan --scope swarm --config-from mv-config --attachable swarm-network
     ```
 deprecated: false
+hidden: false
 min_api_version: "1.21"
 experimental: false
 experimentalcli: false

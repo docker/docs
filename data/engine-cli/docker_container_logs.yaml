@@ -129,6 +129,7 @@ examples: |-
     Tue 14 Nov 2017 16:40:02 CET
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

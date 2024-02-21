@@ -3278,8 +3278,8 @@ Several new configuration keys have been added to `docker-compose.yml`:
 - `pid: host`, like `docker run --pid=host`, lets you reuse the same PID namespace as the host machine.
 - `cpuset`, like `docker run --cpuset-cpus`, lets you specify which CPUs to allow execution in.
 - `read_only`, like `docker run --read-only`, lets you mount a container's filesystem as read-only.
-- `security_opt`, like `docker run --security-opt`, lets you specify [security options](/engine/reference/commandline/container_run/#security-opt).
-- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/commandline/container_run/#log-driver).
+- `security_opt`, like `docker run --security-opt`, lets you specify [security options](/reference/cli/docker/container/run/#security-opt).
+- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/reference/cli/docker/container/run/#log-driver).
 
 ### Bug fixes
 

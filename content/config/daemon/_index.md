@@ -67,7 +67,7 @@ You can also explicitly specify the location of the configuration file on
 startup, using the `dockerd --config-file` flag.
 
 Learn about the available configuration options in the
-[dockerd reference docs](../../engine/reference/commandline/dockerd.md#daemon-configuration-file)
+[dockerd reference docs](../../reference/cli/dockerd.md#daemon-configuration-file)
 
 ### Configuration using flags
 
@@ -86,7 +86,7 @@ $ dockerd --debug \
 ```
 
 Learn about the available configuration options in the
-[dockerd reference docs](../../engine/reference/commandline/dockerd.md), or by
+[dockerd reference docs](../../reference/cli/dockerd.md), or by
 running:
 
 ```console

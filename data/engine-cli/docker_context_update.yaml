@@ -2,7 +2,7 @@ command: docker context update
 short: Update a context
 long: |-
     Updates an existing `context`.
-    See [context create](context_create.md).
+    See [context create](/reference/cli/docker/context/create/).
 usage: docker context update [OPTIONS] CONTEXT
 pname: docker context
 plink: docker_context.yaml
@@ -47,6 +47,7 @@ examples: |-
         my-context
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

@@ -65,7 +65,7 @@ it to LLB so BuildKit can execute it. Frontends can be distributed as images,
 and the user can target a specific version of a frontend that is guaranteed to
 work for the features used by their definition.
 
-For example, to build a [Dockerfile](../../engine/reference/builder.md) with
+For example, to build a [Dockerfile](../../reference/dockerfile.md) with
 BuildKit, you would
 [use an external Dockerfile frontend](../dockerfile/frontend.md).
 

@@ -80,7 +80,7 @@ Docker Build Cloud server directly is better, because it will likely be faster
 than transferring the files with the build context.
 
 You can fetch remote files during the build using the
-[Dockerfile `ADD` instruction](/engine/reference/builder/#add),
+[Dockerfile `ADD` instruction](/reference/dockerfile/#add),
 or in your `RUN` instructions with tools like `wget` and `rsync`.
 
 ### Multi-threaded tools

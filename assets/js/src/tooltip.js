@@ -26,7 +26,7 @@ for (const cmd of cmds) {
   const a = document.createElement("a")
   a.classList.add("underline","underline-offset-4","decoration-dashed","cursor-pointer")
   a.title = `Learn more about the ${name} instruction`
-  a.href = `/engine/reference/builder/#${name.toLowerCase()}`
+  a.href = `/reference/dockerfile/#${name.toLowerCase()}`
   a.innerHTML = cmd.outerHTML
   cmd.insertAdjacentElement("beforebegin", a)
   cmd.remove()

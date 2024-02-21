@@ -58,6 +58,8 @@ github.com/docker/buildx v0.12.1 h1:oahmdKmkGaa8NnaWKvtDZe2vpSYsKZ+WsHOMLQTDCk8=
 github.com/docker/buildx v0.12.1/go.mod h1:SBLnQH9q+77aVvpvS5LLIly9+nHVlwscl5GEegGMD5g=
 github.com/docker/buildx v0.12.2-0.20240126114058-d43cf8c2c6b4 h1:aEFpoxTw5LIRjN0jFdHsOa1POpELzgwJ0SnhykCa8dg=
 github.com/docker/buildx v0.12.2-0.20240126114058-d43cf8c2c6b4/go.mod h1:SBLnQH9q+77aVvpvS5LLIly9+nHVlwscl5GEegGMD5g=
+github.com/docker/buildx v0.12.2-0.20240220084849-89154c7d3303 h1:J34paheV5gSKezhnVzwT5WwRQgPzBLYAdCYAFPoEYfU=
+github.com/docker/buildx v0.12.2-0.20240220084849-89154c7d3303/go.mod h1:OoLv85M5U/p8TWyCINtEilyy0A0XTN9COQgmuE0bWhw=
 github.com/docker/cli v24.0.2+incompatible h1:QdqR7znue1mtkXIJ+ruQMGQhpw2JzMJLRXp6zpzF6tM=
 github.com/docker/cli v24.0.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v24.0.4+incompatible h1:Y3bYF9ekNTm2VFz5U/0BlMdJy73D+Y1iAAZ8l63Ydzw=
@@ -80,6 +82,8 @@ github.com/docker/cli v25.0.1-0.20240119143135-01f933261885+incompatible h1:UkZc
 github.com/docker/cli v25.0.1-0.20240119143135-01f933261885+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v25.0.1+incompatible h1:mFpqnrS6Hsm3v1k7Wa/BO23oz0k121MTbTO1lpcGSkU=
 github.com/docker/cli v25.0.1+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v25.0.4-0.20240221083216-f67e569a8fb9+incompatible h1:crlBDc5Kfph4aUtWf9Rz+BtcNdB17bE3NLU+3+WuAaw=
+github.com/docker/cli v25.0.4-0.20240221083216-f67e569a8fb9+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/compose-cli v1.0.35 h1:uZyEHLalfqBS2PiTpA1LAULyJmuQ+YtZg7nG4Xl3/Cc=
 github.com/docker/compose-cli v1.0.35/go.mod h1:mSXI4hFLpRU3EtI8NTo32bNwI0UXSr8jnq+/rYjGAUU=
 github.com/docker/compose/v2 v2.22.0 h1:3rRz4L7tPU75wRsV8JZh2/aTgerQvPa1cpzZN+tHqUY=
@@ -102,6 +106,8 @@ github.com/docker/compose/v2 v2.24.4 h1:uBlpNmv27Gd9vlExUkQcgmLuNYlGloxX6yCt7Oau
 github.com/docker/compose/v2 v2.24.4/go.mod h1:409UYNwh+eoKY5UST4ORZMuMNj+nBUuEZC3V+WF8CqA=
 github.com/docker/compose/v2 v2.24.5 h1:7K173fhy+ghA88C8ib5YNa+kAZCx0CBeGW7lHcdoPZw=
 github.com/docker/compose/v2 v2.24.5/go.mod h1:gg+RsqCXYD/TOIJgya4N9mtj/UmFJGEls7y3h/kadVE=
+github.com/docker/compose/v2 v2.24.6 h1:V5fOXgga0hYy4wHsygCquO6/k++8q3WuckU7Qo1cnXk=
+github.com/docker/compose/v2 v2.24.6/go.mod h1:ugV3/2KoKEeM98ZYF9vsYwnSExC4xLGxblAqXB6HUXQ=
 github.com/docker/distribution v2.8.2+incompatible h1:T3de5rq0dB1j30rp0sA2rER+m322EBzniBPB6ZIzuh8=
 github.com/docker/distribution v2.8.2+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/go v1.5.1-1.0.20160303222718-d30aec9fd63c/go.mod h1:CADgU4DSXK5QUlFslkQu2yW2TKzFZcXq/leZfM0UH5Q=

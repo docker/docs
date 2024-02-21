@@ -203,7 +203,7 @@ cgroup_parent: m-executor-abcd
 command: bundle exec thin -p 3000
 ```
 
-The value can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+The value can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
 
 ```yaml
 command: [ "bundle", "exec", "thin", "-p", "3000" ]
@@ -523,7 +523,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 Alternatively, the value can also be a list, in a manner similar to the
-[Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+[Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
 
 ```yml
 entrypoint:
@@ -938,7 +938,7 @@ been the case if `group_add` were not declared.
 ## healthcheck
 
 `healthcheck` declares a check that's run to determine whether or not the service containers are "healthy". It works in the same way, and has the same default values, as the
-[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/engine/reference/builder/#healthcheck)
+[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/reference/dockerfile/#healthcheck)
 set by the service's Docker image. Your Compose file can override the values set in the Dockerfile. 
 
 ```yml

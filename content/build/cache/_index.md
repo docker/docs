@@ -58,7 +58,7 @@ anything differently, they still need to re-run.
 > the image on the same host one week later will still get you the same packages
 > as before. The only way to force a rebuild is by making sure that a layer
 > before it has changed, or by clearing the build cache using
-> [`docker builder prune`](../../engine/reference/commandline/builder_prune/).
+> [`docker builder prune`](../../reference/cli/docker/builder/prune.md).
 
 ## How can I use the cache efficiently?
 

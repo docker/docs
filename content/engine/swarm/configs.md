@@ -113,10 +113,10 @@ those remaining after a `docker service update --config-rm`.
 Use these links to read about specific commands, or continue to the
 [example about using configs with a service](#advanced-example-use-configs-with-a-nginx-service).
 
-- [`docker config create`](../reference/commandline/config_create.md)
-- [`docker config inspect`](../reference/commandline/config_inspect.md)
-- [`docker config ls`](../reference/commandline/config_ls.md)
-- [`docker config rm`](../reference/commandline/config_rm.md)
+- [`docker config create`](../../reference/cli/docker/config/create.md)
+- [`docker config inspect`](../../reference/cli/docker/config/inspect.md)
+- [`docker config ls`](../../reference/cli/docker/config/ls.md)
+- [`docker config rm`](../../reference/cli/docker/config/rm.md)
 
 ## Examples
 

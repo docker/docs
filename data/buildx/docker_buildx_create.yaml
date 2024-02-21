@@ -207,7 +207,7 @@ examples: |-
     #### `docker` driver
 
     Uses the builder that is built into the Docker daemon. With this driver,
-    the [`--load`](buildx_build.md#load) flag is implied by default on
+    the [`--load`](/reference/cli/docker/buildx/build/#load) flag is implied by default on
     `buildx build`. However, building multi-platform images or exporting cache is
     not currently supported.
 
@@ -217,7 +217,7 @@ examples: |-
     both building multi-platform images and exporting cache are supported.
 
     Unlike `docker` driver, built images will not automatically appear in
-    `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+    `docker images` and [`build --load`](/reference/cli/docker/buildx/build/#load) needs to be used
     to achieve that.
 
     #### `kubernetes` driver
@@ -226,7 +226,7 @@ examples: |-
     BuildKit container image to build your images.
 
     Unlike `docker` driver, built images will not automatically appear in
-    `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+    `docker images` and [`build --load`](/reference/cli/docker/buildx/build/#load) needs to be used
     to achieve that.
 
     #### `remote` driver
@@ -236,7 +236,7 @@ examples: |-
     configure buildx to point at it.
 
     Unlike `docker` driver, built images will not automatically appear in
-    `docker images` and [`build --load`](buildx_build.md#load) needs to be used
+    `docker images` and [`build --load`](/reference/cli/docker/buildx/build/#load) needs to be used
     to achieve that.
 
     ### Set additional driver-specific options (--driver-opt) {#driver-opt}

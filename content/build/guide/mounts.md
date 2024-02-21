@@ -214,7 +214,7 @@ mounts.
 
 Related information:
 
-- [Dockerfile reference](../../engine/reference/builder.md#run---mount)
+- [Dockerfile reference](../../reference/dockerfile.md#run---mount)
 - [Bind mounts](../../storage/bind-mounts.md)
 
 ## Next steps
