@@ -338,7 +338,7 @@ Related information:
 
  - [Compose file reference](/compose/compose-file/)
  - [Compose Watch](../../compose/file-watch.md)
- - [Dockerfile reference](/engine/reference/builder/)
+ - [Dockerfile reference](/reference/dockerfile/)
 
 ## Next steps
 

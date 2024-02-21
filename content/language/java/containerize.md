@@ -70,8 +70,8 @@ directory. Both names are supported, but Compose prefers the canonical
 You should now have the following three new files in your `spring-petclinic`
 directory.
 
-- [Dockerfile](../../engine/reference/builder.md)
-- [.dockerignore](../../engine/reference/builder.md#dockerignore-file)
+- [Dockerfile](/reference/dockerfile/)
+- [.dockerignore](/reference/dockerfile/#dockerignore-file)
 - [docker-compose.yaml](../../compose/compose-file/_index.md)
 
 
@@ -120,7 +120,7 @@ In this section, you learned how you can containerize and run a Java
 application using Docker.
 
 Related information:
- - [docker init reference](../../engine/reference/commandline/init.md)
+ - [docker init reference](/reference/cli/docker/init/)
 
 ## Next steps
 
