@@ -70,8 +70,8 @@ functionality of the host machine.
 
 A given volume can be mounted into multiple containers simultaneously. When no
 running container is using a volume, the volume is still available to Docker
-and isn't removed automatically. You can remove unused volumes using `docker
-volume prune`.
+and isn't removed automatically. You can remove unused anonymous volumes using `docker
+volume prune` and all unused volumes using `docker volume prune -a`.
 
 When you mount a volume, it may be named or anonymous. Anonymous volumes are
 given a random name that's guaranteed to be unique within a given Docker host.
