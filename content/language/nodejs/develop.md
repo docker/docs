@@ -272,16 +272,151 @@ You can now connect an inspector client to your application for debugging. For
 more details about inspector clients, see the [Node.js
 documentation](https://nodejs.org/en/docs/guides/debugging-getting-started).
 
+## Debug your containers
+
+While running your application in a container, you may come across issues that aren't related to the application's code. Issues may be related to the container environment that your application is running in. In this section, you'll walk through the steps you may take to debug a scenario where the application container gives an error about no database connection.
+
+To debug a database connection issue:
+
+1. Verify that the database container is running.
+   
+   You can use the `docker ps` command to verify which containers are running and get the container IDs.
+
+   ```console
+   $ docker ps
+
+   CONTAINER ID   IMAGE                         COMMAND                  CREATED          STATUS                    PORTS                                            NAMES
+   78b36184f881   docker-nodejs-sample-server   "docker-entrypoint.s…"   54 seconds ago   Up 42 seconds             0.0.0.0:3000->3000/tcp, 0.0.0.0:9229->9229/tcp   docker-nodejs-sample-server-1
+   5f6271e301a8   postgres                      "docker-entrypoint.s…"   54 seconds ago   Up 52 seconds (healthy)   5432/tcp                                         docker-nodejs-sample-db-1
+   ```
+
+   In the previous example, you can see the `postgres` container is running and its ID is `5f6271e301a8`.
+
+2. Inspect the logs of the containers.
+
+   You can view the logs of containers by running the `docker logs` command with
+   the container ID. Replace the container ID with your container ID.
+
+   ```console
+   $ docker logs 5f6271e301a8
+
+   ...
+   2024-02-21 20:34:40.416 UTC [49] LOG:  checkpoint starting: time
+   2024-02-21 20:34:46.882 UTC [49] LOG:  checkpoint complete: wrote 67 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.431 s, sync=0.023 s, total=6.466 s; sync files=31, longest=0.015 s, average=0.001 s; distance=354 kB, estimate=354 kB; lsn=0/196BB18, redo lsn=0/196BAE0
+   ```
+   
+   You can look through the container logs for any error messages. For example,
+   you can look for credential or network configuration errors.
+
+3. Get a shell into the container to interact with the environment and execute
+   commands.
+
+   You can use the `docker exec` command to get a shell into some containers.
+   Many containers may use slim images that have no shell. The easiest way to
+   get a shell into any container, even those running slim images, is to use the
+   `docker debug` command. In debugging scenarios, the `docker debug` command is
+   a replacement for `docker exec` and has several advantages, such as not
+   modifying the environment of containers and providing access to a
+   customizable toolbox.
+
+   Use one of the following commands to get a shell into your container.
+
+   {{< tabs >}}
+   {{< tab name="docker exec" >}}
+
+   1. Get a shell into the database container with the following command.
+      Replace the container ID with your own container ID.
+
+      ```console
+      $ docker exec -u 0 -it 5f6271e301a8 /bin/sh
+      ```
+      
+      The following is a breakdown of the `docker exec` command options.
+      - `-u 0`: This option specifies the user that the command should run as. 0
+        is the user ID for the root user, so this command will run with root
+        privileges inside the container. Specifying the user ensures that the
+        command has the appropriate permissions for its operations.
+      - `-i` (or `--interactive`): This flag keeps the STDIN (standard input)
+        open even if not attached. It allows you to interact with the command
+        line of the container through your terminal. This is useful for
+        interactive commands that require input from the user.
+      - `-t` (or `--tty`): This allocates a pseudo-TTY, which is essentially a
+        virtual terminal inside the container. This makes it possible to
+        interact with the command line interface of the container in a more
+        user-friendly way, as if you were using a terminal session directly on
+        the host. It supports input, output, and error flow, along with terminal
+        resizing and signals.
+      - `5f6271e301a8`: This is the container ID or name. It specifies which
+        container you want to execute the command in. Docker uses this to
+        identify the specific container instance you're targeting for your
+        command.
+      - `/bin/sh`: This is the command you want to run inside the container. In
+        this case, it's launching a shell (sh), which allows you to interact
+        with the container's file system and execute further commands inside it.
+        If you're using Git Bash in Windows, use `//bin/sh`. When a container
+        has no shell, you can use `docker debug`.
+
+   2. Inside the shell, install tools to debug the issue. The following command
+      installs ping.
+
+      ```console
+      # apt-get update && apt-get iputils-ping
+      ```
+
+      Note that installing tools in the container will increase its size and
+      attack surface. In addition, any tools installed aren't available in
+      future containers. To avoid these issues, Docker recommends using `docker
+      debug`.
+
+  3. Inside the shell, use the installed tools. The following command pings the
+     `server` service to verify connectivity.
+
+      ```console
+      # ping -c 1 server
+      PING server (172.26.0.3) 56(84) bytes of data.
+      64 bytes from docker-nodejs-sample-server-1.docker-nodejs-sample_default (172.26.0.3): icmp_seq=1 ttl=64 time=0.131 ms
+      ```
+   {{< /tab >}}
+   {{< tab name="docker debug" >}}
+
+   > **Note**
+   >
+   > Docker Debug requires a [Pro, Team, or Business subscription](../../subscription/details.md). You must [sign in](../../desktop/get-started.md) to use this command.
+
+   1. Get a shell into the database container with the following command.
+      Replace the container ID with your own container ID.
+
+      ```console
+      $ docker debug 5f6271e301a8
+      ```
+
+   2. Inside the shell, use tools from Docker Debug's toolbox. The following
+     command pings the `server` service to verify connectivity.
+
+      ```console
+      docker > ping -c 1 server
+      PING server (172.26.0.3) 56(84) bytes of data.
+      64 bytes from docker-nodejs-sample-server-1.docker-nodejs-sample_default (172.26.0.3): icmp_seq=1 ttl=64 time=0.066 ms
+      ```
+
+      Docker Debug's toolbox comes with many standard Linux tools pre-installed,
+      such as `ping`. To learn how to install more tools in your toolbox, see
+      [docker debug](../../reference/cli/docker/debug.md).
+
+   {{< /tab >}}
+   {{< /tabs >}}
+
 ## Summary
 
-In this section, you took a look at setting up your Compose file to add a mock
+In this section, you took a look at setting up your Compose file to add a local
 database and persist data. You also learned how to create a multi-stage
-Dockerfile and set up a bind mount for development.
+Dockerfile and set up a bind mount for development. Finally, you learned how to debug container issues.
 
 Related information:
  - [Volumes top-level element](/compose/compose-file/07-volumes/)
  - [Services top-level element](/compose/compose-file/05-services/)
  - [Multi-stage builds](../../build/building/multi-stage.md)
+ - [docker CLI reference](../../reference/cli/docker/_index.md)
 
 ## Next steps
 
