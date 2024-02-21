@@ -7,6 +7,7 @@ aliases:
 - /edge/engine/reference/commandline/container_ls/
 - /engine/reference/commandline/container_ls/
 - /engine/reference/commandline/ps/
+- /reference/cli/docker/ps/
 layout: cli
 ---
 

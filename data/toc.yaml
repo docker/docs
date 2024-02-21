@@ -293,13 +293,13 @@ Reference:
   section:
   - path: /reference/cli/docker/
     title: docker (base command)
-  - path: /reference/cli/docker/image/build/
+  - path: /reference/cli/docker/build/
     title: docker build
   - sectiontitle: docker builder
     section:
       - path: /reference/cli/docker/builder/
         title: docker builder
-      - path: /reference/cli/docker/image/build/
+      - path: /reference/cli/docker/builder/build/
         title: docker builder build
       - path: /reference/cli/docker/builder/prune/
         title: docker builder prune
@@ -509,7 +509,7 @@ Reference:
         title: docker context use
   - path: /reference/cli/docker/debug/
     title: docker debug (Beta)
-  - path: /reference/cli/docker/container/exec/
+  - path: /reference/cli/docker/exec/
     title: docker exec
   - sectiontitle: docker image
     section:
@@ -539,9 +539,9 @@ Reference:
       title: docker image save
     - path: /reference/cli/docker/image/tag/
       title: docker image tag
-  - path: /reference/cli/docker/image/ls/
+  - path: /reference/cli/docker/images/
     title: docker images
-  - path: /reference/cli/docker/system/info/
+  - path: /reference/cli/docker/info/
     title: docker info
   - path: /reference/cli/docker/init/
     title: docker init
@@ -623,13 +623,13 @@ Reference:
       title: docker plugin set
     - path: /reference/cli/docker/plugin/upgrade/
       title: docker plugin upgrade
-  - path: /reference/cli/docker/container/ls/
+  - path: /reference/cli/docker/ps/
     title: docker ps
-  - path: /reference/cli/docker/image/pull/
+  - path: /reference/cli/docker/pull/
     title: docker pull
-  - path: /reference/cli/docker/image/push/
+  - path: /reference/cli/docker/push/
     title: docker push
-  - path: /reference/cli/docker/container/run/
+  - path: /reference/cli/docker/run/
     title: docker run
   - sectiontitle: docker scout
     section:

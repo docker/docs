@@ -7,6 +7,7 @@ aliases:
 - /edge/engine/reference/commandline/container_exec/
 - /engine/reference/commandline/container_exec/
 - /engine/reference/commandline/exec/
+- /reference/cli/docker/exec/
 layout: cli
 ---
 

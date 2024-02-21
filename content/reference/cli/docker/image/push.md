@@ -7,6 +7,7 @@ aliases:
 - /edge/engine/reference/commandline/image_push/
 - /engine/reference/commandline/image_push/
 - /engine/reference/commandline/push/
+- /reference/cli/docker/push/
 layout: cli
 ---
 
