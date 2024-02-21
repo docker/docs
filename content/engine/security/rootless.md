@@ -130,7 +130,7 @@ testuser:231072:65536
 ## Install
 > **Note**
 >
-> If the system-wide Docker daemon is already running, consider disabling it:
+> If the system-wide Docker daemon is already running, consider disabling it (Reboot after disabling):
 > `$ sudo systemctl disable --now docker.service docker.socket`
 
 {{< tabs >}}
