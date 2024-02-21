@@ -7,6 +7,7 @@ aliases:
 - /edge/engine/reference/commandline/image_pull/
 - /engine/reference/commandline/image_pull/
 - /engine/reference/commandline/pull/
+- /reference/cli/docker/pull/
 layout: cli
 ---
 

@@ -6,6 +6,7 @@ aliases:
 - /edge/engine/reference/commandline/image_save/
 - /engine/reference/commandline/image_save/
 - /engine/reference/commandline/save/
+- /reference/cli/docker/save/
 layout: cli
 ---
 

@@ -7,6 +7,7 @@ aliases:
 - /edge/engine/reference/commandline/image_ls/
 - /engine/reference/commandline/image_ls/
 - /engine/reference/commandline/images/
+- /reference/cli/docker/images/
 layout: cli
 ---
 

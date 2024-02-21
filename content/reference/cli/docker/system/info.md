@@ -7,6 +7,7 @@ aliases:
 - /edge/engine/reference/commandline/system_info/
 - /engine/reference/commandline/system_info/
 - /engine/reference/commandline/info/
+- /reference/cli/docker/info/
 layout: cli
 ---
 

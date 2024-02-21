@@ -8,6 +8,8 @@ aliases:
 - /engine/reference/commandline/image_build/
 - /engine/reference/commandline/build/
 - /engine/reference/commandline/builder_build/
+- /reference/cli/docker/build/
+- /reference/cli/docker/builder/build/
 layout: cli
 ---
 
