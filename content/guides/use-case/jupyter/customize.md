@@ -248,8 +248,8 @@ build and run containers with a simple command.
 Related information:
 
 - [Compose file reference](../../../compose/compose-file/_index.md)
-- [Docker CLI reference](/engine/reference/commandline/docker/)
-- [Dockerfile reference](/engine/reference/builder/)
+- [Docker CLI reference](/reference/cli/docker/)
+- [Dockerfile reference](/reference/dockerfile/)
 - [Jupyter Docker Stacks documentation](https://jupyter-docker-stacks.readthedocs.io/en/latest/)
 
 ## Next steps

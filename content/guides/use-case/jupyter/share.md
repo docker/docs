@@ -139,5 +139,5 @@ publish the image, and let others easily access and build upon your work.
 Related information:
 
 - [Docker Hub manual](../../../docker-hub/_index.md)
-- [Dockerfile reference](/engine/reference/builder/)
-- [Docker CLI reference](/engine/reference/commandline/docker/)
+- [Dockerfile reference](/reference/dockerfile/)
+- [Docker CLI reference](/reference/cli/docker/)
