@@ -55,7 +55,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - In the case of named volumes, the first field is the name of the volume, and is
     unique on a given host machine. For anonymous volumes, the first field is
     omitted.
-  - The second field is the path where the file or directory are mounted in
+  - The second field is the path where the file or directory is mounted in
     the container.
   - The third field is optional, and is a comma-separated list of options, such
     as `ro`. These options are discussed below.
