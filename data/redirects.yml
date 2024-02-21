@@ -105,8 +105,8 @@
   - /reference/api/docker_remote_api_v1.22/
   - /reference/api/docker_remote_api_v1.23/
 # redirect for old location of dockerd reference
-"/engine/reference/commandline/dockerd/":
-  - /reference/cli/dockerd/
+"/reference/cli/dockerd/":
+  - /engine/reference/commandline/dockerd/
 
 "/engine/security/#docker-daemon-attack-surface":
   # Details about the "Docker Daemon attack surface". This redirect is currently
