@@ -368,7 +368,7 @@ To debug a database connection issue:
       future containers. To avoid these issues, Docker recommends using `docker
       debug`.
 
-  3. Inside the shell, use the installed tools. The following command pings the
+   3. Inside the shell, use the installed tools. The following command pings the
      `server` service to verify connectivity.
 
       ```console
