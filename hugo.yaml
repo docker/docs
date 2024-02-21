@@ -282,7 +282,7 @@ module:
           target: content/engine/reference/run.md
         - source: docs/reference/commandline/cli.md
           target: content/engine/reference/commandline/cli.md
-        - source: docs/reference/commandline/dockerd.md
+        - source: docs/reference/dockerd.md
           target: content/reference/cli/dockerd.md
 
     - path: github.com/docker/compose/v2
