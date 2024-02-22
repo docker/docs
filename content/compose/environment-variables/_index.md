@@ -9,6 +9,7 @@ Use environment variables to pass configuration information to containers at run
 
 Environment variables are key-value pairs that contain data that can be used by processes running inside a Docker container. They are often used to configure application settings and other parameters that may vary between different environments, such as development, testing, and production.  
 
+
 > **Tip**
 >
 > Before using environment variables, read through all of the information first to get a full picture of environment variables in Docker Compose.
