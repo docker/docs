@@ -4,7 +4,7 @@ datafile: docker_container_run
 linkTitle: docker run
 title: docker container run
 aliases:
-- /engine/reference/commandline/container_rm/
+- /engine/reference/commandline/container_run/
 - /engine/reference/commandline/run/
 - /reference/cli/docker/run/
 layout: cli
