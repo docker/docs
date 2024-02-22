@@ -82,11 +82,11 @@ Make sure you have completed the following before you begin:
 
 1. Go to the Docker Hub SSO app that you created in the previous steps.
 2. Navigate to the **API permission** category in your app settings.
-3. Select **Grant admin consent for [YOUR TENANT NAME] > Yes**.
+3. Select **Grant admin consent for YOUR TENANT NAME > Yes**.
 
 ### Assign users to the SSO app
 
-1. Navigate to your Azure AD dashboard, then select **Enterprise Applications > [APP NAME]**.
+1. Navigate to your Azure AD dashboard, then select **Enterprise Applications > APP NAME**.
 2. Select **1. Assign users and groups**.
 3. Add users that will be allowed to use the app.
 
