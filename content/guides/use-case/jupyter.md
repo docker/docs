@@ -67,14 +67,14 @@ To access an existing notebook on your system, you can use a [bind mount](/stora
 {{< tab name="Windows (PowerShell)" >}}
 
 ```console
-$ docker run --rm -p 8889:8888 -v "$(pwd):/home/jovyan/work" jupyter/base-notebook start-notebook.py --NotebookApp.token='my-token'
+$ docker run --rm -p 8889:8888 -v "$(pwd):/home/jovyan/work" quay.io/jupyter/base-notebook start-notebook.py --NotebookApp.token='my-token'
 ```
 
 {{< /tab >}}
 {{< tab name="Mac / Linux" >}}
 
 ```console
-$ docker run --rm -p 8889:8888 -v "$(pwd):/home/jovyan/work" jupyter/base-notebook start-notebook.py --NotebookApp.token='my-token'
+$ docker run --rm -p 8889:8888 -v "$(pwd):/home/jovyan/work" quay.io/jupyter/base-notebook start-notebook.py --NotebookApp.token='my-token'
 ```
 {{< /tab >}}
 {{< /tabs >}}
