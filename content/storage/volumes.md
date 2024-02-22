@@ -676,10 +676,16 @@ $ docker run --rm -v /foo -v awesome:/bar busybox top
 
 ### Remove all volumes
 
-To remove all unused volumes and free up space:
+To remove all unused anonymous volumes and free up space run:
 
 ```console
 $ docker volume prune
+```
+
+To remove all unused volumes and free up space run:
+
+```console
+$ docker volume prune -a
 ```
 
 ## Next steps
