@@ -8,6 +8,11 @@ Docker Scout lets users secure their software supply chain and continuously obse
 
 In this section, learn how to buy and manage a Docker Scout Team subscription for your personal account or for an organization. If you're an organization with multiple teams, a Docker Scout Business plan may be better. To buy Docker Scout Business, [contact sales](https://www.docker.com/products/docker-scout/#contact-sales).
 
+> **Note**
+>
+> You need to be an owner to manage billing for an organization.
+>
+
 ## Buy Docker Scout Team
 
 1. Sign in to [Docker Scout](https://scout.docker.com/) with your Docker ID.
@@ -37,7 +42,7 @@ Renewals charge to the original credit card used to buy Docker Scout Team. To up
 
 ### Update number of repositories for your subscription
 
-You can add or remove the number of repositories associated with your subscription.
+You can add or remove the number of repositories associated with your Docker Scout Team subscription.
 
 To add repositories:
 
@@ -46,7 +51,7 @@ To add repositories:
 3. Select **Settings**.
 4. Select **Billing**.
 5. Select **Add repositories**.
-6. Enter the number of repositories you want to add, then select **Purchase**.
+6. Select the number of repositories in groups of five you want to add, then select **Purchase**.
 
 This purchase charges your default payment method.
 
@@ -57,7 +62,7 @@ To remove repositories:
 3. Select **Settings**.
 4. Select **Billing**.
 5. Select **Remove repositories**.
-6. Enter the number of repositories you want to remove, then select **Remove**.
+6. Select the number of repositories you want to remove, then select **Remove**.
 
 The number of repositories updates on your next billing cycle.
 
@@ -67,7 +72,7 @@ The number of repositories updates on your next billing cycle.
 
 ### Downgrade your subscription
 
-You can downgrade your Docker Scout Team subscription to a Docker Scout Free subscription at anytime before the renewal date. Your subscription features remain available until the end of your billing cycle.
+You can downgrade from Docker Scout Team or Docker Scout Business to a Docker Scout Free subscription at anytime before the renewal date. Your subscription features remain available until the end of your billing cycle.
 
 1. Sign in to [Docker Scout](https://scout.docker.com/) with your Docker ID.
 2. Select your personal account or organization namespace from the drop-down in the navigation menu on the left side of the screen.
