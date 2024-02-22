@@ -50,19 +50,20 @@ data between cloud builders.
 
 ## Get Docker Build Cloud
 
-To get started with Docker Build Cloud, [create a Docker
-account](../../docker-id/_index.md) and sign up for the free plan on the
+To get started with Docker Build Cloud,
+[create a Docker account](../../docker-id/_index.md)
+and sign up for the starter plan on the
 [Docker Build Cloud Dashboard](https://build.docker.com/).
 
-> **Note**
->
-> If your organization isn't already on a paid Docker subscription, you will
-> need to provide a payment method to sign up for Docker Build Cloud. If you
-> select the free plan, there will be no charges on the provided payment
-> method, it's only required for verification purposes.
+If your organization isn't already on a paid Docker subscription, you will
+need to provide a payment method to sign up for Docker Build Cloud. If you
+select the starter plan, there will be no charges on the provided payment
+method, it's only required for verification purposes.
 
-Once you've signed up and created a builder, continue by [setting up the
-builder in your local environment](./setup.md).
+Once you've signed up and created a builder, continue by
+[setting up the builder in your local environment](./setup.md).
 
-For more information about the available subscription plans, see [Docker Build Cloud
-subscriptions and features](../../subscription/build-details.md).
+For more information about the available subscription plans, see
+[Docker Build Cloud subscriptions and features](../../subscription/build-details.md).
+For information about roles and permissions related to Docker Build Cloud, see
+[Roles and Permissions](../../security/for-admins/roles-and-permissions.md#docker-build-cloud).
