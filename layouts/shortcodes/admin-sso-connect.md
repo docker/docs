@@ -8,9 +8,7 @@
   {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
 {{ end }}
 
-From your IdP, return to {{ $product_link }}.
-
-1. Select the verified domains you want to apply the connection to.
+1. In {{ $product_link }}, select the verified domains you want to apply the connection to.
 2. To provision your users, select the organization(s) and/or team(s).
 3. Review your summary and select **Create Connection**.
 

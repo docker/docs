@@ -31,7 +31,12 @@ Make sure you have completed the following before you begin:
     - Name ID format: `EmailAddress`
     - Application username: `Email`
     - Update application on: `Create or Update`
-    - Attribute Statements: `add`
+    - Attribute Statements: `add`. You can define your attribute statement like the following: 
+
+     | Attribute name | Name format | Value                                    |
+     | :------------- | :---------- | :--------------------------------------- |
+     | name           | Unspecified | username.firstName + " " + user.lastName |
+
 6. Select **Next**.
 7. Select **I'm an Okta customer adding an internal app**.
 8. Select **Finish**.
@@ -49,8 +54,8 @@ Make sure you have completed the following before you begin:
     - ACS URL → Reply URL
 7. Save configuration
 8. From section **SAML Signing Certificate** download **Certificate (Base64)**
-9. Open the certificate file in a text editor and paste the content of the file in Docker Hub or Admin Console **SAML configurations > “Key x509 Certificate”**.
-10. From the section **Set up Docker**, copy **Login URL** and paste it into **SAML Sign-in URL** in Docker Hub or Admin Console.
+9. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console.
+10. From the section **Set up Docker**, copy **Login URL** and paste it into the **SAML Sign-in URL** field in Docker Hub or Admin Console.
 
 {{< /tab >}}
 {{< tab name="Azure Connect (OIDC)" >}}
