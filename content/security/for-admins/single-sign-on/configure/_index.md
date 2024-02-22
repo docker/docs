@@ -11,9 +11,18 @@ aliases:
 - /admin/organization/security-settings/sso-configuration/
 ---
 
-Follow the steps on this page to configure SSO for your organization or company.
+Get started creating a single sign-on (SSO) connection for your organization or company.
 
-## Step one: Add and verify your domain
+The steps to create your SSO configuration are:
+
+1. [Add and verify the domain or domains](#add-and-verify-your-domain) that your members use to sign in to Docker.
+2. [Create your SSO connection](#create-an-sso-connection-in-docker) in Docker.
+3. [Configure your IdP](./configure-idp.md) to work with Docker.
+4. [Complete your SSO connection](../connect/_index.md) in Docker.
+
+This page walks through steps 1 and 2 using Docker Hub or the Admin Console.
+
+## Add and verify your domain
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
@@ -30,7 +39,7 @@ Follow the steps on this page to configure SSO for your organization or company.
 {{< /tab >}}
 {{< /tabs >}}
 
-## Step two: Create an SSO connection
+## Create an SSO connection in Docker
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
@@ -45,15 +54,12 @@ Follow the steps on this page to configure SSO for your organization or company.
 {{< /tab >}}
 {{< /tabs >}}
 
+## What's next?
+
+From here, you can [continue configuration in your IdP](./configure-idp.md).
+
 ## More resources
 
 The following video provides an overview of configuring SSO with SAML in Entra ID (formerly Azure AD).
 
 <iframe title="Configure SSO with SAML in Entra ID overview" class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/0a30409381f340cfb01790adbd9aa9b3?sid=7e4e10a7-7f53-437d-b593-8a4886775632"></iframe>
-
-## What's next?
-
-- [Set up SCIM](../../scim.md)
-- [Enable Group mapping](../../group-mapping.md)
-- [Manage your SSO connections](../manage/_index.md)
-
