@@ -42,7 +42,7 @@ Renewals charge to the original credit card used to buy Docker Scout Team. To up
 
 ### Update number of repositories for your subscription
 
-You can add or remove the number of repositories associated with your Docker Scout Team subscription.
+On a Docker Scout Team plan, you can add or remove the number of repositories associated with your subscription. The number of repositories you can add or remove are bundled in groups of five.
 
 To add repositories:
 
@@ -51,7 +51,7 @@ To add repositories:
 3. Select **Settings**.
 4. Select **Billing**.
 5. Select **Add repositories**.
-6. Select the number of repositories in groups of five you want to add, then select **Purchase**.
+6. Select the number of repositories you want to add, then select **Purchase**.
 
 This purchase charges your default payment method.
 
@@ -69,10 +69,16 @@ The number of repositories updates on your next billing cycle.
 > **Note**
 >
 > You can't add repositories while repository removal is pending. You can add repositories again during the next billing cycle.
+>
 
 ### Downgrade your subscription
 
 You can downgrade from Docker Scout Team or Docker Scout Business to a Docker Scout Free subscription at anytime before the renewal date. Your subscription features remain available until the end of your billing cycle.
+
+> **Note**
+>
+> You can't downgrade from Docker Scout Business to Docker Scout Team.
+>
 
 1. Sign in to [Docker Scout](https://scout.docker.com/) with your Docker ID.
 2. Select your personal account or organization namespace from the drop-down in the navigation menu on the left side of the screen.
