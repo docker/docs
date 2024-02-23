@@ -53,8 +53,8 @@ You can find further information on the vulnerability or exploit, including if a
 
 ## Remediation recommendations
 
-In Docker Hub and Docker Desktop 4.17 and later versions, when inspecting an
-image, you can get recommended actions for improving the security of that image.
+When you inspect an image in Docker Desktop or Docker Hub,
+Docker Scout can provide recommendations for improving the security of that image.
 
 ### Recommendations in Docker Desktop
 
@@ -91,10 +91,6 @@ To view security recommendations for an image in Docker Hub:
    details.
 
 ### Recommendations for current image
-
-> **Note**
->
-> This recommendation is only available in Docker Desktop.
 
 The recommendations for the current image view helps you determine whether the image
 version that you're using is out of date. If the tag you're using is referencing an
