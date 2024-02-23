@@ -8,4 +8,22 @@
       fill: currentColor;
     }
   }
+
+  .icon-xs {
+    svg {
+      @apply text-base;
+    }
+  }
+
+  .icon-sm {
+    svg {
+      @apply text-lg;
+    }
+  }
+
+  .icon-top {
+    svg {
+      @apply ml-1 align-top;
+    }
+  }
 }

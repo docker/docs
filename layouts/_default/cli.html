@@ -13,18 +13,39 @@
   {{ .Scratch.Set "subheadings" slice }}
   {{ partial "breadcrumbs.html" . }}
   <article class="DocSearch-content prose max-w-none dark:prose-invert">
-    {{ if ne .LinkTitle .Title }}
-    {{/*
-      we use linkTitle for surfacing popular aliases like "docker run"
-      if linkTitle is set, use both alias and canonical cmd as title
-    */}}
-    <h1 class="scroll-mt-36">{{ .LinkTitle }}<span
-      class="text-gray-light dark:text-gray-dark"> ({{ .Title }})</span>
-    </h1>
-    {{ else }}
     <h1 class="scroll-mt-36">{{ .Title }}</h1>
-    {{ end }}
-    {{ $data.short | .RenderString (dict "display" "block") }}
+    <table>
+      <tbody>
+        {{ with $data.short }}
+        <tr>
+          <th class="text-left w-32">Description</th>
+          <td>{{ . }}</th>
+        </tr>
+        {{ end }}
+        {{ with $data.usage }}
+        <tr>
+          <th class="text-left w-32">Usage</th>
+          <td><code>{{ . }}</code></td>
+        </tr>
+        {{ end }}
+        {{ with $data.aliases }}
+        {{ $aliases := strings.Replace . (fmt.Printf "%s, " page.Title) "" }}
+        <tr>
+          <th class="text-left w-32 flex items-center gap-2">
+            <span>Aliases</span>
+            {{ partial "tooltip.html" "An alias is a short or memorable alternative for a longer command." }}
+          </th>
+          <td>
+            <div class="flex gap-3">
+            {{ range (strings.Split $aliases ", ") }}
+              <code>{{ . }}</code>
+            {{ end }}
+            </div>
+          </td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
     {{ .Content }}
     {{ if $data.deprecated }}
       <blockquote class="warning">
@@ -59,23 +80,6 @@
         {{ partial "components/badge.html" (dict "color" "blue" "content" "Swarm") }}
         This command works with the Swarm orchestrator.
       </p>
-    {{ end }}
-    {{ with $data.usage }}
-      {{ $heading := dict "level" 2 "text" "Usage" }}
-      {{ partial "heading.html" $heading }}
-      {{ $.Scratch.Add "headings" $heading }}
-      {{ highlight (strings.Replace . "\t" "") "console" }}
-    {{ end }}
-    {{ with $data.aliases }}
-      {{ $heading := dict "level" 2 "text" "Aliases" }}
-      {{ partial "heading.html" $heading }}
-      {{ $aliases := strings.Split . ", " }}
-      <p>The following commands are equivalent and redirect here:</p>
-      <ul>
-      {{ range $aliases }}
-        <li><code>{{ . }}</code></li>
-      {{ end }}
-      </ul>
     {{ end }}
     {{ with $data.long }}
       {{ $heading := dict "level" 2 "text" "Description" }}

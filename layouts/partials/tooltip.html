@@ -1,0 +1,11 @@
+<div data-tooltip-wrapper>
+  <div data-tooltip-button class="icon-svg icon-sm flex items-center text-blue-light dark:text-blue-dark">
+    {{ partial "icon" "help" }}
+  </div>
+  <div data-tooltip-body
+    class="absolute left-0 top-0 hidden max-w-56 rounded bg-accent-light p-2 text-white dark:bg-accent-dark"
+    role="tooltip">
+    {{ . }}
+    <div data-tooltip-arrow class="absolute h-2 w-2 rotate-45 bg-accent-light dark:bg-accent-dark"></div>
+  </div>
+</div>
