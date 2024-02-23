@@ -31,3 +31,7 @@ Make sure you have completed the following before you begin:
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## What's next
+
+Learn how you can [manage your SSO connection](../manage/_index.md), domain, and users for your organization or company.
