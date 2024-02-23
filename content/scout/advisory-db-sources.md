@@ -5,23 +5,20 @@ keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security
 title: Advisory database sources and matching service
 ---
 
-Docker Scout is a service that helps developers and security teams build and
-maintain a secure software supply chain. A key component of this is the ability
-to assess your software artifacts against a reliable source of vulnerability
-information. Different tools collect vulnerability information from different
-sources, and use different methods to identify matches against software
-artifacts. This can lead to differing results between tools.
+Reliable information sources are key for Docker Scout's ability to
+surface relevant and accurate assessments of your software artifacts.
+Given the diversity of sources and methodologies in the industry,
+discrepancies in vulnerability assessment results can and do happen.
+This page describes how the Docker Scout advisory database
+and its CVE-to-package matching approach works to deal with these discrepancies.
 
-To help you understand why different tools can provide different results when
-assessing software for vulnerabilities, this page explains how the Docker Scout
-advisory database and CVE-to-package matching service works.
+## Advisory database sources
 
-## Docker Scout’s advisory database sources
+Docker Scout aggregates vulnerability data from multiple sources.
+The data is continuously updated to ensure that your security posture
+is represented using the latest available information, in real-time.
 
-Docker Scout creates and maintains its vulnerability database by ingesting and
-collating vulnerability data from multiple sources continuously. These
-sources include many recognizable package repositories and trusted security
-trackers, including:
+Docker Scout uses the following package repositories and security trackers:
 
 - [Alpine secdb](https://secdb.alpinelinux.org/)
 - [AlmaLinux Security Advisory](https://errata.almalinux.org/)
@@ -49,66 +46,26 @@ trackers, including:
 - [Wolfi Security Feed](https://packages.wolfi.dev/os/security.json)
 - [Chainguard Security Feed](https://packages.cgr.dev/chainguard/security.json)
 
-Docker Scout correlates the vulnerability data from these advisories with the
-Software Bill of Materials (SBOM) of container images to detect what
-vulnerabilities affect an image. The SBOM summarizes the contents of an image,
-and Docker Scout stores the SBOM in its database.
+When you enable Docker Scout for your Docker organization,
+a new database instance is provisioned on the Docker Scout platform.
+The database stores the Software Bill of Materials (SBOM) and other metadata about your images.
+When a security advisory has new information about a vulnerability,
+your SBOM is cross-referenced with the CVE information to detect how it affects you.
 
-When there is information about a new vulnerability, Docker Scout correlates
-the vulnerable package with the SBOMs in the database to identify affected
-images.
+For more details on how image analysis works, see the [image analysis page](./image-analysis.md).
 
-When you enable Docker Scout for your organization, you receive your own
-instance of the database. The database tracks timestamped metadata about your
-images that Docker Scout can then match to CVEs. Find more details on how this
-works in the [image analysis page](./image-analysis.md).
+## Vulnerability matching
 
-Docker Scout image analysis integrates seamlessly with Docker Desktop and
-Docker Hub, and you can also enable integrations with other systems, see
-[Integrating Docker Scout with other systems](./integrations/index.md).
+Traditional tools often rely on broad [Common Product Enumeration (CPE)](https://en.wikipedia.org/wiki/Common_Platform_Enumeration) matching,
+which can lead to many false-positive results.
 
-## How Docker Scout makes more precise matches
+Docker Scout uses [Package URLs (PURLs)](https://github.com/package-url/purl-spec)
+to match packages against CVEs, which yields more precise identification of vulnerabilities.
+PURLs significantly reduce the chances of false positives, focusing only on genuinely affected packages.
 
-Many other tools use fuzzy [Common Product Enumeration
-(CPE)](https://en.wikipedia.org/wiki/Common_Platform_Enumeration) matching with
-wild cards to known vulnerabilities with the versions of software packages they affect.
-This can return a lot of false positives which you need to triage.
+## Supported package ecosystems
 
-The typical structure of a CPE match looks like this:
-
-```text
-cpe:<cpe_version>:<part>:<vendor>:<product>:<version>:<update>:<edition>:<language>:<sw_edition>:<target_sw>:<target_hw>:<other>
-```
-
-For example `cpe:*:*:*:calendar:*:*:*:*:*:*:*` returns a match on anything with
-the product name “calendar”. If there is a vulnerability present in an npm
-package, this CPE match would also return packages and modules for all other
-languages too.
-
-Instead, Docker Scout matches CVEs to SBOMs using [Package URL (PURL)
-links](https://github.com/package-url/purl-spec) that are a more precise,
-universal schema for matching software packages. A PURL link can help you only
-identify the relevant packages with far less false positives.
-
-Continuing this example, a PURL can match the specific package name to a
-language and version.
-
-```text
-pkg:npm/calendar@12.0.2
-```
-
-This only matches a node package with the name `calendar` and the version
-`12.0.2`. For relevant packages, you can specify architectures and operating
-system versions to make more precise matches.
-
-In summary, Docker Scout’s technique improves matching accuracy and reduces the
-number of results that turn out to be false-positives.
-
-## Package ecosystems supported by Docker Scout
-
-By sourcing vulnerability data from the [advisory
-databases](#docker-scouts-advisory-database-sources), Docker Scout is able to
-support analyzing the following package ecosystems:
+Docker Scout supports the following package ecosystems:
 
 - .NET
 - GitHub packages
