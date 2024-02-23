@@ -1177,7 +1177,7 @@ examples: |-
 
     #### Example: run htop inside a container
 
-    To run `htop` in a container that shares the process namespac of the host:
+    To run `htop` in a container that shares the process namespace of the host:
 
     1. Run an alpine container with the `--pid=host` option:
 
