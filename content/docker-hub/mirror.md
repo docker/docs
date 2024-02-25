@@ -132,7 +132,7 @@ Save the file and reload Docker for the change to take effect.
 > an error or is giving you information. For example, this log message is
 > informational:
 >
-> ```conf
+> ```text
 > time="2017-06-02T15:47:37Z" level=info msg="error statting local store, serving from upstream: unknown blob" go.version=go1.7.4
 > ```
 >
