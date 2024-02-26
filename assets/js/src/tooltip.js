@@ -1,33 +1,66 @@
-const keywords = [
-  "ADD",
-  "ARG",
-  "CMD",
-  "COPY",
-  "ENTRYPOINT",
-  "ENV",
-  "EXPOSE",
-  "FROM",
-  "HEALTHCHECK",
-  "LABEL",
-  // "MAINTAINER",
-  "ONBUILD",
-  "RUN",
-  "SHELL",
-  "STOPSIGNAL",
-  "USER",
-  "VOLUME",
-  "WORKDIR",
-]
-const cmds = Array.from(document.querySelectorAll(".language-dockerfile span.k"))
-  .filter((el) => keywords.some(kwd => el.textContent.includes(kwd)));
+import { computePosition, flip, shift, offset, arrow } from "@floating-ui/dom";
 
-for (const cmd of cmds) {
-  const name = cmd.textContent;
-  const a = document.createElement("a")
-  a.classList.add("underline","underline-offset-4","decoration-dashed","cursor-pointer")
-  a.title = `Learn more about the ${name} instruction`
-  a.href = `/reference/dockerfile/#${name.toLowerCase()}`
-  a.innerHTML = cmd.outerHTML
-  cmd.insertAdjacentElement("beforebegin", a)
-  cmd.remove()
+/* Regular tooltips (partial) */
+
+const tooltipWrappers = Array.from(
+  document.querySelectorAll("[data-tooltip-wrapper]"),
+);
+
+for (const tooltipWrapper of tooltipWrappers) {
+  const button = tooltipWrapper.firstElementChild;
+  const tooltip = button.nextElementSibling;
+  const arrowElement = tooltip.firstElementChild;
+
+  function update() {
+    computePosition(button, tooltip, {
+      placement: "top",
+      middleware: [
+        offset(6),
+        flip(),
+        shift({ padding: 5 }),
+        arrow({ element: arrowElement }),
+      ],
+    }).then(({ x, y, placement, middlewareData }) => {
+      Object.assign(tooltip.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      });
+
+      // Accessing the data
+      const { x: arrowX, y: arrowY } = middlewareData.arrow;
+
+      const staticSide = {
+        top: "bottom",
+        right: "left",
+        bottom: "top",
+        left: "right",
+      }[placement.split("-")[0]];
+
+      Object.assign(arrowElement.style, {
+        left: arrowX != null ? `${arrowX}px` : "",
+        top: arrowY != null ? `${arrowY}px` : "",
+        right: "",
+        bottom: "",
+        [staticSide]: "-4px",
+      });
+    });
+  }
+
+  function showTooltip() {
+    tooltip.classList.toggle("hidden");
+    update();
+  }
+
+  function hideTooltip() {
+    tooltip.classList.toggle("hidden");
+  }
+
+  [
+    ["mouseenter", showTooltip],
+    ["mouseleave", hideTooltip],
+    ["focus", showTooltip],
+    ["blur", hideTooltip],
+  ].forEach(([event, listener]) => {
+    button.addEventListener(event, listener);
+  });
 }

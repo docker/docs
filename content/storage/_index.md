@@ -206,7 +206,7 @@ If you use either bind mounts or volumes, keep the following in mind:
   in which some files or directories exist, these files or directories are
   obscured by the mount, just as if you saved files into `/mnt` on a Linux host
   and then mounted a USB drive into `/mnt`. The contents of `/mnt` would be
-  obscured by the contents of the USB drive until the USB drive were unmounted.
+  obscured by the contents of the USB drive until the USB drive was unmounted.
   The obscured files are not removed or altered, but are not accessible while the
   bind mount or volume is mounted.
 

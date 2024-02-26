@@ -179,6 +179,9 @@ Guides:
         title: Text summarization
     - path: /scout/guides/vex/
       title: Suppress CVEs with VEX
+    - path: /guides/use-case/jupyter/
+      title: Data science with JupyterLab
+
 
 - sectiontitle: Develop with Docker
   section:

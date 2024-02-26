@@ -2,12 +2,12 @@
 {{- if (strings.HasPrefix $url "http") -}}
   {{/* external link, add icon */}}
   <a
-    class="link external-link"
+    class="link"
     href="{{ $url | safeURL }}"
     target="_blank"
     rel="noopener">
       {{- .Text | safeHTML -}}
-      <span class="icon-svg">
+      <span class="icon-svg icon-xs icon-top">
         {{- partial "icon" "open_in_new" -}}
       </span></a>
 {{- else if (strings.HasPrefix $url "/") -}}
