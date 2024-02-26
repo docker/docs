@@ -92,8 +92,8 @@ examples: |-
 
     ### Remove all stopped containers
 
-    Use the [`docker container prune`](container_prune.md) command to remove all
-    stopped containers, or refer to the [`docker system prune`](system_prune.md)
+    Use the [`docker container prune`](/reference/cli/docker/container/prune/) command to remove all
+    stopped containers, or refer to the [`docker system prune`](/reference/cli/docker/system/prune/)
     command to remove unused containers in addition to other Docker resources, such
     as (unused) images and networks.
 
@@ -143,6 +143,7 @@ examples: |-
     `/bar` is removed. The same behavior holds for volumes inherited with
     `--volumes-from`.
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

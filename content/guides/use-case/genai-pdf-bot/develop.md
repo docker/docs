@@ -236,7 +236,7 @@ In this section, you learned how to set up a development environment to provide
 access all the services that your GenAI application needs.
 
 Related information:
- - [Dockerfile reference](../../../engine/reference/builder.md)
+ - [Dockerfile reference](../../../reference/dockerfile.md)
  - [Compose file reference](../../../compose/compose-file/_index.md)
  - [Ollama Docker image](https://hub.docker.com/r/ollama/ollama)
  - [Neo4j Official Docker Image](https://hub.docker.com/_/neo4j)

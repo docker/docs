@@ -7,7 +7,7 @@ title: Networking in Compose
 {{< include "compose-eol.md" >}}
 
 By default Compose sets up a single
-[network](../engine/reference/commandline/network_create.md) for your app. Each
+[network](../reference/cli/docker/network/create.md) for your app. Each
 container for a service joins the default network and is both reachable by
 other containers on that network, and discoverable by the service's name.
 

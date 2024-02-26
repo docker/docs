@@ -173,7 +173,7 @@ sbom.spdx.json
 ## Inspecting SBOMs
 
 To explore created SBOMs exported through the `image` exporter, you can use
-[`imagetools inspect`](../../engine/reference/commandline/buildx_imagetools_inspect.md).
+[`imagetools inspect`](../../reference/cli/docker/buildx/imagetools/inspect.md).
 
 Using the `--format` option, you can specify a template for the output. All
 SBOM-related data is available under the `.SBOM` attribute. For example, to get

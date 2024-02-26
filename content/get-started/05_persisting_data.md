@@ -205,7 +205,7 @@ In this section, you learned how to persist container data.
 
 Related information:
 
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [docker CLI reference](/reference/cli/docker/)
  - [Volumes](../storage/volumes.md)
 
 ## Next steps

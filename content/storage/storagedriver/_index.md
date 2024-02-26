@@ -383,7 +383,7 @@ here. Any files the container doesn't change don't get copied to this writable
 layer. This means that the writable layer is as small as possible.
 
 When an existing file in a container is modified, the storage driver performs a
-copy-on-write operation. The specifics steps involved depend on the specific
+copy-on-write operation. The specific steps involved depend on the specific
 storage driver. For the `overlay2` driver, the  copy-on-write operation follows
 this rough sequence:
 
@@ -427,7 +427,7 @@ lots of layers, and deep directory trees can make the impact more noticeable.
 This is mitigated by the fact that each `copy_up` operation only occurs the first
 time a given file is modified.
 
-To verify the way that copy-on-write works, the following procedures spins up 5
+To verify the way that copy-on-write works, the following procedure spins up 5
 containers based on the `acme/my-final-image:1.0` image we built earlier and
 examines how much room they take up.
 
@@ -522,14 +522,14 @@ examines how much room they take up.
    40ebdd763416   acme/my-final-image:1.0   my_container_1   5B (virtual 7.75MB)
    ```
 
-The previous examples illustrate how copy-on-write filesystems help making
+The previous examples illustrate how copy-on-write filesystems help make
 containers efficient. Not only does copy-on-write save space, but it also
 reduces container start-up time. When you create a container (or multiple
 containers from the same image), Docker only needs to create the thin writable
 container layer.
 
 If Docker had to make an entire copy of the underlying image stack each time it
-created a new container, container create times and disk space used would be
+created a new container, container creation times and disk space used would be
 significantly increased. This would be similar to the way that virtual machines
 work, with one or more virtual disks per virtual machine. The [`vfs` storage](vfs-driver.md)
 doesn't provide a CoW filesystem or other optimizations. When using this storage

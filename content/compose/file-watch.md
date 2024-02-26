@@ -17,7 +17,7 @@ For many projects, this allows for a hands-off development workflow once Compose
 * Directories are watched recursively
 * Glob patterns aren't supported
 * Rules from `.dockerignore` apply
-  * Use `include` / `exclude` to override
+  * Use `ignore` to defined additional paths to be ignored (same syntax)
   * Temporary/backup files for common IDEs (Vim, Emacs, JetBrains, & more) are ignored automatically
   * `.git` directories are ignored automatically
 

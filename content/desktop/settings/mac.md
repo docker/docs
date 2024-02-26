@@ -226,7 +226,7 @@ edit the JSON configuration directly from the dashboard in Docker Desktop, or op
 edit the file using your favorite text editor.
 
 To see the full list of possible configuration options, see the
-[dockerd command reference](/engine/reference/commandline/dockerd/).
+[dockerd command reference](/reference/cli/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
 

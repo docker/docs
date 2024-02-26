@@ -18,12 +18,6 @@
     @apply text-blue-light underline underline-offset-2 dark:text-blue-dark;
   }
 
-  .external-link {
-    .icon-svg svg {
-      @apply text-base ml-1 align-top;
-    }
-  }
-
   .invertible {
     @apply dark:hue-rotate-180 dark:invert dark:filter;
   }

@@ -6,7 +6,7 @@ description: Learn how to Configure CI/CD for your Java application
 
 ## Prerequisites
 
-Complete the previous sections of this guide, starting with [Build your Java image](build-images.md). You must have a [GitHub](https://github.com/signup) account and a [Docker](https://hub.docker.com/signup) account to complete this section.
+Complete the previous sections of this guide, starting with [Containerize your app](containerize.md). You must have a [GitHub](https://github.com/signup) account and a [Docker](https://hub.docker.com/signup) account to complete this section.
 
 ## Overview
 
@@ -103,7 +103,7 @@ to Docker Hub.
            with:
              context: .
              push: true
-             target: production
+             target: final
              tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
 

@@ -218,7 +218,7 @@ for creating a Docker container.
 
 The sample application already contains a `Dockerfile`. Open the `Dockerfile` in a code or text editor to explore its contents.
 
-The following steps explain each part of the `Dockerfile`. For more details, see the [Dockerfile reference](/engine/reference/builder/).
+The following steps explain each part of the `Dockerfile`. For more details, see the [Dockerfile reference](/reference/dockerfile/).
 
 1. Specify the base image.
 
@@ -341,7 +341,7 @@ To run the application using Docker:
      this case) is sent to the Docker daemon to enable the build. It includes
      all the files and subdirectories in the specified directory.
 
-   For more details, see the [docker build CLI reference](/engine/reference/commandline/image_build/).
+   For more details, see the [docker build CLI reference](/reference/cli/docker/image/build/).
 
    Docker outputs several logs to your console as it builds the image. You'll
    see it download and install the dependencies. Depending on your network
@@ -375,7 +375,7 @@ To run the application using Docker:
      Docker container. It gets passed to the `entrypoint.sh` script, which runs
      it when the container starts.
 
-   For more details, see the [docker run CLI reference](/engine/reference/commandline/container_run/).
+   For more details, see the [docker run CLI reference](/reference/cli/docker/container/run/).
 
    > **Note**
    >
@@ -420,8 +420,8 @@ the application using Docker.
 
 Related information:
 
-* [Docker CLI reference](/engine/reference/commandline/docker/)
-* [Dockerfile reference](/engine/reference/builder/)
+* [Docker CLI reference](/reference/cli/docker/)
+* [Dockerfile reference](/reference/dockerfile/)
 * [Natural Language Toolkit](https://www.nltk.org/)
 * [Python documentation](https://docs.python.org/3/)
 * [scikit-learn](https://scikit-learn.org/)

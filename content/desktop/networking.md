@@ -53,6 +53,22 @@ See:
 - [Proxies on Mac](settings/mac.md#proxies)
 - [Proxies on Windows](settings/windows.md#proxies)
 
+### SOCKS5 proxy support (Beta)
+
+SOCKS (Socket Secure) is a protocol that facilitates the routing of network packets between a client and a server through a proxy server. It provides a way to enhance privacy, security, and network performance for users and applications.
+
+With Docker Desktop 4.28 and later, you can enable SOCKS proxy support to allow outgoing requests, such as pulling images, and access Linux container backend IPs from the host. 
+
+To enable and set up SOCKS proxy support:
+
+1. Navigate to **Settings** in Docker Desktop. 
+2. Go to **Features in development** and then on the **Beta** tab check the **Enable SOCKS proxy support** option. 
+3. Select **Apply & restart**.
+4. Go to the **Resources** tab and from the dropdown menu select **Proxies**
+5. Switch on the **Manual proxy configuration** toggle. 
+6. In the **Secure Web Server HTTPS** box, paste your `socks5://host:port` URL.
+
+
 {{< /tab >}}
 {{< tab name="For Mac and Linux" >}}
 
@@ -169,5 +185,5 @@ container to random ports on the host.
 $ docker run -d -P --name webserver nginx
 ```
 
-See the [run command](../engine/reference/commandline/container_run.md) for more details on
+See the [run command](../reference/cli/docker/container/run.md) for more details on
 publish options used with `docker run`.

@@ -141,18 +141,18 @@ detailed information for analysis.
 > **Warning**
 >
 > Note that `mode=max` exposes the values of
-> [build arguments](../../engine/reference/commandline/buildx_build.md#build-arg).
+> [build arguments](../../reference/cli/docker/buildx/build.md#build-arg).
 >
 > If you're misusing build arguments to pass credentials, authentication
 > tokens, or other secrets, you should refactor your build to pass the secrets using
-> [secret mounts](../../engine/reference/commandline/buildx_build.md#secret) instead.
+> [secret mounts](../../reference/cli/docker/buildx/build.md#secret) instead.
 > Secret mounts don't leak outside of the build and are never included in provenance attestations.
 {.warning}
 
 ## Inspecting Provenance
 
 To explore created Provenance exported through the `image` exporter, you can
-use [`imagetools inspect`](../../engine/reference/commandline/buildx_imagetools_inspect.md).
+use [`imagetools inspect`](../../reference/cli/docker/buildx/imagetools/inspect.md).
 
 Using the `--format` option, you can specify a template for the output. All
 provenance-related data is available under the `.Provenance` attribute. For

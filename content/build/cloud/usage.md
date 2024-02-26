@@ -66,7 +66,7 @@ $ docker compose build
 
 In addition to `docker buildx use`, you can also use the `docker compose build
 --builder` flag or the [`BUILDX_BUILDER` environment
-variable](../building/env-vars.md#buildx_builder) to select the cloud builder.
+variable](../building/variables.md#buildx_builder) to select the cloud builder.
 
 ## Loading build results
 
@@ -142,15 +142,15 @@ The traffic is encrypted and secrets are never stored in the build cache.
 >
 > If you're misusing build arguments to pass credentials, authentication
 > tokens, or other secrets, you should refactor your build to pass the secrets using
-> [secret mounts](../../engine/reference/commandline/buildx_build.md#secret) instead.
+> [secret mounts](../../reference/cli/docker/buildx/build.md#secret) instead.
 > Build arguments are stored in the cache and their values are exposed through attestations.
 > Secret mounts don't leak outside of the build and are never included in attestations.
 {.warning}
 
 For more information, refer to:
 
-- [`docker buildx build --secret`](/engine/reference/commandline/buildx_build/#secret)
-- [`docker buildx build --ssh`](/engine/reference/commandline/buildx_build/#ssh)
+- [`docker buildx build --secret`](/reference/cli/docker/buildx/build/#secret)
+- [`docker buildx build --ssh`](/reference/cli/docker/buildx/build/#ssh)
 
 ## Managing build cache
 
@@ -159,10 +159,10 @@ The system manages it for you through [garbage collection](/build/cache/garbage-
 
 Old cache is automatically removed if you hit your storage limit.
 You can check your current cache state using the
-[`docker buildx du` command](/engine/reference/commandline/buildx_du/).
+[`docker buildx du` command](/reference/cli/docker/buildx/du/).
 
 To clear the builder's cache manually,
-use the [`docker buildx prune` command](/engine/reference/commandline/buildx_prune/).
+use the [`docker buildx prune` command](/reference/cli/docker/buildx/prune/).
 This works like pruning the cache for any other builder.
 
 > **Warning**

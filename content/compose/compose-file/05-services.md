@@ -203,7 +203,7 @@ cgroup_parent: m-executor-abcd
 command: bundle exec thin -p 3000
 ```
 
-The value can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+The value can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
 
 ```yaml
 command: [ "bundle", "exec", "thin", "-p", "3000" ]
@@ -523,7 +523,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 Alternatively, the value can also be a list, in a manner similar to the
-[Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+[Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
 
 ```yml
 entrypoint:
@@ -938,7 +938,7 @@ been the case if `group_add` were not declared.
 ## healthcheck
 
 `healthcheck` declares a check that's run to determine whether or not the service containers are "healthy". It works in the same way, and has the same default values, as the
-[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/engine/reference/builder/#healthcheck)
+[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/reference/dockerfile/#healthcheck)
 set by the service's Docker image. Your Compose file can override the values set in the Dockerfile. 
 
 ```yml
@@ -1151,7 +1151,7 @@ There is a performance penalty for applications that swap memory to disk often.
 
 - `none`: Turns off all container networking.
 - `host`: Gives the container raw access to the host's network interface.
-- `service:{name}`: Gives the containers access to the specified service only.
+- `service:{name}`: Gives the containers access to the specified service only. For more information, see [Container networks](../../network/_index.md#container-networks).
 
 ```yml
     network_mode: "host"
@@ -1408,18 +1408,21 @@ expressed in the short form.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
 - `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
+- `name`: A human-readable name for the port, used to document it's usage within the service.
 
 ```yml
 ports:
-  - target: 80
+  - name: http
+    target: 80
     host_ip: 127.0.0.1
     published: "8080"
     protocol: tcp
     mode: host
 
-  - target: 80
+  - name: https
+    target: 443
     host_ip: 127.0.0.1
-    published: "8000-9000"
+    published: "8083-9000"
     protocol: tcp
     mode: host
 ```

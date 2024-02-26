@@ -46,6 +46,7 @@ examples: |-
     0.0.0.0:4321
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

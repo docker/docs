@@ -148,7 +148,7 @@ inherited_options:
 examples: |-
     ### Override the configured builder instance (--builder) {#builder}
 
-    Same as [`buildx --builder`](buildx.md#builder).
+    Same as [`buildx --builder`](/reference/cli/docker/buildx/#builder).
 
     ### Specify a build definition file (-f, --file) {#file}
 
@@ -222,11 +222,11 @@ examples: |-
 
     ### Set type of progress output (--progress) {#progress}
 
-    Same as [`build --progress`](buildx_build.md#progress).
+    Same as [`build --progress`](/reference/cli/docker/buildx/build/#progress).
 
     ### Create provenance attestations (--provenance) {#provenance}
 
-    Same as [`build --provenance`](buildx_build.md#provenance).
+    Same as [`build --provenance`](/reference/cli/docker/buildx/build/#provenance).
 
     ### Always attempt to pull a newer version of the image (--pull) {#pull}
 
@@ -234,7 +234,7 @@ examples: |-
 
     ### Create SBOM attestations (--sbom) {#sbom}
 
-    Same as [`build --sbom`](buildx_build.md#sbom).
+    Same as [`build --sbom`](/reference/cli/docker/buildx/build/#sbom).
 
     ### Override target configurations from command line (--set) {#set}
 

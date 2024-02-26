@@ -18,7 +18,7 @@ efficient images. It provides [general guidelines for your Dockerfiles](guidelin
 Docker builds images automatically by reading the instructions from a
 Dockerfile which is a text file that contains all commands, in order, needed to
 build a given image. A Dockerfile adheres to a specific format and set of
-instructions which you can find at [Dockerfile reference](../../engine/reference/builder.md).
+instructions which you can find at [Dockerfile reference](../../reference/dockerfile.md).
 
 A Docker image consists of read-only layers each of which represents a
 Dockerfile instruction. The layers are stacked and each one is a delta of the
@@ -46,7 +46,7 @@ deleting files, are written to this writable container layer.
 
 ## Additional resources
 
-* [Dockerfile reference](../../engine/reference/builder.md)
+* [Dockerfile reference](../../reference/dockerfile.md)
 * [More about Automated builds](../../docker-hub/builds/index.md)
 * [Guidelines for creating Docker Official Images](../../trusted-content/official-images.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker)
