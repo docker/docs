@@ -100,7 +100,7 @@ The **Configuration** section of the Info tab shows parameters passed to the bui
 - Secrets, including their IDs (but not their values)
 - SSH sockets
 - Labels
-- [Additional contexts](/engine/reference/commandline/buildx_build/#build-context)
+- [Additional contexts](/reference/cli/docker/buildx/build/#build-context)
 
 ### Outputs and artifacts
 
