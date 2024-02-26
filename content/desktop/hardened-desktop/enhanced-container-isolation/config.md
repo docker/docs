@@ -27,7 +27,7 @@ such access could allow them to perform supply chain attacks (e.g., build and
 push malicious images into the organization's repositories) or similar.
 
 However, some legitimate use cases require containers to have access to the
-Docker Engine socket. For example, the popular [TestContainers](https://testcontainers.com/)
+Docker Engine socket. For example, the popular [Testcontainers](https://testcontainers.com/)
 framework sometimes bind-mounts the Docker Engine socket into containers to
 manage them or perform post-test cleanup.
 
@@ -110,7 +110,7 @@ In general, it's easier to specify the image using the tag wildcard format
 (e.g., `<image-name>:*`) because then `imageList` doesn't need to be updated whenever a new version of the
 image is used. Alternatively, you can use an immutable tag (e.g., `:latest`),
 but it does not always work as well as the wildcard because, for example,
-TestContainers uses specific versions of the image, not necessarily the latest
+Testcontainers uses specific versions of the image, not necessarily the latest
 one.
 
 When ECI is enabled, Docker Desktop periodically downloads the image digests
@@ -211,7 +211,7 @@ Whether to configure the list as an allow or deny list depends on the use case.
   `admin-settings.json` file due to image tag changes.
 
 * In the `commandList`, block commands that you don't expect the container to
-  execute. For example, for local testing (e.g., TestContainers), containers that bind-mount the Docker
+  execute. For example, for local testing (e.g., Testcontainers), containers that bind-mount the Docker
   socket typically create / run / remove containers, volumes, and networks, but
   don't typically build images or push them into repositories (though some may
   legitimately do this). What commands to allow or block depends on the use case.

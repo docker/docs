@@ -17,7 +17,7 @@
   {{ partial "header.html" . }}
   <main class="flex min-h-screen w-full flex-col items-stretch self-center">
     <div class="flex w-[1200px] flex-col items-stretch gap-20 self-center py-20 lg:w-full lg:px-4">
-      <div class="bg-pattern-blue-light dark:bg-pattern-blue-dark relative overflow-hidden rounded drop-shadow">
+      <div class="bg-pattern-blue relative overflow-hidden rounded drop-shadow">
         <div class="flex h-full flex-col items-start justify-between gap-4 p-8">
           <div class="flex items-center gap-6">
             <span class="icon-svg text-violet-light dark:text-violet-dark">
@@ -35,8 +35,8 @@
           </a>
         </div>
         <div class="absolute bottom-0 right-0 origin-bottom-right md:scale-50">
-          <img class="dark:hidden" src="/assets/images/app-wf-light-1.svg" />
-          <img class="hidden dark:block" src="/assets/images/app-wf-dark-1.svg" />
+          <img class="dark:hidden" alt="Low-fi desktop app" src="/assets/images/app-wf-light-1.svg" />
+          <img class="hidden dark:block" alt="Low-fi desktop app" src="/assets/images/app-wf-dark-1.svg" />
         </div>
       </div>
 
@@ -110,7 +110,7 @@
       </div>
 
       <div class="z-10 grid grid-cols-2 gap-20 md:grid-cols-1">
-        <div class="bg-pattern-verde-light dark:bg-pattern-verde-dark relative rounded p-6 drop-shadow">
+        <div class="bg-pattern-verde relative rounded p-6 drop-shadow">
           <div class="flex h-full flex-col items-start justify-between gap-12">
             <div class="flex flex-col gap-4">
               <h2 class="font-medium">Getting started</h2>
@@ -127,12 +127,12 @@
             </div>
           </div>
           <div class="absolute bottom-0 right-0 origin-bottom-right sm:scale-75">
-            <img class="dark:hidden" src="/assets/images/app-wf-light-2.svg" />
-            <img class="hidden dark:block" src="/assets/images/app-wf-dark-2.svg" />
+            <img class="dark:hidden" alt="Low-fi desktop app" src="/assets/images/app-wf-light-2.svg" />
+            <img class="hidden dark:block" alt="Low-fi desktop app" src="/assets/images/app-wf-dark-2.svg" />
           </div>
         </div>
         <div class="rounded-[6px] bg-gradient-to-br from-blue-light-400 to-magenta-light-400 dark:from-blue-dark-400 dark:to-magenta-dark-400 p-[2px] drop-shadow">
-          <div class="bg-pattern-purple-light dark:bg-pattern-purple-dark rounded p-6">
+          <div class="bg-pattern-purple rounded p-6">
             <div class="flex flex-col gap-12">
               <div class="flex flex-col gap-4">
                 <h2 class="font-medium">Featured</h2>
@@ -152,8 +152,8 @@
                 <div class="ml-auto sm:col-start-2">
                   {{ $dbcLogoWhite := resources.Get "images/build-cloud-white.svg" }}
                   {{ $dbcLogoLight := resources.Get "images/build-cloud-light.svg" }}
-                  <img class="hidden h-full w-full dark:block" src="{{ $dbcLogoWhite.Permalink }}" />
-                  <img class="h-full w-full dark:hidden" src="{{ $dbcLogoLight.Permalink }}" />
+                  <img class="hidden h-full w-full dark:block" alt="Docker Build Cloud logo" src="{{ $dbcLogoWhite.Permalink }}" />
+                  <img class="h-full w-full dark:hidden" alt="Docker Build Cloud logo" src="{{ $dbcLogoLight.Permalink }}" />
                 </div>
               </div>
             </div>

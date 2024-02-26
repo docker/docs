@@ -8,9 +8,14 @@ aliases:
 - /docker-hub/accounts/
 ---
 
-You can create a Docker account with your email address or by signing up with your Google or GitHub account. Once you've created your account with a unique Docker ID, you can access all Docker products, including Docker Hub. With Docker Hub, you can access repositories and explore images that are available from the community and verified publishers.
+You can create a free Docker account with your email address or by signing up with your Google or GitHub account. Once you've created your account with a unique Docker ID, you can access all Docker products, including Docker Hub. With Docker Hub, you can access repositories and explore images that are available from the community and verified publishers.
 
 Your Docker ID becomes your username for hosted Docker services, and [Docker forums](https://forums.docker.com/).
+
+> **Tip**
+>
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+{ .tip }
 
 ## Create a Docker ID
 
@@ -61,7 +66,7 @@ Your Docker ID becomes your username for hosted Docker services, and [Docker for
 
 Once you register and verify your Docker ID email address, you can sign in to [your Docker account](https://login.docker.com/u/login/). You can sign in with your email address (or username) and password. Or, you can sign in with your social provider. See [Sign in with your social provider](#sign-in-with-your-social-provider).
 
-You can also sign in through the CLI using the `docker login` command. For more information, see [`docker login`](../engine/reference/commandline/login.md).
+You can also sign in through the CLI using the `docker login` command. For more information, see [`docker login`](../reference/cli/docker/login.md).
 
 > **Warning**
 >

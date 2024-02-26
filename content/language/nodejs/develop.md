@@ -36,19 +36,19 @@ You need to update the following items in the `compose.yaml` file:
 
 The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml {hl_lines="7-40"}
 services:
   server:
     build:
       context: .
+    ports:
+      - 3000:3000
     environment:
       NODE_ENV: production
       POSTGRES_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD_FILE: /run/secrets/db-password
       POSTGRES_DB: example
-    ports:
-      - 3000:3000
     depends_on:
       db:
         condition: service_healthy
@@ -148,7 +148,7 @@ development, you can use one multi-stage Dockerfile for both.
 
 Update your Dockerfile to the following multi-stage Dockerfile.
 
-```dockerfile
+```dockerfile {hl_lines="5-26"}
 # syntax=docker/dockerfile:1
 
 ARG NODE_VERSION=18.0.0
@@ -167,7 +167,6 @@ COPY . .
 CMD npm run dev
 
 FROM base as prod
-ENV NODE_ENV production
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
@@ -178,9 +177,9 @@ CMD node src/index.js
 ```
 
 In the Dockerfile, you first add a label `as base` to the `FROM
-node:${NODE_VERSION}-alpine` statement. This allows you to refer to this build
-stage in other build stages. Next, you add a new build stage labeled `dev` to
-install your dev dependencies and start the container using `npm run dev`.
+node:${NODE_VERSION}-alpine` statement. This lets you refer to this build stage
+in other build stages. Next, you add a new build stage labeled `dev` to install
+your development dependencies and start the container using `npm run dev`.
 Finally, you add a stage labeled `prod` that omits the dev dependencies and runs
 your application using `node src/index.js`. To learn more about multi-stage
 builds, see [Multi-stage builds](../../build/building/multi-stage.md).
@@ -189,8 +188,8 @@ Next, you'll need to update your Compose file to use the new stage.
 
 ### Update your Compose file for development
 
-To run the `dev` stage with Compose, you need to update your `compose.yaml` file.
-Open your `compose.yaml` file in an IDE or text editor, and then add the
+To run the `dev` stage with Compose, you need to update your `compose.yaml`
+file. Open your `compose.yaml` file in an IDE or text editor, and then add the
 `target: dev` instruction to target the `dev` stage from your multi-stage
 Dockerfile.
 
@@ -200,21 +199,21 @@ Lastly, publish port `9229` for debugging.
 
 The following is the updated Compose file.
 
-```yaml
+```yaml {hl_lines=[5,8,20,21]}
 services:
   server:
     build:
       context: .
       target: dev
+    ports:
+      - 3000:3000
+      - 9229:9229
     environment:
       NODE_ENV: production
       POSTGRES_HOST: db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD_FILE: /run/secrets/db-password
       POSTGRES_DB: example
-    ports:
-      - 3000:3000
-      - 9229:9229
     depends_on:
       db:
         condition: service_healthy

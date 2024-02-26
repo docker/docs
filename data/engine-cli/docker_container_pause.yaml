@@ -31,6 +31,7 @@ examples: |-
     $ docker pause my_container
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

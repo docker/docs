@@ -15,7 +15,10 @@ aliases:
 Docker Desktop provides several networking features to make it easier to
 use.
 
-## Features for all platforms
+## Networking features
+
+{{< tabs >}}
+{{< tab name="For all platforms" >}}
 
 ### VPN Passthrough
 
@@ -50,7 +53,8 @@ See:
 - [Proxies on Mac](settings/mac.md#proxies)
 - [Proxies on Windows](settings/windows.md#proxies)
 
-## Features for Mac and Linux
+{{< /tab >}}
+{{< tab name="For Mac and Linux" >}}
 
 ### SSH agent forwarding
 
@@ -82,7 +86,10 @@ services:
       - SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
  ```
 
-## Known limitations for all platforms
+{{< /tab >}}
+{{< /tabs >}}
+
+## Known limitations
 
 ### Changing internal IP addresses
 
@@ -101,10 +108,10 @@ ping the Windows containers.
 
 ### Per-container IP addressing is not possible
 
-The docker bridge network is not reachable from the host.
-However if you are a Windows user, it works with Windows containers.
+This is because the Docker `bridge` network is not reachable from the host.
+However if you are a Windows user, per-container IP addressing is possible with Windows containers.
 
-## Use cases and workarounds for all platforms
+## Use cases and workarounds 
 
 ### I want to connect from a container to a service on the host
 
@@ -131,7 +138,7 @@ If you have installed Python on your machine, use the following instructions as 
     # exit
     ```
 
-#### I want to connect to a container from the host
+### I want to connect to a container from the host
 
 Port forwarding works for `localhost`. `--publish`, `-p`, or `-P` all work.
 Ports exposed from Linux are forwarded to the host.
@@ -162,5 +169,5 @@ container to random ports on the host.
 $ docker run -d -P --name webserver nginx
 ```
 
-See the [run command](../engine/reference/commandline/container_run.md) for more details on
+See the [run command](../reference/cli/docker/container/run.md) for more details on
 publish options used with `docker run`.

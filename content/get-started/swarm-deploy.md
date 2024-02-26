@@ -105,5 +105,5 @@ Further documentation for all new Swarm objects and CLI commands used in this ar
  - [Swarm Mode](../engine/swarm/index.md)
  - [Swarm Mode Services](../engine/swarm/how-swarm-mode-works/services.md)
  - [Swarm Stacks](../engine/swarm/stack-deploy.md)
- - [`docker stack *`](/engine/reference/commandline/stack/)
- - [`docker service *`](/engine/reference/commandline/service/)
+ - [`docker stack *`](/reference/cli/docker/stack/)
+ - [`docker service *`](/reference/cli/docker/service/)

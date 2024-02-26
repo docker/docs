@@ -103,7 +103,7 @@ CMD ["flask", "run"]
 
 This tells Docker to:
 
-* Build an image starting with the Python 3.7 image.
+* Build an image starting with the Python 3.10 image.
 * Set the working directory to `/code`.
 * Set environment variables used by the `flask` command.
 * Install gcc and other dependencies
@@ -119,7 +119,7 @@ This tells Docker to:
 
 For more information on how to write Dockerfiles, see the
 [Docker user guide](../develop/index.md)
-and the [Dockerfile reference](/engine/reference/builder/).
+and the [Dockerfile reference](/reference/dockerfile/).
 
 
 ## Step 3: Define services in a Compose file

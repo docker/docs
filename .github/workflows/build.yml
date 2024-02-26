@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       -
         name: Checkout
@@ -36,7 +36,7 @@ jobs:
             *.cache-to=type=gha,scope=build,mode=max
 
   validate:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -65,7 +65,7 @@ jobs:
   # build-releaser job will just build _releaser app used for Netlify and
   # AWS deployment in publish workflow. it's just to be sure it builds correctly.
   build-releaser:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       -
         name: Checkout

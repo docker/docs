@@ -18,19 +18,13 @@ You can also locate the `settings.json` file at `C:\Users\[USERNAME]\AppData\Roa
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
-- **Start Docker Desktop when you sign in**. Select to automatically start Docker
+- **Start Docker Desktop when you sign in to your computer**. Select to automatically start Docker
   Desktop when you sign in to your machine.
 
 - **Open Docker Dashboard when Docker Desktop starts**. Select to automatically open the
   dashboard when starting Docker Desktop.
 
-- **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
-
-- **Use containerd for pulling and storing images**.
-  Turns on the containerd image store.
-  This brings new features like faster container startup performance by lazy-pulling images,
-  and the ability to run Wasm applications with Docker.
-  For more information, see [containerd image store](../containerd.md).
+- **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use system settings**.
 
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
 If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
@@ -43,15 +37,18 @@ If you choose the integrated terminal, you can run commands in a running contain
 - **Use the WSL 2 based engine**. WSL 2 provides better performance than the
   Hyper-V backend. For more information, see [Docker Desktop WSL 2 backend](../wsl/index.md).
 
-- **Add `*.docker.internal` to the host's `/etc/hosts` file. (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
+- **Add the `*.docker.internal` names to the host's `/etc/hosts` file (Password required)**. Lets you resolve `*.docker.internal` DNS names from both the host and your containers.
 
+- **Use containerd for pulling and storing images**.
+  Turns on the containerd image store.
+  This brings new features like faster container startup performance by lazy-pulling images,
+  and the ability to run Wasm applications with Docker.
+  For more information, see [containerd image store](../containerd.md).
+  
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
   troubleshoot the application. Clear the check box to opt out. Docker may
   periodically prompt you for more information.
-
-- **Show weekly tips**. Select to display useful advice and suggestions about
-  using Docker.
 
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
     >**Note**
@@ -263,7 +260,7 @@ edit the JSON configuration directly from the dashboard in Docker Desktop, or op
 edit the file using your favorite text editor.
 
 To see the full list of possible configuration options, see the
-[dockerd command reference](/engine/reference/commandline/dockerd/).
+[dockerd command reference](/reference/cli/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
 

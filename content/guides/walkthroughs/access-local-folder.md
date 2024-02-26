@@ -72,7 +72,7 @@ $ docker compose up -d
 
 ## Step 4: Develop the application
 
-Now, you can take advantage of the container’s environment while you develop the application on your local system. Any changes you make to the application on your local system are reflected in the container. In your local directory, open `app/views/todos.ejs` in an code or text editor, update the `Enter your task` string, and save the file. Visit or refresh [localhost:3001](http://localhost:3001)⁠ to view the changes.
+Now, you can take advantage of the container’s environment while you develop the application on your local system. Any changes you make to the application on your local system are reflected in the container. In your local directory, open `app/views/todos.ejs` in a code or text editor, update the `Enter your task` string, and save the file. Visit or refresh [localhost:3001](http://localhost:3001)⁠ to view the changes.
 
 ## Summary
 
@@ -82,7 +82,7 @@ Related information:
 
 - Deep dive into [bind mounts](../../storage/bind-mounts.md)
 - Learn about using bind mounts in Compose in the [Compose file reference](../../compose/compose-file/_index.md)
-- Explore using bind mounts via the CLI in the [Docker run reference](/engine/reference/commandline/container_run/#mount)
+- Explore using bind mounts via the CLI in the [Docker run reference](/reference/cli/docker/container/run/#mount)
 
 ## Next steps
 

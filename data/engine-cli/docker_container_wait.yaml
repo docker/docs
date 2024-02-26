@@ -45,6 +45,7 @@ examples: |-
     0
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

@@ -11,7 +11,7 @@ aliases:
 Repositories let you share container images with your team,
 customers, or the Docker community at large.
 
-A single Docker Hub repository can hold many Docker images which are stored as **tags**. You can push Docker images to Docker Hub with the [`docker push`](/engine/reference/commandline/push/)command.
+A single Docker Hub repository can hold many Docker images which are stored as **tags**. You can push Docker images to Docker Hub with the [`docker push`](/reference/cli/docker/image/push/)command.
 
 ## Create a repository
 

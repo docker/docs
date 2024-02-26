@@ -8,11 +8,11 @@ aliases:
 - /docker-hub/registry-access-management/
 ---
 
-> Note
+> **Note**
 >
 > Registry Access Management is available to [Docker Business](../../subscription/details.md) customers only. 
 
-With Registry Access Management (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard on Docker Hub. 
+With Registry Access Management (RAM), administrators can ensure that their developers using Docker Desktop only access allowed registries. This is done through the Registry Access Management dashboard in Docker Hub or the Docker Admin Console.
 
 Registry Access Management supports both cloud and on-prem registries. Example registries administrators can allow include: 
  - Docker Hub. This is enabled by default.

@@ -155,14 +155,14 @@ $ docker buildx build \
 You can customize the network that the builder container uses. This is useful
 if you need to use a specific network for your builds.
 
-For example, let's [create a network](../../engine/reference/commandline/network_create.md)
+For example, let's [create a network](../../reference/cli/docker/network/create.md)
 named `foonet`:
 
 ```console
 $ docker network create foonet
 ```
 
-Now create a [`docker-container` builder](../../engine/reference/commandline/buildx_create.md)
+Now create a [`docker-container` builder](../../reference/cli/docker/buildx/create.md)
 that will use this network:
 
 ```console
@@ -172,13 +172,13 @@ $ docker buildx create --use \
   --driver-opt "network=foonet"
 ```
 
-Boot and [inspect `mybuilder`](../../engine/reference/commandline/buildx_inspect.md):
+Boot and [inspect `mybuilder`](../../reference/cli/docker/buildx/inspect.md):
 
 ```console
 $ docker buildx inspect --bootstrap
 ```
 
-[Inspect the builder container](../../engine/reference/commandline/inspect.md)
+[Inspect the builder container](../../reference/cli/docker/inspect.md)
 and see what network is being used:
 
 ```console
@@ -189,4 +189,4 @@ map[foonet:0xc00018c0c0]
 ## Further reading
 
 For more information on the Docker container driver, see the
-[buildx reference](../../engine/reference/commandline/buildx_create.md#driver).
+[buildx reference](../../reference/cli/docker/buildx/create.md#driver).

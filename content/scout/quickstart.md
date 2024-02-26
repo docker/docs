@@ -50,7 +50,7 @@ You can do this from Docker Hub, the Docker Scout Dashboard, and CLI.
 
 1. Sign in to your Docker account with the `docker login` command or use the
    **Sign in** button in Docker Desktop.
-2. Use the Docker CLI [`docker scout repo enable`](/engine/reference/commandline/scout_repo_enable)
+2. Use the Docker CLI [`docker scout repo enable`](/reference/cli/docker/scout/repo/enable)
    command to enable analysis on an existing repository:
 
    ```console
@@ -74,7 +74,7 @@ Docker Scout analyzes the image you built most recently by default,
 so there's no need to specify the name of the image in this case.
 
 Learn more about the `docker scout cves` command in the
-[`CLI reference documentation`](/engine/reference/commandline/scout_cves).
+[`CLI reference documentation`](/reference/cli/docker/scout/cves).
 
 ## Step 4: Fix application vulnerabilities
 
@@ -134,7 +134,7 @@ it isn't the most effective way to improve your supply chain conduct.
 
 Docker Scout also supports policy evaluation,
 a higher-level concept for detecting and fixing issues in your images.
-Policies are a set of customizable rules that lets organizations track whether
+Policies are a set of customizable rules that let organizations track whether
 images are compliant with their supply chain requirements.
 
 Because policy rules are specific to each organization,

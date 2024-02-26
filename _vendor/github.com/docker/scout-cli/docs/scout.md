@@ -11,6 +11,7 @@ Command line tool for Docker Scout
 
 | Name                                          | Description                                                                                 |
 |:----------------------------------------------|:--------------------------------------------------------------------------------------------|
+| [`attestation`](scout_attestation.md)         | Manage attestations on image indexes                                                        |
 | [`cache`](scout_cache.md)                     | Manage Docker Scout cache and temporary files                                               |
 | [`compare`](scout_compare.md)                 | Compare two images and display differences (experimental)                                   |
 | [`config`](scout_config.md)                   | Manage Docker Scout configuration                                                           |

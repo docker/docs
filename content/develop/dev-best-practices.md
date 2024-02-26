@@ -87,7 +87,7 @@ keep image size small:
   it.
 
 - Take this even further by requiring your development, testing, and
-  security teams to [sign images](../engine/reference/commandline/trust.md)
+  security teams to [sign images](../reference/cli/docker/trust/_index.md)
   before the teams deploy the images into production. This way, before an image is
   deployed into production, it has been tested and signed off by, for instance,
   development, quality, and security teams.

@@ -16,8 +16,8 @@ long: |-
     new container is `created`.
 
     The `docker create` command shares most of its options with the `docker run`
-    command (which performs a `docker create` before starting it). Refer to the
-    [`docker run` command](run.md) section and the [Docker run reference](../run.md)
+    command (which performs a `docker create` before starting it).
+    Refer to the [`docker run` CLI reference](/reference/cli/docker/container/run/)
     for details on the available flags and options.
 usage: docker container create [OPTIONS] IMAGE [COMMAND] [ARG...]
 pname: docker container
@@ -1099,6 +1099,7 @@ examples: |-
     drwxr-xr-x 32 1000 staff 1140 Dec  5 04:01 docker
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

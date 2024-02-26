@@ -1,5 +1,8 @@
 ---
-published: false
+_build:
+  list: never
+  publishResources: false
+  render: never
 ---
 
 This is an initial attempt to make it easier to test the TLS (HTTPS) examples in the protect-access.md

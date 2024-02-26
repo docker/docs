@@ -54,6 +54,7 @@ examples: |-
     A /var/log/nginx/error.log
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

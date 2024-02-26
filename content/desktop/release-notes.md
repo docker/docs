@@ -24,6 +24,60 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 4.27.2
+
+{{< release-date date="2024-02-08" >}}
+
+{{< desktop-install all=true version="4.27.2" build_path="/137060/" >}}
+
+### Upgrades
+
+- [Compose v2.24.5](https://github.com/docker/compose/releases/tag/v2.24.5)
+- [Docker Scout CLI v1.4.1](https://github.com/docker/scout-cli/releases/tag/v1.4.1)
+- Docker Debug v0.0.24
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed a bug where the diagnostics ID would not print correctly when uploading diagnostics from the terminal.
+- Fixed a bug where the default settings values were being reset to default on startup, when using Settings Management.
+- Fixed a bug with the dashboard being shown at startup even though the **Open Docker Dashboard when Docker Desktop starts** option was disabled. Fixes [docker/for-win#13887](https://github.com/docker/for-win/issues/13887).
+- Fixed a bug in the build backend service that caused Docker Desktop to crash. Fixes [docker/for-win#13885](https://github.com/docker/for-win/issues/13885), [docker/for-win#13896](https://github.com/docker/for-win/issues/13896), [docker/for-win#13899](https://github.com/docker/for-win/issues/13899), [docker/for-mac#7164](https://github.com/docker/for-mac/issues/7164), [docker/for-mac#7169](https://github.com/docker/for-mac/issues/7169).
+- Fixed the Docker Engine socket permissions when mounted inside containers. Fixes [docker/for-win#13898](https://github.com/docker/for-win/issues/13898).
+- Docker Scout:
+  - Updated dependencies to address Leaky Vessels series of CVEs ([CVE-2024-21626](https://github.com/advisories/GHSA-xr7r-f8xq-vfvv), [CVE-2024-24557](https://github.com/advisories/GHSA-xw73-rw38-6vjc))
+  - Added initial VEX document to document false positive [CVE-2020-8911](https://github.com/advisories/GHSA-f5pg-7wfw-84q9) and [CVE-2020-8912](https://github.com/advisories/GHSA-7f33-f4f5-xwgw)
+  - Added support for cosign SBOM attestations
+  - Added support for VEX in-toto attestations
+- Docker Debug:
+  - Fixed a bug when pulling the image behind resource accesses management
+  - Fixed connection issues
+
+#### For Mac
+
+- Re-added kernel modules needed by `Istio`. Fixes [docker/for-mac#7148](https://github.com/docker/for-mac/issues/7148).
+- Node now uses all the cores available under Rosetta.
+- Fixed an issue with `php-fpm`. Fixes [docker/for-mac#7037](https://github.com/docker/for-mac/issues/7037).
+
+## 4.27.1
+
+{{< release-date date="2024-02-01" >}}
+
+{{< desktop-install all=true version="4.27.1" build_path="/136059/" >}}
+
+### Upgrades
+
+- [Docker Engine v25.0.2](https://docs.docker.com/engine/release-notes/25.0/#2502) which contains a fix for [CVE-2024-24557](https://scout.docker.com/vulnerabilities/id/CVE-2024-24557), [CVE-2024-23650](https://scout.docker.com/vulnerabilities/id/CVE-2024-23650), [CVE-2024-23651](https://scout.docker.com/vulnerabilities/id/CVE-2024-23651), [CVE-2024-23652](https://scout.docker.com/vulnerabilities/id/CVE-2024-23652) and [CVE-2024-23653](https://scout.docker.com/vulnerabilities/id/CVE-2024-23653)
+- [Containerd v1.6.28](https://github.com/containerd/containerd/releases/tag/v1.6.28)
+- [Runc v1.1.12](https://github.com/opencontainers/runc/releases/tag/v1.1.12) which contains a fix for [CVE-2024-21626](https://scout.docker.com/vulnerabilities/id/CVE-2024-21626)
+
+### Bug fixes and enhancements
+
+#### For Mac
+
+- Fixed a bug that caused Docker Desktop to hang when applying an update.
+
 ## 4.27.0
 
 {{< release-date date="2024-01-25" >}}
@@ -35,8 +89,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Docker init now supports Java and is generally available to all users.
 - [Synchronized File Shares](synchronized-file-sharing.md) provides fast and flexible host-to-VM file sharing within Docker Desktop. Utilizing the technology behind [Docker’s acquisition of Mutagen](https://www.docker.com/blog/mutagen-acquisition/), this feature provides an alternative to virtual bind mounts that uses synchronized filesystem caches, improving performance for developers working with large codebases.
 - Organization admins can now [configure Docker socket mount permissions](hardened-desktop/enhanced-container-isolation/config.md) when ECI is enabled.
--  [Containerd Image Store](containerd.md) support is now generally available to all users.
-- Get a debug shell into any container or image with the new [`docker debug` command](../engine/reference/commandline/debug.md) (Beta).
+- [Containerd Image Store](containerd.md) support is now generally available to all users.
+- Get a debug shell into any container or image with the new [`docker debug` command](../reference/cli/docker/debug.md) (Beta).
 - Organization admins, with a Docker Business subscription, can now configure a custom list of extensions with [Private Extensions Marketplace](extensions/private-marketplace.md) enabled (Beta)
 
 ### Upgrades
@@ -55,7 +109,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms
 
-- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](../engine/reference/commandline/scout.md).
+- The `docker scan` command has been removed. To continue learning about the vulnerabilities of your images, and many other features, use the [`docker scout` command](../reference/cli/docker/scout/_index.md).
 - Fixed a bug where automatic updates would not download when the **Always download updates** checkbox was selected.
 - Fixed typo in the dashboard tooltip. Fixes [docker/for-mac#7132](https://github.com/docker/for-mac/issues/7132)
 - Improved signal handling behavior (e.g. when pressing Ctrl-C in the terminal while running a `docker` command).
@@ -98,6 +152,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed a bug where the credentials store configuration would reset on app restart with the WSL integration. Fixes [docker/for-win#13529](https://github.com/docker/for-win/issues/13529).
 - Fixed an issue that prevented the correct WSL engine errors from propagating to the user.
 - Fixed an issue that would cause Docker Desktop to hang when quitting from Windows Containers mode.
+
+### Security
+
+#### For Windows
+
+- Mitigated several DLL side-loading vulnerabilities in the Docker Desktop installer on Windows, reported by Suman Kumar Chakraborty ([@Hijack-Everything](https://github.com/Hijack-Everything))
 
 ### Known issues
 
@@ -420,7 +480,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### New
 
 - Added support for new Wasm runtimes: wws and lunatic.
-- [`docker init`](../engine/reference/commandline/init.md) now supports ASP.NET
+- [`docker init`](../reference/cli/docker/init.md) now supports ASP.NET
 - Increased performance of exposed ports on macOS, for example with `docker run -p`.
 
 ### Bug fixes and enhancements
@@ -681,7 +741,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Removed
 
-- Removed `docker scan` command. To continue learning about the vulnerabilities of your images, and many other features, use the new `docker scout` command. Run `docker scout --help`, or [read the docs to learn more](../engine/reference/commandline/scout.md).
+- Removed `docker scan` command. To continue learning about the vulnerabilities of your images, and many other features, use the new `docker scout` command. Run `docker scout --help`, or [read the docs to learn more](../reference/cli/docker/scout/_index.md).
 
 ### Upgrades
 
@@ -1980,7 +2040,7 @@ CVE-2021-44228](https://www.docker.com/blog/apache-log4j-2-cve-2021-44228/).
 
 Docker Dashboard incorrectly displays the container memory usage as zero on
 Hyper-V based machines.
-You can use the [`docker stats`](../engine/reference/commandline/container_stats.md)
+You can use the [`docker stats`](../reference/cli/docker/container/stats.md)
 command on the command line as a workaround to view the
 actual memory usage. See
 [docker/for-mac#6076](https://github.com/docker/for-mac/issues/6076).

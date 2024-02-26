@@ -1,30 +1,167 @@
-(Certified|Verified) Publisher( Program)?
-Docker-Sponsored Open Source
+A?GPLv3
+APIs?
+ARM
+AWS
+Amazon
+Ambassador
+Anchore
+Apple
+Artifactory
+Autobuild
 Autotest
+Azure
 BuildKit
+BusyBox
+CNCF
+CVEs?
+CentOS
+Ceph
+Chrome
+Chrome DevTools
+CloudFront
+Codefresh
+CouchDB
+Couchbase
+DHCP
+DNS
+DSOS
+DVP
+Ddosify
+Dev Environments?
+Django
 Docker
-Dockerize
-Dockerizing
+Docker Build Cloud
 Docker Business
 Docker Dasboard
 Docker Desktop
 Docker Engine
-Docker Hub
-Docker Team
 Docker Extension
+Docker Hub
+Docker Scout
+Docker Team
+Docker-Sponsored Open Source
 Dockerfile
+Dockerize
+Dockerizing
+Ethernet
+Fargate
+Fedora
+Flink
+GPG
+GPUs?
+GRUB
+GeoNetwork
+Git
+GitHub( Actions)?
+Google
+HTTP
 HyperKit
+IPs?
+IPv[46]
+IPvlan
+Intel
+JFrog
+JetBrains
 Kitematic
+Kubernetes
+LTS
+Linux
 LinuxKit
-Official Images?
-Sponsored (OSS|Open Source Software)
-Swarm
-Swarm Mode
+Logstash
+MAC
+Mac
+Mail(chimp|gun)
+Microsoft
+MySQL
+Nginx
+Nuxeo
+OAuth
+OCI
+Okta
+Postgres
+PowerShell
+Python
+QEMU
+RHEL
+RPM
+S3
+SARIF
+SBOMs?
+SDKs?
+SLES
+SLSA
+SPDX
+SQLite
+SSO
+Slack
+Snyk
+Solr
+SonarQube
+Syft
+Sysdig
+TCP
+TLS
+UDP
+URLs?
+Ubuntu
+Unix
+VLAN
+VM
+VMware
+WSL
+Wasm
+Windows
+Zsh
 [Bb]uildx
 [Cc]ompose
+[Dd]istros
+[Ff]ilepaths?
+[Ff]iletypes?
+[GgCc]oroutine
+[Hh]ostname
+[Ll]oopback
 [Mm]oby
-dockerd
+[Pp]aravirtualization
+[Pp]roxying
+[Rr]eal-time
+[Rr]untimes?
+[Ss]andbox(ed)?
+[Ss]wappable
+[Ss]warm
+[Vv]irtualize
+[Ww]alkthrough
+cgroup
+config
+containerd
+deserialization
+deserialize
 dockerignore
-Docker Hub Vulnerability Scanning
-Docker Vulnerability Scanning
-Basic vulnerability scanning
+firewalld
+gRPC
+glibc
+inotify
+iptables
+kubectl
+kubefwd
+kubelet
+lookup
+macOS
+macvlan
+mfsymlinks
+minikube
+musl
+nameserver
+namespace
+npm
+osquery
+osxfs
+runc
+stdin
+stdout
+subnet
+systemd
+ufw
+umask
+ungated
+vSphere
+virtiofs

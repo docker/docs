@@ -104,6 +104,9 @@
   - /reference/api/docker_remote_api_v1.21/
   - /reference/api/docker_remote_api_v1.22/
   - /reference/api/docker_remote_api_v1.23/
+# redirect for old location of dockerd reference
+"/reference/cli/dockerd/":
+  - /engine/reference/commandline/dockerd/
 
 "/engine/security/#docker-daemon-attack-surface":
   # Details about the "Docker Daemon attack surface". This redirect is currently
@@ -125,7 +128,7 @@
 "/build/architecture/#install-buildx":
   # Instructions on installing Buildx. Redirect used in Docker CLI.
   - /go/buildx/
-"/engine/reference/commandline/compose_build/":
+"/reference/cli/docker/compose/build/":
   - /go/compose-native-build/
 "/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user":
   # Details about how to give "non-root" users access to a privileged Docker
@@ -135,7 +138,7 @@
   - /go/deprecated/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
-"/engine/reference/commandline/login/#credential-stores":
+"/reference/cli/docker/login/#credential-stores":
   - /go/credential-store/
 "/cloud/ecs-integration/":
   - /go/compose-ecs-eol/
@@ -635,6 +638,8 @@
   - "/go/scout-sq/"
 "/scout/integrations/source-code-management/github/":
   - "/go/scout-github/"
+"/scout/guides/vex/":
+  - "/go/vex-guide/"
 
 # Build links (internal)
 "/build/bake/reference/":
@@ -661,8 +666,9 @@
 # Build links (external)
 "https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
   - /go/build-eap/
-"https://www.docker.com/products/build-cloud/":
+"https://www.docker.com/products/build-cloud/?utm_campaign=2024-02-02-banner_dbc_ga&utm_medium=in-product-ad&utm_source=desktop_v4":
   - /go/build-ga/
+"https://www.docker.com/products/build-cloud/?utm_campaign=2024-02-02-dbc_cli&utm_medium=in-product-ad&utm_source=desktop_v4":
   - /go/docker-build-cloud/
 
 # CLI backlinks
@@ -678,7 +684,8 @@
   - /go/build-context-dockerignore/
 "/compose/compose-file":
   - /go/compose-spec-reference/
-"/engine/reference/builder":
+"/reference/dockerfile":
   - /go/dockerfile-reference/
+  - /engine/reference/builder/
 "/get-started/04_sharing_app":
   - /go/get-started-sharing/

@@ -45,6 +45,7 @@ examples: |-
     $ docker export --output="latest.tar" red_panda
     ```
 deprecated: false
+hidden: false
 experimental: false
 experimentalcli: false
 kubernetes: false

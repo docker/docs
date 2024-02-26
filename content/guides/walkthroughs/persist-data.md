@@ -106,7 +106,7 @@ Related information:
 
 - Deep dive into [volumes](../../storage/volumes.md)
 - Learn about using volumes in Compose in the [Compose file reference](../../compose/compose-file/_index.md)
-- Explore using volumes via the CLI in the [docker volume CLI reference](../../engine/reference/commandline/volume_create.md) and [Docker run reference](/reference/run/)
+- Explore using volumes via the CLI in the [docker volume CLI reference](../../reference/cli/docker/volume/create.md) and [Docker run reference](/reference/run/)
 
 ## Next steps
 

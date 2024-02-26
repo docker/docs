@@ -40,7 +40,7 @@ $ docker compose up
 
 ## Step 4: Update the Docker assets
 
-The `docker init` command tries its best to do the heavy lifting for you, but sometimes there's some assembly required. In this case, you can refer to the [Dockerfile reference⁠](/engine/reference/builder/) and [Compose file reference](/compose/compose-file/)⁠ to learn how to update the files created by `docker init`.
+The `docker init` command tries its best to do the heavy lifting for you, but sometimes there's some assembly required. In this case, you can refer to the [Dockerfile reference⁠](/reference/dockerfile/) and [Compose file reference](/compose/compose-file/)⁠ to learn how to update the files created by `docker init`.
 
 ## Summary
 
@@ -48,8 +48,8 @@ In this walkthrough, you learned how to containerize your own application.
 
 Related information:
 
-- Read more about [docker init](../../engine/reference/commandline/init.md)
-- Learn more about Docker assets in the [Dockerfile reference⁠](/engine/reference/builder/) and [Compose file reference](/compose/compose-file/)
+- Read more about [docker init](../../reference/cli/docker/init.md)
+- Learn more about Docker assets in the [Dockerfile reference⁠](/reference/dockerfile/) and [Compose file reference](/compose/compose-file/)
 
 ## Next steps
 
