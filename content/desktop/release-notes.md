@@ -33,7 +33,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### New
 
 - [Settings Management](hardened-desktop/settings-management/index.md) now allows admins to set the default file-sharing implementation and specify which paths developer can add file shares to.
-- Added support for `socks5://` HTTP and HTTPS proxy URLs when the [`SOCKS` proxy support beta feature](networking.md) is enabled.- Users can now filter volumes to see which ones are in use in the **Volumes** tab.
+- Added support for `socks5://` HTTP and HTTPS proxy URLs when the [`SOCKS` proxy support beta feature](networking.md) is enabled.
+- Users can now filter volumes to see which ones are in use in the **Volumes** tab.
 
 ### Upgrades
 
