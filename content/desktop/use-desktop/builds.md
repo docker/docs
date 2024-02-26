@@ -9,9 +9,9 @@ keywords: Docker Dashboard, manage, gui, dashboard, builders, builds
 The **Builds** view is a simple interface that lets you inspect your build
 history and manage builders using Docker Desktop.
 
-Opening the Builds view in Docker Desktop displays a list of completed builds.
+Opening the **Builds** view in Docker Desktop displays a list of completed builds.
 By default, the list is sorted by date, showing the most recent builds at the top.
-You can switch to the **Active builds** to view any ongoing builds.
+You can switch to **Active builds** to view any ongoing builds.
 
 ![Build UI screenshot active builds](../images/build-ui-active-builds.webp)
 
