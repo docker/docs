@@ -39,7 +39,7 @@ Hardened Docker Desktop moves the ownership boundary for Docker Desktop configur
 
 It is for security conscious organizations who:
 - Don’t give their users root or admin access on their machines
-- Would like Docker Desktop to be within their organization’s centralized control 
+- Would like Docker Desktop to be within their organization’s centralized control
 - Have certain compliance obligations
 
 ### What does Hardened Docker Desktop include?

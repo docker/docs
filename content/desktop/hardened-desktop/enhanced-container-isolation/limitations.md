@@ -13,7 +13,7 @@ Hyper-V to create the Docker Desktop Linux VM. ECI was not supported when Docker
 Desktop was configured to use Windows Subsystem for Linux (aka WSL).
 
 Starting with Docker Desktop 4.20, ECI is supported when Docker Desktop is
-configured to use either Hyper-V or WSL version 2.
+configured to use either Hyper-V or WSL 2.
 
 >**Note**
 >
