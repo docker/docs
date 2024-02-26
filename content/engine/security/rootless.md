@@ -131,7 +131,9 @@ testuser:231072:65536
 > **Note**
 >
 > If the system-wide Docker daemon is already running, consider disabling it:
-> `$ sudo systemctl disable --now docker.service docker.socket`
+>```console
+>$ sudo systemctl disable --now docker.service docker.socket
+>```
 
 {{< tabs >}}
 {{< tab name="With packages (RPM/DEB)" >}}
