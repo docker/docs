@@ -24,11 +24,11 @@ Whenever a project name is defined by top-level `name` or by some custom mechani
 [interpolation](12-interpolation.md) and environment variable resolution as `COMPOSE_PROJECT_NAME`
 
 ```yml
+name: myapp
+
 services:
   foo:
     image: busybox
-    environment:
-      - COMPOSE_PROJECT_NAME
     command: echo "I'm running ${COMPOSE_PROJECT_NAME}"
 ```
 
