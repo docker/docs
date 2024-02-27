@@ -149,7 +149,7 @@ Guides:
     - title: "Test your deployment"
       path: /language/php/deploy/
 
-- sectiontitle: Use-case guides
+- sectiontitle: Use-case guides {{< badge color=violet text=New >}}
   section:
     - sectiontitle: Generative AI
       section:
@@ -177,10 +177,10 @@ Guides:
         title: Text classification
       - path: /guides/use-case/nlp/text-summarization/
         title: Text summarization
-    - path: /scout/guides/vex/
-      title: Suppress CVEs with VEX
     - path: /guides/use-case/jupyter/
       title: Data science with JupyterLab
+    - path: /scout/guides/vex/
+      title: Suppress CVEs with VEX
 
 
 - sectiontitle: Develop with Docker
