@@ -68,12 +68,12 @@ details, see [Manage members](/admin/organization/members/).
 
 4. Verify that sign-in is enforced.
 
-    Start Docker Desktop on the user’s machine and verify that the **Sign in
-    required!** prompt appears.
+    Restart Docker Desktop on the user’s machine and verify that the **Sign in
+    required!** prompt appears. In some cases, a system reboot may be necessary for the enforcement to take effect.
 
     > **Tip**
     >
-    > If your users have issues starting Docker Desktop after you enforce sign-in, they may need to update to the latest version.
+    > If your users have issues starting Docker Desktop after you enforce sign-in, they may need to update to the latest version. 
     { .tip }
 
 ## Alternative methods to create a registry.json file
