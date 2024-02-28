@@ -84,7 +84,7 @@ You can also configure attributes to override default values, such as default te
 >
 > When you create the application for your SSO connection in Entra ID (formerly Azure AD) we recommend that you don't assign the app to all the users in the directory.
 > Instead, you can create a security group and assign the app to the group. This way, you can control who in your organization has access to Docker.
-> To change the default setting for assignment, go to the main properties for your app and find the **Assignment required** setting. Set it to **No**.
+> To change the default setting for assignment, go to the main properties for your app and find the **Assignment required** setting. Set it to **Yes**.
 { .tip }
 
 1. Go to Azure AD admin portal.
