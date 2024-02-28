@@ -16,12 +16,6 @@ Make sure you have completed the following before you begin:
     - SAML: **Entity ID**, **ACS URL**
     - Azure AD (OIDC): **Redirect URL**
 
-> **Tip**
->
-> When you create the application for your SSO connection in the IdP, we recommend that you don't assign the app to all the users in the directory.
-> Instead, you can create a security group and assign the app to the group. This way, you can control who in your organization has access to Docker.
-{ .tip }
-
 ## SSO attributes
 
 When a user signs in using SSO, Docker obtains the following attributes from the IdP:
@@ -86,15 +80,22 @@ You can also configure attributes to override default values, such as default te
 {{< /tab >}}
 {{< tab name="Entra ID SAML 2.0" >}}
 
+> **Tip**
+>
+> When you create the application for your SSO connection in Entra ID (formerly Azure AD) we recommend that you don't assign the app to all the users in the directory.
+> Instead, you can create a security group and assign the app to the group. This way, you can control who in your organization has access to Docker.
+> To change the default setting for assignment, go to the main properties for your app and find the **Assignment required** setting. Set it to **No**.
+{ .tip }
+
 1. Go to Azure AD admin portal.
 2. Go to **Default Directory > Add > Enterprise Application > Create your own application**.
 3. Enter “Docker” for application name and select **non-gallery** option.
 4. After the application is created, go to Single Sign-On and select **SAML**.
 5. Select **Edit** on the **Basic SAML configuration** section.
 6. Add the following settings from Docker Hub:
-    - Entity ID → Identifier
-    - ACS URL → Reply URL
-7. Save configuration
+    - Entity ID: Identifier
+    - ACS URL: Reply URL
+7. Save configuration.
 8. From section **SAML Signing Certificate** download **Certificate (Base64)**
 9. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console.
 10. From the section **Set up Docker**, copy **Login URL** and paste it into the **SAML Sign-in URL** field in Docker Hub or Admin Console.
