@@ -16,6 +16,46 @@ Make sure you have completed the following before you begin:
     - SAML: **Entity ID**, **ACS URL**
     - Azure AD (OIDC): **Redirect URL**
 
+> **Tip**
+>
+> When you create the application for your SSO connection in the IdP, we recommend that you don't assign the app to all the users in the directory.
+> Instead, you can create a security group and assign the app to the group. This way, you can control who in your organization has access to Docker.
+{ .tip }
+
+## SSO attributes
+
+When a user signs in using SSO, Docker obtains the following attributes from the IdP:
+
+- **Email address** - unique identifier of the user
+- **Full name** - name of the user
+- **Groups (optional)** - list of groups to which the user belongs
+- **Docker Org (optional)** - the organization to which the the user belongs
+- **Docker Team (optional)** - the team within an organization that a user has been added to
+- **Docker Role (optional)** - the role for the user that grants their permissions in an organization
+
+If you use SAML for your SSO connection, Docker obtains these attributes from the SAML assertion message. Your IdP may use different naming for SAML attributes than those in the previous list. The following table lists the possible SAML attributes that can be present in order for your SSO connection to work.
+
+> **Important**
+>
+>SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](../../scim.md), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For example, to make sure that the full name of a user displays in your organization, you would set a `name` attribute in your SAML attributes and ensure the value includes their first name and last name. The exact method for setting these values (for example, constructing it with `user.firstName + " " + user.lastName`) varies depending on your IdP.
+{.important}
+
+You can also configure attributes to override default values, such as default team or organization. See [role mapping](../../scim.md#set-up-role-mapping).
+
+| SSO attribute | SAML assertion message attributes |
+| ---------------- | ------------------------- |
+| Email address    | `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn"`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"`, `email`                           |
+| Full name        | `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"`, `name`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"`, `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"`  |
+| Groups (optional) | `"http://schemas.xmlsoap.org/claims/Group"`, `"http://schemas.microsoft.com/ws/2008/06/identity/claims/groups"`, `Groups`, `groups` |
+| Docker Org (optional)        | `dockerOrg`   |
+| Docker Team (optional)     | `dockerTeam`  |
+| Docker Role (optional)      | `dockerRole`  |
+
+> **Important**
+>
+> If none of the email address attributes listed in the previous table are found, SSO returns an error. Also, if the `Full name` attribute isn't set, then the name will be displayed as the value of the `Email address`.
+{ .important}
+
 ## Configure your IdP to work with Docker
 
 {{< tabs >}}
@@ -40,6 +80,8 @@ Make sure you have completed the following before you begin:
 6. Select **Next**.
 7. Select **I'm an Okta customer adding an internal app**.
 8. Select **Finish**.
+9. After you create the app, go to your app and select **View SAML setup instructions**.
+10. Here you can find the **SAML Sign-in URL** and the **x509 Certificate**. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console. Then, paste the value of the **SAML Sign-in URL** and paste it into the corresponding field in Docker Hub or Admin Console.
 
 {{< /tab >}}
 {{< tab name="Entra ID SAML 2.0" >}}
@@ -83,6 +125,13 @@ Make sure you have completed the following before you begin:
 1. Go to the Docker Hub SSO app that you created in the previous steps.
 2. Navigate to the **API permission** category in your app settings.
 3. Select **Grant admin consent for YOUR TENANT NAME > Yes**.
+4. Next, you need to add additional permissions. Select **Add a permission**.
+5. Select **Delegated permissions**.
+6. Search for `Directory.Read.All`, and select this option.
+7. Then, search for `User.Read`, and select this option.
+8. Select **Add permissions**.
+
+You can verify admin consent was granted for each permission correctly by checking the **Status** column.
 
 ### Assign users to the SSO app
 
