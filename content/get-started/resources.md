@@ -42,7 +42,6 @@ If books are your preferred learning style, check out these written by the [Dock
 
 * [Learn Docker in a Month of Lunches](https://www.manning.com/books/learn-docker-in-a-month-of-lunches), Elton Stoneman. Use the code `stonemanpc` for a 40% discount.
 * [Docker on Windows: From 101 to Production with Docker on Windows](https://www.amazon.com/Docker-Windows-Elton-Stoneman-ebook/dp/B0711Y4J9K/), Elton Stoneman
-* [Learn Kubernetes in a Month of Lunches](https://www.manning.com/books/learn-kubernetes-in-a-month-of-lunches), Elton Stoneman. Use the code `stonemanpc` for a 40% discount.
 * [Docker in Action 2nd Edition](https://www.manning.com/books/docker-in-action-second-edition) Jeff Nickoloff, Oct 2019
 * [The Kubernetes Book](https://www.amazon.com/Kubernetes-Book-Nigel-Poulton/dp/1521823634/ref=sr_1_3?ie=UTF8&qid=1509660871&sr=8-3&keywords=nigel+poulton), Nigel Poulton, Nov 2018
 * [Docker Deep Dive](https://www.amazon.com/Docker-Deep-Dive-Nigel-Poulton/dp/1521822808/ref=sr_1_1?ie=UTF8&qid=1509660871&sr=8-1&keywords=nigel+poulton), Nigel Poulton, March 2018
