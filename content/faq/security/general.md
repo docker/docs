@@ -26,7 +26,7 @@ You can configure this through SSO using your IdP. Check with your IdP if they s
 
 ### How are sessions managed and do they expire?
 
-Docker Desktop uses tokens to manage user sessions after a user signs in. Docker Desktop signs you out after 90 days, or 30 days of inactivity.
+Docker Desktop uses tokens to manage sessions after a user signs in. Docker Desktop signs you out after 90 days, or 30 days of inactivity.
 
 In Docker Hub, you need to re-authenticate after 24 hours. If users are authenticating using SSO, the default session timeout for the IdP is respected.
 
