@@ -179,6 +179,8 @@ Guides:
         title: Text classification
       - path: /guides/use-case/nlp/text-summarization/
         title: Text summarization
+    - path: /guides/use-case/tensorflowjs/
+      title: Face detection with TensorFlow.js
     - path: /guides/use-case/jupyter/
       title: Data science with JupyterLab
     - path: /scout/guides/vex/
