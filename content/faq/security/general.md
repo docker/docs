@@ -26,9 +26,9 @@ You can configure this through SSO using your IdP. Check with your IdP if they s
 
 ### How are sessions managed and do they expire?
 
-If configured, the IdP manages sessions.
+Docker Desktop sessions expire after 90 days, or after 30 days of inactivity. Note that these session expirations are related to the tokens stored by Docker Desktop. Session expiration isn't an accurate metric to determine when a user last logged in to or used Docker Desktop.
 
-Docker Desktop sessions expire after 30 days, or after 7 days of inactivity. For Docker Hub, the IdP manages sessions, if configured. If you use application-level sign-in, users are signed out due to inactivity after 14 days and must sign in again after 30 days.
+In Docker Hub, users are signed out due to inactivity after 14 days and must sign in again after 30 days.
 
 ### How does Docker attribute downloads to us and what data is used to classify or verify the user is part of our organization? 
 
