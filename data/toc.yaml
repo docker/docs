@@ -5,25 +5,17 @@ Guides:
   section:
     - title: "Overview"
       path: /guides/get-started/
-    - sectiontitle: "Quick hands-on guides"
-      section:
-      - title: "What is a container?"
-        path: /guides/walkthroughs/what-is-a-container/
-      - title: "Run a container"
-        path: /guides/walkthroughs/run-a-container/
-      - title: "Run Docker Hub images"
-        path: /guides/walkthroughs/run-hub-images/
-      - title: "Run multi-container applications"
-        path: /guides/walkthroughs/multi-container-apps/
-      - title: "Persist container data"
-        path: /guides/walkthroughs/persist-data/
-      - title: "Access a local folder"
-        path: /guides/walkthroughs/access-local-folder/
-      - title: "Containerize your application"
-        path: /guides/walkthroughs/containerize-your-app/
-      - title: "Publish your image"
-        path: /guides/walkthroughs/publish-your-image/
-    - sectiontitle: "Getting started guide"
+    - title: "Get Docker Desktop"
+      path: /guides/get-started/get-docker-desktop/
+    - title: "Develop with containers"
+      path: /guides/get-started/develop-with-containers/
+    - title: "Build and push your first image"
+      path: /guides/get-started/build-and-push-first-image/
+    - title: "Fix image policy issues"
+      path: /guides/get-started/fix-image-policy-issues/
+    - title: "What's next?"
+      path: /guides/get-started/whats-next/
+    - sectiontitle: "Workshop"
       section:
       - title: "Part 1: Overview"
         path: /get-started/
@@ -45,7 +37,38 @@ Guides:
         path: /get-started/09_image_best/
       - title: "Part 10: What next?"
         path: /get-started/11_what_next/
-
+- sectiontitle: "Docker concepts"
+  section:
+  - sectiontitle: "The basics"
+    section:
+    - title: "What is a container?"
+      path: /guides/walkthroughs/what-is-a-container/
+    - title: "Run a container"
+      path: /guides/walkthroughs/run-a-container/
+    - title: "Run Docker Hub images"
+      path: /guides/walkthroughs/run-hub-images/
+    - title: "Run multi-container applications"
+      path: /guides/walkthroughs/multi-container-apps/
+    - title: "Persist container data"
+      path: /guides/walkthroughs/persist-data/
+    - title: "Access a local folder"
+      path: /guides/walkthroughs/access-local-folder/
+    - title: "Containerize your application"
+      path: /guides/walkthroughs/containerize-your-app/
+    - title: "Publish your image"
+      path: /guides/walkthroughs/publish-your-image/
+  - sectiontitle: "Building images"
+    section:
+    - title: "Article one"
+      path: /guides/docker-concepts/building-images/article-one/
+    - title: "Article two"
+      path: /guides/docker-concepts/building-images/article-one/
+  - sectiontitle: "Running containers"
+    section:
+    - title: "Article one"
+      path: /guides/docker-concepts/running-containers/article-one/
+    - title: "Article two"
+      path: /guides/docker-concepts/running-containers/article-one/
 - sectiontitle: Language-specific guides
   section:
   - path: /language/

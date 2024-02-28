@@ -4,6 +4,7 @@ refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
+enableEmoji: true
 disableKinds:
   - taxonomy
   - term
