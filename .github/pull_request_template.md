@@ -1,10 +1,12 @@
+<!--Delete sections as needed -->
+
 ## Description
 
 <!-- Tell us what you did and why -->
 
-## Related issues
+## Related issues or tickets
 
-<!-- Related issues and pull requests -->
+<!-- Related issues, pull requests, or Jira tickets -->
 
 ## Reviews
 
