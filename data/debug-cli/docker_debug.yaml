@@ -1,5 +1,5 @@
 command: docker debug
-short: Get a shell into any container or image. Replacement for `docker exec`.
+short: Get a shell into any container or image. An alternative to debugging with `docker exec`.
 long: |-
   > **Note**
   >
