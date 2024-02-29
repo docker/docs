@@ -1,6 +1,6 @@
 ---
 description: Learn how to create and manage your Docker account.
-keywords: accounts, docker ID, account management, account center, docker account
+keywords: accounts, docker ID, account management, account settings, docker account, docker dashboard
 title: Docker account overview
 grid:
 - title: Create a Docker ID
@@ -9,15 +9,15 @@ grid:
   link: /docker-id/
 - title: Manage account
   description: Learn how to manage the settings for your account.
-  icon: settings_suggest
+  icon: manage_accounts
   link: /accounts/manage-account/
-- title: Docker account FAQ
+- title: Account FAQ
   description: Explore popular FAQ topics about organizations.
   icon: help
   link: /faq/admin/general-faqs/
 ---
 
-You can create a Docker account to secure a Docker ID, which is a username for your account that lets you access Docker products. You can use your Docker account to sign in to Docker products like Docker Hub, Docker Desktop, or Docker Scout. You can manage the settings for your account in [Account Center](https://account.docker.com/).
+You can create a Docker account to secure a Docker ID, which is a username for your account that lets you access Docker products. You can use your Docker account to sign in to Docker products like Docker Hub, Docker Desktop, or Docker Scout. You can manage the settings for your account in [Docker Dashboard](https://account.docker.com/).
 
 In this section, explore how you can create, manage, or update your account.
 

@@ -63,7 +63,7 @@ When prompted for a password, enter your personal access token instead of a pass
 
 ## Modify existing tokens
 
-You can rename, activate, deactivate, or delete a token as needed. You can access your tokens in your settings in Account Center.
+You can rename, activate, deactivate, or delete a token as needed. You can access your tokens in your settings in Docker Dashboard.
 
 1. Sign in to your [Docker account](https://account.docker.com/login).
 
