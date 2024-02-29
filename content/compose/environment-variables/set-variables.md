@@ -1,28 +1,12 @@
 ---
-title: Ways to set environment variables with Compose
-description: How to set, use, and manage environment variables with Compose
-keywords: compose, orchestration, environment, env file
-aliases:
-- /compose/env/
-- /compose/link-env-deprecated/
+title: Set, use, and manage variables in a Compose file with interpolation
+description: How to set, use, and manage variables in your Compose file with interpolation
+keywords: compose, orchestration, environment, variables, interpolation
 ---
 
-With Compose, there are multiple ways you can set environment variables in your containers. You can use either your Compose file, or the CLI. 
-
-Be aware that each method is subject to [environment variable precedence](envvars-precedence.md).
-
->**Tip**
->
-> Don't use environment variables to pass sensitive information, such as passwords, in to your containers. Use [secrets](../use-secrets.md) instead.
-{ .tip }
-
-## Compose file
-
-### Substitute with an `.env` file
-
-An `.env` file in Docker Compose is a text file used to define environment variables that should be made available to Docker containers when running `docker compose up`. This file typically contains key-value pairs of environment variables, and it allows you to centralize and manage configuration in one place. The `.env` file is useful if you have multiple environment variables you need to store.
-
-The `.env` file is the default method for setting environment variables in your containers. The `.env` file should be placed at the root of the project directory next to your `compose.yaml` file. For more information on formatting an environment file, see [Syntax for environment files](env-file.md).
+A Compose file can uses variables to offer more flexibility. If you want to quickly switch 
+between image tags to test multiple versions, or want to adjust a volume source to your local
+environment, you don't need to edit the compose file, but can just set variables
 
 Below is a simple example: 
 
@@ -46,6 +30,58 @@ $ docker compose config
 services:
   web:
     image: 'webapp:v1.5'
+```
+
+Inserting values in this way is known as "interpolation" and allows you to adjust the compose model to your needs without
+having to make changes to the compose file.
+
+## Interpolation syntax
+
+Interpolation is applied for unquoted and double-quoted values.
+Both braced (`${VAR}`) and unbraced (`$VAR`) expressions are supported.
+
+For braced expressions, the following formats are supported:
+- Direct substitution
+  - `${VAR}` -> value of `VAR`
+- Default value
+  - `${VAR:-default}` -> value of `VAR` if set and non-empty, otherwise `default`
+  - `${VAR-default}` -> value of `VAR` if set, otherwise `default`
+- Required value
+  - `${VAR:?error}` -> value of `VAR` if set and non-empty, otherwise exit with error
+  - `${VAR?error}` -> value of `VAR` if set, otherwise exit with error
+- Alternative value
+  - `${VAR:+replacement}` -> `replacement` if `VAR` is set and non-empty, otherwise empty
+  - `${VAR+replacement}` -> `replacement` if `VAR` is set, otherwise empty
+
+For more information, see [Interpolation](../compose-file/12-interpolation.md) in the Compose Specification. 
+
+## Ways to set variables with interpolation
+
+### `.env` file
+
+An `.env` file in Docker Compose is a text file used to define  variables that should be made available to Docker containers when running `docker compose up`. This file typically contains key-value pairs of  variables, and it allows you to centralize and manage configuration in one place. The `.env` file is useful if you have multiple variables you need to store.
+
+The `.env` file is the default method for setting variables. The `.env` file should be placed at the root of the project directory next to your `compose.yaml` file. For more information on formatting an environment file, see [Syntax for environment files](env-file.md).
+
+Basic example: 
+
+```console
+$ cat .env
+## define COMPOSE_DEBUG based on DEV_MODE, defaults to false
+COMPOSE_DEBUG=${DEV_MODE:-false}
+
+$ cat compose.yaml 
+  services:
+    webapp:
+      image: my-webapp-image
+      environment:
+        - DEBUG=${COMPOSE_DEBUG}
+
+$ DEV_MODE=true docker compose config
+services:
+  webapp:
+    environment:
+      DEBUG: "true"
 ```
 
 #### Additional information 
@@ -90,65 +126,6 @@ services:
 > It is not supported by Swarm when running `docker stack deploy`.
 { .important }
 
-### Use the `environment` attribute
-
-You can set environment variables directly in your Compose file without using an `.env` file, with the
-[`environment` attribute](../compose-file/05-services.md#environment) in your `compose.yml`. It works in the same way as `docker run -e VARIABLE=VALUE ...`
-
-```yaml
-web:
-  environment:
-    - DEBUG=1
-```
-
-See [`environment` attribute](../compose-file/05-services.md#environment) for more examples on how to use it. 
-
-#### Additional information 
-- You can choose not to set a value and pass the environment variables from your shell straight through to your containers. It works in the same way as `docker run -e VARIABLE ...`:
-  ```yaml
-  web:
-    environment:
-      - DEBUG
-  ```
-  The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run. 
-  Note that in this case no warning is issued if the `DEBUG` variable in the shell environment is not set. 
-
-- You can also take advantage of [interpolation](env-file.md#interpolation).
-  ```yaml
-  web:
-    environment:
-      - DEBUG=${DEBUG}
-  ```
-  The result is similar to the one above but Compose gives you a warning if the `DEBUG` variable is not set in the shell environment.
-
-### Use the `env_file` attribute
-
-The [`env_file` attribute](../compose-file/05-services.md#env_file) lets you use multiple `.env` files in your Compose application. It also helps you keep your environment variables separate from your main configuration file, providing a more organized and secure way to manage sensitive information, as you do not need to place your `.env` file in the root of your project's directory. 
-
-It works in the same way as `docker run --env-file=FILE ...`.
-
-```yaml
-web:
-  env_file:
-    - web-variables.env
-```
-#### Additional information 
-- If multiple files are specified, they are evaluated in order and can override values set in previous files.
-- Environment variables declared in the `.env` file cannot then be referenced again separately in the Compose file.
-- If you use both the `env_file` and `environment` attribute, environment variables set by `environment` take precedence.
-- The paths to your `.env` file, specified in the `env_file` attribute,  are relative to the location of your `compose.yml` file. 
-- Values in your `.env` files can be overridden from the command line by using [`docker compose run -e`](#set-environment-variables-with-docker-compose-run---env).
-- Your `.env` files can be overriden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
-- As of Docker Compose version 2.24.0, you can set your `.env` file to be optional by using the `required` field. When `required` is set to `false` and the `.env` file is missing,
-Compose silently ignores the entry.
-  ```yaml
-  env_file:
-    - path: ./default.env
-      required: true # default
-    - path: ./override.env
-      required: false
-  ``` 
-
 ### Substitute from the shell 
 
 You can use existing environment variables from your host machine or from the shell environment where you execute `docker compose` commands. This allows you to dynamically inject values into your Docker Compose configuration at runtime.
@@ -172,8 +149,6 @@ If an environment variable is not set, Compose substitutes with an empty string.
 >
 > Values set in the shell environment override those set in the `.env` file, the `environment` attribute, and the `env_file` attribute. For more information, see [Environment variable precedence](envvars-precedence.md).
 { .important }
-
-## CLI
 
 ### Substitute with `--env-file`
 
@@ -256,8 +231,5 @@ $ docker compose run -e DEBUG=1 web python console.py
 
   The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
 
-## Further resources
-- [Understand environment variable precedence](envvars-precedence.md).
-- [Set or change predefined environment variables](envvars.md)
-- [Explore best practices](best-practices.md)
+
 - [Understand the syntax and formatting guidelines for environment files](env-file.md)
