@@ -24,7 +24,7 @@ REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
 buildme      latest    c021c8a7051f   5 seconds ago   150MB
 ```
 
-The program compiles to executable binaries, so you don’t need Go language
+The program compiles two executable binaries, so you don’t need Go language
 utilities to exist in the final image.
 
 ## Add stages
