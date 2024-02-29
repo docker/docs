@@ -94,65 +94,68 @@
       {{ . | $.RenderString (dict "display" "block") }}
     {{ end }}
     {{ with $data.options }}
-      {{ $heading := dict "level" 2 "text" "Options" }}
-      {{ partial "heading.html" $heading }}
-      {{ $.Scratch.Add "headings" $heading }}
-      <table>
-        <thead>
-          <tr>
-            <th>Option</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{ range where . "hidden" false }}
+      {{ $opts := where . "hidden" false }}
+      {{ with $opts }}
+        {{ $heading := dict "level" 2 "text" "Options" }}
+        {{ partial "heading.html" $heading }}
+        {{ $.Scratch.Add "headings" $heading }}
+        <table>
+          <thead>
             <tr>
-              {{ $short := .shorthand }}
-              {{ $long := .option }}
-              <td>
-                {{ with .details_url }}
-                <a class="link" href="{{ . }}">
-                  <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
-                </a>
-                {{ else }}
-                <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
-                {{ end }}
-              </td>
-              {{ $skipDefault := `[],map[],false,0,0s,default,'',""` }}
-              <td>
-                {{ with .default_value }}
-                  {{ cond (in $skipDefault .) "" (printf "<code>%s</code>" . | safeHTML) }}
-                {{ end }}
-              </td>
-              <td>
-                {{ with .min_api_version }}
-                  {{ partial "components/badge.html" (dict "color" "blue" "content" (printf "API %s+" .)) }}
-                {{ end }}
-                {{ with .deprecated }}
-                  {{ partial "components/badge.html" (dict "color" "red" "content" "Deprecated") }}
-                {{ end }}
-                {{ with .experimental }}
-                  {{ partial "components/badge.html" (dict "color" "amber" "content" "experimental (daemon)") }}
-                {{ end }}
-                {{ with .experimentalcli }}
-                  {{ partial "components/badge.html" (dict "color" "amber" "content" "experimental (CLI)") }}
-                {{ end }}
-                {{ with .kubernetes }}
-                  {{ partial "components/badge.html" (dict "color" "blue" "content" "Kubernetes") }}
-                {{ end }}
-                {{ with .swarm }}
-                  {{ partial "components/badge.html" (dict "color" "blue" "content" "Swarm") }}
-                {{ end }}
-                {{ if .description }}
-                  {{/* replace newlines in long desc with break tags */}}
-                  {{ markdownify (strings.Replace .description "\n" "<br>") }}
-                {{ end }}
-              </td>
+              <th>Option</th>
+              <th>Default</th>
+              <th>Description</th>
             </tr>
-          {{ end }}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {{ range . }}
+              <tr>
+                {{ $short := .shorthand }}
+                {{ $long := .option }}
+                <td>
+                  {{ with .details_url }}
+                  <a class="link" href="{{ . }}">
+                    <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                  </a>
+                  {{ else }}
+                  <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                  {{ end }}
+                </td>
+                {{ $skipDefault := `[],map[],false,0,0s,default,'',""` }}
+                <td>
+                  {{ with .default_value }}
+                    {{ cond (in $skipDefault .) "" (printf "<code>%s</code>" . | safeHTML) }}
+                  {{ end }}
+                </td>
+                <td>
+                  {{ with .min_api_version }}
+                    {{ partial "components/badge.html" (dict "color" "blue" "content" (printf "API %s+" .)) }}
+                  {{ end }}
+                  {{ with .deprecated }}
+                    {{ partial "components/badge.html" (dict "color" "red" "content" "Deprecated") }}
+                  {{ end }}
+                  {{ with .experimental }}
+                    {{ partial "components/badge.html" (dict "color" "amber" "content" "experimental (daemon)") }}
+                  {{ end }}
+                  {{ with .experimentalcli }}
+                    {{ partial "components/badge.html" (dict "color" "amber" "content" "experimental (CLI)") }}
+                  {{ end }}
+                  {{ with .kubernetes }}
+                    {{ partial "components/badge.html" (dict "color" "blue" "content" "Kubernetes") }}
+                  {{ end }}
+                  {{ with .swarm }}
+                    {{ partial "components/badge.html" (dict "color" "blue" "content" "Swarm") }}
+                  {{ end }}
+                  {{ if .description }}
+                    {{/* replace newlines in long desc with break tags */}}
+                    {{ markdownify (strings.Replace .description "\n" "<br>") }}
+                  {{ end }}
+                </td>
+              </tr>
+            {{ end }}
+          </tbody>
+        </table>
+      {{ end }}
     {{ end }}
     {{ with $data.examples }}
       {{ $heading := dict "level" 2 "text" "Examples" }}
