@@ -116,7 +116,7 @@ The following table describes the driver-specific options that you can pass to
 
 Some of these options are also available as flags to the `dockerd` CLI, and you
 can use them to configure the default `docker0` bridge when starting the Docker
-daemon. The following tables shows which options have equivalent flags in the
+daemon. The following table shows which options have equivalent flags in the
 `dockerd` CLI.
 
 | Option                                           | Flag        |
@@ -168,7 +168,7 @@ $ docker network rm my-net
 ## Connect a container to a user-defined bridge
 
 When you create a new container, you can specify one or more `--network` flags.
-This example connects a Nginx container to the `my-net` network. It also
+This example connects an Nginx container to the `my-net` network. It also
 publishes port 80 in the container to port 8080 on the Docker host, so external
 clients can access that port. Any other container connected to the `my-net`
 network has access to all ports on the `my-nginx` container, and vice versa.
