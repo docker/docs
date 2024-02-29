@@ -1942,14 +1942,16 @@ Manuals:
     section:
     - path: /compose/environment-variables/
       title: Overview
-    - path: /compose/environment-variables/set-environment-variables/
-      title: Explore ways to set environment variables
+    - path: /compose/environment-variables/set-variables/
+      title: Set variables in your Compose file
+    - path: /compose/environment-variables/set-container-environment-variables/
+      title: Set variables in your container's environment
+    - path: /compose/environment-variables/envvars/
+      title: Set or change pre-defined environment variables
     - path: /compose/environment-variables/envvars-precedence/
       title: Understand environment variables precedence
     - path: /compose/environment-variables/env-file/
       title: Syntax for environment files
-    - path: /compose/environment-variables/envvars/
-      title: Set or change pre-defined environment variables
     - path: /compose/environment-variables/best-practices/
       title: Best practices
   - sectiontitle: Use...
