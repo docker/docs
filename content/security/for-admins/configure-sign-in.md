@@ -68,8 +68,10 @@ details, see [Manage members](/admin/organization/members/).
 
 4. Verify that sign-in is enforced.
 
-    Start Docker Desktop on the user’s machine and verify that the **Sign in
-    required!** prompt appears.
+    To activate the `registry.json` file, restart Docker Desktop on the user’s machine. When Docker Desktop starts, verify that the **Sign in
+    required!** prompt appears. 
+    
+    In some cases, a system reboot may be necessary for the enforcement to take effect.
 
     > **Tip**
     >
