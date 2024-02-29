@@ -12,10 +12,10 @@ When the same environment variable is set in multiple sources, Docker Compose fo
 This page contains information on the level of precedence each method of setting environmental variables takes.
 
 The order of precedence (highest to lowest) is as follows:
-1. Set using [`docker compose run -e` in the CLI](set-environment-variables.md#set-environment-variables-with-docker-compose-run---env).
-2. Substituted from your [shell](set-environment-variables.md#substitute-from-the-shell), your default [`.env` file](set-environment-variables.md#substitute-with-an-env-file), or with the [`--env-file` argument](set-environment-variables.md#substitute-with---env-file) in the CLI.
-3. Set using just the [`environment` attribute in the Compose file](set-environment-variables.md#use-the-environment-attribute)
-4. Use of the [`env_file` attribute](set-environment-variables.md#use-the-env_file-attribute) in the Compose file
+1. Set using [`docker compose run -e` in the CLI](set-variables.md#set-environment-variables-with-docker-compose-run---env).
+2. Substituted from your [shell](set-variables.md#substitute-from-the-shell), your default [`.env` file](set-variables.md#env-file), or with the [`--env-file` argument](set-variables.md#substitute-with---env-file) in the CLI.
+3. Set using just the [`environment` attribute in the Compose file](set-container-environment-variables.md#use-the-environment-attribute)
+4. Use of the [`env_file` attribute](set-container-environment-variables.md#use-the-env_file-attribute) in the Compose file
 5. Set in a container image in the [ENV directive](../../reference/dockerfile.md#env).
    Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is no Docker Compose entry for `environment`, `env_file` or `run --env`.
 

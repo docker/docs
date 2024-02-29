@@ -19,9 +19,9 @@ Consider how your application adapts to different environments. For example deve
 
 #### Know interpolation
    
-Understand how [interpolation](env-file.md#interpolation) works within compose files for dynamic configurations.
+Understand how [interpolation](set-variables.md#interpolation-syntax) works within compose files for dynamic configurations.
 
 #### Command line overrides
     
-Be aware that you can [override environment variables](set-environment-variables.md#cli) from the command line when starting containers. This is useful for testing or when you have temporary changes.
+Be aware that you can [override environment variables](set-variables.md#set-environment-variables-with-docker-compose-run---env) from the command line when starting containers. This is useful for testing or when you have temporary changes.
 

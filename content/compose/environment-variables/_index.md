@@ -17,8 +17,8 @@ Environment variables are key-value pairs that contain data that can be used by 
 { .tip }
 
 This section covers key content such as:
-- How to set, use, and manage variables in a Compose file
-- [Set environment variables within your container's environment](set-environment-variables.md).
+- [How to set and use variables in a Compose file](set-variables.md)
+- [Set environment variables within your container's environment](set-container-environment-variables.md).
 - Changing pre-defined [environment variables](envvars.md).
 
 It also covers: 

@@ -8,7 +8,7 @@ aliases:
 - /compose/environment-variables/set-environment-variables/
 ---
 
-With Compose, there are two ways you can set environment variables in your containers with your Compose file. 
+A container's environment is not set until there's an explicit entry in the service configuration to make this happen. With Compose, there are two ways you can set environment variables in your containers with your Compose file. 
 
 >**Tip**
 >
@@ -85,8 +85,8 @@ In addition, as env file support [interpolation](set-variables.md#interpolation-
 - Environment variables declared in the `.env` file cannot then be referenced again separately in the Compose file.
 - If you use both the `env_file` and `environment` attribute, environment variables set by `environment` take precedence.
 - The paths to your `.env` file, specified in the `env_file` attribute,  are relative to the location of your `compose.yml` file. 
-- Values in your `.env` files can be overridden from the command line by using [`docker compose run -e`](#set-environment-variables-with-docker-compose-run---env).
-- Your `.env` files can be overriden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
+- Values in your `.env` files can be overridden from the command line by using [`docker compose run -e`](set-variables.md#set-environment-variables-with-docker-compose-run---env).
+- Your `.env` files can be overriden by another `.env` if it is [substituted with `--env-file`](set-variables.md#substitute-with---env-file).
 - As of Docker Compose version 2.24.0, you can set your `.env` file to be optional by using the `required` field. When `required` is set to `false` and the `.env` file is missing,
 Compose silently ignores the entry.
   ```yaml

@@ -10,7 +10,7 @@ This page provides information on the syntax rules and guidelines when using an 
 
 > **Important**
 >
-> Environment variables from an environment file have lower precedence than those from any other [method](set-environment-variables.md).
+> Environment variables from an environment file have lower precedence than those from any other [method](set-variables.md).
 For more information, see [Environment variables precedence](envvars-precedence.md).
 { .important }
 
@@ -19,7 +19,7 @@ The following syntax rules apply to environment files:
 
 - Lines beginning with `#` are processed as comments and ignored.
 - Blank lines are ignored.
-- Unquoted and double-quoted (`"`) values have [interpolation](#interpolation) applied.
+- Unquoted and double-quoted (`"`) values have [interpolation](set-variables.md#interpolation-syntax) applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
