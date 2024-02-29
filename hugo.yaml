@@ -38,7 +38,7 @@ related:
 
 build:
   buildStats:
-    enabled: true
+    enable: true
   cachebusters:
     - source: assets/watching/hugo_stats\.json
       target: styles\.css
@@ -91,15 +91,17 @@ params:
   repo: https://github.com/docker/docs
   docs_url: https://docs.docker.com
 
-  latest_engine_api_version: "1.43"
-  docker_ce_version: "24.0.7"
-  compose_version: "v2.24.1"
+  latest_engine_api_version: "1.44"
+  docker_ce_version: "25.0.0"
+  compose_version: "v2.24.6"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
   buildkit_version: "0.12.3"
 
   example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
+  example_alpine_version: "3.19"
+  example_node_version: "20"
 
   min_api_threshold: 1.41
 
@@ -231,6 +233,9 @@ module:
       target: assets
     - source: hugo_stats.json
       target: assets/watching/hugo_stats.json
+    - source: node_modules/@material-symbols/svg-400/rounded
+      target: assets/icons
+
   imports:
 
     - path: github.com/moby/moby
@@ -245,7 +250,7 @@ module:
     - path: github.com/moby/buildkit
       mounts:
         - source: frontend/dockerfile/docs/reference.md
-          target: content/engine/reference/builder.md
+          target: content/reference/dockerfile.md
         - source: docs/buildkitd.toml.md
           target: content/build/buildkit/toml-configuration.md
         - source: docs/attestations/slsa-definitions.md
@@ -277,8 +282,8 @@ module:
           target: content/engine/reference/run.md
         - source: docs/reference/commandline/cli.md
           target: content/engine/reference/commandline/cli.md
-        - source: docs/reference/commandline/dockerd.md
-          target: content/engine/reference/commandline/dockerd.md
+        - source: docs/reference/dockerd.md
+          target: content/reference/cli/dockerd.md
 
     - path: github.com/docker/compose/v2
       mounts:

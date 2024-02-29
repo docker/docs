@@ -124,7 +124,7 @@ examples: |-
 
     ### Override the configured builder instance (--builder) {#builder}
 
-    Same as [`buildx --builder`](buildx.md#builder).
+    Same as [`buildx --builder`](/reference/cli/docker/buildx/#builder).
 
     ### Show final image instead of pushing (--dry-run) {#dry-run}
 

@@ -11,6 +11,51 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.6
+{{< release-date date="2024-02-15" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.3
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.7
+
+### Bug fixes and enhancements
+- Fixed issue of `.env` file loading when project file is set via `COMPOSE_FILE` variable
+- Aligned `ps --status=exited` behaviour with the Docker CLI behaviour
+- Fixed a deadlock when collecting large logs
+
+## 2.24.5
+{{< release-date date="2024-01-30" >}}
+
+### Bug fixes and enhancements
+- Fixed "failed to solve: changes out of order" errors when building images on Windows.
+
+## 2.24.4
+{{< release-date date="2024-01-29" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.1
+- Dependencies upgrade: bump docker to 25.0.1
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.3
+
+### Bug fixes and enhancements
+- Fixed issue when checking external network existence when swarm is enabled.
+- Added support for `storage_opt` attribute.
+
+## 2.24.3
+{{< release-date date="2024-01-24" >}}
+
+This release fixes a build issue with Docker Desktop for Windows introduced in Compose v2.24.0.
+
+### Update
+- Compose now uses a custom version of `fsutils` library.
+
+## 2.24.2
+{{< release-date date="2024-01-22" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0 GA
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.2
+
 ## 2.24.1
 {{< release-date date="2024-01-18" >}}
 
@@ -21,10 +66,10 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Dependencies upgrade: bump containerd to 1.7.12
 
 ### Bug fixes and enhancements
-Reworked the display of container status during `up`
-Fixed the engine version required to use `healthcheck.start_interval`
-Removed `watch` subcommand from the `alpha` command
-Fixed a bug when handling received signals
+- Reworked the display of container status during `up`
+- Fixed the engine version required to use `healthcheck.start_interval`
+- Removed `watch` subcommand from the `alpha` command
+- Fixed a bug when handling received signals
 
 ## 2.24.0
 {{< release-date date="2024-01-11" >}}
@@ -2832,7 +2877,7 @@ naming scheme accordingly before upgrading.
 ## 1.6.0
 (2016-01-15)
 
-### Major Features:
+### Major Features
 
 -   Compose 1.6 introduces a new format for `docker-compose.yml` which lets
     you define networks and volumes in the Compose file as well as services. It
@@ -2880,7 +2925,7 @@ naming scheme accordingly before upgrading.
     `docker-compose up SERVICE` on a service with dependencies, those are started
     as well.
 
-### New Features:
+### New Features
 
 -   Added a new command `config` which validates and prints the Compose
     configuration after interpolating variables, resolving relative paths, and
@@ -3245,8 +3290,8 @@ Several new configuration keys have been added to `docker-compose.yml`:
 - `pid: host`, like `docker run --pid=host`, lets you reuse the same PID namespace as the host machine.
 - `cpuset`, like `docker run --cpuset-cpus`, lets you specify which CPUs to allow execution in.
 - `read_only`, like `docker run --read-only`, lets you mount a container's filesystem as read-only.
-- `security_opt`, like `docker run --security-opt`, lets you specify [security options](/engine/reference/run/#security-configuration).
-- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/run/#logging-drivers---log-driver).
+- `security_opt`, like `docker run --security-opt`, lets you specify [security options](/reference/cli/docker/container/run/#security-opt).
+- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/reference/cli/docker/container/run/#log-driver).
 
 ### Bug fixes
 

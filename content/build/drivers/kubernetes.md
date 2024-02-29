@@ -103,7 +103,7 @@ replicas. `sticky` (the default) attempts to connect the same build performed
 multiple times to the same node each time, ensuring better use of local cache.
 
 For more information on scalability, see the options for
-[`docker buildx create`](../../engine/reference/commandline/buildx_create.md#driver-opt).
+[`docker buildx create`](../../reference/cli/docker/buildx/create.md#driver-opt).
 
 ## Node assignment
 
@@ -158,7 +158,7 @@ $ docker buildx build \
 
 > **Warning**
 >
-> QEMU performs full-system emulation of non-native platforms, which is much
+> QEMU performs full-CPU emulation of non-native platforms, which is much
 > slower than native builds. Compute-heavy tasks like compilation and
 > compression/decompression will likely take a large performance hit.
 { .warning }
@@ -342,4 +342,4 @@ That's it! You've now built an image from a Kubernetes pod, using Buildx!
 ## Further reading
 
 For more information on the Kubernetes driver, see the
-[buildx reference](../../engine/reference/commandline/buildx_create.md#driver).
+[buildx reference](../../reference/cli/docker/buildx/create.md#driver).

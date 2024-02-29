@@ -4,6 +4,7 @@ keywords: fig, composition, compose version 2, docker
 title: Compose file version 2 reference
 toc_max: 4
 toc_min: 1
+sitemap: false
 ---
 
 {{< include "compose-eol.md" >}}
@@ -217,7 +218,7 @@ build:
 > In your Dockerfile, if you specify `ARG` before the `FROM` instruction,
 > `ARG` is not available in the build instructions under `FROM`.
 > If you need an argument to be available in both places, also specify it under
-> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](../../engine/reference/builder.md#understand-how-arg-and-from-interact)
+> the `FROM` instruction. Refer to the [understand how ARGS and FROM interact](../../reference/dockerfile.md#understand-how-arg-and-from-interact)
 > section in the documentation for usage details.
 
 You can omit the value when specifying a build argument, in which case its value
@@ -273,7 +274,7 @@ An entry with the ip address and hostname is created in `/etc/hosts` inside cont
 Specify a build’s container isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](../../engine/reference/commandline/run.md#isolation)
+[Docker Engine docs](../../reference/cli/docker/container/run.md#isolation)
 for details.
 
 If unspecified, Compose will use the `isolation` value found in the service's definition
@@ -399,7 +400,7 @@ command: bundle exec thin -p 3000
 ```
 
 The command can also be a list, in a manner similar to
-[dockerfile](../../engine/reference/builder.md#cmd):
+[dockerfile](../../reference/dockerfile.md#cmd):
 
 ```yaml
 command: ["bundle", "exec", "thin", "-p", "3000"]
@@ -574,7 +575,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 The entrypoint can also be a list, in a manner similar to
-[dockerfile](../../engine/reference/builder.md#entrypoint):
+[dockerfile](../../reference/dockerfile.md#entrypoint):
 
 ```yaml
 entrypoint: ["php", "-d", "memory_limit=-1", "vendor/bin/phpunit"]
@@ -778,7 +779,7 @@ host system to be added. An example of where this is useful is when multiple
 containers (running as different users) need to all read or write the same
 file on the host system. That file can be owned by a group shared by all the
 containers, and specified in `group_add`. See the
-[Docker documentation](../../engine/reference/run.md#additional-groups) for more
+[Docker documentation](../../reference/cli/docker/container/run.md#additional-groups) for more
 details.
 
 A full example:
@@ -802,7 +803,7 @@ used.
 
 Configure a check that's run to determine whether or not containers for this
 service are "healthy". See the docs for the
-[HEALTHCHECK Dockerfile instruction](../../engine/reference/builder.md#healthcheck)
+[HEALTHCHECK Dockerfile instruction](../../reference/dockerfile.md#healthcheck)
 for details on how healthchecks work.
 
 ```yaml
@@ -891,7 +892,7 @@ services:
 > The default init binary that is used is [Tini](https://github.com/krallin/tini),
 > and is installed in `/usr/libexec/docker-init` on the daemon host. You can
 > configure the daemon to use a custom init binary through the
-> [`init-path` configuration option](../../engine/reference/commandline/dockerd.md#daemon-configuration-file).
+> [`init-path` configuration option](../../reference/cli/dockerd.md#daemon-configuration-file).
 
 ### isolation
 
@@ -900,7 +901,7 @@ services:
 Specify a container’s isolation technology. On Linux, the only supported value
 is `default`. On Windows, acceptable values are `default`, `process` and
 `hyperv`. Refer to the
-[Docker Engine docs](../../engine/reference/commandline/run.md#isolation)
+[Docker Engine docs](../../reference/cli/docker/container/run.md#isolation)
 for details.
 
 ### labels
@@ -1294,7 +1295,7 @@ web:
 Specify the default number of containers to deploy for this service. Whenever
 you run `docker-compose up`, Compose creates or removes containers to match
 the specified number. This value can be overridden using the
-[`--scale`](../../engine/reference/commandline/compose_up.md)
+[`--scale`](../../reference/cli/docker/compose/up.md)
 
 ```yaml
 web:
@@ -1557,7 +1558,7 @@ restart: "unless-stopped"
 ### cpu_count, cpu_percent, cpu\_shares, cpu\_period, cpu\_quota, cpus, cpuset, domainname, hostname, ipc, mac\_address, mem\_limit, memswap\_limit, mem\_swappiness, mem\_reservation, oom_kill_disable, oom_score_adj, privileged, read\_only, shm\_size, stdin\_open, tty, user, working\_dir
 
 Each of these is a single value, analogous to its
-[docker run](../../engine/reference/run.md#runtime-constraints-on-resources) counterpart.
+[docker run](../../reference/cli/docker/container/run.md#runtime-constraints-on-resources) counterpart.
 
 > Added in [version 2.2](compose-versioning.md#version-22) file format.
 >
@@ -1635,7 +1636,7 @@ While it is possible to declare [volumes](#volumes) on the fly as part of the
 service declaration, this section allows you to create named volumes that can be
 reused across multiple services (without relying on `volumes_from`), and are
 easily retrieved and inspected using the docker command line or API.
-See the [docker volume](../../engine/reference/commandline/volume_create.md)
+See the [docker volume](../../reference/cli/docker/volume/create.md)
 subcommand documentation for more information.
 
 See [use volumes](../../storage/volumes.md) and [volume plugins](/engine/extend/plugins_volume/)

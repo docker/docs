@@ -96,14 +96,14 @@ Docker from the repository.
    ```bash
    # Add Docker's official GPG key:
    sudo apt-get update
-   sudo apt-get install ca-certificates curl gnupg
+   sudo apt-get install ca-certificates curl
    sudo install -m 0755 -d /etc/apt/keyrings
-   curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-   sudo chmod a+r /etc/apt/keyrings/docker.gpg
+   sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
+   sudo chmod a+r /etc/apt/keyrings/docker.asc
 
    # Add the repository to Apt sources:
    echo \
-     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
+     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
    sudo apt-get update
@@ -143,15 +143,15 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:24.0.0-1~debian.11~bullseye
-   5:23.0.6-1~debian.11~bullseye
+   5:25.0.0-1~debian.12~bookworm
+   5:24.0.7-1~debian.12~bookworm
    ...
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:24.0.0-1~debian.11~bullseye
+   $ VERSION_STRING=5:25.0.0-1~debian.12~bookworm
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
   

@@ -341,7 +341,7 @@ types and storage drivers for handling more complex and specialized use cases.
 
 Related information:
 
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [docker CLI reference](/reference/cli/docker/)
  - [Manage data in Docker](https://docs.docker.com/storage/)
 
 ## Next steps

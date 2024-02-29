@@ -13,10 +13,40 @@
   {{ .Scratch.Set "subheadings" slice }}
   {{ partial "breadcrumbs.html" . }}
   <article class="DocSearch-content prose max-w-none dark:prose-invert">
-    {{ with .Title }}
-    <h1 class="scroll-mt-36">{{ . }}</h1>
-    {{ end }}
-    {{ $data.short | .RenderString (dict "display" "block") }}
+    <h1 class="scroll-mt-36">{{ .Title }}</h1>
+    <table>
+      <tbody>
+        {{ with $data.short }}
+        <tr>
+          <th class="text-left w-32">Description</th>
+          <td>{{ . }}</th>
+        </tr>
+        {{ end }}
+        {{ with $data.usage }}
+        <tr>
+          <th class="text-left w-32">Usage</th>
+          <td><code>{{ . }}</code></td>
+        </tr>
+        {{ end }}
+        {{ with $data.aliases }}
+        {{ $aliases := strings.Replace . (fmt.Printf "%s, " page.Title) "" }}
+        <tr>
+          <th class="text-left w-32 flex items-center gap-2">
+            <span>Aliases</span>
+            {{ partial "tooltip.html" "An alias is a short or memorable alternative for a longer command." }}
+          </th>
+          <td>
+            <div class="flex gap-3">
+            {{ range (strings.Split $aliases ", ") }}
+              <code>{{ . }}</code>
+            {{ end }}
+            </div>
+          </td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+    {{ .Content }}
     {{ if $data.deprecated }}
       <blockquote class="warning">
         <p><strong>This command is deprecated</strong></p>
@@ -51,12 +81,6 @@
         This command works with the Swarm orchestrator.
       </p>
     {{ end }}
-    {{ with $data.usage }}
-      {{ $heading := dict "level" 2 "text" "Usage" }}
-      {{ partial "heading.html" $heading }}
-      {{ $.Scratch.Add "headings" $heading }}
-      {{ highlight (strings.Replace . "\t" "") "console" }}
-    {{ end }}
     {{ with $data.long }}
       {{ $heading := dict "level" 2 "text" "Description" }}
       {{ partial "heading.html" $heading }}
@@ -77,16 +101,24 @@
         <thead>
           <tr>
             <th>Option</th>
-            <th>Short</th>
             <th>Default</th>
             <th>Description</th>
           </tr>
         </thead>
         <tbody>
-          {{ range . }}
+          {{ range where . "hidden" false }}
             <tr>
-              <td>{{ with .option }}<code>--{{ . }}</code>{{ end }}</td>
-              <td>{{ with .shorthand }}<code>-{{ . }}</code>{{ end }}</td>
+              {{ $short := .shorthand }}
+              {{ $long := .option }}
+              <td>
+                {{ with .details_url }}
+                <a class="link" href="{{ . }}">
+                  <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                </a>
+                {{ else }}
+                <code>{{ with $short }}-{{ . }}, {{end}}--{{ $long }}</code>
+                {{ end }}
+              </td>
               {{ $skipDefault := `[],map[],false,0,0s,default,'',""` }}
               <td>
                 {{ with .default_value }}
@@ -134,7 +166,6 @@
       {{ end }}
       {{ $.RenderString (dict "display" "block") . }}
     {{ end }}
-    {{ .Content }}
   </article>
 {{ end }}
 

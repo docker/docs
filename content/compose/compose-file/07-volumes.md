@@ -40,7 +40,7 @@ creating a volume. Optionally, you can configure it with the following keys:
 
 ### driver
 
-Specifies which volume driver should be used. Default and available values are platform specific. If the driver is not available, Compose returns an error and doesn't deploy the application.
+Specifies which volume driver should be used. If the driver is not available, Compose returns an error and doesn't deploy the application.
 
 ```yml
 volumes:

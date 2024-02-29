@@ -1,7 +1,7 @@
 ---
 description: Configure registry.json to enforce users to sign into Docker Desktop
 toc_max: 2
-keywords: authentication, registry.json, configure,
+keywords: authentication, registry.json, configure, enforce sign-in
 title: Enforce sign-in for Desktop
 aliases:
 - /docker-hub/configure-sign-in/
@@ -68,8 +68,10 @@ details, see [Manage members](/admin/organization/members/).
 
 4. Verify that sign-in is enforced.
 
-    Start Docker Desktop on the user’s machine and verify that the **Sign in
-    required!** prompt appears.
+    To activate the `registry.json` file, restart Docker Desktop on the user’s machine. When Docker Desktop starts, verify that the **Sign in
+    required!** prompt appears. 
+    
+    In some cases, a system reboot may be necessary for the enforcement to take effect.
 
     > **Tip**
     >

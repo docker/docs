@@ -38,7 +38,7 @@ services:
 
 When you run `docker compose up`, the `web` service defined in the Compose file [interpolates](env-file.md#interpolation) in the
 image `webapp:v1.5` which was set in the `.env` file. You can verify this with the
-[config command](../../engine/reference/commandline/compose_config.md), which prints your resolved application config to the terminal:
+[config command](../../reference/cli/docker/compose/config.md), which prints your resolved application config to the terminal:
 
 ```console
 $ docker compose config
@@ -80,7 +80,7 @@ services:
 - You can place your `.env` file in a location other than the root of your project's directory, and then use one of the following methods so Compose can navigate to it:
   - The [`--env-file` option in the CLI](#substitute-with---env-file)
   - Using the [`env_file` attribute in the Compose file](../compose-file/05-services.md#env_file)
-- Values in your `.env` file can be overridden from the command line by using [`docker-compose up -e`](#set-environment-variables-with-docker-compose-run---env).
+- Values in your `.env` file can be overridden from the command line by using [`docker compose run -e`](#set-environment-variables-with-docker-compose-run---env).
 - Your `.env` file can be overridden by another `.env` if it is [substituted with `--env-file`](#substitute-with---env-file).
 
 > **Important**

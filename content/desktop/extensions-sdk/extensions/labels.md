@@ -10,7 +10,7 @@ This information is then displayed as an overview of the extension, so users can
 
 ![An extension overveiw, generated from labels](images/marketplace-details.png)
 
-You can define [Image labels](../../../engine/reference/builder.md#label) in the extension's `Dockerfile`.
+You can define [Image labels](../../../reference/dockerfile.md#label) in the extension's `Dockerfile`.
 
 Here is the list of labels you need to specify when building your extension:
 

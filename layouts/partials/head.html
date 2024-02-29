@@ -36,10 +36,8 @@
   })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
   </script>
 {{ end }}
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" />
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@1" rel="stylesheet" />
+{{/* preload Roboto Flex as it's a critical font: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload */}}
+<link href="/assets/fonts/RobotoFlex.woff2" rel="preload" as="font" type="font/woff2" crossorigin />
 {{ partial "utils/css.html" . }}
 {{ $theme := resources.Get "js/theme.js" | js.Build (dict "minify" true) }}
 <script>{{ $theme.Content | safeJS }}</script>
@@ -57,7 +55,4 @@
 }}
 <script defer src="{{ $js.Permalink }}"></script>
 <link rel="preconnect" href="https://{{ site.Params.algolia.appid }}-dsn.algolia.net" crossorigin />
-{{ if .Page.Store.Get "hasMermaid" }}
-{{ $mermaid := resources.Get "js/mermaid.js" | js.Build (dict "minify" true) }}
-<script>{{ $mermaid.Content | safeJS }}</script>
-{{ end }}
+{{ partialCached "utils/resources.html" . }}

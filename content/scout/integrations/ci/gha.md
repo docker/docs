@@ -143,7 +143,7 @@ image comparison:
     to-env: production
     ignore-unchanged: true
     only-severities: critical,high
-    token: ${{ secrets.DOCKER_PAT }}
+    github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 The compare command analyzes the image and evaluates policy compliance, and

@@ -44,16 +44,13 @@ see [Remediation](../../policy/remediation.md).
 
 To integrate Docker Scout with your GitHub organization:
 
-1. Go to [Integrations](https://scout.docker.com/settings/integrations/) on the
-   Docker Scout Dashboard.
-2. Find the **GitHub** integration under the **Source code management**
-   section, and select **Integrate**.
-3. On the integration page that opens, select the
-   **Integrate GitHub app** button to open GitHub.
-4. Select the organization that you want to integrate.
-5. Select whether you want to integrate all repositories in the GitHub
+1. Go to [GitHub integration](https://scout.docker.com/settings/integrations/github/)
+   on the Docker Scout Dashboard.
+2. Select the **Integrate GitHub app** button to open GitHub.
+3. Select the organization that you want to integrate.
+4. Select whether you want to integrate all repositories in the GitHub
    organization or a manual selection of repositories.
-6. Select **Install & Authorize** to add the Docker Scout app to the
+5. Select **Install & Authorize** to add the Docker Scout app to the
    organization.
 
    This redirects you back to the Docker Scout Dashboard, which lists your

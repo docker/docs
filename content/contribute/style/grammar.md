@@ -13,7 +13,7 @@ An acronym is an abbreviation you would speak as a word, for example, ROM (for r
 
 An initialism is a type of acronym that comprises a group of initial letters used as an abbreviation for a name or expression. If you were using the acronym in a spoken conversation, you would enunciate each letter: H-T-M-L for Hypertext Markup Language.
 
-### Best practice:
+### Best practice
 
 - Spell out lesser-known acronyms or initialisms on first use, then follow with the acronym or initialism in parentheses. After this, throughout the rest of your page or document, use the acronym or initialism alone.
 > ‘You can use single sign-on (SSO) to sign in to Notion. You may need to ask your administrator to enable SSO.’
@@ -26,7 +26,7 @@ An initialism is a type of acronym that comprises a group of initial letters use
 
 Unless you're referring to UI text or user-defined text, you shouldn't add emphasis to text. Clear, front-loaded wording makes the subject of a sentence clear.
 
-### Best practice:
+### Best practice
 
 - Don't use bold to refer to a feature name.
 - Use italics sparingly, as this type of formatting can be difficult to read in digital experiences.
@@ -63,7 +63,7 @@ A contraction results from letters being left out from the original word or phra
 
 Following our conversational approach, it's acceptable to use contractions in almost all content types. Just don't get carried away. Too many contractions in a sentence can make it difficult to read.
 
-### Best practice:
+### Best practice
 
 - Stay consistent - don't switch between contractions and their spelled-out equivalents in body copy or UI text.
 - Avoid negative contractions (can't, don't, wouldn't, and shouldn't) whenever possible. Try to rewrite your sentence to align with our helpful approach that puts the focus on solutions, not problems.
@@ -79,7 +79,7 @@ When possible, use the month's full name (October 1, 2022). If there are space c
 
 In all UI content and technical documentation, use decimals instead of fractions.
 
-### Best practice:
+### Best practice
 
 - Always carry decimals to at least the hundredth place (33.76).
 - In tables, align decimals on the decimal point.
@@ -89,7 +89,7 @@ In all UI content and technical documentation, use decimals instead of fractions
 
 Lists are a great way to break down complex ideas and make them easier to read and scan.
 
-### Best practice:
+### Best practice
 
 - Bulleted lists should contain relatively few words or short phrases. For most content types, limit the number of items in a list to five.
 - Don’t add commas (,) or semicolons (;) to the ends of list items.

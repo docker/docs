@@ -145,39 +145,76 @@ For readability, it is recommended to explicitly set the attribute value to the 
 array `[]` (with `!reset null` or `!reset []`) so that it is clear that resulting attribute will be
 cleared.
 
-Merging the following example YAML trees:
+A base `compose.yaml` file:
 
 ```yaml
 services:
-  foo:
-    build: 
-      dockerfile: foo.Dockerfile
-    read_only: true
+  app:
+    image: myapp
+    ports:
+      - "8080:80" 
     environment:
-      FOO: BAR
+      FOO: BAR           
+```
+
+And an `overide.compose.yaml` file:
+
+```yaml
+services:
+  app:
+    image: myapp
+    ports: !reset []
+    environment:
+      FOO: !reset null
+```
+
+Results in:
+
+```yaml
+services:
+  app:
+    image: myapp
+```
+
+### Replace value
+
+> Available in Docker Compose version 2.24.4 and later
+
+While `!reset` can be used to remove a declaration from a Compose file using an override file, `!override` allows you 
+to fully replace an attribute, bypassing the standard merge rules. A typical example is to fully replace a resource definition, to rely on a distinct model but using the same name.
+
+A base `compose.yaml` file:
+
+```yaml
+services:
+  app:
+    image: myapp
     ports:
       - "8080:80"            
 ```
 
-```yaml
-services:
-  foo:
-    image: foo
-    build: !reset null
-    read_only: !reset false
-    environment:
-      FOO: !reset null
-    ports: !reset []
-```
-
-Result in a Compose application model equivalent to the YAML tree:
+To remove the original port, but expose a new one, the following override file is used:
 
 ```yaml
 services:
-  foo:
-    image: foo
-    build: null
-    read_only: false
-    environment: {}
-    ports: []
+  app:
+    ports: !override
+      - "8443:443" 
 ```
+
+This results in: 
+
+```yaml
+services:
+  app:
+    image: myapp
+    ports:
+      - "8443:443" 
+```
+
+If `!override` had not been used, both `8080:80` and `8443:443` would be exposed as per the [merging rules outlined above](#sequence). 
+
+## Additional resources
+
+For more information on how merge can be used to create a composite Compose file, see [Working with multiple Compose files](../multiple-compose-files/_index.md)
+

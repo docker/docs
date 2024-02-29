@@ -16,7 +16,7 @@ To get the example image:
 
 1. In Docker Desktop, select the search bar.
 2. In the search bar, specify `docker/welcome-to-docker`.
-3. Select **Pull** to pull the image from Docker Hub to you computer.
+3. Select **Pull** to pull the image from Docker Hub to your computer.
 
 ![Search Docker Desktop for the welcome-to-docker image](images/getting-started-search.webp?w=650&border=true)
 
@@ -55,7 +55,7 @@ In this walkthrough, you pushed and shared an image on Docker Hub.
 Related information:
 
 - Deep dive into the [Docker Hub manual](../../docker-hub/_index.md)
-- Learn more about the [docker tag](../../engine/reference/commandline/tag.md)
+- Learn more about the [docker tag](../../reference/cli/docker/image/tag.md)
   command
 
 ## Next steps

@@ -55,7 +55,7 @@ In the `compose.yaml` file, you need to uncomment all of the database instructio
 
 The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml {hl_lines="7-36"}
 services:
   server:
     build:
@@ -157,7 +157,7 @@ Watch](../../compose/file-watch.md).
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose
 Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml {hl_lines="14-17"}
 services:
   server:
     build:

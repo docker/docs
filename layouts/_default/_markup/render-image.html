@@ -15,6 +15,7 @@
   class="cursor-pointer hover:opacity-90"
 >
   <img
+    loading="lazy"
     src="{{ $imagePath }}"
     alt="{{ .Text }}"
     {{ with $width }}
@@ -34,11 +35,12 @@
       class="fixed z-20 inset-0 flex items-center justify-center bg-black/70 p-6"
     >
       <button
-        class="material-symbols-rounded fixed z-30 top-6 right-8 text-white text-5xl"
+        class="text-white fixed z-30 top-6 right-8 icon-svg"
       >
-        close
+        {{ partial "icon" "close" }}
       </button>
       <img
+        loading="lazy"
         class="rounded max-w-full max-h-full"
         src="{{ $imagePath }}"
         alt="{{ .Text }}"

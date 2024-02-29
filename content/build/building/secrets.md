@@ -15,7 +15,7 @@ secret mounts or SSH mounts, which expose secrets to your builds securely.
 
 Secret mounts expose secrets to the build containers as files. You [mount the
 secrets to the `RUN`
-instructions](../../engine/reference/builder.md#run---mounttypesecret) that
+instructions](../../reference/dockerfile.md#run---mounttypesecret) that
 need to access them, similar to how you would define a bind mount or cache
 mount.
 
@@ -25,7 +25,7 @@ RUN --mount=type=secret,id=mytoken \
 ```
 
 To pass a secret to a build, use the [`docker build --secret`
-flag](../../engine/reference/commandline/buildx_build.md#secret), or the
+flag](../../reference/cli/docker/buildx/build.md#secret), or the
 equivalent options for [Bake](../bake/reference.md#targetsecret).
 
 {{< tabs >}}
@@ -56,8 +56,8 @@ target "default" {
 ### Sources
 
 The source of a secret can be either a
-[file](../../engine/reference/commandline/buildx_build.md#file) or an
-[environment variable](../../engine/reference/commandline/buildx_build.md#env).
+[file](../../reference/cli/docker/buildx/build.md#file) or an
+[environment variable](../../reference/cli/docker/buildx/build.md#env).
 When you use the CLI or Bake, the type can be detected automatically. You can
 also specify it explicitly with `type=file` or `type=env`.
 
@@ -98,7 +98,7 @@ you can use the SSH mount instead of a secret mount. Cloning private Git
 repositories is a common use case for SSH mounts.
 
 The following example clones a private GitHub repository using a [Dockerfile
-SSH mount](../../engine/reference/builder.md#run---mounttypessh).
+SSH mount](../../reference/dockerfile.md#run---mounttypessh).
 
 ```dockerfile
 # syntax=docker/dockerfile:1
@@ -107,7 +107,7 @@ ADD git@github.com:me/myprivaterepo.git /src/
 ```
 
 To pass an SSH socket the build, you use the [`docker build --ssh`
-flag](../../engine/reference/commandline/buildx_build.md#ssh), or equivalent
+flag](../../reference/cli/docker/buildx/build.md#ssh), or equivalent
 options for [Bake](../bake/reference.md#targetssh).
 
 ```console

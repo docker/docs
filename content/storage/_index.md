@@ -77,9 +77,13 @@ When you mount a volume, it may be named or anonymous. Anonymous volumes are
 given a random name that's guaranteed to be unique within a given Docker host.
 Just like named volumes, anonymous volumes persist even if you remove the
 container that uses them, except if you use the `--rm` flag when creating the
-container. Docker automatically removes anonymous volume mounts for containers
-created with the `--rm` flag. See [Remove anonymous
-volumes](volumes.md#remove-anonymous-volumes).
+container, in which case the anonymous volume is destroyed.
+See [Remove anonymous volumes](volumes.md#remove-anonymous-volumes).
+If you create multiple containers after each other that use anonymous volumes,
+each container creates its own volume.
+Anonymous volumes aren't reused or shared between containers automatically.
+To share an anonymous volume between two or more containers,
+you must mount the anonymous volume using the random volume ID.
 
 Volumes also support the use of volume drivers, which allow you to store
 your data on remote hosts or cloud providers, among other possibilities.
@@ -105,6 +109,12 @@ You can't use Docker CLI commands to directly manage bind mounts.
 > powerful ability which can have security implications, including impacting
 > non-Docker processes on the host system.
 { .important }
+
+> **Tip**
+>
+> Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase?
+> Check out [Synchronized file shares](../desktop/synchronized-file-sharing.md). It provides fast and flexible host-to-VM file sharing by enhancing bind mount performance through the use of synchronized filesystem caches.
+{ .tip }
 
 ### tmpfs
 
@@ -196,7 +206,7 @@ If you use either bind mounts or volumes, keep the following in mind:
   in which some files or directories exist, these files or directories are
   obscured by the mount, just as if you saved files into `/mnt` on a Linux host
   and then mounted a USB drive into `/mnt`. The contents of `/mnt` would be
-  obscured by the contents of the USB drive until the USB drive were unmounted.
+  obscured by the contents of the USB drive until the USB drive was unmounted.
   The obscured files are not removed or altered, but are not accessible while the
   bind mount or volume is mounted.
 

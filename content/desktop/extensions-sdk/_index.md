@@ -10,7 +10,7 @@ grid:
     icon: "checklist"
     link: "/desktop/extensions-sdk/process/"
   - title: "Quickstart guide"
-    description: Follow the quickstart guide to create a basic Docker Extension quickly.
+    description: Follow the quickstart guide to create a basic Docker extension quickly.
     icon: "explore"
     link: "/desktop/extensions-sdk/quickstart/"
   - title: "View the design guidelines"
@@ -22,7 +22,7 @@ grid:
     icon: "publish"
     link: "/desktop/extensions-sdk/extensions/"
   - title: "Interacting with Kubernetes"
-    description: Find information on how to interact indirectly with a Kubernetes cluster from your Docker Extension.
+    description: Find information on how to interact indirectly with a Kubernetes cluster from your Docker extension.
     icon: "multiple_stop"
     link: "/desktop/extensions-sdk/dev/kubernetes/"
   - title: "Multi-arch extensions"

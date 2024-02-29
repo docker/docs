@@ -77,15 +77,15 @@ grid_resources:
   description: Understand the steps you can take to improve the security of your container.
   icon: category
   link: /develop/security-best-practices/
-- title: Docker Scout
-  description: Explore how Docker Scout can help you create a more secure software supply chain.
+- title: Supress CVEs with VEX
+  description: Learn how to suppress non-applicable or fixed vulnerabilities found in your images.
   icon: query_stats
-  link: /scout/
+  link: /scout/guides/vex/
 ---
 
 Docker provides security guardrails for both administrators and developers. 
 
-If you're an administrator, you can enforce sign in across Docker products for your developers, and 
+If you're an administrator, you can enforce sign-in across Docker products for your developers, and 
 scale, manage, and secure your instances of Docker Desktop with DevOps security controls like Enhanced Container Isolation and Registry Access Management. 
 
 For both administrators and developers, Docker provides security-specific products such as Docker Scout, for securing your software supply chain with proactive image vulnerability monitoring and remediation strategies. 

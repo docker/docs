@@ -6,23 +6,6 @@ title: Compose FAQs
 
 {{< include "compose-eol.md" >}}
 
-### How do I get help?
-
-Docker Compose is under active development. If you need help, would like to
-contribute, or simply want to talk about the project with like-minded
-individuals, we have a number of open channels for communication.
-
-- To report bugs or file feature requests, use the [issue tracker on Github](https://github.com/docker/compose/issues).
-
-- To talk about the project with people in real time, join the
-  `#docker-compose` channel on the [Docker Community Slack](https://dockr.ly/slack).
-
-- To contribute code submit a [pull request on Github](https://github.com/docker/compose/pulls).
-
-### Where can I find example Compose files?
-
-There are [many examples of Compose files on GitHub](https://github.com/docker/awesome-compose).
-
 ### What is the difference between `docker compose` and `docker-compose`
 
 Version one of the Docker Compose command-line binary was first released in 2014. It was written in Python, and is invoked with `docker-compose`. Typically, Compose V1 projects include a top-level version element in the compose.yml file, with values ranging from 2.0 to 3.8, which refer to the specific file formats.
@@ -54,7 +37,7 @@ containers.
 ### Why do my services take 10 seconds to recreate or stop?
 
 The `docker compose stop` command attempts to stop a container by sending a `SIGTERM`. It then waits
-for a [default timeout of 10 seconds](../engine/reference/commandline/compose_stop.md). After the timeout,
+for a [default timeout of 10 seconds](../reference/cli/docker/compose/stop.md). After the timeout,
 a `SIGKILL` is sent to the container to forcefully kill it. If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
@@ -90,10 +73,6 @@ system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
 [dumb-init](https://github.com/Yelp/dumb-init) or
 [tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
 handling `SIGTERM` properly.
-
-### Can I control service startup order?
-
-Yes, see [Controlling startup order](startup-order.md).
 
 ### How do I run multiple copies of a Compose file on the same host?
 

@@ -34,7 +34,7 @@ $ docker buildx build --push --platform=linux/amd64,linux/arm64 --tag=username/m
 ```
 
 You can then check the image manifest to see if the image is available for both
-architectures using the [`docker buildx imagetools` command](../../../engine/reference/commandline/buildx_imagetools.md):
+architectures using the [`docker buildx imagetools` command](../../../reference/cli/docker/buildx/imagetools/_index.md):
 
 ```console
 $ docker buildx imagetools inspect username/my-extension:0.0.1

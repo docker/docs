@@ -68,17 +68,17 @@ gracefully stops tasks on nodes in `Drain` mode and schedules the tasks on an
 `Active` node. The scheduler does not assign new tasks to nodes with `Drain`
 availability.
 
-Refer to the [`docker node update`](../../reference/commandline/node_update.md)
+Refer to the [`docker node update`](../../../reference/cli/docker/node/update.md)
 command line reference to see how to change node availability.
 
 ## Change roles
 
 You can promote a worker node to be a manager by running `docker node promote`.
 For example, you may want to promote a worker node when you
-take a manager node offline for maintenance. See [node promote](../../reference/commandline/node_promote.md).
+take a manager node offline for maintenance. See [node promote](../../../reference/cli/docker/node/promote.md).
 
 You can also demote a manager node to a worker node. See
-[node demote](../../reference/commandline/node_demote.md).
+[node demote](../../../reference/cli/docker/node/demote.md).
 
 
 ## Learn more

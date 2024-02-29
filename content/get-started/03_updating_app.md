@@ -98,7 +98,7 @@ To remove a container, you first need to stop it. Once it has stopped, you can r
 In this section, you learned how to update and rebuild a container, as well as how to stop and remove a container.
 
 Related information:
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [docker CLI reference](/reference/cli/docker/)
 
 ## Next steps
 

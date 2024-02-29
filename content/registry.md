@@ -4,6 +4,7 @@ description: The Docker Hub registry implementation
 keywords: registry, distribution, docker hub, spec, schema, api, manifest, auth
 aliases:
   - /registry/compatibility/
+  - /registry/configuration/
   - /registry/deploying/
   - /registry/deprecated/
   - /registry/garbage-collection/

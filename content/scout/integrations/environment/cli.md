@@ -12,7 +12,7 @@ GitHub and as a container image on Docker Hub. Use the client to invoke the
 `docker scout environment` command to assign your images to environments.
 
 For more information about how to use the `docker scout environment` command,
-refer to the [CLI reference](../../../engine/reference/commandline/scout_environment.md).
+refer to the [CLI reference](../../../reference/cli/docker/scout/environment.md).
 
 ## Examples
 

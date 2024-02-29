@@ -24,7 +24,23 @@ available resources. Deploy support is an optional aspect of the Compose Specifi
 described in detail in the [Compose Deploy Specification](deploy.md) documentation.
 If not implemented the `deploy` section is ignored and the Compose file is still considered valid.
 
+## annotations
+
+`annotations` defines annotations for the container. `annotations` can use either an array or a map.
+
+```yml
+annotations:
+  com.example.foo: bar
+```
+
+```yml
+annotations:
+  - com.example.foo=bar
+```
+
 ## attach
+
+> Available with Docker Compose version 2.20.0 and later
 
 When `attach` is defined and set to `false` Compose does not collect service logs,
 until you explicitly request it to.
@@ -187,7 +203,7 @@ cgroup_parent: m-executor-abcd
 command: bundle exec thin -p 3000
 ```
 
-The value can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+The value can also be a list, in a manner similar to [Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
 
 ```yaml
 command: [ "bundle", "exec", "thin", "-p", "3000" ]
@@ -206,8 +222,7 @@ Services can only access configs when explicitly granted by the `configs` attrib
 Compose reports an error if `config` doesn't exist on the platform or isn't defined in the
 [`configs` top-level element](08-configs.md) in the Compose file.
 
-There are two syntaxes defined for configs. To remain compliant to this specification, an implementation
-must support both syntaxes. Implementations must allow use of both short and long syntaxes within the same document.
+There are two syntaxes defined for configs: a short syntax and a long syntax.
 
 You can grant a service access to multiple configs, and you can mix long and short syntax.
 
@@ -423,6 +438,8 @@ Compose guarantees dependency services marked with
 
 ## develop
 
+> Available with Docker Compose version 2.22.0 and later.
+
 `develop` specifies the development configuration for maintaining a container in sync with source, as defined in the [Development Section](develop.md).
 
 ## device_cgroup_rules
@@ -506,7 +523,7 @@ entrypoint: /code/entrypoint.sh
 ```
 
 Alternatively, the value can also be a list, in a manner similar to the
-[Dockerfile](https://docs.docker.com/engine/reference/builder/#cmd):
+[Dockerfile](https://docs.docker.com/reference/dockerfile/#cmd):
 
 ```yml
 entrypoint:
@@ -551,6 +568,7 @@ env_file:
   - path: ./override.env
     required: false
 ```
+> `required` attribute is available with Docker Compose version 2.24.0 or later.
 
 Relative path are resolved from the Compose file's parent folder. As absolute paths prevent the Compose
 file from being portable, Compose warns you when such a path is used to set `env_file`.
@@ -638,7 +656,7 @@ When not explicitly set, `tcp` protocol is used.
 expose:
   - "3000"
   - "8000"
-  - "8080-8085/tcp
+  - "8080-8085/tcp"
 ```
 
 > **Note**
@@ -837,20 +855,6 @@ duplicates resulting from the merge are not removed.
 
 Any other allowed keys in the service definition should be treated as scalars.
 
-## annotations
-
-`annotations` defines annotations for the container. `annotations` can use either an array or a map.
-
-```yml
-annotations:
-  com.example.foo: bar
-```
-
-```yml
-annotations:
-  - com.example.foo=bar
-```
-
 ## external_links
 
 `external_links` link service containers to services managed outside of your Compose application.
@@ -934,7 +938,7 @@ been the case if `group_add` were not declared.
 ## healthcheck
 
 `healthcheck` declares a check that's run to determine whether or not the service containers are "healthy". It works in the same way, and has the same default values, as the
-[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/engine/reference/builder/#healthcheck)
+[HEALTHCHECK Dockerfile instruction](https://docs.docker.com/reference/dockerfile/#healthcheck)
 set by the service's Docker image. Your Compose file can override the values set in the Dockerfile. 
 
 ```yml
@@ -1018,9 +1022,7 @@ The init binary that is used is platform specific.
 
 ## ipc
 
-`ipc` configures the IPC isolation mode set by the service container. Available
-values are platform specific, but Compose defines specific values
-which must be implemented as described if supported:
+`ipc` configures the IPC isolation mode set by the service container.
 
 - `shareable`: Gives the container its own private IPC namespace, with a
   possibility to share it with other containers.
@@ -1030,17 +1032,6 @@ which must be implemented as described if supported:
 ```yml
     ipc: "shareable"
     ipc: "service:[service name]"
-```
-
-## uts
-
-`uts` configures the UTS namespace mode set for the service container. When unspecified
-it is the runtime's decision to assign a UTS namespace, if supported. Available values are:
-
-- `'host'`: Results in the container using the same UTS namespace as the host.
-
-```yml
-    uts: "host"
 ```
 
 ## isolation
@@ -1078,10 +1069,6 @@ results in a runtime error.
 
 ## links
 
-> **Note**
->
-> Availability of the `links` attribute is implementation specific.
-
 `links` defines a network link to containers in another service. Either specify both the service name and
 a link alias (`SERVICE:ALIAS`), or just the service name.
 
@@ -1118,13 +1105,53 @@ logging:
 The `driver` name specifies a logging driver for the service's containers. The default and available values
 are platform specific. Driver specific options can be set with `options` as key-value pairs.
 
+## mac_address
+
+> Available with Docker Compose version 2.24.0 and later.
+
+`mac_address` sets a MAC address for the service container.
+
+> **Note**
+> Container runtimes might reject this value (ie. Docker Engine >= v25.0). In that case, you should use [networks.mac_address](#mac_address) instead.
+
+## mem_limit
+
+_DEPRECATED: use [deploy.limits.memory](deploy.md#memory)_
+
+## mem_reservation
+
+_DEPRECATED: use [deploy.reservations.memory](deploy.md#memory)_
+
+## mem_swappiness
+
+`mem_swappiness` defines as a percentage, a value between 0 and 100, for the host kernel to swap out
+anonymous memory pages used by a container.
+
+- `0`: Turns off anonymous page swapping.
+- `100`: Sets all anonymous pages as swappable.
+
+The default value is platform specific.
+
+## memswap_limit
+
+`memswap_limit` defines the amount of memory the container is allowed to swap to disk. This is a modifier
+attribute that only has meaning if [`memory`](deploy.md#memory) is also set. Using swap lets the container write excess
+memory requirements to disk when the container has exhausted all the memory that is available to it.
+There is a performance penalty for applications that swap memory to disk often.
+
+- If `memswap_limit` is set to a positive integer, then both `memory` and `memswap_limit` must be set. `memswap_limit` represents the total amount of memory and swap that can be used, and `memory` controls the amount used by non-swap memory. So if `memory`="300m" and `memswap_limit`="1g", the container can use 300m of memory and 700m (1g - 300m) swap.
+- If `memswap_limit` is set to 0, the setting is ignored, and the value is treated as unset.
+- If `memswap_limit` is set to the same value as `memory`, and `memory` is set to a positive integer, the container does not have access to swap.
+- If `memswap_limit` is unset, and `memory` is set, the container can use as much swap as the `memory` setting, if the host container has swap memory configured. For instance, if `memory`="300m" and `memswap_limit` is not set, the container can use 600m in total of memory and swap.
+- If `memswap_limit` is explicitly set to -1, the container is allowed to use unlimited swap, up to the amount available on the host system.
+
 ## network_mode
 
-`network_mode` sets a service container's network mode. Available values are platform specific, but Compose defines specific values which must be implemented as described if supported:
+`network_mode` sets a service container's network mode. 
 
 - `none`: Turns off all container networking.
 - `host`: Gives the container raw access to the host's network interface.
-- `service:{name}`: Gives the containers access to the specified service only.
+- `service:{name}`: Gives the containers access to the specified service only. For more information, see [Container networks](../../network/_index.md#container-networks).
 
 ```yml
     network_mode: "host"
@@ -1234,7 +1261,7 @@ networks:
 
 `link_local_ips` specifies a list of link-local IPs. Link-local IPs are special IPs which belong to a well
 known subnet and are purely managed by the operator, usually dependent on the architecture where they are
-deployed. Implementation is platform specific.
+deployed.
 
 Example:
 
@@ -1281,44 +1308,6 @@ networks:
   app_net_2:
   app_net_3:
 ```
-
-## mac_address
-
-`mac_address` sets a MAC address for the service container.
-
-> **Note**
-> Container runtimes might reject this value (ie. Docker Engine >= v25.0). In that case, you should use [networks.mac_address](#mac_address) instead.
-
-## mem_limit
-
-_DEPRECATED: use [deploy.limits.memory](deploy.md#memory)_
-
-## mem_reservation
-
-_DEPRECATED: use [deploy.reservations.memory](deploy.md#memory)_
-
-## mem_swappiness
-
-`mem_swappiness` defines as a percentage, a value between 0 and 100, for the host kernel to swap out
-anonymous memory pages used by a container.
-
-- `0`: Turns off anonymous page swapping.
-- `100`: Sets all anonymous pages as swappable.
-
-The default value is platform specific.
-
-## memswap_limit
-
-`memswap_limit` defines the amount of memory the container is allowed to swap to disk. This is a modifier
-attribute that only has meaning if [`memory`](deploy.md#memory) is also set. Using swap lets the container write excess
-memory requirements to disk when the container has exhausted all the memory that is available to it.
-There is a performance penalty for applications that swap memory to disk often.
-
-- If `memswap_limit` is set to a positive integer, then both `memory` and `memswap_limit` must be set. `memswap_limit` represents the total amount of memory and swap that can be used, and `memory` controls the amount used by non-swap memory. So if `memory`="300m" and `memswap_limit`="1g", the container can use 300m of memory and 700m (1g - 300m) swap.
-- If `memswap_limit` is set to 0, the setting is ignored, and the value is treated as unset.
-- If `memswap_limit` is set to the same value as `memory`, and `memory` is set to a positive integer, the container does not have access to swap.
-- If `memswap_limit` is unset, and `memory` is set, the container can use as much swap as the `memory` setting, if the host container has swap memory configured. For instance, if `memory`="300m" and `memswap_limit` is not set, the container can use 600m in total of memory and swap.
-- If `memswap_limit` is explicitly set to -1, the container is allowed to use unlimited swap, up to the amount available on the host system.
 
 ## oom_kill_disable
 
@@ -1419,18 +1408,21 @@ expressed in the short form.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
 - `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
+- `name`: A human-readable name for the port, used to document it's usage within the service.
 
 ```yml
 ports:
-  - target: 80
+  - name: http
+    target: 80
     host_ip: 127.0.0.1
     published: "8080"
     protocol: tcp
     mode: host
 
-  - target: 80
+  - name: https
+    target: 443
     host_ip: 127.0.0.1
-    published: "8000-9000"
+    published: "8083-9000"
     protocol: tcp
     mode: host
 ```
@@ -1471,8 +1463,6 @@ services:
   `if_not_present` is considered an alias for this value for backward compatibility.
 * `build`: Compose builds the image. Compose rebuilds the image if it's already present.
 
-If `pull_policy` and `build` are both present, Compose builds the image by default. This behavior may be overridden in the toolchain, depending on the implementation. 
-
 ## read_only
 
 `read_only` configures the service container to be created with a read-only filesystem.
@@ -1504,7 +1494,6 @@ section of the Docker run reference page.
 
 `runtime` specifies which runtime to use for the service’s containers.
 
-The value of `runtime` is specific to the implementation.
 For example, `runtime` can be the name of [an implementation of OCI Runtime Spec](https://github.com/opencontainers/runtime-spec/blob/master/implementations.md), such as "runc".
 
 ```yml
@@ -1513,6 +1502,8 @@ web:
   command: true
   runtime: runc
 ```
+
+The default is `runc`. To use a different runtime, see [Alternative runtimes](../../engine/alternative-runtimes.md).
 
 ## scale
 
@@ -1566,9 +1557,7 @@ the service's containers.
 - `mode`: The [permissions](https://wintelguy.com/permissions-calc.pl) for the file to be mounted in `/run/secrets/`
   in the service's task containers, in octal notation.
   The default value is world-readable permissions (mode `0444`).
-  The writable bit must be ignored if set. The executable bit may be set.
-
-Note that the `uid`, `gid`, and `mode` attributes are implementation specific. 
+  The writable bit must be ignored if set. The executable bit may be set. 
 
 The following example sets the name of the `server-certificate` secret file to `server.crt`
 within the container, sets the mode to `0440` (group-readable), and sets the user and group
@@ -1706,6 +1695,17 @@ on platform configuration.
 
 ```yml
 userns_mode: "host"
+```
+
+## uts
+
+`uts` configures the UTS namespace mode set for the service container. When unspecified
+it is the runtime's decision to assign a UTS namespace, if supported. Available values are:
+
+- `'host'`: Results in the container using the same UTS namespace as the host.
+
+```yml
+    uts: "host"
 ```
 
 ## volumes

@@ -1,5 +1,5 @@
 ---
-description: Learn how to use repositories on Docker Hub
+description: Learn how to manage repositories on Docker Hub
 keywords: Docker, docker, trusted, registry, accounts, plans, Dockerfile, Docker Hub,
   webhooks, docs, documentation, manage, repos
 title: Manage repositories
@@ -34,7 +34,7 @@ repositories for your user account, upgrade your Docker Hub subscription from yo
 
 When consolidating personal repositories, you can pull private images from the initial repository and push them into another repository owned by you. To avoid losing your private images, perform the following steps:
 
-1. Navigate to [Docker Hub](https://hub.docker.com) create a new Docker ID and select the personal subscription.
+1. Navigate to [Docker Hub](https://hub.docker.com) create a new Docker ID and select a personal subscription.
 2. Using `docker login` from the CLI, sign in using your original Docker ID and pull your private images.
 3. Tag your private images with your newly created Docker ID, for example:
 

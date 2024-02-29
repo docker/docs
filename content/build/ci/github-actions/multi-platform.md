@@ -53,7 +53,7 @@ take a long time depending on the number of platforms and your Dockerfile.
 
 To solve this issue you can use a matrix strategy to distribute the build for
 each platform across multiple runners and create manifest list using the
-[`buildx imagetools create` command](../../../engine/reference/commandline/buildx_imagetools_create.md).
+[`buildx imagetools create` command](../../../reference/cli/docker/buildx/imagetools/create.md).
 
 The following workflow will build the image for each platform on a dedicated
 runner using a matrix strategy and push by digest. Then, the `merge` job will

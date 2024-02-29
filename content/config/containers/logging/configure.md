@@ -3,9 +3,11 @@ description: Learn how to configure logging driver for the Docker daemon
 keywords: docker, logging, driver
 title: Configure logging drivers
 aliases:
+  - /config/containers/logging/logentries/
   - /engine/reference/logging/overview/
   - /engine/reference/logging/
   - /engine/admin/reference/logging/
+  - /engine/admin/logging/logentries/
   - /engine/admin/logging/overview/
 ---
 
@@ -43,7 +45,7 @@ included with Docker, you can also implement and use [logging driver plugins](pl
 To configure the Docker daemon to default to a specific logging driver, set the
 value of `log-driver` to the name of the logging driver in the `daemon.json`
 configuration file. Refer to the "daemon configuration file" section in the
-[`dockerd` reference manual](/engine/reference/commandline/dockerd/#daemon-configuration-file)
+[`dockerd` reference manual](/reference/cli/dockerd/#daemon-configuration-file)
 for details.
 
 The default logging driver is `json-file`. The following example sets the default
@@ -196,7 +198,6 @@ see more options.
 | [`splunk`](splunk.md)         | Writes log messages to `splunk` using the HTTP Event Collector.                                             |
 | [`etwlogs`](etwlogs.md)       | Writes log messages as Event Tracing for Windows (ETW) events. Only available on Windows platforms.         |
 | [`gcplogs`](gcplogs.md)       | Writes log messages to Google Cloud Platform (GCP) Logging.                                                 |
-| [`logentries`](logentries.md) ([deprecated](../../../../engine/deprecated.md#logentries-logging-driver)) | Writes log messages to Rapid7 Logentries. |
 
 ## Limitations of logging drivers
 

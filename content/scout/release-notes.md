@@ -12,7 +12,30 @@ the `docker/scout-cli` [GitHub repository](https://github.com/docker/scout-cli/r
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
 for what's coming next.
 
-## 2024-01-12
+## 2024 Q1
+
+New features and enhancements released in Q1 of 2024.
+
+### 2024-01-26
+
+**Azure Container Registry** integration graduated from
+[Early Access](../release-lifecycle.md#early-access-ea) to
+[General Availability](../release-lifecycle.md#genera-availability-ga).
+
+For more information and setup instructions, see
+[Integrate Azure Container Registry](./integrations/registry/acr.md).
+
+### 2024-01-23
+
+New **Unapproved base images** policy, which lets you restrict which base
+images you allow in your builds. You define the allowed base images using a
+pattern. Base images whose image reference don't match the specified patterns
+cause the policy to fail.
+
+For more information, see
+[Unapproved base images](./policy/_index.md#unapproved-base-images).
+
+### 2024-01-12
 
 New **Default non-root user** policy, which flags images that would run as the
 `root` superuser with full system administration privileges by default.
@@ -21,7 +44,7 @@ runtime security.
 
 For more information, see [Default non-root user](./policy/_index.md#default-non-root-user).
 
-## 2024-01-11
+### 2024-01-11
 
 [Beta](../release-lifecycle.md#beta) launch of a new GitHub app for integrating
 Docker Scout with your source code management, and a remediation feature for
@@ -44,7 +67,11 @@ For more information about how to authorize the Docker Scout GitHub app on your
 source repositories, see
 [Integrate Docker Scout with GitHub](./integrations/source-code-management/github.md).
 
-## 2023-12-20
+## 2023 Q4
+
+New features and enhancements released in Q4 of 2023.
+
+### 2023-12-20
 
 **Azure Container Registry** integration graduated from
 [Beta](../release-lifecycle.md#beta) to
@@ -53,7 +80,7 @@ source repositories, see
 For more information and setup instructions, see
 [Integrate Azure Container Registry](./integrations/registry/acr.md).
 
-## 2023-12-06
+### 2023-12-06
 
 New [SonarQube](https://www.sonarsource.com/products/sonarqube/) integration
 and related policy. SonarQube is an open-source platform for continuous
@@ -67,7 +94,7 @@ For more information, see:
 - [Integration and setup instructions](./integrations/code-quality/sonarqube.md)
 - [Quality gates passed policy](./policy/_index.md#quality-gates-passed)
 
-## 2023-12-01
+### 2023-12-01
 
 [Beta](../release-lifecycle.md#beta) release of a new **Azure Container
 Registry** (ACR) integration, which lets Docker Scout pull and analyze images
@@ -76,7 +103,7 @@ in ACR repositories automatically.
 To learn more about the integration and how to get started, see
 [Integrate Azure Container Registry](./integrations/registry/acr.md).
 
-## 2023-11-21
+### 2023-11-21
 
 New **configurable policies** feature, which enables you to tweak the
 out-of-the-box policies according to your preferences, or disable them entirely
@@ -89,7 +116,7 @@ policies for your organization include:
 
 For more information, see [Configurable policies](./policy/configure.md).
 
-## 2023-11-10
+### 2023-11-10
 
 New **Supply chain attestations** policy for helping you track whether your
 images are built with SBOM and provenance attestations. Adding attestations to
@@ -99,7 +126,7 @@ often a prerequisite for doing more.
 See [Supply chain attestations policy](./policy/_index.md#supply-chain-attestations)
 for details.
 
-## 2023-11-01
+### 2023-11-01
 
 New **High-profile vulnerabilities** policy, which ensures your artifacts are
 free from a curated list of vulnerabilities widely recognized to be risky.
@@ -107,7 +134,7 @@ free from a curated list of vulnerabilities widely recognized to be risky.
 For more information, see
 [High-profile vulnerabilities policy](./policy/_index.md#high-profile-vulnerabilities).
 
-## 2023-10-04
+### 2023-10-04
 
 This marks the General Availability (GA) release of Docker Scout.
 
@@ -118,7 +145,7 @@ The following new features are included in this release:
 - [Sysdig integration](#sysdig-integration)
 - [JFrog Artifactory integration](#jfrog-artifactory-integration)
 
-### Policy evaluation
+#### Policy evaluation
 
 Policy Evaluation is an early access feature that helps you ensure software
 integrity and track how your artifacts are doing over time. This release ships
@@ -141,7 +168,7 @@ You can view and evaluate policy status for images using the Docker Scout
 Dashboard and the `docker scout policy` CLI command. For more information,
 refer to the [Policy Evaluation documentation](./policy/_index.md).
 
-### Amazon ECR integration
+#### Amazon ECR integration
 
 The new Amazon Elastic Container Registry (ECR) integration enables image
 analysis for images hosted in ECR repositories.
@@ -156,7 +183,7 @@ repositories, activating Docker Scout for specific repositories, and removing
 the integration if needed. To learn more, refer to the [Amazon ECR integration
 documentation](./integrations/registry/ecr.md).
 
-### Sysdig integration
+#### Sysdig integration
 
 The new Sysdig integration gives you real-time security insights for your
 Kubernetes runtime environments.
@@ -169,7 +196,7 @@ into memory, using VEX documents.
 For more information and getting started, see [Sysdig integration
 documentation](./integrations/environment/sysdig.md).
 
-### JFrog Artifactory integration
+#### JFrog Artifactory integration
 
 The new JFrog Artifactory integration enables automatic image analysis on
 Artifactory registries.
@@ -181,7 +208,7 @@ for new images, performs analysis, and uploads results to Docker Scout, all
 while preserving the integrity of image data. Learn more in the [Artifactory
 integration documentation](./integrations/registry/artifactory.md)
 
-### Known limitations
+#### Known limitations
 
 - Image analysis only works for Linux images
 - Docker Scout can't process images larger than 12GB in compressed size

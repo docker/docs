@@ -4,38 +4,38 @@ description: Learn about the Docker Build Cloud subscriptions plans and features
 keywords: subscription, pro, team, business, features, build, cloud, Build Cloud, remote builder
 ---
 
-You can enhance your teams' builds with a Build Cloud subscription. This page describes the features available for the different subscription tiers.
+You can enhance your teams' builds with a Build Cloud subscription. This page describes the features available for the different subscription tiers. To compare features available for each tier, see [Docker Build Cloud pricing](https://www.docker.com/products/build-cloud/#pricing).
 
 ## Docker Build Cloud Starter
 
-If you have an existing [Docker subscription](./details.md), Build Cloud is included. The features available vary depending on your subscription tier.
+If you have an existing [Docker Core subscription](./details.md), a base level of Build Cloud minutes and cache are included. The features available vary depending on your Docker Core subscription tier.
 
-### Docker Personal plus Build Cloud
+### Docker Personal
 
 - 50 build minutes every month
 - Available for one user
 - 1 parallel build
 
-### Docker Pro plus Build Cloud
+### Docker Pro
 
 - 100 build minutes every month
 - Available for one user
 - 4 parallel builds
 
-### Docker Team plus Build Cloud
+### Docker Team
 
-- 400 build minutes every month
+- 400 build minutes every month shared across your organization
 - Option to onboard up to 100 members
 - Can buy additional seats to add more minutes
 
-### Docker Business plus Build Cloud
+### Docker Business
 
-- All the features listed for Docker Team plus Build Cloud
-- 800 build minutes every month
+- All the features listed for Docker Team
+- 800 build minutes every month shared across your organization
 
 ## Docker Build Cloud Team
 
-You can upgrade the starter plan for any tier to enhance your developers' experience with the following features:
+You can upgrade any tier to enhance your developers' experience with the following features:
 
 - 200 additional build minutes per seat
 - Option to buy reserve minutes
@@ -50,4 +50,4 @@ To learn how to buy this subscription, see [Docker Build Cloud billing](../billi
 
 ## Docker Build Cloud Enterprise
 
-For enterprise features such as paying via invoice and additional build minutes, [contact sales](https://www.docker.com/pricing/contact-sales/).
+For enterprise features such as paying via invoice and additional build minutes, [contact sales](https://www.docker.com/products/build-cloud/#contact_sales).

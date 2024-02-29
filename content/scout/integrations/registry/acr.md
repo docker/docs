@@ -4,11 +4,6 @@ keywords: docker scout, acr, azure, integration, image analysis, security, cves
 title: Azure Container Registry integration
 ---
 
-> **Early Access feature**
->
-> The Azure Container Registry (ACR) integration is currently in [Early Access](../../../release-lifecycle.md#early-access-ea).
-{ .experimental }
-
 Integrating Docker Scout with Azure Container Registry (ACR) lets you view
 image insights for images hosted in ACR repositories. After integrating Docker
 Scout with ACR and activating Docker Scout for a repository, pushing an image
@@ -114,7 +109,7 @@ redirected to the Azure registry summary page, which shows you all your Azure
 integrations for the current organization.
 
 Next, activate Docker Scout for the repositories that you want to analyze in
-[repository settings](../../dashboard.md#repository-settings). When you enable
+[repository settings](https://scout.docker.com/settings/repos/).
 
 After activating repositories, images that you push are analyzed by Docker
 Scout. The analysis results appear in the Docker Scout Dashboard.
@@ -131,14 +126,12 @@ latest image version automatically.
 
 To remove an ACR integration:
 
-1. Go to [Integrations](https://scout.docker.com/settings/integrations/) on the
-   Docker Scout Dashboard.
-2. Select the **Analyze my images from another registry** filter option.
-3. Find **Azure Container Registry** in the list, and select **Manage**.
-4. Find the ACR integration that you want to remove, and select the **Remove**
+1. Go to the [ACR integration page](https://scout.docker.com/settings/integrations/azure/)
+   on the Docker Scout Dashboard.
+2. Find the ACR integration that you want to remove, and select the **Remove**
    button.
-5. In the dialog that opens, confirm by selecting **Remove**.
-6. After removing the integration in the Docker Scout Dashboard, also remove
+3. In the dialog that opens, confirm by selecting **Remove**.
+4. After removing the integration in the Docker Scout Dashboard, also remove
    the Azure resources related to the integration:
 
    - The `docker-scout-readonly-token` token for the container registry.
