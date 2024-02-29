@@ -77,10 +77,10 @@ grid_resources:
   description: Understand the steps you can take to improve the security of your container.
   icon: category
   link: /develop/security-best-practices/
-- title: Docker Scout
-  description: Explore how Docker Scout can help you create a more secure software supply chain.
+- title: Supress CVEs with VEX
+  description: Learn how to suppress non-applicable or fixed vulnerabilities found in your images.
   icon: query_stats
-  link: /scout/
+  link: /scout/guides/vex/
 ---
 
 Docker provides security guardrails for both administrators and developers. 
