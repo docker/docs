@@ -552,6 +552,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - [`docker init`](../reference/cli/docker/init.md) now supports ASP.NET
 - Increased performance of exposed ports on macOS, for example with `docker run -p`.
 
+### Removed
+
+- Removed Compose V1 from Docker Desktop as it has stopped receiving updates.  Compose V2 has replaced it and is now integrated into all current Docker Desktop versions. For more information, see [Migrate to Compose V2](../compose/migrate.md).
+
 ### Bug fixes and enhancements
 
 #### For all platforms

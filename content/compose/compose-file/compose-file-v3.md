@@ -6,6 +6,7 @@ keywords: docker compose ports, docker compose version 3, docker-compose memory 
 title: Compose file version 3 reference
 toc_max: 4
 toc_min: 1
+sitemap: false
 ---
 
 {{< include "compose-eol.md" >}}
