@@ -38,7 +38,7 @@ Here you can find:
 - How many repositories are Scout-enabled
 - Your subscription renewal date
 
-Renewals charge to the original credit card used to buy Docker Scout Team. To update your payment method, see [Add or update a payment method](/billing/payment-method/).
+Renewals charge to the original credit card used to buy Docker Scout Team. Select the **Payment methods and billing history** link to update your payment information or view past invoices.
 
 ### Update number of repositories for your subscription
 
@@ -75,10 +75,11 @@ The number of repositories updates on your next billing cycle.
 
 You can downgrade from Docker Scout Team or Docker Scout Business to a Docker Scout Free subscription at anytime before the renewal date. Your subscription features remain available until the end of your billing cycle.
 
-> **Note**
+> **Tip**
 >
-> You can't downgrade from Docker Scout Business to Docker Scout Team.
+> To downgrade from Docker Scout Business to Docker Scout Team, [contact](https://hub.docker.com/support/contact) your account manager to cancel so you can start a Docker Scout Team subscription.
 >
+{ .tip }
 
 1. Sign in to [Docker Scout](https://scout.docker.com/) with your Docker ID.
 2. Select your personal account or organization namespace from the drop-down in the navigation menu on the left side of the screen.
