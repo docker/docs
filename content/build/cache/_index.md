@@ -50,7 +50,11 @@ anything differently, they still need to re-run.
 
 > **Note**
 >
-> Suppose you have a `RUN apt-get update && apt-get upgrade -y` step in your
+> Suppose you have a
+> ```text
+> RUN apt-get update && apt-get upgrade -y
+> ``` 
+> step in your
 > Dockerfile to upgrade all the software packages in your Debian-based image to
 > the latest version.
 >
