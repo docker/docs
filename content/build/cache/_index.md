@@ -50,9 +50,13 @@ anything differently, they still need to re-run.
 
 > **Note**
 >
-> Suppose you have a `RUN apt-get update && apt-get upgrade -y` step in your
-> Dockerfile to upgrade all the software packages in your Debian-based image to
-> the latest version.
+> Suppose you have a step in your Dockerfile
+> to upgrade all the software packages in your
+> Debian-based image to the latest version:
+>
+> ```dockerfile
+> RUN apt-get update && apt-get upgrade -y
+> ```
 >
 > This doesn't mean that the images you build are always up to date. Rebuilding
 > the image on the same host one week later will still get you the same packages
