@@ -1321,6 +1321,8 @@ Manuals:
       title: Overview
     - path: /scout/quickstart/
       title: Quickstart
+    - path: /scout/install/
+      title: Install
     - sectiontitle: Explore Docker Scout
       section:
       - path: /scout/dashboard/
