@@ -151,6 +151,8 @@ Guides:
 
 - sectiontitle: Use-case guides {{< badge color=violet text=New >}}
   section:
+    - path: /guides/use-case/
+      title: Overview
     - sectiontitle: Generative AI
       section:
       - sectiontitle: PDF analysis and chat

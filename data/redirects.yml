@@ -689,3 +689,6 @@
   - /engine/reference/builder/
 "/get-started/04_sharing_app":
   - /go/get-started-sharing/
+
+"/reference/cli/docker/debug/":
+  - /go/debug-cli/
