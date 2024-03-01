@@ -62,6 +62,12 @@ To trigger image analysis for an image in a registry, push the image to a
 registry that's integrated with Docker Scout, to a repository where image
 analysis is activated.
 
+> **Note**
+>
+> Image analysis on the Docker Scout platform has a maximum image file size
+> limit of 10 GB, unless the image has an SBOM attestation.
+> See [Maximum image size](#maximum-image-size).
+
 1. Sign in with your Docker ID, either using the `docker login` command or the
    **Sign in** button in Docker Desktop.
 2. Build and push the image that you want to analyze.
@@ -96,8 +102,8 @@ You can analyze local images with Docker Scout using Docker Desktop or the
 
 > **Note**
 >
-> There is a 3 GB size limit on images analyzed by Docker Scout in Docker
-> Desktop.
+> Docker Desktop background indexing supports images up to 10 GB in size.
+> See [Maximum image size](#maximum-image-size).
 
 To analyze an image locally using the Docker Desktop GUI:
 
@@ -247,3 +253,15 @@ For more information, see [Vulnerability Metrics (NIST)](https://nvd.nist.gov/vu
 Note that, given the advisory prioritization and fallback mechanism described
 earlier, severity ratings displayed in Docker Scout may deviate from this
 rating system.
+
+## Maximum image size
+
+Image analysis on the Docker Scout platform, and analysis triggered by background
+indexing in Docker Desktop, has an image file size limit of 10 GB (uncompressed).
+To analyze images larger than that, you can either:
+
+- Attach [SBOM attestations](../build/attestations/sbom.md) at build-time
+- Use the [CLI](#cli) to analyze the image locally
+
+Images analyzed locally with the CLI and images with SBOM attestations
+have no maximum file size.
