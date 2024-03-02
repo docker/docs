@@ -156,6 +156,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY_IMAGE }}
+          tags: type=raw,value=<str>
       -
         name: Login to Docker Hub
         uses: docker/login-action@v3
