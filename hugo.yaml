@@ -39,6 +39,8 @@ related:
 build:
   buildStats:
     enable: true
+    disableIDs: true
+    disableTags: true
   cachebusters:
     - source: assets/watching/hugo_stats\.json
       target: styles\.css

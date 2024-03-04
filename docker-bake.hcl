@@ -27,7 +27,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test"]
+  targets = ["lint", "test", "validate-stats"]
 }
 
 target "test" {
@@ -166,5 +166,15 @@ target "validate-upstream" {
     UPSTREAM_COMMIT = UPSTREAM_COMMIT
   }
   target = "validate-upstream"
+  output = ["type=cacheonly"]
+}
+
+target "update-stats" {
+  target = "update-stats"
+  output = ["."]
+}
+
+target "validate-stats" {
+  target = "validate-stats"
   output = ["type=cacheonly"]
 }

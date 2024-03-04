@@ -34,6 +34,17 @@ RUN hugo --gc --minify -d /out -e $HUGO_ENV -b $DOCS_URL
 FROM scratch as release
 COPY --from=build /out /
 
+FROM scratch as update-stats
+COPY --from=build /src/hugo_stats.json /hugo_stats.json
+
+FROM build as validate-stats
+RUN <<EOF
+if [ -n "$(git status --porcelain -- hugo_stats.json)" ]; then
+  echo >&2 'ERROR: hugo_stats.json differs. Update with `docker buildx bake update-stats`'
+  exit 1
+fi
+EOF
+
 FROM davidanson/markdownlint-cli2:v0.12.1 as lint
 USER root
 RUN --mount=type=bind,target=. \
