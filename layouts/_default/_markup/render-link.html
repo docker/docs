@@ -7,7 +7,7 @@
     target="_blank"
     rel="noopener">
       {{- .Text | safeHTML -}}
-      <span class="icon-svg icon-xs icon-top">
+      <span class="pl-1 icon-svg icon-sm">
         {{- partial "icon" "open_in_new" -}}
       </span></a>
 {{- else if (strings.HasPrefix $url "/") -}}

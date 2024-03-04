@@ -8,6 +8,11 @@
   :root {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    scrollbar-color: theme(colors.gray.light.400) theme(colors.black / 0.05);
+    &.dark {
+      scrollbar-color: theme(colors.gray.dark.800) theme(colors.white / 0.10);
+    }
   }
 }
 
