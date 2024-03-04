@@ -74,7 +74,7 @@ For information about the metadata stored by Docker Scout, see [Data handling](.
 
 File sharing (bind mount from the host filesystem) uses a user-space crafted file server (running in `com.docker.backend` as the user running Docker Desktop), so containers can’t gain any access that the user on the host doesn’t already have.
 
-### How are Extensions within the Marketplace vetting for security prior to placement? 
+### How are extensions within the Marketplace vetted for security prior to placement? 
 
 Security vetting for extensions is on our roadmap however this vetting isn't currently done. 
 

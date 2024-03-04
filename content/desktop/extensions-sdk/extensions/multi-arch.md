@@ -11,14 +11,14 @@ It is highly recommended that, at a minimum, your extension is supported for the
 
 Docker Desktop retrieves the extension image according to the user’s system architecture. If the extension does not provide an image that matches the user’s system architecture, Docker Desktop is not able to install the extension. As a result, users can’t run the extension in Docker Desktop.
 
-### Build and push for multiple architectures
+## Build and push for multiple architectures
 
 If you created an extension from the `docker extension init` command, the
 `Makefile` at the root of the directory includes a target with name
 `push-extension`.
 
-You can do `make push-extension` to build your extension against both
-`linux/amd64` and `linux/arm64` platforms, and push them to DockerHub.
+You can run `make push-extension` to build your extension against both
+`linux/amd64` and `linux/arm64` platforms, and push them to Docker Hub.
 
 For example:
 
@@ -52,22 +52,22 @@ Manifests:
   Platform:  linux/arm64
 ```
 
-> Having trouble pushing the image?
+> **Tip**
 >
-> Ensure you are logged into DockerHub. Otherwise, run `docker login` to authenticate.
+> If you're having trouble pushing the image, make sure you're signed in to Docker Hub. Otherwise, run `docker login` to authenticate.
 { .tip }
 
 For more information, see [Multi-platform images](../../../build/building/multi-platform.md) page.
 
-### Adding multi-arch binaries
+## Adding multi-arch binaries
 
 If your extension includes some binaries that deploy to the host, it’s important that they also have the right architecture when building the extension against multiple architectures.
 
 Currently, Docker does not provide a way to explicitly specify multiple binaries for every architecture in the `metadata.json` file. However, you can add architecture-specific binaries depending on the `TARGETARCH` in the extension’s `Dockerfile`.
 
-The example below shows an extension that uses a binary as part of its operations. The extension needs to run both in Docker Desktop for Mac and Windows.
+The following example shows an extension that uses a binary as part of its operations. The extension needs to run both in Docker Desktop for Mac and Windows.
 
-In the `Dockerfile`, we download the binary depending on the target architecture:
+In the `Dockerfile`, download the binary depending on the target architecture:
 
 ```Dockerfile
 #syntax=docker/dockerfile:1.3-labs
@@ -97,7 +97,7 @@ LABEL org.opencontainers.image.title="example-extension" \
 COPY --from=dl /out /
 ```
 
-In the `metadata.json` file, we specify the path for every binary on every platform:
+In the `metadata.json` file, specify the path for every binary on every platform:
 
 ```json
 {
@@ -133,9 +133,9 @@ As a result, when `TARGETARCH` equals:
 - `arm64`, the `kubectl` binary fetched corresponds to the `arm64` architecture, and is copied to `/darwin/kubectl` in the final stage.
 - `amd64`, two `kubectl` binaries are fetched. One for Darwin and another for Windows. They are copied to `/darwin/kubectl` and `/windows/kubectl.exe` respectively, in the final stage.
 
-> Note
+> **Note**
 >
-> The binary destination path for darwin is darwin/kubectl in both cases. The only change is the architecture-specific binary that is downloaded.
+> The binary destination path for Darwin is `darwin/kubectl` in both cases. The only change is the architecture-specific binary that is downloaded.
 
 When the extension is installed, the extension framework copies the binaries from the extension image at `/darwin/kubectl` for Darwin, or `/windows/kubectl.exe` for Windows, to a specific location in the user’s host filesystem.
 

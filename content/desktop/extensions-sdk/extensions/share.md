@@ -1,10 +1,8 @@
 ---
 title: Share your extension
-description: Docker extension distribution
+description: Share your extension with a share link
 keywords: Docker, extensions, share
 ---
-
-## Share your extension with others
 
 Once your extension image is accessible on Docker Hub, anyone with access to the image can install the extension.
 
@@ -12,9 +10,9 @@ People can install your extension by typing `docker extension install my/awesome
 
 However, this option doesn't provide a preview of the extension before it's installed.
 
-## Share with URL
+## Createa a share URL
 
-Docker now allows you to share your extensions using a URL.
+Docker lets you share your extensions using a URL.
 
 When people navigate to this URL, it opens Docker Desktop and displays a preview of your extension in the same way as an extension in the Marketplace. From the preview, users can then select **Install**.
 
@@ -32,4 +30,6 @@ To generate this link you can either:
 
   ![Share button](images/list-preview.png)
 
-Previews of the extension description or screenshots, for example, are created using [extension labels](labels.md).
+> **Note**
+>
+> Previews of the extension description or screenshots, for example, are created using [extension labels](labels.md).

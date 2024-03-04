@@ -10,7 +10,7 @@ In order to improve the developer experience, Docker Desktop provides a set of t
 
 ### Open Chrome DevTools
 
-In order to open the Chrome DevTools for your extension when you click on the extension tab, run:
+In order to open the Chrome DevTools for your extension when you select the **Extensions** tab, run:
 
 ```console
 $ docker extension dev debug <name-of-your-extensions>
@@ -22,7 +22,7 @@ Each subsequent click on the extension tab also opens Chrome DevTools. To stop t
 $ docker extension dev reset <name-of-your-extensions>
 ```
 
-After an extension is deployed, it is also possible to open Chrome DevTools from the UI extension part using a variation of the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code). Click on the extension tab, and then hit the key sequence `up, up, down, down, left, right, left, right, p, d, t`.
+After an extension is deployed, it is also possible to open Chrome DevTools from the UI extension part using a variation of the [Konami Code](https://en.wikipedia.org/wiki/Konami_Code). Seletc the **Extensions** tab, and then hit the key sequence `up, up, down, down, left, right, left, right, p, d, t`.
 
 ### Hot reloading whilst developing the UI
 
