@@ -38,7 +38,7 @@
 {{ end }}
 {{/* preload Roboto Flex as it's a critical font: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload */}}
 <link href="/assets/fonts/RobotoFlex.woff2" rel="preload" as="font" type="font/woff2" crossorigin />
-{{ partial "utils/css.html" . }}
+{{ partialCached "utils/css.html" "-" }}
 {{ $theme := resources.Get "js/theme.js" | js.Build (dict "minify" true) }}
 <script>{{ $theme.Content | safeJS }}</script>
 {{ $js := resources.Match "js/src/**.js"
@@ -55,4 +55,4 @@
 }}
 <script defer src="{{ $js.Permalink }}"></script>
 <link rel="preconnect" href="https://{{ site.Params.algolia.appid }}-dsn.algolia.net" crossorigin />
-{{ partialCached "utils/resources.html" . }}
+{{ partialCached "utils/resources.html" "-" }}

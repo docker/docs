@@ -12,7 +12,6 @@ module.exports = {
             'pre code': false,
             'code::before': false,
             'code::after': false,
-            table: false,
             // light colors for prose
             "--tw-prose-body": theme("colors.black"),
             "--tw-prose-headings": theme("colors.black"),

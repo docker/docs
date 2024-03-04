@@ -33,7 +33,7 @@
         <tr>
           <th class="text-left w-32 flex items-center gap-2">
             <span>Aliases</span>
-            {{ partial "tooltip.html" "An alias is a short or memorable alternative for a longer command." }}
+            {{ partialCached "tooltip.html" "An alias is a short or memorable alternative for a longer command." "cli-alias" }}
           </th>
           <td>
             <div class="flex gap-3">
@@ -71,19 +71,19 @@
     {{ end }}
     {{ with $data.kubernetes }}
       <p>
-        {{ partial "components/badge.html" (dict "color" "blue" "content" "Kubernetes") }}
+        {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Kubernetes") "k8s" }}
         This command works with the Kubernetes orchestrator.
       </p>
     {{ end }}
     {{ with $data.swarm }}
       <p>
-        {{ partial "components/badge.html" (dict "color" "blue" "content" "Swarm") }}
+        {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Swarm") "swarm" }}
         This command works with the Swarm orchestrator.
       </p>
     {{ end }}
     {{ with $data.long }}
       {{ $heading := dict "level" 2 "text" "Description" }}
-      {{ partial "heading.html" $heading }}
+      {{ partialCached "heading.html" $heading "cli-description" }}
       {{ $subHeadings := (strings.FindRE `(?m:#{3,4} .*)` .) }}
       {{ $.Scratch.Add "headings" $heading }}
       {{ range $subHeadings }}
@@ -97,7 +97,7 @@
       {{ $opts := where . "hidden" false }}
       {{ with $opts }}
         {{ $heading := dict "level" 2 "text" "Options" }}
-        {{ partial "heading.html" $heading }}
+        {{ partialCached "heading.html" $heading "cli-options" }}
         {{ $.Scratch.Add "headings" $heading }}
         <table>
           <thead>
@@ -129,22 +129,22 @@
                 </td>
                 <td>
                   {{ with .min_api_version }}
-                    {{ partial "components/badge.html" (dict "color" "blue" "content" (printf "API %s+" .)) }}
+                    {{ partialCached "components/badge.html" (dict "color" "blue" "content" (printf "API %s+" .)) "api" . }}
                   {{ end }}
                   {{ with .deprecated }}
-                    {{ partial "components/badge.html" (dict "color" "red" "content" "Deprecated") }}
+                    {{ partialCached "components/badge.html" (dict "color" "red" "content" "Deprecated") "deprecated" }}
                   {{ end }}
                   {{ with .experimental }}
-                    {{ partial "components/badge.html" (dict "color" "amber" "content" "experimental (daemon)") }}
+                    {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (daemon)") "exp" }}
                   {{ end }}
                   {{ with .experimentalcli }}
-                    {{ partial "components/badge.html" (dict "color" "amber" "content" "experimental (CLI)") }}
+                    {{ partialCached "components/badge.html" (dict "color" "amber" "content" "experimental (CLI)") "exp-cli" }}
                   {{ end }}
                   {{ with .kubernetes }}
-                    {{ partial "components/badge.html" (dict "color" "blue" "content" "Kubernetes") }}
+                    {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Kubernetes") "k8s" }}
                   {{ end }}
                   {{ with .swarm }}
-                    {{ partial "components/badge.html" (dict "color" "blue" "content" "Swarm") }}
+                    {{ partialCached "components/badge.html" (dict "color" "blue" "content" "Swarm") "swarm" }}
                   {{ end }}
                   {{ if .description }}
                     {{/* replace newlines in long desc with break tags */}}
@@ -159,7 +159,7 @@
     {{ end }}
     {{ with $data.examples }}
       {{ $heading := dict "level" 2 "text" "Examples" }}
-      {{ partial "heading.html" $heading }}
+      {{ partialCached "heading.html" $heading "cli-examples" }}
       {{ $subHeadings := (strings.FindRE `(?m:#{3,4} .*)` .) }}
       {{ $.Scratch.Add "headings" $heading }}
       {{ range $subHeadings }}
@@ -171,7 +171,7 @@
     {{ end }}
     {{ if eq .Kind "section" }}
       {{ $heading := dict "level" 2 "text" "Subcommands" }}
-      {{ partial "heading.html" $heading }}
+      {{ partialCached "heading.html" $heading "cli-subcommands" }}
       {{ $.Scratch.Add "headings" $heading }}
       <table>
         <thead>
