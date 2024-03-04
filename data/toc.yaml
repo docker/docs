@@ -2216,8 +2216,6 @@ FAQ:
       title: General
     - path: /faq/security/networking-and-vms/
       title: Networking and VMs
-    - path: /faq/security/settings-management/
-      title: Settings Management
     - path: /faq/security/eci-faq/
       title: Enhanced Container Isolation
     - sectiontitle: Single Sign-On
