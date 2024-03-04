@@ -54,12 +54,14 @@ the Azure resources.
 {{< accordion title="JSON template" >}}
 
 {{< acr-template.inline >}}
-{{ $data := data.GetJSON "https://prod-scout-integration-templates.s3.amazonaws.com/latest/acr_token_template.json" }}
+{{ with resources.GetRemote "https://prod-scout-integration-templates.s3.amazonaws.com/latest/acr_token_template.json" }}
+{{ $data := .Content | transform.Unmarshal }}
 
 ```json
 {{ transform.Remarshal "json" $data }}
 ```
 
+{{ end }}
 {{< /acr-template.inline >}}
 
 {{< /accordion >}}
