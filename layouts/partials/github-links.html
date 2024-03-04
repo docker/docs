@@ -2,21 +2,21 @@
 {{ with .File }}
 {{ if not (in .Filename "/_vendor/") }}
 <p class="flex items-center gap-2">
-  <span class="icon-svg">{{ partial "icon" "edit" }}</span>
+  <span class="icon-svg">{{ partialCached "icon" "edit" "edit" }}</span>
   <a class="link" target="_blank" rel="noopener"
     href="{{ site.Params.repo }}/edit/main/content/{{ .Path }}">{{- T "editPage" -}}
     <span class="icon-svg icon-xs">
-      {{ partial "icon" "open_in_new" }}
+      {{ partialCached "icon" "open_in_new" "open_in_new" }}
     </span></a>
 </p>
 {{ end }}
 {{ end }}
 <p class="flex items-center gap-2">
-  <span class="icon-svg">{{ partial "icon" "done" }}</span>
+  <span class="icon-svg">{{ partialCached "icon" "done" "done" }}</span>
   <a class="link" target="_blank" rel="noopener"
     href="{{ site.Params.repo }}/issues/new?template=doc_issue.yml&location={{ .Permalink }}&labels=status%2Ftriage">{{- T "requestChanges" -}}
     <span class="icon-svg icon-xs">
-      {{ partial "icon" "open_in_new" }}
+      {{ partialCached "icon" "open_in_new" "open_in_new" }}
     </span></a>
   </a>
 </p>

@@ -1,8 +1,8 @@
 <div x-data="{ open: false }" class="border border-gray-light-200 dark:border-gray-dark-200 bg-white dark:bg-gray-dark-100">
   <button class="not-prose w-full py-2 px-4 flex justify-between" x-on:click="open = ! open">
     <span>{{ .title }}</span>
-    <span :class="{ 'hidden' : !open }" class="icon-svg">{{ partial "icon" "expand_less" }}</span>
-    <span :class="{ 'hidden' : open }" class="icon-svg">{{ partial "icon" "expand_more" }}</span>
+    <span :class="{ 'hidden' : !open }" class="icon-svg">{{ partialCached "icon" "expand_less" "expand_less" }}</span>
+    <span :class="{ 'hidden' : open }" class="icon-svg">{{ partialCached "icon" "expand_more" "expand_more" }}</span>
   </button>
 
   <div x-show="open" x-collapse class="px-4">

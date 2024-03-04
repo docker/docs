@@ -8,7 +8,7 @@
     rel="noopener">
       {{- .Text | safeHTML -}}
       <span class="pl-1 icon-svg icon-sm">
-        {{- partial "icon" "open_in_new" -}}
+        {{- partialCached "icon" "open_in_new" "open_in_new" -}}
       </span></a>
 {{- else if (strings.HasPrefix $url "/") -}}
   {{/* absolute link, use url as-is */}}
