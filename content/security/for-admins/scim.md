@@ -158,10 +158,10 @@ The external namespace to use to set up these attributes is `urn:ietf:params:sci
 ### Set up
 
 1. Setup [SSO](./single-sign-on/configure/_index.md) and SCIM first.
-2. In the Okta admin portal, go to **Directory > Profile Editor** and click on **User(Default)**.
+2. In the Okta admin portal, go to **Directory > Profile Editor** and select **User (Default)**.
 3. Select **Add Attribute** and configure the values for the role, org, or team you want to add. Exact naming isn't required.
 4. Return to the **Profile Editor** and select your application.
-5. Select **Add Attribute** and enter the required values. The **External Name** and **External Namespace** must be correct. The external name values for org/team/role mapping are `dockerOrg`, `dockerTeam`, and `dockerRole` respectively, as listed in the previous table. The external namespace is the same for all of them: `urn:ietf:params:scim:schemas:extension:docker:2.0:User`.
+5. Select **Add Attribute** and enter the required values. The **External Name** and **External Namespace** must be exact. The external name values for org/team/role mapping are `dockerOrg`, `dockerTeam`, and `dockerRole` respectively, as listed in the previous table. The external namespace is the same for all of them: `urn:ietf:params:scim:schemas:extension:docker:2.0:User`.
 6. After creating the attributes, go to the top and select **Mappings > Okta User to YOUR APP**.
 7. Go to the newly created attributes and map the variable names selected above to the external names, then select **Save Mappings**. If you’re using JIT provisioning, continue to the following step.
 8. Go to **Applications > YOUR APP > General > SAML Settings > Edit > Step 2** and configure the mapping from the user attribute to the docker variables.
@@ -185,7 +185,7 @@ If a user doesn't already have attributes set up, users who are added to the gro
 
 1. Setup [SSO](./single-sign-on/configure/_index.md) and SCIM first.
 2. In the Azure AD admin portal, go to**Enterprise Apps > YOUR APP > Provisioning > Mappings > Provision Azure Active Directory Users**.
-3. To setup up the new mapping, check **Show advanced options** and then select **Edit attribute options**.
+3. To set up the new mapping, check **Show advanced options**, then select **Edit attribute options**.
 4. Create new entries with the desired mapping for role, org, or group (for example, `urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerRole`) as a string type.
 5. Go back to **Attribute Mapping** for users and click **Add new mapping**.
 
@@ -195,13 +195,17 @@ This implementation works best for roles, but can't be used along with organizat
 
 1. In the **Edit Attribute** view, select the **Expression** mapping type.
 2. To create app roles named as the role directly, in the **Expression** field, enter `SingleAppRoleAssignment([appRoleAssignments])`.
-3. Set the following fields: 
-    - **Target attribute** to `urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerRole`.
+3. Set the following fields:
+    - **Target attribute**: `urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerRole`.
     - **Match objects using this attribute**: No
     - **Apply this mapping**: Always
 4. Save your configuration.
 
-If you’re restricted to using app roles you have already defined (for example, `My Corp Administrators`) you’ll need to setup a switch for these roles. For example, `Switch(SingleAppRoleAssignment([appRoleAssignments]), "member", "My Corp Administrator", "owner", "My Corp Editor", "editor")`.
+If you’re restricted to using app roles you have already defined (for example, `My Corp Administrators`) you’ll need to setup a switch for these roles. For example:
+
+```text
+Switch(SingleAppRoleAssignment([appRoleAssignments]), "member", "My Corp Administrator", "owner", "My Corp Editor", "editor")`
+```
 
 ### Direct mapping
 
@@ -217,7 +221,7 @@ This implementation works for all three mapping types at the same time.
 
 ### Assign users
 
-Go to **App registrations > YOUR APP > App Roles** and create an app role for each Docker role. If possible, create it with a display name that is directly equivalent to the role in Docker, for example, `owner` instead of `Owner`. If set up this way, then you can use expression mapping to `SingleAppRoleAssignment([appRoleAssignments])`. Otherwise a custom switch will have to be used. See [Expression mapping](#expression-mapping).
+Go to **App registrations > YOUR APP > App Roles** and create an app role for each Docker role. If possible, create it with a display name that is directly equivalent to the role in Docker, for example, `owner` instead of `Owner`. If set up this way, then you can use expression mapping to `SingleAppRoleAssignment([appRoleAssignments])`. Otherwise, a custom switch will have to be used. See [Expression mapping](#expression-mapping).
 
 To add a user:
 1. Go to **YOUR APP > Users and groups**. Select **Add user/group**.

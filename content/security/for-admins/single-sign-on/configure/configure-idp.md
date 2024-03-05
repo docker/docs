@@ -60,8 +60,8 @@ You can also configure attributes to override default values, such as default te
 3. Select **SAML 2.0**, then select **Next**.
 4. Enter App Name "Docker Hub" and optionally upload a logo for the app, then select **Next**.
 5. To configure SAML, enter the following into Okta:
-    - ACS URL - Single Sign On URL
-    - Entity ID - Audience URI (SP Entity ID)
+    - ACS URL: Single Sign On URL
+    - Entity ID: Audience URI (SP Entity ID)
     - Name ID format: `EmailAddress`
     - Application username: `Email`
     - Update application on: `Create or Update`
@@ -96,7 +96,7 @@ You can also configure attributes to override default values, such as default te
     - Entity ID: Identifier
     - ACS URL: Reply URL
 7. Save configuration.
-8. From section **SAML Signing Certificate** download **Certificate (Base64)**
+8. From section **SAML Signing Certificate** download **Certificate (Base64)**.
 9. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console.
 10. From the section **Set up Docker**, copy **Login URL** and paste it into the **SAML Sign-in URL** field in Docker Hub or Admin Console.
 
@@ -107,7 +107,7 @@ You can also configure attributes to override default values, such as default te
 
 1. Go to Azure AD admin portal.
 2. Select **App Registration > New Registration**.
-3. Name the App to “Docker Hub SSO” or pick any name you wish for the app.
+3. Enter “Docker Hub SSO” or similar for the application name.
 4. Under **Supported account types**, specify who can use this application or access the app.
 5. In the **Redirect URI** section, select **Web** from the dropdown menu and paste the **Redirect URI** value from the Docker console into this field.
 6. Select **Register** to register the app.
