@@ -59,7 +59,7 @@ See [`environment` attribute](../compose-file/05-services.md#environment) for mo
 ## Use the `env_file` attribute
 
 
-Container environment can also be set using [env files](env-file.md) along with the [`env_file` attribute](../compose-file/05-services.md#env_file).
+Container environment can also be set using [env files](set-variables.md#env-file) along with the [`env_file` attribute](../compose-file/05-services.md#env_file).
 
 ```yaml
 services:
@@ -67,15 +67,15 @@ services:
     env_file: "webapp.env"
 ```
 
-The [`env_file` attribute](../compose-file/05-services.md#env_file) lets you use multiple `.env` files in your Compose application. It also helps you keep your environment variables separate from your main configuration file, providing a more organized and secure way to manage sensitive information, as you do not need to place your `.env` file in the root of your project's directory. 
+The [`env_file` attribute](../compose-file/05-services.md#env_file) also lets you use multiple `.env` files in your Compose application. It can help you to keep your environment variables separate from your main configuration file, providing a more organized and secure way to manage sensitive information, as you do not need to place your `.env` file in the root of your project's directory. 
 
-Using an env file for service environment allow to use the same file for use by a plain `docker run --env-file ...` command,
+Using an `.env` file for service environment allows you to use the same file for use by a plain `docker run --env-file ...` command,
 or to share same env file within multiple services without the need to duplicate a long `environment` yaml block.
-In addition, as env file support [interpolation](set-variables.md#interpolation-syntax), it is possible to combine those with values set by `environment`. 
+In addition, as the `.env` file supports [interpolation](set-variables.md#interpolation-syntax), it is possible to combine those with values set by `environment`. 
 
 > **Important**
 >
-> Interpolation in env files is a Docker Compose CLI feature.
+> Interpolation in `.env` files is a Docker Compose CLI feature.
 >
 > It is not supported when running `docker run --env-file ...`.
 { .important }

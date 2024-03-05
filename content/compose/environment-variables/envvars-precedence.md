@@ -13,9 +13,9 @@ This page contains information on the level of precedence each method of setting
 
 The order of precedence (highest to lowest) is as follows:
 1. Set using [`docker compose run -e` in the CLI](set-variables.md#set-environment-variables-with-docker-compose-run---env).
-2. Substituted from your [shell](set-variables.md#substitute-from-the-shell), your default [`.env` file](set-variables.md#env-file), or with the [`--env-file` argument](set-variables.md#substitute-with---env-file) in the CLI.
-3. Set using just the [`environment` attribute in the Compose file](set-container-environment-variables.md#use-the-environment-attribute)
-4. Use of the [`env_file` attribute](set-container-environment-variables.md#use-the-env_file-attribute) in the Compose file
+2. Combination of either the `environment` or `env_file` attribute and substitution from your [shell](set-variables.md#substitute-from-the-shell), or an environment file. (either your default [`.env` file](set-variables.md#env-file), or with the [`--env-file` argument](set-variables.md#substitute-with---env-file) in the CLI).
+3. Set using just the [`environment` attribute](set-container-environment-variables.md#use-the-environment-attribute) in the Compose file.
+4. Use of the [`env_file` attribute](set-container-environment-variables.md#use-the-env_file-attribute) in the Compose file.
 5. Set in a container image in the [ENV directive](../../reference/dockerfile.md#env).
    Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is no Docker Compose entry for `environment`, `env_file` or `run --env`.
 
@@ -52,7 +52,7 @@ The following table uses `VALUE`, an environment variable defining the version f
 
 Each column represents a context from where you can set a value, or substitute in a value for `VALUE`.
 
-The columns `Host OS environment` and `.env file` is listed only as an illustration lookup. In reality, they don't result in a variable in the container by itself.
+The columns `Host OS environment` and `.env file` is listed only for illustration purposes. In reality, they don't result in a variable in the container by itself, but in confjunction with either the `environment` or `env_file` attribute.
 
 Each row represents a combination of contexts where `VALUE` is set, substituted, or both. The **Result** column indicates the final value for `VALUE` in each scenario.
 

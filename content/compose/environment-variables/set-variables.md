@@ -4,9 +4,9 @@ description: How to set, use, and manage variables in your Compose file with int
 keywords: compose, orchestration, environment, variables, interpolation
 ---
 
-A Compose file can uses variables to offer more flexibility. If you want to quickly switch 
+A Compose file can use variables to offer more flexibility. If you want to quickly switch 
 between image tags to test multiple versions, or want to adjust a volume source to your local
-environment, you don't need to edit the compose file, but can just set variables
+environment, you don't need to edit the Compose file each time, you can just set variables that insert values at run time.
 
 Below is a simple example: 
 
@@ -32,8 +32,7 @@ services:
     image: 'webapp:v1.5'
 ```
 
-Inserting values in this way is known as "interpolation" and allows you to adjust the compose model to your needs without
-having to make changes to the compose file.
+Inserting values in this way is known as interpolation.
 
 ## Interpolation syntax
 
