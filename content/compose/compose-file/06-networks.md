@@ -105,7 +105,7 @@ networks:
 
 `enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](../../config/daemon/ipv6.md).
 
-## external
+### external
 
 If set to `true`:
  - `external` specifies that this network’s lifecycle is maintained outside of that of the application.
