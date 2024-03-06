@@ -49,8 +49,12 @@ ADD .htmltest.yml .htmltest.yml
 RUN htmltest
 
 FROM build-base as update-modules
-ARG MODULE="-u"
-RUN hugo mod get ${MODULE}
+ARG MODULE
+RUN if [ -n "$MODULE" ]; then \
+        hugo mod get ${MODULE}; \
+    else \
+        echo "no module set"; \
+    fi
 RUN hugo mod vendor
 
 FROM scratch as vendor
