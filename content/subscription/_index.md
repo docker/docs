@@ -31,7 +31,7 @@ grid_resources:
   icon: license
 - title: Subscription FAQs
   description: Find the answers you need and explore common questions.
-  link: /subscription/faqs/
+  link: /subscription/faq/
   icon: help
 aliases:
 - /docker-hub/billing/
