@@ -60,6 +60,8 @@ github.com/docker/buildx v0.12.2-0.20240126114058-d43cf8c2c6b4 h1:aEFpoxTw5LIRjN
 github.com/docker/buildx v0.12.2-0.20240126114058-d43cf8c2c6b4/go.mod h1:SBLnQH9q+77aVvpvS5LLIly9+nHVlwscl5GEegGMD5g=
 github.com/docker/buildx v0.12.2-0.20240220084849-89154c7d3303 h1:J34paheV5gSKezhnVzwT5WwRQgPzBLYAdCYAFPoEYfU=
 github.com/docker/buildx v0.12.2-0.20240220084849-89154c7d3303/go.mod h1:OoLv85M5U/p8TWyCINtEilyy0A0XTN9COQgmuE0bWhw=
+github.com/docker/buildx v0.13.0 h1:nNbkgaxsWEZPX1P8yXN6dibAv7ADRMVqi0aohDFhLJY=
+github.com/docker/buildx v0.13.0/go.mod h1:f2n6vggoX4sNNZ0XoRZ0Wtv6J1/rbDTabgdHtpW9NNM=
 github.com/docker/cli v24.0.2+incompatible h1:QdqR7znue1mtkXIJ+ruQMGQhpw2JzMJLRXp6zpzF6tM=
 github.com/docker/cli v24.0.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v24.0.4+incompatible h1:Y3bYF9ekNTm2VFz5U/0BlMdJy73D+Y1iAAZ8l63Ydzw=
