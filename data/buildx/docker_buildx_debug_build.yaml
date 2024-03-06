@@ -430,7 +430,7 @@ options:
     - option: shm-size
       value_type: bytes
       default_value: "0"
-      description: Size of `/dev/shm`
+      description: Shared memory size for build containers
       deprecated: false
       hidden: false
       experimental: false
