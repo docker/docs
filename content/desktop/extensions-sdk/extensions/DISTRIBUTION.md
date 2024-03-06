@@ -36,7 +36,7 @@ Users can download and install the newer version of any extension without updati
 
 ## Extension API dependencies
 
-Extensions must specify the Extension API version they rely on. Docker Desktop checks the extensions required version, and only proposes to install extensions that are compatible with the current Docker Desktop version installed. Users might need to update Docker Desktop in order to install the latest extensions available.
+Extensions must specify the Extension API version they rely on. Docker Desktop checks the extension's required version, and only proposes to install extensions that are compatible with the current Docker Desktop version installed. Users might need to update Docker Desktop in order to install the latest extensions available.
 
 Extension image labels must specify the API version that the extension relies upon. This allows Docker Desktop to inspect newer versions of extension images without downloading the full extension image upfront.
 
