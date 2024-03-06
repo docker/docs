@@ -159,7 +159,7 @@ variable "UPSTREAM_MODULE_NAME" {
 variable "UPSTREAM_REPO" {
   default = null
 }
-variable "UPSTREAM_MODULE_NAME" {
+variable "UPSTREAM_COMMIT" {
   default = null
 }
 
