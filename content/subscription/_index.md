@@ -2,8 +2,8 @@
 description: Learn about subscription features and how to manage your subscription
 keywords: Docker, pricing, billing, Pro, Team, business, subscription, tier, plan
 title: Docker subscription overview
-grid:
-- title: Docker subscriptions and features
+grid_subscriptions:
+- title: Docker Core subscriptions and features
   description: Explore what you can do with your Docker subscription.
   link: /subscription/details/
   icon: feature_search
@@ -15,6 +15,7 @@ grid:
   description: Learn how a Docker Build Cloud subscription can accelerate your builds.
   link: /subscription/build-details/
   icon: build
+grid_core:
 - title: Upgrade your subscription
   description: Learn how to upgrade your plan to the next level.
   link: /subscription/upgrade/
@@ -23,21 +24,32 @@ grid:
   description: Do more with Docker and add seats to your subscription.
   link: /subscription/add-seats/
   icon: group_add
-- title: Subscription FAQs
-  description: Find the answers you need and explore common questions.
-  link: /subscription/faq/
-  icon: help
+grid_resources:
 - title: Docker Desktop license agreement
   description: Review the terms of the Docker Subscription Service Agreement.
   link: /subscription/desktop-license/
   icon: license
+- title: Subscription FAQs
+  description: Find the answers you need and explore common questions.
+  link: /subscription/faqs/
+  icon: help
 aliases:
 - /docker-hub/billing/
 - /docker-hub/billing/faq/
 ---
 
-A Docker subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.
+A Docker Core subscription includes licensing for commercial use of Docker components including Docker Desktop and Docker Hub.
 
-Use the resources here to decide what subscription you need, manage an existing subscription, or explore additional products like Docker Scout.
+Use the resources here to decide what subscription you need, manage an existing subscription, or explore additional products like Docker Scout or Docker Build Cloud.
 
-{{< grid >}}
+## Docker subscriptions and features
+
+{{< grid items="grid_subscriptions" >}}
+
+## Manage your Docker Core subscription
+
+{{< grid items="grid_core" >}}
+
+## Resources
+
+{{< grid items="grid_resources" >}}

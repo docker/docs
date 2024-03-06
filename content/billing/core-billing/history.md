@@ -2,6 +2,8 @@
 title: View billing history
 description: Discover how to view your billing history in Docker Hub
 keywords: payments, billing, subscription, invoices, renewals, invoice management, billing administration
+aliases:
+- /billing/history/
 ---
 
 In this section, learn how you can view your billing history, manage your invoices, and verify your renewal date. All monthly and annual subscriptions are automatically renewed at the end of the term using the original form of payment.
@@ -19,7 +21,7 @@ Your invoice includes the following:
 
 Amounts are in USD.
 
-The information listed in the Bill to section is based on your billing information. Not all fields are required. The billing information includes the following:
+The information listed in the **Bill** to section is based on your billing information. Not all fields are required. The billing information includes the following:
 
 - Name (required) - the name of the administrator or company.
 - Email address (required) - the email address that receives all billing-related emails for the account.

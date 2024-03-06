@@ -2,6 +2,8 @@
 title: Update the billing information
 description: Learn how to update your billing information in Docker Hub
 keywords: payments, billing, subscription, invoices
+aliases:
+- /billing/details/
 ---
 
 You can update the billing information for your personal account or for an organization. When you update your billing information, these changes apply to future billing invoices.
@@ -13,16 +15,18 @@ You can update the billing information for your personal account or for an organ
 
 The billing information provided appears on all your billing invoices. The email address provided is where Docker sends all invoices and other [billing-related communication](#update-your-email-address-that-receives-billing-invoices).
 
-## Personal account
+## Manage billing information
+
+### Personal account
 
 1. Select your avatar in the top-right corner of Docker Hub.
 2. From the drop-down menu select **Billing**.
 3. Select the **Payment methods and billing history** link.
 4. In the **Billing Information** section, select **Update information**.
 5. Enter your updated billing details.
-6. Select **Save**. 
+6. Select **Save**.
 
-## Organization 
+### Organization
 
 > **Note**
 >

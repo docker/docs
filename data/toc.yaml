@@ -2126,14 +2126,16 @@ Manuals:
   section:
   - path: /billing/
     title: Overview
-  - path: /billing/payment-method/
-    title: Add or update a payment method
-  - path: /billing/details/
-    title: Update the billing information
-  - path: /billing/history/
-    title: View your billing history
-  - path: /billing/cycle/
-    title: Change your billing cycle
+  - sectiontitle: Docker Core billing
+    section:
+    - path: /billing/core-billing/payment-method/
+      title: Add or update a payment method
+    - path: /billing/core-billing/details/
+      title: Update the billing information
+    - path: /billing/core-billing/history/
+      title: View your billing history
+    - path: /billing/core-billing/cycle/
+      title: Change your billing cycle
   - path: /billing/scout-billing/
     title: Docker Scout billing
   - path: /billing/build-billing/
@@ -2144,16 +2146,18 @@ Manuals:
   section:
   - path: /subscription/
     title: Overview
-  - path: /subscription/details/
-    title: Docker subscriptions and features
-  - path: /subscription/upgrade/
-    title: Upgrade
-  - path: /subscription/add-seats/
-    title: Add seats
-  - path: /subscription/remove-seats/
-    title: Remove seats
-  - path: /subscription/downgrade/
-    title: Downgrade
+  - sectiontitle: Docker Core
+    section:
+    - path: /subscription/core-subscription/details/
+      title: Subscriptions and features
+    - path: /subscription/core-subscription/upgrade/
+      title: Upgrade
+    - path: /subscription/core-subscription/add-seats/
+      title: Add seats
+    - path: /subscription/core-subscription/remove-seats/
+      title: Remove seats
+    - path: /subscription/core-subscription/downgrade/
+      title: Downgrade
   - path: /subscription/desktop-license/
     title: Docker Desktop license agreement
   - path: /subscription/scout-details/
