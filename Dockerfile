@@ -50,11 +50,15 @@ RUN htmltest
 
 FROM build-base as update-modules
 ARG MODULE
-RUN if [ -n "$MODULE" ]; then \
-        hugo mod get ${MODULE}; \
-    else \
-        echo "no module set"; \
-    fi
+RUN <<"EOT"
+if [ -n "$MODULE" ]; then
+    go mod edit -dropdreplace ${MODULE/@*/}
+    hugo mod get ${MODULE}
+    go mod edit -replace ${MODULE/@*/}=${MODULE};
+else \
+    echo "no module set"; \
+fi
+EOT
 RUN hugo mod vendor
 
 FROM scratch as vendor
