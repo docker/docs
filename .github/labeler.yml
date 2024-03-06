@@ -86,6 +86,9 @@ area/samples:
 area/storage:
   - content/storage/**
 
+area/accounts:
+  - content/accounts/**
+
 hugo:
   - layouts/**
   - hugo.yaml
