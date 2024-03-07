@@ -61,7 +61,7 @@ Make sure you have:
     ```
 
    In this example, `redis` is the hostname of the redis container on the
-   application's network. We use the default port for Redis, `6379`.
+   application's network and the default port, `6379` is used.
 
    > **Note**
    >
@@ -97,11 +97,6 @@ Make sure you have:
    CMD ["flask", "run" "--debug"]
    ```
 
-   > **Important**
-   >
-   >Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
-   { .important }
-
    {{< accordion title="Understand the Dockerfile" >}}
 
    This tells Docker to:
@@ -116,6 +111,11 @@ Make sure you have:
    * Set the default command for the container to `flask run --debug`.
 
    {{< /accordion >}}
+
+   > **Important**
+   >
+   >Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
+   { .important }
 
    For more information on how to write Dockerfiles, see the [Docker user guide](../develop/index.md) and the [Dockerfile reference](/reference/dockerfile/).
 
@@ -180,7 +180,7 @@ With a single command, you create and start all the services from your configura
 
 2. Enter `http://localhost:8000/` in a browser to see the application running.
 
-   If this doesn't resolve, you can also try http://127.0.0.1:8000.
+   If this doesn't resolve, you can also try `http://127.0.0.1:8000`.
 
    You should see a message in your browser saying:
 
@@ -217,7 +217,7 @@ With a single command, you create and start all the services from your configura
 
 5. Stop the application, either by running `docker compose down`
    from within your project directory in the second terminal, or by
-   hitting CTRL+C in the original terminal where you started the app.
+   hitting `CTRL+C` in the original terminal where you started the app.
 
 ## Step 4: Edit the Compose file to use Compose Watch
 
@@ -244,7 +244,7 @@ For more information on how Compose Watch works, see [Use Compose Watch](file-wa
 
 > **Note**
 >
-> For this example to work, we added the `--debug` option to the `Dockerfile`. he --debug option in Flask enables automatic code reload, making it possible to work on the backend API without the need to restart or rebuild the container.
+> For this example to work, the `--debug` option is added to the `Dockerfile`. The `--debug` option in Flask enables automatic code reload, making it possible to work on the backend API without the need to restart or rebuild the container.
 After changing a .py file, subsequent API calls will use the new code, but the browser UI will not automatically refresh in this small example. Most frontend development servers include native live reload support that works with Compose.
 
 ## Step 5: Re-build and run the app with Compose
@@ -318,7 +318,7 @@ Using multiple Compose files lets you customize a Compose application for differ
 
 4. Run `docker compose up` to build the app with the updated Compose files, and run it. You should see the `Hello world` message in your browser. 
 
-This is a simplified example, but it demonstrates the basic principle of `include` and how it can make it easier to modularize complex applications into sub-Compose files. For more information on `include` and working with multiple Compose files, see [Working with multiple Compse files](multiple-compose-files/_index.md).
+This is a simplified example, but it demonstrates the basic principle of `include` and how it can make it easier to modularize complex applications into sub-Compose files. For more information on `include` and working with multiple Compose files, see [Working with multiple Compose files](multiple-compose-files/_index.md).
 
 ## Step 8: Experiment with some other commands
 
