@@ -51,8 +51,9 @@ RUN htmltest
 FROM build-base as update-modules
 ARG MODULE
 RUN <<"EOT"
+set -ex
 if [ -n "$MODULE" ]; then
-    go mod edit -dropdreplace ${MODULE/@*/}
+    go mod edit -dropreplace ${MODULE/@*/}
     hugo mod get ${MODULE}
     go mod edit -replace ${MODULE/@*/}=${MODULE};
 else \
