@@ -13,7 +13,7 @@ aliases:
 
 > **Docker Desktop terms**
 >
-> Commercial use of Docker Desktop in larger enterprises (more than 250
+er enterprises (more than 250
 > employees OR more than $10 million USD in annual revenue) requires a [paid
 > subscription](https://www.docker.com/pricing/).
 
