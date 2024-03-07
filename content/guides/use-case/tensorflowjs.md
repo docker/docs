@@ -1,8 +1,7 @@
 ---
 description: Learn how to deploy pre-trained models in a TensorFlow.js web applications to perform face detection.
-keywords: tensorflow.js, machine learning, ml, mediapipe, blazeface
+keywords: tensorflow.js, machine learning, ml, mediapipe, blazeface, face detection
 title: Face detection with TensorFlow.js
-toc_max: 2
 ---
 
 This guide introduces the seamless integration of TensorFlow.js with Docker to
@@ -19,8 +18,10 @@ perform face detection. In this guide, you'll explore:
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](../../../get-docker.md).
-* You have a [Git client](https://git-scm.com/downloads). The examples in this guide use a command-line based Git client, but you can use any client.
+* You have installed the latest version of
+  [Docker Desktop](../../../get-docker.md).
+* You have a [Git client](https://git-scm.com/downloads). The examples in this
+  guide use a command-line based Git client, but you can use any client.
 
 ## What is TensorFlow.js?
 
@@ -74,24 +75,32 @@ To run the image as a container, run the following command in a terminal.
 $ docker run -p 80:80 face-detection-tensorjs
 ```
 
-The command runs the container and maps port 80 in the container to port 80 on your system.
+The command runs the container and maps port 80 in the container to port 80 on
+your system.
 
-Once the application is running, open a web browser and access the application at [http://localhost:80](http://localhost:80). You may need to grant access to your webcam for the application.
+Once the application is running, open a web browser and access the application
+at [http://localhost:80](http://localhost:80). You may need to grant access to
+your webcam for the application.
 
-![Face detection application](images/face-detection.webp)
+In the web application, you can change the backend to use one of the following:
+- WASM
+- WebGL
+- CPU
 
 To stop the application, press `ctrl`+`c` in the terminal.
 
-In the web application, you can change the backend to use one of the following:
-- wasm
-- webgl
-- cpu
+## About the application
+
+The sample application performs real-time face detection using
+[MediaPipe](https://developers.google.com/mediapipe/), a comprehensive framework
+for building multimodal machine learning pipelines. It's specifically using the
+BlazeFace model, a lightweight model for detecting faces in images.
 
 In the context of TensorFlow.js or similar web-based machine learning
-frameworks, wasm, webgl, and cpu refer to different backends that can be used to
+frameworks, the WASM, WebGL, and CPU backends can be used to
 execute operations. Each of these backends utilizes different resources and
 technologies available in modern browsers and has its strengths and limitations.
-Here's a brief breakdown of the different backends:
+The following sections are a brief breakdown of the different backends.
 
 ### WASM
 
@@ -122,12 +131,6 @@ suitable.
 
 ## Explore the application's code
 
-The sample application performs real-time face detection using the
-[MediaPipe framework](https://developers.google.com/mediapipe/), a
-comprehensive framework for building multimodal machine learning pipelines.
-It's specifically using the BlazeFace model, a lightweight model for detecting
-faces in images.
-
 Explore the purpose of each file and their contents in the following sections.
 
 ### The index.html file
@@ -140,7 +143,7 @@ including:
 
 - tfjs-core and tfjs-converter for core TensorFlow.js functionality and model
   conversion.
-- tfjs-backend-webgl, tfjs-backend-cpu, and a custom tf-backend-wasm.js script
+- tfjs-backend-webgl, tfjs-backend-cpu, and the tf-backend-wasm script
   for different computational backend options that TensorFlow.js can use for
   processing. These backends allow the application to perform machine learning
   tasks efficiently by leveraging the user's hardware capabilities.
@@ -256,7 +259,7 @@ breakdown of some of its key components and functionalities:
   blue dots for facial landmarks on a canvas overlaying the video.
 
 
-{{< accordion title="src/index.js" >}}
+{{< accordion title="index.js" >}}
 
 ```javascript
 const stats = new Stats();
@@ -385,15 +388,19 @@ setupPage();
 
 ### The tf-backend-wasm.js file
 
-The `tf-backend-wasm.js` file contains initialization logic for the
-TensorFlow.js WASM backend, some utilities for interacting with the WASM
-binaries, and functions to set custom paths for the WASM binaries.
+The `tf-backend-wasm.js` file is part of the
+[TensorFlow.js library](https://github.com/tensorflow/tfjs/tree/master/tfjs-backend-wasm).
+It contains initialization logic for the TensorFlow.js WASM backend, some
+utilities for interacting with the WASM binaries, and functions to set custom
+paths for the WASM binaries.
 
 ### The tfjs-backend-wasm-simd.wasm file
 
-The `tfjs-backend-wasm-simd.wasm` file is a WASM binary that's part of
-TensorFlow.js when using the WebAssembly backend, specifically optimized to
-utilize SIMD (Single Instruction, Multiple Data) instructions.
+The `tfjs-backend-wasm-simd.wasm` file is part of the
+[TensorFlow.js library](https://github.com/tensorflow/tfjs/tree/master/tfjs-backend-wasm).
+It's a WASM binary that's used for the WebAssembly
+backend, specifically optimized to utilize SIMD (Single Instruction, Multiple
+Data) instructions.
 
 ## The Dockerfile
 
@@ -412,15 +419,18 @@ WORKDIR /usr/share/nginx/html
 COPY . .
 ```
 
-This Dockerfile defines an image that serves static content using Nginx from an Alpine Linux base image.
+This Dockerfile defines an image that serves static content using Nginx from an
+Alpine Linux base image.
 
 ## Summary
 
-In this guide, you explored how to leverage TensorFlow.js with Docker to run a pre-trained model for face detection in a web application.
+In this guide, you explored how to leverage TensorFlow.js with Docker to run a
+pre-trained model for face detection in a web application.
 
 Related information:
 
 - [TensorFlow.js website](https://www.tensorflow.org/js)
 - [MediaPipe website](https://developers.google.com/mediapipe/)
 - [Dockerfile reference](/reference/dockerfile/)
+- [Docker CLI reference](/reference/cli/docker/)
 - [Docker Blog: Accelerating Machine Learning with TensorFlow.js](https://www.docker.com/blog/accelerating-machine-learning-with-tensorflow-js-using-pretrained-models-and-docker/)
