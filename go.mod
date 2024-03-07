@@ -10,7 +10,7 @@ require (
 	github.com/docker/compose/v2 v2.24.7 // indirect
 	github.com/docker/scout-cli v1.4.1 // indirect
 	github.com/moby/buildkit v0.13.0 // indirect
-	github.com/moby/moby v25.0.3-0.20240203133757-341a7978a541+incompatible // indirect
+	github.com/moby/moby v25.0.4+incompatible // indirect
 )
 
 replace (
@@ -19,5 +19,5 @@ replace (
 	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.24.7
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.4.1
 	github.com/moby/buildkit => github.com/moby/buildkit v0.13.0-rc3.0.20240307092343-22d4212fed7e
-	github.com/moby/moby => github.com/moby/moby v25.0.3-0.20240203133757-341a7978a541+incompatible
+	github.com/moby/moby => github.com/moby/moby v25.0.4+incompatible
 )

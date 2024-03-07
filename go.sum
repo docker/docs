@@ -221,6 +221,8 @@ github.com/moby/moby v25.0.0+incompatible h1:KIFudkwXNK+kBrnCxWZNwhEf/jJzdjQAP7E
 github.com/moby/moby v25.0.0+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/moby v25.0.3-0.20240203133757-341a7978a541+incompatible h1:0Vgi62q5Zo4E0wl1ZBj8bRq9rZeOGK+xwz1SBr3Naz8=
 github.com/moby/moby v25.0.3-0.20240203133757-341a7978a541+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
+github.com/moby/moby v25.0.4+incompatible h1:vea1J80wDM5x5geaZSaywFkfFxLABJIQ3mmR4ewZGbU=
+github.com/moby/moby v25.0.4+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
 github.com/moby/sys/symlink v0.1.0/go.mod h1:GGDODQmbFOjFsXvfLVn3+ZRxkch54RkSiGqsZeMYowQ=
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/morikuni/aec v1.0.0/go.mod h1:BbKIizmSmc5MMPqRYbxO4ZU0S0+P200+tUnFx7PXmsc=
