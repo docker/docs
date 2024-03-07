@@ -60,6 +60,10 @@ github.com/docker/buildx v0.12.2-0.20240126114058-d43cf8c2c6b4 h1:aEFpoxTw5LIRjN
 github.com/docker/buildx v0.12.2-0.20240126114058-d43cf8c2c6b4/go.mod h1:SBLnQH9q+77aVvpvS5LLIly9+nHVlwscl5GEegGMD5g=
 github.com/docker/buildx v0.12.2-0.20240220084849-89154c7d3303 h1:J34paheV5gSKezhnVzwT5WwRQgPzBLYAdCYAFPoEYfU=
 github.com/docker/buildx v0.12.2-0.20240220084849-89154c7d3303/go.mod h1:OoLv85M5U/p8TWyCINtEilyy0A0XTN9COQgmuE0bWhw=
+github.com/docker/buildx v0.13.0 h1:nNbkgaxsWEZPX1P8yXN6dibAv7ADRMVqi0aohDFhLJY=
+github.com/docker/buildx v0.13.0/go.mod h1:f2n6vggoX4sNNZ0XoRZ0Wtv6J1/rbDTabgdHtpW9NNM=
+github.com/docker/buildx v0.13.1-0.20240307093612-37b7ad1465d2 h1:kuFvsZyZCYqxWBc3O7B95wHAoYKheuZYztIHstwnF7Y=
+github.com/docker/buildx v0.13.1-0.20240307093612-37b7ad1465d2/go.mod h1:f2n6vggoX4sNNZ0XoRZ0Wtv6J1/rbDTabgdHtpW9NNM=
 github.com/docker/cli v24.0.2+incompatible h1:QdqR7znue1mtkXIJ+ruQMGQhpw2JzMJLRXp6zpzF6tM=
 github.com/docker/cli v24.0.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v24.0.4+incompatible h1:Y3bYF9ekNTm2VFz5U/0BlMdJy73D+Y1iAAZ8l63Ydzw=
@@ -110,6 +114,7 @@ github.com/docker/compose/v2 v2.24.6 h1:V5fOXgga0hYy4wHsygCquO6/k++8q3WuckU7Qo1c
 github.com/docker/compose/v2 v2.24.6/go.mod h1:ugV3/2KoKEeM98ZYF9vsYwnSExC4xLGxblAqXB6HUXQ=
 github.com/docker/distribution v2.8.2+incompatible h1:T3de5rq0dB1j30rp0sA2rER+m322EBzniBPB6ZIzuh8=
 github.com/docker/distribution v2.8.2+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
+github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/go v1.5.1-1.0.20160303222718-d30aec9fd63c/go.mod h1:CADgU4DSXK5QUlFslkQu2yW2TKzFZcXq/leZfM0UH5Q=
 github.com/docker/go-connections v0.4.0/go.mod h1:Gbd7IOopHjR8Iph03tsViu4nIes5XhDvyHbTtUxmeec=
 github.com/docker/go-events v0.0.0-20190806004212-e31b211e4f1c/go.mod h1:Uw6UezgYA44ePAFQYUehOuCzmy5zmg/+nl2ZfMWGkpA=
@@ -195,6 +200,12 @@ github.com/moby/buildkit v0.13.0-beta1.0.20240126101002-6bd81372ad6f h1:weCt2sfZ
 github.com/moby/buildkit v0.13.0-beta1.0.20240126101002-6bd81372ad6f/go.mod h1:vEcIVw63dZyhTgbcyQWXlZrtrKnvFoSI8LhfV+Vj0Jg=
 github.com/moby/buildkit v0.13.0-beta3.0.20240201135300-d906167d0b34 h1:9oIm9T7YyDxRAXvP7y605G3TZmPGZjFvRHbbMJcIDy8=
 github.com/moby/buildkit v0.13.0-beta3.0.20240201135300-d906167d0b34/go.mod h1:tSWWhq1EDM0eB3ngMNDiH2hOOW9fXTyn2uXuOraCLlE=
+github.com/moby/buildkit v0.13.0-rc3.0.20240307012628-5a4c2975457b h1:lMLGJ3ErbAa5eGsVj7CkmN/2ByyyUFs3abfX99+C4pA=
+github.com/moby/buildkit v0.13.0-rc3.0.20240307012628-5a4c2975457b/go.mod h1:P5zIr3pyh1VQoK751o5JFtogepVcLi9+77PTfmvJwls=
+github.com/moby/buildkit v0.13.0-rc3.0.20240307092343-22d4212fed7e h1:lEQehVlOgEMJ6bZvx3TWFjFE9Cic4fWJplNNQtYUX/A=
+github.com/moby/buildkit v0.13.0-rc3.0.20240307092343-22d4212fed7e/go.mod h1:P5zIr3pyh1VQoK751o5JFtogepVcLi9+77PTfmvJwls=
+github.com/moby/buildkit v0.13.0 h1:reVR1Y+rbNIUQ9jf0Q1YZVH5a/nhOixZsl+HJ9qQEGI=
+github.com/moby/buildkit v0.13.0/go.mod h1:aNmNQKLBFYAOFuzQjR3VA27/FijlvtBD1pjNwTSN37k=
 github.com/moby/locker v1.0.1/go.mod h1:S7SDdo5zpBK84bzzVlKr2V0hz+7x9hWbYC/kq7oQppc=
 github.com/moby/moby v24.0.2+incompatible h1:yH+5dRHH1x3XRKzl1THA2aGTy6CHYnkt5N924ADMax8=
 github.com/moby/moby v24.0.2+incompatible/go.mod h1:fDXVQ6+S340veQPv35CzDahGBmHsiclFwfEygB/TWMc=
@@ -220,6 +231,7 @@ github.com/opencontainers/image-spec v1.1.0-rc4 h1:oOxKUJWnFC4YGHCCMNql1x4YaDfYB
 github.com/opencontainers/image-spec v1.1.0-rc4/go.mod h1:X4pATf0uXsnn3g5aiGIsVnJBR4mxhKzfwmvK/B2NTm8=
 github.com/opencontainers/image-spec v1.1.0-rc5 h1:Ygwkfw9bpDvs+c9E34SdgGOj41dX/cbdlwvlWt0pnFI=
 github.com/opencontainers/image-spec v1.1.0-rc5/go.mod h1:X4pATf0uXsnn3g5aiGIsVnJBR4mxhKzfwmvK/B2NTm8=
+github.com/opencontainers/image-spec v1.1.0-rc6 h1:XDqvyKsJEbRtATzkgItUqBA7QHk58yxX1Ov9HERHNqU=
 github.com/opentracing/opentracing-go v1.2.0/go.mod h1:GxEUsuufX4nBwe+T+Wl9TAgYrxe9dPLANfrWvHYVTgc=
 github.com/peterbourgon/diskv v2.0.1+incompatible/go.mod h1:uqqh8zWWbv1HBMNONnaR/tNboyR3/BZd58JJSHlUSCU=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=

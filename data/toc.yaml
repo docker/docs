@@ -1233,7 +1233,7 @@ Manuals:
         - path: /desktop/extensions/settings-feedback/
           title: Change settings and give feedback
         - path: /desktop/extensions/private-marketplace/
-          title: Configure a private marketplace (Beta)
+          title: Configure a private Marketplace (Beta)
     - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
@@ -1262,7 +1262,7 @@ Manuals:
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Generate a share link
               path: /desktop/extensions-sdk/extensions/share/
-            - title: Publish in the marketplace
+            - title: Publish in the Marketplace
               path: /desktop/extensions-sdk/extensions/publish/
             - title: Build multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
@@ -2216,8 +2216,6 @@ FAQ:
       title: General
     - path: /faq/security/networking-and-vms/
       title: Networking and VMs
-    - path: /faq/security/settings-management/
-      title: Settings Management
     - path: /faq/security/eci-faq/
       title: Enhanced Container Isolation
     - sectiontitle: Single Sign-On

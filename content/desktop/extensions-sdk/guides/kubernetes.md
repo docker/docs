@@ -1,14 +1,14 @@
 ---
-title: Interacting with Kubernetes from a Docker extension
-description: How to connect to a Kubernetes cluster from a Docker Extension
+title: Interacting with Kubernetes from an extension
+description: How to connect to a Kubernetes cluster from an extension
 keywords: Docker, Extensions, sdk, Kubernetes
 aliases:
 - /desktop/extensions-sdk/dev/kubernetes/
 ---
 
-Currently, the Extensions SDK does not provide any API methods to directly interact with the Docker Desktop managed Kubernetes cluster or any other created using other tools such as KinD. However, this page provides a way for you to use other SDK APIs to interact indirectly with a Kubernetes cluster from your Docker extension.
+The Extensions SDK does not provide any API methods to directly interact with the Docker Desktop managed Kubernetes cluster or any other created using other tools such as KinD. However, this page provides a way for you to use other SDK APIs to interact indirectly with a Kubernetes cluster from your extension.
 
-To request an API that directly interacts with Docker Desktop-managed Kubernetes, you can upvote [this issue](https://github.com/docker/extensions-sdk/issues/181) in our GitHub repository.
+To request an API that directly interacts with Docker Desktop-managed Kubernetes, you can upvote [this issue](https://github.com/docker/extensions-sdk/issues/181) in the Extensions SDK GitHub repository.
 
 ## Prerequisites
 
@@ -20,13 +20,13 @@ Docker Desktop conveniently provides the user with a local preconfigured `kubeco
 
 ## Ship the `kubectl` as part of the extension
 
-If your extension needs to interact with Kubernetes clusters, it is recommended that you include the `kubectl` command line tool as part of your extension. By doing this, users who install your extension get `kubectl` installed in their host.
+If your extension needs to interact with Kubernetes clusters, it is recommended that you include the `kubectl` command line tool as part of your extension. By doing this, users who install your extension get `kubectl` installed on their host.
 
 To find out how to ship the `kubectl` command line tool for multiple platforms as part of your Docker Extension image, see [Build multi-arch extensions](../../../desktop/extensions-sdk/extensions/multi-arch.md#adding-multi-arch-binaries).
 
 ## Examples
 
-The code snippets below have been put together in the [Kubernetes Sample Extension](https://github.com/docker/extensions-sdk/tree/main/samples/kubernetes-sample-extension). It shows how to interact with a Kubernetes cluster by shipping the `kubectl` command-line tool.
+The following code snippets have been put together in the [Kubernetes Sample Extension](https://github.com/docker/extensions-sdk/tree/main/samples/kubernetes-sample-extension). It shows how to interact with a Kubernetes cluster by shipping the `kubectl` command-line tool.
 
 ### Check the Kubernetes API server is reachable
 
@@ -71,7 +71,7 @@ const output = await ddClient.extension.host?.cli.exec("kubectl", [
 
 ## Persisting the kubeconfig file
 
-Below there are different ways to persist and read the kubeconfig file from the host filesystem. Users can add, edit, or remove Kubernetes context to the `kubeconfig` file at any time.
+Below there are different ways to persist and read the `kubeconfig` file from the host filesystem. Users can add, edit, or remove Kubernetes context to the `kubeconfig` file at any time.
 
 > Warning
 >

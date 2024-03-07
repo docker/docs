@@ -8,7 +8,7 @@ This section describes how to make your extension available and more visible, so
 
 ## Release your extension
 
-You have developed your extension and tested it locally. You are now ready to release the extension and make it available for others to install and use (either internally with your team, or more publicly).
+After you have developed your extension and tested it locally, you are ready to release the extension and make it available for others to install and use (either internally with your team, or more publicly).
 
 Releasing your extension consists of:
 
@@ -24,7 +24,7 @@ Once your extension is available on Docker Hub, users who have access to the ext
 
 ### Use a share extension link
 
-You can also [generate a share URL](share.md) in order to share your extension within your team, or promote your extension on the internet. The share link allows users to view the extension description and screenshots.
+You can also [generate a share URL](share.md) in order to share your extension within your team, or promote your extension on the internet. The share link lets users view the extension description and screenshots.
 
 ### Publish your extension in the Marketplace
 
@@ -32,10 +32,10 @@ You can publish your extension in the Extensions Marketplace to make it more dis
 
 ## What happens next
 
-### Extension new releases
+### New releases
 
-Once you have released your extension, you can push a new release just by pushing a new version of the extension image, with an incremented tag (still using semver conventions).
-Docker extensions published in the Marketplace benefit from update notifications to all Desktop users that have installed the extension. For more details, see [new releases and updates](DISTRIBUTION.md#new-releases-and-updates)
+Once you have released your extension, you can push a new release just by pushing a new version of the extension image, with an incremented tag (still using `semver` conventions).
+Extensions published in the Marketplace benefit from update notifications to all Desktop users that have installed the extension. For more details, see [new releases and updates](DISTRIBUTION.md#new-releases-and-updates).
 
 ### Extension support and user feedback
 

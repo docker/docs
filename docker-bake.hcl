@@ -141,10 +141,14 @@ target "aws-cloudfront-update" {
   output = ["type=cacheonly"]
 }
 
+variable "VENDOR_MODULE" {
+  default = null
+}
+
 target "vendor" {
   target = "vendor"
   args = {
-    MODULE = null
+    MODULE = VENDOR_MODULE
   }
   output = ["."]
 }

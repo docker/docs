@@ -105,7 +105,7 @@ networks:
 
 `enable_ipv6` enables IPv6 networking. For an example, see step four of [Create an IPv6 network](../../config/daemon/ipv6.md).
 
-## external
+### external
 
 If set to `true`:
  - `external` specifies that this network’s lifecycle is maintained outside of that of the application.
@@ -164,12 +164,12 @@ networks:
         baz: "0"
 ```
 
-## internal
+### internal
 
 By default, Compose provides external connectivity to networks. `internal`, when set to `true`, allows you to
 create an externally isolated network.
 
-## labels
+### labels
 
 Add metadata to containers using `labels`. You can use either an array or a dictionary.
 
@@ -195,7 +195,7 @@ networks:
 
 Compose sets `com.docker.compose.project` and `com.docker.compose.network` labels.
 
-## name
+### name
 
 `name` sets a custom name for the network. The name field can be used to reference networks which contain special characters.
 The name is used as is and is not scoped with the project name.
