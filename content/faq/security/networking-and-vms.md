@@ -6,7 +6,7 @@ title: Network and VM FAQs
 
 ### How can I limit the type of internet access allowed by the container when it runs, to prevent it from being able to exfiltrate data or download malicious code? 
 
-There is no built-in mechanism for that but it can be addressed by process-level firewall on the host. Hook into the `com.docker.vpnkit`` user-space process and apply rules where it can connect to (DNS URL white list; packet/payload filter) and which ports/protocols it is allowed to use.
+There is no built-in mechanism for that but it can be addressed by process-level firewall on the host. Hook into the `com.docker.vpnkit` user-space process and apply rules where it can connect to (DNS URL white list; packet/payload filter) and which ports/protocols it is allowed to use.
 
 ### Can I prevent users binding ports on 0.0.0.0? 
 
@@ -18,7 +18,7 @@ The Docker network settings are entirely local within the VM and have no effect 
 
 ### Can I apply rules on container network traffic via a local firewall or VPN client?
 
-For network connectivity, Docker Desktop uses a user-space process (`com.docker.vpnkit`), which inherits constraints like firewall rules, VPN, http proxy properties etc, from the user that launched it.
+For network connectivity, Docker Desktop uses a user-space process (`com.docker.vpnkit`), which inherits constraints like firewall rules, VPN, HTTP proxy properties etc, from the user that launched it.
 
 ### Does running Docker Desktop for Windows with Hyper-V backend allow users to create arbitrary VMs? 
 

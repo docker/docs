@@ -23,13 +23,13 @@ To validate, run:
 $ docker extension validate <name-of-your-extension>
 ```
 
-If your extension is valid, the message below displays:
+If your extension is valid, the following message displays:
 
 ```console
 The extension image "name-of-your-extension" is valid
 ```
 
-Before the image is built, it is also possible to validate only the metadata.json file:
+Before the image is built, it's also possible to validate only the `metadata.json` file:
 
 ```console
 $ docker extension validate /path/to/metadata.json
