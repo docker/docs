@@ -10,6 +10,45 @@ issues, and bug fixes in [Dockerfile reference](../../reference/dockerfile.md).
 
 For usage, see the [Dockerfile frontend syntax](frontend.md) page.
 
+## 1.7.0
+
+{{< release-date date="2024-03-06" >}}
+
+### Stable
+
+```dockerfile
+# syntax=docker/dockerfile:1.7
+```
+
+- Variable expansion now allows string substitutions and trimming.
+  [moby/buildkit#4427](https://github.com/moby/buildkit/pull/4427),
+  [moby/buildkit#4287](https://github.com/moby/buildkit/pull/4287)
+- Named contexts with local sources now correctly transfer only the files used in the Dockerfile instead of the full source directory.
+  [moby/buildkit#4161](https://github.com/moby/buildkit/pull/4161)
+- Dockerfile now better validates the order of stages and returns nice errors with stack traces if stages are in incorrect order.
+  [moby/buildkit#4568](https://github.com/moby/buildkit/pull/4568),
+  [moby/buildkit#4567](https://github.com/moby/buildkit/pull/4567)
+- History commit messages now contain flags used with `COPY` and `ADD`.
+  [moby/buildkit#4597](https://github.com/moby/buildkit/pull/4597)
+- Progress messages for `ADD` commands from Git and HTTP sources have been improved.
+  [moby/buildkit#4408](https://github.com/moby/buildkit/pull/4408)
+
+### Labs
+
+```dockerfile
+# syntax=docker/dockerfile:1.7-labs
+```
+
+- New `--parents` flag has been added to `COPY` for copying files while keeping the parent directory structure.
+  [moby/buildkit#4598](https://github.com/moby/buildkit/pull/4598),
+  [moby/buildkit#3001](https://github.com/moby/buildkit/pull/3001),
+  [moby/buildkit#4720](https://github.com/moby/buildkit/pull/4720),
+  [moby/buildkit#4728](https://github.com/moby/buildkit/pull/4728),
+  [docs](../../reference/dockerfile.md#copy---parents)
+- New `--exclude` flag can be used in `COPY` and `ADD` commands to apply filter to copied files.
+  [moby/buildkit#4561](https://github.com/moby/buildkit/pull/4561),
+  [docs](../../reference/dockerfile.md#copy---exclude)
+
 ## 1.6.0
 
 {{< release-date date="2023-06-13" >}}
