@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.21.1
 
 require (
-	github.com/docker/buildx v0.13.0 // indirect
+	github.com/docker/buildx v0.13.1-0.20240307093612-37b7ad1465d2 // indirect
 	github.com/docker/cli v26.0.0-rc1+incompatible // indirect
 	github.com/docker/compose/v2 v2.24.6 // indirect
 	github.com/docker/scout-cli v1.4.1 // indirect
@@ -14,7 +14,7 @@ require (
 )
 
 replace (
-	github.com/docker/buildx => github.com/docker/buildx v0.13.0
+	github.com/docker/buildx => github.com/docker/buildx v0.13.1-0.20240307093612-37b7ad1465d2
 	github.com/docker/cli => github.com/docker/cli v25.0.4-0.20240221083216-f67e569a8fb9+incompatible
 	github.com/docker/compose/v2 => github.com/docker/compose/v2 v2.24.6
 	github.com/docker/scout-cli => github.com/docker/scout-cli v1.4.1
