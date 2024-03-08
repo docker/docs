@@ -28,7 +28,7 @@ After your domain is verified, create an SSO connection.
    >
    > You have to verify at least one domain before creating the connections.
 
-4. Select an authentication method, **SAML** or **Azure AD (OIDC)**. See [More resources](#more-resources) for a video overview on how to set up SSO with SAML in Entra ID (formerly Azure AD).
+4. Select an authentication method, **SAML** or **Azure AD (OIDC)**.
 5. Copy the following fields to add to your IdP:
 
    - SAML: **Entity ID**, **ACS URL**

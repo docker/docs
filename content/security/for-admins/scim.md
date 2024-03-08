@@ -63,6 +63,8 @@ You must make sure you have [configured SSO](single-sign-on/configure/_index.md)
 
 ## Enable SCIM in your IdP
 
+The user interface for your IdP may differ slightly from the following steps. You can refer to the documentation for your IdP to verify.
+
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
@@ -108,19 +110,6 @@ You must make sure you have [configured SSO](single-sign-on/configure/_index.md)
 9. Remove all unsupported attributes.
 10. Select **Save**.
 11. Set the provisioning status to **On**.
-
-{{< /tab >}}
-{{< tab name="OneLogin" >}}
-
-1. Go to the OneLogin admin portal.
-2. Go to the app that you created when you configured SSO.
-3. Go to the **Access** tab and enable the app for the `ol_role` that you created when you configured SSO.
-4. Go to the **Provisioning** tab and set up like the following:
-    - Select **Enable provisioning**.
-    - De-select **Create user**, **Delete user**, **Update user**.
-    - When users are deleted in OneLogin, or the user's app access is removed, perform the below action: **Suspend**
-    - When user accounts are suspended in OneLogin, perform the following action: **Suspend**
-5. Select **Save**.
 
 {{< /tab >}}
 {{< /tabs >}}

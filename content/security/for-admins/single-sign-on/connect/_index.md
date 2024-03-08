@@ -4,6 +4,13 @@ keywords: configure, sso, docker hub, hub, docker admin, admin, security
 title: Connect single-sign on
 ---
 
+The steps to create your SSO configuration are:
+
+1. [Add and verify the domain or domains](/security/for-admins/single-sign-on/configure#add-and-verify-your-domain) that your members use to sign in to Docker.
+2. [Create your SSO connection](/security/for-admins/single-sign-on/configure#create-an-sso-connection-in-docker) in Docker.
+3. [Configure your IdP](/security/for-admins/single-sign-on/configure/configure-idp#configure-your-idp-to-work-with-docker) to work with Docker.
+4. [Complete your SSO connection](#complete-your-sso-connection) in Docker.
+
 Follow the steps on this page to finish creating your SSO connection. Then, test your connection and optionally enforce SSO for your organization.
 
 ## Prerequisites

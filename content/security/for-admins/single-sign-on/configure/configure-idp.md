@@ -4,7 +4,14 @@ keywords: configure, sso, docker hub, hub, docker admin, admin, security
 title: Configure your IdP
 ---
 
-This page describes the general steps to continue setting up your single-sign on (SSO) connection.
+The steps to create your SSO configuration are:
+
+1. [Add and verify the domain or domains](/security/for-admins/single-sign-on/configure#add-and-verify-your-domain) that your members use to sign in to Docker.
+2. [Create your SSO connection](/security/for-admins/single-sign-on/configure#create-an-sso-connection-in-docker) in Docker.
+3. [Configure your IdP](#configure-your-idp-to-work-with-docker) to work with Docker.
+4. [Complete your SSO connection](/security/for-admins/single-sign-on/connect/) in Docker.
+
+This page walks through step 3 for common IdPs.
 
 ## Prerequisites
 
@@ -52,6 +59,8 @@ You can also configure attributes to override default values, such as default te
 
 ## Configure your IdP to work with Docker
 
+The user interface for your IdP may differ slightly from the following steps. You can refer to the documentation for your IdP to verify.
+
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
@@ -86,6 +95,8 @@ You can also configure attributes to override default values, such as default te
 > Instead, you can create a security group and assign the app to the group. This way, you can control who in your organization has access to Docker.
 > To change the default setting for assignment, go to the main properties for your app and find the **Assignment required** setting. Set it to **Yes**.
 { .tip }
+
+See [More resources](#more-resources) for a video overview on how to set up SSO with SAML in Entra ID (formerly Azure AD).
 
 1. Go to Azure AD admin portal.
 2. Go to **Default Directory > Add > Enterprise Application > Create your own application**.
@@ -147,54 +158,14 @@ In the Docker Console, paste the following values obtained in the previous steps
 - **Azure AD Domain**
 
 {{< /tab >}}
-{{< tab name="OneLogin" >}}
-
-1. Go to the OneLogin admin portal.
-2. Go to **Applications > Applications > Add App**
-3. Use the search input and search for “**SCIM Provisioner with SAML (SCIM v2 Core)**” and select the only result item.
-4. Enter a display name, for example “Docker Hub”.
-5. Optional: Upload Docker icons for the app and add an appropriate description for the app.
-6. Select **Save**.
-7. After saving the new app, more tabs on the left will appear. Go to the **Configuration** tab.
-8. Open a separate tab in your browser and go to **Docker Hub > Settings > Security > SSO > SAML**.
-9. Copy from the Docker console and paste the following into OneLogin:
-   - Entity ID - SAML Audience URL
-   - ACS URL - SAML Consumer URL
-   - SCIM Base URL - SCIM Base URL
-   - Custom Headers:
-     - `Content-Type: application/scim+json`
-     - `User-Agent: OneLogin SCIM`
-   - SCIM Bearer Token - SCIM Bearer Token
-   - SCIM JSON Template:
-
-     ```json
-        {
-            "schemas": [
-            "urn:ietf:params:scim:schemas:core:2.0:User"
-            ],
-            "userName": "{$parameters.scimusername}",
-            "name": {
-                "givenName": "{$user.firstname}",
-                "familyName": "{$user.lastname}"
-            },
-            "emails": [
-                {
-                    "value": "{$user.email}",
-                    "primary": true
-                }
-            ]
-        }
-     ```
-10. Select **API Connection > Enable**, to change **API Status** to **Enable**.
-11. Select **Save** button again, then go to the **Parameters** tab.
-12. Select **scimusername** and set the value to `Email`.
-13. Select **Save**, then go to the **SSO** tab.
-14. Copy **SAML 2.0 Endpoint (HTTP)** url to paste in the Docker console in the **SAML Sign-on URL** field.
-15. Go to **X.509 Certificate** and select **View Details** to copy the PEM certificate (—-BEGIN CERTIFICATE —- ….) to paste in the Docker console in the **x509 Certificate** field.
-
-{{< /tab >}}
 {{< /tabs >}}
 
 ## What's next?
 
 [Complete your connection](../connect/_index.md) in the Docker console, then test your connection.
+
+## More resources
+
+The following video provides an overview of configuring SSO with SAML in Entra ID (formerly Azure AD).
+
+<iframe title="Configure SSO with SAML in Entra ID overview" class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/0a30409381f340cfb01790adbd9aa9b3?sid=7e4e10a7-7f53-437d-b593-8a4886775632"></iframe>
