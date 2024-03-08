@@ -830,6 +830,10 @@ Reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.44/
+        title: v1.44 reference
+      - path: /engine/api/v1.43/
+        title: v1.43 reference
       - path: /engine/api/v1.42/
         title: v1.42 reference
       - path: /engine/api/v1.41/
