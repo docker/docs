@@ -51,6 +51,8 @@ _For checksums, see [Release notes](../release-notes.md)_
   - Enable hardware virtualization in BIOS. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
+For more information on setting up WSL 2 with Docker desktop, see [WSL](wsl/_index.md).
+
 > **Important**
 >
 > To run Windows containers, you need Windows 10 or Windows 11 Professional or Enterprise edition.
