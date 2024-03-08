@@ -19,7 +19,7 @@ Owners can also see the activity logs for their repository if the repository is 
 
 > **Note**
 >
-> Activity logs requires a [Docker Team or Business subscription](../../subscription/_index.md).
+> Activity logs requires a [Docker Team or Business subscription](../../../subscription/_index.md).
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}

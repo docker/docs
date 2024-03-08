@@ -48,7 +48,7 @@ There is no limit to the number of organizations you can have under a company la
 
 ## Add seats to an organization
 
-When you have a [self-serve](../../subscription/details.md#self-serve) subscription that has no pending subscription changes, you can add seats using the following steps.
+When you have a [self-serve](../../subscription/core-subscription/details.md#self-serve) subscription that has no pending subscription changes, you can add seats using the following steps.
 
 1. Sign in to the [Admin Console](https://admin.docker.com).
 2. In the left navigation, select your company in the drop-down menu.

@@ -10,7 +10,7 @@ aliases:
 
 > **Note**
 >
-> Image Access Management is available to [Docker Business](../../subscription/details.md#docker-business) customers only.
+> Image Access Management is available to [Docker Business](../../subscription/core-subscription/details.md#docker-business) customers only.
 
 Image Access Management gives administrators control over which types of images, such as Docker Official Images, Docker Verified Publisher Images, or community images, their developers can pull from Docker Hub.
 

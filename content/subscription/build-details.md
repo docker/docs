@@ -8,7 +8,7 @@ You can enhance your teams' builds with a Build Cloud subscription. This page de
 
 ## Docker Build Cloud Starter
 
-If you have an existing [Docker Core subscription](./details.md), a base level of Build Cloud minutes and cache are included. The features available vary depending on your Docker Core subscription tier.
+If you have an existing [Docker Core subscription](../subscription/core-subscription/details.md), a base level of Build Cloud minutes and cache are included. The features available vary depending on your Docker Core subscription tier.
 
 ### Docker Personal
 
