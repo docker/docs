@@ -51,7 +51,7 @@ _For checksums, see [Release notes](../release-notes.md)_
   - Enable hardware virtualization in BIOS. For more information, see
     [Virtualization](../troubleshoot/topics.md#virtualization).
 
-For more information on setting up WSL 2 with Docker Desktop, see [WSL](wsl/_index.md).
+For more information on setting up WSL 2 with Docker Desktop, see [WSL](../wsl/_index.md).
 
 > **Important**
 >
