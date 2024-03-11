@@ -1,0 +1,36 @@
+<div x-data="{ open: false }" @keyup.escape.window="open = false" @keydown.window="(e) => {
+switch(e.key) {
+case 'k':
+  if (e.metaKey || e.ctrlKey) {
+     open = !open;
+  }
+}
+}">
+  <!-- search button -->
+  <button @click="open = true">
+    <span class="icon-svg">{{ partialCached "icon" "search" "search" }}</span>
+  </button>
+  <!-- search modal -->
+  <div class="fixed left-0 top-0 z-10 my-12 flex w-lvw justify-center text-gray-light-800 dark:text-gray-dark-800"
+    role="dialog" tabindex="-1" x-show="open" x-trap="open" x-cloak x-transition>
+    <div class="w-[840px] rounded-lg bg-white p-2 dark:bg-background-dark md:m-4 md:w-full" @click.away="open = false">
+      <div class="m-2 text-lg">Search Docker documentation</div>
+      <header class="flex items-center">
+        <input type="search" id="modal-search-input"
+          class="mx-1 flex h-12 flex-auto appearance-none bg-transparent p-4 focus:outline-transparent"
+          placeholder="Search..." tabindex="0" />
+        <div class="icon-svg px-2">
+          {{ partialCached "icon" "search" "search" }}
+        </div>
+      </header>
+      <section class="max-h-[65vh] flex-auto overflow-auto px-2">
+        <div class="flex flex-col gap-2" id="modal-search-results">
+          <!-- results -->
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- search modal backdrop -->
+  <div class="fixed left-0 top-0 h-full w-full bg-background-dark/70 dark:bg-gray-dark-100/70" x-show="open" x-cloak>
+  </div>
+</div>
