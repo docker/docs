@@ -113,8 +113,9 @@ unsuitable for use in your software because of the restrictions they enforce.
 This policy is unfulfilled if your artifacts contain one or more packages with
 a violating license.
 
-You can configure the list of licenses by creating a custom policy, see
-[Configure policies](./configure.md).
+You can configure the list of licenses that this policy should look out for,
+and add exceptions by specifying an allow-list (in the form of PURLs).
+See [Configure policies](./configure.md).
 
 ### Outdated base images
 
