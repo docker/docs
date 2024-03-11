@@ -679,17 +679,13 @@ extends:
 - `service`: Defines the name of the service being referenced as a base, for example `web` or `database`.
 - `file`: The location of a Compose configuration file defining that service.
 
-### Restrictions
+When a service uses `extends`, it can also specify dependencies on other resources, often including explicit volumes declarations. However, it's important to note that `extends` does not automatically incorporate the target volume definition into the extending Compose file. Instead, you are responsible for ensuring that an equivalent resource exists for the service being extended to maintain consistency. Docker Compose verifies that a resource with the referenced ID is present within the Compose model.
 
-The following restrictions apply to the service being referenced:
+Dependencies on other resources in an `extends` target can be:
+- An explicit reference by `volumes`, `networks`, `configs`, `secrets`, `links`, `volumes_from` or `depends_on`
+- A reference to another service using the `service:{name}` syntax in namespace declaration (`ipc`, `pid`, `network_mode`)
 
-- Services that have dependencies on other services cannot be used as a base. Therefore, any key
-  that introduces a dependency on another service is incompatible with `extends`. The
-  non-exhaustive list of such keys is: `links`, `volumes_from`, `container` mode (in `ipc`, `pid`,
-  `network_mode` and `net`), `service` mode (in `ipc`, `pid` and `network_mode`), `depends_on`.
-- Services cannot have circular references with `extends`.
-
-Compose returns an error in all of these cases.
+Circular references with `extends` are not supported, Compose returns an error when one is detected.
 
 ### Finding referenced service
 
