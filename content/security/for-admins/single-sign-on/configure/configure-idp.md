@@ -151,7 +151,7 @@ You can verify admin consent was granted for each permission correctly by checki
 2. Select **1. Assign users and groups**.
 3. Add users that will be allowed to use the app.
 
-In the Docker Console, paste the following values obtained in the previous steps to continue configuration:
+In Docker Hub or Admin Console, paste the following values obtained in the previous steps to continue configuration:
 
 - **Client ID**
 - **Client Secret**
