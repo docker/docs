@@ -1,4 +1,5 @@
-<header class="sticky top-0 z-20 h-16 px-4 text-white bg-gradient-to-r from-accent-light to-blue-light-500 dark:from-accent-dark dark:to-blue-dark-100">
+<header
+  class="sticky top-0 z-20 h-16 px-4 text-white bg-gradient-to-r from-accent-light to-blue-light-500 dark:from-accent-dark dark:to-blue-dark-100">
   <div class="mx-auto flex h-full max-w-[1400px] items-center justify-between">
     <div class="flex h-full items-center md:gap-8 gap-2">
       {{ if not .IsHome }}
@@ -18,7 +19,7 @@
       {{ partial "top-nav.html" . }}
     </div>
     <div class="flex items-center gap-6">
-      <div id="docsearch"></div>
+      {{ partialCached "search.html" "-" }}
       <button aria-label="Theme switch" id="theme-switch" class="svg-icon"
         x-data="{ theme: localStorage.getItem('theme-preference') }" x-init="$watch('theme', value => {
         localStorage.setItem('theme-preference', value);
