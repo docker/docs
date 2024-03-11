@@ -7,9 +7,12 @@ title: Face detection with TensorFlow.js
 This guide introduces the seamless integration of TensorFlow.js with Docker to
 perform face detection. In this guide, you'll explore:
 
-- How to run a containerized TensorFlow.js application with Docker
-- The code for a face detection application using TensorFlow.js
-- The Dockerfile to build a TensorFlow.js web application
+- Run a containerized TensorFlow.js application using Docker.
+- Implement face detection in a web application with TensorFlow.js.
+- Construct a Dockerfile for a TensorFlow.js web application.
+- Use Docker Compose for real-time application development and updates.
+- Share your Docker image on Docker Hub to facilitate deployment and extend
+  reach.
 
 > **Acknowledgment**
 >
@@ -402,7 +405,7 @@ It's a WASM binary that's used for the WebAssembly
 backend, specifically optimized to utilize SIMD (Single Instruction, Multiple
 Data) instructions.
 
-## The Dockerfile
+## Explore the Dockerfile
 
 In a Docker-based project, the Dockerfile serves as the foundational
 asset for building your application's environment.
@@ -422,15 +425,114 @@ COPY . .
 This Dockerfile defines an image that serves static content using Nginx from an
 Alpine Linux base image.
 
+## Develop with Compose
+
+Docker Compose is a tool for defining and running multi-container Docker
+applications. With Compose, you use a YAML file to configure your application's
+services, networks, and volumes. In this case, the application isn't a
+multi-container application, but Docker Compose has other useful features for
+development, like [Compose Watch](../../compose/file-watch.md).
+
+The sample application doesn't have a Compose file yet. To create a Compose
+file, in the `TensorJS-Face-Detection` directory, create a text file named
+`compose.yaml` and then add the following contents.
+
+```yaml
+services:
+  server:
+    build:
+      context: .
+    ports:
+      - 80:80
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /usr/share/nginx/html
+```
+
+This Compose file defines a service that is built using the Dockerfile in the
+same directory. It maps port 80 on the host to port 80 in the container. It also
+has a `develop` subsection with the `watch` attribute that defines a list of
+rules that control automatic service updates based on local file changes. For
+more details about the Compose instructions, see the
+[Compose file reference](../../compose/compose-file/_index.md).
+
+Save the changes to your `compose.yaml` file and then run the following command to run the application.
+
+```console
+$ docker compose watch
+```
+
+Once the application is running, open a web browser and access the application
+at [http://localhost:80](http://localhost:80). You may need to grant access to
+your webcam for the application.
+
+Now you can make changes to the source code and see the changes automatically
+reflected in the container without having to rebuild and rerun the container.
+
+Open the `index.js` file and update the landmark points to be green instead of
+blue on line 83.
+
+```diff
+-        ctx.fillStyle = "blue";
++        ctx.fillStyle = "green";
+```
+
+Save the changes to the `index.js` file and then refresh the browser page. The
+landmark points should now appear green.
+
+To stop the application, press `ctrl`+`c` in the terminal.
+
+## Share your image
+
+Publishing your Docker image on Docker Hub streamlines deployment processes for
+others, enabling seamless integration into diverse projects. It also promotes
+the adoption of your containerized solutions, broadening their impact across the
+developer ecosystem. To share your image:
+
+1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) or sign in to [Docker Hub](https://hub.docker.com).
+
+2. Rename your image so that Docker knows which repository to push it to. Open a
+   terminal and run the following `docker tag` command. Replace `YOUR-USER-NAME`
+   with your Docker ID.
+
+   ```console
+   $ docker tag face-detection-tensorjs YOUR-USER-NAME/face-detection-tensorjs
+   ```
+
+3. Run the following `docker push` command to push the image to Docker Hub.
+   Replace `YOUR-USER-NAME` with your Docker ID.
+
+   ```console
+   $ docker push YOUR-USER-NAME/face-detection-tensorjs
+   ```
+
+4. Verify that you pushed the image to Docker Hub.
+   1. Go to [Docker Hub](https://hub.docker.com).
+   2. Select **Repositories**.
+   3. View the **Last pushed** time for your repository.
+
+Other users can now download and run your image using the `docker run` command. They need to replace `YOUR-USER-NAME` with your Docker ID.
+
+```console
+$ docker run -p 80:80 YOUR-USER-NAME/face-detection-tensorjs
+```
+
 ## Summary
 
-In this guide, you explored how to leverage TensorFlow.js with Docker to run a
-pre-trained model for face detection in a web application.
+This guide demonstrated leveraging TensorFlow.js and Docker for face detection
+in web applications. It highlighted the ease of running containerized
+TensorFlow.js applications, and developing with Docker Compose for real-time
+code changes. Additionally, it covered how sharing your Docker image on Docker
+Hub can streamline deployment for others, enhancing the application's reach
+within the developer community.
 
 Related information:
 
 - [TensorFlow.js website](https://www.tensorflow.org/js)
 - [MediaPipe website](https://developers.google.com/mediapipe/)
 - [Dockerfile reference](/reference/dockerfile/)
+- [Compose file reference](../../compose/compose-file/_index.md)
 - [Docker CLI reference](/reference/cli/docker/)
 - [Docker Blog: Accelerating Machine Learning with TensorFlow.js](https://www.docker.com/blog/accelerating-machine-learning-with-tensorflow-js-using-pretrained-models-and-docker/)
