@@ -119,7 +119,6 @@ See the documentation for your IdP for additional details:
 
 - [Okta](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm)
 - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/user-provisioning)
-- [OneLogin](https://developers.onelogin.com/scim/create-app)
 
 ## Set up role mapping
 
