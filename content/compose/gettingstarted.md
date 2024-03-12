@@ -245,7 +245,7 @@ For more information on how Compose Watch works, see [Use Compose Watch](file-wa
 > **Note**
 >
 > For this example to work, the `--debug` option is added to the `Dockerfile`. The `--debug` option in Flask enables automatic code reload, making it possible to work on the backend API without the need to restart or rebuild the container.
-After changing a .py file, subsequent API calls will use the new code, but the browser UI will not automatically refresh in this small example. Most frontend development servers include native live reload support that works with Compose.
+> After changing the `.py` file, subsequent API calls will use the new code, but the browser UI will not automatically refresh in this small example. Most frontend development servers include native live reload support that works with Compose.
 
 ## Step 5: Re-build and run the app with Compose
 
@@ -288,7 +288,7 @@ Using multiple Compose files lets you customize a Compose application for differ
 
 1. In your project folder, create a new Compose file called `infra.yaml`.
 
-2. Cut Redis service from your `compose.yaml` file into your new `infra.yaml` file and add the `services` top-level attribute at the top of your file. Your `infra.yaml` file should now look like this:
+2. Cut the Redis service from your `compose.yaml` file and paste it into your new `infra.yaml` file. Make sure you add the `services` top-level attribute at the top of your file. Your `infra.yaml` file should now look like this:
 
    ```yaml
    services:
