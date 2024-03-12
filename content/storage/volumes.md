@@ -55,7 +55,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - In the case of named volumes, the first field is the name of the volume, and is
     unique on a given host machine. For anonymous volumes, the first field is
     omitted.
-  - The second field is the path where the file or directory are mounted in
+  - The second field is the path where the file or directory is mounted in
     the container.
   - The third field is optional, and is a comma-separated list of options, such
     as `ro`. These options are discussed below.
@@ -154,8 +154,7 @@ the volume for you. The following example mounts the volume `myvol2` into
 `/app/` in the container.
 
 The `-v` and `--mount` examples below produce the same result. You can't run
-them both unless you remove the `devtest` container and the `myvol2` volume
-after running the first one.
+them both unless you remove the `devtest` container after running the first one.
 
 {{< tabs >}}
 {{< tab name="`--mount`" >}}
@@ -677,10 +676,16 @@ $ docker run --rm -v /foo -v awesome:/bar busybox top
 
 ### Remove all volumes
 
-To remove all unused volumes and free up space:
+To remove all unused anonymous volumes and free up space run:
 
 ```console
 $ docker volume prune
+```
+
+To remove all unused volumes and free up space run:
+
+```console
+$ docker volume prune -a
 ```
 
 ## Next steps
