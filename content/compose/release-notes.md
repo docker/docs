@@ -11,6 +11,29 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.7
+{{< release-date date="2024-03-06" >}}
+
+### Update
+- Dependencies upgrade: bump golang to 1.21.8
+- Dependencies upgrade: bump compose-go to 2.0.0-rc8
+- Dependencies upgrade: bump docker to v24.0.4
+
+### Bug fixes and enhancements
+
+- Compose now ensures stable priority sort order for networks 
+- Fixed interpolation with curly braces (e.g. JSON) in default values 
+- Fixed validation for non-unique `container_name` values
+- Fixed validation for `develop.watch`
+- Fixed environment loading for `include`
+- Fixed panic when merging labels/networks
+- Added support for `--no-path-resolution` when using `include`
+- Fixed missing project name errors
+- Fixed `--no-interpolate` flag on `config`
+- Added a workaround for file lock issues with Watch mode on Windows
+- Fixed duplicate exit code status messages
+- Compose now respects `COMPOSE_REMOVE_ORPHANS` on `up`
+
 ## 2.24.6
 {{< release-date date="2024-02-15" >}}
 
