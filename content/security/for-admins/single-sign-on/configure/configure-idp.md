@@ -30,7 +30,7 @@ When a user signs in using SSO, Docker obtains the following attributes from the
 - **Email address** - unique identifier of the user
 - **Full name** - name of the user
 - **Groups (optional)** - list of groups to which the user belongs
-- **Docker Org (optional)** - the organization to which the the user belongs
+- **Docker Org (optional)** - the organization to which the user belongs
 - **Docker Team (optional)** - the team within an organization that a user has been added to
 - **Docker Role (optional)** - the role for the user that grants their permissions in an organization
 

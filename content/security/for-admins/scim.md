@@ -123,7 +123,7 @@ See the documentation for your IdP for additional details:
 
 ## Set up role mapping
 
-You can assign [roles](/security/for-admins/roles-and-permissions/) to members in your organization in the IdP. To set up a role, you can use optional user-level attributes for the person you want to assign a role. In addition to roles, you can set an organization and team to override the default provisioning values set by the SSO connection.
+You can assign [roles](/security/for-admins/roles-and-permissions/) to members in your organization in the IdP. To set up a role, you can use optional user-level attributes for the person you want to assign a role. In addition to roles, you can set an organization or team to override the default provisioning values set by the SSO connection.
 
 > **Note**
 >
@@ -183,34 +183,36 @@ If a user doesn't already have attributes set up, users who are added to the gro
 This implementation works best for roles, but can't be used along with organization and team mapping using the same method. With this approach, you can assign attributes at a group level, which members can inherit. This is the recommended approach for role mapping.
 
 1. In the **Edit Attribute** view, select the **Expression** mapping type.
-2. To create app roles named as the role directly, in the **Expression** field, enter `SingleAppRoleAssignment([appRoleAssignments])`.
+2. If you can create app roles named as the role directly (for example, `owner` or `editor`), in the **Expression** field, you can use `SingleAppRoleAssignment([appRoleAssignments])`.
+
+   Alternatively, if you’re restricted to using app roles you have already defined (for example, `My Corp Administrators`) you’ll need to setup a switch for these roles. For example:
+
+    ```text
+    Switch(SingleAppRoleAssignment([appRoleAssignments]), "member", "My Corp Administrator", "owner", "My Corp Editor", "editor")`
+    ```
 3. Set the following fields:
     - **Target attribute**: `urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerRole`.
     - **Match objects using this attribute**: No
     - **Apply this mapping**: Always
 4. Save your configuration.
 
-If you’re restricted to using app roles you have already defined (for example, `My Corp Administrators`) you’ll need to setup a switch for these roles. For example:
-
-```text
-Switch(SingleAppRoleAssignment([appRoleAssignments]), "member", "My Corp Administrator", "owner", "My Corp Editor", "editor")`
-```
-
 ### Direct mapping
 
-This implementation works for all three mapping types at the same time.
+Direct mapping is an alternative to expression mapping. This implementation works for all three mapping types at the same time. In order to assign users, you'll need to use the Microsoft Graph API.
 
 1. In the **Edit Attribute** view, select the **Direct** mapping type.
 2. Set the following fields:
-    - **Source attribute**: `extensionAttribute1`
+    - **Source attribute**: choose one of the allowed extension attributes in Entra (for example, `extensionAttribute1`)
     - **Target attribute**: `urn:ietf:params:scim:schemas:extension:docker:2.0:User:dockerRole`
     - **Match objects using this attribute**: No
     - **Apply this mapping**: Always
+
+    If you're setting more than one attribute, for example role and organization, you need to choose a different extension attribute for each one.
 3. Save your configuration.
 
 ### Assign users
 
-Go to **App registrations > YOUR APP > App Roles** and create an app role for each Docker role. If possible, create it with a display name that is directly equivalent to the role in Docker, for example, `owner` instead of `Owner`. If set up this way, then you can use expression mapping to `SingleAppRoleAssignment([appRoleAssignments])`. Otherwise, a custom switch will have to be used. See [Expression mapping](#expression-mapping).
+If you used expression mapping in the previous step, go to **App registrations > YOUR APP > App Roles** and create an app role for each Docker role. If possible, create it with a display name that is directly equivalent to the role in Docker, for example, `owner` instead of `Owner`. If set up this way, then you can use expression mapping to `SingleAppRoleAssignment([appRoleAssignments])`. Otherwise, a custom switch will have to be used. See [Expression mapping](#expression-mapping).
 
 To add a user:
 1. Go to **YOUR APP > Users and groups**. Select **Add user/group**.
@@ -220,6 +222,8 @@ To add a group:
 1. Go to **YOUR APP > Users and groups**. Select **Add user/group**.
 2. Select the group you want to add, then **Select** the desired role for the users in that group.
 
+If you used direct mapping in the previous step, go to **Microsoft Graph Explorer** and sign in to your tenant. You need to be a tenant admin to use this feature. Use the Microsoft Graph API to assign the extension attribute to the user with the value that corresponds to what the attribute was mapped to. See the [Microsoft Graph API documentation](https://learn.microsoft.com/en-us/graph/extensibility-overview?tabs=http) on adding or updating data in extension attributes.
+
 {{< /tab >}}
 {{< /tabs >}}
 
@@ -227,7 +231,6 @@ See the documentation for your IdP for additional details:
 
 - [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-add-custom-user-attributes.htm)
 - [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes#provisioning-a-custom-extension-attribute-to-a-scim-compliant-application)
-- [OneLogin](https://onelogin.service-now.com/support?id=kb_article&sys_id=742a000d4740f1909d8dfd1f536d435f&kb_category=566ffd6887332910695f0f66cebb3556#config-info-custom)
 
 ## Disable SCIM
 
