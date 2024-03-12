@@ -17,16 +17,7 @@ edit the display name and description of the new policy to help distinguish
 it from the default policy it's based on.
 
 The available configuration parameters for a policy depends on the default
-policy you used as a base for your custom policy. The following table lists the
-default policies that you can configure, and the available configuration
-parameters that you can use to create a custom policy.
-
-| Default policy                            | Configuration parameters |
-| ----------------------------------------- | ------------------------ |
-| All critical vulnerabilities              | Severities               |
-| Copyleft licenses                         | License names            |
-| Fixable critical and high vulnerabilities | Severities, age          |
-| High-profile vulnerabilities              | CVEs                     |
+policy you used as a base for your custom policy.
 
 To configure a policy:
 

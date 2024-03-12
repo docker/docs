@@ -208,6 +208,8 @@ github.com/moby/buildkit v0.13.0-rc3.0.20240307012628-5a4c2975457b h1:lMLGJ3ErbA
 github.com/moby/buildkit v0.13.0-rc3.0.20240307012628-5a4c2975457b/go.mod h1:P5zIr3pyh1VQoK751o5JFtogepVcLi9+77PTfmvJwls=
 github.com/moby/buildkit v0.13.0-rc3.0.20240307092343-22d4212fed7e h1:lEQehVlOgEMJ6bZvx3TWFjFE9Cic4fWJplNNQtYUX/A=
 github.com/moby/buildkit v0.13.0-rc3.0.20240307092343-22d4212fed7e/go.mod h1:P5zIr3pyh1VQoK751o5JFtogepVcLi9+77PTfmvJwls=
+github.com/moby/buildkit v0.13.0-rc3.0.20240308080452-a38011b9f57d h1:q8sI5enL3NBniNUIeVyrbUj6WCSc0gg+tAQgX1m6oTM=
+github.com/moby/buildkit v0.13.0-rc3.0.20240308080452-a38011b9f57d/go.mod h1:P5zIr3pyh1VQoK751o5JFtogepVcLi9+77PTfmvJwls=
 github.com/moby/buildkit v0.13.0 h1:reVR1Y+rbNIUQ9jf0Q1YZVH5a/nhOixZsl+HJ9qQEGI=
 github.com/moby/buildkit v0.13.0/go.mod h1:aNmNQKLBFYAOFuzQjR3VA27/FijlvtBD1pjNwTSN37k=
 github.com/moby/locker v1.0.1/go.mod h1:S7SDdo5zpBK84bzzVlKr2V0hz+7x9hWbYC/kq7oQppc=
