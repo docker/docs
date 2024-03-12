@@ -14,7 +14,7 @@ Using the Flask framework, the application features a hit counter in Redis, prov
 
 The concepts demonstrated here should be understandable even if you're not familiar with Python. 
 
-This is a non-normative example that just highlights the key things you can do with Compose
+This is a non-normative example that just highlights the key things you can do with Compose.
 
 ## Prerequisites
 
@@ -94,7 +94,7 @@ Make sure you have:
    RUN pip install -r requirements.txt
    EXPOSE 5000
    COPY . .
-   CMD ["flask", "run" "--debug"]
+   CMD ["flask", "run", "--debug"]
    ```
 
    {{< accordion title="Understand the Dockerfile" >}}
@@ -249,18 +249,15 @@ After changing a .py file, subsequent API calls will use the new code, but the b
 
 ## Step 5: Re-build and run the app with Compose
 
-From your project directory, type `docker compose watch` to build and launch the app and start the file watch mode.
+From your project directory, type `docker compose watch` or `docker compose up --watch` to build and launch the app and start the file watch mode.
 
 ```console
-$ docker compose up
-
-Creating network "composetest_default" with the default driver
-Creating composetest_web_1 ...
-Creating composetest_redis_1 ...
-Creating composetest_web_1
-Creating composetest_redis_1 ... done
-Attaching to composetest_web_1, composetest_redis_1
-web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+$ docker compose watch
+[+] Running 2/2
+ ✔ Container docs-redis-1 Created                                                                                                                                                                                                        0.0s
+ ✔ Container docs-web-1    Recreated                                                                                                                                                                                                      0.1s
+Attaching to redis-1, web-1
+         ⦿ watch enabled
 ...
 ```
 
@@ -346,11 +343,7 @@ This is a simplified example, but it demonstrates the basic principle of `includ
    $ docker compose stop
    ```
 
-- You can bring everything down, removing the containers entirely, with the `down` command. Pass `--volumes` to also remove the data volume used by the Redis container:
-
-   ```console
-   $ docker compose down --volumes
-   ```
+- You can bring everything down, removing the containers entirely, with the `down` command. 
 
 ## Where to go next
 
