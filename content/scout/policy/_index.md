@@ -31,11 +31,11 @@ what vulnerabilities they're exposed to. Policy Evaluation builds on top of the
 image analysis feature, interpreting the analysis results against the rules
 defined by policies.
 
-A policy defines one or more criteria that your artifacts should fulfill. For
-example, one of the default policies in Docker Scout is the **Critical
-vulnerabilities** policy, which requires that your artifacts must not contain
-any critical vulnerabilities. If an artifact contains one or more
-vulnerabilities with a critical severity, that artifact fails the evaluation.
+A policy defines image quality criteria that your artifacts should fulfill.
+For example, the **Copyleft licenses** policy flags packages distributed under a copyleft license.
+If an image contains a copyleft-licensed package, that image is non-compliant with this policy.
+Some policies, such as the **Copyleft licenses** policy, are configurable.
+Configurable policies let you adjust the criteria to better match your organization's needs.
 
 In Docker Scout, policies are designed to help you ratchet forward your
 security and supply chain stature. Where other tools focus on providing a pass
@@ -55,7 +55,6 @@ image up-to-dateness.
 Docker Scout ships the following out-of-the-box policies:
 
 - [Fixable critical and high vulnerabilities](#fixable-critical-and-high-vulnerabilities)
-- [Critical vulnerabilities](#critical-vulnerabilities)
 - [Copyleft licenses](#copyleft-licenses)
 - [Outdated base images](#outdated-base-images)
 - [High-profile vulnerabilities](#high-profile-vulnerabilities)
@@ -89,19 +88,6 @@ or high-severity vulnerability, where a fix version is available.
 
 You can configure the severity level and age thresholds by creating a custom
 policy. For more information, see [Configure policies](./configure.md).
-
-### Critical vulnerabilities
-
-The **Critical vulnerabilities** policy requires that your artifacts contain no
-known critical vulnerabilities. The policy is unfulfilled if your artifact
-contains one or more critical vulnerabilities.
-
-This policy flags all critical vulnerabilities, whether or not there's a fix
-version available, and regardless of how long it's been since the vulnerability
-was first disclosed.
-
-You can configure the severity level by creating a custom policy, see
-[Configure policies](./configure.md).
 
 ### Copyleft licenses
 

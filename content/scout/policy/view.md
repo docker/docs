@@ -83,26 +83,37 @@ $ docker scout policy \
   --platform linux/amd64 \
   dockerscoutpolicy/email-api-service:0.0.2
 
-Image reference: dockerscoutpolicy/email-api-service:0.0.2
-Digest: sha256:17b1fde0329c71af302b6391fc73a08f56cb8c33e7eea7a33b61a24cedbf2b69
-Platform: linux/amd64
-
-## Overview
-
-Policy status:  FAILED  (1/3 policies violated)
-
-                      Policy                     │      Results       
-─────────────────────────────────────────────────┼────────────────────
-  ✓ Critical and high vulnerabilities with fixes │ 0 vulnerabilities  
-  ✗ Critical vulnerabilities                     │    1C              
-  ✓ Packages with GPL3+ licenses                 │ 0 packages         
+    ✓ Pulled
+    ✓ Policy evaluation results found
 
 
-## "Critical vulnerabilities" policy evaluation results
+​## Overview
+​
+​             │               Analyzed Image
+​─────────────┼──────────────────────────────────────────────
+​  Target     │  dockerscoutpolicy/email-api-service:0.0.2
+​    digest   │  17b1fde0329c
+​    platform │ linux/amd64
+​
+​
+​## Policies
+​
+​Policy status  FAILED  (2/8 policies met, 3 missing data)
+​
+​  Status │                  Policy                   │           Results
+​─────────┼───────────────────────────────────────────┼──────────────────────────────
+​  ✓      │ Copyleft licenses                         │    0 packages
+​  !      │ Default non-root user                     │
+​  !      │ Fixable critical and high vulnerabilities │    2C     1H     0M     0L
+​  ✓      │ High-profile vulnerabilities              │    0C     0H     0M     0L
+​  ?      │ Outdated base images                      │    No data
+​         │                                           │    Learn more ↗
+​  ?      │ Quality gates passed                      │    No data
+​         │                                           │    Learn more ↗
+​  !      │ Supply chain attestations                 │    2 deviations
+​  ?      │ Unapproved base images                    │    No data
 
-  Vulnerability  │  Severity  │                     Current package version                     │ Fix version  
-─────────────────┼────────────┼─────────────────────────────────────────────────────────────────┼──────────────
-  CVE-2022-48174 │  CRITICAL  │ pkg:apk/alpine/busybox@1.36.1-r0?os_name=alpine&os_version=3.18 │ 1.36.1-r1
+...
 ```
 
 For more information about the command, refer to the [CLI
