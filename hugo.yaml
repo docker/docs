@@ -94,7 +94,7 @@ params:
   repo: https://github.com/docker/docs
   docs_url: https://docs.docker.com
 
-  latest_engine_api_version: "1.45"
+  latest_engine_api_version: "1.44"
   docker_ce_version: "25.0.4"
   compose_version: "v2.24.7"
   compose_file_v3: "3.8"
