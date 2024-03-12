@@ -57,6 +57,11 @@ outputFormats:
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
+  metadata:
+    baseName: metadata
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
   robots:
     baseName: robots
     isPlainText: true
@@ -67,12 +72,8 @@ outputs:
   home:
     - html
     - redirects
+    - metadata
     - robots
-  term:
-    - html
-    - json
-
-taxonomies:
 
 languages:
   en:
