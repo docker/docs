@@ -494,10 +494,10 @@ developer ecosystem. To share your image:
 1. [Sign up](https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade) or sign in to [Docker Hub](https://hub.docker.com).
 
 2. Rebuild your image to include the changes to your application. This time,
-   prefix the name with your Docker ID. Docker uses the name to determine which
-   repository to push it to . Open a terminal and run the following command in
-   the `TensorJS-Face-Detection` directory. Replace `YOUR-USER-NAME` with your
-   Docker ID.
+   prefix the image name with your Docker ID. Docker uses the name to determine
+   which repository to push it to. Open a terminal and run the following
+   command in the `TensorJS-Face-Detection` directory. Replace `YOUR-USER-NAME`
+   with your Docker ID.
 
    ```console
    $ docker build -t YOUR-USER-NAME/face-detection-tensorjs .
