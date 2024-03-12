@@ -13,16 +13,16 @@ aliases:
 
 Get started creating a single sign-on (SSO) connection for your organization or company.
 
-The steps to create your SSO configuration are:
+The steps to set up your SSO configuration are:
 
-1. [Add and verify the domain or domains](#add-and-verify-your-domain) that your members use to sign in to Docker.
-2. [Create your SSO connection](#create-an-sso-connection-in-docker) in Docker.
+1. [Add and verify the domain or domains](#step-one-add-and-verify-your-domain) that your members use to sign in to Docker.
+2. [Create your SSO connection](#step-two-create-an-sso-connection-in-docker) in Docker.
 3. [Configure your IdP](./configure-idp.md) to work with Docker.
 4. [Complete your SSO connection](../connect/_index.md) in Docker.
 
 This page walks through steps 1 and 2 using Docker Hub or the Admin Console.
 
-## Add and verify your domain
+## Step one: Add and verify your domain
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
@@ -39,7 +39,7 @@ This page walks through steps 1 and 2 using Docker Hub or the Admin Console.
 {{< /tab >}}
 {{< /tabs >}}
 
-## Create an SSO connection in Docker
+## Step two: Create an SSO connection in Docker
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
@@ -49,6 +49,8 @@ This page walks through steps 1 and 2 using Docker Hub or the Admin Console.
 {{< /tab >}}
 {{< tab name="Admin Console" >}}
 
+{{< include "admin-early-access.md" >}}
+
 {{% admin-sso-config product="admin" %}}
 
 {{< /tab >}}
@@ -56,4 +58,4 @@ This page walks through steps 1 and 2 using Docker Hub or the Admin Console.
 
 ## What's next?
 
-From here, you can [continue configuration in your IdP](./configure-idp.md).
+[Continue configuration in your IdP](./configure-idp.md).

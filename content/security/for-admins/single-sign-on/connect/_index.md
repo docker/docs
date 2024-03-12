@@ -1,17 +1,17 @@
 ---
 description: Learn how to complete your single-sign on connection and next steps for enabling SSO.
 keywords: configure, sso, docker hub, hub, docker admin, admin, security
-title: Connect single-sign on
+title: Complete your single sign-on connection
 ---
 
-The steps to create your SSO configuration are:
+The steps to set up your SSO configuration are:
 
-1. [Add and verify the domain or domains](/security/for-admins/single-sign-on/configure#add-and-verify-your-domain) that your members use to sign in to Docker.
-2. [Create your SSO connection](/security/for-admins/single-sign-on/configure#create-an-sso-connection-in-docker) in Docker.
-3. [Configure your IdP](/security/for-admins/single-sign-on/configure/configure-idp#configure-your-idp-to-work-with-docker) to work with Docker.
-4. [Complete your SSO connection](#complete-your-sso-connection) in Docker.
+1. [Add and verify the domain or domains](/security/for-admins/single-sign-on/configure#step-one-add-and-verify-your-domain) that your members use to sign in to Docker.
+2. [Create your SSO connection](/security/for-admins/single-sign-on/configure#step-two-create-an-sso-connection-in-docker) in Docker.
+3. [Configure your IdP](/security/for-admins/single-sign-on/configure/configure-idp#step-three-configure-your-idp-to-work-with-docker) to work with Docker.
+4. [Complete your SSO connection](#step-four-complete-your-sso-connection) in Docker.
 
-Follow the steps on this page to finish creating your SSO connection. Then, test your connection and optionally enforce SSO for your organization.
+This page walks you through the final steps of creating your SSO connection. You can then test your connection and optionally enforce SSO for your organization.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ Make sure you have completed the following before you begin:
     - SAML: **SAML Sign-on URL**, **x509 Certificate**
     - Azure AD (OIDC): **Client ID**, **Client Secret**, **Azure AD Domain**
 
-## Complete your SSO connection
+## Step four: Complete your SSO connection
 
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}

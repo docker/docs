@@ -4,11 +4,11 @@ keywords: configure, sso, docker hub, hub, docker admin, admin, security
 title: Configure your IdP
 ---
 
-The steps to create your SSO configuration are:
+The steps to set up your SSO configuration are:
 
-1. [Add and verify the domain or domains](/security/for-admins/single-sign-on/configure#add-and-verify-your-domain) that your members use to sign in to Docker.
-2. [Create your SSO connection](/security/for-admins/single-sign-on/configure#create-an-sso-connection-in-docker) in Docker.
-3. [Configure your IdP](#configure-your-idp-to-work-with-docker) to work with Docker.
+1. [Add and verify the domain or domains](/security/for-admins/single-sign-on/configure#step-one-add-and-verify-your-domain) that your members use to sign in to Docker.
+2. [Create your SSO connection](/security/for-admins/single-sign-on/configure#step-two-create-an-sso-connection-in-docker) in Docker.
+3. [Configure your IdP](#step-three-configure-your-idp-to-work-with-docker) to work with Docker.
 4. [Complete your SSO connection](/security/for-admins/single-sign-on/connect/) in Docker.
 
 This page walks through step 3 for common IdPs.
@@ -57,7 +57,7 @@ You can also configure attributes to override default values, such as default te
 > If none of the email address attributes listed in the previous table are found, SSO returns an error. Also, if the `Full name` attribute isn't set, then the name will be displayed as the value of the `Email address`.
 { .important}
 
-## Configure your IdP to work with Docker
+## Step three: Configure your IdP to work with Docker
 
 The user interface for your IdP may differ slightly from the following steps. You can refer to the documentation for your IdP to verify.
 
@@ -101,7 +101,7 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 1. Go to Azure AD admin portal.
 2. Go to **Default Directory > Add > Enterprise Application > Create your own application**.
 3. Enter “Docker” for application name and select **non-gallery** option.
-4. After the application is created, go to Single Sign-On and select **SAML**.
+4. After the application is created, go to **Single Sign-On** and select **SAML**.
 5. Select **Edit** on the **Basic SAML configuration** section.
 6. Add the following settings from Docker Hub:
     - Entity ID: Identifier
