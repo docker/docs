@@ -7,7 +7,7 @@ toolchain go1.21.1
 require (
 	github.com/docker/buildx v0.12.0-rc2.0.20231219140829-617f538cb315 // indirect
 	github.com/docker/cli v26.0.0-rc1+incompatible // indirect
-	github.com/docker/compose/v2 v2.0.0-00010101000000-000000000000 // indirect
+	github.com/docker/compose/v2 v2.24.7 // indirect
 	github.com/docker/scout-cli v1.4.1 // indirect
 	github.com/moby/buildkit v0.13.0 // indirect
 	github.com/moby/moby v25.0.4+incompatible // indirect
