@@ -21,7 +21,7 @@ The number of seats will be charged to your payment information on file, and are
 
 ## Remove seats
 
-1. Sign in to your [Docker account](https://login.docker.com/) and go to [Docker Build Cloud](https://build.docker.com/).
+1. Sign in to your [Docker account](https:/hub.docker.com/login) and go to [Docker Build Cloud](https://build.docker.com/).
 2. Select **Settings & billing**.
 3. Under your current plan, select **Remove seats**.
 4. Enter the total number of seats you want to keep on your plan, then select **Remove seats**.
@@ -32,7 +32,7 @@ The charge for the reduced seat count will be reflected on the next billing cycl
 
 As an owner of the Docker Build Cloud team, you can invite members to access cloud builders. To invite team members to your team in Docker Build Cloud:
 
-1. Sign in to your [Docker account](https://login.docker.com/) and go to [Docker Build Cloud](https://build.docker.com/).
+1. Sign in to your [Docker account](https:/hub.docker.com/login) and go to [Docker Build Cloud](https://build.docker.com/).
 2. Select **User management**.
 3. Select **Invite**.
 4. Enter the email address or Docker ID of the member you want to invite. If the invitee doesn’t have a Docker ID, you need to enter their email address so they can create an account when they accept the invite.

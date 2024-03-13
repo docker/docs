@@ -2144,11 +2144,10 @@ Manuals:
       title: View your billing history
     - path: /billing/core-billing/cycle/
       title: Change your billing cycle
-  - path: /billing/scout-billing/
-    title: Docker Scout billing
   - path: /billing/build-billing/
     title: Docker Build Cloud billing
-
+  - path: /billing/scout-billing/
+    title: Docker Scout billing
 
 - sectiontitle: Subscription
   section:
