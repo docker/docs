@@ -20,6 +20,8 @@ The support available from Docker extends to installing and running Docker Deskt
 
 For troubleshooting problems and intermittent failures that are outside of Docker's control, you should contact your hypervisor vendor. Each hypervisor vendor offers different levels of support. For example, Microsoft supports running nested Hyper-V both on-prem and on Azure, with some version constraints. This may not be the case for VMWare ESXi.
 
+Docker does not support running multiples instances of Docker Desktop on the same machine in a VDI environment. 
+
 ## Turn on nested virtualization
 
 You must turn on nested virtualization before you install Docker Desktop on a virtual machine.
