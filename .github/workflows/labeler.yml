@@ -16,6 +16,6 @@ jobs:
     steps:
       -
         name: Run
-        uses: actions/labeler@v4
+        uses: actions/labeler@v5
         with:
           dot: true
