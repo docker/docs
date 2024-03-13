@@ -6,7 +6,7 @@ aliases:
 - /desktop/windows/privileged-helper/
 ---
 
-This page contains information about the permission requirements for running and installing Docker Desktop on Windows, the functionality of the privileged helper process `com.docker.service` and the reasoning behind this approach. 
+This page contains information about the permission requirements for running and installing Docker Desktop on Windows, the functionality of the privileged helper process `com.docker.service` and the reasoning behind this approach.
 
 It also provides clarity on running containers as `root` as opposed to having `Administrator` access on the host and the privileges of the Windows Docker engine and Windows containers.
 
@@ -34,13 +34,33 @@ The service performs the following functionalities:
 - Conducting healthchecks and retrieving the version of the service itself.
 
 The service start mode depends on which container engine is selected, and, for WSL, on whether it is needed to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file. This is controlled by a setting under `Use the WSL 2 based engine` in the settings page. When this is set, WSL engine behaves the same as Hyper-V. So:
-- With Windows containers, or Hyper-v Linux containers, the service is started when the system boots and runs all the time, even when Docker Desktop isn't running. This is required so you can launch Docker Desktop without admin privileges. 
+- With Windows containers, or Hyper-v Linux containers, the service is started when the system boots and runs all the time, even when Docker Desktop isn't running. This is required so you can launch Docker Desktop without admin privileges.
 - With WSL2 Linux containers, the service isn't necessary and therefore doesn't run automatically when the system boots. When you switch to Windows containers or Hyper-V Linux containers, or choose to maintain `host.docker.internal` and `gateway.docker.internal` in the Win32 hosts file, a UAC prompt is displayed which asks you to accept the privileged operation to start the service. If accepted, the service is started and set to start automatically upon the next Windows boot.
 
 ## Containers running as root within the Linux VM
 
-The Linux Docker daemon and containers run in a minimal, special-purpose Linux VM managed by Docker. It is immutable so you can’t extend it or change the installed software. 
-This means that although containers run by default as `root`, this doesn't allow altering the VM and doesn't grant `Administrator` access to the Windows host machine. The Linux VM serves as a security boundary and limits what resources from the host can be accessed. File sharing uses a user-space crafted file server and any directories from the host bind mounted into Docker containers still retain their original permissions. It doesn't give you access to any files that it doesn’t already have access to.
+The Linux Docker daemon and containers run in a minimal, special-purpose Linux
+VM managed by Docker. It is immutable so you can’t extend it or change the
+installed software.  This means that although containers run by default as
+`root`, this doesn't allow altering the VM and doesn't grant `Administrator`
+access to the Windows host machine. The Linux VM serves as a security boundary
+and limits what resources from the host can be accessed. File sharing uses a
+user-space crafted file server and any directories from the host bind mounted
+into Docker containers still retain their original permissions. It doesn't give
+you access to any files that it doesn’t already have access to.
+
+## Enhanced Container Isolation
+
+In addition, Docker Desktop supports [Enhanced Container Isolation
+mode](../hardened-desktop/enhanced-container-isolation/_index.md) (ECI),
+available to Business customers only, which further secures containers without
+impacting developer workflows.
+
+ECI automatically runs all containers within a Linux user-namespace, such that
+root in the container is mapped to an unprivileged user inside the Docker
+Desktop VM. ECI uses this and other advanced techniques to further secure
+containers within the Docker Desktop Linux VM, such that they are further
+isolated from the Docker daemon and other services running inside the VM.
 
 ## Windows Containers
 
