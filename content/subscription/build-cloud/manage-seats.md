@@ -40,4 +40,4 @@ As an owner of the Docker Build Cloud team, you can invite members to access clo
 
 Invitees receive an email with instructions on how they can accept the invite. After they accept, the seat will be marked as **Allocated** in the **User management** section in the Docker Build Cloud dashboard.
 
-For more information on the permissions granted to members, see Roles and permissions - Docker Build Cloud.
+For more information on the permissions granted to members, see [Roles and permissions](/security/for-admins/roles-and-permissions#docker-build-cloud).

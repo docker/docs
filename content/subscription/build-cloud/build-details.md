@@ -48,7 +48,7 @@ The Docker Build Cloud Team subscription is tied to a Docker
 shared cache of a Docker Build Cloud Team subscription, users must be a part of
 the organization associated with the subscription. See Manage seats and invites.
 
-To learn how to buy this subscription for your Docker organization, see [Buy your subscription - Existing account or organization](/billing/build-billing#existing-account-or-organization).
+To learn how to buy this subscription for your Docker organization, see [Buy your subscription - existing account or organization](/billing/build-billing#existing-account-or-organization).
 
 If you haven’t created a Docker organization yet and don’t have an existing Docker Core subscription, see [Buy your subscription - new organization](/billing/build-billing#new-organization). For organizations without a Docker Core subscription, this plan also includes 50 shared minutes in addition to the Docker Build Cloud Team minutes.
 
