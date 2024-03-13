@@ -8,6 +8,18 @@ toc_max: 2
 This page contains information about the new features, improvements, and bug
 fixes in [Docker Buildx](https://github.com/docker/buildx).
 
+## 0.13.1
+
+{{< release-date date="2024-03-13" >}}
+
+The full release note for this release is available
+[on GitHub](https://github.com/docker/buildx/releases/tag/v0.13.1).
+
+### Bug fixes
+
+- Fix connecting to `docker-container://` and `kube-pod://` style URLs with remote driver. [docker/buildx#2327](https://github.com/docker/buildx/pull/2327)
+- Fix handling of `--push` with Bake when a target has already defined a non-image output. [docker/buildx#2330](https://github.com/docker/buildx/pull/2330)
+
 ## 0.13.0
 
 {{< release-date date="2024-03-06" >}}
