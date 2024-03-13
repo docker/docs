@@ -96,14 +96,12 @@ Docker from the repository.
    ```bash
    # Add Docker's official GPG key:
    sudo apt-get update
-   sudo apt-get install ca-certificates curl
-   sudo install -m 0755 -d /etc/apt/keyrings
-   sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
-   sudo chmod a+r /etc/apt/keyrings/docker.asc
+   sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
+   sudo curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker.gpg
 
    # Add the repository to Apt sources:
    echo \
-     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
+     "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker.gpg] {{% param "download-url-base" %}} \
      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
    sudo apt-get update
