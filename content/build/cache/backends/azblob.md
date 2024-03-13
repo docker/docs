@@ -50,7 +50,7 @@ The environment variables are read from the server, not the Buildx client.
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../_index.md).
+For an introduction to caching see [Docker build cache](../_index.md).
 
 For more information on the `azblob` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#azure-blob-storage-cache-experimental).

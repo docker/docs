@@ -1,5 +1,5 @@
 ---
-title: Optimizing builds with cache management
+title: Docker build cache
 description: Improve your build speed with effective use of the build cache
 keywords: build, buildx, buildkit, dockerfile, image layers, build instructions, build context
 aliases:
@@ -9,7 +9,7 @@ aliases:
 When you build the same Docker image multiple times, knowing how to optimize
 the build cache is a great tool for making sure the builds run fast.
 
-## How does the build cache work?
+## How the build cache works
 
 Understanding Docker's build cache helps you write better Dockerfiles that
 result in faster builds.
@@ -64,7 +64,7 @@ anything differently, they still need to re-run.
 > before it has changed, or by clearing the build cache using
 > [`docker builder prune`](../../reference/cli/docker/builder/prune.md).
 
-## How can I use the cache efficiently?
+## Optimizing how you use the build cache
 
 Now that you understand how the cache works, you can begin to use the cache to
 your advantage. While the cache will automatically work on any `docker build`
