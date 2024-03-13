@@ -1819,7 +1819,9 @@ Manuals:
     - sectiontitle: Cache
       section:
         - path: /build/cache/
-          title: Optimizing builds with cache
+          title: Overview
+        - path: /build/cache/invalidation/
+          title: Cache invalidation
         - path: /build/cache/garbage-collection/
           title: Garbage collection
         - sectiontitle: Cache backends
@@ -1918,6 +1920,8 @@ Manuals:
             title: SBOM and provenance attestations
           - path: /build/ci/github-actions/annotations/
             title: Annotations
+          - path: /build/ci/github-actions/reproducible-builds/
+            title: Reproducible builds
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose

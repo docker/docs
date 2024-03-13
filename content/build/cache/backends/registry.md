@@ -63,7 +63,7 @@ fail, but the build continues.
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../_index.md).
+For an introduction to caching see [Docker build cache](../_index.md).
 
 For more information on the `registry` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#registry-push-image-and-cache-separately).
