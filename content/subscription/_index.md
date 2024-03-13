@@ -13,7 +13,7 @@ grid_subscriptions:
   icon: query_stats
 - title: Docker Build Cloud subscriptions and features
   description: Learn how a Docker Build Cloud subscription can accelerate your builds.
-  link: /subscription/build-details/
+  link: /subscription/build-cloud/build-details/
   icon: build
 grid_core:
 - title: Upgrade your subscription

@@ -2166,12 +2166,16 @@ Manuals:
       title: Remove seats
     - path: /subscription/core-subscription/downgrade/
       title: Downgrade
-  - path: /subscription/desktop-license/
-    title: Docker Desktop license agreement
+  - sectiontitle: Docker Build Cloud
+    section:
+    - path: /subscription/build-cloud/build-details/
+      title: Subscriptions and features
+    - path: /subscription/build-cloud/manage-seats/
+      title: Manage seats and invites
   - path: /subscription/scout-details/
     title: Docker Scout subscriptions and features
-  - path: /subscription/build-details/
-    title: Docker Build Cloud subscriptions and features
+  - path: /subscription/desktop-license/
+    title: Docker Desktop license agreement
 
 - sectiontitle: Trusted content
   section:
