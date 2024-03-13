@@ -1819,7 +1819,9 @@ Manuals:
     - sectiontitle: Cache
       section:
         - path: /build/cache/
-          title: Optimizing builds with cache
+          title: Overview
+        - path: /build/cache/invalidation/
+          title: Cache invalidation
         - path: /build/cache/garbage-collection/
           title: Garbage collection
         - sectiontitle: Cache backends

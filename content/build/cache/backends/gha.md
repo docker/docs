@@ -101,7 +101,7 @@ For example:
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../_index.md).
+For an introduction to caching see [Docker build cache](../_index.md).
 
 For more information on the `gha` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#github-actions-cache-experimental).
