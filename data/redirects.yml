@@ -113,6 +113,10 @@
   # used in warnings printed by the Docker Engine, and in the installation script
   # at "get.docker.com"
   - /go/attack-surface/
+"/engine/security/protect-access/":
+  # Details about how to protect the Docker daemon socket.
+  # This redirect is used in warnings printed by the Docker Engine.
+  - /go/api-security/
 "/registry/spec/deprecated-schema-v1/":
   # Details about deprecated image manifest formats. This redirect is currently
   # used in warnings printed by the Docker Engine when pulling deprecated image
