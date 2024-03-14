@@ -4,7 +4,7 @@ keywords: swarm, security, tls, pki,
 title: Manage swarm security with public key infrastructure (PKI)
 ---
 
-The swarm mode public key infrastructure (PKI) system built into Docker
+The Swarm mode public key infrastructure (PKI) system built into Docker
 makes it simple to securely deploy a container orchestration system. The nodes
 in a swarm use mutual Transport Layer Security (TLS) to authenticate, authorize,
 and encrypt the communications with other nodes in the swarm.
@@ -14,10 +14,10 @@ as a manager node. By default, the manager node generates a new root Certificate
 Authority (CA) along with a key pair, which are used to secure communications
 with other nodes that join the swarm. If you prefer, you can specify your own
 externally-generated root CA, using the `--external-ca` flag of the
-[docker swarm init](../../reference/commandline/swarm_init.md) command.
+[docker swarm init](../../../reference/cli/docker/swarm/init.md) command.
 
 The manager node also generates two tokens to use when you join additional nodes
-to the swarm: one **worker token** and one **manager token**. Each token
+to the swarm: one worker token and one manager token. Each token
 includes the digest of the root CA's certificate and a randomly generated
 secret. When a node joins the swarm, the joining node uses the digest to
 validate the root CA certificate from the remote manager. The remote manager
@@ -32,7 +32,7 @@ the lifetime of the node in the current swarm.
 The diagram below illustrates how manager nodes and worker nodes encrypt
 communications using a minimum of TLS 1.2.
 
-![TLS diagram](/engine/swarm/images/tls.png)
+![TLS diagram](/engine/swarm/images/tls.webp?w=600)
 
 The example below shows the information from a certificate from a worker node:
 
@@ -55,7 +55,7 @@ By default, each node in the swarm renews its certificate every three months.
 You can configure this interval by running the `docker swarm update
 --cert-expiry <TIME PERIOD>` command. The minimum rotation value is 1 hour.
 Refer to the
-[docker swarm update](../../reference/commandline/swarm_update.md) CLI
+[docker swarm update](../../../reference/cli/docker/swarm/update.md) CLI
 reference for details.
 
 ## Rotating the CA certificate
@@ -103,4 +103,4 @@ root CA, and do not contain any intermediates.
 ## Learn More
 
 * Read about how [nodes](nodes.md) work.
-* Learn how swarm mode [services](services.md) work.
+* Learn how Swarm mode [services](services.md) work.

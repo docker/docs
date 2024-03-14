@@ -18,16 +18,16 @@ on GitHub/GitLab doing exactly this now.
 
 In the `getting-started-app` directory, create a file named `compose.yaml`.
 
-   ```
-   ├── getting-started-app/
-   │ ├── Dockerfile
-   │ ├── compose.yaml
-   │ ├── node_modules/
-   │ ├── package.json
-   │ ├── spec/
-   │ ├── src/
-   │ └── yarn.lock
-   ```
+```text
+├── getting-started-app/
+│ ├── Dockerfile
+│ ├── compose.yaml
+│ ├── node_modules/
+│ ├── package.json
+│ ├── spec/
+│ ├── src/
+│ └── yarn.lock
+```
 
 ## Define the app service
 
@@ -51,7 +51,6 @@ You'll now define this service in the `compose.yaml` file.
    The name will automatically become a network alias, which will be useful when defining your MySQL service.
 
    ```yaml
-
    services:
      app:
        image: node:18-alpine

@@ -2,13 +2,13 @@ command: docker config ls
 aliases: docker config ls, docker config list
 short: List configs
 long: |-
-    Run this command on a manager node to list the configs in the swarm.
+    Run this command on a manager node to list the configs in the Swarm.
 
     For detailed information about using configs, refer to [store configuration data using Docker Configs](/engine/swarm/configs/).
 
     > **Note**
     >
-    > This is a cluster management command, and must be executed on a swarm
+    > This is a cluster management command, and must be executed on a Swarm
     > manager node. To learn about managers and workers, refer to the
     > [Swarm mode section](/engine/swarm/) in the
     > documentation.
@@ -178,6 +178,7 @@ examples: |-
     78a85c484f71        config-3                  10 days ago
     ```
 deprecated: false
+hidden: false
 min_api_version: "1.30"
 experimental: false
 experimentalcli: false

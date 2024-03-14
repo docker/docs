@@ -13,9 +13,10 @@ aliases:
 { .restricted }
 
 The GitHub Actions cache utilizes the
-[GitHub-provided Action's cache](https://github.com/actions/cache) available
-from within your CI execution environment. This is the recommended cache to use
-inside your GitHub action pipelines, as long as your use case falls within the
+[GitHub-provided Action's cache](https://github.com/actions/cache) or other
+cache services supporting the GitHub Actions cache protocol. This is the
+recommended cache to use inside your GitHub Actions workflows, as long as your
+use case falls within the
 [size and usage limits set by GitHub](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy).
 
 This cache storage backend is not supported with the default `docker` driver.
@@ -33,13 +34,14 @@ $ docker buildx build --push -t <registry>/<image> \
 The following table describes the available CSV parameters that you can pass to
 `--cache-to` and `--cache-from`.
 
-| Name           | Option                  | Type        | Default                         | Description                                   |
-| -------------- | ----------------------- | ----------- | ------------------------------- | --------------------------------------------- |
-| `url`          | `cache-to`,`cache-from` | String      | `$ACTIONS_CACHE_URL`            | Cache server URL, see [authentication][1].    |
-| `token`        | `cache-to`,`cache-from` | String      | `$ACTIONS_RUNTIME_TOKEN`        | Access token, see [authentication][1].        |
-| `scope`        | `cache-to`,`cache-from` | String      | Name of the current Git branch. | Cache scope, see [scope][2]                   |
-| `mode`         | `cache-to`              | `min`,`max` | `min`                           | Cache layers to export, see [cache mode][3].  |
-| `ignore-error` | `cache-to`              | Boolean     | `false`                         | Ignore errors caused by failed cache exports. |
+| Name           | Option                  | Type        | Default                  | Description                                                          |
+| -------------- | ----------------------- | ----------- | ------------------------ | -------------------------------------------------------------------- |
+| `url`          | `cache-to`,`cache-from` | String      | `$ACTIONS_CACHE_URL`     | Cache server URL, see [authentication][1].                           |
+| `token`        | `cache-to`,`cache-from` | String      | `$ACTIONS_RUNTIME_TOKEN` | Access token, see [authentication][1].                               |
+| `scope`        | `cache-to`,`cache-from` | String      | `buildkit`               | Which scope cache object belongs to, see [scope][2]                  |
+| `mode`         | `cache-to`              | `min`,`max` | `min`                    | Cache layers to export, see [cache mode][3].                         |
+| `ignore-error` | `cache-to`              | Boolean     | `false`                  | Ignore errors caused by failed cache exports.                        |
+| `timeout`      | `cache-to`,`cache-from` | String      | `10m`                    | Max duration for importing or exporting cache before it's timed out. |
 
 [1]: #authentication
 [2]: #scope
@@ -56,23 +58,21 @@ GitHub Action as a helper for exposing the variables.
 
 ## Scope
 
-By default, cache is scoped per Git branch. This ensures a separate cache
-environment for the main branch and each feature branch. If you build multiple
-images on the same branch, each build will overwrite the cache of the previous,
-leaving only the final cache.
+Scope is a key used to identify the cache object. By default, it is set to
+`buildkit`. If you build multiple images, each build will overwrite the cache
+of the previous, leaving only the final cache.
 
-To preserve the cache for multiple builds on the same branch, you can manually
-specify a cache scope name using the `scope` parameter. In the following
-example, the cache is set to a combination of the branch name and the image
-name, to ensure each image gets its own cache):
+To preserve the cache for multiple builds, you can specify this scope attribute
+with a specific name. In the following example, the cache is set to the image
+name, to ensure each image gets its own cache:
 
 ```console
 $ docker buildx build --push -t <registry>/<image> \
-  --cache-to type=gha,url=...,token=...,scope=$GITHUB_REF_NAME-image \
-  --cache-from type=gha,url=...,token=...,scope=$GITHUB_REF_NAME-image .
+  --cache-to type=gha,url=...,token=...,scope=image \
+  --cache-from type=gha,url=...,token=...,scope=image .
 $ docker buildx build --push -t <registry>/<image2> \
-  --cache-to type=gha,url=...,token=...,scope=$GITHUB_REF_NAME-image2 \
-  --cache-from type=gha,url=...,token=...,scope=$GITHUB_REF_NAME-image2 .
+  --cache-to type=gha,url=...,token=...,scope=image2 \
+  --cache-from type=gha,url=...,token=...,scope=image2 .
 ```
 
 GitHub's [cache access restrictions](https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache),
@@ -101,7 +101,7 @@ For example:
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../_index.md).
+For an introduction to caching see [Docker build cache](../_index.md).
 
 For more information on the `gha` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#github-actions-cache-experimental).

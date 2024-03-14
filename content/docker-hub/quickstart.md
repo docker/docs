@@ -2,7 +2,7 @@
 description: Learn how to get started using Docker Hub
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, accounts,
   organizations, repositories, groups, teams
-title: Docker Hub Quickstart
+title: Docker Hub quickstart
 aliases:
 - /apidocs/docker-cloud/
 - /docker-cloud/
@@ -79,23 +79,28 @@ aliases:
 
 The following section contains step-by-step instructions on how to get started with Docker Hub.
 
-### Step 1: Sign up for a Docker account
+### Step 1: Sign up for a free Docker account
 
 Start by creating a [Docker ID](https://hub.docker.com/signup).
 
-A Docker ID grants you access to Docker Hub repositories and lets you explore available images from the community and verified publishers. You also need a Docker ID to share images on Docker Hub.
+A [Docker ID](../docker-id/_index.md) grants you access to Docker Hub repositories and lets you explore available images from the community and verified publishers. You also need a Docker ID to share images on Docker Hub.
+
+> **Tip**
+>
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
+{ .tip }
 
 ### Step 2: Create your first repository
 
 To create a repository:
 
 1. Sign in to [Docker Hub](https://hub.docker.com).
-2. Select **Create a Repository** on the Docker Hub welcome page.
+2. On the Repositories page, select **Create repository**.
 3. Name it **&lt;your-username&gt;/my-private-repo**.
 4. Set the visibility to **Private**.
 5. Select **Create**.
 
-    You've created your first repository. 
+You've created your first repository.
 
 ### Step 3: Download and install Docker Desktop
 
@@ -147,7 +152,7 @@ You need to download Docker Desktop to build, push, and pull container images.
 
 ### Step 5: Build and push a container image to Docker Hub from your computer
 
-1. Start by creating a [Dockerfile](../engine/reference/builder.md) to specify your application as shown below:
+1. Start by creating a [Dockerfile](../reference/dockerfile.md) to specify your application as shown below:
 
    ```dockerfile
    # syntax=docker/dockerfile:1
@@ -163,7 +168,31 @@ Docker image locally.
 
 4. Run `docker push <your_username>/my-private-repo` to push your Docker image to Docker Hub. You should see output similar to:
 
-    ![Terminal](images/index-terminal.png)
+   ```console
+   $ cat > Dockerfile <<EOF
+   FROM busybox
+   CMD echo "Hello world! This is my first Docker image."
+   EOF
+   $ docker build -t mobythewhale/my-private-repo .
+   [+] Building 1.2s (5/5) FINISHED
+   => [internal] load build definition from Dockerfile
+   => => transferring dockerfile: 110B
+   => [internal] load .dockerignore
+   => => transferring context: 2B
+   => [internal] load metadata for docker.io/library/busybox:latest
+   => CACHED [1/1] FROM docker.io/library/busybox@sha256:a9286defaba7n3a519
+   => exporting to image
+   => => exporting layers
+   => => writing image sha256:dcdb1fd928bf257bfc0122ea47accd911a3a386ce618
+   => => naming to docker.io/mobythewhale/my-private-repo
+   $ docker run mobythewhale/my-private-repo
+   Hello world! This is my first Docker image.
+   $ docker push mobythewhale/my-private-repo
+   The push refers to repository [docker.io/mobythewhale/my-private-repo]
+   d2421964bad1: Layer already exists
+   latest: digest: sha256:7604fbf8eeb03d866fd005fa95cdbb802274bf9fa51f7dafba6658294
+   efa9baa size: 526
+   ```
 
     >**Note**
     >
@@ -171,7 +200,7 @@ Docker image locally.
 
 5. Your repository in Docker Hub should now display a new `latest` tag under **Tags**:
 
-    ![Tag created](images/index-tag.png)
+    ![Tag created](images/index-tag.webp)
 
 You've successfully:
 

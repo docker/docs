@@ -8,33 +8,36 @@ aliases:
   - /scout/advanced-image-analysis/
 ---
 
-When you activate image analysis for a repository, Docker Scout analyzes new
-images automatically when you push to that repository. Docker Scout image
-analysis is more than point-in-time scanning, the analysis gets reevaluated
-continuously, meaning you don't need to re-scan the image to see an updated
-vulnerability report.
+When you activate image analysis for a repository,
+Docker Scout automatically analyzes new images that you push to that repository.
 
-Docker Scout image analysis is available by default for Docker Hub
-repositories. You can also integrate third-party registries, such as Amazon ECR
-and JFrog Artifactory, and even run image analysis locally on your development
-machine.
+Image analysis extracts the Software Bill of Material (SBOM)
+and other image metadata,and evaluates it against vulnerability data from
+[security advisories](./advisory-db-sources.md).
 
-The following video shows how to activate Docker Scout image analysis on your
-repositories.
+If you run image analysis as a one-off task using the CLI or Docker Desktop,
+Docker Scout won't store any data about your image.
+If you enable Docker Scout for your container image repositories however,
+Docker Scout saves a metadata snapshot of your images after the analysis.
+As new vulnerability data becomes available, Docker Scout recalibrates the analysis using the metadata snapshot,
+which means your security status for images is updated in real-time.
+This dynamic evaluation means there's no need to re-analyze images when new CVE information is disclosed.
 
-<iframe class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/a6fb14ede0a94d0d984edf6cf16604e0?sid=ba34f694-32a6-4b74-b3f8-9cc6b80ef66f"></iframe>
+Docker Scout image analysis is available by default for Docker Hub repositories.
+You can also integrate third-party registries and other services. To learn more,
+see [Integrating Docker Scout with other systems](./integrations/_index.md).
 
-## Activate image analysis
+## Activate Docker Scout on a repository
 
 The free tier of Docker Scout lets you use Docker Scout for up to 3
 repositories per Docker organization. You can update your Docker Scout plan if
 you need additional repositories, see [Docker Scout
 billing](../billing/scout-billing.md).
 
-Before you can activate image analysis for a repository, ensure that the
-registry is integrated with Docker Scout. Docker Hub is integrated by default.
-For information about integrating Docker Scout with registries and other
-systems, see [Integrating Docker Scout](./integrations/_index.md)
+Before you can activate image analysis on a repository in a third-party registry,
+the registry must be integrated with Docker Scout for your Docker organization.
+Docker Hub is integrated by default. For more information, see
+See [Container registry integrations](./integrations/_index.md#container-registries)
 
 > **Note**
 >
@@ -50,14 +53,20 @@ To activate image analysis:
 5. Select the repositories that you want to enable.
 6. Select **Enable image analysis**.
 
-If your repositories already contain images, Docker Scout pulls and analyzes
-the latest images automatically.
+If your repositories already contain images,
+Docker Scout pulls and analyzes the latest images automatically.
 
 ## Analyze registry images
 
 To trigger image analysis for an image in a registry, push the image to a
 registry that's integrated with Docker Scout, to a repository where image
 analysis is activated.
+
+> **Note**
+>
+> Image analysis on the Docker Scout platform has a maximum image file size
+> limit of 10 GB, unless the image has an SBOM attestation.
+> See [Maximum image size](#maximum-image-size).
 
 1. Sign in with your Docker ID, either using the `docker login` command or the
    **Sign in** button in Docker Desktop.
@@ -71,8 +80,10 @@ analysis is activated.
    [build attestations](../build/attestations/_index.md) to the image. Docker
    Scout uses attestations to provide more fine-grained analysis results.
 
-   The default `docker` driver only supports build attestations if you use the
-   [containerd image store](../desktop/containerd/_index.md).
+   > **Note**
+   >
+   > The default `docker` driver only supports build attestations if you use the
+   > [containerd image store](../desktop/containerd.md).
 
 3. Go to the [Docker Scout Dashboard](https://scout.docker.com/)
 4. Sign in with your Docker ID.
@@ -80,20 +91,19 @@ analysis is activated.
 6. Go to the **Images** tab. The image appears in the list shortly after you
    push it to the registry.
 
-   It may take a few minutes for the analysis report to appear. If the analysis
-   report is not available, wait a moment and then refresh the page.
+   It may take a few minutes for the analysis results to appear.
 
 ## Analyze images locally
 
 You can analyze local images with Docker Scout using Docker Desktop or the
-`docker scout quickview` and `docker scout cves` commands for the Docker CLI.
+`docker scout` commands for the Docker CLI.
 
 ### Docker Desktop
 
 > **Note**
 >
-> There is a 3 GB size limit on images analyzed by Docker Scout in Docker
-> Desktop.
+> Docker Desktop background indexing supports images up to 10 GB in size.
+> See [Maximum image size](#maximum-image-size).
 
 To analyze an image locally using the Docker Desktop GUI:
 
@@ -107,38 +117,16 @@ To analyze an image locally using the Docker Desktop GUI:
 
 ### CLI
 
-The `docker scout` CLI commands provide a terminal interface for using Docker
-Scout with local and remote images.
+The `docker scout` CLI commands provide a command line interface for using Docker
+Scout from your terminal.
 
-Using the `docker scout quickview` and `docker scout cves` CLI commands, you
-can analyze images locally and view the analysis report in text format. You can
-print the results directly to stdout, or export them to a file using a
-structured format, such as Static Analysis Results Interchange Format (SARIF).
+- `docker scout quickview`: summary of the specified image, see [Quickview](#quickview)
+- `docker scout cves`: local analysis of the specified image, see [CVEs](#cves)
+- `docker scout compare`: analyzes and compares two images
 
-#### Install
-
-The Docker Scout CLI plugin is available in Docker Desktop starting with
-version 4.17 and available as a standalone binary.
-
-To install the latest version of the plugin manually, run the following
-commands:
-
-```console
-$ curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
-$ sh install-scout.sh
-```
-
-> **Note**
->
-> Always examine scripts downloaded from the internet before running them
-> locally. Before installing, make yourself familiar with potential risks and
-> limitations of the convenience script.
-
-If you want to install the plugin manually, you can find full instructions in
-the [plugin's repository](https://github.com/docker/scout-cli).
-
-The plugin is also available as [a container image](https://hub.docker.com/r/docker/scout-cli)
-and as [a GitHub action](https://github.com/docker/scout-action).
+By default, the results are printed to standard output.
+You can also export results to a file in a structured format,
+such as Static Analysis Results Interchange Format (SARIF).
 
 #### Quickview
 
@@ -200,5 +188,56 @@ $ docker scout cves --format only-packages --only-vuln-packages \
 For more information about these commands and how to use them, refer to the CLI
 reference documentation:
 
-- [`docker scout quickview`](../engine/reference/commandline/scout_quickview.md)
-- [`docker scout cves`](../engine/reference/commandline/scout_cves.md)
+- [`docker scout quickview`](../reference/cli/docker/scout/quickview.md)
+- [`docker scout cves`](../reference/cli/docker/scout/cves.md)
+
+## Vulnerability severity assessment
+
+Docker Scout assigns a severity rating to vulnerabilities based on
+vulnerability data from [advisory sources](./advisory-db-sources.md).
+Advisories are ranked and prioritized depending on the type of package that's
+affected by a vulnerability. For example, if a vulnerability affects an OS
+package, the severity level assigned by the distribution maintainer is
+prioritized.
+
+If the preferred advisory source has assigned a severity rating to a CVE, but
+not a CVSS score, Docker Scout falls back to displaying a CVSS score from
+another source. The severity rating from the preferred advisory and the CVSS
+score from the fallback advisory are displayed together. This means a
+vulnerability can have a severity rating of `LOW` with a CVSS score of 9.8, if
+the preferred advisory assigns a `LOW` rating but no CVSS score, and a fallback
+advisory assigns a CVSS score of 9.8.
+
+Vulnerabilities that haven't been assigned a CVSS score in any source are
+categorized as **Unspecified** (U).
+
+Docker Scout doesn't implement a proprietary vulnerability metrics system. All
+metrics are inherited from security advisories that Docker Scout integrates
+with. Advisories may use different thresholds for classifying vulnerabilities,
+but most of them adhere to the CVSS v3.0 specification, which maps CVSS scores
+to severity ratings according to the following table:
+
+| CVSS score | Severity rating  |
+| ---------- | ---------------- |
+| 0.1 – 3.9  | **Low** (L)      |
+| 4.0 – 6.9  | **Medium** (M)   |
+| 7.0 – 8.9  | **High** (H)     |
+| 9.0 – 10.0 | **Critical** (C) |
+
+For more information, see [Vulnerability Metrics (NIST)](https://nvd.nist.gov/vuln-metrics/cvss).
+
+Note that, given the advisory prioritization and fallback mechanism described
+earlier, severity ratings displayed in Docker Scout may deviate from this
+rating system.
+
+## Maximum image size
+
+Image analysis on the Docker Scout platform, and analysis triggered by background
+indexing in Docker Desktop, has an image file size limit of 10 GB (uncompressed).
+To analyze images larger than that, you can either:
+
+- Attach [SBOM attestations](../build/attestations/sbom.md) at build-time
+- Use the [CLI](#cli) to analyze the image locally
+
+Images analyzed locally with the CLI and images with SBOM attestations
+have no maximum file size.

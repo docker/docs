@@ -3,15 +3,13 @@ description: Collecting Docker metrics with Prometheus
 keywords: prometheus, metrics
 title: Collect Docker metrics with Prometheus
 aliases:
-- /engine/admin/prometheus/
-- /config/thirdparty/monitoring/
-- /config/thirdparty/prometheus/
+  - /engine/admin/prometheus/
+  - /config/thirdparty/monitoring/
+  - /config/thirdparty/prometheus/
 ---
 
 [Prometheus](https://prometheus.io/) is an open-source systems monitoring and
-alerting toolkit. You can configure Docker as a Prometheus target. This topic
-shows you how to configure Docker, set up Prometheus to run as a Docker
-container, and monitor your Docker instance using Prometheus.
+alerting toolkit. You can configure Docker as a Prometheus target.
 
 > **Warning**
 >
@@ -19,48 +17,41 @@ container, and monitor your Docker instance using Prometheus.
 > development and may change at any time.
 { .warning }
 
-Currently, you can only monitor Docker itself. You cannot currently monitor your
+Currently, you can only monitor Docker itself. You can't currently monitor your
 application using the Docker target.
 
-## Prerequisites
+## Example
 
-1.  One or more Docker engines are joined into a Docker swarm, using `docker
-    swarm init` on one manager and `docker swarm join` on other managers and
-    worker nodes.
-2.  You need an internet connection to pull the Prometheus image.
+The following example shows you how to configure your Docker daemon, set up
+Prometheus to run as a container on your local machine, and monitor your Docker
+instance using Prometheus.
 
-## Configure Docker
+### Configure the daemon
 
 To configure the Docker daemon as a Prometheus target, you need to specify the
-`metrics-address`. The best way to do this is via the `daemon.json`, which is
-located at one of the following locations by default. If the file does not
-exist, create it.
+`metrics-address` in the `daemon.json` configuration file. This daemon expects
+the file to be located at one of the following locations by default. If the
+file doesn't exist, create it.
 
 - **Linux**: `/etc/docker/daemon.json`
 - **Windows Server**: `C:\ProgramData\docker\config\daemon.json`
-- **Docker Desktop for Mac / Docker Desktop for Windows**: Click the Docker icon in the toolbar,
-  select **Settings**, then select **Docker Engine**.
+- **Docker Desktop**: Open the Docker Desktop settings and select **Docker Engine** to edit the file.
 
-If the file is currently empty, paste the following:
+Add the following configuration:
 
 ```json
 {
-  "metrics-addr" : "127.0.0.1:9323"
+  "metrics-addr": "127.0.0.1:9323"
 }
 ```
 
-If the file is not empty, add the new key, making sure that the resulting
-file is valid JSON. Be careful that every line ends with a comma (`,`) except
-for the last line.
+Save the file, or in the case of Docker Desktop for Mac or Docker Desktop for
+Windows, save the configuration. Restart Docker.
 
-Save the file, or in the case of Docker Desktop for Mac or Docker Desktop for Windows, save the
-configuration. Restart Docker.
+Docker now exposes Prometheus-compatible metrics on port 9323 on the loopback
+interface.
 
-Docker now exposes Prometheus-compatible metrics on port 9323.
-
-## Configure and run Prometheus
-
-Prometheus runs as a Docker service on a Swarm.
+### Create a Prometheus configuration
 
 Copy the following configuration file and save it to a location of your choice,
 for example `/tmp/prometheus.yml`. This is a stock Prometheus configuration file,
@@ -69,14 +60,14 @@ except for the addition of the Docker job definition at the bottom of the file.
 ```yml
 # my global config
 global:
-  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
   evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
   # scrape_timeout is set to the global default (10s).
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-      monitor: 'codelab-monitor'
+    monitor: "codelab-monitor"
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -87,90 +78,90 @@ rule_files:
 # Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
+  - job_name: prometheus
 
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['host.docker.internal:9090']
+      - targets: ["localhost:9090"]
 
-  - job_name: 'docker'
-         # metrics_path defaults to '/metrics'
-         # scheme defaults to 'http'.
+  - job_name: docker
+      # metrics_path defaults to '/metrics'
+      # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['localhost:9323']
+      - targets: ["host.docker.internal:9323"]
 ```
 
-Next, start a single-replica Prometheus service using this configuration.
+### Run Prometheus in a container
 
-- If you're using Docker Desktop, run:
+Next, start a Prometheus container using this configuration.
 
-  ```console
-  $ docker service create --replicas 1 --name my-prometheus \
-      --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
-      --publish published=9090,target=9090,protocol=tcp \
-      prom/prometheus
-  ```
+```console
+$ docker run --name my-prometheus \
+    --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
+    -p 9090:9090 \
+    --add-host host.docker.internal=host-gateway \
+    prom/prometheus
+```
 
-- If you're using Docker Engine without Docker Desktop, run:
+If you're using Docker Desktop, the `--add-host` flag is optional. This flag
+makes sure that the host's internal IP gets exposed to the Prometheus
+container. Docker Desktop does this by default. The host IP is exposed as the
+`host.docker.internal` hostname. This matches the configuration defined in
+`prometheus.yml` in the previous step.
 
-  ```console
-  $ docker service create --replicas 1 --name my-prometheus \
-      --mount type=bind,source=/tmp/prometheus.yml,destination=/etc/prometheus/prometheus.yml \
-      --publish published=9090,target=9090,protocol=tcp \
-      --add-host host.docker.internal:host-gateway \
-      prom/prometheus
-  ```
+### Open the Prometheus Dashboard
 
-Verify that the Docker target is listed at http://localhost:9090/targets/.
+Verify that the Docker target is listed at `http://localhost:9090/targets/`.
 
-![Prometheus targets page](images/prometheus-targets.png)
+![Prometheus targets page](images/prometheus-targets.webp)
 
-You can't access the endpoint URLs directly if you use Docker Desktop 
-for Mac or Docker Desktop for Windows.
+> **Note**
+>
+> You can't access the endpoint URLs on this page directly if you use Docker
+> Desktop.
 
-## Use Prometheus
+### Use Prometheus
 
-Create a graph. Click the **Graphs** link in the Prometheus UI. Choose a metric
+Create a graph. Select the **Graphs** link in the Prometheus UI. Choose a metric
 from the combo box to the right of the **Execute** button, and click
 **Execute**. The screenshot below shows the graph for
 `engine_daemon_network_actions_seconds_count`.
 
-![Prometheus engine_daemon_network_actions_seconds_count report](images/prometheus-graph_idle.png)
+![Idle Prometheus report](images/prometheus-graph_idle.webp)
 
-The above graph shows a pretty idle Docker instance. Your graph might look
-different if you are running active workloads.
+The graph shows a pretty idle Docker instance, unless you're already running
+active workloads on your system.
 
-To make the graph more interesting, create some network actions by starting
-a service with 10 tasks that just ping Docker non-stop (you can change the
-ping target to anything you like):
-
-```console
-$ docker service create \
-  --replicas 10 \
-  --name ping_service \
-  alpine ping docker.com
-```
-
-Wait a few minutes (the default scrape interval is 15 seconds) and reload
-your graph.
-
-![Prometheus engine_daemon_network_actions_seconds_count report](images/prometheus-graph_load.png)
-
-When you are ready, stop and remove the `ping_service` service, so that you
-are not flooding a host with pings for no reason.
+To make the graph more interesting, run a container that uses some network
+actions by starting downloading some packages using a package manager:
 
 ```console
-$ docker service remove ping_service
+$ docker run --rm alpine apk add git make musl-dev go
 ```
 
-Wait a few minutes and you should see that the graph falls back to the idle
-level.
+Wait a few seconds (the default scrape interval is 15 seconds) and reload your
+graph. You should see an uptick in the graph, showing the increased network
+traffic caused by the container you just ran.
 
+![Prometheus report showing traffic](images/prometheus-graph_load.webp)
 
 ## Next steps
 
-- Read the [Prometheus documentation](https://prometheus.io/docs/introduction/overview/)
-- Set up some [alerts](https://prometheus.io/docs/alerting/overview/)
+The example provided here shows how to run Prometheus as a container on your
+local system. In practice, you'll probably be running Prometheus on another
+system or as a cloud service somewhere. You can set up the Docker daemon as a
+Prometheus target in such contexts too. Configure the `metrics-addr` of the
+daemon and add the address of the daemon as a scrape endpoint in your
+Prometheus configuration.
+
+```yaml
+- job_name: docker
+  static_configs:
+    - targets: ["docker.daemon.example:<PORT>"]
+```
+
+For more information about Prometheus, refer to the
+[Prometheus documentation](https://prometheus.io/docs/introduction/overview/)

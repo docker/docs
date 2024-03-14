@@ -33,6 +33,8 @@ compatibility, and [how to upgrade](#upgrading).
 
 {{< include "content/compose-matrix.md" >}}
 
+<!-- markdownlint-disable reference-links-images -->
+
 > Looking for more detail on Docker and Compose compatibility?
 >
 > We recommend keeping up-to-date with newer releases as much as possible.
@@ -43,6 +45,7 @@ gives details on which versions of Docker Engine are supported, along
 with compatible Compose file format versions. (See also, the discussion in
 [issue #3404]({{% param "repo" %}}/issues/3404).)
 
+<!-- markdownlint-enable reference-links-images -->
 
 For details on versions and how to upgrade, see
 [Versioning](compose-versioning.md#versioning) and
@@ -253,8 +256,6 @@ several more.
 - Removed: `volume_driver`, `volumes_from`, `cpu_shares`, `cpu_quota`,
   `cpuset`, `mem_limit`, `memswap_limit`, `extends`, `group_add`. See
   the [upgrading](#upgrading) guide for how to migrate away from these.
-  For more information on `extends`, see
-  [Extending services](../multiple-compose-files/extends.md).
 
 - Added: [deploy](compose-file-v3.md#deploy)
 

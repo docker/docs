@@ -15,10 +15,10 @@ aliases:
 - /notary/reference/common-configs/
 ---
 
-When transferring data among networked systems, *trust* is a central concern. In
+When transferring data among networked systems, trust is a central concern. In
 particular, when communicating over an untrusted medium such as the internet, it
 is critical to ensure the integrity and the publisher of all the data a system
-operates on. You use the Docker Engine to push and pull images (data) to a
+operates on. You use Docker Engine to push and pull images (data) to a
 public or private registry. Content trust gives you the ability to verify both
 the integrity and the publisher of all the data received from a registry over
 any channel.
@@ -39,7 +39,7 @@ chains signing content as part of their release process.
 
 An individual image record has the following identifier:
 
-```
+```text
 [REGISTRY_HOST[:REGISTRY_PORT]/]REPOSITORY[:TAG]
 ```
 
@@ -86,16 +86,16 @@ Trust for an image tag is managed through the use of signing keys. A key set is
 created when an operation using DCT is first invoked. A key set consists
 of the following classes of keys:
 
-- an offline key that is the root of DCT for an image tag
-- repository or tagging keys that sign tags
-- server-managed keys such as the timestamp key, which provides freshness
+- An offline key that is the root of DCT for an image tag
+- Repository or tagging keys that sign tags
+- Server-managed keys such as the timestamp key, which provides freshness
 	security guarantees for your repository
 
 The following image depicts the various signing keys and their relationships:
 
 ![Content Trust components](images/trust_components.png)
 
-> **WARNING**
+> **Warning**
 >
 >The root key once lost is not recoverable. If you lose any other key, send an email to [Docker Hub Support](mailto:hub-support@docker.com). This loss also requires manual intervention from every
 consumer that used a signed tag from this repository prior to the loss.
@@ -106,7 +106,7 @@ to create new repositories, it is a good idea to store it offline in hardware.
 For details on securing, and backing up your keys, make sure you
 read how to [manage keys for DCT](trust_key_mng.md).
 
-## Signing Images with Docker Content Trust
+## Signing images with Docker Content Trust
 
 Within the Docker CLI we can sign and push a container image with the
 `$ docker trust` command syntax. This is built on top of the Notary feature
@@ -218,7 +218,7 @@ Enter passphrase for signer key with ID 8ae710e:
 Successfully deleted signature for registry.example.com/admin/demo:1
 ```
 
-## Client Enforcement with Docker Content Trust
+## Client enforcement with Docker Content Trust
 
 Content trust is disabled by default in the Docker Client. To enable
 it, set the `DOCKER_CONTENT_TRUST` environment variable to `1`. This prevents

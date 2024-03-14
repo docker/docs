@@ -78,7 +78,7 @@ inherited_options:
 examples: |-
     ### Override the configured builder instance (--builder) {#builder}
 
-    Same as [`buildx --builder`](buildx.md#builder).
+    Same as [`buildx --builder`](/reference/cli/docker/buildx/#builder).
 
     ### Format the output (--format) {#format}
 
@@ -139,23 +139,93 @@ examples: |-
 
     #### JSON output
 
-    A `json` go template func is also available if you want to render fields as
-    JSON bytes:
+    A `json` template function is also available if you want to render fields in
+    JSON format:
 
     ```console
-    $ docker buildx imagetools inspect crazymax/loop --format "{{json .Manifest}}"
+    $ docker buildx imagetools inspect crazymax/buildkit:attest --format "{{json .Manifest}}"
     ```
+
     ```json
     {
-      "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-      "digest": "sha256:a9ca35b798e0b198f9be7f3b8b53982e9a6cf96814cb10d78083f40ad8c127f1",
-      "size": 949
+      "schemaVersion": 2,
+      "mediaType": "application/vnd.oci.image.index.v1+json",
+      "digest": "sha256:7007b387ccd52bd42a050f2e8020e56e64622c9269bf7bbe257b326fe99daf19",
+      "size": 855,
+      "manifests": [
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:fbd10fe50b4b174bb9ea273e2eb9827fa8bf5c88edd8635a93dc83e0d1aecb55",
+          "size": 673,
+          "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+          }
+        },
+        {
+          "mediaType": "application/vnd.oci.image.manifest.v1+json",
+          "digest": "sha256:a9de632c16998489fd63fbca42a03431df00639cfb2ecb8982bf9984b83c5b2b",
+          "size": 839,
+          "annotations": {
+            "vnd.docker.reference.digest": "sha256:fbd10fe50b4b174bb9ea273e2eb9827fa8bf5c88edd8635a93dc83e0d1aecb55",
+            "vnd.docker.reference.type": "attestation-manifest"
+          },
+          "platform": {
+            "architecture": "unknown",
+            "os": "unknown"
+          }
+        }
+      ]
+    }
+    ```
+
+    ```console
+    $ docker buildx imagetools inspect crazymax/buildkit:attest --format "{{json .Image}}"
+    ```
+
+    ```json
+    {
+      "created": "2022-12-01T11:46:47.713777178Z",
+      "architecture": "amd64",
+      "os": "linux",
+      "config": {
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        ],
+        "Cmd": [
+          "/bin/sh"
+        ]
+      },
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:ded7a220bb058e28ee3254fbba04ca90b679070424424761a53a043b93b612bf",
+          "sha256:d85d09ab4b4e921666ccc2db8532e857bf3476b7588e52c9c17741d7af14204f"
+        ]
+      },
+      "history": [
+        {
+          "created": "2022-11-22T22:19:28.870801855Z",
+          "created_by": "/bin/sh -c #(nop) ADD file:587cae71969871d3c6456d844a8795df9b64b12c710c275295a1182b46f630e7 in / "
+        },
+        {
+          "created": "2022-11-22T22:19:29.008562326Z",
+          "created_by": "/bin/sh -c #(nop)  CMD [\"/bin/sh\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2022-12-01T11:46:47.713777178Z",
+          "created_by": "RUN /bin/sh -c apk add curl # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        }
+      ]
     }
     ```
 
     ```console
     $ docker buildx imagetools inspect moby/buildkit:master --format "{{json .Manifest}}"
     ```
+
     ```json
     {
       "schemaVersion": 2,
@@ -300,11 +370,13 @@ examples: |-
     }
     ```
 
-    Following command provides [SLSA](https://github.com/moby/buildkit/blob/master/docs/attestations/slsa-provenance.md) JSON output:
+    The following command provides [SLSA](https://github.com/moby/buildkit/blob/master/docs/attestations/slsa-provenance.md)
+    JSON output:
 
     ```console
     $ docker buildx imagetools inspect crazymax/buildkit:attest --format "{{json .Provenance}}"
     ```
+
     ```json
     {
       "SLSA": {
@@ -359,11 +431,13 @@ examples: |-
     }
     ```
 
-    Following command provides [SBOM](https://github.com/moby/buildkit/blob/master/docs/attestations/sbom.md) JSON output:
+    The following command provides [SBOM](https://github.com/moby/buildkit/blob/master/docs/attestations/sbom.md)
+    JSON output:
 
     ```console
     $ docker buildx imagetools inspect crazymax/buildkit:attest --format "{{json .SBOM}}"
     ```
+
     ```json
     {
       "SPDX": {
@@ -388,6 +462,7 @@ examples: |-
     ```console
     $ docker buildx imagetools inspect crazymax/buildkit:attest --format "{{json .}}"
     ```
+
     ```json
     {
       "name": "crazymax/buildkit:attest",
@@ -456,75 +531,6 @@ examples: |-
             "comment": "buildkit.dockerfile.v0"
           }
         ]
-      },
-      "Provenance": {
-        "SLSA": {
-          "builder": {
-            "id": ""
-          },
-          "buildType": "https://mobyproject.org/buildkit@v1",
-          "materials": [
-            {
-              "uri": "pkg:docker/docker/buildkit-syft-scanner@stable-1",
-              "digest": {
-                "sha256": "b45f1d207e16c3a3a5a10b254ad8ad358d01f7ea090d382b95c6b2ee2b3ef765"
-              }
-            },
-            {
-              "uri": "pkg:docker/alpine@latest?platform=linux%2Famd64",
-              "digest": {
-                "sha256": "8914eb54f968791faf6a8638949e480fef81e697984fba772b3976835194c6d4"
-              }
-            }
-          ],
-          "invocation": {
-            "configSource": {},
-            "parameters": {
-              "frontend": "dockerfile.v0",
-              "locals": [
-                {
-                  "name": "context"
-                },
-                {
-                  "name": "dockerfile"
-                }
-              ]
-            },
-            "environment": {
-              "platform": "linux/amd64"
-            }
-          },
-          "metadata": {
-            "buildInvocationID": "02tdha2xkbxvin87mz9drhag4",
-            "buildStartedOn": "2022-12-01T11:50:07.264704131Z",
-            "buildFinishedOn": "2022-12-01T11:50:08.243788739Z",
-            "reproducible": false,
-            "completeness": {
-              "parameters": true,
-              "environment": true,
-              "materials": false
-            },
-            "https://mobyproject.org/buildkit@v1#metadata": {}
-          }
-        }
-      },
-      "SBOM": {
-        "SPDX": {
-          "SPDXID": "SPDXRef-DOCUMENT",
-          "creationInfo": {
-            "created": "2022-12-01T11:46:48.063400162Z",
-            "creators": [
-              "Tool: syft-v0.60.3",
-              "Tool: buildkit-1ace2bb",
-              "Organization: Anchore, Inc"
-            ],
-            "licenseListVersion": "3.18"
-          },
-          "dataLicense": "CC0-1.0",
-          "documentNamespace": "https://anchore.com/syft/dir/run/src/core-0a4ccc6d-1a72-4c3a-a40e-3df1a2ffca94",
-          "files": [...],
-          "spdxVersion": "SPDX-2.2"
-        }
       }
     }
     ```
@@ -538,6 +544,7 @@ examples: |-
     ```console
     $ docker buildx imagetools inspect --format '{{json (index .Image "linux/s390x")}}' moby/buildkit:master
     ```
+
     ```json
     {
       "created": "2022-11-30T17:42:26.414957336Z",
@@ -604,15 +611,14 @@ examples: |-
     }
     ```
 
-    ### Show original, unformatted JSON manifest (--raw) {#raw}
+    ### Show original JSON manifest (--raw) {#raw}
 
-    Use the `--raw` option to print the unformatted JSON manifest bytes.
-
-    > `jq` is used here to get a better rendering of the output result.
+    Use the `--raw` option to print the raw JSON manifest.
 
     ```console
-    $ docker buildx imagetools inspect --raw crazymax/loop | jq
+    $ docker buildx imagetools inspect --raw crazymax/loop
     ```
+
     ```json
     {
       "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
@@ -645,6 +651,7 @@ examples: |-
     ```console
     $ docker buildx imagetools inspect --raw moby/buildkit:master | jq
     ```
+
     ```json
     {
       "mediaType": "application/vnd.docker.distribution.manifest.list.v2+json",

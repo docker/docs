@@ -25,7 +25,9 @@ runtime but you don't want to store in the image or in source control, such as:
 - Other important data such as the name of a database or internal server
 - Generic strings or binary content (up to 500 kb in size)
 
-> **Note**: Docker secrets are only available to swarm services, not to
+> **Note**
+>
+> Docker secrets are only available to swarm services, not to
 > standalone containers. To use this feature, consider adapting your container
 > to run as a service. Stateful containers can typically run with a scale of 1
 > without changing the container code.
@@ -50,7 +52,7 @@ differences in the implementations, they are called out in the
 examples below. Keep the following notable differences in mind:
 
 - Microsoft Windows has no built-in driver for managing RAM disks, so within
-  running Windows containers, secrets **are** persisted in clear text to the
+  running Windows containers, secrets are persisted in clear text to the
   container's root disk. However, the secrets are explicitly removed when a
   container stops. In addition, Windows does not support persisting a running
   container as an image using `docker commit` or similar commands.
@@ -115,12 +117,12 @@ the mount point of the secret within a given container.
 Use these links to read about specific commands, or continue to the
 [example about using secrets with a service](secrets.md#simple-example-get-started-with-secrets).
 
-- [`docker secret create`](../reference/commandline/secret_create.md)
-- [`docker secret inspect`](../reference/commandline/secret_inspect.md)
-- [`docker secret ls`](../reference/commandline/secret_ls.md)
-- [`docker secret rm`](../reference/commandline/secret_rm.md)
-- [`--secret`](../reference/commandline/service_create.md#secret) flag for `docker service create`
-- [`--secret-add` and `--secret-rm`](../reference/commandline/service_update.md#secret-add) flags for `docker service update`
+- [`docker secret create`](../../reference/cli/docker/secret/create.md)
+- [`docker secret inspect`](../../reference/cli/docker/secret/inspect.md)
+- [`docker secret ls`](../../reference/cli/docker/secret/ls.md)
+- [`docker secret rm`](../../reference/cli/docker/secret/rm.md)
+- [`--secret`](../../reference/cli/docker/service/create.md#secret) flag for `docker service create`
+- [`--secret-add` and `--secret-rm`](../../reference/cli/docker/service/update.md#secret-add) flags for `docker service update`
 
 ## Examples
 
@@ -130,7 +132,9 @@ easier to use Docker secrets. To find out how to modify your own images in
 a similar way, see
 [Build support for Docker Secrets into your images](#build-support-for-docker-secrets-into-your-images).
 
-> **Note**: These examples use a single-Engine swarm and unscaled services for
+> **Note**
+>
+> These examples use a single-Engine swarm and unscaled services for
 > simplicity. The examples use Linux containers, but Windows containers also
 > support secrets. See [Windows support](#windows-support).
 
@@ -208,9 +212,9 @@ real-world example, continue to
     This is a secret
     ```
 
-5.  Verify that the secret is **not** available if you commit the container.
+5.  Verify that the secret is not available if you commit the container.
 
-    ```none
+    ```console
     $ docker commit $(docker ps --filter name=redis -q) committed_redis
 
     $ docker run --rm -it committed_redis cat /run/secrets/my_secret_data
@@ -245,7 +249,7 @@ real-world example, continue to
     to the secret. The container ID is different, because the
     `service update` command redeploys the service.
 
-    ```none
+    ```console
     $ docker container exec -it $(docker ps --filter name=redis -q) cat /run/secrets/my_secret_data
 
     cat: can't open '/run/secrets/my_secret_data': No such file or directory
@@ -280,27 +284,29 @@ This example assumes that you have PowerShell installed.
 
 2.  If you have not already done so, initialize or join the swarm.
 
-    ```powershell
-    docker swarm init
+    ```console
+    > docker swarm init
     ```
 
 3.  Save the `index.html` file as a swarm secret named `homepage`.
 
-    ```powershell
-    docker secret create homepage index.html
+    ```console
+    > docker secret create homepage index.html
     ```
 
 4.  Create an IIS service and grant it access to the `homepage` secret.
 
-    ```powershell
-    docker service create
-        --name my-iis
-        --publish published=8000,target=8000
-        --secret src=homepage,target="\inetpub\wwwroot\index.html"
-        microsoft/iis:nanoserver  
+    ```console
+    > docker service create `
+        --name my-iis `
+        --publish published=8000,target=8000 `
+        --secret src=homepage,target="\inetpub\wwwroot\index.html" `
+        microsoft/iis:nanoserver
     ```
 
-    > **Note**: There is technically no reason to use secrets for this
+    > **Note**
+    >
+    > There is technically no reason to use secrets for this
     > example; [configs](configs.md) are a better fit. This example is
     > for illustration only.
 
@@ -309,10 +315,10 @@ This example assumes that you have PowerShell installed.
 
 6.  Remove the service and the secret.
 
-    ```powershell
-    docker service rm my-iis
-    docker secret rm homepage
-    docker image remove secret-test
+    ```console
+    > docker service rm my-iis
+    > docker secret rm homepage
+    > docker image remove secret-test
     ```
 
 ### Intermediate example: Use secrets with a Nginx service
@@ -354,7 +360,7 @@ generate the site key and certificate, name the files `site.key` and
     the following contents into it. This constrains the root CA to signing leaf
     certificates and not intermediate CAs.
 
-    ```none
+    ```ini
     [root_ca]
     basicConstraints = critical,CA:TRUE,pathlen:1
     keyUsage = critical, nonRepudiation, cRLSign, keyCertSign
@@ -388,7 +394,7 @@ generate the site key and certificate, name the files `site.key` and
     certificate so that it can only be used to authenticate a server and
     can't be used to sign certificates.
 
-    ```none
+    ```ini
     [server]
     authorityKeyIdentifier=keyid,issuer
     basicConstraints = critical,CA:FALSE
@@ -419,7 +425,7 @@ generate the site key and certificate, name the files `site.key` and
     In the current directory, create a new file called `site.conf` with the
     following contents:
 
-    ```none
+    ```nginx
     server {
         listen                443 ssl;
         server_name           localhost;
@@ -465,7 +471,9 @@ generate the site key and certificate, name the files `site.key` and
     actually starts, so you don't need to rebuild your image if you change the
     Nginx configuration.
 
-    > **Note**: Normally you would create a Dockerfile which copies the `site.conf`
+    > **Note**
+    >
+    > Normally you would create a Dockerfile which copies the `site.conf`
     > into place, build the image, and run a container using your custom image.
     > This example does not require a custom image. It puts the `site.conf`
     > into place and runs the container all in one step.
@@ -621,7 +629,9 @@ This example illustrates some techniques to use Docker secrets to avoid saving
 sensitive credentials within your image or passing them directly on the command
 line.
 
-> **Note**: This example uses a single-Engine swarm for simplicity, and uses a
+> **Note**
+>
+> This example uses a single-Engine swarm for simplicity, and uses a
 > single-node MySQL service because a single MySQL server instance cannot be
 > scaled by simply using a replicated service, and setting up a MySQL cluster is
 > beyond the scope of this example.
@@ -637,7 +647,9 @@ line.
     password. You can use another command to generate the password if you
     choose.
 
-    > **Note**: After you create a secret, you cannot update it. You can only
+    > **Note**
+    >
+    > After you create a secret, you cannot update it. You can only
     > remove and re-create it, and you cannot remove a secret that a service is
     > using. However, you can grant or revoke a running service's access to
     > secrets using `docker service update`. If you need the ability to update a
@@ -736,11 +748,6 @@ line.
     wvnh0siktqr3  mysql  replicated  1/1       mysql:latest
     ```
 
-    At this point, you could actually revoke the `mysql` service's access to the
-    `mysql_password` and `mysql_root_password` secrets because the passwords
-    have been saved in the MySQL system database. Don't do that for now, because
-    we use them later to facilitate rotating the MySQL password.
-
 5.  Now that MySQL is set up, create a WordPress service that connects to the
     MySQL service. The WordPress service has the following characteristics:
 
@@ -756,9 +763,7 @@ line.
       nodes.
     - Has access to the `mysql_password` secret, but specifies a different
       target file name within the container. The WordPress container uses
-      the mount point `/run/secrets/wp_db_password`. Also specifies that the
-      secret is not group-or-world-readable, by setting the mode to
-      `0400`.
+      the mount point `/run/secrets/wp_db_password`.
     - Sets the environment variable `WORDPRESS_DB_PASSWORD_FILE` to the file
       path where the secret is mounted. The WordPress service reads the
       MySQL password string from that file and add it to the `wp-config.php`
@@ -776,7 +781,7 @@ line.
          --network mysql_private \
          --publish published=30000,target=80 \
          --mount type=volume,source=wpdata,destination=/var/www/html \
-         --secret source=mysql_password,target=wp_db_password,mode=0400 \
+         --secret source=mysql_password,target=wp_db_password \
          -e WORDPRESS_DB_USER="wordpress" \
          -e WORDPRESS_DB_PASSWORD_FILE="/run/secrets/wp_db_password" \
          -e WORDPRESS_DB_HOST="mysql:3306" \
@@ -828,7 +833,9 @@ This example builds upon the previous one. In this scenario, you create a new
 secret with a new MySQL password, update the `mysql` and `wordpress` services to
 use it, then remove the old secret.
 
-> **Note**: Changing the password on a MySQL database involves running extra
+> **Note**
+>
+> Changing the password on a MySQL database involves running extra
 > queries or commands, as opposed to just changing a single environment variable
 > or a file, since the image only sets the MySQL password if the database doesn’t
 > already exist, and MySQL stores the password within a MySQL database by default.
@@ -863,7 +870,9 @@ use it, then remove the old secret.
     Even though the MySQL service has access to both the old and new secrets
     now, the MySQL password for the WordPress user has not yet been changed.
 
-    > **Note**: This example does not rotate the MySQL `root` password.
+    > **Note**
+    >
+    > This example does not rotate the MySQL `root` password.
 
 3.  Now, change the MySQL password for the `wordpress` user using the
     `mysqladmin` CLI. This command reads the old and new password from the files
@@ -889,7 +898,7 @@ use it, then remove the old secret.
         bash -c 'mysqladmin --user=wordpress --password="$(< /run/secrets/old_mysql_password)" password "$(< /run/secrets/mysql_password)"'
     ```
 
-    **or**:
+    Or:
 
     ```console
     $ docker container exec $(docker ps --filter name=mysql -q) \
@@ -897,14 +906,13 @@ use it, then remove the old secret.
     ```
 
 4.  Update the `wordpress` service to use the new password, keeping the target
-    path at `/run/secrets/wp_db_password` and keeping the file permissions at
-    `0400`.  This triggers a rolling restart of the WordPress service and
-    the new secret is used.
+    path at `/run/secrets/wp_db_password`. This triggers a rolling restart of
+    the WordPress service and the new secret is used.
 
     ```console
     $ docker service update \
          --secret-rm mysql_password \
-         --secret-add source=mysql_password_v2,target=wp_db_password,mode=0400 \
+         --secret-add source=mysql_password_v2,target=wp_db_password \
          wordpress    
     ```
 
@@ -1008,15 +1016,15 @@ volumes:
 ```
 
 This example creates a simple WordPress site using two secrets in
-a compose file.
+a Compose file.
 
-The keyword `secrets:` defines two secrets `db_password:` and
-`db_root_password:`.
+The top-level element `secrets` defines two secrets `db_password` and
+`db_root_password`.
 
 When deploying, Docker creates these two secrets and populates them with the
-content from the file specified in the compose file.
+content from the file specified in the Compose file.
 
-The db service uses both secrets, and the wordpress is using one.
+The `db` service uses both secrets, and `wordpress` is using one.
 
 When you deploy, Docker mounts a file under `/run/secrets/<secret_name>` in the
 services. These files are never persisted on disk, but are managed in memory.
@@ -1024,5 +1032,5 @@ services. These files are never persisted on disk, but are managed in memory.
 Each service uses environment variables to specify where the service should look
 for that secret data.
 
-More information on short and long syntax for secrets can be found at
-[Compose file version 3 reference](../../compose/compose-file/compose-file-v3.md#secrets).
+More information on short and long syntax for secrets can be found in the
+[Compose Specification](../../compose/compose-file/09-secrets.md).

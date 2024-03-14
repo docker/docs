@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: github.repository_owner == 'docker'
     steps:
       -
@@ -79,10 +79,10 @@ jobs:
           fetch-depth: 0
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       -
         name: Build website
-        uses: docker/bake-action@v3
+        uses: docker/bake-action@v4
         with:
           files: |
             docker-bake.hcl
@@ -90,6 +90,7 @@ jobs:
           set: |
             *.cache-from=type=gha,scope=deploy-${{ env.BRANCH_NAME }}
             *.cache-to=type=gha,scope=deploy-${{ env.BRANCH_NAME }},mode=max
+          provenance: false
       -
         name: Configure AWS Credentials
         if: ${{ env.DOCS_AWS_IAM_ROLE != '' }}
@@ -101,11 +102,24 @@ jobs:
         name: Upload files to S3 bucket
         if: ${{ env.DOCS_S3_BUCKET != '' }}
         run: |
-          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync --acl public-read public s3://${{ env.DOCS_S3_BUCKET }}/ --delete
+          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync \
+            --acl public-read \
+            --delete \
+            --exclude "*" \
+            --include "*.webp" \
+            --metadata-directive="REPLACE" \
+            --no-guess-mime-type \
+            --content-type="image/webp" \
+            public s3://${{ env.DOCS_S3_BUCKET }}/
+          aws --region ${{ env.DOCS_AWS_REGION }} s3 sync \
+            --acl public-read \
+            --delete \
+            --exclude "*.webp" \
+            public s3://${{ env.DOCS_S3_BUCKET }}/
       -
         name: Update S3 config
         if: ${{ env.DOCS_S3_BUCKET != '' && env.DOCS_S3_CONFIG != '' }}
-        uses: docker/bake-action@v3
+        uses: docker/bake-action@v4
         with:
           files: |
             docker-bake.hcl
@@ -119,7 +133,7 @@ jobs:
       -
         name: Update Cloudfront config
         if: ${{ env.DOCS_CLOUDFRONT_ID != '' }}
-        uses: docker/bake-action@v3
+        uses: docker/bake-action@v4
         with:
           files: |
             docker-bake.hcl

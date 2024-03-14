@@ -18,7 +18,9 @@ any time, and services can share a config. You can even use configs in
 conjunction with environment variables or labels, for maximum flexibility.
 Config values can be generic strings or binary content (up to 500 kb in size).
 
-> **Note**: Docker configs are only available to swarm services, not to
+> **Note**
+>
+> Docker configs are only available to swarm services, not to
 > standalone containers. To use this feature, consider adapting your container
 > to run as a service with a scale of 1.
 
@@ -111,17 +113,19 @@ those remaining after a `docker service update --config-rm`.
 Use these links to read about specific commands, or continue to the
 [example about using configs with a service](#advanced-example-use-configs-with-a-nginx-service).
 
-- [`docker config create`](../reference/commandline/config_create.md)
-- [`docker config inspect`](../reference/commandline/config_inspect.md)
-- [`docker config ls`](../reference/commandline/config_ls.md)
-- [`docker config rm`](../reference/commandline/config_rm.md)
+- [`docker config create`](../../reference/cli/docker/config/create.md)
+- [`docker config inspect`](../../reference/cli/docker/config/inspect.md)
+- [`docker config ls`](../../reference/cli/docker/config/ls.md)
+- [`docker config rm`](../../reference/cli/docker/config/rm.md)
 
 ## Examples
 
 This section includes graduated examples which illustrate how to use
 Docker configs.
 
-> **Note**: These examples use a single-Engine swarm and unscaled services for
+> **Note**
+>
+> These examples use a single-engine swarm and unscaled services for
 > simplicity. The examples use Linux containers, but Windows containers also
 > support configs.
 

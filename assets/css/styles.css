@@ -1,44 +1,17 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-/* base */
-
-@import "/assets/css/typography";
-@import "/assets/css/toc";
-@import "/assets/css/code";
-@import "/assets/css/search";
-
-/* components */
-
-@import "/assets/css/callouts";
-@import "/assets/css/tables";
-
-/* global utils */
-
-[x-cloak] {
-  display: none !important;
-}
-
-:root {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.link {
-  @apply text-blue-light dark:text-blue-dark underline-offset-2 underline;
-}
-
-hr {
-  @apply border-divider-light dark:border-divider-dark;
-}
-
-.sidebar-hover {
-  @apply hover:bg-gray-light-200 hover:dark:bg-gray-dark-200;
-}
-
-.sidebar-underline {
-  @apply underline underline-offset-4 decoration-4 decoration-blue-light dark:decoration-blue-dark;
-}
-
 /* see also: tailwind.config.js */
+
+@import "tailwindcss/base";
+@import "/assets/css/global";
+@import "/assets/css/typography";
+@import "/assets/css/search";
+@import "/assets/css/hack";
+
+@import "tailwindcss/components";
+@import "/assets/css/code";
+@import "/assets/css/toc";
+@import "/assets/css/callouts";
+
+@import "tailwindcss/utilities";
+@import "/assets/css/syntax-light";
+@import "/assets/css/syntax-dark";
+@import "/assets/css/icons";

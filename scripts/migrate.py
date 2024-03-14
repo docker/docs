@@ -5,7 +5,6 @@ import os
 import re
 import frontmatter
 
-
 def get_md_files(content_dir: str) -> list[str]:
     md_files = []
     for root, _, files in os.walk(content_dir):

@@ -43,11 +43,11 @@ tags:
 
       The `X-Retry-After` header is a unix timestamp of when you can call the API again.
 
-      *Note: These rate limits are separate from anti-abuse and Docker Hub
+      **Note**: These rate limits are separate from anti-abuse and Docker Hub
 
       download, or pull rate limiting. To learn more about Docker Hub pull rate
 
-      limiting, see [Docker Hub download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).*
+      limiting, see [Docker Hub download rate limit](https://docs.docker.com/docker-hub/download-rate-limit/).
   - name: authentication
     x-displayName: Authentication
     description: |
@@ -55,14 +55,14 @@ tags:
       Docker credentials before using them.
 
       Additionally, similar to the Docker Hub UI features, API endpoint responses may vary depending 
-      on your plan (Free, Pro, or Team) and your account's permissions.
+      on your plan (Personal, Pro, or Team) and your account's permissions.
 
       To learn more about the features available in each plan and to upgrade your existing plan, see [Docker Pricing](https://www.docker.com/pricing).
   - name: access-tokens
     x-displayName: Personal Access Tokens
     description: |
       The Personal Access Token endpoints lets you manage personal access tokens. For more 
-      information, see [Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
+      information, see [Access Tokens](https://docs.docker.com/security/for-developers/access-tokens/).
 
       You can use a personal access token instead of a password in the [Docker CLI](https://docs.docker.com/engine/reference/commandline/cli/) 
       or in the [Create an authentication token](#operation/PostUsersLogin) route to obtain a bearer 
@@ -77,20 +77,13 @@ tags:
 
       ***Treat your personal access token like your password and keep it secret. You cannot retrieve 
       your token after it is generated.***
-  - name: images
-    x-displayName: Advanced Image Management
-    description: |
-      The Advanced Image Management API endpoints allow you to manage Docker
-      images across all repositories.
-
-      For more information, see [Advanced Image Management dashboard](https://docs.docker.com/docker-hub/image-management/).
   - name: audit-logs
     x-displayName: Audit Logs
     description: |
       The Audit Logs API endpoints allow you to query audit log events across a
       namespace.
 
-      For more information, see [Audit Log](https://docs.docker.com/docker-hub/audit-log/)
+      For more information, see [Audit Log](https://docs.docker.com/admin/organization/activity-logs/).
   - name: org-settings
     x-displayName: Org Settings
     description: |
@@ -99,13 +92,13 @@ tags:
   - name: repositories
     x-displayName: Repositories
     description: |
-      The repository endpoints allow you to manage your repository's
-      configuration like description.
+      The repository endpoints allow you to access your repository's
+      tags.
   - name: scim
     x-displayName: SCIM
     description: |
       SCIM is a provisioning system that lets you manage users within your identity provider (IdP).
-      For more information, see [System for Cross-domain Identity management](https://docs.docker.com/docker-hub/scim/).
+      For more information, see [System for Cross-domain Identity management](https://docs.docker.com/security/for-admins/scim/).
 x-tagGroups:
   - name: General
     tags:
@@ -158,10 +151,10 @@ paths:
     post:
       tags:
         - authentication
-      summary: Second factor authentication.
+      summary: Second factor authentication
       operationId: PostUsers2FALogin
       description: |
-        When user has 2FA enabled, this is the second call to perform after
+        When a user has two-factor authentication (2FA) enabled, this is the second call to perform after
         `/v2/users/login` call.
 
         Creates and returns a bearer token in JWT format that you can use to authenticate with Docker Hub APIs.
@@ -305,254 +298,9 @@ paths:
           $ref: "#/components/responses/Unauthorized"
         404:
           $ref: "#/components/responses/NotFound"
-  /v2/namespaces/{namespace}/repositories/{repository}/images-summary:
-    get:
-      tags:
-        - images
-      summary: Get summary of repository's images
-      description: |
-        Gets the number of images in a repository and the number of images
-        counted as active and inactive.
-      operationId: GetNamespacesRepositoriesImagesSummary
-      parameters:
-        - name: namespace
-          in: path
-          required: true
-          description: Namespace of the repository.
-          schema:
-            type: string
-        - name: repository
-          in: path
-          required: true
-          description: Name of the repository.
-          schema:
-            type: string
-        - name: active_from
-          in: query
-          required: false
-          description: |
-            Sets the time from which an image must have been pushed or pulled to
-            be counted as active.
-
-            Defaults to 1 month before the current time.
-          schema:
-            type: string
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref:
-                  "#/components/schemas/GetNamespaceRepositoryImagesSummaryResponse"
-        401:
-          description: Unauthorized - user does not have read access to the namespace
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-  /v2/namespaces/{namespace}/repositories/{repository}/images:
-    get:
-      tags:
-        - images
-      summary: Get details of repository's images
-      description: Gets details on the images in a repository.
-      operationId: GetNamespacesRepositoriesImages
-      parameters:
-        - name: namespace
-          in: path
-          required: true
-          description: Namespace of the repository.
-          schema:
-            type: string
-        - name: repository
-          in: path
-          required: true
-          description: Name of the repository.
-          schema:
-            type: string
-        - name: status
-          in: query
-          required: false
-          description: Filters to only show images of this status.
-          schema:
-            type: string
-            enum:
-              - active
-              - inactive
-        - name: currently_tagged
-          in: query
-          required: false
-          description: |
-            Filters to only show images with:
-            - `true`: at least 1 current tag.
-            - `false`: no current tags.
-          schema:
-            type: boolean
-        - name: ordering
-          in: query
-          required: false
-          description: |
-            Orders the results by this property.
-
-            Prefixing with `-` sorts by descending order.
-          schema:
-            type: string
-            enum:
-              - last_activity
-              - -last_activity
-              - digest
-              - -digest
-        - name: active_from
-          in: query
-          required: false
-          description: |
-            Sets the time from which an image must have been pushed or pulled to
-            be counted as active.
-
-            Defaults to 1 month before the current time.
-          schema:
-            type: string
-        - name: page
-          in: query
-          required: false
-          description: Page number to get. Defaults to 1.
-          schema:
-            type: integer
-        - name: page_size
-          in: query
-          required: false
-          description: Number of images to get per page. Defaults to 10. Max of 100.
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetNamespaceRepositoryImagesResponse"
-        401:
-          description: Unauthorized - user does not have read access to the namespace.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        403:
-          description: Forbidden - this API is only available to users on Pro or Team plans.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-  /v2/namespaces/{namespace}/repositories/{repository}/images/{digest}/tags:
-    get:
-      tags:
-        - images
-      summary: Get image's tags
-      description: Gets current and historical tags for an image.
-      operationId: GetNamespacesRepositoriesImagesTags
-      parameters:
-        - name: namespace
-          in: path
-          required: true
-          description: Namespace of the repository.
-          schema:
-            type: string
-        - name: repository
-          in: path
-          required: true
-          description: Name of the repository.
-          schema:
-            type: string
-        - name: digest
-          in: path
-          required: true
-          description: Digest of the image.
-          schema:
-            type: string
-        - name: page
-          in: query
-          required: false
-          description: Page number to get. Defaults to 1.
-          schema:
-            type: integer
-        - name: page_size
-          in: query
-          required: false
-          description: Number of images to get per page. Defaults to 10. Max of 100.
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetNamespaceRepositoryImagesTagsResponse"
-        401:
-          description: Unauthorized - user does not have read access to the namespace
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        403:
-          description: Forbidden - this API is only available to users on Pro or Team plans
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-  /v2/namespaces/{namespace}/delete-images:
-    post:
-      tags:
-        - images
-      summary: Delete images
-      operationId: PostNamespacesDeleteImages
-      description: |
-        Deletes one or more images within a namespace. This is currently limited to a single 
-        repository.
-
-        If you attempt to delete images that are marked as active or are currently tagged, the deletion does not happen and it displays the warnings.
-        To continue with the deletion, you must ignore these warnings by putting them in the `ignore_warnings` property.
-
-        Deleting a currently tagged image deletes the tag from the repository.
-
-        You cannot ignore errors. It is not possible to directly delete children of multi-arch images.
-      parameters:
-        - name: namespace
-          in: path
-          required: true
-          description: Namespace of the repository.
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PostNamespacesDeleteImagesRequest"
-        description: Delete request.
-        required: true
-      responses:
-        200:
-          description: Deletion completed
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PostNamespacesDeleteImagesResponseSuccess"
-        400:
-          description: Deletion not possible
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PostNamespacesDeleteImagesResponseError"
-        403:
-          description: Forbidden - this API is only available to users on Pro or Team plans
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
   /v2/auditlogs/{account}:
     get:
-      summary: Returns list of audit log  events.
+      summary: Returns list of audit log events
       description: Get audit log events for a given namespace.
       operationId: AuditLogs_GetAuditLogs
       responses:
@@ -665,7 +413,7 @@ paths:
         - audit-logs
   /v2/auditlogs/{account}/actions:
     get:
-      summary: Returns list of audit log actions.
+      summary: Returns list of audit log actions
       description:
         Get audit log actions for a namespace to be used as a filter for
         querying audit events.
@@ -982,7 +730,7 @@ paths:
         and `count` query parameters to receive paginated results.
 
         **Sorting:**<br>
-        Sorting lets you to specify the order of returned resources by specifying
+        Sorting lets you specify the order of returned resources by specifying
         a combination of `sortBy` and `sortOrder` query parameters.
 
         The `sortBy` parameter specifies the attribute whose value will be used
@@ -1941,6 +1689,8 @@ components:
           type: string
           description: Friendly name for you to identify the token.
           example: My read only token
+          minLength: 1
+          maxLength: 100
         scopes:
           type: array
           description: |
@@ -1982,6 +1732,8 @@ components:
         token_label:
           type: string
           example: My read only token
+          minLength: 1
+          maxLength: 100
         is_active:
           type: boolean
           example: false

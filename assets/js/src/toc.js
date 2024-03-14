@@ -1,43 +1,29 @@
-const toc = document.querySelector("#TableOfContents")
+const toc = document.querySelector("#TableOfContents");
+const headings = document.querySelectorAll("main article h2, main article h3");
 
 if (toc) {
-  const prose = document.querySelector("article.prose")
-  const headings = prose.querySelectorAll("h2, h3")
-  // grab the yposition and targets for all anchor links
-  const anchorLinks = Array.from(headings)
-    .map((h) => h.previousElementSibling)
-    .map((a) => [a.offsetTop - 64, `#${a.name}`])
-    .sort((a, b) => (a[0] > b[0] ? 1 : 0))
+  window.addEventListener("scroll", updateToc);
+  updateToc();
+}
 
-  let closestHeading
-
-  // find the closest anchor link based on window scrollpos
-  function findClosestHeading() {
-    yPos = window.scrollY
-    closest = anchorLinks.reduce((prev, curr) => {
-      return Math.abs(curr[0] - yPos) < Math.abs(prev[0] - yPos) &&
-        curr[0] <= yPos
-        ? curr
-        : prev
-    })
-    return closest
-  }
-
-  function updateToc() {
-    const prev = toc.querySelector('a[aria-current="true"]')
-    const next = toc.querySelector(`a[href="${closestHeading[1]}"]`)
-    if (prev) {
-      prev.removeAttribute("aria-current")
+function updateToc() {
+  // find the heading currently in view
+  const currentSection = Array.from(headings).reduce((previous, current) => {
+    const { top } = current.getBoundingClientRect();
+    // if current is in the top 100px of the viewport
+    // 100px is an arbitrary value
+    // Should be header height + margin
+    if (top < 100) {
+      return current;
     }
-    if (next) {
-      next.setAttribute("aria-current", "true")
-    }
+    return previous
+  });
+  const prev = toc.querySelector('a[aria-current="true"]');
+  const next = toc.querySelector(`a[href="#${currentSection.id}"]`);
+  if (prev) {
+    prev.removeAttribute("aria-current");
   }
-
-  function handleScroll() {
-    closestHeading = findClosestHeading()
-    updateToc()
+  if (next) {
+    next.setAttribute("aria-current", "true");
   }
-
-  window.addEventListener("scroll", handleScroll)
 }

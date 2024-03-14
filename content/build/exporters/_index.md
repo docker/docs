@@ -8,7 +8,7 @@ aliases:
 
 Exporters save your build results to a specified output type. You specify the
 exporter to use with the
-[`--output` CLI option](../../engine/reference/commandline/buildx_build/#output).
+[`--output` CLI option](../../reference/cli/docker/buildx/build.md#output).
 Buildx supports the following exporters:
 
 - `image`: exports the build result to a container image.
@@ -20,7 +20,7 @@ Buildx supports the following exporters:
   [OCI image layout](https://github.com/opencontainers/image-spec/blob/v1.0.1/image-layout.md)
   format.
 - `docker`: exports the build result to the local filesystem in the
-  [Docker Image Specification v1.2.0](https://github.com/moby/moby/blob/v24.0.0/image/spec/v1.2.md)
+  [Docker Image Specification v1.2.0](https://github.com/moby/moby/blob/v25.0.0/image/spec/v1.2.md)
   format.
 - `cacheonly`: doesn't export a build output, but runs the build and creates a
   cache.
@@ -74,7 +74,7 @@ $ docker buildx build --tag <registry>/<image> --load .
 Building images using the `docker` driver are automatically loaded to the local
 image store.
 
-Images loaded to the image store are available to for `docker run` immediately
+Images loaded to the image store are available to `docker run` immediately
 after the build finishes, and you'll see them in the list of images when you run
 the `docker images` command.
 

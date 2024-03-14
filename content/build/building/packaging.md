@@ -12,17 +12,17 @@ It all starts with a Dockerfile.
 Docker builds images by reading the instructions from a Dockerfile. A
 Dockerfile is a text file containing instructions for building your source
 code. The Dockerfile instruction syntax is defined by the specification
-reference in the [Dockerfile reference](../../engine/reference/builder.md).
+reference in the [Dockerfile reference](../../reference/dockerfile.md).
 
 Here are the most common types of instructions:
 
 | Instruction                                                        | Description                                                                                                                                                                                              |
 | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`FROM <image>`](../../engine/reference/builder.md#from)           | Defines a base for your image.                                                                                                                                                                           |
-| [`RUN <command>`](../../engine/reference/builder.md#run)           | Executes any commands in a new layer on top of the current image and commits the result. `RUN` also has a shell form for running commands.                                                               |
-| [`WORKDIR <directory>`](../../engine/reference/builder.md#workdir) | Sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY`, and `ADD` instructions that follow it in the Dockerfile.                                                                          |
-| [`COPY <src> <dest>`](../../engine/reference/builder.md#copy)      | Copies new files or directories from `<src>` and adds them to the filesystem of the container at the path `<dest>`.                                                                                      |
-| [`CMD <command>`](../../engine/reference/builder.md#cmd)           | Lets you define the default program that is run once you start the container based on this image. Each Dockerfile only has one `CMD`, and only the last `CMD` instance is respected when multiple exist. |
+| [`FROM <image>`](../../reference/dockerfile.md#from)           | Defines a base for your image.                                                                                                                                                                           |
+| [`RUN <command>`](../../reference/dockerfile.md#run)           | Executes any commands in a new layer on top of the current image and commits the result. `RUN` also has a shell form for running commands.                                                               |
+| [`WORKDIR <directory>`](../../reference/dockerfile.md#workdir) | Sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY`, and `ADD` instructions that follow it in the Dockerfile.                                                                          |
+| [`COPY <src> <dest>`](../../reference/dockerfile.md#copy)      | Copies new files or directories from `<src>` and adds them to the filesystem of the container at the path `<dest>`.                                                                                      |
+| [`CMD <command>`](../../reference/dockerfile.md#cmd)           | Lets you define the default program that is run once you start the container based on this image. Each Dockerfile only has one `CMD`, and only the last `CMD` instance is respected when multiple exist. |
 
 Dockerfiles are crucial inputs for image builds and can facilitate automated,
 multi-layer image builds based on your unique configurations. Dockerfiles can
@@ -38,7 +38,7 @@ Some projects may need distinct Dockerfiles for specific purposes. A common
 convention is to name these `<something>.Dockerfile`. You can specify the
 Dockerfile filename using the `--file` flag for the `docker build` command.
 Refer to the
-[`docker build` CLI reference](../../engine/reference/commandline/build.md#file)
+[`docker build` CLI reference](../../reference/cli/docker/image/build.md#file)
 to learn about the `--file` flag.
 
 > **Note**
@@ -84,7 +84,7 @@ FROM ubuntu:22.04
 
 # install app dependencies
 RUN apt-get update && apt-get install -y python3 python3-pip
-RUN pip install flask==2.1.*
+RUN pip install flask==3.0.*
 
 # install app
 COPY hello.py /
@@ -92,7 +92,7 @@ COPY hello.py /
 # final configuration
 ENV FLASK_APP=hello
 EXPOSE 8000
-CMD flask run --host 0.0.0.0 --port 8000
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 Here's a breakdown of what this Dockerfile does:
@@ -109,11 +109,11 @@ Here's a breakdown of what this Dockerfile does:
 
 ### Dockerfile syntax
 
-The first line to add to a Dockerfile is a [`# syntax` parser directive](../../engine/reference/builder.md#syntax).
+The first line to add to a Dockerfile is a [`# syntax` parser directive](../../reference/dockerfile.md#syntax).
 While optional, this directive instructs the Docker builder what syntax to use
 when parsing the Dockerfile, and allows older Docker versions with [BuildKit enabled](../buildkit/index.md#getting-started)
 to use a specific [Dockerfile frontend](../dockerfile/frontend.md) before
-starting the build. [Parser directives](../../engine/reference/builder.md/#parser-directives)
+starting the build. [Parser directives](../../reference/dockerfile.md#parser-directives)
 must appear before any other comment, whitespace, or Dockerfile instruction in
 your Dockerfile, and should be the first line in Dockerfiles.
 
@@ -136,7 +136,7 @@ The line following the syntax directive defines what base image to use:
 FROM ubuntu:22.04
 ```
 
-The [`FROM` instruction](../../engine/reference/builder.md#from) sets your base
+The [`FROM` instruction](../../reference/dockerfile.md#from) sets your base
 image to the 22.04 release of Ubuntu. All instructions that follow are executed
 in this base image: an Ubuntu environment. The notation `ubuntu:22.04`, follows
 the `name:tag` standard for naming Docker images. When you build images, you
@@ -156,7 +156,7 @@ The following line executes a build command inside the base image.
 RUN apt-get update && apt-get install -y python3 python3-pip
 ```
 
-This [`RUN` instruction](../../engine/reference/builder.md#run) executes a
+This [`RUN` instruction](../../reference/dockerfile.md#run) executes a
 shell in Ubuntu that updates the APT package index and installs Python tools in
 the container.
 
@@ -181,7 +181,7 @@ The second `RUN` instruction installs the `flask` dependency required by the
 Python application.
 
 ```dockerfile
-RUN pip install flask==2.1.*
+RUN pip install flask==3.0.*
 ```
 
 A prerequisite for this instruction is that `pip` is installed into the build
@@ -191,7 +191,7 @@ use the command to install the flask web framework.
 ### Copying files
 
 The next instruction uses the
-[`COPY` instruction](../../engine/reference/builder.md#copy) to copy the
+[`COPY` instruction](../../reference/dockerfile.md#copy) to copy the
 `hello.py` file from the local build context into the root directory of our image. 
 
 ```dockerfile
@@ -207,7 +207,7 @@ of the build container.
 ### Setting environment variables
 
 If your application uses environment variables, you can set environment variables
-in your Docker build using the [`ENV` instruction](../../engine/reference/builder.md#env).
+in your Docker build using the [`ENV` instruction](../../reference/dockerfile.md#env).
 
 ```dockerfile
 ENV FLASK_APP=hello
@@ -219,7 +219,7 @@ flask wouldn't know where to find our application to be able to run it.
 
 ### Exposed ports
 
-The [`EXPOSE` instruction](../../engine/reference/builder.md#expose) marks that
+The [`EXPOSE` instruction](../../reference/dockerfile.md#expose) marks that
 our final image has a service listening on port `8000`.
 
 ```dockerfile
@@ -231,15 +231,25 @@ team members understand what this application is doing.
 
 ### Starting the application
 
-Finally, [`CMD` instruction](../../engine/reference/builder.md#cmd) sets the
+Finally, [`CMD` instruction](../../reference/dockerfile.md#cmd) sets the
 command that is run when the user starts a container based on this image.
+
+```dockerfile
+CMD ["flask", "run", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+This command starts the flask development server listening on all addresses
+on port `8000`. The example here uses the "exec form" version of `CMD`.
+It's also possible to use the "shell form":
 
 ```dockerfile
 CMD flask run --host 0.0.0.0 --port 8000
 ```
 
-In this case we'll start the flask development server listening on all addresses
-on port `8000`.
+There are subtle differences between these two versions,
+for example in how they trap signals like `SIGTERM` and `SIGKILL`.
+For more information about these differences, see
+[Shell and exec form](../../reference/dockerfile.md#shell-and-exec-form)
 
 ## Building
 

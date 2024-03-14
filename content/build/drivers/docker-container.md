@@ -33,12 +33,23 @@ container
 The following table describes the available driver-specific options that you can
 pass to `--driver-opt`:
 
-| Parameter       | Type   | Default          | Description                                                                                |
-| --------------- | ------ | ---------------- | ------------------------------------------------------------------------------------------ |
-| `image`         | String |                  | Sets the image to use for running BuildKit.                                                |
-| `network`       | String |                  | Sets the network mode for running the BuildKit container.                                  |
-| `cgroup-parent` | String | `/docker/buildx` | Sets the cgroup parent of the BuildKit container if Docker is using the `cgroupfs` driver. |
-| `env.<key>`     | String |                  | Sets the environment variable `key` to the specified `value` in the BuildKit container.    |
+| Parameter        | Type   | Default          | Description                                                                                                            |
+| ---------------- | ------ | ---------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `image`          | String |                  | Sets the BuildKit image to use for the container.                                                                      |
+| `memory`         | String |                  | Sets the amount of memory the container can use.                                                                       |
+| `memory-swap`    | String |                  | Sets the memory swap limit for the container.                                                                          |
+| `cpu-quota`      | String |                  | Imposes a CPU CFS quota on the container.                                                                              |
+| `cpu-period`     | String |                  | Sets the CPU CFS scheduler period for the container.                                                                   |
+| `cpu-shares`     | String |                  | Configures CPU shares (relative weight) of the container.                                                              |
+| `cpuset-cpus`    | String |                  | Limits the set of CPU cores the container can use.                                                                     |
+| `cpuset-mems`    | String |                  | Limits the set of CPU memory nodes the container can use.                                                              |
+| `network`        | String |                  | Sets the network mode for the container.                                                                               |
+| `cgroup-parent`  | String | `/docker/buildx` | Sets the cgroup parent of the container if Docker is using the "cgroupfs" driver.                                      |
+| `restart-policy` | String | `unless-stopped` | Sets the container's [restart policy](../../config/containers/start-containers-automatically.md#use-a-restart-policy). |
+| `env.<key>`      | String |                  | Sets the environment variable `key` to the specified `value` in the container.                                         |
+
+Before you configure the resource limits for the container,
+read about [configuring runtime resource constraints for containers](../../config/containers/resource_constraints/).
 
 ## Usage
 
@@ -145,14 +156,14 @@ $ docker buildx build \
 You can customize the network that the builder container uses. This is useful
 if you need to use a specific network for your builds.
 
-For example, let's [create a network](../../engine/reference/commandline/network_create.md)
+For example, let's [create a network](../../reference/cli/docker/network/create.md)
 named `foonet`:
 
 ```console
 $ docker network create foonet
 ```
 
-Now create a [`docker-container` builder](../../engine/reference/commandline/buildx_create.md)
+Now create a [`docker-container` builder](../../reference/cli/docker/buildx/create.md)
 that will use this network:
 
 ```console
@@ -162,13 +173,13 @@ $ docker buildx create --use \
   --driver-opt "network=foonet"
 ```
 
-Boot and [inspect `mybuilder`](../../engine/reference/commandline/buildx_inspect.md):
+Boot and [inspect `mybuilder`](../../reference/cli/docker/buildx/inspect.md):
 
 ```console
 $ docker buildx inspect --bootstrap
 ```
 
-[Inspect the builder container](../../engine/reference/commandline/inspect.md)
+[Inspect the builder container](../../reference/cli/docker/inspect.md)
 and see what network is being used:
 
 ```console
@@ -179,4 +190,4 @@ map[foonet:0xc00018c0c0]
 ## Further reading
 
 For more information on the Docker container driver, see the
-[buildx reference](../../engine/reference/commandline/buildx_create.md#driver).
+[buildx reference](../../reference/cli/docker/buildx/create.md#driver).

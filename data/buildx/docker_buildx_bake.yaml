@@ -2,7 +2,7 @@ command: docker buildx bake
 aliases: docker buildx bake, docker buildx f
 short: Build from a file
 long: |-
-    Bake is a high-level build command. Each specified target will run in parallel
+    Bake is a high-level build command. Each specified target runs in parallel
     as part of the build.
 
     Read [High-level build options with Bake](/build/bake/)
@@ -148,13 +148,13 @@ inherited_options:
 examples: |-
     ### Override the configured builder instance (--builder) {#builder}
 
-    Same as [`buildx --builder`](buildx.md#builder).
+    Same as [`buildx --builder`](/reference/cli/docker/buildx/#builder).
 
     ### Specify a build definition file (-f, --file) {#file}
 
     Use the `-f` / `--file` option to specify the build definition file to use.
-    The file can be an HCL, JSON or Compose file. If multiple files are specified
-    they are all read and configurations are combined.
+    The file can be an HCL, JSON or Compose file. If multiple files are specified,
+    all are read and the build configurations are combined.
 
     You can pass the names of the targets to build, to build only specific target(s).
     The following example builds the `db` and `webapp-release` targets that are
@@ -189,9 +189,9 @@ examples: |-
     See the [Bake file reference](/build/bake/reference/)
     for more details.
 
-    ### Do not use cache when building the image (--no-cache) {#no-cache}
+    ### Don't use cache when building the image (--no-cache) {#no-cache}
 
-    Same as `build --no-cache`. Do not use cache when building the image.
+    Same as `build --no-cache`. Don't use cache when building the image.
 
     ### Print the options without building (--print) {#print}
 
@@ -222,11 +222,11 @@ examples: |-
 
     ### Set type of progress output (--progress) {#progress}
 
-    Same as [`build --progress`](buildx_build.md#progress).
+    Same as [`build --progress`](/reference/cli/docker/buildx/build/#progress).
 
     ### Create provenance attestations (--provenance) {#provenance}
 
-    Same as [`build --provenance`](buildx_build.md#provenance).
+    Same as [`build --provenance`](/reference/cli/docker/buildx/build/#provenance).
 
     ### Always attempt to pull a newer version of the image (--pull) {#pull}
 
@@ -234,7 +234,7 @@ examples: |-
 
     ### Create SBOM attestations (--sbom) {#sbom}
 
-    Same as [`build --sbom`](buildx_build.md#sbom).
+    Same as [`build --sbom`](/reference/cli/docker/buildx/build/#sbom).
 
     ### Override target configurations from command line (--set) {#set}
 
@@ -253,7 +253,7 @@ examples: |-
     $ docker buildx bake --set foo*.no-cache              # bypass caching only for targets starting with 'foo'
     ```
 
-    Complete list of overridable fields:
+    You can override the following fields:
 
     * `args`
     * `cache-from`

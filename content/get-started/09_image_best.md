@@ -95,9 +95,6 @@ dependencies if there was a change to the `package.json`.
     [here](../build/building/context.md#dockerignore-files).
     In this case, the `node_modules` folder should be omitted in the second `COPY` step because otherwise,
     it would possibly overwrite files which were created by the command in the `RUN` step.
-    For further details on why this is recommended for Node.js applications and other best practices,
-    have a look at their guide on
-    [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/).
 
 3. Build a new image using `docker build`.
 
@@ -213,7 +210,7 @@ In this section, you learned a few image building best practices, including laye
 
 Related information:
  - [.dockerignore](../build/building/context.md#dockerignore-files)
- - [Dockerfile reference](../engine/reference/builder.md)
+ - [Dockerfile reference](../reference/dockerfile.md)
  - [Build with Docker guide](../build/guide/index.md)
  - [Dockerfile best practices](../develop/develop-images/dockerfile_best-practices.md)
 

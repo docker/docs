@@ -23,16 +23,25 @@ You can also locate the `settings.json` file at `~/Library/Group Containers/grou
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
-- **Start Docker Desktop when you log in**. Select to automatically start Docker
+- **Start Docker Desktop when you sign in to your computer**. Select to automatically start Docker
   Desktop when you sign in to your machine.
 
-- **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
+- **Open Docker Dashboard when Docker Desktop starts**. Select to automatically open the
+  dashboard when starting Docker Desktop.
+
+- **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use system settings**.
 
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
 If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
 
 - **Include VM in Time Machine backups**. Select to back up the Docker Desktop
   virtual machine. This option is turned off by default.
+
+- **Use containerd for pulling and storing images**.
+  Turns on the containerd image store.
+  This brings new features like faster container startup performance by lazy-pulling images,
+  and the ability to run Wasm applications with Docker.
+  For more information, see [containerd image store](../containerd.md).
 
 - **Use Virtualization framework**. Select to allow Docker Desktop to use the `virtualization.framework` instead of the `hypervisor.framework`.
     > **Tip**
@@ -46,16 +55,12 @@ If you choose the integrated terminal, you can run commands in a running contain
     > Use VirtioFS for speedy file sharing. VirtioFS has reduced the time taken to complete filesystem operations by [up to 98%](https://github.com/docker/roadmap/issues/7#issuecomment-1044452206)
     { .tip }
 
+- **Use Rosetta for x86_64/amd64 emulation on Apple Silicon**. Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab. You must also be on macOS Ventura or later. 
+
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
   troubleshoot the application. Clear the checkbox to opt out. Docker may
   periodically prompt you for more information.
-
-- **Show weekly tips**. Select to display useful advice and suggestions about
-  using Docker.
-
-- **Open Docker Desktop dashboard at startup**. Select to automatically open the
-  dashboard when starting Docker Desktop.
 
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md).
     >**Note**
@@ -63,6 +68,10 @@ If you choose the integrated terminal, you can run commands in a running contain
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
 - **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
+
+- **SBOM Indexing**. When this option is enabled, inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout.
+
+- **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
 ## Resources
 
@@ -119,7 +128,7 @@ Use File sharing to allow local directories on your machine to be shared with
 Linux containers. This is especially useful for editing source code in an IDE on
 the host while running and testing the code in a container.
 
-By default the `/Users`, `/Volume`, `/private`, `/tmp` and `/var/folders` directory are shared.
+By default the `/Users`, `/Volumes`, `/private`, `/tmp` and `/var/folders` directory are shared.
 If your project is outside this directory then it must be added to the list,
 otherwise you may get `Mounts denied` or `cannot start service` errors at runtime.
 
@@ -192,6 +201,8 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 {{< include "desktop-network-setting.md" >}}
 
+You can also select **Use kernel networking for UDP**. This lets you use a more efficient kernel networking path for UDP by changing the value of `kernelForUDP` in the `settings.json` file.
+
 ## Docker Engine
 
 The **Docker Engine** tab allows you to configure the Docker daemon used to run containers with Docker Desktop.
@@ -215,7 +226,7 @@ edit the JSON configuration directly from the dashboard in Docker Desktop, or op
 edit the file using your favorite text editor.
 
 To see the full list of possible configuration options, see the
-[dockerd command reference](/engine/reference/commandline/dockerd/).
+[dockerd command reference](/reference/cli/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
@@ -275,17 +286,13 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 {{< include "beta.md" >}}
 
-#### Use containerd for pulling and storing images
-
-Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
-
-#### Use Rosetta for x86/AMD64 emulation on Apple Silicon.
-
-Turns on Rosetta to accelerate x86/AMD64 binary emulation on Apple Silicon. This option is only available if you have turned on **Virtualization framework** in the **General** settings tab.
-
 ### Experimental features
 
 {{< include "desktop-experimental.md" >}}
+
+## Notifications
+
+{{< include "desktop-notifications-settings.md" >}}
 
 ## Advanced
 
@@ -308,3 +315,12 @@ On the **Advanced** tab, you can reconfigure your initial installation settings:
   For more information on each configuration and use case, see [Permission requirements](../mac/permission-requirements.md).
 
 - **Automatically check configuration**. Regularly checks your configuration to ensure no unexpected changes have been made by another application.
+
+  Docker Desktop checks if your setup, configured during installation, has been altered by external apps like Orbstack. Docker Desktop checks:
+    - The symlinks of Docker binaries to `/usr/local/bin`.
+    - The symlink of the default Docker socket. 
+  Additionally, Docker Desktop ensures that the context is switched to `desktop-linux` on startup.
+  
+  You are notified if changes are found and are able to restore the configuration directly from the notification.
+
+

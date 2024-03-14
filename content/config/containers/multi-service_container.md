@@ -1,12 +1,12 @@
 ---
-description: How to run more than one process in a container
+description: Learn how to run more than one process in a single container
 keywords: docker, supervisor, process management
-title: Run multiple services in a container
+title: Run multiple processes in a container
 aliases:
-- /articles/using_supervisord/
-- /engine/admin/multi-service_container/
-- /engine/admin/using_supervisord/
-- /engine/articles/using_supervisord/
+  - /articles/using_supervisord/
+  - /engine/admin/multi-service_container/
+  - /engine/admin/using_supervisord/
+  - /engine/articles/using_supervisord/
 ---
 
 A container's main running process is the `ENTRYPOINT` and/or `CMD` at the
@@ -25,8 +25,8 @@ your process falls into this category, you can use the `--init` option when you
 run the container. The `--init` flag inserts a tiny init-process into the
 container as the main process, and handles reaping of all processes when the
 container exits. Handling such processes this way is superior to using a
-full-fledged init process such as `sysvinit`, `upstart`, or `systemd` to handle
-process lifecycle within your container.
+full-fledged init process such as `sysvinit` or `systemd` to handle process
+lifecycle within your container.
 
 If you need to run more than one service within a container, you can achieve
 this in a few different ways.
@@ -34,7 +34,7 @@ this in a few different ways.
 ## Use a wrapper script
 
 Put all of your commands in a wrapper script, complete with testing and
-debugging information. Run the wrapper script as your `CMD`. This is a very
+debugging information. Run the wrapper script as your `CMD`. The following is a
 naive example. First, the wrapper script:
 
 ```bash
@@ -66,10 +66,9 @@ CMD ./my_wrapper_script.sh
 
 ## Use Bash job controls
 
-If you have one main process that needs to start first and stay running but
-you temporarily need to run some other processes (perhaps to interact with
-the main process) then you can use bash's job control to facilitate that.
-First, the wrapper script:
+If you have one main process that needs to start first and stay running but you
+temporarily need to run some other processes (perhaps to interact with the main
+process) then you can use bash's job control. First, the wrapper script:
 
 ```bash
 #!/bin/bash
@@ -103,8 +102,8 @@ CMD ./my_wrapper_script.sh
 
 ## Use a process manager
 
-Use a process manager like `supervisord`. This is a moderately heavy-weight
-approach that requires you to package `supervisord` and its configuration in
+Use a process manager like `supervisord`. This is more involved than the other
+options, as it requires you to bundle `supervisord` and its configuration into
 your image (or base your image on one that includes `supervisord`), along with
 the different applications it manages. Then you start `supervisord`, which
 manages your processes for you.

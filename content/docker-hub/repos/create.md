@@ -11,7 +11,7 @@ aliases:
 Repositories let you share container images with your team,
 customers, or the Docker community at large.
 
-A single Docker Hub repository can hold many Docker images which are stored as **tags**. You can push Docker images to Docker Hub with the [`docker push`](/engine/reference/commandline/push/)command.
+A single Docker Hub repository can hold many Docker images which are stored as **tags**. You can push Docker images to Docker Hub with the [`docker push`](/reference/cli/docker/image/push/)command.
 
 ## Create a repository
 
@@ -22,7 +22,7 @@ A single Docker Hub repository can hold many Docker images which are stored as *
 When creating a new repository:
 
 - You can choose to locate it under your own user account, or under any
-  [organization](../../docker-hub/orgs.md) where you are an [owner](../manage-a-team.md#organization-owner).
+  [organization](../../admin/organization//orgs.md) where you are an [owner](../../admin/organization/manage-a-team.md#organization-owner) or [editor](../../security/for-admins/roles-and-permissions.md).
 - The repository name needs to:
     - Be unique
     - Have between 2 and 255 characters
@@ -61,7 +61,7 @@ Once you have created a repository, you can start using `docker push` to push
 images.
 
 To push an image to Docker Hub, you must first name your local image using your
-Docker Hub username and the repository name that you created.
+Docker ID and the repository name that you created.
 
 If you want to add multiple images to a repository, add a specific `:<tag>` to them, for example `docs/base:testing`. If it's not specified, the tag defaults to `latest`.
 

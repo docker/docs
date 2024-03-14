@@ -1,5 +1,5 @@
 ---
-title: Optimizing builds with cache management
+title: Docker build cache
 description: Improve your build speed with effective use of the build cache
 keywords: build, buildx, buildkit, dockerfile, image layers, build instructions, build context
 aliases:
@@ -9,7 +9,7 @@ aliases:
 When you build the same Docker image multiple times, knowing how to optimize
 the build cache is a great tool for making sure the builds run fast.
 
-## How does the build cache work?
+## How the build cache works
 
 Understanding Docker's build cache helps you write better Dockerfiles that
 result in faster builds.
@@ -48,19 +48,9 @@ And that's the Docker build cache in a nutshell. Once a layer changes, then all
 downstream layers need to be rebuilt as well. Even if they wouldn't build
 anything differently, they still need to re-run.
 
-> **Note**
->
-> Suppose you have a `RUN apt-get update && apt-get upgrade -y` step in your
-> Dockerfile to upgrade all the software packages in your Debian-based image to
-> the latest version.
->
-> This doesn't mean that the images you build are always up to date. Rebuilding
-> the image on the same host one week later will still get you the same packages
-> as before. The only way to force a rebuild is by making sure that a layer
-> before it has changed, or by clearing the build cache using
-> [`docker builder prune`](../../engine/reference/commandline/builder_prune/).
+For more details about how cache invalidation works, see [Cache invalidation](invalidation.md).
 
-## How can I use the cache efficiently?
+## Optimizing how you use the build cache
 
 Now that you understand how the cache works, you can begin to use the cache to
 your advantage. While the cache will automatically work on any `docker build`
@@ -243,7 +233,7 @@ stages in parallel. Only the instructions in the `site` stage will end up as
 layers in the final image. The entire `git` history doesn't get embedded into
 the final result, which helps keep the image small and secure.
 
-#### Combine commands together wherever possible.
+#### Combine commands together wherever possible
 
 Most Dockerfile commands, and `RUN` commands in particular, can often be joined
 together. For example, instead of using `RUN` like this:
@@ -283,5 +273,6 @@ of continuing.)
 
 For more information on using cache to do efficient builds, see:
 
+- [Cache invalidation](invalidation.md)
 - [Garbage collection](garbage-collection.md)
 - [Cache storage backends](./backends/index.md)

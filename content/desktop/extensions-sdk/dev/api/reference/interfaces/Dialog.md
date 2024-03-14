@@ -1,7 +1,6 @@
 ---
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
-skip_read_time: true
 ---
 
 # Interface: Dialog
@@ -18,7 +17,7 @@ Allows opening native dialog boxes.
 
 ▸ **showOpenDialog**(`dialogProperties`): `Promise`<[`OpenDialogResult`](OpenDialogResult.md)\>
 
-Display a native open dialog, allowing to select a file or a folder.
+Display a native open dialog. Lets you select a file or a folder.
 
 ```typescript
 ddClient.desktopUI.dialog.showOpenDialog({properties: ['openFile']});

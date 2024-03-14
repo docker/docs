@@ -5,19 +5,19 @@ arm64: |
   ARM64 is the 64-bit extension of the ARM CPU architecture. arm64 architecture
   is used in Apple silicon machines.
 base image: |
-  A **base image** has no parent image specified in its Dockerfile. It is created using a Dockerfile with the `FROM scratch` directive.
+  A base image has no parent image specified in its Dockerfile. It is created using a Dockerfile with the `FROM scratch` directive.
 btrfs: |
   btrfs (B-tree file system) is a Linux [filesystem](#filesystem) that Docker
   supports as a storage backend. It is a [copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write) filesystem.
 build: |
-  build is the process of building Docker images using a [Dockerfile](#dockerfile).
+  Build is the process of building Docker images using a [Dockerfile](#dockerfile).
   The build uses a Dockerfile and a "context". The context is the set of files in the directory in which the image is built.
 cgroups: |
   cgroups is a Linux kernel feature that limits, accounts for, and isolates
   the resource usage (CPU, memory, disk I/O, network, etc.) of a collection
   of processes. Docker relies on cgroups to control and isolate resource limits.
 
-  *Also known as : control groups*
+  *Also known as control groups*
 cluster: |
   A cluster is a group of machines that work together to run workloads and provide high availability.
 Compose: |
@@ -27,7 +27,7 @@ Compose: |
   application up in a single command which does everything that needs to
   be done to get it running.
 
-  *Also known as : docker-compose
+  *Also known as Docker Compose*
 copy-on-write: |
   Docker uses a
   [copy-on-write](/storage/storagedriver/#the-copy-on-write-cow-strategy)
@@ -66,7 +66,7 @@ Docker: |
   - The Docker project as a whole, which is a platform for developers and sysadmins to develop, ship, and run applications
   - The docker daemon process running on the host which manages images and containers (also called Docker Engine)
 Docker Business: |
-  Docker Buisness is a Docker subscription. Docker Business offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and accelerate their secure software supply chain initiatives.
+  Docker Business is a Docker subscription. Docker Business offers centralized management and advanced security features for enterprises that use Docker at scale. It empowers leaders to manage their Docker development environments and accelerate their secure software supply chain initiatives.
 Docker Desktop: |
   Docker Desktop is an easy-to-install, lightweight
   Docker development environment. Docker Desktop is available for [Mac](#docker-desktop-for-mac), [Windows](#docker-desktop-for-windows), and [Linux](#docker-desktop-for-linux), providing developers a consistent experience across platforms. Docker Desktop includes Docker Engine, Docker CLI client, Docker Compose, Docker Content Trust, Kubernetes, and Credential Helper.
@@ -88,7 +88,7 @@ Docker Desktop for Windows: |
 Docker Desktop for Linux: |
   Docker Desktop for Linux is an an easy-to-install, lightweight Docker development environment designed specifically for Linux machines. It's the best solution if you want to build, debug, test, package, and ship Dockerized applications on a Linux machine.
 Docker Hub: |
-  The [Docker Hub](https://hub.docker.com/) is a centralized resource for working with Docker and its components. It provides the following services:
+  [Docker Hub](https://hub.docker.com/) is a centralized resource for working with Docker and its components. It provides the following services:
 
   - A registry to host Docker images
   - User authentication
@@ -183,9 +183,9 @@ node: |
   A [node](/engine/swarm/how-swarm-mode-works/nodes/) is a physical or virtual
   machine running an instance of the Docker Engine in [swarm mode](#swarm-mode).
 
-  **Manager nodes** perform swarm management and orchestration duties. By default manager nodes are also worker nodes.
+  Manager nodes perform swarm management and orchestration duties. By default manager nodes are also worker nodes.
 
-  **Worker nodes** execute tasks.
+  Worker nodes execute tasks.
 organization: |
   An organization is a collection of teams and repositories that can be managed together. Docker users become members of an organization when they are assigned to at least one team in the organization.
 organization name: |
@@ -198,10 +198,10 @@ overlay storage driver: |
   [union mount](https://en.wikipedia.org/wiki/Union_mount) for other file systems.
   It is supported by the Docker daemon as a storage driver.
 parent image: |
-  An image's **parent image** is the image designated in the `FROM` directive
+  An image's parent image is the image designated in the `FROM` directive
   in the image's Dockerfile. All subsequent commands are based on this parent
   image. A Dockerfile with the `FROM scratch` directive uses no parent image, and creates
-  a **base image**.
+  a base image.
 persistent storage: |
   Persistent storage or volume storage provides a way for a user to add a
   persistent layer to the running container's file system. This persistent layer
@@ -265,7 +265,7 @@ virtual machine: |
 
   Compared to containers, a virtual machine is heavier to run, provides more isolation, gets its own set of resources and does minimal sharing.
 
-  *Also known as : VM*
+  *Also known as VM*
 volume: |
   A volume is a specially-designated directory within one or more containers
   that bypasses the Union File System. Volumes are designed to persist data,

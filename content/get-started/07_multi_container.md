@@ -17,7 +17,7 @@ container or run it separately?" In general, each container should do one thing 
 
 And there are more reasons. So, like the following diagram, it's best to run your app in multiple containers.
 
-![Todo App connected to MySQL container](images/multi-container.png?w=350h=250)
+![Todo App connected to MySQL container](images/multi-container.webp?w=350h=250)
 
 
 ## Container networking
@@ -44,7 +44,7 @@ In the following steps, you'll create the network first and then attach the MySQ
    database will use to initialize the database. To learn more about the MySQL environment variables, see the "Environment Variables" section in the [MySQL Docker Hub listing](https://hub.docker.com/_/mysql/).
 
    {{< tabs >}}
-   {{< tab name="Mac / Linux" >}}
+   {{< tab name="Mac / Linux / Git Bash" >}}
    
    ```console
    $ docker run -d \
@@ -56,9 +56,7 @@ In the following steps, you'll create the network first and then attach the MySQ
    ```
 
    {{< /tab >}}
-   {{< tab name="Windows" >}}
-
-   In Windows, run this command in PowerShell.
+   {{< tab name="PowerShell" >}}
 
    ```powershell
    $ docker run -d `
@@ -66,6 +64,18 @@ In the following steps, you'll create the network first and then attach the MySQ
        -v todo-mysql-data:/var/lib/mysql `
        -e MYSQL_ROOT_PASSWORD=secret `
        -e MYSQL_DATABASE=todos `
+       mysql:8.0
+   ```
+   
+   {{< /tab >}}
+   {{< tab name="Command Prompt" >}}
+
+   ```console
+   $ docker run -d ^
+       --network todo-app --network-alias mysql ^
+       -v todo-mysql-data:/var/lib/mysql ^
+       -e MYSQL_ROOT_PASSWORD=secret ^
+       -e MYSQL_DATABASE=todos ^
        mysql:8.0
    ```
    
@@ -209,7 +219,7 @@ You can now start your dev-ready container.
    ```
    
    {{< /tab >}}
-   {{< tab name="Windows" >}}
+   {{< tab name="PowerShell" >}}
    In Windows, run this command in PowerShell.
 
    ```powershell
@@ -224,6 +234,37 @@ You can now start your dev-ready container.
      sh -c "yarn install && yarn run dev"
    ```
 
+   {{< /tab >}}
+   {{< tab name="Command Prompt" >}}
+   In Windows, run this command in Command Prompt.
+
+   ```console
+   $ docker run -dp 127.0.0.1:3000:3000 ^
+     -w /app -v "%cd%:/app" ^
+     --network todo-app ^
+     -e MYSQL_HOST=mysql ^
+     -e MYSQL_USER=root ^
+     -e MYSQL_PASSWORD=secret ^
+     -e MYSQL_DB=todos ^
+     node:18-alpine ^
+     sh -c "yarn install && yarn run dev"
+   ```
+
+   {{< /tab >}}
+   {{< tab name="Git Bash" >}}
+
+   ```console
+   $ docker run -dp 127.0.0.1:3000:3000 \
+     -w //app -v "/$(pwd):/app" \
+     --network todo-app \
+     -e MYSQL_HOST=mysql \
+     -e MYSQL_USER=root \
+     -e MYSQL_PASSWORD=secret \
+     -e MYSQL_DB=todos \
+     node:18-alpine \
+     sh -c "yarn install && yarn run dev"
+   ```
+   
    {{< /tab >}}
    {{< /tabs >}}
 
@@ -269,7 +310,7 @@ At this point, you have an application that now stores its data in an external d
 container. You learned a little bit about container networking and service discovery using DNS.
 
 Related information:
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [docker CLI reference](/reference/cli/docker/)
  - [Networking overview](../network/index.md)
 
 ## Next steps

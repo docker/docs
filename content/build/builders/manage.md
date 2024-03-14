@@ -16,7 +16,7 @@ that use other drivers, such as the
 which runs the BuildKit daemon in a container.
 
 Use the
-[`docker buildx create`](../../engine/reference/commandline/buildx_create.md)
+[`docker buildx create`](../../reference/cli/docker/buildx/create.md)
 command to create a builder.
 
 ```console
@@ -96,6 +96,28 @@ acekq89snc7j6im1rjdizvsg1*                true        8.192kB     37 seconds ago
 Reclaimable:  2.01GB
 Total:        2.01GB
 ```
+
+## Remove a builder
+
+Use the
+[`docker buildx remove`](../../reference/cli/docker/buildx/create.md)
+command to remove a builder.
+
+```console
+$ docker buildx rm <builder-name>
+```
+
+If you remove your currently selected builder,
+the default `docker` builder is automatically selected.
+You can't remove the default builder.
+
+Local build cache for the builder is also removed.
+
+### Removing remote builders
+
+Removing a remote builder doesn't affect the remote build cache.
+It also doesn't stop the remote BuildKit daemon.
+It only removes your connection to the builder.
 
 ## Manage builders with Docker Desktop
 

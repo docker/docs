@@ -20,8 +20,7 @@ Docker. Volumes have several advantages over bind mounts:
 - You can manage volumes using Docker CLI commands or the Docker API.
 - Volumes work on both Linux and Windows containers.
 - Volumes can be more safely shared among multiple containers.
-- Volume drivers let you store volumes on remote hosts or cloud providers, to
-  encrypt the contents of volumes, or to add other functionality.
+- Volume drivers let you store volumes on remote hosts or cloud providers, encrypt the contents of volumes, or add other functionality.
 - New volumes can have their content pre-populated by a container.
 - Volumes on Docker Desktop have much higher performance than bind mounts from
   Mac and Windows hosts.
@@ -31,7 +30,7 @@ container's writable layer, because a volume doesn't increase the size of the
 containers using it, and the volume's contents exist outside the lifecycle of a
 given container.
 
-![Volumes on the Docker host](images/types-of-mounts-volume.png)
+![Volumes on the Docker host](images/types-of-mounts-volume.webp?w=450&h=300)
 
 If your container generates non-persistent state data, consider using a
 [tmpfs mount](tmpfs.md) to avoid storing the data anywhere permanently, and to
@@ -49,7 +48,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
 
 If you need to specify volume driver options, you must use `--mount`.
 
-- **`-v` or `--volume`**: Consists of three fields, separated by colon characters
+- `-v` or `--volume`: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
   isn't immediately obvious.
 
@@ -61,7 +60,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - The third field is optional, and is a comma-separated list of options, such
     as `ro`. These options are discussed below.
 
-- **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
+- `--mount`: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `-v` or `--volume`, but the order of the keys isn't significant, and
   the value of the flag is easier to understand.
@@ -79,7 +78,7 @@ If you need to specify volume driver options, you must use `--mount`.
   - The `volume-opt` option, which can be specified more than once, takes a
     key-value pair consisting of the option name and its value.
 
-> Escape values from outer CSV parser
+> **Warning**
 >
 > If your volume driver accepts a comma-separated list as an option,
 > you must escape the value from the outer CSV parser. To escape a `volume-opt`,
@@ -89,17 +88,18 @@ If you need to specify volume driver options, you must use `--mount`.
 > For example, the `local` driver accepts mount options as a comma-separated
 > list in the `o` parameter. This example shows the correct way to escape the list.
 >
->     $ docker service create \
->         --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
->         --name myservice \
->         <IMAGE>
->
-> { .warning }
+> ```console
+> $ docker service create \
+>  --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
+>  --name myservice \
+>  <IMAGE>
+> ```
+{ .warning }
 
 The examples below show both the `--mount` and `-v` syntax where possible, with
 `--mount` first.
 
-### Differences between `-v` and `--mount` behavior
+### Differences between `-v` and `--mount` behavior 
 
 As opposed to bind mounts, all options for volumes are available for both
 `--mount` and `-v` flags.
@@ -111,13 +111,13 @@ Volumes used with services, only support `--mount`.
 Unlike a bind mount, you can create and manage volumes outside the scope of any
 container.
 
-**Create a volume**:
+Create a volume:
 
 ```console
 $ docker volume create my-vol
 ```
 
-**List volumes**:
+List volumes:
 
 ```console
 $ docker volume ls
@@ -125,7 +125,7 @@ $ docker volume ls
 local               my-vol
 ```
 
-**Inspect a volume**:
+Inspect a volume:
 
 ```console
 $ docker volume inspect my-vol
@@ -141,7 +141,7 @@ $ docker volume inspect my-vol
 ]
 ```
 
-**Remove a volume**:
+Remove a volume:
 
 ```console
 $ docker volume rm my-vol
@@ -229,7 +229,7 @@ volumes:
 Running `docker compose up` for the first time creates a volume. Docker reuses the same volume when you run the command subsequently.
 
 You can create a volume directly outside of Compose using `docker volume create` and
-then reference it inside `docker-compose.yml` as follows:
+then reference it inside `compose.yaml` as follows:
 
 ```yaml
 services:
@@ -408,7 +408,7 @@ $ docker volume rm nginx-vol
 When building fault-tolerant applications, you may need to configure multiple
 replicas of the same service to have access to the same files.
 
-![shared storage](images/volumes-shared-storage.svg)
+![shared storage](images/volumes-shared-storage.webp)
 
 There are several ways to achieve this when developing your applications.
 One is to add logic to your application to store files on a cloud object
@@ -458,7 +458,7 @@ The following example specifies an SSH password. However, if the two hosts have
 shared keys configured, you can exclude the password.
 Each volume driver may have zero or more configurable options.
 
-> **Note:**
+> **Note**
 >
 > If the volume driver requires you to pass any options,
 > you must use the `--mount` flag to mount the volume, and not `-v`.
@@ -669,7 +669,7 @@ the Docker Engine removes the `/foo` volume but not the `awesome` volume.
 $ docker run --rm -v /foo -v awesome:/bar busybox top
 ```
 
-> **Note**:
+> **Note**
 >
 > If another container binds the volumes with
 > `--volumes-from`, the volume definitions are _copied_ and the

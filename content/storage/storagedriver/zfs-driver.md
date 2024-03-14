@@ -134,7 +134,7 @@ Edit `/etc/docker/daemon.json` and add the following:
 ```
 
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#daemon-storage-driver)
+[daemon reference documentation](/reference/cli/dockerd/#daemon-storage-driver)
 
 Save and close the file, and restart Docker.
 
@@ -150,7 +150,7 @@ ZFS uses the following objects:
 
 The process of creating a clone:
 
-![ZFS snapshots and clones](images/zfs_clones.jpg)
+![ZFS snapshots and clones](images/zfs_clones.webp?w=450)
 
 
 1.  A read-only snapshot is created from the filesystem.
@@ -175,7 +175,7 @@ on a ZFS Snapshot of the top layer of the image it's created from.
 The diagram below shows how this is put together with a running container based
 on a two-layer image.
 
-![ZFS pool for Docker container](images/zfs_zpool.jpg)
+![ZFS pool for Docker container](images/zfs_zpool.webp?w=600)
 
 When you start a container, the following steps happen in order:
 
@@ -209,7 +209,7 @@ the dataset it was created from (the snapshots of its parent layers). Read
 operations are fast, even if the data being read is from a deep layer.
 This diagram illustrates how block sharing works:
 
-![ZFS block sharing](images/zpool_blocks.jpg)
+![ZFS block sharing](images/zpool_blocks.webp?w=450)
 
 
 ### Writing files

@@ -1,12 +1,10 @@
 command: docker scout cache prune
 short: Remove temporary or cached data
 long: |-
-    Docker Scout stores temporary files to generate SBOMs of images and cache those SBOMs to not generate or fetch them again.
+    The `docker scout cache prune` command removes temporary data and SBOM cache.
 
-    The `docker scout cache prune` command will remove all the temporary files used while generating the SBOMs.
-
-    By default the cached SBOMs will not be deleted are they can be used by the different `docker scout` commands. But the `--sboms`
-    flag can be used to delete them.
+    By default, `docker scout cache prune` only deletes temporary data.
+    To delete temporary data and clear the SBOM cache, use the `--sboms` flag.
 usage: docker scout cache prune
 pname: docker scout cache
 plink: docker_scout_cache.yaml
@@ -37,6 +35,16 @@ inherited_options:
       value_type: bool
       default_value: "false"
       description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
       deprecated: false
       hidden: true
       experimental: false

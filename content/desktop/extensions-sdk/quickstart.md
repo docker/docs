@@ -6,7 +6,7 @@ aliases:
 - desktop/extensions-sdk/tutorials/initialize/
 ---
 
-Follow this guide to get started with building a basic Docker extension. The Quickstart guide automatically generates boilerplate files for you.
+Follow this guide to get started with creating a basic Docker extension. The Quickstart guide automatically generates boilerplate files for you.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ Follow this guide to get started with building a basic Docker extension. The Qui
 
 > Note
 >
-> NodeJS and Go are only required when you follow the quickstart guide to build an extension. It uses the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
+> NodeJS and Go are only required when you follow the quickstart guide to create an extension. It uses the `docker extension init` command to automatically generate boilerplate files. This command uses a template based on a ReactJS and Go application.
 
 ## Step one: Set up your directory
 
@@ -66,6 +66,7 @@ see a **Quickstart** item underneath the **Extensions** menu. Selecting this ite
 >
 > During UI development, it’s helpful to use hot reloading to test your changes without rebuilding your entire
 > extension. See [Preview whilst developing the UI](dev/test-debug.md#hot-reloading-whilst-developing-the-ui) for more information.
+{ .tip }
 
 You may also want to inspect the containers that belong to the extension. By default, extension containers are
 hidden from the Docker Dashboard. You can change this in **Settings**, see
@@ -82,8 +83,6 @@ To remove the extension, run:
 ```console
 $ docker extension rm <name-of-your-extension>
 ```
-
-{{< include "extensions-form.md" >}}
 
 ## What's next
 

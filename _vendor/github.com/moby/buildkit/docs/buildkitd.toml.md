@@ -7,12 +7,14 @@ of daemon configuration.
 The file path is `/etc/buildkit/buildkitd.toml` for rootful mode,
 `~/.config/buildkit/buildkitd.toml` for rootless mode.
 
-The following is a complete `buildkitd.toml` configuration example, please
-note some configuration is only good for edge cases, please take care of it
-carefully.
+The following is a complete `buildkitd.toml` configuration example.
+Note that some configuration options are only useful in edge cases.
 
 ```toml
+# debug enables additional debug logging
 debug = true
+# trace enables additional trace logging (very verbose, with potential performance impacts)
+trace = true
 # root is where all buildkit state is stored.
 root = "/var/lib/buildkit"
 # insecure-entitlements allows insecure entitlements, disabled by default.
@@ -109,6 +111,7 @@ insecure-entitlements = [ "network.host", "security.insecure" ]
   # configure the containerd runtime
   [worker.containerd.runtime]
     name = "io.containerd.runc.v2"
+    path = "/path/to/containerd/runc/shim"
     options = { BinaryName = "runc" }
 
   [[worker.containerd.gcpolicy]]

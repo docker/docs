@@ -5,40 +5,66 @@
  *
  * */
 
-.prose blockquote {
-  @apply bg-blue-light-100 p-4 font-normal not-italic dark:bg-blue-dark-100;
-  quotes: none;
-  > *:first-child {
-    @apply relative ml-5 mt-0 before:absolute before:-left-5 before:font-icons before:content-['info'];
-  }
-  *:last-child {
-    @apply mb-0 after:content-none;
-  }
-
-  &.warning {
-    @apply border-l-red-light bg-red-light-100 dark:border-l-red-dark dark:bg-red-dark-100;
-  }
-
-  &.important {
-    @apply border-l-amber-light bg-amber-light-100 dark:border-l-amber-dark dark:bg-amber-dark-100;
-  }
-
-  &.tip {
-    @apply border-l-green-light bg-green-light-100 dark:border-l-green-dark dark:bg-green-dark-100;
+@layer components {
+  .prose blockquote {
+    @apply bg-blue-light-100 px-6 py-4 font-normal not-italic dark:bg-blue-dark-100;
+    quotes: none;
     > *:first-child {
-      @apply before:content-['thumb\_up'];
+      @apply relative ml-6 mt-0;
+      &:before {
+        @apply bg-black dark:bg-white;
+        position: absolute;
+        display: block;
+        margin-left: -24px;
+        margin-top: 4px;
+        width: 20px;
+        height: 20px;
+        mask-image: url('/icons/info-fill.svg');
+        -webkit-mask-image: url('/icons/info-fill.svg');
+        mask-repeat: no-repeat;
+        mask-size: cover;
+      }
     }
-  }
-
-  &.experimental {
-    > *:first-child {
-      @apply before:content-['science'];
+    *:last-child {
+      @apply mb-0 after:content-none;
     }
-  }
-  &.restricted {
-    @apply border-l-violet-light bg-violet-light-100 dark:border-l-violet-dark dark:bg-violet-dark-100;
-    > *:first-child {
-      @apply before:content-['rocket\_launch'];
+
+    &.warning {
+      @apply border-l-red-light bg-red-light-100 dark:border-l-red-dark dark:bg-red-dark-100;
+      > *:first-child:before {
+        mask-image: url('/icons/dangerous-fill.svg');
+        -webkit-mask-image: url('/icons/dangerous-fill.svg');
+      }
+    }
+
+    &.important {
+      @apply border-l-amber-light bg-amber-light-100 dark:border-l-amber-dark dark:bg-amber-dark-100;
+      > *:first-child:before {
+        mask-image: url('/icons/warning-fill.svg');
+        -webkit-mask-image: url('/icons/warning-fill.svg');
+      }
+    }
+
+    &.tip {
+      @apply border-l-green-light bg-green-light-100 dark:border-l-green-dark dark:bg-green-dark-100;
+      > *:first-child:before {
+        mask-image: url('/icons/lightbulb-fill.svg');
+        -webkit-mask-image: url('/icons/lightbulb-fill.svg');
+      }
+    }
+
+    &.experimental {
+      > *:first-child:before {
+        mask-image: url('/icons/science-fill.svg');
+        -webkit-mask-image: url('/icons/science-fill.svg');
+      }
+    }
+    &.restricted {
+      @apply border-l-violet-light bg-violet-light-100 dark:border-l-violet-dark dark:bg-violet-dark-100;
+      > *:first-child:before {
+        mask-image: url('/icons/rocket_launch-fill.svg');
+        -webkit-mask-image: url('/icons/rocket_launch-fill.svg');
+      }
     }
   }
 }

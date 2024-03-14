@@ -16,63 +16,43 @@ changes won't be seen in another container, even if they're using the same image
 
 ### See this in practice
 
-To see this in action, you're going to start two containers and create a file in each.
-What you'll see is that the files created in one container aren't available in another.
+To see this in action, you're going to start two containers. In one container, you'll create a file. In the other container, you'll verify the file exists.
+What you'll see is that the file created in one container isn't available in another.
 
-> **Note**
->
-> If you use Windows and want to use Git Bash to run Docker commands, see [Working with Git Bash](../desktop/troubleshoot/topics.md#working-with-git-bash) for syntax differences.
-
-1. Start an `ubuntu` container that will create a file named `/data.txt` with a random number
-   between 1 and 10000.
+1. Start an Alpine container and access its shell.
 
     ```console
-    $ docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
+    $ docker run -ti --name=mytest alpine
     ```
 
-    In case you're curious about the command, you're starting a bash shell and invoking two
-    commands (why you have the `&&`). The first portion picks a single random number and writes
-    it to `/data.txt`. The second command is simply watching a file to keep the container running.
-
-2. Validate that you can see the output by accessing the terminal in the container. To do so, you can use the CLI or Docker Desktop's graphical interface.
-
-   {{< tabs group="ui" >}}
-   {{< tab name="CLI" >}}
-
-   On the command line, use the `docker exec` command to access the container. You need to get the
-   container's ID (use `docker ps` to get it). In your Mac or Linux terminal, or in Windows Command Prompt or PowerShell, get the content with the following command.
-
-   ```console
-   $ docker exec <container-id> cat /data.txt
-   ```
-   
-   {{< /tab >}}
-   {{< tab name="Docker Desktop" >}}
-   
-   In Docker Desktop, go to **Containers**, hover over the container running the **ubuntu** image, and select the **Show container actions** menu. From the drop-down menu, select **Open in terminal**.
-
-   You will see a terminal that is running a shell in the Ubuntu container. Run the following command to see the content of the `/data.txt` file. Close this terminal afterwards again.
-
-   ```console
-   $ cat /data.txt
-   ```
-
-   {{< /tab >}}
-   {{< /tabs >}}
-
-   You should see a random number.
-
-3. Now, start another `ubuntu` container (the same image) and you'll see you don't have the same file. In your Mac or Linux terminal, or in Windows Command Prompt or PowerShell, get the content with the following command.
+2. In the container, create a `greeting.txt` file with `hello` inside.
 
     ```console
-    $ docker run -it ubuntu ls /
+    / # echo "hello" > greeting.txt
     ```
 
-    In this case the command lists the files in the root directory of the container.
-    Look, there's no `data.txt` file there! That's because it was written to the scratch space for
-    only the first container.
+3. Exit the container.
 
-4. Go ahead and remove the first container using the `docker rm -f <container-id>` command.
+   ```console
+   / # exit
+   ```
+
+4. Run a new Alpine container and use the `cat` command to verify that the
+   file does not exist.
+   
+   ```console
+   $ docker run alpine cat greetings.txt
+   ```
+
+   You should see output similiar to the following that indicates the file does not exist in the new container.
+
+   ```console
+   cat: can't open 'greetings.txt': No such file or directory
+   ```
+
+5. Go ahead and remove the containers using `docker ps --all` to get the IDs,
+   and then `docker rm -f <container-id>` to remove the containers.
+
 
 ## Container volumes
 
@@ -106,7 +86,7 @@ name of the volume.
 
 You can create the volume and start the container using the CLI or Docker Desktop's graphical interface.
 
-{{< tabs group="ui" >}}
+{{< tabs >}}
 {{< tab name="CLI" >}}
 
 1. Create a volume by using the `docker volume create` command.
@@ -115,14 +95,28 @@ You can create the volume and start the container using the CLI or Docker Deskto
    $ docker volume create todo-db
    ```
 
-2. Stop and remove the todo app container once again with `docker rm -f <id>`, as it is still running without using the persistent volume.
+2. Stop and remove the todo app container once again with `docker rm -f <id>`,
+   as it is still running without using the persistent volume.
 
-3. Start the todo app container, but add the `--mount` option to specify a volume mount. Give the volume a name, and mount
-   it to `/etc/todos` in the container, which captures all files created at the path. In your Mac or Linux terminal, or in Windows Command Prompt or PowerShell, run the following command:
+3. Start the todo app container, but add the `--mount` option to specify a
+   volume mount. Give the volume a name, and mount it to `/etc/todos` in the
+   container, which captures all files created at the path.
 
    ```console
    $ docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db,target=/etc/todos getting-started
    ```
+
+   > **Note**
+   >
+   > If you're using Git Bash, you must use different syntax for this command.
+   >
+   > ```console
+   > $ docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db, target=//etc/todos getting-started
+   > ```
+   >
+   > For more details about Git Bash's syntax differences, see
+   > [Working with Git Bash](../desktop/troubleshoot/topics/#working-with-git-bash).
+
 
 {{< /tab >}}
 {{< tab name="Docker Desktop" >}}
@@ -163,7 +157,7 @@ To start the todo app container with the volume mounted:
 
 1. Once the container starts up, open the app and add a few items to your todo list.
 
-    ![Items added to todo list](images/items-added.png)
+    ![Items added to todo list](images/items-added.webp)
     
 
 2. Stop and remove the container for the todo app. Use Docker Desktop or `docker ps` to get the ID and then `docker rm -f <id>` to remove it.
@@ -205,7 +199,7 @@ In this section, you learned how to persist container data.
 
 Related information:
 
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [docker CLI reference](/reference/cli/docker/)
  - [Volumes](../storage/volumes.md)
 
 ## Next steps

@@ -1,8 +1,11 @@
 command: docker scout policy
 short: |
     Evaluate policies against an image and display the policy evaluation results (experimental)
-long: |
-    The `docker scout policy` command evaluates policies against an image. The image is indexed into the Scout platform - if it wasn't already - and policies will run against it. The policy results may take a few minutes to become available.
+long: |-
+    The `docker scout policy` command evaluates policies against an image.
+    The image analysis is uploaded to Docker Scout where policies get evaluated.
+
+    The policy evaluation results may take a few minutes to become available.
 usage: docker scout policy [IMAGE | REPO]
 pname: docker scout
 plink: docker_scout.yaml
@@ -10,8 +13,8 @@ options:
     - option: env
       value_type: string
       description: Name of the environment to compare to
-      deprecated: false
-      hidden: false
+      deprecated: true
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -55,11 +58,40 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: to-env
+      value_type: string
+      description: Name of the environment to compare to
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: to-latest
+      value_type: bool
+      default_value: "false"
+      description: Latest image processed to compare to
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
     - option: debug
       value_type: bool
       default_value: "false"
       description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
       deprecated: false
       hidden: true
       experimental: false
@@ -88,7 +120,7 @@ examples: |-
     ### Compare policy results for a repository in a specific environment
 
     ```console
-    $ docker scout policy dockerscoutpolicy/customers-api-service --env production
+    $ docker scout policy dockerscoutpolicy/customers-api-service --to-env production
     ```
 deprecated: false
 experimental: false

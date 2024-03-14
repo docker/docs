@@ -31,7 +31,7 @@ Before you can run the application, you need to get the application source code 
 
 2. View the contents of the cloned repository. You should see the following files and sub-directories.
 
-   ```
+   ```text
    ├── getting-started-app/
    │ ├── package.json
    │ ├── README.md
@@ -47,7 +47,7 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
 1. In the `getting-started-app` directory, the same location as the `package.json` file, create a file named `Dockerfile`. You can use the following commands to create a Dockerfile based on your operating system.
 
    {{< tabs >}}
-   {{< tab name="Mac / Linux" >}}
+   {{< tab name="Mac / Linux / Windows (Git Bash)" >}}
 
    In the terminal, run the following commands.
 
@@ -64,7 +64,7 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
    ```
 
    {{< /tab >}}
-   {{< tab name="Windows" >}}
+   {{< tab name="Windows (Command Prompt)" >}}
 
    In the Windows Command Prompt, run the following commands.
 
@@ -78,6 +78,23 @@ To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a te
 
    ```console
    $ type nul > Dockerfile
+   ```
+
+   {{< /tab >}}
+   {{< tab name="Windows (PowerShell)" >}}
+
+   In PowerShell, run the following commands.
+
+   Make sure you're in the `getting-started-app` directory. Replace `\path\to\getting-started-app` with the path to your `getting-started-app` directory.
+
+   ```console
+   $ cd \path\to\getting-started-app
+   ```
+
+   Create an empty file named `Dockerfile`.
+
+   ```powershell
+   $ New-Item -Path . -Name Dockerfile -ItemType File
    ```
 
    {{< /tab >}}
@@ -128,16 +145,21 @@ Now that you have an image, you can run the application in a container using the
    ```
 
    The `-d` flag (short for `--detach`) runs the container in the background.
-   The `-p` flag (short for `--publish`) creates a port mapping between the host and the container.
-   The `-p` flag takes a string value in the format of `HOST:CONTAINER`,
-   where `HOST` is the address on the host, and `CONTAINER` is the port on the container.
-   The command publishes the container's port 3000 to `127.0.0.1:3000` (`localhost:3000`) on the host.
-   Without the port mapping, you wouldn't be able to access the application from the host.
+   This means that Docker starts your container and returns you to the terminal
+   prompt. You can verify that a container is running by viewing it in Docker
+   Dashboard under **Containers**, or by running `docker ps` in the terminal.
+
+   The `-p` flag (short for `--publish`) creates a port mapping between the host
+   and the container. The `-p` flag takes a string value in the format of
+   `HOST:CONTAINER`, where `HOST` is the address on the host, and `CONTAINER` is
+   the port on the container. The command publishes the container's port 3000 to
+   `127.0.0.1:3000` (`localhost:3000`) on the host. Without the port mapping,
+   you wouldn't be able to access the application from the host.
 
 2. After a few seconds, open your web browser to [http://localhost:3000](http://localhost:3000).
    You should see your app.
 
-   ![Empty todo list](images/todo-list-empty.png)
+   ![Empty todo list](images/todo-list-empty.webp)
    
 
 3. Add an item or two and see that it works as you expect. You can mark items as complete and remove them. Your frontend is successfully storing items in the backend.
@@ -166,7 +188,7 @@ df784548666d        getting-started     "docker-entrypoint.s…"   2 minutes ago
 
 In Docker Desktop, select the **Containers** tab to see a list of your containers.
 
-![Docker Desktop with get-started container running](images/dashboard-two-containers.png)
+![Docker Desktop with get-started container running](images/dashboard-two-containers.webp)
 
 {{< /tab >}}
 {{< /tabs >}}
@@ -177,8 +199,8 @@ In this section, you learned the basics about creating a Dockerfile to build an 
 
 Related information:
 
- - [Dockerfile reference](../engine/reference/builder.md)
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [Dockerfile reference](../reference/dockerfile.md)
+ - [docker CLI reference](/reference/cli/docker/)
  - [Build with Docker guide](../build/guide/index.md)
 
 ## Next steps

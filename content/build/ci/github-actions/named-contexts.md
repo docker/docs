@@ -4,7 +4,7 @@ description: Use additional contexts in multi-stage builds with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, context
 ---
 
-You can define [additional build contexts](../../../engine/reference/commandline/buildx_build.md#build-context),
+You can define [additional build contexts](../../../reference/cli/docker/buildx/build.md#build-context),
 and access them in your Dockerfile with `FROM name` or `--from=name`. When
 Dockerfile defines a stage with the same name it's overwritten.
 
@@ -42,7 +42,7 @@ jobs:
         with:
           context: .
           build-contexts: |
-            alpine=docker-image://alpine:3.16
+            alpine=docker-image://alpine:{{% param "example_alpine_version" %}}
           tags: myimage:latest
 ```
 

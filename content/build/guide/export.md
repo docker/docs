@@ -103,7 +103,7 @@ This is explored later on in this guide.
 
 Related information:
 
-- [`docker build --output` CLI reference](../../engine/reference/commandline/build.md#output)
+- [`docker build --output` CLI reference](../../reference/cli/docker/image/build.md#output)
 - [Build exporters](../exporters/index.md)
 
 ## Next steps

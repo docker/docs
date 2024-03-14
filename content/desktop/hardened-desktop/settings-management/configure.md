@@ -15,14 +15,14 @@ Settings Management is designed specifically for organizations who don’t give 
 ### Prerequisites
 
 - [Download and install Docker Desktop 4.13.0 or later](../../release-notes.md).
-- As an admin, you need to [configure a registry.json to enforce sign-in](../../../docker-hub/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
+- As an admin, you need to [configure a registry.json to enforce sign-in](../../../security/for-admins/configure-sign-in.md). This is because this feature requires a Docker Business subscription and therefore your Docker Desktop users must authenticate to your organization for this configuration to take effect.
 
 ### Step one: Create the `admin-settings.json` file and save it in the correct location
 
 You can either use the `--admin-settings` installer flag on [macOS](../../install/mac-install.md#install-from-the-command-line) or [Windows](../../install/windows-install.md#install-from-the-command-line) to automatically create the `admin-settings.json` and save it in the correct location, or set it up manually.
 
 To set it up manually:
-1. Create a new, empty JSON file and name it `admin-settings`.
+1. Create a new, empty JSON file and name it `admin-settings.json`.
 2. Save the `admin-settings.json` file on your developers' machines in the following locations:
 
     - Mac: `/Library/Application\ Support/com.docker.docker/admin-settings.json`
@@ -31,9 +31,10 @@ To set it up manually:
 
     By placing this file in the above protected directories, end users are unable to modify it.
 
-    >**Note**
+    > **Important**
     >
     > It is assumed that you have the ability to push the `admin-settings.json` settings file to the locations specified above through a device management software such as [Jamf](https://www.jamf.com/lp/en-gb/apple-mobile-device-management-mdm-jamf-shared/?attr=google_ads-brand-search-shared&gclid=CjwKCAjw1ICZBhAzEiwAFfvFhEXjayUAi8FHHv1JJitFPb47C_q_RCySTmF86twF1qJc_6GST-YDmhoCuJsQAvD_BwE).
+    { .important }
 
 ### Step two: Configure the settings you want to lock in
 
@@ -69,7 +70,19 @@ The following `admin-settings.json` code and table provides an example of the re
   },
   "enhancedContainerIsolation": {
     "locked": true,
-    "value": true
+    "value": true,
+    "dockerSocketMount": {
+      "imageList": {
+        "images": [
+          "docker.io/localstack/localstack:*",
+          "docker.io/testcontainers/ryuk:*"
+        ]
+      },
+      "commandList": {
+        "type": "deny",
+        "commands": ["push"]
+      }
+    }
   },
   "linuxVM": {
     "wslEngineEnabled": {
@@ -106,29 +119,75 @@ The following `admin-settings.json` code and table provides an example of the re
     "value": true
   },
   "extensionsEnabled": {
-    "value": false,
-    "locked": true
+    "locked": true,
+    "value": false
+  },
+  "scout": {
+    "locked": false,
+    "sbomIndexing": true,
+    "useBackgroundIndexing": true
+  },
+  "allowExperimentalFeatures": {
+    "locked": false,
+    "value": false
+  },
+  "allowBetaFeatures": {
+    "locked": false,
+    "value": false
+  },
+  "blockDockerLoad": {
+    "locked": false,
+    "value": true
+  },
+  "filesharingAllowedDirectories": [
+    {
+      "path": "$HOME",
+      "sharedByDefault": true
+    },
+    {
+      "path":"$TMP",
+      "sharedByDefault": false
+    }
+  ], 
+  "useVirtualizationFrameworkVirtioFS": {
+    "locked": true,
+    "value": true 
+  },
+  "useGrpcfuse": {
+    "locked": true,
+    "value": true 
   }
-}
+} 
 ```
 
 | Parameter                        |   | Description                      |
 | :------------------------------- |---| :------------------------------- |
 | `configurationFileVersion`        |   |Specifies the version of the configuration file format.    |
-| `exposeDockerAPIOnTCP2375` | <span class="badge badge-info">Windows only</span>| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
+| `exposeDockerAPIOnTCP2375` | Windows only| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
 | `proxy` |   |If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores and values set for `http`, `https` and `exclude`. Change `mode` to `manual` to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property, for example `"https": "http://myotherproxy.com:4321"`. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy. |
-&nbsp; &nbsp; &nbsp; &nbsp;`windowsDockerdPort`  | <span class="badge badge-info">Windows only</span> | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port. The default value is -1 which disables the option. Note: This is available for Windows containers only. |
-| `enhancedContainerIsolation`  |  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md).| 
+| &nbsp; &nbsp; &nbsp; &nbsp;`windowsDockerdPort`  | Windows only | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port. The default value is -1 which disables the option. Note: This is available for Windows containers only. |
+| `enhancedContainerIsolation`  |  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md).|
+| &nbsp; &nbsp; &nbsp; &nbsp;`dockerSocketMount` |  | By default, enhanced container isolation blocks bind-mounting the Docker Engine socket into containers (e.g., `docker run -v /var/run/docker.sock:/var/run/docker.sock ...`). This allows admins to relax this in a controlled way. See [ECI Configuration](../enhanced-container-isolation/config.md) for more info. |
+| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `imageList` |  | Indicates which container images are allowed to bind-mount the Docker Engine socket. |
+| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `commandList` |  | Restricts the commands that containers can issue via the bind-mounted Docker Engine socket. |
 | `linuxVM` |   |Parameters and settings related to Linux VM options - grouped together here for convenience. |
-| &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  | <span class="badge badge-info">Windows only</span> | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag.
-| &nbsp;&nbsp; &nbsp; &nbsp;`dockerDaemonOptions`|  |If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/engine/reference/commandline/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |
+| &nbsp; &nbsp; &nbsp; &nbsp;`wslEngineEnabled`  | Windows only | If `value` is set to true, Docker Desktop uses the WSL 2 based engine. This overrides anything that may have been set at installation using the `--backend=<backend name>` flag. |
+| &nbsp;&nbsp; &nbsp; &nbsp;`dockerDaemonOptions`|  |If `value` is set to true, it overrides the options in the Docker Engine config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file). Note that for added security, a few of the config attributes may be overridden when Enhanced Container Isolation is enabled. |
 | &nbsp;&nbsp; &nbsp; &nbsp;`vpnkitCIDR` |  |Overrides the network range used for vpnkit DHCP/DNS for `*.docker.internal`  |
 |`kubernetes`|  | If `enabled` is set to true, a Kubernetes single-node cluster is started when Docker Desktop starts. If `showSystemContainers` is set to true, Kubernetes containers are displayed in the UI and when you run `docker ps`.  `imagesRepository` allows you to specify which repository Docker Desktop pulls the Kubernetes images from. For example, `"imagesRepository": "registry-1.docker.io/docker"`.  |
 | `windowsContainers` |  | Parameters and settings related to `windowsContainers` options - grouped together here for convenience.                  |
-| &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  | Overrides the options in the Linux daemon config file. See the [Docker Engine reference](/engine/reference/commandline/dockerd/#daemon-configuration-file).|                                |
+| &nbsp; &nbsp; &nbsp; &nbsp;`dockerDaemonOptions` |  | Overrides the options in the Linux daemon config file. See the [Docker Engine reference](/reference/cli/dockerd/#daemon-configuration-file).|
 |`disableUpdate`|  |If `value` is set to true, checking for and notifications about Docker Desktop updates is disabled.|
 |`analyticsEnabled`|  |If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |
 |`extensionsEnabled`|  |If `value` is set to false, Docker extensions are disabled. |
+|`scout`|| Setting `useBackgroundIndexing` to `false` disables automatic indexing of images loaded to the image store. Setting `sbomIndexing` to `false` prevents the manual indexing triggered by inspecting an image in Docker Desktop.<br><br>**Note**: Users can still use the `docker scout` CLI commands to index images, even if indexing is disabled in Settings Management. |
+| `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|
+| `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|
+| `blockDockerLoad` | | If `value` is set to `true`, users are no longer able to run [`docker load`](/reference/cli/docker/image/load/) and receive an error if they try to.|
+| `filesharingAllowedDirectories` |  | Specify which paths your developers can add file shares to. Also accepts `$HOME`, `$TMP`, or `$TEMP` as `path` variables. When a path is added, its subdirectories are allowed. If `sharedByDefault` is set to `true`, that path will be added upon factory reset or when Docker Desktop first starts. |
+| `useVirtualizationFrameworkVirtioFS`|  macOS only | If `value` is set to `true`, VirtioFS is set as the file sharing mechanism. Note: If both `useVirtualizationFrameworkVirtioFS` and `useGrpcfuse` have `value` set to `true`, VirtioFS takes precedence. Likewise, if both `useVirtualizationFrameworkVirtioFS` and `useGrpcfuse` have `value` set to `false`, osxfs is set as the file sharing mechanism. |
+| `useGrpcfuse` | macOS only | If `value` is set to `true`, gRPC Fuse is set as the file sharing mechanism. |
+
 
 ### Step three: Re-launch Docker Desktop
 >**Note**

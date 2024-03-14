@@ -2,13 +2,13 @@ command: docker config rm
 aliases: docker config rm, docker config remove
 short: Remove one or more configs
 long: |-
-    Removes the specified configs from the swarm.
+    Removes the specified configs from the Swarm.
 
     For detailed information about using configs, refer to [store configuration data using Docker Configs](/engine/swarm/configs/).
 
     > **Note**
     >
-    > This is a cluster management command, and must be executed on a swarm
+    > This is a cluster management command, and must be executed on a Swarm
     > manager node. To learn about managers and workers, refer to the
     > [Swarm mode section](/engine/swarm/) in the
     > documentation.
@@ -36,9 +36,10 @@ examples: |-
 
     > **Warning**
     >
-    > Unlike `docker rm`, this command does not ask for confirmation before removing
-    > a config.
+    > This command doesn't ask for confirmation before removing a config.
+    { .warning }
 deprecated: false
+hidden: false
 min_api_version: "1.30"
 experimental: false
 experimentalcli: false

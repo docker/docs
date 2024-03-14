@@ -21,74 +21,62 @@ $ docker build --target=server --platform=linux/arm/v7 .
 ```
 
 You can also use emulation to produce outputs for multiple platforms at once.
-However, the default build driver doesn't support concurrent multi-platform
-builds. So first, you need to switch to a different builder, that uses a driver
+However, the default image store in Docker Engine doesn't support building
+and loading multi-platform images. You need to enable the containerd image store
 which supports concurrent multi-platform builds.
 
-To switch to using a different driver, you're going to need to use the Docker
-Buildx. Buildx is the next generation build client, and it provides a similar
-user experience to the regular `docker build` command that you’re used to, while
-supporting additional features.
+## Enable the containerd image store
 
-## Buildx setup
+{{< tabs >}}
+{{< tab name="Docker Desktop" >}}
 
-Buildx comes pre-bundled with Docker Desktop, and you can invoke this build
-client using the `docker buildx` command. No need for any additional setup. If
-you installed Docker Engine manually, you may need to install the Buildx plugin
-separately. See
-[Install Docker Engine](../../engine/install/index.md) for instructions.
+To enable the containerd image store in Docker Desktop,
+go to **Settings** and select **Use containerd for pulling and storing images**
+in the **General** tab.
 
-Verify that the Buildx client is installed on your system, and that you’re able
-to run it:
+Note that changing the image store means you'll temporarily lose access to
+images and containers in the classic image store.
+Those resources still exist, but to view them, you'll need to
+disable the containerd image store.
 
-```console
-$ docker buildx version
-github.com/docker/buildx v0.10.3 79e156beb11f697f06ac67fa1fb958e4762c0fab
+{{< /tab >}}
+{{< tab name="Docker Engine" >}}
+
+If you're not using Docker Desktop,
+enable the containerd image store by adding the following feature configuration
+to your `/etc/docker/daemon.json` configuration file.
+
+```json {hl_lines=3}
+{
+  "features": {
+    "containerd-snapshotters": true
+  }
+}
 ```
 
-Next, create a builder that uses the `docker-container`. Run the following
-`docker buildx create` command:
+Restart the daemon after updating the configuration file.
 
 ```console
-$ docker buildx create --driver=docker-container --name=container
+$ systemctl restart docker
 ```
 
-This creates a new builder with the name `container`. You can list available
-builders with `docker buildx ls`.
-
-```console
-$ docker buildx ls
-NAME/NODE           DRIVER/ENDPOINT               STATUS
-container           docker-container
-  container_0       unix:///var/run/docker.sock   inactive
-default *           docker
-  default           default                       running
-desktop-linux       docker
-  desktop-linux     desktop-linux                 running
-```
-
-The status for the new `container` builder is inactive. That's fine - it's
-because you haven't started using it yet.
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Build using emulation
 
-To run multi-platform builds with Buildx, invoke the `docker buildx build`
-command, and pass it the same arguments as you did to the regular `docker build`
-command before. Only this time, also add:
+To run multi-platform builds, invoke the `docker build` command,
+and pass it the same arguments as you did before.
+Only this time, also add a `--platform` flag specifying multiple architectures.
 
-- `--builder=container` to select the new builder
-- `--platform=linux/amd64,linux/arm/v7,linux/arm64/v8` to build for multiple
-  architectures at once
-
-```console
-$ docker buildx build \
+```console {hl_lines=4}
+$ docker build \
     --target=binaries \
     --output=bin \
-    --builder=container \
     --platform=linux/amd64,linux/arm64,linux/arm/v7 .
 ```
 
-This command uses emulation to run the same build four times, once for each
+This command uses emulation to run the same build three times, once for each
 platform. The build results are exported to a `bin` directory.
 
 ```text
@@ -104,9 +92,9 @@ bin
     └── server
 ```
 
-When you build using a builder that supports multi-platform builds, the builder
-runs all of the build steps under emulation for each platform that you specify.
-Effectively forking the build into two concurrent processes.
+When you build for multiple platforms concurrently,
+BuildKit runs all of the build steps under emulation for each platform that you specify.
+Effectively forking the build into multiple concurrent processes.
 
 ![Build pipelines using emulation](./images/emulation.png)
 
@@ -222,10 +210,9 @@ illustrates how to build, and export, binaries for Mac (ARM64), Windows, and
 Linux:
 
 ```console
-$ docker buildx build \
+$ docker build \
   --target=binaries \
   --output=bin \
-  --builder=container \
   --platform=darwin/arm64,windows/amd64,linux/amd64 .
 ```
 
@@ -253,9 +240,8 @@ using emulation and cross-compilation.
 Related information:
 
 - [Multi-platfom images](../building/multi-platform.md)
-- [Drivers overview](../drivers/index.md)
-- [Docker container driver](../drivers/docker-container.md)
-- [`docker buildx create` CLI reference](../../engine/reference/commandline/buildx_create.md)
+- [containerd image store (Docker Desktop)](../../desktop/containerd.md)
+- [containerd image store (Docker Engine)](../../storage/containerd.md)
 
 You may also want to consider checking out
 [xx - Dockerfile cross-compilation helpers](https://github.com/tonistiigi/xx).

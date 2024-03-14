@@ -2,7 +2,7 @@ command: docker service update
 short: Update a service
 long: |-
     Updates a service as described by the specified parameters. The parameters are
-    the same as [`docker service create`](service_create.md). Refer to the description
+    the same as [`docker service create`](/reference/cli/docker/service/create/). Refer to the description
     there for further information.
 
     Normally, updating a service will only cause the service's tasks to be replaced with new ones if a change to the
@@ -301,6 +301,16 @@ options:
       deprecated: false
       hidden: false
       min_api_version: "1.25"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: health-start-interval
+      value_type: duration
+      description: Time between running the check during the start period (ms|s|m|h)
+      deprecated: false
+      hidden: false
+      min_api_version: "1.44"
       experimental: false
       experimentalcli: false
       kubernetes: false
@@ -972,7 +982,7 @@ examples: |-
     service name.
 
     - The `--mount-add` flag takes the same parameters as the `--mount` flag on
-      `service create`. Refer to the [volumes and bind mounts](service_create.md#mount)
+      `service create`. Refer to the [volumes and bind mounts](/reference/cli/docker/service/create/#mount)
       section in the `service create` reference for details.
 
     - The `--mount-rm` flag takes the `target` path of the mount.
@@ -1000,7 +1010,7 @@ examples: |-
 
     Use the `--publish-add` or `--publish-rm` flags to add or remove a published
     port for a service. You can use the short or long syntax discussed in the
-    [docker service create](service_create.md#publish)
+    [docker service create](/reference/cli/docker/service/create/#publish)
     reference.
 
     The following example adds a published service port to an existing service.
@@ -1015,7 +1025,7 @@ examples: |-
 
     Use the `--network-add` or `--network-rm` flags to add or remove a network for
     a service. You can use the short or long syntax discussed in the
-    [docker service create](service_create.md#network)
+    [docker service create](/reference/cli/docker/service/create/#network)
     reference.
 
     The following example adds a new alias name to an existing service already connected to network my-network:
@@ -1047,7 +1057,7 @@ examples: |-
 
     ```
 
-    Roll back the `web` service...
+    The following example rolls back the `web` service:
 
     ```console
     $ docker service update --rollback web
@@ -1110,13 +1120,13 @@ examples: |-
     ### Update services using templates
 
     Some flags of `service update` support the use of templating.
-    See [`service create`](service_create.md#create-services-using-templates) for the reference.
+    See [`service create`](/reference/cli/docker/service/create/#create-services-using-templates) for the reference.
 
 
     ### Specify isolation mode on Windows (--isolation) {#isolation}
 
     `service update` supports the same `--isolation` flag as `service create`
-    See [`service create`](service_create.md) for the reference.
+    See [`service create`](/reference/cli/docker/service/create/) for the reference.
 
     ### Updating Jobs
 
@@ -1135,6 +1145,7 @@ examples: |-
     To run a job again with the same parameters that it was run previously, it can
     be force updated with the `--force` flag.
 deprecated: false
+hidden: false
 min_api_version: "1.24"
 experimental: false
 experimentalcli: false

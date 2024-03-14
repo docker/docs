@@ -1,72 +1,174 @@
 ---
-title: Explore Builds (Beta)
+title: Explore Builds
 description: Understand how to use the Builds view in Docker Desktop
 keywords: Docker Dashboard, manage, gui, dashboard, builders, builds
 ---
 
+![Builds view in Docker Desktop](../images/builds-view.webp)
+
 The **Builds** view is a simple interface that lets you inspect your build
-history and manage builders using Docker Desktop. By default, it
-displays a list of all your ongoing and completed builds. 
+history and manage builders using Docker Desktop.
 
-> **Beta feature**
->
-> The **Builds** view is currently in [Beta](../../release-lifecycle.md/#beta).
-> This feature may change or be removed from future releases.
-{ .experimental }
+Opening the **Builds** view in Docker Desktop displays a list of completed builds.
+By default, the list is sorted by date, showing the most recent builds at the top.
+You can switch to **Active builds** to view any ongoing builds.
 
+![Build UI screenshot active builds](../images/build-ui-active-builds.webp)
 
-The **Builds** view displays metadata about the build, such as:
+If you're connected to a cloud builder through [Docker Build Cloud](../../build/cloud/_index.md),
+the Builds view also lists any active or completed cloud builds by other team members
+connected to the same cloud builder.
 
-- Build name
-- Target platforms
-- Builder name
-- Build duration
-- Progress bar
-- Cache usage
-- Completion date
+## Show build list
 
-The **Active builds** section displays builds that are currently running on
-builders that you're using.
+Select the **Builds** view in the Docker Dashboard to open the build list.
 
-The **Completed builds** section lists build records for past builds for your
-active builders. The list doesn't include builds for inactive builders.
+The build list shows running and completed builds for your active builders. The
+top-right corner shows the name of your currently selected builder, and the
+**Builder settings** button lets you [manage builders](#manage-builders) in the
+Docker Desktop settings.
 
-## Turn on the Builds view
+Running builds are displayed in the top section of this view, with information
+about the build target and progress.
 
-1. Navigate to **Settings**.
-2. Select **Features in development**.
-3. In the **Beta features** tab, select the **Display Builds view** checkbox.
-4. Select **Apply & restart** for the changes to take effect.
+The lower section of the view shows your recent builds. You can select any of
+the builds from the active builds or completed builds section to view detailed
+information, such as logs, a performance breakdown, cache utilization, and
+more.
 
-After the restart, the **Builds** view and the **Builders** settings menu
-appear.
+The build list doesn't include builds for inactive builders. That is, builders
+that you've removed from your system, or builders that have been stopped.
 
-## Inspect a build
+## Inspect builds
 
 To inspect a build, select the build that you want to view in the list.
+The inspection view contains a number of tabs.
 
-The **Info** tab displays details about the build job. The details include
-information such as target stage for multi-stage builds, target platforms, and
-version control information, if available.
+The **Info** tab displays details about the build.
 
-The **Source** tab shows the [frontend](../../build/dockerfile/frontend.md)
+If you're inspecting a multi-platform build, the drop-down menu in the
+top-right of this tab lets you filter the information down to a specific
+platform:
+
+![Platform filter](../images/build-ui-platform-menu.webp?w=400)
+
+The **Source details** section shows information about the frontend
+[frontend](../../build/dockerfile/frontend.md) and, if available,
+the source code repository used for the build.
+
+### Build timing
+
+The **Build timing** section of the Info tab contains charts
+showing a breakdown of the build execution from various angles.
+
+- **Real time** refers to the wall-clock time that it took to complete the build.
+- **Accumulated time** shows the total CPU time for all steps.
+- **Cache usage** shows the extent to which build operations were cached.
+- **Parallel execution** shows how much of the build execution time was spent running steps in parallel.
+
+![Build timing charts](../images/build-ui-timing-chart.webp)
+
+The chart colors and legend keys describe the different build operations. Build
+operations are defined as follows:
+
+| Build operation      | Description                                                                                                                                                                     |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Local file transfers | Time spent transferring local files from the client to the builder.                                                                                                             |
+| File operations      | Any operations that involve creating and copying files in the build. For example, the `COPY`, `WORKDIR`, `ADD` instructions in a Dockerfile frontend all incur file operations. |
+| Image pulls          | Time spent pulling images.                                                                                                                                                      |
+| Executions           | Container executions, for example commands defined as `RUN` instructions in a Dockerfile frontend.                                                                              |
+| HTTP                 | Remote artifact downloads using `ADD`.                                                                                                                                          |
+| Git                  | Same as **HTTP** but for Git URLs.                                                                                                                                              |
+| Result exports       | Time spent exporting the build results.                                                                                                                                         |
+| SBOM                 | Time spent generating the [SBOM attestation](../../build/attestations/sbom.md).                                                                                                 |
+| Idle                 | Idle time for build workers, which can happen if you have configured a [max parallelism limit](../../build/buildkit/configure.md#max-parallelism).                              |
+
+### Build dependencies
+
+The **Dependencies** section shows images and remote resources used during
+the build. Resources listed here include:
+
+- Container images used during the build
+- Git repositories included using the `ADD` Dockerfile instruction
+- Remote HTTPS resources included using the `ADD` Dockerfile instruction
+
+### Arguments, secrets, and other parameters
+
+The **Configuration** section of the Info tab shows parameters passed to the build:
+
+- Build arguments, including the resolved value
+- Secrets, including their IDs (but not their values)
+- SSH sockets
+- Labels
+- [Additional contexts](/reference/cli/docker/buildx/build/#build-context)
+
+### Outputs and artifacts
+
+The **Build results** section shows a summary of the generated build artifacts,
+including image manifest details, attestations, and Open Telemetry traces.
+
+Attestations are metadata records attached to a container image.
+The metadata describes something about the image,
+for example how it was built or what packages it contains.
+For more information about attestations, see [Build attestations](../../build/attestations/_index.md).
+
+Open Telemetry traces for builds capture information about the build execution
+steps in Buildx and BuildKit. You can view and analyze the traces yourself
+using a trace visualization tool like Jaeger. Refer to
+[OpenTelemetry support](../../build/building/opentelemetry.md) for more information.
+
+### Dockerfile source and errors
+
+When inspecting a successful completed build or an ongoing active build,
+the **Source** tab shows the [frontend](../../build/dockerfile/frontend.md)
 used to create the build.
 
-The **Error** tab appears if the build finished with an error. It displays the
-[frontend](../../build/dockerfile/frontend.md) used to create the build, and
-the build error displays inline in the frontend source.
+If the build failed, an **Error** tab displays instead of the **Source** tab.
+The error message is inlined in the Dockerfile source,
+indicating where the failure happened and why.
 
-The **Logs** tab displays the build logs. If the build is currently running,
-the logs are updated in real-time.
+![Build error displayed inline in the Dockerfile](../images/build-ui-error.webp)
 
-The **Stats** tab displays statistics data about completed builds. Analyze the
-build stats to get a better understanding of how your build gets executed, and
-find ways to optimize it.
+### Build logs
+
+The **Logs** tab displays the build logs.
+For active builds, the logs are updated in real-time.
+
+You can toggle between a **List view** and a **Plain-text view** of a build log.
+
+- The **List view** presents all build steps in a collapsible format,
+  with a timeline for navigating the log along a time axis.
+
+- The **Plain-text view** displays the log as plain text.
+
+The **Copy** button lets you copy the plain-text version of the log to your clipboard.
+
+### Build history
+
+The **History** tab displays statistics data about completed builds.
+
+The time series chart illustrates trends in duration, build steps, and cache usage for related builds,
+helping you identify patterns and shifts in build operations over time.
+For instance, significant spikes in build duration or a high number of cache misses
+could signal opportunities for optimizing the Dockerfile.
+
+![Build history chart](../images/build-ui-history.webp)
+
+You can navigate to and inspect a related build by selecting it in the chart,
+or using the **Past builds** list below the chart.
 
 ## Manage builders
 
-To inspect your builders, and change your default builder, select
-**Builder settings** to open the settings menu. For more information, see:
+The **Builder settings** view in the Docker Desktop settings lets you:
+
+- Inspect the state and configuration of active builders
+- Start and stop a builder
+- Delete build history
+- Add or remove builders (or connect and disconnect, in the case of cloud builders)
+
+![Builder settings drop-down](../images/build-ui-manage-builders.webp)
+
+For more information about managing builders, see:
 
 - [Change settings, Windows](../settings/windows.md#builders)
 - [Change settings, Mac](../settings/mac.md#builders)

@@ -11,7 +11,7 @@ There are two types of extensions available in the Extensions Marketplace:
 Docker-reviewed extensions are manually reviewed by the Docker Extensions team to ensure an extra level of trust
 and quality. They appear as **Reviewed** in the Marketplace.
 
-Self-published extensions are autonomously published by extension developers. They appear as **Not reviewed** in the Marketplace.
+Self-published extensions are autonomously published by extension developers and go through an automated validation process. They appear as **Not reviewed** in the Marketplace.
 
 ## Install an extension
 
@@ -26,7 +26,7 @@ To install an extension:
    The Extensions Marketplace opens on the **Browse** tab.
 3. Browse the available extensions.
    You can sort the list of extensions by **Recently added**, **Most installed**, or alphabetically. Alternatively, use the **Content** or **Categories** drop-down menu to search for extensions by whether they have been reviewed or not, or by category.
-4. Choose you extension and select **Install**.
+4. Choose an extension and select **Install**.
 
 From here, you can select **Open** to access the extension or install additional extensions. The extension also appears in the left-hand menu and in the **Manage** tab.
 

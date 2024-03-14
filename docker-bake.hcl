@@ -27,7 +27,7 @@ target "release" {
 }
 
 group "validate" {
-  targets = ["lint", "test"]
+  targets = ["lint", "test", "validate-stats"]
 }
 
 target "test" {
@@ -141,10 +141,44 @@ target "aws-cloudfront-update" {
   output = ["type=cacheonly"]
 }
 
+variable "VENDOR_MODULE" {
+  default = null
+}
+
 target "vendor" {
   target = "vendor"
   args = {
-    MODULE = null
+    MODULE = VENDOR_MODULE
   }
   output = ["."]
+}
+
+variable "UPSTREAM_MODULE_NAME" {
+  default = null
+}
+variable "UPSTREAM_REPO" {
+  default = null
+}
+variable "UPSTREAM_MODULE_NAME" {
+  default = null
+}
+
+target "validate-upstream" {
+  args {
+    UPSTREAM_MODULE_NAME = UPSTREAM_MODULE_NAME
+    UPSTREAM_REPO = UPSTREAM_REPO
+    UPSTREAM_COMMIT = UPSTREAM_COMMIT
+  }
+  target = "validate-upstream"
+  output = ["type=cacheonly"]
+}
+
+target "update-stats" {
+  target = "update-stats"
+  output = ["."]
+}
+
+target "validate-stats" {
+  target = "validate-stats"
+  output = ["type=cacheonly"]
 }

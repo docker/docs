@@ -9,7 +9,7 @@ Push an image or image index to Docker Scout (experimental)
 |:-----------------|:---------|:--------|:-------------------------------------------------------------------|
 | `--author`       | `string` |         | Name of the author of the image                                    |
 | `--org`          | `string` |         | Namespace of the Docker organization to which image will be pushed |
-| `-o`, `--output` | `string` |         | Write the report to a file.                                        |
+| `-o`, `--output` | `string` |         | Write the report to a file                                         |
 | `--sbom`         |          |         | Create and upload SBOMs                                            |
 | `--timestamp`    | `string` |         | Timestamp of image or tag creation                                 |
 
@@ -18,7 +18,7 @@ Push an image or image index to Docker Scout (experimental)
 
 ## Description
 
-The `docker scout push` command allows to push an image or image index to Docker Scout.
+The `docker scout push` command lets you push an image or analysis result to Docker Scout.
 
 ## Examples
 

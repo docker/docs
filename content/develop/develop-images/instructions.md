@@ -14,7 +14,7 @@ images. Docker recommends the [Alpine image](https://hub.docker.com/_/alpine/) a
 is tightly controlled and small in size (currently under 6 MB), while still
 being a full Linux distribution.
 
-For more information about the `FROM` instruction, see [Dockerfile reference for the FROM instruction](../../engine/reference/builder.md#from).
+For more information about the `FROM` instruction, see [Dockerfile reference for the FROM instruction](../../reference/dockerfile.md#from).
 
 ### LABEL
 
@@ -60,7 +60,7 @@ See [Understanding object labels](../../config/labels-custom-metadata.md)
 for guidelines about acceptable label keys and values. For information about
 querying labels, refer to the items related to filtering in
 [Managing labels on objects](../../config/labels-custom-metadata.md#manage-labels-on-objects).
-See also [LABEL](../../engine/reference/builder.md#label) in the Dockerfile reference.
+See also [LABEL](../../reference/dockerfile.md#label) in the Dockerfile reference.
 
 ### RUN
 
@@ -68,7 +68,7 @@ Split long or complex `RUN` statements on multiple lines separated with
 backslashes to make your Dockerfile more readable, understandable, and
 maintainable.
 
-For more information about `RUN`, see [Dockerfile reference for the RUN instruction](../../engine/reference/builder.md#run).
+For more information about `RUN`, see [Dockerfile reference for the RUN instruction](../../reference/dockerfile.md#run).
 
 #### apt-get
 
@@ -211,11 +211,11 @@ python and perl. For example, `CMD ["perl", "-de0"]`, `CMD ["python"]`, or `CMD
 ["php", "-a"]`. Using this form means that when you execute something like
 `docker run -it python`, you’ll get dropped into a usable shell, ready to go.
 `CMD` should rarely be used in the manner of `CMD ["param", "param"]` in
-conjunction with [`ENTRYPOINT`](../../engine/reference/builder.md#entrypoint), unless
+conjunction with [`ENTRYPOINT`](../../reference/dockerfile.md#entrypoint), unless
 you and your expected users are already quite familiar with how `ENTRYPOINT`
 works.
 
-For more information about `CMD`, see [Dockerfile reference for the CMD instruction](../../engine/reference/builder.md#cmd).
+For more information about `CMD`, see [Dockerfile reference for the CMD instruction](../../reference/dockerfile.md#cmd).
 
 ### EXPOSE
 
@@ -228,9 +228,9 @@ so on.
 For external access, your users can execute `docker run` with a flag indicating
 how to map the specified port to the port of their choice.
 For container linking, Docker provides environment variables for the path from
-the recipient container back to the source (ie, `MYSQL_PORT_3306_TCP`).
+the recipient container back to the source (for example, `MYSQL_PORT_3306_TCP`).
 
-For more information about `EXPOSE`, see [Dockerfile reference for the EXPOSE instruction](../../engine/reference/builder.md#expose).
+For more information about `EXPOSE`, see [Dockerfile reference for the EXPOSE instruction](../../reference/dockerfile.md#expose).
 
 ### ENV
 
@@ -240,7 +240,7 @@ example, `ENV PATH=/usr/local/nginx/bin:$PATH` ensures that `CMD ["nginx"]`
 just works.
 
 The `ENV` instruction is also useful for providing the required environment
-variables specific to services you wish to containerize, such as Postgres’s
+variables specific to services you want to containerize, such as Postgres’s
 `PGDATA`.
 
 Lastly, `ENV` can also be used to set commonly used version numbers so that
@@ -298,60 +298,69 @@ $ docker run --rm test sh -c 'echo $ADMIN_USER'
 
 ```
 
-For more information about `ENV`, see [Dockerfile reference for the ENV instruction](../../engine/reference/builder.md#env).
+For more information about `ENV`, see [Dockerfile reference for the ENV instruction](../../reference/dockerfile.md#env).
 
 ### ADD or COPY
 
-Although `ADD` and `COPY` are functionally similar, generally speaking, `COPY`
-is preferred. That’s because it’s more transparent than `ADD`. `COPY` only
-supports the basic copying of local files into the container, while `ADD` has
-some features (like local-only tar extraction and remote URL support) that are
-not immediately obvious. Consequently, the best use for `ADD` is local tar file
-auto-extraction into the image, as in `ADD rootfs.tar.xz /`.
+`ADD` and `COPY` are functionally similar. `COPY` supports basic copying of
+files into the container, from the [build context](../../build/building/context.md)
+or from a stage in a [multi-stage build](../../build/building/multi-stage.md).
+`ADD` supports features for fetching files from remote HTTPS and Git URLs, and
+extracting tar files automatically when adding files from the build context.
 
-If you have multiple Dockerfile steps that use different files from your
-context, `COPY` them individually, rather than all at once. If
-a specifically required file changes, then this ensures that
-only that step's build cache is invalidated, forcing only that step to be run again.
-
-For example:
+You'll mostly want to use `COPY` for copying files from one stage to another in
+a multi-stage build. If you need to add files from the build context to the
+container temporarily to execute a `RUN` instruction, you can often substitute
+the `COPY` instruction with a bind mount instead. For example, to temporarily
+add a `requirements.txt` file for a `RUN pip install` instruction:
 
 ```dockerfile
-COPY requirements.txt /tmp/
-RUN pip install --requirement /tmp/requirements.txt
-COPY . /tmp/
+RUN --mount=type=bind,source=requirements.txt,target=/tmp/requirements.txt \
+    pip install --requirement /tmp/requirements.txt
 ```
 
-Results in fewer cache invalidations for the `RUN` step, than if you put the
-`COPY . /tmp/` before it.
+Bind mounts are more efficient than `COPY` for including files from the build
+context in the container. Note that bind-mounted files are only added
+temporarily for a single `RUN` instruction, and don't persist in the final
+image. If you need to include files from the build context in the final image,
+use `COPY`.
 
-Because image size matters, using `ADD` to fetch packages from remote URLs is
-strongly discouraged; you should use `curl` or `wget` instead. That way you can
-delete the files you no longer need after they've been extracted and you don't
-have to add another layer in your image. For example, you should avoid doing
-things like:
+The `ADD` instruction is best for when you need to download a remote artifact
+as part of your build. `ADD` is better than manually adding files using
+something like `wget` and `tar`, because it ensures a more precise build cache.
+`ADD` also has built-in support for checksum validation of the remote
+resources, and a protocol for parsing branches, tags, and subdirectories from
+[Git URLs](../../reference/cli/docker/image/build.md#git-repositories).
+
+The following example uses `ADD` to download a .NET installer. Combined with
+multi-stage builds, only the .NET runtime remains in the final stage, no
+intermediate files.
 
 ```dockerfile
-ADD https://example.com/big.tar.xz /usr/src/things/
-RUN tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things
-RUN make -C /usr/src/things all
+# syntax=docker/dockerfile:1
+
+FROM scratch AS src
+ARG DOTNET_VERSION=8.0.0-preview.6.23329.7
+ADD --checksum=sha256:270d731bd08040c6a3228115de1f74b91cf441c584139ff8f8f6503447cebdbb \
+    https://dotnetcli.azureedge.net/dotnet/Runtime/$DOTNET_VERSION/dotnet-runtime-$DOTNET_VERSION-linux-arm64.tar.gz /dotnet.tar.gz
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.0-preview.6-bookworm-slim-arm64v8 AS installer
+
+# Retrieve .NET Runtime
+RUN --mount=from=src,target=/src <<EOF
+mkdir -p /dotnet
+tar -oxzf /src/dotnet.tar.gz -C /dotnet
+EOF
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.0-preview.6-bookworm-slim-arm64v8
+
+COPY --from=installer /dotnet /usr/share/dotnet
+RUN ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 ```
-
-And instead, do something like:
-
-```dockerfile
-RUN mkdir -p /usr/src/things \
-    && curl -SL https://example.com/big.tar.xz \
-    | tar -xJC /usr/src/things \
-    && make -C /usr/src/things all
-```
-
-For other items, like files and directories, that don't require the tar
-auto-extraction capability of `ADD`, you should always use `COPY`.
 
 For more information about `ADD` or `COPY`, see the following:
-- [Dockerfile reference for the ADD instruction](../../engine/reference/builder.md#add)
-- [Dockerfile reference for the COPY instruction](../../engine/reference/builder.md#copy)
+- [Dockerfile reference for the ADD instruction](../../reference/dockerfile.md#add)
+- [Dockerfile reference for the COPY instruction](../../reference/dockerfile.md#copy)
 
 
 ### ENTRYPOINT
@@ -407,7 +416,7 @@ exec "$@"
 ```
 
 
-This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec) so that the final running application becomes the container's PID 1. This allows the application to receive any Unix signals sent to the container. For more information, see the [`ENTRYPOINT` reference](../../engine/reference/builder.md#entrypoint).
+This script uses [the `exec` Bash command](https://wiki.bash-hackers.org/commands/builtin/exec) so that the final running application becomes the container's PID 1. This allows the application to receive any Unix signals sent to the container. For more information, see the [`ENTRYPOINT` reference](../../reference/dockerfile.md#entrypoint).
 
 In the following example, a helper script is copied into the container and run via `ENTRYPOINT` on
 container start:
@@ -418,7 +427,7 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["postgres"]
 ```
 
-This script allows the user to interact with Postgres in several ways.
+This script lets you interact with Postgres in several ways.
 
 It can simply start Postgres:
 
@@ -426,28 +435,28 @@ It can simply start Postgres:
 $ docker run postgres
 ```
 
-Or, it can be used to run Postgres and pass parameters to the server:
+Or, you can use it to run Postgres and pass parameters to the server:
 
 ```console
 $ docker run postgres postgres --help
 ```
 
-Lastly, it could also be used to start a totally different tool, such as Bash:
+Lastly, you can use it to start a totally different tool, such as Bash:
 
 ```console
 $ docker run --rm -it postgres bash
 ```
 
-For more information about `ENTRYPOINT`, see [Dockerfile reference for the ENTRYPOINT instruction](../../engine/reference/builder.md#entrypoint).
+For more information about `ENTRYPOINT`, see [Dockerfile reference for the ENTRYPOINT instruction](../../reference/dockerfile.md#entrypoint).
 
 ### VOLUME
 
-The `VOLUME` instruction should be used to expose any database storage area,
+You should use the `VOLUME` instruction to expose any database storage area,
 configuration storage, or files and folders created by your Docker container. You
 are strongly encouraged to use `VOLUME` for any combination of mutable or user-serviceable
 parts of your image.
 
-For more information about `VOLUME`, see [Dockerfile reference for the VOLUME instruction](../../engine/reference/builder.md#volume).
+For more information about `VOLUME`, see [Dockerfile reference for the VOLUME instruction](../../reference/dockerfile.md#volume).
 
 ### USER
 
@@ -484,7 +493,7 @@ running it as non-`root`, consider using [“gosu”](https://github.com/tianon/
 Lastly, to reduce layers and complexity, avoid switching `USER` back and forth
 frequently.
 
-For more information about `USER`, see [Dockerfile reference for the USER instruction](../../engine/reference/builder.md#user).
+For more information about `USER`, see [Dockerfile reference for the USER instruction](../../reference/dockerfile.md#user).
 
 ### WORKDIR
 
@@ -493,7 +502,7 @@ For clarity and reliability, you should always use absolute paths for your
 like `RUN cd … && do-something`, which are hard to read, troubleshoot, and
 maintain.
 
-For more information about `WORKDIR`, see [Dockerfile reference for the WORKDIR instruction](../../engine/reference/builder.md#workdir).
+For more information about `WORKDIR`, see [Dockerfile reference for the WORKDIR instruction](../../reference/dockerfile.md#workdir).
 
 ### ONBUILD
 
@@ -518,4 +527,4 @@ fails catastrophically if the new build's context is missing the resource being
 added. Adding a separate tag, as recommended above, helps mitigate this by
 allowing the Dockerfile author to make a choice.
 
-For more information about `ONBUILD`, see [Dockerfile reference for the ONBUILD instruction](../../engine/reference/builder.md#onbuild).
+For more information about `ONBUILD`, see [Dockerfile reference for the ONBUILD instruction](../../reference/dockerfile.md#onbuild).

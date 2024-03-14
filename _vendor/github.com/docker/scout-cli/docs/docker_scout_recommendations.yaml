@@ -3,9 +3,10 @@ short: Display available base image updates and remediation recommendations
 long: |-
     The `docker scout recommendations` command display recommendations for base images updates.
     It analyzes the image and display recommendations to refresh or update the base image.
-    For each recommendation it shows a list of benefits like less vulnerabilities, smaller image, etc.
+    For each recommendation it shows a list of benefits, such as
+    fewer vulnerabilities or smaller image size.
 
-    If no image is specified, the most recently built image will be used.
+    If no image is specified, the most recently built image is used.
 
     The following artifact types are supported:
 
@@ -13,8 +14,6 @@ long: |-
     - OCI layout directories
     - Tarball archives, as created by `docker save`
     - Local directory or file
-
-    The tool analyzes the provided software artifact, and generates a vulnerability report.
 
     By default, the tool expects an image reference, such as:
 
@@ -29,7 +28,7 @@ long: |-
     - `local://` use an image from the local image store (don't do a registry lookup)
     - `registry://` use an image from a registry (don't use a local image)
     - `oci-dir://` use an OCI layout directory
-    - `archive://` use a tarball archive, as created by docker save
+    - `archive://` use a tarball archive, as created by `docker save`
     - `fs://` use a local directory or file
 usage: docker scout recommendations [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
@@ -67,7 +66,7 @@ options:
     - option: output
       shorthand: o
       value_type: string
-      description: Write the report to a file.
+      description: Write the report to a file
       deprecated: false
       hidden: false
       experimental: false
@@ -87,7 +86,7 @@ options:
       value_type: string
       description: |-
         Reference to use if the provided tarball contains multiple references.
-        Can only be used with archive.
+        Can only be used with archive
       deprecated: false
       hidden: false
       experimental: false
@@ -108,6 +107,16 @@ inherited_options:
       value_type: bool
       default_value: "false"
       description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
       deprecated: false
       hidden: true
       experimental: false

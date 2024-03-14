@@ -6,8 +6,8 @@ description: Get oriented on some basics of Docker and install Docker Desktop.
 
 Containerization provides an opportunity to move and scale applications to
 clouds and data centers. Containers effectively guarantee that those applications run the
-same way anywhere, allowing us to quickly and easily take advantage of all
-these environments. Additionally, as we scale our applications up, we need some
+same way anywhere, allowing you to quickly and easily take advantage of all
+these environments. Additionally, as you scale your applications up, you need some
 tooling to help automate the maintenance of those applications, enable the
 replacement of failed containers automatically, and manage the roll-out of
 updates and reconfigurations of those containers during their lifecycle.
@@ -311,5 +311,5 @@ Further documentation for all CLI commands used in this article are available he
 - [`kubectl get`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
 - [`kubectl logs`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs)
 - [`kubectl delete`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#delete)
-- [`docker swarm init`](/engine/reference/commandline/swarm_init/)
-- [`docker service *`](/engine/reference/commandline/service/)
+- [`docker swarm init`](/reference/cli/docker/swarm/init/)
+- [`docker service *`](/reference/cli/docker/service/)

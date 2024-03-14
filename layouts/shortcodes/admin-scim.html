@@ -1,50 +1,12 @@
 {{ $product_link := "[Docker Hub](https://hub.docker.com)" }}
-{{ $sso_link := "[configured SSO](/single-sign-on/configure/)" }}
 {{ $sso_navigation := `Navigate to the SSO settings page for your organization or company.
    - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
    - Company: Select **Organizations**, your company, and then **Settings**.` }}
-{{ $group_link := "[Group mapping](/docker-hub/group-mapping)"}}
 
 {{ if eq (.Get "product") "admin" }}
-{{ $product_link = "[Docker Admin](https://admin.docker.com)" }}
-{{ $sso_link = "[configured SSO](/admin/organization/security-settings/sso-configuration/)" }}
-{{ $sso_navigation = "Select your organization in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
-{{ $group_link = "[Group mapping](/admin/organization/security-settings/group-mapping/)"}}
-{{ if eq (.Get "layer") "company" }}
-{{ $sso_link = "[configured SSO](/admin/company/settings/sso-configuration/)" }}
-{{ $sso_navigation = "Select your company in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
-{{ $group_link = "[Group mapping](/admin/company/settings/group-mapping)"}}
+{{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
+{{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
 {{ end }}
-{{ end }}
-
-This section is for administrators who want to enable System for Cross-domain Identity Management (SCIM) 2.0 for their business. It is available for Docker Business customers.
-
-SCIM provides automated user provisioning and de-provisioning for your Docker organization or company through your identity provider (IdP).  Once you enable SCIM in Docker and your IdP, any user assigned to the Docker application in the IdP is automatically provisioned in Docker and added to the organization or company.
-
-Similarly, if a user gets unassigned from the Docker application in the IdP, the user is removed from the organization or company in Docker. SCIM also synchronizes changes made to a user's attributes in the IdP, for instance the user’s first name and last name.
-
-The following provisioning features are supported:
- - Creating new users
- - Push user profile updates
- - Remove users
- - Deactivate users
- - Re-activate users
- - Group mapping
-
-The following table lists the supported attributes. Note that your attribute mappings must match for SSO to prevent duplicating your members.
-
-| Attribute    | Description
-|:---------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
-| userName             | User's primary email address. This is used as the unique identifier of the user. |
-| name.givenName | User’s first name |
-| name.familyName | User’s surname |
-| active | Indicates if a user is enabled or disabled. Can be set to false to de-provision the user. |
-
-For additional details about supported attributes and SCIM, see [Docker Hub API SCIM reference](/docker-hub/api/latest/#tag/scim).
-
-## Set up SCIM
-
-You must make sure you have {{ $sso_link }} before you enable SCIM. Enforcing SSO is not required.
 
 ### Step one: Enable SCIM in Docker
 
@@ -63,7 +25,7 @@ Follow the instructions provided by your IdP:
 
 ## Set up role mapping
 
-You can assign [roles](/docker-hub/roles-and-permissions/) to members in your organization in the IdP. To set up a role, you can use optional user-level attributes for the person you want to assign a role. In addition to roles, you can set an organization and team to override the default provisioning values set by the SSO connection.
+You can assign [roles](/security/for-admins/roles-and-permissions/) to members in your organization in the IdP. To set up a role, you can use optional user-level attributes for the person you want to assign a role. In addition to roles, you can set an organization and team to override the default provisioning values set by the SSO connection.
 
 > **Note**
 >
@@ -73,9 +35,9 @@ The following table lists the supported optional user-level attributes.
 
 | Attribute | Possible values    | Considerations |
 | --------- | ------------------ | -------------- |
-| `dockerRole` | `member`, `editor`, or `owner`. For a list of permissions for each role, see [Roles and permissions](/docker-hub/roles-and-permissions/). | If you don't assign a role in the IdP, the value of the `dockerRole` attribute defaults to `member`. When you set the attribute, this overrides the default value. |
+| `dockerRole` | `member`, `editor`, or `owner`. For a list of permissions for each role, see [Roles and permissions](/security/for-admins/roles-and-permissions/). | If you don't assign a role in the IdP, the value of the `dockerRole` attribute defaults to `member`. When you set the attribute, this overrides the default value. |
 | `dockerOrg` | `organizationName`. For example, an organization named "moby" would be `moby`. | Setting this attribute overrides the default organization configured by the SSO connection. Also, this won't add the user to the default team. If this attribute isn't set, the user is provisioned to the default organization and the default team. If set and `dockerTeam` is also set, this provisions the user to the team within that org. |
-| `dockerTeam` | `teamName`. For example, a team named "developers" would be `developers`. | Setting this attribute provisions the user to the default org and to the specified team, instead of the SSO connection's default team. This also creates the team if it doesn't exist. You can still use group mapping to provision users to teams in multiple orgs. See {{ $group_link }}. |
+| `dockerTeam` | `teamName`. For example, a team named "developers" would be `developers`. | Setting this attribute provisions the user to the default org and to the specified team, instead of the SSO connection's default team. This also creates the team if it doesn't exist. You can still use group mapping to provision users to teams in multiple orgs. See [Group mapping](/security/for-admins/group-mapping/). |
 
 After you set the role in the IdP, you need to sync to push the changes to Docker.
 

@@ -7,18 +7,18 @@ aliases:
 - /compose/envvars-precedence/
 ---
 
-When you set the same environment variable in multiple sources, there’s a precedence rule used by Compose. It aims to resolve the value for the variable in question.
+When the same environment variable is set in multiple sources, Docker Compose follows a precedence rule to determine the value for that variable.
 
 This page contains information on the level of precedence each method of setting environmental variables takes.
 
 The order of precedence (highest to lowest) is as follows:
 1. Set using [`docker compose run -e` in the CLI](set-environment-variables.md#set-environment-variables-with-docker-compose-run---env)
 2. Substituted from your [shell](set-environment-variables.md#substitute-from-the-shell)
-3. Set using the [`environment` attribute in the Compose file](set-environment-variables.md#use-the-environment-attribute)
+3. Set using just the [`environment` attribute in the Compose file](set-environment-variables.md#use-the-environment-attribute)
 4. Use of the [`--env-file` argument](set-environment-variables.md#substitute-with---env-file) in the CLI
 5. Use of the [`env_file` attribute](set-environment-variables.md#use-the-env_file-attribute) in the Compose file
 6. Set using an [`.env` file](set-environment-variables.md#substitute-with-an-env-file) placed at base of your project directory
-7. Set in a container image in the [ENV directive](../../engine/reference/builder.md#env).
+7. Set in a container image in the [ENV directive](../../reference/dockerfile.md#env).
    Having any `ARG` or `ENV` setting in a `Dockerfile` evaluates only if there is no Docker Compose entry for `environment`, `env_file` or `run --env`.
 
 ## Simple example
@@ -65,7 +65,7 @@ Each column represents a context from where you can set a value, or substitute i
 
 The columns `Host OS environment` and `.env file` is listed only as an illustration lookup. In reality, they don't result in a variable in the container by itself.
 
-Each row represents a combination of contexts where `TAG` is set, substituted, or both.
+Each row represents a combination of contexts where `TAG` is set, substituted, or both. The **Result** column indicates the final value for `TAG` in each scenario.
 
 
 |  # |  `docker compose run --env`  |  `environment` attribute  |  `env_file` attribute  |  Image `ENV` |  `Host OS` environment  |  `.env` file      | |  Result  |

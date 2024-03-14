@@ -1,7 +1,7 @@
 ---
-description: Frequently asked questions
+description: Frequently asked questions for Docker Desktop for Windows
 keywords: desktop, windows, faqs
-title: FAQs for Windows
+title: FAQs for Docker Desktop for Windows
 ---
 
 ### Can I use VirtualBox alongside Docker Desktop?
@@ -12,32 +12,9 @@ Yes, you can run VirtualBox along with Docker Desktop if you have enabled the [W
 
 Docker Desktop uses the Windows Hyper-V features. While older Windows versions have Hyper-V, their Hyper-V implementations lack features critical for Docker Desktop to work.
 
-### Can I install Docker Desktop on Windows 10 Home?
-
-If you are running Windows 10 Home (starting with version 1903), you can install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/) with the [WSL 2 backend](../wsl/index.md).
-
 ### Can I run Docker Desktop on Windows Server?
 
 No, running Docker Desktop on Windows Server is not supported.
-
-### How do I run Windows containers on Windows Server?
-
-You can install a native Windows binary which allows you to develop and run
-Windows containers without Docker Desktop. For more information, see the tutorial about running Windows containers on Windows Server in
-[Getting Started with Windows Containers](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md).
-
-### Why do I see the `Docker Desktop Access Denied` error message when I try to start Docker Desktop?
-
-Docker Desktop displays the **Docker Desktop - Access Denied** error if a Windows user is not part of the **docker-users** group.
-
-If your admin account is different to your user account, add the **docker-users** group. Run **Computer Management** as an administrator and navigate to **Local Users* and Groups** > **Groups** > **docker-users**.
-
-Right-click to add the user to the group. Log out and log back in for the changes to take effect.
-
-### Why does Docker Desktop fail to start when anti-virus software is installed?
-
-Some anti-virus software may be incompatible with Hyper-V and Windows 10 builds which impact Docker
-Desktop. For more information, see [Docker Desktop fails to start when anti-virus software is installed](../troubleshoot/workarounds.md#docker-desktop-fails-to-start-when-anti-virus-software-is-installed).
 
 ### Can I change permissions on shared volumes for container-specific deployment requirements?
 
@@ -64,7 +41,7 @@ See the [Stack Overflow post](https://stackoverflow.com/questions/67746843/clear
 
 ### How do I add custom CA certificates?
 
-You can add trusted **Certificate Authorities (CAs)** to your Docker daemon to verify registry server certificates, and **client certificates**, to authenticate to registries.
+You can add trusted Certificate Authorities (CAs) to your Docker daemon to verify registry server certificates, and client certificates, to authenticate to registries.
 
 Docker Desktop supports all trusted Certificate Authorities (CAs) (root or
 intermediate). Docker recognizes certs stored under Trust Root
@@ -90,7 +67,7 @@ directory on Moby (the Docker Desktop virtual machine running on Hyper-V).
 You need to restart Docker Desktop after making any changes to the keychain
 or to the `~/.docker/certs.d` directory in order for the changes to take effect.
 
-The registry cannot be listed as an _insecure registry_ (see
+The registry cannot be listed as an insecure registry (see
 [Docker Daemon](../settings/windows.md#docker-engine)). Docker Desktop ignores
 certificates listed under insecure registries, and does not send client
 certificates. Commands like `docker run` that attempt to pull from the registry
@@ -100,38 +77,3 @@ To learn more about how to set the client TLS certificate for verification, see
 [Verify repository client with certificates](../../engine/security/certificates.md)
 in the Docker Engine topics.
 
-## How do I switch between Windows and Linux containers
-
-From the Docker Desktop menu, you can toggle which daemon (Linux or Windows)
-the Docker CLI talks to. Select **Switch to Windows containers** to use Windows
-containers, or select **Switch to Linux containers** to use Linux containers
-(the default).
-
-For more information on Windows containers, refer to the following documentation:
-
-- Microsoft documentation on [Windows containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/index).
-
-- [Build and Run Your First Windows Server Container (Blog Post)](https://blog.docker.com/2016/09/build-your-first-docker-windows-server-container/)
-  gives a quick tour of how to build and run native Docker Windows containers on Windows 10 and Windows Server 2016 evaluation releases.
-
-- [Getting Started with Windows Containers (Lab)](https://github.com/docker/labs/blob/master/windows/windows-containers/README.md)
-  shows you how to use the [MusicStore](https://github.com/aspnet/MusicStore/)
-  application with Windows containers. The MusicStore is a standard .NET application and,
-  [forked here to use containers](https://github.com/friism/MusicStore), is a good example of a multi-container application.
-
-- To understand how to connect to Windows containers from the local host, see
-  [I want to connect to a container from Windows](../networking.md#i-want-to-connect-to-a-container-from-the-host)
-
-> Settings dialog changes with Windows containers
->
-> When you switch to Windows containers, the Settings dialog only shows those tabs that are active and apply to your Windows containers:
->
->  * [General](../settings/windows.md#general)
->  * [Proxies](../settings/windows.md#proxies)
->  * [Daemon](../settings/windows.md#docker-engine)
-
-If you set proxies or daemon configuration in Windows containers mode, these
-apply only on Windows containers. If you switch back to Linux containers,
-proxies and daemon configurations return to what you had set for Linux
-containers. Your Windows container settings are retained and become available
-again when you switch back.

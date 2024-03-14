@@ -4,7 +4,7 @@ keywords: docker, container, cluster, swarm mode, node
 title: How services work
 ---
 
-To deploy an application image when Docker Engine is in swarm mode, you create a
+To deploy an application image when Docker Engine is in Swarm mode, you create a
 service. Frequently a service is the image for a microservice within the
 context of some larger application. Examples of services might include an HTTP
 server, a database, or any other type of executable program that you wish to run
@@ -14,11 +14,11 @@ When you create a service, you specify which container image to use and which
 commands to execute inside running containers. You also define options for the
 service including:
 
-* the port where the swarm makes the service available outside the swarm
-* an overlay network for the service to connect to other services in the swarm
+* The port where the swarm makes the service available outside the swarm
+* An overlay network for the service to connect to other services in the swarm
 * CPU and memory limits and reservations
-* a rolling update policy
-* the number of replicas of the image to run in the swarm
+* A rolling update policy
+* The number of replicas of the image to run in the swarm
 
 ## Services, tasks, and containers
 
@@ -31,9 +31,9 @@ For example, imagine you want to load balance between three instances of an HTTP
 listener. The diagram below shows an HTTP listener service with three replicas.
 Each of the three instances of the listener is a task in the swarm.
 
-![ HTTP listener service with three replicas](../images/services-diagram.png)
+![ HTTP listener service with three replicas](../images/services-diagram.webp?w=550)
 
-A container is an isolated process. In the swarm mode model, each task invokes
+A container is an isolated process. In the Swarm mode model, each task invokes
 exactly one container. A task is analogous to a “slot” where the scheduler
 places a container. Once the container is live, the scheduler recognizes that
 the task is in a running state. If the container fails health checks or
@@ -56,17 +56,17 @@ series of states: assigned, prepared, running, etc. If the task fails, the
 orchestrator removes the task and its container and then creates a new task to
 replace it according to the desired state specified by the service.
 
-The underlying logic of Docker swarm mode is a general purpose scheduler and
+The underlying logic of Docker's Swarm mode is a general purpose scheduler and
 orchestrator. The service and task abstractions themselves are unaware of the
 containers they implement. Hypothetically, you could implement other types of
 tasks such as virtual machine tasks or non-containerized process tasks. The
 scheduler and orchestrator are agnostic about the type of the task. However, the
 current version of Docker only supports container tasks.
 
-The diagram below shows how swarm mode accepts service create requests and
+The diagram below shows how Swarm mode accepts service create requests and
 schedules tasks to worker nodes.
 
-![Services flow](../images/service-lifecycle.png)
+![Services flow](../images/service-lifecycle.webp?w=700)
 
 ### Pending services
 
@@ -74,9 +74,11 @@ A service may be configured in such a way that no node currently in the
 swarm can run its tasks. In this case, the service remains in state `pending`.
 Here are a few examples of when a service might remain in state `pending`.
 
-> **Note**: If your only intention is to prevent a service from
-being deployed, scale the service to 0 instead of trying to configure it in
-such a way that it remains in `pending`.
+> **Tip**
+> If your only intention is to prevent a service from
+> being deployed, scale the service to 0 instead of trying to configure it in
+> such a way that it remains in `pending`.
+{ .tip }
 
 - If all nodes are paused or drained, and you create a service, it is
   pending until a node becomes available. In reality, the first node to become
@@ -112,12 +114,12 @@ orchestrator creates a task and the scheduler assigns the task to the new node.
 Good candidates for global services are monitoring agents, anti-virus scanners
 or other types of containers that you want to run on every node in the swarm.
 
-The diagram below shows a three-service replica in yellow and a global service
-in gray.
+The diagram below shows a three-service replica in gray and a global service
+in black.
 
-![Global vs replicated services](../images/replicated-vs-global.png)
+![Global vs replicated services](../images/replicated-vs-global.webp?w=450)
 
 ## Learn more
 
-* Read about how swarm mode [nodes](nodes.md) work.
-* Learn how [PKI](pki.md) works in swarm mode.
+* Read about how Swarm mode [nodes](nodes.md) work.
+* Learn how [PKI](pki.md) works in Swarm mode.

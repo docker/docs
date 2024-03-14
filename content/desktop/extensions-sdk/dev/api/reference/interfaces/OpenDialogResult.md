@@ -1,7 +1,6 @@
 ---
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
-skip_read_time: true
 ---
 
 # Interface: OpenDialogResult
@@ -32,4 +31,4 @@ ___
 
 • `Optional` `Readonly` **bookmarks**: `string`[]
 
-macOS only- An array matching the filePaths array of base64 encoded strings which contains security scoped bookmark data. securityScopedBookmarks must be enabled for this to be populated
+macOS only. An array matching the `filePaths` array of `base64` encoded strings which contains security scoped bookmark data. `securityScopedBookmarks` must be enabled for this to be populated.

@@ -12,6 +12,20 @@ known issues for each Docker Hub release.
 
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
+## 2023-12-11
+
+- The Advanced Image Management feature, along with the corresponding API endpoints, has been retired.
+  See [docker/roadmap#534](https://github.com/docker/roadmap/issues/534).
+
+  The following API endpoints have been removed:
+
+  ```text
+  /namespaces/{namespace}/repositories/{repository}/images
+  /namespaces/{namespace}/repositories/{repository}/images/{digest}/tags
+  /namespaces/{namespace}/repositories/{repository}/images-summary
+  /namespaces/{namespace}/delete-images
+  ```
+
 ## 2023-08-28
 
 - Organizations with SSO enabled can assign members to roles, organizations, and teams with [SCIM role mapping](scim.md#set-up-role-mapping). 
@@ -38,7 +52,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- The new [domain audit](../docker-hub/domain-audit.md) feature lets you audit your domains for users who aren't a member of your organization.
+- The new domain audit feature lets you audit your domains for users who aren't a member of your organization.
 
 
 ## 2022-09-26
@@ -51,13 +65,13 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and enhancements
 
-- In Docker Hub, you can now download a [registry.json](../docker-hub/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
+- In Docker Hub, you can now download a [registry.json](../security/for-admins/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
 
 ## 2022-09-19
 
 ### Bug fixes and enhancements
 
-- You can now [export a CSV file of members](../docker-hub/members.md/#export-members) from organizations that you own.
+- You can now [export a CSV file of members](../admin/organization//members.md/#export-members) from organizations that you own.
 
 ## 2022-07-22
 
@@ -93,7 +107,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### New
 
-- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/upgrade.md).
+- You can now purchase or upgrade to a Docker Business subscription using a credit card. To learn more, see [Upgrade your subscription](../subscription/core-subscription/upgrade.md).
 
 ## 2021-08-31
 
@@ -117,7 +131,6 @@ The updated [Docker Subscription Service Agreement](https://www.docker.com/legal
 ### Enhancement
 
 When managing the content of your repositories, you can now filter the results based on the currentness of the tags and more easily identify your untagged images.
-For more information, see  [Advanced Management Dashboard](image-management.md).
 
 For Docker Hub API documentation, see [Docker Hub API Reference](api/latest.md#operation/GetNamespacesRepositoriesImages).
 
@@ -143,7 +156,7 @@ For details on how to update your billing information, see [Update billing infor
 
 **Advanced Image Management dashboard**
 
-Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories. For more information, see [Advanced Image Management dashboard](image-management.md).
+Docker introduces the Advanced Image Management dashboard that enables you to view and manage Docker images in your repositories.
 
 ## 2021-01-25
 
@@ -151,7 +164,7 @@ Docker introduces the Advanced Image Management dashboard that enables you to vi
 
 Docker introduces Audit logs, a new feature that allows team owners to view a list of activities that occur at organization and repository levels. This feature begins tracking the activities from the release date, that is, **from 25 January 2021**.
 
-For more information about this feature and for instructions on how to use it, see [Audit logs](audit-log.md).
+For more information about this feature and for instructions on how to use it, see [Activity logs](../admin/organization/activity-logs.md).
 
 ## 2020-11-10
 
@@ -159,7 +172,7 @@ For more information about this feature and for instructions on how to use it, s
 
 The **Repositories** view now shows which images have gone stale because they haven't been pulled or pushed recently. For more information, see [repository tags](repos/access/index.md#view-repository-tags).
 
-# 2020-10-07
+## 2020-10-07
 
 ### New feature
 
@@ -188,7 +201,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 ## 2019-10-21
 
 ### New features
-* **Beta:** Docker Hub now supports [two-factor authentication (2FA)](2fa/index.md). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
+* **Beta:** Docker Hub now supports two-factor authentication (2FA). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
 
     > If you lose both your 2FA authentication device and recovery code, you may
     > not be able to recover your account.
@@ -241,7 +254,7 @@ Each organization page now breaks down into these tabs:
 
 ### Enhancements
 
-* The [billing page](../subscription/upgrade.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
+* The [billing page](../subscription/core-subscription/upgrade.md) for personal accounts has been updated. You can access the page at its new URL: [https://hub.docker.com/billing/plan](https://hub.docker.com/billing/plan).
 
 ### Known Issues
 

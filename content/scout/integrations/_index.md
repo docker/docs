@@ -7,7 +7,7 @@ title: Integrating Docker Scout with other systems
 By default, Docker Scout integrates with your Docker organization and your
 Docker Scout-enabled repositories on Docker Hub. You can integrate Docker Scout
 with additional third-party systems to get access to even more insights,
-including realtime information about you running workloads.
+including real-time information about you running workloads.
 
 ## Integration categories
 
@@ -25,6 +25,7 @@ The following container registry integrations are available:
 
 - [Artifactory](./registry/artifactory.md)
 - [Amazon Elastic Container Registry](./registry/ecr.md)
+- [Azure Container Registry](./registry/acr.md)
 
 ### Continuous Integration
 
@@ -44,10 +45,40 @@ The following CI integrations are available:
 ### Environment monitoring
 
 Environment monitoring refers to integrating Docker Scout with your deployments.
-This can give you information in realtime about your running container workloads.
+This can give you information in real-time about your running container workloads.
 
 Integrating with environments lets you compare production workloads to other
 versions, in your image repositories or in your other environments.
 
+The following environment monitoring integrations are available
+
+- [Sysdig](./environment/sysdig.md)
+
 For more information about environment integrations, see
 [Environments](./environment/index.md).
+
+### Code quality
+
+Integrating Docker Scout with code analysis tools enables quality checks
+directly on source code, helping you keep track of bugs, security issues, test
+coverage, and more. In addition to image analysis and environment monitoring,
+code quality gates let you shift left your supply chain management with Docker
+Scout.
+
+Once you enable a code quality integration, Docker Scout includes the code
+quality assessments as policy evaluation results for the repositories where
+you've enabled the integration.
+
+The following code quality integrations are available:
+
+- [SonarQube](sonarqube.md)
+
+### Source code management
+
+Integrate Docker Scout with your version control system to get guided
+remediation advice on how to address issues detected by Docker Scout image
+analysis, directly in your repositories.
+
+The following source code management integrations are available:
+
+- [GitHub](source-code-management/github.md) {{< badge color=violet text=Beta >}}

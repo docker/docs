@@ -91,7 +91,7 @@ $ docker buildx build --push -t <registry>/<image> \
 
 ## Further reading
 
-For an introduction to caching see [Optimizing builds with cache](../_index.md).
+For an introduction to caching see [Docker build cache](../_index.md).
 
 For more information on the `local` cache backend, see the
 [BuildKit README](https://github.com/moby/buildkit#local-directory-1).

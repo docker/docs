@@ -18,24 +18,27 @@ You can also locate the `settings.json` file at `~/.docker/desktop/settings.json
 
 On the **General** tab, you can configure when to start Docker and specify other settings:
 
-- **Start Docker Desktop when you log in**. Select to automatically start Docker
+- **Start Docker Desktop when you sign in to your computer**. Select to automatically start Docker
   Desktop when you sign in to your machine.
 
-- **Choose Theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use System Settings**.
+- **Open Docker Dashboard when Docker Desktop starts**. Select to automatically open the
+  dashboard when starting Docker Desktop.
+
+- **Choose theme for Docker Desktop**. Choose whether you want to apply a **Light** or **Dark** theme to Docker Desktop. Alternatively you can set Docker Desktop to **Use system settings**.
 
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
 If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
 
+- **Use containerd for pulling and storing images**.
+  Turns on the containerd image store.
+  This brings new features like faster container startup performance by lazy-pulling images,
+  and the ability to run Wasm applications with Docker.
+  For more information, see [containerd image store](../containerd.md).
+  
 - **Send usage statistics**. Select so Docker Desktop sends diagnostics,
   crash reports, and usage data. This information helps Docker improve and
   troubleshoot the application. Clear the check box to opt out. Docker may
   periodically prompt you for more information.
-
-- **Show weekly tips**. Select to display useful advice and suggestions about
-  using Docker.
-
-- **Open Docker Desktop dashboard at startup**. Select to automatically open the
-  dashboard when starting Docker Desktop.
 
 - **Use Enhanced Container Isolation**. Select to enhance security by preventing containers from breaching the Linux VM. For more information, see [Enhanced Container Isolation](../hardened-desktop/enhanced-container-isolation/index.md)
     >**Note**
@@ -43,6 +46,10 @@ If you choose the integrated terminal, you can run commands in a running contain
     > This setting is only available if you are signed in to Docker Desktop and have a Docker Business subscription.
 
 - **Show CLI hints**. Displays CLI hints and tips when running Docker commands in the CLI. This is turned on by default. To turn CLI hints on or off from the CLI, set `DOCKER_CLI_HINTS` to `true` or `false` respectively.
+
+- **SBOM Indexing**. When this option is enabled, inspecting an image in Docker Desktop shows a **Start analysis** button that, when selected, analyzes the image with Docker Scout.
+
+- **Enable background SBOM indexing**. When this option is enabled, Docker Scout automatically analyzes images that you build or pull.
 
 ## Resources
 
@@ -172,7 +179,7 @@ edit the file using your favorite text editor.
 > about how to configure the Docker daemon on a manually installed Docker Engine.
 
 To see the full list of possible configuration options, see the
-[dockerd command reference](/engine/reference/commandline/dockerd/).
+[dockerd command reference](/reference/cli/dockerd/).
 
 Select **Apply & Restart** to save your settings and restart Docker Desktop.
 
@@ -232,10 +239,10 @@ You can also sign up to the [Developer Preview program](https://www.docker.com/c
 
 {{< include "beta.md" >}}
 
-#### Use containerd for pulling and storing images
-
-Turns on the containerd image store. This brings new features like faster container startup performance by lazy-pulling images, and the ability to run Wasm applications with Docker. For more information, see [containerd image store](../containerd/index.md).
-
 ### Experimental features
 
 {{< include "desktop-experimental.md" >}}
+
+## Notifications
+
+{{< include "desktop-notifications-settings.md" >}}

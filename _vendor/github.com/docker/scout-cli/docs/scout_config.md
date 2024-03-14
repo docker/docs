@@ -11,7 +11,8 @@ Manage Docker Scout configuration
 `docker scout config` allows you to list, get and set Docker Scout configuration.
 
 Available configuration key:
-- `organization`: Namespace of the Docker organization to be used by default if it cannot be inferred from the image reference
+
+- `organization`: Namespace of the Docker organization to be used by default.
 
 ## Examples
 

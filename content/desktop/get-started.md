@@ -29,22 +29,30 @@ aliases:
 - /winkit/getting-started/
 ---
 
-Docker recommends that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard.
+Docker recommends that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard. 
 
-Once signed in, you can access your Docker Hub repositories directly from Docker Desktop.
+In large enterprises where admin access is restricted, administrators can [Configure registry.json to enforce sign-in](../security/for-admins/configure-sign-in.md). 
 
-Authenticated users also get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
+> **Tip**
+>
+> Explore [Docker's core subscriptions](https://www.docker.com/pricing/) to see what else Docker can offer you. 
 
-In large enterprises where admin access is restricted, administrators can [Configure registry.json to enforce sign-in](../docker-hub/configure-sign-in.md). Enforcing developers to authenticate through Docker Desktop also allows administrators to improve their organization’s security posture for containerized development by taking advantage of [Hardened Desktop](hardened-desktop/index.md).
+## Benefits of signing in
+
+- You can access your Docker Hub repositories directly from Docker Desktop.
+
+- Authenticated users also get a higher pull rate limit compared to anonymous users. For example, if you are authenticated, you get 200 pulls per 6 hour period, compared to 100 pulls per 6 hour period per IP address for anonymous users. For more information, see [Download rate limit](../docker-hub/download-rate-limit.md).
+
+- Improve your organization’s security posture for containerized development by taking advantage of [Hardened Desktop](hardened-desktop/index.md).
 
 > **Note**
 >
 > Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity. 
 
-### Credentials management for Linux users
+## Signing in with Docker Desktop for Linux
 
-Docker Desktop relies on [`pass`](https://www.passwordstore.org/) to store credentials in gpg2-encrypted files.
-Before signing in to Docker Hub from the Docker Dashboard or the Docker menu, you must initialize `pass`.
+Docker Desktop for Linux relies on [`pass`](https://www.passwordstore.org/) to store credentials in gpg2-encrypted files.
+Before signing in to Docker Desktop with your [Docker ID](../docker-id/_index.md), you must initialize `pass`.
 Docker Desktop displays a warning if you've not initialized `pass`.
 
 You can initialize pass by using a gpg key. To generate a gpg key, run:
@@ -55,7 +63,7 @@ $ gpg --generate-key
 
 The following is an example similar to what you see once you run the previous command:
 
-```console
+```console {hl_lines=12}
 ...
 GnuPG needs to construct a user ID to identify your key.
 
@@ -84,7 +92,7 @@ mkdir: created directory '/home/molly/.password-store/'
 Password store initialized for <generated_gpg-id_public_key>
 ```
 
-Once you initialize `pass`, you can sign in on the Docker Dashboard and pull your private images.
+Once you initialize `pass`, you can sign in and pull your private images.
 When Docker CLI or Docker Desktop use credentials, a user prompt may pop up for the password you set during the gpg key generation.
 
 ```console

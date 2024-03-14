@@ -57,17 +57,17 @@ keep image size small:
 
 - When building images, always tag them with useful tags which codify version
   information, intended destination (`prod` or `test`, for instance), stability,
-  or other information that is useful when deploying the application in
-  different environments. Do not rely on the automatically-created `latest` tag.
+  or other information that's useful when deploying the application in
+  different environments. Don't rely on the automatically-created `latest` tag.
 
 ## Where and how to persist application data
 
-- **Avoid** storing application data in your container's writable layer using
+- Avoid storing application data in your container's writable layer using
   [storage drivers](../storage/storagedriver/select-storage-driver.md). This increases the
   size of your container and is less efficient from an I/O perspective than
   using volumes or bind mounts.
 - Instead, store data using [volumes](../storage/volumes.md).
-- One case where it is appropriate to use
+- One case where it's appropriate to use
   [bind mounts](../storage/bind-mounts.md) is during development,
   when you may want to mount your source directory or a binary you just built
   into your container. For production, use a volume instead, mounting it into
@@ -87,8 +87,8 @@ keep image size small:
   it.
 
 - Take this even further by requiring your development, testing, and
-  security teams to [sign images](../engine/reference/commandline/trust.md)
-  before they are deployed into production. This way, before an image is
+  security teams to [sign images](../reference/cli/docker/trust/_index.md)
+  before the teams deploy the images into production. This way, before an image is
   deployed into production, it has been tested and signed off by, for instance,
   development, quality, and security teams.
 

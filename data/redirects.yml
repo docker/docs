@@ -81,21 +81,48 @@
 # provide a short, permanent link to refer to a topic in the documentation.
 # For example, the docker CLI can output https://docs.docker.com/go/some-topic
 # in its help output, which can be redirected to elsewhere in the documentation.
-"/docker-hub/access-tokens/":
+"/security/for-developers/access-tokens/":
   - /go/access-tokens/
 "/desktop/mac/apple-silicon/":
   - /go/apple-silicon/
+"/engine/api/#deprecated-api-versions":
+  - /engine/api/v1.18/
+  - /engine/api/v1.19/
+  - /engine/api/v1.20/
+  - /engine/api/v1.21/
+  - /engine/api/v1.22/
+  - /engine/api/v1.23/
+  - /engine/reference/api/docker_remote_api_v1.18/
+  - /engine/reference/api/docker_remote_api_v1.19/
+  - /engine/reference/api/docker_remote_api_v1.20/
+  - /engine/reference/api/docker_remote_api_v1.21/
+  - /engine/reference/api/docker_remote_api_v1.22/
+  - /engine/reference/api/docker_remote_api_v1.23/
+  - /reference/api/docker_remote_api_v1.18/
+  - /reference/api/docker_remote_api_v1.19/
+  - /reference/api/docker_remote_api_v1.20/
+  - /reference/api/docker_remote_api_v1.21/
+  - /reference/api/docker_remote_api_v1.22/
+  - /reference/api/docker_remote_api_v1.23/
+# redirect for old location of dockerd reference
+"/reference/cli/dockerd/":
+  - /engine/reference/commandline/dockerd/
+
 "/engine/security/#docker-daemon-attack-surface":
   # Details about the "Docker Daemon attack surface". This redirect is currently
   # used in warnings printed by the Docker Engine, and in the installation script
   # at "get.docker.com"
   - /go/attack-surface/
+"/engine/security/protect-access/":
+  # Details about how to protect the Docker daemon socket.
+  # This redirect is used in warnings printed by the Docker Engine.
+  - /go/api-security/
 "/registry/spec/deprecated-schema-v1/":
   # Details about deprecated image manifest formats. This redirect is currently
   # used in warnings printed by the Docker Engine when pulling deprecated image
   # formats:
   #
-  #   - Docker Image Specification v1.0.0 (https://github.com/moby/moby/blob/v24.0.0/image/spec/v1.md)
+  #   - Docker Image Specification v1.0.0 (https://github.com/moby/moby/blob/v25.0.0/image/spec/v1.md)
   #   - Docker Image manifest version 2, schema 1 (https://github.com/distribution/distribution/blob/ff2bce27319a0a0bca924820c353fae3b9046e91/docs/spec/manifest-v2-1.md)
   #
   # TODO(thaJeztah) We need a better page describing the image formats (and deprecated ones)
@@ -105,7 +132,7 @@
 "/build/architecture/#install-buildx":
   # Instructions on installing Buildx. Redirect used in Docker CLI.
   - /go/buildx/
-"/engine/reference/commandline/compose_build/":
+"/reference/cli/docker/compose/build/":
   - /go/compose-native-build/
 "/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user":
   # Details about how to give "non-root" users access to a privileged Docker
@@ -115,6 +142,8 @@
   - /go/deprecated/
 "/engine/reference/commandline/cli/#experimental-features":
   - /go/experimental/
+"/reference/cli/docker/login/#credential-stores":
+  - /go/credential-store/
 "/cloud/ecs-integration/":
   - /go/compose-ecs-eol/
 "/compose/migrate/":
@@ -569,6 +598,8 @@
   - /feedback/extension/
 "https://docs.google.com/forms/u/1/d/e/1FAIpQLScgzKwqQyr7BmnphdrcGTO3wkye_McHJVsWzOIgEESfqmditQ/formResponse":
   - /feedback/runtime/
+"https://docs.google.com/forms/d/e/1FAIpQLSeqCJNB45MeKO_ofBO4ZvglZ0cevMMD_FYzncKoZNwqz_9bxg/viewform":
+  - /feedback/desktop-build/
 
 # Docker Scout
 "/scout/":
@@ -582,6 +613,10 @@
   - /go/scout-ci/
 "/scout/policy/":
   - /go/scout-policy/
+"/scout/policy/configure/":
+  - /go/scout-configure-policy/
+"/develop/develop-images/guidelines/#pin-base-image-versions":
+  - /go/base-image-pinning/
 # integrations
 "/scout/integrations/ci/gha/":
   - "/go/scout-gha/"
@@ -601,25 +636,63 @@
   - "/go/scout-env/"
 "/scout/integrations/environment/sysdig/":
   - "/go/scout-sysdig/"
+"/scout/integrations/registry/acr/":
+  - "/go/scout-acr/"
+"/scout/integrations/code-quality/sonarqube/":
+  - "/go/scout-sq/"
+"/scout/integrations/source-code-management/github/":
+  - "/go/scout-github/"
+"/scout/guides/vex/":
+  - "/go/vex-guide/"
 
-# Build links
+# Build links (internal)
+"/build/bake/reference/":
+  - /build/customize/bake/file-definition/
 "/desktop/use-desktop/builds/":
   - /go/builds/
 "/build/builders/":
   - /go/builders/
 "/build/builders/#selected-builder":
   - /go/builders/selected/
-"https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
-  - /go/build-eap/
 "/build/building/multi-platform/":
   - /go/build-multi-platform/
 "/build/cache/backends/":
   - /go/build-cache-backends/
 "/build/exporters/":
   - /go/build-exporters/
-"/build/bake/reference/":
-  - /build/customize/bake/file-definition/
+"/build/ci/github-actions/attestations/":
+  - /go/build-attestations-gha/
+"/build/attestations/":
+  - /go/attestations/
+"/build/attestations/slsa-provenance/":
+  - /go/provenance/
+
+# Build links (external)
+"https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
+  - /go/build-eap/
+"https://www.docker.com/products/build-cloud/?utm_campaign=2024-02-02-banner_dbc_ga&utm_medium=in-product-ad&utm_source=desktop_v4":
+  - /go/build-ga/
+"https://www.docker.com/products/build-cloud/?utm_campaign=2024-02-02-dbc_cli&utm_medium=in-product-ad&utm_source=desktop_v4":
+  - /go/docker-build-cloud/
 
 # CLI backlinks
 "/config/filter/":
   - /go/filter/
+
+# Docker Init
+"/develop/develop-images/instructions/#user":
+  - /go/dockerfile-user-best-practices/
+"/develop/develop-images/instructions/#apt-get":
+  - /go/dockerfile-aptget-best-practices/
+"/build/building/context/#dockerignore-files":
+  - /go/build-context-dockerignore/
+"/compose/compose-file":
+  - /go/compose-spec-reference/
+"/reference/dockerfile":
+  - /go/dockerfile-reference/
+  - /engine/reference/builder/
+"/get-started/04_sharing_app":
+  - /go/get-started-sharing/
+
+"/reference/cli/docker/debug/":
+  - /go/debug-cli/

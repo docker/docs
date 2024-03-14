@@ -23,15 +23,11 @@ the image repository:
 
 - The timestamp and snapshot keys are safely generated and stored in a signing server
 	that is deployed alongside the Docker registry. These keys are generated in a backend
-	service that isn't directly exposed to the internet and are encrypted at rest.
+	service that isn't directly exposed to the internet and are encrypted at rest. Use the Notary CLI to [manage your snapshot key locally](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#rotate-keys).
 
 Delegation keys are optional, and not generated as part of the normal `docker`
-workflow.  They need to be
+workflow. They need to be
 [manually generated and added to the repository](trust_delegation.md#creating-delegation-keys).
-
-**Note**: Prior to Docker Engine 1.11, the snapshot key was also generated and stored
-locally client-side.
-Use the Notary CLI to [manage your snapshot key locally again](https://github.com/theupdateframework/notary/blob/master/docs/advanced_usage.md#rotate-keys) for repositories created with newer versions of Docker.
 
 ## Choose a passphrase
 
@@ -47,9 +43,9 @@ All the Docker trust keys are stored encrypted using the passphrase you provide
 on creation. Even so, you should still take care of the location where you back them up.
 Good practice is to create two encrypted USB keys.
 
-> **WARNING**
+> **Warning**
 >
-> It is **very important** that you back up your keys to a safe, secure location.
+> It is very important that you back up your keys to a safe, secure location.
 The loss of the repository key is recoverable, but the loss of the root key is not.
 { .warning }
 
@@ -73,14 +69,14 @@ Prior to Docker Engine 1.11, this feature was only in the experimental branch.
 
 ## Key loss
 
-> **WARNING**
+> **Warning**
 >
 > If a publisher loses keys it means losing the ability to sign images for the repositories in
 question. If you lose a key, send an email to [Docker Hub Support](mailto:hub-support@docker.com).
 As a reminder, the loss of a root key is not recoverable.
 { .warning }
 
-This loss also requires **manual intervention** from every consumer that used a signed
+This loss also requires manual intervention from every consumer that used a signed
 tag from this repository prior to the loss.  
 Image consumers get the following error for content previously downloaded from the affected repo(s):
 

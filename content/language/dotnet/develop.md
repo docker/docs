@@ -24,23 +24,23 @@ application](containerize.md).
 
 To get the updated code, you need to checkout the `add-db` branch. For the changes you made in [Containerize a .NET application](containerize.md), for this section, you can stash them. In a terminal, run the following commands in the `docker-dotnet-sample` directory.
 
-Stash any previous changes.
+1. Stash any previous changes.
 
-```console
-$ git stash -u
-```
+   ```console
+   $ git stash -u
+   ```
 
-Check out the new branch with the updated application.
+2. Check out the new branch with the updated application.
 
-```console
-$ git checkout add-db
-```
+   ```console
+   $ git checkout add-db
+   ```
 
 In the `add-db` branch, only the .NET application has been updated. None of the Docker assets have been updated yet.
 
 You should now have the following in your `docker-dotnet-sample` directory.
 
-```
+```text
 ├── docker-dotnet-sample/
 │ ├── .git/
 │ ├── src/
@@ -80,7 +80,7 @@ Uncomment the database instructions in the `compose.yaml` file.
 
 The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml {hl_lines="8-33"}
 services:
   server:
     build:
@@ -128,7 +128,7 @@ You must create this file as it's not included in the source repository.
 In the `docker-dotnet-sample` directory, create a new directory named `db` and
 inside that directory create a file named `password.txt`. Open `password.txt` in an IDE or text editor and add the following password. The password must be on a single line, with no additional lines in the file.
 
-```
+```text
 example
 ```
 
@@ -136,7 +136,7 @@ Save and close the `password.txt` file.
 
 You should now have the following in your `docker-dotnet-sample` directory.
 
-```
+```text
 ├── docker-dotnet-sample/
 │ ├── .git/
 │ ├── db/
@@ -182,15 +182,35 @@ cb36e310aa7e   docker-dotnet-server   "dotnet myWebApp.dll"    About a minute ag
 39fdcf0aff7b   postgres               "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   5432/tcp               docker-dotnet-db-1
 ```
 
-In the previous example, the container ID is `39fdcf0aff7b`. Run the following command to run the `psql` command inside your database container and insert a record into the database. Replace the container ID with your own container ID.
+In the previous example, the container ID is `39fdcf0aff7b`. Run the following command to start a bash shell in the postgres container. Replace the container ID with your own container ID.
 
 ```console
-$ docker exec 39fdcf0aff7b psql -d example -U postgres -c "INSERT INTO \"Students\" (\"ID\", \"LastName\", \"FirstMidName\", \"EnrollmentDate\") VALUES (DEFAULT, 'Whale', 'Moby', '2013-03-20');"
+$ docker exec -it 39fdcf0aff7b bash
 ```
+
+Then run the following command to connect to the database.
+
+```console
+postgres@39fdcf0aff7b:/$ psql -d example -U postgres
+```
+
+And finally, insert a record into the database.
+
+```console
+example=# INSERT INTO "Students" ("ID", "LastName", "FirstMidName", "EnrollmentDate") VALUES (DEFAULT, 'Whale', 'Moby', '2013-03-20');
+```
+
 You should see output like the following.
 
 ```console
 INSERT 0 1
+```
+
+Close the database connection and exit the container shell by running `exit` twice.
+
+```console
+example=# exit
+postgres@39fdcf0aff7b:/$ exit
 ```
 
 ## Verify that data persists in the database
@@ -216,7 +236,7 @@ Use Compose Watch to automatically update your running Compose services as you e
 
 Open your `compose.yaml` file in an IDE or text editor and then add the Compose Watch instructions. The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml  {hl_lines="11-14"}
 services:
   server:
     build:
@@ -285,7 +305,7 @@ Add a new development stage to your Dockerfile and update your `compose.yaml` fi
 
 The following is the updated Dockerfile.
 
-```Dockerfile
+```Dockerfile {hl_lines="10-13"}
 # syntax=docker/dockerfile:1
 
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
@@ -318,7 +338,7 @@ ENTRYPOINT ["dotnet", "myWebApp.dll"]
 
 The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml  {hl_lines="5"}
 services:
   server:
     build:

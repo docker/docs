@@ -1,119 +1,41 @@
 ---
-description: Frequently asked questions
+description: Frequently asked questions for Docker Desktop for Linux
 keywords: desktop, linux, faqs
-title: FAQs for Linux
+title: FAQs for Docker Desktop for Linux
 aliases:
 - /desktop/linux/space/
 ---
-
-### What is the difference between Docker Desktop for Linux and Docker Engine
-
-Docker Desktop for Linux and Docker Engine can be installed side-by-side on the
-same machine. Docker Desktop for Linux stores containers and images in an isolated
-storage location within a VM and offers
-controls to restrict [its resources](../settings/linux.md#resources). Using a dedicated storage
-location for Docker Desktop prevents it from interfering with a Docker Engine
-installation on the same machine.
-
-While it's possible to run both Docker Desktop and Docker Engine simultaneously,
-there may be situations where running both at the same time can cause issues.
-For example, when mapping network ports (`-p` / `--publish`) for containers, both
-Docker Desktop and Docker Engine may attempt to reserve the same port on your
-machine, which can lead to conflicts ("port already in use").
-
-We generally recommend stopping the Docker Engine while you're using Docker Desktop
-to prevent the Docker Engine from consuming resources and to prevent conflicts
-as described above.
-
-Use the following command to stop the Docker Engine service:
-
-```console
-$ sudo systemctl stop docker docker.socket containerd
-```
-
-Depending on your installation, the Docker Engine may be configured to automatically
-start as a system service when your machine starts. Use the following command to
-disable the Docker Engine service, and to prevent it from starting automatically:
-
-```console
-$ sudo systemctl disable docker docker.socket containerd
-```
-
-#### How do I switch between Docker Desktop and Docker Engine
-{ #context }
-
-The Docker CLI can be used to interact with multiple Docker Engines. For example,
-you can use the same Docker CLI to control a local Docker Engine and to control
-a remote Docker Engine instance running in the cloud. [Docker Contexts](../../engine/context/working-with-contexts.md)
-allow you to switch between Docker Engines instances.
-
-When installing Docker Desktop, a dedicated "desktop-linux" context is created to
-interact with Docker Desktop. On startup, Docker Desktop automatically sets its
-own context (`desktop-linux`) as the current context. This means that subsequent
-Docker CLI commands target Docker Desktop. On shutdown, Docker Desktop resets
-the current context to the `default` context.
-
-Use the `docker context ls` command to view what contexts are available on your
-machine. The current context is indicated with an asterisk (`*`);
-
-```console
-$ docker context ls
-NAME            DESCRIPTION                               DOCKER ENDPOINT                                  ...
-default *       Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                      ...
-desktop-linux                                             unix:///home/<user>/.docker/desktop/docker.sock  ...        
-```
-
-If you have both Docker Desktop and Docker Engine installed on the same machine,
-you can run the `docker context use` command to switch between the Docker Desktop
-and Docker Engine contexts. For example, use the "default" context to interact
-with the Docker Engine;
-
-```console
-$ docker context use default
-default
-Current context is now "default"
-```
-
-And use the `desktop-linux` context to interact with Docker Desktop:
-
-```console
-$ docker context use desktop-linux
-desktop-linux
-Current context is now "desktop-linux"
-```
-
-Refer to the [Docker Context documentation](../../engine/context/working-with-contexts.md) for more details.
 
 ### Why does Docker Desktop for Linux run a VM?
 
 Docker Desktop for Linux runs a Virtual Machine (VM) for the following reasons:
 
-1. **To ensure that Docker Desktop provides a consistent experience across platforms**.
+1. To ensure that Docker Desktop provides a consistent experience across platforms.
 
-    During research, the most frequently cited reason for users wanting Docker Desktop for Linux (DD4L) was to ensure a consistent Docker Desktop
+    During research, the most frequently cited reason for users wanting Docker Desktop for Linux was to ensure a consistent Docker Desktop
     experience with feature parity across all major operating systems. Utilizing
     a VM ensures that the Docker Desktop experience for Linux users will closely
     match that of Windows and macOS.
 
-2. **To make use of new kernel features**
+2. To make use of new kernel features.
 
     Sometimes we want to make use of new operating system features. Because we control the kernel and the OS inside the VM, we can roll these out to all users immediately, even to users who are intentionally sticking on an LTS version of their machine OS.
 
-3. **To enhance security**
+3. To enhance security.
 
     Container image vulnerabilities pose a security risk for the host environment. There is a large number of unofficial images that are not guaranteed to be verified for known vulnerabilities. Malicious users can push images to public registries and use different methods to trick users into pulling and running them. The VM approach mitigates this threat as any malware that gains root privileges is restricted to the VM environment without access to the host.
 
     Why not run rootless Docker? Although this has the benefit of superficially limiting access to the root user so everything looks safer in "top", it allows unprivileged users to gain `CAP_SYS_ADMIN` in their own user namespace and access kernel APIs which are not expecting to be used by unprivileged users, resulting in [vulnerabilities](https://www.openwall.com/lists/oss-security/2022/01/18/7).
 
-4. **To provide the benefits of feature parity and enhanced security, with minimal impact on performance**
+4. To provide the benefits of feature parity and enhanced security, with minimal impact on performance.
 
-    The VM utilized by DD4L uses [`virtiofs`](https://virtio-fs.gitlab.io), a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with virtiofs.
+    The VM utilized by Docker Desktop for Linux uses [`VirtioFS`](https://virtio-fs.gitlab.io), a shared file system that allows virtual machines to access a directory tree located on the host. Our internal benchmarking shows that with the right resource allocation to the VM, near native file system performance can be achieved with VirtioFS.
 
-    As such, we have adjusted the default memory available to the VM in DD4L. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
+    As such, we have adjusted the default memory available to the VM in Docker Desktop for Linux. You can tweak this setting to your specific needs by using the **Memory** slider within the **Settings** > **Resources** tab of Docker Desktop.
 
 ### How do I enable file sharing?
 
-Docker Desktop for Linux uses [virtiofs](https://virtio-fs.gitlab.io/) as the
+Docker Desktop for Linux uses [VirtioFS](https://virtio-fs.gitlab.io/) as the
 default (and currently only) mechanism to enable file sharing between the host
 and Docker Desktop VM. In order not to require elevated privileges, without
 unnecessarily restricting operations on the shared files, Docker Desktop runs
@@ -186,9 +108,9 @@ To move the disk image file to a different location:
 
 1. Select **Settings** then  **Advanced** from the **Resources** tab.
 
-2. In the **Disk image location** section, click **Browse** and choose a new location for the disk image.
+2. In the **Disk image location** section, select **Browse** and choose a new location for the disk image.
 
-3. Click **Apply & Restart** for the changes to take effect.
+3. Select **Apply & Restart** for the changes to take effect.
 
 Do not move the file directly in Finder as this can cause Docker Desktop to lose track of the file.
 
@@ -206,7 +128,7 @@ Alternatively, to list images, run:
 $ docker image ls
 ```
 
-and then, to list containers, run:
+To list containers, run:
 
 ```console
 $ docker container ls -a
@@ -250,6 +172,6 @@ To reduce the maximum size of the disk image file:
 
 2. The **Disk image size** section contains a slider that allows you to change the maximum size of the disk image. Adjust the slider to set a lower limit.
 
-3. Click **Apply & Restart**.
+3. Select **Apply & Restart**.
 
-When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images will be lost.
+When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images are lost.

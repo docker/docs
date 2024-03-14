@@ -12,7 +12,7 @@ container. This includes:
 1. [Choosing the right base image](#choose-the-right-base-image) from a trusted source and keeping it small
 2. [Using multi-stage builds](#use-multi-stage-builds)
 3. [Rebuilding images](#rebuild-images)
-4. [Check your image for vulnerabilities](#check-your-image-for-vulnerabilities)
+4. [Checking your image for vulnerabilities](#check-your-image-for-vulnerabilities)
 
 ### Choose the right base image
 
@@ -30,7 +30,7 @@ Docker verifying the authenticity of the content in their repositories. When you
 pick your base image, look out for the **Official Image** and **Verified Publisher**
 badges.
 
-![Docker Hub Official and Verified Publisher images](images/hub-official-images.png)
+![Docker Hub Official and Verified Publisher images](images/hub-official-images.webp)
 
 When building your own image from a Dockerfile, ensure you choose a minimal base
 image that matches your requirements. A smaller base image not only offers
@@ -58,7 +58,7 @@ image. This can result in a concise final image.
 This method of creating a tiny image doesn't only significantly reduce
 complexity, but also reduces the chance of implementing vulnerable artifacts in your
 image. Therefore, instead of images that are built on images, that again are
-built on other images, multi-stage builds allow you to 'cherry pick' your
+built on other images, multi-stage builds let you 'cherry pick' your
 artifacts without inheriting the vulnerabilities from the base images on which
 they rely.
 
@@ -68,7 +68,7 @@ For detailed information on how to configure multi-stage builds, see
 ### Rebuild images
 
 A Docker image is built from a Dockerfile. A Dockerfile contains a set of
-instructions which allows you to automate the steps you would normally
+instructions which lets you automate the steps you would normally
 (manually) take to create an image. Additionally, it can include some imported
 libraries and install custom software. These appear as instructions in the
 Dockerfile.
@@ -86,7 +86,7 @@ FROM ubuntu:latest
 RUN apt-get -y update && apt-get install -y python
 ```
 
-We recommend that you rebuild your Docker image regularly to prevent known
+Docker recommends that you rebuild your Docker image regularly to prevent known
 vulnerabilities that have been addressed. When rebuilding, use the option
 `--no-cache` to avoid cache hits and to ensure a fresh download.
 
@@ -132,7 +132,7 @@ that affect images that you build or use.
   the "core" vulnerability scanning solution with enhanced capabilities and more
   detailed and actionable insights.
 - For the CLI, there's the
-  [`docker scout` CLI plugin](../engine/reference/commandline/scout.md)
+  [`docker scout` CLI plugin](../reference/cli/docker/scout/_index.md)
   which lets you explore vulnerabilities for images using the terminal.
 - Docker Desktop has a detailed image view for images in your local image
   store, that visualizes all of the known vulnerabilities affecting an image.

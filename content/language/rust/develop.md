@@ -14,7 +14,7 @@ description: Learn how to develop your Rust application locally.
 
 In this section, you’ll learn how to use volumes and networking in Docker. You’ll also use Docker to build your images and Docker Compose to make everything a whole lot easier.
 
-First, you’ll take a look at running a database in a container and how you can use volumes and networking to persist your data and allow your application to talk with the database. Then you’ll pull everything together into a Compose file which allows you to set up and run a local development environment with one command.
+First, you’ll take a look at running a database in a container and how you can use volumes and networking to persist your data and let your application talk with the database. Then you’ll pull everything together into a Compose file which lets you set up and run a local development environment with one command.
 
 ## Run a database in a container
 
@@ -34,7 +34,7 @@ Now create a network that your application and database will use to talk to each
 $ docker network create postgresnet
 ```
 
-Now you can run PostgreSQL in a container and attach to the volume and network that you created above. Docker pulls the image from Hub and runs it for you locally.
+Now you can run PostgreSQL in a container and attach to the volume and network that you created previously. Docker pulls the image from Hub and runs it for you locally.
 In the following command, option `--mount` is for starting the container with a volume. For more information, see [Docker volumes](../../storage/volumes.md).
 
 ```console
@@ -72,7 +72,7 @@ For the sample application, you'll use a variation of the backend from the react
 
 1. Clone the sample application repository using the following command.
 
-   ```
+   ```console
    $ git clone https://github.com/docker/docker-rust-postgres
    ```
 
@@ -86,6 +86,7 @@ For the sample application, you'll use a variation of the backend from the react
      - .dockerignore
      - Dockerfile
      - compose.yaml
+     - README.Docker.md
 
    Let's get started!
 
@@ -98,12 +99,12 @@ For the sample application, you'll use a variation of the backend from the react
 
    `docker init` handled creating most of the instructions in the Dockerfile, but you'll need to update it for your unique application. In addition to a `src` directory, this application includes a `migrations` directory to initialize the database. Add a bind mount for the `migrations` directory to the build stage in the Dockerfile. The following is the updated Dockerfile.
 
-   ```dockerfile
+   ```dockerfile {hl_lines="28"}
    # syntax=docker/dockerfile:1
 
    # Comments are provided throughout this file to help you get started.
    # If you need more help, visit the Dockerfile reference guide at
-   # https://docs.docker.com/engine/reference/builder/
+   # https://docs.docker.com/reference/dockerfile/
    
    ################################################################################
    # Create a stage for building the application.
@@ -200,7 +201,7 @@ For the sample application, you'll use a variation of the backend from the react
 
    You should get a response like the following.
 
-   ```
+   ```json
    [{"id":1,"login":"root"}]
    ```
 
@@ -218,7 +219,7 @@ You need to update the following items in the `compose.yaml` file:
 
 The following is the updated `compose.yaml` file.
 
-```yaml
+```yaml {hl_lines=["17-23","30-55"]}
 # Comments are provided throughout this file to help you get started.
 # If you need more help, visit the Docker compose reference guide at
 # https://docs.docker.com/compose/compose-file/
@@ -282,7 +283,7 @@ Before you run the application using Compose, notice that this Compose file spec
 
 In the cloned repository's directory, create a new directory named `db` and inside that directory create a file named `password.txt` that contains the password for the database. Using your favorite IDE or text editor, add the following contents to the `password.txt` file.
 
-```
+```text
 mysecretpassword
 ```
 
@@ -304,7 +305,7 @@ $ curl http://localhost:8000/users
 
 You should receive the following response:
 
-```
+```json
 [{"id":1,"login":"root"}]
 ```
 

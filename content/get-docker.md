@@ -23,27 +23,33 @@ significantly reduce the delay between writing code and running it in production
 You can download and install Docker on multiple platforms. Refer to the following
 section and choose the best installation path for you.
 
+> **Docker Desktop terms**
+>
+> Commercial use of Docker Desktop in larger enterprises (more than 250
+> employees OR more than $10 million USD in annual revenue) requires a [paid
+> subscription](https://www.docker.com/pricing/).
+
 {{< card
   title="Docker Desktop for Mac"
-  description="A native application using the macOS sandbox security model which delivers all Docker tools to your Mac."
+  description="A native application using the macOS sandbox security model that delivers all Docker tools to your Mac."
   link="/desktop/install/mac-install/"
-  image="/assets/images/apple_48.svg" >}}
+  icon="/assets/images/apple_48.svg" >}}
 
 <br>
 
 {{< card
   title="Docker Desktop for Windows"
-  description="A native Windows application which delivers all Docker tools to your Windows computer."
+  description="A native Windows application that delivers all Docker tools to your Windows computer."
   link="/desktop/install/windows-install/"
-  image="/assets/images/windows_48.svg" >}}
+  icon="/assets/images/windows_48.svg" >}}
 
 <br>
 
 {{< card
   title="Docker Desktop for Linux"
-  description="A native Linux application which delivers all Docker tools to your Linux computer."
+  description="A native Linux application that delivers all Docker tools to your Linux computer."
   link="/desktop/install/linux-install/"
-  image="/assets/images/linux_48.svg" >}}
+  icon="/assets/images/linux_48.svg" >}}
 
 > **Note**
 >

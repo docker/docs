@@ -1,8 +1,7 @@
 ---
 description: The benefits of enhanced container isolation
 title: Key features and benefits
-keywords: set up, enhanced container isolation, rootless, security, features, Docker
-  Desktop
+keywords: set up, enhanced container isolation, rootless, security, features, Docker Desktop
 ---
 
 ### Linux User Namespace on all containers
@@ -62,11 +61,12 @@ workloads whether benign or malicious to gain control of the Linux kernel
 inside the Docker Desktop VM and thus modify security related settings, for example registry
 access management, and network proxies.
 
-With Enhanced Container Isolation, privileged containers can no longer do this. The combination of the Linux user-namespace and other security techniques used
-by Sysbox ensures that processes inside a privileged container can only access
-resources assigned to the container.
+With Enhanced Container Isolation, privileged containers can no longer do
+this. The combination of the Linux user-namespace and other security techniques
+used by Sysbox ensures that processes inside a privileged container can only
+access resources assigned to the container.
 
-> Note
+> **Note**
 >
 > Enhanced Container Isolation does not prevent users from launching privileged
 > containers, but rather runs them securely by ensuring that they can only
@@ -79,7 +79,7 @@ For example, Enhanced Container Isolation ensures privileged containers can't
 access Docker Desktop network settings in the Linux VM configured via Berkeley
 Packet Filters (BPF):
 
-```
+```console
 $ docker run --privileged djs55/bpftool map show
 Error: can't get next map: Operation not permitted
 ```
@@ -87,7 +87,7 @@ Error: can't get next map: Operation not permitted
 In contrast, without Enhanced Container Isolation, privileged containers
 can easily do this:
 
-```
+```console
 $ docker run --privileged djs55/bpftool map show
 17: ringbuf  name blocked_packets  flags 0x0
         key 0B  value 0B  max_entries 16777216  memlock 0B
@@ -110,22 +110,22 @@ breaks isolation.
 
 For example, sharing the pid namespace fails:
 
-```
+```console
 $ docker run -it --rm --pid=host alpine
 docker: Error response from daemon: failed to create shim task: OCI runtime create failed: error in the container spec: invalid or unsupported container spec: sysbox containers can't share namespaces [pid] with the host (because they use the linux user-namespace for isolation): unknown.
 ```
 
 Similarly sharing the network namespace fails:
 
-```
-docker run -it --rm --network=host alpine
+```console
+$ docker run -it --rm --network=host alpine
 docker: Error response from daemon: failed to create shim task: OCI runtime create failed: error in the container spec: invalid or unsupported container spec: sysbox containers can't share a network namespace with the host (because they use the linux user-namespace for isolation): unknown.
 ```
 
 In addition, the `--userns=host` flag, used to disable the user-namespace on the
 container, is ignored:
 
-```
+```console
 $ docker run -it --rm --userns=host alpine
 / # cat /proc/self/uid_map
          0     100000      65536
@@ -150,7 +150,7 @@ For example, the following bind mount of the Docker Engine's configuration file
 (`/etc/docker/daemon.json` inside the Linux VM) into a container is restricted
 and therefore fails:
 
-```
+```console
 $ docker run -it --rm -v /etc/docker/daemon.json:/mnt/daemon.json alpine
 docker: Error response from daemon: failed to create shim task: OCI runtime create failed: error in the container spec: can't mount /etc/docker/daemon.json because it's configured as a restricted host mount: unknown
 ```
@@ -162,21 +162,18 @@ Of course, bind mounts of host files continue to work as usual. For example,
 assuming a user configures Docker Desktop to file share her $HOME directory,
 she can bind mount it into the container:
 
-```
+```console
 $ docker run -it --rm -v $HOME:/mnt alpine
 / #
 ```
 
-> Note
+> **Note**
 >
-> Enhanced Container Isolation won't allow bind mounting the Docker socket
+> By default, Enhanced Container Isolation won't allow bind mounting the Docker Engine socket
 > (/var/run/docker.sock) into a container, as doing so essentially grants the
-> container control of Docker Engine, thus breaking container
-> isolation. Containers that rely on this will not work with Enhanced Container
-> Isolation enabled. Instead, use Docker-in-Docker (i.e., run the Docker Engine
-> fully inside a Docker Container). Enhanced Container Isolation is capable of
-> running Docker-in-Docker securely, without giving the outer container root
-> privileges in the Docker Desktop Linux VM.
+> container control of Docker Engine, thus breaking container isolation. However,
+> as some legitimate use cases require this, it's possible to relax
+> this restriction for trusted container images. See [Docker socket mount permissions](config.md#docker-socket-mount-permissions).
 
 ### Vetting sensitive system calls
 
@@ -189,7 +186,7 @@ For example, a container that has `CAP_SYS_ADMIN` (required to execute the
 `mount` system call) can't use that capability to change a read-only bind mount
 into a read-write mount:
 
-```
+```console
 $ docker run -it --rm --cap-add SYS_ADMIN -v $HOME:/mnt:ro alpine
 / # mount -o remount,rw /mnt /mnt
 mount: permission denied (are you root?)
@@ -205,7 +202,7 @@ within the container, and mount them read-only or read-write as needed. Those
 mounts are allowed since they occur within the container, and therefore don't
 breach it's root filesystem:
 
-```
+```text
 / # mkdir /root/tmpfs
 / # mount -t tmpfs tmpfs /root/tmpfs
 / # mount -o remount,ro /root/tmpfs /root/tmpfs
@@ -271,7 +268,7 @@ As a simple example, when Enhanced Container Isolation is enabled the
 `/proc/uptime` file shows the uptime of the container itself, not that of the
 Docker Desktop Linux VM:
 
-```
+```console
 $ docker run -it --rm alpine
 / # cat /proc/uptime
 5.86 5.86

@@ -1,7 +1,6 @@
 ---
-description: Instructions for installing Docker as a binary. Mostly meant for hackers
-  who want to try out Docker on a variety of environments.
-keywords: binaries, installation, docker, documentation, linux
+description: Learn how to install Docker as a binary. These instructions are most suitable for testing purposes.
+keywords: binaries, installation, docker, documentation, linux, install docker engine
 title: Install Docker Engine from binaries
 aliases:
 - /engine/installation/binaries/
@@ -14,8 +13,7 @@ aliases:
 >
 > This page contains information on how to install Docker using binaries. These
 > instructions are mostly suitable for testing purposes. We do not recommend
-> installing Docker using binaries in production environments as they will not be
-> updated automatically with security updates. The Linux binaries described on this
+> installing Docker using binaries in production environments as they don't have automatic security updates. The Linux binaries described on this
 > page are statically linked, which means that vulnerabilities in build-time
 > dependencies are not automatically patched by security updates of your Linux
 > distribution.
@@ -81,7 +79,7 @@ either of the two. This helps improve security and blocks certain
 types of exploits. Review the documentation for your Linux distribution for
 instructions for enabling and configuring AppArmor or SELinux.
 
-> Security Warning
+> **Security warning**
 >
 > If either of the security mechanisms is enabled, do not disable it as a
 > work-around to make Docker or its containers run. Instead, configure it
@@ -94,7 +92,7 @@ instructions for enabling and configuring AppArmor or SELinux.
   [Enabling `seccomp` for Docker](../security/seccomp.md).
 
 - Enable user namespaces if possible. See the
-  [Daemon user namespace options](/engine/reference/commandline/dockerd/#daemon-user-namespace-options).
+  [Daemon user namespace options](/reference/cli/dockerd/#daemon-user-namespace-options).
 
 ### Install static binaries
 
@@ -208,7 +206,7 @@ To install client binaries, perform the following steps:
 > The following section describes how to install the Docker daemon on Windows
 > Server which allows you to run Windows containers only. When you install the
 > Docker daemon on Windows Server, the daemon doesn't contain Docker components
-> such as `buildx` and `compose`. If you are running Windows 10 or 11,
+> such as `buildx` and `compose`. If you're running Windows 10 or 11,
 > we recommend that you install [Docker Desktop](../../desktop/index.md) instead.
 
 Binary packages on Windows include both `dockerd.exe` and `docker.exe`. On Windows,

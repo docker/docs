@@ -10,27 +10,23 @@ a stack description in the form of a [Compose file](../../compose/compose-file/c
 
 {{< include "swarm-compose-compat.md" >}}
 
-The `docker stack deploy` command supports any Compose file of version "3.x".
-If you have an older version, see the [upgrade guide](../../compose/compose-file/compose-versioning.md#upgrading).
-
 To run through this tutorial, you need:
 
-1.  A Docker Engine running in [swarm mode](swarm-mode.md).
-    If you're not familiar with swarm mode, you might want to read
+1.  A Docker Engine running in [Swarm mode](swarm-mode.md).
+    If you're not familiar with Swarm mode, you might want to read
     [Swarm mode key concepts](key-concepts.md)
     and [How services work](how-swarm-mode-works/services.md).
 
     > **Note**
     >
     > If you're trying things out on a local development environment,
-    > you can put your engine into swarm mode with `docker swarm init`.
+    > you can put your engine into Swarm mode with `docker swarm init`.
     >
     > If you've already got a multi-node swarm running, keep in mind that all
     > `docker stack` and `docker service` commands must be run from a manager
     > node.
 
 2.  A current version of [Docker Compose](../../compose/install/index.md).
-
 
 ## Set up a Docker registry
 
@@ -115,9 +111,9 @@ counter whenever you visit it.
     CMD ["python", "app.py"]
     ```
 
-5.  Create a file called `docker-compose.yml` and paste this in:
+5.  Create a file called `compose.yml` and paste this in:
 
-    ```none
+    ```yaml
       services:
         web:
           image: 127.0.0.1:5000/stackdemo
@@ -144,7 +140,7 @@ counter whenever you visit it.
     Compose doesn't take advantage of swarm mode, and deploys everything to a
     single node. You can safely ignore this.
 
-    ```none
+    ```console
     $ docker compose up -d
 
     WARNING: The Docker Engine you're using is running in swarm mode.
@@ -224,7 +220,7 @@ The stack is now ready to be deployed.
 1.  Create the stack with `docker stack deploy`:
 
     ```console
-    $ docker stack deploy --compose-file docker-compose.yml stackdemo
+    $ docker stack deploy --compose-file compose.yml stackdemo
 
     Ignoring unsupported options: build
 
@@ -263,8 +259,8 @@ The stack is now ready to be deployed.
     Hello World! I have been seen 3 times.
     ```
 
-    Thanks to Docker's built-in routing mesh, you can access any node in the
-    swarm on port 8000 and get routed to the app:
+    With Docker's built-in routing mesh, you can access any node in the
+    swarm on port `8000` and get routed to the app:
 
     ```console
     $ curl http://address-of-other-node:8000
@@ -288,7 +284,7 @@ The stack is now ready to be deployed.
     ```
 
 5.  If you're just testing things out on a local machine and want to bring your
-    Docker Engine out of swarm mode, use `docker swarm leave`:
+    Docker Engine out of Swarm mode, use `docker swarm leave`:
 
     ```console
     $ docker swarm leave --force

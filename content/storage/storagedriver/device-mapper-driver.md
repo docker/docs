@@ -1,10 +1,19 @@
 ---
 description: Learn how to optimize your use of device mapper driver.
 keywords: container, storage, driver, device mapper
-title: Use the Device Mapper storage driver
+title: Use the Device Mapper storage driver (deprecated)
 aliases:
 - /engine/userguide/storagedriver/device-mapper-driver/
 ---
+
+> **Deprecated**
+>
+> The Device Mapper driver [has been deprecated](../../../engine/deprecated.md#device-mapper-storage-driver),
+> and is removed in Docker Engine v25.0. If you are using Device Mapper,
+> you must migrate to a supported storage driver before upgrading to Docker
+> Engine v25.0. Read the [Docker storage drivers](select-storage-driver.md)
+> page for supported storage drivers.
+{ .warning }
 
 Device Mapper is a kernel-based framework that underpins many advanced
 volume management technologies on Linux. Docker's `devicemapper` storage driver
@@ -71,7 +80,7 @@ For production systems, see
     ```
 
     See all storage options for each storage driver in the
-    [daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
+    [daemon reference documentation](/reference/cli/dockerd/#options-per-storage-driver)
 
     Docker does not start if the `daemon.json` file contains badly-formed JSON.
 
@@ -178,7 +187,7 @@ options in the table above.
 ```
 
 See all storage options for each storage driver in the
-[daemon reference documentation](/engine/reference/commandline/dockerd/#options-per-storage-driver)
+[daemon reference documentation](/reference/cli/dockerd/#options-per-storage-driver)
 
 Restart Docker for the changes to take effect. Docker invokes the commands to
 configure the block device for you.
@@ -431,7 +440,7 @@ If you run into repeated problems with thin pool, you can set the storage option
 `/etc/docker/daemon.json`. For instance, setting it to `10` ensures
 that operations fail with a warning when the free space is at or near 10%.
 See the
-[storage driver options in the Engine daemon reference](/engine/reference/commandline/dockerd/#daemon-storage-driver).
+[storage driver options in the Engine daemon reference](/reference/cli/dockerd/#daemon-storage-driver).
 
 ### Increase capacity on a running device
 
@@ -536,33 +545,34 @@ thin pool is 100 GB, and is increased to 200 GB.
 
 5.  Reload the devicemapper thin pool.
 
-    a.  Get the pool name first. The pool name is the first field, delimited by
-        ` :`. This command extracts it.
+    a. Get the pool name first. The pool name is the first field, delimited by
+    `:`. This command extracts it.
 
-            $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
+    ```console
+    $ sudo dmsetup status | grep ' thin-pool ' | awk -F ': ' {'print $1'}
+    docker-8:1-123141-pool
+    ```
 
-            docker-8:1-123141-pool
+    b. Dump the device mapper table for the thin pool.
 
-    b.  Dump the device mapper table for the thin pool.
+    ```console
+    $ sudo dmsetup table docker-8:1-123141-pool
+    0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
+    ```
 
-            $ sudo dmsetup table docker-8:1-123141-pool
+    c. Calculate the total sectors of the thin pool using the second field
+    of the output. The number is expressed in 512-k sectors. A 100G file has
+    209715200 512-k sectors. If you double this number to 200G, you get
+    419430400 512-k sectors.
 
-            0 209715200 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing
+    d. Reload the thin pool with the new sector number, using the following
+    three `dmsetup`  commands.
 
-    c.  Calculate the total sectors of the thin pool using the second field
-        of the output. The number is expressed in 512-k sectors. A 100G file has
-        209715200 512-k sectors. If you double this number to 200G, you get
-        419430400 512-k sectors.
-
-    d.  Reload the thin pool with the new sector number, using the following
-        three `dmsetup`  commands.
-
-            $ sudo dmsetup suspend docker-8:1-123141-pool
-
-            $ sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing'
-
-            $ sudo dmsetup resume docker-8:1-123141-pool
-
+    ```console
+    $ sudo dmsetup suspend docker-8:1-123141-pool
+    $ sudo dmsetup reload docker-8:1-123141-pool --table '0 419430400 thin-pool 7:1 7:0 128 32768 1 skip_block_zeroing'
+    $ sudo dmsetup resume docker-8:1-123141-pool
+    ```
 
 #### Resize a direct-lvm thin pool
 
@@ -740,7 +750,7 @@ container, it is a snapshot of the image the container is based on. The followin
 example shows a Docker host with two running containers. The first is a `ubuntu`
 container and the second is a `busybox` container.
 
-![Ubuntu and busybox image layers](images/two_dm_container.jpg)
+![Ubuntu and busybox image layers](images/two_dm_container.webp?w=450&h=100)
 
 ## How container reads and writes work with `devicemapper`
 
@@ -750,7 +760,7 @@ With `devicemapper`, reads happen at the block level. The diagram below shows
 the high level process for reading a single block (`0x44f`) in an example
 container.
 
-![Reading a block with devicemapper](images/dm_container.jpg)
+![Reading a block with devicemapper](images/dm_container.webp?w=650)
 
 An application makes a read request for block `0x44f` in the container. Because
 the container is a thin snapshot of an image, it doesn't have the block, but it

@@ -134,7 +134,7 @@ EOF
 
 ### Configure proxy settings per daemon
 
-The `default` key under `proxies` in `daemon.json` configures the proxy
+The `default` key under `proxies` in `~/.docker/config.json` configures the proxy
 settings for all daemons that the client connects to.
 To configure the proxies for individual daemons,
 use the address of the daemon instead of the `default` key.
@@ -174,7 +174,7 @@ $ docker run --env HTTP_PROXY="http://proxy.example.com:3128" redis
 
 For a list of all the proxy-related build arguments that you can use with the
 `docker build` command, see
-[Predefined ARGs](../engine/reference/builder.md#predefined-args).
+[Predefined ARGs](../reference/dockerfile.md#predefined-args).
 These proxy values are only available in the build container.
 They're not included in the build output.
 

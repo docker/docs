@@ -1,0 +1,29 @@
+@layer utilities {
+  .icon-svg {
+    svg {
+      font-size: 24px;
+      width: 1em;
+      height: 1em;
+      display: inline-block;
+      fill: currentColor;
+    }
+  }
+
+  .icon-xs {
+    svg {
+      font-size: 12px;
+    }
+  }
+
+  .icon-sm {
+    svg {
+      font-size: 16px;
+    }
+  }
+
+  .icon-lg {
+    svg {
+      font-size: 32px;
+    }
+  }
+}

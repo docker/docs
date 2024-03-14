@@ -31,11 +31,12 @@ Refer to the following table for details on the Enhanced Service Account add-on 
 
 ## How a pull is defined
 
+- Pulls are accounted to the user doing the pull, not to the owner of the image.
 - A pull request is defined as up to two `GET` requests on registry manifest URLs (`/v2/*/manifests/*`).
 - A normal image pull makes a single manifest request.
-- A pull request for a multi-arch image makes two manifest requests.
+- A pull request for a multi-arch image makes two manifest requests. 
 - `HEAD` requests aren't counted.
-- Limits are applied based on the user doing the pull, and not based on the image being pulled or its owner.
+- Some images are unlimited through our [Docker Sponsored Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/) and [Docker Verified Publisher](https://www.docker.com/partners/programs) programs.
 
 ## Creating a new service account
 
@@ -56,5 +57,5 @@ official images and other public images, you don't have to grant any access perm
 
 Refer to the following topics for additional information:
 
-- [Mirroring Docker Hub](../registry/recipes/mirror.md)
+- [Mirroring Docker Hub](./mirror.md)
 - [Docker pricing FAQs](https://www.docker.com/pricing/faq/)

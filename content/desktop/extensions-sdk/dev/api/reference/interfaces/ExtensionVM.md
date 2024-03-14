@@ -1,7 +1,6 @@
 ---
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
-skip_read_time: true
 ---
 
 # Interface: ExtensionVM
@@ -18,7 +17,7 @@ skip_read_time: true
 
 Executes a command in the backend container.
 
-Example: Execute the command `ls -l` inside the **backend container**:
+Example: Execute the command `ls -l` inside the backend container:
 
 ```typescript
 await ddClient.extension.vm.cli.exec(
@@ -29,12 +28,12 @@ await ddClient.extension.vm.cli.exec(
 
 Streams the output of the command executed in the backend container.
 
-When the extension defines its own `docker-compose.yaml` file
+When the extension defines its own `compose.yaml` file
 with multiple containers, the command is executed on the first container defined.
 Change the order in which containers are defined to execute commands on another
 container.
 
-Example: Spawn the command `ls -l` inside the **backend container**:
+Example: Spawn the command `ls -l` inside the backend container:
 
 ```typescript
 await ddClient.extension.vm.cli.exec("ls", ["-l"], {

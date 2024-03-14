@@ -1,32 +1,23 @@
 ---
 description: Frequently asked questions for Docker Compose
-keywords: documentation, docs,  docker, compose, faq
+keywords: documentation, docs,  docker, compose, faq, docker compose vs docker-compose
 title: Compose FAQs
 ---
 
 {{< include "compose-eol.md" >}}
 
-### How do I get help?
+### What is the difference between `docker compose` and `docker-compose`
 
-Docker Compose is under active development. If you need help, would like to
-contribute, or simply want to talk about the project with like-minded
-individuals, we have a number of open channels for communication.
+Version one of the Docker Compose command-line binary was first released in 2014. It was written in Python, and is invoked with `docker-compose`. Typically, Compose V1 projects include a top-level version element in the compose.yml file, with values ranging from 2.0 to 3.8, which refer to the specific file formats.
 
-* To report bugs or file feature requests, use the [issue tracker on Github](https://github.com/docker/compose/issues).
+Version two of the Docker Compose command-line binary was announced in 2020, is written in Go, and is invoked with `docker compose`. Compose V2 ignores the version top-level element in the compose.yml file.
 
-* To talk about the project with people in real time, join the
-  `#docker-compose` channel on the [Docker Community Slack](https://dockr.ly/slack).
-
-* To contribute code submit a [pull request on Github](https://github.com/docker/compose/pulls).
-
-### Where can I find example Compose files?
-
-There are [many examples of Compose files on GitHub](https://github.com/docker/awesome-compose).
+For further information, see [History and development of Compose](intro/history.md).
 
 ### What's the difference between `up`, `run`, and `start`?
 
 Typically, you want `docker compose up`. Use `up` to start or restart all the
-services defined in a `docker-compose.yml`. In the default "attached"
+services defined in a `compose.yml`. In the default "attached"
 mode, you see all the logs from all the containers. In "detached" mode (`-d`),
 Compose exits after starting the containers, but the containers continue to run
 in the background.
@@ -46,8 +37,8 @@ containers.
 ### Why do my services take 10 seconds to recreate or stop?
 
 The `docker compose stop` command attempts to stop a container by sending a `SIGTERM`. It then waits
-for a [default timeout of 10 seconds](../engine/reference/commandline/compose_stop.md). After the timeout,
-a `SIGKILL` is sent to the container to forcefully kill it.  If you
+for a [default timeout of 10 seconds](../reference/cli/docker/compose/stop.md). After the timeout,
+a `SIGKILL` is sent to the container to forcefully kill it. If you
 are waiting for this timeout, it means that your containers aren't shutting down
 when they receive the `SIGTERM` signal.
 
@@ -57,7 +48,7 @@ in containers.
 
 To fix this problem, try the following:
 
-* Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
+- Make sure you're using the exec form of `CMD` and `ENTRYPOINT`
 in your Dockerfile.
 
   For example use `["program", "arg1", "arg2"]` not `"program arg1 arg2"`.
@@ -65,32 +56,28 @@ in your Dockerfile.
   doesn't handle signals properly. Compose always uses the JSON form, so don't
   worry if you override the command or entrypoint in your Compose file.
 
-* If you are able, modify the application that you're running to
+- If you are able, modify the application that you're running to
 add an explicit signal handler for `SIGTERM`.
 
-* Set the `stop_signal` to a signal which the application knows how to handle:
+- Set the `stop_signal` to a signal which the application knows how to handle:
 
-```yaml
-services:
-  web:
-    build: .
-    stop_signal: SIGINT
-```
+  ```yaml
+  services:
+    web:
+      build: .
+      stop_signal: SIGINT
+  ```
 
-* If you can't modify the application, wrap the application in a lightweight init
+- If you can't modify the application, wrap the application in a lightweight init
 system (like [s6](https://skarnet.org/software/s6/)) or a signal proxy (like
 [dumb-init](https://github.com/Yelp/dumb-init) or
 [tini](https://github.com/krallin/tini)).  Either of these wrappers takes care of
 handling `SIGTERM` properly.
 
-### Can I control service startup order?
-
-Yes, see [Controlling startup order](startup-order.md).
-
 ### How do I run multiple copies of a Compose file on the same host?
 
 Compose uses the project name to create unique identifiers for all of a
-project's  containers and other resources. To run multiple copies of a project,
+project's containers and other resources. To run multiple copies of a project,
 set a custom project name using the [`-p` command line option](reference/index.md)
 or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
@@ -111,7 +98,7 @@ You can add your code to the image using `COPY` or `ADD` directive in a
 Docker image, for example when you're sending code to another environment
 (production, CI, etc).
 
-You should use a `volume` if you want to make changes to your code and see them
+Use a `volume` if you want to make changes to your code and see them
 reflected immediately, for example when you're developing code and your server
 supports hot code reloading or live-reload.
 

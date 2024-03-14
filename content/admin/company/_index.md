@@ -1,8 +1,12 @@
 ---
-description: Learn about companies.
+description: Learn about managing companies.
 keywords: company, multiple organizations, manage companies
 title: Overview
 grid:
+- title: Create a company
+  description: Get started by learning how to create a company.
+  icon: apartment
+  link: /admin/company/new-company/
 - title: Manage organizations
   description: Learn how to add and manage organizations as well as seats within your
     company.
@@ -19,25 +23,26 @@ grid:
 - title: Configure Single Sign-On
   description: Discover how to configure SSO for your entire company.
   icon: key
-  link: /admin/company/settings/sso/
+  link: /security/for-admins/single-sign-on/
 - title: Set up SCIM
   description: Set up SCIM to automatically provision and deprovision users in your
     company.
   icon: checklist
-  link: /admin/company/settings/scim/
+  link: /security/for-admins/scim/
 - title: Domain management
   description: Add and verify your domains.
   icon: domain_verification
   link: /admin/company/settings/domains/
+- title: FAQs
+  description: Explore common company FAQs.
+  link: /faq/admin/company-faqs/
+  icon: help
+aliases:
+- /docker-hub/creating-companies/
 ---
-
-{{< include "admin-early-access.md" >}}
 
 {{< include "admin-company-overview.md" >}}
 
-To create a company, see
-[Create a company](../organization/general-settings.md#create-a-company).
-
-Learn how to administer a company using Docker Admin in the following sections.
+Learn how to administer a company in the following sections.
 
 {{< grid >}}

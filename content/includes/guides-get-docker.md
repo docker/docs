@@ -1,0 +1,1 @@
+Before you start, get the latest version of [Docker Desktop](../../get-docker.md). Docker adds new features regularly and some parts of this guide may work only with the latest version of Docker Desktop.

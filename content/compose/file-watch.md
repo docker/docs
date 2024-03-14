@@ -13,11 +13,11 @@ Use `watch` to automatically update and preview your running Compose services as
 For many projects, this allows for a hands-off development workflow once Compose is running, as services automatically update themselves when you save your work.
 
 `watch` adheres to the following file path rules:
-* All paths are relative to the build context
+* All paths are relative to the project directory
 * Directories are watched recursively
 * Glob patterns aren't supported
 * Rules from `.dockerignore` apply
-  * Use `include` / `exclude` to override
+  * Use `ignore` to defined additional paths to be ignored (same syntax)
   * Temporary/backup files for common IDEs (Vim, Emacs, JetBrains, & more) are ignored automatically
   * `.git` directories are ignored automatically
 
@@ -45,6 +45,28 @@ the `action`, additional fields might be accepted or required.
 Watch mode can be used with many different languages and frameworks.
 The specific paths and rules will vary project to project, but the concepts remain the same. 
 
+### Prerequisites
+
+In order to work properly, `watch` relies on common executables. Make sure your service image contains the following binaries:
+* stat
+* mkdir
+* rmdir
+* tar
+
+`watch` also requires that the container's `USER` can write to the target path so it can update files. A common pattern is for 
+initial content to be copied into the container using the `COPY` instruction in a Dockerfile. To ensure such files are owned 
+by the configured user, use the `COPY --chown` flag:
+
+```dockerfile
+# Run as a non-privileged user
+FROM node:18-alpine
+RUN useradd -ms /bin/sh -u 1001 app
+USER app
+
+# Copy source files into application directory
+COPY --chown=app:app . /app
+```
+
 ### `action`
 
 #### Sync
@@ -63,6 +85,13 @@ The behavior is the same as running `docker compose up --build <svc>`.
 
 Rebuild is ideal for compiled languages or as fallbacks for modifications to particular files that require a full
 image rebuild (e.g. `package.json`).
+
+#### Sync + Restart
+
+If `action` is set to `sync+restart`, Compose synchronizes your changes with the service containers and restarts it. 
+
+`sync+restart` is ideal when config file changes, and you don't need to rebuild the image but just restart the main process of the service containers. 
+It will work well when you update a database configuration or your `nginx.conf` file for example
 
 >**Tip**
 >
@@ -130,11 +159,17 @@ This pattern can be followed for many languages and frameworks, such as Python w
 2. Run `docker compose watch` to build and launch a Compose project and start the file watch mode.
 3. Edit service source files using your preferred IDE or editor.
 
->**Looking for a sample project to test things out?**
+> **Looking for a sample project to test things out?**
 >
->  Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars), or [build the docs site locally](../contribute/contribute-guide.md#build-and-preview-the-docs-locally) for a demonstration of Compose `watch`.
+> Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
+> or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
+> for a demonstration of Compose `watch`.
 { .tip }
 
 ## Feedback
 
 We are actively looking for feedback on this feature. Give feedback or report any bugs you may find in the [Compose Specification repository](https://github.com/compose-spec/compose-spec/pull/253).
+
+## Reference
+
+- [Compose Develop Specification](compose-file/develop.md)

@@ -39,7 +39,7 @@ alpine       3.16      a8cbb8c69ee7   40 minutes ago   8.67MB
 alpine       latest    7144f7bab3d4   40 minutes ago   11.7MB
 ```
 
-The available fields (`reference` in this case) depends on the command you run.
+The available fields (`reference` in this case) depend on the command you run.
 Some filters expect an exact match. Others handle partial matches. Some filters
 let you use regular expressions.
 
@@ -49,8 +49,8 @@ about the supported filtering capabilities for each command.
 ## Combining filters
 
 You can combine multiple filters by passing multiple `--filter` flags. The
-following example shows how to print all images that don't match
-`alpine:latest` or `busybox` - a logical `OR`.
+following example shows how to print all images that match `alpine:latest` or
+`busybox` - a logical `OR`.
 
 ```console
 $ docker images
@@ -71,17 +71,17 @@ busybox      glibc     7338d0c72c65   2 hours ago   6.09MB
 ### Multiple negated filters
 
 Some commands support negated filters on [labels](./labels-custom-metadata.md).
-Negated filters only consider results don't match the specified patterns. The
-following command prunes all containers that aren't labeled `foo`.
+Negated filters only consider results that don't match the specified patterns.
+The following command prunes all containers that aren't labeled `foo`.
 
 ```console
 $ docker container prune --filter "label!=foo"
 ```
 
 There's a catch in combining multiple negated label filters. Multiple negated
-filters a single negative constraint - a logical `AND`. The following command
-prunes all containers except those labeled both `foo` and `bar`. Containers
-labeled either `foo` or `bar`, but not both, will be pruned.
+filters create a single negative constraint - a logical `AND`. The following 
+command prunes all containers except those labeled both `foo` and `bar`.
+Containers labeled either `foo` or `bar`, but not both, will be pruned.
 
 ```console
 $ docker container prune --filter "label!=foo" --filter "label!=bar"
@@ -92,21 +92,21 @@ $ docker container prune --filter "label!=foo" --filter "label!=bar"
 For more information about filtering commands, refer to the CLI reference
 description for commands that support the `--filter` flag:
 
-- [`docker config ls`](../engine/reference/commandline/config_ls.md)
-- [`docker container prune`](../engine/reference/commandline/container_prune.md)
-- [`docker image prune`](../engine/reference/commandline/image_prune.md)
-- [`docker images`](../engine/reference/commandline/images.md)
-- [`docker network ls`](../engine/reference/commandline/network_ls.md)
-- [`docker network prune`](../engine/reference/commandline/network_prune.md)
-- [`docker node ls`](../engine/reference/commandline/node_ls.md)
-- [`docker node ps`](../engine/reference/commandline/node_ps.md)
-- [`docker plugin ls`](../engine/reference/commandline/plugin_ls.md)
-- [`docker ps`](../engine/reference/commandline/ps.md)
-- [`docker search`](../engine/reference/commandline/search.md)
-- [`docker secret ls`](../engine/reference/commandline/secret_ls.md)
-- [`docker service ls`](../engine/reference/commandline/service_ls.md)
-- [`docker service ps`](../engine/reference/commandline/service_ps.md)
-- [`docker stack ps`](../engine/reference/commandline/stack_ps.md)
-- [`docker system prune`](../engine/reference/commandline/system_prune.md)
-- [`docker volume ls`](../engine/reference/commandline/volume_ls.md)
-- [`docker volume prune`](../engine/reference/commandline/volume_prune.md)
+- [`docker config ls`](../reference/cli/docker/config/ls.md)
+- [`docker container prune`](../reference/cli/docker/container/prune.md)
+- [`docker image prune`](../reference/cli/docker/image/prune.md)
+- [`docker image ls`](../reference/cli/docker/image/ls.md)
+- [`docker network ls`](../reference/cli/docker/network/ls.md)
+- [`docker network prune`](../reference/cli/docker/network/prune.md)
+- [`docker node ls`](../reference/cli/docker/node/ls.md)
+- [`docker node ps`](../reference/cli/docker/node/ps.md)
+- [`docker plugin ls`](../reference/cli/docker/plugin/ls.md)
+- [`docker container ls`](../reference/cli/docker/container/ls.md)
+- [`docker search`](../reference/cli/docker/search.md)
+- [`docker secret ls`](../reference/cli/docker/secret/ls.md)
+- [`docker service ls`](../reference/cli/docker/service/ls.md)
+- [`docker service ps`](../reference/cli/docker/service/ps.md)
+- [`docker stack ps`](../reference/cli/docker/stack/ps.md)
+- [`docker system prune`](../reference/cli/docker/system/prune.md)
+- [`docker volume ls`](../reference/cli/docker/volume/ls.md)
+- [`docker volume prune`](../reference/cli/docker/volume/prune.md)

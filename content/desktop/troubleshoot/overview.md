@@ -15,13 +15,6 @@ aliases:
 - /docker-for-windows/troubleshoot/
 ---
 
-{{< cta
-  header="This feature requires a paid Docker subscription"
-  body="Docker Desktop offers support for developers subscribed to a Pro, Team, or a Business tier. Upgrade now to benefit from Docker Support."
-  url="https://www.docker.com/pricing?utm_source=docker&utm_medium=webreferral&utm_campaign=docs_driven_upgrade_desktop_support"
-  cta="Upgrade now"
->}}
-
 This page contains information on how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
 
 ## Troubleshoot menu
@@ -50,6 +43,15 @@ Docker Desktop to their initial state, the same as when Docker Desktop was first
 If you are a Mac or Linux user, you also have the option to **Uninstall** Docker Desktop from your system.
 
 ## Diagnose
+ 
+> **Tip**
+>
+> If you do not find a solution in troubleshooting, browse the GitHub repositories or create a new issue:
+>
+> - [docker/for-mac](https://github.com/docker/for-mac/issues)
+> - [docker/for-win](https://github.com/docker/for-win/issues)
+> - [docker/for-linux](https://github.com/docker/for-linux/issues)
+{ .tip }
 
 ### Diagnose from the app
 
@@ -79,10 +81,10 @@ Docker Desktop cannot start.
    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
    ```
 
-2. Create and upload the diagnostics ID. Run:
+2. Create and upload the diagnostics ID. In PowerShell, run:
 
    ```console
-   $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
+   $ & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" gather -upload
    ```
 
 After the diagnostics have finished, the terminal displays your diagnostics ID and the path to the diagnostics file. The diagnostics ID is composed of your user ID and a timestamp. For example `BE9AFAAF-F68B-41D0-9D12-84760E6B8740/20190905152051`. 
@@ -184,10 +186,10 @@ Docker Desktop contains a self-diagnose tool which can help you identify some co
    $ C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe
    ```
 
-2. Run the self-diagnose tool:
+2. In PowerShell, run the self-diagnose tool:
 
    ```console
-   $ "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
+   $ & "C:\Program Files\Docker\Docker\resources\com.docker.diagnose.exe" check
    ```
 
 {{< /tab >}}

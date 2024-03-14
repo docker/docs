@@ -5,12 +5,11 @@
     class="link"
     href="{{ $url | safeURL }}"
     target="_blank"
-    rel="noopener"
-    >{{ .Text | safeHTML }}<span
-      class="select-none ml-1 align-top text-[1em] material-symbols-rounded"
-      >open_in_new</span
-    ></a
-  >
+    rel="noopener">
+      {{- .Text | safeHTML -}}
+      <span class="pl-1 icon-svg icon-sm">
+        {{- partialCached "icon" "open_in_new" "open_in_new" -}}
+      </span></a>
 {{- else if (strings.HasPrefix $url "/") -}}
   {{/* absolute link, use url as-is */}}
   <a class="link" href="{{ $url }}">{{ .Text | safeHTML }}</a>

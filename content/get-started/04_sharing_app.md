@@ -29,13 +29,13 @@ To push an image, you first need to create a repository on Docker Hub.
 
 In the following image, you can see an example Docker command from Docker Hub. This command will push to this repository.
 
-![Docker command with push example](images/push-command.png)
+![Docker command with push example](images/push-command.webp)
 
 
 ## Push the image
 
 1. In the command line, run the `docker push` command that you see on Docker
-   Hub. Note that your command will have your Docker ID, not "docker".
+   Hub. Note that your command will have your Docker ID, not "docker". For example, `docker push YOUR-USER-NAME/getting-started`.
 
    ```console
    $ docker push docker/getting-started
@@ -71,7 +71,7 @@ new instance that has never seen this container image. To do this, you will use 
 
 > **Note**
 >
-> Play with Docker uses the amd64 platform. If you are using an ARM based Mac with Apple Silicon, you will need to rebuild the image to be compatible with Play with Docker and push the new image to your repository.
+> Play with Docker uses the amd64 platform. If you are using an ARM based Mac with Apple silicon, you will need to rebuild the image to be compatible with Play with Docker and push the new image to your repository.
 >
 > To build an image for the amd64 platform, use the `--platform` flag.
 > ```console
@@ -89,7 +89,7 @@ new instance that has never seen this container image. To do this, you will use 
 
 4. Select the **ADD NEW INSTANCE** option on the left side bar. If you don't see it, make your browser a little wider. After a few seconds, a terminal window opens in your browser.
 
-    ![Play with Docker add new instance](images/pwd-add-new-instance.png)
+    ![Play with Docker add new instance](images/pwd-add-new-instance.webp)
 
 5. In the terminal, start your freshly pushed app.
 
@@ -127,7 +127,7 @@ can use the latest version of the image.
 
 Related information:
 
- - [docker CLI reference](/engine/reference/commandline/cli/)
+ - [docker CLI reference](/reference/cli/docker/)
  - [Multi-platform images](../build/building/multi-platform.md)
  - [Docker Hub overview](../docker-hub/index.md)
 

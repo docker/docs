@@ -1,22 +1,28 @@
 ---
-title: Test your deployment
+title: Test your Node.js deployment
 keywords: deploy, kubernetes, node, node.js
-description: Learn how to develop locally using Kubernetes
+description: Learn how to deploy locally to test and debug your Kubernetes deployment
 ---
 
 ## Prerequisites
 
 - Complete all the previous sections of this guide, starting with [Containerize a Node.js application](containerize.md).
-- [Turn on Kubernetes](/desktop/kubernetes/#turn-on-kubernetes) in Docker Desktop.
+- [Turn on Kubernetes](/desktop/kubernetes/#install-and-turn-on-kubernetes) in Docker Desktop.
 
 ## Overview
 
-In this section, you'll learn how to use Docker Desktop to deploy your application to a fully-featured Kubernetes environment on your development machine. This allows you to test and debug your workloads on Kubernetes locally before deploying.
+In this section, you'll learn how to use Docker Desktop to deploy your
+application to a fully-featured Kubernetes environment on your development
+machine. This allows you to test and debug your workloads on Kubernetes locally
+before deploying.
 
 ## Create a Kubernetes YAML file
 
-In the cloned repository's directory, create a file name `docker-node-kubernetes.yaml`. Open the file in an IDE or text editor and add the following contents.
-Replace `DOCKER_USERNAME/REPO_NAME` with your Docker username and the name of the repository that you created in [Configure CI/CD for your Node.js application](configure-ci-cd.md).
+In the cloned repository's directory, create a file named
+`docker-node-kubernetes.yaml`. Open the file in an IDE or text editor and add
+the following contents. Replace `DOCKER_USERNAME/REPO_NAME` with your Docker
+username and the name of the repository that you created in [Configure CI/CD for
+your Node.js application](configure-ci-cd.md).
 
 ```yaml
 apiVersion: apps/v1
@@ -57,9 +63,10 @@ spec:
 In this Kubernetes YAML file, there are two objects, separated by the `---`:
 
  - A Deployment, describing a scalable group of identical pods. In this case,
-   you'll get just one replica, or copy of your pod, and that pod (which is
-   described under the template: key) has just one container in it, based off of
-    the image built by GitHub Actions in [Configure CI/CD for your Node.js application](configure-ci-cd.md).
+   you'll get just one replica, or copy of your pod. That pod, which is
+   described under `template`, has just one container in it. The container is
+   created from the image built by GitHub Actions in [Configure CI/CD for your
+   Node.js application](configure-ci-cd.md).
  - A NodePort service, which will route traffic from port 30001 on your host to
    port 3000 inside the pods it routes to, allowing you to reach your app
    from the network.

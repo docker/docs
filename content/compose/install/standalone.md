@@ -18,9 +18,9 @@ On this page you can find instructions on how to install Compose standalone on L
 >For example type `docker-compose up` when using Compose standalone, instead of `docker compose up`.
 
 1. To download and install Compose standalone, run:
-  ```console
-  $ curl -SL https://github.com/docker/compose/releases/download/{{% param "compose_version" %}}/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-  ```
+   ```console
+   $ curl -SL https://github.com/docker/compose/releases/download/{{% param "compose_version" %}}/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+   ```
 2. Apply executable permissions to the standalone binary in the target path for the installation.
 3. Test and execute compose commands using `docker-compose`.
 

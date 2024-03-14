@@ -40,11 +40,11 @@ has to be. Build arguments make life easier:
       go build -o /bin/server ./cmd/server
 
   FROM scratch AS client
-  COPY --from=build /bin/client /bin/
+  COPY --from=build-client /bin/client /bin/
   ENTRYPOINT [ "/bin/client" ]
 
   FROM scratch AS server
-  COPY --from=build /bin/server /bin/
+  COPY --from=build-server /bin/server /bin/
   ENTRYPOINT [ "/bin/server" ]
 ```
 
@@ -143,7 +143,7 @@ configurable, and inject values at build-time.
 
 Related information:
 
-- [`ARG` Dockerfile reference](../../engine/reference/builder.md#arg)
+- [`ARG` Dockerfile reference](../../reference/dockerfile.md#arg)
 
 ## Next steps
 

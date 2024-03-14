@@ -37,9 +37,10 @@ You manage OCI artifacts on Docker Hub in a similar way you would container
 images.
 
 Pushing and pulling OCI artifacts to and from a registry is done using a
-registry client. [ORAS CLI](https://oras.land/cli/) is a command-line tool that
-provides the capability of managing OCI artifacts in a registry. If you use Helm
-charts, the [Helm CLI](https://helm.sh/docs/intro/install/) provides built-in
+registry client. [ORAS CLI](https://oras.land/docs/installation)
+is a command-line tool that provides the capability of managing
+OCI artifacts in a registry. If you use Helm charts, the
+[Helm CLI](https://helm.sh/docs/intro/install/) provides built-in
 functionality for pushing and pulling charts to and from a registry.
 
 Registry clients invoke HTTP requests to the Docker Hub registry API. The

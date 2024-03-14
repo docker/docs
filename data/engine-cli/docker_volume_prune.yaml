@@ -1,5 +1,5 @@
 command: docker volume prune
-short: Remove all unused local volumes
+short: Remove unused local volumes
 long: |-
     Remove all unused local volumes. Unused local volumes are those which are not
     referenced by any containers. By default, it only removes anonymous volumes.
@@ -83,6 +83,7 @@ examples: |-
     format is the `label!=...` (`label!=<key>` or `label!=<key>=<value>`), which removes
     volumes without the specified labels.
 deprecated: false
+hidden: false
 min_api_version: "1.25"
 experimental: false
 experimentalcli: false

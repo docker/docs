@@ -1,28 +1,28 @@
 ---
-description: Configuring and troubleshooting the Docker daemon
-keywords: docker, daemon, configuration, troubleshooting
+description: Configuring the Docker daemon
+keywords: docker, daemon, configuration
 title: Docker daemon configuration overview
 aliases:
-- /articles/chef/
-- /articles/configuring/
-- /articles/dsc/
-- /articles/puppet/
-- /config/thirdparty/
-- /config/thirdparty/ansible/
-- /config/thirdparty/chef/
-- /config/thirdparty/dsc/
-- /config/thirdparty/puppet/
-- /engine/admin/
-- /engine/admin/ansible/
-- /engine/admin/chef/
-- /engine/admin/configuring/
-- /engine/admin/dsc/
-- /engine/admin/puppet/
-- /engine/articles/chef/
-- /engine/articles/configuring/
-- /engine/articles/dsc/
-- /engine/articles/puppet/
-- /engine/userguide/
+  - /articles/chef/
+  - /articles/configuring/
+  - /articles/dsc/
+  - /articles/puppet/
+  - /config/thirdparty/
+  - /config/thirdparty/ansible/
+  - /config/thirdparty/chef/
+  - /config/thirdparty/dsc/
+  - /config/thirdparty/puppet/
+  - /engine/admin/
+  - /engine/admin/ansible/
+  - /engine/admin/chef/
+  - /engine/admin/configuring/
+  - /engine/admin/dsc/
+  - /engine/admin/puppet/
+  - /engine/articles/chef/
+  - /engine/articles/configuring/
+  - /engine/articles/dsc/
+  - /engine/articles/puppet/
+  - /engine/userguide/
 ---
 
 This page shows you how to customize the Docker daemon, `dockerd`.
@@ -48,34 +48,31 @@ You can use both of these options together as long as you don't specify the same
 option both as a flag and in the JSON file. If that happens, the Docker daemon
 won't start and prints an error message.
 
-To configure the Docker daemon using a JSON file, create a file at
-`/etc/docker/daemon.json` on Linux systems, or
-`C:\ProgramData\docker\config\daemon.json` on Windows.
+### Configuration file
 
-Here's what the configuration file might look like:
+The following table shows the location where the Docker daemon expects to find
+the configuration file by default, depending on your system and how you're
+running the daemon.
 
-```json
-{
-  "builder": {
-    "gc": {
-      "defaultKeepStorage": "20GB",
-      "enabled": true
-    }
-  },
-  "experimental": false
-}
-```
+| OS and configuration | File location                              |
+| -------------------- | ------------------------------------------ |
+| Linux, regular setup | `/etc/docker/daemon.json`                  |
+| Linux, rootless mode | `~/.config/docker/daemon.json`             |
+| Windows              | `C:\ProgramData\docker\config\daemon.json` |
 
-In addition to Docker Desktop default values, this configuration enables garbage
-collection at a 20GB threshold, and enables buildkit.
+For rootless mode, the daemon respects the `XDG_CONFIG_HOME` variable. If set,
+the expected file location is `$XDG_CONFIG_HOME/docker/daemon.json`.
 
-Using this configuration file, run the Docker daemon in debug mode, using TLS, and
-listen for traffic routed to `192.168.59.3` on port `2376`. You can learn what
-configuration options are available in the
-[dockerd reference docs](../../engine/reference/commandline/dockerd.md#daemon-configuration-file)
+You can also explicitly specify the location of the configuration file on
+startup, using the `dockerd --config-file` flag.
 
-You can also start the Docker daemon manually and configure it using flags. This
-can be useful for troubleshooting problems.
+Learn about the available configuration options in the
+[dockerd reference docs](../../reference/cli/dockerd.md#daemon-configuration-file)
+
+### Configuration using flags
+
+You can also start the Docker daemon manually and configure it using flags.
+This can be useful for troubleshooting problems.
 
 Here's an example of how to manually start the Docker daemon, using the same
 configurations as shown in the previous JSON configuration:
@@ -88,26 +85,13 @@ $ dockerd --debug \
   --host tcp://192.168.59.3:2376
 ```
 
-You can learn what configuration options are available in the
-[dockerd reference docs](../../engine/reference/commandline/dockerd.md), or by
+Learn about the available configuration options in the
+[dockerd reference docs](../../reference/cli/dockerd.md), or by
 running:
 
 ```console
 $ dockerd --help
 ```
-
-Many specific configuration options are discussed throughout the Docker
-documentation. Some places to go next include:
-
-- [Automatically start containers](../containers/start-containers-automatically.md)
-- [Limit a container's resources](../containers/resource_constraints.md)
-- [Configure storage drivers](../../storage/storagedriver/select-storage-driver.md)
-- [Container security](../../engine/security/index.md)
-
-You can configure most daemon options using the `daemon.json` file. One thing
-you can't configure using daemon.json mechanism is an HTTP proxy. For
-instructions on using a proxy, see
-[Configure Docker to use a proxy server](../../network/proxy.md).
 
 ## Daemon data directory
 
@@ -133,3 +117,14 @@ Since the state of a Docker daemon is kept on this directory, make sure you use
 a dedicated directory for each daemon. If two daemons share the same directory,
 for example, an NFS share, you are going to experience errors that are difficult
 to troubleshoot.
+
+## Next steps
+
+Many specific configuration options are discussed throughout the Docker
+documentation. Some places to go next include:
+
+- [Automatically start containers](../containers/start-containers-automatically.md)
+- [Limit a container's resources](../containers/resource_constraints.md)
+- [Configure storage drivers](../../storage/storagedriver/select-storage-driver.md)
+- [Container security](../../engine/security/_index.md)
+- [Configure the Docker daemon to use a proxy](./systemd.md#httphttps-proxy)

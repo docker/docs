@@ -1,15 +1,11 @@
 ---
-description: Frequently asked questions
+description: Frequently asked questions for Docker Desktop for Mac
 keywords: desktop, mac, faqs
-title: FAQs for Mac
+title: FAQs for Docker Desktop for Mac
 aliases:
 - /desktop/mac/space/
 - /docker-for-mac/space/
 ---
-
-### What is Docker.app?
-
-`Docker.app` is Docker Desktop on Mac. It bundles the Docker client and Docker Engine. `Docker.app` uses the macOS Hypervisor.framework to run containers.
 
 ### What is HyperKit?
 
@@ -26,7 +22,7 @@ HyperKit is thinner than VirtualBox and VMWare fusion, and the version included 
 
 The privileged helper process `com.docker.vmnetd` is started by `launchd` and
 runs in the background. The process does not consume any resources unless
-Docker.app connects to it, so it's safe to ignore.
+`Docker.app` connects to it, so it's safe to ignore.
 
 ### Where does Docker Desktop store Linux containers and images? 
 Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Mac filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory.
@@ -51,11 +47,14 @@ To move the disk image file to a different location:
 
 1. Select **Settings** then  **Advanced** from the **Resources** tab.
 
-2. In the **Disk image location** section, click **Browse** and choose a new location for the disk image.
+2. In the **Disk image location** section, select **Browse** and choose a new location for the disk image.
 
-3. Click **Apply & Restart** for the changes to take effect.
+3. Select **Apply & Restart** for the changes to take effect.
 
-Do not move the file directly in Finder as this can cause Docker Desktop to lose track of the file.
+>**Important**
+>
+> Do not move the file directly in Finder as this can cause Docker Desktop to lose track of the file.
+{ .important }
 
 ##### How do I delete unnecessary containers and images?
 
@@ -71,7 +70,7 @@ Alternatively, to list images, run:
 $ docker image ls
 ```
 
-and then, to list containers, run:
+To list containers, run:
 
 ```console
 $ docker container ls -a
@@ -85,10 +84,10 @@ $ docker system prune
 
 This command removes all stopped containers, unused networks, dangling images, and build cache.
 
-It might take a few minutes to reclaim space on the host depending on the format of the disk image file:
+It might take a few minutes to reclaim space on the host depending on the format of the disk image file. If the file is name:
 
-- If the file is named `Docker.raw`: space on the host should be reclaimed within a few seconds.
-- If the file is named `Docker.qcow2`: space will be freed by a background process after a few minutes.
+- `Docker.raw`, space on the host is reclaimed within a few seconds.
+- `Docker.qcow2`, space is freed by a background process after a few minutes.
 
 Space is only freed when images are deleted. Space is not freed automatically when files are deleted inside running containers. To trigger a space reclamation at any point, run the command:
 
@@ -115,9 +114,9 @@ To reduce the maximum size of the disk image file:
 
 2. The **Disk image size** section contains a slider that allows you to change the maximum size of the disk image. Adjust the slider to set a lower limit.
 
-3. Click **Apply & Restart**.
+3. Select **Apply & Restart**.
 
-When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images will be lost.
+When you reduce the maximum size, the current disk image file is deleted, and therefore, all containers and images are lost.
 
 ### How do I add TLS certificates?
 
@@ -184,7 +183,7 @@ Desktop `xhyve` virtual machine).
 If you have this directory structure, you do not need to manually add the CA
 certificate to your Mac OS system login:
 
-```
+```text
 /Users/<user>/.docker/certs.d/
 └── <MyRegistry>:<Port>
    ├── ca.crt
@@ -195,7 +194,7 @@ certificate to your Mac OS system login:
 The following further illustrates and explains a configuration with custom
 certificates:
 
-```
+```text
 /etc/docker/certs.d/        <-- Certificate directory
 └── localhost:5000          <-- Hostname:port
    ├── client.cert          <-- Client certificate
@@ -207,7 +206,7 @@ certificates:
 You can also have this directory structure, as long as the CA certificate is
 also in your keychain.
 
-```
+```text
 /Users/<user>/.docker/certs.d/
 └── <MyRegistry>:<Port>
     ├── client.cert
@@ -221,7 +220,7 @@ in the Docker Engine topics.
 
 ### How do I install shell completion?
 
-Docker Desktop comes with scripts to enable completion for the `docker` and `docker-compose` commands. The completion scripts may be
+Docker Desktop comes with scripts to enable completion for the `docker` and `docker compose` commands. The completion scripts may be
 found inside `Docker.app`, in the `Contents/Resources/etc/` directory and can be
 installed both in Bash and Zsh.
 

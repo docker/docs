@@ -5,31 +5,31 @@ title: Manage swarm service networks
 toc_max: 3
 ---
 
-This topic discusses how to manage the application data for your swarm services.
-
+This page describes networking for swarm services.
 
 ## Swarm and types of traffic
+
 A Docker swarm generates two different kinds of traffic:
 
-- **Control and management plane traffic**: This includes swarm management
+- Control and management plane traffic: This includes swarm management
   messages, such as requests to join or leave the swarm. This traffic is
   always encrypted.
 
-- **Application data plane traffic**: This includes container traffic and
+- Application data plane traffic: This includes container traffic and
   traffic to and from external clients.
 
 ## Key network concepts
 
 The following three network concepts are important to swarm services:
 
-- **Overlay networks** manage communications among the Docker daemons
+- Overlay networks manage communications among the Docker daemons
   participating in the swarm. You can create overlay networks, in the same way
   as user-defined networks for standalone containers. You can attach a service
   to one or more existing overlay networks as well, to enable service-to-service
   communication. Overlay networks are Docker networks that use the `overlay`
   network driver.
 
-- The **ingress network** is a special overlay network that facilitates
+- The ingress network is a special overlay network that facilitates
   load balancing among a service's nodes. When any swarm node receives a
   request on a published port, it hands that request off to a module called
   `IPVS`. `IPVS` keeps track of all the IP addresses participating in that
@@ -40,7 +40,7 @@ The following three network concepts are important to swarm services:
   swarm. Most users do not need to customize its configuration, but Docker allows
   you to do so.
 
-- The **docker_gwbridge** is a bridge network that connects the overlay
+- The docker_gwbridge is a bridge network that connects the overlay
   networks (including the `ingress` network) to an individual Docker daemon's
   physical network. By default, each container a service is running is connected
   to its local Docker daemon host's `docker_gwbridge` network.
@@ -49,7 +49,10 @@ The following three network concepts are important to swarm services:
   join a swarm. Most users do not need to customize its configuration, but
   Docker allows you to do so.
 
-> **See also** [Networking overview](../../network/index.md) for more details about Swarm networking in general.
+> **Tip**
+>
+> See also [Networking overview](../../network/index.md) for more details about Swarm networking in general.
+{ .tip }
 
 ## Firewall considerations
 
@@ -63,7 +66,19 @@ When setting up networking in a Swarm, special care should be taken. Consult
 the [tutorial](swarm-tutorial/index.md#open-protocols-and-ports-between-the-hosts)
 for an overview.
 
-## Create an overlay network
+## Overlay networking
+
+When you initialize a swarm or join a Docker host to an existing swarm, two
+new networks are created on that Docker host:
+
+- An overlay network called `ingress`, which handles the control and data traffic
+  related to swarm services. When you create a swarm service and do not
+  connect it to a user-defined overlay network, it connects to the `ingress`
+  network by default.
+- A bridge network called `docker_gwbridge`, which connects the individual
+  Docker daemon to the other daemons participating in the swarm.
+
+### Create an overlay network
 
 To create an overlay network, specify the `overlay` driver when using the
 `docker network create` command:
@@ -216,7 +231,9 @@ Multiple pools can be configured if discontiguous address space is required. How
 
 The default mask length can be configured and is the same for all networks. It is set to `/24` by default. To change the default subnet mask length, use the `--default-addr-pool-mask-length` command line option.
 
-> **Note**: Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation.
+> **Note**
+>
+> Default address pools can only be configured on `swarm init` and cannot be altered after cluster creation.
 
 ##### Overlay network size limitations
 
@@ -269,7 +286,7 @@ from any swarm node which is joined to the swarm and is in a `running` state.
 
 ### Configure service discovery
 
-**Service discovery** is the mechanism Docker uses to route a request from your
+Service discovery is the mechanism Docker uses to route a request from your
 service's external clients to an individual swarm node, without the client
 needing to know how many nodes are participating in the service or their
 IP addresses or ports. You don't need to publish ports which are used between
@@ -348,7 +365,9 @@ services which publish ports, such as a WordPress service which publishes port
       my-ingress
     ```
 
-    > **Note**: You can name your `ingress` network something other than
+    > **Note**
+    >
+    > You can name your `ingress` network something other than
     > `ingress`, but you can only have one. An attempt to create a second one
     > fails.
 
@@ -377,7 +396,7 @@ order to delete an existing bridge. The package name is `bridge-utils`.
 
 4.  Create or re-create the `docker_gwbridge` bridge with your custom settings.
     This example uses the subnet `10.11.0.0/16`. For a full list of customizable
-    options, see [Bridge driver options](../reference/commandline/network_create.md#bridge-driver-options).
+    options, see [Bridge driver options](../../reference/cli/docker/network/create.md#bridge-driver-options).
 
     ```console
     $ docker network create \
@@ -425,10 +444,40 @@ $ docker swarm join \
   192.168.99.100:2377
 ```
 
+## Publish ports on an overlay network
+
+Swarm services connected to the same overlay network effectively expose all
+ports to each other. For a port to be accessible outside of the service, that
+port must be _published_ using the `-p` or `--publish` flag on `docker service
+create` or `docker service update`. Both the legacy colon-separated syntax and
+the newer comma-separated value syntax are supported. The longer syntax is
+preferred because it is somewhat self-documenting.
+
+<table>
+<thead>
+<tr>
+<th>Flag value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tr>
+<td><tt>-p 8080:80</tt> or<br /><tt>-p published=8080,target=80</tt></td>
+<td>Map TCP port 80 on the service to port 8080 on the routing mesh.</td>
+</tr>
+<tr>
+<td><tt>-p 8080:80/udp</tt> or<br /><tt>-p published=8080,target=80,protocol=udp</tt></td>
+<td>Map UDP port 80 on the service to port 8080 on the routing mesh.</td>
+</tr>
+<tr>
+<td><tt>-p 8080:80/tcp -p 8080:80/udp</tt> or <br /><tt>-p published=8080,target=80,protocol=tcp -p published=8080,target=80,protocol=udp</tt></td>
+<td>Map TCP port 80 on the service to TCP port 8080 on the routing mesh, and map UDP port 80 on the service to UDP port 8080 on the routing mesh.</td>
+</tr>
+</table>
+
 ## Learn more
 
 * [Deploy services to a swarm](services.md)
 * [Swarm administration guide](admin_guide.md)
 * [Swarm mode tutorial](swarm-tutorial/index.md)
 * [Networking overview](../../network/index.md)
-* [Docker CLI reference](../reference/commandline/docker.md)
+* [Docker CLI reference](../../reference/cli/docker/)

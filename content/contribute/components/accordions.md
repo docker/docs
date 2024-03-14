@@ -16,7 +16,7 @@ $ docker run hello-world
 
 ## Markup
 
-````
+````markdown
 {{</* accordion title="Accordion example" */>}}
 
 ```console

@@ -2,14 +2,15 @@ command: docker scout compare
 aliases: docker scout compare, docker scout diff
 short: Compare two images and display differences (experimental)
 long: |-
-    The `docker scout compare` command analyzes two images and displays a comparison of both.
+    The `docker scout compare` command analyzes two images and displays a comparison.
 
     > This command is **experimental** and its behaviour might change in the future
 
-    The main usage is to compare two versions of the same image.
-    For instance when a new image is built and compared to the version running in production.
+    The intended use of this command is to compare two versions of the same image.
+    For instance, when a new image is built and compared to the version running in production.
 
-    If no image is specified, the most recently built image will be used.
+    If no image is specified, the most recently built image is used
+    as a comparison target.
 
     The following artifact types are supported:
 
@@ -17,8 +18,6 @@ long: |-
     - OCI layout directories
     - Tarball archives, as created by `docker save`
     - Local directory or file
-
-    The tool analyzes the provided software artifact, and generates a vulnerability report.
 
     By default, the tool expects an image reference, such as:
 
@@ -33,7 +32,7 @@ long: |-
     - `local://` use an image from the local image store (don't do a registry lookup)
     - `registry://` use an image from a registry (don't use a local image)
     - `oci-dir://` use an OCI layout directory
-    - `archive://` use a tarball archive, as created by docker save
+    - `archive://` use a tarball archive, as created by `docker save`
     - `fs://` use a local directory or file
 usage: docker scout compare --to IMAGE|DIRECTORY|ARCHIVE [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
@@ -44,6 +43,18 @@ options:
       value_type: bool
       default_value: "false"
       description: Return exit code '2' if vulnerability changes are detected
+      deprecated: true
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: exit-on
+      shorthand: x
+      value_type: stringSlice
+      default_value: '[]'
+      description: |
+        Comma separated list of conditions to fail the action step if worse, options are: vulnerability, policy
       deprecated: false
       hidden: false
       experimental: false
@@ -167,7 +178,7 @@ options:
     - option: output
       shorthand: o
       value_type: string
-      description: Write the report to a file.
+      description: Write the report to a file
       deprecated: false
       hidden: false
       experimental: false
@@ -187,7 +198,7 @@ options:
       value_type: string
       description: |-
         Reference to use if the provided tarball contains multiple references.
-        Can only be used with archive.
+        Can only be used with archive
       deprecated: false
       hidden: false
       experimental: false
@@ -247,6 +258,16 @@ inherited_options:
       value_type: bool
       default_value: "false"
       description: Debug messages
+      deprecated: false
+      hidden: true
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: verbose-debug
+      value_type: bool
+      default_value: "false"
+      description: Verbose debug
       deprecated: false
       hidden: true
       experimental: false

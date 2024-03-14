@@ -4,7 +4,7 @@
 {{- $linux := .Get "linux" -}}
 {{- $version := .Get "version" -}}
 {{- $build_path := .Get "build_path" -}}
-<blockquote {{ if eq $build_path "/" }}class="tip" {{ end }}>
+<blockquote {{ if eq $build_path "/" }} class="tip" {{ end }}>
   <p>Download Docker Desktop</p>
   <p>
     {{- if or $all $win }}
@@ -17,11 +17,11 @@
     <a target="_blank" rel="noopener" href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}Docker.dmg">Mac
       with Apple chip</a>
     (<a target="_blank" rel="noopener"
-      href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}checksums.txt">checksum</a>)
+      href="https://desktop.docker.com/mac/main/arm64{{ $build_path }}checksums.txt">checksum</a>) |
     <a target="_blank" rel="noopener" href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}Docker.dmg">Mac
       with Intel chip</a>
     (<a target="_blank" rel="noopener"
-      href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}checksums.txt">checksum</a>) |
+      href="https://desktop.docker.com/mac/main/amd64{{ $build_path }}checksums.txt">checksum</a>)
     {{ end -}}
     {{- if or $all $linux }}
     |

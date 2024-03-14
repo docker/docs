@@ -14,34 +14,34 @@ Docker Hub limits the number of Docker image downloads, or pulls, based on the a
 | [Authenticated users](#how-do-i-authenticate-pull-requests)| 200 pulls per 6 hour period |
 | Users with a paid [Docker subscription](https://www.docker.com/pricing) | Up to 5000 pulls per day |
 
-If you require a higher number of pulls, you can also purchase an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
+If you require a higher number of pulls, you can also buy an [Enhanced Service Account add-on](service-accounts.md#enhanced-service-account-add-on-pricing).
 
-Some images are unlimited through our [Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/) and [Publisher](https://www.docker.com/partners/programs) programs. See [Docker Pricing](https://www.docker.com/pricing) and [Resource Consumption Updates FAQ](https://www.docker.com/pricing/resource-consumption-updates) for details.
 
 ## Definition of limits
 
 A user's limit is equal to the highest entitlement of their
 personal account or any organization they belong to. To take 
-advantage of this, you must log in to 
+advantage of this, you must sign in to 
 [Docker Hub](https://hub.docker.com/) 
 as an authenticated user. For more information, see
 [How do I authenticate pull requests](#how-do-i-authenticate-pull-requests). 
 Unauthenticated (anonymous) users will have the limits enforced via IP.
 
+- Pulls are accounted to the user doing the pull, not to the owner of the image.
 - A pull request is defined as up to two `GET` requests on registry 
 manifest URLs (`/v2/*/manifests/*`).
 - A normal image pull makes a 
 single manifest request.
 - A pull request for a multi-arch image makes two 
 manifest requests. 
-- `HEAD` requests aren't counted. 
-
+- `HEAD` requests aren't counted.
+- Some images are unlimited through our [Docker Sponsored Open Source](https://www.docker.com/blog/expanded-support-for-open-source-software-projects/) and [Docker Verified Publisher](https://www.docker.com/partners/programs) programs.
 
 ## How do I know my pull requests are being limited?
 
 When you issue a pull request and you are over the limit, Docker Hub returns a `429` response code with the following body when the manifest is requested:
 
-```
+```text
 You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limits
 ```
 
@@ -51,7 +51,7 @@ This error message appears in the Docker CLI or in the Docker Engine logs.
 
 Valid API requests to Hub usually include the following rate limit headers in the response:
 
-```
+```text
 ratelimit-limit    
 ratelimit-remaining
 docker-ratelimit-source
@@ -89,7 +89,7 @@ ratelimit-remaining: 76;w=21600
 docker-ratelimit-source: 192.0.2.1
 ```
 
-In the example above, the pull limit is 100 pulls per 21600 seconds (6 hours), and there are 76 pulls remaining.
+In the previous example, the pull limit is 100 pulls per 21600 seconds (6 hours), and there are 76 pulls remaining.
 
 ### I don't see any RateLimit headers
 
@@ -113,11 +113,11 @@ Select **Sign in / Create Docker ID** from the Docker Desktop menu and follow th
 
 ### Docker Engine
 
-If you're using a standalone version of Docker Engine, run the `docker login` command from a terminal to authenticate with Docker Hub. For information on how to use the command, see [docker login](../engine/reference/commandline/login.md).
+If you're using a standalone version of Docker Engine, run the `docker login` command from a terminal to authenticate with Docker Hub. For information on how to use the command, see [docker login](../reference/cli/docker/login.md).
 
 ### Docker Swarm
 
-If you're running Docker Swarm, you must use the `-- with-registry-auth` flag to authenticate with Docker Hub. For more information, see [Create a service](../engine/reference/commandline/service_create.md/#create-a-service). If you are using a Docker Compose file to deploy an application stack, see [docker stack deploy](../engine/reference/commandline/stack_deploy.md).
+If you're running Docker Swarm, you must use the `-- with-registry-auth` flag to authenticate with Docker Hub. For more information, see [Create a service](../reference/cli/docker/service/create.md/#create-a-service). If you are using a Docker Compose file to deploy an application stack, see [docker stack deploy](../reference/cli/docker/stack/deploy.md).
 
 ### GitHub Actions
 

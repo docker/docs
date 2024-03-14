@@ -8,20 +8,33 @@ toc_max: 3
 
 - A small image: ![a small image](/assets/images/footer_moby_icon.png)
 
-- Images will by default occupy the full width of the reading column, if they are big enough:
+- Large images occupy the full width of the reading column by default:
 
   ![a pretty wide image](/assets/images/banner_image_24512.png)
 
-- Image size can be set using URL query parameters: ![a pretty wide image](/assets/images/banner_image_24512.png?w=100&h=50)
+- Image size can be set using query parameters: `?h=<height>&w=<width>`
+
+  ![a pretty wide image](/assets/images/banner_image_24512.png?w=100&h=50)
+
+- Image with a border, also set with a query parameter: `?border=true`
+
+  ![a small image](/assets/images/footer_moby_icon.png?border=true)
+
 
 ## HTML and Markdown
 
 ```markdown
 - A small image: ![a small image](/assets/images/footer_moby_icon.png)
 
-- Images will by default occupy the full width of the reading column, if they are big enough:
+- Large images occupy the full width of the reading column by default:
 
   ![a pretty wide image](/assets/images/banner_image_24512.png)
 
-- Image size can be set using URL query parameters (`h` and `w`): ![a pretty wide image](/assets/images/banner_image_24512.png?w=100&h=50)
+- Image size can be set using query parameters: `?h=<height>&w=<width>`
+
+  ![a pretty wide image](/assets/images/banner_image_24512.png?w=100&h=50)
+
+- Image with a border, also set with a query parameter: `?border=true`
+
+  ![a small image](/assets/images/footer_moby_icon.png?border=true)
 ```

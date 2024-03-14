@@ -2,17 +2,17 @@
 {{ $ctx := . }}
 
 
-<nav class="py-4 gap-4 flex items-center overflow-hidden text-gray-light dark:text-gray-dark">
+<nav id="breadcrumbs" class="py-4 gap-4 flex items-center text-gray-light dark:text-gray-dark max-w-full min-w-0">
   {{ with ($scratch.GetSortedMapValues "sections") }}
     {{ range $i, $e := . }}
       {{- if $i -}}
         <span>/</span>
       {{- end -}}
-      <a href="{{ $e.path }}" class="link whitespace-nowrap">{{ markdownify $e.title }}</a>
+      <a href="{{ $e.path }}" class="link truncate">{{ markdownify $e.title }}</a>
     {{- end -}}
   {{- end -}}
   {{- with $scratch.Get "lastsection" -}}
   <span>/</span>
-  <span>{{ markdownify .title }}</span>
+  <span class="truncate">{{ markdownify .title }}</span>
   {{- end -}}
 </nav>

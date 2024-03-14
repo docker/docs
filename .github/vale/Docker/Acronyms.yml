@@ -5,11 +5,15 @@ level: warning
 ignorecase: false
 # Ensures that the existence of 'first' implies the existence of 'second'.
 first: '\b([A-Z]{3,5})\b'
-second: '(?:\b[A-Z][a-z]+(?: |\n))+\(([A-Z]{3,5})\)'
+second: '(?:\b[A-Za-z]+(?: |\n))+\(([A-Z]{3,5})\)'
 # ... with the exception of these:
 exceptions:
   - API
+  - BIOS
+  - FUSE
+  - ARM
   - ASP
+  - AWS
   - CLI
   - CPU
   - CSS
@@ -43,6 +47,7 @@ exceptions:
   - PATH
   - PDF
   - PHP
+  - POSIX
   - POST
   - RAM
   - REPL
@@ -62,6 +67,7 @@ exceptions:
   - URL
   - USB
   - UTF
+  - WSL
   - XML
   - XSS
   - YAML

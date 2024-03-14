@@ -18,7 +18,7 @@ As opposed to volumes and bind mounts, a `tmpfs` mount is temporary, and only
 persisted in the host memory. When the container stops, the `tmpfs` mount is
 removed, and files written there won't be persisted.
 
-![tmpfs on the Docker host](images/types-of-mounts-tmpfs.png)
+![tmpfs on the Docker host](images/types-of-mounts-tmpfs.webp?w=450&h=300)
 
 This is useful to temporarily store sensitive files that you don't want to
 persist in either the host or the container writable layer.
@@ -35,10 +35,10 @@ containers.
 In general, `--mount` is more explicit and verbose. The biggest difference is
 that the `--tmpfs` flag does not support any configurable options.
 
-- **`--tmpfs`**: Mounts a `tmpfs` mount without allowing you to specify any
+- `--tmpfs`: Mounts a `tmpfs` mount without allowing you to specify any
   configurable options, and can only be used with standalone containers.
 
-- **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
+- `--mount`: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `--tmpfs`:
   - The `type` of the mount, which can be [`bind`](bind-mounts.md), `volume`, or
@@ -78,7 +78,7 @@ $ docker run -d \
 ```
 
 {{< /tab >}}
-{{< tab name="`-v`" >}}
+{{< tab name="`--tmpfs`" >}}
 
 ```console
 $ docker run -d \

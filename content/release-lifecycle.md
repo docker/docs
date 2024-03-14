@@ -1,6 +1,6 @@
 ---
-title: Product release lifecycle
-description: describes to users the various stages of feature lifecycle from beta
+title: Docker's product release lifecycle 
+description: Describes the various stages of feature lifecycle from beta
   to GA.
 keywords: beta, GA, Early Access,
 ---
@@ -26,7 +26,7 @@ Experimental offerings are features that Docker is currently experimenting with.
 
 **Customer availability:** Availability of experimental features is limited. A portion of users may have access to none, one or many experimental features. 
 
-**Support:** Support for Experimental features is best effort via Community support channels and forums.
+**Support:** Support for experimental features is best effort via Community support channels and forums.
 
 **Limitations:** Experimental features may have potentially significant limitations such as functional limitations, performance limitations, and API limitations. Features and programmatic interfaces may change at any time without notice.
 
@@ -38,7 +38,7 @@ Beta offerings are initial releases of potential future products or features. Cu
 
 **Customer availability:** Participation in beta releases is by invitation or via use of clearly identified beta features in product. Beta invitations may be public or private.
 
-**Support:** Support for Beta features is best effort via Community support channels and forums.
+**Support:** Support for beta features is best effort via Community support channels and forums.
 
 **Limitations:** Beta releases may have potentially significant limitations such as functional limitations, performance limitations, and API limitations. Features and programmatic interfaces may change at any time without notice.
 
@@ -60,11 +60,11 @@ Early Access offerings are products or features that may have potential feature 
 
 General Availability offerings are fully functional products or features that are openly accessible to all Docker customers.
 
-**Customer availability:** All Docker users have access to General Availability offerings according to their subscription levels.
+**Customer availability:** All Docker users have access to GA offerings according to their subscription levels.
 
 **Limitations:** General Availability features and products will have few or no limitations for supported use cases.
 
-**Support:** All General Availability offerings are fully supported, as described in our [support page](https://www.docker.com/support/).
+**Support:** All GA offerings are fully supported, as described in our [support page](https://www.docker.com/support/).
 
 **Retirement:** General Availability offerings follow the [retirement process](#retirement-process) outlined below.
 

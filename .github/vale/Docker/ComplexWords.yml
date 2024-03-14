@@ -3,14 +3,12 @@ message: "Consider using '%s' instead of '%s'."
 ignorecase: true
 level: suggestion
 swap:
-  accelerate: speed up
   accentuate: stress
   accompany: go with
   accomplish: carry out|do
   accorded: given
   accordingly: so
   accrue: add
-  accurate: right|exact
   acquiesce: agree
   acquire: get|buy
   addressees: you
@@ -38,13 +36,11 @@ swap:
   confer: give|award
   consequently: so
   consolidate: merge
-  constitutes: forms
   convene: meet
   demonstrate: show|prove
   depart: leave
   designate: choose
   desire: want|wish
-  determine: decide|find
   detrimental: bad|harmful
   disclose: share|tell
   discontinue: stop
@@ -60,7 +56,6 @@ swap:
   equivalent: equal
   exclusively: only
   expedite: hurry
-  facilitate: ease
   females: women
   finalize: complete|finish
   illustrate: show

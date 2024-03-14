@@ -1,21 +1,20 @@
 ---
 description: Containerize Rust apps using Docker
 keywords: Docker, getting started, Rust, language
-title: What will you learn in this module?
+title: Rust language-specific guide
 toc_min: 1
 toc_max: 2
 ---
 
 The Rust language-specific guide teaches you how to create a containerized Rust application using Docker. In this guide, you'll learn how to:
 
-* Create a sample Rust application
-* Create a new Dockerfile which contains instructions required to build a Rust image
+* Containerize a Rust application
 * Build an image and run the newly built image as a container
 * Set up volumes and networking
 * Orchestrate containers using Compose
 * Use containers for development
 * Configure a CI/CD pipeline for your application using GitHub Actions
-* Deploy your application to the cloud
+* Deploy your containerized Rust application locally to Kubernetes to test and debug your deployment
 
 After completing the Rust modules, you should be able to containerize your own Rust application based on the examples and instructions provided in this guide.
 

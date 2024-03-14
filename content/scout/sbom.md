@@ -4,9 +4,9 @@ description: Use Docker Scout to extract the SBOM for your project.
 keywords: scout, supply chain, sbom, software bill of material, spdx
 ---
 
-As part of [image analysis](./image-analysis.md), Docker Scout generates a
-Software Bill of Material (SBOM) for your project. The SBOM uses the Software
-Package Data Exchange (SPDX) format.
+[Image analysis](./image-analysis.md) uses image SBOMs to understand what packages and versions an image contains.
+Docker Scout uses SBOM attestations if available on the image (recommended).
+If no SBOM attestation is available, Docker Scout creates one by indexing the image contents.
 
 ## View from CLI
 
@@ -18,14 +18,14 @@ $ docker scout sbom [IMAGE]
 ```
 
 By default, this prints the SBOM in a JSON format to stdout.
+The default JSON format produced by `docker scout sbom` isn't SPDX-JSON.
+To output SPDX, use the `--format spdx` flag:
 
-> **Note**
->
-> The JSON format produced by `docker scout sbom` is not SPDX-JSON. To generate
-> SPDX, use the SBOM generator plugin for BuildKit, see [Attach the SBOM as a
-> build attestation](#attest).
+```console
+$ docker scout sbom --format spdx [IMAGE]
+```
 
-Use the `--format list` flag to generate a human-readable output.
+To generate a human-readable list, use the `--format list` flag:
 
 ```console
 $ docker scout sbom --format list alpine
@@ -54,37 +54,32 @@ $ docker scout sbom --format list alpine
 ```
 
 For more information about the `docker scout sbom` command, refer to the [CLI
-reference](../engine/reference/commandline/scout_sbom.md).
+reference](../reference/cli/docker/scout/sbom.md).
 
 ## Attach as build attestation {#attest}
 
 You can generate the SBOM and attach it to the image at build-time as an
 [attestation](../build/attestations/_index.md). BuildKit provides a default
-SBOM generator which is different from what Docker Scout uses. You can swap out
-the default generator and replace it with the Docker Scout SBOM generator,
-which creates richer results and ensures better compatibility with the Docker
-Scout image analysis.
+SBOM generator which is different from what Docker Scout uses.
+You can configure BuildKit to use the Docker Scout SBOM generator
+using the `--attest` flag for the `docker build` command.
+The Docker Scout SBOM indexer provides richer results
+and ensures better compatibility with the Docker Scout image analysis.
 
 ```console
 $ docker build --tag <org>/<image> \
-  --attest type=sbom,generator=docker/scout-sbom-indexer:d3f9c2d \
+  --attest type=sbom,generator=docker/scout-sbom-indexer:latest \
   --push .
 ```
 
-> **Note**
->
-> The Docker Scout SBOM generator is currently only published under the tag
-> `d3f9c2d`.
-
-The default, non-containerd image store doesn't currently support images with
-attestations. To build images with SBOM attestations, you can either turn on
-the [containerd image store](../desktop/containerd/_index.md) feature, or use a
+To build images with SBOM attestations, you must either turn on
+the [containerd image store](../desktop/containerd.md) feature, or use a
 `docker-container` builder together with the `--push` flag to push the image
 (with attestations) directly to a registry.
 
 ## Extract to file
 
-The command for extracting the SBOM of an image to an SDPX JSON file is
+The command for extracting the SBOM of an image to an SPDX JSON file is
 different depending on whether the image has been pushed to a registry or if
 it's a local image.
 
@@ -100,7 +95,7 @@ $ docker buildx imagetools inspect <image> --format "{{ json .SBOM }}" > sbom.sp
 
 ### Local image
 
-To extract the SDPX file for a local image, build the image with the `local`
+To extract the SPDX file for a local image, build the image with the `local`
 exporter and use the `scout-sbom-indexer` SBOM generator plugin.
 
 The following command saves the SBOM to a file at `build/sbom.spdx.json`.

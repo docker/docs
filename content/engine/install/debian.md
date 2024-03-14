@@ -1,6 +1,7 @@
 ---
-description: Instructions for installing Docker Engine on Debian
-keywords: requirements, apt, installation, debian, install, uninstall, upgrade, update
+description: Learn how to install Docker Engine on Debian. These instructions cover
+  the different installation methods, how to uninstall, and next steps.
+keywords: requirements, apt, installation, debian, install, uninstall, install debian, docker engine, install docker engine, upgrade, update
 title: Install Docker Engine on Debian
 toc_max: 4
 aliases:
@@ -37,11 +38,10 @@ and ppc64le (ppc64el) architectures.
 
 ### Uninstall old versions
 
-Before you can install Docker Engine, you must first make sure that any
-conflicting packages are uninstalled.
+Before you can install Docker Engine, you need to uninstall any conflicting packages.
 
-Distro maintainers provide an unofficial distribution of Docker packages in
-their repositories. You must uninstall these packages before you can install the 
+Distro maintainers provide unofficial distributions of Docker packages in
+their repositories. You must uninstall these packages before you can install the
 official version of Docker Engine.
 
 The unofficial packages to uninstall are:
@@ -78,33 +78,33 @@ You can install Docker Engine in different ways, depending on your needs:
   the easiest and quickest way to get started.
 
 - Set up and install Docker Engine from
-  [Docker's Apt repository](#install-using-the-repository).
+  [Docker's `apt` repository](#install-using-the-repository).
 
 - [Install it manually](#install-from-a-package) and manage upgrades manually.
 
-- Use a [convenience scripts](#install-using-the-convenience-script). Only
+- Use a [convenience script](#install-using-the-convenience-script). Only
   recommended for testing and development environments.
 
-### Install using the Apt repository {#install-using-the-repository}
+### Install using the `apt` repository {#install-using-the-repository}
 
 Before you install Docker Engine for the first time on a new host machine, you
-need to set up the Docker Apt repository. Afterward, you can install and update
+need to set up the Docker `apt` repository. Afterward, you can install and update
 Docker from the repository.
 
-1. Set up Docker's Apt repository.
+1. Set up Docker's `apt` repository.
 
    ```bash
    # Add Docker's official GPG key:
    sudo apt-get update
-   sudo apt-get install ca-certificates curl gnupg
+   sudo apt-get install ca-certificates curl
    sudo install -m 0755 -d /etc/apt/keyrings
-   curl -fsSL {{% param "download-url-base" %}}/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-   sudo chmod a+r /etc/apt/keyrings/docker.gpg
+   sudo curl -fsSL {{% param "download-url-base" %}}/gpg -o /etc/apt/keyrings/docker.asc
+   sudo chmod a+r /etc/apt/keyrings/docker.asc
 
    # Add the repository to Apt sources:
    echo \
-     "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] {{% param "download-url-base" %}} \
-     "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] {{% param "download-url-base" %}} \
+     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
    sudo apt-get update
    ```
@@ -143,15 +143,15 @@ Docker from the repository.
    # List the available versions:
    $ apt-cache madison docker-ce | awk '{ print $3 }'
 
-   5:24.0.0-1~debian.11~bullseye
-   5:23.0.6-1~debian.11~bullseye
+   5:25.0.0-1~debian.12~bookworm
+   5:24.0.7-1~debian.12~bookworm
    ...
    ```
 
    Select the desired version and install:
 
    ```console
-   $ VERSION_STRING=5:24.0.0-1~debian.11~bullseye
+   $ VERSION_STRING=5:25.0.0-1~debian.12~bookworm
    $ sudo apt-get install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
    ```
   
@@ -184,6 +184,7 @@ If you can't use Docker's `apt` repository to install Docker Engine, you can
 download the `deb` file for your release and install it manually. You need to
 download a new file each time you want to upgrade Docker Engine.
 
+<!-- markdownlint-disable-next-line -->
 1. Go to [`{{% param "download-url-base" %}}/dists/`]({{% param "download-url-base" %}}/dists/).
 
 2. Select your Debian version in the list.

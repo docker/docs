@@ -8,7 +8,7 @@ aliases:
 
 Bind mounts have been around since the early days of Docker. Bind mounts have
 limited functionality compared to [volumes](volumes.md). When you use a bind
-mount, a file or directory on the _host machine_ is mounted into a container.
+mount, a file or directory on the host machine is mounted into a container.
 The file or directory is referenced by its absolute path on the host
 machine. By contrast, when you use a volume, a new directory is created within
 Docker's storage directory on the host machine, and Docker manages that
@@ -21,7 +21,13 @@ available. If you are developing new Docker applications, consider using
 [named volumes](volumes.md) instead. You can't use Docker CLI commands to directly
 manage bind mounts.
 
-![Bind mounts on the Docker host](images/types-of-mounts-bind.png)
+![Bind mounts on the Docker host](images/types-of-mounts-bind.webp?w=450&h=300)
+
+> **Tip**
+>
+> Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase?
+> Check out [Synchronized file shares](../desktop/synchronized-file-sharing.md). It provides fast and flexible host-to-VM file sharing by enhancing bind mount performance through the use of synchronized filesystem caches.
+{ .tip }
 
 ## Choose the -v or --mount flag
 
@@ -34,8 +40,9 @@ syntax separates them. Here is a comparison of the syntax for each flag.
 > New users should use the `--mount` syntax. Experienced users may
 > be more familiar with the `-v` or `--volume` syntax, but are encouraged to
 > use `--mount`, because research has shown it to be easier to use.
+{ .tip }
 
-- **`-v` or `--volume`**: Consists of three fields, separated by colon characters
+- `-v` or `--volume`: Consists of three fields, separated by colon characters
   (`:`). The fields must be in the correct order, and the meaning of each field
   is not immediately obvious.
   - In the case of bind mounts, the first field is the path to the file or
@@ -46,7 +53,7 @@ syntax separates them. Here is a comparison of the syntax for each flag.
     as `ro`, `z`, and `Z`. These options
     are discussed below.
 
-- **`--mount`**: Consists of multiple key-value pairs, separated by commas and each
+- `--mount`: Consists of multiple key-value pairs, separated by commas and each
   consisting of a `<key>=<value>` tuple. The `--mount` syntax is more verbose
   than `-v` or `--volume`, but the order of the keys is not significant, and
   the value of the flag is easier to understand.
@@ -72,15 +79,15 @@ The examples below show both the `--mount` and `-v` syntax where possible, and
 ### Differences between `-v` and `--mount` behavior
 
 Because the `-v` and `--volume` flags have been a part of Docker for a long
-time, their behavior cannot be changed. This means that **there is one behavior
-that is different between `-v` and `--mount`.**
+time, their behavior cannot be changed. This means that there is one behavior
+that is different between `-v` and `--mount`.
 
 If you use `-v` or `--volume` to bind-mount a file or directory that does not
-yet exist on the Docker host, `-v` creates the endpoint for you. **It is
-always created as a directory.**
+yet exist on the Docker host, `-v` creates the endpoint for you. It is
+always created as a directory.
 
 If you use `--mount` to bind-mount a file or directory that does not
-yet exist on the Docker host, Docker does **not** automatically create it for
+yet exist on the Docker host, Docker does not automatically create it for
 you, but generates an error.
 
 ## Start a container with a bind mount
@@ -265,6 +272,30 @@ $ docker container stop devtest
 $ docker container rm devtest
 ```
 
+## Recursive mounts
+
+When you bind mount a path that itself contains mounts, those submounts are
+also included in the bind mount by default. This behavior is configurable,
+using the `bind-recursive` option for `--mount`. This option is only supported
+with the `--mount` flag, not with `-v` or `--volume`.
+
+If the bind mount is read-only, the Docker Engine makes a best-effort attempt
+at making the submounts read-only as well. This is referred to as recursive
+read-only mounts. Recursive read-only mounts require Linux kernel version 5.12
+or later. If you're running an older kernel version, submounts are
+automatically mounted as read-write by default. Attempting to set submounts to
+be read-only on a kernel version earlier than 5.12, using the
+`bind-recursive=readonly` option, results in an error.
+
+Supported values for the `bind-recursive` option are:
+
+| Value               | Description                                                                                                       |
+|:--------------------|:------------------------------------------------------------------------------------------------------------------|
+| `enabled` (default) | Read-only mounts are made recursively read-only if kernel is v5.12 or later. Otherwise, submounts are read-write. |
+| `disabled`          | Submounts are ignored (not included in the bind mount).                                                           |
+| `writable`          | Submounts are read-write.                                                                                         |
+| `readonly`          | Submounts are read-only. Requires kernel v5.12 or later.                                                          |
+
 ## Configure bind propagation
 
 Bind propagation defaults to `rprivate` for both bind mounts and volumes. It is
@@ -279,7 +310,7 @@ propagation setting has a recursive counterpoint. In the case of recursion,
 consider that `/tmp/a` is also mounted as `/foo`. The propagation settings
 control whether `/mnt/a` and/or `/tmp/a` would exist.
 
-> Warning
+> **Warning**
 >
 > Mount propagation doesn't work with Docker Desktop.
 { .warning }
@@ -337,7 +368,7 @@ Now if you create `/app/foo/`, `/app2/foo/` also exists.
 ## Configure the selinux label
 
 If you use `selinux` you can add the `z` or `Z` options to modify the selinux
-label of the **host file or directory** being mounted into the container. This
+label of the host file or directory being mounted into the container. This
 affects the file or directory on the host machine itself and can have
 consequences outside of the scope of Docker.
 
@@ -345,11 +376,13 @@ consequences outside of the scope of Docker.
   containers.
 - The `Z` option indicates that the bind mount content is private and unshared.
 
-Use **extreme** caution with these options. Bind-mounting a system directory
+Use extreme caution with these options. Bind-mounting a system directory
 such as `/home` or `/usr` with the `Z` option renders your host machine
 inoperable and you may need to relabel the host machine files by hand.
 
-> **Important**: When using bind mounts with services, selinux labels
+> **Important**
+>
+> When using bind mounts with services, selinux labels
 > (`:Z` and `:z`), as well as `:ro` are ignored. See
 > [moby/moby #32579](https://github.com/moby/moby/issues/32579) for details.
 { .important }

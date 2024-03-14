@@ -1,14 +1,14 @@
 ---
 title: Host network driver
 description: All about exposing containers on the Docker host's network
-keywords: network, host, standalone
+keywords: network, host, standalone, host mode networking
 aliases:
 - /network/host/
 ---
 
 If you use the `host` network mode for a container, that container's network
-stack is not isolated from the Docker host (the container shares the host's
-networking namespace), and the container does not get its own IP-address allocated.
+stack isn't isolated from the Docker host (the container shares the host's
+networking namespace), and the container doesn't get its own IP-address allocated.
 For instance, if you run a container which binds to port 80 and you use `host`
 networking, the container's application is available on port 80 on the host's IP
 address.
@@ -16,7 +16,7 @@ address.
 > **Note**
 >
 > Given that the container does not have its own IP-address when using
-> `host` mode networking, [port-mapping](overlay.md#publish-ports) does not
+> `host` mode networking, [port-mapping](overlay.md#publish-ports) doesn't
 > take effect, and the `-p`, `--publish`, `-P`, and `--publish-all` option are
 > ignored, producing a warning instead:
 >
@@ -24,9 +24,12 @@ address.
 > WARNING: Published ports are discarded when using host network mode
 > ```
 
-Host mode networking can be useful to optimize performance, and in situations where
-a container needs to handle a large range of ports, as it does not require network
-address translation (NAT), and no "userland-proxy" is created for each port.
+Host mode networking can be useful for the following use cases:
+
+- To optimize performance
+- In situations where a container needs to handle a large range of ports
+
+This is because it doesn't require network address translation (NAT), and no "userland-proxy" is created for each port.
 
 The host networking driver only works on Linux hosts, and is not supported on
 Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.

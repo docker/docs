@@ -59,6 +59,9 @@ func main() {
 	}
 
 	defer reader.Close()
+	// cli.ImagePull is asynchronous.
+	// The reader needs to be read completely for the pull operation to complete.
+	// If stdout is not required, consider using io.Discard instead of os.Stdout.
 	io.Copy(os.Stdout, reader)
 
 	resp, err := cli.ContainerCreate(ctx, &container.Config{
@@ -119,17 +122,17 @@ $ curl --unix-socket /var/run/docker.sock "http://localhost/v{{% param "latest_e
 hello world
 ```
 
-When using cURL to connect over a unix socket, the hostname is not important. The
-examples above use `localhost`, but any hostname would work.
+When using cURL to connect over a Unix socket, the hostname isn't important. The
+previous examples use `localhost`, but any hostname would work.
 
-> **Using cURL 7.47.0 or below?**
+> **Important**
 >
-> The examples above assume you are using cURL 7.50.0 or above. Older versions of
+> The previous examples assume you're using cURL 7.50.0 or above. Older versions of
 > cURL used a [non-standard URL notation](https://github.com/moby/moby/issues/17960)
 > when using a socket connection.
-> 
-> If you are using an older version of cURL, use `http:/<API version>/` instead,
-> for example, `http:/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/start`
+>
+> If you're' using an older version of cURL, use `http:/<API version>/` instead,
+> for example: `http:/v{{% param "latest_engine_api_version" %}}/containers/1c6594faf5/start`.
 { .important }
 
 {{< /tab >}}
@@ -283,7 +286,9 @@ $ curl --unix-socket /var/run/docker.sock http://localhost/v{{% param "latest_en
 Now that you know what containers exist, you can perform operations on them.
 This example stops all running containers.
 
-> **Note**: Don't run this on a production server. Also, if you are using swarm
+> **Note**
+>
+> Don't run this on a production server. Also, if you're' using swarm
 > services, the containers stop, but Docker creates new ones to keep
 > the service running in its configured state.
 
@@ -549,7 +554,9 @@ $ curl --unix-socket /var/run/docker.sock \
 
 Pull an image, like `docker pull`, with authentication:
 
-> **Note**: Credentials are sent in the clear. Docker's official registries use
+> **Note**
+>
+> Credentials are sent in the clear. Docker's official registries use
 > HTTPS. Private registries should also be configured to use HTTPS.
 
 {{< tabs group="lang" >}}
@@ -601,10 +608,10 @@ func main() {
 {{< tab name="Python" >}}
 
 The Python SDK retrieves authentication information from the [credentials
-store](/engine/reference/commandline/login/#credentials-store) file and
+store](/reference/cli/docker/login/#credentials-store) file and
 integrates with [credential
-helpers](https://github.com/docker/docker-credential-helpers). It is possible to override these credentials, but that is out of
-scope for this Getting Started guide. After using `docker login`, the Python SDK
+helpers](https://github.com/docker/docker-credential-helpers). It's possible to override these credentials, but that's out of
+scope for this example guide. After using `docker login`, the Python SDK
 uses these credentials automatically.
 
 ```python

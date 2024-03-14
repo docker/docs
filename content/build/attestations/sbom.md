@@ -27,7 +27,7 @@ final image as a JSON-encoded SPDX document, using the format defined by the
 
 ## Create SBOM attestations
 
-To create a provenance attestation, pass the `--attest type=sbom` option to the
+To create an SBOM attestation, pass the `--attest type=sbom` option to the
 `docker buildx build` command:
 
 ```console
@@ -36,6 +36,9 @@ $ docker buildx build --tag <namespace>/<image>:<version> \
 ```
 
 Alternatively, you can use the shorthand `--sbom=true` option instead of `--attest type=sbom`.
+
+For an example on how to add SBOM attestations with GitHub Actions, see
+[Add attestations with GitHub Actions](../ci/github-actions/attestations.md).
 
 ## Verify SBOM attestations
 
@@ -170,7 +173,7 @@ sbom.spdx.json
 ## Inspecting SBOMs
 
 To explore created SBOMs exported through the `image` exporter, you can use
-[`imagetools inspect`](../../engine/reference/commandline/buildx_imagetools_inspect.md).
+[`imagetools inspect`](../../reference/cli/docker/buildx/imagetools/inspect.md).
 
 Using the `--format` option, you can specify a template for the output. All
 SBOM-related data is available under the `.SBOM` attribute. For example, to get

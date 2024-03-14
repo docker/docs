@@ -1,27 +1,22 @@
-{{ $sso_link := "[Configure SSO](/single-sign-on/)" }}
-{{ $scim_link := "[Configure SCIM](/docker-hub/scim/)" }}
-{{ $members_link := "[Invite members](/docker-hub/members/)" }}
-{{ $audit_link := "[Audit your domains](/docker-hub/domain-audit/)" }}
-
-{{ if eq (.Get "product") "admin" }}
-  {{ $sso_link = "[Configure SSO](/admin/organization/security-settings/sso/)" }}
-  {{ $scim_link = "[Configure SCIM](/admin/organization/security-settings/scim/)" }}
-  {{ $members_link = "[Invite members](/admin/organization/members/)" }}
-  {{ $audit_link = "[Audit your domains](/admin/organization/security-settings/domains/)" }}
-{{ end }}
-
 Onboarding your organization allows you to gain visibility into the activity of your users and enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits. For more details, see [Docker subscriptions and features](/subscription/details/).
+
+In this guide, you'll learn how to get started with the following:
+
+- Identify your users to help you efficiently allocate your subscription seats
+- Invite members and owners to your organization
+- Secure authentication and authorization for your organization using Single Sign-On (SSO) and System for Cross-domain Identity Management (SCIM)
+- Enforce sign-on for Docker Desktop to ensure security best practices
 
 ## Prerequisites
 
 Before you start to onboard your organization, ensure that you:
-- Have a Docker Team or Business subcription. See [Pricing & Subscriptions](https://www.docker.com/pricing/) for details.
+- Have a Docker Team or Business subscription. See [Pricing & Subscriptions](https://www.docker.com/pricing/) for details.
 
   > **Note**
   >
-  > When purchasing a subscription through [Pricing & Subscriptions](https://www.docker.com/pricing/), the on-screen instructions guide you through creating an organization. If you have purchased a subscription through Docker Sales and you have not yet created an organization, see [Create an organization](/docker-hub/orgs#create-an-organization).
+  > When purchasing a subscription through [Pricing & Subscriptions](https://www.docker.com/pricing/), the on-screen instructions guide you through creating an organization. If you have purchased a subscription through Docker Sales and you have not yet created an organization, see [Create an organization](/admin/organization/orgs).
 
-- Familiarize yourself with Docker concepts and terminology in the [glossary](/glossary/) and [FAQs](/docker-hub/general-faqs/).
+- Familiarize yourself with Docker concepts and terminology in the [glossary](/glossary/) and [FAQs](/faq/admin/general-faqs/).
 
 ## Step 1: Identify your Docker users and their Docker accounts
 
@@ -42,21 +37,22 @@ Identifying your users will ensure that you allocate your subscription seats eff
 
 When you create an organization, you are the only owner. You may optionally add additional owners. Owners can help you onboard and manage your organization.
 
-To add an owner, invite a user and assign them the owner role. For more details, see {{ $members_link }}.
+To add an owner, invite a user and assign them the owner role. For more details, see [Invite members](/admin/organization/members/).
 
 ## Step 3: Invite members
 
 When you add users to your organization, you gain visibility into their activity and you can enforce security settings. In addition, members of your organization receive increased pull limits and other organization wide benefits.
 
-To add a member, invite a user and assign them the member role. For more details, see {{ $members_link }}.
+To add a member, invite a user and assign them the member role. For more details, see [Invite members](/admin/organization/members/).
 
 ## Step 4: Manage members with SSO and SCIM
 
-Configuring Single Sign-On (SSO) or System for Cross-domain Identity Management (SCIM) is optional and only available to Docker Business subscribers. To upgrade a Docker Team subscription to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
+Configuring SSO and SCIM is optional and only available to Docker Business subscribers. To upgrade a Docker Team subscription to a Docker Business subscription, see [Upgrade your subscription](/subscription/upgrade/).
 
-You can manage your members in your identity provider and automatically provision them to your Docker organization with SSO or SCIM. See the following for more details.
-   - {{ $sso_link }} to automatically provision and add members when they sign in to Docker through your identity provider.
-   - {{ $scim_link }} to automatically provision, add, and de-provision members to Docker through your identity provider.
+You can manage your members in your identity provider and automatically provision them to your Docker organization with SSO and SCIM. See the following for more details.
+   - [Configure SSO](/security/for-admins/single-sign-on/) to authenticate and add members when they sign in to Docker through your identity provider.
+   - Optional: [Enforce SSO](/security/for-admins/single-sign-on/configure/#optional-step-four-enforce-sso) to ensure that users must sign in to Docker with SSO.
+   - [Configure SCIM](/security/for-admins/scim/) to automatically provision, add, and de-provision members to Docker through your identity provider.
 
 
 ## Step 5: Enforce sign-in for Docker Desktop
@@ -66,8 +62,8 @@ By default, members of your organization can use Docker Desktop on their machine
 ## What's next
 
 - [Create](/docker-hub/repos/create/) and [manage](/docker-hub/repos/) repositories.
-- Create [teams](/docker-hub/manage-a-team/) for fine-grained repository access.
+- Create [teams](/admin/organization/manage-a-team/) for fine-grained repository access.
 - Configure [Hardened Docker Desktop](/desktop/hardened-desktop/) to improve your organization’s security posture for containerized development.
-- {{ $audit_link }} to ensure that all Docker users in your domain are part of your organization.
+- [Audit your domains](/docker-hub/domain-audit/) to ensure that all Docker users in your domain are part of your organization.
 
 Your Docker subscription provides many more additional features. To learn more, see [Docker subscriptions and features](/subscription/details/).

@@ -11,6 +11,172 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.24.7
+{{< release-date date="2024-03-06" >}}
+
+### Update
+- Dependencies upgrade: bump golang to 1.21.8
+- Dependencies upgrade: bump compose-go to 2.0.0-rc8
+- Dependencies upgrade: bump docker to v24.0.4
+
+### Bug fixes and enhancements
+
+- Compose now ensures stable priority sort order for networks 
+- Fixed interpolation with curly braces (e.g. JSON) in default values 
+- Fixed validation for non-unique `container_name` values
+- Fixed validation for `develop.watch`
+- Fixed environment loading for `include`
+- Fixed panic when merging labels/networks
+- Added support for `--no-path-resolution` when using `include`
+- Fixed missing project name errors
+- Fixed `--no-interpolate` flag on `config`
+- Added a workaround for file lock issues with Watch mode on Windows
+- Fixed duplicate exit code status messages
+- Compose now respects `COMPOSE_REMOVE_ORPHANS` on `up`
+
+## 2.24.6
+{{< release-date date="2024-02-15" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.3
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.7
+
+### Bug fixes and enhancements
+- Fixed issue of `.env` file loading when project file is set via `COMPOSE_FILE` variable
+- Aligned `ps --status=exited` behaviour with the Docker CLI behaviour
+- Fixed a deadlock when collecting large logs
+
+## 2.24.5
+{{< release-date date="2024-01-30" >}}
+
+### Bug fixes and enhancements
+- Fixed "failed to solve: changes out of order" errors when building images on Windows.
+
+## 2.24.4
+{{< release-date date="2024-01-29" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.1
+- Dependencies upgrade: bump docker to 25.0.1
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.3
+
+### Bug fixes and enhancements
+- Fixed issue when checking external network existence when swarm is enabled.
+- Added support for `storage_opt` attribute.
+
+## 2.24.3
+{{< release-date date="2024-01-24" >}}
+
+This release fixes a build issue with Docker Desktop for Windows introduced in Compose v2.24.0.
+
+### Update
+- Compose now uses a custom version of `fsutils` library.
+
+## 2.24.2
+{{< release-date date="2024-01-22" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0 GA
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.2
+
+## 2.24.1
+{{< release-date date="2024-01-18" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0-rc3
+- Dependencies upgrade: bump docker to 25.0.0-rc3
+- Dependencies upgrade: bump compose-go to 2.0.0-rc.1
+- Dependencies upgrade: bump containerd to 1.7.12
+
+### Bug fixes and enhancements
+- Reworked the display of container status during `up`
+- Fixed the engine version required to use `healthcheck.start_interval`
+- Removed `watch` subcommand from the `alpha` command
+- Fixed a bug when handling received signals
+
+## 2.24.0
+{{< release-date date="2024-01-11" >}}
+
+### Update
+- Dependencies upgrade: bump cli to 25.0.0-beta.3
+- Dependencies upgrade: bump compose-go to 2.0.0-beta.3
+- Dependencies upgrade: bump golang to 1.21.6 
+
+### Bug fixes and enhancements
+- Introduced `docker compose attach` to attach local standard input, output, and error streams to a service's running container.
+- Introduced `docker compose stats` to display a live stream of container(s) resource usage statistics.
+- Introduced `docker compose ps --orphans` to include/exclude services not declared.
+- Introduced `docker compose logs --index` to select a replica container. 
+- Introduced `docker compose build --with-dependencies` to also build dependencies. 
+- Added source policies for build.
+- Included disabled services for shell completion.
+- Restored `Project` in ps JSON output.
+- Added OCI 1.0 fallback support for AWS ECR.
+- Build now does not require environment to be resolved.
+- Compose now sends out a cancel event on SIGINT/SIGTERM signal for `compose up`.
+- Fixed log by exposing services ports when `--verbose`.
+- Fixed inlined and environment-defined configs to be mounted under /\<id\> until an explicit target is set.
+- Fixed combination of `--pull always --no-build`.
+- Fixed race condition in log printer.
+- Fixed `docker compose up` teardown when command context is cancelled.
+
+## 2.23.3
+{{< release-date date="2023-11-22" >}}
+
+### Update
+- Dependencies upgrade: bump buildx to v0.12.0
+
+## 2.23.2
+{{< release-date date="2023-11-21" >}}
+
+### Update
+- Dependencies upgrade: bump buildkit 0.12.3 
+- Dependencies upgrade: bump docker 24.0.7 
+- Dependencies upgrade: bump cli 24.0.7 
+- Dependencies upgrade: bump 1.20.2
+
+### Bug fixes and enhancements
+- Compose now supports `builds.tags` with `push` command.
+- Compose Watch now re-builds service images at startup.
+- Now `--remove-orphans` doesn't manage disabled services as orphaned.
+- Compose displays `Building` output log only if there is at least one service to build.
+
+## 2.23.1
+{{< release-date date="2023-11-16" >}}
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.20.1
+
+### Bug fixes and enhancements
+- Aligned Compose with OCI artifact best practices.
+- Introduced `--resolve-image-digests` so users can seal service images by digest when publishing a Compose application.
+- Improved Compose Watch configuration logging.
+- Compose now rejects a Compose file using `secrets|configs.driver` or `template_driver`.
+- Compose now fails to start if a dependency is missing. 
+- Fixed SIGTERM support to stop/kill stack.
+- Fixed a `--hash` regression.
+- Fixed "Application failed to start after update" when an external network is on a watched service.
+- Fixed `--pull` documentation.
+- Fixed display by adding newline in cmd/compose/build.go.
+- Compose is rendered quiet after filtering applied.
+- Stripped project prefix from docker-compose up output.
+
+## 2.23.0
+{{< release-date date="2023-10-18" >}}
+
+### Update
+- Dependencies upgrade: bump compose-go to v1.20.0
+- Dependencies upgrade: bump containerd to 1.7.7
+
+### Bug fixes and enhancements
+- Added dry-run support for publish command
+- Added `COMPOSE_ENV_FILES` env variable to pass a list of env files
+- Added `sync+restart` action to `compose watch`
+- Aligned `compose ps` output with Docker CLI by default and introduced `--no-trunc` to keep the previous behaviour
+- Fixed hashes inconsistency between `up` and `configure`
+- Enabled profiles when `down` ran with explicit service names
+- Fixed an issue when the pull policy provided was invalid
+
 ## 2.22.0
 {{< release-date date="2023-09-21" >}}
 
@@ -2734,7 +2900,7 @@ naming scheme accordingly before upgrading.
 ## 1.6.0
 (2016-01-15)
 
-### Major Features:
+### Major Features
 
 -   Compose 1.6 introduces a new format for `docker-compose.yml` which lets
     you define networks and volumes in the Compose file as well as services. It
@@ -2782,7 +2948,7 @@ naming scheme accordingly before upgrading.
     `docker-compose up SERVICE` on a service with dependencies, those are started
     as well.
 
-### New Features:
+### New Features
 
 -   Added a new command `config` which validates and prints the Compose
     configuration after interpolating variables, resolving relative paths, and
@@ -3147,8 +3313,8 @@ Several new configuration keys have been added to `docker-compose.yml`:
 - `pid: host`, like `docker run --pid=host`, lets you reuse the same PID namespace as the host machine.
 - `cpuset`, like `docker run --cpuset-cpus`, lets you specify which CPUs to allow execution in.
 - `read_only`, like `docker run --read-only`, lets you mount a container's filesystem as read-only.
-- `security_opt`, like `docker run --security-opt`, lets you specify [security options](/engine/reference/run/#security-configuration).
-- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/engine/reference/run/#logging-drivers---log-driver).
+- `security_opt`, like `docker run --security-opt`, lets you specify [security options](/reference/cli/docker/container/run/#security-opt).
+- `log_driver`, like `docker run --log-driver`, lets you specify a [log driver](/reference/cli/docker/container/run/#log-driver).
 
 ### Bug fixes
 
@@ -3298,7 +3464,8 @@ Thanks @ryanbrainard and @d11wtq!
    For example, if you have a `web` service which depends on a `db` service, `fig run web ...` will start the `db` service.
 
  - Environment variables can now be resolved from the environment that Fig is running in. Just specify it as a blank variable in your `fig.yml` and, if set, it'll be resolved:
-   ```
+
+   ```yaml
    environment:
      RACK_ENV: development
      SESSION_SECRET:
@@ -3306,7 +3473,7 @@ Thanks @ryanbrainard and @d11wtq!
 
  - `volumes_from` is now supported in `fig.yml`. All of the volumes from the specified services and containers will be mounted:
 
-   ```
+   ```yaml
    volumes_from:
     - service_name
     - container_name
@@ -3314,7 +3481,7 @@ Thanks @ryanbrainard and @d11wtq!
 
  - A host address can now be specified in `ports`:
 
-   ```
+   ```yaml
    ports:
     - "0.0.0.0:8000:8000"
     - "127.0.0.1:8001:8001"

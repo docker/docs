@@ -7,16 +7,15 @@ title: Networking in Compose
 {{< include "compose-eol.md" >}}
 
 By default Compose sets up a single
-[network](../engine/reference/commandline/network_create.md) for your app. Each
+[network](../reference/cli/docker/network/create.md) for your app. Each
 container for a service joins the default network and is both reachable by
-other containers on that network, and discoverable by them at a hostname
-identical to the container name.
+other containers on that network, and discoverable by the service's name.
 
 > **Note**
 >
 > Your app's network is given a name based on the "project name",
 > which is based on the name of the directory it lives in. You can override the
-> project name with either the [`--project-name` flag](reference/index.md){
+> project name with either the [`--project-name` flag](reference/index.md)
 > or the [`COMPOSE_PROJECT_NAME` environment variable](environment-variables/envvars.md#compose_project_name).
 
 For example, suppose your app is in a directory called `myapp`, and your `compose.yml` looks like this:
@@ -41,7 +40,7 @@ When you run `docker compose up`, the following happens:
 3.  A container is created using `db`'s configuration. It joins the network
     `myapp_default` under the name `db`.
 
-Each container can now look up the hostname `web` or `db` and
+Each container can now look up the service name `web` or `db` and
 get back the appropriate container's IP address. For example, `web`'s
 application code could connect to the URL `postgres://db:5432` and start
 using the Postgres database.

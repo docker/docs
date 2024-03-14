@@ -69,7 +69,7 @@ $ docker info
 For the best user experience with SSH, configure `~/.ssh/config` as follows to allow
 reusing a SSH connection for multiple invocations of the `docker` CLI:
 
-```
+```text
 ControlMaster     auto
 ControlPath       ~/.ssh/control-%C
 ControlPersist    yes
@@ -85,18 +85,20 @@ In the daemon mode, it only allows connections from clients
 authenticated by a certificate signed by that CA. In the client mode,
 it only connects to servers with a certificate signed by that CA.
 
-> Advanced topic
+> **Important**
 >
-> Using TLS and managing a CA is an advanced topic. Please familiarize yourself
+> Using TLS and managing a CA is an advanced topic. Familiarize yourself
 > with OpenSSL, x509, and TLS before using it in production.
 { .important }
 
 ### Create a CA, server and client keys with OpenSSL
 
-> **Note**: Replace all instances of `$HOST` in the following example with the
+> **Note**
+>
+> Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
-First, on the **Docker daemon's host machine**, generate CA private and public keys:
+First, on the Docker daemon's host machine, generate CA private and public keys:
 
 ```console
 $ openssl genrsa -aes256 -out ca-key.pem 4096
@@ -129,7 +131,9 @@ Now that you have a CA, you can create a server key and certificate
 signing request (CSR). Make sure that "Common Name" matches the hostname you use
 to connect to Docker:
 
-> **Note**: Replace all instances of `$HOST` in the following example with the
+> **Note**
+>
+> Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
 ```console
@@ -155,7 +159,9 @@ $ echo subjectAltName = DNS:$HOST,IP:10.10.10.20,IP:127.0.0.1 >> extfile.cnf
 Set the Docker daemon key's extended usage attributes to be used only for
 server authentication:
 
-    $ echo extendedKeyUsage = serverAuth >> extfile.cnf
+```console
+$ echo extendedKeyUsage = serverAuth >> extfile.cnf
+```
 
 Now, generate the signed certificate:
 
@@ -177,7 +183,9 @@ Docker clients.
 For client authentication, create a client key and certificate signing
 request:
 
-> **Note**: For simplicity of the next couple of steps, you may perform this
+> **Note**
+>
+> For simplicity of the next couple of steps, you may perform this
 > step on the Docker daemon's host machine as well.
 
 ```console
@@ -193,7 +201,9 @@ $ openssl req -subj '/CN=client' -new -key key.pem -out client.csr
 To make the key suitable for client authentication, create a new extensions
 config file:
 
-    $ echo extendedKeyUsage = clientAuth > extfile-client.cnf
+```console
+$ echo extendedKeyUsage = clientAuth > extfile-client.cnf
+```
 
 Now, generate the signed certificate:
 
@@ -245,13 +255,16 @@ $ dockerd \
 To connect to Docker and validate its certificate, provide your client keys,
 certificates and trusted CA:
 
-> Run it on the client machine
+> **Tip**
 >
 > This step should be run on your Docker client machine. As such, you
 > need to copy your CA certificate, your server certificate, and your client
 > certificate to that machine.
+{ .tip }
 
-> **Note**: Replace all instances of `$HOST` in the following example with the
+> **Note**
+>
+> Replace all instances of `$HOST` in the following example with the
 > DNS name of your Docker daemon's host.
 
 ```console
@@ -262,10 +275,12 @@ $ docker --tlsverify \
     -H=$HOST:2376 version
 ```
 
-> **Note**:
+> **Note**
+>
 > Docker over TLS should run on TCP port 2376.
 
-> **Warning**:
+> **Warning**
+>
 > As shown in the example above, you don't need to run the `docker` client
 > with `sudo` or the `docker` group when you use certificate authentication.
 > That means anyone with the keys can give any instructions to your Docker

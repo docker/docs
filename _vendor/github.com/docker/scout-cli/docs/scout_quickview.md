@@ -9,13 +9,14 @@ Quick overview of an image
 
 ### Options
 
-| Name             | Type     | Default | Description                                                                                              |
-|:-----------------|:---------|:--------|:---------------------------------------------------------------------------------------------------------|
-| `--env`          | `string` |         | Name of the environment                                                                                  |
-| `--org`          | `string` |         | Namespace of the Docker organization                                                                     |
-| `-o`, `--output` | `string` |         | Write the report to a file.                                                                              |
-| `--platform`     | `string` |         | Platform of image to analyze                                                                             |
-| `--ref`          | `string` |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive. |
+| Name             | Type     | Default | Description                                                                                             |
+|:-----------------|:---------|:--------|:--------------------------------------------------------------------------------------------------------|
+| `--env`          | `string` |         | Name of the environment                                                                                 |
+| `--latest`       |          |         | Latest indexed image                                                                                    |
+| `--org`          | `string` |         | Namespace of the Docker organization                                                                    |
+| `-o`, `--output` | `string` |         | Write the report to a file                                                                              |
+| `--platform`     | `string` |         | Platform of image to analyze                                                                            |
+| `--ref`          | `string` |         | Reference to use if the provided tarball contains multiple references.<br>Can only be used with archive |
 
 
 <!---MARKER_GEN_END-->
@@ -23,10 +24,11 @@ Quick overview of an image
 ## Description
 
 The `docker scout quickview` command displays a quick overview of an image.
-It displays a summary of the vulnerabilities in the image and the vulnerabilities from the base image.
-If available it also displays base image refresh and update recommendations.
+It displays a summary of the vulnerabilities in the specified image
+and vulnerabilities from the base image.
+If available, it also displays base image refresh and update recommendations.
 
-If no image is specified, the most recently built image will be used.
+If no image is specified, the most recently built image is used.
 
 The following artifact types are supported:
 
@@ -34,8 +36,6 @@ The following artifact types are supported:
 - OCI layout directories
 - Tarball archives, as created by `docker save`
 - Local directory or file
-
-The tool analyzes the provided software artifact, and generates a vulnerability report.
 
 By default, the tool expects an image reference, such as:
 
@@ -50,7 +50,7 @@ or if you want to control from where the image will be resolved, you must prefix
 - `local://` use an image from the local image store (don't do a registry lookup)
 - `registry://` use an image from a registry (don't use a local image)
 - `oci-dir://` use an OCI layout directory
-- `archive://` use a tarball archive, as created by docker save
+- `archive://` use a tarball archive, as created by `docker save`
 - `fs://` use a local directory or file
 
 ## Examples

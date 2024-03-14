@@ -17,7 +17,7 @@ By default, containerd uses runc as its container runtime.
 ## What runtimes can I use?
 
 You can use any runtime that implements the containerd 
-[shim API](https://github.com/containerd/containerd/blob/main/runtime/v2/README.md).
+[shim API](https://github.com/containerd/containerd/blob/main/core/runtime/v2/README.md).
 Such runtimes ship with a containerd shim, and you can use them without any
 additional configuration. See [Use containerd shims](#use-containerd-shims).
 
@@ -107,7 +107,7 @@ use the `runtimes` option in the daemon configuration file.
    ```
 
 For more information about the configuration options for containerd shims, see
-[Configure containerd shims](./reference/commandline/dockerd.md#configure-containerd-shims).
+[Configure containerd shims](./../reference/cli/dockerd.md#configure-containerd-shims).
 
 ## Examples
 
@@ -115,7 +115,7 @@ The following examples show you how to set up and use alternative container
 runtimes with Docker Engine.
 
 - [youki](#youki)
-- [Wasmtime](#youki)
+- [Wasmtime](#wasmtime)
 
 ### youki
 
@@ -127,7 +127,7 @@ youki functions as a drop-in replacement for runc, meaning it relies on the
 runc shim to invoke the runtime binary. When you register runtimes acting as
 runc replacements, you configure the path to the runtime executable, and
 optionally a set of runtime arguments. For more information, see
-[Configure runc drop-in replacements](./reference/commandline/dockerd.md#configure-runc-drop-in-replacements).
+[Configure runc drop-in replacements](./../reference/cli/dockerd.md#configure-runc-drop-in-replacements).
 
 To add youki as a container runtime:
 
@@ -233,6 +233,6 @@ $ docker run --rm \
 ## Related information
 
 - To learn more about the configuration options for container runtimes,
-  see [Configure container runtimes](./reference/commandline/dockerd.md#configure-container-runtimes).
+  see [Configure container runtimes](./../reference/cli/dockerd.md#configure-container-runtimes).
 - You can configure which runtime that the daemon should use as its default.
-  Refer to [Configure the default container runtime](./reference/commandline/dockerd.md#configure-the-default-container-runtime).
+  Refer to [Configure the default container runtime](./../reference/cli/dockerd.md#configure-the-default-container-runtime).

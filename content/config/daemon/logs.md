@@ -1,6 +1,6 @@
 ---
 title: Read the daemon logs
-description: How to read the container logs for the Docker daemon.
+description: How to read the event logs for the Docker daemon
 keywords: docker, daemon, configuration, troubleshooting, logging
 ---
 
@@ -13,8 +13,8 @@ subsystem used:
 | Linux                              | Use the command `journalctl -xu docker.service` (or read `/var/log/syslog` or `/var/log/messages`, depending on your Linux Distribution) |
 | macOS (`dockerd` logs)             | `~/Library/Containers/com.docker.docker/Data/log/vm/dockerd.log`                                                                         |
 | macOS (`containerd` logs)          | `~/Library/Containers/com.docker.docker/Data/log/vm/containerd.log`                                                                      |
-| Windows (WSL2) (`dockerd` logs)    | `%LOCALAPPDATA%\Docker\log\vm\dockerd.log`                                                                                                |
-| Windows (WSL2) (`containerd` logs) | `%LOCALAPPDATA%\Docker\log\vm\containerd.log`                                                                                             |
+| Windows (WSL2) (`dockerd` logs)    | `%LOCALAPPDATA%\Docker\log\vm\dockerd.log`                                                                                               |
+| Windows (WSL2) (`containerd` logs) | `%LOCALAPPDATA%\Docker\log\vm\containerd.log`                                                                                            |
 | Windows (Windows containers)       | Logs are in the Windows Event Log                                                                                                        |
 
 To view the `dockerd` logs on macOS, open a terminal Window, and use the `tail`
@@ -40,9 +40,8 @@ There are two ways to enable debugging. The recommended approach is to set the
 Docker platform.
 
 1.  Edit the `daemon.json` file, which is usually located in `/etc/docker/`. You
-    may need to create this file, if it does not yet exist. On macOS or Windows,
-    do not edit the file directly. Instead, go to **Preferences** / **Daemon** /
-    **Advanced**.
+    may need to create this file, if it doesn't yet exist. On macOS or Windows,
+    don't edit the file directly. Instead, edit the file through the Docker Desktop settings.
 
 2.  If the file is empty, add the following:
 
@@ -53,9 +52,9 @@ Docker platform.
     ```
 
     If the file already contains JSON, just add the key `"debug": true`, being
-    careful to add a comma to the end of the line if it is not the last line
+    careful to add a comma to the end of the line if it's not the last line
     before the closing bracket. Also verify that if the `log-level` key is set,
-    it is set to either `info` or `debug`. `info` is the default, and possible
+    it's set to either `info` or `debug`. `info` is the default, and possible
     values are `debug`, `info`, `warn`, `error`, `fatal`.
 
 3.  Send a `HUP` signal to the daemon to cause it to reload its configuration.
@@ -91,7 +90,7 @@ sending a `SIGUSR1` signal to the daemon.
 
   Run the executable with the flag `--pid=<PID of daemon>`.
 
-This forces a stack trace to be logged but does not stop the daemon. Daemon logs
+This forces a stack trace to be logged but doesn't stop the daemon. Daemon logs
 show the stack trace or the path to a file containing the stack trace if it was
 logged to a file.
 
@@ -109,7 +108,7 @@ The Docker daemon log can be viewed by using one of the following methods:
 
 > **Note**
 >
-> It is not possible to manually generate a stack trace on Docker Desktop for
+> It isn't possible to manually generate a stack trace on Docker Desktop for
 > Mac or Docker Desktop for Windows. However, you can click the Docker taskbar
 > icon and choose **Troubleshoot** to send information to Docker if you run into
 > issues.

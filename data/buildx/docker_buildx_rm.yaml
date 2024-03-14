@@ -1,9 +1,9 @@
 command: docker buildx rm
-short: Remove a builder instance
+short: Remove one or more builder instances
 long: |-
     Removes the specified or current builder. It is a no-op attempting to remove the
     default builder.
-usage: docker buildx rm [NAME]
+usage: docker buildx rm [OPTIONS] [NAME] [NAME...]
 pname: docker buildx
 plink: docker_buildx.yaml
 options:
@@ -33,7 +33,7 @@ options:
     - option: keep-daemon
       value_type: bool
       default_value: "false"
-      description: Keep the buildkitd daemon running
+      description: Keep the BuildKit daemon running
       details_url: '#keep-daemon'
       deprecated: false
       hidden: false
@@ -75,7 +75,7 @@ examples: |-
 
     ### Override the configured builder instance (--builder) {#builder}
 
-    Same as [`buildx --builder`](buildx.md#builder).
+    Same as [`buildx --builder`](/reference/cli/docker/buildx/#builder).
 
     ### Do not prompt for confirmation (--force) {#force}
 
@@ -85,15 +85,18 @@ examples: |-
     $ docker buildx rm --all-inactive --force
     ```
 
-    ### Keep the buildkitd daemon running (--keep-daemon) {#keep-daemon}
+    ### Keep the BuildKit daemon running (--keep-daemon) {#keep-daemon}
 
-    Keep the buildkitd daemon running after the buildx context is removed. This is useful when you manage buildkitd daemons and buildx contexts independently.
-    Currently, only supported by the [`docker-container` and `kubernetes` drivers](buildx_create.md#driver).
+    Keep the BuildKit daemon running after the buildx context is removed. This is
+    useful when you manage BuildKit daemons and buildx contexts independently.
+    Only supported by the
+    [`docker-container`](/build/drivers/docker-container/)
+    and [`kubernetes`](/build/drivers/kubernetes/) drivers.
 
     ### Keep BuildKit state (--keep-state) {#keep-state}
 
     Keep BuildKit state, so it can be reused by a new builder with the same name.
-    Currently, only supported by the [`docker-container` driver](buildx_create.md#driver).
+    Currently, only supported by the [`docker-container` driver](/build/drivers/docker-container/).
 deprecated: false
 hidden: false
 experimental: false

@@ -1,12 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./hugo_stats.json","./layouts/**/*.{html,js}", "./content/**/*.md", "assets/js/**/*.js"],
+  content: ["./hugo_stats.json", "layouts/**/*.html", "assets/**/*.js"],
   darkMode: "class",
   theme: {
     extend: {
       typography: (theme) => ({
         DEFAULT: {
           css: {
+            pre: false,
+            code: false,
+            'pre code': false,
+            'code::before': false,
+            'code::after': false,
             // light colors for prose
             "--tw-prose-body": theme("colors.black"),
             "--tw-prose-headings": theme("colors.black"),
@@ -19,9 +24,6 @@ module.exports = {
             "--tw-prose-quotes": theme("colors.black"),
             "--tw-prose-quote-borders": theme("colors.blue.light.500"),
             "--tw-prose-captions": theme("colors.gray.light.600"),
-            "--tw-prose-code": theme("colors.black"),
-            "--tw-prose-pre-code": theme("colors.gray.light.800"),
-            "--tw-prose-pre-bg": theme("colors.white"),
             "--tw-prose-th-borders": theme("colors.gray.light.200"),
             "--tw-prose-td-borders": theme("colors.gray.light.200"),
 
@@ -37,9 +39,6 @@ module.exports = {
             "--tw-prose-invert-quotes": theme("colors.white"),
             "--tw-prose-invert-quote-borders": theme("colors.blue.dark.500"),
             "--tw-prose-invert-captions": theme("colors.gray.dark.600"),
-            "--tw-prose-invert-code": theme("colors.white"),
-            "--tw-prose-invert-pre-code": theme("colors.background.light"),
-            "--tw-prose-invert-pre-bg": theme("colors.gray.dark.200"),
             "--tw-prose-invert-th-borders": theme("colors.gray.dark.200"),
             "--tw-prose-invert-td-borders": theme("colors.gray.dark.200"),
           },
@@ -70,9 +69,14 @@ module.exports = {
       white: "#fff",
       black: "#000",
 
+      accent: {
+        light: "#677285",
+        dark: "#2D404E",
+      },
+
       background: {
         light: "#f9f9fa",
-        dark: "#1c262d",
+        dark: "#141b1f",
       },
 
       divider: {
@@ -144,9 +148,9 @@ module.exports = {
         },
         dark: {
           DEFAULT: "#a371fc",
-          100: "#491d7b",
-          200: "#5f25a0",
-          300: "#7835d3",
+          100: "#380093",
+          200: "#4F00B4",
+          300: "#6D1CDB",
           400: "#8a53ec",
           500: "#a371fc",
           600: "#b38bfc",
@@ -155,6 +159,32 @@ module.exports = {
         },
       },
 
+      magenta: {
+        light: {
+          DEFAULT: "#C918C0",
+          100: "#FFE6FB",
+          200: "#FFC9F6",
+          300: "#FFA6F0",
+          400: "#E950E2",
+          500: "#C918C0",
+          600: "#AB00A4",
+          700: "#830080",
+          800: "#440040",
+        },
+        dark: {
+          DEFAULT: "#E950E2",
+          100: "#7E0078",
+          200: "#92008B",
+          300: "#AB00A4",
+          400: "#CC18C4",
+          500: "#E950E2",
+          600: "#FF6FF9",
+          700: "#FF8AFA",
+          800: "#FFA4FB",
+        },
+      },
+
+
       blue: {
         light: {
           DEFAULT: "#086dd7",
@@ -162,17 +192,17 @@ module.exports = {
           200: "#c0e0fa",
           300: "#8bc7f5",
           400: "#1c90ed",
-          500: "#086dd7",
-          600: "#0055bd",
-          700: "#1144a6",
+          500: "#1D63ED",
+          600: "#0C49C2",
+          700: "#00308D",
           800: "#00084d",
         },
         dark: {
           DEFAULT: "#3391ee",
-          100: "#06326d",
-          200: "#08489b",
-          300: "#1760ca",
-          400: "#2673e3",
+          100: "#002EA3",
+          200: "#063BB7",
+          300: "#1351D4",
+          400: "#1D63ED",
           500: "#3391ee",
           600: "#55a4f1",
           700: "#7cb9f4",
@@ -194,11 +224,11 @@ module.exports = {
         },
         dark: {
           DEFAULT: "#2aa391",
-          100: "#11423b",
-          200: "#155048",
-          300: "#176254",
-          400: "#228375",
-          500: "#2aa391",
+          100: "#003F36",
+          200: "#005045",
+          300: "#006256",
+          400: "#008471",
+          500: "#00A58C",
           600: "#3cc1ad",
           700: "#7accc3",
           800: "#a5ddd6",
@@ -208,7 +238,7 @@ module.exports = {
       gray: {
         light: {
           DEFAULT: "#677285",
-          100: "#efeff2",
+          100: "#F4F4F6",
           200: "#e1e2e6",
           300: "#c4c8d1",
           400: "#8993a5",
@@ -219,10 +249,10 @@ module.exports = {
         },
         dark: {
           DEFAULT: "#7794ab",
-          100: "#141b1f",
-          200: "#27343e",
-          300: "#364754",
-          400: "#465c6e",
+          100: "#080B0E",
+          200: "#1C262D",
+          300: "#2D404E",
+          400: "#4E6A81",
           500: "#7794ab",
           600: "#94abbc",
           700: "#adbecb",
@@ -233,7 +263,7 @@ module.exports = {
 
     fontFamily: {
       sans: [
-        "Roboto",
+        "Roboto Flex",
         "system-ui",
         "-apple-system",
         "BlinkMacSystemFont",

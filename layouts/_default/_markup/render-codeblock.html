@@ -1,13 +1,17 @@
 <div class="group relative">
   <button
-    x-data="{ code: '{{ strings.ReplaceRE `(?sm)^\$\s+` "" .Inner | base64Encode }}' }"
-    class="material-symbols-rounded hidden group-hover:block absolute top-3 right-3 text-gray-light-300 dark:text-gray-dark-600"
+    x-data="{ code: '{{encoding.Base64Encode .Inner}}', copying: false }"
+    class="absolute top-3 right-3 text-gray-light-300 dark:text-gray-dark-600"
     title="Copy"
-    @click="window.navigator.clipboard.writeText(atob(code));
-    $el.textContent='check_circle';
-    setTimeout(() => $el.textContent='content_copy', 2000);"
+    @click="window.navigator.clipboard.writeText(atob(code).replaceAll(/^\$\s*/gm, ''));
+    copying = true;
+    setTimeout(() => copying = false, 2000);"
   >
-    content_copy
+    <span :class="{ 'group-hover:block' : !copying }" class="hidden icon-svg">{{ partialCached "icon" "content_copy" "content_copy" }}</span>
+    <span :class="{ 'group-hover:block' : copying }" class="hidden icon-svg">{{ partialCached "icon" "check_circle" "check_circle" }}</span>
   </button>
-  {{ highlight .Inner .Type }}
+  {{ $result := transform.HighlightCodeBlock . }}
+  <div class="syntax-light dark:syntax-dark">
+    {{ $result.Wrapped }}
+  </div>
 </div>

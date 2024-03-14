@@ -42,7 +42,7 @@ dependency graph that can be used to put together very complex build
 definitions. It also supports features not exposed in Dockerfiles, like direct
 data mounting and nested invocation.
 
-![Directed acyclic graph (DAG)](../images/buildkit-dag.svg)
+{{< figure src="../images/buildkit-dag.svg" class="invertible" >}}
 
 Everything about execution and caching of your builds is defined in LLB. The
 caching model is entirely rewritten compared to the legacy builder. Rather than
@@ -65,7 +65,7 @@ it to LLB so BuildKit can execute it. Frontends can be distributed as images,
 and the user can target a specific version of a frontend that is guaranteed to
 work for the features used by their definition.
 
-For example, to build a [Dockerfile](../../engine/reference/builder.md) with
+For example, to build a [Dockerfile](../../reference/dockerfile.md) with
 BuildKit, you would
 [use an external Dockerfile frontend](../dockerfile/frontend.md).
 

@@ -1,7 +1,6 @@
 ---
 description: Docker extension API reference
 keywords: Docker, extensions, sdk, API, reference
-skip_read_time: true
 ---
 
 # Interface: DockerDesktopClient
@@ -23,6 +22,7 @@ The client is already connected to the backend.
 >**Warning**
 >
 > It will be removed in a future version. Use [extension](DockerDesktopClient.md#extension) instead.
+{ .warning }
 
 #### Inherited from
 
@@ -90,6 +90,7 @@ const containers = await window.ddClient.listContainers();
 >**Warning**
 >
 > It will be removed in a future version. Use [listContainers](Docker.md#listcontainers) instead.
+{ .warning }
 
 #### Parameters
 
@@ -122,6 +123,7 @@ const images = await window.ddClient.listImages();
 > **Warning**
 > 
 > It will be removed in a future version. Use [listImages](Docker.md#listimages) instead.
+{ .warning }
 
 #### Parameters
 
@@ -145,7 +147,7 @@ ___
 
 ▸ **navigateToContainers**(): `void`
 
-Navigate to the containers window in Docker Desktop.
+Navigate to the container's window in Docker Desktop.
 ```typescript
 window.ddClient.navigateToContainers();
 ```
@@ -153,6 +155,7 @@ window.ddClient.navigateToContainers();
 > **Warning**
 > 
 > It will be removed in a future version. Use [viewContainers](NavigationIntents.md#viewcontainers) instead.
+{ .warning }
 
 #### Returns
 
@@ -176,6 +179,7 @@ await window.ddClient.navigateToContainer(id);
 > **Warning**
 >
 > It will be removed in a future version.
+{ .warning }
 
 #### Parameters
 
@@ -207,6 +211,7 @@ await window.ddClient.navigateToContainerLogs(id);
 > **Warning**
 >
 > It will be removed in a future version.
+{ .warning }
 
 #### Parameters
 
@@ -238,6 +243,7 @@ await window.ddClient.navigateToContainerInspect(id);
 > **Warning**
 >
 > It will be removed in a future version.
+{ .warning }
 
 #### Parameters
 
@@ -270,6 +276,7 @@ await window.ddClient.navigateToContainerStats(id);
 > **Warning**
 > 
 > It will be removed in a future version.
+{ .warning }
 
 #### Parameters
 
@@ -301,6 +308,7 @@ await window.ddClient.navigateToImages(id);
 > **Warning**
 >
 > It will be removed in a future version. Use [viewImages](NavigationIntents.md#viewimages) instead.
+{ .warning }
 
 #### Returns
 
@@ -326,6 +334,7 @@ await window.ddClient.navigateToImage(id, tag);
 > **Warning**
 >
 > It will be removed in a future version. Use [viewImage](NavigationIntents.md#viewimage) instead.
+{ .warning }
 
 #### Parameters
 
@@ -359,6 +368,7 @@ await window.ddClient.navigateToVolumes();
 > **Warning**
 >
 > It will be removed in a future version. Use [viewVolumes](NavigationIntents.md#viewvolumes) instead.
+{ .warning }
 
 #### Returns
 
@@ -383,6 +393,7 @@ window.ddClient.navigateToVolume(volume);
 > **Warning**
 >
 > It will be removed in a future version. Use [viewVolume](NavigationIntents.md#viewvolume) instead.
+{ .warning }
 
 #### Parameters
 
@@ -413,6 +424,7 @@ window.ddClient.navigateToDevEnvironments();
 > **Warning**
 > 
 > It will be removed in a future version. Use [viewDevEnvironments](NavigationIntents.md#viewdevenvironments) instead.
+{ .warning }
 
 #### Returns
 
@@ -441,6 +453,7 @@ window.ddClient.execHostCmd(`cliShippedOnHost xxx`).then((cmdResult: any) => {
 > **Warning**
 > 
 > It will be removed in a future version. Use [exec](ExtensionCli.md#exec) instead.
+{ .warning }
 
 #### Parameters
 
@@ -462,7 +475,7 @@ ___
 
 ▸ **spawnHostCmd**(`cmd`, `args`, `callback`): `void`
 
-Invoke an extension binary on your host and getting the output stream.
+Invoke an extension binary on your host and get the output stream.
 
 ```typescript
 window.ddClient.spawnHostCmd(
@@ -481,6 +494,7 @@ window.ddClient.spawnHostCmd(
 > **Warning**
 >
 > It will be removed in a future version. Use [exec](ExtensionCli.md#exec) instead.
+{ .warning }
 
 #### Parameters
 
@@ -504,7 +518,7 @@ ___
 
 ▸ **execDockerCmd**(`cmd`, `...args`): `Promise`<[`ExecResultV0`](ExecResultV0.md)\>
 
-You can also directly execute the docker binary.
+You can also directly execute the Docker binary.
 
 ```typescript
 const output = await window.ddClient.execDockerCmd("info");
@@ -513,6 +527,7 @@ const output = await window.ddClient.execDockerCmd("info");
 > **Warning**
 >
 > It will be removed in a future version. Use [exec](DockerCommand.md#exec) instead.
+{ .warning }
 
 #### Parameters
 
@@ -535,8 +550,8 @@ The result will contain both the standard output and the standard error of the e
 For convenience, the command result object also has methods to easily parse it depending on the output format:
 
 - `output.lines(): string[]` splits output lines.
-- `output.parseJsonObject(): any` parses a well-formed json output.
-- `output.parseJsonLines(): any[]` parses each output line as a json object.
+- `output.parseJsonObject(): any` parses a well-formed JSON output.
+- `output.parseJsonLines(): any[]` parses each output line as a JSON object.
 
 If the output of the command is too long, or you need to get the output as a stream you can use the
  * spawnDockerCmd function:
@@ -560,6 +575,7 @@ ___
 > **Warning**
 >
 > It will be removed in a future version. Use [exec](DockerCommand.md#exec) instead.
+{ .warning }
 
 #### Parameters
 
@@ -592,12 +608,13 @@ window.ddClient.openExternal("https://docker.com");
 **Warning**
 >
 > It will be removed in a future version. Use [openExternal](Host.md#openexternal) instead.
+{ .warning }
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `url` | `string` | The URL the browser will open (must have the protocol `http` or `https`). |
+| `url` | `string` | The URL the browser opens (must have the protocol `http` or `https`). |
 
 #### Returns
 
@@ -624,6 +641,7 @@ window.ddClient.toastSuccess("message");
 >**Warning`**
 >
 > It will be removed in a future version. Use [success](Toast.md#success) instead.
+{ .warning }
 
 #### Parameters
 
@@ -654,6 +672,7 @@ window.ddClient.toastWarning("message");
 > **Warning**
 >
 > It will be removed in a future version. Use [warning](Toast.md#warning) instead.
+{ .warning }
 
 #### Parameters
 
@@ -684,6 +703,7 @@ window.ddClient.toastError("message");
 >**Warning**
 >
 > It will be removed in a future version. Use [error](Toast.md#error) instead.
+{ .warning }
 
 #### Parameters
 

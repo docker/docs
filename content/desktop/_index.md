@@ -46,9 +46,9 @@ aliases:
 ---
 
 Docker Desktop is a one-click-install application for your Mac, Linux, or Windows environment
-that lets you to build, share, and run containerized applications and microservices. 
+that lets you build, share, and run containerized applications and microservices. 
 
-It provides a straightforward GUI (Graphical User Interface) that lets you manage your containers, applications, and images directly from your machine. Docker Desktop can be used either on its own or as a complementary tool to the CLI. 
+It provides a straightforward GUI (Graphical User Interface) that lets you manage your containers, applications, and images directly from your machine. You can use Docker Desktop either on its own or as a complementary tool to the CLI. 
 
 Docker Desktop reduces the time spent on complex setups so you can focus on writing code. It takes care of port mappings, file system concerns, and other default settings, and is regularly updated with bug fixes and security updates.
 
@@ -59,7 +59,7 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 - [Docker Engine](../engine/index.md)
 - Docker CLI client
 - [Docker Scout](../scout/_index.md) (additional subscription may apply)
-- [Docker Buildx](../build/index.md)
+- [Docker Build](../build/index.md)
 - [Docker Extensions](extensions/index.md)
 - [Docker Compose](../compose/index.md)
 - [Docker Content Trust](../engine/security/trust/index.md)
@@ -72,7 +72,7 @@ Docker Desktop reduces the time spent on complex setups so you can focus on writ
 * Ability to containerize and share any application on any cloud platform, in multiple languages and frameworks.
 * Quick installation and setup of a complete Docker development environment.
 * Includes the latest version of Kubernetes.
-* On Windows, the ability to toggle between Linux and Windows Server environments to build applications.
+* On Windows, the ability to toggle between Linux and Windows containers to build applications.
 * Fast and reliable performance with native Windows Hyper-V virtualization.
 * Ability to work natively on Linux through WSL 2 on Windows machines.
 * Volume mounting for code and data, including file change notifications and easy access to running containers on the localhost network.
