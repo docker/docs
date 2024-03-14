@@ -65,6 +65,9 @@ USER app
 
 # Copy source files into application directory
 COPY --chown=app:app . /app
+
+# Install dependencies
+RUN npm install
 ```
 
 ### `action`
