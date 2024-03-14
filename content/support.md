@@ -64,6 +64,7 @@ Docker excludes support for the following types of issues:
    * System/Server administration activities
    * Third-party applications not provided by Docker
    * Use on or in conjunction with hardware or software other than that specified in the applicable documentation
+   * Running multiple instances of Docker Desktop on a single machine
 
 ## What Docker Desktop versions are supported?
 
