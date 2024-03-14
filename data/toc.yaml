@@ -2098,7 +2098,11 @@ Manuals:
       -  path: /security/for-admins/single-sign-on/
          title: Overview
       -  path: /security/for-admins/single-sign-on/configure/
-         title: Configure
+         title: Configure Docker
+      -  path: /security/for-admins/single-sign-on/configure/configure-idp/
+         title: Configure your IdP
+      -  path: /security/for-admins/single-sign-on/connect/
+         title: Connect
       -  path: /security/for-admins/single-sign-on/manage/
          title: Manage
     - path: /security/for-admins/scim/
