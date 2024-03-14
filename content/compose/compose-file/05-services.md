@@ -1407,19 +1407,20 @@ expressed in the short form.
 - `published`: The publicly exposed port. It is defined as a string and can be set as a range using syntax `start-end`. It means the actual port is assigned a remaining available port, within the set range.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
+- `app_protocol`: The application procotol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands.
 - `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
 - `name`: A human-readable name for the port, used to document it's usage within the service.
 
 ```yml
 ports:
-  - name: http
+  - name: web
     target: 80
     host_ip: 127.0.0.1
     published: "8080"
     protocol: tcp
     mode: host
 
-  - name: https
+  - name: web-secured
     target: 443
     host_ip: 127.0.0.1
     published: "8083-9000"
