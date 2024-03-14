@@ -26,6 +26,10 @@ A Synchronized file share behaves just like a virtual file share, but takes adva
 
 After creating a file share instance, any container using a bind mount that points to a location on the host filesystem matching the specified synchronized file share location, or a subdirectory within it,  utilizes the Synchronized File Shares feature. Bind mounts that don't satisfy this condition are passed to the normal virtual filesystem [bind-mounting mechanism](../storage/bind-mounts.md), for example VirtioFS or gRPC-FUSE.
 
+> **Note**
+>
+> Synchronized file shares is not used by Kubernetes' `hostPath` volumes in Docker Desktop.
+
 > **Important**
 >
 > Synchronized file shares isn't available on WSL or when using Windows containers. 
@@ -72,6 +76,8 @@ In general, use your `.syncignore` file to exclude items that aren't critical to
 ## Known issues
 
 - Changes made to `.syncignore` don't lead to immediate deletions unless the file share is recreated. In other words, files that are newly ignored due to modifications in the `.syncignore` file remain in their current location, but are no longer updated during synchronization.
+
+- File share instances are currently limited to approximately 1-1.5 million files per share. Docker plans to increase this limit to 2 million in a future release. For best performance, if you have a file share instance of this size, try to decompose it into multiple shares corresponding to individual bind mount locations.
 
 - Case conflicts, due to Linux being case-sensitive and macOS/Windows only being case-preserving, display as **File exists** problems in the GUI. These can be ignored. However, if they persist, you can report the issue.
 
