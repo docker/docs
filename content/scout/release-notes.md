@@ -12,9 +12,16 @@ the `docker/scout-cli` [GitHub repository](https://github.com/docker/scout-cli/r
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
 for what's coming next.
 
-## 2024 Q1
+## Q1 2024
 
-New features and enhancements released in Q1 of 2024.
+New features and enhancements released in the first quarter of of 2024.
+
+### 2024-03-14
+
+The **All critical vulnerabilities** policy has been removed.
+The **Fixable critical and high vulnerabilities** policy provides similar functionality,
+and will be updated in the future to allow for more extensive customization,
+making the now-removed **All critical vulnerabilities** policy redundant.
 
 ### 2024-01-26
 
@@ -67,9 +74,9 @@ For more information about how to authorize the Docker Scout GitHub app on your
 source repositories, see
 [Integrate Docker Scout with GitHub](./integrations/source-code-management/github.md).
 
-## 2023 Q4
+## Q4 2023
 
-New features and enhancements released in Q4 of 2023.
+New features and enhancements released in the fourth quarter of 2023.
 
 ### 2023-12-20
 
