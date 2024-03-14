@@ -1418,6 +1418,7 @@ ports:
     host_ip: 127.0.0.1
     published: "8080"
     protocol: tcp
+    app_protocol: http
     mode: host
 
   - name: web-secured
@@ -1425,6 +1426,7 @@ ports:
     host_ip: 127.0.0.1
     published: "8083-9000"
     protocol: tcp
+    app_protocol: https
     mode: host
 ```
 
