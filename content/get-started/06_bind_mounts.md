@@ -79,7 +79,7 @@ setting, see the topic for [Mac](../desktop/settings/mac.md/#file-sharing),
    {{< /tab >}}
    {{< /tabs >}}
    
-   The `--mount` option tells Docker to create a bind mount, where `src` is the
+   The `--mount type=bind` option tells Docker to create a bind mount, where `src` is the
    current working directory on your host machine (`getting-started-app`), and
    `target` is where that directory should appear inside the container (`/src`).
 
