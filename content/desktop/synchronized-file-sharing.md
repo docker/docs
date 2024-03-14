@@ -51,6 +51,12 @@ When the status indicator displays **Watching for filesystem changes**, your fil
 >
 > When you create a new service, setting the [bind mount option consistency](../reference/cli/docker/service/create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
 
+> **Tip**
+>
+> Compose can now automatically create file shares for bind mounts. 
+> Ensure you're signed into Docker with a paid subscription and have **Access experimental features** enabled in Docker Desktop settings.
+{ .tip }
+
 ## Explore your file share instance
 
 The **Synchronized file shares** section displays all your file share instances and provides useful information about each instance including:
