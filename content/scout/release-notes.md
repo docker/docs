@@ -16,6 +16,13 @@ for what's coming next.
 
 New features and enhancements released in the first quarter of of 2024.
 
+### 2024-03-14
+
+The **All critical vulnerabilities** policy has been removed.
+The **Fixable critical and high vulnerabilities** policy provides similar functionality,
+and will be updated in the future to allow for more extensive customization,
+making the now-removed **All critical vulnerabilities** policy redundant.
+
 ### 2024-01-26
 
 **Azure Container Registry** integration graduated from

@@ -154,12 +154,11 @@ The image is evaluated against the default, out-of-the-box policies.
 $ docker scout quickview
 
 ...
-Policy status  FAILED  (2/7 policies met, 2 missing data)
+Policy status  FAILED  (2/6 policies met, 2 missing data)
 
   Status │                  Policy                   │           Results
 ─────────┼───────────────────────────────────────────┼──────────────────────────────
   ✓      │ Copyleft licenses                         │    0 packages
-  !      │ Critical vulnerabilities                  │    2C     0H     0M     0L
   !      │ Default non-root user                     │
   !      │ Fixable critical and high vulnerabilities │    2C    16H     0M     0L
   ✓      │ High-profile vulnerabilities              │    0C     0H     0M     0L
