@@ -57,7 +57,40 @@ testuser:231072:65536
 - `overlay2` storage driver  is enabled by default
   ([Ubuntu-specific kernel patch](https://kernel.ubuntu.com/git/ubuntu/ubuntu-bionic.git/commit/fs/overlayfs?id=3b7da90f28fe1ed4b79ef2d994c81efbc58f1144)).
 
-- Known to work on Ubuntu 18.04, 20.04, and 22.04.
+- Ubuntu 24.04 and later enables restricted unprivileged user namespaces by
+  default, which prevents unprivileged processes in creating user namespaces
+  unless an AppArmor profile is configured to allow programs to use
+  unprivileged user namespaces.
+
+  If you install `docker-ce-rootless-extras` using the deb package (`apt-get
+  install docker-ce-rootless-extras`), then the AppArmor profile for
+  `rootlesskit` is already bundled with the `apparmor` deb package. With this
+  installation method, you don't need to add any manual the AppArmor
+  configuration. If you install the rootless extras using the [installation
+  script](https://get.docker.com/rootless), however, you must add an AppArmor
+  profile for `rootlesskit` manually:
+
+  1. Add the AppArmor profile to `/etc/apparmor.d/usr.local.bin.rootlesskit`:
+
+     ```console
+     $ cat <<EOF > /etc/apparmor.d/$(echo $HOME/bin/rootlesskit | sed -e s@^/@@ -e s@/@.@g)
+     abi <abi/4.0>,
+     include <tunables/global>
+
+     $HOME/bin/rootlesskit flags=(unconfined) {
+       userns,
+
+       include if exists <local/$(echo $HOME/bin/rootlesskit | sed -e s@^/@@ -e s@/@.@g)>
+     }
+     EOF
+     ```
+
+  2. Restart AppArmor.
+
+     ```console
+     $ systemctl restart apparmor.service
+     ```
+
 {{< /tab >}}
 {{< tab name="Debian GNU/Linux" >}}
 - Install `dbus-user-session` package if not installed. Run `sudo apt-get install -y dbus-user-session` and relogin.
