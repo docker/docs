@@ -335,7 +335,7 @@ This is a simplified example, but it demonstrates the basic principle of `includ
    composetest_web_1     flask run                        Up      0.0.0.0:8000->5000/tcp
    ```
 
-- See `docker compose --help` to see other available commands.
+- Run `docker compose --help` to see other available commands.
 
 - If you started Compose with `docker compose up -d`, stop your services once you've finished with them:
 
@@ -343,7 +343,7 @@ This is a simplified example, but it demonstrates the basic principle of `includ
    $ docker compose stop
    ```
 
-- You can bring everything down, removing the containers entirely, with the `down` command. 
+- You can bring everything down, removing the containers entirely, with the `docker compose down` command. 
 
 ## Where to go next
 
