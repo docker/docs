@@ -11,6 +11,18 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.25.0
+{{< release-date date="2024-03-15" >}}
+
+
+### Update
+- Dependencies upgrade: bump compose-go v2.0.0
+
+### Bug fixes and enhancements
+- Restored `config` hebaviour until `--no-interpolate` is set
+- Fixed service name shell completion
+- Added `--watch` flag to `up` command
+
 ## 2.24.7
 {{< release-date date="2024-03-06" >}}
 
