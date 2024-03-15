@@ -14,7 +14,7 @@ The following describes some of the key features included with your Docker Core 
 
 3 Docker Scout-enabled repositories for advanced remote image analysis. You can purchase a Docker Scout subscription to enable more repositories. See [Docker Scout subscriptions and features](../scout-details.md).
 
-Docker Build Cloud minutes are also included. For more information, see [Docker Build Cloud subscriptions and features](../build-details.md).
+Docker Build Cloud minutes are also included. For more information, see [Docker Build Cloud subscriptions and features](../build-cloud/build-details.md).
 
 Docker maintains a [public roadmap](https://github.com/docker/roadmap) so subscribers can see what new features are in development, as well as request new capabilities.
 
