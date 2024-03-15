@@ -33,20 +33,21 @@ container
 The following table describes the available driver-specific options that you can
 pass to `--driver-opt`:
 
-| Parameter        | Type   | Default          | Description                                                                                                            |
-| ---------------- | ------ | ---------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `image`          | String |                  | Sets the BuildKit image to use for the container.                                                                      |
-| `memory`         | String |                  | Sets the amount of memory the container can use.                                                                       |
-| `memory-swap`    | String |                  | Sets the memory swap limit for the container.                                                                          |
-| `cpu-quota`      | String |                  | Imposes a CPU CFS quota on the container.                                                                              |
-| `cpu-period`     | String |                  | Sets the CPU CFS scheduler period for the container.                                                                   |
-| `cpu-shares`     | String |                  | Configures CPU shares (relative weight) of the container.                                                              |
-| `cpuset-cpus`    | String |                  | Limits the set of CPU cores the container can use.                                                                     |
-| `cpuset-mems`    | String |                  | Limits the set of CPU memory nodes the container can use.                                                              |
-| `network`        | String |                  | Sets the network mode for the container.                                                                               |
-| `cgroup-parent`  | String | `/docker/buildx` | Sets the cgroup parent of the container if Docker is using the "cgroupfs" driver.                                      |
-| `restart-policy` | String | `unless-stopped` | Sets the container's [restart policy](../../config/containers/start-containers-automatically.md#use-a-restart-policy). |
-| `env.<key>`      | String |                  | Sets the environment variable `key` to the specified `value` in the container.                                         |
+| Parameter        | Type    | Default          | Description                                                                                                            |
+| ---------------- | ------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `image`          | String  |                  | Sets the BuildKit image to use for the container.                                                                      |
+| `memory`         | String  |                  | Sets the amount of memory the container can use.                                                                       |
+| `memory-swap`    | String  |                  | Sets the memory swap limit for the container.                                                                          |
+| `cpu-quota`      | String  |                  | Imposes a CPU CFS quota on the container.                                                                              |
+| `cpu-period`     | String  |                  | Sets the CPU CFS scheduler period for the container.                                                                   |
+| `cpu-shares`     | String  |                  | Configures CPU shares (relative weight) of the container.                                                              |
+| `cpuset-cpus`    | String  |                  | Limits the set of CPU cores the container can use.                                                                     |
+| `cpuset-mems`    | String  |                  | Limits the set of CPU memory nodes the container can use.                                                              |
+| `default-load`   | Boolean | `false`          | Automatically load images to the Docker Engine image store.                                                            |
+| `network`        | String  |                  | Sets the network mode for the container.                                                                               |
+| `cgroup-parent`  | String  | `/docker/buildx` | Sets the cgroup parent of the container if Docker is using the "cgroupfs" driver.                                      |
+| `restart-policy` | String  | `unless-stopped` | Sets the container's [restart policy](../../config/containers/start-containers-automatically.md#use-a-restart-policy). |
+| `env.<key>`      | String  |                  | Sets the environment variable `key` to the specified `value` in the container.                                         |
 
 Before you configure the resource limits for the container,
 read about [configuring runtime resource constraints for containers](../../config/containers/resource_constraints/).
