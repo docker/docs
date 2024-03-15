@@ -1559,10 +1559,10 @@ the service's containers.
   The default value is world-readable permissions (mode `0444`).
   The writable bit must be ignored if set. The executable bit may be set. 
 
-The following example sets the name of the `server-certificate` secret file to `server.crt`
+The following example sets the name of the `server-certificate` secret file to `server.cert`
 within the container, sets the mode to `0440` (group-readable), and sets the user and group
-to `103`. The value of `server-certificate` secret is provided by the platform through a lookup and
-the secret's lifecycle is not directly managed by Compose.
+to `103`. The value of `server-certificate` is set
+to the contents of the file `./server.cert`.
 
 ```yml
 services:
@@ -1576,7 +1576,7 @@ services:
         mode: 0440
 secrets:
   server-certificate:
-    external: true
+    file: ./server.cert
 ```
 
 ## security_opt
