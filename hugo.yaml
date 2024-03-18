@@ -117,21 +117,24 @@ params:
 
 menus:
   main:
-  - name: Guides
+  - name: Get started
     url: /get-started/overview/
     weight: 1
-  - name: Manuals
-    url: /manuals/
+  - name: Guides
+    url: /language/
     weight: 2
+  - name: Docker platform
+    url: /manuals/
+    weight: 3
+  - name: Accounts and enterprise
+    url: /admin/
+    weight: 4
   - name: Reference
     url: /reference/
-    weight: 3
+    weight: 5
   - name: Samples
     url: /samples/
-    weight: 4
-  - name: FAQ
-    url: /faq/
-    weight: 5
+    weight: 6
 
   footer:
     - url: https://www.docker.com/products

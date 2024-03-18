@@ -1,4 +1,4 @@
-Guides:
+Get started:
 - title: Docker overview
   path: /get-started/overview/
 - sectiontitle: Get started
@@ -46,6 +46,7 @@ Guides:
       - title: "Part 10: What next?"
         path: /get-started/11_what_next/
 
+Guides:
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -976,7 +977,58 @@ Reference:
           title: Version 2
 - path: /glossary/
   title: Glossary
-
+- sectiontitle: FAQs
+  section:
+  - path: /faq/
+    title: Overview
+  - path: /billing/faqs/
+    title: Billing
+  - path: /compose/faq/
+    title: Compose
+  - sectiontitle: Desktop
+    section:
+    - path: /desktop/faqs/general/
+      title: General
+    - path: /desktop/faqs/macfaqs/
+      title: Mac
+    - path: /desktop/faqs/windowsfaqs/
+      title: Windows
+    - path: /desktop/faqs/linuxfaqs/
+      title: Linux
+    - path: /desktop/faqs/releases/
+      title: Releases
+  - sectiontitle: Docker account and admin
+    section:
+    - path: /faq/admin/general-faqs/
+      title: General
+    - path: /faq/admin/organization-faqs/
+      title: Organization
+    - path: /faq/admin/company-faqs/
+      title: Company
+  - path: /subscription/faq/
+    title: Subscription
+  - sectiontitle: Security
+    section:
+    - path: /faq/security/general/
+      title: General
+    - path: /faq/security/networking-and-vms/
+      title: Networking and VMs
+    - path: /faq/security/eci-faq/
+      title: Enhanced Container Isolation
+    - sectiontitle: Single Sign-On
+      section:
+      - path: /faq/security/single-sign-on/faqs/
+        title: General
+      - path: /faq/security/single-sign-on/saml-faqs/
+        title: SAML
+      - path: /faq/security/single-sign-on/idp-faqs/
+        title: Identity providers
+      - path: /faq/security/single-sign-on/domain-faqs/
+        title: Domains
+      - path: /faq/security/single-sign-on/enforcement-faqs/
+        title: Enforcement
+      - path: /faq/security/single-sign-on/users-faqs/
+        title: Manage users
 
 
 Samples:
@@ -1074,7 +1126,7 @@ Samples:
       title: Wireguard
 
 
-Manuals:
+Docker platform:
 - path: /manuals/
   title: Overview
 - title: Get Docker
@@ -2049,7 +2101,27 @@ Manuals:
     title: OCI artifacts
   - path: /docker-hub/release-notes/
     title: Release notes
+- sectiontitle: Trusted content
+  section:
+  - path: /trusted-content/
+    title: Overview
+  - path: /trusted-content/official-images/
+    title: Docker Official images
+  - path: /trusted-content/dvp-program/
+    title: Docker Verified Publisher Program
+  - path: /trusted-content/dsos-program/
+    title: Docker-Sponsored Open Source Program
+  - path: /trusted-content/insights-analytics/
+    title: Insights and analytics
 
+- path: /release-notes/
+  title: Release notes
+- path: /support/
+  title: Get support
+- path: /release-lifecycle/
+  title: Product release lifecycle
+
+Accounts and enterprise:
 - sectiontitle: Administration
   section:
   - path: /admin/
@@ -2181,75 +2253,3 @@ Manuals:
     title: Docker Scout subscriptions and features
   - path: /subscription/desktop-license/
     title: Docker Desktop license agreement
-
-- sectiontitle: Trusted content
-  section:
-  - path: /trusted-content/
-    title: Overview
-  - path: /trusted-content/official-images/
-    title: Docker Official images
-  - path: /trusted-content/dvp-program/
-    title: Docker Verified Publisher Program
-  - path: /trusted-content/dsos-program/
-    title: Docker-Sponsored Open Source Program
-  - path: /trusted-content/insights-analytics/
-    title: Insights and analytics
-
-- path: /release-notes/
-  title: Release notes
-- path: /support/
-  title: Get support
-- path: /release-lifecycle/
-  title: Product release lifecycle
-
-FAQ:
-  - path: /faq/
-    title: Overview
-  - path: /billing/faqs/
-    title: Billing
-  - path: /compose/faq/
-    title: Compose
-  - sectiontitle: Desktop
-    section:
-    - path: /desktop/faqs/general/
-      title: General
-    - path: /desktop/faqs/macfaqs/
-      title: Mac
-    - path: /desktop/faqs/windowsfaqs/
-      title: Windows
-    - path: /desktop/faqs/linuxfaqs/
-      title: Linux
-    - path: /desktop/faqs/releases/
-      title: Releases
-  - sectiontitle: Docker account and admin
-    section:
-    - path: /faq/admin/general-faqs/
-      title: General
-    - path: /faq/admin/organization-faqs/
-      title: Organization
-    - path: /faq/admin/company-faqs/
-      title: Company
-  - path: /subscription/faq/
-    title: Subscription
-  - sectiontitle: Security
-    section:
-    - path: /faq/security/general/
-      title: General
-    - path: /faq/security/networking-and-vms/
-      title: Networking and VMs
-    - path: /faq/security/eci-faq/
-      title: Enhanced Container Isolation
-    - sectiontitle: Single Sign-On
-      section:
-      - path: /faq/security/single-sign-on/faqs/
-        title: General
-      - path: /faq/security/single-sign-on/saml-faqs/
-        title: SAML
-      - path: /faq/security/single-sign-on/idp-faqs/
-        title: Identity providers
-      - path: /faq/security/single-sign-on/domain-faqs/
-        title: Domains
-      - path: /faq/security/single-sign-on/enforcement-faqs/
-        title: Enforcement
-      - path: /faq/security/single-sign-on/users-faqs/
-        title: Manage users
