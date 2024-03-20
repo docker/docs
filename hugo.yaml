@@ -99,7 +99,7 @@ params:
   compose_version: "v2.25.0"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  buildkit_version: "0.12.3"
+  buildkit_version: "0.13.1"
 
   example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
