@@ -1,4 +1,5 @@
 command: docker scout attestation add
+aliases: docker scout attestation add, docker scout attest add
 short: Add attestation to image
 long: The docker scout attestation add command adds attestations to images.
 usage: docker scout attestation add OPTIONS IMAGE [IMAGE...]
