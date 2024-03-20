@@ -41,13 +41,13 @@ What you'll see is that the file created in one container isn't available in ano
    file does not exist.
    
    ```console
-   $ docker run alpine cat greetings.txt
+   $ docker run alpine cat greeting.txt
    ```
 
    You should see output similiar to the following that indicates the file does not exist in the new container.
 
    ```console
-   cat: can't open 'greetings.txt': No such file or directory
+   cat: can't open 'greeting.txt': No such file or directory
    ```
 
 5. Go ahead and remove the containers using `docker ps --all` to get the IDs,
