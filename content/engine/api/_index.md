@@ -73,21 +73,21 @@ To see the highest version of the API your Docker daemon and client support, use
 ```console
 $ docker version
 Client: Docker Engine - Community
- Version:           25.0.0
- API version:       1.44
- Go version:        go1.21.6
- Git commit:        e758fe5
- Built:             Thu Jan 18 17:11:25 2024
+ Version:           26.0.0
+ API version:       1.45
+ Go version:        go1.21.8
+ Git commit:        2ae903e
+ Built:             Wed Mar 20 15:17:48 2024
  OS/Arch:           linux/amd64
  Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          25.0.0
-  API version:      1.44 (minimum version 1.24)
-  Go version:       go1.21.6
-  Git commit:       615dfdf
-  Built:            Thu Jan 18 17:09:47 2024
+  Version:          26.0.0
+  API version:      1.45 (minimum version 1.24)
+  Go version:       go1.21.8
+  Git commit:       8b79278
+  Built:            Wed Mar 20 15:17:48 2024
   OS/Arch:          linux/amd64
   Experimental:     false
   ...
@@ -99,14 +99,14 @@ You can specify the API version to use in any of the following ways:
   that incorporates the API version with the features you need.
 - When using `curl` directly, specify the version as the first part of the URL.
   For instance, if the endpoint is `/containers/` you can use
-  `/v1.44/containers/`.
+  `/v1.45/containers/`.
 - To force the Docker CLI or the Docker Engine SDKs to use an older version
   of the API than the version reported by `docker version`, set the
   environment variable `DOCKER_API_VERSION` to the correct version. This works
   on Linux, Windows, or macOS clients.
 
   ```console
-  $ DOCKER_API_VERSION='1.43'
+  $ DOCKER_API_VERSION='1.44'
   ```
 
   While the environment variable is set, that version of the API is used, even
@@ -127,6 +127,7 @@ You can specify the API version to use in any of the following ways:
 
 | Docker version | Maximum API version        | Change log                                               |
 |:---------------|:---------------------------|:---------------------------------------------------------|
+| 26.0           | [1.45](/engine/api/v1.45/) | [changes](/engine/api/version-history/#v145-api-changes) |
 | 25.0           | [1.44](/engine/api/v1.44/) | [changes](/engine/api/version-history/#v144-api-changes) |
 | 24.0           | [1.43](/engine/api/v1.43/) | [changes](/engine/api/version-history/#v143-api-changes) |
 | 23.0           | [1.42](/engine/api/v1.42/) | [changes](/engine/api/version-history/#v142-api-changes) |

@@ -832,6 +832,8 @@ Reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.45/
+        title: v1.45 reference
       - path: /engine/api/v1.44/
         title: v1.44 reference
       - path: /engine/api/v1.43/
@@ -1706,10 +1708,12 @@ Manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/25.0/
-      title: Engine 25.0
+    - path: /engine/release-notes/26.0/
+      title: Engine 26.0
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/25.0/
+        title: Engine 25.0
       - path: /engine/release-notes/24.0/
         title: Engine 24.0
       - path: /engine/release-notes/23.0/

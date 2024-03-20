@@ -9,6 +9,16 @@ usage: docker scout cache prune
 pname: docker scout cache
 plink: docker_scout_cache.yaml
 options:
+    - option: epss
+      value_type: bool
+      default_value: "false"
+      description: Prune cached EPSS scores
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: force
       shorthand: f
       value_type: bool
