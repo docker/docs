@@ -75,6 +75,7 @@ options:
       value_type: bool
       default_value: "false"
       description: Give extended privileges to the command
+      details_url: '#privileged'
       deprecated: false
       hidden: false
       experimental: false
@@ -180,6 +181,10 @@ examples: |-
     VAR_B=2
     HOME=/root
     ```
+
+    ### Escalate container privileges (--privileged) {#privileged}
+
+    See [`docker run --privileged`](/reference/cli/docker/container/run/#privileged).
 
     ### Set the working directory for the exec process (--workdir, -w) {#workdir}
 
