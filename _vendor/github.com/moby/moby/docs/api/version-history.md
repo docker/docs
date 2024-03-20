@@ -13,6 +13,24 @@ keywords: "API, Docker, rcli, REST, documentation"
      will be rejected.
 -->
 
+## v1.45 API changes
+
+[Docker Engine API v1.45](https://docs.docker.com/engine/api/v1.45/) documentation
+
+* `POST /containers/create` now supports `VolumeOptions.Subpath` which allows a
+  subpath of a named volume to be mounted.
+* `POST /images/search` will always assume a `false` value for the `is-automated`
+  field. Consequently, searching for `is-automated=true` will yield no results,
+  while `is-automated=false` will be a no-op.
+* `GET /images/{name}/json` no longer includes the `Container` and
+  `ContainerConfig` fields. To access image configuration, use `Config` field
+  instead.
+* The `Aliases` field returned in calls to `GET /containers/{name:.*}/json` no
+  longer contains the short container ID, but instead will reflect exactly the
+  values originally submitted to the `POST /containers/create` endpoint. The
+  newly introduced `DNSNames` should now be used instead when short container
+  IDs are needed.
+
 ## v1.44 API changes
 
 [Docker Engine API v1.44](https://docs.docker.com/engine/api/v1.44/) documentation
@@ -70,9 +88,9 @@ keywords: "API, Docker, rcli, REST, documentation"
 * `GET /info` now includes `status` properties in `Runtimes`.
 * A new field named `DNSNames` and containing all non-fully qualified DNS names
   a container takes on a specific network has been added to `GET /containers/{name:.*}/json`.
-* The `Aliases` field returned in calls to `GET /containers/{name:.*}/json` in v1.44  and older
-  versions contains the short container ID. This will change in the next API version,  v1.45.
-  Starting with that API version, this specific value will  be removed from the `Aliases` field
+* The `Aliases` field returned in calls to `GET /containers/{name:.*}/json` in v1.44 and older
+  versions contains the short container ID. This will change in the next API version, v1.45.
+  Starting with that API version, this specific value will be removed from the `Aliases` field
   such that this field will reflect exactly the values originally submitted to the
   `POST /containers/create` endpoint. The newly introduced `DNSNames` should now be used instead.
 * The fields `HairpinMode`, `LinkLocalIPv6Address`, `LinkLocalIPv6PrefixLen`, `SecondaryIPAddresses`,
