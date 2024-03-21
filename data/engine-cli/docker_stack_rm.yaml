@@ -13,6 +13,18 @@ long: |-
 usage: docker stack rm [OPTIONS] STACK [STACK...]
 pname: docker stack
 plink: docker_stack.yaml
+options:
+    - option: detach
+      shorthand: d
+      value_type: bool
+      default_value: "true"
+      description: Do not wait for stack removal
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
 inherited_options:
     - option: help
       value_type: bool
