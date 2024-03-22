@@ -10,9 +10,9 @@ description: What is a container? This concept page will teach you about contain
 
 Imagine you’re developing a killer web app. It has three main parts - A `React` frontend, a `Python` API, and a `PostgreSQL` database.
 
-- **React app:** A user interface that lets users browse the frontend
-- **Python API:**  An engine that powers the application logic
-- **Database:** Used for storing all the essential information for your application
+- **React app:** A user interface that lets users browse the frontend.
+- **Python API:**  An engine that powers the application logic.
+- **Database:**  Used for storing all the essential information for your application.
 
 Traditionally, all these components are bundled together in one single system. It works but it’s difficult to manage and scale. If one component fails, it might affect the whole application and result in downtime. 
 
@@ -62,22 +62,24 @@ Use the following instructions to run a container.
 
 ## View your container
 
-Congratulations!! You just ran your first container! You can view it in the **Containers** tab of the Docker Desktop GUI.
+Congratulations!! You just ran your first container! 🍻
+ 
+You can view it in the **Containers** tab of the Docker Desktop GUI.
 
 
 ![Screenshot of the container tab of the Docker Desktop GUI showing the welcome-to-docker container running on the host port 8080](images/view-your-containers.webp?border=true&w=750&h=600)
 
-This container runs a simple web server that displays a simple website. When working with more complex projects, you'll run different parts in different containers. For example, a different container for the frontend, backend, and database. In this walkthrough, you only have a simple frontend container.
+This container runs a web server that displays a simple website. When working with more complex projects, you'll run different parts in different containers. For example, a different container for the frontend, backend, and database. In this walkthrough, you only have a simple frontend container.
 
 ## Access the frontend
 
-The frontend is accessible on port 8080 of your local host. Select the link in the Port(s) column of your container, or visit [http://localhost:8080](https://localhost:8080)  in your browser to view it.
+The frontend is accessible on port `8080` of your local host. Select the link in the **Port(s)** column of your container, or visit [http://localhost:8080](https://localhost:8080)  in your browser to view it.
 
 ![Screenshot of the landing page of the nginx web server, coming from the running container](images/access-the-frontend.webp?border)
 
 ## Explore your container
 
-Docker Desktop lets you easily view and interact with different aspects of your container. Try it out yourself. Select your container and then select **Files** to explore your container's isolated file system.
+Docker Desktop lets you easily view and interact with different aspects of your container. Try it out yourself. Select your container and then click on **Files** to explore your container's isolated file system.
 
 
 ![Screenshot of the Docker Desktop GUI showing the files and directories inside a running container](images/explore-your-container.webp?border)
@@ -85,7 +87,7 @@ Docker Desktop lets you easily view and interact with different aspects of your 
 
 ## Stop your container
 
-The `docker/welcome-to-docker` container continues to run until you stop it. To stop the container in Docker Desktop, go to the **Containers** tab and select the **Stop** icon in the **Actions** column of your container.
+The `docker/welcome-to-docker` container continues to run until you stop it. To stop the container, go to the **Containers** tab and select the **Stop** icon in the **Actions** column of your container.
 
 
 ![Screenshot of the Docker Desktop GUI with the nginx container selected and being prepared to stop](images/stop-your-container.webp?border)
@@ -93,11 +95,13 @@ The `docker/welcome-to-docker` container continues to run until you stop it. To 
 {{< /tab >}}
 {{< tab name="CLI" >}}
 
-Follow the instructions to to run Nginx container using your CLI terminal:
+## Run a container
+
+Follow the instructions to to run a container using your CLI terminal:
 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop
 
-2. Open a terminal and run the following command:
+2. Open your CLI terminal and run the following command:
 
 ```console
   docker run -d -p 8080:80 docker/welcome-to-docker
@@ -121,7 +125,7 @@ You will see output like the following:
 
 This output is the result of running the `docker ps` command. It shows you information about the containers currently running on your Docker engine.
 
-This container runs a simple web server that displays a simple website. When working with more complex projects, you'll run different parts in different containers. For example, a different container for the `frontend`, `backend`, and `database`. In this walkthrough, you only have a simple frontend container.
+This container runs a web server that displays a simple website. When working with more complex projects, you'll run different parts in different containers. For example, a different container for the `frontend`, `backend`, and `database`. In this walkthrough, you only have a simple frontend container.
 
 
 ## Access the frontend
@@ -154,4 +158,5 @@ Now that you have learned the basics of a Docker container, it's time to learn a
 - [What is a container](https://docs.docker.com/guides/walkthroughs/what-is-a-container/)
 - [Overview of container](https://www.docker.com/resources/what-container/)
 - [Why Docker?](https://www.docker.com/why-docker/)
+
 {{< button text="What is an image" url="what-is-an-image" >}}
