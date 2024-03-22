@@ -4,6 +4,7 @@ keywords: faq, questions, documentation,  docker
 title: Docker frequently asked questions (FAQ)
 aliases:
 - /engine/misc/faq/
+categories: [faq]
 ---
 
 ### Does Docker run on Linux, macOS, and Windows?

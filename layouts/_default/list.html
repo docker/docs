@@ -8,6 +8,9 @@
     {{ with .Title }}
     <h1 class="scroll-mt-36">{{ . }}</h1>
     {{ end }}
+    <div class="hidden lg:block">
+      {{ partial "pagemeta.html" . }}
+    </div>
     {{ .Content }}
   </article>
 {{ end }}

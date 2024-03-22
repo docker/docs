@@ -9,6 +9,7 @@ aliases:
 - /desktop/linux/install/
 'yes': '![yes](/assets/images/green-check.svg){: .inline style="height: 14px; margin:
   0 auto"}'
+categories: [ installation ]
 ---
 
 > **Docker Desktop terms**

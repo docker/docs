@@ -17,6 +17,7 @@ aliases:
 - /install/windows/ee-preview/
 - /installation/windows/
 - /desktop/win/configuring-wsl/
+categories: [ installation ]
 ---
 
 > **Docker Desktop terms**

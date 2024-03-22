@@ -7,6 +7,7 @@ keywords: build, best practices
 aliases:
 - /engine/userguide/eng-image/multistage-build/
 - /develop/develop-images/multistage-build/
+categories: [best-practices]
 ---
 
 Multi-stage builds are useful to anyone who has struggled to optimize

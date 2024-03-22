@@ -3,6 +3,7 @@ description: Learn how to get started using Docker Hub
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, accounts,
   organizations, repositories, groups, teams
 title: Docker Hub quickstart
+categories: [quickstart]
 aliases:
 - /apidocs/docker-cloud/
 - /docker-cloud/

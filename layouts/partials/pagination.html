@@ -1,0 +1,70 @@
+{{- if gt .Paginator.TotalPages 1 }}
+  {{ $selectable := "cursor-pointer" }}
+  {{ $active := "hover:text-black dark:hover:text-white underline underline-offset-8" }}
+  {{ $disabled := "cursor-not-allowed text-gray-light dark:text-gray-dark" }}
+  <ul class="flex gap-6 items-center">
+  {{- with .Paginator }}
+    {{- $currentPageNumber := .PageNumber }}
+
+    {{- with .First }}
+      {{- if ne $currentPageNumber .PageNumber }}
+      <li>
+        <a class="{{ $selectable }}" href="{{ .URL }}" aria-label="First">
+          <span class="icon-svg">
+            {{- partialCached "icon" "navigate_before" "navigate_before" -}}
+          </span>
+        </a>
+      </li>
+      {{- else }}
+      <li>
+        <a class="{{ $disabled }}" aria-disabled="true" aria-label="First">
+          <span class="icon-svg">
+            {{- partialCached "icon" "navigate_before" "navigate_before" -}}
+          </span>
+        </a>
+      </li>
+      {{- end }}
+    {{- end }}
+
+    {{- $slots := 5 }}
+    {{- $start := math.Max 1 (sub .PageNumber (math.Floor (div $slots 2))) }}
+    {{- $end := math.Min .TotalPages (sub (add $start $slots) 1) }}
+    {{- if lt (add (sub $end $start) 1) $slots }}
+      {{- $start = math.Max 1 (add (sub $end $slots) 1) }}
+    {{- end }}
+
+    {{- range $k := seq $start $end }}
+      {{- if eq $.Paginator.PageNumber $k }}
+      <li>
+        <a class="{{ $active }}" aria-current="page" aria-label="Page {{ $k }}">{{ $k }}</a>
+      </li>
+      {{- else }}
+      <li>
+        <a class="{{ $selectable }}" href="{{ (index $.Paginator.Pagers (sub $k 1)).URL }}" aria-label="Page {{ $k }}">{{ $k }}</a>
+      </li>
+      {{- end }}
+    {{- end }}
+
+    {{- with .Last }}
+      {{- if ne $currentPageNumber .PageNumber }}
+      <li>
+        <a class="{{ $selectable }}" href="{{ .URL }}" aria-label="Last">
+          <span class="icon-svg">
+            {{- partialCached "icon" "navigate_next" "navigate_next" -}}
+          </span>
+        </a>
+      </li>
+      {{- else }}
+      <li>
+        <a class="{{ $disabled }}" aria-disabled="true" aria-label="Last">
+          <span class="icon-svg">
+            {{- partialCached "icon" "navigate_next" "navigate_next" -}}
+          </span>
+        </a>
+      </li>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  </ul>
+{{- end }}
+

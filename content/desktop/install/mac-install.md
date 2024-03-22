@@ -13,6 +13,7 @@ aliases:
 - /docker-for-mac/apple-m1/
 - /docker-for-mac/apple-silicon/
 - /desktop/mac/apple-silicon/
+categories: [ installation ]
 ---
 
 > **Docker Desktop terms**

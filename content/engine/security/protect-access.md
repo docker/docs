@@ -6,6 +6,7 @@ aliases:
 - /articles/https/
 - /engine/articles/https/
 - /engine/security/https/
+categories: [best-practices]
 ---
 
 By default, Docker runs through a non-networked UNIX socket. It can also

@@ -2,6 +2,7 @@
 title: Build release notes
 description: Release notes for Buildx
 keywords: build, buildx, buildkit, release notes
+categories: [release-notes]
 toc_max: 2
 ---
 

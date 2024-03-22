@@ -2,6 +2,7 @@
 description: Summary of samples related to Compose
 keywords: documentation, docs, docker, compose, samples
 title: Sample apps with Compose
+categories: [samples]
 ---
 
 The following samples show the various aspects of how to work with Docker

@@ -21,6 +21,8 @@ grid:
 - title: Docker Desktop
   icon: explore
   link: /desktop/faqs/general/
+cascade:
+  categories: [faq]
 ---
 
 Explore popular FAQ topics.

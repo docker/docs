@@ -6,6 +6,7 @@ title: Install Docker Desktop on Debian
 toc_max: 4
 aliases:
 - /desktop/linux/install/debian/
+categories: [ installation ]
 ---
 
 > **Docker Desktop terms**

@@ -4,6 +4,7 @@ description: Image security best practices guide
 keywords: docker, images, containers, vulnerability, cve
 aliases:
 - /develop/scan-images/
+categories: [best-practices]
 ---
 
 You can take a few steps to improve the security of your
