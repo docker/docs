@@ -46,6 +46,20 @@ Guides:
       - title: "Part 10: What next?"
         path: /get-started/11_what_next/
 
+- sectiontitle: "Docker concepts"
+  section:
+  - sectiontitle: "The basics"
+    section:
+    - title: "What is a container?"
+      path: /guides/docker-concepts/the-basics/what-is-a-container/
+    - title: "What is an image?"
+      path: /guides/docker-concepts/the-basics/what-is-an-image/
+    - title: "What is a registry?"
+      path: /guides/docker-concepts/the-basics/what-is-a-registry/
+    - title: "What is Docker Compose?"
+      path: /guides/docker-concepts/the-basics/what-is-docker-compose/
+
+
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
