@@ -8,19 +8,15 @@ description: What is an image
 
 ## Explanation
 
-Remember those magic boxes we introduced for each component of your web application (`React` frontend, `Python` API backend, `PostgreSQL` database)? What makes them work? Well, those boxes are powered by container images. You can think of a container image as a self-contained package. It’s a complete bundle that includes everything your container needs to run perfectly - files and programs, configuration settings, libraries, binaries and all the dependencies. 
+Remember those magic boxes we introduced for each component of your web application (`React` frontend, `Python` API backend and `PostgreSQL` database)? What makes them work? Well, those boxes are powered by container images. You can think of a container image as a self-contained package. It’s a complete bundle that includes everything your container needs to run perfectly - files and programs, configuration settings, libraries, binaries and all the dependencies. 
 
 So if you think of a `container` as an isolated sandbox environment using all the files in that environment without even installing it on the host, then the question is how do I get those files into that environment? Where do those files come from? How do we share those environments? That’s where container images come in. A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container. 
 
 Two important aspects of images:
 
-
-
 1.  **Images are immutable**
 
 Consider a PostgreSQL Docker image. You can’t edit it directly. They are unchanging once created. Instead, you can create a new image with the desired changes.
-
-
 
 2. **Container images are composed of Layers**
 
@@ -34,13 +30,12 @@ Docker officially maintains Docker Hub. You can find a variety of [DOI](https://
 
 For example, `Redis` and `Memcached` are a few popular ready-to-go DOI Docker images. You can download these images and have these services up and running pretty quickly. There are also base images, like the `Node.js` Docker image, that you can use as a starting point and add your own files and configurations. Whenever you download a Docker image to start a Docker container, you’re downloading everything that’s needed to run a Docker container.
 
-
 ## Try it now
 
 {{< tabs >}}
 {{< tab name="Using Docker Desktop" >}}
 
-## Search and pull a container image
+In this hands-on, you will see how to search and pull a container image using Docker Desktop GUI.
 
 1. Open the Docker Desktop dashboard and select the **Images** tab in the left-hand navigation menu.
 
@@ -54,9 +49,7 @@ For example, `Redis` and `Memcached` are a few popular ready-to-go DOI Docker im
 
  ![A screenshot of the Docker Desktop dashboard showing the search results for the docker/welcome-to-docker image](images/select-image.webp?border=true&w=1050&h=400)
 
-
 Select **Pull** to download the image to your local system.
-
 
 ## View your image
 
@@ -68,11 +61,9 @@ Once you have an image downloaded, you can view quite a few details about the im
 
 ![A screenshot of the Docker Desktop dashboard showing the images tab with an arrow pointing to the docker/welcome-to-docker image](images/pulled-image.webp?border=true&w=1050&h=400)
 
-
 3. The image details page presents you with information regarding the layers of the image, the packages and libraries installed in the image, and any discovered vulnerabilities.
 
 ![A screenshot of the image details view for the docker/welcome-to-docker image](images/image-layers.webp?border=true&w=1050&h=400)
-
 
 In this walkthrough, you searched and pulled a Docker image. In addition to pulling a Docker image, you also learned about the layers of a Docker Image.
 
@@ -99,7 +90,6 @@ You will see output like the following:
 ```
 
 This output is the result of running the docker search command. It shows you information about the image available on the Docker Hub.
-
 
 3. Pull the image
 
@@ -137,12 +127,10 @@ Each of these lines represents different layers of the image being downloaded an
 
 The command shows a list of Docker images currently available on your system. The `docker/welcome-to-docker` has a total size of approximately 29.7MB.
 
-
 In this walkthrough, you searched and pulled a Docker image. In addition to pulling a Docker image, you also learned about the layers of a Docker Image.
 
 {{< /tab >}}
 {{< /tabs >}}
-
 
 ## Additional resources
 
