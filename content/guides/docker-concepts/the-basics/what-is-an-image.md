@@ -8,7 +8,7 @@ description: What is an image
 
 ## Explanation
 
-Remember those magic boxes we introduced for each component of your web application (`React` frontend, `Python` API backend, `PostgreSQL` database)? What makes them work? Well, those boxes are powered by `container` images. You can think of a container image as a self-contained package. It’s a complete bundle that includes everything your container needs to run perfectly - files and programs, configuration settings, libraries, binaries and all the dependencies. 
+Remember those magic boxes we introduced for each component of your web application (`React` frontend, `Python` API backend, `PostgreSQL` database)? What makes them work? Well, those boxes are powered by container images. You can think of a container image as a self-contained package. It’s a complete bundle that includes everything your container needs to run perfectly - files and programs, configuration settings, libraries, binaries and all the dependencies. 
 
 So if you think of a `container` as an isolated sandbox environment using all the files in that environment without even installing it on the host, then the question is how do I get those files into that environment? Where do those files come from? How do we share those environments? That’s where container images come in. A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container. 
 
@@ -18,13 +18,13 @@ Two important aspects of images:
 
 1.  **Images are immutable**
 
-Consider a `PostgreSQL` Docker image. You can’t edit it directly. They are unchanging once created. Instead, you can create a new image with the desired changes.
+Consider a PostgreSQL Docker image. You can’t edit it directly. They are unchanging once created. Instead, you can create a new image with the desired changes.
 
 
 
 2. **Container images are composed of Layers**
 
-Container images are built using layers, and layers represent file system changes. Each layer adds, removes, or modifies layers that might have been there previously. For example, if you have a `Python` Docker Image then you can use the image and add additional layers on the top of the `Python` image and run it in the form of a `container` without even managing `Python` itself. If you need to make a change to a `Python` container image, you either need to build a new image or extend an existing base image, adding your layers on top of it.
+Container images are built using layers, and layers represent file system changes. Each layer adds, removes, or modifies layers that might have been there previously. For example, if you have a `Python` Docker Image then you can use the image and add additional layers on the top of the Python image and run it in the form of a `container` without even managing Python itself. If you need to make a change to a Python container image, you either need to build a new image or extend an existing base image, adding your layers on top of it.
 
 So how are these images distributed? The answer is `Docker Hub`.
 

@@ -12,8 +12,7 @@ Now that you know what a container image is and how it works, you might wonder- 
 
 Well, you can store your container images on your computer system, but what if you want to share them with your friends or use them on another machine? That’s where the image registry comes in.
 
-An image registry is a centralized location for storing and sharing your container images. It can be either public or private. Remember we talked about [Docker Hub](https://hub.docker.com)? It is a public registry that anyone can use, and Docker looks for images on `Docker Hub` by default. While Docker Hub is a popular option, there's a whole world of public container registries available today, including [Amazon Elastic Container Registry(ECR)](https://aws.amazon.com/ecr/), [Azure Container Registry (ACR)](https://azure.microsoft.com/en-in/products/container-registry), [Google Container Registry (GCR)](https://cloud.google.com/artifact-registry) etc. You can even run your private registry in your local system or inside your organization. For example, [VMware Harbor](https://docs.vmware.com/en/VMware-Harbor-Registry/services/vmware-harbor-registry/GUID-index.html), [JFrog Artifactory](https://jfrog.com/artifactory/), [GitLab Container registry](https://docs.gitlab.com/ee/user/packages/container_registry/) etc.
-
+An image registry is a centralized location for storing and sharing your container images. It can be either public or private. Remember we talked about [Docker Hub](https://hub.docker.com)? It is a public registry that anyone can use, and Docker looks for images on `Docker Hub` by default. While Docker Hub is a popular option, there's a whole world of public container registries available today, including [Amazon Elastic Container Registry(ECR)](https://aws.amazon.com/ecr/), [Azure Container Registry (ACR)](https://azure.microsoft.com/en-in/products/container-registry), [Google Container Registry (GCR)](https://cloud.google.com/artifact-registry) etc. You can even run your private registry in your local system or inside your organization. For example, VMware Harbor, JFrog Artifactory, GitLab Container registry etc.
 
 ## Registry vs repository
 
@@ -21,7 +20,7 @@ While you’re working with `Docker Hub`, you might hear users using terms like 
 
 A registry is a centralized location that stores and manages container images whereas a repository is a collection of related container images within a registry. Think of it as a folder where you organize your images based on projects. Each repository contains one or more container images.
 
-> You can create one private repository and unlimited public repositories using the free version of Docker Hub. For more information, visit the Docker Hub subscription page.
+> You can create one private repository and unlimited public repositories using the free version of Docker Hub. For more information, visit the [Docker Hub subscription page](https://www.docker.com/pricing/).
 
 
 ## Try it now
@@ -84,7 +83,7 @@ At the password prompt, enter your personal access token(PAT). If you see the **
 ### Cloning a sample Node.js code
 
 
-Let's clone a sample Node.js project from a GitHub repository. This repository contains a pre-built Dockerfile necessary for building a Docker image.
+Let's clone a sample Node.js project from a [GitHub repository](https://github.com/dockersamples/helloworld-demo-node). This repository contains a pre-built Dockerfile necessary for building a Docker image.
 
 Don't worry about the specifics of how the Dockerfile was constructed; we'll cover that in detail in later sections.
 
@@ -106,10 +105,18 @@ Change to the `helloworld-demo-node `directory and run the following command to 
  docker build -t <your-dockerhub-id>/docker-quickstart .
 ```
 
+> Make sure you include the dot (.) at the end of the `docker build` command. This tells Docker where to find the Dockerfile.
+
+
 3. Run the following command to list the newly created Docker image.
 
 ```console
  docker images
+```
+
+You will see output like the following:
+
+```console
  REPOSITORY                 TAG       IMAGE ID       CREATED         SIZE
  <your-dockerhub-id>/docker-quickstart   latest    476de364f70e   2 minutes ago   170MB
 ```
