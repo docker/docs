@@ -8,20 +8,22 @@ keywords: docker compose example, docker compose tutorial, how to use docker com
 title: Try Docker Compose
 ---
 
-This tutorial is designed to introduce the key concepts of Docker Compose whilst building a simple Python web application. The application uses the Flask framework and maintains a hit counter in
-Redis. 
+This tutorial aims to introduce fundamental concepts of Docker Compose by guiding you through the development of a basic Python web application. 
+
+Using the Flask framework, the application features a hit counter in Redis, providing a practical example of how Docker Compose can be applied in web development scenarios. 
 
 The concepts demonstrated here should be understandable even if you're not familiar with Python. 
 
+This is a non-normative example that just highlights the key things you can do with Compose.
+
 ## Prerequisites
 
-You need to have Docker Engine and Docker Compose on your machine. You can either:
-- Install [Docker Engine](../get-docker.md) and [Docker Compose](install/index.md) as standalone binaries
-- Install [Docker Desktop](../desktop/index.md) which includes both Docker Engine and Docker Compose
+Make sure you have:
 
-You don't need to install Python or Redis, as both are provided by Docker images.
+- Installed the latest version of Docker Compose
+- A basic understanding of Docker concepts and how Docker works
 
-## Step 1: Define the application dependencies
+## Step 1: Set up
 
 1. Create a directory for the project:
 
@@ -59,12 +61,12 @@ You don't need to install Python or Redis, as both are provided by Docker images
     ```
 
    In this example, `redis` is the hostname of the redis container on the
-   application's network. We use the default port for Redis, `6379`.
+   application's network and the default port, `6379` is used.
 
-   > Handling transient errors
+   > **Note**
    >
    > Note the way the `get_hit_count` function is written. This basic retry
-   > loop lets us attempt our request multiple times if the redis service is
+   > loop attempts the request multiple times if the Redis service is
    > not available. This is useful at startup while the application comes
    > online, but also makes the application more resilient if the Redis
    > service needs to be restarted anytime during the app's lifetime. In a
@@ -79,50 +81,47 @@ You don't need to install Python or Redis, as both are provided by Docker images
    redis
    ```
 
-## Step 2: Create a Dockerfile
+4. Create a `Dockerfile` and paste the following code in:
 
-The Dockerfile is used to build a Docker image. The image
-contains all the dependencies the Python application requires, including Python
-itself.
+   ```dockerfile
+   # syntax=docker/dockerfile:1
+   FROM python:3.10-alpine
+   WORKDIR /code
+   ENV FLASK_APP=app.py
+   ENV FLASK_RUN_HOST=0.0.0.0
+   RUN apk add --no-cache gcc musl-dev linux-headers
+   COPY requirements.txt requirements.txt
+   RUN pip install -r requirements.txt
+   EXPOSE 5000
+   COPY . .
+   CMD ["flask", "run", "--debug"]
+   ```
 
-In your project directory, create a file named `Dockerfile` and paste the following code in:
+   {{< accordion title="Understand the Dockerfile" >}}
 
-```dockerfile
-# syntax=docker/dockerfile:1
-FROM python:3.10-alpine
-WORKDIR /code
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
-RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-EXPOSE 5000
-COPY . .
-CMD ["flask", "run"]
-```
+   This tells Docker to:
 
-This tells Docker to:
+   * Build an image starting with the Python 3.10 image.
+   * Set the working directory to `/code`.
+   * Set environment variables used by the `flask` command.
+   * Install gcc and other dependencies
+   * Copy `requirements.txt` and install the Python dependencies.
+   * Add metadata to the image to describe that the container is listening on port 5000
+   * Copy the current directory `.` in the project to the workdir `.` in the image.
+   * Set the default command for the container to `flask run --debug`.
 
-* Build an image starting with the Python 3.10 image.
-* Set the working directory to `/code`.
-* Set environment variables used by the `flask` command.
-* Install gcc and other dependencies
-* Copy `requirements.txt` and install the Python dependencies.
-* Add metadata to the image to describe that the container is listening on port 5000
-* Copy the current directory `.` in the project to the workdir `.` in the image.
-* Set the default command for the container to `flask run`.
+   {{< /accordion >}}
 
->Important
->
->Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
-{ .important }
+   > **Important**
+   >
+   >Check that the `Dockerfile` has no file extension like `.txt`. Some editors may append this file extension automatically which results in an error when you run the application.
+   { .important }
 
-For more information on how to write Dockerfiles, see the
-[Docker user guide](../develop/index.md)
-and the [Dockerfile reference](/reference/dockerfile/).
+   For more information on how to write Dockerfiles, see the [Docker user guide](../develop/index.md) and the [Dockerfile reference](/reference/dockerfile/).
 
+## Step 2: Define services in a Compose file
 
-## Step 3: Define services in a Compose file
+Compose simplifies the control of your entire application stack, making it easy to manage services, networks, and volumes in a single, comprehensible YAML configuration file.
 
 Create a file called `compose.yaml` in your project directory and paste
 the following:
@@ -145,7 +144,11 @@ It then binds the container and the host machine to the exposed port, `8000`. Th
 The `redis` service uses a public [Redis](https://registry.hub.docker.com/_/redis/) 
 image pulled from the Docker Hub registry.
 
-## Step 4: Build and run your app with Compose
+For more information on the `compose.yaml` file, see [How Compose works](compose-application-model.md).
+
+## Step 3: Build and run your app with Compose
+
+With a single command, you create and start all the services from your configuration file.
 
 1. From your project directory, start up your application by running `docker compose up`.
 
@@ -175,13 +178,13 @@ image pulled from the Docker Hub registry.
    Compose pulls a Redis image, builds an image for your code, and starts the
    services you defined. In this case, the code is statically copied into the image at build time.
 
-2. Enter http://localhost:8000/ in a browser to see the application running.
+2. Enter `http://localhost:8000/` in a browser to see the application running.
 
-   If this doesn't resolve, you can also try http://127.0.0.1:8000.
+   If this doesn't resolve, you can also try `http://127.0.0.1:8000`.
 
    You should see a message in your browser saying:
 
-   ```console
+   ```text
    Hello World! I have been seen 1 times.
    ```
 
@@ -191,7 +194,7 @@ image pulled from the Docker Hub registry.
 
    The number should increment.
 
-   ```console
+   ```text
    Hello World! I have been seen 2 times.
    ```
 
@@ -214,12 +217,11 @@ image pulled from the Docker Hub registry.
 
 5. Stop the application, either by running `docker compose down`
    from within your project directory in the second terminal, or by
-   hitting CTRL+C in the original terminal where you started the app.
+   hitting `CTRL+C` in the original terminal where you started the app.
 
-## Step 5: Edit the Compose file to add a bind mount
+## Step 4: Edit the Compose file to use Compose Watch
 
-Edit the `compose.yaml` file in your project directory to add a
-[bind mount](../storage/bind-mounts.md) for the `web` service:
+Edit the `compose.yaml` file in your project directory to use `watch` so you can preview your running Compose services which are automatically updated as you edit and save your code:
 
 ```yaml
 services:
@@ -227,128 +229,124 @@ services:
     build: .
     ports:
       - "8000:5000"
-    volumes:
-      - .:/code
-    environment:
-      FLASK_DEBUG: "true"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /code
   redis:
     image: "redis:alpine"
 ```
 
-The new `volumes` key mounts the project directory (current directory) on the
-host to `/code` inside the container, allowing you to modify the code on the
-fly, without having to rebuild the image. The `environment` key sets the
-`FLASK_DEBUG` environment variable, which tells `flask run` to run in development
-mode and reload the code on change. This mode should only be used in development.
+Whenever a file is changed, Compose syncs the file to the corresponding location under `/code` inside the container. Once copied, the bundler updates the running application without a restart.
 
-## Step 6: Re-build and run the app with Compose
+For more information on how Compose Watch works, see [Use Compose Watch](file-watch.md). Alternatively, see [Manage data in containers](../storage/volumes.md) for other options.
 
-From your project directory, type `docker compose up` to build the app with the updated Compose file, and run it.
+> **Note**
+>
+> For this example to work, the `--debug` option is added to the `Dockerfile`. The `--debug` option in Flask enables automatic code reload, making it possible to work on the backend API without the need to restart or rebuild the container.
+> After changing the `.py` file, subsequent API calls will use the new code, but the browser UI will not automatically refresh in this small example. Most frontend development servers include native live reload support that works with Compose.
+
+## Step 5: Re-build and run the app with Compose
+
+From your project directory, type `docker compose watch` or `docker compose up --watch` to build and launch the app and start the file watch mode.
 
 ```console
-$ docker compose up
-
-Creating network "composetest_default" with the default driver
-Creating composetest_web_1 ...
-Creating composetest_redis_1 ...
-Creating composetest_web_1
-Creating composetest_redis_1 ... done
-Attaching to composetest_web_1, composetest_redis_1
-web_1    |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+$ docker compose watch
+[+] Running 2/2
+ ✔ Container docs-redis-1 Created                                                                                                                                                                                                        0.0s
+ ✔ Container docs-web-1    Recreated                                                                                                                                                                                                      0.1s
+Attaching to redis-1, web-1
+         ⦿ watch enabled
 ...
 ```
 
 Check the `Hello World` message in a web browser again, and refresh to see the
 count increment.
 
-> Shared folders, volumes, and bind mounts
->
-> * If your project is outside of the `Users` directory (`cd ~`), then you
-need to share the drive or location of the Dockerfile and volume you are using.
-If you get runtime errors indicating an application file is not found, a volume
-mount is denied, or a service cannot start, try enabling file or drive sharing.
-Volume mounting requires shared drives for projects that live outside of
-`C:\Users` (Windows) or `/Users` (Mac), and is required for _any_ project on
-Docker Desktop for Mac and Docker Desktop for Windows that uses
-[Linux containers](../desktop/faqs/windowsfaqs.md#how-do-i-switch-between-windows-and-linux-containers).
-For more information, see
-[File sharing on Docker for Mac](../desktop/settings/mac.md#file-sharing),
-[File sharing on Docker for Windows](../desktop/settings/windows.md#file-sharing), [File sharing on Docker for Linux](../desktop/settings/linux.md#file-sharing).
-and the general examples on how to
-> [Manage data in containers](../storage/volumes.md).
->
-> * If you are using Oracle VirtualBox on an older Windows OS, you might encounter an issue with shared folders as described in this [VB trouble
-ticket](https://www.virtualbox.org/ticket/14920). Newer Windows systems meet the
-requirements for [Docker Desktop for Windows](../desktop/install/windows-install.md) and do not
-need VirtualBox.
-{ .important }
+## Step 6: Update the application
 
-## Step 7: Update the application
+To see Compose Watch in action:
 
-As the application code is now mounted into the container using a volume,
-you can make changes to its code and see the changes instantly, without having
-to rebuild the image.
-
-Change the greeting in `app.py` and save it. For example, change the `Hello World!`
+1. Change the greeting in `app.py` and save it. For example, change the `Hello World!`
 message to `Hello from Docker!`:
 
-```python
-return 'Hello from Docker! I have been seen {} times.\n'.format(count)
-```
+   ```python
+   return 'Hello from Docker! I have been seen {} times.\n'.format(count)
+   ```
 
-Refresh the app in your browser. The greeting should be updated, and the
+2. Refresh the app in your browser. The greeting should be updated, and the
 counter should still be incrementing.
 
-![hello world in browser](images/quick-hello-world-3.png)
+   ![hello world in browser](images/quick-hello-world-3.png)
+
+3. Once you're done, run `docker compose down`.
+
+## Step 7: Split up your services
+
+Using multiple Compose files lets you customize a Compose application for different environments or workflows. This is useful for large applications that may use dozens of containers, with ownership distributed across multiple teams. 
+
+1. In your project folder, create a new Compose file called `infra.yaml`.
+
+2. Cut the Redis service from your `compose.yaml` file and paste it into your new `infra.yaml` file. Make sure you add the `services` top-level attribute at the top of your file. Your `infra.yaml` file should now look like this:
+
+   ```yaml
+   services:
+     redis:
+       image: "redis:alpine"
+   ```
+
+3. In your `compose.yaml` file, add the `include` top-level attribute along with the path to the `infra.yaml` file.
+
+   ```yaml
+   include:
+      - infra.yaml
+   services:
+     web:
+       build: .
+       ports:
+         - "8000:5000"
+       develop:
+         watch:
+           - action: sync
+             path: .
+             target: /code
+   ```
+
+4. Run `docker compose up` to build the app with the updated Compose files, and run it. You should see the `Hello world` message in your browser. 
+
+This is a simplified example, but it demonstrates the basic principle of `include` and how it can make it easier to modularize complex applications into sub-Compose files. For more information on `include` and working with multiple Compose files, see [Working with multiple Compose files](multiple-compose-files/_index.md).
 
 ## Step 8: Experiment with some other commands
 
-If you want to run your services in the background, you can pass the `-d` flag
-(for "detached" mode) to `docker compose up` and use `docker compose ps` to
-see what is currently running:
+- If you want to run your services in the background, you can pass the `-d` flag (for "detached" mode) to `docker compose up` and use `docker compose ps` to see what is currently running:
 
-```console
-$ docker compose up -d
+   ```console
+   $ docker compose up -d
 
-Starting composetest_redis_1...
-Starting composetest_web_1...
+   Starting composetest_redis_1...
+   Starting composetest_web_1...
 
-$ docker compose ps
+   $ docker compose ps
 
-       Name                      Command               State           Ports         
--------------------------------------------------------------------------------------
-composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
-composetest_web_1     flask run                        Up      0.0.0.0:8000->5000/tcp
-```
+          Name                      Command               State           Ports         
+   -------------------------------------------------------------------------------------
+   composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
+   composetest_web_1     flask run                        Up      0.0.0.0:8000->5000/tcp
+   ```
 
-The `docker compose run` command allows you to run one-off commands for your
-services. For example, to see what environment variables are available to the
-`web` service:
+- Run `docker compose --help` to see other available commands.
 
-```console
-$ docker compose run web env
-```
+- If you started Compose with `docker compose up -d`, stop your services once you've finished with them:
 
-See `docker compose --help` to see other available commands.
+   ```console
+   $ docker compose stop
+   ```
 
-If you started Compose with `docker compose up -d`, stop
-your services once you've finished with them:
-
-```console
-$ docker compose stop
-```
-
-You can bring everything down, removing the containers entirely, with the `down`
-command. Pass `--volumes` to also remove the data volume used by the Redis
-container:
-
-```console
-$ docker compose down --volumes
-```
+- You can bring everything down, removing the containers entirely, with the `docker compose down` command. 
 
 ## Where to go next
 
 - Try the [Sample apps with Compose](https://github.com/docker/awesome-compose)
 - [Explore the full list of Compose commands](reference/index.md)
 - [Explore the Compose file reference](compose-file/index.md)
-- To learn more about volumes and bind mounts, see [Manage data in Docker](../storage/index.md)

@@ -1099,12 +1099,12 @@ Manuals:
          title: Install on Linux
        - sectiontitle: Installation per Linux distro
          section:
+            - path: /desktop/install/ubuntu/
+              title: Install on Ubuntu
             - path: /desktop/install/debian/
               title: Install on Debian
             - path: /desktop/install/fedora/
               title: Install on Fedora
-            - path: /desktop/install/ubuntu/
-              title: Install on Ubuntu
             - path: /desktop/install/archlinux/
               title: Install on Arch
     - path: /desktop/get-started/
