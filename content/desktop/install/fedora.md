@@ -22,12 +22,12 @@ This page contains information on how to install, launch and upgrade Docker Desk
 
 To install Docker Desktop successfully, you must:
 
-- Meet the [system requirements](linux-install.md#system-requirements).
+- Meet the [system requirements](linux-install.md#general-system-requirements).
 - Have a 64-bit version of either Fedora 38 or Fedora 39.
 
-Additionally, for a Gnome Desktop environment you must install AppIndicator and KStatusNotifierItem [Gnome extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
+Additionally, for a GNOME desktop environment you must install AppIndicator and KStatusNotifierItem [GNOME extensions](https://extensions.gnome.org/extension/615/appindicator-support/).
 
-For non-Gnome Desktop environments, `gnome-terminal` must be installed:
+For non-GNOME desktop environments, `gnome-terminal` must be installed:
 
 ```console
 $ sudo dnf install gnome-terminal
