@@ -80,8 +80,6 @@ In this walkthrough, you searched and pulled a Docker image. In addition to pull
 
 {{< tab name="CLI" >}}
 
-## Run a container
-
 Follow the instructions to search and pull a Docker image using CLI to view its layers.
 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
