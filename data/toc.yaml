@@ -2255,8 +2255,6 @@ Manuals:
   - path: /trusted-content/insights-analytics/
     title: Insights and analytics
 
-- path: /release-notes/
-  title: Release notes
 - path: /support/
   title: Get support
 - path: /release-lifecycle/

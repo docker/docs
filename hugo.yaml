@@ -4,9 +4,9 @@ refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
-disableKinds:
-  - taxonomy
-  - term
+
+taxonomies:
+  tag: tags
 
 markup:
   tableOfContents:

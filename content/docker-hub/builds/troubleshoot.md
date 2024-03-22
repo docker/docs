@@ -2,6 +2,7 @@
 title: Troubleshoot your autobuilds
 description: How to troubleshoot Automated builds
 keywords: docker hub, troubleshoot, automated builds, autobuilds
+tags: [ Troubleshooting ]
 ---
 
 > **Note**

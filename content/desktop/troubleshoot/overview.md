@@ -13,6 +13,7 @@ aliases:
 - /windows/troubleshoot/
 - /docker-for-win/troubleshoot/
 - /docker-for-windows/troubleshoot/
+tags: [ Troubleshooting ]
 ---
 
 This page contains information on how to diagnose and troubleshoot Docker Desktop, and how to check the logs.

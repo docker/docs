@@ -190,6 +190,16 @@
           {{ end }}
         </div>
       </div>
+      <div class="flex flex-col gap-4">
+        <h2 class="mb-4 text-xl">Browse by tag</h2>
+        <div class="flex flex-wrap gap-4">
+          {{ $tags := slice }}
+          {{- range site.Taxonomies.tags }}
+            {{ $tags = $tags | append .Page }}
+          {{ end }}
+          {{ partial "tags.html" $tags }}
+        </div>
+      </div>
     </div>
 
     <div

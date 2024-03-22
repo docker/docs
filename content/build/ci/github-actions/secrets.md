@@ -2,6 +2,7 @@
 title: Using secrets with GitHub Actions
 description: Example using secret mounts with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, secret
+tags: [Secrets]
 ---
 
 A build secret is sensitive information, such as a password or API token, consumed as part of the build process.

@@ -4,6 +4,7 @@ description: Learn about the latest features of Docker Scout
 keywords: docker scout, release notes, changelog, features, changes, delta, new, releases
 aliases:
 - /scout/release-notes/
+tags: [Release notes]
 ---
 
 This page contains information about the new features, improvements, known

@@ -2,6 +2,7 @@
 title: Docker development best practices
 description: Rules of thumb for making your life easier as a Docker application developer
 keywords: application, development
+tags: [Best practices]
 ---
 
 The following development patterns have proven to be helpful for people
