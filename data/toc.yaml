@@ -57,26 +57,6 @@ Guides:
       path: /guides/docker-concepts/the-basics/what-is-a-registry/
     - title: "What is Docker Compose?"
       path: /guides/docker-concepts/the-basics/what-is-docker-compose/
-  - sectiontitle: "Building images"
-    section:
-    - title: "Writing a Dockerfile"
-      path: /guides/docker-concepts/building-images/writing-dockerfile/
-    - title: "Build, tag, and publish an image"
-      path: /guides/docker-concepts/building-images/building-and-publishing-image/
-    - title: "Building in CI/CD"
-      path: /guides/docker-concepts/building-images/building-in-cicd/
-    - title: "Using the build cache"
-      path: /guides/docker-concepts/building-images/using-the-build-cache/
-    - title: "Multi-stage builds"
-      path: /guides/docker-concepts/building-images/multi-stage-builds/
-    - title: "Building for multiple architecture"
-      path: /guides/docker-concepts/building-images/building-for-multiple-architecture/
-    - title: "Using remote builders"
-      path: /guides/docker-concepts/building-images/using-remote-builders/
-    - title: "Injecting secrets during the build"
-      path: /guides/docker-concepts/building-images/injecting-secrets/
-    - title: "Troubleshooting failing builds"
-      path: /guides/docker-concepts/building-images/troubleshooting-failing-builds/
 
 - sectiontitle: Language-specific guides
   section:
