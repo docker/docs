@@ -187,6 +187,8 @@ In this walkthrough, you searched and pulled a Docker image. In addition to pull
 {{< /tab >}}
 {{< /tabs >}}
 
+In this walkthrough, you searched and pulled a Docker image. In addition to pulling a Docker image, you also learned about the layers of a Docker Image.
+
 ## Additional resources
 
 The following resources will help you learn more about exploring, finding, and building images:

@@ -143,6 +143,7 @@ You can quickly verify if the container is working fine or not by executing the 
 By now, you should be able to find the new image by navigating to **Tags** section of your Docker Hub repository.
 
 ![Screenshot of the Docker Hub page that displays the newly added image tag](images/dockerhub-tags.webp?border=true) 
+
 In this walkthrough, you learned how to sign up for a Docker Hub account and create your first Docker Hub repository. You also learned how to build and tag a Docker image and push it to your Docker Hub repository.
 
 ### Additional resources
