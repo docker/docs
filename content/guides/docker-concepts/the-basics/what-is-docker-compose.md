@@ -20,6 +20,11 @@ Thanks to Docker Compose. With `Docker Compose`, you can define all these contai
 
 One of the significant advantages of using Compose is developers can define their application stack in a file, keeping it at the root of your project repository, and easily enable someone else to contribute to your project. All someone would need to do is clone your repository and start the compose app. It's important to understand that Compose is a declarative tool - you simply define it and go. You don't always need to recreate everything from scratch. Just run `docker-compose up` again, and Compose will reconcile the changes in your file and apply them intelligently.
 
+>**Tip**
+>
+>  Dockerfile provides instructions to build a specific container image while the Compose file defines your containers. The Compose file often references a Dockerfile to build an image to use for a particular service.
+
+
 ## Try it now 
 
 In this hands-on, you will learn how to use a Docker compose to run multi-container applications. We’ll use a simple to-do list app built with Node.js and MySQL as a database server.
