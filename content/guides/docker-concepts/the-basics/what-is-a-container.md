@@ -38,7 +38,7 @@ A container is simply an isolated process with all of the files it needs to run.
 
 ## Try it now
 
-In this hands-on, you will see how to run a simple Docker container using Docker Desktop GUI.
+In this hands-on, you will see how to run a Docker container using Docker Desktop GUI.
 
 {{< tabs >}}
 {{< tab name="Using the GUI" >}}
@@ -64,8 +64,7 @@ Use the following instructions to run a container.
 7. Select **Run** to start your container.
 
 Congratulations!! You just ran your first container! 🎉
-
-
+ 
 ### View your container
 
 You can view all of your containers by going to the **Containers** view of the Docker Dashboard.
@@ -158,7 +157,11 @@ The `docker/welcome-to-docker` container continues to run until you stop it. You
 
 1. Run `docker ps` to get the ID of the container
 
+<<<<<<< HEAD
 2. Provide the container ID or name to the [`docker stop`](/reference/cli/docker/container/stop/) command:
+=======
+To remove a container, you can use `docker rm <the-container-id>` command.
+>>>>>>> d9b82abfc1 (Few formatting changes)
 
     ```console
     docker stop <the-container-id>
@@ -176,6 +179,11 @@ The `docker/welcome-to-docker` container continues to run until you stop it. You
 {{< /tab >}}
 {{< /tabs >}}
 
+<<<<<<< HEAD
+=======
+Now that you ran a pre-made Docker image and explored a container, it's time to learn about Docker image and it's layered architecture.
+
+>>>>>>> d9b82abfc1 (Few formatting changes)
 ## Additional resources
 
 The following links provide additional guidance into containers:
