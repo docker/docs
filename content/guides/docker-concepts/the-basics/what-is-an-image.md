@@ -1,5 +1,5 @@
 ---
-title: What is an image
+title: What is an image?
 keywords: concepts, build, images, container, docker desktop
 description: What is an image
 ---
@@ -8,135 +8,195 @@ description: What is an image
 
 ## Explanation
 
-Remember those magic boxes we introduced for each component of your web application (`React` frontend, `Python` API backend and `PostgreSQL` database)? What makes them work? Well, those boxes are powered by container images. You can think of a container image as a self-contained package. It’s a complete bundle that includes everything your container needs to run perfectly - files and programs, configuration settings, libraries, binaries and all the dependencies. 
+Seeing a [container](./what-is-a-container) is an isolated process, where does it get its files and configuration? How do you share those environments? 
 
-So if you think of a `container` as an isolated sandbox environment using all the files in that environment without even installing it on the host, then the question is how do I get those files into that environment? Where do those files come from? How do we share those environments? That’s where container images come in. A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container. 
+That's where container images come in! 
 
-Two important aspects of images:
+A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container.
 
-1.  **Images are immutable**
+For a [PostgreSQL](https://hub.docker.com/_/postgresql) image, that image will package the database binaries, config files, and other dependencies. For a Python web app, it'll include the Python runtime, your app code, and all of its dependencies.
 
-Consider a PostgreSQL Docker image. You can’t edit it directly. They are unchanging once created. Instead, you can create a new image with the desired changes.
+There are two important principles of images:
 
-2. **Container images are composed of Layers**
+1. Images are immutable. Once an image is created, it can't be modified. You can only make a new image or add changes on top of it.
 
-Container images are built using layers, and layers represent file system changes. Each layer adds, removes, or modifies layers that might have been there previously. For example, if you have a `Python` Docker Image then you can use the image and add additional layers on the top of the Python image and run it in the form of a `container` without even managing Python itself. If you need to make a change to a Python container image, you either need to build a new image or extend an existing base image, adding your layers on top of it.
+2. Container images are composed of layers. Each layer represented a set of file system changes that add, remove, or modify files.
 
-So how are these images distributed? The answer is `Docker Hub`.
+These two principles let you to extend or add to existing images. For example, if you are building a Python app, you can start from the [Python image](https://hub.docker.com/_/python) and add additional layers to install your app's dependencies and add your code. This lets you focus on your app, rather than Python itself.
+
+### Finding images
 
 [Docker Hub](https://hub.docker.com) is the default global marketplace for storing and distributing images. It has over 100,000 images created by developers that you can run locally. You can search for Docker Hub images and run them directly from Docker Desktop.
 
-Docker officially maintains Docker Hub. You can find a variety of [DOI](https://docs.docker.com/trusted-content/official-images/)(Docker Official Images), [DVP](https://docs.docker.com/trusted-content/dvp-program/) (Docker Verified Publisher), and [DSOS](https://docs.docker.com/trusted-content/dsos-program/) (Docker Sponsored Open-source) images that provide a good starting point to start with the images in the Docker Hub. 
+Docker Hub provides a variety of Docker-supported and endorsed images known as Docker Trusted Content. These provide fully managed services or great starters for your own images. These include:
 
-For example, `Redis` and `Memcached` are a few popular ready-to-go DOI Docker images. You can download these images and have these services up and running pretty quickly. There are also base images, like the `Node.js` Docker image, that you can use as a starting point and add your own files and configurations. Whenever you download a Docker image to start a Docker container, you’re downloading everything that’s needed to run a Docker container.
+- [Docker Official Images](https://hub.docker.com/search?q=&type=image&image_filter=official) - a curated set of Docker repositories, serve as the starting point for the majority of users, and are some of the most secure on Docker Hub
+- [Docker Verified Publishers](https://hub.docker.com/search?q=&image_filter=store) - high-quality images from commercial publishers verified by Docker
+- [Docker-Sponsored Open Source](https://hub.docker.com/search?q=&image_filter=open_source) - images published and maintained by open-source projects sponsored by Docker through Docker's open source program
+
+For example, [Redis](https://hub.docker.com/_/redis) and [Memcached](https://hub.docker.com/_/memcached) are a few popular ready-to-go Docker Official Images. You can download these images and have these services up and running in a matter of seconds. There are also base images, like the [Node.js](https://hub.docker.com/_/node) Docker image, that you can use as a starting point and add your own files and configurations.
 
 ## Try it now
 
 {{< tabs >}}
-{{< tab name="Using Docker Desktop" >}}
+{{< tab name="Using the GUI" >}}
 
-In this hands-on, you will see how to search and pull a container image using Docker Desktop GUI.
+In this hands-on, you will learn how to search and pull a container image using Docker Desktop GUI.
 
-1. Open the Docker Desktop dashboard and select the **Images** tab in the left-hand navigation menu.
+### Search for and download an image
 
-![A screenshot of the Docker Desktop dashboard showing the image tab on the left sidebar](images/click-image.webp?border=true&w=1050&h=400)
+1. Open the Docker Desktop dashboard and select the **Images** view in the left-hand navigation menu.
 
-2. Select the **Search images to run** button. If you don't see it, select the `global search bar` at the top of the screen.
+    ![A screenshot of the Docker Desktop dashboard showing the image view on the left sidebar](images/click-image.webp?border=true&w=1050&h=400)
 
-![A screenshot of the Docker Desktop dashboard showing the search ta](images/search-image.webp?border)
+2. Select the **Search images to run** button. If you don't see it, select the _global search bar_ at the top of the screen.
+
+    ![A screenshot of the Docker Desktop dashboard showing the search ta](images/search-image.webp?border)
 
 3. In the **Search** field, enter "welcome-to-docker". Once the search has completed, select the `docker/welcome-to-docker` image.
 
- ![A screenshot of the Docker Desktop dashboard showing the search results for the docker/welcome-to-docker image](images/select-image.webp?border=true&w=1050&h=400)
+    ![A screenshot of the Docker Desktop dashboard showing the search results for the docker/welcome-to-docker image](images/select-image.webp?border=true&w=1050&h=400)
 
-Select **Pull** to download the image to your local system.
+4. Select **Pull** to download the image.
 
-## View your image
 
-Once you have an image downloaded, you can view quite a few details about the image either through the GUI or the CLI.
+### Learn about the image
 
-1. In the Docker Desktop Dashboard, select the **Images** tab.
+Once you have an image downloaded, you can learn quite a few details about the image either through the GUI or the CLI.
+
+1. In the Docker Desktop Dashboard, select the **Images** view.
 
 2. Select the **docker/welcome-to-docker** image to open details about the image.
 
-![A screenshot of the Docker Desktop dashboard showing the images tab with an arrow pointing to the docker/welcome-to-docker image](images/pulled-image.webp?border=true&w=1050&h=400)
+    ![A screenshot of the Docker Desktop dashboard showing the images view with an arrow pointing to the docker/welcome-to-docker image](images/pulled-image.webp?border=true&w=1050&h=400)
 
 3. The image details page presents you with information regarding the layers of the image, the packages and libraries installed in the image, and any discovered vulnerabilities.
 
-![A screenshot of the image details view for the docker/welcome-to-docker image](images/image-layers.webp?border=true&w=1050&h=400)
+    ![A screenshot of the image details view for the docker/welcome-to-docker image](images/image-layers.webp?border=true&w=1050&h=400)
 
-In this walkthrough, you searched and pulled a Docker image. In addition to pulling a Docker image, you also learned about the layers of a Docker Image.
+In this walkthrough, you searched and pulled a Docker image. In addition to pulling a Docker image, you also learned about the layers of a Docker image.
 
 {{< /tab >}}
 
-{{< tab name="CLI" >}}
+{{< tab name="Using the CLI" >}}
 
 Follow the instructions to search and pull a Docker image using CLI to view its layers.
 
-1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
+### Search for and download an image
 
-2. Open a terminal and run the following command:
+1. Open a terminal and search for images using the [`docker search`](/reference/cli/docker/search/) command:
 
-```console
- docker search docker/welcome-to-docker
-```
+    ```console
+    docker search docker/welcome-to-docker
+    ```
 
-You will see output like the following:
+    You will see output like the following:
 
-```console
- docker search docker/welcome-to-docker
- NAME                       DESCRIPTION                                     STARS     OFFICIAL
- docker/welcome-to-docker   Docker image for new users getting started w…   20
-```
+    ```console
+    NAME                       DESCRIPTION                                     STARS     OFFICIAL
+    docker/welcome-to-docker   Docker image for new users getting started w…   20
+    ```
 
-This output is the result of running the docker search command. It shows you information about the image available on the Docker Hub.
+    This output shows you information about relevant images available on Docker Hub.
 
-3. Pull the image
+3. Pull the image using the [`docker pull`](/reference/cli/docker/image/pull/) command.
 
-```console
- docker pull docker/welcome-to-docker
-```
+    ```console
+    docker pull docker/welcome-to-docker
+    ```
 
-You will see output like the following:
+    You will see output like the following:
 
-```console
- Using default tag: latest
- latest: Pulling from docker/welcome-to-docker
- 579b34f0a95b: Download complete
- d11a451e6399: Download complete
- 1c2214f9937c: Download complete
- b42a2f288f4d: Download complete
- 54b19e12c655: Download complete
- 1fb28e078240: Download complete
- 94be7e780731: Download complete
- 89578ce72c35: Download complete
- Digest: sha256:eedaff45e3c78538087bdd9dc7afafac7e110061bbdd836af4104b10f10ab693
- Status: Downloaded newer image for docker/welcome-to-docker:latest
- docker.io/docker/welcome-to-docker:latest
-```
+    ```console
+    Using default tag: latest
+    latest: Pulling from docker/welcome-to-docker
+    579b34f0a95b: Download complete
+    d11a451e6399: Download complete
+    1c2214f9937c: Download complete
+    b42a2f288f4d: Download complete
+    54b19e12c655: Download complete
+    1fb28e078240: Download complete
+    94be7e780731: Download complete
+    89578ce72c35: Download complete
+    Digest: sha256:eedaff45e3c78538087bdd9dc7afafac7e110061bbdd836af4104b10f10ab693
+    Status: Downloaded newer image for docker/welcome-to-docker:latest
+    docker.io/docker/welcome-to-docker:latest
+    ```
 
-Each of these lines represents different layers of the image being downloaded and completed successfully. Each layer contributes to the overall functionality of the image. The image is being pulled from the official Docker repository named `docker` and the image name is `welcome-to-docker`.
+    Each of line represents a different downloaded layer of the image. Remember that each layer is a set of filesystem changes and provides functionality of the image.
 
-4. View your image
 
-```console
- docker images
- REPOSITORY                 TAG       IMAGE ID       CREATED        SIZE
- docker/welcome-to-docker   latest    eedaff45e3c7   4 months ago   29.7MB
-```
+### Learn about the image
 
-The command shows a list of Docker images currently available on your system. The `docker/welcome-to-docker` has a total size of approximately 29.7MB.
+1. List your downloaded images using the [`docker image ls`](/reference/cli/docker/image/ls/) command:
 
-In this walkthrough, you searched and pulled a Docker image. In addition to pulling a Docker image, you also learned about the layers of a Docker Image.
+    ```console
+    docker image ls
+    ```
+
+    You will see output like the following:
+
+    ```console
+    REPOSITORY                 TAG       IMAGE ID       CREATED        SIZE
+    docker/welcome-to-docker   latest    eedaff45e3c7   4 months ago   29.7MB
+    ```
+
+    The command shows a list of Docker images currently available on your system. The `docker/welcome-to-docker` has a total size of approximately 29.7MB.
+
+    > *Image size*
+    > 
+    > The image size represented here reflects the uncompressed size of the image, not the download size of the layers.
+
+2. List the image's layers using the [`docker image history`](/reference/cli/docker/image/history/) command:
+
+    ```console
+    docker image history docker/welcome-to-docker
+    ```
+
+    You will see output like the following:
+
+    ```console
+    IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
+    648f93a1ba7d   4 months ago   COPY /app/build /usr/share/nginx/html # buil…   1.6MB     buildkit.dockerfile.v0
+    <missing>      5 months ago   /bin/sh -c #(nop)  CMD ["nginx" "-g" "daemon…   0B
+    <missing>      5 months ago   /bin/sh -c #(nop)  STOPSIGNAL SIGQUIT           0B
+    <missing>      5 months ago   /bin/sh -c #(nop)  EXPOSE 80                    0B
+    <missing>      5 months ago   /bin/sh -c #(nop)  ENTRYPOINT ["/docker-entr…   0B
+    <missing>      5 months ago   /bin/sh -c #(nop) COPY file:9e3b2b63db9f8fc7…   4.62kB
+    <missing>      5 months ago   /bin/sh -c #(nop) COPY file:57846632accc8975…   3.02kB
+    <missing>      5 months ago   /bin/sh -c #(nop) COPY file:3b1b9915b7dd898a…   298B
+    <missing>      5 months ago   /bin/sh -c #(nop) COPY file:caec368f5a54f70a…   2.12kB
+    <missing>      5 months ago   /bin/sh -c #(nop) COPY file:01e75c6dd0ce317d…   1.62kB
+    <missing>      5 months ago   /bin/sh -c set -x     && addgroup -g 101 -S …   9.7MB
+    <missing>      5 months ago   /bin/sh -c #(nop)  ENV PKG_RELEASE=1            0B
+    <missing>      5 months ago   /bin/sh -c #(nop)  ENV NGINX_VERSION=1.25.3     0B
+    <missing>      5 months ago   /bin/sh -c #(nop)  LABEL maintainer=NGINX Do…   0B
+    <missing>      5 months ago   /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B
+    <missing>      5 months ago   /bin/sh -c #(nop) ADD file:ff3112828967e8004…   7.66MB
+    ```
+
+    This output shows you all of the layers, they're sizes, and the command used to create the layer. 
+
+    > **Viewing the full command**
+    >
+    > If you add the `--no-trunc` flag to the command, you will see the full command. Note that, since the output is in a table-like format, longer commands will cause the output to be very difficult to navigate.
+    { .tip }
+
+In this walkthrough, you searched and pulled a Docker image. In addition to pulling a Docker image, you also learned about the layers of a Docker image.
 
 {{< /tab >}}
 {{< /tabs >}}
 
 ## Additional resources
 
-* [Explore the Image view in Docker Desktop](https://docs.docker.com/desktop/use-desktop/images/)
-* [Packaging your software](https://docs.docker.com/build/building/packaging/)
-* [Explore the Containers view in Docker Desktop](https://docs.docker.com/desktop/use-desktop/container/)
-* [Overview of Docker Hub](https://hub.docker.com)
+The following resources will help you learn more about exploring, finding, and building images:
+
+- [Docker Trusted Content](/trusted-content/)
+  - [Docker Official Images docs](/trusted-content/official-images/)
+  - [Docker Verified Publisher docs](/trusted-content/dvp-program/)
+  - [Docker-Sponsored Open Source Program docs](/trusted-content/dsos-program/)
+- [Explore the Image view in Docker Desktop](/desktop/use-desktop/images/)
+- [Packaging your software](/build/building/packaging/)
+- [Docker Hub](https://hub.docker.com)
 
 {{< button text="What is a registry?" url="what-is-a-registry" >}}
