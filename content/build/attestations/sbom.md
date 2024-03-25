@@ -188,6 +188,11 @@ $ docker buildx imagetools inspect <namespace>/<image>:<version> \
 }
 ```
 
+> **Tip**
+>
+> If the image is multi-arch, you can use check the index for the arch you want with `--format '{{ json (index .SBOM "linux/amd64").SPDX }}'`.
+{ .tip }
+
 You can also construct more complex expressions using the full functionality
 of Go templates. For example, you can list all the installed packages and their
 version identifiers:
