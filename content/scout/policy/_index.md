@@ -77,8 +77,8 @@ available. Essentially, this means that there's an easy fix that you can deploy
 for images that fail this policy: upgrade the vulnerable package to a version
 containing a fix for the vulnerability.
 
-This policy only flags critical and high severity vulnerabilities that were
-published more than 30 days ago. The rationale for only flagging
+By default, this policy only flags critical and high severity vulnerabilities
+disclosed more than 30 days ago. The rationale for only flagging
 vulnerabilities of a certain age is that newly discovered vulnerabilities
 shouldn't cause your evaluations to fail until you've had a chance to address
 them.
@@ -86,8 +86,15 @@ them.
 This policy is unfulfilled if an artifact is affected by one or more critical-
 or high-severity vulnerability, where a fix version is available.
 
-You can configure the severity level and age thresholds by creating a custom
-policy. For more information, see [Configure policies](./configure.md).
+You can configure the parameters of this policy by creating a custom version of the policy.
+The following policy parameters are configurable in a custom version:
+
+- Name and description of the policy
+- Severity levels to consider
+- Age threshold (set to `0` to flag all vulnerabilities, regardless of age)
+- Whether or not to only report vulnerabilities with a fix version available
+
+For more information about configuring policies, see [Configure policies](./configure.md).
 
 ### Copyleft licenses
 
