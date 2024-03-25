@@ -14,7 +14,13 @@ for what's coming next.
 
 ## Q1 2024
 
-New features and enhancements released in the first quarter of of 2024.
+New features and enhancements released in the first quarter of 2024.
+
+### 2024-03-20
+
+The **Fixable critical and high vulnerabilities** policy now supports a
+**Fixable vulnerabilities only** configuration option, which lets you decide
+whether or not to only flag vulnerabilities with an available fix version.
 
 ### 2024-03-14
 
