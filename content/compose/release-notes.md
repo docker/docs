@@ -11,6 +11,23 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.26.0
+{{< release-date date="2024-03-22" >}}
+
+### Update
+- Dependencies upgrade: bump compose-go v2.0.2
+- Dependencies upgrade: bump docker v26.0.0
+
+### Bug fixes and enhancements
+- Reduced timeout of the Otel tracing command
+- Fixed `config --format json`
+- Fixed documentation on default build image name
+- Introduced Synchronized file shares for bind mounts in Compose
+- Added support for `annotations`
+- Introduced `config --variables` to list Compose model variables
+- Added a navigation menu within `docker compose up`
+
+
 ## 2.25.0
 {{< release-date date="2024-03-15" >}}
 
