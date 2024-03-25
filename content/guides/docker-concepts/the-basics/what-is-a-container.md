@@ -40,7 +40,7 @@ A container is simply an isolated process with all of the files it needs to run.
 
 In this hands-on, you will see how to run a Docker container using Docker Desktop GUI.
 
-{{< tabs >}}
+{{< tabs group=concept-usage persist=true >}}
 {{< tab name="Using the GUI" >}}
 
 Use the following instructions to run a container.

@@ -38,7 +38,7 @@ For example, [Redis](https://hub.docker.com/_/redis) and [Memcached](https://hub
 
 ## Try it now
 
-{{< tabs >}}
+{{< tabs group=concept-usage persist=true >}}
 {{< tab name="Using the GUI" >}}
 
 In this hands-on, you will learn how to search and pull a container image using Docker Desktop GUI.
