@@ -20,12 +20,12 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 - Reduced timeout of the Otel tracing command
-- Fixed compose `config --format json`
+- Fixed `config --format json`
 - Fixed documentation on default build image name
-- Introduced Mutagen synchronized file share integration
+- Introduced Synchronized file shares for bind mounts in Compose
 - Added support for `annotations`
-- Introduced `config --variables` to list compose model variables
-- Added navigation menu with in `compose up`
+- Introduced `config --variables` to list Compose model variables
+- Added a navigation menu within `docker compose up`
 
 
 ## 2.25.0
