@@ -164,6 +164,7 @@ Docker from the repository.
    `hello-world` image.
 
    ```console
+   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 
