@@ -139,7 +139,7 @@ container. This behavior is illustrated in the following example.
 
 If restart policies don't suit your needs, such as when processes outside
 Docker depend on Docker containers, you can use a process manager such as
-[systemd](https://freedesktop.org/wiki/Software/systemd/) or
+[systemd](https://systemd.io/) or
 [supervisor](http://supervisord.org/) instead.
 
 > **Warning**
