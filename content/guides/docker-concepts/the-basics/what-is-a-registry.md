@@ -8,17 +8,19 @@ description: What is a registry? This Docker Concept will explain what a registr
 
 ## Explanation
 
-Now that you know what a container image is and how it works, you might wonder- Where do you store these images? 
+Now that you know what a container image is and how it works, you might wonder - where do you store these images? 
 
-Well, you can store your container images on your computer system, but what if you want to share them with your friends or use them on another machine? That’s where the image registry comes in.
+Well, you can store your container images on your computer system, but what if you want to share them with your friends or use them on another machine? That's where the image registry comes in.
 
-An image registry is a centralized location for storing and sharing your container images. It can be either public or private. Remember we talked about [Docker Hub](https://hub.docker.com)? It is a public registry that anyone can use, and Docker looks for images on `Docker Hub` by default. While Docker Hub is a popular option, there's a whole world of public container registries available today, including [Amazon Elastic Container Registry(ECR)](https://aws.amazon.com/ecr/), [Azure Container Registry (ACR)](https://azure.microsoft.com/en-in/products/container-registry), [Google Container Registry (GCR)](https://cloud.google.com/artifact-registry) etc. You can even run your private registry in your local system or inside your organization. For example, VMware Harbor, JFrog Artifactory, GitLab Container registry etc.
+An image registry is a centralized location for storing and sharing your container images. It can be either public or private. [Docker Hub](https://hub.docker.com) is a public registry that anyone can use and is the default registry. 
 
-## Registry vs repository
+While Docker Hub is a popular option, there are many other available container registries available today, including [Amazon Elastic Container Registry(ECR)](https://aws.amazon.com/ecr/), [Azure Container Registry (ACR)](https://azure.microsoft.com/en-in/products/container-registry), and [Google Container Registry (GCR)](https://cloud.google.com/artifact-registry). You can even run your private registry on your local system or inside your organization. For example, Harbor, JFrog Artifactory, GitLab Container registry etc.
 
-While you’re working with `Docker Hub`, you might hear users using terms like **registry** and **repository** like they’re interchangeable. Even though they’re related, they’re not quite the same thing.
+### Registry vs repository
 
-A registry is a centralized location that stores and manages container images whereas a repository is a collection of related container images within a registry. Think of it as a folder where you organize your images based on projects. Each repository contains one or more container images.
+While you're working with registries, you might hear the terms **registry** and **repository** as if they're interchangeable. Even though they're related, they're not quite the same thing.
+
+A _registry_ is a centralized location that stores and manages container images, whereas a _repository_ is a collection of related container images within a registry. Think of it as a folder where you organize your images based on projects. Each repository contains one or more container images.
 
 >**Note**
 >
@@ -28,128 +30,106 @@ A registry is a centralized location that stores and manages container images wh
 
 In this hands-on, you will learn how to build and push a Docker image to the Docker Hub repository.
 
-### Sign up for a free Docker account {#sign-up-for-a-free-docker-account}
+### Sign up for a free Docker account
 
-1. [Click here](https://hub.docker.com/signup) to create a new Docker account, if not already done.
+1. If you have not done so, [create a Docker account](https://hub.docker.com/signup).
 
-![Screenshot of the official Docker Hub page showing the Sign up page](images/dockerhub-signup.webp?border)
+    ![Screenshot of the official Docker Hub page showing the Sign up page](images/dockerhub-signup.webp?border)
 
-You can use your Google account or GitHub credentials in order to sign-up. If you already have a Docker account, you can directly click on **Sign-in** to enter your credentials.
+    You can use your Google or GitHub account to authenticate.
 
-### Create your first repository  {#create-your-first-repository}
+### Create your first repository
 
-1. Once you login to Docker Hub, click on the **Create your repository** button.
-2. Choose your namespace (i.e. your Docker account) and your preferred repository name. For this demonstration, let’s name it `docker-quickstart`. Enter a short description to identify your repository.
+1. Sign in to [Docker Hub](https://hub.docker.com)
+2. Select the **Create repository** button in the top-right corner
+3. Select your namespace (most likely your username) and enter `docker-quickstart` as the repository name.
 
-![Screenshot of the Docker Hub page that shows how to create a public repository](images/create-hub-repository.webp?border)
+    ![Screenshot of the Docker Hub page that shows how to create a public repository](images/create-hub-repository.webp?border)
 
-3. Set the visibility to **Public**. 
-4. Select **Create**.
+4. Set the visibility to **Public**. 
+5. Select the **Create** button to create the repository.
 
-That’s it. You've successfully created your first repository.🍻
+That's it. You've successfully created your first repository. 🎉
 
-This repository is empty right now. Let’s push some images to it to see them appear on the Docker Hub. 
+This repository is empty right now. You'll now fix this by pushing an image to it.
 
-### Log into Docker Hub using the CLI
+### Login with Docker Desktop
 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop, if not already installed.
-2. Open your CLI terminal and run the following command:
-
-```console
- docker login
-```
-
-Alternatively, you can use the following command to pass your username to the command line directly.
-
-```console
- docker login registry-1.docker.io -u <your-dockerhub-id>
-```
-
-At the password prompt, enter your personal access token(PAT). If you see the **Login Succeeded** message, it shows that you’re successfully logged in to Docker Hub.
+2. In the Docker Desktop GUI, select the **Log in** button in the top-right corner
 
 ### Cloning a sample Node.js code
 
-Let's clone a sample Node.js project from a [GitHub repository](https://github.com/dockersamples/helloworld-demo-node). This repository contains a pre-built Dockerfile necessary for building a Docker image.
+In order to create an image, you first need a project. To get you started quickly, you'll use a sample Node.js project found at [github.com/dockersamples/helloworld-demo-node](https://github.com/dockersamples/helloworld-demo-node). This repository contains a pre-built Dockerfile necessary for building a Docker image.
 
-Don't worry about the specifics of how the Dockerfile was constructed; we'll cover that in detail in later sections.
+Don't worry about the specifics of the Dockerfile, as you'll learn about that in later sections.
 
-1. Clone the GitHub repository
+1. Clone the GitHub repository using the following command:
 
-```console
- git clone https://github.com/dockersamples/helloworld-demo-node
-```
+    ```console
+    git clone https://github.com/dockersamples/helloworld-demo-node
+    ```
 
-2. Build a Docker image
+2. Navigate into the newly created directory.
 
-Change to the `helloworld-demo-node `directory and run the following command to build a Docker image.
+    ```console
+    cd hello-world-demo-node
+    ```
 
-```console
- docker build -t <your-dockerhub-id>/docker-quickstart .
-```
+3. Run the following command to build a Docker image, swapping out `YOUR_DOCKER_USERNAME` with your username.
 
->**Note**
->
-> Make sure you include the dot (.) at the end of the `docker build` command. This tells Docker where to find the Dockerfile.
+    ```console
+    docker build -t <YOUR_DOCKER_USERNAME>/docker-quickstart .
+    ```
 
-3. Run the following command to list the newly created Docker image
+    >**Note**
+    >
+    > Make sure you include the dot (.) at the end of the `docker build` command. This tells Docker where to find the Dockerfile.
 
-```console
- docker images
-```
+4. Run the following command to list the newly created Docker image:
 
-You will see output like the following:
+    ```console
+    docker images
+    ```
 
-```console
- REPOSITORY                 TAG       IMAGE ID       CREATED         SIZE
- <your-dockerhub-id>/docker-quickstart   latest    476de364f70e   2 minutes ago   170MB
-```
+    You will see output like the following:
 
-4. You can execute the following command to run a Docker container
+    ```console
+    REPOSITORY                                 TAG       IMAGE ID       CREATED         SIZE
+    <YOUR_DOCKER_USERNAME>/docker-quickstart   latest    476de364f70e   2 minutes ago   170MB
+    ```
 
-```console
- docker run -d -p 8080:8080 <your-dockerhub-id>/docker-quickstart 
-```
+5. Start a container to test the image by running the following command (swap out the username with your own username):
 
-You can quickly verify if the container is working fine or not by executing the following `curl `command. If the command is not available, you can directly access the app by visiting [http://localhost:8080](http://localhost:8080) on your browser.
+    ```console
+    docker run -d -p 8080:8080 <YOUR_DOCKER_USERNAME>/docker-quickstart 
+    ```
 
-```console
- curl localhost:8080
- 
-           ##         .
-     ## ## ##        ==
-  ## ## ## ## ##    ===
- /""""""""""""""""\___/ ===
- {                       /  ===-
- \______ O           __/
-  \    \         __/
-   \____\_______/
- 
- 
- Hello from Docker!
-```
+    You can verify if the container is working by visiting [http://localhost:8080](http://localhost:8080) with your browser.
 
-5. Next, you can use `docker tag` command to tag the Docker image. Docker tags are used for labeling and versioning Docker images, essentially serving as a convenient reference to a specific version of an image. 
+6. Use the [`docker tag`](/reference/cli/docker/image/tag/) command to tag the Docker image. Docker tags allow you to label and version your images. 
 
-```console 
- docker tag <your-dockerhub-id>/docker-quickstart <your-dockerhub-id>/docker-quickstart:1.0 
-```
+    ```console 
+    docker tag <YOUR_DOCKER_USERNAME>/docker-quickstart <YOUR_DOCKER_USERNAME>/docker-quickstart:1.0 
+    ```
 
-6. Finally, it’s time to push the newly built image to your Docker Hub repository
+7. Finally, it's time to push the newly built image to your Docker Hub repository by using the [`docker push`](/reference/cli/docker/image/push/) command:
 
-```console 
- docker push -u <your-dockerhub-id>/docker-quickstart:1.0
-```
+    ```console 
+    docker push -u <YOUR_DOCKER_USERNAME>/docker-quickstart:1.0
+    ```
 
-By now, you should be able to find the new image by navigating to **Tags** section of your Docker Hub repository.
+8. Open [Docker Hub](https://hub.docker.com) and navigate to your repository. Navigate to the **Tags** section and see your newly pushed image.
 
-![Screenshot of the Docker Hub page that displays the newly added image tag](images/dockerhub-tags.webp?border=true) 
+    ![Screenshot of the Docker Hub page that displays the newly added image tag](images/dockerhub-tags.webp?border=true) 
 
-In this walkthrough, you learned how to sign up for a Docker Hub account and create your first Docker Hub repository. You also learned how to build and tag a Docker image and push it to your Docker Hub repository.
+In this walkthrough, you signed up for a Docker account, created your first Docker Hub repository, and built, tagged, and pushed a container image to your Docker Hub repository.
 
-### Additional resources
+## Additional resources
 
-- [Docker Hub Quickstart](https://docs.docker.com/docker-hub/quickstart/)
-- [Manage Docker Hub Repositories](https://docs.docker.com/docker-hub/repo)
-- [How to tag an image](https://docs.docker.com/reference/cli/docker/image/tag/)
+- [Docker Hub Quickstart](/docker-hub/quickstart/)
+- [Manage Docker Hub Repositories](/docker-hub/repo)
 
-{{< button text="What is Docker Compose" url="what-is-Docker-Compose" >}}
+Now that you understand the basics of containers and images, you're ready to learn about Docker Compose.
+
+{{< button text="What is Docker Compose?" url="what-is-Docker-Compose" >}}
