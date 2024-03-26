@@ -99,7 +99,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
 
     This output shows you information about relevant images available on Docker Hub.
 
-3. Pull the image using the [`docker pull`](/reference/cli/docker/image/pull/) command.
+2. Pull the image using the [`docker pull`](/reference/cli/docker/image/pull/) command.
 
     ```console
     docker pull docker/welcome-to-docker

@@ -44,9 +44,7 @@ Follow the instructions to run the to-do list app on your system.
     cd todo-list-app
     ```
 
-Inside this directory, you'll find a file named `docker-compose.yaml`. This YAML file is where all the magic happens! It defines all the services that make up your application, along with their configurations. Each service specifies its image, ports, volumes, networks, and any other settings necessary for its functionality. Take some time to explore the YAML file and familiarize yourself with its structure. 
-
-
+    Inside this directory, you'll find a file named `compose.yaml`. This YAML file is where all the magic happens! It defines all the services that make up your application, along with their configurations. Each service specifies its image, ports, volumes, networks, and any other settings necessary for its functionality. Take some time to explore the YAML file and familiarize yourself with its structure. 
 
 4. Use the [`docker compose up`](/reference/cli/docker/compose/up/) command to start the application:
 

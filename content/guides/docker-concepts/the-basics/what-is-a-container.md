@@ -157,11 +157,7 @@ The `docker/welcome-to-docker` container continues to run until you stop it. You
 
 1. Run `docker ps` to get the ID of the container
 
-<<<<<<< HEAD
 2. Provide the container ID or name to the [`docker stop`](/reference/cli/docker/container/stop/) command:
-=======
-To remove a container, you can use `docker rm <the-container-id>` command.
->>>>>>> d9b82abfc1 (Few formatting changes)
 
     ```console
     docker stop <the-container-id>
@@ -171,7 +167,7 @@ To remove a container, you can use `docker rm <the-container-id>` command.
 >
 > When referencing containers by ID, you don't need to provide the full ID. You only need to provide enough of the ID to make it unique. As an example, the previous container could be stopped by running the following command:
 >
-> ```
+> ```console
 > docker stop a1f
 > ```
 { .tip }
