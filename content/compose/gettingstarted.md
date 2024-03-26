@@ -350,4 +350,4 @@ This is a simplified example, but it demonstrates the basic principle of `includ
 - Try the [Sample apps with Compose](https://github.com/docker/awesome-compose)
 - [Explore the full list of Compose commands](reference/index.md)
 - [Explore the Compose file reference](compose-file/index.md)
-- [Checkout the Learning Docker Compose video on LinkedIn Learning](https://www.linkedin.com/learning/learning-docker-compose/)
+- [Check out the Learning Docker Compose video on LinkedIn Learning](https://www.linkedin.com/learning/learning-docker-compose/)
