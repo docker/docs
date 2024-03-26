@@ -2,7 +2,6 @@
 {{ if .Description }}
   {{ $desc = .Description }}
 {{ else }}
-  {{ $desc = .Summary }}
   {{ with .File }}
     {{ with (index (site.Data.frontmatter) .Path) }}
       {{ with .description }}
