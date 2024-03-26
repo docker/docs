@@ -31,8 +31,7 @@ Host mode networking can be useful for the following use cases:
 
 This is because it doesn't require network address translation (NAT), and no "userland-proxy" is created for each port.
 
-The host networking driver only works on Linux hosts, but is available on newer
-versions of Docker Desktop as a beta feature (see below for details).
+The host networking driver only works on Linux hosts, but is available as a Beta feature, on Docker Desktop version 4.29 and later.
 
 You can also use a `host` network for a swarm service, by passing `--network host`
 to the `docker service create` command. In this case, control traffic (traffic
@@ -44,28 +43,28 @@ given swarm node.
 
 ## Docker Desktop
 
-Since Docker Desktop 4.29 host networking is also supported on Docker Desktop for Mac,
+Host networking is also supported on Docker Desktop version 4.29 and later for Mac,
 Windows, and Linux as a beta feature for users with a paid subscription
-(Docker Pro or higher).
+.
 
-This feature works in both directions. That means that you can
+This feature works in both directions. This means you can
 access a server that is running in a container from your host and you can access
 servers running on your host from any container that is started with host
 networking enabled. TCP as well as UDP are supported as communication protocols.
 
 ### Examples
 
-This command starts netcat in a container to listen on port 8000:
+The following command starts netcat in a container that listens on port `8000`:
 
-```
-docker run --rm -it --net=host nicolaka/netshoot nc -lkv 0.0.0.0 8000
+```console
+$ docker run --rm -it --net=host nicolaka/netshoot nc -lkv 0.0.0.0 8000
 ```
 
-Port 8000 will then be available on the host and you can connect to it with this
+Port `8000` will then be available on the host and you can connect to it with the following
 command from another terminal:
 
-```
-nc localhost 8000
+```console
+$ nc localhost 8000
 ```
 
 What you type in here will then appear on the terminal where the container is
@@ -74,20 +73,20 @@ running.
 To access a service running on the container you can start a container with
 host networking enabled with this command:
 
-```
-docker run --rm -it --net=host nicolaka/netshoot
+```console
+$ docker run --rm -it --net=host nicolaka/netshoot
 ```
 
 If you then want to access a service on your host from the container (in this
-example a web server running on port 80), you can do it like this:
+example a web server running on port `80`), you can do it like this:
 
-```
-nc localhost 80
+```console
+$ nc localhost 80
 ```
 
 ### Limitations
 
-The host network feature of Docker Desktop works on layer 4. That means that
+The host network feature of Docker Desktop works on layer 4. This means that
 unlike with Docker on Linux, network protocols that operate below TCP or UDP are
 not supported.
 
