@@ -23,7 +23,7 @@ installed and coexist together.
 ### Go SDK
 
 ```console
-$ go get github.com/docker/docker/client
+$ go install github.com/docker/docker/client@latest
 ```
 
 The client requires a recent version of Go. Run `go version` and ensure that you're running a currently supported version of Go.
