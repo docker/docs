@@ -40,7 +40,7 @@ You'll need to clone a new repository to get a sample application that includes 
    Let's get started!
 
    ? What application platform does your project use? Python
-   ? What version of Python do you want to use? 3.11.4
+   ? What version of Python do you want to use? 3.10
    ? What port do you want your app to listen on? 5000
    ? What is the command to run your app? python3 -m flask run --host=0.0.0.0
    ```
