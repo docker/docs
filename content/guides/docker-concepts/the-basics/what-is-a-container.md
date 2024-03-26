@@ -179,11 +179,6 @@ To remove a container, you can use `docker rm <the-container-id>` command.
 {{< /tab >}}
 {{< /tabs >}}
 
-<<<<<<< HEAD
-=======
-Now that you ran a pre-made Docker image and explored a container, it's time to learn about Docker image and it's layered architecture.
-
->>>>>>> d9b82abfc1 (Few formatting changes)
 ## Additional resources
 
 The following links provide additional guidance into containers:
@@ -191,7 +186,7 @@ The following links provide additional guidance into containers:
 - [Running a container](/engine/reference/run/)
 - [What is a container?](/guides/walkthroughs/what-is-a-container/)
 - [Overview of container](https://www.docker.com/resources/what-container/)
-- [Why Docker?](/why-docker/)
+- [Why Docker?](https://www.docker.com/why-docker/)
 
 Now that you have learned the basics of a Docker container, it's time to learn about Docker images.
 
