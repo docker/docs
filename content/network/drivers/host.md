@@ -70,7 +70,7 @@ $ nc localhost 8000
 What you type in here will then appear on the terminal where the container is
 running.
 
-To access a service running on the container you can start a container with
+To access a service running on the host from the container, you can start a container with
 host networking enabled with this command:
 
 ```console
