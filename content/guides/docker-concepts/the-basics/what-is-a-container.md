@@ -99,7 +99,7 @@ The `docker/welcome-to-docker` container continues to run until you stop it.
 
 1. Go to the **Containers** view in the Docker Dashboard.
 
-2. Locate the container you'd like to remove
+2. Locate the container you'd like to stop.
 
 3. Select the **Stop** action in the **Actions** column.
 
