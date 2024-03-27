@@ -19,12 +19,9 @@ host.
 
 ## Prerequisites
 
-- This procedure requires port 80 to be available on the Docker host. To make
-  Nginx listen on a different port, see the
-  [documentation for the `nginx` image](https://hub.docker.com/_/nginx/)
-
-- The `host` networking driver only works on Linux hosts, and is not supported
-  on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
+This procedure requires port 80 to be available on the Docker host. To make
+Nginx listen on a different port, see the
+[documentation for the `nginx` image](https://hub.docker.com/_/nginx/)
 
 ## Procedure
 
