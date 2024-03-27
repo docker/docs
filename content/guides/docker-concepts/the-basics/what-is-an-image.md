@@ -175,7 +175,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
     <missing>      5 months ago   /bin/sh -c #(nop) ADD file:ff3112828967e8004…   7.66MB
     ```
 
-    This output shows you all of the layers, they're sizes, and the command used to create the layer. 
+    This output shows you all of the layers, their sizes, and the command used to create the layer. 
 
     > **Viewing the full command**
     >
