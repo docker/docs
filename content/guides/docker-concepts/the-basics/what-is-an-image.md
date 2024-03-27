@@ -45,7 +45,7 @@ In this hands-on, you will learn how to search and pull a container image using 
 
 ### Search for and download an image
 
-1. Open the Docker Desktop dashboard and select the **Images** view in the left-hand navigation menu.
+1. Open the Docker Dashboard and select the **Images** view in the left-hand navigation menu.
 
     ![A screenshot of the Docker Desktop dashboard showing the image view on the left sidebar](images/click-image.webp?border=true&w=1050&h=400)
 
