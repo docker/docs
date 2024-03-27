@@ -53,7 +53,7 @@ That's it. You've successfully created your first repository. 🎉
 
 This repository is empty right now. You'll now fix this by pushing an image to it.
 
-### Login with Docker Desktop
+### Sign in with Docker Desktop
 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop, if not already installed.
 2. In the Docker Desktop GUI, select the **Sign in** button in the top-right corner
