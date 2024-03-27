@@ -40,7 +40,7 @@ In this hands-on, you will learn how to build and push a Docker image to the Doc
 
 ### Create your first repository
 
-1. Sign in to [Docker Hub](https://hub.docker.com)
+1. Sign in to [Docker Hub](https://hub.docker.com).
 2. Select the **Create repository** button in the top-right corner
 3. Select your namespace (most likely your username) and enter `docker-quickstart` as the repository name.
 
