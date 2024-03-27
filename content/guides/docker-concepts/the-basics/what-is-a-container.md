@@ -180,7 +180,6 @@ The `docker/welcome-to-docker` container continues to run until you stop it. You
 The following links provide additional guidance into containers:
 
 - [Running a container](/engine/reference/run/)
-- [What is a container?](/guides/walkthroughs/what-is-a-container/)
 - [Overview of container](https://www.docker.com/resources/what-container/)
 - [Why Docker?](https://www.docker.com/why-docker/)
 
