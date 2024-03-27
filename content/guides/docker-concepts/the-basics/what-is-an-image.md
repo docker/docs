@@ -64,7 +64,7 @@ In this hands-on, you will learn how to search and pull a container image using 
 
 Once you have an image downloaded, you can learn quite a few details about the image either through the GUI or the CLI.
 
-1. In the Docker Desktop Dashboard, select the **Images** view.
+1. In the Docker Dashboard, select the **Images** view.
 
 2. Select the **docker/welcome-to-docker** image to open details about the image.
 
