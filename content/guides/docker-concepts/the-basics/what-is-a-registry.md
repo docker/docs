@@ -58,7 +58,7 @@ This repository is empty right now. You'll now fix this by pushing an image to i
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop, if not already installed.
 2. In the Docker Desktop GUI, select the **Sign in** button in the top-right corner
 
-### Cloning a sample Node.js code
+### Clone sample Node.js code
 
 In order to create an image, you first need a project. To get you started quickly, you'll use a sample Node.js project found at [github.com/dockersamples/helloworld-demo-node](https://github.com/dockersamples/helloworld-demo-node). This repository contains a pre-built Dockerfile necessary for building a Docker image.
 
