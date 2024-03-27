@@ -97,7 +97,7 @@ Docker Desktop lets you explore and interact with different aspects of your cont
 
 The `docker/welcome-to-docker` container continues to run until you stop it. 
 
-1. Go to the **Containers** view in the Docker Dashboard
+1. Go to the **Containers** view in the Docker Dashboard.
 
 2. Locate the container you'd like to remove
 
