@@ -26,10 +26,10 @@ This page contains information on how you can set or change the following pre-de
 ## Methods to override 
 
 You can set or change the pre-defined environment variables:
-- Within your Compose file using the [`environment` attribute](set-environment-variables.md#use-the-environment-attribute)
+- Within your Compose file using the [`environment` attribute](set-variables.md#use-the-environment-attribute)
 - With an [environment file](env-file.md) 
 - From the command line
-- From your [shell](set-environment-variables.md#substitute-from-the-shell)
+- From your [shell](set-variables.md#substitute-from-the-shell)
 
 When changing or setting any environment variables, be aware of [Environment variable precedence](envvars-precedence.md).
 

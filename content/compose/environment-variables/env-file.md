@@ -10,7 +10,7 @@ This page provides information on the syntax rules and guidelines when using an 
 
 > **Important**
 >
-> Environment variables from an environment file have lower precedence than those from any other [method](set-environment-variables.md).
+> Environment variables from an environment file have lower precedence than those from any other [method](set-variables.md).
 For more information, see [Environment variables precedence](envvars-precedence.md).
 { .important }
 
@@ -19,7 +19,7 @@ The following syntax rules apply to environment files:
 
 - Lines beginning with `#` are processed as comments and ignored.
 - Blank lines are ignored.
-- Unquoted and double-quoted (`"`) values have [interpolation](#interpolation) applied.
+- Unquoted and double-quoted (`"`) values have [interpolation](set-variables.md#interpolation-syntax) applied.
 - Each line represents a key-value pair. Values can optionally be quoted.
   - `VAR=VAL` -> `VAL`
   - `VAR="VAL"` -> `VAL`
@@ -40,23 +40,3 @@ The following syntax rules apply to environment files:
   - `VAR="some\tvalue"` -> `some  value`
   - `VAR='some\tvalue'` -> `some\tvalue`
   - `VAR=some\tvalue` -> `some\tvalue`
-
-### Interpolation
-Compose supports interpolation in environment files.
-Interpolation is applied for unquoted and double-quoted values.
-Both braced (`${VAR}`) and unbraced (`$VAR`) expressions are supported.
-
-For braced expressions, the following formats are supported:
-- Direct substitution
-  - `${VAR}` -> value of `VAR`
-- Default value
-  - `${VAR:-default}` -> value of `VAR` if set and non-empty, otherwise `default`
-  - `${VAR-default}` -> value of `VAR` if set, otherwise `default`
-- Required value
-  - `${VAR:?error}` -> value of `VAR` if set and non-empty, otherwise exit with error
-  - `${VAR?error}` -> value of `VAR` if set, otherwise exit with error
-- Alternative value
-  - `${VAR:+replacement}` -> `replacement` if `VAR` is set and non-empty, otherwise empty
-  - `${VAR+replacement}` -> `replacement` if `VAR` is set, otherwise empty
-
-For more information, see [Interpolation](../compose-file/12-interpolation.md) in the Compose Specification. 
