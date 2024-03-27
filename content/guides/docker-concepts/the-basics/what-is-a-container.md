@@ -91,7 +91,7 @@ Docker Desktop lets you explore and interact with different aspects of your cont
 
 3. Select the **Files** tab to explore your container's isolated file system.
 
-    ![Screenshot of the Docker Desktop Dashboard showing the files and directories inside a running container](images/explore-your-container.webp?border)
+    ![Screenshot of the Docker Dashboard showing the files and directories inside a running container](images/explore-your-container.webp?border)
 
 ### Stop your container
 
