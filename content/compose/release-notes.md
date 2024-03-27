@@ -2,6 +2,7 @@
 title: Docker Compose release notes
 description: Release notes for Docker Compose
 keywords: release notes, compose
+categories: [release-notes]
 toc_max: 2
 aliases:
 - /release-notes/docker-compose/

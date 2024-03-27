@@ -8,6 +8,7 @@ aliases:
 - /docker-cloud/getting-started/intermediate/optimize-dockerfiles/
 - /docker-cloud/tutorials/optimize-dockerfiles/
 - /engine/userguide/eng-image/dockerfile_best-practices/
+categories: [best-practices]
 ---
 
 This topic covers recommended best practices and methods for building

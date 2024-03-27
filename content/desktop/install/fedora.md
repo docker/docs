@@ -6,6 +6,7 @@ title: Install Docker Desktop on Fedora
 toc_max: 4
 aliases:
 - /desktop/linux/install/fedora/
+categories: [ installation ]
 ---
 
 > **Docker Desktop terms**

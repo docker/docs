@@ -9,6 +9,7 @@ title: Install Docker Desktop on Ubuntu
 toc_max: 4
 aliases:
 - /desktop/linux/install/ubuntu/
+categories: [ installation ]
 ---
 
 > **Docker Desktop terms**

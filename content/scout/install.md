@@ -2,6 +2,7 @@
 title: Install Docker Scout
 description: Installation instructions for the Docker Scout CLI plugin
 keywords: scout, cli, install, download
+categories: [ installation ]
 ---
 
 The Docker Scout CLI plugin comes pre-installed with Docker Desktop.

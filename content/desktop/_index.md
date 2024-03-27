@@ -6,37 +6,33 @@ keywords: how to use docker desktop, what is docker desktop used for, what does 
 title: Overview of Docker Desktop
 grid:
 - title: Install Docker Desktop
-  description: 'Install Docker Desktop on
-
+  description: |
+    Install Docker Desktop on
     [Mac](/desktop/install/mac-install/),
-
     [Windows](/desktop/install/windows-install/), or
-
     [Linux](/desktop/install/linux-install/).
-
-    '
   icon: download
 - title: Explore Docker Desktop
   description: Navigate Docker Desktop and learn about its key features.
   icon: feature_search
-  link: /desktop/use-desktop
+  link: /desktop/use-desktop/
 - title: View the release notes
   description: Find out about new features, improvements, and bug fixes.
   icon: note_add
-  link: /desktop/release-notes
+  link: /desktop/release-notes/
 - title: Browse common FAQs
   description: Explore general FAQs or FAQs for specific platforms.
   icon: help
   link: /desktop/faqs/
 - title: Find additional resources
-  description: Find information on networking features, deploying on Kubernetes, and
-    more.
+  description: |
+    Find information on networking features, deploying on Kubernetes, and more.
   icon: category
-  link: /desktop/kubernetes
+  link: /desktop/kubernetes/
 - title: Give feedback
   description: Provide feedback on Docker Desktop or Docker Desktop features.
   icon: sms
-  link: /desktop/feedback
+  link: /desktop/feedback/
 aliases:
 - /desktop/opensource/
 - /docker-for-mac/dashboard/
@@ -52,17 +48,16 @@ It provides a straightforward GUI (Graphical User Interface) that lets you manag
 
 Docker Desktop reduces the time spent on complex setups so you can focus on writing code. It takes care of port mappings, file system concerns, and other default settings, and is regularly updated with bug fixes and security updates.
 
-
 {{< tabs >}}
 {{< tab name="What's included in Docker Desktop?" >}}
 
-- [Docker Engine](../engine/index.md)
+- [Docker Engine](../engine/_index.md)
 - Docker CLI client
 - [Docker Scout](../scout/_index.md) (additional subscription may apply)
-- [Docker Build](../build/index.md)
-- [Docker Extensions](extensions/index.md)
-- [Docker Compose](../compose/index.md)
-- [Docker Content Trust](../engine/security/trust/index.md)
+- [Docker Build](../build/_index.md)
+- [Docker Extensions](./extensions/_index.md)
+- [Docker Compose](../compose/_index.md)
+- [Docker Content Trust](../engine/security/trust/_index.md)
 - [Kubernetes](https://github.com/kubernetes/kubernetes/)
 - [Credential Helper](https://github.com/docker/docker-credential-helpers/)
 

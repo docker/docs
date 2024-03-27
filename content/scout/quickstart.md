@@ -4,6 +4,7 @@ keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, 
 description: Learn how to get started with Docker Scout to analyze images and fix vulnerabilities
 aliases:
   - /atomist/get-started/
+categories: [quickstart]
 ---
 
 Docker Scout analyzes image contents and generates a detailed report of packages

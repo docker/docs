@@ -29,6 +29,8 @@ aliases:
 - /engine/installation/oracle/
 - /enterprise/supported-platforms/
 - /install/linux/docker-ee/oracle/
+cascade:
+  categories: [ installation ]
 ---
 
 This section describes how to install Docker Engine on Linux, also known as

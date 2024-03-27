@@ -1,12 +1,6 @@
 @layer components {
   #TableOfContents {
-    nav {
-      @apply border-l-2 border-divider-light;
-    }
-    ul ul {
-      @apply pl-2;
-    }
-    a {
+    .toc a {
       @apply block max-w-full truncate py-1 pl-2 hover:font-medium hover:no-underline;
       &[aria-current="true"],
       &:hover {

@@ -4,6 +4,7 @@ description: Learn how to containerize different types of services by walking th
   Official Docker samples.
 cascade:
   layout: samples
+  categories: [samples]
 aliases:
 - /en/latest/examples/
 - /engine/examples/

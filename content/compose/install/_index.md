@@ -10,6 +10,8 @@ aliases:
 - /compose/compose-desktop/
 - /compose/install/other/
 - /compose/install/compose-desktop/
+cascade:
+  categories: [ installation ]
 ---
 
 {{< include "compose-eol.md" >}}
