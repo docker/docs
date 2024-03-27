@@ -130,7 +130,7 @@ In this walkthrough, you signed up for a Docker account, created your first Dock
 - [Docker Hub Quickstart](/docker-hub/quickstart/)
 - [Manage Docker Hub Repositories](/docker-hub/repos/)
 
-## What's Next
+## Next Steps
 
 Now that you understand the basics of containers and images, you're ready to learn about Docker Compose.
 
