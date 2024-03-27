@@ -24,15 +24,12 @@ area/desktop:
   - changed-files:
       - any-glob-to-any-file:
           - content/desktop/**
-          - "!content/desktop/extensions/**"
-          - "!content/desktop/extensions-sdk/**"
 
 area/engine:
   - changed-files:
       - any-glob-to-any-file:
           - content/engine/**
           - content/config/**
-          - "!content/engine/reference/commandline/*"
 
 area/install:
   - changed-files:
