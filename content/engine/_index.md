@@ -66,12 +66,7 @@ such as images, containers, networks, and volumes.
 For more details, see
 [Docker Architecture](../get-started/overview.md#docker-architecture).
 
+Use of Docker Engine or Docker CLI through Docker Desktop is subject to the
+[licensing terms](./install/_index.md#licensing).
+
 {{< grid >}}
-
-## Licensing
-
-The Docker Engine is licensed under the Apache License, Version 2.0. See
-[LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full license
-text. 
-
-However, for commercial use of Docker Engine obtained via Docker Desktop within larger enterprises (exceeding 250 employees OR with annual revenue surpassing $10 million USD), a [paid subscription](https://www.docker.com/pricing/) is required.

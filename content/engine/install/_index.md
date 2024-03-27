@@ -104,11 +104,50 @@ For information about the open source project, refer to the
 
 Patch releases are always backward compatible with its major and minor version.
 
-### Licensing
+## Licensing
 
 Docker Engine is licensed under the Apache License, Version 2.0. See
 [LICENSE](https://github.com/moby/moby/blob/master/LICENSE) for the full
 license text.
+
+Commercial use of Docker Desktop (which includes Docker Engine and Docker CLI)
+requires a [paid subscription](https://www.docker.com/pricing/)
+in enterprises exceeding 250 employees OR with annual revenue surpassing $10 million USD.
+
+To check if you're using Docker Engine through Docker Desktop,
+run the `docker version` command and inspect the server version.
+
+```console {hl_lines=12}
+$ docker version
+Client:
+ Cloud integration: v1.0.35+desktop.13
+ Version:           26.0.0
+ API version:       1.45
+ Go version:        go1.21.8
+ Git commit:        2ae903e
+ Built:             Wed Mar 20 15:14:46 2024
+ OS/Arch:           darwin/arm64
+ Context:           desktop-linux
+
+Server: Docker Desktop 4.29.0 (143713)
+ Engine:
+  Version:          26.0.0
+  API version:      1.45 (minimum version 1.24)
+  Go version:       go1.21.8
+  Git commit:       8b79278
+  Built:            Wed Mar 20 15:18:02 2024
+  OS/Arch:          linux/arm64
+  Experimental:     false
+ containerd:
+  Version:          1.6.28
+  GitCommit:        ae07eda36dd25f8a1b98dfbf587313b99c0190bb
+ runc:
+  Version:          1.1.12
+  GitCommit:        v1.1.12-0-g51d5e94
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+```
 
 ## Reporting security issues
 
