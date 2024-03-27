@@ -1349,6 +1349,8 @@ Manuals:
         title: Image analysis
       - path: /scout/image-prefix/
         title: Specify artifact type or location
+      - path: /scout/exceptions/
+        title: Exceptions {{< badge color=violet text=New >}}
       - path: /scout/sbom/
         title: SBOM
       - path: /scout/env-vars/
