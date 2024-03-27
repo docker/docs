@@ -272,12 +272,6 @@ module:
         - source: docs/bake-reference.md
           target: content/build/bake/reference.md
 
-    - path: github.com/docker/scout-cli
-      mounts:
-        - source: docs
-          includeFiles: "*.yaml"
-          target: data/scout-cli
-
     - path: github.com/docker/cli
       mounts:
         - source: docs/extend
