@@ -143,7 +143,7 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
 
     The command shows a list of Docker images currently available on your system. The `docker/welcome-to-docker` has a total size of approximately 29.7MB.
 
-    > *Image size*
+    > **Image size**
     > 
     > The image size represented here reflects the uncompressed size of the image, not the download size of the layers.
 
