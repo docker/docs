@@ -1665,6 +1665,12 @@ There are three options:
 * Specify just the container port (an ephemeral host port is chosen for the host port).
 * Specify the host IP address to bind to AND both ports (the default is 0.0.0.0, meaning all interfaces): (`IPADDR:HOSTPORT:CONTAINERPORT`). If HOSTPORT is empty (for example `127.0.0.1::80`), an ephemeral port is chosen to bind to on the host.
 
+> Note when using docker stack deploy
+>
+> Specifying `IPADDR:HOSTPORT:CONTAINERPORT` does not limit access
+> to the specified IP when [deploying a stack in swarm mode](../../reference/cli/docker/stack/deploy.md).
+{ .important }
+
 > **Note**
 >
 > When mapping ports in the `HOST:CONTAINER` format, you may experience
