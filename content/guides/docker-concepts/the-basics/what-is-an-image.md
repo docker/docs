@@ -200,4 +200,8 @@ The following resources will help you learn more about exploring, finding, and b
 - [Packaging your software](/build/building/packaging/)
 - [Docker Hub](https://hub.docker.com)
 
+## Next steps
+
+Now that you have learned the basics of images, it's time to learn about distributing images through registries.
+
 {{< button text="What is a registry?" url="what-is-a-registry" >}}
