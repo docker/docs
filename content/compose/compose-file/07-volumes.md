@@ -12,7 +12,7 @@ The top-level `volumes` declaration lets you configure named volumes that can be
 >
 > Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase? 
 > Compose now takes advantage of [Synchronized file shares](../../desktop/synchronized-file-sharing.md) and  automatically creates file shares for bind mounts. 
-> Ensure you're signed into Docker with a paid subscription and have **Access experimental features** enabled in Docker Desktop settings.
+> Ensure you're signed into Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
 { .tip }
 
 ## Example

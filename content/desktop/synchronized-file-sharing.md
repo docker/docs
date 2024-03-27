@@ -54,7 +54,7 @@ When the status indicator displays **Watching for filesystem changes**, your fil
 > **Tip**
 >
 > Compose can now automatically create file shares for bind mounts. 
-> Ensure you're signed into Docker with a paid subscription and have **Access experimental features** enabled in Docker Desktop settings.
+> Ensure you're signed into Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
 { .tip }
 
 ## Explore your file share instance
