@@ -103,7 +103,7 @@ The `docker/welcome-to-docker` container continues to run until you stop it.
 
 3. Select the **Stop** action in the **Actions** column.
 
-    ![Screenshot of the Docker Desktop Dashboard with the welcome container selected and being prepared to stop](images/stop-your-container.webp?border)
+    ![Screenshot of the Docker Dashboard with the welcome container selected and being prepared to stop](images/stop-your-container.webp?border)
 
 {{< /tab >}}
 {{< tab name="Using the CLI" >}}
