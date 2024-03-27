@@ -22,6 +22,8 @@ This page contains information on how you can set or change the following pre-de
 - `COMPOSE_ANSI`
 - `COMPOSE_STATUS_STDOUT`
 - `COMPOSE_ENV_FILES`
+- `COMPOSE_MENU`
+- `COMPOSE_EXPERIMENTAL`
 
 ## Methods to override 
 
@@ -151,6 +153,32 @@ COMPOSE_ENV_FILES=.env.envfile1, .env.envfile2
 ```
 
 If `COMPOSE_ENV_FILES` is not set, and you don't provide `--env-file` in the CLI, Docker Compose uses the default behavior, which is to look for an `.env` file in the project directory.
+
+### COMPOSE\_MENU
+
+When enabled, Compose will display a navigation menu to open the Compose stack in Docker Desktop or to switch in `watch` mode.
+
+* Supported values:
+  * `true` or `1`, to enable,
+  * `false` or `0`, to disable.
+* Defaults to: `0`.
+
+> **Note**
+>
+> Available in Docker Compose version 2.26.0 and later, and Docker Desktop version 4.29 and later
+
+### COMPOSE\_EXPERIMENTAL
+
+This is an opt-out variable, when turn off it will deactivate the experimental features such as the navigation menu or the Mutagen file sharing.
+
+* Supported values:
+  * `true` or `1`, to enable,
+  * `false` or `0`, to disable.
+* Defaults to: `1`.
+
+> **Note**
+>
+> Available in Docker Compose version 2.26.0 and later, and Docker Desktop version 4.29 and later
 
 ## Unsupported in Compose V2
 
