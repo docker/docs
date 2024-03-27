@@ -49,7 +49,7 @@ Use the following instructions to run a container.
 
 2. Specify `welcome-to-docker` in the search input and then select the **Pull** button.
 
-    ![A screenshot of the Docker Desktop dashboard showing the search result for welcome-to-docker Docker image ](images/search-the-docker-image.webp?border=true&w=1000&h=700)
+    ![A screenshot of the Docker Dashboard showing the search result for welcome-to-docker Docker image ](images/search-the-docker-image.webp?border=true&w=1000&h=700)
 
 3. Once the image is successfully pulled, select the **Run** button.
 
