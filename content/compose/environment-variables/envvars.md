@@ -156,7 +156,7 @@ If `COMPOSE_ENV_FILES` is not set, and you don't provide `--env-file` in the CLI
 
 ### COMPOSE\_MENU
 
-When enabled, Compose will display a navigation menu to open the Compose stack in Docker Desktop or to switch in `watch` mode.
+When enabled, Compose displays a navigation menu where you can choose to open the Compose stack in Docker Desktop, switch on [`watch` mode](../file-watch.md), or use [Docker Debug](../../reference/cli/debug.md).
 
 * Supported values:
   * `true` or `1`, to enable,
@@ -169,7 +169,7 @@ When enabled, Compose will display a navigation menu to open the Compose stack i
 
 ### COMPOSE\_EXPERIMENTAL
 
-This is an opt-out variable, when turn off it will deactivate the experimental features such as the navigation menu or the Mutagen file sharing.
+This is an opt-out variable. When turned off it deactivates the experimental features such as the navigation menu or [Synchronized file shares](../../desktop/synchronized-file-sharing.md).
 
 * Supported values:
   * `true` or `1`, to enable,
