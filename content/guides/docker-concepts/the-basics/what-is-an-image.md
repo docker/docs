@@ -68,7 +68,7 @@ Once you have an image downloaded, you can learn quite a few details about the i
 
 2. Select the **docker/welcome-to-docker** image to open details about the image.
 
-    ![A screenshot of the Docker Desktop dashboard showing the images view with an arrow pointing to the docker/welcome-to-docker image](images/pulled-image.webp?border=true&w=1050&h=400)
+    ![A screenshot of the Docker Dashboard showing the images view with an arrow pointing to the docker/welcome-to-docker image](images/pulled-image.webp?border=true&w=1050&h=400)
 
 3. The image details page presents you with information regarding the layers of the image, the packages and libraries installed in the image, and any discovered vulnerabilities.
 
