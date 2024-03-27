@@ -113,7 +113,7 @@ Follow the instructions to run a container using the CLI:
 1. Open your CLI terminal and start a container by using the [`docker run`](/reference/cli/docker/container/run/) command:
 
     ```console
-    docker run -d -p 8080:80 docker/welcome-to-docker
+    $ docker run -d -p 8080:80 docker/welcome-to-docker
     ```
 
     The output from this command is the full container ID. 
