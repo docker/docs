@@ -156,7 +156,7 @@ If `COMPOSE_ENV_FILES` is not set, and you don't provide `--env-file` in the CLI
 
 ### COMPOSE\_MENU
 
-When enabled, Compose displays a navigation menu where you can choose to open the Compose stack in Docker Desktop, switch on [`watch` mode](../file-watch.md), or use [Docker Debug](../../reference/cli/debug.md).
+When enabled, Compose displays a navigation menu where you can choose to open the Compose stack in Docker Desktop, switch on [`watch` mode](../file-watch.md), or use [Docker Debug](../../reference/cli/docker/debug.md).
 
 * Supported values:
   * `true` or `1`, to enable,
