@@ -74,7 +74,7 @@ Once you have an image downloaded, you can learn quite a few details about the i
 
     ![A screenshot of the image details view for the docker/welcome-to-docker image](images/image-layers.webp?border=true&w=1050&h=400)
 
-In this walkthrough, you searched and pulled a Docker image. In addition to pulling a Docker image, you also learned about the layers of a Docker image.
+
 
 {{< /tab >}}
 
