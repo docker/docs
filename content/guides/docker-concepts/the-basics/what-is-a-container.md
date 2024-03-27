@@ -63,7 +63,7 @@ Use the following instructions to run a container.
 
 7. Select **Run** to start your container.
 
-Congratulations!! You just ran your first container! 🎉
+Congratulations! You just ran your first container! 🎉
  
 ### View your container
 
