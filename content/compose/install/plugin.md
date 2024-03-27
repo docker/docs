@@ -10,6 +10,8 @@ title: Install the Compose plugin
 aliases:
 - /compose/compose-plugin/
 - /compose/compose-linux/
+redirect_from:
+- /compose/install/linux/
 ---
 
 {{< include "compose-eol.md" >}}
@@ -19,6 +21,8 @@ On this page you can find instructions on how to install the Compose plugin on L
 To install the Compose plugin on Linux, you can either:
 - [Set up Docker's repository on your Linux system](#install-using-the-repository).
 - [Install Compose manually](#install-the-plugin-manually).
+
+To install the Compose plugin on Windows Server, you need to [install it manually](#on-windows-server).
 
 > **Note**
 >
@@ -85,6 +89,8 @@ To update the Compose plugin, run the following commands:
 
 ## Install the plugin manually
 
+### On Linux
+
 > **Note**
 >
 > This option requires you to manage upgrades manually. We recommend setting up Docker's repository for easier maintenance.
@@ -117,6 +123,30 @@ To update the Compose plugin, run the following commands:
     ```
 
 3. Test the installation.
+
+    ```console
+    $ docker compose version
+    Docker Compose version {{% param "compose_version" %}}
+    ```
+
+### On Windows Server
+
+> **Note**
+>
+> This option requires you to manage upgrades manually.
+
+1.  Run PowerShell as an administrator.
+    When asked if you want to allow this app to make changes to your device, select **Yes** in order to proceed with the installation.
+
+2. Run the following command to download the latest release of Compose ({{% param "compose_version" %}}):
+
+    ```powershell
+    Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{% param "compose_version" %}}/docker-compose-windows-x86_64.exe" -Destination $Env:ProgramData\docker\cli-plugins\docker-compose.exe
+    ```
+
+    To install a different version of Compose, substitute `{{% param "compose_version" %}}` with the version of Compose you want to use.
+
+3.  Test the installation.
 
     ```console
     $ docker compose version
