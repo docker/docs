@@ -55,7 +55,7 @@ In this hands-on, you will learn how to search and pull a container image using 
 
 3. In the **Search** field, enter "welcome-to-docker". Once the search has completed, select the `docker/welcome-to-docker` image.
 
-    ![A screenshot of the Docker Desktop dashboard showing the search results for the docker/welcome-to-docker image](images/select-image.webp?border=true&w=1050&h=400)
+    ![A screenshot of the Docker Dashboard showing the search results for the docker/welcome-to-docker image](images/select-image.webp?border=true&w=1050&h=400)
 
 4. Select **Pull** to download the image.
 
