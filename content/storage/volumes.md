@@ -466,8 +466,7 @@ Each volume driver may have zero or more configurable options.
 ```console
 $ docker run -d \
   --name sshfs-container \
-  --volume-driver vieux/sshfs \
-  --mount src=sshvolume,target=/app,volume-opt=sshcmd=test@node2:/home/test,volume-opt=password=testpassword \
+  --mount type=volume,volume-driver=vieux/sshfs,src=sshvolume,target=/app,volume-opt=sshcmd=test@node2:/home/test,volume-opt=password=testpassword \
   nginx:latest
 ```
 
