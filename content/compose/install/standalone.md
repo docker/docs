@@ -50,12 +50,11 @@ on Microsoft Windows Server and want to install Docker Compose.
 3. Run the following command to download the latest release of Compose ({{% param "compose_version" %}}):
 
     ```powershell
-     Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{% param "compose_version" %}}/docker-compose-windows-x86_64.exe" -Destination $Env:ProgramFiles\Docker\docker-compose.exe
+     Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/{{% param "compose_version" %}}/docker-compose-windows-x86_64.exe" -Destination $env:windir\System32\docker-compose.exe
     ```
-
     > **Note**
     >
-    > On Windows Server 2019 you can add the Compose executable to `$Env:ProgramFiles\Docker`.
+    > The Microsoft [install script for Windows Server](https://learn.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=dockerce#windows-server-1) installs docker.exe and dockerd.exe in `$env:windir\System32`.
      Because this directory is registered in the system `PATH`, you can run the `docker-compose --version` 
      command on the subsequent step with no additional configuration.
 
