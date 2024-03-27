@@ -59,7 +59,7 @@ Use the following instructions to run a container.
 
 6. In the **Host port**, specify `8080`.
 
-    ![A screenshot of Docker Desktop dashboard showing the container run dialog with welcome-to-docker typed in as the container name and 8080 specified as the port number](images/run-a-new-container.webp?border=true&w=550&h=400)
+    ![A screenshot of Docker Dashboard showing the container run dialog with welcome-to-docker typed in as the container name and 8080 specified as the port number](images/run-a-new-container.webp?border=true&w=550&h=400)
 
 7. Select **Run** to start your container.
 
