@@ -24,6 +24,80 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
 
+## 
+
+{{< release-date date="2024-02-26" >}}
+
+{{< desktop-install all=true version="4.29.0" build_path="/TBD/" >}}
+
+### New
+
+- Beta version of air-gapped containers
+- Added the ability to enforce Rosetta usage via Settings Management
+- Docker socket mount restrictions admin configuration with ECI
+- Moby 26 engine including Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX
+- New Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
+- Compose now supports Synchronized file shares
+- New interactive Compose CLI
+- Added support for host networking in Docker Desktop (Beta)
+- Beta - Docker Debug for running containers in GUI
+- Beta - Volumes Backup & Share extension functionality available in Volumes tab
+
+### Upgrades
+
+- [Docker Compose v2.26.0](https://github.com/docker/compose/releases/tag/v2.26.0)
+- [Docker Scout CLI v1.6.3](https://github.com/docker/scout-cli/releases/tag/v1.6.3)
+- [Docker Engine v26.0.0](https://docs.docker.com/engine/release-notes/26.0/#2600)
+- [Buildx v0.13.1](https://github.com/docker/buildx/releases/tag/v0.13.1)
+- [Docker Scout CLI v1.6.0](https://github.com/docker/scout-cli/releases/tag/v1.6.0)
+- [Kubernetes v1.29.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.2)
+- [cri-dockerd v0.3.11](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.11)
+- Docker Debug v0.0.27
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue with dropdown menu opening beyond application window.
+- Docker Init:
+  - Updated the formatting of CLI output to improve legibility
+  - Fixed an issue with `.dockerignore` to avoid ignoring application files that start with "compose"
+  - Improved how Java applications are started based on Spring Boot version. Fixes [docker/for-mac#7171](https://github.com/docker/for-mac/issues/7171).
+  - Removed non-official Docker image used for Rust cross-compilation
+- Automatic management of Synchronized File Shares in Compose (experimental).
+- Interactive Compose TUI (experimental).
+- The maximum number of files per Synchronized File Share should now exceed 2 million.
+- Fixed an issue that caused the warning: "_The value provided to Autocomplete is invalid._" when clicking in the export to local image field.
+- **Run Cloud** can now be accessed from the Dashboard
+- Opting out from sending analytics will now also disable collecting data for bug reports
+- You can now share and unshare a port to the Cloud Engine in the **Containers** view.
+- Shared cloud can now be accessed from the footer in the right hands side of the **Dashboard**
+- **Synchronized File Shares** bind mount source creation behaviors are now aligned with other file sharing mechanisms.
+- Added beta support for host networking on macOS, Windows and Docker Desktop for Linux  [docker#238](https://github.com/docker/roadmap/issues/238).
+- Added timestamp to the new unread notifications in the **Dashboard**.
+- Fixed typo in the virtualization support error message. Fixes [docker/desktop-linux#197](https://github.com/docker/desktop-linux/issues/197).
+- Allow connections to host.docker.internal to be blocked by a rule in a proxy autoconfig .pac file.
+- Added support for `PROXY reject.docker.internal:1234` to reject connections in a proxy autoconfig .pac file.
+- Fixed the placement of the secondary menu in the **Images** and **Containers** lists
+- Fixed a race condition that occurred when starting Docker Desktop with QEMU.
+- Improved the error message when an image pull is blocked by Registry Access Management policy.
+
+#### For Mac
+
+- Fixed Kubernetes not starting successfully. Fixes [docker/for-mac#7136](https://github.com/docker/for-mac/issues/7136) and [docker/for-mac#7031](https://github.com/docker/for-mac/issues/7031).
+
+#### For Windows
+
+- Fixed a bug where `docker run -v` would fail after switching between WSL 2 and Hyper-V.
+
+#### For Linux
+
+- Fixed and issue that caused the list of available experimental features in the UI to become out-of-sync with the back-end data.
+
+#### Security
+
+- Disabled Electron `runAsNode` fuse to improve security hardening. [More info here.](https://www.electronjs.org/blog/statement-run-as-node-cves)
+
 ## 4.28.0
 
 {{< release-date date="2024-02-26" >}}
