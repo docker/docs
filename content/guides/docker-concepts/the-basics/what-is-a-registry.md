@@ -56,7 +56,7 @@ This repository is empty right now. You'll now fix this by pushing an image to i
 ### Login with Docker Desktop
 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop, if not already installed.
-2. In the Docker Desktop GUI, select the **Log in** button in the top-right corner
+2. In the Docker Desktop GUI, select the **Sign in** button in the top-right corner
 
 ### Cloning a sample Node.js code
 
