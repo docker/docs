@@ -694,5 +694,8 @@
 "/get-started/04_sharing_app":
   - /go/get-started-sharing/
 
+## Docker Debug
 "/reference/cli/docker/debug/":
   - /go/debug-cli/
+"/desktop/use-desktop/container/#integrated-terminal":
+  - /go/debug-gui/
