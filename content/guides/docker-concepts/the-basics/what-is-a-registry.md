@@ -32,7 +32,7 @@ In this hands-on, you will learn how to build and push a Docker image to the Doc
 
 ### Sign up for a free Docker account
 
-1. If you have not done so, [create a Docker account](https://hub.docker.com/signup).
+1. If you haven't created one yet, head over to the [Docker Hub](https://hub.docker.com) page to sign up for a new Docker account.
 
     ![Screenshot of the official Docker Hub page showing the Sign up page](images/dockerhub-signup.webp?border)
 
