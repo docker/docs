@@ -184,6 +184,8 @@ The following links provide additional guidance into containers:
 - [Overview of container](https://www.docker.com/resources/what-container/)
 - [Why Docker?](https://www.docker.com/why-docker/)
 
+## What's Next
+
 Now that you have learned the basics of a Docker container, it's time to learn about Docker images.
 
 {{< button text="What is an image?" url="what-is-an-image" >}}
