@@ -129,7 +129,8 @@ In this walkthrough, you learned how to use Docker Compose to start and stop a m
 
 ## Additional resources
 
-This concept page purposely didn't do a deep-dive on Compose and how to write a Compose file, but focused on introducing you to what Compose is.
+This page was a brief introduction to Compose. In the following resources, you can dive deeper into Compose and how to write Compose files.
+
 
 * [Overview of Docker Compose](/compose/)
 * [Overview of Docker Compose CLI](/compose/reference/)
