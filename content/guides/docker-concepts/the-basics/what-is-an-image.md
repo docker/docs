@@ -182,7 +182,6 @@ Follow the instructions to search and pull a Docker image using CLI to view its 
     > If you add the `--no-trunc` flag to the command, you will see the full command. Note that, since the output is in a table-like format, longer commands will cause the output to be very difficult to navigate.
     { .tip }
 
-In this walkthrough, you searched and pulled a Docker image. In addition to pulling a Docker image, you also learned about the layers of a Docker image.
 
 {{< /tab >}}
 {{< /tabs >}}
