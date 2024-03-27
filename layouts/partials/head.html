@@ -44,7 +44,6 @@
 {{ $js := resources.Match "js/src/**.js"
   | resources.Concat "scripts.js"
   | js.Build (dict
-    "minify" true
     "params" (dict
       "apikey" site.Params.algolia.apikey
       "appid" site.Params.algolia.appid
