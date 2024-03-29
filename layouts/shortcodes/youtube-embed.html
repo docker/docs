@@ -1,6 +1,6 @@
 <div id="youtube-player-{{ .Get 0 }}" data-video-id="{{ .Get 0}}" class="youtube-video aspect-video w-full"></div>
-{{ if $.Page.Scratch.Get "youtube-embed" | default "incomplete" | ne "setup" }} 
-{{ $.Page.Scratch.Set "youtube-embed" "setup" }}
+{{ if page.Scratch.Get "youtube-embed" | default "incomplete" | ne "setup" }} 
+{{ page.Scratch.Set "youtube-embed" "setup" }}
 <script>
 (function() {
   var tag = document.createElement('script');
