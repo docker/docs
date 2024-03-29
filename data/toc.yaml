@@ -1419,8 +1419,12 @@ Manuals:
         section:
         - title: GitHub
           path: /scout/integrations/source-code-management/github/
-    - path: /scout/release-notes/
-      title: Release notes
+    - sectiontitle: Release notes
+      section:
+      - path: /scout/release-notes/cli/
+        title: CLI and GitHub Action
+      - path: /scout/release-notes/platform/
+        title: Platform
 
 - sectiontitle: Docker Engine
   section:
