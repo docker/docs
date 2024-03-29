@@ -79,27 +79,37 @@ To open the integrated terminal, either:
 
 - Hover over your running container and select the **Show container actions**
   menu. From the drop-down menu, select **Open in terminal**.
-- Select the container and then select the **Exec** tab.
+- Or, select the container and then select the **Exec** tab.
 
 To use your external terminal, navigate to the **General** tab in **Settings**
 and select the **System default** option under **Choose your terminal**.
 
 #### Open the integrated terminal in debug mode
 
-Debug mode is in [Beta](../../release-lifecycle.md#beta) and requires a [Pro, Team, or Business subcription](/subscription/details/). You must be signed in to use debug mode. Debug mode has several advantages, such as:
+> **Beta**
+>
+> The debug mode feature is in [Beta](../../release-lifecycle.md/#beta). Docker
+> recommends that you don't use this feature in production environments.
+{ .experimental }
+
+Debug mode requires a [Pro, Team, or Business subcription](/subscription/details/). Debug mode has several advantages, such as:
 
 - A customizable toolbox. The toolbox comes with many standard Linux tools
   pre-installed, such as `vim`, `nano`, `htop`, and `curl`. For more details, see the [`docker debug` CLI reference](/reference/cli/docker/debug/).
 - The ability to access containers that don't have a shell, for example, slim or
   distroless containers.
 
-To open the integrated terminal in debug mode, either:
+To open the integrated terminal in debug mode:
 
-- Hover over your running container and select the **Show container actions**
-  menu. From the drop-down menu, select **Use Docker Debug**.
-- Select the container and then select the **Debug** tab. If the **Debug** tab
-  isn't visible, select the **Exec** tab and then enable the **Debug mode**
-  setting.
+1. Sign in to Docker Desktop with an account that has a Pro, Team, or Business
+   subscription.
+2. After you're signed in, either:
+
+   - Hover over your running container and select the **Show container actions**
+     menu. From the drop-down menu, select **Use Docker Debug**.
+   - Or, select the container and then select the **Debug** tab. If the
+     **Debug** tab isn't visible, select the **Exec** tab and then enable the
+     **Debug mode** setting.
 
 To use debug mode by default when accessing the integrated terminal, navigate to
 the **General** tab in **Settings** and select the **Enable Docker Debug by
