@@ -117,7 +117,6 @@ queries the platform for an existing network simply called `outside` and connect
 `proxy` service's containers to it.
 
 ```yml
-
 services:
   proxy:
     image: example/proxy

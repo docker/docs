@@ -48,7 +48,6 @@ In the following example, `metrics` volume specification uses alias
 to avoid repetition but overrides `name` attribute:
 
 ```yml
-
 services:
   backend:
     image: example/database
