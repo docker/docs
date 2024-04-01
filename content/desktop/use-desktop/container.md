@@ -124,7 +124,7 @@ can also:
 - Edit a file straight from the built-in editor
 - Drag and drop files and folders between the host and the container
 - Delete unnecessary files when you right-click on a file
-- Download file and folders from the container straight to the host
+- Download files and folders from the container straight to the host
 
 ## Additional resources
 - [What is a container](../../guides/walkthroughs/what-is-a-container.md)
