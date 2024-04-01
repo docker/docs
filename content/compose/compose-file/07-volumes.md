@@ -128,7 +128,7 @@ For example, if `DATABASE_VOLUME=my_volume_001` in your `.env` file:
 ```yml
 volumes:
   db-data:
-      name: ${DATABASE_VOLUME}
+    name: ${DATABASE_VOLUME}
 ```
 
 Running `docker compose up` uses the volume called `my_volume_001`. 
