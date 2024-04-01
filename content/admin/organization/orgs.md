@@ -53,12 +53,6 @@ to your organization's **Settings** page.
 8. (Optional) Select annual or monthly billing cycle.
 9. Follow the on-screen instructions to pay for your subscription.
 
-   > **Note**
-   >
-   > If you've already paid for a subscription for the new organization through
-   > a Docker sales representative, then don't enter payment information.
-   > Instead, select **Back** to return to Docker Hub from the billing portal, then select **Organizations** to verify that the organization has been created.
-
 You've now created an organization.
 
 ## View an organization
