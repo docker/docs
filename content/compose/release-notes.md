@@ -12,6 +12,19 @@ aliases:
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
 ## 2.26.0
+{{< release-date date="2024-03-29" >}}
+
+### Update
+- Dependencies upgrade: opencontainers/image-spec v1.1.0
+
+### Bug fixes and enhancements
+- Added image pull failure reason in output
+- Fixed crash when running up with `--no-build` and `--watch`
+- Fixed crash when no TTY available and menu enabled
+- Improved legibility of menu actions
+
+
+## 2.26.0
 {{< release-date date="2024-03-22" >}}
 
 ### Update
