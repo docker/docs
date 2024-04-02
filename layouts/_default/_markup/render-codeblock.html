@@ -1,17 +1,36 @@
 <div class="group relative">
-  <button
-    x-data="{ code: '{{encoding.Base64Encode .Inner}}', copying: false }"
-    class="absolute top-3 right-3 text-gray-light-300 dark:text-gray-dark-600"
-    title="Copy"
-    @click="window.navigator.clipboard.writeText(atob(code).replaceAll(/^\$\s*/gm, ''));
+  <button x-data="{ code: '{{encoding.Base64Encode .Inner}}', copying: false }"
+    class="absolute right-3 top-3 z-20 text-gray-light-300 dark:text-gray-dark-600" title="Copy" @click="window.navigator.clipboard.writeText(atob(code).replaceAll(/^\$\s*/gm, ''));
     copying = true;
-    setTimeout(() => copying = false, 2000);"
-  >
-    <span :class="{ 'group-hover:block' : !copying }" class="hidden icon-svg">{{ partialCached "icon" "content_copy" "content_copy" }}</span>
-    <span :class="{ 'group-hover:block' : copying }" class="hidden icon-svg">{{ partialCached "icon" "check_circle" "check_circle" }}</span>
+    setTimeout(() => copying = false, 2000);">
+    <span :class="{ 'group-hover:block' : !copying }" class="icon-svg hidden">{{ partialCached "icon" "content_copy" "content_copy" }}</span>
+    <span :class="{ 'group-hover:block' : copying }" class="icon-svg hidden">{{ partialCached "icon" "check_circle" "check_circle" }}</span>
   </button>
-  {{ $lang := .Type | default "text" }}
+  {{ $lang := .Type | default "text" }} {{ $result := transform.Highlight .Inner
+  $lang .Options }}
   <div class="syntax-light dark:syntax-dark">
-    {{ transform.Highlight .Inner $lang .Options }}
+    {{ with .Attributes.collapse }}
+    <div x-data="{ collapse: true }" class="relative scroll-mt-20 overflow-clip"
+      x-init="$watch('collapse', value => $root.scrollIntoView({ behavior: 'smooth'}))">
+      <div x-show="collapse"
+        class="to-transparent absolute z-10 flex h-32 w-full flex-col-reverse items-center overflow-clip bg-gradient-to-t from-background-light to-75% bg-cover pb-4 dark:from-background-dark">
+        <button @click="collapse = false"
+          class="flex items-center rounded-full bg-blue-light px-2 text-sm text-white dark:bg-blue-dark-400">
+          <span>Show more</span>
+          <span class="icon-svg">{{ partialCached "icon" "expand_more" "expand_more" }}</span>
+        </button>
+      </div>
+      <div :class="{ 'h-32': collapse }">
+        {{ $result }}
+        <button @click="collapse = true" x-show="!collapse"
+          class="mx-auto -mt-4 flex items-center rounded-b-lg bg-blue-light px-2 text-sm text-white dark:bg-blue-dark-400">
+          <span>Hide</span>
+          <span class="icon-svg">{{ partialCached "icon" "expand_less" "expand_less" }}</span>
+        </button>
+      </div>
+    </div>
+    {{ else }}
+      {{ $result }}
+    {{ end }}
   </div>
 </div>
