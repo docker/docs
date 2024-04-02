@@ -10,8 +10,8 @@
     <span :class="{ 'group-hover:block' : !copying }" class="hidden icon-svg">{{ partialCached "icon" "content_copy" "content_copy" }}</span>
     <span :class="{ 'group-hover:block' : copying }" class="hidden icon-svg">{{ partialCached "icon" "check_circle" "check_circle" }}</span>
   </button>
-  {{ $result := transform.HighlightCodeBlock . }}
+  {{ $lang := .Type | default "text" }}
   <div class="syntax-light dark:syntax-dark">
-    {{ $result.Wrapped }}
+    {{ transform.Highlight .Inner $lang .Options }}
   </div>
 </div>
