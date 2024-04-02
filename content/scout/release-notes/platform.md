@@ -18,6 +18,14 @@ for what's coming next.
 
 New features and enhancements released in the first quarter of 2024.
 
+### 2024-03-29
+
+The **High-profile vulnerabilities** policy now reports the `xz` backdoor
+vulnerability [CVE-2024-3094](https://scout.docker.com/v/CVE-2024-3094). Any
+images in your Docker organization containing the version of `xz/liblzma` with
+the backdoor will be non-compliant with the **High-profile vulnerabilities**
+policy.
+
 ### 2024-03-20
 
 The **Fixable critical and high vulnerabilities** policy now supports a
