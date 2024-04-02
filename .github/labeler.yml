@@ -1,103 +1,140 @@
 area/release:
-  - .github/**
-  - _releaser/**
-  - netlify.toml
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/**
+          - _releaser/**
+          - netlify.toml
 
 area/build:
-  - content/build/**
-  - _vendor/github.com/moby/buildkit/**
-  - _vendor/github.com/docker/buildx/**
-  - content/engine/commandline/build*
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/build/**
+          - _vendor/github.com/moby/buildkit/**
+          - _vendor/github.com/docker/buildx/**
+          - content/engine/commandline/build*
 
 area/compose:
-  - content/compose/**
-  - _vendor/github.com/docker/compose/**
-  - _vendor/github.com/compose-spec/compose-spec/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/compose/**
+          - _vendor/github.com/docker/compose/**
+          - _vendor/github.com/compose-spec/compose-spec/**
 
 area/desktop:
-  - any:
-      [
-        content/desktop/**,
-        "!content/desktop/extensions/**",
-        "!content/desktop/extensions-sdk/**",
-      ]
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/desktop/**
 
 area/engine:
-  - any:
-      [
-        content/engine/**,
-        content/config/**,
-        "!content/engine/reference/commandline/*",
-      ]
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/engine/**
+          - content/config/**
 
 area/install:
-  - content/desktop/install/**
-  - content/engine/install/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/desktop/install/**
+          - content/engine/install/**
 
 area/swarm:
-  - content/engine/swarm/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/engine/swarm/**
 
 area/security:
-  - content/security/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/security/**
 
 area/get-started:
-  - content/get-started/**
-  - content/language/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/get-started/**
+          - content/language/**
 
 area/networking:
-  - content/network/**
-  - content/config/ipv6.md
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/network/**
+          - content/config/ipv6.md
 
 area/hub:
-  - content/docker-hub/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/docker-hub/**
 
 area/cli:
-  - content/engine/reference/commandline/**
-  - _vendor/github.com/docker/cli/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/engine/reference/commandline/**
+          - _vendor/github.com/docker/cli/**
 
 area/api:
-  - content/engine/api/**
-  - content/docker-hub/api/**
-  - _vendor/github.com/moby/moby/docs/api/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/engine/api/**
+          - content/docker-hub/api/**
+          - _vendor/github.com/moby/moby/docs/api/*
 
 area/scout:
-  - content/scout/**
-  - _vendor/github.com/docker/scout-cli/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/scout/**
+          - _vendor/github.com/docker/scout-cli/**
 
 area/billing:
-  - content/billing/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/billing/**
 
 area/subscription:
-  - content/subscription/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/subscription/**
 
 area/admin:
-  - content/admin/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/admin/**
 
 area/configuration:
-  - content/config/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/config/**
 
 area/extensions:
-  - content/desktop/extensions/**
-  - content/desktop/extensions-sdk/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/desktop/extensions/**
+          - content/desktop/extensions-sdk/**
 
 area/samples:
-  - content/samples/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/samples/**
 
 area/storage:
-  - content/storage/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - content/storage/**
 
 area/accounts:
   - content/accounts/**
 
 hugo:
-  - layouts/**
-  - hugo.yaml
-  - tailwind.config.js
-  - postcss.config.js
-  - assets/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - layouts/**
+          - hugo.yaml
+          - tailwind.config.js
+          - postcss.config.js
+          - assets/**
 
 dependencies:
-  - go.mod
-  - go.sum
-  - package*.json
-  - _vendor/**
+  - changed-files:
+      - any-glob-to-any-file:
+          - go.mod
+          - go.sum
+          - package*.json
+          - _vendor/**

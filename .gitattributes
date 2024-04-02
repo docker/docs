@@ -1,2 +1,5 @@
 # Auto-detect text files, ensure they use LF.
 * text=auto eol=lf
+
+# Fine-tune GitHub's language detection
+content/**/*.md linguist-detectable

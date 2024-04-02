@@ -1036,6 +1036,7 @@ options:
     - option: userns
       value_type: string
       description: User namespace to use
+      details_url: '#userns'
       deprecated: false
       hidden: false
       experimental: false
@@ -1177,7 +1178,7 @@ examples: |-
 
     #### Example: run htop inside a container
 
-    To run `htop` in a container that shares the process namespace of the host:
+    To run `htop` in a container that shares the process namespac of the host:
 
     1. Run an alpine container with the `--pid=host` option:
 
@@ -1238,6 +1239,21 @@ examples: |-
        strace: Process 1 attached
        ```
 
+    ### Disable namespace remapping for a container (--userns) {#userns}
+
+    If you enable user namespaces on the daemon,
+    all containers are started with user namespaces enabled by default.
+    To disable user namespace remapping for a specific container,
+    you can set the `--userns` flag to `host`.
+
+    ```console
+    docker run --userns=host hello-world
+    ```
+
+    `host` is the only valid value for the `--userns` flag.
+
+    For more information, refer to [Isolate containers with a user namespace](/engine/security/userns-remap/).
+
     ### UTS settings (--uts) {#uts}
 
     ```text
@@ -1293,7 +1309,37 @@ examples: |-
     of the containers, using `"shareable"` mode for the main (i.e. "donor")
     container, and `"container:<donor-name-or-ID>"` for other containers.
 
-    ### Full container capabilities (--privileged) {#privileged}
+    ### Escalate container privileges (--privileged) {#privileged}
+
+    The `--privileged` flag gives the following capabilities to a container:
+
+    - Enables all Linux kernel capabilities
+    - Disables the default seccomp profile
+    - Disables the default AppArmor profile
+    - Disables the SELinux process label
+    - Grants access to all host devices
+    - Makes `/sys` read-write
+    - Makes cgroups mounts read-write
+
+    In other words, the container can then do almost everything that the host can
+    do. This flag exists to allow special use-cases, like running Docker within
+    Docker.
+
+    > **Warning**
+    >
+    > Use the `--privileged` flag with caution.
+    > A container with `--privileged` is not a securely sandboxed process.
+    > Containers in this mode can get a root shell on the host
+    > and take control over the system.
+    >
+    > For most use cases, this flag should not be the preferred solution.
+    > If your container requires escalated privileges,
+    > you should prefer to explicitly grant the necessary permissions,
+    > for example by adding individual kernel capabilities with `--cap-add`.
+    >
+    > For more information, see
+    > [Runtime privilege and Linux capabilities](/engine/reference/run/#runtime-privilege-and-linux-capabilities)
+    { .warning }
 
     The following example doesn't work, because by default, Docker drops most
     potentially dangerous kernel capabilities, including `CAP_SYS_ADMIN ` (which is
@@ -1314,11 +1360,6 @@ examples: |-
     Filesystem      Size  Used Avail Use% Mounted on
     none            1.9G     0  1.9G   0% /mnt
     ```
-
-    The `--privileged` flag gives all capabilities to the container, and it also
-    lifts all the limitations enforced by the `device` cgroup controller. In other
-    words, the container can then do almost everything that the host can do. This
-    flag exists to allow special use-cases, like running Docker within Docker.
 
     ### Set working directory (-w, --workdir) {#workdir}
 
@@ -1967,7 +2008,7 @@ examples: |-
     password is hidden:
 
     ```console
-    $ docker run -i debian passwd root
+    $ docker run -it debian passwd root
     New password:
     Retype new password:
     passwd: password updated successfully

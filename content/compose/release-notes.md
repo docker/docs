@@ -11,6 +11,71 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
+## 2.26.0
+{{< release-date date="2024-03-29" >}}
+
+### Update
+- Dependencies upgrade: opencontainers/image-spec v1.1.0
+
+### Bug fixes and enhancements
+- Added image pull failure reason in output
+- Fixed crash when running up with `--no-build` and `--watch`
+- Fixed crash when no TTY available and menu enabled
+- Improved legibility of menu actions
+
+
+## 2.26.0
+{{< release-date date="2024-03-22" >}}
+
+### Update
+- Dependencies upgrade: bump compose-go v2.0.2
+- Dependencies upgrade: bump docker v26.0.0
+
+### Bug fixes and enhancements
+- Reduced timeout of the Otel tracing command
+- Fixed `config --format json`
+- Fixed documentation on default build image name
+- Introduced Synchronized file shares for bind mounts in Compose
+- Added support for `annotations`
+- Introduced `config --variables` to list Compose model variables
+- Added a navigation menu within `docker compose up`
+
+
+## 2.25.0
+{{< release-date date="2024-03-15" >}}
+
+
+### Update
+- Dependencies upgrade: bump compose-go v2.0.0
+
+### Bug fixes and enhancements
+- Restored `config` hebaviour until `--no-interpolate` is set
+- Fixed service name shell completion
+- Added `--watch` flag to `up` command
+
+## 2.24.7
+{{< release-date date="2024-03-06" >}}
+
+### Update
+- Dependencies upgrade: bump golang to 1.21.8
+- Dependencies upgrade: bump compose-go to 2.0.0-rc8
+- Dependencies upgrade: bump docker to v24.0.4
+
+### Bug fixes and enhancements
+
+- Compose now ensures stable priority sort order for networks 
+- Fixed interpolation with curly braces (e.g. JSON) in default values 
+- Fixed validation for non-unique `container_name` values
+- Fixed validation for `develop.watch`
+- Fixed environment loading for `include`
+- Fixed panic when merging labels/networks
+- Added support for `--no-path-resolution` when using `include`
+- Fixed missing project name errors
+- Fixed `--no-interpolate` flag on `config`
+- Added a workaround for file lock issues with Watch mode on Windows
+- Fixed duplicate exit code status messages
+- Compose now respects `COMPOSE_REMOVE_ORPHANS` on `up`
+
 ## 2.24.6
 {{< release-date date="2024-02-15" >}}
 

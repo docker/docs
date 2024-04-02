@@ -27,6 +27,18 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: detach
+      shorthand: d
+      value_type: bool
+      default_value: "true"
+      description: |
+        Exit immediately instead of waiting for the stack services to converge
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: prune
       value_type: bool
       default_value: "false"
@@ -34,6 +46,17 @@ options:
       deprecated: false
       hidden: false
       min_api_version: "1.27"
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: quiet
+      shorthand: q
+      value_type: bool
+      default_value: "false"
+      description: Suppress progress output
+      deprecated: false
+      hidden: false
       experimental: false
       experimentalcli: false
       kubernetes: false

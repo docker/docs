@@ -343,7 +343,7 @@ Setting `NO_COLOR` to anything turns off colorized output, as recommended by
 
 ### BUILDKIT_HOST
 
-_Introduced in [Buildx v0.9.0](../release-notes.md#090)_
+{{< introduced buildx 0.9.0 "../release-notes.md#090" >}}
 
 You use the `BUILDKIT_HOST` to specify the address of a BuildKit daemon to use
 as a remote builder. This is the same as specifying the address as a positional
@@ -465,7 +465,7 @@ $ export BUILDX_EXPERIMENTAL=1
 
 ### BUILDX_GIT_CHECK_DIRTY
 
-_Introduced in [Buildx v0.10.4](../release-notes.md#0104)_
+{{< introduced buildx 0.10.4 "../release-notes.md#0104" >}}
 
 When set to true, checks for dirty state in source control information for
 [provenance attestations](../attestations/slsa-provenance.md).
@@ -478,7 +478,7 @@ $ export BUILDX_GIT_CHECK_DIRTY=1
 
 ### BUILDX_GIT_INFO
 
-_Introduced in [Buildx v0.10.0](../release-notes.md#0100)_
+{{< introduced buildx 0.10.0 "../release-notes.md#0100" >}}
 
 When set to false, removes source control information from
 [provenance attestations](../attestations/slsa-provenance.md).
@@ -491,7 +491,7 @@ $ export BUILDX_GIT_INFO=0
 
 ### BUILDX_GIT_LABELS
 
-_Introduced in [Buildx v0.10.0](../release-notes.md#0100)_
+{{< introduced buildx 0.10.0 "../release-notes.md#0100" >}}
 
 Adds provenance labels, based on Git information, to images that you build. The
 labels are:
@@ -520,7 +520,7 @@ If the repository is in a dirty state, the `revision` gets a `-dirty` suffix.
 
 ### BUILDX_NO_DEFAULT_ATTESTATIONS
 
-_Introduced in [Buildx v0.10.4](../release-notes.md#0104)_
+{{< introduced buildx 0.10.4 "../release-notes.md#0104" >}}
 
 By default, BuildKit v0.11 and later adds
 [provenance attestations](../attestations/slsa-provenance.md) to images you

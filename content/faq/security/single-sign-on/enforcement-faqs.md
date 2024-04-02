@@ -8,7 +8,7 @@ aliases:
 
 ### We currently have a Docker Team subscription. How do we enable SSO?
 
-SSO is available with a Docker Business subscription. To enable SSO, you must first upgrade your subscription to a Docker Business subscription. To learn how to upgrade your existing account, see [Upgrade your subscription](../../../subscription/upgrade.md).
+SSO is available with a Docker Business subscription. To enable SSO, you must first upgrade your subscription to a Docker Business subscription. To learn how to upgrade your existing account, see [Upgrade your subscription](../../../subscription/core-subscription/upgrade.md).
 
 ### How do service accounts work with SSO?
 

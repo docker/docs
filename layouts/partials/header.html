@@ -11,14 +11,14 @@
         sidebar.classList.replace('md:block', 'md:hidden');
       }
       }" class="icon-svg hidden px-4 md:block" aria-label="Menu">
-        {{ partial "icon" "menu" }}
+        {{ partialCached "icon" "menu" "menu" }}
       </button>
       {{ end }}
       <div>
         {{/* main logo */}}
         <a title="Docker Docs home page" href="{{ site.BaseURL }}">
           <div>
-            {{- (resources.Get "images/docs-logo-white-full.svg").Content | safe.HTML -}}
+            {{- (resources.Get "images/docker-docs-white.svg").Content | safe.HTML -}}
           </div>
         </a>
       </div>
@@ -31,8 +31,8 @@
         localStorage.setItem('theme-preference', value);
         document.firstElementChild.className = value;
       })" @click="theme = (theme === 'dark' ? 'light' : 'dark')">
-        <span class="icon-svg dark:hidden">{{ partial "icon" "light_mode"}}</span>
-        <span class="icon-svg hidden dark:block">{{ partial "icon" "dark_mode"}}</span>
+        <span class="icon-svg dark:hidden">{{ partialCached "icon" "light_mode" "light_mode"}}</span>
+        <span class="icon-svg hidden dark:block">{{ partialCached "icon" "dark_mode" "dark_mode"}}</span>
       </button>
     </div>
   </div>

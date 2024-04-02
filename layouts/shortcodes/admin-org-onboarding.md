@@ -51,7 +51,7 @@ Configuring SSO and SCIM is optional and only available to Docker Business subsc
 
 You can manage your members in your identity provider and automatically provision them to your Docker organization with SSO and SCIM. See the following for more details.
    - [Configure SSO](/security/for-admins/single-sign-on/) to authenticate and add members when they sign in to Docker through your identity provider.
-   - Optional: [Enforce SSO](/security/for-admins/single-sign-on/configure/#optional-step-four-enforce-sso) to ensure that users must sign in to Docker with SSO.
+   - Optional: [Enforce SSO](/security/for-admins/single-sign-on/connect/#optional-enforce-sso) to ensure that users must sign in to Docker with SSO.
    - [Configure SCIM](/security/for-admins/scim/) to automatically provision, add, and de-provision members to Docker through your identity provider.
 
 

@@ -213,7 +213,7 @@ target "webapp" {
 The following table shows the complete list of attributes that you can assign to a target:
 
 | Name                                            | Type    | Description                                                          |
-| ----------------------------------------------- | ------- | -------------------------------------------------------------------- |
+|-------------------------------------------------|---------|----------------------------------------------------------------------|
 | [`args`](#targetargs)                           | Map     | Build arguments                                                      |
 | [`annotations`](#targetannotations)             | List    | Exporter annotations                                                 |
 | [`attest`](#targetattest)                       | List    | Build attestations                                                   |
@@ -233,9 +233,11 @@ The following table shows the complete list of attributes that you can assign to
 | [`platforms`](#targetplatforms)                 | List    | Target platforms                                                     |
 | [`pull`](#targetpull)                           | Boolean | Always pull images                                                   |
 | [`secret`](#targetsecret)                       | List    | Secrets to expose to the build                                       |
+| [`shm-size`](#targetshm-size)                   | List    | Size of `/dev/shm`                                                   |
 | [`ssh`](#targetssh)                             | List    | SSH agent sockets or keys to expose to the build                     |
 | [`tags`](#targettags)                           | List    | Image names and tags                                                 |
 | [`target`](#targettarget)                       | String  | Target build stage                                                   |
+| [`ulimits`](#targetulimits)                     | List    | Ulimit options                                                       |
 
 ### `target.args`
 
@@ -832,6 +834,29 @@ RUN --mount=type=secret,id=KUBECONFIG \
     KUBECONFIG=$(cat /run/secrets/KUBECONFIG) helm upgrade --install
 ```
 
+### `target.shm-size`
+
+Sets the size of the shared memory allocated for build containers when using
+`RUN` instructions.
+
+The format is `<number><unit>`. `number` must be greater than `0`. Unit is
+optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g`
+(gigabytes). If you omit the unit, the system uses bytes.
+
+This is the same as the `--shm-size` flag for `docker build`.
+
+```hcl
+target "default" {
+  shm-size = "128m"
+}
+```
+
+> **Note**
+>
+> In most cases, it is recommended to let the builder automatically determine
+> the appropriate configurations. Manual adjustments should only be considered
+> when specific performance tuning is required for complex build scenarios.
+
 ### `target.ssh`
 
 Defines SSH agent sockets or keys to expose to the build.
@@ -877,6 +902,32 @@ target "default" {
   target = "binaries"
 }
 ```
+
+### `target.ulimits`
+
+Ulimits overrides the default ulimits of build's containers when using `RUN`
+instructions and are specified with a soft and hard limit as such:
+`<type>=<soft limit>[:<hard limit>]`, for example:
+
+```hcl
+target "app" {
+  ulimits = [
+    "nofile=1024:1024"
+  ]
+}
+```
+
+> **Note**
+>
+> If you do not provide a `hard limit`, the `soft limit` is used
+> for both values. If no `ulimits` are set, they are inherited from
+> the default `ulimits` set on the daemon.
+
+> **Note**
+>
+> In most cases, it is recommended to let the builder automatically determine
+> the appropriate configurations. Manual adjustments should only be considered
+> when specific performance tuning is required for complex build scenarios.
 
 ## Group
 

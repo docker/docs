@@ -453,7 +453,7 @@ options:
     - option: shm-size
       value_type: bytes
       default_value: "0"
-      description: Size of `/dev/shm`
+      description: Shared memory size for build containers
       details_url: '#shm-size'
       deprecated: false
       hidden: false
@@ -611,9 +611,9 @@ examples: |-
 
     - `network.host` - Allows executions with host networking.
     - `security.insecure` - Allows executions without sandbox. See
-      [related Dockerfile extensions](/reference/dockerfile/#run---securitysandbox).
+      [related Dockerfile extensions](/reference/dockerfile/#run---security).
 
-    For entitlements to be enabled, the `buildkitd` daemon also needs to allow them
+    For entitlements to be enabled, the BuildKit daemon also needs to allow them
     with `--allow-insecure-entitlement` (see [`create --buildkitd-flags`](/reference/cli/docker/buildx/create/#buildkitd-flags)).
 
     ```console
@@ -786,6 +786,7 @@ examples: |-
 
     ```json
     {
+      "buildx.build.ref": "mybuilder/mybuilder0/0fjb6ubs52xx3vygf6fgdl611",
       "containerimage.config.digest": "sha256:2937f66a9722f7f4a2df583de2f8cb97fc9196059a410e7f00072fc918930e66",
       "containerimage.descriptor": {
         "annotations": {
@@ -881,6 +882,10 @@ examples: |-
     $ docker buildx build -o type=docker,dest=- . > myimage.tar
     $ docker buildx build -t tonistiigi/foo -o type=registry
     ```
+
+    > **Note **
+    >
+    > Since BuildKit v0.13.0 multiple outputs can be specified by repeating the flag.
 
     Supported exported types are:
 
@@ -1112,11 +1117,20 @@ examples: |-
     $ SECRET_TOKEN=token docker buildx build --secret id=SECRET_TOKEN .
     ```
 
-    ### Size of /dev/shm (--shm-size) {#shm-size}
+    ### Shared memory size for build containers (--shm-size) {#shm-size}
+
+    Sets the size of the shared memory allocated for build containers when using
+    `RUN` instructions.
 
     The format is `<number><unit>`. `number` must be greater than `0`. Unit is
     optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes), or `g`
     (gigabytes). If you omit the unit, the system uses bytes.
+
+    > **Note**
+    >
+    > In most cases, it is recommended to let the builder automatically determine
+    > the appropriate configurations. Manual adjustments should only be considered
+    > when specific performance tuning is required for complex build scenarios.
 
     ### SSH agent socket or keys to expose to the build (--ssh) {#ssh}
 
@@ -1151,7 +1165,8 @@ examples: |-
 
     ### Set ulimits (--ulimit) {#ulimit}
 
-    `--ulimit` is specified with a soft and hard limit as such:
+    `--ulimit` overrides the default ulimits of build's containers when using `RUN`
+    instructions and are specified with a soft and hard limit as such:
     `<type>=<soft limit>[:<hard limit>]`, for example:
 
     ```console
@@ -1163,6 +1178,12 @@ examples: |-
     > If you don't provide a `hard limit`, the `soft limit` is used
     > for both values. If no `ulimits` are set, they're inherited from
     > the default `ulimits` set on the daemon.
+
+    > **Note**
+    >
+    > In most cases, it is recommended to let the builder automatically determine
+    > the appropriate configurations. Manual adjustments should only be considered
+    > when specific performance tuning is required for complex build scenarios.
 deprecated: false
 hidden: false
 experimental: false

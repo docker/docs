@@ -679,17 +679,13 @@ extends:
 - `service`: Defines the name of the service being referenced as a base, for example `web` or `database`.
 - `file`: The location of a Compose configuration file defining that service.
 
-### Restrictions
+When a service uses `extends`, it can also specify dependencies on other resources, an explicit `volumes` declaration for instance. However, it's important to note that `extends` does not automatically incorporate the target volume definition into the extending Compose file. Instead, you are responsible for ensuring that an equivalent resource exists for the service being extended to maintain consistency. Docker Compose verifies that a resource with the referenced ID is present within the Compose model.
 
-The following restrictions apply to the service being referenced:
+Dependencies on other resources in an `extends` target can be:
+- An explicit reference by `volumes`, `networks`, `configs`, `secrets`, `links`, `volumes_from` or `depends_on`
+- A reference to another service using the `service:{name}` syntax in namespace declaration (`ipc`, `pid`, `network_mode`)
 
-- Services that have dependencies on other services cannot be used as a base. Therefore, any key
-  that introduces a dependency on another service is incompatible with `extends`. The
-  non-exhaustive list of such keys is: `links`, `volumes_from`, `container` mode (in `ipc`, `pid`,
-  `network_mode` and `net`), `service` mode (in `ipc`, `pid` and `network_mode`), `depends_on`.
-- Services cannot have circular references with `extends`.
-
-Compose returns an error in all of these cases.
+Circular references with `extends` are not supported, Compose returns an error when one is detected.
 
 ### Finding referenced service
 
@@ -1407,23 +1403,26 @@ expressed in the short form.
 - `published`: The publicly exposed port. It is defined as a string and can be set as a range using syntax `start-end`. It means the actual port is assigned a remaining available port, within the set range.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
+- `app_protocol`: The application procotol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands.
 - `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
 - `name`: A human-readable name for the port, used to document it's usage within the service.
 
 ```yml
 ports:
-  - name: http
+  - name: web
     target: 80
     host_ip: 127.0.0.1
     published: "8080"
     protocol: tcp
+    app_protocol: http
     mode: host
 
-  - name: https
+  - name: web-secured
     target: 443
     host_ip: 127.0.0.1
     published: "8083-9000"
     protocol: tcp
+    app_protocol: https
     mode: host
 ```
 
@@ -1559,10 +1558,10 @@ the service's containers.
   The default value is world-readable permissions (mode `0444`).
   The writable bit must be ignored if set. The executable bit may be set. 
 
-The following example sets the name of the `server-certificate` secret file to `server.crt`
+The following example sets the name of the `server-certificate` secret file to `server.cert`
 within the container, sets the mode to `0440` (group-readable), and sets the user and group
-to `103`. The value of `server-certificate` secret is provided by the platform through a lookup and
-the secret's lifecycle is not directly managed by Compose.
+to `103`. The value of `server-certificate` is set
+to the contents of the file `./server.cert`.
 
 ```yml
 services:
@@ -1576,7 +1575,7 @@ services:
         mode: 0440
 secrets:
   server-certificate:
-    external: true
+    file: ./server.cert
 ```
 
 ## security_opt

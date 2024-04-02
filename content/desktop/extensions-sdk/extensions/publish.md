@@ -1,10 +1,10 @@
 ---
-title: Publish your extension to the marketplace
+title: Publish your extension in the Marketplace
 description: Docker extension distribution
 keywords: Docker, extensions, publish
 ---
 
-## Submit your extension to the marketplace
+## Submit your extension to the Marketplace
 
 Docker Desktop displays published extensions in the Extensions Marketplace on [Docker Desktop](https://open.docker.com/extensions/marketplace) and [Docker Hub](https://hub.docker.com/search?q=&type=extension).
 The Extensions Marketplace is a space where developers can discover extensions to improve their developer experience and propose their own extension to be available for all Desktop users.
@@ -13,7 +13,7 @@ Whenever you are [ready to publish](./DISTRIBUTION.md) your extension in the Mar
 
 > **Note**
 >
-> As the Extension Marketplace continues to add new features for both Extension users and publishers, we expect you
+> As the Extension Marketplace continues to add new features for both Extension users and publishers, you are expected
 > to maintain your extension over time to ensure it stays available in the Marketplace.
 
 > **Important**
@@ -25,7 +25,7 @@ Whenever you are [ready to publish](./DISTRIBUTION.md) your extension in the Mar
 Before you submit your extension, it must pass the [validation](validate.md) checks.
 
 It is highly recommended that your extension follows the guidelines outlined in this section before submitting your
-extension. If you request a review from the Docker Extensions team and have not followed the guidelines above, the review process may take longer. 
+extension. If you request a review from the Docker Extensions team and have not followed the guidelines, the review process may take longer. 
 
 These guidelines don't replace Docker's terms of service or guarantee approval:
 - Review the [design guidelines](../design/design-guidelines.md)

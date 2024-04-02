@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./hugo_stats.json","./layouts/**/*.{html,js}", "./content/**/*.md", "assets/js/**/*.js"],
+  content: ["./hugo_stats.json", "layouts/**/*.html", "assets/**/*.js"],
   darkMode: "class",
   theme: {
     extend: {
@@ -12,7 +12,6 @@ module.exports = {
             'pre code': false,
             'code::before': false,
             'code::after': false,
-            table: false,
             // light colors for prose
             "--tw-prose-body": theme("colors.black"),
             "--tw-prose-headings": theme("colors.black"),

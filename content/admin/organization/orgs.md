@@ -11,7 +11,7 @@ aliases:
 This section describes how to create an organization. Before you begin:
 
 - You need a [Docker ID](../../docker-id/_index.md).
-- Review the [Docker subscriptions and features](../../subscription/details.md) to determine what plan to choose for your organization.
+- Review the [Docker subscriptions and features](../../subscription/core-subscription/details.md) to determine what plan to choose for your organization.
 
 ## Create an organization
 
@@ -52,12 +52,6 @@ to your organization's **Settings** page.
 7. In the billing portal, select **Qty** to update the number of seats you require, then select **Update**.
 8. (Optional) Select annual or monthly billing cycle.
 9. Follow the on-screen instructions to pay for your subscription.
-
-   > **Note**
-   >
-   > If you've already paid for a subscription for the new organization through
-   > a Docker sales representative, then don't enter payment information.
-   > Instead, select **Back** to return to Docker Hub from the billing portal, then select **Organizations** to verify that the organization has been created.
 
 You've now created an organization.
 
@@ -108,7 +102,7 @@ configure your organization.
    organization's **Settings** page.
 
 - **Billing**: Displays information about your existing
-[Docker subscription (plan)](../../subscription/_index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../../billing/history.md).
+[Docker subscription (plan)](../../subscription/_index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../../billing/core-billing/history.md).
 
 ## Videos
 

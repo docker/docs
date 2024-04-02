@@ -7,8 +7,8 @@
     copying = true;
     setTimeout(() => copying = false, 2000);"
   >
-    <span :class="{ 'group-hover:block' : !copying }" class="hidden icon-svg">{{ partial "icon" "content_copy" }}</span>
-    <span :class="{ 'group-hover:block' : copying }" class="hidden icon-svg">{{ partial "icon" "check_circle" }}</span>
+    <span :class="{ 'group-hover:block' : !copying }" class="hidden icon-svg">{{ partialCached "icon" "content_copy" "content_copy" }}</span>
+    <span :class="{ 'group-hover:block' : copying }" class="hidden icon-svg">{{ partialCached "icon" "check_circle" "check_circle" }}</span>
   </button>
   {{ $result := transform.HighlightCodeBlock . }}
   <div class="syntax-light dark:syntax-dark">

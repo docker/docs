@@ -35,8 +35,6 @@ grid_nlp:
   description: Explore an app that can summarize text.
   link: /guides/use-case/nlp/text-summarization/
   icon: summarize
-
-
 ---
 
 Explore this collection of use-case guides designed to help you leverage Docker
@@ -50,6 +48,15 @@ how Docker can streamline your projects and workflows.
 ## Natural language processing
 
 {{< grid items="grid_nlp" >}}
+
+## TensorFlow
+
+{{< card
+  title="Face detection with TensorFlow.js"
+  icon=face
+  link=/guides/use-case/tensorflowjs/
+  description="Explore a face detection app built with TensorFlow.js and Docker."
+>}}
 
 ## Data science
 

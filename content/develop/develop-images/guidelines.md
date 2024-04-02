@@ -86,37 +86,10 @@ When building an image, Docker steps through the instructions in your
 Dockerfile, executing each in the order specified. For each instruction, Docker
 checks whether it can reuse the instruction from the build cache.
 
-The basic rules of build cache invalidation are as follows:
-
-- Starting with a parent image that's already in the cache, the next
-  instruction is compared against all child images derived from that base
-  image to see if one of them was built using the exact same instruction. If
-  not, the cache is invalidated.
-
-- In most cases, simply comparing the instruction in the Dockerfile with one
-  of the child images is sufficient. However, certain instructions require more
-  examination and explanation.
-
-- For the `ADD` and `COPY` instructions, the modification time and size file
-  metadata is used to determine whether cache is valid. During cache lookup,
-  cache is invalidated if the file metadata has changed for any of the files
-  involved.
-
-- Aside from the `ADD` and `COPY` commands, cache checking doesn't look at the
-  files in the container to determine a cache match. For example, when processing
-  a `RUN apt-get -y update` command the files updated in the container
-  aren't examined to determine if a cache hit exists. In that case just
-  the command string itself is used to find a match.
-
-Once the cache is invalidated, all subsequent Dockerfile commands generate new
-images and the cache isn't used.
-
-If your build contains several layers and you want to ensure the build cache is
-reusable, order the instructions from less frequently changed to more
-frequently changed where possible.
-
-For more information about the Docker build cache and how to optimize your
-builds, see [cache management](../../build/cache/_index.md).
+Understanding how the build cache works, and how cache invalidation occurs,
+is critical for ensuring faster builds.
+For more information about the Docker build cache and how to optimize your builds,
+see [Docker build cache](../../build/cache/_index.md).
 
 ## Pin base image versions
 

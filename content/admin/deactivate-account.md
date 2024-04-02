@@ -20,7 +20,7 @@ Before deactivating an organization, complete the following:
 - Download any images and tags you want to keep:
   `docker pull -a <image>:<tag>`.
 
-- If you have an active Docker subscription, [downgrade it to a **Docker Free Team** subscription](../subscription/downgrade.md).
+- If you have an active Docker subscription, [downgrade it to a **Docker Free Team** subscription](../subscription/core-subscription/downgrade.md).
 
 - If you have an active Docker Scout subscription, [downgrade it to a Docker Scout Free subscription](../billing/scout-billing.md#downgrade-your-subscription).
 

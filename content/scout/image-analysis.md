@@ -62,6 +62,12 @@ To trigger image analysis for an image in a registry, push the image to a
 registry that's integrated with Docker Scout, to a repository where image
 analysis is activated.
 
+> **Note**
+>
+> Image analysis on the Docker Scout platform has a maximum image file size
+> limit of 10 GB, unless the image has an SBOM attestation.
+> See [Maximum image size](#maximum-image-size).
+
 1. Sign in with your Docker ID, either using the `docker login` command or the
    **Sign in** button in Docker Desktop.
 2. Build and push the image that you want to analyze.
@@ -96,8 +102,8 @@ You can analyze local images with Docker Scout using Docker Desktop or the
 
 > **Note**
 >
-> There is a 3 GB size limit on images analyzed by Docker Scout in Docker
-> Desktop.
+> Docker Desktop background indexing supports images up to 10 GB in size.
+> See [Maximum image size](#maximum-image-size).
 
 To analyze an image locally using the Docker Desktop GUI:
 
@@ -121,30 +127,6 @@ Scout from your terminal.
 By default, the results are printed to standard output.
 You can also export results to a file in a structured format,
 such as Static Analysis Results Interchange Format (SARIF).
-
-#### Install
-
-The Docker Scout CLI plugin comes pre-installed with Docker Desktop.
-You can also install it as a standalone binary.
-
-To install the latest version of the plugin manually, run the following commands:
-
-```console
-$ curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
-$ sh install-scout.sh
-```
-
-> **Note**
->
-> Always examine scripts downloaded from the internet before running them
-> locally. Before installing, make yourself familiar with potential risks and
-> limitations of the convenience script.
-
-If you want to install the plugin manually, you can find full instructions in
-the [plugin's repository](https://github.com/docker/scout-cli).
-
-The plugin is also available as [a container image](https://hub.docker.com/r/docker/scout-cli)
-and as [a GitHub action](https://github.com/docker/scout-action).
 
 #### Quickview
 
@@ -247,3 +229,15 @@ For more information, see [Vulnerability Metrics (NIST)](https://nvd.nist.gov/vu
 Note that, given the advisory prioritization and fallback mechanism described
 earlier, severity ratings displayed in Docker Scout may deviate from this
 rating system.
+
+## Maximum image size
+
+Image analysis on the Docker Scout platform, and analysis triggered by background
+indexing in Docker Desktop, has an image file size limit of 10 GB (uncompressed).
+To analyze images larger than that, you can either:
+
+- Attach [SBOM attestations](../build/attestations/sbom.md) at build-time
+- Use the [CLI](#cli) to analyze the image locally
+
+Images analyzed locally with the CLI and images with SBOM attestations
+have no maximum file size.

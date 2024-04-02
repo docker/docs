@@ -92,6 +92,7 @@ SLES
 SLSA
 SPDX
 SQLite
+SSH
 SSO
 Slack
 Snyk

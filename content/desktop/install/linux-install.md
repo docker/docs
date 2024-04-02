@@ -124,11 +124,12 @@ and architectures:
 
 
 
-| Platform                | x86_64 / amd64         | 
-|:-----------------------|:-----------------------:|
-| [Ubuntu](ubuntu.md)     | ✅ |
-| [Debian](debian.md)     | ✅  |
-| [Fedora](fedora.md)     | ✅ |
+| Platform                | x86_64 / amd64          | 
+|:------------------------|:-----------------------:|
+| [Ubuntu](ubuntu.md)                         | ✅  |
+| [Debian](debian.md)                         | ✅  |
+| [Red Hat Enterprise Linux (RHEL)](rhel.md)  | ✅  |
+| [Fedora](fedora.md)                         | ✅  |
 
 
 An experimental package is available for [Arch](archlinux.md)-based distributions. Docker has not tested or verified the installation.
@@ -215,12 +216,13 @@ Sign out and sign back in so that your group membership is re-evaluated.
 > Make sure you meet the system requirements outlined earlier and follow the distro-specific prerequisites.
 { .important } 
 
-1. Download the correct package for your Linux distribution and install it with the corresponding package manager. 
-   - [Install on Debian](debian.md)
-   - [Install on Fedora](fedora.md)
+1. Download the correct package for your Linux distribution and install it with the corresponding package manager.
    - [Install on Ubuntu](ubuntu.md)
-   - [Install on Arch](archlinux.md) 
-   By default, Docker Desktop is installed at `/opt/docker-desktop`.
+   - [Install on Debian](debian.md)
+   - [Install on Red Hat Enterprise Linux (RHEL)](rhel.md)
+   - [Install on Fedora](fedora.md)
+   - [Install on Arch](archlinux.md)
+  By default, Docker Desktop is installed at `/opt/docker-desktop`.
 
 2. Open your **Applications** menu in Gnome/KDE Desktop and search for **Docker Desktop**.
 

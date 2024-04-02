@@ -46,6 +46,20 @@ Guides:
       - title: "Part 10: What next?"
         path: /get-started/11_what_next/
 
+- sectiontitle: "Docker concepts"
+  section:
+  - sectiontitle: "The basics"
+    section:
+    - title: "What is a container?"
+      path: /guides/docker-concepts/the-basics/what-is-a-container/
+    - title: "What is an image?"
+      path: /guides/docker-concepts/the-basics/what-is-an-image/
+    - title: "What is a registry?"
+      path: /guides/docker-concepts/the-basics/what-is-a-registry/
+    - title: "What is Docker Compose?"
+      path: /guides/docker-concepts/the-basics/what-is-docker-compose/
+
+
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -179,6 +193,8 @@ Guides:
         title: Text classification
       - path: /guides/use-case/nlp/text-summarization/
         title: Text summarization
+    - path: /guides/use-case/tensorflowjs/
+      title: Face detection with TensorFlow.js
     - path: /guides/use-case/jupyter/
       title: Data science with JupyterLab
     - path: /scout/guides/vex/
@@ -830,6 +846,12 @@ Reference:
       section:
       - path: /engine/api/version-history/
         title: Version history overview
+      - path: /engine/api/v1.45/
+        title: v1.45 reference
+      - path: /engine/api/v1.44/
+        title: v1.44 reference
+      - path: /engine/api/v1.43/
+        title: v1.43 reference
       - path: /engine/api/v1.42/
         title: v1.42 reference
       - path: /engine/api/v1.41/
@@ -1091,12 +1113,12 @@ Manuals:
          title: Install on Linux
        - sectiontitle: Installation per Linux distro
          section:
+            - path: /desktop/install/ubuntu/
+              title: Install on Ubuntu
             - path: /desktop/install/debian/
               title: Install on Debian
             - path: /desktop/install/fedora/
               title: Install on Fedora
-            - path: /desktop/install/ubuntu/
-              title: Install on Ubuntu
             - path: /desktop/install/archlinux/
               title: Install on Arch
     - path: /desktop/get-started/
@@ -1233,7 +1255,7 @@ Manuals:
         - path: /desktop/extensions/settings-feedback/
           title: Change settings and give feedback
         - path: /desktop/extensions/private-marketplace/
-          title: Configure a private marketplace (Beta)
+          title: Configure a private Marketplace (Beta)
     - sectiontitle: Extensions SDK
       section:
         - path: /desktop/extensions-sdk/
@@ -1262,7 +1284,7 @@ Manuals:
               path: /desktop/extensions-sdk/extensions/DISTRIBUTION/
             - title: Generate a share link
               path: /desktop/extensions-sdk/extensions/share/
-            - title: Publish in the marketplace
+            - title: Publish in the Marketplace
               path: /desktop/extensions-sdk/extensions/publish/
             - title: Build multi-arch extensions
               path: /desktop/extensions-sdk/extensions/multi-arch/
@@ -1323,6 +1345,8 @@ Manuals:
       title: Overview
     - path: /scout/quickstart/
       title: Quickstart
+    - path: /scout/install/
+      title: Install
     - sectiontitle: Explore Docker Scout
       section:
       - path: /scout/dashboard/
@@ -1395,8 +1419,12 @@ Manuals:
         section:
         - title: GitHub
           path: /scout/integrations/source-code-management/github/
-    - path: /scout/release-notes/
-      title: Release notes
+    - sectiontitle: Release notes
+      section:
+      - path: /scout/release-notes/cli/
+        title: CLI and GitHub Action
+      - path: /scout/release-notes/platform/
+        title: Platform
 
 - sectiontitle: Docker Engine
   section:
@@ -1698,10 +1726,12 @@ Manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/25.0/
-      title: Engine 25.0
+    - path: /engine/release-notes/26.0/
+      title: Engine 26.0
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/25.0/
+        title: Engine 25.0
       - path: /engine/release-notes/24.0/
         title: Engine 24.0
       - path: /engine/release-notes/23.0/
@@ -1813,7 +1843,9 @@ Manuals:
     - sectiontitle: Cache
       section:
         - path: /build/cache/
-          title: Optimizing builds with cache
+          title: Overview
+        - path: /build/cache/invalidation/
+          title: Cache invalidation
         - path: /build/cache/garbage-collection/
           title: Garbage collection
         - sectiontitle: Cache backends
@@ -1912,6 +1944,8 @@ Manuals:
             title: SBOM and provenance attestations
           - path: /build/ci/github-actions/annotations/
             title: Annotations
+          - path: /build/ci/github-actions/reproducible-builds/
+            title: Reproducible builds
     - path: /build/release-notes/
       title: Release notes
 - sectiontitle: Docker Compose
@@ -2095,7 +2129,11 @@ Manuals:
       -  path: /security/for-admins/single-sign-on/
          title: Overview
       -  path: /security/for-admins/single-sign-on/configure/
-         title: Configure
+         title: Configure Docker
+      -  path: /security/for-admins/single-sign-on/configure/configure-idp/
+         title: Configure your IdP
+      -  path: /security/for-admins/single-sign-on/connect/
+         title: Connect
       -  path: /security/for-admins/single-sign-on/manage/
          title: Manage
     - path: /security/for-admins/scim/
@@ -2133,40 +2171,47 @@ Manuals:
   section:
   - path: /billing/
     title: Overview
-  - path: /billing/payment-method/
-    title: Add or update a payment method
-  - path: /billing/details/
-    title: Update the billing information
-  - path: /billing/history/
-    title: View your billing history
-  - path: /billing/cycle/
-    title: Change your billing cycle
-  - path: /billing/scout-billing/
-    title: Docker Scout billing
+  - sectiontitle: Docker Core billing
+    section:
+    - path: /billing/core-billing/payment-method/
+      title: Add or update a payment method
+    - path: /billing/core-billing/details/
+      title: Update the billing information
+    - path: /billing/core-billing/history/
+      title: View your billing history
+    - path: /billing/core-billing/cycle/
+      title: Change your billing cycle
   - path: /billing/build-billing/
     title: Docker Build Cloud billing
-
+  - path: /billing/scout-billing/
+    title: Docker Scout billing
 
 - sectiontitle: Subscription
   section:
   - path: /subscription/
     title: Overview
-  - path: /subscription/details/
-    title: Docker subscriptions and features
-  - path: /subscription/upgrade/
-    title: Upgrade
-  - path: /subscription/add-seats/
-    title: Add seats
-  - path: /subscription/remove-seats/
-    title: Remove seats
-  - path: /subscription/downgrade/
-    title: Downgrade
-  - path: /subscription/desktop-license/
-    title: Docker Desktop license agreement
+  - sectiontitle: Docker Core
+    section:
+    - path: /subscription/core-subscription/details/
+      title: Subscriptions and features
+    - path: /subscription/core-subscription/upgrade/
+      title: Upgrade
+    - path: /subscription/core-subscription/add-seats/
+      title: Add seats
+    - path: /subscription/core-subscription/remove-seats/
+      title: Remove seats
+    - path: /subscription/core-subscription/downgrade/
+      title: Downgrade
+  - sectiontitle: Docker Build Cloud
+    section:
+    - path: /subscription/build-cloud/build-details/
+      title: Subscriptions and features
+    - path: /subscription/build-cloud/manage-seats/
+      title: Manage seats and invites
   - path: /subscription/scout-details/
     title: Docker Scout subscriptions and features
-  - path: /subscription/build-details/
-    title: Docker Build Cloud subscriptions and features
+  - path: /subscription/desktop-license/
+    title: Docker Desktop license agreement
 
 - sectiontitle: Trusted content
   section:
@@ -2223,8 +2268,6 @@ FAQ:
       title: General
     - path: /faq/security/networking-and-vms/
       title: Networking and VMs
-    - path: /faq/security/settings-management/
-      title: Settings Management
     - path: /faq/security/eci-faq/
       title: Enhanced Container Isolation
     - sectiontitle: Single Sign-On

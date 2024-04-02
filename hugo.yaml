@@ -39,6 +39,8 @@ related:
 build:
   buildStats:
     enable: true
+    disableIDs: true
+    disableTags: true
   cachebusters:
     - source: assets/watching/hugo_stats\.json
       target: styles\.css
@@ -55,6 +57,11 @@ outputFormats:
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
+  metadata:
+    baseName: metadata
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
   robots:
     baseName: robots
     isPlainText: true
@@ -65,12 +72,8 @@ outputs:
   home:
     - html
     - redirects
+    - metadata
     - robots
-  term:
-    - html
-    - json
-
-taxonomies:
 
 languages:
   en:
@@ -91,20 +94,26 @@ params:
   repo: https://github.com/docker/docs
   docs_url: https://docs.docker.com
 
-  latest_engine_api_version: "1.44"
-  docker_ce_version: "25.0.0"
-  compose_version: "v2.24.6"
+  latest_engine_api_version: "1.45"
+  docker_ce_version: "26.0.0"
+  compose_version: "v2.26.1"
   compose_file_v3: "3.8"
   compose_file_v2: "2.4"
-  buildkit_version: "0.12.3"
+  buildkit_version: "0.13.1"
 
   example_go_version: "1.21"
   example_golangci_lint_version: "v1.52"
   example_alpine_version: "3.19"
   example_node_version: "20"
 
-  min_api_threshold: 1.41
-
+  min_version_thresholds:
+    buildx: "0.10.0"
+    buildkit: "0.11.0"
+    engine: "24.0.0"
+    api: "1.41"
+    desktop: "4.20.0"
+    compose: "2.20.0"
+    scout: "1.0.0"
 
 menus:
   main:
@@ -262,12 +271,6 @@ module:
       mounts:
         - source: docs/bake-reference.md
           target: content/build/bake/reference.md
-
-    - path: github.com/docker/scout-cli
-      mounts:
-        - source: docs
-          includeFiles: "*.yaml"
-          target: data/scout-cli
 
     - path: github.com/docker/cli
       mounts:

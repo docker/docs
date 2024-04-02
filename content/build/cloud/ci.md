@@ -33,6 +33,24 @@ See [Loading build results](./usage/#loading-build-results) for details.
 {{< tabs >}}
 {{< tab name="GitHub Actions" >}}
 
+> **Note**
+>
+> Version 4.0.0 and later of `docker/build-push-action` and
+> `docker/bake-action` builds images with [provenance attestations by
+> default](../ci/github-actions/attestations.md#default-provenance). Docker
+> Build Cloud automatically attempts to load images to the local image store if
+> you don't explicitly push them to a registry.
+>
+> This results in a conflicting scenario where if you build a tagged image
+> without pushing it to a registry, Docker Build Cloud attempts to load images
+> containing attestations. But the local image store on the GitHub runner
+> doesn't support attestations, and the image load fails as a result.
+>
+> If you want to load images built with `docker/build-push-action` together
+> with Docker Build Cloud, you must disable provenance attestations by setting
+> `provenance: false` in the GitHub Action inputs (or in `docker-bake.hcl` if
+> you use Bake).
+
 ```yaml
 name: ci
 

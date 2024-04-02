@@ -49,10 +49,10 @@
       {{ markdownify .entry.sectiontitle }}
     </span>
     <span class="icon-svg {{ if $expanded }}hidden{{ end }}">
-      {{ partial "icon" "expand_more" }}
+      {{ partialCached "icon" "expand_more" "expand_more" }}
     </span>
     <span class="icon-svg {{ if not $expanded }}hidden{{ end }}">
-      {{ partial "icon" "expand_less" }}
+      {{ partialCached "icon" "expand_less" "expand_less" }}
     </span>
   </button>
   <ul class="{{if not $expanded}}hidden {{end}}ml-3 md:ml-[21px]">
