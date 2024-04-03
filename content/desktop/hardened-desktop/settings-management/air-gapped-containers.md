@@ -25,7 +25,7 @@ You can choose:
 
 ## Configuration
 
-Assuming enforced sign-in and Settings Management are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
+Assuming [enforced sign-in](../../../security/for-admins/configure-sign-in.md) and Settings Management are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
 
 ```json
 {
@@ -33,6 +33,9 @@ Assuming enforced sign-in and Settings Management are enabled, add the new proxy
   "containersProxy": {
     "locked": true,
     "mode": "manual",
+    "http": "",
+    "https": "",
+    "exclude": "",
     "pac": "http://192.168.1.16:62039/proxy.pac",
     "transparentPorts": "*"
   }
@@ -45,7 +48,7 @@ The `containersProxy` setting describes the policy which is applied to traffic f
 - `mode`: Same meaning as with the existing `proxy` setting. Possible values are `system` and `manual`.
 - `http`, `https`, `exclude`: Same meaning as with the `proxy` setting. Only takes effect if `mode` is set to `manual`.
 - `pac` : URL for a PAC file. Only takes effect if `mode` is `manual`, and is considered higher priority than `http`, `https`, `exclude`.
-- `transparentPorts`: A comma-separated list of ports (e.g. `80`,`443`,`8080`) or a wildcard (`*`) indicating which ports should be proxied.
+- `transparentPorts`: A comma-separated list of ports (e.g. `"80,443,8080"`) or a wildcard (`*`) indicating which ports should be proxied.
 
 > **Important**
 >
@@ -54,7 +57,7 @@ The `containersProxy` setting describes the policy which is applied to traffic f
 
 ## Example PAC file
 
-For general information about PAC files, see the [Mozilla documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file).
+For general information about PAC files, see the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file).
 
 The following is an example PAC file:
 
@@ -70,7 +73,7 @@ function FindProxyForURL(url, host) {
 }
 ```
 
-The url parameter is either `http://host_or_ip:port` or `https://host_or_ip:port`.
+The `url` parameter is either `http://host_or_ip:port` or `https://host_or_ip:port`.
 
 The hostname is normally available for outgoing requests on port `80` and `443`, but for other cases there is only an IP address.
 
@@ -81,6 +84,6 @@ The `FindProxyForURL` can return the following values:
 - `DIRECT`: Allows this request to go direct, without a proxy
 - `PROXY reject.docker.internal:any_port`: Rejects this request
 
-In this particular example HTTP and HTTPS requests for `internal.corp` are sent via the HTTP proxy  `10.0.0.1:3128`. Requests to connect to IPs on the subnet `192.168.0.0/24` connect directly. All other requests are blocked.
+In this particular example, HTTP and HTTPS requests for `internal.corp` are sent via the HTTP proxy `10.0.0.1:3128`. Requests to connect to IPs on the subnet `192.168.0.0/24` connect directly. All other requests are blocked.
 
-To restrict traffic connecting to ports on the developers local machine, match the special hostname `host.docker.internal`.
+To restrict traffic connecting to ports on the developers local machine, [match the special hostname `host.docker.internal`](../../networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
