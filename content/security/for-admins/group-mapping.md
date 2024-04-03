@@ -37,6 +37,13 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
 ![JIT provisioning](../images/group-mapping.png)
 
+> **Beta feature**
+>
+> Optional Just-in-Time (JIT) provisioning is available in private beta. If you're participating in this program, you have the option to turn off this default provisioning and disable JIT. This configuration is recommended if you're using SCIM to auto-provision users.
+{ .experimental }
+
+If you disable JIT provisioning when you create or edit your SSO connection, you can still use group mapping as long as you have also enabled SCIM.
+
 ## Use group mapping
 
 To correctly assign your users to Docker teams, you must create groups in your IdP following the naming pattern `organization:team`. For example, if you want to manage provisioning for the team "developers", and your organization name is "moby", you must create a group in your IdP with the name `moby:developers`.

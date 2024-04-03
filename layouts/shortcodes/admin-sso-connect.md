@@ -10,7 +10,8 @@
 
 1. In {{ $product_link }}, select the verified domains you want to apply the connection to.
 2. To provision your users, select the organization(s) and/or team(s).
-3. Review your summary and select **Create Connection**.
+3. **Beta feature** - Choose how you want to provision users by enabling Just-in-Time (JIT) provisioning (default), or disabling JIT provisioning.
+4. Review your summary and select **Create Connection**.
 
 ## Test your SSO configuration
 

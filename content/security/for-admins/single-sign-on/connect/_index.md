@@ -26,6 +26,11 @@ Make sure you have completed the following before you begin:
 
 ## Step four: Complete your SSO connection
 
+> **Beta feature**
+>
+> Optional Just-in-Time (JIT) provisioning is available in private beta. If you're participating in this program, you have the option to turn off this default provisioning and disable JIT. This configuration is recommended if you're using SCIM to auto-provision users.
+{ .experimental }
+
 {{< tabs >}}
 {{< tab name="Docker Hub" >}}
 
