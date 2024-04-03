@@ -62,7 +62,8 @@ To use the volume with a container, see [Use volumes](../../storage/volumes.md#s
 ## Delete one or more volumes
 
 Deleting a volume deletes the volume and all its data. When a container is using
-a volume, you can't delete the volume. You must first delete any containers
+a volume, you can't delete the volume, even if the container is stopped.
+You must first stop and remove any containers
 using the volume before you can delete the volume.
 
 To delete a volume:
