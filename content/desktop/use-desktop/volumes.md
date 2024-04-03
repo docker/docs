@@ -57,7 +57,7 @@ To create a volume:
 2. In the **New Volume** modal, specify a volume name, and then select
    **Create**.
 
-To use the volume with a container, see [Use volumes](../../storage/volumes.md).
+To use the volume with a container, see [Use volumes](../../storage/volumes.md#start-a-container-with-a-volume).
 
 ## Delete one or more volumes
 
