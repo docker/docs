@@ -167,7 +167,7 @@ Guides:
   section:
     - path: /guides/use-case/
       title: Overview
-    - sectiontitle: Generative AI
+    - sectiontitle: AI/ML
       section:
       - sectiontitle: PDF analysis and chat
         section:
@@ -179,6 +179,8 @@ Guides:
           title: Develop your app
       - path: /guides/use-case/genai-video-bot/
         title: Video transcription and chat
+      - path: /guides/use-case/tensorflowjs/
+        title: Face detection with TensorFlow.js
     - sectiontitle: Natural language processing
       section:
       - path: /guides/use-case/nlp/
@@ -193,12 +195,12 @@ Guides:
         title: Text classification
       - path: /guides/use-case/nlp/text-summarization/
         title: Text summarization
-    - path: /guides/use-case/tensorflowjs/
-      title: Face detection with TensorFlow.js
     - path: /guides/use-case/jupyter/
       title: Data science with JupyterLab
     - path: /scout/guides/vex/
       title: Suppress CVEs with VEX
+    - path: /guides/use-case/databases/
+      title: Use containerized databases
 
 
 - sectiontitle: Develop with Docker
