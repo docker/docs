@@ -160,7 +160,16 @@ Docker from the repository.
    {{< /tab >}}
    {{< /tabs >}}
 
-3. Verify that the Docker Engine installation is successful by running the
+3. Start and enable Docker in `systemctl`
+   
+   ```console
+   $ systemctl start docker
+   $ systemctl enable docker
+   ```
+   
+    You can check the status by running `systemctl status docker`.
+
+4. Verify that the Docker Engine installation is successful by running the
    `hello-world` image.
 
    ```console
