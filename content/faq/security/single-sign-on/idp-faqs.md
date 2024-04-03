@@ -44,7 +44,7 @@ Yes, bot accounts need a seat, similar to a regular end user, having a non-alias
 
 ### Does SAML SSO use Just-in-Time provisioning?
 
-_Optional Just-in-Time (JIT) provisioning configuration is only available in Private Beta. Otherwise, JIT is enabled by default. This feature will be available for all users soon._
+_Optional Just-in-Time (JIT) provisioning configuration is only available in Private Beta when you use the Admin Console. Otherwise, JIT is enabled by default. This feature will be available for all users soon._
 
 The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally disable JIT if you prefer not to auto-provision users, or if you opt for auto-provisioning using SCIM.
 

@@ -45,6 +45,40 @@ aliases:
 {{< /tab >}}
 {{< /tabs >}}
 
+## Manage SSO connections
+
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
+{{% admin-sso-management-connections product="hub" %}}
+
+{{< /tab >}}
+{{< tab name="Admin Console" >}}
+
+{{< include "admin-early-access.md" >}}
+
+{{% admin-sso-management-connections product="admin" %}}
+
+{{< /tab >}}
+{{< /tabs >}}
+
+## Manage users
+
+{{< tabs >}}
+{{< tab name="Docker Hub" >}}
+
+{{% admin-sso-management-users product="hub" %}}
+
+{{< /tab >}}
+{{< tab name="Admin Console" >}}
+
+{{< include "admin-early-access.md" >}}
+
+{{% admin-sso-management-users product="admin" %}}
+
+{{< /tab >}}
+{{< /tabs >}}
+
 ## What's next?
 
 - [Set up SCIM](../../scim.md)

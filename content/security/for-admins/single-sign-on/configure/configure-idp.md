@@ -43,7 +43,7 @@ If you use SAML for your SSO connection, Docker obtains these attributes from th
 
 > **Beta feature**
 >
-> Optional Just-in-Time (JIT) provisioning is available in private beta. If you're participating in this program, you can avoid conflicts between SCIM and JIT by disabling JIT provisioning in your SSO connection.
+> Optional Just-in-Time (JIT) provisioning is available in Private Beta when you use the Admin Console. If you're participating in this program, you can avoid conflicts between SCIM and JIT by disabling JIT provisioning in your SSO connection.
 { .experimental }
 
 You can also configure attributes to override default values, such as default team or organization. See [role mapping](../../scim.md#set-up-role-mapping).

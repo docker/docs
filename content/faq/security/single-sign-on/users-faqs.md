@@ -57,7 +57,7 @@ When SSO is enabled and enforced, your users just have to sign in using the emai
 
 ### Is Docker SSO fully synced with the IdP?
 
-_Optional Just-in-Time (JIT) provisioning configuration is only available in Private Beta. Otherwise, JIT is enabled by default. This feature will be available for all users soon._
+_Optional Just-in-Time (JIT) provisioning configuration is only available in Private Beta when you use the Admin Console. Otherwise, JIT is enabled by default. This feature will be available for all users soon._
 
 Docker SSO provides Just-in-Time (JIT) provisioning by default, with an option to disable JIT. Users are provisioned when a user authenticates with SSO. If a user leaves the organization, administrators must sign in to Docker Hub and manually [remove the user](https://docs.docker.com/admin/organization/members/#remove-a-member-or-invitee) from the organization.
 

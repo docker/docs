@@ -39,7 +39,7 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
 > **Beta feature**
 >
-> Optional Just-in-Time (JIT) provisioning is available in private beta. If you're participating in this program, you have the option to turn off this default provisioning and disable JIT. This configuration is recommended if you're using SCIM to auto-provision users.
+> Optional Just-in-Time (JIT) provisioning is available in Private Beta when you use the Admin Console. If you're participating in this program, you have the option to turn off this default provisioning and disable JIT. This configuration is recommended if you're using SCIM to auto-provision users.
 { .experimental }
 
 If you disable JIT provisioning when you create or edit your SSO connection, you can still use group mapping as long as you have also enabled SCIM.

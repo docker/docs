@@ -44,7 +44,7 @@ For additional details about supported attributes and SCIM, see [Docker Hub API 
 
 > **Beta feature**
 >
-> Optional Just-in-Time (JIT) provisioning is available in private beta. If you're participating in this program, you can avoid conflicts between SCIM and JIT by disabling JIT provisioning in your SSO connection.
+> Optional Just-in-Time (JIT) provisioning is available in Private Beta when you use the Admin Console. If you're participating in this program, you can avoid conflicts between SCIM and JIT by disabling JIT provisioning in your SSO connection.
 { .experimental }
 
 ## Enable SCIM in Docker
