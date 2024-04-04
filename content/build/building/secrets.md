@@ -1,7 +1,7 @@
 ---
 title: Build secrets
 description: Manage credentials and other secrets securely
-keywords: build, secrets, credentials, passwords, tokens
+keywords: build, secrets, credentials, passwords, tokens, ssh, git, auth, http
 ---
 
 A build secret is any piece of sensitive information, such as a password or API
@@ -115,4 +115,86 @@ options for [Bake](../bake/reference.md#targetssh).
 
 ```console
 $ docker buildx build --ssh default .
+```
+
+## Git authentication for remote contexts
+
+BuildKit supports two pre-defined build secrets, `GIT_AUTH_TOKEN` and
+`GIT_AUTH_HEADER`. Use them to specify HTTP authentication parameters when
+building with remote, private Git repositories, including:
+
+- Building with a private Git repository as build context
+- Fetching private Git repositories in a build with `ADD`
+
+For example, say you have a private GitLab project at
+`https://gitlab.com/example/todo-app.git`, and you want to run a build using
+that repository as the build context. An unauthenticated `docker build` command
+fails because the builder isn't authorized to pull the repository:
+
+```console
+$ docker build https://gitlab.com/example/todo-app.git
+[+] Building 0.4s (1/1) FINISHED
+ => ERROR [internal] load git source https://gitlab.com/dvdk/todo-app.git
+------
+ > [internal] load git source https://gitlab.com/dvdk/todo-app.git:
+0.313 fatal: could not read Username for 'https://gitlab.com': terminal prompts disabled
+------
+```
+
+To authenticate the builder to the Git server, set the `GIT_AUTH_TOKEN`
+environment variable to contain a valid GitLab access token, and pass it as a
+secret to the build:
+
+```console
+$ GIT_AUTH_TOKEN=$(cat gitlab-token.txt) docker build \
+  --secret id=GIT_AUTH_TOKEN \
+  https://gitlab.com/example/todo-app.git
+```
+
+The `GIT_AUTH_TOKEN` also works with `ADD` to fetch private Git repositories as
+part of your build:
+
+```dockerfile
+FROM alpine
+ADD https://gitlab.com/example/todo-app.git /src
+```
+
+### HTTP authentication scheme
+
+By default, Git authentication over HTTP uses the Bearer authentication scheme:
+
+```http
+Authorization: Bearer <GIT_AUTH_TOKEN>
+```
+
+If you need to use a Basic scheme, with a username and password, you can set
+the `GIT_AUTH_HEADER` build secret:
+
+```console
+$ export GIT_AUTH_TOKEN=$(cat gitlab-token.txt)
+$ export GIT_AUTH_HEADER=basic
+$ docker build \
+  --secret id=GIT_AUTH_TOKEN \
+  --secret id=GIT_AUTH_HEADER \
+  https://gitlab.com/example/todo-app.git
+```
+
+BuildKit currently only supports the Bearer and Basic schemes.
+
+### Multiple hosts
+
+You can set the `GIT_AUTH_TOKEN` and `GIT_AUTH_HEADER` secrets on a per-host
+basis, which lets you use different authentication parameters for different
+hostnames. To specify a hostname, append the hostname as a suffix to the secret
+ID:
+
+```console
+$ export GITLAB_TOKEN=$(cat gitlab-token.txt)
+$ export GERRIT_TOKEN=$(cat gerrit-username-password.txt)
+$ export GERRIT_SCHEME=basic
+$ docker build \
+  --secret id=GIT_AUTH_TOKEN.gitlab.com,env=GITLAB_TOKEN \
+  --secret id=GIT_AUTH_TOKEN.gerrit.internal.example,env=GERRIT_TOKEN \
+  --secret id=GIT_AUTH_HEADER.gerrit.internal.example,env=GERRIT_SCHEME \
+  https://gitlab.com/example/todo-app.git
 ```
