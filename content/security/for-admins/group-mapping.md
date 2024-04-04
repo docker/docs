@@ -21,6 +21,8 @@ IdPs share with Docker the main attributes of every authorized user through SSO,
 
 Docker uses the email address of the user to identify them on the platform. Every Docker account must have a unique email address at all times.
 
+### SSO authentication with JIT provisioning enabled
+
 After every successful SSO sign-in authentication, the JIT provisioner performs the following actions:
 
 1. Checks if there's an existing Docker account with the email address of the user that just authenticated.
@@ -35,14 +37,32 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
    b) If the IdP didn't provide group mappings, it checks if the user is already a member of the organization, or if the SSO connection is for multiple organizations (only at company level) and if the user is a member of any of those organizations. If the user isn't a member, it adds the user to the default team and organization configured in the SSO connection.
 
-![JIT provisioning](../images/group-mapping.png)
+![JIT provisioning](../images/jit-enabled-flow.svg)
+
+### SSO authentication with JIT provisioning disabled
 
 > **Beta feature**
 >
 > Optional Just-in-Time (JIT) provisioning is available in Private Beta when you use the Admin Console. If you're participating in this program, you have the option to turn off this default provisioning and disable JIT. This configuration is recommended if you're using SCIM to auto-provision users.
 { .experimental }
 
-If you disable JIT provisioning when you create or edit your SSO connection, you can still use group mapping as long as you have also enabled SCIM.
+When you opt to disable JIT provisioning in your SSO connection, the following actions occur:
+
+1. Checks if there's an existing Docker account with the email address of the user that just authenticated.
+
+   a) If no account is found with the same email address, it creates a new Docker account using basic user attributes (email, name, and surname). Authentication with SSO generates a new username for this new account by using the email, name, and random numbers to make sure that all account usernames are unique in the platform.
+
+   b) If an account exists for this email address, it uses this account and updates the full name of the user’s profile if needed.
+
+2. Checks if there are any pending invitations to the SSO organization in order to auto-accept the invitation.
+
+   a) If the user isn't already a member of the organization, or doesn't have a pending invitation to join, sign in fails and the user is blocked from accessing the organization.
+
+   b) If the user is a member of the organization, or has a pending invitation to join, then sign in is successful.
+
+If you disable JIT provisioning when you create or edit your SSO connection, you can still use group mapping as long as you have also enabled SCIM. When JIT provisioning is disabled and SCIM isn't enabled, users won't be auto-provisioned to groups. For instructions on disabling JIT provisioning, see [Manage users](/security/for-admins/single-sign-on/manage/#manage-users).
+
+![JIT provisioning](../images/jit-disabled-flow.svg)
 
 ## Use group mapping
 

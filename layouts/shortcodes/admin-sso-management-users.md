@@ -20,7 +20,8 @@
   2. Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM**.
   3. In the SSO connections table, select the **Action** icon and then **Edit connection**.
   4. Select **Next** to navigate to the section where you can choose how to provision users. 
-  5. Choose to enable or disable Just-in-Time (JIT) provisioning (default).` }}
+  5. Choose to enable or disable Just-in-Time (JIT) provisioning (default).
+  6. Follow the on-screen instructions to save your configuration.` }}
 {{ end }}
 
 > **Important**
@@ -35,7 +36,7 @@
 
 > **Beta feature**
 >
-> Optional Just-in-Time (JIT) provisioning is available in Private Beta when you use the Admin Console. If you're participating in this program, you have the option to turn off this default provisioning and disable JIT. This configuration is recommended if you're using SCIM to auto-provision users.
+> Optional Just-in-Time (JIT) provisioning is available in Private Beta when you use the Admin Console. If you're participating in this program, you have the option to turn off this default provisioning and disable JIT. This configuration is recommended if you're using SCIM to auto-provision users. See [SSO authentication with JIT provisioning disabled](/security/for-admins/group-mapping/#sso-authentication-with-jit-provisioning-disabled).
 { .experimental }
 
 ### Add guest users when SSO is enabled
