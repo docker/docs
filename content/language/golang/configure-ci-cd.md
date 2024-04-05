@@ -61,7 +61,7 @@ to Docker Hub.
    This takes you to a page for creating a new GitHub actions workflow file in
    your repository, under `.github/workflows/main.yml` by default.
 
-3. In the editor window, copy and paste the following YAML configuration.
+3. In the editor window, copy and paste the following YAML configuration and commit the changes.
 
    ```yaml
    name: ci
