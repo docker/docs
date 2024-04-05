@@ -15,7 +15,7 @@ These images provide essential base repositories that serve as the starting poin
 
 These include operating systems such as [Ubuntu](https://hub.docker.com/_/ubuntu/) and [Alpine](https://hub.docker.com/_/alpine/), programming languages such as [Python](https://hub.docker.com/_/python) and [Node](https://hub.docker.com/_/node), and other essential tools such as [Redis](https://hub.docker.com/_/redis) and [MySQL](https://hub.docker.com/_/mysql).
 
-The images are some of the most secure images on Docker Hub. This is particularly important as Docker Official Images are some of the most popular on Docker Hub. Typically, Docker Official images have few or no vulnerabilities.
+The images are some of the [most secure images](https://www.docker.com/blog/enhancing-security-and-transparency-with-docker-official-images/) on Docker Hub. This is particularly important as Docker Official Images are some of the most popular on Docker Hub. Typically, Docker Official images have few or no vulnerabilities.
 
 The images exemplify [`Dockerfile` best practices](/engine/userguide/eng-image/dockerfile_best-practices/) and provide clear documentation to serve as a reference for other `Dockerfile` authors.
 
