@@ -691,6 +691,7 @@
 "/reference/dockerfile":
   - /go/dockerfile-reference/
   - /engine/reference/builder/
+  - /reference/builder/
 "/get-started/04_sharing_app":
   - /go/get-started-sharing/
 
