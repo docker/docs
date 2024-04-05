@@ -31,7 +31,9 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
    b) If an account exists for this email address, it uses this account and updates the full name of the user’s profile if needed.
 
-2. Checks if the IdP shared group mappings while authenticating the user.
+2. Checks for any pending invitations to the SSO organization to auto-accept the invitation. If the invitation is specific to a group, the user will be added to the invited group along with group mappings in the following step.
+
+3. Checks if the IdP shared group mappings while authenticating the user.
 
    a) If the IdP provided group mappings for the user, the user gets added to the organizations and teams indicated by the group mappings.
 
@@ -54,7 +56,7 @@ When you opt to disable JIT provisioning in your SSO connection, the following a
 
    b) If an account exists for this email address, it uses this account and updates the full name of the user’s profile if needed.
 
-2. Checks if there are any pending invitations to the SSO organization in order to auto-accept the invitation.
+2. Checks if there are any pending invitations to the SSO organization (or, SSO organizations if the SSO connection is managed at the company level) in order to auto-accept the invitation.
 
    a) If the user isn't already a member of the organization, or doesn't have a pending invitation to join, sign in fails and the user is blocked from accessing the organization.
 
