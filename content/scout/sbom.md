@@ -2,6 +2,8 @@
 title: Docker Scout SBOMs
 description: Use Docker Scout to extract the SBOM for your project.
 keywords: scout, supply chain, sbom, software bill of material, spdx
+aliases:
+- /engine/sbom/
 ---
 
 [Image analysis](./image-analysis.md) uses image SBOMs to understand what packages and versions an image contains.
