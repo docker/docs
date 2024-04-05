@@ -2208,8 +2208,14 @@ Manuals:
   section:
   - path: /trusted-content/
     title: Overview
-  - path: /trusted-content/official-images/
-    title: Docker Official images
+  - sectiontitle: Docker Official Images
+    section:
+    - path: /trusted-content/official-images/
+      title: Overview
+    - path: /trusted-content/official-images/using/
+      title: Using official images
+    - path: /trusted-content/official-images/contributing/
+      title: Contributing
   - path: /trusted-content/dvp-program/
     title: Docker Verified Publisher Program
   - path: /trusted-content/dsos-program/

@@ -21,7 +21,7 @@ image. When choosing an image, ensure it's built from a trusted source and keep
 it small.
 
 Docker Hub has more than 8.3 million repositories. Some of these images are
-[Official Images](../trusted-content/official-images.md), which are published by
+[Official Images](../trusted-content/official-images/_index.md), which are published by
 Docker as a curated set of Docker open source and drop-in solution repositories.
 Docker also offers images that are published by
 [Verified Publishers](../trusted-content/dvp-program.md). These high-quality images

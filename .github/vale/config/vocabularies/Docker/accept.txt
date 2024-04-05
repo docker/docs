@@ -114,6 +114,7 @@ Wasm
 Windows
 Zsh
 [Bb]uildx
+[Cc]odenames?
 [Cc]ompose
 [Dd]istros
 [Ff]ilepaths?
@@ -129,6 +130,7 @@ Zsh
 [Ss]andbox(ed)?
 [Ss]wappable
 [Ss]warm
+[Tt]oolchains?
 [Vv]irtualize
 [Ww]alkthrough
 cgroup
@@ -138,8 +140,8 @@ deserialization
 deserialize
 dockerignore
 firewalld
+g?libc
 gRPC
-glibc
 inotify
 iptables
 kubectl
