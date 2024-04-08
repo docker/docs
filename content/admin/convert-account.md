@@ -55,12 +55,16 @@ Consider the following effects of converting your account:
 
 1. Ensure you have removed your user account from any company or teams or organizations. Also make sure that you have a new Docker ID before you convert an account. See the [Prerequisites](#prerequisites) section for details.
 
-2. In the top-right of Docker Hub, select your account name and then from the drop-down menu, select **My Account**.
+2. Sign in to your [Docker account](https://account.docker.com/login).
 
-3. From the **Convert Account** tab, select **Convert to Organization**.
+3. In Docker Home, select your avatar in the top-right corner to open the dropdown.
 
-4. Review the warning displayed about converting a user account. This action cannot be undone and has considerable implications for your assets and the account.
+4. Select **My Account** to go to your account settings.
 
-5. Enter a **Docker ID** to set an organization owner. This is the user account that will manage the organization, and the only way to access the organization settings after conversion. You cannot use the same Docker ID as the account you are trying to convert.
+5. In the **Account management** section, select **Convert account**.
 
-6. Select **Convert and Purchase** to confirm. The new owner receives a notification email. Use that owner account to sign in to your new organization.
+6. Review the warning displayed about converting a user account. This action cannot be undone and has considerable implications for your assets and the account.
+
+7. Enter a **Docker ID** to set an organization owner. This is the user account that will manage the organization, and the only way to access the organization settings after conversion. You cannot use the same Docker ID as the account you are trying to convert.
+
+8. Select **Confirm and purchase** to confirm. The new owner receives a notification email. Use that owner account to sign in and manage the organization.
