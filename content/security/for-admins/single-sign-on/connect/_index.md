@@ -32,14 +32,14 @@ Make sure you have completed the following before you begin:
 { .experimental }
 
 {{< tabs >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-sso-connect product="hub" %}}
-
-{{< /tab >}}
 {{< tab name="Admin Console" >}}
 
 {{% admin-sso-connect product="admin" %}}
+
+{{< /tab >}}
+{{< tab name="Docker Hub" >}}
+
+{{% admin-sso-connect product="hub" %}}
 
 {{< /tab >}}
 {{< /tabs >}}

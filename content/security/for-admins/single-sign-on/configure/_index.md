@@ -25,11 +25,6 @@ This page walks through steps 1 and 2 using Docker Hub or the Admin Console.
 ## Step one: Add and verify your domain
 
 {{< tabs >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-domains product="hub" %}}
-
-{{< /tab >}}
 {{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
@@ -37,21 +32,26 @@ This page walks through steps 1 and 2 using Docker Hub or the Admin Console.
 {{% admin-domains product="admin" %}}
 
 {{< /tab >}}
+{{< tab name="Docker Hub" >}}
+
+{{% admin-domains product="hub" %}}
+
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Step two: Create an SSO connection in Docker
 
 {{< tabs >}}
-{{< tab name="Docker Hub" >}}
-
-{{% admin-sso-config product="hub" %}}
-
-{{< /tab >}}
 {{< tab name="Admin Console" >}}
 
 {{< include "admin-early-access.md" >}}
 
 {{% admin-sso-config product="admin" %}}
+
+{{< /tab >}}
+{{< tab name="Docker Hub" >}}
+
+{{% admin-sso-config product="hub" %}}
 
 {{< /tab >}}
 {{< /tabs >}}
