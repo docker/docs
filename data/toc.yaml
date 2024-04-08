@@ -1158,7 +1158,7 @@ Manuals:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
             title: Key features and benefits
           - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
-            title: Advanced configuration options (Beta)
+            title: Advanced configuration options
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
