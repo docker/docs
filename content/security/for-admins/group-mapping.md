@@ -31,7 +31,7 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
    b) If an account exists for this email address, it uses this account and updates the full name of the user’s profile if needed.
 
-2. Checks for any pending invitations to the SSO organization to auto-accept the invitation. If the invitation is specific to a group, the user will be added to the invited group along with group mappings in the following step.
+2. Checks for any pending invitations to the SSO organization to auto-accept the invitation. If the invitation is specific to a group, the user is added to the invited group along with group mappings in the following step.
 
 3. Checks if the IdP shared group mappings while authenticating the user.
 

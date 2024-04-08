@@ -41,7 +41,7 @@
 
 ### Add guest users when SSO is enabled
 
-To add a guest if they aren’t verified through your IdP:
+To add a guest that isn't verified through your IdP:
 
 1. Sign in to {{ $product_link }}.
 2. {{ $member_navigation }}
