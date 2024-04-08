@@ -1784,6 +1784,13 @@ expressed in the short form.
   - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number.
 - `consistency`: The consistency requirements of the mount. Available values are platform specific.
 
+> **Tip**
+>
+> Working with large repositories or monorepos, or with virtual file systems that are no longer scaling with your codebase? 
+> Compose now takes advantage of [Synchronized file shares](../../desktop/synchronized-file-sharing.md) and  automatically creates file shares for bind mounts. 
+> Ensure you're signed into Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
+{ .tip }
+
 ## volumes_from
 
 `volumes_from` mounts all of the volumes from another service or container. You can optionally specify
