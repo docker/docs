@@ -1149,6 +1149,8 @@ Manuals:
             title: What is Settings Management?
           - path: /desktop/hardened-desktop/settings-management/configure/
             title: Configure Settings Management
+          - path: /desktop/hardened-desktop/settings-management/air-gapped-containers/
+            title: Air-gapped containers (Beta)
         - sectiontitle: Enhanced Container Isolation
           section:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/
@@ -1158,7 +1160,7 @@ Manuals:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
             title: Key features and benefits
           - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
-            title: Advanced configuration options (Beta)
+            title: Advanced configuration options
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1176,7 +1178,7 @@ Manuals:
     - path: /desktop/wasm/
       title: Wasm workloads (Beta)
     - path: /desktop/synchronized-file-sharing/
-      title: Synchronized file shares {{< badge color=violet text=New >}}
+      title: Synchronized file shares
     - sectiontitle: WSL
       section:
         - path: /desktop/wsl/

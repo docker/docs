@@ -36,6 +36,7 @@ Using the `admin-settings.json` file, admins can:
 - Configure network settings
 - Configure Kubernetes settings
 - Enforce the use of WSL 2 based engine or Hyper-V
+- Enforce the use of Rosetta for x86_64/amd64 emulation on Apple Silicon
 - Configure Docker Engine
 - Turn off Docker Desktop's ability to checks for updates
 - Turn off Docker Extensions
@@ -43,6 +44,7 @@ Using the `admin-settings.json` file, admins can:
 - Turn off beta and experimental features
 - Control the file sharing implementation for your developers on macOS
 - Specify which paths your developers can add file shares to
+- Configure air-gapped containers (Beta)
 
 For more details on the syntax and options admins can set, see [Configure Settings Management](configure.md).
 

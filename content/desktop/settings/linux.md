@@ -29,6 +29,8 @@ On the **General** tab, you can configure when to start Docker and specify other
 - **Choose container terminal**. Determines which terminal is launched when opening the terminal from a container.
 If you choose the integrated terminal, you can run commands in a running container straight from the Docker Dashboard. For more information, see [Explore containers](../use-desktop/container.md).
 
+- **Enable Docker Debug by default**. Check this option to use Docker Debug by default when accessing the integrated terminal. For more information, see [Explore containers](../use-desktop/container.md#integrated-terminal).
+
 - **Use containerd for pulling and storing images**.
   Turns on the containerd image store.
   This brings new features like faster container startup performance by lazy-pulling images,
