@@ -1,10 +1,10 @@
 ---
 description: Learn how to manage settings for your Docker account.
-keywords: accounts, docker ID, account settings, account management, docker dashboard
+keywords: accounts, docker ID, account settings, account management, docker home
 title: Manage your Docker account
 ---
 
-You can manage the settings for your Docker account in Docker Dashboard. Here you can also take administrative actions for your account and manage your account security.
+You can manage the settings for your Docker account in Docker Home. Here you can also take administrative actions for your account and manage your account security.
 
 > **Tip**
 >
@@ -14,7 +14,7 @@ You can manage the settings for your Docker account in Docker Dashboard. Here yo
 ## Update general settings
 
 1. Sign in to your [Docker account](https://account.docker.com/login).
-2. In Docker Dashboard, select your avatar in the top-right corner to open the dropdown.
+2. In Docker Home, select your avatar in the top-right corner to open the dropdown.
 3. Select **My Account**.
 
 From here, you can take any of the following actions.
@@ -53,7 +53,7 @@ Follow the instructions in the password reset email.
 
 ## Manage security settings
 
-You can manage the security settings for your account in Docker Dashboard.
+You can manage the security settings for your account in Docker Home.
 
 For information on two-factor authentication (2FA) for your account, see [Enable two-factor authentication](../security/for-developers/2fa/_index.md) to get started.
 
@@ -61,7 +61,7 @@ For information on personal access tokens (PAT), see [Create and manage access t
 
 ## Account management
 
-You can take administrative actions for your account in Docker Dashboard.
+You can take administrative actions for your account in Docker Home.
 
 For more information on converting your account, see [Convert an account into an organization](../admin/convert-account.md).
 
