@@ -4,8 +4,6 @@ title: Badges
 toc_max: 3
 ---
 
-We use badges to highlight new content in our docs. 
-
 ### Examples
 
 {{< badge color=blue text="blue badge" >}}
