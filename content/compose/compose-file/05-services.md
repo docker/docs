@@ -150,10 +150,10 @@ an integer value using microseconds as unit or a [duration](11-extension.md#spec
 
 ## cpus
 
-_DEPRECATED: use [deploy.limits.cpus](deploy.md#cpus)_
-
 `cpus` define the number of (potentially virtual) CPUs to allocate to service containers. This is a fractional number.
 `0.000` means no limit.
+
+When set, `cpus` must be consistent with the `cpus` attribute in the [Deploy Specification](deploy.md#cpus).
 
 ## cpuset
 
@@ -1112,11 +1112,15 @@ are platform specific. Driver specific options can be set with `options` as key-
 
 ## mem_limit
 
-_DEPRECATED: use [deploy.limits.memory](deploy.md#memory)_
+`mem_limit` configures a limit on the amount of memory a container can allocate, set as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+
+When set, `mem_limit` must be consistent with the `limits.memory` attribute in the [Deploy Specification](deploy.md#memory)
 
 ## mem_reservation
 
-_DEPRECATED: use [deploy.reservations.memory](deploy.md#memory)_
+`mem_reservation` configures a reservation on the amount of memory a container can allocate, set as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+
+When set, `mem_reservation` must be consistent with the `reservations.memory` attribute in the [Deploy Specification](deploy.md#memory).
 
 ## mem_swappiness
 
@@ -1322,13 +1326,13 @@ Supported values are platform specific.
 
 ## pids_limit
 
-_DEPRECATED: use [deploy.resources.limits.pids](deploy.md#pids)_
-
 `pids_limit` tunes a container’s PIDs limit. Set to -1 for unlimited PIDs.
 
 ```yml
 pids_limit: 10
 ```
+
+When set, `pids_limit` must be consistent with the `pids` attribute in the [Deploy Specification](deploy.md#pids).
 
 ## platform
 
