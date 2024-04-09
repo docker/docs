@@ -1,4 +1,4 @@
-Guides:
+Get started:
 - title: Docker overview
   path: /get-started/overview/
 - sectiontitle: Get started
@@ -46,6 +46,8 @@ Guides:
       - title: "Part 10: What next?"
         path: /get-started/11_what_next/
 
+
+Guides:
 - sectiontitle: "Docker concepts"
   section:
   - sectiontitle: "The basics"
@@ -58,7 +60,6 @@ Guides:
       path: /guides/docker-concepts/the-basics/what-is-a-registry/
     - title: "What is Docker Compose?"
       path: /guides/docker-concepts/the-basics/what-is-docker-compose/
-
 
 - sectiontitle: Language-specific guides
   section:
@@ -1090,7 +1091,7 @@ Samples:
       title: Wireguard
 
 
-Manuals:
+Product manuals:
 - path: /manuals/
   title: Overview
 - title: Get Docker
@@ -2074,6 +2075,25 @@ Manuals:
   - path: /docker-hub/release-notes/
     title: Release notes
 
+- sectiontitle: Trusted content
+  section:
+  - path: /trusted-content/
+    title: Overview
+  - path: /trusted-content/official-images/
+    title: Docker Official images
+  - path: /trusted-content/dvp-program/
+    title: Docker Verified Publisher Program
+  - path: /trusted-content/dsos-program/
+    title: Docker-Sponsored Open Source Program
+  - path: /trusted-content/insights-analytics/
+    title: Insights and analytics
+
+- path: /release-notes/
+  title: Release notes
+- path: /release-lifecycle/
+  title: Product release lifecycle
+
+Accounts and enterprise:
 - sectiontitle: Administration
   section:
   - path: /admin/
@@ -2110,6 +2130,25 @@ Manuals:
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
     title: Deactivate an account or organization
+
+- sectiontitle: Billing
+  section:
+  - path: /billing/
+    title: Overview
+  - sectiontitle: Docker Core billing
+    section:
+    - path: /billing/core-billing/payment-method/
+      title: Add or update a payment method
+    - path: /billing/core-billing/details/
+      title: Update the billing information
+    - path: /billing/core-billing/history/
+      title: View your billing history
+    - path: /billing/core-billing/cycle/
+      title: Change your billing cycle
+  - path: /billing/build-billing/
+    title: Docker Build Cloud billing
+  - path: /billing/scout-billing/
+    title: Docker Scout billing
 
 - sectiontitle: Security
   section:
@@ -2160,25 +2199,6 @@ Manuals:
   - path: /security/security-announcements/
     title: Security announcements
 
-- sectiontitle: Billing
-  section:
-  - path: /billing/
-    title: Overview
-  - sectiontitle: Docker Core billing
-    section:
-    - path: /billing/core-billing/payment-method/
-      title: Add or update a payment method
-    - path: /billing/core-billing/details/
-      title: Update the billing information
-    - path: /billing/core-billing/history/
-      title: View your billing history
-    - path: /billing/core-billing/cycle/
-      title: Change your billing cycle
-  - path: /billing/build-billing/
-    title: Docker Build Cloud billing
-  - path: /billing/scout-billing/
-    title: Docker Scout billing
-
 - sectiontitle: Subscription
   section:
   - path: /subscription/
@@ -2205,26 +2225,8 @@ Manuals:
     title: Docker Scout subscriptions and features
   - path: /subscription/desktop-license/
     title: Docker Desktop license agreement
-
-- sectiontitle: Trusted content
-  section:
-  - path: /trusted-content/
-    title: Overview
-  - path: /trusted-content/official-images/
-    title: Docker Official images
-  - path: /trusted-content/dvp-program/
-    title: Docker Verified Publisher Program
-  - path: /trusted-content/dsos-program/
-    title: Docker-Sponsored Open Source Program
-  - path: /trusted-content/insights-analytics/
-    title: Insights and analytics
-
-- path: /release-notes/
-  title: Release notes
 - path: /support/
   title: Get support
-- path: /release-lifecycle/
-  title: Product release lifecycle
 
 FAQ:
   - path: /faq/
