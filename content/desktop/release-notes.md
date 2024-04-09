@@ -88,7 +88,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Windows
 
 - Fixed a bug where `docker run -v` would fail after switching between WSL 2 and Hyper-V.
-- Fixed a bug where Docker Desktop was not stopping its WSL distros (docker-desktop and docker-desktop-data) when it was shutdown. Fixes [docker/for-win/issues/13443](https://github.com/docker/for-win/issues/13443) and [docker/for-win/issues/13938](https://github.com/docker/for-win/issues/13938).
+- Fixed a bug where Docker Desktop was not stopping its WSL distros (`docker-desktop` and `docker-desktop-data`) when it was shutdown. Fixes [docker/for-win/issues/13443](https://github.com/docker/for-win/issues/13443) and [docker/for-win/issues/13938](https://github.com/docker/for-win/issues/13938).
 
 #### For Linux
 
