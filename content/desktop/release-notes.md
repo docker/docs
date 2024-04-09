@@ -32,16 +32,17 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### New
 
-- A beta version of air-gapped containers is now available with Settings Management.
-- You can now enforce Rosetta usage via Settings Management.
-- Docker socket mount restrictions admin configuration with ECI is now generally available.
-- Moby 26 engine including Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
-- New Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
-- Compose supports Synchronized file shares (experimental).
-- New interactive Compose CLI.
-- Beta release of host networking in Docker Desktop.
-- Beta release of Docker Debug for running containers.
-- Beta release of the Volumes Backup & Share extension functionality available in the **Volumes** tab.
+- You can now enforce Rosetta usage via [Settings Management](hardened-desktop/settings-management/configure.md).
+- [Docker socket mount restrictions](hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
+- Docker Desktop now takes advantage of the Moby 26 engine which includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
+- New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
+- Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
+- New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
+- Beta release of:
+  - Air-gapped containers with [Settings Management](hardened-desktop/settings-management/air-gapped-containers.md).
+  - [Host networking](../network/drivers/host.md#docker-desktop) in Docker Desktop.
+  - [Docker Debug](use-desktop/container.md#integrated-terminal) for running containers.
+  - [Volumes Backup & Share extension](use-desktop/volumes.md) functionality available in the **Volumes** tab.
 
 ### Upgrades
 
@@ -64,8 +65,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
   - Fixed an issue with `.dockerignore` to avoid ignoring application files that start with "compose".
   - Improved how Java applications are started based on Spring Boot version. Fixes [docker/for-mac#7171](https://github.com/docker/for-mac/issues/7171).
   - Removed non-official Docker image used for Rust cross-compilation.
-- Interactive Compose TUI (experimental).
-- The maximum number of files per Synchronized file share now exceeds 2 million.
+- The maximum number of files per [Synchronized file share](synchronized-file-sharing.md) now exceeds 2 million.
 - Fixed an issue that caused the warning: "_The value provided to Autocomplete is invalid._" when selecting the **Export to local image** field.
 - **Run Cloud** can now be accessed from the Docker Dashboard.
 - Opting out from sending analytics will now also disable collecting data for bug reports.
