@@ -18,7 +18,7 @@ The top-level `configs` declaration defines or references configuration data tha
 
 - `file`: The config is created with the contents of the file at the specified path.
 - `environment`: The config content is created with the value of an environment variable.
-- `content`: The content is created with the inlined value.
+- `content`: The content is created with the inlined value. Introduced in Docker Compose version [2.23.1](../release-notes.md#2231).
 - `external`: If set to true, `external` specifies that this config has already been created. Compose does not
   attempt to create it, and if it does not exist, an error occurs.
 - `name`: The name of the config object in the container engine to look up. This field can be used to

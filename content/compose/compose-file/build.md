@@ -123,6 +123,8 @@ build:
 
 ### dockerfile_inline
 
+{{< introduced compose 2.17.0 "../release-notes.md#2170" >}}
+
 `dockerfile_inline` defines the Dockerfile content as an inlined string in a Compose file. When set, the `dockerfile`
 attribute is not allowed and Compose rejects any Compose file having both set.
 
@@ -173,6 +175,8 @@ args:
 ```
 
 ### ssh
+
+{{< introduced compose 2.4.0 "../release-notes.md#240" >}}
 
 `ssh` defines SSH authentications that the image builder should use during image build (e.g., cloning private repository).
 
@@ -229,6 +233,8 @@ Unsupported caches are ignored and don't prevent you from building images.
 
 ### cache_to
 
+{{< introduced compose 2.4.0 "../release-notes.md#240" >}}
+
 `cache_to` defines a list of export locations to be used to share build cache with future builds.
 
 ```yml
@@ -244,6 +250,8 @@ Cache target is defined using the same `type=TYPE[,KEY=VALUE]` syntax defined by
 Unsupported caches are ignored and don't prevent you from building images.
 
 ### additional_contexts
+
+{{< introduced compose 2.17.0 "../release-notes.md#2170" >}}
 
 `additional_contexts` defines a list of named contexts the image builder should use during image build.
 
@@ -295,7 +303,7 @@ extra_hosts:
   - "myhostv6=[::1]"
 ```
 
-The separator `=` is preferred, but `:` can also be used. For example:
+The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](../release-notes.md#2241). For example:
 
 ```yml
 extra_hosts:
@@ -318,6 +326,8 @@ configuration, which means for Linux `/etc/hosts` will get extra lines:
 are platform specific.
 
 ### privileged
+
+{{< introduced compose 2.15.0 "../release-notes.md#2" >}}
 
 `privileged` configures the service image to build with elevated privileges. Support and actual impacts are platform specific.
 
@@ -353,11 +363,15 @@ build:
 
 ### no_cache
 
+{{< introduced compose 2.4.0 "../release-notes.md#240" >}}
+
 `no_cache` disables image builder cache and enforces a full rebuild from source for all image layers. This only
 applies to layers declared in the Dockerfile, referenced images COULD be retrieved from local image store whenever tag
 has been updated on registry (see [pull](#pull)).
 
 ### pull
+
+{{< introduced compose 2.4.0 "../release-notes.md#240" >}}
 
 `pull` requires the image builder to pull referenced images (`FROM` Dockerfile directive), even if those are already
 available in the local image store.
@@ -414,6 +428,9 @@ build:
 ```
 
 ### secrets
+
+{{< introduced compose 2.5.0 "../release-notes.md#250" >}}
+
 `secrets` grants access to sensitive data defined by [secrets](05-services.md#secrets) on a per-service build basis. Two
 different syntax variants are supported: the short syntax and the long syntax.
 
@@ -485,6 +502,8 @@ Such grant must be explicit within service specification as [secrets](05-service
 
 ### tags
 
+{{< introduced compose 2.5.1 "../release-notes.md#251" >}}
+
 `tags` defines a list of tag mappings that must be associated to the build image. This list comes in addition to
 the `image` [property defined in the service section](05-services.md#image)
 
@@ -496,7 +515,7 @@ tags:
 
 ### ulimits
 
-> Available with Docker Compose version 2.24.0 and later.
+{{< introduced compose 2.23.1 "../release-notes.md#2231" >}}
 
 `ulimits` overrides the default ulimits for a container. It's specified either as an integer for a single limit
 or as mapping for soft/hard limits.
@@ -514,6 +533,8 @@ services:
 ```
 
 ### platforms
+
+{{< introduced compose 2.10.0 "../release-notes.md#2100" >}}
 
 `platforms` defines a list of target [platforms](05-services.md#platform).
 
