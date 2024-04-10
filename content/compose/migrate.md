@@ -19,8 +19,8 @@ With Docker Desktop, Compose V2 is always accessible as `docker compose`.
 Additionally, the **Use Compose V2** setting is turned on by default, which provides an alias from `docker-compose`.
 
 For manual installs on Linux, you can get Compose V2 by either:
-- [Using Docker's repository](install/linux.md#install-using-the-repository) (recommended)
-- [Downloading and installing manually](install/linux.md#install-the-plugin-manually)
+- [Using Docker's repository](install/plugin.md#install-using-the-repository) (recommended)
+- [Downloading and installing manually](install/plugin.md#install-the-plugin-manually)
 
 ## What are the differences between Compose V1 and Compose V2?
 
