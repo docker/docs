@@ -2,14 +2,7 @@
 datafolder: engine-cli
 datafile: docker_image_build
 linkTitle: docker build
-title: docker image build
-aliases:
-- /edge/engine/reference/commandline/image_build/
-- /engine/reference/commandline/image_build/
-- /engine/reference/commandline/build/
-- /engine/reference/commandline/builder_build/
-- /reference/cli/docker/build/
-- /reference/cli/docker/builder/build/
+title: docker build (legacy builder)
 layout: cli
 ---
 

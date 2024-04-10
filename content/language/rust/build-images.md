@@ -174,7 +174,7 @@ Related information:
  - [Dockerfile reference](../../reference/dockerfile.md)
  - [.dockerignore file](../../reference/dockerfile.md#dockerignore-file)
  - [docker init CLI reference](../../reference/cli/docker/init.md)
- - [docker build CLI reference](../../reference/cli/docker/image/build.md)
+ - [docker build CLI reference](../../reference/cli/docker/buildx/build.md)
 
 
 ## Next steps

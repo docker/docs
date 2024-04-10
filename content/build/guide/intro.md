@@ -160,7 +160,7 @@ container image and created a container from it.
 Related information:
 
 - [Dockerfile reference](../../reference/dockerfile.md)
-- [`docker build` CLI reference](../../reference/cli/docker/image/build.md)
+- [`docker build` CLI reference](../../reference/cli/docker/buildx/build.md)
 - [`docker run` CLI reference](../../reference/cli/docker/container/run.md)
 
 ## Next steps

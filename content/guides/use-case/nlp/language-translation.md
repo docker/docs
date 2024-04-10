@@ -262,7 +262,7 @@ To run the application using Docker:
      this case) is sent to the Docker daemon to enable the build. It includes
      all the files and subdirectories in the specified directory.
 
-   For more details, see the [docker build CLI reference](/reference/cli/docker/image/build/).
+   For more details, see the [docker build CLI reference](/reference/cli/docker/buildx/build/).
 
    Docker outputs several logs to your console as it builds the image. You'll
    see it download and install the dependencies. Depending on your network
