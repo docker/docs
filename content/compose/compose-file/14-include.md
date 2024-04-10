@@ -4,7 +4,7 @@ description: Learn about include
 keywords: compose, compose specification, include, compose file reference
 ---
 
-{{< introduced compose 2.20.0 "../../release-notes.md#2200" >}}
+{{< introduced compose 2.20.0 "../release-notes.md#2200" >}}
 
 A Compose application can declare dependency on another Compose application. This is useful if:
 - You want to reuse other Compose files.
