@@ -27,7 +27,7 @@ Create a GitHub repository, configure the Docker Hub secrets, and push your sour
 
 3. Create a new **Repository secrets** named `DOCKER_USERNAME` and your Docker ID as value.
 
-4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read, Write and Delete.
+4. Create a new [Personal Access Token (PAT)](../../security/for-developers/access-tokens.md/#create-an-access-token) for Docker Hub. You can name this token `docker-tutorial`. Make sure access permissions include Read and Write.
 
 5. Add the PAT as a second **Repository secrets** in your GitHub repository, with the name
    `DOCKERHUB_TOKEN`.
