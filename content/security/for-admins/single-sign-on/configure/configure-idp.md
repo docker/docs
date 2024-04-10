@@ -165,12 +165,14 @@ In the Docker console, paste the following values obtained in the previous steps
 {{< /tab >}}
 {{< /tabs >}}
 
+## More resources
+
+The following videos demonstrate how to configure your IdP with your Docker SSO connection.
+
+- [Video: SSO connection with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=633)
+- [Video: SSO connection with Azure Connect (OIDC)](https://youtu.be/bGquA8qR9jU?feature=shared&t=630)
+- [Video: SSO connection with Entra ID (Azure) SAML](https://youtu.be/bGquA8qR9jU?feature=shared&t=1246)
+
 ## What's next?
 
 [Complete your connection](../connect/_index.md) in the Docker console, then test your connection.
-
-## More resources
-
-The following video provides an overview of configuring SSO with SAML in Entra ID (formerly Azure AD).
-
-<iframe title="Configure SSO with SAML in Entra ID overview" class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/0a30409381f340cfb01790adbd9aa9b3?sid=7e4e10a7-7f53-437d-b593-8a4886775632"></iframe>

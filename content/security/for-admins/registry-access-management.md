@@ -63,3 +63,7 @@ There are certain limitations when using Registry Access Management:
 - Under the WSL 2 network, traffic from all Linux distributions is restricted (this will be resolved in the updated 5.15 series Linux kernel)
 
 Also, Registry Access Management operates on the level of hosts, not IP addresses. Developers can bypass this restriction within their domain resolution, for example by running Docker against a local proxy or modifying their operating system's `sts` file. Blocking these forms of manipulation is outside the remit of Docker Desktop.
+
+## More resources
+
+- [Video: Hardened Desktop Registry Access Management](https://www.youtube.com/watch?v=oA1WQZWnTAk)

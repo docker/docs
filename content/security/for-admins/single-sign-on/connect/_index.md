@@ -44,6 +44,14 @@ Make sure you have completed the following before you begin:
 {{< /tab >}}
 {{< /tabs >}}
 
+## More resources
+
+The following videos demonstrate how to enforce SSO.
+
+- [Video: Enforce SSO with Okta SAML](https://youtu.be/c56YECO4YP4?feature=shared&t=1072)
+- [Video: Enforce SSO with Azure AD (OIDC)](https://youtu.be/bGquA8qR9jU?feature=shared&t=1087)
+
+
 ## What's next
 
 Learn how you can [manage your SSO connection](../manage/_index.md), domain, and users for your organization or company.

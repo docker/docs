@@ -36,3 +36,7 @@ You need to [configure a registry.json to enforce sign-in](configure-sign-in.md)
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## More resources
+
+- [Video: Hardened Desktop Image Access Management](https://www.youtube.com/watch?v=r3QRKHA1A5U)

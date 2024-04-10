@@ -61,3 +61,7 @@ For more information on how you can add organizations to your company, see [Add 
 - [Manage organizations](./organizations.md)
 - [Manage company users](./users.md)
 - [Manage company owners](./owners.md)
+
+## More resources
+
+- [Video demo: Create a company](https://youtu.be/XZ5_i6qiKho?feature=shared&t=359)
