@@ -73,7 +73,7 @@ Don't worry about the specifics of the Dockerfile, as you'll learn about that in
 2. Navigate into the newly created directory.
 
     ```console
-    cd hello-world-demo-node
+    cd helloworld-demo-node
     ```
 
 3. Run the following command to build a Docker image, swapping out `YOUR_DOCKER_USERNAME` with your username.
