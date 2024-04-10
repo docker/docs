@@ -340,6 +340,8 @@ Reference:
     title: docker (base command)
   - path: /reference/cli/docker/build/
     title: docker build
+  - path: /reference/cli/docker/build-legacy/
+    title: docker build (legacy builder)
   - sectiontitle: docker builder
     section:
       - path: /reference/cli/docker/builder/
