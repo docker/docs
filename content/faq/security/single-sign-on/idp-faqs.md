@@ -42,9 +42,14 @@ You can add a bot account to your IDP and create an access token for it to repla
 
 Yes, bot accounts need a seat, similar to a regular end user, having a non-aliased domain email enabled in the IdP and using a seat in Hub.
 
-### Does Docker plan to release SAML Just-In-Time (JIT) provisioning?
+### Does SAML SSO use Just-in-Time provisioning?
 
-The SSO implementation is already Just-In-Time. Administrators don't have to create user's accounts on Hub, they can just enable it on the IdP and have the users sign in through their domain email on Hub.
+> **Beta feature**
+>
+> Optional Just-in-Time (JIT) provisioning configuration is only available in Private Beta when you use the Admin Console. Otherwise, JIT is enabled by default. This feature will be available for all users soon.
+{ .experimental }
+
+The SSO implementation uses Just-in-Time (JIT) provisioning by default. You can optionally disable JIT if you prefer not to auto-provision users, or if you opt for auto-provisioning using SCIM.
 
 ### Will there be IdP-initiated logins?
 

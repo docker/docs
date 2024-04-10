@@ -610,8 +610,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-09-11" >}}
 
-{{< desktop-install all=true version="4.23.0" build_path="/120376/" >}}
-
 ### Upgrades
 - [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
 - [Docker Engine v24.0.6](https://docs.docker.com/engine/release-notes/24.0/#2406)
@@ -681,8 +679,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-08-24" >}}
 
-{{< desktop-install all=true version="4.22.1" build_path="/118664/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -696,8 +692,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.22.0
 
 {{< release-date date="2023-08-03" >}}
-
-{{< desktop-install all=true version="4.22.0" build_path="/117440/" >}}
 
 ### Upgrades
 
@@ -751,8 +745,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-07-03" >}}
 
-{{< desktop-install all=true version="4.21.1" build_path="/114176/" >}}
-
 #### For all platforms
 
 - Fixed connection leak for Docker contexts using SSH ([docker/for-mac#6834](https://github.com/docker/for-mac/issues/6834) and [docker/for-win#13564](https://github.com/docker/for-win/issues/13564))
@@ -764,8 +756,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.21.0
 
 {{< release-date date="2023-06-29" >}}
-
-{{< desktop-install all=true version="4.21.0" build_path="/113844/" >}}
 
 ### New
 
@@ -817,8 +807,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-06-05" >}}
 
-{{< desktop-install all=true version="4.20.1" build_path="/110738/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -833,8 +821,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.20.0
 
 {{< release-date date="2023-05-30" >}}
-
-{{< desktop-install all=true version="4.20.0" build_path="/109717/" >}}
 
 ### Upgrades
 
@@ -874,8 +860,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.19.0
 
 {{< release-date date="2023-04-27" >}}
-
-{{< desktop-install all=true version="4.19.0" build_path="/106363/" >}}
 
 ### New
 
@@ -947,8 +931,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.18.0
 
 {{< release-date date="2023-04-03" >}}
-
-{{< desktop-install all=true version="4.18.0" build_path="/104112/" >}}
 
 ### New
 

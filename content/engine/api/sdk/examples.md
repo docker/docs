@@ -39,8 +39,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/stdcopy"
 )
@@ -53,7 +53,7 @@ func main() {
 	}
 	defer cli.Close()
 
-	reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", types.ImagePullOptions{})
+	reader, err := cli.ImagePull(ctx, "docker.io/library/alpine", image.PullOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -73,7 +73,7 @@ func main() {
 		panic(err)
 	}
 
-	if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
+	if err := cli.ContainerStart(ctx, resp.ID, container.StartOptions{}); err != nil {
 		panic(err)
 	}
 
@@ -86,7 +86,7 @@ func main() {
 	case <-statusCh:
 	}
 
-	out, err := cli.ContainerLogs(ctx, resp.ID, types.ContainerLogsOptions{ShowStdout: true})
+	out, err := cli.ContainerLogs(ctx, resp.ID, container.LogsOptions{ShowStdout: true})
 	if err != nil {
 		panic(err)
 	}
@@ -155,8 +155,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 )
 
@@ -170,7 +170,7 @@ func main() {
 
 	imageName := "bfirsh/reticulate-splines"
 
-	out, err := cli.ImagePull(ctx, imageName, types.ImagePullOptions{})
+	out, err := cli.ImagePull(ctx, imageName, image.PullOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -184,7 +184,7 @@ func main() {
 		panic(err)
 	}
 
-	if err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions{}); err != nil {
+	if err := cli.ContainerStart(ctx, resp.ID, container.StartOptions{}); err != nil {
 		panic(err)
 	}
 
@@ -232,7 +232,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/docker/docker/api/types"
+	containertypes "github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 )
 
@@ -244,7 +244,7 @@ func main() {
 	}
 	defer cli.Close()
 
-	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
+	containers, err := cli.ContainerList(ctx, containertypes.ListOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -302,7 +302,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/docker/docker/api/types"
 	containertypes "github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 )
@@ -315,7 +314,7 @@ func main() {
 	}
 	defer cli.Close()
 
-	containers, err := cli.ContainerList(ctx, types.ContainerListOptions{})
+	containers, err := cli.ContainerList(ctx, containertypes.ListOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -377,7 +376,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 )
 
@@ -389,7 +388,7 @@ func main() {
 	}
 	defer cli.Close()
 
-	options := types.ContainerLogsOptions{ShowStdout: true}
+	options := container.LogsOptions{ShowStdout: true}
 	// Replace this ID with a container that really exists
 	out, err := cli.ContainerLogs(ctx, "f1064a8a4c82", options)
 	if err != nil {
@@ -439,7 +438,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 )
 
@@ -451,7 +450,7 @@ func main() {
 	}
 	defer cli.Close()
 
-	images, err := cli.ImageList(ctx, types.ImageListOptions{})
+	images, err := cli.ImageList(ctx, image.ListOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -502,7 +501,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 )
 
@@ -514,7 +513,7 @@ func main() {
 	}
 	defer cli.Close()
 
-	out, err := cli.ImagePull(ctx, "alpine", types.ImagePullOptions{})
+	out, err := cli.ImagePull(ctx, "alpine", image.PullOptions{})
 	if err != nil {
 		panic(err)
 	}
@@ -572,7 +571,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/image"
+	"github.com/docker/docker/api/types/registry"
 	"github.com/docker/docker/client"
 )
 
@@ -584,7 +584,7 @@ func main() {
 	}
 	defer cli.Close()
 
-	authConfig := types.AuthConfig{
+	authConfig := registry.AuthConfig{
 		Username: "username",
 		Password: "password",
 	}
@@ -594,7 +594,7 @@ func main() {
 	}
 	authStr := base64.URLEncoding.EncodeToString(encodedJSON)
 
-	out, err := cli.ImagePull(ctx, "alpine", types.ImagePullOptions{RegistryAuth: authStr})
+	out, err := cli.ImagePull(ctx, "alpine", image.PullOptions{RegistryAuth: authStr})
 	if err != nil {
 		panic(err)
 	}
@@ -659,7 +659,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 )
@@ -680,7 +679,7 @@ func main() {
 		panic(err)
 	}
 
-	if err := cli.ContainerStart(ctx, createResp.ID, types.ContainerStartOptions{}); err != nil {
+	if err := cli.ContainerStart(ctx, createResp.ID, container.StartOptions{}); err != nil {
 		panic(err)
 	}
 
@@ -693,7 +692,7 @@ func main() {
 	case <-statusCh:
 	}
 
-	commitResp, err := cli.ContainerCommit(ctx, createResp.ID, types.ContainerCommitOptions{Reference: "helloworld"})
+	commitResp, err := cli.ContainerCommit(ctx, createResp.ID, container.CommitOptions{Reference: "helloworld"})
 	if err != nil {
 		panic(err)
 	}
