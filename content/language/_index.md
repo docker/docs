@@ -31,6 +31,9 @@ Learn how to containerize your applications and start developing using Docker. C
         <a href="/language/python/"><img class="m-auto rounded" src="/language/images/python.webp" alt="Develop with Python"></a>
     </div>
     <div class="flex items-center flex-1 shadow p-4">
+        <a href="/language/R/"><img class="m-auto rounded" src="/language/images/r.webp" alt="Develop with R"></a>
+    </div>
+    <div class="flex items-center flex-1 shadow p-4">
         <a href="/language/java/"><img class="m-auto rounded" src="/language/images/java.webp" alt="Develop with Java"></a>
     </div>
     <div class="flex items-center flex-1 shadow p-4">
