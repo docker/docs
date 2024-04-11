@@ -4,7 +4,7 @@ keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you about the layers of container image.
 ---
 
-{{< youtube-embed W1kWqFkiu7k >}}
+{{< youtube-embed wJwqtAkmtQA >}}
 
 ## Explanation
 
