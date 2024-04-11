@@ -41,7 +41,6 @@ annotations:
 ## attach
 
 {{< introduced compose 2.20.0 "../release-notes.md#2200" >}}
-> Available with Docker Compose version 2.20.0 and later
 
 When `attach` is defined and set to `false` Compose does not collect service logs,
 until you explicitly request it to.
@@ -1118,7 +1117,7 @@ are platform specific. Driver specific options can be set with `options` as key-
 
 `mem_limit` configures a limit on the amount of memory a container can allocate, set as a string expressing a [byte value](11-extension.md#specifying-byte-values).
 
-When set, `mem_limit` must be consistent with the `limits.memory` attribute in the [Deploy Specification](deploy.md#memory)
+When set, `mem_limit` must be consistent with the `limits.memory` attribute in the [Deploy Specification](deploy.md#memory).
 
 ## mem_reservation
 

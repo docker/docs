@@ -176,8 +176,6 @@ args:
 
 ### ssh
 
-{{< introduced compose 2.4.0 "../release-notes.md#240" >}}
-
 `ssh` defines SSH authentications that the image builder should use during image build (e.g., cloning private repository).
 
 `ssh` property syntax can be either:
@@ -232,8 +230,6 @@ build:
 Unsupported caches are ignored and don't prevent you from building images.
 
 ### cache_to
-
-{{< introduced compose 2.4.0 "../release-notes.md#240" >}}
 
 `cache_to` defines a list of export locations to be used to share build cache with future builds.
 
@@ -363,15 +359,11 @@ build:
 
 ### no_cache
 
-{{< introduced compose 2.4.0 "../release-notes.md#240" >}}
-
 `no_cache` disables image builder cache and enforces a full rebuild from source for all image layers. This only
 applies to layers declared in the Dockerfile, referenced images COULD be retrieved from local image store whenever tag
 has been updated on registry (see [pull](#pull)).
 
 ### pull
-
-{{< introduced compose 2.4.0 "../release-notes.md#240" >}}
 
 `pull` requires the image builder to pull referenced images (`FROM` Dockerfile directive), even if those are already
 available in the local image store.
@@ -428,8 +420,6 @@ build:
 ```
 
 ### secrets
-
-{{< introduced compose 2.5.0 "../release-notes.md#250" >}}
 
 `secrets` grants access to sensitive data defined by [secrets](05-services.md#secrets) on a per-service build basis. Two
 different syntax variants are supported: the short syntax and the long syntax.
@@ -502,8 +492,6 @@ Such grant must be explicit within service specification as [secrets](05-service
 
 ### tags
 
-{{< introduced compose 2.5.1 "../release-notes.md#251" >}}
-
 `tags` defines a list of tag mappings that must be associated to the build image. This list comes in addition to
 the `image` [property defined in the service section](05-services.md#image)
 
@@ -533,8 +521,6 @@ services:
 ```
 
 ### platforms
-
-{{< introduced compose 2.10.0 "../release-notes.md#2100" >}}
 
 `platforms` defines a list of target [platforms](05-services.md#platform).
 
