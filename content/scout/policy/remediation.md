@@ -30,9 +30,8 @@ prerequisites that ensure Docker Scout can successfully evaluate the policy.
 Recommendations appear on the policy details pages of the Docker Scout
 Dashboard. To get to this page:
 
-1. Open the [Docker Scout Dashboard](https://scout.docker.com/)
-2. Go to the **Policies** page.
-3. Select a policy in the list.
+1. Go to the [Policies page](https://scout.docker.com/reports/policy) in the Docker Scout Dashboard.
+2. Select a policy in the list.
 
 The policy details page groups evaluation results into two different tabs
 depending on the policy status:

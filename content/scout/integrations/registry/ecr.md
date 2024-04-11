@@ -116,7 +116,7 @@ To add additional registries:
    is **Connected**.
 
 Next, activate Docker Scout for the repositories that you want to analyze in
-[repository settings](https://scout.docker.com/settings/repos/).
+[Repository settings](https://scout.docker.com/settings/repos/).
 
 ## Remove integration
 
