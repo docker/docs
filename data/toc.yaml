@@ -90,6 +90,18 @@ Guides:
       path: /language/python/configure-ci-cd/
     - title: "Test your deployment"
       path: /language/python/deploy/
+  - sectiontitle: R
+    section:
+    - title: "Overview"
+      path: /language/R/
+    - title: "Containerize your app"
+      path: /language/R/containerize/
+    - title: "Develop your app"
+      path: /language/R/develop/
+    - title: "Configure CI/CD"
+      path: /language/R/configure-ci-cd/
+    - title: "Test your deployment"
+      path: /language/R/deploy/
   - sectiontitle: Java
     section:
     - title: "Overview"
