@@ -26,19 +26,19 @@ This example might look like:
 
 Why is this beneficial? With layering, you can reuse the layers from one image for another image. For example, imagine you wanted to create another Python application. Due to layering, you can leverage the same Python base. This will make builds faster and reduce the amount of storage and bandwidth required to distribute the images. The image layering might look similar to the following:
 
-![screenshot of the flowchat showing the benefits of the image layering](images/container_image_layer_reuse.webp?border=true)
+![screenshot of the flowchart showing the benefits of the image layering](images/container_image_layer_reuse.webp?border=true)
 
 With this layering, you can easily extend the images of others! As a developer, it allows you to focus on your unique application needs.
 
 ### Merging the layers
 
-The magic for merging the layers lies in the use of a unioned filesystem. While this will get technical, here’s how it works:
+The magic for merging the layers lies in the use of a union filesystem. While this will get technical, here’s how it works:
 
 1. After each layer is downloaded, it is extracted into its own directory on the host filesystem. 
-2. A unioned filesystem is created. This "stacks each of the layers’ directories on top of each other into a new directory, giving a new and unified view. 
+2. A union filesystem is created. This stacks each of the layers directories' on top of each other into a new directory, giving a new and unified view. 
 3. When the container is started, its root directory is set to the location of this merged directory (using `chroot`).
 
-When the unioned filesystem is created, in addition to the image layers, a directory is created specifically for the running container. This allows the container to make filesystem changes while allowing the original image layers to remain untouched. This enables  you to run multiple containers from the same underlying image.
+When the union filesystem is created, in addition to the image layers, a directory is created specifically for the running container. This allows the container to make filesystem changes while allowing the original image layers to remain untouched. This enables you to run multiple containers from the same underlying image.
 
 ## Try it out
 
@@ -66,7 +66,7 @@ In this first step, you will create your own base image that you will then use f
     $ apt update && apt install -y nodejs
     ```
 
-    When this command runs, it downloads and installs Node inside the container. In the context of the unioned filesystem, these filesystem changes occur within the directory unique to this container. 
+    When this command runs, it downloads and installs Node inside the container. In the context of the union filesystem, these filesystem changes occur within the directory unique to this container. 
 
 3. Validate if Node is installed by running the following command:
 

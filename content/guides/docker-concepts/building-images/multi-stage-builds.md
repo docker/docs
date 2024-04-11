@@ -15,7 +15,7 @@ Multi-stage builds introduce multiple stages in your Dockerfile, each with a spe
 While multi-stage builds are excellent for Java and .NET builds (separating build tools from the final image), their applications extend far beyond:
 
 - React applications. Build and minify your React code in one stage. Then, in another stage, copy the production-ready files to a smaller runtime image. This optimizes your image for deployment.
-- Compiling dependencies. If your application relies on pre-compiled libraries, a multi-stage build allows you to compile them in one stage and then use the compiled artifacts in the final runtime image. No need to bundle the entire compiler in your final image!
+- Compiling dependencies. If your application relies on pre-compiled libraries, a multi-stage build lets you to compile them in one stage and then use the compiled artifacts in the final runtime image. No need to bundle the entire compiler in your final image!
 - Python with pip. Separate the installation of Python and its dependencies (using pip) in one stage from the application code and data in another. This keeps your runtime image focused on execution.
 
 
@@ -45,7 +45,7 @@ This Dockerfile uses a two-stage build:
 
 ## Try it now
 
-In this hands-on experience, you'll unlock the power of Multi-stage builds to create lean and efficient Docker images for a sample Java application! We'll use a simple “Hello World” Spring Boot-based application built with Maven as our example.
+In this hands-on experience, you'll unlock the power of Multi-stage builds to create lean and efficient Docker images for a sample Java application! You'll use a simple “Hello World” Spring Boot-based application built with Maven as your example.
 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
 
@@ -59,7 +59,7 @@ In this hands-on experience, you'll unlock the power of Multi-stage builds to cr
 
 Select **Generate** to create and download the zip file for this project.
 
-For this demonstration, we’ve paired Maven build automation with Java, a Spring Web dependency, and Java 21 for our metadata.
+For this demonstration, you’ve paired Maven build automation with Java, a Spring Web dependency, and Java 21 for your metadata.
 
 
 3. Navigate the project structure. Once you unzip the file, you'll see the following project directory structure:
@@ -216,7 +216,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     ```
 
 
-    Based on this output, we can see our image is 880MB in size! In this image, we have the full JDK, Maven toolchain, and more. In production, we don’t need that in our final image.
+    Based on this output, you can see that your image is 880MB in size! In this image, you have the full JDK, Maven toolchain, and more. In production, we don’t need that in your final image.
 
 
 ### Run the Spring Boot application
@@ -278,12 +278,12 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 
     - The first stage remains the same as the previous Dockerfile, providing a Java Development Kit (JDK) environment for building the application. This stage is given the name of builder.
 
-    - The second stage is a new stage named `final`. Since it starts `FROM builder`, it inherits everything from the base stage (JDK environment). It uses a slimmer `eclipse-temurin:21.0.2_13-jre-jammy` image,  containing just the Java Runtime Environment (JRE) needed to run the application. This image provides a Java Runtime Environment (JRE) which is sufficient for running the compiled application (JAR file). 
+    - The second stage is a new stage named `final`. Since it starts `FROM builder`, it inherits everything from the base stage (JDK environment). It uses a slimmer `eclipse-temurin:21.0.2_13-jre-jammy` image, containing just the Java Runtime Environment (JRE) needed to run the application. This image provides a Java Runtime Environment (JRE) which is enough for running the compiled application (JAR file). 
 
     With multi-stage builds, a Docker build uses one base image for compilation, packaging, and unit tests and then a separate image for the application runtime. As a result, the final image is smaller in size since it doesn’t contain any development or debugging tools. By separating the build environment from the final runtime environment, you can significantly reduce the image size and increase the security of your final images. 
 
 
-2. Now, let’s rebuild our image and run our ready-to-use production build. 
+2. Now, let’s rebuild your image and run your ready-to-use production build. 
 
     ```console
     $ docker build -t spring-helloworld-builder .
@@ -308,10 +308,10 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     spring-helloworld         latest    ff708d5ee194   About an hour ago   880MB
     ```
 
-    Our final image is just 428 MB, compared to the original build size of 880 MB.
+    Your final image is just 428 MB, compared to the original build size of 880 MB.
 
 
-    By optimizing each stage and only including what is necessary, you were able to significantly reduce the   
+    By optimizing each stage and only including what's necessary, you were able to significantly reduce the   
     overall image size while still achieving the same functionality. This not only improves performance but   
     also makes your Docker images more lightweight, more secure, and easier to manage.
 

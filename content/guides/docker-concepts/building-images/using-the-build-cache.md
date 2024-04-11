@@ -19,7 +19,7 @@ RUN yarn install --production
 CMD ["node", "./src/index.js"]
 ```
 
-When you run the `docker build` command to create a new image, Docker executes each instruction in your Dockerfile, creating a layer for each command and in the order specified. For each instruction, Docker checks whether it can reuse the instruction from a previous build (we call this the build cache). If it finds that you've already executed a similar instruction before, Docker doesn't need to redo it. Instead, it’ll use the cached result. This way, your build process becomes faster and more efficient, saving you valuable time and resources.
+When you run the `docker build` command to create a new image, Docker executes each instruction in your Dockerfile, creating a layer for each command and in the order specified. For each instruction, Docker checks whether it can reuse the instruction from a previous build (you call this the build cache). If it finds that you've already executed a similar instruction before, Docker doesn't need to redo it. Instead, it’ll use the cached result. This way, your build process becomes faster and more efficient, saving you valuable time and resources.
 
 So, when does Docker decide it's time to hit the refresh button on its cache? Well, there are a few situations that'll do the trick.
 
@@ -42,7 +42,7 @@ But you might ask “Why is it important to use the cache effectively?”
 
 ## Try it out
 
-In this hands-on, you will learn how to utilize the Docker build cache effectively for Node.js application.
+In this hands-on, you will learn how to use the Docker build cache effectively for Node.js application.
 
 ### Build the application
 
@@ -223,9 +223,9 @@ In this hands-on, you will learn how to utilize the Docker build cache effective
     </table>
 
 
-    Going back to the `docker image history` output, we see that each command in the Dockerfile becomes a new layer in the image. You might remember that when we made a change to the image, the `yarn` dependencies had to be reinstalled. Is there a way to fix this? It doesn't make much sense to re-ship the same dependencies every time we build, right?
+    Going back to the `docker image history` output, you see that each command in the Dockerfile becomes a new layer in the image. You might remember that when you made a change to the image, the `yarn` dependencies had to be reinstalled. Is there a way to fix this? It doesn't make much sense to re-ship the same dependencies every time you build, right?
 
-    To fix this, we need to restructure our Dockerfile to help support the caching of the dependencies. For Node-based applications, those dependencies are defined in the `package.json` file. So what if we start by copying only that file first, install the dependencies, and then copy everything else? Then, we only recreate the yarn dependencies if there was a change to the package.json. Make sense?
+    To fix this, you need to restructure your Dockerfile to help support the caching of the dependencies. For Node-based applications, those dependencies are defined in the `package.json` file. So what if you start by copying only that file first, install the dependencies, and then copy everything else? Then, you only recreate the yarn dependencies if there was a change to the package.json. Make sense?
 
     Update the Dockerfile to copy in the package.json first, install dependencies, and then copy everything else in.
 
@@ -274,7 +274,7 @@ In this hands-on, you will learn how to utilize the Docker build cache effective
     => => naming to docker.io/library/node-app:2.0                                                 0.0s
     ```
 
-    You'll see that all layers were rebuilt. Perfectly fine since we changed the Dockerfile quite a bit.
+    You'll see that all layers were rebuilt. Perfectly fine since you changed the Dockerfile quite a bit.
 
     Now, make a change to the `src/static/index.html` file (like change the title to say "The Awesome Todo App").
 
@@ -307,7 +307,7 @@ In this hands-on, you will learn how to utilize the Docker build cache effective
     => => naming to docker.io/library/node-app:3.0                                                 0.0s
     ```
 
-    First off, you should notice that the build was much faster! You'll see that several steps are using previously cached layers. So, hooray! We're using the build cache. Pushing and pulling this image and updates to it will be much faster as well.
+    First off, you should notice that the build was much faster! You'll see that several steps are using previously cached layers. So, hooray! You're using the build cache. Pushing and pulling this image and updates to it will be much faster as well.
 
 By following these optimization techniques, you can make your Docker builds faster and more efficient, leading to quicker iteration cycles and improved development productivity.
 
@@ -317,7 +317,7 @@ By following these optimization techniques, you can make your Docker builds fast
 * [Cache Storage Backend](/build/cache/backends/)
 * [Build cache invalidation](/build/cache/invalidation/)
 
-Now that you understand how to utilize the Docker build cache effectively, you're ready to learn about Multi-stage builds.
+Now that you understand how to use the Docker build cache effectively, you're ready to learn about Multi-stage builds.
 
 {{< button text="Multi-stage builds" url="multi-stage-builds" >}}
 
