@@ -137,10 +137,10 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 
 To learn more about writing a Dockerfile, visit the following resources:
 
-* [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
-* [Dockerfile best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-* [Create your own base image](https://docs.docker.com/build/building/base-images/)
-* [Getting Started with Docker init](https://docs.docker.com/reference/cli/docker/init/)
+* [Dockerfile reference](/reference/dockerfile/)
+* [Dockerfile best practices](/develop/develop-images/dockerfile_best-practices/)
+* [Create your own base image](/build/building/base-images/)
+* [Getting Started with Docker init](/reference/cli/docker/init/)
 
 Now that you have created a Dockerfile and learned the basics, it's time to learn about building, tagging, and pushing the images.
 

@@ -167,7 +167,7 @@ Now that you have a repository on Docker Hub, it's time for you to build an imag
     mobywhale/concepts-build-image-demo    latest    746c7e06537f   24 seconds ago   354MB
     ```
 
-3. You can actually view the history (or how the image was created) by using the [docker image history](https://docs.docker.com/reference/cli/docker/image/history/) command:
+3. You can actually view the history (or how the image was created) by using the [docker image history](/reference/cli/docker/image/history/) command:
 
     ```console
     $ docker image history mobywhale/concepts-build-image-demo
@@ -197,7 +197,7 @@ Now that you have a repository on Docker Hub, it's time for you to build an imag
 
 Now that you have an image built, it's time to push the image to a registry.
 
-1. Push the image using the [docker push](https://docs.docker.com/reference/cli/docker/image/push/) command:
+1. Push the image using the [docker push](/reference/cli/docker/image/push/) command:
 
     ```console
     $ docker push <YOUR_DOCKER_USERNAME>/concepts-build-image-demo
@@ -211,11 +211,11 @@ Now that you have an image built, it's time to push the image to a registry.
 
 To learn more about building, tagging, and publishing images, visit the following resources:
 
-* [What is a build context?](https://docs.docker.com/build/building/context/#what-is-a-build-context)
-* [docker build reference](https://docs.docker.com/engine/reference/commandline/image_build/)
-* [docker image tag reference](https://docs.docker.com/engine/reference/commandline/image_tag/)
-* [docker push reference](https://docs.docker.com/engine/reference/commandline/image_push/)
-* [What is a registry?](https://docs.docker.com/guides/docker-concepts/the-basics/what-is-a-registry/)
+* [What is a build context?](/build/building/context/#what-is-a-build-context)
+* [docker build reference](/engine/reference/commandline/image_build/)
+* [docker image tag reference](/engine/reference/commandline/image_tag/)
+* [docker push reference](/engine/reference/commandline/image_push/)
+* [What is a registry?](/guides/docker-concepts/the-basics/what-is-a-registry/)
 
 Now that you have learned about building and publishing images, it's time to learn how to speed up build process using the Docker build cache.
 

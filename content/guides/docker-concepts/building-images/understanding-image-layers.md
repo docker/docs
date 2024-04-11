@@ -108,7 +108,7 @@ In this first step, you will create your own base image that you will then use f
 6. To prove your image has Node installed, you can start a new container using this new image:
 
     ```console
-    docker run node-base node -e "console.log('Hello again')"
+    docker run node-base node -e `console.log('Hello again')`
     ```
 
     With that, you should get a “Hello again” output in the terminal, showing Node was installed and working!
@@ -195,9 +195,9 @@ Now that you have a base image, you can extend that image to build additional im
 
 If you’d like to dive deeper into the things you learned, check out the following resources:
 
-* [docker image history CLI reference](https://docs.docker.com/reference/cli/docker/image/history/)
-* [docker cp CLI reference](https://docs.docker.com/reference/cli/docker/container/cp/)
-* [Docker Scout reference](https://docs.docker.com/scout/)
+* [docker image history CLI reference](/reference/cli/docker/image/history/)
+* [docker cp CLI reference](/reference/cli/docker/container/cp/)
+* [Docker Scout reference](/scout/)
 
 
 ## Next steps
