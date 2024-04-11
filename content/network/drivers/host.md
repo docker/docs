@@ -44,7 +44,8 @@ given swarm node.
 ## Docker Desktop
 
 Host networking is also supported on Docker Desktop version 4.29 and later for Mac,
-Windows, and Linux as a beta feature.
+Windows, and Linux as a beta feature and *has to be enabled via Settings/Features in
+development/Enable host networking*.
 
 This feature works in both directions. This means you can
 access a server that is running in a container from your host and you can access
