@@ -8,7 +8,7 @@ description: This concept page will teach you how to create image using Dockerfi
 
 ## Explanation
 
-A Dockerfile is a simple text-based document that's used to create a container image. It provides instructions to the image builder on the commands to run, files to copy, and a few other configuration options. 
+A `Dockerfile` is a simple text-based document that's used to create a container image. It provides instructions to the image builder on the commands to run, files to copy, and a few other configuration options. 
 
 As an example, the following Dockerfile would produce a ready-to-run Python application:
 
@@ -35,14 +35,14 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
 
 Some of the most common instructions in a `Dockerfile` include:
 
-- `FROM <image>` - this specifies the base image that the build will extend
-- `WORKDIR <path>` - this instruction specifies the "working directory" or the path in the image that files will be copied and commands will be executed
+- `FROM <image>` - this specifies the base image that the build will extend.
+- `WORKDIR <path>` - this instruction specifies the "working directory" or the path in the image where files will be copied and commands will be executed.
 - `COPY <host-path> <image-path>` - this instruction tells the builder to copy files from the host and put them into the container image
-- `RUN <command>` - this instruction tells the builder to run the specified command
-- `ENV <name> <value>` - this instruction sets an environment variable that a running container will use
-- `EXPOSE <port-number>` - this instruction sets configuration on the image that indicates a port the image would like to expose
-- `USER <user-or-uid>` - this instruction sets the default user for all subsequent instructions
-- `CMD ["<command>", "<arg1>"]` - this instruction sets the default command a container using this image will run
+- `RUN <command>` - this instruction tells the builder to run the specified command.
+- `ENV <name> <value>` - this instruction sets an environment variable that a running container will use.
+- `EXPOSE <port-number>` - this instruction sets configuration on the image that indicates a port the image would like to expose.
+- `USER <user-or-uid>` - this instruction sets the default user for all subsequent instructions.
+- `CMD ["<command>", "<arg1>"]` - this instruction sets the default command a container using this image will run.
 
 
 To read through all of the instructions or go into greater detail, check out the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/).
@@ -91,7 +91,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     COPY . .
     ```
 
-5. Install the app's dependencies by using the `yarn` CLI and package manager. To do so, run a command using the RUN instruction:
+5. Install the app's dependencies by using the `yarn` CLI and package manager. To do so, run a command using the `RUN` instruction:
 
     ```dockerfile
     RUN yarn install --production

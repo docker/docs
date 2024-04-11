@@ -113,7 +113,7 @@ In this hands-on, you will build a simple image using a provided `Dockerfile` an
 
 1. Get the sample application.
 
-If you have git, you can clone the repository for the sample application. Otherwise, you can download the sample application. Choose one of the following options.
+If you have Git, you can clone the repository for the sample application. Otherwise, you can download the sample application. Choose one of the following options.
 
 {{< tabs >}}
 {{< tab name="Clone with git" >}}
@@ -142,7 +142,7 @@ Download the source and extract it.
 
 Now that you have a repository on Docker Hub, it's time for you to build an image and push it to the repository.
 
-1. Using a terminal in the root of the sample app repo, run the following command. Replace `YOUR_DOCKER_USERNAME` with your Docker Hub username:
+1. Using a terminal in the root of the sample app repository, run the following command. Replace `YOUR_DOCKER_USERNAME` with your Docker Hub username:
 
     ```console
     $ docker build -t <YOUR_DOCKER_USERNAME>/concepts-build-image-demo .

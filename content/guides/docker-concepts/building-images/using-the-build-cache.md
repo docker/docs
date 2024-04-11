@@ -4,7 +4,7 @@ keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you about the build cache, what changes invalidate the cache and how to effectively use the build cache.
 ---
 
-{{< youtube-embed W1kWqFkiu7k >}}
+{{< youtube-embed Ri6jMknjprY >}}
 
 ## Explanation
 
