@@ -33,7 +33,7 @@ TBD
 | `WINDOWSCONTAINERSDEFAULTDATAROOT` | Specifies the default location for the Windows containers. | None |
 | `WSLDEFAULTDATAROOT` | Specifies the default location for the WSL distribution disk. | None |
 | `DISABLEENGINEINSTALL` | TBA | TBA |
-| `INSTALLFOLDER` | Specifies a custom location where Docker Desktop will be installed (TODO: https://docker.atlassian.net/browse/DS-847) We will try to include for a later stage. | C:\Program Files\Docker |
+| `INSTALLFOLDER` | Specifies a custom location where Docker Desktop will be installed TODO: We will try to include for a later stage. | C:\Program Files\Docker |
 
 ### Silent installations
 

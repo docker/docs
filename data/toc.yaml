@@ -1113,7 +1113,7 @@ Manuals:
            title: Overview
          - path: /desktop/install/msi/quickstart/
            title: Quickstart
-         - path: /desktop/install/msi/configure/
+         - path: /desktop/install/msi/install-and-configure/
            title: Install and configure
          - path: /desktop/install/msi/faq/
            title: FAQs
