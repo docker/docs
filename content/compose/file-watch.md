@@ -4,9 +4,7 @@ keywords: compose, file watch, experimental
 title: Use Compose Watch
 ---
 
-> **Note**
->
-> Compose Watch is available in Docker Compose version 2.22 and later.
+{{< introduced compose 2.22.0 "release-notes.md#2220" >}}
 
 Use `watch` to automatically update and preview your running Compose services as you edit and save your code. 
 

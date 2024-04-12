@@ -111,7 +111,7 @@ You can create the volume and start the container using the CLI or Docker Deskto
    > If you're using Git Bash, you must use different syntax for this command.
    >
    > ```console
-   > $ docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db, target=//etc/todos getting-started
+   > $ docker run -dp 127.0.0.1:3000:3000 --mount type=volume,src=todo-db,target=//etc/todos getting-started
    > ```
    >
    > For more details about Git Bash's syntax differences, see

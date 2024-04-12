@@ -12,7 +12,7 @@ The top-level `secrets` declaration defines or references sensitive data that is
 application. The source of the secret is either `file` or `environment`.
 
 - `file`: The secret is created with the contents of the file at the specified path.
-- `environment`: The secret is created with the value of an environment variable.
+- `environment`: The secret is created with the value of an environment variable. 
 
 ## Example 1
 

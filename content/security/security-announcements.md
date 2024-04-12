@@ -35,7 +35,7 @@ If you are using affected versions of runc, BuildKit, Moby, or Docker Desktop, m
 
 If you are unable to update to an unaffected version promptly, follow these best practices to mitigate risk: 
 
-* Only use trusted Docker images (such as [Docker Official Images](../trusted-content/official-images.md)).
+* Only use trusted Docker images (such as [Docker Official Images](../trusted-content/official-images/_index.md)).
 * Don’t build Docker images from untrusted sources or untrusted Dockerfiles.
 * If you are a Docker Business customer using Docker Desktop and unable to update to v4.27.1, make sure to enable [Hardened Docker Desktop](../desktop/hardened-desktop/_index.md) features such as:
   * [Enhanced Container Isolation](../desktop/hardened-desktop/enhanced-container-isolation/_index.md), which mitigates the impact of CVE-2024-21626 in the case of running containers from malicious images.
@@ -116,7 +116,7 @@ the Text4Shell CVE in the vulnerability report. For detailed instructions, see [
 
 ### Docker Official Images impacted by CVE-2022-42889
 
-A number of [Docker Official Images](../trusted-content/official-images.md) contain the vulnerable versions of
+A number of [Docker Official Images](../trusted-content/official-images/_index.md) contain the vulnerable versions of
 Apache Commons Text. The following lists Docker Official Images that
 may contain the vulnerable versions of Apache Commons Text:
 
@@ -169,7 +169,7 @@ Log4j 2 CVE in the vulnerability report. For detailed instructions, see [Scan im
 
 _Last updated December 2021_
 
-A number of [Docker Official Images](../trusted-content/official-images.md) contain the vulnerable versions of
+A number of [Docker Official Images](../trusted-content/official-images/_index.md) contain the vulnerable versions of
 Log4j 2 CVE-2021-44228. The following table lists Docker Official Images that
 may contained the vulnerable versions of Log4j 2. We updated Log4j 2 in these images to the latest version. Some of these images may not be
 vulnerable for other reasons. We recommend that you also review the guidelines published on the upstream websites.
