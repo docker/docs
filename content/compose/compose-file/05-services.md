@@ -1739,6 +1739,7 @@ services:
         target: /data
         volume:
           nocopy: true
+          subpath: sub
       - type: bind
         source: /var/run/postgres/postgres.sock
         target: /var/run/postgres/postgres.sock
@@ -1790,6 +1791,7 @@ expressed in the short form.
   - `selinux`: The SELinux re-labeling option `z` (shared) or `Z` (private)
 - `volume`: Configures additional volume options:
   - `nocopy`: Flag to disable copying of data from a container when a volume is created.
+  - `subpath`: Path inside a volume to mount instead of the volume root.
 - `tmpfs`: Configures additional tmpfs options:
   - `size`: The size for the tmpfs mount in bytes (either numeric or as bytes unit).
   - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](../release-notes.md#2260).
