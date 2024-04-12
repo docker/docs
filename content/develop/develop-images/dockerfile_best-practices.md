@@ -48,7 +48,7 @@ deleting files, are written to this writable container layer.
 
 * [Dockerfile reference](../../reference/dockerfile.md)
 * [More about Automated builds](../../docker-hub/builds/index.md)
-* [Guidelines for creating Docker Official Images](../../trusted-content/official-images.md)
+* [Guidelines for creating Docker Official Images](../../trusted-content/official-images/_index.md)
 * [Best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker)
 * [More about base images](../../build/building/base-images.md)
 * [More on image layers and how Docker builds and stores images](../../storage/storagedriver/index.md).
