@@ -14,6 +14,11 @@ aliases:
 - /engine/reference/commandline/registry_ls/
 - /engine/reference/commandline/registry_rmi/
 - /engine/reference/commandline/docker/
+- /reference/commandline/cli/
+- /engine/reference/commandline/engine/
+- /engine/reference/commandline/engine_activate/
+- /engine/reference/commandline/engine_check/
+- /engine/reference/commandline/engine_update/
 layout: cli
 ---
 
