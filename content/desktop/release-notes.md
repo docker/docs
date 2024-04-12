@@ -97,6 +97,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 - Disabled Electron `runAsNode` fuse to improve security hardening. For more info, see [Electron's documentation.](https://www.electronjs.org/blog/statement-run-as-node-cves)
 
+### Known issues
+
+#### For Mac
+
+- Docker Desktop on Apple Silicon doesn't start if Rosetta is not installed. This will be fixed in future releases. See [docker/for-mac#7243](https://github.com/docker/for-mac/issues/7243).
+
 ## 4.28.0
 
 {{< release-date date="2024-02-26" >}}
