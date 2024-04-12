@@ -86,10 +86,9 @@ and select the **System default** option under **Choose your terminal**.
 
 #### Open the integrated terminal in debug mode
 
-> **Beta**
+> **Beta feature**
 >
-> The debug mode feature is in [Beta](../../release-lifecycle.md/#beta). Docker
-> recommends that you don't use this feature in production environments.
+> The debug mode feature is currently in [Beta](../../release-lifecycle.md/#beta).
 { .experimental }
 
 Debug mode requires a [Pro, Team, or Business subcription](/subscription/details/). Debug mode has several advantages, such as:
