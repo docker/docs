@@ -93,15 +93,15 @@ Guides:
   - sectiontitle: R
     section:
     - title: "Overview"
-      path: /language/R/
+      path: /language/r/
     - title: "Containerize your app"
-      path: /language/R/containerize/
+      path: /language/r/containerize/
     - title: "Develop your app"
-      path: /language/R/develop/
+      path: /language/r/develop/
     - title: "Configure CI/CD"
-      path: /language/R/configure-ci-cd/
+      path: /language/r/configure-ci-cd/
     - title: "Test your deployment"
-      path: /language/R/deploy/
+      path: /language/r/deploy/
   - sectiontitle: Java
     section:
     - title: "Overview"

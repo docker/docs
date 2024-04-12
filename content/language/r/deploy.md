@@ -84,7 +84,7 @@ To learn more about Kubernetes objects, see the [Kubernetes documentation](https
 
    You should see output that looks like the following, indicating your Kubernetes objects were created successfully.
 
-   ```shell
+   ```text
    deployment.apps/docker-r-demo created
    service/service-entrypoint created
    ```

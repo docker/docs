@@ -19,39 +19,18 @@ In this section, you'll learn how to set up a development environment for your c
 
 You'll need to clone a new repository to get a sample application that includes logic to connect to the database.
 
-1. Change to a directory where you want to clone the repository and run the following command.
+Change to a directory where you want to clone the repository and run the following command.
 
-   ```console
-   $ git clone https://github.com/mfranzon/r-docker-dev.git
-   ```
+```console
+$ git clone https://github.com/mfranzon/r-docker-dev.git
+```
 
-2. In the cloned repository's directory, run `docker init` to create the necessary Docker files. Refer to the following example to answer the prompts from `docker init`.
-
-  ```console
-  $ docker init
-  Welcome to the Docker Init CLI!
-
-  This utility will walk you through creating the following files with sensible defaults for your project:
-    - .dockerignore
-    - Dockerfile
-    - compose.yaml
-    - README.Docker.md
-
-  Let's get started!
-
-  ? What application platform does your project use? Other
-
-  CREATED: .dockerignore
-  CREATED: Dockerfile
-  CREATED: compose.yaml
-  CREATED: README.Docker.md
-  ```
 
 ## Add a local database and persist data
 
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
 
-In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. `docker init` handled creating most of the instructions, but you'll need to update it for your unique application.
+In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. 
 
 In the `compose.yaml` file, you need to uncomment all of the database instructions. In addition, you need to add the database password file as an environment variable to the server service and specify the secret file to use .
 
@@ -119,7 +98,8 @@ directory.
 ├── r-docker-dev/
 │ ├── db/
 │ │ └── password.txt
-│ ├── app.py
+│ ├── src/
+│ │ └── app.py
 │ ├── requirements.txt
 │ ├── .dockerignore
 │ ├── compose.yaml
