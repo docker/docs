@@ -40,7 +40,7 @@ annotations:
 
 ## attach
 
-> Available with Docker Compose version 2.20.0 and later
+{{< introduced compose 2.20.0 "../release-notes.md#2200" >}}
 
 When `attach` is defined and set to `false` Compose does not collect service logs,
 until you explicitly request it to.
@@ -150,10 +150,10 @@ an integer value using microseconds as unit or a [duration](11-extension.md#spec
 
 ## cpus
 
-_DEPRECATED: use [deploy.limits.cpus](deploy.md#cpus)_
-
 `cpus` define the number of (potentially virtual) CPUs to allocate to service containers. This is a fractional number.
 `0.000` means no limit.
+
+When set, `cpus` must be consistent with the `cpus` attribute in the [Deploy Specification](deploy.md#cpus).
 
 ## cpuset
 
@@ -181,6 +181,9 @@ cap_drop:
 ```
 
 ## cgroup
+
+{{< introduced compose 2.15.0 "../release-notes.md#2150" >}}
+
 `cgroup` specifies the cgroup namespace to join. When unset, it is the container runtime's decision to
 select which cgroup namespace to use, if supported.
 
@@ -387,7 +390,7 @@ expressed in the short form.
 
 - `restart`: When set to `true` Compose restarts this service after it updates the dependency service.
   This applies to an explicit restart controlled by a Compose operation, and excludes automated restart by the container runtime
-  after the container dies.
+  after the container dies. Introduced in Docker Compose version [2.17.0](../release-notes.md#2170).
 
 - `condition`: Sets the condition under which dependency is considered satisfied
   - `service_started`: An equivalent of the short syntax described above
@@ -397,7 +400,7 @@ expressed in the short form.
   - `service_completed_successfully`: Specifies that a dependency is expected to run
     to successful completion before starting a dependent service.
 - `required`: When set to `false` Compose only warns you when the dependency service isn't started or available. If it's not defined
-    the default value of `required` is `true`.
+    the default value of `required` is `true`. Introduced in Docker Compose version [2.20.0](../release-notes.md#2200).
 
 Service dependencies cause the following behaviors:
 
@@ -438,7 +441,7 @@ Compose guarantees dependency services marked with
 
 ## develop
 
-> Available with Docker Compose version 2.22.0 and later.
+{{< introduced compose 2.22.0 "../release-notes.md#2220" >}}
 
 `develop` specifies the development configuration for maintaining a container in sync with source, as defined in the [Development Section](develop.md).
 
@@ -885,7 +888,7 @@ extra_hosts:
   - "myhostv6=[::1]"
 ```
 
-The separator `=` is preferred, but `:` can also be used. For example:
+The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](../release-notes.md#2241). For example:
 
 ```yml
 extra_hosts:
@@ -947,7 +950,7 @@ healthcheck:
   start_interval: 5s
 ```
 
-`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](11-extension.md#specifying-durations).
+`interval`, `timeout`, `start_period`, and `start_interval` are [specified as durations](11-extension.md#specifying-durations). Introduced in Docker Compose version [2.20.2](../release-notes.md#2202)
 
 `test` defines the command Compose runs to check container health. It can be
 either a string or a list. If it's a list, the first item must be either `NONE`, `CMD` or `CMD-SHELL`.
@@ -1112,11 +1115,15 @@ are platform specific. Driver specific options can be set with `options` as key-
 
 ## mem_limit
 
-_DEPRECATED: use [deploy.limits.memory](deploy.md#memory)_
+`mem_limit` configures a limit on the amount of memory a container can allocate, set as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+
+When set, `mem_limit` must be consistent with the `limits.memory` attribute in the [Deploy Specification](deploy.md#memory).
 
 ## mem_reservation
 
-_DEPRECATED: use [deploy.reservations.memory](deploy.md#memory)_
+`mem_reservation` configures a reservation on the amount of memory a container can allocate, set as a string expressing a [byte value](11-extension.md#specifying-byte-values).
+
+When set, `mem_reservation` must be consistent with the `reservations.memory` attribute in the [Deploy Specification](deploy.md#memory).
 
 ## mem_swappiness
 
@@ -1278,6 +1285,8 @@ networks:
 
 ### mac_address
 
+{{< introduced compose 2.23.2 "../release-notes.md#2232" >}}
+
 `mac_address` sets the MAC address used by the service container when connecting to this particular network.
 
 ### priority
@@ -1322,13 +1331,13 @@ Supported values are platform specific.
 
 ## pids_limit
 
-_DEPRECATED: use [deploy.resources.limits.pids](deploy.md#pids)_
-
 `pids_limit` tunes a container’s PIDs limit. Set to -1 for unlimited PIDs.
 
 ```yml
 pids_limit: 10
 ```
+
+When set, `pids_limit` must be consistent with the `pids` attribute in the [Deploy Specification](deploy.md#pids).
 
 ## platform
 
@@ -1403,7 +1412,7 @@ expressed in the short form.
 - `published`: The publicly exposed port. It is defined as a string and can be set as a range using syntax `start-end`. It means the actual port is assigned a remaining available port, within the set range.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
-- `app_protocol`: The application procotol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands.
+- `app_protocol`: The application procotol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](../release-notes.md#2260).
 - `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
 - `name`: A human-readable name for the port, used to document it's usage within the service.
 
@@ -1698,6 +1707,8 @@ userns_mode: "host"
 
 ## uts
 
+{{< introduced compose 2.15.1 "../release-notes.md#2151" >}}
+
 `uts` configures the UTS namespace mode set for the service container. When unspecified
 it is the runtime's decision to assign a UTS namespace, if supported. Available values are:
 
@@ -1781,7 +1792,7 @@ expressed in the short form.
   - `nocopy`: Flag to disable copying of data from a container when a volume is created.
 - `tmpfs`: Configures additional tmpfs options:
   - `size`: The size for the tmpfs mount in bytes (either numeric or as bytes unit).
-  - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number.
+  - `mode`: The file mode for the tmpfs mount as Unix permission bits as an octal number. Introduced in Docker Compose version [2.14.0](../release-notes.md#2260).
 - `consistency`: The consistency requirements of the mount. Available values are platform specific.
 
 > **Tip**

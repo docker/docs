@@ -112,7 +112,7 @@ params:
     engine: "24.0.0"
     api: "1.41"
     desktop: "4.20.0"
-    compose: "2.20.0"
+    compose: "2.14.0"
     scout: "1.0.0"
 
 menus:
