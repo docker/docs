@@ -17,20 +17,18 @@ TBD
 
 | Property | Description | Default |
 | :--- | :--- | :--- |
-| `ENABLEDESKTOPSHORTCUT` | Creates a shortcut on the current users desktop | 1 |
-| `ADMINSETTINGS` | Automatically creates an admin-settings.json file which is used by admins to control certain Docker Desktop settings on client machines within their organization. It must be used together with the `ALLOWEDORG` property. | None |
-| `ALLOWEDORG` | Requires the user to sign in and be part of the specified Docker Hub organization when running the application. This creates the regsitry.json file containing the specified organisations. | None |
+| `ENABLEDESKTOPSHORTCUT` | Creates a desktop shortcut. | 1 |
+| `ADMINSETTINGS` | Automatically creates an `admin-settings.json` file which is used to [control certain Docker Desktop settings](../../hardened-desktop/settings-management/_index.md) on client machines within organizations. It must be used together with the `ALLOWEDORG` property. | None |
+| `ALLOWEDORG` | Requires the user to sign in and be part of the specified Docker Hub organization when running the application. This creates the `regsitry.json` file containing the specified organisations. | None |
 | `ALWAYSRUNSERVICE` | Lets users switch to Windows containers without needing admin rights | 0 |
 | `DISABLEWINDOWSCONTAINERS` | Disables the Windows containers integration | 0 |
-| `ENGINE` | The Docker Engine that will be used to run containers. This can be one of:
-`wsl` , `hyperv` or `windows` | `wsl` |
-| `PROXYHTTPMODE` | Sets the HTTP Proxy mode. This can be one of:
-`system` or `manual` | `system` |
+| `ENGINE` | Sets the Docker Engine that is used to run containers. This can be either `wsl` , `hyperv`, or `windows` | `wsl` |
+| `PROXYHTTPMODE` | Sets the HTTP Proxy mode. This can be either `system` or `manual` | `system` |
 | `OVERRIDEPROXYHTTP` | Sets the URL of the HTTP proxy that must be used for outgoing HTTP requests. | None |
 | `OVERRIDEPROXYHTTPS` | Sets the URL of the HTTP proxy that must be used for outgoing HTTPS requests. | None |
-| `OVERRIDEPROXYEXCLUD`E | Bypasses proxy settings for the hosts and domains. Uses a comma-separated list. | None |
+| `OVERRIDEPROXYEXCLUDE` | Bypasses proxy settings for the hosts and domains. Uses a comma-separated list. | None |
 | `HYPERVDEFAULTDATAROOT` | Specifies the default location for the Hyper-V VM disk. | None |
-| `WINDOWSCONTAINERSDEFAULTDATAROOT` | Specifies the default location for the Windows containers. | None |
+| `WINDOWSCONTAINERSDEFAULTDATAROOT` | Specifies the default location for Windows containers. | None |
 | `WSLDEFAULTDATAROOT` | Specifies the default location for the WSL distribution disk. | None |
 | `DISABLEENGINEINSTALL` | TBA | TBA |
 | `INSTALLFOLDER` | Specifies a custom location where Docker Desktop will be installed TODO: We will try to include for a later stage. | C:\Program Files\Docker |
@@ -81,7 +79,7 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS=
 
 > **Tip**
 >
-> Here are some useful tips to remember when creating a value that expects a JSON string as it’s value:
+> Some useful tips to remember when creating a value that expects a JSON string as it’s value:
 > 
 > - The property expects a JSON formatted string
 > - The string should be wrapped in double quotes
