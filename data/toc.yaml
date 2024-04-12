@@ -1111,10 +1111,10 @@ Manuals:
          section:
          - path: /desktop/install/msi/
            title: Overview
-         - path: /desktop/install/msi/quickstart/
-           title: Quickstart
          - path: /desktop/install/msi/install-and-configure/
            title: Install and configure
+         - path: /desktop/install/msi/install-scenarios/
+           title: Install scenarios
          - path: /desktop/install/msi/faq/
            title: FAQs
        - path: /desktop/windows/permission-requirements/

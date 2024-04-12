@@ -1,12 +1,23 @@
 ---
 title: Install and configure
-description:
-keywords:
+description: Understand how to use the MSI installer. Also explore additional configuration options.
+keywords: msi, windows, docker desktop, install, deploy, configure
 ---
 
 ## Install 
 
-TBD
+{< tabs >}}
+{{< tab name="Install interactively" >}}
+
+TODO
+
+{{< /tab >}}
+{{< tab name="Install from the command line" >}}
+
+TODO
+
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Configuration options 
 
@@ -18,6 +29,7 @@ TBD
 | Property | Description | Default |
 | :--- | :--- | :--- |
 | `ENABLEDESKTOPSHORTCUT` | Creates a desktop shortcut. | 1 |
+| `INSTALLFOLDER` | Specifies a custom location where Docker Desktop will be installed. | C:\Program Files\Docker |
 | `ADMINSETTINGS` | Automatically creates an `admin-settings.json` file which is used to [control certain Docker Desktop settings](../../hardened-desktop/settings-management/_index.md) on client machines within organizations. It must be used together with the `ALLOWEDORG` property. | None |
 | `ALLOWEDORG` | Requires the user to sign in and be part of the specified Docker Hub organization when running the application. This creates the `regsitry.json` file containing the specified organisations. | None |
 | `ALWAYSRUNSERVICE` | Lets users switch to Windows containers without needing admin rights | 0 |
@@ -30,8 +42,6 @@ TBD
 | `HYPERVDEFAULTDATAROOT` | Specifies the default location for the Hyper-V VM disk. | None |
 | `WINDOWSCONTAINERSDEFAULTDATAROOT` | Specifies the default location for Windows containers. | None |
 | `WSLDEFAULTDATAROOT` | Specifies the default location for the WSL distribution disk. | None |
-| `DISABLEENGINEINSTALL` | TBA | TBA |
-| `INSTALLFOLDER` | Specifies a custom location where Docker Desktop will be installed TODO: We will try to include for a later stage. | C:\Program Files\Docker |
 
 ### Silent installations
 
