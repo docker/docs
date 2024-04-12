@@ -16,4 +16,4 @@ Bulk deployments are useful because users don't need to download and install Doc
 
 - Follow the [Quickstart](quickstart.md) guide to quickly deploy Docker Desktop with its default values. 
 - Explore the [installation scenarios and configuration options](install-and-configure.md).
-- Read the [FAQs](faqs.md).
+- Read the [FAQs](faq.md).

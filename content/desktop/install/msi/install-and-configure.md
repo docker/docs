@@ -16,13 +16,13 @@ TBD
 { .important }
 
 | Property | Description | Default |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `ENABLEDESKTOPSHORTCUT` | Creates a shortcut on the current users desktop | 1 |
 | `ADMINSETTINGS` | Automatically creates an admin-settings.json file which is used by admins to control certain Docker Desktop settings on client machines within their organization. It must be used together with the `ALLOWEDORG` property. | None |
 | `ALLOWEDORG` | Requires the user to sign in and be part of the specified Docker Hub organization when running the application. This creates the regsitry.json file containing the specified organisations. | None |
 | `ALWAYSRUNSERVICE` | Lets users switch to Windows containers without needing admin rights | 0 |
 | `DISABLEWINDOWSCONTAINERS` | Disables the Windows containers integration | 0 |
-| `ENGINE` | The docker engine that will be used to run containers. This can be one of:
+| `ENGINE` | The Docker Engine that will be used to run containers. This can be one of:
 `wsl` , `hyperv` or `windows` | `wsl` |
 | `PROXYHTTPMODE` | Sets the HTTP Proxy mode. This can be one of:
 `system` or `manual` | `system` |
