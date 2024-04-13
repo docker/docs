@@ -1412,7 +1412,7 @@ expressed in the short form.
 - `published`: The publicly exposed port. It is defined as a string and can be set as a range using syntax `start-end`. It means the actual port is assigned a remaining available port, within the set range.
 - `host_ip`: The Host IP mapping, unspecified means all network interfaces (`0.0.0.0`).
 - `protocol`: The port protocol (`tcp` or `udp`). Defaults to `tcp`.
-- `app_protocol`: The application procotol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](../release-notes.md#2260).
+- `app_protocol`: The application protocol (TCP/IP level 4 / OSI level 7) this port is used for. This is optional and can be used as a hint for Compose to offer richer behavior for protocols that it understands. Introduced in Docker Compose version [2.26.0](../release-notes.md#2260).
 - `mode`: `host`: For publishing a host port on each node, or `ingress` for a port to be load balanced. Defaults to `ingress`.
 - `name`: A human-readable name for the port, used to document it's usage within the service.
 
