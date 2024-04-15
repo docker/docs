@@ -1,5 +1,5 @@
 ---
-description: Learn about best practices for videos in docs, and how about the component to add videos.
+description: Learn about guidelines and best practices for videos in docs, and how to add a video component.
 title: Videos
 toc_max: 3
 ---
