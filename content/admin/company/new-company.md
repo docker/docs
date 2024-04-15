@@ -64,4 +64,4 @@ For more information on how you can add organizations to your company, see [Add 
 
 ## More resources
 
-- [Video demo: Create a company](https://youtu.be/XZ5_i6qiKho?feature=shared&t=359)
+- [Video: Create a company](https://youtu.be/XZ5_i6qiKho?feature=shared&t=359)

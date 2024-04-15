@@ -99,4 +99,4 @@ To view a team's permissions across all repositories:
 ## More resources
 
 - [Video: Docker teams](https://youtu.be/WKlT1O-4Du8?feature=shared&t=348)
-- [Video demo: Roles, teams, and repositories](https://youtu.be/WKlT1O-4Du8?feature=shared&t=435)
+- [Video: Roles, teams, and repositories](https://youtu.be/WKlT1O-4Du8?feature=shared&t=435)

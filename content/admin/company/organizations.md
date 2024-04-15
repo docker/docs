@@ -88,5 +88,5 @@ For more details about managing an organization, see [Organization administratio
 
 ## More resources
 
-- [Video demo: Managing a company and nested organizations](https://youtu.be/XZ5_i6qiKho?feature=shared&t=229)
-- [Video demo: Adding nested organizations to a company](https://youtu.be/XZ5_i6qiKho?feature=shared&t=454)
+- [Video: Managing a company and nested organizations](https://youtu.be/XZ5_i6qiKho?feature=shared&t=229)
+- [Video: Adding nested organizations to a company](https://youtu.be/XZ5_i6qiKho?feature=shared&t=454)
