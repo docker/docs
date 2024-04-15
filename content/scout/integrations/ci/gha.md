@@ -124,26 +124,26 @@ With this setup out of the way, you can add the following steps to run the
 image comparison:
 
 ```yaml
-# You can skip this step if Docker Hub is your registry
-# and you already authenticated before
-- name: Authenticate to Docker
-  uses: docker/login-action@v3
-  with:
-    username: ${{ secrets.DOCKER_USER }}
-    password: ${{ secrets.DOCKER_PAT }}
+      # You can skip this step if Docker Hub is your registry
+      # and you already authenticated before
+      - name: Authenticate to Docker
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PAT }}
 
-# Compare the image built in the pull request with the one in production
-- name: Docker Scout
-  id: docker-scout
-  if: ${{ github.event_name == 'pull_request' }}
-  uses: docker/scout-action@v1
-  with:
-    command: compare
-    image: ${{ steps.meta.outputs.tags }}
-    to-env: production
-    ignore-unchanged: true
-    only-severities: critical,high
-    github-token: ${{ secrets.GITHUB_TOKEN }}
+      # Compare the image built in the pull request with the one in production
+      - name: Docker Scout
+        id: docker-scout
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: docker/scout-action@v1
+        with:
+          command: compare
+          image: ${{ steps.meta.outputs.tags }}
+          to-env: production
+          ignore-unchanged: true
+          only-severities: critical,high
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 The compare command analyzes the image and evaluates policy compliance, and
