@@ -17,8 +17,6 @@ grid_genai:
   description: Explore a face detection app built with TensorFlow.js and Docker.
   icon: face
   link: /guides/use-case/tensorflowjs/
-
-grid_nlp:
 - title: Language translation
   description: Build and run an app to translate languages.
   link: /guides/use-case/nlp/language-translation/
@@ -45,14 +43,6 @@ Explore this collection of use-case guides designed to help you leverage Docker
 for a variety of advanced applications. From generative AI to security, discover
 how Docker can streamline your projects and workflows.
 
-## AI/ML
-
-{{< grid items="grid_genai" >}}
-
-## Natural language processing
-
-{{< grid items="grid_nlp" >}}
-
 ## Data science
 
 {{< card
@@ -61,6 +51,20 @@ how Docker can streamline your projects and workflows.
   link=/guides/use-case/jupyter/
   description="Set up a JupyterLab environment to conduct and share data science research, making your projects more reproducible and scalable."
 >}}
+
+## Databases & storage
+
+{{< card
+  title="Use containerized databases"
+  icon=storage
+  link=/guides/use-case/databases/
+  description="Learn how to run and manage containerized databases."
+>}}
+
+## Machine learning & AI
+
+{{< grid items="grid_genai" >}}
+
 
 ## Security
 
@@ -71,11 +75,3 @@ how Docker can streamline your projects and workflows.
   description="Learn how to suppress non-applicable or fixed vulnerabilities found in your images."
 >}}
 
-## Databases
-
-{{< card
-  title="Use containerized databases"
-  icon=storage
-  link=/guides/use-case/databases/
-  description="Learn how to run and manage containerized databases."
->}}
