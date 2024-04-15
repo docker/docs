@@ -46,11 +46,10 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Upgrades
 
-- [Docker Compose v2.26.0](https://github.com/docker/compose/releases/tag/v2.26.0)
+- [Docker Compose v2.26.1](https://github.com/docker/compose/releases/tag/v2.26.1)
 - [Docker Scout CLI v1.6.3](https://github.com/docker/scout-cli/releases/tag/v1.6.3)
 - [Docker Engine v26.0.0](https://docs.docker.com/engine/release-notes/26.0/#2600)
 - [Buildx v0.13.1](https://github.com/docker/buildx/releases/tag/v0.13.1)
-- [Docker Scout CLI v1.6.0](https://github.com/docker/scout-cli/releases/tag/v1.6.0)
 - [Kubernetes v1.29.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.2)
 - [cri-dockerd v0.3.11](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.11)
 - Docker Debug v0.0.27
@@ -97,6 +96,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### Security
 
 - Disabled Electron `runAsNode` fuse to improve security hardening. For more info, see [Electron's documentation.](https://www.electronjs.org/blog/statement-run-as-node-cves)
+
+### Known issues
+
+#### For Mac
+
+- Docker Desktop on Apple Silicon doesn't start if Rosetta is not installed. This will be fixed in future releases. See [docker/for-mac#7243](https://github.com/docker/for-mac/issues/7243).
 
 ## 4.28.0
 

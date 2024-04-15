@@ -96,10 +96,9 @@ To empty a volume:
 
 ## Export a volume
 
-> **Beta**
+> **Beta feature**
 >
-> The export volume feature is in [Beta](../../release-lifecycle.md/#beta).
-> Docker recommends that you don't use this feature in production environments.
+> The export volume feature is currently in [Beta](../../release-lifecycle.md/#beta).
 { .experimental }
 
 You can export the content of a volume to a local file, a local image, or an to
@@ -128,10 +127,9 @@ To export a volume:
 
 ## Import a volume
 
-> **Beta**
+> **Beta feature**
 >
-> The import volume feature is in [Beta](../../release-lifecycle.md/#beta).
-> Docker recommends that you don't use this feature in production environments.
+> The import volume feature is currently in [Beta](../../release-lifecycle.md/#beta).
 { .experimental }
 
 You can import a local file, a local image, or an image from Docker Hub. Any
