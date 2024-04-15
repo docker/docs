@@ -684,6 +684,8 @@ Reference:
       title: docker scout integration list
     - path: /reference/cli/docker/scout/policy/
       title: docker scout policy
+    - path: /reference/cli/docker/scout/push/
+      title: docker scout push
     - path: /reference/cli/docker/scout/quickview/
       title: docker scout quickview
     - path: /reference/cli/docker/scout/recommendations/
