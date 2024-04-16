@@ -13,7 +13,7 @@ ENV NODE_ENV=production
 RUN npm install
 
 FROM base AS hugo
-ARG HUGO_VERSION=0.122.0
+ARG HUGO_VERSION=0.124.1
 ARG TARGETARCH
 WORKDIR /tmp/hugo
 RUN wget -O "hugo.tar.gz" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-${TARGETARCH}.tar.gz"

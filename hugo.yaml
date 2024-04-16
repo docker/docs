@@ -230,7 +230,7 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.116.1"
+    min: "0.124.1"
   mounts:
     - source: assets
       target: assets
