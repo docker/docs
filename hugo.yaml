@@ -126,9 +126,6 @@ menus:
   - name: Reference
     url: /reference/
     weight: 3
-  - name: Samples
-    url: /samples/
-    weight: 4
 
   footer:
     - url: https://www.docker.com/products
