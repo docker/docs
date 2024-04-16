@@ -32,6 +32,8 @@ directory.
 ├── r-docker/
 │ ├── src/
 │ │ └── app.R
+│ ├── src_db/
+│ │ └── app_db.R
 │ ├── compose.yaml
 │ ├── Dockerfile
 │ └── README.md

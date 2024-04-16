@@ -25,6 +25,16 @@ Change to a directory where you want to clone the repository and run the followi
 $ git clone https://github.com/mfranzon/r-docker-dev.git
 ```
 
+## Configure the application to use the database
+
+To try the connection between the Shiny application and the local database you have to modify the `Dockerfile` changing the `COPY` instruction:
+
+```diff
+-RUN src/ .
++RUN src_db/ .
+```
+
+
 
 ## Add a local database and persist data
 
@@ -91,7 +101,7 @@ mysecretpassword
 
 Save and close the `password.txt` file.
 
-You should now have the following contents in your `python-docker-dev`
+You should now have the following contents in your `r-docker-dev`
 directory.
 
 ```text
@@ -99,7 +109,9 @@ directory.
 │ ├── db/
 │ │ └── password.txt
 │ ├── src/
-│ │ └── app.py
+│ │ └── app.R
+│ ├── src_db/
+│ │ └── app_db.R
 │ ├── requirements.txt
 │ ├── .dockerignore
 │ ├── compose.yaml

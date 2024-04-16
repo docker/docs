@@ -5,7 +5,7 @@ title: R language-specific guide
 toc_min: 1
 toc_max: 2
 ---
-The Python language-specific guide teaches you how to containerize a R application using Docker. In this guide, you’ll learn how to:
+The R language-specific guide teaches you how to containerize a R application using Docker. In this guide, you’ll learn how to:
 
 * Containerize and run a R application
 * Set up a local environment to develop a R application using containers
