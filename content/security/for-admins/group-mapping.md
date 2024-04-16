@@ -100,3 +100,10 @@ Once complete, a user who signs in to Docker through SSO is automatically added 
 >
 > [Enable SCIM](scim.md) to take advantage of automatic user provisioning and de-provisioning. If you don't enable SCIM users are only automatically provisioned. You have to de-provision them manually.
 { .tip }
+
+## More resources
+
+The following videos demonstrate how to use group mapping with your IdP.
+
+- [Video: Group mapping with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=3023)
+- [Video: Attribute and group mapping with Entra ID (Azure)](https://youtu.be/bGquA8qR9jU?feature=shared&t=2039)

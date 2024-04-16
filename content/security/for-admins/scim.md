@@ -254,3 +254,12 @@ If SCIM is disabled, any user provisioned through SCIM will remain in the organi
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## More resources
+
+The following videos demonstrate how to configure SCIM for your IdP.
+
+- [Video: Configure SCIM with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=1314)
+- [Video: Attribute mapping with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=1998)
+- [Video: Configure SCIM with Entra ID (Azure)](https://youtu.be/bGquA8qR9jU?feature=shared&t=1668)
+- [Video: Attribute and group mapping with Entra ID (Azure)](https://youtu.be/bGquA8qR9jU?feature=shared&t=2039)
