@@ -69,6 +69,8 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
+See [More resources](#more-resources) for a video overview on how to set up SSO with SAML in Okta.
+
 1. Go to the Okta admin portal.
 2. Go to **Applications > Applications > Create App Integration**.
 3. Select **SAML 2.0**, then select **Next**.
@@ -89,7 +91,7 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 7. Select **I'm an Okta customer adding an internal app**.
 8. Select **Finish**.
 9. After you create the app, go to your app and select **View SAML setup instructions**.
-10. Here you can find the **SAML Sign-in URL** and the **x509 Certificate**. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console. Then, paste the value of the **SAML Sign-in URL** and paste it into the corresponding field in Docker Hub or Admin Console.
+10. Here you can find the **SAML Sign-in URL** and the **x509 Certificate**. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console. Then, copy the value of the **SAML Sign-in URL** and paste it into the corresponding field in Docker Hub or Admin Console.
 
 {{< /tab >}}
 {{< tab name="Entra ID SAML 2.0" >}}
@@ -118,6 +120,8 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 
 {{< /tab >}}
 {{< tab name="Azure Connect (OIDC)" >}}
+
+See [More resources](#more-resources) for a video overview on how to set up SSO with Azure Connect (OIDC).
 
 ### Create app registration
 
@@ -165,12 +169,14 @@ In the Docker console, paste the following values obtained in the previous steps
 {{< /tab >}}
 {{< /tabs >}}
 
+## More resources
+
+The following videos demonstrate how to configure your IdP with your Docker SSO connection.
+
+- [Video: SSO connection with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=633)
+- [Video: SSO connection with Azure Connect (OIDC)](https://youtu.be/bGquA8qR9jU?feature=shared&t=630)
+- [Video: SSO connection with Entra ID (Azure) SAML](https://youtu.be/bGquA8qR9jU?feature=shared&t=1246)
+
 ## What's next?
 
 [Complete your connection](../connect/_index.md) in the Docker console, then test your connection.
-
-## More resources
-
-The following video provides an overview of configuring SSO with SAML in Entra ID (formerly Azure AD).
-
-<iframe title="Configure SSO with SAML in Entra ID overview" class="border-0 w-full aspect-video mb-8" allow="fullscreen" src="https://www.loom.com/embed/0a30409381f340cfb01790adbd9aa9b3?sid=7e4e10a7-7f53-437d-b593-8a4886775632"></iframe>

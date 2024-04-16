@@ -174,3 +174,7 @@ sysbox-runc
 ```
 
 Without Enhanced Container Isolation, `docker inspect` outputs `runc`, which is the standard OCI runtime.
+
+## More resources
+
+- [Video: Enhanced Container Isolation](https://www.youtube.com/watch?v=oA1WQZWnTAk)

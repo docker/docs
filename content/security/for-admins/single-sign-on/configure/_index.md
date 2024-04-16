@@ -56,6 +56,13 @@ This page walks through steps 1 and 2 using Docker Hub or the Admin Console.
 {{< /tab >}}
 {{< /tabs >}}
 
+## More resources
+
+The following videos walk through verifying your domain to create your SSO connection in Docker.
+
+- [Video: Verify your domain for SSO with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=529)
+- [Video: Verify your domain for SSO with Azure AD (OIDC)](https://youtu.be/bGquA8qR9jU?feature=shared&t=496)
+
 ## What's next?
 
 [Continue configuration in your IdP](./configure-idp.md).

@@ -104,12 +104,6 @@ configure your organization.
 - **Billing**: Displays information about your existing
 [Docker subscription (plan)](../../subscription/_index.md), including the number of seats and next payment due date. For how to access the billing history and payment methods for your organization, see [View billing history](../../billing/core-billing/history.md).
 
-## Videos
+## More resources
 
-You can also check out the following videos for information about creating Teams
-and Organizations in Docker Hub.
-
-- [Overview of organizations](https://www.youtube-nocookie.com/embed/G7lvSnAqed8)
-- [Create an organization](https://www.youtube-nocookie.com/embed/b0TKcIqa9Po)
-- [Working with Teams](https://www.youtube-nocookie.com/embed/MROKmtmWCVI)
-- [Create Teams](https://www.youtube-nocookie.com/embed/78wbbBoasIc)
+- [Video: Docker Hub Organizations](https://www.youtube.com/watch?v=WKlT1O-4Du8)
