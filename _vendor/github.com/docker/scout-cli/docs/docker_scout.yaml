@@ -15,6 +15,7 @@ cname:
     - docker scout help
     - docker scout integration
     - docker scout policy
+    - docker scout push
     - docker scout quickview
     - docker scout recommendations
     - docker scout repo
@@ -30,6 +31,7 @@ clink:
     - docker_scout_help.yaml
     - docker_scout_integration.yaml
     - docker_scout_policy.yaml
+    - docker_scout_push.yaml
     - docker_scout_quickview.yaml
     - docker_scout_recommendations.yaml
     - docker_scout_repo.yaml
