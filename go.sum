@@ -162,6 +162,8 @@ github.com/docker/scout-cli v1.4.1 h1:jRHO3LI3x2eMrvObKC6uadoRATbwZSXm1NafSzo9Cu
 github.com/docker/scout-cli v1.4.1/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/docker/scout-cli v1.6.0 h1:07Kn2d/AshUSUk64ArZzE31lj4h7waGi8tjrFXxMZLY=
 github.com/docker/scout-cli v1.6.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
+github.com/docker/scout-cli v1.7.0 h1:2dEbQKqkxM6wsJab/Ma3EJacS9ZrkVs1C4KbjXggJjY=
+github.com/docker/scout-cli v1.7.0/go.mod h1:Eo1RyCJsx3ldz/YTY5yGxu9g9mwTYbRUutxQUkow3Fc=
 github.com/elazarl/goproxy v0.0.0-20191011121108-aa519ddbe484/go.mod h1:Ro8st/ElPeALwNFlcTpWmkr6IoMFfkjXAvTHpevnDsM=
 github.com/evanphx/json-patch v4.9.0+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
