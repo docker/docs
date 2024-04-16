@@ -98,10 +98,4 @@ For more information, see [Docker Data Processing Agreement](https://www.docker.
 
 Before seeking support, you can perform basic troubleshooting. See [Diagnose and troubleshooting](../desktop/troubleshoot/overview.md) for more information.
 
-You can also see if an answer already exists in the following FAQs:
-- [Docker Business or Team onboarding](faq/admin/general-faqs.md)
-- [Docker Desktop](../desktop/faqs/general.md)
-- [Docker Desktop for Linux](../desktop/faqs/linuxfaqs.md)
-- [Docker Desktop for Mac](../desktop/faqs/macfaqs.md)
-- [Docker Desktop for Windows](../desktop/faqs/windowsfaqs.md)
-- [Single Sign-on](faq/security/single-sign-on/faqs.md)
+You can also see if an answer already exists in the [FAQs](/tags/faq/).

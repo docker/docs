@@ -129,9 +129,6 @@ menus:
   - name: Samples
     url: /samples/
     weight: 4
-  - name: FAQ
-    url: /faq/
-    weight: 5
 
   footer:
     - url: https://www.docker.com/products

@@ -2,8 +2,10 @@
 description: Organization FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, organizations, administration
 title: FAQs on organizations
+tags: [FAQ]
 aliases:
 - /docker-hub/organization-faqs/
+- /faq/admin/organization-faqs/
 ---
 
 ### What if the Docker ID I want for my organization or company is taken?
