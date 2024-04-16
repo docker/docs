@@ -22,7 +22,7 @@ The sample application uses the popular [Shiny](https://shiny.posit.co/) framewo
 Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
 
 ```console
-$ git clone https://github.com/mfranzon/r-docker.git
+$ git clone https://github.com/mfranzon/r-docker-dev.git
 ```
 
 You should now have the following contents in your `r-docker`
