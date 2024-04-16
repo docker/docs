@@ -8,13 +8,33 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.7.0
+
+{{< release-date date="2024-04-15" >}}
+
+### New
+
+- The [`docker scout push` command](/reference/cli/docker/scout/push/) is now fully available: analyze images locally and push the SBOM to Docker Scout.
+
+### Bug fixes and enhancements
+
+- Fix adding attestations with `docker scout attestation add` to images in private repositories
+- Fix image processing for images based on the empty `scratch` base image
+- A new `sbom://` protocol for Docker Scout CLI commands let you read a Docker Scout SBOM from standard input.
+
+  ```console
+  $ docker scout sbom IMAGE | docker scout qv sbom://
+  ```
+
+- Add classifier for Joomla packages
+
 ## 1.6.4
 
 {{< release-date date="2024-03-26" >}}
 
-### Bug fix
+### Bug fixes and enhancements
 
-- Fix epoch handling for rpm-based images.
+- Fix epoch handling for RPM-based Linux distributions
 
 ## 1.6.3
 

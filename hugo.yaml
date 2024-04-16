@@ -293,3 +293,9 @@ module:
         - source: docs/reference
           target: data/compose-cli
           includeFiles: "*.yaml"
+
+    - path: github.com/docker/scout-cli
+      mounts:
+        - source: docs
+          target: data/scout-cli
+          includeFiles: "*.yaml"
