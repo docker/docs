@@ -8,7 +8,8 @@ toc_max: 3
 
 Videos are used rarely in Docker's documentation. When used, video should complement written text and not be the sole format of documentation. Videos can take longer to produce and be more difficult to maintain than written text or even screenshots, so consider the following before adding video:
 
-- Can you demonstrate a clear customer need for using video ?
+- Can you demonstrate a clear customer need for using video?
+- Does the video offer new content, rather than directly reading or re-purposing official documentation?
 - If the video contains user interfaces that may change regularly, do you have a maintenance plan to keep the video fresh?
 - Does the [voice and tone](../style/voice-tone.md) of the video align with the rest of the documentation?
 - Have you considered other options, such as screenshots or clarifying existing documentation?
