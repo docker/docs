@@ -140,7 +140,7 @@ To learn more about writing a Dockerfile, visit the following resources:
 * [Dockerfile reference](/reference/dockerfile/)
 * [Dockerfile best practices](/develop/develop-images/dockerfile_best-practices/)
 * [Create your own base image](/build/building/base-images/)
-* [Getting Started with Docker init](/reference/cli/docker/init/)
+* [Getting started with Docker Init](/reference/cli/docker/init/)
 
 Now that you have created a Dockerfile and learned the basics, it's time to learn about building, tagging, and pushing the images.
 
