@@ -42,7 +42,7 @@ You can use containers to set up local services, like a database. In this sectio
 
 In the cloned repository's directory, open the `compose.yaml` file in an IDE or text editor. 
 
-In the `compose.yaml` file, you need to uncomment all of the database instructions. In addition, you need to add the database password file as an environment variable to the server service and specify the secret file to use .
+In the `compose.yaml` file, you need to un-comment the properties for configuring the database. You must also mount the database password file and set an environment variable on the `shiny-app` service pointing to the location of the file in the container.
 
 The following is the updated `compose.yaml` file.
 
