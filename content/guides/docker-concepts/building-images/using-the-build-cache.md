@@ -227,7 +227,7 @@ In this hands-on, you will learn how to use the Docker build cache effectively f
 
     To fix this, you need to restructure your Dockerfile to help support the caching of the dependencies. For Node-based applications, those dependencies are defined in the `package.json` file. So what if you start by copying only that file first, install the dependencies, and then copy everything else? Then, you only recreate the yarn dependencies if there was a change to the package.json. Make sense?
 
-    Update the Dockerfile to copy in the package.json first, install dependencies, and then copy everything else in.
+6. Update the Dockerfile to copy in the `package.json` file first, install dependencies, and then copy everything else in.
 
      ```dockerfile
      FROM node:20-alpine
