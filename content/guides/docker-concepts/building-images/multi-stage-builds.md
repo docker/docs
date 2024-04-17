@@ -174,7 +174,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
      ```
 
 
- 7. Set the default command to be executed when the container starts. This command instructs the container to run the Maven wrapper (`./mvnw`) with the `spring-boot:run` goal, which will build and execute your Spring Boot application
+ 7. Set the default command to be executed when the container starts. This command instructs the container to run the Maven wrapper (`./mvnw`) with the `spring-boot:run` goal, which will build and execute your Spring Boot application.
 
      ```dockerfile
      CMD ["./mvnw", "spring-boot:run"]
