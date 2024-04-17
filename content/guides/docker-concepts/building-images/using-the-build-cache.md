@@ -33,7 +33,7 @@ So, when does Docker decide it's time to hit the refresh button on its cache? We
 
 By keeping an eye on these triggers, Docker ensures that each build reflects the most up-to-date state of your project, keeping everything running smoothly and preventing any surprises along the way.
 
-But you might ask “Why is it important to use the cache effectively?”
+But you might ask, “Why is it important to use the cache effectively?”
 
 - First off, speed! Using the cache effectively means faster builds. When Docker can reuse previous results, it skips unnecessary steps, shaving off valuable time.
 - Then there's storage. Efficient cache usage means you're not storing redundant data. By reusing cached layers instead of creating new ones, you're saving space on your system.
