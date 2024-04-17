@@ -59,7 +59,7 @@ In this hands-on experience, you'll unlock the power of multi-stage builds to cr
 
     Select **Generate** to create and download the zip file for this project.
 
-For this demonstration, you’ve paired Maven build automation with Java, a Spring Web dependency, and Java 21 for your metadata.
+    For this demonstration, you’ve paired Maven build automation with Java, a Spring Web dependency, and Java 21 for your metadata.
 
 
 3. Navigate the project structure. Once you unzip the file, you'll see the following project directory structure:
