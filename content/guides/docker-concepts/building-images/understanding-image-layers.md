@@ -191,7 +191,7 @@ Now that you have a base image, you can extend that image to build additional im
 6. Now that you’re done with your containers, you can remove them using the following command:
 
     ```console
-    $ docker rm -f sample-app app-container
+    $ docker rm -f app-container
     ```
 
 ## Additional resources
