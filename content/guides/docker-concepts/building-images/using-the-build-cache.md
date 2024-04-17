@@ -90,7 +90,7 @@ In this hands-on, you will learn how to use the Docker build cache effectively f
 
 5. Re-building without changes
 
-   Now, let’s re-run the `docker build` command without making any change in the source code or Dockerfile as shown:
+   Now, re-run the `docker build` command without making any change in the source code or Dockerfile as shown:
 
     ```console
     $ docker build -t node-app:1.0 .
