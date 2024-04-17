@@ -245,7 +245,7 @@ In this hands-on, you will learn how to use the Docker build cache effectively f
      node_modules
      ```
 
-     Let’s build the new image:
+8. Build the new image:
 
     ```console
     $ docker build -t node-app:2.0 .
