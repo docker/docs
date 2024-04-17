@@ -154,7 +154,7 @@ Now that you have a repository on Docker Hub, it's time for you to build an imag
     $ docker build -t mobywhale/concepts-build-image-demo .
     ```
 
-2. Once the build has completed, you can view the image by using the CLI or the GUI.
+2. Once the build has completed, you can view the image by using the following command:
 
     ```console
     $ docker image ls
