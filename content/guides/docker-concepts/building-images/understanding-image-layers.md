@@ -155,7 +155,7 @@ Now that you have a base image, you can extend that image to build additional im
     $ docker commit -c "CMD node app.js" -m "Add app" app-container sample-app
     ```
 
-    This command will create a new image named `sample-app`, but also adds additional configuration to the image to set the default command when starting a container. In this case, you are setting it to automatically run `node app.js`.
+    This command not only creates a new image named `sample-app`, but also adds additional configuration to the image to set the default command when starting a container. In this case, you are setting it to automatically run `node app.js`.
 
 4. In a terminal outside of the container, run the following command to view the update layers:
 
