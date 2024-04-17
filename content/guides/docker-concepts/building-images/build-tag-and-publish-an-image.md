@@ -217,7 +217,7 @@ To learn more about building, tagging, and publishing images, visit the followin
 * [docker push reference](/engine/reference/commandline/image_push/)
 * [What is a registry?](/guides/docker-concepts/the-basics/what-is-a-registry/)
 
-Now that you have learned about building and publishing images, it's time to learn how to speed up build process using the Docker build cache.
+Now that you have learned about building and publishing images, it's time to learn how to speed up the build process using the Docker build cache.
 
 {{< button text="Using the build cache" url="using-the-build-cache" >}}
 
