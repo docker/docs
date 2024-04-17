@@ -88,7 +88,7 @@ In this hands-on, you will learn how to use the Docker build cache effectively f
 
     The first line indicates that the entire build process took *20.0 seconds*. The first build may take some time as it installs dependencies.
 
-5. Re-building without changes
+5. Rebuild without making changes.
 
    Now, re-run the `docker build` command without making any change in the source code or Dockerfile as shown:
 
