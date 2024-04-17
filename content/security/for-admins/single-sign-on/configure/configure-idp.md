@@ -69,7 +69,26 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 {{< tabs >}}
 {{< tab name="Okta" >}}
 
-See [More resources](#more-resources) for a video overview on how to set up SSO with SAML in Okta.
+You can configure Docker with Okta using the pre-configured Docker integration, or by creating a custom application. We recommend the [Docker app integration](#add-the-app-integration-in-okta).
+
+### Add the app integration in Okta
+
+1. Sign in to the Okta Console.
+2. Select **Applications > Add Application**.
+3. Search for Docker.
+4. Select **Add**. This opens the **General Settings** page.
+5. Configure the following settings:
+   - **Application label**: Leave this as Docker or customize if you prefer.
+   - **Docker SSO Connection ID**: Copy this value from Docker Hub or Admin Console and paste it here.
+     ![Single sign-on connection ID](../images/sso-connection-id.png)
+   - **Application visibility**: Optionally, configure if you want this app visible to your users.
+6. Select **Done**.
+7. After you create the app, go to your app and select **View SAML setup instructions**.
+8. Here you can find the **SAML Sign-in URL** and the **x509 Certificate**. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console. Then, copy the value of the **SAML Sign-in URL** and paste it into the corresponding field in Docker Hub or Admin Console.
+
+### Create a custom application in Okta
+
+See [More resources](#more-resources) for a video overview on how to set up a custom SSO application with SAML in Okta.
 
 1. Go to the Okta admin portal.
 2. Go to **Applications > Applications > Create App Integration**.
@@ -94,7 +113,7 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 10. Here you can find the **SAML Sign-in URL** and the **x509 Certificate**. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console. Then, copy the value of the **SAML Sign-in URL** and paste it into the corresponding field in Docker Hub or Admin Console.
 
 {{< /tab >}}
-{{< tab name="Entra ID SAML 2.0" >}}
+{{< tab name="Entra ID SAML" >}}
 
 > **Tip**
 >
@@ -117,6 +136,14 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 8. From section **SAML Signing Certificate** download **Certificate (Base64)**.
 9. Open the certificate file in a text editor and paste the contents of the file in the **x509 Certificate** field in Docker Hub or Admin Console.
 10. From the section **Set up Docker**, copy **Login URL** and paste it into the **SAML Sign-in URL** field in Docker Hub or Admin Console.
+
+{{< /tab >}}
+{{< tab name="SAML 2.0" >}}
+
+Refer to the documentation for your IdP for configuration details. You will need the following values from your Docker SSO connection to configure your IdP:
+
+- **Entity ID**
+- **ACS URL**
 
 {{< /tab >}}
 {{< tab name="Azure Connect (OIDC)" >}}

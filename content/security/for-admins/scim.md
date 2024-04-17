@@ -75,6 +75,8 @@ The user interface for your IdP may differ slightly from the following steps. Yo
 
 ### Enable SCIM
 
+If you're using the [Docker app integration](/security/for-admins/single-sign-on/configure/configure-idp/#add-the-app-integration-in-okta) for your SSO connection, SCIM is already configured. If you manually created your application in Okta, complete the following steps:
+
 1. Go to the Okta admin portal.
 2. Go to the app you created when you configured your SSO connection.
 3. On the app page, go to the **General** tab and select **Edit App Settings**.
@@ -149,6 +151,8 @@ The external namespace to use to set up these attributes is `urn:ietf:params:sci
 {{< tab name="Okta" >}}
 
 ### Set up
+
+If you're using the [Docker app integration](/security/for-admins/single-sign-on/configure/configure-idp/#add-the-app-integration-in-okta) for your SSO connection, role mapping is already configured. If you manually created your application in Okta, complete the following steps:
 
 1. Setup [SSO](./single-sign-on/configure/_index.md) and SCIM first.
 2. In the Okta admin portal, go to **Directory > Profile Editor** and select **User (Default)**.
