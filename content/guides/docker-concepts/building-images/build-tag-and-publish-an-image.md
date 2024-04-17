@@ -205,7 +205,7 @@ Now that you have an image built, it's time to push the image to a registry.
 
     If you receive a `requested access to the resource is denied`, make sure you are both logged in and that your Docker username is correct in the image tag.
 
-    After a moment, your image should be pushed to Docker Hub! :tada:
+    After a moment, your image should be pushed to Docker Hub! 🎉
 
 ## Additional resources
 
