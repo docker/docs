@@ -62,7 +62,7 @@ That name certainly isn't memorable, which is where tagging becomes useful.
 
 Tagging images is the method to provide an image with a memorable name. However, there is a structure to the name of an image. A full image name has the following structure:
 
-```
+```text
 [HOST[:PORT_NUMBER]/]PATH[:TAG]
 ```
 
