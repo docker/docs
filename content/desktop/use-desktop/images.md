@@ -101,5 +101,6 @@ Hovering over an image tag reveals two options:
 - **View in Hub**: Open the Docker Hub page and display detailed information about the image.
 
 ## Additional resources
+
 - [Run Docker Hub images](../../guides/walkthroughs/run-hub-images.md)
 - [Publish your image](../../guides/walkthroughs/publish-your-image.md)

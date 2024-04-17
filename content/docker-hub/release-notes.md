@@ -201,6 +201,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 ## 2019-10-21
 
 ### New features
+
 * **Beta:** Docker Hub now supports two-factor authentication (2FA). Enable it in your account settings, under the **[Security](https://hub.docker.com/settings/security)** section.
 
     > If you lose both your 2FA authentication device and recovery code, you may
@@ -208,6 +209,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
     { .important }
 
 ### Enhancements
+
 * As a security measure, when two-factor authentication is enabled, the Docker CLI requires a personal access token instead of a password to log in.
 
 ### Known Issues
@@ -218,6 +220,7 @@ to `hub.docker.com`. You can access the page at its new URL: [https://hub.docker
 ## 2019-10-02
 
 ### Enhancements
+
 * You can now manage teams and members straight from your [organization page](https://hub.docker.com/orgs).
 Each organization page now breaks down into these tabs:
   * **New:** Members - manage your members directly from this page (delete,

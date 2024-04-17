@@ -26,6 +26,7 @@ When practical, state instructions in terms of what the user should accomplish, 
 
 
 ## Refer to UI elements
+
 Don't use UI elements as if they were English verbs or nouns.
 
 |Correct     |Incorrect    |

@@ -872,6 +872,7 @@ external_links:
 `extra_hosts` adds hostname mappings to the container network interface configuration (`/etc/hosts` for Linux).
 
 ### Short syntax
+
 Short syntax uses plain strings in a list. Values must set hostname and IP address for additional hosts in the form of `HOSTNAME=IP`.
 
 ```yml
@@ -897,6 +898,7 @@ extra_hosts:
 ```
 
 ### Long syntax
+
 Alternatively, `extra_hosts` can be set as a mapping between hostname(s) and IP(s)
 
 ```yml
