@@ -127,7 +127,7 @@ In this first step, you will create your own base image that you will then use f
 { .tip }
 
 
-### Building an app image
+### Build an app image
 
 Now that you have a base image, you can extend that image to build additional images.
 
