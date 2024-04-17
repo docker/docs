@@ -46,7 +46,7 @@ In the `compose.yaml` file, you need to un-comment the properties for configurin
 
 The following is the updated `compose.yaml` file.
 
-```yaml {hl_lines="7-36"}
+```yaml
 services:
   shiny-app:
     build:
