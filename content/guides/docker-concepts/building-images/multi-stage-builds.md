@@ -57,7 +57,7 @@ In this hands-on experience, you'll unlock the power of multi-stage builds to cr
 
     [Spring Initializr](https://start.spring.io/) is a quickstart generator for Spring projects. It provides an extensible API to generate JVM-based projects with implementations for several common concepts — like basic language generation for Java, Kotlin, and Groovy. 
 
-Select **Generate** to create and download the zip file for this project.
+    Select **Generate** to create and download the zip file for this project.
 
 For this demonstration, you’ve paired Maven build automation with Java, a Spring Web dependency, and Java 21 for your metadata.
 
