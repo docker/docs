@@ -136,7 +136,7 @@ In this hands-on experience, you'll unlock the power of multi-stage builds to cr
     The `SpringbootDockerApplication.java` file starts by declaring your `com.example.springbootdocker` package and importing necessary Spring frameworks. This Java file creates a simple Spring Boot web application that responds with "Hello World" when a user visits its homepage. 
 
 
-### Creating the Dockerfile
+### Create the Dockerfile
 
 Now that you have the project, you’re ready to create the `Dockerfile`.
 
