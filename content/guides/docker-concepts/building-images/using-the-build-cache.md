@@ -276,7 +276,7 @@ In this hands-on, you will learn how to use the Docker build cache effectively f
 
     You'll see that all layers were rebuilt. Perfectly fine since you changed the Dockerfile quite a bit.
 
-    Now, make a change to the `src/static/index.html` file (like change the title to say "The Awesome Todo App").
+9. Now, make a change to the `src/static/index.html` file (like change the title to say "The Awesome Todo App").
 
 10. Build the Docker image. This time, your output should look a little different.
 
