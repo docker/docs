@@ -118,7 +118,7 @@ In this hands-on, you will build a simple image using a provided `Dockerfile` an
 {{< tabs >}}
 {{< tab name="Clone with git" >}}
 
-Use the following command in a terminal to clone the sample application repository.
+   Use the following command in a terminal to clone the sample application repository.
 
    ```console
    $ git clone https://github.com/docker/getting-started-todo-app
