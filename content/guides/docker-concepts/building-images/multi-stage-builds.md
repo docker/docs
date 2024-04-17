@@ -255,7 +255,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     Hello World
     ```
 
-### Using Multi-stage Builds
+### Use multi-stage builds
 
 1. Consider the following Dockerfile:
 
