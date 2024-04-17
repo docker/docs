@@ -86,7 +86,7 @@ In this hands-on, you will learn how to use the Docker build cache effectively f
     [+] Building 20.0s (10/10) FINISHED
     ```
 
-    The first line indicates that the entire build process took **20.0 seconds**. The first build may take some time as it installs dependencies.
+    The first line indicates that the entire build process took *20.0 seconds*. The first build may take some time as it installs dependencies.
 
 5. Re-building without changes
 
