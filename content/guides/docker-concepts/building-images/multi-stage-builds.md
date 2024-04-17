@@ -45,7 +45,7 @@ This Dockerfile uses a two-stage build:
 
 ## Try it now
 
-In this hands-on experience, you'll unlock the power of Multi-stage builds to create lean and efficient Docker images for a sample Java application! You'll use a simple “Hello World” Spring Boot-based application built with Maven as your example.
+In this hands-on experience, you'll unlock the power of multi-stage builds to create lean and efficient Docker images for a sample Java application! You'll use a simple “Hello World” Spring Boot-based application built with Maven as your example.
 
 1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
 
