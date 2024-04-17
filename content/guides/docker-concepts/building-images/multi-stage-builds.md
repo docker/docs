@@ -208,7 +208,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     $ docker images
     ```
 
-    Doing so will product output like the following:
+    Doing so will produce output like the following:
 
     ```console
     REPOSITORY          TAG       IMAGE ID       CREATED          SIZE
