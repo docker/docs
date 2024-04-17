@@ -46,31 +46,37 @@ If you are unable to update to an unaffected version promptly, follow these best
 ### Technical details and impact
 
 #### CVE-2024-21626 (High)
+
 In runc v1.1.11 and earlier, due to certain leaked file descriptors, an attacker can gain access to the host filesystem by causing a newly-spawned container process (from `runc exec`) to have a working directory in the host filesystem namespace, or by tricking a user to run a malicious image and allow a container process to gain access to the host filesystem through `runc run`. The attacks can also be adapted to overwrite semi-arbitrary host binaries, allowing for complete container escapes. Note that when using higher-level runtimes (such as Docker or Kubernetes), this vulnerability can be exploited by running a malicious container image without additional configuration or by passing specific workdir options when starting a container. The vulnerability can also be exploited from within Dockerfiles in the case of Docker.
 
 _The issue has been fixed in runc v1.1.12._
 
 #### CVE-2024-23651 (High)
+
 In BuildKit <= v0.12.4, two malicious build steps running in parallel sharing the same cache mounts with subpaths could cause a race condition, leading to files from the host system being accessible to the build container. This will only occur if a user is trying to build a Dockerfile of a malicious project.
 
 _The issue has been fixed in BuildKit v0.12.5._
 
 #### CVE-2024-23652 (High)
+
 In BuildKit <= v0.12.4, a malicious BuildKit frontend or Dockerfile using `RUN --mount` could trick the feature that removes empty files created for the mountpoints into removing a file outside the container from the host system. This will only occur if a user is using a malicious Dockerfile.
 
 _The issue has been fixed in BuildKit v0.12.5._
 
 #### CVE-2024-23653 (High)
+
 In addition to running containers as build steps, BuildKit also provides APIs for running interactive containers based on built images. In BuildKit <= v0.12.4, it is possible to use these APIs to ask BuildKit to run a container with elevated privileges. Normally, running such containers is only allowed if special `security.insecure` entitlement is enabled both by buildkitd configuration and allowed by the user initializing the build request.
 
 _The issue has been fixed in BuildKit v0.12.5._
 
 #### CVE-2024-23650 (Medium)
+
 In BuildKit <= v0.12.4, a malicious BuildKit client or frontend could craft a request that could lead to BuildKit daemon crashing with a panic.
 
 _The issue has been fixed in BuildKit v0.12.5._
 
 #### CVE-2024-24557 (Medium)
+
 In Moby <= v25.0.1 and <= v24.0.8, the classic builder cache system is prone to cache poisoning if the image is built FROM scratch. Also, changes to some instructions (most important being `HEALTHCHECK` and `ONBUILD`) would not cause a cache miss. An attacker with knowledge of the Dockerfile someone is using could poison their cache by making them pull a specially crafted image that would be considered a valid cache candidate for some build steps.
 
 _The issue has been fixed in Moby >= v25.0.2 and >= v24.0.9._
@@ -78,16 +84,19 @@ _The issue has been fixed in Moby >= v25.0.2 and >= v24.0.9._
 ### How are Docker products affected? 
 
 #### Docker Desktop
+
 Docker Desktop v4.27.0 and earlier are affected. Docker Desktop v4.27.1 was released on February 1 and includes runc, BuildKit, and dockerd binaries patches. In addition to updating to this new version, we encourage all Docker users to diligently use Docker images and Dockerfiles and ensure you only use trusted content in your builds.
 
 As always, you should check Docker Desktop system requirements for your operating system ([Windows](../desktop/install/windows-install.md#system-requirements), [Linux](../desktop/install/linux-install.md#general-system-requirements), [Mac](../desktop/install/mac-install.md#system-requirements)) before updating to ensure full compatibility.
 
 #### Docker Build Cloud
+
 Any new Docker Build Cloud builder instances will be provisioned with the latest Docker Engine and BuildKit versions and will, therefore, be unaffected by these CVEs. Updates have also been rolled out to existing Docker Build Cloud builders.
 
 _No other Docker products are affected by these vulnerabilities._
 
 ### Advisory links
+
 * Runc
   * [CVE-2024-21626](https://github.com/opencontainers/runc/security/advisories/GHSA-xr7r-f8xq-vfvv)
 * BuildKit

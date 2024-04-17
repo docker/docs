@@ -34,6 +34,7 @@ To install Docker Desktop successfully, you must:
   ```console
   $ sudo apt install gnome-terminal
   ```
+
 ## Install Docker Desktop
 
 Recommended approach to install Docker Desktop on Ubuntu:

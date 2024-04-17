@@ -310,9 +310,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### Known issues
 
 #### For all platforms
+
 - When using Setting Management, the settings that are not set in the `admin-settings.json` will be reset to default when Docker Desktop starts.
 
 #### For Mac
+
 - Updating to 4.27.0 from the **Software updates** sometimes hangs. As a workaround, use the 4.27.0 installer from this page.
 
 ## 4.26.1
@@ -516,6 +518,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - **Switch to Windows containers** option in the tray menu may not show up on Windows. As a workaround, edit the [`settings.json` file](https://docs.docker.com/desktop/settings/windows/) and set `"displaySwitchWinLinContainers": true`.
 
 #### For all platforms
+
 - Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**. 
 
 ## 4.24.2
@@ -611,11 +614,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Mac
 
 - Creating a container with the port 53 fails with the error address `already in use`. As a workaround, deactivate network acceleration by adding `"kernelForUDP": false`, in the `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
+
 ## 4.23.0
 
 {{< release-date date="2023-09-11" >}}
 
 ### Upgrades
+
 - [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
 - [Docker Engine v24.0.6](https://docs.docker.com/engine/release-notes/24.0/#2406)
 - [Docker Scout CLI v0.24.1](https://github.com/docker/scout-cli/releases/tag/v0.24.1).

@@ -205,6 +205,7 @@ The following `admin-settings.json` code and table provides an example of the re
 
 
 ### Step three: Re-launch Docker Desktop
+
 >**Note**
 >
 >Administrators should test the changes made through the `admin-settings.json` file locally to see if the settings work as expected.

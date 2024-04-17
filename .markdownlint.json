@@ -1,5 +1,6 @@
 {
   "default": false,
+  "blanks-around-headings": true,
   "hr-style": true,
   "heading-start-left": true,
   "single-h1": true,
