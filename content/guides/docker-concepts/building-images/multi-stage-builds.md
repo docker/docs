@@ -140,7 +140,7 @@ In this hands-on experience, you'll unlock the power of multi-stage builds to cr
 
 Now that you have the project, you’re ready to create the `Dockerfile`.
 
- 1. Create a file named `Dockerfile` in the same folder that contains all the other folders and files (like src, pom.xml, etc.)
+ 1. Create a file named `Dockerfile` in the same folder that contains all the other folders and files (like src, pom.xml, etc.).
 
  2. In the `Dockerfile`, define your base image by adding the following line:
 
