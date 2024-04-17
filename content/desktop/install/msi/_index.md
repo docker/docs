@@ -16,5 +16,4 @@ Todo
 ## What's next
 
 - [Use the Microsoft installer and read the configuration options](install-and-configure.md).
-- Explore the [example install scenarios](install-scenarios.md).
 - Read the [FAQs](faq.md).

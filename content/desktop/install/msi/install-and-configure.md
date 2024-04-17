@@ -12,7 +12,7 @@ keywords: msi, windows, docker desktop, install, deploy, configure
 
 3. Once you've accepted the license agreement, you can choose the install location. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 
-3. Configure the Docker Desktop installation. You can:
+4. Configure the Docker Desktop installation. You can:
 
 - Create a desktop shortcut
 
@@ -22,9 +22,9 @@ keywords: msi, windows, docker desktop, install, deploy, configure
 
 - Select the engine for Docker Desktop. Either WSL or Hyper-V. If your system only supports one of the two options, you will not be able to select which backend to use.
 
-4. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
+5. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
-5. When the installation is successful, select **Finish** to complete the installation process.
+6. When the installation is successful, select **Finish** to complete the installation process.
 
 If your admin account is different to your user account, you must add the user to the **docker-users** group:
 1. Run **Computer Management** as an **administrator**.
