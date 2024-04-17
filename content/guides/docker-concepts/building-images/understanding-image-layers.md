@@ -157,7 +157,7 @@ Now that you have a base image, you can extend that image to build additional im
 
     This command not only creates a new image named `sample-app`, but also adds additional configuration to the image to set the default command when starting a container. In this case, you are setting it to automatically run `node app.js`.
 
-4. In a terminal outside of the container, run the following command to view the update layers:
+4. In a terminal outside of the container, run the following command to view the updated layers:
 
     ```console
     $ docker image history sample-app
