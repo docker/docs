@@ -320,7 +320,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 ## Additional resources
 
 * [Multi-stage builds](/build/building/multi-stage/)
-* [Dockerfile Best Practices](/develop/develop-images/dockerfile_best-practices/)
+* [Dockerfile best practices](/develop/develop-images/dockerfile_best-practices/)
 * [Creating a base image](/build/building/base-images/)
 * [Spring Boot Docker](https://spring.io/guides/topicals/spring-boot-docker)
 
