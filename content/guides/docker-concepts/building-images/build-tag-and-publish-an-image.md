@@ -123,7 +123,7 @@ In this hands-on, you will build a simple image using a provided `Dockerfile` an
    ```console
    $ git clone https://github.com/docker/getting-started-todo-app
    ```
-{{< /tab >}}
+   {{< /tab >}}
 {{< tab name="Download" >}}
 
    Download the source and extract it.
