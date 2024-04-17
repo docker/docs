@@ -4,9 +4,9 @@ description: If you're an IT admin, learn how to deploy Docker Desktop with Micr
 keywords: msi, docker desktop, windows, installation
 ---
 
-Todo:
-Docker provide a 64-bit Microsoft installer (MSI) package to help IT Administrators customize and bulk deploy Docker Desktop for multiple users or machines. MSI files can be used with Microsoft Endpoint Configuration or third-party distribution software. 
-Bulk deployments are useful because users don't need to download and install Docker Desktop manually. Rather, It will be deployed to their machines and then auto-launch the first time users sign into a computer.
+Docker offers a 64-bit Microsoft Installer (MSI) package designed to assist IT administrators in customizing and deploying Docker Desktop across multiple users or machines. 
+
+This MSI package is compatible with Microsoft Configuration Manager and other third-party distribution software, facilitating streamlined, bulk deployments. Such deployments eliminate the need for individual users to manually download and install Docker Desktop. Instead, it is installed and automatically launched the first time a developer signs in to their machine, simplifying the setup process.
 
 ## How it works
 

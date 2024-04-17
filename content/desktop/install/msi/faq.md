@@ -1,5 +1,5 @@
 ---
-title: MSi FAQs
+title: MSI FAQs
 description: Frequently asked questions for deploying Docker Desktop with Microsoft installer
 keywords: msi, deploy, docker desktop, faqs
 ---
