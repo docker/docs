@@ -46,7 +46,7 @@ In this hands-on, you will learn how to use the Docker build cache effectively f
 
 ### Build the application
 
-1. [Download and install](https://www.docker.com/products/docker-desktop/)  Docker Desktop.
+1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
 
 2. Open a terminal and [clone this sample application](https://github.com/dockersamples/todo-list-app).
 
