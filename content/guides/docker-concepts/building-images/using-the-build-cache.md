@@ -239,7 +239,7 @@ In this hands-on, you will learn how to use the Docker build cache effectively f
      CMD ["node", "src/index.js"]
      ```
 
-     Create a file named `.dockerignore` in the same folder as the Dockerfile with the following contents.
+7. Create a file named `.dockerignore` in the same folder as the Dockerfile with the following contents.
 
      ```plaintext
      node_modules
