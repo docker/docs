@@ -57,7 +57,7 @@ Just as you saw with the previous example, a Dockerfile will typically (but not 
 4. Configure the final image
 
 In this quick hands-on, you'll write a Dockerfile that builds a simple Node application. If you're not familiar with Node-based applications, don't worry! There are plenty of [other language-specific samples](https://docs.docker.com/language/) you can explore.
-Setup
+### Set up
 
 [Download this ZIP file](https://github.com/docker/getting-started-todo-app/raw/build-image-from-scratch/app.zip) and extract the contents into a directory on your machine.
 
