@@ -595,6 +595,7 @@ credential_spec:
 ```
 
 #### Example gMSA configuration
+
 When configuring a gMSA credential spec for a service, you only need
 to specify a credential spec with `config`, as shown in the following example:
 

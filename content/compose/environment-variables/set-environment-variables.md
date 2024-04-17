@@ -104,6 +104,7 @@ web:
 See [`environment` attribute](../compose-file/05-services.md#environment) for more examples on how to use it. 
 
 #### Additional information 
+
 - You can choose not to set a value and pass the environment variables from your shell straight through to your containers. It works in the same way as `docker run -e VARIABLE ...`:
   ```yaml
   web:
@@ -132,7 +133,9 @@ web:
   env_file:
     - web-variables.env
 ```
+
 #### Additional information 
+
 - If multiple files are specified, they are evaluated in order and can override values set in previous files.
 - Environment variables declared in the `.env` file cannot then be referenced again separately in the Compose file.
 - If you use both the `env_file` and `environment` attribute, environment variables set by `environment` take precedence.
@@ -188,6 +191,7 @@ $ docker compose --env-file ./config/.env.dev up
 ```
 
 #### Additional information 
+
 - This method is useful if you want to temporarily override an `.env` file that is already referenced in your `compose.yml` file. For example you may have different `.env` files for production ( `.env.prod`) and testing (`.env.test`).
   In the following example, there are two environment files, `.env` and `.env.dev`. Both have different values set for `TAG`. 
 
@@ -246,6 +250,7 @@ Similar to `docker run --env`, you can set environment variables temporarily wit
 ```console
 $ docker compose run -e DEBUG=1 web python console.py
 ```
+
 #### Additional information 
 
 - You can also pass a variable from the shell by not giving it a value:
@@ -257,6 +262,7 @@ $ docker compose run -e DEBUG=1 web python console.py
   The value of the `DEBUG` variable in the container is taken from the value for the same variable in the shell in which Compose is run.
 
 ## Further resources
+
 - [Understand environment variable precedence](envvars-precedence.md).
 - [Set or change predefined environment variables](envvars.md)
 - [Explore best practices](best-practices.md)

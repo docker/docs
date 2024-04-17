@@ -63,6 +63,7 @@ For details on using production-oriented features, see
 [Compose in production](../production.md).
 
 ## What's next?
+
 - [Learn about the history of Compose](history.md)
 - [Understand how Compose works](../compose-application-model.md)
 - [Try Compose](../gettingstarted.md)

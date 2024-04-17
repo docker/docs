@@ -194,7 +194,7 @@ The following `admin-settings.json` code and table provides an example of the re
 |`disableUpdate`|  |If `value` is set to true, checking for and notifications about Docker Desktop updates is disabled.|
 |`analyticsEnabled`|  |If `value` is set to false, Docker Desktop doesn't send usage statistics to Docker. |
 |`extensionsEnabled`|  |If `value` is set to false, Docker extensions are disabled. |
-|`scout`|| Setting `useBackgroundIndexing` to `false` disables automatic indexing of images loaded to the image store. Setting `sbomIndexing` to `false` prevents the manual indexing triggered by inspecting an image in Docker Desktop.<br><br>**Note**: Users can still use the `docker scout` CLI commands to index images, even if indexing is disabled in Settings Management. |
+|`scout`|| Setting `useBackgroundIndexing` to `false` disables automatic indexing of images loaded to the image store. Setting `sbomIndexing` to `false` prevents users from being able to index image by inspecting them in Docker Desktop or using `docker scout` CLI commands. |
 | `allowExperimentalFeatures`| | If `value` is set to `false`, experimental features are disabled.|
 | `allowBetaFeatures`| | If `value` is set to `false`, beta features are disabled.|
 | `blockDockerLoad` | | If `value` is set to `true`, users are no longer able to run [`docker load`](/reference/cli/docker/image/load/) and receive an error if they try to.|
@@ -205,6 +205,7 @@ The following `admin-settings.json` code and table provides an example of the re
 
 
 ### Step three: Re-launch Docker Desktop
+
 >**Note**
 >
 >Administrators should test the changes made through the `admin-settings.json` file locally to see if the settings work as expected.

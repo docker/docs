@@ -20,6 +20,7 @@ Whenever you are [ready to publish](./DISTRIBUTION.md) your extension in the Mar
 >
 > The Docker manual review process for extensions is paused at the moment. Submit your extension through the [automated submission process](https://github.com/docker/extensions-submissions/issues/new?assignees=&labels=&template=1_automatic_review.yaml&title=%5BSubmission%5D%3A+)
 { .important }
+
 ### Before you submit
 
 Before you submit your extension, it must pass the [validation](validate.md) checks.

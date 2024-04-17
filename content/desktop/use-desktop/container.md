@@ -126,6 +126,7 @@ can also:
 - Download files and folders from the container straight to the host
 
 ## Additional resources
+
 - [What is a container](../../guides/walkthroughs/what-is-a-container.md)
 - [Run a container](../../guides/walkthroughs/run-a-container.md)
 - [Run multi-container applications](../../guides/walkthroughs/multi-container-apps.md)
