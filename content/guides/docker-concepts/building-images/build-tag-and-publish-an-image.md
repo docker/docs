@@ -113,7 +113,7 @@ In this hands-on, you will build a simple image using a provided `Dockerfile` an
 
 1. Get the sample application.
 
-If you have Git, you can clone the repository for the sample application. Otherwise, you can download the sample application. Choose one of the following options.
+   If you have Git, you can clone the repository for the sample application. Otherwise, you can download the sample application. Choose one of the following options.
 
 {{< tabs >}}
 {{< tab name="Clone with git" >}}
