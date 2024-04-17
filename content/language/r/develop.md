@@ -34,8 +34,6 @@ To try the connection between the Shiny application and the local database you h
 +RUN src_db/ .
 ```
 
-
-
 ## Add a local database and persist data
 
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
