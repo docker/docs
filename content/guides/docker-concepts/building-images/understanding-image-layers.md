@@ -163,7 +163,7 @@ Now that you have a base image, you can extend that image to build additional im
     $ docker image history sample-app
     ```
 
-    You’ll then see output that looks like the following. Note the top layer has the “Add app” and the next layer is “Add node”:
+    You’ll then see output that looks like the following. Note the top layer comment has “Add app” and the next layer has “Add node”:
 
     ```console
     IMAGE          CREATED              CREATED BY                                      SIZE      COMMENT
