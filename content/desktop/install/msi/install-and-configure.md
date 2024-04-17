@@ -14,13 +14,13 @@ keywords: msi, windows, docker desktop, install, deploy, configure
 
 4. Configure the Docker Desktop installation. You can:
 
-- Create a desktop shortcut
+    - Create a desktop shortcut
 
-- Set the Docker Desktop service startup type to automatic
+    - Set the Docker Desktop service startup type to automatic
 
-- Disable Windows Container usage
+    - Disable Windows Container usage
 
-- Select the engine for Docker Desktop. Either WSL or Hyper-V. If your system only supports one of the two options, you will not be able to select which backend to use.
+    - Select the engine for Docker Desktop. Either WSL or Hyper-V. If your system only supports one of the two options, you will not be able to select which backend to use.
 
 5. Follow the instructions on the installation wizard to authorize the installer and proceed with the install.
 
