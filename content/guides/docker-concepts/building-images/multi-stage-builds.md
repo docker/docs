@@ -62,7 +62,7 @@ In this hands-on experience, you'll unlock the power of multi-stage builds to cr
     For this demonstration, you’ve paired Maven build automation with Java, a Spring Web dependency, and Java 21 for your metadata.
 
 
-3. Navigate the project structure. Once you unzip the file, you'll see the following project directory structure:
+3. Navigate the project directory. Once you unzip the file, you'll see the following project directory structure:
 
 
     ```plaintext
