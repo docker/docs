@@ -131,7 +131,7 @@ In this hands-on, you will build a simple image using a provided `Dockerfile` an
    {{< button url="https://github.com/docker/getting-started-todo-app/raw/cd61f824da7a614a8298db503eed6630eeee33a3/app.zip" text="Download the source" >}}
 
    {{< /tab >}}
-{{< /tabs >}}
+   {{< /tabs >}}
 
 
 2. If you don't have a Docker account yet, create one now. Once you've done that, sign in to Docker Desktop using that account.
