@@ -34,8 +34,6 @@ To try the connection between the Shiny application and the local database you h
 +RUN src_db/ .
 ```
 
-
-
 ## Add a local database and persist data
 
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
@@ -147,10 +145,10 @@ Use Compose Watch to automatically update your running Compose services as you
 edit and save your code. For more details about Compose Watch, see [Use Compose
 Watch](../../compose/file-watch.md).
 
-Open your `compose.yaml` file in an IDE or text editor and then add the Compose
-Watch instructions. The following is the updated `compose.yaml` file.
+Lines 15 to 18 in the `compose.yaml` file contain properties that trigger Docker
+to rebuild the image when a file in the current working directory is changed:
 
-```yaml {hl_lines="15-18"}
+```yaml {hl_lines="15-18",linenos=true}
 services:
   shiny-app:
     build:
