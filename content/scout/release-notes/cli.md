@@ -127,6 +127,8 @@ and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-ac
   uses the cache from Windows. That way, if an image has been indexed for
   instance by Docker Desktop there's no need anymore to re-index it on WSL2
   side.
+- Indexing is now blocked in the CLI if it has been disabled using
+  [Settings Management](../../desktop/hardened-desktop/settings-management/configure.md) feature.
 
 - Fix a panic that would occur when analyzing a single-image `oci-dir` input
 - Improve local attestation support with the containerd image store
