@@ -126,7 +126,7 @@ In this hands-on, you will build a simple image using a provided `Dockerfile` an
 {{< /tab >}}
 {{< tab name="Download" >}}
 
-Download the source and extract it.
+   Download the source and extract it.
 
 {{< button url="https://github.com/docker/getting-started-todo-app/raw/cd61f824da7a614a8298db503eed6630eeee33a3/app.zip" text="Download the source" >}}
 
