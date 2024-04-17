@@ -37,7 +37,7 @@ Some of the most common instructions in a `Dockerfile` include:
 
 - `FROM <image>` - this specifies the base image that the build will extend.
 - `WORKDIR <path>` - this instruction specifies the "working directory" or the path in the image where files will be copied and commands will be executed.
-- `COPY <host-path> <image-path>` - this instruction tells the builder to copy files from the host and put them into the container image
+- `COPY <host-path> <image-path>` - this instruction tells the builder to copy files from the host and put them into the container image.
 - `RUN <command>` - this instruction tells the builder to run the specified command.
 - `ENV <name> <value>` - this instruction sets an environment variable that a running container will use.
 - `EXPOSE <port-number>` - this instruction sets configuration on the image that indicates a port the image would like to expose.
