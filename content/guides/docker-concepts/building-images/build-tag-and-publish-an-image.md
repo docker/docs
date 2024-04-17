@@ -22,7 +22,7 @@ Most often, images are built using a `Dockerfile`. The most basic `docker build`
 docker build .
 ```
 
-The final . in the command provides the path or URL to the [build context](https://docs.docker.com/build/building/context/#what-is-a-build-context). At this location, the builder will find the `Dockerfile` and other referenced files.
+The final `.` in the command provides the path or URL to the [build context](https://docs.docker.com/build/building/context/#what-is-a-build-context). At this location, the builder will find the `Dockerfile` and other referenced files.
 
 When a build occurs, the builder will pull the base image if needed and then run all of the instructions as outlined in the `Dockerfile`.
 
