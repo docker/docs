@@ -111,7 +111,7 @@ In this first step, you will create your own base image that you will then use f
 7. To prove your image has Node installed, you can start a new container using this new image:
 
     ```console
-    docker run node-base node -e `console.log('Hello again')`
+    $ docker run node-base node -e "console.log('Hello again')"
     ```
 
     With that, you should get a “Hello again” output in the terminal, showing Node was installed and working!
