@@ -134,9 +134,11 @@ In this hands-on, you will build a simple image using a provided `Dockerfile` an
    {{< /tabs >}}
 
 
-2. If you don't have a Docker account yet, create one now. Once you've done that, sign in to Docker Desktop using that account.
+2. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
 
-3. In [Docker Hub](https://hub.docker.com), create a repository for your new image. Give the new repository a name of `concepts-build-image-demo` and use the defaults for all of the other settings.
+3. If you don't have a Docker account yet, [create one now](https://hub.docker.com/). Once you've done that, sign in to Docker Desktop using that account.
+
+4. In [Docker Hub](https://hub.docker.com), create a repository for your new image. Give the new repository a name of `concepts-build-image-demo` and use the defaults for all of the other settings.
 
 ### Build an image
 
@@ -216,6 +218,8 @@ To learn more about building, tagging, and publishing images, visit the followin
 * [docker image tag reference](/engine/reference/commandline/image_tag/)
 * [docker push reference](/engine/reference/commandline/image_push/)
 * [What is a registry?](/guides/docker-concepts/the-basics/what-is-a-registry/)
+
+## Next steps
 
 Now that you have learned about building and publishing images, it's time to learn how to speed up the build process using the Docker build cache.
 

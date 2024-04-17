@@ -48,7 +48,10 @@ In this hands-on, you will create new image layers manually using the [docker co
 
 In this first step, you will create your own base image that you will then use for the following steps.
 
-1. In a terminal, run the following command to start a new container:
+1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
+
+
+2. In a terminal, run the following command to start a new container:
 
     ```console
     $ docker run --name=base-container -ti ubuntu
@@ -60,7 +63,7 @@ In this first step, you will create your own base image that you will then use f
     root@d8c5ca119fcd:/#
     ```
 
-2. Inside the container, run the following command to install Node.js:
+3. Inside the container, run the following command to install Node.js:
 
     ```console
     $ apt update && apt install -y nodejs
@@ -68,7 +71,7 @@ In this first step, you will create your own base image that you will then use f
 
     When this command runs, it downloads and installs Node inside the container. In the context of the union filesystem, these filesystem changes occur within the directory unique to this container. 
 
-3. Validate if Node is installed by running the following command:
+4. Validate if Node is installed by running the following command:
 
     ```console
     $ node -e 'console.log("Hello world!")'
@@ -76,7 +79,7 @@ In this first step, you will create your own base image that you will then use f
 
     You should then see a “Hello world!” appear in the console.
 
-4. Now that you have Node installed, you’re ready to save the changes you’ve made as a new image layer, from which you can start new containers or build new images. To do so, you will use the [docker commit](https://docs.docker.com/reference/cli/docker/container/commit/) command. Run the following command in a new terminal:
+5. Now that you have Node installed, you’re ready to save the changes you’ve made as a new image layer, from which you can start new containers or build new images. To do so, you will use the [docker commit](https://docs.docker.com/reference/cli/docker/container/commit/) command. Run the following command in a new terminal:
 
     ```console
     $ docker commit -m “Add node” base-container node-base
@@ -84,7 +87,7 @@ In this first step, you will create your own base image that you will then use f
 
     Congratulations! You have now created a brand new image! 🎉
 
-5. View the layers of your image using the `docker image history` command:
+6. View the layers of your image using the `docker image history` command:
 
     ```console
     $ docker image history node-base
@@ -105,7 +108,7 @@ In this first step, you will create your own base image that you will then use f
 
     Note the “Add node” comment on the top line. This layer contains the Node.js install you just made.
 
-6. To prove your image has Node installed, you can start a new container using this new image:
+7. To prove your image has Node installed, you can start a new container using this new image:
 
     ```console
     docker run node-base node -e `console.log('Hello again')`
@@ -113,7 +116,7 @@ In this first step, you will create your own base image that you will then use f
 
     With that, you should get a “Hello again” output in the terminal, showing Node was installed and working!
 
-7. Now that you’re done creating your base image, you can remove that container:
+8. Now that you’re done creating your base image, you can remove that container:
 
     ```console
     $ docker rm -f base-container
@@ -196,8 +199,8 @@ Now that you have a base image, you can extend that image to build additional im
 If you’d like to dive deeper into the things you learned, check out the following resources:
 
 * [docker image history CLI reference](/reference/cli/docker/image/history/)
-* [docker cp CLI reference](/reference/cli/docker/container/cp/)
-* [Docker Scout reference](/scout/)
+* [docker image layers](/build/guide/layers/)
+* [docker commit](/reference/cli/docker/container/commit/)
 
 
 ## Next steps

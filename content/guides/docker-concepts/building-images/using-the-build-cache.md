@@ -317,6 +317,9 @@ By following these optimization techniques, you can make your Docker builds fast
 * [Cache Storage Backend](/build/cache/backends/)
 * [Build cache invalidation](/build/cache/invalidation/)
 
+
+## Next steps
+
 Now that you understand how to use the Docker build cache effectively, you're ready to learn about Multi-stage builds.
 
 {{< button text="Multi-stage builds" url="multi-stage-builds" >}}

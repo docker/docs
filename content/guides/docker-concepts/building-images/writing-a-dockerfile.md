@@ -65,7 +65,9 @@ In this quick hands-on, you'll write a Dockerfile that builds a simple Node appl
 
 Now that you have the project, you’re ready to create the `Dockerfile`.
 
-1. Create a file named `Dockerfile` in the same folder as the file `package.json`.
+1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
+
+2. Create a file named `Dockerfile` in the same folder as the file `package.json`.
 
     > **Dockerfile file extensions**
     >
@@ -73,31 +75,31 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     > will automatically add an extension to the file (or complain it doesn't have one).
     { .important }
 
-2. In the `Dockerfile`, define your base image by adding the following line:
+3. In the `Dockerfile`, define your base image by adding the following line:
 
     ```dockerfile
     FROM node:20-alpine
     ```
 
-3. Now, define the working directory by using the `WORKDIR` instruction. This will specify where future commands will run and the directory files will be copied inside the container image.
+4. Now, define the working directory by using the `WORKDIR` instruction. This will specify where future commands will run and the directory files will be copied inside the container image.
 
     ```dockerfile
     WORKDIR /usr/local/app
     ```
 
-4. Copy all of the files from your project on your machine into the container image by using the `COPY` instruction:
+5. Copy all of the files from your project on your machine into the container image by using the `COPY` instruction:
 
     ```dockerfile
     COPY . .
     ```
 
-5. Install the app's dependencies by using the `yarn` CLI and package manager. To do so, run a command using the `RUN` instruction:
+6. Install the app's dependencies by using the `yarn` CLI and package manager. To do so, run a command using the `RUN` instruction:
 
     ```dockerfile
     RUN yarn install --production
     ```
 
-6. Finally, specify the default command to run by using the `CMD` instruction:
+7. Finally, specify the default command to run by using the `CMD` instruction:
 
     ```dockerfile
     CMD ["node", "./src/index.js"]
@@ -141,6 +143,8 @@ To learn more about writing a Dockerfile, visit the following resources:
 * [Dockerfile best practices](/develop/develop-images/dockerfile_best-practices/)
 * [Create your own base image](/build/building/base-images/)
 * [Getting started with Docker Init](/reference/cli/docker/init/)
+
+## Next steps
 
 Now that you have created a Dockerfile and learned the basics, it's time to learn about building, tagging, and pushing the images.
 
