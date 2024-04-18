@@ -143,7 +143,11 @@ The marketplace content is generated from extension image information as image l
 
 It's recommended that you try the private marketplace on your Docker Desktop installation.
 
-1. Use the following command,copy the relevant generated files to the location where Docker Desktop reads its configuration files.
+1. Run the following command in your terminal. This command automatically copies the generated files to the location where Docker Desktop reads the configuration files. Depending on your operating system, the location is:
+
+    - Mac: `/Library/Application\ Support/com.docker.docker`
+    - Windows: `C:\ProgramData\DockerDesktop`
+    - Linux: `/usr/share/docker-desktop`
 
    {{< tabs group="os_version" >}}
    {{< tab name="Mac" >}}
