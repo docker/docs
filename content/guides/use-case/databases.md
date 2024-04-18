@@ -276,7 +276,7 @@ To create a network and run containers on it:
    1. Run a phpMyAdmin container. Use the `--network` option to specify the
       network, the `-p` option to let you access the container from your host
       machine, and the `-e` option to specify a required environment variable
-      for this image. 
+      for this image.
 
       ```console
       $ docker run --name my-phpmyadmin -d --network my-network -p 8080:80 -e PMA_HOST=my-mysql phpmyadmin
@@ -381,7 +381,7 @@ data persists:
    1. In the Docker Dashboard, select the global search at the top of the window.
    2. Specify `mysql` in the search box, and select the **Images** tab if not
    already selected.
-   3. Hover over the **msyql** image and select **Run**.
+   3. Hover over the **mysql** image and select **Run**.
    The **Run a new container** model appears.
    4. Expand **Optional settings**.
    5. In the optional settings, specify the following:
@@ -658,7 +658,7 @@ To run your containers with Docker Compose:
    3. To stop the containers, press `ctrl`+`c` in the terminal.
 
 Now, with Docker Compose you can start your database and app, mount volumes,
-configure networking, and more, all with a single commmand.
+configure networking, and more, all with a single command.
 
 ## Summary
 
