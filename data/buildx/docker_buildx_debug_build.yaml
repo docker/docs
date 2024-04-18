@@ -192,7 +192,7 @@ options:
       swarm: false
     - option: iidfile
       value_type: string
-      description: Write the image ID to the file
+      description: Write the image ID to a file
       deprecated: false
       hidden: false
       experimental: false
@@ -250,7 +250,7 @@ options:
       swarm: false
     - option: metadata-file
       value_type: string
-      description: Write build result metadata to the file
+      description: Write build result metadata to a file
       deprecated: false
       hidden: false
       experimental: false
