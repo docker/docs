@@ -12,7 +12,7 @@ The **Automatically check for updates** setting in the **Software updates** tab 
 
 You can also let Docker Desktop automatically download new updates in the background by selecting the **Always download updates** checkbox.
 
-Sometimes new versions are rolled out gradually over a few days. Therefore, if you wait, it will turn up soon. Alternatively, you can select **Check for Updates** in the Docker menu to get the latest version immediately.
+Sometimes new versions are rolled out gradually over a few days. Therefore, if you wait, it will turn up soon. Alternatively, you can select **Check for updates** in the Docker menu to get the latest version immediately.
 
 ### How do I ensure that all users in my organization are using the same version?
 
