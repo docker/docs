@@ -308,6 +308,9 @@ They're used to configure the Buildx client, or the BuildKit daemon.
 | [BUILDKIT_HOST](#buildkit_host)                                             | String            | Specify host to use for remote builders.             |
 | [BUILDKIT_PROGRESS](#buildkit_progress)                                     | String            | Configure type of progress output.                   |
 | [BUILDKIT_TTY_LOG_LINES](#buildkit_tty_log_lines)                           | String            | Number of log lines (for active steps in tty mode).  |
+| [BUILDX_BAKE_GIT_AUTH_HEADER](#buildx_bake_git_auth_header)                 | String            | HTTP authentication scheme for remote Bake files.    |
+| [BUILDX_BAKE_GIT_AUTH_TOKEN](#buildx_bake_git_auth_token)                   | String            | HTTP authentication token for remote Bake files.     |
+| [BUILDX_BAKE_GIT_SSH](#buildx_bake_git_ssh)                                 | String            | SSH authentication for remote Bake files.            |
 | [BUILDX_BUILDER](#buildx_builder)                                           | String            | Specify the builder instance to use.                 |
 | [BUILDX_CONFIG](#buildx_config)                                             | String            | Specify location for configuration, state, and logs. |
 | [BUILDX_EXPERIMENTAL](#buildx_experimental)                                 | Boolean           | Turn on experimental features.                       |
@@ -325,6 +328,8 @@ You can express Boolean values for environment variables in different ways.
 For example, `true`, `1`, and `T` all evaluate to true.
 Evaluation is done using the `strconv.ParseBool` function in the Go standard library.
 See the [reference documentation](https://pkg.go.dev/strconv#ParseBool) for details.
+
+<!-- vale Docker.HeadingSentenceCase = NO -->
 
 ### BUILDKIT_COLORS
 
@@ -424,6 +429,53 @@ Example:
     }
   ]
 }
+```
+
+### BUILDX_BAKE_GIT_AUTH_HEADER
+
+{{< introduced buildx 0.14.0 >}}
+
+Sets the HTTP authentication scheme when using a remote Bake definition in a private Git repository.
+This is equivalent to the [`GIT_AUTH_HEADER` secret](./secrets#http-authentication-scheme),
+but facilitates the pre-flight authentication in Bake when loading the remote Bake file.
+Supported values are `bearer` (default) and `basic`.
+
+Usage:
+
+```console
+$ export BUILDX_BAKE_GIT_AUTH_HEADER=basic
+```
+
+### BUILDX_BAKE_GIT_AUTH_TOKEN
+
+{{< introduced buildx 0.14.0 >}}
+
+Sets the HTTP authentication token when using a remote Bake definition in a private Git repository.
+This is equivalent to the [`GIT_AUTH_TOKEN` secret](./secrets#git-authentication-for-remote-contexts),
+but facilitates the pre-flight authentication in Bake when loading the remote Bake file.
+
+Usage:
+
+```console
+$ export BUILDX_BAKE_GIT_AUTH_TOKEN=$(cat git-token.txt)
+```
+
+### BUILDX_BAKE_GIT_SSH
+
+{{< introduced buildx 0.14.0 >}}
+
+Lets you specify a list of SSH agent socket filepaths to forward to Bake
+for authenticating to a Git server when using a remote Bake definition in a private repository.
+This is similar to SSH mounts for builds, but facilitates the pre-flight authentication in Bake when resolving the build definition.
+
+Setting this environment is typically not necessary, because Bake will use the `SSH_AUTH_SOCK` agent socket by default.
+You only need to specify this variable if you want to use a socket with a different filepath.
+This variable can take multiple paths using a comma-separated string.
+
+Usage:
+
+```console
+$ export BUILDX_BAKE_GIT_SSH=/run/foo/listener.sock,~/.creds/ssh.sock
 ```
 
 ### BUILDX_BUILDER
@@ -545,3 +597,4 @@ Usage:
 $ export BUILDX_NO_DEFAULT_LOAD=1
 ```
 
+<!-- vale Docker.HeadingSentenceCase = YES -->

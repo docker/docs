@@ -179,3 +179,19 @@ docker buildx bake -f bake.hcl -f cwd://local.hcl "https://github.com/crazy-max/
   }
 }
 ```
+
+## Remote definition in a private repository
+
+If you want to use a remote definition that lives in a private repository,
+you may need to specify credentials for Bake to use when fetching the definition.
+
+If you can authenticate to the private repository using the default `SSH_AUTH_SOCK`,
+then you don't need to specify any additional authentication parameters for Bake.
+Bake automatically uses your default agent socket.
+
+For authentication using an HTTP token, or custom SSH agents,
+use the following environment variables to configure Bake's authentication strategy:
+
+- [`BUILDX_BAKE_GIT_AUTH_TOKEN`](../building/variables.md#buildx_bake_git_auth_token)
+- [`BUILDX_BAKE_GIT_AUTH_HEADER`](../building/variables.md#buildx_bake_git_auth_header)
+- [`BUILDX_BAKE_GIT_SSH`](../building/variables.md#buildx_bake_git_ssh)

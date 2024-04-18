@@ -14,7 +14,7 @@ That's where container images come in!
 
 A container image is a standardized package that includes all of the files, binaries, libraries, and configurations to run a container.
 
-For a [PostgreSQL](https://hub.docker.com/_/postgresql) image, that image will package the database binaries, config files, and other dependencies. For a Python web app, it'll include the Python runtime, your app code, and all of its dependencies.
+For a [PostgreSQL](https://hub.docker.com/_/postgres) image, that image will package the database binaries, config files, and other dependencies. For a Python web app, it'll include the Python runtime, your app code, and all of its dependencies.
 
 There are two important principles of images:
 

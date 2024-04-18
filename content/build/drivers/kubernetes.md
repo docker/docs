@@ -38,6 +38,7 @@ can pass to `--driver-opt`:
 | `requests.memory` | Memory size       |                                         | Sets the request memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G` |
 | `limits.cpu`      | CPU units         |                                         | Sets the limit CPU value specified in units of Kubernetes CPU. For example `requests.cpu=100m` or `requests.cpu=2`                   |
 | `limits.memory`   | Memory size       |                                         | Sets the limit memory value specified in bytes or with a valid suffix. For example `requests.memory=500Mi` or `requests.memory=4G`   |
+| `default-load`    | Boolean           | `false`                                 | Automatically load images to the Docker Engine image store.                                                                          |
 | `nodeselector`    | CSV string        |                                         | Sets the pod's `nodeSelector` label(s). See [node assignment][2].                                                                    |
 | `annotation`      | CSV string        |                                         | Sets additional annotations on the deployments and pods.                                                                             |
 | `labels`          | CSV string        |                                         | Sets additional labels on the deployments and pods.                                                                                  |
