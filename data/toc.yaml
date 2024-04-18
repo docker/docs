@@ -2055,6 +2055,8 @@ Manuals:
         title: Access
       - path: /docker-hub/repos/
         title: Manage
+      - path: /docker-hub/repos/categories/
+        title: Categories
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - path: /docker-hub/webhooks/
