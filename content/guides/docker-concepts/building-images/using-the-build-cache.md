@@ -89,7 +89,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
     $ docker build .
     ```
 
-   You might notice that the subsequent builds after the initial one will be faster due to the caching mechanism, as long as the commands and context remain unchanged. Docker caches the intermediate layers generated during the build process. When you rebuild the image without making any changes to the Dockerfile or the source code, Docker can reuse the cached layers, significantly speeding up the build process.
+   Subsequent builds after the initial are faster due to the caching mechanism, as long as the commands and context remain unchanged. Docker caches the intermediate layers generated during the build process. When you rebuild the image without making any changes to the Dockerfile or the source code, Docker can reuse the cached layers, significantly speeding up the build process.
 
     ```console
     [+] Building 1.0s (9/9) FINISHED                                                                            docker:desktop-linux
