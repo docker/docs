@@ -198,11 +198,11 @@ If you’d like to dive deeper into the things you learned, check out the follow
 
 * [docker image history CLI reference](/reference/cli/docker/image/history/)
 * [docker image layers](/build/guide/layers/)
-* [docker commit](/reference/cli/docker/container/commit/)
+* [`docker container commit`](/reference/cli/docker/container/commit/)
 
 
 ## Next steps
 
-As hinted earlier, most image builds don’t use `docker commit`. Instead, you’ll use a Dockerfile which automates these steps for you.
+As hinted earlier, most image builds don’t use `docker container commit`. Instead, you’ll use a Dockerfile which automates these steps for you.
 
 {{< button text="Writing a Dockerfile" url="writing-a-dockerfile" >}}
