@@ -24,7 +24,7 @@ docker build .
 
 The final `.` in the command provides the path or URL to the [build context](https://docs.docker.com/build/building/context/#what-is-a-build-context). At this location, the builder will find the `Dockerfile` and other referenced files.
 
-When a build occurs, the builder will pull the base image if needed and then run all of the instructions as outlined in the `Dockerfile`.
+When you run a build, the builder pulls the base image, if needed, and then runs the instructions specified in the Dockerfile.
 
 With the previous command, the image will have no name, but the output will provide the ID of the image. As an example, the previous command might produce the following output:
 
