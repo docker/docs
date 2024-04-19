@@ -107,7 +107,7 @@ Within a few seconds, all of the layers for your image will be pushed to the reg
 
 ## Try it out
 
-In this hands-on, you will build a simple image using a provided `Dockerfile` and push it to Docker Hub.
+In this hands-on guide, you will build a simple image using a provided Dockerfile and push it to Docker Hub.
 
 ### Set up
 
