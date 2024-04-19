@@ -8,7 +8,7 @@ description: This concept page will teach you about the purpose of the multi-sta
 
 ## Explanation
 
-In a traditional build, everything happens in one go: downloading dependencies, compiling code, and packaging the application – all ending up in your final image. This approach works, but it leads to bulky images carrying unnecessary weight and increasing your security risks. This is where multi-stage builds come in!
+In a traditional build, all build instructions are executed in sequence, and in a single build container: downloading dependencies, compiling code, and packaging the application. All those layers end up in your final image. This approach works, but it leads to bulky images carrying unnecessary weight and increasing your security risks. This is where multi-stage builds come in.
 
 Multi-stage builds introduce multiple stages in your Dockerfile, each with a specific purpose. Think of it like the ability to define a pipeline within your Dockerfile. By separating the build environment from the final runtime environment, you can significantly reduce the image size and increase the security of your final images. This is especially beneficial for applications with large build dependencies. Less weight translates to faster downloads, quicker deployments, and better resource utilization.
 
