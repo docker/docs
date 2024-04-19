@@ -12,11 +12,10 @@ In a traditional build, all build instructions are executed in sequence, and in 
 
 Multi-stage builds introduce multiple stages in your Dockerfile, each with a specific purpose. Think of it like the ability to run different parts of a build in multiple different environments, concurrently. By separating the build environment from the final runtime environment, you can significantly reduce the image size and attack surface. This is especially beneficial for applications with large build dependencies.
 
-While multi-stage builds are excellent for Java and .NET builds (separating build tools from the final image), their applications extend far beyond:
+Multi-stage builds are recommended for all types of applications.
 
-- React applications. Build and minify your React code in one stage. Then, in another stage, copy the production-ready files to a smaller runtime image. This optimizes your image for deployment.
-- Compiling dependencies. If your application relies on pre-compiled libraries, a multi-stage build lets you to compile them in one stage and then use the compiled artifacts in the final runtime image. No need to bundle the entire compiler in your final image!
-- Python with pip. Separate the installation of Python and its dependencies (using pip) in one stage from the application code and data in another. This keeps your runtime image focused on execution.
+- For interpreted languages, like JavaScript or Ruby or Python, you can build and minify your code in one stage, and copy the production-ready files to a smaller runtime image. This optimizes your image for deployment.
+- For compiled languages, like C or Go or Rust, multi-stage builds let you compile in one stage and copy the compiled binaries into a final runtime image. No need to bundle the entire compiler in your final image.
 
 
 Here's a simplified example of a multi-stage build structure using pseudo-code. Notice there are multiple `FROM` statements and a new `AS <stage-name>`. In addition, the `COPY` statement in the second stage is copying `--from` the previous stage.
