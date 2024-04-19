@@ -42,7 +42,7 @@ When the union filesystem is created, in addition to the image layers, a directo
 
 ## Try it out
 
-In this hands-on, you will create new image layers manually using the [docker commit](https://docs.docker.com/reference/cli/docker/container/commit/) command. Note that you’ll rarely create images this way, as you’ll normally [use a Dockerfile](./writing-a-dockerfile.md). But, it makes it easier to understand how it’s all working.
+In this hands-on guide, you will create new image layers manually using the [`docker container commit`](https://docs.docker.com/reference/cli/docker/container/commit/) command. Note that you’ll rarely create images this way, as you’ll normally [use a Dockerfile](./writing-a-dockerfile.md). But, it makes it easier to understand how it’s all working.
 
 ### Create a base image
 
