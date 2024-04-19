@@ -107,7 +107,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
    ```
 
 
-   In the output, the subsequent build was completed in just 1.0 second, indicating that Docker was able to leverage the cached layers and did not need to repeat the time-consuming steps like installing dependencies.
+   The subsequent build was completed in just 1.0 second by leveraging the cached layers. No need to repeat time-consuming steps like installing dependencies.
 
 
     <table>
