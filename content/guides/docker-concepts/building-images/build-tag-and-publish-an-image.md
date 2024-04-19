@@ -91,7 +91,7 @@ docker image tag my-username/my-image another-username/another-image:v1
 
 ### Publishing images
 
-Once you have an image built and tagged, you are ready to push it to a registry. To do so, use the [docker push](https://docs.docker.com/engine/reference/commandline/image_push/) command:
+Once you have an image built and tagged, you're ready to push it to a registry. To do so, use the [`docker push`](https://docs.docker.com/engine/reference/commandline/image_push/) command:
 
 ```console
 docker push my-username/my-image
