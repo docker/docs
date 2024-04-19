@@ -300,7 +300,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
     => => naming to docker.io/library/node-app:3.0                                                 0.0s
     ```
 
-    First off, you should notice that the build was much faster! You'll see that several steps are using previously cached layers. So, hooray! You're using the build cache. Pushing and pulling this image and updates to it will be much faster as well.
+    First off, you should notice that the build was much faster. You'll see that several steps are using previously cached layers. That's good news; you're using the build cache. Pushing and pulling this image and updates to it will be much faster as well.
 
 By following these optimization techniques, you can make your Docker builds faster and more efficient, leading to quicker iteration cycles and improved development productivity.
 
