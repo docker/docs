@@ -153,7 +153,7 @@ Now that you have a base image, you can extend that image to build additional im
 3. In another terminal, run the following command to save this container’s changes as a new image:
 
     ```console
-    $ docker commit -c "CMD node app.js" -m "Add app" app-container sample-app
+    $ docker container commit -c "CMD node app.js" -m "Add app" app-container sample-app
     ```
 
     This command not only creates a new image named `sample-app`, but also adds additional configuration to the image to set the default command when starting a container. In this case, you are setting it to automatically run `node app.js`.
