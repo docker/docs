@@ -21,24 +21,17 @@ CMD ["node", "./src/index.js"]
 
 When you run the `docker build` command to create a new image, Docker executes each instruction in your Dockerfile, creating a layer for each command and in the order specified. For each instruction, Docker checks whether it can reuse the instruction from a previous build. If it finds that you've already executed a similar instruction before, Docker doesn't need to redo it. Instead, it’ll use the cached result. This way, your build process becomes faster and more efficient, saving you valuable time and resources.
 
-So, when does Docker decide it's time to hit the refresh button on its cache? Well, there are a few situations that'll do the trick.
+Using the build cache effectively lets you achieve faster builds by reusing results from previous builds and skipping unnecessary work.
+In order to maximize cache usage and avoid resource-intensive and time-consuming rebuilds, it's important to understand how cache invalidation works.
+Here are a few examples of situations that can cause cache to be invalidated:
 
-- For `RUN` instructions, any changes to the command invalidates that layer. Say, you modified a `RUN` command in your Dockerfile. Maybe you updated a package or installed something new. Docker takes note of that change and says, "Hey, things are different now. Time to clear out the cache and start fresh!" If there's any modification to a `RUN` command in your Dockerfile, it triggers the cache invalidation. Docker recognizes this change and knows that subsequent commands might produce different results
-
+- For `RUN` instructions, any changes to the command invalidates that layer. For example, say you modified a `RUN` command in your Dockerfile. Docker detects the change and invalidates the build cache if there's any modification to a `RUN` command in your Dockerfile.
 
 - For `COPY` or `ADD` instructions, any changes to the files being copied invalidate that layer. Docker keeps an eye on any alterations to files within your project directory. Whether it's a change in content or properties like permissions, Docker considers these modifications as triggers to invalidate the cache.
 
+- Once one layer is invalidated, all following layers are also invalidated. If any previous layer, including the base image or intermediary layers, has been invalidated due to changes, Docker ensures that subsequent layers relying on it are also invalidated. This keeps the build process synchronized and prevents inconsistencies.
 
-- Once one layer is invalidated, all following layers are also invalidated. Every layer in your Docker image is interconnected. If any previous layer, including the base image or intermediary layers, has been invalidated due to changes, Docker ensures that subsequent layers relying on it are also invalidated. This keeps the build process synchronized and prevents inconsistencies.
-
-By keeping an eye on these triggers, Docker ensures that each build reflects the most up-to-date state of your project, keeping everything running smoothly and preventing any surprises along the way.
-
-But you might ask, “Why is it important to use the cache effectively?”
-
-- First off, speed! Using the cache effectively means faster builds. When Docker can reuse previous results, it skips unnecessary steps, shaving off valuable time.
-- Then there's storage. Efficient cache usage means you're not storing redundant data. By reusing cached layers instead of creating new ones, you're saving space on your system.
-- And hey, let's not forget about those pushes and pulls. When you're working with Docker images, efficient caching means quicker uploads and downloads. Less data to transfer means faster deployments and updates, keeping your workflow moving at lightning speed.
-
+When you're writing or editing a Dockerfile, keep an eye out for unnecessary cache misses to ensure that builds run as fast and efficiently as possible.
 
 ## Try it out
 
