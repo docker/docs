@@ -70,7 +70,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
 4. Execute the following command to build the Docker image:
 
     ```console
-    $ docker build -t node-app:1.0 .
+    $ docker build .
     ```
 
     Here’s the result of the build process:
