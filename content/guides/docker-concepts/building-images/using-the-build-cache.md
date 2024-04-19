@@ -86,7 +86,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
    Now, re-run the `docker build` command without making any change in the source code or Dockerfile as shown:
 
     ```console
-    $ docker build -t node-app:1.0 .
+    $ docker build .
     ```
 
    You might notice that the subsequent builds after the initial one will be faster due to the caching mechanism, as long as the commands and context remain unchanged. Docker caches the intermediate layers generated during the build process. When you rebuild the image without making any changes to the Dockerfile or the source code, Docker can reuse the cached layers, significantly speeding up the build process.
