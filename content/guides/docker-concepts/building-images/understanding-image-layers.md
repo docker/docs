@@ -85,8 +85,6 @@ In this first step, you will create your own base image that you will then use f
     $ docker container commit -m "Add node" base-container node-base
     ```
 
-    Congratulations! You have now created a brand new image! 🎉
-
 6. View the layers of your image using the `docker image history` command:
 
     ```console
