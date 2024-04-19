@@ -42,7 +42,7 @@ But you might ask, “Why is it important to use the cache effectively?”
 
 ## Try it out
 
-In this hands-on, you will learn how to use the Docker build cache effectively for a Node.js application.
+In this hands-on guide, you will learn how to use the Docker build cache effectively for a Node.js application.
 
 ### Build the application
 
