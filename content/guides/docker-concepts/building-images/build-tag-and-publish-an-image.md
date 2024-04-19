@@ -8,7 +8,7 @@ description: This concept page will teach you how to build, tag, and publish an 
 
 ## Explanation
 
-In this concept, you will learn the following:
+In this guide, you will learn the following:
 
 - Building images - the process of building an image based on a `Dockerfile`
 - Tagging images - the process of giving an image a name, which also determines where the image can be distributed
