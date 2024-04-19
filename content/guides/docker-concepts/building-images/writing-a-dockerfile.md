@@ -8,7 +8,7 @@ description: This concept page will teach you how to create image using Dockerfi
 
 ## Explanation
 
-A `Dockerfile` is a simple text-based document that's used to create a container image. It provides instructions to the image builder on the commands to run, files to copy, and a few other configuration options. 
+A Dockerfile is a text-based document that's used to create a container image. It provides instructions to the image builder on the commands to run, files to copy, startup command, and more.
 
 As an example, the following Dockerfile would produce a ready-to-run Python application:
 
