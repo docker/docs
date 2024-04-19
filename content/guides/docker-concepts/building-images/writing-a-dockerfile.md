@@ -124,7 +124,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 > more secure.
 >
 > Keep reading to learn more about how to make the image maximize the
-> build cache, run as a non-root user, and even use multi-stage builds.
+> build cache, run as a non-root user, and multi-stage builds.
 { .important }
 
 
