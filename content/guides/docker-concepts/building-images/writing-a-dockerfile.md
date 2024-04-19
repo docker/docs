@@ -118,7 +118,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
 
 > **This Dockerfile isn't production-ready yet**
 >
-> It's important to note that this `Dockerfile` is _not_ following all
+> It's important to note that this Dockerfile is _not_ following all
 > of the best practices yet (by design). It will build the app, but the
 > builds won't be as fast as they could be and the image could be made
 > more secure.
