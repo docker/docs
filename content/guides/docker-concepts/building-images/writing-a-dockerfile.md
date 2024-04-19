@@ -56,7 +56,7 @@ Just as you saw with the previous example, a Dockerfile typically follows these 
 3. Copy in any relevant source code and/or binaries
 4. Configure the final image
 
-In this quick hands-on, you'll write a Dockerfile that builds a simple Node application. If you're not familiar with Node-based applications, don't worry! There are plenty of [other language-specific samples](https://docs.docker.com/language/) you can explore.
+In this quick hands-on guide, you'll write a Dockerfile that builds a simple Node.js application. If you're not familiar with JavaScript-based applications, don't worry. It isn't necessary for following along with this guide.
 
 ### Set up
 
