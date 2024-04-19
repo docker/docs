@@ -49,7 +49,7 @@ To read through all of the instructions or go into greater detail, check out the
 
 ## Try it out
 
-Just as you saw with the previous example, a Dockerfile will typically (but not always) follow these steps:
+Just as you saw with the previous example, a Dockerfile typically follows these steps:
 
 1. Determine your base image
 2. Install application dependencies
