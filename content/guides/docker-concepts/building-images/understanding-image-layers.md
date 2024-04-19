@@ -79,10 +79,10 @@ In this first step, you will create your own base image that you will then use f
 
     You should then see a “Hello world!” appear in the console.
 
-5. Now that you have Node installed, you’re ready to save the changes you’ve made as a new image layer, from which you can start new containers or build new images. To do so, you will use the [docker commit](https://docs.docker.com/reference/cli/docker/container/commit/) command. Run the following command in a new terminal:
+5. Now that you have Node installed, you’re ready to save the changes you’ve made as a new image layer, from which you can start new containers or build new images. To do so, you will use the [`docker container commit`](https://docs.docker.com/reference/cli/docker/container/commit/) command. Run the following command in a new terminal:
 
     ```console
-    $ docker commit -m "Add node" base-container node-base
+    $ docker container commit -m "Add node" base-container node-base
     ```
 
     Congratulations! You have now created a brand new image! 🎉
