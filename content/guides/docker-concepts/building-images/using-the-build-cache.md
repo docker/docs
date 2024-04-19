@@ -241,7 +241,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
 8. Build the new image:
 
     ```console
-    $ docker build -t node-app:2.0 .
+    $ docker build .
     ```
 
     You'll then see output similar to the following:
