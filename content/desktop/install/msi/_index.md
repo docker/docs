@@ -3,10 +3,12 @@ title: Deploy with Microsoft installer
 description: If you're an IT admin, learn how to deploy Docker Desktop with Microsoft installer
 keywords: msi, docker desktop, windows, installation
 ---
+ 
+Docker offers a 64-bit Microsoft Installer (MSI) package designed to assist IT administrators in customizing and deploying Docker Desktop across multiple users or machines in an enterprise environment. 
 
-Docker offers a 64-bit Microsoft Installer (MSI) package designed to assist IT administrators in customizing and deploying Docker Desktop across multiple users or machines. 
+The MSI package supports various MDM (Mobile Device Management) solutions, making it ideal for bulk installations and eliminating the need for manual setups by individual users. With this package, IT administrators can ensure standardized, policy-driven installations of Docker Desktop, enhancing efficiency and software management across their organizations. Instead, it is installed and automatically launched the first time a developer signs in to their machine, simplifying the setup process.
 
-This MSI package is compatible with Microsoft Configuration Manager and other third-party distribution software, facilitating streamlined, bulk deployments. Such deployments eliminate the need for individual users to manually download and install Docker Desktop. Instead, it is installed and automatically launched the first time a developer signs in to their machine, simplifying the setup process.
+ Whether you're looking to implement scripted installations or integrate Docker Desktop with existing MDM solutions, this MSI package is an essential resource.
 
 ## How it works
 
