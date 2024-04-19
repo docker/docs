@@ -138,7 +138,6 @@ In this hands-on guide, you will build a simple image using a provided Dockerfil
 
 3. If you don't have a Docker account yet, [create one now](https://hub.docker.com/). Once you've done that, sign in to Docker Desktop using that account.
 
-4. In [Docker Hub](https://hub.docker.com), create a repository for your new image. Give the new repository a name of `concepts-build-image-demo` and use the defaults for all of the other settings.
 
 ### Build an image
 
