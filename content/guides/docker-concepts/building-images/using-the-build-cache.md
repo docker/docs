@@ -218,7 +218,7 @@ In this hands-on guide, you will learn how to use the Docker build cache effecti
 
     Going back to the `docker image history` output, you see that each command in the Dockerfile becomes a new layer in the image. You might remember that when you made a change to the image, the `yarn` dependencies had to be reinstalled. Is there a way to fix this? It doesn't make much sense to reinstall the same dependencies every time you build, right?
 
-    To fix this, you need to restructure your Dockerfile to help support the caching of the dependencies. For Node-based applications, those dependencies are defined in the `package.json` file. So what if you start by copying only that file first, install the dependencies, and then copy everything else? Then, you only recreate the yarn dependencies if there was a change to the package.json. Make sense?
+    To fix this, restructure your Dockerfile so that the dependency cache remains valid unless it really needs to be invalidated. For Node-based applications, dependencies are defined in the `package.json` file. You'll want to reinstall the dependencies if that file changes, but use cached dependencies if the file is unchanged. So, start by copying only that file first, then install the dependencies, and finally copy everything else. Then, you only need to recreate the yarn dependencies if there was a change to the `package.json` file.
 
 6. Update the Dockerfile to copy in the `package.json` file first, install dependencies, and then copy everything else in.
 
