@@ -108,7 +108,7 @@ In this hands-on experience, you'll unlock the power of multi-stage builds to cr
     `SpringBootDockerApplication.java` file with the following content:
 
 
-    ```plaintext
+    ```java
     package com.example.springbootdocker;
 
     import org.springframework.boot.SpringApplication;
