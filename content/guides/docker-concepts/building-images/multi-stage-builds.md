@@ -40,7 +40,7 @@ COPY --from=build-stage /path/in/build/stage /path/to/place/in/final/stage
 This Dockerfile uses a two-stage build:
 
 - The build stage uses a base image containing build tools needed to compile your application. It includes commands to install build tools, copy source code, and execute build commands.
-- The final stage uses a smaller base image suitable for running your application. It copies the compiled artifacts (e.g., JAR file) from the build stage. Finally, it defines the runtime configuration (like `CMD` or `ENTRYPOINT`) for starting your application.
+- The final stage uses a smaller base image suitable for running your application. It copies the compiled artifacts (a JAR file, for example) from the build stage. Finally, it defines the runtime configuration (using `CMD` or `ENTRYPOINT`) for starting your application.
 
 
 ## Try it now
