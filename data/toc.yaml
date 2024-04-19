@@ -1113,28 +1113,28 @@ Manuals:
   section:
     - path: /desktop/
       title: Overview
-    - sectiontitle: Install Docker Desktop
+    - sectiontitle: Install 
       section:
        - path: /desktop/install/mac-install/
-         title: Install on Mac
+         title: Mac
        - path: /desktop/mac/permission-requirements/
          title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
-         title: Install on Windows
+         title: Windows
        - path: /desktop/windows/permission-requirements/
          title: Understand permission requirements for Windows
        - path: /desktop/install/linux-install/
-         title: Install on Linux
+         title: Linux
        - sectiontitle: Installation per Linux distro
          section:
             - path: /desktop/install/ubuntu/
-              title: Install on Ubuntu
+              title: Ubuntu
             - path: /desktop/install/debian/
-              title: Install on Debian
+              title: Debian
             - path: /desktop/install/fedora/
-              title: Install on Fedora
+              title: Fedora
             - path: /desktop/install/archlinux/
-              title: Install on Arch
+              title: Arch
     - path: /desktop/get-started/
       title: Sign in
     - sectiontitle: Explore Docker Desktop
@@ -1261,7 +1261,7 @@ Manuals:
 - sectiontitle: Docker Extensions
   section:
     - path: /desktop/extensions/
-      title: What are Docker Extensions?
+      title: Overview
     - sectiontitle: Extensions on Docker Desktop
       section:
         - path: /desktop/extensions/marketplace/
@@ -1987,7 +1987,7 @@ Manuals:
   - path: /compose/compose-application-model/
     title: How Compose works
   - path: /compose/gettingstarted/
-    title: Try Compose
+    title: Quickstart
   - path: /compose/project-name/
     title: Specify a project name
   - sectiontitle: Environment variables

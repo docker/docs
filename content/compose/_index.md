@@ -18,7 +18,7 @@ grid:
   description: Follow the instructions on how to install Docker Compose.
   icon: download
   link: /compose/install
-- title: Try Compose
+- title: Quickstart
   description: Learn the key concepts of Docker Compose whilst building a simple Python
     web application.
   icon: explore
