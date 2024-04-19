@@ -16,7 +16,7 @@ In this guide, you will learn the following:
 
 ### Building images
 
-Most often, images are built using a `Dockerfile`. The most basic `docker build` command might look like the following:
+Most often, images are built using a Dockerfile. The most basic `docker build` command might look like the following:
 
 ```bash
 docker build .
