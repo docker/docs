@@ -2388,7 +2388,7 @@ naming scheme accordingly before upgrading.
 - The `pid` option in a service's definition now supports a `service:<name>`
   value.
 
-- Added support for the `storage_opt` parameter in in service definitions.
+- Added support for the `storage_opt` parameter in service definitions.
   This option is not available for the v3 format
 
 #### All formats
