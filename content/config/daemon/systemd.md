@@ -1,7 +1,7 @@
 ---
-description: Learn about controlling and configuring the Docker daemon using systemd
-keywords: dockerd, daemon, systemd, configuration, proxy, networking
-title: Configure the daemon with systemd
+description: Learn how to configure the Docker daemon to use an HTTP proxy
+keywords: dockerd, daemon, configuration, proxy, networking, http_proxy, https_proxy, no_proxy, systemd, environment variables
+title: Configure the daemon to use a proxy
 aliases:
   - /articles/host_integration/
   - /articles/systemd/
@@ -9,36 +9,29 @@ aliases:
   - /engine/articles/systemd/
 ---
 
-This page describes how to customize daemon settings when using systemd.
+<a name="httphttps-proxy"><!-- included for deep-links to old section --></a>
 
-## Custom Docker daemon options
+If your organization uses a proxy server to connect to the internet, you may
+need to configure the Docker daemon to use the proxy server. The daemon uses
+a proxy server to access images stored on Docker Hub and other registries,
+and to reach other nodes in a Docker swarm.
 
-Most configuration options for the Docker daemon are set using the `daemon.json`
-configuration file. See [Docker daemon configuration overview](./index.md) for
-more information.
+This page describes how to configure a proxy for the Docker daemon. For
+instructions on configuring proxy settings for the Docker CLI, see [Configure
+Docker to use a proxy server](../../network/proxy.md).
 
-## Manually create the systemd unit files
+There are two ways you can configure these settings:
 
-When installing the binary without a package manager, you may want to integrate
-Docker with systemd. For this, install the two unit files (`service` and
-`socket`) from
-[the GitHub repository](https://github.com/moby/moby/tree/master/contrib/init/systemd)
-to `/etc/systemd/system`.
+- [Configuring the daemon](#daemon-configuration) through a configuration file or CLI flags
+- Setting [environment variables](#environment-variables) on the system
 
-### Configure the Docker daemon to use a proxy server {#httphttps-proxy}
+Configuring the daemon directly takes precedence over environment variables.
 
-The Docker daemon uses the following environment variables in
-its start-up environment to configure HTTP or HTTPS proxy behavior:
+## Daemon configuration
 
-- `HTTP_PROXY`
-- `http_proxy`
-- `HTTPS_PROXY`
-- `https_proxy`
-- `NO_PROXY`
-- `no_proxy`
-
-In Docker Engine version 23.0 and later versions, you may also configure proxy
-behavior for the daemon in the [`daemon.json` file](./index.md#configure-the-docker-daemon):
+You may configure proxy behavior for the daemon in the `daemon.json` file,
+or using CLI flags for the `--http-proxy` or `--https-proxy` flags for the
+`dockerd` command. Configuration using `daemon.json` is recommended.
 
 ```json
 {
@@ -50,11 +43,26 @@ behavior for the daemon in the [`daemon.json` file](./index.md#configure-the-doc
 }
 ```
 
-These configurations override the default `docker.service` systemd file.
+After changing the configuration file, restart the daemon for the proxy configuration to take effect:
 
-If you're behind an HTTP or HTTPS proxy server, for example in corporate
-settings, the daemon proxy configurations must be specified in the systemd
-service file, not in the `daemon.json` file or using environment variables.
+```console
+$ sudo systemctl restart docker
+```
+
+## Environment variables
+
+The Docker daemon checks the following environment variables in its start-up
+environment to configure HTTP or HTTPS proxy behavior:
+
+- `HTTP_PROXY`
+- `http_proxy`
+- `HTTPS_PROXY`
+- `https_proxy`
+- `NO_PROXY`
+- `no_proxy`
+
+If you're running the Docker daemon as a systemd service, you can create a
+systemd drop-in file that sets the variables for the `docker` service.
 
 > **Note for rootless mode**
 >
@@ -62,12 +70,12 @@ service file, not in the `daemon.json` file or using environment variables.
 > in [rootless mode](../../engine/security/rootless.md). When running in
 > rootless mode, Docker is started as a user-mode systemd service, and uses
 > files stored in each users' home directory in
-> `~/.config/systemd/user/docker.service.d/`. In addition, `systemctl` must be
-> executed without `sudo` and with the `--user` flag. Select the _"rootless
-> mode"_ tab below if you are running Docker in rootless mode.
+> `~/.config/systemd/<user>/docker.service.d/`. In addition, `systemctl` must
+> be executed without `sudo` and with the `--user` flag. Select the "Rootless
+> mode" tab if you are running Docker in rootless mode.
 
 {{< tabs >}}
-{{< tab name="regular install" >}}
+{{< tab name="Regular install" >}}
 
 1. Create a systemd drop-in directory for the `docker` service:
 
@@ -154,7 +162,7 @@ service file, not in the `daemon.json` file or using environment variables.
    ```
 
 {{< /tab >}}
-{{< tab name="rootless mode" >}}
+{{< tab name="Rootless mode" >}}
 
 1. Create a systemd drop-in directory for the `docker` service:
 
