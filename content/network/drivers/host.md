@@ -85,13 +85,14 @@ $ nc localhost 80
 
 ### Limitations
 
-The host network feature of Docker Desktop works on layer 4. This means that
+- The host network feature of Docker Desktop works on layer 4. This means that
 unlike with Docker on Linux, network protocols that operate below TCP or UDP are
 not supported.
-
-Also, the feature doesn't work with Enhanced Container Isolation enabled, since
+- This feature doesn't work with Enhanced Container Isolation enabled, since
 isolating your containers from the host and allowing them access to the host
 network contradict each other.
+- IPv6 is not yet supported. Services need to use IPv4 and bind to address
+  127.0.0.1 in the container to be visible on the host.
 
 ## Next steps
 
