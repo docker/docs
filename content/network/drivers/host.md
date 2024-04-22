@@ -92,7 +92,7 @@ not supported.
 isolating your containers from the host and allowing them access to the host
 network contradict each other.
 - IPv6 is not yet supported. Services need to use IPv4 and bind to address
-  127.0.0.1 in the container to be visible on the host.
+  `127.0.0.1` in the container to be visible on the host.
 
 ## Next steps
 
