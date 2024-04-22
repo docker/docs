@@ -24,7 +24,7 @@ This example might look like:
 
 ![screenshot of the flowchart showing the concept of the image layers](images/container_image_layers.webp?border=true)
 
-Why is this beneficial? With layering, you can reuse the layers from one image for another image. For example, imagine you wanted to create another Python application. Due to layering, you can leverage the same Python base. This will make builds faster and reduce the amount of storage and bandwidth required to distribute the images. The image layering might look similar to the following:
+This is beneficial because it allows layers to be reused between images. For example, imagine you wanted to create another Python application. Due to layering, you can leverage the same Python base. This will make builds faster and reduce the amount of storage and bandwidth required to distribute the images. The image layering might look similar to the following:
 
 ![screenshot of the flowchart showing the benefits of the image layering](images/container_image_layer_reuse.webp?border=true)
 
