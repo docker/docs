@@ -7,6 +7,7 @@ aliases:
   - /articles/systemd/
   - /engine/admin/systemd/
   - /engine/articles/systemd/
+  - /config/daemon/systemd/
 ---
 
 <a name="httphttps-proxy"><!-- included for deep-links to old section --></a>
@@ -60,6 +61,8 @@ environment to configure HTTP or HTTPS proxy behavior:
 - `https_proxy`
 - `NO_PROXY`
 - `no_proxy`
+
+### systemd unit file
 
 If you're running the Docker daemon as a systemd service, you can create a
 systemd drop-in file that sets the variables for the `docker` service.

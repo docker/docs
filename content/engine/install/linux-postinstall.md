@@ -96,7 +96,7 @@ To create the `docker` group and add your user:
 
 ## Configure Docker to start on boot with systemd
 
-Many modern Linux distributions use [systemd](../../config/daemon/systemd.md) to
+Many modern Linux distributions use [systemd](https://systemd.io/) to
 manage which services start when the system boots. On Debian and Ubuntu, the
 Docker service starts on boot by default. To automatically start Docker and
 containerd on boot for other Linux distributions using systemd, run the
@@ -114,9 +114,10 @@ $ sudo systemctl disable docker.service
 $ sudo systemctl disable containerd.service
 ```
 
-If you need to add an HTTP proxy, set a different directory or partition for the
-Docker runtime files, or make other customizations, see
-[customize your systemd Docker daemon options](../../config/daemon/systemd.md).
+You can use systemd unit files to configure the Docker service on startup,
+for example to add an HTTP proxy, set a different directory or partition for the
+Docker runtime files, or other customizations. For an example, see
+[Configure the daemon to use a proxy](../../config/daemon/proxy.md#systemd-unit-file).
 
 ## Configure default logging driver
 
