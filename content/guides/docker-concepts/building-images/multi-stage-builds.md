@@ -215,7 +215,7 @@ Now that you have the project, you’re ready to create the `Dockerfile`.
     ```
 
 
-    Based on this output, you can see that your image is 880MB in size! In this image, you have the full JDK, Maven toolchain, and more. In production, you don’t need that in your final image.
+    This output shows that your image is 880MB in size. It contains the full JDK, Maven toolchain, and more. In production, you don’t need that in your final image.
 
 
 ### Run the Spring Boot application
