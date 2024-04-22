@@ -27,7 +27,7 @@ Here are a few examples of situations that can cause cache to be invalidated:
 
 - For `RUN` instructions, any changes to the command invalidates that layer. For example, say you modified a `RUN` command in your Dockerfile. Docker detects the change and invalidates the build cache if there's any modification to a `RUN` command in your Dockerfile.
 
-- For `COPY` or `ADD` instructions, any changes to the files being copied invalidate that layer. Docker keeps an eye on any alterations to files within your project directory. Whether it's a change in content or properties like permissions, Docker considers these modifications as triggers to invalidate the cache.
+- Any changes to files copied into the image with the `COPY` or `ADD` instructions. Docker keeps an eye on any alterations to files within your project directory. Whether it's a change in content or properties like permissions, Docker considers these modifications as triggers to invalidate the cache.
 
 - Once one layer is invalidated, all following layers are also invalidated. If any previous layer, including the base image or intermediary layers, has been invalidated due to changes, Docker ensures that subsequent layers relying on it are also invalidated. This keeps the build process synchronized and prevents inconsistencies.
 
