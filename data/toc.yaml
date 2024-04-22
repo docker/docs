@@ -1570,6 +1570,8 @@ Manuals:
       title: Filter commands
     - path: /config/formatting/
       title: Format command and log output
+    - path: /config/otel/
+      title: OpenTelemetry
   - sectiontitle: Manage resources
     section:
     - path: /config/pruning/
