@@ -1570,6 +1570,8 @@ Manuals:
       title: Filter commands
     - path: /config/formatting/
       title: Format command and log output
+    - path: /config/otel/
+      title: OpenTelemetry
   - sectiontitle: Manage resources
     section:
     - path: /config/pruning/
@@ -1752,10 +1754,12 @@ Manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/26.0/
-      title: Engine 26.0
+    - path: /engine/release-notes/26.1/
+      title: Engine 26.1
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/26.0/
+        title: Engine 26.0
       - path: /engine/release-notes/25.0/
         title: Engine 25.0
       - path: /engine/release-notes/24.0/
