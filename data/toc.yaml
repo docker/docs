@@ -58,8 +58,18 @@ Guides:
       path: /guides/docker-concepts/the-basics/what-is-a-registry/
     - title: "What is Docker Compose?"
       path: /guides/docker-concepts/the-basics/what-is-docker-compose/
-
-
+  - sectiontitle: "Building images"
+    section:
+    - title: "Understanding image layers"
+      path: /guides/docker-concepts/building-images/understanding-image-layers/
+    - title: "Writing a Dockerfile"
+      path: /guides/docker-concepts/building-images/writing-a-dockerfile/
+    - title: "Build, tag and publish an image"
+      path: /guides/docker-concepts/building-images/build-tag-and-publish-an-image/
+    - title: "Using the build cache"
+      path: /guides/docker-concepts/building-images/using-the-build-cache/
+    - title: "Multi-stage builds"
+      path: /guides/docker-concepts/building-images/multi-stage-builds/
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
