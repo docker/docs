@@ -28,7 +28,7 @@ Why is this beneficial? With layering, you can reuse the layers from one image f
 
 ![screenshot of the flowchart showing the benefits of the image layering](images/container_image_layer_reuse.webp?border=true)
 
-With this layering, you can easily extend the images of others! As a developer, it allows you to focus on your unique application needs.
+Layers let you extend images of others by reusing their base layers, allowing you to add only the data that your application needs.
 
 ### Merging the layers
 
