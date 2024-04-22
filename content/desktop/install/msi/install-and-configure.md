@@ -127,4 +127,5 @@ Additionally, you can also use `/norestart` or `/forcerestart` to control reboot
 
 By default, the installer reboots the machine after a successful installation. When ran silently, the reboot is automatic and the user is not prompted.
 
-
+## Additional resources
+- [Explore the FAQs](faq.md).

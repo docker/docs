@@ -6,13 +6,9 @@ keywords: msi, docker desktop, windows, installation
  
 Docker offers a 64-bit Microsoft Installer (MSI) package designed to assist IT administrators in customizing and deploying Docker Desktop across multiple users or machines in an enterprise environment. 
 
-The MSI package supports various MDM (Mobile Device Management) solutions, making it ideal for bulk installations and eliminating the need for manual setups by individual users. With this package, IT administrators can ensure standardized, policy-driven installations of Docker Desktop, enhancing efficiency and software management across their organizations. Instead, it is installed and automatically launched the first time a developer signs in to their machine, simplifying the setup process.
+The MSI package supports various MDM (Mobile Device Management) solutions, making it ideal for bulk installations and eliminating the need for manual setups by individual users. With this package, IT administrators can ensure standardized, policy-driven installations of Docker Desktop, enhancing efficiency and software management across their organizations. Instead, it is installed and available for developers when they sign in. 
 
- Whether you're looking to implement scripted installations or integrate Docker Desktop with existing MDM solutions, this MSI package is an essential resource.
-
-## How it works
-
-Todo
+Whether you're looking to implement scripted installations or integrate Docker Desktop with existing MDM solutions, this MSI package is an essential resource.
 
 
 ## What's next

@@ -35,3 +35,5 @@ You can suppress reboots by using the `/norestart` option when launching the ins
 ```powershell
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /norestart
 ```
+
+
