@@ -8,7 +8,7 @@ description: This concept page will teach you about the layers of container imag
 
 ## Explanation
 
-As you learned in [What is an image?](../the-basics/what-is-an-image/), container images are composed of layers. And each of these layers, once created, are immutable. But, what does that actually mean? And how are those layers then merged back together to create the filesystem a container will use?
+As you learned in [What is an image?](../the-basics/what-is-an-image/), container images are composed of layers. And each of these layers, once created, are immutable. But, what does that actually mean? And how are those layers used to create the filesystem a container can use?
 
 ### Image layers
 
