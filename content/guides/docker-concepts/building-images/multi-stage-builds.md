@@ -100,7 +100,7 @@ In this hands-on experience, you'll unlock the power of multi-stage builds to cr
    contains most of the information needed to build a customized project. The POM is huge and can seem    
    daunting. Thankfully, you don't yet need to understand every intricacy to use it effectively. 
 
-4. Create a simple RESTful web service that displays "Hello World!". 
+4. Create a RESTful web service that displays "Hello World!". 
 
     
     Under the `src/main/java/com/example/springbootdocker/` directory, you can modify your  
