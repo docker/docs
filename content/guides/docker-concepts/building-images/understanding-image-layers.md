@@ -112,7 +112,7 @@ In this first step, you will create your own base image that you will then use f
     $ docker run node-base node -e "console.log('Hello again')"
     ```
 
-    With that, you should get a “Hello again” output in the terminal, showing Node was installed and working!
+    With that, you should get a “Hello again” output in the terminal, showing Node was installed and working.
 
 8. Now that you’re done creating your base image, you can remove that container:
 
