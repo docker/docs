@@ -32,7 +32,7 @@ Layers let you extend images of others by reusing their base layers, allowing yo
 
 ### Stacking the layers
 
-The magic for merging the layers lies in the use of a union filesystem. While this will get technical, here’s how it works:
+Layering is made possible by content-addressable storage and union filesystems. While this will get technical, here’s how it works:
 
 1. After each layer is downloaded, it is extracted into its own directory on the host filesystem. 
 2. A union filesystem is created. This stacks each of the layers' directories on top of each other into a new directory, giving a new and unified view. 
