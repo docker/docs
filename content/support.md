@@ -6,11 +6,11 @@ aliases:
 - /desktop/support/
 ---
 
-Find information on how to get support, and the scope of Docker support.
+Find information on how to get support, and the scope of support.
 
 ## How do I get support?
 
-If you have a paid Docker subscription, raise a ticket through [Docker support](https://hub.docker.com/support/contact/).
+If you have a paid Docker subscription, you can [contact the Support team](https://hub.docker.com/support/contact/).
 
 All Docker users can seek support through the following resources, where Docker or the community respond on a best effort basis.
    - [Docker Desktop for Windows GitHub repo](https://github.com/docker/for-win) 
