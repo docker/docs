@@ -35,7 +35,7 @@ Layers let you extend images of others by reusing their base layers, allowing yo
 Layering is made possible by content-addressable storage and union filesystems. While this will get technical, here’s how it works:
 
 1. After each layer is downloaded, it is extracted into its own directory on the host filesystem. 
-2. A union filesystem is created. This stacks each of the layers' directories on top of each other into a new directory, giving a new and unified view. 
+2. When you run a container from an image, a union filesystem is created where layers are stacked on top of each other, creating a new and unified view.
 3. When the container starts, its root directory is set to the location of this unified directory, using `chroot`.
 
 When the union filesystem is created, in addition to the image layers, a directory is created specifically for the running container. This allows the container to make filesystem changes while allowing the original image layers to remain untouched. This enables you to run multiple containers from the same underlying image.
