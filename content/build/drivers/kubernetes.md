@@ -46,6 +46,7 @@ can pass to `--driver-opt`:
 | `labels`                     | CSV string        |                                         | Sets additional labels on the deployments and pods.                                                                                  |
 | `tolerations`                | CSV string        |                                         | Configures the pod's taint toleration. See [node assignment][2].                                                                     |
 | `serviceaccount`             | String            |                                         | Sets the pod's `serviceAccountName`.                                                                                                 |
+| `schedulername`              | String            |                                         | Sets the scheduler responsible for scheduling the pod.                                                                               |
 | `rootless`                   | `true`,`false`    | `false`                                 | Run the container as a non-root user. See [rootless mode][3].                                                                        |
 | `loadbalance`                | `sticky`,`random` | `sticky`                                | Load-balancing strategy. If set to `sticky`, the pod is chosen using the hash of the context path.                                   |
 | `qemu.install`               | `true`,`false`    |                                         | Install QEMU emulation for multi platforms support. See [QEMU][4].                                                                   |
@@ -112,6 +113,8 @@ For more information on scalability, see the options for
 
 The Kubernetes driver allows you to control the scheduling of BuildKit pods
 using the `nodeSelector` and `tolerations` driver options.
+You can also set the `schedulername` option if you want to use a custom scheduler altogether.
+
 You can use the `annotations` and `labels` driver options to apply additional
 metadata to the deployments and pods that's hosting your builders.
 
