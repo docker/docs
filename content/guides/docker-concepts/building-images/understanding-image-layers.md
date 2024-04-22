@@ -30,7 +30,7 @@ Why is this beneficial? With layering, you can reuse the layers from one image f
 
 Layers let you extend images of others by reusing their base layers, allowing you to add only the data that your application needs.
 
-### Merging the layers
+### Stacking the layers
 
 The magic for merging the layers lies in the use of a union filesystem. While this will get technical, here’s how it works:
 
