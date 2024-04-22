@@ -36,7 +36,7 @@ The magic for merging the layers lies in the use of a union filesystem. While th
 
 1. After each layer is downloaded, it is extracted into its own directory on the host filesystem. 
 2. A union filesystem is created. This stacks each of the layers' directories on top of each other into a new directory, giving a new and unified view. 
-3. When the container is started, its root directory is set to the location of this merged directory (using `chroot`).
+3. When the container starts, its root directory is set to the location of this unified directory, using `chroot`.
 
 When the union filesystem is created, in addition to the image layers, a directory is created specifically for the running container. This allows the container to make filesystem changes while allowing the original image layers to remain untouched. This enables you to run multiple containers from the same underlying image.
 
