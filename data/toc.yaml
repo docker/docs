@@ -1754,10 +1754,12 @@ Manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/26.0/
-      title: Engine 26.0
+    - path: /engine/release-notes/26.1/
+      title: Engine 26.1
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/26.0/
+        title: Engine 26.0
       - path: /engine/release-notes/25.0/
         title: Engine 25.0
       - path: /engine/release-notes/24.0/
