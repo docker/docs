@@ -1,6 +1,7 @@
 A?GPLv3
 APIs?
 ARM
+Netplan
 AWS
 Amazon
 Ambassador

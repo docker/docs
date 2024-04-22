@@ -289,3 +289,167 @@ Docker isn't running.
    case, repeat steps 2 and 3.
 
    The changes take effect when you reboot the system.
+
+## Docker networks disappearing or losing their IP address
+
+If a Docker network (the `docker0` bridge or a custom network) doesn't appear
+to be working correctly, it could be because another service is interfering
+with or modifying Docker interfaces. Tools that manage networking interfaces on
+the host are known to sometimes also inappropriately modify Docker interfaces.
+
+Refer to the following sections for instructions on how to configure your
+network manager to set Docker interfaces as un-managed, depending on the
+network management tools that exist on the host:
+
+- If `netscript` is installed, consider [uninstalling it](#uninstall-netscript)
+- Configure the network manager to [treat Docker interfaces as un-managed](#un-manage-docker-interfaces)
+- If you're using Netplan, you may need to [apply a custom Netplan configuration](#prevent-netplan-from-overriding-network-configuration)
+
+### Uninstall `netscript`
+
+If `netscript` is installed on your system, you can likely fix this issue by
+uninstalling it. For example, on a Debian-based system:
+
+```console
+$ sudo apt-get remove netscript-2.4
+```
+
+### Un-manage Docker interfaces
+
+In some cases, the network manager will attempt to manage Docker interfaces by
+default. You can try to explicitly flag Docker networks as un-managed by
+editing your system's network configuration settings.
+
+{{< tabs >}}
+{{< tab name="NetworkManager" >}}
+
+If you're using `NetworkManager`, edit your system network configuration under
+`/etc/network/interfaces`
+
+1. Create a file at `/etc/network/interfaces.d/20-docker0` with the following
+   contents:
+
+   ```text
+   iface docker0 inet manual
+   ```
+
+   Note that this example configuration only "un-manages" the default `docker0`
+   bridge, not custom networks.
+
+2. Restart `NetworkManager` for the configuration change to take effect.
+
+   ```console
+   $ systemctl restart NetworkManager
+   ```
+
+3. Verify that the `docker0` interface has the `unmanaged` state.
+
+   ```console
+   $ nmcli device
+   ```
+
+{{< /tab >}}
+{{< tab name="systemd-networkd" >}}
+
+If you're running Docker on a system using `systemd-networkd` as a networking
+daemon, configure the Docker interfaces as un-managed by creating configuration
+files under `/etc/systemd/network`:
+
+1. Create `/etc/systemd/network/docker0.network` with the following contents:
+
+   ```ini
+   # Ensure that the 'docker0' interface is un-managed
+   
+   [Match]  
+   Name=docker0
+   
+   [Link]
+   Unmanaged=yes
+   ```
+
+2. Create `/etc/systemd/network/dockerbridge.network` with the following contents:
+
+   ```ini
+   # Ensure that the docker interfaces 'br-' are un-managed
+   
+   [Match]  
+   Name=br-*
+   
+   [Link]
+   Unmanaged=yes
+   ```
+
+3. Create `/etc/systemd/network/veth.network` with the following contents:
+
+   ```ini
+   # Ensure that veth interfaces are un-managed
+   
+   [Match]  
+   Driver=veth*
+   
+   [Link]
+   Unmanaged=yes
+   ```
+
+4. Reload the configuration.
+
+   ```console
+   $ sudo systemctl restart systemd-networkd
+   ```
+
+5. Restart the Docker daemon.
+
+   ```console
+   $ sudo systemctl restart docker
+   ```
+
+6. Verify that the Docker interfaces have the `unmanaged` state.
+
+   ```console
+   $ networkctl
+   ```
+
+{{< /tab >}}
+{{< /tabs >}}
+
+### Prevent Netplan from overriding network configuration
+
+On systems that use [Netplan](https://netplan.io/) through
+[`cloud-init`](https://cloudinit.readthedocs.io/en/latest/index.html), you may
+need to apply a custom configuration to prevent `netplan` from overriding the
+network manager configuration:
+
+1. Follow the steps in [Un-manage Docker interfaces](#un-manage-docker-interfaces)
+   for creating the network manager configuration.
+2. Create a `netplan` configuration file under `/etc/netplan/50-cloud-init.yml`
+   with the following contents:
+
+   ```yaml
+   network:
+    ethernets:
+        all:
+            dhcp4: true
+            dhcp6: true
+            match:
+                name: en*
+    renderer: networkd
+    version: 2
+   ```
+
+3. Apply the new Netplan configuration.
+
+   ```console
+   $ sudo netplan apply
+   ```
+
+4. Restart the Docker daemon:
+
+   ```console
+   $ sudo systemctl restart docker
+   ```
+
+5. Verify that the Docker interfaces have the `unmanaged` state.
+
+   ```console
+   $ networkctl
+   ```
