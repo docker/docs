@@ -25,7 +25,7 @@ Using the build cache effectively lets you achieve faster builds by reusing resu
 In order to maximize cache usage and avoid resource-intensive and time-consuming rebuilds, it's important to understand how cache invalidation works.
 Here are a few examples of situations that can cause cache to be invalidated:
 
-- For `RUN` instructions, any changes to the command invalidates that layer. For example, say you modified a `RUN` command in your Dockerfile. Docker detects the change and invalidates the build cache if there's any modification to a `RUN` command in your Dockerfile.
+- Any changes to the command of a `RUN` instruction invalidates that layer. Docker detects the change and invalidates the build cache if there's any modification to a `RUN` command in your Dockerfile.
 
 - Any changes to files copied into the image with the `COPY` or `ADD` instructions. Docker keeps an eye on any alterations to files within your project directory. Whether it's a change in content or properties like permissions, Docker considers these modifications as triggers to invalidate the cache.
 
