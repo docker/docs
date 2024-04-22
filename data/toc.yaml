@@ -1113,6 +1113,8 @@ Manuals:
            title: Overview
          - path: /desktop/install/msi/install-and-configure/
            title: Install and configure
+         - path: /desktop/install/use-intune/
+           title: Use Intune
          - path: /desktop/install/msi/faq/
            title: FAQs
        - path: /desktop/windows/permission-requirements/

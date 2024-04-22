@@ -25,4 +25,5 @@ Learn how to deploy Docker Desktop using Intune, Microsoft's cloud-based device 
 7. Complete the rest of the tabs and then review and create the app. 
 
 ## Additional resources
+
 - [Explore the FAQs](faq.md).
