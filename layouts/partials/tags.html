@@ -1,0 +1,13 @@
+{{- /*
+  List of tag "chips" as links
+  Context: page.Pages
+  */ -}}
+{{- range . -}}
+{{- if eq .File nil }}
+  {{- errorf "[tags] Undefined tag: '%s' in %s" (urlize (strings.ToLower .Title)) page.File.Filename }}
+{{- end }}
+<a class="flex items-center gap-2 lg:text-base px-2 rounded text-gray-light-800 bg-gray-light-200 dark:bg-gray-dark-300 dark:text-gray-dark-800" href="{{ .Permalink }}">
+  <div class="icon-svg icon-sm pb-0.5">{{ partialCached "icon" .Params.icon .Params.icon }}</div>
+  <div>{{ .LinkTitle }}</div>
+</a>
+{{- end -}}

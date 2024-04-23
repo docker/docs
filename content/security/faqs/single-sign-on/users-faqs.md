@@ -2,8 +2,10 @@
 description: Single Sign-on user management FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on
 title: Manage users
+tags: [FAQ]
 aliases:
 - /single-sign-on/users-faqs/
+- /faq/security/single-sign-on/users-faqs/
 ---
 
 ### How do I manage users when using SSO?

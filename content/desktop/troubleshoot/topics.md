@@ -3,6 +3,7 @@ description: Explore common troubleshooting topics for Docker Desktop
 keywords: Linux, Mac, Windows, troubleshooting, topics, Docker Desktop
 title: Troubleshoot topics for Docker Desktop
 toc_max: 4
+tags: [ Troubleshooting ]
 ---
 
 > **Tip**

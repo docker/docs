@@ -1,0 +1,19 @@
+{{ define "main" }}
+  {{ partial "breadcrumbs.html" . }}
+  <article class="DocSearch-content prose max-w-none dark:prose-invert">
+    <h1 class="scroll-mt-36">{{ .Title }}</h1>
+    {{ .Content }}
+    <div class="grid grid-cols-3 gap-4 sm:flex sm:flex-col lg:grid-cols-2">
+    {{ range site.Taxonomies.tags }}
+    {{ partial "components/card.html"
+      (dict
+        "link" .Page.Permalink
+        "title" .Page.Title
+        "description" .Page.Description
+        "icon" .Page.Params.icon
+      )
+    }}
+    {{ end }}
+    </div>
+  </article>
+{{ end }}

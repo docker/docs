@@ -2,6 +2,7 @@
 title: Build secrets
 description: Manage credentials and other secrets securely
 keywords: build, secrets, credentials, passwords, tokens, ssh, git, auth, http
+tags: [Secrets]
 ---
 
 A build secret is any piece of sensitive information, such as a password or API

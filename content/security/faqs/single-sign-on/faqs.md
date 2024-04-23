@@ -2,8 +2,10 @@
 description: Single Sign-on FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, administration, security
 title: General FAQs on SSO
+tags: [FAQ]
 aliases:
 - /single-sign-on/faqs/
+- /faq/security/single-sign-on/faqs/
 ---
 
 ### Is Docker SSO available for all paid subscriptions?

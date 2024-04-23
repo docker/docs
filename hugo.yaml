@@ -4,9 +4,9 @@ refLinksErrorLevel: ERROR
 enableGitInfo: true
 disablePathToLower: true
 enableInlineShortcodes: true
-disableKinds:
-  - taxonomy
-  - term
+
+taxonomies:
+  tag: tags
 
 markup:
   tableOfContents:
@@ -126,12 +126,6 @@ menus:
   - name: Reference
     url: /reference/
     weight: 3
-  - name: Samples
-    url: /samples/
-    weight: 4
-  - name: FAQ
-    url: /faq/
-    weight: 5
 
   footer:
     - url: https://www.docker.com/products
@@ -236,7 +230,7 @@ module:
   proxy: https://proxy.golang.org,direct
   hugoVersion:
     extended: false
-    min: "0.116.1"
+    min: "0.124.1"
   mounts:
     - source: assets
       target: assets

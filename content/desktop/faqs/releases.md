@@ -2,6 +2,7 @@
 description: Frequently asked Docker Desktop questions for all platforms
 keywords: desktop, mac, windows, faqs
 title: FAQs on Docker Desktop releases
+tags: [FAQ]
 ---
 
 ### How frequent will new releases be?

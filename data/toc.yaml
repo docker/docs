@@ -1016,103 +1016,100 @@ Reference:
           title: Version 2
 - path: /glossary/
   title: Glossary
-
-
-
-Samples:
-- path: /samples/
-  title: Overview
-- sectiontitle: Databases
+- sectiontitle: Samples
   section:
-    - path: /samples/mariadb/
-      title: MariaDB
-    - path: /samples/mongodb/
-      title: MongoDB
-    - path: /samples/ms-sql/
-      title: MS-SQL
-    - path: /samples/mysql/
-      title: MySQL
-    - path: /samples/postgres/
-      title: PostgreSQL
-    - path: /samples/redis/
-      title: Redis
-- sectiontitle: Frameworks
-  section:
-    - path: /samples/dotnet/
-      title: .NET
-    - path: /samples/angular/
-      title: Angular
-    - path: /samples/django/
-      title: Django
-    - path: /samples/express/
-      title: Express
-    - path: /samples/fastapi/
-      title: FastAPI
-    - path: /samples/flask/
-      title: Flask
-    - path: /samples/nodejs/
-      title: Node.js
-    - path: /samples/react/
-      title: React
-    - path: /samples/rails/
-      title: Rails
-    - path: /samples/spark/
-      title: Spark
-    - path: /samples/spring/
-      title: Spring Boot
-    - path: /samples/vuejs/
-      title: Vue.js
-- sectiontitle: Languages
-  section:
-    - path: /samples/go/
-      title: Go
-    - path: /samples/java/
-      title: Java
-    - path: /samples/javascript/
-      title: JavaScript
-    - path: /samples/php/
-      title: PHP
-    - path: /samples/python/
-      title: Python
-    - path: /samples/ruby/
-      title: Ruby
-    - path: /samples/rust/
-      title: Rust
-    - path: /samples/typescript/
-      title: TypeScript
-- sectiontitle: Platforms
-  section:
-    - path: /samples/gitea/
-      title: Gitea
-    - path: /samples/nextcloud/
-      title: Nextcloud
-    - path: /samples/portainer/
-      title: Portainer
-    - path: /samples/prometheus/
-      title: Prometheus
-    - path: /samples/wordpress/
-      title: WordPress
-- sectiontitle: Other samples
-  section:
-    - path: /samples/ai-ml/
-      title: AI/ML
-    - path: /samples/cloudflared/
-      title: Cloudflared
-    - path: /samples/elasticsearch/
-      title: Elasticsearch / Logstash / Kibana
-    - path: /samples/minecraft/
-      title: Minecraft
-    - path: /samples/nginx/
-      title: NGINX
-    - path: /samples/pi-hole/
-      title: Pi-hole
-    - path: /samples/plex/
-      title: Plex
-    - path: /samples/traefik/
-      title: Traefik
-    - path: /samples/wireguard/
-      title: Wireguard
-
+  - path: /samples/
+    title: Overview
+  - sectiontitle: Databases
+    section:
+      - path: /samples/mariadb/
+        title: MariaDB
+      - path: /samples/mongodb/
+        title: MongoDB
+      - path: /samples/ms-sql/
+        title: MS-SQL
+      - path: /samples/mysql/
+        title: MySQL
+      - path: /samples/postgres/
+        title: PostgreSQL
+      - path: /samples/redis/
+        title: Redis
+  - sectiontitle: Frameworks
+    section:
+      - path: /samples/dotnet/
+        title: .NET
+      - path: /samples/angular/
+        title: Angular
+      - path: /samples/django/
+        title: Django
+      - path: /samples/express/
+        title: Express
+      - path: /samples/fastapi/
+        title: FastAPI
+      - path: /samples/flask/
+        title: Flask
+      - path: /samples/nodejs/
+        title: Node.js
+      - path: /samples/react/
+        title: React
+      - path: /samples/rails/
+        title: Rails
+      - path: /samples/spark/
+        title: Spark
+      - path: /samples/spring/
+        title: Spring Boot
+      - path: /samples/vuejs/
+        title: Vue.js
+  - sectiontitle: Languages
+    section:
+      - path: /samples/go/
+        title: Go
+      - path: /samples/java/
+        title: Java
+      - path: /samples/javascript/
+        title: JavaScript
+      - path: /samples/php/
+        title: PHP
+      - path: /samples/python/
+        title: Python
+      - path: /samples/ruby/
+        title: Ruby
+      - path: /samples/rust/
+        title: Rust
+      - path: /samples/typescript/
+        title: TypeScript
+  - sectiontitle: Platforms
+    section:
+      - path: /samples/gitea/
+        title: Gitea
+      - path: /samples/nextcloud/
+        title: Nextcloud
+      - path: /samples/portainer/
+        title: Portainer
+      - path: /samples/prometheus/
+        title: Prometheus
+      - path: /samples/wordpress/
+        title: WordPress
+  - sectiontitle: Other samples
+    section:
+      - path: /samples/ai-ml/
+        title: AI/ML
+      - path: /samples/cloudflared/
+        title: Cloudflared
+      - path: /samples/elasticsearch/
+        title: Elasticsearch / Logstash / Kibana
+      - path: /samples/minecraft/
+        title: Minecraft
+      - path: /samples/nginx/
+        title: NGINX
+      - path: /samples/pi-hole/
+        title: Pi-hole
+      - path: /samples/plex/
+        title: Plex
+      - path: /samples/traefik/
+        title: Traefik
+      - path: /samples/wireguard/
+        title: Wireguard
 
 Manuals:
 - path: /manuals/
@@ -1247,6 +1244,18 @@ Manuals:
       title: Uninstall Docker Desktop
     - path: /desktop/feedback/
       title: Give feedback
+    - sectiontitle: Desktop FAQs
+      section:
+      - path: /desktop/faqs/general/
+        title: General
+      - path: /desktop/faqs/macfaqs/
+        title: Mac
+      - path: /desktop/faqs/windowsfaqs/
+        title: Windows
+      - path: /desktop/faqs/linuxfaqs/
+        title: Linux
+      - path: /desktop/faqs/releases/
+        title: Releases
     - path: /desktop/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
@@ -2050,6 +2059,8 @@ Manuals:
     title: Give feedback
   - path: /compose/migrate/
     title: Migrate to Compose V2
+  - path: /compose/faq/
+    title: Compose FAQ
   - path: /compose/release-notes/
     title: Release notes
 
@@ -2136,6 +2147,14 @@ Manuals:
       title: Manage users
     - path: /admin/company/owners/
       title: Manage company owners
+  - sectiontitle: Account and admin FAQ
+    section:
+    - path: /admin/faqs/general-faqs/
+      title: General
+    - path: /admin/faqs/organization-faqs/
+      title: Organization
+    - path: /admin/faqs/company-faqs/
+      title: Company
   - path: /admin/convert-account/
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
@@ -2189,6 +2208,28 @@ Manuals:
         title: Generate a new recovery code
   - path: /security/security-announcements/
     title: Security announcements
+  - sectiontitle: Security FAQs
+    section:
+    - path: /security/faqs/general/
+      title: General
+    - path: /security/faqs/networking-and-vms/
+      title: Networking and VMs
+    - path: /security/faqs/eci-faq/
+      title: Enhanced Container Isolation
+    - sectiontitle: Single Sign-On
+      section:
+      - path: /security/faqs/single-sign-on/faqs/
+        title: General
+      - path: /security/faqs/single-sign-on/saml-faqs/
+        title: SAML
+      - path: /security/faqs/single-sign-on/idp-faqs/
+        title: Identity providers
+      - path: /security/faqs/single-sign-on/domain-faqs/
+        title: Domains
+      - path: /security/faqs/single-sign-on/enforcement-faqs/
+        title: Enforcement
+      - path: /security/faqs/single-sign-on/users-faqs/
+        title: Manage users
 
 - sectiontitle: Billing
   section:
@@ -2208,6 +2249,8 @@ Manuals:
     title: Docker Build Cloud billing
   - path: /billing/scout-billing/
     title: Docker Scout billing
+  - path: /billing/faqs/
+    title: Billing FAQs
 
 - sectiontitle: Subscription
   section:
@@ -2235,6 +2278,8 @@ Manuals:
     title: Docker Scout subscriptions and features
   - path: /subscription/desktop-license/
     title: Docker Desktop license agreement
+  - path: /subscription/faq/
+    title: Subscription FAQ
 
 - sectiontitle: Trusted content
   section:
@@ -2255,61 +2300,7 @@ Manuals:
   - path: /trusted-content/insights-analytics/
     title: Insights and analytics
 
-- path: /release-notes/
-  title: Release notes
 - path: /support/
   title: Get support
 - path: /release-lifecycle/
   title: Product release lifecycle
-
-FAQ:
-  - path: /faq/
-    title: Overview
-  - path: /billing/faqs/
-    title: Billing
-  - path: /compose/faq/
-    title: Compose
-  - sectiontitle: Desktop
-    section:
-    - path: /desktop/faqs/general/
-      title: General
-    - path: /desktop/faqs/macfaqs/
-      title: Mac
-    - path: /desktop/faqs/windowsfaqs/
-      title: Windows
-    - path: /desktop/faqs/linuxfaqs/
-      title: Linux
-    - path: /desktop/faqs/releases/
-      title: Releases
-  - sectiontitle: Docker account and admin
-    section:
-    - path: /faq/admin/general-faqs/
-      title: General
-    - path: /faq/admin/organization-faqs/
-      title: Organization
-    - path: /faq/admin/company-faqs/
-      title: Company
-  - path: /subscription/faq/
-    title: Subscription
-  - sectiontitle: Security
-    section:
-    - path: /faq/security/general/
-      title: General
-    - path: /faq/security/networking-and-vms/
-      title: Networking and VMs
-    - path: /faq/security/eci-faq/
-      title: Enhanced Container Isolation
-    - sectiontitle: Single Sign-On
-      section:
-      - path: /faq/security/single-sign-on/faqs/
-        title: General
-      - path: /faq/security/single-sign-on/saml-faqs/
-        title: SAML
-      - path: /faq/security/single-sign-on/idp-faqs/
-        title: Identity providers
-      - path: /faq/security/single-sign-on/domain-faqs/
-        title: Domains
-      - path: /faq/security/single-sign-on/enforcement-faqs/
-        title: Enforcement
-      - path: /faq/security/single-sign-on/users-faqs/
-        title: Manage users

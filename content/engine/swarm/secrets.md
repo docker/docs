@@ -3,6 +3,7 @@ title: Manage sensitive data with Docker secrets
 description: How to securely store, retrieve, and use sensitive data with Docker services
 keywords: swarm, secrets, credentials, sensitive strings, sensitive data, security,
   encryption, encryption at rest
+tags: [Secrets]
 ---
 
 ## About secrets

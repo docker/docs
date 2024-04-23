@@ -2,8 +2,10 @@
 description: Single Sign-on domain FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, domains, domain verification
 title: Domains
+tags: [FAQ]
 aliases:
 - /single-sign-on/domain-faqs/
+- /faq/security/single-sign-on/domain-faqs/
 ---
 
 ### Can I add sub-domains?

@@ -2,8 +2,10 @@
 description: Single Sign-on enforcement FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, enforce SSO, SSO enforcement
 title: Enforcement
+tags: [FAQ]
 aliases:
 - /single-sign-on/enforcement-faqs/
+- /faq/security/single-sign-on/enforcement-faqs/
 ---
 
 ### We currently have a Docker Team subscription. How do we enable SSO?
