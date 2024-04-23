@@ -4,6 +4,8 @@ description: Learn about the Compose Bridge default transformation
 keywords: compose, bridge, kubernetes
 ---
 
+{{< include "compose-bridge-early-access.md" >}}
+
 Compose Bridge produces Kubernetes manifests so you can deploy
 your Compose application to Kubernetes that is enabled on Docker Desktop.
 

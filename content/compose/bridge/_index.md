@@ -4,6 +4,7 @@ keywords: compose, orchestration, kubernetes, bridge
 title: Overview of Docker Compose Bridge
 ---
 
+{{< include "compose-bridge-early-access.md" >}}
 
 ## Introduction
 
@@ -82,7 +83,7 @@ For more information, see [Templates](./templates.md).
 ### Add your own templates
 
 For resources that are not managed by Compose Bridge's default transformation, 
-you can build your own templates. The compose.yaml model maybe does not offer
+you can build your own templates. The `compose.yaml` model may not offer all 
 the configuration attributes required to populate the target manifest. If this is the case, you can
 then rely on Compose custom extensions to let developers better describe the
 application, and offer an agnostic transformation.
@@ -132,7 +133,7 @@ $ compose-bridge -f compose.yaml convert \
 While Compose Bridge templates make it easy to customize with minimal changes,
 you may want to make significant changes, or rely on an existing conversion tool.
 
-A Compose Bridge transformation is a docker image that is designed to get compose model
+A Compose Bridge transformation is a Docker image that is designed to get a Compose model
 from `/in/compose.yaml` and produce platform manifests under `/out`. This simple 
 contract makes it easy to bundle an alternate transformation, as illustrated below using 
 [Kompose](https://kompose.io/):
@@ -156,6 +157,7 @@ This Dockerfile bundles Kompose and defines the command to run this tool accordi
 to the Compose Bridge transformation contract.
 
 ## Use `compose-bridge` as a `kubectl` plugin
+
 To use the `compose-bridge` binary as a `kubectl` plugin, you need to make sure that the binary is available in your PATH and the name of the binary is prefixed with `kubectl-`. 
 
 1. Rename or copy the `compose-bridge` binary to `kubectl-compose_bridge`:

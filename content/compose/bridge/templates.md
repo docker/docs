@@ -4,6 +4,8 @@ description: Learn about the Compose Bridge templates syntax
 keywords: compose, bridge, templates
 ---
 
+{{< include "compose-bridge-early-access.md" >}}
+
 Compose Bridge's default transformation uses templates to produce Kubernetes manifests.
 This page describes the templating mechanism.
 
@@ -19,8 +21,8 @@ The first line, when creating the YAML file, defines the file being generated us
 ```yaml
 #! manifest.yaml
 ```
-With this header comment, `manifest.yaml` will be created by Compose Bridge with yalml document
-content.
+With this header comment, `manifest.yaml` will be created by Compose Bridge with the content following 
+the annotation.
 
 Combining these together, you can write a template to iterate over some of Compose resources,
 then for each resource you can produce a dedicated manifest:
