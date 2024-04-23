@@ -912,7 +912,7 @@ This release contains a Kubernetes upgrade. Note that your local Kubernetes clus
 * Bug fixes and minor changes
   - LCOW does not anymore need --platform flag on multi-arch images
   - Better WCOW host.docker.internal resolution on host, don't rewrite it if not modified. From [docker/for-win#1976](https://github.com/docker/for-win/issues/1976)
-  - Disk size can now be ajusted from 32GiB to drive space.
+  - Disk size can now be adjusted from 32GiB to drive space.
   - Fix dns update too verbose in logs
   - Fix panic in diagnose
 

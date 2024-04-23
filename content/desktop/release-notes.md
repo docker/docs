@@ -684,7 +684,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Known Issues
 
-- Binding a priviledged port on Docker Desktop does not work on macOS. As a workaround you can expose the port on all interfaces (using `0.0.0.0`) or using localhost (using `127.0.0.1`).
+- Binding a privileged port on Docker Desktop does not work on macOS. As a workaround you can expose the port on all interfaces (using `0.0.0.0`) or using localhost (using `127.0.0.1`).
 
 ## 4.22.1
 
