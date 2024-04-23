@@ -666,6 +666,16 @@
   - /go/attestations/
 "/build/attestations/slsa-provenance/":
   - /go/provenance/
+"/build/building/variables/#arg-usage-example":
+  - /go/build-args/
+"/build/building/secrets/":
+  - /go/build-secrets/
+"/build/building/secrets/#ssh-mounts":
+  - /go/build-ssh/
+"/reference/cli/docker/buildx/build/#build-context":
+  - /go/build-additional-context/
+"/config/labels-custom-metadata/":
+  - /go/labels/
 
 # Build links (external)
 "https://www.docker.com/build-early-access-program/?utm_campaign=onboard-30-customer-zero&utm_medium=in-product-ad&utm_source=desktop_v4":
