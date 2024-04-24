@@ -73,8 +73,8 @@ There are many ways to deploy the `.plist` file. The method you choose is depend
 2. Before deploying the script across the organization, test it on a local macOS machine to ensure it behaves as expected. Pay attention to directory paths, permissions, and the successful application of `plist` settings.
 3. Ensure that you have the capability to execute scripts remotely on macOS devices. This might involve setting up SSH access or using a remote support tool that supports macOS.
 4.  Use a method of remote script execution that fits your organization's infrastructure. Options include:
-   - SSH. If SSH is enabled on the target machines, you can use it to execute the script remotely. This method requires knowledge of the device's IP address and appropriate credentials.
-   - Remote support tool. For organizations using a remote support tool, you can add the script to a task and execute it across all selected machines.
+    - SSH. If SSH is enabled on the target machines, you can use it to execute the script remotely. This method requires knowledge of the device's IP address and appropriate credentials.
+    - Remote support tool. For organizations using a remote support tool, you can add the script to a task and execute it across all selected machines.
 5. Ensure the script is running as expected on all targeted devices. This might involve checking log files or implementing logging within the script itself to report its success or failure.
 
 {{< /tab >}}
