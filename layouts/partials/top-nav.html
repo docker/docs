@@ -2,7 +2,7 @@
 {{ $firstSection := (index ($scratch.GetSortedMapValues "sections") 0).title }}
 <div>
   <nav>
-    <ul class="mt-1 box-content hidden gap-4 lg:flex">
+    <ul class="mt-1 box-content hidden gap-4 md:flex">
       {{ range site.Menus.main }}
       <li {{- if or (eq $firstSection .Name) }} class="border-b-4" {{- end }}>
         <a class="block px-2 py-1" href="{{ .URL }}">{{ .Name }}</a>

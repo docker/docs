@@ -7,9 +7,9 @@
 
 <body class="bg-background-light text-base dark:bg-background-dark dark:text-white">
   {{ partial "header.html" . }}
-  <main class="grid grid-cols-1 xl:grid-cols-main lg:grid-cols-main-lg">
+  <main class="grid grid-cols-1 xl:grid-cols-main-xl lg:grid-cols-main-lg md:grid-cols-main-md">
     <!-- First column: visible on lg and xl -->
-    <div class="hidden lg:block bg-background-light dark:bg-gray-dark-100"
+    <div class="hidden md:block bg-background-light dark:bg-gray-dark-100 overflow-y-scroll"
          {{- $classes := "'fixed', 'z-20', 'left-0', 'top-16', 'w-full', 'flex', 'h-lvh'" }}
          x-data @togglesidebar.window="
            if ($store.showSidebar == false) {

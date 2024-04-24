@@ -3,7 +3,7 @@
     <div class="flex h-full items-center md:gap-8 gap-2">
       {{ if not .IsHome }}
       <button x-data @click="$dispatch('togglesidebar')"
-        class="icon-svg block px-4 lg:hidden h-full" aria-label="Menu">
+        class="icon-svg block px-4 md:hidden h-full" aria-label="Menu">
         {{ partialCached "icon" "menu" "menu" }}
       </button>
       {{ end }}
