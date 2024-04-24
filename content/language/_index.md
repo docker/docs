@@ -23,7 +23,7 @@ In addition to the language-specific modules, Docker documentation also provides
 
 Learn how to containerize your applications and start developing using Docker. Choose one of the following languages to get started.
 
-<div class="grid grid-cols-3 auto-rows-fr sm:flex-col sm:h-auto gap-4">
+<div class="grid grid-cols-2 md:grid-cols-3 h-auto gap-4">
     <div class="flex items-center flex-1 shadow p-4">
         <a href="/language/nodejs/"><img class="m-auto rounded" src="/language/images/nodejs.webp" alt="Develop with Node"></a>
     </div>
