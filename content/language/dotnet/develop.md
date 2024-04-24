@@ -200,11 +200,10 @@ You should see output like the following.
 INSERT 0 1
 ```
 
-Close the database connection and exit the container shell by running `exit` twice.
+Close the database connection and exit the container shell by running `exit`.
 
 ```console
 example=# exit
-postgres@39fdcf0aff7b:/$ exit
 ```
 
 ## Verify that data persists in the database
