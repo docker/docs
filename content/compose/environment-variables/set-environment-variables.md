@@ -238,10 +238,6 @@ $ docker compose --env-file ./config/.env.dev up
   ```console
   $ docker compose --env-file .env --env-file .env.override up
   ```
-- You can override specific environment variables from the command line when starting containers. 
-  ```console
-  $ docker compose --env-file .env.dev up -e DATABASE_URL=mysql://new_user:new_password@new_db:3306/new_database
-  ```
 
 ### Set environment variables with `docker compose run --env`
 
