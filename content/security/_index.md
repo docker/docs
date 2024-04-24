@@ -21,7 +21,7 @@ grid_admins:
   link: /security/for-admins/image-access-management/
 - title: Enforce sign-in
   description: Configure sign-in for members of your teams and organizations.
-  link: /security/for-admins/configure-sign-in/
+  link: /security/for-admins/enforce-sign-in/
   icon: passkey
 - title: Domain audit
   description: Identify uncaptured users in your organization.

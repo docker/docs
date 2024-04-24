@@ -66,7 +66,7 @@ Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/pro
 
 ### Bug fixes and enhancements
 
-- In Docker Hub, you can now download a [registry.json](../security/for-admins/configure-sign-in.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
+- In Docker Hub, you can now download a [registry.json](../security/for-admins/enforce-sign-in/_index.md) file or copy the commands to create a registry.json file to enforce sign-in for your organization.
 
 ## 2022-09-19
 

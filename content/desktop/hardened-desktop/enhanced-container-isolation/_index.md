@@ -92,7 +92,7 @@ To enable Enhanced Container Isolation as a developer:
 
 #### As an admin
 
-To enable Enhanced Container Isolation as an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../security/for-admins/configure-sign-in.md).
+To enable Enhanced Container Isolation as an admin, you first need to [configure a `registry.json` file to enforce sign-in](../../../security/for-admins/enforce-sign-in/_index.md).
 This is because the Enhanced Container Isolation feature requires a Docker
 Business subscription and therefore your Docker Desktop users must authenticate
 to your organization for this configuration to take effect.

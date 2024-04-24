@@ -25,7 +25,7 @@ You can choose:
 
 ## Configuration
 
-Assuming [enforced sign-in](../../../security/for-admins/configure-sign-in.md) and Settings Management are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
+Assuming [enforced sign-in](../../../security/for-admins/enforce-sign-in/_index.md) and Settings Management are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
 
 ```json
 {
