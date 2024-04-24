@@ -6,7 +6,7 @@
 {{ $firstSection := (index ($scratch.GetSortedMapValues "sections") 0).title }}
 
 {{/* Render the top-nav in sidebar for small screens */}}
-<nav class="text-sm py-4 hidden gap-4 pl-4 md:flex flex-col justify-evenly">
+<nav class="text-sm pb-4 gap-4 flex md:hidden flex-col justify-evenly">
   <div class="text-gray-light dark:text-gray-dark">Main sections</div>
   {{ range site.Menus.main }}
   <div class="pl-2 underline-offset-8 decoration-2 hover:underline decoration-blue-light dark:decoration-blue-dark hover:opacity-75
@@ -22,9 +22,8 @@
 {{ range $i, $e := ($scratch.GetSortedMapValues "sections") }}
 {{ $allSections = $allSections | append (index $e "title") }}
 {{ end }}
-<hr>
-<nav id="sectiontree" class="text-sm w-[300px] md:w-full flex flex-col">
-  <div class="hidden md:block p-4 text-gray-light dark:text-gray-dark">This section</div>
+<nav id="sectiontree" class="text-sm flex flex-col">
+  <div class="block py-4 md:hidden text-gray-light dark:text-gray-dark">This section</div>
   {{/* The current page is in the table of contents */}}
   <ul>
     {{/* Walk the toc.yaml nodes under the current main section */}}
@@ -55,7 +54,7 @@
       {{ partialCached "icon" "expand_less" "expand_less" }}
     </span>
   </button>
-  <ul class="{{if not $expanded}}hidden {{end}}ml-3 md:ml-[21px]">
+  <ul class="{{if not $expanded}}hidden {{end}}ml-3">
     {{ range .entry.section }}
     {{ template "tocRender" (dict "entry" . "ctx" $ctx "sections" $sections ) }}
     {{ end }}

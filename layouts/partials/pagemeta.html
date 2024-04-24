@@ -14,7 +14,7 @@
     </div>
   {{- end }}
   {{- with $toc }}
-    <div class="text-lg pb-2 lg:pb-0">Table of contents</div>
+    <div class="text-lg pb-0 lg:pb-2">{{ T "tableOfContents" }}</div>
     <nav class="toc">
       {{ $root := (index page.Fragments.Headings 0).Headings }}
       {{- template "walkHeadingFragments" $root }}
@@ -30,7 +30,7 @@
     {{- range . }}
       {{- if and (ge .Level $min) (le .Level $max) }}
         <li>
-          <a class="lg:link" href="#{{ .ID }}">{{ .Title }}</a>
+          <a class="link lg:no-underline" href="#{{ .ID }}">{{ .Title }}</a>
         </li>
       {{- end }}
       {{- with .Headings }}
