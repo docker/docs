@@ -232,6 +232,8 @@ services:
     environment:
       - POSTGRES_DB=example
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+      - POSTGRES_HOST_AUTH_METHOD=md5
+      - PGDATA=/var/lib/postgresql/data/pgdata 
     expose:
       - 5432
     healthcheck:
