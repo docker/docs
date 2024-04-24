@@ -199,11 +199,7 @@ HTTP/HTTPS proxies can be used when:
 If the host uses a HTTP/HTTPS proxy configuration (static or via Proxy Auto-Configuration), Docker Desktop reads
 this configuration
 and automatically uses these settings for signing into Docker, for pulling and pushing images, and for
-container Internet access. If the proxy requires authorization then Docker Desktop dynamically asks
-the developer for a username and password. All passwords are stored securely in the OS credential store.
-Note that only the `Basic` proxy authentication method is supported so we recommend using an `https://`
-URL for your HTTP/HTTPS proxies to protect passwords while in transit on the network. Docker Desktop
-supports TLS 1.3 when communicating with proxies.
+container Internet access. 
 
 To set a different proxy for Docker Desktop, turn on **Manual proxy configuration** and enter a single
 upstream proxy URL of the form `http://proxy:port` or `https://proxy:port`.
@@ -215,6 +211,27 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 
 If you are running Windows containers in Docker, you can allow the Windows Docker daemon to use Docker Desktop's internal proxy, with the **Use proxy for Windows Docker daemon** setting.
 This is useful when a corporate proxy that requires authentication is manually configured or set at the system level. If you are an admin for your organization and have a Docker Business subscription, you can control this setting with [Settings management](../hardened-desktop/settings-management/configure.md) using the `windowsDockerdPort` parameter.
+
+#### Proxy authentication
+
+If the proxy requires authorization then Docker Desktop dynamically asks
+the developer for a username and password. All passwords are stored securely in the OS credential store.
+
+Docker Desktop supports Basic, Kerberos and NTLM proxy authentication methods. 
+
+##### Basic authentication
+
+If your proxy uses Basic authentication, Docker Desktop dynamically prompts developers for a username and password. 
+
+It's recommended that you use an `https:// URL` for HTTP/HTTPS proxies to protect passwords during network transit. Docker Desktop also supports TLS 1.3 for communication with proxies.
+
+##### Kerberos and NTLM authentication
+
+{{< introduced desktop 4.30 "../release-notes.md" >}}
+
+Kerberos and NTLM proxy authentication are available for Pro, Team, and Business subscribers. No additional configuration is needed beyond specifying the proxy IP address and port.
+
+You can enjoy a seamless experience without being interrupted by prompts for proxy credentials, reducing the risk of account lockouts due to incorrect sign in attempts.
 
 ### Network
 
