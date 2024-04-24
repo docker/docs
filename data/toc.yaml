@@ -1,4 +1,6 @@
 Guides:
+- title: Overview
+  path: /guides/
 - title: Docker overview
   path: /get-started/overview/
 - sectiontitle: Get started
