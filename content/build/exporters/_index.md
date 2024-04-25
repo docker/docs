@@ -182,18 +182,24 @@ WARNING: No output specified with docker-container driver.
 
 ## Multiple exporters
 
-You can only specify a single exporter for any given build (see
-[this pull request](https://github.com/moby/buildkit/pull/2760) for details).
-But you can perform multiple builds one after another to export the same content
-twice. BuildKit caches the build, so unless any of the layers change, all
-successive builds following the first are instant.
+{{< introduced buildx 0.13.0 >}}
 
-The following example shows how to run the same build twice, first using the
-`image`, followed by the `local`.
+You can use multiple exporters for any given build by specifying the `--output`
+flag multiple times. This requires **both Buildx and BuildKit** version 0.13.0
+or later.
+
+The following example runs a single build, using three
+different exporters:
+
+- The `registry` exporter to push the image to a registry
+- The `local` exporter to extract the build results to the local filesystem
+- The `--load` flag (a shorthand for the `image` exporter) to load the results to the local image store.
 
 ```console
-$ docker buildx build --output type=image,tag=<registry>/<image> .
-$ docker buildx build --output type=local,dest=<path/to/output> .
+$ docker buildx build \
+  --output type=registry,tag=<registry>/<image> \
+  --output type=local,dest=<path/to/output> \
+  --load .
 ```
 
 ## Configuration options
