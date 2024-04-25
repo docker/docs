@@ -105,17 +105,45 @@ The **Configuration** section of the Info tab shows parameters passed to the bui
 ### Outputs and artifacts
 
 The **Build results** section shows a summary of the generated build artifacts,
-including image manifest details, attestations, and Open Telemetry traces.
+including image manifest details, attestations, and build traces.
 
 Attestations are metadata records attached to a container image.
 The metadata describes something about the image,
 for example how it was built or what packages it contains.
 For more information about attestations, see [Build attestations](../../build/attestations/_index.md).
 
-Open Telemetry traces for builds capture information about the build execution
-steps in Buildx and BuildKit. You can view and analyze the traces yourself
-using a trace visualization tool like Jaeger. Refer to
-[OpenTelemetry support](../../build/building/opentelemetry.md) for more information.
+Build traces capture information about the build execution steps in Buildx and
+BuildKit. The traces are available in two formats: OTLP and Jaeger. You can
+download build traces from Docker Desktop by opening the actions menu and
+selecting the format you want to download.
+
+#### Inspect build traces with Jaeger
+
+Using a Jaeger client, you can import and inspect build traces from Docker
+Desktop. The following steps show you how to export a trace from Docker Desktop
+and view it in [Jaeger](https://www.jaegertracing.io/):
+
+1. Start Jaeger UI:
+
+   ```console
+   $ docker run -d --name jaeger -p "16686:16686" jaegertracing/all-in-one
+   ```
+
+2. Open the Builds view in Docker Desktop, and select a completed build.
+
+3. Navigate to the **Build results** section, open the actions menu and select **Download as Jaeger format**.
+
+   <video controls>
+     <source src="/assets/video/build-jaeger-export.mp4" type="video/mp4" />
+   </video>
+
+4. Go to <http://localhost:16686> in your browser to open Jaeger UI.
+
+5. Select the **Upload** tab and open the Jaeger build trace you just exported.
+
+Now you can analyze the build trace using the Jaeger UI:
+
+![Jaeger UI screenshot](../images/build-ui-jaeger-screenshot.png "Screenshot of a build trace in the Jaeger UI")
 
 ### Dockerfile source and errors
 
