@@ -20,7 +20,7 @@
     overflow-wrap: anywhere;
     padding: 0 4px;
     table & {
-      overflow-wrap: nowrap;
+      overflow-wrap: unset;
     }
   }
 
