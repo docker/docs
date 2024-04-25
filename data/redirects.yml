@@ -650,6 +650,8 @@
   - "/go/scout-metrics-exporter"
 "/scout/dashboard/#notification-settings":
   - /go/scout-notifications/
+"/scout/integrations/team-collaboration/slack/":
+  - "/go/scout-slack/"
 
 # Build links (internal)
 "/build/bake/reference/":
