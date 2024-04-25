@@ -214,22 +214,19 @@ This is useful when a corporate proxy that requires authentication is manually c
 
 #### Proxy authentication
 
-If the proxy requires authorization then Docker Desktop dynamically asks
-the developer for a username and password. All passwords are stored securely in the OS credential store.
-
 Docker Desktop supports Basic, Kerberos and NTLM proxy authentication methods. 
 
 ##### Basic authentication
 
-If your proxy uses Basic authentication, Docker Desktop dynamically prompts developers for a username and password. 
+If your proxy uses Basic authentication, Docker Desktop prompts developers for a username and password and caches the credentials. All passwords are stored securely in the OS credential store. It will request re-authentication if that cache is removed.
 
-It's recommended that you use an `https:// URL` for HTTP/HTTPS proxies to protect passwords during network transit. Docker Desktop also supports TLS 1.3 for communication with proxies.
+It's recommended that you use an `https://` URL for HTTP/HTTPS proxies to protect passwords during network transit. Docker Desktop also supports TLS 1.3 for communication with proxies.
 
 ##### Kerberos and NTLM authentication
 
 Kerberos and NTLM proxy authentication are available for Pro, Team, and Business subscribers with Docker Desktop version 4.30 and later. No additional configuration is needed beyond specifying the proxy IP address and port.
 
-You can enjoy a seamless experience without being interrupted by prompts for proxy credentials, reducing the risk of account lockouts due to incorrect sign in attempts.
+Developers are no longer interrupted by prompts for proxy credentials as authentication is centralized. This also reduces the risk of account lockouts due to incorrect sign in attempts.
 
 ### Network
 
