@@ -24,6 +24,20 @@
     }
   }
 
+  /* Indented code blocks */
+  :not(.highlight) > pre {
+    @apply my-4 overflow-x-auto p-3;
+    font-size: 0.875em;
+    border: 1px solid;
+    border-radius: theme("spacing.1");
+    background: theme("colors.white");
+    border-color: theme("colors.gray.light.300");
+    .dark & {
+      background: theme("colors.gray.dark.200");
+      border-color: theme("colors.gray.dark.300");
+    }
+  }
+
   .highlight {
     @apply my-4 overflow-x-auto p-3;
 
