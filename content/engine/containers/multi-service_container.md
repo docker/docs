@@ -116,19 +116,36 @@ these files exist at the root of the build context:
 - `my_first_process`
 - `my_second_process`
 
+Here's the script for `my_first_process`:
+```bash
+#!/bin/bash
+while true; do
+  echo "Hello,"
+  sleep 5  # Sleep for 5 seconds
+done
+```
+
+And here's the script for `my_second_process`:
+```bash
+#!/bin/bash
+while true; do
+  echo "world!"
+  sleep 5  # Sleep for 5 seconds
+done
+```
+
+Next, the Dockerfile:
 ```dockerfile
 # syntax=docker/dockerfile:1
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y supervisor
 RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY my_first_process my_first_process
-COPY my_second_process my_second_process
+COPY --chmod=755 my_first_process my_second_process .
 CMD ["/usr/bin/supervisord"]
 ```
 
-If you want to make sure both processes output their `stdout` and `stderr` to
-the container logs, you can add the following to the `supervisord.conf` file:
+The `supervisord.conf` file is configured so that both processes output their `stdout` and `stderr` directly to the container logs:
 
 ```ini
 [supervisord]
@@ -136,8 +153,15 @@ nodaemon=true
 logfile=/dev/null
 logfile_maxbytes=0
 
-[program:app]
-stdout_logfile=/dev/fd/1
-stdout_logfile_maxbytes=0
-redirect_stderr=true
+[program:my_first_process]
+command=./my_first_process ; Command to start the first process
+stdout_logfile=/dev/fd/1  ; Redirect stdout to Docker's standard output
+stdout_logfile_maxbytes=0 ; No limit on stdout log file size
+redirect_stderr=true      ; Redirect stderr to stdout
+
+[program:my_second_process]
+command=./my_second_process ; Command to start the second process
+stdout_logfile=/dev/fd/1   ; Redirect stdout to Docker's standard output
+stdout_logfile_maxbytes=0  ; No limit on stdout log file size
+redirect_stderr=true       ; Redirect stderr to stdout
 ```
