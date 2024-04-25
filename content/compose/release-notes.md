@@ -27,7 +27,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 - Introduced `--abort-on-container-failure` flag
 - Introduced `--all-resources` to not exclude resources not used by services
 - Introduced support for `build.entitlements`
-- Ignored missing containers when `compose down/stop -p`
+- Fixed a bug so Docker Compose now ignores missing containers when `docker compose down/stop -p` is run
 - Fixed support for `--flag=value` syntax in compatibility mode
 
 ## 2.26.1
