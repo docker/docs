@@ -82,3 +82,13 @@ analysis, directly in your repositories.
 The following source code management integrations are available:
 
 - [GitHub](source-code-management/github.md) {{< badge color=violet text=Beta >}}
+
+### Team collaboration
+
+Integrations in this category let you integrate Docker Scout with collaboration
+platforms for broadcasting notifications about your software supply chain in
+real-time to team communication platforms.
+
+The following team collaboration integrations are available:
+
+- [Slack](./team-collaboration/slack.md)
