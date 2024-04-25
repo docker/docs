@@ -36,32 +36,6 @@
   })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
   </script>
 {{ end }}
-{{ if hugo.IsProduction }}
-  {{/*  kapa.ai widget */}}
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var script = document.createElement('script');
-    script.src = 'https://widget.kapa.ai/kapa-widget.bundle.js';
-    script.setAttribute('data-website-id', '{{ site.Params.kapa.id }}');
-    script.setAttribute('data-project-name', 'Docker');
-    script.setAttribute('data-button-image-height', '29px');
-    script.setAttribute('data-button-image-width', '40px');
-    script.setAttribute('data-modal-image-height', '29px');
-    script.setAttribute('data-modal-image-width', '40px');
-    script.setAttribute('data-modal-title-color', '#fff');
-    script.setAttribute('data-project-color', '#086dd7');
-    script.setAttribute('data-modal-header-bg-color', '#086dd7');
-    script.setAttribute('data-project-logo', '/assets/images/logo-icon-white.svg');
-    script.setAttribute('data-font-family', 'Roboto Flex,sans-serif');
-    script.setAttribute('data-modal-disclaimer', 'This is a custom LLM for answering questions about Docker. Answers are based on the contents of the documentation. This feature is experimental - rate the answers to let us know what you think!');
-    script.setAttribute('data-modal-disclaimer-bg-color', '#e5f2fc');
-    script.setAttribute('data-modal-disclaimer-text-color', '#086dd7');
-    script.setAttribute('data-modal-example-questions','What is a volume?,How do I build multi-platform images?,Can I configure Docker to use a proxy?,What does a Docker subscription include?');
-    script.async = true;
-    document.body.appendChild(script);
-  });
-  </script>
-{{ end }}
 {{/* preload Roboto Flex as it's a critical font: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload */}}
 <link href="/assets/fonts/RobotoFlex.woff2" rel="preload" as="font" type="font/woff2" crossorigin />
 {{ partialCached "utils/css.html" "-" }}

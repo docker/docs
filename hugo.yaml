@@ -80,8 +80,6 @@ languages:
     languageName: English
 
 params:
-  kapa:
-    id: ba5c2cbc-6535-4334-a72e-050f7a681c8a
   analytics:
     hotjar:
       prod: 3169877
