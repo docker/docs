@@ -2,6 +2,7 @@
 description: Frequently asked questions for Docker Desktop for Mac
 keywords: desktop, mac, faqs
 title: FAQs for Docker Desktop for Mac
+tags: [FAQ]
 aliases:
 - /desktop/mac/space/
 - /docker-for-mac/space/

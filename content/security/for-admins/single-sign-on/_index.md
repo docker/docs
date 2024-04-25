@@ -37,4 +37,4 @@ In addition, you should add all email addresses to your IdP.
 ## What's next?
 
 - Start [configuring SSO](configure/_index.md) in Docker
-- Explore the [FAQs](../../../faq/security/single-sign-on/faqs.md)
+- Explore the [FAQs](../../../security/faqs/single-sign-on/faqs.md)

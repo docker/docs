@@ -2,9 +2,11 @@
 title: General FAQs for Docker accounts
 description: Frequently asked Docker account and administration questions
 keywords: onboarding, docker, teams, orgs, user accounts, organization accounts
+tags: [FAQ]
 aliases:
 - /docker-hub/general-faqs/
 - /docker-hub/onboarding-faqs/
+- /faq/admin/general-faqs/
 ---
 
 ### What is a Docker ID?
@@ -58,7 +60,7 @@ The organization owner can also add additional owners to help them manage users,
 ### Can I configure multiple SSO identity providers (IdPs) to authenticate users to a single org?
 
 Docker SSO allows only one IdP configuration per organization. For more
-information, see [Configure SSO](../../security/for-admins/single-sign-on/configure/_index.md) and [SSO FAQs](../security/single-sign-on/faqs.md).
+information, see [Configure SSO](../../security/for-admins/single-sign-on/configure/_index.md) and [SSO FAQs](../../security/faqs/single-sign-on/faqs.md).
 
 ### What is a service account?
 

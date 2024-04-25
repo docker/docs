@@ -16,9 +16,12 @@
     background: theme("colors.gray.light.200");
     display: inline-block;
     margin: 0;
-    white-space: nowrap;
     font-weight: 400;
+    overflow-wrap: anywhere;
     padding: 0 4px;
+    table & {
+      overflow-wrap: nowrap;
+    }
   }
 
   .highlight {

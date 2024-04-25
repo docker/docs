@@ -2,6 +2,7 @@
 description: Frequently asked questions for Docker Desktop for Linux
 keywords: desktop, linux, faqs
 title: FAQs for Docker Desktop for Linux
+tags: [FAQ]
 aliases:
 - /desktop/linux/space/
 ---

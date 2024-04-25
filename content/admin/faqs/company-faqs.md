@@ -2,8 +2,10 @@
 description: Company FAQs
 keywords: Docker, Docker Hub, SSO FAQs, single sign-on, company, administration, company management
 title: FAQs on companies
+tags: [FAQ]
 aliases:
 - /docker-hub/company-faqs/
+- /faq/admin/company-faqs/
 ---
 
 ### Are existing subscriptions affected when you create a company and add organizations to it?

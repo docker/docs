@@ -2,6 +2,7 @@
 title: Docker Compose release notes
 description: Release notes for Docker Compose
 keywords: release notes, compose
+tags: [Release notes]
 toc_max: 2
 aliases:
 - /release-notes/docker-compose/
@@ -11,7 +12,25 @@ aliases:
 
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
-## 2.26.0
+## 2.27.0
+
+{{< release-date date="2024-04-24" >}}
+
+### Update
+
+- Dependencies upgrade: bump golang to 1.21.9
+- Dependencies upgrade: bump compose-go to v2.1.0
+- Dependencies upgrade: bump docker engine and cli to v26.1.0
+
+### Bug fixes and enhancements
+
+- Introduced `--abort-on-container-failure` flag
+- Introduced `--all-resources` to not exclude resources not used by services
+- Introduced support for `build.entitlements`
+- Fixed a bug so Docker Compose now ignores missing containers when `docker compose down/stop -p` is run
+- Fixed support for `--flag=value` syntax in compatibility mode
+
+## 2.26.1
 
 {{< release-date date="2024-03-29" >}}
 

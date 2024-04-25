@@ -2,6 +2,9 @@
 description: Find the answers to FAQs related to networking and virtualization
 keywords: Docker, Docker Hub, Docker Desktop secuirty FAQs, secuirty, platform, networks, vms
 title: Network and VM FAQs
+tags: [FAQ]
+aliases:
+- /faq/security/networking-and-vms/
 ---
 
 ### How can I limit the type of internet access allowed by the container when it runs, to prevent it from being able to exfiltrate data or download malicious code? 
