@@ -3,6 +3,6 @@ message: "Consider removing '%s'."
 ignorecase: true
 level: warning
 tokens:
-  - Please
-  - At this time
-  - Currently
+  - please
+  - very
+  - really
