@@ -113,6 +113,7 @@ The settings menu in the Docker Scout Dashboard contains:
 
 - [**Billing**](#billing-settings) for managing your Docker Scout subscription and payments
 - [**Repository settings**](#repository-settings) for enabling and disabling repositories
+- [**Notifications**](#notification-settings) for managing your notification preferences for Docker Scout.
 
 ### Billing settings
 
@@ -131,3 +132,24 @@ Docker Scout analyzes new tags automatically when you push to that repository.
 To enable repositories in Amazon ECR, Azure ACR, or other third-party registries,
 you first need to integrate them.
 See [Container registry integrations](./integrations/_index.md#container-registries)
+
+### Notification settings
+
+The [Notification settings](https://scout.docker.com/settings/notifications)
+page is where you can change the preferences for receiving notifications from
+Docker Scout. Notification settings are personal, and preferences apply to all
+organizations that you're a member of. Changing notification settings only
+affects your personal account, not the entire organization.
+
+The purpose of notifications in Docker Scout is to raise awareness about
+upstream changes that affect you. Docker Scout will notify you about when a new
+vulnerability is disclosed in a security advisory, and it affects one or more
+of your images. You will not receive notifications about changes to
+vulnerability exposure or policy compliance as a result of pushing a new image.
+
+> **Note**
+>
+> Notifications are only triggered for the *last pushed* image tags for each
+> repository. "Last pushed" refers to the image tag that was most recently
+> pushed to the registry and analyzed by Docker Scout. If the last pushed image
+> is not by a newly disclosed CVE, then no notification will be triggered.
