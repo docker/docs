@@ -169,10 +169,10 @@ This pattern can be followed for many languages and frameworks, such as Python w
 { .tip }
 
 
-> **Watch command
+> **Tip**
 >
 > Watch can also be used with the dedicated `docker compose watch` command if you don't want to 
-> get application logs mixed with (re)build logs and filesystem sync events.
+> get the application logs mixed with the (re)build logs and filesystem sync events.
 { .tip }
 
 
