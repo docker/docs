@@ -111,8 +111,20 @@ more information on how to get started with integrations, see
 
 The settings menu in the Docker Scout Dashboard contains:
 
-- **Billing** for managing your Docker Scout subscription and payments
-- **Repository settings** for enabling and disabling repositories
+- [**Billing**](#billing-settings) for managing your Docker Scout subscription and payments
+- [**Repository settings**](#repository-settings) for enabling and disabling repositories
+
+### Billing settings
+
+The [Billing settings](https://scout.docker.com/settings/billing) page shows
+you the Docker Scout plan for the current organization. Here you can see what's
+included in your plan, compare it with other available plans, and change the
+plan if you're an organization owner.
+
+For more information about subscription plans, see
+[Docker Scout subscriptions and features](../subscription/scout-details.md)
+
+### Repository settings
 
 When you enable Docker Scout for a repository,
 Docker Scout analyzes new tags automatically when you push to that repository.
