@@ -1,5 +1,5 @@
 ---
-description: Learn abot the different ways you can force users to sign in to Docker Desktop
+description: Learn about the different ways you can force users to sign in to Docker Desktop
 keywords: authentication, registry.json, configure, enforce sign-in, docker desktop, security 
 title: Ways to enforce sign-in for Docker Desktop
 ---
@@ -8,12 +8,12 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 ## Registry key method (Windows OS)
 
-1. Create the registry key `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop` if not present.
+1. Create the registry key `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop`.
 2. Create the string value `allowedOrg` 
 3. As string data use your organization’s name, all lowercase.
 4. Verify that sign in is enforced. When Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
-In some cases, a system reboot may be necessary for the enforcement to take effect.
+In some cases, a system reboot may be necessary for enforcement to take effect.
 
 ### Example deployment via Group Policy
 

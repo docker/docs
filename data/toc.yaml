@@ -2182,7 +2182,7 @@ Manuals:
       title: SCIM
     - path: /security/for-admins/group-mapping/
       title: Group mapping
-    - sectiontitle: Enforce sign in
+    - sectiontitle: Enforce sign-in
       section:
       - path: /security/for-admins/enforce-sign-in/
         title: Overview

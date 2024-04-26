@@ -51,7 +51,7 @@ Yes, you can convert existing users to an SSO account. To convert users from a n
 - Each user has created a PAT to replace their passwords to allow them to sign in through Docker CLI.
 - Confirm that all CI/CD pipelines automation systems have replaced their passwords with PATs.
 
-For detailed prerequisites and instructions on how to enable SSO, see [Configure Single Sign-on](../../../security/for-admins/enforce-sign-in/_index.md).
+For detailed prerequisites and instructions on how to enable SSO, see [Configure Single Sign-on](../../../security/for-admins/single-sign-on/configure/_index.md).
 
 ### What impact can users expect once we start onboarding them to SSO accounts?
 
