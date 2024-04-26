@@ -8,6 +8,30 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.8.0
+
+{{< release-date date="2024-04-25" >}}
+
+### Bug fixes and enhancements
+
+- Improve format of EPSS score and percentile.
+  
+  Before:
+
+  ```text
+  EPSS Score      : 0.000440
+  EPSS Percentile : 0.092510
+  ```
+
+  After:
+
+  ```text
+  EPSS Score      : 0.04%
+  EPSS Percentile : 9th percentile
+  ```
+
+- Fix markdown output of the `docker scout cves` command when analyzing local filesystem. [docker/scout-cli#113](https://github.com/docker/scout-cli/issues/113)
+
 ## 1.7.0
 
 {{< release-date date="2024-04-15" >}}
