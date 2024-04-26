@@ -25,11 +25,11 @@ Clone the sample application to use with this guide. Open a terminal, change dir
 $ git clone https://github.com/mfranzon/r-docker-dev.git
 ```
 
-You should now have the following contents in your `r-docker`
+You should now have the following contents in your `r-docker-dev`
 directory.
 
 ```text
-├── r-docker/
+├── r-docker-dev/
 │ ├── src/
 │ │ └── app.R
 │ ├── src_db/
@@ -46,7 +46,7 @@ To learn more about the files in the repository, see the following:
 
 ## Run the application
 
-Inside the `r-docker` directory, run the following command in a
+Inside the `r-docker-dev` directory, run the following command in a
 terminal.
 
 ```console
@@ -60,7 +60,7 @@ In the terminal, press `ctrl`+`c` to stop the application.
 ### Run the application in the background
 
 You can run the application detached from the terminal by adding the `-d`
-option. Inside the `r-docker` directory, run the following command
+option. Inside the `r-docker-dev` directory, run the following command
 in a terminal.
 
 ```console
