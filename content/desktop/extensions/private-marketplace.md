@@ -184,7 +184,7 @@ When you select the **Extensions** tab, you should see the private marketplace l
 
 Once you’ve confirmed that the private marketplace configuration works, the final step is to distribute the files to the developers’ machines with the MDM software your organization uses. For example, [Jamf](https://www.jamf.com/).
 
-Make sure your developers are signed in to Docker Desktop in order for the private marketplace configuration to take effect. As an administrator, you should [configure a registry.json to enforce Docker Desktop sign-in](../../security/for-admins/enforce-sign-in/_index.md).
+Make sure your developers are signed in to Docker Desktop in order for the private marketplace configuration to take effect. As an administrator, you can [enforce sign in](../../security/for-admins/enforce-sign-in/_index.md).
 
 ## Feedback
 

@@ -30,7 +30,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 7. Test the GPO. Test the GPO on a small set of machines first to ensure it behaves as expected. You can use the `gpupdate /force` command on a test machine to manually refresh its group policy settings and check the registry to confirm the changes.
 8. Once verified, you can proceed with broader deployment. Monitor the deployment to ensure the settings are applied correctly across the organization's computers.
 
-## .plist method (macOS)
+## plist method (macOS)
 
 1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`
 2. Open `desktop.plist` in a text editor and add the following content, where `myorg` is replaced with your organization’s name all lowercase:
@@ -81,6 +81,8 @@ There are many ways to deploy the `.plist` file. The method you choose is depend
 {{< /tabs >}}
 
 ## registry.json method
+
+The following instructions explain how to create and deploy a `registry.json` file to a single device. There are many ways to deploy the `regitry.json` file. You can follow the example deployments outlined in the `.plist` file section.  The method you choose is dependent on your organizations infrastructure, security policies, and the administrative rights of the end-users. 
 
 ### Option 1: Create a registry.json file to enforce sign-in
 
@@ -275,12 +277,3 @@ $ sudo ls -l /usr/share/docker-desktop/registry/registry.json
 {{< /tab >}}
 {{< /tabs >}}
 
-### Example deployment via an MDM solution. 
-
-The following is only an illustrative example. 
-
-There are many ways to deploy the `regitry.json` file. The method you choose is dependent on your organizations infrastructure, security policies, and the administrative rights of the end-users.
-
-1. Follow the steps outlined above to create the `registry.json` file.
-2. Distribute the `registry.json` file to the appropriate directory (depending on OS) on all client machines using an MDM tool, ensuring it's done with administrative rights.
-3. Through the MDM tool, set the file permissions to allow editing by administrators only.

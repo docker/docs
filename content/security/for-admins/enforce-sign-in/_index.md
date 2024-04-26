@@ -21,7 +21,7 @@ There are multiple ways you can enforce sign-in, depending on your companies' se
 
 ## How is sign-in enforced?
 
-When Docker Desktop starts and it detects a `registry.json` file, the
+When Docker Desktop starts and it detects a registry key, a `.plist` file or `registry.json` file, the
 following occurs:
 
 - A **Sign in required!** prompt appears requiring the user to sign
