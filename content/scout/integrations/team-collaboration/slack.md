@@ -26,6 +26,9 @@ to the Slack channels associated with the webhook.
 > pushed to the registry and analyzed by Docker Scout. If the last pushed image
 > is not by a newly disclosed CVE, then no notification will be triggered.
 
+For more information about Docker Scout notifications,
+see [Notification settings](../../dashboard.md#notification-settings)
+
 ## Setup
 
 To add a Slack integration:
