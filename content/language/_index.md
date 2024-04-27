@@ -1,6 +1,6 @@
 ---
 description: Language-specific guides overview
-keywords: guides, docker, language, node, java, python, R, go, golang, .net
+keywords: guides, docker, language, node, java, python, R, go, golang, .net, c++
 title: Language-specific guides overview
 toc_min: 1
 toc_max: 2
