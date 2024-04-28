@@ -156,7 +156,7 @@ again when you switch back.
 
 2. Double-click `Docker Desktop Installer.exe` to run the installer. By default, Docker Desktop is installed at `C:\Program Files\Docker\Docker`.
 
-3. When prompted, ensure the **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or not depending on your choice of backend.
+3. When prompted, ensure to **Use WSL 2 instead of Hyper-V** option on the Configuration page is selected or select depending on your choice of backend.
 
    If your system only supports one of the two options, you will not be able to select which backend to use.
 
