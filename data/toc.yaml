@@ -1404,8 +1404,6 @@ Manuals:
         title: SBOM
       - path: /scout/env-vars/
         title: Environment variables
-      - path: /scout/metrics-exporter/
-        title: Metrics exporter
     - sectiontitle: Policy Evaluation
       section:
       - path: /scout/policy/
