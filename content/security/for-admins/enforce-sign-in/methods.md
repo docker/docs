@@ -8,8 +8,12 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
 
 ## Registry key method (Windows OS)
 
-1. Create the registry key `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop`.
-2. Create the string value `allowedOrg` 
+1. Create the registry key. Your new key should look like the following:
+
+   ```console 
+   $ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop
+   ```
+2. Create the string value `allowedOrgs` 
 3. As string data use your organization’s name, all lowercase.
 4. Verify that sign in is enforced. When Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
@@ -21,11 +25,11 @@ The following is only an illustrative example.
 
 There are many ways to deploy the registry key, for example using an MDM solution or with PowerShell scripting. The method you choose is dependent on your organizations infrastructure, security policies, and the administrative rights of the end-users. 
 
-1. Create the registry script. Write a script to create the `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop` key, add the `allowedOrg` string, and then set the value to your organization’s name.
+1. Create the registry script. Write a script to create the `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop` key, add the `allowedOrgs` string, and then set the value to your organization’s name.
 2. Within Group Policy, create or edit a Group Policy Objective (GPO) that applies to the machines or users you wish to target.
 3. Within the GPO, navigate to **Computer Configuration** > **Preferences** > **Windows Settings** > **Registry**.
 4. Add the registry item. Right-click on the **Registry** node, select **New** > **Registry Item**.
-5. Configure the new registry item to match the registry script you created, specifying the action as **Update**. Make suer you input the correct path, value name (`allowedOrg`), and value data (your organization’s name).
+5. Configure the new registry item to match the registry script you created, specifying the action as **Update**. Make suer you input the correct path, value name (`allowedOrgs`), and value data (your organization’s name).
 6. Link the GPO to an Organizational Unit (OU) that contains the machines you want to apply this setting to.
 7. Test the GPO. Test the GPO on a small set of machines first to ensure it behaves as expected. You can use the `gpupdate /force` command on a test machine to manually refresh its group policy settings and check the registry to confirm the changes.
 8. Once verified, you can proceed with broader deployment. Monitor the deployment to ensure the settings are applied correctly across the organization's computers.
@@ -40,7 +44,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
    <plist version="1.0">
      <dict>
-	     <key>allowedOrg</key>
+	     <key>allowedOrgs</key>
 	     <string>myorg</string>
      </dict>
    </plist>
@@ -67,7 +71,7 @@ There are many ways to deploy the `.plist` file. The method you choose is depend
 1. Create a Bash script that can check for the existence of the `.plist` file in the correct directory, create or modify it as needed, and set the appropriate permissions.
    Include commands in your script to:
     - Navigate to the `/Library/Application Support/com.docker.docker/` directory or create it if it doesn't exist.
-    - Use the `defaults` command to write the required keys and values to the `desktop.plist` file. For example, `defaults write /Library/Application\ Support/com.docker.docker/desktop.plist allowedOrg -string "myorg"`.
+    - Use the `defaults` command to write the required keys and values to the `desktop.plist` file. For example, `defaults write /Library/Application\ Support/com.docker.docker/desktop.plist allowedOrgs -string "myorg"`.
     - Change permissions of the `plist` file to restrict editing, using `chmod` and possibly `chown` to set the owner to root or another admin account, ensuring it can't be easily modified by unauthorized users.
 
 2. Before deploying the script across the organization, test it on a local macOS machine to ensure it behaves as expected. Pay attention to directory paths, permissions, and the successful application of `plist` settings.
