@@ -203,7 +203,6 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 >
 > Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
 
-
 ### Network
 
 {{< include "desktop-network-setting.md" >}}

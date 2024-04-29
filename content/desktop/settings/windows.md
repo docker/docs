@@ -220,7 +220,6 @@ This is useful when a corporate proxy that requires authentication is manually c
 >
 > Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
 
-
 ### Network
 
 > **Note**
