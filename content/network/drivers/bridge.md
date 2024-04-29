@@ -35,6 +35,10 @@ network.**
 
 ## Differences between user-defined bridges and the default bridge
 
+<!-- The above heading has an error
+     It's part of the diff context but not the added lines
+-->
+
 - **User-defined bridges provide automatic DNS resolution between containers**.
 
   Containers on the default bridge network can only access each other by IP
@@ -157,7 +161,7 @@ first.
 $ docker network rm my-net
 ```
 
-> **What's really happening?**
+> **What's really happening?** <!-- This line has an error, as does line 166 -->
 >
 > When you create or remove a user-defined bridge or connect or disconnect a
 > container from a user-defined bridge, Docker uses tools specific to the
@@ -228,6 +232,8 @@ but only by IP address, unless they're linked using the
 To configure the default `bridge` network, you specify options in `daemon.json`.
 Here is an example `daemon.json` with several options specified. Only specify
 the settings you need to customize.
+
+<!-- No errors here -->
 
 ```json
 {
