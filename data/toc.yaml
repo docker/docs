@@ -1140,6 +1140,8 @@ Manuals:
               title: Ubuntu
             - path: /desktop/install/debian/
               title: Debian
+            - path: /desktop/install/rhel/
+              title: RHEL {{< badge color=violet text=New >}}
             - path: /desktop/install/fedora/
               title: Fedora
             - path: /desktop/install/archlinux/
