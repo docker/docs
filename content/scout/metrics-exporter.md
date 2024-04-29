@@ -1,5 +1,6 @@
 ---
 title: Docker Scout metrics exporter
+sitemap: false
 description: |
   Learn how to scrape data from Docker Scout using Prometheus to create your own
   vulnerability and policy dashboards wiht Grafana
