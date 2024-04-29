@@ -88,11 +88,64 @@ The following lists the supported group mapping attributes:
 | members | A list of users that are members of this group. |
 | members(x).value | Unique ID of the user that is a member of this group. Members are referenced by ID. |
 
-To take advantage of group mapping, follow the instructions provided by your IdP:
+{{< tabs >}}
+{{< tab name="Okta" >}}
 
-- [Okta](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm)
-- [Entra ID (formerly Azure AD)](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes)
-- [OneLogin](https://developers.onelogin.com/scim/create-app)
+The user interface for your IdP may differ slightly from the following steps. You can refer to the [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) to verify.
+
+To set up your groups:
+
+1. Sign in to the Okta Console.
+2. Select **Applications > Provisioning > Integration**.
+3. Select **Edit** to enable groups on your connection, then select **Push groups**.
+4. Select **Save**. Saving this configuration will add the **Push Groups** tab to your application.
+5. Create your groups by navigating to **Directory > Groups**.
+6. Add your groups using the format `organization:team` that matches the names of your organization(s) and team(s) in Docker.
+7. Assign people to the group(s) that you create.
+8. Return to **Applications > Provisioning> Integration**, then select the **Push Groups** tab to open the view where you can control and manage how groups are provisioned.
+9. Select **Push Groups > Find groups by rule**.
+10. Configure the groups by rule like the following:
+    - Enter a rule name, for example `Sync groups with Docker Hub`
+    - Match group by name, for example starts with `docker:` or contains `:` or multi-organization
+    - If you enable **Immediately push groups by rule**, sync will happens as soon as there's a change on the group or assignments on the group. Enable this if you don't want to manually push groups.
+
+Find your new rule under **By rule** in the **Pushed Groups** column. The groups that match that rule are listed in the groups table on the right-hand side.
+
+To push the groups from this table:
+
+1. Select **Group in Okta**.
+2. Select the **Push Status** drop-down.
+3. Select **Push Now**.
+
+{{< /tab >}}
+{{< tab name="Entra ID" >}}
+
+The user interface for your IdP may differ slightly from the following steps. You can refer to the [Entra ID documentation](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes) to verify.
+
+Complete the following before configuring group mapping:
+
+1. Sign in to Entra ID and go to your application.
+2. In your application, go to **Provisioning > Mappings**.
+3. Select **Provision Microsoft Entra ID Groups**.
+4. Select **Show advanced options**, then **Edit attribute list**.
+5. Update the `externalId` type to `reference`, then select the **Multi-Value** checkbox and choose the referenced object attribute `urn:ietf:params:scim:schemas:core:2.0:Group`.
+6. Select **Save**, then **Yes** to confirm.
+7. Go to **Provisioning**.
+8. Toggle **Provision Status** to **On**, then select **Save**.
+
+Next, set up group mapping:
+
+1. Go to the application overview page.
+2. Under **Provision user accounts**, select **Get started**.
+3. Select **Add user/group**.
+4. Create your group(s) using the `organization:team` format.
+5. Assign the group to the provisioning group.
+6. Select **Start provisioning** to start the sync.
+
+To verify, go to **Monitor > Provisioning logs** to see that your groups were provisioned successfully. In your Docker organization, you can check that the groups were correctly provisioned and the members were added to the appropriate teams.
+
+{{< /tab >}}
+{{< /tabs >}}
 
 Once complete, a user who signs in to Docker through SSO is automatically added to the organizations and teams mapped in the IdP.
 
