@@ -644,6 +644,8 @@
   - "/go/scout-github/"
 "/scout/guides/vex/":
   - "/go/vex-guide/"
+"/scout/metrics-exporter/":
+  - "/go/scout-metrics-exporter"
 
 # Build links (internal)
 "/build/bake/reference/":
