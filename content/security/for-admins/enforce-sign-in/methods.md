@@ -14,11 +14,17 @@ This page outlines the different ways you can enforce sign-in for Docker Desktop
    $ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop
    ```
 2. Create a multi-string value `allowedOrgs` 
+   > **Important**
+   >
+   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   { .important }
 3. As string data use your organization’s name, all lowercase.
 4. Restart Docker Desktop.
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
 In some cases, a system reboot may be necessary for enforcement to take effect.
+
+
 
 ### Example deployment via Group Policy
 
@@ -52,6 +58,11 @@ There are many ways to deploy the registry key, for example using an MDM solutio
      </dict>
    </plist>
    ```
+   > **Important**
+   >
+   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   { .important }
+
 3. Modify the file permissions to ensure the file cannot be edited by any non-administrator users.
 4. Restart Docker Desktop. 
 5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
@@ -117,6 +128,10 @@ details, see [Manage members](/admin/organization/members/).
     "allowedOrgs": ["myorg"]
     }
     ```
+   > **Important**
+   >
+   > Only one entry for `allowedOrgs` is currently supported. If you add more than one value, sign-in enforcement silently fails.
+   { .important }
 
 4. Verify that sign-in is enforced.
 
