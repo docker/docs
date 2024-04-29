@@ -9,7 +9,7 @@
 {{ $border := index $params "border" }}
 
 
-<div
+<figure
   x-data="{ zoom: false }"
   @click="zoom = ! zoom"
   class="cursor-pointer hover:opacity-90"
@@ -27,6 +27,9 @@
     {{ with .Title }}title="{{ . }}"{{ end }}
     class="rounded mx-auto{{ with $border }} border border-divider-light dark:border-divider-dark{{end}}"
   />
+  {{ with .Title }}
+    <figcaption class="text-gray-light dark:text-gray-dark">{{ . }}</figcaption>
+  {{ end }}
   <template x-teleport="body">
     <div
       x-show="zoom"
@@ -48,4 +51,4 @@
       />
     </div>
   </template>
-</div>
+</figure>
