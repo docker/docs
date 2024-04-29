@@ -6,16 +6,17 @@ title: Ways to enforce sign-in for Docker Desktop
 
 This page outlines the different ways you can enforce sign-in for Docker Desktop.
 
-## Registry key method (Windows OS)
+## Registry key method (Windows only)
 
 1. Create the registry key. Your new key should look like the following:
 
    ```console 
    $ HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop
    ```
-2. Create the string value `allowedOrgs` 
+2. Create a multi-string value `allowedOrgs` 
 3. As string data use your organization’s name, all lowercase.
-4. Verify that sign in is enforced. When Docker Desktop starts, verify that the **Sign in required!** prompt appears.
+4. Restart Docker Desktop.
+5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
 In some cases, a system reboot may be necessary for enforcement to take effect.
 
@@ -25,7 +26,7 @@ The following is only an illustrative example.
 
 There are many ways to deploy the registry key, for example using an MDM solution or with PowerShell scripting. The method you choose is dependent on your organizations infrastructure, security policies, and the administrative rights of the end-users. 
 
-1. Create the registry script. Write a script to create the `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop` key, add the `allowedOrgs` string, and then set the value to your organization’s name.
+1. Create the registry script. Write a script to create the `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Docker\Docker Desktop` key, add the `allowedOrgs` multi-string, and then set the value to your organization’s name.
 2. Within Group Policy, create or edit a Group Policy Objective (GPO) that applies to the machines or users you wish to target.
 3. Within the GPO, navigate to **Computer Configuration** > **Preferences** > **Windows Settings** > **Registry**.
 4. Add the registry item. Right-click on the **Registry** node, select **New** > **Registry Item**.
@@ -34,7 +35,7 @@ There are many ways to deploy the registry key, for example using an MDM solutio
 7. Test the GPO. Test the GPO on a small set of machines first to ensure it behaves as expected. You can use the `gpupdate /force` command on a test machine to manually refresh its group policy settings and check the registry to confirm the changes.
 8. Once verified, you can proceed with broader deployment. Monitor the deployment to ensure the settings are applied correctly across the organization's computers.
 
-## plist method (macOS)
+## plist method (Mac only)
 
 1. Create the file `/Library/Application Support/com.docker.docker/desktop.plist`
 2. Open `desktop.plist` in a text editor and add the following content, where `myorg` is replaced with your organization’s name all lowercase:
@@ -45,12 +46,15 @@ There are many ways to deploy the registry key, for example using an MDM solutio
    <plist version="1.0">
      <dict>
 	     <key>allowedOrgs</key>
-	     <string>myorg</string>
+	     <array>
+             <string>myorg</string>
+         </array>
      </dict>
    </plist>
    ```
 3. Modify the file permissions to ensure the file cannot be edited by any non-administrator users.
-4. Verify that sign in is enforced. When Docker Desktop starts, verify that the **Sign in required!** prompt appears.
+4. Restart Docker Desktop. 
+5. Open Docker Desktop and when Docker Desktop starts, verify that the **Sign in required!** prompt appears.
 
 ### Example deployment 
 
@@ -84,7 +88,7 @@ There are many ways to deploy the `.plist` file. The method you choose is depend
 {{< /tab >}}
 {{< /tabs >}}
 
-## registry.json method
+## registry.json method (All)
 
 The following instructions explain how to create and deploy a `registry.json` file to a single device. There are many ways to deploy the `regitry.json` file. You can follow the example deployments outlined in the `.plist` file section.  The method you choose is dependent on your organizations infrastructure, security policies, and the administrative rights of the end-users. 
 

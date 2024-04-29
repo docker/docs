@@ -15,9 +15,9 @@ subscription](../../../subscription/core-subscription/details.md) and they can c
 security features](../../../desktop/hardened-desktop/_index.md) for your organization.
 
 There are multiple ways you can enforce sign-in, depending on your companies' set up and preferences:
-- [Registry key method (Windows OS)](methods.md#registry-key-method-windows-os)
-- [`.plist` method (macOS)](methods.md#plist-method-macos)
-- [`registry.json` method](methods.md#registryjson-method)
+- [Registry key method (Windows only)](methods.md#registry-key-method-windows-only)
+- [`.plist` method (Mac only)](methods.md#plist-method-mac-only)
+- [`registry.json` method (All)](methods.md#registryjson-method-all)
 
 ## How is sign-in enforced?
 
