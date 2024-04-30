@@ -11,7 +11,7 @@ If you have lost your two-factor authentication recovery code and still have
 access to your Docker account, you can generate a new recovery code.
 
 1. Sign in to your [Docker account](https://account.docker.com/login).
-2. Select your avatar and then from the dropdown menu, then select **My Account**.
+2. Select your avatar and then from the drop-down menu, then select **My Account**.
 3. Navigate to the **Security** section, then select the arrow icon.
 4. Enter your password, then select **Confirm**.
 5. Select **Generate new code**.

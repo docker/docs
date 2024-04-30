@@ -30,7 +30,7 @@ Before deactivating an organization, complete the following:
 
 ### Deactivate
 
-Once you have completed all the steps above, you can deactivate your organization.
+Once you have completed all the previous steps, you can deactivate your organization.
 
 > **Warning**
 >
