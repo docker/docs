@@ -36,6 +36,7 @@ jobs:
             *.cache-to=type=gha,scope=build,mode=max
 
   vale:
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
