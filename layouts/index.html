@@ -16,7 +16,7 @@
   </div>
   {{ partial "header.html" . }}
   <main class="flex min-h-screen w-full flex-col items-stretch self-center">
-    <div class="flex w-[1200px] flex-col items-stretch gap-20 self-center py-20 lg:w-full lg:px-4">
+    <div class="flex xl:w-[1200px] flex-col items-stretch gap-20 self-center py-20 w-full px-4">
       <div class="bg-pattern-blue relative overflow-hidden rounded drop-shadow">
         <div class="flex h-full flex-col items-start justify-between gap-4 p-8">
           <div class="flex items-center gap-6">
@@ -34,16 +34,16 @@
             Get Docker
           </a>
         </div>
-        <div class="absolute bottom-0 right-0 origin-bottom-right md:scale-50">
+        <div class="absolute bottom-0 right-0 origin-bottom-right scale-50 lg:scale-100">
           <img class="dark:hidden" alt="Low-fi desktop app" src="/assets/images/app-wf-light-1.svg" />
           <img class="hidden dark:block" alt="Low-fi desktop app" src="/assets/images/app-wf-dark-1.svg" />
         </div>
       </div>
 
       <div>
-        <div class="grid grid-cols-3 gap-4 sm:flex sm:flex-col md:grid-cols-1">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <div>
-            <a class="h-full" href="/get-started/overview/">
+            <a class="h-full" href="/guides/">
               <div
                 class="flex h-full flex-col gap-2 rounded border border-gray-light-100 bg-white p-4 drop-shadow-sm hover:border-gray-light-200 hover:drop-shadow-lg dark:border-gray-dark-400 dark:bg-gray-dark-200 hover:dark:border-gray-dark">
                 <div class="flex items-center gap-4">
@@ -57,8 +57,7 @@
                   </div>
                 </div>
                 <div class="leading-snug text-gray-light-500 dark:text-gray-dark-700">
-                  Learn the basics and benefits of containerizing your
-                  application.
+                  Get started and learn how Docker can optimize your development workflows
                 </div>
               </div>
             </a>
@@ -109,7 +108,7 @@
         </div>
       </div>
 
-      <div class="z-10 grid grid-cols-2 gap-20 md:grid-cols-1">
+      <div class="z-10 grid grid-cols-1 gap-20 lg:grid-cols-2">
         <div class="bg-pattern-verde relative rounded p-6 drop-shadow">
           <div class="flex h-full flex-col items-start justify-between gap-12">
             <div class="flex flex-col gap-4">
@@ -126,7 +125,7 @@
               </a>
             </div>
           </div>
-          <div class="absolute bottom-0 right-0 origin-bottom-right sm:scale-75">
+          <div class="absolute bottom-0 right-0 origin-bottom-right scale-75 md:scale-100">
             <img class="dark:hidden" alt="Low-fi desktop app" src="/assets/images/app-wf-light-2.svg" />
             <img class="hidden dark:block" alt="Low-fi desktop app" src="/assets/images/app-wf-dark-2.svg" />
           </div>
@@ -144,12 +143,12 @@
                   native multi-platform builds. Get started today for free.
                 </p>
               </div>
-              <div class="grid grid-cols-3 gap-4 justify-self-end sm:grid-cols-2">
+              <div class="grid grid-cols-2 gap-4 justify-self-end md:grid-cols-3">
                 <a href="https://build.docker.com/"
                   class="cursor-pointer rounded bg-blue-light px-4 py-2 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">Dashboard</a>
                 <a href="/build/cloud/"
                   class="cursor-pointer rounded bg-blue-light px-4 py-2 text-white transition duration-300 hover:bg-blue-light-400 dark:bg-blue-dark-400 dark:hover:bg-blue-dark">Docs</a>
-                <div class="ml-auto sm:col-start-2">
+                <div class="ml-auto col-start-2 md:col-start-3">
                   {{ $dbcLogoWhite := resources.Get "images/build-cloud-white.svg" }}
                   {{ $dbcLogoLight := resources.Get "images/build-cloud-light.svg" }}
                   <img class="hidden h-full w-full dark:block" alt="Docker Build Cloud logo" src="{{ $dbcLogoWhite.Permalink }}" />
@@ -163,7 +162,7 @@
 
       <div>
         <h2 class="mb-4 text-xl">Browse by section</h2>
-        <div class="grid grid-cols-4 gap-4 sm:flex sm:flex-col lg:grid-cols-2 xl:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {{ range .Params.grid }}
           <div>
             <div
@@ -190,12 +189,22 @@
           {{ end }}
         </div>
       </div>
+      <div class="flex flex-col gap-4">
+        <h2 class="mb-4 text-xl">Browse by tag</h2>
+        <div class="flex flex-wrap gap-4">
+          {{ $tags := slice }}
+          {{- range site.Taxonomies.tags }}
+            {{ $tags = $tags | append .Page }}
+          {{ end }}
+          {{ partial "tags.html" $tags }}
+        </div>
+      </div>
     </div>
 
     <div
-      class="relative flex h-[334px] items-center justify-center overflow-hidden bg-gray-light-100 dark:bg-gray-dark-200 sm:h-full sm:py-8">
+      class="relative flex md:h-[334px] items-center justify-center overflow-hidden bg-gray-light-100 dark:bg-gray-dark-200 h-full py-8">
       <div class="w-[1200px] px-4">
-        <div class="flex max-w-[66%] flex-col gap-8 sm:max-w-full">
+        <div class="flex md:max-w-[66%] flex-col gap-8 max-w-full">
           <h2 class="text-2xl">Community resources</h2>
           <p>
             Find fellow Docker enthusiasts, engage in insightful discussions,
@@ -203,7 +212,7 @@
             offer a rich online experience for developers to create valuable
             connections that challenge and inspire!
           </p>
-          <div class="flex gap-4 sm:flex-col">
+          <div class="flex gap-4 flex-col md:flex-row">
             <a href="https://forums.docker.com/"
               class="cursor-pointer rounded bg-white px-4 py-2 text-blue-light hover:bg-gray-light-100 dark:bg-gray-dark-400 dark:text-white dark:hover:bg-gray-dark-500">
               Visit Docker Forum
@@ -219,65 +228,8 @@
           </div>
         </div>
       </div>
-      <div class="absolute right-0 top-0 sm:hidden">
-        <svg class="dark:hidden" width="555" height="334" viewBox="0 0 555 334" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <g style="mix-blend-mode: multiply">
-            <path d="M0 249.997L283.445 0H555V334H89.8843L0 249.997Z" fill="url(#paint0_linear_129_29139)" />
-          </g>
-          <g style="mix-blend-mode: multiply">
-            <path d="M80 84.003L363.445 334H554.5V0H169.884L80 84.003Z" fill="url(#paint1_linear_129_29139)" />
-          </g>
-          <g style="mix-blend-mode: multiply">
-            <path d="M279 334L555 104V182.33V254.174V334H279Z" fill="url(#paint2_linear_129_29139)" />
-          </g>
-          <defs>
-            <linearGradient id="paint0_linear_129_29139" x1="18.5" y1="61.5" x2="502" y2="240.5"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#C0E0FA" />
-              <stop offset="1" stop-color="#EFEFF2" />
-            </linearGradient>
-            <linearGradient id="paint1_linear_129_29139" x1="98.5" y1="272.5" x2="582" y2="93.5"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#F7ECFF" />
-              <stop offset="1" stop-color="#EFEFF2" />
-            </linearGradient>
-            <linearGradient id="paint2_linear_129_29139" x1="282.381" y1="-33.7561" x2="1315.56" y2="352.19"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#C6EAE1" />
-              <stop offset="1" stop-color="#EFEFF2" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <svg class="hidden dark:block" width="555" height="334" viewBox="0 0 555 334" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <g style="mix-blend-mode: multiply">
-            <path d="M0 249.997L283.445 0H555V334H89.8843L0 249.997Z" fill="url(#paint0_linear_129_29443)" />
-          </g>
-          <g style="mix-blend-mode: multiply">
-            <path d="M80 84.003L363.445 334H554.5V0H169.884L80 84.003Z" fill="url(#paint1_linear_129_29443)" />
-          </g>
-          <g style="mix-blend-mode: multiply">
-            <path d="M279 334L555 104V182.33V254.174V334H279Z" fill="url(#paint2_linear_129_29443)" />
-          </g>
-          <defs>
-            <linearGradient id="paint0_linear_129_29443" x1="18.5" y1="61.5" x2="502" y2="240.5"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#C0E0FA" />
-              <stop offset="1" stop-color="#EFEFF2" />
-            </linearGradient>
-            <linearGradient id="paint1_linear_129_29443" x1="98.5" y1="272.5" x2="582" y2="93.5"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#F7ECFF" />
-              <stop offset="1" stop-color="#EFEFF2" />
-            </linearGradient>
-            <linearGradient id="paint2_linear_129_29443" x1="282.381" y1="-33.7561" x2="1315.56" y2="352.19"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#C6EAE1" />
-              <stop offset="1" stop-color="#EFEFF2" />
-            </linearGradient>
-          </defs>
-        </svg>
+      <div class="absolute right-0 top-0 hidden md:block">
+        {{- (resources.Get "images/home-abstract-faint.svg").Content | safe.HTML -}}
       </div>
     </div>
   </main>

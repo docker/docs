@@ -4,6 +4,7 @@ description: Learn about the latest features of Docker Scout
 keywords: docker scout, release notes, changelog, features, changes, delta, new, releases
 aliases:
 - /scout/release-notes/
+tags: [Release notes]
 ---
 
 This page contains information about the new features, improvements, known
@@ -17,6 +18,14 @@ for what's coming next.
 ## Q1 2024
 
 New features and enhancements released in the first quarter of 2024.
+
+### 2024-03-29
+
+The **High-profile vulnerabilities** policy now reports the `xz` backdoor
+vulnerability [CVE-2024-3094](https://scout.docker.com/v/CVE-2024-3094). Any
+images in your Docker organization containing the version of `xz/liblzma` with
+the backdoor will be non-compliant with the **High-profile vulnerabilities**
+policy.
 
 ### 2024-03-20
 

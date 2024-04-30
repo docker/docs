@@ -1,4 +1,6 @@
 Guides:
+- title: Overview
+  path: /guides/
 - title: Docker overview
   path: /get-started/overview/
 - sectiontitle: Get started
@@ -58,8 +60,18 @@ Guides:
       path: /guides/docker-concepts/the-basics/what-is-a-registry/
     - title: "What is Docker Compose?"
       path: /guides/docker-concepts/the-basics/what-is-docker-compose/
-
-
+  - sectiontitle: "Building images"
+    section:
+    - title: "Understanding image layers"
+      path: /guides/docker-concepts/building-images/understanding-image-layers/
+    - title: "Writing a Dockerfile"
+      path: /guides/docker-concepts/building-images/writing-a-dockerfile/
+    - title: "Build, tag and publish an image"
+      path: /guides/docker-concepts/building-images/build-tag-and-publish-an-image/
+    - title: "Using the build cache"
+      path: /guides/docker-concepts/building-images/using-the-build-cache/
+    - title: "Multi-stage builds"
+      path: /guides/docker-concepts/building-images/multi-stage-builds/
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
@@ -90,6 +102,18 @@ Guides:
       path: /language/python/configure-ci-cd/
     - title: "Test your deployment"
       path: /language/python/deploy/
+  - sectiontitle: R
+    section:
+    - title: "Overview"
+      path: /language/r/
+    - title: "Containerize your app"
+      path: /language/r/containerize/
+    - title: "Develop your app"
+      path: /language/r/develop/
+    - title: "Configure CI/CD"
+      path: /language/r/configure-ci-cd/
+    - title: "Test your deployment"
+      path: /language/r/deploy/
   - sectiontitle: Java
     section:
     - title: "Overview"
@@ -684,6 +708,8 @@ Reference:
       title: docker scout integration list
     - path: /reference/cli/docker/scout/policy/
       title: docker scout policy
+    - path: /reference/cli/docker/scout/push/
+      title: docker scout push
     - path: /reference/cli/docker/scout/quickview/
       title: docker scout quickview
     - path: /reference/cli/docker/scout/recommendations/
@@ -992,103 +1018,100 @@ Reference:
           title: Version 2
 - path: /glossary/
   title: Glossary
-
-
-
-Samples:
-- path: /samples/
-  title: Overview
-- sectiontitle: Databases
+- sectiontitle: Samples
   section:
-    - path: /samples/mariadb/
-      title: MariaDB
-    - path: /samples/mongodb/
-      title: MongoDB
-    - path: /samples/ms-sql/
-      title: MS-SQL
-    - path: /samples/mysql/
-      title: MySQL
-    - path: /samples/postgres/
-      title: PostgreSQL
-    - path: /samples/redis/
-      title: Redis
-- sectiontitle: Frameworks
-  section:
-    - path: /samples/dotnet/
-      title: .NET
-    - path: /samples/angular/
-      title: Angular
-    - path: /samples/django/
-      title: Django
-    - path: /samples/express/
-      title: Express
-    - path: /samples/fastapi/
-      title: FastAPI
-    - path: /samples/flask/
-      title: Flask
-    - path: /samples/nodejs/
-      title: Node.js
-    - path: /samples/react/
-      title: React
-    - path: /samples/rails/
-      title: Rails
-    - path: /samples/spark/
-      title: Spark
-    - path: /samples/spring/
-      title: Spring Boot
-    - path: /samples/vuejs/
-      title: Vue.js
-- sectiontitle: Languages
-  section:
-    - path: /samples/go/
-      title: Go
-    - path: /samples/java/
-      title: Java
-    - path: /samples/javascript/
-      title: JavaScript
-    - path: /samples/php/
-      title: PHP
-    - path: /samples/python/
-      title: Python
-    - path: /samples/ruby/
-      title: Ruby
-    - path: /samples/rust/
-      title: Rust
-    - path: /samples/typescript/
-      title: TypeScript
-- sectiontitle: Platforms
-  section:
-    - path: /samples/gitea/
-      title: Gitea
-    - path: /samples/nextcloud/
-      title: Nextcloud
-    - path: /samples/portainer/
-      title: Portainer
-    - path: /samples/prometheus/
-      title: Prometheus
-    - path: /samples/wordpress/
-      title: WordPress
-- sectiontitle: Other samples
-  section:
-    - path: /samples/ai-ml/
-      title: AI/ML
-    - path: /samples/cloudflared/
-      title: Cloudflared
-    - path: /samples/elasticsearch/
-      title: Elasticsearch / Logstash / Kibana
-    - path: /samples/minecraft/
-      title: Minecraft
-    - path: /samples/nginx/
-      title: NGINX
-    - path: /samples/pi-hole/
-      title: Pi-hole
-    - path: /samples/plex/
-      title: Plex
-    - path: /samples/traefik/
-      title: Traefik
-    - path: /samples/wireguard/
-      title: Wireguard
-
+  - path: /samples/
+    title: Overview
+  - sectiontitle: Databases
+    section:
+      - path: /samples/mariadb/
+        title: MariaDB
+      - path: /samples/mongodb/
+        title: MongoDB
+      - path: /samples/ms-sql/
+        title: MS-SQL
+      - path: /samples/mysql/
+        title: MySQL
+      - path: /samples/postgres/
+        title: PostgreSQL
+      - path: /samples/redis/
+        title: Redis
+  - sectiontitle: Frameworks
+    section:
+      - path: /samples/dotnet/
+        title: .NET
+      - path: /samples/angular/
+        title: Angular
+      - path: /samples/django/
+        title: Django
+      - path: /samples/express/
+        title: Express
+      - path: /samples/fastapi/
+        title: FastAPI
+      - path: /samples/flask/
+        title: Flask
+      - path: /samples/nodejs/
+        title: Node.js
+      - path: /samples/react/
+        title: React
+      - path: /samples/rails/
+        title: Rails
+      - path: /samples/spark/
+        title: Spark
+      - path: /samples/spring/
+        title: Spring Boot
+      - path: /samples/vuejs/
+        title: Vue.js
+  - sectiontitle: Languages
+    section:
+      - path: /samples/go/
+        title: Go
+      - path: /samples/java/
+        title: Java
+      - path: /samples/javascript/
+        title: JavaScript
+      - path: /samples/php/
+        title: PHP
+      - path: /samples/python/
+        title: Python
+      - path: /samples/ruby/
+        title: Ruby
+      - path: /samples/rust/
+        title: Rust
+      - path: /samples/typescript/
+        title: TypeScript
+  - sectiontitle: Platforms
+    section:
+      - path: /samples/gitea/
+        title: Gitea
+      - path: /samples/nextcloud/
+        title: Nextcloud
+      - path: /samples/portainer/
+        title: Portainer
+      - path: /samples/prometheus/
+        title: Prometheus
+      - path: /samples/wordpress/
+        title: WordPress
+  - sectiontitle: Other samples
+    section:
+      - path: /samples/ai-ml/
+        title: AI/ML
+      - path: /samples/cloudflared/
+        title: Cloudflared
+      - path: /samples/elasticsearch/
+        title: Elasticsearch / Logstash / Kibana
+      - path: /samples/minecraft/
+        title: Minecraft
+      - path: /samples/nginx/
+        title: NGINX
+      - path: /samples/pi-hole/
+        title: Pi-hole
+      - path: /samples/plex/
+        title: Plex
+      - path: /samples/traefik/
+        title: Traefik
+      - path: /samples/wireguard/
+        title: Wireguard
 
 Manuals:
 - path: /manuals/
@@ -1099,28 +1122,28 @@ Manuals:
   section:
     - path: /desktop/
       title: Overview
-    - sectiontitle: Install Docker Desktop
+    - sectiontitle: Install 
       section:
        - path: /desktop/install/mac-install/
-         title: Install on Mac
+         title: Mac
        - path: /desktop/mac/permission-requirements/
          title: Understand permission requirements for Mac
        - path: /desktop/install/windows-install/
-         title: Install on Windows
+         title: Windows
        - path: /desktop/windows/permission-requirements/
          title: Understand permission requirements for Windows
        - path: /desktop/install/linux-install/
-         title: Install on Linux
+         title: Linux
        - sectiontitle: Installation per Linux distro
          section:
             - path: /desktop/install/ubuntu/
-              title: Install on Ubuntu
+              title: Ubuntu
             - path: /desktop/install/debian/
-              title: Install on Debian
+              title: Debian
             - path: /desktop/install/fedora/
-              title: Install on Fedora
+              title: Fedora
             - path: /desktop/install/archlinux/
-              title: Install on Arch
+              title: Arch
     - path: /desktop/get-started/
       title: Sign in
     - sectiontitle: Explore Docker Desktop
@@ -1149,6 +1172,8 @@ Manuals:
             title: What is Settings Management?
           - path: /desktop/hardened-desktop/settings-management/configure/
             title: Configure Settings Management
+          - path: /desktop/hardened-desktop/settings-management/air-gapped-containers/
+            title: Air-gapped containers (Beta)
         - sectiontitle: Enhanced Container Isolation
           section:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/
@@ -1158,7 +1183,7 @@ Manuals:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/features-benefits/
             title: Key features and benefits
           - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
-            title: Advanced configuration options (Beta)
+            title: Advanced configuration options
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1176,7 +1201,7 @@ Manuals:
     - path: /desktop/wasm/
       title: Wasm workloads (Beta)
     - path: /desktop/synchronized-file-sharing/
-      title: Synchronized file shares {{< badge color=violet text=New >}}
+      title: Synchronized file shares
     - sectiontitle: WSL
       section:
         - path: /desktop/wsl/
@@ -1221,6 +1246,18 @@ Manuals:
       title: Uninstall Docker Desktop
     - path: /desktop/feedback/
       title: Give feedback
+    - sectiontitle: Desktop FAQs
+      section:
+      - path: /desktop/faqs/general/
+        title: General
+      - path: /desktop/faqs/macfaqs/
+        title: Mac
+      - path: /desktop/faqs/windowsfaqs/
+        title: Windows
+      - path: /desktop/faqs/linuxfaqs/
+        title: Linux
+      - path: /desktop/faqs/releases/
+        title: Releases
     - path: /desktop/release-notes/
       title: Release notes
     - sectiontitle: Previous versions
@@ -1245,7 +1282,7 @@ Manuals:
 - sectiontitle: Docker Extensions
   section:
     - path: /desktop/extensions/
-      title: What are Docker Extensions?
+      title: Overview
     - sectiontitle: Extensions on Docker Desktop
       section:
         - path: /desktop/extensions/marketplace/
@@ -1544,6 +1581,8 @@ Manuals:
       title: Filter commands
     - path: /config/formatting/
       title: Format command and log output
+    - path: /config/otel/
+      title: OpenTelemetry
   - sectiontitle: Manage resources
     section:
     - path: /config/pruning/
@@ -1726,10 +1765,12 @@ Manuals:
     title: Deprecated features
   - sectiontitle: Release notes
     section:
-    - path: /engine/release-notes/26.0/
-      title: Engine 26.0
+    - path: /engine/release-notes/26.1/
+      title: Engine 26.1
     - sectiontitle: Previous versions
       section:
+      - path: /engine/release-notes/26.0/
+        title: Engine 26.0
       - path: /engine/release-notes/25.0/
         title: Engine 25.0
       - path: /engine/release-notes/24.0/
@@ -1971,7 +2012,7 @@ Manuals:
   - path: /compose/compose-application-model/
     title: How Compose works
   - path: /compose/gettingstarted/
-    title: Try Compose
+    title: Quickstart
   - path: /compose/project-name/
     title: Specify a project name
   - sectiontitle: Environment variables
@@ -2020,6 +2061,8 @@ Manuals:
     title: Give feedback
   - path: /compose/migrate/
     title: Migrate to Compose V2
+  - path: /compose/faq/
+    title: Compose FAQ
   - path: /compose/release-notes/
     title: Release notes
 
@@ -2037,6 +2080,8 @@ Manuals:
         title: Access
       - path: /docker-hub/repos/
         title: Manage
+      - path: /docker-hub/repos/categories/
+        title: Categories
   - path: /docker-hub/download-rate-limit/
     title: Download rate limit
   - path: /docker-hub/webhooks/
@@ -2113,6 +2158,14 @@ Manuals:
       title: Manage users
     - path: /admin/company/owners/
       title: Manage company owners
+  - sectiontitle: Account and admin FAQ
+    section:
+    - path: /admin/faqs/general-faqs/
+      title: General
+    - path: /admin/faqs/organization-faqs/
+      title: Organization
+    - path: /admin/faqs/company-faqs/
+      title: Company
   - path: /admin/convert-account/
     title: Convert an account into an organization
   - path: /admin/deactivate-account/
@@ -2166,6 +2219,28 @@ Manuals:
         title: Generate a new recovery code
   - path: /security/security-announcements/
     title: Security announcements
+  - sectiontitle: Security FAQs
+    section:
+    - path: /security/faqs/general/
+      title: General
+    - path: /security/faqs/networking-and-vms/
+      title: Networking and VMs
+    - path: /security/faqs/eci-faq/
+      title: Enhanced Container Isolation
+    - sectiontitle: Single Sign-On
+      section:
+      - path: /security/faqs/single-sign-on/faqs/
+        title: General
+      - path: /security/faqs/single-sign-on/saml-faqs/
+        title: SAML
+      - path: /security/faqs/single-sign-on/idp-faqs/
+        title: Identity providers
+      - path: /security/faqs/single-sign-on/domain-faqs/
+        title: Domains
+      - path: /security/faqs/single-sign-on/enforcement-faqs/
+        title: Enforcement
+      - path: /security/faqs/single-sign-on/users-faqs/
+        title: Manage users
 
 - sectiontitle: Billing
   section:
@@ -2185,6 +2260,8 @@ Manuals:
     title: Docker Build Cloud billing
   - path: /billing/scout-billing/
     title: Docker Scout billing
+  - path: /billing/faqs/
+    title: Billing FAQs
 
 - sectiontitle: Subscription
   section:
@@ -2212,13 +2289,21 @@ Manuals:
     title: Docker Scout subscriptions and features
   - path: /subscription/desktop-license/
     title: Docker Desktop license agreement
+  - path: /subscription/faq/
+    title: Subscription FAQ
 
 - sectiontitle: Trusted content
   section:
   - path: /trusted-content/
     title: Overview
-  - path: /trusted-content/official-images/
-    title: Docker Official images
+  - sectiontitle: Docker Official Images
+    section:
+    - path: /trusted-content/official-images/
+      title: Overview
+    - path: /trusted-content/official-images/using/
+      title: Using official images
+    - path: /trusted-content/official-images/contributing/
+      title: Contributing
   - path: /trusted-content/dvp-program/
     title: Docker Verified Publisher Program
   - path: /trusted-content/dsos-program/
@@ -2226,61 +2311,7 @@ Manuals:
   - path: /trusted-content/insights-analytics/
     title: Insights and analytics
 
-- path: /release-notes/
-  title: Release notes
 - path: /support/
   title: Get support
 - path: /release-lifecycle/
   title: Product release lifecycle
-
-FAQ:
-  - path: /faq/
-    title: Overview
-  - path: /billing/faqs/
-    title: Billing
-  - path: /compose/faq/
-    title: Compose
-  - sectiontitle: Desktop
-    section:
-    - path: /desktop/faqs/general/
-      title: General
-    - path: /desktop/faqs/macfaqs/
-      title: Mac
-    - path: /desktop/faqs/windowsfaqs/
-      title: Windows
-    - path: /desktop/faqs/linuxfaqs/
-      title: Linux
-    - path: /desktop/faqs/releases/
-      title: Releases
-  - sectiontitle: Docker account and admin
-    section:
-    - path: /faq/admin/general-faqs/
-      title: General
-    - path: /faq/admin/organization-faqs/
-      title: Organization
-    - path: /faq/admin/company-faqs/
-      title: Company
-  - path: /subscription/faq/
-    title: Subscription
-  - sectiontitle: Security
-    section:
-    - path: /faq/security/general/
-      title: General
-    - path: /faq/security/networking-and-vms/
-      title: Networking and VMs
-    - path: /faq/security/eci-faq/
-      title: Enhanced Container Isolation
-    - sectiontitle: Single Sign-On
-      section:
-      - path: /faq/security/single-sign-on/faqs/
-        title: General
-      - path: /faq/security/single-sign-on/saml-faqs/
-        title: SAML
-      - path: /faq/security/single-sign-on/idp-faqs/
-        title: Identity providers
-      - path: /faq/security/single-sign-on/domain-faqs/
-        title: Domains
-      - path: /faq/security/single-sign-on/enforcement-faqs/
-        title: Enforcement
-      - path: /faq/security/single-sign-on/users-faqs/
-        title: Manage users

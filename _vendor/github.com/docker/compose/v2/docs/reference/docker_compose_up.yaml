@@ -35,6 +35,17 @@ options:
       experimentalcli: false
       kubernetes: false
       swarm: false
+    - option: abort-on-container-failure
+      value_type: bool
+      default_value: "false"
+      description: |
+        Stops all containers if any container exited with failure. Incompatible with -d
+      deprecated: false
+      hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
     - option: always-recreate-deps
       value_type: bool
       default_value: "false"
@@ -104,6 +115,17 @@ options:
         Recreate containers even if their configuration and image haven't changed
       deprecated: false
       hidden: false
+      experimental: false
+      experimentalcli: false
+      kubernetes: false
+      swarm: false
+    - option: menu
+      value_type: bool
+      default_value: "false"
+      description: |
+        Enable interactive shortcuts when running attached (Experimental). Incompatible with --detach.
+      deprecated: false
+      hidden: true
       experimental: false
       experimentalcli: false
       kubernetes: false

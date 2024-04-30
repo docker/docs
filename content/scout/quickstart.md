@@ -50,8 +50,15 @@ You can do this from Docker Hub, the Docker Scout Dashboard, and CLI.
 
 1. Sign in to your Docker account with the `docker login` command or use the
    **Sign in** button in Docker Desktop.
-2. Use the Docker CLI [`docker scout repo enable`](/reference/cli/docker/scout/repo/enable)
-   command to enable analysis on an existing repository:
+
+2. Next, enroll your organization with Docker Scout, using the `docker scout enroll` command.
+
+   ```console
+   $ docker scout enroll <ORG_NAME>
+       ✓ Successfully enrolled organization <ORG_NAME> with Docker Scout Free
+   ```
+
+3. Enable Docker Scout for your image repository with the `docker scout repo enable` command.
 
    ```console
    $ docker scout repo enable --org <ORG_NAME> <ORG_NAME>/scout-demo
@@ -220,9 +227,9 @@ results through a different lens: the Docker Scout Dashboard.
 
 1. Open the [Docker Scout Dashboard](https://scout.docker.com/).
 2. Sign in with your Docker account.
-3. Go to the **Images** tab.
+3. Select **Images** in the left-hand navigation.
 
-The images tab lists your Scout-enabled repositories.
+The images page lists your Scout-enabled repositories.
 Select the image in the list to open the **Image details** sidebar.
 The sidebar shows a compliance overview for the last pushed tag of a repository.
 

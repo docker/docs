@@ -2,6 +2,7 @@
 title: Using secrets with GitHub Actions
 description: Example using secret mounts with GitHub Actions
 keywords: ci, github actions, gha, buildkit, buildx, secret
+tags: [Secrets]
 ---
 
 A build secret is sensitive information, such as a password or API token, consumed as part of the build process.
@@ -109,9 +110,7 @@ or to fetch application packages from a private repository.
 The following Dockerfile example uses an SSH mount
 to fetch Go modules from a private GitHub repository.
 
-{{< accordion title="Dockerfile" >}}
-
-```dockerfile
+```dockerfile {collapse=1}
 # syntax=docker/dockerfile:1
 
 ARG GO_VERSION="{{% param example_go_version %}}"
@@ -150,8 +149,6 @@ RUN --mount=type=bind,target=. \
     --mount=type=cache,target=/root/.cache \
     go build ...
 ```
-
-{{< /accordion >}}
 
 To build this Dockerfile, you must specify an SSH mount that the builder can
 use in the steps with `--mount=type=ssh`.

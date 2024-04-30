@@ -43,15 +43,6 @@ grid_apis:
   description: API for Docker Verified Publishers to fetch analytics data.
   icon: area_chart
   link: /docker-hub/api/dvp/
-grid_specs:
-- title: Image specification
-  description: Describes the various components of a Docker image.
-  icon: contract
-  link: /registry/spec/manifest-v2-2/
-- title: Registry token authentication
-  description: Outlines the Docker Registry authentication schemes.
-  icon: key
-  link: /registry/spec/auth/
 aliases:
 - /app/working-with-app/
 - /engine/reference/commandline/app/
@@ -88,7 +79,3 @@ various APIs, CLIs, drivers and specifications, and file formats.
 ## Application programming interfaces (APIs)
 
 {{< grid items="grid_apis" >}}
-
-## Drivers and specifications
-
-{{< grid items="grid_specs" >}}

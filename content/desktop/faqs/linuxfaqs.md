@@ -2,6 +2,7 @@
 description: Frequently asked questions for Docker Desktop for Linux
 keywords: desktop, linux, faqs
 title: FAQs for Docker Desktop for Linux
+tags: [FAQ]
 aliases:
 - /desktop/linux/space/
 ---
@@ -86,6 +87,7 @@ a group with the new GID and adding our user to it, or by setting a recursive
 ACL (see `setfacl(1)`) for folders shared with the Docker Desktop VM.
 
 ### Where does Docker Desktop store Linux containers?
+
 Docker Desktop stores Linux containers and images in a single, large "disk image" file in the Linux filesystem. This is different from Docker on Linux, which usually stores containers and images in the `/var/lib/docker` directory on the host's filesystem.
 
 #### Where is the disk image file?

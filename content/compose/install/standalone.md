@@ -12,6 +12,7 @@ aliases:
 On this page you can find instructions on how to install Compose standalone on Linux or Windows Server, from the command line.
 
 ### On Linux
+
 > **Compose standalone**
 >
 > Note that Compose standalone uses the `-compose` syntax instead of the current standard syntax `compose`.  

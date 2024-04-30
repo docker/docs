@@ -39,8 +39,13 @@ For additional details about supported attributes and SCIM, see [Docker Hub API 
 
 > **Important**
 >
->SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](scim.md#set-up-scim), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For more information, see [SSO attributes](../for-admins/single-sign-on/configure/configure-idp.md#sso-attributes).
+> SSO uses Just-in-Time (JIT) provisioning by default. If you [enable SCIM](scim.md#set-up-scim), JIT values still overwrite the attribute values set by SCIM provisioning whenever users log in. To avoid conflicts, make sure your JIT values match your SCIM values. For more information, see [SSO attributes](../for-admins/single-sign-on/configure/configure-idp.md#sso-attributes).
 {.important}
+
+> **Beta feature**
+>
+> Optional Just-in-Time (JIT) provisioning is available in Private Beta when you use the Admin Console. If you're participating in this program, you can avoid conflicts between SCIM and JIT by disabling JIT provisioning in your SSO connection. See [SSO authentication with JIT provisioning disabled](/security/for-admins/group-mapping/#sso-authentication-with-jit-provisioning-disabled).
+{ .experimental }
 
 ## Enable SCIM in Docker
 
@@ -249,3 +254,12 @@ If SCIM is disabled, any user provisioned through SCIM will remain in the organi
 
 {{< /tab >}}
 {{< /tabs >}}
+
+## More resources
+
+The following videos demonstrate how to configure SCIM for your IdP.
+
+- [Video: Configure SCIM with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=1314)
+- [Video: Attribute mapping with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=1998)
+- [Video: Configure SCIM with Entra ID (Azure)](https://youtu.be/bGquA8qR9jU?feature=shared&t=1668)
+- [Video: Attribute and group mapping with Entra ID (Azure)](https://youtu.be/bGquA8qR9jU?feature=shared&t=2039)

@@ -134,7 +134,8 @@ The list includes the following vulnerabilities:
 - [CVE-2014-0160 (OpenSSL Heartbleed)](https://scout.docker.com/v/CVE-2014-0160)
 - [CVE-2021-44228 (Log4Shell)](https://scout.docker.com/v/CVE-2021-44228)
 - [CVE-2023-38545 (cURL SOCKS5 heap buffer overflow)](https://scout.docker.com/v/CVE-2023-38545)
-- [CVE-2023-44487 (HTTP/2 Rapid Reset)](https://scout.docker.com/v/CVE-2023-44487)
+:cc
+- [CVE-2024-3094 (XZ backdoor)](https://scout.docker.com/v/CVE-2024-3094)
 
 You can configure the CVEs included in this list by creating a custom policy.
 For more information, see [Configure policies](./configure.md).
@@ -305,13 +306,11 @@ You can also configure the policy to:
 
 This policy isn't enabled by default. To enable the policy:
 
-1. Go to the [Docker Scout Dashboard](https://scout.docker.com/).
-2. Go to the **Policies** section.
-3. Select the **Unapproved base images** policy in the list.
-4. Enter the patterns that you want to allow.
-5. Select whether you want to allow only supported tags or supported distro
-   versions of official images.
-6. Select **Save and enable**.
+1. [Create a new policy](https://scout.docker.com/reports/policies/create?fromDefinition=approved-base-images&fromNamespace=docker) in the Docker Scout Dashboard.
+2. Under **Approved base image sources**, specify the image reference patterns that you want to allow.
+3. Select whether you want to allow only supported tags for official images,
+   and supported Linux distribution versions.
+4. Select **Save and enable**.
 
    The policy is now enabled for your current organization.
 

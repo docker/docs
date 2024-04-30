@@ -8,13 +8,57 @@ This page contains information about the new features, improvements, known
 issues, and bug fixes in the Docker Scout [CLI plugin](https://github.com/docker/scout-cli/)
 and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-action).
 
+## 1.8.0
+
+{{< release-date date="2024-04-25" >}}
+
+### Bug fixes and enhancements
+
+- Improve format of EPSS score and percentile.
+  
+  Before:
+
+  ```text
+  EPSS Score      : 0.000440
+  EPSS Percentile : 0.092510
+  ```
+
+  After:
+
+  ```text
+  EPSS Score      : 0.04%
+  EPSS Percentile : 9th percentile
+  ```
+
+- Fix markdown output of the `docker scout cves` command when analyzing local filesystem. [docker/scout-cli#113](https://github.com/docker/scout-cli/issues/113)
+
+## 1.7.0
+
+{{< release-date date="2024-04-15" >}}
+
+### New
+
+- The [`docker scout push` command](/reference/cli/docker/scout/push/) is now fully available: analyze images locally and push the SBOM to Docker Scout.
+
+### Bug fixes and enhancements
+
+- Fix adding attestations with `docker scout attestation add` to images in private repositories
+- Fix image processing for images based on the empty `scratch` base image
+- A new `sbom://` protocol for Docker Scout CLI commands let you read a Docker Scout SBOM from standard input.
+
+  ```console
+  $ docker scout sbom IMAGE | docker scout qv sbom://
+  ```
+
+- Add classifier for Joomla packages
+
 ## 1.6.4
 
 {{< release-date date="2024-03-26" >}}
 
-### Bug fix
+### Bug fixes and enhancements
 
-- Fix epoch handling for rpm-based images.
+- Fix epoch handling for RPM-based Linux distributions
 
 ## 1.6.3
 
@@ -107,6 +151,8 @@ and the `docker/scout-action` [GitHub Action](https://github.com/docker/scout-ac
   uses the cache from Windows. That way, if an image has been indexed for
   instance by Docker Desktop there's no need anymore to re-index it on WSL2
   side.
+- Indexing is now blocked in the CLI if it has been disabled using
+  [Settings Management](../../desktop/hardened-desktop/settings-management/configure.md) feature.
 
 - Fix a panic that would occur when analyzing a single-image `oci-dir` input
 - Improve local attestation support with the containerd image store

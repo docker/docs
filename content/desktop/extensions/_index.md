@@ -1,7 +1,7 @@
 ---
 description: Extensions
 keywords: Docker Extensions, Docker Desktop, Linux, Mac, Windows
-title: What are Docker Extensions?
+title: Overview of Docker Extensions
 toc_min: 1
 toc_max: 2
 ---

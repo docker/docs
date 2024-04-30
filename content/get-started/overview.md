@@ -189,6 +189,7 @@ the default registry configuration):
     stops but isn't removed. You can start it again or remove it.
 
 ## The underlying technology
+
 Docker is written in the [Go programming language](https://golang.org/) and takes
 advantage of several features of the Linux kernel to deliver its functionality.
 Docker uses a technology called `namespaces` to provide the isolated workspace

@@ -1,47 +1,80 @@
 @layer components {
-  .highlight,
-  :not(pre) > code {
-    font-size: 0.875em;
-    border: 1px solid;
-    border-radius: theme("spacing.1");
-    background: theme("colors.white");
-    border-color: theme("colors.gray.light.300");
-    .dark & {
-      background: theme("colors.gray.dark.200");
-      border-color: theme("colors.gray.dark.300");
+  .prose {
+    .highlight,
+    :not(pre) > code {
+      font-size: 0.875em;
+      border: 1px solid;
+      border-radius: theme("spacing.1");
+      background: theme("colors.white");
+      border-color: theme("colors.gray.light.300");
+      .dark & {
+        background: theme("colors.gray.dark.200");
+        border-color: theme("colors.gray.dark.300");
+      }
     }
-  }
 
-  :not(pre) > code {
-    background: theme("colors.gray.light.200");
-    display: inline-block;
-    margin: 0;
-    white-space: nowrap;
-    font-weight: 400;
-    padding: 0 4px;
-  }
-
-  .highlight {
-    @apply my-4 overflow-x-auto p-3;
-
-    /* LineTableTD */
-    .lntd {
-      vertical-align: top;
-      padding: 0;
+    :not(pre) > code {
+      background: theme("colors.gray.light.200");
+      display: inline-block;
       margin: 0;
-      border: 0;
+      font-weight: 400;
+      overflow-wrap: anywhere;
+      padding: 0 4px;
+      table & {
+        overflow-wrap: unset;
+      }
     }
-    /* LineTable */
-    .lntable {
-      display: table;
-      width: 100%;
-      border-spacing: 0;
-      padding: 0;
-      margin: 0;
-      border: 0;
-      /* LineNumberColumnHighlight */
-      .lntd:first-child .hl {
-        display: block;
+
+    /* Indented code blocks */
+    :not(.highlight) > pre {
+      @apply my-4 overflow-x-auto p-3;
+      font-size: 0.875em;
+      border: 1px solid;
+      border-radius: theme("spacing.1");
+      background: theme("colors.white");
+      border-color: theme("colors.gray.light.300");
+      .dark & {
+        background: theme("colors.gray.dark.200");
+        border-color: theme("colors.gray.dark.300");
+      }
+    }
+
+    .highlight {
+      @apply my-4 overflow-x-auto p-3;
+
+      /* LineTableTD */
+      .lntd {
+        vertical-align: top;
+        padding: 0;
+        margin: 0;
+        white-space: nowrap;
+        font-weight: 400;
+        padding: 0 4px;
+      }
+
+      .highlight {
+        @apply my-4 overflow-x-auto p-3;
+
+        /* LineTableTD */
+        .lntd {
+          vertical-align: top;
+          padding: 0;
+          margin: 0;
+          border: 0;
+        }
+        /* LineTable */
+        .lntable {
+          display: table;
+          width: 100%;
+          border-spacing: 0;
+          padding: 0;
+          margin: 0;
+          border: 0;
+          /* LineNumberColumnHighlight */
+          .lntd:first-child .hl {
+            display: block;
+          }
+        }
       }
     }
   }

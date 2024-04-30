@@ -32,12 +32,14 @@ following occurs:
 - When a user signs out, the **Sign in required!** prompt appears and they can
   no longer use Docker Desktop.
 
-> **Enforcing Single Sign-On (SSO)**
+> **Enforce sign-in vs enforce SSO**
 >
-> Enforcing sign-in to Docker Desktop isn't the same as enforcing SSO. To ensure
-> that your users always sign in using their SSO credentials, you must also
-> enforce SSO. For more details, see [Single Sign-On
-> overview](single-sign-on/_index.md).
+> Enforcing sign-in ensures that users are required to sign in to use Docker Desktop.
+> If your organization is also using single sign-on (SSO), you can optionally enforce SSO.
+> This means that your users must use SSO to sign in, instead of a username and password.
+> When you enforce sign-in and enforce SSO, your users must sign in and must use SSO to do so.
+> See [Enforce SSO](/security/for-admins/single-sign-on/connect#optional-enforce-sso) for details on how to enable this for your SSO connection.
+{ .tip }
 
 
 ## Create a registry.json file to enforce sign-in

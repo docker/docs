@@ -7,6 +7,6 @@ aliases:
 - /engine/reference/commandline/debug/
 ---
 
-> **Beta**
+> **Beta feature**
 >
-> Docker Debug is currently in [Beta](../../../release-lifecycle.md#beta). Docker recommends that you do not use this in production environments.
+> Docker Debug is currently in [Beta](../../../release-lifecycle.md#beta).

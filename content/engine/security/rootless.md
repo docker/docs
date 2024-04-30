@@ -161,6 +161,7 @@ testuser:231072:65536
 - NFS mounts as the docker "data-root" is not supported. This limitation is not specific to rootless mode.
 
 ## Install
+
 > **Note**
 >
 > If the system-wide Docker daemon is already running, consider disabling it:
@@ -377,6 +378,7 @@ Or add `net.ipv4.ip_unprivileged_port_start=0` to `/etc/sysctl.conf` (or
 `/etc/sysctl.d`) and run `sudo sysctl --system`.
 
 ### Limiting resources
+
 Limiting resources with cgroup-related `docker run` flags such as `--cpus`, `--memory`, `--pids-limit`
 is supported only when running with cgroup v2 and systemd.
 See [Changing cgroup version](../../config/containers/runmetrics.md) to enable cgroup v2.
@@ -409,6 +411,7 @@ EOF
 > Delegating `cpuset` requires systemd 244 or later.
 
 #### Limiting resources without cgroup
+
 Even when cgroup is not available, you can still use the traditional `ulimit` and [`cpulimit`](https://github.com/opsengine/cpulimit),
 though they work in process-granularity rather than in container-granularity,
 and can be arbitrarily disabled by the container process.
@@ -688,6 +691,7 @@ For more information about networking options for RootlessKit, see:
 - [Port drivers](https://github.com/rootless-containers/rootlesskit/blob/v2.0.0/docs/port.md)
 
 ### Tips for debugging
+
 **Entering into `dockerd` namespaces**
 
 The `dockerd-rootless.sh` script executes `dockerd` in its own user, mount, and network namespaces.

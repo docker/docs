@@ -51,6 +51,12 @@ When the status indicator displays **Watching for filesystem changes**, your fil
 >
 > When you create a new service, setting the [bind mount option consistency](../reference/cli/docker/service/create.md#options-for-bind-mounts) to `:consistent` bypasses Synchronized file shares. 
 
+> **Tip**
+>
+> Compose can now automatically create file shares for bind mounts. 
+> Ensure you're signed in to Docker with a paid subscription and have enabled both **Access experimental features** and **Manage Synchronized file shares with Compose** in Docker Desktop's settings.
+{ .tip }
+
 ## Explore your file share instance
 
 The **Synchronized file shares** section displays all your file share instances and provides useful information about each instance including:
@@ -77,13 +83,9 @@ In general, use your `.syncignore` file to exclude items that aren't critical to
 
 - Changes made to `.syncignore` don't lead to immediate deletions unless the file share is recreated. In other words, files that are newly ignored due to modifications in the `.syncignore` file remain in their current location, but are no longer updated during synchronization.
 
-- File share instances are currently limited to approximately 1-1.5 million files per share. Docker plans to increase this limit to 2 million in a future release. For best performance, if you have a file share instance of this size, try to decompose it into multiple shares corresponding to individual bind mount locations.
+- File share instances are currently limited to approximately 2 million files per share. For best performance, if you have a file share instance of this size, try to decompose it into multiple shares corresponding to individual bind mount locations.
 
 - Case conflicts, due to Linux being case-sensitive and macOS/Windows only being case-preserving, display as **File exists** problems in the GUI. These can be ignored. However, if they persist, you can report the issue.
-
-- File share instances mounted into [ECI](hardened-desktop/enhanced-container-isolation/_index.md) containers are currently read-only.
-
-- You cannot remove a file share instance during the initial synchronization. You have to wait for it to complete before **Delete** has any effect.
 
 - Synchronized file shares proactively reports temporary issues, which can result in occasional **Conflict** and **Problem** indicators appearing in the GUI during synchronization. These can be ignored. However, if they persist, you can report the issue.
 

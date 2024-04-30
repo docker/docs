@@ -6,6 +6,7 @@ toc_max: 3
 
 We support these broad categories of callouts:
 
+- Version callouts
 - Notes (no HTML attribute required)
 - Tips, which use the `{ .tip }` class
 - Important, which use the `{ .important }` class
@@ -14,6 +15,8 @@ We support these broad categories of callouts:
 - Restricted, which use the `{ .restricted }` class
 
 ## Examples
+
+{{< introduced buildx 0.10.4 >}}
 
 > **Note**
 >
@@ -62,7 +65,11 @@ For both of the following callouts, consult [the Docker release lifecycle](/rele
 > product.
 { .restricted}
 
-## HTML
+## Formatting 
+
+```go
+{{</* introduced buildx 0.10.4 "../../release-notes.md#0104" */>}}
+```
 
 ```html
 > **Note**

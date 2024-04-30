@@ -13,6 +13,7 @@ aliases:
 - /windows/troubleshoot/
 - /docker-for-win/troubleshoot/
 - /docker-for-windows/troubleshoot/
+tags: [ Troubleshooting ]
 ---
 
 This page contains information on how to diagnose and troubleshoot Docker Desktop, and how to check the logs.
@@ -66,6 +67,17 @@ This opens the in-app **Support** page and starts collecting the diagnostics.
         >
         > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
     - If you don't have a paid Docker subscription, select **Report a Bug** to open a new Docker Desktop issue on GitHub. Complete the information required and ensure you add the diagnostic ID you copied in step three. 
+
+### Diagnose from an error message 
+
+1. When an error message appears, select **Gather diagnostics**.
+2. When the diagnostics are uploaded, Docker Desktop prints a diagnostic ID. Copy this ID.
+3. Use your diagnostics ID to get help:
+    - If you have a paid Docker subscription, you can [contact support](https://hub.docker.com/support/desktop/). Fill in the information required and add the ID you copied in step two to the **Diagnostics ID** field. Then, select **Submit** to request Docker Desktop support.
+        > **Note**
+        >
+        > You must be signed in to Docker Desktop to access the support form. For information on what's covered as part of Docker Desktop support, see [Support](../../support/index.md).
+    - If you don't have a paid Docker subscription, you can open a new Docker Desktop issue on GitHub for [Mac](https://github.com/docker/for-mac/issues), [Windows](https://github.com/docker/for-win/issues), or [Linux](https://github.com/docker/for-linux/issues). Complete the information required and ensure you add the diagnostic ID you copied in step two. 
 
 ### Diagnose from the terminal
 

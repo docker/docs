@@ -2,6 +2,7 @@
 description: Frequently asked questions for Docker Desktop for Windows
 keywords: desktop, windows, faqs
 title: FAQs for Docker Desktop for Windows
+tags: [FAQ]
 ---
 
 ### Can I use VirtualBox alongside Docker Desktop?

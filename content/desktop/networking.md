@@ -185,5 +185,8 @@ container to random ports on the host.
 $ docker run -d -P --name webserver nginx
 ```
 
+Alternatively, you can also use [host networking](../network/drivers/host.md#docker-desktop)
+to give the container direct access to the network stack of the host.
+
 See the [run command](../reference/cli/docker/container/run.md) for more details on
 publish options used with `docker run`.

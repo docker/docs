@@ -36,6 +36,7 @@ Using the `admin-settings.json` file, admins can:
 - Configure network settings
 - Configure Kubernetes settings
 - Enforce the use of WSL 2 based engine or Hyper-V
+- Enforce the use of Rosetta for x86_64/amd64 emulation on Apple Silicon
 - Configure Docker Engine
 - Turn off Docker Desktop's ability to checks for updates
 - Turn off Docker Extensions
@@ -43,6 +44,7 @@ Using the `admin-settings.json` file, admins can:
 - Turn off beta and experimental features
 - Control the file sharing implementation for your developers on macOS
 - Specify which paths your developers can add file shares to
+- Configure air-gapped containers (Beta)
 
 For more details on the syntax and options admins can set, see [Configure Settings Management](configure.md).
 
@@ -63,3 +65,7 @@ Docker doesn't automatically mandate that developers re-launch and re-authentica
 Any settings that are enforced, are grayed out in Docker Desktop and the user is unable to edit them, either via the Docker Desktop UI, CLI, or the `settings.json` file. In addition, if Enhanced Container Isolation is enforced, developers can't use privileged containers or similar techniques to modify enforced settings within the Docker Desktop Linux VM, for example, reconfigure proxy and networking of reconfigure Docker Engine.
 
 ![Proxy settings grayed out](/assets/images/grayed-setting.png)
+
+## More resources
+
+- [Video: Settings Managmeent](https://www.youtube.com/watch?v=I9oJOJ1P9PQ)

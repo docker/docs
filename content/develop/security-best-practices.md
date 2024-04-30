@@ -4,6 +4,7 @@ description: Image security best practices guide
 keywords: docker, images, containers, vulnerability, cve
 aliases:
 - /develop/scan-images/
+tags: [Best practices]
 ---
 
 You can take a few steps to improve the security of your
@@ -21,7 +22,7 @@ image. When choosing an image, ensure it's built from a trusted source and keep
 it small.
 
 Docker Hub has more than 8.3 million repositories. Some of these images are
-[Official Images](../trusted-content/official-images.md), which are published by
+[Official Images](../trusted-content/official-images/_index.md), which are published by
 Docker as a curated set of Docker open source and drop-in solution repositories.
 Docker also offers images that are published by
 [Verified Publishers](../trusted-content/dvp-program.md). These high-quality images

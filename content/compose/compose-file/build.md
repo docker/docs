@@ -123,6 +123,8 @@ build:
 
 ### dockerfile_inline
 
+{{< introduced compose 2.17.0 "../release-notes.md#2170" >}}
+
 `dockerfile_inline` defines the Dockerfile content as an inlined string in a Compose file. When set, the `dockerfile`
 attribute is not allowed and Compose rejects any Compose file having both set.
 
@@ -245,6 +247,8 @@ Unsupported caches are ignored and don't prevent you from building images.
 
 ### additional_contexts
 
+{{< introduced compose 2.17.0 "../release-notes.md#2170" >}}
+
 `additional_contexts` defines a list of named contexts the image builder should use during image build.
 
 `additional_contexts` can be a mapping or a list:
@@ -295,7 +299,7 @@ extra_hosts:
   - "myhostv6=[::1]"
 ```
 
-The separator `=` is preferred, but `:` can also be used. For example:
+The separator `=` is preferred, but `:` can also be used. Introduced in Docker Compose version [2.24.1](../release-notes.md#2241). For example:
 
 ```yml
 extra_hosts:
@@ -318,6 +322,8 @@ configuration, which means for Linux `/etc/hosts` will get extra lines:
 are platform specific.
 
 ### privileged
+
+{{< introduced compose 2.15.0 "../release-notes.md#2" >}}
 
 `privileged` configures the service image to build with elevated privileges. Support and actual impacts are platform specific.
 
@@ -414,6 +420,7 @@ build:
 ```
 
 ### secrets
+
 `secrets` grants access to sensitive data defined by [secrets](05-services.md#secrets) on a per-service build basis. Two
 different syntax variants are supported: the short syntax and the long syntax.
 
@@ -496,7 +503,7 @@ tags:
 
 ### ulimits
 
-> Available with Docker Compose version 2.24.0 and later.
+{{< introduced compose 2.23.1 "../release-notes.md#2231" >}}
 
 `ulimits` overrides the default ulimits for a container. It's specified either as an integer for a single limit
 or as mapping for soft/hard limits.

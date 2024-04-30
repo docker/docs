@@ -105,14 +105,15 @@ flag.
 The following table describes the driver-specific options that you can pass to
 `--option` when creating a custom network using the `bridge` driver.
 
-| Option                                           | Default        | Description                                                 |
-| ------------------------------------------------ | -------------- | ----------------------------------------------------------- |
-| `com.docker.network.bridge.name`                 |                | Interface name to use when creating the Linux bridge.       |
-| `com.docker.network.bridge.enable_ip_masquerade` | `true`         | Enable IP masquerading.                                     |
-| `com.docker.network.bridge.enable_icc`           | `true`         | Enable or Disable inter-container connectivity.             |
-| `com.docker.network.bridge.host_binding_ipv4`    |                | Default IP when binding container ports.                    |
-| `com.docker.network.driver.mtu`                  | `0` (no limit) | Set the containers network Maximum Transmission Unit (MTU). |
-| `com.docker.network.container_iface_prefix`      | `eth`          | Set a custom prefix for container interfaces.               |
+| Option                                           | Default        | Description                                                                                   |
+| ------------------------------------------------ | -------------- | --------------------------------------------------------------------------------------------- |
+| `com.docker.network.bridge.name`                 |                | Interface name to use when creating the Linux bridge.                                         |
+| `com.docker.network.bridge.enable_ip_masquerade` | `true`         | Enable IP masquerading.                                                                       |
+| `com.docker.network.bridge.enable_icc`           | `true`         | Enable or Disable inter-container connectivity.                                               |
+| `com.docker.network.bridge.host_binding_ipv4`    |                | Default IP when binding container ports.                                                      |
+| `com.docker.network.driver.mtu`                  | `0` (no limit) | Set the containers network Maximum Transmission Unit (MTU).                                   |
+| `com.docker.network.container_iface_prefix`      | `eth`          | Set a custom prefix for container interfaces.                                                 |
+| `com.docker.network.bridge.inhibit_ipv4`         | `false`        | Prevent Docker from [assigning an IP address](#skip-ip-address-configuration) to the network. |
 
 Some of these options are also available as flags to the `dockerd` CLI, and you
 can use them to configure the default `docker0` bridge when starting the Docker
@@ -256,6 +257,21 @@ to a single network.
 
 For more information about this limitation, see
 [moby/moby#44973](https://github.com/moby/moby/issues/44973#issuecomment-1543747718).
+
+## Skip IP address configuration
+
+The `com.docker.network.bridge.inhibit_ipv4` option lets you create a network
+that uses an existing bridge and have Docker skip configuring the IPv4 address
+on the bridge. This is useful if you want to configure the IP address for the
+bridge manually. For instance if you add a physical interface to your bridge,
+and need to move its IP address to the bridge interface.
+
+To use this option, you should first configure the Docker daemon to use a
+self-managed bridge, using the `bridge` option in the `daemon.json` or the
+`dockerd --bridge` flag.
+
+With this configuration, north-south traffic won't work unless you've manually
+configured the IP address for the bridge.
 
 ## Next steps
 

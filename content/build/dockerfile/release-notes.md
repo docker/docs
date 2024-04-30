@@ -2,6 +2,7 @@
 title: Dockerfile release notes
 description: Release notes for Dockerfile frontend
 keywords: build, dockerfile, frontend, release notes
+tags: [Release notes]
 toc_max: 2
 ---
 

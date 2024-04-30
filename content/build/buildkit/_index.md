@@ -105,9 +105,151 @@ If the `/etc/docker/daemon.json` file doesn't exist, create new file called
 `daemon.json` and then add the following to the file. And restart the Docker
 daemon.
 
+## BuildKit on Windows
+
 > **Warning**
 >
-> BuildKit only fully supports building Linux containers. Experimental Windows
-> container support is tracked in
-> [`moby/buildkit#616`](https://github.com/moby/buildkit/issues/616)
+> BuildKit only fully supports building Linux containers.
+> Windows container support is experimental, and is tracked in
+> [`moby/buildkit#616`](https://github.com/moby/buildkit/issues/616).
 { .warning }
+
+BuildKit has experimental support for Windows containers (WCOW) as of version 0.13.
+This section walks you through the steps for trying it out.
+We appreciate any feedback you submit by [opening an issue here](https://github.com/moby/buildkit/issues/new), especially `buildkitd.exe`.
+
+### Known limitations
+
+- BuildKit on Windows currently only supports the `containerd` worker.
+  Support for non-OCI workers is tracked in [moby/buildkit#4836](https://github.com/moby/buildkit/issues/4836).
+
+### Prerequisites
+
+- Architecture: `amd64`, `arm64` (binaries available but not officially tested yet).
+- Supported OS: Windows Server 2019, Windows Server 2022, Windows 11.
+- Base images: `ServerCore:ltsc2019`, `ServerCore:ltsc2022`, `NanoServer:ltsc2022`.
+  See the [compatibility map here](https://learn.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/version-compatibility?tabs=windows-server-2019%2Cwindows-11#windows-server-host-os-compatibility).
+- Docker Desktop version 4.29 or later
+
+### Steps
+
+> **Note**
+>
+> The following commands require administrator (elevated) privileges in a PowerShell terminal.
+
+1. Enable the **Hyper-V** and **Containers** Windows features.
+
+   ```console
+   > Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V, Containers -All
+   ```
+
+   If you see `RestartNeeded` as `True`, restart your machine and re-open a PowerShell terminal as an administrator.
+   Otherwise, continue with the next step.
+
+2. Switch to Windows containers in Docker Desktop.
+
+   Select the Docker icon in the taskbar, and then **Switch to Windows containers...**.
+
+3. Install containerd version 1.7.7 or later following the setup instructions [here](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#installing-containerd-on-windows).
+
+4. Download and extract the latest BuildKit release.
+
+   ```powershell
+   $version = "v0.13.1" # specify the release version, v0.13+
+   $arch = "amd64" # arm64 binary available too
+   curl.exe -LO https://github.com/moby/buildkit/releases/download/$version/buildkit-$version.windows-$arch.tar.gz
+   # there could be another `.\bin` directory from containerd instructions
+   # you can move those
+   mv bin bin2
+   tar.exe xvf .\buildkit-$version.windows-$arch.tar.gz
+   ## x bin/
+   ## x bin/buildctl.exe
+   ## x bin/buildkitd.exe
+   ```
+
+5. Install BuildKit binaries on `PATH`.
+
+   ```powershell
+   # after the binaries are extracted in the bin directory
+   # move them to an appropriate path in your $Env:PATH directories or:
+   Copy-Item -Path ".\bin" -Destination "$Env:ProgramFiles\buildkit" -Recurse -Force
+   # add `buildkitd.exe` and `buildctl.exe` binaries in the $Env:PATH
+   $Path = [Environment]::GetEnvironmentVariable("PATH", "Machine") + `
+       [IO.Path]::PathSeparator + "$Env:ProgramFiles\buildkit"
+   [Environment]::SetEnvironmentVariable( "Path", $Path, "Machine")
+   $Env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + `
+       [System.Environment]::GetEnvironmentVariable("Path","User")
+   ```
+6. Start the BuildKit daemon.
+
+   ```console
+   > buildkitd.exe
+   ```
+
+7. In another terminal with administrator privileges, create a remote builder that uses the local BuildKit daemon.
+
+   > **Note**
+   >
+   > This requires Docker Desktop version 4.29 or later.
+
+   ```console
+   > docker buildx create --name buildkit-exp --use --driver=remote npipe:////./pipe/buildkitd
+   buildkit-exp
+   ```
+
+8. Verify the builder connection by running `docker buildx inspect`.
+
+   ```console
+   > docker buildx inspect
+   ```
+
+   The output should indicate that the builder platform is Windows,
+   and that the endpoint of the builder is a named pipe.
+
+   ```text
+   Name:          buildkit-exp
+    Driver:        remote
+    Last Activity: 2024-04-15 17:51:58 +0000 UTC
+    Nodes:
+    Name:             buildkit-exp0
+    Endpoint:         npipe:////./pipe/buildkitd
+    Status:           running
+    BuildKit version: v0.13.1
+    Platforms:        windows/amd64
+   ...
+   ```
+
+9. Create a Dockerfile and build a `hello-world` image.
+
+   ```console
+   > mkdir sample_dockerfile
+   > cd sample_dockerfile
+   > Set-Content Dockerfile @"
+   FROM mcr.microsoft.com/windows/nanoserver:ltsc2022
+   USER ContainerAdministrator
+   COPY hello.txt C:/
+   RUN echo "Goodbye!" >> hello.txt
+   CMD ["cmd", "/C", "type C:\\hello.txt"]
+   "@
+   Set-Content hello.txt @"
+   Hello from BuildKit!
+   This message shows that your installation appears to be working correctly.
+   "@
+   ```
+
+   > **Note**
+   >
+   > For a consistent experience, use forward-slashes `/` for paths, e.g. `C:/` instead of `C:\`.
+   > Support for Windows-style paths is tracked in [moby/buildkit#4696](https://github.com/moby/buildkit/issues/4696).
+
+10. Build and push the image to a registry.
+
+    ```console
+    > docker buildx build --push -t <username>/hello-buildkit .
+    ```
+
+11. After pushing to the registry, run the image with `docker run`.
+
+    ```console
+    > docker run <username>/hello-world
+    ```

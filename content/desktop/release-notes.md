@@ -2,6 +2,7 @@
 description: Release notes for Docker Desktop for Mac, Linux, and Windows
 keywords: Docker desktop, release notes, linux, mac, windows
 title: Docker Desktop release notes
+tags: [Release notes]
 toc_max: 2
 aliases:
 - /docker-for-mac/release-notes/
@@ -23,6 +24,85 @@ This page contains information about the new features, improvements, known issue
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1) to see what's coming next.
 
 For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/releases.md).
+
+## 4.29.0
+
+{{< release-date date="2024-04-08" >}}
+
+{{< desktop-install all=true version="4.29.0" build_path="/145265/" >}}
+
+### New
+
+- You can now enforce Rosetta usage via [Settings Management](hardened-desktop/settings-management/configure.md).
+- [Docker socket mount restrictions](hardened-desktop/enhanced-container-isolation/config.md) with ECI is now generally available.
+- Docker Desktop now takes advantage of the Moby 26 engine which includes Buildkit 0.13, sub volumes mounts, networking updates, and improvements to the containerd multi-platform image store UX.
+- New and improved Docker Desktop error screens: swift troubleshooting, easy diagnostics uploads, and actionable remediation.
+- Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
+- New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
+- Beta release of:
+  - Air-gapped containers with [Settings Management](hardened-desktop/settings-management/air-gapped-containers.md).
+  - [Host networking](../network/drivers/host.md#docker-desktop) in Docker Desktop.
+  - [Docker Debug](use-desktop/container.md#integrated-terminal) for running containers.
+  - [Volumes Backup & Share extension](use-desktop/volumes.md) functionality available in the **Volumes** tab.
+
+### Upgrades
+
+- [Docker Compose v2.26.1](https://github.com/docker/compose/releases/tag/v2.26.1)
+- [Docker Scout CLI v1.6.3](https://github.com/docker/scout-cli/releases/tag/v1.6.3)
+- [Docker Engine v26.0.0](https://docs.docker.com/engine/release-notes/26.0/#2600)
+- [Buildx v0.13.1](https://github.com/docker/buildx/releases/tag/v0.13.1)
+- [Kubernetes v1.29.2](https://github.com/kubernetes/kubernetes/releases/tag/v1.29.2)
+- [cri-dockerd v0.3.11](https://github.com/Mirantis/cri-dockerd/releases/tag/v0.3.11)
+- Docker Debug v0.0.27
+
+### Bug fixes and enhancements
+
+#### For all platforms
+
+- Fixed an issue with dropdown menu opening beyond the application window.
+- Docker Init:
+  - Updated the formatting of CLI output to improve legibility.
+  - Fixed an issue with `.dockerignore` to avoid ignoring application files that start with "compose".
+  - Improved how Java applications are started based on Spring Boot version. Fixes [docker/for-mac#7171](https://github.com/docker/for-mac/issues/7171).
+  - Removed non-official Docker image used for Rust cross-compilation.
+- The maximum number of files per [Synchronized file share](synchronized-file-sharing.md) now exceeds 2 million.
+- Fixed an issue that caused the warning: "_The value provided to Autocomplete is invalid._" when selecting the **Export to local image** field.
+- **Run Cloud** can now be accessed from the Docker Dashboard.
+- Opting out from sending analytics will now also disable collecting data for bug reports.
+- You can now share and unshare a port to the Cloud Engine in the **Containers** view.
+- Shared cloud can now be accessed from the footer in the right-hand side of the **Dashboard**.
+- Added beta support for host networking on macOS, Windows and Docker Desktop for Linux  [docker#238](https://github.com/docker/roadmap/issues/238).
+- Added a timestamp to new unread notifications.
+- Fixed typo in the virtualization support error message. Fixes [docker/desktop-linux#197](https://github.com/docker/desktop-linux/issues/197).
+- Docker Desktop now allows connections to `host.docker.internal` to be blocked by a rule in a PAC file.
+- Fixed the placement of the secondary menu in the **Images** and **Containers** lists.
+- Fixed a race condition that occurred when starting Docker Desktop with QEMU.
+- Improved the error message when an image pull is blocked by Registry Access Management policy.
+- Re-add `CONFIG_BONDING=y` in the kernel config.
+
+#### For Mac
+
+- Fixed Kubernetes not starting successfully. Fixes [docker/for-mac#7136](https://github.com/docker/for-mac/issues/7136) and [docker/for-mac#7031](https://github.com/docker/for-mac/issues/7031).
+- Fixed a bug when the browser was not able to send back authentication information to Docker Desktop. Fixes [docker/for-mac/issues#7160](https://github.com/docker/for-mac/issues/7160).
+
+#### For Windows
+
+- Fixed a bug where `docker run -v` would fail after switching between WSL 2 and Hyper-V.
+- Fixed a bug where Docker Desktop was not stopping its WSL distros (`docker-desktop` and `docker-desktop-data`) when it was shutdown. Fixes [docker/for-win/issues/13443](https://github.com/docker/for-win/issues/13443) and [docker/for-win/issues/13938](https://github.com/docker/for-win/issues/13938).
+
+#### For Linux
+
+- Fixed an issue that caused the list of available experimental features in the UI to become out-of-sync with the backend data.
+
+#### Security
+
+- Disabled Electron `runAsNode` fuse to improve security hardening. For more info, see [Electron's documentation.](https://www.electronjs.org/blog/statement-run-as-node-cves)
+
+### Known issues
+
+#### For Mac
+
+- Docker Desktop on Apple Silicon doesn't start if Rosetta is not installed. This will be fixed in future releases. See [docker/for-mac#7243](https://github.com/docker/for-mac/issues/7243).
 
 ## 4.28.0
 
@@ -231,9 +311,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### Known issues
 
 #### For all platforms
+
 - When using Setting Management, the settings that are not set in the `admin-settings.json` will be reset to default when Docker Desktop starts.
 
 #### For Mac
+
 - Updating to 4.27.0 from the **Software updates** sometimes hangs. As a workaround, use the 4.27.0 installer from this page.
 
 ## 4.26.1
@@ -437,6 +519,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - **Switch to Windows containers** option in the tray menu may not show up on Windows. As a workaround, edit the [`settings.json` file](https://docs.docker.com/desktop/settings/windows/) and set `"displaySwitchWinLinContainers": true`.
 
 #### For all platforms
+
 - Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**. 
 
 ## 4.24.2
@@ -532,13 +615,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Mac
 
 - Creating a container with the port 53 fails with the error address `already in use`. As a workaround, deactivate network acceleration by adding `"kernelForUDP": false`, in the `settings.json` file located at `~/Library/Group Containers/group.com.docker/settings.json`.
+
 ## 4.23.0
 
 {{< release-date date="2023-09-11" >}}
 
-{{< desktop-install all=true version="4.23.0" build_path="/120376/" >}}
-
 ### Upgrades
+
 - [Compose v2.21.0](https://github.com/docker/compose/releases/tag/v2.21.0)
 - [Docker Engine v24.0.6](https://docs.docker.com/engine/release-notes/24.0/#2406)
 - [Docker Scout CLI v0.24.1](https://github.com/docker/scout-cli/releases/tag/v0.24.1).
@@ -601,13 +684,11 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Known Issues
 
-- Binding a priviledged port on Docker Desktop does not work on macOS. As a workaround you can expose the port on all interfaces (using `0.0.0.0`) or using localhost (using `127.0.0.1`).
+- Binding a privileged port on Docker Desktop does not work on macOS. As a workaround you can expose the port on all interfaces (using `0.0.0.0`) or using localhost (using `127.0.0.1`).
 
 ## 4.22.1
 
 {{< release-date date="2023-08-24" >}}
-
-{{< desktop-install all=true version="4.22.1" build_path="/118664/" >}}
 
 ### Bug fixes and enhancements
 
@@ -622,8 +703,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.22.0
 
 {{< release-date date="2023-08-03" >}}
-
-{{< desktop-install all=true version="4.22.0" build_path="/117440/" >}}
 
 ### Upgrades
 
@@ -677,8 +756,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-07-03" >}}
 
-{{< desktop-install all=true version="4.21.1" build_path="/114176/" >}}
-
 #### For all platforms
 
 - Fixed connection leak for Docker contexts using SSH ([docker/for-mac#6834](https://github.com/docker/for-mac/issues/6834) and [docker/for-win#13564](https://github.com/docker/for-win/issues/13564))
@@ -690,8 +767,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.21.0
 
 {{< release-date date="2023-06-29" >}}
-
-{{< desktop-install all=true version="4.21.0" build_path="/113844/" >}}
 
 ### New
 
@@ -743,8 +818,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2023-06-05" >}}
 
-{{< desktop-install all=true version="4.20.1" build_path="/110738/" >}}
-
 ### Bug fixes and enhancements
 
 #### For all platforms
@@ -759,8 +832,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.20.0
 
 {{< release-date date="2023-05-30" >}}
-
-{{< desktop-install all=true version="4.20.0" build_path="/109717/" >}}
 
 ### Upgrades
 
@@ -800,8 +871,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.19.0
 
 {{< release-date date="2023-04-27" >}}
-
-{{< desktop-install all=true version="4.19.0" build_path="/106363/" >}}
 
 ### New
 
@@ -873,8 +942,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ## 4.18.0
 
 {{< release-date date="2023-04-03" >}}
-
-{{< desktop-install all=true version="4.18.0" build_path="/104112/" >}}
 
 ### New
 
@@ -1762,7 +1829,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 ### New
 
 - IT Administrators can now install Docker Desktop remotely using the command line.
-- Add the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images. For more information, see [Docker SBOM](../engine/sbom/index.md).
+- Add the Docker Software Bill of Materials (SBOM) CLI plugin. The new CLI plugin enables users to generate SBOMs for Docker images.
 - Use [cri-dockerd](https://github.com/Mirantis/cri-dockerd) for new Kubernetes clusters instead of `dockershim`. The change is transparent from the user's point of view and Kubernetes containers run on the Docker Engine as before. `cri-dockerd` allows Kubernetes to manage Docker containers using the standard [Container Runtime Interface](https://github.com/kubernetes/cri-api#readme), the same interface used to control other container runtimes. For more information, see [The Future of Dockershim is cri-dockerd](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/).
 
 ### Updates
