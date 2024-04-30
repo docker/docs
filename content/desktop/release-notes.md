@@ -42,7 +42,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For Windows
 
-- Added support for Kerberos and NTLM proxy authentication on Windows, available for Pro, Team and Business subscription users.
+- Added support for Kerberos and NTLM proxy authentication on Windows, available Business subscription users.
 
 ### Upgrades
 
@@ -83,6 +83,15 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed bash completions for the Docker CLI in a WSL environment.
 - Fixed a regression in Docker Desktop 4.28 that caused host files bind-mounted into containers to not show up properly inside the container, when using Docker-in-Docker (via mounts of `/var/run/docker.sock`) on WSL.
 - Fixed a bug that would cause the following error `merging settings: integratedWslDistros type mismatch`.
+
+
+### Known issues
+
+#### For Windows
+
+- When starting Docker Desktop as a non admin user, if the user is not a member of docker-users group, the following error connect `ENOENT \\.\pipe\errorReporter` might be triggered.
+This can be resolved by adding the user to docker-users group. Before starting Docker Desktop, make sure to log out and then log back in and unregister docker-desktop distribution if
+that was created, using `wsl --unregister docker-desktop`.
 
 ## 4.29.0
 
