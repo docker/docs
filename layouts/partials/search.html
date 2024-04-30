@@ -1,0 +1,45 @@
+<div x-data="{ open: false }"
+  @keyup.escape.window="open = false; if (!open) { document.body.classList.remove('overflow-hidden'); }"
+  @keydown.window="(e) => {
+switch(e.key) {
+case 'k':
+  if (e.metaKey || e.ctrlKey) {
+     e.preventDefault()
+     open = !open;
+     if (open) {
+       document.body.classList.add('overflow-hidden');
+     } else {
+       document.body.classList.remove('overflow-hidden');
+     }
+  }
+}
+}">
+  <!-- search button -->
+  <button @click="open = true; document.body.classList.add('overflow-hidden');">
+    <span class="icon-svg">{{ partialCached "icon" "search" "search" }}</span>
+  </button>
+  <!-- search modal -->
+  <div class="fixed left-0 top-0 z-20 flex w-lvw justify-center py-12 text-gray-light-800 dark:text-gray-dark-800"
+    role="dialog" tabindex="-1" x-show="open" x-trap="open" x-cloak x-transition>
+    <div class="max-h-[80vh] overflow-hidden lg:w-[600px] xl:w-[800px] rounded-lg bg-white p-2 mx-8 dark:bg-background-dark w-full flex flex-col"
+      @click.away="open = false; document.body.classList.remove('overflow-hidden');">
+      <div class="m-2 text-xl">Search Docker documentation</div>
+      <header class="flex items-center py-2">
+        <input type="search" id="modal-search-input"
+          class="mx-1 flex h-12 flex-auto appearance-none rounded bg-transparent p-4 outline outline-2 outline-gray-light focus:outline-blue-light dark:outline-gray-dark dark:focus:outline-blue-dark"
+          placeholder="Search..." tabindex="0" />
+        <div class="icon-svg px-2">
+          {{ partialCached "icon" "search" "search" }}
+        </div>
+      </header>
+      <section class="overflow-y-auto px-2">
+        <div class="flex min-h-0 flex-col gap-2" id="modal-search-results">
+          <!-- results -->
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- search modal backdrop -->
+  <div class="fixed left-0 top-0 h-full w-full bg-background-dark/70 dark:bg-gray-dark-100/70" x-show="open" x-cloak>
+  </div>
+</div>
