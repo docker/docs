@@ -3,7 +3,6 @@
 @import "tailwindcss/base";
 @import "/assets/css/global";
 @import "/assets/css/typography";
-@import "/assets/css/search";
 @import "/assets/css/hack";
 
 @import "tailwindcss/components";

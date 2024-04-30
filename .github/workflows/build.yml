@@ -35,6 +35,15 @@ jobs:
             *.cache-from=type=gha,scope=build
             *.cache-to=type=gha,scope=build,mode=max
 
+  vale:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: errata-ai/vale-action@38bf078c328061f59879b347ca344a718a736018
+        with:
+          files: content
+
   validate:
     runs-on: ubuntu-22.04
     strategy:

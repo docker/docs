@@ -3,6 +3,10 @@
   {{- $title := partialCached "utils/title.html" . . -}}
   {{- $desc := partialCached "utils/description.html" . . -}}
   {{- $kwd := partialCached "utils/keywords.html" . . -}}
-  {{- jsonify (dict "url" .Permalink "title" $title "description" $desc "keywords" $kwd) -}},
+  {{- $tags := slice -}}
+  {{- range (.GetTerms "tags") -}}
+    {{ $tags = $tags | append .LinkTitle }}
+  {{- end -}}
+  {{- jsonify (dict "url" .Permalink "title" $title "description" $desc "keywords" $kwd "tags" $tags) -}},
 {{- end -}}
 {}]

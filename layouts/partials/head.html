@@ -68,15 +68,7 @@
 <script>{{ $theme.Content | safeJS }}</script>
 {{ $js := resources.Match "js/src/**.js"
   | resources.Concat "scripts.js"
-  | js.Build (dict
-    "params" (dict
-      "apikey" site.Params.algolia.apikey
-      "appid" site.Params.algolia.appid
-      "indexname" site.Params.algolia.indexname
-    )
-    "targetPath" "scripts.js"
-  )
+  | js.Build (dict "minify" true "targetPath" "scripts.js")
 }}
 <script defer src="{{ $js.Permalink }}"></script>
-<link rel="preconnect" href="https://{{ site.Params.algolia.appid }}-dsn.algolia.net" crossorigin />
 {{ partialCached "utils/resources.html" "-" }}
