@@ -61,6 +61,7 @@ IPs?
 IPv[46]
 IPvlan
 Intel
+Jamf
 JFrog
 JetBrains
 Kitematic
@@ -83,6 +84,7 @@ Okta
 Postgres
 PowerShell
 Python
+Plist
 QEMU
 RHEL
 RPM
@@ -160,6 +162,7 @@ namespace
 npm
 osquery
 osxfs
+plist
 runc
 stdin
 stdout

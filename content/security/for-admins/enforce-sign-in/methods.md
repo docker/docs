@@ -117,9 +117,9 @@ details, see [Manage members](/admin/organization/members/).
 
     | Platform | Location |
     | --- | --- |
-    | Windows | /ProgramData/DockerDesktop/registry.json |
-    | Mac | /Library/Application Support/com.docker.docker/registry.json |
-    | Linux | /usr/share/docker-desktop/registry/registry.json |
+    | Windows | `/ProgramData/DockerDesktop/registry.json` |
+    | Mac | `/Library/Application Support/com.docker.docker/registry.json` |
+    | Linux | `/usr/share/docker-desktop/registry/registry.json` |
 
 3. Specify your organization in the `registry.json` file.
 
