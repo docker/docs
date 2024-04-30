@@ -14,7 +14,7 @@ You can manage the settings for your Docker account in Docker Home. Here you can
 ## Update general settings
 
 1. Sign in to your [Docker account](https://account.docker.com/login).
-2. In Docker Home, select your avatar in the top-right corner to open the dropdown.
+2. In Docker Home, select your avatar in the top-right corner to open the drop-down.
 3. Select **My Account**.
 
 From here, you can take any of the following actions.

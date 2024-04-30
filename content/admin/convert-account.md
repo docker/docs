@@ -57,7 +57,7 @@ Consider the following effects of converting your account:
 
 2. Sign in to your [Docker account](https://account.docker.com/login).
 
-3. In Docker Home, select your avatar in the top-right corner to open the dropdown.
+3. In Docker Home, select your avatar in the top-right corner to open the drop-down.
 
 4. Select **My Account** to go to your account settings.
 
