@@ -12,8 +12,7 @@ access to your Docker Hub account, you can generate a new recovery code.
 
 1. Sign in to your Docker Hub account. 
 2. Select your avatar and then from the drop-down menu, select **My Account**.
-3. Navigate to the **Security** tab and select **Click here to generate a new code**.
-4. Enter your password.
+3. Navigate to the **Security** tab and select **Manage Two-Factor Authentication**.
+4. Enter your password, then select **Confirm**.
 
-Your new recovery code is displayed. Remember to save your recovery code
-and store it somewhere safe.
+In the **Manage recovery code** section, you can view your recovery code or generate a new code. Remember to save your recovery code and store it somewhere safe.
