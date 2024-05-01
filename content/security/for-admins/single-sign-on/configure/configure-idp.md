@@ -115,12 +115,28 @@ See [More resources](#more-resources) for a video overview on how to set up a cu
 {{< /tab >}}
 {{< tab name="Entra ID SAML" >}}
 
+You can configure Docker with Entra ID using the pre-configured Docker integration, or by creating a custom application. We recommend the [Docker app integration](#add-the-app-integration-in-entra-id).
+
+### Add the app integration in Entra ID
+
+1. Go to the Entra ID admin portal.
+2. Go to **Identity > Applications > Enterprise applications > All applications**.
+3. Select **New application**.
+4. Search for Docker and add it to the main directory.
+5. Copy the Docker SSO Connection ID from Docker Hub or Admin Console.
+   ![Single sign-on connection ID](../images/sso-connection-id.png)
+6. Enter the SSO Connection ID in Entra ID to create your application.
+7. Once your application is created, find the **Login URL** and **SAML Signing Certificate** and copy them into the corresponding fields in your Docker SSO connection.
+8. Assign users to the app via direct assignment or via security groups.
+
 > **Tip**
 >
 > When you create the application for your SSO connection in Entra ID (formerly Azure AD) we recommend that you don't assign the app to all the users in the directory.
 > Instead, you can create a security group and assign the app to the group. This way, you can control who in your organization has access to Docker.
 > To change the default setting for assignment, go to the main properties for your app and find the **Assignment required** setting. Set it to **Yes**.
 { .tip }
+
+### Create a custom application in Entra ID
 
 See [More resources](#more-resources) for a video overview on how to set up SSO with SAML in Entra ID (formerly Azure AD).
 
@@ -152,7 +168,7 @@ See [More resources](#more-resources) for a video overview on how to set up SSO 
 
 ### Create app registration
 
-1. Go to Azure AD admin portal.
+1. Go to the Azure AD admin portal.
 2. Select **App Registration > New Registration**.
 3. Enter “Docker Hub SSO” or similar for the application name.
 4. Under **Supported account types**, specify who can use this application or access the app.

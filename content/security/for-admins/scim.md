@@ -106,6 +106,9 @@ If you're using the [Docker app integration](/security/for-admins/single-sign-on
 {{< /tab >}}
 {{< tab name="Entra ID SAML 2.0" >}}
 
+
+If you're using the [Docker app integration](/security/for-admins/single-sign-on/configure/configure-idp/#add-the-app-integration-in-entra-id) for your SSO connection, SCIM is already configured. If you manually created your application in Entra ID, complete the following steps:
+
 1. In the Azure admin portal, go to **Enterprise Applications**, then select the **Docker** application you created when you set up your SSO connection.
 2. Go to **Provisioning** and select **Get Started**.
 3. Select **Automatic** provisioning mode.
@@ -177,6 +180,8 @@ If a user doesn't already have attributes set up, users who are added to the gro
 
 {{< /tab >}}
 {{< tab name="Entra ID SAML 2.0" >}}
+
+If you're using the [Docker app integration](/security/for-admins/single-sign-on/configure/configure-idp/#add-the-app-integration-in-entra-id) for your SSO connection, role mapping is already configured. If you manually created your application in Entra ID, complete the following steps:
 
 ### Set up
 
