@@ -1,5 +1,5 @@
 ---
-description: Overview of Docker Official Images
+description: Get an overview on Docker Official Images, what they are, and how they differ from other images available on Docker Hub
 keywords: Docker, docker, registry, accounts, plans, Dockerfile, Docker Hub, docs,
   official,image, documentation
 title: Docker Official Images
