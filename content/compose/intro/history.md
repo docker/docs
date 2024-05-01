@@ -34,9 +34,9 @@ Compose V2 ignores the `version` top-level element in the `compose.yml` file.
 The Docker Compose CLIs are defined by specific file formats. 
 
 Three major versions of the Compose file format for Compose V1 were released:
-- [Compose file format 1](../compose-file/legacy-versions.md) with Compose 1.0.0 in 2014
-- [Compose file format 2.x](../compose-file/legacy-versions.md) with Compose 1.6.0 in 2016
-- [Compose file format 3.x](../compose-file/legacy-versions.md) with Compose 1.10.0 in 2017
+- Compose file format 1 with Compose 1.0.0 in 2014
+- Compose file format 2.x with Compose 1.6.0 in 2016
+- Compose file format 3.x with Compose 1.10.0 in 2017
 
 Compose file format 1 is substantially different to all the following formats as it lacks a top-level `services` key.
 Its usage is historical and files written in this format don't run with Compose V2.
