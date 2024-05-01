@@ -224,7 +224,7 @@ It's recommended that you use an `https://` URL for HTTP/HTTPS proxies to protec
 
 ##### Kerberos and NTLM authentication
 
-Kerberos and NTLM proxy authentication are available for Pro, Team, and Business subscribers with Docker Desktop version 4.30 and later. No additional configuration is needed beyond specifying the proxy IP address and port.
+Kerberos and NTLM proxy authentication are available for Business subscribers with Docker Desktop version 4.30 and later. No additional configuration is needed beyond specifying the proxy IP address and port.
 
 Developers are no longer interrupted by prompts for proxy credentials as authentication is centralized. This also reduces the risk of account lockouts due to incorrect sign in attempts.
 
