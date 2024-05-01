@@ -593,12 +593,12 @@ You aren't going to cover any of these advanced use cases here.
 
 ### Variable substitution in Docker Compose
 
-One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution). You can see some examples in the Compose file, `environment` section. By means of an example:
+One of the really cool features of Docker Compose is [variable substitution](../../compose/compose-file/12-interpolation.md). You can see some examples in the Compose file, `environment` section. By means of an example:
 
 * `PGUSER=${PGUSER:-totoro}` means that inside the container, the environment variable `PGUSER` shall be set to the same value as it has on the host machine where Docker Compose is run. If there is no environment variable with this name on the host machine, the variable inside the container gets the default value of `totoro`.
 * `PGPASSWORD=${PGPASSWORD:?database password not set}` means that if the environment variable `PGPASSWORD` isn't set on the host, Docker Compose will display an error. This is OK, because you don't want to hard-code default values for the password. You set the password value in the `.env` file, which is local to your machine. It is always a good idea to add `.env` to `.gitignore` to prevent the secrets being checked into the version control.
 
-Other ways of dealing with undefined or empty values exist, as documented in the [variable substitution](../../compose/compose-file/compose-file-v3.md#variable-substitution) section of the Docker documentation.
+Other ways of dealing with undefined or empty values exist, as documented in the [variable substitution](../../compose/compose-file/12-interpolation.md) section of the Docker documentation.
 
 ### Validating Docker Compose configuration
 
@@ -722,7 +722,7 @@ Such distributed set-up offers interesting possibilities, such as applying Chaos
 If you are interested in experimenting with CockroachDB clusters, check out:
 
 * [Start a CockroachDB Cluster in Docker](https://www.cockroachlabs.com/docs/v20.2/start-a-local-cluster-in-docker-mac.html) article; and
-* Documentation for Docker Compose keywords [`deploy`](../../compose/compose-file/compose-file-v3.md#deploy) and [`replicas`](../../compose/compose-file/compose-file-v3.md#replicas).
+* Documentation for Docker Compose keywords [`deploy`](../../compose/compose-file/legacy-versions.md) and [`replicas`](../../compose/compose-file/legacy-versions.md).
 
 ### Other databases
 
