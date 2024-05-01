@@ -12,8 +12,6 @@ aliases:
 - /compose/compose-linux/
 ---
 
-{{< include "compose-eol.md" >}}
-
 On this page you can find instructions on how to install the Compose plugin on Linux from the command line.
 
 To install the Compose plugin on Linux, you can either:
