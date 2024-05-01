@@ -6,7 +6,7 @@ title: Deploy a stack to a swarm
 
 When running Docker Engine in swarm mode, you can use `docker stack deploy` to
 deploy a complete application stack to the swarm. The `deploy` command accepts
-a stack description in the form of a [Compose file](../../compose/compose-file/compose-file-v3.md).
+a stack description in the form of a [Compose file](../../compose/compose-file/legacy-versions.md).
 
 {{< include "swarm-compose-compat.md" >}}
 

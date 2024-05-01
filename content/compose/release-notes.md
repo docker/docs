@@ -2209,7 +2209,7 @@ naming scheme accordingly before upgrading.
 
 - Added support for `extra_hosts` in build configuration
 
-- Added support for the [long syntax](compose-file/compose-file-v3.md#long-syntax-3) for volume entries, as previously introduced in the 3.2 format.
+- Added support for the [long syntax](compose-file/legacy-versions.md) for volume entries, as previously introduced in the 3.2 format.
   Using this syntax will create [mounts](../storage/bind-mounts.md) instead of volumes.
 
 #### Compose file version 2.1 and up
@@ -3145,7 +3145,7 @@ naming scheme accordingly before upgrading.
     You don't have to use it - your existing Compose files will run on Compose
     1.6 exactly as they do today.
 
-    Check the [upgrade guide](../compose/compose-file/compose-versioning.md#upgrading)
+    Check the [upgrade guide](../compose/compose-file/legacy-versions.md)
     for full details.
 
 -   Support for networking has exited experimental status and is the recommended
