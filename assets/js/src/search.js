@@ -20,6 +20,7 @@ async function initializeIndex() {
     ],
     minMatchCharLength: 2,
     threshold: 0.2,
+    useExtendedSearch: true,
   };
 
   handler = new Fuse(index, options);
