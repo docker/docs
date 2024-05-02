@@ -29,8 +29,6 @@ aliases:
 - /winkit/getting-started/
 ---
 
-Docker recommends that you authenticate using the **Sign in** option in the top-right corner of the Docker Dashboard. 
-
 In large enterprises where admin access is restricted, administrators can [Configure registry.json to enforce sign-in](../security/for-admins/configure-sign-in.md). 
 
 > **Tip**
@@ -45,9 +43,32 @@ In large enterprises where admin access is restricted, administrators can [Confi
 
 - Improve your organization’s security posture for containerized development by taking advantage of [Hardened Desktop](hardened-desktop/index.md).
 
+## Signing in with Docker Desktop
+
+Docker Desktop supports multiple ways of signing in users:
+
+- Using the **Sign in** option in the top-right corner of the Docker Dashboard. This is the <u>recommended</u> option. When clicking on the button, your browser will open and ask for your credentials. Once authentication is successful, the browser will automatically sign Docker Desktop in.
+
 > **Note**
 >
-> Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity. 
+> Docker Desktop automatically signs you out after 90 days, or after 30 days of inactivity.
+
+- Using the Docker CLI: `docker login`. Refer to [Docker CLI "login" documentation](https://docs.docker.com/reference/cli/docker/login/) for additional details. If you sign in against https://hub.docker.com, then Docker Desktop will automatically be signed in.
+
+> **Note**
+>
+> Docker Hub provides 2 ways of authenticating with the CLI:
+> - via a password
+> - via a generated Access Token (available here: https://hub.docker.com/settings/security)
+
+## FAQ
+
+Q: When signing in with my Docker Hub credentials and Docker CLI (`docker login`), Docker Desktop is not automatically signed in.
+
+A: Check the following file: `$HOME/.docker/config.json`. When using Docker Desktop, the Credential Store (`credsStore`) needs to be `desktop`.
+
+Docker Desktop will automatically use your native credential manager (Apple macOS keychain, Microsoft Windows Credential Manager, D-Bus Secret Service or [pass](https://www.passwordstore.org))
+
 
 ## Signing in with Docker Desktop for Linux
 
