@@ -8,8 +8,6 @@ aliases:
 - /release-notes/docker-compose/
 ---
 
-{{< include "compose-eol.md" >}}
-
 For more detailed information, see the [release notes in the Compose repo](https://github.com/docker/compose/releases/).
 
 ## 2.27.0
