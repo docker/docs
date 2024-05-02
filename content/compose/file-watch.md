@@ -6,9 +6,7 @@ title: Use Compose Watch
 
 {{< introduced compose 2.22.0 "release-notes.md#2220" >}}
 
-Use `watch` to automatically update and preview your running Compose services as you edit and save your code. 
-
-For many projects, this allows for a hands-off development workflow once Compose is running, as services automatically update themselves when you save your work.
+{{< include "compose/watch.md" >}}
 
 `watch` adheres to the following file path rules:
 * All paths are relative to the project directory

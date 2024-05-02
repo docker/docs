@@ -1,0 +1,1 @@
+Configs allow services to adapt their behaviour without the need to rebuild a Docker image. As with volumes, configs are mounted as files into a service's container's filesystem. The location of the mount point within the container defaults to `/<config-name>` in Linux containers and `C:\<config-name>` in Windows containers. 

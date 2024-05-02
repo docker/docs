@@ -6,13 +6,11 @@ keywords: compose, compose specification, compose file reference, compose develo
 
 > **Note:** 
 >
-> Develop is an optional part of the Compose Specification. It's available with Docker Compose version 2.22.0 and later.
+> Develop is available with Docker Compose version 2.22.0 and later.
 
-## Introduction
+{{< include "compose/develop.md" >}}
 
-Compose focuses on the development use-case of running applications on a local machine. It also supports some development hooks to improve the velocity of your local workflow, also known as your "inner loop". This document defines how Compose behaves to efficiently assist the developer.
-
-This section defines the development constraints and workflows set by Compose. Only a subset of
+This document defines how Compose behaves to efficiently assist the developer and defines the development constraints and workflows set by Compose. Only a subset of
 Compose file services may require a `develop` subsection.
 
 ## Illustrative example

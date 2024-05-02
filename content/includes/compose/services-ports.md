@@ -1,0 +1,1 @@
+The `ports` attribute specifies which ports in a container are exposed and mapped to the host machine. It can be defined using short syntax for simple port mapping or long syntax, which includes additional options like protocol type and network mode. 

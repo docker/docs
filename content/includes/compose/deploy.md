@@ -1,0 +1,2 @@
+Deploy is an optional part of the Compose Specification. It lets you declare additional metadata on services so Compose gets
+relevant data to allocate adequate resources on the platform and configure them to match your needs.
