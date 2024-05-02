@@ -1571,6 +1571,8 @@ Manuals:
     section:
     - path: /engine/reference/commandline/cli/
       title: Use the Docker CLI
+    - path: /config/completion/
+      title: Completion
     - path: /config/filter/
       title: Filter commands
     - path: /config/formatting/
