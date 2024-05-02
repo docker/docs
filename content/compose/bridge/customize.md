@@ -10,9 +10,15 @@ This page explains how Compose Bridge utilizes templating to efficiently transla
 
 ## How it works 
 
+Compose bridge uses transformations to let you convert a compose model into another form. 
+
+A transformation is packaged as a Docker image that receive the fully-resolved Compose model as `/in/compose.yaml` and can produce any target format file under `/out`.
+
+Compose Bridge provides its transformation for Kubernetes using Go templates, so that it is easy to extend for customization by just replacing or appending your own templates.
+
 ### Syntax
 
-Compose Bridge make use of templates to transform a Compose configuration file into Kubernetes manifests. Templates are plain text files that use the [Go templating language](https://pkg.go.dev/text/template). This allows for the insertion of logic and data, making the templates dynamic and adaptable according to the Compose model.
+Compose Bridge make use of templates to transform a Compose configuration file into Kubernetes manifests. Templates are plain text files that use the [Go templating syntax](https://pkg.go.dev/text/template). This enables the insertion of logic and data, making the templates dynamic and adaptable according to the Compose model.
 
 When a template is executed, it must produce a YAML file which is the standard format for Kubernetes manifests. Multiple files can be generated as long as they are separated by `---`
 
@@ -65,7 +71,7 @@ As part of the Go templating syntax, Compose Bridge offers a set of YAML helper 
 - `indent`: writes string content indented by N spaces
 - `helmValue`: write the string content as a template value in final file
 
-In the following example, the template checks if a healthcheck interval is specified for a service, applies the seconds function to convert this interval into seconds and assigns the value to  the`periodSeconds` attribute.
+In the following example, the template checks if a healthcheck interval is specified for a service, applies the seconds function to convert this interval into seconds and assigns the value to the `periodSeconds` attribute.
 
 ```yaml
 {{ if $service.healthcheck.interval }}
@@ -75,25 +81,21 @@ In the following example, the template checks if a healthcheck interval is speci
 
 ## Customization
 
-The Kubernetes manifests produced by Compose Bridge 
-are designed to allow deployment on Docker Desktop with Kubernetes enabled. 
-
 Kubernetes is such a versatile platform that there are many ways
-to map Compose concepts into a Kubernetes resource definitions. Compose
+to map Compose concepts into Kubernetes resource definitions. Compose
 Bridge lets you customize the transformation to match your own infrastructure
-decisions and preferences, with various level of flexibility / investment.
-
+decisions and preferences, with various level of flexibility and effort.
 
 ### Modify the default templates
 
-You can extract templates used by default transformation `docker/compose-bridge-kubernetes`
-by running `compose-bridge transformations create my-template --from docker/compose-bridge-kubernetes` 
+You can extract templates used by the default transformation `docker/compose-bridge-kubernetes`,
+by running `compose-bridge transformations create --from docker/compose-bridge-kubernetes my-template` 
 and adjusting those to match your needs.
 
-The templates will be extracted into a directory named after your template name (ie `my-template`).  
-Inside, you will find a Dockerfile that allows you to create your own image to distribute your template, as well as a directory containing the templating files.  
+The templates are extracted into a directory named after your template name, in this case `my-template`.  
+It includes a Dockerfile that lets you to create your own image to distribute your template, as well as a directory containing the templating files.  
 You are free to edit the existing files, delete them, or [add new ones](#add-your-own-templates) to subsequently generate Kubernetes manifests that meet your needs.  
-You can then use the generated Dockerfile to package your changes into a new Transformer image, which you can then use with Compose Bridge:
+You can then use the generated Dockerfile to package your changes into a new transformation image, which you can then use with Compose Bridge:
 
 ```console
 $ docker build --tag mycompany/transform --push .
@@ -101,7 +103,7 @@ $ docker build --tag mycompany/transform --push .
 
 You can then use your transformation as a replacement:
 ```console
-$ compose-bridge -f compose.yaml convert --transformation mycompany/transform 
+$ compose-bridge convert --transformations mycompany/transform 
 ```
 
 ### Add your own templates
@@ -109,10 +111,10 @@ $ compose-bridge -f compose.yaml convert --transformation mycompany/transform
 For resources that are not managed by Compose Bridge's default transformation, 
 you can build your own templates. The `compose.yaml` model may not offer all 
 the configuration attributes required to populate the target manifest. If this is the case, you can
-then rely on Compose custom extensions to let developers better describe the
+then rely on Compose custom extensions to better describe the
 application, and offer an agnostic transformation.
 
-As an illustration, if developers add `x-virtual-host` metadata
+As an illustration, if you add `x-virtual-host` metadata
 to service definitions in the `compose.yaml` file, you can use the following custom attribute
 to produce Ingress rules:
 
@@ -147,7 +149,7 @@ when transforming Compose models into Kubernetes in addition to other
 transformations:
 
 ```console
-$ compose-bridge -f compose.yaml convert \
+$ compose-bridge convert \
     --transformation docker/compose-bridge-kubernetes \
     --transformation mycompany/transform 
 ```
@@ -159,7 +161,7 @@ you may want to make significant changes, or rely on an existing conversion tool
 
 A Compose Bridge transformation is a Docker image that is designed to get a Compose model
 from `/in/compose.yaml` and produce platform manifests under `/out`. This simple 
-contract makes it easy to bundle an alternate transformation, as illustrated below using 
+contract makes it easy to bundle an alternate transformation using 
 [Kompose](https://kompose.io/):
 
 ```Dockerfile
