@@ -86,11 +86,18 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### Known issues
 
+#### For all platforms
+
+- If you have enabled a feature in Docker Desktop that requires you to be signed in, such as **Host networking** you must remain signed in to use Docker Desktop. To continue using Docker Desktop or to modify these settings, ensure you are signed in.
+
 #### For Windows
 
-- When starting Docker Desktop as a non admin user, if the user is not a member of docker-users group, the following error connect `ENOENT \\.\pipe\errorReporter` might be triggered.
-This can be resolved by adding the user to docker-users group. Before starting Docker Desktop, make sure to log out and then log back in and unregister docker-desktop distribution if
-that was created, using `wsl --unregister docker-desktop`.
+- When starting Docker Desktop as a non-admin user, the following error connect `ENOENT \\.\pipe\errorReporter` might be triggered if the user is not a member of the **docker-users** group.
+This can be resolved by adding the user to the **docker-users** group. Before starting Docker Desktop, make sure to sign out and then sign back in and unregister `docker-desktop` distribution if that was created, using `wsl --unregister docker-desktop`.
+
+#### For Linux
+
+- Ubuntu 24.04 LTS is not yet supported, Docker Desktop will fail to start. Due to a change in how the latest Ubuntu release restricts the unprivileged namespaces, `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0` needs to be ran at least once. Refer to the [Ubuntu Blog](https://ubuntu.com/blog/ubuntu-23-10-restricted-unprivileged-user-namespaces) for more details.
 
 ## 4.29.0
 
