@@ -1,5 +1,5 @@
 ---
-description: Learn about managing companies.
+description: Learn about managing companies in Docker including how they relate to organizations, their key features, and more
 keywords: company, multiple organizations, manage companies
 title: Overview
 grid:

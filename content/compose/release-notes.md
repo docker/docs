@@ -1,6 +1,6 @@
 ---
 title: Docker Compose release notes
-description: Release notes for Docker Compose
+description: Learn about the new features, bug fixes, and breaking changes for the newest Docker Compose release
 keywords: release notes, compose
 tags: [Release notes]
 toc_max: 2
