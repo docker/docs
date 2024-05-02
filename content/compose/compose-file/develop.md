@@ -10,7 +10,7 @@ keywords: compose, compose specification, compose file reference, compose develo
 
 {{< include "compose/develop.md" >}}
 
-This document defines how Compose behaves to efficiently assist the developer and defines the development constraints and workflows set by Compose. Only a subset of
+This page defines how Compose behaves to efficiently assist you and defines the development constraints and workflows set by Compose. Only a subset of
 Compose file services may require a `develop` subsection.
 
 ## Illustrative example
