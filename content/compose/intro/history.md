@@ -6,8 +6,6 @@ aliases:
 - /compose/history/
 ---
 
-{{< include "compose-eol.md" >}}
-
 This page provides:
  - A brief history of the development of the Docker Compose CLI
  - A clear explanation of the major versions and file formats that make up Compose V1 and Compose V2

@@ -6,8 +6,6 @@ aliases:
 - /compose/reference/overview/
 ---
 
-{{< include "compose-eol.md" >}}
-
 This page provides usage information for the `docker compose` command.
 
 ## Command options overview and help

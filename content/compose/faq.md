@@ -5,8 +5,6 @@ title: Compose FAQs
 tags: [FAQ]
 ---
 
-{{< include "compose-eol.md" >}}
-
 ### What is the difference between `docker compose` and `docker-compose`
 
 Version one of the Docker Compose command-line binary was first released in 2014. It was written in Python, and is invoked with `docker-compose`. Typically, Compose V1 projects include a top-level version element in the compose.yml file, with values ranging from 2.0 to 3.8, which refer to the specific file formats.
