@@ -1,6 +1,6 @@
 ---
 title: Manuals
-description: Explore the Docker product user manuals
+description: Learn how to install, set up, configure, and use Docker products with this collection of user guides
 keywords: docker, docs, manuals, products, user guides, how-to
 notoc: true
 skip_read_time: true

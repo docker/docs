@@ -1,7 +1,6 @@
 ---
 title: Reference documentation
-description: This section includes the reference documentation for the Docker platform’s
-  various APIs, CLIs, and file formats.
+description: Find reference documentation for the Docker platform’s various APIs, CLIs, and file formats
 notoc: true
 grid_files:
 - title: Dockerfile

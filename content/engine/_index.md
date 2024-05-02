@@ -1,5 +1,5 @@
 ---
-description: Engine
+description: Find a comprehensive overview of Docker Engine, including how to install, storage details, networking, and more
 keywords: Engine
 title: Docker Engine overview
 grid:
