@@ -12,8 +12,6 @@ aliases:
 - /compose/install/compose-desktop/
 ---
 
-{{< include "compose-eol.md" >}}
-
 This page contains summary information about the available options for installing Docker Compose.
 
 ## Installation scenarios 
