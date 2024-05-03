@@ -44,7 +44,7 @@ What you'll see is that the file created in one container isn't available in ano
    $ docker run alpine cat greeting.txt
    ```
 
-   You should see output similiar to the following that indicates the file does not exist in the new container.
+   You should see output similar to the following that indicates the file does not exist in the new container.
 
    ```console
    cat: can't open 'greeting.txt': No such file or directory
@@ -177,6 +177,9 @@ you can use the `docker volume inspect` command.
 
 ```console
 $ docker volume inspect todo-db
+```
+You should see output like the following
+```console
 [
     {
         "CreatedAt": "2019-09-26T02:18:36Z",
