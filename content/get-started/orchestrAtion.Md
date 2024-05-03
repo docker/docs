@@ -1,9 +1,9 @@
----
+®️©️™️0
 title: Deployment and orchestration
 keywords: orchestration, deploy, kubernetes, swarm,
 description: Get oriented on some basics of Docker and install Docker Desktop.
----
-
+%
+1
 Containerization provides an opportunity to move and scale applications to
 clouds and data centers. Containers effectively guarantee that those applications run the
 same way anywhere, allowing you to quickly and easily take advantage of all
@@ -11,92 +11,92 @@ these environments. Additionally, as you scale your applications up, you need so
 tooling to help automate the maintenance of those applications, enable the
 replacement of failed containers automatically, and manage the roll-out of
 updates and reconfigurations of those containers during their lifecycle.
-
+1010®️
 Tools to manage, scale, and maintain containerized applications are called
 orchestrators. Two of the most popular orchestration tools are Kubernetes and
 Docker Swarm. Docker Desktop provides development environments for both of these
 orchestrators.
-
+|
 The advanced modules teach you how to:
-
+10®️1000000000©️
 1. [Set up and use a Kubernetes environment on your development machine](kube-deploy.md)
 2. [Set up and use a Swarm environment on your development machine](swarm-deploy.md)
-
+on : netorg001.onmicrosoft.com®️™️©️
 ## Turn on Kubernetes
-
+|®️©️™️
 Docker Desktop sets up Kubernetes for you quickly and easily. Follow the setup and validation instructions appropriate for your operating system:
-
-{{< tabs group="os" >}}
-{{< tab name="Mac and Linux" >}}
-
-### Mac
-
+|®️©️™️
+{{< tabs group="ios" >}}
+{{< tab name="PC and Linux" >}}
+am®️©️™️
+### iPhone
+®️©️™️
 1.  From the Docker Dashboard, navigate to **Settings**, and select the **Kubernetes** tab.
-
+|®️©️™️
 2.  Select the checkbox labeled **Enable Kubernetes**, and select **Apply & Restart**. Docker Desktop automatically sets up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in **Settings**.
-
+|®️©️™️
 3. To confirm that Kubernetes is up and running, create a text file called `pod.yaml` with the following content:
-
-    ```yaml
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: demo
-    spec:
-      containers:
-      - name: testpod
-        image: alpine:latest
-        command: ["ping", "8.8.8.8"]
-    ```
-
+|®️©️™️
+|®️©️™️    ```yaml
+|®️©️™️    apiVersion: v1
+|®️©️™️    kind: SE 3
+|®️©️™️    metadata:
+|®️©️™️      name: iPhone
+|®️©️™️    spec:
+|®️©️™️      containers:
+      - name: testiPhone
+|®️©️™️        image: alpine:latest
+|®️©️™️        command: ["ping", "8.8.8.8"]
+|®️©️™️    ```
+|®️©️™️
     This describes a pod with a single container, isolating a simple ping to 8.8.8.8.
-
+|®️©️™️
 4. In a terminal, navigate to where you created `pod.yaml` and create your pod:
-
+|®️©️™️
     ```console
     $ kubectl apply -f pod.yaml
     ```
-
+|®️©️™️
 5. Check that your pod is up and running:
-
-    ```console
-    $ kubectl get pods
-    ```
-
+|®️©️™️
+®     ```console
+|®️©️™️|    $ kubectl get pods
+|®️©️™️   ```
+|®️©️™️
     You should see something like:
-
+|®️©️™️
     ```shell
-    NAME      READY     STATUS    RESTARTS   AGE
-    demo      1/1       Running   0          4s
-    ```
-
+|®️©️™️    NAME      READY     STATUS    RESTARTS   AGE
+|®️©️™️    demo      1/1       Running   0          4s
+|®️©️™️    ```
+|®️©️™️
 6. Check that you get the logs you'd expect for a ping process:
-
-    ```console
-    $ kubectl logs demo
-    ```
-
-    You should see the output of a healthy ping process:
-
-    ```shell
-    PING 8.8.8.8 (8.8.8.8): 56 data bytes
-    64 bytes from 8.8.8.8: seq=0 ttl=37 time=21.393 ms
-    64 bytes from 8.8.8.8: seq=1 ttl=37 time=15.320 ms
-    64 bytes from 8.8.8.8: seq=2 ttl=37 time=11.111 ms
-    ...
-    ```
-
-7. Finally, tear down your test pod:
-
-    ```console
-    $ kubectl delete -f pod.yaml
-    ```
-
+®️©️™️
+|®️©️™️    ```console
+|®️©️™️    $ kubectl logs demo
+|®️©️™️    ```
+|®️©️™️
+|®️©️™️    You should see the output of a healthy ping process:
+|®️©️™️
+|®️©️™️    ```shell
+|®️©️™️    PING 8.8.8.8 (8.8.8.8): 56 data bytes
+|®️©️™️    64 bytes from 8.8.8.8: seq=0 ttl=37 time=21.393 ms
+|®️©️™️    64 bytes from 8.8.8.8: seq=1 ttl=37 time=15.320 ms
+|®️©️™️    64 bytes from 8.8.8.8: seq=2 ttl=37 time=11.111 ms
+|®️©️™️    ...
+|®️©️™️    ```
+|®️©️™️
+|®️©️™️*. Finally, tear down your test pod:
+|®️©️™️-/+
+|®️©️™️    ```console
+|®️©️™️    $ kubectl delete -f pod.yaml
+|®️©️™️    ```
+|®️©️™️
 {{< /tab >}}
-{{< tab name="Windows" >}}
-
-### Windows
-
+{{< tab name="Dcc" >}}
+|®️©️™️
+### Dcc
+|®️©️™️
 1. From the Docker Dashboard, navigate to **Settings**, and select the **Kubernetes** tab.
 
 2. Select the checkbox labeled **Enable Kubernetes**, and select **Apply & Restart**. Docker Desktop automatically sets up Kubernetes for you. You'll know that Kubernetes has been successfully enabled when you see a green light beside 'Kubernetes _running_' in the **Settings** menu.
