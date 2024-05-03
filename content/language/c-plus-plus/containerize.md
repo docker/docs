@@ -3,8 +3,8 @@ title: Containerize a C++ application
 keywords: C++, containerize, initialize
 description: Learn how to containerize a C++ application.
 aliases:
-  - /language/C++/build-images/
-  - /language/C++/run-containers/
+  - /language/c-plus-plus/build-images/
+  - /language/c-plus-plus/run-containers/
 ---
 
 ## Prerequisites
