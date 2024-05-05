@@ -70,6 +70,18 @@ Guides:
       path: /guides/docker-concepts/building-images/using-the-build-cache/
     - title: "Multi-stage builds"
       path: /guides/docker-concepts/building-images/multi-stage-builds/
+  - sectiontitle: "Running containers"
+    section:
+    - title: "Publishing ports"
+      path: /guides/docker-concepts/running-containers/publishing-ports/
+    - title: "Overriding container defaults"
+      path: /guides/docker-concepts/running-containers/overriding-container-defaults/
+    - title: "Persisting container data"
+      path: /guides/docker-concepts/running-containers/persisting-container-data/
+    - title: "Sharing local files with containers"
+      path: /guides/docker-concepts/running-containers/sharing-local-files-with-containers/
+    - title: "Multi-container applications"
+      path: /guides/docker-concepts/running-containers/multi-container-applications/
 - sectiontitle: Language-specific guides
   section:
   - path: /language/
