@@ -22,8 +22,8 @@ New features and enhancements released in the second quarter of 2024.
 ### 2024-05-06
 
 New HTTP endpoint that lets you scrape data from Docker Scout with Prometheus,
-to create your own vulnerability and policy dashboards with Grafana. See
-[Docker Scout metrics exporter](../metrics-exporter.md)
+to create your own vulnerability and policy dashboards with Grafana.
+For more information, see [Docker Scout metrics exporter](../metrics-exporter.md).
 
 ## Q1 2024
 
