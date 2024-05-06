@@ -1,6 +1,6 @@
 ---
 description: Organization FAQs
-keywords: Docker, Docker Hub, SSO FAQs, single sign-on, organizations, administration
+keywords: Docker, Docker Hub, SSO FAQs, single sign-on, organizations, administration, Admin Console, members, organization management, manage orgs
 title: FAQs on organizations
 tags: [FAQ]
 aliases:
@@ -52,15 +52,15 @@ There isn't any automatic notification when the total number of users for the re
 members exceed the number of licenses, you will receive an error informing you
 to contact the administrator due to lack of seats.
 
-### How can I merge organizations in Docker Hub?
+### How can I merge organization accounts?
 
-Reach out to your Support contact if you need to merge organizations.
+You can downgrade a secondary organization and transition your users and data to a primary organization. See [Merge organizations](../organization/orgs.md#merge-organizations).
 
 ### Do organization invitees take up seats?
 
 Yes. A user invited to an organization will take up one of the provisioned
 seats, even if that user hasn’t accepted their invitation yet. Organization
-owners can manage the list of invitees through the **Invitees** tab on the organization settings page in Docker Hub.
+owners can manage the list of invitees through the **Invitees** tab on the organization settings page in Docker Hub, or in the **Members** page in Admin Console.
 
 ### Do organization owners take a seat?
 
