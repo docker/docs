@@ -58,7 +58,7 @@ when using [Testcontainers](https://testcontainers.com/) for local testing.
 To enable such use cases, it's possible to configure ECI to allow Docker socket
 mounts into containers, but only for your chosen (i.e,. trusted) container images, and
 even restrict what commands the container can send to the Docker engine via the socket.
-See [ECI Docker socket mount permissions](../../desktop/hardened-desktop/enhanced-container-isolation/config.md#docker-socket-mount-permissions).
+See [ECI Docker socket mount permissions](config.md#docker-socket-mount-permissions).
 
 ### Does ECI protect all containers launched with Docker Desktop?
 
@@ -71,12 +71,12 @@ with Docker Desktop 4.30, it protects such containers, except for Docker Desktop
 on WSL 2 (Windows hosts).
 
 Note that ECI always protects containers used by `docker build`, when using the
-[docker-container build driver](../../build/drivers/_index.md), since Docker
+[docker-container build driver](../../../build/drivers/_index.md), since Docker
 Desktop 4.19 and on all supported platforms (Windows with WSL 2 or Hyper-V, Mac,
 and Linux).
 
 ECI does not yet protect Docker Desktop Kubernetes pods, Extension containers,
-and [Dev Environments containers](../../desktop/dev-environments/_index.md).
+and [Dev Environments containers](../../../desktop/dev-environments/_index.md).
 
 ### Does ECI protect containers launched prior to enabling ECI?
 
