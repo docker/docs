@@ -1,5 +1,5 @@
 ---
-description: Learn how to register for a Docker ID and log in to your account
+description: Learn how to register for a Docker ID and sign in to your account
 keywords: accounts, docker ID, billing, paid plans, support, Hub, Store, Forums, knowledge
   base, beta access, email, activation, verification
 title: Create an account

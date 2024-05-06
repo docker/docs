@@ -1,6 +1,5 @@
 ---
-description: Learn about Docker Hub features and the administrative tasks available
-  in Docker Hub
+description: Find a comprehensive overview of Docker Hub, including its features, administrative settings, how to get started quickly, and more
 keywords: Docker, docker, docker hub, hub, repositories, docker account
 title: Overview of Docker Hub
 grid:

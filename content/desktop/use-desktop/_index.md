@@ -1,5 +1,5 @@
 ---
-description: Understand what you can do with Docker Dashboard
+description: Learn how to use the Docker Dashboard within Docker Desktop, including Quick search, the Docker menu, and more
 keywords: Docker Dashboard, manage, containers, gui, dashboard, images, user manual,
   whale menu
 title: Explore Docker Desktop

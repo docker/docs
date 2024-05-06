@@ -1,6 +1,6 @@
 ---
 title: Overview of Docker Build
-description: Introduction and overview of Docker Build
+description: Get an overview of Docker Build to package and bundle your code and ship it anywhere
 keywords: build, buildx, buildkit
 grid:
 - title: Packaging your software
