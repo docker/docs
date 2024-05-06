@@ -23,6 +23,11 @@ If you are linking a source code provider to create autobuilds for a team, follo
 
 ## Link to a GitHub user account
 
+> **Early Access**
+>
+> Centralized repository settings are in Early Access. If your account isn't selected for Early Access, you can manage the following settings in your account settings.
+{ .restricted }
+
 1. Sign in to Docker Hub.
 
 2. Select the **Settings** icon in the top-right navigation, then select **Repository Settings**.

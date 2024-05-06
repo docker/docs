@@ -4,6 +4,13 @@ description: Learn how to deactivate a Docker user account.
 keywords: Docker Hub, delete, deactivate, account, account management
 ---
 
+> **Early Access**
+>
+> Docker Home is in Early Access for select users. If your account isn't selected for Early Access,
+> you can manage your account settings, personal access tokens, and two-factor authentication for
+> your account in [Docker Hub](https://hub.docker.com/).
+{ .restricted }
+
 You can deactivate an account at any time. This section describes the prerequisites and steps to deactivate a user account. For information on deactivating an organization, see [Deactivating an organization](../admin/deactivate-account.md).
 
 >**Warning**
@@ -38,7 +45,7 @@ Before deactivating your Docker account, ensure that you meet the following requ
 
 ### Deactivate
 
-Once you have completed all the steps above, you can deactivate your account.
+Once you have completed all the previous steps, you can deactivate your account.
 
 > **Warning**
 >

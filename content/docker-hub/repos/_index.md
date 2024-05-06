@@ -9,6 +9,11 @@ aliases:
 
 ## Manage default repository settings
 
+> **Early Access**
+>
+> Centralized repository settings are in Early Access. If your account isn't selected for Early Access, you can manage the following settings in your account settings.
+{ .restricted }
+
 You can manage the default repository settings for your personal account in Docker Hub. Select the **Settings** icon, then select **Repository Settings**.
 
 Here you can manage the following:

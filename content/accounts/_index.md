@@ -20,7 +20,7 @@ grid:
 > **Early Access**
 >
 > Docker Home is in Early Access for select users. If your account isn't selected for Early Access,
-> you can mange your account settings, personal access tokens, and two-factor authentication for
+> you can manage your account settings, personal access tokens, and two-factor authentication for
 > your account in [Docker Hub](https://hub.docker.com/).
 { .restricted }
 
