@@ -4,7 +4,7 @@ keywords: concepts, build, images, container, docker desktop
 description: This concept page will teach you the significance of publishing and exposing ports in Docker 
 ---
 
-{{< youtube-embed Jx8zoIhiP4c >}}
+{{< youtube-embed 9JnqOmJ96ds >}}
 
 ## Explanation
 
