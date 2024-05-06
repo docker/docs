@@ -66,6 +66,12 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed CLI-plugin symlinks not being removed when CLI apps were removed.
 - Fixed a bug in the shared ports drawer to show the right message for local engines.
 - Dev Environments is being sunset and has moved to the **Beta** tab in **Features in development**.
+- Build UI:
+  - Better bulk delete for build records.
+  - Added action to open the relevant web page for container images and Git sources in build dependencies.
+  - Added action to download Provenance and OpenTelemetry traces in Jaeger or OTLP format.
+  - Fixed source details for remote build invocations.
+  - Fixed a bug where multi-platform builds would show up as separate records when using a cloud builder.
 
 #### For Mac
 
