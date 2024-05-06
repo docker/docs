@@ -78,8 +78,6 @@ Guides:
       path: /guides/docker-concepts/running-containers/overriding-container-defaults/
     - title: "Persisting container data"
       path: /guides/docker-concepts/running-containers/persisting-container-data/
-    - title: "Sharing local files with containers"
-      path: /guides/docker-concepts/running-containers/sharing-local-files-with-containers/
     - title: "Multi-container applications"
       path: /guides/docker-concepts/running-containers/multi-container-applications/
 - sectiontitle: Language-specific guides
