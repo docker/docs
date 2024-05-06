@@ -53,6 +53,8 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
   - Updated `spin` shim to `v0.13.1`
 - [Docker Scout CLI v1.8.0](https://github.com/docker/scout-cli/releases/tag/v1.8.0)
 - Docker Debug `v0.0.29`
+- Linux kernel `v6.6.26`
+- [Go 1.22.2](https://github.com/golang/go/releases/tag/go1.22.2)
 
 ### Bug fixes and enhancements
 
