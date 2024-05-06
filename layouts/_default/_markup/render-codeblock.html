@@ -4,7 +4,7 @@
   {{ end }}
   <div class="group relative">
     <button x-data="{ code: '{{encoding.Base64Encode .Inner}}', copying: false }"
-      class="absolute right-3 top-3 z-20 text-gray-light-300 dark:text-gray-dark-600" title="Copy" @click="window.navigator.clipboard.writeText(atob(code).replaceAll(/^\$\s*/gm, ''));
+      class="absolute right-3 top-3 z-20 text-gray-light-300 dark:text-gray-dark-600" title="copy" @click="window.navigator.clipboard.writeText(atob(code).replaceAll(/^[\$>]\s+/gm, ''));
       copying = true;
       setTimeout(() => copying = false, 2000);">
       <span :class="{ 'group-hover:block' : !copying }" class="icon-svg hidden">{{ partialCached "icon" "content_copy" "content_copy" }}</span>

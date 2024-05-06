@@ -1,6 +1,6 @@
 ---
 title: Build release notes
-description: Release notes for Buildx
+description: Learn about the new features, bug fixes, and breaking changes for the newest Buildx release
 keywords: build, buildx, buildkit, release notes
 tags: [Release notes]
 toc_max: 2

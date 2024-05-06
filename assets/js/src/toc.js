@@ -1,4 +1,4 @@
-const toc = document.querySelector("#TableOfContents");
+const toc = document.querySelector("#TableOfContents .toc");
 const headings = document.querySelectorAll("main article h2, main article h3");
 
 if (toc) {

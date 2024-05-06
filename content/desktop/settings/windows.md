@@ -212,6 +212,7 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 If you are running Windows containers in Docker, you can allow the Windows Docker daemon to use Docker Desktop's internal proxy, with the **Use proxy for Windows Docker daemon** setting.
 This is useful when a corporate proxy that requires authentication is manually configured or set at the system level. If you are an admin for your organization and have a Docker Business subscription, you can control this setting with [Settings management](../hardened-desktop/settings-management/configure.md) using the `windowsDockerdPort` parameter.
 
+
 #### Proxy authentication
 
 Docker Desktop supports Basic, Kerberos and NTLM proxy authentication methods. 
@@ -227,6 +228,11 @@ It's recommended that you use an `https://` URL for HTTP/HTTPS proxies to protec
 Kerberos and NTLM proxy authentication are available for Business subscribers with Docker Desktop version 4.30 and later. No additional configuration is needed beyond specifying the proxy IP address and port.
 
 Developers are no longer interrupted by prompts for proxy credentials as authentication is centralized. This also reduces the risk of account lockouts due to incorrect sign in attempts.
+
+> **Note**
+>
+> Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+
 
 ### Network
 

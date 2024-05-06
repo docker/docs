@@ -5,6 +5,6 @@ level: error
 swap:
   (?:kilobytes?|KB): kB
   gigabytes?: GB
-  megabyte?: MB
+  megabytes?: MB
   petabytes?: PB
   terrabytes?: TB

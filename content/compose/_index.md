@@ -48,8 +48,6 @@ aliases:
 - /compose/completion/
 ---
 
-{{< include "compose-eol.md" >}}
-
 Docker Compose is a tool for defining and running multi-container applications. 
 It is the key to unlocking a streamlined and efficient development and deployment experience. 
 

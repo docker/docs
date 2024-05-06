@@ -2,8 +2,7 @@
 title: Docker Scout
 keywords: scout, supply chain, vulnerabilities, packages, cves, scan, analysis, analyze
 description:
-  Docker Scout analyzes your images to help you understand their dependencies
-  and potential vulnerabilities
+  Get an overview on Docker Scout to proactively enhance your software supply chain security
 aliases:
   - /atomist/
   - /atomist/try-atomist/

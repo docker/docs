@@ -56,6 +56,24 @@ and it's an excellent way for users to run their favorite Linux distro on
 Windows hosts and access Docker from within (see Docker Desktop's WSL distro
 integration feature, enabled via the Dashboard's **Settings** > **Resources** > **WSL Integration**).
 
+### Docker Builds with the "Docker" driver are not protected by ECI
+
+Prior to Docker Desktop 4.30, `docker build` commands that use the buildx
+`docker` driver (the default) are not protected by ECI (i.e., the build runs
+rootful inside the Docker Desktop VM).
+
+Starting with Docker Desktop 4.30, `docker build` commands that use the buildx
+`docker` driver are protected by ECI (i.e., the build runs rootless inside
+the Docker Desktop VM), except when Docker Desktop is configured to use WSL 2
+(on Windows hosts). We expect to improve on this in future versions of Docker
+Desktop.
+
+Note that `docker build` commands that use the `docker-container` driver are
+always protected by ECI (i.e., the build runs inside a rootless Docker
+container). This is true since Docker Desktop 4.19 (when ECI was introduced) and
+on all platforms where Docker Desktop is supported (Windows with WSL or Hyper-V,
+Mac, and Linux).
+
 ### Docker Build and Buildx have some restrictions
 
 With ECI enabled, Docker build `--network=host` and Docker Buildx entitlements
@@ -77,6 +95,12 @@ containers come from trusted entities to avoid issues.
 Containers launched by the Docker Desktop Dev Environments feature are not yet
 protected either. We expect to improve on this in future versions of Docker
 Desktop.
+
+### Docker Debug containers are not yet protected
+
+[Docker Debug](https://docs.docker.com/reference/cli/docker/debug/) containers
+are not yet protected by ECI. We expect to improve on this in future versions of
+Docker Desktop.
 
 ### Use in production
 

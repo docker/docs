@@ -44,6 +44,12 @@ module.exports = {
           },
         },
       }),
+
+      gridTemplateColumns: {
+        'main-xl': 'minmax(300px, 1fr) minmax(100ch, 1fr) 1fr',
+        'main-lg': '300px minmax(75ch, 2fr) 1fr',
+        'main-md': '250px 1fr',
+      },
     },
 
     // theme values
@@ -58,16 +64,10 @@ module.exports = {
       "4xl": ["2.5rem", { letterSpacing: "-0.015em", fontWeight: 500 }],
     },
 
-    screens: {
-      sm: { max: "640px" },
-      md: { max: "1024px" },
-      lg: { max: "1280px" },
-      xl: { max: "1440px" },
-    },
-
     colors: {
       white: "#fff",
       black: "#000",
+      transparent: 'transparent',
 
       accent: {
         light: "#677285",

@@ -23,10 +23,6 @@ This does not conflict with any of the local files or local tooling set up on yo
 
 ## Prerequisites
 
-Dev Environments is available as part of Docker Desktop 3.5.0 release. Download and install **Docker Desktop 3.5.0** or later:
-
-- [Docker Desktop](../release-notes.md)
-
 To get started with Dev Environments, you must also install the following tools and extension on your machine:
 
 - [Git](https://git-scm.com). Make sure add Git to your PATH if you're a Windows user. 
@@ -74,7 +70,7 @@ fi
 
 To launch a dev environment:
 
-1. From **Dev Environments** in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
+1. From the **Dev Environments** tab in Docker Dashboard, select **Create**. The **Create a Dev Environment** dialog displays.
 2. Select **Get Started**. 
 3. Optional: Provide a name for you dev environment.
 4. Select **Existing Git repo** as the source and then paste your Git repository link into the field provided.

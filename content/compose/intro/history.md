@@ -6,8 +6,6 @@ aliases:
 - /compose/history/
 ---
 
-{{< include "compose-eol.md" >}}
-
 This page provides:
  - A brief history of the development of the Docker Compose CLI
  - A clear explanation of the major versions and file formats that make up Compose V1 and Compose V2
@@ -34,9 +32,9 @@ Compose V2 ignores the `version` top-level element in the `compose.yml` file.
 The Docker Compose CLIs are defined by specific file formats. 
 
 Three major versions of the Compose file format for Compose V1 were released:
-- [Compose file format 1](../compose-file/compose-versioning.md##version-1-to-2x) with Compose 1.0.0 in 2014
-- [Compose file format 2.x](../compose-file/compose-file-v2.md) with Compose 1.6.0 in 2016
-- [Compose file format 3.x](../compose-file/compose-file-v3.md) with Compose 1.10.0 in 2017
+- Compose file format 1 with Compose 1.0.0 in 2014
+- Compose file format 2.x with Compose 1.6.0 in 2016
+- Compose file format 3.x with Compose 1.10.0 in 2017
 
 Compose file format 1 is substantially different to all the following formats as it lacks a top-level `services` key.
 Its usage is historical and files written in this format don't run with Compose V2.
