@@ -169,6 +169,10 @@ The following `admin-settings.json` code and table provides an example of the re
   "useGrpcfuse": {
     "locked": true,
     "value": true 
+  },
+  "displayedOnboarding": {
+    "locked": true,
+    "value": true 
   }
 } 
 ```
@@ -202,6 +206,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | `useVirtualizationFrameworkVirtioFS`|  macOS only | If `value` is set to `true`, VirtioFS is set as the file sharing mechanism. Note: If both `useVirtualizationFrameworkVirtioFS` and `useGrpcfuse` have `value` set to `true`, VirtioFS takes precedence. Likewise, if both `useVirtualizationFrameworkVirtioFS` and `useGrpcfuse` have `value` set to `false`, osxfs is set as the file sharing mechanism. |
 | `useVirtualizationFrameworkRosetta`|  macOS only | If `value` is set to `true`, Docker Desktop turns on Rosetta to accelerate x86_64/amd64 binary emulation on Apple Silicon. Note: This also automatically enables `Use Virtualization framework`. |
 | `useGrpcfuse` | macOS only | If `value` is set to `true`, gRPC Fuse is set as the file sharing mechanism. |
+| `displayedOnboarding` |  | If `value` is set to `true`, the onboarding survey will not be displayed to new users. Setting `value` to `false` has no effect. |
 
 
 ### Step three: Re-launch Docker Desktop
