@@ -1116,7 +1116,7 @@ Manuals:
   section:
     - path: /desktop/
       title: Overview
-    - sectiontitle: Install 
+    - sectiontitle: Install
       section:
        - path: /desktop/install/mac-install/
          title: Mac
@@ -1178,6 +1178,8 @@ Manuals:
             title: Key features and benefits
           - path: /desktop/hardened-desktop/enhanced-container-isolation/config/
             title: Advanced configuration options
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/limitations/
+            title: Limitations
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
