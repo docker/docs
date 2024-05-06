@@ -216,6 +216,10 @@ The HTTPS proxy settings used for scanning images are set using the `HTTPS_PROXY
 If you are running Windows containers in Docker, you can allow the Windows Docker daemon to use Docker Desktop's internal proxy, with the **Use proxy for Windows Docker daemon** setting.
 This is useful when a corporate proxy that requires authentication is manually configured or set at the system level. If you are an admin for your organization and have a Docker Business subscription, you can control this setting with [Settings management](../hardened-desktop/settings-management/configure.md) using the `windowsDockerdPort` parameter.
 
+> **Note**
+>
+> Docker Desktop also supports the use of [SOCKS5 proxies](../networking.md#socks5-proxy-support).
+
 ### Network
 
 > **Note**
