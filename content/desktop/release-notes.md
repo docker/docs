@@ -95,6 +95,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For all platforms
 
 - If you have enabled a feature in Docker Desktop that requires you to be signed in, such as **Host networking** you must remain signed in to use Docker Desktop. To continue using Docker Desktop or to modify these settings, ensure you are signed in.
+- To enable or disable "Manage Synchronized file shares with Compose"; "Access experimental features" and "Manage Synchronized file shares with Compose" have to be checked or unchecked at the same time.
 
 #### For Windows
 
