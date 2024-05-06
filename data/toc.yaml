@@ -1180,6 +1180,8 @@ Manuals:
             title: Advanced configuration options
           - path: /desktop/hardened-desktop/enhanced-container-isolation/limitations/
             title: Limitations
+          - path: /desktop/hardened-desktop/enhanced-container-isolation/FAQ/
+            title: faq
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -2214,8 +2216,6 @@ Manuals:
       title: General
     - path: /security/faqs/networking-and-vms/
       title: Networking and VMs
-    - path: /security/faqs/eci-faq/
-      title: Enhanced Container Isolation
     - sectiontitle: Single Sign-On
       section:
       - path: /security/faqs/single-sign-on/faqs/
