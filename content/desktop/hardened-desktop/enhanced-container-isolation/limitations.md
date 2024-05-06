@@ -78,6 +78,12 @@ Containers launched by the Docker Desktop Dev Environments feature are not yet
 protected either. We expect to improve on this in future versions of Docker
 Desktop.
 
+### Docker Debug containers are not yet protected
+
+[Docker Debug](https://docs.docker.com/reference/cli/docker/debug/) containers
+are not yet protected by ECI. We expect to improve on this in future versions of
+Docker Desktop.
+
 ### Use in production
 
 In general users should not experience differences between running a container
