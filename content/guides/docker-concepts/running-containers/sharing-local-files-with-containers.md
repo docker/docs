@@ -14,9 +14,9 @@ Consider a scenario where you have a web application container that requires acc
 
 Docker offers two primary storage options for persisting data and sharing files between the host machine and containers: volumes and bind mounts.
 
-### Volume versus Bind Mounts
+### Volumes versus bind mounts
 
-If you want to ensure that data generated or modified inside the container persists even after the container stops running, you would opt for a volume. [You can learn more](/running-containers/persisting-container-data/) about volumes and their use cases.
+If you want to ensure that data generated or modified inside the container persists even after the container stops running, you would opt for a volume. [You can learn more](./persisting-container-data/) about volumes and their use cases.
 
 If you have specific files or directories on your host system that you want to directly share with your container, like configuration files or development code, then you would use a bind mount. It's like opening a direct portal between your host and container for sharing. Bind mounts are ideal for development environments where real-time file access and sharing between the host and container are crucial.
 
@@ -24,7 +24,7 @@ If you have specific files or directories on your host system that you want to d
 
 Both `-v` (or `--volume`) and `--mount` flags used with the `docker run` command let you share files or directories between your local machine (host) and a Docker container. However, there are some key differences in their behavior and usage.
 
-The` -v` flag is simpler and more convenient for basic volume or bind mount operations. If the host location doesn’t exist when using `-v` or `--volume`, a directory will be automatically created.
+The `-v` flag is simpler and more convenient for basic volume or bind mount operations. If the host location doesn’t exist when using `-v` or `--volume`, a directory will be automatically created.
 
 Imagine you're a developer working on a project. You have a source directory on your development machine where your code resides. When you compile or build your code, the generated artifacts (compiled code, executables, images, etc.) are saved in a separate subdirectory within your source directory. You call this subdirectory  `/host/path`. Now you want these build artifacts to be accessible within a Docker container running your application. Additionally, you want the container to automatically access the latest build artifacts whenever you rebuild your code.
 
@@ -77,7 +77,7 @@ In this guide, you’ll practice how to create and use a bind mount to share fil
 
 3. Open the browser and access [http://localhost:8080](http://localhost:8080) or use the curl command to verify if it's working fine or not.
 
-    ```
+    ```console
     $ curl localhost:8080
     ```
 
@@ -98,72 +98,72 @@ Using a bind mount, you can map the configuration file on your host computer to 
 
 3. Change the directory to `public_html` and create a file `index.html` with the following content. This is a basic HTML document that creates a simple webpage that welcomes you with a friendly whale!
 
-    ```
+    ```html
     <!DOCTYPE html>
     <html lang="en">
     <head>
-    <meta charset="UTF-8">
-    <title> My Website with a Whale & Docker!</title>
+      <meta charset="UTF-8">
+      <title> My Website with a Whale & Docker!</title>
     </head>
     <body>
-    <h1>Whalecome!!</h1>
-    <p>Look! There's a friendly whale greeting you!</p>
-    <pre id="docker-art">
-       ##         .
-      ## ## ##        ==
-     ## ## ## ## ##    ===
-     /"""""""""""""""""\___/ ===
-   {                       /  ===-
-   \______ O           __/
-    \    \         __/
-     \____\_______/
+      <h1>Whalecome!!</h1>
+      <p>Look! There's a friendly whale greeting you!</p>
+      <pre id="docker-art">
+        ##         .
+       ## ## ##        ==
+      ## ## ## ## ##    ===
+      /"""""""""""""""""\___/ ===
+    {                       /  ===-
+     \______ O           __/
+      \    \         __/
+       \____\_______/
 
-    Hello from Docker!
-    </pre>
+      Hello from Docker!
+      </pre>
     </body>
     </html>
     ```
 
 4. Run the container
 
-The `--mount` and `-v` examples produces the same result. You can't run them both unless you remove the `my_site` container after running the first one.
+    The `--mount` and `-v` examples produces the same result. You can't run them both unless you remove the `my_site` container after running the first one.
 
-{{< tabs >}}
-{{< tab name="`-v`" >}}
+    {{< tabs >}}
+    {{< tab name="`-v`" >}}
 
-```console
-$ docker run -d --name my_site \
--p 8080:80 \
--v .:/usr/local/apache2/htdocs/ \
-httpd:2.4
-```
+    ```console
+    $ docker run -d --name my_site \
+    -p 8080:80 \
+    -v .:/usr/local/apache2/htdocs/ \
+    httpd:2.4
+    ```
 
-{{< /tab >}}
-{{< tab name="`--mount`" >}}
+    {{< /tab >}}
+    {{< tab name="`--mount`" >}}
 
-```console
-$ docker run -d --name my_site \
--p 8080:80 \
---mount type=bind,source="$(pwd)",target=/usr/local/apache2/htdocs/ \
-httpd:2.4
- ```
-{{< /tab >}}
-{{< /tabs >}}
+    ```console
+    $ docker run -d --name my_site \
+    -p 8080:80 \
+    --mount type=bind,source="$(pwd)",target=/usr/local/apache2/htdocs/ \
+    httpd:2.4
+    ```
+    {{< /tab >}}
+    {{< /tabs >}}
 
 5. If you access the site, you find a new webpage that welcomes you with a friendly whale!
 
 
 
-###  Access the file on the Docker dashboard
+### Access the file on the Docker dashboard
 
 1. You can view the mounted files inside a container by selecting the containers, **Files** tab and navigating to `/usr/local/apache2/htdocs/` directory and clicking “View file editor”.
 
-![A screenshot of Docker dashboard showing the mounted files inside the a container](images/mounted-files.webp?w=border)
+    ![A screenshot of Docker dashboard showing the mounted files inside the a container](images/mounted-files.webp?w=border)
 
 
 2. Delete the file on the host and verify the file is also deleted in the container. You will find that the files no longer exist under **Files** in the Docker dashboard.
 
-![A screenshot of Docker dashboard showing the deleted files inside the a container](images/deleted-files.webp?w=border)
+    ![A screenshot of Docker dashboard showing the deleted files inside the a container](images/deleted-files.webp?w=border)
 
 
 
@@ -181,7 +181,7 @@ The container continues to run until you stop it.
 
 3. Select the **Delete**  action in the Actions column.
 
-![A screenshot of Docker dashboard showing how to delete the container](images/delete-the-container.webp?w=border)
+    ![A screenshot of Docker dashboard showing how to delete the container](images/delete-the-container.webp?w=border)
 
 
 

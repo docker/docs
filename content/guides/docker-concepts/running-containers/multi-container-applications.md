@@ -45,24 +45,24 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
 
 1. Get the sample application. If you have Git, you can clone the repository for the sample application. Otherwise, you can download the sample application. Choose one of the following options.
 
-{{< tabs >}}
-{{< tab name="Clone with git" >}}
+    {{< tabs >}}
+    {{< tab name="Clone with git" >}}
 
-Use the following command in a terminal to clone the sample application repository.
+    Use the following command in a terminal to clone the sample application repository.
 
-```console
-$ git clone https://github.com/dockersamples/nginx-node-redis
-```
+    ```console
+    $ git clone https://github.com/dockersamples/nginx-node-redis
+    ```
 
-{{< /tab >}}
-{{< tab name="Download" >}}
+    {{< /tab >}}
+    {{< tab name="Download" >}}
 
-Download the source and extract it.
+    Download the source and extract it.
 
-{{< button url="https://github.com/dockersamples/nginx-node-redis/archive/refs/heads/main.zip" text="Download the source" >}}
+    {{< button url="https://github.com/dockersamples/nginx-node-redis/archive/refs/heads/main.zip" text="Download the source" >}}
 
-{{< /tab >}}
-{{< /tabs >}}
+    {{< /tab >}}
+    {{< /tabs >}}
 
 2. Navigate into the `nginx-node-redis-main` directory
 
@@ -92,7 +92,7 @@ Download the source and extract it.
 
 ### Run the containers
 
-1. Before we can run a multi-container application, we need to create a network for them all to communicate through. We can do so using the `docker network create` command:
+1. Before you can run a multi-container application, you need to create a network for them all to communicate through. You can do so using the `docker network create` command:
 
     ```console
     $ docker network create sample-app
@@ -173,7 +173,7 @@ Navigate to the root of the project directory. Inside this directory, you'll fin
     When you run this command, you should see output similar to the following:
 
 
-    ```
+    ```console
     Running 5/5
     ✔ Network nginx-nodejs-redis_default    Created                                                0.0s
     ✔ Container nginx-nodejs-redis-web1-1   Started                                                0.1s

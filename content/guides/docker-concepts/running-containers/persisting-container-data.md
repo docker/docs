@@ -71,7 +71,7 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 
 4. In the PostgreSQL command line, run the following to create a database table and insert two records:
 
-    ```
+    ```psql
     CREATE TABLE tasks (
         id SERIAL PRIMARY KEY,
         description VARCHAR(100)
@@ -81,7 +81,7 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 
 5. Verify the data is in the database by running the following in the PostgreSQL command line:
 
-    ```
+    ```psql
     SELECT * FROM tasks;
     ```
 

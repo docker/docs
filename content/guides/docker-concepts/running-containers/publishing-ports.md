@@ -94,6 +94,7 @@ In this step, you will run a container and publish its port using the Docker CLI
    ![A screenshot of the landing page of the Nginx web server running in a container](images/access-the-frontend.webp?border=true)
 
 ### Use Docker Compose
+
 This example will launch the same application using Docker Compose:
 
 1. Create a new directory and inside that directory, create a `compose.yaml` file with the following contents:

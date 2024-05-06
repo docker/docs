@@ -36,7 +36,7 @@ $ docker run -e foo=bar my_image env
 
 You will see output like the following:
 
-```
+```console
 HOSTNAME=2042f2e6ebe4
 foo=bar
 ```
@@ -125,7 +125,7 @@ Follow the steps to see how to connect a Redis container to a custom network.
 
 By default, containers are not limited in their resource usage. However, on shared systems, it's crucial to manage resources effectively. It's important not to allow a running container to consume too much of the host machine's memory.
 
-This is where the `docker run` command shines again. It offers flags like `--memory` and` --cpus` to restrict how much CPU and memory a container can use.
+This is where the `docker run` command shines again. It offers flags like `--memory` and `--cpus` to restrict how much CPU and memory a container can use.
 
 ```console
 $ docker run -d --memory=”512m” --cpus=”.5” redis
