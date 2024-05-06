@@ -77,7 +77,7 @@ testuser:231072:65536
      abi <abi/4.0>,
      include <tunables/global>
 
-     $HOME/bin/rootlesskit flags=(unconfined) {
+     "$HOME/bin/rootlesskit" flags=(unconfined) {
        userns,
 
        include if exists <local/$(echo $HOME/bin/rootlesskit | sed -e s@^/@@ -e s@/@.@g)>
