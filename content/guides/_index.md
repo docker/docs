@@ -19,8 +19,8 @@ get-started:
   icon: foundation
 
 dive-deeper:
-- title: Langauge-specific guides
-  description: Learn how to containerize, develop, and test langauage-specific apps using Docker.
+- title: Language-specific guides
+  description: Learn how to containerize, develop, and test language-specific apps using Docker.
   link: /language/
   icon: code
 - title: Use-case guides
