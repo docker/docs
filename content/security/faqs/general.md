@@ -1,6 +1,6 @@
 ---
 description: Find the answers to common security related FAQs
-keywords: Docker, Docker Hub, Docker Desktop secuirty FAQs, secuirty, platform, Docker Scout, admin, security
+keywords: Docker, Docker Hub, Docker Desktop security FAQs, platform, Docker Scout, admin, security
 title: General security FAQs
 tags: [FAQ]
 aliases:
@@ -72,31 +72,6 @@ If SCIM isn't enabled, you have to manually remove PAT users from the organizati
 ### What metadata is collected from container images that Scout analyzes?
 
 For information about the metadata stored by Docker Scout, see [Data handling](../../scout/data-handling.md).
-
-### How are containers isolated from the host?
-
-Docker Desktop runs all containers inside a Linux virtual machine (except for native Windows containers). This adds a strong layer of isolation between containers and the host the machine. However note the following:
-
-* Containers have access to host files configured for file sharing via Settings -> Resources -> File Sharing (see the next FAQ question below for more info).
-
-* By default, containers run as root but with limited capabilities inside the
-  Docker Desktop VM. Containers running with elevated privileges (e.g.,
-  `--privileged`, `--pid=host`, `--cap-add`, etc.) run as root with elevated
-  privileges inside the Docker Desktop VM (which gives them access to Docker
-  Desktop VM internals, including the Docker Engine). Thus, users must be
-  careful which containers they run this way to avoid security breaches by
-  malicious container images.
-
-* If [Enhanced Container Isolation (ECI)](../../desktop/hardened-desktop/enhanced-container-isolation/_index.md)
-  is enabled, then containers run "rootless" inside the Docker Desktop VM (even
-  when using the `--privileged` flag or similar). This adds a strong extra layer
-  of isolation to prevent malicious containers from breaching the Docker Desktop
-  VM. No changes to the containers or user workflows are required as the extra
-  protection is added behind the scenes.
-
-### To which portions of the host filesystem do containers have read and write access? Can containers running as root gain access to admin-owned files or directories on the host?
-
-File sharing (bind mount from the host filesystem) uses a user-space crafted file server (running in `com.docker.backend` as the user running Docker Desktop), so containers can’t gain any access that the user on the host doesn’t already have.
 
 ### How are extensions within the Marketplace vetted for security prior to placement?
 

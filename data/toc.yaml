@@ -2216,6 +2216,8 @@ Manuals:
       title: General
     - path: /security/faqs/networking-and-vms/
       title: Networking and VMs
+    - path: /security/faqs/containers
+      title: Containers
     - sectiontitle: Single Sign-On
       section:
       - path: /security/faqs/single-sign-on/faqs/
