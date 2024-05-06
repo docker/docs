@@ -15,6 +15,16 @@ Docker Scout platform, including the Dashboard. For CLI release notes, refer to
 Take a look at the [Docker Public Roadmap](https://github.com/docker/roadmap/projects/1)
 for what's coming next.
 
+## Q2 2024
+
+New features and enhancements released in the second quarter of 2024.
+
+### 2024-05-06
+
+New HTTP endpoint that lets you scrape data from Docker Scout with Prometheus,
+to create your own vulnerability and policy dashboards with Grafana. See
+[Docker Scout metrics exporter](../metrics-exporter.md)
+
 ## Q1 2024
 
 New features and enhancements released in the first quarter of 2024.
