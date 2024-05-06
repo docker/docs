@@ -162,6 +162,7 @@ Docker from the repository.
    image:
 
    ```console
+   $ sudo service docker start
    $ sudo docker run hello-world
    ```
 
