@@ -310,6 +310,37 @@ pipeline {
 ```
 
 {{< /tab >}}
+{{< tab name="BitBucket Pipelines" >}}
+
+```yaml
+# Prerequisites: $DOCKER_USER, $DOCKER_PAT setup as deployment variables
+# This pipeline assumes $BITBUCKET_REPO_SLUG as the image name
+# Replace <ORG> in the `docker buildx create` command with your Docker org
+
+image: atlassian/default-image:3
+
+pipelines:
+  default:
+    - step:
+        name: Build multi-platform image
+        script:
+          - mkdir -vp ~/.docker/cli-plugins/
+          - ARCH=amd64
+          - BUILDX_URL=$(curl -s https://raw.githubusercontent.com/docker/actions-toolkit/main/.github/buildx-lab-releases.json | jq -r ".latest.assets[] | select(endswith(\"linux-$ARCH\"))")
+          - curl --silent -L --output ~/.docker/cli-plugins/docker-buildx $BUILDX_URL
+          - chmod a+x ~/.docker/cli-plugins/docker-buildx
+          - echo "$DOCKER_PAT" | docker login --username $DOCKER_USER --password-stdin
+          - docker buildx create --use --driver cloud "<ORG>/default"
+          - IMAGE_NAME=$BITBUCKET_REPO_SLUG
+          - docker buildx build
+            --platform linux/amd64,linux/arm64
+            --push
+            --tag "$IMAGE_NAME" .
+        services:
+          - docker
+```
+
+{{< /tab >}}
 {{< tab name="Shell" >}}
 
 ```bash
