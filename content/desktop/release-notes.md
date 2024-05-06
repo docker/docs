@@ -29,7 +29,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 {{< release-date date="2024-05-06" >}}
 
-{{< desktop-install all=true version="4.30.0" build_path="/TBD/" >}}
+{{< desktop-install all=true version="4.30.0" build_path="/149282/" >}}
 
 ### New
 
