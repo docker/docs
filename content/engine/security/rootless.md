@@ -436,6 +436,7 @@ For example:
 ## Troubleshooting
 
 ### Errors installing the Docker daemon
+
 The `rootlesskit` cannot detect Systemd properly if you switch to your user via `sudo su`.  For users which cannot be logged-in, you must utilize the `machinectl` command which is a part of the `systemd-container` package. After installing `systemd-container` switch to "myuser" with the following command:
 ``` console
 $ sudo machinectl shell myuser@
