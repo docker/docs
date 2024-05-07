@@ -21,6 +21,10 @@ grid:
     description: Control the images developers can pull from Docker Hub.
     icon: "photo_library"
     link: "/security/for-admins/image-access-management/"
+  - title: "Air-Gapped Containers"
+    description: Restrict containers from accessing unwanted network resources.
+    icon: "shield_locked"
+    link: "/desktop/hardened-desktop/air-gapped-containers/"
 ---
 
 > **Note**
@@ -45,17 +49,20 @@ It is for security conscious organizations who:
 ### What does Hardened Docker Desktop include?
 
 It includes:
+
+{{< grid >}}
+
 - Settings Management, which helps admins to confidently manage and control the usage of Docker Desktop within their organization.
 - Enhanced Container Isolation (ECI), a setting that instantly enhances security by preventing containers from running as root in Docker Desktop’s Linux VM and ensures that any configurations set using Settings Management cannot be bypassed or modified by containers.
 - Registry Access Management (RAM), which allows admins to control the registries developers can access.
 - Image Access Management (IAM), which gives admins control over which images developers can pull from Docker Hub.
+- Air-Gapped Containers, which restrict containers from accessing unwanted network resources.
 
 ### How does it help my organisation?
 
 Hardened Desktop features work independently but collectively to create a defense-in-depth strategy, safeguarding developer workstations against potential attacks across various functional layers, such as configuring Docker Desktop, pulling container images, and running container images. This multi-layered defense approach ensures comprehensive security.
 
 It helps mitigate against threats such as:
- - Malware and supply chain attacks. RAM and IAM prevent developers from accessing certain container registries and image types, significantly lowering the risk of malicious payloads. Additionally, ECI restricts the impact of containers with malicious payloads by running them without root privileges inside a Linux user namespace.
- - Insider threats. Settings Management configures and locks various Docker Desktop settings, such as proxy settings, ECI, and prevents exposure of the Docker API. This helps admins enforce company policies and prevents developers from introducing insecure configurations, intentionally or unintentionally.
-
-{{< grid >}}
+ - **Malware and supply chain attacks:** RAM and IAM prevent developers from accessing certain container registries and image types, significantly lowering the risk of malicious payloads. Additionally, ECI restricts the impact of containers with malicious payloads by running them without root privileges inside a Linux user namespace.
+ - **Lateral movement:** Air gapped containers allows admins to configure network access restrictions for containers, thereby preventing malicious containers from lateral movement within the organization's network.
+ - **Insider threats:** Settings Management configures and locks various Docker Desktop settings, such as proxy settings, ECI, and prevents exposure of the Docker API. This helps admins enforce company policies and prevents developers from introducing insecure configurations, intentionally or unintentionally.
