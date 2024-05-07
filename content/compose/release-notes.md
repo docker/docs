@@ -72,7 +72,7 @@ For more detailed information, see the [release notes in the Compose repo](https
 
 ### Bug fixes and enhancements
 
-- Restored `config` hebaviour until `--no-interpolate` is set
+- Restored `config` behaviour until `--no-interpolate` is set
 - Fixed service name shell completion
 - Added `--watch` flag to `up` command
 

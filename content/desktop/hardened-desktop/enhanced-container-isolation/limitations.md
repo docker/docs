@@ -56,7 +56,7 @@ and it's an excellent way for users to run their favorite Linux distro on
 Windows hosts and access Docker from within (see Docker Desktop's WSL distro
 integration feature, enabled via the Dashboard's **Settings** > **Resources** > **WSL Integration**).
 
-### Docker Builds with the "Docker" driver are not protected by ECI
+### ECI protection for Docker Builds with the "Docker" driver
 
 Prior to Docker Desktop 4.30, `docker build` commands that use the buildx
 `docker` driver (the default) are not protected by ECI (i.e., the build runs
