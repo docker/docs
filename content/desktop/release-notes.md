@@ -78,7 +78,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For Mac
 
 - Fixed a bug where a segmentation fault was triggered with Virtualization Framework, on post-2019 Macs. See [docker/for-mac#6824](https://github.com/docker/for-mac/issues/6824).
-- Enabled `CONFIG_SECURITY=y` kernel config, for example for [Tetragon](https://tetragon.io/). Fixes [docker/for-mac#7260](https://github.com/docker/for-mac/issues/7250).
+- Enabled `CONFIG_SECURITY=y` kernel config, for example for [Tetragon](https://tetragon.io/). Fixes [docker/for-mac#7250](https://github.com/docker/for-mac/issues/7250).
 - Re-added support for `SQUASHFS` compression. Fixes [docker/for-mac#7260](https://github.com/docker/for-mac/issues/7260).
 - Fixed a bug that caused a new version of Docker Desktop to be marked as damaged.
 - Increased network MTU when using qemu on Apple Silicon.
