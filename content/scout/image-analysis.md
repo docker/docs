@@ -3,7 +3,7 @@ title: Docker Scout image analysis
 description:
   Docker Scout image analysis provides a detailed view into the composition of
   your images and the vulnerabilities that they contain
-keywords: scanning, vulnerabilities, supply chain, security, analysis
+keywords: scout, scanning, vulnerabilities, supply chain, security, analysis
 aliases:
   - /scout/advanced-image-analysis/
 ---
