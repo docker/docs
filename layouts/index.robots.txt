@@ -2,7 +2,7 @@
 User-agent: *
 
 
-Sitemap: {{ site.BaseURL }}/sitemap.xml
+Sitemap: {{ "sitemap.xml" | absURL }}
 {{- else -}}
 # Disable all indexing on staging websites and Netlify previews to prevent
 # them showing up in search results.
