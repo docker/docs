@@ -1,7 +1,7 @@
 ---
-description: Learn how to create air-gapped containers with Settings Management
-title: Configure air-gapped containers with Settings Management
-keywords: settings management, air gapped, security, Docker Desktop, configuration, proxy, network
+description: Air-gapped Containers - What it is, benefits, and how to configure it.
+title: Air-gapped Containers
+keywords: air gapped, security, Docker Desktop, configuration, proxy, network
 ---
 
 > **Beta feature**
@@ -25,7 +25,7 @@ You can choose:
 
 ## Configuration
 
-Assuming [enforced sign-in](../../../security/for-admins/configure-sign-in.md) and Settings Management are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
+Assuming [enforced sign-in](../../../security/for-admins/configure-sign-in.md) and [Settings Management](../settings-management/_index.md) are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
 
 ```json
 {

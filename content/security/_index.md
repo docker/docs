@@ -21,7 +21,7 @@ grid_admins:
   link: /security/for-admins/image-access-management/
 - title: "Air-Gapped Containers"
   description: Restrict containers from accessing unwanted network resources.
-  icon: "shield_locked"
+  icon: "security"
   link: /desktop/hardened-desktop/air-gapped-containers/
 - title: Enforce sign-in
   description: Configure sign-in for members of your teams and organizations.
