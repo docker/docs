@@ -18,8 +18,11 @@ async function initializeIndex() {
       { name: "keywords", weight: 1 },
       { name: "tags", weight: 1 },
     ],
-    minMatchCharLength: 2,
+    minMatchCharLength: 1,
     threshold: 0.2,
+    ignoreLocation: true,
+    useExtendedSearch: true,
+    ignoreFieldNorm: true,
   };
 
   handler = new Fuse(index, options);
@@ -28,17 +31,17 @@ async function initializeIndex() {
 
 async function executeSearch(query) {
   !indexed && (await initializeIndex());
-  const results = handler.search(query).map(({ item }) => item);
-  return results
+  const results = handler.search(query);
+  return results;
 }
 
 async function modalSearch(e) {
   const query = e.target.value;
-  results = await executeSearch(query)
+  results = await executeSearch(query);
 
   let resultsHTML = `<div>${results.length} results</div>`;
   resultsHTML += results
-    .map((item) => {
+    .map(({ item }) => {
       return `<div class="bg-gray-light-100 dark:bg-gray-dark-200 rounded p-4">
       <div class="flex flex-col">
         <a class="link" href="${item.url}">${item.title}</a>
