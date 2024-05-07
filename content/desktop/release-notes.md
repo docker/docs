@@ -33,7 +33,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 ### New
 
-#### For all platforms 
+#### For all platforms
 
 - Docker Desktop now supports SOCKS5 proxies. Requires a Business subscription.
 - Improved extensibility via CLI hooks with new the Docker Engine Moby 26.1 release.
@@ -124,7 +124,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
 - New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
 - Beta release of:
-  - Air-gapped containers with [Settings Management](hardened-desktop/settings-management/air-gapped-containers.md).
+  - Air-gapped containers with [Settings Management](hardened-desktop/air-gapped-containers/_index.md).
   - [Host networking](../network/drivers/host.md#docker-desktop) in Docker Desktop.
   - [Docker Debug](use-desktop/container.md#integrated-terminal) for running containers.
   - [Volumes Backup & Share extension](use-desktop/volumes.md) functionality available in the **Volumes** tab.
@@ -205,7 +205,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - [Compose v2.24.6](https://github.com/docker/compose/releases/tag/v2.24.6)
 - [Docker Engine v25.0.3](https://docs.docker.com/engine/release-notes/25.0/#2503)
 - [Docker Scout CLI v1.5.0](https://github.com/docker/scout-cli/releases/tag/v1.5.0)
-- [Qemu 8.1.5](https://wiki.qemu.org/ChangeLog/8.1) 
+- [Qemu 8.1.5](https://wiki.qemu.org/ChangeLog/8.1)
 - [Wasm](../desktop/wasm/_index.md) runtimes:
   - Updated runwasi shims to `v0.4.0`, including:
     - wasmtime `v17.0`, with initial support for WASI preview 2
@@ -482,7 +482,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Fixed a bug were the setting **Start Docker Desktop when you sign in** would not work. Fixes [docker/for-mac#7052](https://github.com/docker/for-mac/issues/7052).
 - You can now enable the use of Kernel networking path for UDP through the UI. Fixes [docker/for-mac#7008](https://github.com/docker/for-mac/issues/7008).
 - Fixed a regression where the `uninstall` CLI tool was missing.
-- Addressed an issue which caused Docker Desktop to become unresponsive when analytics were disabled with Settings Management. 
+- Addressed an issue which caused Docker Desktop to become unresponsive when analytics were disabled with Settings Management.
 
 #### For Windows
 
@@ -494,7 +494,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 #### For Windows
 
 - Docker CLI doesn’t work when using WSL 2 integration on an older Linux distribution (for example, Ubuntu 20.04) which uses a `glibc` version older than `2.32`. This will be fixed in future releases. See [docker/for-win#13824](https://github.com/docker/for-win/issues/13824).
-  
+
 ## 4.25.2
 
 {{< release-date date="2023-11-21" >}}
@@ -604,7 +604,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 
 #### For all platforms
 
-- Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**. 
+- Docker operations, such as pulling images or logging in, fail with 'connection refused' or 'timeout' errors if the Swap file size is set to 0MB. As a workaround, configure the swap file size to a non-zero value in the **Resources** tab in **Settings**.
 
 ## 4.24.2
 
