@@ -82,7 +82,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Re-added support for `SQUASHFS` compression. Fixes [docker/for-mac#7260](https://github.com/docker/for-mac/issues/7260).
 - Fixed a bug that caused a new version of Docker Desktop to be marked as damaged.
 - Increased network MTU when using qemu on Apple Silicon.
-- Fixed a bug preventing Docker Desktop to start if Rosetta was not installed.
+- Fixed a bug preventing Docker Desktop to start if Rosetta was not installed. Fixes [docker/for-mac#7243](https://github.com/docker/for-mac/issues/7243).
 
 #### For Windows
 
