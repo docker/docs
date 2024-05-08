@@ -50,7 +50,7 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
 
    Use the following command in a terminal to clone the sample application repository.
 
-   ```
+   ```console
    $ git clone https://github.com/dockersamples/nginx-node-redis
    ```
 
