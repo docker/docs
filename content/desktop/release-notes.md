@@ -35,13 +35,13 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 #### For all platforms 
 
-- Docker Desktop now supports SOCKS5 proxies. Requires a Business subscription.
+- Docker Desktop now supports [SOCKS5 proxies](networking.md#socks5-proxy-support). Requires a Business subscription.
 - Improved extensibility via CLI hooks with new the Docker Engine Moby 26.1 release.
-- Added a new setting to manage the onboarding survey in [Settings Management](hardened-desktop/settings-management/_index.md)
+- Added a new setting to manage the onboarding survey in [Settings Management](hardened-desktop/settings-management/_index.md).
 
 #### For Windows
 
-- Added support for Kerberos and NTLM proxy authentication on Windows. Requires a Business subscription.
+- Added support for [Kerberos and NTLM proxy authentication](settings/windows.md#proxy-authentication) on Windows. Requires a Business subscription.
 
 ### Upgrades
 
@@ -90,7 +90,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 - Fixed bash completions for the Docker CLI in a WSL environment.
 - Fixed a regression in Docker Desktop 4.28 that caused host files bind-mounted into containers to not show up properly inside the container, when using Docker-in-Docker (via mounts of `/var/run/docker.sock`) on WSL.
 - Fixed a bug that would cause the following error `merging settings: integratedWslDistros type mismatch`.
-
 
 ### Known issues
 
