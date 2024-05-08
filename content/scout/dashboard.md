@@ -168,3 +168,6 @@ The available notification settings are:
 From this page, you can also go to the settings for Team collaboration
 integrations, such as the [Slack](./integrations/team-collaboration/slack.md)
 integration.
+
+You can also configure your notification settings in Docker Desktop by going
+to **Settings** > **Notifications**.
