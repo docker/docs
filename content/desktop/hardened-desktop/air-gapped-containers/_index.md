@@ -1,6 +1,6 @@
 ---
-description: Air-gapped Containers - What it is, benefits, and how to configure it.
-title: Air-gapped Containers
+title: Air-gapped containers
+description: Air-gapped containers - What it is, benefits, and how to configure it.
 keywords: air gapped, security, Docker Desktop, configuration, proxy, network
 ---
 

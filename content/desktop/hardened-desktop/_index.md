@@ -56,7 +56,7 @@ It includes:
 - Enhanced Container Isolation (ECI), a setting that instantly enhances security by preventing containers from running as root in Docker Desktop’s Linux VM and ensures that any configurations set using Settings Management cannot be bypassed or modified by containers.
 - Registry Access Management (RAM), which allows admins to control the registries developers can access.
 - Image Access Management (IAM), which gives admins control over which images developers can pull from Docker Hub.
-- Air-Gapped Containers, which restricts containers from accessing unwanted network resources.
+- Air-gapped containers, which restricts containers from accessing unwanted network resources.
 
 ### How does it help my organisation?
 
