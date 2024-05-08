@@ -648,6 +648,8 @@
   - "/go/vex-guide/"
 "/scout/metrics-exporter/":
   - "/go/scout-metrics-exporter"
+"/scout/dashboard/#notification-settings":
+  - /go/scout-notifications/
 
 # Build links (internal)
 "/build/bake/reference/":

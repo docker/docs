@@ -153,3 +153,14 @@ vulnerability exposure or policy compliance as a result of pushing a new image.
 > repository. "Last pushed" refers to the image tag that was most recently
 > pushed to the registry and analyzed by Docker Scout. If the last pushed image
 > is not by a newly disclosed CVE, then no notification will be triggered.
+
+The available notification settings are:
+
+- **Notification pop-ups**: select this check-box to receive notification
+  pop-up messages in the Docker Scout Dashboard.
+- **OS notifications**: select this check-box to receive OS-level notifications
+  from your browser if you have the Docker Scout Dashboard open in a browser
+  tab.
+
+  To enable OS notifications, Docker Scout needs permissions to send
+  notifications using the browser API.
