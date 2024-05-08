@@ -53,13 +53,13 @@ For Compose standalone, see [Install Compose Standalone](standalone.md).
 3.  Verify that Docker Compose is installed correctly by checking the version.
 
     ```console
-    $ docker compose version
+    $ docker-compose version
     ```
 
     Expected output:
 
     ```text
-    Docker Compose version vN.N.N
+    docker-compose version vN.N.N
     ```
 
     Where `vN.N.N` is placeholder text standing in for the latest version.
@@ -117,6 +117,6 @@ To update the Compose plugin, run the following commands:
 3. Test the installation.
 
     ```console
-    $ docker compose version
-    Docker Compose version {{% param "compose_version" %}}
+    $ docker-compose version
+    docker-compose version {{% param "compose_version" %}}
     ```
