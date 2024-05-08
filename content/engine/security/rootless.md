@@ -436,8 +436,12 @@ For example:
 
 ## Troubleshooting
 
-### Errors installing the Docker daemon
-
+### Unable to install with systemd when systemd is present on the system
+``` console
+$ dockerd-rootless-setuptool.sh install
+[INFO] systemd not detected, dockerd-rootless.sh needs to be started manually:
+...
+```
 `rootlesskit` cannot detect systemd properly if you switch to your user via `sudo su`. For users which cannot be logged-in, you must use the `machinectl` command which is part of the `systemd-container` package. After installing `systemd-container` switch to `myuser` with the following command:
 ``` console
 $ sudo machinectl shell myuser@
