@@ -437,6 +437,7 @@ For example:
 ## Troubleshooting
 
 ### Unable to install with systemd when systemd is present on the system
+
 ``` console
 $ dockerd-rootless-setuptool.sh install
 [INFO] systemd not detected, dockerd-rootless.sh needs to be started manually:
