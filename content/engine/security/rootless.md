@@ -73,7 +73,8 @@ testuser:231072:65536
   profile for `rootlesskit` manually:
 
   1. Create and install the currently logged-in user's AppArmor profile:
-     ``` console
+
+     ```console
      $ filename=$(echo $HOME/bin/rootlesskit | sed -e s@^/@@ -e s@/@.@g)
      $ cat <<EOF > ~/${filename}
      abi <abi/4.0>,
