@@ -170,7 +170,7 @@ testuser:231072:65536
 > If the system-wide Docker daemon is already running, consider disabling it:
 >```console
 >$ sudo systemctl disable --now docker.service docker.socket
->$ sudo systemctl stop docker.service docker.socket
+>$ sudo rm /var/run/docker.sock
 >```
 > Should you choose not to shut down the `docker` service and socket, you will need to use the `--force`
 > parameter in the next section. There are no known issues, but until you shutdown and disable you're
