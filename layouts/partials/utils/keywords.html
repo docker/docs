@@ -1,11 +1,11 @@
 {{ $keywords := "" }}
 {{ if .Keywords }}
-  {{ $keywords = strings.Split (collections.Delimit .Keywords " ") ", " }}
+  {{ $keywords = delimit .Keywords " " }}
 {{ else }}
   {{ with .File }}
     {{ with (index (site.Data.frontmatter) .Path) }}
       {{ with .keywords }}
-        {{ $keywords = strings.Split (strings.Trim . "\n") ", " }}
+        {{ $keywords = strings.Replace (strings.Trim . "\n") "\n" " " }}
       {{ end }}
     {{ end }}
   {{ end }}
