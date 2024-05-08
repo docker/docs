@@ -172,7 +172,7 @@ testuser:231072:65536
 >$ sudo systemctl disable --now docker.service docker.socket
 >$ sudo systemctl stop docker.service docker.socket
 >```
-> Should you choose not to shut down the docker service and socket, you will need to use the `--force`
+> Should you choose not to shut down the `docker` service and socket, you will need to use the `--force`
 > parameter in the next section. There are no known issues, but until you shutdown and disable you're
 > still running rootful Docker. 
 
