@@ -22,13 +22,13 @@
       padding: 0 4px;
     }
 
-    table code {
+    table:not(.lntable) code {
       overflow-wrap: unset;
       white-space: nowrap;
     }
 
     /* Indented code blocks */
-    :not(.highlight) > pre {
+    pre:not(.chroma) {
       @apply my-4 overflow-x-auto p-3;
       font-size: 0.875em;
       border: 1px solid;
