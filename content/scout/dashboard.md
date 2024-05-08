@@ -164,3 +164,7 @@ The available notification settings are:
 
   To enable OS notifications, Docker Scout needs permissions to send
   notifications using the browser API.
+
+From this page, you can also go to the settings for Team collaboration
+integrations, such as the [Slack](./integrations/team-collaboration/slack.md)
+integration.
