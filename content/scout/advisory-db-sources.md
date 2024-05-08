@@ -1,7 +1,7 @@
 ---
 description: More details on the advisory database and CVE-to-package matching service
   behind Docker Scout analysis.
-keywords: scanning, analysis, vulnerabilities, Hub, supply chain, security
+keywords: scout, scanning, analysis, vulnerabilities, Hub, supply chain, security, packages, repositories, ecosystem
 title: Advisory database sources and matching service
 ---
 
