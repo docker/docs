@@ -59,7 +59,7 @@ See your [SCIM](scim.md) and [SSO](../../security/for-admins/single-sign-on/conf
 
 ### How does a company owner enable group mapping in an IdP?
 
-See [SCIM](scim.md) and [Group mapping](../../security/for-admins/group-mapping.md) for more information.
+See [SCIM](scim.md) and [Group mapping](../../security/for-admins/provisioning/group-mapping.md) for more information.
 
 ### What's the definition of a company vs an organization?
 
