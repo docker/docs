@@ -130,7 +130,7 @@ The Docker Dashboard provides the ability to view the contents of any volume, as
 
 2. Select the **postgres_data** volume’s name.
 
-3. The **Data** tab shows the contents of the volume and provides the ability to navigate the files. Double-clicking on a file will allow you to see the contents and make changes.
+3. The **Data** tab shows the contents of the volume and provides the ability to navigate the files. Double-clicking on a file will let you see the contents and make changes.
 
 4. Right-click on any file to save it or delete it.
 
