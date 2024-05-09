@@ -1,7 +1,7 @@
 ---
 title: Persisting container data
 keywords: concepts, build, images, container, docker desktop
-description: This concept page will teach you the significance of data persistent in Docker
+description: This concept page will teach you the significance of data persistence in Docker
 ---
 
 {{< youtube-embed 10_2BjqB_Ls >}}
