@@ -126,7 +126,7 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 
 The Docker Dashboard provides the ability to view the contents of any volume, as well as the ability to export, import, and clone volumes.
 
-1. Open the **Docker Dashboard** and navigate to the **Volumes** view. In this view, you should see the **postgres_data** volume
+1. Open the Docker Dashboard and navigate to the **Volumes** view. In this view, you should see the **postgres_data** volume.
 
 2. Select the **postgres_data** volume’s name.
 
