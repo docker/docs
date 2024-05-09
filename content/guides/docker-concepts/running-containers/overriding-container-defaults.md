@@ -54,7 +54,7 @@ You can use the `--memory` and `--cpus` flags with the `docker run` command to r
 $ docker run --memory="512m" --cpus="0.5" my_image
  ```
 
-This command limits container memory usage to 512 megabytes and defines the CPU quota of 0.5 for half a core.
+This command limits container memory usage to 512 MB and defines the CPU quota of 0.5 for half a core.
 
 > **Monitor the real-time resource usage**
 >
