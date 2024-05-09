@@ -67,7 +67,7 @@ By effectively using these `docker run` flags, you can tailor your containerized
 
 In this hands-on guide, you'll see how to use the `docker run` command to override the container defaults.
 
-1. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
+1. [Download and install](/get-docker/) Docker Desktop.
 
 ### Run the multiple instance of Redis database
 
