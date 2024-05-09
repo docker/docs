@@ -16,7 +16,7 @@ Now you might ask, "How can I override these container defaults?" The answer is 
 
 The `docker run` command offers a powerful way to override these defaults and tailor the container's behavior to your liking. The command offers several flags that let you to customize container behavior on the fly.
 
-Here's a few ways you can achieve this:
+Here's a few ways you can achieve this.
 
 ### Overriding the network ports
 
