@@ -120,7 +120,7 @@ This example will launch the same application using Docker Compose:
 If you’d like to dive in deeper on this topic, be sure to check out the following resources:
 
 * [`docker container port` CLI reference](/reference/cli/docker/container/port/)
-* [Published Ports](https://docs.docker.com/network/#published-ports)
+* [Published ports](/network/#published-ports)
 
 ## Next steps
 
