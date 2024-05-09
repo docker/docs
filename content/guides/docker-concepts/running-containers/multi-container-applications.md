@@ -131,6 +131,11 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
 
     ```console
     $ docker ps
+    ```
+
+    You will see output like the following: 
+
+    ```text
     CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                NAMES
     2cf7c484c144   nginx     "/docker-entrypoint.…"   9 seconds ago        Up 8 seconds        0.0.0.0:80->80/tcp   nginx
     7a070c9ffeaa   web       "docker-entrypoint.s…"   19 seconds ago       Up 18 seconds                            web2
