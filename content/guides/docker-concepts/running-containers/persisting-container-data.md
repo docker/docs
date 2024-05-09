@@ -53,7 +53,7 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 
 ### Use volumes
 
-1. [Download and instal](https://www.docker.com/products/docker-desktop/)l Docker Desktop.
+1. [Download and install](/get-docker/) Docker Desktop.
 
 2. Start a container using the [Postgres image](https://hub.docker.com/_/postgres) with the following command:
 
