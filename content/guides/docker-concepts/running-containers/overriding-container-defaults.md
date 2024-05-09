@@ -169,7 +169,7 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
 ## Additional resources
 
 * [Build variables](/build/building/variables/)
-* [Ways to set environment variables with Compose](https://docs.docker.com/compose/environment-variables/set-environment-variables/)
+* [Ways to set environment variables with Compose](/compose/environment-variables/set-environment-variables/)
 * [What is a container](/guides/docker-concepts/the-basics/what-is-a-container/)
 
 ## Next steps
