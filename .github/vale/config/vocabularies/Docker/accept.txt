@@ -43,6 +43,7 @@ Docker-Sponsored Open Source
 Dockerfile
 Dockerize
 Dockerizing
+Entra
 Ethernet
 Fargate
 Fedora
