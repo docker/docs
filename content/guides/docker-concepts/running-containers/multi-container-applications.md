@@ -189,7 +189,7 @@ Navigate to the root of the project directory. Inside this directory, you'll fin
 
 
 
-3. Alternatively, you can use the Docker Dashboard to remove the containers by selecting the application stack and selecting the Delete button.
+3. Alternatively, you can use the Docker Dashboard to remove the containers by selecting the application stack and selecting the **Delete** button.
 
 
 
