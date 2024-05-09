@@ -140,7 +140,7 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
 
 7. If you look at the Docker Dashboard, you can see the containers and dive deeper into their configuration.
 
-
+   ![A screenshot of Docker Dashboard showing multi-container applications](images/multi-container-apps.webp?border=true)
 
 8. With everything up and running, you can open [http://localhost](http://localhost) in your browser to see the site. Refresh the page several times to see the host that’s handling the request and the total number of requests:
 
@@ -157,9 +157,8 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
 
 9. You can use the Docker Dashboard to remove the containers by selecting the containers and selecting the **Delete** button
 
-
-    ![A screenshot of Docker Dashboard showing multi-container applications](images/multi-container-apps.webp?border=true)
-
+   ![A screenshot of Docker Dashboard showing how to delete the multi-container applications](images/delete-multi-container-apps.webp?border=true)
+ 
 ## Simplify the deployment using Docker Compose
 
 
@@ -189,12 +188,11 @@ Navigate to the root of the project directory. Inside this directory, you'll fin
 2. If you look at the Docker Dashboard, you can see the containers and dive deeper into their configuration.
 
 
-    ![A screenshot of Docker Dashboard showing how to delete the multi-container applications](images/delete-multi-container-apps.webp?border=true)
-
-
+    ![A screenshot of Docker Dashboard showing the containers of the application stack deployed using Docker Compose](images/list-containers.webp?border=true)
 
 3. Alternatively, you can use the Docker Dashboard to remove the containers by selecting the application stack and selecting the **Delete** button.
 
+   ![A screenshot of Docker Dashboard that shows how to remove the containers that you deployed using Docker Compose](images/delete-containers.webp?border=true)
 
 
 In this guide, you learned how easy it is to use Docker Compose to start and stop a multi-container application compared to `docker run` which is error-prone and difficult to manage.
