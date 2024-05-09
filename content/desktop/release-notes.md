@@ -36,7 +36,6 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 #### For all platforms 
 
 - Docker Desktop now supports [SOCKS5 proxies](networking.md#socks5-proxy-support). Requires a Business subscription.
-- Improved extensibility via CLI hooks with new the Docker Engine Moby 26.1 release.
 - Added a new setting to manage the onboarding survey in [Settings Management](hardened-desktop/settings-management/_index.md).
 
 #### For Windows
