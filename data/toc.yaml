@@ -187,7 +187,7 @@ Guides:
     - title: "Test your deployment"
       path: /language/php/deploy/
 
-- sectiontitle: Use-case guides {{< badge color=violet text=New >}}
+- sectiontitle: Use-case guides
   section:
     - path: /guides/use-case/
       title: Overview
