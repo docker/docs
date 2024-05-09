@@ -113,7 +113,7 @@ This example will launch the same application using Docker Compose:
 
 3. Use the `docker compose up` command to start the application. 
 
-4. Open your browser to [http://localhost:8080](http://localhost:8080)
+4. Open your browser to [http://localhost:8080](http://localhost:8080).
 
 ## Additional resources
 
