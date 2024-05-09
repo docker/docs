@@ -150,7 +150,7 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
          command: ["redis-server", "--requirepass", "redispassword"]
     ```
 
-    The YAML file defines a service named `redis` that uses the official Redis image, sets an entrypoint script, and starts the container with password authentication.
+    The Compose file defines a service named `redis` that uses the official Redis image, sets an entrypoint script, and starts the container with password authentication.
 
 2. Bring up the service by running the following command:
 
