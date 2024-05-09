@@ -1,6 +1,6 @@
 ---
 keywords: SCIM, SSO, user provisioning, de-provisioning, role mapping, assign users
-title: SCIM overview
+title: SCIM provisioning
 description: Learn how System for Cross-domain Identity Management works and how to set it up.
 aliases:
 - /security/for-admins/scim/
