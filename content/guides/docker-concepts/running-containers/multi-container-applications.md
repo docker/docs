@@ -28,7 +28,7 @@ That's where Docker Compose comes to the rescue.
 
 Docker Compose defines your entire multi-container application in a single YAML file called `compose.yml`. This file specifies configurations for all your containers, their dependencies, environment variables, and even volumes and networks. With Docker Compose:
 
-- You don't need to run multiple docker run commands. All you need to do is define your entire multi-container application in a single YAML file. This centralizes configuration and simplifies management.
+- You don't need to run multiple `docker run` commands. All you need to do is define your entire multi-container application in a single YAML file. This centralizes configuration and simplifies management.
 - You can run containers in a specific order and manage network connections easily.
 - You can simply scale individual services up or down within the multi-container setup. This allows for efficient allocation based on real-time needs.
 - You can implement persistent volumes with ease.
