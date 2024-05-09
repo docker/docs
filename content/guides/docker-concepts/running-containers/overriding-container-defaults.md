@@ -162,7 +162,7 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
 
 3. Verify the authentication with Docker Dashboard.
 
-    Open the **Docker Dashboard**, select the **Redis** container and select **Exec** to enter into the container shell.
+    Open the Docker Dashboard, select the **Redis** container and select **Exec** to enter into the container shell.
 
     ![A screenshot of the Docker Dashboard selecting the Redis container and entering into its shell using EXEC button](images/exec-into-redis-container.webp?border=true) 
 
