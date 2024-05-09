@@ -126,7 +126,7 @@ Follow the steps to see how to connect a Redis container to a custom network.
 
 ### Manage the resources
 
-By default, containers are not limited in their resource usage. However, on shared systems, it's crucial to manage resources effectively. It's important not to allow a running container to consume too much of the host machine's memory.
+By default, containers are not limited in their resource usage. However, on shared systems, it's crucial to manage resources effectively. It's important not to let a running container consume too much of the host machine's memory.
 
 This is where the `docker run` command shines again. It offers flags like `--memory` and `--cpus` to restrict how much CPU and memory a container can use.
 
