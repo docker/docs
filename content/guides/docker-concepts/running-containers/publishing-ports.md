@@ -75,7 +75,7 @@ In this hands-on guide, you'll learn how to publish container ports using both t
 
 In this step, you will run a container and publish its port using the Docker CLI.
 
-1. Download and install Docker Desktop
+1. [Download and install](/get-docker/) Docker Desktop.
 
 2. In a terminal, run the following command to start a new container:
 
