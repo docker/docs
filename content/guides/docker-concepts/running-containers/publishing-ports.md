@@ -31,7 +31,7 @@ docker run -p 8080:80 my-image
 
 Now, any traffic sent to port `8080` on your host machine will be forwarded to port `80` within the container.
 
-> **Important note**
+> **Important**
 >
 > When a port is published, it's published to all network interfaces by default. This means any traffic that reaches your machine can access the published application. Be mindful of publishing databases or any sensitive information. [Learn more about published ports here](https://docs.docker.com/network/#published-ports)
 { .warning }
