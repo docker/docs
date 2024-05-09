@@ -72,7 +72,7 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
 
     Inside this directory, you'll find two sub-directories - `nginx` and `web`.
 
-3. [Download and install](https://www.docker.com/products/docker-desktop/) Docker Desktop.
+3. [Download and install](/get-docker/) Docker Desktop.
 
 ### Build the images
 
