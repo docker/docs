@@ -107,7 +107,7 @@ This example will launch the same application using Docker Compose:
           - 8080:80
     ```
 
-    The `ports` configuration accepts a few different forms of syntax for the port definition. In this case, you’re using the same `HOST_PORT: CONTAINER_PORT` used in the `docker run` command.
+    The `ports` configuration accepts a few different forms of syntax for the port definition. In this case, you’re using the same `HOST_PORT:CONTAINER_PORT` used in the `docker run` command.
 
 2. Open a terminal and navigate to the directory you created in the previous step.
 
