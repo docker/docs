@@ -87,7 +87,7 @@ In this hands-on guide, you'll see how to use the `docker run` command to overri
 
     This will start a new Redis container in the background, listening on the standard container port `6379` but mapped to port `6380` on the host machine. You override the host port just to ensure that this new container doesn't conflict with the existing running container.
 
-3. Verify if both containers are running via the Docker dashboard
+3. Verify if both containers are running via the Docker Dashboard.
 
     ![A screenshot of Docker Dashboard showing the running instances of Redis containers](images/running-redis-containers.webp?border=true)
 
