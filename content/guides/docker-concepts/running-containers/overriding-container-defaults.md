@@ -140,7 +140,7 @@ The `--cpus` flag specifies the CPU quota for the container. Here, it's set to h
 
 Sometimes, you might need to override the default commands (`CMD`) or entry points (`ENTRYPOINT`) defined in a Docker image, especially when using Docker Compose.
 
-1. Create a `docker-compose.yaml` file with the following content:
+1. Create a `compose.yaml` file with the following content:
 
     ```yaml
     services:
