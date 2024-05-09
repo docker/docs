@@ -10,7 +10,7 @@ description: This concept page will teach you the significance of publishing and
 
 If you've been following the guides so far, you understand that containers provide isolated processes for each component of your application. Each component - a React frontend, a Python API, and a Postgres database - runs in its own sandbox environment, completely isolated from everything else on your host machine. This isolation is great for security and managing dependencies, but it also means you can’t access them directly. For example, you can’t access the web app in your browser.
 
-That’s where port publishing comes in!
+That’s where port publishing comes in.
 
 ### Publishing ports
 
