@@ -160,7 +160,7 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
 
     This command starts the Redis service defined in the Docker Compose file.
 
-3. Verify the authentication with Docker Dashboard
+3. Verify the authentication with Docker Dashboard.
 
     Open the **Docker Dashboard**, select the **Redis** container and select **Exec** to enter into the container shell.
 
