@@ -147,7 +147,7 @@ There are a few methods to remove volumes, including the following:
 
 1. Select the **Delete Volume** option on a volume in the Docker Dashboard.
 
-2. Use the `docker volume rm` command
+2. Use the `docker volume rm` command:
 
     ```console
     $ docker volume rm postgres_data
