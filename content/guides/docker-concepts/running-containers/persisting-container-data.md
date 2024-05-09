@@ -43,7 +43,7 @@ Volumes have their own lifecycle beyond that of containers and can grow quite la
 > While you can use the `docker volume create` command to create a volume, Docker will automatically create a volume when needed. For example, the following command will auto-create a volume named `sample-volume` if it doesn’t exist:
 >
 > ```console
-> $ docker run -v sample-volumes:/data my-image
+> $ docker run -v sample-volume:/data my-image
 > ```
 
 
