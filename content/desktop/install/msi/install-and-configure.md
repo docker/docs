@@ -48,14 +48,25 @@ When installing via the user interface it is possible to:
 - Disable Windows Containers
 - Choose between the WSL or Hyper-V engine
 
-Non-interactive installations are silent and any additional configuration must be passed as arguments. They must also be executed from an elevated terminal.
+Non-interactive installations are silent and any additional configuration must be passed as arguments.
 
 ### Common installation commands
+
+> **Important**
+>
+> Admin rights are required to run any of the following commands.
+{ .important }
 
 #### Installing interactively with verbose logging
 
 ```powershell
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log"
+```
+
+#### Installing interactively without verbose logging
+
+```powershell
+msiexec /i "DockerDesktop.msi"
 ```
 
 #### Installing non-interactively with verbose logging
@@ -86,13 +97,19 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS=
 > - Property names are expected to be in double quotes
 { .tip }
 
-#### Uninstalling interactively
+#### Uninstalling interactively with verbose logging
+
+```powershell
+msiexec /x "DockerDesktop.msi" /L*V ".\msi.log"
+```
+
+#### Uninstalling interactively without verbose logging
 
 ```powershell
 msiexec /x "DockerDesktop.msi"
 ```
 
-#### Uninstalling non-interactively 
+#### Uninstalling non-interactively without verbose logging
 
 ```powershell
 msiexec /x "DockerDesktop.msi" /quiet
