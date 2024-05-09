@@ -171,3 +171,5 @@ umask
 ungated
 vSphere
 virtiofs
+displayName
+"docker"
