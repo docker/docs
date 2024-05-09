@@ -64,7 +64,7 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
    {{< /tab >}}
    {{< /tabs >}}
 
-2. Navigate into the `nginx-node-redis-main` directory
+2. Navigate into the `nginx-node-redis-main` directory:
 
     ```console
     $ cd nginx-node-redis-main
