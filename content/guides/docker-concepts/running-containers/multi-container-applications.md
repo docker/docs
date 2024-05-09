@@ -122,7 +122,9 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
     $ docker run -d --name nginx --network sample-app  -p 80:80 nginx
     ```
 
-     > Nginx is typically used as a reverse proxy for web applications, routing traffic to backend servers. In our case, it routes to the Node.js backend containers (web1 or web2)
+     > **Note**
+     >
+     > Nginx is typically used as a reverse proxy for web applications, routing traffic to backend servers. In this case, it routes to the Node.js backend containers (web1 or web2).
 
 
 6.  Verify the containers are up by running the following command:
