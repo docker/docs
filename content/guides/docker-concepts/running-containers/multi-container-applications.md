@@ -21,7 +21,7 @@ While `docker run` is a convenient tool for launching containers, it becomes dif
 - Imagine running several `docker run` commands (frontend, backend, and database) with different configurations for development, testing, and production environments. It's error-prone and time-consuming.
 - Applications often rely on each other. Manually starting containers in a specific order and managing network connections become difficult as the stack expands.
 - Each application needs its `docker run` command, making it difficult to scale individual services. Scaling the entire application means potentially wasting resources on components that don't need a boost.
-- Persisting data for each application requires separate volume mounts or configurations within each docker run command. This creates a scattered data management approach.
+- Persisting data for each application requires separate volume mounts or configurations within each `docker run` command. This creates a scattered data management approach.
 - Setting environment variables for each application through separate docker run commands is tedious and error-prone.
 
 That's where Docker Compose comes to the rescue.
