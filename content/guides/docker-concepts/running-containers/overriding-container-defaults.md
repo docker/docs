@@ -61,7 +61,7 @@ This command limits container memory usage to 512 MB and defines the CPU quota o
 > You can use the `docker stats` command to monitor the real-time resource usage of running containers. This helps you understand whether the allocated resources are sufficient or need adjustment.
 { .tip }
 
-By effectively using these `docker run` flags, you can tailor your containerized application's behaviour to fit your specific requirements!
+By effectively using these `docker run` flags, you can tailor your containerized application's behavior to fit your specific requirements.
 
 ## Try it now
 
