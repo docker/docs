@@ -134,7 +134,7 @@ This is where the `docker run` command shines again. It offers flags like `--mem
 $ docker run -d --memory=”512m” --cpus=”.5” redis
 ```
 
-The `--cpus` flag specifies the CPU quota for the container. Here, it's set to half a CPU core (0.5) whereas the `--memory` flag specifies the memory limit for the container. In this case, it's set to 512 megabytes (512MB).
+The `--cpus` flag specifies the CPU quota for the container. Here, it's set to half a CPU core (0.5) whereas the `--memory` flag specifies the memory limit for the container. In this case, it's set to 512 MB.
 
 ### Override the default `CMD` and `ENTRYPOINT` in Docker Compose
 
