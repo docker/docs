@@ -1181,7 +1181,7 @@ Manuals:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
             title: FAQ
         - path: /desktop/hardened-desktop/air-gapped-containers/
-          title: What is air-gapped containers?
+          title: Air-Gapped Containers
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
