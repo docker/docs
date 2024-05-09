@@ -153,7 +153,7 @@ There are a few methods to remove volumes, including the following:
     $ docker volume rm postgres_data
     ```
 
-3. Use the `docker volume prune` command to remove all unused volumes
+3. Use the `docker volume prune` command to remove all unused volumes:
 
     ```console
     $ docker volume prune
