@@ -145,15 +145,13 @@ $ docker rm -f new-db
 
 There are a few methods to remove volumes, including the following:
 
-1. Select the **Delete Volume** option on a volume in the Docker Dashboard.
-
-2. Use the `docker volume rm` command:
+- Select the **Delete Volume** option on a volume in the Docker Dashboard.
+- Use the `docker volume rm` command:
 
     ```console
     $ docker volume rm postgres_data
     ```
-
-3. Use the `docker volume prune` command to remove all unused volumes:
+- Use the `docker volume prune` command to remove all unused volumes:
 
     ```console
     $ docker volume prune
