@@ -28,7 +28,7 @@ grid:
   description: Set up SCIM to automatically provision and deprovision users in your
     company.
   icon: checklist
-  link: /security/for-admins/scim/
+  link: /security/for-admins/provisioning/scim/
 - title: Domain management
   description: Add and verify your domains.
   icon: domain_verification
