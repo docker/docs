@@ -45,6 +45,7 @@
       "For-Mac-with-Apple-silicon",
       "For-Mac-with-Intel-chip",
       "For-all-platforms",
+      "GUI",
       "Git-Bash",
       "Git-Bash-CLI",
       "GitHub-Actions",
