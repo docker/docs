@@ -26,6 +26,7 @@ Docker Scout uses the following package repositories and security trackers:
 - [Bitnami Vulnerability Database](https://github.com/bitnami/vulndb)
 - [CISA Known Exploited Vulnerability
   Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)
+- [CISA Vulnrichment](https://github.com/cisagov/vulnrichment)
 - [Debian Security Bug Tracker](https://security-tracker.debian.org/tracker/)
 - [Exploit Prediction Scoring System (EPSS)](https://api.first.org/epss/)
 - [GitHub Advisory Database](https://github.com/advisories/)
