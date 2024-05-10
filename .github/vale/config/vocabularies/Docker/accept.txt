@@ -170,3 +170,5 @@ umask
 ungated
 vSphere
 virtiofs
+Entra
+displayName
