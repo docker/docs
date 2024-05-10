@@ -79,7 +79,7 @@ Additionally, you can use the [Docker Hub API](/docker-hub/api/latest/) to compl
 
 If a user attempts to sign in to Docker using an email address that is a verified domain for your SSO connection, they need to be a member of the organization to access it, or have a pending invitation to the organization. Users who don't meet these criteria will encounter an `Access denied` error, and will need an administrator to invite them to the organization.
 
-See [SSO authentication with JIT provisioning disabled](/security/for-admins/provisioning/group-mapping/#sso-authentication-with-jit-provisioning-disabled).
+See [SSO authentication with JIT provisioning disabled](/security/for-admins/provisioning/just-in-time/#sso-authentication-with-jit-provisioning-disabled).
 
 To auto-provision users without JIT provisioning, you can use [SCIM](/security/for-admins/provisioning/scim/).
 
