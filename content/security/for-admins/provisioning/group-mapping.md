@@ -30,9 +30,9 @@ Once you enable group mappings in your connection, users assigned to that group 
 
 You can use this format to add a user to multiple organizations. For example, if you want to add a user to the "backend" team in the "moby" organization as well as the "desktop" team in the "whale" organization, the format would be: `moby:backend` and `whale:desktop`.
 
->**Tip**
+> **Tip**
 >
->Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, this creates a group if it doesn’t already exist.
+> Use the same names for the Docker teams as your group names in the IdP to prevent further configuration. When you sync groups, this creates a group if it doesn’t already exist.
 { .tip}
 
 The following lists the supported group mapping attributes:
@@ -175,7 +175,7 @@ Once complete, a user who signs in to Docker through SSO is automatically added 
 
 ## More resources
 
-The following videos demonstrate how to use group mapping with your IdP.
+The following videos demonstrate how to use group mapping with your IdP with SCIM enabled.
 
 - [Video: Group mapping with Okta](https://youtu.be/c56YECO4YP4?feature=shared&t=3023)
 - [Video: Attribute and group mapping with Entra ID (Azure)](https://youtu.be/bGquA8qR9jU?feature=shared&t=2039)
