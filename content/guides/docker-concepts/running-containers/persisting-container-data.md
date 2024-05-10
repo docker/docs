@@ -119,7 +119,7 @@ In this guide, you’ll practice creating and using volumes to persist data crea
 9. Verify the database still has the records by running the following command:
 
     ```console
-    $ docker exec -ti new-db psql -U postgres -c “SELECT * FROM tasks”
+    $ docker exec -ti new-db psql -U postgres -c "SELECT * FROM tasks"
     ```
 
 ### View volume contents
