@@ -44,8 +44,8 @@ The available categories are:
 
 > **Note**
 >
-> Auto-generated categories only apply to Docker Official Images, Docker
-> Verified Publishers, and Docker-Sponsored Open Source program participants.
+> Auto-generated categories only apply to Docker Verified Publishers and
+> Docker-Sponsored Open Source program participants.
 
 For repositories that pre-date the Categories feature in Docker Hub,
 categories have been automatically generated and applied, using OpenAI, based
