@@ -1168,8 +1168,6 @@ Manuals:
             title: What is Settings Management?
           - path: /desktop/hardened-desktop/settings-management/configure/
             title: Configure Settings Management
-          - path: /desktop/hardened-desktop/settings-management/air-gapped-containers/
-            title: Air-gapped containers (Beta)
         - sectiontitle: Enhanced Container Isolation
           section:
           - path: /desktop/hardened-desktop/enhanced-container-isolation/
@@ -1184,6 +1182,8 @@ Manuals:
             title: Limitations
           - path: /desktop/hardened-desktop/enhanced-container-isolation/faq/
             title: FAQ
+        - path: /desktop/hardened-desktop/air-gapped-containers/
+          title: Air-Gapped Containers
     - sectiontitle: Dev Environments (Beta)
       section:
         - path: /desktop/dev-environments/
@@ -1579,6 +1579,8 @@ Manuals:
     section:
     - path: /engine/reference/commandline/cli/
       title: Use the Docker CLI
+    - path: /config/completion/
+      title: Completion
     - path: /config/filter/
       title: Filter commands
     - path: /config/formatting/

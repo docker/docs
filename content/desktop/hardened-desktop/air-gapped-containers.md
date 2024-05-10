@@ -1,12 +1,12 @@
 ---
-description: Learn how to create air-gapped containers with Settings Management
-title: Configure air-gapped containers with Settings Management
-keywords: settings management, air gapped, security, Docker Desktop, configuration, proxy, network
+title: Air-gapped containers
+description: Air-gapped containers - What it is, benefits, and how to configure it.
+keywords: air gapped, security, Docker Desktop, configuration, proxy, network
 ---
 
 > **Beta feature**
 >
-> This feature is in [Beta](../../../release-lifecycle.md/#beta).
+> This feature is in [Beta](../../release-lifecycle.md/#beta).
 > It's available with Docker Desktop version 4.29 and later.
 { .experimental }
 
@@ -25,7 +25,7 @@ You can choose:
 
 ## Configuration
 
-Assuming [enforced sign-in](../../../security/for-admins/configure-sign-in.md) and Settings Management are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
+Assuming [enforced sign-in](../../security/for-admins/configure-sign-in.md) and [Settings Management](settings-management/_index.md) are enabled, add the new proxy configuration to the `admin-settings.json` file. For example:
 
 ```json
 {
@@ -86,4 +86,4 @@ The `FindProxyForURL` can return the following values:
 
 In this particular example, HTTP and HTTPS requests for `internal.corp` are sent via the HTTP proxy `10.0.0.1:3128`. Requests to connect to IPs on the subnet `192.168.0.0/24` connect directly. All other requests are blocked.
 
-To restrict traffic connecting to ports on the developers local machine, [match the special hostname `host.docker.internal`](../../networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
+To restrict traffic connecting to ports on the developers local machine, [match the special hostname `host.docker.internal`](../networking.md#i-want-to-connect-from-a-container-to-a-service-on-the-host).
