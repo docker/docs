@@ -157,24 +157,24 @@ The following `admin-settings.json` code and table provides an example of the re
       "path":"$TMP",
       "sharedByDefault": false
     }
-  ], 
+  ],
   "useVirtualizationFrameworkVirtioFS": {
     "locked": true,
-    "value": true 
+    "value": true
   },
   "useVirtualizationFrameworkRosetta": {
     "locked": true,
-    "value": true 
+    "value": true
   },
   "useGrpcfuse": {
     "locked": true,
-    "value": true 
+    "value": true
   },
   "displayedOnboarding": {
     "locked": true,
-    "value": true 
+    "value": true
   }
-} 
+}
 ```
 
 | Parameter                        |   | Description                      |
@@ -183,7 +183,7 @@ The following `admin-settings.json` code and table provides an example of the re
 | `exposeDockerAPIOnTCP2375` | Windows only| Exposes the Docker API on a specified port. If `value` is set to true, the Docker API is exposed on port 2375. Note: This is unauthenticated and should only be enabled if protected by suitable firewall rules.|
 | `proxy` |   |If `mode` is set to `system` instead of `manual`, Docker Desktop gets the proxy values from the system and ignores and values set for `http`, `https` and `exclude`. Change `mode` to `manual` to manually configure proxy servers. If the proxy port is custom, specify it in the `http` or `https` property, for example `"https": "http://myotherproxy.com:4321"`. The `exclude` property specifies a comma-separated list of hosts and domains to bypass the proxy. |
 | &nbsp; &nbsp; &nbsp; &nbsp;`windowsDockerdPort`  | Windows only | Exposes Docker Desktop's internal proxy locally on this port for the Windows Docker daemon to connect to. If it is set to 0, a random free port is chosen. If the value is greater than 0, use that exact value for the port. The default value is -1 which disables the option. Note: This is available for Windows containers only. |
-| `containersProxy` (Beta) | | Allows you to create air-gapped containers. For more information see [Configure air-gapped containers with Settings Management](air-gapped-containers.md).|
+| `containersProxy` (Beta) | | Allows you to create air-gapped containers. For more information see [Air-gapped containers](../air-gapped-containers.md).|
 | `enhancedContainerIsolation`  |  | If `value` is set to true, Docker Desktop runs all containers as unprivileged, via the Linux user-namespace, prevents them from modifying sensitive configurations inside the Docker Desktop VM, and uses other advanced techniques to isolate them. For more information, see [Enhanced Container Isolation](../enhanced-container-isolation/index.md).|
 | &nbsp; &nbsp; &nbsp; &nbsp;`dockerSocketMount` |  | By default, enhanced container isolation blocks bind-mounting the Docker Engine socket into containers (e.g., `docker run -v /var/run/docker.sock:/var/run/docker.sock ...`). This allows admins to relax this in a controlled way. See [ECI Configuration](../enhanced-container-isolation/config.md) for more info. |
 | &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `imageList` |  | Indicates which container images are allowed to bind-mount the Docker Engine socket. |
