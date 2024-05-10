@@ -160,7 +160,7 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
     >
     > You might have noticed that Nginx, acting as a reverse proxy, likely distributes incoming requests in a round-robin fashion between the two backend containers. This means each request might be directed to a different container (web1 and web2) on a rotating basis. The output shows consecutive increments for both the web1 and web2 containers and the actual counter value stored in Redis is updated only after the response is sent back to the client.
 
-9. You can use the Docker Dashboard to remove the containers by selecting the containers and selecting the **Delete** button
+9. You can use the Docker Dashboard to remove the containers by selecting the containers and selecting the **Delete** button.
 
    ![A screenshot of Docker Dashboard showing how to delete the multi-container applications](images/delete-multi-container-apps.webp?border=true)
  
