@@ -4,7 +4,7 @@ keywords: user provisioning, just-in-time provisioning, JIT, autoprovision, Dock
 title: Just-in-Time provisioning
 ---
 
-Just-in-Time (JIT) provisioning runs after every successful SSO sign-in. JIT verifies that the user that signs in is a member of the organization and teams that they are assigned to in the IdP. When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.
+Just-in-Time (JIT) provisioning runs after every successful single sign-on (SSO) sign-in. JIT verifies that the user that signs in is a member of the organization and teams that they are assigned to in the IdP. When you [create your SSO connection](../single-sign-on/_index.md), JIT provisioning is turned on by default.
 
 ## SSO authentication with JIT provisioning enabled
 

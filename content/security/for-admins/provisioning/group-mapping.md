@@ -9,7 +9,7 @@ aliases:
 - /security/for-admins/group-mapping/
 ---
 
-With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams.
+With directory group-to-team provisioning from your IdP, user updates will automatically sync with your Docker organizations and teams. You can use group mapping once you have configured [single sign-on (SSO)](../single-sign-on/_index.md).
 
 > **Tip**
 >
