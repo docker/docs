@@ -114,7 +114,7 @@ Follow the steps to see how to connect a Redis container to a custom network.
 3. Connect Redis to the existing network by using the following command:
 
     ```console
-    $ docker run -d -p 6381:6379 –network mynetwork redis
+    $ docker run -d -p 6381:6379 --network mynetwork redis
     ```
 
     This will start Redis container in the background, mapped to the host port 6381 and attached to the `mynetwork` network. You passed the `--network` parameter to override the container default by connecting the container to custom Docker network for better isolation and communication with other containers.
