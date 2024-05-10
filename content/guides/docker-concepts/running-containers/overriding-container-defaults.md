@@ -131,7 +131,7 @@ By default, containers are not limited in their resource usage. However, on shar
 This is where the `docker run` command shines again. It offers flags like `--memory` and `--cpus` to restrict how much CPU and memory a container can use.
 
 ```console
-$ docker run -d --memory=”512m” --cpus=”.5” redis
+$ docker run -d --memory="512m" --cpus=".5" redis
 ```
 
 The `--cpus` flag specifies the CPU quota for the container. Here, it's set to half a CPU core (0.5) whereas the `--memory` flag specifies the memory limit for the container. In this case, it's set to 512 MB.
