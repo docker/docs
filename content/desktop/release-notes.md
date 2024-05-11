@@ -61,7 +61,7 @@ For frequently asked questions about Docker Desktop releases, see [FAQs](faqs/re
 
 - Improved Enhanced Container Isolation (ECI) security when running `docker build` commands in rootless containers.
 - Fixed a bug where `docker events` exited with `Unexpected EOF` when Docker Desktop entered/exited Resource Saver mode.
-- Fixed a bug where `docker stats --no-stream` hanged when Docker Desktop was in Resource Saver mode.
+- Fixed a bug where `docker stats --no-stream` hung when Docker Desktop was in Resource Saver mode.
 - Fixed a bug in the self-diagnose CLI that incorrectly showed the VM had not started. Fixes [docker/for-mac#7241](https://github.com/docker/for-mac/issues/7241).
 - Fixed a bug where high-throughput port forward transfers could stall. Fixes [docker/for-mac#7207](https://github.com/docker/for-mac/issues/7207).
 - Fixed CLI-plugin symlinks not being removed when CLI apps were removed.
@@ -122,7 +122,7 @@ This can be resolved by adding the user to the **docker-users** group. Before st
 - Compose supports [Synchronized file shares (experimental)](synchronized-file-sharing.md).
 - New [interactive Compose CLI (experimental)](../compose/environment-variables/envvars.md#compose_menu).
 - Beta release of:
-  - Air-gapped containers with [Settings Management](hardened-desktop/air-gapped-containers/_index.md).
+  - Air-Gapped Containers with [Settings Management](hardened-desktop/air-gapped-containers/_index.md).
   - [Host networking](../network/drivers/host.md#docker-desktop) in Docker Desktop.
   - [Docker Debug](use-desktop/container.md#integrated-terminal) for running containers.
   - [Volumes Backup & Share extension](use-desktop/volumes.md) functionality available in the **Volumes** tab.
