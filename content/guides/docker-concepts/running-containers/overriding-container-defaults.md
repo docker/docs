@@ -12,8 +12,6 @@ When a Docker container starts, it executes an application or command. The conta
 
 For example, if you have an existing database container that listens on the standard port and you want to run a new instance of the same database container, then you might want to change the port settings the new container listens on so that it doesn’t conflict with the existing container. Sometimes you might want to increase the memory available to the container if the program needs more resources to handle a heavy workload or set the environment variables to provide specific configuration details the program needs to function properly.
 
-Now you might ask, "How can I override these container defaults?" The answer is `docker run` command.
-
 The `docker run` command offers a powerful way to override these defaults and tailor the container's behavior to your liking. The command offers several flags that let you to customize container behavior on the fly.
 
 Here's a few ways you can achieve this.
