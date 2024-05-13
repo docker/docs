@@ -13,7 +13,7 @@
 <meta name="description" content="{{ $description }}" />
 <meta
   name="keywords"
-  content="{{- partial "utils/keywords.html" . -}}"
+  content="{{- delimit (partialCached "utils/keywords.html" . .) ", " -}}"
 />
 <link rel="canonical" href="{{ .Permalink }}" />
 
