@@ -198,15 +198,13 @@ the `my-nginx` container from the `my-net` network.
 $ docker network disconnect my-net my-nginx
 ```
 
-## Use IPv6
+## Use IPv6 in a user-defined bridge network
 
-If you need IPv6 support for Docker containers, you need to
-[enable the option](../../config/daemon/ipv6.md) on the Docker daemon and reload its
-configuration, before creating any IPv6 networks or assigning containers IPv6
-addresses.
+When you create your network, you can specify the `--ipv6` flag to enable IPv6.
 
-When you create your network, you can specify the `--ipv6` flag to enable
-IPv6. You can't selectively disable IPv6 support on the default `bridge` network.
+```console
+$ docker network create --ipv6 --subnet 2001:db8:1234::/64 my-net
+```
 
 ## Use the default bridge network
 
@@ -232,10 +230,8 @@ the settings you need to customize.
 {
   "bip": "192.168.1.1/24",
   "fixed-cidr": "192.168.1.0/25",
-  "fixed-cidr-v6": "2001:db8::/64",
   "mtu": 1500,
   "default-gateway": "192.168.1.254",
-  "default-gateway-v6": "2001:db8:abcd::89",
   "dns": ["10.20.1.2","10.20.1.3"]
 }
 ```
@@ -244,9 +240,28 @@ Restart Docker for the changes to take effect.
 
 ### Use IPv6 with the default bridge network
 
-If you configure Docker for IPv6 support (see [Use IPv6](#use-ipv6)), the
-default bridge network is also configured for IPv6 automatically. Unlike
-user-defined bridges, you can't selectively disable IPv6 on the default bridge.
+IPv6 can be enabled for the default bridge using the following options in
+`daemon.json`, or their command line equivalents.
+
+These three options only affect the default bridge, they are not used by
+user-defined networks. The addresses in below are examples from the
+IPv6 documentation range.
+
+- Option `ipv6` is required
+- Option `fixed-cidr-v6` is required, it specifies the network prefix to be used.
+  - The prefix should normally be `/64` or shorter.
+  - For experimentation on a local network, it is better to use a Unique Local
+    prefix (matching `fd00::/8`) than a Link Local prefix (matching `fe80::/10`).
+- Option `default-gateway-v6` is optional. If unspecified, the default is the first
+  address in the `fixed-cidr-v6` subnet.
+
+```json
+{
+  "ipv6": true,
+  "fixed-cidr-v6": "2001:db8::/64",
+  "default-gateway-v6": "2001:db8:abcd::89"
+}
+```
 
 ## Connection limit for bridge networks
 

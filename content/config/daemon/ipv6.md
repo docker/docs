@@ -6,61 +6,26 @@ aliases:
 - /engine/userguide/networking/default_network/ipv6/
 ---
 
-Before you can use IPv6 in Docker containers, you need to
-enable IPv6 support in the Docker daemon. Afterward, you can choose to use
-either IPv4 or IPv6 (or both) with any container or network.
-
 IPv6 is only supported on Docker daemons running on Linux hosts.
-
-> **Note**
->
-> When using IPv6, we recommend that you enable the
-> [experimental](../../release-lifecycle.md#experimental)
-> `ip6tables` parameter in the daemon configuration.
 
 ## Create an IPv6 network
 
-The following steps show you how to create a Docker network that uses IPv6.
+- Using `docker network create`:
 
-1. Edit the Docker daemon configuration file,
-   located at `/etc/docker/daemon.json`. Configure the following parameters:
+  ```console
+  $ docker network create --ipv6 --subnet 2001:db8::/64 ip6net
+  ```
 
-   ```json
-   {
-     "experimental": true,
-     "ip6tables": true
-   }
-   ```
+- Using a Docker Compose file:
 
-   `ip6tables` enables additional IPv6 packet filter rules, providing network
-   isolation and port mapping. This parameter requires `experimental` to be
-   set to `true`.
-
-2. Save the configuration file.
-3. Restart the Docker daemon for your changes to take effect.
-
-   ```console
-   $ sudo systemctl restart docker
-   ```
-
-4. Create a new IPv6 network.
-
-   - Using `docker network create`:
-
-     ```console
-     $ docker network create --ipv6 --subnet 2001:0DB8::/112 ip6net
-     ```
-
-   - Using a Docker Compose file:
-
-     ```yaml
-      networks:
-        ip6net:
-          enable_ipv6: true
-          ipam:
-            config:
-              - subnet: 2001:0DB8::/112
-     ```
+  ```yaml
+   networks:
+     ip6net:
+       enable_ipv6: true
+       ipam:
+         config:
+           - subnet: 2001:db8::/64
+  ```
 
 You can now run containers that attach to the `ip6net` network.
 
@@ -96,9 +61,7 @@ The following steps show you how to use IPv6 on the default bridge network.
    ```json
    {
      "ipv6": true,
-     "fixed-cidr-v6": "2001:db8:1::/64",
-     "experimental": true,
-     "ip6tables": true
+     "fixed-cidr-v6": "2001:db8:1::/64"
    }
    ```
 
@@ -106,8 +69,7 @@ The following steps show you how to use IPv6 on the default bridge network.
    - `fixed-cidr-v6` assigns a subnet to the default bridge network,
      enabling dynamic IPv6 address allocation.
    - `ip6tables` enables additional IPv6 packet filter rules, providing network
-     isolation and port mapping. This parameter requires `experimental` to be
-     set to `true`.
+     isolation and port mapping. It is enabled by-default, but can be disabled.
 
 2. Save the configuration file.
 3. Restart the Docker daemon for your changes to take effect.
