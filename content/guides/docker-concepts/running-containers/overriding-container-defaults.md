@@ -21,7 +21,7 @@ Here's a few ways you can achieve this.
 Sometimes you might want to use separate database instances for development and testing purposes. Running these database instances on the same port might conflict. You can use the `-p` option in `docker run` to map container ports to host ports, allowing you to run the multiple instances of the container without any conflict.
 
 ```console
-$ docker run -d -p HOST_PORT:CONTAINER_PORT my_image
+$ docker run -d -p HOST_PORT:CONTAINER_PORT postgres
 ```
 
 ### Setting environment variables
@@ -29,7 +29,7 @@ $ docker run -d -p HOST_PORT:CONTAINER_PORT my_image
 This option sets an environment variable `foo` inside the container with the value `bar`.
 
 ```console
-$ docker run -e foo=bar my_image env
+$ docker run -e foo=bar postgres env
 ```
 
 You will see output like the following:
@@ -49,7 +49,7 @@ foo=bar
 You can use the `--memory` and `--cpus` flags with the `docker run` command to restrict how much CPU and memory a container can use. For example, you can set a memory limit for the Python API container, preventing it from consuming excessive resources on your host. Here's the command:
 
 ```console
-$ docker run --memory="512m" --cpus="0.5" my_image
+$ docker run -e POSTGRES_PASSWORD=mysecretpassword --memory="512m" --cpus="0.5" postgres
  ```
 
 This command limits container memory usage to 512 MB and defines the CPU quota of 0.5 for half a core.
