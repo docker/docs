@@ -169,14 +169,6 @@ and sign in using the credentials defined in the Docker Compose file (username: 
 
 The dashboards are pre-configured to visualize the vulnerability and policy metrics scraped by Prometheus.
 
-### Revoke an access token
-
-If you suspect that your PAT has been compromised or is no longer needed, you can revoke it at any time.
-To revoke a PAT, follow the steps in the [Create and manage access tokens](/security/for-developers/access-tokens/#modify-existing-tokens).
-
-Revoking a PAT immediately invalidates the token, and prevents Prometheus from scraping metrics using that token.
-You will need to create a new PAT and update the Prometheus configuration to use the new token.
-
 ## Datadog
 
 This section describes how to scrape the metrics endpoint using Datadog.
@@ -350,3 +342,11 @@ To change the scrape interval:
   file at the global or job level.
 - Datadog: set the `min_collection_interval` property in the Datadog agent
   configuration file, see [Datadog documentation](https://docs.datadoghq.com/developers/custom_checks/write_agent_check/#updating-the-collection-interval).
+
+## Revoke an access token
+
+If you suspect that your PAT has been compromised or is no longer needed, you can revoke it at any time.
+To revoke a PAT, follow the steps in the [Create and manage access tokens](/security/for-developers/access-tokens/#modify-existing-tokens).
+
+Revoking a PAT immediately invalidates the token, and prevents Prometheus from scraping metrics using that token.
+You will need to create a new PAT and update the Prometheus configuration to use the new token.
