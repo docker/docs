@@ -57,7 +57,7 @@ To remove a user:
 
 > **Beta feature**
 >
-> Optional Just-in-Time (JIT) provisioning is available in Beta when you use the Admin Console and SCIM is enabled. With this feature, you have the option to disable JIT provisioning. See [SSO authentication with JIT provisioning disabled](/security/for-admins/group-mapping/#sso-authentication-with-jit-provisioning-disabled).
+> Optional Just-in-Time (JIT) provisioning is available in [beta](/release-lifecycle/#beta) when you use the Admin Console and SCIM is enabled. With this feature, you have the option to disable JIT provisioning. See [SSO authentication with JIT provisioning disabled](/security/for-admins/group-mapping/#sso-authentication-with-jit-provisioning-disabled).
 { .experimental }
 
 {{ $provisioning_steps }}
