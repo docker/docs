@@ -17,7 +17,7 @@ That’s where port publishing comes in.
 Publishing a port provides the ability to break through a little bit of networking isolation by setting up a forwarding rule. As an example, you can indicate that requests on your host’s port `8080` should be forwarded to the container’s port `80`. Publishing ports happens during container creation using the `-p` (or `--publish`) flag with `docker run`. The syntax is:
 
 ```console
-docker run -p HOST_PORT:CONTAINER_PORT my-image
+docker run -d -p HOST_PORT:CONTAINER_PORT nginx
 ```
 
 - `HOST_PORT`: The port number on your host machine where you want to receive traffic
@@ -26,7 +26,7 @@ docker run -p HOST_PORT:CONTAINER_PORT my-image
 For example, to publish the container's port `80` to host port `8080`:
 
 ```console
-docker run -p 8080:80 my-image
+docker run -d -p 8080:80 nginx
 ```
 
 Now, any traffic sent to port `8080` on your host machine will be forwarded to port `80` within the container.

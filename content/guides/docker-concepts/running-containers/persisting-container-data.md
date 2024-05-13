@@ -19,7 +19,7 @@ Volumes are a storage mechanism that provide the ability to persist data beyond 
 As an example, imagine you create a volume named `log-data`. When starting a container with the following command, the volume will be mounted (or attached) into the container at `/logs`:
 
 ```console
-$ docker run -v log-data:/logs my-image
+$ docker run -d -p 80:80 -v log-data:/logs nginx
 ```
 
 When the container runs, all files it writes into the `/logs` folder will be saved in this volume, outside of the container. If you delete the container and start a new container using the same volume, the files will still be there.
@@ -43,7 +43,7 @@ Volumes have their own lifecycle beyond that of containers and can grow quite la
 > While you can use the `docker volume create` command to create a volume, Docker will automatically create a volume when needed. For example, the following command will auto-create a volume named `sample-volume` if it doesn’t exist:
 >
 > ```console
-> $ docker run -v sample-volume:/data my-image
+> $ docker run -d -p 80:80 -v sample-volume:/data nginx
 > ```
 
 
