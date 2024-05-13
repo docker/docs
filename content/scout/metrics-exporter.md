@@ -163,7 +163,9 @@ Prometheus UI at <http://localhost:9090/targets>.
 To view the Grafana dashboards, go to <http://localhost:3000/dashboards>,
 and sign in using the credentials defined in the Docker Compose file (username: `admin`, password: `grafana`).
 
-![Policy dashboard in Grafana](./images/scout-metrics-grafana.png "Policy dashboard in Grafana")
+![Vulnerability dashboard in Grafana](./images/scout-metrics-grafana-vulns.png "Vulnerability dashboard in Grafana")
+
+![Policy dashboard in Grafana](images/scout-metrics-grafana-policy.png "Policy dashboard in Grafana")
 
 The dashboards are pre-configured to visualize the vulnerability and policy metrics scraped by Prometheus.
 
