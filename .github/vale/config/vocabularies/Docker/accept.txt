@@ -165,6 +165,7 @@ stdin
 stdout
 subnet
 systemd
+tmpfs
 ufw
 umask
 ungated

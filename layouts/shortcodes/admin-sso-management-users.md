@@ -14,14 +14,12 @@
   {{ $member_navigation = `Navigate to the user management page for your organization or company. 
     - Organization: Select your organization in the left navigation drop-down menu, and then select **Members**.
     - Company: Select your company in the left navigation drop-down menu, and then select **Users**.` }}
-  {{ $remove_button = "**Remove member**, if you're an organization, or **Remove user**, is you're a company" }}
-  {{ $provisioning_steps = `To choose how your users are provisioned:
+  {{ $remove_button = "**Remove member**, if you're an organization, or **Remove user**, if you're a company" }}
+  {{ $provisioning_steps = `Users are provisioned with JIT provisioning by default. If you enable SCIM, you can disable JIT:
   1. Sign in to the [Admin Console](https://admin.docker.com).
   2. Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM**.
-  3. In the SSO connections table, select the **Action** icon and then **Edit connection**.
-  4. Select **Next** to navigate to the section where you can choose how to provision users. 
-  5. Choose to enable or disable Just-in-Time (JIT) provisioning (default).
-  6. Follow the on-screen instructions to save your configuration.` }}
+  3. In the SSO connections table, select the **Action** icon and then **Disable JIT provisioning**.
+  4. Select **Disable** to confirm.` }}
 {{ end }}
 
 > **Important**
