@@ -49,7 +49,7 @@ foo=bar
 You can use the `--memory` and `--cpus` flags with the `docker run` command to restrict how much CPU and memory a container can use. For example, you can set a memory limit for the Python API container, preventing it from consuming excessive resources on your host. Here's the command:
 
 ```console
-$ docker run -e POSTGRES_PASSWORD=mysecretpassword --memory="512m" --cpus="0.5" postgres
+$ docker run -e POSTGRES_PASSWORD=secret --memory="512m" --cpus="0.5" postgres
  ```
 
 This command limits container memory usage to 512 MB and defines the CPU quota of 0.5 for half a core.
@@ -67,35 +67,35 @@ In this hands-on guide, you'll see how to use the `docker run` command to overri
 
 1. [Download and install](/get-docker/) Docker Desktop.
 
-### Run the multiple instance of Redis database
+### Run multiple instance of the Postgres database
 
-1.  Start a container using the [Redis image](https://hub.docker.com/_/redis) with the following command:
+1.  Start a container using the [Postgres image](https://hub.docker.com/_/postgres) with the following command:
     
     ```console
-    $ docker run -d -p 6379:6379 redis
+    $ docker run -d -e POSTGRES_PASSWORD=secret -p 5432:5432 postgres
     ```
 
-    This will start the Redis database in the background, listening on the standard container port `6379` and mapped to port `6379` on the host machine.
+    This will start the Postgres database in the background, listening on the standard container port `5432` and mapped to port `5432` on the host machine.
 
-2. Start a new Redis container mapped to the different port
+2. Start a new Postgres container mapped to a different port. 
 
     ```console
-    $ docker run -d -p 6380:6379 redis
+    $ docker run -d -e POSTGRES_PASSWORD=secret -p 5433:5432 postgres
     ```
 
-    This will start a new Redis container in the background, listening on the standard container port `6379` but mapped to port `6380` on the host machine. You override the host port just to ensure that this new container doesn't conflict with the existing running container.
+    This will start a new Postgres container in the background, listening on the standard container port `5432` but mapped to port `5433` on the host machine. You override the host port just to ensure that this new container doesn't conflict with the existing running container.
 
 3. Verify if both containers are running via the Docker Dashboard.
 
-    ![A screenshot of Docker Dashboard showing the running instances of Redis containers](images/running-redis-containers.webp?border=true)
+    ![A screenshot of Docker Dashboard showing the running instances of Postgres containers](images/running-postgres-containers.webp?border=true)
 
-### Run Redis container in a controlled network
+### Run Postgres container in a controlled network
 
 By default, containers automatically connect to a special network called a bridge network when you run them. This bridge network acts like a virtual bridge, allowing containers on the same host to communicate with each other while keeping them isolated from the outside world and other hosts. It's a convenient starting point for most container interactions. However, for specific scenarios, you might want more control over the network configuration.
 
 Here's where the `--network` flag with the `docker run` command comes in.
 
-Follow the steps to see how to connect a Redis container to a custom network.
+Follow the steps to see how to connect a Postgres container to a custom network.
 
 1. Create a network by using the following command:
 
@@ -109,13 +109,13 @@ Follow the steps to see how to connect a Redis container to a custom network.
     $ docker network ls
     ```
 
-3. Connect Redis to the existing network by using the following command:
+3. Connect Postgres to the existing network by using the following command:
 
     ```console
-    $ docker run -d -p 6381:6379 --network mynetwork redis
+    $ docker run -d -e POSTGRES_PASSWORD=secret -p 5434:5432 --network mynetwork postgres
     ```
 
-    This will start Redis container in the background, mapped to the host port 6381 and attached to the `mynetwork` network. You passed the `--network` parameter to override the container default by connecting the container to custom Docker network for better isolation and communication with other containers.
+    This will start Postgres container in the background, mapped to the host port 5434 and attached to the `mynetwork` network. You passed the `--network` parameter to override the container default by connecting the container to custom Docker network for better isolation and communication with other containers.
 
     > **Inspecting the container network**
     >
@@ -129,7 +129,7 @@ By default, containers are not limited in their resource usage. However, on shar
 This is where the `docker run` command shines again. It offers flags like `--memory` and `--cpus` to restrict how much CPU and memory a container can use.
 
 ```console
-$ docker run -d --memory="512m" --cpus=".5" redis
+$ docker run -d -e POSTGRES_PASSWORD=secret --memory="512m" --cpus=".5" postgres
 ```
 
 The `--cpus` flag specifies the CPU quota for the container. Here, it's set to half a CPU core (0.5) whereas the `--memory` flag specifies the memory limit for the container. In this case, it's set to 512 MB.
@@ -138,17 +138,20 @@ The `--cpus` flag specifies the CPU quota for the container. Here, it's set to h
 
 Sometimes, you might need to override the default commands (`CMD`) or entry points (`ENTRYPOINT`) defined in a Docker image, especially when using Docker Compose.
 
-1. Create a `compose.yaml` file with the following content:
+1. Create a `compose.yml` file with the following content:
 
     ```yaml
     services:
-        redis:
-         image: redis
-         entrypoint: ["docker-entrypoint.sh"]
-         command: ["redis-server", "--requirepass", "redispassword"]
+      postgres:
+        image: postgres
+        entrypoint: ["docker-entrypoint.sh", "postgres"]
+        command: ["-h", "localhost", "-p", "5432"]
+        environment:
+          POSTGRES_PASSWORD: secret 
     ```
 
-    The Compose file defines a service named `redis` that uses the official Redis image, sets an entrypoint script, and starts the container with password authentication.
+
+    The Compose file defines a service named `postgres` that uses the official Postgres image, sets an entrypoint script, and starts the container with password authentication.
 
 2. Bring up the service by running the following command:
 
@@ -156,13 +159,20 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
     $ docker compose up -d
     ```
 
-    This command starts the Redis service defined in the Docker Compose file.
+    This command starts the Postgres service defined in the Docker Compose file.
 
 3. Verify the authentication with Docker Dashboard.
 
-    Open the Docker Dashboard, select the **Redis** container and select **Exec** to enter into the container shell.
+    Open the Docker Dashboard, select the **Postgres** container and select **Exec** to enter into the container shell.
 
-    ![A screenshot of the Docker Dashboard selecting the Redis container and entering into its shell using EXEC button](images/exec-into-redis-container.webp?border=true) 
+    ![A screenshot of the Docker Dashboard selecting the Postgres container and entering into its shell using EXEC button](images/exec-into-postgres-container.webp?border=true)
+
+
+    > **Note**
+    > 
+    > The PostgreSQL image sets up trust authentication locally so you may notice a password is not required when connecting from localhost (inside the same container). However, a password will be required if connecting from a different host/container.
+
+
 
 ## Additional resources
 
