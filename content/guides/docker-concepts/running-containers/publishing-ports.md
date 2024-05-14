@@ -91,7 +91,8 @@ In this step, you will run a container and publish its port using the Docker CLI
 
 4. Open the website by either selecting the link in the **Port(s)** column of your container or visiting [http://localhost:8080](http://localhost:8080) in your browser.
 
-   ![A screenshot of the landing page of the Nginx web server running in a container](images/access-the-frontend.webp?border=true)
+   ![A screenshot of the landing page of the Nginx web server running in a container](/guides/docker-concepts/the-basics/images/access-the-frontend.webp?border=true)
+
 
 ### Use Docker Compose
 
