@@ -2,6 +2,7 @@ A?GPLv3
 APIs?
 ARM
 AWS
+Admin Console
 Amazon
 Ambassador
 Anchore
@@ -89,6 +90,7 @@ RPM
 S3
 SARIF
 SBOMs?
+SCIM
 SDKs?
 SLES
 SLSA
@@ -165,6 +167,7 @@ stdin
 stdout
 subnet
 systemd
+tmpfs
 ufw
 umask
 ungated

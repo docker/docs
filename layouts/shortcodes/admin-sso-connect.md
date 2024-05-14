@@ -2,19 +2,15 @@
 {{ $sso_navigation := `Navigate to the SSO settings page for your organization or company.
    - Organization: Select **Organizations**, your organization, **Settings**, and then **Security**.
    - Company: Select **Organizations**, your company, and then **Settings**.` }}
-{{ $provisioning_step := "4. Review your summary and select **Create Connection**." }}
 
 {{ if eq (.Get "product") "admin" }}
   {{ $product_link = "the [Admin Console](https://admin.docker.com)" }}
   {{ $sso_navigation = "Select your organization or company in the left navigation drop-down menu, and then select **SSO & SCIM.**" }}
-  {{ $provisioning_step = `
-3. **Beta feature** - Choose how you want to provision users by enabling Just-in-Time (JIT) provisioning (default), or disabling JIT provisioning.
-4. Review your summary and select **Create Connection**.` }}
 {{ end }}
 
 1. In {{ $product_link }}, select the verified domains you want to apply the connection to.
 2. To provision your users, select the organization(s) and/or team(s).
-{{ $provisioning_step }}
+3. Review your summary and select **Create Connection**.
 
 ## Test your SSO configuration
 

@@ -71,31 +71,6 @@ WARNING: No output specified with docker-container driver. Build result will onl
 ...
 ```
 
-## Loading to local image store
-
-Unlike when using the default `docker` driver, images built with the
-`docker-container` driver must be explicitly loaded into the local image store.
-Use the `--load` flag:
-
-```console
-$ docker buildx build --load -t <image> --builder=container .
-...
- => exporting to oci image format                                                                                                      7.7s
- => => exporting layers                                                                                                                4.9s
- => => exporting manifest sha256:4e4ca161fa338be2c303445411900ebbc5fc086153a0b846ac12996960b479d3                                      0.0s
- => => exporting config sha256:adf3eec768a14b6e183a1010cb96d91155a82fd722a1091440c88f3747f1f53f                                        0.0s
- => => sending tarball                                                                                                                 2.8s
- => importing to docker
-```
-
-The image becomes available in the image store when the build finishes:
-
-```console
-$ docker image ls
-REPOSITORY                       TAG               IMAGE ID       CREATED             SIZE
-<image>                          latest            adf3eec768a1   2 minutes ago       197MB
-```
-
 ## Cache persistence
 
 The `docker-container` driver supports cache persistence, as it stores all the

@@ -15,7 +15,15 @@ async function initializeIndex() {
     keys: [
       { name: "title", weight: 2 },
       { name: "description", weight: 1 },
-      { name: "keywords", weight: 1 },
+      {
+        name: "keywords",
+        weight: 1,
+        getFn: (page) => {
+          return Array.isArray(page.keywords)
+            ? page.keywords.join(" ")
+            : page.keywords;
+        },
+      },
       { name: "tags", weight: 1 },
     ],
     minMatchCharLength: 1,

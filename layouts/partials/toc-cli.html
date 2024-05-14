@@ -13,7 +13,7 @@
           {{ else }}
             href="#{{ $text | anchorize }}"
           {{ end }}
-          >{{ plainify $text }}</a>
+          >{{ markdownify $text }}</a>
       </li>
     {{ end }}
   </ul>

@@ -103,20 +103,22 @@ arbitrary containers.
 
 For this reason, the REST API endpoint (used by the Docker CLI to
 communicate with the Docker daemon) changed in Docker 0.5.2, and now
-uses a UNIX socket instead of a TCP socket bound on 127.0.0.1 (the
+uses a Unix socket instead of a TCP socket bound on 127.0.0.1 (the
 latter being prone to cross-site request forgery attacks if you happen to run
 Docker directly on your local machine, outside of a VM). You can then
-use traditional UNIX permission checks to limit access to the control
+use traditional Unix permission checks to limit access to the control
 socket.
 
 You can also expose the REST API over HTTP if you explicitly decide to do so.
-However, if you do that, be aware of the above mentioned security
-implications.
+However, if you do that, be aware of the above mentioned security implications.
 Note that even if you have a firewall to limit accesses to the REST API 
 endpoint from other hosts in the network, the endpoint can be still accessible
 from containers, and it can easily result in the privilege escalation.
 Therefore it is *mandatory* to secure API endpoints with 
 [HTTPS and certificates](protect-access.md).
+Exposing the daemon API over HTTP without TLS is not permitted,
+and such a configuration causes the daemon to fail early on startup, see
+[Unauthenticated TCP connections](../deprecated.md#unauthenticated-tcp-connections).
 It is also recommended to ensure that it is reachable only from a trusted
 network or VPN.
 

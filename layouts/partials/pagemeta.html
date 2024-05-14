@@ -30,7 +30,7 @@
     {{- range . }}
       {{- if and (ge .Level $min) (le .Level $max) }}
         <li>
-          <a class="link lg:no-underline" href="#{{ .ID }}">{{ .Title }}</a>
+          <a class="link lg:no-underline" href="#{{ .ID }}">{{ markdownify .Title }}</a>
         </li>
       {{- end }}
       {{- with .Headings }}
