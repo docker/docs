@@ -45,7 +45,7 @@ After every successful SSO sign-in authentication, the JIT provisioner performs 
 
 > **Beta feature**
 >
-> Optional Just-in-Time (JIT) provisioning is available in Private Beta when you use the Admin Console. If you're participating in this program, you have the option to turn off this default provisioning and disable JIT. This configuration is recommended if you're using SCIM to auto-provision users.
+> Optional Just-in-Time (JIT) provisioning is available in [beta](/release-lifecycle/#beta) when you use the Admin Console and enable SCIM. With this feature, you have the option to disable JIT provisioning.
 { .experimental }
 
 When you opt to disable JIT provisioning in your SSO connection, the following actions occur:
