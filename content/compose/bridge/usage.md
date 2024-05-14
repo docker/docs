@@ -6,21 +6,21 @@ keywords: compose, bridge, kubernetes
 
 {{< include "compose-bridge-early-access.md" >}}
 
-Compose Bridge supplies an out-of-the box transformation for you Compose configuration file. Based on an arbitrary `compose.yaml` project, Compose Bridge produces:
+Compose Bridge supplies an out-of-the box transformation for you Compose configuration file. Based on an arbitrary `compose.yaml` file, Compose Bridge produces:
 
 - A [Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) so all your resources are isolated and don't conflict with resources from other deployments.
 - A [ConfigMap](https://kubernetes.io/docs/concepts/configuration/configmap/) with an entry for each and every [config](../compose-file/08-configs.md) resource in your Compose application.
 - [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for application services. This ensures that the specified number of instances of your application are maintained in the Kubernetes cluster.
-- [Services](https://kubernetes.io/docs/concepts/services-networking/service/) for ports exposed by your services, used for service-to-service communication
-- [Services](https://kubernetes.io/docs/concepts/services-networking/service/) for ports published by your services, with type `LoadBalancer` so that Docker Desktop will also expose same port on host
+- [Services](https://kubernetes.io/docs/concepts/services-networking/service/) for ports exposed by your services, used for service-to-service communication.
+- [Services](https://kubernetes.io/docs/concepts/services-networking/service/) for ports published by your services, with type `LoadBalancer` so that Docker Desktop will also expose same port on the host.
 - [Network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to replicate the networking topology defined in your `compose.yaml` file. 
-- [PersistentVolumeClaims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) for your volumes, using `hostpath` storage class so that Docker Desktop manages volume creation
+- [PersistentVolumeClaims](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) for your volumes, using `hostpath` storage class so that Docker Desktop manages volume creation.
 - [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) with your secret encoded. This is designed for local use in a testing environment
 
-And a Kustomize overlay dedicated to Docker Desktop with:
- - `Loadbalancer` for services which need to expose ports on host
- - A `PersistentVolumeClaim` to use the Docker Desktop storage provisioner `desktop-storage-provisioner` to handle volume provisioning more effectively
- - A Kustomize file to link all the resources together
+It also supplies a Kustomize overlay dedicated to Docker Desktop with:
+ - `Loadbalancer` for services which need to expose ports on host.
+ - A `PersistentVolumeClaim` to use the Docker Desktop storage provisioner `desktop-storage-provisioner` to handle volume provisioning more effectively.
+ - A Kustomize file to link all the resources together.
 
 ## Use the default Compose Bridge transformation
 
@@ -72,7 +72,7 @@ $ compose-bridge -f <path-to-file>/compose.yaml convert
 
 > **Tip**
 >
-> Run `compose-bridge convert --help` to see available flags. 
+> Run `compose-bridge convert --help` to see all available flags. 
 { .tip }
 
 ## What's next?

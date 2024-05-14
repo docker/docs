@@ -10,9 +10,9 @@ This page explains how Compose Bridge utilizes templating to efficiently transla
 
 ## How it works 
 
-Compose bridge uses transformations to let you convert a compose model into another form. 
+Compose bridge uses transformations to let you convert a Compose model into another form. 
 
-A transformation is packaged as a Docker image that receive the fully-resolved Compose model as `/in/compose.yaml` and can produce any target format file under `/out`.
+A transformation is packaged as a Docker image that receives the fully-resolved Compose model as `/in/compose.yaml` and can produce any target format file under `/out`.
 
 Compose Bridge provides its transformation for Kubernetes using Go templates, so that it is easy to extend for customization by just replacing or appending your own templates.
 
@@ -22,7 +22,7 @@ Compose Bridge make use of templates to transform a Compose configuration file i
 
 When a template is executed, it must produce a YAML file which is the standard format for Kubernetes manifests. Multiple files can be generated as long as they are separated by `---`
 
-Each YAML output file begins with a custom header notation, for example:
+Each YAML output file begins with custom header notation, for example:
 
 ```yaml
 #! manifest.yaml
@@ -60,18 +60,18 @@ You can check the [Compose Specification JSON schema](https://github.com/compose
 
 As part of the Go templating syntax, Compose Bridge offers a set of YAML helper functions designed to manipulate data within the templates efficiently:
 
-- `seconds`: convert a [duration](https://github.com/compose-spec/compose-spec/blob/master/11-extension.md#specifying-durations) into an integer
-- `uppercase` convert a string into upper case characters
-- `title`: convert a string by capitalizing first letter of each word
-- `safe`: convert a string into a safe identifier, replacing all characters but \[a-z\] with `-`
-- `truncate`: removes the N first elements from a list
-- `join`: group elements from a list into a single string, using a separator
-- `base64`: encode string as base64 used in Kubernetes for encoding secrets.
-- `map`: transform value according to mappings expressed as `"value -> newValue"` strings 
-- `indent`: writes string content indented by N spaces
-- `helmValue`: write the string content as a template value in final file
+- `seconds`: Converts a [duration](https://github.com/compose-spec/compose-spec/blob/master/11-extension.md#specifying-durations) into an integer
+- `uppercase`: Converts a string into upper case characters
+- `title`: Converts a string by capitalizing the first letter of each word
+- `safe`: Converts a string into a safe identifier, replacing all characters (except lowercase a-z) with `-`
+- `truncate`: Removes the N first elements from a list
+- `join`: Groups elements from a list into a single string, using a separator
+- `base64`: Encodes a string as base64 used in Kubernetes for encoding secrets
+- `map`: Transforms a value according to mappings expressed as `"value -> newValue"` strings 
+- `indent`: Writes string content indented by N spaces
+- `helmValue`: Writes the string content as a template value in the final file
 
-In the following example, the template checks if a healthcheck interval is specified for a service, applies the seconds function to convert this interval into seconds and assigns the value to the `periodSeconds` attribute.
+In the following example, the template checks if a healthcheck interval is specified for a service, applies the `seconds` function to convert this interval into seconds and assigns the value to the `periodSeconds` attribute.
 
 ```yaml
 {{ if $service.healthcheck.interval }}
@@ -81,7 +81,7 @@ In the following example, the template checks if a healthcheck interval is speci
 
 ## Customization
 
-Kubernetes is such a versatile platform that there are many ways
+As Kubernetes is a versatile platform, there are many ways
 to map Compose concepts into Kubernetes resource definitions. Compose
 Bridge lets you customize the transformation to match your own infrastructure
 decisions and preferences, with various level of flexibility and effort.
@@ -90,10 +90,10 @@ decisions and preferences, with various level of flexibility and effort.
 
 You can extract templates used by the default transformation `docker/compose-bridge-kubernetes`,
 by running `compose-bridge transformations create --from docker/compose-bridge-kubernetes my-template` 
-and adjusting those to match your needs.
+and adjusting the templates to match your needs.
 
 The templates are extracted into a directory named after your template name, in this case `my-template`.  
-It includes a Dockerfile that lets you to create your own image to distribute your template, as well as a directory containing the templating files.  
+It includes a Dockerfile that lets you create your own image to distribute your template, as well as a directory containing the templating files.  
 You are free to edit the existing files, delete them, or [add new ones](#add-your-own-templates) to subsequently generate Kubernetes manifests that meet your needs.  
 You can then use the generated Dockerfile to package your changes into a new transformation image, which you can then use with Compose Bridge:
 
@@ -102,6 +102,7 @@ $ docker build --tag mycompany/transform --push .
 ```
 
 You can then use your transformation as a replacement:
+
 ```console
 $ compose-bridge convert --transformations mycompany/transform 
 ```
@@ -114,7 +115,7 @@ the configuration attributes required to populate the target manifest. If this i
 then rely on Compose custom extensions to better describe the
 application, and offer an agnostic transformation.
 
-As an illustration, if you add `x-virtual-host` metadata
+For example, if you add `x-virtual-host` metadata
 to service definitions in the `compose.yaml` file, you can use the following custom attribute
 to produce Ingress rules:
 
@@ -181,3 +182,7 @@ CMD ["/usr/bin/kompose", "convert", "-f", "/in/compose.yaml", "--out", "/out"]
 
 This Dockerfile bundles Kompose and defines the command to run this tool according
 to the Compose Bridge transformation contract.
+
+## What's next?
+
+- [Explore the advanced integration](advanced-integration.md)
