@@ -170,7 +170,7 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
 
     > **Note**
     > 
-    > The PostgreSQL image sets up trust authentication locally so you may notice a password is not required when connecting from localhost (inside the same container). However, a password will be required if connecting from a different host/container.
+    > The PostgreSQL image sets up trust authentication locally so you may notice a password isn't required when connecting from localhost (inside the same container). However, a password will be required if connecting from a different host/container.
 
 
 
