@@ -88,7 +88,7 @@ In this step, you will run a container and publish its port using the Docker CLI
 
 3. Verify the published port by going to the **Containers** view of the Docker Dashboard.
 
-   ![A screenshot of Docker dashboard showing the published port](images/published-ports.webp?border=true)
+   ![A screenshot of Docker dashboard showing the published port](images/published-ports.webp?w=5000&border=true)
 
 4. Open the website by either selecting the link in the **Port(s)** column of your container or visiting [http://localhost:8080](http://localhost:8080) in your browser.
 

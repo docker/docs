@@ -53,6 +53,15 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
    ```console
    $ git clone https://github.com/dockersamples/nginx-node-redis
    ```
+   
+   Navigate into the `nginx-node-redis` directory:
+
+   ```console
+   $ cd nginx-node-redis
+   ```
+
+   Inside this directory, you'll find two sub-directories - `nginx` and `web`.
+   
 
    {{< /tab >}}
    {{< tab name="Download" >}}
@@ -61,16 +70,18 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
 
    {{< button url="https://github.com/dockersamples/nginx-node-redis/archive/refs/heads/main.zip" text="Download the source" >}}
 
+
+   Navigate into the `nginx-node-redis-main` directory:
+
+   ```console
+   $ cd nginx-node-redis-main
+   ```
+
+   Inside this directory, you'll find two sub-directories - `nginx` and `web`.
+
    {{< /tab >}}
    {{< /tabs >}}
 
-2. Navigate into the `nginx-node-redis-main` directory:
-
-    ```console
-    $ cd nginx-node-redis-main
-    ```
-
-    Inside this directory, you'll find two sub-directories - `nginx` and `web`.
 
 3. [Download and install](/get-docker/) Docker Desktop.
 
@@ -145,7 +156,7 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
 
 7. If you look at the Docker Dashboard, you can see the containers and dive deeper into their configuration.
 
-   ![A screenshot of Docker Dashboard showing multi-container applications](images/multi-container-apps.webp?border=true)
+   ![A screenshot of Docker Dashboard showing multi-container applications](images/multi-container-apps.webp?w=5000&border=true)
 
 8. With everything up and running, you can open [http://localhost](http://localhost) in your browser to see the site. Refresh the page several times to see the host that’s handling the request and the total number of requests:
 
