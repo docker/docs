@@ -42,6 +42,9 @@ foo=bar
 > **Tip**
 >
 > The `.env` file acts as a convenient way to set environment variables for your Docker containers without cluttering your command line with numerous `-e` flags. To use a `.env` file, you can pass `--env-file` option with the `docker run` command.
+> ```console
+> $ docker run --env-file .env postgres env
+> ```
 { .tip }
 
 ### Restricting the container to consume the resources
