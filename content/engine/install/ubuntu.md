@@ -232,6 +232,33 @@ You have now successfully installed and started Docker Engine.
 
 {{< include "root-errors.md" >}}
 
+#### Recommended Extras for Ubuntu Installation
+
+To enhance security and manage credentials properly for Docker login, install the following packages:
+
+```Console
+apt-get update; apt-get -y install pass golang-docker-credential-helpers
+```
+
+**Initializing the Password Store:**
+
+If your password store and gpg are uninitialized, generate a GPG key and set up the store:
+
+``` console
+gpg --full-generate-key
+# Follow the prompts to generate a key
+pass init $(gpg --list-keys | grep "^    " | head -1)
+```
+
+This setup is required for securely storing Docker credentials without a warning of unencrypted passwords in `~/.config/docker.json`.
+
+> **Note**
+> The `gpg --full-generate-key` command may fail if accessed via a non-login prompt. Please use `sudo machinectl shell THE_TARGET_USER@` and replace `THE_TARGET_USER` with your username to access a login prompt.
+
+**General Note:** Ensure `gpg` and `pass` are installed before initializing the password store. These tools are necessary for secure credential management during `docker login` and other authentication-required operations.
+
+
+
 #### Upgrade Docker Engine
 
 To upgrade Docker Engine, download the newer package files and repeat the
