@@ -26,7 +26,7 @@ When the container runs, all files it writes into the `/logs` folder will be sav
 
 > **Sharing files using volumes**
 >
-> As a pro-tip, you can attach the same volume to multiple containers to easily share files between containers. This might be helpful in scenarios such as log aggregation, data pipelines, or other event-driven applications.
+> You can attach the same volume to multiple containers to share files between containers. This might be helpful in scenarios such as log aggregation, data pipelines, or other event-driven applications.
 { .tip }
 
 
