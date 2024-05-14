@@ -17,7 +17,7 @@ That’s where port publishing comes in.
 Publishing a port provides the ability to break through a little bit of networking isolation by setting up a forwarding rule. As an example, you can indicate that requests on your host’s port `8080` should be forwarded to the container’s port `80`. Publishing ports happens during container creation using the `-p` (or `--publish`) flag with `docker run`. The syntax is:
 
 ```console
-docker run -d -p HOST_PORT:CONTAINER_PORT nginx
+docker run -d -p HOST_PORT:CONTAINER_PORT httpd
 ```
 
 - `HOST_PORT`: The port number on your host machine where you want to receive traffic
@@ -26,7 +26,7 @@ docker run -d -p HOST_PORT:CONTAINER_PORT nginx
 For example, to publish the container's port `80` to host port `8080`:
 
 ```console
-docker run -d -p 8080:80 nginx
+docker run -d -p 8080:80 httpd
 ```
 
 Now, any traffic sent to port `8080` on your host machine will be forwarded to port `80` within the container.
@@ -43,17 +43,17 @@ At times, you may want to simply publish the port but don’t care which host po
 For example, the following command will publish the container’s port `80` onto an ephemeral port on the host:
 
 ```console
-docker run -p 80 docker/welcome-to-docker
+docker run -p 80 httpd
 ```
  
 Once the container is running, using `docker ps` will show you the port that was chosen:
 
 ```console
-CONTAINER ID   IMAGE                      COMMAND                  CREATED         STATUS        PORTS                                     NAMES
-5646fec21960   docker/welcome-to-docker   "/docker-entrypoint.…"   2 seconds ago   Up 1 second   0.0.0.0:32770->80/tcp, :::32770->80/tcp   busy_shaw
+CONTAINER ID   IMAGE         COMMAND                  CREATED              STATUS              PORTS                    NAMES
+442cab5f6329   httpd         "httpd-foreground"       3 seconds ago        Up 2 seconds        0.0.0.0:50155->80/tcp    goofy_rosalind
 ```
 
-In this example, the app is exposed on the host at port `32770`.
+In this example, the app is exposed on the host at port `50155`.
 
 ### Publishing all ports
 
@@ -64,7 +64,7 @@ With the `-P` or `--publish-all` flag, you can automatically publish all exposed
 For example, the following command will publish all of the exposed ports configured by the image:
 
 ```console
-docker run -P docker/welcome-to-docker
+docker run -P httpd
 ```
 
 ## Try it now
