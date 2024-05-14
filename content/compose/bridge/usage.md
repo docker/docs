@@ -34,7 +34,7 @@ Compose looks for a `compose.yaml` file inside the current directory and then co
 
 The following output is displayed 
 ```console
-$ compose-bridge -f compose.yaml convert
+$ compose-bridge convert -f compose.yaml 
 Kubernetes resource api-deployment.yaml created
 Kubernetes resource db-deployment.yaml created
 Kubernetes resource web-deployment.yaml created
@@ -67,7 +67,7 @@ the standard deployment command `kubectl apply -k out/overlays/desktop/`.
 If you want to convert a `compose.yaml` file that is located in another directory, you can run:
 
 ```console
-$ compose-bridge -f <path-to-file>/compose.yaml convert
+$ compose-bridge convert -f <path-to-file>/compose.yaml 
 ```
 
 > **Tip**

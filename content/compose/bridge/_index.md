@@ -27,8 +27,9 @@ For more detailed information on how these transformations work and how you can 
 To get started with Compose Bridge, you need to:
 
 1. Download and install a version of Docker Desktop that supports Compose Bridge.
-2. Navigate to the **Features in development** tab in **Settings**. 
-3. From the **Experimental features** tab, select **Enable Compose Bridge**.
+2. Sign in to your Docker account.
+3. Navigate to the **Features in development** tab in **Settings**. 
+4. From the **Experimental features** tab, select **Enable Compose Bridge**.
 
 ## Feedback
 
