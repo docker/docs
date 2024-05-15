@@ -600,6 +600,8 @@
   - /feedback/runtime/
 "https://docker.qualtrics.com/jfe/form/SV_3OGeFazYFGv4Zj8":
   - /feedback/desktop-build/
+"https://docker.qualtrics.com/jfe/form/SV_3F9hnsKdzmlIr6m":
+  - /feedback/gha-build-summary/
 
 # Docker Scout
 "https://deploy-preview-19873--docsdocker.netlify.app/scout/dashboard/#notification-settings":
