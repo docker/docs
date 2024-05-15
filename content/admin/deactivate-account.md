@@ -66,7 +66,7 @@ Before deactivating an organization, complete the following:
 
 ### Deactivate
 
-Once you have completed all the steps above, you can deactivate your organization.
+Once you have completed all previous the steps, you can deactivate your organization.
 
 > This cannot be undone. Be sure you've gathered all the data you need from your organization before deactivating it.
 { .warning }
@@ -74,7 +74,7 @@ Once you have completed all the steps above, you can deactivate your organizatio
 {{< tabs >}}
 {{< tab name="Admin Console" >}}
 
-1. In Docker Admin, choose the organization you want to deactivate.
+1. In Admin Console, choose the organization you want to deactivate.
 2. Under **Organization settings**, select **Deactivate**.
 3. Select **Deactivate organization**.
 
