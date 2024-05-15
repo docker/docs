@@ -41,7 +41,7 @@ By leveraging Docker Compose for running multi-container setups, you can build c
 
 In this hands-on guide, you'll first see how to build and run a counter web application based on Node.js, an Nginx reverse proxy, and a Redis database using the `docker run` commands. You’ll also see how you can simplify the entire deployment process using Docker Compose.
 
-## Running with the Docker CLI
+### Set up
 
 1. Get the sample application. If you have Git, you can clone the repository for the sample application. Otherwise, you can download the sample application. Choose one of the following options.
 
