@@ -167,8 +167,9 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
 3. Verify the authentication with Docker Dashboard.
 
     Open the Docker Dashboard, select the **Postgres** container and select **Exec** to enter into the container shell. You can type the following command to connect to the Postgres database:
+
     ```
-    # psql -U postgres
+    psql -U postgres
     ```
 
     ![A screenshot of the Docker Dashboard selecting the Postgres container and entering into its shell using EXEC button](images/exec-into-postgres-container.webp?border=true)
