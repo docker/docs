@@ -83,7 +83,7 @@ In this hands-on guide, you'll first see how to build and run a counter web appl
    {{< /tabs >}}
 
 
-3. [Download and install](/get-docker/) Docker Desktop.
+2. [Download and install](/get-docker/) Docker Desktop.
 
 ### Build the images
 
