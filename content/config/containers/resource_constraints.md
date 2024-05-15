@@ -24,7 +24,7 @@ WARNING: No swap limit support
 ```
 
 Consult your operating system's documentation for enabling them. See also the
-[Docker Engine troubleshooting guide](../../engine/install/troubleshoot.md#kernel-cgroup-swap-limit-capabilities)
+[Docker Engine troubleshooting guide](../daemon/troubleshoot.md#kernel-cgroup-swap-limit-capabilities)
 for more information.
 
 ## Memory

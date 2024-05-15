@@ -1491,8 +1491,6 @@ Manuals:
       title: Binaries
     - path: /engine/install/linux-postinstall/
       title: Post-installation steps
-    - path: /engine/install/troubleshoot/
-      title: Troubleshoot installation
   - sectiontitle: Storage
     section:
     - path: /storage/
@@ -1503,8 +1501,6 @@ Manuals:
       title: Bind mounts
     - path: /storage/tmpfs/
       title: tmpfs mounts
-    - path: /storage/troubleshooting_volume_errors/
-      title: Troubleshoot
     - sectiontitle: Storage drivers
       section:
       - path: /storage/storagedriver/
