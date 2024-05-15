@@ -1683,7 +1683,7 @@ tmpfs:
 ## tty
 
 `tty` configures a service's container to run with a TTY. This is the same as This is the same as running a container with the 
-`-t` or `-tty` flag. For more information, see [Allocate a pseudo-TTY](../../reference/cli/docker/container/run/#tty).
+`-t` or `--tty` flag. For more information, see [Allocate a pseudo-TTY](../../reference/cli/docker/container/run/#tty).
 
 Supported values are `true` or `false`.
 
