@@ -81,10 +81,22 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart
 ```
 
-#### Installing non-interactively with Admin settings
+#### Installing non-interactively with admin settings
 
 ```powershell
 msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS="{"configurationFileVersion":2,"enhancedContainerIsolation":{"value":true,"locked":false}}" ALLOWEDORG="docker.com"
+```
+
+#### Installing with the passive display option
+
+You can use the `/passive` display option instead of `/quiet` when you want to perform a non-interactive installation but show a progress dialog.
+
+In passive mode the installer doesn't display any prompts or error messages to the user and the installation cannot be cancelled.
+
+For example:
+
+```powershell
+msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /passive /norestart
 ```
 
 > **Tip**
@@ -97,6 +109,35 @@ msiexec /i "DockerDesktop.msi" /L*V ".\msi.log" /quiet /norestart ADMINSETTINGS=
 > - Property names are expected to be in double quotes
 { .tip }
 
+### Common uninstall commands
+
+When uninstalling Docker Desktop, you need to use the same `.msi` file that was originally used to install the application.
+
+If you no longer have the original `.msi` file, you need to use the product code associated with the installation. To find the product code, run:
+
+```powershell
+Get-WmiObject Win32_Product | Select-Object IdentifyingNumber, Name | Where-Object {$_.Name -eq "Docker Desktop"}
+```
+
+It should return output similar to the following:
+
+```text
+IdentifyingNumber                      Name
+-----------------                      ----
+{10FC87E2-9145-4D7D-B493-2E99E8D8E103} Docker Desktop
+```
+> **Note**
+>
+> This command can take some time to return, depending on the number of installed applications.
+
+`IdentifyingNumber` is the applications product code and can be used to uninstall Docker Desktop. For example:
+
+```powershell
+msiexec /x {10FC87E2-9145-4D7D-B493-2E99E8D8E103} /L*V ".\msi.log" /quiet
+```
+
+
+
 #### Uninstalling interactively with verbose logging
 
 ```powershell
@@ -107,6 +148,12 @@ msiexec /x "DockerDesktop.msi" /L*V ".\msi.log"
 
 ```powershell
 msiexec /x "DockerDesktop.msi"
+```
+
+#### Uninstalling non-interactively with verbose logging
+
+```powershell
+msiexec /x "DockerDesktop.msi" /L*V ".\msi.log" /quiet
 ```
 
 #### Uninstalling non-interactively without verbose logging
