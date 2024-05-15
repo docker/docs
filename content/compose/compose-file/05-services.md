@@ -1608,7 +1608,7 @@ It's specified as a [byte value](11-extension.md#specifying-byte-values).
 
 ## stdin_open
 
-`stdin_open` configures a service containers to run with an allocated stdin. This is the same as running a container with the 
+`stdin_open` configures a service's container to run with an allocated stdin. This is the same as running a container with the 
 `-i` flag. For more information, see [Keep STDIN open](../../reference/cli/docker/container/run/#interactive).
 
 Supported values are `true` or `false`.
@@ -1682,7 +1682,7 @@ tmpfs:
 
 ## tty
 
-`tty` configures service container to run with a TTY. This is the same as This is the same as running a container with the 
+`tty` configures a service's container to run with a TTY. This is the same as This is the same as running a container with the 
 `-t` or `-tty` flag. For more information, see [Allocate a pseudo-TTY](../../reference/cli/docker/container/run/#tty).
 
 Supported values are `true` or `false`.
