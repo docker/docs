@@ -36,7 +36,7 @@ Docker Hub provides a variety of Docker-supported and endorsed images known as D
 
 For example, [Redis](https://hub.docker.com/_/redis) and [Memcached](https://hub.docker.com/_/memcached) are a few popular ready-to-go Docker Official Images. You can download these images and have these services up and running in a matter of seconds. There are also base images, like the [Node.js](https://hub.docker.com/_/node) Docker image, that you can use as a starting point and add your own files and configurations.
 
-## Try it now
+## Try it out
 
 {{< tabs group=concept-usage persist=true >}}
 {{< tab name="Using the GUI" >}}
