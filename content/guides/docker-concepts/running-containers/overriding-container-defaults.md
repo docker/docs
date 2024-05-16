@@ -64,7 +64,7 @@ This command limits container memory usage to 512 MB and defines the CPU quota o
 
 By effectively using these `docker run` flags, you can tailor your containerized application's behavior to fit your specific requirements.
 
-## Try it now
+## Try it out
 
 In this hands-on guide, you'll see how to use the `docker run` command to override the container defaults.
 
