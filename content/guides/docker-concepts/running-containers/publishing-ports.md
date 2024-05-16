@@ -43,7 +43,7 @@ At times, you may want to simply publish the port but don’t care which host po
 For example, the following command will publish the container’s port `80` onto an ephemeral port on the host:
 
 ```console
-docker run -p 80 nginx
+$ docker run -p 80 nginx
 ```
  
 Once the container is running, using `docker ps` will show you the port that was chosen:
