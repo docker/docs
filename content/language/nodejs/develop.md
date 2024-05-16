@@ -22,7 +22,7 @@ In this section, you'll learn how to set up a development environment for your c
 You can use containers to set up local services, like a database. In this section, you'll update the `compose.yaml` file to define a database service and a volume to persist data.
 
 1. Open your `compose.yaml` file in an IDE or text editor.
-2. Uncomment the database related instructions. The following is the udpated
+2. Uncomment the database related instructions. The following is the updated
    `compose.yaml` file.
 
    > **Important**
