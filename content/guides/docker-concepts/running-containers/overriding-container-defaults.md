@@ -86,7 +86,7 @@ In this hands-on guide, you'll see how to use the `docker run` command to overri
     $ docker run -d -e POSTGRES_PASSWORD=secret -p 5433:5432 postgres
     ```
 
-    This will start a new Postgres container in the background, listening on the standard container port `5432` but mapped to port `5433` on the host machine. You override the host port just to ensure that this new container doesn't conflict with the existing running container.
+    This will start another Postgres container in the background, listening on the standard postgres port `5432` in the container, but mapped to port `5433` on the host machine. You override the host port just to ensure that this new container doesn't conflict with the existing running container.
 
 3. Verify if both containers are running via the Docker Dashboard.
 
