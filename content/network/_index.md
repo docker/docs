@@ -174,22 +174,6 @@ configuration.
 | `--dns-opt`    | A key-value pair representing a DNS option and its value. See your operating system's documentation for `resolv.conf` for valid options.                                                                                                                            |
 | `--hostname`   | The hostname a container uses for itself. Defaults to the container's ID if not specified.                                                                                                                                                                          |
 
-### Nameservers with IPv6 addresses
-
-If the `/etc/resolv.conf` file on the host system contains one or more
-nameserver entries with an IPv6 address, those nameserver entries get copied
-over to `/etc/resolv.conf` in containers that you run.
-
-For containers using musl libc (in other words, Alpine Linux), this results in
-a race condition for hostname lookup. As a result, hostname resolution might
-sporadically fail if the external IPv6 DNS server wins the race condition
-against the embedded DNS server.
-
-It's rare that the external DNS server is faster than the embedded one. But
-things like garbage collection, or large numbers of concurrent DNS requests,
-can sometimes result in a round trip to the external server being faster than local
-resolution.
-
 ### Custom hosts
 
 Your container will have lines in `/etc/hosts` which define the hostname of the
