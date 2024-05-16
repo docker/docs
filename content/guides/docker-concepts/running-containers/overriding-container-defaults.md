@@ -96,11 +96,11 @@ In this hands-on guide, you'll see how to use the `docker run` command to overri
 
 By default, containers automatically connect to a special network called a bridge network when you run them. This bridge network acts like a virtual bridge, allowing containers on the same host to communicate with each other while keeping them isolated from the outside world and other hosts. It's a convenient starting point for most container interactions. However, for specific scenarios, you might want more control over the network configuration.
 
-Here's where the `--network` flag with the `docker run` command comes in.
+Here's where the custom network comes in. You create a custom network by passing `--network` flag with the `docker run` command. All containers without a `--network` flag are attached to the default bridge network.
 
 Follow the steps to see how to connect a Postgres container to a custom network.
 
-1. Create a network by using the following command:
+1. Create a new custom network by using the following command:
 
     ```console
     $ docker network create mynetwork
@@ -112,17 +112,21 @@ Follow the steps to see how to connect a Postgres container to a custom network.
     $ docker network ls
     ```
 
-3. Connect Postgres to the existing network by using the following command:
+    This command lists all networks, including the newly created "mynetwork".
+
+3. Connect Postgres to the custom network by using the following command:
 
     ```console
     $ docker run -d -e POSTGRES_PASSWORD=secret -p 5434:5432 --network mynetwork postgres
     ```
 
-    This will start Postgres container in the background, mapped to the host port 5434 and attached to the `mynetwork` network. You passed the `--network` parameter to override the container default by connecting the container to custom Docker network for better isolation and communication with other containers.
+    This will start Postgres container in the background, mapped to the host port 5434 and attached to the `mynetwork` network. You passed the `--network` parameter to override the container default by connecting the container to custom Docker network for better isolation and communication with other containers. You can use `docker network inspect` command to see if the container is tied to this new bridge network.
 
-    > **Inspecting the container network**
+
+    > **Key difference between default bridge and custom networks**
     >
-    > You can use `docker network inspect` command to see if the container is tied to this new bridge network.
+    > 1. DNS resolution: By default, containers connected to the default bridge network can communicate with each other, but only by IP address. (unless you use `--link` option which is considered legacy). It is not recommended for production use due to the various [technical shortcomings](/network/drivers/bridge/#differences-between-user-defined-bridges-and-the-default-bridge). On a custom network, containers can resolve each other by name or alias.
+    > 2. Isolation: All containers without a `--network` specified are attached to the default bridge network, hence can be a risk, as unrelated containers are then able to communicate. Using a custom network provides a scoped network in which only containers attached to that network are able to communicate, hence providing better isolation.
     { .tip }
 
 ### Manage the resources
