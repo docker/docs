@@ -80,7 +80,7 @@ In this hands-on guide, you'll see how to use the `docker run` command to overri
 
     This will start the Postgres database in the background, listening on the standard container port `5432` and mapped to port `5432` on the host machine.
 
-2. Start a new Postgres container mapped to a different port. 
+2. Start a second Postgres container mapped to a different port. 
 
     ```console
     $ docker run -d -e POSTGRES_PASSWORD=secret -p 5433:5432 postgres
