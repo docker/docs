@@ -65,7 +65,7 @@ With the `-P` or `--publish-all` flag, you can automatically publish all exposed
 For example, the following command will publish all of the exposed ports configured by the image:
 
 ```console
-docker run -P nginx
+$ docker run -P nginx
 ```
 
 ## Try it out
