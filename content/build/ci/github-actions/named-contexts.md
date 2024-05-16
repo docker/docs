@@ -26,8 +26,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   docker:
@@ -35,8 +33,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      
       - name: Build
         uses: docker/build-push-action@v5
         with:
@@ -65,8 +65,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   docker:
@@ -74,10 +72,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           driver: docker
+      
       - name: Build base image
         uses: docker/build-push-action@v5
         with:
@@ -85,6 +85,7 @@ jobs:
           file: ./base/Dockerfile
           load: true
           tags: my-base-image:latest
+      
       - name: Build
         uses: docker/build-push-action@v5
         with:
@@ -113,8 +114,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 jobs:
   docker:
@@ -127,13 +126,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
           # network=host driver-opt needed to push to local registry
           driver-opts: network=host
+      
       - name: Build base image
         uses: docker/build-push-action@v5
         with:
@@ -141,6 +143,7 @@ jobs:
           file: ./base/Dockerfile
           tags: localhost:5000/my-base-image:latest
           push: true
+      
       - name: Build
         uses: docker/build-push-action@v5
         with:

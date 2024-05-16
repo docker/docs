@@ -19,13 +19,11 @@ with [build-push-action] and [bake-action].
 {{< tabs >}}
 {{< tab name="build-push-action" >}}
 
-```yaml {hl_lines=37}
+```yaml {hl_lines=35}
 name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 env:
   IMAGE_NAME: user/app
@@ -48,7 +46,7 @@ jobs:
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
 
@@ -63,13 +61,11 @@ jobs:
 {{< /tab >}}
 {{< tab name="bake-action" >}}
 
-```yaml {hl_lines=39}
+```yaml {hl_lines=37}
 name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 env:
   IMAGE_NAME: user/app
@@ -92,12 +88,12 @@ jobs:
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
 
       - name: Build
-        uses: docker/bake-action@v3
+        uses: docker/bake-action@v4
         with:
           files: |
             ./docker-bake.hcl
@@ -121,13 +117,11 @@ want to annotate. For example, setting `DOCKER_METADATA_ANNOTATIONS_LEVELS` to
 The following example creates annotations on both the image index and
 manifests.
 
-```yaml {hl_lines=33}
+```yaml {hl_lines=31}
 name: ci
 
 on:
   push:
-    branches:
-      - "main"
 
 env:
   IMAGE_NAME: user/app
@@ -150,7 +144,7 @@ jobs:
 
       - name: Extract metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.IMAGE_NAME }}
         env:
