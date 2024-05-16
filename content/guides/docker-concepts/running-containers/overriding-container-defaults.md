@@ -189,11 +189,11 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
 
 You can also override defaults directly using the `docker run` command with the following command:
 
-   ```console 
-   $ docker run -e POSTGRES_PASSWORD=secret postgres docker-entrypoint.sh -h localhost -p 5432
-   ```
+```console 
+$ docker run -e POSTGRES_PASSWORD=secret postgres docker-entrypoint.sh -h localhost -p 5432
+```
 
-   This command runs a Postgres container, sets an environment variable for password authentication, overrides the default startup commands and configures hostname and port mapping.
+This command runs a Postgres container, sets an environment variable for password authentication, overrides the default startup commands and configures hostname and port mapping.
 
 
 ## Additional resources
