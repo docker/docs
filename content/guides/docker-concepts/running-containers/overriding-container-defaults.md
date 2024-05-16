@@ -88,7 +88,7 @@ In this hands-on guide, you'll see how to use the `docker run` command to overri
 
     This will start another Postgres container in the background, listening on the standard postgres port `5432` in the container, but mapped to port `5433` on the host machine. You override the host port just to ensure that this new container doesn't conflict with the existing running container.
 
-3. Verify if both containers are running via the Docker Dashboard.
+3. Verify that both containers are running by going to the **Containers** view in the Docker Dashboard.
 
     ![A screenshot of Docker Dashboard showing the running instances of Postgres containers](images/running-postgres-containers.webp?border=true)
 
