@@ -26,7 +26,7 @@ $ docker run -d -p HOST_PORT:CONTAINER_PORT nginx
 For example, to publish the container's port `80` to host port `8080`:
 
 ```console
-docker run -d -p 8080:80 nginx
+$ docker run -d -p 8080:80 nginx
 ```
 
 Now, any traffic sent to port `8080` on your host machine will be forwarded to port `80` within the container.
