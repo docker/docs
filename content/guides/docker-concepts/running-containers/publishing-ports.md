@@ -101,7 +101,7 @@ This example will launch the same application using Docker Compose:
 
 1. Create a new directory and inside that directory, create a `compose.yaml` file with the following contents:
 
-    ```yaml {hl_lines=[4,5]}
+    ```yaml
     services:
       app:
         image: docker/welcome-to-docker
