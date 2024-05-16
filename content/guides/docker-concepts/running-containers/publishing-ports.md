@@ -68,7 +68,7 @@ For example, the following command will publish all of the exposed ports configu
 docker run -P nginx
 ```
 
-## Try it now
+## Try it out
 
 In this hands-on guide, you'll learn how to publish container ports using both the CLI and Docker Compose for deploying a web application.
 
