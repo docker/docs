@@ -76,7 +76,8 @@ Once you have completed all previous the steps, you can deactivate your organiza
 
 1. In Admin Console, choose the organization you want to deactivate.
 2. Under **Organization settings**, select **Deactivate**.
-3. Select **Deactivate organization**.
+3. Enter the organization name to confirm deactivation.
+4. Select **Deactivate organization**.
 
 {{< /tab >}}
 {{< tab name="Hub" >}}
