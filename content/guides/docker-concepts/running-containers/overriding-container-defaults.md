@@ -141,7 +141,9 @@ $ docker run -d -e POSTGRES_PASSWORD=secret --memory="512m" --cpus=".5" postgres
 
 The `--cpus` flag specifies the CPU quota for the container. Here, it's set to half a CPU core (0.5) whereas the `--memory` flag specifies the memory limit for the container. In this case, it's set to 512 MB.
 
-### Override the default `CMD` and `ENTRYPOINT` in Docker Compose
+### Override the default CMD and ENTRYPOINT in Docker Compose
+
+
 
 Sometimes, you might need to override the default commands (`CMD`) or entry points (`ENTRYPOINT`) defined in a Docker image, especially when using Docker Compose.
 
@@ -183,6 +185,15 @@ Sometimes, you might need to override the default commands (`CMD`) or entry poin
     > 
     > The PostgreSQL image sets up trust authentication locally so you may notice a password isn't required when connecting from localhost (inside the same container). However, a password will be required if connecting from a different host/container.
 
+### Override the default CMD and ENTRYPOINT with `docker run`
+
+You can also override defaults directly using the `docker run` command with the following command:
+
+   ```console 
+   $ docker run -e POSTGRES_PASSWORD=secret postgres docker-entrypoint.sh -h localhost -p 5432
+   ```
+
+   This command runs a Postgres container, sets an environment variable for password authentication, overrides the default startup commands and configures hostname and port mapping.
 
 
 ## Additional resources
