@@ -18,7 +18,7 @@ With directory group-to-team provisioning from your IdP, user updates will autom
 
 ## How group mapping works
 
-IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. Just-In-Time (JIT) Provisioning uses these attributes to create or update the user’s Docker profile and their associations with organizations and teams on Docker Hub.
+IdPs share with Docker the main attributes of every authorized user through SSO, such as email address, name, surname, and groups. Just-in-Time (JIT) Provisioning uses these attributes to create or update the user’s Docker profile and their associations with organizations and teams on Docker Hub.
 
 Docker uses the email address of the user to identify them on the platform. Every Docker account must have a unique email address at all times.
 
@@ -121,12 +121,12 @@ To set up your groups:
 5. Create your groups by navigating to **Directory > Groups**.
 6. Add your groups using the format `organization:team` that matches the names of your organization(s) and team(s) in Docker.
 7. Assign users to the group(s) that you create.
-8. Return to **Applications > Provisioning> Integration**, then select the **Push Groups** tab to open the view where you can control and manage how groups are provisioned.
+8. Return to **Applications > Provisioning > Integration**, then select the **Push Groups** tab to open the view where you can control and manage how groups are provisioned.
 9. Select **Push Groups > Find groups by rule**.
 10. Configure the groups by rule like the following:
     - Enter a rule name, for example `Sync groups with Docker Hub`
-    - Match group by name, for example starts with `docker:` or contains `:` or multi-organization
-    - If you enable **Immediately push groups by rule**, sync will happens as soon as there's a change on the group or assignments on the group. Enable this if you don't want to manually push groups.
+    - Match group by name, for example starts with `docker:` or contains `:` for multi-organization
+    - If you enable **Immediately push groups by rule**, sync will happen as soon as there's a change to the group or group assignments. Enable this if you don't want to manually push groups.
 
 Find your new rule under **By rule** in the **Pushed Groups** column. The groups that match that rule are listed in the groups table on the right-hand side.
 
