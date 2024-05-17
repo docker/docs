@@ -113,7 +113,7 @@ has all necessary tools and libraries to compile and run a Go application.
 
 > **Note**
 >
-> If you are curious about creating your own base images, you can check out the following section of this guide: [creating base images](../../build/building/base-images.md).
+> If you are curious about creating your own base images, you can check out the following section of this guide: [creating base images](../../build/building/base-images.md#create-a-base-image).
 > Note, however, that this isn't necessary to continue with your task at hand.
 
 Now that you have defined the base image for your upcoming container image, you
