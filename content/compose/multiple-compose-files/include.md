@@ -8,7 +8,7 @@ title: Include
 
 {{< include "compose/include.md" >}}
 
-The [`include` top-level element](../compose-file/14-include.md) helps to reflect the engineering team responsible for the code directly im the config file's organization. It also solves the relative path problem that [`extends`](extends.md) and [merge](merge.md) present. 
+The [`include` top-level element](../compose-file/14-include.md) helps to reflect the engineering team responsible for the code directly in the config file's organization. It also solves the relative path problem that [`extends`](extends.md) and [merge](merge.md) present. 
 
 Each path listed in the `include` section loads as an individual Compose application model, with its own project directory, in order to resolve relative paths.
 

@@ -168,7 +168,6 @@ This pattern can be followed for many languages and frameworks, such as Python w
 > Check out [`dockersamples/avatars`](https://github.com/dockersamples/avatars),
 > or [local setup for Docker docs](https://github.com/docker/docs/blob/main/CONTRIBUTING.md)
 > for a demonstration of Compose `watch`.
-{ .tip }
 
 ## Feedback
 
