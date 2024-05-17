@@ -42,7 +42,7 @@ It is for security conscious organizations who:
 - Would like Docker Desktop to be within their organization’s centralized control
 - Have certain compliance obligations
 
-### How does it help my organisation?
+### How does it help my organization?
 
 Hardened Desktop features work independently but collectively to create a defense-in-depth strategy, safeguarding developer workstations against potential attacks across various functional layers, such as configuring Docker Desktop, pulling container images, and running container images. This multi-layered defense approach ensures comprehensive security. It helps mitigate against threats such as:
 
