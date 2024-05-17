@@ -6,8 +6,6 @@ keywords: compose, compose specification, compose file reference, compose build 
 
 {{< include "compose/build.md" >}}
 
-`build` can be either specified as a single string defining a context path, or as a detailed build definition.
-
 In the former case, the whole path is used as a Docker context to execute a Docker build, looking for a canonical
 `Dockerfile` at the root of the directory. The path can be absolute or relative. If it is relative, it is resolved
 from the Compose file's parent folder. If it is absolute, the path prevents the Compose file from being portable so Compose displays a warning. 

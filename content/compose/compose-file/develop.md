@@ -6,7 +6,7 @@ keywords: compose, compose specification, compose file reference, compose develo
 
 > **Note:** 
 >
-> Develop is available with Docker Compose version 2.22.0 and later.
+> Develop is an optional part of the Compose Specification. It is available with Docker Compose version 2.22.0 and later.
 
 {{< include "compose/develop.md" >}}
 
