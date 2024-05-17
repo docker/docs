@@ -26,7 +26,7 @@ A _registry_ is a centralized location that stores and manages container images,
 >
 > You can create one private repository and unlimited public repositories using the free version of Docker Hub. For more information, visit the [Docker Hub subscription page](https://www.docker.com/pricing/).
 
-## Try it now
+## Try it out
 
 In this hands-on, you will learn how to build and push a Docker image to the Docker Hub repository.
 

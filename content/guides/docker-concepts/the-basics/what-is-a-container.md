@@ -36,7 +36,7 @@ A container is simply an isolated process with all of the files it needs to run.
 > Quite often, you will see containers and VMs used together. As an example, in a cloud environment, the provisioned machines are typically VMs. However, instead of provisioning one machine to run one application, a VM with a container runtime can run multiple containerized applications, increasing resource utilization and reducing costs.
 
 
-## Try it now
+## Try it out
 
 In this hands-on, you will see how to run a Docker container using the Docker Desktop GUI.
 
