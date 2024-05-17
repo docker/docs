@@ -66,7 +66,7 @@ Before deactivating an organization, complete the following:
 
 ### Deactivate
 
-Once you have completed all previous the steps, you can deactivate your organization.
+Once you have completed all the previous the steps, you can deactivate your organization.
 
 > This cannot be undone. Be sure you've gathered all the data you need from your organization before deactivating it.
 { .warning }
