@@ -44,6 +44,7 @@ Docker-Sponsored Open Source
 Dockerfile
 Dockerize
 Dockerizing
+Entra
 Ethernet
 Fargate
 Fedora
@@ -144,6 +145,7 @@ config
 containerd
 deserialization
 deserialize
+displayName
 dockerignore
 firewalld
 g?libc
@@ -175,5 +177,3 @@ umask
 ungated
 vSphere
 virtiofs
-Entra
-displayName
