@@ -12,11 +12,17 @@ Single sign-on (SSO) allows users to authenticate using their identity providers
 
 ## How it works
 
-When you enable SSO, your users can't authenticate using their Docker login credentials (Docker ID and password). Docker supports Service Provider Initiated SSO flow. Instead, they are redirected to your IdP's authentication page to sign in. Your users must sign in to Docker Hub or Docker Desktop to initiate the SSO authentication process.
+When you enable SSO, your users can't authenticate using their Docker login credentials (Docker ID and password). Docker supports Service Provider (SP) Initiated SSO flow. Instead, they are redirected to your IdP's authentication page to sign in. Your users must sign in to Docker Hub or Docker Desktop to initiate the SSO authentication process.
 
 The following diagram shows how SSO operates and is managed in Docker Hub and Docker Desktop. In addition, it provides information on how to authenticate between your IdP.
 
 ![SSO architecture](images/SSO.png)
+
+### Supported features
+
+- SP-initiated SSO
+- Just-in-Time (JIT) provisioning
+- Force authentication
 
 ## How to set it up
 
