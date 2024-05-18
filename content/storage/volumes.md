@@ -99,7 +99,7 @@ If you need to specify volume driver options, you must use `--mount`.
 The examples below show both the `--mount` and `-v` syntax where possible, with
 `--mount` first.
 
-### Differences between `-v` and `--mount` behavior 
+### Differences between -v and --mount behavior 
 
 As opposed to bind mounts, all options for volumes are available for both
 `--mount` and `-v` flags.
