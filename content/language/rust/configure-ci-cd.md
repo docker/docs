@@ -95,6 +95,7 @@ to Docker Hub.
              push: true
              tags: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
    ```
+   
    If your Dockerfile is in a different directory, update the `context` with the path to the directory containing the Dockerfile.
 
    For more information about the YAML syntax used here, see [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions).
